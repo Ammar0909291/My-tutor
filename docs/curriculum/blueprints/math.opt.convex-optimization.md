@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.convex-optimization |
-| Title | Convex Optimization |
+| name | Convex Optimization |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -127,7 +127,7 @@ Step 1 — "∇f(x*)=0 means 'no unconstrained descent direction.' But on the bo
 **TB-R03 (MC-3 CONVEXITY-OF-FEASIBLE-SET-ENOUGH):**
 Step 1 — "Two requirements: convex feasible set AND convex objective. Satisfying only one is insufficient." Step 2 — Non-convex f over convex C: min sin(x) s.t. x∈[0,4π]. Feasible set = interval (convex). Objective sin(x) is non-convex. Local minima at x=3π/2, 7π/2 etc.; global minimum at x=3π/2 (both are local minima with the same value here — a fortunate special case). More generally, the problem can have many strictly different local minima. Step 3 — Non-convex C with convex f: min x² s.t. x∈[−2,−1]∪[1,2]. f is convex; C is non-convex. Two local (and global, here tied) minima at x=−1 and x=1. Only knowing f is convex doesn't save you.
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Show that the problem min e^x s.t. x∈[0,1] is convex. Find the optimal x* and verify the variational inequality condition at x*.

@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.mobius-transformation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.mobius-transformation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d861ef3bb35bce078acd1a22be7977d702f79effa30bfea798b415f97a101af0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.mobius-transformation.md": "sha256:f4fed10db464f65a31059c499f6688544ef88610a1f6e3d6925048602c8ec29c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.mobius-transformation",
+    "name": "Möbius Transformation",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.cx.conformal-mapping"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.mobius-transformation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.mobius-transformation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.mobius-transformation.md": "sha256:f4fed10db464f65a31059c499f6688544ef88610a1f6e3d6925048602c8ec29c"
+      },
+      "contentHash": "sha256:0d7575d547ed266e88fa94a261b35f85abe864f855c7644d74af5b41014d9cb8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.mobius-transformation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.mobius-transformation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.mobius-transformation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.mobius-transformation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.mobius-transformation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.mobius-transformation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.mobius-transformation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.mobius-transformation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.mobius-transformation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.mobius-transformation.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.mobius-transformation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.mobius-transformation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.mobius-transformation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.mobius-transformation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.mobius-transformation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.mobius-transformation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.mobius-transformation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **definition** of a Möbius transformation — $f(z)=(az+b)/(cz+d)$ with $a,b,c,d\\in\\mathbb{C}$, $ad-bc\\neq0$ — and correctly identify the **group structure**: composition of two Möbius transformations is Möbius, the inverse $f^{-1}(z)=(dz-b)/(-cz+a)$ is Möbius, and the family forms the group $\\mathrm{PGL}(2,\\mathbb{C})$ (invertible $2\\times2$ complex matrices modulo scalar multiples).\n- LO2: Apply the **circle-and-line preservation property** — Möbius transformations map circles and straight lines (viewed as \"generalized circles\" on the Riemann sphere $\\widehat{\\mathbb{C}}$) to circles and straight lines — and use this to compute the image of a given circle or line under a Möbius transformation.\n- LO3: Construct the **unique Möbius transformation** sending three prescribed distinct points $z_1,z_2,z_3$ to three prescribed distinct points $w_1,w_2,w_3$ (using the cross-ratio formula), and recognize the **three-point normalization** that determines a Möbius transformation exactly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "MOBIUS-COMPOSITION-NOT-SYSTEMATIC",
+      "content": "| MC-1 | MOBIUS-COMPOSITION-NOT-SYSTEMATIC | Believing there is no systematic algebraic formula for composing Möbius transformations, missing the matrix-multiplication correspondence that makes composition a direct 2×2 matrix product | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "MOBIUS-DETERMINED-BY-TWO-OR-FOUR-POINTS",
+      "content": "| MC-2 | MOBIUS-DETERMINED-BY-TWO-OR-FOUR-POINTS | Believing a Möbius transformation is determined by two points (underdetermined) or requires four points (overdetermined), missing that exactly three free parameters → exactly three prescribed image points uniquely determine the map | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "CIRCLE-PRESERVATION-MEANS-CIRCLES-ONLY",
+      "content": "| MC-3 | CIRCLE-PRESERVATION-MEANS-CIRCLES-ONLY | Believing circle-and-line preservation means Möbius transformations always send circles to circles (not lines), missing the unified Riemann sphere perspective where lines ARE circles (circles through ∞) and the theorem applies to generalized circles | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Definition, Group Structure, and Matrix Correspondence (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Definition, Group Structure, and Matrix Correspondence (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Circle-and-Line Preservation (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Circle-and-Line Preservation (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Three-Point Normalization and Cross-Ratio (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Three-Point Normalization and Cross-Ratio (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Write down the inverse of the Möbius transformation $f(z)=(3z+2)/(z-1)$ and verify that $f\\circ f^{-1}=\\mathrm{id}$ using both the formula and the matrix representation.\n  2. Find the image of the real line (the set $\\mathrm{Im}(z)=0$) under $f(z)=i(1-z)/(1+z)$ (the Cayley map). Classify the image as a circle or line.\n  3. Find the unique Möbius transformation sending $0\\to i$, $1\\to0$, $i\\to1$, expressing your answer in standard form $f(z)=(az+b)/(cz+d)$.\n  4. A Möbius transformation satisfies $f(f(z))=z$ for all $z$ (an involution). What constraint does this impose on the matrix $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, and give a nontrivial example (other than $f(z)=z$)?\n- **P76 (Transfer Probe, mode = independence)**: \"The upper half-plane $\\mathbb{H}=\\{z:\\mathrm{Im}(z)>0\\}$ and the unit disk $\\mathbb{D}=\\{z:|z|<1\\}$ are conformally equivalent via the Cayley map $f(z)=(z-i)/(z+i)$. (a) The automorphism group of $\\mathbb{D}$ consists exactly of Möbius transformations of the form $f(z)=e^{i\\theta}(z-a)/(1-\\bar{a}z)$ with $|a|<1$ (Blaschke factors). Using this lesson's three-point normalization, explain why prescribing where THREE points of $\\partial\\mathbb{D}$ go under an automorphism of $\\mathbb{D}$ uniquely determines the automorphism — even though the formula has two parameters ($\\theta$ and $a$). (b) In hyperbolic geometry, the Poincaré disk model uses the unit disk with the metric $ds=2|dz|/(1-|z|^2)$. The isometries of this metric are exactly the automorphisms of $\\mathbb{D}$ above. Using this lesson's group structure, explain why the isometry group of the Poincaré disk is a group (closed under composition and inverse), and identify what algebraic structure the matrix representation gives it.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.conformal-mapping` (conformal maps, angle-preservation, the Riemann sphere $\\widehat{\\mathbb{C}}=\\mathbb{C}\\cup\\{\\infty\\}$, and the basic idea that holomorphic bijections are conformal).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.mobius-transformation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.mobius-transformation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.conformal-mapping` (conformal maps, angle-preservation, the Riemann sphere $\\widehat{\\mathbb{C}}$, and the idea of biholomorphic maps — Möbius transformations are the conformal automorphisms of $\\widehat{\\mathbb{C}}$).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.mobius-transformation.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

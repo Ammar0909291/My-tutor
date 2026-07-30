@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.num.newtons-method |
-| Title | Newton's Method |
+| name | Newton's Method |
 | Domain | math.num |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -105,7 +105,7 @@ Step 1 — "For Newton's method to converge, x₀ must lie in the 'basin of attr
 **TB-R03 (MC-3 LINEAR-CONVERGENCE-MEANS-SLOW):**
 Step 1 — "Linear convergence means |eₙ₊₁|≈c·|eₙ| for a constant c<1 (the convergence rate). Quadratic means |eₙ₊₁|≈C·|eₙ|². For a double root of Newton's method, the linear rate is c=½ — you gain about log₁₀(2)≈0.3 decimal digits per iteration. After 50 iterations you have 15 digits. That is perfectly practical; it's just slower than quadratic." Step 2 — Comparison: simple root (quadratic) starting with error 10⁻¹: after 1 step ~10⁻², 2 steps ~10⁻⁴, 3 steps ~10⁻⁸, 4 steps ~10⁻¹⁶. Double root (linear, c=½): after k steps, error ≈ (½)^k × 10⁻¹, so 50 steps gives 10⁻¹⁶ — same accuracy, but 50 iterations instead of 4. Step 3 — "For a double root: use the modified method xₙ₊₁=xₙ−2f(xₙ)/f'(xₙ) (multiplicity m=2 substituted). This restores quadratic convergence. Alternatively, apply Newton to g(x)=f(x)/f'(x), which has a simple root wherever f had a double root."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Apply Newton's method to f(x)=cos(x)−x to find the fixed point (Dottie number ≈ 0.739). Start at x₀=0. Perform 4 iterations by hand (to 4 decimal places) and verify quadratic convergence.

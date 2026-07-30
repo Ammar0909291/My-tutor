@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.maximum-flow-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.maximum-flow",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a59ac2b2c93b96a5564e67cadcbdbf9a3071506883e1ee3a1e9df4e3e226a4fd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.maximum-flow.md": "sha256:18d5d85a5ccfc1e079217d99566507aca7a225034f65b025a510e5462c8801cb"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.maximum-flow",
+    "name": "Maximum Flow",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.graph.connectivity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.maximum-flow-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.maximum-flow (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.maximum-flow.md": "sha256:18d5d85a5ccfc1e079217d99566507aca7a225034f65b025a510e5462c8801cb"
+      },
+      "contentHash": "sha256:d96f41bffd928812b21772357a776aa97bf648221fa7a2e361a75e52ff796fc0",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.maximum-flow.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.maximum-flow.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.maximum-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.maximum-flow\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.maximum-flow.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.maximum-flow.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.maximum-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.maximum-flow\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.maximum-flow.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.maximum-flow.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.maximum-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.maximum-flow\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.maximum-flow.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.maximum-flow.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.maximum-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.maximum-flow\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.maximum-flow/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **flow network** (directed graph with capacities $c:E\\to\\mathbb{R}_{\\ge0}$, source $s$, sink $t$), a **feasible flow** (conservation at internal vertices, capacity constraints), and **flow value** $|f|=\\sum_{v}f(s,v)$; define the **residual graph** $G_f$ and **augmenting path**; state the **Ford-Fulkerson method** and its correctness.\n- LO2: State and apply the **Max-Flow Min-Cut Theorem**: $\\max|f|=\\min\\text{cap}(S,T)$ over all $s$-$t$ cuts $(S,T)$; compute the minimum cut for a given flow network by identifying the reachable set in the residual graph after max flow is achieved.\n- LO3: Describe **Edmonds-Karp** (Ford-Fulkerson using BFS for augmenting paths, guaranteeing $O(nm^2)$ complexity); apply max-flow to reduce **bipartite maximum matching** to a flow problem; state the complexity of the resulting matching algorithm.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "BACKWARD-EDGES-ARE-PHYSICAL",
+      "content": "| MC-1 | BACKWARD-EDGES-ARE-PHYSICAL | Treating the backward residual edges as representing physical reverse capacity in the original network — they represent the ability to cancel previously committed forward flow, not actual reverse pipes; without this abstraction, the correctness of augmenting paths cannot be understood | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "MIN-CUT-IS-UNIQUE",
+      "content": "| MC-2 | MIN-CUT-IS-UNIQUE | Believing the minimum cut is always unique in a flow network — multiple minimum cuts can coexist (any subset of $V$ that forms a cut with the same capacity as the max flow is a minimum cut); the specific cut $S^*$ (reachable vertices in $G_f$) is one canonical minimum cut, not necessarily the only one | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "MAX-FLOW-SOLVES-GENERAL-MATCHING",
+      "content": "| MC-3 | MAX-FLOW-SOLVES-GENERAL-MATCHING | Believing max-flow techniques directly solve maximum matching in general (non-bipartite) graphs — the unit-capacity flow reduction works ONLY for bipartite graphs; general graph matching (with odd cycles) requires Edmond's blossom algorithm and cannot be handled by standard network flow | Critical |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Flow as a \"Current Through Pipes\" Shifted to Abstraction (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Flow as a \\\"Current Through Pipes\\\" Shifted to Abstraction (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Max-Flow Min-Cut: Duality in Action (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Max-Flow Min-Cut: Duality in Action (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Bipartite Matching Reduction (Primitive P16: Counterexample direction reversed — show power of reduction)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Bipartite Matching Reduction (Primitive P16: Counterexample direction reversed — show power of reduction)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Run Ford-Fulkerson on the following network: $s\\to a=7, s\\to b=4, a\\to c=3, a\\to b=3, b\\to c=6, c\\to t=5, b\\to t=4$. Find the max flow and identify the min cut.\n  2. After reaching max flow in Problem 1, identify $S^*$ (vertices reachable from $s$ in the residual graph) and verify that cap$(S^*,T^*)=|f^*|$.\n  3. Reduce the following bipartite matching problem to a max-flow problem and solve it: $A=\\{a_1,a_2,a_3\\}$, $B=\\{b_1,b_2,b_3\\}$; edges $a_1b_1, a_1b_3, a_2b_1, a_2b_2, a_3b_2, a_3b_3$. State the maximum matching.\n  4. Edmonds-Karp uses BFS augmenting paths. Give the sequence of BFS-augmenting paths for Problem 1 and verify that the total number of augmentations is at most $O(nm)=O(5\\cdot7)=35$.\n- **P76 (Transfer Probe, mode = independence)**: \"The **minimum vertex cut** between $s$ and $t$ (minimum number of vertices whose removal disconnects $s$ from $t$) can be computed via max flow using the following reduction: replace each vertex $v$ (other than $s$ and $t$) by two vertices $v_{in}$ and $v_{out}$ with a capacity-1 edge $v_{in}\\to v_{out}$; for each original edge $(u,v)$, add $u_{out}\\to v_{in}$ with capacity $\\infty$; find the max $s_{out}$-$t_{in}$ flow. (a) Explain why this reduction correctly computes the minimum vertex cut (use Menger's theorem: the minimum vertex cut between $s$ and $t$ equals the maximum number of internally vertex-disjoint $s$-$t$ paths). (b) Apply the reduction to the graph $\\{s,a,b,c,t\\}$ with edges $sa, sb, ac, bc, ct$ to compute the minimum vertex cut. (c) How does the reduction change if we want vertex-disjoint paths instead of edge-disjoint paths?\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Maximum Flow — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.graph.connectivity` (paths, cuts, connected components, vertex/edge cuts). Requires familiarity with BFS, directed graphs, and integer capacities for the standard algorithm treatments. No further prerequisites.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.maximum-flow/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.maximum-flow",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.graph.connectivity` (vertex/edge cuts, paths, connectivity definition).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.maximum-flow.md",
+        "startLine": 114,
+        "endLine": 120
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

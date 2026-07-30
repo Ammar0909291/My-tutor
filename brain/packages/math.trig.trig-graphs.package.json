@@ -1,0 +1,331 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.trig-graphs-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.trig-graphs",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:96665439d0285d3e013d9dbf5999c207c1bc7fd02fd076271b3a11a6312bc6c7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.trig-graphs.md": "sha256:d0b1224f9c9213e155c43d2faf5f2911c43e9e62ae9828fc253de64b7c11f223"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.trig-graphs",
+    "name": "Graphs of Trigonometric Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.trig.amplitude-period-phase"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.trig-graphs-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.trig-graphs (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.trig-graphs.md": "sha256:d0b1224f9c9213e155c43d2faf5f2911c43e9e62ae9828fc253de64b7c11f223"
+      },
+      "contentHash": "sha256:1006ca7a6dde4f0cd54e5832e9eb39cebeb101884985233594b3e7f9ee0dcf25",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-graphs.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-graphs.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-graphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-graphs\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-graphs.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-graphs.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-graphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-graphs\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-graphs.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-graphs.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-graphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-graphs\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-graphs.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-graphs.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-graphs"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-graphs\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.trig-graphs/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "Graphs of Trigonometric Functions — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.amplitude-period-phase**: Amplitude, period, phase shift, and vertical shift of y = A sin(Bx + C) + D; five-key-point sketching algorithm\n\n### Target Knowledge State\nStudent sketches y = sin x, y = cos x, and y = tan x over one full period, labelling all zeros, maxima, minima, and (for tan) vertical asymptotes. Student applies the five-key-point algorithm from the amplitude-period-phase blueprint to sketch any transformed sinusoidal function and identifies its key features from a given graph. Student explains why cos is a phase-shifted version of sin and why tan has period π.\n\n### Conceptual Obstacles\n1. Assigning period 2π to the tangent function instead of π\n2. Starting cos x at y = 0 (like sin x) rather than at its maximum y = 1\n3. Shifting the graph in the wrong direction when phase shift is applied\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "TANGENT-PERIOD-2PI",
+      "content": "| MC-1 | TANGENT-PERIOD-2PI | Student graphs tan x with one full period spanning [0, 2π] rather than [0, π] | Any tangent graphing problem |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "COS-STARTS-ZERO",
+      "content": "| MC-2 | COS-STARTS-ZERO | Student draws cos x starting at y = 0 (treating it like sin x), missing the initial maximum at (0, 1) | Sketching y = cos x or transformed cosine |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "PHASE-SHIFT-DIRECTION",
+      "content": "| MC-3 | PHASE-SHIFT-DIRECTION | Student shifts the graph right when the equation indicates a left shift (or vice versa) | y = sin(x + C) problems with C > 0 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "Reference Graphs and Key Features",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Reference Graphs and Key Features\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 64,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "Sketching and Identifying Transformed Trig Graphs",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sketching and Identifying Transformed Trig Graphs\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 123,
+        "endLine": 181
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "sin vs cos: Phase Relationship",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"sin vs cos: Phase Relationship\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 181,
+        "endLine": 233
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 233,
+        "endLine": 439
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Sketch y = 3 cos(x + π/3) for x ∈ [−π/3, 5π/3], labelling all five key points.\n\n**Problem 2.** A graph shows a sinusoid with amplitude 2, period 4π, and first maximum at (π, 2). Write the equation.\n\n**Problem 3.** Sketch y = tan(2x) for x ∈ [−π/4, 3π/4], marking asymptotes and the zero.\n\n**Problem 4.** For y = −sin(x + π), show analytically that this equals y = sin x and describe the graphical transformations that produce this equivalence.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Phase shift = −π/3 (left); amplitude 3; period 2π; key points: (−π/3, 3), (π/6, 0), (2π/3, −3), (7π/6, 0), (5π/3, 3). ✓\n\n2. Amplitude = 2 → A = 2. Period = 4π → B = 2π/(4π) = 1/2. First maximum at x = π → phase shift = π right → −C/B = π → C = −π/2. Equation: y = 2 cos(x/2 − π/4) or y = 2 sin(x/2 − π/4 − π/2) = 2 sin(x/2 − 3π/4). Either form correct. ✓\n\n3. Period = π/2; asymptotes at x = π/4 and x = 3π/4 (and x = −π/4); zero at x = 0 and x = π/2. ✓\n\n4. −sin(x + π) = −[sin x cos π + cos x sin π] = −[−sin x + 0] = sin x. Graphically: phase shift left by π plus reflection over x-axis, with the two transformations cancelling each other. ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* An EEG signal is modeled by y = 3 sin(16πt + π/3) µV, where t is in seconds.\n\n*(a)* Find the amplitude, frequency (Hz), and phase shift in seconds.\n\n*(b)* At t = 0, is the signal at a zero, maximum, minimum, or intermediate value? Determine the exact value.\n\n*Expected answer:*\n\n*(a)* Amplitude = 3 µV. B = 16π → period = 2π/(16π) = 1/8 s → frequency = 8 Hz. Phase shift = −(π/3)/(16π) = −1/48 s (left shift of 1/48 s).\n\n*(b)* y(0) = 3 sin(π/3) = 3 · (√3/2) = 3√3/2 ≈ 2.598 µV — an intermediate positive value (between 0 and the maximum of 3).\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (all three sub-parts of (a) correct and (b) correct); 0.5 if frequency and (b) are correct but phase shift computed incorrectly.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.8 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| ≥ 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed item; tangent period error → B01; cos starting value → B02; phase shift direction → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; rebuild reference graphs from key point tables; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.trig-graphs` complete. Threshold 0.8 requires 4/5 correct.\n\n**Unlocks:** Fourier series; signal processing applications; inverse trig functions graphically.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 236,
+        "endLine": 332
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** P (Pictorial) — side-by-side graphs of sin x, cos x, and tan x over [−π, 2π].\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Display the three reference graphs with key features annotated; state the cos = sin(x + π/2) phase relationship; tan asymptote derivation\n2. **A02 P04 PATTERN INDUCTION** — Gallery: identify equations from graphs and sketch graphs from equations; apply five-key-point algorithm for transformed sinusoids; read off asymptote positions for tan(Bx + C)\n3. **A03 P06 CONTRAST PAIR** — y = sin x vs y = cos x: identical amplitude and period, but cos starts at max (0, 1) while sin starts at zero — phase relationship verified analytically\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Sketch one period of y = 2 sin(x − π/2) and state all five key points. |\n| R2 | 3 days | For y = tan(x/2), state the period and the equations of the first two positive asymptotes. |\n| R3 | 7 days | From the graph: amplitude 3, midline y = 1, period π, first minimum at x = π/4. Write the equation. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 382,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "math.trig.trig-graphs/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.trig-graphs",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | Fourier analysis; signal processing applications |\n| Requires (Tier-1) | math.trig.amplitude-period-phase |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent EEG signal problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-graphs.md",
+        "startLine": 392,
+        "endLine": 406
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.burnside-lemma-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.burnside-lemma",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:267fc80e3569757916e24409ed67992736ca0399a30bc982197f135df12d02d2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.burnside-lemma.md": "sha256:53c01109b7a753ec9eab97a2053f4386a57121aa98cf9f85c36f8fffd3d088c8"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.burnside-lemma",
+    "name": "",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.abst.group-action"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.burnside-lemma-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.burnside-lemma (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.burnside-lemma.md": "sha256:53c01109b7a753ec9eab97a2053f4386a57121aa98cf9f85c36f8fffd3d088c8"
+      },
+      "contentHash": "sha256:63cb71521282bc0506f81cbe65e0576755a12d4a756d5135ab358f753e21adb3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.burnside-lemma.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.burnside-lemma.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.burnside-lemma"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.burnside-lemma\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.burnside-lemma.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.burnside-lemma.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.burnside-lemma"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.burnside-lemma\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.burnside-lemma.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.burnside-lemma.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.burnside-lemma"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.burnside-lemma\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.burnside-lemma.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.burnside-lemma.md#TA-A04 (addresses MC-3, MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.burnside-lemma"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.burnside-lemma\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.burnside-lemma/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "math.abst.burnside-lemma — cognitive map",
+      "content": "### Target Understanding\n**Burnside's Lemma** (also called the Cauchy–Frobenius lemma):\nIf a finite group G acts on a finite set X, then the number of distinct orbits |G \\ X| is:\n\n  |G \\ X| = (1/|G|) × Σ_{g ∈ G} |X^g|\n\nwhere X^g = {x ∈ X : g · x = x} is the **fixed-point set** of g (elements of X left unchanged by g).\n\nIn plain language: the number of essentially-distinct configurations under symmetry = the average\nnumber of configurations fixed by each group element.\n\n### Key Terms\n- **Orbit** of x: {g·x : g ∈ G} — all configurations reachable from x by symmetry.\n- **Fixed-point set** X^g: configurations that look the same after applying symmetry g.\n- **Orbit count** |G \\ X|: the number of truly distinct configurations (distinct = in different orbits).\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Coloring a triangle's vertices with 2 colors under rotations; direct orbit-counting vs. Burnside |\n| **Pictorial (P)** | Fixed-point table: rows = group elements, columns = colorings, mark fixed points |\n| **Abstract (A)** | General formula with proof sketch (double-counting of (g,x) pairs with g·x=x) |\n\n### Prerequisite Knowledge (from KG)\n- **math.abst.group-action** — action axioms (e·x=x, (gh)·x=g·(h·x)); orbits; stabilizers;\n  orbit-stabilizer theorem |G| = |Orb(x)|·|Stab(x)|\n\n### Canonical Example: Coloring a Triangle with 2 Colors\nG = Z/3Z = {r⁰, r¹, r²} (rotations of a triangle; r = 120° rotation), X = all 2-colorings of 3 vertices = 2³ = 8 configurations.\n\n| g | Action | X^g (fixed colorings) | |X^g| |\n|---|--------|----------------------|------|\n| r⁰ (identity) | fixes all | all 8 | 8 |\n| r¹ (120°) | rotates → fixed iff v₁=v₂=v₃ | {RRR, BBB} | 2 |\n| r² (240°) | rotates → fixed iff v₁=v₂=v₃ | {RRR, BBB} | 2 |\n\n|G \\ X| = (1/3)(8 + 2 + 2) = 12/3 = **4** distinct colorings.\nDirect count: {RRR}, {BBB}, {RRB, RBR, BRR} (one R, two B), {BBR, BRB, RBB} (one B, two R) → 4 orbits ✓.\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 31,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "FIXED-POINT-MEANS-TOTAL-FIXED",
+      "content": "| MC-1 | FIXED-POINT-MEANS-TOTAL-FIXED | Computes |X^g| as the number of elements in the entire orbit, not the number of x with g·x=x | Confuses orbit size with fixed-point set; misreads \"fixed by g\" as \"touched by g\" | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "BURNSIDE-COUNTS-CONFIGURATIONS",
+      "content": "| MC-2 | BURNSIDE-COUNTS-CONFIGURATIONS | Reports Burnside's result as the total number of configurations rather than the number of distinct orbits | Conflates |X| (all configurations) with |G\\X| (distinct ones under symmetry) | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "FORMULA-APPLIED-WITHOUT-ALL-GROUP-ELEMENTS",
+      "content": "| MC-3 | FORMULA-APPLIED-WITHOUT-ALL-GROUP-ELEMENTS | Computes Σ|X^g| for only some g ∈ G (e.g., skips identity) | Doesn't realize the sum runs over ALL elements of G, including the identity | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "Entry: The Triangle Coloring Problem (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: The Triangle Coloring Problem (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 113,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "MC-1 Gate: What X^g Really Means (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: What X^g Really Means (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 158,
+        "endLine": 210
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "Why the Formula Works: Double-Counting and the Orbit Count (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Why the Formula Works: Double-Counting and the Orbit Count (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 210,
+        "endLine": 259
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P06\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 259,
+        "endLine": 545
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** State Burnside's Lemma. Define X^g clearly.\n\n*(Target: |G\\X| = (1/|G|) Σ_{g∈G} |X^g|, where X^g = {x∈X : g·x=x}. |G\\X| is the number\nof orbits. X^g is the fixed-point set of g — elements fixed by the action of g.)*\n\n**Q2.** Color the 3 vertices of a triangle with 3 colors (R, G, B) under rotation (G=Z/3Z).\nCompute |G\\X| using Burnside's Lemma.\n\n*(Target: |X| = 3³ = 27. r⁰: all 27 fixed. r¹,r²: fixed iff all vertices same color → {RRR,GGG,BBB},\nso |X^{r¹}| = |X^{r²}| = 3. Burnside: (27 + 3 + 3)/3 = 33/3 = 11.)*\n\n**Q3.** A student applies Burnside to a square with Z/4Z and reports: \"I computed the orbit of\nRRRB (which has size 4) and the orbit of RBRB (size 2). So there are 2 orbits.\"\nWhat error has the student made?\n\n*(Target: The student found orbits of only two specific configurations, not all orbits. Burnside\n(or systematic orbit enumeration) is needed to count ALL distinct orbits. The student also likely\nconfused \"size of an orbit\" with \"number of orbits.\" Correct answer via Burnside is 6 orbits.)*\n\n**Q4.** In Burnside's formula, why must the sum include the identity element r⁰?\n\n*(Target: r⁰ is a group element, so it must be included in the sum over all g∈G. |X^{r⁰}| = |X|\nbecause the identity fixes everything. Omitting it under-counts significantly.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independent application of Burnside's Lemma to a new symmetric object.*\n\n> A regular hexagon has 6 vertices. Color each vertex Red or Blue. The symmetry group is\n> Z/6Z = {r⁰, r¹, r², r³, r⁴, r⁵} (rotations by 0°, 60°, 120°, 180°, 240°, 300°). |X| = 2⁶ = 64.\n>\n> (a) For each rotation r^k (k = 0,1,2,3,4,5), state the condition for a 2-coloring to be fixed,\n>     then compute |X^{r^k}|.\n> (b) Apply Burnside's formula to find the number of distinct colorings.\n\n*Expected answers:*\n- **(a)**\n  - r⁰: all 64 fixed. |X^{r⁰}| = 64.\n  - r¹ (60°): cycles all 6 vertices in one orbit (1→2→3→4→5→6→1); fixed iff all same color: 2. |X^{r¹}| = 2.\n  - r² (120°): two 3-cycles (1→3→5→1, 2→4→6→2); fixed iff color(1)=color(3)=color(5) AND color(2)=color(4)=color(6): 2×2=4. |X^{r²}| = 4.\n  - r³ (180°): three 2-cycles (1↔4, 2↔5, 3↔6); fixed iff color(i)=color(i+3) for i=1,2,3: 2³=8. |X^{r³}| = 8.\n  - r⁴ (240°): same cycle structure as r²: |X^{r⁴}| = 4.\n  - r⁵ (300°): same cycle structure as r¹: |X^{r⁵}| = 2.\n- **(b)** Burnside: (64+2+4+8+4+2)/6 = 84/6 = **14** distinct colorings.\n\n**[P55 — SCORE]**  Award 1 point if both parts correct (all six fixed-point counts and final answer 14); 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 4 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.75  →  ⌈0.75 × 5⌉ = 4\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score ≥ 4/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 3/5 → Identify which items failed:**\n  - Q1 wrong → definition gap → re-state X^g = {x: g·x=x} and orbit formula.\n  - Q2 wrong → MC-3 (missed identity or r¹/r²) → TB-R03; re-work fixed-point table.\n  - Q3 wrong → MC-2 (orbit count vs. configuration count) → TB-R02.\n  - Q4 wrong → MC-3 (skipping identity) → TB-R03.\n  - P76 wrong → identify which r^k has wrong |X^{r^k}|; explain cycle structure and fixed-point condition.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.burnside-lemma\nMASTERY_REACHED: true\nUNLOCKS:         []\nNEXT_CONCEPT:    (continue math.abst domain)\nSESSION_CLOSE:   \"You can now apply Burnside's Lemma to count distinct configurations under\n                  symmetry. The key steps are: identify the group and its action, compute the\n                  fixed-point set X^g for each group element (elements fixed by that symmetry),\n                  sum over all group elements, and divide by |G|.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: FIXED-POINT-MEANS-TOTAL-FIXED (MC-1)\n\n**Trigger:** Student computes |X^g| incorrectly — confuses orbit size with fixed-point count.\n\n**Step 1 — State the definition.**\n> X^g = {x ∈ X : g · x = x}.\n> For each x, ask: \"Does applying g to x give back x?\"\n> Count only those x that pass this test.\n\n**Step 2 — Walk through r¹ on the triangle.**\n> r¹ rotates 120°. Test each coloring:\n> - RRR: r¹·RRR = RRR ✓ (all same, rotation doesn't change it)\n> - BBB: r¹·BBB = BBB ✓\n> - RRB: r¹ moves colors: vertex 1→2, so position 2 gets the old color of 1 = R;\n>        position 3 gets old color of 2 = R; position 1 gets old color of 3 = B.\n>        r¹·RRB = BRR ≠ RRB. ✗ Not fixed.\n> Fixed-point set of r¹ = {RRR, BBB}. |X^{r¹}| = 2.\n\n**Exit:** Return to TA-A02 P49.\n\n---\n\n### TB-R02 · Repair: BURNSIDE-COUNTS-CONFIGURATIONS (MC-2)\n\n**Trigger:** Student reports Burnside's result as the total number of configurations.\n\n**Step 1 — Contrast the two quantities.**\n> |X| = total number of configurations (2³ = 8 for triangle, ignoring symmetry).\n> |G \\ X| = number of DISTINCT configurations under symmetry (orbits).\n> These are different. |G \\ X| ≤ |X|.\n\n**Step 2 — Concrete example.**\n> Triangle: |X| = 8 colorings; RRB, RBR, BRR are all \"the same\" under rotation.\n> Under rotation, we count {RRR}, {BBB}, {orbit of RRB}, {orbit of RBB} = 4 distinct types.\n> Burnside gives 4 = |G \\ X|, not 8 = |X|.\n\n**Exit:** Return to TA-A03 P49.\n\n---\n\n### TB-R03 · Repair: FORMULA-APPLIED-WITHOUT-ALL-GROUP-ELEMENTS (MC-3)\n\n**Trigger:** Student sums |X^g| for only some g (e.g., non-identity elements only).\n\n**Step 1 — Reinforce the domain of the sum.**\n> Burnside: Σ_{g ∈ G} |X^g|. The sum runs over EVERY g in G.\n> G = Z/4Z has 4 elements: r⁰, r¹, r², r³. All four must be included.\n\n**Step 2 — Why identity matters most.**\n> |X^{r⁰}| = |X| because the identity fixes every x.\n> For a square: |X^{r⁰}| = 16 (much larger than |X^{r¹}|=2 or |X^{r²}|=4).\n> Omitting r⁰ changes the sum from 24 to 8, giving 8/4 = 2 — wildly wrong.\n\n**Exit:** Return to TA-A03 P49.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"State Burnside's Lemma. What is X^g?\"\n    Target: |G\\X| = (1/|G|)Σ|X^g|; X^g = {x: g·x=x}.\n\n  Interval-2 (+3 days):\n    Probe: \"Triangle, 2 colors, rotations (Z/3Z): apply Burnside. What is the answer?\"\n    Target: (8+2+2)/3 = 4 distinct colorings.\n\n  Interval-3 (+1 week):\n    Probe: \"Square, 2 colors, Z/4Z: why does |X^{r²}| = 4?\"\n    Target: r² swaps corners 1↔3 and 2↔4; fixed iff color(1)=color(3) AND color(2)=color(4); 2×2=4.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (MC-1 gate: X^g definition).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.group-action:\n    Used in:   TA-A01 (action of Z/3Z on 2-colorings of triangle; orbit definition),\n               TA-A02 (fixed-point set X^g defined via g·x=x; contrasted with orbit),\n               TA-A03 (proof sketch uses orbit-stabilizer theorem |Stab(x)|=|G|/|Orb(x)|),\n               TA-A04 (P76 uses cycle structure of Z/6Z action).\n    Assumed:   Student knows group action axioms; can compute orbits; has seen the\n               orbit-stabilizer theorem.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The coloring motivation is essential — do not skip it.**\nBurnside's Lemma appears purely abstract without the coloring problem as the motivating example.\nThe triangle-with-2-colors example has just enough complexity (8 configurations, 4 orbits, 3 non-trivial computations) to make the formula feel useful, while remaining checkable by hand.\n\n**2. The fixed-point table is the key pedagogical tool.**\nHave students fill in a table: rows = group elements, columns = configurations, cell = ✓ if fixed.\nReading row sums gives |X^g|; total ÷ |G| gives orbit count. The table forces explicit testing of\neach x under each g, directly combating MC-1.\n\n**3. MC-1 is the dominant error at the apply level.**\nStudents who learned orbit-stabilizer readily conflate |Orb(x)| (the size of an orbit) with\n|X^g| (the number of points fixed by g). The triangle TA-A02 example (r¹ fixing only {RRR,BBB})\nis the clearest corrective: orbit of RRB has size 3, but |X^{r¹}| = 2 (unrelated quantities).\n\n**4. The proof sketch via double-counting in TA-A03 is optional at bloom=apply.**\nStudents who have time and interest benefit from seeing WHY the formula works. But the core\nskill at bloom=apply is correctly applying the formula (computing each |X^g|, summing, dividing).\nThe proof sketch can be presented as \"here's why it works\" without being assessed.\n\n**5. The cycle-structure shortcut for P76 (hexagon) prepares for Pólya enumeration.**\nFor a k-cycle, fixed colorings require all k vertices the same color. For the hexagon: r² has\ntwo 3-cycles → 2² = 4; r³ has three 2-cycles → 2³ = 8. Students who internalize this pattern\nhave a stepping stone toward the full Pólya enumeration theorem.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.burnside-lemma\n================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = C (Concrete: triangle-coloring problem before formula).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — fixed-point vs. orbit definition).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 contrast; TB-R02/R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross-links in KG; cross_links = [].\n[PASS] V-17  GR-9: P76 uses Independence mode; probe requires student to compute all six\n              |X^{r^k}| for the hexagon and apply Burnside independently (answer = 14).\n[PASS] V-18  GR-10: MAMR = 4/5; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.75 × 5⌉ = 4/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (≥4/5 → pass; ≤3/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Burnside's Lemma stated with formula and X^g definition.\n             Canonical example: triangle with 2 colors, Z/3Z; full fixed-point table; answer = 4.\n             Square extension: Z/4Z, |X|=16; |X^{r^k}| computed for all k; answer = 6.\n             MC-1: explicit test of r¹·RRB = BRR ≠ RRB; |X^{r¹}|=2, not orbit size 3.\n             MC-2: |X|=8 vs |G\\X|=4 contrasted explicitly.\n             MC-3: identity must be included; |X^{r⁰}|=|X|=16 for square.\n             Proof sketch via double-counting: orbit-stabilizer → Burnside formula derived.\n             P76: hexagon with 2 colors, Z/6Z; cycle structure analysis; answer = 14.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 259,
+        "endLine": 545
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11 four representations: triangle coloring problem, fixed-point table,\n                 formula + P49)\n      → TA-A02 (P41/P64 MC-1 gate: what X^g really means — fixed by g, not in the orbit\n                 + P49)\n      → TA-A03 (P06 contrast: orbit count vs. configuration count; formula proof sketch\n                 via double-counting + P49)\n      → TA-A04 (P91 terminal mastery gate — P76 independence probe)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (re-examine fixed-point definition; test each x individually under g·x=?)\n  MC-2 → TB-R02 (contrast: |X|=8 configurations vs |G\\X|=4 distinct under symmetry)\n  MC-3 → TB-R03 (sum over ALL g, including r⁰; identity always contributes |X| fixed points)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 88,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"State Burnside's Lemma. What is X^g?\"\n    Target: |G\\X| = (1/|G|)Σ|X^g|; X^g = {x: g·x=x}.\n\n  Interval-2 (+3 days):\n    Probe: \"Triangle, 2 colors, rotations (Z/3Z): apply Burnside. What is the answer?\"\n    Target: (8+2+2)/3 = 4 distinct colorings.\n\n  Interval-3 (+1 week):\n    Probe: \"Square, 2 colors, Z/4Z: why does |X^{r²}| = 4?\"\n    Target: r² swaps corners 1↔3 and 2↔4; fixed iff color(1)=color(3) AND color(2)=color(4); 2×2=4.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (MC-1 gate: X^g definition).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 419,
+        "endLine": 441
+      }
+    },
+    {
+      "assetId": "math.abst.burnside-lemma/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.burnside-lemma",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.group-action:\n    Used in:   TA-A01 (action of Z/3Z on 2-colorings of triangle; orbit definition),\n               TA-A02 (fixed-point set X^g defined via g·x=x; contrasted with orbit),\n               TA-A03 (proof sketch uses orbit-stabilizer theorem |Stab(x)|=|G|/|Orb(x)|),\n               TA-A04 (P76 uses cycle structure of Z/6Z action).\n    Assumed:   Student knows group action axioms; can compute orbits; has seen the\n               orbit-stabilizer theorem.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.burnside-lemma.md",
+        "startLine": 441,
+        "endLine": 460
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

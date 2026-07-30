@@ -1,0 +1,652 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.rational-root-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.rational-root",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:de29b0e14786b21c543c10f8ab6d57f0cb91885cd9241261b308a9b3b7580ce1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.rational-root.md": "sha256:0500216c6dc9b058d504e2b38a5e776e43dc6f9f8f1f8aaf49dacd6dbd3e449a"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 15,
+      "mastery_probe": 1
+    },
+    "ruleCount": 15
+  },
+  "concept": {
+    "conceptId": "math.func.rational-root",
+    "name": "Rational Root Theorem",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.func.polynomial-function",
+      "math.alg.polynomial-roots"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.rational-root-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.rational-root (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.rational-root.md": "sha256:0500216c6dc9b058d504e2b38a5e776e43dc6f9f8f1f8aaf49dacd6dbd3e449a"
+      },
+      "contentHash": "sha256:4dc10265c082fda75a36c36db153384ca8e75b97c26c5ebabfa0bbfb6fbb60ab",
+      "ruleCount": 15,
+      "bandCounts": {
+        "3": 15
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.rational-root.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.rational-root.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.rational-root"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.rational-root\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.rational-root/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.rational-root",
+      "title": "Learning Objective",
+      "content": "Given a polynomial with integer coefficients, the student states the Rational Root Theorem (any rational root p/q in lowest terms satisfies: p divides the constant term a₀ and q divides the leading coefficient aₙ), generates the complete list of candidate rational roots, tests candidates using synthetic or polynomial division, uses confirmed roots to factor the polynomial and reduce its degree, and correctly interprets a failed RRT test (no rational roots exist — irrational or complex roots may still exist).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.rational-root",
+      "title": "ALL-CANDIDATES-ARE-ROOTS",
+      "content": "| MC-1 | ALL-CANDIDATES-ARE-ROOTS | Student lists ±(factors of a₀)/(factors of aₙ) and declares all of them to be roots without testing; assumes the theorem guarantees roots, not merely candidates | Type 5 — instruction-induced (the candidate list is presented as \"the possible rational roots,\" and students conflate \"possible\" with \"actual\" — the theorem only filters down to a finite list; testing is always required) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.rational-root",
+      "title": "RRT-FINDS-ALL-ROOTS",
+      "content": "| MC-2 | RRT-FINDS-ALL-ROOTS | Student, after finding no rational roots, concludes the polynomial has no roots at all; does not consider irrational or complex roots | Type 1 — overgeneralization (the RRT is the ONLY root-finding technique students know at this stage; absence of rational roots is incorrectly interpreted as absence of all roots, because the tool's failure is confused with the problem's having no solution) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.rational-root",
+      "title": "LEADING-COEFFICIENT-IGNORED",
+      "content": "| MC-3 | LEADING-COEFFICIENT-IGNORED | Student uses only factors of a₀ (the constant term) as candidates, forgetting to divide by factors of aₙ (the leading coefficient); always checks only ±(integer divisors of a₀), missing candidates like ±1/2, ±3/2, etc. | Type 5 — instruction-induced (leading-coefficient-1 polynomials are taught first, where the candidates are simply ±(factors of a₀); when aₙ≠1 is introduced, the extra division step is missed because the earlier pattern is too deeply set) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "a₀=6: factors ±1, ±2, ±3, ±6.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"a₀=6: factors ±1, ±2, ±3, ±6.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "aₙ=2: factors ±1, ±2.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"aₙ=2: factors ±1, ±2.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "Candidates: ±1, ±2, ±3, ±6, ±1/2, ±3/2. (12 candidates.)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Candidates: ±1, ±2, ±3, ±6, ±1/2, ±3/2. (12 candidates.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "CORRECT → \"RRT: candidates are ±(factors of a₀)/(factors of aₙ). Test each by substitution or synthetic division. Remainder=0 → root; remainder≠0 → not a root. RRT only finds RATIONAL roots — others may exist.\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"RRT: candidates are ±(factors of a₀)/(factors of aₙ). Test each by substitution or synthetic division. Remainder=0 → root; remainder≠0 → not a root. RRT only finds RATIONAL roots — others may exist.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "PARTIAL (generates candidates correctly but tests by plugging into the expanded polynomial, making arithmetic errors) → \"Synthetic division is faster for testing candidates than direct substitution. The remainder is f(candidate) — if it's 0, the candidate is a root.\" → TB-R03 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (generates candidates correctly but tests by plugging into the expanded polynomial, making arithmetic errors) → \\\"Synthetic division is faster for testing candidates than direct substitution. The remainder is f(candidate) — if it's 0, the candidate is a root.\\\" → TB-R03 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "NO_RESPONSE → \"For f(x)=x²−5x+6: factors of 6 are ±1, ±2, ±3, ±6. Leading coeff=1, so only ±1 in denominator. Test x=2: f(2)=4−10+6=0. Does x=2 work?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"For f(x)=x²−5x+6: factors of 6 are ±1, ±2, ±3, ±6. Leading coeff=1, so only ±1 in denominator. Test x=2: f(2)=4−10+6=0. Does x=2 work?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "CORRECT → \"RRT gives CANDIDATES for rational roots only. Exhausting the list without finding a root means no rational roots — irrational and complex roots may still exist. For degree 2 with no rational roots: use the quadratic formula.\" → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"RRT gives CANDIDATES for rational roots only. Exhausting the list without finding a root means no rational roots — irrational and complex roots may still exist. For degree 2 with no rational roots: use the quadratic formula.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "PARTIAL (identifies rational vs. irrational distinction but doesn't know what to do next) → \"After RRT fails: if degree is 2, apply the quadratic formula to the remaining quadratic. For higher degree, numerical methods or advanced techniques.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (identifies rational vs. irrational distinction but doesn't know what to do next) → \\\"After RRT fails: if degree is 2, apply the quadratic formula to the remaining quadratic. For higher degree, numerical methods or advanced techniques.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "NO_RESPONSE → \"After confirming x=√2 is a root of x²−2=0: is √2 a rational number? Could RRT have listed it as a candidate? What does this tell you about RRT's limitations?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"After confirming x=√2 is a root of x²−2=0: is √2 a rational number? Could RRT have listed it as a candidate? What does this tell you about RRT's limitations?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "CORRECT → \"Non-monic polynomials: candidates = ±(factors of a₀)/(factors of aₙ). Confirmed roots reduce degree: divide out confirmed factors, apply RRT to quotient. When degree 2 survives, apply quadratic formula.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"CORRECT → \\\"Non-monic polynomials: candidates = ±(factors of a₀)/(factors of aₙ). Confirmed roots reduce degree: divide out confirmed factors, apply RRT to quotient. When degree 2 survives, apply quadratic formula.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "PARTIAL (lists all candidates but misses fractional ones) → \"When leading coefficient is 6 (not 1), the denominator of the candidate fraction can be 2, 3, or 6 — not just 1. This creates fractional candidates: ±1/2, ±1/3, ±1/6.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"PARTIAL (lists all candidates but misses fractional ones) → \\\"When leading coefficient is 6 (not 1), the denominator of the candidate fraction can be 2, 3, or 6 — not just 1. This creates fractional candidates: ±1/2, ±1/3, ±1/6.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 115,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 116,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.rational-root",
+      "title": "NO_RESPONSE → \"For g(x)=6x³−11x²−3x+2: write all factors of 2 (numerator) and all factors of 6 (denominator). Form all possible fractions ±p/q in lowest terms.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"NO_RESPONSE → \\\"For g(x)=6x³−11x²−3x+2: write all factors of 2 (numerator) and all factors of 6 (denominator). Form all possible fractions ±p/q in lowest terms.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 117,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.func.rational-root/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.rational-root",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. List all rational root candidates for: (a) f(x)=x³−4x²+x+6; (b) g(x)=3x³−x²−3x+1; (c) h(x)=2x⁴+x³−3x−2.\n2. For f(x)=x³−6x²+11x−6: test x=1, 2, 3 using synthetic division. Factor f completely. State all zeros.\n3. For g(x)=2x³−5x²+1: apply RRT completely. If some roots are irrational, use the quadratic formula on the remaining factor.\n4. True or false: \"If the Rational Root Theorem gives no rational roots, the polynomial has no real roots.\" Justify with a counterexample.\n\n**P55 — Reflect & Consolidate:** \"RRT candidates: ±p/q where p|a₀ and q|aₙ. Test by substitution or synthetic division. Confirm → factor out, reduce degree, repeat. Exhaust list → no rational roots; irrational/complex roots may still exist. Non-monic: don't forget fractional candidates.\"\n\n**P76 — Transfer Probe (Independence mode):**\nf(x)=x³+px+q has no rational roots for any choice of p, q with p²+4q>0. (a) Under what condition on p and q does f have three real roots? (Use the discriminant of the depressed cubic.) (b) Show that x³−3x+1 satisfies that condition: compute the discriminant and verify all three roots are real but irrational. (c) Apply RRT to x³−3x+1 and confirm no rational roots. (d) Use trigonometric substitution x=2cos(θ) to show the three roots are 2cos(2π/9), 2cos(8π/9), 2cos(14π/9).\n\n**P55 — Reflect & Consolidate:** \"The depressed cubic (no x² term) connects RRT failure to discriminant analysis and trigonometric solutions. When all rational candidates fail for a cubic with three real roots, the roots are irrational and can be expressed via trigonometric substitution. This is the historical origin of the casus irreducibilis: real irrational roots that cannot be expressed without complex arithmetic in the Cardano formula.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=6x⁴−7x³−11x²+2x+2. (a) List all rational root candidates. (b) Use synthetic division to confirm x=2 is a root and find the cubic quotient. (c) From the cubic quotient, find any remaining rational roots. (d) For any remaining quadratic factor, determine whether its roots are rational, irrational, or complex. (e) Write f(x) as a product of linear and/or irreducible quadratic factors.\"\n\n**P55 — Reflect & Consolidate:** \"The RRT workflow: list candidates → test → factor out each confirmed root → reapply RRT to quotient → when degree 2, apply quadratic formula. The combination of RRT + synthetic division + quadratic formula solves any degree-4 polynomial that has rational roots, producing a complete factorization.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.rational-root complete\n- Score 3/5 → REVIEW non-monic candidate list and irrational-root limitation; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.polynomial-function or math.alg.polynomial-roots; reassign\n\n**P78 — Completion:** Rational Root Theorem certified. Student generates the complete candidate list (including fractional candidates for non-monic polynomials), tests via synthetic division, reduces degree by factoring out confirmed roots, correctly interprets RRT failure as a statement about rational roots only, and integrates RRT with the quadratic formula for a complete polynomial factorization workflow.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.rational-root.md",
+        "startLine": 130,
+        "endLine": 157
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

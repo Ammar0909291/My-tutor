@@ -1,0 +1,329 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.ratio-test-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.ratio-test",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8bc3bfdcda4671653c4a28a28a65013f4856b5dd8bc4a3f95aaa2dc1540c2c57",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.ratio-test.md": "sha256:ce6af3751d80d444e4bda6d4db81f1ee5f78d8b91434042d8873f252de5463c8"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.ratio-test",
+    "name": "Ratio Test for Series",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.ratio-test-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.ratio-test (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.ratio-test.md": "sha256:ce6af3751d80d444e4bda6d4db81f1ee5f78d8b91434042d8873f252de5463c8"
+      },
+      "contentHash": "sha256:a50d3942db688a3ca5d628124ab9653d4f2d68c68f33d39ee3b89026add882e7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.ratio-test.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.ratio-test.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.ratio-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.ratio-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.ratio-test.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.ratio-test.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.ratio-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.ratio-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.ratio-test.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.ratio-test.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.ratio-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.ratio-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.ratio-test.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.ratio-test.md#TA-A04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.ratio-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.ratio-test\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.ratio-test/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.ratio-test",
+      "title": "Ratio Test for Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.series-convergence**: Σaₙ converges iff {Sₙ} converges; geometric series converges iff |r| < 1; Divergence Test\n\n### Target Knowledge State\nStudent can state and apply D'Alembert's Ratio Test: compute L = lim_{n→∞} |a_{n+1}/aₙ|; conclude convergence if L < 1, divergence if L > 1, and recognise the test is inconclusive if L = 1. Student knows the ratio test is especially powerful for series involving factorials (n!), exponentials (rⁿ), or their products, and understands why the test always gives L = 1 for p-series (requiring a different test there).\n\n### Conceptual Obstacles\n1. Confusing L = 1 (inconclusive) with divergence — the ratio test gives no information when L = 1; the harmonic series and Σ1/n² both yield L = 1 yet have opposite convergence\n2. Factorial algebra errors: replacing (n+1)!/n! with n or 1 rather than (n+1); or mishandling a_{n+1} when aₙ involves (n+1) in the denominator\n3. Overgeneralising: applying the ratio test to p-series or simple rational series where it always fails (L = 1 every time) instead of switching to a comparison or integral test\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.ratio-test",
+      "title": "RATIO-TEST-L=1-MEANS-DIVERGES",
+      "content": "| MC-1 | RATIO-TEST-L=1-MEANS-DIVERGES | Student sees L = 1 and concludes the series diverges; the test is in fact inconclusive — the series may converge, diverge, or oscillate | Any series whose ratio test gives exactly L = 1 (p-series, many rational series) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.ratio-test",
+      "title": "FACTORIAL-ALGEBRA-ERROR",
+      "content": "| MC-2 | FACTORIAL-ALGEBRA-ERROR | Student computes (n+1)!/n! as n or 1 instead of n+1; or simplifies a_{n+1}/aₙ by cancelling incorrectly when factorials appear in both numerator and denominator | Any ratio-test problem involving n! |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.ratio-test",
+      "title": "RATIO-TEST-UNIVERSAL",
+      "content": "| MC-3 | RATIO-TEST-UNIVERSAL | Student applies the ratio test to every convergence problem including simple p-series and polynomial/rational series, repeatedly getting L = 1 and stuck; does not recognise the test is inappropriate for these forms | Problems with Σ1/nᵖ, Σn/(n²+1), or any purely polynomial series |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.ratio-test",
+      "title": "Deriving and Applying the Ratio Test",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving and Applying the Ratio Test\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 64,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.ratio-test",
+      "title": "Pattern Gallery and L = 1 Domain",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pattern Gallery and L = 1 Domain\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 134,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.ratio-test",
+      "title": "Three-Case Contrast and Test Selection",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Three-Case Contrast and Test Selection\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 191,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.ratio-test",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 250,
+        "endLine": 464
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.ratio-test",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Apply the ratio test to each series. State L, and conclude convergence, divergence, or inconclusiveness (with a note on what to try instead).*\n\n**Problem 1.** Σₙ₌₁^∞ 2ⁿ/n!\n\n**Problem 2.** Σₙ₌₁^∞ nⁿ/n!\n\n**Problem 3.** Σₙ₌₁^∞ (n+1)/3ⁿ\n\n**Problem 4.** Σₙ₌₁^∞ 1/n² (apply ratio test; state what it tells you and what test you would use instead)\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. a_{n+1}/aₙ = 2/(n+1) → L = **0** < 1 → **converges** ✓\n\n2. a_{n+1}/aₙ = (1+1/n)ⁿ → L = **e** ≈ 2.718 > 1 → **diverges** ✓\n\n3. a_{n+1}/aₙ = (n+2)/(3(n+1)) → L = **1/3** < 1 → **converges** ✓\n\n4. a_{n+1}/aₙ = n²/(n+1)² → L = **1** → **inconclusive**. Use p-series test (p=2 > 1) or integral test to confirm convergence. ✓\n\nScore 1 point per problem. Problem 4: must state both that ratio test is inconclusive AND name a valid alternative test.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Determine whether Σₙ₌₁^∞ n²/3ⁿ converges or diverges.\n\n*(a)* Set up the ratio a_{n+1}/aₙ and simplify fully.\n\n*(b)* Compute L = lim_{n→∞} |a_{n+1}/aₙ|.\n\n*(c)* State the conclusion and verify that the test is definitive (L ≠ 1).\n\n*Expected answer:*\n\n*(a)* a_{n+1}/aₙ = [(n+1)²/3^{n+1}] / [n²/3ⁿ] = (n+1)²/(3n²)\n\n*(b)* L = lim (n+1)²/(3n²) = lim (n²+2n+1)/(3n²) = **1/3** < 1 ✓\n\n*(c)* L = 1/3 < 1 → **converges** absolutely. Definitive since L ≠ 1.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all three parts correct; 0.5 if L correct but conclusion omitted or setup has minor error).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; L=1 error → B01; factorial algebra → B02; wrong test choice → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; re-derive the geometric-series connection; drill factorial simplification; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.ratio-test` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** math.seq.root-test (natural follow-up — root test is strictly stronger; understanding ratio test first motivates root test).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 253,
+        "endLine": 355
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.ratio-test",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — advanced learner; the ratio test is a fully algebraic criterion grounded in comparison with a geometric series.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — A: derive the ratio test from the geometric-series comparison idea; apply to a factorial-exponential example; establish the three-case decision rule\n2. **A02 P04 PATTERN INDUCTION** — apply ratio test to a gallery of factorial/exponential series; discover L = 1 by computing with p-series; formulate the \"ratio test domain\" (where it works vs. doesn't)\n3. **A03 P06 CONTRAST PAIR** — compare ratio test vs. comparison test for the same series; contrast L < 1, L > 1, L = 1 cases side by side\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.ratio-test",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Apply the ratio test to Σ n³/2ⁿ. State L and conclude. |\n| R2 | 3 days | Apply the ratio test to Σ (2n)!/(n!)². Compute a_{n+1}/aₙ carefully — both factorials change. State L and conclude. |\n| R3 | 7 days | The ratio test gives L = 1 for Σ 1/√n. What test should be used instead? Apply it and state the conclusion. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 405,
+        "endLine": 415
+      }
+    },
+    {
+      "assetId": "math.seq.ratio-test/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.ratio-test",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.seq.root-test |\n| Requires (Tier-1) | math.seq.series-convergence |\n\n**GR-8 compliance:** cross_links = none.\n**GR-9 compliance:** P76 uses an independent problem unrelated to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.ratio-test.md",
+        "startLine": 415,
+        "endLine": 429
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.num.splines |
-| Title | Spline Interpolation |
+| name | Spline Interpolation |
 | Domain | math.num |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -112,7 +112,7 @@ Step 1 — "An interpolating spline passes through every data point. A B-spline 
 **TB-R03 (MC-3 PIECEWISE-LINEAR-IS-NOT-A-SPLINE):**
 Step 1 — "Piecewise linear is the simplest spline: each piece is a polynomial of degree 1 (a line segment), and the pieces join with C⁰ continuity. The spline framework is general: degree-1 = piecewise linear (C⁰), degree-3 with C¹ and C² = cubic spline. The same interpolation conditions apply; only the polynomial degree changes." Step 2 — Equations for piecewise linear on n+1 points: n pieces × 2 coefficients = 2n unknowns. Conditions: 2n values (interpolation at both endpoints of each piece) = 2n equations. Exactly determined; C⁰ holds automatically because adjacent pieces share an endpoint. Step 3 — "Unifying view: a 'spline of degree k' is a piecewise degree-k polynomial with as many continuous derivatives as possible (degree k−1 at most). Degree 1 = C⁰ linear spline. Degree 3 = C² cubic spline (one lower than the polynomial degree). The spline framework unifies all cases."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Three data points: (0,0), (1,1), (2,0). (a) Construct the piecewise linear C⁰ spline. (b) Set up the conditions for a natural cubic spline (C² with S''(0)=S''(2)=0). List all equations and solve for the 8 coefficients (4 per piece).

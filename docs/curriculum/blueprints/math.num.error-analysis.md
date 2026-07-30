@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.num.error-analysis |
-| Title | Error Analysis |
+| name | Error Analysis |
 | Domain | math.num |
 | Difficulty | proficient |
 | Bloom level | analyze |
@@ -110,7 +110,7 @@ Step 1 — "A small relative error in the INPUT is necessary but not sufficient 
 **TB-R03 (MC-3 BACKWARD-ERROR-IS-HARDER-TO-COMPUTE):**
 Step 1 — "Backward error analysis asks a conceptual question, not a computational one: 'What nearby problem does my algorithm solve exactly?' For many algorithms, the answer takes a clean form. For Gaussian elimination solving Ax=b, the computed x̃ is the exact solution to (A+ΔA)x̃=b where ‖ΔA‖≤O(nu)‖A‖ — this is Wilkinson's theorem, proved once and applied to every run." Step 2 — Practical: compute the backward error as the normalised residual ‖Ax̃−b‖/(‖A‖·‖x̃‖). This requires only the computed x̃, A, and b — NOT the exact solution. It is usually cheap and informative. Step 3 — "Backward stability is the gold standard: an algorithm is backward-stable if its backward error is ≈u. Once you know the algorithm is backward-stable, the error bound is κ·u for every input, without further analysis. This is why backward analysis is fundamental to numerical linear algebra."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. For f(x)=1/x at x=0.01, compute the condition number κ_f. If x has relative error 10⁻¹⁰, what is the bound on the relative error in 1/x? Is f ill-conditioned at x=0.01?

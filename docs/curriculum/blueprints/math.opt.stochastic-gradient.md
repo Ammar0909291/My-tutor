@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.stochastic-gradient |
-| Title | Stochastic Gradient Descent |
+| name | Stochastic Gradient Descent |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -100,7 +100,7 @@ Step 1 — "GD with constant LR on a strongly convex f: converges to the minimum
 **TB-R03 (MC-3 MORE-DATA-MEANS-SMALLER-BATCH):**
 Step 1 — "Batch size is a hyperparameter, not a function of N. With N=10⁶ samples you still use b=32 or b=256 — the same 32 samples are a noisy but unbiased estimate of the gradient regardless of whether N is 10⁶ or 10⁹." Step 2 — "What scales with N: the number of steps per epoch (N/b). More data → more distinct mini-batches per epoch → more updates → better coverage, not smaller batches." Step 3 — Re-explain the variance formula: Var[batch gradient]=(σ²/b), independent of N.
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. For f(θ)=(1/4)(f₁(θ)+f₂(θ)+f₃(θ)+f₄(θ)) where fᵢ(θ)=(θ−i)², compute the true gradient ∇f(θ) at θ=3. Then compute the stochastic gradient ∇f₂(θ) at θ=3. Verify 𝔼ᵢ[∇fᵢ(3)]=∇f(3).

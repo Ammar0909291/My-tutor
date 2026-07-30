@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.duality-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.duality",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dbabd0a28abe9da464b14e5b227e64684fb6959ee24e29edfd0fee2da4bf27ce",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.duality.md": "sha256:26841641ca463ae97d9f200ffc528c0694210005d96a1dae498b4d136d8c050a"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.opt.duality",
+    "name": "Lagrangian Duality",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.opt.convex-optimization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.duality-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.duality (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.duality.md": "sha256:26841641ca463ae97d9f200ffc528c0694210005d96a1dae498b4d136d8c050a"
+      },
+      "contentHash": "sha256:41b9d9f4ecc985d89d9d1852480642338c4b42c60e350dbc539f3d136810be23",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.duality.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.duality.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.duality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.duality\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.duality/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.duality",
+      "title": "Learning Objective",
+      "content": "Given a primal problem (P): min f(x) s.t. gᵢ(x)≤0, hⱼ(x)=0, the student forms the Lagrangian L(x,λ,ν)=f(x)+Σλᵢgᵢ(x)+Σνⱼhⱼ(x), defines the dual function g(λ,ν)=inf_x L(x,λ,ν), establishes the weak duality inequality g(λ,ν)≤p* for all λ≥0, identifies conditions under which strong duality holds (Slater's condition for convex problems), and interprets the duality gap.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.duality/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.duality",
+      "title": "DUAL-ALWAYS-EQUALS-PRIMAL-NONCONVEX",
+      "content": "| MC-1 | DUAL-ALWAYS-EQUALS-PRIMAL-NONCONVEX | Student assumes strong duality holds for any optimization problem; applies it to non-convex problems and gets incorrect bounds | Type 5 — instruction-induced (strong duality is emphasised for LP; the convexity requirement for general problems is downplayed) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.duality/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.duality",
+      "title": "DUAL-VARIABLES-ARE-JUST-MULTIPLIERS",
+      "content": "| MC-2 | DUAL-VARIABLES-ARE-JUST-MULTIPLIERS | Student treats Lagrange multipliers as a computation device, not as prices/shadow prices; cannot interpret λᵢ as the rate of change of optimal value with respect to constraint tightening | Type 5 — instruction-induced (Lagrange multipliers introduced as a solving technique, not as sensitivity analysis) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.duality/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.duality",
+      "title": "SLATER-MEANS-INTERIOR-POINT-EXISTS",
+      "content": "| MC-3 | SLATER-MEANS-INTERIOR-POINT-EXISTS | Student believes Slater's condition requires a strictly interior point of the ENTIRE feasible set; confuses Slater's condition (strict inequality constraints satisfied) with non-degeneracy of the optimal solution | Type 2 — perceptual intuition (Slater sounds geometric — \"some interior point\" — but applies only to the inequality constraints) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "CORRECT → \"Lagrangian relaxes the constraints into the objective via multipliers; dual function takes the infimum over x; weak duality gives g(λ,ν)≤p* always.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Lagrangian relaxes the constraints into the objective via multipliers; dual function takes the infimum over x; weak duality gives g(λ,ν)≤p* always.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "PARTIAL (can write Lagrangian, can't compute inf_x) → \"For f(x)=½x² and g(x)=x−1≤0 (x≥1), compute inf_x(½x²+λ(x−1)) over all x∈ℝ.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (can write Lagrangian, can't compute inf_x) → \\\"For f(x)=½x² and g(x)=x−1≤0 (x≥1), compute inf_x(½x²+λ(x−1)) over all x∈ℝ.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "NO_RESPONSE → \"What is inf_x (½x²+λx) for λ≥0? Take the derivative and set to zero.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"What is inf_x (½x²+λx) for λ≥0? Take the derivative and set to zero.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "CORRECT → \"Weak duality ALWAYS holds. Strong duality for convex problems: Slater's condition (strictly feasible point) is sufficient.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Weak duality ALWAYS holds. Strong duality for convex problems: Slater's condition (strictly feasible point) is sufficient.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "PARTIAL (understands weak, can't state Slater) → \"Slater's condition: there exists x̃ with gᵢ(x̃)___0 for all i. What goes in the blank — strict or non-strict inequality?\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands weak, can't state Slater) → \\\"Slater's condition: there exists x̃ with gᵢ(x̃)___0 for all i. What goes in the blank — strict or non-strict inequality?\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "INCORRECT → TB-R01 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "NO_RESPONSE → \"If p*=5 and d*=3, what is the duality gap? Can this happen for a convex problem satisfying Slater?\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"If p*=5 and d*=3, what is the duality gap? Can this happen for a convex problem satisfying Slater?\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "CORRECT → \"λᵢ* is the shadow price: rate of improvement in p* per unit relaxation of constraint i. Active constraints have λᵢ*>0; inactive have λᵢ*=0.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"λᵢ* is the shadow price: rate of improvement in p* per unit relaxation of constraint i. Active constraints have λᵢ*>0; inactive have λᵢ*=0.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "PARTIAL (knows CS, can't interpret shadow price) → \"If constraint i is inactive (some slack), loosening it further can't help — so λᵢ*=0. Why?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows CS, can't interpret shadow price) → \\\"If constraint i is inactive (some slack), loosening it further can't help — so λᵢ*=0. Why?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 112,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 113,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.opt.duality/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.duality",
+      "title": "NO_RESPONSE → \"If you relax a binding constraint by 1 unit and the optimal cost drops by 3, what is the shadow price of that constraint?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"If you relax a binding constraint by 1 unit and the optimal cost drops by 3, what is the shadow price of that constraint?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.opt.duality/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.duality",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Form the Lagrangian for: min x²+y² s.t. x+y≥2. Compute the dual function g(λ) and solve the dual max_{λ≥0} g(λ). Verify strong duality by checking p*=d*.\n2. For the LP in standard form min cᵀx s.t. Ax=b, x≥0, write the Lagrangian (treating equality constraints with free multipliers ν) and show the dual is max bᵀν s.t. Aᵀν≤c.\n3. Check Slater's condition for: (a) min x₁²+x₂² s.t. x₁+x₂≥1; (b) min x₁²+x₂² s.t. (x₁−1)²+(x₂−1)²≤0 (feasible set = single point {(1,1)}). For which does Slater hold?\n4. In problem (a) of Q3, identify the shadow price of the constraint x₁+x₂≥1 and verify it by perturbing the right-hand side to 1+ε.\n\n**P55 — Reflect & Consolidate:** \"Lagrangian duality: relax constraints into the objective, take infimum over x, maximise over multipliers. Weak duality always holds; strong duality needs convexity + Slater. Dual variables are shadow prices.\"\n\n**P76 — Transfer Probe (Independence mode):**\nSVM as a duality application: The soft-margin SVM primal is min_{w,b,ξ} ½‖w‖²+CΣξᵢ s.t. yᵢ(wᵀxᵢ+b)≥1−ξᵢ, ξᵢ≥0. Form the Lagrangian with multipliers αᵢ≥0 (for the margin constraints) and μᵢ≥0 (for ξᵢ≥0). Take inf over (w,b,ξ) to obtain the dual. Show that the dual variables αᵢ are the \"support vectors\" (only points with αᵢ>0 contribute to the decision boundary). This is why SVM is a sparse classifier.\n\n**P55 — Reflect & Consolidate:** \"SVM duality is the canonical machine learning example: the primal is a constrained QP over a high-dimensional w; the dual reduces to a QP over n sample weights αᵢ, enabling the kernel trick.\"\n\n**P75 — Mastery Assessment:**\n\"P: min x₁+x₂+x₃ s.t. x₁+x₂≥2, x₂+x₃≥2, x₁,x₂,x₃≥0. (a) Form the Lagrangian L(x,λ). (b) Compute the dual function g(λ₁,λ₂) by taking inf over x≥0. (c) Solve max g(λ) over λ≥0. (d) Verify p*=d*. (e) Identify which constraints are active at optimality and find the dual variables via complementary slackness.\"\n\n**P55 — Reflect & Consolidate:** \"The dual of an LP is an LP. The optimal dual variables are the shadow prices of the primal constraints, certifiable via complementary slackness.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; advance to math.opt.kkt\n- Score 3/5 → REVIEW weak duality proof and Slater; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.opt.convex-optimization; reassign\n\n**P78 — Completion:** Lagrangian duality certified. Student can form the dual, apply weak and strong duality, interpret dual variables as shadow prices, and state Slater's condition.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.duality.md",
+        "startLine": 127,
+        "endLine": 154
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

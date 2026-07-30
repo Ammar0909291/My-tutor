@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.homotopy-equivalence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.homotopy-equivalence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b69fffb5e91639ec163006049b1b00157673d9a552c3bfde1044d5d143e48020",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.homotopy-equivalence.md": "sha256:56dbad5f1d7e20cff35870579e8f40df6bf8230a21841f55cc5279ee8fce3034"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.homotopy-equivalence",
+    "name": "Homotopy Equivalence",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.top.homotopy"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.homotopy-equivalence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.homotopy-equivalence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.homotopy-equivalence.md": "sha256:56dbad5f1d7e20cff35870579e8f40df6bf8230a21841f55cc5279ee8fce3034"
+      },
+      "contentHash": "sha256:0c068d465261397bd90e49480402f356ab91826f5298cf857e5796e623e8fc1f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.homotopy-equivalence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homotopy-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homotopy-equivalence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.homotopy-equivalence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homotopy-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homotopy-equivalence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.homotopy-equivalence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homotopy-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homotopy-equivalence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.homotopy-equivalence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homotopy-equivalence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homotopy-equivalence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.homotopy-equivalence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **homotopy equivalence** ($f:X\\to Y$ and $g:Y\\to X$ with $g\\circ f\\simeq\\mathrm{id}_X$ and $f\\circ g\\simeq\\mathrm{id}_Y$); distinguish it from homeomorphism (homotopy equivalence is strictly weaker); state that **contractible** spaces (homotopy equivalent to a point) include $\\mathbb{R}^n$, convex subsets, and cones.\n- LO2: Use **deformation retracts** to establish homotopy equivalences — a subspace $A\\subseteq X$ is a deformation retract of $X$ if there exists a retraction $r:X\\to A$ homotopic to $\\mathrm{id}_X$ rel $A$; prove $X\\simeq A$ when $A$ is a deformation retract of $X$.\n- LO3: Compute homotopy types of standard spaces using deformation retracts: $\\mathbb{R}^n\\setminus\\{0\\}\\simeq S^{n-1}$, the cylinder $S^1\\times[0,1]\\simeq S^1$, the Möbius strip $\\simeq S^1$, and the punctured torus $T^2\\setminus\\{p\\}\\simeq S^1\\vee S^1$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "HOMOTOPY-EQUIVALENT-MEANS-HOMEOMORPHIC",
+      "content": "| MC-1 | HOMOTOPY-EQUIVALENT-MEANS-HOMEOMORPHIC | Believing homotopy equivalence implies homeomorphism — missing that contractible spaces (all homotopy equivalent to a point) need not be homeomorphic to each other: $[0,1]\\simeq\\{pt\\}$ but $[0,1]\\not\\cong\\{pt\\}$ | Critical |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "DEFORMATION-RETRACT-DIRECTION-CONFUSED",
+      "content": "| MC-2 | DEFORMATION-RETRACT-DIRECTION-CONFUSED | Believing the deformation retract is only the retraction map $r:X\\to A$ (one direction) — missing that BOTH the inclusion $i:A\\hookrightarrow X$ and the retraction $r$ must be checked as homotopy inverses | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "CONTRACTIBLE-MEANS-COMPACT",
+      "content": "| MC-3 | CONTRACTIBLE-MEANS-COMPACT | Believing \"contractible\" implies \"bounded\" or \"compact\" — conflating a topological deformation property with a metric/compactness property; $\\mathbb{R}^n$ is contractible and non-compact | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "From Homotopy of Maps to Equivalence of Spaces (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Homotopy of Maps to Equivalence of Spaces (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "Deformation Retracts (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Deformation Retracts (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "Homotopy Invariants as Distinguishing Tools (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Homotopy Invariants as Distinguishing Tools (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Show that any convex subset $C\\subseteq\\mathbb{R}^n$ (with at least one point) is contractible. Construct the explicit contracting homotopy.\n  2. Show $\\mathbb{R}^n\\setminus\\{0\\}\\simeq S^{n-1}$ by constructing a deformation retract. Verify all three conditions of a deformation retract.\n  3. Prove that homotopy equivalence is an equivalence relation (reflexivity: $X\\simeq X$; symmetry: $X\\simeq Y\\Rightarrow Y\\simeq X$; transitivity).\n  4. Use the fundamental group to show that $S^2\\not\\simeq T^2$ (torus). (Note: $\\pi_1(S^2)=\\{e\\}$; $\\pi_1(T^2)\\cong\\mathbb{Z}\\times\\mathbb{Z}$.)\n- **P76 (Transfer Probe, mode = independence)**: \"The **Euler characteristic** is a homotopy invariant for finite CW complexes. (a) Compute $\\chi$ for $S^1$ (1 zero-cell, 1 one-cell: $\\chi=0$) and for $S^1\\vee S^1$ (1 zero-cell, 2 one-cells: $\\chi=-1$). (b) A punctured torus $T^2\\setminus\\{p\\}$ is homotopy equivalent to $S^1\\vee S^1$. Verify this homotopy invariant prediction: $\\chi(T^2\\setminus\\{p\\})$ should equal $\\chi(S^1\\vee S^1)=-1$. Compute $\\chi(T^2\\setminus\\{p\\})$ directly from the CW structure of $T^2$ (1 zero-cell, 2 one-cells, 1 two-cell: $\\chi(T^2)=0$) by noting that removing a point from the interior of the two-cell replaces it with an open disk, reducing the two-cell count by 1. (c) Conclude that $T^2\\setminus\\{p\\}\\not\\simeq S^2\\setminus\\{p\\}$ by computing their Euler characteristics.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Homotopy Equivalence — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.homotopy` (homotopy of maps $H:X\\times[0,1]\\to Y$, homotopy relative to a subset, homotopy classes, the fundamental group $\\pi_1$). The key fact used throughout: homotopy-invariant functors (e.g., $\\pi_1$, homology groups) assign equal values to homotopy-equivalent spaces.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.homotopy-equivalence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.homotopy-equivalence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.homotopy` (homotopy of maps, homotopy relative to a subspace, the fundamental group $\\pi_1$).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homotopy-equivalence.md",
+        "startLine": 105,
+        "endLine": 111
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.stochastic-gradient-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.stochastic-gradient",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b87cbeeb4a322ea2230845649d35b18df5fe6602587f916d98d29b40dfd06e19",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.stochastic-gradient.md": "sha256:da1feb8d857a763088ec7c3cb5f9f473ccc278007eb9dda6088e4ee7e3e110cc"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.opt.stochastic-gradient",
+    "name": "Stochastic Gradient Descent",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.opt.gradient-methods",
+      "math.prob.expected-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.stochastic-gradient-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.stochastic-gradient (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.stochastic-gradient.md": "sha256:da1feb8d857a763088ec7c3cb5f9f473ccc278007eb9dda6088e4ee7e3e110cc"
+      },
+      "contentHash": "sha256:eb198b399f2dcd1abf0641189acad3acf4f6cb92a4ab3b6bdf50991f5298a53c",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.stochastic-gradient.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.stochastic-gradient"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.stochastic-gradient\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.stochastic-gradient/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "Learning Objective",
+      "content": "Given an objective function of the form f(θ)=(1/N)Σᵢfᵢ(θ) (finite-sum structure), the student explains why full-gradient GD is computationally prohibitive for large N, defines the SGD update θ←θ−α∇fᵢ(θ) using a single randomly-selected term, justifies the update as an unbiased estimate of the true gradient, selects appropriate learning rate schedules (constant, decaying, warm-up), explains mini-batch as a variance-reduction middle ground, and identifies the convergence properties (convergence to a neighbourhood of the minimum, noise floor) versus those of full GD.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "SGD-UPDATE-IS-WRONG-GRADIENT",
+      "content": "| MC-1 | SGD-UPDATE-IS-WRONG-GRADIENT | Student believes using ∇fᵢ instead of ∇f introduces a systematic error (bias) into each step; does not see that 𝔼[∇fᵢ(θ)]=∇f(θ) | Type 5 — instruction-induced (students learn \"use the true gradient\" from deterministic GD) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "CONSTANT-LR-ALWAYS-CONVERGES",
+      "content": "| MC-2 | CONSTANT-LR-ALWAYS-CONVERGES | Student applies a constant (non-decaying) learning rate and expects convergence to the exact minimum; is confused when loss oscillates near the optimum | Type 1 — overgeneralization (constant LR works for GD on strongly convex functions; fails for SGD noise) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "MORE-DATA-MEANS-SMALLER-BATCH",
+      "content": "| MC-3 | MORE-DATA-MEANS-SMALLER-BATCH | Student believes mini-batch size should decrease as the dataset grows; confuses batch size with step count or epoch count | Type 3 — language contamination (\"mini-batch\" sounds like it should scale with N) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "CORRECT → \"SGD replaces O(N) gradient by O(1) unbiased estimate. The noise is a price for the speedup.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"SGD replaces O(N) gradient by O(1) unbiased estimate. The noise is a price for the speedup.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "PARTIAL (understands update, misses unbiasedness) → \"What is 𝔼[∇fᵢ(θ)] if i is chosen uniformly from {1,…,N}?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (understands update, misses unbiasedness) → \\\"What is 𝔼[∇fᵢ(θ)] if i is chosen uniformly from {1,…,N}?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "NO_RESPONSE → \"If f(θ)=(f₁(θ)+f₂(θ)+f₃(θ))/3, what is the average of ∇f₁,∇f₂,∇f₃?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"If f(θ)=(f₁(θ)+f₂(θ)+f₃(θ))/3, what is the average of ∇f₁,∇f₂,∇f₃?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "CORRECT → \"Constant LR → noise floor; decaying LR → exact convergence (in theory); practical: warm-up + decay.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Constant LR → noise floor; decaying LR → exact convergence (in theory); practical: warm-up + decay.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "PARTIAL (knows LR matters, can't quantify noise floor) → \"If σ² is the gradient variance and α is the LR, how does the oscillation radius scale with α?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows LR matters, can't quantify noise floor) → \\\"If σ² is the gradient variance and α is the LR, how does the oscillation radius scale with α?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "NO_RESPONSE → \"If you halve α from 0.1 to 0.05, the oscillation amplitude roughly halves. Does the loss floor go up or down?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"If you halve α from 0.1 to 0.05, the oscillation amplitude roughly halves. Does the loss floor go up or down?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "CORRECT → \"Mini-batch is the variance-cost trade-off. Doubling b halves variance and allows doubling LR.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Mini-batch is the variance-cost trade-off. Doubling b halves variance and allows doubling LR.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "PARTIAL (knows mini-batch reduces variance, misses linear scaling rule) → \"If you double the mini-batch size from 32 to 64, by how much can you increase the learning rate without increasing the noise floor?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows mini-batch reduces variance, misses linear scaling rule) → \\\"If you double the mini-batch size from 32 to 64, by how much can you increase the learning rate without increasing the noise floor?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "NO_RESPONSE → \"A mini-batch of b=32 has variance σ²/32. A mini-batch of b=64 has variance _?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"A mini-batch of b=32 has variance σ²/32. A mini-batch of b=64 has variance _?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.opt.stochastic-gradient/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.stochastic-gradient",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. For f(θ)=(1/4)(f₁(θ)+f₂(θ)+f₃(θ)+f₄(θ)) where fᵢ(θ)=(θ−i)², compute the true gradient ∇f(θ) at θ=3. Then compute the stochastic gradient ∇f₂(θ) at θ=3. Verify 𝔼ᵢ[∇fᵢ(3)]=∇f(3).\n2. A student uses SGD with constant α=0.01 on a convex problem and observes training loss stabilizing at 0.05±0.02. They switch to SGD with α_t=0.01/√t. Qualitatively describe the expected behavior of the training loss over the next 10,000 steps.\n3. Compare the total computational cost (in gradient evaluations) of: (a) 1000 full-GD steps on N=50,000 samples; (b) 1,562,500 SGD steps on b=32 mini-batches covering the same total gradient evaluations.\n4. State the Robbins-Monro conditions on the learning rate schedule {α_t} and explain intuitively what each condition ensures.\n\n**P55 — Reflect & Consolidate:** \"SGD trades gradient accuracy (variance) for computational speed. The noise floor is proportional to α; convergence requires α→0 at the right rate. Mini-batch interpolates between SGD and full GD.\"\n\n**P76 — Transfer Probe (Independence mode):**\nVariance reduction method — SVRG (Stochastic Variance Reduced Gradient): periodically compute the full gradient g̃=∇f(θ̃) at a snapshot θ̃; then each step uses ∇fᵢ(θ)−∇fᵢ(θ̃)+g̃ instead of ∇fᵢ(θ). Show that this modified estimator is still unbiased (𝔼ᵢ[∇fᵢ(θ)−∇fᵢ(θ̃)+g̃]=∇f(θ)). Explain qualitatively why the variance is smaller when θ≈θ̃ compared to plain SGD.\n\n**P55 — Reflect & Consolidate:** \"SVRG shows the unbiasedness argument generalises: any correction that averages to zero preserves unbiasedness. Variance reduction by subtracting a correlated control variate is a general technique.\"\n\n**P75 — Mastery Assessment:**\n\"You train a model on N=1,000,000 samples. (a) Full GD would require one pass through all N samples per step. You plan 100 epochs. How many gradient evaluations does full GD use? (b) SGD with b=256 and same 100 epochs: how many gradient evaluations? (c) The noise floor of SGD with constant α is proportional to α·σ²/b. If you double b from 256 to 512, by what factor should you scale α to keep the noise floor the same? (d) Explain why a decaying learning rate schedule is preferable to a constant LR if you want convergence guarantees.\"\n\n**P55 — Reflect & Consolidate:** \"The key trade-offs: computation per step (O(b)), gradient variance (σ²/b), noise floor (α·σ²/b), convergence (decay LR). These three levers interact.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.opt.stochastic-gradient complete\n- Score 3/5 → REVIEW unbiasedness and learning rate schedule; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.opt.gradient-methods or math.prob.expected-value; reassign\n\n**P78 — Completion:** Stochastic gradient descent certified. Student can justify unbiasedness, select learning rate schedules, and reason about the noise floor vs. convergence trade-off.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.stochastic-gradient.md",
+        "startLine": 103,
+        "endLine": 130
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

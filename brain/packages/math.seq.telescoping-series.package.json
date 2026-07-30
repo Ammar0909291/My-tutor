@@ -1,0 +1,339 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.telescoping-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.telescoping-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:59eb3d68d40a0c0d568525f26a33f0620e7094f62bf325d929a3330220f8ea01",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.telescoping-series.md": "sha256:008bb786886cf131e4e9d1d5b1f8dfdd19989e72576a6b5d9f0f5b378c4e1902"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.telescoping-series",
+    "name": "Telescoping Series",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.seq.partial-sums"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.telescoping-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.telescoping-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.telescoping-series.md": "sha256:008bb786886cf131e4e9d1d5b1f8dfdd19989e72576a6b5d9f0f5b378c4e1902"
+      },
+      "contentHash": "sha256:5f9d68bdaca31fa3a82983828137d2f7a56516e32d01e1403f7dac49c3437b31",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.telescoping-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.telescoping-series.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.telescoping-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.telescoping-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.telescoping-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.telescoping-series.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.telescoping-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.telescoping-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.telescoping-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.telescoping-series.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.telescoping-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.telescoping-series\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.telescoping-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.telescoping-series.md#TA-A04 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.telescoping-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.telescoping-series\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.telescoping-series/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "Telescoping Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.partial-sums**: Sₙ = a₁+a₂+⋯+aₙ; computing Sₙ by direct summation; closed-form vs recursive expressions\n\n### Target Knowledge State\nStudent can recognise the telescoping form Σ(bₙ − bₙ₊₁) in a given series; can apply partial fraction decomposition to write aₙ = bₙ − bₙ₊₁ when aₙ is a rational function; can write out Sₙ explicitly to see the cancellation pattern; and can evaluate the sum by taking lim_{n→∞} Sₙ = b₁ − lim bₙ₊₁.\n\n### Conceptual Obstacles\n1. Attempting to telescope before decomposing — for aₙ = 1/(n(n+1)), the terms as given do not visibly telescope; partial fractions (1/n − 1/(n+1)) must be found first\n2. Confusing which terms survive the cancellation — in Sₙ = b₁ − bₙ₊₁, students sometimes write b₁ + bₙ₊₁ or bₙ − b₁, reversing the sign or the order\n3. Assuming every rational series telescopes — telescoping requires a specific difference structure; series like Σ1/n² do not telescope directly\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "TELESCOPE-BEFORE-DECOMPOSE",
+      "content": "| MC-1 | TELESCOPE-BEFORE-DECOMPOSE | Student tries to apply the telescoping formula to aₙ=1/(n(n+1)) directly without splitting into partial fractions first; the form must be a difference bₙ−bₙ₊₁ before cancellation works | Any rational-function series needing partial fractions |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "WRONG-SURVIVING-TERMS",
+      "content": "| MC-2 | WRONG-SURVIVING-TERMS | Student writes Sₙ = b₁ + bₙ₊₁ or bₙ − b₁ instead of b₁ − bₙ₊₁; reverses sign or order in the cancellation | Writing out the telescoping sum |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "ALL-RATIONAL-SERIES-TELESCOPE",
+      "content": "| MC-3 | ALL-RATIONAL-SERIES-TELESCOPE | Student attempts to telescope Σ1/n² by guessing a difference structure; not all rational series have a telescoping form | Any series with rational terms |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "Telescoping Form and Partial Fractions",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Telescoping Form and Partial Fractions\",\"primitives\":[\"P02\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 64,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "Recognising and Setting Up Telescoping",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Recognising and Setting Up Telescoping\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 132,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "Extended Telescoping and Double Telescope",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Extended Telescoping and Double Telescope\",\"primitives\":[\"P05\",\"P49\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 184,
+        "endLine": 246
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P04\",\"P05\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 246,
+        "endLine": 461
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Use partial fractions and telescoping to evaluate each sum.*\n\n**Problem 1.** Σₙ₌₁^∞ 1/((n+1)(n+3))\n\n**Problem 2.** Σₙ₌₁^∞ (1/2)ⁿ − (1/2)ⁿ⁺¹  (verify it telescopes and find S∞)\n\n**Problem 3.** Σₙ₌₁^∞ 3/(n(n+3))  (use the gap-3 result from A03)\n\n**Problem 4.** Find Σₙ₌₂^∞ 1/(n²−1)  (note n²−1=(n−1)(n+1), sum starts at n=2)\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. PF: 1/((n+1)(n+3))=1/2(1/(n+1)−1/(n+3)); gap 2; surviving: 1/(n+1)|_{n=1}=1/2 and 1/(n+1)|_{n=2}=1/3; S∞=1/2(1/2+1/3)=1/2·5/6=**5/12**\n2. bₙ=(1/2)ⁿ, bₙ₊₁=(1/2)ⁿ⁺¹; Sₙ=b₁−bₙ₊₁=1/2−(1/2)ⁿ⁺¹→1/2; **S∞=1/2**. Verify: this equals Σ(1/2)ⁿ·(1−1/2)=Σ(1/2)ⁿ⁺¹... actually bₙ−bₙ₊₁=(1/2)ⁿ−(1/2)ⁿ⁺¹; Sₙ=(1/2)¹−(1/2)ⁿ⁺¹→1/2 ✓\n3. 3/(n(n+3))=3·(1/3)(1/n−1/(n+3))=1/n−1/(n+3); S∞=1/1+1/2+1/3=**11/6**... wait: 3·(11/18)=11/6. Actually 3/(n(n+3))=1·(1/n−1/(n+3)) (A in PF: 3/(n(n+3))=A/n+B/(n+3): A·(n+3)+Bn=3; A=1,B=−1); S∞=(1+1/2+1/3)−0=**11/6**. *(Note: from the gap-3 result above, Σ1/(n(n+3))=11/18; multiplying by 3 gives 11/6.)*\n4. 1/(n²−1)=1/2(1/(n−1)−1/(n+1)), gap 2; n starts at 2; surviving: b₁=1/1=1 and b₂=1/2; S∞=1/2(1+1/2)=**3/4**\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Evaluate Σₙ₌₁^∞ 1/(4n²−1).\n\n(a) Factor the denominator.\n\n(b) Decompose into partial fractions.\n\n(c) Identify the telescoping structure and find S∞.\n\n*Expected answers:*\n\n(a) 4n²−1 = (2n−1)(2n+1)\n\n(b) 1/((2n−1)(2n+1)) = 1/2·(1/(2n−1) − 1/(2n+1))\n\n(c) This is 1/2·(bₙ − bₙ₊₁) where bₙ = 1/(2n−1).\nSₙ = 1/2·(1/(2·1−1) − 1/(2n+1)) = 1/2·(1 − 1/(2n+1))\nS∞ = 1/2·1 = **1/2**\n\n(This is the Leibniz series connection: 1/1·3 + 1/3·5 + ⋯ = 1/2, related to π/4 via partial fractions on arctan.)\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; if MC-1 (no PF first) → B01; if MC-2 (wrong surviving terms) → B02; targeted repair |\n| ≤ 2/5 | → Return to A01; rework canonical 1/(n(n+1)) example step by step; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.telescoping-series` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** none directly (see KG).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 249,
+        "endLine": 352
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — partial-sum definition is prior knowledge; symbolic cancellation is the new skill.\n\n**Scaffolding sequence:**\n1. **A01 P02 FORMAL DEFINITION** — define telescoping form Σ(bₙ−bₙ₊₁); derive Sₙ = b₁−bₙ₊₁; apply to 1/(n(n+1)) via partial fractions; address MC-1, MC-2\n2. **A02 P04 PATTERN INDUCTION** — practice partial fraction setups for several rational aₙ; tabulate cancellation; address MC-3\n3. **A03 P05 WORKED EXAMPLE** — extended form with gap k: Σ(bₙ−bₙ₊ₖ); double-telescope example\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Find S∞ for Σₙ₌₁^∞ 1/((n+2)(n+3)). Show the partial fraction step. |\n| R2 | 3 days | Verify that Σₙ₌₁^∞ 1/(n(n+1)) = 1 by computing S₁, S₂, S₅, and lim Sₙ. |\n| R3 | 7 days | Find S∞ for Σₙ₌₁^∞ 2/(n(n+2)). |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 402,
+        "endLine": 412
+      }
+    },
+    {
+      "assetId": "math.seq.telescoping-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.telescoping-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | none |\n| Requires (Tier-1) | math.seq.partial-sums |\n\n**GR-8 compliance:** no cross_links in KG — documented.\n**GR-9 compliance:** P76 uses an independent problem (4n²−1).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.telescoping-series.md",
+        "startLine": 412,
+        "endLine": 426
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

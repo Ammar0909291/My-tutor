@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.divergent-sequence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.divergent-sequence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fb44bb175c86a7c9ba44bf69b538ec9f626cf6a6c3c59b2ad40c3b41346ee154",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.divergent-sequence.md": "sha256:20918048ca2371ae1f9542572636cd7eb317469d746e1edf49f02e1f112d5313"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.divergent-sequence",
+    "name": "Divergent Sequence",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.seq.convergent"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.divergent-sequence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.divergent-sequence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.divergent-sequence.md": "sha256:20918048ca2371ae1f9542572636cd7eb317469d746e1edf49f02e1f112d5313"
+      },
+      "contentHash": "sha256:613bc8c53eec5c2ea51338afbbcf29524622c8dbf0ac066849d5265c0bba2965",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.divergent-sequence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergent-sequence.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergent-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergent-sequence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.divergent-sequence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergent-sequence.md#TA-A02 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergent-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergent-sequence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.divergent-sequence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergent-sequence.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergent-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergent-sequence\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.divergent-sequence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergent-sequence.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergent-sequence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergent-sequence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.divergent-sequence/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "Divergent Sequence — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.convergent**: {aₙ} converges to L iff for every ε>0 there exists N such that n>N → |aₙ−L|<ε; equivalently, lim_{n→∞} aₙ = L for some finite L ∈ ℝ\n\n### Target Knowledge State\nStudent can define divergence as the logical negation of convergence; can classify sequences by divergence type (unbounded positive, unbounded negative, oscillating without limit); can prove divergence formally by negating the convergence definition or by applying boundedness; understands that bounded sequences may still diverge (oscillating case); knows the Monotone Convergence Theorem — a monotone bounded sequence must converge — and its contrapositive as a divergence criterion.\n\n### Conceptual Obstacles\n1. Believing every bounded sequence converges — {(−1)ⁿ} is bounded (all terms in {−1, +1}) yet diverges because it oscillates without settling near any single value\n2. Equating divergence with blowing up to infinity — oscillating sequences like {(−1)ⁿ} or {sin(nπ/2)} are divergent without any term becoming large\n3. Thinking {(−1)ⁿ/n} diverges because it alternates — the terms still approach 0 so the sequence converges to 0 (alternating signs do not guarantee divergence)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "BOUNDED-SEQUENCE-CONVERGES",
+      "content": "| MC-1 | BOUNDED-SEQUENCE-CONVERGES | Student concludes {(−1)ⁿ} converges because all terms lie in [−1,1]; confuses boundedness with convergence | Any bounded sequence presented for analysis |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "DIVERGES-ONLY-TO-INFINITY",
+      "content": "| MC-2 | DIVERGES-ONLY-TO-INFINITY | Student classifies only sequences with aₙ→±∞ as divergent; treats oscillating sequences as \"neither convergent nor divergent\" | Sequences like {(−1)ⁿ} or {sin n} presented |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "ALTERNATING-SIGN-IMPLIES-DIVERGENCE",
+      "content": "| MC-3 | ALTERNATING-SIGN-IMPLIES-DIVERGENCE | Student says {(−1)ⁿ/n} diverges because of alternating signs; misses that |aₙ|=1/n→0 forces the limit to 0 regardless of sign | Any sequence with alternating sign |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "Formal Definition and Taxonomy",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Formal Definition and Taxonomy\",\"primitives\":[\"P02\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 64,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "Bounded vs Unbounded Divergence",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Bounded vs Unbounded Divergence\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 112,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "Monotone Convergence Theorem and Divergence Criterion",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Monotone Convergence Theorem and Divergence Criterion\",\"primitives\":[\"P05\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 164,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P05\",\"P06\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 223,
+        "endLine": 423
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*For each sequence, classify as convergent or divergent. For divergent sequences, identify the type.*\n\n**Problem 1.** aₙ = (−1)ⁿ · 3\n\n**Problem 2.** aₙ = n²/(n²+1)\n\n**Problem 3.** aₙ = (−1)ⁿ/(n+1)\n\n**Problem 4.** bₙ = 1 − (2/3)ⁿ\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Oscillates between +3 and −3; bounded, no limit → **diverges (bounded oscillation)**\n2. n²/(n²+1) = 1/(1+1/n²) → 1 → **converges to 1**\n3. |aₙ| = 1/(n+1) → 0; squeeze: −1/(n+1) ≤ aₙ ≤ 1/(n+1) → **converges to 0**\n4. (2/3)ⁿ → 0 since |2/3|<1 → bₙ → 1 → **converges to 1**\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Let aₙ = n·sin(πn). Classify this sequence as convergent or divergent. Justify your answer by identifying whether the MCT applies or by directly analyzing the limit.\n\n*Expected answer:* sin(πn) = 0 for all integer n (since πn is always a multiple of π and sin(kπ)=0). So aₙ = n·0 = 0 for all n ≥ 1. The sequence is constantly 0 → **converges to 0**. (This tests whether the student correctly evaluates sin at integer multiples of π rather than applying oscillation intuition from the sine function's general graph.)\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; if MC-1 (bounded=convergent) → B01; if MC-2 (divergence=blowing up) → B02; targeted repair |\n| ≤ 2/5 | → Return to A01; rework the formal definition and the taxonomy; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.divergent-sequence` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** none directly (see KG).\n\nNext concept: convergence tests (divergence-test, comparison-test, ratio-test, integral-test) that formally determine whether more complex sequences and their associated series converge or diverge.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 226,
+        "endLine": 315
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — learner already has the formal convergence definition.\n\n**Scaffolding sequence:**\n1. **A01 P02 FORMAL DEFINITION** — negate the convergence definition to obtain the formal divergence definition; classify the three divergence types with canonical examples\n2. **A02 P06 CONTRAST PAIR** — convergent vs divergent sequences side-by-side: bounded-convergent / bounded-divergent (oscillating) / unbounded-divergent; address MC-1, MC-2\n3. **A03 P05 WORKED EXAMPLE** — Monotone Convergence Theorem as a convergence tool and its contrapositive as a divergence tool; address MC-3\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Classify: aₙ = (−1)ⁿ(1+1/n). Convergent or divergent? |\n| R2 | 3 days | State MCT precisely. Give one example where MCT applies and one where it does not (explain why not). |\n| R3 | 7 days | Show from the definition that {(−1)ⁿ} diverges (exhibit ε and two subsequences with different limits). |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 365,
+        "endLine": 375
+      }
+    },
+    {
+      "assetId": "math.seq.divergent-sequence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.divergent-sequence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | none |\n| Requires (Tier-1) | math.seq.convergent |\n\n**GR-8 compliance:** no cross_links in KG — documented.\n**GR-9 compliance:** P76 uses an independent problem (n·sin(πn)) not connected to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergent-sequence.md",
+        "startLine": 375,
+        "endLine": 389
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

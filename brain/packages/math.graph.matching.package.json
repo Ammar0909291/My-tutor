@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.matching-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.matching",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:75a421e08c99fbb8d4217f184208ed6cfab07e2b59ab276102e4108eb6b210ad",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.matching.md": "sha256:3b9560b2a87c5a8a0fbf89e20861609337c3000afb60081d4f9cee41d6aa76cb"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.matching",
+    "name": "Graph Matching",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.graph.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.matching-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.matching (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.matching.md": "sha256:3b9560b2a87c5a8a0fbf89e20861609337c3000afb60081d4f9cee41d6aa76cb"
+      },
+      "contentHash": "sha256:de72570ac188b3f4c9b17eb4d58d49c056a8187d54e59aa484160b44868e5cf9",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.matching.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.matching.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.matching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.matching\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.matching.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.matching.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.matching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.matching\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.matching.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.matching.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.matching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.matching\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.matching.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.matching.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.matching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.matching\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.matching/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.matching",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **matching** $M$ (set of pairwise non-adjacent edges), **maximum matching** (largest $|M|$), **maximal matching** (cannot add more edges), and **perfect matching** ($|M|=n/2$); distinguish these three concepts via counterexamples; define **$M$-alternating** and **$M$-augmenting** paths and state Berge's theorem ($M$ is maximum iff no augmenting path exists).\n- LO2: State and apply **Hall's theorem**: a bipartite graph $G=(A\\cup B,E)$ has a perfect matching (saturating all of $A$) iff for every $S\\subseteq A$, $|N(S)|\\ge|S|$; use Hall's condition to certify or refute the existence of a perfect matching without finding one.\n- LO3: State **König's theorem** (in bipartite graphs, max matching size = min vertex cover size); apply it to find a minimum vertex cover from a maximum matching; contrast with general graphs where König fails and only the Gallai identity $\\alpha+\\tau=n$ holds.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.matching/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.matching",
+      "title": "MAXIMAL-EQUALS-MAXIMUM",
+      "content": "| MC-1 | MAXIMAL-EQUALS-MAXIMUM | Confusing maximal matching (locally extensible to no further edges) with maximum matching (globally largest); a maximal matching may have fewer than half the edges of a maximum matching; greedy construction gives maximal, not necessarily maximum | Critical |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.graph.matching/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.matching",
+      "title": "HALL-CONDITION-ONLY-FOR-SINGLETONS",
+      "content": "| MC-2 | HALL-CONDITION-ONLY-FOR-SINGLETONS | Believing Hall's theorem only requires checking individual vertices (each $a\\in A$ has a neighbor) rather than ALL subsets $S\\subseteq A$; the Hall violator is almost always a non-singleton subset, and singleton-checking catches only isolated vertices | Critical |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.graph.matching/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.matching",
+      "title": "KÖNIG-HOLDS-FOR-ALL-GRAPHS",
+      "content": "| MC-3 | KÖNIG-HOLDS-FOR-ALL-GRAPHS | Believing König's theorem ($\\nu=\\tau$) applies to general (non-bipartite) graphs — it fails for odd cycles and general non-bipartite graphs; the Gallai inequality $\\nu\\le\\tau\\le2\\nu$ is the correct general bound; matching and covering theory diverge for non-bipartite graphs (Edmonds' blossom algorithm is required for maximum matching) | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.graph.matching/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.matching",
+      "title": "Maximal vs. Maximum: A Critical Distinction (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Maximal vs. Maximum: A Critical Distinction (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.matching/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.matching",
+      "title": "Hall's Condition as a Structural Test (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Hall's Condition as a Structural Test (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.matching/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.matching",
+      "title": "König's Theorem: Matching Equals Cover in Bipartite Graphs (Primitive P16: Counterexample for general graphs)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"König's Theorem: Matching Equals Cover in Bipartite Graphs (Primitive P16: Counterexample for general graphs)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.matching/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.matching",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.graph.matching/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.matching",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find a maximum matching in the bipartite graph $A=\\{a_1,a_2,a_3,a_4\\}$, $B=\\{b_1,b_2,b_3,b_4\\}$, edges: $a_1b_1,a_1b_2,a_2b_2,a_2b_3,a_3b_3,a_3b_4,a_4b_1,a_4b_4$. Show the augmenting-path sequence starting from the empty matching.\n  2. Check Hall's condition for the bipartite graph $A=\\{a_1,a_2,a_3\\}$, $B=\\{b_1,b_2,b_3\\}$; edges: $a_1b_1,a_2b_1,a_2b_2,a_3b_2,a_3b_3$. Does a perfect matching saturating $A$ exist? If not, exhibit the Hall violator $S$.\n  3. Use König's theorem to find the minimum vertex cover of the graph in Problem 1 from its maximum matching. Verify your answer by checking that every edge has at least one endpoint in the cover.\n  4. Give an example of a non-bipartite graph on 5 vertices where $\\nu(G)<\\tau(G)$. State both values and verify.\n- **P76 (Transfer Probe, mode = independence)**: \"**Deficiency version of Hall's theorem**: For a bipartite graph $G=(A\\cup B,E)$, the maximum size of a matching saturating $A$ is $\\min_{S\\subseteq A}(|A|-|S|+|N(S)|)=|A|-\\text{def}(G)$, where $\\text{def}(G)=\\max_{S\\subseteq A}(|S|-|N(S)|)$ is the **deficiency** (0 if Hall's condition holds). (a) Compute the deficiency of the graph in Problem 2 above and verify that the maximum matching size equals $|A|-\\text{def}(G)$. (b) State and prove the deficiency formula as a generalization of Hall's theorem (hint: the Hall violator achieving maximum $|S|-|N(S)|$ is the bottleneck; connecting it to Berge's theorem gives the formula). (c) How does the deficiency formula change if we want a matching saturating all of $B$ instead of $A$?\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Graph Matching — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.graph.matching/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.matching",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.graph.graph` (bipartite graphs, adjacency, paths, connected components). Requires familiarity with induction and set notation for Hall's theorem proof. No further prerequisites.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.matching/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.matching",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.graph.graph` (bipartite graphs, adjacency, paths).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.matching.md",
+        "startLine": 109,
+        "endLine": 115
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

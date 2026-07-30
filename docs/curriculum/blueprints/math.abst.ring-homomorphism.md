@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.abst.ring-homomorphism |
-| Title | Ring Homomorphism |
+| name | Ring Homomorphism |
 | Domain | math.abst |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -106,7 +106,7 @@ Step 1 — "Subrings are closed under the ring operations within themselves. Ide
 **TB-R03 (MC-3 UNITAL-CONFUSION / FIT application):**
 Step 1 — Address unital confusion: "Whether φ(1_R)=1_S is required depends on the author's definition of 'ring.' In unital-ring theory, ring homomorphisms preserve multiplicative identity. In non-unital theory, they need not. The condition φ(ab)=φ(a)φ(b) alone never forces φ(1)=1 — check: the zero map φ≡0 satisfies φ(ab)=0=0·0=φ(a)φ(b) but φ(1)=0≠1." Step 2 — For FIT application gap: "The isomorphism [r]↦φ(r) is well-defined because if [r]=[r'], then r−r'∈ker(φ), so φ(r−r')=0, so φ(r)=φ(r'). Injectivity is free from this." Re-probe ev example.
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Define φ: ℤ[x]→ℝ by φ(f)=f(√2). Verify φ is a ring homomorphism, find ker(φ), and apply FIT to identify im(φ).

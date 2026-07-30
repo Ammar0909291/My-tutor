@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.graph-coloring-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.graph-coloring",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:814f64a016a69449eca84165f95d03763bb49fe9118fc06253f693d90658272e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.graph-coloring.md": "sha256:ae03edd40018ce3d476182945a459dd2996d585633d2932ce50c7ebe0b89260b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.graph-coloring",
+    "name": "Graph Coloring",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.disc.graph-coloring"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.graph-coloring-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.graph-coloring (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.graph-coloring.md": "sha256:ae03edd40018ce3d476182945a459dd2996d585633d2932ce50c7ebe0b89260b"
+      },
+      "contentHash": "sha256:b2f36916a2d1227a2f7dee55a99312463cc7609054ed475f8fcd2038375b7f7e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.graph-coloring.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.graph-coloring.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.graph-coloring.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.graph-coloring.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.graph-coloring.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.graph-coloring.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.graph-coloring.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.graph-coloring.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.graph-coloring\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.graph-coloring/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **proper vertex coloring** and the **chromatic number** $\\chi(G)$; compute or bound $\\chi(G)$ for small graphs (cliques, cycles, bipartite graphs, Petersen graph); state the **greedy coloring bound** $\\chi(G)\\le\\Delta(G)+1$ and **Brooks' theorem** ($\\chi(G)\\le\\Delta(G)$ for connected graphs that are neither $K_n$ nor an odd cycle).\n- LO2: State the **Four Color Theorem** (every planar graph is 4-colorable); prove the **Five Color Theorem** (constructively, using the contraction argument); explain why 4-colorability remains non-trivially hard to prove despite the theorem.\n- LO3: Define **edge coloring** and the **chromatic index** $\\chi'(G)$; state **Vizing's theorem** ($\\Delta(G)\\le\\chi'(G)\\le\\Delta(G)+1$); classify a given graph as Class 1 ($\\chi'=\\Delta$) or Class 2 ($\\chi'=\\Delta+1$); state that determining the class is NP-hard in general.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "CHROMATIC-NUMBER-EQUALS-CLIQUE-NUMBER",
+      "content": "| MC-1 | CHROMATIC-NUMBER-EQUALS-CLIQUE-NUMBER | Believing $\\chi(G)=\\omega(G)$ always — the clique number gives a LOWER BOUND ($\\chi\\ge\\omega$) but not an equality; triangle-free graphs (Mycielski construction) can have arbitrarily large chromatic number while $\\omega=2$ | Critical |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "FIVE-COLOR-PROOF-EXTENDS-TO-FOUR",
+      "content": "| MC-2 | FIVE-COLOR-PROOF-EXTENDS-TO-FOUR | Believing the Kempe-chain argument used in the Five Color Theorem can be extended to prove the Four Color Theorem — Kempe's original 1879 attempt to prove the Four Color Theorem using this exact idea was shown by Heawood (1890) to contain an error; the Four Color Theorem required a fundamentally different (computer-assisted) proof | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "VIZING-HOLDS-FOR-MULTIGRAPHS",
+      "content": "| MC-3 | VIZING-HOLDS-FOR-MULTIGRAPHS | Applying Vizing's theorem ($\\chi'\\le\\Delta+1$) to multigraphs — Vizing's theorem holds only for SIMPLE graphs (no parallel edges, no self-loops); for multigraphs with maximum multiplicity $\\mu$, the correct upper bound is Shannon's $\\lfloor3\\Delta/2\\rfloor$, which can be much larger than $\\Delta+1$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Chromatic Number from Cliques Up (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Chromatic Number from Cliques Up (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Five Color Theorem: Kempe Chains in Action (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Five Color Theorem: Kempe Chains in Action (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Vizing's Theorem and Class 1 vs. Class 2 (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Vizing's Theorem and Class 1 vs. Class 2 (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Compute $\\chi(G)$ for the **wheel graph** $W_5$ (a central vertex connected to all 5 vertices of $C_5$). First give lower and upper bounds, then exhibit an optimal coloring.\n  2. Brooks' theorem says $\\chi(G)\\le\\Delta(G)$ unless $G$ is $K_n$ or an odd cycle. Give two explicit exceptions: (a) a complete graph where $\\chi=\\Delta+1$, and (b) an odd cycle where $\\chi=3=\\Delta+1$. Verify in each case.\n  3. Apply the Five Color Theorem proof to the following planar graph ($n=6$, add edges $\\{v,1\\},\\{v,2\\},\\{v,3\\},\\{v,4\\},\\{v,5\\}$ to form $K_{1,5}$): identify a vertex of degree $\\le5$, remove it, 5-color the remaining graph, and reintroduce the vertex.\n  4. Determine whether the **Petersen graph** is Class 1 or Class 2 for edge coloring. (Recall: Petersen is 3-regular; use the fact that Petersen has no perfect matching to argue $\\chi'>3$.)\n- **P76 (Transfer Probe, mode = independence)**: \"A **$k$-critical graph** is a graph with $\\chi(G)=k$ but $\\chi(G-e)<k$ for every edge $e$ (removing any edge decreases the chromatic number). (a) Show that every odd cycle $C_{2k+1}$ is 3-critical: $\\chi(C_{2k+1})=3$ and $\\chi(C_{2k+1}-e)=2$ for any edge $e$ (i.e., removing any edge gives a path, which is bipartite). (b) Prove that a $k$-critical graph must have minimum degree $\\delta(G)\\ge k-1$ (hint: if $\\delta(G)\\le k-2$, remove the lowest-degree vertex $v$; the remaining graph has a $(k-1)$-coloring by criticality; reintroduce $v$ — it has $\\le k-2$ neighbors, so a $(k-1)$-coloring exists, contradicting $\\chi(G)=k$). (c) Use (b) to prove that a $k$-critical graph on $n$ vertices has at least $n(k-1)/2$ edges.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Graph Coloring — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.graph-coloring` (basic vertex coloring definition, map-coloring motivation, chromatic number concept). Requires familiarity with planar graphs (for the Four Color Theorem section) and inductive proofs. No further prerequisites.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.graph-coloring/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.graph-coloring",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.graph-coloring` (basic vertex coloring, map-coloring motivation, chromatic number concept).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: `math.disc.graph-coloring` — MISSING on disk (verified) → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.graph-coloring.md",
+        "startLine": 118,
+        "endLine": 124
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

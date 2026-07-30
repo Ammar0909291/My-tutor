@@ -1,0 +1,719 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.horizontal-asymptote-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.horizontal-asymptote",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:438e302e49d24779443ef42d460da3175b4a5e437ce92f841f83fbef8b235cd7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.horizontal-asymptote.md": "sha256:d3d0efd1fc0787a4860d98f953052adcb8dc0b6937c7d8d71a01d165a63b504a"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 17,
+      "mastery_probe": 1
+    },
+    "ruleCount": 17
+  },
+  "concept": {
+    "conceptId": "math.func.horizontal-asymptote",
+    "name": "Horizontal Asymptotes",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.rational-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.horizontal-asymptote-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.horizontal-asymptote (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.horizontal-asymptote.md": "sha256:d3d0efd1fc0787a4860d98f953052adcb8dc0b6937c7d8d71a01d165a63b504a"
+      },
+      "contentHash": "sha256:6410cc0e2d5649abc3b7c748f2cc9f445aca35fb7a0e3154ee8b84268eb5a536",
+      "ruleCount": 17,
+      "bandCounts": {
+        "3": 17
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.horizontal-asymptote.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.horizontal-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.horizontal-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.horizontal-asymptote/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "Learning Objective",
+      "content": "Given a rational function f(x)=P(x)/Q(x), the student determines the horizontal asymptote (or its absence) using degree comparison (deg P < deg Q → y=0; deg P = deg Q → y=aₙ/bₙ; deg P > deg Q → none), recognises that a function CAN cross its horizontal asymptote (unlike vertical asymptotes), identifies oblique (slant) asymptotes when deg P = deg Q + 1 via polynomial long division, and verifies asymptotic claims by evaluating the function at large x-values.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "HORIZONTAL-NEVER-CROSSED",
+      "content": "| MC-1 | HORIZONTAL-NEVER-CROSSED | Student believes the graph can NEVER cross a horizontal asymptote, because vertical asymptotes are never crossed; applies the vertical-asymptote rule universally | Type 1 — overgeneralization (vertical asymptotes are never crossed because the function is undefined there; students transfer this hard rule to horizontal asymptotes, which are a limit statement only — the function can cross its HA finitely many times in the interior) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "PLUG-IN-LARGE-NUMBER",
+      "content": "| MC-2 | PLUG-IN-LARGE-NUMBER | Student substitutes x=1000 into the function, reads off a value like 2.003, and reports the horizontal asymptote as \"y=2.003\" — a numerical approximation mistaken for an exact asymptote | Type 5 — instruction-induced (plugging in large numbers is a legitimate checking strategy, but is introduced before the algebraic degree-comparison rule; students stop at the numerical step and never derive the exact limit) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "OBLIQUE-IS-HORIZONTAL",
+      "content": "| MC-3 | OBLIQUE-IS-HORIZONTAL | When deg P = deg Q + 1, the function has an oblique asymptote y=mx+b (a slant line); student either reports no asymptote or reports the y-intercept b as a horizontal asymptote | Type 5 — instruction-induced (the three-case rule for horizontal asymptotes is memorized without the \"fourth case\" of deg P = deg Q+1; oblique asymptotes require long division and are introduced separately, after the HA rule is already fixed in memory) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "Case 1 (n < m): aₙxⁿ/bₘxᵐ = (aₙ/bₘ)·x^(n−m) → 0. **Horizontal asymptote: y=0.**",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Case 1 (n < m): aₙxⁿ/bₘxᵐ = (aₙ/bₘ)·x^(n−m) → 0. **Horizontal asymptote: y=0.**\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "Case 2 (n = m): aₙxⁿ/bₘxⁿ = aₙ/bₙ (constant). **Horizontal asymptote: y=aₙ/bₙ.**",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Case 2 (n = m): aₙxⁿ/bₘxⁿ = aₙ/bₙ (constant). **Horizontal asymptote: y=aₙ/bₙ.**\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "Case 3 (n > m): aₙxⁿ/bₘxᵐ → ±∞. **No horizontal asymptote.** (May have oblique asymptote if n=m+1.)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Case 3 (n > m): aₙxⁿ/bₘxᵐ → ±∞. **No horizontal asymptote.** (May have oblique asymptote if n=m+1.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "CORRECT → \"Compare degrees: n<m → y=0; n=m → y=leading coeff ratio; n>m → no HA.\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"Compare degrees: n<m → y=0; n=m → y=leading coeff ratio; n>m → no HA.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "PARTIAL (applies Case 2 rule to Case 1 and gets y=aₙ/bₘ=3/1=3 for (3x+1)/(x²+2)) → \"The degree of the numerator is 1; the degree of the denominator is 2. Since 1<2, this is Case 1: the denominator grows faster, pulling f toward 0.\" → TB-R02 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (applies Case 2 rule to Case 1 and gets y=aₙ/bₘ=3/1=3 for (3x+1)/(x²+2)) → \\\"The degree of the numerator is 1; the degree of the denominator is 2. Since 1<2, this is Case 1: the denominator grows faster, pulling f toward 0.\\\" → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "NO_RESPONSE → \"For f(x)=(2x²+1)/(x²+3): divide every term by x². What does f simplify to as x→∞?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"For f(x)=(2x²+1)/(x²+3): divide every term by x². What does f simplify to as x→∞?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "**Vertical asymptotes:** the function is UNDEFINED there; graph CANNOT cross. (Hard constraint.)",
+      "content": "{\"id\":\"TA-8\",\"title\":\"**Vertical asymptotes:** the function is UNDEFINED there; graph CANNOT cross. (Hard constraint.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "**Horizontal asymptotes:** describe limit AT INFINITY; the function CAN have finite values equal to the HA in the interior. (Soft constraint — only enforced as x→±∞.)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"**Horizontal asymptotes:** describe limit AT INFINITY; the function CAN have finite values equal to the HA in the interior. (Soft constraint — only enforced as x→±∞.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "CORRECT → \"Horizontal asymptotes: the function CAN cross them in the interior; they only constrain the tails (x→±∞). This is fundamentally different from vertical asymptotes, where the function is undefined.\" → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"CORRECT → \\\"Horizontal asymptotes: the function CAN cross them in the interior; they only constrain the tails (x→±∞). This is fundamentally different from vertical asymptotes, where the function is undefined.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "PARTIAL (understands HA can be crossed but can't find where) → \"Set f(x)=L (the HA value) and solve the resulting polynomial equation. Any real solution is an x-value where the HA is crossed.\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"PARTIAL (understands HA can be crossed but can't find where) → \\\"Set f(x)=L (the HA value) and solve the resulting polynomial equation. Any real solution is an x-value where the HA is crossed.\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "INCORRECT → TB-R01 → A03",
+      "content": "{\"id\":\"TA-12\",\"title\":\"INCORRECT → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "NO_RESPONSE → \"For f(x)=2/(x²+1), the HA is y=0. Evaluate f(0). Does f(0)=0? Can the graph cross y=0?\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-13\",\"title\":\"NO_RESPONSE → \\\"For f(x)=2/(x²+1), the HA is y=0. Evaluate f(0). Does f(0)=0? Can the graph cross y=0?\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "CORRECT → \"Three-case degree rule → HA or no HA. If n=m+1: polynomial long division → oblique asymptote y=mx+b. f can cross both HA and OA in the interior; only vertical asymptotes are never crossed.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-14\",\"title\":\"CORRECT → \\\"Three-case degree rule → HA or no HA. If n=m+1: polynomial long division → oblique asymptote y=mx+b. f can cross both HA and OA in the interior; only vertical asymptotes are never crossed.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 119,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "PARTIAL (performs long division incorrectly, off-by-one in remainder) → \"Verify: multiply (quotient)×(divisor)+remainder and check it equals the original numerator. This confirms the long division.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"PARTIAL (performs long division incorrectly, off-by-one in remainder) → \\\"Verify: multiply (quotient)×(divisor)+remainder and check it equals the original numerator. This confirms the long division.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 120,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 121,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "NO_RESPONSE → \"For f(x)=(x²+3x)/(x−1): the degree of the numerator exceeds the degree of the denominator by exactly 1. Perform long division: x²+3x ÷ (x−1). What is the quotient line?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-17\",\"title\":\"NO_RESPONSE → \\\"For f(x)=(x²+3x)/(x−1): the degree of the numerator exceeds the degree of the denominator by exactly 1. Perform long division: x²+3x ÷ (x−1). What is the quotient line?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 122,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "math.func.horizontal-asymptote/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.horizontal-asymptote",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Find all horizontal asymptotes (if any) for: (a) f(x)=(3x²−1)/(5x²+2); (b) g(x)=(x+4)/(x³−1); (c) h(x)=x²/(x−1); (d) k(x)=(2x³−x)/(4x³+3).\n2. For f(x)=(x²−4)/(x²+4): (a) Find the horizontal asymptote. (b) Does f ever equal its HA? (c) Find all x where f(x)=0. Does f cross y=0?\n3. Find the oblique asymptote of f(x)=(x²+3x+2)/(x−1) using long division. Sketch the asymptote and verify one point on the graph.\n4. A rational function has degree-3 numerator and degree-3 denominator, with leading coefficients 4 and −2 respectively. State the horizontal asymptote. Find where f could cross it (in terms of what equation to solve).\n\n**P55 — Reflect & Consolidate:** \"HA rule: deg(P)<deg(Q)→y=0; deg(P)=deg(Q)→y=leading ratio; deg(P)>deg(Q)→none. If deg(P)=deg(Q)+1: oblique asymptote via long division. HA can be crossed; VA cannot.\"\n\n**P76 — Transfer Probe (Independence mode):**\nf(x)=(2x³−3x)/(x²+1). (a) Determine whether f has a horizontal asymptote or an oblique asymptote. (b) Perform polynomial long division to find the oblique asymptote y=mx+b. (c) Show that f(x)−(mx+b)→0 as x→∞ by computing f(x)−(mx+b) explicitly. (d) Find all x where f crosses its oblique asymptote (solve f(x)=mx+b). (e) Verify the graph crosses at those x by checking f evaluates to the asymptote line's value there.\n\n**P55 — Reflect & Consolidate:** \"Oblique asymptotes verified by showing the remainder term R(x)/Q(x)→0. Crossing an oblique asymptote = solving f(x)=mx+b = solving R(x)/Q(x)=0 = solving R(x)=0. Both horizontal and oblique asymptotes can be crossed in the interior — tail behavior only.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=(3x³+x²−2)/(x²−1). (a) Factor the denominator: identify vertical asymptotes and/or holes. (b) Does f have a horizontal or oblique asymptote? Find it. (c) Where does f cross its asymptote? (d) Describe the end behavior: as x→+∞ and x→−∞, what does f approach along its asymptote?\"\n\n**P55 — Reflect & Consolidate:** \"Full asymptote analysis: vertical (denominator zeros after cancellation), horizontal or oblique (degree comparison then long division if needed). A complete graph requires all four: x-intercepts, y-intercept, vertical asymptotes (with one-sided behavior), and horizontal/oblique asymptote.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.horizontal-asymptote complete\n- Score 3/5 → REVIEW degree-comparison rule and crossing behavior; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.rational-function; reassign\n\n**P78 — Completion:** Horizontal asymptotes certified. Student applies the three-case degree rule, recognises that graphs can cross horizontal asymptotes, locates oblique asymptotes via long division, and integrates HA analysis with vertical asymptote and zero analysis to produce a complete rational function graph.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.horizontal-asymptote.md",
+        "startLine": 135,
+        "endLine": 162
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

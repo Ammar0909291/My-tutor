@@ -1,0 +1,341 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.group-operation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.group-operation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c9bfb1a0e70efeeff9699954d1c969ded3b811cef47a30de40aa6de5cc69ecc9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.group-operation.md": "sha256:04a4d3cbb307ce0189dc965b36a3358e761ec9463cae19e9f6d1da04078793fa"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.group-operation",
+    "name": "",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.group-theory"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.group-operation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.group-operation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.group-operation.md": "sha256:04a4d3cbb307ce0189dc965b36a3358e761ec9463cae19e9f6d1da04078793fa"
+      },
+      "contentHash": "sha256:82ca44b89934d8deed795bcf5de54c8a44e12d79ba644f88654fa0a6ccaedc64",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.group-operation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-operation.md#TA-A01 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-operation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-operation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-operation.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-operation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-operation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-operation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-operation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-operation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-operation.md#TA-A04 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-operation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-operation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.group-operation/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.group-operation",
+      "title": "math.abst.group-operation — cognitive map",
+      "content": "### Target Understanding\nThis blueprint makes the group operation **computational**: given a specific group, perform\noperations, read Cayley tables, work in modular arithmetic, and recognise non-abelian structure.\n\n**Key computational objects:**\n1. **Z/nZ** (integers mod n under addition): the canonical finite abelian group.\n   Elements: {0, 1, 2, …, n−1}.  Operation: a + b = (a + b) mod n.  Identity: 0.  Inverse: n−a.\n2. **Cayley table** (multiplication table): encodes all |G|² group operation values.\n   Row a, column b, entry = a·b.  Key structural property: every element appears **exactly once**\n   in each row and each column (Latin square property — consequence of cancellation laws in groups).\n3. **Z/2Z × Z/2Z** (Klein four-group): the smallest non-cyclic abelian group (4 elements, every\n   non-identity element is its own inverse).\n4. **D₃** (dihedral group of the triangle): 6 elements {e, r, r², s, sr, sr²}; non-abelian.\n   r = rotation 120°, s = reflection; key relation: sr = r²s.\n\n### Distinction from math.abst.group-theory\n`math.abst.group-theory` established the four axioms G1–G4 and verified them for abstract\nexamples.  This blueprint focuses on **computing within specific groups** using Cayley tables and\nmodular arithmetic; the objective is fluency with the group operation as a tool, not just the\naxiomatic structure.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Z/4Z Cayley table; compute 3 + 2 (mod 4) = 1; inverse of 3 = 1 |\n| **Pictorial (P)** | Full 4×4 table; highlight: each number 0,1,2,3 appears exactly once per row/col |\n| **Abstract (A)** | Latin square property; non-abelian D₃; sr ≠ rs derived from table |\n\n### Canonical Cayley Table — Z/4Z\n| + | 0 | 1 | 2 | 3 |\n|---|---|---|---|---|\n| **0** | 0 | 1 | 2 | 3 |\n| **1** | 1 | 2 | 3 | 0 |\n| **2** | 2 | 3 | 0 | 1 |\n| **3** | 3 | 0 | 1 | 2 |\n\nEvery row is a cyclic shift; every element appears once per row/column.  Identity 0 = top-left.\nSymmetric about the main diagonal (abelian).\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 31,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-operation",
+      "title": "CAYLEY-TABLE-ALWAYS-SYMMETRIC",
+      "content": "| MC-1 | CAYLEY-TABLE-ALWAYS-SYMMETRIC | Claims the Cayley table of any group must be symmetric (because \"multiplication is symmetric\") | Conflates commutativity with the group operation; only abelian groups have symmetric Cayley tables | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-operation",
+      "title": "MODULAR-IDENTITY-IS-N",
+      "content": "| MC-2 | MODULAR-IDENTITY-IS-N | Writes \"the identity in Z/nZ is n\" | Confuses the modulus n with the identity element 0; in Z/nZ, n ≡ 0 (mod n) — the identity IS 0 | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-operation",
+      "title": "MODULAR-INVERSE-SUBTRACTION",
+      "content": "| MC-3 | MODULAR-INVERSE-SUBTRACTION | Computes inverse of a in Z/nZ as \"−a\" without checking it lies in {0,…,n−1} | Transfers additive inverse from ℤ without reducing mod n; e.g., writes inverse of 3 in Z/4Z as −3 instead of 1 | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-operation",
+      "title": "Computing in Z/4Z (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Computing in Z/4Z (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 111,
+        "endLine": 149
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-operation",
+      "title": "MC-1 Gate: The D₃ Cayley Table is Not Symmetric (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: The D₃ Cayley Table is Not Symmetric (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 149,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-operation",
+      "title": "Contrast: Symmetric vs Non-Symmetric Tables (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast: Symmetric vs Non-Symmetric Tables (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 200,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-operation",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P06\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 240,
+        "endLine": 523
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.group-operation",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Write the complete Cayley table for Z/5Z (integers mod 5 under addition).\n*(5×5 table with entries (a+b) mod 5. Identity row/column for 0. Inverse pairs: 1↔4, 2↔3, 0↔0.)*\n\n**Q2.** In D₃, compute (r² · s) · r.  State which entry in the D₃ table this corresponds to.\n*(r²s · r = r²(sr) = r²(r²s) = r⁴s = rs. [using sr = r²s repeatedly]. Or look up the D₃ table.)*\n\n**Q3.** In Z/8Z, find the inverse of 5.  Show the verification.\n*(Solve 5 + x ≡ 0 (mod 8): x = 3.  Verify: 5 + 3 = 8 ≡ 0 (mod 8) = identity ✓.)*\n\n**Q4.** The table below has 4 elements {e, a, b, c}.  Determine whether it is a valid Cayley table.\n| · | e | a | b | c |\n|---|---|---|---|---|\n| **e** | e | a | b | c |\n| **a** | a | e | c | b |\n| **b** | b | c | e | a |\n| **c** | c | b | a | e |\n*(Check Latin square: each row/col contains {e,a,b,c} exactly once ✓. Check symmetry: table is symmetric → abelian. Check identity: row e = header row ✓. This is a valid Cayley table (in fact the Klein four-group).)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Cross-link to math.linalg.vector-addition)\n\n*Cross-link probe: bridges group operation in Z/2Z × Z/2Z to vector addition.*\n\n> The Klein four-group V₄ = Z/2Z × Z/2Z has elements {(0,0), (1,0), (0,1), (1,1)} with\n> component-wise addition mod 2.\n>\n> (i) Write the Cayley table for V₄.\n> (ii) Note that these elements can be viewed as 2D vectors over Z/2Z.  Is the group operation\n>      the same as component-wise vector addition?\n> (iii) Is V₄ isomorphic to Z/4Z?  Give one structural reason.\n\n*Expected answers:*\n- **(i)** Table: (0,0) is the identity; each non-identity element is its own inverse (e.g.,\n  (1,0)+(1,0)=(2,0)=(0,0)).  4×4 symmetric table with the Klein four-group structure.\n- **(ii)** Yes — the operation IS component-wise vector addition (mod 2), identical to vector\n  addition in (ℤ/2ℤ)².\n- **(iii)** No. In Z/4Z, the element 1 has order 4 (1+1+1+1=4≡0 is the first time you return\n  to identity).  In V₄, every non-identity element has order 2.  Different order structure → not isomorphic.\n\n**[P55 — SCORE]**  Award 1 point for P76 if (i) correct table + (iii) correct non-isomorphism reason; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.85  →  ⌈0.85 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → Z/5Z table error → recompute (a+b) mod 5 for a few entries, then retry.\n  - Q2 wrong → D₃ relation sr = r²s not applied correctly → revisit TA-A02 P64.\n  - Q3 wrong → MC-3 → TB-R03 (solve 5+x≡0 mod 8 as equation).\n  - Q4 wrong → Latin square check → revisit TA-A03 P06.\n  - P76 wrong → identify: if (i) table wrong, revisit Z/nZ computation; if (iii) wrong, preview order concept.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.group-operation\nMASTERY_REACHED: true\nUNLOCKS:         (none — lateral enrichment node)\nNEXT_CONCEPT:    (instructor-directed: math.abst.cyclic-group or math.abst.group-order)\nSESSION_CLOSE:   \"You can now compute within finite groups using Cayley tables and modular\n                  arithmetic, read whether a table represents an abelian or non-abelian group\n                  from its symmetry, identify the Latin square property, and contrast Z/4Z\n                  (cyclic, abelian) with D₃ (non-abelian). The Klein four-group shows that\n                  group operation on 2D vectors mod 2 is exactly the group structure of V₄.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: CAYLEY-TABLE-ALWAYS-SYMMETRIC (MC-1)\n\n**Trigger:** Student claims every Cayley table must be symmetric.\n\n**Step 1 — Define symmetry precisely.**\n> Cayley table is symmetric ↔ for all a, b: entry(a,b) = entry(b,a) ↔ a·b = b·a for all a,b\n> ↔ the group is ABELIAN.  Non-abelian groups have non-symmetric tables — still valid groups.\n\n**Step 2 — Compute sr and rs in D₃.**\n> Using sr = r²s (defining relation of D₃):\n> r·s = rs (in the table: row r, col s → entry rs).\n> s·r = sr = r²s (row s, col r → entry r²s).\n> rs ≠ r²s → table is NOT symmetric at these entries.\n\n**Step 3 — Verify D₃ is still a group.**\n> The Latin square property holds (every element once per row/col).  G1–G4 verified.  D₃ IS a group; it is not abelian.\n\n**Exit:** Return to TA-A02 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: MODULAR-IDENTITY-IS-N (MC-2)\n\n**Trigger:** Student says the identity in Z/nZ is n.\n\n**Step 1 — Apply G3 from first principles.**\n> G3: find e such that a + e ≡ a (mod n) for all a.\n> a + e ≡ a → e ≡ 0 (mod n).  The identity is **0**, not n.\n> Note: n ≡ 0 (mod n) — they are the same congruence class, but the canonical representative is 0.\n\n**Step 2 — Concrete check.**\n> In Z/4Z: 3 + 0 = 3 ≡ 3 ✓.  3 + 4 = 7 ≡ 3 ✓ — same result, but 4 ≡ 0 in Z/4Z.\n> The element is always written as 0, not 4.\n\n**Exit:** Return to TA-A01 P49 checkpoint, part (ii).\n\n---\n\n### TB-R03 · Repair: MODULAR-INVERSE-SUBTRACTION (MC-3)\n\n**Trigger:** Student writes inverse of a in Z/nZ as −a without reduction.\n\n**Step 1 — State G4 as an equation.**\n> Find x ∈ {0, 1, …, n−1} such that a + x ≡ 0 (mod n).  The answer must be in range.\n\n**Step 2 — Compute.**\n> Inverse of 3 in Z/4Z: 3 + x ≡ 0 (mod 4) → x ≡ −3 ≡ 1 (mod 4).  Write 1, not −3.\n> Verify: 3 + 1 = 4 ≡ 0 ✓.\n\n**Step 3 — General formula.**\n> Inverse of a in Z/nZ is (n − a) mod n.  For a = 0: (n − 0) mod n = 0 (self-inverse).\n\n**Exit:** Return to TA-A01 P49 checkpoint, part (ii).\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"In Z/7Z, what is 5 + 6?  What is the inverse of 5?\"\n    Target: 5+6=11≡4; inverse of 5 is 2 (5+2=7≡0). PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"A Cayley table is symmetric. What does that tell you about the group?\"\n    Target: The group is abelian (commutative). PASS if this connection stated.\n\n  Interval-3 (+1 week):\n    Probe: \"What is the Latin square property of a Cayley table? Which groups have it?\"\n    Target: Every element appears exactly once in each row and column. ALL groups (not just abelian).\n            PASS if \"all groups\" or \"every group\" stated.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A01 (Z/nZ) or TA-A02 (abelian/non-abelian).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.group-theory:\n    Used in:   TA-A01 (G3 identity and G4 inverse verified in Z/4Z table; Latin square\n               property derived from cancellation via G4), TA-A02 (G1–G4 checked for D₃;\n               P64 invokes G5 as the non-required extra property), TA-A03 (Latin square\n               proof uses G4's implied left cancellation).\n    Assumed:   Student holds all four group axioms G1–G4 and can identify which axiom\n               justifies each group-theoretic step.\n\nUNLOCKS_ENABLED:\n  (none — lateral enrichment; prerequisite for deeper group-structure concepts via instructor)\n\nCROSS_LINKS_NOTED:\n  math.linalg.vector-addition:\n    Status:    Tier 1 concept — P76 uses a cross-link probe.\n    P76 probe: Student builds the Cayley table for V₄ = Z/2Z × Z/2Z and recognises it\n               as component-wise vector addition; compares structure to Z/4Z.\n    Bridge:    Group operation in V₄ IS component-wise addition on 2-vectors over Z/2Z.\n               This prepares the student for vector space axioms (vector addition as an\n               abelian group axiom) and distinguishes cyclic groups from non-cyclic ones.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. Z/nZ is the principal computational laboratory for this blueprint.**\nThe Cayley table for Z/4Z should be provided (as above) for TA-A01 and available throughout.\nDo not ask the student to construct it from scratch before they have practised reading it.\n\n**2. MC-1 (symmetry required) is the key conceptual gate.**\nTA-A02 is a formal MC-1 gate (P41 + P64) positioned early — before TA-A03's contrast pair —\nso the student enters the contrast exercise with MC-1 already cleared.  D₃ is the ideal\ncounterexample: small enough (6 elements) to show the asymmetric computation sr ≠ rs concretely,\nyet familiar from geometry.\n\n**3. The Latin square property is a theorem, not an axiom.**\nStudents sometimes confuse the Latin square property (once-per-row, once-per-column) with an\naxiom.  TA-A03 makes the derivation explicit: it follows from left cancellation (a⁻¹ applied\nto a·b = a·c gives b = c), which itself follows from G4 + G2.\n\n**4. The P76 Klein four-group probe distinguishes structure from elements.**\nV₄ and Z/4Z both have 4 elements but are non-isomorphic.  The P76 probe requires the student\nto identify the order-structure difference (every non-identity element has order 2 in V₄ vs\norder 4 for the generator in Z/4Z).  This pre-builds intuition for the isomorphism blueprint.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.group-operation\n==================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 6; 4 TAs used ≤ 6. ✓\n[PASS] V-4   CPA_ENTRY_STAGE = C (Z/4Z Cayley table as concrete anchor before abstraction).\n[PASS] V-5   P76_MODE = Cross-link with explicit rationale (math.linalg.vector-addition Tier 1).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03.\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — D₃ non-symmetric).\n[PASS] V-8   MC-2 and MC-3 addressed in TA-A01/TA-A03 and repair chains.\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA, has P49 for exit check)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91.\n[PASS] V-13  GR-4: P77 contains exactly 4 questions. ✓\n[PASS] V-14  GR-5: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-6: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-9: P76 uses Cross-link mode; probe builds V₄ Cayley table and compares\n              to vector addition, bridging to math.linalg.vector-addition.\n[PASS] V-17  GR-10: MAMR stated; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-18  PASS_CRITERION = ⌈0.85 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-19  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Z/4Z Cayley table provided and used as primary computational tool.\n             D₃ partial table provided to illustrate non-abelian (asymmetric) group.\n             Latin square property derived from cancellation (not just asserted).\n             MC-1 (table symmetry = abelian) cleared via D₃ gate in TA-A02.\n             MC-2 (identity is n not 0) and MC-3 (inverse is −a not (n−a) mod n) addressed.\n             P76 cross-link: V₄ = Z/2Z×Z/2Z; operation IS component-wise vector addition;\n             V₄ ≇ Z/4Z (order argument).\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 240,
+        "endLine": 523
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-operation",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11: Z/4Z table + read-and-compute exercises + P49)\n      → TA-A02 (P41/P64 MC-1 gate: non-abelian D₃ table — sr ≠ rs + P49)\n      → TA-A03 (P06: symmetric (abelian) vs asymmetric (non-abelian) Cayley tables + P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (D₃ table excerpt showing sr ≠ rs)\n  MC-2 → TB-R02 (n ≡ 0 mod n; identity is 0 not n)\n  MC-3 → TB-R03 (compute inverse by solving a + x ≡ 0 mod n)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 89,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-operation",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"In Z/7Z, what is 5 + 6?  What is the inverse of 5?\"\n    Target: 5+6=11≡4; inverse of 5 is 2 (5+2=7≡0). PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"A Cayley table is symmetric. What does that tell you about the group?\"\n    Target: The group is abelian (commutative). PASS if this connection stated.\n\n  Interval-3 (+1 week):\n    Probe: \"What is the Latin square property of a Cayley table? Which groups have it?\"\n    Target: Every element appears exactly once in each row and column. ALL groups (not just abelian).\n            PASS if \"all groups\" or \"every group\" stated.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A01 (Z/nZ) or TA-A02 (abelian/non-abelian).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 393,
+        "endLine": 416
+      }
+    },
+    {
+      "assetId": "math.abst.group-operation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.group-operation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.group-theory:\n    Used in:   TA-A01 (G3 identity and G4 inverse verified in Z/4Z table; Latin square\n               property derived from cancellation via G4), TA-A02 (G1–G4 checked for D₃;\n               P64 invokes G5 as the non-required extra property), TA-A03 (Latin square\n               proof uses G4's implied left cancellation).\n    Assumed:   Student holds all four group axioms G1–G4 and can identify which axiom\n               justifies each group-theoretic step.\n\nUNLOCKS_ENABLED:\n  (none — lateral enrichment; prerequisite for deeper group-structure concepts via instructor)\n\nCROSS_LINKS_NOTED:\n  math.linalg.vector-addition:\n    Status:    Tier 1 concept — P76 uses a cross-link probe.\n    P76 probe: Student builds the Cayley table for V₄ = Z/2Z × Z/2Z and recognises it\n               as component-wise vector addition; compares structure to Z/4Z.\n    Bridge:    Group operation in V₄ IS component-wise addition on 2-vectors over Z/2Z.\n               This prepares the student for vector space axioms (vector addition as an\n               abelian group axiom) and distinguishes cyclic groups from non-cyclic ones.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-operation.md",
+        "startLine": 416,
+        "endLine": 444
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.end-behavior |
-| Title | End Behavior of Functions |
+| name | End Behavior of Functions |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | analyze |
@@ -124,7 +124,7 @@ Step 1 — "For even degree: xⁿ is symmetric — (−x)ⁿ=xⁿ. So x→−∞
 **TB-R03 (MC-3 LEADING-COEFFICIENT-ONLY-POSITIVE):**
 Step 1 — "Finding end behavior as x→−∞ requires two steps: (a) raise the leading variable to the degree, and (b) apply the actual sign of x, which is negative. For odd n: (−large)ⁿ is negative-large. For even n: (−large)ⁿ is positive-large." Step 2 — f(x)=3x⁵: as x→−∞, x⁵→−∞ (odd power, x is negative → result is negative). So 3x⁵→3(−∞)=−∞. f(x)→−∞ as x→−∞. As x→+∞: 3x⁵→+∞. Opposite tails. Step 3 — "Systematic: replace x with −∞ (keeping the sign). x⁵=−∞⁵=−∞; x⁴=−∞⁴=+∞. Then multiply by the leading coefficient. This always gives the correct x→−∞ direction."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. State the end behavior (x→+∞ and x→−∞) for: (a) f(x)=4x³−x+7; (b) g(x)=−x⁴+3x²; (c) h(x)=−5x⁷+2x³−1; (d) k(x)=x⁸.

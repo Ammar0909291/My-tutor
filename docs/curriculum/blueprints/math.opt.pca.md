@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.pca |
-| Title | Principal Component Analysis |
+| name | Principal Component Analysis |
 | Domain | math.opt |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -116,7 +116,7 @@ Step 1 — "Variance measures spread around the MEAN, not around the origin. PCA
 **TB-R03 (MC-3 EIGENVALUE-IS-VARIANCE-TOTAL):**
 Step 1 — "Total variance = sum of all feature variances = trace(Σ) = Σλᵢ. The trace is preserved across eigendecomposition." Step 2 — In our example: trace(Σ)=5+5=10=λ₁+λ₂=8+2 ✓. Explained ratio for PC₁: 8/10=80%. Step 3 — "Dividing by λ_max (=8) gives 8/8=100% for the first component — which would mean all variation is explained and you never need more components. That's wrong." Re-probe with λ₁/(λ₁+λ₂).
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Data matrix (3 samples, 2 features): X_raw=[[1,1],[3,3],[5,5]]. Compute the centred data, the 2×2 covariance matrix, the eigenvalues, and interpret the result (why is one eigenvalue zero?).

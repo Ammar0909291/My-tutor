@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.abst.quotient-ring |
-| Title | Quotient Ring |
+| name | Quotient Ring |
 | Domain | math.abst |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -103,7 +103,7 @@ Step 1 — "A subring is closed under ring operations. An ideal adds one more ru
 **TB-R03 (MC-3 MULTIPLICATION-UNDEFINED / prime-maximal confusion):**
 Step 1 — For MC-3: "Let's verify (r+I)(s+I)=rs+I is well-defined. Suppose r'=r+i₁ and s'=s+i₂ are different representatives. Then r's'=rs+ri₂+i₁s+i₁i₂. We need this in rs+I. ri₂∈I (I absorbs from left), i₁s∈I (absorbs from right), i₁i₂∈I. Sum of three ideal elements is in I. ✓" Step 2 — Re-probe multiplication in ℤ/4ℤ. For prime/maximal confusion: contrast ℤ/6ℤ zero divisor computation directly.
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Let R=ℤ[x] and I=(x−2). Describe the elements of R/I and compute [(x²+1)]·[(x−3)] in R/I.

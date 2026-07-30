@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.splines-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.splines",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:289992232cd3d53dfbbc798f94078b6da739145ed44f04136cc439a8bc970dc2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.splines.md": "sha256:59344cf24ad83ffa7acc9f7519454b2d7ed516e0bcd8d945abdfece1e717060b"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.num.splines",
+    "name": "Spline Interpolation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.num.interpolation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.splines-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.splines (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.splines.md": "sha256:59344cf24ad83ffa7acc9f7519454b2d7ed516e0bcd8d945abdfece1e717060b"
+      },
+      "contentHash": "sha256:d7b9552e4720a4d79c11db076717fd31d63a96f4654b8859acd0da3cdb0820ab",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.splines.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.splines.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.splines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.splines\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.splines/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.splines",
+      "title": "Learning Objective",
+      "content": "Given a set of data points, the student constructs a piecewise polynomial spline by writing the conditions for C⁰ (continuity), C¹ (continuous first derivative), and C² (continuous second derivative) at interior knots; sets up and counts the equations for a natural cubic spline (S''(x₀)=S''(xₙ)=0); explains why splines avoid the Runge phenomenon that afflicts high-degree global polynomial interpolation; and distinguishes interpolating splines (pass through data) from approximating splines (B-splines, Bezier curves) by contrasting their defining properties.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.splines/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.splines",
+      "title": "MORE-SMOOTHNESS-ALWAYS-BETTER",
+      "content": "| MC-1 | MORE-SMOOTHNESS-ALWAYS-BETTER | Student always imposes C² conditions even when C¹ is sufficient, adding unnecessary complexity and potentially over-constraining the system | Type 1 — overgeneralization (textbook examples always feature the most refined spline — natural cubic; students infer that maximum smoothness is always optimal without considering that C⁰ linear splines suffice for many engineering applications) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.splines/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.splines",
+      "title": "SPLINE-CONTROL-POINTS-ARE-INTERPOLATION-POINTS",
+      "content": "| MC-2 | SPLINE-CONTROL-POINTS-ARE-INTERPOLATION-POINTS | Student believes B-splines and Bezier curves pass exactly through their control points; confuses the interpolating and approximating frameworks | Type 3 — language contamination (all splines are described as \"fitting a curve through points\"; the phrase \"through points\" implies interpolation; the distinction between control points as weights vs. data points as constraints is never emphasised) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.splines/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.splines",
+      "title": "PIECEWISE-LINEAR-IS-NOT-A-SPLINE",
+      "content": "| MC-3 | PIECEWISE-LINEAR-IS-NOT-A-SPLINE | Student does not recognise piecewise-linear interpolation (connecting dots with straight lines) as the simplest C⁰ spline, and cannot extend the spline framework to linear pieces | Type 5 — instruction-induced (splines are introduced via cubic splines to achieve visual smoothness; the piecewise-linear case is treated as a naive method, not as a degenerate member of the spline family) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "CORRECT → \"A cubic spline on n+1 points has n pieces, each with 4 coefficients = 4n unknowns. Conditions: 2n (interpolation) + 3(n−1) (C¹ and C²) + 2 boundary = 4n equations. Unique solution for the natural cubic spline.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"A cubic spline on n+1 points has n pieces, each with 4 coefficients = 4n unknowns. Conditions: 2n (interpolation) + 3(n−1) (C¹ and C²) + 2 boundary = 4n equations. Unique solution for the natural cubic spline.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "PARTIAL (can state conditions but cannot count equations) → \"Count: n pieces × 2 endpoint values = 2n equations (interpolation). C⁰ adds n−1 equations (interior matching). C¹ adds n−1. C² adds n−1. Natural BC adds 2. Total: 2n+3(n−1)+2=5n−1 — wait, that overcounts. Let's recount: 2n+2(n−1)+2=4n. Each piece has 4 unknowns → 4n total → uniquely determined.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (can state conditions but cannot count equations) → \\\"Count: n pieces × 2 endpoint values = 2n equations (interpolation). C⁰ adds n−1 equations (interior matching). C¹ adds n−1. C² adds n−1. Natural BC adds 2. Total: 2n+3(n−1)+2=5n−1 — wait, that overcounts. Let's recount: 2n+2(n−1)+2=4n. Each piece has 4 unknowns → 4n total → uniquely determined.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "NO_RESPONSE → \"For 3 data points (2 pieces), how many cubic polynomial coefficients are there total? List the conditions that must hold at the interior knot x₁.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"For 3 data points (2 pieces), how many cubic polynomial coefficients are there total? List the conditions that must hold at the interior knot x₁.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "CORRECT → \"Splines avoid Runge's phenomenon because they are piecewise polynomials of low (typically degree 3) degree. The degree-n polynomial fits the data exactly but oscillates; the spline fits the data exactly with bounded, smooth curvature by spreading the fit across many low-degree pieces.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Splines avoid Runge's phenomenon because they are piecewise polynomials of low (typically degree 3) degree. The degree-n polynomial fits the data exactly but oscillates; the spline fits the data exactly with bounded, smooth curvature by spreading the fit across many low-degree pieces.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "PARTIAL (understands Runge's oscillation but cannot connect to spline advantage) → \"Why doesn't the spline oscillate? Because each cubic piece only 'knows about' the data points at its two endpoints (plus continuity at knots). It has no incentive to pass through far-away data, unlike the global polynomial which must honour all n+1 points simultaneously.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands Runge's oscillation but cannot connect to spline advantage) → \\\"Why doesn't the spline oscillate? Because each cubic piece only 'knows about' the data points at its two endpoints (plus continuity at knots). It has no incentive to pass through far-away data, unlike the global polynomial which must honour all n+1 points simultaneously.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "NO_RESPONSE → \"Plot 1/(1+25x²) on [−1,1] and fit it with a degree-10 Lagrange interpolant and a cubic spline at the same 11 equally-spaced points. Which curve behaves better near the endpoints?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Plot 1/(1+25x²) on [−1,1] and fit it with a degree-10 Lagrange interpolant and a cubic spline at the same 11 equally-spaced points. Which curve behaves better near the endpoints?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "CORRECT → \"Interpolating splines pass through data exactly; approximating splines (B-splines, Bezier) use control points that attract but do not constrain the curve. Interpolating splines are used when data is exact; approximating splines when shape design or noisy data is the goal.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Interpolating splines pass through data exactly; approximating splines (B-splines, Bezier) use control points that attract but do not constrain the curve. Interpolating splines are used when data is exact; approximating splines when shape design or noisy data is the goal.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "PARTIAL (knows interpolating vs. approximating but confuses B-spline control points with data points) → \"A B-spline control polygon and the B-spline curve are two different objects. The curve is a smooth approximation to the polygon — it follows the polygon's shape without touching each vertex. Draw three control points forming a triangle. The B-spline curve will be a smooth curve bulging toward the middle vertex.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows interpolating vs. approximating but confuses B-spline control points with data points) → \\\"A B-spline control polygon and the B-spline curve are two different objects. The curve is a smooth approximation to the polygon — it follows the polygon's shape without touching each vertex. Draw three control points forming a triangle. The B-spline curve will be a smooth curve bulging toward the middle vertex.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.num.splines/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.splines",
+      "title": "NO_RESPONSE → \"A CAD engineer moves a 'control point' in software and the curve smoothly follows. Is this an interpolating or approximating spline? How do you know?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"A CAD engineer moves a 'control point' in software and the curve smoothly follows. Is this an interpolating or approximating spline? How do you know?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.num.splines/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.splines",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Three data points: (0,0), (1,1), (2,0). (a) Construct the piecewise linear C⁰ spline. (b) Set up the conditions for a natural cubic spline (C² with S''(0)=S''(2)=0). List all equations and solve for the 8 coefficients (4 per piece).\n2. A natural cubic spline is fit to n+1 uniformly spaced data from f(x)=e^x on [0,1]. If the error is O(h⁴), estimate how many points are needed to guarantee error < 10⁻⁸. Compare with a degree-10 global polynomial using equally spaced points.\n3. A student uses a degree-15 Lagrange polynomial to interpolate Runge's function f(x)=1/(1+25x²) on 16 equally spaced points in [−1,1]. Describe what will happen near x=±1. Now explain how replacing the polynomial with a cubic spline resolves the problem.\n4. In a CAD system, a designer moves a B-spline control point from (3,2) to (3,4). (a) Does the curve pass through (3,2) before the move? (b) Which portions of the curve change? (c) How does local support (the B-spline property that each control point influences only k+1 spans) compare to a global polynomial?\n\n**P55 — Reflect & Consolidate:** \"Cubic spline: n pieces × 4 coefficients, determined by 2n interpolation + 3(n−1) smoothness + 2 boundary = 4n conditions. Natural BC: S''=0 at ends. Avoids Runge phenomenon. B-spline: approximating (control polygon ≠ interpolation), local support, standard in CAD.\"\n\n**P76 — Transfer Probe (Independence mode):**\nA periodic spline satisfies S(x₀)=S(xₙ) and S'(x₀)=S'(xₙ) and S''(x₀)=S''(xₙ) (periodic boundary conditions). (a) How many boundary conditions does a periodic cubic spline have compared to a natural cubic spline? (b) Set up the system of equations for a periodic cubic spline on 4 equally spaced points in [0, 2π] fitted to f(x)=sin(x). (c) Solve numerically and plot the spline vs. sin(x). (d) Prove that the periodic cubic spline minimises ∫₀^{2π}[S''(x)]² among all periodic C² interpolants (hint: integration by parts).\n\n**P55 — Reflect & Consolidate:** \"Periodic splines replace the natural boundary conditions with periodicity constraints. The system remains tridiagonal (or circulant for periodic) and uniquely solvable. The minimisation property generalises: any natural/periodic cubic spline minimises the curvature integral — it is the 'smoothest' interpolant.\"\n\n**P75 — Mastery Assessment:**\n\"You are fitting a flight-path altitude profile h(t) at 6 measured times (t₀,…,t₅). You know the aircraft's climb rate dh/dt at t₀ and t₅ (clamped conditions). (a) Set up the full 4n×4n linear system for the clamped cubic spline. (b) Identify the tridiagonal structure of the system and explain why it is efficient to solve. (c) Estimate the error if the true altitude profile is h(t)=100sin(t/50) and points are spaced 10 seconds apart. (d) A sensor glitch introduces noise at t₃. Should you use an interpolating spline or an approximating B-spline? Justify.\"\n\n**P55 — Reflect & Consolidate:** \"Real applications: clamped cubic splines for smooth paths with known endpoint derivatives; B-spline smoothing for noisy sensor data. The tridiagonal system is a key efficiency advantage of cubic splines — O(n) solver replaces O(n³) for a full system.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.splines complete\n- Score 3/5 → REVIEW condition counting and Runge phenomenon; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.num.interpolation; reassign\n\n**P78 — Completion:** Spline interpolation certified. Student constructs natural cubic splines by writing and counting conditions, explains Runge phenomenon avoidance, distinguishes interpolating from approximating splines, and applies splines to practical path-fitting problems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.splines.md",
+        "startLine": 115,
+        "endLine": 142
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

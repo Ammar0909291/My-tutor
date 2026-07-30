@@ -1,0 +1,209 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.ring-homomorphism-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.ring-homomorphism",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ae4673a04ef5ac1add9d98c721b1331ab8aa571719e56d063c94f7401e2b7826",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.ring-homomorphism.md": "sha256:a622df8cd0f3efac0f1d31436911cc42776289025804e27ebbe8c8c365531e5a"
+    },
+    "assetCount": 7,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 2,
+      "mastery_probe": 1
+    },
+    "ruleCount": 2
+  },
+  "concept": {
+    "conceptId": "math.abst.ring-homomorphism",
+    "name": "Ring Homomorphism",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.abst.ring-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.ring-homomorphism-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.ring-homomorphism (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.ring-homomorphism.md": "sha256:a622df8cd0f3efac0f1d31436911cc42776289025804e27ebbe8c8c365531e5a"
+      },
+      "contentHash": "sha256:7cb01749efbc6fbadd3d86b151a76cf6a2d740e507830aca90cffc4c923c6c22",
+      "ruleCount": 2,
+      "bandCounts": {
+        "3": 2
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.ring-homomorphism.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ring-homomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ring-homomorphism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.ring-homomorphism.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.ring-homomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.ring-homomorphism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.ring-homomorphism/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.ring-homomorphism",
+      "title": "Learning Objective",
+      "content": "Given two rings R and S, the student defines a ring homomorphism φ: R→S via the two conditions φ(a+b)=φ(a)+φ(b) and φ(ab)=φ(a)φ(b), identifies the kernel as a two-sided ideal of R and the image as a subring of S, applies the First Isomorphism Theorem R/ker(φ)≅im(φ), and distinguishes ring homomorphisms from group homomorphisms on the additive structure alone.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.ring-homomorphism/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.ring-homomorphism",
+      "title": "RING-HOM-ONLY-ADDITIVE",
+      "content": "| MC-1 | RING-HOM-ONLY-ADDITIVE | Student checks only φ(a+b)=φ(a)+φ(b) and concludes φ is a ring homomorphism, ignoring the multiplicative condition φ(ab)=φ(a)φ(b) | Type 5 — instruction-induced (group homomorphism requires only one condition) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.abst.ring-homomorphism/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.ring-homomorphism",
+      "title": "KERNEL-IS-SUBRING-NOT-IDEAL",
+      "content": "| MC-2 | KERNEL-IS-SUBRING-NOT-IDEAL | Student knows ker(φ)={r∈R: φ(r)=0_S} is a subring but does not recognise it is a two-sided ideal (absorbs multiplication from all of R) | Type 1 — overgeneralization (group kernel is a normal subgroup; ring kernel absorbs more) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.abst.ring-homomorphism/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.ring-homomorphism",
+      "title": "UNITAL-CONFUSION",
+      "content": "| MC-3 | UNITAL-CONFUSION | Student believes every ring homomorphism must satisfy φ(1_R)=1_S; applies this to non-unital examples and wrongly rejects valid homomorphisms, or conversely forgets the unital condition when it IS required | Type 5 — instruction-induced (textbooks disagree on whether \"ring\" means unital) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.ring-homomorphism/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ring-homomorphism",
+      "title": "ker(φ) is a subring:",
+      "content": "{\"id\":\"TA-1\",\"title\":\"ker(φ) is a subring:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.abst.ring-homomorphism/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.ring-homomorphism",
+      "title": "ker(φ) absorbs from all of R (ideal property):",
+      "content": "{\"id\":\"TA-2\",\"title\":\"ker(φ) absorbs from all of R (ideal property):\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.abst.ring-homomorphism/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.ring-homomorphism",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Define φ: ℤ[x]→ℝ by φ(f)=f(√2). Verify φ is a ring homomorphism, find ker(φ), and apply FIT to identify im(φ).\n2. Let φ: M₂(ℝ)→ℝ be given by φ(A)=tr(A) (trace). Is φ a ring homomorphism? Provide evidence for or against each of the two conditions.\n3. Suppose φ: R→S is a surjective ring homomorphism and R is commutative. Prove that S is commutative.\n4. Give an example of a group homomorphism ψ: (ℤ,+)→(ℤ,+) that is NOT a ring homomorphism (with respect to the ring structure (ℤ,+,·)).\n\n**P55 — Reflect & Consolidate:** \"A ring homomorphism must respect both operations simultaneously. Its kernel is automatically an ideal; the FIT says the quotient by the kernel exactly captures the image.\"\n\n**P76 — Transfer Probe (Independence mode, cross_links=[]):**\nLet R be any commutative ring and consider the Frobenius map φ: R→R defined by φ(r)=r^p for a prime p. In characteristic p (meaning p·1_R=0_R), verify: (a) φ(a+b)=aᵖ+bᵖ using the binomial theorem and the fact that p | C(p,k) for 1≤k≤p−1; (b) φ(ab)=(ab)ᵖ=aᵖbᵖ (commutativity used); conclude φ is a ring homomorphism (the Frobenius endomorphism). Identify ker(φ) when R=𝔽_p[x]/(f) for an irreducible f.\n\n**P55 — Reflect & Consolidate:** \"The Frobenius endomorphism is the canonical ring homomorphism in characteristic-p algebra; it generates the Galois group of finite field extensions.\"\n\n**P75 — Mastery Assessment:**\n\"Let φ: ℤ[i]→ℤ/5ℤ be defined by φ(a+bi)=[a+2b] (where [·] denotes class mod 5). (a) Verify φ is a ring homomorphism. (Hint: check φ(i·i)=φ(i)·φ(i) using 2²=4≡−1 mod 5.) (b) Show φ is surjective. (c) Find ker(φ) and use FIT to conclude ℤ[i]/(2−i)≅ℤ/5ℤ, noting that 2−i generates ker(φ) because N(2−i)=5.\"\n\n**P55 — Reflect & Consolidate:** \"This example connects ring homomorphisms to algebraic number theory: Gaussian integers mod a prime element produce a finite field via the First Isomorphism Theorem.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED; advance to first isomorphism theorem or quotient ring applications\n- Score 4/5 → REVIEW multiplicative condition and FIT statement; replay A01–A02\n- Score ≤ 3/5 → PREREQUISITE GAP in math.abst.ring-theory or math.abst.ideal; reassign before retry\n\n**P78 — Completion:** Ring homomorphism certified. Student can verify both conditions, identify kernel as ideal, apply FIT, and distinguish ring from group homomorphisms.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.ring-homomorphism.md",
+        "startLine": 109,
+        "endLine": 136
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

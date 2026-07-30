@@ -1,0 +1,651 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.even-odd-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.even-odd-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:48d2f995f763a8cb24bf603c0711b0bf79acd8a653c185216b03320128714c82",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.even-odd-functions.md": "sha256:999095dadddecaade9abf6af837e72059486f4dde59df87cd257b27d47c158a2"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 15,
+      "mastery_probe": 1
+    },
+    "ruleCount": 15
+  },
+  "concept": {
+    "conceptId": "math.func.even-odd-functions",
+    "name": "Even and Odd Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.graph-of-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.even-odd-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.even-odd-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.even-odd-functions.md": "sha256:999095dadddecaade9abf6af837e72059486f4dde59df87cd257b27d47c158a2"
+      },
+      "contentHash": "sha256:a45ea015bbce1d09541da3d356923ceea84269aa8a7567524d7f26d3f42bf0aa",
+      "ruleCount": 15,
+      "bandCounts": {
+        "3": 15
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.even-odd-functions.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.even-odd-functions.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.even-odd-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.even-odd-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.even-odd-functions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "Learning Objective",
+      "content": "Given a function f, the student classifies it as even (f(−x)=f(x) for all x), odd (f(−x)=−f(x) for all x), or neither by algebraic substitution; interprets even symmetry as reflection about the y-axis and odd symmetry as 180° rotational symmetry about the origin; applies symmetry to simplify definite integrals (∫_{−a}^{a} f = 0 for odd, 2∫_0^a for even); and recognises that a function can be neither even nor odd.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "EVEN-ODD-FROM-EXPONENTS",
+      "content": "| MC-1 | EVEN-ODD-FROM-EXPONENTS | Student determines even/odd by looking at the exponent of x only: x² is even (exponent 2), x³ is odd (exponent 3); does not handle sums (x²+x is neither) or non-monomial functions | Type 5 — instruction-induced (monomials like x^n ARE even iff n is even; students generalise this shortcut to all functions) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "NEITHER-MEANS-BOTH",
+      "content": "| MC-2 | NEITHER-MEANS-BOTH | Student, finding that f(−x)≠f(x) AND f(−x)≠−f(x), concludes the function is both even and odd rather than neither | Type 1 — overgeneralization (students confuse \"the test fails\" with \"some other state between even and odd\"; the correct conclusion is simply \"neither\") |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "EVEN-MEANS-SYMMETRIC-ABOUT-x-AXIS",
+      "content": "| MC-3 | EVEN-MEANS-SYMMETRIC-ABOUT-x-AXIS | Student confuses y-axis symmetry (even function) with x-axis symmetry; draws the wrong axis of symmetry | Type 3 — language contamination (\"even\" suggests the x-axis which has equation y=even-number; the correct axis is y-axis) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "CORRECT → \"Substitute −x: if f(−x)=f(x), even (y-axis symmetry). If f(−x)=−f(x), odd (origin symmetry). Otherwise: neither.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Substitute −x: if f(−x)=f(x), even (y-axis symmetry). If f(−x)=−f(x), odd (origin symmetry). Otherwise: neither.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "PARTIAL (handles monomials, fails on sums) → \"For f(x)=x²+x, compute f(−x) and compare to f(x) and −f(x). What do you find?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (handles monomials, fails on sums) → \\\"For f(x)=x²+x, compute f(−x) and compare to f(x) and −f(x). What do you find?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "NO_RESPONSE → \"For f(x)=x², compute f(3) and f(−3). Are they equal? What does this tell you about the graph?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"For f(x)=x², compute f(3) and f(−3). Are they equal? What does this tell you about the graph?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "Derivative of even = odd. Derivative of odd = even.",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Derivative of even = odd. Derivative of odd = even.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "∫_{−a}^{a} f(x)dx = 0 if f is odd (antisymmetric contributions cancel).",
+      "content": "{\"id\":\"TA-6\",\"title\":\"∫_{−a}^{a} f(x)dx = 0 if f is odd (antisymmetric contributions cancel).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "∫_{−a}^{a} f(x)dx = 2∫_0^a f(x)dx if f is even.",
+      "content": "{\"id\":\"TA-7\",\"title\":\"∫_{−a}^{a} f(x)dx = 2∫_0^a f(x)dx if f is even.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "CORRECT → \"Even×Even=Even, Odd×Odd=Even, Even×Odd=Odd, Even+Odd=Neither. Symmetric integrals simplify: odd→0, even→double the half-integral.\" → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Even×Even=Even, Odd×Odd=Even, Even×Odd=Odd, Even+Odd=Neither. Symmetric integrals simplify: odd→0, even→double the half-integral.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "PARTIAL (knows examples, can't derive the product rules) → \"If f is odd: f(−x)=−f(x). If g is odd: g(−x)=−g(x). What is [f·g](−x)?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (knows examples, can't derive the product rules) → \\\"If f is odd: f(−x)=−f(x). If g is odd: g(−x)=−g(x). What is [f·g](−x)?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "NO_RESPONSE → \"Compute ∫_{−2}^{2} x³ dx without a calculator. Justify using symmetry.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"Compute ∫_{−2}^{2} x³ dx without a calculator. Justify using symmetry.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "CORRECT → \"Even: y-axis symmetry (NOT x-axis). Odd: origin (180° rotation). x-axis symmetry fails the vertical line test. A function that is neither has no such symmetry.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"CORRECT → \\\"Even: y-axis symmetry (NOT x-axis). Odd: origin (180° rotation). x-axis symmetry fails the vertical line test. A function that is neither has no such symmetry.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "PARTIAL (confuses y-axis and x-axis symmetry) → \"Draw the parabola y=x². Is the left half the mirror image of the right (y-axis), or is the top half the mirror of the bottom (x-axis)?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"PARTIAL (confuses y-axis and x-axis symmetry) → \\\"Draw the parabola y=x². Is the left half the mirror image of the right (y-axis), or is the top half the mirror of the bottom (x-axis)?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "NO_RESPONSE → \"Plot (1,1) and (−1,1) for f(x)=x². Are these points mirror images across the y-axis or across the x-axis?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"NO_RESPONSE → \\\"Plot (1,1) and (−1,1) for f(x)=x². Are these points mirror images across the y-axis or across the x-axis?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.func.even-odd-functions/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.even-odd-functions",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Classify each as even, odd, or neither: (a) f(x)=x⁴−6x²+1; (b) g(x)=x³+x; (c) h(x)=x²+2x; (d) k(x)=(x³−x)/(x²+1).\n2. Prove: if f and g are odd, then f+g is odd. Is f·g even or odd?\n3. Use symmetry to evaluate: (a) ∫_{−3}^{3} (x⁵−x³+x) dx; (b) ∫_{−π}^{π} sin(x)cos(x) dx.\n4. Decompose f(x)=eˣ into an even part and an odd part: f(x)=E(x)+O(x) where E is even and O is odd. [Hint: any function can be written as ½(f(x)+f(−x))+½(f(x)−f(−x)).] Identify E(x) and O(x).\n\n**P55 — Reflect & Consolidate:** \"Even: f(−x)=f(x), y-axis symmetry. Odd: f(−x)=−f(x), origin symmetry. Neither: the third category. Every function decomposes into even+odd parts. Integrals over [−a,a]: odd→0, even→2×half.\"\n\n**P76 — Transfer Probe (Independence mode):**\nFourier series: any periodic function on [−π,π] can be written as a sum of sines and cosines. Since cos(nx) is even and sin(nx) is odd: (a) if f is an even periodic function, show that all sine coefficients (bₙ) in the Fourier expansion must be zero; (b) if f is odd, show all cosine coefficients (a₀, aₙ) must be zero; (c) confirm: f(x)=x on (−π,π) is odd, so its Fourier series contains only sine terms — verify the first two terms are (2/π)sin(x)−(1/π)sin(2x).\n\n**P55 — Reflect & Consolidate:** \"Fourier series applies even/odd symmetry directly: even functions need only cosines, odd functions need only sines, halving the computation. This is one of the most-used applications of function symmetry in engineering and physics.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=x/(x²+1). (a) Is f even, odd, or neither? Justify algebraically. (b) What does this imply about ∫_{−2}^{2} f(x)dx? Evaluate it without computing the antiderivative. (c) If g(x)=f(x)+1, is g even, odd, or neither? (d) Sketch f and g, marking the symmetry (or lack thereof) of each.\"\n\n**P55 — Reflect & Consolidate:** \"Adding a constant to an odd function destroys odd symmetry (unless the constant is 0). The symmetry test always requires checking the full function after any modification.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.even-odd-functions complete\n- Score 3/5 → REVIEW algebraic classification for non-monomial functions; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.graph-of-function; reassign\n\n**P78 — Completion:** Even and odd functions certified. Student classifies functions algebraically, identifies the correct symmetry axis (y-axis for even, origin for odd), applies parity rules to products and sums, and uses symmetry to evaluate symmetric integrals.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.even-odd-functions.md",
+        "startLine": 124,
+        "endLine": 151
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

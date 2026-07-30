@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.homeomorphism-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.homeomorphism",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1fe2bb34a4627510b3c8201b44e4d96a8f2a29542533df56fc326dbadba32899",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.homeomorphism.md": "sha256:68f644b58597a5e25e50d63bee28b72bf2e541948c2ac128a490d177d1a08187"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.homeomorphism",
+    "name": "Homeomorphism",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.top.continuity-top"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.homeomorphism-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.homeomorphism (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.homeomorphism.md": "sha256:68f644b58597a5e25e50d63bee28b72bf2e541948c2ac128a490d177d1a08187"
+      },
+      "contentHash": "sha256:5b5b29e1ce68de0ca8949101e5dcadd3f7ae023ace2da2618d74e65e98502635",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.homeomorphism.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homeomorphism.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homeomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homeomorphism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.homeomorphism.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homeomorphism.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homeomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homeomorphism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.homeomorphism.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homeomorphism.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homeomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homeomorphism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.homeomorphism.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.homeomorphism.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.homeomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.homeomorphism\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.homeomorphism/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define **homeomorphism** ($f:X\\to Y$ bijective, $f$ continuous, $f^{-1}$ continuous); state that homeomorphic spaces are **topologically indistinguishable**; list four **topological invariants** (compactness, connectedness, cardinality of fundamental group, Hausdorff property) that are preserved by homeomorphism.\n- LO2: **Prove two spaces are not homeomorphic** by exhibiting a topological invariant that one space possesses and the other does not (e.g., compactness distinguishes $[0,1]$ from $(0,1)$; removing a point distinguishes $S^1$ from $\\mathbb{R}$).\n- LO3: **Construct explicit homeomorphisms** — the tangent map $\\tan:\\left(-\\tfrac\\pi2,\\tfrac\\pi2\\right)\\to\\mathbb{R}$, stereographic projection $S^n\\setminus\\{N\\}\\to\\mathbb{R}^n$, and the quotient identification $[0,1]/\\{0\\sim1\\}\\cong S^1$ — and verify that both $f$ and $f^{-1}$ are continuous.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.homeomorphism",
+      "title": "HOMEOMORPHISM-MEANS-BIJECTIVE-CONTINUOUS",
+      "content": "| MC-1 | HOMEOMORPHISM-MEANS-BIJECTIVE-CONTINUOUS | Believing a bijective continuous map is automatically a homeomorphism — missing that $f^{-1}$ must also be continuous; the canonical counterexample is $[0,1)\\to S^1$ | Critical |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.homeomorphism",
+      "title": "SAME-CARDINALITY-IMPLIES-HOMEOMORPHIC",
+      "content": "| MC-2 | SAME-CARDINALITY-IMPLIES-HOMEOMORPHIC | Believing spaces with the same cardinality of points are homeomorphic — missing that $\\mathbb{R}$ and $[0,1]$ have the same cardinality ($\\mathfrak{c}$) but are not homeomorphic (compactness differs) | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.homeomorphism",
+      "title": "VISUALLY-SIMILAR-MEANS-HOMEOMORPHIC",
+      "content": "| MC-3 | VISUALLY-SIMILAR-MEANS-HOMEOMORPHIC | Believing spaces that \"look similar\" geometrically must be homeomorphic — an annulus and a disk look similar locally but are not homeomorphic (removing the central circle from an annulus leaves a connected space, but no analogous cut on the disk disconnects it the same way) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Why $f^{-1}$ Must Also Be Continuous (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Why $f^{-1}$ Must Also Be Continuous (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Topological Invariants as Distinguishing Tools (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Topological Invariants as Distinguishing Tools (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Constructing Homeomorphisms (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Constructing Homeomorphisms (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (5-problem set)**:\n  1. Show $(0,\\infty)\\cong\\mathbb{R}$ by constructing an explicit homeomorphism and verifying continuity of both $f$ and $f^{-1}$.\n  2. Show that $\\mathbb{R}^2\\setminus\\{0\\}$ and $\\mathbb{R}^2\\setminus\\{p,q\\}$ (two points removed) are NOT homeomorphic. (Hint: removing a single additional point from the first leaves a connected space, but the second already has one component less.)\n  3. Is $[0,1]\\cong[0,1]\\times[0,1]$? Justify using a topological invariant. (Hint: consider removing a boundary point and counting path-components.)\n  4. Show that any open interval $(a,b)$ in $\\mathbb{R}$ is homeomorphic to any other open interval $(c,d)$.\n  5. Prove: the continuous bijection $f:[0,1)\\to S^1$, $f(t)=e^{2\\pi it}$, is NOT a homeomorphism by showing $f^{-1}$ fails continuity at the point $1\\in S^1$.\n- **P76 (Transfer Probe, mode = independence)**: \"A map $f:X\\to Y$ between compact Hausdorff spaces is a **homeomorphism** if and only if it is bijective and continuous (no separate check on $f^{-1}$ needed). (a) Prove this: if $f$ is continuous, bijective, $X$ compact, $Y$ Hausdorff, then $f$ is a homeomorphism. Hint: show closed sets map to closed sets. (b) Explain why the hypothesis '$X$ compact, $Y$ Hausdorff' cannot be dropped by revisiting the $[0,1)\\to S^1$ counterexample: identify which hypothesis that example violates.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Homeomorphism — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.continuity-top` (topological definition of continuity: $f$ continuous iff preimages of open sets are open; homeomorphism requires the same for $f^{-1}$). No metric is assumed.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.homeomorphism/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.homeomorphism",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.continuity-top` (topological continuity via preimages of open sets, needed to define both $f$ and $f^{-1}$ continuous).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.homeomorphism.md",
+        "startLine": 108,
+        "endLine": 114
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,338 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.group-isomorphism-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.group-isomorphism",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:109146df70211d99eab4af8b0263c85e9748781a6e667a31b7ac420cf996c82b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.group-isomorphism.md": "sha256:38083e98ed4c2149f127848d643ef3be26ba201bffffc16c576144f42c4330bb"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.group-isomorphism",
+    "name": "",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.group-homomorphism"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.group-isomorphism-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.group-isomorphism (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.group-isomorphism.md": "sha256:38083e98ed4c2149f127848d643ef3be26ba201bffffc16c576144f42c4330bb"
+      },
+      "contentHash": "sha256:5c56ecfa194608c7f1869f4d33f2d0150a5f2d282e33f221e1c4b5c6c7f929a7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.group-isomorphism.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-isomorphism.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-isomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-isomorphism\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-isomorphism.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-isomorphism.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-isomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-isomorphism\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-isomorphism.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-isomorphism.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-isomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-isomorphism\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-isomorphism.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-isomorphism.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-isomorphism"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-isomorphism\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.group-isomorphism/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "math.abst.group-isomorphism — cognitive map",
+      "content": "### Target Understanding\nA **group isomorphism** φ: G → H is a **bijective group homomorphism**: a map satisfying\n(I1) φ(a·b) = φ(a)·φ(b) for all a, b ∈ G (homomorphism condition);\n(I2) φ is injective (one-to-one); (I3) φ is surjective (onto).\nTwo groups G and H are **isomorphic** (written G ≅ H) if such a φ exists.\nIsomorphic groups are structurally identical — they differ only in the labeling of elements.\nProperties **preserved** by isomorphisms: order of the group, element orders, abelian property,\ncyclic property, number of elements of each order, number of subgroups of each order.\n\n### Distinction from math.abst.group-homomorphism\nThe prerequisite established that a homomorphism φ: G → H satisfies φ(ab) = φ(a)φ(b) but may\ncollapse structure (e.g., the trivial map). An isomorphism requires bijection — no collapse,\nno gaps — so both groups are structurally the same.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Z/4Z vs {1, i, −1, −i} ≅ via n ↦ iⁿ; counting element orders |\n| **Pictorial (P)** | Cayley-table comparison; matching entry patterns |\n| **Abstract (A)** | Bijective homomorphism definition; structural invariants as obstructions |\n\n### Prerequisite Knowledge (from KG)\n- **math.abst.group-homomorphism** — homomorphism condition φ(ab) = φ(a)φ(b); kernel; image;\n  the homomorphism preserves identity and inverses\n\n### Canonical Examples\n| Isomorphism | φ | Key Check |\n|:------------|:--|:----------|\n| (Z/4Z, +) ≅ ({1,i,−1,−i}, ×) | φ(n) = iⁿ | φ(m+n) = i^(m+n) = iᵐ·iⁿ = φ(m)·φ(n) ✓; bijection ✓ |\n| (Z/2Z, +) ≅ ({1,−1}, ×) | φ(0)=1, φ(1)=−1 | φ(0+0)=1=1·1 ✓; bijection ✓ |\n| Z/4Z ≇ V₄ = Z/2Z×Z/2Z | — | Z/4Z has element of order 4; V₄ does not |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 32,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "SAME-SIZE-MEANS-ISOMORPHIC",
+      "content": "| MC-1 | SAME-SIZE-MEANS-ISOMORPHIC | Claims Z/4Z ≅ V₄ because both have 4 elements | Confuses bijection of sets with isomorphism of groups; ignores the homomorphism condition and structural invariants | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "ANY-BIJECTION-IS-ISOMORPHISM",
+      "content": "| MC-2 | ANY-BIJECTION-IS-ISOMORPHISM | Proposes a bijection φ: G → H without checking φ(ab) = φ(a)φ(b) | Forgets that isomorphism = bijection + homomorphism; treats it as a purely set-theoretic notion | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "ISOMORPHISM-PRESERVES-LABELS",
+      "content": "| MC-3 | ISOMORPHISM-PRESERVES-LABELS | Thinks isomorphic groups share the same element names or operation symbol | Conflates structural sameness with identical representation; doesn't see that G ≅ H means relabeling, not identity | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "Entry: Defining and Constructing an Isomorphism (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: Defining and Constructing an Isomorphism (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 105,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "MC-1 Gate: Structural Invariants Distinguish Non-Isomorphic Groups (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: Structural Invariants Distinguish Non-Isomorphic Groups (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 144,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "A Bijection Is Not Enough: The Homomorphism Condition (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"A Bijection Is Not Enough: The Homomorphism Condition (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 196,
+        "endLine": 235
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P06\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 235,
+        "endLine": 501
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Define group isomorphism. State which two properties a map φ: G → H must satisfy.\n\n*(Target: φ must be (1) a group homomorphism — φ(ab) = φ(a)φ(b) — and (2) a bijection. Both required.)*\n\n**Q2.** Show that Z/4Z ≇ Z/2Z × Z/2Z by identifying a structural invariant that differs.\n\n*(Target: Z/4Z has an element of order 4 (e.g., 1); Z/2Z × Z/2Z has no element of order 4 — every non-identity element has order 2. Isomorphisms preserve element orders, so they cannot be isomorphic.)*\n\n**Q3.** Determine whether the map φ: (Z/6Z, +) → (Z/6Z, +) defined by φ(n) = 2n is a group isomorphism.\n\n*(Target: Homomorphism: φ(m+n) = 2(m+n) = 2m+2n = φ(m)+φ(n) ✓. But: φ(3) = 6 = 0 = φ(0), so φ is NOT injective. Not a bijection. Therefore φ is a homomorphism but NOT an isomorphism.)*\n\n**Q4.** If φ: G → H is a group isomorphism, prove that φ maps the identity of G to the identity of H.\n\n*(Target: Let e_G be the identity of G. Then φ(e_G) = φ(e_G · e_G) = φ(e_G) · φ(e_G) (homomorphism).\n  In H: φ(e_G) = φ(e_G) · φ(e_G). Multiply both sides on the right by [φ(e_G)]⁻¹: e_H = φ(e_G).)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independent reasoning probe within group theory.*\n\n> Let G = Z/5Z (the integers mod 5 under addition) and\n> H = {z ∈ ℂ : z⁵ = 1} (the 5th roots of unity under multiplication).\n> Define φ: G → H by φ(k) = e^(2πik/5).\n>\n> (a) Show φ is a group homomorphism.\n> (b) Show φ is a bijection.\n> (c) Conclude that G ≅ H.\n\n*Expected answers:*\n- **(a) Homomorphism:** φ(k + m) = e^(2πi(k+m)/5) = e^(2πik/5) · e^(2πim/5) = φ(k) · φ(m). ✓\n- **(b) Bijection:** |G| = |H| = 5. The elements e^(2πik/5) for k=0,1,2,3,4 are distinct (distinct angles in [0,2π)). So φ maps 5 elements to 5 distinct targets — bijection. ✓\n- **(c) Conclusion:** φ is a bijective homomorphism, so G ≅ H: Z/5Z ≅ {5th roots of unity}.\n\n**[P55 — SCORE]**  Award 1 point for P76 if all three parts answered correctly; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.85  →  ⌈0.85 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → definition gap → re-state: bijection + homomorphism, both required.\n  - Q2 wrong → MC-1 active → TB-R01 (element-order invariant table).\n  - Q3 wrong → MC-2 active → TB-R02 (check injectivity: if φ(a)=φ(b), must a=b?).\n  - Q4 wrong → homomorphism argument gap → scaffold: φ(e)·φ(e) = φ(e·e) = φ(e), cancel.\n  - P76 wrong → identify which part failed; re-route to matching repair.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.group-isomorphism\nMASTERY_REACHED: true\nUNLOCKS:         []\nNEXT_CONCEPT:    (continue math.abst domain)\nSESSION_CLOSE:   \"You can now define and verify group isomorphisms, use structural\n                  invariants (element orders) to prove groups are not isomorphic, and\n                  distinguish bijection from isomorphism. Two isomorphic groups are\n                  the same algebraic structure with different labels.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: SAME-SIZE-MEANS-ISOMORPHIC (MC-1)\n\n**Trigger:** Student claims groups of the same order are always isomorphic.\n\n**Step 1 — Name the counterexample.**\n> Z/4Z and V₄ both have order 4. Are they isomorphic?\n\n**Step 2 — Compute element orders.**\n> Z/4Z: orders are {1, 4, 2, 4}. There IS an element of order 4.\n> V₄: orders are {1, 2, 2, 2}. There is NO element of order 4.\n\n**Step 3 — Apply the invariant.**\n> Isomorphisms preserve element orders (proved: ord(φ(g)) = ord(g)).\n> If Z/4Z ≅ V₄, V₄ would need an element of order 4. It doesn't.\n> Conclusion: Z/4Z ≇ V₄, even though |Z/4Z| = |V₄| = 4.\n\n**Exit:** Return to TA-A02 P49.\n\n---\n\n### TB-R02 · Repair: ANY-BIJECTION-IS-ISOMORPHISM (MC-2)\n\n**Trigger:** Student proposes a bijection without checking φ(ab) = φ(a)φ(b).\n\n**Step 1 — Show a bijection that fails.**\n> ψ: Z/4Z → {1,i,−1,−i}: ψ(0)=1, ψ(1)=−1, ψ(2)=i, ψ(3)=−i.\n> ψ is a bijection. But: ψ(1+1) = ψ(2) = i. ψ(1)·ψ(1) = (−1)(−1) = 1. i ≠ 1. FAIL.\n\n**Step 2 — Reinforce the definition.**\n> Isomorphism = bijection AND homomorphism (φ(ab)=φ(a)φ(b)).\n> Must check BOTH. A bijection that fails the operation condition is NOT an isomorphism.\n\n**Exit:** Return to TA-A03 P49.\n\n---\n\n### TB-R03 · Repair: ISOMORPHISM-PRESERVES-LABELS (MC-3)\n\n**Trigger:** Student thinks G ≅ H means the groups are the same set with the same operation.\n\n**Step 1 — Clarify.**\n> G ≅ H means the groups have identical STRUCTURE — same operation table up to relabeling.\n> The elements of G and H can be completely different objects (numbers vs. matrices vs. roots of unity).\n\n**Step 2 — Example.**\n> (Z/4Z, +) ≅ ({1,i,−1,−i}, ×): one has integers, the other has complex numbers.\n> Different elements, different operation symbols, same structural blueprint.\n\n**Exit:** Return to TA-A01.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Does Z/6Z have any element of order 6? Does S₃? Are they isomorphic?\"\n    Target: Z/6Z: yes (generator 1 has order 6). S₃: no element of order 6. S₃ ≇ Z/6Z.\n\n  Interval-2 (+3 days):\n    Probe: \"State the two conditions a map φ: G → H must satisfy to be a group isomorphism.\"\n    Target: (1) φ(ab)=φ(a)φ(b) for all a,b (homomorphism); (2) φ bijective.\n\n  Interval-3 (+1 week):\n    Probe: \"Construct an isomorphism between Z/2Z and {1,−1} under multiplication.\"\n    Target: φ(0)=1, φ(1)=−1; verify φ(0+1)=−1=φ(0)·φ(1)=1·(−1) ✓; bijection ✓.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (structural invariants) or TA-A03\n                        (bijection vs. isomorphism).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.group-homomorphism:\n    Used in:   TA-A01 (definition of isomorphism as bijective homomorphism),\n               TA-A03 (homomorphism condition φ(ab)=φ(a)φ(b) as mandatory requirement\n                       separate from bijectivity),\n               TA-A04 Q4 (using homomorphism property to prove identity preservation).\n    Assumed:   Student holds φ(ab) = φ(a)φ(b); knows kernel and image; knows homomorphism\n               preserves identity and inverses.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The structural invariant strategy is the most powerful proof tool here.**\nStudents at the analyze level should internalize: to prove G ≇ H, find ONE property that differs\n(element order multiset, abelian vs. non-abelian, cyclic vs. non-cyclic). To prove G ≅ H, construct\nan explicit bijective homomorphism. TA-A02 builds the \"look for invariants\" habit via element orders.\n\n**2. MC-1 is the dominant error at this stage.**\nAfter encountering Z/2Z ≅ {1,−1} and Z/4Z ≅ {1,i,−1,−i}, students often over-generalize to\n\"same order → isomorphic.\" The Z/4Z vs. V₄ example is the canonical corrective — memorizable\nand unambiguous.\n\n**3. Q3 tests the distinction between homomorphism and isomorphism at bloom=analyze.**\nThe map n ↦ 2n on Z/6Z is a homomorphism but not injective (fails I2). This requires the student\nto check both conditions independently, not assume one implies the other.\n\n**4. The P76 independence probe (nth roots of unity) extends the pattern.**\nStudents who saw Z/4Z ≅ {4th roots of unity} in TA-A01 should readily generalize to Z/5Z ≅\n{5th roots of unity}, making the connection between cyclic groups and roots of unity. This probe\ntests whether the student can apply the definition independently, not just verify given examples.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.group-isomorphism\n====================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 6; 4 TAs used ≤ 6.\n[PASS] V-4   CPA_ENTRY_STAGE = A (abstract structural definition; abstract algebra bloom=analyze).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — element-order invariant).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 contrast pair; TB-R02/R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross-links in KG; cross_links = [].\n[PASS] V-17  GR-9: P76 uses Independence mode; probe requires student to construct an\n              isomorphism independently (Z/5Z ≅ 5th roots of unity) and verify all three\n              conditions (homomorphism, injective, surjective).\n[PASS] V-18  GR-10: MAMR stated in Component 3; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.85 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   Group isomorphism defined as bijective homomorphism (I1 + I2 + I3).\n             Canonical isomorphisms: Z/4Z ≅ {1,i,−1,−i}, Z/2Z ≅ {1,−1}.\n             MC-1: element-order invariant proves Z/4Z ≇ V₄.\n             MC-2: bijection ψ without homomorphism property shown to fail.\n             MC-3: structural sameness ≠ identical representation.\n             Q4: identity-preservation proof via homomorphism cancellation.\n             P76: Z/5Z ≅ {5th roots of unity} constructed and verified independently.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 235,
+        "endLine": 501
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11 four representations: Z/4Z ≅ {1,i,−1,−i} + P49)\n      → TA-A02 (P41/P64 MC-1 gate: structural invariants distinguish non-isomorphic\n                 groups even of the same order + P49)\n      → TA-A03 (P06 contrast: bijection alone is not enough; homomorphism condition required + P49)\n      → TA-A04 (P91 terminal mastery gate — P76 independence probe)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (structural invariant table; element orders of Z/4Z vs V₄)\n  MC-2 → TB-R02 (verify φ(ab) = φ(a)φ(b) for a proposed bijection; counterexample)\n  MC-3 → TB-R03 (isomorphism is relabeling; same group up to renaming of elements)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 82,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Does Z/6Z have any element of order 6? Does S₃? Are they isomorphic?\"\n    Target: Z/6Z: yes (generator 1 has order 6). S₃: no element of order 6. S₃ ≇ Z/6Z.\n\n  Interval-2 (+3 days):\n    Probe: \"State the two conditions a map φ: G → H must satisfy to be a group isomorphism.\"\n    Target: (1) φ(ab)=φ(a)φ(b) for all a,b (homomorphism); (2) φ bijective.\n\n  Interval-3 (+1 week):\n    Probe: \"Construct an isomorphism between Z/2Z and {1,−1} under multiplication.\"\n    Target: φ(0)=1, φ(1)=−1; verify φ(0+1)=−1=φ(0)·φ(1)=1·(−1) ✓; bijection ✓.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (structural invariants) or TA-A03\n                        (bijection vs. isomorphism).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 379,
+        "endLine": 402
+      }
+    },
+    {
+      "assetId": "math.abst.group-isomorphism/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.group-isomorphism",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.group-homomorphism:\n    Used in:   TA-A01 (definition of isomorphism as bijective homomorphism),\n               TA-A03 (homomorphism condition φ(ab)=φ(a)φ(b) as mandatory requirement\n                       separate from bijectivity),\n               TA-A04 Q4 (using homomorphism property to prove identity preservation).\n    Assumed:   Student holds φ(ab) = φ(a)φ(b); knows kernel and image; knows homomorphism\n               preserves identity and inverses.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-isomorphism.md",
+        "startLine": 402,
+        "endLine": 421
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

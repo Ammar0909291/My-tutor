@@ -1,0 +1,334 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.special-angles-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.special-angles",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4454bf232daa4128b53c5fadbf7c2cb61a4f0adff055900a176ee0e70edf4ad7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.special-angles.md": "sha256:30ff705a2404ae68df70bca04bd17f2d28511eb793f14164228de484eabeac97"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.special-angles",
+    "name": "Trigonometric Values at Special Angles",
+    "difficultyRaw": "proficient",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.trig.basic-ratios"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.special-angles-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.special-angles (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.special-angles.md": "sha256:30ff705a2404ae68df70bca04bd17f2d28511eb793f14164228de484eabeac97"
+      },
+      "contentHash": "sha256:b168b69e9d6dbc7a1779f14ce0939e788f0ecdf2b4725cf59772da500d5b2783",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.special-angles.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.special-angles.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.special-angles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.special-angles\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.special-angles.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.special-angles.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.special-angles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.special-angles\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.special-angles.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.special-angles.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.special-angles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.special-angles\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.special-angles.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.special-angles.md#TA-A04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.special-angles"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.special-angles\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.special-angles/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.special-angles",
+      "title": "Trigonometric Values at Special Angles — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.basic-ratios**: SOH-CAH-TOA; labeling Opposite, Adjacent, Hypotenuse relative to the reference angle θ; three primary trig ratios\n\n### Target Knowledge State\nStudent derives exact values of sin, cos, and tan at 0°, 30°, 45°, 60°, and 90° from the 30-60-90 and 45-45-90 triangles placed on the unit circle. Student extends these to all angles in [0°, 360°) using the reference angle and ASTC sign rules. Student evaluates trig expressions at multiples of 30° and 45° without a calculator.\n\n### Conceptual Obstacles\n1. Swapping sin 30° and sin 60° — or equivalently, swapping cos 30° and cos 60°\n2. Applying positive values in all quadrants, ignoring the ASTC sign rule for angles beyond 90°\n3. Confusing the quadrant-3 formula (π + α) with the quadrant-2 formula (π − α)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.special-angles",
+      "title": "SIN-COS-30-60-SWAP",
+      "content": "| MC-1 | SIN-COS-30-60-SWAP | Student writes sin 30° = √3/2 and cos 30° = 1/2 (values reversed) | Direct recall of the 30° and 60° rows |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.special-angles",
+      "title": "SIGN-OMISSION-BEYOND-90",
+      "content": "| MC-2 | SIGN-OMISSION-BEYOND-90 | Student applies positive values for sin/cos/tan regardless of which quadrant the angle is in | Angles such as 120°, 210°, 315° |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.special-angles",
+      "title": "QUADRANT-FORMULA-CONFUSION",
+      "content": "| MC-3 | QUADRANT-FORMULA-CONFUSION | Student uses π − α for Q3 angles instead of π + α | Reference angle problems in Q3 and Q4 |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.special-angles",
+      "title": "Deriving the Special-Angle Table from Triangles",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving the Special-Angle Table from Triangles\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 64,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.special-angles",
+      "title": "Extending to All Quadrants",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Extending to All Quadrants\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 124,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.special-angles",
+      "title": "Q2 vs Q3 Reference Angle Formulas",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Q2 vs Q3 Reference Angle Formulas\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 173,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.special-angles",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 226,
+        "endLine": 432
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.special-angles",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Find the exact values of sin 225°, cos 225°, and tan 225°.\n\n**Problem 2.** Evaluate sin 150° · cos 120° − cos 150° · sin 120°.\n\n**Problem 3.** Find all θ in [0°, 360°) such that tan θ = −1.\n\n**Problem 4.** Simplify sin²(60°) + cos²(30°) − tan(45°) to a single fraction.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Q3; reference 45°. sin 225° = −√2/2, cos 225° = −√2/2, tan 225° = 1. ✓\n\n2. sin(150° − 120°) = sin 30° = 1/2. (This is the sine-difference identity, or compute directly: (1/2)(−1/2) − (−√3/2)(√3/2) = −1/4 + 3/4 = 1/2.) ✓\n\n3. Reference angle α: tan α = 1 → α = 45°. Tan negative in Q2 and Q4: θ = 135°, 315°. ✓\n\n4. sin²(60°) = 3/4; cos²(30°) = 3/4; tan(45°) = 1. Sum = 3/4 + 3/4 − 1 = 1/2. ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* An analogue clock has an hour hand 8 cm long. At 5:00, the hour hand points to the \"5\", which corresponds to an angle of 150° measured clockwise from the 12 o'clock position (equivalently, 210° in standard mathematical notation measured counterclockwise from the positive x-axis).\n\n*(a)* How far below the centre of the clock face is the tip of the hour hand?\n\n*(b)* A student says the tip is 4 cm to the right of the centre. Evaluate this claim.\n\n*Expected answer:*\n\n*(a)* In standard notation the angle is 210°. The y-coordinate of the tip = 8 · sin 210° = 8 · (−1/2) = −4 cm. The tip is **4 cm below** the centre.\n\n*(b)* x-coordinate = 8 · cos 210° = 8 · (−√3/2) = −4√3 ≈ −6.93 cm. The tip is approximately 6.93 cm to the **left**, not to the right. The student's claim is incorrect in both direction and magnitude.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (both parts correct); 0.5 if (a) correct but (b) evaluated incorrectly.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Identify missed item; sin/cos swap → B01; sign error → B02; quadrant formula confusion → B03; targeted repair |\n| ≤ 3/5 | → Return to A01; re-derive the table from the two special triangles; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.special-angles` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** Unit circle fluency; exact-value computations in calculus; trig identities involving special angles.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 229,
+        "endLine": 325
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.special-angles",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — labeled 30-60-90 and 45-45-90 triangles inscribed in the unit circle.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Derive exact values from 30-60-90 and 45-45-90 unit-circle triangles; state the complete special-angle table; memory device for sin 30° vs sin 60°\n2. **A02 P04 PATTERN INDUCTION** — Extend to all quadrants using reference angles and ASTC; gallery of angles at multiples of 30° and 45°; procedure table\n3. **A03 P06 CONTRAST PAIR** — Q2 vs Q3 reference angle formulas; same reference angle α = 30°, different quadrant formula (π − α vs π + α)\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.special-angles",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Give exact values of sin 150°, cos 240°, tan 330°. |\n| R2 | 3 days | Find all θ in [0°, 360°) where cos θ = −1/2. |\n| R3 | 7 days | Evaluate sin(30°)cos(60°) + cos(30°)sin(60°) without a calculator. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 375,
+        "endLine": 385
+      }
+    },
+    {
+      "assetId": "math.trig.special-angles/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.special-angles",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | Unit circle fluency; exact-value trig computations |\n| Requires (Tier-1) | math.trig.basic-ratios |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent clock-hand geometry problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.special-angles.md",
+        "startLine": 385,
+        "endLine": 399
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

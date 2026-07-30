@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.duality |
-| Title | Lagrangian Duality |
+| name | Lagrangian Duality |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | analyze |
@@ -124,7 +124,7 @@ Step 1 — "λᵢ is not just a solving trick; it is an economic price. Think of
 **TB-R03 (MC-3 SLATER-MEANS-INTERIOR-POINT-EXISTS):**
 Step 1 — "Slater's condition: ∃x̃ with gᵢ(x̃)<0 strictly for all INEQUALITY constraints. It says nothing about x̃ being in the interior of any other region." Step 2 — Example: P: min f(x) s.t. x≤1, x=−1 (equality). Slater: need x̃ with x̃<1. x̃=−1 satisfies this. But x̃=−1 is the only feasible point (equality forces x=−1). Slater holds even though the feasible set is a single point! Step 3 — Clarify: Slater is about the INEQUALITY constraints only. It ensures the dual is not degenerate at the boundary of the constraint set.
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Form the Lagrangian for: min x²+y² s.t. x+y≥2. Compute the dual function g(λ) and solve the dual max_{λ≥0} g(λ). Verify strong duality by checking p*=d*.

@@ -1,0 +1,373 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.sylow-theorems-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.sylow-theorems",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ff2a6106525e9188a19676ca432363d9e74051fb95961ca9083cfa6d527a00c8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.sylow-theorems.md": "sha256:dd8ff55de8ab4798fe4917d05e6c567390d7700b2f8ec351317d13843c932658"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.abst.sylow-theorems",
+    "name": "",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.abst.group-action",
+      "math.nt.prime-number"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.sylow-theorems-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.sylow-theorems (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.sylow-theorems.md": "sha256:dd8ff55de8ab4798fe4917d05e6c567390d7700b2f8ec351317d13843c932658"
+      },
+      "contentHash": "sha256:41ff00ef5b5983583475a08ec74440ee82897f205c5a4f8b369ee79364e8aaec",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.sylow-theorems.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.sylow-theorems.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.sylow-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.sylow-theorems\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.sylow-theorems.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.sylow-theorems.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.sylow-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.sylow-theorems\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.sylow-theorems.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.sylow-theorems.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.sylow-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.sylow-theorems\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.sylow-theorems.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.sylow-theorems.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.sylow-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.sylow-theorems\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.sylow-theorems.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.sylow-theorems.md#TA-A05 (addresses MC-3, MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.sylow-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.sylow-theorems\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.sylow-theorems/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "math.abst.sylow-theorems — cognitive map",
+      "content": "### Target Understanding\nLet G be a finite group with |G| = pⁿ × m where p is prime and gcd(p, m) = 1.\nA **Sylow p-subgroup** of G is a subgroup of order pⁿ (the largest power of p dividing |G|).\n\n**Three Sylow Theorems:**\n- **Sylow I (Existence):** G has at least one Sylow p-subgroup.\n- **Sylow II (Conjugacy):** All Sylow p-subgroups are conjugate to each other: if P and Q are\n  both Sylow p-subgroups, then Q = gPg⁻¹ for some g ∈ G.\n- **Sylow III (Count):** The number n_p of Sylow p-subgroups satisfies:\n  (i) n_p ≡ 1 (mod p); (ii) n_p divides m; (iii) n_p = [G : N_G(P)] (index of normalizer).\n\n**Application pattern:** n_p ≡ 1 (mod p) AND n_p | m narrows n_p to a small set of possibilities.\nIf n_p = 1, the unique Sylow p-subgroup is **normal** in G. This is the main tool for proving\ngroups are or are not simple.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | |G|=6: Sylow 2-subgroups (order 2), Sylow 3-subgroups (order 3); counting them |\n| **Pictorial (P)** | Lattice of subgroups with Sylow subgroups highlighted; n_p divisibility diagram |\n| **Abstract (A)** | Three theorems in full generality; n_p constraints as a system; simplicity criterion |\n\n### Prerequisite Knowledge (from KG)\n- **math.abst.group-action** — conjugation action; orbit-stabilizer theorem (used in Sylow I proof);\n  normalizer N_G(P) = Stab_G(P) under conjugation action on subgroups\n- **math.nt.prime-number** — prime p; gcd; prime factorization of |G|; prime powers\n\n### Canonical Examples\n| |G| | p | pⁿ | m | n_p constraints | n_p | Normal? |\n|-----|---|----|----|-----------------|-----|---------|\n| 6 | 2 | 2 | 3 | n_2≡1(mod2), n_2|3 → n_2∈{1,3} | 3 (in S₃) | No |\n| 6 | 3 | 3 | 2 | n_3≡1(mod3), n_3|2 → n_3∈{1} | 1 | Yes |\n| 12 | 2 | 4 | 3 | n_2≡1(mod2), n_2|3 → n_2∈{1,3} | 3 (in A₄) | No |\n| 12 | 3 | 3 | 4 | n_3≡1(mod3), n_3|4 → n_3∈{1,4} | 4 (in A₄) | No |\n| 15 | 3 | 3 | 5 | n_3≡1(mod3), n_3|5 → n_3=1 | 1 | Yes |\n| 15 | 5 | 5 | 3 | n_5≡1(mod5), n_5|3 → n_5=1 | 1 | Yes |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 31,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "SYLOW-SUBGROUP-ALWAYS-NORMAL",
+      "content": "| MC-1 | SYLOW-SUBGROUP-ALWAYS-NORMAL | Claims every Sylow p-subgroup is automatically normal in G | Confuses the CONCLUSION (n_p=1 implies normality) with a universal claim; doesn't recall that normality requires n_p=1 specifically | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "SYLOW-III-WRONG-DIVISOR",
+      "content": "| MC-2 | SYLOW-III-WRONG-DIVISOR | Applies n_p | |G| instead of n_p | m (where m = |G|/pⁿ) | Forgets to remove the p-part from |G| before applying divisibility; uses full group order instead of the cofactor | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "ANY-p-SUBGROUP-IS-SYLOW",
+      "content": "| MC-3 | ANY-p-SUBGROUP-IS-SYLOW | Calls any p-subgroup a \"Sylow p-subgroup\" regardless of order | Doesn't require the subgroup to have order pⁿ (the full prime-power factor); thinks any subgroup of prime-power order is a Sylow subgroup | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "Entry: Sylow Subgroups and the Three Theorems for |G|=6 (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: Sylow Subgroups and the Three Theorems for |G|=6 (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 111,
+        "endLine": 154
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "MC-1 Gate: n_p = 1 is the Normality Condition (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: n_p = 1 is the Normality Condition (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 154,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "Pattern: Applying the Sylow Constraint System (P04 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Pattern: Applying the Sylow Constraint System (P04 + P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 204,
+        "endLine": 250
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "Contrast: Sylow Subgroup vs. General p-Subgroup (P06 + P49)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Contrast: Sylow Subgroup vs. General p-Subgroup (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 250,
+        "endLine": 291
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 291,
+        "endLine": 563
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/mastery_probe/MP-TA-A05",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A05 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** State all three Sylow theorems for a group G of order pⁿm (gcd(p,m)=1).\n\n*(Target: I: G has a Sylow p-subgroup of order pⁿ. II: All Sylow p-subgroups are conjugate.\nIII: n_p ≡ 1 (mod p), n_p | m, n_p = [G:N_G(P)]. All three needed.)*\n\n**Q2.** For |G| = 30 = 2 × 3 × 5, apply Sylow III to show n_5 = 1 or 6, then use an element-count\nargument to deduce n_5 = 1.\n\n*(Target: n_5≡1 mod 5, n_5|6 → {1,2,3,6}; intersection {1,6}. If n_5=6: 6 Sylow 5-subgroups,\neach order 5, pairwise only {e} in common → 6×4=24 elements of order 5. n_3: ≡1 mod 3, |10 →\n{1,10}. If n_3=10: 10×2=20 elements of order 3. 24+20=44>30. Contradiction. So n_5=1 or n_3=1;\nin either case G has a normal subgroup. Standard result: n_5=1.)*\n\n**Q3.** A group of order 77 = 7 × 11. Show it must be cyclic using Sylow theory.\n\n*(Target: n_7≡1 mod 7, |11 → {1,11}; n_7=1 (only 1≤11 and ≡1 mod 7; 11≢1 mod 7 since 11-1=10 is not divisible by 7). So P₇⊴G. n_11≡1 mod 11, |7 → {1,7}; 7≢1 mod 11. So n_11=1, P₁₁⊴G. G=P₇×P₁₁≅Z/7Z×Z/11Z≅Z/77Z (gcd(7,11)=1). G is cyclic.)*\n\n**Q4.** In a group of order 12, can there be exactly 2 Sylow 3-subgroups?  Justify.\n\n*(Target: No. Sylow III requires n_3≡1 mod 3 and n_3|4. n_3∈{1,4}. n_3=2 would require 2≡1 mod 3 (FALSE: 2-1=1, not divisible by 3). So n_3 cannot be 2. Only n_3∈{1,4}.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independent Sylow analysis of a new group order.*\n\n> G is a group of order 30 = 2 × 3 × 5.\n>\n> (a) For each prime p ∈ {2, 3, 5}: compute pⁿ, m, and the full list of candidates for n_p.\n> (b) Which Sylow subgroup(s) are forced to be normal by the candidate list alone?\n> (c) Using an element-counting argument if needed, show that G cannot be simple.\n\n*Expected answers:*\n- **(a)** p=2: pⁿ=2, m=15; n_2≡1(mod2), n_2|15 → {1,3,5,15}. p=3: pⁿ=3, m=10; n_3≡1(mod3), n_3|10 → {1,10}. p=5: pⁿ=5, m=6; n_5≡1(mod5), n_5|6 → {1,6}.\n- **(b)** Only constraints: n_3∈{1,10} and n_5∈{1,6}. Neither is forced to 1 by divisibility alone.\n- **(c)** Suppose n_5=6 AND n_3=10. Elements of order 5 from six Sylow 5-subgroups: 6×4=24. Elements of order 3 from ten Sylow 3-subgroups: 10×2=20. Total ≥ 24+20 = 44 > 30. Contradiction. So n_5=1 or n_3=1, giving a proper normal subgroup. G is not simple.\n\n**[P55 — SCORE]**  Award 1 point if all three parts correct; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 4 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.75  →  ⌈0.75 × 5⌉ = 4\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score ≥ 4/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 3/5 → Identify which items failed:**\n  - Q1 wrong → missing a theorem → re-state all three with precise hypotheses.\n  - Q2 wrong → element-count argument gap → walk through: each Sylow 5-subgroup contributes 4 non-identity elements.\n  - Q3 wrong → MC-3 (subgroup order) or MC-2 (divisibility) → TB-R03 or TB-R02.\n  - Q4 wrong → n_p ≡ 1 (mod p) constraint → check 2 ≡ 1 (mod 3)? No.\n  - P76 wrong → identify which part (a/b/c) failed; re-route to matching repair.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.sylow-theorems\nMASTERY_REACHED: true\nUNLOCKS:         []\nNEXT_CONCEPT:    (continue math.abst domain)\nSESSION_CLOSE:   \"You now know the three Sylow theorems: existence, conjugacy, and count\n                  constraints for n_p. You can determine whether n_p is forced to 1 (giving\n                  a normal Sylow subgroup), and you can use element-counting arguments to\n                  rule out simplicity. These are the main tools for classifying small groups.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: SYLOW-SUBGROUP-ALWAYS-NORMAL (MC-1)\n\n**Trigger:** Student claims Sylow p-subgroup is always normal in G.\n\n**Step 1 — State the correct theorem.**\n> A Sylow p-subgroup P is normal in G ↔ n_p = 1 (P is the unique Sylow p-subgroup).\n> This is a biconditional: normal iff unique, NOT \"exists iff normal.\"\n\n**Step 2 — Counterexample.**\n> In S₃ (order 6): three Sylow 2-subgroups: {e,(12)}, {e,(13)}, {e,(23)}.\n> n_2 = 3 ≠ 1. None of them is normal in S₃.\n> (Check: (123)(12)(132) = (23) ≠ (12). So {e,(12)} is not closed under conjugation by (123).)\n\n**Exit:** Return to TA-A02 P49.\n\n---\n\n### TB-R02 · Repair: SYLOW-III-WRONG-DIVISOR (MC-2)\n\n**Trigger:** Student uses n_p | |G| instead of n_p | m.\n\n**Step 1 — Identify the correct m.**\n> |G| = pⁿ × m where gcd(p,m) = 1.\n> m = |G| / pⁿ. This removes the p-part entirely.\n> Sylow III: n_p | m (not n_p | |G|).\n\n**Step 2 — Example showing the difference.**\n> |G|=12=2²·3. For p=2: pⁿ=4, m=3.\n> n_2 | 3 → n_2∈{1,3}. Only 2 options.\n> n_2 | 12 → n_2∈{1,2,3,4,6,12}. 6 options — much weaker, harder to conclude anything.\n\n**Exit:** Return to TA-A03 P49 or TA-A04 P49 (whichever was active).\n\n---\n\n### TB-R03 · Repair: ANY-p-SUBGROUP-IS-SYLOW (MC-3)\n\n**Trigger:** Student calls a subgroup of order p (rather than pⁿ) a Sylow p-subgroup.\n\n**Step 1 — Definition check.**\n> Sylow p-subgroup has order pⁿ = the LARGEST power of p dividing |G|.\n> For |G|=12=2²·3: Sylow 2-subgroups have order 4 (=2²), NOT order 2.\n> A subgroup of order 2 is a p-subgroup but NOT a Sylow 2-subgroup.\n\n**Step 2 — Find pⁿ first.**\n> Factor |G| = pⁿ · m. Then Sylow p-subgroup order = pⁿ.\n> For |G|=12, p=2: 12 = 2² · 3 → Sylow 2-subgroup order = 4.\n\n**Exit:** Return to TA-A04 P49.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"For |G|=20=2²·5: find all candidates for n_5. Is the Sylow 5-subgroup normal?\"\n    Target: n_5≡1 mod 5, n_5|4 → n_5=1. Yes, normal.\n\n  Interval-2 (+3 days):\n    Probe: \"State the three Sylow theorems.\"\n    Target: I: existence. II: conjugacy (all are conjugate). III: n_p≡1(mod p), n_p|m.\n\n  Interval-3 (+1 week):\n    Probe: \"In |G|=12, why can there NOT be exactly 2 Sylow 3-subgroups?\"\n    Target: n_3 must satisfy n_3≡1 mod 3; n_3=2 gives 2-1=1, but 1 must be divisible by 3 — FALSE.\n            So n_3=2 violates the congruence condition. Sylow III eliminates it.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (normality gate) or TA-A04 (divisibility).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.group-action:\n    Used in:   TA-A02 (conjugation action of G on Sylow subgroups; n_p = [G:N_G(P)] from\n               orbit-stabilizer; proof of Sylow II via conjugation orbits),\n               TA-A03 (element-counting argument counts non-identity elements in orbits).\n    Assumed:   Student holds orbit-stabilizer theorem; knows conjugation is a group action;\n               knows normalizer N_G(H) = {g∈G: gHg⁻¹=H}.\n  math.nt.prime-number:\n    Used in:   All TAs (prime factorization of |G|; gcd(p,m)=1; prime power pⁿ).\n    Assumed:   Student can factor integers into prime powers; knows gcd; knows prime p.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The two-constraint system (congruence + divisibility) is the core skill.**\nEvery Sylow III application reduces to: list numbers ≡ 1 (mod p), intersect with divisors of m.\nThis two-step filter is algorithmically simple but students often apply either constraint alone.\nThe TA-A03 gallery builds the \"run the system\" habit across many different group orders.\n\n**2. The element-counting argument is the most powerful simplicity tool.**\nWhen Sylow III gives multiple candidates for n_p, the element-count argument (total elements from\nall Sylow subgroups exceeds |G|) is often decisive. TA-A03 develops this with |G|=56; TA-A05 Q2\nand P76 apply it to |G|=30. Teach it as a systematic tool: count elements of highest-order\np-subgroups first, then check if any room remains for other Sylow subgroups.\n\n**3. MC-1 (always normal) is structural and must be caught early.**\nStudents who take abstract algebra often believe Sylow subgroups are special and therefore normal.\nThe S₃ example (three Sylow 2-subgroups, none normal) is the canonical corrective. Reinforce:\nuniqueness ↔ normality is the biconditional; existence alone guarantees nothing about normality.\n\n**4. The P76 probe (order 30) requires synthesis of all three Sylow theorems.**\nThe standard order-30 non-simplicity proof is a good capstone: it requires applying Sylow III\nthree times, observing that no n_p is immediately forced to 1, and using the element count to\nforce a contradiction. This is a genuine analysis task at bloom=analyze.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.sylow-theorems\n================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 9; 5 TAs used ≤ 9.\n[PASS] V-4   CPA_ENTRY_STAGE = C (Concrete: |G|=6, S₃, specific subgroup lists before theorems).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — n_p=1 ↔ normality; A₄ counterexample).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A04 contrast; TB-R02/R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P41 ✓  TA-A03→P04 ✓  TA-A04→P06 ✓  TA-A05→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  TA-A04→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A05) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A05 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross-links in KG; cross_links = [].\n[PASS] V-17  GR-9: P76 uses Independence mode; probe applies all three Sylow theorems to\n              |G|=30, requiring computation of three n_p candidate lists and an element-count\n              argument — the full analytical sequence at bloom=analyze.\n[PASS] V-18  GR-10: MAMR = 4/5; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.75 × 5⌉ = 4/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (≥4/5 → pass; ≤3/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   All three Sylow theorems stated precisely in Component 1 and Q1.\n             n_p constraint system (congruence + divisibility) applied in every non-gate TA.\n             MC-1: S₃ counterexample (n_2=3, none normal); A₄ counterexample (n_2=3, n_3=4).\n             MC-2: n_p|m vs n_p||G| contrasted explicitly in TA-A04.\n             MC-3: Sylow p-subgroup order = pⁿ, not p; contrasted with general p-subgroup.\n             Element-count argument introduced in TA-A03 and applied in Q2 and P76.\n             P76: full Sylow analysis of |G|=30; non-simplicity proved via element count.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 291,
+        "endLine": 563
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11 four representations: Sylow subgroup definition + n_p constraints\n                 for |G|=6 + P49)\n      → TA-A02 (P41/P64 MC-1 gate: n_p=1 ↔ normality; |G|=12 example shows n_p≠1 + P49)\n      → TA-A03 (P04 pattern: n_p constraint system applied across multiple group orders;\n                 simplicity via n_p analysis + P49)\n      → TA-A04 (P06 contrast: Sylow p-subgroup vs. general p-subgroup; n_p|m vs n_p||G| + P49)\n      → TA-A05 (P91 terminal mastery gate — P76 independence probe)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (n_p=1 ↔ unique ↔ normal; three-statement equivalence; S₃ counterexample)\n  MC-2 → TB-R02 (compute m = |G|/pⁿ first; n_p divides m, not |G|)\n  MC-3 → TB-R03 (Sylow p-subgroup has order pⁿ exactly; general p-subgroups smaller)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 86,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"For |G|=20=2²·5: find all candidates for n_5. Is the Sylow 5-subgroup normal?\"\n    Target: n_5≡1 mod 5, n_5|4 → n_5=1. Yes, normal.\n\n  Interval-2 (+3 days):\n    Probe: \"State the three Sylow theorems.\"\n    Target: I: existence. II: conjugacy (all are conjugate). III: n_p≡1(mod p), n_p|m.\n\n  Interval-3 (+1 week):\n    Probe: \"In |G|=12, why can there NOT be exactly 2 Sylow 3-subgroups?\"\n    Target: n_3 must satisfy n_3≡1 mod 3; n_3=2 gives 2-1=1, but 1 must be divisible by 3 — FALSE.\n            So n_3=2 violates the congruence condition. Sylow III eliminates it.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (normality gate) or TA-A04 (divisibility).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 437,
+        "endLine": 460
+      }
+    },
+    {
+      "assetId": "math.abst.sylow-theorems/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.sylow-theorems",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.group-action:\n    Used in:   TA-A02 (conjugation action of G on Sylow subgroups; n_p = [G:N_G(P)] from\n               orbit-stabilizer; proof of Sylow II via conjugation orbits),\n               TA-A03 (element-counting argument counts non-identity elements in orbits).\n    Assumed:   Student holds orbit-stabilizer theorem; knows conjugation is a group action;\n               knows normalizer N_G(H) = {g∈G: gHg⁻¹=H}.\n  math.nt.prime-number:\n    Used in:   All TAs (prime factorization of |G|; gcd(p,m)=1; prime power pⁿ).\n    Assumed:   Student can factor integers into prime powers; knows gcd; knows prime p.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.sylow-theorems.md",
+        "startLine": 460,
+        "endLine": 481
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

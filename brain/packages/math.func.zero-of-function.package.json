@@ -1,0 +1,685 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.zero-of-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.zero-of-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fdcd55d4103f565ba69ad10b2269fe7c7b5d6e8156eac44b29c14e28c3c3ce27",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.zero-of-function.md": "sha256:58b2356382586e5770e0817dcf1a1706b0faeadaeac297fd2b017b8989708e4d"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 16,
+      "mastery_probe": 1
+    },
+    "ruleCount": 16
+  },
+  "concept": {
+    "conceptId": "math.func.zero-of-function",
+    "name": "Zeros of a Function",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.graph-of-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.zero-of-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.zero-of-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.zero-of-function.md": "sha256:58b2356382586e5770e0817dcf1a1706b0faeadaeac297fd2b017b8989708e4d"
+      },
+      "contentHash": "sha256:9785ec39d856ab8f477b0a10556617fdc9ec6de4c5a4519e6764e23235fd4c00",
+      "ruleCount": 16,
+      "bandCounts": {
+        "3": 16
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.zero-of-function.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.zero-of-function.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.zero-of-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.zero-of-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.zero-of-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.zero-of-function",
+      "title": "Learning Objective",
+      "content": "Given a function f, the student defines a zero as a value x* where f(x*)=0 (equivalently, an x-intercept of the graph), finds zeros algebraically by solving f(x)=0, counts zeros using graphical analysis, distinguishes zeros (x-values) from y-intercepts (the single y-value when x=0), and connects to math.num.root-finding methods for functions that cannot be solved in closed form.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.zero-of-function",
+      "title": "ZEROS-ARE-Y-VALUES",
+      "content": "| MC-1 | ZEROS-ARE-Y-VALUES | Student confuses zeros of f with the y-intercept; says \"the zero is 5\" when the y-intercept f(0)=5 is meant; does not distinguish x-intercepts (zeros) from y-intercept (value at x=0) | Type 3 — language contamination (\"zero\" sounds like \"the value zero\" which is a y-value; the distinction between x-coordinate and y-coordinate is lost) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.zero-of-function",
+      "title": "EVERY-FUNCTION-HAS-A-ZERO",
+      "content": "| MC-2 | EVERY-FUNCTION-HAS-A-ZERO | Student assumes every function crosses the x-axis; does not consider functions with no real zeros (e.g., f(x)=x²+1, f(x)=eˣ) | Type 5 — instruction-induced (early examples always have integer zeros; no-zero cases are introduced later) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.zero-of-function",
+      "title": "HOLE-VS-ZERO",
+      "content": "| MC-3 | HOLE-VS-ZERO | Student treats a removable discontinuity (hole in a rational function) as a zero; does not check that the function must evaluate to zero (not be undefined) at a zero | Type 5 — instruction-induced (both holes and zeros involve x-values where the numerator may vanish; the denominator condition is missed) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "f(x)=x²−1: two real zeros (±1)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"f(x)=x²−1: two real zeros (±1)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "f(x)=x²: one repeated zero (0); graph touches but does not cross x-axis",
+      "content": "{\"id\":\"TA-2\",\"title\":\"f(x)=x²: one repeated zero (0); graph touches but does not cross x-axis\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "f(x)=x²+1: no real zeros (discriminant < 0)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"f(x)=x²+1: no real zeros (discriminant < 0)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "f(x)=x³: one zero (0); crosses x-axis",
+      "content": "{\"id\":\"TA-4\",\"title\":\"f(x)=x³: one zero (0); crosses x-axis\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "CORRECT → \"Zero: x* where f(x*)=0. Found by solving f(x)=0. Geometrically: x-intercepts. Distinct from y-intercept f(0). Not every function has zeros.\" → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Zero: x* where f(x*)=0. Found by solving f(x)=0. Geometrically: x-intercepts. Distinct from y-intercept f(0). Not every function has zeros.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "PARTIAL (solves correctly but confuses zero with y-intercept) → \"For f(x)=x²−4: what is f(0)? That's the y-intercept. What are the solutions to x²−4=0? Those are the zeros.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (solves correctly but confuses zero with y-intercept) → \\\"For f(x)=x²−4: what is f(0)? That's the y-intercept. What are the solutions to x²−4=0? Those are the zeros.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "NO_RESPONSE → \"Where does the graph of f(x)=x²−4 cross the x-axis? Set y=0 in y=x²−4 and solve.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Where does the graph of f(x)=x²−4 cross the x-axis? Set y=0 in y=x²−4 and solve.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "CORRECT → \"Zeros: where f(x*)=0 (not undefined). No zero iff graph never crosses x-axis. Holes in rational functions are not zeros.\" → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Zeros: where f(x*)=0 (not undefined). No zero iff graph never crosses x-axis. Holes in rational functions are not zeros.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "PARTIAL (applies rational root theorem blindly, doesn't check for holes) → \"Before declaring x=1 a zero, check: is f(1) actually equal to 0, or is it undefined?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (applies rational root theorem blindly, doesn't check for holes) → \\\"Before declaring x=1 a zero, check: is f(1) actually equal to 0, or is it undefined?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "INCORRECT → TB-R03 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "NO_RESPONSE → \"For f(x)=(x²−1)/(x−1), what happens when you substitute x=1? Is f(1)=0 or is f(1) undefined?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"For f(x)=(x²−1)/(x−1), what happens when you substitute x=1? Is f(1)=0 or is f(1) undefined?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "CORRECT → \"Zeros of algebraic functions: factor, use quadratic formula, or rational root theorem. For transcendental equations: numerical methods (math.num.root-finding). Always verify that f(x*)=0 not undefined.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"Zeros of algebraic functions: factor, use quadratic formula, or rational root theorem. For transcendental equations: numerical methods (math.num.root-finding). Always verify that f(x*)=0 not undefined.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "PARTIAL (knows factoring, unaware of numerical methods) → \"Can you solve cos(x)=x algebraically? What would you do instead?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL (knows factoring, unaware of numerical methods) → \\\"Can you solve cos(x)=x algebraically? What would you do instead?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.zero-of-function",
+      "title": "NO_RESPONSE → \"For f(x)=x³−2x+1, list the possible rational zeros using ±factors of 1 / ±factors of 1.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"For f(x)=x³−2x+1, list the possible rational zeros using ±factors of 1 / ±factors of 1.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.func.zero-of-function/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.zero-of-function",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Find all zeros of: (a) f(x)=x²−7x+12; (b) g(x)=x³−x; (c) h(x)=(x²−9)/(x+3). State whether each is a true zero or a hole.\n2. Determine how many real zeros each function has without finding them: (a) f(x)=x⁴+2x²+1; (b) g(x)=x⁵−3; (c) h(x)=eˣ−1.\n3. The function f(x)=x³−2 has one real zero. Find it exactly. Then explain why x=cos(x) cannot be solved exactly and describe how you would locate its zero numerically.\n4. A student says: \"f(x)=x²−4 has zeros at x=±2 and y-intercept −4. The zero at x=2 is 2 units above the y-intercept.\" Identify and correct the conceptual error.\n\n**P55 — Reflect & Consolidate:** \"Zero = x-value where f(x*)=0 = x-intercept. Distinct from y-intercept f(0). Holes are not zeros. Some functions have no real zeros. For non-algebraic equations: numerical root-finding (math.num.root-finding).\"\n\n**P76 — Transfer Probe (Cross-link mode: math.num.root-finding):**\nThe bisection method locates a zero of a continuous function f on [a,b] when f(a) and f(b) have opposite signs. (a) Apply bisection to f(x)=x³−2 on [1,2] for 3 iterations, halving the interval each time. (b) Show that after n iterations, the error in the zero estimate is at most (b−a)/2ⁿ. (c) How many iterations are needed to estimate √[3]{2} to within 0.01? (d) Explain why bisection is guaranteed to work (use the Intermediate Value Theorem).\n\n**P55 — Reflect & Consolidate:** \"Bisection exploits sign-changes (IVT guarantees a zero between sign-change endpoints). Error halves each iteration: n iterations gives error ≤(b−a)/2ⁿ. This is a guaranteed but slow convergence. Newton's method converges faster but requires f'(x).\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=(x³−8)/(x²−4). (a) Find all zeros of f (where f is defined AND equals zero). (b) Find all holes in the graph. (c) Find the y-intercept. (d) How many times does the graph cross the x-axis? Sketch the approximate shape near the zeros and holes.\"\n\n**P55 — Reflect & Consolidate:** \"For rational functions: factor fully. Zeros = x where numerator=0 and denominator≠0. Holes = x where both numerator=0 and denominator=0 (cancel the common factor). Y-intercept = f(0) if 0 is in the domain.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.zero-of-function complete\n- Score 3/5 → REVIEW holes vs. zeros in rational functions; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.graph-of-function; reassign\n\n**P78 — Completion:** Zeros of functions certified. Student defines zeros as x-intercepts, finds them algebraically, distinguishes them from y-intercepts and holes, and knows when numerical methods (math.num.root-finding) are required.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.zero-of-function.md",
+        "startLine": 117,
+        "endLine": 144
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

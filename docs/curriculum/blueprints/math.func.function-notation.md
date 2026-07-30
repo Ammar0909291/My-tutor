@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.function-notation |
-| Title | Function Notation |
+| name | Function Notation |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -97,7 +97,7 @@ Step 1 — "In algebra, 2x means 2 times x. But f(x) is different notation entir
 **TB-R02 (MC-2 f(a+b)=f(a)+f(b)):**
 Step 1 — "This equality is called LINEARITY. It holds for functions f(x)=cx (lines through origin). For any other function, plugging in a+b is different from evaluating at a and b separately." Step 2 — Visual: the graph of f(x)=x² is curved. On a curve, f(a+b)≠f(a)+f(b) because the curve doesn't 'add up' the way a line does. Step 3 — "Always expand f(a+b) by substituting a+b for x in the full rule. Never split across the addition without checking linearity first."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. For f(x)=x²−2x+3: compute f(0), f(−2), f(a), f(x+1), and f(x+h)−f(x).

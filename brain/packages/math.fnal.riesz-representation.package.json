@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.riesz-representation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.riesz-representation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:614b36b451deb5dcd61ca35ff7199639cc10976bf12d3ac5644fec1d6d9ddf99",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.riesz-representation.md": "sha256:67f02afd0a7586c702bc38fcc1f0ae6493a9d1a5ec9168a9d154dfe4d6635bae"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.riesz-representation",
+    "name": "Riesz Representation Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.fnal.hilbert-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.riesz-representation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.riesz-representation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.riesz-representation.md": "sha256:67f02afd0a7586c702bc38fcc1f0ae6493a9d1a5ec9168a9d154dfe4d6635bae"
+      },
+      "contentHash": "sha256:ef88c18fb62b62101fbb397e25ffe82096f334ee9d1188ddc531139a306a6513",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.riesz-representation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.riesz-representation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.riesz-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.riesz-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.riesz-representation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.riesz-representation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.riesz-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.riesz-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.riesz-representation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.riesz-representation.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.riesz-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.riesz-representation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.riesz-representation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.riesz-representation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.riesz-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.riesz-representation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.riesz-representation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Riesz Representation Theorem** — every bounded linear functional $f:H\\to\\mathbb{F}$ on a Hilbert space is of the form $f(x)=\\langle x,y\\rangle$ for a **unique** $y\\in H$ with $\\|f\\|=\\|y\\|$ — and correctly identify that $y$ depends on $f$ and is uniquely determined by it.\n- LO2: Compute the **representing vector** $y$ for specific bounded linear functionals on concrete Hilbert spaces (e.g., evaluation functionals on $L^2$, projection-type functionals on $\\ell^2$), and verify the norm identity $\\|f\\|=\\|y\\|$.\n- LO3: State and interpret the **self-duality** of Hilbert spaces — the map $\\Phi:H\\to H^*$, $y\\mapsto f_y$ where $f_y(x)=\\langle x,y\\rangle$, is a conjugate-linear isometric isomorphism — and correctly distinguish Hilbert spaces (isometrically isomorphic to their own dual via inner product) from general Banach spaces (where $X^*$ need not equal $X$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "REPRESENTING-VECTOR-NOT-UNIQUE",
+      "content": "| MC-1 | REPRESENTING-VECTOR-NOT-UNIQUE | Believing the representing vector $y$ in $f(x)=\\langle x,y\\rangle$ might not be unique — multiple $y$'s could represent the same functional — missing that positive-definiteness of the inner product forces uniqueness | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "SOME-BOUNDED-FUNCTIONALS-NOT-INNER-PRODUCT-FORM",
+      "content": "| MC-2 | SOME-BOUNDED-FUNCTIONALS-NOT-INNER-PRODUCT-FORM | Believing there exist bounded linear functionals on a Hilbert space that cannot be written as $\\langle x,y\\rangle$ for any $y\\in H$, missing that the Riesz theorem is a complete characterization | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "ALL-BANACH-SPACES-SELF-DUAL",
+      "content": "| MC-3 | ALL-BANACH-SPACES-SELF-DUAL | Treating self-duality ($H\\cong H^*$) as a general Banach-space property rather than a specifically Hilbert-structure consequence enabled by the inner product | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "The Theorem and the Representing Vector (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Theorem and the Representing Vector (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "Computing the Representing Vector in Concrete Spaces (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Computing the Representing Vector in Concrete Spaces (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "Self-Duality and Its Limits (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Self-Duality and Its Limits (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the Riesz Representation Theorem with all hypotheses and the uniqueness claim. What role does the completeness of $H$ play?\n  2. For $H=\\ell^2$ and $f((x_n))=x_1+x_2/2+x_3/3+\\cdots$ (if this is bounded — first determine whether it is), find the representing vector $y$ and compute $\\|f\\|$.\n  3. Verify the norm identity $\\|f\\|=\\|y\\|$ for your answer to Problem 2.\n  4. Explain, using the proof's key step (orthogonal complement of $\\ker(f)$ is one-dimensional), why the representing vector exists and is unique.\n- **P76 (Transfer Probe, mode = independence)**: \"In quantum mechanics, observables are self-adjoint operators on a Hilbert space $H$ (the state space of the system). The 'expectation value' of an observable $A$ in a state $\\psi$ is $\\langle\\psi,A\\psi\\rangle$ — an inner product evaluation. (a) Using the Riesz theorem, explain why any linear functional of the form 'compute a measurement outcome given a state $\\psi$' can be represented as an inner product $\\langle\\psi,y\\rangle$ for a unique $y\\in H$ — giving a concrete interpretation of why states and measurement operators both live in $H$ and its dual, which the Riesz theorem shows are the same. (b) In a general Banach space (no inner product), states and observables would NOT be elements of the same space (the state space and its dual would differ). Explain, using this lesson's Example 3, why Hilbert space is the natural setting for quantum mechanics: it is the unique setting where states and bounded observables are interchangeable via the same self-dual structure.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.hilbert-space` (Hilbert spaces: complete inner product spaces; the inner product $\\langle\\cdot,\\cdot\\rangle$, the Cauchy-Schwarz inequality, orthogonality, and the orthogonal projection theorem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.riesz-representation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.riesz-representation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.hilbert-space` (inner product spaces, Cauchy-Schwarz inequality, orthogonal projection theorem — all used in the Riesz theorem's proof and statement).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.riesz-representation.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

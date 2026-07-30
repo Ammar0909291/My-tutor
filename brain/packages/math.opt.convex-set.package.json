@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.convex-set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.convex-set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:34186b0ba925b207296c645bbee8431216a8e1badb83c7e80cd7268261e31804",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.convex-set.md": "sha256:566f3f690cbc825df4dcb8aa89fe81fa128e26194a9bbd150092960bee934d3c"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.opt.convex-set",
+    "name": "Convex Set",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.vector"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.convex-set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.convex-set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.convex-set.md": "sha256:566f3f690cbc825df4dcb8aa89fe81fa128e26194a9bbd150092960bee934d3c"
+      },
+      "contentHash": "sha256:1aa05121f2566a7d9c95128854f62c2a4673682ad6d19d297e96a8c9ca8548d1",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-set.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-set.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-set\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.convex-set/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.convex-set",
+      "title": "Learning Objective",
+      "content": "Given a subset S of ℝⁿ, the student applies the line-segment criterion (for all x,y∈S and t∈[0,1], tx+(1−t)y∈S) to classify S as convex or non-convex, identifies canonical convex sets (balls, half-spaces, hyperplanes, polyhedra, cones), explains why convexity is closed under intersection and affine maps, and distinguishes convex from non-convex regions by counterexample.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-set",
+      "title": "CONVEX-MEANS-SMOOTH",
+      "content": "| MC-1 | CONVEX-MEANS-SMOOTH | Student conflates convexity with smoothness of boundary; believes a square (with corners) is not convex | Type 2 — perceptual intuition (smooth curves look \"more convex\") |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-set",
+      "title": "CONVEX-UNION-CLOSED",
+      "content": "| MC-2 | CONVEX-UNION-CLOSED | Student believes the union of two convex sets is convex; confuses with intersection rule | Type 1 — overgeneralization (closure feels symmetric for both operations) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-set",
+      "title": "MIDPOINT-SUFFICIENT",
+      "content": "| MC-3 | MIDPOINT-SUFFICIENT | Student checks only the midpoint t=1/2 rather than all t∈[0,1]; concludes the star-shaped set is convex because all midpoints are inside | Type 3 — language contamination (\"middle\" collapses t to 1/2) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "CORRECT → \"Convexity is a line-segment property, not a smoothness property. A square's corners don't violate it.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Convexity is a line-segment property, not a smoothness property. A square's corners don't violate it.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "PARTIAL (knows definition, misclassifies square) → \"Take two corners of the square. Does the segment between them stay in [0,1]²?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows definition, misclassifies square) → \\\"Take two corners of the square. Does the segment between them stay in [0,1]²?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "NO_RESPONSE → \"Choose x=(0,0) and y=(1,1) in the unit disk. Is (0.5,0.5) in the disk?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Choose x=(0,0) and y=(1,1) in the unit disk. Is (0.5,0.5) in the disk?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "CORRECT → \"Union is NOT closed; intersection IS. Affine maps preserve convexity.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Union is NOT closed; intersection IS. Affine maps preserve convexity.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "PARTIAL (knows intersection, uncertain about union) → \"Draw two disjoint line segments on ℝ. Is their union convex?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows intersection, uncertain about union) → \\\"Draw two disjoint line segments on ℝ. Is their union convex?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "NO_RESPONSE → \"Is {x∈ℝ: 0≤x≤1} convex? Is {x∈ℝ: 2≤x≤3} convex? Is their union convex?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Is {x∈ℝ: 0≤x≤1} convex? Is {x∈ℝ: 2≤x≤3} convex? Is their union convex?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "CORRECT → \"The boundary alone (sphere, hyperplane) is typically NOT convex; filled sets (ball, half-space) are.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"The boundary alone (sphere, hyperplane) is typically NOT convex; filled sets (ball, half-space) are.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "PARTIAL → \"Apply the line-segment test between two opposite points on the unit circle.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL → \\\"Apply the line-segment test between two opposite points on the unit circle.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-set",
+      "title": "NO_RESPONSE → \"Is (0,0) on the unit circle? Is (1,0) on the unit circle? Is (0.5,0) on the unit circle?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Is (0,0) on the unit circle? Is (1,0) on the unit circle? Is (0.5,0) on the unit circle?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.opt.convex-set/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.convex-set",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Prove that every half-space H={x∈ℝⁿ: aᵀx≤b} is a convex set.\n2. Let S={x∈ℝ²: x₁²+x₂²≤4} and T={x∈ℝ²: x₁≥0}. Is S∩T convex? Is S∪T convex? Justify both.\n3. Is the set {(x,y)∈ℝ²: xy≥1, x>0} convex? Prove or give a counterexample.\n4. Show that the image of a convex set under an affine map f(x)=Ax+b is convex.\n\n**P55 — Reflect & Consolidate:** \"Convexity is the line-segment condition on all pairs of points. It is closed under intersection and affine images, but not union.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe epigraph of a function f: ℝⁿ→ℝ is epi(f) = {(x,t)∈ℝⁿ⁺¹: f(x)≤t}. Show that f is a convex function (f(tx+(1−t)y)≤tf(x)+(1−t)f(y)) if and only if epi(f) is a convex set in ℝⁿ⁺¹. (Establish both directions.)\n\n**P55 — Reflect & Consolidate:** \"The epigraph connection shows convex functions and convex sets are two faces of one concept: this is why convex analysis treats them uniformly.\"\n\n**P75 — Mastery Assessment:**\n\"(a) Prove that any convex polytope P={x: Ax≤b} is convex. (b) Is the set {x∈ℝ²: |x₁|+|x₂|≤1} (the ℓ₁ unit ball) convex? Prove it. (c) Give an example of a non-convex set whose every pair of points has a convex hull contained in the set (so midpoints are always in the set, but the set is not convex). Why doesn't this contradict the definition?\"\n\n**P55 — Reflect & Consolidate:** \"Part (c) illustrates why the full condition ∀t∈[0,1] is needed — not just t=1/2.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED; advance to math.opt.convex-optimization\n- Score 4/5 → REVIEW line-segment condition and intersection rule; replay A01–A02\n- Score ≤ 3/5 → PREREQUISITE GAP in math.linalg.vector; reassign before retry\n\n**P78 — Completion:** Convex set certified. Student can apply and prove the line-segment criterion and identify convexity-preserving operations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-set.md",
+        "startLine": 116,
+        "endLine": 143
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

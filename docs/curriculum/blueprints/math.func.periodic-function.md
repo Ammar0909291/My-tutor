@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.periodic-function |
-| Title | Periodic Functions |
+| name | Periodic Functions |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | understand |
@@ -125,7 +125,7 @@ Step 1 — "A period is a DISTANCE — measured from any point on the graph to t
 **TB-R03 (MC-3 ALMOST-PERIODIC-IS-PERIODIC):**
 Step 1 — "Periodicity is an EXACT algebraic condition: f(x+T)=f(x) must hold for EVERY x in the domain, not just 'most' x or 'visually similar' x." Step 2 — f(x)=e⁻ˣsin(x). At x=0: f(0)=0. At x=2π: f(2π)=e⁻²π·sin(2π)=0. Looks the same? But at x=1: f(1)=e⁻¹sin(1)≈0.309. At x=1+2π: f(1+2π)=e⁻⁽¹⁺²π⁾sin(1)≈e⁻⁷·⁲⁸·0.841≈0.00061. Not equal. NOT periodic. Step 3 — "Damping (multiplying by e⁻ˣ, or any decaying envelope) always destroys periodicity. Check algebraically by substituting x+T and simplifying."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. For each function, state whether it is periodic and if so find the fundamental period: (a) f(x)=cos(5x); (b) g(x)=tan(x/2); (c) h(x)=|sin(x)|; (d) k(x)=sin(x)·cos(x).

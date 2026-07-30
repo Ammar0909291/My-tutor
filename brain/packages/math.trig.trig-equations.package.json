@@ -1,0 +1,387 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.trig-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.trig-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0a198ce18e4888906d8a8b9ff88655f26fcedef339228c517bcb2ec90fc85f3a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.trig-equations.md": "sha256:ffe6762af48919f2fca5726f1e32ac63ede0a37f612fc30086795dffe0bc9dd5"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 4,
+      "teaching_action_meta": 5,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 5
+  },
+  "concept": {
+    "conceptId": "math.trig.trig-equations",
+    "name": "Trigonometric Equations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.trig.trig-identities",
+      "math.trig.inverse-trig"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.trig-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.trig-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.trig-equations.md": "sha256:ffe6762af48919f2fca5726f1e32ac63ede0a37f612fc30086795dffe0bc9dd5"
+      },
+      "contentHash": "sha256:0dea559c43ad754cd7df0069848e3bae3ea727eae6d5983a644d9210fa3ded58",
+      "ruleCount": 5,
+      "bandCounts": {
+        "3": 5
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-equations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-equations.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-equations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-equations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-equations.md#TA-A02 (addresses MC-2, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-equations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-equations.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-equations.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-equations.md#TA-A04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-equations\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.trig-equations.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.trig-equations.md#TA-A05 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.trig-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.trig-equations\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.trig-equations/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.trig-equations",
+      "title": "Trigonometric Equations — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.trig-identities**: Pythagorean identities, reciprocal identities, and simplification strategies needed to reduce complex equations\n- **math.trig.inverse-trig**: arcsin/arccos/arctan to find the principal value; domain and range of each inverse function\n\n### Target Knowledge State\nStudent isolates the trig function, finds the principal value using an inverse function, identifies all solutions in the given interval using ASTC and period symmetry, and writes the general solution with correct period multiples. Student handles linear, quadratic, and composite-argument (e.g., sin(2θ)) equations. Student checks solutions for extraneous roots when squaring or applying identities.\n\n### Conceptual Obstacles\n1. Stopping at the principal (first) solution and missing the second quadrant solution\n2. Adding 2kπ as the period multiple for functions (tan, sin(2θ)) whose effective period is not 2π\n3. Squaring both sides to clear a trig expression without checking extraneous solutions\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-equations",
+      "title": "ONLY-PRINCIPAL-VALUE",
+      "content": "| MC-1 | ONLY-PRINCIPAL-VALUE | Student reports sin θ = 1/2 → θ = π/6 only, missing the π − π/6 = 5π/6 solution | Any linear trig equation in [0, 2π) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-equations",
+      "title": "WRONG-PERIOD-MULTIPLE",
+      "content": "| MC-2 | WRONG-PERIOD-MULTIPLE | Student adds 2kπ for tan equations or sin(2θ) where the effective period is π | tan θ = k; sin(2θ) = k style problems |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-equations",
+      "title": "EXTRANEOUS-UNCHECKED",
+      "content": "| MC-3 | EXTRANEOUS-UNCHECKED | Student squares both sides (e.g., sec θ = 1 − tan θ) without substituting solutions back to verify | Equations requiring squaring or cross-multiplication |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "math.trig.trig-equations",
+      "title": "INTERVAL-OVERSHOOT",
+      "content": "| MC-4 | INTERVAL-OVERSHOOT | Student finds solutions in [0, 4π) when the given interval is [0, 2π); includes extra pairs from the doubled range | Composite-argument problems like sin(2θ) = k |",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-equations",
+      "title": "The Four-Step Algorithm for Linear Trig Equations",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Four-Step Algorithm for Linear Trig Equations\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 67,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-equations",
+      "title": "Composite-Argument and Non-Standard-Period Equations",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Composite-Argument and Non-Standard-Period Equations\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-4\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 120,
+        "endLine": 162
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-equations",
+      "title": "Positive vs Negative Values: Quadrant Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Positive vs Negative Values: Quadrant Contrast\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 162,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-equations",
+      "title": "Quadratic Trigonometric Equations",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Quadratic Trigonometric Equations\",\"primitives\":[\"P11\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 205,
+        "endLine": 274
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.trig-equations",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 274,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.trig-equations",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A05 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Solve 2 cos²θ − cos θ = 0 for θ ∈ [0, 2π).\n\n**Problem 2.** Solve sin(2θ) = √3/2 for θ ∈ [0, 2π).\n\n**Problem 3.** Solve 2 sin²θ + 3 sin θ + 1 = 0 for θ ∈ [0, 2π).\n\n**Problem 4.** Solve tan θ = √3 for the general solution (all real θ).\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. cos θ(2 cos θ − 1) = 0; cos θ = 0 → π/2, 3π/2; cos θ = 1/2 → π/3, 5π/3. Four solutions: π/3, π/2, 3π/2, 5π/3. ✓\n\n2. 2θ ∈ [0, 4π); sin(2θ) = √3/2; reference π/3; Q1: 2θ = π/3, 7π/3; Q2: 2θ = 2π/3, 8π/3; divide by 2: θ = π/6, π/3, 7π/6, 4π/3. ✓\n\n3. (2 sin θ + 1)(sin θ + 1) = 0; sin θ = −1/2 → 7π/6, 11π/6; sin θ = −1 → 3π/2. Three solutions: 7π/6, 3π/2, 11π/6. ✓\n\n4. tan θ = √3; reference π/3; period π; general solution: θ = π/3 + kπ, k ∈ ℤ. ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* A city's average daily temperature is modeled by T(t) = 12 + 8 sin(2πt/365 − π/2) degrees Celsius, where t is the day of the year (t = 1 is January 1).\n\n*(a)* On which days is T(t) = 16 °C? (Find all solutions in [1, 365].)\n\n*(b)* Explain why there are two days, and which one is in spring vs autumn.\n\n*Expected answer:*\n\n*(a)* 12 + 8 sin(2πt/365 − π/2) = 16 → sin(2πt/365 − π/2) = 1/2.\n\nLet u = 2πt/365 − π/2; u ∈ [−π/2, 3π/2) for t ∈ [1, 365].\n\nsin u = 1/2 → reference π/6; sin positive in Q1 and Q2.\n\nu = π/6 → 2πt/365 − π/2 = π/6 → 2πt/365 = 2π/3 → t = 365/3 ≈ 122 (May 2).\n\nu = 5π/6 → 2πt/365 − π/2 = 5π/6 → 2πt/365 = 4π/3 → t = 2(365)/3 ≈ 243 (August 31).\n\n*(b)* The sinusoidal model crosses 16 °C twice: once on the way up (spring, ≈ day 122) and once on the way down (late summer/early autumn, ≈ day 243).\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (both dates correct with correct method); 0.5 if setup correct but arithmetic error in one date.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| ≥ 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed item; missing Q2 solution → B01; wrong period → B02; extraneous unchecked → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; rebuild four-step algorithm with a simple linear equation; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.trig-equations` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** Advanced trig applications; differential equations modelling sinusoidal phenomena.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 277,
+        "endLine": 381
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.trig-equations",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — algebraic equation in a trig function.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Four-step algorithm; derive all solutions on the unit circle for a linear equation; general solution notation\n2. **A02 P04 PATTERN INDUCTION** — Gallery of linear and composite-argument equations; handle sin(2θ), cos(θ/2), tan(θ); period-adjusted solution sets\n3. **A03 P06 CONTRAST PAIR** — Positive vs negative trig value: sin θ = 1/2 (Q1+Q2) vs sin θ = −1/2 (Q3+Q4); identical method, different quadrants\n4. **A04 P11 REPRESENTATION SHIFT** — Quadratic trig equations: factor or substitute u = sin θ; split into two linear equations; re-verify domain restrictions\n5. **A05 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 58,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.trig-equations",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Solve 2 sin θ − 1 = 0 for θ ∈ [0, 2π). State both solutions. |\n| R2 | 3 days | Solve cos(2θ) = −1/2 for θ ∈ [0, 2π). How many solutions? |\n| R3 | 7 days | Solve 2 sin²θ − sin θ = 0 for θ ∈ [0, 2π) by factoring. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 431,
+        "endLine": 441
+      }
+    },
+    {
+      "assetId": "math.trig.trig-equations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.trig-equations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | Advanced sinusoidal modeling applications |\n| Requires (Tier-1) | math.trig.trig-identities, math.trig.inverse-trig |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent temperature-modeling problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.trig-equations.md",
+        "startLine": 441,
+        "endLine": 455
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

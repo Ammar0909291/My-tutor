@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.zero-of-function |
-| Title | Zeros of a Function |
+| name | Zeros of a Function |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | understand |
@@ -114,7 +114,7 @@ Step 1 — "Graph f(x)=x²+1: parabola with vertex at (0,1). Never touches the x
 **TB-R03 (MC-3 HOLE-VS-ZERO):**
 Step 1 — "A zero of f requires TWO things: (1) x* is in the domain of f, AND (2) f(x*)=0. If the denominator is 0 at x*, then x* is NOT in the domain — it is a hole or vertical asymptote, not a zero." Step 2 — (x²−1)/(x−1)=(x+1)(x−1)/(x−1)=x+1 for x≠1. At x=1: hole (the function is undefined). At x=−1: f(−1)=0/(−2)=0. Zero at x=−1. Step 3 — "Factor numerator and denominator separately. Zeros of numerator NOT also zeros of denominator = zeros of the function. Zeros of both numerator and denominator = holes."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Find all zeros of: (a) f(x)=x²−7x+12; (b) g(x)=x³−x; (c) h(x)=(x²−9)/(x+3). State whether each is a true zero or a hole.

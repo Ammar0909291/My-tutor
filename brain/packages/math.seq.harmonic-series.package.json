@@ -1,0 +1,333 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.harmonic-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.harmonic-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ffd658cdfb4821e5ebd04a3ea5284eae3507982d3b21ea1f4bd7059fcd9eece2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.harmonic-series.md": "sha256:0eee41923e786bae0edbb269b8c34dc124cc2961ec0015334abf810f81cd9438"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.harmonic-series",
+    "name": "The Harmonic Series",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.harmonic-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.harmonic-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.harmonic-series.md": "sha256:0eee41923e786bae0edbb269b8c34dc124cc2961ec0015334abf810f81cd9438"
+      },
+      "contentHash": "sha256:c9278ff7e4fd15dfa0cda9fd9ba89522ed82c5c80e941b2f31dc30f4f49cb294",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.harmonic-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.harmonic-series.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.harmonic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.harmonic-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.harmonic-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.harmonic-series.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.harmonic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.harmonic-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.harmonic-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.harmonic-series.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.harmonic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.harmonic-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.harmonic-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.harmonic-series.md#TA-A04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.harmonic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.harmonic-series\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.harmonic-series/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "The Harmonic Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.series-convergence**: Σaₙ converges iff partial sums {Sₙ} converge; Divergence Test: aₙ↛0 → diverges; aₙ→0 is necessary but NOT sufficient; p-series Σ1/nᵖ converges iff p>1\n\n### Target Knowledge State\nStudent proves Σ1/n diverges via Oresme's grouping argument (S_{2^k} > 1 + k/2 → ∞); understands why the Divergence Test is inconclusive (1/n→0 satisfies the necessary condition, not the sufficient); explains that partial sums Hₙ ≈ ln n + γ grow without bound at logarithmic speed; articulates why p=1 is the exact boundary of p-series convergence; uses Hₙ ≈ ln n + 0.5772 to estimate partial sums.\n\n### Conceptual Obstacles\n1. Applying the Divergence Test backwards — aₙ→0 does not imply convergence; the test is one-directional\n2. Believing \"grows slowly\" means \"eventually converges\" — logarithmic growth is still unbounded growth\n3. Confusing the term 1/n (→0) with the partial sum Hₙ (→∞ like ln n)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "HARMONIC-CONVERGES-BECAUSE-TERMS-VANISH",
+      "content": "| MC-1 | HARMONIC-CONVERGES-BECAUSE-TERMS-VANISH | Student reasons \"1/n→0, so Σ1/n converges,\" applying the Divergence Test in the invalid reverse direction; confuses aₙ→0 (necessary for convergence) with aₙ→0 (sufficient for convergence) | Any problem asking WHY Σ1/n diverges; comparison with geometric series where both aₙ→0 and series converges |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "HARMONIC-CONVERGES-SLOWLY-TO-FINITE-LIMIT",
+      "content": "| MC-2 | HARMONIC-CONVERGES-SLOWLY-TO-FINITE-LIMIT | Student observes that Hₙ grows very slowly and concludes it must eventually stabilise; does not grasp that logarithmic divergence is still divergence | Partial-sum table or estimation problems showing Hₙ growing sluggishly |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "PARTIAL-SUM-GROWS-LIKE-TERM",
+      "content": "| MC-3 | PARTIAL-SUM-GROWS-LIKE-TERM | Student confuses the n-th term 1/n (→0) with the partial sum Hₙ (∼ln n); estimates Hₙ ≈ 1/n or expects partial sums to shrink as n increases | Any problem asking to estimate or compute Hₙ |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "Oresme's Proof: Why Σ1/n Diverges",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Oresme's Proof: Why Σ1/n Diverges\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 64,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "How Hₙ Grows: The Euler–Mascheroni Constant",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"How Hₙ Grows: The Euler–Mascheroni Constant\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 127,
+        "endLine": 184
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "p=1 Is the Exact Watershed",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"p=1 Is the Exact Watershed\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 184,
+        "endLine": 241
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 241,
+        "endLine": 453
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Complete the grouping proof: show that S_{2^k} > 1 + k/2 for all integers k ≥ 1 by writing out the block structure and showing each block contributes ≥ 1/2.\n\n**Problem 2.** Σ1/n^{1.001} converges but Σ1/n diverges, even though both have terms tending to 0. Using the block argument, explain precisely why the exponent difference matters.\n\n**Problem 3.** Using Hₙ ≈ ln n + 0.5772: (a) estimate H_{e^{10}} (use ln(e^{10}) = 10); (b) estimate the smallest n for which Hₙ > 5.\n\n**Problem 4.** A student argues: \"Σ(−1)ⁿ/n converges by the Alternating Series Test. Its terms have the same magnitude as 1/n. Therefore Σ1/n also converges — its terms are no larger.\" Identify all errors.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Block k consists of terms 1/(2^{k−1}+1) + ··· + 1/2^k — exactly 2^{k−1} terms, each ≥ 1/2^k. Block sum ≥ 2^{k−1} × 1/2^k = 1/2. Therefore S_{2^k} = 1 + Σ_{j=1}^k (block j) > 1 + k × (1/2) = 1 + k/2. ✓\n\n2. At p=1: block k has maximum term 1/2^k and 2^{k−1} terms → block sum ≥ 2^{k−1}/2^k = 1/2 (constant, never shrinks). At p=1.001: maximum term 1/2^{k·1.001}, block sum ≤ 2^{k−1}/2^{k·1.001} = (1/2)·(1/2^{0.001k}) → 0 geometrically. The blocks shrink to 0 for p>1; they do not shrink for p=1. This is the exact mechanism behind the watershed. ✓\n\n3. (a) H_{e^{10}} ≈ ln(e^{10}) + 0.577 = 10 + 0.577 ≈ **10.577**. (b) Hₙ > 5 → ln n > 5 − 0.577 = 4.423 → n > e^{4.423} ≈ **83**. So approximately n = 83 terms. ✓\n\n4. Errors: (i) The inference \"Σ(−1)ⁿ/n converges → Σ1/n converges\" is invalid — a conditionally convergent series converges by sign-cancellation, not by magnitude. Taking absolute values can produce divergence (MC-2 from absolute convergence). (ii) \"Its terms are no larger\": |1/n| = |(−1)ⁿ/n| exactly — the terms are the same magnitude, so the comparison proves nothing in either direction. (iii) The correct conclusion: Σ1/n diverges by Oresme's proof; the AST confirms only that the signed series converges, which is a separate fact. ✓ (Full credit for identifying at least 2 errors.)\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Determine all p for which Σₙ₌₁^∞ 1/nᵖ converges. Use the harmonic series as a reference case.\n\n*(a)* State the p-series convergence criterion.\n\n*(b)* Explain, using the grouping argument, why p=1 is the exact boundary and not p=0.99 or p=1.01.\n\n*(c)* How does the harmonic series fit into this picture as the p=1 case?\n\n*Expected answer:*\n\n*(a)* Σ1/nᵖ converges iff p > 1.\n\n*(b)* At p=1 (harmonic): every block contributes ≥ 1/2 → S_{2^k} → ∞. At p=1+ε: block sum ≤ (1/2)·(2^{−ε})^k → geometric series → converges. At p=1−ε: block sum ≥ (1/2)·(2^{ε})^k → grows → diverges faster. The exact threshold is where blocks stop shrinking: precisely p=1.\n\n*(c)* The harmonic series is the canonical p=1 case — the unique p-series at the exact convergence boundary. It diverges, but so slowly (∼ ln n) that in practice the divergence is hard to observe. It establishes that aₙ→0 alone (no matter how fast) is insufficient for convergence.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (all three parts addressed); 0.5 if criterion stated correctly but boundary reasoning absent or imprecise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items: grouping proof → B01; logarithmic growth confusion → B02; term/partial-sum confusion → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; redo grouping proof step by step; confirm Divergence Test limitation; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.harmonic-series` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** Comparison-test benchmarks (harmonic as canonical divergent reference); logarithmic-denominator series Σ1/(n ln n); absolute vs conditional convergence of the alternating harmonic.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 244,
+        "endLine": 344
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — advanced learner fluent with partial sums and convergence tests.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Shift from individual terms (1/n→0) to grouped blocks (each ≥ 1/2); Oresme's proof; why the Divergence Test is silent here\n2. **A02 P04 PATTERN INDUCTION** — Partial sums Hₙ ≈ ln n + γ; logarithmic growth; estimation with the Euler–Mascheroni approximation\n3. **A03 P06 CONTRAST PAIR** — Harmonic (p=1, diverges) vs Σ1/n^{1+ε} (p>1, converges): p=1 as exact watershed\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Explain in one paragraph why 1/n→0 does not imply Σ1/n converges, and state the key step of the grouping proof. |\n| R2 | 3 days | Estimate H_{e^{20}} using Hₙ ≈ ln n + 0.5772. (Answer: H_{e^{20}} ≈ 20.577.) |\n| R3 | 7 days | For what values of p does Σ1/(n^p · ln n) converge? (Hint: integral test — for p>1 the integral ∫x^{−p}(ln x)^{−1}dx converges; for p=1 let u=ln x → ∫1/u du = ln(ln x)→∞ → diverges; p<1 also diverges by comparison with Σ1/n^p.) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 394,
+        "endLine": 404
+      }
+    },
+    {
+      "assetId": "math.seq.harmonic-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.harmonic-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.seq.comparison-test (harmonic as canonical divergent benchmark), math.seq.absolute-convergence (alternating harmonic as canonical conditional-convergence example) |\n| Requires (Tier-1) | math.seq.series-convergence |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent p-series problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.harmonic-series.md",
+        "startLine": 404,
+        "endLine": 418
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,685 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.transformations-functions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.transformations-functions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6e0eeb3197f3d7d036025daacf728359ade9f5bbb152cffd39f7193c664d2644",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.transformations-functions.md": "sha256:1ffd8e2442eb259d2368e498e6c4d4db6f29f4e2550f6b29f3dada6248c42b81"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 16,
+      "mastery_probe": 1
+    },
+    "ruleCount": 16
+  },
+  "concept": {
+    "conceptId": "math.func.transformations-functions",
+    "name": "Transformations of Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.func.graph-of-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.transformations-functions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.transformations-functions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.transformations-functions.md": "sha256:1ffd8e2442eb259d2368e498e6c4d4db6f29f4e2550f6b29f3dada6248c42b81"
+      },
+      "contentHash": "sha256:55c71215e17a21c5f6460e8f67c447c82d120d70f2f2245101b8f2b837fdba13",
+      "ruleCount": 16,
+      "bandCounts": {
+        "3": 16
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.transformations-functions.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.transformations-functions.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.transformations-functions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.transformations-functions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.transformations-functions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.transformations-functions",
+      "title": "Learning Objective",
+      "content": "Given a base function f(x) and a transformed form g(x)=af(bx−h)+k, the student identifies each parameter's geometric effect (a: vertical stretch/reflect; b: horizontal stretch/compress; h: horizontal shift; k: vertical shift), applies transformations in the correct order to graph g from the graph of f, writes g(x) given a description of transformations, and inverts the process — reading transformation parameters from a given graph.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.transformations-functions",
+      "title": "HORIZONTAL-SHIFT-WRONG-DIRECTION",
+      "content": "| MC-1 | HORIZONTAL-SHIFT-WRONG-DIRECTION | Student reads f(x−h) as a shift LEFT by h (instead of RIGHT); interprets f(x+3) as shifting right by 3 (instead of left) | Type 3 — language contamination (\"−h\" looks like subtraction = left; but the direction is opposite to the sign inside the argument) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.transformations-functions",
+      "title": "HORIZONTAL-AFFECTS-VERTICAL",
+      "content": "| MC-2 | HORIZONTAL-AFFECTS-VERTICAL | Student applies h (inside the function) as a vertical translation and k (outside) as a horizontal translation | Type 1 — overgeneralization (students note that something inside the parentheses \"changes x\" but confuse which direction the effect goes) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.transformations-functions",
+      "title": "ORDER-INDEPENDENT",
+      "content": "| MC-3 | ORDER-INDEPENDENT | Student applies transformations in any order, assuming the final result is the same; does not see that horizontal stretch and horizontal shift do not commute | Type 1 — overgeneralization (vertical transformations — stretch and shift — commute with each other; students assume all transformations commute) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "f(x)=x² has vertex (0,0), passes through (1,1),(−1,1),(2,4),(−2,4).",
+      "content": "{\"id\":\"TA-1\",\"title\":\"f(x)=x² has vertex (0,0), passes through (1,1),(−1,1),(2,4),(−2,4).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "Shift right 1: key points become (1,0),(2,1),(0,1),(3,4),(−1,4).",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Shift right 1: key points become (1,0),(2,1),(0,1),(3,4),(−1,4).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "Compress horizontally by 1/3: x-coords ÷3 from the SHIFTED base... [track original through g(x)=−2(3x−3)²+4=−2(9(x−1)²)+4=−18(x−1)²+4. Vertex (1,4), opens downward.]",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Compress horizontally by 1/3: x-coords ÷3 from the SHIFTED base... [track original through g(x)=−2(3x−3)²+4=−2(9(x−1)²)+4=−18(x−1)²+4. Vertex (1,4), opens downward.]\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "Summary: vertex (0,0) → (1,4). Opens down with stretch factor 2×9=18.",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Summary: vertex (0,0) → (1,4). Opens down with stretch factor 2×9=18.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "CORRECT → \"g(x)=af(b(x−h))+k: h shifts right, k shifts up, |a| stretches vertically, 1/b stretches horizontally, negative a reflects about x-axis. Apply in order: horizontal shift → horizontal scale → vertical scale → reflect → vertical shift.\" → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"g(x)=af(b(x−h))+k: h shifts right, k shifts up, |a| stretches vertically, 1/b stretches horizontally, negative a reflects about x-axis. Apply in order: horizontal shift → horizontal scale → vertical scale → reflect → vertical shift.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "PARTIAL (knows vertical shifts and stretches, confuses horizontal shift direction) → \"For f(x−3): what x makes the argument zero? That's the new 'centre' of the function. Which direction did it move?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows vertical shifts and stretches, confuses horizontal shift direction) → \\\"For f(x−3): what x makes the argument zero? That's the new 'centre' of the function. Which direction did it move?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "NO_RESPONSE → \"The graph of f(x)=|x| has vertex at (0,0). Where is the vertex of g(x)=|x−2|+3? Start by finding which x makes x−2=0.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"The graph of f(x)=|x| has vertex at (0,0). Where is the vertex of g(x)=|x−2|+3? Start by finding which x makes x−2=0.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "CORRECT → \"Horizontal: argument is (bx−h). Factor to get b(x−h/b). Shift: right by h/b. Compress: factor of b inward. Vertical: a scales, k shifts up.\" → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Horizontal: argument is (bx−h). Factor to get b(x−h/b). Shift: right by h/b. Compress: factor of b inward. Vertical: a scales, k shifts up.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "PARTIAL (handles single transformations, fails composites) → \"For g(x)=f(2x−6): factor as f(2(x−3)). What is the shift? What is the compression?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (handles single transformations, fails composites) → \\\"For g(x)=f(2x−6): factor as f(2(x−3)). What is the shift? What is the compression?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "INCORRECT → TB-R03 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "NO_RESPONSE → \"For g(x)=(x−3)²: track the vertex of f(x)=x². Where is (0,0) after the horizontal shift?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"For g(x)=(x−3)²: track the vertex of f(x)=x². Where is (0,0) after the horizontal shift?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "CORRECT → \"Order matters for horizontal transformations: always factor the argument to separate shift from compression. g(x)=af(b(x−h))+k is the canonical form: h=shift right, 1/b=horizontal stretch, a=vertical stretch, k=vertical shift.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"Order matters for horizontal transformations: always factor the argument to separate shift from compression. g(x)=af(b(x−h))+k is the canonical form: h=shift right, 1/b=horizontal stretch, a=vertical stretch, k=vertical shift.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 119,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "PARTIAL (knows transformations individually, applies wrong order) → \"For g(x)=3√(2x−4): first factor 2x−4=2(x−2). Now identify b=2, h=2. Apply shift right 2 THEN compress by 2.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL (knows transformations individually, applies wrong order) → \\\"For g(x)=3√(2x−4): first factor 2x−4=2(x−2). Now identify b=2, h=2. Apply shift right 2 THEN compress by 2.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 120,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 121,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.transformations-functions",
+      "title": "NO_RESPONSE → \"Write g(x)=|2x−6| in the form |b(x−h)| by factoring 2 from 2x−6. What shift and compression does this reveal?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"Write g(x)=|2x−6| in the form |b(x−h)| by factoring 2 from 2x−6. What shift and compression does this reveal?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 122,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "math.func.transformations-functions/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.transformations-functions",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Write the equation for each transformation of f(x)=x³: (a) shift left 2, up 5; (b) reflect about x-axis, stretch vertically by 3; (c) compress horizontally by factor 4, shift down 1.\n2. For g(x)=−2|3x−6|+1: (a) Write in canonical form. (b) State the vertex (inflection point), vertical stretch, horizontal compression, and shifts. (c) Track the point (1, 0) from f(x)=|x| through each transformation to its new location in g.\n3. A sine curve has amplitude 3, period π, shifted right by π/4, and shifted up 1. Write its equation.\n4. The graph of g passes through (2,5) and is obtained from f(x)=√x by: shift right 1, vertical stretch by a. Find a.\n\n**P55 — Reflect & Consolidate:** \"g(x)=af(b(x−h))+k: inside = horizontal (shift right h, compress by b). Outside = vertical (stretch by a, shift up k). Factor the argument first to extract b and h correctly. Order matters for horizontal transformations.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe function g(x)=A·sin(B(x−C))+D is the most general sinusoidal function. (a) Identify the amplitude (|A|), period (2π/B), phase shift (C), and vertical shift (D). (b) Given that g has amplitude 4, period 6, phase shift π/3 to the right, and midline y=−2, write g(x). (c) Explain why the period is 2π/B, not 2πB. [Connect to horizontal compression.] (d) Sketch one full period.\n\n**P55 — Reflect & Consolidate:** \"The sinusoidal form g(x)=A·sin(B(x−C))+D applies the complete transformation vocabulary: B compresses the period (horizontal compression by B = period÷B), C shifts phase, A scales amplitude, D shifts midline. This is the most-used form in physics, engineering, and signal processing.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=1/x. g(x)=(−3)/(2x+4)+1. (a) Rewrite g in canonical form af(b(x−h))+k. (b) Identify all four transformation parameters. (c) State the vertical asymptote and horizontal asymptote of g by tracking where f has its asymptotes. (d) Track the point (1,1) on f to its new location on g.\"\n\n**P55 — Reflect & Consolidate:** \"Asymptotes transform with the function: if f has vertical asymptote at x=0, then af(b(x−h))+k has vertical asymptote at x=h. Horizontal asymptote y=0 shifts to y=k. Transformation vocabulary applies to asymptotes, vertices, and all key features.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.transformations-functions complete\n- Score 3/5 → REVIEW horizontal shift direction and argument factoring; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.graph-of-function; reassign\n\n**P78 — Completion:** Transformations of functions certified. Student applies the canonical form g(x)=af(b(x−h))+k, identifies each parameter's geometric effect, factors the argument to separate shift from compression, and tracks key points through composite transformations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.transformations-functions.md",
+        "startLine": 135,
+        "endLine": 162
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.periodic-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.periodic-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:008a01ec62969a2f2852387537dc2e1fd553e2c95bb432d27d098fa460e77f13",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.periodic-function.md": "sha256:903be911761b48b08bddd51c08f2991ef71e6bd4fbe78b146dc555d566c8e12e"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.func.periodic-function",
+    "name": "Periodic Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.periodic-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.periodic-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.periodic-function.md": "sha256:903be911761b48b08bddd51c08f2991ef71e6bd4fbe78b146dc555d566c8e12e"
+      },
+      "contentHash": "sha256:267ac4d3b6b1a071df29f53dbdcfc972a98626f3a68e2a703336145c1e408575",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.periodic-function.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.periodic-function.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.periodic-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.periodic-function\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.periodic-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.periodic-function",
+      "title": "Learning Objective",
+      "content": "Given a function f, the student identifies it as periodic by verifying f(x+T)=f(x) for all x in the domain (where T>0 is the period), finds the fundamental period as the smallest such positive T, reads period from a graph, distinguishes period from frequency (f=1/T), applies the concept to sinusoidal functions, and connects to math.trig.trig-functions as the canonical family of periodic functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.periodic-function",
+      "title": "PERIOD-VS-FREQUENCY",
+      "content": "| MC-1 | PERIOD-VS-FREQUENCY | Student conflates period T and frequency f=1/T; says \"the period is 2 Hz\" or \"the frequency is 3 seconds\" — mixing units and meaning | Type 3 — language contamination (\"frequency\" in everyday English means \"how often\" = many times per unit time, but mathematically this is 1/T, not T; students swap the two) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.periodic-function",
+      "title": "PERIOD-IS-THE-PEAK",
+      "content": "| MC-2 | PERIOD-IS-THE-PEAK | Student identifies the period as the x-coordinate of the first maximum rather than the horizontal distance to the next identical phase point | Type 5 — instruction-induced (graphs shown with maximum at a \"nice\" x-value; students anchor on that visible landmark rather than measuring the cycle length) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.periodic-function",
+      "title": "ALMOST-PERIODIC-IS-PERIODIC",
+      "content": "| MC-3 | ALMOST-PERIODIC-IS-PERIODIC | Student accepts \"nearly repeating\" functions (e.g. a damped sinusoid) as periodic because the shape \"looks the same\"; does not check the exact equality f(x+T)=f(x) for all x | Type 1 — overgeneralization (visual similarity is compelling; students don't verify the algebraic condition, especially where amplitude decays) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "CORRECT → \"f is periodic with period T iff f(x+T)=f(x) for all x in its domain; T must be the smallest such positive value. Frequency = 1/T.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"f is periodic with period T iff f(x+T)=f(x) for all x in its domain; T must be the smallest such positive value. Frequency = 1/T.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "PARTIAL (identifies the period but calls it frequency) → \"Period T is measured in units of x (e.g. seconds); frequency = 1/T is measured in cycles per second (Hz). Which one equals 'how long one cycle takes'?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (identifies the period but calls it frequency) → \\\"Period T is measured in units of x (e.g. seconds); frequency = 1/T is measured in cycles per second (Hz). Which one equals 'how long one cycle takes'?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "NO_RESPONSE → \"Look at the graph of sin(x). Where does the pattern first repeat exactly? Measure the horizontal distance from one peak to the next peak.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Look at the graph of sin(x). Where does the pattern first repeat exactly? Measure the horizontal distance from one peak to the next peak.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "CORRECT → \"Period of A sin(Bx−C)+D is 2π/|B|. The |A|, C, D parameters don't change the period. Check by verifying f(x+T)=f(x) algebraically.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Period of A sin(Bx−C)+D is 2π/|B|. The |A|, C, D parameters don't change the period. Check by verifying f(x+T)=f(x) algebraically.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "PARTIAL (applies 2π/B but uses B including its sign, getting a negative period) → \"Period is always positive: use |B|, the absolute value of the coefficient of x.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (applies 2π/B but uses B including its sign, getting a negative period) → \\\"Period is always positive: use |B|, the absolute value of the coefficient of x.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "NO_RESPONSE → \"For f(x)=cos(3x), what value of T makes cos(3(x+T))=cos(3x)? The cosine repeats every 2π, so 3T=2π, giving T=2π/3.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"For f(x)=cos(3x), what value of T makes cos(3(x+T))=cos(3x)? The cosine repeats every 2π, so 3T=2π, giving T=2π/3.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "CORRECT → \"Periodic requires EXACT algebraic equality f(x+T)=f(x) for all x — visual similarity is insufficient. Period T = 1/frequency. Sum of periodic functions is periodic iff period ratio is rational.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Periodic requires EXACT algebraic equality f(x+T)=f(x) for all x — visual similarity is insufficient. Period T = 1/frequency. Sum of periodic functions is periodic iff period ratio is rational.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 112,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "PARTIAL (correct algebraic check, confuses period and frequency) → \"If T=0.01 seconds per cycle, how many cycles per second is that? That's the frequency. Period and frequency are reciprocals.\" → TB-R01 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (correct algebraic check, confuses period and frequency) → \\\"If T=0.01 seconds per cycle, how many cycles per second is that? That's the frequency. Period and frequency are reciprocals.\\\" → TB-R01 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 113,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.periodic-function",
+      "title": "NO_RESPONSE → \"Is f(x)=e⁻ˣ·sin(x) periodic? Compute f(0) and f(2π). Are they equal?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Is f(x)=e⁻ˣ·sin(x) periodic? Compute f(0) and f(2π). Are they equal?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 115,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.func.periodic-function/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.periodic-function",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. For each function, state whether it is periodic and if so find the fundamental period: (a) f(x)=cos(5x); (b) g(x)=tan(x/2); (c) h(x)=|sin(x)|; (d) k(x)=sin(x)·cos(x).\n2. A periodic function f has f(3)=7 and period T=4. Find: (a) f(7); (b) f(−1); (c) f(23).\n3. Determine whether f(x)=sin(x)+sin(√3 x) is periodic. Justify algebraically.\n4. A signal has frequency 60 Hz. (a) Find its period. (b) Write a formula A sin(Bx) with this period (x in seconds). (c) How many complete cycles occur in 0.1 seconds?\n\n**P55 — Reflect & Consolidate:** \"Periodic: f(x+T)=f(x) for all x, T = smallest positive such value. Period of A sin(Bx+C)+D is 2π/|B|. Period ≠ peak location. Exact repetition required — damping destroys periodicity. Period × frequency = 1.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.trig.trig-functions):**\nThe fundamental period of sin(x) is 2π. (a) Prove that tan(x) has period π, not 2π: show tan(x+π)=tan(x) and that no smaller positive T works. (b) Show that sin(x) does NOT have period π: find a specific x where sin(x+π)≠sin(x). (c) Express sin(x) in terms of cos(x): sin(x)=cos(x−π/2). What does this say about their periods and phase relationship? (d) The function f(x)=sin(nx)+cos(mx) has what period when n and m are positive integers? [Apply the LCM rule.]\n\n**P55 — Reflect & Consolidate:** \"Different trig functions have different fundamental periods: sin/cos=2π, tan/cot=π, |sin|/|cos|=π. Taking absolute value halves the period. LCM of periods gives the period of a sum — only when ratios are rational.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=2sin(3x−π)+1. (a) What is the amplitude? (b) What is the fundamental period? (c) What is the phase shift (horizontal displacement from sin(3x))? (d) What is the vertical shift? (e) Verify that f(x+2π/3)=f(x) for all x. (f) Show that f does NOT satisfy f(x+π/3)=f(x) by finding a counterexample.\"\n\n**P55 — Reflect & Consolidate:** \"The full parameter set of A sin(B(x−C))+D: amplitude |A|, period 2π/|B|, phase shift C (right), vertical shift D. Only |B| determines the period. All other parameters change amplitude, position, or level — not the cycle length.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.periodic-function complete\n- Score 3/5 → REVIEW period vs. frequency and exact-periodicity condition; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.function-concept; reassign\n\n**P78 — Completion:** Periodic functions certified. Student identifies periodic functions algebraically and graphically, finds the fundamental period, applies the 2π/|B| rule for sinusoidal functions, distinguishes period from frequency, and uses the rational-ratio criterion for sums of periodic functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.periodic-function.md",
+        "startLine": 128,
+        "endLine": 155
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

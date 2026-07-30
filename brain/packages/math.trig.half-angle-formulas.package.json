@@ -1,0 +1,331 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.half-angle-formulas-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.half-angle-formulas",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c208da4c610acbcefb6d33c337628cb388fab6c18afdd63106e88ddfeb726121",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.half-angle-formulas.md": "sha256:bed2d582ec211ae08753f56638c141350d6cdb51898492dfd734b8881b38c18c"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.half-angle-formulas",
+    "name": "Half Angle Formulas",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.trig.double-angle-formulas"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.half-angle-formulas-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.half-angle-formulas (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.half-angle-formulas.md": "sha256:bed2d582ec211ae08753f56638c141350d6cdb51898492dfd734b8881b38c18c"
+      },
+      "contentHash": "sha256:6ccb2e3f27fbb3602d408e2ba741afdb8e5495fdfa94d7cbe31883a046aacae8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.half-angle-formulas.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.half-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.half-angle-formulas\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.half-angle-formulas.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.half-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.half-angle-formulas\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.half-angle-formulas.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.half-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.half-angle-formulas\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.half-angle-formulas.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md#TA-A04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.half-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.half-angle-formulas\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.half-angle-formulas/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "Half Angle Formulas — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.double-angle-formulas**: cos 2θ = 1 − 2 sin²θ = 2 cos²θ − 1; power-reducing identities sin²θ = (1 − cos 2θ)/2 and cos²θ = (1 + cos 2θ)/2 — the direct algebraic source of the half-angle formulas\n\n### Target Knowledge State\nStudent derives sin(θ/2) = ±√((1 − cos θ)/2) and cos(θ/2) = ±√((1 + cos θ)/2) from the power-reducing identities by substituting 2α = θ. Student determines the ± sign from the quadrant of θ/2 (not θ). Student applies the formulas to compute exact values at non-standard angles such as 15°, 22.5°, and 75°, and to simplify expressions involving half angles.\n\n### Conceptual Obstacles\n1. Treating sin(θ/2) as ½ sin θ — scaling the function instead of halving the argument\n2. Determining the ± sign from the quadrant of θ instead of the quadrant of θ/2\n3. Confusing the sin half-angle formula (1 − cos) with the cos half-angle formula (1 + cos)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "HALF-ANGLE-SCALING",
+      "content": "| MC-1 | HALF-ANGLE-SCALING | Student writes sin(θ/2) = ½ sin θ by treating the half-angle as a simple scalar | Any sin(θ/2) evaluation |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "SIGN-FROM-THETA-NOT-HALF",
+      "content": "| MC-2 | SIGN-FROM-THETA-NOT-HALF | Student determines the ± from the quadrant of θ rather than the quadrant of θ/2 | Problems where θ and θ/2 are in different quadrant families |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "FORMULA-SWAP",
+      "content": "| MC-3 | FORMULA-SWAP | Student uses (1 + cos θ) under the radical for sin and (1 − cos θ) for cos, reversing the two formulas | Direct evaluation of sin or cos half-angle values |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "Deriving the Half-Angle Formulas",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving the Half-Angle Formulas\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 64,
+        "endLine": 130
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "Gallery of Exact-Value Computations",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Gallery of Exact-Value Computations\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 130,
+        "endLine": 183
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "sin vs cos Half-Angle: Which Formula Uses Which Term",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"sin vs cos Half-Angle: Which Formula Uses Which Term\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 183,
+        "endLine": 226
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 226,
+        "endLine": 441
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Find the exact value of sin(π/8).\n\n**Problem 2.** Find the exact value of cos(15°).\n\n**Problem 3.** Given cos θ = −3/5 with θ in Q3, find sin(θ/2).\n\n**Problem 4.** Find tan(π/12) using the rationalized tan half-angle formula tan(θ/2) = (1 − cos θ)/sin θ.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. sin(π/8) = sin((π/4)/2); θ = π/4; cos(π/4) = √2/2; π/8 in Q1 → positive.\n   sin(π/8) = √((1 − √2/2)/2) = √((2 − √2)/4) = **(√(2 − √2))/2**. ✓\n\n2. cos(15°) = cos(30°/2); θ = 30°; cos 30° = √3/2; 15° in Q1 → positive.\n   cos(15°) = √((1 + √3/2)/2) = √((2 + √3)/4) = **(√(2 + √3))/2**. ✓\n\n3. θ in Q3 means 180° < θ < 270°, so 90° < θ/2 < 135° → θ/2 is in Q2 → sin(θ/2) > 0.\n   cos θ = −3/5; sin(θ/2) = +√((1 − (−3/5))/2) = √((1 + 3/5)/2) = √(8/10) = √(4/5) = **2/√5 = 2√5/5**. ✓\n\n4. tan(π/12) = tan(30°/2); θ = 30°; cos 30° = √3/2; sin 30° = 1/2.\n   tan(π/12) = (1 − √3/2)/(1/2) = 2(1 − √3/2) = **2 − √3** ≈ 0.268. ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Prove the identity sin²(θ/2) = (1 − cos θ)/2, then use it to find sin(22.5°) exactly and verify that 2 sin²(22.5°) = 1 − cos(45°).\n\n*(a)* Derive the identity sin²(θ/2) = (1 − cos θ)/2 from the double-angle formula for cosine.\n\n*(b)* Use the identity to compute sin(22.5°) exactly.\n\n*(c)* Verify numerically that 2 sin²(22.5°) = 1 − cos(45°).\n\n*Expected answer:*\n\n*(a)* cos 2α = 1 − 2 sin²α → 2 sin²α = 1 − cos 2α → sin²α = (1 − cos 2α)/2. Let α = θ/2: sin²(θ/2) = (1 − cos θ)/2. ✓\n\n*(b)* θ = 45°; cos 45° = √2/2; sin²(22.5°) = (1 − √2/2)/2 = (2 − √2)/4.\nsin(22.5°) = +√((2 − √2)/4) = (√(2 − √2))/2 (positive since 22.5° ∈ Q1). ✓\n\n*(c)* 2 sin²(22.5°) = 2 · (2 − √2)/4 = (2 − √2)/2 = 1 − √2/2 = 1 − cos 45°. ✓\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (all three parts correct with valid derivation in (a)); 0.5 if (a) and (b) correct but (c) skipped or incomplete.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| ≥ 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed item; scaling error → B01; sign error → B02; formula swap → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; re-derive both formulas from power-reducing identities; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.half-angle-formulas` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** Integration by parts with trig functions; Fourier coefficient computation; advanced trig identity proofs.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 229,
+        "endLine": 334
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — algebraic derivation from the power-reducing identities.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Derive both half-angle formulas from power-reducing identities via substitution 2α = θ; state tan half-angle formula; sign-determination rule; summary table\n2. **A02 P04 PATTERN INDUCTION** — Gallery of exact-value computations at 15°, π/8, and 75°; three-step procedure; tan half-angle applied\n3. **A03 P06 CONTRAST PAIR** — sin(θ/2) formula (1 − cos θ) vs cos(θ/2) formula (1 + cos θ); contrast reveals which formula increases/decreases from zero\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Find the exact value of sin(75°/2) = sin(37.5°) in simplified radical form. |\n| R2 | 3 days | Given sin θ = 4/5 with θ in Q1, find cos(θ/2) exactly. |\n| R3 | 7 days | Use the tan half-angle formula to prove tan(π/8) = √2 − 1. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 384,
+        "endLine": 394
+      }
+    },
+    {
+      "assetId": "math.trig.half-angle-formulas/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.half-angle-formulas",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | Advanced integration techniques; Fourier coefficient derivations |\n| Requires (Tier-1) | math.trig.double-angle-formulas |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent identity-proof and verification problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.half-angle-formulas.md",
+        "startLine": 394,
+        "endLine": 408
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

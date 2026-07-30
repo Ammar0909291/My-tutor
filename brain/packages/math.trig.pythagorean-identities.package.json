@@ -1,0 +1,334 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.pythagorean-identities-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.pythagorean-identities",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6373b273583d7f83692876a24c20997e137f2305b8fb89d466f59061ad9726b1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.pythagorean-identities.md": "sha256:fd3cc78845991114018b441606d78736ef5ed628a98be9690c965c8ba9c9ba1b"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.pythagorean-identities",
+    "name": "Pythagorean Identities",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.trig.trig-identities",
+      "math.trig.unit-circle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.pythagorean-identities-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.pythagorean-identities (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.pythagorean-identities.md": "sha256:fd3cc78845991114018b441606d78736ef5ed628a98be9690c965c8ba9c9ba1b"
+      },
+      "contentHash": "sha256:11381dd460a9955dbf52e7e79c72065ec064c7225bf3b97908119dc05ce345be",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.pythagorean-identities.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.pythagorean-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.pythagorean-identities\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.pythagorean-identities.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.pythagorean-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.pythagorean-identities\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.pythagorean-identities.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.pythagorean-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.pythagorean-identities\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.pythagorean-identities.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md#TA-A04 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.pythagorean-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.pythagorean-identities\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.pythagorean-identities/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "Pythagorean Identities — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.unit-circle**: sin θ = y, cos θ = x on the unit circle; unit circle equation x² + y² = 1\n- **math.trig.trig-identities**: General concept of a trigonometric identity as an equation true for all valid θ\n\n### Target Knowledge State\nStudent derives sin²θ + cos²θ = 1 directly from the unit circle equation, then derives 1 + tan²θ = sec²θ (dividing by cos²θ) and 1 + cot²θ = csc²θ (dividing by sin²θ). Student selects the appropriate identity form for a given problem: the fundamental form when sin and cos appear, the tan/sec form when tangent or secant appears, and the cot/csc form when cotangent or cosecant appears. Student uses these identities to find unknown trig values given one ratio and a quadrant, and to simplify expressions.\n\n### Conceptual Obstacles\n1. Believing the identity applies only to acute angles in a right triangle, rather than to all real θ\n2. Choosing the wrong identity form — using sin²+cos²=1 when 1+tan²=sec² would reduce steps directly\n3. Losing the ± sign when solving for sin θ = ±√(1−cos²θ) — the quadrant determines the sign\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "PYTHAGOREAN-AS-GEOMETRIC",
+      "content": "| MC-1 | PYTHAGOREAN-AS-GEOMETRIC | Student believes sin²θ+cos²θ=1 requires θ to be in a right triangle; unaware it holds for all real θ via the unit circle | When θ > 90° or θ is negative |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "ALWAYS-USE-FUNDAMENTAL",
+      "content": "| MC-2 | ALWAYS-USE-FUNDAMENTAL | Student always uses sin²θ+cos²θ=1 even when 1+tan²θ=sec²θ would immediately give the answer with fewer steps | Problems involving secant or tangent |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "SIGN-LOSS-IN-SOLVING",
+      "content": "| MC-3 | SIGN-LOSS-IN-SOLVING | Student writes sinθ=√(1−cos²θ) without the ± symbol; chooses the positive square root regardless of quadrant | \"Given cosθ, find sinθ\" problems specifying a quadrant |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "Deriving All Three Pythagorean Identities",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving All Three Pythagorean Identities\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 65,
+        "endLine": 129
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "Applying the Identities",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Applying the Identities\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 129,
+        "endLine": 186
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "Choosing the Right Identity Form",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Choosing the Right Identity Form\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 186,
+        "endLine": 232
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 232,
+        "endLine": 435
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Given sin θ = 3/5 and θ is in Q2, find cos θ and tan θ.\n\n**Problem 2.** Simplify: sin²θ · sec²θ + cos²θ · sec²θ.\n\n**Problem 3.** Simplify: (1 − sin²θ)/(1 − cos²θ), assuming neither denominator is zero.\n\n**Problem 4.** If tan θ = 2 (θ acute), find sec²θ, then find cos²θ.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. sin²θ + cos²θ = 1 → cos²θ = 1 − 9/25 = 16/25. Q2: cosθ < 0 → **cos θ = −4/5**. tan θ = sinθ/cosθ = (3/5)/(−4/5) = **−3/4** ✓\n\n2. sec²θ · (sin²θ + cos²θ) = sec²θ · 1 = **sec²θ** ✓\n\n3. (1−sin²θ)/(1−cos²θ) = cos²θ/sin²θ = **cot²θ** ✓\n\n4. sec²θ = 1 + tan²θ = 1 + 4 = **5**. cos²θ = 1/sec²θ = **1/5** ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Prove the identity: sin⁴θ − cos⁴θ = sin²θ − cos²θ.\n\n*(Hint: Factor the left side as a difference of squares.)*\n\n*Expected answer:*\n\nsin⁴θ − cos⁴θ = (sin²θ − cos²θ)(sin²θ + cos²θ) = (sin²θ − cos²θ) · **1** = sin²θ − cos²θ ✓\n\nThe key step is recognizing sin⁴θ − cos⁴θ = (sin²θ)² − (cos²θ)² and applying a² − b² = (a−b)(a+b), then using sin²θ + cos²θ = 1.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point for correct factoring and application of the identity.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Identify missed item; geometric misconception → B01; wrong form → B02; sign loss → B03; targeted repair |\n| ≤ 3/5 | → Return to A01; re-derive all three identities from unit circle; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.pythagorean-identities` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** All downstream identity-based proofs and simplifications; prerequisite for double-angle, half-angle derivations.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 235,
+        "endLine": 329
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — derive from the unit circle equation.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Unit circle equation x²+y²=1 → substitute x=cosθ, y=sinθ → derive all three identities algebraically\n2. **A02 P04 PATTERN INDUCTION** — Gallery of \"given one ratio, find others\" problems; gallery of expression simplifications; introduce quadrant sign selection\n3. **A03 P06 CONTRAST PAIR** — Same expression, two routes: fundamental identity vs. tan/sec identity; show when each is more efficient\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Given tan θ = −3/4 with θ in Q2, find sin θ and cos θ. |\n| R2 | 3 days | Simplify: (sec²θ − 1) · cos²θ. |\n| R3 | 7 days | Prove: (sin θ + cos θ)² = 1 + 2 sin θ cos θ. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 379,
+        "endLine": 389
+      }
+    },
+    {
+      "assetId": "math.trig.pythagorean-identities/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.pythagorean-identities",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | double-angle derivations; trig identity proofs |\n| Requires (Tier-1) | math.trig.trig-identities, math.trig.unit-circle |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent algebraic factoring problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.pythagorean-identities.md",
+        "startLine": 389,
+        "endLine": 403
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

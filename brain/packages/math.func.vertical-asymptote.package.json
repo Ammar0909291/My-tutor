@@ -1,0 +1,923 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.vertical-asymptote-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.vertical-asymptote",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4147a88778a56124f8f2541c3e99964bcc916bfa291759117b9f410b59d59ca9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.vertical-asymptote.md": "sha256:27d0c75cee5bf7f08c838aaa395676564d17d5a483ba200c3ebc148a4f780f4d"
+    },
+    "assetCount": 28,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 23,
+      "mastery_probe": 1
+    },
+    "ruleCount": 23
+  },
+  "concept": {
+    "conceptId": "math.func.vertical-asymptote",
+    "name": "Vertical Asymptotes",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.rational-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.vertical-asymptote-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.vertical-asymptote (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.vertical-asymptote.md": "sha256:27d0c75cee5bf7f08c838aaa395676564d17d5a483ba200c3ebc148a4f780f4d"
+      },
+      "contentHash": "sha256:243c4898b91c0c2bea873da1c8f4f9876190342a8218205307692028ca2a3a94",
+      "ruleCount": 23,
+      "bandCounts": {
+        "3": 23
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-23",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-23",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertical-asymptote.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertical-asymptote.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertical-asymptote"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertical-asymptote\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.vertical-asymptote/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "Learning Objective",
+      "content": "Given a rational function f(x)=P(x)/Q(x), the student locates vertical asymptotes by identifying where Q(x)=0 and P(x)≠0, distinguishes vertical asymptotes from removable discontinuities (holes, where both P and Q share a common zero), describes one-sided behavior (f→+∞ or −∞ from each side) using sign analysis, sketches the graph near the asymptote with correct direction arrows, and correctly interprets the vertical asymptote as a line the graph approaches but does not cross.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "NUMERATOR-ZERO-IS-ASYMPTOTE",
+      "content": "| MC-1 | NUMERATOR-ZERO-IS-ASYMPTOTE | Student identifies zeros of the numerator P(x)=0 as locations of vertical asymptotes, rather than zeros of the denominator Q(x)=0 | Type 3 — language contamination (\"asymptote\" is associated with \"something going wrong\" = \"zero\"; the zero that makes the function blow up is the denominator's, not the numerator's, but students anchor on the word \"zero\") |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "GRAPH-CROSSES-ASYMPTOTE",
+      "content": "| MC-2 | GRAPH-CROSSES-ASYMPTOTE | Student draws the graph touching or crossing the vertical asymptote line, treating it as just another value on the graph rather than as a line the function cannot reach | Type 5 — instruction-induced (horizontal asymptotes CAN be crossed, which students learn later; this bleeds back onto vertical asymptotes as \"maybe it can cross too\") |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "HOLE-IS-AN-ASYMPTOTE",
+      "content": "| MC-3 | HOLE-IS-AN-ASYMPTOTE | Student identifies a removable discontinuity (hole) — where both numerator and denominator vanish at the same x — as a vertical asymptote, because both seem to involve \"division by zero\" | Type 5 — instruction-induced (the first encounter with \"denominator = 0\" in a rational function is often taught as \"always gives a vertical asymptote\" before the full cancellation check is introduced) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "No common factors in numerator and denominator.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"No common factors in numerator and denominator.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "Denominator zeros: x=2 and x=−3.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Denominator zeros: x=2 and x=−3.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "Vertical asymptotes: x=2 and x=−3.",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Vertical asymptotes: x=2 and x=−3.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "Numerator zeros: x=1. This is a zero of f, not an asymptote.",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Numerator zeros: x=1. This is a zero of f, not an asymptote.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "As x→2⁺: (x−2)→0⁺ and (x+3)→5>0. Denominator→0⁺. f→+∞.",
+      "content": "{\"id\":\"TA-5\",\"title\":\"As x→2⁺: (x−2)→0⁺ and (x+3)→5>0. Denominator→0⁺. f→+∞.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "As x→2⁻: (x−2)→0⁻ and (x+3)→5>0. Denominator→0⁻. f→−∞.",
+      "content": "{\"id\":\"TA-6\",\"title\":\"As x→2⁻: (x−2)→0⁻ and (x+3)→5>0. Denominator→0⁻. f→−∞.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "CORRECT → \"Vertical asymptotes: zeros of denominator after canceling common factors with numerator. Numerator zeros are zeros of f, not asymptotes. Approach from each side: sign analysis gives +∞ or −∞.\" → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Vertical asymptotes: zeros of denominator after canceling common factors with numerator. Numerator zeros are zeros of f, not asymptotes. Approach from each side: sign analysis gives +∞ or −∞.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "PARTIAL (identifies correct x-values but confuses which direction the graph goes) → \"Determine the sign of the numerator and each denominator factor near x=2. Their product's sign tells you +∞ or −∞ as you approach.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (identifies correct x-values but confuses which direction the graph goes) → \\\"Determine the sign of the numerator and each denominator factor near x=2. Their product's sign tells you +∞ or −∞ as you approach.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "NO_RESPONSE → \"For f(x)=1/(x−2): what value of x makes the denominator zero? What happens to f when x is very close to 2?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"For f(x)=1/(x−2): what value of x makes the denominator zero? What happens to f when x is very close to 2?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "If (x−a) is a factor of Q but NOT of P after full factoring: **vertical asymptote** at x=a.",
+      "content": "{\"id\":\"TA-11\",\"title\":\"If (x−a) is a factor of Q but NOT of P after full factoring: **vertical asymptote** at x=a.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "If (x−a) is a factor of BOTH P and Q: **hole** at x=a. (Graph a point after cancellation.)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"If (x−a) is a factor of BOTH P and Q: **hole** at x=a. (Graph a point after cancellation.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "CORRECT → \"Always factor fully and cancel before declaring a vertical asymptote. A common zero in both P and Q is a hole, not an asymptote. Vertical asymptote ↔ infinite limit; hole ↔ finite limit.\" → A03",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"Always factor fully and cancel before declaring a vertical asymptote. A common zero in both P and Q is a hole, not an asymptote. Vertical asymptote ↔ infinite limit; hole ↔ finite limit.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "PARTIAL (knows cancellation rule, still says x=2 is an asymptote because \"the denominator is zero\") → \"After canceling (x−2)/(x−2), the function is simply x+2 near x=2. What does x+2 approach as x→2? Is that infinite or finite?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL (knows cancellation rule, still says x=2 is an asymptote because \\\"the denominator is zero\\\") → \\\"After canceling (x−2)/(x−2), the function is simply x+2 near x=2. What does x+2 approach as x→2? Is that infinite or finite?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "INCORRECT → TB-R03 → A03",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "NO_RESPONSE → \"Evaluate (x²−4)/(x−2) at x=2.1, 2.01, 2.001. Does the function blow up or approach a specific value?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"Evaluate (x²−4)/(x−2) at x=2.1, 2.01, 2.001. Does the function blow up or approach a specific value?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "Zeros of f: x=3 (numerator=0, denominator≠0). Graph CROSSES x-axis at (3,0).",
+      "content": "{\"id\":\"TA-17\",\"title\":\"Zeros of f: x=3 (numerator=0, denominator≠0). Graph CROSSES x-axis at (3,0).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "Vertical asymptotes: x=1 and x=−2 (denominator=0, not canceled).",
+      "content": "{\"id\":\"TA-18\",\"title\":\"Vertical asymptotes: x=1 and x=−2 (denominator=0, not canceled).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "x=3: f is defined, equals 0. x=1, x=−2: f is undefined, blows up.",
+      "content": "{\"id\":\"TA-19\",\"title\":\"x=3: f is defined, equals 0. x=1, x=−2: f is undefined, blows up.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "CORRECT → \"Odd-multiplicity asymptote: graph changes sign (approaches ±∞ from opposite sides). Even-multiplicity: graph has same sign (both ±∞). Vertical asymptotes come from uncanceled denominator zeros; zeros of f come from numerator zeros.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-20\",\"title\":\"CORRECT → \\\"Odd-multiplicity asymptote: graph changes sign (approaches ±∞ from opposite sides). Even-multiplicity: graph has same sign (both ±∞). Vertical asymptotes come from uncanceled denominator zeros; zeros of f come from numerator zeros.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "PARTIAL (correct identification, cannot determine one-sided behavior for even-multiplicity) → \"For g(x)=1/(x−1)²: compute g(1.1)=1/0.01=100>0 and g(0.9)=1/0.01=100>0. Same sign on both sides because the square is always positive.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"PARTIAL (correct identification, cannot determine one-sided behavior for even-multiplicity) → \\\"For g(x)=1/(x−1)²: compute g(1.1)=1/0.01=100>0 and g(0.9)=1/0.01=100>0. Same sign on both sides because the square is always positive.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 115,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-22\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 116,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/teaching_action_meta/TA-23",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "NO_RESPONSE → \"For f(x)=3/((x+2)²): evaluate f(−1.9) and f(−2.1). Are both positive or do they have opposite signs?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-23\",\"title\":\"NO_RESPONSE → \\\"For f(x)=3/((x+2)²): evaluate f(−1.9) and f(−2.1). Are both positive or do they have opposite signs?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-23",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 117,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.func.vertical-asymptote/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.vertical-asymptote",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Find all vertical asymptotes and holes of: (a) f(x)=(x+1)/(x²−1); (b) g(x)=(x²−x−6)/(x²−4); (c) h(x)=x/(x³−x).\n2. For f(x)=2/((x−3)(x+1)²), determine the one-sided behavior at each vertical asymptote (whether f→+∞ or −∞ from each side) without graphing.\n3. A rational function has vertical asymptotes at x=−2 and x=4, a hole at x=1, and crosses the x-axis at x=0. Write a possible formula for f(x). (Hint: numerator has factors for zero and hole; denominator has factors for asymptotes and hole.)\n4. True or false, with justification: \"If f(a) is undefined, then x=a is a vertical asymptote of f.\" Provide a counterexample if false.\n\n**P55 — Reflect & Consolidate:** \"Vertical asymptotes: uncanceled denominator zeros. Holes: canceled common zeros. Sign analysis gives one-sided direction (±∞). Odd-multiplicity → opposite sides. Even-multiplicity → same side. The graph approaches but never touches a vertical asymptote.\"\n\n**P76 — Transfer Probe (Independence mode):**\nA rational function f(x)=P(x)/Q(x) with deg(Q)=3 has: vertical asymptotes at x=−1 and x=2, a hole at x=3, and lim x→+∞ f(x)=0. (a) Determine Q(x) up to a constant. (b) Determine P(x) up to a constant, given that f has exactly one x-intercept at x=5. (c) Verify: does deg(P)<deg(Q) (consistent with lim→0 at ±∞)? (d) Sketch the graph, marking all key features.\n\n**P55 — Reflect & Consolidate:** \"Building a rational function from features: asymptotes → denominator factors; holes → canceled factors in both; intercepts → numerator factors. Degree comparison → end behavior (horizontal asymptote or not). All features are encoded in the polynomial structure.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=(x²−5x+6)/((x²−4)(x−3)). (a) Factor numerator and denominator fully. (b) Identify all holes and vertical asymptotes. (c) Determine the simplified form of f after cancellation. (d) Find all zeros and the y-intercept of the simplified f. (e) Describe the one-sided behavior at each vertical asymptote.\"\n\n**P55 — Reflect & Consolidate:** \"Complete rational function analysis: (1) factor fully; (2) cancel common zeros → holes; (3) remaining denominator zeros → vertical asymptotes; (4) numerator zeros of simplified form → x-intercepts; (5) sign analysis → one-sided ±∞ at each asymptote. This is the full graphing algorithm.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.vertical-asymptote complete\n- Score 3/5 → REVIEW hole vs. asymptote distinction and one-sided sign analysis; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.rational-function; reassign\n\n**P78 — Completion:** Vertical asymptotes certified. Student locates vertical asymptotes by factoring and canceling, distinguishes them from holes, determines one-sided behavior via sign analysis, and correctly sketches asymptotic behavior on graphs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertical-asymptote.md",
+        "startLine": 130,
+        "endLine": 157
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,720 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.floating-point-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.floating-point",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:597e8ba66981570bb98cb005202418f8dc1c5db3c34cc4c135ed895fed8941fc",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.floating-point.md": "sha256:1f57e5fe878b56702091c96ac7697fd6b5e149eebba9ab83c148937ca75a9b88"
+    },
+    "assetCount": 22,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 17,
+      "mastery_probe": 1
+    },
+    "ruleCount": 17
+  },
+  "concept": {
+    "conceptId": "math.num.floating-point",
+    "name": "Floating-Point Arithmetic",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.scientific-notation",
+      "math.arith.significant-figures"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.floating-point-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.floating-point (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.floating-point.md": "sha256:1f57e5fe878b56702091c96ac7697fd6b5e149eebba9ab83c148937ca75a9b88"
+      },
+      "contentHash": "sha256:96d1686bf944fbcc2499e622ac7f3b48a9e0435dcefb91bdce9a9fcbc9a0a68d",
+      "ruleCount": 17,
+      "bandCounts": {
+        "3": 17
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.floating-point.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.floating-point.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.floating-point"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.floating-point\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.floating-point/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.floating-point",
+      "title": "Learning Objective",
+      "content": "Given IEEE 754 floating-point representation, the student explains the bit-level structure (sign, exponent, mantissa), quantifies representation error using the relative error model fl(x)=x(1+ε) with |ε|≤u (machine epsilon u≈2.2×10⁻¹⁶ for double precision), identifies catastrophic cancellation in subtraction of nearly equal numbers, rewrites unstable expressions to avoid cancellation (e.g. √(x+1)−√x → 1/(√(x+1)+√x)), and recognises special values (NaN, ±∞, ±0).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.floating-point",
+      "title": "FLOATING-POINT-IS-EXACT",
+      "content": "| MC-1 | FLOATING-POINT-IS-EXACT | Student treats floating-point as exact rational arithmetic; does not account for rounding at every operation | Type 1 — overgeneralization (integer arithmetic IS exact in computers; student extends this to floating-point without recognising the change of representation) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.floating-point",
+      "title": "ADDING-SMALL-TO-LARGE-IS-SAFE",
+      "content": "| MC-2 | ADDING-SMALL-TO-LARGE-IS-SAFE | Student adds a very small number to a very large number and trusts the result; does not realise the small number is absorbed below the precision threshold | Type 5 — instruction-induced (the error bound |ε|≤u is taught as \"small,\" suggesting all individual errors are negligible; the cumulative effect of 10⁶ additions is not emphasised) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.floating-point",
+      "title": "CANCELLATION-IS-ACCURATE",
+      "content": "| MC-3 | CANCELLATION-IS-ACCURATE | Student believes that f(x)=√(x+1)−√x is accurate because both square roots are computed accurately; does not recognise that subtraction of nearly equal quantities destroys relative accuracy | Type 1 — overgeneralization (each operand is accurate; the student does not track that relative error on the difference equals absolute error on each operand divided by a tiny difference) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "Bit 63: sign (1 bit)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Bit 63: sign (1 bit)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "Bits 62–52: biased exponent (11 bits, bias=1023)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Bits 62–52: biased exponent (11 bits, bias=1023)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "Bits 51–0: significand fraction (52 bits, implicit leading 1)",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Bits 51–0: significand fraction (52 bits, implicit leading 1)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "CORRECT → \"Every real number is rounded to the nearest representable float. The relative error |fl(x)−x|/|x| ≤ u for every x in the normal range. No operation is exact (except those producing representable results exactly, e.g. addition of small integers).\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"Every real number is rounded to the nearest representable float. The relative error |fl(x)−x|/|x| ≤ u for every x in the normal range. No operation is exact (except those producing representable results exactly, e.g. addition of small integers).\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "PARTIAL (knows bits but cannot connect to relative error) → \"Count the 52-fraction bits. The gap between consecutive doubles near x is x·2·2⁻⁵²=x·2⁻⁵¹; the rounding error is at most half that gap, so |fl(x)−x|/|x| ≤ 2⁻⁵²=u.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (knows bits but cannot connect to relative error) → \\\"Count the 52-fraction bits. The gap between consecutive doubles near x is x·2·2⁻⁵²=x·2⁻⁵¹; the rounding error is at most half that gap, so |fl(x)−x|/|x| ≤ 2⁻⁵²=u.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "NO_RESPONSE → \"Enter 0.1+0.2 in Python. What does the output say? Why is it not exactly 0.3?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"Enter 0.1+0.2 in Python. What does the output say? Why is it not exactly 0.3?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "CORRECT → \"Catastrophic cancellation occurs when two nearly equal quantities are subtracted; the relative error on the difference equals the absolute error on each operand divided by a tiny difference — potentially amplified by 10⁶ or more. Stable reformulation avoids the subtraction.\" → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Catastrophic cancellation occurs when two nearly equal quantities are subtracted; the relative error on the difference equals the absolute error on each operand divided by a tiny difference — potentially amplified by 10⁶ or more. Stable reformulation avoids the subtraction.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "PARTIAL (identifies cancellation risk but cannot quantify or reformulate) → \"If a≈b and both are accurate to 15 digits but a−b≈10⁻¹², how many correct digits does a−b have? Now multiply (a−b)(a+b)=a²−b² and divide by (a+b) — how does that avoid subtracting nearly equal numbers?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (identifies cancellation risk but cannot quantify or reformulate) → \\\"If a≈b and both are accurate to 15 digits but a−b≈10⁻¹², how many correct digits does a−b have? Now multiply (a−b)(a+b)=a²−b² and divide by (a+b) — how does that avoid subtracting nearly equal numbers?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "NO_RESPONSE → \"Compute (10⁸+1)−10⁸ exactly. Now compute it in Python. Do you get 1 or 0?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"Compute (10⁸+1)−10⁸ exactly. Now compute it in Python. Do you get 1 or 0?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "If f(x) involves subtracting nearly equal quantities, look for algebraic identities or rationalisations.",
+      "content": "{\"id\":\"TA-12\",\"title\":\"If f(x) involves subtracting nearly equal quantities, look for algebraic identities or rationalisations.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "Test near the cancellation region: the stable and unstable formulas agree away from it but diverge near it.",
+      "content": "{\"id\":\"TA-13\",\"title\":\"Test near the cancellation region: the stable and unstable formulas agree away from it but diverge near it.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "CORRECT → \"1−cos(x) is inaccurate near x=0 due to catastrophic cancellation; 2sin²(x/2) avoids it. General principle: whenever a formula subtracts nearly equal floats, look for an algebraic equivalent that avoids the subtraction.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-14\",\"title\":\"CORRECT → \\\"1−cos(x) is inaccurate near x=0 due to catastrophic cancellation; 2sin²(x/2) avoids it. General principle: whenever a formula subtracts nearly equal floats, look for an algebraic equivalent that avoids the subtraction.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "PARTIAL (identifies the problem but cannot derive the stable form) → \"Use 1−cos(x)=2sin²(x/2). Why doesn't sin²(x/2) suffer cancellation? Because sin(x/2) itself is small near x=0, not the difference of two large quantities.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"PARTIAL (identifies the problem but cannot derive the stable form) → \\\"Use 1−cos(x)=2sin²(x/2). Why doesn't sin²(x/2) suffer cancellation? Because sin(x/2) itself is small near x=0, not the difference of two large quantities.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.floating-point",
+      "title": "NO_RESPONSE → \"Compute 1−cos(0.0001) in Python. Compare with (0.0001)²/2. Are they equal? Why?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-17\",\"title\":\"NO_RESPONSE → \\\"Compute 1−cos(0.0001) in Python. Compare with (0.0001)²/2. Are they equal? Why?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.num.floating-point/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.floating-point",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. (a) What is the machine epsilon u for double precision? (b) True or false: every integer n with |n|≤2⁵³ is exactly representable as a double-precision float. (c) What is fl(2⁵³+1) in double precision?\n2. Evaluate f(x)=(e^x−1)/x near x=0 using direct computation and an alternative stable formula. What identity resolves the cancellation?\n3. Give two examples of floating-point operations that produce special values (NaN or ±∞) and explain what each signals.\n4. A loop computes s = 0; for n in range(1, N+1): s += 1.0/n. For N=10⁷, estimate the maximum accumulated rounding error in s using the error model. How does Kahan summation help?\n\n**P55 — Reflect & Consolidate:** \"Floating-point ≈ real arithmetic with relative error ≤ u ≈ 2.22×10⁻¹⁶ per operation. Catastrophic cancellation: subtracting nearly equal floats amplifies relative error by a large factor. Remedy: algebraic reformulation to avoid subtraction. Special values (NaN, ±∞) signal overflow or invalid operations.\"\n\n**P76 — Transfer Probe (Independence mode):**\nf(x)=ln(x+1)−ln(x) for large x. (a) Show that direct computation suffers catastrophic cancellation for large x. (b) Find a stable alternative using a single logarithm. (c) Confirm numerically at x=10¹⁰ that the stable form gives ~15 accurate digits while the unstable form loses most of its precision. (d) Identify the general algebraic technique (rationalising or combining logarithms) and state when each is appropriate.\n\n**P55 — Reflect & Consolidate:** \"The general technique for stabilising subtraction of nearly equal quantities: rewrite using algebraic identities (rationalise, trigonometric half-angle, Taylor-series-based approximation for small arguments, or combine logarithms). Always verify by testing near the cancellation region.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=sin(x)/x near x=0. (a) Explain why direct division is not catastrophically cancelled (sin(x) is not nearly equal to x for all small x — what is sin(x) near 0?). (b) However, near x=0 the value sin(x)/x→1 and can be computed accurately. But explain why computing sin(0.0) raises a 0/0 issue. (c) A student proposes using the Taylor series (1−x²/6+x⁴/120−…) for |x|<0.01. What are the trade-offs of this approach vs. using the two-argument form atan2 or a library sinc function? (d) For x=1×10⁻¹⁵, compare sin(x)/x (direct) with the Taylor term 1−x²/6. Which is more accurate and why?\"\n\n**P55 — Reflect & Consolidate:** \"Near-zero function evaluation: sometimes no cancellation occurs even when arguments are tiny (sin(x)/x→1 has no subtraction of nearly equal floats). The risk is 0/0 undefined, not cancellation. Use Taylor series for |x|<threshold, direct formula elsewhere. Choose the threshold to minimise total error.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.floating-point complete\n- Score 3/5 → REVIEW catastrophic cancellation and machine epsilon; replay A02–A03\n- Score ≤ 2/5 → PREREQUISITE GAP in math.arith.scientific-notation or math.arith.significant-figures; reassign\n\n**P78 — Completion:** Floating-point arithmetic certified. Student identifies representation limits (machine epsilon, special values), recognises catastrophic cancellation, applies stable algebraic reformulations, and estimates accumulated rounding error.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.floating-point.md",
+        "startLine": 116,
+        "endLine": 143
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

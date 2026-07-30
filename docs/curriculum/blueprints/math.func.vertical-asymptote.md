@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.vertical-asymptote |
-| Title | Vertical Asymptotes |
+| name | Vertical Asymptotes |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | analyze |
@@ -127,7 +127,7 @@ Step 1 — "A vertical asymptote at x=a means f is UNDEFINED at x=a (denominator
 **TB-R03 (MC-3 HOLE-IS-AN-ASYMPTOTE):**
 Step 1 — "Both holes and vertical asymptotes involve x-values where the denominator is zero. The difference: if the numerator is ALSO zero at that x, the zero in the numerator cancels the zero in the denominator. After cancellation, the function approaches a finite value — that's a hole, not an asymptote." Step 2 — Analogy: (x−2)(x−3)/(x−2) = x−3 for x≠2. The (x−2) factor removed itself. As x→2: x−3→−1, a finite value. No blowup. Step 3 — "Always factor and cancel FIRST. Then declare asymptotes from what's left in the denominator. What's been canceled becomes a hole — mark it with an open circle on the graph at the finite limit value."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Find all vertical asymptotes and holes of: (a) f(x)=(x+1)/(x²−1); (b) g(x)=(x²−x−6)/(x²−4); (c) h(x)=x/(x³−x).

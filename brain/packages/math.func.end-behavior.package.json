@@ -1,0 +1,651 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.end-behavior-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.end-behavior",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c98d8c9255afd3eb606272efe84d7175b580e92c5bf9a16ccbeb9c6ae70122c6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.end-behavior.md": "sha256:39e4e692533b187959b206d7ff984dbbac329b0c36d69bdbda5caccdf70d6972"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 15,
+      "mastery_probe": 1
+    },
+    "ruleCount": 15
+  },
+  "concept": {
+    "conceptId": "math.func.end-behavior",
+    "name": "End Behavior of Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.polynomial-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.end-behavior-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.end-behavior (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.end-behavior.md": "sha256:39e4e692533b187959b206d7ff984dbbac329b0c36d69bdbda5caccdf70d6972"
+      },
+      "contentHash": "sha256:54eaec3a8e229e61671b2eacc6c9da5fc5e6c63c47906c2d62adc7ec9d34aa81",
+      "ruleCount": 15,
+      "bandCounts": {
+        "3": 15
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.end-behavior.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.end-behavior.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.end-behavior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.end-behavior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.end-behavior/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.end-behavior",
+      "title": "Learning Objective",
+      "content": "Given a polynomial function, the student determines end behavior (the function's behavior as x→+∞ and x→−∞) using the leading term rule (degree and sign of leading coefficient), writes end behavior using arrow notation (f(x)→+∞ as x→+∞, etc.), draws the correct tail directions on a graph, extends the analysis to rational functions via degree comparison and leading-coefficient ratio, and distinguishes end behavior from local behavior (zeros, local maxima/minima) in the middle of the graph.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.end-behavior",
+      "title": "END-BEHAVIOR-FROM-ZERO",
+      "content": "| MC-1 | END-BEHAVIOR-FROM-ZERO | Student evaluates f(0) or f(1) to determine what the function does at the \"ends\"; doesn't understand that end behavior requires x→±∞ | Type 1 — overgeneralization (students are used to evaluating functions at specific values; \"what does f do\" triggers substitution of a convenient value rather than limits) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.end-behavior",
+      "title": "ODD-DEGREE-SAME-ENDS",
+      "content": "| MC-2 | ODD-DEGREE-SAME-ENDS | Student believes odd-degree polynomials have the same tail direction on both sides, like even-degree polynomials; draws both tails going up (or both down) | Type 1 — overgeneralization (most early polynomial examples are even-degree — the symmetric parabola imprints \"both ends go the same way\"; the asymmetric behavior of odd-degree functions is counter-intuitive) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.end-behavior",
+      "title": "LEADING-COEFFICIENT-ONLY-POSITIVE",
+      "content": "| MC-3 | LEADING-COEFFICIENT-ONLY-POSITIVE | Student correctly uses the leading coefficient's sign for large positive x, but ignores the reversal at x→−∞ for odd-degree polynomials; always writes the same behavior for both ends | Type 5 — instruction-induced (right-side analysis is taught first and more heavily; (−x)ⁿ sign reversal for odd n is introduced later and not always practiced symmetrically) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "Leading term: −3x⁴. Degree 4 (even), coefficient −3 (negative).",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Leading term: −3x⁴. Degree 4 (even), coefficient −3 (negative).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "Pattern: both down. f(x)→−∞ as x→+∞; f(x)→−∞ as x→−∞.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Pattern: both down. f(x)→−∞ as x→+∞; f(x)→−∞ as x→−∞.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "Verification: f(100)=−3(10⁸)+7(10⁶)−…≈−3×10⁸ (very negative). ✓",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Verification: f(100)=−3(10⁸)+7(10⁶)−…≈−3×10⁸ (very negative). ✓\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "CORRECT → \"End behavior: look at aₙxⁿ only. Even degree: both ends same direction (sign of aₙ). Odd degree: ends in opposite directions (positive aₙ → right up/left down).\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"End behavior: look at aₙxⁿ only. Even degree: both ends same direction (sign of aₙ). Odd degree: ends in opposite directions (positive aₙ → right up/left down).\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "PARTIAL (correct for x→+∞, wrong for x→−∞) → \"For x→−∞: substitute −∞ into the leading term aₙxⁿ. If n is odd, (−∞)ⁿ=−∞, so the sign flips.\" → TB-R03 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (correct for x→+∞, wrong for x→−∞) → \\\"For x→−∞: substitute −∞ into the leading term aₙxⁿ. If n is odd, (−∞)ⁿ=−∞, so the sign flips.\\\" → TB-R03 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "NO_RESPONSE → \"Fill in a table for f(x)=x³ at x=10, 100, 1000 (all positive) and x=−10, −100, −1000. What happens at the extremes?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"Fill in a table for f(x)=x³ at x=10, 100, 1000 (all positive) and x=−10, −100, −1000. What happens at the extremes?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "CORRECT → \"Leading term determines both ends. Degree-parity determines same vs. opposite directions. Leading-coefficient sign determines which direction (up/down) for x→+∞. Local behavior in the middle is independent.\" → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Leading term determines both ends. Degree-parity determines same vs. opposite directions. Leading-coefficient sign determines which direction (up/down) for x→+∞. Local behavior in the middle is independent.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "PARTIAL (confuses turning points with end behavior) → \"Turning points are the 'bumps' in the middle. End behavior is about the tails for very large |x| — far from any turning points. The leading term wins at the tails regardless of bumps.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (confuses turning points with end behavior) → \\\"Turning points are the 'bumps' in the middle. End behavior is about the tails for very large |x| — far from any turning points. The leading term wins at the tails regardless of bumps.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "NO_RESPONSE → \"For f(x)=−x⁵+3x³−x, what is the leading term? Use it to fill in: f(x)→__ as x→+∞ and f(x)→__ as x→−∞.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"For f(x)=−x⁵+3x³−x, what is the leading term? Use it to fill in: f(x)→__ as x→+∞ and f(x)→__ as x→−∞.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "CORRECT → \"Odd-degree polynomials: tails in opposite directions. Even-degree: tails in same direction. The leading coefficient's sign gives the x→+∞ direction; x→−∞ reverses for odd degree.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"CORRECT → \\\"Odd-degree polynomials: tails in opposite directions. Even-degree: tails in same direction. The leading coefficient's sign gives the x→+∞ direction; x→−∞ reverses for odd degree.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "PARTIAL (correctly finds x→+∞, writes same direction for x→−∞) → \"For f(x)=−x³: at x=−10, f=−(−10)³=−(−1000)=1000>0. This is positive, opposite to f(10)=−1000. So x³ and −x go in opposite directions at ±∞.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"PARTIAL (correctly finds x→+∞, writes same direction for x→−∞) → \\\"For f(x)=−x³: at x=−10, f=−(−10)³=−(−1000)=1000>0. This is positive, opposite to f(10)=−1000. So x³ and −x go in opposite directions at ±∞.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 112,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 113,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.end-behavior",
+      "title": "NO_RESPONSE → \"Evaluate f(x)=x³ at x=100 and at x=−100. What are the two values? What are the two tails doing?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"NO_RESPONSE → \\\"Evaluate f(x)=x³ at x=100 and at x=−100. What are the two values? What are the two tails doing?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.func.end-behavior/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.end-behavior",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. State the end behavior (x→+∞ and x→−∞) for: (a) f(x)=4x³−x+7; (b) g(x)=−x⁴+3x²; (c) h(x)=−5x⁷+2x³−1; (d) k(x)=x⁸.\n2. A polynomial f has exactly 3 turning points and both tails going to −∞. What is the minimum degree of f? What must be true about the leading coefficient?\n3. Sketch a polynomial with: odd degree, negative leading coefficient, two turning points. Label the tail directions.\n4. Determine end behavior for the rational function f(x)=(3x²−1)/(x²+2). [Hint: divide numerator and denominator by x² and apply limits.] What is the horizontal asymptote?\n\n**P55 — Reflect & Consolidate:** \"End behavior: look at leading term aₙxⁿ only. Even degree → same tails. Odd degree → opposite tails. Sign of aₙ → right tail direction. x→−∞ reverses sign only for odd n. Local behavior (zeros, turning points) doesn't affect the tails.\"\n\n**P76 — Transfer Probe (Independence mode):**\nFor a rational function f(x)=P(x)/Q(x): (a) If deg(P)<deg(Q), show that f(x)→0 as x→±∞. What is the horizontal asymptote? (b) If deg(P)=deg(Q), show that f(x)→aₙ/bₙ (ratio of leading coefficients). (c) If deg(P)=deg(Q)+1, show that f has an oblique asymptote y=mx+b; find it for f(x)=(2x²+3x)/(x+1). (d) If deg(P)>deg(Q)+1, what happens to f as x→±∞? Does it have any asymptote?\n\n**P55 — Reflect & Consolidate:** \"End behavior of rational functions depends on the degrees: underdeveloped numerator → 0; equal degrees → constant; numerator one more → oblique asymptote; numerator larger excess → unbounded. Polynomial long division reveals the oblique asymptote explicitly.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=x⁴−16x². (a) Identify the leading term and state the end behavior. (b) How many turning points could f have (maximum)? (c) Factor f(x) completely and find all zeros. (d) Sketch f: mark zeros, approximate turning points, and confirm the tail behavior matches your analysis in (a).\"\n\n**P55 — Reflect & Consolidate:** \"End behavior constrains the graph's tails but says nothing about the middle. A degree-4 polynomial can have 0, 2, or 4 real zeros and up to 3 turning points while maintaining the same even-positive end behavior (both tails up). Reading a sketch requires separating local and global analysis.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.end-behavior complete\n- Score 3/5 → REVIEW odd-degree behavior at x→−∞ and leading-term dominance; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.polynomial-function; reassign\n\n**P78 — Completion:** End behavior certified. Student applies the leading-term rule to determine tail directions for any polynomial, writes end behavior using correct arrow notation, distinguishes even-degree (same tails) from odd-degree (opposite tails) patterns, and extends analysis to rational function horizontal/oblique asymptotes.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.end-behavior.md",
+        "startLine": 127,
+        "endLine": 154
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

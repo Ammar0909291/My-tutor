@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.integer-programming |
-| Title | Integer Programming |
+| name | Integer Programming |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | analyze |
@@ -154,7 +154,7 @@ Step 1 — "B&B generates a tree of subproblems, each obtained by adding one bou
 **TB-R03 (MC-3 LP-RELAXATION-ALWAYS-TIGHT):**
 Step 1 — "TU is a rare structural property. Network flow and assignment matrices are TU because they are 0/1 matrices where each column sums to exactly 0 or ±1 in a balanced way. Knapsack, TSP, scheduling problems almost never have TU constraint matrices." Step 2 — Integrality gap can be arbitrarily large: the TSP LP relaxation (with subtour elimination) can give fractional tours that are convex combinations of multiple integer tours, with no single integer-feasible tour near the LP optimal. Christofides algorithm gets within 3/2 of LP optimal, but this gap is structural, not a fluke. Step 3 — "The LP relaxation gives a bound (lower bound for min, upper bound for max) and is a starting point for B&B — not the solution. Always check for TU before trusting LP to solve the IP directly."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Solve by branch-and-bound (draw the full tree): max 2x₁+3x₂ s.t. x₁+2x₂≤5, 3x₁+x₂≤6, x₁,x₂≥0, x₁,x₂∈ℤ. Show LP relaxation and integer solution at each node.

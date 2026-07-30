@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.compact-operator-spectrum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.compact-operator-spectrum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4dc584b69c39124d5d20f8407d93212a7a9392bfcadab0705802ae2daf2c05f3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md": "sha256:e86feaac2c536e881f688a548e22208bbf82af1e82ffed2ed17528d36d284116"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.compact-operator-spectrum",
+    "name": "Compact Operators",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.fnal.spectral-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.compact-operator-spectrum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.compact-operator-spectrum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md": "sha256:e86feaac2c536e881f688a548e22208bbf82af1e82ffed2ed17528d36d284116"
+      },
+      "contentHash": "sha256:67f0050036aa1c36143881d483fd008532e65e4f8704618b1d5420928f2f3272",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.compact-operator-spectrum.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.compact-operator-spectrum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.compact-operator-spectrum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.compact-operator-spectrum.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.compact-operator-spectrum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.compact-operator-spectrum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.compact-operator-spectrum.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.compact-operator-spectrum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.compact-operator-spectrum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.compact-operator-spectrum.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.compact-operator-spectrum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.compact-operator-spectrum\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **compact operator** $T:X\\to Y$ as a bounded linear operator that maps every bounded set to a **precompact** (relatively compact: has compact closure) set, and correctly reformulate this as: every bounded sequence $(x_n)$ in $X$ has a subsequence $(x_{n_k})$ such that $(Tx_{n_k})$ converges in $Y$ — and distinguish compactness from boundedness (every compact operator is bounded, but most bounded operators are not compact in infinite dimensions).\n- LO2: State the **spectral properties of compact operators on Banach spaces** — the spectrum of a compact operator $T$ is at most countable with 0 as the only possible accumulation point; every nonzero spectral value $\\lambda$ is an eigenvalue with finite-dimensional eigenspace; if $X$ is infinite-dimensional, $0\\in\\sigma(T)$ always — and correctly analyze which spectral properties hold for compact vs. general bounded operators.\n- LO3: State the **Fredholm alternative** for a compact operator $T$ and scalar $\\lambda\\neq0$: either $\\lambda I-T$ is invertible (the equation $(\\lambda I-T)x=y$ has a unique solution for every $y$), or $\\lambda$ is an eigenvalue of $T$ (and $(\\lambda I-T)x=y$ has a solution iff $y$ is orthogonal to $\\ker(\\lambda I-T^*)$) — a direct analogue of the finite-dimensional \"either $Ax=b$ has a unique solution, or $Ax=0$ has a nontrivial solution.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "BOUNDED-IMPLIES-COMPACT-IN-INFINITE-DIMENSIONS",
+      "content": "| MC-1 | BOUNDED-IMPLIES-COMPACT-IN-INFINITE-DIMENSIONS | Believing that every bounded linear operator on an infinite-dimensional Banach space is compact, missing that compactness is a strictly stronger property not shared by operators like the identity | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "COMPACT-SPECTRUM-NOT-NECESSARILY-DISCRETE",
+      "content": "| MC-2 | COMPACT-SPECTRUM-NOT-NECESSARILY-DISCRETE | Believing that compact operators can have nonzero eigenvalues that accumulate at nonzero points, missing the spectral discreteness theorem (nonzero spectrum of a compact operator is at most countable, with $0$ as the only possible accumulation point) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "FREDHOLM-ALTERNATIVE-APPLIES-TO-ALL-OPERATORS",
+      "content": "| MC-3 | FREDHOLM-ALTERNATIVE-APPLIES-TO-ALL-OPERATORS | Believing the Fredholm alternative's dichotomy (unique-solvability or eigenvalue structure) holds for general bounded operators, not just compact ones — missing that this finite-dimensional-like structure requires compactness | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "Compact Operators: Definition and Core Examples (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Compact Operators: Definition and Core Examples (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "Spectral Properties: Discrete Spectrum and Finite Eigenspaces (Primitive P37: Classify)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Spectral Properties: Discrete Spectrum and Finite Eigenspaces (Primitive P37: Classify)\",\"primitives\":[\"P37\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "The Fredholm Alternative (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Fredholm Alternative (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Define compactness for a linear operator, and prove or disprove: the identity on $\\ell^2$ is compact. (Construct an explicit bounded sequence with no convergent image subsequence.)\n  2. For the compact diagonal operator $T:\\ell^2\\to\\ell^2$, $T(x_n)=(x_n/n^2)$, describe the spectrum $\\sigma(T)$ completely: list all eigenvalues, their eigenspaces, and identify the only possible accumulation point.\n  3. Using the Fredholm alternative, determine for which right-hand sides $y\\in\\ell^2$ the equation $(I-T)x=y$ has a solution, where $T$ is from Problem 2. (Is $\\lambda=1$ an eigenvalue? Use the spectral description from Problem 2.)\n  4. Explain why $0$ is always in the spectrum of a compact operator on an infinite-dimensional Banach space. (Hint: would $T$ be invertible if $0\\notin\\sigma(T)$? What would that imply about $I=T\\cdot T^{-1}$?)\n- **P76 (Transfer Probe, mode = independence)**: \"Integral equations of the form $\\int_0^1 K(x,y)u(y)\\,dy = f(x)$ or $u(x) - \\lambda\\int_0^1 K(x,y)u(y)\\,dy = f(x)$ (Fredholm integral equations of the first and second kind) arise throughout physics and engineering. (a) Using this lesson's definition, explain why the integral operator $Ku(x)=\\int_0^1 K(x,y)u(y)\\,dy$ with continuous $K$ on $[0,1]^2$ is compact on $L^2([0,1])$, and why this makes the equation $u-\\lambda Ku=f$ a Fredholm-type problem. (b) Using the Fredholm alternative, state the two possible outcomes for $u-\\lambda Ku=f$ when $\\lambda\\neq0$ is given: when is there always a unique solution, and when might there be no solution for some $f$? (c) Explain why the equation $Ku=f$ (no $\\lambda$, i.e., $\\lambda=1/1$ but the operator is $K$ not $\\lambda I-K$) is intrinsically harder: relate this to the fact that $0$ is always in $\\sigma(K)$ for a compact $K$ on an infinite-dimensional space.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.spectral-theory` (spectrum, resolvent, eigenvalues, spectral radius; properties of the spectrum for general bounded operators on Banach/Hilbert spaces).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.compact-operator-spectrum/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.compact-operator-spectrum",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.spectral-theory` (spectrum, resolvent, eigenvalues — the spectral language this concept's LO2 and LO3 use and extend to the compact case).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.compact-operator-spectrum.md",
+        "startLine": 99,
+        "endLine": 105
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

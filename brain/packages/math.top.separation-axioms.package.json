@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.separation-axioms-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.separation-axioms",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:457c24e9b92dac6062f6d86c3c5e164b1eb7757da203d364045c8207f6cb93df",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.separation-axioms.md": "sha256:a89e2faee5387a7a5e8cbd8e7f4ed78ea28037662001bcb6f63779377c048005"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.separation-axioms",
+    "name": "Separation Axioms",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.top.topological-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.separation-axioms-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.separation-axioms (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.separation-axioms.md": "sha256:a89e2faee5387a7a5e8cbd8e7f4ed78ea28037662001bcb6f63779377c048005"
+      },
+      "contentHash": "sha256:a5995e20f8ba659ae5c80e5e0accd2d0a51f2f8c427566fe9d9edae68bf05970",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.separation-axioms.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.separation-axioms.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.separation-axioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.separation-axioms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.separation-axioms.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.separation-axioms.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.separation-axioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.separation-axioms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.separation-axioms.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.separation-axioms.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.separation-axioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.separation-axioms\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.separation-axioms.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.separation-axioms.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.separation-axioms"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.separation-axioms\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.separation-axioms/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.separation-axioms",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **five separation axioms** T₀–T₄ precisely; recite the implication chain T₄⇒T₃⇒T₂⇒T₁⇒T₀; give one concrete example showing each implication is strict (i.e., the chain does not reverse).\n- LO2: **Prove** that metric spaces are T₄ (and hence satisfy all lower separation axioms); verify that the Sierpiński space $\\{0,1\\}$ with topology $\\{\\emptyset,\\{1\\},\\{0,1\\}\\}$ is T₀ but not T₁; use T₂ to prove that limits of sequences are unique in Hausdorff spaces.\n- LO3: **Apply Urysohn's Lemma** (T₄ ↔ disjoint closed sets separated by a continuous $[0,1]$-valued function) and **Urysohn's Metrization Theorem** (T₃ + second-countable ↔ metrizable); use these to analyze which properties of common spaces follow from which axiom.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.separation-axioms",
+      "title": "HAUSDORFF-NEIGHBORHOODS-PARTITION-X",
+      "content": "| MC-1 | HAUSDORFF-NEIGHBORHOODS-PARTITION-X | Believing T₂ requires the separating open sets $U,V$ to cover or partition $X$ — they only need to be disjoint and each contain the respective point; they may be small and fail to cover $X$ | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.separation-axioms",
+      "title": "NORMAL-DOES-NOT-IMPLY-REGULAR",
+      "content": "| MC-2 | NORMAL-DOES-NOT-IMPLY-REGULAR | Confusing the direction of the T₃/T₄ implication: T₄ (normal+T₁) implies T₃ (regular+T₁), not the reverse; students sometimes think T₃ is the stronger axiom because \"regular\" sounds more restrictive than \"normal\" | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.separation-axioms",
+      "title": "NORMAL-IMPLIES-METRIZABLE",
+      "content": "| MC-3 | NORMAL-IMPLIES-METRIZABLE | Believing T₄ (normality) alone implies metrizability — metrizability additionally requires second-countability (Urysohn's Metrization Theorem: second-countable + T₃ ↔ metrizable); the long line is T₄ and non-metrizable | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.separation-axioms",
+      "title": "The Hierarchy as Progressive Separation (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Hierarchy as Progressive Separation (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.separation-axioms",
+      "title": "Critical Examples (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Critical Examples (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.separation-axioms",
+      "title": "Urysohn's Lemma (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Urysohn's Lemma (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.separation-axioms",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.separation-axioms",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Prove that in any T₁ space, every singleton $\\{x\\}$ is a closed set. (Use the T₁ condition to show $X\\setminus\\{x\\}$ is open.)\n  2. Show that the cofinite topology on an infinite set $X$ (open sets = ∅ and complements of finite sets) is T₁ but NOT T₂.\n  3. Prove: in a Hausdorff (T₂) space, every sequence has at most one limit. (Use the disjoint-neighborhood property directly as in Example 3.)\n  4. State Urysohn's Lemma and use it to prove the following instance: in $\\mathbb{R}$ (which is normal), for the disjoint closed sets $F_0=\\{0\\}$ and $F_1=\\{1\\}$, construct an explicit Urysohn function $f:\\mathbb{R}\\to[0,1]$ with $f(0)=0$ and $f(1)=1$.\n- **P76 (Transfer Probe, mode = independence)**: \"A **regular Lindelöf space** (T₃ + every open cover has a countable subcover) is normal. (a) Prove this: use the T₃ property to shrink open neighborhoods of each point of $F_1$ away from $F_0$, then extract a countable subcover $\\{V_n\\}$ covering $F_1$, and define $U_n=V_n\\setminus\\bigcup_{k\\le n}\\overline{W_k}$ where $W_k$ cover $F_0$ similarly — show the resulting $U=\\bigcup U_n$ and $V=\\bigcup V_n'$ are disjoint open sets separating $F_0$ and $F_1$. (b) Conclude that every second-countable T₃ space is normal (T₄), and hence metrizable by Urysohn's Metrization Theorem.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Separation Axioms — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.separation-axioms",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (open/closed sets, neighborhood concept, continuous maps defined by preimage condition). Knowledge of metric spaces is helpful context for examples but not a prerequisite — the axioms are purely topological.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.separation-axioms/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.separation-axioms",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (the three open-set axioms and the notion of neighborhoods).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.separation-axioms.md",
+        "startLine": 109,
+        "endLine": 115
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

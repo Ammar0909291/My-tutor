@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.kkt-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.kkt",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e52d08e1d07f1df48e8ff0521b7fd7eefdbd0528dfb7e52da69fbc4a211d982a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.kkt.md": "sha256:99cd5dc5702d28f155e175983059f29d187e48e2095b8018eff4c774ff6b6522"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.opt.kkt",
+    "name": "KKT Conditions",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.opt.duality",
+      "math.opt.lagrange-multipliers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.kkt-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.kkt (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.kkt.md": "sha256:99cd5dc5702d28f155e175983059f29d187e48e2095b8018eff4c774ff6b6522"
+      },
+      "contentHash": "sha256:5207fd56ee9de723c94909493f8743224cbbbe9161d4385620a92f7a1d5120ed",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.kkt.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.kkt.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.kkt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.kkt\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.kkt/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.kkt",
+      "title": "Learning Objective",
+      "content": "Given a constrained optimisation problem min f(x) s.t. gᵢ(x)≤0, hⱼ(x)=0, the student writes all four KKT conditions (stationarity, primal feasibility, dual feasibility, complementary slackness), explains why they are necessary for any smooth optimum under LICQ but sufficient only for convex problems, applies them to solve a small QP by hand, and identifies which training points in a hard-margin SVM are support vectors using complementary slackness.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.kkt",
+      "title": "KKT-SUFFICIENT-ALWAYS",
+      "content": "| MC-1 | KKT-SUFFICIENT-ALWAYS | Student believes KKT conditions are both necessary AND sufficient for optimality for any problem; applies them to non-convex problems and trusts the result as a global minimum | Type 5 — instruction-induced (KKT is introduced as \"the optimality conditions\"; the convexity caveat is added later and students miss it) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.kkt",
+      "title": "COMPLEMENTARY-SLACKNESS-CONFUSION",
+      "content": "| MC-2 | COMPLEMENTARY-SLACKNESS-CONFUSION | Student reads λᵢgᵢ(x*)=0 as a symmetric choice — either factor can be zero by preference — without seeing the causal direction: inactive constraint forces λᵢ=0, and λᵢ>0 forces constraint active | Type 1 — overgeneralization (reads a product-zero as symmetric; misses the causal direction from the constraint's status) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.kkt",
+      "title": "DUAL-FEASIBILITY-OPTIONAL",
+      "content": "| MC-3 | DUAL-FEASIBILITY-OPTIONAL | Student omits the dual feasibility condition λᵢ≥0 when writing KKT; thinks KKT is just stationarity plus primal feasibility; does not understand why a negative multiplier on an inequality constraint would be geometrically wrong | Type 3 — language contamination (\"Lagrange multiplier\" is sign-free in unconstrained equality settings; the inequality sign requirement comes only with gᵢ≤0 and is missed) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "CORRECT → \"Four KKT conditions: stationarity, primal feasibility, dual feasibility (λᵢ≥0), complementary slackness (λᵢgᵢ=0). Necessary for any smooth optimum; sufficient for convex.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Four KKT conditions: stationarity, primal feasibility, dual feasibility (λᵢ≥0), complementary slackness (λᵢgᵢ=0). Necessary for any smooth optimum; sufficient for convex.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "PARTIAL (writes stationarity + primal, omits dual feasibility) → \"What sign restriction holds on the multipliers λᵢ for inequality constraints gᵢ≤0? Why can't λᵢ be negative?\" → TB-R03 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (writes stationarity + primal, omits dual feasibility) → \\\"What sign restriction holds on the multipliers λᵢ for inequality constraints gᵢ≤0? Why can't λᵢ be negative?\\\" → TB-R03 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "NO_RESPONSE → \"Write the Lagrangian for min f(x) s.t. g(x)≤0. What is the derivative of L with respect to x set to zero?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Write the Lagrangian for min f(x) s.t. g(x)≤0. What is the derivative of L with respect to x set to zero?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "CORRECT → \"KKT: necessary always (under LICQ). Sufficient: only when f and all gᵢ are convex and hⱼ are affine. Without convexity: enumerate ALL KKT points and compare.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"KKT: necessary always (under LICQ). Sufficient: only when f and all gᵢ are convex and hⱼ are affine. Without convexity: enumerate ALL KKT points and compare.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "PARTIAL (knows KKT isn't always sufficient, unsure of the condition) → \"State the conditions on f and gᵢ that make every KKT point globally optimal.\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows KKT isn't always sufficient, unsure of the condition) → \\\"State the conditions on f and gᵢ that make every KKT point globally optimal.\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "INCORRECT → TB-R01 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "NO_RESPONSE → \"Can a local maximum satisfy KKT conditions? Give a 1D example.\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Can a local maximum satisfy KKT conditions? Give a 1D example.\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "CORRECT → \"CS: λᵢgᵢ(x*)=0 means inactive constraint → λᵢ=0; or λᵢ>0 → constraint active. In SVM: αᵢ>0 exactly for support vectors. Solution determined by boundary points only.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"CS: λᵢgᵢ(x*)=0 means inactive constraint → λᵢ=0; or λᵢ>0 → constraint active. In SVM: αᵢ>0 exactly for support vectors. Solution determined by boundary points only.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "PARTIAL (understands CS, can't identify SVM support vectors) → \"If αᵢ=3 for training point xᵢ, what does CS say about yᵢ(wᵀxᵢ+b)?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (understands CS, can't identify SVM support vectors) → \\\"If αᵢ=3 for training point xᵢ, what does CS say about yᵢ(wᵀxᵢ+b)?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.kkt",
+      "title": "NO_RESPONSE → \"In αᵢ(yᵢ(wᵀxᵢ+b)−1)=0, if αᵢ>0 what must be true about yᵢ(wᵀxᵢ+b)?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"In αᵢ(yᵢ(wᵀxᵢ+b)−1)=0, if αᵢ>0 what must be true about yᵢ(wᵀxᵢ+b)?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 112,
+        "endLine": 112
+      }
+    },
+    {
+      "assetId": "math.opt.kkt/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.kkt",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Write all four KKT conditions for: min x₁²+2x₂² s.t. x₁+x₂≤3, x₁≥0. Solve for x*.\n2. For min (x₁−3)²+(x₂−2)² s.t. x₁²+x₂²≤5: write the KKT conditions, find x* by case analysis, verify all four conditions.\n3. A student solves KKT for min −x₁x₂ s.t. x₁+x₂≤4, x₁,x₂≥0 and finds a KKT point at (2,2). Compute the Hessian of f at (2,2). Is this point a minimum, maximum, or saddle point? Does KKT sufficiency apply?\n4. In soft-margin SVM, KKT conditions include αᵢ∈[0,C] and ξᵢ≥0 with a separate multiplier μᵢ. Using CS, explain which training points have: 0<αᵢ<C (on the margin), αᵢ=C (margin violators with ξᵢ>0), αᵢ=0 (correctly classified, inside margin).\n\n**P55 — Reflect & Consolidate:** \"KKT: necessary for smooth problems under LICQ. Four conditions: stationarity, primal feasibility, dual feasibility (λᵢ≥0), complementary slackness (λᵢgᵢ=0). Sufficient for convex programs. CS identifies which constraints are active — in SVM, which training points are support vectors.\"\n\n**P76 — Transfer Probe (Independence mode):**\nFritz John conditions: without assuming LICQ, the stationarity condition becomes λ₀∇f(x*)+Σλᵢ∇gᵢ(x*)=0 where λ₀≥0 and (λ₀,λ₁,…)≠(0,…,0). (a) Show that if LICQ holds at x* (active constraint gradients are linearly independent), then λ₀>0, so dividing by λ₀ recovers standard KKT. (b) Give a concrete example where LICQ fails: min x₁ s.t. x₁²≤0, x₁≥0. Find the optimum, check whether LICQ holds, and show that the only Fritz John multipliers satisfying the condition have λ₀=0 (the \"abnormal\" case where standard KKT fails).\n\n**P55 — Reflect & Consolidate:** \"Fritz John generalises KKT to cases where LICQ fails. When LICQ holds, Fritz John reduces to standard KKT (λ₀=1). LICQ fails when active constraint gradients are linearly dependent — e.g., two constraints tangent at the optimum. The abnormal case (λ₀=0) means the standard stationarity condition may not hold even at the true optimum.\"\n\n**P75 — Mastery Assessment:**\n\"The problem: min x₁+x₂ s.t. x₁²+x₂²≤2, x₁+x₂≥1, x₁,x₂≥0. (a) Write the complete KKT conditions (all four conditions for every constraint). (b) Determine which constraints are active at the optimum by case analysis and complementary slackness. (c) Solve for x* and all multipliers. (d) Is the problem convex? Does convexity make your KKT solution provably globally optimal?\"\n\n**P55 — Reflect & Consolidate:** \"Case analysis via CS: for each inequality, either active (gᵢ=0, λᵢ unconstrained but ≥0) or inactive (λᵢ=0). Exhausting all cases + checking dual feasibility gives the complete solution. For convex problems, the first KKT point found is the unique global minimum.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.opt.kkt complete\n- Score 3/5 → REVIEW complementary slackness case analysis and necessity vs. sufficiency; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.opt.duality or math.opt.lagrange-multipliers; reassign\n\n**P78 — Completion:** KKT conditions certified. Student can write all four KKT conditions, distinguish necessity from sufficiency, apply CS to identify active constraints and SVM support vectors, and verify optimality in convex and non-convex cases.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.kkt.md",
+        "startLine": 125,
+        "endLine": 152
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

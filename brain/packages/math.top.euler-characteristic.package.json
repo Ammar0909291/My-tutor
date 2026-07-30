@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.euler-characteristic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.euler-characteristic",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6f5d8fcbc2e69980b106ab37e3172bcc020450beeae7ffbdfb960bebd10ffa8b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.euler-characteristic.md": "sha256:d3dba45eb35d9d0fe35b8b974a6e5d8c7dc2286745b79320a61ae9db531aafaf"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.euler-characteristic",
+    "name": "Euler Characteristic",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.top.homology"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.euler-characteristic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.euler-characteristic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.euler-characteristic.md": "sha256:d3dba45eb35d9d0fe35b8b974a6e5d8c7dc2286745b79320a61ae9db531aafaf"
+      },
+      "contentHash": "sha256:178973a03e2b84d14b065a8dab5cf249c394f78224eaa3939a8160a5a6e573c9",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.euler-characteristic.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.euler-characteristic.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.euler-characteristic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.euler-characteristic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.euler-characteristic.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.euler-characteristic.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.euler-characteristic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.euler-characteristic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.euler-characteristic.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.euler-characteristic.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.euler-characteristic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.euler-characteristic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.euler-characteristic.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.euler-characteristic.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.euler-characteristic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.euler-characteristic\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.euler-characteristic/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "Learning Objectives",
+      "content": "- LO1: **Compute** $\\chi(X)=V-E+F$ for polyhedra and verify Euler's formula $\\chi=2$ for convex polyhedra; express $\\chi$ as the **alternating sum of Betti numbers** $\\chi=\\sum_n(-1)^n\\,\\mathrm{rank}(H_n(X;\\mathbb{Z}))$ and verify the two formulas agree on standard examples ($S^2$, $T^2$, $\\mathbb{R}P^2$).\n- LO2: **Use $\\chi$ as a topological invariant** to distinguish closed surfaces: $\\chi(S^2)=2$ (sphere), $\\chi(T^2)=0$ (torus), $\\chi(\\Sigma_g)=2-2g$ (orientable genus-$g$ surface); explain why $\\chi=0$ alone does NOT determine the homeomorphism type (Klein bottle and torus both have $\\chi=0$ but are not homeomorphic — one is orientable, one is not).\n- LO3: **Apply the classification of compact surfaces** — orientable surfaces classified by genus $g\\ge0$, non-orientable surfaces by non-orientable genus $k\\ge1$ with $\\chi=2-k$ — to read off the topological type from $\\chi$ together with an orientability flag.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "EULER-FORMULA-HOLDS-FOR-ALL-POLYHEDRA",
+      "content": "| MC-1 | EULER-FORMULA-HOLDS-FOR-ALL-POLYHEDRA | Believing $V-E+F=2$ holds for any polyhedron regardless of topology — missing that it holds only for polyhedra homeomorphic to $S^2$; a torus-shaped polyhedron gives $V-E+F=0$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "SAME-EULER-CHARACTERISTIC-MEANS-HOMEOMORPHIC",
+      "content": "| MC-2 | SAME-EULER-CHARACTERISTIC-MEANS-HOMEOMORPHIC | Believing two compact surfaces with equal $\\chi$ are homeomorphic — missing orientability as the second classifying invariant: the torus ($\\chi=0$, orientable) and Klein bottle ($\\chi=0$, non-orientable) have the same $\\chi$ but different topological type | Critical |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "EULER-FORMULA-V-MINUS-E-PLUS-F-UNIVERSALLY-2",
+      "content": "| MC-3 | EULER-FORMULA-V-MINUS-E-PLUS-F-UNIVERSALLY-2 | Believing the formula always gives 2 for any surface triangulation — confusing Euler's special result for $S^2$ with the general formula $\\chi=V-E+F=2-2g$ for genus-$g$ orientable surfaces | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "From Polyhedra to Homology (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Polyhedra to Homology (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "Computing $\\chi$ for Surfaces (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Computing $\\\\chi$ for Surfaces (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "Classification of Compact Surfaces (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Classification of Compact Surfaces (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. A surface is formed by gluing a regular octagon (8-gon) with edge identification word $abcda^{-1}b^{-1}c^{-1}d^{-1}$. Determine $V$, $E$, $F$ from the CW structure. Compute $\\chi$ and identify the surface.\n  2. Show that $\\chi(\\mathbb{R}P^2)=1$ using the CW structure: 1 zero-cell, 1 one-cell, 1 two-cell (standard structure of $\\mathbb{R}P^2$). Verify that $H_2(\\mathbb{R}P^2;\\mathbb{Z})=0$ is consistent with the Betti-number formula.\n  3. The connected sum $M_1\\#M_2$ of two surfaces satisfies $\\chi(M_1\\#M_2)=\\chi(M_1)+\\chi(M_2)-2$. Use this to compute $\\chi(\\Sigma_g)$ for all $g\\ge0$ by induction from $\\chi(S^2)=2$ and $\\chi(T^2)=0$.\n  4. Show that no compact surface has Euler characteristic equal to 3. (Use the classification theorem: possible values are $2,1,0,-1,-2,\\ldots$; explain why 3 is not achievable.)\n- **P76 (Transfer Probe, mode = independence)**: \"The **Lefschetz Fixed-Point Theorem** states: for a continuous map $f:X\\to X$ on a compact triangulable space, if the **Lefschetz number** $L(f)=\\sum_n(-1)^n\\,\\mathrm{tr}(f_{*n})$ (trace of the induced map on $H_n$) is non-zero, then $f$ has a fixed point. Note that $L(\\mathrm{id})=\\chi(X)$. (a) Use this to explain why every continuous map $f:S^2\\to S^2$ with $\\deg f\\neq(-1)^{n+1}$ must have a fixed point (compute $L(f)=1+(-1)^2\\deg f$ from $f_*$ on $H_2\\cong\\mathbb{Z}$). (b) Apply the theorem to the identity map on $T^2$: note $L(\\mathrm{id}_{T^2})=\\chi(T^2)=0$, which is consistent with the existence of fixed-point-free maps (like a translation of the torus) — explain why $L=0$ does NOT guarantee the absence of fixed points.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Euler Characteristic — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.homology` (singular or simplicial homology, Betti numbers $\\beta_n=\\mathrm{rank}(H_n)$, the sequence of homology groups of a CW complex, the fact that Betti numbers are finite for compact spaces). The $V-E+F$ formula is introduced here as a special case of the homological formula for 2-dimensional polyhedra.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.euler-characteristic/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.euler-characteristic",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.homology` (Betti numbers, singular/simplicial homology groups, CW complexes).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: `math.disc.planar-graph` listed in KG but blueprint NOT on disk → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.euler-characteristic.md",
+        "startLine": 109,
+        "endLine": 115
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

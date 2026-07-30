@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.num.floating-point |
-| Title | Floating-Point Arithmetic |
+| name | Floating-Point Arithmetic |
 | Domain | math.num |
 | Difficulty | proficient |
 | Bloom level | understand |
@@ -113,7 +113,7 @@ Step 1 — "When you add a small number ε to a large number M in floating-point
 **TB-R03 (MC-3 CANCELLATION-IS-ACCURATE):**
 Step 1 — "Each of √(x+1) and √x is computed to full precision — about 15 significant digits. But their DIFFERENCE is much smaller than either one: for x=10¹², both are ≈10⁶ while the difference is ≈5×10⁻⁷. The absolute errors in each (≈u×10⁶≈2.22×10⁻¹⁰) are larger than the 'true' answer itself. Relative accuracy of the difference: (2.22×10⁻¹⁰)/(5×10⁻⁷) ≈ 4×10⁻⁴ — only 4 significant digits, not 15." Step 2 — Stable alternative: √(x+1)−√x = 1/(√(x+1)+√x). Both terms of the denominator are large positives; no cancellation occurs; full 15-digit accuracy is retained. Step 3 — "The test: compare the stable and unstable formulas at x=10¹². The stable formula gives ~15 digits; the unstable formula matches only the first 4-5. Whenever two operands are nearly equal, look for an algebraic reformulation that replaces the subtraction with a sum."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. (a) What is the machine epsilon u for double precision? (b) True or false: every integer n with |n|≤2⁵³ is exactly representable as a double-precision float. (c) What is fl(2⁵³+1) in double precision?

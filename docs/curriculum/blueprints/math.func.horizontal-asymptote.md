@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.horizontal-asymptote |
-| Title | Horizontal Asymptotes |
+| name | Horizontal Asymptotes |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | analyze |
@@ -132,7 +132,7 @@ Step 1 — "Plugging in a large number gives an APPROXIMATION of the horizontal 
 **TB-R03 (MC-3 OBLIQUE-IS-HORIZONTAL):**
 Step 1 — "A horizontal asymptote y=L is a CONSTANT line. An oblique asymptote y=mx+b (m≠0) is a SLANTED line — not horizontal at all. These are two different phenomena with different detection methods." Step 2 — f(x)=(x²+2)/(x−1). Degree of numerator (2) exceeds degree of denominator (1) by 1. No horizontal asymptote by the degree rule (n>m → none). Perform long division: x²+2=(x−1)(x+1)+3. So f(x)=x+1+3/(x−1). As x→∞: f≈x+1. Oblique asymptote: y=x+1, a slant line with slope 1. Step 3 — "Check the degrees first. If n=m+1: do long division to find the slant asymptote. If n<m or n=m: apply the HA rule. If n>m+1: neither."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Find all horizontal asymptotes (if any) for: (a) f(x)=(3x²−1)/(5x²+2); (b) g(x)=(x+4)/(x³−1); (c) h(x)=x²/(x−1); (d) k(x)=(2x³−x)/(4x³+3).

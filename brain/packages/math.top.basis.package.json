@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.basis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.basis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6c292a95198f227e3106092d0228a73cc8b69cdeec86e1e2f02fbf519bcf6c92",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.basis.md": "sha256:0a02894a86e5cfbab1d2698a067e88c35aa8bd5c72c9001c239207a9dbd84381"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.basis",
+    "name": "Basis for a Topology",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.top.topological-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.basis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.basis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.basis.md": "sha256:0a02894a86e5cfbab1d2698a067e88c35aa8bd5c72c9001c239207a9dbd84381"
+      },
+      "contentHash": "sha256:68b36fe47feafefac04eb2389e6baface21e5edfe0a75221263d67dc34b759db",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.basis.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.basis.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.basis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.basis.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.basis.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.basis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.basis.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.basis.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.basis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.basis.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.basis.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.basis\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.basis/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.basis",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **two basis conditions** — (i) every point lies in some basis element, (ii) for any $x \\in B_1 \\cap B_2$ with $B_1,B_2\\in\\mathcal{B}$ there exists $B_3\\in\\mathcal{B}$ with $x\\in B_3\\subseteq B_1\\cap B_2$ — and explain why these guarantee a well-defined topology where $U$ is open iff every point of $U$ is in some basis element contained in $U$.\n- LO2: **Verify** a given collection is a basis; determine when two bases generate the **same topology** (iff each basis element of one is a union of basis elements of the other, equivalently: each basis element of $\\mathcal{B}_1$ is covered by $\\mathcal{B}_2$ and vice versa).\n- LO3: Construct the **standard bases** for $\\mathbb{R}^n$ (open balls), the order topology on a linearly ordered set (open intervals $(a,b)$), and the product topology ($\\pi_\\alpha^{-1}(U_\\alpha)$ finite intersections); use the basis comparison criterion to show that the lower-limit topology $\\mathcal{B}_{LL}=\\{[a,b):a<b\\}$ on $\\mathbb{R}$ is **strictly finer** than the standard topology.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.basis/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.basis",
+      "title": "BASIS-IS-CLOSED-UNDER-INTERSECTION",
+      "content": "| MC-1 | BASIS-IS-CLOSED-UNDER-INTERSECTION | Believing a basis must be closed under pairwise intersection — confusing condition B2 (find a refinement at each point) with closure under $\\cap$ (which would make $\\mathcal{B}$ itself a topology) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.top.basis/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.basis",
+      "title": "DIFFERENT-BASES-MEANS-DIFFERENT-TOPOLOGIES",
+      "content": "| MC-2 | DIFFERENT-BASES-MEANS-DIFFERENT-TOPOLOGIES | Believing two different collections $\\mathcal{B}_1\\neq\\mathcal{B}_2$ always generate different topologies — missing that $\\{(a,b)\\}$ and $\\{(a,b): a,b\\in\\mathbb{Q}\\}$ generate the same standard topology on $\\mathbb{R}$ | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.top.basis/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.basis",
+      "title": "LOWER-LIMIT-SAME-AS-STANDARD",
+      "content": "| MC-3 | LOWER-LIMIT-SAME-AS-STANDARD | Believing $[a,b)$ and $(a,b)$ generate the same topology on $\\mathbb{R}$ because both are \"intervals\" — missing that $[0,1)$ is lower-limit-open but not standard-open, making $\\mathcal{T}_{LL}$ strictly finer | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.top.basis/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.basis",
+      "title": "Motivation via Open Balls (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Motivation via Open Balls (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.basis/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.basis",
+      "title": "The Two Conditions (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Two Conditions (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.basis/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.basis",
+      "title": "Basis Comparison (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Basis Comparison (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.basis/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.basis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.top.basis/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.basis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (5-problem set)**:\n  1. Verify that the collection $\\mathcal{B}=\\{(a,b)\\times(c,d): a<b, c<d\\}$ of open rectangles satisfies B1 and B2 in $\\mathbb{R}^2$.\n  2. Show that $\\mathcal{B}=\\{B(x,1/n): x\\in\\mathbb{R}^2, n\\in\\mathbb{Z}^+\\}$ (unit-fraction-radius disks only) generates the standard topology on $\\mathbb{R}^2$.\n  3. Show that $\\mathcal{B}=\\{\\{x\\}: x\\in X\\}$ (singletons) generates the discrete topology on any set $X$; verify B1 and B2.\n  4. On $\\mathbb{R}$, compare $\\mathcal{B}_{LL}=\\{[a,b)\\}$ with $\\mathcal{B}_{RR}=\\{(a,b]\\}$. Is $\\mathcal{T}_{LL}=\\mathcal{T}_{RR}$? (Show $[0,1)\\in\\mathcal{T}_{LL}$ but $[0,1)\\notin\\mathcal{T}_{RR}$ and vice versa for $(0,1]$.)\n  5. Prove: if $\\mathcal{T}$ is a topology on $X$ and $\\mathcal{B}\\subseteq\\mathcal{T}$ with the property that every member of $\\mathcal{T}$ is a union of members of $\\mathcal{B}$, then $\\mathcal{B}$ is a basis for $\\mathcal{T}$. (Verify B1 and B2.)\n- **P76 (Transfer Probe, mode = independence)**: \"The **second-countability axiom** states that a topological space has a **countable basis**. (a) Show that $\\mathbb{R}^n$ with the standard topology is second-countable by exhibiting an explicit countable basis. (b) Show that the lower-limit topology $\\mathcal{T}_{LL}$ on $\\mathbb{R}$ is NOT second-countable: any basis for $\\mathcal{T}_{LL}$ must contain uncountably many elements. Hint: for each $x\\in\\mathbb{R}$, the set $[x,x+1)$ is open but cannot be expressed as a union of basis elements that 'start before' $x$, so each $x$ must contribute its own basis element.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Basis for a Topology — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.top.basis/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.basis",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (the three open-set axioms, the notions of open and closed sets, subspace topology). No metric space or distance notion is assumed — the basis formalism is purely set-theoretic.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.basis/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.basis",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (the three axioms for a topology, definition of open sets).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.basis.md",
+        "startLine": 106,
+        "endLine": 112
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

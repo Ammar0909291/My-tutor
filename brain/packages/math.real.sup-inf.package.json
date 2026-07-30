@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.sup-inf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.sup-inf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bc79c3a9e30de7b2a6a89ea8c25fa310726045a04f20f0543f1db28b569b6052",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.sup-inf.md": "sha256:1e48a2e93f1450addd79ab3dceff2f0c00d8b7db3f45c5c62a7d91ce3d62312c"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.real.sup-inf",
+    "name": "Supremum and Infimum",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.real.completeness"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.sup-inf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.sup-inf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.sup-inf.md": "sha256:1e48a2e93f1450addd79ab3dceff2f0c00d8b7db3f45c5c62a7d91ce3d62312c"
+      },
+      "contentHash": "sha256:feeefb5e10bf50cfddce1f6dde08f873ef9d888c99cf439c8e6f18dc1cd8c200",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.sup-inf.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.sup-inf.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.sup-inf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.sup-inf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.sup-inf.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.sup-inf.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.sup-inf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.sup-inf\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.sup-inf.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.sup-inf.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.sup-inf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.sup-inf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.sup-inf/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.sup-inf",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **supremum** $\\sup(S)$ of a set $S\\subseteq\\mathbb{R}$ as its **least upper bound** — an upper bound $u$ such that no smaller number is also an upper bound — and the **infimum** $\\inf(S)$ as its **greatest lower bound**, and correctly verify a proposed value is the supremum using the two-part test: (i) it is an upper bound, and (ii) no smaller number is.\n- LO2: State that the **completeness** of $\\mathbb{R}$ (already established) guarantees every non-empty, bounded-above subset of $\\mathbb{R}$ has a supremum IN $\\mathbb{R}$ (and dually for infimum/bounded-below), and correctly identify this as the reason $\\sup/\\inf$ are guaranteed to exist for such sets, in contrast to $\\mathbb{Q}$ where they can fail to exist.\n- LO3: Correctly distinguish **attained** suprema (where $\\sup(S)\\in S$, making it also the **maximum**) from **unattained** ones (where $\\sup(S)\\notin S$, so $S$ has no maximum at all), and classify given sets accordingly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.sup-inf",
+      "title": "SUPREMUM-EXISTENCE-ASSUMED-IN-RATIONALS",
+      "content": "| MC-1 | SUPREMUM-EXISTENCE-ASSUMED-IN-RATIONALS | Believing every bounded-above set of rational numbers has a supremum that is itself rational, missing that completeness (and the guaranteed existence of sup/inf) is a genuinely $\\mathbb{R}$-specific property | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.sup-inf",
+      "title": "SUPREMUM-ASSUMED-ALWAYS-ATTAINED",
+      "content": "| MC-2 | SUPREMUM-ASSUMED-ALWAYS-ATTAINED | Believing the supremum of a set is always an element of that set (i.e., always equals the maximum), missing that many sets have an unattained supremum and no maximum at all | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.sup-inf",
+      "title": "UPPER-BOUND-ALONE-MISTAKEN-FOR-SUPREMUM",
+      "content": "| MC-3 | UPPER-BOUND-ALONE-MISTAKEN-FOR-SUPREMUM | Believing ANY upper bound of a set qualifies as \"the supremum,\" missing the second requirement that it be the LEAST such upper bound | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.sup-inf",
+      "title": "The Two-Part Supremum Test, via Completeness (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Two-Part Supremum Test, via Completeness (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.sup-inf",
+      "title": "Attained vs. Unattained Suprema (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Attained vs. Unattained Suprema (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 11,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.sup-inf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.sup-inf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Find $\\sup(S)$ and $\\inf(S)$ for $S=\\{1-1/n : n\\in\\mathbb{N}, n\\ge1\\}=\\{0,1/2,2/3,3/4,\\ldots\\}$, and determine whether each is attained.\n  2. Verify, using the two-part test, that $\\inf([2,5])=2$.\n  3. Explain why $S=\\{q\\in\\mathbb{Q}:q<\\pi\\}$ has no supremum within $\\mathbb{Q}$, but does have one within $\\mathbb{R}$.\n  4. Give an example of a bounded set whose supremum IS attained (i.e., is also a maximum), and one whose supremum is NOT attained, justifying each.\n- **P76 (Transfer Probe, mode = independence)**: \"A sequence $(a_n)$ is said to be bounded above if the SET of its terms, $\\{a_n : n\\in\\mathbb{N}\\}$, is bounded above as a subset of $\\mathbb{R}$. (a) Using this lesson's completeness-guarantees-existence result, explain why every bounded-above sequence of real numbers has a well-defined supremum, $\\sup_n a_n$, regardless of whether the sequence converges. (b) Explain, using this lesson's attained-vs-unattained distinction, why $\\sup_n a_n$ being UNattained (e.g. for $a_n=1-1/n$) does not prevent it from being a meaningful, well-defined real number — connecting to why this quantity is useful even when no single term of the sequence equals it.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.sup-inf",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.completeness` (the completeness axiom of $\\mathbb{R}$: every non-empty subset bounded above has a least upper bound).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.sup-inf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.sup-inf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.completeness` (the completeness axiom — every non-empty, bounded-above subset of $\\mathbb{R}$ has a least upper bound — that this concept directly names, characterizes via the two-part test, and contrasts against $\\mathbb{Q}$).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.sup-inf.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

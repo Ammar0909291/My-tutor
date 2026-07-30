@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.morera-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.morera-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f3d667fe73b2723cec40c1987929c475ffb7d9143a1d11882827f29cbe615481",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.morera-theorem.md": "sha256:e64584cec1ccc6f2f7907af387ba7be4eae01362afa47a913f64949a956e917c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.morera-theorem",
+    "name": "Morera's Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.cx.cauchy-integral-formula"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.morera-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.morera-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.morera-theorem.md": "sha256:e64584cec1ccc6f2f7907af387ba7be4eae01362afa47a913f64949a956e917c"
+      },
+      "contentHash": "sha256:c78ed96730e94c1f75576e082612a45ce678ffd6d4fe425ccdcbdecdaf290477",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.morera-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.morera-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.morera-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.morera-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.morera-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.morera-theorem.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.morera-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.morera-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.morera-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.morera-theorem.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.morera-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.morera-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.morera-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.morera-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.morera-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.morera-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.morera-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State **Morera's Theorem** — if $f$ is continuous on a domain $D$ and $\\oint_T f\\,dz=0$ for every triangle $T\\subset D$, then $f$ is holomorphic on $D$ — and correctly identify it as the **converse of Cauchy's theorem** (Cauchy says holomorphic implies zero triangle integrals; Morera says zero triangle integrals implies holomorphic).\n- LO2: Apply Morera's Theorem as a **holomorphicity test**: given a function defined by a limiting process, integral, or series, verify continuity and zero triangle integrals (often by swapping integral/limit signs or using dominated convergence), then conclude holomorphicity without computing a complex derivative directly.\n- LO3: Explain the **proof mechanism** — the zero-triangle-integral condition makes $F(z)=\\int_{z_0}^z f(w)\\,dw$ well-defined (path-independent), so $F$ is an antiderivative of $f$, hence $F$ is holomorphic; since antiderivatives of holomorphic functions are holomorphic and $F'=f$, $f$ is itself holomorphic — recognizing this as the Cauchy integral formula machinery running in reverse.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "MORERA-REQUIRES-ALL-CLOSED-CONTOURS",
+      "content": "| MC-1 | MORERA-REQUIRES-ALL-CLOSED-CONTOURS | Believing Morera's theorem requires zero integral over every closed contour (not just triangles), missing that the triangle condition alone suffices and is the theorem's actual hypothesis | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "UNIFORM-LIMITS-HOLOMORPHIC-OBVIOUS",
+      "content": "| MC-2 | UNIFORM-LIMITS-HOLOMORPHIC-OBVIOUS | Believing uniform convergence preserving holomorphicity is obvious or also true in real analysis, missing that Morera's theorem is the key result that makes this uniquely true in complex analysis | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "MORERA-IS-DIRECT-COMPUTATION",
+      "content": "| MC-3 | MORERA-IS-DIRECT-COMPUTATION | Believing applying Morera requires computing the complex derivative directly, missing that the whole point is to avoid the derivative and instead verify the triangle-integral condition via swapping/dominated convergence | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Morera as Exact Converse and Statement (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Morera as Exact Converse and Statement (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Applying Morera to Integral-Defined Functions (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Applying Morera to Integral-Defined Functions (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Uniform Limits of Holomorphic Functions Are Holomorphic (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Uniform Limits of Holomorphic Functions Are Holomorphic (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State Morera's theorem precisely, identifying all hypotheses (continuity, triangle condition, domain type) and the conclusion, and state which theorem it is the converse of.\n  2. Let $f_n(z)=z^n/n!$. Show that $f(z)=\\sum_{n=0}^\\infty z^n/n!=e^z$ is holomorphic on $\\mathbb{C}$ using Morera's theorem (the partial sums converge uniformly on every compact set, so apply Morera to the uniform limit).\n  3. Define $F(z)=\\int_0^1 \\frac{1}{t+z}\\,dt$ for $z\\notin[-1,0]$. Apply Morera's theorem to show $F$ is holomorphic on $\\mathbb{C}\\setminus[-1,0]$.\n  4. Explain the proof of Morera's theorem: why does the zero-triangle-integral condition guarantee that $F(z)=\\int_{z_0}^z f(w)\\,dw$ is path-independent, and why does this make $f$ holomorphic?\n- **P76 (Transfer Probe, mode = independence)**: \"In several complex variables, a function $f:\\mathbb{C}^n\\to\\mathbb{C}$ is holomorphic if it is holomorphic in each variable separately — a result known as Hartogs's theorem. (a) Morera's theorem for one complex variable converts an integration condition into a holomorphicity conclusion. Explain informally why an analog of Morera's theorem (integrals over triangles in each coordinate plane vanish) might give a path toward proving holomorphicity in several variables, even though the geometry is higher-dimensional. (b) In real analysis, a function with zero integral over every rectangle is not necessarily smooth. Using Morera's theorem's conclusion, explain what specifically about complex analysis makes the zero-integral hypothesis much stronger than in the real case — and what role the Cauchy integral formula plays as the link between integration and differentiation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.cauchy-integral-formula` (the Cauchy integral formula, the fact that holomorphic functions have antiderivatives on simply connected domains, and that a function with a holomorphic antiderivative is itself holomorphic).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.morera-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.morera-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.cauchy-integral-formula` (the Cauchy integral formula, path-independence of integrals for holomorphic functions, and the fact that a function with a holomorphic antiderivative is itself holomorphic — the machinery Morera's proof runs in reverse).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.morera-theorem.md",
+        "startLine": 95,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

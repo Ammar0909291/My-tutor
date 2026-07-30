@@ -1,0 +1,286 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.group-inverse-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.group-inverse",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fb5c805c00c5905ff7b7313477fb62642fa8aa79c488d1bd4e618307dc982e71",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.group-inverse.md": "sha256:98305d8cc930cc91745cb6a214371343fb85b91b39dd1c2172f22cebe05f002a"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.abst.group-inverse",
+    "name": "",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.abst.group-theory"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.group-inverse-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.group-inverse (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.group-inverse.md": "sha256:98305d8cc930cc91745cb6a214371343fb85b91b39dd1c2172f22cebe05f002a"
+      },
+      "contentHash": "sha256:33bee66df75bd974c7f7441ca86171401b88c10eaea8698346cce287d087a529",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.group-inverse.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-inverse.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-inverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-inverse\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-inverse.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-inverse.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-inverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-inverse\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-inverse.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-inverse.md#TA-A03 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-inverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-inverse\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.group-inverse/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.group-inverse",
+      "title": "math.abst.group-inverse — cognitive map",
+      "content": "### Target Understanding\nG4 guarantees that inverses **exist** in a group; this blueprint establishes two key **theorems**\nthat sharpen that guarantee:\n\n**(T1) Uniqueness:** The inverse of any group element is unique.\n  Proof: Suppose a·b = e and a·c = e.  Then b = b·e = b·(a·c) = (b·a)·c = e·c = c.\n\n**(T2) Product-inverse formula:** For any a, b ∈ G, (a·b)⁻¹ = b⁻¹·a⁻¹ (reversal of order).\n  Proof: (a·b)·(b⁻¹·a⁻¹) = a·(b·b⁻¹)·a⁻¹ = a·e·a⁻¹ = a·a⁻¹ = e.  By T1 (uniqueness),\n         (a·b)⁻¹ = b⁻¹·a⁻¹.\n\n**(T3) Double-inverse:** (a⁻¹)⁻¹ = a for every a ∈ G.\n  Proof: a⁻¹ · a = e (G4), so a is the inverse of a⁻¹; by uniqueness T1, (a⁻¹)⁻¹ = a.\n\n### Distinction from math.abst.group-theory\n`math.abst.group-theory` established that G4 guarantees the **existence** of inverses and built\nintuition via concrete groups (ℤ,+), (ℝ\\{0},×).  This blueprint proves structural theorems\nabout inverses: uniqueness (T1), product-reversal (T2), double-inverse (T3).  The student moves\nfrom \"inverses exist\" to \"inverses behave exactly as these three theorems dictate.\"\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | (ℤ, +): inverse of 3 is unique (−3); (3+5)⁻¹ = (−5)+(−3) = −8 ✓ |\n| **Pictorial (P)** | Cayley table excerpt: each element appears exactly once in each row/column |\n| **Abstract (A)** | Uniqueness proof (T1), product-inverse proof (T2), double-inverse proof (T3) |\n\n### Canonical Examples\n| Group | a | b | (a·b)⁻¹ | b⁻¹·a⁻¹ | Match? |\n|-------|---|---|---------|---------|--------|\n| (ℤ, +) | 3 | 5 | −8 | (−5)+(−3) = −8 | ✓ |\n| (ℝ\\{0}, ×) | 2 | 3 | 1/6 | (1/3)·(1/2) = 1/6 | ✓ |\n| (GL₂(ℝ), ×) | A | B | (AB)⁻¹ | B⁻¹A⁻¹ | ✓ (cross-link) |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 31,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-inverse",
+      "title": "INVERSE-NOT-UNIQUE",
+      "content": "| MC-1 | INVERSE-NOT-UNIQUE | Claims \"a group element might have two different inverses\" or treats non-uniqueness as possible | Hasn't applied G4 and associativity together; doesn't realise G2+G4 force uniqueness | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-inverse",
+      "title": "PRODUCT-INVERSE-WRONG-ORDER",
+      "content": "| MC-2 | PRODUCT-INVERSE-WRONG-ORDER | Writes (a·b)⁻¹ = a⁻¹·b⁻¹ (parallel to the product, not reversed) | Over-generalises from (ℤ,+) where addition is commutative and order doesn't matter; fails to account for non-abelian groups | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-inverse",
+      "title": "Uniqueness of the Inverse (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Uniqueness of the Inverse (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 102,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-inverse",
+      "title": "Product-Inverse Formula (P06 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Product-Inverse Formula (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 135,
+        "endLine": 172
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-inverse",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P06\",\"P11\",\"P49\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 172,
+        "endLine": 428
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.group-inverse",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A03 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Prove that in any group (G, ·), the inverse of each element is unique.\n*(Proof: Suppose a·b = e and a·c = e.  Then b = b·e = b·(a·c) = (b·a)·c = e·c = c.  So b = c.)*\n\n**Q2.** In (ℤ, +), verify the product-inverse formula: compute (7 + (−3))⁻¹ using both sides.\n*(LHS: (7 + (−3))⁻¹ = (4)⁻¹ = −4. RHS using T2: (−3)⁻¹ + (7)⁻¹ = 3 + (−7) = −4. ✓ Note: abelian, so order doesn't matter here.)*\n\n**Q3.** Prove that (a⁻¹)⁻¹ = a for any element a in a group.\n*(a⁻¹ · a = e by G4, so a satisfies the definition of the inverse of a⁻¹.  By uniqueness (T1), (a⁻¹)⁻¹ = a.)*\n\n**Q4.** In a non-abelian group G, is it possible that (a·b)⁻¹ = a⁻¹·b⁻¹ for some specific a, b?  Give an example or explain why not.\n*(Yes — if a and b happen to commute (b·a = a·b), then b⁻¹·a⁻¹ = a⁻¹·b⁻¹, so both formulas give the same result for that specific pair. Example: in GL₂(ℝ), any matrix commutes with scalar multiples of the identity.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Cross-link to math.linalg.matrix-inverse)\n\n*Cross-link probe: bridges group inverse to matrix inverse in GL₂(ℝ).*\n\n> Let A = [[2,1],[1,1]] and B = [[1,1],[0,1]] be elements of GL₂(ℝ) (the group of invertible 2×2 matrices under multiplication).\n>\n> (i) Compute A⁻¹ and B⁻¹ using the 2×2 inverse formula.\n> (ii) Compute AB and then (AB)⁻¹ directly.\n> (iii) Compute B⁻¹A⁻¹ and verify it equals (AB)⁻¹.\n> (iv) Compute A⁻¹B⁻¹ and confirm it does NOT equal (AB)⁻¹.\n\n*Expected answers:*\n- **(i)** A⁻¹ = [[1,−1],[−1,2]]; B⁻¹ = [[1,−1],[0,1]].\n- **(ii)** AB = [[2,3],[1,2]]; (AB)⁻¹ = [[2,−3],[−1,2]].\n- **(iii)** B⁻¹A⁻¹ = [[1,−1],[0,1]]·[[1,−1],[−1,2]] = [[2,−3],[−1,2]] = (AB)⁻¹. ✓\n- **(iv)** A⁻¹B⁻¹ = [[1,−1],[−1,2]]·[[1,−1],[0,1]] = [[1,−2],[−1,3]] ≠ (AB)⁻¹. ✗\n\n**[P55 — SCORE]**  Award 1 point for P76 if (ii) and (iii) correct with (iv) identified as wrong; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.95  →  ⌈0.95 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → MC-1 → TB-R01 (uniqueness proof step-by-step).\n  - Q3 wrong → double-inverse gap → revisit T3 from TA-A01.\n  - Q4 wrong → product-inverse formula gap → revisit TA-A02 Contrast; re-administer.\n  - Q2 wrong → review (ℤ,+) case; note abelian allows commuting the order.\n  - P76 wrong → identify which part failed; if (iii) wrong, MC-2 active → TB-R02.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.group-inverse\nMASTERY_REACHED: true\nUNLOCKS:         (none — terminal node)\nNEXT_CONCEPT:    (instructor-directed: revisit math.abst.group-operation or advance to subgroups)\nSESSION_CLOSE:   \"You have proved three theorems about group inverses: the inverse is unique (T1),\n                  double-inverse is the original element (T3), and (ab)⁻¹ = b⁻¹a⁻¹ (T2 — note\n                  the reversal). These theorems hold in every group, including matrix groups\n                  where the order matters. The matrix inverse you know from linear algebra is\n                  exactly the group inverse in GL_n(ℝ).\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: INVERSE-NOT-UNIQUE (MC-1)\n\n**Trigger:** Student claims uniqueness is not guaranteed, or cannot prove T1.\n\n**Step 1 — Set up the proof structure.**\n> \"Suppose a has two inverses: call them b and c.  We will show b and c must be equal.\"\n> From G4: a·b = e.  Also: a·c = e.\n\n**Step 2 — Use associativity (G2).**\n> b = b·e         (G3: identity)\n>   = b·(a·c)     (substitute a·c = e)\n>   = (b·a)·c     (G2: associativity)\n>   = e·c          (G4: b·a = e, since b is an inverse of a)\n>   = c            (G3: identity)\n\n**Step 3 — Concrete check.**\n> In (ℤ,+): if 3 + b = 0 and 3 + c = 0, then b = 0 − 3 = −3 and c = 0 − 3 = −3 = b ✓.\n\n**Exit:** Return to TA-A01 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: PRODUCT-INVERSE-WRONG-ORDER (MC-2)\n\n**Trigger:** Student writes (a·b)⁻¹ = a⁻¹·b⁻¹.\n\n**Step 1 — Concrete matrix counterexample.**\n> Compute A = [[2,1],[1,1]], B = [[1,1],[0,1]].\n> AB = [[2,3],[1,2]].  (AB)⁻¹ = [[2,−3],[−1,2]].\n> A⁻¹B⁻¹ = [[1,−1],[−1,2]]·[[1,−1],[0,1]] = [[1,−2],[−1,3]].\n> [[1,−2],[−1,3]] ≠ [[2,−3],[−1,2]].  **The wrong-order formula fails.**\n\n**Step 2 — Show the correct order works.**\n> B⁻¹A⁻¹ = [[1,−1],[0,1]]·[[1,−1],[−1,2]] = [[2,−3],[−1,2]] = (AB)⁻¹. ✓\n\n**Step 3 — Reinforce the \"shoes and socks\" mnemonic.**\n> To put on shoes-then-socks: first shoes, then socks.  To undo: remove socks (last on) first,\n> then shoes (first on).  The inverse of the composite reverses the order.\n\n**Exit:** Return to TA-A02 P49 checkpoint.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"In a group, what is (a·b·c)⁻¹? State T2 applied twice.\"\n    Target: c⁻¹·b⁻¹·a⁻¹. PASS if correct order stated.\n\n  Interval-2 (+3 days):\n    Probe: \"In (GL₂(ℝ), ×), if (AB)⁻¹ = C, what is B⁻¹A⁻¹? What is (A⁻¹)⁻¹?\"\n    Target: B⁻¹A⁻¹ = C (= (AB)⁻¹); (A⁻¹)⁻¹ = A (T3). PASS if both correct.\n\n  Interval-3 (+1 week):\n    Probe: \"Does every group element have a unique inverse? Cite the theorem and its proof idea.\"\n    Target: Yes. Uniqueness (T1): if a·b = e and a·c = e, then b = (b·a)·c = e·c = c.\n            PASS if the associativity step cited.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A01 (uniqueness) or TA-A02 (product-inverse).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.group-theory:\n    Used in:   TA-A01 (invokes G2, G3, G4 explicitly in the uniqueness proof; student\n               is expected to name axioms by number), TA-A02 (G4 is the definition of\n               inverse used in product-inverse proof; G2 cited for (b·a)·c step).\n    Assumed:   Student holds G1–G4 and can identify which axiom justifies each step in\n               a group-theoretic calculation.\n\nUNLOCKS_ENABLED:\n  (none — this is a terminal node for the math.abst.group-inverse subtopic)\n\nCROSS_LINKS_NOTED:\n  math.linalg.matrix-inverse:\n    Status:    Tier 1 concept — P76 uses a cross-link probe.\n    P76 probe: Student computes (AB)⁻¹ and B⁻¹A⁻¹ for specific 2×2 matrices, verifying\n               that the group-theoretic formula T2 matches the linear-algebra matrix-inverse.\n    Bridge:    The group inverse in GL_n(ℝ) is exactly the matrix inverse.  T2 in groups\n               explains WHY (AB)⁻¹ = B⁻¹A⁻¹ in linear algebra — it is not a matrix-specific\n               formula but a consequence of the universal group-inverse theorem.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. This is a proof-heavy 1-hour concept.**\nAll three theorems (T1, T2, T3) are short proofs using only G2, G3, G4.  At bloom=understand,\nthe student needs to reproduce the proof steps and identify which axiom justifies each step,\nnot just state the conclusions.\n\n**2. MC-2 is hidden in abelian groups.**\nStudents who have only worked in (ℤ,+) or (ℝ\\{0},×) never see the wrong-order formula fail\nbecause commutativity makes both orders equal.  The GL₂(ℝ) example in TA-A02 is the minimal\nconcrete counterexample — exactly what the P76 cross-link probe also exploits.\n\n**3. T3 follows from T1 immediately.**\nMany students re-derive double-inverse by solving (a⁻¹)⁻¹ = x → a⁻¹·x = e.  This is valid\nbut longer.  The elegant path is: \"a is an inverse of a⁻¹; by T1 it is THE inverse.\"\n\n**4. Q4 catches nuance.**\nThe question asks whether (a·b)⁻¹ = a⁻¹·b⁻¹ is EVER possible in a non-abelian group.\nThe answer \"yes, when a and b commute\" is the target — not \"no, never.\"  This distinguishes\nunderstanding from memorising the general formula.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.group-inverse\n===============================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 4; 3 TAs used ≤ 4. ✓\n[PASS] V-4   CPA_ENTRY_STAGE = A (purely algebraic proofs; no concrete manipulation needed).\n[PASS] V-5   P76_MODE = Cross-link with explicit rationale (math.linalg.matrix-inverse Tier 1).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A01 before TA-A02.\n[PASS] V-7   MC-1 addressed by uniqueness proof in TA-A01 (P11 + P49).\n[PASS] V-8   MC-2 addressed in TA-A02 (P06 contrast with GL₂(ℝ) counterexample).\n[PASS] V-9   Both MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P06 ✓  TA-A03→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49. TA-A01→P49 ✓  TA-A02→P49 ✓\n[PASS] V-12  GR-3: Terminal TA (TA-A03) is a mastery gate containing P91.\n[PASS] V-13  GR-4: P91 terminal in TA-A03 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-14  GR-5: P76 included inside P91 in the mastery gate.\n[PASS] V-15  GR-6: Cross-link math.linalg.matrix-inverse documented in Component 7.\n[PASS] V-16  GR-9: P76 uses Cross-link mode; probe verifies T2 concretely in GL₂(ℝ).\n[PASS] V-17  GR-10: MAMR stated; MC-1 cleared at TA-A01 before TA-A02.\n\nPASS CRITERION\n[PASS] V-18  PASS_CRITERION = ⌈0.95 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-19  P74 routing covers all score outcomes (5/5 → pass; ≤4/5 → item-specific repair).\n[PASS] V-20  P77 contains exactly 4 questions. ✓ (V-13)\n\nCONTENT\n[PASS] AIR   Uniqueness of inverse (T1), product-inverse formula T2: (ab)⁻¹=b⁻¹a⁻¹, and\n             double-inverse T3: (a⁻¹)⁻¹=a all stated and proved.  GL₂(ℝ) concrete example\n             for T2.  MC-2 counterexample via explicit 2×2 matrix calculation.\n             P76 cross-link: (AB)⁻¹ vs B⁻¹A⁻¹ vs A⁻¹B⁻¹ computed for A=[[2,1],[1,1]],\n             B=[[1,1],[0,1]], confirming the group-theoretic formula.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 172,
+        "endLine": 428
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-inverse",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11: uniqueness proof T1 + double-inverse T3 + P49)\n      → TA-A02 (P06: product-inverse (ab)⁻¹=b⁻¹a⁻¹ vs wrong-order a⁻¹b⁻¹ + P49)\n      → TA-A03 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (trace uniqueness proof step-by-step with (ℤ,+) numbers)\n  MC-2 → TB-R02 (compute (AB)⁻¹ numerically vs B⁻¹A⁻¹ vs A⁻¹B⁻¹; show only the former = I)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 82,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-inverse",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"In a group, what is (a·b·c)⁻¹? State T2 applied twice.\"\n    Target: c⁻¹·b⁻¹·a⁻¹. PASS if correct order stated.\n\n  Interval-2 (+3 days):\n    Probe: \"In (GL₂(ℝ), ×), if (AB)⁻¹ = C, what is B⁻¹A⁻¹? What is (A⁻¹)⁻¹?\"\n    Target: B⁻¹A⁻¹ = C (= (AB)⁻¹); (A⁻¹)⁻¹ = A (T3). PASS if both correct.\n\n  Interval-3 (+1 week):\n    Probe: \"Does every group element have a unique inverse? Cite the theorem and its proof idea.\"\n    Target: Yes. Uniqueness (T1): if a·b = e and a·c = e, then b = (b·a)·c = e·c = c.\n            PASS if the associativity step cited.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A01 (uniqueness) or TA-A02 (product-inverse).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 303,
+        "endLine": 326
+      }
+    },
+    {
+      "assetId": "math.abst.group-inverse/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.group-inverse",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.group-theory:\n    Used in:   TA-A01 (invokes G2, G3, G4 explicitly in the uniqueness proof; student\n               is expected to name axioms by number), TA-A02 (G4 is the definition of\n               inverse used in product-inverse proof; G2 cited for (b·a)·c step).\n    Assumed:   Student holds G1–G4 and can identify which axiom justifies each step in\n               a group-theoretic calculation.\n\nUNLOCKS_ENABLED:\n  (none — this is a terminal node for the math.abst.group-inverse subtopic)\n\nCROSS_LINKS_NOTED:\n  math.linalg.matrix-inverse:\n    Status:    Tier 1 concept — P76 uses a cross-link probe.\n    P76 probe: Student computes (AB)⁻¹ and B⁻¹A⁻¹ for specific 2×2 matrices, verifying\n               that the group-theoretic formula T2 matches the linear-algebra matrix-inverse.\n    Bridge:    The group inverse in GL_n(ℝ) is exactly the matrix inverse.  T2 in groups\n               explains WHY (AB)⁻¹ = B⁻¹A⁻¹ in linear algebra — it is not a matrix-specific\n               formula but a consequence of the universal group-inverse theorem.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-inverse.md",
+        "startLine": 326,
+        "endLine": 353
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

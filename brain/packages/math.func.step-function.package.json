@@ -1,0 +1,175 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.step-function-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.step-function",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:36919dac865d6836ac6896121f778341be30dd5ecbe3d15d12ed0d96ed06e133",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.step-function.md": "sha256:b7868e58ec5fb78d17dcaf84e8fd35504aef6573fbbe6ec2d8a0a1cb03adab4b"
+    },
+    "assetCount": 6,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 1,
+      "mastery_probe": 1
+    },
+    "ruleCount": 1
+  },
+  "concept": {
+    "conceptId": "math.func.step-function",
+    "name": "Step Functions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.func.piecewise-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.step-function-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.step-function (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.step-function.md": "sha256:b7868e58ec5fb78d17dcaf84e8fd35504aef6573fbbe6ec2d8a0a1cb03adab4b"
+      },
+      "contentHash": "sha256:edf7e01c01bff3355224bfefc5a01ca45e60236aea1bb0463afd5ff9d102bfb0",
+      "ruleCount": 1,
+      "bandCounts": {
+        "3": 1
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.step-function.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.step-function.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.step-function"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.step-function\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.step-function/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.step-function",
+      "title": "Learning Objective",
+      "content": "Given a real number x, the student evaluates the floor function ⌊x⌋ (greatest integer ≤ x) and ceiling function ⌈x⌉ (least integer ≥ x), identifies their graphs as staircase patterns with the correct open/closed endpoint convention at each jump, recognises that both are piecewise-constant (step) functions with jump discontinuities at every integer, applies them to model real-world rounding and quantization problems, and distinguishes floor from ceiling by tracking which integer boundary is taken.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.step-function.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.step-function/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.step-function",
+      "title": "FLOOR-CEILING-SWAP",
+      "content": "| MC-1 | FLOOR-CEILING-SWAP | Student applies the ceiling function when the floor is needed and vice versa; interprets ⌊2.3⌋=3 (ceiling) or ⌈2.7⌉=2 (floor) — swapping the direction of rounding | Type 3 — language contamination (\"floor\" suggests \"low/down\" correctly, but \"ceiling\" as \"high/up\" doesn't map intuitively onto the mathematical definition for all learners; negative numbers exacerbate the confusion because ⌊−2.3⌋=−3 \"goes down further\" while ⌈−2.3⌉=−2 \"goes up toward zero\") |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.step-function.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.step-function/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.step-function",
+      "title": "STEP-FUNCTION-IS-CONTINUOUS",
+      "content": "| MC-2 | STEP-FUNCTION-IS-CONTINUOUS | Student treats the floor/ceiling function as continuous (\"it just counts up by steps\") and does not recognize the jump discontinuities at integers | Type 1 — overgeneralization (the staircase graph looks like a connected sequence of lines; students perceive the graph as \"going up\" continuously rather than jumping at each integer boundary) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.step-function.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.step-function/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.step-function",
+      "title": "CLOSED-DOT-ON-WRONG-SIDE",
+      "content": "| MC-3 | CLOSED-DOT-ON-WRONG-SIDE | Student places the filled dot on the wrong side of each step on the graph; for ⌊x⌋, fills in the right endpoint of each interval (the integer value not achieved) rather than the left | Type 5 — instruction-induced (open/closed endpoint notation is confusing in the context of step functions; the closed dot should be on the LEFT for floor and on the RIGHT for ceiling, which feels counterintuitive) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.step-function.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.step-function/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.step-function",
+      "title": "4",
+      "content": "{\"id\":\"TA-4\",\"title\":\"4\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.step-function.md",
+        "startLine": 19,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.func.step-function/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.step-function",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Evaluate: (a) ⌊4.9⌋; (b) ⌈4.1⌉; (c) ⌊−3.5⌋; (d) ⌈−2.1⌉; (e) ⌊7⌋; (f) ⌈−4⌉.\n2. Sketch y=⌊x⌋ for −2≤x≤3. Mark all filled and open endpoints correctly. List all x-values where the function has a jump discontinuity on this interval.\n3. A phone plan charges $0.05 per second, always rounded up to the nearest second. Write a formula for the charge C(t) for a call of duration t seconds (t>0). Evaluate C(3.2) and C(5).\n4. Prove or disprove: ⌊x+n⌋=⌊x⌋+n for any real x and any integer n.\n\n**P55 — Reflect & Consolidate:** \"Floor ⌊x⌋: round down (even for negatives). Ceiling ⌈x⌉: round up. Both equal x at integers. ⌊x⌋=⌈x⌉−1 for non-integer x. Jump discontinuities at all integers. Floor: closed LEFT, open RIGHT. Ceiling: open LEFT, closed RIGHT.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe fractional part function {x}=x−⌊x⌋. (a) Sketch {x} for −1≤x≤3. (b) Show that {x} is periodic with period 1. (c) Compute ⌊{x}⌋ for all x. What is it always? (d) Any real number x can be written as x=⌊x⌋+{x} (integer part + fractional part). Use this to prove that ⌊x+y⌋=⌊x⌋+⌊y⌋ or ⌊x⌋+⌊y⌋+1, depending on whether {x}+{y}<1 or ≥1.\n\n**P55 — Reflect & Consolidate:** \"The fractional part {x}=x−⌊x⌋ is the sawtooth function: periodic period 1, range [0,1), zero at all integers. Integer+fractional-part decomposition leads to the floor addition lemma, which appears in number theory (floor sum estimates) and algorithm analysis (integer arithmetic).\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=⌊2x+1⌋. (a) Evaluate f(0), f(0.4), f(0.5), f(1). (b) For which values of x does f(x)=3? Write the answer as an interval. (c) Where are the jump discontinuities of f? (d) Sketch f for 0≤x≤2, marking all open and closed endpoints. (e) How does the step width of f compare to ⌊x⌋? Why?\"\n\n**P55 — Reflect & Consolidate:** \"Stretching the argument: ⌊bx⌋ has step width 1/|b| instead of 1. f(x)=⌊2x⌋ has steps of width 1/2; f(x)=⌊x/3⌋ has steps of width 3. Jump discontinuities occur where the argument hits an integer: 2x+1=n → x=(n−1)/2. The structure of step functions follows directly from the floor/ceiling definitions and the piecewise-constant nature.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.step-function complete\n- Score 3/5 → REVIEW floor vs. ceiling for negative arguments and correct endpoint placement; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.piecewise-function; reassign\n\n**P78 — Completion:** Step functions certified. Student evaluates floor and ceiling correctly including negative arguments, graphs with correct open/closed endpoint convention, identifies jump discontinuities at integers, applies to real-world rounding contexts, and recognises the fractional part function as the canonical sawtooth periodic companion.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.step-function.md",
+        "startLine": 130,
+        "endLine": 157
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

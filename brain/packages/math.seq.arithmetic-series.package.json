@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.arithmetic-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.arithmetic-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:242a070d5e84dd88d9d3dacdfd18783d2dce56f0c9436e41f576a1c4c0703f05",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.arithmetic-series.md": "sha256:3a5f6bc7ee736fdcfcdf79aff5a10290cfef774278f784fe99ae4641cadef89a"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.arithmetic-series",
+    "name": "Arithmetic Series",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.seq.arithmetic-sequence",
+      "math.seq.series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.arithmetic-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.arithmetic-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.arithmetic-series.md": "sha256:3a5f6bc7ee736fdcfcdf79aff5a10290cfef774278f784fe99ae4641cadef89a"
+      },
+      "contentHash": "sha256:4f6a67a45758ee2bad868c5a0cb41f1bce2c3e246e694f40fe876c40dfb6d4c3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-series.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-series.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-series.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.arithmetic-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.arithmetic-series.md#TA-A04 (addresses MC-1, MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.arithmetic-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.arithmetic-series\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.arithmetic-series/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "Arithmetic Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.arithmetic-sequence**: aₙ = a₁ + (n−1)d; the nth term; common difference d; recognising AP from constant differences\n- **math.seq.series**: Sₙ = a₁ + a₂ + ⋯ + aₙ; partial sums as a new sequence; Σ notation\n\n### Target Knowledge State\nStudent can derive both forms of the arithmetic series formula using the Gauss pairing argument (Sₙ = n(a₁+aₙ)/2) and substitute to obtain Sₙ = n(2a₁+(n−1)d)/2; can apply either form to compute partial sums given any two of {a₁, d, n, Sₙ, aₙ}; can evaluate the sum of the first n positive integers (1+2+⋯+n = n(n+1)/2) and related canonical sums; and can invert the formula to find a missing parameter.\n\n### Conceptual Obstacles\n1. Substituting the term formula aₙ = a₁+(n−1)d for Sₙ — the term formula gives one term, not the running total; these are different objects\n2. Believing the pairing argument only works for even n — Gauss's proof writes Sₙ twice (forward and backward) and adds; n can be odd or even, and the n pairs always sum to n(a₁+aₙ)/2 in either case\n3. Forgetting to multiply by n/2 after computing a₁+aₙ — students compute the \"per-pair\" sum correctly but omit the number-of-pairs factor\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "TERM-FORMULA-AS-SUM",
+      "content": "| MC-1 | TERM-FORMULA-AS-SUM | Student writes Sₙ = a₁+(n−1)d (the term formula) instead of the sum formula; confuses the nth term with the sum of n terms | \"Find the sum of the first n terms\" |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "PAIRING-ONLY-WORKS-FOR-EVEN-n",
+      "content": "| MC-2 | PAIRING-ONLY-WORKS-FOR-EVEN-n | Student applies the pairing argument only when n is even, thinking odd n leaves one term unmatched | Any AP sum with odd n |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "FORGETTING-n-IN-SUM",
+      "content": "| MC-3 | FORGETTING-n-IN-SUM | Student computes (a₁+aₙ)/2 and stops; omits multiplying by n; reports the average term instead of the total | Any AP sum application |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "Gauss Pairing Derivation",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Gauss Pairing Derivation\",\"primitives\":[\"P02\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 65,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "Canonical Sums and Inverse Problems",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Canonical Sums and Inverse Problems\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 134,
+        "endLine": 196
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "Term vs Sum Contrast and Applications",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Term vs Sum Contrast and Applications\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 196,
+        "endLine": 251
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P04\",\"P06\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 251,
+        "endLine": 459
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Apply the appropriate arithmetic series formula.*\n\n**Problem 1.** Find S₁₂ for the AP: 1, 4, 7, 10, ...\n\n**Problem 2.** Find the sum of all integers from 1 to 200.\n\n**Problem 3.** An AP has a₁=10, S₁₀=145. Find the common difference d.\n\n**Problem 4.** The 5th partial sum of an AP is 25 and the 5th term is 7. Find a₁.\n\n**Problem 5.** Find the sum of all multiples of 7 between 1 and 100.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. a₁=1, d=3, n=12: S₁₂=12(2+(11·3))/2=12·35/2=**210**\n2. n=200, a₁=1, aₙ=200: S=200·201/2=**20100**\n3. S₁₀=10(20+9d)/2=145 → 5(20+9d)=145 → 20+9d=29 → 9d=9 → **d=1**\n4. S₅=5(a₁+a₅)/2=25 → (a₁+7)/2=5 → a₁+7=10 → **a₁=3**; verify: a₅=a₁+4d; need d too: d=(a₅−a₁)/4=4/4=1; S₅=5(2·3+4·1)/2=5·10/2=25 ✓\n5. Multiples of 7: 7,14,...,98; a₁=7, aₙ=98, n=(98−7)/7+1=14; S=14(7+98)/2=14·105/2=**735**\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* A theatre has 20 rows of seats. The first row has 15 seats, and each subsequent row has 3 more seats than the row before.\n\n(a) How many seats are in the 20th row?\n\n(b) What is the total number of seats in the theatre?\n\n(c) If tickets for row n cost £(50−n) each, and every seat is sold, find the total ticket revenue. (Hint: revenue = Σ_{n=1}^{20} [seats in row n × ticket price for row n].)\n\n*Expected answers:*\n\n(a) a₂₀ = 15 + 19·3 = 15+57 = **72 seats**\n\n(b) S₂₀ = 20(15+72)/2 = 20·87/2 = **870 seats**\n\n(c) Row n has (15+3(n−1)) seats at price (50−n) each:\nRevenue = Σ_{n=1}^{20} (12+3n)(50−n) = Σ(600 − 12n + 150n − 3n²) = Σ(600 + 138n − 3n²)\n= 20·600 + 138·S₂₀^{Σn} − 3·Σn²\n= 12000 + 138·(20·21/2) − 3·(20·21·41/6)\n= 12000 + 138·210 − 3·2870\n= 12000 + 28980 − 8610\n= **£32370**\n\n(Part c is a challenging extension; parts a and b suffice for full marks if c is attempted.)\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point for parts (a)+(b) correct; bonus for part (c).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.85 × 5⌉ = 5). Total n = 6 (P77: 5 items, P76: 1 item — P77 score + P76 score, capped at 5/5 for MAMR).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5 (max 5 from P77; P76 replaces any missed P77 item up to cap).\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Review missed item type; if MC-1 (used term formula) → B01; if MC-3 (forgot n) → B02; targeted repair, then re-gate |\n| ≤ 3/5 | → Return to A01; rederive the formula from the pairing argument; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.arithmetic-series` complete. Threshold 0.85 requires 5/5 correct.\n\n**Unlocks:** none directly (see KG).\n\nNext concept: `math.seq.infinite-geometric-series` extends sum-to-infinity reasoning for the geometric case; `math.seq.telescoping-series` uses partial-fraction decomposition for closed-form sums.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 254,
+        "endLine": 366
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — learner has both required prior-concept formulas in symbolic form.\n\n**Scaffolding sequence:**\n1. **A01 P02 FORMAL DEFINITION** — derive Sₙ = n(a₁+aₙ)/2 via the Gauss pairing argument; derive the substituted form Sₙ = n(2a₁+(n−1)d)/2; address MC-1 and MC-2\n2. **A02 P04 PATTERN INDUCTION** — compute canonical sums (1+2+⋯+n; sum of first n odd integers); identify which formula form to use given available information; address MC-3\n3. **A03 P06 CONTRAST PAIR** — term formula vs sum formula side-by-side; forward problems (find Sₙ) vs inverse problems (find n or d given Sₙ)\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Find S₁₅ for the AP: 3, 7, 11, 15, ... |\n| R2 | 3 days | The sum of 12 terms of an AP is 144 and the first term is 2. Find d and a₁₂. |\n| R3 | 7 days | Show from the Gauss pairing argument that S₇ for the AP 1,4,7,...,19 equals 70. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 400,
+        "endLine": 410
+      }
+    },
+    {
+      "assetId": "math.seq.arithmetic-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.arithmetic-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | none |\n| Requires (Tier-1) | math.seq.arithmetic-sequence, math.seq.series |\n\n**GR-8 compliance:** no cross_links in KG — documented.\n**GR-9 compliance:** P76 uses an independent theatre-seating problem, not connected to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.arithmetic-series.md",
+        "startLine": 410,
+        "endLine": 424
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

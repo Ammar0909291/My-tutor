@@ -1,0 +1,334 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.basic-ratios-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.basic-ratios",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7e69bb3e58775a8ac7e00a45c6da93fb8ca9054634be3c3f94e8458b7c5638a6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.basic-ratios.md": "sha256:ffc8960e9abbdd028f2107ca1e472a2f7dcf4f42cf6298d70cdf5d360e643054"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.basic-ratios",
+    "name": "Basic Trigonometric Ratios (SOH-CAH-TOA)",
+    "difficultyRaw": "proficient",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.trig.right-triangle-trig"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.basic-ratios-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.basic-ratios (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.basic-ratios.md": "sha256:ffc8960e9abbdd028f2107ca1e472a2f7dcf4f42cf6298d70cdf5d360e643054"
+      },
+      "contentHash": "sha256:33c3f10acdee2c51bb2aa17ab3036784581d53b899bbbb146cbca4e627c9199f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.basic-ratios.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.basic-ratios.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.basic-ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.basic-ratios\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.basic-ratios.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.basic-ratios.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.basic-ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.basic-ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.basic-ratios.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.basic-ratios.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.basic-ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.basic-ratios\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.basic-ratios.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.basic-ratios.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.basic-ratios"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.basic-ratios\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.basic-ratios/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "Basic Trigonometric Ratios (SOH-CAH-TOA) — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.right-triangle-trig**: Right-triangle geometry; hypotenuse as the side opposite the right angle; similar-triangle angle-ratio invariance; Pythagorean theorem\n\n### Target Knowledge State\nStudent names and applies the three primary trigonometric ratios: sin θ = opposite/hypotenuse, cos θ = adjacent/hypotenuse, tan θ = opposite/adjacent. Student labels Opposite, Adjacent, and Hypotenuse correctly relative to the reference angle θ (not the right angle). Student applies the Pythagorean theorem to find a missing side before computing a ratio.\n\n### Conceptual Obstacles\n1. Swapping sin and cos — assigning the adjacent leg to sin or the opposite leg to cos\n2. Labeling sides relative to the right-angle vertex instead of relative to θ\n3. Identifying the hypotenuse by visual \"longest appearance\" rather than as the side opposite the right angle\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "OPPOSITE-ADJACENT-SWAP",
+      "content": "| MC-1 | OPPOSITE-ADJACENT-SWAP | Student reverses sin and cos: writes sin θ = adjacent/hyp and cos θ = opposite/hyp | Any problem requiring both sin θ and cos θ |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "WRONG-REFERENCE-VERTEX",
+      "content": "| MC-2 | WRONG-REFERENCE-VERTEX | Student labels O and A relative to the right-angle vertex rather than relative to θ | Non-standard orientations; θ near the right angle |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "HYPOTENUSE-BY-POSITION",
+      "content": "| MC-3 | HYPOTENUSE-BY-POSITION | Student identifies a different side as hypotenuse when the triangle is tilted, rather than always using the side opposite the right angle | Rotated or non-standard diagrams |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "Defining SOH-CAH-TOA from a Labeled Diagram",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Defining SOH-CAH-TOA from a Labeled Diagram\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 64,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "Computing All Three Ratios from Given Sides",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Computing All Three Ratios from Given Sides\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 120,
+        "endLine": 171
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "The Moving Reference Angle",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Moving Reference Angle\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 171,
+        "endLine": 223
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 223,
+        "endLine": 434
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** In a right triangle with legs 3 and 4 (hypotenuse 5), θ is the angle opposite the leg of length 3. Find sin θ, cos θ, and tan θ.\n\n**Problem 2.** In a right triangle with legs 5 and 12 (hypotenuse 13), θ is the angle opposite the leg of length 5. Find sin θ, cos θ, and tan θ.\n\n**Problem 3.** A right triangle has one leg = 8 and hypotenuse = 17. θ is the angle between the hypotenuse and the leg of length 8. Find sin θ, cos θ, and tan θ. (Find the missing leg first.)\n\n**Problem 4.** If sin θ = 7/25 where θ is an acute angle in a right triangle, find cos θ and tan θ.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. sin θ = 3/5, cos θ = 4/5, tan θ = 3/4 ✓\n\n2. Opposite = 5, Adjacent = 12, Hyp = 13. sin θ = 5/13, cos θ = 12/13, tan θ = 5/12 ✓\n\n3. Missing leg = √(17² − 8²) = √(289 − 64) = √225 = 15. θ between hyp and leg 8 → Adjacent = 8, Opposite = 15, Hyp = 17. sin θ = 15/17, cos θ = 8/17, tan θ = 15/8 ✓\n\n4. sin θ = 7/25 → Opposite = 7, Hypotenuse = 25. Adjacent = √(25² − 7²) = √576 = 24. cos θ = 24/25, tan θ = 7/24 ✓\n\nScore 1 point per problem (each problem has multiple parts; award 1 point for all sub-parts correct).\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* A ladder leans against a wall. The foot of the ladder is 5 m from the base of the wall and the top reaches 12 m up the wall. The angle θ is formed between the ladder and the ground.\n\n*(a)* Find the length of the ladder.\n\n*(b)* Find sin θ, cos θ, and tan θ.\n\n*(c)* A student writes cos θ = 12/13. What error did the student make?\n\n*Expected answer:*\n\n*(a)* Ladder = √(5² + 12²) = √169 = 13 m.\n\n*(b)* Opposite (wall height) = 12, Adjacent (ground distance) = 5, Hypotenuse (ladder) = 13.\nsin θ = 12/13, cos θ = 5/13, tan θ = 12/5.\n\n*(c)* The student confused Opposite and Adjacent for cos: wrote 12/13 (opposite/hypotenuse) when cos = adjacent/hypotenuse = 5/13. The value 12/13 is sin θ, not cos θ.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (all three parts correct); 0.5 if (a) and (b) correct but (c) error not identified.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.95 × 5⌉ = 5). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Identify missed item; sin/cos swap → B01; wrong vertex → B02; hypotenuse error → B03; targeted repair |\n| ≤ 3/5 | → Return to A01; re-label triangle diagram from scratch; rebuild SOH-CAH-TOA; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.basic-ratios` complete. Threshold 0.95 requires 5/5 correct.\n\n**Unlocks:** math.trig.special-angles (special angle values from 30-60-90 and 45-45-90); downstream trig functions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 226,
+        "endLine": 327
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — labeled right-triangle diagram with a marked reference angle θ.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Four-stage diagram: unlabeled triangle → right angle marked → θ marked → sides labeled O/A/H relative to θ; state SOH-CAH-TOA\n2. **A02 P04 PATTERN INDUCTION** — Gallery of triangles with varying side lengths; compute sin, cos, tan; extend to missing-side problems via Pythagorean theorem\n3. **A03 P06 CONTRAST PAIR** — Same triangle, θ at two different vertices; show O and A swap while H is fixed; resolve MC-2\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | In a right triangle with legs 8 and 15 (hypotenuse 17), find sin, cos, tan for the angle opposite the leg of length 8. |\n| R2 | 3 days | A right triangle has hypotenuse 10 and one leg 6. Find all six values (sin, cos, tan) for both acute angles. |\n| R3 | 7 days | Without a calculator: if tan θ = 3/4 (acute θ), find sin θ and cos θ. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 377,
+        "endLine": 387
+      }
+    },
+    {
+      "assetId": "math.trig.basic-ratios/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.basic-ratios",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.trig.special-angles |\n| Requires (Tier-1) | math.trig.right-triangle-trig |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent ladder problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.basic-ratios.md",
+        "startLine": 387,
+        "endLine": 401
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

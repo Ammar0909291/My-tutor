@@ -1,0 +1,328 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.absolute-convergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.absolute-convergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:544458f226957093936ba90fb46811d6203ff8fc9e5faac755c0c8fa8965888d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.absolute-convergence.md": "sha256:d2c4ce043584a4474a51dc1d430f965e8e596f6c281a2a77bf5b842766bf2671"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.absolute-convergence",
+    "name": "Absolute and Conditional Convergence",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.alternating-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.absolute-convergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.absolute-convergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.absolute-convergence.md": "sha256:d2c4ce043584a4474a51dc1d430f965e8e596f6c281a2a77bf5b842766bf2671"
+      },
+      "contentHash": "sha256:31727f7707b11272eab44ba12b0128b56c9f59105165693abb41fcb68120f11a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.absolute-convergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.absolute-convergence.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.absolute-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.absolute-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.absolute-convergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.absolute-convergence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.absolute-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.absolute-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.absolute-convergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.absolute-convergence.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.absolute-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.absolute-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.absolute-convergence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.absolute-convergence.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.absolute-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.absolute-convergence\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.absolute-convergence/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "Absolute and Conditional Convergence — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.alternating-series**: Alternating Series Test (AST): bₙ decreasing to 0 → Σ(−1)ⁿbₙ converges; alternating harmonic Σ(−1)^{n+1}/n = ln 2; error bound |Rₙ| ≤ bₙ₊₁\n\n### Target Knowledge State\nStudent distinguishes three convergence classes for Σaₙ: (1) **absolutely convergent** — Σ|aₙ| converges; Σaₙ then necessarily converges and its sum is invariant under rearrangement; (2) **conditionally convergent** — Σaₙ converges but Σ|aₙ| diverges; rearrangement can change the sum to any target; (3) **divergent** — Σaₙ diverges. Student applies the two-step classification pipeline: first test Σ|aₙ| (ratio/root/comparison/p-series); if Σ|aₙ| converges → absolutely convergent; if Σ|aₙ| diverges, test Σaₙ directly (AST or Divergence Test) — if Σaₙ converges → conditionally convergent, else divergent. Student states and applies the Riemann Rearrangement Theorem.\n\n### Conceptual Obstacles\n1. Believing all convergent series are absolutely convergent — fails to recognise sign-cancellation can produce convergence even when Σ|aₙ| diverges\n2. Inferring Σaₙ diverges from Σ|aₙ| diverging — forgets sign-cancellation; alternating harmonic is the canonical counterexample\n3. Applying rearrangement-invariance to conditionally convergent series — only absolute convergence licenses free rearrangement\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "CONDITIONAL-EQUALS-ABSOLUTE",
+      "content": "| MC-1 | CONDITIONAL-EQUALS-ABSOLUTE | Student believes convergence and absolute convergence are identical; does not recognise conditionally convergent series as a separate class | Any classification problem; series where Σaₙ converges but Σ\\|aₙ\\| diverges |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "ABSOLUTE-DIVERGENCE-IMPLIES-SERIES-DIVERGENCE",
+      "content": "| MC-2 | ABSOLUTE-DIVERGENCE-IMPLIES-SERIES-DIVERGENCE | Student concludes Σ\\|aₙ\\| diverges → Σaₙ diverges; forgets sign-cancellation allows conditional convergence; alternating harmonic is the canonical refutation | Two-step classification when the absolute-value test fails |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "REARRANGEMENT-SAFE-FOR-ALL",
+      "content": "| MC-3 | REARRANGEMENT-SAFE-FOR-ALL | Student applies rearrangement-invariance to all convergent series, not just absolutely convergent ones; unaware of Riemann Rearrangement Theorem | Any context involving re-ordering a series or summing it in a different sequence |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "The Three Convergence Classes",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Three Convergence Classes\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 64,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "Classification Pipeline",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Classification Pipeline\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 135,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "Rearrangement: What Each Class Allows",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Rearrangement: What Each Class Allows\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 189,
+        "endLine": 253
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 253,
+        "endLine": 467
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*For each series: classify as absolutely convergent, conditionally convergent, or divergent. Show the two-step pipeline.*\n\n**Problem 1.** Σₙ₌₁^∞ (−1)ⁿ / n²\n\n**Problem 2.** Σₙ₌₁^∞ (−1)^{n+1} / √n\n\n**Problem 3.** Σₙ₌₁^∞ (−1)ⁿ · n/(n+1)\n\n**Problem 4.** Σₙ₌₁^∞ (−1)ⁿ / 2ⁿ\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. Step 1: Σ1/n² converges (p=2>1) → **absolutely convergent** ✓\n\n2. Step 1: Σ1/√n diverges (p=1/2<1). Step 2: AST — 1/√n↘0 → Σ(−1)^{n+1}/√n converges → **conditionally convergent** ✓\n\n3. Step 1: Σn/(n+1) diverges (terms → 1 ≠ 0). Step 2: Divergence Test — (−1)ⁿ·n/(n+1) does not → 0 → **diverges** ✓\n\n4. Step 1: Σ1/2ⁿ converges (geometric, r=1/2<1) → **absolutely convergent** ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Classify Σₙ₌₁^∞ (−1)ⁿ/(n²+1).\n\n*(a)* Test Σ|aₙ| = Σ1/(n²+1). Apply an appropriate convergence test.\n\n*(b)* Classify the series.\n\n*(c)* May its terms be rearranged without changing the sum? Justify.\n\n*Expected answer:*\n\n*(a)* LCT with Σ1/n²: L = lim [n²/(n²+1)] = 1 ∈ (0,∞); Σ1/n² converges (p=2) → Σ1/(n²+1) **converges**.\n\n*(b)* Σ|aₙ| converges → **absolutely convergent**.\n\n*(c)* Yes — absolutely convergent series are rearrangement-invariant (A03). The Riemann Rearrangement Theorem does not apply (it applies only to conditionally convergent series).\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (all three parts correct); 0.5 if classification correct but rearrangement justification missing or inverted.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.7 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items: classification confusion → B01/B02; rearrangement error → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; re-examine three-class diagram; re-derive two-step pipeline; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.absolute-convergence` complete. Threshold 0.7 requires 4/5 correct.\n\n**Unlocks:** Power series radius of convergence; absolute convergence on the interval of convergence; full series classification toolkit.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 256,
+        "endLine": 358
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — advanced learner fluent with alternating series and multiple convergence tests.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Shift from \"does Σaₙ converge?\" to \"does Σ|aₙ| converge?\"; three-class diagram; proof that absolute convergence implies convergence\n2. **A02 P04 PATTERN INDUCTION** — Classification gallery; induce the two-step pipeline; discover role of sign-cancellation\n3. **A03 P06 CONTRAST PAIR** — Absolute vs conditional: rearrangement theorem; what each class allows and forbids\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Classify Σ(−1)ⁿ·ln(n)/n. (Hint: for n≥3, ln(n)/n > 1/n → Σln(n)/n diverges by DCT; AST: ln(n)/n↘0 → conditional.) |\n| R2 | 3 days | Classify Σ(−1)ⁿ·n²/n! (test Σn²/n! via ratio: L=0 → converges → absolutely convergent). |\n| R3 | 7 days | The series 1 − 1/2 + 1/3 − 1/4 + ··· = ln 2. A student rearranges it and claims the sum must still be ln 2 since \"convergent series have fixed sums.\" What must be true for this argument to be valid, and is it valid here? |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 408,
+        "endLine": 418
+      }
+    },
+    {
+      "assetId": "math.seq.absolute-convergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.absolute-convergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | power series absolute convergence; radius of convergence analysis |\n| Requires (Tier-1) | math.seq.alternating-series |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent problem unrelated to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.absolute-convergence.md",
+        "startLine": 418,
+        "endLine": 432
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

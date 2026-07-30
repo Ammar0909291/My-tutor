@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.fnal.uniform-boundedness-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.fnal.uniform-boundedness",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4d5d323f286d4dbd485ba7b07248dc13a8989d2a5730d2966172e6bf17c7b9eb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md": "sha256:018d54d157aff90bcbb70d27aea814bdf2d6a58eb8302608cf8cfcb0de1075f7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.fnal.uniform-boundedness",
+    "name": "Uniform Boundedness Principle",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.fnal.bounded-operator",
+      "math.real.baire-category"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.fnal.uniform-boundedness-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.fnal.uniform-boundedness (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md": "sha256:018d54d157aff90bcbb70d27aea814bdf2d6a58eb8302608cf8cfcb0de1075f7"
+      },
+      "contentHash": "sha256:cd593962193717c41b70139787bde326a0f670cf29af8ec240f85235986c6fcd",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.fnal.uniform-boundedness.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.uniform-boundedness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.uniform-boundedness\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.uniform-boundedness.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.uniform-boundedness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.uniform-boundedness\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.uniform-boundedness.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.uniform-boundedness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.uniform-boundedness\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.fnal.uniform-boundedness.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.fnal.uniform-boundedness"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.fnal.uniform-boundedness\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.fnal.uniform-boundedness/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the **Uniform Boundedness Principle** (Banach-Steinhaus theorem) — if $\\{T_\\alpha\\}_{\\alpha\\in I}$ is a family of bounded linear operators from a **Banach** space $X$ to a normed space $Y$ such that $\\sup_\\alpha\\|T_\\alpha x\\|<\\infty$ for EACH fixed $x\\in X$ (pointwise boundedness), then $\\sup_\\alpha\\|T_\\alpha\\|<\\infty$ (uniform boundedness in operator norm) — and correctly distinguish pointwise boundedness (the hypothesis) from uniform boundedness (the conclusion).\n- LO2: Explain why the proof genuinely requires the **Baire Category theorem** applied to $X$ (a Banach space, hence a complete metric space), identifying the specific role completeness plays in ruling out a pointwise-bounded but uniformly-unbounded family.\n- LO3: Apply the principle to conclude that a **pointwise-convergent sequence of bounded operators** (with $\\lim_n T_n x$ existing for each $x$) has **uniformly bounded norms** $\\sup_n\\|T_n\\|<\\infty$ — and correctly identify what additional data is needed to conclude the limit operator is itself bounded.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "POINTWISE-BOUND-ASSUMED-UNIFORM",
+      "content": "| MC-1 | POINTWISE-BOUND-ASSUMED-UNIFORM | Believing that if each $\\|T_\\alpha x\\|$ is finite, a single bound automatically works for all $\\alpha$, treating the UBP as a trivial tautology rather than a genuinely non-trivial theorem | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "UBP-ASSUMED-INDEPENDENT-OF-COMPLETENESS",
+      "content": "| MC-2 | UBP-ASSUMED-INDEPENDENT-OF-COMPLETENESS | Believing the Uniform Boundedness Principle holds for any normed space, missing that the Baire Category theorem (and hence completeness of $X$) is the essential mechanism | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "POINTWISE-CONVERGENT-LIMIT-NOT-AUTOMATICALLY-BOUNDED",
+      "content": "| MC-3 | POINTWISE-CONVERGENT-LIMIT-NOT-AUTOMATICALLY-BOUNDED | Believing that when $T_n x\\to Tx$ pointwise but $T_n$ is not eventually norm-bounded, the limit $T$ could still be bounded — missing that UBP already guarantees $\\sup_n\\|T_n\\|<\\infty$ from the pointwise convergence alone | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Pointwise vs. Uniform Boundedness, and the Theorem's Statement (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Pointwise vs. Uniform Boundedness, and the Theorem's Statement (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Completeness Is the Key Hypothesis (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Completeness Is the Key Hypothesis (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Application to Pointwise-Convergent Operator Sequences (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Application to Pointwise-Convergent Operator Sequences (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State the Uniform Boundedness Principle with all hypotheses (space types, pointwise condition, conclusion), distinguishing pointwise from uniform boundedness in your own words.\n  2. Show directly that if $T_n:\\ell^2\\to\\mathbb{R}$, $T_n(x)=x_n$ (projection onto $n$-th coordinate), then pointwise boundedness holds (compute $\\sup_n|T_n(x)|$ for each fixed $x\\in\\ell^2$) and uniform boundedness holds (compute $\\sup_n\\|T_n\\|$).\n  3. Explain, using the Baire Category theorem, what specific structural property of Banach spaces the UBP proof exploits, and identify the step where completeness enters.\n  4. Suppose $T_n:X\\to Y$ is a pointwise-convergent sequence of bounded operators on a Banach space $X$. Without computing $\\|T_n\\|$ individually, explain why the limit operator $T(x)=\\lim_n T_n x$ is automatically bounded.\n- **P76 (Transfer Probe, mode = independence)**: \"In numerical analysis, a quadrature formula for computing $\\int_0^1 f(t)\\,dt$ is a rule $Q_n(f)=\\sum_{k=1}^n w_{nk}f(t_{nk})$ — a bounded linear functional on $C([0,1])$ with $\\|Q_n\\|=\\sum_k|w_{nk}|$. (a) Using the UBP, explain what it means for a quadrature sequence to be 'consistent' (converges to the true integral for every $f\\in C([0,1])$): what does UBP immediately tell you about the operator norms $\\|Q_n\\|$? (b) A student argues 'if the quadrature works for every specific $f$ I test, the norms $\\|Q_n\\|$ must eventually stabilize.' Using this lesson's Example 3-style argument, explain why pointwise convergence alone does not guarantee the norms stabilize — and why UBP fills this gap only because $C([0,1])$ is a Banach space.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.fnal.bounded-operator` (bounded linear operators, the operator norm) and `math.real.baire-category` (the Baire Category theorem: a complete metric space cannot be written as a countable union of nowhere-dense closed sets).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.fnal.uniform-boundedness/reference/1",
+      "kind": "reference",
+      "conceptId": "math.fnal.uniform-boundedness",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.fnal.bounded-operator` (bounded linear operators and the operator norm — the objects the principle concerns), `math.real.baire-category` (the Baire Category theorem — the proof mechanism that makes completeness productive).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.fnal.uniform-boundedness.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

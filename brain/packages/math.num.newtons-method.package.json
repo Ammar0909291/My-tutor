@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.newtons-method-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.newtons-method",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6ca1710c2bd71b82f5c3db3787aef67d9ef95676ce7ccaab1c8117e0b510b96a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.newtons-method.md": "sha256:669c92493d399205646f0510dabc3ed8e6676cf2ba19d8c39d4ef6d82996cf04"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.num.newtons-method",
+    "name": "Newton's Method",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.num.root-finding",
+      "math.calc.derivative-definition"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.newtons-method-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.newtons-method (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.newtons-method.md": "sha256:669c92493d399205646f0510dabc3ed8e6676cf2ba19d8c39d4ef6d82996cf04"
+      },
+      "contentHash": "sha256:6227f76cfcbb854ae908d7673740ac253cba63baf54207aa86f2b439a7ab733e",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.newtons-method.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.newtons-method.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.newtons-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.newtons-method\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.newtons-method/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.newtons-method",
+      "title": "Learning Objective",
+      "content": "Given a differentiable function f, the student derives the Newton iteration xₙ₊₁=xₙ−f(xₙ)/f'(xₙ) from the tangent-line approximation, applies it to locate a root to prescribed precision, identifies failure modes (zero derivative, divergence from a bad initial guess, oscillation, cycle), quantifies quadratic convergence (the number of correct digits approximately doubles each iteration for simple roots), and modifies the iteration xₙ₊₁=xₙ−m·f(xₙ)/f'(xₙ) to restore quadratic convergence for roots of multiplicity m.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.newtons-method",
+      "title": "NEWTON-ALWAYS-CONVERGES",
+      "content": "| MC-1 | NEWTON-ALWAYS-CONVERGES | Student believes Newton's method converges for any continuous function and any starting point; does not consider divergence, cycles, or failure at flat regions | Type 5 — instruction-induced (Newton's method is introduced with examples where it converges beautifully; failure cases are deferred or omitted; the convergence theorem's assumption of \"sufficiently close initial guess\" is stated but not enforced) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.newtons-method",
+      "title": "INITIAL-GUESS-IRRELEVANT",
+      "content": "| MC-2 | INITIAL-GUESS-IRRELEVANT | Student picks an arbitrary starting point and expects convergence; does not use sign changes, graphs, or bracketing to find a good initial guess | Type 1 — overgeneralization (in problems with nice quadratic-convergence examples, any reasonable starting point works; student does not realise the basin of attraction can be small or fractal-shaped for complex functions) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.newtons-method",
+      "title": "LINEAR-CONVERGENCE-MEANS-SLOW",
+      "content": "| MC-3 | LINEAR-CONVERGENCE-MEANS-SLOW | Student incorrectly discards a method showing linear convergence as \"too slow to be useful,\" not recognising that linear convergence with factor 0.01 (say) still adds 2 significant digits per iteration | Type 3 — language contamination (the word \"linear\" is associated with \"first-order\" = slow compared with \"quadratic\" = fast; the RATE 0.01 matters more than the ORDER label) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "CORRECT → \"Newton's method: xₙ₊₁=xₙ−f(xₙ)/f'(xₙ). Geometric derivation: tangent line to y=f(x) crosses x-axis at next iterate. Quadratic convergence for simple roots: correct digits approximately doubles each iteration.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Newton's method: xₙ₊₁=xₙ−f(xₙ)/f'(xₙ). Geometric derivation: tangent line to y=f(x) crosses x-axis at next iterate. Quadratic convergence for simple roots: correct digits approximately doubles each iteration.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "PARTIAL (can apply the formula but cannot explain why it converges quadratically) → \"Write down the Taylor expansion of f(xₙ) around the root α. Divide by f'(xₙ)≈f'(α). What power of eₙ=xₙ−α remains in eₙ₊₁?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (can apply the formula but cannot explain why it converges quadratically) → \\\"Write down the Taylor expansion of f(xₙ) around the root α. Divide by f'(xₙ)≈f'(α). What power of eₙ=xₙ−α remains in eₙ₊₁?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "NO_RESPONSE → \"Draw y=x²−2. At x=2, draw the tangent. Where does it cross the x-axis? That's x₁. Now repeat at x₁.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Draw y=x²−2. At x=2, draw the tangent. Where does it cross the x-axis? That's x₁. Now repeat at x₁.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "CORRECT → \"Newton's method converges quadratically only for simple roots from a sufficiently close starting point. Zero derivative causes division-by-zero or extreme step. Multiple roots cause linear convergence; the modified method m·f/f' restores quadratic convergence.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Newton's method converges quadratically only for simple roots from a sufficiently close starting point. Zero derivative causes division-by-zero or extreme step. Multiple roots cause linear convergence; the modified method m·f/f' restores quadratic convergence.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "PARTIAL (names failure modes but cannot describe the oscillation case) → \"For f(x)=x³−x at x₀=1/√5: compute x₁=x₀−f(x₀)/f'(x₀). Then x₂ from x₁. Do you return to x₀? This is a 2-cycle: the method loops forever without converging.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (names failure modes but cannot describe the oscillation case) → \\\"For f(x)=x³−x at x₀=1/√5: compute x₁=x₀−f(x₀)/f'(x₀). Then x₂ from x₁. Do you return to x₀? This is a 2-cycle: the method loops forever without converging.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "NO_RESPONSE → \"For f(x)=(x−1)², apply Newton starting at x=2. How many iterations to get |error|<10⁻⁶? Compare with a simple root.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"For f(x)=(x−1)², apply Newton starting at x=2. How many iterations to get |error|<10⁻⁶? Compare with a simple root.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "CORRECT → \"Newton's method requires a good initial guess (within the basin of attraction). For functions with vertical asymptotes, oscillatory behavior, or multiple roots, start with bracketing or a graph. Brent's method combines safety (bracketing) with quadratic convergence (Newton/secant).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Newton's method requires a good initial guess (within the basin of attraction). For functions with vertical asymptotes, oscillatory behavior, or multiple roots, start with bracketing or a graph. Brent's method combines safety (bracketing) with quadratic convergence (Newton/secant).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "PARTIAL (identifies the divergence but does not know a recovery strategy) → \"Bisection is the fallback: it always converges from a bracket [a,b] with f(a)f(b)<0. Once bisection has narrowed the interval to 10⁻³ precision, switch to Newton for quadratic speed-up. This hybrid is Brent's method in spirit.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (identifies the divergence but does not know a recovery strategy) → \\\"Bisection is the fallback: it always converges from a bracket [a,b] with f(a)f(b)<0. Once bisection has narrowed the interval to 10⁻³ precision, switch to Newton for quadratic speed-up. This hybrid is Brent's method in spirit.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.newtons-method",
+      "title": "NO_RESPONSE → \"Plot f(x)=x−tan(x) near x=4.5. What happens to tan(x) near x=3π/2≈4.71? Can the tangent line from x₀=4.5 give a useful crossing with the x-axis?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Plot f(x)=x−tan(x) near x=4.5. What happens to tan(x) near x=3π/2≈4.71? Can the tangent line from x₀=4.5 give a useful crossing with the x-axis?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.num.newtons-method/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.newtons-method",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Apply Newton's method to f(x)=cos(x)−x to find the fixed point (Dottie number ≈ 0.739). Start at x₀=0. Perform 4 iterations by hand (to 4 decimal places) and verify quadratic convergence.\n2. For f(x)=(x−3)³, apply Newton's method from x₀=4. (a) Show convergence is linear. (b) Identify the linear rate c. (c) Apply the modified Newton with m=3 and show quadratic convergence.\n3. Derive the secant method xₙ₊₁=xₙ−f(xₙ)·(xₙ−xₙ₋₁)/(f(xₙ)−f(xₙ₋₁)) from Newton's method by replacing f'(xₙ) with a finite-difference approximation. What is its order of convergence (approximately 1.618)?\n4. Sketch the Newton basin of attraction for f(x)=x³−x on the real line. Identify which starting intervals lead to convergence to each of the three roots (0, 1, −1).\n\n**P55 — Reflect & Consolidate:** \"Newton: xₙ₊₁=xₙ−f/f'. Quadratic convergence for simple roots. Failure modes: f'=0, bad start, multiple roots. Modified Newton (multiply by m) restores quadratic for multiplicity m. Always bracket first; use Newton only to refine.\"\n\n**P76 — Transfer Probe (Cross-link: math.opt.gradient-methods):**\nNewton's method for optimisation minimises g(x) by finding g'(x)=0. (a) Show that applying Newton's method to f(x)=g'(x) gives the Newton update xₙ₊₁=xₙ−g'(xₙ)/g''(xₙ). (b) Apply this to g(x)=x⁴−4x²+4 to find all local minima starting from x₀=−3, x₀=0, x₀=3. (c) Identify a starting point where Newton's method for optimization finds a local MAXIMUM or a saddle point instead. (d) Explain how this connects to gradient-descent methods (which use only g', not g''), and why Newton converges faster near critical points.\n\n**P55 — Reflect & Consolidate:** \"Newton's method for optimisation: apply the root-finding iteration to f=g'. The Hessian g'' plays the role of f'. The method converges quadratically to a local extremum from a close start. Without convexity, it can find maxima or saddle points — the same convergence analysis and failure modes apply.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=e^x−3x. (a) Show f has exactly two roots. (b) Find good initial guesses by plotting or sign analysis. (c) Apply Newton's method to each root until |f(xₙ)|<10⁻¹⁰. (d) Classify the convergence order numerically by computing log(|eₙ₊₁|)/log(|eₙ|). (e) A student starts at x₀=0.5 and sees the iterates bouncing between two values. Diagnose the issue and propose a fix.\"\n\n**P55 — Reflect & Consolidate:** \"Complete Newton workflow: (1) establish root count and rough locations (sign changes, plot); (2) pick x₀ within the basin; (3) iterate until convergence criterion; (4) verify order numerically; (5) if divergence or oscillation, fall back to bisection then re-enter Newton.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.newtons-method complete\n- Score 3/5 → REVIEW failure modes and basin of attraction; replay A02–A03\n- Score ≤ 2/5 → PREREQUISITE GAP in math.num.root-finding or math.calc.derivative-definition; reassign\n\n**P78 — Completion:** Newton's method certified. Student derives the iteration from the tangent line, applies it to locate roots, explains quadratic convergence for simple roots, identifies all failure modes, applies the modified method for multiple roots, and connects the method to optimisation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.newtons-method.md",
+        "startLine": 108,
+        "endLine": 135
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

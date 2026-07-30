@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.dynamic-programming |
-| Title | Dynamic Programming |
+| name | Dynamic Programming |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -117,7 +117,7 @@ Step 1 — "Greedy works when: each locally best choice leads to a globally best
 **TB-R03 (MC-3 SUBPROBLEM-ORDER-ARBITRARY):**
 Step 1 — "Every DP table has a dependency DAG: cell X depends on cells Y₁,Y₂,… You must compute Y₁ and Y₂ BEFORE X. Topological order of the DAG gives a valid fill order." Step 2 — Draw the 4×4 LCS table; draw arrows from each cell to its dependencies. Show the DAG: (i,j) depends on (i−1,j), (i,j−1), (i−1,j−1). A valid fill order: all (i−1,j−1), (i−1,j), (i,j−1) before (i,j) — row-by-row achieves this. Step 3 — Show that column-by-column fails: (1,1) needs (0,1) not yet available in first column pass.
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Write the Bellman recurrence for the Edit Distance problem (minimum insertions/deletions/substitutions to transform string A into string B). Fill a 3×4 table for A="cat", B="cuts".

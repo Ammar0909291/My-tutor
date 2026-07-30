@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.newton-optimization |
-| Title | Newton's Method for Optimization |
+| name | Newton's Method for Optimization |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -124,7 +124,7 @@ Step 1 — "Quadratic convergence describes the RATE of decay of the error, not 
 **TB-R03 (MC-2 HESSIAN-INVERSION-IS-EXPENSIVE-SO-SKIP):**
 Step 1 — "You're right that O(n³) makes exact Newton impractical for n>10⁴. But quasi-Newton methods approximate H⁻¹ without ever forming or inverting the Hessian." Step 2 — "BFGS update: B_{k+1}=B_k + rank-2 correction using the current gradient change. Cost: O(n²) per step, stores an n×n matrix. L-BFGS: stores only the last m (≈20) gradient pairs; cost O(mn) per step." Step 3 — "In practice: Newton for n<1000 (scipy.optimize.minimize, method='Newton-CG'); BFGS for n<10⁵; L-BFGS for large-scale ML."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Apply two Newton steps to minimise f(θ)=e^θ+e^{−θ}−2 starting at θ₀=1.0. Compute f'(θ), f''(θ), and each Newton step exactly.

@@ -1,0 +1,686 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.convex-optimization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.convex-optimization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ca9f61bec390cce0aa050c22a1c16b73aa179bfd62273e28f5f5f5803f9d6f73",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.convex-optimization.md": "sha256:957a03c75311f46413912ce84de5382ee297cdf3e4d81e809df616e54244acfb"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 16,
+      "mastery_probe": 1
+    },
+    "ruleCount": 16
+  },
+  "concept": {
+    "conceptId": "math.opt.convex-optimization",
+    "name": "Convex Optimization",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.opt.convex-function",
+      "math.opt.convex-set"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.convex-optimization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.convex-optimization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.convex-optimization.md": "sha256:957a03c75311f46413912ce84de5382ee297cdf3e4d81e809df616e54244acfb"
+      },
+      "contentHash": "sha256:89d823cbd0909f95d1b6eb6552bbecd53c7965e4c26172b60b643d2fcda9e676",
+      "ruleCount": 16,
+      "bandCounts": {
+        "3": 16
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.convex-optimization.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.convex-optimization.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.convex-optimization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.convex-optimization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.convex-optimization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "Learning Objective",
+      "content": "Given a minimisation problem min f(x) s.t. x∈C with f convex and C a convex set, the student states the fundamental theorem (any local minimum is a global minimum), verifies the optimality condition (∇f(x*)=0 for unconstrained; 〈∇f(x*), y−x*〉≥0 for all y∈C for constrained), applies projected gradient descent, and selects among standard problem classes (LP, QP, SDP) by matching the structural form of f and C.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "LOCAL-IS-NOT-GLOBAL-FOR-CONVEX",
+      "content": "| MC-1 | LOCAL-IS-NOT-GLOBAL-FOR-CONVEX | Student treats a locally optimal point as potentially not global; applies heuristics (random restarts, simulated annealing) unnecessarily to a convex problem | Type 5 — instruction-induced (students learn local≠global for non-convex, then over-apply this caution) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "GRADIENT-ZERO-SUFFICIENT-CONSTRAINED",
+      "content": "| MC-2 | GRADIENT-ZERO-SUFFICIENT-CONSTRAINED | Student uses ∇f(x*)=0 as the constrained optimality condition without checking feasibility; fails to use the projected gradient / variational inequality condition | Type 1 — overgeneralization (unconstrained: ∇f=0 is necessary AND sufficient; constrained requires more) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "CONVEXITY-OF-FEASIBLE-SET-ENOUGH",
+      "content": "| MC-3 | CONVEXITY-OF-FEASIBLE-SET-ENOUGH | Student believes a problem is convex as long as the feasible set C is convex; does not check that the objective f is also convex (a non-convex objective over a convex set can have many local minima) | Type 1 — overgeneralization (convex set is one of two requirements; both must hold) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "CORRECT → \"Any local minimum of a convex function over a convex set is global. This is the central guarantee enabling efficient optimisation.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Any local minimum of a convex function over a convex set is global. This is the central guarantee enabling efficient optimisation.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "PARTIAL (knows the theorem, can't prove it) → \"Why does the contradiction work? What property of C is used to ensure z_t is feasible?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows the theorem, can't prove it) → \\\"Why does the contradiction work? What property of C is used to ensure z_t is feasible?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "NO_RESPONSE → \"For f(x)=x², what are the local minima? For f(x)=sin(x), what are the local minima?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"For f(x)=x², what are the local minima? For f(x)=sin(x), what are the local minima?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "CORRECT → \"Constrained optimum: variational inequality, not just ∇f=0. Projected gradient descent enforces feasibility at each step.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Constrained optimum: variational inequality, not just ∇f=0. Projected gradient descent enforces feasibility at each step.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "PARTIAL (understands constraint but can't apply VI) → \"At x*=(1/2,1/2), is the gradient pointing into or out of the feasible set?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands constraint but can't apply VI) → \\\"At x*=(1/2,1/2), is the gradient pointing into or out of the feasible set?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "NO_RESPONSE → \"What is the projection of (0,0) onto the line x+y=1?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"What is the projection of (0,0) onto the line x+y=1?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "CORRECT → \"Three checks: convex objective, convex inequality constraints, affine equality constraints. Matching the class selects the right solver.\" → A04",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Three checks: convex objective, convex inequality constraints, affine equality constraints. Matching the class selects the right solver.\\\" → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "PARTIAL (knows LP/QP, unclear on non-convex constraints) → \"If the constraint is x₁²+x₂²≥1 (exterior of unit disk), is the feasible set convex?\" → TB-R03 → A04",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows LP/QP, unclear on non-convex constraints) → \\\"If the constraint is x₁²+x₂²≥1 (exterior of unit disk), is the feasible set convex?\\\" → TB-R03 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "INCORRECT → TB-R03 → A04",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "NO_RESPONSE → \"Is f(x)=‖x‖² convex? Is the feasible set {x: xᵀQx≤1, Q⪰0} convex?\" → TB-R03 → A04",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Is f(x)=‖x‖² convex? Is the feasible set {x: xᵀQx≤1, Q⪰0} convex?\\\" → TB-R03 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "CORRECT → \"Non-convex = potentially many local minima, no global guarantee. Convex = single global minimum, polynomial-time solvable.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"Non-convex = potentially many local minima, no global guarantee. Convex = single global minimum, polynomial-time solvable.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "PARTIAL → \"Can gradient descent find (−1,−1) and (1,1) as local minima of (x²−1)²+(y²−1)²? Which is global?\" → TB-R03 (extend) → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL → \\\"Can gradient descent find (−1,−1) and (1,1) as local minima of (x²−1)²+(y²−1)²? Which is global?\\\" → TB-R03 (extend) → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 115,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 116,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "NO_RESPONSE → \"Plot (x²−1)² for x∈[−2,2]. How many local minima does it have?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"Plot (x²−1)² for x∈[−2,2]. How many local minima does it have?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 117,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.opt.convex-optimization/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.convex-optimization",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Show that the problem min e^x s.t. x∈[0,1] is convex. Find the optimal x* and verify the variational inequality condition at x*.\n2. Classify each problem as LP, QP, SOCP, SDP, or non-convex: (a) min xᵀx s.t. Ax=b; (b) min |x|+|y| s.t. x+y≤3; (c) min xᵀQx s.t. ‖x‖₂≤1, Q not PSD; (d) min cᵀx s.t. xᵀx≤1.\n3. For min ½‖x‖² s.t. aᵀx≥b, apply the projected gradient update once from x₀=0. (Projection onto the half-space aᵀx≥b is x+max(0,b−aᵀx)a/‖a‖².)\n4. A student claims: \"I ran gradient descent on a convex function and it got stuck at a non-optimal point because the gradient became very small but non-zero.\" Is this a valid failure mode? Under what conditions on the step size does this happen?\n\n**P55 — Reflect & Consolidate:** \"Convex optimization: local=global (guaranteed), polynomial-time solvable, mature solvers. The two requirements are: convex objective AND convex feasible set.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe proximal gradient method: for min f(x)+g(x) where f is smooth convex and g is convex but non-smooth (e.g., g(x)=λ‖x‖₁, the LASSO penalty), the update is x_{k+1}=prox_{αg}(x_k−α∇f(x_k)) where prox_{αg}(v)=argmin_x{g(x)+½α⁻¹‖x−v‖²}. Show that when g=0, the proximal gradient step reduces to the standard gradient descent step. Compute prox_{αλ‖·‖₁}(v) (the soft-thresholding operator: sign(v)·max(|v|−αλ,0)). Explain why the LASSO problem is convex even though g is non-differentiable.\n\n**P55 — Reflect & Consolidate:** \"Proximal gradient extends convex optimisation to non-smooth objectives by splitting: smooth part handled by gradient, non-smooth part by the proximal operator. LASSO is convex despite the non-differentiability of ‖·‖₁.\"\n\n**P75 — Mastery Assessment:**\n\"The elastic net problem: min ½‖Ax−b‖²+λ₁‖x‖₁+½λ₂‖x‖². (a) Is the objective convex? Justify by showing each term's Hessian. (b) Is the feasible set convex? (c) If you apply gradient descent to just the smooth part ½‖Ax−b‖²+½λ₂‖x‖², what is the gradient? (d) Why can't you directly apply gradient descent to the full objective? What do you use instead?\"\n\n**P55 — Reflect & Consolidate:** \"Elastic net is a convex but non-smooth objective. The ‖·‖₁ term requires proximal methods. This is the standard setup for sparse learning in high dimensions.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; advance to math.opt.linear-programming and/or math.opt.duality\n- Score 3/5 → REVIEW local=global theorem and optimality conditions; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.opt.convex-function or math.opt.convex-set; reassign\n\n**P78 — Completion:** Convex optimization certified. Student can verify problem convexity, apply the fundamental theorem, state optimality conditions, and classify problems into LP/QP/SDP/SOCP.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.convex-optimization.md",
+        "startLine": 130,
+        "endLine": 157
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

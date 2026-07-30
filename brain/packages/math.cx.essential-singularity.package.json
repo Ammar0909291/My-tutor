@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.essential-singularity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.essential-singularity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8aeb8c7015d07419d7ac69add60c37b33f32a6221739bbcfc4da1d3ccc286936",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.essential-singularity.md": "sha256:ec544370fc219cf2c088e8ff58c8f15aefc7e97f7379f1dc7d4ae00352f184ca"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.essential-singularity",
+    "name": "Essential Singularity",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cx.singularities"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.essential-singularity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.essential-singularity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.essential-singularity.md": "sha256:ec544370fc219cf2c088e8ff58c8f15aefc7e97f7379f1dc7d4ae00352f184ca"
+      },
+      "contentHash": "sha256:2dff7b886420406e55ed7eb30c3198bdaea3c8b50b9efb9bbb8d807aab0fef9e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.essential-singularity.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.essential-singularity.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.essential-singularity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.essential-singularity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.essential-singularity.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.essential-singularity.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.essential-singularity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.essential-singularity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.essential-singularity.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.essential-singularity.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.essential-singularity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.essential-singularity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.essential-singularity.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.essential-singularity.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.essential-singularity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.essential-singularity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.essential-singularity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify an **essential singularity** — an isolated singularity that is neither removable nor a pole, equivalently one where the Laurent series has infinitely many nonzero negative-power terms — and correctly classify it against removable singularities (Laurent series has no negative terms; $\\lim|f|<\\infty$) and poles (Laurent series has finitely many negative terms; $|f|\\to\\infty$).\n- LO2: State and apply the **Casorati-Weierstrass theorem** — if $z_0$ is an essential singularity of $f$, then for every $\\delta>0$ and every $w\\in\\mathbb{C}$, there exists $z$ with $0<|z-z_0|<\\delta$ and $|f(z)-w|<\\varepsilon$ — recognizing that the image of any punctured neighborhood of $z_0$ is DENSE in $\\mathbb{C}$, meaning $f$ behaves with maximal wildness near an essential singularity.\n- LO3: State the **Great Picard theorem** — near an essential singularity, $f$ takes every complex value with at most one possible exception, and takes each such value **infinitely often** — and recognize this as a dramatic strengthening of Casorati-Weierstrass (dense image becomes: almost every value achieved infinitely often), with $e^{1/z}$ at $z=0$ as the canonical example (misses only $w=0$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "ESSENTIAL-SINGULARITY-CONFUSED-WITH-POLE",
+      "content": "| MC-1 | ESSENTIAL-SINGULARITY-CONFUSED-WITH-POLE | Believing that a function with an essential singularity can satisfy $|f(z)|\\to\\infty$ as $z\\to z_0$, confusing essential singularities with poles (poles have $|f|\\to\\infty$; essential singularities have no limit at all) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "CASORATI-WEIERSTRASS-MEANS-SURJECTIVE",
+      "content": "| MC-2 | CASORATI-WEIERSTRASS-MEANS-SURJECTIVE | Believing Casorati-Weierstrass says the image of a punctured neighborhood is all of $\\mathbb{C}$ (surjective), missing that it only says DENSE — Great Picard is needed for the surjectivity (minus one exception) conclusion | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "GREAT-PICARD-SAME-AS-CASORATI-WEIERSTRASS",
+      "content": "| MC-3 | GREAT-PICARD-SAME-AS-CASORATI-WEIERSTRASS | Believing Great Picard and Casorati-Weierstrass are equivalent results with different names, missing that Great Picard is dramatically stronger (infinite preimages for almost every value, not just density of the image) and requires significantly more difficult proof machinery | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Essential Singularity Classification (Primitive P37: Classify)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Essential Singularity Classification (Primitive P37: Classify)\",\"primitives\":[\"P37\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Casorati-Weierstrass: Dense Image Near an Essential Singularity (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Casorati-Weierstrass: Dense Image Near an Essential Singularity (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Great Picard: Surjectivity minus at Most One Exception (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Great Picard: Surjectivity minus at Most One Exception (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Classify the singularity of $f(z)=\\sin(1/z)$ at $z=0$ (identify the type and give the Laurent series evidence).\n  2. State the Casorati-Weierstrass theorem and apply it to $f(z)=\\sin(1/z)$: for the value $w=1/2$, show that there exist solutions to $\\sin(1/z)=1/2$ with $|z|$ arbitrarily small.\n  3. State the Great Picard theorem and identify the exceptional value (if any) for $f(z)=e^{1/z}$. Explain why the exceptional value is exceptional (why it cannot be achieved).\n  4. Explain the relationship between Casorati-Weierstrass and Great Picard: which is the stronger statement, and in what specific way is Great Picard stronger than Casorati-Weierstrass?\n- **P76 (Transfer Probe, mode = independence)**: \"In value distribution theory (Nevanlinna theory), a meromorphic function $f$ on $\\mathbb{C}$ is studied by measuring HOW OFTEN it takes each value $w$ — the counting function $n(r,w)$ counts preimages in $|z|<r$. The First Fundamental Theorem of Nevanlinna theory says that the average of $n(r,w)$ over all $w$ grows at the same rate as the number of poles. (a) Using Great Picard (this lesson), explain why an entire function with an essential singularity at $\\infty$ (i.e., a non-polynomial entire function, since $\\infty$ is always a singularity of an entire function) must take EVERY value with at most one exception — this is the Little Picard theorem. What does this say about the image of a non-constant entire function? (b) Using Casorati-Weierstrass as a weaker analog: if instead of Great Picard you only knew Casorati-Weierstrass, what would you be able to conclude about the image of a non-constant entire function, and why is this weaker than Little Picard's conclusion?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.singularities` (classification of isolated singularities via Laurent series — removable, pole, essential — and the Riemann removable singularity theorem and pole characterization).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.essential-singularity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.essential-singularity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.singularities` (classification of isolated singularities via Laurent series — the three types and their Laurent-series characterizations — since this lesson deepens the essential case with Casorati-Weierstrass and Great Picard).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.essential-singularity.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.step-function |
-| Title | Step Functions |
+| name | Step Functions |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -127,7 +127,7 @@ Step 1 — "Continuous means: no jumps, no holes. For the floor function, comput
 **TB-R03 (MC-3 CLOSED-DOT-ON-WRONG-SIDE):**
 Step 1 — "For ⌊x⌋: which values of x give ⌊x⌋=2? Answer: x∈[2,3) — the CLOSED bracket is on the LEFT (x=2 included) and the OPEN bracket is on the RIGHT (x=3 excluded). So the FILLED dot is at (2, 2) and the OPEN dot is at (3, 2)." Step 2 — "For ⌈x⌉: which values give ⌈x⌉=3? Answer: x∈(2,3] — OPEN on the LEFT, CLOSED on the RIGHT. Filled dot at (3, 3), open dot at (2, 3)." Step 3 — "Memory: floor = filled on LEFT (interval starts closed); ceiling = filled on RIGHT (interval ends closed). Draw the interval bracket notation [n, n+1) to remind yourself which side is closed."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Evaluate: (a) ⌊4.9⌋; (b) ⌈4.1⌉; (c) ⌊−3.5⌋; (d) ⌈−2.1⌉; (e) ⌊7⌋; (f) ⌈−4⌉.

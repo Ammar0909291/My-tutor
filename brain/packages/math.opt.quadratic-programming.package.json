@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.quadratic-programming-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.quadratic-programming",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f675a253a29d73527fc170f0f7b79e5b715b364fc075138f1bc91d94209194f6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.quadratic-programming.md": "sha256:1e51404fa07d31ff4dc3ccf22b2a581411e43e17cde849bf7829aba76b157db6"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.opt.quadratic-programming",
+    "name": "Quadratic Programming",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.opt.linear-programming",
+      "math.linalg.positive-definite"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.quadratic-programming-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.quadratic-programming (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.quadratic-programming.md": "sha256:1e51404fa07d31ff4dc3ccf22b2a581411e43e17cde849bf7829aba76b157db6"
+      },
+      "contentHash": "sha256:bbec95cb0b994eabdac50652e890a034706a6f8125305c743a671d90cecc5460",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.quadratic-programming.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.quadratic-programming.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.quadratic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.quadratic-programming\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.quadratic-programming/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "Learning Objective",
+      "content": "Given a quadratic program (QP): min ½xᵀQx+cᵀx s.t. Ax≤b, the student classifies the problem as convex (Q⪰0) or non-convex (Q not PSD), writes the KKT conditions, solves small instances (2D active-set or closed-form), explains why the SVM training problem is a QP, and distinguishes QP from LP by the curved objective.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "QP-ALWAYS-CONVEX",
+      "content": "| MC-1 | QP-ALWAYS-CONVEX | Student assumes any QP is convex; does not check whether Q is positive semidefinite; attempts to apply convex solvers to non-convex QPs | Type 5 — instruction-induced (QPs are usually introduced with convex examples; non-convex QPs are harder and mentioned later) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "KKT-SUFFICIENT-WITHOUT-CONVEXITY",
+      "content": "| MC-2 | KKT-SUFFICIENT-WITHOUT-CONVEXITY | Student applies KKT conditions and concludes a solution is globally optimal without verifying convexity; a KKT point of a non-convex QP may be a saddle point | Type 1 — overgeneralization (KKT necessary always; sufficient only for convex problems) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "QP-SAME-AS-LS",
+      "content": "| MC-3 | QP-SAME-AS-LS | Student confuses unconstrained QP min ½‖Ax−b‖² with the QP min ½xᵀQx+cᵀx; does not see that least squares is a special case (Q=AᵀA, c=−Aᵀb) with a closed-form solution, while constrained QP is harder | Type 3 — language contamination (\"quadratic objective\" sounds the same in both) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "CORRECT → \"QP: quadratic objective, polyhedral constraints. Convex iff Q⪰0. Solved by active-set or interior-point.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"QP: quadratic objective, polyhedral constraints. Convex iff Q⪰0. Solved by active-set or interior-point.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "PARTIAL (knows form, can't check convexity) → \"For Q=[[1,2],[2,1]], compute the eigenvalues. Is Q PSD?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows form, can't check convexity) → \\\"For Q=[[1,2],[2,1]], compute the eigenvalues. Is Q PSD?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "NO_RESPONSE → \"If Q=[[4,0],[0,9]], is Q PSD? What are its eigenvalues?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"If Q=[[4,0],[0,9]], is Q PSD? What are its eigenvalues?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "CORRECT → \"Always check Q⪰0 before applying convex solvers. KKT is globally sufficient only when Q⪰0.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Always check Q⪰0 before applying convex solvers. KKT is globally sufficient only when Q⪰0.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "PARTIAL (knows to check eigenvalues, unsure how) → \"For [[a,b],[b,c]], the eigenvalues are positive iff a>0 and ac−b²>0 (Sylvester's criterion). Apply this to Q=[[2,1],[1,2]].\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows to check eigenvalues, unsure how) → \\\"For [[a,b],[b,c]], the eigenvalues are positive iff a>0 and ac−b²>0 (Sylvester's criterion). Apply this to Q=[[2,1],[1,2]].\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "NO_RESPONSE → \"Compute det([[2,1],[1,2]])=4−1=3>0 and leading 1×1 minor=2>0. What does Sylvester say?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Compute det([[2,1],[1,2]])=4−1=3>0 and leading 1×1 minor=2>0. What does Sylvester say?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "CORRECT → \"SVM is a convex QP. Q=I (block) is PSD → unique global optimum. The dual (kernel trick) is also a QP.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"SVM is a convex QP. Q=I (block) is PSD → unique global optimum. The dual (kernel trick) is also a QP.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "PARTIAL (knows SVM is QP, unsure about soft-margin) → \"Why is soft-margin SVM still a QP? The ξ variables appear linearly, not quadratically.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows SVM is QP, unsure about soft-margin) → \\\"Why is soft-margin SVM still a QP? The ξ variables appear linearly, not quadratically.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "NO_RESPONSE → \"In soft-margin SVM, the objective has ½‖w‖²+CΣξᵢ. What is the degree of each term in (w,b,ξ)?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"In soft-margin SVM, the objective has ½‖w‖²+CΣξᵢ. What is the degree of each term in (w,b,ξ)?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.opt.quadratic-programming/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.quadratic-programming",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Classify as convex QP, non-convex QP, or LP: (a) min x₁²+3x₁x₂+x₂² s.t. x₁+x₂≤1; (b) min 2x₁²−x₁x₂+x₂² s.t. x₁,x₂≥0; (c) min 3x₁+x₂ s.t. x₁²+x₂²≤1. (Classify (c) carefully: what kind of problem is it?)\n2. Solve min ½x₁²+½x₂²−x₁ s.t. x₁+x₂=1, x₁,x₂≥0 using KKT conditions.\n3. Write the dual QP of min ½‖x‖² s.t. Ax≥b and show it equals max bᵀλ−½λᵀ(AA ᵀ)λ s.t. λ≥0.\n4. A portfolio optimisation problem: min xᵀΣx s.t. μᵀx≥r, 1ᵀx=1, x≥0 where Σ is a covariance matrix, μ is expected returns, r is the required return. Is this a convex QP? Identify Q, c, A, b.\n\n**P55 — Reflect & Consolidate:** \"QP: quadratic objective, polyhedral constraints. Convex iff Q⪰0. KKT is globally sufficient for convex QPs. SVM training, portfolio optimisation, and QP relaxations all reduce to this form.\"\n\n**P76 — Transfer Probe (Independence mode):**\nLASSO as a QP: min ½‖Ax−b‖²+λ‖x‖₁. The ‖x‖₁=Σ|xᵢ| is non-smooth. Show that by introducing auxiliary variables tᵢ≥|xᵢ| (i.e., tᵢ≥xᵢ and tᵢ≥−xᵢ), LASSO becomes min ½‖Ax−b‖²+λΣtᵢ s.t. tᵢ≥xᵢ, tᵢ≥−xᵢ ∀i, which is a convex QP in (x,t). Verify Q for the augmented variable vector.\n\n**P55 — Reflect & Consolidate:** \"LASSO reduces to a QP via auxiliary variable lifting of the ‖·‖₁ norm. The same trick converts any absolute-value penalty into linear constraints.\"\n\n**P75 — Mastery Assessment:**\n\"Hard-margin SVM with training set {(x₁,+1),(x₂,+1),(x₃,−1)} where x₁=(1,0),x₂=(0,1),x₃=(0,0): (a) Write the hard-margin SVM QP in terms of w∈ℝ², b∈ℝ. (b) Solve for (w*,b*) and find the margin. (c) Write the KKT conditions and identify which training points are support vectors (λᵢ>0). (d) Verify that the KKT multipliers satisfy complementary slackness.\"\n\n**P55 — Reflect & Consolidate:** \"The SVM margin is 2/‖w*‖; support vectors are the training points with active margin constraints (KKT multiplier >0). All other training points have zero KKT multipliers.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.opt.quadratic-programming complete\n- Score 3/5 → REVIEW convexity check and KKT sufficiency; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.opt.linear-programming or math.linalg.positive-definite; reassign\n\n**P78 — Completion:** Quadratic programming certified. Student can classify QP convexity, write KKT conditions, solve small instances, and model SVM training as a QP.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.quadratic-programming.md",
+        "startLine": 119,
+        "endLine": 146
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

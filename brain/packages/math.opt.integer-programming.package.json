@@ -1,0 +1,685 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.integer-programming-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.integer-programming",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9f9e4ac24db9bea25bd4c5a45e27f12c7b78dbb018880a84fcff2407cc4ba5cd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.integer-programming.md": "sha256:4b177d0820552b3e8370a3090f0663b961061bd3dca86ef807020602fb2a88a1"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 16,
+      "mastery_probe": 1
+    },
+    "ruleCount": 16
+  },
+  "concept": {
+    "conceptId": "math.opt.integer-programming",
+    "name": "Integer Programming",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.opt.linear-programming"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.integer-programming-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.integer-programming (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.integer-programming.md": "sha256:4b177d0820552b3e8370a3090f0663b961061bd3dca86ef807020602fb2a88a1"
+      },
+      "contentHash": "sha256:80bf785e91d6aa99c823213b0596cc7b9a662c2568374a5afc530e93b7f9b42b",
+      "ruleCount": 16,
+      "bandCounts": {
+        "3": 16
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.integer-programming.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.integer-programming.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.integer-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.integer-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.integer-programming/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.integer-programming",
+      "title": "Learning Objective",
+      "content": "Given an integer program min cᵀx s.t. Ax≤b, x∈ℤⁿ, the student distinguishes ILP/MIP/BIP, explains why integrality destroys convexity (discrete feasible set), solves a 2-variable ILP by LP relaxation followed by branch-and-bound, explains the integrality gap and when it is zero (total unimodularity), and situates the NP-hardness of ILP within math.disc.complexity-classes via the 3-SAT reduction.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.integer-programming",
+      "title": "IP-IS-JUST-LP-WITH-ROUNDING",
+      "content": "| MC-1 | IP-IS-JUST-LP-WITH-ROUNDING | Student solves the LP relaxation and rounds the fractional solution to the nearest integer, believing this gives an optimal or near-optimal IP solution; does not know that rounding can violate constraints or give solutions arbitrarily far from optimal | Type 1 — overgeneralization (rounding works for some special cases like network flows; students generalize this to all IPs) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.integer-programming",
+      "title": "BRANCH-AND-BOUND-IS-BRUTE-FORCE",
+      "content": "| MC-2 | BRANCH-AND-BOUND-IS-BRUTE-FORCE | Student equates branch-and-bound with exhaustive enumeration of all integer points; does not see that LP relaxation bounds prune large subtrees, making B&B far more efficient in practice than 2ⁿ enumeration | Type 3 — language contamination (\"branch\" sounds like branching over all possibilities; the \"bound\" that prunes subtrees is missed) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.integer-programming",
+      "title": "LP-RELAXATION-ALWAYS-TIGHT",
+      "content": "| MC-3 | LP-RELAXATION-ALWAYS-TIGHT | Student assumes the LP relaxation optimal value equals the IP optimal value, or that the LP optimal solution is always integer or near-integer; does not know that the integrality gap can be arbitrarily large | Type 5 — instruction-induced (network flow LPs are introduced early and always have integer optima due to total unimodularity; students over-generalise this special property to all IPs) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "CORRECT → \"IP restricts LP to integer solutions. Feasible set is discrete, non-convex. LP relaxation gives a bound but not the solution. Rounding is not valid. NP-hard in general.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"IP restricts LP to integer solutions. Feasible set is discrete, non-convex. LP relaxation gives a bound but not the solution. Rounding is not valid. NP-hard in general.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "PARTIAL (knows rounding fails, doesn't know why) → \"If rounding the LP solution violates a constraint, what does that tell you about the integrality gap?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows rounding fails, doesn't know why) → \\\"If rounding the LP solution violates a constraint, what does that tell you about the integrality gap?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "NO_RESPONSE → \"If the LP optimum is x*=(1.7,0.3) satisfying 2x₁+x₂≤4, does rounding to (2,0) also satisfy 2(2)+0=4≤4? What about (1,0)? Which is better?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"If the LP optimum is x*=(1.7,0.3) satisfying 2x₁+x₂≤4, does rounding to (2,0) also satisfy 2(2)+0=4≤4? What about (1,0)? Which is better?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "CORRECT → \"Integrality gap=LP opt−IP opt. Gap=0 iff matrix A is TU. For general IPs, LP gives a bound only; explicit search (B&B or cutting planes) needed.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Integrality gap=LP opt−IP opt. Gap=0 iff matrix A is TU. For general IPs, LP gives a bound only; explicit search (B&B or cutting planes) needed.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "PARTIAL (knows TU concept, can't check it) → \"For A=[[1,1],[1,0]], compute the determinants of all 1×1 and 2×2 submatrices. Is A TU?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows TU concept, can't check it) → \\\"For A=[[1,1],[1,0]], compute the determinants of all 1×1 and 2×2 submatrices. Is A TU?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "INCORRECT → TB-R03 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "NO_RESPONSE → \"Why does a network flow LP always have an integer optimal solution? What structural property of the incidence matrix causes this?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Why does a network flow LP always have an integer optimal solution? What structural property of the incidence matrix causes this?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "CORRECT → \"B&B = LP relaxation at each node gives a bound; prune when bound ≤ incumbent (max) or ≥ incumbent (min). Not brute force — pruning makes it practical. Worst-case exponential, confirming NP-hardness.\" → A04",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"B&B = LP relaxation at each node gives a bound; prune when bound ≤ incumbent (max) or ≥ incumbent (min). Not brute force — pruning makes it practical. Worst-case exponential, confirming NP-hardness.\\\" → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 118,
+        "endLine": 118
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "PARTIAL (understands branching, misses the pruning rule) → \"When exactly do you prune a B&B node in a maximisation problem?\" → TB-R02 → A04",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (understands branching, misses the pruning rule) → \\\"When exactly do you prune a B&B node in a maximisation problem?\\\" → TB-R02 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 119,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "INCORRECT → TB-R02 → A04",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R02 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 120,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "NO_RESPONSE → \"In the worked example, why was the node x₂≤1, x₁≥3 discarded without solving?\" → TB-R02 → A04",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"In the worked example, why was the node x₂≤1, x₁≥3 discarded without solving?\\\" → TB-R02 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 121,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "CORRECT → \"B&B = tree with LP bounds for pruning. Cutting planes = add valid inequalities until LP is integer. Branch-and-Cut = both. All are exponential worst-case (IP is NP-hard), but modern solvers make large structured IPs tractable.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"B&B = tree with LP bounds for pruning. Cutting planes = add valid inequalities until LP is integer. Branch-and-Cut = both. All are exponential worst-case (IP is NP-hard), but modern solvers make large structured IPs tractable.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 141,
+        "endLine": 141
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "PARTIAL (understands B&B, unclear on what a cut is) → \"A Gomory cut is a valid inequality that all integer-feasible points satisfy. Why doesn't adding it remove any integer solutions?\" → TB-R03 (extend) → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL (understands B&B, unclear on what a cut is) → \\\"A Gomory cut is a valid inequality that all integer-feasible points satisfy. Why doesn't adding it remove any integer solutions?\\\" → TB-R03 (extend) → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 142,
+        "endLine": 142
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 143,
+        "endLine": 143
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.integer-programming",
+      "title": "NO_RESPONSE → \"If the LP optimum is x₁=1.5 and x₁ must be integer, write the two constraints that separate feasible integer values. Which one goes in the left branch and which in the right?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"If the LP optimum is x₁=1.5 and x₁ must be integer, write the two constraints that separate feasible integer values. Which one goes in the left branch and which in the right?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 144,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "math.opt.integer-programming/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.integer-programming",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Solve by branch-and-bound (draw the full tree): max 2x₁+3x₂ s.t. x₁+2x₂≤5, 3x₁+x₂≤6, x₁,x₂≥0, x₁,x₂∈ℤ. Show LP relaxation and integer solution at each node.\n2. 0/1 knapsack: max 4x₁+5x₂+3x₃ s.t. 2x₁+3x₂+x₃≤5, xᵢ∈{0,1}. (a) Solve the LP relaxation. (b) Is the LP solution integer? (c) What is the integrality gap?\n3. Explain why 3-SAT reduces to 0/1 ILP: for the clause (x₁∨¬x₂∨x₃), write a linear inequality over binary variables y₁,y₂,y₃∈{0,1} (where yᵢ=1 iff xᵢ=true) that is satisfied iff the clause is satisfied. Use this to argue that 0/1 ILP is NP-hard.\n4. A production schedule: 3 product types, each batch is an integer. Formulate as ILP. The constraint matrix A has columns corresponding to products and rows to resources. Is A likely to be TU? What would TU imply?\n\n**P55 — Reflect & Consolidate:** \"IP adds integrality to LP. Feasible set is discrete; LP gives a lower/upper bound. B&B: LP bounds prune the search tree — NOT brute force. TU matrices give zero integrality gap. Cutting planes add valid inequalities. NP-hard in general via 3-SAT reduction.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.disc.complexity-classes):**\nUsing math.disc.complexity-classes concepts: (a) Show 0/1 ILP is in NP: given a binary vector x, the constraint check Ax≤b can be done in polynomial time. (b) Show 3-SAT ≤_P 0/1 ILP: for a 3-SAT instance with n variables and m clauses, construct an 0/1 ILP with n binary variables yᵢ (yᵢ=1 iff xᵢ=true) and m constraints (one per clause) in O(n+m) time. (c) Conclude 0/1 ILP is NP-complete. (d) Reconcile NP-hardness with the fact that CPLEX solves million-variable IPs in hours: worst-case exponential ≠ typical exponential; structure + cuts + branching heuristics make it tractable.\n\n**P55 — Reflect & Consolidate:** \"NP-completeness is a worst-case statement over all instances. Modern IP solvers exploit problem structure (strong cuts, constraint propagation, warm-start from LP, presolve) to make real-world IPs tractable. The NP-hardness result tells us there is no polynomial-time EXACT algorithm for ALL instances — not that IP is practically unsolvable.\"\n\n**P75 — Mastery Assessment:**\n\"The IP: min x₁+x₂ s.t. 3x₁+2x₂≥12, x₁+x₂≤6, x₁,x₂≥0, x₁,x₂∈ℤ. (a) Solve the LP relaxation and report the optimal value. (b) Draw the B&B tree for at least two levels of branching. (c) Report the IP optimal solution and value. (d) Compute the integrality gap. (e) Is the constraint matrix TU? Given your answer, should you have expected the LP relaxation to be integer?\"\n\n**P55 — Reflect & Consolidate:** \"B&B terminates with a provably optimal IP solution when all nodes are pruned or integer. The integrality gap quantifies how much the LP overestimates (for max) or underestimates (for min) the true IP value. TU matrices are the closed-form exception where LP solves IP exactly.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.opt.integer-programming complete\n- Score 3/5 → REVIEW branch-and-bound pruning rule and integrality gap; replay A02–A03\n- Score ≤ 2/5 → PREREQUISITE GAP in math.opt.linear-programming; reassign\n\n**P78 — Completion:** Integer programming certified. Student can formulate ILP/MIP/BIP, compute LP relaxation bounds, execute branch-and-bound with pruning, recognise TU matrices as the zero-gap case, and place IP within NP-hardness theory via the 3-SAT reduction.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.integer-programming.md",
+        "startLine": 157,
+        "endLine": 184
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

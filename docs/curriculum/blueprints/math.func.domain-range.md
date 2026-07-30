@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.domain-range |
-| Title | Domain and Range |
+| name | Domain and Range |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | understand |
@@ -121,7 +121,7 @@ Step 1 — "Three natural domain restrictions: (1) denominators cannot be 0; (2)
 **TB-R03 (MC-3 RANGE-IS-COMPUTED-NOT-REASONED):**
 Step 1 — "Plugging in values samples the range; it doesn't prove it. Better method: reason about the function's structure. What is its minimum/maximum output? Does it skip any values? Is it continuous (intermediate value theorem says no gaps)?" Step 2 — f(x)=x²/(x²+1): denominator always > numerator → 0≤f(x)<1. As x→∞: f→1. f(0)=0. Range=[0,1). Step 3 — "Use the graph (projection onto y-axis), or solve y=f(x) for x and find which y-values give real solutions. That's the range."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Find the natural domain of: (a) f(x)=√(2x−6); (b) g(x)=(x+1)/(x²−4); (c) h(x)=ln(x²−9). Write answers in interval notation.

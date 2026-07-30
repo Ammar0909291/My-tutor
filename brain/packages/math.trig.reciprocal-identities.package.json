@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.reciprocal-identities-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.reciprocal-identities",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e6013b0f2d21182c23c8d4c51049f5631125fe890b39f670ce2c6095824f59e0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.reciprocal-identities.md": "sha256:4d3576cc86d85fc4f15f123d3c86a2df0f54c784c8d8834b06f12032b9914bc3"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.trig.reciprocal-identities",
+    "name": "Reciprocal and Quotient Identities",
+    "difficultyRaw": "proficient",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.trig.trig-identities"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.reciprocal-identities-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.reciprocal-identities (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.reciprocal-identities.md": "sha256:4d3576cc86d85fc4f15f123d3c86a2df0f54c784c8d8834b06f12032b9914bc3"
+      },
+      "contentHash": "sha256:7a346e338574cb3697a607383268007b7179745e8b2cf9b3988ed79e1ce95814",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.reciprocal-identities.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.reciprocal-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.reciprocal-identities\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.reciprocal-identities.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.reciprocal-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.reciprocal-identities\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.reciprocal-identities.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.reciprocal-identities"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.reciprocal-identities\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.reciprocal-identities/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "Reciprocal and Quotient Identities — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.trig-identities**: sin θ, cos θ, tan θ definitions; the concept of a trigonometric identity\n\n### Target Knowledge State\nStudent states all six reciprocal and quotient identities without prompting: csc θ = 1/sin θ, sec θ = 1/cos θ, cot θ = 1/tan θ = cos θ/sin θ, tan θ = sin θ/cos θ. Student applies these identities to simplify expressions and prove basic identities involving all six trig functions. Student correctly pairs sec with cos (not sin) and csc with sin (not cos).\n\n### Conceptual Obstacles\n1. Swapping secant and cosecant — writing sec θ = 1/sin θ and csc θ = 1/cos θ\n2. Treating cot θ as equivalent to tan θ rather than its reciprocal\n3. Forgetting that csc, sec, cot are undefined wherever their denominators vanish\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "SECANT-COSECANT-SWAP",
+      "content": "| MC-1 | SECANT-COSECANT-SWAP | Student writes sec θ = 1/sin θ and csc θ = 1/cos θ — the \"co\" in cosecant is misread as cosine | Any problem requiring sec or csc values |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "COT-EQUALS-TAN",
+      "content": "| MC-2 | COT-EQUALS-TAN | Student treats cot θ as another name for tan θ, rather than as 1/tan θ = cos θ/sin θ | Simplifications involving cot θ |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "DOMAIN-BLINDNESS",
+      "content": "| MC-3 | DOMAIN-BLINDNESS | Student computes csc(0), sec(π/2), or cot(0) without noticing undefined results | Domain-sensitive problems |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "All Six Functions and Their Relationships",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"All Six Functions and Their Relationships\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 63,
+        "endLine": 126
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "Simplifying with Reciprocal and Quotient Identities",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Simplifying with Reciprocal and Quotient Identities\",\"primitives\":[\"P04\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 126,
+        "endLine": 180
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 180,
+        "endLine": 384
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A03 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Given sin θ = 5/13 and cos θ = 12/13, find csc θ, sec θ, and cot θ.\n\n**Problem 2.** Simplify: cot θ · sin θ.\n\n**Problem 3.** Simplify: (sec θ − cos θ)/sin θ.\n\n**Problem 4.** For what values of θ in [0, 2π) is sec θ undefined?\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. csc θ = 13/5, sec θ = 13/12, cot θ = cos θ/sin θ = 12/5 ✓\n\n2. cot θ · sin θ = (cos θ/sin θ) · sin θ = **cos θ** ✓\n\n3. **tan θ** (see A02 gallery) ✓\n\n4. sec θ = 1/cos θ is undefined when cos θ = 0: **θ = π/2 and θ = 3π/2** ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Prove the identity: tan θ + cot θ = sec θ · csc θ.\n\n*Expected answer:*\n\nLHS = sin θ/cos θ + cos θ/sin θ = (sin²θ + cos²θ)/(sin θ cos θ) = 1/(sin θ cos θ)\n\nRHS = (1/cos θ)(1/sin θ) = 1/(sin θ cos θ)\n\nLHS = RHS ✓\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point for a complete proof with all steps shown.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Identify missed item; sec/csc swap → B01; cot confusion → B02; domain error → B03; targeted repair |\n| ≤ 3/5 | → Return to A01; rebuild the paired table; re-memorise the sec/cos and csc/sin pairings; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.reciprocal-identities` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** All six-function identity proofs; cotangent in integration contexts.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 183,
+        "endLine": 277
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — define from the three primary ratios.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Paired table: six functions as three reciprocal pairs + two quotient identities; domain restriction column; memory device\n2. **A02 P04 PATTERN INDUCTION** — Gallery of simplifications using reciprocal and quotient identities; prove one identity from scratch\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 56,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Given tan θ = 5/12 (acute), find all six trig values. |\n| R2 | 3 days | Simplify: sin θ · cot θ + cos θ · tan θ. |\n| R3 | 7 days | Prove: csc θ − sin θ = cos θ · cot θ. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 327,
+        "endLine": 337
+      }
+    },
+    {
+      "assetId": "math.trig.reciprocal-identities/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.reciprocal-identities",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | Identity proofs involving all six functions |\n| Requires (Tier-1) | math.trig.trig-identities |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent identity proof.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.reciprocal-identities.md",
+        "startLine": 337,
+        "endLine": 351
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

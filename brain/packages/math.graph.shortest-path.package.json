@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.shortest-path-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.shortest-path",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d15ffdb6d74f6f657f1c29fae860c55fe67d28cbde75d7b0f0abdf19e7c7e19f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.shortest-path.md": "sha256:e55164ddf9b45535d4aab49b05a18c02fba87044f1a36d73155d92f0b627a105"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.shortest-path",
+    "name": "Shortest Path Algorithms",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.graph.graph",
+      "math.disc.asymptotic-notation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.shortest-path-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.shortest-path (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.shortest-path.md": "sha256:e55164ddf9b45535d4aab49b05a18c02fba87044f1a36d73155d92f0b627a105"
+      },
+      "contentHash": "sha256:6d73f05bc299edfd5dedd958eaf8262addb7972faa6c1ce79dfdbfff6abfb862",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.shortest-path.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.shortest-path.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.shortest-path"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.shortest-path\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.shortest-path.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.shortest-path.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.shortest-path"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.shortest-path\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.shortest-path.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.shortest-path.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.shortest-path"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.shortest-path\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.shortest-path.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.shortest-path.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.shortest-path"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.shortest-path\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.shortest-path/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the **shortest-path problem** (single-source, single-target, all-pairs) on a weighted directed graph; explain why negative-weight cycles make shortest paths undefined; state the conditions under which **Dijkstra's algorithm** is correct (non-negative edge weights) and execute it using a min-priority queue, stating complexity $O((n+m)\\log n)$.\n- LO2: Execute **Bellman-Ford** (relax all edges $n-1$ times; detect negative cycles via a final relaxation pass) on graphs with negative edges; state its complexity $O(nm)$; explain the correctness argument via the shortest-path optimality substructure.\n- LO3: Execute **Floyd-Warshall** (all-pairs shortest paths via dynamic programming on intermediate vertex sets) on small graphs; state its complexity $O(n^3)$; detect negative cycles (diagonal entry $d[v][v]<0$); compare all three algorithms on the axes of: weight restrictions, source count, and asymptotic complexity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.shortest-path",
+      "title": "DIJKSTRA-WORKS-WITH-NEGATIVE-EDGES",
+      "content": "| MC-1 | DIJKSTRA-WORKS-WITH-NEGATIVE-EDGES | Believing Dijkstra is correct for graphs with negative edge weights — once a vertex is finalized (extracted from the priority queue), Dijkstra assumes no further relaxation is possible, but a negative edge from a later vertex can invalidate that finalization | Critical |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 114,
+        "endLine": 114
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.shortest-path",
+      "title": "BELLMAN-FORD-NEEDS-MORE-THAN-N-MINUS-1-ROUNDS",
+      "content": "| MC-2 | BELLMAN-FORD-NEEDS-MORE-THAN-N-MINUS-1-ROUNDS | Believing Bellman-Ford requires $n$ or more rounds to guarantee correctness — in fact $n-1$ rounds suffice because any simple path (in a negative-cycle-free graph) uses at most $n-1$ edges; round $n$ is used only for negative-cycle DETECTION, not for convergence | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 115,
+        "endLine": 115
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.shortest-path",
+      "title": "FLOYD-WARSHALL-NEGATIVE-CYCLE-FROM-OFF-DIAGONAL",
+      "content": "| MC-3 | FLOYD-WARSHALL-NEGATIVE-CYCLE-FROM-OFF-DIAGONAL | Believing that an off-diagonal entry $d[i][j]<0$ proves a negative cycle — negative off-diagonal values can occur without a negative cycle (simply meaning there's a cheaper path from $i$ to $j$); a negative cycle is proven only by $d[v][v]<0$ for some $v$ | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 116,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Dijkstra as \"Expand the Closest Frontier\" (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Dijkstra as \\\"Expand the Closest Frontier\\\" (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Bellman-Ford: Why $n-1$ Rounds (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Bellman-Ford: Why $n-1$ Rounds (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Floyd-Warshall: DP on Intermediate Sets (Primitive P16: Counterexample for limits)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Floyd-Warshall: DP on Intermediate Sets (Primitive P16: Counterexample for limits)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (5-problem set)**:\n  1. Run Dijkstra on: $s\\to a=1, s\\to b=4, a\\to b=2, a\\to c=5, b\\to c=1$. List the order in which vertices are finalized and give $d[c]$.\n  2. Add edge $c\\to a=-3$ to the graph above. Explain why Dijkstra would give an incorrect answer, and run Bellman-Ford to compute the correct $d[c]$. Is there a negative cycle?\n  3. Run Floyd-Warshall on the 3-vertex graph: $1\\to2=5, 2\\to3=3, 3\\to1=-4$. Compute the full distance matrix and determine whether a negative cycle exists.\n  4. A graph has $n=100$ vertices and $m=200$ edges, all non-negative. Which algorithm gives the fastest correct answer for all-pairs shortest paths — running Dijkstra from each vertex or Floyd-Warshall? Justify with complexity analysis.\n  5. Prove that the shortest path substructure holds: if $p$ is a shortest path from $u$ to $v$ passing through $w$, then the sub-path from $u$ to $w$ is a shortest path from $u$ to $w$. (Use this to justify why the Bellman-Ford relaxation invariant works.)\n- **P76 (Transfer Probe, mode = independence)**: \"**Johnson's algorithm** solves all-pairs shortest paths on sparse graphs with possibly negative weights. It works in three steps: (1) Add a new vertex $q$ with zero-weight edges to all other vertices; run Bellman-Ford from $q$ to compute potentials $h(v)$; (2) Reweight every edge $(u,v)$ by $\\hat{w}(u,v)=w(u,v)+h(u)-h(v)$ (making all weights non-negative); (3) Run Dijkstra from each vertex on the reweighted graph; adjust back using $d(u,v)=\\hat{d}(u,v)-h(u)+h(v)$. (a) Verify that the reweighting $\\hat{w}(u,v)\\ge0$ whenever $h$ satisfies the Bellman-Ford invariant (i.e., $h(v)\\le h(u)+w(u,v)$ for all edges). (b) State Johnson's overall complexity and explain when it beats Floyd-Warshall. (c) Why is adding the dummy vertex $q$ necessary rather than simply using Bellman-Ford from any existing vertex?\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Shortest Path Algorithms — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.graph.graph` (weighted directed graphs, adjacency) and `math.disc.asymptotic-notation` ($O, \\Omega, \\Theta$, analysis of nested loops). Requires familiarity with priority queues and dynamic programming at the level of informal recurrences. No further prerequisites.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.shortest-path/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.shortest-path",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.graph.graph` (weighted digraphs, adjacency); `math.disc.asymptotic-notation` ($O$-notation, loop analysis).\n- **Unlocks**: `math.graph.maximum-flow`.\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.shortest-path.md",
+        "startLine": 124,
+        "endLine": 130
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

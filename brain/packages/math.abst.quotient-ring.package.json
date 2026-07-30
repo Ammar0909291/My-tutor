@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.quotient-ring-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.quotient-ring",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:27e61998bfe47e6a170724f88e17ff018440483d51b56739c575ad980f60b649",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.quotient-ring.md": "sha256:4a51bc5ea8ef95f0813cc12f95c5369eeb0502baeddc8d95d8a4d4eb2beb377b"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.abst.quotient-ring",
+    "name": "Quotient Ring",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.ideal"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.quotient-ring-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.quotient-ring (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.quotient-ring.md": "sha256:4a51bc5ea8ef95f0813cc12f95c5369eeb0502baeddc8d95d8a4d4eb2beb377b"
+      },
+      "contentHash": "sha256:f3637e43b8769b759a40fbfdc4c5cf23915bdc3aa475d77257f07a1057c083c5",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.quotient-ring.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.quotient-ring.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.quotient-ring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.quotient-ring\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.quotient-ring/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "Learning Objective",
+      "content": "Given a ring R and a two-sided ideal I, the student constructs the quotient ring R/I as a set of cosets {r+I : r∈R} with well-defined addition and multiplication, verifies both operations, identifies zero and unity in R/I, and applies the construction to the canonical examples ℤ/nℤ and ℝ[x]/(x²+1)≅ℂ.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "QUOTIENT-RING-ELEMENTS-ARE-NUMBERS",
+      "content": "| MC-1 | QUOTIENT-RING-ELEMENTS-ARE-NUMBERS | Student treats r+I as a number r rather than as the entire coset {r+i : i∈I}; confuses representative with coset | Type 2 — perceptual intuition (r+I looks like \"r plus I\") |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "IDEAL-MEANS-SUBRING",
+      "content": "| MC-2 | IDEAL-MEANS-SUBRING | Student believes any subring works in place of an ideal for the construction; tries to form R/S for a subring S that is not an ideal and is puzzled when multiplication is undefined | Type 5 — instruction-induced (quotient groups only require subgroup) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "MULTIPLICATION-UNDEFINED",
+      "content": "| MC-3 | MULTIPLICATION-UNDEFINED | Student correctly forms coset addition but stops, believing multiplication of cosets (r+I)(s+I) = rs+I is not well-defined without checking | Type 1 — overgeneralization (quotient-group experience: no multiplication there) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "CORRECT → \"The coset [r] is the entire set {r+i : i∈I}; you can pick any representative to compute.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"The coset [r] is the entire set {r+i : i∈I}; you can pick any representative to compute.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "PARTIAL (knows addition, not multiplication) → \"Multiplication (r+I)(s+I) = rs+I works because I is a two-sided ideal — let's verify.\" → re-probe multiplication column, then A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows addition, not multiplication) → \\\"Multiplication (r+I)(s+I) = rs+I works because I is a two-sided ideal — let's verify.\\\" → re-probe multiplication column, then A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "INCORRECT (treats r+I as a number) → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT (treats r+I as a number) → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "NO_RESPONSE → \"Pick any two residues in ℤ/4ℤ and multiply them using the coset definition.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Pick any two residues in ℤ/4ℤ and multiply them using the coset definition.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "CORRECT → \"Ideals absorb external multiplication; subrings do not. Only ideals give well-defined coset multiplication.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Ideals absorb external multiplication; subrings do not. Only ideals give well-defined coset multiplication.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "PARTIAL (unsure about two-sided) → \"In commutative rings every ideal is automatically two-sided; in non-commutative rings left vs. right matters.\" → re-probe M₂ example, then A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (unsure about two-sided) → \\\"In commutative rings every ideal is automatically two-sided; in non-commutative rings left vs. right matters.\\\" → re-probe M₂ example, then A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "INCORRECT (thinks any subring works) → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT (thinks any subring works) → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "NO_RESPONSE → \"Try: in ℤ, is 3ℤ a subring? Is it an ideal?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Try: in ℤ, is 3ℤ a subring? Is it an ideal?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "CORRECT → \"Prime ideals give integral domains; maximal ideals give fields. The quotient ring inherits the ideal's structural role.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Prime ideals give integral domains; maximal ideals give fields. The quotient ring inherits the ideal's structural role.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "PARTIAL (knows definition, misses field criterion) → \"Maximal: no ideal properly between I and R. Field: every nonzero element is a unit. They connect through the quotient.\" → re-probe ℝ[x] examples, then Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows definition, misses field criterion) → \\\"Maximal: no ideal properly between I and R. Field: every nonzero element is a unit. They connect through the quotient.\\\" → re-probe ℝ[x] examples, then Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "NO_RESPONSE → \"Is [2] a unit in ℤ/6ℤ? Can you find [a] with [2]·[a]=[1]?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Is [2] a unit in ℤ/6ℤ? Can you find [a] with [2]·[a]=[1]?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.abst.quotient-ring/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.quotient-ring",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Let R=ℤ[x] and I=(x−2). Describe the elements of R/I and compute [(x²+1)]·[(x−3)] in R/I.\n2. In ℤ/12ℤ, find all zero divisors. Then determine whether the ideal 12ℤ is prime, maximal, or neither in ℤ.\n3. Prove that if φ: R→S is a ring homomorphism, then ker(φ) is a two-sided ideal of R. (State only — no homomorphism theory needed: use closure under subtraction and absorption by ring multiplication.)\n4. Show that ℝ[x]/(x²+1) is a field by verifying every nonzero coset [ax+b] (not both zero) has a multiplicative inverse in ℝ[x]/(x²+1). (Hint: multiply by [−ax+b] and simplify using x²≡−1.)\n\n**P55 — Reflect & Consolidate:** \"A quotient ring collapses an ideal to zero. Every algebraic identity in R descends to R/I, and the ideal's structural type (prime/maximal) determines whether the quotient is a domain or a field.\"\n\n**P76 — Transfer Probe (Independence mode, cross_links=[]):**\nLet R=ℤ[i] (Gaussian integers) and I=(1+i). Note |ℤ[i]/(1+i)|=2 (since (1+i)(1−i)=2 so 2∈I, and every element a+bi≡a−b mod (1+i) with a−b∈{0,1}). Show (1+i) is a prime ideal in ℤ[i] by verifying ℤ[i]/(1+i)≅ℤ/2ℤ (a field). Explicitly compute [i]=[i·1]=[(i·(1+i)−i)/1]—use i≡−1 mod (1+i) since i−(−1)=i+1∈I—and verify [i]=[1] in ℤ/2ℤ.\n\n**P55 — Reflect & Consolidate:** \"The Gaussian integer example shows quotient rings appear naturally in algebraic number theory: modding out by a prime element produces a finite field.\"\n\n**P75 — Mastery Assessment:**\n\"Consider R=ℚ[x] and the ideal I=(x²−2). (a) Show that every element of ℚ[x]/I has the form [a+bx] for a,b∈ℚ. (b) Define multiplication: [a+bx]·[c+dx]=[ac+2bd+(ad+bc)x]. Verify this is consistent with x²≡2. (c) Is R/I a field? Justify by determining whether x²−2 is irreducible over ℚ. (d) Find the multiplicative inverse of [1+x] in R/I.\"\n\n**P55 — Reflect & Consolidate:** \"ℚ[x]/(x²−2)≅ℚ(√2), the field extension generated by √2. Quotient rings are the algebraic mechanism behind all field extensions.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; advance to math.abst.ring-homomorphism\n- Score 3/5 → REVIEW well-definedness and prime/maximal distinction; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.abst.ideal; reassign before retry\n\n**P78 — Completion:** Quotient ring construction certified. Student can build R/I, verify well-definedness, and classify the quotient by the ideal's structural type.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.quotient-ring.md",
+        "startLine": 106,
+        "endLine": 133
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

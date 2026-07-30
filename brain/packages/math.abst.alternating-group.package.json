@@ -1,0 +1,345 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.alternating-group-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.alternating-group",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d86a838aac397a5cdc227e5073e78aa1df284d409fb5421332ab2232cea549eb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.alternating-group.md": "sha256:7927e4e146218b9e72be0a524ab07cf90dbd179c32a092994a317f32319e43d3"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.alternating-group",
+    "name": "",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.abst.symmetric-group",
+      "math.abst.normal-subgroup"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.alternating-group-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.alternating-group (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.alternating-group.md": "sha256:7927e4e146218b9e72be0a524ab07cf90dbd179c32a092994a317f32319e43d3"
+      },
+      "contentHash": "sha256:468a0a5ae13f8c7c7569c4d9ca83ca405948c009605017335d6d87f6dae452b2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.alternating-group.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.alternating-group.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.alternating-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.alternating-group\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.alternating-group.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.alternating-group.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.alternating-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.alternating-group\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.alternating-group.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.alternating-group.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.alternating-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.alternating-group\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.alternating-group.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.alternating-group.md#TA-A04 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.alternating-group"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.alternating-group\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.alternating-group/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.alternating-group",
+      "title": "math.abst.alternating-group — cognitive map",
+      "content": "### Target Understanding\nThe **alternating group** A_n is the set of all **even permutations** in S_n under composition.\nA permutation σ is **even** if it can be written as a product of an even number of transpositions\n(2-cycles); **odd** if it requires an odd number. The parity (even/odd) is well-defined.\n\nKey facts:\n- |A_n| = n!/2 for n ≥ 2 (exactly half of S_n is even)\n- A_n ⊴ S_n (normal subgroup, index 2; index-2 subgroups are always normal)\n- A_n is abelian for n ≤ 3; non-abelian for n ≥ 4\n- A_3 ≅ Z/3Z (cyclic of order 3)\n- A_4 has order 12 and NO subgroup of order 6 (famous exception to Lagrange converse)\n- **A_n is simple for n ≥ 5** — the single most important theorem about alternating groups\n\n### Distinction from math.abst.symmetric-group\nThe prerequisite S_n covers all permutations. A_n is its normal subgroup of index 2:\nthe even half. The key new structure is: (1) parity defines a well-defined surjective homomorphism\nS_n → Z/2Z with kernel A_n; (2) A_n is simple for n ≥ 5, making it a building block of all\nfinite groups (Jordan–Hölder theorem).\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Even/odd permutations in S₃ and S₄; classify each by transposition count |\n| **Pictorial (P)** | Cayley table for A₃; parity diagram S_n → Z/2Z with kernel A_n |\n| **Abstract (A)** | A_n ⊴ S_n; index 2; |A_n| = n!/2; simplicity of A_n for n≥5 |\n\n### Prerequisite Knowledge (from KG)\n- **math.abst.symmetric-group** — permutations; cycle notation; transpositions; cycle type;\n  S_n structure; order of a permutation\n- **math.abst.normal-subgroup** — normal subgroup definition; index; index-2 always normal;\n  quotient group; kernel of a homomorphism is normal\n\n### Canonical Examples\n\n**A₃ = even permutations in S₃:**\n| Permutation | Cycle type | Transpositions | Even/Odd |\n|-------------|-----------|----------------|----------|\n| e | — | 0 | **Even** |\n| (123) | 3-cycle | (12)(13) → 2 | **Even** |\n| (132) | 3-cycle | (13)(12) → 2 | **Even** |\n| (12) | transposition | 1 | Odd |\n| (13) | transposition | 1 | Odd |\n| (23) | transposition | 1 | Odd |\n\nA₃ = {e, (123), (132)}, |A₃| = 3 = 3!/2. A₃ ≅ Z/3Z.\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 31,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.alternating-group",
+      "title": "EVEN-PERMUTATION-IS-EVEN-LOOKING",
+      "content": "| MC-1 | EVEN-PERMUTATION-IS-EVEN-LOOKING | Determines parity by counting fixed points or by the permutation's \"visual\" appearance rather than the number of transpositions | Conflates the cycle STRUCTURE with parity; doesn't apply the transposition-count rule: k-cycle = k−1 transpositions | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.alternating-group",
+      "title": "A_n-ALWAYS-CYCLIC",
+      "content": "| MC-2 | A_n-ALWAYS-CYCLIC | Claims A_n is cyclic for all n | Overgeneralizes from A₃ ≅ Z/3Z; doesn't check commutativity or element orders for n≥4 | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.alternating-group",
+      "title": "A_n-NOT-NORMAL",
+      "content": "| MC-3 | A_n-NOT-NORMAL | Doubts A_n ⊴ S_n because \"not every subgroup is normal\" | Forgets the theorem: index-2 subgroups are always normal; doesn't use the parity homomorphism | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.alternating-group",
+      "title": "Entry: Even Permutations and A₃ (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: Even Permutations and A₃ (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 118,
+        "endLine": 169
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.alternating-group",
+      "title": "MC-1 Gate: Parity = Transposition Count (mod 2) (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: Parity = Transposition Count (mod 2) (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 169,
+        "endLine": 222
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.alternating-group",
+      "title": "Pattern Gallery: A_n Across n = 3, 4, 5 (P04 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Pattern Gallery: A_n Across n = 3, 4, 5 (P04 + P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 222,
+        "endLine": 289
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.alternating-group",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P04\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 289,
+        "endLine": 585
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.alternating-group",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Define A_n. What is |A_n|? Why is A_n normal in S_n?\n\n*(Target: A_n = even permutations in S_n under composition. |A_n| = n!/2. Normal because A_n is the\nkernel of the parity homomorphism π: S_n → Z/2Z (even↦0, odd↦1); kernels of homomorphisms are\nnormal. Alternatively: index-2 subgroups are always normal.)*\n\n**Q2.** Classify the permutation (1234)(56) ∈ S₆ as even or odd.\n\n*(Target: (1234) is a 4-cycle: 3 transpositions; (56) is a 2-cycle: 1 transposition.\nTotal: 3+1=4 transpositions → even. (1234)(56) ∈ A₆.)*\n\n**Q3.** Explain why A_n is simple for n ≥ 5 is a significant result in group theory.\n\n*(Target: A_n simple for n≥5 means it has no proper non-trivial normal subgroups — it cannot be\n\"factored\" further. By the Jordan–Hölder theorem, simple groups are the \"atoms\" of all finite\ngroups. The fact that A_5 (order 60) is simple was the key reason the general quintic polynomial\nhas no formula solvable by radicals (Galois theory). Significance: first non-trivial simple group;\nbuilding block of all finite groups.)*\n\n**Q4.** Does A₄ have a subgroup of order 6?  Answer using Sylow theory.\n\n*(Target: No. n_3 in A₄: ≡1 mod 3, |4 → n_3∈{1,4}. If a subgroup H of order 6 exists, [A₄:H]=2\nso H⊴A₄. H would contain elements of order 2 and 3. The four Sylow 3-subgroups of A₄ give 8\ndistinct elements of order 3; they can't all fit in H (|H|=6 has at most 2 elements of order 3).\nContradiction. (Or: a more direct proof that no element-enumeration works.) No order-6 subgroup.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independent reasoning about A₅.*\n\n> A₅ is the alternating group on 5 elements.\n>\n> (a) What is |A₅|?\n> (b) List the cycle types of even permutations in S₅ (a cycle type is even iff its total\n>     transposition count is even). How many permutations of each even cycle type are in A₅?\n> (c) State why A₅ is the smallest non-trivial simple group (one sentence).\n\n*Expected answers:*\n- **(a)** |A₅| = 5!/2 = 60.\n- **(b)** Cycle types in S₅: (1)(1)(1)(1)(1) [0 transpositions, even]: 1 element (identity).\n  (2)(1)(1)(1) [1 transposition, odd]: 10 elements. NOT in A₅.\n  (3)(1)(1) [2 transpositions, even]: C(5,3)×2 = 10×2=20 elements. In A₅.\n  Wait: 3-cycles in S₅: choose 3 of 5 to cycle (C(5,3)=10 ways), each gives 2 distinct 3-cycles ((abc) and (acb)), total 20. ✓\n  (4)(1) [3 transpositions, odd]: 5×(4−1)!=5×6=30 elements. NOT in A₅.\n  Wait: 4-cycles in S₅: 5!/(4×1) = 30? Actually C(5,4)×3! = 5×6=30. ✓ odd.\n  (2)(2)(1) [2 transpositions, even]: C(5,2)×C(3,2)/2=10×3/2=15. In A₅.\n  (Actually: choose first pair C(5,2)=10, second pair C(3,2)=3, divide by 2 (unordered pairs): 15.)\n  (3)(2) [3 transpositions, odd]: C(5,3)×2×C(2,2)=10×2×1=20. NOT in A₅.\n  (5) [4 transpositions, even]: (5−1)!=24 elements. In A₅.\n  A₅ even cycle types: identity (1), 3-cycles (20), double-transpositions (15), 5-cycles (24). Total: 1+20+15+24=60=|A₅| ✓.\n- **(c)** A₅ is simple because its 60 elements fall into conjugacy classes of sizes 1, 15, 20, 12, 12 (the two classes of 5-cycles), and no union of these (including {e}) forms a proper normal subgroup (one can verify by checking all possible unions sum to neither 1 nor 60 while satisfying subgroup conditions).\n\n**[P55 — SCORE]**  Award 1 point if (a) correct and (b) identifies all four even cycle types correctly; allow partial credit on (c) (explanation quality, not memorization); full point requires all of (a) and (b). 0 if (a) or (b) substantially wrong.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 4 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.80  →  ⌈0.80 × 5⌉ = 4\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score ≥ 4/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 3/5 → Identify which items failed:**\n  - Q1 wrong → MC-3 (normality) → TB-R03; or definition gap → re-state A_n = even permutations.\n  - Q2 wrong → MC-1 (parity count) → TB-R01; recount transpositions.\n  - Q3 wrong → simplicity not understood → connect to Jordan–Hölder and Galois theory in one sentence.\n  - Q4 wrong → Sylow argument gap → re-route to TA-A03 P49 (ii).\n  - P76 wrong → identify which part; (a) trivial fix; (b) cycle-type classification gap → TB-R01.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.alternating-group\nMASTERY_REACHED: true\nUNLOCKS:         []\nNEXT_CONCEPT:    (continue math.abst domain)\nSESSION_CLOSE:   \"You now know A_n: the even permutations in S_n, a normal subgroup of\n                  index 2 with |A_n|=n!/2. A₃≅Z/3Z is cyclic; A₄ is the famous order-12\n                  group with no subgroup of order 6; A_n is simple for n≥5, making it the\n                  building block of finite group theory.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: EVEN-PERMUTATION-IS-EVEN-LOOKING (MC-1)\n\n**Trigger:** Student determines parity by visual inspection rather than transposition count.\n\n**Step 1 — State the rule.**\n> A k-cycle requires exactly k−1 transpositions.\n> Parity of σ = (sum of (length−1) over all cycles in the disjoint cycle decomposition) mod 2.\n\n**Step 2 — Apply to examples.**\n> (12345): 5-cycle → 4 transpositions → even.\n> (12)(345): (12) gives 1, (345) gives 2. Total 3 transpositions → odd.\n> (12)(34)(56): three 2-cycles → 3 transpositions → odd.\n\n**Step 3 — Check understanding.**\n> (1234)(56): (1234) gives 3, (56) gives 1. Total 4 → even.\n\n**Exit:** Return to TA-A02 P49.\n\n---\n\n### TB-R02 · Repair: A_n-ALWAYS-CYCLIC (MC-2)\n\n**Trigger:** Student claims A_n is cyclic for n ≥ 4.\n\n**Step 1 — Show A₄ is non-abelian.**\n> In A₄: take σ=(123), τ=(124).\n> σ∘τ ≠ τ∘σ (computation shows one maps 1→4 and the other maps 1→3).\n> A group is cyclic only if it is abelian. A₄ is not abelian, so not cyclic.\n\n**Step 2 — General statement.**\n> A₃ ≅ Z/3Z is cyclic (order 3, prime, so necessarily cyclic).\n> A_n for n ≥ 4 is non-abelian (and has no single generator) — not cyclic.\n\n**Exit:** Return to TA-A03 P49.\n\n---\n\n### TB-R03 · Repair: A_n-NOT-NORMAL (MC-3)\n\n**Trigger:** Student is unsure why A_n ⊴ S_n.\n\n**Step 1 — Parity homomorphism argument.**\n> Define π: S_n → Z/2Z by π(σ) = 0 if σ is even, 1 if σ is odd.\n> π is a homomorphism: π(στ) = π(σ)+π(τ) (parities add mod 2).\n> ker(π) = A_n (even permutations map to 0).\n> Kernels of group homomorphisms are always normal subgroups.\n> Therefore A_n ⊴ S_n.\n\n**Step 2 — Alternative: index-2 argument.**\n> A_n has index 2 in S_n (exactly two cosets: A_n and S_n \\ A_n).\n> Any subgroup of index 2 is normal. (Proof: left and right cosets coincide.)\n\n**Exit:** Return to TA-A04 Q1.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Is (12345) even or odd? Is (123)(45) even or odd?\"\n    Target: (12345): 5-cycle=4 transpositions → even. (123)(45): 2+1=3 transpositions → odd.\n\n  Interval-2 (+3 days):\n    Probe: \"State two reasons why A_n is normal in S_n.\"\n    Target: (1) Kernel of parity homomorphism π: S_n→Z/2Z. (2) Index-2 subgroups are normal.\n\n  Interval-3 (+1 week):\n    Probe: \"Why does A₄ have no subgroup of order 6? Sketch the argument.\"\n    Target: H of order 6 would have index 2, so H⊴A₄. But n_3=4 in A₄ gives 8 elements\n            of order 3; H can hold at most 2 (since |H|=6). Contradiction.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (MC-1 parity gate) or TA-A03 (gallery).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.symmetric-group:\n    Used in:   TA-A01 (S₃ element listing; cycle notation; transposition decomposition),\n               TA-A02 (parity of specific permutations in S₄, S₅),\n               TA-A04 Q2, P76 (cycle types in S₅; transposition counts).\n    Assumed:   Student holds cycle notation; can compute composition of permutations; knows\n               the k-cycle → k−1 transpositions fact (or is reminded of it in TA-A02).\n  math.abst.normal-subgroup:\n    Used in:   TA-A01 (A_n ⊴ S_n stated as a fact, derived via index-2),\n               TB-R03 (parity homomorphism + kernel = normal subgroup proof),\n               TA-A03 (normal subgroup of A₄: V₄; simplicity definition).\n    Assumed:   Student knows normal subgroup definition; knows kernels are normal; knows\n               index-2 subgroups are normal; knows quotient group A_n / (normal K) concept.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. Parity (MC-1) is the unavoidable entry-level hurdle.**\nStudents who have only seen permutations as bijections often have no intuition for parity. The\nk-cycle = k−1 transpositions rule must be applied mechanically at first (count cycles, compute\nlengths, add up k−1 values, take mod 2) until the pattern is automatic. TA-A02's examples across\nk=2,3,4,5 build the habit systematically.\n\n**2. The non-abelian / not-cyclic distinction (MC-2) is crucial for expert-level work.**\nAfter seeing A₃ ≅ Z/3Z, students often assume A_n is cyclic for all n. The A₄ computation\n(showing (123)∘(124) ≠ (124)∘(123)) is the cleanest corrective. The specific elements (123) and\n(124) are the standard pair used in textbooks because their composition is easy to compute.\n\n**3. The A₄ no-order-6-subgroup result is a canonical \"Lagrange converse is false\" example.**\nStudents who believe \"if d divides |G| then G has a subgroup of order d\" should see this\ncounterexample memorized. The Sylow argument (n_3=4 gives 8 elements of order 3; no room for a\nsubgroup of order 6) is the cleanest proof.\n\n**4. A₅ simplicity is the bloom=analyze capstone.**\nStudents are not expected to prove A₅ is simple (that proof is long and requires advanced\nconjugacy class arguments). The target is: knowing the statement, knowing its significance\n(smallest non-trivial simple group; connection to Galois theory), and knowing the element count\nvia cycle types. P76 tests this via the cycle-type enumeration.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.alternating-group\n====================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 7; 4 TAs used ≤ 7.\n[PASS] V-4   CPA_ENTRY_STAGE = C (Concrete: S₃ element table, even/odd classification).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — k-cycle = k−1 transpositions).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03 pattern; TB-R02/R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P41 ✓  TA-A03→P04 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross-links in KG; cross_links = [].\n[PASS] V-17  GR-9: P76 uses Independence mode; probe requires student to compute |A₅|,\n              enumerate all even cycle types in S₅ with counts, and explain simplicity.\n[PASS] V-18  GR-10: MAMR = 4/5; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.80 × 5⌉ = 4/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (≥4/5 → pass; ≤3/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   A_n defined as even permutations in S_n; |A_n|=n!/2; A_n⊴S_n.\n             k-cycle = k−1 transpositions rule stated and applied.\n             A₃≅Z/3Z (cyclic, order 3); A₄ non-abelian (order 12, no subgroup of order 6);\n             A_n simple for n≥5 (statement, significance, connection to Galois theory).\n             MC-1: (12345) has 4 transpositions (even), not odd; (1234)(56) has 4 (even).\n             MC-2: A₄ non-abelian via (123)∘(124)≠(124)∘(123).\n             MC-3: parity homomorphism π; ker(π)=A_n; kernels normal.\n             P76: A₅ cycle-type enumeration; |A₅|=60; simplicity explanation.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 289,
+        "endLine": 585
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.alternating-group",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11 four representations: even/odd in S₃; A₃ ≅ Z/3Z + P49)\n      → TA-A02 (P41/P64 MC-1 gate: parity = transposition count (mod 2); k-cycle = k−1\n                 transpositions + P49)\n      → TA-A03 (P04 pattern gallery: A_n properties across n=3,4,5; simplicity of A₅ + P49)\n      → TA-A04 (P91 terminal mastery gate — P76 independence probe)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (k-cycle = k−1 transpositions; examples for 2-cycle, 3-cycle, 4-cycle)\n  MC-2 → TB-R02 (A₄ non-abelian: exhibit (12)(34)·(13)(24) ≠ (13)(24)·(12)(34))\n  MC-3 → TB-R03 (parity homomorphism π: S_n → Z/2Z, ker(π)=A_n, so A_n⊴S_n by FIT)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 95,
+        "endLine": 113
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.alternating-group",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"Is (12345) even or odd? Is (123)(45) even or odd?\"\n    Target: (12345): 5-cycle=4 transpositions → even. (123)(45): 2+1=3 transpositions → odd.\n\n  Interval-2 (+3 days):\n    Probe: \"State two reasons why A_n is normal in S_n.\"\n    Target: (1) Kernel of parity homomorphism π: S_n→Z/2Z. (2) Index-2 subgroups are normal.\n\n  Interval-3 (+1 week):\n    Probe: \"Why does A₄ have no subgroup of order 6? Sketch the argument.\"\n    Target: H of order 6 would have index 2, so H⊴A₄. But n_3=4 in A₄ gives 8 elements\n            of order 3; H can hold at most 2 (since |H|=6). Contradiction.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (MC-1 parity gate) or TA-A03 (gallery).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 455,
+        "endLine": 478
+      }
+    },
+    {
+      "assetId": "math.abst.alternating-group/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.alternating-group",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.symmetric-group:\n    Used in:   TA-A01 (S₃ element listing; cycle notation; transposition decomposition),\n               TA-A02 (parity of specific permutations in S₄, S₅),\n               TA-A04 Q2, P76 (cycle types in S₅; transposition counts).\n    Assumed:   Student holds cycle notation; can compute composition of permutations; knows\n               the k-cycle → k−1 transpositions fact (or is reminded of it in TA-A02).\n  math.abst.normal-subgroup:\n    Used in:   TA-A01 (A_n ⊴ S_n stated as a fact, derived via index-2),\n               TB-R03 (parity homomorphism + kernel = normal subgroup proof),\n               TA-A03 (normal subgroup of A₄: V₄; simplicity definition).\n    Assumed:   Student knows normal subgroup definition; knows kernels are normal; knows\n               index-2 subgroups are normal; knows quotient group A_n / (normal K) concept.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.alternating-group.md",
+        "startLine": 478,
+        "endLine": 502
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

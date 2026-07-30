@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.num.numerical-differentiation |
-| Title | Numerical Differentiation |
+| name | Numerical Differentiation |
 | Domain | math.num |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -116,7 +116,7 @@ Step 1 — "The forward difference uses one extra function evaluation at x+h. Th
 **TB-R03 (MC-3 NUMERICAL-DERIVATIVE-CONVERGES-TO-EXACT):**
 Step 1 — "In exact arithmetic: yes, [f(x+h)−f(x)]/h→f'(x) as h→0. In floating-point: the numerator f(x+h)−f(x) suffers catastrophic cancellation when h is small (both values round to nearly the same float), so the quotient no longer converges — it eventually returns 0." Step 2 — Plot the error curve: as h decreases from 1 to 10⁻⁸, error decreases (truncation dominates, working as expected). Below h*≈10⁻⁸, error increases sharply (roundoff dominates). This U-shaped curve is characteristic of every finite-difference formula. Step 3 — "The U-shaped error curve is a diagnostic tool: if you plot log(error) vs. log(h) and see a V shape (or J shape), you have identified the optimal step size as the bottom of the V. Always plot this curve when tuning a numerical derivative."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Derive the central difference formula for f'(x) by adding the Taylor expansions of f(x+h) and f(x−h) (correcting: you need to SUBTRACT them — identify the correct operation) and confirm the O(h²) error term.

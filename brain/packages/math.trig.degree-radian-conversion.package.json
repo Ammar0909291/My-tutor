@@ -1,0 +1,300 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.degree-radian-conversion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.degree-radian-conversion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:16ea242969c85386b2faa661f2765ed9dbecbab99462e11ec8ecd501a7578a18",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md": "sha256:df121fe9bb389c20056534f70e3214d707caa2f537f1368bbf1cf4a55b0835b1"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.trig.degree-radian-conversion",
+    "name": "Degree–Radian Conversion",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.trig.angle-measure"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.degree-radian-conversion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.degree-radian-conversion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md": "sha256:df121fe9bb389c20056534f70e3214d707caa2f537f1368bbf1cf4a55b0835b1"
+      },
+      "contentHash": "sha256:accac9cb74bd8f788d14e7ecbb56bc7b063e7d981b2f349661b8ec08dacf8d96",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.degree-radian-conversion.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.degree-radian-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.degree-radian-conversion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.degree-radian-conversion.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md#TA-A02 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.degree-radian-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.degree-radian-conversion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.degree-radian-conversion.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md#TA-A03 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.degree-radian-conversion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.degree-radian-conversion\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.degree-radian-conversion/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "Degree–Radian Conversion — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.angle-measure**: Angles as rotations; degree as 1/360 of a full circle; protractor measurements; direction of rotation (positive = counter-clockwise)\n\n### Target Knowledge State\nStudent derives the conversion factor from 2π radians = 360° (one full circle). Student converts fluently in both directions: multiply by π/180 to convert degrees to radians; multiply by 180/π to convert radians to degrees. Student applies the radian requirement in context-dependent formulas (arc length s = rθ, sector area A = ½r²θ) by converting first. Student recalls the standard angle table: 0°, 30°=π/6, 45°=π/4, 60°=π/3, 90°=π/2, 120°=2π/3, 180°=π, 270°=3π/2, 360°=2π.\n\n### Conceptual Obstacles\n1. Applying the conversion factor in the wrong direction — multiplying degrees by 180/π (instead of π/180) or radians by π/180 (instead of 180/π)\n2. Substituting degree values directly into formulas that require radians (s = rθ, A = ½r²θ)\n3. Confusing π radians = 180° with 360° = π — half-circle vs full-circle confusion\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "WRONG-CONVERSION-DIRECTION",
+      "content": "| MC-1 | WRONG-CONVERSION-DIRECTION | Student multiplies by 180/π to convert degrees to radians, or by π/180 to convert radians to degrees — exact reversal of the correct factors | Any conversion problem; especially when the answer \"looks wrong\" but the student doesn't notice |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "DEGREE-SUBSTITUTION-IN-RADIAN-FORMULA",
+      "content": "| MC-2 | DEGREE-SUBSTITUTION-IN-RADIAN-FORMULA | Student plugs degree values directly into s=rθ, A=½r²θ, or ω=θ/t without converting; gets answers off by a factor of π/180 ≈ 57.3 | Arc length, sector area, or angular velocity problems |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "FULL-CIRCLE-IS-PI",
+      "content": "| MC-3 | FULL-CIRCLE-IS-PI | Student believes 360° = π (one full circle = π), confusing 180° = π radians with 360° = 2π radians | Any problem involving full or partial rotations; radian equivalents of large angles |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "Deriving the Conversion Factors",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving the Conversion Factors\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 63,
+        "endLine": 127
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "Applying Conversions in Context",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Applying Conversions in Context\",\"primitives\":[\"P04\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 127,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 192,
+        "endLine": 403
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A03 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 5/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Convert 135° to radians. Express as a fraction of π.\n\n**Problem 2.** Convert 7π/4 radians to degrees.\n\n**Problem 3.** A wheel of radius 8 cm rotates through 240°. Find the arc length (in cm, exact form).\n\n**Problem 4.** Convert 2.5 radians to degrees (give the exact answer as a fraction, then a decimal approximation to the nearest tenth).\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. 135 × π/180 = 3π/4 rad ✓\n\n2. (7π/4) × (180/π) = 7 × 180/4 = 1260/4 = **315°** ✓\n\n3. Convert 240° to radians: 240 × π/180 = 4π/3. Arc length: s = 8 × (4π/3) = **32π/3 cm ≈ 33.51 cm** ✓\n\n4. 2.5 × (180/π) = **450/π degrees ≈ 143.2°** ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* A pendulum of length 1.5 m swings through an arc. The central angle of its swing is 5π/9 radians.\n\n*(a)* Convert the angle to degrees.\n\n*(b)* Find the arc length of the pendulum's path.\n\n*(c)* A student computes the arc length as 1.5 × 100° = 150 m. Identify the error.\n\n*Expected answer:*\n\n*(a)* (5π/9) × (180/π) = 5 × 20 = **100°**.\n\n*(b)* s = rθ = 1.5 × (5π/9) = **5π/6 m ≈ 2.618 m** (using θ in radians).\n\n*(c)* The student used the degree measure (100°) directly in s = rθ. This formula requires θ in radians. The correct θ = 5π/9 rad, giving s = 1.5 × (5π/9) = 5π/6 m, not 150 m.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (all three parts correct); 0.5 if (a) and (b) correct but error in (c) not identified.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 5/5 (⌈0.9 × 5⌉ = 5). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 | → P78 COMPLETION — mastery confirmed |\n| 4/5 | → Identify missed item; wrong-direction → B01; formula error → B02; full-circle confusion → B03; targeted repair |\n| ≤ 3/5 | → Return to A01; re-derive both factors from 2π=360°; rebuild standard angle table; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.degree-radian-conversion` complete. Threshold 0.9 requires 5/5 correct.\n\n**Unlocks:** Radian-based trig functions; arc length and sector area; angular velocity; special angles in radian form.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 195,
+        "endLine": 295
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — start from the full circle as a physical object (360° and one circumference = 2π radii).\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Derive both conversion factors from 2π rad = 360°; apply to the standard angle table; fix MC-1 direction\n2. **A02 P04 PATTERN INDUCTION** — Gallery of conversions; induce the \"multiply-by-π/180\" and \"multiply-by-180/π\" pattern; practice with context formulas\n3. **A03 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 56,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Convert 5π/3 radians to degrees and 225° to radians. |\n| R2 | 3 days | A sector of radius 10 cm has central angle 5π/6. Find its arc length and area. |\n| R3 | 7 days | A wheel spinning at 300 rpm. Express its angular velocity in rad/s. (Hint: 300 rev/min × 2π rad/rev ÷ 60 s/min.) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 345,
+        "endLine": 355
+      }
+    },
+    {
+      "assetId": "math.trig.degree-radian-conversion/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.degree-radian-conversion",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.trig.special-angles, math.trig.trig-functions, math.trig.unit-circle (radian entry) |\n| Requires (Tier-1) | math.trig.angle-measure |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent pendulum problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.degree-radian-conversion.md",
+        "startLine": 355,
+        "endLine": 369
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

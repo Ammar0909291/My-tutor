@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.smooth-manifold-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.smooth-manifold",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c4653255aca5d0e1779f3a0678ddd2fd90eb99b5ad9c79bf1cd3f2fc5980156f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.smooth-manifold.md": "sha256:0d48d55609692fa8765b6d3399bef5b185f6299880743704d6fb89237f571824"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.smooth-manifold",
+    "name": "Smooth Manifold",
+    "difficultyRaw": "research",
+    "bloom": "understand",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.top.manifold",
+      "math.real.differentiability-rigorous"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.smooth-manifold-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.smooth-manifold (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.smooth-manifold.md": "sha256:0d48d55609692fa8765b6d3399bef5b185f6299880743704d6fb89237f571824"
+      },
+      "contentHash": "sha256:4879cb0f6f1e2e122e00f57c8c2821c87d69876712968a64b262ca53ba0690f7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.smooth-manifold.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.smooth-manifold.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.smooth-manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.smooth-manifold\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.smooth-manifold.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.smooth-manifold.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.smooth-manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.smooth-manifold\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.smooth-manifold.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.smooth-manifold.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.smooth-manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.smooth-manifold\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.smooth-manifold.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.smooth-manifold.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.smooth-manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.smooth-manifold\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.smooth-manifold/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **smooth (C∞) atlas** (a collection of charts whose transition maps $\\phi_\\beta\\circ\\phi_\\alpha^{-1}:\\phi_\\alpha(U_\\alpha\\cap U_\\beta)\\to\\phi_\\beta(U_\\alpha\\cap U_\\beta)$ are $C^\\infty$ diffeomorphisms between open subsets of $\\mathbb{R}^n$); define a **smooth manifold** as a topological manifold equipped with a maximal smooth atlas; verify that the transition maps of the standard two-chart atlas on $S^n$ are smooth.\n- LO2: Define **smooth maps** between smooth manifolds ($f:M\\to N$ is smooth iff $\\psi\\circ f\\circ\\phi^{-1}$ is $C^\\infty$ for all charts $(\\phi,U)$ on $M$ and $(\\psi,V)$ on $N$) and **diffeomorphisms** (smooth bijections with smooth inverse); distinguish diffeomorphism from homeomorphism and explain why exotic spheres (non-diffeomorphic smooth structures on $S^7$) are possible.\n- LO3: Construct the **tangent space** $T_pM$ at a point via derivations (linear maps $v:C^\\infty(M)\\to\\mathbb{R}$ satisfying the Leibniz rule $v(fg)=v(f)g(p)+f(p)v(g)$); state the **Whitney Embedding Theorem** ($M^n$ embeds smoothly in $\\mathbb{R}^{2n}$); state the existence of **exotic smooth structures** on $\\mathbb{R}^4$ (uncountably many pairwise non-diffeomorphic smooth structures).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "SMOOTH-ATLAS-MEANS-SMOOTH-CHARTS",
+      "content": "| MC-1 | SMOOTH-ATLAS-MEANS-SMOOTH-CHARTS | Believing a smooth atlas requires each chart map $\\phi_\\alpha:U_\\alpha\\to\\mathbb{R}^n$ to be smooth — missing that smoothness of individual charts is not defined (charts are homeomorphisms from a topological space to $\\mathbb{R}^n$, and smoothness requires a domain with a smooth structure); what must be smooth are the TRANSITION MAPS, which are maps between open subsets of $\\mathbb{R}^n$ | Critical |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 95,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "TANGENT-VECTOR-IS-AN-ARROW-IN-AMBIENT-SPACE",
+      "content": "| MC-2 | TANGENT-VECTOR-IS-AN-ARROW-IN-AMBIENT-SPACE | Believing tangent vectors on an abstract manifold are arrows in some ambient $\\mathbb{R}^N$ — missing that the tangent-space-as-derivations definition is intrinsic, coordinate-transformation rules follow from the chain rule on transition maps, and no ambient space is needed | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "SMOOTH-STRUCTURE-IS-UNIQUE",
+      "content": "| MC-3 | SMOOTH-STRUCTURE-IS-UNIQUE | Believing every topological manifold has at most one smooth structure (up to diffeomorphism) — missing that exotic structures exist: $S^7$ has 28 distinct smooth structures, $\\mathbb{R}^4$ has uncountably many; this uniqueness holds only in dimensions 1, 2, 3 and is false in general | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "From Atlas to Smooth Atlas (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Atlas to Smooth Atlas (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "Tangent Vectors as Derivations (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Tangent Vectors as Derivations (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "Exotic Structures and the Diffeomorphism Gap (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Exotic Structures and the Diffeomorphism Gap (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that the transition map $\\phi_S\\circ\\phi_N^{-1}(u)=u/|u|^2$ for the two-chart atlas on $S^n$ is $C^\\infty$ on $\\mathbb{R}^n\\setminus\\{0\\}$. Compute its Jacobian.\n  2. Show that the map $f:S^1\\to S^1$ defined by $f(e^{i\\theta})=e^{2i\\theta}$ (the doubling map) is smooth with respect to the standard smooth structure on $S^1$. Compute $df$ (the differential of $f$) at a point $p\\in S^1$ using a local chart.\n  3. On $M=\\mathbb{R}^2$, define the derivation $v=x\\,\\partial/\\partial y - y\\,\\partial/\\partial x$ at $p=(1,0)$. Verify $v$ is a tangent vector (derivation) at $p$ and compute $v(f)$ for $f(x,y)=x^2+y^2$.\n  4. State the Whitney Embedding Theorem and explain why it implies that every compact smooth $n$-manifold embeds smoothly as a closed submanifold of $\\mathbb{R}^{2n}$ (what does \"closed\" mean here and why is it important for compactness?).\n- **P76 (Transfer Probe, mode = cross-link to `math.geom.differential-geometry-curves`)**: \"Differential geometry of curves is built on the smooth-manifold framework. A smooth curve $\\gamma:\\mathbb{R}\\to M$ on a smooth manifold $M$ is a smooth map from $\\mathbb{R}$ (with its standard smooth structure) to $M$. The velocity vector $\\dot\\gamma(t)\\in T_{\\gamma(t)}M$ is the derivation $\\dot\\gamma(t)(f)=(f\\circ\\gamma)'(t)$ for $f\\in C^\\infty(M)$. (a) Show that $\\dot\\gamma(t)$ is indeed a derivation at $\\gamma(t)$. (b) For $M=\\mathbb{R}^2$ and $\\gamma(t)=(\\cos t,\\sin t)$ (the unit circle parameterized by arc length), compute $\\dot\\gamma(t)$ as a derivation and identify which tangent vector $(-\\sin t,\\cos t)\\in T_{\\gamma(t)}\\mathbb{R}^2$ it corresponds to. (c) Explain why the concept of 'arc length' for curves on a smooth manifold requires an additional structure (a Riemannian metric on $TM$) not present in the smooth structure alone — relate this to the distinction between a smooth manifold and a Riemannian manifold.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Smooth Manifold — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.manifold` (topological manifolds, charts, atlases, locally Euclidean condition) and `math.real.differentiability-rigorous` ($C^\\infty$ functions between open subsets of $\\mathbb{R}^n$, the chain rule, the inverse function theorem). These together equip the learner to verify transition-map smoothness and to define smooth maps in coordinates.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.smooth-manifold/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.smooth-manifold",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.manifold` (topological manifold definition, charts, atlases), `math.real.differentiability-rigorous` ($C^\\infty$ functions between open subsets of $\\mathbb{R}^n$, chain rule, inverse function theorem).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: `math.geom.differential-geometry-curves` EXISTS on disk → P76 uses cross-link probe mode, bridging the smooth-manifold framework to the geometric study of curves with the velocity-vector / arc-length / Riemannian metric connection.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.smooth-manifold.md",
+        "startLine": 105,
+        "endLine": 111
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

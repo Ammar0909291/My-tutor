@@ -1,0 +1,339 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.divergence-test-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.divergence-test",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5d00060ec9873ee20c6b00c451e928779658a0b01f8fbcbff310c8bcf9a110cd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.divergence-test.md": "sha256:19208d7b5e24cdfbcbe4056d76546573dfdbd9b1a7f5b0cb0916c8f0e06b38ee"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.divergence-test",
+    "name": "Divergence Test (nth Term Test)",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.divergence-test-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.divergence-test (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.divergence-test.md": "sha256:19208d7b5e24cdfbcbe4056d76546573dfdbd9b1a7f5b0cb0916c8f0e06b38ee"
+      },
+      "contentHash": "sha256:329f9c29fad1ae0f2cc24b8aa4ffdf2901154f1bf02a81284a2cb5f4ad426833",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.divergence-test.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergence-test.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergence-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergence-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.divergence-test.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergence-test.md#TA-A02 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergence-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergence-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.divergence-test.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergence-test.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergence-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergence-test\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.divergence-test.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.divergence-test.md#TA-A04 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.divergence-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.divergence-test\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.divergence-test/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.divergence-test",
+      "title": "Divergence Test (nth Term Test) — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.series-convergence**: Σaₙ converges iff the sequence of partial sums {Sₙ} has a finite limit L; geometric series formula; Divergence Test mentioned as a corollary (but not fully established as a standalone tool with its limitation)\n\n### Target Knowledge State\nStudent can state the Divergence Test precisely (if lim aₙ ≠ 0 then Σaₙ diverges); can prove it from the definition of convergence; understands that the converse is FALSE with the harmonic series as the canonical counterexample; and can apply the test as a quick first-pass divergence check, correctly recognising when it is conclusive (diverges) versus inconclusive (aₙ → 0).\n\n### Conceptual Obstacles\n1. Concluding convergence from aₙ→0 — the test guarantees divergence when aₙ↛0, but says nothing when aₙ→0; the harmonic series Σ1/n diverges despite 1/n→0\n2. Confusing the limit of the terms with the limit of the partial sums — lim aₙ = 0 is about the nth term sequence; lim Sₙ is about the series sum; these are different sequences\n3. Believing the Harmonic series converges \"very slowly\" — Σ1/n diverges (→∞) no matter how slow; there is no \"partial convergence\"\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.divergence-test",
+      "title": "DIVERGENCE-TEST-PROVES-CONVERGENCE",
+      "content": "| MC-1 | DIVERGENCE-TEST-PROVES-CONVERGENCE | Student concludes Σaₙ converges because aₙ→0; treats the Divergence Test as a two-directional test | Any series where the terms go to 0 |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.divergence-test",
+      "title": "TERM-LIMIT-EQUALS-PARTIAL-SUM-LIMIT",
+      "content": "| MC-2 | TERM-LIMIT-EQUALS-PARTIAL-SUM-LIMIT | Student equates lim aₙ with lim Sₙ; believes if the terms approach 0, the partial sums also approach 0 | Series problems where limit of terms is 0 but sum is nonzero |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.divergence-test",
+      "title": "HARMONIC-CONVERGES-SLOWLY",
+      "content": "| MC-3 | HARMONIC-CONVERGES-SLOWLY | Student says Σ1/n \"converges very slowly\" or \"converges but to infinity\"; misunderstands that divergence means Sₙ→∞, not slow convergence | Harmonic series discussion |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergence-test",
+      "title": "Statement and Proof",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Statement and Proof\",\"primitives\":[\"P02\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 64,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergence-test",
+      "title": "Conclusive vs Inconclusive Cases",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Conclusive vs Inconclusive Cases\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 117,
+        "endLine": 173
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergence-test",
+      "title": "Systematic First-Pass Application",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Systematic First-Pass Application\",\"primitives\":[\"P05\",\"P49\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 173,
+        "endLine": 240
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.divergence-test",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P05\",\"P06\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 240,
+        "endLine": 436
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.divergence-test",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Apply the Divergence Test: state DIVERGES or INCONCLUSIVE, and give the value of lim aₙ.*\n\n**Problem 1.** Σ (3n² − 1)/(n² + n)\n\n**Problem 2.** Σ 1/n²\n\n**Problem 3.** Σ arctan(n)\n\n**Problem 4.** Σ (0.99)ⁿ\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. lim (3n²−1)/(n²+n) = lim (3−1/n²)/(1+1/n) = 3 ≠ 0 → **DIVERGES**\n2. lim 1/n² = 0 → **INCONCLUSIVE** (actually converges to π²/6)\n3. lim arctan(n) = π/2 ≠ 0 → **DIVERGES**\n4. lim (0.99)ⁿ = 0 → **INCONCLUSIVE** (|r|<1, geometric → converges to (0.99)/(1−0.99)=99)\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Three students apply the Divergence Test to the series Σ cos(1/n):\n\n- Student A: \"lim cos(1/n) = cos(0) = 1 ≠ 0 → the series diverges.\"\n- Student B: \"cos(1/n) oscillates for different n → inconclusive.\"\n- Student C: \"cos(1/n) → 1 as n→∞, and 1 ≠ 0, so the series diverges.\"\n\n(a) Which student(s) are correct, and why?\n\n(b) Does knowing that cos(1/n) → 1 tell you anything about how fast Σcos(1/n) grows?\n\n*Expected answers:*\n\n(a) Students A and C are correct. cos(1/n) is a well-defined limit as n→∞ (since 1/n→0 and cosine is continuous at 0): lim cos(1/n) = cos(0) = 1 ≠ 0. By the Divergence Test, Σcos(1/n) **diverges**. Student B is wrong: cos(1/n) does NOT oscillate (1/n→0 monotonically, so cos(1/n)→1 monotonically from below). \"Oscillates\" is not a property of this sequence.\n\n(b) Since each term → 1, the partial sums Sₙ ≈ n → ∞ at roughly linear speed. The series grows like n (much faster than the harmonic series which grows like ln n).\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.8 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify error type; if MC-1 (treated inconclusive as converges) → B01; if MC-2 (confused term limit with partial sum limit) → B02; targeted repair |\n| ≤ 2/5 | → Return to A01; reprove the theorem; make the converse failure explicit; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.divergence-test` complete. Threshold 0.8 requires 4/5 correct.\n\n**Unlocks:** none directly (see KG).\n\nNext concept: `math.seq.comparison-test`, `math.seq.ratio-test`, `math.seq.integral-test` — the tools for settling the inconclusive cases.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 243,
+        "endLine": 344
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.divergence-test",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — series-convergence definition is the prior foundation.\n\n**Scaffolding sequence:**\n1. **A01 P02 FORMAL DEFINITION** — state and prove the Divergence Test; contrast with its false converse; address MC-2\n2. **A02 P06 CONTRAST PAIR** — conclusive (diverges) vs inconclusive (aₙ→0) cases with a comparison table; harmonic series as the canonical MC-1 counterexample; address MC-1, MC-3\n3. **A03 P05 WORKED EXAMPLE** — systematic application of the Divergence Test as first-pass filter; examples where it concludes and examples where another test is needed\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.divergence-test",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Apply the Divergence Test to Σ (n+2)/(3n+1). State the limit and the conclusion. |\n| R2 | 3 days | Give one series with aₙ→0 that converges, and one that diverges. State which test proves each. |\n| R3 | 7 days | Prove the Divergence Test from the definition of series convergence (write the proof in full). |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 378,
+        "endLine": 388
+      }
+    },
+    {
+      "assetId": "math.seq.divergence-test/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.divergence-test",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | none |\n| Requires (Tier-1) | math.seq.series-convergence |\n\n**GR-8 compliance:** no cross_links in KG — documented.\n**GR-9 compliance:** P76 uses an independent problem (cos(1/n)).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.divergence-test.md",
+        "startLine": 388,
+        "endLine": 402
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

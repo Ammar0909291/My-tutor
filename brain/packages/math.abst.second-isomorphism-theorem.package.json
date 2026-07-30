@@ -1,0 +1,338 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.second-isomorphism-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.second-isomorphism-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6681b2edbbc546c360eefdc703569192669d0720c4f79192bd88bc006e632208",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md": "sha256:13653cfaff71dcbd13e50d42b92519665b76f35e1a77aee8f057537e63ed66c9"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.second-isomorphism-theorem",
+    "name": "",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.abst.first-isomorphism-theorem"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.second-isomorphism-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.second-isomorphism-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md": "sha256:13653cfaff71dcbd13e50d42b92519665b76f35e1a77aee8f057537e63ed66c9"
+      },
+      "contentHash": "sha256:6c172d5c325bbed96028b6c99b221434025c9141efa5985729e72c21bc5e7f8b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.second-isomorphism-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.second-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.second-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.second-isomorphism-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.second-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.second-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.second-isomorphism-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.second-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.second-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.second-isomorphism-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md#TA-A04 (addresses MC-2, MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.second-isomorphism-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.second-isomorphism-theorem\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "math.abst.second-isomorphism-theorem — cognitive map",
+      "content": "### Target Understanding\n**Second Isomorphism Theorem (SIT):** Let G be a group, H ≤ G a subgroup, and N ⊴ G a normal\nsubgroup. Then:\n(S1) HN = {hn : h ∈ H, n ∈ N} is a subgroup of G;\n(S2) H ∩ N is a normal subgroup of H;\n(S3) H / (H ∩ N) ≅ HN / N via the natural map h(H∩N) ↦ hN.\n\nThe SIT is also called the **Diamond Isomorphism Theorem** — the four groups H, N, HN, H∩N\nform a diamond-shaped lattice. The isomorphism identifies two quotients that live on different\nsides of the diamond.\n\n### Distinction from math.abst.first-isomorphism-theorem\nThe First Isomorphism Theorem (FIT) says: for φ: G → H, G/ker(φ) ≅ im(φ).\nThe SIT does not require a homomorphism — it finds a natural isomorphism between quotients of\nsubgroups whose interaction is constrained by the diamond lattice structure.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | G = Z/12Z, H = {0,4,8} ≅ Z/3Z, N = {0,6} ≅ Z/2Z |\n| **Pictorial (P)** | Diamond lattice diagram: HN at top, H and N on sides, H∩N at bottom |\n| **Abstract (A)** | Full theorem statement; natural map h(H∩N) ↦ hN; proof that it's well-defined and bijective |\n\n### Prerequisite Knowledge (from KG)\n- **math.abst.first-isomorphism-theorem** — FIT statement G/ker(φ) ≅ im(φ); normal subgroups;\n  quotient groups; coset arithmetic; well-definedness of quotient operations\n\n### Canonical Example\nG = Z, H = 2Z (even integers), N = 3Z (multiples of 3).\n- HN = 2Z + 3Z = {2a + 3b : a,b ∈ Z} = Z (since gcd(2,3)=1, Bézout gives 1 = 3−2 ∈ HN)\n- H ∩ N = 2Z ∩ 3Z = 6Z\n- SIT: 2Z / 6Z ≅ Z / 3Z, i.e., Z/2Z·(Z/3Z) side → verified: |2Z/6Z| = 3 = |Z/3Z| ✓\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 31,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "HN-NOT-A-SUBGROUP",
+      "content": "| MC-1 | HN-NOT-A-SUBGROUP | Claims HN may not be a subgroup without additional conditions | Forgets that N ⊴ G (not just N ≤ G) is exactly the condition that makes HN a subgroup; conflates subgroup and normal subgroup roles | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "WRONG-QUOTIENT-SIDES",
+      "content": "| MC-2 | WRONG-QUOTIENT-SIDES | Writes H/(H∩N) ≅ N/something or confuses which quotient is on which side | Misreads the diamond; doesn't track which group is normal in which ambient group | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "WELL-DEFINEDNESS-SKIPPED",
+      "content": "| MC-3 | WELL-DEFINEDNESS-SKIPPED | Applies the map h(H∩N) ↦ hN without checking that different coset representatives give the same image | Doesn't recall that quotient maps must be checked for well-definedness; assumes any formula is a valid map | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "Entry: The Diamond Structure and Statement (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Entry: The Diamond Structure and Statement (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 104,
+        "endLine": 158
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "MC-1 Gate: Why N Must Be Normal in G (P41 + P64 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"MC-1 Gate: Why N Must Be Normal in G (P41 + P64 + P49)\",\"primitives\":[\"P41\",\"P49\",\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 158,
+        "endLine": 204
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "The Natural Map: Well-Definedness and the SIT vs FIT Contrast (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Natural Map: Well-Definedness and the SIT vs FIT Contrast (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 204,
+        "endLine": 245
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P06\",\"P11\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 245,
+        "endLine": 517
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** State the Second Isomorphism Theorem precisely (list all hypotheses and conclusions).\n\n*(Target: Hypotheses: G group, H ≤ G, N ⊴ G. Conclusions: (S1) HN ≤ G; (S2) H∩N ⊴ H;\n(S3) H/(H∩N) ≅ HN/N via h(H∩N) ↦ hN. All three parts required.)*\n\n**Q2.** In G = Z/60Z, let H = {0,15,30,45} (order 4) and N = {0,20,40} (order 3).\nIdentify H∩N, HN, and state what the SIT gives for H/(H∩N).\n\n*(Target: H∩N = {0} (gcd(4,3)=1). |HN| = |H|·|N|/|H∩N| = 4·3/1 = 12. H/(H∩N) ≅ H ≅ Z/4Z.\nHN/N has order 12/3 = 4 ≅ Z/4Z. SIT: Z/4Z ≅ HN/N.)*\n\n**Q3.** Why is it essential that N ⊴ G (and not merely N ≤ G) in the SIT?\n\n*(Target: N ⊴ G is needed for HN to be a subgroup. Without normality, products h₁n₁h₂n₂ may\nnot factor into HN. Also, HN/N requires N to be normal in HN (which follows from N ⊴ G) to\nform a quotient group.)*\n\n**Q4.** Explain how the SIT follows from the FIT applied to the natural map φ|_H: H → HN/N.\n\n*(Target: Define φ|_H(h) = hN ∈ HN/N. This is a homomorphism (φ(h₁h₂) = h₁h₂N = (h₁N)(h₂N) ✓).\nker(φ|_H) = {h∈H : hN=N} = {h∈H : h∈N} = H∩N. im(φ|_H) = HN/N.\nBy FIT: H/ker(φ|_H) = H/(H∩N) ≅ im(φ|_H) = HN/N.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independent reasoning probe applying SIT to a new group.*\n\n> Let G = S₄, N = A₄ ⊴ S₄ (alternating group, index 2), H = {e, (12)} ≤ S₄.\n>\n> (a) Compute H ∩ N and |HN|.\n> (b) Identify the groups H/(H∩N) and HN/N and state the isomorphism the SIT gives.\n> (c) What is the order of each quotient group?\n\n*Expected answers:*\n- **(a)** H = {e,(12)}, N = A₄ (all even permutations). H∩N = {e} ((12) is odd). |HN| = 2·12/1 = 24 = |S₄|, so HN = S₄.\n- **(b)** H/(H∩N) = H/{e} ≅ H ≅ Z/2Z. HN/N = S₄/A₄ ≅ Z/2Z. SIT: Z/2Z ≅ S₄/A₄.\n- **(c)** Both quotients have order 2.\n\n**[P55 — SCORE]**  Award 1 point if all three parts correct; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 4 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.80  →  ⌈0.80 × 5⌉ = 4\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score ≥ 4/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 3/5 → Identify which items failed:**\n  - Q1 wrong → missing a hypothesis or conclusion → re-state theorem in full.\n  - Q2 wrong → MC-2 active → TB-R02 (diamond diagram; which group is normal in which).\n  - Q3 wrong → MC-1 active → TB-R01 (counterexample in S₃ where HN not a subgroup).\n  - Q4 wrong → FIT connection gap → TB-R03 (well-definedness + kernel identification).\n  - P76 wrong → identify part (a/b/c) that failed; re-route to matching repair.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.second-isomorphism-theorem\nMASTERY_REACHED: true\nUNLOCKS:         []\nNEXT_CONCEPT:    (continue math.abst domain)\nSESSION_CLOSE:   \"You now know the Second Isomorphism Theorem: given H ≤ G and N ⊴ G,\n                  HN is a subgroup, H∩N is normal in H, and H/(H∩N) ≅ HN/N. You can\n                  apply the diamond lattice to identify the quotient groups, and you\n                  understand why N must be normal in G for the theorem to hold.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: HN-NOT-A-SUBGROUP (MC-1)\n\n**Trigger:** Student is unsure why N must be normal (vs. just a subgroup) for HN to be a subgroup.\n\n**Step 1 — Show failure without normality.**\n> S₃: H = {e,(12)}, N = {e,(13)} — both subgroups but neither normal.\n> HN = {e,(12),(13),(12)(13)} = {e,(12),(13),(132)}: 4 elements. |S₃| = 6. 4 does not divide 6.\n> By Lagrange, HN cannot be a subgroup. ✓ Normality is not optional.\n\n**Step 2 — Show why normality fixes it.**\n> N ⊴ G means gNg⁻¹ = N for all g ∈ G. In particular, for h ∈ H: hNh⁻¹ = N.\n> So when we compute (h₁n₁)(h₂n₂) = h₁(h₂·h₂⁻¹n₁h₂)n₂ = h₁h₂·(n₁')n₂ where n₁' = h₂⁻¹n₁h₂ ∈ N.\n> Product = (h₁h₂)(n₁'n₂) ∈ HN ✓.\n\n**Exit:** Return to TA-A02 P49.\n\n---\n\n### TB-R02 · Repair: WRONG-QUOTIENT-SIDES (MC-2)\n\n**Trigger:** Student confuses which group is quotient by which in H/(H∩N) ≅ HN/N.\n\n**Step 1 — Draw the diamond.**\n> Four groups form a diamond:\n> - Top: HN (the \"join\" of H and N)\n> - Left: H; Right: N\n> - Bottom: H∩N (the \"meet\" of H and N)\n> Left-side quotient: H / (H∩N). Right-side ambient quotient: HN / N.\n> The isomorphism connects left-bottom to right-bottom via the top.\n\n**Step 2 — Apply to the example.**\n> G = Z, H = 2Z, N = 3Z, HN = Z, H∩N = 6Z.\n> Left quotient: 2Z / 6Z. Right quotient: Z / 3Z.\n> SIT: 2Z / 6Z ≅ Z / 3Z. (Not Z/6Z ≅ something.)\n\n**Exit:** Return to TA-A03 P49.\n\n---\n\n### TB-R03 · Repair: WELL-DEFINEDNESS-SKIPPED (MC-3)\n\n**Trigger:** Student applies φ(h(H∩N)) = hN without checking well-definedness.\n\n**Step 1 — Why it matters.**\n> A coset h(H∩N) has many representatives: h, h·x, h·y for x,y ∈ H∩N.\n> Well-definedness means: regardless of which representative we use, the image is the same coset.\n\n**Step 2 — Check it.**\n> Suppose h(H∩N) = h'(H∩N), so h⁻¹h' ∈ H∩N ⊆ N.\n> Then h⁻¹h' ∈ N, so hN = h'N. ✓ The image is the same.\n\n**Exit:** Return to TA-A03 P49.\n\n---\n\n<!-- COMPONENT 6: P89 SPACED REPETITION -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"State the SIT. How many conclusions does it have?\"\n    Target: Three conclusions: HN ≤ G; H∩N ⊴ H; H/(H∩N) ≅ HN/N.\n\n  Interval-2 (+3 days):\n    Probe: \"In G=Z, H=4Z, N=6Z: find H∩N and HN, then state what SIT gives.\"\n    Target: H∩N = 12Z (lcm(4,6)=12). HN = 2Z (gcd(4,6)=2). SIT: 4Z/12Z ≅ 2Z/6Z.\n            (Both ≅ Z/3Z, order 3.)\n\n  Interval-3 (+1 week):\n    Probe: \"Why can't we drop the hypothesis N ⊴ G in the SIT?\"\n    Target: Without N ⊴ G, HN may not be a subgroup (S₃ counterexample). Also\n            HN/N requires N ⊴ HN to form a quotient group.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (normality gate) or TA-A03 (diamond).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.first-isomorphism-theorem:\n    Used in:   TA-A03 (SIT derived from FIT applied to the restriction map h↦hN;\n               ker identification as H∩N; image as HN/N),\n               TA-A04 Q4 (formal proof path: restrict→apply FIT→identify kernel).\n    Assumed:   Student holds the FIT statement G/ker(φ)≅im(φ), knows how to identify\n               kernels and images, understands well-definedness of quotient maps.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The diamond diagram is the single most useful pedagogical tool for the SIT.**\nDraw it at the start. Label all four vertices. Identify which quotient is on which \"side.\" Students\nwho sketch the diamond make far fewer errors in applying the theorem than those who work purely\nsymbolically.\n\n**2. The SIT-via-FIT derivation (TA-A03 Contrast B) is the proof sketch that sticks.**\nRather than proving the SIT from scratch, show it as a corollary of the FIT. Define φ|_H, compute\nker = H∩N, compute im = HN/N, apply FIT. This approach reuses the FIT immediately and reinforces\nit, rather than introducing a separate standalone proof.\n\n**3. MC-1 (HN not a subgroup) is easy to miss because students have many examples where N is normal.**\nThe S₃ counterexample with two non-normal 2-element subgroups is concrete and produces a violation\nof Lagrange's theorem (4 does not divide 6), making the failure unambiguous.\n\n**4. At bloom=analyze, Q4 requires the student to construct the derivation, not just recall it.**\nThe connection SIT→FIT is a non-trivial analysis step at this level. Students who can independently\nidentify φ|_H, compute its kernel as H∩N, and invoke the FIT have reached the bloom target.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.second-isomorphism-theorem\n=============================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 6; 4 TAs used ≤ 6.\n[PASS] V-4   CPA_ENTRY_STAGE = A (expert/analyze; diamond structure introduced abstractly first).\n[PASS] V-5   P76_MODE = Independence with explicit rationale (cross_links = []).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A02 gate before TA-A03 (MAMR).\n[PASS] V-7   MC-1 has dedicated gate TA (TA-A02: P41 + P64 — S₃ counterexample; normality proof).\n[PASS] V-8   MC-2 and MC-3 addressed after MC-1 (TA-A03; TB-R02/R03).\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P41 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49.\n               TA-A01→P49 ✓  TA-A03→P49 ✓  (TA-A02 is a gate TA)\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91; structure terminal.\n[PASS] V-13  GR-4: P41/P64 gate structure present in TA-A02 for MC-1.\n[PASS] V-14  GR-6: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-7: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-8: No cross-links in KG; cross_links = [].\n[PASS] V-17  GR-9: P76 uses Independence mode; probe applies SIT to (S₄, A₄, H={e,(12)})\n              requiring student to compute H∩N, HN, and both quotient groups independently.\n[PASS] V-18  GR-10: MAMR = 4/5; MC-1 cleared at TA-A02 before TA-A03.\n\nPASS CRITERION\n[PASS] V-19  PASS_CRITERION = ⌈0.80 × 5⌉ = 4/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-20  P74 routing covers all score outcomes (≥4/5 → pass; ≤3/5 → item-specific repair).\n\nCONTENT\n[PASS] AIR   SIT stated with all hypotheses (H≤G, N⊴G) and three conclusions (S1, S2, S3).\n             Diamond diagram introduced and labeled with four vertices.\n             Concrete examples: Z with H=2Z, N=3Z; Z/60Z with H={0,15,30,45}, N={0,20,40};\n             S₄ with N=A₄ in P76.\n             MC-1: S₃ counterexample shows HN not a subgroup when N not normal (|HN|=4∤6).\n             MC-2: Diamond diagram walkthrough clarifies which quotient on which side.\n             MC-3: Well-definedness of h(H∩N)↦hN proved rigorously.\n             Q4: SIT derived from FIT via restriction map — the analysis-level synthesis task.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 245,
+        "endLine": 517
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11 four representations: HN subgroup criterion + diamond diagram + P49)\n      → TA-A02 (P41/P64 MC-1 gate: why N ⊴ G is essential for HN ≤ G + P49)\n      → TA-A03 (P06 contrast: well-definedness of the map h(H∩N)↦hN; SIT vs FIT + P49)\n      → TA-A04 (P91 terminal mastery gate — P76 independence probe)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (HN subgroup test: closure requires nH = Hn, i.e., N normal)\n  MC-2 → TB-R02 (diamond diagram walkthrough; identify H∩N as normal in H, HN as ambient)\n  MC-3 → TB-R03 (well-definedness check: if h(H∩N) = h'(H∩N) then h⁻¹h'∈H∩N, so hN=h'N)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 82,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"State the SIT. How many conclusions does it have?\"\n    Target: Three conclusions: HN ≤ G; H∩N ⊴ H; H/(H∩N) ≅ HN/N.\n\n  Interval-2 (+3 days):\n    Probe: \"In G=Z, H=4Z, N=6Z: find H∩N and HN, then state what SIT gives.\"\n    Target: H∩N = 12Z (lcm(4,6)=12). HN = 2Z (gcd(4,6)=2). SIT: 4Z/12Z ≅ 2Z/6Z.\n            (Both ≅ Z/3Z, order 3.)\n\n  Interval-3 (+1 week):\n    Probe: \"Why can't we drop the hypothesis N ⊴ G in the SIT?\"\n    Target: Without N ⊴ G, HN may not be a subgroup (S₃ counterexample). Also\n            HN/N requires N ⊴ HN to form a quotient group.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (normality gate) or TA-A03 (diamond).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 396,
+        "endLine": 420
+      }
+    },
+    {
+      "assetId": "math.abst.second-isomorphism-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.second-isomorphism-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.first-isomorphism-theorem:\n    Used in:   TA-A03 (SIT derived from FIT applied to the restriction map h↦hN;\n               ker identification as H∩N; image as HN/N),\n               TA-A04 Q4 (formal proof path: restrict→apply FIT→identify kernel).\n    Assumed:   Student holds the FIT statement G/ker(φ)≅im(φ), knows how to identify\n               kernels and images, understands well-definedness of quotient maps.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.second-isomorphism-theorem.md",
+        "startLine": 420,
+        "endLine": 438
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

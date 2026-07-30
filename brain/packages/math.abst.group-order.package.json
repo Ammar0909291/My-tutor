@@ -1,0 +1,341 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.group-order-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.group-order",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bc25e4d67df63428aba2abfa6a2c3f8f7af72912e63c2dd9f12ec34c4ab67fb5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.group-order.md": "sha256:a9b51555c50174ec6a6ba270ac2263d5744016ff3cda096a13ff7b634d55aca0"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.group-order",
+    "name": "",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.abst.group-theory"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.group-order-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.group-order (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.group-order.md": "sha256:a9b51555c50174ec6a6ba270ac2263d5744016ff3cda096a13ff7b634d55aca0"
+      },
+      "contentHash": "sha256:521121f7f979669fbdec320f8be4e90e73cc5c106b3bef0d5a7c966b4f9f9cc4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.group-order.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-order.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-order\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-order.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-order.md#TA-A02 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-order\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-order.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-order.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-order\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.group-order.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.group-order.md#TA-A04 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.group-order"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.group-order\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.group-order/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.group-order",
+      "title": "math.abst.group-order — cognitive map",
+      "content": "### Target Understanding\nTwo separate but related uses of the word \"order\" in group theory:\n\n**(O1) Order of a group** |G|: the number of elements in G.\n- |Z/6Z| = 6.  |D₃| = 6.  |GL₂(ℝ)| = ∞.  |{e}| = 1 (trivial group).\n\n**(O2) Order of an element** ord(g): the smallest positive integer k such that gᵏ = e.\n- If no such k exists, ord(g) = ∞.\n- ord(e) = 1 for any group (e¹ = e = identity).\n- In Z/6Z: ord(1) = 6, ord(2) = 3, ord(3) = 2, ord(4) = 3, ord(5) = 6.\n\n**Key theorem** (preview of Lagrange): In a **finite** group G, the order of every element\ndivides |G|.  (Full proof in `math.abst.lagrange-theorem`; here we verify empirically.)\n- |Z/6Z| = 6; element orders {1,2,3,6}; all divide 6 ✓.\n- |D₃| = 6; element orders {1,2,3}; all divide 6 ✓.\n\n### Distinction from math.abst.group-theory\n`math.abst.group-theory` defined G4 (inverses exist) without introducing orders.  This blueprint\ndefines both kinds of order, develops computational fluency, and previews the Lagrange divisibility\nproperty that will be proved in the follow-on blueprint.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Z/6Z: compute each element's order by successive addition |\n| **Pictorial (P)** | \"Orbit\" table: list gᵏ for k=1,2,… until reaching e |\n| **Abstract (A)** | ord(g) definition; relationship between ord(g) and |G|; gⁿ=e ↔ ord(g)|n |\n\n### Element Orders in D₃\n| Element | gᵏ sequence | Order |\n|---------|-------------|-------|\n| e | e | 1 |\n| r | r, r², e | 3 |\n| r² | r², e | 3 |\n| s | s, e | 2 |\n| rs | rs, e | 2 |\n| r²s | r²s, e | 2 |\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 31,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-order",
+      "title": "ORDER-OF-GROUP-VS-ELEMENT",
+      "content": "| MC-1 | ORDER-OF-GROUP-VS-ELEMENT | Confuses \"order of the group\" (number of elements) with \"order of an element\" (smallest power giving identity) | Two different technical meanings for the same word introduced simultaneously | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-order",
+      "title": "ORDER-ALWAYS-EQUALS-GROUP-ORDER",
+      "content": "| MC-2 | ORDER-ALWAYS-EQUALS-GROUP-ORDER | Claims every element has order = |G| | Over-generalises from generators of Z/nZ (which have order n); forgets elements like identity (order 1) and proper subgroup generators | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.group-order",
+      "title": "ORD-NOT-DIVIDES-GROUP-ORDER",
+      "content": "| MC-3 | ORD-NOT-DIVIDES-GROUP-ORDER | After computing orders, doesn't recognise that ord(g) must divide |G| | Hasn't internalised the Lagrange divisibility pattern; sees it as a coincidence | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-order",
+      "title": "Two Meanings of Order (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two Meanings of Order (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 110,
+        "endLine": 152
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-order",
+      "title": "Element Order Gallery for D₃ (P04 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Element Order Gallery for D₃ (P04 + P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 152,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-order",
+      "title": "Key Relationships: Generator ↔ Order = |G|; Identity Has Order 1 (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Key Relationships: Generator ↔ Order = |G|; Identity Has Order 1 (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 189,
+        "endLine": 234
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.group-order",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P49\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 234,
+        "endLine": 501
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.group-order",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** Find the order of every element in Z/8Z.  Which elements are generators?\n*(Orders: ord(0)=1, ord(1)=8, ord(2)=4, ord(3)=8, ord(4)=2, ord(5)=8, ord(6)=4, ord(7)=8.\n Generators: {1,3,5,7} — those with ord=8=|G|.)*\n\n**Q2.** In a group G of order 12, can an element have order 5?  Order 4?  Justify.\n*(Order 5: No — 5 does not divide 12 (12/5 is not an integer). Order 4: Yes — 4|12. ✓)*\n\n**Q3.** Prove: if ord(g) = k, then ord(g²) divides k.  (Hint: compute (g²)^k.)\n*((g²)^k = g^{2k} = (g^k)² = e² = e.  By the gⁿ=e ↔ ord(g)|n theorem, ord(g²) | 2k.\n Also (g²)^k = e → ord(g²) | k directly from the theorem applied to g². ✓)*\n\n**Q4.** The element g in a group satisfies g⁶ = e but g² ≠ e and g³ ≠ e.  What is ord(g)?\n*(ord(g) must divide 6 (from g⁶=e). Divisors of 6: {1,2,3,6}.  g¹≠e (else ord=1 but g²≠e contradicts),\n g²≠e, g³≠e → ord(g)∉{1,2,3}. So ord(g)=6.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independence probe: applies order divisibility in a novel finite group setting.*\n\n> A group G has order 15.  An element g ∈ G satisfies g⁵ ≠ e and g³ ≠ e.\n>\n> (i) What are the possible orders of g?\n> (ii) If additionally g¹⁵ = e, determine ord(g) exactly.\n> (iii) Does the existence of g imply G is cyclic?  Explain.\n\n*Expected answers:*\n- **(i)** ord(g) must divide |G| = 15 (Lagrange divisibility).  Divisors of 15: {1, 3, 5, 15}.\n  g³ ≠ e → ord(g) ≠ 1 and ord(g) ≠ 3.  g⁵ ≠ e → ord(g) ≠ 5.  So ord(g) ∈ {15}.\n- **(ii)** g¹⁵ = e confirms ord(g) | 15; combined with (i), ord(g) = 15.\n- **(iii)** Yes. ord(g) = 15 = |G|.  g generates all of G (every element is a power of g).  G = ⟨g⟩ is cyclic.\n\n**[P55 — SCORE]**  Award 1 point for P76 if (i)+(ii) correct and (iii) reason stated; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → revisit orbit table in TA-A01; re-administer.\n  - Q2 wrong → MC-3 → TB-R03 (divisibility check).\n  - Q3 wrong → revisit gⁿ=e ↔ ord(g)|n from TA-A03.\n  - Q4 wrong → revisit divisors-of-6 logic in TA-A03 P49.\n  - P76 wrong → identify which part; route to TB-R03 for Lagrange divisibility.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.group-order\nMASTERY_REACHED: true\nUNLOCKS:         math.abst.lagrange-theorem\nNEXT_CONCEPT:    math.abst.lagrange-theorem\nSESSION_CLOSE:   \"You can compute the order of any element in a finite group, distinguish it\n                  from the order of the group itself, identify generators (ord(g)=|G|), and\n                  verify that element orders always divide the group order — a pattern that\n                  Lagrange's theorem will prove in full generality.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: ORDER-OF-GROUP-VS-ELEMENT (MC-1)\n\n**Trigger:** Student conflates |G| and ord(g).\n\n**Step 1 — Two-column comparison.**\n> | Concept | Symbol | What it counts | Example (Z/6Z) |\n> |---------|--------|----------------|----------------|\n> | Order of the group | |G| | Number of elements | |Z/6Z| = 6 |\n> | Order of an element | ord(g) | Smallest k ≥ 1 with gᵏ = e | ord(2) = 3 |\n\n**Step 2 — Show they are different for the same group.**\n> |Z/6Z| = 6 but ord(2) = 3.  Different numbers, different questions.\n\n**Exit:** Return to TA-A01 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: ORDER-ALWAYS-EQUALS-GROUP-ORDER (MC-2)\n\n**Trigger:** Student claims every element has order |G|.\n\n**Step 1 — Identity counterexample.**\n> ord(e) = 1 in every group.  |G| = 1 only for the trivial group.  So ord(e) ≠ |G| unless |G|=1.\n\n**Step 2 — Concrete counterexample in Z/6Z.**\n> ord(2) = 3 ≠ 6 = |Z/6Z|.\n> Orbit: 2, 4, 0 — only 3 steps to return to identity.\n\n**Step 3 — Correct rule.**\n> ord(g) = |G| ↔ g is a generator of a cyclic group.  Most elements have smaller orders.\n\n**Exit:** Return to TA-A02 P49 checkpoint.\n\n---\n\n### TB-R03 · Repair: ORD-NOT-DIVIDES-GROUP-ORDER (MC-3)\n\n**Trigger:** Student doesn't apply the Lagrange divisibility test.\n\n**Step 1 — Verify pattern in Z/8Z.**\n> |Z/8Z| = 8.  Element orders: ord(0)=1, ord(1)=8, ord(2)=4, ord(3)=8, ord(4)=2, ord(5)=8, ord(6)=4, ord(7)=8.\n> Divisors of 8: {1, 2, 4, 8}.  Orders found: {1, 2, 4, 8}.  All divide 8 ✓.\n\n**Step 2 — Apply the test prospectively.**\n> If someone claims an element in a group of order 12 has order 5: check 5|12? No → impossible.\n> If they claim order 4: check 4|12? Yes → possible.\n\n**Step 3 — State the rule clearly.**\n> In a finite group G: ord(g) always divides |G|.  This is Lagrange's theorem (proved next concept).\n> Use it to rule out impossible orders before computing.\n\n**Exit:** Return to TA-A03 P49 checkpoint.\n\n---\n\n<!-- COMPONENT 6: P89 Spaced Repetition -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"In Z/9Z, what is ord(3)? What is ord(6)?\"\n    Target: ord(3): 3,6,0 → order 3. ord(6): 6,3,0 → order 3. PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"A group has order 10. Can an element have order 4? Order 5?\"\n    Target: Order 4: No (4∤10). Order 5: Yes (5|10). PASS if both with divisibility reason.\n\n  Interval-3 (+1 week):\n    Probe: \"g⁴ = e in a group. Does this mean ord(g)=4? What are the possibilities?\"\n    Target: No — ord(g) must divide 4, so ord(g) ∈ {1,2,4}.  All three are possible.\n            PASS if divisors of 4 cited correctly.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A01 (orbit tables) or TA-A03 (gⁿ=e theorem).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.group-theory:\n    Used in:   TA-A01 (identity e used; G4 underlies orbit computation — gᵏ hits e),\n               TA-A02 (G4 + G2 used in D₃ orbit computation), TA-A03 (Euclidean division\n               argument for gⁿ=e theorem uses G2+G4).\n    Assumed:   Student holds G1–G4 and can compute in concrete groups (Z/nZ, D₃).\n\nUNLOCKS_ENABLED:\n  math.abst.lagrange-theorem:\n    Dependency: Lagrange's theorem states |H| divides |G| for any subgroup H ≤ G.\n                The element-order divisibility rule (ord(g) | |G|) is an immediate corollary:\n                ⟨g⟩ is a subgroup of order ord(g), so ord(g) | |G|.\n                Students need element order fluency to follow the Lagrange proof.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n  P76 independence probe uses a group of order 15 — a novel setting to apply order divisibility.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The \"two orders\" naming collision is the primary source of MC-1.**\nBoth \"|G|\" and \"ord(g)\" are called \"order.\"  Make the two-column table in TA-A01 explicit and\nvisible throughout the session.  Encourage the student to write |G| and ord(g) on paper to\ndistinguish them by notation.\n\n**2. The orbit table is the primary computational tool.**\nStudents should compute gᵏ for k=1, 2, … until reaching e, listing each value.  For Z/nZ this\nis repeated addition mod n.  For D₃, use the composition table.  The orbit table is both the\ncomputation method and the proof that the computed value IS the order.\n\n**3. The \"gⁿ=e ↔ ord(g)|n\" theorem has a subtle implication.**\nQ3 (prove ord(g²) divides ord(g)) is an advanced application — at bloom=apply, a complete proof\nis expected.  However, the key step is just applying the theorem twice, not a new proof technique.\nIf Q3 is failed, route to TA-A03's statement of the theorem rather than re-teaching from scratch.\n\n**4. The P76 probe anticipates Lagrange's theorem.**\nParts (i)–(iii) walk through the logic of Lagrange divisibility in a concrete order-15 group.\nThis is intentionally planted as a preparation for the next concept — the student sees Lagrange\nused to determine order uniquely before the full theorem is stated.\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.group-order\n=============================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 5; 4 TAs used ≤ 5. ✓\n[PASS] V-4   CPA_ENTRY_STAGE = C (Z/6Z orbit table as concrete entry).\n[PASS] V-5   P76_MODE = Independence (no cross_links; order-15 group novel setting).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A01 gate.\n[PASS] V-7   MC-1 surfaced in TA-A01 P49 (iii); TB-R01 route.\n[PASS] V-8   MC-2 and MC-3 addressed in TA-A02 and TA-A03.\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P04 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49. TA-A01→P49 ✓  TA-A02→P49 ✓  TA-A03→P49 ✓\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91.\n[PASS] V-13  GR-4: P77 contains exactly 4 questions. ✓\n[PASS] V-14  GR-5: P91 terminal in TA-A04 with correct compound\n               P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-6: P76 included inside P91 in the mastery gate.\n[PASS] V-16  GR-9: P76 Independence mode — novel group of order 15; order divisibility applied.\n[PASS] V-17  GR-10: MAMR stated; MC-1 cleared at TA-A01 before TA-A02.\n\nPASS CRITERION\n[PASS] V-18  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-19  P74 routing covers all score outcomes.\n\nCONTENT\n[PASS] AIR   Two orders defined: |G| (group size) and ord(g) (smallest power giving identity).\n             Orbit tables for Z/6Z and D₃. Generator ↔ ord(g)=|G|. ord(e)=1 always.\n             gⁿ=e ↔ ord(g)|n theorem stated and proved. Element orders divide |G| established\n             empirically as preview of Lagrange. MC-1/MC-2/MC-3 all addressed.\n             P76 independence: order-15 group; ord(g)=15 uniquely determined; G cyclic.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 234,
+        "endLine": 501
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-order",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11: two meanings of order; orbit table for Z/6Z + P49)\n      → TA-A02 (P04: element order gallery for D₃; all orders divide |D₃|=6 + P49)\n      → TA-A03 (P06: ord(g)=|G| ↔ g is a generator of a cyclic group; identity always order 1 + P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (two-column comparison: order of group = counting; order of element = smallest power)\n  MC-2 → TB-R02 (identity has order 1; element 2 in Z/6Z has order 3, not 6)\n  MC-3 → TB-R03 (verify pattern in Z/8Z: all element orders divide 8)\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 88,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.group-order",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"In Z/9Z, what is ord(3)? What is ord(6)?\"\n    Target: ord(3): 3,6,0 → order 3. ord(6): 6,3,0 → order 3. PASS if both correct.\n\n  Interval-2 (+3 days):\n    Probe: \"A group has order 10. Can an element have order 4? Order 5?\"\n    Target: Order 4: No (4∤10). Order 5: Yes (5|10). PASS if both with divisibility reason.\n\n  Interval-3 (+1 week):\n    Probe: \"g⁴ = e in a group. Does this mean ord(g)=4? What are the possibilities?\"\n    Target: No — ord(g) must divide 4, so ord(g) ∈ {1,2,4}.  All three are possible.\n            PASS if divisors of 4 cited correctly.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A01 (orbit tables) or TA-A03 (gⁿ=e theorem).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 378,
+        "endLine": 401
+      }
+    },
+    {
+      "assetId": "math.abst.group-order/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.group-order",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.group-theory:\n    Used in:   TA-A01 (identity e used; G4 underlies orbit computation — gᵏ hits e),\n               TA-A02 (G4 + G2 used in D₃ orbit computation), TA-A03 (Euclidean division\n               argument for gⁿ=e theorem uses G2+G4).\n    Assumed:   Student holds G1–G4 and can compute in concrete groups (Z/nZ, D₃).\n\nUNLOCKS_ENABLED:\n  math.abst.lagrange-theorem:\n    Dependency: Lagrange's theorem states |H| divides |G| for any subgroup H ≤ G.\n                The element-order divisibility rule (ord(g) | |G|) is an immediate corollary:\n                ⟨g⟩ is a subgroup of order ord(g), so ord(g) | |G|.\n                Students need element order fluency to follow the Lagrange proof.\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n  P76 independence probe uses a group of order 15 — a novel setting to apply order divisibility.\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.group-order.md",
+        "startLine": 401,
+        "endLine": 426
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

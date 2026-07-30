@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.rational-root |
-| Title | Rational Root Theorem |
+| name | Rational Root Theorem |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | analyze |
@@ -127,7 +127,7 @@ Step 1 — "Rational Root Theorem only finds RATIONAL roots — fractions p/q wi
 **TB-R03 (MC-3 LEADING-COEFFICIENT-IGNORED):**
 Step 1 — "When the leading coefficient aₙ≠1: the denominator of each candidate p/q must divide aₙ, not just 1. So candidates include fractions with aₙ's factors in the denominator — these are not just integers." Step 2 — f(x)=2x²−5x+2. a₀=2 (factors ±1, ±2); aₙ=2 (factors ±1, ±2). Candidates: ±1/1, ±2/1, ±1/2, ±2/2=±1. Distinct list: ±1, ±2, ±1/2. Test x=1/2: f(1/2)=2(1/4)−5(1/2)+2=1/2−5/2+2=0. ✓ Root x=1/2 — a fractional candidate that would be missed if aₙ=2 were ignored. Step 3 — "Always list factors of BOTH a₀ AND aₙ. Form ALL fractions ±(factor of a₀)/(factor of aₙ). Reduce duplicates. This complete list is the only guarantee you won't miss a rational root."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. List all rational root candidates for: (a) f(x)=x³−4x²+x+6; (b) g(x)=3x³−x²−3x+1; (c) h(x)=2x⁴+x³−3x−2.

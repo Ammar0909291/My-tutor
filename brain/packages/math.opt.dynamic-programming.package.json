@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.dynamic-programming-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.dynamic-programming",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:71cf24052ef290fd70a03eb1eb04e396f2ce0b44b1005d4a47a1295c5e581e8b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.dynamic-programming.md": "sha256:67650a4ef77f281e6a242b58b9ed5c7311d8d245566a066885e664450534c482"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.opt.dynamic-programming",
+    "name": "Dynamic Programming",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.disc.recurrence-relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.dynamic-programming-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.dynamic-programming (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.dynamic-programming.md": "sha256:67650a4ef77f281e6a242b58b9ed5c7311d8d245566a066885e664450534c482"
+      },
+      "contentHash": "sha256:fa4ee8294db7b34f11bb1d4ab022244199bf499b5c939305480214ea54b82dd9",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.dynamic-programming.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.dynamic-programming.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.dynamic-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.dynamic-programming\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.dynamic-programming/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "Learning Objective",
+      "content": "Given an optimization problem, the student identifies whether it has overlapping subproblems and optimal substructure, formulates a Bellman recurrence, selects a top-down (memoization) or bottom-up (tabulation) implementation strategy, and applies the method to canonical problems (longest common subsequence, 0/1 knapsack, shortest path with stages).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "DP-IS-JUST-RECURSION",
+      "content": "| MC-1 | DP-IS-JUST-RECURSION | Student implements a naive recursive solution without memoization and calls it DP; confuses the technique with the pattern of recursion | Type 5 — instruction-induced (DP IS recursion + memory, but recursion alone is presented first) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "GREEDY-ALWAYS-WORKS",
+      "content": "| MC-2 | GREEDY-ALWAYS-WORKS | Student applies a greedy heuristic to problems with overlapping subproblems (e.g., fractional-knapsack logic to 0/1 knapsack) and gets wrong answers | Type 1 — overgeneralization (greedy works for activity selection and fractional knapsack; overapplied) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "SUBPROBLEM-ORDER-ARBITRARY",
+      "content": "| MC-3 | SUBPROBLEM-ORDER-ARBITRARY | Student fills the DP table in an incorrect order (computing cell (i,j) before (i−1,j) or (i,j−1) are available); does not respect dependency DAG | Type 2 — perceptual intuition (table looks like a grid; row-by-row seems natural but dependencies vary) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "CORRECT → \"Memoization caches; tabulation fills bottom-up. Both convert exponential recursion to polynomial time.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Memoization caches; tabulation fills bottom-up. Both convert exponential recursion to polynomial time.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "PARTIAL (knows recursion, doesn't see the caching distinction) → \"Trace F(5) naive: how many times is F(2) computed? Now trace with memoization.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (knows recursion, doesn't see the caching distinction) → \\\"Trace F(5) naive: how many times is F(2) computed? Now trace with memoization.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "NO_RESPONSE → \"Compute L[2][3] in the LCS table above, using the recurrence.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Compute L[2][3] in the LCS table above, using the recurrence.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "CORRECT → \"DP is required when greedy commits irrevocably and misses better combinations.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"DP is required when greedy commits irrevocably and misses better combinations.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "PARTIAL (knows greedy fails, can't explain why) → \"After greedy picks item 2 and 3, can it pick item 1? What's the total weight?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows greedy fails, can't explain why) → \\\"After greedy picks item 2 and 3, can it pick item 1? What's the total weight?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "NO_RESPONSE → \"What is the maximum value achievable with the DP table at W=5?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"What is the maximum value achievable with the DP table at W=5?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "CORRECT → \"Top-down is lazy and natural; bottom-up requires knowing the dependency order (topological sort of subproblem DAG) but avoids stack issues.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Top-down is lazy and natural; bottom-up requires knowing the dependency order (topological sort of subproblem DAG) but avoids stack issues.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "PARTIAL (knows the names, can't identify when each fails) → \"In the LCS table, which cells does L[2][3] depend on? Can you fill (2,3) before (1,3)?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows the names, can't identify when each fails) → \\\"In the LCS table, which cells does L[2][3] depend on? Can you fill (2,3) before (1,3)?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "NO_RESPONSE → \"Look at L[i][j]=max(L[i−1][j], L[i][j−1]). What two cells do you need before computing L[2][3]?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"Look at L[i][j]=max(L[i−1][j], L[i][j−1]). What two cells do you need before computing L[2][3]?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 107,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.opt.dynamic-programming/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.dynamic-programming",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Write the Bellman recurrence for the Edit Distance problem (minimum insertions/deletions/substitutions to transform string A into string B). Fill a 3×4 table for A=\"cat\", B=\"cuts\".\n2. In the 0/1 knapsack with capacity W=6 and items (w=1,v=1),(w=2,v=6),(w=3,v=10),(w=5,v=16), build the DP table and identify the optimal item selection.\n3. Explain why the coin change problem (minimum coins to make amount n using denominations d₁,…,dₖ) has optimal substructure and overlapping subproblems.\n4. Give an example of a problem that has optimal substructure but no overlapping subproblems (so DP would be wasteful — use a simpler method instead).\n\n**P55 — Reflect & Consolidate:** \"DP requires: overlapping subproblems (caching helps) AND optimal substructure (sub-optimal subproblem solutions can't be part of an optimal overall solution). When both hold, DP turns exponential brute force into polynomial time.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe Matrix Chain Multiplication problem: given matrices A₁,A₂,…,Aₙ with dimensions p₀×p₁, p₁×p₂,…, p_{n−1}×pₙ, find the parenthesization minimizing total scalar multiplications. The subproblem is M[i][j] = minimum cost to multiply Aᵢ through Aⱼ. Write the Bellman recurrence for M[i][j] in terms of M[i][k] and M[k+1][j] for all splits k, with base case M[i][i]=0. Identify the correct fill order (not row-by-row; why?).\n\n**P55 — Reflect & Consolidate:** \"Matrix chain shows the fill order must match the subproblem DAG, which here is chain length: fill all length-1 chains, then length-2, etc., not row by row.\"\n\n**P75 — Mastery Assessment:**\n\"The Longest Increasing Subsequence (LIS) problem: given array A[1..n], find the length of the longest strictly increasing subsequence. (a) Define the subproblem L[i] = length of LIS ending at index i. (b) Write the Bellman recurrence. (c) Give the fill order. (d) Compute LIS for A=[3,1,4,1,5,9,2,6].\"\n\n**P55 — Reflect & Consolidate:** \"LIS is a classic DP where the subproblem index is the 'position of the last element chosen' — a common DP design pattern for sequence problems.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.opt.dynamic-programming complete\n- Score 3/5 → REVIEW Bellman recurrence formulation; replay A01\n- Score ≤ 2/5 → PREREQUISITE GAP in math.disc.recurrence-relation; reassign\n\n**P78 — Completion:** Dynamic programming certified. Student can identify DP applicability, formulate Bellman recurrences, and implement both memoization and tabulation strategies.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.dynamic-programming.md",
+        "startLine": 120,
+        "endLine": 147
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

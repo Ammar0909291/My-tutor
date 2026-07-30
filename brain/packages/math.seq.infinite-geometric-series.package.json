@@ -1,0 +1,339 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.infinite-geometric-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.infinite-geometric-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:779a9f492d30381c441dba57a68ef54fa13bfc98f6b4642f9f85db568e2b8548",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md": "sha256:9f923dc2bf02dcf613221e1575c2a1ca58443c34225411fce6de004bd7263250"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.infinite-geometric-series",
+    "name": "Infinite Geometric Series",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.seq.geometric-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.infinite-geometric-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.infinite-geometric-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md": "sha256:9f923dc2bf02dcf613221e1575c2a1ca58443c34225411fce6de004bd7263250"
+      },
+      "contentHash": "sha256:7b0223b73f6412742330fe366ef229c6f46a192749f139462eaf9d57a65c0736",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.infinite-geometric-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md#TA-A01 (addresses MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.infinite-geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.infinite-geometric-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.infinite-geometric-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.infinite-geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.infinite-geometric-series\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.infinite-geometric-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.infinite-geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.infinite-geometric-series\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.infinite-geometric-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md#TA-A04 (addresses MC-1, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.infinite-geometric-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.infinite-geometric-series\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.infinite-geometric-series/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "Infinite Geometric Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.geometric-series**: Sₙ = a(1−rⁿ)/(1−r) for r≠1; convergence when |r|<1; divergence when |r|≥1\n\n### Target Knowledge State\nStudent can derive S∞ = a/(1−r) by taking the limit of Sₙ as n→∞ when |r|<1; can verify the convergence condition (|r|<1 required, signed r allowed including negative); can apply the formula to find the sum, the first term, or r given partial information; and can convert a recurring decimal to a fraction using the infinite GP sum.\n\n### Conceptual Obstacles\n1. Applying S∞ = a/(1−r) without checking |r|<1 — when |r|≥1, the formula gives a finite-looking number but the series actually diverges; must check convergence first\n2. Treating the infinite sum as \"the sequence limit\" — the limit of the terms (rⁿ→0) is not the same as the sum of the series; students conflate lim aₙ with Σaₙ\n3. Using the finite Sₙ formula as the infinite sum — stopping at Sₙ = a(1−rⁿ)/(1−r) without taking n→∞; the infinite sum is the limit, not any single partial sum\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "FORMULA-WITHOUT-CONVERGENCE-CHECK",
+      "content": "| MC-1 | FORMULA-WITHOUT-CONVERGENCE-CHECK | Student applies a/(1−r) without first verifying |r|<1; may report a finite sum for a divergent series | Any problem where r is not obviously less than 1 in absolute value |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "TERM-LIMIT-AS-SERIES-SUM",
+      "content": "| MC-2 | TERM-LIMIT-AS-SERIES-SUM | Student reports lim rⁿ = 0 as the \"sum\" of the infinite GP; confuses the convergence of terms with the value of the sum | Problems asking for the sum where |r|<1 |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "PARTIAL-SUM-IS-INFINITE-SUM",
+      "content": "| MC-3 | PARTIAL-SUM-IS-INFINITE-SUM | Student uses Sₙ for a specific large n as the exact infinite sum; does not take the limit n→∞ | Any infinite GP sum problem |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "Derivation of S∞",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Derivation of S∞\",\"primitives\":[\"P02\",\"P49\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 64,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "Convergence vs Divergence Cases",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Convergence vs Divergence Cases\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 123,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "Applications: Recurring Decimals and Inverse Problems",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Applications: Recurring Decimals and Inverse Problems\",\"primitives\":[\"P05\",\"P49\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 194,
+        "endLine": 258
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P04\",\"P05\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 258,
+        "endLine": 455
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA (GR-3, GR-6)\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Apply the infinite geometric series formula.*\n\n**Problem 1.** Find S∞ for: 4 − 2 + 1 − 1/2 + ⋯\n\n**Problem 2.** Does Σₙ₌₀^∞ (5/4)ⁿ converge? State S∞ if it does.\n\n**Problem 3.** An infinite GP has S∞=18 and r=2/3. Find the first term a.\n\n**Problem 4.** Convert 0.272727... to a fraction using the infinite GP formula.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. a=4, r=−1/2, |r|=1/2<1 → S∞=4/(1−(−1/2))=4/(3/2)=**8/3**\n2. r=5/4, |r|=5/4>1 → **diverges**; no S∞ exists\n3. S∞=a/(1−r): 18=a/(1−2/3)=a/(1/3) → **a=6**; verify: |r|=2/3<1 ✓\n4. 0.27 repeating = 27/100 + 27/10000 + ⋯; a=27/100, r=1/100; S∞=(27/100)/(99/100)=27/99=**3/11**\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* A ball is dropped from a height of 4 metres. After each bounce it rises to 3/4 of the previous height and then falls back down. Assume the ball bounces infinitely many times.\n\n(a) Write the total distance travelled as an infinite series (first drop + bounces).\n\n(b) Find the exact total distance.\n\n(c) Why is your answer finite even though the ball bounces infinitely many times?\n\n*Expected answers:*\n\n(a) First drop: 4 m. Then each bounce = rise + fall = 2·(3/4)·4, 2·(3/4)²·4, ⋯\nTotal = 4 + 2·3 + 2·(9/4) + ⋯ = 4 + Σₙ₌₁^∞ 2·4·(3/4)ⁿ = 4 + 8·Σₙ₌₁^∞ (3/4)ⁿ\n\n(b) Σₙ₌₁^∞ (3/4)ⁿ = (3/4)/(1−3/4) = (3/4)/(1/4) = 3\nTotal = 4 + 8·3 = 4 + 24 = **28 metres**\n\n(c) The bounce heights form a geometric sequence with |r|=3/4<1 — each bounce is shorter by the factor 3/4. The distances decrease exponentially fast, so their infinite sum is finite.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.8 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; if MC-1 (no convergence check) → B01; if MC-3 (used finite Sₙ) → B02; targeted repair |\n| ≤ 2/5 | → Return to A01; rederive from the limit of Sₙ; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.infinite-geometric-series` complete. Threshold 0.8 requires 4/5 correct.\n\n**Unlocks:** none directly (see KG).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 261,
+        "endLine": 362
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — learner has the finite GP sum formula; the new content is taking n→∞.\n\n**Scaffolding sequence:**\n1. **A01 P02 FORMAL DEFINITION** — derive S∞ = a/(1−r) from the limit of Sₙ; state the convergence condition; distinguish MC-2 and MC-3\n2. **A02 P04 PATTERN INDUCTION** — tabulate partial sums approaching S∞; examine divergent cases (|r|≥1); apply to signed r; address MC-1\n3. **A03 P05 WORKED EXAMPLE** — recurring decimal to fraction conversion; inverse problems (given S∞ find a or r)\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Find S∞ for: 10 + 5 + 2.5 + 1.25 + ⋯ |\n| R2 | 3 days | An infinite GP has S∞=12 and a=3. Find r. Verify |r|<1. |\n| R3 | 7 days | Convert 0.454545... to a fraction using infinite GP. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 396,
+        "endLine": 406
+      }
+    },
+    {
+      "assetId": "math.seq.infinite-geometric-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.infinite-geometric-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | none |\n| Requires (Tier-1) | math.seq.geometric-series |\n\n**GR-8 compliance:** no cross_links in KG — documented.\n**GR-9 compliance:** P76 (bouncing ball) is independent of any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.infinite-geometric-series.md",
+        "startLine": 406,
+        "endLine": 420
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

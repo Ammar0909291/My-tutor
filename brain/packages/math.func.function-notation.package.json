@@ -1,0 +1,515 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.function-notation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.function-notation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eea66ca0d87adaf8cd3de220ca2c5d0e05fac9112b25e8602a99236ce77badfe",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.function-notation.md": "sha256:b7a0e5c4b926878b51e175f1d526f930d3860f66f77483aee84c3881681e3ac4"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 11,
+      "mastery_probe": 1
+    },
+    "ruleCount": 11
+  },
+  "concept": {
+    "conceptId": "math.func.function-notation",
+    "name": "Function Notation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.function-notation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.function-notation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.function-notation.md": "sha256:b7a0e5c4b926878b51e175f1d526f930d3860f66f77483aee84c3881681e3ac4"
+      },
+      "contentHash": "sha256:b1c7da11761480f7922866b49ff0156c004393ab68140a71a4609b0bbd0b9593",
+      "ruleCount": 11,
+      "bandCounts": {
+        "3": 11
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-notation.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-notation.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.function-notation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.function-notation",
+      "title": "Learning Objective",
+      "content": "Given a function defined by a rule, the student reads and writes f(x) notation fluently — evaluating f(a) for a specific value, evaluating f(expression) by substitution, interpreting f(a)=b as \"input a gives output b,\" distinguishing f(x) (the function value) from f (the function itself), and using notation for piecewise, composed, and named functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.function-notation",
+      "title": "f(x)-MEANS-f-TIMES-x",
+      "content": "| MC-1 | f(x)-MEANS-f-TIMES-x | Student interprets f(x) as multiplication: f(x) = f × x; writes \"2f(3) = 2×f×3 = 6f\" or similar | Type 3 — language contamination (juxtaposition in algebra means multiplication: 2x = 2×x; students apply this to f(x)) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.function-notation",
+      "title": "f(a+b)=f(a)+f(b)",
+      "content": "| MC-2 | f(a+b)=f(a)+f(b) | Student assumes all functions are linear/additive: f(a+b)=f(a)+f(b) for any f; applies this even when f is quadratic, exponential, or absolute value | Type 1 — overgeneralization (linearity holds for f(x)=cx; students extend it to all functions) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.function-notation",
+      "title": "f(a)-IS-f-APPLIED-AMBIGUOUSLY",
+      "content": "| MC-3 | f(a)-IS-f-APPLIED-AMBIGUOUSLY | Student confuses f(a) = \"f evaluated at a\" with f · (a) (multiplication) or with f − a (subtraction); makes errors like computing g(x+h)−g(x) as g·(h)−g·x | Type 3 — language contamination (same notation as multiplication is extended inconsistently across algebraic operations) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "f(a): f evaluated AT a. Substitute a for x in the rule.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"f(a): f evaluated AT a. Substitute a for x in the rule.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "f(x+h): f evaluated AT (x+h). Substitute (x+h) everywhere x appears.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"f(x+h): f evaluated AT (x+h). Substitute (x+h) everywhere x appears.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "f(a)=b means \"input a gives output b.\"",
+      "content": "{\"id\":\"TA-3\",\"title\":\"f(a)=b means \\\"input a gives output b.\\\"\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "CORRECT → \"f(a): substitute a for x. f(x+h): substitute (x+h) for x everywhere. f(a)=b: a is the input, b is the output.\" → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"CORRECT → \\\"f(a): substitute a for x. f(x+h): substitute (x+h) for x everywhere. f(a)=b: a is the input, b is the output.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "PARTIAL (evaluates at numbers, struggles with expressions) → \"For f(x)=x²−1, compute f(x+h) by replacing every x with (x+h). Don't simplify yet.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"PARTIAL (evaluates at numbers, struggles with expressions) → \\\"For f(x)=x²−1, compute f(x+h) by replacing every x with (x+h). Don't simplify yet.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "NO_RESPONSE → \"If f(x)=3x+2, what is f(5)? Now compute f(5) again by substituting 5 for x in 3x+2.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-7\",\"title\":\"NO_RESPONSE → \\\"If f(x)=3x+2, what is f(5)? Now compute f(5) again by substituting 5 for x in 3x+2.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "CORRECT → \"f(a+b)≠f(a)+f(b) unless f is linear. f(ca)≠cf(a) unless f is linear. f(x) is not f times x — it is f evaluated at x. Each evaluation requires full substitution.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"f(a+b)≠f(a)+f(b) unless f is linear. f(ca)≠cf(a) unless f is linear. f(x) is not f times x — it is f evaluated at x. Each evaluation requires full substitution.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "PARTIAL (knows it's not multiplication, still confused about f(a+b)) → \"Compute f(1+2) and f(1)+f(2) for f(x)=x². Are they equal? Why not?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (knows it's not multiplication, still confused about f(a+b)) → \\\"Compute f(1+2) and f(1)+f(2) for f(x)=x². Are they equal? Why not?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-notation",
+      "title": "NO_RESPONSE → \"For g(x)=|x|, compute g(3+4) and g(3)+g(4). Are they equal?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"For g(x)=|x|, compute g(3+4) and g(3)+g(4). Are they equal?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.func.function-notation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.function-notation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. For f(x)=x²−2x+3: compute f(0), f(−2), f(a), f(x+1), and f(x+h)−f(x).\n2. For g(x)=|2x−1|: compute g(0), g(½), g(−1). Is g(a+b)=g(a)+g(b)? Verify with a=1,b=2.\n3. Given h(3)=7 and h(5)=−1, and knowing h is linear (h(x)=mx+b), find h(x). Then compute h(8).\n4. Express \"the output of f when the input is increased by 1\" in function notation. Simplify for f(x)=3x−5.\n\n**P55 — Reflect & Consolidate:** \"f(a): evaluate at a by substituting. f(a+b): substitute the whole expression a+b — never split. f(a)=b: a is the input, b is the output. f is the function; f(x) is its value at x.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe difference quotient: for f(x)=x², compute [f(x+h)−f(x)]/h and simplify. Show that as h→0, this approaches 2x. This is the derivative of f(x)=x² at x. Now compute the difference quotient for g(x)=x³ and simplify for general h, then identify what it approaches as h→0. This is the derivative of x³.\n\n**P55 — Reflect & Consolidate:** \"The difference quotient [f(x+h)−f(x)]/h is the foundation of differential calculus — it measures the average rate of change. Computing it requires correct function notation: substitute (x+h) fully into f's rule before simplifying.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=2x²+x−3. (a) Compute f(2), f(−1), f(a−1). (b) Compute f(x+h)−f(x) and divide by h. Simplify. (c) Let g(x)=f(2x)−f(x). Simplify g(x). Is g(x)=f(x)? Explain. (d) Compute g(0) two ways: directly and using your simplified expression.\"\n\n**P55 — Reflect & Consolidate:** \"Function notation is a substitution rule, not multiplication. Every evaluation requires full substitution of the argument into the rule. The difference quotient [f(x+h)−f(x)]/h requires two separate full substitutions before subtraction.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.function-notation complete\n- Score 3/5 → REVIEW substitution into expressions and the f(a+b)≠f(a)+f(b) non-linearity; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.function-concept; reassign\n\n**P78 — Completion:** Function notation certified. Student reads and writes f(x) as substitution, evaluates at numbers and expressions, computes difference quotients, and correctly interprets f(a)=b.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-notation.md",
+        "startLine": 100,
+        "endLine": 127
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

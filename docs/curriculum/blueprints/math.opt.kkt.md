@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.kkt |
-| Title | KKT Conditions |
+| name | KKT Conditions |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -122,7 +122,7 @@ Step 1 — "λᵢgᵢ(x*)=0: since λᵢ≥0 and gᵢ(x*)≤0, the causal direct
 **TB-R03 (MC-3 DUAL-FEASIBILITY-OPTIONAL):**
 Step 1 — "For Lagrange conditions with equality constraints only, νⱼ can be any sign — there is no direction preference for an equality. For inequality gᵢ(x)≤0: λᵢ<0 would mean the Lagrangian gradient ∇f+λᵢ∇gᵢ=0 has the multiplier pushing toward INCREASING gᵢ — away from feasibility." Step 2 — Geometric: at a constrained minimum on the boundary gᵢ=0, the gradient −∇f must point into the feasible halfspace (gᵢ≤0 side). This requires λᵢ≥0. Negative λᵢ would mean ∇f points into the feasible set — the minimum would be in the interior, not on the boundary. Contradiction. Step 3 — "Always write all four: (1) stationarity, (2) primal feasibility, (3) DUAL FEASIBILITY λᵢ≥0, (4) complementary slackness. Missing dual feasibility is the most common KKT error."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Write all four KKT conditions for: min x₁²+2x₂² s.t. x₁+x₂≤3, x₁≥0. Solve for x*.

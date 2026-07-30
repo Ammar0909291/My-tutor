@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cx.rouche-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cx.rouche-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:597b025e955fac9dff01c8aeebea799d516a8608b8aacf694dabd3522695bc31",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cx.rouche-theorem.md": "sha256:b119c0b18fa38403a0147d6e8038ad2fb9c066a44c28b1188ad36db02081cd85"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.cx.rouche-theorem",
+    "name": "Rouché's Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.cx.argument-principle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cx.rouche-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cx.rouche-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cx.rouche-theorem.md": "sha256:b119c0b18fa38403a0147d6e8038ad2fb9c066a44c28b1188ad36db02081cd85"
+      },
+      "contentHash": "sha256:9ca25f584aa3e22ad1da96ee6e44662e9c8502baf6fb105d3067cb5ae920753c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cx.rouche-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.rouche-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.rouche-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.rouche-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.rouche-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.rouche-theorem.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.rouche-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.rouche-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.rouche-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.rouche-theorem.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.rouche-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.rouche-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cx.rouche-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cx.rouche-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cx.rouche-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cx.rouche-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cx.rouche-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State **Rouché's Theorem** — if $f$ and $g$ are holomorphic inside and on a simple closed contour $C$, and $|f(z)-g(z)|<|g(z)|$ for all $z\\in C$, then $f$ and $g$ have the **same number of zeros** (counted with multiplicity) inside $C$ — and correctly identify the hypothesis as a DOMINATION condition on the contour (not in the interior).\n- LO2: Apply Rouché's Theorem to **count zeros of polynomials** by choosing a dominant term $g$ and verifying the domination condition $|f-g|<|g|$ on an appropriate circle, recognizing that the \"easy\" direction is to let $g$ be the dominant monomial and $f$ be the full polynomial.\n- LO3: Derive the **Fundamental Theorem of Algebra** as a corollary of Rouché's Theorem — for $p(z)=a_nz^n+\\cdots+a_0$, take $g(z)=a_nz^n$ and $C=|z|=R$ for large $R$; show the domination condition holds, conclude $p$ and $g$ have the same number of zeros inside $|z|=R$; since $g$ has $n$ zeros (all at the origin), $p$ has $n$ zeros.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "ROUCHE-DOMINATION-MUST-HOLD-INSIDE",
+      "content": "| MC-1 | ROUCHE-DOMINATION-MUST-HOLD-INSIDE | Believing the domination condition $|f(z)-g(z)|<|g(z)|$ must hold for all $z$ inside the contour $C$ (not just on $C$), making the theorem harder to apply and missing that the pointwise check on the boundary curve suffices | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "FTA-VIA-ROUCHE-ANY-RADIUS-WORKS",
+      "content": "| MC-2 | FTA-VIA-ROUCHE-ANY-RADIUS-WORKS | Believing that in the FTA proof via Rouché, any choice of circle radius $R$ makes the domination condition hold, missing that $R$ must be large enough for the leading monomial to dominate the lower-order terms on $|z|=R$ | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "ROUCHE-GIVES-SAME-ZERO-LOCATIONS",
+      "content": "| MC-3 | ROUCHE-GIVES-SAME-ZERO-LOCATIONS | Believing Rouché's theorem concludes that $f$ and $g$ have the same ZEROS (same locations), not just the same NUMBER of zeros — missing that the theorem is a counting result, not a location result | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "The Domination Condition and What It Guarantees (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Domination Condition and What It Guarantees (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "Using Rouché to Locate Zeros in Annuli (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Using Rouché to Locate Zeros in Annuli (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "FTA as a Rouché Corollary (Primitive P37: Classify)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"FTA as a Rouché Corollary (Primitive P37: Classify)\",\"primitives\":[\"P37\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. State Rouché's theorem precisely, identifying all hypotheses (holomorphicity conditions, domination condition, where it must hold) and the conclusion (what exactly is equal between $f$ and $g$).\n  2. Count the zeros of $f(z)=z^6+10z^2+2$ inside $|z|=2$ using Rouché. Identify your choice of $g$, verify the domination condition explicitly, and state the count.\n  3. Show that the polynomial $p(z)=z^5+2z^3+z-6$ has exactly one zero inside $|z|=1$ using Rouché (hint: compare with $g(z)=-6$).\n  4. Use Rouché's theorem to prove that if $|a|>e$ then $f(z)=e^z-az^n$ has exactly $n$ zeros inside the unit disk $|z|<1$.\n- **P76 (Transfer Probe, mode = independence)**: \"In control theory, the stability of a linear time-invariant system is determined by the locations of the poles of its transfer function $H(s)=N(s)/D(s)$ — the system is stable if and only if all poles of $H$ lie in the left half-plane $\\mathrm{Re}(s)<0$. (a) The Nyquist criterion in control theory uses a winding-number argument: if the Nyquist contour (a large semicircle enclosing the right half-plane) is mapped by $1+H(s)$, the number of clockwise encirclements of the origin equals the number of unstable poles. Using this lesson's argument-principle foundation for Rouché's theorem, explain why counting winding numbers is equivalent to counting zeros/poles inside a contour. (b) Suppose a nominal stable system $D_0(s)$ is perturbed to $D_0(s)+\\Delta(s)$. Using Rouché's theorem (with $g=D_0$ and $f=D_0+\\Delta$), state a sufficient condition on $|\\Delta(j\\omega)|$ for all real $\\omega$ (on the imaginary axis) that guarantees the perturbed system remains stable — and explain why this is a robustness guarantee.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cx.argument-principle` (the argument principle: $\\frac{1}{2\\pi i}\\oint_C\\frac{f'}{f}\\,dz = Z - P$ counts zeros minus poles; winding numbers; the connection between contour integrals and counts of zeros).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cx.rouche-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cx.rouche-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cx.argument-principle` (the argument principle — $\\frac{1}{2\\pi i}\\oint_C\\frac{f'}{f}\\,dz$ counts zeros minus poles — and winding numbers — since Rouché's proof is a continuity argument on the winding number).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cx.rouche-theorem.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

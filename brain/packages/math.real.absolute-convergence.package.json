@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.real.absolute-convergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.real.absolute-convergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a8c69729450e18bfbbc95383a2e6da3d284da8eb96f55a91bff85f4666867db9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.real.absolute-convergence.md": "sha256:3b11b49d1c9336a020e487623e3c6855d5942e7a256e8e75c90ccf32b7aeb107"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.real.absolute-convergence",
+    "name": "Absolute Convergence",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.real.series-rigorous"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.real.absolute-convergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.real.absolute-convergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.real.absolute-convergence.md": "sha256:3b11b49d1c9336a020e487623e3c6855d5942e7a256e8e75c90ccf32b7aeb107"
+      },
+      "contentHash": "sha256:c2bd873ea2a7be89c32f4c9d8dafbd6e23cbbf7113f988f9ba9b5adbd0256d16",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.real.absolute-convergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.absolute-convergence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.absolute-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.absolute-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.absolute-convergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.absolute-convergence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.absolute-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.absolute-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.real.absolute-convergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.real.absolute-convergence.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.real.absolute-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.real.absolute-convergence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.real.absolute-convergence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a series $\\sum a_n$ as **absolutely convergent** if $\\sum|a_n|$ converges (as an ordinary series of non-negative terms), and correctly determine, for a given series, whether it is absolutely convergent by testing $\\sum|a_n|$.\n- LO2: State and apply the theorem that absolute convergence **implies** ordinary convergence ($\\sum|a_n|$ converges $\\implies\\sum a_n$ converges), and correctly distinguish this from the (generally false) converse — recognizing series that converge but NOT absolutely (**conditionally convergent** series).\n- LO3: State the **rearrangement dichotomy**: an absolutely convergent series may be rearranged into ANY order without changing its sum, while a conditionally convergent series can be rearranged to sum to ANY prescribed real number (or diverge) — and correctly identify which behavior applies to a given series.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "CONVERGENCE-CONFLATED-WITH-ABSOLUTE-CONVERGENCE",
+      "content": "| MC-1 | CONVERGENCE-CONFLATED-WITH-ABSOLUTE-CONVERGENCE | Believing every convergent series is automatically absolutely convergent, missing conditionally convergent series (which converge but not absolutely) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "REARRANGEMENT-ASSUMED-ALWAYS-SAFE",
+      "content": "| MC-2 | REARRANGEMENT-ASSUMED-ALWAYS-SAFE | Believing the sum of a series is always independent of term order, regardless of whether the series is absolutely or only conditionally convergent | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "ABSOLUTE-VALUE-SERIES-TEST-SKIPPED-AS-REDUNDANT",
+      "content": "| MC-3 | ABSOLUTE-VALUE-SERIES-TEST-SKIPPED-AS-REDUNDANT | Believing it is unnecessary to separately test $\\sum|a_n|$ once $\\sum a_n$'s convergence is established, missing that absolute convergence is a strictly stronger, separately-verified property | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "Absolute Convergence Implies Convergence, and the Gap Between Them (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Absolute Convergence Implies Convergence, and the Gap Between Them (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "The Rearrangement Dichotomy (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Rearrangement Dichotomy (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Determine whether $\\sum_{n=1}^\\infty\\frac{(-1)^n}{n^3}$ is absolutely convergent, conditionally convergent, or divergent, justifying via the absolute-value series.\n  2. Determine the same for $\\sum_{n=1}^\\infty\\frac{(-1)^{n+1}}{\\sqrt n}$.\n  3. Explain why absolute convergence implies convergence, sketching the Cauchy-criterion argument from Component 3 in your own words.\n  4. Explain, using the rearrangement dichotomy, why a physicist rearranging terms in an absolutely convergent series (e.g. to group terms conveniently) never introduces an error, while the same operation on a conditionally convergent series genuinely could.\n- **P76 (Transfer Probe, mode = independence)**: \"A power series $\\sum_{n=0}^\\infty c_n x^n$ converges absolutely for $|x|<R$ (strictly inside its radius of convergence $R$) — this is a standard fact from the theory of power series. (a) Using this lesson's rearrangement dichotomy, explain why this absolute-convergence guarantee is what allows power series to be freely rearranged, differentiated, and integrated term-by-term inside their radius of convergence without changing the represented function — an operation that would NOT be justified if the series were only conditionally convergent. (b) At the boundary $|x|=R$ itself, a power series can sometimes converge only conditionally (or not at all). Explain what could go wrong, using this lesson's Riemann rearrangement fact, if someone tried to rearrange terms of a power series evaluated exactly at such a boundary point.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.real.series-rigorous` (the rigorous $\\varepsilon$–$N$ definition of series convergence via partial sums, and standard convergence tests).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.real.absolute-convergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.real.absolute-convergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.real.series-rigorous` (the rigorous $\\varepsilon$–$N$/Cauchy-criterion framework for series convergence, used directly in this concept's absolute-convergence-implies-convergence proof).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists `math.seq.absolute-convergence`, checked via `ls docs/curriculum/blueprints/` and confirmed NOT YET authored. $P76_{mode}=$ **independence** (with the P76 probe above engaging the power-series application directly, since this concept's connection to power series is pedagogically central even before a dedicated `math.seq` treatment exists — consistent with this corpus's established rule that transfer probes may reference a cross-linked concept without requiring its Blueprint to already exist).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.real.absolute-convergence.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

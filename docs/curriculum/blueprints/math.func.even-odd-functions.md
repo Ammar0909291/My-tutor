@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.even-odd-functions |
-| Title | Even and Odd Functions |
+| name | Even and Odd Functions |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -121,7 +121,7 @@ Step 1 — "After computing f(−x): compare with f(x) — if equal, EVEN. Compa
 **TB-R03 (MC-3 EVEN-MEANS-SYMMETRIC-ABOUT-x-AXIS):**
 Step 1 — "Even function: f(−x)=f(x) means the y-values at x and −x are THE SAME. On the graph: the point (x, f(x)) has a mirror image (−x, f(x)) — same height, reflected across the y-axis." Step 2 — x-axis symmetry means (x,y) and (x,−y) are both on the graph. For a function, both (x, f(x)) and (x, −f(x)) would be on the graph. But a function can have only one y-value per x — so x-axis symmetry is impossible for any non-zero function. Step 3 — "Even → y-axis. Odd → origin. x-axis is never a function's symmetry axis (except f=0)."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Classify each as even, odd, or neither: (a) f(x)=x⁴−6x²+1; (b) g(x)=x³+x; (c) h(x)=x²+2x; (d) k(x)=(x³−x)/(x²+1).

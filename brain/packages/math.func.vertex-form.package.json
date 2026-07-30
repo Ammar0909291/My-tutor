@@ -1,0 +1,822 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.vertex-form-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.vertex-form",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:54dab9e6dc63a830ec6ba03bea47ca436a2d113ec761e1b52f1dd30e07253d90",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.vertex-form.md": "sha256:1525b209ceb31db0f2b1970b608f3f26eb1a0bfa70cea1a59297684ad0e07ef0"
+    },
+    "assetCount": 25,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 20,
+      "mastery_probe": 1
+    },
+    "ruleCount": 20
+  },
+  "concept": {
+    "conceptId": "math.func.vertex-form",
+    "name": "Vertex Form of a Quadratic",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.func.quadratic-function",
+      "math.alg.completing-the-square"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.vertex-form-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.vertex-form (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.vertex-form.md": "sha256:1525b209ceb31db0f2b1970b608f3f26eb1a0bfa70cea1a59297684ad0e07ef0"
+      },
+      "contentHash": "sha256:b5192562d3bfb78b7b2523e58468c4e0402b96fe4ecbacd59d9059f09b764b20",
+      "ruleCount": 20,
+      "bandCounts": {
+        "3": 20
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.vertex-form.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.vertex-form.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.vertex-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.vertex-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.vertex-form/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.vertex-form",
+      "title": "Learning Objective",
+      "content": "Given a quadratic function in standard form f(x)=ax²+bx+c, the student converts it to vertex form f(x)=a(x−h)²+k by completing the square, reads the vertex (h,k) and axis of symmetry x=h directly from vertex form, uses the vertex to determine the function's minimum (a>0) or maximum (a<0) value, converts back from vertex form to standard form by expanding, and recognizes vertex form as the canonical form connecting quadratic functions to transformations of f(x)=x².",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.vertex-form",
+      "title": "VERTEX-FROM-STANDARD-WRONG",
+      "content": "| MC-1 | VERTEX-FROM-STANDARD-WRONG | Student reads the vertex directly from standard form ax²+bx+c as (b, c), or computes vertex incorrectly as (−b/2a, c) without substituting back; does not use the full formula h=−b/(2a), k=f(h) | Type 5 — instruction-induced (the b and c coefficients appear prominently in standard form; students try to read off the vertex from these visible constants rather than deriving h and k from the full completing-the-square process) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.vertex-form",
+      "title": "HORIZONTAL-SHIFT-SIGN-ERROR",
+      "content": "| MC-2 | HORIZONTAL-SHIFT-SIGN-ERROR | Student reads f(x)=a(x−h)²+k as vertex at (−h, k), applying an extra sign flip; e.g., vertex form (x−3)² → vertex at (−3, 0) instead of (3, 0) | Type 3 — language contamination ((x−h) contains a minus sign; students interpret the minus as \"the x-coordinate is negative h\" rather than \"the shift is h to the right\") |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.vertex-form",
+      "title": "K-IS-THE-MINIMUM-VALUE-ALWAYS",
+      "content": "| MC-3 | K-IS-THE-MINIMUM-VALUE-ALWAYS | Student identifies k as the minimum (not the maximum) regardless of the sign of a; does not connect k to a minimum when a>0 but a maximum when a<0 | Type 1 — overgeneralization (the most common example is a>0, which gives a minimum at k; student memorizes \"vertex y-value is the minimum\" without conditioning on the direction of opening) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "a: vertical stretch/reflection (same as in transformations). a>0 → opens up; a<0 → opens down.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"a: vertical stretch/reflection (same as in transformations). a>0 → opens up; a<0 → opens down.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "h: horizontal shift. **Positive h → vertex at x=h to the RIGHT of origin.** (The minus sign inside x−h is part of the formula; h itself is the right-shift.)",
+      "content": "{\"id\":\"TA-2\",\"title\":\"h: horizontal shift. **Positive h → vertex at x=h to the RIGHT of origin.** (The minus sign inside x−h is part of the formula; h itself is the right-shift.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "k: vertical shift. Vertex at y=k. k is the minimum (a>0) or maximum (a<0).",
+      "content": "{\"id\":\"TA-3\",\"title\":\"k: vertical shift. Vertex at y=k. k is the minimum (a>0) or maximum (a<0).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "Vertex: **(h, k)**.",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Vertex: **(h, k)**.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "Axis of symmetry: **x=h**.",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Axis of symmetry: **x=h**.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "f(x)=2(x−3)²+1: a=2, h=3, k=1. Vertex=(3,1). Opens up. Minimum y=1. Axis x=3.",
+      "content": "{\"id\":\"TA-6\",\"title\":\"f(x)=2(x−3)²+1: a=2, h=3, k=1. Vertex=(3,1). Opens up. Minimum y=1. Axis x=3.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "g(x)=−(x+2)²+5: rewrite as −(x−(−2))²+5. a=−1, h=−2, k=5. Vertex=(−2,5). Opens down. Maximum y=5.",
+      "content": "{\"id\":\"TA-7\",\"title\":\"g(x)=−(x+2)²+5: rewrite as −(x−(−2))²+5. a=−1, h=−2, k=5. Vertex=(−2,5). Opens down. Maximum y=5.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "h(x)=3x²−12x+13: need to convert. (Done in A02.)",
+      "content": "{\"id\":\"TA-8\",\"title\":\"h(x)=3x²−12x+13: need to convert. (Done in A02.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "CORRECT → \"Vertex form a(x−h)²+k: vertex=(h,k). The sign inside the bracket is OPPOSITE to h (x−h → vertex at +h). k is min if a>0, max if a<0.\" → A02",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Vertex form a(x−h)²+k: vertex=(h,k). The sign inside the bracket is OPPOSITE to h (x−h → vertex at +h). k is min if a>0, max if a<0.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "PARTIAL (reads vertex as (−h, k) when form shows (x−3)²) → \"In (x−3)²: what value of x makes x−3=0? That x is the vertex's x-coordinate — which equals +3, not −3.\" → TB-R02 → A02",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (reads vertex as (−h, k) when form shows (x−3)²) → \\\"In (x−3)²: what value of x makes x−3=0? That x is the vertex's x-coordinate — which equals +3, not −3.\\\" → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "INCORRECT → TB-R02 → A02",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "NO_RESPONSE → \"f(x)=(x−4)²+2. What x makes the square term equal to zero? At that x, what is f(x)? That point is the vertex.\" → TB-R02 → A02",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"f(x)=(x−4)²+2. What x makes the square term equal to zero? At that x, what is f(x)? That point is the vertex.\\\" → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "CORRECT → \"Complete the square: group x-terms, factor a if needed, add/subtract (half-coefficient)², write as a perfect square. Vertex (h,k) read directly from a(x−h)²+k.\" → A03",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"Complete the square: group x-terms, factor a if needed, add/subtract (half-coefficient)², write as a perfect square. Vertex (h,k) read directly from a(x−h)²+k.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "PARTIAL (adds (b/2)² but forgets to subtract it, getting a wrong k) → \"When you add (b/2)² inside the bracket, you've added a(b/2)² to the function. You must subtract the same amount outside to keep the function equal. Always add AND subtract.\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL (adds (b/2)² but forgets to subtract it, getting a wrong k) → \\\"When you add (b/2)² inside the bracket, you've added a(b/2)² to the function. You must subtract the same amount outside to keep the function equal. Always add AND subtract.\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "INCORRECT → TB-R01 → A03",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "NO_RESPONSE → \"For f(x)=x²−4x+7: what is half of −4? Square it: (−2)²=4. Add 4 and subtract 4: x²−4x+4+7−4=(x−2)²+3.\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"For f(x)=x²−4x+7: what is half of −4? Square it: (−2)²=4. Add 4 and subtract 4: x²−4x+4+7−4=(x−2)²+3.\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "CORRECT → \"Vertex form → standard: expand the square and collect. Standard → vertex: complete the square. k=min (a>0) or max (a<0). y-intercept=f(0)=ah²+k ≠ vertex unless h=0. Zeros symmetric about x=h.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-17\",\"title\":\"CORRECT → \\\"Vertex form → standard: expand the square and collect. Standard → vertex: complete the square. k=min (a>0) or max (a<0). y-intercept=f(0)=ah²+k ≠ vertex unless h=0. Zeros symmetric about x=h.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 131,
+        "endLine": 131
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "PARTIAL (correctly finds vertex but states k is always the minimum) → \"Check: a=−2 in f(x)=−2(x−1)²+8. Does the parabola open up or down? If it opens DOWN, is the vertex the lowest or highest point?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-18\",\"title\":\"PARTIAL (correctly finds vertex but states k is always the minimum) → \\\"Check: a=−2 in f(x)=−2(x−1)²+8. Does the parabola open up or down? If it opens DOWN, is the vertex the lowest or highest point?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 132,
+        "endLine": 132
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-19\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 133,
+        "endLine": 133
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.vertex-form",
+      "title": "NO_RESPONSE → \"For f(x)=−(x−2)²+9: substitute x=2 to find f(2). Can f(x) ever EXCEED this value? Check f(0), f(1), f(3), f(4).\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"NO_RESPONSE → \\\"For f(x)=−(x−2)²+9: substitute x=2 to find f(2). Can f(x) ever EXCEED this value? Check f(0), f(1), f(3), f(4).\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 134,
+        "endLine": 134
+      }
+    },
+    {
+      "assetId": "math.func.vertex-form/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.vertex-form",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Convert to vertex form by completing the square: (a) f(x)=x²−10x+29; (b) g(x)=2x²+8x+3; (c) h(x)=−x²+4x+1.\n2. From vertex form, identify vertex, axis of symmetry, and maximum/minimum: (a) f(x)=3(x−2)²−7; (b) g(x)=−½(x+4)²+6.\n3. A projectile has height h(t)=−5t²+20t+1 meters (t in seconds). Convert to vertex form. What is the maximum height, and when does it occur?\n4. The vertex of a parabola is (−1, 4) and it passes through (1, 0). Find the equation in both vertex form and standard form.\n\n**P55 — Reflect & Consolidate:** \"Standard→vertex: complete the square, factor a first. Vertex→standard: expand. Vertex=(h,k): h=−b/(2a), k=f(h). Sign rule: (x−h)² → vertex at +h. k=min iff a>0; k=max iff a<0. y-intercept=ah²+k (not k).\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe vertex form extends to conic sections. An ellipse centered at (h,k) with semi-axes a and b satisfies (x−h)²/a²+(y−k)²/b²=1. (a) Identify the center and semi-axes of (x−2)²/9+(y+1)²/4=1. (b) Show that when b=a and the equation is a circle, the vertex form of the standard circle equation (x−h)²+(y−k)²=r² reveals center (h,k) by the same sign-flip logic as the parabola's vertex. (c) For a parabola in vertex form y=a(x−h)²+k, identify h and k as the focus-shifts in the conic-section derivation.\n\n**P55 — Reflect & Consolidate:** \"The (x−h)²+(y−k)² and (x−h)²/a² patterns unify vertex/center identification across conics. The sign-flip rule (x−h → center at +h) applies universally in all shifted conics, not just parabolas. Vertex form is the entry point to the broader language of conic sections.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=2x²−12x+13. (a) Convert to vertex form. (b) State vertex, axis of symmetry, and minimum value. (c) Find zeros using vertex form (solve 2(x−3)²+k=0 for the k you found). (d) Find the y-intercept from standard form and verify using vertex form. (e) Sketch the parabola, marking vertex, zeros, y-intercept, and axis of symmetry.\"\n\n**P55 — Reflect & Consolidate:** \"Vertex form is the synthesis of all parabola information: it encodes the transformation from y=x² (translation right h, up k, vertical stretch a). Every feature follows: zeros = h±√(−k/a) (when k/a<0), y-intercept = ah²+k, axis x=h, max/min = k with direction from a.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.vertex-form complete\n- Score 3/5 → REVIEW sign convention for h and completing-the-square algorithm; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.quadratic-function or math.alg.completing-the-square; reassign\n\n**P78 — Completion:** Vertex form certified. Student converts between standard and vertex forms by completing the square, reads vertex, axis, and extremum directly from vertex form, correctly interprets the sign of h, identifies minimum vs. maximum from the sign of a, and connects vertex form to the transformation language of function transformations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.vertex-form.md",
+        "startLine": 147,
+        "endLine": 174
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

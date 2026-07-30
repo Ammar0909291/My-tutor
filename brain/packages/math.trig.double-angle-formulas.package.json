@@ -1,0 +1,332 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.double-angle-formulas-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.double-angle-formulas",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1cddb35d873a64ffd81408afbd74a8cbece27151249e5b82b63ea18650bae325",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.double-angle-formulas.md": "sha256:f14d65252ba4ab0c490bde3341ad723ac947058cf679c9b06c9b87ad46312c85"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.double-angle-formulas",
+    "name": "Double-Angle Formulas",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.trig.sum-difference-formulas"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.double-angle-formulas-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.double-angle-formulas (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.double-angle-formulas.md": "sha256:f14d65252ba4ab0c490bde3341ad723ac947058cf679c9b06c9b87ad46312c85"
+      },
+      "contentHash": "sha256:0a3fbd827b6b57f18592058b9e81665f3dd42194c848d7fa6786c110916ed9e5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.double-angle-formulas.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.double-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.double-angle-formulas\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.double-angle-formulas.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.double-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.double-angle-formulas\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.double-angle-formulas.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.double-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.double-angle-formulas\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.double-angle-formulas.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.double-angle-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.double-angle-formulas\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.double-angle-formulas/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "Double-Angle Formulas — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.sum-difference-formulas**: sin(A+B) = sinA cosB + cosA sinB; cos(A+B) = cosA cosB − sinA sinB; these are the source of the double-angle formulas\n\n### Target Knowledge State\nStudent derives sin 2θ = 2 sin θ cos θ and cos 2θ = cos²θ − sin²θ from the sum formulas by setting A = B = θ. Student states the three equivalent forms of cos 2θ (choosing based on context) and derives tan 2θ = 2 tan θ/(1 − tan²θ). Student applies the formulas to compute exact values and simplify expressions, including the power-reducing forms sin²θ = (1 − cos 2θ)/2 and cos²θ = (1 + cos 2θ)/2.\n\n### Conceptual Obstacles\n1. Writing sin 2θ = 2 sin θ (doubling the value instead of using the product formula)\n2. Choosing the inefficient form of cos 2θ given only one of sin θ or cos θ\n3. Omitting the (1 − tan²θ) denominator in tan 2θ — writing 2 tan θ instead\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "DOUBLE-ANGLE-SCALING",
+      "content": "| MC-1 | DOUBLE-ANGLE-SCALING | Student writes sin 2θ = 2 sin θ, treating 2θ as a scalar multiplication on the function value | Any \"find sin 2θ\" problem |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "WRONG-COS-DOUBLE-FORM",
+      "content": "| MC-2 | WRONG-COS-DOUBLE-FORM | Student uses cos²θ − sin²θ when only cos θ is known (requiring an extra step to find sin θ), instead of using 2cos²θ − 1 directly | \"Given cos θ, find cos 2θ\" problems |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "TAN-DOUBLE-NO-DENOMINATOR",
+      "content": "| MC-3 | TAN-DOUBLE-NO-DENOMINATOR | Student writes tan 2θ = 2 tan θ and omits the (1 − tan²θ) denominator | Any \"find tan 2θ\" problem |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "Deriving the Double-Angle Formulas",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving the Double-Angle Formulas\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 64,
+        "endLine": 124
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "Computing Double-Angle Values",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Computing Double-Angle Values\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 124,
+        "endLine": 170
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "Choosing the Right Form of cos 2θ",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Choosing the Right Form of cos 2θ\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 170,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 220,
+        "endLine": 425
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Given sin θ = 3/5 (θ in Q1), find sin 2θ, cos 2θ, and tan 2θ exactly.\n\n**Problem 2.** Find sin(2·30°) using the double-angle formula. Verify against the known value of sin 60°.\n\n**Problem 3.** Simplify: 2sin(x/2)cos(x/2).\n\n**Problem 4.** Given tan θ = 2, find tan 2θ.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. cos θ = 4/5. sin 2θ = 2·(3/5)·(4/5) = **24/25**. cos 2θ = (4/5)²−(3/5)² = **7/25**. tan 2θ = sin2θ/cos2θ = 24/7 ✓\n\n2. sin(60°) = 2·sin30°·cos30° = 2·(1/2)·(√3/2) = **√3/2**. Matches the known sin 60° = √3/2 ✓\n\n3. 2sin(x/2)cos(x/2) = sin(2·x/2) = **sin x** ✓\n\n4. tan 2θ = 2·2/(1−4) = **−4/3** ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* The range of a projectile launched at angle θ is R = (v₀²/g)·sin 2θ.\n\n*(a)* Show that maximum range occurs at θ = 45°.\n\n*(b)* Find the ratio R(30°)/R(45°) — the range at 30° as a fraction of the maximum range.\n\n*Expected answer:*\n\n*(a)* sin 2θ is maximized when 2θ = π/2, i.e., **θ = π/4 = 45°**. At this angle, sin 2θ = sin 90° = 1.\n\n*(b)* R(30°)/R(45°) = sin(60°)/sin(90°) = (√3/2)/1 = **√3/2 ≈ 0.866**. So the range at 30° is about 86.6% of the maximum.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (both parts correct).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.8 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 4–5/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed item; scaling error → B01; form selection → B02; tan denominator → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; re-derive from sum formulas; emphasize product structure of sin 2θ; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.double-angle-formulas` complete. Threshold 0.8 requires 4/5 correct.\n\n**Unlocks:** math.trig.half-angle-formulas (derives from power-reducing forms of cos 2θ).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 223,
+        "endLine": 319
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — derive directly from sum-difference formulas.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Derive sin 2θ and cos 2θ by setting A=B=θ in the sum formulas; show all three cos 2θ forms; derive tan 2θ; derive power-reducing identities\n2. **A02 P04 PATTERN INDUCTION** — Gallery of exact-value computations from given sin/cos/tan; automate form-selection\n3. **A03 P06 CONTRAST PAIR** — Three forms of cos 2θ: contrast which form requires the fewest steps for \"given cos θ only\", \"given sin θ only\", \"given both\"\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Given cos θ = −3/5 (θ in Q3), find sin 2θ, cos 2θ, tan 2θ. |\n| R2 | 3 days | Simplify: cos²(3x) − sin²(3x). |\n| R3 | 7 days | Prove: sin 3θ = 3 sin θ − 4 sin³θ. (Hint: sin 3θ = sin(2θ+θ).) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 369,
+        "endLine": 379
+      }
+    },
+    {
+      "assetId": "math.trig.double-angle-formulas/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.double-angle-formulas",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.trig.half-angle-formulas |\n| Requires (Tier-1) | math.trig.sum-difference-formulas |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent projectile-range problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.double-angle-formulas.md",
+        "startLine": 379,
+        "endLine": 393
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

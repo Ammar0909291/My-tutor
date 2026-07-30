@@ -1,0 +1,958 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.linear-programming-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.linear-programming",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:efc9140fc7365514e3d53c8717c422588b37904474f7825627be1fae5a354c3b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.linear-programming.md": "sha256:e9ce7218824b9f5b9b9523828b421f6c44c4f15db5edfc3b551242ca72ecea42"
+    },
+    "assetCount": 29,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 24,
+      "mastery_probe": 1
+    },
+    "ruleCount": 24
+  },
+  "concept": {
+    "conceptId": "math.opt.linear-programming",
+    "name": "Linear Programming",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.opt.convex-optimization",
+      "math.linalg.linear-system"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.linear-programming-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.linear-programming (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.linear-programming.md": "sha256:e9ce7218824b9f5b9b9523828b421f6c44c4f15db5edfc3b551242ca72ecea42"
+      },
+      "contentHash": "sha256:380db783345b8bcdfe15f14018c87c3b00c0dbc0e432cc26bea8f6ac1c3ade8e",
+      "ruleCount": 24,
+      "bandCounts": {
+        "3": 24
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-23",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-23",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-24",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-24",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.linear-programming.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.linear-programming.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.linear-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.linear-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.linear-programming/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.linear-programming",
+      "title": "Learning Objective",
+      "content": "Given a linear program in standard form (min cᵀx s.t. Ax=b, x≥0), the student identifies the feasible polytope, states that the optimal solution occurs at a vertex (basic feasible solution), executes two iterations of the simplex method (pivot selection and basis update), formulates the dual LP and applies LP duality (weak and strong duality, complementary slackness), and selects between simplex and interior-point methods by problem structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.linear-programming",
+      "title": "OPTIMAL-INTERIOR-LP",
+      "content": "| MC-1 | OPTIMAL-INTERIOR-LP | Student believes the LP optimum can occur in the interior of the feasible polytope; does not know the extreme-point (vertex) theorem | Type 2 — perceptual intuition (smooth optimisation finds interior optima; LP looks the same) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.linear-programming",
+      "title": "DUAL-ALWAYS-EQUALS-PRIMAL",
+      "content": "| MC-2 | DUAL-ALWAYS-EQUALS-PRIMAL | Student applies strong duality unconditionally; does not check whether both primal and dual are feasible (strong duality fails if primal is infeasible or unbounded) | Type 5 — instruction-induced (\"LP duality\" is taught as strong duality; caveats are added later) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.linear-programming",
+      "title": "SIMPLEX-EXPONENTIAL-IN-PRACTICE",
+      "content": "| MC-3 | SIMPLEX-EXPONENTIAL-IN-PRACTICE | Student dismisses simplex as exponential-time and therefore impractical; does not know that simplex runs in polynomial expected time and dominates interior-point for sparse/warm-started problems | Type 3 — language contamination (worst-case exponential ≠ typical exponential; courses often emphasise worst case) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "(0,0): 0; (3,0): −3; (3,1): −5; (1,3): −7; (0,3): −6.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"(0,0): 0; (3,0): −3; (3,1): −5; (1,3): −7; (0,3): −6.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "CORRECT → \"LP optimum is always at a vertex. The simplex method walks from vertex to vertex along edges.\" → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"CORRECT → \\\"LP optimum is always at a vertex. The simplex method walks from vertex to vertex along edges.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "PARTIAL (finds optimum numerically, misses vertex interpretation) → \"Can the optimum be at (2,2)? Check if (2,2) is a vertex of the feasible polytope.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"PARTIAL (finds optimum numerically, misses vertex interpretation) → \\\"Can the optimum be at (2,2)? Check if (2,2) is a vertex of the feasible polytope.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "NO_RESPONSE → \"How many vertices does the feasible polytope in the 2D example have?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"NO_RESPONSE → \\\"How many vertices does the feasible polytope in the 2D example have?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "Basis = {s₁,s₂,s₃}, BFS: x₁=x₂=0, s₁=4,s₂=3,s₃=3. Objective=0.",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Basis = {s₁,s₂,s₃}, BFS: x₁=x₂=0, s₁=4,s₂=3,s₃=3. Objective=0.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "Reduced costs: c̄₁=−1, c̄₂=−2. Most negative: x₂ enters.",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Reduced costs: c̄₁=−1, c̄₂=−2. Most negative: x₂ enters.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "Ratios (minimum ratio test): 4/1=4, 3/∞=∞, 3/1=3. Min ratio at row 3 → s₃ leaves.",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Ratios (minimum ratio test): 4/1=4, 3/∞=∞, 3/1=3. Min ratio at row 3 → s₃ leaves.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 71,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "Pivot on (row 3, col x₂): new basis {s₁,s₂,x₂}.",
+      "content": "{\"id\":\"TA-9\",\"title\":\"Pivot on (row 3, col x₂): new basis {s₁,s₂,x₂}.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "New BFS: x₂=3, x₁=0, s₁=1, s₂=3. Objective=−6.",
+      "content": "{\"id\":\"TA-10\",\"title\":\"New BFS: x₂=3, x₁=0, s₁=1, s₂=3. Objective=−6.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "Recompute reduced costs: c̄₁=1 (updated via pivot). Wait, let me recalculate. After pivoting x₂ in: row 3 becomes x₂=3−s₃. Updated row 1: s₁=4−x₁−x₂=4−x₁−(3−s₃)=1−x₁+s₃. Updated objective: −x₁−2x₂=−x₁−2(3−s₃)=−6−x₁+2s₃. Reduced cost of x₁=−1 (still negative → x₁ enters). Minimum ratio test on updated rows: row1: 1/1=1, row2: 3/1=3. x₁ enters via row1 (s₁ leaves). New BFS: x₁=1,x₂=3, objective=−7.",
+      "content": "{\"id\":\"TA-11\",\"title\":\"Recompute reduced costs: c̄₁=1 (updated via pivot). Wait, let me recalculate. After pivoting x₂ in: row 3 becomes x₂=3−s₃. Updated row 1: s₁=4−x₁−x₂=4−x₁−(3−s₃)=1−x₁+s₃. Updated objective: −x₁−2x₂=−x₁−2(3−s₃)=−6−x₁+2s₃. Reduced cost of x₁=−1 (still negative → x₁ enters). Minimum ratio test on updated rows: row1: 1/1=1, row2: 3/1=3. x₁ enters via row1 (s₁ leaves). New BFS: x₁=1,x₂=3, objective=−7.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "All reduced costs ≥0 → optimal.",
+      "content": "{\"id\":\"TA-12\",\"title\":\"All reduced costs ≥0 → optimal.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "CORRECT → \"Simplex: enter most-negative-reduced-cost variable, pivot via minimum-ratio-test, repeat until no negative reduced costs.\" → A03",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"Simplex: enter most-negative-reduced-cost variable, pivot via minimum-ratio-test, repeat until no negative reduced costs.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "PARTIAL (understands pivot, can't do ratio test) → \"The minimum ratio test prevents which variable from going negative?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL (understands pivot, can't do ratio test) → \\\"The minimum ratio test prevents which variable from going negative?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "NO_RESPONSE → \"In iteration 1, why do we compute 4/1, ∞, 3/1 as ratios? What are we checking?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"In iteration 1, why do we compute 4/1, ∞, 3/1 as ratios? What are we checking?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "CORRECT → \"Weak duality: primal ≥ dual always. Strong duality: equal at optimum. Complementary slackness: optimal iff each constraint-variable pair has at least one zero.\" → A04",
+      "content": "{\"id\":\"TA-17\",\"title\":\"CORRECT → \\\"Weak duality: primal ≥ dual always. Strong duality: equal at optimum. Complementary slackness: optimal iff each constraint-variable pair has at least one zero.\\\" → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 102,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "PARTIAL (knows duality theorem, can't apply CS) → \"At the primal optimum, x₁*=1>0 — what does CS say about the dual constraint involving x₁?\" → TB-R02 (extend) → A04",
+      "content": "{\"id\":\"TA-18\",\"title\":\"PARTIAL (knows duality theorem, can't apply CS) → \\\"At the primal optimum, x₁*=1>0 — what does CS say about the dual constraint involving x₁?\\\" → TB-R02 (extend) → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "INCORRECT → TB-R02 → A04",
+      "content": "{\"id\":\"TA-19\",\"title\":\"INCORRECT → TB-R02 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "NO_RESPONSE → \"Weak duality says cᵀx≥bᵀy. If primal value is 7 and dual value is 5, is this consistent?\" → TB-R02 → A04",
+      "content": "{\"id\":\"TA-20\",\"title\":\"NO_RESPONSE → \\\"Weak duality says cᵀx≥bᵀy. If primal value is 7 and dual value is 5, is this consistent?\\\" → TB-R02 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "CORRECT → \"Simplex is vertex-walking; interior-point is path-through-middle. Both solve LP in practice; choice depends on problem structure.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-21\",\"title\":\"CORRECT → \\\"Simplex is vertex-walking; interior-point is path-through-middle. Both solve LP in practice; choice depends on problem structure.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 120,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "PARTIAL → \"For re-optimising after a small change to b, which algorithm benefits from warm-starting?\" → Gate (after brief answer)",
+      "content": "{\"id\":\"TA-22\",\"title\":\"PARTIAL → \\\"For re-optimising after a small change to b, which algorithm benefits from warm-starting?\\\" → Gate (after brief answer)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 121,
+        "endLine": 121
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-23",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-23\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-23",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 122,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/teaching_action_meta/TA-24",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.linear-programming",
+      "title": "NO_RESPONSE → \"If you've already solved an LP and slightly change one right-hand side value b_i, do you want to start from scratch or from the previous optimal basis?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-24\",\"title\":\"NO_RESPONSE → \\\"If you've already solved an LP and slightly change one right-hand side value b_i, do you want to start from scratch or from the previous optimal basis?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-24",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 123,
+        "endLine": 123
+      }
+    },
+    {
+      "assetId": "math.opt.linear-programming/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.linear-programming",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Convert min 3x₁+2x₂ s.t. x₁+x₂≥2, 2x₁+x₂≥3, x₁,x₂≥0 to standard form and identify the initial BFS (use artificial variables if needed to state the starting basis).\n2. Apply two simplex iterations to the LP: min −3x₁−5x₂ s.t. x₁+x₂+s₁=4, 2x₁+s₂=6, x₂+s₃=4. Show the tableau after each pivot.\n3. Write the dual of: min cᵀx s.t. Ax≥b, x≥0. Apply weak duality to show that if the primal is unbounded below, the dual is infeasible.\n4. At the optimal primal solution x*=(1,2,0), dual solution y*=(2,1), verify complementary slackness for the LP: min 4x₁+3x₂+2x₃ s.t. x₁+x₂+x₃≥3, 2x₁+x₂≥4.\n\n**P55 — Reflect & Consolidate:** \"LP: linear objective over a polytope; optimum at a vertex; simplex walks vertices; interior-point traverses interior. Duality: primal min = dual max at optimum (strong duality for feasible LPs).\"\n\n**P76 — Transfer Probe (Independence mode):**\nNetwork flow LP: Given a directed graph G=(V,E), source s, sink t, and capacities uₑ on each edge, the max-flow LP is max Σₑ:tail=s xₑ s.t. Σₑ:head=v xₑ = Σₑ:tail=v xₑ for all v≠s,t (flow conservation), 0≤xₑ≤uₑ. Write the dual of this LP. Show that the dual variables correspond to s-t cuts and that the dual objective equals the capacity of the minimum cut. (This proves the max-flow min-cut theorem via LP duality.)\n\n**P55 — Reflect & Consolidate:** \"Max-flow min-cut is LP duality applied to network flows. This is the template for combinatorial duality: primal variables are flows, dual variables are cuts.\"\n\n**P75 — Mastery Assessment:**\n\"The LP: min 2x₁+3x₂+4x₃ s.t. x₁+x₂+x₃≥5, x₁+2x₂≥4, x₁,x₂,x₃≥0. (a) Find the optimal solution geometrically or by enumeration of vertices. (b) Write and solve the dual LP. (c) Verify strong duality (primal opt = dual opt). (d) Identify which complementary slackness conditions are active at optimality.\"\n\n**P55 — Reflect & Consolidate:** \"The duality gap is zero for all feasible LPs (Farkas/strong duality). Complementary slackness gives a certificate of optimality: checking primal+dual feasibility + CS is enough to certify the solution.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; advance to math.opt.quadratic-programming and/or math.opt.integer-programming\n- Score 3/5 → REVIEW simplex pivot rules and strong duality conditions; replay A02–A03\n- Score ≤ 2/5 → PREREQUISITE GAP in math.opt.convex-optimization or math.linalg.linear-system; reassign\n\n**P78 — Completion:** Linear programming certified. Student can convert to standard form, execute simplex iterations, write and solve the dual, and apply LP duality and complementary slackness.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.linear-programming.md",
+        "startLine": 137,
+        "endLine": 164
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

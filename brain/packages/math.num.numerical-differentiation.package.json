@@ -1,0 +1,618 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.numerical-differentiation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.numerical-differentiation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e846733b61963f20131aa67cdcef85432eaa526ea8041114716da961d1ed7c80",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.numerical-differentiation.md": "sha256:3cb8f016872f7fcdf63b236d897153efb19bd9fe01e6c820a061386b6c91ed94"
+    },
+    "assetCount": 19,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 14,
+      "mastery_probe": 1
+    },
+    "ruleCount": 14
+  },
+  "concept": {
+    "conceptId": "math.num.numerical-differentiation",
+    "name": "Numerical Differentiation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.calc.derivative-definition",
+      "math.num.error-analysis"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.numerical-differentiation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.numerical-differentiation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.numerical-differentiation.md": "sha256:3cb8f016872f7fcdf63b236d897153efb19bd9fe01e6c820a061386b6c91ed94"
+      },
+      "contentHash": "sha256:e7c7b13eeca591767a0d8e4efa4ff4c9e93976a4d44de84ad3b68489ca737d2d",
+      "ruleCount": 14,
+      "bandCounts": {
+        "3": 14
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.numerical-differentiation.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.numerical-differentiation.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.numerical-differentiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.numerical-differentiation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.numerical-differentiation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "Learning Objective",
+      "content": "Given a function f known only at discrete points or expensive to differentiate analytically, the student derives the forward difference f'(x)≈[f(x+h)−f(x)]/h (O(h) truncation error) and central difference f'(x)≈[f(x+h)−f(x−h)]/(2h) (O(h²) truncation error) from Taylor expansion; explains the trade-off between truncation error (decreases as h→0) and roundoff error (increases as h→0) with optimal step size h*≈√u for forward difference and h*≈u^{1/3} for central; applies Richardson extrapolation to eliminate leading error terms and improve accuracy; and derives the second-derivative formula f''(x)≈[f(x+h)−2f(x)+f(x−h)]/h² (O(h²) error).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "SMALLER-H-ALWAYS-BETTER",
+      "content": "| MC-1 | SMALLER-H-ALWAYS-BETTER | Student keeps decreasing h to reduce error, not realising that roundoff error grows as h→0 and eventually dominates; tries h=10⁻¹⁵ and gets a result of 0 | Type 5 — instruction-induced (the derivative is defined as a limit as h→0, so students carry over the limit intuition to finite-h computation; the finite-precision floor is never mentioned in the calculus definition) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "FORWARD-AND-CENTRAL-DIFFERENCE-SAME-ACCURACY",
+      "content": "| MC-2 | FORWARD-AND-CENTRAL-DIFFERENCE-SAME-ACCURACY | Student assumes both formulas have the same accuracy since both approximate the same derivative | Type 1 — overgeneralization (both formulas are called \"finite difference approximations\" with no immediate visible difference; the O(h) vs. O(h²) distinction is only apparent from the Taylor expansion, which students may not carry out) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "NUMERICAL-DERIVATIVE-CONVERGES-TO-EXACT",
+      "content": "| MC-3 | NUMERICAL-DERIVATIVE-CONVERGES-TO-EXACT | Student expects that as h→0, the numerical formula always converges to the exact derivative, ignoring the catastrophic cancellation of f(x+h)−f(x) for small h | Type 5 — instruction-induced (the limit is defined as h→0 and students believe any computation that \"approaches the limit\" converges; the transition from exact arithmetic to finite precision is not emphasised) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "Forward difference: total error ≈ (h/2)|f''| + 2u|f|/h; minimised at h*=2√(u|f|/|f''|)≈√u≈10⁻⁸.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Forward difference: total error ≈ (h/2)|f''| + 2u|f|/h; minimised at h*=2√(u|f|/|f''|)≈√u≈10⁻⁸.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "Central difference: total error ≈ (h²/6)|f'''| + 2u|f|/h; minimised at h*≈(3u|f|/|f'''|)^{1/3}≈u^{1/3}≈10⁻⁵.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Central difference: total error ≈ (h²/6)|f'''| + 2u|f|/h; minimised at h*≈(3u|f|/|f'''|)^{1/3}≈u^{1/3}≈10⁻⁵.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "CORRECT → \"Forward difference: O(h) truncation error, optimal h*≈√u≈10⁻⁸. Central difference: O(h²) truncation error, optimal h*≈u^{1/3}≈10⁻⁵. Both have a U-shaped total error curve in h — decreasing for large h (truncation dominates) and increasing for small h (roundoff dominates).\" → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CORRECT → \\\"Forward difference: O(h) truncation error, optimal h*≈√u≈10⁻⁸. Central difference: O(h²) truncation error, optimal h*≈u^{1/3}≈10⁻⁵. Both have a U-shaped total error curve in h — decreasing for large h (truncation dominates) and increasing for small h (roundoff dominates).\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "PARTIAL (can use the formulas but cannot derive the truncation error from Taylor) → \"Expand f(x+h) in a Taylor series: f(x+h)=f(x)+hf'(x)+(h²/2)f''(x)+…. Subtract f(x) and divide by h. The leading remainder term is (h/2)f''(x). This is the truncation error: proportional to h.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"PARTIAL (can use the formulas but cannot derive the truncation error from Taylor) → \\\"Expand f(x+h) in a Taylor series: f(x+h)=f(x)+hf'(x)+(h²/2)f''(x)+…. Subtract f(x) and divide by h. The leading remainder term is (h/2)f''(x). This is the truncation error: proportional to h.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "NO_RESPONSE → \"Compute [sin(1.1)−sin(1)]/0.1 and compare with cos(1)≈0.5403. What is the error? What happens when h=0.01?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"NO_RESPONSE → \\\"Compute [sin(1.1)−sin(1)]/0.1 and compare with cos(1)≈0.5403. What is the error? What happens when h=0.01?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "CORRECT → \"Forward O(h), central O(h²), Richardson-extrapolated central O(h⁴). Second derivative: [f(x+h)−2f(x)+f(x−h)]/h², O(h²). All have an optimal h where truncation = roundoff; going beyond that optimal h makes things worse.\" → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Forward O(h), central O(h²), Richardson-extrapolated central O(h⁴). Second derivative: [f(x+h)−2f(x)+f(x−h)]/h², O(h²). All have an optimal h where truncation = roundoff; going beyond that optimal h makes things worse.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "PARTIAL (knows the formulas but not Richardson extrapolation) → \"You have D(h) and D(h/2), both approximations of f'. Both have error ≈c·h². Write two equations with two unknowns: D(h)=f'+c·h² and D(h/2)=f'+c·(h²/4). Solve for f'. The answer is the Richardson extrapolation formula.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (knows the formulas but not Richardson extrapolation) → \\\"You have D(h) and D(h/2), both approximations of f'. Both have error ≈c·h². Write two equations with two unknowns: D(h)=f'+c·h² and D(h/2)=f'+c·(h²/4). Solve for f'. The answer is the Richardson extrapolation formula.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "NO_RESPONSE → \"Compute [sin(1.001)−sin(0.999)]/(2×0.001) and compare with cos(1). Compare the error to the forward-difference error at h=0.001. Which is more accurate?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"Compute [sin(1.001)−sin(0.999)]/(2×0.001) and compare with cos(1). Compare the error to the forward-difference error at h=0.001. Which is more accurate?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "CORRECT → \"Smaller h is not always better. For h below the optimal step size, roundoff error from catastrophic cancellation in f(x+h)−f(x) dominates. The optimal step size balances truncation (decreases with h) and roundoff (increases with h). Forward difference: h*≈10⁻⁸; central difference: h*≈10⁻⁵.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"Smaller h is not always better. For h below the optimal step size, roundoff error from catastrophic cancellation in f(x+h)−f(x) dominates. The optimal step size balances truncation (decreases with h) and roundoff (increases with h). Forward difference: h*≈10⁻⁸; central difference: h*≈10⁻⁵.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "PARTIAL (understands the concept but cannot estimate h*) → \"Total error = truncation + roundoff ≈ (h/2)|f''| + 2u|f|/h. Minimise over h: d/dh[(h/2)|f''|+2u|f|/h]=|f''|/2−2u|f|/h²=0 → h²=4u|f|/|f''| → h*=2√(u|f|/|f''|)≈2√u≈4.5×10⁻⁸ for typical functions.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL (understands the concept but cannot estimate h*) → \\\"Total error = truncation + roundoff ≈ (h/2)|f''| + 2u|f|/h. Minimise over h: d/dh[(h/2)|f''|+2u|f|/h]=|f''|/2−2u|f|/h²=0 → h²=4u|f|/|f''| → h*=2√(u|f|/|f''|)≈2√u≈4.5×10⁻⁸ for typical functions.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "NO_RESPONSE → \"Compute [sin(1+h)−sin(1)]/h for h=10⁻⁸ and h=10⁻¹⁵. Compare each with cos(1)≈0.5403023. Which h gives a better approximation?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"Compute [sin(1+h)−sin(1)]/h for h=10⁻⁸ and h=10⁻¹⁵. Compare each with cos(1)≈0.5403023. Which h gives a better approximation?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.num.numerical-differentiation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.numerical-differentiation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Derive the central difference formula for f'(x) by adding the Taylor expansions of f(x+h) and f(x−h) (correcting: you need to SUBTRACT them — identify the correct operation) and confirm the O(h²) error term.\n2. Use Richardson extrapolation to derive a 4th-order approximation for f'(x) using the central difference D(h)=[f(x+h)−f(x−h)]/(2h). Verify: [4D(h/2)−D(h)]/3 has error O(h⁴).\n3. Compute f''(1) for f(x)=e^x using [f(1+h)−2f(1)+f(1−h)]/h² for h=0.1, 0.01, 0.001. Confirm error is O(h²). Estimate the optimal h* for this second-derivative formula.\n4. A physical measurement y=f(t) is taken at times t₀, t₀+h, t₀+2h with measurement noise σ=10⁻³. (a) Estimate the derivative error from measurement noise in the central-difference formula. (b) How does this change the optimal step size h* compared to the pure floating-point case?\n\n**P55 — Reflect & Consolidate:** \"Forward: O(h), h*≈√u≈10⁻⁸. Central: O(h²), h*≈u^{1/3}≈10⁻⁵. Second derivative: O(h²), h*≈u^{1/4}≈10⁻⁴. Richardson extrapolation: eliminate leading error term → gain two orders. The error curve is U-shaped; the optimal h balances truncation and roundoff.\"\n\n**P76 — Transfer Probe (Independence mode):**\nThe complex-step derivative: for an analytic function f, Im[f(x+ih)]/h ≈ f'(x) with NO roundoff error from subtraction (only h² and higher order terms). (a) Derive this from the Taylor expansion of f(x+ih) treating i as a perturbation. (b) Evaluate it numerically for f=sin at x=1 with h=10⁻²⁰ and compare with the forward and central finite differences at their respective optimal step sizes. (c) Explain why there is no cancellation error (no subtraction of nearly equal quantities). (d) Identify the limitation: f must be defined for complex arguments.\n\n**P55 — Reflect & Consolidate:** \"The complex-step derivative avoids cancellation entirely by using imaginary perturbations instead of real differences. It achieves machine-precision accuracy (error ≈ u·|f|) for any h>0. This is superior to all real finite differences in the absence of noise. The trade-off: requires complex-arithmetic capability in the code.\"\n\n**P75 — Mastery Assessment:**\n\"You are estimating the Jacobian matrix J_{ij}=∂fᵢ/∂xⱼ for a system of n=100 equations in n unknowns, where f is a black-box numerical code. (a) How many function evaluations are needed for the full Jacobian using forward differences? (b) How many using central differences? (c) What is the error order of each column of J with forward vs. central differences? (d) Propose a Richardson-extrapolated Jacobian and estimate the additional function evaluation cost. (e) When would automatic differentiation (exact derivatives via code transformation) be preferable to numerical differentiation?\"\n\n**P55 — Reflect & Consolidate:** \"Jacobian estimation: forward difference needs n+1 evaluations (1 baseline + n perturbations), central needs 2n, Richardson-extrapolated central needs 4n. For large-scale systems, automatic differentiation (forward or reverse mode AD) is the standard — it gives exact derivatives at O(n) cost with no step-size tuning.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.numerical-differentiation complete\n- Score 3/5 → REVIEW optimal step size and U-shaped error curve; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.calc.derivative-definition or math.num.error-analysis; reassign\n\n**P78 — Completion:** Numerical differentiation certified. Student derives forward and central difference formulas from Taylor expansion, identifies the U-shaped error curve, computes the optimal step size, applies Richardson extrapolation, and extends analysis to second derivatives and Jacobians.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.numerical-differentiation.md",
+        "startLine": 119,
+        "endLine": 146
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

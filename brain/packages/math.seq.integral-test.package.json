@@ -1,0 +1,333 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.integral-test-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.integral-test",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9c88673eae88e60fe1bbadb6037dc0b77b5041489bdb5a5b03872669c93cf65d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.integral-test.md": "sha256:d3d808f22b58d692b6d7dbe478621e505e53bc013b006fa7321ee66269a6ebad"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.integral-test",
+    "name": "Integral Test for Series",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.series-convergence",
+      "math.calc.improper-integrals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.integral-test-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.integral-test (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.integral-test.md": "sha256:d3d808f22b58d692b6d7dbe478621e505e53bc013b006fa7321ee66269a6ebad"
+      },
+      "contentHash": "sha256:c96ff5ecf04cae9d5b8e4b25f1f1bf3d9397d12fc5c8510a3fafcde06ab12ee3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.integral-test.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.integral-test.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.integral-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.integral-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.integral-test.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.integral-test.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.integral-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.integral-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.integral-test.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.integral-test.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.integral-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.integral-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.integral-test.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.integral-test.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.integral-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.integral-test\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.integral-test/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.integral-test",
+      "title": "Integral Test for Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.series-convergence**: Σaₙ converges iff {Sₙ} converges; harmonic series Σ1/n diverges despite terms→0\n- **math.calc.improper-integrals**: ∫ₐ^∞ f(x)dx = lim_{t→∞} ∫ₐ^t f(x)dx; convergence of this limit determines whether the integral converges\n\n### Target Knowledge State\nStudent can state the Integral Test conditions (f continuous, positive, decreasing on [N,∞) with f(n)=aₙ) and conclusion (Σaₙ and ∫_N^∞ f(x)dx either both converge or both diverge). Student understands the integral and series do NOT converge to the same value — only convergence/divergence is shared. Student can apply the integral test to derive the p-series test (p > 1 converges, p ≤ 1 diverges) and to series involving logarithmic denominators.\n\n### Conceptual Obstacles\n1. Equating the integral value with the series sum — the integral and series share convergence behaviour but NOT their numerical values; the integral gives an estimate, not the exact sum\n2. Omitting the monotone-decreasing condition — the integral test requires f to be continuous, positive, AND decreasing; applying it to a non-monotone function can yield incorrect conclusions\n3. Believing that the starting index (n=1 vs. n=2 vs. n=N) affects convergence — changing the starting index changes the series value but never its convergence or divergence status\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.integral-test",
+      "title": "INTEGRAL-EQUALS-SERIES-SUM",
+      "content": "| MC-1 | INTEGRAL-EQUALS-SERIES-SUM | Student concludes Σaₙ = ∫₁^∞ f(x)dx; equates the integral value with the series sum; may accept partial credit for \"close approximation\" framing | Any integral-test problem asking for the convergence decision; reverse-engineering problems asking for the series sum |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.integral-test",
+      "title": "MONOTONE-NOT-REQUIRED",
+      "content": "| MC-2 | MONOTONE-NOT-REQUIRED | Student applies integral test to a function that is positive but not eventually decreasing; does not verify the decreasing condition before applying the test | Series with oscillating or eventually-increasing terms; e.g., aₙ = sin²n/n² (not monotone but the test still works because a different bound applies) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.integral-test",
+      "title": "STARTING-INDEX-CHANGES-CONVERGENCE",
+      "content": "| MC-3 | STARTING-INDEX-CHANGES-CONVERGENCE | Student believes Σₙ₌₁^∞ aₙ and Σₙ₌₂^∞ aₙ may have different convergence; or that starting at n=N \"changes\" the test outcome | Any problem where integral is evaluated from 2 or N rather than 1; p-series with restricted domains |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.integral-test",
+      "title": "Integral Test Statement and P-Series Derivation",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Integral Test Statement and P-Series Derivation\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 65,
+        "endLine": 140
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.integral-test",
+      "title": "Logarithmic Denominators and the Boundary Family",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Logarithmic Denominators and the Boundary Family\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 140,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.integral-test",
+      "title": "Contrast: Convergence vs. Value; Conditions Required",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Contrast: Convergence vs. Value; Conditions Required\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 198,
+        "endLine": 260
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.integral-test",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 260,
+        "endLine": 483
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.integral-test",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*For each series: verify the integral test conditions, evaluate the improper integral, and state convergence or divergence.*\n\n**Problem 1.** Σₙ₌₁^∞ 1/n^{1/3}\n\n**Problem 2.** Σₙ₌₂^∞ 1/(n(ln n)²)\n\n**Problem 3.** Σₙ₌₁^∞ n·e^{-n²}\n\n**Problem 4.** Σₙ₌₁^∞ 1/n^{1.5}\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. f(x) = x^{-1/3}: continuous, positive, decreasing on [1,∞). ∫₁^∞ x^{-1/3}dx = [x^{2/3}/(2/3)]₁^∞ = (3/2)·∞ → **diverges**. p=1/3 < 1. ✓\n\n2. f(x) = 1/(x(ln x)²): continuous, positive, decreasing for x≥2. ∫₂^t [−1/ln x]₂^t = 1/ln 2 (finite) → **converges**. ✓\n\n3. f(x) = xe^{-x²}: continuous, positive; decreasing for x ≥ 1 (f'(x) = e^{-x²}(1−2x²) < 0 for x ≥ 1). ∫₁^∞ xe^{-x²}dx = [−(1/2)e^{-x²}]₁^∞ = 0 + 1/(2e) = 1/(2e) → **converges**. ✓\n\n4. f(x) = x^{-3/2}: p=3/2 > 1 → **converges** (p-series). ∫₁^∞ x^{-3/2}dx = [−2/√x]₁^∞ = 0 + 2 = 2. ✓\n\nScore 1 point per problem. Full credit requires: conditions stated (at least \"continuous, positive, decreasing\") + integral computation + convergence conclusion.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: cross-link probe — math.calc.improper-integrals)*\n\n*Problem:* Apply the integral test to Σₙ₌₂^∞ 1/(n ln n).\n\nThis problem requires skills from **math.calc.improper-integrals**: evaluate ∫₂^∞ 1/(x ln x)dx using the limit definition of an improper integral.\n\n*(a)* Verify that f(x) = 1/(x ln x) satisfies the integral test conditions on [2, ∞).\n\n*(b)* Using the substitution u = ln x, evaluate ∫₂^t 1/(x ln x)dx.\n\n*(c)* Take the limit as t → ∞ and state whether the improper integral converges or diverges.\n\n*(d)* Conclude: does Σₙ₌₂^∞ 1/(n ln n) converge or diverge?\n\n*Expected answer:*\n\n*(a)* f(x) = 1/(x ln x) is continuous for x > 1, positive for x ≥ 2 (ln x > 0), and decreasing (f'(x) = −(1 + ln x)/(x ln x)² < 0). ✓\n\n*(b)* u = ln x, du = dx/x. When x=2: u=ln 2; when x=t: u=ln t.\n∫₂^t dx/(x ln x) = ∫_{ln 2}^{ln t} du/u = [ln u]_{ln 2}^{ln t} = ln(ln t) − ln(ln 2) ✓\n\n*(c)* lim_{t→∞} [ln(ln t) − ln(ln 2)] = ∞ (since ln(ln t) → ∞ as t → ∞). Improper integral **diverges**. ✓\n\n*(d)* By the integral test: Σₙ₌₂^∞ 1/(n ln n) **diverges**. ✓\n\n*Connection to math.calc.improper-integrals:* The limit definition ∫₂^∞ f(x)dx = lim_{t→∞} ∫₂^t f(x)dx is essential — without it, the integral cannot be evaluated rigorously, and the \"infinite upper limit\" has no meaning.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all four parts correct; 0.5 if integral set-up correct but limit evaluation missing or divergence conclusion absent).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.7 × 5⌉ = 4). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; value-vs-convergence confusion → B01; missing conditions → B02; starting-index error → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; re-prove p-series via integral test; re-examine area-bound argument; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.integral-test` complete. Threshold 0.7 requires 4/5 correct.\n\n**Unlocks:** math.seq.absolute-convergence, deeper analysis of series comparison families.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 263,
+        "endLine": 374
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.integral-test",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — advanced learner with improper integral fluency; the integral test is a purely algebraic–analytic argument with no physical-world entry point needed.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — A: integral test statement with conditions; area-under-curve bounding argument; p-series derivation as the primary application; MC-1 antidote\n2. **A02 P04 PATTERN INDUCTION** — apply integral test to logarithmic-denominator series; induce the boundary between convergence and divergence for families like Σ1/(n·(ln n)ᵖ)\n3. **A03 P06 CONTRAST PAIR** — compare series/integral convergence vs. value; contrast conditions (monotone required vs. not); starting-index invariance\n4. **A04 P91 Gate** — mastery assessment including cross-link probe to math.calc.improper-integrals\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.integral-test",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Apply the integral test to Σₙ₌₁^∞ 1/n^{0.5}. State the conditions, evaluate ∫₁^∞ x^{-0.5}dx, and conclude. |\n| R2 | 3 days | Does Σₙ₌₂^∞ 1/(n(ln n)^{1/2}) converge or diverge? Use the integral test with u = ln x. |\n| R3 | 7 days | A student claims: \"∫₁^∞ 1/x³ dx = 1/2, so Σₙ₌₁^∞ 1/n³ = 1/2.\" Identify the error and state the correct conclusion about Σ1/n³. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 424,
+        "endLine": 434
+      }
+    },
+    {
+      "assetId": "math.seq.integral-test/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.integral-test",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | math.calc.improper-integrals |\n| P76_mode | cross-link probe (file exists on disk) |\n| Unlocks | math.seq.absolute-convergence |\n| Requires (Tier-1) | math.seq.series-convergence, math.calc.improper-integrals |\n\n**GR-8 compliance:** cross_links = [math.calc.improper-integrals]; Tier-1 prerequisite → P76 uses cross-link probe mode.\n**GR-9 compliance:** P76 explicitly connects to math.calc.improper-integrals (limit definition of improper integral, substitution) as a cross-link probe — not an independence problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.integral-test.md",
+        "startLine": 434,
+        "endLine": 448
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.linear-programming |
-| Title | Linear Programming |
+| name | Linear Programming |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -134,7 +134,7 @@ For duality: "Strong duality requires both (P) and (D) to be feasible. If (P) is
 **TB-R03 (MC-3 SIMPLEX-EXPONENTIAL-IN-PRACTICE):**
 Step 1 — "Worst-case ≠ typical case. The Klee-Minty cube is a pathological construction that simplex visits exponentially many vertices — but it never arises in practice." Step 2 — "Empirically: simplex takes O(m) to O(2m) pivots on problems with m constraints — far fewer than the 2ⁿ worst case." Step 3 — "Interior-point has polynomial WORST-CASE complexity but is slower per iteration (dense linear algebra) and can't warm-start. For LP relaxations in branch-and-bound (IP), simplex's warm-start is critical."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Convert min 3x₁+2x₂ s.t. x₁+x₂≥2, 2x₁+x₂≥3, x₁,x₂≥0 to standard form and identify the initial BFS (use artificial variables if needed to state the starting basis).

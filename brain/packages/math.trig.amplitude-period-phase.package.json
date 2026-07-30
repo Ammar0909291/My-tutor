@@ -1,0 +1,334 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.amplitude-period-phase-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.amplitude-period-phase",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:db8d16e4e95dd51cd47f13ea2687e74abbd1234db684b5a4c91dc2b9ba1f7022",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md": "sha256:9055ac5b6d2dc09c1a93ab2a5028f175e57438f20660e1a2f0f921f43c9f4609"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.amplitude-period-phase",
+    "name": "Amplitude, Period, Phase Shift",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.trig.trig-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.amplitude-period-phase-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.amplitude-period-phase (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md": "sha256:9055ac5b6d2dc09c1a93ab2a5028f175e57438f20660e1a2f0f921f43c9f4609"
+      },
+      "contentHash": "sha256:4fdfedc00da967938e397f7a66a96205110dc41ac527871f59bad66c80637310",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.amplitude-period-phase.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md#TA-A01 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.amplitude-period-phase"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.amplitude-period-phase\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.amplitude-period-phase.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.amplitude-period-phase"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.amplitude-period-phase\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.amplitude-period-phase.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.amplitude-period-phase"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.amplitude-period-phase\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.amplitude-period-phase.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md#TA-A04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.amplitude-period-phase"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.amplitude-period-phase\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.amplitude-period-phase/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "Amplitude, Period, Phase Shift — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.trig-functions**: Graphs of y = sin x and y = cos x; key points, periodicity, range [−1, 1]; the unit circle as generator of the sine wave\n\n### Target Knowledge State\nStudent extracts amplitude, period, phase shift, and vertical shift from y = A sin(Bx + C) + D and its cosine counterpart. Student applies the four-parameter formula to describe any horizontal compression, reflection, translation, and vertical shift. Student produces a sketch of a transformed sinusoidal function by transforming five key points.\n\n### Conceptual Obstacles\n1. Confusing period with B — writing period = B instead of period = 2π/|B|\n2. Confusing phase shift sign — reading phase shift as C instead of −C/B\n3. Treating amplitude as signed — writing amplitude = A instead of |A|\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "PERIOD-IS-B",
+      "content": "| MC-1 | PERIOD-IS-B | Student states period = B, ignoring the 2π/|B| formula | Any y = A sin(Bx + C) + D problem |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "PHASE-SHIFT-SIGN",
+      "content": "| MC-2 | PHASE-SHIFT-SIGN | Student reads phase shift as C rather than −C/B; e.g., y = sin(x + π/3) gives phase shift +π/3 instead of −π/3 | Problems where C is positive |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "AMPLITUDE-IGNORES-SIGN",
+      "content": "| MC-3 | AMPLITUDE-IGNORES-SIGN | Student writes amplitude = −2 for y = −2 sin(x), forgetting |A| ≥ 0 | Equations with negative A |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "Standard Form Parameters Table",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Standard Form Parameters Table\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 64,
+        "endLine": 122
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "Extracting Parameters and Sketching",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Extracting Parameters and Sketching\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 122,
+        "endLine": 174
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "Phase Shift Sign Contrast",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Phase Shift Sign Contrast\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 174,
+        "endLine": 224
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 224,
+        "endLine": 434
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** Identify the amplitude, period, phase shift, and vertical shift of y = 3 sin(2x − π/3) + 1.\n\n**Problem 2.** Identify the amplitude, period, phase shift, and vertical shift of y = −2 cos(πx/2 + π/4) − 1.\n\n**Problem 3.** Write an equation of the form y = A sin(Bx + C) for a sinusoid with amplitude 4, period 6π, and phase shift π/2 to the right.\n\n**Problem 4.** For y = sin(2x + π), state the period and phase shift and verify analytically that the function equals y = −sin(2x).\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. A = 3, period = π, phase shift = π/6 right, D = 1 ✓\n\n2. A = 2 (|−2|), period = 4, phase shift = π/2 left, D = −1 ✓\n\n3. Period = 6π → 2π/|B| = 6π → B = 1/3. Phase shift π/2 right → −C/B = π/2 → C = −π/6. Equation: y = 4 sin(x/3 − π/6) ✓\n\n4. Period = π. Phase shift = −π/2 (left). sin(2x + π) = sin(2x)cos(π) + cos(2x)sin(π) = −sin(2x). ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* A sound wave is modeled by y = 5 sin(800πt − π/4), where y is pressure in Pa and t is time in seconds.\n\n*(a)* Identify the amplitude and explain its physical meaning.\n\n*(b)* Find the frequency of the wave (frequency = 1 / period).\n\n*(c)* Find the phase shift and explain whether the wave leads or lags a reference wave y = 5 sin(800πt).\n\n*Expected answer:*\n\n*(a)* Amplitude = 5 Pa. It is the maximum pressure variation from atmospheric equilibrium.\n\n*(b)* B = 800π, so period = 2π/(800π) = 1/400 s. Frequency = 400 Hz.\n\n*(c)* Phase shift = −(−π/4)/(800π) = 1/3200 s > 0 (rightward). The wave lags the reference by 1/3200 seconds — it reaches its peaks slightly later.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point (all three parts correct); 0.5 if amplitude and frequency correct but phase interpretation wrong.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.8 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| ≥ 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed item; period error → B01; phase shift sign → B02; amplitude sign → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; rebuild parameters table from y = A sin(Bx + C) + D; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.amplitude-period-phase` complete. Threshold 0.8 requires 4/5 correct.\n\n**Unlocks:** math.trig.trig-graphs (sketching all six trig functions with transformations).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 227,
+        "endLine": 327
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** P (Pictorial) — side-by-side comparison of y = sin x with a transformed sinusoidal graph.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Annotate the parameters table from the standard form y = A sin(Bx + C) + D; derive amplitude, period, phase shift, and vertical shift; worked table\n2. **A02 P04 PATTERN INDUCTION** — Gallery of transformed sinusoids; extract all four parameters from equation and from graph; five-key-point sketching algorithm\n3. **A03 P06 CONTRAST PAIR** — y = 2 sin(x + π/4) vs y = 2 sin(x − π/4); same A and B, opposite C — produces left vs right shift to isolate MC-2\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | State the amplitude, period, and phase shift of y = 5 cos(3x − π/2). |\n| R2 | 3 days | Write the equation of a cosine wave with amplitude 3, period 4π, midline y = 2, and phase shift π/3 to the left. |\n| R3 | 7 days | Sketch one period of y = −2 sin(πx/2 + π/4) + 1, labeling all five key points. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 377,
+        "endLine": 387
+      }
+    },
+    {
+      "assetId": "math.trig.amplitude-period-phase/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.amplitude-period-phase",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.trig.trig-graphs |\n| Requires (Tier-1) | math.trig.trig-functions |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent sound-wave application problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.amplitude-period-phase.md",
+        "startLine": 387,
+        "endLine": 401
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,332 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.comparison-test-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.comparison-test",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4ddc42205b3a29f25557d67c2820a076dd23a7e823e30058d8d439accb6a3594",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.comparison-test.md": "sha256:12289c2322e8154b49defa56cd4b353755c12117fd900c68af0bf576561a605b"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.comparison-test",
+    "name": "Comparison Tests for Series",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.comparison-test-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.comparison-test (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.comparison-test.md": "sha256:12289c2322e8154b49defa56cd4b353755c12117fd900c68af0bf576561a605b"
+      },
+      "contentHash": "sha256:4a2d6f67d970edd2f722e30202cbb749d262f207fadec7f91118aba24d625ff8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.comparison-test.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.comparison-test.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.comparison-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.comparison-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.comparison-test.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.comparison-test.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.comparison-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.comparison-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.comparison-test.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.comparison-test.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.comparison-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.comparison-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.comparison-test.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.comparison-test.md#TA-A04 (addresses MC-1, MC-2, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.comparison-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.comparison-test\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.comparison-test/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.comparison-test",
+      "title": "Comparison Tests for Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.series-convergence**: Σaₙ converges iff {Sₙ} converges; Divergence Test (aₙ↛0 → diverge); geometric series (|r|<1 converges); harmonic series Σ1/n diverges\n\n### Target Knowledge State\nStudent can apply the Direct Comparison Test (DCT): if 0 ≤ aₙ ≤ bₙ, then Σbₙ convergent ⟹ Σaₙ convergent, and Σaₙ divergent ⟹ Σbₙ divergent. Student can apply the Limit Comparison Test (LCT): if lim(aₙ/bₙ) = L with 0 < L < ∞, then Σaₙ and Σbₙ have identical convergence behaviour. Student selects appropriate benchmark series (p-series, geometric) and applies the correct test for the given form.\n\n### Conceptual Obstacles\n1. Wrong-direction DCT: if 0 ≤ bₙ ≤ aₙ and Σbₙ converges, concluding Σaₙ also converges — the larger series may or may not converge; only the smaller can be \"squeezed down\"\n2. Treating L = 0 or L = ∞ in LCT as fully inconclusive, or applying the finite-L rule to these boundary cases — each has a one-sided conclusion, not full inconclusive status\n3. Choosing a benchmark series with no known convergence/divergence (e.g., comparing with a series under investigation), or choosing a benchmark asymptotically of the wrong order\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.comparison-test",
+      "title": "COMPARISON-WRONG-DIRECTION",
+      "content": "| MC-1 | COMPARISON-WRONG-DIRECTION | Student compares aₙ ≤ bₙ and concludes \"bₙ diverges → aₙ diverges\" or \"aₙ converges → bₙ converges\" — reverses the valid DCT implications | Series where the benchmark is larger; any problem requiring bounding from above for convergence or from below for divergence |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.comparison-test",
+      "title": "LIMIT-COMPARISON-L-BOUNDARY",
+      "content": "| MC-2 | LIMIT-COMPARISON-L-BOUNDARY | Student applies the finite-nonzero LCT rule when L = 0 or L = ∞; either declares full inconclusive or incorrectly treats it as same-fate | LCT calculations where the limit ratio collapses to 0 (aₙ much smaller) or blows up to ∞ (aₙ much larger) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.comparison-test",
+      "title": "BENCHMARK-SELECTION-ARBITRARY",
+      "content": "| MC-3 | BENCHMARK-SELECTION-ARBITRARY | Student picks any familiar series as benchmark without verifying asymptotic comparability; compares 1/(n²+1) with Σ1/n rather than Σ1/n² | Any comparison-test problem; most visible when the chosen benchmark makes the inequality impossible to establish or yields L=0/∞ |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.comparison-test",
+      "title": "Direct Comparison Test: Logic and Direction",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Direct Comparison Test: Logic and Direction\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 64,
+        "endLine": 135
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.comparison-test",
+      "title": "Limit Comparison Test: Asymptotic Matching",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Limit Comparison Test: Asymptotic Matching\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 135,
+        "endLine": 200
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.comparison-test",
+      "title": "DCT vs. LCT: Choosing the Right Tool",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"DCT vs. LCT: Choosing the Right Tool\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 200,
+        "endLine": 261
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.comparison-test",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 261,
+        "endLine": 482
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.comparison-test",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*For each series: state convergence or divergence, name the test used, identify the benchmark, and show the key step.*\n\n**Problem 1.** Σₙ₌₁^∞ 1/(n² + n)\n\n**Problem 2.** Σₙ₌₂^∞ 1/√(n − 1)\n\n**Problem 3.** Σₙ₌₁^∞ (n + 1)/(n³ + 2)\n\n**Problem 4.** Σₙ₌₁^∞ sin(1/n)\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. DCT: 1/(n²+n) = 1/(n(n+1)) < 1/n²; Σ1/n² converges (p=2) → **converges** ✓\n   Alternatively, LCT with Σ1/n²: L = lim [n²/(n²+n)] = lim [1/(1+1/n)] = 1 → converges.\n\n2. DCT: 1/√(n−1) > 1/√n; Σ1/√n diverges (p=1/2 < 1) → **diverges** ✓\n   Or LCT with Σ1/√n: L = lim [√n/√(n−1)] = 1 → diverges.\n\n3. LCT with Σ1/n²: L = lim [(n+1)·n²/(n³+2)] = lim [(n³+n²)/(n³+2)] = **1** ∈ (0,∞) → **converges** ✓\n\n4. LCT with Σ1/n: L = lim [sin(1/n)/(1/n)] = 1 (standard small-angle limit) → same fate as Σ1/n (diverges) → **diverges** ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Determine whether Σₙ₌₁^∞ 1/(n² + sin²n) converges or diverges.\n\nNote: sin²n is bounded (0 ≤ sin²n ≤ 1) but takes no simple closed-form values at integer n — a direct inequality or LCT is needed.\n\n*(a)* Propose a benchmark series and explain your asymptotic reasoning.\n\n*(b)* Apply the LCT and compute the limit L = lim [aₙ/bₙ].\n\n*(c)* State the conclusion and cite the convergence of your benchmark.\n\n*Expected answer:*\n\n*(a)* Benchmark: Σ1/n² — dominant term of denominator n²+sin²n is n².\n\n*(b)* L = lim [1/(n²+sin²n)] / [1/n²] = lim [n²/(n²+sin²n)].\n\nSince 0 ≤ sin²n ≤ 1, we have n²/(n²+1) ≤ n²/(n²+sin²n) ≤ n²/n² = 1.\nSqueeze theorem: L = **1** (since n²/(n²+1) → 1). ✓\n\n*(c)* L = 1 ∈ (0,∞); Σ1/n² converges (p=2 > 1); by LCT, **Σ1/(n²+sin²n) converges**.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all three parts correct; partial credit: 0.5 if limit correct but benchmark not justified or conclusion not stated).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.75 × 5⌉ = 4). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; direction error → B01; benchmark error → B03; L-boundary confusion → B02; targeted repair |\n| ≤ 2/5 | → Return to A01; re-examine direction map; re-derive DCT from partial sums inequality; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.comparison-test` complete. Threshold 0.75 requires 4/5 correct.\n\n**Unlocks:** downstream series-test concepts (ratio test, root test, integral test — all deepen the comparison toolkit).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 264,
+        "endLine": 373
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.comparison-test",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — advanced learner already fluent with series convergence concepts.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — A: Direct Comparison Test statement and logic; inequality direction map; p-series and geometric as canonical benchmarks\n2. **A02 P04 PATTERN INDUCTION** — apply both DCT and LCT to a sequence of cases; induce the asymptotic-matching principle for benchmark selection; discover L = 0 / L = ∞ edge cases\n3. **A03 P06 CONTRAST PAIR** — DCT vs. LCT: when each is easier; wrong-direction failures; boundary-L cases side by side\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.comparison-test",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Does Σ n/(n³+4) converge? Apply LCT with an appropriate benchmark. |\n| R2 | 3 days | Apply DCT to show Σ cos²n/n² converges. (Hint: cos²n ≤ 1.) |\n| R3 | 7 days | For Σ 1/(n·lnⁿ), identify whether DCT or LCT is appropriate and determine convergence. (Benchmark: Σ1/(n·n^ε) for small ε — this diverges by p-series, p<1.) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 423,
+        "endLine": 433
+      }
+    },
+    {
+      "assetId": "math.seq.comparison-test/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.comparison-test",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.seq.ratio-test, math.seq.root-test, math.seq.integral-test |\n| Requires (Tier-1) | math.seq.series-convergence |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent problem unrelated to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.comparison-test.md",
+        "startLine": 433,
+        "endLine": 447
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

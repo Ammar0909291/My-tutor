@@ -1,0 +1,343 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.abst.lagrange-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.abst.lagrange-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:04c13e6270b1f35603efd73054138c62826b7fd07d77f22ab5e151f769a62eef",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.abst.lagrange-theorem.md": "sha256:98bfe8cbb762e3b08fb3f370fcb61f3dd6c8f0800f8f53a53391add1a394f44e"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.abst.lagrange-theorem",
+    "name": "",
+    "difficultyRaw": "advanced",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.abst.coset"
+    ],
+    "status": "PACKAGE_READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.abst.lagrange-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.abst.lagrange-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.abst.lagrange-theorem.md": "sha256:98bfe8cbb762e3b08fb3f370fcb61f3dd6c8f0800f8f53a53391add1a394f44e"
+      },
+      "contentHash": "sha256:9eb7db89882984595c06a6df6a8d9886d018910a0d0f53a166d47d838c406434",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.abst.lagrange-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.lagrange-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.lagrange-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.lagrange-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md#TA-A02 (addresses MC-3, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.lagrange-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.lagrange-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.lagrange-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.lagrange-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.lagrange-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.abst.lagrange-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md#TA-A04 (addresses MC-3, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.abst.lagrange-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.abst.lagrange-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.abst.lagrange-theorem/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "math.abst.lagrange-theorem — cognitive map",
+      "content": "### Target Understanding\n**Lagrange's Theorem:** Let G be a finite group and H a subgroup of G.  Then |H| divides |G|.\nMoreover, |G| = |H| · [G:H] where [G:H] = number of distinct left cosets of H in G.\n\n**Proof structure:**\n1. Left cosets partition G: for any g₁, g₂ ∈ G, either g₁H = g₂H or g₁H ∩ g₂H = ∅.\n2. Every coset has the same size |H|.\n3. Therefore |G| = (number of distinct cosets) · |H| → |H| | |G|.\n\n**Key corollaries:**\n- **C1:** The order of every element divides |G|.\n  (Since ⟨g⟩ is a subgroup of order ord(g), Lagrange gives ord(g) | |G|.)\n- **C2:** Every group of prime order p is cyclic (isomorphic to Z/pZ).\n  (Any non-identity element g has ord(g) | p, so ord(g) = p → g generates G.)\n- **C3:** In a group of order n, gⁿ = e for every g ∈ G.\n  (Since ord(g) | n, we have gⁿ = (g^{ord(g)})^{n/ord(g)} = e^{n/ord(g)} = e.)\n\n### Distinction from math.abst.coset\n`math.abst.coset` introduced left cosets aH, proved the partition property, and defined the\nindex [G:H].  This blueprint uses those results as the premise of Lagrange's proof and focuses\non the theorem's statement, proof, and corollaries.\n\n### Conceptual Layers (C → P → A)\n| Layer | Content |\n|-------|---------|\n| **Concrete (C)** | Z/6Z: cosets of H = {0,2,4} (index 2); cosets of H = {0,3} (index 3) |\n| **Pictorial (P)** | Partition diagram: G = H ∪ 1+H with each piece the same size |\n| **Abstract (A)** | Lagrange proof via partition + equal-size cosets; corollaries C1–C3 |\n\n### Coset Partition Example (Z/6Z, H = {0, 2, 4})\n|H| = 3.  Cosets:\n- 0 + H = {0, 2, 4}\n- 1 + H = {1, 3, 5}\nTwo cosets, each of size 3.  |G| = 6 = 3 × 2 = |H| × [G:H]. ✓\n\n---\n\n<!-- COMPONENT 2: MISCONCEPTION REGISTRY -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 31,
+        "endLine": 71
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "LAGRANGE-CONVERSE-TRUE",
+      "content": "| MC-1 | LAGRANGE-CONVERSE-TRUE | Claims \"if d divides |G|, then G has a subgroup of order d\" | Confuses the theorem with its converse; the converse is FALSE in general (A₄ has order 12 but no subgroup of order 6) | **FOUNDATIONAL** |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "COSET-OVERLAP-POSSIBLE",
+      "content": "| MC-2 | COSET-OVERLAP-POSSIBLE | Thinks two different cosets might share an element | Didn't absorb the coset partition property from the prerequisite; doesn't see that shared element ⟹ equal cosets | Secondary |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "COROLLARY-OVERSHOOT",
+      "content": "| MC-3 | COROLLARY-OVERSHOOT | Applies C2 (prime-order cyclic) to non-prime group orders | Misreads C2 as \"G of order n is cyclic\"; it only applies when n is prime | Secondary |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "Coset Partition → Lagrange Proof (P11 + P49)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Coset Partition → Lagrange Proof (P11 + P49)\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 107,
+        "endLine": 144
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "Gallery: Valid and Invalid Subgroup Orders (P04 + P49)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Gallery: Valid and Invalid Subgroup Orders (P04 + P49)\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-1\",\"MC-3\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 144,
+        "endLine": 179
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "Lagrange vs Converse; Prime-Order Groups (P06 + P49)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Lagrange vs Converse; Prime-Order Groups (P06 + P49)\",\"primitives\":[\"P06\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 179,
+        "endLine": 220
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Terminal Mastery Gate (P91)\",\"primitives\":[\"P04\",\"P06\",\"P11\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 220,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "Terminal Mastery Gate (P91)",
+      "content": "### TA-A04 · Terminal Mastery Gate (P91)\n\n```\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78\n```\n\n**[P77 — MULTI-PROBLEM SET]**  (4 questions)\n\n**Q1.** State and prove Lagrange's Theorem.\n*(Statement: |H| | |G| for any subgroup H ≤ G (finite).\n Proof: Cosets partition G (from coset theory). Each coset has size |H| (left multiplication by a\n is a bijection H → aH). If there are k cosets, |G| = k|H|, so |H| | |G|. ✓)*\n\n**Q2.** G has order 35.  What are the possible orders of subgroups?  Possible element orders?\n*(Divisors of 35 = {1, 5, 7, 35}. Possible subgroup orders: 1, 5, 7, 35. Element orders must\n also divide 35: same set {1, 5, 7, 35}.)*\n\n**Q3.** Prove: in a group of order p (prime), every non-identity element generates the whole group.\n*(Let g ≠ e. ord(g) | p; since p prime, ord(g) ∈ {1, p}. ord(g)=1 ↔ g=e (contradiction). So\n ord(g)=p → ⟨g⟩ has p elements = |G| → ⟨g⟩ = G. ✓)*\n\n**Q4.** Does there exist a group of order 6 with no element of order 6?  Justify.\n*(Yes — D₃ has order 6 and all element orders are 1, 2, or 3 (maximum 3). No element generates\n all of D₃ (not cyclic). Lagrange says orders must divide 6; {1,2,3} all divide 6 ✓.)*\n\n**[P55 — SCORE]**  Tally Q1–Q4.\n\n---\n\n**[P76 — TRANSFER PROBE]**  (P76_MODE = Independence)\n\n*Independence probe: applies Lagrange to constrain group structure.*\n\n> A group G has order 21.\n>\n> (i) List all possible orders of proper subgroups (not trivial, not G itself).\n> (ii) List all possible orders of elements (including e and non-identity).\n> (iii) G has an element g with g³ = e but g ≠ e.  Can G have an element h with h⁷ = e but h ≠ e?  Can both g and h exist simultaneously?\n> (iv) Is G necessarily cyclic?  Why or why not?\n\n*Expected answers:*\n- **(i)** Divisors of 21 = {1, 3, 7, 21}.  Proper non-trivial: {3, 7}.\n- **(ii)** Element orders: divisors of 21 = {1, 3, 7, 21}.\n- **(iii)** Yes to both — ord(g)=3 (divides 21 ✓) and ord(h)=7 (divides 21 ✓).  Both can exist.\n- **(iv)** Not necessarily.  21 is not prime (21 = 3×7), so C2 doesn't apply.  If G has an element\n  of order 21, then G is cyclic; but G could have only elements of orders 1, 3, 7 and still be a\n  group of order 21 (e.g., Z/3Z × Z/7Z ≅ Z/21Z in this case — actually Z/21Z since gcd(3,7)=1 — but\n  in general non-abelian groups of order 21 exist).  [Acceptable answer: \"not necessarily; 21 is not prime.\"]\n\n**[P55 — SCORE]**  Award 1 point for P76 if (i)+(ii) correct and (iv) reasoned; 0 otherwise.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\n```\nPASS_CRITERION: 5 out of 5 items (4 P77 + 1 P76)\nTHRESHOLD:      0.90  →  ⌈0.90 × 5⌉ = 5\n```\n\n**[P55 — SCORE]**  Combine P77 tally + P76 score → total out of 5.\n\n**[P74 — ROUTING DECISION]**\n\n- **Score = 5/5 → MASTERY ACHIEVED.** Proceed to P78.\n- **Score ≤ 4/5 → Identify which items failed:**\n  - Q1 wrong → revisit TA-A01 proof sketch; TB-R02 for coset partition step if needed.\n  - Q2 wrong → revisit divisors of 35; apply Lagrange systematically.\n  - Q3 wrong → revisit C2 in TA-A03 P64.\n  - Q4 wrong → MC-3 → TB-R03 (D₃ counterexample).\n  - P76 wrong → identify which part; route to TA-A02/TA-A03 as appropriate.\n  - After repair, re-administer only the failed item.\n\n**[P55 — SCORE]**  Record repair outcome.\n\n**[P78 — COMPLETION]**\n\n```\nBLUEPRINT_ID:    math.abst.lagrange-theorem\nMASTERY_REACHED: true\nUNLOCKS:         (none — lateral enrichment)\nNEXT_CONCEPT:    (instructor-directed: math.abst.group-isomorphism or sylow-theorems)\nSESSION_CLOSE:   \"Lagrange's theorem: |H| always divides |G|. The proof uses the fact that\n                  cosets partition G into equal-size pieces. Key corollaries: element orders\n                  divide |G|; prime-order groups are cyclic; gⁿ=e for all g. The converse\n                  is FALSE — divisibility of |G| by d does not guarantee a subgroup of order d.\"\n```\n\n---\n\n<!-- COMPONENT 5: PROTOCOL B (REPAIR) -->\n\n## Component 5: Protocol B — Repair Chains\n\n---\n\n### TB-R01 · Repair: LAGRANGE-CONVERSE-TRUE (MC-1)\n\n**Trigger:** Student says every divisor of |G| gives a subgroup.\n\n**Step 1 — State the theorem precisely.**\n> Lagrange (THEOREM, one direction only): H ≤ G ⟹ |H| | |G|.\n> Converse (NOT a theorem): d | |G| ⟹ ∃ subgroup of order d.  This is FALSE.\n\n**Step 2 — Counterexample: A₄.**\n> A₄ (even permutations of 4 elements): |A₄| = 12.  6 | 12.\n> BUT A₄ has NO subgroup of order 6. (Accepted without full proof.)\n> Lagrange's theorem gives only a necessary condition.\n\n**Exit:** Return to TA-A03 P49 checkpoint.\n\n---\n\n### TB-R02 · Repair: COSET-OVERLAP-POSSIBLE (MC-2)\n\n**Trigger:** Student thinks two different cosets can share an element.\n\n**Step 1 — Coset partition from prerequisite.**\n> Recall: if g₁H and g₂H share any element (say g₁h₁ = g₂h₂ for some h₁,h₂ ∈ H), then\n> g₁⁻¹g₂ = h₁h₂⁻¹ ∈ H → g₁H = g₂H.  Distinct cosets have NO overlap.\n\n**Step 2 — Verify in Z/6Z.**\n> H = {0,3}. Coset 1+H = {1,4}. Coset 2+H = {2,5}.  No overlap with each other or H. ✓\n\n**Exit:** Return to TA-A01 P49 checkpoint.\n\n---\n\n### TB-R03 · Repair: COROLLARY-OVERSHOOT (MC-3)\n\n**Trigger:** Student applies prime-order corollary to non-prime group orders.\n\n**Step 1 — State C2 precisely.**\n> C2: If |G| = p is PRIME, then G ≅ Z/pZ (cyclic).\n> This only holds for prime order.  It does NOT say \"if |G| = n then G ≅ Z/nZ.\"\n\n**Step 2 — Counterexample for non-prime order.**\n> |D₃| = 6 (not prime).  D₃ is NOT cyclic (non-abelian).  Z/6Z IS cyclic (abelian).\n> Same order (6), different groups.  Non-prime order → C2 fails to apply.\n\n**Step 3 — Correct the rule.**\n> Prime order → exactly one group up to isomorphism (Z/pZ).\n> Composite order → multiple non-isomorphic groups may exist (e.g., order 6: Z/6Z and D₃).\n\n**Exit:** Return to TA-A03 P49 checkpoint.\n\n---\n\n<!-- COMPONENT 6: P89 Spaced Repetition -->\n\n## Component 6: P89 Spaced Repetition\n\n```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"A group of order 15 has a subgroup of order 5. Which theorem guarantees this is possible?\"\n    Target: Lagrange allows it (5|15), but doesn't guarantee it. Answer should mention Lagrange\n            as the necessary condition, and note the converse is not guaranteed. PASS if Lagrange cited.\n\n  Interval-2 (+3 days):\n    Probe: \"Is every group of order 11 cyclic? Why?\"\n    Target: Yes — 11 is prime → C2: every group of prime order is cyclic ≅ Z/11Z.\n            PASS if prime cited and C2 applied.\n\n  Interval-3 (+1 week):\n    Probe: \"Can a group of order 10 have a subgroup of order 4? Element of order 4?\"\n    Target: Subgroup of order 4: No — 4∤10. Element of order 4: No (same reason: ord(g)|10,\n            divisors of 10 = {1,2,5,10}, 4 not among them). PASS if both with divisibility reason.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (divisor gallery) or TA-A03 (converse).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->\n\n## Component 7: Cross-Blueprint Dependencies\n\n```\nPREREQUISITES_CONSUMED:\n  math.abst.coset:\n    Used in:   TA-A01 (coset partition property; equal-size bijection; index [G:H] — all from\n               coset blueprint used directly in the Lagrange proof), TA-A02 (subgroup notation\n               H ≤ G and order |H| assume coset fluency), TA-A03 (normal subgroup and index\n               mentioned briefly in A₄ counterexample).\n    Assumed:   Student holds: definition of left coset aH; proof that cosets partition G; the\n               left-multiplication bijection H → aH; the index [G:H]; coset definition H ≤ G.\n\nUNLOCKS_ENABLED:\n  (none — terminal node for Lagrange; conceptually feeds Sylow theorems via group-order)\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n  P76 independence probe applies Lagrange to a group of order 21 (= 3×7).\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->\n\n## Component 8: Teaching Notes\n\n**1. The coset prerequisite does the heavy lifting.**\nThe entire proof of Lagrange reduces to two facts from the coset blueprint: (a) cosets partition\nG, and (b) every coset has the same size |H|.  Students who hold these facts can reproduce the\nproof in 3 lines.  Spend TA-A01 confirming these prerequisites are solid before proceeding.\n\n**2. MC-1 (converse true) is the dominant long-term error.**\nStudents remember \"subgroup orders divide group order\" and incorrectly infer \"any divisor gives\na subgroup.\"  The A₄ counterexample (order 12, no subgroup of order 6) is the standard reference\npoint.  Stating the counterexample without full proof is sufficient at this level.\n\n**3. Corollary C2 is powerful but scoped.**\nThe prime-order corollary (C2) is arguably the most elegant consequence of Lagrange at this\nlevel.  Its proof is 2 lines.  But its scope is strict — it applies only when |G| is prime.\nStudents should be able to cite both the theorem and its scope boundary.\n\n**4. Q4 requires holding two ideas simultaneously.**\nA group of order 6 with no element of order 6 (= D₃) shows that the divisibility rule (orders\n1,2,3 all divide 6) is consistent with non-cyclicity.  This prepares students for the Sylow\ntheory distinction between \"possible order\" and \"realised order.\"\n\n---\n\n<!-- COMPONENT 10: VALIDATION CHECKLIST -->\n\n## Component 10: Validation Checklist\n\n```\nVALIDATION CHECKLIST — math.abst.lagrange-theorem\n===================================================\n\nSTRUCTURAL\n[PASS] V-1   Blueprint has all 10 required components (0–8, 10).\n[PASS] V-2   Metadata block complete: all 9 fields present and consistent with KG.\n[PASS] V-3   SESSION_TA_CAP = 5; 4 TAs used ≤ 5. ✓\n[PASS] V-4   CPA_ENTRY_STAGE = C (Z/6Z coset partition as concrete anchor).\n[PASS] V-5   P76_MODE = Independence (no cross_links; order-21 novel inference).\n\nMISCONCEPTION COVERAGE\n[PASS] V-6   MC-1 FOUNDATIONAL identified; cleared at TA-A03 gate.\n[PASS] V-7   MC-1 surfaced via TA-A02 P49 and TA-A03 P06; TB-R01 route.\n[PASS] V-8   MC-2 and MC-3 addressed in TA-A01 and TA-A03; repair chains present.\n[PASS] V-9   All three MCs have repair chains in Protocol B.\n\nGRAMMAR RULES\n[PASS] V-10  GR-1: Every non-repair TA opens with B-category primitive.\n               TA-A01→P11 ✓  TA-A02→P04 ✓  TA-A03→P06 ✓  TA-A04→P91(P77) ✓\n[PASS] V-11  GR-2: Every non-gate TA has P49. TA-A01→P49 ✓  TA-A02→P49 ✓  TA-A03→P49 ✓\n[PASS] V-12  GR-3: Terminal TA (TA-A04) is a mastery gate containing P91.\n[PASS] V-13  GR-4: P77 contains exactly 4 questions. ✓\n[PASS] V-14  GR-5: P91 terminal with correct compound P77→P55→P76→P55→P75→P55→P74→P55→P78. ✓\n[PASS] V-15  GR-6: P76 included inside P91.\n[PASS] V-16  GR-9: P76 Independence — group of order 21; novel Lagrange application.\n[PASS] V-17  GR-10: MAMR stated; MC-1 addressed before gate.\n\nPASS CRITERION\n[PASS] V-18  PASS_CRITERION = ⌈0.90 × 5⌉ = 5/5; composition = 4 P77 + 1 P76 = 5 items ✓.\n[PASS] V-19  P74 routing covers all score outcomes.\n\nCONTENT\n[PASS] AIR   Lagrange's Theorem stated and proved (coset partition + equal-size bijection).\n             Corollaries C1 (element orders divide |G|), C2 (prime-order → cyclic), C3 (gⁿ=e).\n             Converse FALSE (A₄ counterexample). MC-1/MC-2/MC-3 all addressed.\n             P76 independence: order-21 group; possible element orders; non-prime → not necessarily cyclic.\n\nVERDICT: PACKAGE_READY\n```",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 220,
+        "endLine": 488
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "Scaffolding Protocol",
+      "content": "```\nEntry → TA-A01 (P11: coset partition of Z/6Z; equal-size cosets visualised + P49)\n      → TA-A02 (P04: gallery of Lagrange applications — valid/invalid subgroup orders + P49)\n      → TA-A03 (P06: Lagrange vs converse; prime-order groups cyclic + P49)\n      → TA-A04 (P91 terminal mastery gate)\n\nRepair (Protocol B):\n  MC-1 → TB-R01 (A₄ counterexample: order 12, no subgroup of order 6)\n  MC-2 → TB-R02 (coset partition proof: shared element implies equal cosets)\n  MC-3 → TB-R03 (C2 applies only to prime order; construct D₃ (order 6, not prime, not cyclic))\n```\n\n---\n\n<!-- COMPONENT 4: PROTOCOL A (MAIN) -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 85,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "P89 Spaced Repetition",
+      "content": "```\nP89 SCHEDULE:\n  Interval-1 (next session):\n    Probe: \"A group of order 15 has a subgroup of order 5. Which theorem guarantees this is possible?\"\n    Target: Lagrange allows it (5|15), but doesn't guarantee it. Answer should mention Lagrange\n            as the necessary condition, and note the converse is not guaranteed. PASS if Lagrange cited.\n\n  Interval-2 (+3 days):\n    Probe: \"Is every group of order 11 cyclic? Why?\"\n    Target: Yes — 11 is prime → C2: every group of prime order is cyclic ≅ Z/11Z.\n            PASS if prime cited and C2 applied.\n\n  Interval-3 (+1 week):\n    Probe: \"Can a group of order 10 have a subgroup of order 4? Element of order 4?\"\n    Target: Subgroup of order 4: No — 4∤10. Element of order 4: No (same reason: ord(g)|10,\n            divisors of 10 = {1,2,5,10}, 4 not among them). PASS if both with divisibility reason.\n\nREACTIVATION_TRIGGER: Any probe fails → requeue TA-A02 (divisor gallery) or TA-A03 (converse).\n```\n\n---\n\n<!-- COMPONENT 7: CROSS-BLUEPRINT DEPENDENCIES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 367,
+        "endLine": 392
+      }
+    },
+    {
+      "assetId": "math.abst.lagrange-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.abst.lagrange-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "```\nPREREQUISITES_CONSUMED:\n  math.abst.coset:\n    Used in:   TA-A01 (coset partition property; equal-size bijection; index [G:H] — all from\n               coset blueprint used directly in the Lagrange proof), TA-A02 (subgroup notation\n               H ≤ G and order |H| assume coset fluency), TA-A03 (normal subgroup and index\n               mentioned briefly in A₄ counterexample).\n    Assumed:   Student holds: definition of left coset aH; proof that cosets partition G; the\n               left-multiplication bijection H → aH; the index [G:H]; coset definition H ≤ G.\n\nUNLOCKS_ENABLED:\n  (none — terminal node for Lagrange; conceptually feeds Sylow theorems via group-order)\n\nCROSS_LINKS_NOTED:\n  (none — cross_links = [])\n  P76 independence probe applies Lagrange to a group of order 21 (= 3×7).\n```\n\n---\n\n<!-- COMPONENT 8: TEACHING NOTES -->",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.abst.lagrange-theorem.md",
+        "startLine": 392,
+        "endLine": 415
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

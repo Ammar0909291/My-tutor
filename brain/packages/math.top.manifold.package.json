@@ -1,0 +1,316 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.top.manifold-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.top.manifold",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e52cc354097850a75d4cc0ca285eebf61deaa1574c18c2e0ebcbd9ac155bb544",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.top.manifold.md": "sha256:0ea830d16dfc2be7e8a9945966651bdd65bfd709033f828405bfb18eec03f445"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.top.manifold",
+    "name": "Topological Manifold",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.top.topological-space",
+      "math.top.homeomorphism"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.top.manifold-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.top.manifold (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.top.manifold.md": "sha256:0ea830d16dfc2be7e8a9945966651bdd65bfd709033f828405bfb18eec03f445"
+      },
+      "contentHash": "sha256:04cbd2a0edbd5a65eba3d4500859b414546ff3d6de9e756ec75a3f3ae2657a9c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.top.manifold.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.manifold.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.manifold\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.manifold.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.manifold.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.manifold\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.manifold.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.manifold.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.manifold\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.top.manifold.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.top.manifold.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.top.manifold"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.top.manifold\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.top.manifold/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.top.manifold",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **$n$-dimensional topological manifold** (Hausdorff + second-countable + every point has a neighborhood homeomorphic to $\\mathbb{R}^n$); define a **chart** $(U,\\phi)$ and **atlas**; state why the Hausdorff and second-countability conditions are included (to exclude pathological spaces and ensure the existence of partitions of unity).\n- LO2: **Verify** that standard spaces ($S^n$, $T^n$, $\\mathbb{R}P^n$) are manifolds by exhibiting explicit atlases; define **manifolds with boundary** (locally modeled on the upper half-space $\\mathbb{H}^n=\\{x\\in\\mathbb{R}^n:x_n\\ge0\\}$), identifying boundary $\\partial M$ as the set of points that map to $\\partial\\mathbb{H}^n=\\mathbb{R}^{n-1}$.\n- LO3: **Apply the classification of compact surfaces** (every compact connected 2-manifold without boundary is homeomorphic to exactly one of $S^2$, a connected sum of $g\\ge1$ tori, or a connected sum of $k\\ge1$ copies of $\\mathbb{R}P^2$); distinguish the **manifold boundary** $\\partial M$ from the **topological boundary** $\\partial A$ of a subspace $A$ in an ambient space.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.top.manifold/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.top.manifold",
+      "title": "MANIFOLD-MUST-BE-EMBEDDED-IN-EUCLIDEAN-SPACE",
+      "content": "| MC-1 | MANIFOLD-MUST-BE-EMBEDDED-IN-EUCLIDEAN-SPACE | Believing a manifold is by definition a subset of some $\\mathbb{R}^N$ — missing that the intrinsic definition requires only local homeomorphisms; an abstract manifold has no ambient space (Whitney's theorem guarantees an embedding exists, but it is not part of the definition) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.top.manifold/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.top.manifold",
+      "title": "LOCALLY-EUCLIDEAN-IS-SUFFICIENT-FOR-MANIFOLD",
+      "content": "| MC-2 | LOCALLY-EUCLIDEAN-IS-SUFFICIENT-FOR-MANIFOLD | Believing local homeomorphism to $\\mathbb{R}^n$ alone suffices for a manifold — missing the Hausdorff and second-countability conditions; the line with two origins is locally $\\mathbb{R}$ but fails Hausdorff and is excluded | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 107,
+        "endLine": 107
+      }
+    },
+    {
+      "assetId": "math.top.manifold/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.top.manifold",
+      "title": "MANIFOLD-BOUNDARY-EQUALS-TOPOLOGICAL-BOUNDARY",
+      "content": "| MC-3 | MANIFOLD-BOUNDARY-EQUALS-TOPOLOGICAL-BOUNDARY | Believing the manifold boundary $\\partial M$ always agrees with the topological boundary of $M$ as a subspace of an ambient space — the two agree for many embedded cases but differ in general: $S^1\\subset\\mathbb{R}^2$ has empty manifold boundary but non-empty topological boundary as a subspace | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.top.manifold/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.manifold",
+      "title": "Local vs. Global Euclidean Structure (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Local vs. Global Euclidean Structure (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.top.manifold/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.manifold",
+      "title": "Checking the Three Conditions (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Checking the Three Conditions (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.top.manifold/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.manifold",
+      "title": "Manifolds with Boundary and the Classification Theorem (Primitive P16: Counterexample)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Manifolds with Boundary and the Classification Theorem (Primitive P16: Counterexample)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.top.manifold/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.top.manifold",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.manifold/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.top.manifold",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Show that $T^2$ (the torus) is a 2-manifold without boundary. Describe an atlas explicitly using the quotient map $\\mathbb{R}^2\\to T^2=\\mathbb{R}^2/\\mathbb{Z}^2$.\n  2. Show that $[0,1]$ is a 1-manifold with boundary $\\partial[0,1]=\\{0,1\\}$. Identify which points are interior manifold points (need a neighborhood homeomorphic to $\\mathbb{R}$) and which are boundary (need a neighborhood homeomorphic to $[0,\\infty)$).\n  3. Prove that the Möbius strip is a 2-manifold with boundary, and identify its boundary. (Describe the boundary circle as a simple closed curve.) Is the Möbius strip orientable?\n  4. Use the classification theorem to list all compact connected 2-manifolds (without boundary) with $\\chi\\ge0$. (There are exactly four: $S^2$, $T^2$, $\\mathbb{R}P^2$, and the Klein bottle.)\n- **P76 (Transfer Probe, mode = independence)**: \"The **Poincaré Conjecture** (now Poincaré–Perelman theorem) states: every compact simply connected 3-manifold without boundary is homeomorphic to $S^3$. (a) Explain why the analogous statement in dimension 2 is true and easy: every compact simply connected 2-manifold without boundary is homeomorphic to $S^2$ — identify which surface in the classification has $\\chi=2$ and trivial fundamental group. (b) The analogous statement for $n=1$ is even easier: state and prove it (classify compact connected 1-manifolds: they are $S^1$ and $[0,1]$). (c) Why is dimension 3 hard while dimensions 1 and 2 are accessible? (Dimension 1: classified by compactness and boundary; dimension 2: rich but classifiable by $\\chi$ and orientability; dimension 3: the full machinery of geometric flows — Ricci flow with surgery — was needed.)\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Topological Manifold — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 21,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "math.top.manifold/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.top.manifold",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.top.topological-space` (open sets, Hausdorff axiom, second-countability) and `math.top.homeomorphism` (bijective bicontinuous maps, topological invariants). These prerequisites together guarantee the student can verify the local-homeomorphism condition and understand why invariants derived from manifolds are well-defined.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.top.manifold/reference/1",
+      "kind": "reference",
+      "conceptId": "math.top.manifold",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.top.topological-space` (topological space definition, Hausdorff axiom, second-countability), `math.top.homeomorphism` (for chart/atlas homeomorphisms and invariance of dimension).\n- **Unlocks**: `math.top.smooth-manifold` (adds a differentiable structure to the topological manifold atlas).\n- **Cross-link**: none in KG → P76 uses independence mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.top.manifold.md",
+        "startLine": 116,
+        "endLine": 122
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,333 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.trig.law-of-sines-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.trig.law-of-sines",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0268a22cb075d2f9f77181490fb9a2e6950922d352504076e13de6cc2ea487e1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.trig.law-of-sines.md": "sha256:4063bbd51935aa4d471cf34258f3c830b397d9f7b7305d3b325bb84ca288b8d9"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.trig.law-of-sines",
+    "name": "Law of Sines",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.trig.right-triangle-trig"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.trig.law-of-sines-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.trig.law-of-sines (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.trig.law-of-sines.md": "sha256:4063bbd51935aa4d471cf34258f3c830b397d9f7b7305d3b325bb84ca288b8d9"
+      },
+      "contentHash": "sha256:7d83e6c9bccdedc41e5d5dfe3ceefdaa3938712a29918f0da900b63974456f39",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.trig.law-of-sines.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.law-of-sines.md#TA-A01 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.law-of-sines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.law-of-sines\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.law-of-sines.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.law-of-sines.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.law-of-sines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.law-of-sines\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.law-of-sines.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.law-of-sines.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.law-of-sines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.law-of-sines\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.trig.law-of-sines.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.trig.law-of-sines.md#TA-A04 (addresses MC-3, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.trig.law-of-sines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.trig.law-of-sines\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.trig.law-of-sines/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "Law of Sines — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.trig.right-triangle-trig**: Sine as opposite/hypotenuse; altitude from vertex divides a general triangle into two right triangles\n\n### Target Knowledge State\nStudent states and applies the law of sines: a/sin A = b/sin B = c/sin C (where a, b, c are sides opposite angles A, B, C respectively). Student identifies AAS and ASA as the configurations where the law of sines applies. Student recognizes and resolves the ambiguous case (SSA): determines whether 0, 1, or 2 triangles exist, and finds all valid solutions when 2 triangles are possible.\n\n### Conceptual Obstacles\n1. Applying the law of sines to SAS or SSS configurations, where law of cosines is required\n2. In the SSA ambiguous case, always assuming exactly one triangle exists — missing the obtuse solution\n3. Confusing the angle-side pairing: side a must be opposite angle A (not adjacent to it)\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 29,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "SINE-RULE-FOR-ALL",
+      "content": "| MC-1 | SINE-RULE-FOR-ALL | Student applies law of sines to SAS or SSS configurations where it cannot directly find the missing side | Any triangle problem without a stated angle-side pair opposite each other |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "AMBIGUOUS-CASE-BLINDNESS",
+      "content": "| MC-2 | AMBIGUOUS-CASE-BLINDNESS | In SSA, student finds only the acute angle solution for B (arcsin result) and never considers the obtuse supplement | SSA problems where b sin A < a < b |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "ANGLE-SIDE-PAIRING",
+      "content": "| MC-3 | ANGLE-SIDE-PAIRING | Student writes a/sin B or b/sin A — pairing a side with the wrong angle in the ratio | Setting up the proportion |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "Deriving the Law of Sines",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Deriving the Law of Sines\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 64,
+        "endLine": 118
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "Solving AAS and ASA Triangles",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Solving AAS and ASA Triangles\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 118,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "The Ambiguous Case (SSA)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Ambiguous Case (SSA)\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 164,
+        "endLine": 221
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\",\"MC-3\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 221,
+        "endLine": 422
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n**Problem 1.** In △ABC, A = 40°, B = 70°, a = 15. Find side b (to 2 decimal places).\n\n**Problem 2.** In △ABC, B = 50°, C = 65°, c = 20. Find side b and angle A.\n\n**Problem 3.** In △ABC, A = 30°, a = 8, b = 12. Determine the number of valid triangles and find angle B for each.\n\n**Problem 4.** In △ABC, C = 110°, c = 25, a = 12. Find angle A.\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. b/sin70° = 15/sin40° → b = 15·sin70°/sin40° ≈ **21.95** ✓\n\n2. A = 180°−50°−65° = 65°. b/sin50° = 20/sin65° → b ≈ 20·0.766/0.906 ≈ **16.91** ✓\n\n3. h = 12·sin30° = 6; 6 < 8 < 12 → 2 triangles. sinB = 6/8 = 3/4. B₁ ≈ **48.59°**, B₂ ≈ **131.41°** ✓\n\n4. sinA/12 = sin110°/25 → sinA = 12·sin110°/25 ≈ 0.451. A ≈ **26.8°** (acute only, since C > 90°) ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* A surveyor at point A sights a landmark C across a river. The line of sight makes 35° with the riverbank AB. From point B, 100 m downstream from A, the sighting angle to C is 55° (measured from the bank on the same side). Find the distance AC.\n\n*Expected answer:*\n\nIn △ABC: angle at A = 35°, angle at B = 180° − 55° = 125°, angle at C = 180° − 35° − 125° = 20°.\n\nBy law of sines: AC/sin B = AB/sin C → AC = 100 · sin125°/sin20° ≈ 100 · 0.8192/0.3420 ≈ **239.5 m**.\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe: 1 point for correct angle identification and application of law of sines.\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.8 × 5⌉ = 4). Total n = 5 (P77: 4 items, P76: 1 item).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 4–5/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed item; wrong law → B01; missed ambiguous solution → B02; wrong pairing → B03; targeted repair |\n| ≤ 2/5 | → Return to A01; re-derive from altitude; rebuild proportion-setup procedure; schedule R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.trig.law-of-sines` complete. Threshold 0.8 requires 4/5 correct.\n\n**Unlocks:** Combined law of sines/cosines applications; surveying and navigation problems.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 224,
+        "endLine": 316
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** C (Concrete) — derive from a general triangle with a labeled altitude.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — Draw altitude h; show two right triangles; derive h = b sin A = a sin B; rearrange to a/sin A = b/sin B; extend to include C\n2. **A02 P04 PATTERN INDUCTION** — Gallery of AAS and ASA problems; automate the proportion setup\n3. **A03 P06 CONTRAST PAIR** — The ambiguous case (SSA): three scenarios (no triangle, one right triangle, two triangles) shown side by side with a consistent diagram\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 56,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | In △ABC, A=55°, C=75°, b=30. Find sides a and c. |\n| R2 | 3 days | Ambiguous case: A=25°, a=10, b=14. How many triangles? Find all angles B. |\n| R3 | 7 days | A ship travels from port P to island Q on a bearing of N40°E for 50 km. It then reaches island R on a bearing of S60°E. The angle at Q between PQ and QR is 80°. Find the distance QR. |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 366,
+        "endLine": 376
+      }
+    },
+    {
+      "assetId": "math.trig.law-of-sines/reference/1",
+      "kind": "reference",
+      "conceptId": "math.trig.law-of-sines",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | Navigation and surveying applications; combined law problems |\n| Requires (Tier-1) | math.trig.right-triangle-trig |\n\n**GR-8 compliance:** cross_links = none; no cross-link documentation needed.\n**GR-9 compliance:** P76 uses an independent surveying problem.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.trig.law-of-sines.md",
+        "startLine": 376,
+        "endLine": 390
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

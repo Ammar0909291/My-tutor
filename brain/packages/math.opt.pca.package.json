@@ -1,0 +1,550 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.pca-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.pca",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d33df73cb7f7cdc1fae6960d9f9511310f5d2539b38fb76a1a00fe4c29c4ae7a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.pca.md": "sha256:7c2b0410b185a56334aab51efa2ec0592343888174f36903aebb8e908bd0b463"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.opt.pca",
+    "name": "Principal Component Analysis",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.svd",
+      "math.stats.covariance-matrix"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.pca-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.pca (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.pca.md": "sha256:7c2b0410b185a56334aab51efa2ec0592343888174f36903aebb8e908bd0b463"
+      },
+      "contentHash": "sha256:fadbbba0e8d2d9f67f337e7578868af0acb8d4c09981ff9980c5d339bec8d4fb",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.pca.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.pca.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.pca"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.pca\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.pca/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.pca",
+      "title": "Learning Objective",
+      "content": "Given a data matrix X (n×d, n samples, d features), the student centres the data, computes the empirical covariance matrix Σ=(1/n)XᵀX, applies eigendecomposition or SVD to identify the top-k principal components (eigenvectors of Σ corresponding to the largest eigenvalues), projects X onto these components, computes the explained variance ratio, and selects k using the scree plot or a variance threshold.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.pca/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.pca",
+      "title": "PCA-SELECTS-FEATURES",
+      "content": "| MC-1 | PCA-SELECTS-FEATURES | Student confuses PCA with feature selection; believes principal components are original features with highest variance; does not see that PCs are LINEAR COMBINATIONS of all features | Type 5 — instruction-induced (both reduce dimensionality, but by different mechanisms) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.pca/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.pca",
+      "title": "FORGET-CENTRING",
+      "content": "| MC-2 | FORGET-CENTRING | Student applies PCA to uncentred data; gets a first PC dominated by the mean direction rather than variance direction | Type 2 — perceptual intuition (centring seems like a minor preprocessing detail) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.pca/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.pca",
+      "title": "EIGENVALUE-IS-VARIANCE-TOTAL",
+      "content": "| MC-3 | EIGENVALUE-IS-VARIANCE-TOTAL | Student adds up all eigenvalues to get total variance but uses the wrong formula for explained ratio; divides individual eigenvalue by the largest eigenvalue instead of the sum | Type 1 — overgeneralization (normalising by the maximum sounds natural) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "CORRECT → \"PCs are eigenvectors of the covariance matrix; eigenvalues measure variance in each direction.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"PCs are eigenvectors of the covariance matrix; eigenvalues measure variance in each direction.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "PARTIAL (computes eigenvectors but forgot centring) → \"What is Σ for uncentred X_raw? Compare it to Σ for centred X.\" → TB-R02 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (computes eigenvectors but forgot centring) → \\\"What is Σ for uncentred X_raw? Compare it to Σ for centred X.\\\" → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "INCORRECT → TB-R02 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "NO_RESPONSE → \"Compute the mean of the four x₁-coordinates: (2+4+6+8)/4=?\" → TB-R02 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Compute the mean of the four x₁-coordinates: (2+4+6+8)/4=?\\\" → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 66,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "CORRECT → \"PCs are linear combinations of ALL features, not selected subsets. They maximise variance in new coordinate directions.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"PCs are linear combinations of ALL features, not selected subsets. They maximise variance in new coordinate directions.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "PARTIAL (agrees PCA isn't feature selection, unclear on linear combination) → \"In the 2D example, write out what PC₁'s score is for the first sample: (1/√2)·(−3)+(1/√2)·(−3)=?\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (agrees PCA isn't feature selection, unclear on linear combination) → \\\"In the 2D example, write out what PC₁'s score is for the first sample: (1/√2)·(−3)+(1/√2)·(−3)=?\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "INCORRECT → TB-R01 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "NO_RESPONSE → \"Can the first principal component score be negative? What does a negative score mean geometrically?\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Can the first principal component score be negative? What does a negative score mean geometrically?\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "CORRECT → \"Explained variance ratio = λᵢ/(Σλⱼ) — divide by SUM not maximum. SVD gives principal components as right singular vectors.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Explained variance ratio = λᵢ/(Σλⱼ) — divide by SUM not maximum. SVD gives principal components as right singular vectors.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 103,
+        "endLine": 103
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "PARTIAL (knows trace is denominator, confused about SVD) → \"If singular values are σ₁=4, σ₂=2, n=4, what are the eigenvalues of the covariance matrix?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (knows trace is denominator, confused about SVD) → \\\"If singular values are σ₁=4, σ₂=2, n=4, what are the eigenvalues of the covariance matrix?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 104,
+        "endLine": 104
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 105,
+        "endLine": 105
+      }
+    },
+    {
+      "assetId": "math.opt.pca/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.pca",
+      "title": "NO_RESPONSE → \"In our 2D example, λ₁=8, λ₂=2. What fraction of total variance does PC₁ explain?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"In our 2D example, λ₁=8, λ₂=2. What fraction of total variance does PC₁ explain?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 106,
+        "endLine": 106
+      }
+    },
+    {
+      "assetId": "math.opt.pca/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.pca",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Data matrix (3 samples, 2 features): X_raw=[[1,1],[3,3],[5,5]]. Compute the centred data, the 2×2 covariance matrix, the eigenvalues, and interpret the result (why is one eigenvalue zero?).\n2. A dataset has d=5 features with eigenvalues of the covariance matrix: λ=(10,5,2,1,0.5). Choose k using the 90% variance threshold.\n3. Explain why PCA applied to standardised data (each feature divided by its std before applying PCA) gives different results than PCA on uncentred/unstandardised data, and when you would prefer one over the other.\n4. The economy SVD of centred X is X=UΣVᵀ with singular values (6,3,1,0.5) and n=10 samples. Compute the explained variance ratio for the first two principal components.\n\n**P55 — Reflect & Consolidate:** \"PCA finds directions of maximum variance via the eigendecomposition of the covariance matrix. Always centre first. Explained variance ratio = λᵢ/Σλⱼ. SVD is the numerically stable route.\"\n\n**P76 — Transfer Probe (Cross-link to math.linalg.svd):**\nThe connection between SVD and PCA: given centred X (n×d), the economy SVD is X=UΣVᵀ. Show that (a) the columns of V are the eigenvectors of (1/n)XᵀX (the covariance matrix), and (b) the eigenvalues of the covariance matrix equal σᵢ²/n where σᵢ are the singular values of X. Use this to explain why SVD-based PCA avoids forming XᵀX explicitly (numerical stability when n<d).\n\n**P55 — Reflect & Consolidate:** \"SVD directly yields PCA: right singular vectors are principal components, squared singular values divided by n are eigenvalues. No need to form XᵀX explicitly — more stable numerically.\"\n\n**P75 — Mastery Assessment:**\n\"Dataset: 50 face images, each 64×64=4096 pixels (flattened to a vector). (a) What is the size of the data matrix X and its covariance matrix Σ? (b) Why is computing the full eigendecomposition of Σ impractical? (c) Describe how the economy SVD of X (50×4096, rank≤50) reduces the computation. (d) The top 10 singular values of X explain 85% of variance. How many additional singular values do you need to reach 95%, and how would you decide without computing all 4096?\"\n\n**P55 — Reflect & Consolidate:** \"Face recognition (Eigenfaces) was the first major PCA application in computer vision. The SVD trick is essential: instead of a 4096×4096 covariance matrix, you work with a 50×50 matrix.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.opt.pca complete\n- Score 3/5 → REVIEW centring and explained variance formula; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.linalg.svd or math.stats.covariance-matrix; reassign\n\n**P78 — Completion:** PCA certified. Student can centre data, compute covariance, find principal components, and interpret explained variance ratios via eigendecomposition or SVD.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.pca.md",
+        "startLine": 119,
+        "endLine": 146
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.semidefinite-programming |
-| Title | Semidefinite Programming |
+| name | Semidefinite Programming |
 | Domain | math.opt |
 | Difficulty | research |
 | Bloom level | analyze |
@@ -130,7 +130,7 @@ Step 1 — "PSD cone: {X∈𝕊ⁿ: X⪰0}. Convex means: if X,Y⪰0 and t∈[0,
 **TB-R03 (MC-3 SDP-ALWAYS-HAS-RANK-1-SOLUTION):**
 Step 1 — "The SDP DROPS the rank-1 constraint xᵢxⱼ=xᵢ·xⱼ. The optimal SDP solution X* can have any rank from 1 to n. High rank means the SDP relaxation is 'loose' relative to the combinatorial problem." Step 2 — "Rounding: factorize X*=VᵀV; the columns vᵢ are unit vectors in ℝⁿ. Cut by a random hyperplane: xᵢ=sign(vᵢᵀr). This is the GW rounding." Step 3 — "When X* happens to be rank-1, the SDP solution IS the original problem's optimal solution and the rounding is exact."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Show that the set {x∈ℝ²: [[1,x₁],[x₁,x₂]]⪰0} is a convex set in ℝ² by finding the explicit constraints on (x₁,x₂) from the PSD condition.

@@ -1,0 +1,549 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.domain-range-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.domain-range",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cb1a5c32d10366c3eac9ca609bc98b68b7b465115264fd65c3f19dd06eac81d4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.domain-range.md": "sha256:8185de9ac41806d64e70c1e72484f18cc4885f45da79d77fd2e13c62de30e5d7"
+    },
+    "assetCount": 17,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 12,
+      "mastery_probe": 1
+    },
+    "ruleCount": 12
+  },
+  "concept": {
+    "conceptId": "math.func.domain-range",
+    "name": "Domain and Range",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.func.function-concept"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.domain-range-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.domain-range (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.domain-range.md": "sha256:8185de9ac41806d64e70c1e72484f18cc4885f45da79d77fd2e13c62de30e5d7"
+      },
+      "contentHash": "sha256:8cd7f3347f2c23afaada7bacfe1c92334843e0b565f83b45053277957626e2ee",
+      "ruleCount": 12,
+      "bandCounts": {
+        "3": 12
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.domain-range.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.domain-range.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.domain-range"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.domain-range\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.domain-range/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.domain-range",
+      "title": "Learning Objective",
+      "content": "Given a function defined by a formula, a graph, or a table, the student states the domain (all valid inputs) and the range (all actual outputs), identifies natural domain restrictions (denominator ≠ 0, radicand ≥ 0, logarithm argument > 0), reads domain and range from a graph using projection onto axes, and distinguishes domain restriction from range restriction when composing functions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.domain-range",
+      "title": "RANGE-EQUALS-DOMAIN",
+      "content": "| MC-1 | RANGE-EQUALS-DOMAIN | Student assumes the range of a function equals its domain; does not distinguish input set from output set; writes \"domain = range = all reals\" for f(x)=x² | Type 1 — overgeneralization (for f(x)=x, domain=range=ℝ is true; students extend this to all functions) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.domain-range",
+      "title": "DOMAIN-ONLY-EXCLUDES-ZEROS",
+      "content": "| MC-2 | DOMAIN-ONLY-EXCLUDES-ZEROS | Student identifies only the zeros of denominators as domain restrictions; forgets radical restrictions (radicand ≥ 0) and logarithm restrictions (argument > 0) | Type 5 — instruction-induced (denominators are the most-emphasised restriction; others are introduced later) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.domain-range",
+      "title": "RANGE-IS-COMPUTED-NOT-REASONED",
+      "content": "| MC-3 | RANGE-IS-COMPUTED-NOT-REASONED | Student attempts to find the range by plugging in arbitrary x-values rather than reasoning about the function's output structure; misses the range for functions with bounded outputs like f(x)=sin(x) | Type 1 — overgeneralization (domain is found by algebraic restriction; students try to apply the same algebraic approach to range, which requires different reasoning) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "CORRECT → \"Domain = valid inputs (check: denominator≠0, radicand≥0, log argument>0). Range = actual outputs (reason from function's structure or graph projection).\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Domain = valid inputs (check: denominator≠0, radicand≥0, log argument>0). Range = actual outputs (reason from function's structure or graph projection).\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "PARTIAL (finds domain, can't find range of f(x)=x²) → \"What is the smallest value x² can take? Can x² be negative? Use this to state the range.\" → TB-R03 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (finds domain, can't find range of f(x)=x²) → \\\"What is the smallest value x² can take? Can x² be negative? Use this to state the range.\\\" → TB-R03 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "NO_RESPONSE → \"For f(x)=√(x−1), what values of x make the square root undefined? Start there.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"For f(x)=√(x−1), what values of x make the square root undefined? Start there.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "CORRECT → \"Each function type has a characteristic range shape. Polynomials (odd degree): ℝ. Even powers: [min,∞). Reciprocals: ℝ\\{0}. Exponentials: (0,∞). Trig: bounded interval.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Each function type has a characteristic range shape. Polynomials (odd degree): ℝ. Even powers: [min,∞). Reciprocals: ℝ\\\\{0}. Exponentials: (0,∞). Trig: bounded interval.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "PARTIAL (knows some cases, can't find range of √(9−x²)) → \"What does the graph of √(9−x²) look like? Project onto the y-axis.\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (knows some cases, can't find range of √(9−x²)) → \\\"What does the graph of √(9−x²) look like? Project onto the y-axis.\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "INCORRECT → TB-R03 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "NO_RESPONSE → \"For f(x)=2ˣ, can 2ˣ ever equal 0 or a negative number? What happens as x→−∞?\" → TB-R03 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"For f(x)=2ˣ, can 2ˣ ever equal 0 or a negative number? What happens as x→−∞?\\\" → TB-R03 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "CORRECT → \"Natural domain from algebraic restrictions. Domain of f∘g: x in dom(g) AND g(x) in dom(f). Range found by output analysis or graph projection.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"Natural domain from algebraic restrictions. Domain of f∘g: x in dom(g) AND g(x) in dom(f). Range found by output analysis or graph projection.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 108,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "PARTIAL (finds domain of f∘g incorrectly, uses dom(f) instead) → \"The restriction comes from what f requires of its INPUT, which is g(x). What does √(·) need its argument to satisfy?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (finds domain of f∘g incorrectly, uses dom(f) instead) → \\\"The restriction comes from what f requires of its INPUT, which is g(x). What does √(·) need its argument to satisfy?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.domain-range",
+      "title": "NO_RESPONSE → \"For (f∘g)(x)=√(x−3), what must be true about x−3 for the square root to be defined?\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"For (f∘g)(x)=√(x−3), what must be true about x−3 for the square root to be defined?\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.func.domain-range/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.domain-range",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Find the natural domain of: (a) f(x)=√(2x−6); (b) g(x)=(x+1)/(x²−4); (c) h(x)=ln(x²−9). Write answers in interval notation.\n2. Find the range of: (a) f(x)=3−x² (without graphing, by reasoning); (b) g(x)=|2x+1|; (c) h(x)=eˣ−2.\n3. Find the domain and range of f(x)=√(4−x²). Sketch the graph. What standard geometric shape is it?\n4. Let f(x)=1/x and g(x)=x−2. Find the domain of f∘g and g∘f. Explain why they differ.\n\n**P55 — Reflect & Consolidate:** \"Domain: valid inputs (algebraic restrictions). Range: actual outputs (structure analysis, graph projection). Composition domain: two-step intersection. Natural domain: all real inputs not excluded by algebraic constraints.\"\n\n**P76 — Transfer Probe (Independence mode):**\nFormal domain-range analysis for a rational function: f(x)=(x²−1)/(x²+1). (a) Find the natural domain. (b) Show that f(x)∈[−1,1) for all x in the domain. [Hint: solve y=(x²−1)/(x²+1) for x² and find which y-values give real solutions.] (c) Is every value in [−1,1) actually achieved? Check the endpoints separately. (d) State the range.\n\n**P55 — Reflect & Consolidate:** \"To find the range algebraically: set y=f(x), solve for x (or x²), and find which y-values give real solutions. This is the inverse-function approach to range. The domain of the inverse = the range of the original.\"\n\n**P75 — Mastery Assessment:**\n\"f(x)=√(x+3)/(x−1). (a) Find the natural domain. (b) Find the range by analyzing what values √(x+3)/(x−1) can take. (c) Verify your range by checking f at x=−3, x=0, x=2, and x→∞. (d) Find the domain and range of g(x)=f(x+1). How does the domain/range shift?\"\n\n**P55 — Reflect & Consolidate:** \"Translating by c: domain shifts by −c (if g(x)=f(x+c), domain shifts left by c), range is unchanged. Algebraic domain restrictions, structural range reasoning, and composition domain are the three core skills.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.func.domain-range complete\n- Score 3/5 → REVIEW range reasoning for non-linear functions; replay A02–A03\n- Score ≤ 2/5 → PREREQUISITE GAP in math.func.function-concept; reassign\n\n**P78 — Completion:** Domain and range certified. Student can find natural domain by algebraic restriction, determine range by structural reasoning, read domain/range from graphs, and compute domain of function compositions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.domain-range.md",
+        "startLine": 124,
+        "endLine": 151
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

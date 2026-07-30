@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.transformations-functions |
-| Title | Transformations of Functions |
+| name | Transformations of Functions |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -132,7 +132,7 @@ Step 1 — "Two kinds of transformation: INSIDE the function (affects horizontal
 **TB-R03 (MC-3 ORDER-INDEPENDENT):**
 Step 1 — "Horizontal shift and horizontal compression do NOT commute. The canonical form g(x)=af(b(x−h))+k was written this way precisely so the h is the shift AFTER the compression is taken out." Step 2 — g(x)=f(2x−4): is this shift-2-right then compress-by-2, or compress-by-2 then shift-2-right? Factor: 2x−4=2(x−2). Canonical form: b=2, h=2. Interpretation: compress by factor 2, then shift right 2. In the OTHER order (shift first, then compress): shift by 2 gives f(x−2), then compress gives f(2x−2) — different. Step 3 — "Always factor the argument first: f(bx−c)=f(b(x−c/b)). The shift is c/b (not c), AFTER the compression factor b is extracted."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Write the equation for each transformation of f(x)=x³: (a) shift left 2, up 5; (b) reflect about x-axis, stretch vertically by 3; (c) compress horizontally by factor 4, shift down 1.

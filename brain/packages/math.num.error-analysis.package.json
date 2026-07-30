@@ -1,0 +1,651 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.num.error-analysis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.num.error-analysis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dcdd8869dde4fef28c24dcf77b566bc64eb9e96e3e27588e4ca25dc8c4e11744",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.num.error-analysis.md": "sha256:122a9c2ad14d336b7c1b609e8829191e6f93aa10ce573d6918b38a1c85d7c469"
+    },
+    "assetCount": 20,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 15,
+      "mastery_probe": 1
+    },
+    "ruleCount": 15
+  },
+  "concept": {
+    "conceptId": "math.num.error-analysis",
+    "name": "Error Analysis",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.num.floating-point"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.num.error-analysis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.num.error-analysis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.num.error-analysis.md": "sha256:122a9c2ad14d336b7c1b609e8829191e6f93aa10ce573d6918b38a1c85d7c469"
+      },
+      "contentHash": "sha256:f5210feff370ebd212d8c783252dbbda1a051f2a19529ed7bafe42e698381e52",
+      "ruleCount": 15,
+      "bandCounts": {
+        "3": 15
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.num.error-analysis.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.num.error-analysis.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.num.error-analysis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.num.error-analysis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.num.error-analysis/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.num.error-analysis",
+      "title": "Learning Objective",
+      "content": "Given a numerical computation, the student distinguishes absolute error (|x̃−x|), relative error (|x̃−x|/|x|), roundoff error (from floating-point representation), and truncation error (from approximating an infinite process); propagates errors through elementary operations using first-order Taylor expansion |Δf|≈|f'(x)||Δx|; computes the condition number κ of a problem and distinguishes ill-conditioned from well-conditioned inputs; applies backward error analysis (finding the exact problem that the computed answer solves exactly); and classifies algorithms as numerically stable or unstable using worked examples.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.num.error-analysis",
+      "title": "TRUNCATION-IS-ROUNDING",
+      "content": "| MC-1 | TRUNCATION-IS-ROUNDING | Student uses \"truncation error\" to mean floating-point roundoff (chopping a decimal), conflating two distinct error sources | Type 3 — language contamination (the word \"truncate\" appears in both \"truncate a decimal\" and \"truncate a Taylor series\"; students apply the more familiar arithmetic meaning to the numerical-methods context) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.num.error-analysis",
+      "title": "SMALL-RELATIVE-ERROR-MEANS-ACCURATE",
+      "content": "| MC-2 | SMALL-RELATIVE-ERROR-MEANS-ACCURATE | Student concludes an answer is accurate because the relative error in the input is small; does not account for ill-conditioning multiplying that input error by κ | Type 5 — instruction-induced (error propagation is introduced with the formula |Δf|≈|f'||Δx|; the role of κ as the amplification factor is treated as an advanced separate topic, not integrated into the initial mental model) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.num.error-analysis",
+      "title": "BACKWARD-ERROR-IS-HARDER-TO-COMPUTE",
+      "content": "| MC-3 | BACKWARD-ERROR-IS-HARDER-TO-COMPUTE | Student avoids backward error analysis, believing it requires inverting the computation; does not realise that for many algorithms the backward error has a simple closed form | Type 1 — overgeneralization (backward analysis requires \"finding what problem the algorithm solved exactly,\" which sounds like running the algorithm in reverse; students over-interpret this as requiring inversion of a complex chain of operations) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "CORRECT → \"Absolute error = size of mistake; relative error = fractional size; truncation error = from stopping an infinite process early; roundoff error = from fp representation. Condition number κ measures input-to-output error amplification.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Absolute error = size of mistake; relative error = fractional size; truncation error = from stopping an infinite process early; roundoff error = from fp representation. Condition number κ measures input-to-output error amplification.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "PARTIAL (confuses truncation and roundoff) → \"Roundoff error happens at the storage level — representing a real number as a finite binary string. Truncation error happens at the algorithm level — stopping after finitely many terms of an infinite series or finitely many iterations. Both occur in most computations, independently.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (confuses truncation and roundoff) → \\\"Roundoff error happens at the storage level — representing a real number as a finite binary string. Truncation error happens at the algorithm level — stopping after finitely many terms of an infinite series or finitely many iterations. Both occur in most computations, independently.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "NO_RESPONSE → \"If I approximate sin(x)≈x for small x, what kind of error is that? If I represent sin(0.1) as a double, what kind of error is that?\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"If I approximate sin(x)≈x for small x, what kind of error is that? If I represent sin(0.1) as a double, what kind of error is that?\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "CORRECT → \"κ(A) measures worst-case amplification of input errors. Backward error = how big a perturbation of the true problem would produce exactly the computed answer. A stable algorithm has small backward error ≈u; an accurate answer additionally requires κ(A) to be small.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"κ(A) measures worst-case amplification of input errors. Backward error = how big a perturbation of the true problem would produce exactly the computed answer. A stable algorithm has small backward error ≈u; an accurate answer additionally requires κ(A) to be small.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "PARTIAL (understands condition number but not backward error) → \"Backward error analysis asks: 'What problem did my algorithm actually solve?' If the answer is 'a problem that differs from the original by at most 5×10⁻¹⁵,' then the algorithm is backward-stable. This is usually EASIER to prove than bounding the forward error directly.\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands condition number but not backward error) → \\\"Backward error analysis asks: 'What problem did my algorithm actually solve?' If the answer is 'a problem that differs from the original by at most 5×10⁻¹⁵,' then the algorithm is backward-stable. This is usually EASIER to prove than bounding the forward error directly.\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "INCORRECT → TB-R02 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "NO_RESPONSE → \"Solve [1 1; 1 1+10⁻¹⁰][x₁;x₂]=[2;2+10⁻¹⁰]. Perturb the (2,2) entry by 10⁻¹⁰. How much does the solution change?\" → TB-R02 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Solve [1 1; 1 1+10⁻¹⁰][x₁;x₂]=[2;2+10⁻¹⁰]. Perturb the (2,2) entry by 10⁻¹⁰. How much does the solution change?\\\" → TB-R02 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "Backward error (residual): easy to compute without knowing the exact solution",
+      "content": "{\"id\":\"TA-9\",\"title\":\"Backward error (residual): easy to compute without knowing the exact solution\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "Condition number: characterises the problem, not the algorithm",
+      "content": "{\"id\":\"TA-10\",\"title\":\"Condition number: characterises the problem, not the algorithm\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "Their product bounds the forward error",
+      "content": "{\"id\":\"TA-11\",\"title\":\"Their product bounds the forward error\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "CORRECT → \"Residual (backward error) measures whether x̃ approximately satisfies the equation. Condition number κ measures how the problem amplifies errors. Forward accuracy ≈ κ × backward error. A tiny residual on an ill-conditioned problem still means a potentially large forward error.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"CORRECT → \\\"Residual (backward error) measures whether x̃ approximately satisfies the equation. Condition number κ measures how the problem amplifies errors. Forward accuracy ≈ κ × backward error. A tiny residual on an ill-conditioned problem still means a potentially large forward error.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "PARTIAL (understands one factor but not the product) → \"Think of κ as a magnifying glass: backward error 10⁻¹⁴ under a ×10¹⁰ lens becomes 10⁻⁴. Reporting only the residual is like describing a photograph by only the lens magnification — you need both the original size and the magnification.\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-13\",\"title\":\"PARTIAL (understands one factor but not the product) → \\\"Think of κ as a magnifying glass: backward error 10⁻¹⁴ under a ×10¹⁰ lens becomes 10⁻⁴. Reporting only the residual is like describing a photograph by only the lens magnification — you need both the original size and the magnification.\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-14\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.num.error-analysis",
+      "title": "NO_RESPONSE → \"If κ(A)=10⁸ and the residual ‖Ax̃−b‖/‖b‖=10⁻¹² , what is the worst-case relative error in x̃?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"NO_RESPONSE → \\\"If κ(A)=10⁸ and the residual ‖Ax̃−b‖/‖b‖=10⁻¹² , what is the worst-case relative error in x̃?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.num.error-analysis/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.num.error-analysis",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. For f(x)=1/x at x=0.01, compute the condition number κ_f. If x has relative error 10⁻¹⁰, what is the bound on the relative error in 1/x? Is f ill-conditioned at x=0.01?\n2. A student solves Ax=b with a backward error of 3×10⁻¹⁵ and reports κ(A)=5×10⁷. (a) Estimate the relative forward error bound. (b) How many significant figures of x can the student trust?\n3. Classify each as truncation or roundoff error: (a) computing e^x as 1+x+x²/2!+x³/3! (stopping at cubic term); (b) storing the computed sum 1+1/7; (c) taking 100 instead of ∞ iterations of an iterative solver; (d) subtracting fl(1.0000001)−fl(1.0000000).\n4. The matrix [[10⁻⁸, 1],[1, 0]] has a very large condition number. (a) Use Gaussian elimination WITHOUT pivoting to solve [[10⁻⁸, 1],[1, 0]][x;y]=[1;1]. (b) Now use partial pivoting (swap rows). (c) Which gives a more accurate answer and why?\n\n**P55 — Reflect & Consolidate:** \"Absolute error = size; relative error = fraction; roundoff = fp storage; truncation = stopping early. Condition number κ = error amplification factor. Backward error (≈residual) + κ → forward error bound. Backward-stable algorithms achieve the theoretical minimum forward error κ·u.\"\n\n**P76 — Transfer Probe (Independence mode):**\nEvaluate f(x)=ln(sin(x)) near x=π. (a) Compute κ_f = |f'(x)·x/f(x)|. What happens to κ as x→π? (b) Give a numerical demonstration: compute f(π−10⁻⁸) using direct evaluation vs. a Taylor expansion of sin(x) near x=π. What is the backward error in each? (c) Is this primarily a roundoff or truncation problem? (d) What range of x is safe for direct evaluation, and what is the transition strategy?\n\n**P55 — Reflect & Consolidate:** \"Near singularities of f (where f→0 or f′→∞), the condition number κ diverges and the problem becomes ill-conditioned regardless of algorithm. The practitioner's response: document the ill-conditioning, use alternative representations near the singularity, and report a broader uncertainty interval.\"\n\n**P75 — Mastery Assessment:**\n\"A student uses the recurrence xₙ₊₁ = 2.5xₙ − xₙ₋₁ to compute the sequence starting at x₀=1, x₁=1.5 (the intended orbit has xₙ→1.5 always). (a) Propagate errors through one step: if xₙ has error εₙ and xₙ₋₁ has error εₙ₋₁, what is εₙ₊₁? (b) Show that the recurrence is numerically unstable (the homogeneous solution includes a term that grows like (2.5)ⁿ). (c) What is the backward error of the computed x̃ₙ (i.e. what original x₀, x₁ does the recurrence exactly reproduce)? (d) Propose a stable reformulation.\"\n\n**P55 — Reflect & Consolidate:** \"Numerical stability is not just about individual operations — an algorithm's error can grow exponentially through a recurrence even when each step has tiny backward error. Always check stability by analysing the homogeneous solution or by running with two slightly different initial conditions and observing how the difference grows.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.num.error-analysis complete\n- Score 3/5 → REVIEW condition number and backward error distinction; replay A02–A03\n- Score ≤ 2/5 → PREREQUISITE GAP in math.num.floating-point; reassign\n\n**P78 — Completion:** Error analysis certified. Student distinguishes all four error types, propagates errors through a computation, interprets condition numbers, applies backward error analysis, and classifies algorithms as stable or unstable.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.num.error-analysis.md",
+        "startLine": 113,
+        "endLine": 140
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

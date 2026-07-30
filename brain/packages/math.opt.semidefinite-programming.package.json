@@ -1,0 +1,686 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.opt.semidefinite-programming-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.opt.semidefinite-programming",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4411f0f25b7a854f88ff5e0edd14f5169f08a4435eb6d9f08a8afdd7dc403454",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.opt.semidefinite-programming.md": "sha256:e6fc419027cfb61676138b8fc0f94081da1204f2aacab24621d68e6a7383d9b1"
+    },
+    "assetCount": 21,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 16,
+      "mastery_probe": 1
+    },
+    "ruleCount": 16
+  },
+  "concept": {
+    "conceptId": "math.opt.semidefinite-programming",
+    "name": "Semidefinite Programming",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.opt.convex-optimization",
+      "math.linalg.positive-definite"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.opt.semidefinite-programming-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.opt.semidefinite-programming (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.opt.semidefinite-programming.md": "sha256:e6fc419027cfb61676138b8fc0f94081da1204f2aacab24621d68e6a7383d9b1"
+      },
+      "contentHash": "sha256:943b084828436d2e56e480195f3078a7344b8d4375ee390d7bb6836e6ab4ed1c",
+      "ruleCount": 16,
+      "bandCounts": {
+        "3": 16
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.opt.semidefinite-programming.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.opt.semidefinite-programming"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.opt.semidefinite-programming\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.opt.semidefinite-programming/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "Learning Objective",
+      "content": "Given a semidefinite program (SDP) in standard form (min tr(CX) s.t. tr(AᵢX)=bᵢ, X⪰0), the student identifies the PSD cone as a convex cone (hence SDP is convex), states why SDP generalises LP and QP (scalar variables → matrix variable), writes the dual SDP, applies SDP relaxations to at least one combinatorial problem (MAX-CUT relaxation via Goemans-Williamson), and recognises interior-point as the standard solution algorithm.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "SDP-IS-JUST-QP",
+      "content": "| MC-1 | SDP-IS-JUST-QP | Student treats SDP as a QP with a symmetric matrix variable; does not recognise that PSD constraints (X⪰0) are fundamentally different from simple box or polyhedral constraints on matrix entries | Type 1 — overgeneralization (QP has a PD matrix in the objective; SDP has a PSD matrix as the variable — structurally different) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "PSD-CONE-IS-NOT-CONVEX",
+      "content": "| MC-2 | PSD-CONE-IS-NOT-CONVEX | Student believes the set of PSD matrices {X: X⪰0} is not convex (because it \"involves a nonlinear condition det≥0\") | Type 2 — perceptual intuition (eigenvalue conditions look nonlinear; the set LOOKS complicated) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "SDP-ALWAYS-HAS-RANK-1-SOLUTION",
+      "content": "| MC-3 | SDP-ALWAYS-HAS-RANK-1-SOLUTION | Student expects SDP solutions to be rank-1 matrices (outer products vvᵀ); confuses the SDP relaxation with the original problem's optimal solution, which may require rounding | Type 5 — instruction-induced (SDP relaxations are introduced via rank-1 formulations; the relaxation drops the rank constraint) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "CORRECT → \"SDP: optimise a linear function of a matrix variable over the PSD cone ∩ affine constraints. PSD cone is convex.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"SDP: optimise a linear function of a matrix variable over the PSD cone ∩ affine constraints. PSD cone is convex.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "PARTIAL (understands LP/QP analogy, doubts PSD cone is convex) → \"For 2×2 diagonal matrices X=diag(a,b)⪰0 (a,b≥0) and Y=diag(c,d)⪰0: is tX+(1−t)Y⪰0?\" → TB-R02 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (understands LP/QP analogy, doubts PSD cone is convex) → \\\"For 2×2 diagonal matrices X=diag(a,b)⪰0 (a,b≥0) and Y=diag(c,d)⪰0: is tX+(1−t)Y⪰0?\\\" → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "INCORRECT → TB-R02 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "NO_RESPONSE → \"What does X⪰0 mean? How many constraints does it impose on a 2×2 symmetric matrix?\" → TB-R02 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"What does X⪰0 mean? How many constraints does it impose on a 2×2 symmetric matrix?\\\" → TB-R02 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "CORRECT → \"SDP has a MATRIX variable; QP has a vector variable. SDP relaxes rank-1 constraint to PSD → convex. This is the SDP relaxation technique.\" → A03",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"SDP has a MATRIX variable; QP has a vector variable. SDP relaxes rank-1 constraint to PSD → convex. This is the SDP relaxation technique.\\\" → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "PARTIAL (understands variable difference, unclear on relaxation) → \"If X⪰0 but not rank-1, can you recover an x vector from X?\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (understands variable difference, unclear on relaxation) → \\\"If X⪰0 but not rank-1, can you recover an x vector from X?\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "INCORRECT → TB-R01 → A03",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "NO_RESPONSE → \"What is the rank of xxᵀ for any nonzero vector x?\" → TB-R01 → A03",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"What is the rank of xxᵀ for any nonzero vector x?\\\" → TB-R01 → A03\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "CORRECT → \"SDP relaxation: lift integer/rank-1 problem to PSD cone; solve SDP efficiently; round the solution back. GW achieves 0.878 for MAX-CUT.\" → A04",
+      "content": "{\"id\":\"TA-9\",\"title\":\"CORRECT → \\\"SDP relaxation: lift integer/rank-1 problem to PSD cone; solve SDP efficiently; round the solution back. GW achieves 0.878 for MAX-CUT.\\\" → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 96,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "PARTIAL (understands relaxation, unsure about rounding) → \"After solving the SDP, X* may have rank > 1. How do we recover a partition (S, V\\S)?\" → TB-R03 → A04",
+      "content": "{\"id\":\"TA-10\",\"title\":\"PARTIAL (understands relaxation, unsure about rounding) → \\\"After solving the SDP, X* may have rank > 1. How do we recover a partition (S, V\\\\S)?\\\" → TB-R03 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 97,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "INCORRECT → TB-R03 → A04",
+      "content": "{\"id\":\"TA-11\",\"title\":\"INCORRECT → TB-R03 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "NO_RESPONSE → \"The SDP has Xᵢᵢ=1 for all i. What does this correspond to in the original xᵢ∈{±1} problem?\" → TB-R03 → A04",
+      "content": "{\"id\":\"TA-12\",\"title\":\"NO_RESPONSE → \\\"The SDP has Xᵢᵢ=1 for all i. What does this correspond to in the original xᵢ∈{±1} problem?\\\" → TB-R03 → A04\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "CORRECT → \"SDP generalises LP: scalar x→matrix X, x≥0→X⪰0, cᵀx→tr(CX). Solved by interior-point; spectrahedron has no vertices to walk.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"CORRECT → \\\"SDP generalises LP: scalar x→matrix X, x≥0→X⪰0, cᵀx→tr(CX). Solved by interior-point; spectrahedron has no vertices to walk.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 117,
+        "endLine": 117
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "PARTIAL → \"Why can't simplex work for SDP? (What is the analogue of 'vertex' for the PSD cone?)\" → Gate (after brief answer)",
+      "content": "{\"id\":\"TA-14\",\"title\":\"PARTIAL → \\\"Why can't simplex work for SDP? (What is the analogue of 'vertex' for the PSD cone?)\\\" → Gate (after brief answer)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 118,
+        "endLine": 118
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "INCORRECT → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-15\",\"title\":\"INCORRECT → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 119,
+        "endLine": 119
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "NO_RESPONSE → \"The PSD cone is smooth (no corners). What property of LP does simplex exploit that SDP's feasible set lacks?\" → TB-R03 → Gate",
+      "content": "{\"id\":\"TA-16\",\"title\":\"NO_RESPONSE → \\\"The PSD cone is smooth (no corners). What property of LP does simplex exploit that SDP's feasible set lacks?\\\" → TB-R03 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 120,
+        "endLine": 120
+      }
+    },
+    {
+      "assetId": "math.opt.semidefinite-programming/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.opt.semidefinite-programming",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (4 items):**\n1. Show that the set {x∈ℝ²: [[1,x₁],[x₁,x₂]]⪰0} is a convex set in ℝ² by finding the explicit constraints on (x₁,x₂) from the PSD condition.\n2. Write the dual SDP of: min tr(CX) s.t. tr(AᵢX)=bᵢ (i=1,…,m), X⪰0. (The dual is max bᵀy s.t. C−ΣyᵢAᵢ⪰0.)\n3. For the graph with edges {(1,2),(1,3),(2,3)} (triangle), write the MAX-CUT SDP (3×3 matrix X with X₁₁=X₂₂=X₃₃=1). What is the SDP optimal value, and what does the SDP say about the maximum cut?\n4. Explain why the constraint xᵀQx≤t (for Q⪰0) can be written as a linear matrix inequality using the Schur complement lemma.\n\n**P55 — Reflect & Consolidate:** \"SDP: matrix generalisation of LP. PSD cone is convex. SDP relaxations drop rank constraints. Interior-point solves SDPs in polynomial time. GW shows SDP relaxations can yield near-optimal approximations.\"\n\n**P76 — Transfer Probe (Independence mode):**\nLyapunov stability via SDP: A linear system ẋ=Ax is stable (all eigenvalues of A have negative real part) if and only if there exists P⪰0 such that AᵀP+PA≺0 (negative definite). Formulate finding such P as an SDP: variables = entries of the symmetric matrix P; constraints = P⪰0, AᵀP+PA+εI⪯0 for small ε>0. Explain why this is a valid SDP (linear in P; both constraints are LMIs). This shows control theory stability analysis is an SDP.\n\n**P55 — Reflect & Consolidate:** \"Lyapunov stability reduces to an SDP: find a PSD matrix satisfying two linear matrix inequalities. This is the canonical application of SDP in control theory — a polynomial-time certificate for stability.\"\n\n**P75 — Mastery Assessment:**\n\"MAX-INDEPENDENT-SET relaxation: For graph G=(V,E), an independent set has no two adjacent vertices. The max independent set size α(G) satisfies (by Lovász theta): α(G)≤ϑ(G)=max{tr(JX): tr(X)=1, Xᵢⱼ=0 ∀(i,j)∈E, X⪰0} where J is the all-ones matrix. (a) Is this a valid SDP? Identify the variable, objective, and constraints. (b) For K₃ (complete 3-vertex graph), α(K₃)=1. What does the SDP give? (c) Why is SDP relaxation useful here even if the SDP bound is not tight?\"\n\n**P55 — Reflect & Consolidate:** \"The Lovász theta function is an SDP relaxation of the independent set problem. It is polynomial-time computable and provides tight bounds for many graph classes (perfect graphs). NP-hardness of independent set → SDP is not always tight.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 4/5 → MASTERED; math.opt.semidefinite-programming complete\n- Score 3/5 → REVIEW PSD cone convexity and the SDP vs. QP distinction; replay A01–A02\n- Score ≤ 2/5 → PREREQUISITE GAP in math.linalg.positive-definite or math.opt.convex-optimization; reassign\n\n**P78 — Completion:** Semidefinite programming certified. Student can formulate an SDP, prove PSD cone convexity, apply SDP relaxations, and describe the GW rounding algorithm.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.opt.semidefinite-programming.md",
+        "startLine": 133,
+        "endLine": 160
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

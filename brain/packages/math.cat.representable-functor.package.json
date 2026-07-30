@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.cat.representable-functor-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.cat.representable-functor",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a72e0167507ad7224cfe189bdfe6eed5225822194ac3bf1659bed37802173c73",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.cat.representable-functor.md": "sha256:f11897773fef1570aa0a34bcb58dcb1c05a474178a5a4939d0cd5c7b689deef1"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.cat.representable-functor",
+    "name": "Representable Functor",
+    "difficultyRaw": "research",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.cat.yoneda-lemma"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.cat.representable-functor-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.cat.representable-functor (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.cat.representable-functor.md": "sha256:f11897773fef1570aa0a34bcb58dcb1c05a474178a5a4939d0cd5c7b689deef1"
+      },
+      "contentHash": "sha256:8d2e204b8d087ab6ef87785d0041dfa9865e549118327248582dc54bde30c768",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.cat.representable-functor.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.representable-functor.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.representable-functor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.representable-functor\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.representable-functor.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.representable-functor.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.representable-functor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.representable-functor\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.cat.representable-functor.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.cat.representable-functor.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.cat.representable-functor"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.cat.representable-functor\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.cat.representable-functor/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.cat.representable-functor",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a functor $F:\\mathcal{C}\\to\\mathbf{Set}$ as **representable** if there exists an object $A\\in\\mathcal{C}$ (the **representing object**) and a natural isomorphism $F\\cong\\mathrm{Hom}(A,-)$, and correctly distinguish \"representable\" (isomorphic to SOME Hom-functor) from merely \"related to a Hom-functor\" or \"computable.\"\n- LO2: Given a representable functor $F\\cong\\mathrm{Hom}(A,-)$ with the isomorphism $\\eta$, identify the **universal element** $u\\in F(A)$ as $\\eta_A(\\mathrm{id}_A)$ (the element corresponding to the identity morphism under the isomorphism at component $A$), and correctly compute $u$ for a specific representable functor.\n- LO3: Explain why representability **captures universal properties** — recognizing that a universal-property-defined construction (e.g. a product, a free object) corresponds exactly to a representable functor, with the universal element being precisely the abstract \"universal instance\" the construction's defining property refers to.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.cat.representable-functor",
+      "title": "REPRESENTABILITY-TREATED-AS-LOOSE-RESEMBLANCE",
+      "content": "| MC-1 | REPRESENTABILITY-TREATED-AS-LOOSE-RESEMBLANCE | Believing a functor is representable if its values merely \"resemble\" or \"relate to\" Hom-sets, rather than requiring a genuine natural isomorphism verified at every object | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.cat.representable-functor",
+      "title": "UNIVERSAL-ELEMENT-TREATED-AS-ARBITRARY",
+      "content": "| MC-2 | UNIVERSAL-ELEMENT-TREATED-AS-ARBITRARY | Believing the universal element is any convenient element of $F(A)$, rather than the SPECIFIC element $\\eta_A(\\mathrm{id}_A)$ that alone reconstructs the entire natural isomorphism | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.cat.representable-functor",
+      "title": "REPRESENTING-OBJECT-ASSUMED-UNIQUE-WITHOUT-QUALIFICATION",
+      "content": "| MC-3 | REPRESENTING-OBJECT-ASSUMED-UNIQUE-WITHOUT-QUALIFICATION | Believing the representing object $A$ is the unique object with this property in an absolute sense, without the standard qualification \"unique up to isomorphism\" | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.representable-functor",
+      "title": "Representability as Yoneda's Strongest Case (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Representability as Yoneda's Strongest Case (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.representable-functor",
+      "title": "The Universal Element, and Universal Properties as Representability (Primitive P37: Classify)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Universal Element, and Universal Properties as Representability (Primitive P37: Classify)\",\"primitives\":[\"P37\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.cat.representable-functor",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.cat.representable-functor",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (4-problem set)**:\n  1. Verify that the forgetful functor $U:\\mathbf{Mon}\\to\\mathbf{Set}$ (monoids to sets) is represented by the free monoid on one generator $(\\mathbb{N},+)$, by describing the correspondence $\\mathrm{Hom}_{\\mathbf{Mon}}(\\mathbb{N},M)\\cong M$.\n  2. Identify the universal element for the representable functor in problem 1.\n  3. Explain, using Example 3's argument, why a coproduct $A\\sqcup B$'s universal property corresponds to the representability of the functor $X\\mapsto\\mathrm{Hom}(A,X)\\times\\mathrm{Hom}(B,X)$ (note: contravariant direction — maps OUT of $A,B$ INTO $X$).\n  4. Explain why \"a functor's values look set-like\" is not sufficient to establish representability, using this lesson's naturality requirement.\n- **P76 (Transfer Probe, mode = independence)**: \"In linear algebra, the dual space functor $V\\mapsto V^*=\\mathrm{Hom}(V,\\mathbb{F})$ (for a fixed field $\\mathbb{F}$, viewed as vectors spaces over $\\mathbb{F}$, contravariant in $V$) is itself already literally a Hom-functor by construction. (a) Using this lesson's definition, explain why the (contravariant) functor $V\\mapsto V^*$ is trivially representable — represented by $\\mathbb{F}$ itself, viewed as a one-dimensional vector space. (b) Identify what the universal element would be for this representable functor, using this lesson's $u=\\eta_A(\\mathrm{id}_A)$ formula, applied at $A=\\mathbb{F}$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.cat.representable-functor",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.cat.yoneda-lemma` (the Yoneda lemma itself: natural transformations $\\mathrm{Hom}(A,-)\\Rightarrow F$ correspond bijectively to elements of $F(A)$, via $\\eta\\mapsto\\eta_A(\\mathrm{id}_A)$) — representability is precisely the special case where this correspondence is not just a bijection of Hom-sets but a genuine natural ISOMORPHISM of functors.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.cat.representable-functor/reference/1",
+      "kind": "reference",
+      "conceptId": "math.cat.representable-functor",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.cat.yoneda-lemma` (the general correspondence between natural transformations $\\mathrm{Hom}(A,-)\\Rightarrow F$ and elements of $F(A)$ — representability is the special case where this correspondence is a full isomorphism).\n- **Unlocks**: none listed in the KG for this concept.\n- **Cross-link**: KG lists no cross-links for this concept. (KG `related` field lists `math.cat.adjunction`, confirmed authored via `ls`, but `related` is not a `cross_links` entry and per this corpus's convention only `cross_links` entries require the P76_mode disk-check protocol — noted here for completeness, not treated as a formal cross-link.)",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.cat.representable-functor.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

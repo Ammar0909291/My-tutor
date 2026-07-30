@@ -1,0 +1,328 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.seq.root-test-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.seq.root-test",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a117cb77b9383f77f547d664119968b592ce6954a5feb024fd8f5f373d56e377",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.seq.root-test.md": "sha256:6f2930c4fc402aa053485321ea7f96ac2360fd969f1a06dce3242f389ea34a7f"
+    },
+    "assetCount": 12,
+    "assetCounts": {
+      "core_explanation": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 2,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.seq.root-test",
+    "name": "Root Test for Series",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.seq.series-convergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.seq.root-test-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.seq.root-test (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.seq.root-test.md": "sha256:6f2930c4fc402aa053485321ea7f96ac2360fd969f1a06dce3242f389ea34a7f"
+      },
+      "contentHash": "sha256:040d806082207af1ec7bd4b8655c5f1e8782d24b6a6a07c6c7c3c4f59983ff51",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.seq.root-test.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.root-test.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.root-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.root-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.root-test.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.root-test.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.root-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.root-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.root-test.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.root-test.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.root-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.root-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.seq.root-test.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.seq.root-test.md#TA-A04 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.seq.root-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.seq.root-test\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.seq.root-test/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.seq.root-test",
+      "title": "Root Test for Series — cognitive map",
+      "content": "### Prior Knowledge Anchors\n- **math.seq.series-convergence**: geometric series converges iff |r| < 1; Divergence Test; convergence = {Sₙ} converges\n- **math.seq.ratio-test** (sibling concept): L = lim|a_{n+1}/aₙ|; the root test is strictly stronger — whenever the ratio test gives a finite L, the root test gives the same value\n\n### Target Knowledge State\nStudent can state Cauchy's Root Test: L = lim_{n→∞} |aₙ|^{1/n}; converges if L < 1, diverges if L > 1, inconclusive if L = 1. Student recognises nth-power series (aₙ = (f(n))ⁿ) as the natural domain of the root test, knows the key limit lim_{n→∞} n^{1/n} = 1, and can compute L for series of the form (expression)ⁿ by collapsing the nth root.\n\n### Conceptual Obstacles\n1. Assuming the root test and ratio test always agree — the root test is strictly stronger: whenever the ratio gives a finite L, the root test gives the same L; but there exist series where the ratio is inconclusive (L=1) and the root test gives L ≠ 1\n2. Forgetting that lim n^{1/n} = 1 (not n, not ∞) — this limit is non-obvious, comes from exp((ln n)/n) → exp(0) = 1, and causes errors when aₙ contains polynomial factors like nᵖ raised to the nth power\n3. Applying the root test to series not written as nth powers (e.g., factorial series) where the nth root does not simplify — the ratio test is almost always easier there\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 29,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.seq.root-test",
+      "title": "ROOT-AND-RATIO-ALWAYS-SAME",
+      "content": "| MC-1 | ROOT-AND-RATIO-ALWAYS-SAME | Student assumes root and ratio tests always give identical L; does not know the root test can succeed where the ratio test gives L = 1 | Any comparison between the two tests; series where ratio gives 1 but root gives something else |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.seq.root-test",
+      "title": "NTH-ROOT-OF-N-IS-N",
+      "content": "| MC-2 | NTH-ROOT-OF-N-IS-N | Student computes (nᵖ)^{1/n} = nᵖ (missing the 1/n exponent effect) instead of nᵖ/ⁿ → 1 | Series of the form (cⁿ · nᵖ)^{1/n} or ((f(n))ⁿ) where the polynomial factor matters |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.seq.root-test",
+      "title": "ROOT-TEST-ON-FACTORIAL-SERIES",
+      "content": "| MC-3 | ROOT-TEST-ON-FACTORIAL-SERIES | Student applies root test to series with n!; the nth root of n! does not simplify to a clean limit and the ratio test is uniformly better for factorials | Factorial series like Σ n!/nⁿ, Σ 2ⁿ/n!, or Σ (n!)² |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.root-test",
+      "title": "Cauchy's Root Test and the Key Limit",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cauchy's Root Test and the Key Limit\",\"primitives\":[\"P11\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 65,
+        "endLine": 137
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.root-test",
+      "title": "Pattern Gallery and Domain of the Root Test",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Pattern Gallery and Domain of the Root Test\",\"primitives\":[\"P04\",\"P49\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 137,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.root-test",
+      "title": "Root Test vs. Ratio Test: Choosing and Comparing",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Root Test vs. Ratio Test: Choosing and Comparing\",\"primitives\":[\"P06\",\"P49\",\"P91\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 188,
+        "endLine": 247
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.seq.root-test",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate\",\"primitives\":[\"P04\",\"P06\",\"P07\",\"P11\",\"P27\",\"P41\",\"P49\",\"P55\",\"P64\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P89\",\"P91\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 247,
+        "endLine": 467
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.seq.root-test",
+      "title": "P91 Mastery Gate",
+      "content": "### Teaching Action A04 — Mastery Gate\n\n**Primitive:** P91 (P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78)\n**MAMR:** 4/5\n**Status:** Terminal TA\n\n---\n\n**[P77 — MULTI-PROBLEM SET]**\n\n*Apply the root test to each series. State |aₙ|^{1/n}, compute L, and conclude. If the test is inconclusive, name a test that would work.*\n\n**Problem 1.** Σₙ₌₁^∞ (n/(n+1))^n\n\n**Problem 2.** Σₙ₌₁^∞ (1+1/n)^{n²}\n\n**Problem 3.** Σₙ₌₁^∞ 1/nⁿ\n\n**Problem 4.** Σₙ₌₁^∞ 1/n³ (apply root test; state what it tells you)\n\n---\n\n**[P55 — SCORE]**\n\n*Answers:*\n\n1. |aₙ|^{1/n} = n/(n+1) → **1** as n→∞. L = 1 → **inconclusive**. (In fact this series diverges — terms don't go to 0 since (n/(n+1))^n → 1/e ≠ 0. Use the Divergence Test.) ✓\n\n   *Award 1 point if student correctly identifies L = 1 and inconclusive, and suggests a valid alternative.*\n\n2. |aₙ|^{1/n} = (1+1/n)^{n²/n} = (1+1/n)^n → **e** ≈ 2.718 > 1 → **diverges**. ✓\n\n3. |aₙ|^{1/n} = (1/nⁿ)^{1/n} = 1/n → **0** < 1 → **converges**. ✓\n\n4. |aₙ|^{1/n} = (n^{-3})^{1/n} = n^{-3/n} = (n^{1/n})^{-3} → **1**. L = 1 → **inconclusive**. p-series test: p = 3 > 1 → converges. ✓\n\nScore 1 point per problem.\n\n---\n\n**[P76 — TRANSFER PROBE]** *(P76_mode: independence)*\n\n*Problem:* Determine whether Σₙ₌₁^∞ (3n/(2n+1))ⁿ converges or diverges. Use the root test and show all steps.\n\n*(a)* Write |aₙ|^{1/n} explicitly.\n\n*(b)* Compute the limit L.\n\n*(c)* State the conclusion and verify the test is definitive.\n\n*Expected answer:*\n\n*(a)* aₙ = (3n/(2n+1))ⁿ → |aₙ|^{1/n} = 3n/(2n+1)\n\n*(b)* L = lim_{n→∞} 3n/(2n+1) = lim [3n/(2n+1)] = **3/2** (divide numerator and denominator by n)\n\n*(c)* L = 3/2 > 1 → **diverges**. L ≠ 1 → test is definitive. ✓\n\n---\n\n**[P55 — SCORE]**\n\nTransfer probe scoring: 1 point (all parts correct; 0.5 if L correct but intermediate step missing or conclusion absent).\n\n---\n\n**[P75 — MASTERY ASSESSMENT]**\n\nMAMR = 4/5 (⌈0.7 × 5⌉ = 4). Total n = 5 (P77 items: 4, P76: 1).\n\n---\n\n**[P55 — SCORE]**\n\nRecord total score X/5.\n\n---\n\n**[P74 — ROUTING DECISION]**\n\n| Score | Routing |\n|-------|---------|\n| 5/5 or 4/5 | → P78 COMPLETION — mastery confirmed |\n| 3/5 | → Identify missed items; n^{1/n} error → B02; wrong test choice → B03; root/ratio confusion → B01; targeted repair |\n| ≤ 2/5 | → Return to A01; re-derive key limit lim n^{1/n} = 1; drill nth-root computation on pure (expression)ⁿ examples; schedule spaced review at R1 |\n\n---\n\n**[P55 — SCORE]**\n\nRouting outcome recorded.\n\n---\n\n**[P78 — COMPLETION]**\n\nConcept `math.seq.root-test` complete. Threshold 0.7 requires 4/5 correct.\n\n**Unlocks:** deeper convergence analysis (Σ alternating/absolute convergence, power series radius of convergence).\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 250,
+        "endLine": 354
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.root-test",
+      "title": "Scaffolding Protocol",
+      "content": "**Entry point:** A (Abstract) — advanced learner; the root test is algebraic and requires no new geometric or physical intuition beyond the geometric series already mastered.\n\n**Scaffolding sequence:**\n1. **A01 P11 REPRESENTATION SHIFT** — A: derive root test from the geometric series idea; establish lim n^{1/n} = 1; demonstrate clean computation on an nth-power series\n2. **A02 P04 PATTERN INDUCTION** — compute root test on a gallery of nth-power series; discover L = 1 for p-series (root test shares the same limitation as ratio test for rational series); contrast root test on a series where ratio test would require careful factorial simplification\n3. **A03 P06 CONTRAST PAIR** — root test vs. ratio test: same series computed both ways; a series where they differ; when to choose each\n4. **A04 P91 Gate** — mastery assessment\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 57,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.seq.root-test",
+      "title": "P89 Spaced Repetition Schedule",
+      "content": "| Review # | Delay | Probe |\n|----------|-------|-------|\n| R1 | 1 day | Apply the root test to Σ (2/(n+1))ⁿ. State L and conclude. |\n| R2 | 3 days | Compute |aₙ|^{1/n} for aₙ = n³·(1/4)ⁿ. What is L? Does the n³ factor affect the answer? |\n| R3 | 7 days | For Σ (1−1/n)^{n²}, apply the root test: compute L and state the conclusion. (Hint: (1−1/n)^n → 1/e.) |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 408,
+        "endLine": 418
+      }
+    },
+    {
+      "assetId": "math.seq.root-test/reference/1",
+      "kind": "reference",
+      "conceptId": "math.seq.root-test",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "| Field | Value |\n|-------|-------|\n| cross_links | none |\n| P76_mode | independence |\n| Unlocks | math.seq.absolute-convergence |\n| Requires (Tier-1) | math.seq.series-convergence |\n\n**GR-8 compliance:** cross_links = none.\n**GR-9 compliance:** P76 uses an independent problem unrelated to any cross-linked concept.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.seq.root-test.md",
+        "startLine": 418,
+        "endLine": 432
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

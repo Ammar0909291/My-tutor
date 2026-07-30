@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.piecewise-function |
-| Title | Piecewise Functions |
+| name | Piecewise Functions |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -134,7 +134,7 @@ Step 1 — "Piecewise notation is just a tool for organizing different formulas 
 **TB-R03 (MC-3 DOMAIN-PIECES-OVERLAP):**
 Step 1 — "A function must assign EXACTLY ONE output to each input. If two pieces both claim x=3 (e.g., x≤3 and x≥3), then x=3 has two pieces and potentially two values — that breaks the function rule." Step 2 — Fix by making all boundary ownership unambiguous: use x<3 for the first piece and x≥3 for the second. Now x=3 belongs only to the second. OR: x≤3 for the first and x>3 for the second. Either is fine; never both ≤ and ≥. Step 3 — "Exactly one inequality per boundary point should be 'closed' (≤ or ≥). The other must be strict (< or >). This guarantees mutual exclusion."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. For f(x) = ⎧ x²+1 if x<−1 ⎨ 3 if x=−1 ⎩ 2x−1 if x>−1: evaluate f(−3), f(−1), f(0), f(2). Is f continuous at x=−1?

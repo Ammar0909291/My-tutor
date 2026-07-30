@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.convex-set |
-| Title | Convex Set |
+| name | Convex Set |
 | Domain | math.opt |
 | Difficulty | proficient |
 | Bloom level | understand |
@@ -113,7 +113,7 @@ Step 1 — "Intersection: what's in BOTH sets stays together. Union: what's in E
 **TB-R03 (MC-3 MIDPOINT-SUFFICIENT):**
 Step 1 — "Checking t=1/2 only tests one midpoint. Convexity requires ALL t∈[0,1]." Step 2 — Star polygon: choose two tips x,y of the star. Midpoint (t=1/2) of nearby tips might be inside. But the segment at t=0.3 exits through the inner concave notch. Step 3 — Re-state: must verify tx+(1−t)y∈S for EVERY t in [0,1], not just t=1/2.
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Prove that every half-space H={x∈ℝⁿ: aᵀx≤b} is a convex set.

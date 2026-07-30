@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.func.vertex-form |
-| Title | Vertex Form of a Quadratic |
+| name | Vertex Form of a Quadratic |
 | Domain | math.func |
 | Difficulty | proficient |
 | Bloom level | apply |
@@ -144,7 +144,7 @@ Step 1 — "In f(x)=a(x−h)²+k: the shift is h to the RIGHT. The minus sign is
 **TB-R03 (MC-3 K-IS-THE-MINIMUM-VALUE-ALWAYS):**
 Step 1 — "k is the VALUE of f at the vertex. Whether this is a minimum or maximum depends on which way the parabola opens — determined by the sign of a." Step 2 — f(x)=2(x−1)²+3: a=2>0, opens UP. Vertex=(1,3) is the LOWEST point. Minimum=3. g(x)=−2(x−1)²+3: a=−2<0, opens DOWN. Vertex=(1,3) is the HIGHEST point. Maximum=3. Same vertex value k=3, but one is a min and one is a max. Step 3 — "Rule: a>0 → opens up → vertex is minimum (lowest). a<0 → opens down → vertex is maximum (highest). Check the sign of a FIRST, then interpret k."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Convert to vertex form by completing the square: (a) f(x)=x²−10x+29; (b) g(x)=2x²+8x+3; (c) h(x)=−x²+4x+1.

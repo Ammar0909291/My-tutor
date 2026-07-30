@@ -4,7 +4,7 @@
 | Field | Value |
 |---|---|
 | KG ID | math.opt.quadratic-programming |
-| Title | Quadratic Programming |
+| name | Quadratic Programming |
 | Domain | math.opt |
 | Difficulty | expert |
 | Bloom level | apply |
@@ -116,7 +116,7 @@ Step 1 — "KKT: necessary conditions (every optimum satisfies them). Sufficient
 **TB-R03 (MC-3 QP-SAME-AS-LS):**
 Step 1 — "Least squares: min ½‖Ax−b‖²=½xᵀAᵀAx−(Aᵀb)ᵀx+½‖b‖². This IS a QP with Q=AᵀA⪰0 and c=−Aᵀb, unconstrained. The closed form x*=(AᵀA)⁻¹Aᵀb solves it." Step 2 — "Constrained QP: same objective but with Ax≤b. The constraint changes the problem fundamentally — no closed form; requires active-set or interior-point." Step 3 — "LS is the unconstrained special case; constrained QP is the general problem. Both have quadratic objectives, but LS has a direct analytical solution while QP with constraints doesn't."
 
-## Component 7 — P91 Gate Sequence (Mastery)
+## Component 7 — P91 Mastery Gate Sequence
 
 **P77 — Problem Set (4 items):**
 1. Classify as convex QP, non-convex QP, or LP: (a) min x₁²+3x₁x₂+x₂² s.t. x₁+x₂≤1; (b) min 2x₁²−x₁x₂+x₂² s.t. x₁,x₂≥0; (c) min 3x₁+x₂ s.t. x₁²+x₂²≤1. (Classify (c) carefully: what kind of problem is it?)

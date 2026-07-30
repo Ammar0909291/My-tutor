@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.graph.eulerian-circuit-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.graph.eulerian-circuit",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cf17d996b811a17797134903cbd90029ebe59231525a019b70dd4d04a7ed7421",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.graph.eulerian-circuit.md": "sha256:d8dae25d17761fe8f3cd30dbdb50badd777f7a299b1d43d7fc212d7708006e9b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.graph.eulerian-circuit",
+    "name": "Eulerian and Hamiltonian Graphs",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.euler-hamiltonian"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.graph.eulerian-circuit-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.graph.eulerian-circuit (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.graph.eulerian-circuit.md": "sha256:d8dae25d17761fe8f3cd30dbdb50badd777f7a299b1d43d7fc212d7708006e9b"
+      },
+      "contentHash": "sha256:95afcf5da18a1f4042ce1b58951a9a20166ec1f6202cb9f9b854c6720fb75924",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.graph.eulerian-circuit.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.eulerian-circuit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.eulerian-circuit\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.eulerian-circuit.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.eulerian-circuit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.eulerian-circuit\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.eulerian-circuit.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.eulerian-circuit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.eulerian-circuit\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.graph.eulerian-circuit.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.graph.eulerian-circuit"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.graph.eulerian-circuit\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.graph.eulerian-circuit/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and prove **Euler's theorem**: a connected graph has an Eulerian circuit iff every vertex has even degree; has an Eulerian path (not circuit) iff exactly two vertices have odd degree; characterize **Eulerian digraphs** (in-degree = out-degree at every vertex for an Eulerian circuit); execute Hierholzer's algorithm to construct an Eulerian circuit.\n- LO2: Define a **Hamiltonian path** and **Hamiltonian cycle**; state sufficient conditions — **Dirac's theorem** ($\\delta(G)\\ge n/2$ implies Hamiltonian) and **Ore's theorem** ($\\deg(u)+\\deg(v)\\ge n$ for all non-adjacent $u,v$ implies Hamiltonian) — and give examples showing these conditions are not necessary.\n- LO3: Explain the fundamental **complexity asymmetry**: Eulerian circuits are decidable and constructible in $O(n+m)$; Hamiltonian cycles are NP-complete (no polynomial algorithm known); identify this as one of the sharpest examples of two structurally similar-looking problems with completely different computational difficulty.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "EULERIAN-CIRCUIT-REQUIRES-EVEN-NUMBER-OF-EDGES",
+      "content": "| MC-1 | EULERIAN-CIRCUIT-REQUIRES-EVEN-NUMBER-OF-EDGES | Believing Eulerian circuits require an even number of edges rather than the correct condition that every vertex has even degree; the number of edges can be odd (e.g., the Petersen graph has 15 edges and is 3-regular, so all vertices have odd degree — no Eulerian circuit — but 15 is odd by coincidence of a separate property) | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 109,
+        "endLine": 109
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "DIRAC-IMPLIES-HAMILTONICITY-IS-NECESSARY",
+      "content": "| MC-2 | DIRAC-IMPLIES-HAMILTONICITY-IS-NECESSARY | Confusing the direction: believing Dirac's condition is NECESSARY for Hamiltonicity (i.e., every Hamiltonian graph satisfies Dirac) rather than only SUFFICIENT (Dirac is enough, but not needed); $C_n$ for large $n$ has $\\delta=2\\ll n/2$ yet is Hamiltonian | Critical |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 110,
+        "endLine": 110
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "HAMILTONICITY-IS-EASY-ON-DENSE-GRAPHS-IN-GENERAL",
+      "content": "| MC-3 | HAMILTONICITY-IS-EASY-ON-DENSE-GRAPHS-IN-GENERAL | Believing that all Hamiltonian problems are polynomial on dense graphs; while SUFFICIENT-CONDITION problems (does this graph satisfy Dirac?) are trivially polynomial, deciding Hamiltonicity remains hard for general graphs even with specific density constraints not meeting Dirac | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 111,
+        "endLine": 111
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "From Königsberg to Formal Theorem (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"From Königsberg to Formal Theorem (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "Sufficient Conditions That Aren't Necessary (Primitive P25: Deductive)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sufficient Conditions That Aren't Necessary (Primitive P25: Deductive)\",\"primitives\":[\"P25\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "The NP-Hard Contrast (Primitive P16: Counterexample direction — show hardness)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The NP-Hard Contrast (Primitive P16: Counterexample direction — show hardness)\",\"primitives\":[\"P16\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78.\n\n- **P77 (5-problem set)**:\n  1. Determine whether the Petersen graph (10 vertices, 3-regular) has an Eulerian circuit or Eulerian path. Justify using Euler's theorem.\n  2. Construct an Eulerian circuit on $K_5$ (5 vertices, 4-regular, 10 edges) using Hierholzer's algorithm. List the edges in traversal order.\n  3. A connected graph has degree sequence $(2,2,3,3,4,4)$. State whether it has an Eulerian circuit, Eulerian path, both, or neither. Justify.\n  4. Verify that $K_6$ satisfies Dirac's condition and exhibit a Hamiltonian cycle in $K_6$.\n  5. Give a graph on 6 vertices that is Hamiltonian but does NOT satisfy Dirac's condition. (Dirac requires $\\delta\\ge3$; find a Hamiltonian graph with $\\delta\\le2$.)\n- **P76 (Transfer Probe, mode = cross-link with `math.disc.euler-hamiltonian`)**: \"The **Chinese Postman Problem** asks for the shortest closed walk traversing every edge at least once in a weighted graph. (a) Show that if $G$ is Eulerian, the Chinese Postman tour has weight equal to the total weight of all edges (no edges need to be repeated). (b) If $G$ has $2k$ odd-degree vertices, the Chinese Postman solution requires adding $k$ extra traversals to make all vertices even-degree. Explain why the optimal solution pairs up the $2k$ odd-degree vertices into $k$ pairs and adds the shortest path between each pair (this is the **minimum-weight perfect matching on odd-degree vertices**, solvable in polynomial time). (c) Contrast with the **Travelling Salesman Problem** (TSP): find the shortest Hamiltonian cycle in a complete weighted graph. Explain why TSP is NP-hard while the Chinese Postman Problem is polynomial, even though both involve closed walks.\"\n- **P55 — Transition Prompt**: \"Take a moment. Now try the next challenge.\"\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78. Not met → Protocol B on missed MC → re-gate.\n- **P78 (Completion)**: Eulerian and Hamiltonian Graphs — certified.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 21,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.euler-hamiltonian` (Königsberg bridge problem, informal Eulerian path definition, Hamiltonian cycle concept). Requires familiarity with graph connectivity, degree sequence, and basic algorithmic notation. No further prerequisites.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.graph.eulerian-circuit/reference/1",
+      "kind": "reference",
+      "conceptId": "math.graph.eulerian-circuit",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.euler-hamiltonian` (Königsberg bridge problem, informal Eulerian path context).\n- **Unlocks**: none listed in the KG.\n- **Cross-link**: `math.disc.euler-hamiltonian` (verified on disk) → P76 uses cross-link probe mode.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.graph.eulerian-circuit.md",
+        "startLine": 119,
+        "endLine": 125
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
