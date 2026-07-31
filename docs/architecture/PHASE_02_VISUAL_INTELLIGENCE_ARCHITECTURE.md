@@ -1,9 +1,9 @@
 # Phase 2 — Visual Intelligence Architecture
 
 **Document class:** Architecture blueprint. Design only.
-**Status:** DRAFT — pending independent merge-gate review. Not approved, not merged, not
+**Status:** DRAFT — **READY FOR INDEPENDENT MERGE-GATE REVIEW.** Not approved, not merged, not
 implemented. **The author may not self-certify merge readiness** (Phase 1 §18).
-**Version:** 2.0.0-draft
+**Version:** 2.1.0-draft (supersedes 2.0.0-draft; Appendix D is the change log)
 **Owner:** Pappu (Chief Architect track)
 **Phase:** 02 of the phased architecture program (`architecture/phase-02-visual-intelligence`)
 **Builds on:** Phase 1 Teaching Quality Architecture v1.2.0 (CANONICAL) — extended, never modified
@@ -21,14 +21,14 @@ here constitutes a request for implementation approval.
 
 ## Table of Contents
 
-0. [Reconciliation Map](#0-reconciliation-map) — §0.1 visual-territory inventory · §0.2 canonical visual hierarchy · §0.3 ownership boundary
+0. [Reconciliation Map](#0-reconciliation-map) — §0.1 inventory · §0.2 canonical visual hierarchy · §0.3 ownership boundary and handoffs · **§0.4 a contradiction between reused authorities** *(new in v2.1.0)*
 1. [Executive Summary](#1-executive-summary)
 2. [Design Principles](#2-design-principles)
 3. [System Overview and Layer Model](#3-system-overview-and-layer-model)
 4. [VD-1 · Visual Decision Engine](#4-vd-1--visual-decision-engine) — *when*, and *when not*
 5. [VD-2 · Visual Purpose Taxonomy](#5-vd-2--visual-purpose-taxonomy) — *why*
 6. [VD-3 · Visual Selection Engine](#6-vd-3--visual-selection-engine) — *which*
-7. [VD-4 · The VisualIntent Projection](#7-vd-4--the-visualintent-projection) — the interface
+7. [VD-4 · The VisualIntent Projection](#7-vd-4--the-visualintent-projection) — the interface, incl. **§7.4 the VisualAvailability projection** *(new in v2.1.0)*
 8. [VD-5 · Campaign and Strategy Interaction](#8-vd-5--campaign-and-strategy-interaction)
 9. [VD-6 · Visuals and Mastery](#9-vd-6--visuals-and-mastery)
 10. [VD-7 · Fallback Hierarchy and Graceful Degradation](#10-vd-7--fallback-hierarchy-and-graceful-degradation)
@@ -37,14 +37,14 @@ here constitutes a request for implementation approval.
 13. [Interfaces](#13-interfaces)
 14. [Risks](#14-risks)
 15. [Trade-offs](#15-trade-offs)
-16. [Governance and Extensibility](#16-governance-and-extensibility)
+16. [Governance, Scalability and Extensibility](#16-governance-and-extensibility)
 17. [Future Implementation Guidance](#17-future-implementation-guidance)
 18. [Acceptance Criteria](#18-acceptance-criteria)
 19. [Open Questions](#19-open-questions)
 20. [Reconciliation Procedure Execution Record](#20-reconciliation-procedure-execution-record)
 21. [Merge Requirements](#21-merge-requirements)
 
-Appendices: A Glossary · B Compliance statement · C Curriculum & architecture feedback
+Appendices: A Glossary · B Compliance statement · C Feedback to other owners · **D Change log v2.0.0 → v2.1.0**
 
 ---
 
@@ -60,8 +60,9 @@ and a naive Phase 2 would have duplicated an existing ADR almost in full.
 | Authority | What it owns today | Verdict | Rationale |
 |---|---|---|---|
 | **ADR 12 · Visualization & Simulation Architecture** | The `VisualAsset` model, the `VisualRenderer` taxonomy, the Visual Policy table, concept-keyed caching, background authoring, the mandatory `a11yDescription`, five validator layers, the migration plan | **Reused — and treated as binding** | **The single most important finding.** ADR 12 already owns most of what a naive reading of the Phase 2 brief would design: the *taxonomy*, the *lifecycle*, the *selection mechanics*, the *accessibility requirement*, and the *quality validators*. Phase 2 designs none of these again. See §0.2 for the line. |
-| **ADR 12 §13 · the leaf-dependency rule** | "The Visual tier may not read `TeachingDecision`, `TeachingAction`, or `LessonPlan` — only the single `visual_type` field." Visual is a leaf: everything may call it; it calls nothing | **Reused — a hard constraint on this phase** | This forbids the obvious Phase 2 design (a visual engine that reads campaign and strategy state). Phase 2's central architectural move exists to respect it — see §7. |
-| **ADR 14 · Knowledge Asset Lifecycle** | `AssetIdentity`, the DRAFT→REVIEW→ACTIVE→DEPRECATED→RETIRED lifecycle, `incompatibilities` (misconception gating), at most one ACTIVE per `canonicalSlug` | **Reused** | Visual assets are assets. Phase 2 defines no second lifecycle. |
+| **ADR 12 §13 · the leaf-dependency rule** | "The Visual tier may not read `TeachingDecision`, `TeachingAction`, or `LessonPlan` — only the single `visual_type` field." Visual is a leaf: everything may call it; it calls nothing | **Reused — a hard constraint on this phase** | This forbids the obvious Phase 2 design (a visual engine that reads campaign and strategy state). Phase 2's central architectural move exists to respect it — see §7. **Scope assumption recorded, v2.1.0** — see below. |
+| **`DEPENDENCY_RULES.md` · the leaf entry** | Verbatim: *"this is a leaf dependency. Everything calls into it; it calls into nothing"* — scoped in that file to the **Visual Type System** (`school/visuals/{visualTypes,detectVisual}.ts`) | **Reused, with an inherited ambiguity recorded** | ADR 12 §13 cites this rule but generalizes it from that one module to "the Visual tier" as a whole (`sceneGenerators/`, `visualizationCache`, `generateVisualizationCode`). **Phase 2 adopts ADR 12's broader reading**, because that is the reading its own §13 asserts and the one a visual architecture must satisfy to be safe. But the generalization is ADR 12's, not `DEPENDENCY_RULES`', and Phase 2 records rather than resolves it (VF-6). If the narrow reading is correct, Phase 2's VI-1…VI-5 are stricter than required — which is the safe direction to be wrong. |
+| **ADR 14 · Knowledge Asset Lifecycle** | `AssetIdentity`, the DRAFT→REVIEW→ACTIVE→DEPRECATED→RETIRED lifecycle, `incompatibilities` (misconception gating), at most one ACTIVE per `canonicalSlug` | **Reused — and named as Phase 2's lifecycle target** | Visual assets are assets. Phase 2 defines no second lifecycle. **It also does not assume ADR 12's and ADR 14's lifecycles agree — they do not; see §0.4.** |
 | **ADR 15 · Rendered Reality Model** | Server-authoritative log of what visuals are actually on the learner's screen; five invariants incl. perception-before-reference | **Reused, and load-bearing for §8** | Cross-turn visual awareness is ADR 15's, not Phase 2's. Phase 2 *consumes* RRM to answer "what has this learner already seen in this campaign." |
 | **ADR 08 · Teaching Action Intelligence** | `TeachingDecision.visual_type`; the Posture/Action layer split | **Extended** | Phase 2 widens the projection `visual_type` carries (§7) without changing who decides. |
 | **ADR 09 · Dynamic Lesson Composition** | Cross-turn stage continuity via `lessonStageProgress` | **Reused** | Already extended by Phase 1 TQ-2. Phase 2 adds no stage concept. |
@@ -128,7 +129,7 @@ L-D through L-H by reference.
 | Visual governance | **Designed** — §16 |
 | Visual metrics | **Designed** — VD-9 (§12), bounded against Phase 1 TQ-7 and OSF |
 | Visual quality standards | **Split.** *Technical* validation reused from ADR 12 §4.6. *Pedagogical* quality standard designed (§12.2) |
-| Visual extensibility | **Designed** — §16.3 |
+| Visual extensibility | **Designed** — §16.4 |
 
 **How visuals affect mastery** (brief item, not in the fifteen) is designed in §9 and is, in my
 assessment, the most consequential section in this document.
@@ -150,10 +151,42 @@ its outputs there are **proposals requiring the runtime owner's acceptance**:
 | **VH-4** | RRM records the `VisualIntent` that produced each rendered visual, not only the visual (§8.2) | ADR 15 — runtime owner |
 | **VH-5** | Bible §3/§6.8 gains a Phase 2 pointer; ADR 12 gains a scope note recording that its "when" is now supplied by VD-1 | Bible + ADR 12 — runtime owner |
 | **VH-6** | Wave 0 gains Phase 2 stage items; W4-2 remains gated and is **not** unblocked by this document | Wave 0 — owner |
+| **VH-7** | The **`VisualAvailability` projection** (§7.4) is published by the production tier — a coarse, one-directional capability summary containing no asset ids, cache keys, renderer names or spec payloads | ADR 12 — runtime owner |
+| **VH-8** | **`representationDependence`** (§9.1) is added as a per-concept property of the learner model, with three levels | **ADR 10 Student Memory — runtime owner** |
+
+**VH-8 is called out specifically.** v2.0.0 introduced `representationDependence` in §9.1
+without a handoff, while presenting this list as complete — the learner model is ADR 10's, and
+the governance registry lists the Brain/authoring owner as a forbidden editor of it. That was a
+silent ownership shift, which is the exact anti-pattern Phase 1 §17.2 names ("assuming
+territory"). It is now an explicit proposal requiring the runtime owner's acceptance, and
+Phase 2's merge authorizes it no more than it authorizes VH-1…VH-7.
 
 **Unresolved boundary carried forward.** Phase 1's OQ-10 — whether phase architecture documents
 belong in `docs/architecture/`, which the registry assigns to the runtime owner — applies
 identically here and is not re-litigated. Recorded as VQ-8.
+
+### 0.4 A contradiction between two reused authorities (recorded v2.1.0)
+
+Reconciliation must record contradictions it finds between the documents it reuses, not smooth
+them. v2.0.0 marked ADR 12 and ADR 14 both "Reused" and treated their asset lifecycles as one
+coherent model. **They are two different lifecycles**, and the divergence is verifiable:
+
+| | ADR 12 §4.1 | ADR 14 |
+|---|---|---|
+| States | `'draft' \| 'active' \| 'deprecated'` (3) | `DRAFT → REVIEW → ACTIVE → DEPRECATED → RETIRED` (5), plus `EXPERIMENT_VARIANT` |
+| Review step | none | `REVIEW`, with a curator queue |
+| Terminal state | none — `deprecated` is terminal | `RETIRED` |
+| Deprecation triggers | not enumerated | five, enumerated, evidence-driven |
+| Uniqueness rule | none stated | at most one `ACTIVE` per `canonicalSlug` |
+
+**This contradiction predates Phase 2 and is not Phase 2's to fix** — both documents belong to
+the runtime owner. It is recorded as feedback **VF-5** (Appendix C) rather than resolved here.
+
+**Phase 2's lifecycle target is ADR 14's**, and the choice is not arbitrary: Phase 2's only
+lifecycle interaction is the *pedagogical retirement signal* (§12.4), which needs a destination
+that has a review step, a curator queue and enumerated deprecation triggers. ADR 12's
+three-state field has none of these; ADR 14's lifecycle has all three. Every reference in this
+document to "the asset lifecycle" therefore means ADR 14's, and §12.4 says so explicitly.
 
 ---
 
@@ -355,9 +388,50 @@ left to judgement. Each is a **hard no**, not a preference.
 | **N9** | Accessibility profile precludes the channel and no instructionally equivalent alternative exists | §11.3 — an inaccessible visual is not a partial win |
 | **N10** | The turn is a CLOSING or SUMMARY act | Phase 1 protects the close; a new representation at closure creates an open loop |
 
-Every no-visual outcome is recorded with its contraindication code. This extends — and makes
-concrete — Phase 1's gate **G7**, whose legal reason codes gain the N-codes above (VH-2 note:
-G7's set is Phase 1's; §12.3 records the proposed extension rather than editing Phase 1).
+Every no-visual outcome is recorded with its contraindication code.
+
+#### 4.3.1 Relationship to Phase 1's gate G7 — corrected in v2.1.0
+
+**v2.0.0 stated that G7's reason codes "gain the N-codes above." That was wrong**, in three
+separate ways, and the correction matters more than the error: Phase 1 §8.3 defines G7's set as
+**closed** — *"a reason outside the set fails the gate, and adding a reason requires an
+amendment"* — so extending it silently would have modified a canonical document Phase 2 is
+forbidden to touch. The supporting citation pointed at VH-2, which concerns ADR 12's Visual
+Policy and is unrelated. And the forward reference to §12.3 resolved to nothing.
+
+**The correct resolution requires no Phase 1 amendment at all**, because the two record
+different things at different scales — the same distinction §4.1 already draws:
+
+| | Phase 1 **G7** | Phase 2 **N-codes** |
+|---|---|---|
+| Scale | Campaign / arc | Turn |
+| Question | Why did this *concept's arc* serve no non-verbal representation? | Why does *this turn* carry no visual? |
+| Owner | Phase 1 (canonical, closed at four codes) | Phase 2 |
+| Codes | VERBAL_CLAIM · CHANNEL_UNAVAILABLE · ASSET_ABSENT · LOAD_REDUCTION | N1…N10 |
+
+**N-codes do not extend G7. They are a Phase 2-owned turn-scale record**, and G7 is untouched.
+
+The two meet only in one case: when an arc's VISUAL phase completes having served no non-verbal
+representation, G7 must be answered. Only **persistent** contraindications can produce that
+outcome, and each maps to an existing Phase 1 code — no new code is required:
+
+| Persistent contraindication | Maps to Phase 1 G7 code |
+|---|---|
+| N1 definitional/conventional claim | `VERBAL_CLAIM` |
+| N3 load at capacity throughout | `LOAD_REDUCTION` |
+| N6 sustained RECOVERY | `CHANNEL_UNAVAILABLE` (learner context precludes it) |
+| N9 accessibility profile precludes the channel | `CHANNEL_UNAVAILABLE` |
+| *(no form available — VD-7 rung F8)* | `ASSET_ABSENT` |
+
+The remaining six — **N2** (would reveal an owed answer), **N4** (an equivalent visual already
+failed), **N5** (unaided assessment in progress), **N7** (symbolic-rung mismatch), **N8**
+(dependence risk) and **N10** (closing act) — are **transient turn conditions**. None persists
+across an entire arc phase: the answer stops being owed, the assessment ends, the close
+completes. So none can produce an arc-scale no-visual outcome, and none ever needs a G7 code.
+
+**This is why no handoff is required.** Phase 1 is untouched, its closed set stays closed at
+four, and the mapping above is Phase 2's own record of how its turn-scale codes project onto
+Phase 1's arc-scale gate when — and only when — the gate is implicated.
 
 ### 4.4 Inputs
 
@@ -414,20 +488,40 @@ nothing states what they were for.
 
 **Closed set.** Closure is deliberate, for the same reasons Phase 1 closed its archetype and
 method sets: an open set cannot accumulate effectiveness evidence, cannot be tie-broken
-deterministically, and cannot be audited. Extension is by versioned amendment (§16.3).
+deterministically, and cannot be audited. Extension is by versioned amendment (§16.4).
 
-| # | Purpose | The claim it makes perceptible | Grounding primitive | Characteristic failure |
+**Grounding is by primitive *composition*, not by a single primitive** (strengthened v2.1.0).
+v2.0.0 grounded six of ten purposes in bare P07, which made the grounding criterion nearly
+inert as a discriminator — six purposes sharing one grounding cannot be told apart by it.
+Because the FINAL primitive architecture establishes that anything above a primitive *is* a
+composition (§0.2 C-3), each purpose is now grounded in the composition it actually names, and
+each composition is distinct.
+
+| # | Purpose | The claim it makes perceptible | Grounding composition | Characteristic failure |
 |---|---|---|---|---|
-| **VP-A** | **STRUCTURE-REVEAL** | "This thing has these parts in this arrangement" | P07 | Learner recalls the picture's layout, not the structure |
-| **VP-B** | **PROCESS-TRACE** | "This changes over time/steps in this order" | P07 + P14 prediction | Learner watches; nothing is predicted, so nothing is tested |
-| **VP-C** | **RELATION-MAP** | "These entities relate in this way" | P07 | Becomes a decorative concept map; relations unlabelled |
-| **VP-D** | **QUANTITY-SENSE** | "This magnitude compares to that one thus" | P07 + P16 comparison | Learner reads values off, never internalizes scale |
-| **VP-E** | **CONTRAST-DISCRIMINATE** | "These two differ *here* and only here" | **P17 CONTRAST** | Varies more than one dimension; learns the pair, not the boundary |
-| **VP-F** | **MODEL-EXTERNALIZE** | "Here is the mental model you should be running" | P07 + P26 schema activation | Model is accepted as a picture and never operated |
-| **VP-G** | **ATTENTION-DIRECT** | "Look *here* — this is the load-bearing detail" | P07 | Highlights the salient rather than the important |
-| **VP-H** | **MEMORY-OFFLOAD** | "Hold this externally so working memory is free" | P07 | Becomes a permanent crutch → representation-dependence (§9.1) |
+| **VP-A** | **STRUCTURE-REVEAL** | "This thing has these parts in this arrangement" | P07 alone — the base case | Learner recalls the picture's layout, not the structure |
+| **VP-B** | **PROCESS-TRACE** | "This changes over time/steps in this order" | P14 → P07 → P15 (predict, show, observe) | Learner watches; nothing predicted, so nothing tested |
+| **VP-C** | **RELATION-MAP** | "These entities relate in this way" | P07 + P16 COMPARISON over entity pairs | Decorative concept map; relations unlabelled |
+| **VP-D** | **QUANTITY-SENSE** | "This magnitude compares to that one thus" | P07 + P16 over *magnitudes* | Reads values off; never internalizes scale |
+| **VP-E** | **CONTRAST-DISCRIMINATE** | "These two differ *here* and only here" | **P17 CONTRAST** — one dimension varied | Varies more than one dimension; learns the pair, not the boundary |
+| **VP-F** | **MODEL-EXTERNALIZE** | "Here is the mental model you should be running" | P26 SCHEMA ACTIVATION → P07 → P14 | Model accepted as a picture, never operated |
+| **VP-G** | **ATTENTION-DIRECT** | "Look *here* — this is the load-bearing detail" | P07 *annotating an existing* P07 — the only recursive purpose | Highlights the salient rather than the important |
+| **VP-H** | **MEMORY-OFFLOAD** | "Hold this externally so working memory is free" | P07 held *persistently* alongside another primitive | Becomes a permanent crutch → representation-dependence (§9.1) |
 | **VP-I** | **LEARNER-CONSTRUCT** | *(inverted)* "Show me your model by drawing it" | **P47 DIAGRAM CONSTRUCTION** | Graded as art rather than read as diagnosis |
-| **VP-J** | **MANIPULATE-DISCOVER** | "Change this and observe what follows" | P07 + P14 | Play without extraction (Phase 1 M7's guard) |
+| **VP-J** | **MANIPULATE-DISCOVER** | "Change this and observe what follows" | P14 → learner action → P15 → P25 abstraction | Play without extraction (Phase 1 M7's guard) |
+
+Distinctness now holds on all three of §16.4's criteria rather than two: no two purposes share a
+grounding composition, a claim type, and a characteristic failure.
+
+**VP-H is a constrained purpose, not a free one** (clarified v2.1.0). Review correctly observed
+that its characteristic failure *is* representation-dependence — the exact harm §9.1 exists to
+detect. It is retained because deliberate external memory is genuinely instructional while a
+schema is being built, but it is the one purpose that carries a mandatory obligation:
+
+> **A visual admitted under VP-H MUST carry a withdrawal plan** — a stated point at which the
+> offload is removed and a withdrawal probe (§9.1) is scheduled. VP-H without a withdrawal plan
+> is not admitted. It is the only purpose that manufactures its own failure mode if left
+> unbounded, so it is the only one that must declare in advance how it ends.
 
 **Three properties of the set:**
 
@@ -513,13 +607,26 @@ Deliberately shaped like Phase 1's funnels so the mechanisms read as one family.
  VS6  LOAD ADMISSIBILITY — cut forms whose element count exceeds current
       headroom. Interactive forms carry the highest intrinsic load.
 
- VS7  AVAILABILITY — does an asset exist, or can one be produced without
-      entering the turn's latency budget? Never generate in-turn (ADR 12 §4.4).
-      A miss does not fail the turn — it routes to VD-7's fallback ladder.
+ VS7  AVAILABILITY — cut form classes absent from the concept's
+      VisualAvailability projection (§7.4). Filters against a COARSE,
+      one-directional projection only: never a catalogue query, never an
+      asset id, never a cache key, never a renderer name. Never generate
+      in-turn (ADR 12 §4.4). A miss does not fail the turn — it routes to
+      VD-7's fallback ladder.
 
  VS8  TIE-BREAK — population effectiveness for this purpose on this concept,
-      then a deterministic seed (learner + concept + turn), so replay is exact.
+      sourced from the Evidence Engine (ADR 13) and INERT until that evidence
+      exists; then a deterministic seed (learner + concept + turn), so replay
+      is exact.
 ```
+
+**VS7 and VS8 are deliberately the weakest filters, and both are bounded** (revised v2.1.0).
+They are the two that reach toward the production and evidence tiers respectively, so each is
+constrained to a value published *to* the pedagogical tier rather than a read *into* another
+tier: VS7 consumes the availability projection defined in §7.4; VS8 consumes ADR 13's
+effectiveness scores and defines no effectiveness model of its own. **Until ADR 13 evidence
+accumulates, VS8 reduces to the deterministic seed** — the same posture Phase 1's own tie-break
+filter takes for the same reason.
 
 **Empty-funnel behaviour.** Not an error. It routes to VD-7 (§10) with the purpose preserved,
 and emits a visual-coverage defect naming the concept, the claim and the purpose. That defect
@@ -620,11 +727,58 @@ is impossible without it.
   complete interface.
 - **VI-3** The production tier MAY refuse an intent it cannot satisfy. Refusal is a typed
   outcome, and it triggers the `fallbackContract` rather than an error.
-- **VI-4** The pedagogical tier MUST NOT read renderer internals, cache state, or asset ids. It
-  learns only *what was ultimately shown*, and only through RRM.
+- **VI-4** The pedagogical tier MUST NOT read renderer internals, cache state, asset ids, spec
+  payloads, or any production-tier implementation detail. It learns only *what was ultimately
+  shown* (through RRM) and *what classes of form are available* (through the projection in
+  §7.4, and through nothing else).
 
 VI-4 is the symmetric constraint, and it matters: without it Phase 2 would slowly acquire
 knowledge of ADR 12's internals and the boundary would erode from above.
+
+- **VI-5** The **VisualAvailability projection is the sole exception to VI-4**, and it is
+  bounded by construction (§7.4). It is *published* by the production tier, never *queried* by
+  the pedagogical tier — so the production tier still calls into nothing, and the leaf rule is
+  strengthened rather than weakened.
+
+### 7.4 The VisualAvailability projection (added v2.1.0)
+
+**Why it exists.** Review found a genuine contradiction in v2.0.0: VS7 asked "does an asset
+exist?", which is a read of ADR 12's catalogue, while VI-4 forbade exactly that. Either VS7
+could not execute or the leaf isolation was broken on every turn. The contradiction was real
+and the acceptance criterion asserting leaf preservation was false as written.
+
+**The resolution is a second one-directional projection, in the opposite direction to the
+VisualIntent.** It carries capability, not content.
+
+```
+VisualAvailability {
+  conceptId
+  formClassesAvailable[]        -- pedagogical form classes only (§6.1)
+  formClassesGenerableInTurn[]  -- deterministically producible without
+                                --   entering the turn's latency budget
+  projectionVersion
+}
+```
+
+**What it MUST NOT contain**, enumerated because the value of the boundary is entirely in what
+is excluded: asset ids · cache keys · renderer names or the `VisualRenderer` enum · spec
+payloads · quality scores · asset counts · lifecycle status · any production identifier.
+
+Everything excluded is something whose presence would let the pedagogical tier reason about
+ADR 12's internals — which is how the boundary would erode. Form classes are Phase 2's own
+vocabulary (§6.1), so the projection is expressed entirely in terms the pedagogical tier
+already owns.
+
+**Directionality.** The production tier computes and publishes the projection as a value. The
+pedagogical tier reads it. **No call crosses the boundary in either direction**, so
+`DEPENDENCY_RULES.md`'s leaf rule — "everything calls into it; it calls into nothing" — holds
+exactly as written. This is why the fix is a projection rather than a lookup API: an API would
+have been a call, and a call would have been a coupling.
+
+**Staleness is acceptable and is why the projection is coarse.** It answers "could a diagram
+for this concept plausibly be served?", not "which asset will be served?" A wrong answer costs
+one fallback-ladder step (§10.2), never a failed turn — which is precisely the error tolerance
+that lets the projection stay coarse enough to remain a boundary.
 
 ---
 
@@ -704,8 +858,9 @@ narrower competence. Because the visual makes performance look strong, this fail
 invisible precisely when it is most advanced — the same structure as Phase 1's fast-and-wrong
 dangerous quadrant.
 
-**Phase 2 makes it a first-class learner state.** `representationDependence` is a per-concept
-property of the learner model with three levels:
+**Phase 2 PROPOSES it as a first-class learner state — handoff VH-8, not an enacted change.**
+`representationDependence` would be a per-concept property of the learner model, which is
+ADR 10's territory and the runtime owner's to accept or decline. Three levels:
 
 ```
  INDEPENDENT   performs unaided, in a representation not used to teach it
@@ -924,8 +1079,10 @@ exists to prevent.
 ### 12.4 Retirement and authoring signals
 
 - A visual whose Q1 fails repeatedly for one purpose is retired for that purpose (it may remain
-  valid for another) — a *pedagogical* retirement signal feeding ADR 12/14's existing
-  deprecation triggers. Phase 2 defines no second lifecycle.
+  valid for another) — a *pedagogical* retirement signal feeding **ADR 14's** deprecation
+  triggers and curator queue specifically, per §0.4's disambiguation. ADR 12's three-state field
+  has no review step, no curator queue and no enumerated triggers, so it is not a viable
+  destination for this signal. Phase 2 defines no second lifecycle.
 - Repeated F7/F8 for one claim is a **visual coverage defect**, ranked by concept centrality.
   This is the highest-value authoring signal the architecture produces, because it names exactly
   what to author: a concept, a claim, and a purpose.
@@ -1012,7 +1169,7 @@ without them, representation-dependence is invisible until it fails in a context
 
 ---
 
-## 16. Governance and Extensibility
+## 16. Governance, Scalability and Extensibility
 
 ### 16.1 Ownership summary
 
@@ -1036,7 +1193,48 @@ are versioned artifacts. Amendments carry a migration declaration (`CARRIED` / `
 `RETIRED`), matching Phase 1 §4.3's V-1…V-3, so accumulated effectiveness evidence is never
 silently carried across a definitional change.
 
-### 16.3 Extensibility
+### 16.3 Scalability (added v2.1.0)
+
+Review noted this was absent. ADR 12 §6 owns *production* scalability — cache growth, render
+cost, storage. This section owns only the **pedagogical authoring space**, which is Phase 2's
+to size because Phase 2's purpose taxonomy is what multiplies it.
+
+**The combinatorial space, stated honestly:**
+
+```
+  10 purposes  ×  ~1,756 KG concepts  ×  claims per concept (several)
+               ×  form classes per purpose  ×  languages  ×  grade bands
+```
+
+Fully populated this is millions of assets and is **not a reachable target**. Saying so plainly
+matters: an architecture that implies full coverage sets an authoring program up to fail against
+a denominator nobody ever computed.
+
+**Three properties keep it tractable, and none is a hope:**
+
+- **SC-1 · The space is sparse by design, not by shortfall.** Most concept×purpose cells are
+  never admitted, because VD-1's default is no visual and N1–N10 rule out large regions
+  a priori (a definitional concept admits no VP-A at all). The reachable space is the
+  *admitted* space, not the cross product.
+- **SC-2 · Coverage is demand-ranked, never enumerated.** VD-7's coverage defects (§12.4) are
+  emitted only for claims a learner actually reached and ranked by concept centrality, so
+  authoring follows real traffic. This is the same discipline Phase 1 applies to concept
+  entries, and it is why an unbounded space does not imply an unbounded program.
+- **SC-3 · Degradation is the steady state.** VD-7's ladder assumes absence (VR1: "Certain"),
+  and F6 converts absence into instrumentation. A concept with zero authored visuals still
+  teaches — so coverage is a quality gradient, not a launch gate.
+
+**What does scale linearly** and is therefore bounded: the ten purposes (fixed), the
+contraindication set (fixed), the nine fallback rungs (fixed), and the availability projection
+(one coarse record per concept). **Phase 2 adds no per-turn cost that grows with the asset
+library** — the decision is a boolean evaluation over typed state (§4.5), and VS7 reads a
+projection whose size is independent of how many assets exist.
+
+**The honest residual:** authoring effort per concept rises with the number of *purposes* a
+concept genuinely needs, and nothing here reduces that. It is a content cost, tracked by VR1,
+not an architectural one.
+
+### 16.4 Extensibility
 
 - **New purpose:** admissible only with a distinct claim type, a distinct characteristic
   failure, and a grounding primitive — the same admissibility discipline Phase 1 applies to
@@ -1089,8 +1287,8 @@ Criteria for the **document**, not an implementation.
 | V-A1 | Every scope item designed, or reconciled to an existing owner with rationale | ✅ §0.2 |
 | V-A2 | Phase 1 extended, never modified or contradicted | ✅ — no Phase 1 content changed |
 | V-A3 | No contradiction with the FINAL primitive architecture, ADR 08, ADR 09 | ✅ §0.1 |
-| V-A4 | ADR 12's leaf-dependency rule preserved by construction | ✅ §7.3 VI-1…VI-4 |
-| V-A5 | No duplicate renderer taxonomy, asset model, cache, lifecycle, or validator | ✅ §0.2 |
+| V-A4 | ADR 12's leaf-dependency rule preserved by construction, **with no cross-boundary call in either direction** | ✅ §7.3 VI-1…VI-5, §7.4 — **was FALSE in v2.0.0** (VS7 required a catalogue read VI-4 forbade); now objectively true: the only cross-boundary flows are two published projections, and neither is a call |
+| V-A5 | No duplicate renderer taxonomy, asset model, cache, lifecycle, or validator | ✅ §0.2; §0.4 additionally records that the two reused lifecycles contradict, and names ADR 14 as Phase 2's target |
 | V-A6 | "When NOT to visualize" enumerated, not left to judgement | ✅ §4.3 (N1–N10) |
 | V-A7 | Every visual carries a purpose and a stateable claim | ✅ §5.3 |
 | V-A8 | Visual↔mastery interaction defined, incl. representation-dependence | ✅ §9 |
@@ -1101,11 +1299,17 @@ Criteria for the **document**, not an implementation.
 | V-A13 | Risks state residual risk; trade-offs state accepted cost | ✅ §14, §15 |
 | V-A14 | No code, runtime, schema, API, component, prompt, or curriculum change | ✅ document only |
 | V-A15 | Phase 1 §17's reconciliation procedure executed and recorded | ✅ §20 |
-| V-A16 | Extensibility defined for new purposes, forms and modalities | ✅ §16.3 |
+| V-A16 | Extensibility defined for new purposes, forms and modalities | ✅ §16.4 |
 | V-A17 | Every component declares a falsifiable prediction or failure signature | ⚠️ **PARTIAL** — VD-1, VD-2, VD-6 and VD-7 carry them; VD-3 and VD-8 express falsifiability only through failure modes. Not manufactured to close the checklist |
 | V-A18 | **Independent merge-gate review recommends approval** | ❌ **NOT MET, AND NOT SELF-MARKABLE** (Phase 1 §18) |
+| V-A19 | **No Phase 1 content is modified, and no Phase 1 closed set is extended** | ✅ §4.3.1 — v2.0.0 extended G7's closed set; v2.1.0 removes the extension entirely. Phase 1 is byte-identical |
+| V-A20 | **Every proposed change in another owner's territory is an explicit handoff** | ✅ §0.3 VH-1…VH-8 — VH-7 and VH-8 added in v2.1.0 to cover the availability projection and the learner-model field |
+| V-A21 | **Contradictions found between reused authorities are recorded, not smoothed** | ✅ §0.4 (ADR 12 vs ADR 14 lifecycles); §0.1 (`DEPENDENCY_RULES` leaf scope) |
+| V-A22 | **Scalability is treated and the authoring space is sized honestly** | ✅ §16.3 |
 
-**Status: DRAFT.** Sixteen met, one partial, one unmet by construction.
+**Status: DRAFT — READY FOR INDEPENDENT MERGE-GATE REVIEW.** Twenty of twenty-two met, V-A17
+PARTIAL (VD-3 and VD-8 still lack falsifiable predictions; deliberately not manufactured), and
+V-A18 unmet by construction and not self-markable.
 
 ---
 
@@ -1153,9 +1357,9 @@ checked.
 | 1 · Inventory | Directory listing of `docs/architecture/` (52 + 7), `educational-brain/`, `docs/curriculum/`; grep for visual authorities across all | 14 authorities touching visual territory identified (§0.1) |
 | 2 · Governance registry | Read in full | Visualization/Simulation owned by the runtime owner, Pappu a forbidden editor → §0.3's boundary and VH-1…VH-6 |
 | 3 · ADR reconciliation | Read what each ADR **selected**, not what it diagnosed | **ADR 12 already owns taxonomy, lifecycle, selection mechanics, a11y and validators** — the finding that reshaped this phase. ADR 15 owns cross-turn visual state |
-| 4 · Document reconciliation | One verdict per authority | §0.1; Superseded used zero times |
-| 5 · Ownership verification | One owner per responsibility | §16.1 |
-| 6 · Authority verification | Checked every decision for a second decider | Two selection layers found and separated (§6.1); leaf rule enforced in both directions (§7.3) |
+| 4 · Document reconciliation | One verdict per authority | §0.1; Superseded used zero times. **v2.1.0:** added the `DEPENDENCY_RULES` leaf entry as a distinct authority, and recorded the ADR 12 / ADR 14 lifecycle contradiction in §0.4 rather than smoothing it |
+| 5 · Ownership verification | One owner per responsibility | §16.1. **v2.1.0:** re-run after review found `representationDependence` had shifted ADR 10 territory silently → VH-8 |
+| 6 · Authority verification | Checked every decision for a second decider | Two selection layers found and separated (§6.1). **v2.1.0:** the v2.0.0 leaf claim was FALSE — VS7 required a catalogue read VI-4 forbade. Resolved by the §7.4 availability projection; both cross-boundary flows are now published values, not calls |
 | 7 · Independent review | Not performed by the author | §21 |
 
 **Anti-patterns actively checked** (Phase 1 §17.2): reconciled ADR 12's *selected design*, not
@@ -1238,3 +1442,65 @@ would make campaign visual history queryable by purpose and claim, which VS5 and
 **VF-4 · No field records a learner's CPA position per claim** (VQ-6). This is the visual
 analogue of Phase 1's REQUIRED-BUT-ABSENT knowledge-type gap, and it is VD-1's primary input.
 Recorded for the Twin/Student-Memory owner.
+
+**VF-5 · ADR 12 and ADR 14 carry two different asset lifecycles** (added v2.1.0). ADR 12 §4.1
+defines `status: 'draft' | 'active' | 'deprecated'`; ADR 14 defines
+`DRAFT → REVIEW → ACTIVE → DEPRECATED → RETIRED` plus `EXPERIMENT_VARIANT`, with a curator
+queue, five enumerated deprecation triggers and a one-ACTIVE-per-slug rule. A visual asset is
+subject to both documents and it is not stated which governs. Phase 2 targets ADR 14's (§0.4,
+§12.4) and does not attempt to resolve the contradiction — both documents belong to the runtime
+owner. Recorded for reconciliation at their discretion.
+
+**VF-6 · The Visual leaf rule's scope differs between two documents** (added v2.1.0).
+`DEPENDENCY_RULES.md` scopes its leaf entry to the Visual Type System
+(`school/visuals/{visualTypes,detectVisual}.ts`); ADR 12 §13 cites that rule but applies it to
+"the Visual tier" as a whole. Phase 2 adopts the broader reading and is therefore stricter than
+the narrow reading would require. Worth an explicit statement in whichever document is
+authoritative.
+
+---
+
+## Appendix D — Change log, v2.0.0-draft → v2.1.0-draft
+
+An independent-style merge-gate review returned **DO NOT APPROVE** on v2.0.0 with four blocking
+issues and six important improvements. All ten are resolved below. **No architectural redesign
+was performed** — the review's own conclusion was that the shape is sound and the defects are
+consistency, governance and boundary faults. Nothing was rejected.
+
+### D.1 Blocking issues
+
+| ID | Issue | Resolution | Sections |
+|---|---|---|---|
+| **B1** | VS7 required a catalogue read that VI-4 forbade; leaf isolation broken; V-A4 false | **§7.4 `VisualAvailability` projection** — coarse, one-directional, expressed in Phase 2's own form-class vocabulary, with an enumerated exclusion list (no asset ids, cache keys, renderer names, spec payloads, quality scores, counts or lifecycle status). VS7 restated to filter against it. **VI-4 tightened** (adds spec payloads and implementation detail) and **VI-5 added** making the projection the sole, bounded exception. Crucially it is *published*, never *queried* — so no call crosses the boundary in either direction and the leaf rule is **strengthened**, not weakened. New handoff **VH-7** | §6.2 VS7, §7.3 VI-4/VI-5, §7.4, §18 V-A4 |
+| **B2** | Unauthorized extension of Phase 1's closed G7 set, via a mis-cited handoff (VH-2, unrelated) and a forward reference resolving to nothing | **§4.3.1 replaces the extension entirely.** Checking N1–N10 against Phase 1's actual four codes showed the premise was wrong: G7 is *arc-scale*, N-codes are *turn-scale* — the boundary §4.1 already draws. **N-codes do not extend G7.** Only the four persistent contraindications can produce an arc-scale outcome, and each maps to an existing Phase 1 code; the other six are transient and never reach the gate. **No Phase 1 amendment and no handoff are required**, and both broken citations are gone | §4.3.1 |
+| **B3** | ADR 12 (3-state) and ADR 14 (5-state) lifecycles contradict; both marked "Reused" | **§0.4 records the contradiction** with a state-by-state comparison, states that it predates Phase 2 and belongs to the runtime owner, and **names ADR 14 as Phase 2's target** — chosen on the evidence that only ADR 14 has the review step, curator queue and enumerated triggers a retirement signal needs. §12.4 updated. Feedback **VF-5** added | §0.1, §0.4, §12.4, App. C |
+| **B4** | `representationDependence` added to ADR 10's learner model with no handoff, while the handoff list read as complete | **Handoff VH-8 added** and called out explicitly as a silent ownership shift corrected. §9.1 reworded from "makes it a first-class learner state" to "**proposes** it — handoff VH-8, not an enacted change." §12.1's "no new evidence store" clarified to distinguish a store from a proposed field | §0.3, §9.1, §12.1 |
+
+### D.2 Important improvements
+
+| ID | Issue | Resolution | Sections |
+|---|---|---|---|
+| **I-1** | Six of ten purposes grounded in bare P07 — grounding nearly inert as a discriminator | Grounding is now by primitive **composition**, consistent with the FINAL primitive architecture's own position that everything above a primitive is a composition. All ten compositions are distinct, so §16.4's three-criterion admissibility test is genuinely three-part | §5.2 |
+| **I-2** | VP-H MEMORY-OFFLOAD's characteristic failure *is* representation-dependence | Retained but reclassified as a **constrained purpose**: a VP-H visual MUST carry a withdrawal plan and a scheduled withdrawal probe, or it is not admitted. The only purpose that must declare in advance how it ends | §5.2 |
+| **I-3** | VS8 tie-break used "population effectiveness" — ADR 13 territory | Sourced explicitly from ADR 13 and marked **inert until that evidence exists**, reducing to the deterministic seed — the same posture Phase 1's own tie-break takes | §6.2 VS8 |
+| **I-4** | No scalability treatment | **§16.3** added: sizes the combinatorial space honestly, states plainly that full coverage is not a reachable target, and gives three tractability properties (sparse by design, demand-ranked, degradation as steady state) plus what scales linearly and the honest residual | §16.3 |
+| **I-5** | `DEPENDENCY_RULES` scopes the leaf rule to `school/visuals/*`; ADR 12 §13 generalizes it | Recorded as a distinct inventory row with the scope assumption stated: Phase 2 adopts the broader reading, which is the **safe direction to be wrong**. Feedback **VF-6** added | §0.1, App. C |
+| **I-6** | V-A4 self-marked ✅ against a claim the document falsified | V-A4 corrected with its prior falsity stated; **V-A19…V-A22 added** covering Phase 1 non-modification, handoff completeness, contradiction recording and scalability | §18 |
+
+**Minor items m-1…m-5** were folded into the sections above (VP-H hedging, purpose/contra-
+indication orthogonality, glossary, advisory marking, feedback cross-references).
+
+### D.3 Scope confirmation
+
+**No architectural scope was expanded.** v2.1.0 adds exactly one new architectural object — the
+`VisualAvailability` projection — and it exists solely to *remove* a coupling, not to add
+capability: it is strictly less powerful than the catalogue read v2.0.0 implicitly required.
+Everything else is a correction, a clarification, a recorded contradiction, or a handoff.
+
+No new subsystem. No new component. No new engine. No new evidence store. No new lifecycle.
+No Phase 1 modification — Phase 1 is byte-identical. No ADR modification — every proposed change
+to another owner's document is a handoff (VH-1…VH-8) or feedback (VF-1…VF-6), and Phase 2's
+merge authorizes none of them. No runtime code.
+
+The purpose taxonomy remains ten. The contraindications remain ten. The fallback ladder remains
+nine rungs. The component set remains VD-1…VD-9.
