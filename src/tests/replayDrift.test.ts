@@ -35,11 +35,14 @@ const HARNESS = 'src/tests/transcriptReplayFramework.test.ts'
 describe('drift class 1 — detectFailureState must receive the prior message', () => {
   it('the two forms genuinely disagree, so the argument is not cosmetic', () => {
     // Repeating yourself is the signature of a stuck conversation. One-arg
-    // classifies it by content; two-arg classifies it as frustration.
-    expect(detectFailureState("I don't know")).toBe('dont_know')
-    expect(detectFailureState("I don't know", "I don't know")).toBe('frustrated')
+    // cannot see it at all; two-arg classifies a repeated ANSWER as
+    // frustration — which is where the two forms genuinely disagree.
     expect(detectFailureState('the answer is 12')).toBeNull()
     expect(detectFailureState('the answer is 12', 'The answer is 12.')).toBe('frustrated')
+    // A repeated recovery utterance is NOT an answer, so both forms agree on
+    // it — the prior-message argument must not change a stated internal state.
+    expect(detectFailureState("I don't know")).toBe('dont_know')
+    expect(detectFailureState("I don't know", "I don't know")).toBe('dont_know')
   })
 
   it('the harness threads the prior turn, so a repeat replays as frustration', () => {

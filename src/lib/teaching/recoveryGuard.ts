@@ -306,12 +306,32 @@ export function detectFailureState(message: string, priorUserMessage?: string | 
     if (re.test(text)) return key
   }
   if (isShoutingCaps(text)) return 'frustrated'
-  if (isRepeatedAnswer(text, priorUserMessage)) return 'frustrated'
+  // A RECOVERY UTTERANCE is not an answer either, so repeating one is not
+  // repeating an answer — the same reasoning that already excludes
+  // acknowledgements from isRepeatedAnswer(), applied to the other input
+  // family that is not an answer. The mild classification therefore runs
+  // BEFORE the repeated check rather than after it.
+  //
+  // Ordering was the whole defect. "I don't know" said twice — the single
+  // most likely behaviour of a genuinely stuck learner — matched
+  // isRepeatedAnswer first and returned 'frustrated', so it never reached
+  // its own classifier. 'frustrated' is not in DONT_KNOW_SIGNAL_KEYS, so
+  // consecutiveDontKnows did not increment on the second signal, and the
+  // Rule 2 escalation that ends discovery and forces explanation after two
+  // consecutive signals could not fire for the learner who needs it most.
+  // It also re-inferred an internal state the learner had just stated,
+  // against foundations/04 P20 (stated internal state is ground truth,
+  // accepted instantly, never re-inferred) — a law this module's own header
+  // declares.
+  //
+  // Genuinely repeated CONTENT is unaffected: a repeated substantive answer
+  // matches no pattern here and still falls through to 'frustrated' below.
   if (text.length <= MILD_MAX_LENGTH && !isRephraseRequest(text)) {
     for (const [key, re] of MILD_PATTERNS) {
       if (re.test(text)) return key
     }
   }
+  if (isRepeatedAnswer(text, priorUserMessage)) return 'frustrated'
   return null
 }
 

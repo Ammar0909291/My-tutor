@@ -406,11 +406,13 @@ describe('route-order replay: the acknowledgement survives failure detection', (
     // A single struggle utterance keeps its own key and its own script.
     expect(detectFailureState("I don't know", null)).toBe('dont_know')
     expect(detectFailureState("I'm confused", null)).toBe('confused')
-    // Repeated, the pre-existing repeated-answer rung reclassifies it as
-    // exasperation — unchanged by the acknowledgement exclusion, and asserted
-    // here so the exclusion can never widen into these.
-    expect(detectFailureState("I don't know", "I don't know")).toBe('frustrated')
-    expect(detectFailureState("I'm confused", "I'm confused")).toBe('frustrated')
+    // Repeated, each KEEPS its own key: a recovery utterance is not an answer,
+    // so the repeated-answer rung must not see it. Asserted here so neither
+    // the acknowledgement exclusion nor the repeated-answer rung can widen
+    // into these. (Was 'frustrated' until the ordering fix — that reclassing
+    // is what stopped consecutiveDontKnows incrementing on the second signal.)
+    expect(detectFailureState("I don't know", "I don't know")).toBe('dont_know')
+    expect(detectFailureState("I'm confused", "I'm confused")).toBe('confused')
     // Either way recovery still owns the turn — the guard is not disarmed.
     expect(detectFailureState("I don't know", "I don't know")).not.toBeNull()
   })

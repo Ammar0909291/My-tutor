@@ -147,7 +147,15 @@ describe('detectFailureState — P0-3 frustration', () => {
 
   it('repeated identical answer across turns fires, given the prior message', () => {
     expect(detectFailureState('the answer is 12', 'The answer is 12.')).toBe('frustrated')
-    expect(detectFailureState('I dont know', "I don't know")).toBe('frustrated')
+    expect(detectFailureState('because it accelerates', 'Because it accelerates.')).toBe('frustrated')
+  })
+
+  it('a repeated recovery utterance keeps its own key, not frustration', () => {
+    // A recovery utterance is not an answer, so repeating one is not
+    // repeating an answer — the same exclusion isRepeatedAnswer() already
+    // documents for acknowledgements. See repeatedRecoveryUtterance.test.ts
+    // for the production evidence and the Rule 2 consequence.
+    expect(detectFailureState('I dont know', "I don't know")).toBe('dont_know')
   })
 
   it('repeated-answer check never fires without the prior-message argument (backward compatible)', () => {
