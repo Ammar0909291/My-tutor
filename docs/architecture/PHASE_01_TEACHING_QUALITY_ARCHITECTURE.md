@@ -1,8 +1,9 @@
 # Phase 1 — Teaching Quality Architecture
 
 **Document class:** Architecture blueprint. Design only.
-**Status:** DRAFT — pending review and approval. Not approved, not merged, not implemented.
-**Version:** 1.0.0-draft
+**Status:** DRAFT — revised after architecture review R1; pending fresh review. Not approved,
+not merged, not implemented.
+**Version:** 1.1.0-draft (supersedes 1.0.0-draft; see Appendix C for the full review response)
 **Owner:** Pappu (Chief Architect track)
 **Phase:** 01 of the phased architecture program (`phase-01-teaching-quality`)
 **Normative language:** RFC 2119 (MUST / MUST NOT / SHOULD / MAY).
@@ -22,9 +23,9 @@ for implementation approval.
 0. [Reconciliation Map — what is new, what is reused](#0-reconciliation-map)
 1. [Executive Summary](#1-executive-summary)
 2. [Design Principles](#2-design-principles)
-3. [System Overview and Layer Model](#3-system-overview-and-layer-model)
+3. [System Overview and Layer Model](#3-system-overview-and-layer-model) — incl. **§3.4 Data Dependencies** *(new in v1.1.0)*
 4. [TQ-1 · Teaching Strategy Engine](#4-tq-1--teaching-strategy-engine)
-5. [TQ-2 · Pedagogical Planner](#5-tq-2--pedagogical-planner)
+5. [TQ-2 · Pedagogical Planner](#5-tq-2--pedagogical-planner) — incl. **§5.0 Lifecycle Synchronization** and **§5.7 Relationship to ADR 09** *(new in v1.1.0)*
 6. [TQ-3 · Teaching Method Library](#6-tq-3--teaching-method-library)
 7. [TQ-4 · Adaptive Re-teaching Framework](#7-tq-4--adaptive-re-teaching-framework)
 8. [TQ-5 · Lesson Gold Standard](#8-tq-5--lesson-gold-standard)
@@ -36,6 +37,9 @@ for implementation approval.
 14. [Future Implementation Guidance](#14-future-implementation-guidance)
 15. [Acceptance Criteria](#15-acceptance-criteria)
 16. [Open Questions](#16-open-questions)
+
+Appendices: A Glossary · B Compliance statement · **C Review response (v1.1.0)** ·
+**D Curriculum Feedback** *(both new in v1.1.0)*
 
 ---
 
@@ -51,27 +55,52 @@ Every Phase 1 deliverable is therefore classified against what already exists.
 
 | Phase 1 deliverable | Existing owner(s) | Verdict | What Phase 1 actually contributes |
 |---|---|---|---|
-| 1. Teaching Strategy Engine | EOS v3 `C-30` (selection funnel); `educational-brain/decision-engine/04` (seven filters); `foundations/02` (D1 grid) | **EXTEND** | `C-30` selects an *action per turn*. Nothing owns a *multi-turn approach*. TQ-1 adds the Strategy object above `C-30` and leaves `C-30` as the within-strategy action selector, unchanged. |
-| 2. Pedagogical Planner | `C-33` (session shape); `C-29` (teaching states); ADR 09 (per-turn plan recomputation); `decision-engine/07` | **NEW LAYER, NO NEW AUTHORITY** | Nothing owns the **concept-level lesson arc** (Hook → … → Revision). TQ-2 adds it as a *view over* `C-29`'s existing states — it adds intra-state structure and creates no second state machine. |
+| 1. Teaching Strategy Engine | EOS v3 `C-30` (selection funnel **and per-learner approach history**); `educational-brain/decision-engine/04` (seven filters); `foundations/02` (D1 grid) | **EXTEND, with one explicit ownership transfer** | `C-30` selects an *action per turn*. No component holds a *named, committed multi-turn approach*. TQ-1 adds the Strategy object above `C-30` and leaves `C-30`'s selection unchanged. **Ownership transfer:** `C-30`'s stated responsibility to "maintain per-learner approach history" moves to TQ-4's typed `failedAttempts` set — see §4.1. |
+| 2. Pedagogical Planner | `C-33` (session shape); `C-29` (teaching states); `decision-engine/07` | **NEW LAYER, NO NEW ADVANCEMENT AUTHORITY** | Nothing owns the **concept-level lesson arc** (Hook → … → Revision). TQ-2 adds it as intra-state structure over `C-29`'s existing states. It is a third lifecycle, not a second advancement authority — see §5.0. |
+| 2b. Cross-turn lesson-stage continuity | **ADR 09** (`contextSnapshot.lessonStageProgress`, Option B, selected) | **TQ-2 IS ADR 09 GENERALIZED** | ADR 09's selected design already persists concept-scoped stage position across turns using the proven AI-emitted-tag pattern. That object *is* the arc position. TQ-2 adopts ADR 09's vocabulary, key, and persistence mechanism and generalizes them across sessions and archetypes — it does not introduce a parallel pointer. Full treatment in §5.7. |
 | 3. Teaching Method Library | `educational-brain/teaching-actions/` (27 actions, 6 families) | **EXTEND** | The catalogue is a set of *moves*. A Method is a multi-turn *technique* with preconditions, internal beats, a quality contract, and a failure signature. TQ-3 defines the Method schema and composes existing actions; it redefines no action. |
 | 4. Adaptive Re-teaching | `C-31`; `decision-engine/05` (escalation ladders); `assessment/09` (failure taxonomy) | **EXTEND** | The ladders exist. What does not exist is a *checkable definition of "different"*. TQ-4 adds the Difference Operator, which converts the anti-paraphrase rule from an aspiration into an enforceable constraint. |
 | 5. Lesson Gold Standard | — | **GENUINELY NEW** | No document in the repository defines when a lesson is good enough to ship. |
 | 6. Teacher Decision Flow | `C-28` (four bands) | **CONSOLIDATE** | The eight questions in the brief are not eight decisions; they resolve into `C-28`'s existing band order. TQ-6 supplies the missing per-question deterministic answering rules and the unified flow. |
 | 7. Teaching Quality Metrics | `OUTCOME_SCIENCE_FRAMEWORK.md` (outcome science, 16 constructs) | **COMPLEMENT** | OSF measures whether *learning* happened. Nothing measures whether *teaching* had the properties of good teaching. TQ-7 owns process quality and the process↔outcome join; it defines no competing outcome metric. |
 
-**Taxonomies reused verbatim, not re-derived:**
-- Knowledge types — `decision-engine/04` Filter 2: `concept`, `procedure`, `causal system`,
-  `fact/convention`, `live misconception`, `physical procedure`.
+**Taxonomies reused — and audited before reuse.**
+
+Version 1.0.0-draft treated verbatim reuse as sufficient. It is not. Reuse without
+verification propagates whatever defect the source carries, and it did: the knowledge-type
+taxonomy below was adopted unaudited and turned out to be both unbacked by data and
+internally incoherent. Every reused taxonomy is now recorded with its audit result.
+
+- **Knowledge types** — `decision-engine/04` Filter 2. **Audited; two defects found and
+  corrected here.** (i) The category `live misconception` is a property of a *learner-concept
+  pair*, not of a concept. It is removed from the concept-intrinsic taxonomy and re-sited as a
+  learner-state precondition — see §3.4 and §6.2. The concept-intrinsic set used by this
+  document is therefore the five members: `concept`, `procedure`, `causal system`,
+  `fact/convention`, `physical procedure`. (ii) No such field exists in the data; see §3.4 and
+  the REQUIRED-BUT-ABSENT classification there. Both are recorded as Curriculum Feedback
+  against `decision-engine/04` in Appendix D; neither is fixed by editing that file, which is
+  outside this document's authority.
 - Teaching states — `C-29`: `UNSTARTED → FRAMED → INSTRUCTED → GUIDED → RELEASED → VERIFIED
-  → CONSOLIDATED → TRANSFERRED`, plus preemptive `RECOVERY`.
+  → CONSOLIDATED → TRANSFERRED`, plus preemptive `RECOVERY`. *Audited: consistent, adopted
+  unchanged.*
+- Lesson-stage continuity vocabulary — ADR 09: `LessonStage`, `LessonStageType`,
+  `lessonStageProgress`, `planSignature`, and the named `replan` event. *Audited: adopted and
+  generalized, §5.7.*
 - Response diagnosis — `foundations/02` D1 grid (speed × correctness × confidence).
 - Failure causes — `assessment/09` six-cause taxonomy.
 - Misconception birth types — `educational-brain/misconceptions/` (six types).
 - Action catalogue — `educational-brain/teaching-actions/` (27 actions, 6 families).
 
-**Nothing in this document supersedes any existing ADR or `educational-brain/` file.**
-Where Phase 1 finds an existing rule insufficient, it says so explicitly and adds a layer
-above it; it never silently redefines it.
+**Supersession status.** Phase 1 supersedes no existing ADR or `educational-brain/` file.
+One ADR requires an index amendment rather than supersession: **ADR 09 is absorbed, not
+superseded** — its selected Option B remains the correct mechanism and TQ-2 is its
+generalization. On approval of this document, the Bible's ADR index should record ADR 09 as
+*extended by Phase 1 TQ-2*, which is a scope note, not a supersession. Marking it superseded
+would be wrong and would discard a design already proven in production for one stage type.
+
+Where Phase 1 finds an existing rule insufficient it says so explicitly and adds a layer above
+it; where it finds an existing rule *defective* (the knowledge-type taxonomy) it records
+Curriculum Feedback rather than editing another owner's file.
 
 ---
 
@@ -142,7 +171,9 @@ model has, because it requires being the venue where the learning happened.
 ### 1.3 What Phase 1 deliberately does not do
 
 It does not attempt to make teaching quality emerge from better prompting; it does not
-introduce a second state machine, decision authority, or content model; it does not resolve
+introduce a second authority for advancement, a second decision authority, or a second content
+model — it does introduce two additional *planning* lifecycles, whose synchronization with
+`C-29` is specified in §5.0; it does not resolve
 the content-coverage problem (the honest dominant failure mode of every component here is
 empty libraries, not wrong logic); and it does not claim the metrics prove learning — only
 delayed unassisted retrieval does that, and that instrument belongs to OSF.
@@ -278,7 +309,8 @@ scale, which is precisely why none of it currently has an owner.
 |---|---|---|
 | What is the learner's state? | Learner Twin (Plane 1) | consumer only |
 | Which concept next? | `C-33` + Review Scheduler | consumer only |
-| What state is this concept's teaching in? | `C-29` | consumer; TQ-2 adds sub-structure inside states, never states |
+| What state is this concept's teaching in? | `C-29` | consumer; TQ-2 adds sub-structure inside states (§5.0 SYNC-1/SYNC-3) |
+| Is the learner ready to advance? | `C-29` **alone** | TQ-2 may propose, never certify (§5.0 SYNC-3) |
 | What is legal right now? | `C-29` | TQ-4 *adds* constraints (never removes) |
 | Which approach for this concept? | **TQ-1** | new |
 | Which pedagogical phase now? | **TQ-2** | new |
@@ -286,6 +318,88 @@ scale, which is precisely why none of it currently has an owner.
 | Is this re-teach genuinely different? | **TQ-4** | new |
 | Is this lesson good enough? | **TQ-5** | new |
 | Did learning occur? | OSF | TQ-7 supplies the process side of the join only |
+
+---
+
+### 3.4 Data dependencies
+
+Added in v1.1.0. Version 1.0.0-draft asserted that its components ran on data the system
+already holds. Review found that false in at least one load-bearing case. An architecture that
+depends on fields that do not exist is not a design, it is a wish, so every required field is
+now recorded with its existence status, its owner, its acquisition path, and — most
+importantly — the **defined behaviour when it is absent**.
+
+**Status legend.** `PRESENT` — exists in data today. `DERIVED` — computed at runtime from
+present fields. `RECORDED` — written by an existing runtime path. `ABSENT` — does not exist;
+acquisition required. `ABSENT-GATED` — does not exist and its acquisition is gated on G1/G2.
+
+| Field | Consumer | Status | Owner | Acquisition path | Behaviour when absent |
+|---|---|---|---|---|---|
+| Concept id, prerequisites, difficulty, bloom | TQ-1 S2/S3, TQ-2 | PRESENT | Curriculum Production Pipeline | — | n/a |
+| **Concept knowledge type** (5-member taxonomy) | **TQ-1 S2; every Method's `knowledgeTypeFit[]`** | **ABSENT-GATED** | Curriculum Production Pipeline | New canonical KG field, or an authored per-concept assignment. **G1-gated.** | **S2 goes INERT** — see §3.4.1 |
+| Concept-level authored dispatch | TQ-1 S1 | PRESENT (sparse, ~250 of ~1,756) | `educational-brain/concepts/` | Ongoing authoring program | S1 does not fire; funnel proceeds to S2 |
+| Mastery / ladder rung per concept | TQ-1 S3, TQ-2 exits, `C-29` | RECORDED | Plane 1 Learner Twin | — | n/a |
+| ACTIVE misconception set | TQ-1 S3, TQ-4 C2 | RECORDED | Plane 1 | — | S3 cannot cut corrupted-prerequisite archetypes; recorded as reduced-confidence selection |
+| Response speed / confidence (D1 grid) | TQ-4 T9/T10, TQ-5 S5 | **ABSENT in both channels** | Multimodal I/O plane | `foundations/03 §7` records the cause: the STT path requests bare transcription and discards timing and prosody before the decision layer sees the turn. Recovery is cheap but is a runtime change. | T9/T10 undetectable; **S5 NOT YET SCOREABLE** (§8.4) |
+| Working-capacity estimate | TQ-1 S6, TQ-5 S2 | ABSENT | — (no instrument specified anywhere) | Requires an instrument this architecture does not design | S6 uses archetype static load only; **S2 NOT YET SCOREABLE** |
+| Attempt vector components | TQ-4 L1–L4 | ABSENT | TQ-4 (this document) | Capture, not derivation — see §11.2 | TQ-4 cannot function; this is Stage 1's entire purpose |
+| Lesson-stage position | TQ-2 | ABSENT (designed, not built) | ADR 09 Option B, selected but unimplemented | `contextSnapshot.lessonStageProgress` | Arc position unknown; TQ-2 inert |
+| Asset availability per concept | TQ-1 S7, TQ-3 `degradedForm` | PRESENT | AssetIdentity catalogue | — | Treated as unavailable; degraded form runs |
+| Population effectiveness evidence | TQ-1 S8, TQ-7 Tier D | ABSENT (accumulates post-launch) | Evidence Engine (ADR 13) | Accrues only after Stages 1–6 run | S8 falls through to deterministic seed |
+
+**The honest summary of this table:** six of the eleven fields are absent today, and three of
+those are absent for reasons this document cannot fix. That is not a reason to abandon the
+design — Stage 1 (§14.2) exists precisely to acquire the most important of them — but it is a
+reason to stop describing the components as ready to run.
+
+#### 3.4.1 Knowledge type: REQUIRED BUT ABSENT
+
+The single most consequential data gap, and the one v1.0.0-draft got wrong twice.
+
+**What exists.** `src/lib/curriculum/subjectKgAdapter.ts` derives a three-value
+`ConceptType` — `conceptual | application | problem_solving` — by switching on the KG's
+`bloom` field. The canonical KG's 10-field schema carries no knowledge-type field at all.
+
+**What is required.** The five-member concept-intrinsic taxonomy (§0): `concept`, `procedure`,
+`causal system`, `fact/convention`, `physical procedure`.
+
+**These do not map.** Bloom level describes *cognitive demand*; knowledge type describes *what
+kind of thing is being learned*. A `procedure` and a `causal system` can share a Bloom level
+and must be taught completely differently — which is precisely what filter S2 exists to
+express. Deriving one from the other would produce confident, wrong archetype selection.
+
+**Interim behaviour: S2 GOES INERT.** When knowledge type is unavailable for a concept, filter
+S2 does not run and cuts nothing; the funnel proceeds to S3 with the full archetype set, and
+the selection record is marked `knowledgeTypeUnavailable`. Every Method's `knowledgeTypeFit[]`
+is likewise non-binding for that concept.
+
+Inert, deliberately, rather than heuristic. A wrong knowledge type silently mis-selects the
+archetype for an entire concept campaign, and the failure is invisible — the lesson looks
+fine and teaches the wrong way. An absent filter merely widens the candidate set, which the
+later filters then narrow on evidence that does exist. **Under asymmetric caution (P7's
+sibling principle), a missing filter is strictly safer than a fabricated one.**
+
+**Acquisition path.** A knowledge-type field on the canonical KG, authored by the Curriculum
+Production Pipeline. This is G1-gated and is explicitly *not* requested by this document. It
+is recorded as Curriculum Feedback in Appendix D.
+
+#### 3.4.2 `live misconception` is not a concept type
+
+The second correction. `decision-engine/04` Filter 2 lists `live misconception` alongside five
+concept-intrinsic categories. It does not belong there: a concept is never *of type* live
+misconception — a **learner** has one, about a concept. Filtering concept-intrinsic archetype
+fit by a learner-state category conflates the two and produces incoherent selection.
+
+**Correction applied throughout this document:**
+- Removed from the concept-intrinsic taxonomy (§0) and from filter S2.
+- Re-sited as a **learner-state precondition** in filter S3, where the ACTIVE-misconception
+  check already lives, and in Method `preconditions[]`/`prohibitions[]` (§6.2).
+- M14 Error Analysis and M2 Analogy's misconception prohibition are expressed against learner
+  state, not concept type.
+
+Recorded as Curriculum Feedback against `decision-engine/04` (Appendix D). That file is not
+edited here — it belongs to another authority, and silently correcting another owner's file is
+exactly the behaviour the governance rules forbid.
 
 ---
 
@@ -305,6 +419,24 @@ no referent. The action history is a list of moves, not a record of an approach.
 system cannot tell the difference between *this analogy failed* and *analogical teaching is
 wrong for this learner on this concept* — and it is the second judgement that a good teacher
 makes.
+
+**Ownership transfer from `C-30` (recorded v1.1.0).** Version 1.0.0-draft claimed "nothing owns
+a multi-turn approach." That overstated the gap: `C-30`'s documented responsibilities already
+include *"maintain per-learner approach history so the system does not repeat what already
+failed for this person."* The accurate statement is narrower and still sufficient to justify
+this component: **`C-30` owns an untyped approach history at turn scale; no component owns a
+named, committed approach at campaign scale.**
+
+This document therefore makes one explicit ownership transfer rather than a silent takeover:
+
+> `C-30`'s per-learner approach history is **superseded by TQ-4's typed `failedAttempts` vector
+> set** (§7.4.4), which is the same responsibility with a defined structure, a defined growth
+> and compaction policy (§12 R8), and a defined comparison semantics. `C-30` retains action
+> selection and relinquishes approach memory. On implementation, `C-30`'s responsibility list
+> must be amended to record this, or two approach histories will accumulate independently.
+
+Stating the transfer is the point. A silent takeover of another component's documented
+responsibility is exactly what the governance rules forbid, and it was present in v1.0.0-draft.
 
 ### 4.2 Purpose
 
@@ -332,9 +464,29 @@ TeachingStrategy {
   budget { turns, attempts, sessions }
   distanceSignature          -- the TQ-4 vector this strategy occupies
   status                     -- PROPOSED | ACTIVE | SUSPENDED | ABANDONED | COMPLETED
-  version                    -- policy version that produced it
+                             --   lifecycle and its synchronization: §5.0
+  policyVersion              -- policy version that produced it
+  archetypeSetVersion        -- which closed archetype set was in force
+  axisSetVersion             -- which axis set distanceSignature is expressed in
 }
 ```
+
+**Versioning of the closed sets (added v1.1.0).** §4.4 and §6.3 are closed sets amended by
+version, but v1.0.0-draft never said what happens to accumulated evidence when they change.
+Three rules close that gap:
+
+- **V-1 · Every persisted vector carries `axisSetVersion`.** Vectors recorded under a retired
+  axis set remain readable but are **not comparable** across versions, and `closure()` is never
+  applied across an axis-set boundary (§7.4.4).
+- **V-2 · Effectiveness evidence is version-scoped and never silently carried forward.** Adding
+  a tenth archetype does not inherit the ninth's evidence, and amending an archetype's
+  definition starts a new evidence lineage rather than continuing the old one. Carrying
+  evidence across a definitional change would attribute outcomes to a policy that did not
+  produce them.
+- **V-3 · An amendment declares its migration.** Each amendment states, per affected record
+  class, whether prior evidence is `CARRIED` (definition unchanged, id renamed), `SCOPED`
+  (readable, excluded from current attribution), or `RETIRED`. An amendment with no declared
+  migration is rejected at review.
 
 Three fields carry most of the architectural weight.
 
@@ -364,7 +516,7 @@ added by versioned amendment, never invented at runtime.
 |---|---|---|---|---|---|
 | A1 | **CONCRETE-FIRST** | manipulate → notice → name → symbolize | concept; physical procedure | very low | learner enjoys the manipulation, never abstracts |
 | A2 | **DERIVATIONAL** | establish prior → show necessity → arrive at the claim | concept; causal system | high — priors must be solid | derivation is followed and not retained |
-| A3 | **CONTRASTIVE** | present near-neighbours → force discrimination → name the difference | concept; live misconception | medium | learner learns the pair, not the principle |
+| A3 | **CONTRASTIVE** | present near-neighbours → force discrimination → name the difference | concept *(and the archetype of choice when the learner has an ACTIVE misconception — learner state, not concept type)* | medium | learner learns the pair, not the principle |
 | A4 | **NARRATIVE** | a situation that *requires* the idea → the idea as resolution | fact/convention; concept | low | the story is remembered, the idea is not |
 | A5 | **MODEL-BUILDING** | build the mental model explicitly → operate it → test it | causal system | medium | the model is accepted, never run |
 | A6 | **PROCEDURAL-COACHING** | worked → completion → faded → independent | procedure | low | fluency without meaning |
@@ -373,8 +525,39 @@ added by versioned amendment, never invented at runtime.
 | A9 | **EXPERIENTIAL-SIMULATION** | interact with a system → extract its behaviour → formalize | causal system; physical procedure | low | play without extraction |
 
 Each archetype's *characteristic failure* column is load-bearing: it is the failure signature
-TQ-7 monitors and TQ-4 diagnoses against. An archetype without a known characteristic failure
-is not admissible to the set.
+TQ-7 monitors and TQ-4 diagnoses against.
+
+**Archetype admissibility rule (added v1.1.0).** §6.7 states an admissibility rule for Methods
+— a method duplicating another's distance signature *and* failure signature is the same method
+renamed — but v1.0.0-draft applied no equivalent rule to archetypes, which is inconsistent.
+The rule now applies to both, with one addition:
+
+> An archetype is admissible only if it differs from every other archetype on **at least two**
+> of: (i) characteristic failure, (ii) prerequisite demand profile, (iii) knowledge-type fit.
+> One dimension of difference is a variant, not an archetype.
+
+**Audit of the two pairs review flagged as under-discriminated:**
+
+- **A2 DERIVATIONAL vs A5 MODEL-BUILDING.** *Retained as distinct.* They differ on all three:
+  A2's characteristic failure is *followed and not retained* (the learner accepts each step and
+  reconstructs none); A5's is *accepted and never run* (the learner holds the model as a
+  picture and cannot operate it). A2 demands solid formal priors; A5 demands almost none — it
+  builds the model from scratch. A2 fits `concept` and `causal system`; A5 fits `causal system`
+  only. The distinction is real: a derivation establishes *necessity*, a model establishes
+  *mechanism*, and a learner can have either without the other.
+- **A3 CONTRASTIVE vs A8 ANALOGICAL-TRANSFER.** *Retained, with a sharpened boundary.* Both
+  reason over a reference case, which is what made them look alike, but they run in opposite
+  directions. A3 uses a **near** neighbour to force *discrimination* — the reference is
+  deliberately similar and the learning is what separates them. A8 uses a **distant** source to
+  force *transfer* — the reference is deliberately dissimilar and the learning is what carries
+  across. Their characteristic failures are correspondingly opposite: A3 fails by the learner
+  memorizing the pair instead of the principle; A8 fails by the learner importing an inference
+  the source has and the target does not. **Sharpened boundary added to the set definition:**
+  A3's reference case must share the concept's domain; A8's must not. An archetype using a
+  same-domain reference for transfer is A3 misapplied, and this is now checkable.
+
+Both pairs survive. The audit was still worth running — it produced the A3/A8 domain rule,
+which did not exist before and which prevents a real misselection.
 
 **A7 SOCRATIC-DISCOVERY carries a hard legality gate.** It is illegal when the learner has
 nothing to reason from — which is the definition of a complete beginner on this concept. This
@@ -396,14 +579,26 @@ S1  AUTHORED OVERRIDE
     → Funnel stops. (Today: ~250 of ~1,756 concepts. See §4.9.)
 
 S2  KNOWLEDGE-TYPE FIT
-    Cut archetypes outside the concept's knowledge-type row
-    (taxonomy reused verbatim from decision-engine/04 Filter 2).
+    Cut archetypes outside the concept's knowledge-type row (the FIVE-member
+    concept-intrinsic taxonomy — §0, §3.4.2; `live misconception` is NOT a
+    member and is handled at S3 as learner state).
+    → REQUIRED-BUT-ABSENT (§3.4.1). When knowledge type is unavailable this
+      filter GOES INERT and cuts nothing; the selection record is marked
+      `knowledgeTypeUnavailable`. Deliberately inert rather than heuristic:
+      a fabricated knowledge type mis-selects an entire campaign invisibly,
+      whereas an absent filter merely widens the set for S3–S8 to narrow on
+      evidence that does exist.
 
-S3  PREREQUISITE ADMISSIBILITY
+S3  PREREQUISITE AND LEARNER-STATE ADMISSIBILITY
     Cut archetypes whose prerequisite demand exceeds verified learner state.
     → This is the filter that eliminates A7 and A2 for beginners.
     → An ACTIVE misconception on a prerequisite cuts every archetype that
       builds on that prerequisite (reuses C-29's corrupted-foundation rule).
+    → An ACTIVE misconception on THIS concept constrains the set toward
+      collision-capable archetypes (A3 CONTRASTIVE) and cuts A8 outright
+      (analogies reinforce whichever schema is already active). This is
+      where the former `live misconception` "knowledge type" correctly
+      lives — it is learner state, not a property of the concept (§3.4.2).
 
 S4  LEARNER CONSTRAINTS
     Reading load, attention span, modality availability, accessibility
@@ -420,11 +615,21 @@ S6  COGNITIVE LOAD ADMISSIBILITY
     Estimated intrinsic + extraneous load of the archetype against current
     capacity. A2 and A5 are expensive; under a depleted learner they are cut.
 
-S7  ASSET AVAILABILITY
-    Does the concept have the authored assets this archetype needs?
-    A8 without an authored analogy library, or A9 without a simulation, is a
-    strategy the system cannot actually execute. Cut, or degrade to the
-    archetype's declared fallback.
+S7  EXECUTABILITY  (asset availability + the containment invariant)
+    (a) Does the concept have the authored assets this archetype needs?
+        A8 without an authored analogy library, or A9 without a simulation,
+        is a strategy the system cannot execute. Cut, or degrade to the
+        archetype's declared fallback (TQ-3 `degradedForm`).
+    (b) CONTAINMENT INVARIANT (added v1.1.0). An archetype is admissible only
+        if at least one method in its sequence yields at least one action that
+        survives C-30's own filters for this learner and this concept.
+
+        This is the invariant that keeps TQ-1's funnel and C-30's funnel from
+        disagreeing. Both apply knowledge-type, learner-constraint, history and
+        load filtering, at different scales; without containment, TQ-1 can
+        commit to an archetype whose every constituent action C-30 then cuts,
+        and the learner receives a strategy with no legal moves in it.
+        Verified at selection time, not discovered at turn time.
 
 S8  TIE-BREAK
     Population effectiveness evidence for this archetype on this concept,
@@ -498,6 +703,18 @@ strategyConstraints(strategyId)
   enough data exists. Mitigated by a minimum-evidence threshold below which S5 is inert.
 - **Archetype set too coarse.** Nine archetypes may not discriminate finely enough for some
   domains. Recorded as Open Question OQ-2 rather than pre-emptively solved.
+- **Empty intersection at S7(b).** Every archetype fails the containment invariant — the
+  concept has assets for nothing and the learner's constraints cut the rest. This is a distinct
+  outcome from an empty funnel and must not be silently collapsed into the A1 fallback, because
+  A1 would fail containment too. Defined behaviour: **do not start the campaign.** Route to the
+  nearest prerequisite with a non-empty intersection, and emit a blocking coverage defect naming
+  the concept and the constraint that emptied the set. A learner is better served by a
+  prerequisite that can actually be taught than by a campaign with no legal moves.
+- **Funnel/selector disagreement drift.** Containment is verified at selection time, but the
+  learner's constraints change during a campaign, so an archetype legal at selection can become
+  uncontainable mid-campaign. Detected as method exhaustion (§4.6) and handled as abandonment;
+  a rising rate of mid-campaign containment loss is a defect signal against S4's constraint
+  model rather than against the archetype.
 
 ### 4.10 Falsifiable prediction
 
@@ -509,6 +726,77 @@ decoration and should be removed.
 ---
 
 ## 5. TQ-2 · Pedagogical Planner
+
+### 5.0 Lifecycle synchronization (added v1.1.0)
+
+Version 1.0.0-draft claimed repeatedly to introduce "no second state machine." That claim was
+false, and the review was right to call it a hidden-state defect. This section replaces the
+claim with the accurate one and specifies the behaviour the claim was concealing.
+
+**The accurate claim: no second authority for advancement.**
+
+Three lifecycles run concurrently over one learner-concept pair. Having three is correct —
+they describe different things at different scales. Pretending there is one is what was wrong.
+
+```
+ LIFECYCLE            SCALE      OWNER   STATES
+ ────────────────────────────────────────────────────────────────────────────
+ CONCEPT MASTERY      concept    C-29    UNSTARTED → FRAMED → INSTRUCTED →
+   (authoritative)                       GUIDED → RELEASED → VERIFIED →
+                                         CONSOLIDATED → TRANSFERRED (+RECOVERY)
+
+ STRATEGY             campaign   TQ-1    PROPOSED → ACTIVE → SUSPENDED →
+                                         (ACTIVE | ABANDONED) ; → COMPLETED
+
+ ARC PHASE            campaign   TQ-2    HOOK → INTUITION → EXPLANATION →
+                                         (VISUAL) → EXAMPLES → GUIDED_PRACTICE →
+                                         INDEPENDENT_PRACTICE → SUMMARY → REVISION
+```
+
+**Precedence rules — the invariants that make three lifecycles safe:**
+
+- **SYNC-1 · `C-29` is the sole authority on advancement.** Mastery state is the only lifecycle
+  whose transitions certify learning. TQ-1 and TQ-2 never advance, block, or reverse it.
+- **SYNC-2 · The arc may not block a legal `C-29` transition.** If `C-29` advances on evidence
+  the arc did not plan for — a learner volunteering a correct unprompted production during
+  GUIDED_PRACTICE, which is common and desirable — the transition stands. The arc **re-aligns
+  forward** to the phase matching the new state and records an `out-of-phase-advance` event.
+  Nothing is re-taught, and no evidence is discarded.
+- **SYNC-3 · The arc may not advance `C-29`.** Completing a phase is not evidence. Exiting
+  INDEPENDENT_PRACTICE proposes advancement; `C-29`'s own evidence requirement decides it.
+  This is the door that must stay shut, or arc completion becomes a second route to mastery.
+- **SYNC-4 · Preemption cascades downward, never upward.** `C-31` RECOVERY preempts `C-29`;
+  when it does, Strategy → `SUSPENDED` and the arc re-enters the phase corresponding to
+  `C-29`'s post-recovery state (one rung below entry, never HOOK). On recovery exit, the
+  strategy resumes `ACTIVE` at that phase. TQ-1 and TQ-2 never preempt anything.
+- **SYNC-5 · Strategy completion requires mastery, not arc completion.** `COMPLETED` is
+  reachable only when `C-29` reaches `VERIFIED` **and** SUMMARY has executed. REVISION being
+  outstanding does **not** block completion — see §5.2's corrected wording and §8.1's two-stage
+  closure. (v1.0.0-draft made REVISION unskippable and thereby made strategy completion
+  unreachable within a session; that was an unintended consequence, now removed.)
+- **SYNC-6 · Totality.** The legal-combination table below MUST be total over the state space.
+  Any combination not listed is a **build-time failure**, matching the completeness requirement
+  `C-28` already imposes on its own decision matrix. There is no implicit default.
+
+**Legal combinations (abbreviated; the full matrix is the build-time artifact):**
+
+| `C-29` state | Legal arc phases | Legal strategy status | Notes |
+|---|---|---|---|
+| UNSTARTED | — | PROPOSED | Arc not yet instantiated |
+| FRAMED | HOOK, INTUITION | ACTIVE | |
+| INSTRUCTED | EXPLANATION, VISUAL, EXAMPLES | ACTIVE | VISUAL is parallel, not sequential |
+| GUIDED | GUIDED_PRACTICE | ACTIVE | |
+| RELEASED | INDEPENDENT_PRACTICE | ACTIVE | |
+| VERIFIED | SUMMARY | ACTIVE, COMPLETED | Completion gate (SYNC-5) |
+| CONSOLIDATED | REVISION | COMPLETED | Post-completion, later session |
+| TRANSFERRED | REVISION | COMPLETED | |
+| RECOVERY (preemptive) | phase at preemption, frozen | SUSPENDED | SYNC-4 |
+| any | any | SUSPENDED | Blocking condition; arc frozen, not reset |
+| any | n/a — arc discarded | ABANDONED | New attempt gets a new campaign + new arc |
+
+**Reading the table forward:** the arc adds *sub-structure inside* `C-29` states. INSTRUCTED
+contains three arc phases; GUIDED contains one. That is the entire relationship, and it is why
+the arc is a planning lifecycle rather than a competing mastery lifecycle.
 
 ### 5.1 Why it exists
 
@@ -525,7 +813,8 @@ already say this outright — "lesson plans are fictions."
 The resolution is to treat the arc not as a sequence but as a **partially ordered set of
 phases, each with an entry condition and an exit evidence requirement**, instantiated
 differently by each strategy archetype, and mapped onto the existing teaching states so that
-it adds structure *inside* states rather than becoming a second state authority.
+it adds structure *inside* states rather than becoming a second **authority for advancement**
+(§5.0, SYNC-1 and SYNC-3).
 
 ### 5.2 The nine phases
 
@@ -534,14 +823,14 @@ Each phase is defined by what it *accomplishes*, not by what the tutor says.
 | Phase | Accomplishes | Entry condition | Exit evidence | `C-29` state | Skippable? |
 |---|---|---|---|---|---|
 | **HOOK** | creates the need for the idea | concept FRAMED-eligible | learner engaged with the question the concept answers | `FRAMED` | rarely — see §5.5 |
-| **INTUITION** | an informal, correct pre-formal grasp | HOOK exited | learner can gesture at the idea in their own words, imprecisely | `FRAMED` | no for A1/A4/A9; yes for A6 |
+| **INTUITION** | an informal, correct pre-formal grasp | HOOK exited | learner gestures at the idea in their own words, imprecisely, **and the utterance does not match the concept's misconception register** | `FRAMED` | no for A1/A4/A9; yes for A6 |
 | **EXPLANATION** | the precise claim, stated | INTUITION exited *or* archetype starts here | learner can restate the claim (restatement ≠ understanding) | `INSTRUCTED` | no |
 | **VISUAL** | a non-verbal representation of the same claim | any time after HOOK | learner can point/read the representation | `INSTRUCTED` (parallel) | conditional — §5.4 |
 | **EXAMPLES** | the claim instantiated, including boundaries | EXPLANATION exited | learner classifies a novel instance correctly | `INSTRUCTED` | no |
 | **GUIDED PRACTICE** | production with support | EXAMPLES exited | learner completes with decreasing support | `GUIDED` | no |
 | **INDEPENDENT PRACTICE** | **unassisted** production | GUIDED exit evidence present | unassisted correct production at criterion | `RELEASED` | **never** |
-| **SUMMARY** | consolidation and closure | any exit or budget end | learner produces the summary where possible | `VERIFIED` | **never** |
-| **REVISION** | delayed retrieval | scheduled, later session | unassisted retrieval after delay | `CONSOLIDATED` → `TRANSFERRED` | **never** |
+| **SUMMARY** | consolidation and closure | any exit or budget end | learner produces the summary where possible | `VERIFIED` | **never omitted** |
+| **REVISION** | delayed retrieval | scheduled, later session | unassisted retrieval after delay | `CONSOLIDATED` → `TRANSFERRED` | **never omitted from the plan** — see below |
 
 **Three phases are never skippable, and the reasons differ.** INDEPENDENT PRACTICE is
 unskippable because it is the only phase that produces the evidence advancement requires —
@@ -550,6 +839,20 @@ SUMMARY is unskippable because the last event colours the memory of the whole se
 because a session that ends mid-struggle creates a debt. REVISION is unskippable because a
 concept learned and never retrieved is a concept not learned — and it is the phase that most
 systems drop, because it happens on a different day and produces no immediate satisfaction.
+
+**Correction to REVISION's status (v1.1.0).** Version 1.0.0-draft called REVISION "never
+skippable" without noticing that its execution is not under the system's control: it happens
+days later, and a learner may never return. That produced two unintended consequences — no
+strategy could complete within a session (§5.0 SYNC-5), and no lesson could be scored until
++30 days (§8.1). The precise rule is:
+
+> **REVISION is never omitted from the plan. Whether it is EXECUTED is not the system's to
+> guarantee.** A scheduled REVISION that never occurs because the learner did not return is
+> recorded as an *outcome* — retention unknown — and never as a defect of the lesson that
+> preceded it. A REVISION that was never *scheduled* is a defect of the lesson.
+
+A standard that requires an uncontrollable event is not a standard; a standard that requires
+the system to have *scheduled* the event is enforceable, and is what is meant here.
 
 ### 5.3 The arc is instantiated by the strategy, not fixed
 
@@ -581,6 +884,11 @@ A7 SOCRATIC-DISCOVERY
         → INDEPENDENT → SUMMARY → REVISION
    Note: the tutor's EXPLANATION is a refinement of the learner's, never a
    replacement. Replacing it retroactively invalidates the discovery.
+   Note (v1.1.0): this arc OPENS with a learner-produced phase, which is only
+   coherent because A7's own admissibility gate (§4.4, filter S3) already
+   requires the learner to hold strong priors on this concept's prerequisites.
+   A7's arc presumes those priors; it does not build them. Where they are
+   absent the archetype is cut at S3 and this arc is never instantiated.
 ```
 
 The planner therefore does not own an arc. It owns an **arc instantiation function**: given
@@ -617,6 +925,11 @@ budget, that is an abandonment condition for the strategy, not a reason to advan
 Three phase-transition rules deserve to be stated as laws because their violation is the
 most common form of the "looks like teaching, produces nothing" failure:
 
+- **L0 · Imprecise is not the same as wrong.** INTUITION accepts an imprecise account, which
+  makes it the phase where a plausible-sounding *misconception* is most likely to be certified
+  as understanding. Its exit check is therefore two-sided: the utterance must gesture at the
+  idea **and** must not match the concept's misconception register. An intuition utterance that
+  matches a known wrong pattern does not exit the phase — it routes to TQ-4 diagnosis C2.
 - **L1 · Restatement is not comprehension.** EXPLANATION's exit evidence is that the learner
   can restate the claim. That is the *exit condition of the explanation phase*, and nothing
   more. It is not evidence of understanding, and it may never be used to justify skipping
@@ -643,24 +956,74 @@ obligations**:
 - A gap beyond the decay threshold escalates warm-up to a re-establishment pass, governed by
   the existing placement/resumption rules rather than re-derived here.
 
-### 5.7 Responsibilities
+### 5.7 Relationship to ADR 09 — TQ-2 is ADR 09 generalized
+
+Added in v1.1.0. Version 1.0.0-draft's reconciliation table characterized ADR 09 as "per-turn
+plan recomputation," which is the **problem ADR 09 diagnoses**, not the **solution it
+selected**. The review was right that this under-reconciliation would have produced two
+cross-turn stage pointers with two owners — the exact defect §0 exists to prevent, introduced
+by the section written to prevent it.
+
+**What ADR 09 already selected (Option B).** A `contextSnapshot.lessonStageProgress` key
+holding `{ conceptId, planSignature, stageIndex, totalStages }`, where `planSignature` is a
+cheap deterministic fingerprint of what determines plan *shape*; the AI emits a lightweight
+progress tag parsed server-side exactly as `parseWorkedExampleTag()` already does; and a
+signature mismatch triggers an explicit, named **`replan`** event rather than a silent
+inconsistency.
+
+**That object is the arc position.** TQ-2 therefore does not introduce a parallel mechanism.
+It **adopts ADR 09's vocabulary, key, and persistence pattern** and generalizes them along
+three dimensions ADR 09 explicitly scoped out:
+
+| Dimension | ADR 09 | TQ-2 generalization |
+|---|---|---|
+| Stage vocabulary | `LessonStageType`, derived per-turn from the current `TeachingDecision` | The nine arc phases, derived once from the strategy archetype (§5.3) |
+| Horizon | Within-session continuity | Cross-session (§5.6), with resumption obligations and decay-scaled warm-up |
+| Shape source | One recomputed plan shape | Archetype-instantiated arc — different archetypes yield genuinely different phase graphs |
+| Replan trigger | `planSignature` mismatch | `planSignature` mismatch **or** strategy abandonment (§4.6) — the same event, now with a named cause |
+
+**Concrete reuse commitments, so no parallel object is created:**
+
+- **RC-1** The arc position persists under ADR 09's existing key, `lessonStageProgress`. No new
+  snapshot key is introduced for arc position.
+- **RC-2** `planSignature` is retained as the continuation/replan fingerprint, extended to
+  include the archetype id — because two arcs over the same concept under different archetypes
+  are genuinely different plans and must not be treated as continuations of each other.
+- **RC-3** ADR 09's named `replan` event is retained as the single vocabulary for plan
+  discontinuity. TQ-1's strategy abandonment *emits* a `replan`; it does not define a second
+  discontinuity concept.
+- **RC-4** ADR 09's Option C (a normalized `LessonStageProgress` table) remains deferred on
+  ADR 09's own reasoning. TQ-2 does not reopen it. Should the Evidence Engine later require
+  stage-level analytics, that decision belongs to ADR 10/13, exactly as ADR 09 stated.
+- **RC-5** ADR 09 is recorded in the Bible's ADR index as **extended by Phase 1 TQ-2**, not
+  superseded (§0).
+
+**What this costs.** TQ-2 inherits ADR 09's mechanism, including its dependence on an
+AI-emitted tag — a self-report, weaker than instrumented capture. That is a real limitation
+and it is accepted deliberately: it is the pattern already proven in production for worked
+examples, and inventing a stronger mechanism here would create the duplicate ownership this
+section exists to avoid. The limitation is recorded in §12 R11.
+
+### 5.8 Responsibilities
 
 Owns phase definitions, arc instantiation per archetype, phase entry/exit conditions, phase
 transition and re-entry, conditional-phase decisions with recorded reasons, and cross-session
-arc resumption. **Must not own** teaching states (`C-29`), session shape (`C-33`), strategy
-choice (TQ-1), or action choice (`C-30`).
+arc resumption. **Must not own** teaching states or advancement (`C-29`, §5.0 SYNC-1/SYNC-3),
+transition evidence requirements (`C-29`), session shape (`C-33`), strategy choice (TQ-1), or
+action choice (`C-30`).
 
-### 5.8 Interfaces
+### 5.9 Interfaces
 
 ```
 instantiateArc(strategy, conceptId, learnerProjection) → ConceptArc
 currentPhase(arcId)         → { phase, entered, exitEvidenceRequired[], satisfied[] }
 evaluatePhaseExit(arcId, evidence) → { exit: bool, transition, reason }
-arcConstraints(arcId)       → PolicyConstraint[]   -- consumed by C-28 Band 2
+arcConstraints(arcId)       → ArcConstraint[]      -- forbiddenActions only; see §11.3
 resumeArc(arcId, gapDuration) → { warmUpRequired, resumePhase }
+realignArc(arcId, c29State)   → { newPhase, event: 'out-of-phase-advance' }  -- SYNC-2
 ```
 
-### 5.9 Failure modes
+### 5.10 Failure modes
 
 - **Script drift.** The strongest risk. Mitigated by evidence-gated transitions, by treating
   the arc as a budget the kernel may deviate within, and by making deviation a recorded
@@ -672,7 +1035,7 @@ resumeArc(arcId, gapDuration) → { warmUpRequired, resumePhase }
   later. This is the failure that only REVISION detects — which is why it is unskippable and
   why TQ-7's Tier C is the only real proof.
 
-### 5.10 Falsifiable prediction
+### 5.11 Falsifiable prediction
 
 *Arcs whose INDEPENDENT phase exits on genuinely unassisted evidence will show materially
 higher delayed retrieval at +7 days than arcs that exit INDEPENDENT on assisted evidence.*
@@ -706,7 +1069,11 @@ operate on.
 TeachingMethod {
   methodId, name, family
   intent                 -- the cognitive change it is supposed to produce
-  knowledgeTypeFit[]     -- from decision-engine/04 Filter 2's taxonomy
+  knowledgeTypeFit[]     -- the FIVE-member concept-intrinsic taxonomy (§0, §3.4.2).
+                         --   NON-BINDING when knowledge type is unavailable (§3.4.1).
+  learnerStateFit[]      -- preconditions on LEARNER state, incl. active-misconception
+                         --   status. This is where the former `live misconception`
+                         --   "knowledge type" correctly lives (§3.4.2).
   archetypeAffinity[]    -- which TQ-1 archetypes naturally contain it
   preconditions[]        -- what MUST be true of learner and concept
   prohibitions[]         -- when it is ILLEGAL (not merely unwise)
@@ -747,7 +1114,8 @@ into generic prose.
 
 The brief names eleven methods. All eleven are specified below. The library is **not closed
 at eleven** — six further methods are required for the schema to cover the knowledge-type
-taxonomy, and omitting them would leave `procedure` and `live misconception` under-served.
+taxonomy, and omitting them would leave `procedure` under-served, and would leave the
+ACTIVE-misconception learner state with no delivery vehicle at all.
 They are listed in §6.4 rather than quietly dropped.
 
 ---
@@ -774,8 +1142,9 @@ coverage gap.
 *Preconditions:* the source domain must be *verified* known to this learner, not assumed.
 *Prohibitions:* MUST NOT be used when the concept's anti-analogy list names it as a
 backfire. MUST NOT be left without a declared breakdown boundary. MUST NOT be the first
-representation for a `live misconception` (analogies reinforce whatever schema is already
-active).
+representation when the **learner has an ACTIVE misconception on this concept** — a
+`learnerStateFit` prohibition, not a knowledge-type one (§3.4.2) — because an analogy
+reinforces whichever schema is already active, including the wrong one.
 *Shape:* establish source → map correspondences explicitly → transfer the inference →
 **mark where the analogy breaks** → have the learner state one thing the analogy does *not*
 carry.
@@ -858,6 +1227,13 @@ input to Plane 1, not a decoration.
 before a comprehension check has passed. A mnemonic attached to a concept the learner does
 not understand produces confident retrieval of a meaningless string, which is worse than
 forgetting because it is invisible.
+*Carve-out (added v1.1.0):* for **genuinely arbitrary conventions** — element symbols, notation
+choices, keyboard shortcuts, irregular spellings — there is nothing to understand, and the
+comprehension-check prohibition would block the method's single legitimate use. The carve-out
+is narrow and must be earned: the concept must be tagged arbitrary-convention, and the tag
+requires that no derivation, mechanism, or reason for the convention exists to be taught. "The
+learner finds it hard" is not arbitrariness, and a mnemonic applied there is the substitution
+the prohibition exists to prevent.
 *Shape:* confirm understanding → introduce the device → rehearse → **decouple** (retrieve the
 content without the device).
 *Failure signature:* the learner recalls the mnemonic and cannot unpack it.
@@ -903,7 +1279,7 @@ Stated explicitly rather than silently added or silently dropped:
 |---|---|
 | **M12 · Worked Example** | The single best-evidenced technique for procedural and problem-solving knowledge. M11 contains it as a beat, but it is also a standalone method with its own quality rules. |
 | **M13 · Contrasting Cases** | The primary instrument for concept discrimination; the only method that reliably teaches a boundary. Required by archetype A3. |
-| **M14 · Error Analysis** | The primary instrument for `live misconception`. Without it, the misconception corpus has no delivery vehicle. |
+| **M14 · Error Analysis** | The primary instrument for an **ACTIVE misconception in the learner** (`learnerStateFit`, not a concept type — §3.4.2). Without it, the misconception corpus has no delivery vehicle. |
 | **M15 · Self-Explanation Prompting** | Learner-generated explanation is among the highest-yield activities available and is nearly free. |
 | **M16 · Concrete Manipulation** | Required by archetype A1; the enactive end of the concreteness axis, which the Difference Operator needs to exist. |
 | **M17 · Retrieval Practice** | Required by the REVISION phase; without it, REVISION has no method. |
@@ -997,8 +1373,19 @@ the time**, which is the quantitative form of why diagnosis-first is a gate.
 
 ### 7.4 The Difference Operator
 
-Teaching attempts are vectors on seven axes. Every axis is discrete and ordered where
-ordering is meaningful.
+> **Revision note (v1.1.0).** Version 1.0.0-draft defined legality as a flat axis count with
+> the rule `D = 1`. Architecture review demonstrated that this was wrong, and wrong in a way
+> that mattered: encoded against these same seven axes, the repository's own escalation ladder
+> (`decision-engine/05`) produces `D = 3` or `D = 4` at nearly every rung. Rung 2 of the failed-
+> explanation ladder — "change CHANNEL: demonstrate" — simultaneously changes channel, method,
+> representation and concreteness, because those are not independent choices. The flat count
+> therefore made the corpus's own escalation engine illegal while claiming to formalize it.
+> The correction below keeps the pedagogy the one-dimension law protects and drops the
+> arithmetic that misrepresented it.
+
+#### 7.4.1 The axes are a coordinate system, not a basis
+
+Teaching attempts are described on seven axes:
 
 ```
 AXIS 1  CHANNEL          verbal · visual · enactive · symbolic · auditory
@@ -1012,49 +1399,127 @@ AXIS 6  GRANULARITY      whole < decomposed < atomic-step      (ordered)
 AXIS 7  AGENCY           tutor-does < joint < learner-does     (ordered)
 ```
 
-An attempt is `A = ⟨a₁…a₇⟩`. Distance is the count of differing axes:
+These axes are **correlated, not orthogonal**. Choosing method `M5 Demonstration` fixes
+channel, largely fixes representation, and constrains concreteness — one pedagogical choice
+with forced consequences, not four choices. The corpus's "change exactly one dimension" always
+meant one *pedagogical* dimension. Counting coordinates counts the consequences too, and
+mistakes a single disciplined change for an undiagnosable multiple one.
+
+#### 7.4.2 Primary axis and closure
+
+Legality is defined over an intentional change plus its forced consequences.
 
 ```
-D(A, B) = |{ i : aᵢ ≠ bᵢ }|
+PRIMARY AXIS   The single axis the diagnosis (§7.3) implicates. Exactly one,
+               always named, always recorded.
+
+CLOSURE        closure(fromVector, primaryAxis, targetValue) → Vector
+
+               A TOTAL, PURE function. Given the attempt being replaced, the
+               primary axis, and its new value, it returns the full vector
+               including every axis change FORCED by that choice.
+
+               Total  → every (vector, axis, value) triple has a defined result;
+                        an undefined triple is a BUILD-TIME failure, never a
+                        runtime surprise. This mirrors the totality requirement
+                        C-28 already imposes on its own decision matrix.
+               Pure   → same inputs, same output, always. This is what preserves
+                        deterministic replay (§11.1): closure introduces no new
+                        nondeterminism, because it reads nothing but its arguments.
 ```
 
-**The re-teach legality rule:**
+**The re-teach legality rule (v1.1):**
 
 ```
-A re-teach attempt B following a failed attempt A is LEGAL iff:
+A re-teach attempt B replacing a failed attempt A is LEGAL iff:
 
-  (R1)  D(A, B) = 1                     exactly one axis differs
-  (R2)  the differing axis is the one    the diagnosis (§7.3) implicates
-  (R3)  B ∉ failedAttempts(learner, concept)
-  (R4)  B satisfies all C-29 legality and all TQ-3 preconditions
+  (L1)  exactly ONE primary axis p is declared, and B[p] ≠ A[p]
+  (L2)  p is the axis the recorded diagnosis (§7.3) implicates
+  (L3)  B = closure(A, p, B[p])
+        — every other axis on which B differs from A lies in the closure.
+          A change outside the closure is the undiagnosable multiple change
+          Principle P8 forbids, and is ILLEGAL.
+  (L4)  B ∉ failedAttempts(learner, concept)
+  (L5)  B satisfies all C-29 legality and all TQ-3 preconditions
 
-  D(A,B) = 0  is PARAPHRASE and is ILLEGAL.
-  D(A,B) ≥ 2  is UNDIAGNOSABLE and is ILLEGAL (Principle P8).
+  B = A  (no primary axis changed) is PARAPHRASE and remains ILLEGAL.
 ```
 
-**Why exactly one, not at least one.** `D ≥ 2` will sometimes work. But when it works, the
-system has learned nothing about *why*, and neither has the learner's model — so the next
-learner gets no benefit, and the same concept will be re-taught by trial and error forever.
-The one-dimension law already exists in `decision-engine/05`; the operator is what makes it
-checkable rather than aspirational.
+Paraphrase is still illegal by construction — L1 requires an actual change on a named axis —
+so the property the whole component exists to guarantee is preserved unchanged. What is no
+longer required is that the change have no consequences.
 
-**Two important consequences.**
+**Verification against the existing ladder.** The failed-explanation ladder is now legal at
+every rung, which is the correctness test the flat count failed:
 
-*First*, R1 makes paraphrase structurally illegal rather than discouraged. This is P2 in
-action: the constraint is enforced at decision time (the candidate attempt set is filtered)
-and again at output time (the verifier holds a contract clause naming the axis that must have
-changed).
+| Rung | Primary axis | Closure carries | v1.0 verdict | v1.1 verdict |
+|---|---|---|---|---|
+| 1 · different frame, same channel | 3 representation | (nothing forced) | legal | **legal** |
+| 2 · change channel: demonstrate | 1 channel | method, representation, concreteness | *illegal (D=4)* | **legal** |
+| 3 · concrete enactment | 7 agency | channel, concreteness | *illegal (D=3)* | **legal** |
+| 4 · stop; prerequisite diagnosis | — (leaves the concept) | n/a | n/a | n/a — not a re-teach |
 
-*Second*, R3 requires a persisted set of failed attempt vectors per learner per concept. This
-is a *memory* requirement, and it is the reason the paraphrase failure is universal in
-stateless systems: without the failed set, "different from what we tried" has no referent.
+#### 7.4.3 The axis-dependency matrix
+
+A published, versioned artifact — not an implementation detail. It states which axes are
+forced by a change to each primary axis, and it is the specification `closure()` implements.
+`•` = always forced; `○` = forced conditionally, on the target value.
+
+```
+ PRIMARY ↓        FORCES →   1 chan  2 meth  3 repr  4 conc  5 entry  6 gran  7 agency
+ ─────────────────────────────────────────────────────────────────────────────────────
+ 1 CHANNEL                     —       •       •       ○        ·        ·        ·
+ 2 METHOD                      •       —       •       ○        ○        ·        ○
+ 3 REPRESENTATION              ○       ·       —       ○        ·        ·        ·
+ 4 CONCRETENESS                ○       ○       •       —        ·        ·        ·
+ 5 ENTRY POINT                 ·       ○       ·       ·        —        ·        ·
+ 6 GRANULARITY                 ·       ·       ·       ·        ·        —        ·
+ 7 AGENCY                      ○       ○       ·       ○        ·        ·        —
+```
+
+Three properties this matrix must satisfy, all checkable at build time:
+
+- **Totality** — every primary axis has a defined row.
+- **Acyclicity of forcing** — closure is computed in one pass; a forcing cycle (axis A forces
+  B forces A) is a build-time failure. The matrix above is acyclic by construction because
+  forcing always flows toward *more constrained* axes.
+- **Minimality** — a `•` that is not genuinely forced weakens L3 into permissiveness. Every
+  `•` requires a stated pedagogical justification in the matrix's own record.
+
+Axes 5 and 6 force almost nothing, which is the useful signal: entry point and granularity are
+the two axes that can be changed nearly independently, and they are therefore the cheapest
+genuine changes available. That is a real finding the flat count concealed.
+
+#### 7.4.4 Consequences
+
+*First*, paraphrase remains structurally illegal, enforced at decision time (the candidate set
+is filtered by L1–L5) and again at output time (§7.5).
+
+*Second*, L4 requires a persisted set of failed attempt vectors per learner per concept. This
+is a *memory* requirement, and it is why the paraphrase failure is universal in stateless
+systems: without the failed set, "different from what we tried" has no referent. Its growth
+and compaction are specified in §12 R8; its ownership transfer from `C-30` in §4.1.
+
+*Third*, every persisted vector carries `axisSetVersion` and `policyVersion` (§4.3). Vectors
+recorded under a retired axis set remain readable but are **not comparable** across versions,
+and closure is never applied across an axis-set boundary.
+
+#### 7.4.5 Rejected alternative: `D ≤ 2`
+
+Recorded because the review raised it explicitly and it is the obvious patch. It was rejected.
+`D ≤ 2` still forbids rung 2 (four coordinates change), so it does not fix the defect; and it
+newly *permits* genuinely undiagnosable double changes, so it costs the property P8 exists to
+protect. Relaxing a threshold cannot repair a model whose coordinates are correlated — the
+fix has to distinguish intended change from forced consequence, which is what closure does.
 
 ### 7.5 The paraphrase detector
 
-R1 is necessary but not sufficient. A system can change axis 5 nominally while producing text
-that is semantically the previous explanation. So re-teach turns carry a **two-part check**:
+L1–L3 are necessary but not sufficient. A system can change the entry point nominally while
+producing text that is semantically the previous explanation. So re-teach turns carry a
+**two-part check**:
 
-1. **Structural** — vector distance exactly 1, checked at decision time. Deterministic, free.
+1. **Structural** — primary axis declared and changed, closure respected, checked at decision
+   time. Deterministic and free (small enum comparisons plus one table lookup).
 2. **Semantic** — the produced utterance's similarity to the failed utterance must fall below
    a threshold, checked at output time by `C-36`. A re-teach that passes structurally and
    fails semantically is a *repairable* violation: constrained regeneration naming the axis
@@ -1078,15 +1543,26 @@ REFINEMENT PROTOCOL
     identified, the correct next move is a diagnostic probe, not a re-teach.
  2  Explicitly name what the learner GOT RIGHT. Not encouragement —
     information. It tells them what to keep.
- 3  Hold the representation constant.  D(A, B) = 0 is CORRECT here,
-    because this is not a re-teach.
+ 3  Hold the representation constant. B = A is CORRECT here, because
+    this is not a re-teach and the paraphrase rule does not apply.
  4  Narrow scope to the failing sub-claim only.
  5  Re-test the sub-claim in isolation, then the whole claim.
 ```
 
-Step 3 is the point: **the Difference Operator's rule does not apply to refinement**, and
-misapplying it — forcing a representation change on a partially successful attempt — is
+Step 3 is the point: **the Difference Operator's legality rule does not apply to refinement**,
+and misapplying it — forcing a representation change on a partially successful attempt — is
 itself a defect. This is why T5 is classified separately in §7.2.
+
+**Refinement is budgeted.** Version 1.0.0-draft budgeted re-teaching and left refinement
+unbounded, which permitted indefinite narrowing and, through step 1's diagnostic probe, a run
+of consecutive questions that never technically counted as a re-teach. Two rules close this:
+
+- **Maximum 2 narrowing passes** per claim per session. On exhaustion the path escalates to
+  full diagnosis (§7.3) and is thereafter governed by the re-teach budgets in §7.7 — a third
+  narrowing is not a legal move.
+- **Refinement probes count against the consecutive-question bound** (gate G6). A diagnostic
+  probe is a question regardless of the protocol that emitted it, and exempting it would
+  reintroduce the quiz register through a side door.
 
 ### 7.7 Budgets
 
@@ -1139,9 +1615,11 @@ retrying is how the system improves rather than merely persists.
                                ▼
               ┌────────────────────────────────────┐
               │ SELECT re-teach attempt B where    │
-              │   D(A,B) = 1 on the implicated axis│
-              │   B ∉ failedAttempts               │
-              │   B legal under C-29 + TQ-3        │
+              │   primary axis p = diagnosed axis  │
+              │   B[p] ≠ A[p]        (L1, L2)      │
+              │   B = closure(A, p, B[p])    (L3)  │
+              │   B ∉ failedAttempts         (L4)  │
+              │   B legal under C-29 + TQ-3  (L5)  │
               └────────────────┬───────────────────┘
                                │  none available?
                                ├──────────────────────▶ escalate: drop
@@ -1172,7 +1650,8 @@ abandonment (TQ-1 — TQ-4 *recommends*, TQ-1 decides).
 classifyTrigger(learnerTurn, priorDecision, twinState) → Trigger
 diagnose(trigger, evidence, history)                   → Diagnosis | InsufficientEvidence
 attemptVector(decisionRecord)                          → AttemptVector
-difference(vectorA, vectorB)                           → { distance, differingAxes[] }
+closure(fromVector, primaryAxis, targetValue)          → AttemptVector   -- total, pure
+axisDependencyMatrix(axisSetVersion)                   → ForcingMatrix
 legalReteachSet(conceptId, learnerId, diagnosis)       → AttemptVector[]
 refinementPlan(partialEvidence)                        → RefinementPlan
 reteachBudgetState(conceptId, learnerId)               → BudgetState
@@ -1184,20 +1663,30 @@ reteachBudgetState(conceptId, learnerId)               → BudgetState
   may not support. `InsufficientEvidence` is therefore a *first-class return value*, and its
   correct handling is a diagnostic probe — not a guessed diagnosis. A system that always
   produces a diagnosis is producing fiction.
-- **Axis exhaustion.** All axis-1 changes tried, none worked. Escalation drops concreteness
-  (axis 4) or routes to prerequisites; this is the designed floor, not an error.
+- **Axis exhaustion.** All values on the diagnosed axis tried, none worked. Escalation drops
+  concreteness (axis 4) or routes to prerequisites; this is the designed floor, not an error.
 - **Semantic detector false positives.** Tracked as its own metric; a high rate is a defect in
   the detector, not the renderer.
 - **Vector under-specification.** Two genuinely different teaching acts mapping to the same
   vector, so a real change reads as paraphrase. Mitigated by treating vector collisions found
-  in review as evidence the axis set needs refinement — recorded as OQ-3.
+  in review as evidence the axis set needs a versioned amendment (§4.3, §7.4.4).
+- **Over-permissive closure.** The mirror risk of the v1.0 defect, and the one to watch now: a
+  `•` in the dependency matrix that is not genuinely forced turns L3 from a constraint into a
+  licence, and a maximally-forcing matrix would permit any change at all. Mitigated by the
+  minimality property (§7.4.3) requiring per-entry pedagogical justification, and measured by
+  tracking mean closure size — a rising mean is a defect signal against the matrix.
 
 ### 7.12 Falsifiable prediction
 
-*Under the Difference Operator, the rate of "explain again in different words" turns falls to
-near zero, and second-attempt success rate rises measurably relative to unconstrained
-re-teaching.* If second-attempt success does not rise, the operator is enforcing variety
-without enforcing pedagogy, and the axis set is wrong.
+*Under the primary-axis-plus-closure operator, the rate of "explain again in different words"
+turns falls to near zero, and second-attempt success rate rises measurably relative to
+unconstrained re-teaching.* If second-attempt success does not rise, the operator is enforcing
+variety without enforcing pedagogy, and the axis set or the dependency matrix is wrong.
+
+*Secondary, testing the v1.1 correction specifically:* under closure, escalation-ladder rungs
+execute as authored. If a material share of legal re-teaches still cannot be expressed as
+one primary axis plus its closure, the axis set remains over-decomposed and needs collapsing
+rather than the matrix needing widening.
 
 ---
 
@@ -1213,6 +1702,46 @@ teaching quality is at present asserted rather than measured.
 responses, and outcomes for one learner, one concept, one strategy attempt, across however
 many turns and sessions it spans. Not a session, and not a turn: a session may contain
 several lessons and a turn contains none.
+
+### 8.1.1 Trajectory closure — provisional and final (added v1.1.0)
+
+Version 1.0.0-draft defined the unit but never defined when it *closes*. Combined with
+REVISION's since-corrected "never skippable" status, this made every trajectory unscoreable
+until its REVISION occurred — up to thirty days later, and never at all for a churned learner.
+That would have made §14.2 Stage 2 unable to produce a baseline in any useful timeframe,
+which is fatal to the whole implementation sequence, since every later stage is judged against
+that baseline.
+
+Closure is therefore two-stage:
+
+```
+PROVISIONAL CLOSURE
+  Trigger : C-29 reaches VERIFIED and SUMMARY has executed
+            (or the strategy is ABANDONED, which also closes provisionally)
+  Timing  : same session, typically minutes after the lesson ends
+  Scores  : all 10 gates + S1…S10 excluding revision-dependent terms
+  Purpose : the operational quality signal. This is the number that drives
+            authoring priority, defect reports, and Stage 2's baseline.
+
+FINAL CLOSURE
+  Trigger : the scheduled REVISION executes, OR its scheduling window lapses
+  Timing  : +1 to +30 days
+  Scores  : provisional scores, unchanged, PLUS retention outcome
+  Purpose : the learning signal, and the join key into TQ-7 Tier C / OSF.
+  Lapsed  : a window that lapses because the learner did not return is recorded
+            as retention-unknown. It is an OUTCOME, never a lesson defect —
+            the lesson cannot be blamed for a learner who did not come back.
+```
+
+**The two scores are reported separately and are never averaged into one number.** They
+measure different things — one measures whether the teaching had the right properties, the
+other whether it worked — and collapsing them would hide exactly the divergence (§8.7) that
+makes the rubric falsifiable.
+
+**Production-readiness is assessed at provisional closure.** Final closure validates the
+rubric, not the lesson: a systematic gap between high provisional scores and poor final
+outcomes is evidence the rubric is wrong, and is the trigger to rebuild it against outcome
+data (§8.7).
 
 ### 8.2 The structural / measured split
 
@@ -1236,38 +1765,84 @@ A lesson failing **any** gate is not production-ready, regardless of score.
 |---|---|---|---|
 | **G1** | No assessment action before `INSTRUCTED` | STRUCTURAL | `C-29` legality |
 | **G2** | No advancement on assisted or echoed evidence | STRUCTURAL | `C-29` transition evidence requirement |
-| **G3** | Every re-teach has `D = 1` on the diagnosed axis; no paraphrase | STRUCTURAL (structural part) + MEASURED (semantic part) | TQ-4 filter; `C-36` semantic check |
+| **G3** | Every re-teach declares a primary axis, changes it, and respects closure (§7.4.2 L1–L3); no paraphrase | STRUCTURAL (L1–L3) + MEASURED (semantic check) | TQ-4 filter; `C-36` semantic check |
 | **G4** | Every re-teach is preceded by a recorded diagnosis | STRUCTURAL | TQ-4 precondition |
 | **G5** | The lesson has a close; a session never ends on unresolved failure without a banked win | STRUCTURAL | `C-33` budget reservation; abandoned-session debt |
-| **G6** | No more than 2 consecutive question-actions | STRUCTURAL | `C-29` legality + contract clause |
-| **G7** | A non-verbal representation was available, or its absence is justified in the record | MEASURED | trajectory audit |
-| **G8** | Any surfaced misconception is addressed, or explicitly deferred with a record | MEASURED | trajectory audit |
+| **G6** | No more than 2 consecutive question-actions, **refinement probes included** (§7.6) | STRUCTURAL | `C-29` legality + contract clause |
+| **G7** | A non-verbal representation was served, or its absence carries an **enumerated reason code** | MEASURED | trajectory audit |
+| **G8** | Any surfaced misconception is addressed, or deferred with an **enumerated reason code** | MEASURED | trajectory audit |
 | **G9** | Every action carries a rationale and `alternativesRejected[]` | STRUCTURAL | `C-28` decision record schema |
 | **G10** | The tutor never affirmed a wrong answer or denied a right one | STRUCTURAL | `C-36` correctness-consistency check |
+| **G11** | A REVISION was **scheduled** (execution is not required — §5.2) | STRUCTURAL | TQ-2 arc completion requirement |
 
-Six of ten are fully structural today given the frozen architecture; G3 is half-structural;
-G7 and G8 are measured and are the two clearest candidates for future structural promotion.
+Seven of eleven are fully structural given the frozen architecture; G3 is half-structural; G7
+and G8 are measured and are the two clearest candidates for future structural promotion.
+
+**G7 and G8 require enumerated reason codes (added v1.1.0).** As originally written, both
+passed on the existence of *any* recorded justification, which measured whether the system
+writes strings rather than whether it teaches. Both now draw from a **closed, versioned reason
+set**; a reason outside the set fails the gate, and adding a reason requires an amendment —
+which forces the case to be argued rather than typed.
+
+```
+G7 · legal reasons for serving no non-verbal representation
+     VERBAL_CLAIM         the claim has no spatial/dynamic/relational structure
+     CHANNEL_UNAVAILABLE  learner context or accessibility profile precludes it
+     ASSET_ABSENT         no authored visual exists  → emits a coverage defect
+     LOAD_REDUCTION       adding a channel would exceed capacity now
+
+G8 · legal reasons for deferring a surfaced misconception
+     NOT_BLOCKING         it does not contradict any prerequisite of current work
+     AFFECT_PROTECTED     C-31 preempted; repair queued for a stable moment
+     BUDGET_EXHAUSTED     queued to the repair queue with a scheduled slot
+     INSUFFICIENT_EVIDENCE  one ambiguous signal; queued for re-probe
+```
+
+`ASSET_ABSENT` deliberately both passes the gate and emits a coverage defect: the lesson was
+not wrong to proceed, and the catalogue was wrong to be empty. Those are different failures
+with different owners, and conflating them would either punish lessons for authoring debt or
+hide the debt entirely.
 
 ### 8.4 Scored dimensions
 
 Ten dimensions, each 0–4 with observable anchors. Anchors are stated in terms of ledger
 evidence, never impressions.
 
-| ID | Dimension | 0 | 2 | 4 |
-|---|---|---|---|---|
-| **S1** | Arc completeness | phases missing with no reason | present, some skipped with reasons | all archetype-required phases present with exit evidence |
-| **S2** | Load discipline | new elements far above capacity | at capacity | within capacity with headroom at every phase |
-| **S3** | Representation richness | one representation only | two, one non-verbal | ≥2 genuinely distinct (axis-3 distance ≥1) plus a learner-produced one |
-| **S4** | Interaction balance | tutor-talk ≥ 90% | ~70% | learner production ≥ 40% of turns |
-| **S5** | Struggle calibration | success rate outside band throughout | in band part of the time | in the productive band, adjusted on evidence |
-| **S6** | Responsiveness | decisions traceable to the plan only | mixed | every decision traceable to specific learner evidence |
-| **S7** | Voice quality | register drops on error; walls of text | mostly consistent | consistent register, burst discipline, wait-time honoured |
-| **S8** | Assessment quality | items do not discriminate | some discriminate | items discriminate; distractors misconception-mapped |
-| **S9** | Closure quality | no summary | tutor-produced summary | learner-produced summary; open loops recorded |
-| **S10** | Efficiency | turns far above concept baseline | at baseline | at or below baseline for equal evidence |
+The **Instrument** column was added in v1.1.0. Version 1.0.0-draft claimed in §8.1 that every
+criterion was defined over evidence the system already records; review found three that are
+not. A rubric that scores around a missing instrument produces confident numbers from nothing,
+which is precisely the failure OSF's `OS-6` exists to prevent. Dimensions marked **NYS** (not
+yet scoreable) are **excluded from the mean** until their instrument lands — they are not
+scored as zero, and they are not quietly estimated.
 
-**Production-ready threshold:** all ten gates pass **AND** mean score ≥ 3.0 **AND** no
-dimension below 2.
+| ID | Dimension | Instrument | 0 | 2 | 4 |
+|---|---|---|---|---|---|
+| **S1** | Arc completeness | ✅ available | phases missing with no reason | present, some skipped with reason codes | all archetype-required phases present with exit evidence |
+| **S2** | Load discipline | ❌ **NYS** — no working-capacity instrument exists (§3.4) | new elements far above capacity | at capacity | within capacity with headroom at every phase |
+| **S3** | Representation richness | ✅ available | one representation only | two, one non-verbal | ≥2 genuinely distinct (differing on axis 3) plus a learner-produced one |
+| **S4** | Interaction balance | ✅ available | tutor-talk ≥ 90% | ~70% | learner production ≥ 40% of turns **and** ≥1 extended production (§NTH-4 note) |
+| **S5** | Struggle calibration | ❌ **NYS** — requires the speed/confidence read discarded at the STT boundary (`foundations/03 §7`) | success rate outside band throughout | in band part of the time | in the productive band, adjusted on evidence |
+| **S6** | Responsiveness | ✅ available (via `alternativesRejected[]`) | decisions traceable to the plan only | mixed | every decision traceable to specific learner evidence |
+| **S7** | Voice quality | ⚠️ **PARTIAL** — register and burst discipline are measurable in text; wait-time is not a tutor-side quantity in an async medium | register drops on error; walls of text | mostly consistent | consistent register, burst discipline |
+| **S8** | Assessment quality | ✅ available | items do not discriminate | some discriminate | items discriminate; distractors misconception-mapped |
+| **S9** | Closure quality | ✅ available | no summary | tutor-produced summary | learner-produced summary; open loops recorded |
+| **S10** | Efficiency | ✅ available | turns far above concept baseline | at baseline | at or below baseline for equal evidence |
+
+**S7's wait-time anchor was removed rather than marked NYS.** Wait time is instructional in
+speech, where the tutor controls the silence. In an asynchronous text medium the silence
+belongs to the learner, so "wait-time honoured" was not a hard-to-measure property — it was a
+category error, imported from the voice literature without checking the channel. It returns as
+a scored property if and when duplex voice lands (`C-37`'s stated evolution).
+
+**Production-ready threshold:** all **eleven** gates pass **AND** the mean over *scoreable*
+dimensions ≥ 3.0 **AND** no scoreable dimension below 2.
+
+**Threshold honesty (v1.1.0).** With S2 and S5 excluded, the mean today runs over eight
+dimensions, not ten — and the two excluded are the two most directly tied to cognitive load and
+productive difficulty. The threshold is therefore measuring a *narrower* construct than the
+rubric describes, and comparisons across a period in which an instrument lands are not valid.
+Both facts must be reported alongside any score. See OQ-5 for the calibration status of the
+3.0/2.0 numbers themselves, which remain reasoned rather than empirical.
 
 The floor matters as much as the mean. A lesson scoring 4 on eight dimensions and 0 on
 interaction balance is a lecture, and averaging conceals exactly the failure that most needs
@@ -1345,7 +1920,8 @@ question was missing.
    ║       ├── C-33 session budget + protected close                          ║
    ║       ├── ★ TQ-1 strategy commitments          ◀── new constraint source ║
    ║       ├── ★ TQ-2 arc phase entry/exit          ◀── new constraint source ║
-   ║       └── ★ TQ-4 re-teach legality (D=1)       ◀── new constraint source ║
+   ║       └── ★ TQ-4 re-teach legality             ◀── new constraint source ║
+   ║           (primary axis + closure, §7.4.2)                                ║
    ║       │                                                                  ║
    ║       ▼                                                                  ║
    ║  BAND 3 · TACTICS — selection WITHIN the legal set                       ║
@@ -1383,6 +1959,19 @@ Strict priority, first match wins:
 ```
 Row 2 above row 3 is deliberate: teaching new material on a corrupted foundation produces
 work that must later be undone, which is worse than a decayed memory.
+
+**Anti-thrash rule (added v1.1.0).** As written in v1.0.0-draft, row 4 outranked row 5, so a
+suspended concept whose blocker cleared would preempt an in-progress campaign — which could
+itself then be preempted on the next clearing, and so on. Two rules bound it:
+
+- **AT-1 · Minimum dwell.** An `ACTIVE` campaign may not be preempted by row 4 within its
+  minimum dwell (one completed arc phase, or one session, whichever comes first).
+- **AT-2 · Prerequisite exception.** AT-1 is waived when the resuming concept is a prerequisite
+  of the active one — in that case preemption is not thrash, it is the correct order of work,
+  and continuing the active campaign would be building on the gap that suspended it.
+
+With both in force, row 4's effective position is *below* row 5 except on the prerequisite
+path, which is the behaviour originally intended.
 
 **Q2 · When to explain.** *Owner: `C-29` legality + TQ-2 phase + TQ-4.*
 Explain when the arc is in EXPLANATION, **or** when diagnosis returns C3 (representation
@@ -1458,6 +2047,21 @@ defines no competing outcome metric. The join between them — *which teaching p
 predict retention* — is the point of both, and it is the one body of knowledge that cannot be
 obtained anywhere except the venue where the learning happened.
 
+**Stated once, plainly, so it cannot be inferred wrongly (added v1.1.0):**
+
+> **Phase 1 owns process measurement, not proof of learning.** Tier A measures tutor behaviour.
+> Tier B measures in-lesson performance, which is contaminated by the teaching that just
+> occurred and is the classic cramming artefact. Tier D attributes over the other tiers.
+> **Only Tier C — delayed unassisted retrieval — is evidence that learning occurred, and Tier C
+> is methodologically OSF's.** A reader who takes Tiers A, B or D as proof of learning has
+> misread this component, and no report generated from them may be captioned as showing that
+> learning happened.
+
+The brief for this phase asked for "measurable indicators showing that learning actually
+occurred." What Phase 1 can honestly deliver is the *process* half of that, plus the join that
+makes the outcome half attributable. Claiming more would be the exact substitution §10.5
+lists as this component's primary failure mode.
+
 ### 10.2 Four tiers
 
 **Tier A · Process compliance.** Derived directly from TQ-5. Per-gate violation rate; per-
@@ -1477,7 +2081,10 @@ sufficient evidence of learning:
 - **Learner-produced explanation quality** against the concept's own criteria.
 - **Within-lesson transfer** — correct application to an instance not taught.
 - **Misconception phrase disappearance** — the learner's characteristic wrong phrasing stops
-  appearing (and, critically, does not reappear under load later).
+  appearing (and, critically, does not reappear under load later). **CONTINGENT on OQ-6**: this
+  is the one Tier B indicator requiring verbatim learner language, and it is unavailable for
+  any learner whose rights profile prohibits verbatim capture. It must be reported as
+  unavailable for those learners, never silently omitted from their quality picture.
 - **Hedging reduction** — confidence language converging toward calibration.
 
 **Tier C · Retention.** The only real proof. Unassisted retrieval at +1 day, +7 days,
@@ -1556,18 +2163,38 @@ nothing).
 | Plane 1 (Twin) | TQ-1 | learner projection: mastery, misconceptions, affinities, constraints | down |
 | TQ-1 | TQ-2 | `TeachingStrategy` (archetype, method sequence, commitments) | across |
 | TQ-1 | `C-28` Band 2 | `PolicyConstraint[]` from `commitments[]` | down |
-| TQ-2 | `C-28` Band 2 | `PolicyConstraint[]` from current phase entry/exit | down |
+| TQ-2 | `C-28` Band 2 | `ArcConstraint[]` — forbidden actions only; no evidence claims (§11.3) | down |
+| `C-29` | TQ-2 | state transitions, incl. out-of-phase advances requiring re-alignment (§5.0 SYNC-2) | up |
 | TQ-2 | `C-30` | current phase + admissible action families | down |
 | TQ-3 | TQ-1 | method definitions, preconditions, affinities | across |
 | TQ-3 | `C-34`/`C-36` | `qualityContract` clauses for the active method beat | down |
-| TQ-4 | `C-28` Band 2 | re-teach legality filter (`D=1` on diagnosed axis) | down |
+| TQ-4 | `C-28` Band 2 | re-teach legality filter (primary axis + closure, §7.4.2) | down |
 | TQ-4 | TQ-1 | abandonment *recommendation* (TQ-1 decides) | across |
 | TQ-4 | `C-36` | paraphrase-check clause naming the axis that must differ | down |
-| Ledger | TQ-4 | failed-attempt vector set per learner per concept | up |
+| Ledger | TQ-4 | failed-attempt vector set per learner per concept (**captured, not derived** — see below) | up |
 | Ledger | TQ-5 | complete concept-attempt trajectory | up |
 | TQ-5 | TQ-7 | gate results + dimension scores | across |
 | TQ-7 | OSF | process features for the process↔outcome join | across |
 | TQ-7 | Authoring queue | coverage defects, asset defect reports, authoring flags | up |
+
+**AttemptVector is CAPTURED, not derived (resolved v1.1.0).** v1.0.0-draft was ambiguous:
+§11.2 implied derivation via `attemptVector(decisionRecord)` while §14.2 Stage 1 said "record
+attempt vectors." These are different designs with different gating, and the ambiguity had to
+be resolved rather than left to implementation.
+
+**Resolution: capture.** Derivation is not possible. Axes 3 (representation), 4 (concreteness),
+5 (entry point) and 7 (agency) are not present in the existing decision record — they are
+properties of the *pedagogical intent* of a turn, and nothing today writes them down. A
+`attemptVector(decisionRecord)` that inferred them from action type and rendered text would be
+reconstructing intent from output, which is guessing.
+
+Consequences, stated plainly because they change the gating:
+- Capturing the vector is a **persistence change** and is therefore G2-gated.
+- `C-28`'s decision record gains the vector as a first-class field, written by the kernel at
+  decision time — the only point where the intent is actually known.
+- `attemptVector()` remains in TQ-4's interface (§7.10) as a *reader*, not a deriver.
+- This is precisely the work of §14.2 Stage 1, and it is why Stage 1 must precede Stage 3:
+  without capture, TQ-4's L4 has nothing to compare against.
 
 ### 11.3 The three constraint contracts
 
@@ -1577,9 +2204,18 @@ cannot make an illegal action legal.
 
 ```
 StrategyConstraint  { strategyId, clause, scope: concept, severity: MUST | SHOULD }
-ArcConstraint       { arcId, phase, requiredEvidence[], forbiddenActions[] }
-ReteachConstraint   { failedVectorSet[], diagnosedAxis, requiredDistance: 1 }
+ArcConstraint       { arcId, phase, forbiddenActions[] }
+ReteachConstraint   { failedVectorSet[], primaryAxis, closureSet[], axisSetVersion }
 ```
+
+**`ArcConstraint` carries no `requiredEvidence[]` (corrected v1.1.0).** v1.0.0-draft included
+it, which quietly made TQ-2 a second owner of transition evidence requirements — `C-29`'s
+documented responsibility. Arc gating is now expressed purely as `forbiddenActions[]`, which is
+genuinely narrowing, and **all** evidence requirements defer to `C-29`. This also simplifies
+§5.0's precedence rules: with no evidence claim of its own, the arc cannot contradict `C-29`
+about whether advancement is earned.
+
+**`ReteachConstraint` carries the closure set, not a distance number** — see §7.4.2.
 
 ---
 
@@ -1590,13 +2226,18 @@ ReteachConstraint   { failedVectorSet[], diagnosedAxis, requiredDistance: 1 }
 | **R1** | **Empty libraries.** Every component here is complete as logic and sparse as content. Method libraries, per-concept dispatch, analogies, probes exist for a small minority of concepts. | **High** | **Certain** | Generic per-knowledge-type defaults good enough to stand alone; `degradedForm` declared per method; degraded-execution rate tracked as a first-class metric (TQ-7 Tier A); authoring priority computed from graph centrality. | **High** — this is the honest dominant risk and it is a content problem no architecture solves. |
 | **R2** | **Layer count.** Four scales, seven new components, three constraint contracts. Complexity has its own failure rate. | High | Medium | Narrowing-only contracts; no new decision authority; every component's exclusion list explicit; Phase 1 is architecture — the implementation roadmap (§14) sequences it so complexity arrives incrementally and each increment is independently valuable. | Medium |
 | **R3** | **Arc becomes a script.** The nine phases are read as a sequence and produce scripted courseware. | **High** | Medium | Evidence-gated transitions; archetype-specific instantiation; arc as budget not script; deviation as a recorded first-class event. | Medium — requires implementation discipline, not just design. |
-| **R4** | **Difference Operator enforces variety without pedagogy.** `D=1` is satisfied by changing an axis that does not matter for this failure. | High | Medium | R2 (the axis must be the *diagnosed* one) is what carries the pedagogy; the falsifiable prediction in §7.12 tests exactly this. | Medium |
+| **R4** | **Difference Operator enforces variety without pedagogy.** L1 is satisfied by changing a primary axis that does not matter for this failure. | High | Medium | L2 (the primary axis must be the *diagnosed* one) carries the pedagogy; §7.12's prediction tests exactly this. | Medium |
+| **R4b** | **Over-permissive closure.** The mirror of the v1.0 defect: a dependency-matrix entry that is not genuinely forced turns L3 from a constraint into a licence, and a maximally-forcing matrix permits any change at all. | High | Medium | Minimality requirement with per-entry pedagogical justification (§7.4.3); mean closure size tracked as a defect signal; matrix is versioned and reviewed, not editable per-concept. | Medium — this is now the operator's principal risk, and it is newly introduced by the v1.1 correction. |
 | **R5** | **Diagnosis fabrication.** The six-cause taxonomy demands a classification thin evidence cannot support. | High | **High** | `InsufficientEvidence` as a first-class return; correct handling is a diagnostic probe; diagnosis confidence recorded and low-confidence diagnoses trended. | Medium |
 | **R6** | **Gold Standard becomes the optimization target.** Trajectories are produced that score well without teaching well. | **High** | Medium | The §8.7 prediction ties the rubric to Tier C; human calibration reviews the *scorer*, not the lesson; a 100% gate pass rate is itself a counter-metric. | Medium |
 | **R7** | **Strategy commitment holds too long.** A wrong approach persists because abandonment is deliberately hard. | Medium | Medium | Two-occurrence characteristic-failure trigger; explicit learner rejection abandons immediately; abandonment-rate-by-archetype tracked. | Low |
-| **R8** | **Latency and cost.** Strategy selection, diagnosis, distance computation, and verification per turn. | Medium | Medium | Strategy selection is once per campaign, not per turn; distance is integer comparison over seven small enums; the expensive check (semantic paraphrase) runs only on re-teach turns. | Low |
+| **R8** | **Unbounded failed-attempt state, and its read path.** v1.0.0-draft dismissed cost by pointing at cheap integer comparison while ignoring the table behind it. `failedAttempts` grows as learners × concepts × attempts and is read on every failure turn. | Medium | **High** | **Compaction, specified:** the set is compacted per `(learner, concept)` to the **distinct vector set plus occurrence counts and last-failed timestamps**. This bounds the row count by the size of the vector space rather than by attempt count, which is what makes it finite — a learner who fails twenty times on one concept still occupies at most the distinct approaches they actually experienced. Retention follows the learner-data policy; vectors under a retired `axisSetVersion` are archived, not compared (§4.3 V-1). Read path is a single indexed lookup on `(learnerId, conceptId)`. | Low |
+| **R8b** | **Latency.** Strategy selection, diagnosis, closure computation, and verification per turn. | Medium | Low | Strategy selection is once per campaign, not per turn; closure is one table lookup over seven small enums; the expensive check (semantic paraphrase) runs only on re-teach turns. | Low |
 | **R9** | **Reduced apparent responsiveness.** Constraints refuse things a fluent model would happily do, and a learner may experience this as rigidity. | Medium | Medium | Constraints narrow the legal set, never the conversational surface — a learner's question is always answerable; withholding is always explained once, plainly, with a path forward. | Medium |
 | **R10** | **Governance drift.** Phase 1 concepts leak into implementation ahead of G1/G2. | Medium | Low | Explicit gating statement in the header; every component's future work routed through the Wave 0 approval instrument. | Low |
+| **R11** | **Arc position rests on an AI-emitted self-report.** TQ-2 inherits ADR 09's tag mechanism (§5.7), which is weaker than instrumented capture: a renderer that mis-reports its own stage corrupts the arc position, and the corruption is invisible until a `planSignature` mismatch. | Medium | Medium | Accepted deliberately to avoid duplicate ownership. Mitigated by `planSignature` mismatch producing an explicit `replan` rather than silent drift, and by `C-29` remaining authoritative on advancement (§5.0 SYNC-1) so a corrupted arc position cannot certify mastery. Tag-vs-state disagreement rate tracked. | Medium |
+| **R12** | **Strategy interference across concurrent campaigns.** A session running three concepts runs three archetypes; register whiplash between a Socratic campaign and a concrete-first one may degrade both. Promoted from an open question in v1.0.0-draft — it is a plausible degradation, not a research question. | Medium | Medium | Unmodelled today. Nearest available control is `C-33`'s session shape, which already limits concurrent new concepts. Measurement: compare per-concept Tier B outcomes in single-campaign vs multi-campaign sessions once Stage 1 data exists. | **Medium — unmitigated.** |
+| **R13** | **Absent instruments make the Gold Standard measure a narrower construct than it describes.** With S2 and S5 excluded (§8.4), the mean runs over eight dimensions, and the two excluded are those most tied to cognitive load and productive difficulty. | Medium | **Certain** | Exclusion is explicit rather than estimated; both facts reported alongside every score; comparisons spanning an instrument landing are declared invalid. | Medium — resolvable only by acquiring the instruments (§3.4). |
 
 ---
 
@@ -1616,11 +2257,15 @@ deterministically, cannot be replayed, and cannot be reasoned over. Closure is w
 Tier D attribution possible at all. Novel approaches enter by versioned amendment, which is a
 feature — it forces the case to be made.
 
-**T3 · `D = 1` (exactly) vs. `D ≥ 1`.**
-*Chosen:* exactly one. *Cost:* occasionally the right move is to change two things, and the
-architecture forbids it. *Why:* a double change that works teaches nothing about why, so the
-next learner gains nothing and the concept is re-taught by trial and error indefinitely. The
-cost is real and is accepted deliberately in exchange for a system that learns.
+**T3 · One primary axis plus closure vs. a flat distance threshold.**
+*Chosen (revised v1.1.0):* exactly one *intentional* change, plus whatever that change forces.
+*Cost:* the architecture now depends on a dependency matrix whose entries are pedagogical
+judgements, and a wrong entry silently widens or narrows what is legal — a subtler failure than
+a wrong threshold, and harder to notice (R4b). *Why:* the flat threshold was not merely
+imprecise, it was wrong — it forbade the corpus's own escalation ladder at three of four rungs.
+Distinguishing intended change from forced consequence is the only formulation that preserves
+P8's diagnosability *and* permits the teaching the corpus already prescribes. `D ≤ 2` was
+considered and rejected (§7.4.5): it fixes neither problem and costs the property P8 protects.
 
 **T4 · Structural enforcement vs. flexibility.**
 *Chosen:* structural wherever possible. *Cost:* the system will refuse a legitimate move in
@@ -1664,11 +2309,13 @@ without observability cannot be verified and cannot be improved.
 ### 14.2 Proposed stages
 
 **Stage 1 — Instrumentation (highest value, lowest risk).**
-Record attempt vectors (§7.4) on every teaching decision; record the failed-attempt set;
-record diagnoses where they already occur. **No behaviour changes at all.** This alone makes
-the paraphrase rate measurable for the first time, which converts the central claim of this
-document from assertion to measurement. If the measured paraphrase rate is low, several
-later stages should be reconsidered.
+**Capture** attempt vectors (§7.4, §11.2) on every teaching decision — a persistence change,
+G2-gated, written by the kernel at decision time because that is the only point where
+pedagogical intent is known; maintain the compacted failed-attempt set (§12 R8); record
+diagnoses where they already occur. **No behaviour changes at all** — nothing reads the vectors
+yet. This alone makes the paraphrase rate measurable for the first time, converting the central
+claim of this document from assertion to measurement. If the measured paraphrase rate is low,
+several later stages should be reconsidered.
 
 **Stage 2 — TQ-5 offline evaluation.**
 Implement the gates and dimensions as a read-only trajectory evaluator over recorded data.
@@ -1676,9 +2323,9 @@ Still no behaviour change. Produces the baseline every later stage is judged aga
 adversarial suite proves the gates fire.
 
 **Stage 3 — TQ-4 structural half.**
-The `D = 1` filter and the mandatory-diagnosis precondition, as Band 2 constraints. This is
-the first behaviour change and the highest-value one. It requires Stage 1's failed-attempt
-set to exist.
+The primary-axis + closure filter (L1–L5) and the mandatory-diagnosis precondition, as Band 2
+constraints. This is the first learner-visible behaviour change and the highest-value one. It
+requires Stage 1's captured failed-attempt set and the published, reviewed dependency matrix.
 
 **Stage 4 — TQ-3 method schema.**
 Formalize the schema and populate it for the methods already exercised by authored concept
@@ -1686,8 +2333,10 @@ entries. This is largely a *transcription* of knowledge the corpus already holds
 authoring.
 
 **Stage 5 — TQ-2 arc.**
-The arc as a Band 2 constraint source over `C-29`'s existing states. Requires Stage 4 (arcs
-are instantiated from method sequences).
+The arc as a Band 2 constraint source over `C-29`'s existing states, persisted via ADR 09's
+`lessonStageProgress` (§5.7 RC-1…RC-5) — which means **ADR 09 Option B is implemented as part
+of this stage rather than separately**, and the §5.0 synchronization table is enforced as a
+build-time totality check. Requires Stage 4 (arcs are instantiated from method sequences).
 
 **Stage 6 — TQ-1 strategy commitment.**
 Last of the behaviour changes, because it is the most invasive and depends on all of the
@@ -1700,8 +2349,14 @@ Cannot be pulled earlier by effort.
 ### 14.3 What must be true before Stage 3
 
 - Stage 1 instrumentation has run long enough to establish a baseline paraphrase rate.
-- The axis set (§7.4) has survived review against real trajectories without vector collisions
-  (see OQ-3).
+- The axis set (§7.4.1) has survived review against real trajectories without vector collisions.
+- **The axis-dependency matrix (§7.4.3) has been reviewed and passes its three build-time
+  properties — totality, acyclicity, minimality — and every `•` carries its stated pedagogical
+  justification.** Without minimality review, L3 is a licence rather than a constraint (R4b).
+- **`closure()` is verified total** over the axis set: every (vector, axis, value) triple has a
+  defined result. An undefined triple must fail the build, not the turn.
+- **The existing escalation ladders execute as authored under closure** — the regression test
+  that the v1.1 correction actually worked (§7.4.2's verification table, mechanized).
 - The `InsufficientEvidence` path has a defined, tested behaviour — otherwise mandatory
   diagnosis becomes mandatory fabrication (R5).
 
@@ -1725,23 +2380,33 @@ Phase 1 is complete and approvable when all of the following hold. These are cri
 | **A3** | Every deliverable is reconciled against existing repository components, with a recorded verdict of NEW / EXTEND / CONSOLIDATE / COMPLEMENT. | ✅ §0 |
 | **A4** | No component duplicates an existing authority; every "must not own" is explicit. | ✅ §3.3 and per-component |
 | **A5** | Existing taxonomies are reused verbatim rather than re-derived. | ✅ §0 |
-| **A6** | "Genuinely change strategy rather than paraphrase" is defined as a computable, checkable predicate. | ✅ §7.4 |
-| **A7** | Lesson quality criteria are measurable from evidence the system records, and each is classified structural vs. measured. | ✅ §8.2–§8.4 |
+| **A6** | "Genuinely change strategy rather than paraphrase" is defined as a computable, checkable predicate. | ✅ §7.4.2 (L1–L5) |
+| **A7** | Lesson quality criteria are classified structural vs. measured, **and each declares whether its instrument exists**. | ✅ §8.2–§8.4 (instrument column added v1.1.0) |
 | **A8** | All eight teacher decisions have deterministic answering rules with named defaults. | ✅ §9.3 |
 | **A9** | Quality metrics are distinguished from outcome metrics, with the OSF boundary stated. | ✅ §10.1 |
-| **A10** | Every component declares at least one falsifiable prediction. | ✅ §4.10, §5.10, §6.7*, §7.12, §8.7, §9.4, §10.5* |
+| **A10** | Every component declares at least one falsifiable prediction. | ⚠️ **PARTIAL** — §4.10, §5.11, §7.12, §8.7, §9.4 carry explicit predictions; **TQ-3 and TQ-7 do not** and express falsifiability only through failure signatures and counter-metrics. Marked partial in v1.1.0; v1.0.0-draft marked this satisfied, which was wrong given its own footnote. |
 | **A11** | Risks and trade-offs state residual risk and accepted cost, not only mitigations. | ✅ §12, §13 |
 | **A12** | No code, runtime, schema, API, curriculum, or KG change. | ✅ document only |
 | **A13** | Implementation guidance is sequenced by evidence-unlock and explicitly G2-gated. | ✅ §14 |
-| **A14** | Open questions are recorded as open rather than resolved by assertion. | ✅ §16 |
+| **A14** | Open questions are recorded as open rather than resolved by assertion; resolved items are removed rather than left open. | ✅ §16 |
+| **A15** | **Every required field a component depends on is recorded with existence status, owner, acquisition path, and defined absent-behaviour.** | ✅ §3.4 (added v1.1.0) |
+| **A16** | **All concurrent lifecycles are enumerated, with precedence, legal combinations, and a totality requirement.** | ✅ §5.0 (added v1.1.0) |
+| **A17** | **Every scoreable unit has a defined closure point.** | ✅ §8.1.1 (added v1.1.0) |
+| **A18** | **Independent architecture review recommends approval.** | ❌ **NOT MET — owner-marked only.** Review R1 returned DO NOT APPROVE against v1.0.0-draft. v1.1.0 responds to all findings (Appendix C) and requires a fresh independent review. This criterion may not be self-marked by the author. |
 
-\* TQ-3 and TQ-7 express their falsifiability through failure signatures and counter-metrics
-rather than a single prediction; noted for the reviewer rather than smoothed over.
+**A10 is honestly partial rather than smoothed over.** Two components lack a falsifiable
+prediction. This is not repaired by inventing one — a prediction manufactured to satisfy a
+checklist is worse than an acknowledged gap, because it looks like evidence of rigour while
+testing nothing. TQ-3's and TQ-7's predictions should emerge from Stage 1 data.
 
-**Approval gate.** Phase 1 is complete only when the owner has reviewed and approved this
-document. On approval: commit, merge to `main`, delete the feature branch. The merged
-document becomes the canonical foundation for Phase 2 (`architecture/phase-02-visual-intelligence`),
-which will consume TQ-2's VISUAL phase conditions (§5.4) and TQ-3's M1/M7 as its entry points.
+**Approval gate.** Phase 1 is complete only when A18 is satisfied — a fresh independent
+architecture review recommends approval — **and** the owner has approved. On approval: commit,
+merge to `main`, delete the feature branch. The merged document becomes the canonical
+foundation for Phase 2 (`architecture/phase-02-visual-intelligence`), which will consume TQ-2's
+VISUAL phase conditions (§5.4) and TQ-3's M1/M7 as its entry points.
+
+**Status at v1.1.0: NOT COMPLETE.** Sixteen of eighteen criteria are met, A10 is partial, and
+A18 is unmet by construction until the next review runs.
 
 ---
 
@@ -1763,12 +2428,13 @@ distinctive pedagogies (early literacy and proof-based mathematics have almost n
 common). Sub-archetypes per subject, or a flat larger set? Resolvable only against real
 selection data — deferred to post-Stage-1.
 
-**OQ-3 · Axis independence.** The seven Difference axes are not fully orthogonal: changing
-method (axis 2) often forces a representation change (axis 3), which would register as
-`D = 2` and be rejected as undiagnosable. Two candidate resolutions — declare a primary axis
-per change, or model dependent axes as a single composite — and no evidence yet to choose.
-**This is the most consequential unresolved question in the document**, because it determines
-whether `D = 1` is achievable in practice or is too strict to satisfy.
+**OQ-3 · RESOLVED in v1.1.0 — retained as a closed record, not an open question.**
+The question was whether the axes' non-orthogonality made `D = 1` unachievable. Review
+established that it did, and worse than suspected: the flat count forbade the corpus's own
+escalation ladder at three of four rungs. Resolved by the primary-axis-plus-closure model
+(§7.4.2), which was one of the two candidate resolutions named here. The residual risk it
+creates — over-permissive closure — is now tracked as R4b rather than as an open question,
+because it is a known failure mode with a stated mitigation rather than an undecided design.
 
 **OQ-4 · Refinement/re-teach boundary.** §7.6 requires distinguishing partial understanding
 from failure. On thin evidence — a single ambiguous response — that distinction may not be
@@ -1782,19 +2448,20 @@ decision.
 reasoned starting point, not an empirical one. It must be calibrated against Tier C outcomes
 once the join exists, and it should be expected to move.
 
-**OQ-6 · Verbatim capture governance for minors.** TQ-4's failed-attempt set and the
-misconception evidence model both benefit from verbatim learner phrases. For minors this is a
-data-governance decision with legal dimensions, already standing as an unresolved owner
-decision in project memory. Architecturally, the question is whether the failed-attempt set
-can function on structural vectors alone, with verbatim capture as an optional enrichment.
-*Provisional architectural answer: yes — the vectors are structural and carry no learner
-language — which would make verbatim capture severable. This should be confirmed before
-Stage 1.*
+**OQ-6 · Verbatim capture governance for minors — architecturally resolved, owner confirmation
+outstanding.** Promoted from provisional in v1.1.0. **The architectural answer is settled:
+verbatim capture is SEVERABLE.** Every axis in the AttemptVector is structural — an enum over
+channel, method, representation, concreteness, entry point, granularity and agency — and none
+carries learner language. TQ-4 therefore functions completely without verbatim capture, and
+Stage 1 has no dependency on it. What remains is not an architecture question but a policy
+one: whether the *misconception evidence model* may retain verbatim phrases for learners in a
+protected rights class, which costs exactly one Tier B indicator (§10.2, now marked contingent)
+and nothing else. **Owner decision, not an architectural unknown.**
 
-**OQ-7 · Multi-concept sessions and strategy interference.** A session teaching three
-concepts runs three strategies. Do they interfere — does a `SOCRATIC` campaign on one concept
-degrade a `CONCRETE-FIRST` campaign on another in the same sitting through register whiplash?
-Unmeasured, unmodelled, and plausible.
+**OQ-7 · REMOVED — promoted to risk R12.** Multi-concept strategy interference is a plausible
+degradation with no mitigation, not an unanswered design question. It belongs in the risk
+register where it is tracked and measured, and leaving it filed as an open question understated
+it.
 
 **OQ-8 · Where the human belongs.** `C-41` gives a teacher an override channel. Should a
 human teacher be able to *set* a strategy archetype for a learner, and if so, does that
@@ -1802,21 +2469,33 @@ override survive an abandonment condition firing? A human's judgement is high-we
 evidence, but a strategy failing its own pre-declared exit conditions is exactly the
 situation where evidence should win. Unresolved.
 
+**OQ-9 · Does closure belong to the axis set or to the method library?** New in v1.1.0, arising
+directly from the correction. The dependency matrix (§7.4.3) is currently a property of the
+axis set — one matrix for all concepts. But forcing may be domain-specific: changing
+representation in early literacy may force a channel change that the same move in algebra does
+not. A per-domain matrix would be more accurate and would multiply the review surface by the
+number of domains. Insufficient evidence to choose; the single global matrix is the deliberate
+starting point because it is reviewable, and per-domain variants should be introduced only where
+data shows a global entry is wrong.
+
 ---
 
 ## Appendix A — Glossary of Phase 1 terms
 
 | Term | Definition |
 |---|---|
-| **Campaign** | All teaching of one concept for one learner under one strategy attempt. Spans turns and sessions. The scale Phase 1 introduces. |
+| **Campaign** | All teaching of one concept for one learner under **one strategy attempt**. Spans turns and sessions. The scale Phase 1 introduces. A second attempt at the same concept — after abandonment — is a **new campaign** with a new arc and a new `attemptOrdinal`; it is never a continuation of the first. |
+| **Primary axis** | The single axis a re-teach intentionally changes, selected by diagnosis (§7.4.2). |
+| **Closure** | The total, pure function returning the axis changes *forced* by a primary-axis change (§7.4.2). |
 | **Teaching Strategy** | A named, committed, multi-turn approach to one concept (TQ-1). |
 | **Archetype** | One of nine enumerated strategy shapes (§4.4). |
 | **Concept Lesson Arc** | The phase graph a strategy takes (TQ-2); a view over `C-29` states, not a state machine. |
 | **Phase** | One of nine pedagogical stages with an entry condition and exit evidence (§5.2). |
 | **Method** | A multi-turn teaching technique with preconditions, internal beats, and a failure signature (TQ-3). |
 | **Action** | One move from the existing 27-item catalogue. Methods compose actions. |
-| **Attempt Vector** | A teaching attempt's position on the seven Difference axes (§7.4). |
-| **Difference Operator** | `D(A,B)` = count of differing axes. `D=0` is paraphrase. |
+| **Attempt Vector** | A teaching attempt's position on the seven axes (§7.4.1). Structural only — carries no learner language, which is what makes verbatim capture severable (OQ-6). |
+| **Difference Operator** | The re-teach legality rule: one declared primary axis, changed, plus its closure (§7.4.2). An attempt identical to the failed one is paraphrase and is illegal. |
+| **Provisional / Final closure** | The two points at which a trajectory becomes scoreable (§8.1.1). |
 | **Refinement** | Narrowing to a failing sub-claim while holding representation constant. Not a re-teach (§7.6). |
 | **Trajectory** | The complete record of one concept-attempt; TQ-5's unit of evaluation. |
 | **Structural criterion** | A criterion a conforming implementation cannot violate. |
@@ -1829,4 +2508,117 @@ and reuses the existing corpus; it introduces no parallel pipeline; it modifies 
 route, schema, API, curriculum file, Knowledge Graph, or existing `educational-brain/`
 document; it implements nothing; and it requests no implementation approval. Where it finds
 an existing component insufficient for a Phase 1 deliverable, it says so explicitly and adds a
-layer above it rather than redefining it.
+layer above it rather than redefining it. Where it finds an existing component *defective*, it
+records Curriculum Feedback (Appendix D) rather than editing another owner's file.
+
+---
+
+## Appendix C — Review response (v1.0.0-draft → v1.1.0)
+
+Architecture review R1 returned **DO NOT APPROVE** against v1.0.0-draft with five critical
+findings, thirteen important improvements, seven nice-to-haves, and twenty-five required
+modifications R1–R25. This appendix records the disposition of every item. Nothing was silently
+ignored; two items were modified rather than accepted as written, and the rationale is given.
+
+### C.1 Critical findings
+
+| Finding | Disposition | Where |
+|---|---|---|
+| **CRIT-1** `D = 1` makes the corpus's own escalation ladder illegal (rungs at D=3–4) | **ACCEPTED IN FULL.** The flat count is removed and replaced with primary-axis + closure. The finding was correct and the defect was more serious than an open question: the operator contradicted the ladder it claimed to formalize. | §7.4 (rewritten), §7.4.5 |
+| **CRIT-2** ADR 09 under-reconciled; two arc pointers | **ACCEPTED IN FULL**, in the owner's preferred direction: TQ-2 **is** ADR 09 generalized. Vocabulary, snapshot key, `planSignature`, and the `replan` event are reused rather than reinvented. ADR 09 is *extended*, not superseded. | §0 (row 2b), §5.7 (RC-1…RC-5) |
+| **CRIT-3** Knowledge type depends on data that does not exist; taxonomy mixes concept and learner categories | **ACCEPTED IN FULL.** Knowledge type marked REQUIRED-BUT-ABSENT with S2 going inert; `live misconception` removed from the concept taxonomy and re-sited as learner state. | §3.4, §3.4.1, §3.4.2, §4.5 S2/S3, §6.2 |
+| **CRIT-4** "No second state machine" false; synchronization undefined | **ACCEPTED IN FULL.** Three lifecycles enumerated, six precedence rules, legal-combination table with a totality requirement, wording corrected in all three places. | §5.0, §0, §1.3, §3.3, §5.1 |
+| **CRIT-5** No trajectory closure definition; REVISION makes lessons unscoreable | **ACCEPTED IN FULL.** Provisional and final closure defined; REVISION reworded from "never skippable" to "never omitted from the plan." | §8.1.1, §5.2, §5.0 SYNC-5 |
+
+### C.2 Required modifications R1–R25
+
+| # | Disposition | Section(s) | Note |
+|---|---|---|---|
+| R1 | Accepted | §7.4.2, §7.4.3 | Primary axis + closure + published dependency matrix |
+| R2 | Accepted | §7.5, §7.8, §7.10, §7.11, §7.12, §11.3, §12 R4, §13 T3, §14.3 | Full propagation |
+| R3 | Accepted | §16 OQ-3 | Retained as a *closed record* rather than deleted, so the reasoning survives |
+| R4 | Accepted | §0 | ADR 09 row added; recorded as extended, not superseded |
+| R5 | Accepted | §5.7 | Five explicit reuse commitments |
+| R6 | Accepted | §3.4 | Eleven-field dependency table |
+| R7 | Accepted | §3.4.1, §4.5 S2 | Inert, deliberately not heuristic |
+| R8 | Accepted | §0, §3.4.2, §4.5 S3, §6.2, §6.4 M14, §6.3 M2 | Plus Curriculum Feedback, Appendix D |
+| R9 | Accepted | §5.0 | SYNC-1…SYNC-6 + legal-combination table |
+| R10 | Accepted | §0, §1.3, §3.3, §5.1 | "No second authority for advancement" |
+| R11 | Accepted | §8.1.1 | Two scores, never averaged |
+| R12 | Accepted | §5.2 | Plus new gate G11 (REVISION *scheduled*) |
+| R13 | Accepted | §8.4 | Instrument column; S2/S5 NYS and excluded from the mean |
+| R14 | Accepted | §8.3 | Closed reason-code sets for G7 and G8 |
+| R15 | Accepted | §4.5 S7(b), §4.9 | Containment invariant + empty-intersection behaviour |
+| R16 | Accepted | §0, §4.1 | Explicit ownership transfer from `C-30` |
+| R17 | Accepted | §11.2, §14.2 | Resolved as **capture**, and therefore G2-gated |
+| R18 | Accepted | §7.6, §7.7 | 2 narrowing passes; probes count against G6 |
+| R19 | Accepted | §4.4 | Admissibility rule + both pair audits; produced the new A3/A8 domain rule |
+| R20 | Accepted | §4.3 (V-1…V-3) | Versioning and evidence migration |
+| R21 | Accepted | §12 R8 | Compaction to distinct-vector-set + counts |
+| R22 | Accepted | §9.3 Q1 | AT-1 minimum dwell, AT-2 prerequisite exception |
+| R23 | Accepted | §11.3 | `requiredEvidence[]` removed from `ArcConstraint` |
+| R24 | Accepted | §10.1, §10.2 | Explicit boundary statement; Tier B indicator marked contingent |
+| R25 | Accepted | §15 | A10 → PARTIAL; A15–A18 added, A18 owner-marked only |
+
+**Nice-to-haves:** NTH-1 accepted (§5.2, new law L0); NTH-2 accepted with a deliberately narrow
+carve-out (§6.3 M8); NTH-3 accepted (§5.3); NTH-4 accepted (§8.4 S4 anchor); NTH-5 accepted
+(§16 OQ-7 → §12 R12); NTH-6 accepted (Appendix A); NTH-7 accepted (§16 OQ-6 promoted).
+
+### C.3 Items modified rather than accepted as written
+
+Two, both recorded so the divergence is visible rather than buried.
+
+**R3 — modified.** The review asked that OQ-3 be *deleted*. It is instead retained as an
+explicitly closed record. Deleting it would erase the reasoning that produced the v1.1
+correction, and a future reader encountering the closure model would have no record of what it
+replaced or why. The substance of the instruction — OQ-3 must not remain an open question — is
+satisfied.
+
+**NTH-2 — modified.** The review asked for an arbitrary-convention carve-out to M8's
+prohibition. Accepted, but narrowed: the carve-out requires an explicit
+`arbitrary-convention` tag on the concept, and the tag requires that *no* derivation or reason
+for the convention exists. Without that gate the carve-out would swallow the rule — "the
+learner finds it hard" would become sufficient grounds for a mnemonic, which is exactly the
+substitution-for-understanding failure M8's prohibition exists to prevent.
+
+### C.4 Nothing rejected
+
+No review item was rejected. Two were modified as above; twenty-three of twenty-five required
+modifications plus all five critical findings and all thirteen important improvements were
+accepted as written.
+
+### C.5 New risk introduced by this revision
+
+The correction is not free. Replacing a flat threshold with a dependency matrix moves the
+failure mode from *too strict* to *possibly too permissive*: an entry marked as forcing when it
+is not turns L3 from a constraint into a licence. This is tracked as **R4b** and is now the
+operator's principal risk. It is a better risk than the one it replaces — an over-permissive
+constraint is measurable via mean closure size, whereas the v1.0 defect made correct teaching
+illegal — but it is a real cost of the fix and is recorded as such.
+
+---
+
+## Appendix D — Curriculum Feedback
+
+Findings about files this document does not own. Recorded, not fixed — editing another
+authority's file is what the governance rules forbid.
+
+**CF-1 · `educational-brain/decision-engine/04` Filter 2 taxonomy conflates two kinds of
+category.** Five of its six knowledge types are concept-intrinsic; `live misconception` is a
+property of a learner-concept pair. Filtering concept-intrinsic fit by a learner-state category
+produces incoherent selection. This document uses the five-member concept-intrinsic set and
+re-sites the sixth as learner state (§3.4.2). Recommendation to that file's owner: split the
+row explicitly rather than leaving the two mixed.
+
+**CF-2 · No knowledge-type field exists on the canonical Knowledge Graph.** Filter 2's taxonomy
+has no data behind it; the runtime's `inferConceptType(bloom)` yields a three-value proxy over
+a different construct (cognitive demand, not kind-of-knowledge). Any component filtering by
+knowledge type is inert today (§3.4.1). Recommendation to the Curriculum Production Pipeline:
+consider a knowledge-type field in a future canonical KG schema version. **G1-gated; not
+requested by this document.**
+
+**CF-3 · The voice instrument loss recorded in `foundations/03 §7` has a measurable
+consequence.** Two Gold Standard dimensions (S2, S5) and two re-teach triggers (T9, T10) are
+unavailable because timing and prosody are discarded at the transcription boundary. This
+document does not propose a fix — that is runtime work — but it does now quantify what the
+loss costs downstream (§3.4, §8.4).
