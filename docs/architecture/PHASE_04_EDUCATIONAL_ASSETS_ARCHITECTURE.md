@@ -256,11 +256,15 @@ disconnected.** EA-1 specifies the seam and nothing more.
 depending on who asks, and one number is reported. EA-2 defines coverage as a **vector over the
 four consumers** rather than a scalar, leaves `coveragePercent` untouched, and states the rule
 that makes the vector meaningful: sufficiency is per consumer, never global.
-**Scope, corrected in v4.0.1:** the vector's `teaching` component is **derived from EBC §8's
-E-codes, not defined here** — EBC owns build-time coverage under an explicit delegation from
-CEKR §11. EA-2's genuinely new content is the `visual` and `adaptive` components, for which EBC
-has no check, and the runtime prioritization framing EBC's release-blocking build check does not
-provide.
+**Scope, corrected in v4.0.1, extended in v4.0.2:** two of the vector's four components are
+**derived from EBC, not defined here** — EBC owns build-time coverage under an explicit
+delegation from CEKR §11. `teaching` is EBC's outright (E0501/E0502/E0503). `adaptive` is EBC's
+in part: **EBC already owns adaptive ladder validity and completeness** via E0506, E0507, §7.6's
+E0401/E0402 and §6.4's E0332. **`visual` is EA-2's only wholly new component**; `adaptive`
+contributes only the runtime depth-versus-need reading of a structure EBC has already validated,
+and where EA-2 and an E-code disagree, the E-code wins (SF-1). What remains genuinely EA-2's is
+`visual`, that narrow runtime reading, and the runtime prioritization framing EBC's
+release-blocking build check does not provide. §5.1 and §5.2 carry the full derivation.
 
 ### 1.3 What Phase 4 explicitly does not do
 
