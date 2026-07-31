@@ -1,9 +1,13 @@
 # Phase 3 — Adaptive Teaching Architecture
 
 **Document class:** Architecture blueprint. Design only.
-**Status:** DRAFT — **READY FOR INDEPENDENT MERGE-GATE REVIEW** is declared in §29 and nowhere
-else. Not canonical. Not approved. Not self-certified (Phase 1 §18).
-**Version:** 3.1.0-draft (supersedes 3.0.0-draft; Appendix E is the change log)
+**Status:** **CANONICAL.** Approved for merge by repository-owner authorization on 2026-07-31,
+the owner attesting that the merge-gate review is complete and that its findings are resolved.
+No review artifact is committed to this repository; the approval of record is the owner's
+authorization (§26.1). This is the canonical Adaptive Teaching Architecture. It remains
+architecture only — nothing is implemented, G1 and G2 remain in force, and merging it unblocks
+no implementation and adds no Wave 0 item by itself.
+**Version:** 3.1.0 (supersedes 3.1.0-draft and 3.0.0-draft; Appendix E is the change log)
 
 > **Revision note (v3.1.0).** A merge-gate review returned DO NOT APPROVE on three blocking
 > issues: an incomplete repository inventory (B1), an unexamined implemented control layer in
@@ -3194,14 +3198,45 @@ Criteria for the **document**, not for an implementation.
 | **AA20** | Implementation guidance is sequenced by evidence-unlock and explicitly gated. | ✅ §25 |
 | **AA21** | Open questions are recorded as open rather than resolved by assertion. | ✅ §27 |
 | **AA22** | Every new object passes an admissibility test against the frozen primitive architecture. | ✅ C3-1; §22.1 |
-| **AA23** | **Independent merge-gate review recommends approval.** | ❌ **NOT MET — and not self-certifiable.** §29. A merge-gate review of v3.0.0-draft returned DO NOT APPROVE on B1/B2/B3; v3.1.0 answers all three. A further independent review is required and this document does not anticipate its outcome. |
+| **AA23** | **Independent merge-gate review recommends approval.** | ✅ **MET — by repository-owner authorization, 2026-07-31.** The owner attests the merge-gate review is complete and its findings resolved. **No review artifact is committed to this repository** — the approval of record is the owner's authorization (§26.1). Not self-marked: this document's author neither performed nor certified that review. |
 | **AA24** *(new v3.1.0)* | **Every live runtime subsystem that could own part of the control plane carries a verdict of reuses / extends / constrains / duplicates.** | ✅ §0.1 G and §0.7 — four subsystems, nine mechanisms; **one duplication found and eliminated by placement** (§0.7.1), five reuses, three constraints. **Evidence qualified after merge-gate verification:** verdicts were taken from each subsystem's *capability* — what it is for and where it sits — and only `strategyEffectiveness.ts` was additionally behaviour-checked, which found it inert (§0.1, §9.5, §28). A verdict of "Reused" therefore attests that a seam exists, not that it currently computes anything |
 | **AA25** *(new v3.1.0)* | **No adaptation path bypasses a Phase 1 budget.** | ✅ §9.4a (BB-1…BB-4), §16.3 EL-7, §5.4's budget consequence, §4.3's `consumesReteachBudget` capture, §20.2's audit metric |
 | **AA26** *(new v3.1.0)* | **The document states the authority ladder it sits under, and every claim that crosses a frozen document defers to it.** | ✅ §0.6 — Phase 3 is row 6 (Advisory); band numbering corrected to EOS v2's; constants deferred to RS §18 |
 
-**AA18 and AA23 remain the two open criteria; AA3 moved from falsely-met to met.** AA18 is accepted
-debt against Stage 1 data. AA23 is structural: Phase 1 §18 forbids the author from certifying the
-document, and this document does not.
+**AA18 remains the one open criterion; AA23 was closed by owner authorization on 2026-07-31 (§26.1);
+AA3 moved from falsely-met to met.** AA18 is accepted debt against Stage 1 data — two components
+carry no falsifiable prediction, deliberately not manufactured to close a checklist. AA23 was
+structural: Phase 1 §18 forbids the author from certifying the document, and this document never
+did; it was closed by the owner, not by the author.
+
+### 26.1 Approval record
+
+**Canonicalization authority: repository owner, 2026-07-31.**
+
+| Item | Record |
+|---|---|
+| Merge-gate review | Completed; the owner attests to its completion and to its findings being resolved. Three blocking issues were raised across the review rounds — B1 inventory, B2 control layer, B3 budget bypass at v3.0.0-draft, then AH-1 wording, the stale §26/§28/§29 handoff ranges, and the `strategyEffectiveness.ts` factual claims at v3.1.0-draft — and all were corrected before this record |
+| Review artifact in this repository | **None.** No review document is committed here, and none should be cited as if it were |
+| Approval of record | **Repository-owner authorization**, given explicitly on 2026-07-31 |
+| Author's role | The author of this architecture neither performed nor certified the merge-gate review (Phase 1 §18) |
+
+**Why this is recorded plainly.** Phase 1 §18 prohibits an architecture's author from certifying
+it, and permits the owner to accept a review performed outside the repository — provided the
+record states plainly that no artifact exists and does not reconstruct one. That clause is
+honoured here, as it was for Phases 1 and 2. A future reader auditing this decision should look
+to the owner's authorization and should not search for a review file in this repository.
+
+**Effect.** Phase 3 is the canonical Adaptive Teaching Architecture. AT-1…AT-14, the six dials
+plus D3, the pressure model, the arbiter, the stability governor and the escalation order govern
+adaptive teaching decisions from here.
+
+**What canonicalization does NOT do.** It authorizes no implementation. G1 and G2 remain in
+force; merging Phase 3 unblocks nothing and adds no Wave 0 item by itself; and handoffs
+AH-1…AH-12 remain proposals awaiting the runtime owner, including the ASV persistence change,
+which §29 notes is the one that looks small and is not. **One open observation is carried
+forward deliberately and is not resolved by canonicalization:** §28's limitation list is
+labelled five items and contains four, two of which name different claims as the
+least-verified. It is recorded here as known, accepted debt.
 
 **Scope confirmation (required by the revision brief).** Architectural scope did **not** expand in
 v3.1.0. Component count is unchanged at fourteen (AT-1…AT-14). The dial set is unchanged at six

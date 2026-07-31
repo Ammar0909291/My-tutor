@@ -61,6 +61,35 @@ runtime owner): ADR 12 and ADR 14 carry different asset lifecycles (VF-5), and
 the Visual leaf rule's scope differs between `DEPENDENCY_RULES.md` and ADR 12
 §13 (VF-6).
 
+**Phase 3 canonicalized (2026-07-31).**
+`docs/architecture/PHASE_03_ADAPTIVE_TEACHING_ARCHITECTURE.md` v3.1.0 is
+**CANONICAL** — the Adaptive Teaching Architecture. Same approval basis:
+repository-owner authorization, no review artifact committed (its §26.1 is the
+approval record).
+
+It is the first phase document to consult `docs/architecture/README.md`, the
+repository's **Authority Index**, and to file itself against it: Phase 3 records
+that it — and Phases 1 and 2 — sit at row 6 (**Advisory**), below the frozen EOS
+documents. Where a phase document and a frozen EOS document disagree, **the
+frozen document wins**. It also corrected its own band targets to EOS v2's seven
+bands (implemented as `BandId = 0…6` in `src/lib/kernel/policy/types.ts`) rather
+than eos-v3's four-band summary.
+
+For anyone reading this registry: the adaptive control plane is the runtime
+owner's territory. Phase 3 authored nothing inside it — its stability governor
+is authored as Band-2 subtractive rules in the existing policy pack, not as a
+second evaluator. Its twelve handoffs AH-1…AH-12 are proposals awaiting that
+owner, including the ASV persistence change. **G1 and G2 remain in force;
+merging Phase 3 unblocks no implementation and adds no Wave 0 item.**
+
+It records three contradictions it found but did not fix, all for the runtime
+owner: AC-1 and AC-2 (§0.4), and AC-3 — `ENGINE_REFERENCE.md` #16 documents
+`teachingOutputBias.ts` as computing output bias when the file is a 13-line stub
+whose every export returns a constant (AH-9 proposes the documentation fix).
+It further records that Engine 17 documents `teachingStyle.ts`, which does not
+exist on disk. ISS-01 remains **BLOCKED** and Phase 3 explicitly does not
+resolve it.
+
 **Branch reality (quantified)**:
 | Branch | blueprints | educational-brain/*.md | teaching *.ts | Role |
 |---|---|---|---|---|
@@ -141,6 +170,7 @@ by reference or route feedback to the owner — never re-implement.
 | Teaching Asset Philosophy | Pappu | math-linalg | `docs/curriculum/TEACHING_ASSET_PHILOSOPHY.md` | ACTIVE | **YES** |
 | **Phase 1 Teaching Quality Architecture** | Pappu | `claude/teaching-quality-architecture-xd00jx` → main | `docs/architecture/PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` | **CANONICAL** (v1.2.0, 2026-07-31) | **YES** |
 | **Phase 2 Visual Intelligence Architecture** | Pappu | `architecture/phase-02-visual-intelligence` → main | `docs/architecture/PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md` | **CANONICAL** (v2.1.0, 2026-07-31) | **YES** |
+| **Phase 3 Adaptive Teaching Architecture** | Pappu | `claude/adaptive-teaching-architecture-3e7sz9` → main | `docs/architecture/PHASE_03_ADAPTIVE_TEACHING_ARCHITECTURE.md` | **CANONICAL** (v3.1.0, 2026-07-31) | **YES** |
 | Educational Brain tree | Mohammad | foundation | `educational-brain/` | FROZEN framework | **YES** (extend by reference) |
 | Decision Engine | Mohammad | foundation | `educational-brain/decision-engine/` | FROZEN | **YES** |
 | Teaching Engine / Runtime | Mohammad | foundation | `src/lib/teaching*`, route.ts | FROZEN | **YES** |
