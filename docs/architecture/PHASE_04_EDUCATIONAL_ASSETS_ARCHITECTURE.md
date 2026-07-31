@@ -3,7 +3,7 @@
 **Document class:** Architecture blueprint. Design only.
 **Status:** DRAFT — pending independent merge-gate review. Not canonical. Not approved. Not
 self-certified (Phase 1 §18).
-**Version:** 4.0.0-draft
+**Version:** 4.0.1-draft (supersedes 4.0.0-draft; corrects the B1 sufficiency-ownership finding)
 **Phase:** 04 (`architecture/phase-04-educational-assets`)
 **Builds on:** Phase 1 v1.2.0, Phase 2 v2.1.0, Phase 3 v3.1.0 — all CANONICAL, all binding, none
 modified.
@@ -32,11 +32,17 @@ no implementation and adds no Wave 0 item.
 > And the last item — the prioritized authoring work queue this phase was closest to inventing —
 > **already exists and runs**, in `src/lib/teaching/assets/contentQualityDashboard.ts`.
 >
-> Phase 4 therefore designs **no asset system**. It reconciles the territory, records four
-> contradictions it found and did not fix, and specifies **two narrow integration seams** that
-> genuinely have no owner: authored demand has no path into the live work queue (§4), and
-> "sufficiently covered" means four different things to four consumers with no reconciliation
-> (§5). Everything else is a pointer to an existing owner.
+> Phase 4 therefore designs **no asset system**. It reconciles the territory, records five
+> contradictions and gaps it found and did not fix, and specifies **two narrow integration
+> seams**: authored demand has no path into the live work queue (§4), and no component ranks
+> a concept's sufficiency *per consumer at runtime* (§5). Everything else is a pointer to an
+> existing owner.
+>
+> **Corrected in v4.0.1.** v4.0.0-draft claimed sufficiency had no owner at all. It does:
+> **CEKR §11 delegates coverage rules to EBC §8**, which enforces them as release-blocking
+> build errors (E0501/E0502/E0503, E0512, D15). §5 is narrowed to the runtime per-consumer
+> question EBC does not answer, and the ownership map is corrected. The error was reconciling
+> EBC by its role rather than by what it selected — see CT-5.
 >
 > A Phase 4 that designed an asset architecture would have duplicated a Frozen document and a
 > live subsystem simultaneously. That outcome was avoided by reading source, which is the
@@ -95,7 +101,7 @@ Verdicts: **Reused** · **Extended** · **Complemented** · **Superseded** · **
 | Authority | Owns | Verdict |
 |---|---|---|
 | `EDUCATIONAL_BRAIN_AUTHORING_SDK` | BrainScript DSL · Brain IDE · author workflow · multi-author collaboration · Brain QA · AI-assisted authoring with rails · repository organization · migration · testing | **Reused — owns authoring.** Verified against its section list: it owns *how a human authors an asset*. It contains **no prioritization section** — which is consistent with §4's finding that prioritization lives in the runtime, not the SDK |
-| `EDUCATIONAL_BRAIN_COMPILER` | Brain → runtime compilation, `brain.lock` | **Reused** — Phase 4 defines no compilation step |
+| **`EDUCATIONAL_BRAIN_COMPILER`** §8 | Brain → runtime compilation and `brain.lock` — **and, decisively for this phase, the Validation Pipeline: EBC §8 owns release-mode coverage validation.** The build FAILS in release mode on any E-code: **E0501** every concept has ≥1 explanation content source ("no concept without a voice") · **E0502** misconception coverage, ≥1 bound misconception or an explicit HUM-reviewed `misconceptionCoverage: none-known` attestation ("silence is not coverage") · **E0503** assessment coverage per §6.4 (gate/retention/transfer) · **E0512** every `::todo` hole absent in release mode or inventoried in a dev-mode report · **D15** the instrumented-skeleton doctrine, which permits incomplete constellations in dev builds and blocks them at release | **Reused — and it owns build-time coverage sufficiency** | Corrected v4.0.1. v4.0.0-draft's verdict read "Reused — Phase 4 defines no compilation step", which reconciled EBC by its *role* rather than by what it *selected* — Phase 1 §17.2's "reconciling the citation, not the design" anti-pattern. **EBC §8 is the sufficiency authority for the build-time question**, and §5 is narrowed accordingly. See CT-5 |
 | `OUTCOME_SCIENCE_FRAMEWORK` | Outcome constructs, experiment design, causal attribution | **Complemented** — Phase 4 defines no outcome metric |
 | `docs/curriculum/TEACHING_ASSET_PHILOSOPHY.md` | The "encode teaching not content" doctrine, AI-Removal Test | **Reused** — Pappu-owned; Phase 4 restates none of it |
 | `docs/curriculum/TEACHING_BLUEPRINT_SPECIFICATION.md`, `PRIMITIVE_LIBRARY.md` | Blueprint authoring contract; ~91 primitives | **Reused** |
@@ -141,9 +147,12 @@ The core deliverable of this reconciliation. Each item, its owner, and what Phas
 | 15 | **Visual Intelligence interaction** | **Phase 2** + ADR 12 | §6.2 — the seam only |
 | 16 | **Adaptive Teaching interaction** | **Phase 3** | §6.3 — the seam only |
 | — | *(not in the brief)* **Authoring prioritization** | **`contentQualityDashboard.ts`** (live) | §4 — the routing seam |
-| — | *(not in the brief)* **Sufficiency** | **nobody** | §5 — the one genuinely unowned definition |
+| — | *(not in the brief)* **Sufficiency** | **PARTIAL — `EBC` §8** owns the **build-time release** question: is this subject shippable (E0501/E0502/E0503, E0512, D15). **CEKR §11 delegates to it explicitly** (CT-5) | §5 — **only** the runtime, per-consumer prioritization vector EBC does not provide, and within that only the `visual` and `adaptive` components EBC has no check for |
 
-**Sixteen of sixteen briefed items are owned. Phase 4 designs two seams and nothing else.**
+**Sixteen of sixteen briefed items are owned, and the seventeenth — sufficiency — is partially
+owned by EBC §8.** Phase 4 designs two seams and nothing else, and one of those seams (§5) is
+narrower than v4.0.0-draft claimed: it does not define teaching sufficiency, because EBC already
+does.
 
 ### 0.3 Ownership boundary and handoffs
 
@@ -197,6 +206,25 @@ exists but derives exclusively from serving telemetry — `totalServed`, `groq_f
 no authored-demand input. The two systems are disconnected, and neither document says so. This
 is the observation §4 is built on. Not resolved — §4 defines the seam without changing either side.
 
+**CT-5 · CEKR delegates coverage to EBC, and v4.0.0-draft missed the delegation** *(recorded
+v4.0.1; this is not a contradiction between owners but a reconciliation gap in this document,
+recorded here so the correction is auditable).* CEKR §11 states verbatim:
+
+> *"Coverage rules (concept has explanation/misconception/assessment) remain the **compiler's**
+> release-mode checks (EBC §8) — CEKR permits incomplete constellations (skeleton authoring, D15)
+> but never *invalid* elements. The division of labor: CEKR validation = 'is this element
+> well-formed and honestly claimed'; EBC validation = 'is this subject shippable'."*
+
+CEKR §4 reinforces it — the absence of an EXPLAINS edge is "coverage lint territory" — and
+CEKR-M2's roadmap milestone names a "coverage dashboard over real data".
+
+So the sufficiency question has **two** owners, split by time:
+**EBC §8 owns build-time sufficiency** ("is this subject shippable" — binary, per concept,
+release-blocking), and **nothing owns runtime per-consumer prioritization** ("which of four
+consumers is this concept sufficient *for*, and how should that rank authoring work"). §5 is
+scoped to the second only. Not resolved — the delegation is correct and needs no fixing; what
+needed fixing was this document's failure to read it, now done.
+
 ---
 
 ## 1. Executive Summary
@@ -223,8 +251,13 @@ disconnected.** EA-1 specifies the seam and nothing more.
 
 **EA-2 · Sufficiency (§5).** "Is this concept covered?" has four different correct answers
 depending on who asks, and one number is reported. EA-2 defines coverage as a **vector over the
-four consumers** rather than a scalar, leaves `coveragePercent` untouched, and states the one
-rule that makes the vector meaningful: sufficiency is defined per consumer, never globally.
+four consumers** rather than a scalar, leaves `coveragePercent` untouched, and states the rule
+that makes the vector meaningful: sufficiency is per consumer, never global.
+**Scope, corrected in v4.0.1:** the vector's `teaching` component is **derived from EBC §8's
+E-codes, not defined here** — EBC owns build-time coverage under an explicit delegation from
+CEKR §11. EA-2's genuinely new content is the `visual` and `adaptive` components, for which EBC
+has no check, and the runtime prioritization framing EBC's release-blocking build check does not
+provide.
 
 ### 1.3 What Phase 4 explicitly does not do
 
@@ -375,14 +408,27 @@ figure and Phase 4 proposes no change to it.
 
 It is not a sufficiency test, and four consumers need four different ones:
 
-| Consumer | "Sufficient" means |
-|---|---|
-| Phase 1 teaching quality | an explanation exists **and** a probe with misconception-mapped distractors |
-| Phase 2 visual intelligence | for each visual purpose the concept genuinely needs, a form serving that purpose |
-| Phase 3 adaptive teaching | enough hint-ladder rungs and scaffold levels to fade support |
-| Runtime serving | any ACTIVE asset matching learner language and grade band |
+| Consumer | "Sufficient" means | Already owned? |
+|---|---|---|
+| Phase 1 teaching quality | an explanation exists **and** a probe with misconception-mapped distractors | **YES — EBC §8**: E0501 explanation source, E0502 misconception coverage, E0503 assessment coverage |
+| Phase 2 visual intelligence | for each visual purpose the concept genuinely needs, a form serving that purpose | **NO** — EBC §8 has no visual-purpose check |
+| Phase 3 adaptive teaching | enough hint-ladder rungs and scaffold levels to fade support | **NO** — EBC §8 has no ladder-depth check |
+| Runtime serving | any ACTIVE asset matching learner language and grade band | **PARTIAL** — `coveragePercent` at subject scale |
 
 A concept can be 100% covered by the live metric and insufficient for three of the four.
+
+**Scope correction (v4.0.1).** v4.0.0-draft treated all four components as Phase 4's to define.
+The `teaching` component is not: **EBC §8 already defines it as release-blocking build errors**,
+under an explicit delegation from CEKR §11 (CT-5). EA-2 is narrowed to what EBC does not answer,
+and the distinction is one of **time and purpose**, not of subject matter:
+
+> **EBC §8 answers a build-time, binary, release-blocking question — "is this subject
+> shippable?" EA-2 answers a runtime, graded, prioritization question — "for which consumer is
+> this concept sufficient *right now*, and how should that rank authoring work?"**
+
+A subject can pass every E-code and still be a poor place for the next authoring hour; a subject
+can fail E0501 on a concept no learner reaches. Those are different questions with different
+consumers, and EA-2 owns only the second.
 
 ### 5.2 What EA-2 specifies
 
@@ -390,26 +436,41 @@ A concept can be 100% covered by the live metric and insufficient for three of t
 
 ```
  SufficiencyVector (per concept, per language, per grade band)
-   teaching     satisfied | partial | absent    — Phase 1's needs
-   visual       satisfied | partial | absent    — Phase 2's, per purpose
-   adaptive     satisfied | partial | absent    — Phase 3's, per ladder
-   serving      satisfied | absent              — any ACTIVE match
+   teaching     satisfied | partial | absent    — DERIVED FROM EBC §8's
+                                                  E0501/E0502/E0503. Not defined here
+   visual       satisfied | partial | absent    — Phase 2's, per purpose   ★ new
+   adaptive     satisfied | partial | absent    — Phase 3's, per ladder    ★ new
+   serving      satisfied | absent              — any ACTIVE match; coveragePercent
+                                                  at subject scale
 ```
 
-**Four rules:**
+★ = the two components EBC §8 has no check for. They are EA-2's only genuinely new content.
 
-- **SF-1 · Each consumer defines its own component; no other party may.** Phase 2 decides what
-  visual sufficiency means, because only Phase 2 knows which purposes a concept needs. Phase 4
-  defines the *shape*, never the thresholds.
+**Four rules, two of them corrected in v4.0.1:**
+
+- **SF-1 · Each consumer defines its own component — except `teaching`, which EBC §8 already
+  defines.** *(Corrected v4.0.1.)* v4.0.0-draft read "no other party may", which conflicted
+  directly with E0501–E0503 defining three teaching criteria centrally as compile errors. The
+  corrected rule: **`teaching` is derived from EBC's E-codes and MUST NOT be redefined here** — a
+  concept failing E0501 is not `satisfied` on `teaching`, and Phase 4 asserts no threshold of its
+  own. `visual` and `adaptive` are defined by Phase 2 and Phase 3 respectively, because only they
+  know which purposes and which ladder depths a concept needs. Phase 4 defines the *shape* of the
+  vector and nothing else. **Where EA-2 and an E-code disagree about `teaching`, the E-code
+  wins.**
 - **SF-2 · `coveragePercent` is unchanged and reinterpreted.** It is the `serving` component at
   subject scale. It remains a valid health figure; it is simply not the sufficiency test, and
   should not be read as one.
 - **SF-3 · There is no global sufficiency score.** Collapsing the vector to one number reproduces
   the defect. A concept is sufficient *for a consumer*, and the honest report is the vector.
-- **SF-4 · `absent` is not a defect on its own.** Most concepts will be `absent` for most
-  components for a long time (Phase 1 R1 rates empty libraries "Certain"). Sufficiency is a
-  gradient that ranks work, never a launch gate — and never a quality judgement on a lesson that
-  taught successfully via a fallback.
+- **SF-4 · `absent` is not a defect on its own — at runtime. At release, EBC decides.**
+  *(Corrected v4.0.1.)* v4.0.0-draft stated the runtime half only and presented it as new; it is
+  not, and the omission mattered because EBC already draws this line. **EBC's D15
+  instrumented-skeleton doctrine permits incomplete constellations in dev builds and blocks them
+  at release**, and E0512 inventories `::todo` holes in a dev-mode report while making them
+  release-blocking. EA-2 adopts that split rather than restating it: `absent` is a ranking input
+  at runtime and carries no judgement on a lesson that taught successfully via a fallback, **and
+  it is release-blocking wherever an E-code says so.** Phase 4 does not soften a build error, and
+  a sufficiency vector showing `absent` never licenses shipping a subject EBC would fail.
 
 ### 5.3 What EA-2 does not specify
 
@@ -484,7 +545,7 @@ directs that a gap in a Frozen document is filed against it, not covered by inve
 |---|---|---|
 | EA-A1 | Phase 1 §17's seven-step reconciliation executed **before** architecture was written | ✅ §11 |
 | EA-A2 | Every architecture authority carries exactly one verdict, from a directory listing | ✅ §0.1 |
-| EA-A3 | All sixteen brief items mapped to an owner | ✅ §0.2 — sixteen of sixteen owned |
+| EA-A3 | All sixteen brief items mapped to an owner, **and every non-briefed item too** | ✅ §0.2 — sixteen of sixteen briefed items owned; the seventeenth (sufficiency) is **partially owned by EBC §8**, corrected in v4.0.1 after a merge-gate review found v4.0.0-draft's "nobody" false |
 | EA-A4 | The Authority Index is consulted and this document's row stated | ✅ header, §0.1 A, EP1 |
 | EA-A5 | No Frozen document contradicted; contradictions recorded, not resolved | ✅ §0.4 CT-1…CT-4 |
 | EA-A6 | Runtime claims behaviour-checked, not inferred from filenames | ✅ §0.1 D — 21 files opened |
@@ -536,7 +597,7 @@ Phase 1 §17, executed in full **before** design work.
 | 2 · Governance registry | Read | AssetIdentity pipeline = runtime owner, COMPLETE, never rebuild; Teaching Asset Philosophy = Pappu → §0.3, EH-1…EH-5 |
 | 3 · ADR reconciliation | Read what each **selected**, not what it diagnosed | ADR 14's lifecycle, ADR 13's `CuratorQueueEntry` triggers read literally — all three are degradation triggers, none is absence. That single check produced §4 |
 | 4 · Document reconciliation | One verdict per authority; Frozen documents read in substance | **CEKR owns nine of the sixteen brief items outright.** Superseded used zero times |
-| 5 · Ownership verification | One owner per responsibility | §0.2 — sixteen of sixteen owned |
+| 5 · Ownership verification | One owner per responsibility | §0.2. **Re-run in v4.0.1:** the first pass assigned EBC a verdict from its role and missed that EBC §8 owns build-time coverage sufficiency. Corrected; sufficiency is now recorded as partially owned |
 | 6 · Authority verification | Checked every decision for a second decider | Two seams found unowned; **the third candidate — a prioritized authoring queue — was found already implemented**, which is the anti-pattern "inventing an existing class" caught before writing |
 | 7 · Independent review | Not performed by the author | §12 |
 
@@ -548,9 +609,12 @@ duplicating a live subsystem.**
 
 **Honest limitations.** Four, stated so a reviewer knows where to press hardest:
 
-1. **CEKR was read at section level plus §2.1, §2.2, §3, §8, §10, §11 and §13 in detail.** Its
-   31 kinds and V-1…V-16 were not enumerated individually. If a kind or validation rule already
-   defines sufficiency, §5 is duplicative — the single most likely way this document is wrong.
+1. **This limitation fired, and is now partly closed.** v4.0.0-draft warned: *"If a kind or
+   validation rule already defines sufficiency, §5 is duplicative — the single most likely way
+   this document is wrong."* A merge-gate review found exactly that: CEKR §11 delegates coverage
+   to EBC §8, which defines it as E0501/E0502/E0503. §5 is narrowed accordingly (CT-5). **What
+   remains open:** CEKR's 31 kinds and V-1…V-16 are still not enumerated individually, so a
+   further kind-level definition of sufficiency cannot be ruled out.
 2. **The five seed asset files (~78,000 lines total) were checked for size and character only.**
    They are content, but if any encodes coverage policy, §5 is under-reconciled.
 3. **`buildWorkQueue()`'s ordering logic was read, not exhaustively traced.** DR-1 asserts
@@ -618,6 +682,13 @@ computes; the name invites over-reading. *For the runtime owner.*
 **EF-4 · `CuratorQueueEntry` has no absence trigger** (CT-4). All three triggers are degradation
 signals. Phase 4 routes absence elsewhere (DR-4, EH-3) rather than proposing a fourth trigger,
 but the asymmetry is worth an explicit note in ADR 13. *For the runtime owner.*
+
+**EF-6 · The CEKR → EBC coverage delegation is correct and easy to miss.** CEKR §11 hands
+coverage rules to EBC §8 in a single sentence inside a validation section, and EBC §8 states them
+as E-codes inside a build-error table. Neither document indexes "coverage" or "sufficiency" as a
+named concern, and this document reconciled both and still missed the delegation on its first
+pass (CT-5). No change is requested — the division of labour is sound. A cross-reference in
+either direction would make it findable. *For CEKR's owner and the runtime owner.*
 
 **EF-5 · `contentQualityDashboard.ts` is undocumented in the architecture corpus.** A live,
 348-line subsystem implementing coverage measurement and a prioritized authoring queue appears in
