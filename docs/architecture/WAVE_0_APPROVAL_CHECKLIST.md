@@ -118,3 +118,27 @@ gated items and approved individually, in dependency order:
 
 Phase 1's other cross-owner handoffs (H-2…H-6, §0.3) are likewise proposals
 awaiting the runtime owner and are not approved by canonicalization.
+
+---
+
+## Phase 2 Visual Intelligence Architecture — items not yet listed
+
+`PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md` became **CANONICAL** on
+2026-07-31 (v2.1.0). As with Phase 1, canonical means the architecture is
+agreed; it authorizes **no implementation**. Its §17 defines seven
+evidence-ordered stages, and **none has an approval item here** — so all seven
+remain architecture-only by default.
+
+| Proposed ID | Stage (Phase 2 §17) | Notes |
+|---|---|---|
+| P2-1 | V1 — record purpose, claim and contraindication codes per turn | No behaviour change. Makes the decorative-visual rate measurable for the first time. Prerequisite for P2-3. |
+| P2-2 | V2 — VD-9 offline pedagogical quality evaluation | Read-only over recorded trajectories. |
+| P2-3 | V3 — VD-1 admission test as a constraint | First learner-visible change. Gated on V1 data + an agreed contraindication set. |
+| P2-4 | V4 — `VisualIntent` projection (handoff VH-1) | Additive and back-compatible; `visual_type` stays derivable. |
+| P2-5 | V5 — VD-7 fallback ladder | |
+| P2-6 | V6 — withdrawal probes + mastery gates MG-1/MG-2 | Deliberately late: it lowers reported mastery, and should land only when surrounding measurement is trustworthy. |
+| P2-7 | V7 — VP-I/VP-J interaction instrumentation | Requires interactive infrastructure that is **W4-2 territory**. |
+
+**W4-2 is unchanged and remains gated.** Phase 2's canonicalization does not
+unblock it. Phase 2's eight cross-owner handoffs (VH-1…VH-8, §0.3) are likewise
+proposals awaiting the runtime owner and are not approved by canonicalization.
