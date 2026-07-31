@@ -562,3 +562,17 @@ on advancement. One ownership transfer is recorded: `C-30`'s per-learner approac
 to TQ-4's typed failed-attempt set (Phase 1 §4.1, handoff H-2).
 
 Architecture only — no implementation is authorized by its canonicalization.
+
+**Phase 2 — Visual Intelligence Architecture** ·
+`../PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md` · **CANONICAL** (v2.1.0, 2026-07-31)
+
+Extends Phase 1 with the *pedagogical* visual tier: whether a visual appears (default no, with
+ten enumerated contraindications), why (a closed ten-purpose taxonomy, each visual carrying a
+one-sentence claim), and which form class. The *production* tier — renderers, cache, validators,
+asset lifecycle, rendered state — remains ADR 12/14/15's and is consumed by reference.
+
+Two one-directional projections cross the tier boundary: `VisualIntent` downward and
+`VisualAvailability` upward. Neither is a call, so the Visual tier still calls into nothing and
+ADR 12 §13's leaf rule holds verbatim.
+
+Architecture only — authorizes no implementation; W4-2 remains gated.

@@ -1,9 +1,13 @@
 # Phase 2 — Visual Intelligence Architecture
 
 **Document class:** Architecture blueprint. Design only.
-**Status:** DRAFT — **READY FOR INDEPENDENT MERGE-GATE REVIEW.** Not approved, not merged, not
-implemented. **The author may not self-certify merge readiness** (Phase 1 §18).
-**Version:** 2.1.0-draft (supersedes 2.0.0-draft; Appendix D is the change log)
+**Status:** **CANONICAL.** Approved for merge by repository-owner authorization on 2026-07-31,
+the owner attesting that the merge-gate review is complete and that v2.1.0 resolves its
+findings. No review artifact is committed to this repository; the approval of record is the
+owner's authorization (§18.1). This is the canonical Visual Intelligence Architecture. It
+remains architecture only — nothing is implemented, all stages stay G1/G2 gated, and W4-2
+remains gated.
+**Version:** 2.1.0 (supersedes 2.1.0-draft and 2.0.0-draft; Appendix D is the change log)
 **Owner:** Pappu (Chief Architect track)
 **Phase:** 02 of the phased architecture program (`architecture/phase-02-visual-intelligence`)
 **Builds on:** Phase 1 Teaching Quality Architecture v1.2.0 (CANONICAL) — extended, never modified
@@ -1301,15 +1305,41 @@ Criteria for the **document**, not an implementation.
 | V-A15 | Phase 1 §17's reconciliation procedure executed and recorded | ✅ §20 |
 | V-A16 | Extensibility defined for new purposes, forms and modalities | ✅ §16.4 |
 | V-A17 | Every component declares a falsifiable prediction or failure signature | ⚠️ **PARTIAL** — VD-1, VD-2, VD-6 and VD-7 carry them; VD-3 and VD-8 express falsifiability only through failure modes. Not manufactured to close the checklist |
-| V-A18 | **Independent merge-gate review recommends approval** | ❌ **NOT MET, AND NOT SELF-MARKABLE** (Phase 1 §18) |
+| V-A18 | **Independent merge-gate review recommends approval** | ✅ **MET — by repository-owner authorization, 2026-07-31.** The owner attests the merge-gate review is complete and that v2.1.0 resolves its four blocking findings. **No review artifact is committed to this repository** — the approval of record is the owner's authorization (§18.1). Not self-marked: the author did not certify this. |
 | V-A19 | **No Phase 1 content is modified, and no Phase 1 closed set is extended** | ✅ §4.3.1 — v2.0.0 extended G7's closed set; v2.1.0 removes the extension entirely. Phase 1 is byte-identical |
 | V-A20 | **Every proposed change in another owner's territory is an explicit handoff** | ✅ §0.3 VH-1…VH-8 — VH-7 and VH-8 added in v2.1.0 to cover the availability projection and the learner-model field |
 | V-A21 | **Contradictions found between reused authorities are recorded, not smoothed** | ✅ §0.4 (ADR 12 vs ADR 14 lifecycles); §0.1 (`DEPENDENCY_RULES` leaf scope) |
 | V-A22 | **Scalability is treated and the authoring space is sized honestly** | ✅ §16.3 |
 
-**Status: DRAFT — READY FOR INDEPENDENT MERGE-GATE REVIEW.** Twenty of twenty-two met, V-A17
-PARTIAL (VD-3 and VD-8 still lack falsifiable predictions; deliberately not manufactured), and
-V-A18 unmet by construction and not self-markable.
+**Status: CANONICAL.** Twenty-one of twenty-two met; **V-A17 remains PARTIAL** — VD-3 and VD-8
+still lack falsifiable predictions, deliberately not manufactured to close a checklist. It is
+carried forward as known, accepted debt against Stage V1 data rather than closed by assertion.
+
+### 18.1 Approval record
+
+**Canonicalization authority: repository owner, 2026-07-31.**
+
+| Item | Record |
+|---|---|
+| Merge-gate review | Completed; the owner attests to its completion and to v2.1.0 resolving its four blocking findings (B1–B4, Appendix D) |
+| Review artifact in this repository | **None.** No review document is committed here, and none should be cited as if it were |
+| Approval of record | **Repository-owner authorization**, given explicitly on 2026-07-31 |
+| Author's role | The author did not certify this document (Phase 1 §18). The author's own review of v2.0.0 was explicitly disclosed as non-independent and returned DO NOT APPROVE; v2.1.0 answers all four of its blocking findings |
+
+**Why this is recorded plainly.** Phase 1 §18 prohibits an architecture's author from
+certifying it, and permits the owner to accept a review performed outside the repository —
+provided the record states plainly that no artifact exists and does not reconstruct one. That
+clause is honoured here. A future reader auditing this decision should look to the owner's
+authorization and should not search for a review file in this repository.
+
+**Effect.** Phase 2 is the canonical Visual Intelligence Architecture. Its purpose taxonomy
+(§5.2), contraindications (§4.3), VisualIntent and VisualAvailability projections (§7), fallback
+ladder (§10.2) and mastery gates (§9.2) govern visual teaching decisions from here.
+
+**What canonicalization does NOT do.** It authorizes no implementation. Every stage remains
+G1/G2 gated; **W4-2 remains gated and is not unblocked**; and handoffs VH-1…VH-8 remain
+proposals awaiting the runtime owner's acceptance. Canonical means *this is the agreed
+architecture*, not *this may now be built*.
 
 ---
 

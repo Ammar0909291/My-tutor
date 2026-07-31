@@ -39,6 +39,28 @@ Canonical means *this is the agreed architecture*, **not** *this may now be
 built*: every component remains G1/G2 gated, and its §0.3 handoffs H-1…H-6
 into runtime territory remain proposals awaiting the runtime owner.
 
+**Phase 2 canonicalized (2026-07-31).**
+`docs/architecture/PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md` v2.1.0 is
+**CANONICAL** — the Visual Intelligence Architecture. Same approval basis:
+repository-owner authorization, no review artifact committed (its §18.1 is the
+approval record).
+
+It designs only the **pedagogical** visual tier — whether a visual appears, why
+(a closed ten-purpose taxonomy), and which form class — and consumes the
+**production** tier (ADR 12 renderers/cache/validators, ADR 14 lifecycle, ADR 15
+rendered state) by reference. Two one-directional projections cross the tier
+boundary and neither is a call, so ADR 12 §13's leaf rule holds verbatim.
+
+For anyone reading this registry: Visualization/Simulation remains the runtime
+owner's territory. Phase 2 authored nothing inside it; its eight handoffs
+VH-1…VH-8 are proposals awaiting that owner. **W4-2 remains gated — Phase 2's
+canonicalization does not unblock visual implementation.**
+
+It also records two contradictions it found but did not fix (both belong to the
+runtime owner): ADR 12 and ADR 14 carry different asset lifecycles (VF-5), and
+the Visual leaf rule's scope differs between `DEPENDENCY_RULES.md` and ADR 12
+§13 (VF-6).
+
 **Branch reality (quantified)**:
 | Branch | blueprints | educational-brain/*.md | teaching *.ts | Role |
 |---|---|---|---|---|
@@ -118,6 +140,7 @@ by reference or route feedback to the owner — never re-implement.
 | Blueprint Specification | Pappu | math-linalg | `docs/curriculum/TEACHING_BLUEPRINT_SPECIFICATION.md` | ACTIVE | **YES** |
 | Teaching Asset Philosophy | Pappu | math-linalg | `docs/curriculum/TEACHING_ASSET_PHILOSOPHY.md` | ACTIVE | **YES** |
 | **Phase 1 Teaching Quality Architecture** | Pappu | `claude/teaching-quality-architecture-xd00jx` → main | `docs/architecture/PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` | **CANONICAL** (v1.2.0, 2026-07-31) | **YES** |
+| **Phase 2 Visual Intelligence Architecture** | Pappu | `architecture/phase-02-visual-intelligence` → main | `docs/architecture/PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md` | **CANONICAL** (v2.1.0, 2026-07-31) | **YES** |
 | Educational Brain tree | Mohammad | foundation | `educational-brain/` | FROZEN framework | **YES** (extend by reference) |
 | Decision Engine | Mohammad | foundation | `educational-brain/decision-engine/` | FROZEN | **YES** |
 | Teaching Engine / Runtime | Mohammad | foundation | `src/lib/teaching*`, route.ts | FROZEN | **YES** |
