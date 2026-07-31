@@ -3,7 +3,21 @@
 **Document class:** Architecture blueprint. Design only.
 **Status:** DRAFT — **READY FOR INDEPENDENT MERGE-GATE REVIEW** is declared in §29 and nowhere
 else. Not canonical. Not approved. Not self-certified (Phase 1 §18).
-**Version:** 3.0.0-draft
+**Version:** 3.1.0-draft (supersedes 3.0.0-draft; Appendix E is the change log)
+
+> **Revision note (v3.1.0).** A merge-gate review returned DO NOT APPROVE on three blocking
+> issues: an incomplete repository inventory (B1), an unexamined implemented control layer in
+> `src/lib/kernel/` and `src/lib/eos-runtime/` (B2), and a route by which a dial move could
+> bypass Phase 1's re-teach budget (B3). **No component was redesigned.** AT-1…AT-14 keep their
+> responsibilities, their dials, their rules and their contracts. What changed is verification and
+> placement: §0.1 now classifies every architecture authority including the authority index
+> itself; §0.6 records the authority ladder Phase 3 sits under and reconciles a band-numbering
+> divergence the first draft did not notice; §0.7 reconciles the four runtime subsystems B2 named,
+> and finds **reuse in five of six cases and one duplication, eliminated by placement**; and §9.4a
+> closes the budget hole while §16.1 narrows the missing-rung claim from six dials to four, which
+> is what the evidence supports. The single largest consequence of B2 is that D4 and D5 turn out
+> to be **existing normative BrainConfig budget keys with a live implementation**, which makes
+> them reuse rather than invention and shrinks this phase's novelty claim accordingly.
 **Owner:** Pappu (Chief Architect track)
 **Phase:** 03 of the phased architecture program (`architecture/phase-03-adaptive-teaching`)
 **Builds on:** Phase 1 Teaching Quality Architecture v1.2.0 (CANONICAL) and Phase 2 Visual
@@ -22,7 +36,7 @@ a request for implementation approval.
 
 ## Table of Contents
 
-0. [Reconciliation Map](#0-reconciliation-map) — §0.1 inventory · §0.2 the canonical adaptation stack · §0.3 ownership boundary and handoffs · §0.4 contradictions between reused authorities · §0.5 the brief's scope items, mapped
+0. [Reconciliation Map](#0-reconciliation-map) — §0.1 inventory · §0.2 the canonical adaptation stack · §0.3 ownership boundary and handoffs · §0.4 contradictions between reused authorities · §0.5 the brief's scope items, mapped · **§0.6 authority-ladder compliance and the band-numbering reconciliation** *(new in v3.1.0)* · **§0.7 runtime control-layer reconciliation** *(new in v3.1.0)*
 1. [Executive Summary](#1-executive-summary)
 2. [Design Principles](#2-design-principles)
 3. [System Overview and Layer Model](#3-system-overview-and-layer-model)
@@ -53,7 +67,7 @@ a request for implementation approval.
 28. [Reconciliation Procedure Execution Record](#28-reconciliation-procedure-execution-record)
 29. [Merge Requirements](#29-merge-requirements)
 
-Appendices: A Glossary · B Compliance statement · C Feedback to other owners · D Explicit deferrals
+Appendices: A Glossary · B Compliance statement · C Feedback to other owners · D Explicit deferrals · **E Change log v3.0.0-draft → v3.1.0-draft** *(new)*
 
 ---
 
@@ -86,7 +100,7 @@ authority). Produced from a directory listing, not from memory — see §28.
 | **Phase 1 §5 TQ-2 Pedagogical Planner** | The nine-phase arc, phase entry/exit, arc resumption, SYNC-1…SYNC-6 | **Reused — binding** | Phase 3 advances no phase and certifies no evidence. Dial state is *scoped by* arc phase (§9 SG-6) and is not a second phase pointer. |
 | **Phase 1 §6 TQ-3 Teaching Method Library** | 17 methods; preconditions, prohibitions, shapes, failure signatures, repair ladders, `degradedForm` | **Reused** | The fade schedule in M11, the load bound in M6, the wait rule in M4 are method-internal quality contracts. Phase 3 supplies the standing dial values those contracts are evaluated against; it edits no method. |
 | **Phase 1 §7 TQ-4 Adaptive Re-teaching** | Trigger taxonomy T1–T11, the six-cause diagnosis, the eight-axis Difference Operator, `closure()`, the failed-attempt set, re-teach budgets, the refinement protocol | **Extended, with an explicit boundary** | **The most important reconciliation in this document.** TQ-4 owns *what a different attempt is*. Phase 3 owns *how much support that attempt carries*. Three of Phase 3's six dials have per-attempt projections in TQ-4's axis set; the projection rules are stated in §5.4 and neither authority is weakened. Phase 3 defines **no second difference rule**. |
-| **Phase 1 §9 TQ-6 Teacher Decision Flow** | The unified turn flow; three constraint sources at `C-28` Band 2; the eight questions | **Extended** | Phase 3 adds **one** further Band-2 constraint source and **one** Band-3 parameter supply. It adds no band, no authority, and no question. |
+| **Phase 1 §9 TQ-6 Teacher Decision Flow** | The unified turn flow; three constraint sources at `C-28` Band 2; the eight questions | **Extended** | Phase 3 adds **one** further Band-2 constraint source and **one** Band-5 personalization supply (band numbering per EOS v2, which owns band semantics — §0.6.2). It adds no band, no authority, and no question. |
 | **Phase 1 §10 TQ-7 Teaching Quality Metrics** | Process metrics, the four tiers, the counter-metrics, the OSF boundary | **Extended** | §20's adaptive metrics are Tier A process metrics and Tier D attribution inputs. Phase 3 defines **no outcome metric** and makes no learning claim. Two of TQ-7's counter-metrics (hint-take rate, success near 100%) are adaptive counter-metrics and are reused verbatim, not restated as new. |
 | **Phase 2 §4 VD-1 / §5 VD-2 / §10 VD-7** | Whether a visual appears, its purpose, the fallback ladder | **Complemented** | Modality is a channel decision Phase 2 and Phase 1 axis 1 already own. Phase 3's dials do not include modality — see §5.3's exclusion list. Where load pressure implicates a channel change, Phase 3 emits pressure and Phase 1/Phase 2 decide. |
 | **Phase 2 §9.2 mastery gates / withdrawal probes** | Unaided-assessment invalidation by a supporting visual | **Reused — and generalized in one direction only** | The principle *support present during an unaided item invalidates the evidence* is Phase 2's, stated for visuals. §9 SG-6 applies the same principle to scaffold and hint dials. This is reuse of a rule, not a new rule; §10.5 and §11.6 cite Phase 2 as its origin. |
@@ -95,8 +109,8 @@ authority). Produced from a directory listing, not from memory — see §28.
 
 | Authority | What it owns | Verdict | Rationale |
 |---|---|---|---|
-| **`eos-v3/04` C-32 Struggle Controller** | *"Estimate current success rate over a rolling window; hold the target band…; adjust difficulty, hint availability, and scaffolding to steer toward it; enforce hint discipline…; own the answer-withholding policy…; hard-stop on affect signals."* Outputs: difficulty target, hint policy, scaffolding level, withholding decisions | **Extended — this is the primary integration surface** | C-32 is the **owner of the control loop and its objective**. It names four outputs and defines none of them. Phase 3 supplies the instrument: the typed dial set (§5), the legality of an adjustment (§8, §9), and the ladders behind "hint availability" and "scaffolding level" (§10, §11). **C-32 keeps the loop, the band and the veto.** Phase 3 never sets the target band and never overrides the affect hard-stop. |
-| **`eos-v3/04` C-28 Decision Kernel** | Band order; the legal action set; totality of its decision matrix | **Reused — binding** | Phase 3 publishes constraints into Band 2 and parameters into Band 3. It decides nothing at Band 0/1 and preempts nothing. |
+| **`eos-v3/04` C-32 Struggle Controller** | *"Estimate current success rate over a rolling window; hold the target band…; adjust difficulty, hint availability, and scaffolding to steer toward it; enforce hint discipline…; own the answer-withholding policy…; hard-stop on affect signals."* Outputs: difficulty target, hint policy, scaffolding level, withholding decisions | **Extended — this is the primary integration surface** | C-32 is the **owner of the control loop and its objective**. It names four outputs and defines none of them. Phase 3 supplies the instrument: the typed dial set (§5), the legality of an adjustment (§8, §9), and the ladders behind "hint availability" and "scaffolding level" (§10, §11). **C-32 keeps the loop, the objective and the veto.** Phase 3 never sets the target band and never overrides the affect hard-stop. **Ownership transfer, stated precisely (corrected v3.1.0 — improvement I1):** `C-32`'s charter says it *"adjust[s] difficulty, hint availability, and scaffolding"*; §3.4 assigns the *how much support, right now* decision to AT-2/AT-7/AT-8. **That is a transfer of the adjustment decision**, not merely the gift of an instrument, and AH-1 is its record. v3.0.0-draft's summary line ("loses no responsibility") contradicted AH-1 and is withdrawn. What `C-32` retains is the objective (the target band), the withholding policy, and the absolute affect veto — which is the part that must not move, and does not. |
+| **`eos-v3/04` C-28 Decision Kernel** | Band order; the legal action set; totality of its decision matrix | **Reused — binding** | Phase 3 publishes constraints into **Band 2** (subtractive legality) and parameters into **Band 5** (personalization) — EOS v2 numbering, corrected in v3.1.0 from v3.0.0-draft's "Band 3", which is `C-30` selection and is forbidden to Phase 3 (§0.6.2). It decides nothing at Band 0/1 and preempts nothing. |
 | **`eos-v3/04` C-29 Teaching State Machine** | Teaching states; **sole authority on advancement** | **Reused — binding** | No dial value advances, blocks or reverses a state. A fully-faded scaffold is not mastery evidence; `C-29` decides on evidence, unchanged (Phase 1 SYNC-1/SYNC-3 apply to Phase 3 verbatim). |
 | **`eos-v3/04` C-30 Action Selector** | Per-turn action choice within the legal set | **Reused** | Phase 3 selects no action. Dials narrow and parameterize; `C-30` still chooses. |
 | **`eos-v3/04` C-31 Recovery Engine** | Failure-state detection, recovery protocols, the recovery escalation ladder, the exit rule | **Reused — binding, preemptive** | Recovery **preempts** adaptation entirely (§8 AR-1). Phase 3 has no distress path of its own; adding one would be a second recovery authority. On recovery exit, §9 SG-8 mirrors `C-31`'s own "one rung below entry, never at zero" for the dials. |
@@ -160,17 +174,54 @@ authority). Produced from a directory listing, not from memory — see §28.
 | **`validation/`, `concepts/`, `teaching-actions/`** | **Reused** | Consumed as authored pedagogy; edited nowhere. |
 | **`educational-brain/cognitive-load/`** | **ABSENT — cited across the tree, does not exist** | Delivery 2 §5's intrinsic/extraneous/germane theory was planned and never authored. §14 is written *around* this absence rather than filling it, because filling it would be Brain-tree authoring under an architecture document's cover. Recorded as AF-2. |
 
-**F. Live code read for capability verification (read-only; the runtime owner's territory)**
+**F. Governance, contracts, process, and the frozen v1.0 corpus** *(added v3.1.0 — this entire section was absent from v3.0.0-draft and is blocking issue B1)*
+
+v3.0.0-draft had sections A–F and **no equivalent of Phase 1 §0.1 E**. The documents that would have populated it were therefore unclassified, and the completeness statement's escape clause ("directly or by the category rows above") was empty because no category row covered them. Every one now carries exactly one verdict. Where a document has no adaptive relevance that is **stated as the finding**, not left implied.
+
+| Document | Verdict | Rationale / adaptive relevance |
+|---|---|---|
+| **`README.md` — the Architecture Authority Index** | **Reused — and binding on this document** | **The most consequential omission of v3.0.0-draft.** It answers "when two documents here disagree, which one wins?" and publishes an authority ladder in which every phase document, including this one, sits at row 6 ("Everything else … Advisory"). It also names two code files as sole owners of decisions Phase 3 touches. Full treatment in **§0.6**. |
+| **`EDUCATIONAL_BRAIN_BIBLE.md`** | **Extended** | LIVING; the pre-EOS single source of truth (authority ladder row 5). Read in substance for this revision: its §3 engine map and §6 flow sections were checked for adaptive overlap. Three engines touch dial territory and are reconciled in §0.7 (Engine 15 Teaching Strategy Orchestrator, Engine 16 Teaching Output Bias, Engine 20 Strategy Effectiveness). **Bible primacy applies: where this document and the Bible disagree, the Bible wins until amended.** The Bible gains the Phase 3 pointer on approval — AH-7. |
+| **`DEPENDENCY_RULES.md`** | **Reused — binding** | The 15 permanent rules. Checked against all 15 for this revision; compliance stated in §0.6.3. Rule 9 (one probabilistic component per turn) governs §4.4. Its Teaching Engine entry ("performs zero I/O and calls zero other engines") and its satellite-engine entry ("never called *by* the core teaching chain") both bear on Phase 3's dependency direction — resolved in §0.6.4. |
+| **`ENGINE_REFERENCE.md`** | **Reused (and corrected)** | Frozen interface document. Engine 16 (Teaching Output Bias) is the AC-3 finding; Engine 17 (Teaching Style Detector) documents a file that **does not exist on disk** — a second documentation/reality divergence found in this revision (AF-10). Phase 3 redefines no engine interface. |
+| **`DATA_FLOW.md`** | **Reused** | The code-grounded 65-step turn trace. Steps 17 and 55 place the `[HINT]` bias and tag parse in the flow; both resolve to the AC-3 stub. Phase 3 adds **no step** to this flow — the control loop occupies the existing policy stage (§0.7.1). |
+| **`EDUCATIONAL_BRAIN_V1.md`** | **Reused** | FROZEN v1.0 architecture, consumed unchanged. No adaptive authority beyond what the Bible indexes. |
+| **`EXTENSION_GUIDE.md`** | **Reused** | Its extension pattern — extend in place, never fork a parallel pipeline — is followed: every Phase 3 mechanism attaches to an existing band, store or engine rather than standing beside one. |
+| **`ARCHITECTURE_DECISIONS.md`** | **Reused** | Findings register (Findings 8–10 consumed via Phase 1). Phase 3 adds no finding to another owner's file; its own findings are Appendix C feedback. |
+| **`ARCHITECTURE_COMPLETION_REPORT_V1.md`** | **Reused** | The v1.0 completion record and five-wave sequence; §25's stages sequence into it. Contains no adaptive authority. |
+| **`RUNTIME_EDUCATIONAL_BRAIN_CONTRACT.md`** | **Reused — binding** | CANONICAL interface. Every Phase 3 → runtime interface (§18) is expressed through it (AH-10). Its placement row records an existing "difficulty-floor default" behaviour that D3 must not contradict (§13.2). |
+| **`WAVE_0_APPROVAL_CHECKLIST.md`** | **Extended** | The G2 instrument; §25's stages become checklist items (AH-8). Phase 3's merge adds none by itself. |
+| **`VALIDATION_FRAMEWORK_P10.md`** | **Extended** | Owns the three test tiers, the LLM transcript seam and the frozen fixture set. **§22.4's replay and offline-evaluation claim belongs inside this framework, not beside it** — reconciled in §22.4. Phase 3 defines no parallel harness. |
+| **`OUTCOME_SCIENCE_FRAMEWORK.md`** | **Complemented** | OSF owns outcome constructs, experimental design and causal attribution; §20 supplies process features only. Its `AnswerObserved (… × scaffold level × hint debt × stage)` row independently corroborates AP9. |
+| **`MIGRATION_BLUEPRINT_V1.md`** | **Complemented** | The 7-phase runtime migration plan. §25's stages must be merged into one sequence with it at implementation planning — a handoff, not designed here. |
+| **`ISS_01_LADDER_RECONCILIATION.md`** | **Reused — and it constrains §10.2 and §16** | **BLOCKED on a pedagogical decision; Phase 1 §0.1 E warned it "may affect TQ-2's rung semantics."** v3.0.0-draft never opened it. Read for this revision: it documents a **live 6-phase ladder** (`conversationState.ts` `PHASE_ORDER`, step-down computed as `phaseIndex − 1` floored) against the 10-state canonical TSM, with three defects including "mastery becomes unreachable." Consequences in §0.7.4. **Phase 3 must not be read as resolving ISS-01**, which remains the owner's decision. |
+| **`ARCHITECTURE_ISSUE_REGISTER.md`** | **Reused** | EOS v2 issue register; its hint/analogy-discipline E-code overlap note is consistent with AC-2. Phase 3 adds no issue to another owner's register. |
+| **`ARCHITECTURAL_ROOT_CAUSE_ANALYSIS.md`** | **Reused** | Root-cause findings for Tutor Max failure classes, consumed. **No adaptive authority** — checked, none found. |
+| **`DEVELOPMENT_FLOW_DOCUMENT.md`** | **Reused** | Canonical project-standard flow; respected. **No adaptive authority.** |
+| **`PROJECT_TASK_BREAKDOWN.md`** | **Complemented** | Execution roadmap; §25 must be reconciled into it, not run alongside it. |
+| **`RUNTIME_MAINTENANCE_TRANSITION.md`** | **Reused** | The final planned runtime-architecture posture; respected. **No adaptive authority.** |
+| **`MERGE_PLAN.md`** | **Independent** | Branch consolidation history. No architectural interaction. |
+| **`ARCHITECTURAL_GOVERNANCE_REGISTRY.md`** | **Reused — binding** | The ownership instrument. v3.0.0-draft discussed it in §0.3 but gave it **no verdict row** — itself an instance of the anti-pattern it exists to prevent. Verdict recorded here; §0.3 is its output. |
+| `ASSETIDENTITY_AUDIT.md` · `ENGINEERING_HANDOVER.md` · `ENGINEERING_RUNBOOK_BLOCKED_ITEMS.md` · `PHYSICS_FOUNDATION_MIGRATION_REPORT.md` | **N/A — not architecture authorities** | Operational records and audits. Each checked for adaptive authority; **none contains any.** Same basis as Phase 1 §0.1 F. |
+
+**G. Live runtime code read for capability verification (read-only; the runtime owner's territory)**
+
+*Expanded in v3.1.0. v3.0.0-draft listed only the first five rows, all under `src/lib/school/adaptive/` — a sample presented as a survey, which missed the largest candidate owner of the control plane (blocking issue B2). The four subsystems the review named are reconciled in full in **§0.7**; their verdicts are recorded here.*
 
 | Artifact | Finding | Verdict |
 |---|---|---|
-| `src/lib/school/adaptive/teachingStrategy.ts` | `determineStrategy()` — a **live, deterministic, priority-ordered selector over 7 adaptive postures** (`FOUNDATION_REBUILD`, `MISCONCEPTION_REPAIR`, `MOMENTUM_RECOVERY`, `CONFIDENCE_CORRECTION`, `APPLICATION_FOCUS`, `CONFIDENCE_BUILDING`, `ACCELERATED_GROWTH`) with a stalemate-driven `excludeStrategy` rotation and a `foundationBias` default | **Extended — see §0.2 and §6** |
-| `src/lib/school/adaptive/strategyEffectiveness.ts` | Reads `TeachingStrategyEvent` to detect *"the same strategy firing 3+ times in a row on an unmastered topic"* | **Reused** — a live anti-thrash precursor (§9.5) |
-| `src/lib/school/adaptive/teachingOutputBias.ts` | **13 lines. Every exported function returns a constant** (`BALANCED`, `null`, `''`, `false`, `true`). It is a stub. | **Reused (as evidence of a gap)** — the documented scaffolding/hint dial computes nothing. AF-1 |
+| `src/lib/school/adaptive/teachingStrategy.ts` | `determineStrategy()` — a **live, deterministic, priority-ordered selector over 7 adaptive postures** with a stalemate-driven `excludeStrategy` rotation and a `foundationBias` default | **Extended — §0.2, §6** |
+| `src/lib/school/adaptive/strategyEffectiveness.ts` | Detects *"the same strategy firing 3+ times in a row on an unmastered topic"* | **Reused** — a live anti-thrash precursor (§9.5) |
+| `src/lib/school/adaptive/teachingOutputBias.ts` | **13 lines; every exported function returns a constant.** A stub | **Reused (as evidence of a gap)** — AC-3, AF-1 |
 | `src/lib/school/adaptive/{confidenceCalibration,learningMomentum,conceptTransfer,misconceptionEngine}.ts` | The five signals `getTeachingStrategy()` folds | **Reused** — Phase 3's posture inputs already exist |
-| `src/lib/school/tutoring/hintTag.ts`, `route.ts` `[HINT]` path | A parsed `[HINT]` tag whose bias input is the stub above | **Reused (as evidence of a gap)** — AF-1 |
+| `src/lib/school/tutoring/hintTag.ts` + the `route.ts` `[HINT]` path | A parsed `[HINT]` tag whose bias input is the stub above | **Reused (as evidence of a gap)** — AF-1 |
+| **`src/lib/kernel/policy/{types,engine,basePack,index}.ts`** | **An implemented seven-band policy engine** (`BandId = 0…6`) with subtractive Band-2 filters, a Band-5 personalization surface, `Budgets`, `DecisionTrace`, and conflict resolution by specificity → mandatory → lexical. `basePack.ts` already encodes the D1 grid as **Band-4 rules** (`B4.d1.misconceiving.v1`, `B4.d1.fragile.v1`, `B4.d1.confused.v1`, citing `foundations/02 §1`) and first-lesson limits as **Band-2 legality rules** | **Reused — and it is the evaluator Phase 3's rules run inside.** §0.7.1 |
+| **`src/lib/kernel/frustration.ts`** | A live affect machine — `CALM \| STRAINED \| FLOODED \| RECOVERING` — with `affectBandOf()` → `calm \| strained \| flooded`, read in `route.ts` | **Reused — binding.** It is the selector for the `strained` column of the normative budget table. §0.7.2 |
+| **`src/lib/kernel/{policyMove,parity,shadow,verifier,simulation,tsm,planner,stages,actions}`** | Move mapping, parity harness, shadow pipeline, output verifier, persona simulation, the 10-state TSM | **Reused** — `policyMove.ts` is a **named sole owner** of "what move is this turn?" (§0.6.2). Phase 3 selects no move |
+| **`src/lib/eos-runtime/{flags,policyGate,verifierGate,degradedMode,packLoader,buildContext}.ts`** | `ENABLE_EOS_RUNTIME` master flag; `PolicyMode off\|shadow\|primary` (the master implies **shadow**, never primary); `VerifierMode off\|log\|enforce`; **`degradedMode.ts` = RS P-3 degraded deterministic mode** | **Reused — binding.** §21.2's fallback ladder is reconciled onto P-3 rather than competing with it. §0.7.3 |
+| **`src/lib/teaching/conversationState.ts`** | `PHASE_ORDER` + `phaseIndex − 1` floored step-down (the ISS-01 ladder); `responseBudget(register, consecutiveFailures)` — **a live struggle-scaled response-length dial** whose own comment cites `foundations/04 P5`; `decideNextMove`; `PHASE_MAX_QUESTION_STAGE` | **Reused — and it is the live implementation of D4's turn-density sub-setting.** §0.7.4 |
 
-**Inventory completeness statement.** 53 documents in `docs/architecture/` (52 at Phase 2's count, plus this one), 7 in `docs/architecture/eos-v3/`, 8 specification/library artifacts in `docs/curriculum/` plus its `protocols/` and `blueprints/` directories, and the full `educational-brain/` tree (11 directories) were enumerated by directory listing and each assigned exactly one verdict, directly or by the category rows above. **Zero documents remain unclassified. Superseded was used zero times — Phase 3 replaces nothing.** Reports and audits under `docs/` are N/A as architecture authorities, on the same basis Phase 1 §0.1 F recorded.
+**Inventory completeness statement (rebuilt v3.1.0).** Enumerated by directory listing: **52** pre-existing documents in `docs/architecture/` (this document is excluded from its own denominator — v3.0.0-draft counted itself, which inflated the figure and helped obscure B1), **7** in `docs/architecture/eos-v3/`, **8** specification/library artifacts in `docs/curriculum/` plus its `protocols/` and `blueprints/` directories, the full `educational-brain/` tree (**11** directories), and **four runtime subsystems** read read-only. Each carries exactly one verdict in sections A–G above; section D covers ADR 02–15 without gaps. **Zero documents remain unclassified**, and v3.0.0-draft's escape clause ("directly or by the category rows above") has been removed rather than relied upon. **Superseded was used zero times — Phase 3 replaces nothing.**
 
 ### 0.2 The canonical adaptation stack — and the two lines Phase 3 must not cross
 
@@ -204,7 +255,7 @@ is the single canonical statement. **Every level has exactly one owner and one a
 
   X-A  OBJECTIVE + VETO       C-32 target band · affect hard-stop · withholding policy
   X-B  LEGALITY               C-29 · C-28 Band 2
-  X-C  SELECTION              C-28 Band 3 → C-30
+  X-C  SELECTION              C-28 tactics band → C-30   (Phase 3 never enters)
   X-D  PREEMPTION             C-31 Recovery (above everything)
   X-E  PRIMITIVES             P81 P82 P83 P84 P85 P86 (Category F, FINAL)
 ```
@@ -279,6 +330,8 @@ rather than assuming permission.
 | **AH-8** | `WAVE_0_APPROVAL_CHECKLIST.md` gains items for §25's stages. **Phase 3's merge unblocks nothing.** | Wave 0 — owner |
 | **AH-9** | `ENGINE_REFERENCE.md` #16's description of `teachingOutputBias.ts` is corrected to record that the file is a stub (AF-1). Documentation correction only. | `ENGINE_REFERENCE` — runtime owner |
 | **AH-10** | All Phase 3 → runtime interfaces (§18) are expressed through `RUNTIME_EDUCATIONAL_BRAIN_CONTRACT.md`, never around it. | Contract — runtime owner |
+| **AH-11** *(new v3.1.0 — B2/I2)* | Phase 3's pressure and governor rules are authored **into the existing policy pack** (`kernel/policy/basePack.ts`'s format, at Bands 2/4/5), not into a new evaluator. Which wiring frame governs at implementation time — the EOS band pipeline or the live pre-EOS prompt-assembly path — is the runtime owner's sequencing decision, not an assumption of this document. | `kernel/policy/` + EOS runtime — runtime owner |
+| **AH-12** *(new v3.1.0 — B3)* | `C-28`'s adjustment record carries `consumesReteachBudget`, and Phase 1's §7.7 budget counter is readable by the Band-2 governor rules so an exhausted budget removes D1/D5 failure-response moves from the candidate set. | `C-28` + Phase 1 budget owner — runtime owner |
 
 **Unresolved boundary carried forward.** Phase 1's OQ-10 (whether phase architecture documents
 belong in `docs/architecture/`, which the registry assigns to the runtime owner) applies
@@ -348,9 +401,9 @@ places and `C-32` in three.
 | Hint Architecture | **Designed at the decision layer only** — AT-8 (§11). The hint *content model*, the ladder *schema* and the easier-than *law* are CEKR/EBC's and are not re-authored |
 | Misconception Response Architecture | **DEFERRED to `educational-brain/misconceptions/` and TQ-4 diagnosis C2.** Phase 3 contributes one rule: the dial freeze that protects the collision (§15.2) |
 | Confusion Response Architecture | **Designed, narrowly** — §15.3's three-way disambiguation, because the correct dial response differs sharply between three states the corpus currently treats as one trigger (T3) |
-| Pace Adaptation | **Designed** — AT-9 (§12). The genuinely unowned dial |
+| Pace Adaptation | **Designed as a controller over an existing quantity** — AT-9 (§12). v3.0.0-draft called this "the genuinely unowned dial"; **that was falsified in v3.1.0** — `RS §18`'s `budgets.paragraphs.*` and `budgets.maxNewTerms` are normative, and `conversationState.ts`'s `responseBudget()` implements them. What Phase 3 adds is the controller, not the quantity (§0.7.4) |
 | Difficulty Adaptation | **Designed at the instrument layer only** — AT-10 (§13). `C-32` keeps the loop and the band |
-| Cognitive Load Adaptation | **Designed at the control layer only** — AT-11 (§14). The intrinsic/extraneous/germane theory is deferred to the unauthored `educational-brain/cognitive-load/` library (AF-2) |
+| Cognitive Load Adaptation | **Designed at the control layer only** — AT-11 (§14). The element budget itself is `RS §18`'s `budgets.maxNewElements` ("load filter"), reused; the intrinsic/extraneous/germane theory is deferred to the unauthored `educational-brain/cognitive-load/` library (AF-2) |
 | Teaching Campaign Adaptation | **Designed as an interaction contract** — AT-14 (§17). The campaign objects are Phase 1's |
 | Student State Signals | **DEFERRED to `decision-engine/02` and `student-state/` in full.** Phase 3 defines no state and no detector; §7 maps existing states to pressures |
 | Adaptive Decision Inputs | **Designed** — §18.1, with a five-level existence status per field |
@@ -366,6 +419,271 @@ places and `C-32` in three.
 correctly, not a thin phase: the adaptive brief overlaps Phase 1 more than any other, and the
 value of Phase 3 is concentrated in the five things nobody owns — the dial set, arbitration,
 stability, the hint/scaffold decision layer, and the missing escalation rung.
+
+### 0.6 Authority-ladder compliance and the band-numbering reconciliation *(new in v3.1.0)*
+
+`docs/architecture/README.md` is the repository's **Architecture Authority Index**. It exists to
+answer one question — *when two documents here disagree, which one wins?* — and v3.0.0-draft never
+opened it. Four consequences follow, and none of them changes a Phase 3 component.
+
+#### 0.6.1 Phase 3 is advisory, and says so
+
+The published ladder is: (1) `EOS_V2_ARCHITECTURE.md` **Frozen** — owns the 8 Constitutional Laws,
+the 4 planes, the turn pipeline's shape and **band semantics**; (2) `EOS_V2_RUNTIME_SPECIFICATION.md`
+**Frozen** — owns runtime behaviour, invariants `I-*`, verifier rules `V-*`, failure handling
+`P-*`, and **`§18` BrainConfig defaults, "the only normative source for constants"**;
+(3) `CEKR` **Frozen**; (4) `EOS_IMPLEMENTATION_MASTERPLAN` Living; (5) `EDUCATIONAL_BRAIN_BIBLE` +
+ADRs **Frozen v1.0**; (6) **everything else in the directory — Advisory.**
+
+**Phase 3 sits at row 6.** So do Phase 1 and Phase 2. This is recorded plainly because it changes
+how this document must be read: where Phase 3 and a frozen EOS document disagree, **the frozen
+document wins and Phase 3 is the bug**. The index's own words: *"A gap found while implementing a
+frozen document is a spec bug — file it against that document; do not invent behaviour to cover
+it."* Every Appendix C item is filed on exactly that basis.
+
+Note also that the ladder does **not** list `eos-v3/`. v3.0.0-draft treated `eos-v3/04` as its
+primary integration surface. That remains the right *reference* for component responsibilities
+(`C-28`…`C-43`), but where the two EOS generations differ on anything the ladder assigns to EOS v2
+— band semantics and constants, specifically — **EOS v2 governs**. §0.6.2 is the first place this
+bites.
+
+#### 0.6.2 The band-numbering divergence — recorded, and resolved by the ladder
+
+v3.0.0-draft published constraints "into `C-28` Band 2" and parameters "into `C-28` Band 3",
+using `eos-v3`'s four-band summary (0 safety · 1 affect · 2 policy · 3 tactics). **EOS v2 — which
+owns band semantics — has seven bands**, and `src/lib/kernel/policy/types.ts` implements them as
+`BandId = 0…6`:
+
+```
+ EOS v2 / implemented          eos-v3/04 summary        Phase 3 publication target
+ ─────────────────────────────────────────────────────────────────────────────────────
+ Band 0  interrupts            Band 0 safety            never (AR-1)
+ Band 1  obligations           Band 1 affect            never (AR-1)
+ Band 2  legality (SUBTRACTIVE) Band 2 policy           ★ AdaptationConstraint  — UNCHANGED
+ Band 3  authored dispatch     ─┐                       never (authored wins, §19.2)
+ Band 4  policy tables          ├ Band 3 tactics        pressure→dial rules live here (§0.7.1)
+ Band 5  PERSONALIZATION       ─┤                       ★ AdaptationParameters — CORRECTED
+ Band 6  tie-break             ─┘                       AR-8's tie-break defers here
+```
+
+**Two corrections applied throughout this document, and they are the only substantive edits B2
+forced:**
+
+- `AdaptationConstraint` → **Band 2**. Unchanged, and now correct for a stronger reason: EOS v2's
+  Band 2 is *defined* as subtractive, and `types.ts` carries the comment *"Set by Band 2 legality
+  filters to REMOVE candidate moves. Subtractive."* Phase 3's narrowing-only contract (§18.3) is
+  not a new invariant — **it is Band 2's existing semantics**, which is a considerably better
+  place to stand than a self-declared rule.
+- `AdaptationParameters` → **Band 5, not Band 3.** EOS v2 Band 5 is personalization: *"MAY set
+  representation/anchor/**pace** fields; MUST NOT alter move, stageCeiling, budgets, or legality
+  outcomes."* That is `AdaptationParameters` exactly, including the prohibition Phase 3 already
+  imposed on itself (§18.3's "no action names in parameters"). eos-v3's "Band 3 tactics" is
+  `C-30` selection, which Phase 3 must never touch — so v3.0.0-draft's label was not merely
+  imprecise, it named the one band Phase 3 is forbidden to enter.
+
+**Band 5's budget prohibition, and why it does not break D4/D5.** Band 5 "MUST NOT alter …
+budgets." Two of Phase 3's dials *are* budgets (§0.7.4). The resolution requires no redesign
+because it is what the live code already does: **the dial selects among the normative values
+RS §18 already ships; it does not author or alter a budget.** `responseBudget()` selects between
+`budgets.paragraphs.beginner` = 4 and `.../strained` = 2 on register × struggle. Selecting a
+shipped value is personalization; changing what the shipped values are is a BrainConfig amendment,
+which Phase 3 neither performs nor requests. §5.2 and §18.3 now say this.
+
+#### 0.6.3 The 15 permanent dependency rules
+
+v3.0.0-draft cited Rule 9 twice and never stated compliance with the set. Checked for this
+revision against `DEPENDENCY_RULES.md`'s per-engine sections and the Bible's citations (no single
+enumerated list exists in either file — recorded as a limitation in §28):
+
+- **Rule 9 · one probabilistic component per turn.** §4.4's loop is enum comparison and table
+  lookup, and RS §13 independently forbids the Hint module from touching the LLM. Compliant.
+- **Rule 14 · single-writer ownership.** The ASV has exactly one writer (§4.3 step 7, as corrected
+  in §0.7.1) and Phase 3 writes to no store it does not own. Compliant.
+- **Rule 7 · engines never independently score mastery.** No dial advances, blocks or reverses a
+  teaching state (§3.4). Compliant.
+- **Rule 4 · downstream engines only add fields, never overwrite the source.** `AdaptationConstraint`
+  removes options and never adds one; `AdaptationParameters` sets no action. Compliant.
+- **Rule 12 · the hard DAG boundary between tiers.** See §0.6.4.
+- The remaining rules (1, 2, 3, 5, 6, 8, 10, 11, 13, 15) govern KG immutability, memory writes,
+  recommendation-tier isolation, visual-tier leafness and prompt assembly. **Phase 3 touches none
+  of their subjects and violates none.**
+
+#### 0.6.4 Dependency direction — the improvement I2 asked for
+
+Two dependency laws bear on Phase 3 and they are not the same law:
+
+- **RS §13's global law:** *"dependencies point downward in the plane stack (Expression → Decision
+  → Model → Perception → Substrates); any upward import is an architecture-test failure (T-7)."*
+  The control plane sits in the **Decision plane**. It reads Model-plane views and publishes into
+  the Decision plane's own bands. Downward and lateral only. **Compliant.**
+- **RS §13's Policy Engine contract:** allowed deps *packs, views*; **forbidden deps *Evidence
+  writes, drivers, storage***; and the engine is marked *pure*. v3.0.0-draft's §4.3 step 7 said the
+  loop "commits" and "writes" the adjustment record. **That would violate this contract.**
+  Corrected in §4.3: the loop **emits** the adjustment record as an event; the Evidence Store
+  appends it, exactly as the engine already emits events #20 and #26. No new writer is created.
+- **`DEPENDENCY_RULES.md`'s live-tier law:** the eight adaptive-tier satellites *"feed the system
+  prompt directly; they are never called **by** the core teaching chain."* AT-3 consumes
+  `teachingStrategy.ts`'s **published output**, which under EOS is a Model-plane view feeding a
+  Decision-plane band. Under the live pre-EOS wiring the satellites feed the prompt instead.
+  **Both readings are satisfied by the same rule: Phase 3 reads a published value and calls
+  nothing.** Which frame governs at implementation time is the runtime owner's sequencing
+  decision, recorded as AH-11 rather than assumed.
+
+---
+
+### 0.7 Runtime control-layer reconciliation *(new in v3.1.0 — blocking issue B2)*
+
+The review found four runtime subsystems that v3.0.0-draft never opened and that plausibly own
+parts of the control plane. Each is reconciled below against the four verdicts the revision brief
+specifies: **reuses · extends · constrains · duplicates**. The summary, stated before the detail
+because it is the honest headline:
+
+| Mechanism | Phase 3's relationship | Net effect on Phase 3 |
+|---|---|---|
+| **Band 2** (subtractive legality) | **REUSES** | `AdaptationConstraint` **is** a Band-2 filter. No new narrowing mechanism |
+| **Band 5** (personalization) | **REUSES** | `AdaptationParameters` **is** a Band-5 effect. Publication target corrected from Band 3 |
+| **Band 4 D1-grid rules** (`basePack.ts`) | **DUPLICATED → eliminated by placement** | AT-4's pressures become **rules in the existing pack at the existing bands**, not a parallel deriver |
+| **Frustration bands** (`frustration.ts`) | **REUSES — binding** | AR-1's preemption and §21.3's recovery clamp read this machine. Phase 3 detects no affect |
+| **Degraded mode** (`degradedMode.ts`, RS P-3) | **REUSES — binding** | §21.2's AF-ladder is scoped *inside* P-3, not beside it |
+| **`responseBudget()`** (`conversationState.ts`) | **REUSES — and it is D4's live implementation** | D4/D5 are existing normative BrainConfig keys, not new dials |
+| **`policy/engine.ts`** conflict resolution | **CONSTRAINS Phase 3** | AT-5 arbitrates *pressures*, never band rules. Sole ownership honoured |
+| **`policyMove.ts`** move mapping | **CONSTRAINS Phase 3** | Phase 3 selects no move. Already true; now stated |
+| **ISS-01 ladder** (`PHASE_ORDER`) | **CONSTRAINS Phase 3** | §10.2 and §16 must not be read as resolving a BLOCKED decision |
+
+**One duplication was found and it is eliminated architecturally, without redesign**, by placing
+AT-4's rules inside the existing pack rather than beside it (§0.7.1). Every other relationship is
+reuse or constraint. **No Phase 3 component was removed, added, split or merged.**
+
+#### 0.7.1 `src/lib/kernel/policy/` — the evaluator Phase 3's rules run inside
+
+`policy/engine.ts` and `policy/types.ts` implement a seven-band policy engine with `PolicyInputs`,
+`RuleGuard`, `RuleEffect`, `Budgets`, `DecisionTrace`, `EnginePolicyDecision`, and conflict
+resolution by *specificity → mandatory → lexical*. `README.md` §3 names it as a **sole owner**:
+*"Band evaluation, conflict resolution, completeness — `src/lib/kernel/policy/engine.ts`… a second
+implementation is a defect, not a refactoring opportunity."*
+
+**The duplication.** `basePack.ts` already encodes the D1 grid as Band-4 rules —
+`B4.d1.misconceiving.v1`, `B4.d1.fragile.v1`, `B4.d1.confused.v1`, each citing `foundations/02 §1`
+— which is the same source AT-4 §7.2 derives its primary pressures from. Two mechanisms reading
+one authority to produce turn effects is a duplication by any reading.
+
+**The elimination, and it is placement rather than redesign.** AT-4's pressure rules and AT-6's
+governor rules are **authored as rules in the existing policy pack, at the existing bands,
+evaluated by the existing engine**:
+
+```
+ AT-6 STABILITY GOVERNOR rules (SG-1…SG-8)   → Band 2 rules   (subtractive: they REMOVE
+                                                illegal dial moves from the candidate set)
+ AT-4 PRESSURE rules (§7.2)                  → Band 4 rules   (policy tables; they sit
+                                                alongside the existing B4.d1.* rules and
+                                                extend the same quadrant reading to dials)
+ AT-2 ASV values published                   → Band 5 effect  (personalization)
+ §21.3 CLAMP profiles                        → Band 2 rules   (first-lesson limits are
+                                                ALREADY Band-2 rules in basePack.ts)
+ AR-1 affect preemption                      → Band 0         (already implemented:
+                                                B0.recovery.preempt.v1)
+```
+
+**What this changes in Phase 3: the location of its rules, not their content.** Every SG rule,
+every pressure in §7.2, and every clause of §8's arbitration keeps its wording and its
+justification. What is withdrawn is any implication that Phase 3 supplies a *second evaluator*.
+
+**AT-5's arbitration, bounded against the sole owner.** This is the sharpest boundary in the
+revision, and §8 now carries it:
+
+> `policy/engine.ts` owns **rule conflict resolution** — two rules colliding on a field, resolved
+> by specificity, mandatory-beats-optional, then lexical `ruleId`. **AT-5 owns nothing of the
+> kind.** It resolves *which learner-state pressure is answered*, which is a question upstream of
+> any rule firing. Where AT-5's ordering must be enforced at rule-evaluation time, it is expressed
+> as **band assignment and rule specificity within the existing engine** — AR-3's band priority is
+> band assignment, AR-4's reversibility ordering is specificity, AR-8's tie-break defers to the
+> engine's own lexical rule and to Band 6. **Phase 3 implements no resolver.**
+
+**AR-5 (never average opposing pressures) survives this placement**, and is strengthened by it:
+the engine already emits `PolicyConflictDetected` when two equal-specificity rules collide, and
+its own comment calls that *"always a pack bug."* AR-5's `contradictory-pressure` event is the
+same discipline one layer up — a signal that the state model is wrong, not a value to interpolate.
+
+**Consequence for §4.3 step 7.** RS §13 forbids the Policy Engine from performing Evidence writes.
+The adjustment record is therefore **emitted as an event and appended by the Evidence Store**, not
+written by the loop. §4.3 is corrected accordingly. This preserves Permanent Rule 14's
+single-writer invariant and creates no new writer.
+
+#### 0.7.2 `src/lib/kernel/frustration.ts` — affect bands, reused verbatim
+
+A live machine over `CALM | STRAINED | FLOODED | RECOVERING`, with `affectBandOf()` projecting to
+`calm | strained | flooded`, read in `route.ts` and consumed by the K5 verifier's praise-band rule.
+
+**Verdict: REUSES, binding.** Phase 3 already refused to detect affect (§5.3's exclusion list,
+AR-1, §3.4). This machine is the concrete thing AR-1 defers to and the concrete selector for the
+`strained` column of RS §18's budget table (§0.7.4). Two clarifications are added, no rules
+changed: §8 AR-1 names `frustration.ts` as the preemption source, and §21.3's recovery-clamp row
+names `FLOODED`/`RECOVERING` as the states that raise it. **Phase 3 adds no affect state and no
+detector.**
+
+#### 0.7.3 `src/lib/eos-runtime/` — flags, gates, and degraded mode
+
+`flags.ts` gates the whole subsystem behind `ENABLE_EOS_RUNTIME`, with `PolicyMode
+off | shadow | primary` where *the master flag implies shadow, never primary*, and `policyGate.ts`
+documents *"why primary is not reachable yet."* **The engine is therefore implemented and not yet
+authoritative** — which is why Phase 3 is not in conflict with production behaviour today, and why
+reconciling it now rather than after merge is the cheap moment.
+
+`degradedMode.ts` implements **RS P-3 degraded deterministic mode** and its header states the
+principle Phase 3's §21.2 independently arrived at: *"banner-free (learner not told 'AI down')"*,
+and *"a second template body would be a second owner of degraded pedagogy."*
+
+**Verdict: REUSES, binding.** §21.2's AF0–AF4 ladder describes **adaptation availability**, which
+is orthogonal to P-3's **generation availability** — but they can co-occur, so §21.2 now states
+the precedence: **P-3 governs the turn; the AF-ladder governs the vector inside it.** In P-3 the
+vector holds and publishes (AF3/AF4 behaviour), because a degraded turn still needs support
+conditions. Phase 3 introduces no second degraded mode and no second template path.
+
+#### 0.7.4 `src/lib/teaching/conversationState.ts` — D4 and D5 already exist as normative budgets
+
+The most consequential finding of this revision, and the one that most reduces Phase 3's claim to
+novelty.
+
+**`responseBudget(register, consecutiveFailures)`** returns 4/2 (beginner), 7/4 (intermediate),
+`null`/6 (expert), keyed on `consecutiveFailures >= 2`, with the comment *"Struggle makes responses
+SHORTER, never longer — a flooded mind gets less text, not more (foundations/04 P5)."*
+
+Those are **exactly** `RS §18`'s normative BrainConfig keys:
+
+```
+ budgets.paragraphs.beginner / strained        4 / 2      → D4 turn density
+ budgets.paragraphs.intermediate / strained    7 / 4      → D4 turn density
+ budgets.paragraphs.expert / strained       null / 6      → D4 turn density
+ budgets.maxNewTerms.beginner / other          1 / 2      → D4 new-element rate
+ budgets.maxNewElements (beginner/int/exp)   2 / 3 / 4    → D5 element budget ("load filter")
+ conv.maxConsecutiveQuestions                     2       → already enforced, Band 2
+ recovery.behavioralTrigger        2 consecutive failures → AR-1's trigger
+ fluency.latencyFactor / fluency.count    1.25× / 3       → §13.4's fluency gate
+```
+
+**Verdict: REUSES — and §5.2 is corrected to say so.** D4's turn-density and new-element-rate
+sub-settings and D5's element budget are **not new dials**. They are existing normative constants
+with shipped defaults and a live implementation. What Phase 3 contributes for them is narrower and
+should be stated narrowly: a **controller** — the governor's dwell, hysteresis and rate limits, and
+the pressure that selects among the shipped values on a state read richer than
+`consecutiveFailures >= 2`.
+
+This also resolves Band 5's budget prohibition (§0.6.2): **the dial selects a shipped value; it
+never alters one.** RS §18 remains the only normative source for constants, and §19.3 is corrected
+from "following ADR 10's BrainConfig proposal" to "RS §18 is the normative source; ADR 10's store
+is the persistence proposal."
+
+**The ISS-01 ladder constrains §10.2 and §16.** `PHASE_ORDER` with `phaseIndex − 1` floored is a
+live step-down-one-with-a-floor mechanism — structurally the same shape as AP6 and SG-2, and
+ISS-01 records three defects in it, one catastrophic, **blocked on a pedagogical decision the
+owner has not made**. Consequences, all additive:
+
+- §10.2's scaffold ladder is **not** the ISS-01 ladder and must not be conflated with it: one is
+  support level within a phase, the other is phase position. Stated in §10.2.
+- §16's rung order must not be read as resolving ISS-01's CHECK/PRACTICE ordering defect. Stated
+  in §16.3 as EL-8.
+- Recorded as **AF-11**: whichever way ISS-01 resolves, §10.3's phase clamps must be re-checked
+  against the resulting phase order, because the clamps are keyed on phase identity.
 
 ---
 
@@ -413,8 +731,10 @@ stability: dwell, rate limits, hysteresis, monotonic fade, freeze windows, and a
 detector whose firing means *the dial is not the problem* and routes to diagnosis rather than to
 another adjustment.
 
-**(C) The two dials nobody defined.** Scaffolding (§10) and hints (§11) are named in four
-documents and specified in none as *decisions*. §10 defines the ladder, the fade law, the
+**(C) The two dials nobody defined as decisions.** Scaffolding (§10) and hints (§11) are named in
+four documents — five, counting the implemented `scaffoldDial` — and specified in none as
+*decisions*. (Pace and load, by contrast, turn out to be **existing normative budget keys with a
+live implementation**; §0.7.4 records that as reuse, and this summary claims no novelty for them.) §10 defines the ladder, the fade law, the
 asymmetric re-scaffold rule, the assessment ceiling, and — the one that inverts a common
 intuition — the **expertise-reversal rule**, under which support above the learner's need is a
 defect rather than a safe default. §11 defines the grant decision: one rung per request, the
@@ -577,13 +897,15 @@ neither phase can claim the other's half:
  │   AT-12 misconception/confusion response · AT-13 escalation order              │
  │   AT-14 campaign interaction (to/from TQ-1, TQ-2)                              │
  └───────────────────────────────┬────────────────────────────────────────────────┘
-                                 │ AdaptationConstraint (Band 2, narrowing only)
-                                 │ AdaptationParameters (Band 3, parameterizing only)
+                                 │ AdaptationConstraint (Band 2 legality, subtractive)
+                                 │ AdaptationParameters (Band 5 personalization)
                                  ▼
  ┌────────────────────────────────────────────────────────────────────────────────┐
  │  TURN SCALE (existing, untouched)                                              │
- │  C-28 Band 0 safety → Band 1 affect (C-31 preempts) → Band 2 policy            │
- │       → Band 3 tactics (C-30) → C-34 → C-35 → C-36 → C-37                      │
+ │  C-28 Band 0 interrupts → Band 1 obligations → Band 2 legality (subtractive)   │
+ │       → Band 3 authored dispatch → Band 4 policy → Band 5 personalization       │
+ │       → Band 6 tie-break → C-30 → C-34 → C-35 → C-36 → C-37                    │
+ │  (EOS v2 / kernel/policy numbering — §0.6.2. C-31 preempts at Band 0.)          │
  │  C-32 holds the target band, the withholding policy and the affect veto        │
  └───────────────────────────────┬────────────────────────────────────────────────┘
                                  ▼
@@ -591,8 +913,9 @@ neither phase can claim the other's half:
 ```
 
 **The single most important property of this diagram:** Phase 3 adds **one** constraint source at
-Band 2 and **one** parameter supply at Band 3, and **zero** decision authorities. It never runs at
-Band 0 or Band 1; `C-31` preempts it exactly as it preempts everything else.
+Band 2 and **one** personalization supply at Band 5, and **zero** decision authorities. Both are
+existing band semantics rather than new mechanisms (§0.7.1). It never runs at Band 0 or Band 1;
+`C-31` preempts it exactly as it preempts everything else.
 
 ### 3.4 The one-authority rule, restated per question
 
@@ -610,6 +933,10 @@ Band 0 or Band 1; `C-31` preempts it exactly as it preempts everything else.
 | Is this adjustment legal as a control move? | **AT-6** | new |
 | Which single pressure is answered? | **AT-5** | new |
 | Has adaptation been exhausted? | **AT-13**, reported to **TQ-1** | new signal; TQ-1 decides |
+| Which rule wins when two collide on a field? | **`kernel/policy/engine.ts`** | sole owner (`README.md` §3); AT-5 arbitrates *pressures*, never rules (§8.3) |
+| What move is this turn? | **`kernel/policyMove.ts`** | sole owner (`README.md` §3); Phase 3 selects no move |
+| Does this dial move consume Phase 1's re-teach budget? | **§9.4a** (BB-1 ∧ BB-2), enforced at Band 2 | new rule; Phase 1 §7.7 remains the budget's owner |
+| What is a normative constant's value? | **`RS §18`** | consumer only; new governor constants are proposals against RS §18 (§19.3) |
 | Did learning occur? | OSF | Phase 3 makes no claim |
 
 ### 3.5 Data dependencies
@@ -695,12 +1022,20 @@ publish the resulting constraints and parameters to `C-28`.
                  grounds (dwell, rate, hysteresis, freeze window, oscillation).
                  A rejected move is recorded; it is never silently dropped.
 
-  7  COMMIT      The ASV is updated and the adjustment record written:
+  7  COMMIT      The ASV is updated and the adjustment record EMITTED as an event:
                  { dial, from, to, pressure, evidence, posture, rejectedPressures[],
-                   arcPhase, strategyId, policyVersion, dialSetVersion }
+                   arcPhase, strategyId, policyVersion, dialSetVersion,
+                   consumesReteachBudget: bool }        -- §9.4a
+                 EMITTED, never written. RS §13 forbids the Policy Engine from
+                 performing Evidence writes; the Evidence Store appends, exactly
+                 as it does for the engine's existing events. No new writer is
+                 created and Permanent Rule 14's single-writer invariant holds.
+                 (Corrected v3.1.0 — v3.0.0-draft said "written".)
 
-  8  PUBLISH     AdaptationConstraint[]  → C-28 Band 2   (narrowing only)
-                 AdaptationParameters    → C-28 Band 3   (parameterizing only)
+  8  PUBLISH     AdaptationConstraint[]  → Band 2  (subtractive legality — EOS v2
+                                          semantics, not a new mechanism; §0.7.1)
+                 AdaptationParameters    → Band 5  (personalization; MUST NOT alter
+                                          budgets — it SELECTS shipped RS §18 values)
 
  ── steps 2–7 are SKIPPED entirely when Band 0 or Band 1 fires ────────────────
 ```
@@ -721,7 +1056,7 @@ vector, same output — always. Three consequences, all deliberate:
   claim; it is a legality constraint, and any future design that wants a model in this loop is
   proposing a rule change and must say so.
 - Where a learned dial policy is eventually desirable (§22.2), it enters as a **tie-break under
-  the same containment pattern `C-28` Band 3 already uses** — as a ranking over moves the
+  the same containment pattern the tactics band already uses** — as a ranking over moves the
   governor has already declared legal, never as a replacement for the governor.
 
 ### 4.5 Responsibilities
@@ -782,6 +1117,20 @@ primitive.** The mapping is the set's justification, not a decoration.
 | **D4** | **PACE** | three sub-settings: new-element rate, turn density, wait-time multiplier | **P85 PACING CONTROL / P55 WAIT TIME** | how much arrives per turn and how long the learner is given | archetype default |
 | **D5** | **LOAD** | element budget per turn + decomposition level | **P84 LOAD MANAGEMENT** | how many simultaneous elements the learner must hold | archetype default |
 | **D6** | **INTERLEAVING** | `blocked` … `interleaved` (ordered) | **P83 INTERLEAVING CONTROL** | whether practice mixes concepts | `blocked` within a campaign |
+
+**D4 and D5 are existing normative constants, not new dials (recorded v3.1.0 — B2).**
+`RS §18` — "the only normative source for constants" under the authority ladder — already ships
+`budgets.paragraphs.{beginner,intermediate,expert}` and their `strained` variants, `budgets.
+maxNewTerms`, and `budgets.maxNewElements` labelled *"load filter"*. `conversationState.ts`'s
+`responseBudget(register, consecutiveFailures)` is their live implementation. **D4's turn-density
+and new-element-rate sub-settings and D5's element budget therefore REUSE existing keys.** What
+Phase 3 adds for them is the controller, not the quantity: dwell, hysteresis, rate limiting, and a
+pressure that selects among the shipped values on a richer state read than
+`consecutiveFailures >= 2`. Two consequences follow and both are constraints, not licences:
+**(i)** the dial **selects a shipped value and never alters one**, which is what keeps it legal at
+Band 5 (whose contract forbids altering budgets — §0.6.2); **(ii)** changing what the shipped
+values *are* is a BrainConfig amendment against RS §18, which Phase 3 neither performs nor
+requests.
 
 **D3 has no Category-F primitive and is admitted anyway** — stated rather than hidden. Difficulty
 is realized by *item selection*, which is `C-30`/`C-14` territory, not by a regulation primitive.
@@ -847,6 +1196,12 @@ level three turns running because each individual change was "different."
 **Directional note.** A dial move that is *not* a re-teach (no failure occurred; the pressure was
 boredom or load) does not invoke TQ-4 at all. Only lock (ii) applies. TQ-4 is a re-teach authority,
 not a general change authority, and Phase 3 must not inflate it into one.
+
+**Budget consequence (added v3.1.0 — blocking issue B3).** A move that passes both locks is a
+re-teach *and* a control move, and it therefore **consumes Phase 1 §7.7's re-teach budget**. The
+two-lock rule was never intended to create a cheaper name for a budgeted act. §9.4a states the
+rule, §16.1 narrows the missing-rung claim to the four dials it actually holds for, and §16.3's
+EL-7 places the resulting boundary inside the escalation order.
 
 ### 5.5 Where the vector lives
 
@@ -918,9 +1273,24 @@ across two vectors in one system would be its own defect:
   Changing a dial's range or semantics starts a new evidence lineage.
 - **AV-3** Every amendment declares its migration per record class — `CARRIED`, `SCOPED`, or
   `RETIRED`. An amendment with no declared migration is rejected at review.
-- **AV-4** A dial may be added only if it passes C3-1 (a Category-F primitive with no existing
-  dial) **and** its movements are not expressible as a combination of existing dials. A dial that
-  is a blend of two others is a preset, not a dial (§22.1).
+- **AV-4** A dial may be added only if it passes the admissibility test in AV-5 **and** its
+  movements are not expressible as a combination of existing dials. A dial that is a blend of two
+  others is a preset, not a dial (§22.1).
+- **AV-5 · The admissibility test, restated in two clauses (strengthened v3.1.0 — improvement I5).**
+  v3.0.0-draft stated C3-1 as "one Category-F primitive per dial" and then admitted D3, which has
+  none — a closure rule with an exception on its first application. The rule is now stated to
+  cover the case it always had to:
+
+  > A dial is admissible iff it is the standing parameter of **either** (a) a Category-F
+  > regulation primitive with no existing dial, **or** (b) an existing **normative BrainConfig key
+  > under RS §18** with no existing dial. Nothing else is admissible.
+
+  Under (a): D1 (P81/P82), D2 (P81), D4 (P85/P55), D5 (P84), D6 (P83). Under (b): D4 and D5 also
+  qualify (`budgets.*`), which is corroboration rather than duplication. **D3 DIFFICULTY qualifies
+  under neither** and remains the set's one admitted exception — now an *explicit, bounded* one
+  rather than a silent breach of the rule stated a paragraph earlier. Its justification is that
+  `C-32`'s charter names it and AP3 is unstatable without it; its cost is recorded in W4/AQ-2 and
+  its authority is confined to publishing a target that `C-30` realizes (§13.2).
 
 ### 5.8 Responsibilities
 
@@ -1057,6 +1427,16 @@ mandatory for the same reason, and §7.4 makes the pressure analogue mandatory f
 **Phase 3 defines no learner state and no detector.** Every pressure derives from a taxonomy that
 already exists.
 
+**Placement (added v3.1.0 — B2, the one duplication found).** `src/lib/kernel/policy/basePack.ts`
+already encodes the D1 grid as Band-4 rules — `B4.d1.misconceiving.v1`, `B4.d1.fragile.v1`,
+`B4.d1.confused.v1`, each citing `foundations/02 §1`, the same source this table derives from. Two
+mechanisms reading one authority to produce turn effects is a duplication. It is eliminated by
+**placement, not redesign**: the pressure rules below are authored as **Band-4 rules in the
+existing pack, evaluated by the existing engine**, sitting alongside the `B4.d1.*` rules and
+extending the same quadrant reading from moves to dials. Every pressure keeps its wording, its
+source and its justification; what is withdrawn is any implication of a second deriver. §0.7.1
+carries the full mapping.
+
 | Source (existing authority) | Reading | Pressure |
 |---|---|---|
 | **`foundations/02` D1 grid** — FLUENT MASTERY | fast + correct + confident | `DEMAND↑` on D3; `SUPPORT↓` on D1 |
@@ -1133,7 +1513,10 @@ recorded. Zero is a legitimate and common outcome.
 **AR-1 · Preemption, not arbitration, for affect.**
 If Band 0 or Band 1 fires, the arbiter does not run. `C-31` preempts; the vector holds and applies
 the recovery clamp (§9 SG-8). Phase 3 has **no distress branch**, deliberately: a control plane
-with its own affect path is a second recovery engine.
+with its own affect path is a second recovery engine. **The preemption source is
+`src/lib/kernel/frustration.ts`'s live affect machine** (`CALM | STRAINED | FLOODED | RECOVERING`,
+projected by `affectBandOf()`), already implemented and already read at Band 0 by
+`B0.recovery.preempt.v1` — named here in v3.1.0 so no reader infers that Phase 3 supplies one.
 
 **AR-2 · One pressure, one dial, one step.**
 Inherited from `decision-engine/07` §2's *"Reduce ONE dimension"*, `decision-engine/05`'s
@@ -1194,6 +1577,24 @@ Selects an action · reads component internals · changes more than one dial · 
 runs during recovery · sets the target band · makes a legal action illegal in a way `C-29` did not
 already imply (it may only *narrow*, and narrowing to empty is handled at §21.2).
 
+**And, added v3.1.0 (B2): it never resolves a rule conflict.** `docs/architecture/README.md` §3
+names `src/lib/kernel/policy/engine.ts` the **sole owner** of *"band evaluation, conflict
+resolution, completeness"*, and states that *"a second implementation is a defect, not a
+refactoring opportunity."* The boundary:
+
+> The engine resolves **two rules colliding on a field** — by specificity, then
+> mandatory-beats-optional, then lexical `ruleId`. **AT-5 resolves which learner-state pressure is
+> answered**, which is a question upstream of any rule firing. Where AT-5's ordering must take
+> effect at rule-evaluation time it is expressed **inside** the engine's existing mechanics:
+> AR-3's band priority is *band assignment*, AR-4's reversibility ordering is *rule specificity*,
+> AR-6's clamps are *Band-2 subtractive rules*, and AR-8's tie-break defers to the engine's own
+> lexical rule and to Band 6. **Phase 3 implements no resolver.**
+
+AR-5 is strengthened by this placement rather than weakened by it: the engine already emits
+`PolicyConflictDetected` for an equal-specificity collision and calls it *"always a pack bug."*
+AR-5's `contradictory-pressure` event is the same discipline one layer up — a signal that the
+state model is wrong, never a value to interpolate.
+
 ### 8.4 Failure modes
 
 - **Starvation.** A low-band pressure is never answered because a higher one is always present.
@@ -1226,6 +1627,21 @@ specifies *how long a rung is held before the next*. `decision-engine/05` has fo
 dwell rule. The live posture selector re-derives on every turn from folds that flip on one
 response. `strategyEffectiveness.ts` detects a stalemate at three repeats — the only anti-thrash
 mechanism in the running system, and it counts repeats rather than measuring change.
+
+**Where the governor belongs — the question the review asked (answered v3.1.0).** The split is
+between the rules and their evaluation, and both halves already have owners:
+
+> **The governor's rules are pedagogy and belong to adaptive teaching.** SG-3's asymmetry is
+> `student-state/04`'s build-slow/collapse-steep finding; SG-4's monotonic fade is the fade
+> discipline; SG-5 is the three-representation rule; SG-6's windows each protect an authored
+> sequence; SG-8 mirrors `C-31`'s exit rule. None of that is runtime concern.
+> **Their evaluation is runtime and belongs to `kernel/policy/engine.ts`.** SG-1…SG-8 are
+> authored as **Band-2 subtractive rules** that remove illegal dial moves from the candidate set
+> (§0.7.1). The governor is a rule set, not an evaluator.
+
+So the answer is neither/both: adaptive teaching owns *what stability means here*; the runtime owns
+*when the rules fire and how collisions resolve*. A governor implemented as its own evaluator would
+be the second implementation `README.md` §3 forbids.
 
 A control system with no dwell, no rate limit and no hysteresis oscillates. That is not a
 pedagogical claim; it is what control systems do. And oscillation in this system is not a cosmetic
@@ -1315,14 +1731,69 @@ there would then be two arbiters.
 Phase 1 §7.7 budgets *re-teach attempts*; §9 budgets *adjustments*. They are different resources
 and must not be netted. But they interact at one point, and it needs stating:
 
-> An adjustment does **not** consume a re-teach budget, and a re-teach does **not** reset an
-> adjustment dwell. However, **a re-teach resets the oscillation window** on any dial whose
-> projection (axis 6 or 7) the re-teach changed — because the teaching changed, so prior dial
-> evidence on that axis no longer describes the same situation.
+> A dial move that is **not** a re-teach does not consume a re-teach budget, and a re-teach does
+> **not** reset an adjustment dwell. However, **a re-teach resets the oscillation window** on any
+> dial whose projection (axis 6 or 7) the re-teach changed — because the teaching changed, so prior
+> dial evidence on that axis no longer describes the same situation.
 
 Without this rule the two budgets would silently couple, and a learner who received a legitimate
 re-teach would be blocked from a legitimate support change by an oscillation count accrued under
 different teaching.
+
+### 9.4a The budget-bypass rule (added v3.1.0 — blocking issue B3)
+
+**The defect this closes.** v3.0.0-draft stated three things that were jointly inconsistent:
+§5.4 made D1 the standing form of Phase 1 axis 7 AGENCY and D5 the standing form of axis 6
+GRANULARITY; §9.4 exempted "adjustments" from the re-teach budget; and §16 placed ADAPT below
+RE-TEACH. Because §16's ladder is by construction the *response-to-failure* ladder, a
+failure-response move on D1 or D5 **is** an axis 6/7 change — which Phase 1 §7.4 defines as a
+re-teach and Phase 1 §7.7 budgets at three distinct attempts per claim per session. Relabelled as
+an adjustment, the same move consumed no budget. Phase 1's own §7.4.2 verification tables confirm
+the collision concretely: Ladder 1 rung 3 ("concrete enactment") is primary axis 7; Ladder 3 rung 2
+("decompose to one component") is primary axis 6; Ladder 3 rung 3 ("transfer the apparatus to the
+learner") is axis 7. All three are re-teaches in Phase 1 and were rung-2 dial moves in Phase 3.
+
+**The rule.** Budget consumption is determined by **two facts about the move, not by its name**:
+
+```
+ A dial move CONSUMES Phase 1 §7.7's re-teach budget iff BOTH hold:
+
+   (BB-1)  the dial has a Phase 1 axis projection  — D1 (axis 7) or D5 (axis 6)
+   (BB-2)  the move is taken in RESPONSE TO A FAILURE
+           (trigger class T1, T4, T6, T8 per Phase 1 §7.2, or any entry to
+            the §16 ladder at rung 2 or above)
+
+ A dial move DOES NOT consume it iff EITHER:
+
+   (BB-3)  the dial has no axis projection — D2 HINT, D3 DIFFICULTY,
+           D4 PACE, D6 INTERLEAVING; or
+   (BB-4)  the move is not a failure response — the pressure was boredom,
+           fluency, load detected without failure, attention-span, a learner
+           request, or a clamp/profile application (§21.3).
+```
+
+**Why the boundary falls exactly there.** Phase 1's budget exists to stop a learner being taught
+the same claim repeatedly under superficially different guises. An axis 6/7 change following a
+failure *is* another attempt at the claim — that is what Phase 1's operator says it is, and Phase 3
+has no standing to reclassify it. A hint grant, a pace change or a difficulty step is not another
+attempt at the claim: the teaching is unchanged and the learner has not been re-taught anything.
+BB-3 is therefore not a loophole but the honest statement that four of the six dials sit outside
+the act Phase 1 budgets. BB-4 is the same statement about *why* the move was made: decomposing for
+a learner who is fluent-but-overloaded is not a second attempt at a failed claim.
+
+**Enforcement, and the reason it is checkable rather than asserted.** Every adjustment record
+carries `consumesReteachBudget` (§4.3 step 7), set by BB-1 ∧ BB-2 at commit time. A budgeted move
+is refused by the governor when Phase 1's budget is exhausted, on the same footing as any other
+governor rejection — so **exhaustion of Phase 1's budget removes the move from the candidate set
+before AT-5 can select it**, which is Band 2's subtractive semantics doing the work rather than a
+new mechanism. §20 gains a corresponding audit metric: *budgeted dial moves as a share of D1/D5
+moves*, whose expected value is well above zero and whose collapse toward zero would indicate the
+classifier has been mis-set.
+
+**The two-lock rule remains valid and is strengthened.** Lock (i) still asks *is this different
+teaching?* and lock (ii) still asks *is this a stable control move?*; both may still refuse
+independently. What is added is that passing lock (i) now carries lock (i)'s **cost**, not merely
+its permission — which is what the two-lock rule always implied and never said.
 
 ### 9.5 Reconciliation with the live stalemate detector
 
@@ -1398,6 +1869,14 @@ restated at the dial layer so the dial cannot be used to route around them.
 **The ladder does not fix `n`.** Where an authored Protocol or blueprint declares concept-specific
 rungs, those win (§19.2), exactly as an authored Protocol wins over a generic archetype.
 
+**This ladder is not the ISS-01 ladder (added v3.1.0 — B1).** `conversationState.ts`'s
+`PHASE_ORDER` with `phaseIndex − 1` floored is a **phase** ladder — position in the teaching
+sequence — and is the subject of `ISS_01_LADDER_RECONCILIATION.md`, which is BLOCKED on an
+unresolved pedagogical decision. D1 is a **support** ladder *within* a phase. They have similar
+shapes (step one, never to zero) and different subjects, and conflating them would attach Phase 3
+to a blocked decision it has no standing to make. §16.3 EL-8 restates this for the escalation
+order; AF-11 records that §10.3's clamps must be re-verified once ISS-01 resolves.
+
 ### 10.3 Phase clamps: scaffolding is bounded by the arc, not chosen freely
 
 TQ-2's arc phases imply support ceilings and floors. These are **structural clamps**, not
@@ -1471,7 +1950,7 @@ the evidence hierarchy (`assessment/05`), or recovery support (`C-31`).
   gate reading unassisted-at-this-rung evidence, and by the rung-4-only advancement rule.
 - **Clamp evasion via method choice.** A method whose shape embeds support (M12 Worked Example) is
   selected during INDEPENDENT. Mitigated by the clamp publishing as an `AdaptationConstraint` that
-  narrows the legal action set at Band 2, before `C-30` selects.
+  narrows the legal action set at Band 2 (subtractive legality), before `C-30` selects.
 - **Ladder/primitive drift.** §10.2's rungs and P11/P12's definitions diverge over time. **Not
   mitigated mechanically** — this is Phase 1 R15 recurring, and it is honest to say so.
 
@@ -1497,6 +1976,7 @@ clearest possible instance of the anti-pattern Phase 1 §17.2 names.
 | Hint asset packaging (`hint_tier_1..3`) and lifecycle | **ADR 14** |
 | Capability precondition before hinting toward a step | **`CAPABILITY_MODEL_DESIGN`** |
 | The answer-withholding policy and its honest explanation | **`C-32`** |
+| **The hint module itself** — `hint(request) → slot content`; allowed deps *Knowledge/Capability views, packs, catalog*; **forbidden dep: the LLM** | **`RS §13`** (added v3.1.0 — B2). A hint module already exists in the frozen subsystem contracts. AT-8 is the **grant decision upstream of `hint(request)`**, never a second module, and its HL-4 capability precondition is that contract's *Knowledge/Capability views* dependency restated. The forbidden-LLM dep independently guarantees §11.7's "retrieval, never generation" |
 | `MasteryCondition {hintDebt: 0}` | **CEKR** |
 | Hint-take rate rising with mastery as a counter-metric | **Phase 1 TQ-7 §10.3** |
 
@@ -1618,10 +2098,18 @@ relationship failure, not a success.
 
 ## 12. AT-9 · Pace Adaptation
 
-### 12.1 The one dial with no existing owner
+### 12.1 Ownership — corrected in v3.1.0
 
-Pace is referenced across the repository and owned nowhere. `C-33` owns *session* pacing — how the
-attention budget is allocated across phases. `KG_CONCEPT_GRANULARITY_STANDARD` explicitly assigns
+v3.0.0-draft opened this section "The one dial with no existing owner." **That was wrong**, and the
+correction is recorded here rather than quietly applied: `RS §18` ships
+`budgets.paragraphs.{beginner,intermediate,expert}` with `strained` variants and
+`budgets.maxNewTerms` as **normative constants**, and `src/lib/teaching/conversationState.ts`'s
+`responseBudget(register, consecutiveFailures)` implements them live, citing `foundations/04 P5`.
+Pace is owned. What was missing is a controller over it richer than a two-valued struggle flag, and
+a rule against oscillating it.
+
+Pace is nonetheless split across owners, and that line still needs drawing. `C-33` owns *session*
+pacing — how the attention budget is allocated across phases. `KG_CONCEPT_GRANULARITY_STANDARD` explicitly assigns
 *"a lesson is a pacing decision"* to the composition layer and keeps it off the KG node.
 `EOS_V2` §5.2 lets Band 5 set "pace fields" without defining them. **P85 PACING CONTROL** exists as
 a frozen primitive with no controller above it.
@@ -1640,6 +2128,19 @@ turns longer instead of smaller.
 | **New-element rate** | how many genuinely new elements per turn | `first-lesson/02`'s ≤3-new-words limit is the authored floor case |
 | **Turn density** | how much text/structure arrives in one turn | `first-lesson/02`'s 2-sentence bursts; `foundations/03`'s load-bearing-sentence rule |
 | **Wait-time multiplier** | how long before the tutor fills the silence | **P55 WAIT TIME**; `foundations/03`'s wait-time law; consumed by HL-3 |
+
+**On whether P55 should be its own dial (AQ-1), the lean is stated rather than left open
+(v3.1.0 — M3): it should not.** Wait time and turn density are moved by the same pressures, in the
+same direction, under the same clamps, and separating them would create a pair that AP2 forbids
+from co-moving while every real adjustment wants them to. It stays a sub-setting unless data shows
+a pressure that moves one without the other. This is a lean; AQ-1 remains open for the count of
+dials as a whole.
+
+**Two of the three sub-settings are existing normative keys** — `budgets.paragraphs.*` for turn
+density, `budgets.maxNewTerms` for new-element rate. The wait-time multiplier is the one with no
+BrainConfig key, grounded instead in P55 and `foundations/03`. D4 therefore **selects** shipped
+values for two sub-settings and controls the third, which is what keeps it legal at Band 5, whose
+contract forbids altering budgets (§0.6.2).
 
 **New-element rate is not difficulty and not load.** A hard item delivered one element at a time is
 slow, not easy. Three easy elements at once is fast, not hard. Conflating the three is what makes
@@ -1951,11 +2452,27 @@ move a human tutor makes more often than either:
 > *Same teaching. Same representation. Same claim. One notch more support, or one step smaller,
 > or a little slower.*
 
-That move is not a refinement (nothing partially worked; the scope is unchanged) and it is not a
-re-teach (no axis changed; under L1 it is paraphrase). Today it has no home, so a system faithful
-to Phase 1 must either narrow scope it should not narrow, or change an axis it has no diagnosis
-for. **Rung 2 below is that move**, and placing it is Phase 3's single largest contribution to the
-existing architecture.
+That move is not a refinement (nothing partially worked; the scope is unchanged), and for four of
+the six dials it is not a re-teach either, because those four have **no axis in Phase 1's operator
+at all**: a hint grant, a difficulty step, a pace change and an interleaving change cannot be
+expressed as a primary-axis change, so under L1 they read as paraphrase and are illegal. For those
+four the move genuinely has no home, and a system faithful to Phase 1 must either narrow scope it
+should not narrow or change an axis it has no diagnosis for. **Rung 2 is that move.**
+
+**Scope correction (v3.1.0 — blocking issue B3).** v3.0.0-draft claimed rung 2 for all six dials.
+That claim is false for **D1 SCAFFOLD and D5 LOAD**, whose projections onto Phase 1 axes 7 and 6
+mean Phase 1 *does* already house them — as re-teaches, with a budget (§9.4a). The honest claim is
+therefore narrower and still substantial:
+
+> **The missing rung is genuine for D2 HINT, D3 DIFFICULTY, D4 PACE and D6 INTERLEAVING — four of
+> six dials, and the four that account for most within-turn adaptation. For D1 and D5 the move is
+> not missing from Phase 1; what was missing was a *standing value* for it and a rule against
+> oscillating it.** Rung 2 remains the correct place for D1/D5 moves too, but those moves are
+> budgeted re-teaches under BB-1 ∧ BB-2 rather than free adjustments.
+
+Placing this rung — and paying for the half of it that Phase 1 already owns — remains Phase 3's
+single largest contribution to the existing architecture, at two-thirds of the size v3.0.0-draft
+claimed for it.
 
 ### 16.2 The order
 
@@ -1974,6 +2491,9 @@ existing architecture.
   2 ★  ADAPT                          ★ PHASE 3                    governor-bounded
        one dial, one step,                                         (dwell · rate ·
        under the governor                                          hysteresis · SG-5)
+       D1/D5 on failure ALSO                                       + Phase 1 §7.7
+       consume Phase 1's budget                                      when BB-1 ∧ BB-2
+       (§9.4a, EL-7)                                                 (§9.4a)
 
   3    RE-TEACH                       Phase 1 §7.4                 3 attempts/claim/
        one primary axis + closure;                                 session (Phase 1 §7.7)
@@ -2039,6 +2559,21 @@ Three of the six authored standing moves turn out to be dial moves under other n
 re-teaches. That the authored move set partitions cleanly across rungs 2 and 3 is the strongest
 available corroboration that rung 2 is a real rung and not an invention — the corpus was already
 making these moves, with no layer that distinguished them from re-teaching.
+
+**EL-7 · Rung 2 is not a cheaper name for rung 3. (added v3.1.0 — B3)**
+A rung-2 move on D1 or D5 taken in response to a failure **is** a Phase 1 re-teach and consumes
+Phase 1 §7.7's budget (§9.4a, BB-1 ∧ BB-2). It stays at rung 2 because the *teaching* is unchanged
+and the escalation order should reflect the size of the move, not its cost — but it is paid for at
+rung 3's rate. When Phase 1's budget is exhausted, D1/D5 failure-response moves leave the candidate
+set and the ladder advances to rung 3 or 4 on the remaining dimensions. **No adaptation path
+bypasses the budget**, and the ladder does not acquire an unbudgeted lane.
+
+**EL-8 · This order does not resolve ISS-01. (added v3.1.0 — B1)**
+`ISS_01_LADDER_RECONCILIATION.md` is BLOCKED on a pedagogical decision about the live 6-phase
+ladder's CHECK/PRACTICE ordering and its interaction with the 10-state TSM. §16's rungs are an
+*escalation* order over responses to difficulty; ISS-01's is a *phase* order over teaching states.
+They are different objects and Phase 3 must not be read as having settled the second. Whichever way
+ISS-01 resolves, §10.3's phase clamps must be re-checked against the resulting phase order (AF-11).
 
 **EL-6 · Exhaustion at rung 2 is a signal, not a decision.**
 When the governor rejects every legal dial move and pressures persist, AT-13 emits
@@ -2187,8 +2722,8 @@ state, in conformance with Phase 1 §11.1 and the Contract.
 
 | Output | Consumer | Nature |
 |---|---|---|
-| `AdaptationConstraint[]` | `C-28` **Band 2** | **narrowing only** — removes actions from the legal set |
-| `AdaptationParameters` | `C-28` **Band 3** | **parameterizing only** — how the selected action is delivered |
+| `AdaptationConstraint[]` | `C-28` **Band 2** (legality) | **subtractive** — removes candidate moves. This is Band 2's existing semantics (`kernel/policy/types.ts`), not a Phase 3 invariant |
+| `AdaptationParameters` | `C-28` **Band 5** (personalization) | **parameterizing only** — how the selected action is delivered. Corrected from "Band 3" in v3.1.0 (§0.6.2) |
 | `AdjustmentRecord` | Ledger → TQ-7 Tier A/D, `eos-v3/05`, `eos-v3/06` | evidence |
 | `adaptationExhausted` | **TQ-1** | recommendation only (§17.3) |
 | `contradictory-pressure`, `clamp-conflict`, `oscillation-detected` | defect channel | defect signals |
@@ -2280,8 +2815,14 @@ is wrong.
 ### 19.3 Constants live in a policy store, not here
 
 Every numeric threshold in §9 — dwell counts, hysteresis gaps, reversal windows, rate limits — is a
-**policy-store value**, versioned, reviewed, and personalizable, following ADR 10's `BrainConfig`
-proposal to replace hardcoded constants. This document deliberately publishes **no numbers**. Two
+**BrainConfig value**. **Corrected in v3.1.0 (B1):** `RS §18` is *"the only normative source for
+constants"* under the authority ladder and already ships the values Phase 3's dials consume
+(`budgets.*`, `fluency.latencyFactor` = 1.25×, `fluency.count` = 3, `recovery.behavioralTrigger` =
+2 consecutive failures, `conv.maxConsecutiveQuestions` = 2, `session.affectBudget.cap` = 2 /
+lessonOne 1). New governor constants are therefore **additions to RS §18**, proposed against that
+document; ADR 10's `BrainConfig` store is the *persistence* proposal, not the normative source.
+v3.0.0-draft named only ADR 10 and thereby pointed at the wrong authority. This document
+deliberately publishes **no numbers**. Two
 reasons: they must be calibrated against Tier C outcomes and should be expected to move (Phase 1
 OQ-5's precedent), and numbers in an architecture document acquire a false authority that survives
 the evidence that should have changed them.
@@ -2331,6 +2872,7 @@ Phase 3 defines **no outcome metric** and **no new evidence store**.
 | **Freeze-window integrity** — dial moves attempted inside a window | governor rejections | implementation defects at the highest-cost moments |
 | **Posture residency** | posture records | the self-sealing posture failure (§6.5) |
 | **Proxy-dependence share** — decisions made with `capacityUnknown` or a PROXY flag | parameters | proxy laundering (Phase 1 R14) |
+| **Budgeted-move share** — D1/D5 moves flagged `consumesReteachBudget` as a share of all D1/D5 moves *(added v3.1.0 — B3)* | adjustment records | a collapse toward zero means BB-1 ∧ BB-2 has been mis-set and the budget is being bypassed |
 
 ### 20.3 Counter-metrics
 
@@ -2410,6 +2952,17 @@ ease. The ladder, most-capable first:
                     plus a record that adaptation is unavailable.
 ```
 
+**Precedence against RS P-3 degraded mode (added v3.1.0 — B2).** `src/lib/eos-runtime/
+degradedMode.ts` implements RS `P-3` — *degraded deterministic mode*, template renders and scripted
+moves, *"banner-free (learner not told 'AI down')"* — and its own header states the principle this
+ladder independently arrived at: *"a second template body would be a second owner of degraded
+pedagogy."* The two ladders describe different scarcities and must not be merged:
+
+> **P-3 governs generation availability; the AF-ladder governs adaptation availability.** They
+> co-occur, and P-3 wins the turn: in a P-3 turn the vector **holds and publishes its standing
+> values** (AF3/AF4 behaviour), because a degraded turn still needs support conditions to render
+> at. Phase 3 introduces **no second degraded mode, no template path, and no banner**.
+
 **AF4 is the current state of the world**, and saying so is the point: an architecture whose
 degraded mode is *"the system as it exists today, with a defect report attached"* fails safely, and
 its first implementation stage cannot regress anything.
@@ -2427,7 +2980,7 @@ adjustments, and they are never arbitrated against (AR-6).
 | Profile | Clamp | Authority |
 |---|---|---|
 | **First lesson** | The authored hard limits — 1 concept, ≤3 new words × 3 uses, 2-sentence bursts, ≤6 questions, failure budget 1, WM as 2 slots | `first-lesson/02` — Phase 3 sets **no** lesson-one value of its own |
-| **Recovery** | All dials to the recovery clamp; exit at one rung below entry (SG-8) | `C-31` |
+| **Recovery** | All dials to the recovery clamp; exit at one rung below entry (SG-8). **Raised by `frustration.ts`'s `FLOODED` state and released via `RECOVERING`** (added v3.1.0 — B2); `STRAINED` selects the `strained` column of RS §18's budget table rather than the full clamp | `C-31` + `kernel/frustration.ts` |
 | **Unaided assessment** | D1 = 4, D2 = H0, frozen | `assessment/05`, Phase 2 §9.2 |
 | **Session close** | Dials held; content is dropped before the close, never the close | `C-33` |
 | **Accessibility / reading-load signature** | Channel and burst adaptations per the authored signature | `student-state/05` §7 |
@@ -2462,7 +3015,7 @@ The evolution `C-30` and `C-32` both anticipate. It enters under one constraint:
 > A learned policy may **rank moves the governor has already declared legal**. It may not replace
 > the governor, propose an illegal move, or move more than one dial.
 
-This is `C-28` Band 3's existing containment pattern — a learned policy over an enumerated space
+This is the existing tactics-band containment pattern — a learned policy over an enumerated space
 with the legal set as an action mask. It requires the decision-consequence join (§20.4), which
 requires the adjustment record, which requires AH-3. **No learned policy is possible before Stage 1
 data exists**, and claiming otherwise would be the kind of roadmap fiction §25 is written to avoid.
@@ -2490,7 +3043,11 @@ data exists**, and claiming otherwise would be the kind of roadmap fiction §25 
   on adaptation quality is authored hint ladders and concept dial bounds. This is Phase 1 R1 and
   OQ-1 recurring, and Phase 3 does not solve it.
 - **Replay.** Determinism (§4.4) means a trajectory replays exactly, which is what makes offline
-  evaluation of a dial-policy change possible without touching a learner.
+  evaluation of a dial-policy change possible without touching a learner. **Corrected v3.1.0 (I4):
+  that evaluation belongs inside `VALIDATION_FRAMEWORK_P10.md`'s existing tiers and frozen fixture
+  set, and inside `kernel/simulation/`'s existing persona and invariant harness — not beside
+  either.** Phase 3 defines no harness, no fixture format and no evaluation tier; a dial-policy
+  change is a new *case* for instruments that already exist.
 
 ---
 
@@ -2608,7 +3165,7 @@ Criteria for the **document**, not for an implementation.
 |---|---|---|
 | **AA1** | Every briefed scope item is designed, deferred with a named owner, or split — with the disposition stated. | ✅ §0.5 (9 of 22 deferred) |
 | **AA2** | Phase 1 §17's seven-step reconciliation executed **before** design work and published. | ✅ §0, §28 |
-| **AA3** | Every architecture authority in the repository carries exactly one verdict, produced from a directory listing. | ✅ §0.1 — zero unclassified; **Superseded used zero times** |
+| **AA3** | Every architecture authority in the repository carries exactly one verdict, produced from a directory listing. | ✅ **MET IN v3.1.0 — it was FALSE in v3.0.0-draft.** That draft had no governance/process section, leaving ~21 authorities unclassified including `EDUCATIONAL_BRAIN_BIBLE.md` (zero mentions), `DEPENDENCY_RULES.md`, `ISS_01_LADDER_RECONCILIATION.md` and `README.md` itself, while asserting completeness via an escape clause no category row supported. §0.1 F and G now classify every one; the escape clause is removed. |
 | **AA4** | The canonical adaptation stack is published with one owner and one authority per level. | ✅ §0.2 |
 | **AA5** | The governance registry is reconciled and every cross-owner handoff is explicit. | ✅ §0.3 — AH-1…AH-10 |
 | **AA6** | Contradictions found between reused authorities are recorded, not smoothed or resolved. | ✅ §0.4 — AC-1, AC-2, AC-3 |
@@ -2623,15 +3180,28 @@ Criteria for the **document**, not for an implementation.
 | **AA15** | Metrics are process metrics, bounded against TQ-7 and OSF, with counter-metrics. | ✅ §20 |
 | **AA16** | A fallback exists for every degradation level, and the fully-degraded mode is safe. | ✅ §21.2 — AF4 is today's behaviour plus a defect report |
 | **AA17** | Risks and trade-offs state residual risk and accepted cost, not only mitigations. | ✅ §23, §24 |
-| **AA18** | Every component declares a falsifiable prediction. | ⚠️ **PARTIAL** — §4.7, §5.10, §6.6, §8.5, §9.7, §10.9, §11.8, §12.7, §13.7, §15.6, §16.5, §17.6 carry predictions. **AT-11 (§14.7) declares none, deliberately and with reasons**, and AT-2's is weak. Following Phase 1 A10's precedent: a prediction manufactured to satisfy a checklist is worse than an acknowledged gap. |
+| **AA18** | Every component declares a falsifiable prediction. | ⚠️ **PARTIAL — two components, stated plainly (M5).** §4.7, §5.10, §6.6, §8.5, §9.7, §10.9, §11.8, §12.7, §13.7, §15.6, §16.5, §17.6 carry predictions. **AT-11 (§14.7) declares none, deliberately and with reasons; AT-2's (§5.10) is weak and is counted as partial rather than met.** Following Phase 1 A10's precedent: a prediction manufactured to satisfy a checklist is worse than an acknowledged gap. Carried as debt against Stage 1 data. |
 | **AA19** | No code, runtime, schema, API, prompt, database, UI, curriculum or KG change; no pseudocode; no implementation plan. | ✅ document only |
 | **AA20** | Implementation guidance is sequenced by evidence-unlock and explicitly gated. | ✅ §25 |
 | **AA21** | Open questions are recorded as open rather than resolved by assertion. | ✅ §27 |
 | **AA22** | Every new object passes an admissibility test against the frozen primitive architecture. | ✅ C3-1; §22.1 |
-| **AA23** | **Independent merge-gate review recommends approval.** | ❌ **NOT MET — and not self-certifiable.** §29. |
+| **AA23** | **Independent merge-gate review recommends approval.** | ❌ **NOT MET — and not self-certifiable.** §29. A merge-gate review of v3.0.0-draft returned DO NOT APPROVE on B1/B2/B3; v3.1.0 answers all three. A further independent review is required and this document does not anticipate its outcome. |
+| **AA24** *(new v3.1.0)* | **Every live runtime subsystem that could own part of the control plane carries a verdict of reuses / extends / constrains / duplicates.** | ✅ §0.1 G and §0.7 — four subsystems, nine mechanisms; **one duplication found and eliminated by placement** (§0.7.1), five reuses, three constraints |
+| **AA25** *(new v3.1.0)* | **No adaptation path bypasses a Phase 1 budget.** | ✅ §9.4a (BB-1…BB-4), §16.3 EL-7, §5.4's budget consequence, §4.3's `consumesReteachBudget` capture, §20.2's audit metric |
+| **AA26** *(new v3.1.0)* | **The document states the authority ladder it sits under, and every claim that crosses a frozen document defers to it.** | ✅ §0.6 — Phase 3 is row 6 (Advisory); band numbering corrected to EOS v2's; constants deferred to RS §18 |
 
-**AA18 and AA23 are the two open criteria.** AA18 is accepted debt against Stage 1 data. AA23 is
-structural: Phase 1 §18 forbids the author from certifying the document, and this document does not.
+**AA18 and AA23 remain the two open criteria; AA3 moved from falsely-met to met.** AA18 is accepted
+debt against Stage 1 data. AA23 is structural: Phase 1 §18 forbids the author from certifying the
+document, and this document does not.
+
+**Scope confirmation (required by the revision brief).** Architectural scope did **not** expand in
+v3.1.0. Component count is unchanged at fourteen (AT-1…AT-14). The dial set is unchanged at six
+plus D3. No principle was added or removed (AP1…AP10 intact). No new adaptive subsystem, contract,
+store, evidence table, asset kind, error code, primitive, posture, state or taxonomy was
+introduced. The only new *rules* are §9.4a's budget classifier and AV-5's restatement of an
+admissibility test that already existed; both **narrow** what Phase 3 may do. Two new handoffs
+(AH-11, AH-12) and three new feedback items (AF-9…AF-11) are records, not designs. The one
+substantive reduction is §16.1's narrowing of the missing-rung claim from six dials to four.
 
 ---
 
@@ -2699,7 +3269,26 @@ Phase 1 §17 executed in full, **before** design work.
 | **4 · Document reconciliation** | One verdict per authority | §0.1. Superseded used zero times. **Three contradictions found and recorded rather than smoothed** (§0.4) |
 | **5 · Ownership verification** | One owner per responsibility; every transfer stated | `C-32` keeps the loop, band and veto and gains an instrument (AH-1) — the only near-transfer in the phase, and it is a *gain*, not a takeover. No responsibility is removed from any existing component |
 | **6 · Authority verification** | Checked every decision for a second decider | Two found. (a) Scaffold/agency would have had two authorities → resolved by the projection and two-lock rule (§5.4). (b) A new "adaptive mode" enum would have competed with the live posture selector → resolved by extending it (§6) |
-| **7 · Independent review** | Not performed by the author | §29 |
+| **7 · Independent review** | Performed on v3.0.0-draft; returned **DO NOT APPROVE** on B1/B2/B3. v3.1.0 answers all three. A further independent review is required | §29 |
+
+**Re-execution record (v3.1.0).** Steps 1, 4, 5 and 6 were re-run after the review, because B1 and
+B2 showed the first pass had sampled where it claimed to survey:
+
+| Step re-run | What changed | Result |
+|---|---|---|
+| **1 · Inventory** | Re-enumerated by directory listing and **mechanically diffed against §0.1's tables** rather than checked by recollection | 21 unclassified authorities found, including the authority index and the Bible. §0.1 F added |
+| **1b · Runtime inventory** | Extended from `src/lib/school/adaptive/` to `src/lib/kernel/`, `src/lib/kernel/policy/`, `src/lib/eos-runtime/`, `src/lib/teaching/conversationState.ts` | An implemented seven-band policy engine, an affect machine, a degraded mode and a live response-budget dial found. §0.1 G and §0.7 added |
+| **4 · Document reconciliation** | Verdicts written for all 21 | Superseded still used zero times |
+| **5 · Ownership verification** | Re-run over the newly found subsystems | Two sole owners identified in `README.md` §3 (`policy/engine.ts`, `policyMove.ts`); §8.3 and §3.4 now bound AT-5 against both. `C-32`'s transfer restated honestly (I1) |
+| **6 · Authority verification** | Re-run per mechanism | **One duplication found** — AT-4's pressure derivation against `basePack.ts`'s `B4.d1.*` rules — eliminated by placing Phase 3's rules inside the existing pack (§0.7.1). Everything else is reuse or constraint |
+
+**The anti-pattern that fired this time.** Phase 1 §17.2 names *"reconciling what a review named"*
+and *"trusting the status line."* v3.0.0-draft did both: it reconciled the documents its own
+reading surfaced, and it accepted EOS v2/v3's "reference design / SPECIFICATION" status lines
+without checking whether the specification had been implemented. It had been. Phase 1 §18's clause
+applies squarely — *"a finding of the form 'another previously unseen architecture document was
+discovered' after §17's procedure has been executed indicates the procedure failed"* — and the
+procedural remedy adopted here is recorded as feedback **AF-12** rather than as a private fix.
 
 **Anti-patterns actively checked** (Phase 1 §17.2):
 
@@ -2718,7 +3307,7 @@ verification: `teachingStrategy.ts`, `strategyEffectiveness.ts`, `teachingOutput
 computes nothing — which no amount of document reading would have found, and which materially
 changed §10's and §11's claims about their own novelty.
 
-**Honest limitations.** Three, stated so a reviewer knows where to press hardest:
+**Honest limitations.** Five, stated so a reviewer knows where to press hardest (expanded in v3.1.0; items 1–2 unchanged, item 3 revised, items 4–5 new):
 
 1. **`PRIMITIVE_LIBRARY.md` was not read in full** (310 KB). Category F's membership was verified
    from `EDUCATIONAL_BRAIN_PRIMITIVE_ARCHITECTURE.md`'s appendix and the P11/P12/P81/P82/P85 entries
@@ -2729,9 +3318,18 @@ changed §10's and §11's claims about their own novelty.
    canonical enumerated list, because no such list was found in either file. Rule 9 (one
    probabilistic component per turn) is the one Phase 3 most directly depends on and it was verified
    in substance.
-3. **`C-32`'s implementation status was not verified.** Its charter was read in `eos-v3/04`; whether
-   any of it runs today was not established. If a live difficulty controller exists that this
-   reconciliation missed, §13 is under-reconciled.
+3. **`C-32`'s implementation status is now partly established, and remains partly open.** v3.1.0
+   found the band engine, the frustration machine and the response-budget dial that implement parts
+   of `C-32`'s charter, and reconciled them (§0.7). What was **not** established is whether a live
+   rolling-window success-rate estimator or a target-band computation exists anywhere; no such code
+   was found, but absence-of-finding is weaker than absence. §13 assumes `C-32`'s band is supplied
+   and does not design it — if a live band controller exists, §13 is still under-reconciled.
+4. **`PRIMITIVE_LIBRARY.md` was still not read in full** (310 KB). Category F membership and the
+   P11/P12/P81/P82/P85 entries were verified; **AV-5 clause (a) remains the least-verified claim in
+   this document.**
+5. **The policy pack was read at the level of rule ids, bands and citations, not rule bodies.**
+   `basePack.ts`'s guards and effects were not exhaustively evaluated. If a rule there already
+   moves a dial-like quantity that §0.7.1 did not identify, a second duplication may exist.
 
 ---
 
@@ -2739,8 +3337,13 @@ changed §10's and §11's claims about their own novelty.
 
 Phase 3 may be merged only when **all** hold:
 
+0. **The v3.0.0-draft merge-gate findings are confirmed resolved.** That review returned DO NOT
+   APPROVE on B1 (incomplete inventory), B2 (unexamined implemented control layer) and B3 (a route
+   around Phase 1's re-teach budget). v3.1.0 answers all three — §0.1 F/G, §0.6, §0.7 and §9.4a —
+   and Appendix E maps every change to its issue. **The author does not certify that the answers
+   are sufficient**; confirming that is the reviewer's task.
 1. All acceptance criteria met except those explicitly carried as partial, with the carry stated
-   (§26: AA18 partial, AA23 open).
+   (§26: AA18 partial, AA23 open; AA24–AA26 added in v3.1.0).
 2. **An independent merge-gate review recommends approval.** Per Phase 1 §18 the author may declare
    only readiness and may never self-certify. The reviewer must assume nothing is correct and verify
    against the repository, not against this document.
@@ -2756,18 +3359,21 @@ Phase 3 may be merged only when **all** hold:
 7. On approval, the Bible, the governance registry and the EOS blueprint index gain Phase 3
    pointers (AH-7) — runtime-owner actions.
 
-**Suggested reviewer focus**, ranked by where I judge this document weakest:
+**Suggested reviewer focus**, re-ranked for v3.1.0 by where I judge this document weakest:
 
-1. **§16's escalation order** — the only section that sequences other owners' components. If rung 2
-   is wrong, Phase 1 and `C-32` will disagree at runtime.
-2. **§5.4's two-lock rule** — whether the projection genuinely preserves both operators or merely
-   asserts that it does. AR-R4 says it is unenforced until AH-3.
-3. **C3-1 and the dial set's closure** — §28's limitation 1 makes this the least-verified claim.
-4. **§15.3's disambiguation** — it rests on a PROXY signal and an asymmetric-harm argument, not on
-   data (AQ-5).
-5. **§14 AT-11** — the weakest component: no instrument, no theory library, no prediction.
-6. **Whether fourteen components is warranted** (AR-R7, T7), or whether the thin ones should
-   collapse into their neighbours.
+1. **§0.7's runtime verdicts** — the newest and least-settled material. In particular: is §0.7.1's
+   "one duplication, eliminated by placement" the right count, or does `basePack.ts` contain
+   further dial-like rules that §28's limitation 5 admits were not read at body level?
+2. **§9.4a's BB-1…BB-4** — whether the budget classifier is *complete*. A move that is a failure
+   response on a projected dial but is classified BB-4 would reopen B3.
+3. **§16's escalation order with EL-7** — still the only section sequencing other owners'
+   components, now with a budget interaction across a canonical phase boundary.
+4. **§5.4's two-lock rule** — whether the projection preserves both operators or merely asserts it.
+   AR-R4 says it is unenforced until AH-3 lands both vectors in one field group.
+5. **AV-5 clause (a)** — §28's limitation 4 makes this the least-verified claim in the document.
+6. **§15.3's disambiguation** — a PROXY signal plus an asymmetric-harm argument, not data (AQ-5).
+7. **§14 AT-11** — the weakest component: no instrument, no theory library, no prediction.
+8. **Whether fourteen components is warranted** (AR-R7, T7).
 
 ---
 
@@ -2787,18 +3393,28 @@ Phase 3 may be merged only when **all** hold:
 | **Hint debt** | Accumulated hint rungs granted on an item; attaches to and downgrades the evidence record (§11.4). |
 | **Adaptation blindness** | A turn with no usable state read; the vector holds and the turn is recorded as blind (§21.2 AF3). |
 | **Comfort drift** | A campaign whose net dial direction is toward ease with no single decision at fault (§20.3, F1). |
+| **Clamp conflict** | Two clamps bounding one dial in opposite directions; the more restrictive wins, and an empty range emits a defect rather than picking a value (§8.4). |
+| **Sustained pressure** | A pressure present and unanswered for ≥ N turns; the under-adaptation signal (§20.2). |
+| **Budgeted dial move** | A D1 or D5 move taken in response to a failure; it is a Phase 1 re-teach and consumes Phase 1 §7.7's budget (§9.4a, BB-1 ∧ BB-2). |
+| **Authority ladder** | `README.md`'s precedence order over architecture documents. Phase 3 sits at row 6, Advisory (§0.6.1). |
 | **Adaptation theatre** | A loop that runs, records and publishes while the vector never moves (F2). |
 
 ## Appendix B — Compliance statement
 
-Produced under the repository's Chief Architect governance rules, Phase 1 §17's reconciliation
-procedure, and Phase 1 §18's self-certification prohibition. It reads and reuses the existing
+Produced under the repository's Chief Architect governance rules, `README.md`'s authority ladder
+(under which this document is Advisory, row 6 — §0.6.1), Phase 1 §17's reconciliation procedure,
+and Phase 1 §18's self-certification prohibition. It reads and reuses the existing
 corpus; introduces no parallel pipeline, decision authority, state machine, store, evidence table,
 asset kind, error code, primitive, posture, state, or taxonomy; modifies no runtime, route, schema,
 API, prompt, database, UI, component, curriculum file, Knowledge Graph, or `educational-brain/`
 document; modifies no Phase 1 or Phase 2 content; contains no pseudocode and no implementation plan;
-implements nothing; and requests no implementation approval. Five runtime files were read read-only
-for capability verification and none was modified. Where it found existing components sufficient it
+implements nothing; and requests no implementation approval. **Runtime code was read read-only for
+capability verification and none of it was modified**: `src/lib/school/adaptive/*`,
+`src/lib/school/tutoring/hintTag.ts`, `src/lib/kernel/` (incl. `policy/`, `frustration.ts`,
+`policyMove.ts`, `tsm/`, `simulation/`), `src/lib/eos-runtime/`,
+`src/lib/teaching/conversationState.ts`, and the relevant `src/app/api/learn/chat/route.ts` call
+sites. Every finding about them is recorded as feedback (Appendix C) or as a proposal (§0.3),
+never as a change. Where it found existing components sufficient it
 consumed them by reference and said so; where it found defects in documents it does not own it
 recorded feedback (Appendix C) rather than editing them.
 
@@ -2843,6 +3459,41 @@ REQUIRED-BUT-ABSENT knowledge-type gap and Phase 2's absent CPA-position field. 
 field** under the existing Blueprint Specification is the natural home. *For the Blueprint /
 Curriculum owner.*
 
+**AF-9 · The band vocabulary differs between two frozen authorities** *(new v3.1.0)*.
+`EOS_V2_ARCHITECTURE.md` owns band semantics and defines seven bands (0 interrupts, 1 obligations,
+2 legality/subtractive, 3 authored dispatch, 4 policy tables, 5 personalization, 6 tie-break),
+implemented as `BandId = 0…6` in `kernel/policy/types.ts`. `eos-v3/04` `C-28` summarizes four
+(0 safety, 1 affect, 2 policy, 3 tactics). No mapping is stated between them, and the collision is
+not benign: "Band 3" means *authored dispatch* in one and *tactics/selection* in the other. Phase 3
+adopts EOS v2's numbering per the authority ladder (§0.6.2) and publishes the mapping there.
+A statement in whichever document is authoritative would prevent the next reader repeating
+v3.0.0-draft's error. *For the runtime owner.*
+
+**AF-10 · `ENGINE_REFERENCE.md` #17 documents a file that does not exist** *(new v3.1.0)*.
+Engine 17 "Teaching Style Detector" is documented at `src/lib/school/adaptive/teachingStyle.ts`
+with a four-value output and a "trusts a stored last successful style" behaviour. **No such file is
+on disk.** This is a second instance of the AC-3 class found while verifying the adaptive cluster,
+and it matters for the same reason: a documented adaptive engine that does not exist invites a
+future phase to reconcile against a capability the platform does not have. *For the runtime owner.*
+
+**AF-11 · ISS-01's resolution will require re-checking §10.3's phase clamps** *(new v3.1.0)*.
+`ISS_01_LADDER_RECONCILIATION.md` is BLOCKED on a pedagogical decision about the live 6-phase
+ladder's CHECK/PRACTICE ordering. Phase 3's scaffold clamps (§10.3) are keyed on **phase identity**,
+so whichever way ISS-01 resolves, the clamp table must be re-verified against the resulting phase
+order. Recorded now so the dependency is not discovered later. Phase 3 does not resolve ISS-01.
+*For the Decision Engine / runtime owner.*
+
+**AF-12 · Phase 1 §17's procedure needs a mechanical completeness check and a runtime step**
+*(new v3.1.0)*. Phase 1 §18 states that discovering an unreconciled authority after §17 has run
+"indicates the procedure failed and must itself be amended." That happened here twice. Two
+amendments are proposed, neither applied (Phase 1 is canonical and not this document's to edit):
+**(a)** STEP 4 should require the document list to be **mechanically diffed** against the phase's
+own verdict tables, not checked by reading — the omission of 21 authorities survived three passes
+of careful prose review and was found in seconds by a diff; **(b)** the procedure should carry an
+explicit **STEP 4b · runtime reconciliation** for phases that make claims about existing behaviour,
+because a "SPECIFICATION" status line does not tell you whether the specification has been
+implemented, and in this repository it had been. *For the Phase 1 owner.*
+
 **AF-8 · `decision-engine/05`'s ladders have no dwell rule.** Four ladders specify what changes at
 each rung and none specifies how long a rung is held. §9 SG-1 is Phase 3's answer for dials; the
 authored ladders would benefit from the same. *For the Decision Engine owner — recorded, not
@@ -2870,6 +3521,67 @@ Recorded so a later phase does not read silence as an opening.
 | Mastery classification and advancement | `C-29`, ADR 07 | Owned; no dial advances anything |
 | Outcome measurement and causal attribution | OSF, TQ-7 Tier C/D | Owned; Phase 3 makes no learning claim |
 | Resolution of AC-1, AC-2, AC-3 | The runtime owner | Recorded, not resolved |
+
+---
+
+## Appendix E — Change log, v3.0.0-draft → v3.1.0-draft
+
+**Nothing was redesigned.** Fourteen components, six dials plus D3, ten principles, two contracts,
+and every rule in AT-1…AT-14 are unchanged in substance. The changes below are verification,
+placement, and one scope reduction.
+
+### E.1 Blocking issues → document changes
+
+| Issue | Change | Where |
+|---|---|---|
+| **B1** Inventory incomplete; AA3 false | New **§0.1 F** — governance/contracts/process/frozen-v1.0 corpus, 22 verdict rows covering `README.md`, `EDUCATIONAL_BRAIN_BIBLE.md`, `DEPENDENCY_RULES.md`, `ENGINE_REFERENCE.md`, `DATA_FLOW.md`, `VALIDATION_FRAMEWORK_P10.md`, `ISS_01_LADDER_RECONCILIATION.md`, `ARCHITECTURAL_GOVERNANCE_REGISTRY.md`, `EDUCATIONAL_BRAIN_V1.md`, `EXTENSION_GUIDE.md`, `ARCHITECTURE_DECISIONS.md`, `ARCHITECTURE_COMPLETION_REPORT_V1.md`, `RUNTIME_EDUCATIONAL_BRAIN_CONTRACT.md`, `WAVE_0_APPROVAL_CHECKLIST.md`, `OUTCOME_SCIENCE_FRAMEWORK.md`, `MIGRATION_BLUEPRINT_V1.md`, `ARCHITECTURE_ISSUE_REGISTER.md`, `ARCHITECTURAL_ROOT_CAUSE_ANALYSIS.md`, `DEVELOPMENT_FLOW_DOCUMENT.md`, `PROJECT_TASK_BREAKDOWN.md`, `RUNTIME_MAINTENANCE_TRANSITION.md`, `MERGE_PLAN.md` and the four N/A operational records. **Documents with no adaptive relevance say so explicitly.** | §0.1 F |
+| **B1** | New **§0.6** — authority-ladder compliance: Phase 3 is row 6 (Advisory); the band-numbering divergence recorded and resolved by the ladder; **all 15 permanent dependency rules** stated; dependency direction resolved | §0.6.1–§0.6.4 |
+| **B1** | AA3 corrected from a false ✅ to a documented ✅ with the falsification recorded; completeness statement rebuilt without its escape clause; self-counting removed (M1) | §26 AA3, §0.1 |
+| **B2** | New **§0.1 G** — five further runtime rows: `kernel/policy/`, `kernel/frustration.ts`, `kernel/{policyMove,parity,shadow,verifier,simulation,tsm,…}`, `eos-runtime/`, `conversationState.ts` | §0.1 G |
+| **B2** | New **§0.7** — per-mechanism reconciliation with the four required verdicts. **Result: five reuses, three constraints, one duplication eliminated by placement** | §0.7.1–§0.7.4 |
+| **B2** | Band 2 confirmed as reuse of existing subtractive semantics; **`AdaptationParameters` retargeted from Band 3 to Band 5**; ten band references corrected | §0.6.2, §0.2, §3.3, §4.3, §18.2, §18.3, §22.2 |
+| **B2** | **AT-4's pressures and AT-6's governor rules are placed inside the existing policy pack** at Bands 2/4/5 — the duplication against `basePack.ts`'s `B4.d1.*` rules is removed by placement, not redesign | §0.7.1, §7.2 |
+| **B2** | **AT-5 bounded against `policy/engine.ts`'s sole ownership** of conflict resolution; AR-3/AR-4/AR-8 expressed as band assignment, specificity and the engine's own tie-break | §8.3, §3.4 |
+| **B2** | `frustration.ts` named as AR-1's preemption source and §21.3's clamp trigger | §8.2, §21.3 |
+| **B2** | §21.2's fallback ladder scoped **inside** RS P-3 rather than beside it | §21.2 |
+| **B2** | **D4/D5 recorded as REUSE of RS §18 normative budget keys** with a live implementation; dial *selects* a shipped value and never alters one | §5.2, §0.7.4 |
+| **B2** | §4.3 step 7 corrected from *write* to *emit* — RS §13 forbids the policy plane from performing Evidence writes | §4.3, §0.6.4 |
+| **B2** | Governor placement answered: rules are pedagogy, evaluation is runtime | §9.1 |
+| **B3** | New **§9.4a** — the budget-bypass rule: BB-1…BB-4 determine consumption by *dial projection* ∧ *failure response*, not by name | §9.4a |
+| **B3** | §16.1's missing-rung claim **narrowed from six dials to four** (D2, D3, D4, D6); D1/D5 acknowledged as already housed by Phase 1 | §16.1 |
+| **B3** | New **EL-7** — rung 2 is not a cheaper name for rung 3; budget exhaustion removes D1/D5 failure-response moves from the candidate set at Band 2 | §16.3 |
+| **B3** | Two-lock rule given its budget consequence; `consumesReteachBudget` added to the adjustment record; audit metric added; **AH-12** handoff added | §5.4, §4.3, §20.2, §0.3 |
+
+### E.2 Important improvements → document changes
+
+| ID | Change | Where |
+|---|---|---|
+| **I1** Ownership transfers | `C-32`'s "loses no responsibility" line **withdrawn**; the adjustment-decision transfer stated plainly and reconciled with AH-1 | §0.1 B |
+| **I2** Dependency direction | RS §13's global plane law, the Policy Engine's forbidden-write contract, and `DEPENDENCY_RULES`' satellite law each stated and each satisfied; **AH-11** records that the wiring frame is the runtime owner's decision | §0.6.4, §0.3 |
+| **I3** Runtime/doc mismatches | `teachingStyle.ts` documented-but-absent recorded as **AF-10** alongside AF-1 | Appendix C |
+| **I4** Replay claim | Offline dial-policy evaluation reconciled **into** `VALIDATION_FRAMEWORK_P10.md`'s tiers and `kernel/simulation/`'s harness; no parallel harness | §22.4, §0.1 F |
+| **I5** Dial admissibility | **AV-5** restates the test in two clauses so D3 is an explicit bounded exception rather than a silent breach | §5.7 |
+
+### E.3 Minor improvements
+
+| ID | Change |
+|---|---|
+| **M1** | Self-counting removed from the inventory denominator (52 pre-existing, not 53) |
+| **M2** | §16.2's rung-2 budget column now names Phase 1 §7.7 when BB-1 ∧ BB-2 hold |
+| **M3** | §12.2 states the lean on P55: it stays a D4 sub-setting, with the reason |
+| **M4** | Appendix A gains *clamp conflict*, *sustained pressure*, *budgeted dial move*, *authority ladder* |
+| **M5** | AA18 names **two** components lacking a prediction (AT-11 none, AT-2 weak), not one |
+
+### E.4 What did NOT change
+
+AT-1…AT-14's responsibilities, exclusions, interfaces and failure modes · the six dials and their
+ranges · AP1…AP10 · AR-1…AR-8's content · SG-1…SG-8's content · the coupling prohibition table ·
+the two-lock rule's structure · the escalation order's rungs and owners · §18's two contracts ·
+§20's metrics and counter-metrics (one added) · §21's failure modes and AF-ladder shape ·
+§23's risks · §24's trade-offs · §25's stages · every deferral in Appendix D.
+
+Three new records (AH-11, AH-12; AF-9…AF-12) and one new criterion group (AA24…AA26) are
+**records and checks, not designs**.
 
 ---
 
