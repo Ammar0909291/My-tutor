@@ -542,3 +542,23 @@ implementation.
 
 **If you read only one file**, read 06: it contains what the design got wrong first and
 what it must never do — which is more useful than what it does.
+
+---
+
+## Phase architecture built on this blueprint
+
+**Phase 1 — Teaching Quality Architecture** ·
+`../PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` · **CANONICAL** (v1.2.0, 2026-07-31)
+
+Introduces the **Campaign scale** — the per-concept, multi-turn, often multi-session layer
+between `C-33`'s session and `C-28`'s turn — and seven components (TQ-1…TQ-7) that sit above
+this blueprint's teaching runtime without replacing any part of it.
+
+Integration is deliberately narrow: Phase 1 adds **three narrowing-only constraint sources to
+`C-28` Band 2** (TQ-1 strategy commitments, TQ-2 arc phase, TQ-4 re-teach legality) and **zero
+new decision authorities**. They may remove options from the legal action set and may never add
+one. `C-29`, `C-30`, `C-31`, `C-32` and `C-33` are unchanged; `C-29` remains the sole authority
+on advancement. One ownership transfer is recorded: `C-30`'s per-learner approach history moves
+to TQ-4's typed failed-attempt set (Phase 1 §4.1, handoff H-2).
+
+Architecture only — no implementation is authorized by its canonicalization.

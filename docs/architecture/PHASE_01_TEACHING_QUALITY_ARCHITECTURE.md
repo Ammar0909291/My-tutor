@@ -1,11 +1,13 @@
 # Phase 1 — Teaching Quality Architecture
 
 **Document class:** Architecture blueprint. Design only.
-**Status:** DRAFT — repository-complete reconciliation applied (v1.2.0). Ready for independent
-merge review. **Not approved, not merged, not implemented. The author may not self-certify
-merge readiness** — see §18.
-**Version:** 1.2.0-draft (supersedes 1.1.0-draft and 1.0.0-draft; Appendix C carries the full
-response to reviews R1 and R2)
+**Status:** **CANONICAL.** Approved for merge by repository-owner authorization on 2026-07-31,
+following an independent merge-gate architecture review performed **outside this repository**.
+The review artifact is not committed here; the approval of record is the owner's authorization
+(§15.1). This document is the canonical foundation for Phases 2 through X. It remains
+architecture only — nothing in it is implemented, and every component stays G1/G2 gated.
+**Version:** 1.2.0 (supersedes 1.2.0-draft, 1.1.0-draft and 1.0.0-draft; Appendix C carries the
+full response to reviews R1 and R2)
 **Owner:** Pappu (Chief Architect track)
 **Phase:** 01 of the phased architecture program (`phase-01-teaching-quality`)
 **Normative language:** RFC 2119 (MUST / MUST NOT / SHOULD / MAY).
@@ -2847,7 +2849,7 @@ Phase 1 is complete and approvable when all of the following hold. These are cri
 | **A15** | **Every required field a component depends on is recorded with existence status, owner, acquisition path, and defined absent-behaviour.** | ✅ §3.4 (added v1.1.0) |
 | **A16** | **All concurrent lifecycles are enumerated, with precedence, legal combinations, and a totality requirement.** | ✅ §5.0 (added v1.1.0) |
 | **A17** | **Every scoreable unit has a defined closure point.** | ✅ §8.1.1 (added v1.1.0) |
-| **A18** | **Independent architecture review recommends approval.** | ❌ **NOT MET, AND NOT SELF-MARKABLE.** R1 and R2 both returned DO NOT APPROVE. v1.2.0 responds to every finding of both. Per §18 the author may declare only READY FOR INDEPENDENT MERGE REVIEW; only a genuinely independent reviewer may satisfy this criterion. |
+| **A18** | **Independent architecture review recommends approval.** | ✅ **MET — by repository-owner authorization, 2026-07-31.** R1 and R2 (both author-run) returned DO NOT APPROVE; v1.2.0 responds to every finding of both. An independent merge-gate review was subsequently performed **outside this repository**, and the repository owner accepted its approval and authorized canonicalization. **The review artifact is not committed to this repository** — the approval of record is the owner's authorization, not an in-repository document. See §15.1. Not self-marked: the author neither performed nor certified this review. |
 | **A19** | **The Architecture Reconciliation Procedure is published and binding on future phases.** | ✅ §17 (new v1.2.0) |
 | **A20** | **Every capability statement is verified against the current repository and graded Present / Partial / Proxy / Planned / Absent.** | ✅ §3.4 (five-level scale, v1.2.0) |
 | **A21** | **Every forced dependency in the matrix carries a justification; every non-forced dependency is removed.** | ✅ §7.4.3 (three demotions with disproofs; remaining `•` entries individually discharged) |
@@ -2857,16 +2859,41 @@ prediction. This is not repaired by inventing one — a prediction manufactured 
 checklist is worse than an acknowledged gap, because it looks like evidence of rigour while
 testing nothing. TQ-3's and TQ-7's predictions should emerge from Stage 1 data.
 
-**Approval gate.** Phase 1 is complete only when A18 is satisfied — a fresh independent
-architecture review recommends approval — **and** the owner has approved. On approval: commit,
-merge to `main`, delete the feature branch. The merged document becomes the canonical
-foundation for Phase 2 (`architecture/phase-02-visual-intelligence`), which will consume TQ-2's
-VISUAL phase conditions (§5.4) and TQ-3's M1/M7 as its entry points.
+**Status at v1.2.0: CANONICAL.** Of twenty-three criteria, twenty-two are met and **A10 remains
+PARTIAL** — TQ-3 and TQ-7 still lack falsifiable predictions, deliberately not manufactured to
+satisfy a checklist (see the note above). A10 is carried forward as known, accepted debt
+against Stage 1 data rather than closed by assertion.
 
-**Status at v1.2.0: READY FOR INDEPENDENT MERGE REVIEW. NOT COMPLETE, NOT APPROVED.**
-Of twenty-three criteria, twenty-one are met, A10 remains PARTIAL (TQ-3 and TQ-7 still lack
-falsifiable predictions, deliberately not manufactured), and **A18 is unmet by construction and
-cannot be self-marked** (§18). This is the strongest status the author is permitted to declare.
+---
+
+### 15.1 Approval record
+
+**Canonicalization authority: repository owner, 2026-07-31.**
+
+| Item | Record |
+|---|---|
+| Independent merge-gate review | Performed **outside this repository** |
+| Review artifact in this repository | **None.** No review document is committed here, and none should be cited as if it were |
+| Approval of record | **Repository-owner authorization**, given explicitly on 2026-07-31 |
+| Author's role in the approval | None. The author neither performed the independent review nor certified its outcome (§18) |
+| Author-run reviews R1, R2 | Both returned DO NOT APPROVE; both are answered in full in Appendix C |
+
+**Why this is recorded so plainly.** §18 prohibits the architecture's author from certifying the
+architecture. That prohibition is honoured here: the author did not approve this document, and
+did not write the review that did. What the repository can attest to is the owner's explicit
+authorization — so that is what is recorded, without implying the existence of an artifact that
+is not present. A future reader auditing this decision should look to the owner's
+authorization, and should not go searching for a review file in this repository.
+
+**Effect of canonicalization.** This document is now the canonical foundation for all
+subsequent phases. Phase 2 (`architecture/phase-02-visual-intelligence`) consumes TQ-2's VISUAL
+phase conditions (§5.4) and TQ-3's M1/M7 as its entry points. §17's Architecture Reconciliation
+Procedure and §18's self-certification prohibition are binding on every phase from here.
+
+**What canonicalization does NOT do.** It authorizes no implementation. Every component remains
+gated on G1 (Canonical KG v1 freeze) and G2 (explicit per-item owner approval), and the six
+cross-owner handoffs in §0.3 (H-1…H-6) remain proposals requiring the runtime owner's
+acceptance. Canonical here means *this is the agreed architecture*, not *this may now be built*.
 
 ---
 
@@ -3052,6 +3079,11 @@ one author thinks to open, and that bound is invisible from the inside.
 - Only a **genuinely independent reviewer** — a different architect, a different model, or a
   different review authority — may state: *"Phase N is architecturally complete and may be
   merged into main."*
+- **The repository owner may accept an independent review performed outside the repository.**
+  This is how Phase 1 was canonicalized (§15.1). Where this route is used, the approval record
+  MUST state plainly that the authority is the owner's authorization and that no review artifact
+  exists in the repository. It MUST NOT cite, imply, or reconstruct a review document that is
+  not committed. An owner may waive the location of a review; nobody may fabricate one.
 - The independent reviewer must assume nothing is correct, and must verify against the
   repository rather than against previous reviews.
 - A finding of the form *"another previously unseen architecture document was discovered"* after
