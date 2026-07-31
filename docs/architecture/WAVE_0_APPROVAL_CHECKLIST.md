@@ -169,3 +169,30 @@ before any Wave 0 item is drafted:
 `AH-9` is a documentation correction to `ENGINE_REFERENCE.md` #16 and carries no
 implementation. ISS-01 remains **BLOCKED**; Phase 3 does not resolve it, and
 §10.2/§16 must be re-checked whichever way it resolves.
+
+---
+
+## Phase 4 Educational Assets Architecture — items not yet listed
+
+`PHASE_04_EDUCATIONAL_ASSETS_ARCHITECTURE.md` became **CANONICAL** on 2026-07-31
+(v4.0.2). As with Phases 1, 2 and 3, canonical means the architecture is agreed;
+it authorizes **no implementation**, and **no stage has an approval item here**.
+
+Phase 4's own §12 requirement 5 states it plainly: *"G1 and G2 remain in force.
+Merging Phase 4 unblocks no implementation and adds no Wave 0 item."* This
+section records that fact rather than creating items.
+
+Phase 4 is the smallest phase by design — it designs no asset system, because
+every briefed item already had an owner. Its five cross-owner handoffs
+(EH-1…EH-5, §0.3) are proposals awaiting their owners and are not approved by
+canonicalization. Three deserve flagging before any Wave 0 item is drafted:
+
+| Handoff | Why it needs care |
+|---|---|
+| **EH-1** | `contentQualityDashboard.ts`'s `WorkQueueItem` gains an authored-demand input. The subsystem is registered **COMPLETE / never rebuild**, so this is an extension routed to its owner, never a re-implementation. Note also that `buildWorkQueue()` filters out items classified `none`, so integration is not purely additive at the type level — the review recorded this as an Important item, unresolved. |
+| **EH-2** | The sufficiency vector is published as a per-concept read model. `coveragePercent` is **unchanged** and reinterpreted, not replaced. |
+| **EH-3** | A handoff that requests **no change**: ADR 13's `CuratorQueueEntry.trigger` union gains no member. All three existing triggers are degradation signals; absence is routed to the work queue instead. Recorded so the two queues are not merged by accident. |
+
+EH-4 (filing CT-1…CT-4 against CEKR §10's `Conflict` node) and EH-5 (index
+pointers) carry no implementation. **W4-2 is unchanged and remains gated**;
+Phase 4's canonicalization does not unblock it.

@@ -90,6 +90,39 @@ It further records that Engine 17 documents `teachingStyle.ts`, which does not
 exist on disk. ISS-01 remains **BLOCKED** and Phase 3 explicitly does not
 resolve it.
 
+**Phase 4 canonicalized (2026-07-31).**
+`docs/architecture/PHASE_04_EDUCATIONAL_ASSETS_ARCHITECTURE.md` v4.0.2 is
+**CANONICAL** — the Educational Assets Architecture. Same approval basis:
+repository-owner authorization, no review artifact committed (its §9.1 is the
+approval record).
+
+Its central finding is the one this registry exists to produce: **all sixteen
+briefed asset items already had owners.** CEKR (row 3, Frozen) owns identity,
+versioning, provenance, relationships, multilingual variants, discoverability and
+validation; ADR 14 owns the runtime catalogue and lifecycle; ADR 13 owns quality
+evidence; the AUTHORING_SDK owns authoring; and **EBC §8 owns build-time coverage
+sufficiency** under an explicit delegation from CEKR §11. Phase 4 therefore
+designs **no asset system**. It specifies two seams and nothing else: **EA-1**
+demand routing and **EA-2** a runtime, per-consumer sufficiency vector.
+
+For anyone reading this registry, two entries matter most. First, the prioritized
+**authoring work queue already exists and runs** —
+`src/lib/teaching/assets/contentQualityDashboard.ts`, 348 lines, undocumented in
+any ADR, the Bible or `ENGINE_REFERENCE.md` (EF-5). Three phase documents wrote
+about "the authoring queue" without knowing one existed. **Never rebuild it.**
+Second, the AssetIdentity pipeline remains the runtime owner's territory, marked
+COMPLETE and never-rebuild here; Phase 4 authored nothing inside it and its five
+handoffs **EH-1…EH-5 are proposals** awaiting that owner. **G1 and G2 remain in
+force; merging Phase 4 unblocks no implementation and adds no Wave 0 item.**
+
+It records four contradictions it found but did not fix, all for other owners:
+CT-1 (ADR 12's three-state lifecycle is the outlier — CEKR and ADR 14 both define
+five, and CEKR says it is "aligned with ADR 14", which settles the direction Phase
+2 raised as VF-5 without resolving it), CT-2 (CEKR §10's revision model and
+runtime `versioning.ts` have no documented relationship), CT-3 and CT-4. EH-4
+proposes they be filed against CEKR §10's `Conflict` node with `ACCEPTED_TENSION`
+rather than left in phase documents.
+
 **Branch reality (quantified)**:
 | Branch | blueprints | educational-brain/*.md | teaching *.ts | Role |
 |---|---|---|---|---|
@@ -171,6 +204,8 @@ by reference or route feedback to the owner — never re-implement.
 | **Phase 1 Teaching Quality Architecture** | Pappu | `claude/teaching-quality-architecture-xd00jx` → main | `docs/architecture/PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` | **CANONICAL** (v1.2.0, 2026-07-31) | **YES** |
 | **Phase 2 Visual Intelligence Architecture** | Pappu | `architecture/phase-02-visual-intelligence` → main | `docs/architecture/PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md` | **CANONICAL** (v2.1.0, 2026-07-31) | **YES** |
 | **Phase 3 Adaptive Teaching Architecture** | Pappu | `claude/adaptive-teaching-architecture-3e7sz9` → main | `docs/architecture/PHASE_03_ADAPTIVE_TEACHING_ARCHITECTURE.md` | **CANONICAL** (v3.1.0, 2026-07-31) | **YES** |
+| **Phase 4 Educational Assets Architecture** | Pappu | `architecture/phase-04-educational-assets` → main | `docs/architecture/PHASE_04_EDUCATIONAL_ASSETS_ARCHITECTURE.md` | **CANONICAL** (v4.0.2, 2026-07-31) | **YES** |
+| **Authoring work queue (live)** | Mohammad | foundation | `src/lib/teaching/assets/contentQualityDashboard.ts` | LIVE (348 lines) | **YES — never rebuild; extend by reference (Phase 4 EF-5, EH-1)** |
 | Educational Brain tree | Mohammad | foundation | `educational-brain/` | FROZEN framework | **YES** (extend by reference) |
 | Decision Engine | Mohammad | foundation | `educational-brain/decision-engine/` | FROZEN | **YES** |
 | Teaching Engine / Runtime | Mohammad | foundation | `src/lib/teaching*`, route.ts | FROZEN | **YES** |
