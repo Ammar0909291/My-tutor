@@ -1,8 +1,11 @@
 # Wave 0 — Per-Item Implementation Approval Checklist
 
-**Status:** Prepared 2026-07-04 (integration-prep). **Nothing on this list
-is approved.** This document grants no permission by existing — it is the
-instrument the project owner uses to grant it, one checkbox at a time.
+**Status:** Prepared 2026-07-04 (integration-prep). Extended 2026-07-31 with
+gated items for the 31 open cross-owner handoffs of Phases 1–4 (Wave H below).
+**Nothing on this list is approved.** This document grants no permission by
+existing — it is the instrument the project owner uses to grant it, one
+checkbox at a time. Drafting an item is not approving it: every item added
+2026-07-31 is unchecked, and G1 and G2 remain in force exactly as stated below.
 
 **The two Wave 0 gates** (`ARCHITECTURE_COMPLETION_REPORT_V1.md` §5):
 - [ ] **G1 — Canonical KG v1 freeze declared by the Curriculum Production
@@ -87,6 +90,83 @@ byte-stable; a11yDescription on every served visual.
 
 ---
 
+## Wave H — cross-owner handoff decisions (Phases 1–4)
+
+Added 2026-07-31. The four canonical phase documents each end with a set of
+**explicit cross-owner handoffs** — requests into another owner's territory that
+the phase's own canonicalization deliberately does not enact. Until now those 31
+handoffs existed only inside the phase documents, with no gated item anywhere, so
+there was no instrument by which an owner could approve or decline one. This
+section is that instrument.
+
+**Item IDs are the handoff IDs themselves** (`H-*`, `VH-*`, `AH-*`, `EH-*`), which
+are already stable and canonical in the phase documents. No parallel ID space is
+introduced. Reference them in commits exactly like the `W*` items above.
+
+Three of these handoffs (H-5, VH-6, AH-8) ask that this checklist gain items.
+Drafting this section discharges the **handoff** half of that request. The
+**stage** half — promoting Phases 1 and 2's `Proposed ID` tables (P1-1…P1-7,
+P2-1…P2-7) and Phase 3 §25 / Phase 4's stages into gated items — is **not** done
+here and remains open; their rows say so.
+
+**Nothing in this section is approved.** Every box is unchecked. Per the header,
+an unchecked item is architecture-only, and per Bible §10.1 rule 2 it authorizes
+no implementation. Approving any row here still requires G2, and any row whose
+dependency column names G1 additionally requires G1.
+
+### Phase 1 — Teaching Quality (`PHASE_01_…md` §0.3)
+
+| ID | Handoff | Source | Owner | Depends on | Approved |
+|---|---|---|---|---|---|
+| H-1 | `C-28`'s decision record gains the AttemptVector as a captured field | Phase 1 §11.2 | Runtime schema — runtime owner | G2; must be decided jointly with AH-3 (one field group, not two schemas) | [ ] |
+| H-2 | `C-30`'s documented approach-history responsibility retired in favour of TQ-4's typed `failedAttempts` set | Phase 1 §4.1 | Engine responsibility — runtime owner | G2; H-1 | [ ] |
+| H-3 | Bible ADR index records ADR 09 as *extended by Phase 1 TQ-2* | Phase 1 §5.7 RC-5 | Bible — runtime owner | G2. **Amends a Frozen v1.0 document** (Authority Index row 5) — documentation-only, but via the amendment path, not a direct edit | [ ] |
+| H-4 | Bible engine map gains the Campaign scale and TQ-1…TQ-7 | Phase 1 §0.3 | Bible — runtime owner | G2. Frozen v1.0 (row 5), as H-3 | [ ] |
+| H-5 | This checklist gains items for Phase 1 §14's stages | Phase 1 §0.3 | Wave 0 — owner | **Partially discharged 2026-07-31**: handoff items H-1…H-6 now listed. Stage items P1-1…P1-7 remain `Proposed ID` only and are still to be promoted | [ ] |
+| H-6 | All Phase 1 → runtime interfaces (§11) expressed through `RUNTIME_EDUCATIONAL_BRAIN_CONTRACT.md`, never around it | Phase 1 §11 | Contract — runtime owner | G2 | [ ] |
+
+### Phase 2 — Visual Intelligence (`PHASE_02_…md` §0.3)
+
+| ID | Handoff | Source | Owner | Depends on | Approved |
+|---|---|---|---|---|---|
+| VH-1 | `TeachingDecision.visual_type` widens to the typed `VisualIntent` | Phase 2 §7 | Teaching Engine + ADR 08 — runtime owner | G2. Repository note: no `visual_type` field exists on the Teaching Engine decision today (verified at `827f3796`), so this is create-then-widen, not widen alone | [ ] |
+| VH-2 | ADR 12's Visual Policy table gains a `purpose` dimension alongside `strategy` | Phase 2 §6.5 | ADR 12 — runtime owner | G2. Frozen v1.0 (row 5) | [ ] |
+| VH-3 | `a11yDescription` strengthened from *present and non-empty* to *instructionally equivalent* | ADR 12 §4.5 | ADR 12 — runtime owner | G2 | [ ] |
+| VH-4 | RRM records the `VisualIntent` that produced each rendered visual, not only the visual | Phase 2 §8.2 | ADR 15 — runtime owner | G2 | [ ] |
+| VH-5 | Bible §3/§6.8 gains a Phase 2 pointer; ADR 12 gains a scope note recording that its "when" is supplied by VD-1 | Phase 2 §0.3 | Bible + ADR 12 — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [ ] |
+| VH-6 | This checklist gains Phase 2 stage items; **W4-2 remains gated and is not unblocked** | Phase 2 §0.3 | Wave 0 — owner | **Partially discharged 2026-07-31**: handoff items VH-1…VH-8 now listed. Stage items P2-1…P2-7 remain `Proposed ID` only. W4-2 unchanged | [ ] |
+| VH-7 | The `VisualAvailability` projection is published by the production tier — coarse, one-directional, carrying no asset ids, cache keys, renderer names or spec payloads | Phase 2 §7.4 | ADR 12 — runtime owner | G2 | [ ] |
+| VH-8 | `representationDependence` added as a per-concept property of the learner model, with three levels | Phase 2 §9.1 | ADR 10 Student Memory — runtime owner | G2; W1-2 (ADR 10 Phase 1 stores) | [ ] |
+
+### Phase 3 — Adaptive Teaching (`PHASE_03_…md` §0.3)
+
+| ID | Handoff | Source | Owner | Depends on | Approved |
+|---|---|---|---|---|---|
+| AH-1 | `C-32`'s four unstructured outputs replaced by one typed Adaptation State Vector; `C-32` retains loop, band and veto, and **transfers the adjustment decision** | Phase 3 §5, §0.1 | EOS `C-32` — runtime owner | G2. Flagged in this checklist since Phase 3's canonicalization as an **ownership change**, not only an instrument | [ ] |
+| AH-2 | The ASV persisted as per-learner-per-concept standing state in an **existing** ADR 10 store (candidate: Store 2). No new store | Phase 3 §0.3 | ADR 10 — runtime owner | G2; W1-2. Flagged by Phase 3 §29 as "the one that looks small and is not" | [ ] |
+| AH-3 | `C-28`'s decision record captures the ASV snapshot and adjustment record as **one field group with Phase 1's AttemptVector (H-1)**, not two | Phase 3 §7.4 | `C-28` + ADR 08 — runtime owner | G2; **must be decided jointly with H-1** — approving either alone risks two schemas for one turn | [ ] |
+| AH-4 | Scaffold vocabulary unified: `EOS_V2_RUNTIME_SPECIFICATION` §3.4's `scaffoldDial 0–4` becomes the single definition; `eos-v3` `C-32`'s prose "scaffolding level" is bound to it | Phase 3 §0.4 | EOS v2 + eos-v3 — runtime owner | G2. **Amends a Frozen document** (`EOS_V2_RUNTIME_SPECIFICATION`, Authority Index row 2) via the spec-bug/appendix path. `eos-v3` carries no authority tier (README §"exploration") | [ ] |
+| AH-5 | ADR 08 records the Posture layer explicitly: `teachingStrategy.ts`'s 7 postures are the Posture half of ADR 08's Posture/Action split, distinct from Phase 1's 9 archetypes | Phase 3 §6.1 | ADR 08 — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [ ] |
+| AH-6 | Evidence records carry `scaffoldLevel` and `hintDebt`, as `EOS_V2`'s `AnswerObserved` already specifies, so assisted and unassisted evidence stay distinguishable | Phase 3 §10.5, §11.4 | ADR 13 — runtime owner | G2; W1-3 | [ ] |
+| AH-7 | Bible engine map and §6 gain the adaptive control plane and AT-1…AT-14; ADR index records ADR 08 and ADR 13 as *extended by Phase 3* | Phase 3 §0.3 | Bible — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [ ] |
+| AH-8 | This checklist gains items for Phase 3 §25's stages. **Phase 3's merge unblocks nothing** | Phase 3 §0.3 | Wave 0 — owner | **Partially discharged 2026-07-31**: handoff items AH-1…AH-12 now listed. Phase 3 has no `Proposed ID` stage table; §25's stages remain unlisted | [ ] |
+| AH-9 | `ENGINE_REFERENCE.md` #16's description of `teachingOutputBias.ts` corrected to record that the file is a stub (AF-1) | Phase 3 §0.3 | `ENGINE_REFERENCE` — runtime owner | G2. Documentation correction only; carries no implementation | [ ] |
+| AH-10 | All Phase 3 → runtime interfaces (§18) expressed through `RUNTIME_EDUCATIONAL_BRAIN_CONTRACT.md`, never around it | Phase 3 §18 | Contract — runtime owner | G2 | [ ] |
+| AH-11 | Phase 3's pressure and governor rules authored **into the existing policy pack** (`kernel/policy/basePack.ts`'s format, Bands 2/4/5), not into a new evaluator | Phase 3 §0.3 (v3.1.0) | `kernel/policy/` + EOS runtime — runtime owner | G2. Which wiring frame governs — EOS band pipeline or the live pre-EOS prompt-assembly path — is explicitly the runtime owner's sequencing decision | [ ] |
+| AH-12 | `C-28`'s adjustment record carries `consumesReteachBudget`; Phase 1's §7.7 budget counter readable by Band-2 governor rules so an exhausted budget removes D1/D5 failure-response moves | Phase 3 §0.3 (v3.1.0) | `C-28` + Phase 1 budget owner — runtime owner | G2; H-1, AH-3 | [ ] |
+
+### Phase 4 — Educational Assets (`PHASE_04_…md` §0.3)
+
+| ID | Handoff | Source | Owner | Depends on | Approved |
+|---|---|---|---|---|---|
+| EH-1 | `contentQualityDashboard.ts`'s `WorkQueueItem` gains an optional authored-demand input alongside its telemetry-derived signals | Phase 4 §4 | AssetIdentity pipeline — runtime owner | G2. Subsystem is registered **COMPLETE / never rebuild** — extension routed to its owner, never a re-implementation. Unresolved concern on record: `buildWorkQueue()` filters out items classified `none`, so integration is not purely additive at the type level | [ ] |
+| EH-2 | The sufficiency vector published as a per-concept read model; `coveragePercent` unchanged and reinterpreted, not replaced | Phase 4 §5 | AssetIdentity pipeline — runtime owner | G2; EH-1 | [ ] |
+| EH-3 | ADR 13's `CuratorQueueEntry.trigger` union gains **no** member from Phase 4; coverage demand routed to the work queue, not the curator queue | Phase 4 §0.3 | ADR 13 — runtime owner | G2. **A handoff that requests no change** — recorded so the two queues are not merged by accident. Approving it enacts nothing | [ ] |
+| EH-4 | CEKR §10's `Conflict` node with `ACCEPTED_TENSION` is the home for the contradictions in Phase 4 §0.4; CT-1…CT-4 filed there rather than in phase documents | Phase 4 §0.4 | CEKR — runtime owner | G2. **Amends a Frozen document** (CEKR, Authority Index row 3) via its own §10 revision model. CT-2 remains unresolved | [ ] |
+| EH-5 | On approval, the Bible, the governance registry and the EOS blueprint index gain Phase 4 pointers | Phase 4 §0.3 | runtime owner | G2. Documentation-only; carries no implementation | [ ] |
+
+---
+
 **Recording an approval:** check the box, append `(YYYY-MM-DD, name)`,
 commit with message `governance: approve <IDs>`. Then implementation of
 those items may begin, in dependency order, under the validation gates
@@ -95,7 +175,7 @@ named per wave. Anything unchecked stays architecture-only, per Bible
 
 ---
 
-## Phase 1 Teaching Quality Architecture — items not yet listed
+## Phase 1 Teaching Quality Architecture — stage items not yet listed
 
 `PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` became **CANONICAL** on 2026-07-31
 (v1.2.0). Canonical means the architecture is agreed; it authorizes **no
@@ -116,12 +196,14 @@ gated items and approved individually, in dependency order:
 | P1-6 | Stage 6 — TQ-1 strategy commitment | Most invasive; depends on P1-3…P1-5. |
 | P1-7 | Stage 7 — TQ-7 Tier C/D join | Requires longitudinal data; cannot be pulled earlier. |
 
-Phase 1's other cross-owner handoffs (H-2…H-6, §0.3) are likewise proposals
-awaiting the runtime owner and are not approved by canonicalization.
+Phase 1's six cross-owner handoffs (H-1…H-6, §0.3) are **now listed as gated
+items in Wave H above** (drafted 2026-07-31, all unchecked). They remain
+proposals awaiting the runtime owner and are not approved by canonicalization —
+listing them creates the approval instrument, not the approval.
 
 ---
 
-## Phase 2 Visual Intelligence Architecture — items not yet listed
+## Phase 2 Visual Intelligence Architecture — stage items not yet listed
 
 `PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md` became **CANONICAL** on
 2026-07-31 (v2.1.0). As with Phase 1, canonical means the architecture is
@@ -140,12 +222,14 @@ remain architecture-only by default.
 | P2-7 | V7 — VP-I/VP-J interaction instrumentation | Requires interactive infrastructure that is **W4-2 territory**. |
 
 **W4-2 is unchanged and remains gated.** Phase 2's canonicalization does not
-unblock it. Phase 2's eight cross-owner handoffs (VH-1…VH-8, §0.3) are likewise
-proposals awaiting the runtime owner and are not approved by canonicalization.
+unblock it, and neither does Wave H. Phase 2's eight cross-owner handoffs
+(VH-1…VH-8, §0.3) are **now listed as gated items in Wave H above** (drafted
+2026-07-31, all unchecked). They remain proposals awaiting the runtime owner and
+are not approved by canonicalization.
 
 ---
 
-## Phase 3 Adaptive Teaching Architecture — items not yet listed
+## Phase 3 Adaptive Teaching Architecture — stage items not yet listed
 
 `PHASE_03_ADAPTIVE_TEACHING_ARCHITECTURE.md` became **CANONICAL** on 2026-07-31
 (v3.1.0). As with Phases 1 and 2, canonical means the architecture is agreed; it
@@ -157,9 +241,10 @@ Phase 3's own §29 requirement 5 states it plainly: *"G1 and G2 remain in force.
 Merging Phase 3 unblocks no implementation and adds no Wave 0 item by itself."*
 This section records that fact rather than creating items.
 
-Its twelve cross-owner handoffs (AH-1…AH-12, §0.3) are proposals awaiting the
-runtime owner and are not approved by canonicalization. Two deserve flagging
-before any Wave 0 item is drafted:
+Its twelve cross-owner handoffs (AH-1…AH-12, §0.3) are **now listed as gated
+items in Wave H above** (drafted 2026-07-31, all unchecked). They remain
+proposals awaiting the runtime owner and are not approved by canonicalization.
+Two carried a standing flag, which Wave H's rows preserve:
 
 | Handoff | Why it needs care |
 |---|---|
@@ -172,7 +257,7 @@ implementation. ISS-01 remains **BLOCKED**; Phase 3 does not resolve it, and
 
 ---
 
-## Phase 4 Educational Assets Architecture — items not yet listed
+## Phase 4 Educational Assets Architecture — stage items not yet listed
 
 `PHASE_04_EDUCATIONAL_ASSETS_ARCHITECTURE.md` became **CANONICAL** on 2026-07-31
 (v4.0.2). As with Phases 1, 2 and 3, canonical means the architecture is agreed;
@@ -184,8 +269,10 @@ section records that fact rather than creating items.
 
 Phase 4 is the smallest phase by design — it designs no asset system, because
 every briefed item already had an owner. Its five cross-owner handoffs
-(EH-1…EH-5, §0.3) are proposals awaiting their owners and are not approved by
-canonicalization. Three deserve flagging before any Wave 0 item is drafted:
+(EH-1…EH-5, §0.3) are **now listed as gated items in Wave H above** (drafted
+2026-07-31, all unchecked). They remain proposals awaiting their owners and are
+not approved by canonicalization. Three carried a standing flag, which Wave H's
+rows preserve:
 
 | Handoff | Why it needs care |
 |---|---|
