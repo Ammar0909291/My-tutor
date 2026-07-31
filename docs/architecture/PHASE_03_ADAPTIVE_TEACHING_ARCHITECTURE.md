@@ -3167,7 +3167,7 @@ Criteria for the **document**, not for an implementation.
 | **AA2** | Phase 1 §17's seven-step reconciliation executed **before** design work and published. | ✅ §0, §28 |
 | **AA3** | Every architecture authority in the repository carries exactly one verdict, produced from a directory listing. | ✅ **MET IN v3.1.0 — it was FALSE in v3.0.0-draft.** That draft had no governance/process section, leaving ~21 authorities unclassified including `EDUCATIONAL_BRAIN_BIBLE.md` (zero mentions), `DEPENDENCY_RULES.md`, `ISS_01_LADDER_RECONCILIATION.md` and `README.md` itself, while asserting completeness via an escape clause no category row supported. §0.1 F and G now classify every one; the escape clause is removed. |
 | **AA4** | The canonical adaptation stack is published with one owner and one authority per level. | ✅ §0.2 |
-| **AA5** | The governance registry is reconciled and every cross-owner handoff is explicit. | ✅ §0.3 — AH-1…AH-10 |
+| **AA5** | The governance registry is reconciled and every cross-owner handoff is explicit. | ✅ §0.3 — AH-1…AH-12 |
 | **AA6** | Contradictions found between reused authorities are recorded, not smoothed or resolved. | ✅ §0.4 — AC-1, AC-2, AC-3 |
 | **AA7** | No component duplicates an existing authority; every "must not own" is explicit. | ✅ §3.4 and per-component |
 | **AA8** | Existing taxonomies, ladders and scales are reused verbatim rather than re-derived. | ✅ EOS v2's 0–4 scale, the 7 postures, the D1 grid, the six standing moves, CEKR/EBC's hint model, `decision-engine/02`'s priority order |
@@ -3264,7 +3264,7 @@ Phase 1 §17 executed in full, **before** design work.
 | Step | Action | Result |
 |---|---|---|
 | **1 · Inventory** | Directory listing of `docs/architecture/` (52 pre-existing + `eos-v3/` 7), `docs/curriculum/` (8 specs + `protocols/` + `blueprints/`), `educational-brain/` (11 directories); targeted grep for `hint`, `scaffold`, `pace`, `load`, `difficulty`, `adaptive` across all of them | ~30 authorities touching adaptive territory identified (§0.1). The greps, not the listing, surfaced CEKR's `HintSpec`, EBC's E0401/E0402, and EOS v2's `scaffoldDial` |
-| **2 · Governance registry** | Read in full | Decision Engine, Runtime, Evidence, ADRs and the Bible are the runtime owner's, Pappu a forbidden editor → §0.3's boundary and AH-1…AH-10. The Do-Not-Rebuild list was checked against every proposed object |
+| **2 · Governance registry** | Read in full | Decision Engine, Runtime, Evidence, ADRs and the Bible are the runtime owner's, Pappu a forbidden editor → §0.3's boundary and AH-1…AH-12. The Do-Not-Rebuild list was checked against every proposed object |
 | **3 · ADR reconciliation** | Read what each ADR **selected**, not what it diagnosed | ADR 08's Posture/Action split is the home for §6; ADR 14 already carries `hint_tier_1..3`; ADR 13 owns evidence and Phase 3 must not add a store; ADR 10 carries an existing pacing-signals group |
 | **4 · Document reconciliation** | One verdict per authority | §0.1. Superseded used zero times. **Three contradictions found and recorded rather than smoothed** (§0.4) |
 | **5 · Ownership verification** | One owner per responsibility; every transfer stated | `C-32` keeps the loop, band and veto and gains an instrument (AH-1) — the only near-transfer in the phase, and it is a *gain*, not a takeover. No responsibility is removed from any existing component |
