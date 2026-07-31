@@ -15,6 +15,30 @@ authoring · **Mohammad** = runtime/execution/QA · **Pipeline** =
 Curriculum Production · **Ops** = deployment · **Protected** =
 do-not-touch subsystems.
 
+**Phase 1 canonicalized (2026-07-31).**
+`docs/architecture/PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` v1.2.0 is
+**CANONICAL** — the agreed teaching-quality architecture and the foundation
+for Phases 2 through X. Authorized by **repository-owner authorization**
+following an independent merge-gate review performed **outside this
+repository**; no review artifact is committed here, and none should be cited
+as if it were (that document's §15.1 is the approval record).
+
+Two consequences for anyone reading this registry:
+- Its **§0.2 canonical teaching hierarchy** (Primitive → Action → Method →
+  Strategy → Campaign → Lesson → Curriculum) is the authoritative layer model.
+  It honours this registry's existing MERGE decision that the 27 Teaching
+  Actions are named compounds over primitives, and it reconciles the Strategy
+  layer with the existing per-concept **Protocol** class rather than competing
+  with it.
+- Its **§17 Architecture Reconciliation Procedure** and **§18
+  self-certification prohibition** are binding on every future architecture
+  phase, which must execute the seven-step repository-wide reconciliation
+  before requesting approval.
+
+Canonical means *this is the agreed architecture*, **not** *this may now be
+built*: every component remains G1/G2 gated, and its §0.3 handoffs H-1…H-6
+into runtime territory remain proposals awaiting the runtime owner.
+
 **Branch reality (quantified)**:
 | Branch | blueprints | educational-brain/*.md | teaching *.ts | Role |
 |---|---|---|---|---|
@@ -93,6 +117,7 @@ by reference or route feedback to the owner — never re-implement.
 | Composition Grammar | Pappu | math-linalg | `docs/curriculum/TEACHING_COMPOSITION_GRAMMAR.md` | ACTIVE | **YES** |
 | Blueprint Specification | Pappu | math-linalg | `docs/curriculum/TEACHING_BLUEPRINT_SPECIFICATION.md` | ACTIVE | **YES** |
 | Teaching Asset Philosophy | Pappu | math-linalg | `docs/curriculum/TEACHING_ASSET_PHILOSOPHY.md` | ACTIVE | **YES** |
+| **Phase 1 Teaching Quality Architecture** | Pappu | `claude/teaching-quality-architecture-xd00jx` → main | `docs/architecture/PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` | **CANONICAL** (v1.2.0, 2026-07-31) | **YES** |
 | Educational Brain tree | Mohammad | foundation | `educational-brain/` | FROZEN framework | **YES** (extend by reference) |
 | Decision Engine | Mohammad | foundation | `educational-brain/decision-engine/` | FROZEN | **YES** |
 | Teaching Engine / Runtime | Mohammad | foundation | `src/lib/teaching*`, route.ts | FROZEN | **YES** |

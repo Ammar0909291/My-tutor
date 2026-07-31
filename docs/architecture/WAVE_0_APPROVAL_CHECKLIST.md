@@ -92,3 +92,29 @@ commit with message `governance: approve <IDs>`. Then implementation of
 those items may begin, in dependency order, under the validation gates
 named per wave. Anything unchecked stays architecture-only, per Bible
 §10.1 rule 2.
+
+---
+
+## Phase 1 Teaching Quality Architecture — items not yet listed
+
+`PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md` became **CANONICAL** on 2026-07-31
+(v1.2.0). Canonical means the architecture is agreed; it authorizes **no
+implementation**. Its §14 defines seven evidence-ordered stages, and **none has
+an approval item on this checklist yet** — so all seven remain architecture-only
+by default, exactly like every unchecked item above.
+
+Before any Phase 1 implementation begins, stages P1-1…P1-7 must be added here as
+gated items and approved individually, in dependency order:
+
+| Proposed ID | Stage (Phase 1 §14.2) | Notes |
+|---|---|---|
+| P1-1 | Stage 1 — capture the AttemptVector on every teaching decision | **Persistence change** (handoff H-1, runtime owner). No behaviour change. Prerequisite for P1-3. |
+| P1-2 | Stage 2 — TQ-5 offline trajectory evaluator | Read-only over recorded data. |
+| P1-3 | Stage 3 — TQ-4 primary-axis + closure filter, mandatory diagnosis | First learner-visible behaviour change. Gated on §14.3's preconditions, incl. the dependency matrix passing its minimality review. |
+| P1-4 | Stage 4 — TQ-3 Method schema populated | Largely transcription of existing authored pedagogy. |
+| P1-5 | Stage 5 — TQ-2 arc, persisted via ADR 09 `lessonStageProgress` | Implements ADR 09 Option B as part of this stage. |
+| P1-6 | Stage 6 — TQ-1 strategy commitment | Most invasive; depends on P1-3…P1-5. |
+| P1-7 | Stage 7 — TQ-7 Tier C/D join | Requires longitudinal data; cannot be pulled earlier. |
+
+Phase 1's other cross-owner handoffs (H-2…H-6, §0.3) are likewise proposals
+awaiting the runtime owner and are not approved by canonicalization.
