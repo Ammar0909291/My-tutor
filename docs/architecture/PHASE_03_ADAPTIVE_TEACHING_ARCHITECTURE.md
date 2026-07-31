@@ -320,7 +320,7 @@ rather than assuming permission.
 
 | ID | Handoff | Territory |
 |---|---|---|
-| **AH-1** | `C-32`'s four unstructured outputs (difficulty target, hint policy, scaffolding level, withholding decisions) are replaced by **one typed Adaptation State Vector** (§5). `C-32` retains the loop, the band and the veto; it gains an instrument and loses no responsibility. | EOS `C-32` — runtime owner |
+| **AH-1** | `C-32`'s four unstructured outputs (difficulty target, hint policy, scaffolding level, withholding decisions) are replaced by **one typed Adaptation State Vector** (§5). `C-32` retains the loop, the band and the veto; it gains an instrument and transfers the adjustment decision (§0.1). | EOS `C-32` — runtime owner |
 | **AH-2** | The ASV is persisted as per-learner-per-concept standing state in an **existing** ADR 10 store (candidate: Store 2, alongside the *pacing signals* group ADR 10 already carries). No new store. | ADR 10 — runtime owner |
 | **AH-3** | `C-28`'s decision record captures the ASV snapshot and the adjustment record (§7.4) as **one field group with Phase 1's AttemptVector (H-1)**, not two. Two separate capture proposals against the same record would produce two schemas for one turn. | `C-28` + ADR 08 — runtime owner |
 | **AH-4** | The scaffold vocabulary is unified: `EOS_V2_RUNTIME_SPECIFICATION` §3.4's `scaffoldDial 0–4` becomes the single definition, and `eos-v3` `C-32`'s prose *"scaffolding level"* is bound to it. §0.4 records the divergence. | EOS v2 + eos-v3 — runtime owner |
@@ -3348,9 +3348,9 @@ Phase 3 may be merged only when **all** hold:
    only readiness and may never self-certify. The reviewer must assume nothing is correct and verify
    against the repository, not against this document.
 3. The reconciliation record (§28) is confirmed complete by that reviewer — in particular that no
-   further unreconciled adaptive authority exists, and that §28's three stated limitations are
+   further unreconciled adaptive authority exists, and that §28's five stated limitations are
    acceptable or are closed.
-4. Handoffs **AH-1…AH-10** are acknowledged by the runtime owner as *proposals*. **Phase 3's merge
+4. Handoffs **AH-1…AH-12** are acknowledged by the runtime owner as *proposals*. **Phase 3's merge
    authorizes none of them**, and in particular does not authorize the ASV persistence change,
    which is the one that looks small and is not.
 5. G1 and G2 remain in force. Merging Phase 3 unblocks no implementation and adds no Wave 0 item by
