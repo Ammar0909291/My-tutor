@@ -3,7 +3,7 @@
 **Document class:** Architecture blueprint. Design only.
 **Status:** DRAFT — pending independent merge-gate review. Not canonical. Not approved. Not
 self-certified (Phase 1 §18).
-**Version:** 4.0.1-draft (supersedes 4.0.0-draft; corrects the B1 sufficiency-ownership finding)
+**Version:** 4.0.2-draft (supersedes 4.0.1-draft and 4.0.0-draft; corrects the B2 adaptive-ownership finding)
 **Phase:** 04 (`architecture/phase-04-educational-assets`)
 **Builds on:** Phase 1 v1.2.0, Phase 2 v2.1.0, Phase 3 v3.1.0 — all CANONICAL, all binding, none
 modified.
@@ -38,11 +38,14 @@ no implementation and adds no Wave 0 item.
 > a concept's sufficiency *per consumer at runtime* (§5). Everything else is a pointer to an
 > existing owner.
 >
-> **Corrected in v4.0.1.** v4.0.0-draft claimed sufficiency had no owner at all. It does:
-> **CEKR §11 delegates coverage rules to EBC §8**, which enforces them as release-blocking
-> build errors (E0501/E0502/E0503, E0512, D15). §5 is narrowed to the runtime per-consumer
-> question EBC does not answer, and the ownership map is corrected. The error was reconciling
-> EBC by its role rather than by what it selected — see CT-5.
+> **Corrected in v4.0.1 and again in v4.0.2.** v4.0.0-draft claimed sufficiency had no owner at
+> all. It does: **CEKR §11 delegates coverage rules to EBC §8**, which enforces them as
+> release-blocking build errors. v4.0.1 corrected the `teaching` component
+> (E0501/E0502/E0503, E0512, D15) from a partial reading of five of fifteen E-codes; **v4.0.2
+> corrects `adaptive` too**, after reading all fifteen plus §6.4 and §7.6 and finding E0506,
+> E0507, E0401, E0402 and E0332. §5 is narrowed to the runtime per-consumer question EBC does
+> not answer, and the ownership map is corrected. Both errors had one cause — reconciling EBC by
+> its role, then by part of its content, rather than by all of it. See CT-5 and §11 limitation 1a.
 >
 > A Phase 4 that designed an asset architecture would have duplicated a Frozen document and a
 > live subsystem simultaneously. That outcome was avoided by reading source, which is the
@@ -101,7 +104,7 @@ Verdicts: **Reused** · **Extended** · **Complemented** · **Superseded** · **
 | Authority | Owns | Verdict |
 |---|---|---|
 | `EDUCATIONAL_BRAIN_AUTHORING_SDK` | BrainScript DSL · Brain IDE · author workflow · multi-author collaboration · Brain QA · AI-assisted authoring with rails · repository organization · migration · testing | **Reused — owns authoring.** Verified against its section list: it owns *how a human authors an asset*. It contains **no prioritization section** — which is consistent with §4's finding that prioritization lives in the runtime, not the SDK |
-| **`EDUCATIONAL_BRAIN_COMPILER`** §8 | Brain → runtime compilation and `brain.lock` — **and, decisively for this phase, the Validation Pipeline: EBC §8 owns release-mode coverage validation.** The build FAILS in release mode on any E-code: **E0501** every concept has ≥1 explanation content source ("no concept without a voice") · **E0502** misconception coverage, ≥1 bound misconception or an explicit HUM-reviewed `misconceptionCoverage: none-known` attestation ("silence is not coverage") · **E0503** assessment coverage per §6.4 (gate/retention/transfer) · **E0512** every `::todo` hole absent in release mode or inventoried in a dev-mode report · **D15** the instrumented-skeleton doctrine, which permits incomplete constellations in dev builds and blocks them at release | **Reused — and it owns build-time coverage sufficiency** | Corrected v4.0.1. v4.0.0-draft's verdict read "Reused — Phase 4 defines no compilation step", which reconciled EBC by its *role* rather than by what it *selected* — Phase 1 §17.2's "reconciling the citation, not the design" anti-pattern. **EBC §8 is the sufficiency authority for the build-time question**, and §5 is narrowed accordingly. See CT-5 |
+| **`EDUCATIONAL_BRAIN_COMPILER`** §8 | Brain → runtime compilation and `brain.lock` — **and, decisively for this phase, the Validation Pipeline: EBC §8 owns release-mode coverage validation.** The build FAILS in release mode on any E-code: **E0501** every concept has ≥1 explanation content source ("no concept without a voice") · **E0502** misconception coverage, ≥1 bound misconception or an explicit HUM-reviewed `misconceptionCoverage: none-known` attestation ("silence is not coverage") · **E0503** assessment coverage per §6.4 (gate/retention/transfer) · **E0506** every recovery state × escalation rung has a script AND an exit · **E0507** every hint passes the easier-than proofs · **E0512** every `::todo` hole absent in release mode or inventoried in a dev-mode report · **D15** the instrumented-skeleton doctrine, which permits incomplete constellations in dev builds and blocks them at release. **Also §7.6** — `HintDef` compiles hint-ladder tables per concept/item and proves the easier-than law (**E0401** `hint.stage ≤ target.stage − 1`, **E0402** `hint.requiresCapabilities ⊆ target.requiresCapabilities`) — and **§6.4 E0332**, every recovery state used by scripts has an exit rung | **Reused — and it owns build-time coverage sufficiency for both `teaching` and `adaptive`** | Corrected v4.0.1, extended v4.0.2 after reading all fifteen E-codes plus §6.4 and §7.6. v4.0.0-draft's verdict read "Reused — Phase 4 defines no compilation step", which reconciled EBC by its *role* rather than by what it *selected* — Phase 1 §17.2's "reconciling the citation, not the design" anti-pattern. **EBC §8 is the sufficiency authority for the build-time question**, and §5 is narrowed accordingly. See CT-5 |
 | `OUTCOME_SCIENCE_FRAMEWORK` | Outcome constructs, experiment design, causal attribution | **Complemented** — Phase 4 defines no outcome metric |
 | `docs/curriculum/TEACHING_ASSET_PHILOSOPHY.md` | The "encode teaching not content" doctrine, AI-Removal Test | **Reused** — Pappu-owned; Phase 4 restates none of it |
 | `docs/curriculum/TEACHING_BLUEPRINT_SPECIFICATION.md`, `PRIMITIVE_LIBRARY.md` | Blueprint authoring contract; ~91 primitives | **Reused** |
@@ -147,7 +150,7 @@ The core deliverable of this reconciliation. Each item, its owner, and what Phas
 | 15 | **Visual Intelligence interaction** | **Phase 2** + ADR 12 | §6.2 — the seam only |
 | 16 | **Adaptive Teaching interaction** | **Phase 3** | §6.3 — the seam only |
 | — | *(not in the brief)* **Authoring prioritization** | **`contentQualityDashboard.ts`** (live) | §4 — the routing seam |
-| — | *(not in the brief)* **Sufficiency** | **PARTIAL — `EBC` §8** owns the **build-time release** question: is this subject shippable (E0501/E0502/E0503, E0512, D15). **CEKR §11 delegates to it explicitly** (CT-5) | §5 — **only** the runtime, per-consumer prioritization vector EBC does not provide, and within that only the `visual` and `adaptive` components EBC has no check for |
+| — | *(not in the brief)* **Sufficiency** | **PARTIAL — `EBC` §8** owns the **build-time release** question: is this subject shippable (E0501/E0502/E0503, E0512, D15). **CEKR §11 delegates to it explicitly** (CT-5) | §5 — **only** the runtime, per-consumer prioritization vector EBC does not provide. Within that: `visual` is wholly EA-2's (no EBC check exists); `adaptive` is **only** the runtime depth-versus-need reading, EBC owning ladder validity and completeness (E0506, E0507, §7.6's E0401/E0402, §6.4's E0332); `teaching` and `serving` are not EA-2's at all |
 
 **Sixteen of sixteen briefed items are owned, and the seventeenth — sufficiency — is partially
 owned by EBC §8.** Phase 4 designs two seams and nothing else, and one of those seams (§5) is
@@ -412,15 +415,17 @@ It is not a sufficiency test, and four consumers need four different ones:
 |---|---|---|
 | Phase 1 teaching quality | an explanation exists **and** a probe with misconception-mapped distractors | **YES — EBC §8**: E0501 explanation source, E0502 misconception coverage, E0503 assessment coverage |
 | Phase 2 visual intelligence | for each visual purpose the concept genuinely needs, a form serving that purpose | **NO** — EBC §8 has no visual-purpose check |
-| Phase 3 adaptive teaching | enough hint-ladder rungs and scaffold levels to fade support | **NO** — EBC §8 has no ladder-depth check |
+| Phase 3 adaptive teaching | enough hint-ladder rungs and scaffold levels to fade support | **PARTIAL — EBC owns build-time ladder validity and completeness.** **E0506** every recovery state × escalation rung has a script AND an exit · **E0507** every hint passes the easier-than proofs · **§7.6** compiles `HintDef` hint-ladder tables per concept/item and proves the easier-than law (**E0401** `hint.stage ≤ target.stage − 1`, **E0402** `hint.requiresCapabilities ⊆ target.requiresCapabilities`) · **§6.4 E0332** every recovery state used by scripts has an exit rung. EBC has **no** check of ladder depth *relative to a given learner's need at runtime* |
 | Runtime serving | any ACTIVE asset matching learner language and grade band | **PARTIAL** — `coveragePercent` at subject scale |
 
 A concept can be 100% covered by the live metric and insufficient for three of the four.
 
-**Scope correction (v4.0.1).** v4.0.0-draft treated all four components as Phase 4's to define.
-The `teaching` component is not: **EBC §8 already defines it as release-blocking build errors**,
-under an explicit delegation from CEKR §11 (CT-5). EA-2 is narrowed to what EBC does not answer,
-and the distinction is one of **time and purpose**, not of subject matter:
+**Scope correction (v4.0.1, extended v4.0.2).** v4.0.0-draft treated all four components as
+Phase 4's to define. **Two of them are not.** `teaching` is EBC's (E0501/E0502/E0503), and
+`adaptive` is **partly** EBC's (E0506, E0507, §7.6's E0401/E0402, §6.4's E0332) — the second
+found only on a complete reading of EBC §8, §6.4 and §7.6, after v4.0.1 corrected the first from
+a partial reading. EA-2 is narrowed to what EBC does not answer, and the distinction is one of
+**time and purpose**, not of subject matter:
 
 > **EBC §8 answers a build-time, binary, release-blocking question — "is this subject
 > shippable?" EA-2 answers a runtime, graded, prioritization question — "for which consumer is
@@ -429,6 +434,15 @@ and the distinction is one of **time and purpose**, not of subject matter:
 A subject can pass every E-code and still be a poor place for the next authoring hour; a subject
 can fail E0501 on a concept no learner reaches. Those are different questions with different
 consumers, and EA-2 owns only the second.
+
+**Is the `adaptive` component still justified after this reconciliation?** Narrowly, yes, and the
+justification is worth stating because it is thin. EBC proves a ladder **exists and is valid** —
+every rung scripted with an exit, every hint provably easier than its target. It does not ask
+whether the authored depth is **enough for a particular learner at a particular moment**, which
+is a runtime read of a build-time-validated structure and is the only thing EA-2's `adaptive`
+component contributes. If a reviewer judges that question to belong to Phase 3's dials rather
+than to a sufficiency vector, the component should be dropped and EA-2 reduced to `visual` alone;
+that would not change any other part of this document.
 
 ### 5.2 What EA-2 specifies
 
@@ -439,24 +453,34 @@ consumers, and EA-2 owns only the second.
    teaching     satisfied | partial | absent    — DERIVED FROM EBC §8's
                                                   E0501/E0502/E0503. Not defined here
    visual       satisfied | partial | absent    — Phase 2's, per purpose   ★ new
-   adaptive     satisfied | partial | absent    — Phase 3's, per ladder    ★ new
+   adaptive     satisfied | partial | absent    — runtime depth-vs-need only;
+                                                  validity and completeness are
+                                                  EBC's (E0506/E0507/E0401/
+                                                  E0402/E0332)              ◐ partly new
    serving      satisfied | absent              — any ACTIVE match; coveragePercent
                                                   at subject scale
 ```
 
-★ = the two components EBC §8 has no check for. They are EA-2's only genuinely new content.
+★ = no EBC check exists (verified across all fifteen E-codes: zero visual, diagram, scene or
+render terms). ◐ = EBC owns build-time validity and completeness; only the runtime depth-vs-need
+reading is EA-2's. **`visual` is EA-2's only wholly new component.**
 
 **Four rules, two of them corrected in v4.0.1:**
 
-- **SF-1 · Each consumer defines its own component — except `teaching`, which EBC §8 already
-  defines.** *(Corrected v4.0.1.)* v4.0.0-draft read "no other party may", which conflicted
-  directly with E0501–E0503 defining three teaching criteria centrally as compile errors. The
-  corrected rule: **`teaching` is derived from EBC's E-codes and MUST NOT be redefined here** — a
-  concept failing E0501 is not `satisfied` on `teaching`, and Phase 4 asserts no threshold of its
-  own. `visual` and `adaptive` are defined by Phase 2 and Phase 3 respectively, because only they
-  know which purposes and which ladder depths a concept needs. Phase 4 defines the *shape* of the
-  vector and nothing else. **Where EA-2 and an E-code disagree about `teaching`, the E-code
-  wins.**
+- **SF-1 · Each consumer defines its own component — except where EBC already defines it.**
+  *(Corrected v4.0.1 for `teaching`; extended v4.0.2 to `adaptive`.)* v4.0.0-draft read "no other
+  party may", which conflicted directly with E0501–E0503 defining three teaching criteria
+  centrally as compile errors; a complete reading of EBC §8, §6.4 and §7.6 then showed the same
+  is true in part for `adaptive`. The corrected rule:
+  **`teaching` is derived from EBC's E-codes and MUST NOT be redefined here** — a concept failing
+  E0501 is not `satisfied` on `teaching`, and Phase 4 asserts no threshold of its own.
+  **`adaptive` is bounded the same way**: EBC owns ladder validity and completeness (E0506,
+  E0507, §7.6's E0401/E0402, §6.4's E0332), and EA-2 reads only depth-versus-need at runtime.
+  `visual` is defined by Phase 2, because only Phase 2 knows which purposes a concept needs.
+  Phase 4 defines the *shape* of the vector and nothing else.
+  **Where EA-2 and an E-code disagree about `teaching` or about `adaptive`, the E-code wins** —
+  a ladder failing E0506, E0507, E0401, E0402 or E0332 is never `satisfied` on `adaptive`,
+  whatever the runtime reading says.
 - **SF-2 · `coveragePercent` is unchanged and reinterpreted.** It is the `serving` component at
   subject scale. It remains a valid health figure; it is simply not the sufficiency test, and
   should not be read as one.
@@ -608,6 +632,18 @@ job under another name — which found `contentQualityDashboard.ts` and prevente
 duplicating a live subsystem.**
 
 **Honest limitations.** Four, stated so a reviewer knows where to press hardest:
+
+1a. **EBC §8 was read partially on the first two passes, and completely on the third.**
+   *(Recorded v4.0.2.)* v4.0.0-draft cited no E-code; v4.0.1 cited five of fifteen
+   (E0501/E0502/E0503/E0512 plus D15) and inferred from them that EBC had no adaptive check.
+   A complete reading of all fifteen E-codes plus §6.4 and §7.6 — performed for this correction —
+   found **E0506**, **E0507**, **§7.6's E0401/E0402** and **§6.4's E0332**, which together own
+   build-time ladder validity and completeness. Both B1 and B2 were produced by the same cause:
+   citing part of EBC §8 and generalizing from the part. Two further E-codes touch this
+   document's ownership map without contradicting it and are now noted rather than cited as
+   gaps: **E0508** (build-time provenance completeness, alongside CEKR §2.1) and **E0514**
+   (lexicon presence per shipped language, alongside CEKR §8.2). **EBC §8, §6.4 and §7.6 are now
+   read in full; the remaining EBC sections are not.**
 
 1. **This limitation fired, and is now partly closed.** v4.0.0-draft warned: *"If a kind or
    validation rule already defines sufficiency, §5 is duplicative — the single most likely way
