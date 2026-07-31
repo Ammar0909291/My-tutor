@@ -211,7 +211,7 @@ v3.0.0-draft had sections A–F and **no equivalent of Phase 1 §0.1 E**. The do
 | Artifact | Finding | Verdict |
 |---|---|---|
 | `src/lib/school/adaptive/teachingStrategy.ts` | `determineStrategy()` — a **live, deterministic, priority-ordered selector over 7 adaptive postures** with a stalemate-driven `excludeStrategy` rotation and a `foundationBias` default | **Extended — §0.2, §6** |
-| `src/lib/school/adaptive/strategyEffectiveness.ts` | Detects *"the same strategy firing 3+ times in a row on an unmastered topic"* | **Reused** — a live anti-thrash precursor (§9.5) |
+| `src/lib/school/adaptive/strategyEffectiveness.ts` | **Interface only.** `getStrategyEffectiveness()` is a four-line stub that ignores its arguments and returns `{ stalemate: false, staleMate: false, dominantStrategy: null }` unconditionally. The intended behaviour — *"the same strategy firing 3+ times in a row on an unmastered topic"* — is documented at `teachingStrategy.ts:49` and implemented nowhere | **Reused as an interface only** — the seam exists, the behaviour does not (§9.5) |
 | `src/lib/school/adaptive/teachingOutputBias.ts` | **13 lines; every exported function returns a constant.** A stub | **Reused (as evidence of a gap)** — AC-3, AF-1 |
 | `src/lib/school/adaptive/{confidenceCalibration,learningMomentum,conceptTransfer,misconceptionEngine}.ts` | The five signals `getTeachingStrategy()` folds | **Reused** — Phase 3's posture inputs already exist |
 | `src/lib/school/tutoring/hintTag.ts` + the `route.ts` `[HINT]` path | A parsed `[HINT]` tag whose bias input is the stub above | **Reused (as evidence of a gap)** — AF-1 |
@@ -1371,11 +1371,12 @@ something checkable: *which pressures are admissible, and which dials they may m
   flip on one response. §9 SG-1 applies to posture as to dials — a posture holds for a minimum
   evidence count unless a higher-priority posture's trigger fires. *This is a genuine addition and
   a genuine change in behaviour*, and it is recorded as a proposal (AH-5), not applied.
-- **The stalemate rotation is retained and re-grounded.** `excludeStrategy` rotation on three
-  repeats of an unmastered topic is a live anti-thrash mechanism. §9.5 keeps it and adds the
-  missing half: rotation on *count* is a weaker signal than rotation on *no state change*, and a
-  rotation that fires with the learner's state genuinely improving is a false positive. Recorded
-  as AF-6.
+- **The stalemate rotation is retained as an interface and re-grounded.** `excludeStrategy`
+  rotation on three repeats of an unmastered topic is the *intended* anti-thrash behaviour, but
+  its detector is a stub that never fires (§0.1, §9.5), so nothing rotates today. §9.5 keeps the
+  seam and adds the missing half for whenever it is implemented: rotation on *count* is a weaker
+  signal than rotation on *no state change*, and a rotation that fires with the learner's state
+  genuinely improving is a false positive. Recorded as AF-6.
 - **Posture never preempts.** A posture change is not a recovery, not an abandonment, and not a
   phase transition. It changes which pressures are admissible on the next pass and nothing else.
 
@@ -1625,8 +1626,12 @@ wrong.
 Every authored escalation ladder in the corpus specifies *what changes at each rung* and none
 specifies *how long a rung is held before the next*. `decision-engine/05` has four ladders and no
 dwell rule. The live posture selector re-derives on every turn from folds that flip on one
-response. `strategyEffectiveness.ts` detects a stalemate at three repeats — the only anti-thrash
-mechanism in the running system, and it counts repeats rather than measuring change.
+response. `strategyEffectiveness.ts` exposes a stalemate interface, but its implementation is a
+stub that returns `stalemate: false` unconditionally — so **no functional anti-thrash mechanism
+exists in the running system at all** (corrected after merge-gate verification; v3.1.0-draft
+described this file as live, which was wrong). AT-6 therefore fills a genuine architectural gap
+rather than extending an active runtime capability, and the gap is wider than this document
+previously stated.
 
 **Where the governor belongs — the question the review asked (answered v3.1.0).** The split is
 between the rules and their evaluation, and both halves already have owners:
@@ -1795,11 +1800,15 @@ teaching?* and lock (ii) still asks *is this a stable control move?*; both may s
 independently. What is added is that passing lock (i) now carries lock (i)'s **cost**, not merely
 its permission — which is what the two-lock rule always implied and never said.
 
-### 9.5 Reconciliation with the live stalemate detector
+### 9.5 Reconciliation with the stalemate-detector interface
 
-`strategyEffectiveness.ts` fires when the same posture repeats 3+ times on an unmastered topic.
-That is a real anti-thrash mechanism and Phase 3 keeps it. Two observations, recorded as feedback
-(AF-6) rather than as a change:
+`strategyEffectiveness.ts` **declares** a stalemate interface whose intended behaviour is firing
+when the same posture repeats 3+ times on an unmastered topic. **That behaviour is not
+implemented**: the function is a stub returning `stalemate: false` unconditionally, so it never
+fires. Phase 3 keeps the seam and does not propose removing it. The two observations below apply
+to the *intended* behaviour and remain recorded as feedback (AF-6) rather than as a change —
+they describe how the detector should count if it is ever implemented, not a defect in something
+currently running:
 
 - It counts **repeats**, where SG-5 counts **reversals**. They detect different pathologies —
   stuck versus oscillating — and both are worth having. They are complementary, not redundant.
@@ -3186,7 +3195,7 @@ Criteria for the **document**, not for an implementation.
 | **AA21** | Open questions are recorded as open rather than resolved by assertion. | ✅ §27 |
 | **AA22** | Every new object passes an admissibility test against the frozen primitive architecture. | ✅ C3-1; §22.1 |
 | **AA23** | **Independent merge-gate review recommends approval.** | ❌ **NOT MET — and not self-certifiable.** §29. A merge-gate review of v3.0.0-draft returned DO NOT APPROVE on B1/B2/B3; v3.1.0 answers all three. A further independent review is required and this document does not anticipate its outcome. |
-| **AA24** *(new v3.1.0)* | **Every live runtime subsystem that could own part of the control plane carries a verdict of reuses / extends / constrains / duplicates.** | ✅ §0.1 G and §0.7 — four subsystems, nine mechanisms; **one duplication found and eliminated by placement** (§0.7.1), five reuses, three constraints |
+| **AA24** *(new v3.1.0)* | **Every live runtime subsystem that could own part of the control plane carries a verdict of reuses / extends / constrains / duplicates.** | ✅ §0.1 G and §0.7 — four subsystems, nine mechanisms; **one duplication found and eliminated by placement** (§0.7.1), five reuses, three constraints. **Evidence qualified after merge-gate verification:** verdicts were taken from each subsystem's *capability* — what it is for and where it sits — and only `strategyEffectiveness.ts` was additionally behaviour-checked, which found it inert (§0.1, §9.5, §28). A verdict of "Reused" therefore attests that a seam exists, not that it currently computes anything |
 | **AA25** *(new v3.1.0)* | **No adaptation path bypasses a Phase 1 budget.** | ✅ §9.4a (BB-1…BB-4), §16.3 EL-7, §5.4's budget consequence, §4.3's `consumesReteachBudget` capture, §20.2's audit metric |
 | **AA26** *(new v3.1.0)* | **The document states the authority ladder it sits under, and every claim that crosses a frozen document defers to it.** | ✅ §0.6 — Phase 3 is row 6 (Advisory); band numbering corrected to EOS v2's; constants deferred to RS §18 |
 
@@ -3306,6 +3315,15 @@ verification: `teachingStrategy.ts`, `strategyEffectiveness.ts`, `teachingOutput
 `hintTag.ts`, and the relevant `route.ts` call sites. This produced AC-3 — a documented engine that
 computes nothing — which no amount of document reading would have found, and which materially
 changed §10's and §11's claims about their own novelty.
+
+**A second documented-but-inert engine, found at merge-gate verification.** These five files were
+read for *capability* — what each is for and where it sits — not in every case for *behaviour*.
+Merge-gate review behaviour-checked `strategyEffectiveness.ts` and found it is a four-line stub
+returning `stalemate: false` unconditionally. v3.1.0-draft had described it as a live anti-thrash
+mechanism; that was wrong and is corrected at §0.1, §9.1, §9.5 and AF-6. The correction widens the
+gap AT-6 addresses rather than narrowing it. **The lesson generalizes: an interface's existence is
+not evidence of its behaviour, and the remaining four files were verified at the same
+capability level.**
 
 **Honest limitations.** Five, stated so a reviewer knows where to press hardest (expanded in v3.1.0; items 1–2 unchanged, item 3 revised, items 4–5 new):
 
@@ -3446,8 +3464,12 @@ to the struggle controller unscoped. Proposal AH-4. *For the runtime owner.*
 its largest consumer and every load decision is marked `capacityUnknown` as a result. Restated
 because a second phase now depends on it. *For the Twin / Student-Memory owner.*
 
-**AF-6 · The live stalemate detector rotates on count, not on change.**
-`strategyEffectiveness.ts` fires at three repeats of a posture on an unmastered topic. A posture
+**AF-6 · The stalemate detector is a stub, and its intended design rotates on count, not on change.**
+`strategyEffectiveness.ts` is a four-line stub returning `stalemate: false` unconditionally, so no
+stalemate is ever detected today; the intended behaviour documented at `teachingStrategy.ts:49` is
+three repeats of a posture on an unmastered topic. Two items for the owner. First, the interface is
+unimplemented and the runtime therefore has no anti-thrash mechanism. Second, if it is implemented
+as documented: a posture
 repeating three times *while the learner improves* is the system working; rotating out of it is a
 false positive. Proposal: add a no-state-change condition. Separately, the live posture selector has
 **no dwell** and re-derives from folds that flip on one response (§6.3). *For the runtime owner.*
