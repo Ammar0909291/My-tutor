@@ -5,6 +5,21 @@
 **Supersedes:** nothing — first ADR on visualization architecture
 **Superseded by:** —
 
+**Scope note (2026-07-31, handoff VH-5 — not a supersession).** This ADR's
+*"when to visualize"* is now supplied by **Phase 2 VD-1**
+(`PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md`, CANONICAL v2.1.0): a
+four-condition admission test with ten enumerated contraindications, default no,
+paired with VD-2's ten-purpose taxonomy for *why* and VD-3 for *which form
+class*. ADR 12 is **narrowed, not replaced** — it remains the sole owner of
+renderers, the concept-keyed cache, background authoring, the Visual Policy and
+validation, and every finding and proposal below stands unchanged. Where this
+document reasons about *whether* a visual should appear, read Phase 2 VD-1 as
+the authority and this ADR as the production tier that serves that decision.
+The tier boundary is crossed only by two one-directional projections
+(`VisualIntent` down, `VisualAvailability` up), so §13's leaf rule is preserved.
+Documentation correction only: no proposal here is enacted, W4-2 remains gated,
+and G1/G2 remain in force.
+
 ---
 
 ## 1. Problem

@@ -916,6 +916,37 @@ LoadSignatureDetected, §4.9 of the Architecture); whether REACT enforcement
 
 ---
 
+## Appendix A — Scope notes (amendments)
+
+Per `docs/architecture/README.md`, a Frozen document is amended by an appendix
+that says what it changes — never by silent edit. Nothing in this appendix
+alters a normative clause above; each entry records a binding made elsewhere in
+the corpus that resolves to a definition this document already owns.
+
+### A-1 · Scaffold vocabulary is defined here and only here (2026-07-31, handoff AH-4)
+
+**Supersedes:** nothing. **Changes:** no clause of §3.4 — the definition is
+restated, not modified.
+
+§3.4's `scaffoldDial` — **0–4 (0 = full worked, 4 = solo), GUIDED only**, owner
+TSM, kind `state` — is the **single definition of the scaffold vocabulary for
+the entire corpus**. It is also the quantity referenced by §7's `GUIDED →
+INDEPENDENT` fluency gate (`at scaffoldDial=4`).
+
+`docs/architecture/eos-v3/04-TEACHING-RUNTIME.md`'s `C-32` prose output
+*"scaffolding level"* names this same quantity and defines nothing of its own;
+that file now carries the binding explicitly. `PHASE_03_ADAPTIVE_TEACHING_
+ARCHITECTURE.md` §0.4 records the divergence that made the binding necessary.
+Per the Authority Index, `eos-v3` is a non-authoritative exploration and v2 wins
+by definition wherever the two diverge, so this appendix creates no new
+precedence rule — it removes an ambiguity about whether two names denoted two
+things. They denote one.
+
+**Enacts nothing.** No runtime, schema, or behaviour change; AH-4 is a
+documentation handoff, and G1/G2 remain in force.
+
+---
+
 *End of runtime specification v1.0.0. Implementation of any section requires
 owner approval (G2). Gaps discovered during implementation are spec bugs:
 file them against this document — do not invent behaviour.*

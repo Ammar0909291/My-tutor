@@ -4,8 +4,11 @@
 gated items for the 31 open cross-owner handoffs of Phases 1–4 (Wave H below).
 **Nothing on this list is approved.** This document grants no permission by
 existing — it is the instrument the project owner uses to grant it, one
-checkbox at a time. Drafting an item is not approving it: every item added
-2026-07-31 is unchecked, and G1 and G2 remain in force exactly as stated below.
+checkbox at a time. Drafting an item is not approving it. **Six Wave H items
+(H-3, VH-5, AH-5, AH-9, AH-4, EH-3) were approved and implemented 2026-07-31
+under WP-1** as an explicit owner exception — all six are documentation-only.
+The other 25 Wave H items and all 19 pre-existing unchecked items remain
+unapproved, and G1 and G2 remain in force exactly as stated below.
 
 **The two Wave 0 gates** (`ARCHITECTURE_COMPLETION_REPORT_V1.md` §5):
 - [ ] **G1 — Canonical KG v1 freeze declared by the Curriculum Production
@@ -109,10 +112,16 @@ Drafting this section discharges the **handoff** half of that request. The
 P2-1…P2-7) and Phase 3 §25 / Phase 4's stages into gated items — is **not** done
 here and remains open; their rows say so.
 
-**Nothing in this section is approved.** Every box is unchecked. Per the header,
-an unchecked item is architecture-only, and per Bible §10.1 rule 2 it authorizes
-no implementation. Approving any row here still requires G2, and any row whose
-dependency column names G1 additionally requires G1.
+**Approval state (updated 2026-07-31).** When this section was drafted under WP-0
+every box was unchecked. Six documentation-only items — **H-3, VH-5, AH-5, AH-9,
+AH-4, EH-3** — were subsequently approved by the project owner as an explicit
+exception and implemented under **WP-1**; their rows carry the record. **The
+remaining 25 rows are unchecked and unapproved.** Per the header, an unchecked
+item is architecture-only, and per Bible §10.1 rule 2 it authorizes no
+implementation. Approving any remaining row still requires G2, and any row whose
+dependency column names G1 additionally requires G1. No row approved under WP-1
+carried a runtime, schema, API or behaviour change — that is why they were
+separable from the rest.
 
 ### Phase 1 — Teaching Quality (`PHASE_01_…md` §0.3)
 
@@ -120,7 +129,7 @@ dependency column names G1 additionally requires G1.
 |---|---|---|---|---|---|
 | H-1 | `C-28`'s decision record gains the AttemptVector as a captured field | Phase 1 §11.2 | Runtime schema — runtime owner | G2; must be decided jointly with AH-3 (one field group, not two schemas) | [ ] |
 | H-2 | `C-30`'s documented approach-history responsibility retired in favour of TQ-4's typed `failedAttempts` set | Phase 1 §4.1 | Engine responsibility — runtime owner | G2; H-1 | [ ] |
-| H-3 | Bible ADR index records ADR 09 as *extended by Phase 1 TQ-2* | Phase 1 §5.7 RC-5 | Bible — runtime owner | G2. **Amends a Frozen v1.0 document** (Authority Index row 5) — documentation-only, but via the amendment path, not a direct edit | [ ] |
+| H-3 | Bible ADR index records ADR 09 as *extended by Phase 1 TQ-2* | Phase 1 §5.7 RC-5 | Bible — runtime owner | G2. **Amends a Frozen v1.0 document** (Authority Index row 5) — documentation-only, but via the amendment path, not a direct edit | [x] **implemented 2026-07-31 under WP-1** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3 above). Documentation/specification only; no runtime, schema, API, test, prompt, curriculum or KG change. Already satisfied before this pass: the Bible ADR index already recorded ADR 09 as *extended by Phase 1 TQ-2 (not superseded)* with a 2026-07-31 scope note. **No edit was made** — verified, not re-applied. |
 | H-4 | Bible engine map gains the Campaign scale and TQ-1…TQ-7 | Phase 1 §0.3 | Bible — runtime owner | G2. Frozen v1.0 (row 5), as H-3 | [ ] |
 | H-5 | This checklist gains items for Phase 1 §14's stages | Phase 1 §0.3 | Wave 0 — owner | **Partially discharged 2026-07-31**: handoff items H-1…H-6 now listed. Stage items P1-1…P1-7 remain `Proposed ID` only and are still to be promoted | [ ] |
 | H-6 | All Phase 1 → runtime interfaces (§11) expressed through `RUNTIME_EDUCATIONAL_BRAIN_CONTRACT.md`, never around it | Phase 1 §11 | Contract — runtime owner | G2 | [ ] |
@@ -133,7 +142,7 @@ dependency column names G1 additionally requires G1.
 | VH-2 | ADR 12's Visual Policy table gains a `purpose` dimension alongside `strategy` | Phase 2 §6.5 | ADR 12 — runtime owner | G2. Frozen v1.0 (row 5) | [ ] |
 | VH-3 | `a11yDescription` strengthened from *present and non-empty* to *instructionally equivalent* | ADR 12 §4.5 | ADR 12 — runtime owner | G2 | [ ] |
 | VH-4 | RRM records the `VisualIntent` that produced each rendered visual, not only the visual | Phase 2 §8.2 | ADR 15 — runtime owner | G2 | [ ] |
-| VH-5 | Bible §3/§6.8 gains a Phase 2 pointer; ADR 12 gains a scope note recording that its "when" is supplied by VD-1 | Phase 2 §0.3 | Bible + ADR 12 — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [ ] |
+| VH-5 | Bible §3/§6.8 gains a Phase 2 pointer; ADR 12 gains a scope note recording that its "when" is supplied by VD-1 | Phase 2 §0.3 | Bible + ADR 12 — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [x] **implemented 2026-07-31 under WP-1** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3 above). Documentation/specification only; no runtime, schema, API, test, prompt, curriculum or KG change. Bible §3 Engine 42 row + new §6.8 "Phase 2 pointer" paragraph; ADR 12 header gains a scope note (narrowed, not superseded). |
 | VH-6 | This checklist gains Phase 2 stage items; **W4-2 remains gated and is not unblocked** | Phase 2 §0.3 | Wave 0 — owner | **Partially discharged 2026-07-31**: handoff items VH-1…VH-8 now listed. Stage items P2-1…P2-7 remain `Proposed ID` only. W4-2 unchanged | [ ] |
 | VH-7 | The `VisualAvailability` projection is published by the production tier — coarse, one-directional, carrying no asset ids, cache keys, renderer names or spec payloads | Phase 2 §7.4 | ADR 12 — runtime owner | G2 | [ ] |
 | VH-8 | `representationDependence` added as a per-concept property of the learner model, with three levels | Phase 2 §9.1 | ADR 10 Student Memory — runtime owner | G2; W1-2 (ADR 10 Phase 1 stores) | [ ] |
@@ -145,12 +154,12 @@ dependency column names G1 additionally requires G1.
 | AH-1 | `C-32`'s four unstructured outputs replaced by one typed Adaptation State Vector; `C-32` retains loop, band and veto, and **transfers the adjustment decision** | Phase 3 §5, §0.1 | EOS `C-32` — runtime owner | G2. Flagged in this checklist since Phase 3's canonicalization as an **ownership change**, not only an instrument | [ ] |
 | AH-2 | The ASV persisted as per-learner-per-concept standing state in an **existing** ADR 10 store (candidate: Store 2). No new store | Phase 3 §0.3 | ADR 10 — runtime owner | G2; W1-2. Flagged by Phase 3 §29 as "the one that looks small and is not" | [ ] |
 | AH-3 | `C-28`'s decision record captures the ASV snapshot and adjustment record as **one field group with Phase 1's AttemptVector (H-1)**, not two | Phase 3 §7.4 | `C-28` + ADR 08 — runtime owner | G2; **must be decided jointly with H-1** — approving either alone risks two schemas for one turn | [ ] |
-| AH-4 | Scaffold vocabulary unified: `EOS_V2_RUNTIME_SPECIFICATION` §3.4's `scaffoldDial 0–4` becomes the single definition; `eos-v3` `C-32`'s prose "scaffolding level" is bound to it | Phase 3 §0.4 | EOS v2 + eos-v3 — runtime owner | G2. **Amends a Frozen document** (`EOS_V2_RUNTIME_SPECIFICATION`, Authority Index row 2) via the spec-bug/appendix path. `eos-v3` carries no authority tier (README §"exploration") | [ ] |
-| AH-5 | ADR 08 records the Posture layer explicitly: `teachingStrategy.ts`'s 7 postures are the Posture half of ADR 08's Posture/Action split, distinct from Phase 1's 9 archetypes | Phase 3 §6.1 | ADR 08 — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [ ] |
+| AH-4 | Scaffold vocabulary unified: `EOS_V2_RUNTIME_SPECIFICATION` §3.4's `scaffoldDial 0–4` becomes the single definition; `eos-v3` `C-32`'s prose "scaffolding level" is bound to it | Phase 3 §0.4 | EOS v2 + eos-v3 — runtime owner | G2. **Amends a Frozen document** (`EOS_V2_RUNTIME_SPECIFICATION`, Authority Index row 2) via the spec-bug/appendix path. `eos-v3` carries no authority tier (README §"exploration") | [x] **implemented 2026-07-31 under WP-1** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3 above). Documentation/specification only; no runtime, schema, API, test, prompt, curriculum or KG change. `eos-v3/04-TEACHING-RUNTIME.md` C-32 gains a vocabulary binding to RS §3.4; `EOS_V2_RUNTIME_SPECIFICATION.md` gains **Appendix A-1** — a Frozen document amended by appendix per README, never by silent edit. No §3.4 clause changed. |
+| AH-5 | ADR 08 records the Posture layer explicitly: `teachingStrategy.ts`'s 7 postures are the Posture half of ADR 08's Posture/Action split, distinct from Phase 1's 9 archetypes | Phase 3 §6.1 | ADR 08 — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [x] **implemented 2026-07-31 under WP-1** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3 above). Documentation/specification only; no runtime, schema, API, test, prompt, curriculum or KG change. ADR 08 gains a "Posture-layer record" after its two-layer table, naming the 7 postures as the Posture half and distinguishing Phase 1's 9 Campaign-scale archetypes as a third, separate layer. |
 | AH-6 | Evidence records carry `scaffoldLevel` and `hintDebt`, as `EOS_V2`'s `AnswerObserved` already specifies, so assisted and unassisted evidence stay distinguishable | Phase 3 §10.5, §11.4 | ADR 13 — runtime owner | G2; W1-3 | [ ] |
 | AH-7 | Bible engine map and §6 gain the adaptive control plane and AT-1…AT-14; ADR index records ADR 08 and ADR 13 as *extended by Phase 3* | Phase 3 §0.3 | Bible — runtime owner | G2. Documentation-only; Frozen v1.0 (row 5) | [ ] |
 | AH-8 | This checklist gains items for Phase 3 §25's stages. **Phase 3's merge unblocks nothing** | Phase 3 §0.3 | Wave 0 — owner | **Partially discharged 2026-07-31**: handoff items AH-1…AH-12 now listed. Phase 3 has no `Proposed ID` stage table; §25's stages remain unlisted | [ ] |
-| AH-9 | `ENGINE_REFERENCE.md` #16's description of `teachingOutputBias.ts` corrected to record that the file is a stub (AF-1) | Phase 3 §0.3 | `ENGINE_REFERENCE` — runtime owner | G2. Documentation correction only; carries no implementation | [ ] |
+| AH-9 | `ENGINE_REFERENCE.md` #16's description of `teachingOutputBias.ts` corrected to record that the file is a stub (AF-1) | Phase 3 §0.3 | `ENGINE_REFERENCE` — runtime owner | G2. Documentation correction only; carries no implementation | [x] **implemented 2026-07-31 under WP-1** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3 above). Documentation/specification only; no runtime, schema, API, test, prompt, curriculum or KG change. `ENGINE_REFERENCE.md` #16 corrected: the file is a 13-line stub, every export returns a constant. The engine file itself was NOT touched. |
 | AH-10 | All Phase 3 → runtime interfaces (§18) expressed through `RUNTIME_EDUCATIONAL_BRAIN_CONTRACT.md`, never around it | Phase 3 §18 | Contract — runtime owner | G2 | [ ] |
 | AH-11 | Phase 3's pressure and governor rules authored **into the existing policy pack** (`kernel/policy/basePack.ts`'s format, Bands 2/4/5), not into a new evaluator | Phase 3 §0.3 (v3.1.0) | `kernel/policy/` + EOS runtime — runtime owner | G2. Which wiring frame governs — EOS band pipeline or the live pre-EOS prompt-assembly path — is explicitly the runtime owner's sequencing decision | [ ] |
 | AH-12 | `C-28`'s adjustment record carries `consumesReteachBudget`; Phase 1's §7.7 budget counter readable by Band-2 governor rules so an exhausted budget removes D1/D5 failure-response moves | Phase 3 §0.3 (v3.1.0) | `C-28` + Phase 1 budget owner — runtime owner | G2; H-1, AH-3 | [ ] |
@@ -161,7 +170,7 @@ dependency column names G1 additionally requires G1.
 |---|---|---|---|---|---|
 | EH-1 | `contentQualityDashboard.ts`'s `WorkQueueItem` gains an optional authored-demand input alongside its telemetry-derived signals | Phase 4 §4 | AssetIdentity pipeline — runtime owner | G2. Subsystem is registered **COMPLETE / never rebuild** — extension routed to its owner, never a re-implementation. Unresolved concern on record: `buildWorkQueue()` filters out items classified `none`, so integration is not purely additive at the type level | [ ] |
 | EH-2 | The sufficiency vector published as a per-concept read model; `coveragePercent` unchanged and reinterpreted, not replaced | Phase 4 §5 | AssetIdentity pipeline — runtime owner | G2; EH-1 | [ ] |
-| EH-3 | ADR 13's `CuratorQueueEntry.trigger` union gains **no** member from Phase 4; coverage demand routed to the work queue, not the curator queue | Phase 4 §0.3 | ADR 13 — runtime owner | G2. **A handoff that requests no change** — recorded so the two queues are not merged by accident. Approving it enacts nothing | [ ] |
+| EH-3 | ADR 13's `CuratorQueueEntry.trigger` union gains **no** member from Phase 4; coverage demand routed to the work queue, not the curator queue | Phase 4 §0.3 | ADR 13 — runtime owner | G2. **A handoff that requests no change** — recorded so the two queues are not merged by accident. Approving it enacts nothing | [x] **implemented 2026-07-31 under WP-1** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3 above). Documentation/specification only; no runtime, schema, API, test, prompt, curriculum or KG change. ADR 13 gains a scope note recording that the `CuratorQueueEntry.trigger` union gains **no** member: degradation signals vs. absence signals, absence routed to the work queue. |
 | EH-4 | CEKR §10's `Conflict` node with `ACCEPTED_TENSION` is the home for the contradictions in Phase 4 §0.4; CT-1…CT-4 filed there rather than in phase documents | Phase 4 §0.4 | CEKR — runtime owner | G2. **Amends a Frozen document** (CEKR, Authority Index row 3) via its own §10 revision model. CT-2 remains unresolved | [ ] |
 | EH-5 | On approval, the Bible, the governance registry and the EOS blueprint index gain Phase 4 pointers | Phase 4 §0.3 | runtime owner | G2. Documentation-only; carries no implementation | [ ] |
 

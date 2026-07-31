@@ -263,6 +263,15 @@ learner goals (an exam in three days legitimately shifts the band toward consoli
 
 **Outputs.** Difficulty target, hint policy, scaffolding level, withholding decisions.
 
+> **Vocabulary binding (2026-07-31, handoff AH-4).** *"Scaffolding level"* above is
+> **not** a separate quantity. It denotes `scaffoldDial`, defined normatively in
+> `EOS_V2_RUNTIME_SPECIFICATION.md` §3.4 as **0–4 (0 = full worked, 4 = solo),
+> GUIDED only**, owned by TSM and carried as state. That definition is the single
+> definition of the scaffold vocabulary for the whole corpus; this prose is bound
+> to it and defines nothing of its own. Per the Authority Index, v2 wins wherever
+> v3 and v2 diverge — so if this file's prose ever reads differently from RS §3.4,
+> RS §3.4 governs. Phase 3 §0.4 records the divergence that prompted this binding.
+
 **Ownership.** Owns the difficulty control loop. **Must not own** affect (C-19 has veto)
 or content difficulty definitions (C-08).
 
