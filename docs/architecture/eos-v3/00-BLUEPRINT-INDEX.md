@@ -595,3 +595,23 @@ publish to Band 2 (subtractive) and its parameters to Band 5 (personalization).
 `src/lib/kernel/policy/types.ts`. Phase 3 publishes against the seven-band scheme.
 
 Architecture only — authorizes no implementation; G1 and G2 remain in force.
+
+**Phase 4 — Educational Assets Architecture** ·
+`../PHASE_04_EDUCATIONAL_ASSETS_ARCHITECTURE.md` · **CANONICAL** (v4.0.2, 2026-07-31)
+
+The educational-asset territory, reconciled rather than designed. All sixteen briefed items
+already had owners: **CEKR** (Frozen) for identity, versioning, provenance, relationships,
+variants, discoverability and validation; **ADR 14** for the catalogue and lifecycle; **ADR 13**
+for quality evidence; the **AUTHORING_SDK** for authoring; and **EBC §8** for build-time coverage
+sufficiency, delegated explicitly by **CEKR §11**.
+
+Phase 4 designs no asset system. It specifies two seams — **EA-1** demand routing into the live
+work queue, and **EA-2** a runtime, per-consumer **sufficiency vector** — and records four
+contradictions it did not fix.
+
+**Note for implementers.** The prioritized authoring work queue already exists and runs:
+`src/lib/teaching/assets/contentQualityDashboard.ts`. It is documented in no ADR, no Bible entry
+and no `ENGINE_REFERENCE.md` row (Phase 4 EF-5). Extend it by reference; never rebuild it.
+
+Architecture only — authorizes no implementation; G1 and G2 remain in force, and handoffs
+EH-1…EH-5 remain proposals awaiting their owners.

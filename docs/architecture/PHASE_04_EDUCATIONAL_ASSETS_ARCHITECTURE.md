@@ -1,9 +1,13 @@
 # Phase 4 — Educational Assets Architecture
 
 **Document class:** Architecture blueprint. Design only.
-**Status:** DRAFT — pending independent merge-gate review. Not canonical. Not approved. Not
-self-certified (Phase 1 §18).
-**Version:** 4.0.2-draft (supersedes 4.0.1-draft and 4.0.0-draft; corrects the B2 adaptive-ownership finding)
+**Status:** **CANONICAL.** Approved for merge by repository-owner authorization on 2026-07-31,
+the owner attesting that the merge-gate review is complete and that its findings are resolved.
+No review artifact is committed to this repository; the approval of record is the owner's
+authorization (§9.1). This is the canonical Educational Assets Architecture. It remains
+architecture only — nothing is implemented, G1 and G2 remain in force, and merging it unblocks
+no implementation and adds no Wave 0 item by itself.
+**Version:** 4.0.2 (supersedes 4.0.2-draft, 4.0.1-draft and 4.0.0-draft)
 **Phase:** 04 (`architecture/phase-04-educational-assets`)
 **Builds on:** Phase 1 v1.2.0, Phase 2 v2.1.0, Phase 3 v3.1.0 — all CANONICAL, all binding, none
 modified.
@@ -584,9 +588,47 @@ directs that a gap in a Frozen document is filed against it, not covered by inve
 | EA-A11 | Both seams declare a falsifiable prediction | ✅ §4.4, §5.4 |
 | EA-A12 | Risks state residual risk; trade-offs state accepted cost | ✅ §7, §8 |
 | EA-A13 | Open questions recorded as open | ✅ §10 |
-| EA-A14 | **Independent merge-gate review recommends approval** | ❌ **NOT MET — and not self-certifiable** (Phase 1 §18) |
+| EA-A14 | **Independent merge-gate review recommends approval** | ✅ **MET — by repository-owner authorization, 2026-07-31.** The owner attests the merge-gate review is complete and its findings resolved. **No review artifact is committed to this repository** — the approval of record is the owner's authorization (§9.1). Not self-marked: this document's author neither performed nor certified that review. |
 
-**EA-A14 is the only open criterion.**
+**EA-A14 was the only open criterion; it was closed by owner authorization on 2026-07-31 (§9.1).**
+It was structural rather than substantive: Phase 1 §18 forbids the author from certifying the
+document, and this document never did; it was closed by the owner, not by the author.
+
+### 9.1 Approval record
+
+**Canonicalization authority: repository owner, 2026-07-31.**
+
+| Item | Record |
+|---|---|
+| Merge-gate review | Completed; the owner attests to its completion and to its findings being resolved. Three blocking issues were raised across the review rounds and all were corrected before this record — **B1**, sufficiency wrongly claimed to have no owner, corrected in v4.0.1 to record CEKR §11's delegation to EBC §8; **B2**, `adaptive` wrongly claimed wholly EA-2's, corrected in v4.0.2 after reading all fifteen §8 E-codes plus §6.4 and §7.6; **B3**, §1.2 still carrying the superseded claim after §5 had been corrected |
+| Review artifact in this repository | **None.** No review document is committed here, and none should be cited as if it were |
+| Approval of record | **Repository-owner authorization**, given explicitly on 2026-07-31 |
+| Author's role | The author of this architecture neither performed nor certified the merge-gate review (Phase 1 §18) |
+
+**Why this is recorded plainly.** Phase 1 §18 prohibits an architecture's author from certifying
+it, and permits the owner to accept a review performed outside the repository — provided the
+record states plainly that no artifact exists and does not reconstruct one. That clause is
+honoured here, as it was for Phases 1, 2 and 3. A future reader auditing this decision should
+look to the owner's authorization and should not search for a review file in this repository.
+
+**Effect.** Phase 4 is the canonical Educational Assets Architecture. Its finding governs from
+here: the educational-asset territory is owned — by CEKR at row 3 for identity, versioning,
+provenance, relationships, variants and validation; by ADR 14 for the runtime catalogue and
+lifecycle; by ADR 13 for quality evidence; by the AUTHORING_SDK for authoring; by EBC §8 for
+build-time coverage sufficiency; and by the live `contentQualityDashboard.ts` for authoring
+prioritization. Phase 4 owns two seams and nothing else: **EA-1** demand routing (§4) and
+**EA-2** the runtime, per-consumer sufficiency vector (§5).
+
+**What canonicalization does NOT do.** It authorizes no implementation. G1 and G2 remain in
+force; merging Phase 4 unblocks nothing and adds no Wave 0 item by itself; and handoffs
+**EH-1…EH-5 remain proposals** awaiting their owners. **Open observations carried forward
+deliberately and NOT resolved by canonicalization:** the merge-gate review recorded four
+Important and several Minor items — among them that EA-A2's completeness claim describes an
+asset-territory reconciliation rather than a repository-wide verdict sweep (verified to carry no
+ownership risk), that §5.2's rule-header label is stale against SF-1's own body, that DR-1's
+"additive" understates the integration surface by one `AuthoringProblem` union member, and that
+this document carries no change-log appendix recording the third correction round. None is
+resolved here. Canonicalization records the architecture as agreed; it does not tidy it.
 
 ---
 
