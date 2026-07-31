@@ -13,4 +13,7 @@ export {
   policyGate, policyInputsFromState, NO_SIGNAL, DEFAULT_CALLER_FACTS,
   type PolicyGateResult, type LastSignalFacts, type CallerDecisionFacts,
 } from './policyGate'
-export { degradedTurn, DEFAULT_FALLBACK_CHAIN, type DegradedTurn } from './degradedMode'
+export {
+  degradedTurn, DEFAULT_FALLBACK_CHAIN, DEGRADED_PROVIDER, isDegradedProvider,
+  type DegradedTurn,
+} from './degradedMode'

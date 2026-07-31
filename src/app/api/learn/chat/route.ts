@@ -2542,15 +2542,30 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // whichever labelled sections and assessment items it actually
       // contains and persist each as a DRAFT for future reuse. Fire-and-
       // forget — never awaited, never blocks the turn.
+      // A degraded turn is NOT a successful LLM generation. degradedTurn()
+      // renders a content-free outage template (templateFallback.ts: "no
+      // fabricated pedagogy"), and this capture path existed with no consumer
+      // of `provider` at all, so those templates were decomposed and written
+      // as DRAFT ExplanationAssets exactly like model output. Production holds
+      // five such rows across five concepts and three languages — including
+      // the English template stored as the RUSSIAN core_explanation for
+      // chem.atomic.orbitals. They sit in the admin review queue, and
+      // approving one makes it the single ACTIVE asset for its canonicalSlug,
+      // after which findBestExplanation() serves that boilerplate to every
+      // matching learner forever — turning a transient outage into permanent
+      // repetition that no state-machine fix can reach.
       if (memoryState && !assembled) {
-        void ingestGeneratedLesson({
-          conceptId: memoryState.conceptId,
-          subjectSlug: memoryState.subjectSlug,
-          language: memoryState.language,
-          gradeBand: memoryState.gradeBand,
-          rawContent: text,
-          authorId: 'SYSTEM_AI',
-        })
+        const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
+        if (!isDegradedProvider(provider)) {
+          void ingestGeneratedLesson({
+            conceptId: memoryState.conceptId,
+            subjectSlug: memoryState.subjectSlug,
+            language: memoryState.language,
+            gradeBand: memoryState.gradeBand,
+            rawContent: text,
+            authorId: 'SYSTEM_AI',
+          })
+        }
       }
 
       // Sprint BW: extract and strip VISUAL:<type> tag before persisting/returning.
@@ -2829,6 +2844,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
           const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
           const { enforceStance } = await import('@/lib/teaching/stanceEnforcement')
+          const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
           const askedQuestionThisTurn = repliesWithQuestion(cleanText)
           // Turn Parity Observer: compare what the server decided against
           // what the LLM actually rendered. Measurement only — no blocking.
@@ -2848,6 +2864,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
             signalVerificationStatus: signalVerificationStatusHoisted,
             parityViolation: parityViolationThisTurn,
+            // RS P-3: an outage template taught nothing, so it must not be
+            // folded as a give. See TurnEvidence.degradedTurn.
+            degradedTurn: isDegradedProvider(provider),
             // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
             // CHECK); the mastery gates still require a real answer.
             acknowledgement: lowSignalAckHoisted,
@@ -3580,6 +3599,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } else if (conversationStateHoisted) {
             const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
             const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
+            const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
             const fallbackAskedQ = repliesWithQuestion(cleanText)
             Object.assign(conversationStateUpdate, {
               conversationState: advanceConversationState(conversationStateHoisted, {
@@ -3594,6 +3614,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
                 signalVerificationStatus: signalVerificationStatusHoisted,
                 parityViolation: !!(evidenceMoveHoisted === 'ask' && !fallbackAskedQ),
+                // Same guard as the upstream fold — the two must not disagree
+                // about whether an outage template taught anything.
+                degradedTurn: isDegradedProvider(provider),
                 acknowledgement: lowSignalAckHoisted,
               }),
             })

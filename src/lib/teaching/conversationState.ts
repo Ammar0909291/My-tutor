@@ -228,6 +228,12 @@ export interface TurnEvidence {
   /** True when the server-decided move disagrees with what the LLM rendered
    *  (e.g., decided 'ask' but response had no question). */
   parityViolation?: boolean
+  /** RS P-3: this turn's text is a degraded outage template, not model output.
+   *  The templates are content-free by construction (templateFallback.ts: "no
+   *  fabricated pedagogy"), so the turn delivered NO teaching — `demonstrated`
+   *  and `taughtThisSession` must not record that it did. Sourced from
+   *  degradedMode.isDegradedProvider(), the single owner of the question. */
+  degradedTurn?: boolean
   /** The learner's message was a bare acknowledgement — a receipt ("got it")
    *  or a forward request ("go", "continue", "ready"). Sourced from
    *  isLowSignalAcknowledgement(), the same predicate that drives the turn
@@ -336,12 +342,21 @@ export function advanceConversationState(
   } else {
     next.teachSegmentsSinceQuestion = prev.teachSegmentsSinceQuestion + 1
     next.questionsAskedSinceTeach = 0
-    // A no-question turn in DEMONSTRATE (or later) means the teacher showed
-    // something — the evidence gate DEMONSTRATE→GUIDE needs.
-    if (prev.phase !== 'OBSERVE') next.demonstrated = true
-    // QL-1: any give — including the OBSERVE-phase anchor, which `demonstrated`
-    // deliberately excludes — creates a source the learner can answer from.
-    next.taughtThisSession = true
+    // Both flags below assert a FACT about what the learner received, so a
+    // degraded outage template — content-free by construction — must not set
+    // either. It asks nothing, so without this guard it reads as a give: it
+    // would satisfy the DEMONSTRATE→GUIDE evidence gate having demonstrated
+    // nothing, and would tell QL-1 a source exists to answer from, licensing
+    // a question about material the outage meant was never delivered. That is
+    // the precise condition QL-1 exists to forbid.
+    if (!evidence.degradedTurn) {
+      // A no-question turn in DEMONSTRATE (or later) means the teacher showed
+      // something — the evidence gate DEMONSTRATE→GUIDE needs.
+      if (prev.phase !== 'OBSERVE') next.demonstrated = true
+      // QL-1: any give — including the OBSERVE-phase anchor, which `demonstrated`
+      // deliberately excludes — creates a source the learner can answer from.
+      next.taughtThisSession = true
+    }
   }
 
   // QL-3: fold the learner-directive suppression counter before any early

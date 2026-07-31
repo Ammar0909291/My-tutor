@@ -244,6 +244,11 @@ describe('structural guard — the harness fold must cover the route fold', () =
     strategyUsed:             'server-selected strategy id, not visible in the conversation text',
     signalConfidence:         'SIGNAL tag confidence, not recorded in a transcript',
     signalVerificationStatus: 'produced by the signal-verification subsystem at runtime',
+    degradedTurn:             'AI-provider availability (Message.provider), not a property of the '
+                            + 'conversation text; ReplayTurn carries learner/tutor/signalCorrect only, '
+                            + 'and inferring an outage by matching the template wording would be the '
+                            + 'keyword hack this harness exists to catch. Give ReplayTurn a `degraded` '
+                            + 'flag and delete this entry to replay outages.',
   }
 
   it('every route evidence field is either replayed or explicitly excused', () => {

@@ -29,10 +29,30 @@ import type { PolicyMove } from '@/lib/kernel/types'
  *  real PolicyDecision can pass its own chain. */
 export const DEFAULT_FALLBACK_CHAIN = ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE']
 
+/**
+ * The provider value a degraded turn carries, and the single owner of the
+ * question "did a model actually author this turn?".
+ *
+ * The value already existed on DegradedTurn; what did not exist was any
+ * consumer of it. Downstream code treated a degraded turn as ordinary model
+ * output, so a content-free outage template was recorded as authored teaching
+ * — see the two guards that import this. Exported as a named constant and a
+ * predicate so those consumers cannot drift from the producer by comparing a
+ * bare string literal.
+ */
+export const DEGRADED_PROVIDER = 'degraded'
+
+/** True when this turn's text is a degraded template rather than model output.
+ *  The templates are content-free by construction (see templateFallback.ts),
+ *  so nothing downstream may treat them as teaching the learner received. */
+export function isDegradedProvider(provider: string | null | undefined): boolean {
+  return provider === DEGRADED_PROVIDER
+}
+
 export interface DegradedTurn {
   text: string
   /** Distinguishable in Message.provider analytics; never shown as a banner. */
-  provider: 'degraded'
+  provider: typeof DEGRADED_PROVIDER
   finishReason: 'template'
   move: PolicyMove
   kind: string
