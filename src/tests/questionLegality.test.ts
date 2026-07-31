@@ -25,6 +25,7 @@ import {
   buildTurnDirective,
   type ConversationState,
 } from '@/lib/teaching/conversationState'
+import { detectFailureState, isDontKnowSignal } from '@/lib/teaching/recoveryGuard'
 
 const S = (over: Partial<ConversationState> = {}): ConversationState => ({
   ...initialConversationState('chem.sol.solubility'),
@@ -193,21 +194,34 @@ describe('Henry\'s Law transcript replay — the failure cannot recur', () => {
   it('never produces two ASK turns before anything is taught', () => {
     // Drive the machine the way the live session went: question, non-answer,
     // question, non-answer, "?" … and assert ASK is never legal.
+    //
+    // COUPLING. route.ts derives BOTH halves of a turn from one fact —
+    // `recoveryKey = detectFailureState(message, prior)` feeds `recoveryTurn`
+    // into decideNextMoveDetailed (route.ts:1712) and `recoveryFired` into the
+    // fold (route.ts:2841). An earlier version of this test passed
+    // recoveryTurn:false to the decision while telling the fold
+    // recoveryFired:true — a combination the route cannot produce, which made
+    // the test assert QL-2 in isolation rather than the transcript it is named
+    // for. Both halves now come from the utterance, as they do live.
     let s = S()
     const moves: string[] = []
-    for (let turn = 0; turn < 8; turn++) {
-      const d = decideNextMoveDetailed(s, CTX)
+    for (const said of ['No idea', "I don't know", "I don't know", '?', ':(', 'no clue', 'idk', 'dunno']) {
+      const recoveryKey = detectFailureState(said, null)
+      expect(recoveryKey, `"${said}" must be classified as a non-answer`).not.toBeNull()
+      const d = decideNextMoveDetailed(s, { ...CTX, recoveryTurn: recoveryKey !== null })
       moves.push(d.move)
-      // Model the learner: they cannot answer, so every turn is a non-answer.
       s = advanceConversationState(s, {
         askedQuestion: d.move === 'ask',
         signalCorrect: null,
-        recoveryFired: true,
-        dontKnowSignal: true,
+        recoveryFired: recoveryKey !== null,
+        dontKnowSignal: isDontKnowSignal(recoveryKey),
       })
     }
+    // The transcript's actual failure: seven questions before anything was
+    // taught. Zero questions is the standard, and recovery preemption alone
+    // guarantees it — a learner voicing a failure state is never questioned.
     expect(moves.filter((m) => m === 'ask')).toHaveLength(0)
-    expect(moves[0]).toBe('show') // teaching starts on turn one, not turn eight
+    expect(moves[0]).not.toBe('ask') // teaching starts on turn one, not turn eight
   })
 
   it('surfaces the reason in the directive rather than a bare prohibition', () => {

@@ -214,10 +214,42 @@ export function questionLegality(
   // The per-turn form of the same rule is enforced independently and is not
   // affected: a live "I don't know" fires recovery, and decideNextMoveDetailed
   // returns 'teach' on any recovery turn before this band is consulted.
+  // Scoped a second time, to "nothing has been given since the last question",
+  // for the same reason it was scoped to the diagnostic phase — and closing the
+  // half of the trap that scoping missed.
+  //
+  // `consecutiveDontKnows` is cleared ONLY by `signalCorrect === true`
+  // (conversationState's fold). A signal requires a question. So while this
+  // block held, the counter that releases it could never be written, and the
+  // block sustained itself for the whole diagnostic half. Phase-scoping was
+  // supposed to bound that, because a learner eventually leaves OBSERVE/
+  // DEMONSTRATE/GUIDE — but GUIDE's forward exits are a correct signal
+  // (blocked) or a bare acknowledgement. A learner who answers substantively
+  // and never acknowledges therefore had NO exit: walked end-to-end, they
+  // answer correctly twelve times in a row while the phase stays GUIDE,
+  // correctAtCheck stays 0, and every turn re-emits the same give.
+  //
+  // The premise of the rule expires exactly when a give lands. "Asking again
+  // cannot produce new information" is true of the turn right after a
+  // non-answer, and false once the tutor has since TAUGHT something — new
+  // information is precisely what was added. `teachSegmentsSinceQuestion`
+  // already records that fact (counts consecutive no-question turns, zeroed the
+  // moment a question is asked), and is the same counter remedialGiveDelivered()
+  // and QL-5 use for this identical one-shot-gate-made-permanent shape.
+  //
+  // Neither rung is weakened. The turn immediately after a non-answer still
+  // cannot ask: a live "I don't know" fires recovery, and decideNextMoveDetailed
+  // returns 'teach' on any recovery turn before this band is consulted; the
+  // following turn is then a give under this block. Asking resumes only after
+  // the learner has been given something to answer from — which is the rule.
   const nonAnswers = state.consecutiveDontKnows ?? 0
   const concludesAt = ctx.diagnosticConcludesAfter ?? DEFAULT_DIAGNOSTIC_CONCLUDES_AFTER
   const inDiagnostic = isDiagnosticPhase(state.phase)
-  if (inDiagnostic && nonAnswers >= DEFAULT_NON_ANSWER_BLOCKS_ASK) {
+  if (
+    inDiagnostic
+    && nonAnswers >= DEFAULT_NON_ANSWER_BLOCKS_ASK
+    && (state.teachSegmentsSinceQuestion ?? 0) === 0
+  ) {
     return {
       askLegal: false,
       reason: 'QL2_DIAGNOSTIC_CONCLUDED',
