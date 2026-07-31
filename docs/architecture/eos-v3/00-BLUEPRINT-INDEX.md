@@ -576,3 +576,22 @@ Two one-directional projections cross the tier boundary: `VisualIntent` downward
 ADR 12 §13's leaf rule holds verbatim.
 
 Architecture only — authorizes no implementation; W4-2 remains gated.
+
+**Phase 3 — Adaptive Teaching Architecture** ·
+`../PHASE_03_ADAPTIVE_TEACHING_ARCHITECTURE.md` · **CANONICAL** (v3.1.0, 2026-07-31)
+
+The adaptive control plane, extending Phases 1 and 2. Fourteen components AT-1…AT-14 over six
+dials plus D3, including the Adaptation State Vector — one typed object replacing `C-32`'s four
+unstructured outputs — the pressure model, the arbiter, and the stability governor that supplies
+the dwell, rate limit and hysteresis every authored escalation ladder lacks.
+
+`C-32` keeps the control loop, the target band, the withholding policy and the absolute affect
+veto. Phase 3 supplies the instrument and takes the adjustment decision (AH-1). Its constraints
+publish to Band 2 (subtractive) and its parameters to Band 5 (personalization).
+
+**Note on band numbering.** This blueprint's four-band summary of `C-28` (0 safety · 1 affect ·
+2 policy · 3 tactics) is a summary. `EOS_V2_ARCHITECTURE.md` owns band semantics per
+`../README.md`'s authority ladder, and defines seven bands, implemented as `BandId = 0…6` in
+`src/lib/kernel/policy/types.ts`. Phase 3 publishes against the seven-band scheme.
+
+Architecture only — authorizes no implementation; G1 and G2 remain in force.

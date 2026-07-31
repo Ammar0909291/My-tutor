@@ -142,3 +142,30 @@ remain architecture-only by default.
 **W4-2 is unchanged and remains gated.** Phase 2's canonicalization does not
 unblock it. Phase 2's eight cross-owner handoffs (VH-1…VH-8, §0.3) are likewise
 proposals awaiting the runtime owner and are not approved by canonicalization.
+
+---
+
+## Phase 3 Adaptive Teaching Architecture — items not yet listed
+
+`PHASE_03_ADAPTIVE_TEACHING_ARCHITECTURE.md` became **CANONICAL** on 2026-07-31
+(v3.1.0). As with Phases 1 and 2, canonical means the architecture is agreed; it
+authorizes **no implementation**. Its §25 sequences implementation by
+evidence-unlock, and **no stage has an approval item here** — so all remain
+architecture-only by default.
+
+Phase 3's own §29 requirement 5 states it plainly: *"G1 and G2 remain in force.
+Merging Phase 3 unblocks no implementation and adds no Wave 0 item by itself."*
+This section records that fact rather than creating items.
+
+Its twelve cross-owner handoffs (AH-1…AH-12, §0.3) are proposals awaiting the
+runtime owner and are not approved by canonicalization. Two deserve flagging
+before any Wave 0 item is drafted:
+
+| Handoff | Why it needs care |
+|---|---|
+| **AH-1** | `C-32`'s four unstructured outputs become one typed Adaptation State Vector. `C-32` retains the loop, the band and the veto, and **transfers the adjustment decision** — an ownership change, not only an instrument. |
+| **AH-2** | The ASV is persisted as per-learner-per-concept standing state in an existing ADR 10 store. **No new store** — but §29 notes this is "the one that looks small and is not." |
+
+`AH-9` is a documentation correction to `ENGINE_REFERENCE.md` #16 and carries no
+implementation. ISS-01 remains **BLOCKED**; Phase 3 does not resolve it, and
+§10.2/§16 must be re-checked whichever way it resolves.
