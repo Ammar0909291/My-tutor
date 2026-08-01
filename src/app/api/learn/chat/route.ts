@@ -1348,6 +1348,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // the TEACHING INTENT tag. Null when the composer declared nothing — which
     // is "not captured", never an empty intent.
     let attemptVectorHoisted: import('@/lib/evidence-spine/types').AttemptVectorV2 | null = null
+    // WP-8 / AH-1: this turn's DECLARED Adaptation State Vector. Null when no
+    // dial was declared — "not set", never a default (§21.2: never fabricate a
+    // state read). Captured only; no stage reads it on the live path.
+    let adaptationStateHoisted: import('@/lib/teaching/adaptation/asv').AdaptationStateVector | null = null
     // K3 — the mapped kernel move + its budget, one owner, three consumers.
     let kernelPolicyMoveHoisted: import('@/lib/kernel/policyMove').MappedMove | null = null
     let kernelMaxQuestionsHoisted: 0 | 1 = 0
@@ -2519,7 +2523,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // leak into a stored message, a captured asset, or the client. The vector
       // is carried to this turn's single emitTurn() call and read by nothing
       // else. PROXY honesty class: a declaration of intent, never an instrument.
-      const { parseAttemptVectorTag } = await import('@/lib/teaching/attemptVectorSignal')
+      const { parseAttemptVectorTag, parseAdaptationStateTag } = await import('@/lib/teaching/attemptVectorSignal')
+      // WP-8 / AH-1: the ASV is read from the SAME tag, before the strip.
+      // One declaration channel, one capture path, one writer.
+      adaptationStateHoisted = parseAdaptationStateTag(text).vector
       const attemptVectorParse = parseAttemptVectorTag(text)
       attemptVectorHoisted = attemptVectorParse.vector
       text = attemptVectorParse.cleanText
@@ -3756,6 +3763,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // when nothing was declared, so the payload is byte-identical to
               // before on those turns.
               ...(attemptVectorHoisted !== null && { attemptVector: attemptVectorHoisted }),
+              // WP-8 — rides WP-3's existing v2 field on the same existing
+              // call. No second writer, no second capture path.
+              ...(adaptationStateHoisted !== null && { adaptationState: adaptationStateHoisted }),
               provenance: [
                 ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
                 ...(evidenceAutonomyHoisted ? ['autonomy'] : []),

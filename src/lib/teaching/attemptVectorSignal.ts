@@ -40,6 +40,7 @@
  * default. A malformed value is dropped rather than coerced.
  */
 import type { AttemptVectorV2 } from '@/lib/evidence-spine/types'
+import { readAsvAttributes, type AdaptationStateVector } from './adaptation/asv'
 
 /** Never `PRESENT`. Carried alongside the vector wherever honesty class is
  *  represented, per the standing rule on the confidence row. */
@@ -84,10 +85,27 @@ export function buildAttemptVectorInstruction(): string {
     'concreteness="enactive|iconic|symbolic" ' +
     'entry="definition-first|example-first|problem-first|phenomenon-first|contrast-first" ' +
     'granularity="whole|decomposed|atomic-step" ' +
-    'agency="tutor-does|joint|learner-does"--> ' +
+    'agency="tutor-does|joint|learner-does" ' +
+    // WP-8 / AH-1: the ASV's six dials ride the SAME tag. One declaration
+    // channel, not two — no second tag, no second capture path.
+    'scaffold="0-4" hint="H0|H1|…" difficulty="<signed steps>" ' +
+    'paceRate="<n>" paceDensity="<n>" paceWait="<n>" ' +
+    'loadBudget="<n>" loadDecomposition="whole|decomposed|atomic-step" ' +
+    'interleaving="blocked|interleaved"--> ' +
     'OMIT any attribute you cannot state honestly — never guess one. ' +
     'Omit the whole tag if this turn made no teaching choice.'
   )
+}
+
+/**
+ * WP-8 — the ASV declared on the same tag. Separate export so the two vectors
+ * stay separately typed and separately absent: a turn may declare its attempt
+ * axes and no dials, or the reverse.
+ */
+export function parseAdaptationStateTag(text: string): { vector: AdaptationStateVector | null } {
+  const m = text.match(TAG_RE)
+  if (!m) return { vector: null }
+  return { vector: readAsvAttributes(m[1] ?? '') }
 }
 
 export interface AttemptVectorParse {
