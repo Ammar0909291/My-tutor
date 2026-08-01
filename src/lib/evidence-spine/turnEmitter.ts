@@ -10,7 +10,10 @@
  * PRIVACY: no verbatim learner or tutor text enters the spine (lengths and
  * classified keys only) — deliberate ISS-18 prudence.
  */
-import type { NewSpineEvent, SpineSource } from './types'
+import type {
+  NewSpineEvent, SpineSource,
+  AttemptVectorV2, AdaptationStateVectorV2, AdjustmentRecordV2,
+} from './types'
 import { appendSpineEvents, prismaSpineStore, type SpineStore } from './writer'
 
 const SOURCE: SpineSource = { componentId: 'learn-chat-route', version: 1 }
@@ -50,6 +53,15 @@ export interface TurnFacts {
     direction: 'success' | 'failure' | 'stated_no'
     diagnostic: boolean
   }>
+  /** DecisionRecorded v2 field group. The route does not supply these today —
+   *  no producer exists for any of them (see types.ts). They ride the SAME
+   *  event, the SAME payload and the SAME emitTurn() call as everything above;
+   *  adding a second emit site or a second capture path for them is forbidden.
+   *  Omitted ⇒ the field is absent from the payload ⇒ "not captured". */
+  attemptVector?: AttemptVectorV2
+  adaptationState?: AdaptationStateVectorV2
+  adjustmentRecord?: AdjustmentRecordV2
+  consumesReteachBudget?: boolean
 }
 
 export function buildTurnEvents(f: TurnFacts): NewSpineEvent[] {
@@ -96,6 +108,13 @@ export function buildTurnEvents(f: TurnFacts): NewSpineEvent[] {
       workedExampleFirst: f.workedExampleFirst,
       stageCeiling: f.stageCeiling,
       provenance: f.provenance,
+      // v2 field group — spread only when supplied, so an unpopulated field is
+      // absent rather than an invented default, and today's payload is
+      // byte-identical to v1.
+      ...(f.attemptVector !== undefined && { attemptVector: f.attemptVector }),
+      ...(f.adaptationState !== undefined && { adaptationState: f.adaptationState }),
+      ...(f.adjustmentRecord !== undefined && { adjustmentRecord: f.adjustmentRecord }),
+      ...(f.consumesReteachBudget !== undefined && { consumesReteachBudget: f.consumesReteachBudget }),
     },
   })
   events.push({ ...base, type: 'AssistantRendered', payload: { length: f.assistantLength, askedQuestion: f.assistantAskedQuestion, provider: f.provider } })

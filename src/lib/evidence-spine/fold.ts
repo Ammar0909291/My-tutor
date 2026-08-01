@@ -13,7 +13,7 @@
 import {
   type SpineEventRecord, type SpineEventType, CURRENT_SCHEMA_VERSION,
   type AnswerObservedV1, type UtteranceStateDetectedV1, type RecoveryEnteredV1,
-  type RecoveryExitedV1, type DecisionRecordedV1, type PhaseTransitionedV1,
+  type RecoveryExitedV1, type DecisionRecordedV2, type PhaseTransitionedV1,
   type AssistantRenderedV1, type CapabilityObservedV1,
 } from './types'
 
@@ -199,7 +199,10 @@ export function foldEvent(view: StudentViewProjection, e: SpineEventRecord): Stu
       return v
     }
     case 'DecisionRecorded': {
-      const p = e.payload as DecisionRecordedV1
+      // V1 and V2 both decode here: V2 is additive over V1, so a v1 row reads
+      // as a V2 with every added field absent, and this fold touches only the
+      // v1 fields. Reading the v2 field group is WP-5's job, not the fold's.
+      const p = e.payload as DecisionRecordedV2
       v.decisions += 1
       v.conversation.lastMove = p.move
       if (p.phase !== null) v.teaching.phase = p.phase

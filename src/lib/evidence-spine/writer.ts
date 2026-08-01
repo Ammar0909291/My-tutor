@@ -11,7 +11,19 @@
  * it MUST never throw into the caller (all failures are swallowed after
  * best-effort logging) and it never blocks the learner's turn.
  */
-import { idempotencyKey, type NewSpineEvent } from './types'
+import {
+  idempotencyKey, CURRENT_SCHEMA_VERSION,
+  type NewSpineEvent, type SpineEventType,
+} from './types'
+
+/** The version stamped on a row is the CURRENT version for that event type —
+ *  not a constant. Before this lookup every row was written as version 1
+ *  regardless of type, so bumping CURRENT_SCHEMA_VERSION had no effect on what
+ *  was persisted. An unrecognised type falls back to 1 rather than throwing:
+ *  the writer never fails a turn. */
+function versionFor(type: string): number {
+  return CURRENT_SCHEMA_VERSION[type as SpineEventType] ?? 1
+}
 
 export interface SpineInsertRow {
   seq: number
@@ -63,7 +75,7 @@ export async function appendSpineEvents(
         sessionId: e.sessionId ?? null,
         turnId: e.turnId ?? null,
         type: e.type,
-        schemaVersion: 1,
+        schemaVersion: versionFor(e.type),
         payload: e.payload,
         source: e.source,
         confidence: e.confidence ?? 1,
