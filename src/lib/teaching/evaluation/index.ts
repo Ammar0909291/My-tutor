@@ -31,3 +31,23 @@ export {
   publishAdaptationSupport, archetypeDefaults,
   type AdaptationAvailability, type PublishedSupport, type AdaptationPublishReport,
 } from './adaptationPublish'
+
+// ── WP-9 — Phase 1 Stage 3–7, Phase 2 V3–V6, H-2. Evaluation only. ──────────
+export {
+  AXES, closure, closureAxes, changedAxes, evaluateReteachLegality, paraphraseBaseline,
+  type Axis, type LegalityVerdict, type LegalityResult, type LegalityInputs,
+  type ParaphraseBaseline,
+} from './differenceOperator'
+
+export {
+  buildFailedAttemptSet, approachAlreadyFailed,
+  type AttemptOutcome, type FailedAttemptSet,
+} from './approachHistory'
+
+export {
+  CONTRAINDICATIONS, CONTRAINDICATION_REASON,
+  evaluateAdmission, auditProjection, evaluateFallback, evaluateWithdrawal,
+  type ContraindicationCode, type AdmissionVerdict, type AdmissionResult,
+  type AdmissionInputs, type ProjectionAudit, type FallbackVerdict,
+  type FallbackResult, type WithdrawalResult, type WithdrawalInputs,
+} from './visualAdmission'
