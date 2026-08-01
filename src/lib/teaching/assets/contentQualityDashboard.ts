@@ -162,7 +162,15 @@ function round1(n: number): number { return Math.round(n * 10) / 10 }
 
 // ─── Authoring work queue (deterministic ranking) ──────────────────────────
 
-export type AuthoringProblem = 'no_authored_asset' | 'groq_fallback' | 'grade_fallback' | 'low_confidence' | 'none'
+// `authored_demand` added by WP-6 / handoff EH-1. Every other member is a
+// TELEMETRY-derived problem: it can only be detected once a concept has been
+// served at least once. A concept that was never served because no asset ever
+// existed is structurally invisible to all of them — classifyProblem() returns
+// 'none' at totalServed === 0 and buildWorkQueue() filters 'none' out. That is
+// the gap Phase 4 §4 (EA-1) exists to close: Phase 1's ASSET_ABSENT, Phase 2's
+// visual coverage defect and Phase 3's authoring flag are DECLARED demand, and
+// this member is how they reach the queue.
+export type AuthoringProblem = 'no_authored_asset' | 'groq_fallback' | 'grade_fallback' | 'low_confidence' | 'authored_demand' | 'none'
 export type AuthoringPriority = 'Critical' | 'High' | 'Medium' | 'Low'
 export type AuthoringRecommendation =
   | 'AUTHOR_FIRST_ASSET' | 'ADD_ADULT_VARIANT' | 'REWRITE_EXPLANATION' | 'ADD_MISCONCEPTIONS' | 'ADD_PRACTICE_SET' | 'NO_ACTION'
@@ -176,6 +184,29 @@ export interface WorkQueueItem {
   priority: AuthoringPriority
   recommendation: AuthoringRecommendation
   priorityScore: number
+  /** WP-6 / EH-1. Number of declared coverage defects for this concept, when
+   *  any were supplied. Deliberately NOT folded into `requests`: that field
+   *  counts MemoryServingEvent rows, and a declared defect is not a serving
+   *  request. Absent when the caller supplied no demand — so an existing
+   *  caller's items are shape-identical to before. */
+  demandCount?: number
+  /** The phases that reported the defect, deduplicated and sorted. */
+  demandSources?: readonly AuthoredDemandSource[]
+}
+
+/** WP-6 / EH-1 — a coverage defect DECLARED by a teaching phase, as opposed to
+ *  one INFERRED from serving telemetry.
+ *
+ *  This is an input type only. Nothing here persists demand, and this module
+ *  still owns no writer: the caller holds the defects and passes them in, so
+ *  no second store of coverage state is created (Phase 4 §4's "routed to the
+ *  work queue, not to the curator queue" — EH-3 — stays intact). */
+export type AuthoredDemandSource = 'phase1_asset_absent' | 'phase2_visual_coverage' | 'phase3_authoring_flag'
+
+export interface AuthoredDemand {
+  conceptId: string
+  subject: string
+  source: AuthoredDemandSource
 }
 
 // Deterministic, side-effect-free classification — same stats always
@@ -200,6 +231,7 @@ function recommend(problem: AuthoringProblem): AuthoringRecommendation {
     case 'grade_fallback': return 'ADD_ADULT_VARIANT'
     case 'groq_fallback': return 'AUTHOR_FIRST_ASSET' // groq_fallback with SOME coverage means existing assets aren't clearing the bar for real requesters — same root fix as no coverage: author for the register that's actually being requested
     case 'low_confidence': return 'REWRITE_EXPLANATION'
+    case 'authored_demand': return 'AUTHOR_FIRST_ASSET' // a phase asked for an asset that was not there — the fix is the same as no coverage
     case 'none': return 'NO_ACTION'
   }
 }
@@ -218,24 +250,84 @@ function priorityScore(problem: AuthoringProblem, requests: number): number {
   // Deterministic sort key: problem severity first (no coverage is worse
   // than a register mismatch), then request volume within the same
   // severity — mirrors priorityOf's bands without duplicating logic.
-  const severity: Record<AuthoringProblem, number> = { no_authored_asset: 4, groq_fallback: 3, grade_fallback: 2, low_confidence: 1, none: 0 }
+  // `authored_demand` shares severity 4 with `no_authored_asset` — both mean
+  // "there is no asset to serve". No existing severity is renumbered, so every
+  // pre-existing item's score is bit-identical to before WP-6. Within the tied
+  // band the volume term decides, and a declared defect carries far less volume
+  // than a concept with real serving history, so observed demand still outranks
+  // declared demand without a special case.
+  const severity: Record<AuthoringProblem, number> = { no_authored_asset: 4, authored_demand: 4, groq_fallback: 3, grade_fallback: 2, low_confidence: 1, none: 0 }
   return severity[problem] * 1_000_000 + requests
 }
 
 /** Ranked authoring work queue across one or more subjects' concept stats.
  *  Purely a sort + classify over data already computed above — no new
  *  queries, no randomness, no manual curation. */
-export function buildWorkQueue(allConcepts: ConceptQualityStats[], limit = 50): WorkQueueItem[] {
-  const items = allConcepts
-    .map((c) => {
-      const problem = classifyProblem(c)
-      return {
-        conceptId: c.conceptId, subject: c.subject, requests: c.totalServed,
-        problem, priority: priorityOf(problem, c.totalServed), recommendation: recommend(problem),
-        priorityScore: priorityScore(problem, c.totalServed),
-      }
-    })
+export function buildWorkQueue(
+  allConcepts: ConceptQualityStats[],
+  limit = 50,
+  /** WP-6 / EH-1. Optional and defaulted, so every existing two-argument call
+   *  produces byte-identical output: with no demand this reduces to exactly
+   *  the previous function. */
+  demand: readonly AuthoredDemand[] = [],
+): WorkQueueItem[] {
+  // Group declared defects by concept. A concept may be reported by more than
+  // one phase; each report counts, and the sources are kept so an author can
+  // see who asked.
+  const demandByConcept = new Map<string, { subject: string; count: number; sources: Set<AuthoredDemandSource> }>()
+  for (const d of demand) {
+    const entry = demandByConcept.get(d.conceptId)
+    if (entry) { entry.count += 1; entry.sources.add(d.source) }
+    else demandByConcept.set(d.conceptId, { subject: d.subject, count: 1, sources: new Set([d.source]) })
+  }
+
+  const telemetry = allConcepts.map((c) => {
+    const declared = demandByConcept.get(c.conceptId)
+    const telemetryProblem = classifyProblem(c)
+    // Telemetry wins whenever it found a real problem: a served concept's
+    // observed defect is stronger evidence than a declared one, and demand is
+    // recorded alongside it rather than overriding it. Demand only CHANGES the
+    // classification in the case telemetry structurally cannot see — a concept
+    // with no serving history at all, which classifyProblem() calls 'none'.
+    const problem: AuthoringProblem =
+      telemetryProblem === 'none' && declared !== undefined ? 'authored_demand' : telemetryProblem
+    // Volume term: serving requests when telemetry drove the classification,
+    // the number of declared defects when demand did. Both are "how much
+    // evidence of need exists", measured in the only unit available.
+    const volume = problem === 'authored_demand' ? (declared?.count ?? 0) : c.totalServed
+    return {
+      conceptId: c.conceptId, subject: c.subject, requests: c.totalServed,
+      problem, priority: priorityOf(problem, volume), recommendation: recommend(problem),
+      priorityScore: priorityScore(problem, volume),
+      ...(declared !== undefined && {
+        demandCount: declared.count,
+        demandSources: [...declared.sources].sort(),
+      }),
+    }
+  })
+
+  // Declared defects for concepts the stats array does not contain at all —
+  // a concept outside the caller's subject slice, or one the KG lists but the
+  // caller did not pass. Without this the defect would be silently dropped,
+  // which is the exact invisibility EH-1 exists to remove.
+  const seen = new Set(allConcepts.map((c) => c.conceptId))
+  const orphanDemand = [...demandByConcept.entries()]
+    .filter(([conceptId]) => !seen.has(conceptId))
+    .map(([conceptId, d]) => ({
+      conceptId, subject: d.subject, requests: 0,
+      problem: 'authored_demand' as AuthoringProblem,
+      priority: priorityOf('authored_demand', d.count),
+      recommendation: recommend('authored_demand'),
+      priorityScore: priorityScore('authored_demand', d.count),
+      demandCount: d.count,
+      demandSources: [...d.sources].sort() as readonly AuthoredDemandSource[],
+    }))
+
+  const items = [...telemetry, ...orphanDemand]
     .filter((i) => i.problem !== 'none')
+    // Comparator unchanged from before WP-6 — no tie-break was added, so ties
+    // keep the same stable insertion order they had, and the telemetry items
+    // are still built in the caller's original array order.
     .sort((a, b) => b.priorityScore - a.priorityScore)
     .slice(0, limit)
     .map((item, i) => ({ rank: i + 1, ...item }))
