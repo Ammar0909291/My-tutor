@@ -295,6 +295,29 @@ to the same `systemPrompt`, consistent with Permanent Rule 11 (a
 satellite engine degrading to null must never block a turn) — this ADR
 does not propose coupling their failure modes together.
 
+**Posture-layer record (2026-07-31, handoff AH-5 — documentation only).**
+Naming the row above explicitly, because a third vocabulary has since entered
+the corpus and the three are routinely conflated:
+
+- `teachingStrategy.ts`'s **7 values are Postures** — the *Posture* half of this
+  ADR's own Posture/Action split, exactly as tabulated above. Longitudinal,
+  ~session-scale, synthesized from six signals. Live for both School and Library
+  (ADR 02).
+- `decide()` → TAG → Lesson Composer produces **Actions** — the *Action* half.
+  Turn-level and concrete.
+- Phase 1's **9 Teaching Strategy archetypes** (TQ-1,
+  `PHASE_01_TEACHING_QUALITY_ARCHITECTURE.md`) are **neither**. They sit at the
+  Campaign scale — per-concept, multi-turn, often multi-session — above the
+  session planner and below the curriculum. Phase 1 reconciles them as the
+  cross-concept generalization of the existing per-concept Protocol class.
+
+The three are distinct layers at three different grains, not competing names for
+one thing, and none subsumes another. The name collision is real —
+`teachingStrategy.ts` and "Teaching Strategy Engine" (TQ-1) share a word while
+denoting different layers — and is recorded here so the file is not mistaken for
+an implementation of TQ-1. This note enacts nothing: no interface changes, no
+engine is renamed, and TQ-1 remains architecture-only under G1/G2.
+
 ### (c) `teachingActionGenerator.ts` header comment correction
 
 The minor doc-accuracy note in §1 (the header comment overstating

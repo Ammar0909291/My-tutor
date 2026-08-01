@@ -5,6 +5,21 @@
 **Supersedes:** nothing — first ADR on visualization architecture
 **Superseded by:** —
 
+**Scope note (2026-07-31, handoff VH-5 — not a supersession).** This ADR's
+*"when to visualize"* is now supplied by **Phase 2 VD-1**
+(`PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md`, CANONICAL v2.1.0): a
+four-condition admission test with ten enumerated contraindications, default no,
+paired with VD-2's ten-purpose taxonomy for *why* and VD-3 for *which form
+class*. ADR 12 is **narrowed, not replaced** — it remains the sole owner of
+renderers, the concept-keyed cache, background authoring, the Visual Policy and
+validation, and every finding and proposal below stands unchanged. Where this
+document reasons about *whether* a visual should appear, read Phase 2 VD-1 as
+the authority and this ADR as the production tier that serves that decision.
+The tier boundary is crossed only by two one-directional projections
+(`VisualIntent` down, `VisualAvailability` up), so §13's leaf rule is preserved.
+Documentation correction only: no proposal here is enacted, W4-2 remains gated,
+and G1/G2 remain in force.
+
 ---
 
 ## 1. Problem
@@ -201,6 +216,31 @@ Example: strategy `WORKED_EXAMPLE` → `acceptedRenderers: ['scene_spec', 'visua
 `dynamic_component` (too much cognitive load alongside a step-by-step). Strategy
 `EXPLORATION` → `acceptedRenderers: ['dynamic_component', 'scene_spec', 'interactive_widget']`.
 
+**Amendment (2026-08-01, handoff VH-2 — additive, supersedes nothing).** The table gains a
+**`purpose` dimension alongside `strategy`**:
+
+```typescript
+visualPolicyByPurpose: {
+  [purpose: string]: {              // Phase 2 VD-2's closed ten-purpose set
+    acceptedRenderers: VisualRenderer[]
+    skipVisualization: boolean
+  }
+}
+```
+
+*Why the strategy dimension alone is insufficient.* `strategy` says what kind of teaching turn
+this is; it does not say what the visual must make perceptible. Two turns of the same strategy
+can carry visuals with opposite renderer needs — a `CONTRAST-DISCRIMINATE` visual requires a
+side-by-side minimal pair and is actively harmed by animation, while a `PROCESS-TRACE` visual
+requires the motion that the first one must not have. Keyed on strategy alone, the table cannot
+express that, and the mapping has no input capable of distinguishing them. Phase 2 §6.1 states
+the boundary this preserves: **VD-3 outputs a form class and constraints; ADR 12 maps those to
+renderers.** The `purpose` key is the input that mapping needs.
+
+`visualPolicyByStrategy` is **unchanged and still authoritative** where no purpose is supplied —
+today's condition, since nothing populates a `VisualIntent` yet. Precedence when both apply is
+the runtime owner's call and is not decided here.
+
 The per-turn pipeline becomes:
 1. `decide()` outputs `visual_type` → mapped to accepted renderers via Visual Policy.
 2. For each accepted renderer in order, query `VisualizationCache` by `(conceptId, renderer)`.
@@ -251,6 +291,28 @@ Layer 1 validation rejects it). The `a11yDescription` is used by:
 
 Current state: `a11yDescription` is absent from the live `SceneSpec` and `VisualSpec` schemas.
 Adding it is Phase 1 of this ADR's migration.
+
+**Amendment (2026-08-01, handoff VH-3 — strengthens the bar; supersedes nothing else in §4.5).**
+The acceptance bar for `a11yDescription` moves from **present and non-empty** to
+**instructionally equivalent** (Phase 2 §11.2).
+
+*Why the old bar is not accessibility.* "Cannot be empty string" is satisfied by a label — *"a
+diagram of a circuit"* passes Layer 1 validation and conveys none of what the visual was shown
+to teach. A learner on the screen-reader path or the `THEORETICAL` fallback then receives proof
+that a visual existed rather than its instruction, which is inaccessible in substance while
+passing every check.
+
+The strengthened rule: the description MUST convey the instructional content the visual was
+admitted to deliver — the intent's **claim**. Phase 2 carries that content explicitly as
+`VisualIntent.a11yRequirement` (§7.2), so the producer is told what equivalence means for THIS
+visual instead of inferring it. Where no requirement was stated, equivalence is undefined and
+therefore unmet.
+
+*Enforcement scope, stated honestly.* Full equivalence is a judgement and is not machine-decidable;
+a structural predicate (`a11yDescriptionSatisfies`, `src/lib/teaching/visualIntent.ts`) checks that
+a requirement was stated and that a substantive description answers it. That is a floor, not a
+proof. The old bar remains the Layer 1 hard failure; this is the higher bar assets are authored
+and reviewed against. Nothing here changes Layer 1 validation, and W4-2 remains gated.
 
 ### 4.6 Five validator layers (per renderer)
 

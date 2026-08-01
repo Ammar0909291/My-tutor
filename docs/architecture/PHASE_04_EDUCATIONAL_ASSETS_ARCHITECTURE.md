@@ -185,6 +185,14 @@ Four found. All belong to other owners. Per the Authority Index — *"A gap foun
 implementing a frozen document is a spec bug — file it against that document; do not invent
 behaviour to cover it"* — none is resolved here.
 
+**Filed 2026-07-31 (handoff EH-4, WP-2).** CT-1…CT-4 are now registered against CEKR §10's
+`Conflict` node — see `CEKR_CANONICAL_EDUCATIONAL_KNOWLEDGE_REPRESENTATION.md` **Appendix C**,
+where all four are recorded `OPEN`. That appendix is the **register of record for each
+conflict's state**; the narrative below is retained as the fuller account of how each was found
+and is unchanged. CT-5 is deliberately not filed there — it has no second party, so it is not a
+`Conflict` in §10's sense. Filing resolves nothing: all four remain open, and CT-2 in particular
+remains the unresolved item the implementation program tracks.
+
 **CT-1 · Three documents, two lifecycles.** ADR 12 §4.1 defines `status: 'draft' | 'active' |
 'deprecated'` (3 states). ADR 14 defines DRAFT→REVIEW→ACTIVE→DEPRECATED→RETIRED (5). CEKR §2.1
 defines the same 5 and says explicitly "aligned with ADR 14". Phase 2 recorded the ADR 12 ↔

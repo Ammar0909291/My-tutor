@@ -203,6 +203,20 @@ Written by the nightly rollup job when trigger conditions fire (per ch04 §9). R
 future curator UI — this is the human feedback loop that prevents AI-authored content from
 degrading unnoticed.
 
+**Scope note (2026-07-31, handoff EH-3 — a handoff that requests no change).**
+Phase 4 examined whether coverage demand should become a fourth `trigger` member and
+concluded it should **not**. The `trigger` union stays at exactly the three members above,
+unchanged. The reasoning is worth recording, because the two queues look mergeable and are
+not: all three existing triggers are **degradation** signals — an asset exists, is served,
+and is measurably underperforming. Coverage demand is the opposite shape, an **absence**
+signal: no asset exists, nothing is served, and there is therefore nothing for a curator to
+review. Absence is routed instead to the live authoring work queue
+(`src/lib/teaching/assets/contentQualityDashboard.ts`, Phase 4 seam EA-1), whose
+`classifyProblem()` returns `'none'` when `totalServed === 0` — the exact gap EA-1 exists to
+close. Recorded here so a later reader does not "unify" the curator queue and the work queue
+on the observation that both are queues of things needing human attention. This note changes
+no type, adds no member, and enacts nothing; EH-1 and EH-2 remain unapproved proposals.
+
 ### 4.4 Evidence Engine ownership model
 
 The Evidence Engine is the **single writer** of `EbAssetScore`, `StrategyEffectivenessScore`,

@@ -58,7 +58,7 @@ export const CURRENT_SCHEMA_VERSION: Record<SpineEventType, number> = {
   AutonomyRequested: 1,
   RecoveryEntered: 1,
   RecoveryExited: 1,
-  DecisionRecorded: 1,
+  DecisionRecorded: 2,
   PhaseTransitioned: 1,
   SessionBoundaryDetected: 1,
   LessonCompleted: 1,
@@ -92,6 +92,64 @@ export interface DecisionRecordedV1 {
   stageCeiling: number | null
   provenance: string[]           // rule-path lite: named runtime rules that fired
 }
+
+// ── DecisionRecorded v2 — the unified turn-capture field group ────────────────
+// One event, one payload, one turn: the ASV snapshot, the adjustment record and
+// the AttemptVector are ONE field group on ONE event, never two capture paths.
+//
+// STRUCTURAL ONLY. Every field below is optional and NOTHING POPULATES THEM
+// TODAY. The producers do not exist in this repository:
+//   · AttemptVector          — producer is Phase 1 §14.2 Stage 1 (P1-1)
+//   · AdaptationStateVector  — producer is C-32 typed output (AH-1), the one
+//                              genuine external dependency; `C-32` has no
+//                              occurrence in src/
+//   · AdjustmentRecord       — producer is AH-3
+//   · consumesReteachBudget  — producer is AH-12 (no reteach budget in src/)
+// A field left undefined is an honest "not captured", never a default. Do NOT
+// derive any of these from rendered output: Phase 1 §11.2 resolved that
+// AttemptVector is CAPTURED, not derived, because inferring the pedagogical
+// intent axes from what was produced is guessing.
+
+/** Phase 1 §7.4.1's eight axes. Axes 4, 6 and 7 are ordered; all are optional
+ *  because a producer may know some axes and honestly not know others. */
+export interface AttemptVectorV2 {
+  channel?: 'verbal' | 'visual' | 'enactive' | 'symbolic' | 'auditory'
+  method?: string                                        // M1…M17 (TQ-3)
+  representation?: 'concrete-object' | 'diagram' | 'graph' | 'table' | 'algebraic' | 'narrative' | 'physical-apparatus'
+  concreteness?: 'enactive' | 'iconic' | 'symbolic'      // ordered
+  entryPoint?: 'definition-first' | 'example-first' | 'problem-first' | 'phenomenon-first' | 'contrast-first'
+  granularity?: 'whole' | 'decomposed' | 'atomic-step'   // ordered
+  agency?: 'tutor-does' | 'joint' | 'learner-does'       // ordered
+  instance?: string                                      // AssetIdentity id / analogy source / example ref
+}
+
+/** TODO(AH-1): shape is owned by EOS `C-32`, which has no live producer. Left
+ *  deliberately open rather than invented — a wrong committed shape would have
+ *  to be versioned away again. Populated only once AH-1 lands. */
+export interface AdaptationStateVectorV2 {
+  difficultyTarget?: number
+  hintPolicy?: string
+  /** RS §3.4 `scaffoldDial`: 0–4 (0 = full worked, 4 = solo), GUIDED only. */
+  scaffoldDial?: 0 | 1 | 2 | 3 | 4
+  withheld?: boolean
+}
+
+/** TODO(AH-3): what the adjustment changed, and why. */
+export interface AdjustmentRecordV2 {
+  dimension?: string
+  from?: string | number | null
+  to?: string | number | null
+  reason?: string
+}
+
+export interface DecisionRecordedV2 extends DecisionRecordedV1 {
+  attemptVector?: AttemptVectorV2
+  adaptationState?: AdaptationStateVectorV2
+  adjustmentRecord?: AdjustmentRecordV2
+  /** TODO(AH-12): set by the Band-2 governor once Phase 1 §7.7's budget
+   *  counter is readable. Undefined = not captured, NOT false. */
+  consumesReteachBudget?: boolean
+}
 export interface PhaseTransitionedV1 { machine: 'conversation'; from: string; to: string; direction: 'up' | 'down' | 'reset' }
 export interface SessionBoundaryDetectedV1 { gapMs: number | null; boundaryType: 'inactivity' | 'explicit' | 'unknown' }
 export interface LessonCompletedV1 { conceptId: string | null; certification: 'provisional' | 'signal' }
@@ -100,7 +158,7 @@ export interface CapabilityObservedV1 { capabilityId: string; direction: 'succes
 export type SpinePayload =
   | StudentMessageReceivedV1 | AssistantRenderedV1 | AnswerObservedV1
   | UtteranceStateDetectedV1 | AutonomyRequestedV1 | RecoveryEnteredV1
-  | RecoveryExitedV1 | DecisionRecordedV1 | PhaseTransitionedV1
+  | RecoveryExitedV1 | DecisionRecordedV1 | DecisionRecordedV2 | PhaseTransitionedV1
   | SessionBoundaryDetectedV1 | LessonCompletedV1 | CapabilityObservedV1
 
 // ── Envelope (RS §2.1) ────────────────────────────────────────────────────────

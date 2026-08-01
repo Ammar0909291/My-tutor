@@ -1344,6 +1344,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
+    // P1-1 (Phase 1 Stage 1): this turn's DECLARED AttemptVector, parsed from
+    // the TEACHING INTENT tag. Null when the composer declared nothing — which
+    // is "not captured", never an empty intent.
+    let attemptVectorHoisted: import('@/lib/evidence-spine/types').AttemptVectorV2 | null = null
+    // WP-8 / AH-1: this turn's DECLARED Adaptation State Vector. Null when no
+    // dial was declared — "not set", never a default (§21.2: never fabricate a
+    // state read). Captured only; no stage reads it on the live path.
+    let adaptationStateHoisted: import('@/lib/teaching/adaptation/asv').AdaptationStateVector | null = null
     // K3 — the mapped kernel move + its budget, one owner, three consumers.
     let kernelPolicyMoveHoisted: import('@/lib/kernel/policyMove').MappedMove | null = null
     let kernelMaxQuestionsHoisted: 0 | 1 = 0
@@ -1448,6 +1456,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
         systemPrompt += buildSignalInstruction()
+
+        // P1-1 (Phase 1 Stage 1): the TEACHING INTENT declaration. Sits beside
+        // the OBSERVE signal because it is the same mechanism pointed the other
+        // way — SIGNAL declares what was observed of the learner, ATTEMPT
+        // declares what the composer intended. Capture only: nothing reads the
+        // vector, so no teaching decision differs (§14.2 "No behaviour changes
+        // at all"). Both tags are stripped before storage and before the client.
+        // Kill switch (ENABLE_ATTEMPT_CAPTURE=0): when disabled the instruction
+        // is not appended, so the prompt is byte-identical to pre-P1-1.
+        // Stripping below is NOT gated — see the parse site.
+        const { buildAttemptVectorInstruction, isAttemptCaptureEnabled } = await import('@/lib/teaching/attemptVectorSignal')
+        if (isAttemptCaptureEnabled()) systemPrompt += buildAttemptVectorInstruction()
 
         // P0-1 (lesson introduction defect): computed once, ahead of the
         // session-opening block below, so a non-first lesson's OPENING can
@@ -2476,23 +2496,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch((err) => console.warn('[learn/chat] MemoryServingEvent write failed (non-fatal):', err))
       }
 
-      if (!text) {
-        // RS P-3, the second half. A provider that THROWS is handled at the
-        // routeAI call site above; a provider that returns an EMPTY body is
-        // the same failure — no usable model output — and this path returned
-        // a 502 the client renders as "Sorry, I got cut off". By the comment
-        // on the maxTokens argument above, that is not a rare outage: it
-        // recurs whenever a reasoning model exhausts its budget mid-thought.
-        // So the most FREQUENT degraded case was still shipping the learner a
-        // banner, which is exactly what P-3 forbids. Same remedy, same owner.
-        console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
-        const { degradedTurn } = await import('@/lib/eos-runtime')
-        const degraded = degradedTurn({ register: contentRegister, learnerText: message })
-        text = degraded.text
-        provider = degraded.provider
-        finishReason = degraded.finishReason
-      }
-
       // Wave 0 Step 2/4 (Blueprint Phase 3): extract and strip the SIGNAL
       // tag FIRST — before asset capture and every other tag parser — so
       // the tag never leaks into stored messages, captured assets, or the
@@ -2501,6 +2504,55 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const signalParse = parseSignalTag(text)
       let teachingSignal = signalParse.signal
       text = signalParse.cleanText
+      // P1-1: strip the TEACHING INTENT tag in the same place and for the same
+      // reason — before asset capture and every other parser, so it can never
+      // leak into a stored message, a captured asset, or the client. The vector
+      // is carried to this turn's single emitTurn() call and read by nothing
+      // else. PROXY honesty class: a declaration of intent, never an instrument.
+      const { parseAttemptVectorTag, parseAdaptationStateTag, isAttemptCaptureEnabled } =
+        await import('@/lib/teaching/attemptVectorSignal')
+      // Capture is gated; STRIPPING IS NOT. A model can still emit the tag from
+      // conversation context after the instruction is removed, so the text is
+      // cleaned on every path regardless of the switch — a disabled feature
+      // must never be able to expose a tag.
+      const attemptCaptureOn = isAttemptCaptureEnabled()
+      // WP-8 / AH-1: the ASV is read from the SAME tag, before the strip.
+      // One declaration channel, one capture path, one writer.
+      if (attemptCaptureOn) adaptationStateHoisted = parseAdaptationStateTag(text).vector
+      const attemptVectorParse = parseAttemptVectorTag(text)
+      if (attemptCaptureOn) attemptVectorHoisted = attemptVectorParse.vector
+      text = attemptVectorParse.cleanText
+
+      // C-A — THE SINGLE DEFINITION OF "usable assistant response", and the
+      // only degraded-response path. It sits HERE, after both tag strips,
+      // because those strips can remove content: a reply consisting only of
+      // the mandatory tags is non-empty when the model returns it and empty
+      // once they are removed. This guard previously ran BEFORE the strips,
+      // tested the pre-strip body, never fired, and a blank assistant message
+      // was persisted and rendered with nothing logged.
+      //
+      // `!text.trim()` rather than `!text`: whitespace surviving a strip is
+      // not a usable response either. There is no second implementation —
+      // this is the same block, moved, so a degraded turn is byte-for-byte
+      // what it was, and an originally-empty body still reaches it unchanged
+      // (an empty string is empty through both strips).
+      //
+      // RS P-3, the second half. A provider that THROWS is handled at the
+      // routeAI call site above; a provider that returns an EMPTY body is
+      // the same failure — no usable model output — and this path returned
+      // a 502 the client renders as "Sorry, I got cut off". By the comment
+      // on the maxTokens argument above, that is not a rare outage: it
+      // recurs whenever a reasoning model exhausts its budget mid-thought.
+      // So the most FREQUENT degraded case was still shipping the learner a
+      // banner, which is exactly what P-3 forbids. Same remedy, same owner.
+      if (!text.trim()) {
+        console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
+        const { degradedTurn } = await import('@/lib/eos-runtime')
+        const degraded = degradedTurn({ register: contentRegister, learnerText: message })
+        text = degraded.text
+        provider = degraded.provider
+        finishReason = degraded.finishReason
+      }
       // Bug 2 (mastery gate): a bare acknowledgement ("got it", "ok",
       // "next", "thanks", "👍"…) is not an answer. The prompt forbids the
       // model from emitting a SIGNAL for non-answers, but that is
@@ -3729,6 +3781,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               decisionPhaseAfter: phaseAfter,
               workedExampleFirst: evidenceWorkedExampleFirstHoisted,
               stageCeiling: evidenceStageCeilingHoisted,
+              // P1-1 — rides WP-3's existing v2 field on the existing call.
+              // No second writer, no new event, no new capture path. Omitted
+              // when nothing was declared, so the payload is byte-identical to
+              // before on those turns.
+              ...(attemptVectorHoisted !== null && { attemptVector: attemptVectorHoisted }),
+              // WP-8 — rides WP-3's existing v2 field on the same existing
+              // call. No second writer, no second capture path.
+              ...(adaptationStateHoisted !== null && { adaptationState: adaptationStateHoisted }),
               provenance: [
                 ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
                 ...(evidenceAutonomyHoisted ? ['autonomy'] : []),

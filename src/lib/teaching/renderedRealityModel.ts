@@ -15,6 +15,8 @@
 
 import { VISUAL_META, type VisualType } from '@/lib/school/visuals/visualTypes'
 
+import type { VisualIntent } from './visualIntent'
+
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
@@ -31,6 +33,18 @@ export interface RRMEntry {
   sourcePipeline: VisualSourcePipeline
   matchedConcept: string | null
   turnPosition: number
+  /** WP-7 / handoff VH-4 — "RRM records the VisualIntent that produced each
+   *  rendered visual, not only the visual" (Phase 2 §8.2).
+   *
+   *  Without this, the log answers "what was shown" but not "why", so a
+   *  later turn cannot tell a repeat of the same CLAIM from a repeat of the
+   *  same PICTURE — which is the distinction VD-7's fallback and VS5's
+   *  history exclusion both need.
+   *
+   *  OPTIONAL: nothing forms an intent yet (VD-1/VD-2/VD-3 are stages V3/V5),
+   *  so every entry written today omits it, exactly as before. Absent means
+   *  "no intent was recorded", never "no intent existed". */
+  visualIntent?: VisualIntent
 }
 
 export type RRMLog = RRMEntry[]
@@ -73,6 +87,9 @@ export interface CreateEntryInput {
   responseVisual: string | null
   matchedConcept: string | null
   turnNumber: number
+  /** WP-7 / VH-4. Optional and unsupplied by every current caller, so entries
+   *  are shape-identical to before. */
+  visualIntent?: VisualIntent
 }
 
 export function createRRMEntry(input: CreateEntryInput): RRMEntry | null {
@@ -88,7 +105,19 @@ export function createRRMEntry(input: CreateEntryInput): RRMEntry | null {
     sourcePipeline: pipeline,
     matchedConcept: input.matchedConcept,
     turnPosition: input.turnNumber,
+    // Spread only when supplied, so an entry from a caller that forms no
+    // intent is byte-identical to a pre-WP-7 entry.
+    ...(input.visualIntent !== undefined && { visualIntent: input.visualIntent }),
   }
+}
+
+/** VH-4's payoff, as a query the log could not previously answer: has this
+ *  CLAIM already been made visually, regardless of which picture made it?
+ *  Returns false while no entry carries an intent — absent is not a match. */
+export function hasClaimBeenRendered(log: RRMLog, claim: string): boolean {
+  const needle = claim.trim().toLowerCase()
+  if (needle === '') return false
+  return log.some((e) => e.visualIntent?.claim.trim().toLowerCase() === needle)
 }
 
 function resolveSourcePipeline(input: CreateEntryInput): VisualSourcePipeline | null {

@@ -141,7 +141,7 @@ see ADR 03).
 | 39 | Parametric Scene Generators (×29) | Visual | `teaching/sceneGenerators/{projectile,triangle,molecule,vector,circular,pendulum,electron_shells,lattice,collision,ray_optics,historical_timeline,economics_curves,calculus_graph,civics_org_chart,electric_circuit,kinematics_graphs,heights_and_distances,demographic_pyramid,coordinate_geometry_line,punnett_square,torque_diagram,gravitation_orbit,statistics_bar_chart,ecological_pyramid,logic_gate,er_diagram,periodic_trends,cell_division,dna_structure}.ts` | LIVE (same flag as #38); each generator: extract(LLM) → build(deterministic formula) → validate → consistency-check | — |
 | 40 | AI Scene Generator | Visual | `teaching/generateSceneSpec.ts` | DORMANT (flag-gated: `ENABLE_AI_SCENE_GENERATION`; off by default); LLM-authored `SceneSpec` path, used when neither #37 nor #38-39 produce a result | — |
 | 41 | Scene Spec Validator | Visual | `teaching/sceneSpecValidator.ts` | LIVE — structural validation of `SceneSpec` JSON; used by all three scene-generation paths (#38–40) and the Router (#38) | — |
-| 42 | Dynamic Visualization Engine | Visual | `teaching/visuals/generateVisualizationCode.ts` | DORMANT (flag-gated: `ENABLE_DYNAMIC_VISUALIZATION`; off by default); LLM-authors a React component string (3D Three.js primary, 2D recharts fallback); sandboxed iframe renderer; **violates Permanent Rule 9 when enabled** (second LLM call per turn; see ADR 12) | ADR 12 |
+| 42 | Dynamic Visualization Engine | Visual | `teaching/visuals/generateVisualizationCode.ts` | DORMANT (flag-gated: `ENABLE_DYNAMIC_VISUALIZATION`; off by default); LLM-authors a React component string (3D Three.js primary, 2D recharts fallback); sandboxed iframe renderer; **violates Permanent Rule 9 when enabled** (second LLM call per turn; see ADR 12) | ADR 12; **Phase 2** (VH-5, 2026-07-31) — the *whether* and *why* of a visual are now supplied by Phase 2's VD-1/VD-2; this engine and ADR 12 retain renderer, cache, authoring and validation |
 
 Full per-engine contract (inputs/outputs/public functions/failure
 behavior/guarantees/MUST NOT) lives in `ENGINE_REFERENCE.md` — this table
@@ -517,6 +517,18 @@ rather than more of the same. All blocked on KG v1 freeze + approval.
 
 LIVE across seven confirmed pathways (Engines 32, 36-42). The Visual tier
 is a leaf dependency: everything calls into it, it calls into nothing.
+
+**Phase 2 pointer (VH-5, 2026-07-31).** The *pedagogical* half of this flow —
+**whether** a visual appears (VD-1's four-condition admission test plus ten
+enumerated contraindications, default no), **why** (VD-2's closed ten-purpose
+taxonomy, each purpose carrying a one-sentence claim), and **which form class**
+(VD-3) — is now specified by `PHASE_02_VISUAL_INTELLIGENCE_ARCHITECTURE.md`
+(CANONICAL v2.1.0). ADR 12 and the engines below retain the *production* half:
+renderers, the concept-keyed cache, background authoring, the Visual Policy and
+validation. The two tiers exchange only two one-directional projections —
+`VisualIntent` down, `VisualAvailability` up — so the leaf rule above is
+preserved: neither is a call. Phase 2 authorizes no implementation, and W4-2
+remains gated.
 
 **ADR 12 finding (Visualization & Simulation Architecture, roadmap item
 #7 — DONE):** seven competing visual-generation pathways run with no
