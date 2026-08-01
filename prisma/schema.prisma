@@ -2499,6 +2499,27 @@ model ConceptMasteryRecord {
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt
 
+  // ─── WP-4 structural carriers (AH-2, VH-8) — NOTHING WRITES THESE YET ────
+  // This row is already the per-learner-per-concept grain both handoffs ask
+  // for (see @@id below), so neither needs a new store — AH-2's "No new
+  // store" is satisfied by reusing this one.
+  //
+  // AH-2: the Adaptation State Vector as standing state. Json because the
+  // ASV's shape is owned by EOS `C-32` and is NOT yet typed — AH-1 is the
+  // producer and has no implementation (`C-32` has zero occurrences in src/).
+  // Columns per ASV component would freeze a shape nobody has authored; a
+  // nullable Json carrier does not. NULL = not yet captured, never an empty
+  // ASV. Deliberately NOT on contextSnapshot: that is per-LearnSession, and
+  // this is standing state that must outlive a session.
+  adaptationState          Json?
+  // VH-8: representation-dependence as a per-concept property of the learner
+  // model, three levels (Phase 2 §9.1). String? rather than an enum so no
+  // Prisma enum type is created and correcting the level names later needs no
+  // migration. Producer is Phase 2 V6 (P2-6, withdrawal probes + MG-1/MG-2),
+  // unimplemented. NULL = not yet assessed — NOT "independent of
+  // representation".
+  representationDependence String?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, conceptId])
@@ -2748,6 +2769,22 @@ model EvidenceEvent {
   strength       Float           // 0–1 signal weight per category spec
   rawScore       Float?          // raw probe score when applicable
   contextHash    String?         // hash of turn context for deduplication
+
+  // ─── WP-4 structural carriers (AH-6) — NOTHING WRITES THESE YET ─────────
+  // Assisted and unassisted evidence must stay distinguishable: a pass at
+  // scaffoldDial 0 (full worked) is not the same evidence as a pass at 4
+  // (solo), and a pass carrying hint debt is not an unaided pass. Without
+  // these, every row here is silently treated as unassisted.
+  //
+  // scaffoldLevel mirrors EOS_V2_RUNTIME_SPECIFICATION §3.4's scaffoldDial:
+  // 0–4, 0 = full worked, 4 = solo, GUIDED only. Int? not an enum — §3.4 owns
+  // that definition (RS Appendix A-1) and this column must not become a
+  // second one. Producer is AH-1's typed ASV; unimplemented.
+  // NULL = not captured, NOT scaffoldDial 0.
+  scaffoldLevel  Int?
+  // hintDebt: hints consumed before this outcome. Producer unimplemented.
+  // NULL = not captured, NOT zero debt.
+  hintDebt       Int?
 
   @@index([userId, conceptId])
   @@index([userId, occurredAt])
