@@ -2496,23 +2496,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }).catch((err) => console.warn('[learn/chat] MemoryServingEvent write failed (non-fatal):', err))
       }
 
-      if (!text) {
-        // RS P-3, the second half. A provider that THROWS is handled at the
-        // routeAI call site above; a provider that returns an EMPTY body is
-        // the same failure — no usable model output — and this path returned
-        // a 502 the client renders as "Sorry, I got cut off". By the comment
-        // on the maxTokens argument above, that is not a rare outage: it
-        // recurs whenever a reasoning model exhausts its budget mid-thought.
-        // So the most FREQUENT degraded case was still shipping the learner a
-        // banner, which is exactly what P-3 forbids. Same remedy, same owner.
-        console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
-        const { degradedTurn } = await import('@/lib/eos-runtime')
-        const degraded = degradedTurn({ register: contentRegister, learnerText: message })
-        text = degraded.text
-        provider = degraded.provider
-        finishReason = degraded.finishReason
-      }
-
       // Wave 0 Step 2/4 (Blueprint Phase 3): extract and strip the SIGNAL
       // tag FIRST — before asset capture and every other tag parser — so
       // the tag never leaks into stored messages, captured assets, or the
@@ -2539,6 +2522,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const attemptVectorParse = parseAttemptVectorTag(text)
       if (attemptCaptureOn) attemptVectorHoisted = attemptVectorParse.vector
       text = attemptVectorParse.cleanText
+
+      // C-A — THE SINGLE DEFINITION OF "usable assistant response", and the
+      // only degraded-response path. It sits HERE, after both tag strips,
+      // because those strips can remove content: a reply consisting only of
+      // the mandatory tags is non-empty when the model returns it and empty
+      // once they are removed. This guard previously ran BEFORE the strips,
+      // tested the pre-strip body, never fired, and a blank assistant message
+      // was persisted and rendered with nothing logged.
+      //
+      // `!text.trim()` rather than `!text`: whitespace surviving a strip is
+      // not a usable response either. There is no second implementation —
+      // this is the same block, moved, so a degraded turn is byte-for-byte
+      // what it was, and an originally-empty body still reaches it unchanged
+      // (an empty string is empty through both strips).
+      //
+      // RS P-3, the second half. A provider that THROWS is handled at the
+      // routeAI call site above; a provider that returns an EMPTY body is
+      // the same failure — no usable model output — and this path returned
+      // a 502 the client renders as "Sorry, I got cut off". By the comment
+      // on the maxTokens argument above, that is not a rare outage: it
+      // recurs whenever a reasoning model exhausts its budget mid-thought.
+      // So the most FREQUENT degraded case was still shipping the learner a
+      // banner, which is exactly what P-3 forbids. Same remedy, same owner.
+      if (!text.trim()) {
+        console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
+        const { degradedTurn } = await import('@/lib/eos-runtime')
+        const degraded = degradedTurn({ register: contentRegister, learnerText: message })
+        text = degraded.text
+        provider = degraded.provider
+        finishReason = degraded.finishReason
+      }
       // Bug 2 (mastery gate): a bare acknowledgement ("got it", "ok",
       // "next", "thanks", "👍"…) is not an answer. The prompt forbids the
       // model from emitting a SIGNAL for non-answers, but that is

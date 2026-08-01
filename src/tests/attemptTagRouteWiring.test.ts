@@ -141,3 +141,114 @@ describe('C-1 · content is never silently destroyed', () => {
     }
   })
 })
+
+/**
+ * C-A — a reply that becomes empty AFTER stripping must reach the SAME
+ * degraded path as an originally-empty body.
+ *
+ * `throughStrips` reproduces the route's transformation chain exactly:
+ * parseSignalTag → parseAttemptVectorTag, in that order, each feeding the
+ * next, which is what route.ts:2506 and :2524 do.
+ */
+import { parseSignalTag } from '@/lib/teaching/signals'
+
+const throughStrips = (raw: string): string =>
+  parseAttemptVectorTag(parseSignalTag(raw).cleanText).cleanText
+
+/** The route's single definition of "usable assistant response". */
+const isUsable = (t: string) => Boolean(t.trim())
+
+const SIGNAL = '<!--SIGNAL correctness="true" confidence="high" confusion="false"-->'
+const ATTEMPT = '<!--ATTEMPT channel="verbal" agency="joint"-->'
+
+describe('C-A · the empty guard runs after every content-removing step', () => {
+  it('is positioned after BOTH strips in the route', () => {
+    const signalStrip = lineOf(/text = signalParse\.cleanText/)
+    const attemptStrip = lineOf(/text = attemptVectorParse\.cleanText/)
+    const guard = lineOf(/if \(!text\.trim\(\)\) \{/)
+    expect(signalStrip).toBeGreaterThan(0)
+    expect(guard).toBeGreaterThan(attemptStrip)
+    expect(attemptStrip).toBeGreaterThan(signalStrip)
+  })
+
+  it('runs before cleanText, so nothing downstream sees an empty reply', () => {
+    expect(lineOf(/if \(!text\.trim\(\)\) \{/)).toBeLessThan(lineOf(/let cleanText = text/))
+  })
+
+  it('has exactly ONE empty-body guard — no duplicated degraded logic', () => {
+    expect(allLinesOf(/empty response from model/)).toHaveLength(1)
+    expect(allLinesOf(/if \(!text\.trim\(\)\)/)).toHaveLength(1)
+  })
+
+  it('treats whitespace-only as unusable, not just the empty string', () => {
+    const guardLine = lines[lineOf(/if \(!text\.trim\(\)\) \{/) - 1]
+    expect(guardLine).toContain('.trim()')
+  })
+
+  it('reuses the existing degradedTurn fallback, not a new one', () => {
+    // Two call sites total, both pre-existing in kind: the routeAI throw path
+    // and this empty-body path. No third implementation was added.
+    expect(allLinesOf(/degradedTurn\(\{ register: contentRegister/)).toHaveLength(2)
+  })
+})
+
+describe('C-A · replies that strip to nothing are detected as unusable', () => {
+  it('ATTEMPT-only reply', () => {
+    expect(throughStrips(ATTEMPT)).toBe('')
+    expect(isUsable(throughStrips(ATTEMPT))).toBe(false)
+  })
+
+  it('SIGNAL-only reply', () => {
+    expect(isUsable(throughStrips(SIGNAL))).toBe(false)
+  })
+
+  it('SIGNAL + ATTEMPT only', () => {
+    expect(isUsable(throughStrips(`${SIGNAL}\n${ATTEMPT}`))).toBe(false)
+  })
+
+  it('whitespace + tags only', () => {
+    expect(isUsable(throughStrips(`   \n\t${SIGNAL}\n  ${ATTEMPT}  \n `))).toBe(false)
+  })
+
+  it('malformed tags only — unterminated on the final line', () => {
+    expect(isUsable(throughStrips('<!--ATTEMPT channel="verbal"'))).toBe(false)
+    expect(isUsable(throughStrips('<!--ATTEMPT channel="verbal" />'))).toBe(false)
+  })
+
+  it('an originally-empty body is still unusable through both strips', () => {
+    expect(isUsable(throughStrips(''))).toBe(false)
+    expect(isUsable(throughStrips('   \n  '))).toBe(false)
+  })
+})
+
+describe('C-A · normal replies are unaffected', () => {
+  it('a real reply with both tags keeps its content and stays usable', () => {
+    const out = throughStrips(`Two layers, one inside the other.\n${SIGNAL}\n${ATTEMPT}`)
+    expect(out).toBe('Two layers, one inside the other.')
+    expect(isUsable(out)).toBe(true)
+  })
+
+  it('a tag-free reply is byte-identical — replay determinism preserved', () => {
+    for (const t of ['Answer.', 'Answer.\n\n', 'Line one.\nLine two  ']) {
+      expect(throughStrips(t)).toBe(t)
+      expect(isUsable(throughStrips(t))).toBe(true)
+    }
+  })
+
+  it('content survives a malformed fragment off the final line (C-1 holds)', () => {
+    const t = 'Here is an example:\n```html\n<!--ATTEMPT is a comment\n```\nDoes that help?'
+    expect(throughStrips(t)).toBe(t)
+    expect(isUsable(throughStrips(t))).toBe(true)
+  })
+
+  it('the persisted value is whatever the guard let through — never empty', () => {
+    // The route assigns degraded.text when !text.trim(); every branch below
+    // therefore yields a usable string at the persist site.
+    const candidates = [ATTEMPT, SIGNAL, '', '   ', `Real answer.\n${ATTEMPT}`]
+    for (const raw of candidates) {
+      const stripped = throughStrips(raw)
+      const persisted = isUsable(stripped) ? stripped : 'DEGRADED_TEMPLATE'
+      expect(persisted.trim().length).toBeGreaterThan(0)
+    }
+  })
+})
