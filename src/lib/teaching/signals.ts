@@ -34,6 +34,23 @@ export interface TeachingSignal {
 // <!--SIGNAL ...-->, and [^>]*? stops at the > in /> leaving --> unfound.
 const SIGNAL_RE = /<!--\s*SIGNAL\s+([\s\S]*?)(?:-->|\/>)/i
 
+// R-1/R-3 — removal must be GLOBAL. `.replace` with a non-global regex removes
+// only the FIRST match, so a second complete SIGNAL tag survived to the learner:
+//   'A.\n<!--SIGNAL a="1"--><!--SIGNAL b="2"-->' → 'A.\n<!--SIGNAL b="2"-->'
+// Removal only ever deletes syntactically COMPLETE markup, so making it global
+// cannot touch surrounding text.
+const SIGNAL_RE_G = new RegExp(SIGNAL_RE.source, 'gi')
+
+/**
+ * Remove EVERY complete SIGNAL tag. Pure; no trimming, no fragment handling —
+ * an unterminated `<!--SIGNAL` is deliberately left alone here, matching the
+ * bounded-cleanup rule adopted for ATTEMPT fragments (never sweep to end of
+ * string, never delete legitimate content).
+ */
+export function stripSignalTags(text: string): string {
+  return text.replace(SIGNAL_RE_G, '')
+}
+
 /** Parse and strip the SIGNAL tag. Never throws; absent tag → signal null. */
 export function parseSignalTag(text: string): { signal: TeachingSignal | null; cleanText: string } {
   const m = text.match(SIGNAL_RE)
@@ -56,7 +73,8 @@ export function parseSignalTag(text: string): { signal: TeachingSignal | null; c
   if (phrase) signal.phrase = phrase
   const probe = read('probe')?.toLowerCase()
   if (probe === 'below' || probe === 'at' || probe === 'above') signal.probe = probe as TeachingSignal['probe']
-  const cleanText = text.replace(SIGNAL_RE, '').trimEnd()
+  // The signal VALUE comes from the first tag (above); removal takes them all.
+  const cleanText = stripSignalTags(text).trimEnd()
   return { signal: Object.keys(signal).length > 0 ? signal : null, cleanText }
 }
 

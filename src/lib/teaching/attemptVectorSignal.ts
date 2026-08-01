@@ -41,6 +41,10 @@
  */
 import type { AttemptVectorV2 } from '@/lib/evidence-spine/types'
 import { readAsvAttributes, type AdaptationStateVector } from './adaptation/asv'
+// R-2: complete-tag removal must cover BOTH control-tag kinds in one pass —
+// see `stripAttemptTag`. `signals.ts` does not import this module, so there is
+// no cycle.
+import { stripSignalTags } from './signals'
 
 /** Never `PRESENT`. Carried alongside the vector wherever honesty class is
  *  represented, per the standing rule on the confidence row. */
@@ -55,6 +59,15 @@ export type AttemptVectorHonestyClass = typeof ATTEMPT_VECTOR_HONESTY_CLASS
 // used `[^>]*?-->` and therefore did NOT strip a self-closing tag, which
 // reached the learner. Same shape as SIGNAL_RE now, for the same reason.
 const TAG_RE = /<!--\s*ATTEMPT\b([\s\S]*?)(?:-->|\/>)/i
+
+// R-1 — removal must be GLOBAL. `String.replace` with a non-global regex
+// removes only the FIRST match, so a second well-formed tag survived:
+//   'A.\n<!--ATTEMPT a="1"--><!--ATTEMPT b="2"-->\nMore text.'
+//     → 'A.\n<!--ATTEMPT b="2"-->\nMore text.'
+// The final-line sweep could not reach it (the tag was not on the last line),
+// so it was persisted and rendered. TAG_RE (value extraction) stays first-match
+// — one turn declares one intent — while REMOVAL takes every complete tag.
+const TAG_RE_G = new RegExp(TAG_RE.source, 'gi')
 
 // Residual sweep for an UNTERMINATED tag — the case TAG_RE structurally cannot
 // match. Bounded to the tag's instructed position: the FINAL LINE.
@@ -99,11 +112,33 @@ const TAG_FINAL_LINE_RE = /\n?[ \t]*<!--\s*ATTEMPT\b[^\n]*$/i
  * input is returned unchanged — no trim, no normalisation. The earlier version
  * called `.trimEnd()` unconditionally and so altered every tag-free reply,
  * including with capture disabled.
+ *
+ * WHY THE LOOP, AND WHY IT ALSO REMOVES SIGNAL TAGS (R-2). Removing a complete
+ * tag joins the text on either side of it, and that join can SYNTHESIZE a new
+ * complete tag out of two fragments that were not tags before:
+ *
+ *   '<!--SIG<!--ATTEMPT a="1"-->NAL correctness="true"-->'
+ *      → '<!--SIGNAL correctness="true"-->'    ← reaches the learner
+ *
+ * The route strips SIGNAL first and ATTEMPT second, so a SIGNAL tag created by
+ * ATTEMPT removal has nothing left to remove it. Removing both kinds here, and
+ * repeating until the string stops changing, closes that in both directions.
+ * Each iteration deletes at least one complete tag, so the string strictly
+ * shortens and the loop terminates.
  */
 export function stripAttemptTag(text: string): string {
-  const stripped = text.replace(TAG_RE, '').replace(TAG_FINAL_LINE_RE, '')
-  if (stripped === text) return text
-  return stripped.trimEnd()
+  let out = text
+  for (;;) {
+    // Both complete-tag kinds, globally, until a pass changes nothing.
+    const next = stripSignalTags(out).replace(TAG_RE_G, '')
+    if (next === out) break
+    out = next
+  }
+  // C-1, unchanged: bounded to the final line, applied once, only after every
+  // complete tag is gone. Never sweeps to end of string.
+  out = out.replace(TAG_FINAL_LINE_RE, '')
+  if (out === text) return text
+  return out.trimEnd()
 }
 
 /**
