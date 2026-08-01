@@ -652,6 +652,59 @@ Production Pipeline's next generation (KG authored natively as Family S).
 
 ---
 
+## Appendix C — Registered Conflicts (§10)
+
+Per `docs/architecture/README.md`, a Frozen document is amended by an appendix
+that states what it changes — never by silent edit. **This appendix changes no
+clause above.** §10's `Conflict` node, its three states
+(`OPEN` / `RESOLVED{revisionRef}` / `ACCEPTED_TENSION{rationale}`) and V-14 are
+restated here as they stand, not modified.
+
+**What this appendix is.** §10 designates the `Conflict` node as the corpus's
+registry of contradictions, and Phase 4 handoff **EH-4** proposes that the four
+contradictions it found be filed here rather than left in a phase document. This
+appendix is that filing. It is the *documentary* register: the CEKR data plane
+exists in code (`src/lib/cekr/`, where `Conflict` is a Meta-family kind and
+`CONFLICTS_WITH` runs from a `Conflict` to anything), but instantiating rows
+there is a runtime change, which WP-2 does not carry. When the data plane is
+populated, these four entries are the authored source for those nodes.
+
+**V-14 does not fire on these.** V-14 blocks release on an `OPEN` Conflict
+attached to an **ACTIVE entity**. All four conflicts below hold between
+*architecture documents*, not between ACTIVE CEKR entities, so no subject's
+release is blocked by their being `OPEN`. Recorded explicitly so a later reader
+does not treat this appendix as a release blocker.
+
+**All four are filed `OPEN`.** Phase 4 §0.4 records each with the words *"Not
+resolved."* None was triaged to `ACCEPTED_TENSION`, because assigning a
+rationale is the owner's triage decision and inventing one here would
+manufacture a resolution that no document has reached. Triage to
+`ACCEPTED_TENSION{rationale}` or `RESOLVED{revisionRef}` remains open and is
+each conflict's own owner's call.
+
+| ID | State | Between | Contradiction | Owner |
+|---|---|---|---|---|
+| **CT-1** | `OPEN` | ADR 12 §4.1 ↔ ADR 14 ↔ CEKR §2.1 | Two asset lifecycles. ADR 12 defines 3 states (`draft`/`active`/`deprecated`); ADR 14 defines 5 (DRAFT→REVIEW→ACTIVE→DEPRECATED→RETIRED); CEKR §2.1 defines the same 5 and says "aligned with ADR 14". CEKR, the Frozen authority, sides with ADR 14 — **ADR 12 is the outlier**, and a visual asset is subject to all three. Phase 2 recorded the ADR 12 ↔ ADR 14 half as VF-5; Phase 4 added the third data point. | ADR 12 |
+| **CT-2** | `OPEN` | CEKR §10 ↔ runtime `versioning.ts` | Two versioning models of different shapes. §10 specifies `rev` content hashes, a per-channel head index, a first-class `Revision` entity with a reason taxonomy, and `SUPERSEDES` edges. The runtime specifies `LineageAsset`, `CaptureDecision`, `decideCaptureAction`. Both are legitimate for their layer; **no mapping between them is documented anywhere**, and whether the runtime implements §10 or is an independent model is unstated. | CEKR + runtime |
+| **CT-3** | `OPEN` | `contentQualityDashboard.ts` ↔ Phases 1/2/3 | Coverage is measured one way and needed four ways. The live metric is `coveragePercent = authoredConcepts / kgConcepts` — a concept counts as covered if it has *any* authored asset. Phase 1 needs explanations and probes; Phase 2 needs coverage per visual purpose across ten purposes; Phase 3 needs hint-ladder rungs and scaffold levels. **A concept at 100% by the live metric can be uncovered for three of the four consumers.** Phase 4 §5 defines the sufficiency vector without changing the metric. | AssetIdentity pipeline |
+| **CT-4** | `OPEN` | Phases 1/2/3 ↔ the live authoring queue | Authored demand has no path into the live queue. Phases 1, 2 and 3 emit coverage defects (11, 7 and 2 references) addressed to "the authoring queue"; the queue exists but derives **exclusively from serving telemetry** (`totalServed`, `groq_fallback`) and has no authored-demand input. The two systems are disconnected and neither document says so. Phase 4 §4 defines the seam without changing either side. | AssetIdentity pipeline |
+
+**Scope.** Exactly four, per EH-4. Phase 4's **CT-5** is deliberately **not**
+filed here: §0.4 records it as *"not a contradiction between owners but a
+reconciliation gap in this document"* — it has no second party, so it is not a
+`Conflict` in §10's sense.
+
+**Authority.** These four entries are the register of record. Phase 4 §0.4
+retains the full narrative and now points here; where the two differ, this
+appendix governs the conflict's *state*, and §0.4 remains the fuller account of
+how each was found.
+
+**Enacts nothing.** No clause of this specification is modified, no runtime,
+schema, database or API change is made, and no conflict is resolved. G1 and G2
+remain in force.
+
+---
+
 *End of specification v1.0.0. Design only; adoption and every implementation
 milestone remain owner decisions under the standing G1/G2 governance rules.
 Gaps found later are spec bugs — file them against this document; do not

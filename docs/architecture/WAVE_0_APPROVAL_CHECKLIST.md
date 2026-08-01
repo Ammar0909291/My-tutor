@@ -4,11 +4,12 @@
 gated items for the 31 open cross-owner handoffs of Phases 1–4 (Wave H below).
 **Nothing on this list is approved.** This document grants no permission by
 existing — it is the instrument the project owner uses to grant it, one
-checkbox at a time. Drafting an item is not approving it. **Six Wave H items
-(H-3, VH-5, AH-5, AH-9, AH-4, EH-3) were approved and implemented 2026-07-31
-under WP-1** as an explicit owner exception — all six are documentation-only.
-The other 25 Wave H items and all 19 pre-existing unchecked items remain
-unapproved, and G1 and G2 remain in force exactly as stated below.
+checkbox at a time. Drafting an item is not approving it. **Seven Wave H items
+were approved and implemented 2026-07-31** as explicit owner exceptions, all
+documentation-only: six under **WP-1** (H-3, VH-5, AH-5, AH-9, AH-4, EH-3) and
+one under **WP-2** (EH-4). The other 24 Wave H items and all 19 pre-existing
+unchecked items remain unapproved, and G1 and G2 remain in force exactly as
+stated below.
 
 **The two Wave 0 gates** (`ARCHITECTURE_COMPLETION_REPORT_V1.md` §5):
 - [ ] **G1 — Canonical KG v1 freeze declared by the Curriculum Production
@@ -113,10 +114,11 @@ P2-1…P2-7) and Phase 3 §25 / Phase 4's stages into gated items — is **not**
 here and remains open; their rows say so.
 
 **Approval state (updated 2026-07-31).** When this section was drafted under WP-0
-every box was unchecked. Six documentation-only items — **H-3, VH-5, AH-5, AH-9,
-AH-4, EH-3** — were subsequently approved by the project owner as an explicit
-exception and implemented under **WP-1**; their rows carry the record. **The
-remaining 25 rows are unchecked and unapproved.** Per the header, an unchecked
+every box was unchecked. Seven documentation-only items were subsequently
+approved by the project owner as explicit exceptions and implemented — **H-3,
+VH-5, AH-5, AH-9, AH-4, EH-3** under **WP-1**, and **EH-4** under **WP-2**;
+their rows carry the record. **The
+remaining 24 rows are unchecked and unapproved.** Per the header, an unchecked
 item is architecture-only, and per Bible §10.1 rule 2 it authorizes no
 implementation. Approving any remaining row still requires G2, and any row whose
 dependency column names G1 additionally requires G1. No row approved under WP-1
@@ -171,7 +173,7 @@ separable from the rest.
 | EH-1 | `contentQualityDashboard.ts`'s `WorkQueueItem` gains an optional authored-demand input alongside its telemetry-derived signals | Phase 4 §4 | AssetIdentity pipeline — runtime owner | G2. Subsystem is registered **COMPLETE / never rebuild** — extension routed to its owner, never a re-implementation. Unresolved concern on record: `buildWorkQueue()` filters out items classified `none`, so integration is not purely additive at the type level | [ ] |
 | EH-2 | The sufficiency vector published as a per-concept read model; `coveragePercent` unchanged and reinterpreted, not replaced | Phase 4 §5 | AssetIdentity pipeline — runtime owner | G2; EH-1 | [ ] |
 | EH-3 | ADR 13's `CuratorQueueEntry.trigger` union gains **no** member from Phase 4; coverage demand routed to the work queue, not the curator queue | Phase 4 §0.3 | ADR 13 — runtime owner | G2. **A handoff that requests no change** — recorded so the two queues are not merged by accident. Approving it enacts nothing | [x] **implemented 2026-07-31 under WP-1** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3 above). Documentation/specification only; no runtime, schema, API, test, prompt, curriculum or KG change. ADR 13 gains a scope note recording that the `CuratorQueueEntry.trigger` union gains **no** member: degradation signals vs. absence signals, absence routed to the work queue. |
-| EH-4 | CEKR §10's `Conflict` node with `ACCEPTED_TENSION` is the home for the contradictions in Phase 4 §0.4; CT-1…CT-4 filed there rather than in phase documents | Phase 4 §0.4 | CEKR — runtime owner | G2. **Amends a Frozen document** (CEKR, Authority Index row 3) via its own §10 revision model. CT-2 remains unresolved | [ ] |
+| EH-4 | CEKR §10's `Conflict` node with `ACCEPTED_TENSION` is the home for the contradictions in Phase 4 §0.4; CT-1…CT-4 filed there rather than in phase documents | Phase 4 §0.4 | CEKR — runtime owner | G2. **Amends a Frozen document** (CEKR, Authority Index row 3) via its own §10 revision model. CT-2 remains unresolved | [x] **implemented 2026-07-31 under WP-2** — approved by project owner as an explicit exception (chat instruction, out of the normal G2 sequence; same form as W4-1/W4-3). CT-1…CT-4 filed against CEKR §10's `Conflict` node as **Appendix C**, all four `OPEN` (Phase 4 §0.4 records each as "Not resolved"; triage to ACCEPTED_TENSION/RESOLVED remains each owner's call). CEKR is Frozen (Authority Index row 3), so it is amended by appendix per README — no clause changed. Phase 4 §0.4 gains a pointer; its narrative is unchanged. CT-5 deliberately not filed (no second party). Documentation only; the `src/lib/cekr/` data plane was NOT written to. **CT-2 remains unresolved.** |
 | EH-5 | On approval, the Bible, the governance registry and the EOS blueprint index gain Phase 4 pointers | Phase 4 §0.3 | runtime owner | G2. Documentation-only; carries no implementation | [ ] |
 
 ---
