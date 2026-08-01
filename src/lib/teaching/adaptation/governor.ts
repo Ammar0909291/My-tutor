@@ -117,7 +117,3 @@ export function allSet(
 ): boolean {
   return keys.every((k) => constants.get(k)?.availability === 'SET')
 }
-
-// Re-exported so callers need not reach past this module for the seam.
-export type { BrainConfigStore, BrainConfigRow }
-export { isEffective } from '@/lib/config/brainConfig'

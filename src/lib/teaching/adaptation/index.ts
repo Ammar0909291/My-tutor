@@ -18,9 +18,8 @@ export {
 } from './asv'
 
 export {
-  GOVERNOR_CONSTANT_KEYS, resolveGovernorConstants, allSet, isEffective,
+  GOVERNOR_CONSTANT_KEYS, resolveGovernorConstants, allSet,
   type GovernorConstantKey, type GovernorConstant, type ConstantAvailability,
-  type BrainConfigStore, type BrainConfigRow,
 } from './governor'
 
 export {
