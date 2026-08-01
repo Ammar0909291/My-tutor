@@ -19,9 +19,11 @@ The packages build the instruments that later, separately-gated work will read.
 
 Three properties define the release's risk profile:
 
-- **One behavioural surface.** `route.ts` is `+46 / −0`, and every added line
-  is the gated instruction, the ungated tag strip, two hoisted variables and
-  two payload spreads on the existing `emitTurn()` call.
+- **Two behavioural surfaces, one of them gated.** `route.ts` is `+46 / −0`,
+  and every added line is the gated prompt instruction, the **ungated** tag
+  strip, two hoisted variables and two payload spreads on the existing
+  `emitTurn()` call. The flag covers the instruction; it does not cover the
+  strip, by design (§3).
 - **One additive migration.** Four nullable columns on two existing tables.
   No table, no model, no backfill, no column dropped or retyped.
 - **One reversible switch.** `ENABLE_ATTEMPT_CAPTURE=0` returns the prompt to
@@ -64,8 +66,19 @@ before the reply is stored, rendered or parsed further.
   vector is captured. **The prompt is byte-identical to pre-release.**
 
 Nothing reads the captured vectors on the live path, so no teaching decision
-differs in either state. The model's *input* is not byte-identical when the
-flag is on, and that is the whole of this release's behavioural exposure.
+differs in either state.
+
+**A second, smaller runtime-visible change — the tag strip.** It runs on every
+assistant reply and is **not** gated by the flag, deliberately: a model can emit
+the tag from conversation context after the instruction is removed, so gating
+the strip would let a disabled feature expose a tag. Its effect on output:
+
+- Reply carries an ATTEMPT tag → the tag is removed and the result is
+  right-trimmed.
+- Reply carries no ATTEMPT tag → **returned byte-identical**, including with
+  the flag off.
+- Reply carries an *unterminated* `<!--ATTEMPT` **not** on the final line →
+  **preserved and visible.** See §10 for the tradeoff behind this.
 
 Two supporting changes with no observable effect:
 
@@ -160,7 +173,10 @@ Three levels, increasing cost. L1 will almost certainly suffice.
 **L1 — Flag (seconds, no deploy)**
 Set `ENABLE_ATTEMPT_CAPTURE=0`. The instruction stops being appended; nothing
 is captured. Tag stripping stays active by design, so a tag emitted from
-conversation context still cannot reach a learner.
+conversation context still cannot reach a learner. **L1 does not disable the
+strip** — that is intentional, and it means L1 cannot undo the strip's effect
+on replies that carry a tag. It does restore the prompt exactly, and a tag-free
+reply is byte-identical either way.
 
 **L2 — Code revert (one deploy)**
 Revert the merge. **Leave the migration in place.** Safe because the four new
@@ -212,9 +228,16 @@ discovered later.
   persisted" is satisfied by nothing in this branch; `projectStandingAsv` is
   pure and returns the value rather than writing it. Graded Important, not
   blocking, at the merge gate.
-- **`TAG_RESIDUAL_RE` truncates rather than exposes.** An unterminated tag
-  mid-reply removes the remainder of the text. Fail-safe direction; the
-  instruction requires the tag on its own final line.
+- **An unterminated `<!--ATTEMPT` off the final line is preserved and visible
+  to the learner.** This is a deliberate tradeoff, not an oversight. Two
+  invariants — "a tag never reaches a learner" and "content is never silently
+  destroyed" — are irreconcilable for that one input: the text is either our
+  malformed tag or the model legitimately writing about HTML comments, and
+  nothing distinguishes them. An earlier revision resolved it the other way,
+  deleting to end of string, which destroyed a lesson's closing fence and
+  follow-up question with no log and no counter. It is now resolved in favour
+  of preserving content: an ugly failure a human can see and report beats a
+  silent one they cannot. Recorded in `stripAttemptTag`'s own contract.
 - **Captured vectors are `PROXY` honesty class**, not instrumentation. They
   are authoritative on what was intended and are no evidence of what was
   achieved. TQ-5's gate G3 retains its `MEASURED` semantic half for exactly
@@ -293,7 +316,8 @@ prompt to pre-release. Diagnose afterwards.
 | Symptom | First action | Then |
 |---|---|---|
 | `<!--ATTEMPT` visible in a reply or stored message | **L1 immediately** | Capture the exact message text; it is the B-1 regression surface and the fix is regression-tested, so a real occurrence is new information |
-| Replies look truncated or end abruptly | **L1** | Check for an unterminated tag — `TAG_RESIDUAL_RE` truncates rather than exposes |
+| Replies look truncated or end abruptly | **L1** | The strip no longer truncates — the residual sweep is bounded to the final line. If a reply IS truncated, the cause is elsewhere; capture the exact text before assuming this release |
+| A raw `<!--ATTEMPT` fragment is visible in a reply | **L1** | Expected in one case only: an unterminated fragment off the final line, preserved deliberately (§10). Capture the text; if it is on the final line, that is a real strip failure |
 | Model output quality drops, replies drift off-format | **L1** | This is R1; the prompt is the only changed input |
 | Token cost or latency rises noticeably | **L1** | ~1172 characters per turn is the only addition |
 | Build failed at `prisma migrate deploy` | Do not retry blindly | Check `_prisma_migrations` for a partially-applied row; the migration is 4 independent `ADD COLUMN`s and is safe to re-run |

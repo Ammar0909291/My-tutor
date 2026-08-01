@@ -56,21 +56,54 @@ export type AttemptVectorHonestyClass = typeof ATTEMPT_VECTOR_HONESTY_CLASS
 // reached the learner. Same shape as SIGNAL_RE now, for the same reason.
 const TAG_RE = /<!--\s*ATTEMPT\b([\s\S]*?)(?:-->|\/>)/i
 
-// Belt and braces: any residual ATTEMPT fragment — truncated output, a tag the
-// model never terminated, a second copy — is removed unconditionally. A tag
-// that cannot be parsed must be DISCARDED, never exposed; an unterminated
-// comment is exactly the case TAG_RE cannot match, and it is also the case a
-// learner must never see.
-const TAG_RESIDUAL_RE = /<!--\s*ATTEMPT\b[\s\S]*$/i
+// Residual sweep for an UNTERMINATED tag — the case TAG_RE structurally cannot
+// match. Bounded to the tag's instructed position: the FINAL LINE.
+//
+// The first version of this swept `[\s\S]*$` — from the fragment to end of
+// string — and destroyed everything after it. A reply teaching HTML comments
+// lost its closing fence and its follow-up question, silently, with the
+// truncated text persisted and rendered. `[^\n]*$` cannot cross a newline, so
+// a fragment anywhere but the last line is now left alone.
+const TAG_FINAL_LINE_RE = /\n?[ \t]*<!--\s*ATTEMPT\b[^\n]*$/i
 
 /**
- * Remove every ATTEMPT fragment from assistant text. Total, and applied
+ * Remove ATTEMPT markup from assistant text. Total, and applied
  * UNCONDITIONALLY — including when capture is disabled, because a model can
  * still emit a tag from conversation context after the instruction is removed.
  * Stripping is never gated; only soliciting and capturing are.
+ *
+ * TWO INVARIANTS, AND THE ONE PLACE THEY CONFLICT.
+ *
+ *   (1) An ATTEMPT tag must never reach a learner.
+ *   (2) Learner-visible content must never be silently destroyed.
+ *
+ * Both hold for every case except one: an UNTERMINATED `<!--ATTEMPT` that is
+ * NOT on the final line. There, the two are genuinely irreconcilable — the
+ * text is either our malformed tag or the model legitimately writing about
+ * HTML comments, and nothing in the string distinguishes them. Deleting to
+ * end-of-string satisfies (1) by destroying content; leaving it satisfies (2)
+ * by showing markup.
+ *
+ * RESOLVED IN FAVOUR OF (2), deliberately: a visible `<!--ATTEMPT` fragment is
+ * ugly, self-evident and reportable. Truncated teaching is invisible — no log,
+ * no counter, indistinguishable from a short answer. An ugly failure a human
+ * can see beats a silent one they cannot.
+ *
+ * So: a well-formed tag is removed anywhere (TAG_RE — the terminator and
+ * attribute syntax make it unambiguously ours); an unterminated fragment is
+ * removed only in its instructed position, the final line; anywhere else it is
+ * PRESERVED and visible. That residual exposure is the accepted cost, recorded
+ * here rather than hidden.
+ *
+ * BYTE-IDENTICAL WHEN NOTHING IS REMOVED. If neither pattern matches, the
+ * input is returned unchanged — no trim, no normalisation. The earlier version
+ * called `.trimEnd()` unconditionally and so altered every tag-free reply,
+ * including with capture disabled.
  */
 export function stripAttemptTag(text: string): string {
-  return text.replace(TAG_RE, '').replace(TAG_RESIDUAL_RE, '').trimEnd()
+  const stripped = text.replace(TAG_RE, '').replace(TAG_FINAL_LINE_RE, '')
+  if (stripped === text) return text
+  return stripped.trimEnd()
 }
 
 /**

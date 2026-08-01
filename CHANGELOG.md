@@ -15,11 +15,18 @@ Branch `claude/teaching-quality-architecture-xd00jx`, 14 commits against
 `main @ 827f3796`. 45 files, +4442 / −37.
 
 The campaign implements the capture, persistence and evaluation layers of the
-canonical Phase 1–4 architecture. **Almost all of it is shadow**: with one
-exception noted under *Changed*, no teaching decision, response, prompt or API
-differs from before this branch. Nothing was applied, adapted, admitted or
-enforced — the packages build the instruments that later, separately-gated work
-will read.
+canonical Phase 1–4 architecture. **Almost all of it is shadow**: apart from the
+two items under *Changed*, no teaching decision, prompt or API differs from
+before this branch. Nothing was applied, adapted, admitted or enforced — the
+packages build the instruments that later, separately-gated work will read.
+
+The assistant **response** is altered in exactly one circumstance: when the
+reply carries an ATTEMPT tag, that tag is removed and the result is
+right-trimmed. A tag-free reply is returned byte-identical, including with
+`ENABLE_ATTEMPT_CAPTURE=0`. An earlier revision of this entry claimed no
+response ever differs; that was false, because the strip called `trimEnd()`
+unconditionally and so altered every reply with trailing whitespace. Corrected
+in code and here.
 
 ### Added
 
@@ -96,6 +103,27 @@ will read.
   deliberately not gated** — a model can emit the tag from conversation context
   after the instruction is removed, so a disabled feature still cannot expose
   one.
+
+- **C-1 — the B-1 fix destroyed learner content.** The residual sweep was
+  written as `[\s\S]*$` and deleted from an unterminated fragment to end of
+  string. A reply teaching HTML comments lost its closing fence and its
+  follow-up question, silently, with the truncated text persisted and rendered.
+  The sweep is now bounded to `[^\n]*$` — the tag's instructed position, the
+  final line — so a fragment anywhere else is preserved. Where the two
+  invariants conflict (an unterminated fragment off the final line), the
+  tradeoff is resolved in favour of **preserving content**: a visible
+  `<!--ATTEMPT` fragment is self-evident and reportable, while truncated
+  teaching is invisible. That residual exposure is accepted and documented in
+  the function's own contract.
+- **I-A — the strip altered every reply.** It called `trimEnd()`
+  unconditionally, so a tag-free reply with trailing whitespace came back
+  changed, including with capture disabled. It now returns the input
+  byte-identical when neither pattern matches.
+- **I-B — the B-1 fix had no wiring test.** Five module tests existed and
+  nothing proved the module was connected; the suite would have passed with the
+  route wiring deleted. `attemptTagRouteWiring.test.ts` now asserts the strip
+  precedes persistence, `cleanText` and asset capture, and that the flag gates
+  capture but never the strip.
 
 ### Documentation
 
