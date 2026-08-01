@@ -1,3 +1,5 @@
+import type { VisualIntent } from '@/lib/teaching/visualIntent'
+
 export type TrackLevel = 'T0' | 'T1' | 'T2' | 'T3' | 'T4'
 
 export type ActionType =
@@ -58,4 +60,17 @@ export interface TeachingDecision {
   difficulty: TrackLevel
   estimated_time: number         // minutes
   goal: string
+  /** WP-7 / handoff VH-1 — the typed VisualIntent projection (Phase 2 §7).
+   *
+   *  VH-1 is worded as "`visual_type` widens to the typed VisualIntent", but
+   *  no `visual_type` field has ever existed on this interface, so there is
+   *  nothing to widen: the field is CREATED already typed. That is the
+   *  "create, then widen" the work package names, collapsed into one step
+   *  because the intermediate state would carry no information.
+   *
+   *  OPTIONAL, and `decide()` does not populate it. VD-1's admission test,
+   *  VD-2's purpose assignment and VD-3's selection funnel are Phase 2 stages
+   *  V3/V5 — learner-visible, and outside WP-7. Absent means "no visual
+   *  intent was formed", never "no visual". */
+  visual_intent?: VisualIntent
 }
