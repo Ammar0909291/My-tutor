@@ -47,7 +47,42 @@ import { readAsvAttributes, type AdaptationStateVector } from './adaptation/asv'
 export const ATTEMPT_VECTOR_HONESTY_CLASS = 'PROXY' as const
 export type AttemptVectorHonestyClass = typeof ATTEMPT_VECTOR_HONESTY_CLASS
 
-const TAG_RE = /<!--\s*ATTEMPT\b([^>]*?)-->/i
+// Stripping semantics are IDENTICAL to `signals.ts`'s SIGNAL_RE, deliberately.
+// That file already documents the failure this fixes: "Accept both standard
+// HTML-comment close (-->) and XML/self-closing style (/>), because the LLM
+// sometimes produces <!--SIGNAL .../> instead of <!--SIGNAL ...--> and [^>]*?
+// stops at the > in /> leaving --> unfound." The first version of this module
+// used `[^>]*?-->` and therefore did NOT strip a self-closing tag, which
+// reached the learner. Same shape as SIGNAL_RE now, for the same reason.
+const TAG_RE = /<!--\s*ATTEMPT\b([\s\S]*?)(?:-->|\/>)/i
+
+// Belt and braces: any residual ATTEMPT fragment — truncated output, a tag the
+// model never terminated, a second copy — is removed unconditionally. A tag
+// that cannot be parsed must be DISCARDED, never exposed; an unterminated
+// comment is exactly the case TAG_RE cannot match, and it is also the case a
+// learner must never see.
+const TAG_RESIDUAL_RE = /<!--\s*ATTEMPT\b[\s\S]*$/i
+
+/**
+ * Remove every ATTEMPT fragment from assistant text. Total, and applied
+ * UNCONDITIONALLY — including when capture is disabled, because a model can
+ * still emit a tag from conversation context after the instruction is removed.
+ * Stripping is never gated; only soliciting and capturing are.
+ */
+export function stripAttemptTag(text: string): string {
+  return text.replace(TAG_RE, '').replace(TAG_RESIDUAL_RE, '').trimEnd()
+}
+
+/**
+ * Kill switch, in the repository's established form for capture features
+ * (`ENABLE_EVIDENCE_SPINE`, `turnEmitter.ts:144`): opt-OUT with '0'.
+ * When disabled the instruction is not appended and no vector is captured, so
+ * the prompt and the turn are exactly what they were before P1-1. Stripping
+ * still runs, so disabling can never expose a tag.
+ */
+export function isAttemptCaptureEnabled(): boolean {
+  return process.env.ENABLE_ATTEMPT_CAPTURE !== '0'
+}
 
 // Closed value sets, transcribed from Phase 1 §7.4.1. A value outside its set
 // is dropped: an unrecognised axis value is a mis-declaration, and accepting
@@ -122,7 +157,9 @@ export interface AttemptVectorParse {
  */
 export function parseAttemptVectorTag(text: string): AttemptVectorParse {
   const m = text.match(TAG_RE)
-  if (!m) return { vector: null, cleanText: text }
+  // No parseable tag: still sweep for a residual fragment. A malformed tag is
+  // discarded, never returned in cleanText.
+  if (!m) return { vector: null, cleanText: stripAttemptTag(text) }
 
   const attrs = m[1] ?? ''
   const read = (key: string): string | undefined =>
@@ -147,7 +184,7 @@ export function parseAttemptVectorTag(text: string): AttemptVectorParse {
   // fact the runtime already holds — asking the composer to restate either
   // would invite invention where a real source exists or will exist.
 
-  const cleanText = text.replace(TAG_RE, '').trimEnd()
+  const cleanText = stripAttemptTag(text)
   return { vector: Object.keys(vector).length > 0 ? vector : null, cleanText }
 }
 

@@ -6,7 +6,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   ATTEMPT_VECTOR_HONESTY_CLASS, buildAttemptVectorInstruction,
-  parseAttemptVectorTag, declaredAxisCount,
+  parseAttemptVectorTag, declaredAxisCount, stripAttemptTag, isAttemptCaptureEnabled,
 } from '@/lib/teaching/attemptVectorSignal'
 
 const TAG = '<!--ATTEMPT channel="visual" representation="diagram" concreteness="iconic" ' +
@@ -77,5 +77,42 @@ describe('P1-1 · the tag never reaches the learner or the store', () => {
       expect(() => parseAttemptVectorTag(t)).not.toThrow()
     }
     expect(parseAttemptVectorTag('<!--ATTEMPT-->').vector).toBeNull()
+  })
+})
+
+describe('B-1 · the tag can never reach the learner', () => {
+  it('strips the self-closing form SIGNAL_RE already tolerated', () => {
+    // The exact case the first TAG_RE missed: [^>]*? stops at the > in />.
+    const r = parseAttemptVectorTag('Two layers.\n<!--ATTEMPT channel="visual" />')
+    expect(r.cleanText).toBe('Two layers.')
+    expect(r.cleanText).not.toContain('ATTEMPT')
+  })
+
+  it('discards an unterminated tag rather than exposing it', () => {
+    const r = parseAttemptVectorTag('Two layers.\n<!--ATTEMPT channel="visual"')
+    expect(r.cleanText).toBe('Two layers.')
+    expect(r.vector).toBeNull()
+  })
+
+  it('removes a residual second copy', () => {
+    const r = parseAttemptVectorTag('A.\n<!--ATTEMPT channel="verbal"-->\n<!--ATTEMPT channel="visual"')
+    expect(r.cleanText).not.toContain('ATTEMPT')
+  })
+
+  it('stripAttemptTag is total and runs regardless of the switch', () => {
+    for (const t of ['', 'plain', '<!--ATTEMPT', '<!--ATTEMPT />', '<!--ATTEMPT x="1"-->']) {
+      expect(() => stripAttemptTag(t)).not.toThrow()
+      expect(stripAttemptTag(t)).not.toContain('ATTEMPT')
+    }
+  })
+
+  it('kill switch defaults on and disables with "0"', () => {
+    const prev = process.env.ENABLE_ATTEMPT_CAPTURE
+    delete process.env.ENABLE_ATTEMPT_CAPTURE
+    expect(isAttemptCaptureEnabled()).toBe(true)
+    process.env.ENABLE_ATTEMPT_CAPTURE = '0'
+    expect(isAttemptCaptureEnabled()).toBe(false)
+    if (prev === undefined) delete process.env.ENABLE_ATTEMPT_CAPTURE
+    else process.env.ENABLE_ATTEMPT_CAPTURE = prev
   })
 })

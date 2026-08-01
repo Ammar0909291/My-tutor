@@ -1463,8 +1463,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // declares what the composer intended. Capture only: nothing reads the
         // vector, so no teaching decision differs (§14.2 "No behaviour changes
         // at all"). Both tags are stripped before storage and before the client.
-        const { buildAttemptVectorInstruction } = await import('@/lib/teaching/attemptVectorSignal')
-        systemPrompt += buildAttemptVectorInstruction()
+        // Kill switch (ENABLE_ATTEMPT_CAPTURE=0): when disabled the instruction
+        // is not appended, so the prompt is byte-identical to pre-P1-1.
+        // Stripping below is NOT gated — see the parse site.
+        const { buildAttemptVectorInstruction, isAttemptCaptureEnabled } = await import('@/lib/teaching/attemptVectorSignal')
+        if (isAttemptCaptureEnabled()) systemPrompt += buildAttemptVectorInstruction()
 
         // P0-1 (lesson introduction defect): computed once, ahead of the
         // session-opening block below, so a non-first lesson's OPENING can
@@ -2523,12 +2526,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // leak into a stored message, a captured asset, or the client. The vector
       // is carried to this turn's single emitTurn() call and read by nothing
       // else. PROXY honesty class: a declaration of intent, never an instrument.
-      const { parseAttemptVectorTag, parseAdaptationStateTag } = await import('@/lib/teaching/attemptVectorSignal')
+      const { parseAttemptVectorTag, parseAdaptationStateTag, isAttemptCaptureEnabled } =
+        await import('@/lib/teaching/attemptVectorSignal')
+      // Capture is gated; STRIPPING IS NOT. A model can still emit the tag from
+      // conversation context after the instruction is removed, so the text is
+      // cleaned on every path regardless of the switch — a disabled feature
+      // must never be able to expose a tag.
+      const attemptCaptureOn = isAttemptCaptureEnabled()
       // WP-8 / AH-1: the ASV is read from the SAME tag, before the strip.
       // One declaration channel, one capture path, one writer.
-      adaptationStateHoisted = parseAdaptationStateTag(text).vector
+      if (attemptCaptureOn) adaptationStateHoisted = parseAdaptationStateTag(text).vector
       const attemptVectorParse = parseAttemptVectorTag(text)
-      attemptVectorHoisted = attemptVectorParse.vector
+      if (attemptCaptureOn) attemptVectorHoisted = attemptVectorParse.vector
       text = attemptVectorParse.cleanText
       // Bug 2 (mastery gate): a bare acknowledgement ("got it", "ok",
       // "next", "thanks", "👍"…) is not an answer. The prompt forbids the
