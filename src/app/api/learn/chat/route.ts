@@ -1344,6 +1344,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // EOS M1 (Evidence Spine): decision facts hoisted for the parallel spine
     // emitter — observation only, zero effect on the turn.
     let evidenceMoveHoisted: string | null = null
+    // P1-1 (Phase 1 Stage 1): this turn's DECLARED AttemptVector, parsed from
+    // the TEACHING INTENT tag. Null when the composer declared nothing — which
+    // is "not captured", never an empty intent.
+    let attemptVectorHoisted: import('@/lib/evidence-spine/types').AttemptVectorV2 | null = null
     // K3 — the mapped kernel move + its budget, one owner, three consumers.
     let kernelPolicyMoveHoisted: import('@/lib/kernel/policyMove').MappedMove | null = null
     let kernelMaxQuestionsHoisted: 0 | 1 = 0
@@ -1448,6 +1452,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
         systemPrompt += buildSignalInstruction()
+
+        // P1-1 (Phase 1 Stage 1): the TEACHING INTENT declaration. Sits beside
+        // the OBSERVE signal because it is the same mechanism pointed the other
+        // way — SIGNAL declares what was observed of the learner, ATTEMPT
+        // declares what the composer intended. Capture only: nothing reads the
+        // vector, so no teaching decision differs (§14.2 "No behaviour changes
+        // at all"). Both tags are stripped before storage and before the client.
+        const { buildAttemptVectorInstruction } = await import('@/lib/teaching/attemptVectorSignal')
+        systemPrompt += buildAttemptVectorInstruction()
 
         // P0-1 (lesson introduction defect): computed once, ahead of the
         // session-opening block below, so a non-first lesson's OPENING can
@@ -2501,6 +2514,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const signalParse = parseSignalTag(text)
       let teachingSignal = signalParse.signal
       text = signalParse.cleanText
+      // P1-1: strip the TEACHING INTENT tag in the same place and for the same
+      // reason — before asset capture and every other parser, so it can never
+      // leak into a stored message, a captured asset, or the client. The vector
+      // is carried to this turn's single emitTurn() call and read by nothing
+      // else. PROXY honesty class: a declaration of intent, never an instrument.
+      const { parseAttemptVectorTag } = await import('@/lib/teaching/attemptVectorSignal')
+      const attemptVectorParse = parseAttemptVectorTag(text)
+      attemptVectorHoisted = attemptVectorParse.vector
+      text = attemptVectorParse.cleanText
       // Bug 2 (mastery gate): a bare acknowledgement ("got it", "ok",
       // "next", "thanks", "👍"…) is not an answer. The prompt forbids the
       // model from emitting a SIGNAL for non-answers, but that is
@@ -3729,6 +3751,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               decisionPhaseAfter: phaseAfter,
               workedExampleFirst: evidenceWorkedExampleFirstHoisted,
               stageCeiling: evidenceStageCeilingHoisted,
+              // P1-1 — rides WP-3's existing v2 field on the existing call.
+              // No second writer, no new event, no new capture path. Omitted
+              // when nothing was declared, so the payload is byte-identical to
+              // before on those turns.
+              ...(attemptVectorHoisted !== null && { attemptVector: attemptVectorHoisted }),
               provenance: [
                 ...(recoveryKeyHoisted ? [`recovery:${recoveryKeyHoisted}`] : []),
                 ...(evidenceAutonomyHoisted ? ['autonomy'] : []),
