@@ -1028,6 +1028,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     correctIndex: number
     askedAt: number
   } | null>(null)
+  // P6.6: the server-decided lesson completion payload. Presence of this state
+  // ends the lesson in the UI — the learner never continues inside a completed
+  // lesson, and the next lesson starts only when they choose to.
+  const [lessonCompletion, setLessonCompletion] = useState<{
+    lessonTitle: string | null
+    durationSeconds: number | null
+    mastered: string[]
+    needsReview: string[]
+    nextLessonOrder: number | null
+    fullyMastered: boolean
+  } | null>(null)
   const [skipConfirm, setSkipConfirm] = useState(false)
   // Bug 8: was the last long (collapsed) tutor explanation ever expanded?
   // undefined = no collapsed explanation pending; mirrored into a ref so
@@ -1532,7 +1543,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -1623,6 +1634,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         })
       } else {
         setActiveMcq(null)
+      }
+      // P6.6: completion is server-decided; the client only renders it.
+      if (data.lessonComplete?.complete === true) {
+        setActiveMcq(null)
+        setLessonCompletion({
+          lessonTitle: data.lessonComplete.lessonTitle ?? null,
+          durationSeconds: data.lessonComplete.durationSeconds ?? null,
+          mastered: data.lessonComplete.mastered ?? [],
+          needsReview: data.lessonComplete.needsReview ?? [],
+          nextLessonOrder: data.lessonComplete.nextLessonOrder ?? null,
+          fullyMastered: data.lessonComplete.fullyMastered === true,
+        })
       }
       if (data.mastery) {
         setMasteryState({
@@ -4496,12 +4519,82 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               )}
             </div>
 
+            {/* P6.6 — lesson complete. Replaces the answer/compose affordances
+                entirely: the learner never continues inside a completed lesson,
+                and the next lesson begins only when they choose to. All values
+                come from the server's persisted evidence. */}
+            {lessonCompletion && (
+              <div
+                role="status"
+                aria-label="Lesson complete"
+                style={{
+                  flexShrink: 0,
+                  borderTop: '1px solid var(--border-subtle)',
+                  background: 'var(--bg-surface)',
+                  padding: '14px 12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 8,
+                }}
+              >
+                <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-primary)' }}>
+                  {lessonCompletion.fullyMastered ? '\u2713 Lesson complete' : '\u2713 Lesson finished'}
+                  {lessonCompletion.lessonTitle ? ` \u2014 ${lessonCompletion.lessonTitle}` : ''}
+                </div>
+
+                {lessonCompletion.mastered.length > 0 && (
+                  <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                    <strong style={{ color: 'var(--text-primary)' }}>Mastered:</strong>{' '}
+                    {lessonCompletion.mastered.join(', ')}
+                  </div>
+                )}
+
+                {lessonCompletion.needsReview.length > 0 && (
+                  <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                    <strong style={{ color: 'var(--text-primary)' }}>To review later:</strong>{' '}
+                    {lessonCompletion.needsReview.join(', ')}
+                  </div>
+                )}
+
+                {typeof lessonCompletion.durationSeconds === 'number' && (
+                  <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                    <strong style={{ color: 'var(--text-primary)' }}>Time spent:</strong>{' '}
+                    {Math.max(1, Math.round(lessonCompletion.durationSeconds / 60))} min
+                  </div>
+                )}
+
+                {lessonCompletion.nextLessonOrder !== null && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // Unlock + advance through the EXISTING owner of lesson
+                      // progress (/api/curriculum/progress), then start the next
+                      // lesson. Teaching never begins automatically.
+                      // handleLessonComplete is the existing client owner of
+                      // lesson advancement: it posts to /api/curriculum/progress
+                      // (the server-side owner of completedLessons and
+                      // currentLesson) and syncs local progress. Reused rather
+                      // than adding a second advancement path.
+                      setLessonCompletion(null)
+                      if (currentLessonData) {
+                        void handleLessonComplete(currentLessonData.order, currentLessonData)
+                      }
+                    }}
+                    className="btn-primary"
+                    style={{ marginTop: 4, padding: '10px 14px', borderRadius: 10, fontWeight: 800, fontSize: 13, border: 'none', cursor: 'pointer' }}
+                  >
+                    Start next lesson
+                  </button>
+                )}
+              </div>
+            )}
+
             {/* P2 — tappable multiple-choice answers. Rendered above the
                 composer so the learner taps instead of typing. Sending the
                 option text through the SAME sendMessage path keeps one
                 answer channel: the server grades a tap exactly as it grades
                 a typed reply, so no parallel scoring path can drift. */}
-            {activeMcq && !isStreaming && (
+            {activeMcq && !isStreaming && !lessonCompletion && (
               <div
                 role="group"
                 aria-label="Answer choices"

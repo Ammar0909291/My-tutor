@@ -446,6 +446,11 @@ export async function POST(req: Request) {
     // reason as hintHoisted — attached to the JSON response once cleanText is
     // finalized, so the client can render tappable options.
     let mcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    // P6.6: the lesson-completion payload for this turn, when the final
+    // required concept closed. Hoisted like the others so it can be attached
+    // to the JSON response once cleanText is finalized.
+    let lessonCompletionHoisted:
+      import('@/lib/teaching/lessonCompletion').LessonCompletionPayload | null = null
     // P3: the session's asked-question ledger, read from contextSnapshot before
     // the prompt is built and re-persisted with this turn's questions folded in.
     let questionLedgerHoisted: import('@/lib/teaching/repetitionGuard').QuestionLedger =
@@ -1511,6 +1516,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const { summaryFromAttempt } = await import('@/lib/teaching/lessonAttempt')
               const { buildLessonSummaryBlock } = await import('@/lib/teaching/lessonSummary')
               systemPrompt += buildLessonSummaryBlock(summaryFromAttempt(attempt))
+              // P6.6: an already-completed lesson must not be taught into.
+              // The learner starts the next lesson deliberately; the tutor
+              // delivers the close and stops.
+              if (attempt.status === 'COMPLETED') {
+                const { buildLessonCompleteBlock } = await import('@/lib/teaching/lessonCompletion')
+                systemPrompt += buildLessonCompleteBlock()
+              }
             }
           }
         } catch { /* summary is advisory — never blocks the turn */ }
@@ -3743,6 +3755,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                       topicSlug: stateForOutcome.conceptId,
                     })
                   }
+                  // P6.6: has every required concept in this lesson closed?
+                  // The lesson -> concept mapping is the canonical KG one the
+                  // route already resolved (resolvedConceptId IS this lesson's
+                  // KG node slug); nothing is inferred or guessed. An empty
+                  // requirement can never complete a lesson.
+                  const { requiredConceptsForLesson, shouldFinalizeLesson, buildCompletionPayload } =
+                    await import('@/lib/teaching/lessonCompletion')
+                  const required = requiredConceptsForLesson(
+                    resolvedConceptId ?? stateForOutcome.conceptId,
+                  )
+                  if (shouldFinalizeLesson(required, folded)) {
+                    const { outcome: finalOutcome, summary } =
+                      await store.finalizeLessonAttempt(prisma, id, folded)
+                    lessonCompletionHoisted = buildCompletionPayload(
+                      finalOutcome, summary, lessonCtx?.currentLesson ?? null,
+                    )
+                  }
                 }
               }
             }
@@ -4153,6 +4182,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // P2: when present the client renders tappable options instead of
         // requiring the learner to type an answer.
         mcq: mcqHoisted ?? undefined,
+        // P6.6: present only on the turn the lesson completes. The client
+        // renders the completion screen and must not continue teaching.
+        lessonComplete: lessonCompletionHoisted ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
         completedLessons: lessonCtx?.completedLessons ?? undefined,
         mastery: masterySummary,
