@@ -1542,6 +1542,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           )
         }
 
+        // P7: teaching memory — what has ALREADY been used on this concept, so
+        // the tutor builds on it instead of restarting. Read from the SAME
+        // owner that already records it (TeachingHistory); no new store.
+        try {
+          const { readTeachingHistory: readTHForPrompt, buildTeachingMemoryBlock } =
+            await import('@/lib/teaching/teachingHistory')
+          const memConceptId = snapshotCurrentConceptId ?? resolvedConceptId ?? null
+          systemPrompt += buildTeachingMemoryBlock(
+            readTHForPrompt(snapshot?.teachingHistory, memConceptId),
+          )
+        } catch { /* memory is advisory — never blocks the turn */ }
+
         const { buildAntiRepetitionBlock, readQuestionLedger: readLedgerForPrompt } =
           await import('@/lib/teaching/repetitionGuard')
         const { isLowSignalAcknowledgement: isAckForPrompt } =
@@ -3893,7 +3905,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 conversationStateHoisted?.correctAtPractice ?? 0,
               ),
             })
-            conversationStateUpdate = { ...conversationStateUpdate, teachingHistory: updatedHistory }
+            // P7: fold this turn's memory evidence into the SAME owner --
+            // which assessment question was asked (so an identical MCQ is
+            // never repeated) and the confidence reading (so the adaptation
+            // engine has a trend, not just a current value).
+            const { recordMcqAsked, recordConfidence } = await import('@/lib/teaching/teachingHistory')
+            let memoryHistory = updatedHistory
+            if (mcqHoisted?.question) memoryHistory = recordMcqAsked(memoryHistory, mcqHoisted.question)
+            const confReading = teachingSignal?.confidence
+            if (confReading === 'high' || confReading === 'medium' || confReading === 'low') {
+              memoryHistory = recordConfidence(memoryHistory, confReading)
+            }
+            conversationStateUpdate = { ...conversationStateUpdate, teachingHistory: memoryHistory }
             // ISS-13: teachingHistory is a fold over the snapshot read at the
             // start of this turn (readTeachingHistory, ~1700 lines up), so a
             // concurrent turn's update would be discarded by re-applying our
