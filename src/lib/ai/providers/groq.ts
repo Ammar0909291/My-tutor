@@ -17,6 +17,7 @@ export function createGroqProvider(apiKey: string, model: string): AIProvider {
 
   return {
     name: 'groq',
+    model,
 
     async complete(req: AICompletionRequest): Promise<AICompletionResult> {
       let response

@@ -18,6 +18,7 @@ export function createOpenRouterProvider(apiKey: string, model: string): AIProvi
 
   return {
     name: 'openrouter',
+    model,
 
     async complete(req: AICompletionRequest): Promise<AICompletionResult> {
       let response

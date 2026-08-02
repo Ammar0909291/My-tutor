@@ -29,12 +29,77 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
   const { providers } = opts
   if (providers.length === 0) throw new Error('createFailoverRouter requires at least one provider')
 
+  /**
+   * One structured line per provider ATTEMPT — success or failure — emitted
+   * from the single place that already wraps every attempt and already
+   * measures elapsed time.
+   *
+   * Why this exists: a production question of the form "show me, per Gemini
+   * attempt, the HTTP status / model / latency / tokens / finish reason" was
+   * unanswerable from the logs. Every one of those values except finishReason
+   * was either measured and discarded (latency, tokens, status) or never
+   * captured at all (model). recordSuccess() fed them to an in-process
+   * counter that resets on cold start and is unreachable from outside the
+   * lambda, so nothing durable ever saw them.
+   *
+   * Greppable prefix, key=value pairs, one line: `[ai/attempt]`.
+   */
+  function logAttempt(fields: Record<string, string | number | null | undefined>): void {
+    try {
+      const body = Object.entries(fields)
+        .filter(([, v]) => v !== undefined && v !== null && v !== '')
+        .map(([k, v]) => `${k}=${v}`)
+        .join(' ')
+      console.log(`[ai/attempt] ${body}`)
+    } catch { /* telemetry never breaks a turn */ }
+  }
+
+  /** HTTP status if the provider or SDK surfaced one, else null. */
+  function statusOf(err: any): number | null {
+    if (err instanceof AIProviderError && typeof err.statusCode === 'number') return err.statusCode
+    const raw = err?.status ?? err?.statusCode ?? err?.httpStatusCode
+    return typeof raw === 'number' && raw > 0 ? raw : null
+  }
+
   async function tryProvider(provider: AIProvider, req: AICompletionRequest): Promise<AICompletionResult> {
     recordRequest(provider.name)
     const start = Date.now()
-    const result = await provider.complete(req)
-    recordSuccess(provider.name, Date.now() - start, result.usage ?? null)
-    return result
+    try {
+      const result = await provider.complete(req)
+      const elapsedMs = Date.now() - start
+      recordSuccess(provider.name, elapsedMs, result.usage ?? null)
+      logAttempt({
+        provider: provider.name,
+        model: provider.model,
+        outcome: 'ok',
+        elapsed_ms: elapsedMs,
+        http_status: 200,
+        finish_reason: result.finishReason,
+        prompt_tokens: result.usage?.promptTokens ?? 'not_reported',
+        completion_tokens: result.usage?.completionTokens ?? 'not_reported',
+        chars: result.text.length,
+      })
+      return result
+    } catch (err: any) {
+      // Latency on the FAILURE path was never measured before. Without it a
+      // timeout cannot be distinguished from an instant rejection, which is
+      // exactly the distinction "did the request reach Google?" turns on.
+      const elapsedMs = Date.now() - start
+      logAttempt({
+        provider: provider.name,
+        model: provider.model,
+        outcome: 'fail',
+        elapsed_ms: elapsedMs,
+        http_status: statusOf(err) ?? 'none',
+        error_name: err?.name ?? 'Error',
+        failure_kind: failureKind(err),
+        // An attempt that fails in single-digit ms never left the lambda;
+        // one that burns the full provider budget did reach the network.
+        reached_network: elapsedMs > 250 ? 'likely' : 'unlikely',
+        message: JSON.stringify(String(err?.message ?? '').slice(0, 300)),
+      })
+      throw err
+    }
   }
 
   async function complete(req: AICompletionRequest): Promise<AICompletionResult> {

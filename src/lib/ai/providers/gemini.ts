@@ -12,6 +12,7 @@ export function createGeminiProvider(apiKey: string, model: string): AIProvider 
 
   return {
     name: 'gemini',
+    model,
 
     async complete(req: AICompletionRequest): Promise<AICompletionResult> {
       const gen = client.getGenerativeModel({

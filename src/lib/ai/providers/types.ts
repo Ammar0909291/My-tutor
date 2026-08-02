@@ -21,6 +21,10 @@ export interface AICompletionResult {
 
 export interface AIProvider {
   readonly name: string
+  /** The concrete model this provider instance is configured with. Reported in
+   *  the per-attempt telemetry line so a production log answers "which model
+   *  actually ran" without cross-referencing environment variables. */
+  readonly model?: string
   complete(req: AICompletionRequest): Promise<AICompletionResult>
   healthCheck(): Promise<boolean>
 }
