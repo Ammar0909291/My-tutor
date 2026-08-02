@@ -12,8 +12,10 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY ?? ''
 // Model default: 'gemini-3.5-flash-lite'. The Gemini 2.5 family is deprecated
 // and 404s on this project's API key — every turn silently failed over to Groq,
 // which is why Gemini billing never moved. GEMINI_MODEL may still override, but
-// it must NOT be set to a gemini-2.5-* value; setModelOverride below rejects the
-// deprecated family so a stale env var cannot resurrect the same outage.
+// it must NOT be set to a gemini-2.5-* value; resolveGeminiModel below rejects
+// the deprecated family so a stale env var cannot resurrect the same outage.
+// Verified 2026-08-01 against this project's key: gemini-2.5-flash-lite -> 404
+// "no longer available to new users"; gemini-3.5-flash-lite -> 200 OK.
 const GEMINI_MODEL = resolveGeminiModel(process.env.GEMINI_MODEL)
 
 /** Ignores a deprecated gemini-2.5-* override so a stale Vercel env var cannot
