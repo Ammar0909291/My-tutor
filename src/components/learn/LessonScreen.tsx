@@ -22,6 +22,7 @@ import { recordLastLesson } from '@/lib/hooks/useLastLesson'
 import { PracticePanel } from '@/components/learn/PracticePanel'
 import { InsightsPanel } from '@/components/learn/InsightsPanel'
 import { LessonNavigationPanel } from '@/components/learn/LessonNavigationPanel'
+import { LessonProgressBar } from '@/components/learn/LessonProgressBar'
 import {
   computeLessonLockState, findPreviousLesson, findNextLesson,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
@@ -4093,6 +4094,14 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             )}
 
             {/* Promotion / assessment result banner — hidden per UX review */}
+
+            {/* P1 — lesson progress. Driven entirely by the server-authoritative
+                teaching phase already returned each turn, so it advances
+                automatically and renders nothing before the lesson starts. */}
+            <LessonProgressBar
+              phase={masteryState?.phase}
+              masteryVerified={masteryState?.verified === true}
+            />
 
             {/* Messages */}
             <div
