@@ -5,7 +5,10 @@ import {
   AIRateLimitError, AIServerError, AITimeoutError,
 } from './types'
 
-const TIMEOUT_MS = 30_000
+// SEV-1 (2026-08-02) timeout budget — fallback tier. Same reasoning as
+// src/lib/ai/providers/groq.ts: capped at 8_000 so the full chain fits inside
+// `api/learn/chat`'s 60_000 ms maxDuration.
+const TIMEOUT_MS = 8_000
 
 export function createOpenRouterProvider(apiKey: string, model: string): AIProvider {
   const client = new OpenAI({

@@ -104,8 +104,24 @@ function getRouter() {
   if (providers.length === 0) {
     console.warn('[ai/router] no AI provider has a configured API key — falling back to the full chain so failures are at least visible per-provider')
   }
+  // SEV-1 (2026-08-02): the same-provider retry does not fit the function
+  // budget on the tutor's own route, and the arithmetic is the same one this
+  // file already documents for gemini_only mode above — it was simply never
+  // applied to the path real learners use.
+  //
+  //   primary attempt + RETRY_BACKOFF_MS + primary retry
+  //   = 30_000 + 500 + 30_000 = 60_500 ms
+  //
+  // against vercel.json's `api/learn/chat maxDuration: 60` = 60_000 ms. The
+  // lambda was killed 500 ms INSIDE the second Gemini attempt, so failover to
+  // Groq was never reached and route.ts's degraded path never rendered: the
+  // learner got a blank 504 rather than a fallback answer. Suppressing the
+  // retry removes 30_500 ms from the worst case and costs nothing a learner
+  // can observe — a retryable failure now fails over to the next provider
+  // instead of re-asking the one that just failed.
   _router = createFailoverRouter({
     providers: providers.length > 0 ? providers : candidates.map((c) => c.provider),
+    disableSameProviderRetry: true,
   })
   return _router
 }

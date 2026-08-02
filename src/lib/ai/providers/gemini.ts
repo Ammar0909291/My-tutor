@@ -5,7 +5,14 @@ import {
   AIRateLimitError, AIServerError, AITimeoutError,
 } from './types'
 
-const TIMEOUT_MS = 30_000
+// SEV-1 (2026-08-02) timeout budget. The tutor's route (`api/learn/chat`) has
+// a 60_000 ms maxDuration in vercel.json, and the WHOLE failover chain plus
+// the degraded render must fit inside it. Gemini is the primary tier, so it
+// gets the largest share; the fallbacks are capped tighter (8_000) because
+// they only have to answer after Gemini has already failed.
+//   20_000 (gemini) + 8_000 (openrouter) + 8_000 (groq) = 36_000 < 60_000
+// See src/lib/ai/router.ts for why the same-provider retry is disabled.
+const TIMEOUT_MS = 20_000
 
 export function createGeminiProvider(apiKey: string, model: string): AIProvider {
   const client = new GoogleGenerativeAI(apiKey)

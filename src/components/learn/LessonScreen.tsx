@@ -1651,7 +1651,18 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               // must never be assumed read. undefined = nothing collapsed.
               lastExplanationRead: lastExplanationReadRef.current,
             }),
-          }, 30000)
+            // SEV-1 (2026-08-02). This was 30_000, BELOW the server's own
+            // worst-case turn. When Gemini timed out, the server was still
+            // working through its failover chain and its degraded render when
+            // this abort fired, so the learner never received the fallback the
+            // server was in the middle of producing — and the abort re-entered
+            // the loop above, spawning a second and third full server pipeline
+            // for one learner turn. It must sit ABOVE the server's bounded
+            // worst case (36_000 ms of provider budget + pre/post-AI work) and
+            // BELOW the route's own 60_000 ms maxDuration, so the server is
+            // always the side that decides the outcome. See
+            // src/lib/ai/providers/gemini.ts for the chain arithmetic.
+          }, 50000)
           data = await res.json().catch(() => ({}))
           break
         } catch (fetchErr) {

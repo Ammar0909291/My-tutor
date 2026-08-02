@@ -5,7 +5,12 @@ import {
   AIRateLimitError, AIServerError, AITimeoutError,
 } from './types'
 
-const TIMEOUT_MS = 30_000
+// SEV-1 (2026-08-02) timeout budget — fallback tier. Reached only after the
+// primary has already spent its own budget, so it is capped tighter than
+// Gemini's 20_000 to keep the whole chain inside `api/learn/chat`'s 60_000 ms
+// maxDuration. Groq answers in well under a second in normal operation, so
+// this is not a working constraint. See src/lib/ai/providers/gemini.ts.
+const TIMEOUT_MS = 8_000
 
 /**
  * Third-tier automatic fallback (Gemini → OpenRouter → Groq). Reuses the
