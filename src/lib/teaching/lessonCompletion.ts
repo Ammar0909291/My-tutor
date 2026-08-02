@@ -120,6 +120,47 @@ export function buildCompletionPayload(
 }
 
 /**
+ * The lesson close, rendered deterministically from persisted evidence.
+ *
+ * WHY THIS IS A RUNTIME VALUE AND NOT A PROMPT INSTRUCTION. The completion
+ * GATE (`lessonCompleted` -> D-0a -> SERVE_LESSON_COMPLETE) is read at the
+ * START of a turn from the previously-persisted attempt, but the completion
+ * EVENT happens at the END of a turn, once this turn's evidence has been
+ * folded. On the turn that actually finalises a lesson the gate was therefore
+ * still false, the turn ran as an ordinary teaching turn, and the model had
+ * already produced a new question by the time completion was decided — so the
+ * response carried "lesson finished" AND another teaching question together.
+ * buildLessonCompleteBlock() below could not prevent that: it is prompt text,
+ * it is only injected on LATER turns, and a prompt instruction is advisory.
+ *
+ * The caller replaces the outgoing text with this on the finalising turn, so
+ * the close is enforced by the runtime rather than requested from the model.
+ *
+ * Single owner: this is also what the already-complete serve path renders, so
+ * the two cannot drift into two different closes.
+ */
+export function buildLessonCloseText(
+  lessonTitle: string | null | undefined,
+  summary: Pick<LessonSummary, 'mastered' | 'needsReview'>,
+  opts?: { alreadyFinished?: boolean },
+): string {
+  const title = lessonTitle?.trim() || 'this lesson'
+  const parts: string[] = [
+    opts?.alreadyFinished
+      ? `You've already finished ${title}.`
+      : `That's ${title} finished — nice work.`,
+  ]
+  if (summary.mastered.length > 0) {
+    parts.push(`You mastered: ${summary.mastered.map((o) => o.title).join(', ')}.`)
+  }
+  if (summary.needsReview.length > 0) {
+    parts.push(`Worth another look later: ${summary.needsReview.map((o) => o.title).join(', ')}.`)
+  }
+  parts.push('Press "Start next lesson" whenever you\'re ready to carry on.')
+  return parts.join(' ')
+}
+
+/**
  * The prompt contract for a turn that completes the lesson. The tutor delivers
  * the close and STOPS — it must not open new content, because the lesson is
  * over. This is what prevents the "Lesson complete... let's continue" failure.

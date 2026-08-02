@@ -2589,17 +2589,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             : null
           if (attempt) {
             const summary = summaryFromAttempt(attempt)
-            const parts: string[] = [
-              `You've already finished ${attempt.lessonTitle ?? 'this lesson'}.`,
-            ]
-            if (summary.mastered.length > 0) {
-              parts.push(`You mastered: ${summary.mastered.map((o) => o.title).join(', ')}.`)
-            }
-            if (summary.needsReview.length > 0) {
-              parts.push(`Worth another look later: ${summary.needsReview.map((o) => o.title).join(', ')}.`)
-            }
-            parts.push('Press "Start next lesson" whenever you\'re ready to carry on.')
-            text = parts.join(' ')
+            // Same builder the finalising turn uses, so the two closes cannot
+            // drift into two different messages.
+            const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
+            text = buildLessonCloseText(attempt.lessonTitle, summary, { alreadyFinished: true })
             provider = 'memory'
             memoryFallbackReasonCode = 'lesson_complete'
             try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
@@ -3943,6 +3936,53 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     lessonCompletionHoisted = buildCompletionPayload(
                       finalOutcome, summary, lessonCtx?.currentLesson ?? null,
                     )
+                    // ── THE COMPLETING TURN MUST NOT ALSO TEACH ────────────
+                    // The completion GATE (lessonCompletedHoisted -> D-0a ->
+                    // SERVE_LESSON_COMPLETE) is read at the START of a turn
+                    // from the previously-persisted attempt. The completion
+                    // EVENT is decided HERE, at the end of the turn, from this
+                    // turn's folded evidence. On the finalising turn the gate
+                    // was therefore still false: the turn ran as an ordinary
+                    // teaching turn and the model had already produced a new
+                    // question by the time completion was known. The route
+                    // then emitted BOTH — which is exactly the production
+                    // report, "✓ Lesson finished" shown next to another
+                    // teaching question, and the same reflection question
+                    // asked again on the following turn.
+                    //
+                    // buildLessonCompleteBlock() could never fix this: it is
+                    // prompt text (advisory), and it is only injected on LATER
+                    // turns, after the gate has flipped.
+                    //
+                    // The runtime already holds the correct answer, so the
+                    // outgoing turn is replaced with the deterministic close
+                    // rendered from the SAME finalised attempt + summary the
+                    // completion payload carries. No new state, no new copy
+                    // source — buildLessonCloseText is the one builder the
+                    // already-complete serve path uses too.
+                    const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
+                    cleanText = buildLessonCloseText(finalOutcome.lessonTitle, summary)
+                    // Nothing that solicits a further answer may ride along:
+                    // a tappable question or a hint would re-open the lesson
+                    // the learner has just been told is finished.
+                    mcqHoisted = null
+                    hintHoisted = null
+                    // NO PENDING QUESTION SURVIVES. The reflection question
+                    // this turn had drafted is no longer being delivered, but
+                    // the ladder must still treat this CHECK entry as spent —
+                    // otherwise the next turn re-enters CHECK believing no
+                    // reflection question has been asked yet and asks the same
+                    // one again, which is the reported "Brain asks EXACTLY THE
+                    // SAME question" behaviour. reflectionAskedThisEntry=true
+                    // is questionLegality's existing "max 1 reflection
+                    // question per entry" latch; this sets it rather than
+                    // adding a second pending-question representation.
+                    if (conversationStateAfterTurnHoisted) {
+                      conversationStateAfterTurnHoisted = {
+                        ...conversationStateAfterTurnHoisted,
+                        reflectionAskedThisEntry: true,
+                      }
+                    }
                   }
                 }
               }
