@@ -431,6 +431,10 @@ export async function POST(req: Request) {
     // Sprint W gap A: the structured [HINT] tag's extracted text, hoisted so
     // it can be attached to the JSON response once cleanText is finalized.
     let hintHoisted: string | null = null
+    // P2: this turn's parsed multiple-choice question, hoisted for the same
+    // reason as hintHoisted — attached to the JSON response once cleanText is
+    // finalized, so the client can render tappable options.
+    let mcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
@@ -1456,6 +1460,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // Step 2: the OBSERVE signal (decision-engine/08 step 1; Blueprint Phase 3)
         systemPrompt += buildSignalInstruction()
+
+        // P2: assessment questions are multiple choice by default. Sits beside
+        // the OBSERVE signal because it is the same mechanism — one
+        // machine-readable tag per turn, parsed and stripped server-side.
+        const { buildMcqInstruction } = await import('@/lib/teaching/mcq')
+        systemPrompt += buildMcqInstruction()
 
         // P1-1 (Phase 1 Stage 1): the TEACHING INTENT declaration. Sits beside
         // the OBSERVE signal because it is the same mechanism pointed the other
@@ -2504,6 +2514,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const signalParse = parseSignalTag(text)
       let teachingSignal = signalParse.signal
       text = signalParse.cleanText
+      // P2: parse + strip the MCQ tag in the same place and for the same
+      // reason — before asset capture and every other parser, so the markup
+      // can never leak into a stored message, a captured asset, or the client.
+      // A malformed tag yields null and is still stripped: the turn degrades
+      // to an ordinary typed reply rather than rendering a broken question.
+      const { parseMcqTag } = await import('@/lib/teaching/mcq')
+      const mcqParse = parseMcqTag(text)
+      mcqHoisted = mcqParse.mcq
+      text = mcqParse.cleanText
       // P1-1: strip the TEACHING INTENT tag in the same place and for the same
       // reason — before asset capture and every other parser, so it can never
       // leak into a stored message, a captured asset, or the client. The vector
@@ -4006,6 +4025,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         dynamicVisualizationCode: dynamicVisualizationCode ?? undefined,
         inlinePractice: undefined,
         hint: hintHoisted ?? undefined,
+        // P2: when present the client renders tappable options instead of
+        // requiring the learner to type an answer.
+        mcq: mcqHoisted ?? undefined,
         lessonOrder: lessonCtx?.currentLesson ?? undefined,
         completedLessons: lessonCtx?.completedLessons ?? undefined,
         mastery: masterySummary,

@@ -1019,6 +1019,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // /api/learn/chat. verified=false gates the Complete/Next actions behind
   // an explicit Continue Learning / Skip Anyway choice — never a silent skip.
   const [masteryState, setMasteryState] = useState<{ verified: boolean; gatePending: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } | null>(null)
+  // P2: the current tappable multiple-choice question, if this turn asked one.
+  // `askedAt` is kept so the learner's deliberation time is available as the
+  // one genuine confidence instrument the text channel provides.
+  const [activeMcq, setActiveMcq] = useState<{
+    question: string
+    options: string[]
+    correctIndex: number
+    askedAt: number
+  } | null>(null)
   const [skipConfirm, setSkipConfirm] = useState(false)
   // Bug 8: was the last long (collapsed) tutor explanation ever expanded?
   // undefined = no collapsed explanation pending; mirrored into a ref so
@@ -1523,7 +1532,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -1594,6 +1603,27 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       }
       // Mastery gate: the server's per-turn evidence summary is the single
       // source of truth for whether Complete/Next is evidence-backed.
+      // P2: a tappable multiple-choice question for this turn. Validated
+      // client-side (defense in depth, same rule as visualSpec below) — a
+      // malformed payload falls back to the ordinary typed reply rather than
+      // rendering a broken question.
+      const rawMcq = data.mcq
+      if (
+        rawMcq && typeof rawMcq.question === 'string' && rawMcq.question.trim() !== '' &&
+        Array.isArray(rawMcq.options) && rawMcq.options.length >= 2 && rawMcq.options.length <= 4 &&
+        rawMcq.options.every((o) => typeof o === 'string' && o.trim() !== '') &&
+        typeof rawMcq.correctIndex === 'number' &&
+        rawMcq.correctIndex >= 0 && rawMcq.correctIndex < rawMcq.options.length
+      ) {
+        setActiveMcq({
+          question: rawMcq.question,
+          options: rawMcq.options as string[],
+          correctIndex: rawMcq.correctIndex,
+          askedAt: Date.now(),
+        })
+      } else {
+        setActiveMcq(null)
+      }
       if (data.mastery) {
         setMasteryState({
           verified: data.mastery.verified === true,
@@ -4465,6 +4495,63 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   }}>↓</button>
               )}
             </div>
+
+            {/* P2 — tappable multiple-choice answers. Rendered above the
+                composer so the learner taps instead of typing. Sending the
+                option text through the SAME sendMessage path keeps one
+                answer channel: the server grades a tap exactly as it grades
+                a typed reply, so no parallel scoring path can drift. */}
+            {activeMcq && !isStreaming && (
+              <div
+                role="group"
+                aria-label="Answer choices"
+                style={{
+                  flexShrink: 0,
+                  borderTop: '1px solid var(--border-subtle)',
+                  background: 'var(--bg-surface)',
+                  padding: '10px 12px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6,
+                }}
+              >
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
+                  {activeMcq.question}
+                </div>
+                {activeMcq.options.map((option, i) => (
+                  <button
+                    key={`${i}-${option}`}
+                    type="button"
+                    disabled={isStreaming}
+                    onClick={() => {
+                      if (!sessionId) return
+                      // Clear first: the question is answered, and this also
+                      // prevents a double-tap from sending two answers.
+                      setActiveMcq(null)
+                      void sendMessage(sessionId, option)
+                    }}
+                    style={{
+                      textAlign: 'left',
+                      padding: '9px 12px',
+                      borderRadius: 10,
+                      border: '1px solid var(--border-subtle)',
+                      background: 'var(--bg-card)',
+                      color: 'var(--text-primary)',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      cursor: isStreaming ? 'not-allowed' : 'pointer',
+                      opacity: isStreaming ? 0.6 : 1,
+                      transition: 'background 160ms ease, border-color 160ms ease',
+                    }}
+                  >
+                    <span style={{ fontWeight: 800, marginRight: 8, color: 'var(--coral)' }}>
+                      {String.fromCharCode(65 + i)}
+                    </span>
+                    {option}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* ── Input area ──────────────────────────────────────────── */}
             <div style={{ flexShrink: 0, borderTop: '1px solid var(--border-subtle)', background: 'var(--bg-base)', borderRadius: '0 0 16px 16px', padding: '10px 12px' }}>
