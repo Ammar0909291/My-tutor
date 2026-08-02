@@ -37,6 +37,12 @@ export interface BrainMetricsSnapshot {
   /** P0 compliance validation — see execution.ts checkBrainCompliance(). */
   complianceChecks: number
   complianceViolations: number
+  /** P9 — turns served WITHOUT any model call because the dispatch plan said
+   *  groqRequired=false. Today that is the Explanation Memory path; any future
+   *  deterministic executor is counted here too, so the figure stays correct
+   *  as the ladder grows. Distinct from explanationMemoryServes, which counts
+   *  one specific executor. */
+  deterministicServes: number
 }
 
 const metrics: BrainMetricsSnapshot = {
@@ -49,6 +55,7 @@ const metrics: BrainMetricsSnapshot = {
   decisions: {},
   complianceChecks: 0,
   complianceViolations: 0,
+  deterministicServes: 0,
 }
 
 /** One call per turn, at dispatch time. A null plan counts as a fallback. */
@@ -60,6 +67,11 @@ export function recordDispatch(plan: DispatchPlan | null, brainRuntimeActive: bo
     const key = plan?.decision ?? 'NO_PLAN'
     metrics.decisions[key] = (metrics.decisions[key] ?? 0) + 1
     if (!plan || plan.note.startsWith('FALLBACK')) metrics.fallbacks += 1
+    // P9: the dispatch plan is the ONE authority on whether a model call is
+    // required, so avoidance is counted from it rather than re-derived
+    // anywhere else. Counting at dispatch (not serve) also captures turns
+    // that never reach a serve at all.
+    if (plan && !plan.groqRequired) metrics.deterministicServes += 1
   } catch { /* observability never breaks a turn */ }
 }
 
@@ -72,8 +84,35 @@ export function recordServe(kind: 'memory' | 'llm'): void {
   } catch { /* observability never breaks a turn */ }
 }
 
-export function snapshotBrainMetrics(): BrainMetricsSnapshot {
-  return { ...metrics, decisions: { ...metrics.decisions } }
+/**
+ * P9 cost model. A representative teaching turn on Gemini 3.5 Flash-Lite:
+ * these are ESTIMATES from a fixed per-call figure, not measured billing, and
+ * are labelled as such wherever they surface so nobody mistakes them for an
+ * invoice. Kept beside the metrics they describe so the two cannot drift.
+ */
+export const ESTIMATED_TOKENS_PER_CALL = 2600
+export const ESTIMATED_USD_PER_CALL = 0.0009
+
+export interface BrainCostSnapshot extends BrainMetricsSnapshot {
+  /** Turns that never reached a model. */
+  avoidedGeminiCalls: number
+  /** Share of turns served without a model call, 0-100. */
+  avoidancePercent: number
+  estimatedTokensSaved: number
+  estimatedCostSavedUsd: number
+}
+
+export function snapshotBrainMetrics(): BrainCostSnapshot {
+  const avoided = metrics.deterministicServes
+  const total = metrics.totalTurns
+  return {
+    ...metrics,
+    decisions: { ...metrics.decisions },
+    avoidedGeminiCalls: avoided,
+    avoidancePercent: total === 0 ? 0 : Math.round((avoided / total) * 100),
+    estimatedTokensSaved: avoided * ESTIMATED_TOKENS_PER_CALL,
+    estimatedCostSavedUsd: Number((avoided * ESTIMATED_USD_PER_CALL).toFixed(4)),
+  }
 }
 
 /**
@@ -104,6 +143,7 @@ export function resetBrainMetrics(): void {
   metrics.decisions = {}
   metrics.complianceChecks = 0
   metrics.complianceViolations = 0
+  metrics.deterministicServes = 0
   sessionMetrics.clear()
 }
 
