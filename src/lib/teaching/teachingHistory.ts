@@ -51,6 +51,19 @@ export interface TeachingHistory {
    *  Keyed by misconception id. `misconceptionsSeen` above stays the flat
    *  "what has appeared" list it already was; this adds the state machine. */
   misconceptionStatus: Record<string, MisconceptionStage>
+  /**
+   * AssetIdentity ids of Explanation Memory assets already SERVED to the
+   * learner for this concept — the same "do not replay it" guard
+   * `visualsShown` and `mcqAsked` already provide for the other two authored
+   * channels, which Explanation Memory was missing.
+   *
+   * Production 2026-08-02T13:53–13:54Z: with memory serving finally reachable,
+   * D1-MEMORY-HIT fired on three consecutive turns and served the SAME
+   * 787-character sig-figs asset verbatim each time, in reply to "Got it".
+   * Nothing recorded that the learner had already read it, so re-serving
+   * looked correct to every layer involved.
+   */
+  explanationsServed: string[]
 }
 
 export type ConfidenceReading = 'high' | 'medium' | 'low'
@@ -74,6 +87,7 @@ export function initialTeachingHistory(conceptId: string | null): TeachingHistor
     visualsShown: [],
     mcqAsked: [],
     misconceptionStatus: {},
+    explanationsServed: [],
   }
 }
 
@@ -185,6 +199,11 @@ export function hasAskedMcq(h: TeachingHistory, question: string): boolean {
   return h.mcqAsked.includes(memoryFingerprint(question))
 }
 
+/** Has this authored explanation asset already been served for this concept? */
+export function hasServedExplanation(h: TeachingHistory, assetId: string): boolean {
+  return h.explanationsServed.includes(assetId)
+}
+
 export function hasUsedStrategy(h: TeachingHistory, strategy: number): boolean {
   return h.strategiesUsed.includes(strategy)
 }
@@ -193,6 +212,12 @@ export function hasUsedStrategy(h: TeachingHistory, strategy: number): boolean {
 export function recordVisualShown(h: TeachingHistory, id: string): TeachingHistory {
   if (!id || h.visualsShown.includes(id)) return h
   return { ...h, visualsShown: [...h.visualsShown, id] }
+}
+
+/** Record an authored explanation asset as served. Idempotent. */
+export function recordExplanationServed(h: TeachingHistory, assetId: string): TeachingHistory {
+  if (!assetId || h.explanationsServed.includes(assetId)) return h
+  return { ...h, explanationsServed: [...h.explanationsServed, assetId] }
 }
 
 /** Record an assessment question as asked. Idempotent on fingerprint. */

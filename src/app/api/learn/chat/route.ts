@@ -1578,9 +1578,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { readTeachingHistory: readTHForPrompt, buildTeachingMemoryBlock } =
             await import('@/lib/teaching/teachingHistory')
           const memConceptId = snapshotCurrentConceptId ?? resolvedConceptId ?? null
-          systemPrompt += buildTeachingMemoryBlock(
-            readTHForPrompt(snapshot?.teachingHistory, memConceptId),
-          )
+          // Hoisted rather than discarded: this is the only UNCONDITIONAL read
+          // of the teaching history on the turn (the other assignment, in the
+          // 'explain_differently' branch below, fires on a small minority of
+          // turns). The Explanation Memory already-read guard needs it on
+          // every turn, and re-reading the same snapshot key twice would make
+          // two readers of one owner. That later branch still reassigns with
+          // its own conceptId exactly as before — unchanged.
+          teachingHistoryHoisted = readTHForPrompt(snapshot?.teachingHistory, memConceptId)
+          systemPrompt += buildTeachingMemoryBlock(teachingHistoryHoisted)
         } catch { /* memory is advisory — never blocks the turn */ }
 
         const { buildAntiRepetitionBlock, readQuestionLedger: readLedgerForPrompt } =
@@ -2309,6 +2315,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             userMessage: message,
           })
           assembled = await assembleLesson(memoryState)
+          // ALREADY-READ GUARD. Explanation Memory was the only authored
+          // channel without one: TeachingHistory already stops a visual being
+          // replayed (visualsShown) and an MCQ being re-asked (mcqAsked), but
+          // nothing recorded that the learner had already been shown a stored
+          // explanation. Production 2026-08-02T13:53-13:54Z: the same
+          // 787-character sig-figs asset was served verbatim on three
+          // consecutive turns, each in reply to "Got it", because re-serving
+          // looked correct to every layer involved.
+          // Serving it a second time teaches nothing, so the turn falls
+          // through to the LLM to move the lesson on. Same owner, same
+          // concept scope, same reset-on-concept-change lifecycle as its two
+          // sibling guards — no new store and no new state.
+          if (assembled && teachingHistoryHoisted) {
+            const { hasServedExplanation } = await import('@/lib/teaching/teachingHistory')
+            const explanationId = assembled.explanationAssetId
+            if (explanationId && hasServedExplanation(teachingHistoryHoisted, explanationId)) {
+              assembled = null
+              memoryFallbackReason = 'Already served this concept'
+            }
+          }
           if (assembled && retrievalCacheHoisted) {
             const { CACHE_KEY_EXPLANATION } = await import('@/lib/teaching/retrievalCache')
             retrievalCacheHoisted.set(CACHE_KEY_EXPLANATION, assembled.text)
@@ -4015,9 +4041,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // which assessment question was asked (so an identical MCQ is
             // never repeated) and the confidence reading (so the adaptation
             // engine has a trend, not just a current value).
-            const { recordMcqAsked, recordConfidence } = await import('@/lib/teaching/teachingHistory')
+            const { recordMcqAsked, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
             let memoryHistory = updatedHistory
             if (mcqHoisted?.question) memoryHistory = recordMcqAsked(memoryHistory, mcqHoisted.question)
+            // The write half of the already-read guard above. Recorded only
+            // when the asset was actually SERVED to the learner this turn —
+            // an assembled-but-not-served asset (the Brain routed elsewhere)
+            // was never read, so it must stay servable.
+            if (provider === 'memory' && assembled?.explanationAssetId) {
+              memoryHistory = recordExplanationServed(memoryHistory, assembled.explanationAssetId)
+            }
             const confReading = teachingSignal?.confidence
             if (confReading === 'high' || confReading === 'medium' || confReading === 'low') {
               memoryHistory = recordConfidence(memoryHistory, confReading)

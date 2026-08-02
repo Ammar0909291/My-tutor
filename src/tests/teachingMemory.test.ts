@@ -3,6 +3,7 @@ import {
   initialTeachingHistory, readTeachingHistory, selectNextStrategy,
   memoryFingerprint, hasUsedAnalogy, hasShownVisual, hasAskedMcq, hasUsedStrategy,
   recordVisualShown, recordMcqAsked, recordConfidence, advanceMisconception,
+  hasServedExplanation, recordExplanationServed,
   isMisconceptionResolved, confidenceTrend, buildTeachingMemoryBlock,
   STRATEGY_ANALOGY, STRATEGY_VISUAL, MISCONCEPTION_STAGES,
   type TeachingHistory,
@@ -246,5 +247,65 @@ describe('no duplicated owners — memory is derived from existing state', () =>
     hasUsedAnalogy(h, 'pizza'); hasShownVisual(h, 'x'); hasAskedMcq(h, 'q')
     confidenceTrend(h.confidenceTrail); buildTeachingMemoryBlock(h)
     expect(JSON.stringify(h)).toBe(snapshot)
+  })
+})
+
+describe('P15 — an authored explanation is never served twice for one concept', () => {
+  /**
+   * Production 2026-08-02T13:53:18 / 13:54:11 / 13:54:24 (session
+   * cmsbuubu0000bl4040lrbj69u): provider='memory' served the SAME 787-char
+   * sig-figs asset verbatim on three consecutive turns, each replying to
+   * "Got it". Explanation Memory was the only authored channel with no
+   * already-used guard — visualsShown and mcqAsked already had one.
+   */
+  it('a fresh history has served nothing', () => {
+    const h = initialTeachingHistory('chem.found.significant-figures')
+    expect(h.explanationsServed).toEqual([])
+    expect(hasServedExplanation(h, 'asset-1')).toBe(false)
+  })
+
+  it('records a served asset and reports it', () => {
+    const h = recordExplanationServed(
+      initialTeachingHistory('chem.found.significant-figures'), 'asset-1')
+    expect(hasServedExplanation(h, 'asset-1')).toBe(true)
+  })
+
+  it('does not block a DIFFERENT asset for the same concept', () => {
+    const h = recordExplanationServed(
+      initialTeachingHistory('chem.found.significant-figures'), 'asset-1')
+    expect(hasServedExplanation(h, 'asset-2')).toBe(false)
+  })
+
+  it('is idempotent — re-recording does not duplicate', () => {
+    let h = initialTeachingHistory('c')
+    h = recordExplanationServed(h, 'asset-1')
+    h = recordExplanationServed(h, 'asset-1')
+    expect(h.explanationsServed).toEqual(['asset-1'])
+  })
+
+  it('ignores an empty asset id rather than storing one', () => {
+    const h = recordExplanationServed(initialTeachingHistory('c'), '')
+    expect(h.explanationsServed).toEqual([])
+  })
+
+  it('resets on a concept change — a new concept may serve its own assets', () => {
+    const served = recordExplanationServed(initialTeachingHistory('concept-a'), 'asset-1')
+    const reread = readTeachingHistory(served, 'concept-b')
+    expect(reread.explanationsServed).toEqual([])
+    expect(hasServedExplanation(reread, 'asset-1')).toBe(false)
+  })
+
+  it('survives a reload for the SAME concept — the guard must outlive the turn', () => {
+    const served = recordExplanationServed(initialTeachingHistory('concept-a'), 'asset-1')
+    const reread = readTeachingHistory(JSON.parse(JSON.stringify(served)), 'concept-a')
+    expect(hasServedExplanation(reread, 'asset-1')).toBe(true)
+  })
+
+  it('a legacy row written before this field existed reads as empty, not undefined', () => {
+    const legacy = { ...initialTeachingHistory('c') } as Record<string, unknown>
+    delete legacy.explanationsServed
+    const h = readTeachingHistory(legacy, 'c')
+    expect(h.explanationsServed).toEqual([])
+    expect(() => hasServedExplanation(h, 'x')).not.toThrow()
   })
 })
