@@ -2676,6 +2676,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // told 'AI down'"). AIBudgetExceededError still propagates — budget
         // exhaustion is load management with a deliberate 429, not an outage.
         let routed: { text: string; provider: string; finishReason: string | null }
+        // INCIDENT INSTRUMENTATION (2026-08-02, log-only, no behaviour change).
+        // The per-attempt telemetry in failoverRouter already measures the
+        // PROVIDER hop. The one number the logs could not produce is how much
+        // of the turn is spent BEFORE the provider is even called, and how big
+        // the payload is when it is — the two facts that separate "never
+        // reaches Gemini", "reaches Gemini late" and "reaches Gemini with a
+        // large payload". Emitted immediately before the call so it survives
+        // even when the function is killed mid-request.
+        const promptChars = systemPrompt.length
+        const historyChars = historyMessages.reduce((n, m) => n + m.content.length, 0)
+        console.log(
+          '[learn/chat] PRE-AI' +
+          ` pre_ai_ms=${Date.now() - turnReceivedAt}` +
+          ` system_prompt_chars=${promptChars}` +
+          ` system_prompt_tokens_est=${Math.round(promptChars / 4)}` +
+          ` history_msgs=${historyMessages.length}` +
+          ` history_chars=${historyChars}` +
+          ` learner_msg_chars=${message.length}` +
+          ` total_payload_chars=${promptChars + historyChars + message.length}` +
+          ` max_output_tokens=2048` +
+          ` memory_asset_chars=${assembled?.text.length ?? 0}` +
+          ` concept=${resolvedConceptId ?? 'unknown'}`
+        )
         try {
           routed = await routeAI(
             [...historyMessages, { role: 'user', content: message }],
