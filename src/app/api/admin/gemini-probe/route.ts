@@ -67,7 +67,48 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
   if (!(await isAdmin(session.user.id))) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    // TEMPORARY DIAGNOSTIC (remove once admin access is settled).
+    // isAdmin() reads users.role and returns a bare boolean, so a 403 cannot
+    // distinguish "no session reached the route", "wrong user id", "row
+    // missing" and "role is STUDENT". This line names which one it is.
+    // Verified 2026-08-02: every one of the 20 rows in users is STUDENT — the
+    // database contains no ADMIN at all — so this endpoint 403s for everyone.
+    // No secret is logged: id and email identify the caller, role is a public
+    // enum. The session token, API keys and password hashes are never touched.
+    let dbRole: string | null = null
+    let rowFound = false
+    try {
+      const { prisma } = await import('@/lib/db/prisma')
+      const row = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { role: true, email: true },
+      })
+      rowFound = !!row
+      dbRole = row?.role ?? null
+    } catch (err) {
+      dbRole = `lookup_failed:${err instanceof Error ? err.name : 'unknown'}`
+    }
+    console.warn(
+      '[admin/gemini-probe] 403 —' +
+      ` session_user_id=${session.user.id}` +
+      ` session_email=${session.user.email ?? 'none'}` +
+      ` user_row_found=${rowFound}` +
+      ` db_role=${dbRole ?? 'none'}` +
+      ` expected_role=ADMIN` +
+      ` admin_emails_configured=${(process.env.ADMIN_EMAILS ?? '').length > 0}`,
+    )
+    return NextResponse.json({
+      error: 'Forbidden',
+      diagnostic: {
+        sessionUserId: session.user.id,
+        sessionEmail: session.user.email ?? null,
+        userRowFound: rowFound,
+        dbRole,
+        expectedRole: 'ADMIN',
+        adminEmailsConfigured: (process.env.ADMIN_EMAILS ?? '').length > 0,
+        note: 'Role is read from users.role by isAdmin(). ADMIN_EMAILS only promotes at first sign-in via maybeBootstrapAdmin(); it is not consulted per request.',
+      },
+    }, { status: 403 })
   }
 
   const model = resolveGeminiModel(process.env.GEMINI_MODEL)

@@ -16,6 +16,13 @@ const SRC = readFileSync(
   join(process.cwd(), 'src', 'app', 'api', 'admin', 'gemini-probe', 'route.ts'), 'utf8',
 )
 
+/** Comments stripped. The secret-leak assertion is about what the code LOGS;
+ *  the doc comments legitimately discuss passwords and API keys in prose, and
+ *  matching that would be a false positive. */
+const CODE = SRC
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/^[ \t]*\/\/.*$/gm, '')
+
 describe('probe is admin-gated', () => {
   it('rejects anonymous callers before doing any work', () => {
     expect(SRC).toMatch(/await auth\(\)/)
@@ -87,10 +94,12 @@ describe('probe is read-only and leaks no secret', () => {
     expect(SRC).not.toMatch(/key:\s*apiKey/)
   })
 
-  it('performs no database or state write', () => {
-    for (const w of ['prisma.', '.create(', '.update(', '.delete(', '.upsert(']) {
+  it('performs no state WRITE (the 403 diagnostic read is allowed)', () => {
+    for (const w of ['.create(', '.update(', '.delete(', '.upsert(']) {
       expect(SRC).not.toContain(w)
     }
+    // The only DB access is the temporary 403 diagnostic, and it is a read.
+    expect(SRC).toMatch(/prisma\.user\.findUnique/)
   })
 
   it('is a GET only — no mutating verb is exported', () => {
@@ -98,5 +107,27 @@ describe('probe is read-only and leaks no secret', () => {
     for (const verb of ['POST', 'PATCH', 'PUT', 'DELETE']) {
       expect(SRC).not.toMatch(new RegExp(`export async function ${verb}\\(`))
     }
+  })
+})
+
+describe('403 diagnostic names the actual cause', () => {
+  it('reports the session identity, the row lookup and the role', () => {
+    for (const field of [
+      'session_user_id', 'session_email', 'user_row_found', 'db_role',
+      'expected_role=ADMIN', 'admin_emails_configured',
+    ]) expect(SRC).toContain(field)
+  })
+
+  it('distinguishes a missing row from a STUDENT role', () => {
+    expect(SRC).toMatch(/rowFound/)
+    expect(SRC).toMatch(/lookup_failed/)
+  })
+
+  it('logs no secret — no token, key or password field', () => {
+    for (const secret of ['password', 'sessionToken', 'accessToken']) {
+      expect(CODE).not.toContain(secret)
+    }
+    // The key's VALUE must never be logged or returned — only its presence.
+    expect(CODE).not.toMatch(/\$\{apiKey\}/)
   })
 })
