@@ -68,7 +68,9 @@ export interface TeachingDecision {
   inputsUsed: string[]
   /** Trust in the decision = the weakest reading it depended on (0..1). */
   confidence: number
-  /** Decision-specific payload for a future consumer. */
+  /** Decision-specific payload. Consumed by execution.ts's
+   *  buildBrainExecutionBlock(), which renders prerequisiteId, visualType and
+   *  misconceptionLabel into the authoritative BRAIN DECISION prompt block. */
   parameters: {
     conceptId?: string
     prerequisiteId?: string

@@ -123,9 +123,12 @@ export interface ConversationSummary {
 
 /**
  * The CUE's single output object — one per student turn, computed before
- * the response is generated. This is the object the (future, Milestone 2+)
- * Decision Engine will consume. Nothing consumes it yet: Milestone 1 is
- * perception only, with zero behavior change.
+ * the response is generated. It IS consumed: decisionEngine.ts's
+ * decideTeaching() reads it to produce the turn's TeachingDecision, which
+ * the dispatcher and route then act on when the Brain runtime is enabled
+ * (the default — see decisionEngine.ts's ACTIVATION STATUS). Producing this
+ * object is still pure perception with no behavior of its own; the behavior
+ * lives downstream.
  */
 export interface StudentTurnUnderstanding {
   version: 1

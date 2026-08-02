@@ -10,33 +10,42 @@
  *
  *   SERVE_EXPLANATION_MEMORY -> Explanation Memory (assembleLesson()'s
  *                               already-assembled result; NO model call)
+ *   SERVE_LESSON_COMPLETE    -> persisted LessonAttempt evidence (P6.5/6.6;
+ *                               NO model call)
  *   ASK_DIAGNOSTIC_QUESTION  -> placementVerification probe flow
  *   DETECT_MISCONCEPTION     -> misconceptionEngine repair flow
  *   REVIEW_PREREQUISITE      -> prerequisite/teaching-engine flow
+ *   TEACH_DIRECTLY           -> conversationState SHOW-move directive
  *   PRACTICE                 -> teachingStrategy practice flow
  *   VISUALIZATION            -> detectVisual/visual pipeline flow
  *   CONTINUE_LESSON          -> lesson runtime (composed lesson plan)
- *   ESCALATE_TO_LLM          -> the current routeAI (Groq/Yandex) pipeline
+ *   ESCALATE_TO_LLM          -> the current routeAI pipeline (Gemini primary,
+ *                               OpenRouter then Groq as automatic fallbacks)
  *
  * Executor honesty (ADR 14 §Phase-2 endgame — LLM as voice renderer):
- * except for Explanation Memory, every existing engine executes by
- * directing the LLM through prompt blocks the route has ALREADY injected
- * this turn. The dispatcher therefore has exactly three executors:
- *   - EXPLANATION_MEMORY: serve stored text; Groq is NOT called.
+ * except for the two state-served decisions, every existing engine executes
+ * by directing the LLM through prompt blocks the route has ALREADY injected
+ * this turn. The dispatcher therefore has exactly four executors:
+ *   - EXPLANATION_MEMORY: serve stored text; no model is called.
+ *   - LESSON_COMPLETE: answer from the persisted lesson attempt; no model
+ *     is called.
  *   - LLM_RENDERER: the chosen engine's already-injected blocks direct
- *     the LLM as a renderer. Groq IS called, in the renderer role — the
+ *     the LLM as a renderer. A model IS called, in the renderer role — the
  *     same call the runtime makes today; eliminating it requires authored
  *     assets for the concept (content production), not more code.
  *   - LLM_OPEN: open escalation — the current pipeline as-is.
- * A Groq call therefore happens ONLY when the plan says groqRequired
+ * A model call therefore happens ONLY when the plan says groqRequired
  * (ESCALATE_TO_LLM, or an engine rendering through the LLM); a plan with
- * groqRequired=false is served without any model call.
+ * groqRequired=false is served without any model call. The flag's name
+ * predates the Gemini migration and is kept for compatibility — it means
+ * "a provider call is required", whichever provider the chain selects.
  *
  * Activation is flag-gated: ENABLE_BRAIN_RUNTIME (default ON). Flag on =
- * the plan DRIVES the serve-from-memory-vs-LLM choice (today's only
- * externally visible fork), with the legacy behavior as the fallback for
- * any inconsistent plan. Flag off ('0'/'false') = shadow compare mode —
- * the plan is logged but the legacy serving choice is untouched.
+ * the plan DRIVES the serve-from-state-vs-LLM choice (the memory serve and
+ * the completed-lesson serve are the two externally visible forks), with
+ * the legacy behavior as the fallback for any inconsistent plan. Flag off
+ * ('0'/'false') = shadow compare mode — the plan is logged but the legacy
+ * serving choice is untouched.
  * No prompts, DB, or KG are touched either way.
  * Pure function — no I/O, never throws.
  */

@@ -1,8 +1,9 @@
 /**
- * Decision Engine v1 (Milestone 2) — shadow-mode tests.
+ * Decision Engine v1 (Milestone 2) — tests.
  *
  * Pins: the full deterministic ladder D0–D8 (one test per rule), ladder
- * ORDER (preemption), the shadow invariant, confidence inheritance from
+ * ORDER (preemption), the shape invariants carried by every decision
+ * (including the historical `shadow` marker), confidence inheritance from
  * the CUE's readings, and the never-throws law. Decisions are produced
  * from real CUE output (understandStudentTurn), not hand-built objects,
  * so these tests also pin the CUE→Decision Engine contract.

@@ -1,8 +1,9 @@
 /**
  * Runtime Dispatcher (Milestone 3) — tests.
  *
- * Pins: the complete decision→engine routing table, the three-executor
- * model and its groqRequired invariant (Groq only when the plan says so),
+ * Pins: the complete decision→engine routing table, the four-executor
+ * model and its groqRequired invariant (a model is called only when the
+ * plan says so),
  * the fallback laws (memory decision without content, malformed decision),
  * the feature flag default (ON), and end-to-end CUE→Decision→Dispatch
  * consistency on real pipeline output.

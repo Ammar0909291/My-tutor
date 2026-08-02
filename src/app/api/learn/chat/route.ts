@@ -2335,9 +2335,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Library, BEFORE the response below is produced (memory-served or
       // LLM). Perception only: unifies what the existing detectors and
       // engines already read this turn into ONE StudentTurnUnderstanding
-      // object. Zero behavior change — nothing consumes it yet (the
-      // Decision Engine will, in a later milestone); it is logged for
-      // observability, writes nothing, and can never break a turn
+      // object. Perception has no behavior of its own — it writes nothing
+      // and is logged for observability — but its output IS consumed: the
+      // Decision Engine below reads it, and the dispatcher acts on the
+      // result. It can never break a turn
       // (understandStudentTurn never throws; this guard is belt-and-braces).
       // Milestone 3: the decision is hoisted so the Runtime Dispatcher below
       // can consume it after this block.
@@ -2372,10 +2373,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           observations: cueObservations,
         })
         console.log('[learn/chat] CUE understanding=' + JSON.stringify(understanding))
-        // Decision Engine v1 (Milestone 2) — SHADOW MODE ONLY: consumes the
-        // understanding, produces a typed TeachingDecision, and is logged so
-        // shadow decisions can be compared against what the runtime actually
-        // did. Never acted on: no prompt, DB, or control-flow effect.
+        // Decision Engine v1 (Milestone 2): consumes the understanding,
+        // produces a typed TeachingDecision, and logs it so decisions stay
+        // comparable against what the runtime actually did. The decision is
+        // ACTED ON by the dispatcher block below whenever the Brain runtime
+        // is enabled (the default); with it disabled the log is all it is.
         const { decideTeaching } = await import('@/lib/understanding/decisionEngine')
         const teachingDecision = decideTeaching(understanding)
         cueDecisionHoisted = teachingDecision
@@ -2408,8 +2410,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Runtime Dispatcher (Milestone 3) — the ONE place a TeachingDecision
       // is mapped onto an existing execution path. Flag-gated:
       // ENABLE_BRAIN_RUNTIME on (default) = the plan DRIVES the
-      // serve-from-memory-vs-LLM fork (the only externally
-      // visible fork at this point in the route); every other decision
+      // serve-from-state-vs-LLM fork (two externally visible forks at this
+      // point in the route: the Explanation Memory serve and the P13
+      // completed-lesson serve); every other decision
       // executes through the engine blocks already injected above, with the
       // LLM in the renderer role (see dispatcher.ts executor honesty note).
       // Fallback law: a missing/inconsistent plan always degrades to the
@@ -2476,7 +2479,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Conversation Decision — standalone block for turns where the Brain
       // execution block is empty (ESCALATE_TO_LLM, LLM_OPEN, brain off).
       // The conversation directive must reach the LLM on EVERY turn that
-      // goes through Groq, not just Brain-renderer turns.
+      // goes through a model, not just Brain-renderer turns.
       if (conversationDecisionHoisted && conversationDecisionHoisted.type !== 'RECOVERY' && !serveFromMemory) {
         const brainBlockFired = brainRuntimeActive && dispatchPlanHoisted?.executor === 'LLM_RENDERER'
         if (!brainBlockFired) {

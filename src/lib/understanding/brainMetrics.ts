@@ -3,7 +3,9 @@
  *
  * In-process counters ONLY (no DB changes, per the milestone rules):
  * they measure, per server process, how the Brain runtime is behaving —
- * total turns, Groq calls vs. Explanation Memory serves, the decision
+ * total turns, model calls vs. Explanation Memory serves (the `groqCalls`
+ * counter name predates the Gemini migration and now counts a call to
+ * whichever provider the failover chain selects), the decision
  * distribution, and fallback count — and are logged each turn as
  * '[learn/chat] BRAIN metrics=...' so shadow/active behavior can be
  * verified from logs alone. Counters reset on process restart; they are
@@ -38,10 +40,10 @@ export interface BrainMetricsSnapshot {
   complianceChecks: number
   complianceViolations: number
   /** P9 — turns served WITHOUT any model call because the dispatch plan said
-   *  groqRequired=false. Today that is the Explanation Memory path; any future
-   *  deterministic executor is counted here too, so the figure stays correct
-   *  as the ladder grows. Distinct from explanationMemoryServes, which counts
-   *  one specific executor. */
+   *  groqRequired=false. Today that is the Explanation Memory path and the
+   *  P13 completed-lesson path; any future deterministic executor is counted
+   *  here too, so the figure stays correct as the ladder grows. Distinct from
+   *  explanationMemoryServes, which counts one specific executor. */
   deterministicServes: number
 }
 

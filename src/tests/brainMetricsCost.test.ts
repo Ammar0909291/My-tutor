@@ -142,7 +142,7 @@ describe('exactly one routing authority', () => {
     }
   })
 
-  it('only the memory executor avoids the model today', () => {
+  it('no LLM_RENDERER decision avoids the model; the memory serve does', () => {
     const all: TeachingDecision['decision'][] = [
       'ASK_DIAGNOSTIC_QUESTION', 'DETECT_MISCONCEPTION', 'REVIEW_PREREQUISITE',
       'TEACH_DIRECTLY', 'CONTINUE_LESSON', 'PRACTICE', 'VISUALIZATION', 'ESCALATE_TO_LLM',

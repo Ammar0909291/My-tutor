@@ -1,6 +1,8 @@
 /**
  * Brain Execution — Milestone 4 of the Educational Brain Runtime
- * (owner-approved 2026-07-21). Active ONLY when ENABLE_BRAIN_RUNTIME=1.
+ * (owner-approved 2026-07-21). Active whenever the Brain runtime is enabled
+ * — isBrainRuntimeEnabled(), which is ON by default and off only for
+ * ENABLE_BRAIN_RUNTIME='0'/'false'.
  *
  * When the Brain runtime is ON, the TeachingDecision is authoritative.
  * Execution reuses the runtime's one established control mechanism —
@@ -16,7 +18,8 @@
  * turn (zero duplicated logic) and forbids the LLM from choosing a
  * different action. Decisions that don't render through the LLM return
  * an empty block: SERVE_EXPLANATION_MEMORY is served directly from the
- * asset store (Groq never called), and ESCALATE_TO_LLM is the current
+ * asset store and SERVE_LESSON_COMPLETE directly from the persisted lesson
+ * attempt (no model called for either), and ESCALATE_TO_LLM is the current
  * pipeline unchanged. Pure function — no I/O, never throws.
  */
 import type { TeachingDecision } from './decisionEngine'
