@@ -32,6 +32,7 @@ import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 import { routeAI } from '@/lib/ai/router'
+import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { buildTutorSystemPrompt, type LessonContext } from '@/lib/ai/client'
 import { MessageRole } from '@prisma/client'
 
@@ -127,14 +128,45 @@ export async function POST(req: Request) {
       }))
 
     // Call LLM with instruction as the user turn — NOT persisted
-    const routed = await routeAI(
-      [...historyMessages, { role: 'user', content: instruction }],
-      systemPrompt,
-      country,
-      1200,
-      teachingLanguage,
-      { userId, subject: learnSession.subject.slug },
-    )
+    //
+    // SEV-1 part 2 (2026-08-02): this route had NO degraded path. A provider
+    // failure threw straight to the catch below and returned HTTP 500, and a
+    // chain that outlived the function budget returned nothing at all — the
+    // learner pressed "Start Lesson" and got silence. Production evidence:
+    // "Vercel Runtime Timeout Error: Task timed out after 60 seconds"
+    // (42 occurrences, 6 users, routes include /api/learn/lesson-init,
+    // last 2026-08-02T15:33:56Z) and the 30-second variant on this route's own
+    // former budget.
+    //
+    // The chain's worst case is 20_000 (gemini) + 8_000 (openrouter) +
+    // 8_000 (groq) = 36_000 ms, which does not fit the 30_000 ms maxDuration
+    // this route used to carry — so on this route the provider chain could
+    // never even finish failing before the lambda was killed. vercel.json now
+    // gives it the same 60_000 ms its sibling /api/learn/chat already uses for
+    // the identical chain.
+    //
+    // Reuses the SAME degraded template the chat route serves (RS P-3 /
+    // K6 degradedTurn) — no new copy, no new fallback system. The lesson
+    // opening is teaching-shaped rather than an error, and it is persisted
+    // like any other assistant turn so the transcript stays coherent.
+    let routed: { text: string; provider: string; finishReason: string | null }
+    try {
+      routed = await routeAI(
+        [...historyMessages, { role: 'user', content: instruction }],
+        systemPrompt,
+        country,
+        1200,
+        teachingLanguage,
+        { userId, subject: learnSession.subject.slug },
+      )
+    } catch (aiError) {
+      if (aiError instanceof AIBudgetExceededError) throw aiError
+      console.error('[lesson-init] all providers down — serving degraded template (RS P-3):',
+        aiError instanceof Error ? aiError.message : String(aiError))
+      const { degradedTurn } = await import('@/lib/eos-runtime')
+      const degraded = degradedTurn({ register: 'beginner', learnerText: instruction })
+      routed = { text: degraded.text, provider: degraded.provider, finishReason: degraded.finishReason }
+    }
 
     // Persist ONLY the assistant response
     await prisma.message.create({

@@ -144,7 +144,10 @@ export async function routeAI(
   systemPrompt: string,
   country: string,
   maxTokens = 800,
-  lang: 'ru' | 'en' | 'hi' = 'en',
+  // Retained positionally (three call sites pass it) but no longer read: since
+  // routeAI stopped authoring learner-facing copy it has no text to localise.
+  // Degraded copy — and its localisation — belong to the caller's fallback.
+  _lang: 'ru' | 'en' | 'hi' = 'en',
   _meta?: Record<string, unknown>,
 ): Promise<RouteAIResult> {
   console.log('[ai/router] routing request, country =', country)
@@ -186,17 +189,25 @@ export async function routeAI(
       tags: { provider: error instanceof AIProviderError ? error.provider : 'unknown' },
     })
 
-    if (
-      error.message?.includes('timeout') || error.message?.includes('timed out') ||
-      error.name === 'AITimeoutError'
-    ) {
-      const timeoutMsg: Record<string, string> = {
-        en: 'Taking longer than usual. Please try again.',
-        ru: 'Думаю дольше обычного. Попробуй ещё раз.',
-        hi: 'Thoda time lag raha hai. Please try again.',
-      }
-      return { text: timeoutMsg[lang] || timeoutMsg.en, provider: 'fallback', finishReason: null }
-    }
+    // SEV-1 part 3 (2026-08-02): routeAI must REPORT failure, never absorb it.
+    //
+    // This used to special-case a timeout: when the chain was exhausted and the
+    // last error happened to be an AITimeoutError, routeAI swallowed it and
+    // returned canned text with provider:'fallback' instead of throwing. Every
+    // other exhaustion threw. failoverRouter rethrows `lastErr` — the LAST
+    // provider's error — so which branch ran depended on which provider was
+    // last and how it failed.
+    //
+    // That breaks the P0 guarantee directly: a swallowed timeout is reported to
+    // the caller as SUCCESS, so route.ts's degraded path (RS P-3) never runs
+    // and lesson-init persists "Taking longer than usual. Please try again." as
+    // the lesson opening. On the chat route the client then discards it
+    // (LessonScreen's isFallbackResponse re-throws on provider==='fallback'),
+    // so the learner received neither a Gemini answer NOR the degraded
+    // template — the silent death this objective exists to remove.
+    //
+    // Every failure mode now reaches the one owner of degraded copy: the
+    // caller's fallback path.
     throw error
   }
 }
