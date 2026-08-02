@@ -32,6 +32,29 @@
  *  field, and stored inside the snapshot so no migration is needed. */
 export const SNAPSHOT_VERSION_KEY = '_v'
 
+/**
+ * The PHYSICAL table name for the LearnSession model.
+ *
+ * It is `learn_sessions`, not `LearnSession`: prisma/schema.prisma declares
+ * `@@map("learn_sessions")` on that model, so the Prisma MODEL name never
+ * exists in Postgres. Raw SQL does not go through Prisma's mapping layer, so
+ * it must name the mapped table itself.
+ *
+ * This was wrong (`"LearnSession"`) from the moment this module was written,
+ * and every conditionalMerge below therefore threw 42P01 `relation
+ * "LearnSession" does not exist` — swallowed by writeSnapshotDelta's own
+ * never-throw contract and reported only as a warning. Verified against
+ * production 2026-08-02: the version key this module stamps on every
+ * successful write was present on 0 of 130 sessions, i.e. not one write had
+ * ever landed. Because this module is the SOLE writer of contextSnapshot
+ * (pinned by snapshotWriterDiscipline.test.ts), the column was frozen for
+ * every session, and with it the whole Brain state pipeline.
+ *
+ * Kept as a named constant so the accompanying test can assert it against
+ * schema.prisma's @@map directly, which a fake-db test can never do.
+ */
+export const LEARN_SESSION_TABLE = 'learn_sessions'
+
 /** Total: an absent or malformed version reads as 0, which is also what a
  *  pre-ISS-13 row (written before the key existed) reports — so the first
  *  conditional write against a legacy row succeeds rather than deadlocking. */
@@ -129,8 +152,17 @@ export async function writeSnapshotDelta(
  * here for one reason — a structurally-typed method is fakeable, so the
  * concurrency cases are tested deterministically instead of against a live
  * Postgres — and it carries NO injection surface: all three values are bound
- * as parameters ($1/$2/$3), and the only interpolation is
- * SNAPSHOT_VERSION_KEY, a module constant that never sees user input.
+ * as parameters ($1/$2/$3), and the only interpolations are
+ * LEARN_SESSION_TABLE and SNAPSHOT_VERSION_KEY, module constants that never
+ * see user input.
+ *
+ * THE COST OF THAT FAKEABILITY, learned the hard way: a fake db validates the
+ * arguments but never the SQL, so a wrong table name in this string is
+ * invisible to every test that drives it. That is exactly how
+ * `UPDATE "LearnSession"` survived here against a database whose table is
+ * `learn_sessions`. snapshotTableName.test.ts now checks the identifier
+ * against prisma/schema.prisma's own @@map, which is the one assertion a fake
+ * db cannot make for us.
  */
 async function conditionalMerge(
   db: SnapshotDb,
@@ -140,7 +172,7 @@ async function conditionalMerge(
 ): Promise<number> {
   const payload = JSON.stringify({ ...delta, [SNAPSHOT_VERSION_KEY]: expectedVersion + 1 })
   return db.$executeRawUnsafe(
-    `UPDATE "LearnSession"
+    `UPDATE "${LEARN_SESSION_TABLE}"
      SET "contextSnapshot" = COALESCE("contextSnapshot", '{}'::jsonb) || $1::jsonb
      WHERE id = $2
        AND COALESCE(("contextSnapshot" ->> '${SNAPSHOT_VERSION_KEY}')::int, 0) = $3`,
