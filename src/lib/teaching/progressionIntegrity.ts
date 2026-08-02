@@ -90,6 +90,75 @@ export function pickCurrentTopicSlug(rows: readonly TopicProgressRowLike[]): str
   return best?.topicSlug ?? null
 }
 
+/** The narrow shape this module needs from a resolved lesson. */
+export interface LessonLike {
+  order: number
+  topicSlug: string
+}
+
+/**
+ * ── OBJECTIVE 2: the single owner of "which lesson is being taught" ────────
+ *
+ * PRODUCTION BEHAVIOUR THIS FIXES: a lesson completes, the completion summary
+ * shows, the next lesson unlocks — and then "Continue" / "Got it" keeps
+ * teaching the lesson that just finished, repeating already-mastered
+ * questions.
+ *
+ * The route resolved the current lesson as, in effect:
+ *
+ *     pickCurrentTopicSlug(topicProgressRows)                        // won
+ *       ?? lessons.find(l => l.order === studentProgress.currentLesson)
+ *       ?? lessons[0]
+ *
+ * That reads a LAGGING, MULTI-VALUED cache before the authoritative owner.
+ *
+ *   · StudentProgress.currentLesson is authoritative. It is advanced by EVERY
+ *     completion (/api/curriculum/progress PATCH: currentLesson =
+ *     Math.max(existing, completedLesson + 1)), it is what the UI renders, and
+ *     it is what "next lesson unlocked" reflects. One value, always.
+ *   · TopicProgress IN_PROGRESS rows are a derived record of what has been
+ *     taught. They are multi-valued by design — see this module's header: the
+ *     conversational checkpoint upserts IN_PROGRESS on every signalled turn
+ *     and nothing clears a row when a learner leaves a lesson unfinished, so
+ *     several accumulate as normal steady state.
+ *
+ * So after finishing lesson N, the completed topic is correctly excluded, but
+ * any older unfinished topic still outranks StudentProgress.currentLesson —
+ * and the runtime resumes THAT lesson instead of starting N+1.
+ *
+ * pickCurrentTopicSlug is NOT retired: it answers a genuinely different
+ * question ("which topic have we been working on?") and remains this
+ * function's fallback for a learner who has no authoritative position yet.
+ * What changes is the precedence, which removes the second owner from the
+ * decision rather than trying to keep two owners in sync.
+ *
+ * Pure and total: no I/O, no clock, never throws, order-invariant.
+ */
+export function selectCurrentLesson<T extends LessonLike>(
+  lessons: readonly T[],
+  studentCurrentLesson: number | null | undefined,
+  topicProgressRows: readonly TopicProgressRowLike[],
+): T | null {
+  if (!Array.isArray(lessons) || lessons.length === 0) return null
+
+  // 1. Authoritative owner.
+  if (typeof studentCurrentLesson === 'number' && Number.isFinite(studentCurrentLesson)) {
+    const byOrder = lessons.find((l) => l && l.order === studentCurrentLesson)
+    if (byOrder) return byOrder
+  }
+
+  // 2. Fallback — no StudentProgress row yet, or a stored order that no longer
+  //    resolves. The in-progress record is the best remaining evidence.
+  const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
+  if (inProgressSlug) {
+    const bySlug = lessons.find((l) => l && l.topicSlug === inProgressSlug)
+    if (bySlug) return bySlug
+  }
+
+  // 3. Nothing known — start at the beginning.
+  return lessons[0] ?? null
+}
+
 // ── Stall telemetry ───────────────────────────────────────────────────────
 
 /**

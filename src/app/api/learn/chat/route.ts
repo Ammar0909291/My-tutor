@@ -26,8 +26,8 @@ import {
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 import {
-  pickCurrentTopicSlug, foldProgressionMetrics, readProgressionMetrics,
-  progressionTags, needsSignalRepair,
+  pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
+  readProgressionMetrics, progressionTags, needsSignalRepair,
 } from '@/lib/teaching/progressionIntegrity'
 
 // Voice Signal Recovery (Claude Recommendation #7): mirrors
@@ -271,13 +271,15 @@ export async function POST(req: Request) {
         )
         if (syntheticLessons.length > 0) {
           const topicProgressRows = topicProgressRowsShared
-          const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
-          const currentLesson = (inProgressSlug
-            ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
-            : null)
-            ?? (studentProgress?.currentLesson != null
-              ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
-              : null)
+          // OBJECTIVE 2: StudentProgress.currentLesson is the authoritative
+          // owner of which lesson is open — it is what completion advances and
+          // what the UI renders. The IN_PROGRESS row is a lagging cache and is
+          // consulted only when the owner has no usable value. Reading the
+          // cache first is why "Continue" after a completed lesson resumed an
+          // older unfinished topic instead of starting the next lesson. See
+          // selectCurrentLesson's header.
+          const currentLesson =
+            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
             topicProgressRows
@@ -335,13 +337,9 @@ export async function POST(req: Request) {
           )
           if (syntheticLessons.length > 0) {
             const topicProgressRows = topicProgressRowsShared
-            const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
-            const currentLesson = (inProgressSlug
-              ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
-              : null)
-              ?? (studentProgress?.currentLesson != null
-                ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
-                : null)
+            // OBJECTIVE 2: same authoritative-owner precedence as the KG branch.
+            const currentLesson =
+              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
               ?? syntheticLessons[0]
             const completedSlugs = new Set(
               topicProgressRows
@@ -717,7 +715,28 @@ export async function POST(req: Request) {
             // fires for Library mode; set ENABLE_LIBRARY_CONCEPT_TRACKING=0 to revert.
             if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
               const { resolveLibraryEntryConceptId } = await import('@/lib/curriculum/libraryConceptResolver')
-              libraryConceptNodeIdHoisted = snapshotCurrentConceptId
+              // OBJECTIVE 2 — the second owner, and the one that made a
+              // COMPLETED lesson keep teaching.
+              //
+              // This was snapshot-FIRST and re-seeded from itself, so once
+              // written the pointer could never follow a lesson transition. On
+              // completion, /api/curriculum/progress advances
+              // StudentProgress.currentLesson but does NOT touch this pointer —
+              // its reset lives inside the `!mastered && isNewCompletion` (skip)
+              // branch only. That endpoint's own comment states the mechanism:
+              // "that pointer always wins when a Library turn resolves its
+              // active concept ... so the next chat message kept teaching the
+              // same unmastered concept". The skip path was given a clear-site;
+              // genuine completion never was.
+              //
+              // Making the pointer DERIVED from the resolved lesson fixes every
+              // transition at once — complete, skip, forward nav, backward nav
+              // all move StudentProgress.currentLesson — instead of adding a
+              // clear-site per path. resolvedConceptId is null for subjects
+              // with no canonical KG (Spanish, JavaScript, …), so those keep
+              // exactly the previous snapshot-first order.
+              libraryConceptNodeIdHoisted = resolvedConceptId
+                ?? snapshotCurrentConceptId
                 ?? resolveLibraryEntryConceptId(subjectCode, currentModule.slug)
                 ?? null
             }
@@ -903,7 +922,7 @@ export async function POST(req: Request) {
           .map((r) => r.topicSlug)
         const completedSet = new Set(completedSlugs)
         // A.7: check if the current concept was previously mastered
-        const currentConceptForMastery = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+        const currentConceptForMastery = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
         if (currentConceptForMastery && completedSet.has(currentConceptForMastery)) {
           conceptPreviouslyMasteredHoisted = true
         }
@@ -1020,7 +1039,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // turn of a session has no snapshot concept yet, but the entry concept
       // was already resolved earlier this request (libraryConceptNodeIdHoisted)
       // — use it, so no Library turn bypasses decide().
-      const activeConceptIdForDecide = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted
+      // OBJECTIVE 2: libraryConceptNodeIdHoisted FIRST. It is now seeded
+      // resolvedConceptId-first (see its assignment above), so it already
+      // carries the lesson the learner has open, falling back to the snapshot.
+      // Reading the raw snapshot first was a precedence INVERSION against
+      // Explanation Memory, which has always read resolvedConceptId first —
+      // that let decide() and the conversation state machine keep running on
+      // the COMPLETED concept while authored content was served for the new
+      // one. School Mode leaves libraryConceptNodeIdHoisted null and so falls
+      // through to exactly the previous value.
+      const activeConceptIdForDecide = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId
       if (activeConceptIdForDecide) {
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptIdForDecide)
@@ -1783,7 +1811,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             detectLearnerRequest, buildLearnerRequestBlock,
             buildUnreadExplanationBlock,
           } = await import('@/lib/teaching/masteryGate')
-          const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+          const convConceptId = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
 
 
@@ -2100,7 +2128,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             profileLevel: (profile?.currentLevel === 'beginner' || profile?.currentLevel === 'intermediate' || profile?.currentLevel === 'advanced')
               ? profile.currentLevel : null,
             sessionFailureCount: snapshotSessionFailureCount,
-            currentConceptId: snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null,
+            currentConceptId: libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null,
             hasVerifiedPlacement: placementPrevHoisted?.verified === true,
             pendingPlacementProbe: snapshotPendingProbe ?? null,
             isFirstLessonContext: firstLessonActiveHoisted,
