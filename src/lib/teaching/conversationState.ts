@@ -603,6 +603,28 @@ export function advanceConversationState(
     next.parityViolations = (prev.parityViolations ?? 0) + 1
   }
 
+  // P4 — the lesson stage may only change after a SUCCESSFUL AI response.
+  //
+  // A degraded turn is an outage template, not teaching: the learner received
+  // no explanation, no example and no question. The existing guard above
+  // already stops it from claiming `demonstrated`/`taughtThisSession`, but the
+  // phase itself could still move — the DEMONSTRATE→GUIDE reachability rule
+  // fires on an already-true `demonstrated` inherited from a previous turn,
+  // and the delivery-phase acknowledgement transition treats a content-free
+  // turn as a give. Either way the learner is advanced through the lesson for
+  // a turn in which nothing was taught, which is the exact "assume the
+  // explanation happened" failure P4 forbids.
+  //
+  // Pinning the stage here (rather than at each transition site) keeps ONE
+  // owner of the rule — the same reasoning that hoisted the reachability law
+  // to a single site above, after three copies of it drifted apart.
+  // Learner-describing counters are deliberately still folded: the student's
+  // message was real even when our reply failed.
+  if (evidence.degradedTurn) {
+    next.phase = prev.phase
+    next.turnsInCurrentPhase = prev.turnsInCurrentPhase
+  }
+
   return next
 }
 
