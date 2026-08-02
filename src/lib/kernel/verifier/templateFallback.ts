@@ -49,6 +49,37 @@ export function chooseFallback(chain: string[]): FallbackKind {
   return 'WARM_CLOSE'
 }
 
+/**
+ * Consecutive-outage escalation.
+ *
+ * Root cause of the observed transcript: when every provider failed, the SAME
+ * template was returned on every turn. Six byte-identical replies landed in a
+ * row while the learner typed "Got it", "Just start the damn lesson already"
+ * and "I don't understand, explain differently" — the tutor looked broken and
+ * ignored them, because the template is content-free by design and nothing
+ * tracked that it had already been used.
+ *
+ * Note this could never be fixed by the P3 anti-repetition ledger: that
+ * constrains the MODEL's prompt, and these turns never reach a model.
+ *
+ * `consecutiveFailures` is how many outage turns have now happened in a row
+ * (1 = the first). Repeating the identical text is the single worst signal, so
+ * the wording changes on the second, and by the third the learner is told
+ * plainly that something is wrong rather than being left to conclude the
+ * product is broken.
+ */
+export function renderOutage(consecutiveFailures: number, base: FallbackKind, ctx: TemplateContext): string {
+  const n = Number.isFinite(consecutiveFailures) ? Math.max(1, Math.floor(consecutiveFailures)) : 1
+  if (n === 1) return renderFallback(base, ctx)
+  if (n === 2) {
+    return "I'm still getting my thoughts together on that one — give me a moment and try again."
+  }
+  // Third and beyond: stop pretending this is a teaching turn. Silence about
+  // an outage reads as a broken product, which is exactly what happened.
+  return "Something on my side isn't responding right now, so I can't teach this properly yet. "
+       + "This isn't anything you did. Please try again in a moment — your progress is saved."
+}
+
 /** The template renderer suppresses questions; guarantees no LLM call. */
 export function templateMove(kind: FallbackKind): PolicyMove {
   switch (kind) {

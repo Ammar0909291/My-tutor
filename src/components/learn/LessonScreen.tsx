@@ -1596,6 +1596,12 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [code, language, stdinInput, isRunning])
 
   // Send message
+  // ROOT-CAUSE FIX (returning-learner prompt leak): showInUI=false marks an
+  // internal INSTRUCTION (the lesson opening / resume trigger), not something
+  // the learner said. That was previously a client-render-only flag, so the
+  // server still persisted the instruction as a USER message and replayed it
+  // into the transcript on the next page load. The two halves of one intent
+  // are now inseparable: not shown => not persisted.
   const sendMessage = useCallback(async (sid: string, text: string, showInUI = true, voiceSignal?: VoiceTimingSignal) => {
     // P8.1: ANY learner interaction stops the voice immediately. Every send
     // path (typed message, Enter, send button, quick replies like "Got it",
@@ -1633,6 +1639,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               sessionId: sid, message: text, userId: userId ?? 'anonymous',
+              // See the note on sendMessage: an instruction the learner never
+              // sees must never enter their transcript.
+              ephemeral: !showInUI,
               // Voice Signal Recovery (Claude Recommendation #7): forwarded
               // only when this turn originated from voice dictation —
               // additive, telemetry-only, undefined for typed messages.

@@ -48,6 +48,20 @@ const voiceSignalSchema = z.object({
 const schema = z.object({
   sessionId: z.string(),
   message: z.string().min(1).max(8000),
+  // ROOT-CAUSE FIX (returning-learner prompt leak): the client had a concept
+  // the server could not see. LessonScreen builds an internal INSTRUCTION for
+  // the resume/opening turn and sent it with showInUI=false — but that flag is
+  // client-render-only, so the server still persisted it as a USER message.
+  // On the next page load the history was read back from the DB and the raw
+  // instruction ("The student has returned... Greet them warmly...") rendered
+  // as a chat bubble to the learner.
+  //
+  // `ephemeral` makes "this is a machine instruction, not a learner utterance"
+  // explicit in the contract, so the two halves of the same intent cannot
+  // disagree again. lesson-init/route.ts already got this right by never
+  // persisting its instruction; this gives every other caller the same
+  // guarantee instead of a second, silently-wrong path.
+  ephemeral: z.boolean().optional(),
   // Bug 8 (mastery-gate rework): false = the previous long assistant
   // explanation stayed collapsed ("Read more" never pressed) — the
   // teaching engine must not assume unread text was read. Optional and
@@ -72,7 +86,7 @@ export async function POST(req: Request) {
 
   try {
     const body = await req.json()
-    const { sessionId, message, lastExplanationRead, voiceSignal } = schema.parse(body)
+    const { sessionId, message, lastExplanationRead, voiceSignal, ephemeral } = schema.parse(body)
 
     // Wave 0 Step 2 (Evidence Architecture §2, ASSESSMENT contract):
     // learner response latency is measured server-side from message
@@ -100,9 +114,15 @@ export async function POST(req: Request) {
 
     const profile = await withRetry(() => prisma.profile.findUnique({ where: { userId } }))
 
-    await withRetry(() => prisma.message.create({
-      data: { sessionId, role: MessageRole.USER, content: message },
-    }))
+    // Only a real learner utterance is persisted. An ephemeral instruction is
+    // still sent to the model (it is what triggers the opening) but is never
+    // written to the transcript, so it can never be replayed to the learner.
+    // The ASSISTANT reply is persisted either way — the teaching is real.
+    if (!ephemeral) {
+      await withRetry(() => prisma.message.create({
+        data: { sessionId, role: MessageRole.USER, content: message },
+      }))
+    }
 
     const snapshot = learnSession.contextSnapshot as Record<string, unknown> | null
     const memoryContext = typeof snapshot?.memoryContext === 'string' ? snapshot.memoryContext : null
@@ -455,6 +475,10 @@ export async function POST(req: Request) {
     // the prompt is built and re-persisted with this turn's questions folded in.
     let questionLedgerHoisted: import('@/lib/teaching/repetitionGuard').QuestionLedger =
       { fingerprints: [], recent: [] }
+    // How many OUTAGE turns have happened in a row. Persisted so the degraded
+    // path can escalate its wording instead of repeating one content-free
+    // template forever (the observed six-identical-replies failure).
+    let consecutiveOutagesHoisted = 0
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
@@ -2553,7 +2577,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           captureError(aiError, { route: 'api/learn/chat', tags: { stage: 'ai-degraded' } })
           const { degradedTurn } = await import('@/lib/eos-runtime')
           const degraded = degradedTurn({ register: contentRegister, learnerText: message })
-          routed = { text: degraded.text, provider: degraded.provider, finishReason: degraded.finishReason }
+          // Escalate rather than repeat. Repeating the identical content-free
+          // template is what made the tutor look broken while the learner was
+          // actively asking it to start; by the third consecutive outage the
+          // learner is told plainly that something is wrong on our side.
+          const prevOutages = typeof snapshot?.consecutiveOutages === 'number' ? snapshot.consecutiveOutages : 0
+          consecutiveOutagesHoisted = prevOutages + 1
+          const { renderOutage, chooseFallback } = await import('@/lib/kernel/verifier/templateFallback')
+          const outageText = renderOutage(
+            consecutiveOutagesHoisted,
+            chooseFallback(['SHOW_EASIEST_LEGAL']),
+            { register: contentRegister, learnerText: message },
+          )
+          routed = { text: outageText, provider: degraded.provider, finishReason: degraded.finishReason }
         }
         text = routed.text
         provider = routed.provider
@@ -3730,6 +3766,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const { recordQuestions } = await import('@/lib/teaching/repetitionGuard')
             conversationStateUpdate.questionLedger = recordQuestions(questionLedgerHoisted, cleanText)
           }
+          // A healthy turn clears the outage streak; an outage turn carries it.
+          conversationStateUpdate.consecutiveOutages = consecutiveOutagesHoisted
           // P6.5: fold a CLOSED concept into the lesson attempt — the single
           // owner of lesson-scoped outcomes. A concept closes exactly two ways
           // (mastered, or budget spent), and isConceptClosed owns that test so
