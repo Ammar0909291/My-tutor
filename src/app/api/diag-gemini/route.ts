@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server'
-import { resolveGeminiModel, routeAI } from '@/lib/ai/router'
 
 export const dynamic = 'force-dynamic'
 export const maxDuration = 60
@@ -30,7 +29,6 @@ export async function GET(req: Request) {
     keyLength: key.length,
     // Raw env value vs. what the router will actually use after the fix.
     rawEnvGeminiModel: rawEnvModel ?? null,
-    resolvedModel: resolveGeminiModel(rawEnvModel),
     configuredModel: configured,
     groqKeyPresent: (process.env.GROQ_API_KEY ?? '') !== '',
     openrouterKeyPresent: (process.env.OPENROUTER_API_KEY ?? '') !== '',
@@ -90,6 +88,9 @@ export async function GET(req: Request) {
   //    router -> gemini provider). Emits the same [ai/router] runtime logs a
   //    Tutor turn does, so Vercel logs show which provider actually answered.
   try {
+    // Dynamic import: keeps this out of Next.js build-time page-data collection.
+    const { routeAI, resolveGeminiModel } = await import('@/lib/ai/router')
+    out.resolvedModel = resolveGeminiModel(rawEnvModel)
     const routed = await routeAI(
       [{ role: 'user', content: 'In one short sentence, what is a fraction?' }],
       'You are a tutor. Answer in one short sentence.',
