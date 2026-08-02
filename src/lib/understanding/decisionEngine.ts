@@ -1,14 +1,21 @@
 /**
  * Decision Engine v1 — Milestone 2 of the Educational Brain Runtime
- * (owner-approved 2026-07-21). SHADOW MODE ONLY.
+ * (owner-approved 2026-07-21).
  *
  * Consumes the CUE's StudentTurnUnderstanding (Milestone 1) and produces
- * one typed TeachingDecision per turn. In v1 the decision is LOGGED and
- * nothing else: it changes no prompt, no DB row, no control flow — the
- * existing runtime (teaching-engine decide(), recoveryGuard preemption,
- * Explanation Memory serving, strategy blocks) continues to drive the
- * turn exactly as before. The decision trace exists so shadow logs can be
- * compared against what the runtime actually did, BEFORE any activation.
+ * one typed TeachingDecision per turn.
+ *
+ * ACTIVATION STATUS: this engine was shipped in shadow mode (decision
+ * logged, never acted on) and has since been ACTIVATED. When
+ * isBrainRuntimeEnabled() is true — the default; only ENABLE_BRAIN_RUNTIME
+ * of '0'/'false' disables it — planDispatch() turns the decision into a
+ * dispatch plan whose groqRequired flag decides whether the turn reaches a
+ * model at all, and the chat route serves the turn from Explanation Memory
+ * (SERVE_EXPLANATION_MEMORY) or from the persisted LessonAttempt
+ * (SERVE_LESSON_COMPLETE) without any model call. With the runtime
+ * disabled the decision reverts to a pure shadow log and the pre-existing
+ * runtime (teaching-engine decide(), recoveryGuard preemption, Explanation
+ * Memory serving, strategy blocks) drives the turn exactly as before.
  *
  * One Decision Engine only — relationship to existing deciders (reused,
  * not duplicated):
@@ -46,10 +53,14 @@ export type TeachingDecisionType =
 export interface TeachingDecision {
   version: 1
   computedAt: string
-  /** v1 is shadow-mode only: logged, never acted on. */
+  /**
+   * Historical v1 marker, kept for log/shape compatibility. It does NOT mean
+   * the decision is unused: see ACTIVATION STATUS above — whether a decision
+   * is acted on is decided by isBrainRuntimeEnabled(), not by this field.
+   */
   shadow: true
   decision: TeachingDecisionType
-  /** Stable id of the ladder rule that fired (for shadow-log comparison). */
+  /** Stable id of the ladder rule that fired (for decision-log comparison). */
   ruleId: string
   /** Human-readable trace: why this decision, citing the Brain rule. */
   rationale: string[]
@@ -115,7 +126,7 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
   try {
     // D-0 — RECOVERY PREEMPTS EVERYTHING (affect band; decision-engine/03 §0).
     // The live runtime renders recovery scripts through the LLM (recoveryGuard
-    // block injected LAST), so the shadow decision is LLM escalation with the
+    // block injected LAST), so the decision here is LLM escalation with the
     // recovery rationale — never a content decision into a flooded mind.
     if (u.conversationIntent.value === 'recovery' || u.studentIntent.value === 'expressing_distress') {
       return make(u, 'ESCALATE_TO_LLM', 'D0-RECOVERY-PREEMPT',
