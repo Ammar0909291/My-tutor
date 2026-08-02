@@ -9,10 +9,29 @@ import { AIProviderError } from './providers/types'
 
 // ─── Provider configuration (env-var driven) ─────────────────────────────────
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY ?? ''
-// Model is fully env-var driven (GEMINI_MODEL). Default: 'gemini-2.5-flash-lite'.
-// History: 'gemini-2.5-flash' 404s on keys issued after Gemini 3's release;
-// 'gemini-3.5-flash' was the confirmed-working value until 2026-07-27.
-const GEMINI_MODEL = process.env.GEMINI_MODEL ?? 'gemini-2.5-flash-lite'
+// Model default: 'gemini-3.5-flash-lite'. The Gemini 2.5 family is deprecated
+// and 404s on this project's API key — every turn silently failed over to Groq,
+// which is why Gemini billing never moved. GEMINI_MODEL may still override, but
+// it must NOT be set to a gemini-2.5-* value; resolveGeminiModel below rejects
+// the deprecated family so a stale env var cannot resurrect the same outage.
+// Verified 2026-08-01 against this project's key: gemini-2.5-flash-lite -> 404
+// "no longer available to new users"; gemini-3.5-flash-lite -> 200 OK.
+const GEMINI_MODEL = resolveGeminiModel(process.env.GEMINI_MODEL)
+
+/** Ignores a deprecated gemini-2.5-* override so a stale Vercel env var cannot
+ *  silently re-break the primary provider. Any other value is honoured as-is. */
+export function resolveGeminiModel(configured: string | undefined): string {
+  const fallback = 'gemini-3.5-flash-lite'
+  if (!configured) return fallback
+  if (/^gemini-2\.5[-.]/.test(configured)) {
+    console.warn(
+      `[ai/router] GEMINI_MODEL="${configured}" is a deprecated Gemini 2.5 model that 404s;` +
+      ` using "${fallback}" instead`,
+    )
+    return fallback
+  }
+  return configured
+}
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? ''
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat-v3.1'
 // Third-tier automatic fallback — the model this app ran on before the

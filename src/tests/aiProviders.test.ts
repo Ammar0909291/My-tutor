@@ -5,6 +5,7 @@ import {
   AIServerError, AINetworkError, AIEmptyResponseError,
 } from '@/lib/ai/providers/types'
 import { createFailoverRouter } from '@/lib/ai/providers/failoverRouter'
+import { resolveGeminiModel } from '@/lib/ai/router'
 import {
   recordRequest, recordSuccess, recordFailure, recordFailover,
   snapshotProviderMetrics, resetProviderMetrics,
@@ -494,5 +495,23 @@ describe('Edge cases', () => {
       expect(r.provider).toBe('gemini')
       expect(r.text).toBeTruthy()
     }
+  })
+})
+
+describe('resolveGeminiModel', () => {
+  it('defaults to gemini-3.5-flash-lite when GEMINI_MODEL is unset', () => {
+    expect(resolveGeminiModel(undefined)).toBe('gemini-3.5-flash-lite')
+    expect(resolveGeminiModel('')).toBe('gemini-3.5-flash-lite')
+  })
+
+  it('ignores deprecated gemini-2.5-* overrides (the silent Groq-failover bug)', () => {
+    expect(resolveGeminiModel('gemini-2.5-flash-lite')).toBe('gemini-3.5-flash-lite')
+    expect(resolveGeminiModel('gemini-2.5-flash')).toBe('gemini-3.5-flash-lite')
+    expect(resolveGeminiModel('gemini-2.5-pro')).toBe('gemini-3.5-flash-lite')
+  })
+
+  it('honours any non-deprecated override', () => {
+    expect(resolveGeminiModel('gemini-3.5-flash')).toBe('gemini-3.5-flash')
+    expect(resolveGeminiModel('gemini-4-flash-lite')).toBe('gemini-4-flash-lite')
   })
 })
