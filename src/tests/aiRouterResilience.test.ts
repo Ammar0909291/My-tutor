@@ -11,19 +11,16 @@ async function safeParseJSON(rawText: string | null): Promise<unknown> {
   try { return JSON.parse(clean) } catch { return null }
 }
 
-// Replica of timeout fallback logic in routeAI
-function handleAIError(error: Error, lang: 'ru' | 'en' | 'hi'): string | null {
-  const msg = error.message ?? ''
-  if (msg.includes('timeout') || msg.includes('timed out')) {
-    const msgs: Record<string, string> = {
-      en: 'Taking longer than usual. Please try again.',
-      ru: 'Думаю дольше обычного. Попробуй ещё раз.',
-      hi: 'Thoda time lag raha hai. Please try again.',
-    }
-    return msgs[lang] ?? msgs.en
-  }
-  return null // non-timeout errors re-throw
-}
+// RETIRED (audit 2026-08-02): routeAI used to convert a timeout at chain
+// exhaustion into a canned learner-facing string with provider:'fallback',
+// while every other exhaustion threw. That split made the degraded-message
+// OWNER depend on the last provider's error kind and is why production showed
+// two different degraded tutor messages. routeAI now throws for every failure
+// mode; the single owner of degraded copy is route.ts's K6 degraded path.
+//
+// The real contract is tested against the real module in
+// src/tests/degradedResponseOwnership.test.ts — this replica is kept only so
+// the retired behaviour cannot be reintroduced here unnoticed.
 
 // Replica of Yandex → Groq fallback: missing credentials → use Groq
 function selectProvider(country: string, hasYandexCreds: boolean): string {
@@ -70,30 +67,15 @@ describe('AI router resilience', () => {
     })
   })
 
-  describe('timeout fallback messages', () => {
-    it('timeout error → English fallback', () => {
-      const msg = handleAIError(new Error('Request timed out'), 'en')
-      expect(msg).toBeTruthy()
-      expect(msg).toContain('Please try again')
-    })
-
-    it('timeout error → Russian fallback', () => {
-      const msg = handleAIError(new Error('timeout exceeded'), 'ru')
-      expect(msg).toBeTruthy()
-      expect(msg).toContain('Попробуй ещё раз')
-    })
-
-    it('timeout error → Hindi fallback', () => {
-      const msg = handleAIError(new Error('Request timed out'), 'hi')
-      expect(msg).toContain('Please try again')
-    })
-
-    it('non-timeout error → null (should re-throw)', () => {
-      expect(handleAIError(new Error('Connection refused'), 'en')).toBeNull()
-    })
-
-    it('rate limit error → null (should re-throw)', () => {
-      expect(handleAIError(new Error('Rate limit exceeded'), 'en')).toBeNull()
+  describe('routeAI authors no learner-facing copy', () => {
+    it('the retired timeout-fallback strings are gone from the router module', async () => {
+      const src = await import('node:fs/promises')
+        .then((fs) => fs.readFile('src/lib/ai/router.ts', 'utf8'))
+      // Assert on the STRING LITERALS, not the helper: the defect was copy
+      // being authored here at all, in any language.
+      expect(src).not.toContain("en: 'Taking longer than usual. Please try again.'")
+      expect(src).not.toContain('Попробуй ещё раз')
+      expect(src).not.toContain("provider: 'fallback'")
     })
   })
 

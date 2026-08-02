@@ -128,7 +128,11 @@ export async function routeAI(
   systemPrompt: string,
   country: string,
   maxTokens = 800,
-  lang: 'ru' | 'en' | 'hi' = 'en',
+  // Retained positionally (three call sites pass it) but no longer read: since
+  // routeAI stopped authoring learner-facing copy, it has no text to localise.
+  // The degraded copy — and its localisation — belong to the single owner in
+  // route.ts. See the catch block below.
+  _lang: 'ru' | 'en' | 'hi' = 'en',
   _meta?: Record<string, unknown>,
 ): Promise<RouteAIResult> {
   console.log('[ai/router] routing request, country =', country)
@@ -170,17 +174,29 @@ export async function routeAI(
       tags: { provider: error instanceof AIProviderError ? error.provider : 'unknown' },
     })
 
-    if (
-      error.message?.includes('timeout') || error.message?.includes('timed out') ||
-      error.name === 'AITimeoutError'
-    ) {
-      const timeoutMsg: Record<string, string> = {
-        en: 'Taking longer than usual. Please try again.',
-        ru: 'Думаю дольше обычного. Попробуй ещё раз.',
-        hi: 'Thoda time lag raha hai. Please try again.',
-      }
-      return { text: timeoutMsg[lang] || timeoutMsg.en, provider: 'fallback', finishReason: null }
-    }
+    // SINGLE OWNER OF DEGRADED LEARNER COPY (audit 2026-08-02).
+    //
+    // This used to special-case a timeout: when the chain was exhausted and
+    // the LAST provider's error happened to be an AITimeoutError, routeAI
+    // swallowed the failure and returned a canned "Taking longer than usual"
+    // string with provider:'fallback' instead of throwing. Every other
+    // exhaustion (401, quota, empty response, server error) threw.
+    //
+    // That made the failure OWNER depend on the error kind of whichever
+    // provider was last in the chain, and produced the two-message bug:
+    //   · threw  → route.ts's K6 degraded path → K5 renderOutage() ladder,
+    //              consecutiveOutages incremented, provider='degraded'
+    //   · caught → success:true + provider:'fallback' → the client's
+    //              isFallbackResponse() re-threw it → a SECOND, independent
+    //              ladder (pickRecoveryMessage) with different copy, an
+    //              in-memory counter, and no server record of the outage.
+    // Same outage, two different tutor messages, chosen non-deterministically.
+    //
+    // routeAI now reports failure and never authors learner-facing text. The
+    // degraded-turn owner is route.ts (RS P-3: degradedTurn + renderOutage).
+    // This also stops the timeout string from being returned as a verifier
+    // re-render draft (route.ts's rerender callback), where it could be
+    // verified and served to the learner as a real teaching turn.
     throw error
   }
 }
