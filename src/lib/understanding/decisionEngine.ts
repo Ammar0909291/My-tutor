@@ -130,7 +130,36 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
     // The live runtime renders recovery scripts through the LLM (recoveryGuard
     // block injected LAST), so the decision here is LLM escalation with the
     // recovery rationale — never a content decision into a flooded mind.
-    if (u.conversationIntent.value === 'recovery' || u.studentIntent.value === 'expressing_distress') {
+    //
+    // EXCEPT when the lesson is already CLOSED. Production evidence
+    // (2026-08-02T17:27:45Z, session on chemistry lesson:1):
+    //
+    //   17:26:13  decision=SERVE_LESSON_COMPLETE  executor=LESSON_COMPLETE
+    //   17:27:11  decision=SERVE_LESSON_COMPLETE  executor=LESSON_COMPLETE
+    //   17:27:45  decision=ESCALATE_TO_LLM  ruleId=D0-RECOVERY-PREEMPT
+    //             executor=LLM_OPEN  -> provider=gemini
+    //             resolvedConceptId=chem.found.matter  chars=814
+    //
+    // The SAME understanding snapshot on that turn carried
+    // lessonCompleted:{"value":true}. A recovery-shaped utterance after the
+    // lesson closed therefore routed to an OPEN llm turn with no
+    // lesson-complete constraint, and the tutor taught the finished concept
+    // again — 90 seconds before the learner had advanced anything.
+    //
+    // Escalating here cannot honour the completed-lesson invariant, because
+    // LLM_OPEN carries no constraint the runtime can enforce. D-0a's own
+    // rationale is the reason this exception is correct rather than a
+    // weakening of the affect band: "once a lesson is finished NO other
+    // decision can be correct: there is no next concept to teach, no
+    // diagnosis worth running, and no practice that belongs to this lesson."
+    // There is nothing to recover INTO. D-0a answers from persisted evidence
+    // and points the learner at Review or the next lesson, which is the
+    // honest response to confusion about a lesson that has already ended.
+    const lessonIsClosed = u.lessonCompleted?.value === true
+    if (
+      !lessonIsClosed
+      && (u.conversationIntent.value === 'recovery' || u.studentIntent.value === 'expressing_distress')
+    ) {
       return make(u, 'ESCALATE_TO_LLM', 'D0-RECOVERY-PREEMPT',
         ['Affect band preempts all content decisions (decision-engine/03 §0).',
          'Recovery scripts are rendered by the LLM under the recoveryGuard block already injected by the runtime.'],
@@ -146,14 +175,24 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
     // the correct answer, so paying for a model call to restate it is pure
     // waste.
     //
-    // It does NOT preempt D0: a distressed learner is still a person who needs
-    // real language, and affect outranks content everywhere else in this
-    // ladder (decision-engine/03 §0). Keeping that ordering means a learner
-    // who finishes a lesson and then says "I feel stupid" is still heard.
+    // CORRECTED 2026-08-02 (production incident, see D-0's note above): this
+    // rule previously did NOT preempt D0, on the reasoning that "a distressed
+    // learner is still a person who needs real language". Production proved
+    // that ordering cannot hold the completed-lesson invariant — a
+    // recovery-shaped utterance after the lesson closed routed to LLM_OPEN and
+    // the tutor taught the finished concept again. D0 now yields on a closed
+    // lesson only; affect still outranks content everywhere else in this
+    // ladder, which is every turn of an ACTIVE lesson.
+    //
+    // The learner is still answered, not ignored: the close names what they
+    // mastered and points them at Review or the next lesson, which is the
+    // honest response to confusion about a lesson that has already ended.
     //
     // Starting a NEW lesson clears this: lessonCompleted is read per turn from
-    // the CURRENT lesson's attempt, so normal AI routing resumes immediately.
-    if (u.lessonCompleted?.value === true) {
+    // the CURRENT lesson's attempt, so normal AI routing resumes immediately —
+    // including recovery, which becomes reachable again the moment the next
+    // lesson opens.
+    if (lessonIsClosed) {
       return make(u, 'SERVE_LESSON_COMPLETE', 'D0a-LESSON-ALREADY-COMPLETE',
         ['The lesson attempt is already COMPLETED; P6.6 persisted the summary and completion payload.',
          'No new teaching is legal for a finished lesson, so no model call is required to answer.'],

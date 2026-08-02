@@ -283,10 +283,31 @@ describe('D-0a — lesson already complete', () => {
     }
   })
 
-  it('does NOT preempt recovery — affect still outranks content', () => {
-    // A learner who finishes a lesson and then expresses distress is still a
-    // person who needs real language (decision-engine/03 §0).
+  it('DOES preempt recovery once the lesson is closed (corrected 2026-08-02)', () => {
+    // This test previously pinned the opposite ordering, on the reasoning that
+    // a learner who finishes a lesson and then expresses distress still needs
+    // real language. Production disproved it:
+    //
+    //   17:26:13  decision=SERVE_LESSON_COMPLETE  executor=LESSON_COMPLETE
+    //   17:27:11  decision=SERVE_LESSON_COMPLETE  executor=LESSON_COMPLETE
+    //   17:27:45  decision=ESCALATE_TO_LLM  ruleId=D0-RECOVERY-PREEMPT
+    //             executor=LLM_OPEN -> provider=gemini chars=814
+    //             resolvedConceptId=chem.found.matter
+    //
+    // …with lessonCompleted:{"value":true} in the SAME snapshot. LLM_OPEN
+    // carries no constraint the runtime can enforce, so the tutor re-taught a
+    // finished lesson. There is nothing to recover INTO once the lesson is
+    // closed; the close answers the learner and points at Review / next lesson.
     const d = decide({ lessonCompleted: true, recoveryKey: 'i_am_stupid', message: 'I feel stupid' })
+    expect(d.decision).toBe('SERVE_LESSON_COMPLETE')
+    expect(d.ruleId).toBe('D0a-LESSON-ALREADY-COMPLETE')
+  })
+
+  it('recovery still preempts everything while the lesson is ACTIVE', () => {
+    // The affect band is narrowed ONLY for a closed lesson. Every turn of a
+    // live lesson is unchanged — this is the guarantee the old test protected
+    // and it is still protected.
+    const d = decide({ lessonCompleted: false, recoveryKey: 'i_am_stupid', message: 'I feel stupid' })
     expect(d.decision).toBe('ESCALATE_TO_LLM')
     expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
   })
