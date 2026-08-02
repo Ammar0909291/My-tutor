@@ -334,7 +334,36 @@ const DOMAIN_VISUALS: DomainRule[] = [
 
   // Chemistry domains
   domainRule('chem.bond',   'three_bond_formation', ['three_bond_formation', 'three_molecular_shapes']),
-  domainRule('chem.found',  'three_atomic_structure', ['three_atomic_structure']),
+  //
+  // REMOVED 2026-08-02 (production): domainRule('chem.found',
+  // 'three_atomic_structure', ...).
+  //
+  // A domain rule asserts "every concept under this prefix is well
+  // represented by this visual". That is true for chem.bond / chem.atomic /
+  // chem.period / chem.solid, which are visually uniform. It is FALSE for
+  // chem.found, which is the foundations domain and is deliberately
+  // heterogeneous — 8 concepts, of which exactly ONE is about atoms:
+  //
+  //   chem.found.matter               Nature of Matter
+  //   chem.found.states-of-matter     States of Matter          <- exact entry
+  //   chem.found.pure-substances      Pure Substances and Mixtures
+  //   chem.found.measurement          Physical Quantities and SI Units
+  //   chem.found.significant-figures  Significant Figures and Error Analysis
+  //   chem.found.mole-concept         Mole Concept and Avogadro's Number
+  //   chem.found.stoichiometry        Stoichiometry
+  //   chem.found.concentration        Concentration Units
+  //
+  // Only states-of-matter has an exact entry, so the other SEVEN fell through
+  // to Tier 2 and were all rendered with the generic 3D atom model. Observed
+  // in production on Mole Concept, Mixtures, Pure Substances and Dissolving.
+  //
+  // This is the rule the block below already states for the other 22
+  // chemistry domains — "left unmapped rather than assigning a poorly-fitting
+  // default" — applied to the one domain that violated it. Unmapped concepts
+  // fall through to detectVisual()'s title keyword match, which returns null
+  // when nothing genuinely fits, so no visual is claimed rather than a wrong
+  // one being shown.
+  //
   // Added: chem.atomic/chem.period/chem.solid previously had no domain
   // default at all (25 of chemistry's 27 KG domains had neither an exact
   // entry nor a fallback). These three reuse already-built chemistry
