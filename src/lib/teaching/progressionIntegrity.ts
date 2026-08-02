@@ -90,6 +90,78 @@ export function pickCurrentTopicSlug(rows: readonly TopicProgressRowLike[]): str
   return best?.topicSlug ?? null
 }
 
+/** The narrow shape this module needs from a resolved lesson. Structural so
+ *  both the KG-synthesised and the Subject-Library-synthesised lesson lists
+ *  satisfy it without a shared nominal type. */
+export interface LessonLike {
+  order: number
+  topicSlug: string
+}
+
+/**
+ * ── P20: the single owner of "which lesson is being taught" ────────────────
+ *
+ * ROOT CAUSE this replaces. The route resolved the current lesson as, in
+ * effect:
+ *
+ *     pickCurrentTopicSlug(topicProgressRows)                        // won
+ *       ?? lessons.find(l => l.order === studentProgress.currentLesson)
+ *       ?? lessons[0]
+ *
+ * That reads a LAGGING, MULTI-VALUED CACHE before the canonical owner.
+ *
+ *   · StudentProgress.currentLesson is canonical: it is what the UI renders,
+ *     what every navigation path writes (/api/curriculum/progress PATCH), and
+ *     what placement writes. One value, always.
+ *   · TopicProgress IN_PROGRESS rows are a derived record of what has been
+ *     taught. They are multi-valued by design — see this module's header:
+ *     the conversational checkpoint upserts IN_PROGRESS on every signalled
+ *     turn and nothing clears a row when the learner leaves a lesson, so
+ *     several accumulate as normal steady state. They also lag: the client
+ *     marks the open lesson IN_PROGRESS from a fire-and-forget effect that
+ *     races the first chat turn of that lesson.
+ *
+ * Reading the cache first therefore let a stale row for an earlier concept
+ * outrank the lesson the learner actually had open — reproduced in
+ * src/tests/lessonIdentityOwnership.test.ts against the real production
+ * transcript (UI on chem.found.significant-figures, tutor teaching
+ * chem.found.pure-substances, then a mid-session flip to
+ * chem.found.significant-figures the moment the lagging write landed).
+ *
+ * pickCurrentTopicSlug is NOT retired: it remains the right answer to a
+ * genuinely different question ("which topic have we been working on?") and
+ * is still this function's fallback when the canonical owner has no usable
+ * value. What changes is the precedence, which removes the second owner from
+ * the decision rather than trying to keep two owners in sync.
+ *
+ * Pure and total: no I/O, no clock, never throws, order-invariant.
+ */
+export function selectCurrentLesson<T extends LessonLike>(
+  lessons: readonly T[],
+  studentCurrentLesson: number | null | undefined,
+  topicProgressRows: readonly TopicProgressRowLike[],
+): T | null {
+  if (!Array.isArray(lessons) || lessons.length === 0) return null
+
+  // 1. Canonical owner.
+  if (typeof studentCurrentLesson === 'number' && Number.isFinite(studentCurrentLesson)) {
+    const byOrder = lessons.find((l) => l && l.order === studentCurrentLesson)
+    if (byOrder) return byOrder
+  }
+
+  // 2. Fallback — the learner has no canonical position yet (no StudentProgress
+  //    row), or it no longer resolves (curriculum edited under a stored order).
+  //    The in-progress record is the best remaining evidence of where they are.
+  const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
+  if (inProgressSlug) {
+    const bySlug = lessons.find((l) => l && l.topicSlug === inProgressSlug)
+    if (bySlug) return bySlug
+  }
+
+  // 3. Nothing known — start at the beginning.
+  return lessons[0] ?? null
+}
+
 // ── Stall telemetry ───────────────────────────────────────────────────────
 
 /**

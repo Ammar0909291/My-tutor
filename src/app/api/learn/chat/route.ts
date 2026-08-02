@@ -26,8 +26,8 @@ import {
 } from '@/lib/teaching/assets'
 import { stripIpaNotation } from '@/lib/text/ipaSanitizer'
 import {
-  pickCurrentTopicSlug, foldProgressionMetrics, readProgressionMetrics,
-  progressionTags, needsSignalRepair,
+  pickCurrentTopicSlug, selectCurrentLesson, foldProgressionMetrics,
+  readProgressionMetrics, progressionTags, needsSignalRepair,
 } from '@/lib/teaching/progressionIntegrity'
 
 // Voice Signal Recovery (Claude Recommendation #7): mirrors
@@ -271,13 +271,13 @@ export async function POST(req: Request) {
         )
         if (syntheticLessons.length > 0) {
           const topicProgressRows = topicProgressRowsShared
-          const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
-          const currentLesson = (inProgressSlug
-            ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
-            : null)
-            ?? (studentProgress?.currentLesson != null
-              ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
-              : null)
+          // P20: StudentProgress.currentLesson is the canonical owner of which
+          // lesson is open; the IN_PROGRESS row is a lagging cache and is only
+          // consulted when the canonical owner has no usable value. See
+          // selectCurrentLesson's header for the production transcript this
+          // precedence fixes.
+          const currentLesson =
+            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
             topicProgressRows
@@ -335,13 +335,9 @@ export async function POST(req: Request) {
           )
           if (syntheticLessons.length > 0) {
             const topicProgressRows = topicProgressRowsShared
-            const inProgressSlug = pickCurrentTopicSlug(topicProgressRows)
-            const currentLesson = (inProgressSlug
-              ? syntheticLessons.find((l) => l.topicSlug === inProgressSlug)
-              : null)
-              ?? (studentProgress?.currentLesson != null
-                ? syntheticLessons.find((l) => l.order === studentProgress.currentLesson)
-                : null)
+            // P20: same canonical-owner precedence as the KG branch above.
+            const currentLesson =
+              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
               ?? syntheticLessons[0]
             const completedSlugs = new Set(
               topicProgressRows
@@ -717,7 +713,24 @@ export async function POST(req: Request) {
             // fires for Library mode; set ENABLE_LIBRARY_CONCEPT_TRACKING=0 to revert.
             if (process.env.ENABLE_LIBRARY_CONCEPT_TRACKING !== '0') {
               const { resolveLibraryEntryConceptId } = await import('@/lib/curriculum/libraryConceptResolver')
-              libraryConceptNodeIdHoisted = snapshotCurrentConceptId
+              // P20: the lesson the learner has open wins over the persisted
+              // pointer. The pointer was snapshot-FIRST here and is re-seeded
+              // from itself, so once written it could never follow lesson
+              // navigation — it was a third owner of "current concept" that
+              // outranked both the canonical lesson and the KG resolution.
+              // /api/curriculum/progress already had to special-case clearing
+              // it for "skip" for exactly this reason (see its comment: "that
+              // pointer always wins when a Library turn resolves its active
+              // concept ... so the next chat message kept teaching the same
+              // unmastered concept"). Making the pointer DERIVED rather than
+              // authoritative fixes every navigation path at once instead of
+              // adding a second clear-site per path.
+              //
+              // resolvedConceptId is null for subjects with no canonical KG
+              // (Spanish, JavaScript, …), so those subjects keep exactly the
+              // previous snapshot-first order.
+              libraryConceptNodeIdHoisted = resolvedConceptId
+                ?? snapshotCurrentConceptId
                 ?? resolveLibraryEntryConceptId(subjectCode, currentModule.slug)
                 ?? null
             }
@@ -831,7 +844,11 @@ export async function POST(req: Request) {
     // Additive, own try/catch, never blocks. Teaching style only — content
     // stays curriculum-controlled (the block carries an explicit guard line).
     try {
-      const currentTopicSlug = pickCurrentTopicSlug(topicProgressRowsShared)
+      // P20: the teaching-plan block must describe the lesson being taught.
+      // It previously re-derived its own answer from the IN_PROGRESS cache,
+      // so with a stale row present the tutor received a teaching plan for a
+      // different concept than the one it was told to teach.
+      const currentTopicSlug = resolvedConceptId ?? pickCurrentTopicSlug(topicProgressRowsShared)
       if (currentTopicSlug) {
         const { getTutorTeachingContext, buildTutorTeachingContextBlock } = await import('@/lib/intelligence/tutorTeachingContext')
         const teachingContext = await getTutorTeachingContext(userId, subjectCode, currentTopicSlug)
@@ -903,14 +920,18 @@ export async function POST(req: Request) {
           .map((r) => r.topicSlug)
         const completedSet = new Set(completedSlugs)
         // A.7: check if the current concept was previously mastered
-        const currentConceptForMastery = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+        const currentConceptForMastery = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
         if (currentConceptForMastery && completedSet.has(currentConceptForMastery)) {
           conceptPreviouslyMasteredHoisted = true
         }
 
         // ?? undefined: this consumer's signature is `string | undefined`,
         // matching the `?.topicSlug` it previously received.
-        const inProgressSlug = pickCurrentTopicSlug(topicProgressRows) ?? undefined
+        // P20: the KG-context block ("PREREQUISITES NOT MET", "WHY THIS TOPIC
+        // MATTERS") names a concept to the learner by title, so it must name
+        // the lesson being taught — not a third, independently re-derived
+        // answer from the lagging IN_PROGRESS cache.
+        const inProgressSlug = resolvedConceptId ?? pickCurrentTopicSlug(topicProgressRows) ?? undefined
         const kgContext = buildKnowledgeGraphContext(subjectCode, completedSlugs, inProgressSlug)
         if (kgContext) systemPrompt += `\n\n${kgContext}`
 
@@ -1020,7 +1041,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // turn of a session has no snapshot concept yet, but the entry concept
       // was already resolved earlier this request (libraryConceptNodeIdHoisted)
       // — use it, so no Library turn bypasses decide().
-      const activeConceptIdForDecide = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted
+      // P20: libraryConceptNodeIdHoisted FIRST. It is now seeded
+      // resolvedConceptId-first (see its assignment above), so it already
+      // carries the lesson the learner has open, falling back to the snapshot
+      // itself. Reading the raw snapshot first was a precedence INVERSION
+      // against Explanation Memory, which has always read resolvedConceptId
+      // first — that let decide() and the conversation state machine run on
+      // one concept while authored content was served for another.
+      // School Mode leaves libraryConceptNodeIdHoisted null, so it falls
+      // through to exactly the previous value.
+      const activeConceptIdForDecide = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId
       if (activeConceptIdForDecide) {
         const { createSubjectAdapter } = await import('@/lib/curriculum/subjectKgAdapter')
         const conceptNode = createSubjectAdapter(subjectCode).getConceptNode(activeConceptIdForDecide)
@@ -1783,7 +1813,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             detectLearnerRequest, buildLearnerRequestBlock,
             buildUnreadExplanationBlock,
           } = await import('@/lib/teaching/masteryGate')
-          const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
+          const convConceptId = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
 
 
@@ -2100,7 +2130,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             profileLevel: (profile?.currentLevel === 'beginner' || profile?.currentLevel === 'intermediate' || profile?.currentLevel === 'advanced')
               ? profile.currentLevel : null,
             sessionFailureCount: snapshotSessionFailureCount,
-            currentConceptId: snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null,
+            currentConceptId: libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null,
             hasVerifiedPlacement: placementPrevHoisted?.verified === true,
             pendingPlacementProbe: snapshotPendingProbe ?? null,
             isFirstLessonContext: firstLessonActiveHoisted,
