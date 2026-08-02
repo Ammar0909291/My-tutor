@@ -33,7 +33,7 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
     recordRequest(provider.name)
     const start = Date.now()
     const result = await provider.complete(req)
-    recordSuccess(provider.name, Date.now() - start)
+    recordSuccess(provider.name, Date.now() - start, result.usage ?? null)
     return result
   }
 

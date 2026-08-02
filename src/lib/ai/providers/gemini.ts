@@ -45,7 +45,14 @@ export function createGeminiProvider(apiKey: string, model: string): AIProvider 
 
       if (!text) throw new AIEmptyResponseError('gemini')
 
-      return { text, finishReason, provider: 'gemini' }
+      // P10: the SDK already reports this on every response; it was being
+      // discarded, which is why no token or cost figure existed anywhere.
+      const um = (result.response as { usageMetadata?: { promptTokenCount?: number; candidatesTokenCount?: number } } | undefined)?.usageMetadata
+      const usage = um
+        ? { promptTokens: um.promptTokenCount, completionTokens: um.candidatesTokenCount }
+        : undefined
+
+      return { text, finishReason, provider: 'gemini', usage }
     },
 
     async healthCheck(): Promise<boolean> {

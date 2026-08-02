@@ -14,6 +14,9 @@ export interface AICompletionResult {
   text: string
   finishReason: string | null
   provider: string
+  /** P10 — token counts AS REPORTED BY THE PROVIDER. Optional because not
+   *  every provider returns them; absent means "not measured", never "zero". */
+  usage?: { promptTokens?: number; completionTokens?: number }
 }
 
 export interface AIProvider {
