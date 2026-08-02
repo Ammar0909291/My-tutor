@@ -149,3 +149,62 @@ describe('lib/ai/client uses the shared provider chain', () => {
     vi.doUnmock('@/lib/ai/providers/failoverRouter')
   })
 })
+
+describe('summarizeSession never sends a trailing model turn', () => {
+  beforeEach(() => {
+    captured.length = 0
+    vi.resetModules()
+    // The generateJSON cases above end with doUnmock, which leaves the REAL
+    // failover chain in place — these tests would otherwise make live network
+    // calls. Re-arm the capture stub explicitly.
+    vi.doMock('@/lib/ai/providers/failoverRouter', () => ({
+      createFailoverRouter: () => ({
+        complete: async (req: AICompletionRequest) => {
+          captured.push(req)
+          return { text: 'ok', finishReason: 'stop', provider: 'gemini' }
+        },
+      }),
+    }))
+  })
+
+  /**
+   * Production 2026-08-02T13:50:14Z, POST /api/sessions/end:
+   *   [400 Bad Request] Requests ending with a model turn are not supported
+   * A raw transcript normally ends with the tutor speaking. Groq tolerated it;
+   * Gemini rejects it, so the whole chain failed and the summary was lost.
+   */
+  it('drops trailing assistant turns', async () => {
+    const { summarizeSession } = await import('@/lib/ai/client')
+    await summarizeSession(
+      [
+        { role: 'user', content: 'what is a mixture?' },
+        { role: 'assistant', content: 'a mixture is...' },
+      ],
+      'en',
+    )
+    const msgs = captured[0].messages
+    expect(msgs[msgs.length - 1].role).toBe('user')
+    expect(msgs).toHaveLength(1)
+  })
+
+  it('keeps a transcript that already ends with the learner', async () => {
+    const { summarizeSession } = await import('@/lib/ai/client')
+    await summarizeSession(
+      [
+        { role: 'user', content: 'q' },
+        { role: 'assistant', content: 'a' },
+        { role: 'user', content: 'got it' },
+      ],
+      'en',
+    )
+    expect(captured[0].messages).toHaveLength(3)
+    expect(captured[0].messages[2].content).toBe('got it')
+  })
+
+  it('makes no provider call at all when the learner never spoke', async () => {
+    const { summarizeSession } = await import('@/lib/ai/client')
+    await expect(summarizeSession([{ role: 'assistant', content: 'hello' }], 'en'))
+      .resolves.toBe('')
+    expect(captured).toHaveLength(0)
+  })
+})

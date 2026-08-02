@@ -108,8 +108,26 @@ export async function summarizeSession(
     // removed with the direct Groq client: the router picks whichever
     // provider has a key, so requiring Groq's specifically would now skip
     // summarisation on a deployment running purely on Gemini.
+    //
+    // TRAILING ASSISTANT TURNS MUST BE DROPPED. Unlike the chat route — which
+    // always appends the learner's new message last — this function is handed
+    // a raw session transcript, which normally ENDS with the tutor speaking.
+    // Groq accepted that; Gemini rejects it outright:
+    //   [400 Bad Request] Requests ending with a model turn are not supported
+    // (observed in production 2026-08-02T13:50:14Z on POST /api/sessions/end,
+    // immediately after this function was moved onto the shared router). The
+    // whole chain then failed and the session summary was silently lost.
+    // Truncating to the last learner turn is the minimal contract fix: a
+    // summary of the conversation up to the student's last message is still a
+    // correct summary, and no other caller shape changes.
+    const turns = messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content }))
+    let end = turns.length
+    while (end > 0 && turns[end - 1].role !== 'user') end--
+    const payload = turns.slice(0, end)
+    if (payload.length === 0) return ''
+
     const result = await getAIRouter().complete({
-      messages: messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
+      messages: payload,
       systemPrompt: prompt,
       maxTokens: 200,
       temperature: 0.7,
