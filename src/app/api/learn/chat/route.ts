@@ -435,6 +435,10 @@ export async function POST(req: Request) {
     // reason as hintHoisted — attached to the JSON response once cleanText is
     // finalized, so the client can render tappable options.
     let mcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    // P3: the session's asked-question ledger, read from contextSnapshot before
+    // the prompt is built and re-persisted with this turn's questions folded in.
+    let questionLedgerHoisted: import('@/lib/teaching/repetitionGuard').QuestionLedger =
+      { fingerprints: [], recent: [] }
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
@@ -1467,6 +1471,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { buildMcqInstruction } = await import('@/lib/teaching/mcq')
         systemPrompt += buildMcqInstruction()
 
+        // P3: the do-not-repeat contract — the questions already asked this
+        // session, quoted back, plus the banned stock formulations and the
+        // "confusion → explain, new example, new MCQ" rule that replaces
+        // re-asking. Built from the persisted ledger read above.
+        // The ledger is read HERE, from the session snapshot, rather than from
+        // questionLedgerHoisted: that variable is populated further down (with
+        // conversationState) and is still empty at prompt-build time, which
+        // would have made this whole block inert. Same for the acknowledgement
+        // flag — lowSignalAckHoisted is assigned after this point, so the
+        // predicate is evaluated directly off `message` here. Both are pure
+        // reads, so computing them early changes nothing else.
+        const { buildAntiRepetitionBlock, readQuestionLedger: readLedgerForPrompt } =
+          await import('@/lib/teaching/repetitionGuard')
+        const { isLowSignalAcknowledgement: isAckForPrompt } =
+          await import('@/lib/teaching/conversationState')
+        questionLedgerHoisted = readLedgerForPrompt(snapshot?.questionLedger)
+        systemPrompt += buildAntiRepetitionBlock(questionLedgerHoisted, {
+          learnerAcknowledged: isAckForPrompt(message),
+        })
+
         // P1-1 (Phase 1 Stage 1): the TEACHING INTENT declaration. Sits beside
         // the OBSERVE signal because it is the same mechanism pointed the other
         // way — SIGNAL declares what was observed of the learner, ATTEMPT
@@ -1654,6 +1678,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           } = await import('@/lib/teaching/masteryGate')
           const convConceptId = snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
+
 
           // S2 (Runtime Redesign Mission Part 5): objective state resets on
           // the same conceptId change conversationState does — one
@@ -3625,6 +3650,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // persists that value. The re-fold fallback covers the gate's
           // catch path, where conversationStateAfterTurnHoisted stays null.
           let conversationStateUpdate: Record<string, unknown> = {}
+          // P3: fold this turn's questions into the asked-question ledger and
+          // ride the same snapshot persist as every other counter. This is
+          // what makes "never ask the same thing twice" enforceable — the
+          // previous runtime counted questions but never remembered them.
+          {
+            const { recordQuestions } = await import('@/lib/teaching/repetitionGuard')
+            conversationStateUpdate.questionLedger = recordQuestions(questionLedgerHoisted, cleanText)
+          }
           // K5: session-scoped verifier metrics ride the same snapshot persist
           // as every other counter — no new store, no new writer.
           if (eosVerifierMetricsHoisted) {
