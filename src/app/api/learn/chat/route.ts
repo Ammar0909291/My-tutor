@@ -1493,6 +1493,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // flag — lowSignalAckHoisted is assigned after this point, so the
         // predicate is evaluated directly off `message` here. Both are pure
         // reads, so computing them early changes nothing else.
+        // P6: the lesson-flow contract — the purpose of the next question, the
+        // never-repeat-the-failed-explanation recovery rule, and the concept
+        // budget's close-and-move-on instruction when it is spent. Derived
+        // purely from the conversation state the engine already maintains, so
+        // it adds no second progress tracker. Read from the snapshot here for
+        // the same ordering reason as the ledger below.
+        {
+          const { buildLessonFlowBlock } = await import('@/lib/teaching/conceptBudget')
+          const { readConversationState: readCSForFlow } = await import('@/lib/teaching/conversationState')
+          const flowConceptId = snapshotCurrentConceptId ?? resolvedConceptId ?? null
+          systemPrompt += buildLessonFlowBlock(
+            readCSForFlow(snapshot?.conversationState, flowConceptId),
+          )
+        }
+
         const { buildAntiRepetitionBlock, readQuestionLedger: readLedgerForPrompt } =
           await import('@/lib/teaching/repetitionGuard')
         const { isLowSignalAcknowledgement: isAckForPrompt } =

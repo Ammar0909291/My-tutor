@@ -117,6 +117,12 @@ export interface ConversationState {
   /** A.6: turns spent in the current phase without advancing. Resets to 0
    *  on any phase transition. Used to detect stale teaching loops. */
   turnsInCurrentPhase: number
+  /** P6: total teaching turns spent on THIS concept, across all phases.
+   *  Distinct from turnsInCurrentPhase, which resets on every transition and
+   *  therefore cannot see a learner cycling explain/question/explain across
+   *  phases — the exact loop the concept budget exists to bound. Reset on a
+   *  concept change by readConversationState, like every other counter here. */
+  turnsOnConcept: number
   /** QL-5 (questionLegality.ts, Runtime Redesign Mission Part 7, closes
    *  gap G2): has a reflection/check-style question already been asked
    *  during the CURRENT entry into CHECK phase? CHECK is legacy's
@@ -171,6 +177,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     learnerConfidence: 'unknown',
     frustrationLevel: 0,
     turnsInCurrentPhase: 0,
+    turnsOnConcept: 0,
     reflectionAskedThisEntry: false,
     verifiedCorrectAtCheck: 0,
     verifiedCorrectAtPractice: 0,
@@ -327,6 +334,12 @@ export function advanceConversationState(
   evidence: TurnEvidence,
 ): ConversationState {
   const next: ConversationState = { ...prev }
+
+  // P6: every turn spent on this concept counts toward its teaching budget,
+  // regardless of which phase it happened in or how it went. A degraded turn
+  // taught nothing, so it must not consume budget either (same reasoning as
+  // the P4 stage guard).
+  if (!evidence.degradedTurn) next.turnsOnConcept = (prev.turnsOnConcept ?? 0) + 1
 
   // Stance Enforcement (Claude Recommendation #6): monotonic within the
   // concept's lifetime, same reset-on-concept-change rule as every other
