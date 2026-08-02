@@ -372,6 +372,17 @@ export async function POST(req: Request) {
       contentRegister,
     )
 
+    // P5: the Coach interview's learner profile. Injected immediately after
+    // the base prompt so every later block (anchor, teaching contract,
+    // recovery) can override it — the profile describes the learner's
+    // standing preferences, which a live signal about THIS turn must always
+    // outrank. Renders '' for learners who predate the interview, so existing
+    // sessions are byte-for-byte unchanged.
+    {
+      const { buildCoachAdaptationBlock } = await import('@/lib/coach/learnerProfile')
+      systemPrompt += buildCoachAdaptationBlock(profile ?? null)
+    }
+
     // Loop 1: Topic Anchoring — inject CONCEPT ANCHOR block right after
     // the base prompt, before any other blocks. Uses the already-resolved
     // lessonCtx + resolvedConceptId from the curriculum resolution above.

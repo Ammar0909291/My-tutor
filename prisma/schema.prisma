@@ -175,33 +175,49 @@ enum UserType {
 }
 
 model Profile {
-  id               String           @id @default(cuid())
-  userId           String           @unique
-  displayName      String
-  selfDescription  String           @db.Text
+  id                 String           @id @default(cuid())
+  userId             String           @unique
+  displayName        String
+  selfDescription    String           @db.Text
   // School Mode (Sprint BF): set once at onboarding; board/grade stay null for
   // general learners. educationBoard holds a board id from the education
   // registry ('cbse', 'up_board', ...) — validated in the API layer.
-  userType         UserType         @default(GENERAL_LEARNER)
-  educationBoard   String?
-  grade            Int?
-  currentLevel     String?
-  targetLevel      String?
-  learningGoals    String?          @db.Text
-  voiceId          String?
-  speechRate       Float            @default(1.0)
-  teachingLanguage TeachingLanguage @default(en)
-  country          String           @default("global")
-  voiceSpeed       Float            @default(1.0)
-  confusedTopics   String[]         @default([])
-  masteredTopics   String[]         @default([])
-  totalSessions    Int              @default(0)
-  totalMessages    Int              @default(0)
-  lastStudiedTopic String?
-  streakDays       Int              @default(0)
-  lastStudyDate    DateTime?
-  createdAt        DateTime         @default(now())
-  updatedAt        DateTime         @updatedAt
+  userType           UserType         @default(GENERAL_LEARNER)
+  educationBoard     String?
+  grade              Int?
+  currentLevel       String?
+  targetLevel        String?
+  learningGoals      String?          @db.Text
+  // Coach onboarding interview (P5). All nullable: learners who predate the
+  // interview keep working unchanged, and Tutor Max renders no adaptation
+  // block for them. `goalCategory` is a structured enum value from
+  // src/lib/coach/onboardingInterview.ts — deliberately NOT folded into
+  // `learningGoals` above, which is live free text already read into the
+  // tutor prompt. Experience and subjects are NOT stored here: they reuse
+  // `currentLevel` and ProfileSubject respectively.
+  goalCategory       String?
+  dailyStudyMinutes  Int?
+  learningStyle      String?
+  confidenceBaseline String?
+  /**
+   * Set when the Coach interview completes — the gate for "every new
+   * learner meets Coach before Tutor Max".
+   */
+  coachCompletedAt   DateTime?
+  voiceId            String?
+  speechRate         Float            @default(1.0)
+  teachingLanguage   TeachingLanguage @default(en)
+  country            String           @default("global")
+  voiceSpeed         Float            @default(1.0)
+  confusedTopics     String[]         @default([])
+  masteredTopics     String[]         @default([])
+  totalSessions      Int              @default(0)
+  totalMessages      Int              @default(0)
+  lastStudiedTopic   String?
+  streakDays         Int              @default(0)
+  lastStudyDate      DateTime?
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
 
   user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   subjects ProfileSubject[]
@@ -2484,20 +2500,20 @@ enum MasteryLevel {
 // The two scores are never conflated: masteryScore is the best score achieved,
 // decayedScore is current retention after the forgetting curve is applied.
 model ConceptMasteryRecord {
-  userId            String
-  conceptId         String       // KG node slug, e.g. "math.algebra.linear_equations"
+  userId    String
+  conceptId String // KG node slug, e.g. "math.algebra.linear_equations"
 
-  masteryScore      Float        @default(0)    // 0–1, best score achieved
-  decayedScore      Float        @default(0)    // 0–1, current retention (masteryScore × decay)
-  masteryConfidence Float        @default(0)    // 0–1, statistical confidence in the score
-  masteryLevel      MasteryLevel @default(NOT_STARTED)  // canonical enum
+  masteryScore      Float        @default(0) // 0–1, best score achieved
+  decayedScore      Float        @default(0) // 0–1, current retention (masteryScore × decay)
+  masteryConfidence Float        @default(0) // 0–1, statistical confidence in the score
+  masteryLevel      MasteryLevel @default(NOT_STARTED) // canonical enum
 
-  lastProbeOutcome  String?      // "pass" | "fail" | "partial"
-  lastSeenAt        DateTime     @default(now())
-  attemptCount      Int          @default(0)
-  sampleSize        Int          @default(0)    // effective # of graded interactions
-  createdAt         DateTime     @default(now())
-  updatedAt         DateTime     @updatedAt
+  lastProbeOutcome String? // "pass" | "fail" | "partial"
+  lastSeenAt       DateTime @default(now())
+  attemptCount     Int      @default(0)
+  sampleSize       Int      @default(0) // effective # of graded interactions
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   // ─── WP-4 structural carriers (AH-2, VH-8) — NOTHING WRITES THESE YET ────
   // This row is already the per-learner-per-concept grain both handoffs ask
@@ -2533,8 +2549,8 @@ model ConceptMasteryRecord {
 // Read-only at runtime — no teaching-path code may write to this table.
 model BrainConfig {
   id            String    @id
-  name          String    @unique  // e.g. "mastery_thresholds", "probe_target_frequency"
-  value         Json                // typed payload varies by name
+  name          String    @unique // e.g. "mastery_thresholds", "probe_target_frequency"
+  value         Json // typed payload varies by name
   version       Int       @default(1)
   effectiveFrom DateTime  @default(now())
   effectiveTo   DateTime?
@@ -2557,9 +2573,9 @@ enum MisconceptionStatus {
 
 model ActiveMisconception {
   userId          String
-  misconceptionId String              // canonical slug, e.g. "math.add.carrying_error"
-  topicSlug       String              // KG node slug the misconception applies to
-  confidence      Float               @default(0.5)  // 0–1, Bayesian posterior
+  misconceptionId String // canonical slug, e.g. "math.add.carrying_error"
+  topicSlug       String // KG node slug the misconception applies to
+  confidence      Float               @default(0.5) // 0–1, Bayesian posterior
   firstDetectedAt DateTime            @default(now())
   lastDetectedAt  DateTime            @default(now())
   repairAttempts  Int                 @default(0)
@@ -2615,8 +2631,8 @@ enum VisualRenderer {
   SCENE_SPEC
   VISUAL_SPEC
   DYNAMIC_COMPONENT
-  ANIMATION             // Phase 3+
-  INTERACTIVE_WIDGET    // Phase 3+
+  ANIMATION // Phase 3+
+  INTERACTIVE_WIDGET // Phase 3+
 }
 
 enum ProbeDifficulty {
@@ -2630,41 +2646,41 @@ enum ProbeDifficulty {
 // One row per versioned asset; cross-asset queries go through this table.
 // Quality fields are single-writer: Evidence Engine only (ADR 13 invariant).
 model AssetIdentity {
-  assetId          String      @id @default(uuid())
-  family           AssetFamily
-  familyKind       String      // discriminator: ExplanationKind | ProbeKind | VisualRenderer slug
-  conceptId        String      // KG concept slug
-  language         String      // BCP-47, e.g. "en", "ru"
-  gradeBand        GradeBand   // reuses W1-3 enum
-  authorId         String      // userId or 'SYSTEM_AI' sentinel
-  authorKind       AuthorKind
-  status           AssetStatus @default(DRAFT)
-  version          Int         @default(1)
-  parentVersionId  String?     // self-FK: previous version in same canonicalSlug group
+  assetId         String      @id @default(uuid())
+  family          AssetFamily
+  familyKind      String // discriminator: ExplanationKind | ProbeKind | VisualRenderer slug
+  conceptId       String // KG concept slug
+  language        String // BCP-47, e.g. "en", "ru"
+  gradeBand       GradeBand // reuses W1-3 enum
+  authorId        String // userId or 'SYSTEM_AI' sentinel
+  authorKind      AuthorKind
+  status          AssetStatus @default(DRAFT)
+  version         Int         @default(1)
+  parentVersionId String? // self-FK: previous version in same canonicalSlug group
 
-  canonicalSlug    String      // deterministic hash of (conceptId, familyKind, language)
+  canonicalSlug String // deterministic hash of (conceptId, familyKind, language)
 
   // Evidence — single writer: Evidence Engine (ADR 13)
-  qualityScore     Float       @default(0)
-  qualityConfidence Float      @default(0)
-  sampleSize       Int         @default(0)
+  qualityScore      Float @default(0)
+  qualityConfidence Float @default(0)
+  sampleSize        Int   @default(0)
 
   // Content
-  contentHash      String      // SHA-256 of family-table payload
-  tags             String[]    // e.g. ['good_for_visual_learners', 'requires_calc']
+  contentHash String // SHA-256 of family-table payload
+  tags        String[] // e.g. ['good_for_visual_learners', 'requires_calc']
 
   // Provenance
-  sourceTraceId       String?
-  intellectualProperty String  // 'public_domain' | 'cc_by' | 'proprietary' | ...
-  curriculumMappings  Json     // Array<{ curriculumId: string; codeRef: string }>
-  deprecationReason   String?  @db.Text
+  sourceTraceId        String?
+  intellectualProperty String // 'public_domain' | 'cc_by' | 'proprietary' | ...
+  curriculumMappings   Json // Array<{ curriculumId: string; codeRef: string }>
+  deprecationReason    String? @db.Text
 
   // Safety gates (ADR 14 §4.1 / ch01 §5)
-  incompatibilities String[]   // [misconceptionId] — gates serving to learner with that misconception
-  prerequisites     String[]   // [conceptId] — asset-level prerequisites beyond concept-level
+  incompatibilities String[] // [misconceptionId] — gates serving to learner with that misconception
+  prerequisites     String[] // [conceptId] — asset-level prerequisites beyond concept-level
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   parent   AssetIdentity?  @relation("AssetVersionChain", fields: [parentVersionId], references: [assetId])
   children AssetIdentity[] @relation("AssetVersionChain")
@@ -2684,9 +2700,9 @@ model ExplanationAsset {
   assetId                String           @id
   content                String           @db.Text
   style                  ExplanationStyle
-  readingLevel           Float            // Flesch-Kincaid score
+  readingLevel           Float // Flesch-Kincaid score
   lengthChars            Int
-  targetedMisconceptions String[]         // [misconceptionId] this asset is designed to repair
+  targetedMisconceptions String[] // [misconceptionId] this asset is designed to repair
 
   identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
 
@@ -2697,8 +2713,8 @@ model ExplanationAsset {
 model VisualAsset {
   assetId         String         @id
   renderer        VisualRenderer
-  specPayload     Json           // typed by renderer: SceneSpec | VisualSpec | LatexString | ...
-  a11yDescription String         @db.Text  // mandatory — empty fails Layer 1 validation
+  specPayload     Json // typed by renderer: SceneSpec | VisualSpec | LatexString | ...
+  a11yDescription String         @db.Text // mandatory — empty fails Layer 1 validation
 
   identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
 
@@ -2709,15 +2725,15 @@ model VisualAsset {
 model ProbeAsset {
   assetId                String          @id
   stem                   String          @db.Text
-  choices                Json?           // ProbeChoice[] — null for non-MCQ kinds
-  correctValue           String?         // for true_false / numeric / short_answer
-  tolerance              Float?          // for numeric answer tolerance
-  keywords               String[]        // for short_answer keyword scoring
+  choices                Json? // ProbeChoice[] — null for non-MCQ kinds
+  correctValue           String? // for true_false / numeric / short_answer
+  tolerance              Float? // for numeric answer tolerance
+  keywords               String[] // for short_answer keyword scoring
   sampleAnswer           String?         @db.Text
   difficulty             ProbeDifficulty
-  discriminationScore    Float?          // IRT-like signal 0–1; updated by Evidence Engine
-  targetedMisconceptions String[]        // [misconceptionId] that wrong choices map to
-  requiredVisuals        String[]        // [assetId] that must be on screen with this probe
+  discriminationScore    Float? // IRT-like signal 0–1; updated by Evidence Engine
+  targetedMisconceptions String[] // [misconceptionId] that wrong choices map to
+  requiredVisuals        String[] // [assetId] that must be on screen with this probe
 
   identity AssetIdentity @relation(fields: [assetId], references: [assetId], onDelete: Cascade)
 
@@ -2730,8 +2746,8 @@ model ProbeAsset {
 // on the hot path (ADR 13 §5 Design C, §10 Phase 1 spec).
 
 enum EvidenceCategory {
-  ASSET_SHOWN          // strength always 0.0 — consumed-ness, not effectiveness
-  PROBE_OUTCOME        // strength: 1.0 pass / 0.0 fail / 0.5 partial
+  ASSET_SHOWN // strength always 0.0 — consumed-ness, not effectiveness
+  PROBE_OUTCOME // strength: 1.0 pass / 0.0 fail / 0.5 partial
   MISCONCEPTION_DETECTED
   LEARNER_FEEDBACK
   RE_ASK
@@ -2739,36 +2755,36 @@ enum EvidenceCategory {
 }
 
 enum GradeBand {
-  EARLY              // grades K-2 / ages 5-7
-  ELEMENTARY         // grades 3-5 / ages 8-10
-  MIDDLE             // grades 6-8 / ages 11-13
-  HIGH               // grades 9-12 / ages 14-17
+  EARLY // grades K-2 / ages 5-7
+  ELEMENTARY // grades 3-5 / ages 8-10
+  MIDDLE // grades 6-8 / ages 11-13
+  HIGH // grades 9-12 / ages 14-17
   UNDERGRADUATE
   ADULT
 }
 
 model EvidenceEvent {
-  eventId        String          @id @default(uuid())
-  occurredAt     DateTime        @default(now())
+  eventId    String   @id @default(uuid())
+  occurredAt DateTime @default(now())
 
   // Denormalized — no FK, lock-free INSERT on hot path
-  userId         String
-  sessionId      String?
-  turnId         String?         // assistant Message.id, set when available
+  userId    String
+  sessionId String?
+  turnId    String? // assistant Message.id, set when available
 
-  conceptId      String          // KG node slug (Phase 1: subject slug proxy)
-  language       String          // BCP-47, e.g. "ru", "en"
-  gradeBand      GradeBand
+  conceptId String // KG node slug (Phase 1: subject slug proxy)
+  language  String // BCP-47, e.g. "ru", "en"
+  gradeBand GradeBand
 
-  category       EvidenceCategory
-  assetId        String?         // Knowledge Asset id (Phase 3+)
-  misconceptionId String?        // canonical misconception slug
-  curriculumId   String?         // board/chapter/topic composite key
+  category        EvidenceCategory
+  assetId         String? // Knowledge Asset id (Phase 3+)
+  misconceptionId String? // canonical misconception slug
+  curriculumId    String? // board/chapter/topic composite key
 
-  outcome        String          // "pass" | "fail" | "partial" | "shown" | etc.
-  strength       Float           // 0–1 signal weight per category spec
-  rawScore       Float?          // raw probe score when applicable
-  contextHash    String?         // hash of turn context for deduplication
+  outcome     String // "pass" | "fail" | "partial" | "shown" | etc.
+  strength    Float // 0–1 signal weight per category spec
+  rawScore    Float? // raw probe score when applicable
+  contextHash String? // hash of turn context for deduplication
 
   // ─── WP-4 structural carriers (AH-6) — NOTHING WRITES THESE YET ─────────
   // Assisted and unassisted evidence must stay distinguishable: a pass at
@@ -2781,10 +2797,10 @@ model EvidenceEvent {
   // that definition (RS Appendix A-1) and this column must not become a
   // second one. Producer is AH-1's typed ASV; unimplemented.
   // NULL = not captured, NOT scaffoldDial 0.
-  scaffoldLevel  Int?
+  scaffoldLevel Int?
   // hintDebt: hints consumed before this outcome. Producer unimplemented.
   // NULL = not captured, NOT zero debt.
-  hintDebt       Int?
+  hintDebt      Int?
 
   @@index([userId, conceptId])
   @@index([userId, occurredAt])
@@ -2801,16 +2817,16 @@ model EvidenceEvent {
 // deleted (corrections are new events referencing the corrected eventId).
 model SpineEvent {
   eventId        String   @id @default(uuid())
-  seq            Int      // per-learner monotonic, transactionally assigned
+  seq            Int // per-learner monotonic, transactionally assigned
   learnerId      String
   sessionId      String?
-  turnId         String?  // assistant Message.id when available
-  type           String   // closed catalog, src/lib/evidence-spine/types.ts
+  turnId         String? // assistant Message.id when available
+  type           String // closed catalog, src/lib/evidence-spine/types.ts
   schemaVersion  Int      @default(1)
   payload        Json
-  source         Json     // { componentId, version }
+  source         Json // { componentId, version }
   confidence     Float    @default(1)
-  packVersion    String?  // reserved for M4 policy packs; git SHA until then
+  packVersion    String? // reserved for M4 policy packs; git SHA until then
   idempotencyKey String   @unique
   createdAt      DateTime @default(now())
 

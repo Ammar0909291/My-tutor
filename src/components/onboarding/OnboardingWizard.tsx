@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Check, Play } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { speakText } from '@/lib/tts'
@@ -8,6 +8,9 @@ import { useCountry } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { SKILL_LEVELS, type SkillLevel } from '@/lib/curriculum/levels'
 import { CandyPage } from '@/components/ui/candy'
+import { CoachInterviewStep } from '@/components/onboarding/CoachInterviewStep'
+import type { CoachAnswers } from '@/lib/coach/onboardingInterview'
+import { describeFromAnswers } from '@/lib/coach/learnerProfile'
 
 const FALLBACK_SUBJECTS = [
   { id: 'english',     slug: 'english',     name: 'English',     icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
@@ -27,12 +30,6 @@ const PREVIEW_TEXT: Record<TeachingLang, string> = {
   hi: 'नमस्ते! मैं आपका ट्यूटर हूँ। आज हम बुनियादी बातों से शुरू करेंगे।',
 }
 
-const PLACEHOLDER_CYCLE = [
-  'I have never programmed before, want to start from scratch...',
-  'I know basic Python, want to move to C...',
-  'Studied C at university but forgot a lot...',
-]
-
 const STEPS_COUNT = 4
 
 export function OnboardingWizard({ userName }: { userName: string | null | undefined }) {
@@ -43,12 +40,13 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   const [subjects, setSubjects] = useState<{ id: string; slug: string; name: string; icon?: string }[]>(FALLBACK_SUBJECTS)
   const [subjectSlugs, setSubjectSlugs] = useState<string[]>([])
   const [skillLevel, setSkillLevel] = useState<SkillLevel | ''>('')
-  const [description, setDescription] = useState('')
+  // P5: Coach interview answers. The wizard already owns subjects and skill
+  // level (which map onto ProfileSubject / Profile.currentLevel), so this
+  // holds only the four questions that had no prior home.
+  const [coachAnswers, setCoachAnswers] = useState<CoachAnswers>({})
   const [voiceKey, setVoiceKey] = useState('female')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [placeholderIdx, setPlaceholderIdx] = useState(0)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const teachingLang: TeachingLang = lang
 
@@ -61,18 +59,12 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
     }).catch(() => {})
   }, [])
 
-  useEffect(() => {
-    const id = setInterval(() => setPlaceholderIdx((i) => (i + 1) % PLACEHOLDER_CYCLE.length), 3000)
-    return () => clearInterval(id)
-  }, [])
-
   const canProceed1 = subjectSlugs.length > 0
 
   function toggleSubject(slug: string) {
     setSubjectSlugs((prev) => prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug])
   }
   const canProceed2 = skillLevel !== ''
-  const canProceed3 = description.trim().length >= 20
 
   async function handleFinish() {
     setLoading(true); setError('')
@@ -83,9 +75,17 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
         body: JSON.stringify({
           subjectSlugs,
           currentLevel: skillLevel || 'beginner',
-          selfDescription: description.trim(),
+          // Derived from the Coach answers — the free-text question is gone.
+          selfDescription: describeFromAnswers(
+            { ...coachAnswers, experience: skillLevel || undefined, subjects: subjectSlugs },
+            subjectSlugs.map((slug) => subjects.find((s) => s.slug === slug)?.name ?? slug),
+          ),
           voiceChoice: voiceKey,
           teachingLanguage: teachingLang,
+          goalCategory: coachAnswers.goal,
+          studyTime: coachAnswers.studyTime,
+          learningStyle: coachAnswers.learningStyle,
+          confidenceBaseline: coachAnswers.confidence,
         }),
       })
       const data = await res.json()
@@ -254,39 +254,22 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
             </div>
           )}
 
-          {/* Step 3 — Self description */}
+          {/* Step 3 — Coach interview (P5). Replaces the former free-text
+              "describe your goals" box: Coach asks guided multiple-choice
+              questions instead, and selfDescription is derived from the
+              answers so the profile and tutor prompt contract are unchanged. */}
           {started && step === 3 && (
-            <div className="animate-scale-in">
-              <h1 className="text-2xl md:text-3xl font-black mb-2" style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}>{t('ob_s2_title')}</h1>
-              <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>{t('ob_s2_sub')}</p>
-              <textarea
-                ref={textareaRef}
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder={PLACEHOLDER_CYCLE[placeholderIdx]}
-                rows={6}
-                className="w-full px-4 py-3.5 rounded-xl text-sm leading-relaxed resize-none outline-none transition-all duration-200"
-                style={{
-                  background: 'var(--bg-elevated)',
-                  border: `1px solid ${description.length >= 20 ? 'var(--accent-primary)' : 'var(--border-default)'}`,
-                  color: 'var(--text-primary)',
-                  fontFamily: 'var(--font-body)',
-                  boxShadow: description.length >= 20 ? '0 0 0 3px rgba(247,129,102,0.12)' : 'none',
-                }}
-              />
-              <div className="flex justify-between items-center mt-2 mb-6">
-                <p className="text-xs" style={{ color: 'var(--text-dim)' }}>{t('ob_s2_hint')}</p>
-                <p className="text-xs font-semibold font-mono" style={{ color: description.length >= 20 ? 'var(--accent-primary)' : 'var(--text-dim)' }}>
-                  {description.length} / 500
-                </p>
-              </div>
-              <div className="flex gap-3">
-                <button onClick={() => setStep(2)} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
-                <button onClick={() => setStep(4)} disabled={!canProceed3} className="btn-primary flex-1 py-3 font-bold disabled:opacity-40 disabled:cursor-not-allowed">
-                  {t('ob_next')}
-                </button>
-              </div>
-            </div>
+            <CoachInterviewStep
+              answers={coachAnswers}
+              onAnswer={(id, value) => setCoachAnswers((prev) => {
+                const next = { ...prev }
+                if (value === '') delete (next as Record<string, unknown>)[id]
+                else (next as Record<string, unknown>)[id] = value
+                return next
+              })}
+              onBack={() => setStep(2)}
+              onComplete={() => setStep(4)}
+            />
           )}
 
           {/* Step 4 — Voice */}

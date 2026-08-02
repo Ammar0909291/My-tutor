@@ -5,6 +5,9 @@ import { prisma } from '@/lib/db/prisma'
 import { SubjectType, type Subject } from '@prisma/client'
 import { findLibrarySubject, type SubjectCategory } from '@/lib/curriculum/subjectCatalog'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
+import {
+  GOAL_VALUES, STUDY_TIME_VALUES, LEARNING_STYLE_VALUES, CONFIDENCE_VALUES,
+} from '@/lib/coach/onboardingInterview'
 import { captureError } from '@/lib/monitoring'
 
 // CRITICAL-3 (Sprint D): the old check matched any error whose message
@@ -40,6 +43,14 @@ const generalSchema = z.object({
   selfDescription: z.string().trim().min(10, 'Please describe your learning goals (min 10 characters)').max(2000),
   voiceChoice: z.string(),
   teachingLanguage: z.enum(['ru', 'en', 'hi']).default('en'),
+  // P5 — Coach interview answers. Optional so the existing onboarding paths
+  // (and any client that predates the interview) keep working unchanged; the
+  // enums are the single source of truth from onboardingInterview.ts, so the
+  // API boundary cannot accept a value the profile builder would reject.
+  goalCategory: z.enum(GOAL_VALUES).optional(),
+  studyTime: z.enum(STUDY_TIME_VALUES).optional(),
+  learningStyle: z.enum(LEARNING_STYLE_VALUES).optional(),
+  confidenceBaseline: z.enum(CONFIDENCE_VALUES).optional(),
 }).refine((b) => (b.subjectSlugs && b.subjectSlugs.length > 0) || !!b.subjectSlug, {
   message: 'At least one subject is required', path: ['subjectSlugs'],
 })
@@ -62,6 +73,23 @@ export async function POST(req: Request) {
     // only ever has to handle one system.
     const currentLevel = normalizeToCanonicalLevel(parsed.currentLevel)
     const { selfDescription, voiceChoice, teachingLanguage } = parsed
+    // P5: the Coach interview's four new answers, plus the completion stamp
+    // that gates "every new learner meets Coach before Tutor Max". Built once
+    // here and spread into both the create and update paths so the two cannot
+    // drift. Undefined fields are omitted by Prisma, so a client that sends no
+    // interview answers leaves the existing columns untouched.
+    const coachFields = {
+      goalCategory: parsed.goalCategory,
+      dailyStudyMinutes: parsed.studyTime ? Number(parsed.studyTime) : undefined,
+      learningStyle: parsed.learningStyle,
+      confidenceBaseline: parsed.confidenceBaseline,
+      // Stamped only when the interview actually produced every answer —
+      // a partial interview must not count as "met Coach".
+      coachCompletedAt:
+        parsed.goalCategory && parsed.studyTime && parsed.learningStyle && parsed.confidenceBaseline
+          ? new Date()
+          : undefined,
+    }
     // Accept either the legacy single `subjectSlug` or the new multi-select `subjectSlugs` — dedupe and keep order.
     const subjectSlugs = Array.from(new Set([
       ...(parsed.subjectSlugs ?? []),
@@ -132,7 +160,7 @@ export async function POST(req: Request) {
       await prisma.$transaction(async (tx) => {
         await tx.profile.update({
           where: { userId: effectiveUserId },
-          data: { selfDescription, voiceId: voiceChoice, teachingLanguage, currentLevel },
+          data: { selfDescription, voiceId: voiceChoice, teachingLanguage, currentLevel, ...coachFields },
         })
         // Ensure every selected subject is linked + has a learning path (may be missing if onboarding was interrupted)
         const linkedIds = new Set(existingProfile.subjects.map((s) => s.subjectId))
@@ -169,6 +197,7 @@ export async function POST(req: Request) {
           currentLevel,
           voiceId: voiceChoice,
           teachingLanguage,
+          ...coachFields,
           subjects: { create: subjects.map((s) => ({ subjectId: s.id })) },
         },
       })
