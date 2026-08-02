@@ -1493,6 +1493,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // flag — lowSignalAckHoisted is assigned after this point, so the
         // predicate is evaluated directly off `message` here. Both are pure
         // reads, so computing them early changes nothing else.
+        // P6.5: the lesson summary, rendered from PERSISTED evidence rather
+        // than from model memory. Reads the lesson attempt (the single owner of
+        // lesson-scoped outcomes), so the summary survives a refresh and the
+        // tutor can only verbalise concepts that were actually demonstrated —
+        // it cannot invent coverage. Silent on failure: a summary is never
+        // worth costing the learner their turn.
+        try {
+          const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
+          const summaryLessonKey = lessonKeyFor({ lessonOrder: lessonCtx?.currentLesson ?? null })
+          if (summaryLessonKey) {
+            const { latestLessonAttempt } = await import('@/lib/teaching/lessonAttemptStore')
+            const attempt = await latestLessonAttempt(prisma, {
+              userId, subjectSlug: learnSession.subject.slug, lessonKey: summaryLessonKey,
+            })
+            if (attempt) {
+              const { summaryFromAttempt } = await import('@/lib/teaching/lessonAttempt')
+              const { buildLessonSummaryBlock } = await import('@/lib/teaching/lessonSummary')
+              systemPrompt += buildLessonSummaryBlock(summaryFromAttempt(attempt))
+            }
+          }
+        } catch { /* summary is advisory — never blocks the turn */ }
+
         // P6: the lesson-flow contract — the purpose of the next question, the
         // never-repeat-the-failed-explanation recovery rule, and the concept
         // budget's close-and-move-on instruction when it is spent. Derived
@@ -3683,6 +3705,50 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           {
             const { recordQuestions } = await import('@/lib/teaching/repetitionGuard')
             conversationStateUpdate.questionLedger = recordQuestions(questionLedgerHoisted, cleanText)
+          }
+          // P6.5: fold a CLOSED concept into the lesson attempt — the single
+          // owner of lesson-scoped outcomes. A concept closes exactly two ways
+          // (mastered, or budget spent), and isConceptClosed owns that test so
+          // no third closing condition can be invented here. Concept-level
+          // review status goes to TopicProgress, the pre-existing review owner.
+          // Never blocks the turn: an outcome-persistence failure must not cost
+          // the learner their reply.
+          try {
+            const stateForOutcome = conversationStateAfterTurnHoisted
+            if (stateForOutcome?.conceptId) {
+              const { isConceptClosed, lessonKeyFor, recordConceptOutcome } =
+                await import('@/lib/teaching/lessonAttempt')
+              if (isConceptClosed(stateForOutcome)) {
+                // LessonContext addresses lessons by order within the
+                // subject's curriculum; lessonKeyFor renders that into the
+                // single key format so one lesson cannot be recorded twice
+                // under two identities.
+                const lessonKey = lessonKeyFor({ lessonOrder: lessonCtx?.currentLesson ?? null })
+                if (lessonKey) {
+                  const store = await import('@/lib/teaching/lessonAttemptStore')
+                  const { id, outcome } = await store.openLessonAttempt(prisma, {
+                    userId,
+                    subjectSlug: learnSession.subject.slug,
+                    lessonKey,
+                    lessonTitle: lessonCtx?.lessonTitle ?? null,
+                  })
+                  const folded = recordConceptOutcome(
+                    outcome, stateForOutcome, lessonCtx?.lessonTitle ?? null,
+                  )
+                  await store.saveLessonAttempt(prisma, id, folded)
+                  if (folded.conceptsNeedingReview.includes(stateForOutcome.conceptId)) {
+                    await store.markConceptForReview(prisma, {
+                      userId,
+                      subjectSlug: learnSession.subject.slug,
+                      topicSlug: stateForOutcome.conceptId,
+                    })
+                  }
+                }
+              }
+            }
+          } catch (outcomeErr) {
+            console.warn('[learn/chat] lesson outcome persist failed:',
+              outcomeErr instanceof Error ? outcomeErr.message : String(outcomeErr))
           }
           // K5: session-scoped verifier metrics ride the same snapshot persist
           // as every other counter — no new store, no new writer.
