@@ -73,6 +73,10 @@ function getRouter() {
 export function getAIRouter() { return getRouter() }
 
 // ─── Main router ─────────────────────────────────────────────────────────────
+/** Conversation turns forwarded to the provider. See the note at the one use
+ *  site below for why this is 20 and not 6. */
+export const MAX_HISTORY_MESSAGES = 20
+
 export interface RouteAIResult {
   text: string
   provider: string
@@ -92,7 +96,21 @@ export async function routeAI(
   await consumeAIBudget()
 
   const req: AICompletionRequest = {
-    messages: messages.slice(-6),
+    // Was slice(-6). The live tutor chat route loads HISTORY_LIMIT=30 messages
+    // and passes all of them here, so 24 of every 30 were discarded one line
+    // before the provider call: only 3 exchanges reached the model. Production
+    // evidence (2026-08-02 audit): 1501 of 1881 recorded turns — 79.8% — were
+    // past message 6 in their session and therefore answered with a truncated
+    // view of the conversation. That is the mechanism behind the tutor
+    // re-asking questions the learner had already answered, because the
+    // question and its answer had both scrolled out of context.
+    //
+    // This exact defect was already diagnosed and fixed in the other AI client
+    // in this repo (lib/ai/client.ts generateAIResponse, which moved 6 -> 20
+    // with a written root-cause note) — but never applied here, on the path
+    // the tutor actually uses. Matching that already-made decision rather than
+    // inventing a new number.
+    messages: messages.slice(-MAX_HISTORY_MESSAGES),
     systemPrompt,
     maxTokens,
     temperature: 0.7,

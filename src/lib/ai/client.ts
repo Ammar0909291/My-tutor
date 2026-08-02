@@ -1,12 +1,22 @@
-import Groq from 'groq-sdk'
 import { consumeAIBudget } from '@/lib/ai/budget'
 import { captureError } from '@/lib/monitoring'
+import { getAIRouter, MAX_HISTORY_MESSAGES } from '@/lib/ai/router'
 
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY || '',
-  timeout: 20000,
-  maxRetries: 2,
-})
+// PROVIDER OWNERSHIP (corrected 2026-08-02 from production evidence).
+// This module used to hold its own `new Groq(...)` client and call
+// `openai/gpt-oss-20b` directly, bypassing the failover chain entirely. That
+// made it a second, parallel provider system: Gemini could never serve any of
+// its ~43 call sites (flashcards, curriculum generation, final assessment,
+// mood, chapter practice, and every scene generator), and when Groq was rate-
+// limited or out of quota those features hard-failed to null while Gemini sat
+// idle. Vercel runtime errors confirmed both halves: `[generateJSON DEBUG]
+// model: openai/gpt-oss-20b` was still firing on 2026-08-02T10:47Z, hours
+// after Gemini became the primary provider for chat, and 320 `all providers
+// failed ... on groq` errors were recorded in the preceding week.
+// It now uses the SAME router every other AI path uses — one provider chain,
+// one metrics surface (P10 token accounting reaches these calls for the first
+// time), one failover policy. Public function signatures and return contracts
+// are unchanged.
 
 export async function generateAIResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
@@ -16,26 +26,19 @@ export async function generateAIResponse(
 ): Promise<string> {
   await consumeAIBudget() // propagates AIBudgetExceededError — callers already handle thrown provider errors
   try {
-    const response = await groq.chat.completions.create({
-      model: 'openai/gpt-oss-20b',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        // Was slice(-6): only 3 turns of history reached the model, so a
-        // question asked (and answered) more than 3 exchanges back — easy
-        // to hit with quick-reply chip turns — scrolled out of context
-        // entirely, causing the model to re-ask questions it had already
-        // asked and gotten an answer to. gpt-oss-20b's context window has
-        // ample room for far more input tokens than a 20-message lesson
-        // conversation costs; 20 keeps real cost bounded while covering a
-        // normal teaching exchange.
-        ...messages.slice(-20),
-      ],
-      max_tokens: maxTokens,
+    // History depth stays at 20 — the value this file already established
+    // (see MAX_HISTORY_MESSAGES in router.ts, which now carries the original
+    // root-cause note: at 6, a question asked and answered more than three
+    // exchanges back scrolled out of context and got re-asked).
+    const result = await getAIRouter().complete({
+      messages: messages.slice(-MAX_HISTORY_MESSAGES),
+      systemPrompt,
+      maxTokens,
       temperature: 0.7,
     })
-    return response.choices[0]?.message?.content ?? ''
+    return result.text ?? ''
   } catch (error: any) {
-    console.error('Groq error:', error.message)
+    console.error('[ai/client] generateAIResponse failed:', error.message)
     if (error.message?.includes('timeout') || error.message?.includes('timed out')) {
       const timeoutMsg: Record<string, string> = {
         en: 'Taking longer than usual. Please try again.',
@@ -56,61 +59,36 @@ export async function generateJSON(
   // budget degrades to null the same way a provider error does.
   try { await consumeAIBudget() } catch { return null }
   const fullPrompt = prompt + '\n\nReturn ONLY valid JSON. No markdown. No explanation.'
-  const model = 'openai/gpt-oss-20b'
-  // TEMP DEBUG (scene-extraction debug sprint — remove once diagnosed)
-  console.error('[generateJSON DEBUG] model:', model)
-  console.error('[generateJSON DEBUG] prompt sent to Groq:', fullPrompt)
-  const requestBody = {
-    model,
-    messages: [{
-      role: 'user' as const,
-      content: fullPrompt,
-    }],
-    max_tokens: maxTokens,
-    temperature: 0.3,
-  }
-  // TEMP DEBUG — exact outgoing request, immediately before the call. No
-  // optional fields (response_format/reasoning_format/stream/seed/tools/
-  // tool_choice/stop) are set anywhere above — requestBody's own key list
-  // below is the ground truth for what is and isn't sent.
-  console.error('[generateJSON DEBUG] request keys:', Object.keys(requestBody))
-  console.error('[generateJSON DEBUG] full request body:', JSON.stringify(requestBody))
-  console.error('[generateJSON DEBUG] message content length (chars):', fullPrompt.length)
-  console.error('[generateJSON DEBUG] total JSON payload size (bytes):', Buffer.byteLength(JSON.stringify(requestBody), 'utf8'))
   try {
-    const response = await groq.chat.completions.create(requestBody)
-    const text = response.choices[0]?.message?.content ?? '[]'
-    // TEMP DEBUG
-    console.error('[generateJSON DEBUG] raw Groq response.choices[0].message.content:', JSON.stringify(text))
-    console.error('[generateJSON DEBUG] finish_reason:', response.choices[0]?.finish_reason)
+    const result = await getAIRouter().complete({
+      messages: [{ role: 'user', content: fullPrompt }],
+      systemPrompt: 'You are a JSON generation assistant. Return ONLY valid JSON.',
+      maxTokens,
+      temperature: 0.3,
+    })
+    const text = result.text || '[]'
     const clean = text.replace(/```json\n?/gi, '').replace(/```\n?/g, '').trim()
     try {
-      const parsed = JSON.parse(clean)
-      // TEMP DEBUG
-      console.error('[generateJSON DEBUG] parsed JSON before validation:', JSON.stringify(parsed))
-      return parsed
+      return JSON.parse(clean)
     } catch (parseErr: any) {
       // Fallback: the model ignored "no other text" and wrapped the JSON in
       // prose: pull out the first balanced {...} or [...] block and retry.
       const match = clean.match(/\{[\s\S]*\}|\[[\s\S]*\]/)
       if (match) {
         try {
-          const parsed = JSON.parse(match[0])
-          console.error('[generateJSON DEBUG] parsed JSON via prose-extraction fallback:', JSON.stringify(parsed))
-          return parsed
+          return JSON.parse(match[0])
         } catch { /* fall through to the failure log below */ }
       }
-      // TEMP DEBUG — this catch previously swallowed parse failures with NO logging at all.
-      console.error('[generateJSON DEBUG] JSON.parse FAILED on cleaned text:', JSON.stringify(clean))
-      console.error('[generateJSON DEBUG] parse error:', parseErr.message)
+      // This catch previously swallowed parse failures with NO logging at all.
+      // Kept (unlike the removed success-path debug dumps): a parse failure is
+      // a real defect signal, and the cleaned text is what makes it actionable.
+      console.error('[generateJSON] JSON.parse failed:', parseErr.message, '| cleaned text:', JSON.stringify(clean).slice(0, 500))
       return null
     }
   } catch (error: any) {
     // Swallowed failure — without reporting it would be invisible in production.
-    console.error('Groq JSON error:', error.message)
-    // TEMP DEBUG
-    console.error('[generateJSON DEBUG] full error object:', error)
-    captureError(error, { route: 'lib/ai/generateJSON', tags: { provider: 'groq' } })
+    console.error('[ai/client] generateJSON failed:', error.message)
+    captureError(error, { route: 'lib/ai/generateJSON', tags: { provider: 'router' } })
     return null
   }
 }
@@ -119,7 +97,6 @@ export async function summarizeSession(
   messages: { role: string; content: string }[],
   lang: string,
 ): Promise<string> {
-  if (!process.env.GROQ_API_KEY) return ''
   try { await consumeAIBudget() } catch { return '' }
   const prompt = lang === 'ru'
     ? 'Summarize this tutoring session in 2 sentences in Russian.'
@@ -127,15 +104,17 @@ export async function summarizeSession(
     ? 'इस session को 2 sentences में summarize करें।'
     : 'Summarize this tutoring session in 2 sentences in English.'
   try {
-    const response = await groq.chat.completions.create({
-      model: 'openai/gpt-oss-20b',
-      messages: [
-        { role: 'system', content: prompt },
-        ...messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
-      ],
-      max_tokens: 200,
+    // The GROQ_API_KEY presence check that used to guard this function was
+    // removed with the direct Groq client: the router picks whichever
+    // provider has a key, so requiring Groq's specifically would now skip
+    // summarisation on a deployment running purely on Gemini.
+    const result = await getAIRouter().complete({
+      messages: messages.map((m) => ({ role: m.role as 'user' | 'assistant', content: m.content })),
+      systemPrompt: prompt,
+      maxTokens: 200,
+      temperature: 0.7,
     })
-    return response.choices[0]?.message?.content ?? ''
+    return result.text ?? ''
   } catch { return '' }
 }
 
