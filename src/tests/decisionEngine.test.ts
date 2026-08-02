@@ -255,3 +255,93 @@ describe('Decision Engine — provenance and confidence discipline', () => {
     expect(practice.confidence).toBeLessThanOrEqual(1)
   })
 })
+
+// ── D-0a: LESSON ALREADY COMPLETE (P13) ─────────────────────────────────────
+describe('D-0a — lesson already complete', () => {
+  it('serves the completed lesson deterministically', () => {
+    const d = decide({ lessonCompleted: true })
+    expect(d.decision).toBe('SERVE_LESSON_COMPLETE')
+    expect(d.ruleId).toBe('D0a-LESSON-ALREADY-COMPLETE')
+  })
+
+  it('fires for every post-completion acknowledgement', () => {
+    for (const message of ['Got it', 'Continue', 'Next', 'Go', 'Yes', 'OK', "I'm ready"]) {
+      expect(decide({ lessonCompleted: true, message }).decision).toBe('SERVE_LESSON_COMPLETE')
+    }
+  })
+
+  it('fires for a further message about the completed lesson', () => {
+    expect(decide({ lessonCompleted: true, message: 'what was that about again' }).decision)
+      .toBe('SERVE_LESSON_COMPLETE')
+  })
+
+  it('is idempotent — repeated post-completion turns never escalate', () => {
+    for (let i = 0; i < 5; i++) {
+      expect(decide({ lessonCompleted: true, message: 'Continue' }).decision)
+        .toBe('SERVE_LESSON_COMPLETE')
+    }
+  })
+
+  it('does NOT preempt recovery — affect still outranks content', () => {
+    // A learner who finishes a lesson and then expresses distress is still a
+    // person who needs real language (decision-engine/03 §0).
+    const d = decide({ lessonCompleted: true, recoveryKey: 'i_am_stupid', message: 'I feel stupid' })
+    expect(d.decision).toBe('ESCALATE_TO_LLM')
+    expect(d.ruleId).toBe('D0-RECOVERY-PREEMPT')
+  })
+
+  it('a NEW lesson resumes normal AI routing', () => {
+    // lessonCompleted is read per turn from the CURRENT lesson's attempt.
+    expect(decide({ lessonCompleted: false }).decision).not.toBe('SERVE_LESSON_COMPLETE')
+    expect(decide({}).decision).not.toBe('SERVE_LESSON_COMPLETE')
+  })
+
+  it('an incomplete lesson is completely unaffected', () => {
+    const withFlag = decide({ lessonCompleted: false, sessionFailureCount: 2 })
+    const without = decide({ sessionFailureCount: 2 })
+    expect(withFlag.decision).toBe(without.decision)
+    expect(withFlag.ruleId).toBe(without.ruleId)
+  })
+})
+
+describe('D-0a dispatch — no provider is invoked', () => {
+  it('routes to the deterministic executor and requires no model', async () => {
+    const { planDispatch } = await import('@/lib/understanding/dispatcher')
+    const plan = planDispatch(decide({ lessonCompleted: true }), { assembledAvailable: false })
+    expect(plan.executor).toBe('LESSON_COMPLETE')
+    expect(plan.groqRequired).toBe(false)
+  })
+
+  it('needs no assembled asset (unlike the memory path)', async () => {
+    const { planDispatch } = await import('@/lib/understanding/dispatcher')
+    // The memory decision falls back to the model without content; this one
+    // answers from the persisted attempt, so it must NOT fall back.
+    const complete = planDispatch(decide({ lessonCompleted: true }), { assembledAvailable: false })
+    expect(complete.groqRequired).toBe(false)
+    expect(complete.note.startsWith('FALLBACK')).toBe(false)
+  })
+
+  it('every OTHER decision still requires a model (no regression)', async () => {
+    const { planDispatch } = await import('@/lib/understanding/dispatcher')
+    for (const d of ['ASK_DIAGNOSTIC_QUESTION', 'DETECT_MISCONCEPTION', 'REVIEW_PREREQUISITE',
+      'TEACH_DIRECTLY', 'CONTINUE_LESSON', 'PRACTICE', 'VISUALIZATION', 'ESCALATE_TO_LLM'] as const) {
+      const plan = planDispatch(
+        { version: 1, decision: d, ruleId: 'test', rationale: [], inputsUsed: [], confidence: 1, shadow: true, computedAt: new Date().toISOString() } as unknown as TeachingDecision,
+        { assembledAvailable: true },
+      )
+      expect(plan.groqRequired).toBe(true)
+    }
+  })
+
+  it('counts as an avoided call in the existing metrics', async () => {
+    const { planDispatch } = await import('@/lib/understanding/dispatcher')
+    const { recordDispatch, snapshotBrainMetrics, resetBrainMetrics } =
+      await import('@/lib/understanding/brainMetrics')
+    resetBrainMetrics()
+    recordDispatch(planDispatch(decide({ lessonCompleted: true }), { assembledAvailable: false }), true)
+    const m = snapshotBrainMetrics()
+    expect(m.deterministicServes).toBe(1)
+    expect(m.avoidedGeminiCalls).toBe(1)
+    resetBrainMetrics()
+  })
+})

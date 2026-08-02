@@ -40,6 +40,7 @@ export type TeachingDecisionType =
   | 'CONTINUE_LESSON'          // progression is healthy — proceed
   | 'PRACTICE'                 // consolidate before advancing (D1 FRAGILE quadrant)
   | 'VISUALIZATION'            // serve the already-detected visual aid
+  | 'SERVE_LESSON_COMPLETE'    // lesson already finished — answer from persisted evidence
   | 'ESCALATE_TO_LLM'          // open conversation / recovery / insufficient evidence
 
 export interface TeachingDecision {
@@ -121,6 +122,29 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
         ['Affect band preempts all content decisions (decision-engine/03 §0).',
          'Recovery scripts are rendered by the LLM under the recoveryGuard block already injected by the runtime.'],
         ['conversationIntent', 'studentIntent'])
+    }
+
+    // D-0a — LESSON ALREADY COMPLETE (P13). Placed immediately after the
+    // recovery preempt and before every other rule, because once a lesson is
+    // finished NO other decision can be correct: there is no next concept to
+    // teach, no diagnosis worth running, and no practice that belongs to this
+    // lesson. P6.6 has already persisted the completion payload, the summary,
+    // the mastered/review concept lists and the duration — the runtime holds
+    // the correct answer, so paying for a model call to restate it is pure
+    // waste.
+    //
+    // It does NOT preempt D0: a distressed learner is still a person who needs
+    // real language, and affect outranks content everywhere else in this
+    // ladder (decision-engine/03 §0). Keeping that ordering means a learner
+    // who finishes a lesson and then says "I feel stupid" is still heard.
+    //
+    // Starting a NEW lesson clears this: lessonCompleted is read per turn from
+    // the CURRENT lesson's attempt, so normal AI routing resumes immediately.
+    if (u.lessonCompleted?.value === true) {
+      return make(u, 'SERVE_LESSON_COMPLETE', 'D0a-LESSON-ALREADY-COMPLETE',
+        ['The lesson attempt is already COMPLETED; P6.6 persisted the summary and completion payload.',
+         'No new teaching is legal for a finished lesson, so no model call is required to answer.'],
+        ['lessonCompleted'])
     }
 
     // D-0b — CLOSING IS PROTECTED (Milestone 5 P0 fix; decision-engine/07 §6

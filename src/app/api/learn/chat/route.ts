@@ -479,6 +479,10 @@ export async function POST(req: Request) {
     // path can escalate its wording instead of repeating one content-free
     // template forever (the observed six-identical-replies failure).
     let consecutiveOutagesHoisted = 0
+    // P13: this lesson's attempt is already COMPLETED (P6.6). Read once at
+    // prompt-build time and fed to the CUE, which is what lets the EXISTING
+    // decision ladder rule D-0a fire — the route never decides this itself.
+    let lessonCompletedHoisted = false
     let teachingHistoryHoisted: import('@/lib/teaching/teachingHistory').TeachingHistory | null = null
     let selectedStrategyHoisted: number | null = null
     let retrievalCacheHoisted: import('@/lib/teaching/retrievalCache').RetrievalCache | null = null
@@ -1544,6 +1548,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // The learner starts the next lesson deliberately; the tutor
               // delivers the close and stops.
               if (attempt.status === 'COMPLETED') {
+                lessonCompletedHoisted = true
                 const { buildLessonCompleteBlock } = await import('@/lib/teaching/lessonCompletion')
                 systemPrompt += buildLessonCompleteBlock()
               }
@@ -2343,6 +2348,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           ? snapshot.lastSignal as { correctness?: boolean; confidence?: string }
           : null
         const understanding = understandStudentTurn({
+          // P13: a runtime fact the CUE records and the ladder acts on.
+          lessonCompleted: lessonCompletedHoisted,
           message,
           history: historyMessages,
           recoveryKey: recoveryKeyHoisted,
@@ -2409,6 +2416,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // legacy behavior — the dispatcher can never strand a turn.
       let brainRuntimeActive = false
       let serveFromMemory = assembled !== null
+      let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
         const { isBrainRuntimeEnabled, planDispatch } = await import('@/lib/understanding/dispatcher')
@@ -2421,6 +2429,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           )
           if (brainRuntimeActive) {
             serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null
+            // P13: the plan — not this route — decides that no provider is
+            // needed. Acting on plan.executor is the SAME pattern as
+            // serveFromMemory above, not a bypass of the engine.
+            serveLessonComplete = dispatchPlanHoisted.executor === 'LESSON_COMPLETE'
             // P1 reasoning: a direct student question outranks canned
             // content (D4b) — when the Brain routes an assembled turn to
             // the LLM, record the real reason so the provider log never
@@ -2473,8 +2485,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
-      let text: string
-      let provider: string
+      // Initialised so the compiler can see every branch is covered once the
+      // P13 deterministic branch was added. These placeholders are always
+      // overwritten: the lesson-complete branch, the memory branch and the
+      // provider branch each assign both before use, and the lesson-complete
+      // branch clears its own flag if it cannot produce text.
+      let text: string = ''
+      let provider: string = 'fallback'
       // The provider's own reason the completion ended ('stop', 'length',
       // etc.) — 'n/a' for memory-served responses, which never call a
       // model. Logged below so a future empty-response failure carries
@@ -2499,7 +2516,52 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       let memoryExactGradeMatch: boolean | null = null
       let memoryFallbackUsed: boolean | null = null
       let memoryFallbackReasonCode: string = 'none'
-      if (assembled && serveFromMemory) {
+      // P13 — LESSON ALREADY COMPLETE. Answered entirely from the persisted
+      // LessonAttempt: no Gemini, no Groq, no OpenRouter, no prompt sent. The
+      // learner still gets a real, specific response naming what they
+      // mastered — it is read from evidence rather than regenerated.
+      if (serveLessonComplete) {
+        try {
+          const { latestLessonAttempt } = await import('@/lib/teaching/lessonAttemptStore')
+          const { lessonKeyFor, summaryFromAttempt } = await import('@/lib/teaching/lessonAttempt')
+          const key = lessonKeyFor({ lessonOrder: lessonCtx?.currentLesson ?? null })
+          const attempt = key
+            ? await latestLessonAttempt(prisma, {
+                userId, subjectSlug: learnSession.subject.slug, lessonKey: key,
+              })
+            : null
+          if (attempt) {
+            const summary = summaryFromAttempt(attempt)
+            const parts: string[] = [
+              `You've already finished ${attempt.lessonTitle ?? 'this lesson'}.`,
+            ]
+            if (summary.mastered.length > 0) {
+              parts.push(`You mastered: ${summary.mastered.map((o) => o.title).join(', ')}.`)
+            }
+            if (summary.needsReview.length > 0) {
+              parts.push(`Worth another look later: ${summary.needsReview.map((o) => o.title).join(', ')}.`)
+            }
+            parts.push('Press "Start next lesson" whenever you\'re ready to carry on.')
+            text = parts.join(' ')
+            provider = 'memory'
+            memoryFallbackReasonCode = 'lesson_complete'
+            try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
+            console.log(
+              '[learn/chat] RESPONSE provider=deterministic source=LessonAttempt' +
+              ` lessonKey=${key} groq_invoked=false reason=lesson_already_complete`
+            )
+          } else {
+            // No persisted attempt to answer from — fall through to the normal
+            // path rather than inventing a completion the runtime cannot back.
+            serveLessonComplete = false
+          }
+        } catch (err) {
+          console.warn('[learn/chat] lesson-complete serve failed, falling through:', err)
+          serveLessonComplete = false
+        }
+      }
+
+      if (!serveLessonComplete && assembled && serveFromMemory) {
         text = assembled.text
         provider = 'memory'
         memoryServingMode = assembled.explanationServingMode
@@ -2530,7 +2592,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           ` memoryFallbackUsed=${memoryFallbackUsed}` +
           ` memoryFallbackReason=${memoryFallbackReasonCode}`
         )
-      } else {
+      } else if (!serveLessonComplete) {
+        // P13: a completed lesson was already answered from persisted
+        // evidence above, so the provider path is skipped entirely — this is
+        // the branch that would otherwise have paid for the model call.
         // Maps the existing human-readable memoryFallbackReason string
         // (computed earlier in this route, unchanged) onto a stable snake_
         // case code for the new observability field — additive only, does

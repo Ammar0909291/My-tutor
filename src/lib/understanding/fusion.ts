@@ -27,6 +27,11 @@ export interface FusionExtras {
   evidenceMove: string | null
   /** detectVisual()/visualRegistry result the route already computed, if any. */
   availableVisual: string | null
+  /** P13: the lesson attempt for this lesson is already COMPLETED (P6.6 has
+   *  persisted completion, summary, mastered/review concepts and duration).
+   *  A runtime FACT threaded through fusion exactly like availableVisual —
+   *  not a reader inference, so it carries 'contextSnapshot' provenance. */
+  lessonCompleted?: boolean
   /** true when a visual detection path genuinely ran this turn. */
   visualDetectionRan: boolean
 }
@@ -75,6 +80,10 @@ export function fuseUnderstanding(
     progressState: progress.progressState,
     conversationSummary: conversation.conversationSummary,
     requiredVisualization,
+    // Runtime fact, not inference: sourced from the persisted lesson attempt.
+    lessonCompleted: extras.lessonCompleted === true
+      ? sourced(true, 'contextSnapshot', 1)
+      : sourced(false, 'contextSnapshot', 1),
     recommendedTeachingMode,
     uncertainty: [],
     provenance: {},

@@ -42,7 +42,12 @@
  */
 import type { TeachingDecision, TeachingDecisionType } from './decisionEngine'
 
-export type DispatchExecutor = 'EXPLANATION_MEMORY' | 'LLM_RENDERER' | 'LLM_OPEN'
+export type DispatchExecutor =
+  | 'EXPLANATION_MEMORY'
+  /** P13: served entirely from persisted runtime state — no provider at all. */
+  | 'LESSON_COMPLETE'
+  | 'LLM_RENDERER'
+  | 'LLM_OPEN'
 
 export interface DispatchPlan {
   version: 1
@@ -119,6 +124,11 @@ const ENGINE_ROUTES: Record<TeachingDecisionType, { executor: DispatchExecutor; 
     engine: 'lesson runtime (composed lesson plan blocks already injected)',
     note: 'Healthy progression; the lesson plan directs the renderer.',
   },
+  SERVE_LESSON_COMPLETE: {
+    executor: 'LESSON_COMPLETE',
+    engine: 'lessonAttempt/summaryFromAttempt (P6.5 persisted evidence) + P6.6 completion payload',
+    note: 'Lesson already finished; answer from persisted completion evidence. No model call.',
+  },
   ESCALATE_TO_LLM: {
     executor: 'LLM_OPEN',
     engine: 'routeAI (Groq primary / Yandex fallback) — current pipeline as-is',
@@ -153,7 +163,10 @@ export function planDispatch(decision: TeachingDecision, ctx: DispatchContext): 
       version: 1, decision: decision.decision, ruleId: decision.ruleId,
       executor: route.executor,
       engine: route.engine,
-      groqRequired: route.executor !== 'EXPLANATION_MEMORY',
+      // The two executors that answer from state need no provider at all.
+      // Keeping this as an explicit set (rather than a single !==) means a
+      // future deterministic executor cannot accidentally be billed.
+      groqRequired: route.executor !== 'EXPLANATION_MEMORY' && route.executor !== 'LESSON_COMPLETE',
       note: route.note,
     }
   } catch {

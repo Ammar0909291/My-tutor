@@ -145,6 +145,10 @@ export interface StudentTurnUnderstanding {
    *  (teachingStrategy / evidence move / last successful style) — recorded
    *  with provenance; the CUE itself decides nothing. */
   recommendedTeachingMode: Sourced<string>
+  /** P13: true when this lesson's attempt is already COMPLETED. The runtime
+   *  already holds the correct response (persisted summary + completion
+   *  payload), so no model call is needed to produce one. */
+  lessonCompleted: Sourced<boolean>
   /** Field names whose value is 'unknown' this turn, with the reason. */
   uncertainty: string[]
   /** field name → provenance source, flattened for quick inspection. */

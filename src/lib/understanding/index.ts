@@ -68,6 +68,10 @@ export interface UnderstandingInputs {
     explanationServingMode: string | null
   } | null
   memoryFallbackReason: string | null
+  /** P13: this lesson's attempt is already COMPLETED (LessonAttempt, P6.5/6.6).
+   *  Optional so every existing caller compiles unchanged and behaves exactly
+   *  as before. */
+  lessonCompleted?: boolean
   observations: CueObservations
 }
 
@@ -132,5 +136,6 @@ export function understandStudentTurn(inputs: UnderstandingInputs): StudentTurnU
     evidenceMove: inputs.evidenceMove,
     availableVisual: inputs.observations?.availableVisual ?? null,
     visualDetectionRan: inputs.observations?.visualDetectionRan === true,
+    lessonCompleted: inputs.lessonCompleted === true,
   })
 }
