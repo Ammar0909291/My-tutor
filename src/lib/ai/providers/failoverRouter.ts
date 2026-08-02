@@ -9,6 +9,15 @@ export interface FailoverRouterOptions {
    *  that gets a same-provider retry on a retryable error; every provider
    *  after it is a straight one-shot fallback tried in order. */
   providers: AIProvider[]
+  /**
+   * P17 diagnostic (gemini_only isolation): suppress the primary tier's
+   * same-provider retry, so a failed attempt returns to the caller
+   * immediately rather than costing a second full provider timeout. Default
+   * false — the retry behaves exactly as it always has for every normal
+   * deployment. See router.ts's isGeminiOnlyMode() for why the isolation
+   * window needs it (30s + 30s does not fit a 60s function budget).
+   */
+  disableSameProviderRetry?: boolean
 }
 
 function isRetryable(err: unknown): boolean {
@@ -26,7 +35,7 @@ function failureKind(err: unknown): 'timeout' | 'rateLimit' | 'emptyResponse' | 
 }
 
 export function createFailoverRouter(opts: FailoverRouterOptions) {
-  const { providers } = opts
+  const { providers, disableSameProviderRetry = false } = opts
   if (providers.length === 0) throw new Error('createFailoverRouter requires at least one provider')
 
   /**
@@ -77,6 +86,11 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
         finish_reason: result.finishReason,
         prompt_tokens: result.usage?.promptTokens ?? 'not_reported',
         completion_tokens: result.usage?.completionTokens ?? 'not_reported',
+        // Summed only when at least one half was reported, so an unreported
+        // call reads 'not_reported' rather than a misleading 0.
+        total_tokens: result.usage && (result.usage.promptTokens != null || result.usage.completionTokens != null)
+          ? (result.usage.promptTokens ?? 0) + (result.usage.completionTokens ?? 0)
+          : 'not_reported',
         chars: result.text.length,
       })
       return result
@@ -117,7 +131,7 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
 
         // Only the primary (first) tier gets a same-provider retry — every
         // tier after it is a backup already, tried once.
-        if (isPrimary && isRetryable(err)) {
+        if (isPrimary && isRetryable(err) && !disableSameProviderRetry) {
           try {
             await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS))
             const retryReq = err instanceof AIEmptyResponseError

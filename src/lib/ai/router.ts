@@ -42,8 +42,48 @@ const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'
 
 let _router: ReturnType<typeof createFailoverRouter> | null = null
 
+/**
+ * P17 — GEMINI-ONLY ISOLATION MODE (diagnostic, runtime switch only).
+ *
+ * `AI_PROVIDER_MODE=gemini_only` makes Gemini the sole provider so a 24-hour
+ * window can answer one question: is Gemini itself healthy, or is failover
+ * masking the real fault? Any other value (including unset) leaves the full
+ * chain and today's production behaviour byte-for-byte unchanged.
+ *
+ * NOTHING IS DELETED. The provider factories, the chain order and the
+ * failover algorithm are all untouched — this only narrows the provider LIST
+ * handed to the existing router, which is the single place the chain is
+ * assembled (verified 2026-08-02: getRouter() is the only caller of
+ * createFailoverRouter in src/).
+ */
+export function isGeminiOnlyMode(): boolean {
+  return (process.env.AI_PROVIDER_MODE ?? '').trim().toLowerCase() === 'gemini_only'
+}
+
 function getRouter() {
   if (_router) return _router
+
+  if (isGeminiOnlyMode()) {
+    // One provider in the list means the failover loop has nothing to fail
+    // over TO: no OpenRouter call, no Groq call, no second-provider retry.
+    //
+    // disableSameProviderRetry is required for the diagnostic to be honest,
+    // and the reason is arithmetic rather than preference. AITimeoutError is
+    // declared retryable=true, so the primary tier would normally re-attempt
+    // the SAME provider after a 500ms backoff. With Gemini's 30s cap that is
+    // 30s + 0.5s + 30s = 60.5s against this route's 60s function budget — the
+    // lambda would be killed before the degraded template could render, and
+    // the learner would get a blank 504 instead of the fallback this mode is
+    // specified to return "immediately". It also doubles the apparent Gemini
+    // failure count, which would corrupt the very measurement being taken.
+    console.log('[ai/router] AI_PROVIDER_MODE=gemini_only — failover and same-provider retry disabled for this deployment')
+    _router = createFailoverRouter({
+      providers: [createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)],
+      disableSameProviderRetry: true,
+    })
+    return _router
+  }
+
   // Production evidence (Vercel runtime errors, 2026-07-25/26): OpenRouter
   // was attempted on every single request and failed every time with
   // "401 Missing Authentication header" — OPENROUTER_API_KEY is unset in

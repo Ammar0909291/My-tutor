@@ -146,3 +146,125 @@ describe('telemetry never breaks a turn', () => {
     await expect(r.complete(REQ)).rejects.toThrow('boom')
   })
 })
+
+describe('P17 — gemini_only isolation mode', () => {
+  const KEY = 'AI_PROVIDER_MODE'
+  const prev = process.env[KEY]
+  afterEach(() => {
+    if (prev === undefined) delete process.env[KEY]
+    else process.env[KEY] = prev
+    vi.resetModules()
+  })
+
+  it('is OFF when the variable is unset — production behaviour unchanged', async () => {
+    delete process.env[KEY]
+    vi.resetModules()
+    const { isGeminiOnlyMode } = await import('@/lib/ai/router')
+    expect(isGeminiOnlyMode()).toBe(false)
+  })
+
+  it('is OFF for any other value', async () => {
+    for (const v of ['', 'full', 'groq_only', 'gemini', 'GEMINI', '1', 'true']) {
+      process.env[KEY] = v
+      vi.resetModules()
+      const { isGeminiOnlyMode } = await import('@/lib/ai/router')
+      expect(isGeminiOnlyMode(), `value ${JSON.stringify(v)}`).toBe(false)
+    }
+  })
+
+  it('is ON for gemini_only, case- and whitespace-insensitive', async () => {
+    for (const v of ['gemini_only', 'GEMINI_ONLY', ' gemini_only ']) {
+      process.env[KEY] = v
+      vi.resetModules()
+      const { isGeminiOnlyMode } = await import('@/lib/ai/router')
+      expect(isGeminiOnlyMode(), `value ${JSON.stringify(v)}`).toBe(true)
+    }
+  })
+
+  it('the chain contains ONLY gemini when on', async () => {
+    process.env[KEY] = 'gemini_only'
+    process.env.GEMINI_API_KEY = 'k'
+    process.env.GROQ_API_KEY = 'k'
+    process.env.OPENROUTER_API_KEY = 'k'
+    vi.resetModules()
+    const { getAIRouter } = await import('@/lib/ai/router')
+    expect(getAIRouter().providerNames).toEqual(['gemini'])
+  })
+
+  it('the chain still contains the fallbacks when off', async () => {
+    delete process.env[KEY]
+    process.env.GEMINI_API_KEY = 'k'
+    process.env.GROQ_API_KEY = 'k'
+    process.env.OPENROUTER_API_KEY = 'k'
+    vi.resetModules()
+    const { getAIRouter } = await import('@/lib/ai/router')
+    expect(getAIRouter().providerNames).toEqual(['gemini', 'openrouter', 'groq'])
+  })
+})
+
+describe('P17 — no same-provider retry in isolation mode', () => {
+  it('a retryable failure is attempted ONCE, not twice', async () => {
+    let calls = 0
+    const r = createFailoverRouter({
+      providers: [provider({
+        name: 'gemini',
+        complete: async () => { calls++; throw new AITimeoutError('gemini') },
+      })],
+      disableSameProviderRetry: true,
+    })
+    await expect(r.complete(REQ)).rejects.toThrow()
+    expect(calls).toBe(1)
+    expect(attempts()).toHaveLength(1)
+  })
+
+  it('the retry still happens by default — normal deployments unchanged', async () => {
+    let calls = 0
+    const r = createFailoverRouter({
+      providers: [provider({
+        name: 'gemini',
+        complete: async () => { calls++; throw new AITimeoutError('gemini') },
+      })],
+    })
+    await expect(r.complete(REQ)).rejects.toThrow()
+    expect(calls).toBe(2)
+  })
+
+  it('a single-provider chain never reports a failover', async () => {
+    const r = createFailoverRouter({
+      providers: [provider({ name: 'gemini', complete: async () => { throw new Error('x') } })],
+      disableSameProviderRetry: true,
+    })
+    await expect(r.complete(REQ)).rejects.toThrow('x')
+    expect(lines.some((l) => l.includes('failing over to'))).toBe(false)
+  })
+
+  it('success in isolation mode still returns normally', async () => {
+    const r = createFailoverRouter({
+      providers: [provider({ name: 'gemini' })],
+      disableSameProviderRetry: true,
+    })
+    await expect(r.complete(REQ)).resolves.toMatchObject({ text: 'hi' })
+  })
+})
+
+describe('P17 — total_tokens', () => {
+  it('sums reported usage', async () => {
+    const r = createFailoverRouter({
+      providers: [provider({
+        name: 'gemini',
+        complete: async () => ({
+          text: 'x', finishReason: 'STOP', provider: 'gemini',
+          usage: { promptTokens: 100, completionTokens: 25 },
+        }),
+      })],
+    })
+    await r.complete(REQ)
+    expect(attempts()[0]).toContain('total_tokens=125')
+  })
+
+  it('reads not_reported — never 0 — when usage is absent', async () => {
+    const r = createFailoverRouter({ providers: [provider({ name: 'groq' })] })
+    await r.complete(REQ)
+    expect(attempts()[0]).toContain('total_tokens=not_reported')
+  })
+})
