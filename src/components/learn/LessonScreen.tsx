@@ -12,6 +12,7 @@ import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, LANG_LOCALE, canUseSpeechRecognition, type VoiceType, type TeachingLang } from '@/lib/tts'
+import { voicePlayback } from '@/lib/voice/playbackManager'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
 import type { VoiceTimingSignal } from '@/lib/voice/voiceSignal'
 import { fetchWithTimeout } from '@/lib/net/timeout'
@@ -1095,7 +1096,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [connectStalled, setConnectStalled] = useState(false)
   const autoOpenedPracticeRef = useRef(false)
   const speakingIdRef = useRef<string|null>(null)
-  const serverAudioRef = useRef<HTMLAudioElement|null>(null)
   const mediaRecorderRef = useRef<MediaRecorder | null>(null)
   const audioChunksRef = useRef<Blob[]>([])
   const speechRecognitionRef = useRef<any>(null)
@@ -1375,74 +1375,139 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     } catch { /* ignore */ }
   }, [subjectSlug])
 
-  // TTS
-  const handleStopSpeech = useCallback(() => {
-    stopSpeaking(); speakingIdRef.current = null; setSpeakingId(null)
-    if (serverAudioRef.current) {
-      serverAudioRef.current.pause()
-      URL.revokeObjectURL(serverAudioRef.current.src)
-      serverAudioRef.current = null
+  // P8.1: the manager is the single source of truth for what is speaking; this
+  // component only MIRRORS it into React state for rendering. Nothing else
+  // writes speakingId, so the button state can never disagree with the audio.
+  useEffect(() => {
+    const unsubscribe = voicePlayback.subscribe((state) => {
+      speakingIdRef.current = state.playingId
+      setSpeakingId(state.playingId)
+    })
+    return () => {
+      unsubscribe()
+      // Leaving the lesson (unmount, navigation, lesson change) stops voice
+      // immediately — nothing from lesson A may continue inside lesson B.
+      voicePlayback.stop()
     }
+  }, [])
+
+  // TTS
+  // P8.1: every stop goes through the single playback owner. The manager
+  // disposes whichever mechanism was live (speechSynthesis or the server-TTS
+  // <audio>), so callers no longer have to know which one is playing — the
+  // root cause of the two paths getting out of sync.
+  const handleStopSpeech = useCallback(() => {
+    voicePlayback.stop()
   }, [])
   // Server-side TTS (Sarvam for Hindi, Yandex for Russian) — falls back to
   // the browser speechSynthesis path on any fetch/playback failure, so
   // worst case matches pre-existing behavior, never silence.
-  const speakViaServerTTS = useCallback((id: string, text: string, onDone: () => void) => {
-    // Clean before sending to the server-side TTS provider (Sarvam/Yandex):
-    // Greek letters, math symbols, markdown artefacts, and trailing periods
-    // that some TTS providers read as "full stop" are all resolved here,
-    // matching what the browser-TTS path already does via cleanTextForTTS
-    // inside speakText(). Both paths now receive the same clean text.
-    const cleanedText = cleanTextForTTS(text)
+  // P8.1: server-side TTS (Sarvam for Hindi, Yandex for Russian) as a
+  // disposable playback source. Returns a synchronous disposer that aborts an
+  // in-flight fetch, pauses the element and revokes the object URL — so a
+  // response arriving after the learner has moved on can neither start playing
+  // nor leak an Audio object, which is exactly what used to orphan audio that
+  // nothing could stop.
+  const startServerTtsPlayback = useCallback((
+    req: { text: string; lang: TeachingLang; voice: VoiceType; country: string },
+    onEnded: () => void,
+    onFallback: () => void,
+  ): (() => void) => {
+    const controller = new AbortController()
+    let audio: HTMLAudioElement | null = null
+    let objectUrl: string | null = null
+    let disposed = false
+
+    const release = () => {
+      if (audio) {
+        audio.onended = null
+        audio.onerror = null
+        audio.pause()
+        audio = null
+      }
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl)
+        objectUrl = null
+      }
+    }
+
     fetch('/api/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: cleanedText, lang: teachingLanguage, voice: voiceType, country }),
+      body: JSON.stringify({ text: cleanTextForTTS(req.text), lang: req.lang, voice: req.voice, country: req.country }),
+      signal: controller.signal,
     })
       .then((res) => { if (!res.ok) throw new Error('tts failed'); return res.blob() })
       .then((blob) => {
-        if (speakingIdRef.current !== id) return // superseded while fetching
-        const url = URL.createObjectURL(blob)
-        const audio = new Audio(url)
-        serverAudioRef.current = audio
-        audio.onended = () => { URL.revokeObjectURL(url); onDone() }
-        audio.onerror = () => { URL.revokeObjectURL(url); onDone() }
-        audio.play().catch(() => { URL.revokeObjectURL(url); onDone() })
+        if (disposed) return
+        objectUrl = URL.createObjectURL(blob)
+        const el = new Audio(objectUrl)
+        audio = el
+        el.onended = () => { release(); onEnded() }
+        el.onerror = () => { release(); onEnded() }
+        el.play().catch(() => { release(); onEnded() })
       })
-      .catch(() => {
-        speakText(text, teachingLanguage, voiceType, onDone, country, speed)
+      .catch((err) => {
+        if (disposed || (err as { name?: string })?.name === 'AbortError') return
+        onFallback()
       })
-  }, [teachingLanguage, voiceType, country, speed])
+
+    return () => {
+      disposed = true
+      controller.abort()
+      release()
+      // The browser path may be the active one via onFallback.
+      stopSpeaking()
+    }
+  }, [])
+
+  // P8.1: playback is started THROUGH the manager, never directly. The manager
+  // stops + disposes whatever was playing before this begins, so two voices can
+  // never overlap. The disposer returned by each source is what the manager
+  // calls to halt output synchronously.
   const handleSpeak = useCallback((id: string, text: string) => {
-    speakingIdRef.current = id; setSpeakingId(id)
-    const onDone = () => {
-      if (speakingIdRef.current === id) { speakingIdRef.current = null; setSpeakingId(null) }
-    }
-    if (SERVER_TTS_LANGS.includes(teachingLanguage)) {
-      speakViaServerTTS(id, text, onDone)
-    } else {
-      speakText(text, teachingLanguage, voiceType, onDone, country, speed)
-    }
-  }, [teachingLanguage, voiceType, country, speed, speakViaServerTTS])
+    voicePlayback.start(id, {
+      start: ({ onEnded }) => {
+        if (SERVER_TTS_LANGS.includes(teachingLanguage)) {
+          return startServerTtsPlayback(
+            { text, lang: teachingLanguage, voice: voiceType, country },
+            onEnded,
+            // Fallback keeps prior behaviour: never silence on a TTS failure.
+            () => speakText(text, teachingLanguage, voiceType, onEnded, country, speed),
+          )
+        }
+        speakText(text, teachingLanguage, voiceType, onEnded, country, speed)
+        return () => { stopSpeaking() }
+      },
+    })
+  }, [teachingLanguage, voiceType, country, speed, startServerTtsPlayback])
   const handleVoiceChange = useCallback((v: VoiceType) => {
     setVoiceType(v)
     fetch('/api/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ voiceId: v }) }).catch(() => {})
-    if (speakingIdRef.current) {
-      const id = speakingIdRef.current
+    // P8.1: restart synchronously through the manager. The old code used a
+    // 50ms setTimeout to let the previous voice wind down; the manager stops
+    // and disposes before starting, so no delay is needed (and delays are
+    // exactly what made playback nondeterministic).
+    const id = speakingIdRef.current
+    if (id) {
       const msg = messages.find((m) => m.id === id)
-      stopSpeaking()
-      if (msg) setTimeout(() => handleSpeak(id, msg.content), 50)
+      voicePlayback.stop()
+      if (msg) handleSpeak(id, msg.content)
     }
   }, [messages, handleSpeak])
   const handleSpeedChange = useCallback((s: number) => {
     setSpeed(s)
     setSpeedMenuOpen(false)
     fetch('/api/settings', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ voiceSpeed: s }) }).catch(() => {})
-    if (speakingIdRef.current) {
-      const id = speakingIdRef.current
+    // P8.1: restart synchronously through the manager. The old code used a
+    // 50ms setTimeout to let the previous voice wind down; the manager stops
+    // and disposes before starting, so no delay is needed (and delays are
+    // exactly what made playback nondeterministic).
+    const id = speakingIdRef.current
+    if (id) {
       const msg = messages.find((m) => m.id === id)
-      stopSpeaking()
-      if (msg) setTimeout(() => handleSpeak(id, msg.content), 50)
+      voicePlayback.stop()
+      if (msg) handleSpeak(id, msg.content)
     }
   }, [messages, handleSpeak])
 
@@ -1532,6 +1597,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // Send message
   const sendMessage = useCallback(async (sid: string, text: string, showInUI = true, voiceSignal?: VoiceTimingSignal) => {
+    // P8.1: ANY learner interaction stops the voice immediately. Every send
+    // path (typed message, Enter, send button, quick replies like "Got it",
+    // MCQ taps) funnels through here, so this one call covers them all.
+    voicePlayback.stop()
     setIsStreaming(true)
     // P0 (duplicate AI responses): captured at dispatch time, checked before
     // applying this call's opportunistic lessonOrder sync below. If a
@@ -4617,6 +4686,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     type="button"
                     disabled={isStreaming}
                     onClick={() => {
+                      // P8.1: silence immediately on tap, before any guard can
+                      // return early — the learner has interacted.
+                      voicePlayback.stop()
                       if (!sessionId) return
                       // Clear first: the question is answered, and this also
                       // prevents a double-tap from sending two answers.
