@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { findLibrarySubject } from '@/lib/curriculum/subjectCatalog'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 interface Props {
   variant?: string
@@ -34,6 +35,7 @@ const CAREER_ROLES: Record<string, { role: string; requires: string[] }> = {
 }
 
 export default function CareerSummaryPanel(_props: Props) {
+  const { t } = useLanguage()
   const [data, setData] = useState<CareerData | null>(null)
 
   useEffect(() => {
@@ -147,7 +149,7 @@ export default function CareerSummaryPanel(_props: Props) {
       {/* Potential roles */}
       {roles.length > 0 && (
         <div className="space-y-1">
-          <p className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>Potential Roles</p>
+          <p className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>{t('career_roles')}</p>
           <div className="flex flex-wrap gap-1.5">
             {roles.map(({ role, progress }) => (
               <span

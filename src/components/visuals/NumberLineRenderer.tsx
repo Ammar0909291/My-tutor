@@ -8,6 +8,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { NumberLineSpec } from '@/lib/visuals/visualSpec'
 import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
 
@@ -50,6 +51,7 @@ export function NumberLineRenderer({
   onMasteryEvent?: (signal: VisualMasterySignal) => void
   masteryContext?: VisualMasteryContext
 }) {
+  const { t } = useLanguage()
   const wrapRef = useRef<HTMLDivElement | null>(null)
   const [w, setW] = useState(360)
   const h = 90
@@ -159,7 +161,7 @@ export function NumberLineRenderer({
   return (
     <div style={cardStyle}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-        <span style={badgeStyle}>Number Line</span>
+        <span style={badgeStyle}>{t('viz_number_line')}</span>
         {spec.title && <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-secondary, #6b7280)' }}>{spec.title}</span>}
       </div>
       <div
@@ -198,7 +200,7 @@ export function NumberLineRenderer({
         <p style={{ margin: '4px 4px 0', fontSize: 12, fontWeight: 600, color: 'var(--text-secondary, #6b7280)' }}>{comparison}</p>
       )}
       {spec.interactive && (
-        <p style={{ margin: '4px 4px 0', fontSize: 10, color: 'var(--text-dim, #888)' }}>Drag a point to move it</p>
+        <p style={{ margin: '4px 4px 0', fontSize: 10, color: 'var(--text-dim, #888)' }}>{t('viz_drag_point')}</p>
       )}
       {hasChallenge && challengeGoalText && (
         <p style={{ margin: '4px 4px 0', fontSize: 11, fontWeight: 600, color: challengeMet ? 'var(--coral, #F78166)' : 'var(--text-dim, #888)' }}>
