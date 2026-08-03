@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-coloring-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph-coloring",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:25098805144a0a3f5572b9dc324dc15b3f32f513a7c4e0ee0097541aeec6bf9a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph-coloring.md": "sha256:5f06cbe112c579aade514df9e14e43f7dc42692c038b812e2991ba6ff2f3a07e"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.graph-coloring",
+    "name": "Graph Coloring",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-coloring-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph-coloring (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph-coloring.md": "sha256:5f06cbe112c579aade514df9e14e43f7dc42692c038b812e2991ba6ff2f3a07e"
+      },
+      "contentHash": "sha256:7d98c78efe6141e8d3aee53de9832d3f45cb376f9ebe7e0415284e67101dee5b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph-coloring/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Learning Objectives",
+      "content": "- LO1: Produce a VALID coloring of a given graph (no two adjacent vertices share a color) using a specified number of colors.\n- LO2: Determine (for small graphs) or bound the CHROMATIC NUMBER $\\chi(G)$ — the minimum number of colors needed for a valid coloring.\n- LO3: Apply a GREEDY coloring algorithm and recognize it gives only an UPPER BOUND on $\\chi(G)$, not necessarily the true minimum — the greedy result can require more colors than actually necessary, depending on vertex order.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "SPARSE-GRAPH-ASSUMED-SMALL-CHROMATIC-NUMBER",
+      "content": "| MC-1 | SPARSE-GRAPH-ASSUMED-SMALL-CHROMATIC-NUMBER | Assuming a graph with relatively few edges must have a small chromatic number, ignoring that even a single localized clique forces a lower bound | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "GREEDY-COLORING-RESULT-ASSUMED-OPTIMAL",
+      "content": "| MC-2 | GREEDY-COLORING-RESULT-ASSUMED-OPTIMAL | Treating the number of colors a greedy algorithm happens to use as the true chromatic number, rather than recognizing it as only an upper bound | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "COLORING-VALIDITY-CHECKED-INCOMPLETELY",
+      "content": "| MC-3 | COLORING-VALIDITY-CHECKED-INCOMPLETELY | Verifying only some edges of a proposed coloring rather than checking every single edge for a same-color adjacent pair | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Coloring Validity: No Adjacent Same-Color Vertices (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Coloring Validity: No Adjacent Same-Color Vertices (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Cliques Force a Lower Bound on the Chromatic Number (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Cliques Force a Lower Bound on the Chromatic Number (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Greedy Gives an Upper Bound, Not Necessarily the True Minimum (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Greedy Gives an Upper Bound, Not Necessarily the True Minimum (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Provide a valid 2-coloring for a given 6-cycle graph, or explain why 2 colors suffice.\n  2. Given a graph containing a 4-clique (all 4 vertices mutually connected), state a lower bound on its chromatic number and justify it.\n  3. Apply greedy coloring to a given small graph with a specified vertex order, and count the colors used.\n  4. Explain, in one sentence, why a greedy coloring's color count is only an upper bound on the true chromatic number.\n- **P76 (Transfer Probe, mode = independence)**: \"A university's exam-scheduling problem is modeled as a graph where vertices are courses and an edge connects two courses if any student is enrolled in both (so they cannot be scheduled at the same time). (a) Explain, using this lesson's definitions, why the minimum number of exam time-slots needed corresponds exactly to the graph's chromatic number. (b) The scheduling office runs a greedy algorithm and gets a schedule using 6 time-slots; a consultant claims a smarter algorithm could potentially use fewer — explain, using this lesson's upper-bound distinction, why the greedy result of 6 does not by itself prove that 6 is the true minimum number of time-slots needed.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.graph` (vertices and edges) — coloring assigns labels to vertices subject to an adjacency constraint.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.graph`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.graph-types` (bipartite graphs are exactly the 2-colorable graphs), `math.disc.planar-graph` (the Four Color Theorem's domain of applicability).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
