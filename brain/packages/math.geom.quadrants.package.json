@@ -1,0 +1,262 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.quadrants-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.quadrants",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e0e2e17e99ad0d3168731dd329d64922d69bd4a32f35e092a1601933ddf653d0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.quadrants.md": "sha256:d958f5897b00d0f7937780afe77b8b0a0a0a37dc811bf20f4fd04492e4a69f59"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.quadrants",
+    "name": "Quadrants",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.geom.coordinate-plane"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.quadrants-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.quadrants (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.quadrants.md": "sha256:d958f5897b00d0f7937780afe77b8b0a0a0a37dc811bf20f4fd04492e4a69f59"
+      },
+      "contentHash": "sha256:084e470821a140cca93ce6aafa4909ad9c1665643a4a4e00ebba35175b54dd25",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.quadrants.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.quadrants.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.quadrants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.quadrants\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.quadrants.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.quadrants.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.quadrants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.quadrants\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.quadrants.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.quadrants.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.quadrants"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.quadrants\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.quadrants/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.quadrants",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify which QUADRANT a point $(x,y)$ lies in based on the SIGNS of $x$ and $y$: Quadrant I ($x>0,y>0$), Quadrant II ($x<0,y>0$), Quadrant III ($x<0,y<0$), Quadrant IV ($x>0,y<0$).\n- LO2: Recognize the quadrants are numbered COUNTERCLOCKWISE starting from the upper-right (Quadrant I), NOT clockwise and NOT starting from a different corner — a fixed convention, not an arbitrary choice.\n- LO3: Recognize that points lying ON an axis (where $x=0$ or $y=0$) belong to NEITHER adjacent quadrant — they are considered to be ON the axis (boundary), not inside any of the four quadrant regions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.quadrants",
+      "title": "QUADRANT-SIGN-COMBINATIONS-MISMATCHED-TO-WRONG-QUADRANT-NUMBER",
+      "content": "| MC-1 | QUADRANT-SIGN-COMBINATIONS-MISMATCHED-TO-WRONG-QUADRANT-NUMBER | Confusing which sign combination (e.g. both negative) corresponds to which numbered quadrant | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.quadrants",
+      "title": "AXIS-POINTS-FORCED-INTO-AN-ADJACENT-QUADRANT-RATHER-THAN-RECOGNIZED-AS-BOUNDARY",
+      "content": "| MC-2 | AXIS-POINTS-FORCED-INTO-AN-ADJACENT-QUADRANT-RATHER-THAN-RECOGNIZED-AS-BOUNDARY | Classifying a point lying on an axis (zero coordinate) as belonging to one of the adjacent quadrants, rather than recognizing it's on the boundary | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.quadrants",
+      "title": "Matching Sign Combinations to the Correct Quadrant Number (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Matching Sign Combinations to the Correct Quadrant Number (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.quadrants",
+      "title": "Axis Points Belong to No Quadrant (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Axis Points Belong to No Quadrant (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.quadrants",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.quadrants",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.95×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Identify the quadrant for $(-4,-9)$.\n  2. Identify the quadrant for $(7,2)$.\n  3. Identify the quadrant for $(-3,8)$.\n  4. Determine the quadrant for the point $(0,-6)$, and explain your reasoning.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotics simulation tracks a robot's position on a 2D grid centered at its starting point (the origin), where positive x means 'east' and positive y means 'north.' (a) If the robot is currently at position $(-8,5)$, identify which quadrant it's in, and describe its direction from the origin (e.g. 'northwest'). (b) If the robot moves to position $(0,10)$ (due north, exactly on the y-axis), explain why this position isn't classified as being in any quadrant.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.quadrants",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.coordinate-plane` — quadrants are the four regions this plane is divided into.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.quadrants/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.quadrants",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.coordinate-plane`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.geom.coordinate-plane`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.quadrants.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
