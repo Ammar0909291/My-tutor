@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.derivative-trig-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.derivative-trig",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0c9c181ef45ada3f6424af2b972dd1feeabb35fffaba15b74ee54cf00dccbc72",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.derivative-trig.md": "sha256:6b498d4f7712beee90421d65a2b4fa835bab52b41fce5c02f76e06822a41186b"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.derivative-trig",
+    "name": "Derivatives of Trigonometric Functions",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.derivative-rules",
+      "math.trig.trig-functions",
+      "math.calc.squeeze-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.derivative-trig-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.derivative-trig (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.derivative-trig.md": "sha256:6b498d4f7712beee90421d65a2b4fa835bab52b41fce5c02f76e06822a41186b"
+      },
+      "contentHash": "sha256:edca20c3a1eb063992386cf0ab0ea834698376a45b9955e8dba1551376c983ef",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-trig.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-trig.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-trig\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-trig.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-trig.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-trig\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-trig.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-trig.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-trig\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-trig.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-trig.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-trig\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.derivative-trig/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the six trigonometric derivatives: $\\frac{d}{dx}\\sin x=\\cos x$, $\\frac{d}{dx}\\cos x=-\\sin x$ (WITH the negative sign — a commonly dropped detail), $\\frac{d}{dx}\\tan x=\\sec^2x$, and their reciprocal-function counterparts.\n- LO2: Recognize that ALL six derivatives are ultimately derivable from `math.calc.squeeze-theorem`'s $\\lim_{x\\to0}\\frac{\\sin x}{x}=1$ result COMBINED with the derivative's limit definition — $\\sin x$ and $\\cos x$'s derivatives are the FOUNDATIONAL pair, and the other four (tan, cot, sec, csc) are derived from these two via the QUOTIENT rule (since $\\tan x=\\sin x/\\cos x$, etc.), not independently re-derived from the limit definition each time.\n- LO3: Apply the CHAIN RULE when the trig function's argument is itself a function of $x$: $\\frac{d}{dx}\\sin(g(x))=\\cos(g(x))\\cdot g'(x)$ — a common omission is forgetting the chain-rule factor $g'(x)$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "NEGATIVE-SIGN-DROPPED-FROM-COSINES-DERIVATIVE",
+      "content": "| MC-1 | NEGATIVE-SIGN-DROPPED-FROM-COSINES-DERIVATIVE | Writing d/dx(cos x) = sin x, omitting the required negative sign | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "CHAIN-RULE-FACTOR-OMITTED-FOR-TRIG-FUNCTION-OF-A-FUNCTION",
+      "content": "| MC-2 | CHAIN-RULE-FACTOR-OMITTED-FOR-TRIG-FUNCTION-OF-A-FUNCTION | Omitting the chain-rule factor g'(x) when differentiating a trig function of a non-trivial argument g(x) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Sign-Checking cos(x)'s Derivative via the Graph's Increasing/Decreasing Behavior (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Sign-Checking cos(x)'s Derivative via the Graph's Increasing/Decreasing Behavior (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Deriving the Other Four Trig Derivatives from sin/cos via the Quotient Rule (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Deriving the Other Four Trig Derivatives from sin/cos via the Quotient Rule (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Chain Rule Factor Is Mandatory Whenever the Argument Isn't Plain x (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Chain Rule Factor Is Mandatory Whenever the Argument Isn't Plain x (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Differentiate $f(x)=\\sin x+\\cos x$, being careful with signs.\n  2. Derive $\\frac{d}{dx}\\sec x$ using the quotient rule on $\\sec x=1/\\cos x$.\n  3. Differentiate $f(x)=\\cos(5x)$.\n  4. Differentiate $f(x)=\\tan(x^2+1)$.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models the vertical displacement of a swinging pendulum as $y(t)=A\\cos(\\omega t)$ (amplitude $A$, angular frequency $\\omega$), and needs the pendulum's instantaneous VELOCITY $y'(t)$ at any moment. (a) Differentiate $y(t)$ with respect to time, being careful with both the negative sign on cosine's derivative AND the chain-rule factor from the $\\omega t$ argument. (b) Explain what would go physically wrong (in terms of predicting the wrong direction of motion) if the negative sign were accidentally dropped from the derivative.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.derivative-rules` (the general rules combining these with other functions), `math.trig.trig-functions` (the six functions themselves), and `math.calc.squeeze-theorem` (the key limit result underlying the sin/cos derivations).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-trig/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.derivative-trig",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.derivative-rules`, `math.trig.trig-functions`, `math.calc.squeeze-theorem`.\n- **Unlocks**: `math.calc.derivative-inverse-trig`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-trig.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
