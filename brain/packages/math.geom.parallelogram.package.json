@@ -1,0 +1,262 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.parallelogram-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.parallelogram",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3d49b394181ab474c031ce4134014857ec8d233094030bc226401b8de8b2f756",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.parallelogram.md": "sha256:37b20d0e517d072947bd0061c672b13bd5b11a721a79b6c11cd76f564d42733d"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.parallelogram",
+    "name": "Parallelogram",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.quadrilateral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.parallelogram-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.parallelogram (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.parallelogram.md": "sha256:37b20d0e517d072947bd0061c672b13bd5b11a721a79b6c11cd76f564d42733d"
+      },
+      "contentHash": "sha256:2398878425a14d08d16ca04da375a51bb7ee280822acd4f6e64eb53c69733aba",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.parallelogram.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parallelogram.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parallelogram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parallelogram\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parallelogram.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parallelogram.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parallelogram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parallelogram\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parallelogram.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parallelogram.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parallelogram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parallelogram\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.parallelogram/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.parallelogram",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a PARALLELOGRAM as a quadrilateral with BOTH pairs of opposite sides parallel, and identify RECTANGLE (all angles $90°$), RHOMBUS (all sides equal), and SQUARE (both conditions) as SPECIAL CASES of the parallelogram — not separate, unrelated shape categories.\n- LO2: Recognize the NESTED HIERARCHY: every square IS a rhombus AND a rectangle; every rectangle and every rhombus IS a parallelogram; but NOT every parallelogram is a rectangle or rhombus — the relationship is a one-way SUBSET containment, not an equivalence.\n- LO3: State the key parallelogram PROPERTIES that follow from the parallel-sides definition: opposite sides are EQUAL in length, opposite angles are EQUAL, and the diagonals BISECT each other (cut each other exactly in half).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.parallelogram",
+      "title": "PARALLELOGRAM-RECTANGLE-RHOMBUS-SQUARE-HIERARCHY-TREATED-AS-TWO-WAY-EQUIVALENCE",
+      "content": "| MC-1 | PARALLELOGRAM-RECTANGLE-RHOMBUS-SQUARE-HIERARCHY-TREATED-AS-TWO-WAY-EQUIVALENCE | Treating the nested containment relationship (square⊂rhombus/rectangle⊂parallelogram) as a two-way equivalence rather than a one-way subset relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.parallelogram",
+      "title": "DIAGONALS-BISECTING-EACH-OTHER-CONFUSED-WITH-DIAGONALS-BEING-EQUAL-IN-LENGTH",
+      "content": "| MC-2 | DIAGONALS-BISECTING-EACH-OTHER-CONFUSED-WITH-DIAGONALS-BEING-EQUAL-IN-LENGTH | Confusing the property that a parallelogram's diagonals bisect each other with the (rectangle-specific) property that the diagonals are equal in length | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parallelogram",
+      "title": "The Nested Hierarchy Is a One-Way Containment (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Nested Hierarchy Is a One-Way Containment (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parallelogram",
+      "title": "Diagonals Bisecting Each Other Is Not the Same as Diagonals Being Equal (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Diagonals Bisecting Each Other Is Not the Same as Diagonals Being Equal (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parallelogram",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.parallelogram",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Determine whether \"every square is a rhombus\" is true, and justify.\n  2. Determine whether \"every rhombus is a square\" is true, and justify.\n  3. For a parallelogram with diagonals of total length 8 and 14 intersecting at point $P$, find the length of each half of both diagonals.\n  4. Explain, in one sentence, why a general parallelogram's diagonals bisect each other but are not necessarily equal in length.\n- **P76 (Transfer Probe, mode = independence)**: \"A furniture designer is building a picture frame and wants to verify, using only a tape measure (no protractor), that the frame is a genuine RECTANGLE (not just a general, possibly-leaning parallelogram shape). (a) Explain why simply confirming the opposite sides are parallel and equal (confirming it's a parallelogram) is NOT enough to guarantee it's a rectangle. (b) Using the fact that a rectangle's diagonals are additionally EQUAL in length (beyond just bisecting each other), explain how measuring both diagonals could help verify the frame is truly rectangular.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.parallelogram",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.quadrilateral` — the parallelogram is a specific, defined subtype.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.parallelogram/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.parallelogram",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.quadrilateral`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.trapezoid` (the other major special-case quadrilateral, with only one pair of parallel sides instead of two).\n- **Parent**: `math.geom.quadrilateral`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parallelogram.md",
+        "startLine": 86,
+        "endLine": 93
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

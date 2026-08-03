@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.regular-polygon-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.regular-polygon",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c0e37859432f4b8f54bf94d11e760b2a7c5b05fddd2b3a83df81227f35c7b410",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.regular-polygon.md": "sha256:bf465310e4b6df02cd89379526cdece57bf3a6a2ebe43451c6437980432c2cd9"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.regular-polygon",
+    "name": "Regular Polygon",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.polygon"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.regular-polygon-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.regular-polygon (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.regular-polygon.md": "sha256:bf465310e4b6df02cd89379526cdece57bf3a6a2ebe43451c6437980432c2cd9"
+      },
+      "contentHash": "sha256:d560caec6b531db9d4a9e852371c236fb9d461b33c7b92f0e2585b90fed79f5f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.regular-polygon.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.regular-polygon.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.regular-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.regular-polygon\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.regular-polygon.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.regular-polygon.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.regular-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.regular-polygon\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.regular-polygon.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.regular-polygon.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.regular-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.regular-polygon\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.regular-polygon.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.regular-polygon.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.regular-polygon"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.regular-polygon\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.regular-polygon/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a REGULAR polygon as having BOTH all sides equal AND all angles equal — recognizing that EQUAL SIDES ALONE (equilateral but not equiangular) or EQUAL ANGLES ALONE (equiangular but not equilateral) is NOT sufficient for a polygon to be regular, except in the special case of triangles.\n- LO2: Recognize that EVERY regular polygon can be INSCRIBED in a circle (all vertices lying on a common circle) — a genuine geometric fact, not a coincidence.\n- LO3: Recognize that as the number of sides $n\\to\\infty$, a regular $n$-gon's shape APPROACHES a circle — connecting the discrete world of polygons to the continuous circle as a limiting case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "EQUAL-SIDES-ALONE-ASSUMED-SUFFICIENT-FOR-REGULARITY-BEYOND-TRIANGLES",
+      "content": "| MC-1 | EQUAL-SIDES-ALONE-ASSUMED-SUFFICIENT-FOR-REGULARITY-BEYOND-TRIANGLES | Assuming equal sides alone guarantees a polygon is regular, over-generalizing from the special triangle case where this happens to hold, for polygons with more than 3 sides | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "LARGE-FINITE-N-GON-ASSUMED-TO-LITERALLY-BECOME-A-CIRCLE",
+      "content": "| MC-2 | LARGE-FINITE-N-GON-ASSUMED-TO-LITERALLY-BECOME-A-CIRCLE | Assuming a regular polygon with a sufficiently large finite number of sides literally becomes a circle, rather than merely approaching it in the limit as n approaches infinity | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Both Equal Sides AND Equal Angles Are Required for n > 3 (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Both Equal Sides AND Equal Angles Are Required for n > 3 (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Constructing the Circumscribing Circle (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Constructing the Circumscribing Circle (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Approaching, But Never Exactly Reaching, a Circle at Any Finite n (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Approaching, But Never Exactly Reaching, a Circle at Any Finite n (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 19,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Determine whether a non-square rectangle (all angles equal, but generally unequal sides) is a regular polygon, and justify.\n  2. Explain why, for triangles specifically, equal sides automatically guarantee equal angles, unlike for polygons with more sides.\n  3. Explain what it means for a regular polygon to be \"inscribed\" in a circle.\n  4. Explain why a regular 1000-gon, despite looking almost circular, is not actually a circle.\n  5. (Extra credit) Describe what happens to a regular n-gon's perimeter as n approaches infinity, relative to the circumscribing circle's circumference.\n- **P76 (Transfer Probe, mode = independence)**: \"A manufacturer is designing a coin with a regular polygon shape (rather than a perfect circle) for a limited-edition release, using a regular 20-gon (icosagon) inscribed in a fixed circular blank of radius 1.5 cm. (a) Explain why the coin's actual edge (the 20-gon) is NOT perfectly smooth like a circle, even though it might look nearly circular to the naked eye. (b) Explain what would happen to the coin's shape, in the limit, if the manufacturer kept increasing the number of sides indefinitely.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 19,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.polygon` — the regular polygon is a specific, highly symmetric subtype.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.regular-polygon/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.regular-polygon",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.polygon`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.circle` (the limiting case as n→∞).\n- **Parent**: `math.geom.polygon`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.regular-polygon.md",
+        "startLine": 93,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
