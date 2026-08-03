@@ -7,6 +7,7 @@ import type { TeachingLang, VoiceType } from '@/lib/tts'
 import { useCountry } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { SKILL_LEVELS, type SkillLevel } from '@/lib/curriculum/levels'
+import type { TranslationKey } from '@/lib/i18n'
 import { CandyPage } from '@/components/ui/candy'
 import { CoachInterviewStep } from '@/components/onboarding/CoachInterviewStep'
 import type { CoachAnswers } from '@/lib/coach/onboardingInterview'
@@ -202,7 +203,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                       )}
                       <div className="text-2xl mb-3 font-black" style={{ color: (s.slug === 'c' || s.slug === 'cpp') ? accent : undefined }}>{icon}</div>
                       <div className="font-bold text-sm mb-1" style={{ color: selected ? accent : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-                        {s.name}
+                        {t(('ob_subj_' + s.slug) as TranslationKey) !== ('ob_subj_' + s.slug) ? t(('ob_subj_' + s.slug) as TranslationKey) : s.name}
                       </div>
                     </button>
                   )
@@ -238,9 +239,9 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                         boxShadow: selected ? 'var(--coral-glow)' : 'none',
                       }}>
                       <span className="font-bold text-sm" style={{ color: selected ? 'var(--accent-primary)' : 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
-                        {lvl.label}
+                        {t(('ob_level_' + lvl.key) as TranslationKey)}
                       </span>
-                      <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{lvl.description}</span>
+                      <span className="text-xs" style={{ color: 'var(--text-secondary)' }}>{t(('ob_level_' + lvl.key + '_desc') as TranslationKey)}</span>
                     </button>
                   )
                 })}
