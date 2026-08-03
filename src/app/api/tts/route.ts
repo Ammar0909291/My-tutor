@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
-import { prisma } from '@/lib/db/prisma'
 
 // ─── Yandex SpeechKit TTS (Russia region) ────────────────────────────────────
 async function yandexTTS(text: string, voice: string): Promise<Buffer | null> {
@@ -101,19 +100,24 @@ export async function POST(req: Request) {
   if (!allowed) return rateLimitResponse()
 
   try {
-    // `country` from the client is intentionally unused for ru-routing below —
-    // it's localStorage-backed, per-browser/device, and can silently diverge
-    // from the user's actual profile (same bypass class as the chat-route bug).
-    // Only the server-side profile lookup is authoritative for that decision.
+    // Provider selection keys off `lang` — the language the text is actually
+    // written in — for BOTH providers. Yandex used to key off the learner's
+    // COUNTRY instead, but yandexTTS() hardcodes lang: 'ru-RU', so any
+    // non-Russian learner located in Russia had their text read aloud by a
+    // Russian voice. That was live for Hindi: when SARVAM_API_KEY is unset
+    // (it ships empty in .env.example) the `lang === 'hi'` branch is skipped
+    // and Hindi fell straight through to Yandex. Only Russian may reach
+    // Yandex now; everything else 503s and the client falls back to the
+    // browser's speechSynthesis at the correct locale.
+    //
+    // `lang` is the right signal here specifically because it describes the
+    // text, not the user — the tutor generated this string in the learner's
+    // active teaching language, which is what TTS has to pronounce.
     const { text, lang = 'en', voice = 'female' } = await req.json()
     if (!text) return NextResponse.json({ error: 'No text' }, { status: 400 })
 
     const clean = cleanTextForTTS(text)
     if (!clean.trim()) return NextResponse.json({ error: 'Empty' }, { status: 400 })
-
-    const profile = await prisma.profile.findUnique({ where: { userId: session.user.id } })
-    const profileCountry = (profile as any)?.country ?? 'global'
-    const country = profile?.teachingLanguage === 'ru' ? 'ru' : profileCountry
 
     let buffer: Buffer | null = null
     let contentType = 'audio/mpeg'
@@ -122,11 +126,11 @@ export async function POST(req: Request) {
       console.log('→ TTS: Sarvam (Bulbul v3)')
       buffer = await sarvamTTS(clean)
       if (buffer) contentType = 'audio/wav'
-    } else if (country === 'ru' && process.env.YANDEX_API_KEY) {
+    } else if (lang === 'ru' && process.env.YANDEX_API_KEY) {
       console.log('→ TTS: Yandex SpeechKit')
       buffer = await yandexTTS(clean, voice)
     } else {
-      console.log('→ TTS: no provider branch matched (lang =', lang, ', country =', country, ', YANDEX_API_KEY set =', !!process.env.YANDEX_API_KEY, ')')
+      console.log('→ TTS: no provider branch matched (lang =', lang, ', YANDEX_API_KEY set =', !!process.env.YANDEX_API_KEY, ', SARVAM_API_KEY set =', !!process.env.SARVAM_API_KEY, ')')
     }
     // No other server TTS provider — non-Hindi/non-Russia (and any failure
     // above) returns 503 below so the client uses browser speechSynthesis.
