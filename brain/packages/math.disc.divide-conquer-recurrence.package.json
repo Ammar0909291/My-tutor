@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.divide-conquer-recurrence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.divide-conquer-recurrence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5d6f6b6a3eb8b4d5510a0dc577d9082bb69a4ad83ac8b18cc9d7c2b301d60eb2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md": "sha256:a1ea29f0de3a0874511bbd4d61a9182073408a3b37c4bcbc03a9423a2aaa0241"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.divide-conquer-recurrence",
+    "name": "Divide-and-Conquer Recurrences",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.recurrence-relation",
+      "math.alg.logarithm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.divide-conquer-recurrence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.divide-conquer-recurrence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md": "sha256:a1ea29f0de3a0874511bbd4d61a9182073408a3b37c4bcbc03a9423a2aaa0241"
+      },
+      "contentHash": "sha256:ec075031247289bbe66f8b76450b308aec48ec1364429c63c8ee126ac39a8ad7",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.divide-conquer-recurrence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.divide-conquer-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.divide-conquer-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.divide-conquer-recurrence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.divide-conquer-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.divide-conquer-recurrence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.divide-conquer-recurrence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.divide-conquer-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.divide-conquer-recurrence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.divide-conquer-recurrence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.divide-conquer-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.divide-conquer-recurrence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify the parameters $a$, $b$, and $f(n)$ from a divide-and-conquer recurrence $T(n)=aT(n/b)+f(n)$.\n- LO2: Apply the Master Theorem's three cases by comparing $f(n)$ to $n^{\\log_ba}$ (the \"watershed\" function), determining which case applies and stating the resulting asymptotic solution.\n- LO3: Correctly distinguish the three cases' STRICT comparison requirements (polynomially smaller, equal, or polynomially larger — not merely \"smaller/equal/larger\" in a loose sense) and recognize when the Master Theorem does NOT apply at all.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "POLYNOMIAL-GAP-REQUIREMENT-IGNORED",
+      "content": "| MC-1 | POLYNOMIAL-GAP-REQUIREMENT-IGNORED | Assigning Case 1 or Case 3 based on a loose \"bigger/smaller\" comparison of $f(n)$ to the watershed, without checking the required strict polynomial gap | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "WATERSHED-MISCOMPUTED-FROM-WRONG-PARAMETERS",
+      "content": "| MC-2 | WATERSHED-MISCOMPUTED-FROM-WRONG-PARAMETERS | Computing $n^{\\log_ba}$ using the wrong values of $a$ or $b$, or confusing which is which, from the original recurrence | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "MASTER-THEOREM-APPLIED-TO-NON-CONFORMING-RECURRENCE",
+      "content": "| MC-3 | MASTER-THEOREM-APPLIED-TO-NON-CONFORMING-RECURRENCE | Applying the Master Theorem to a recurrence not in the exact $T(n)=aT(n/b)+f(n)$ form (e.g. subproblems of unequal size, or additional terms) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Identify a, b, f(n), and the Watershed (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Identify a, b, f(n), and the Watershed (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Contrasting the Three Cases on Related Examples (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Contrasting the Three Cases on Related Examples (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "The Gap Must Be Polynomial, Not Just Any Difference (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Gap Must Be Polynomial, Not Just Any Difference (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given $T(n)=3T(n/2)+n$, identify $a,b,f(n)$, compute the watershed, and determine which Master Theorem case applies.\n  2. Given $T(n)=T(n/2)+n$, determine which case applies and state the asymptotic solution.\n  3. Given $T(n)=8T(n/2)+n^2$, determine which case applies and state the asymptotic solution.\n  4. Explain, in one sentence, why the Master Theorem's cases require a POLYNOMIAL (not merely any) gap between $f(n)$ and the watershed.\n- **P76 (Transfer Probe, mode = independence)**: \"A matrix-multiplication algorithm recursively splits an $n\\times n$ matrix multiplication into 7 subproblems of size $n/2$ (Strassen's algorithm), with $O(n^2)$ combine work: $T(n)=7T(n/2)+O(n^2)$. (a) Identify $a,b,f(n)$, compute the watershed $n^{\\log_27}$ (note $\\log_27\\approx2.81$), and determine which Master Theorem case applies. (b) Compare this asymptotic result to the naive $O(n^3)$ matrix multiplication algorithm, and explain in one sentence why Strassen's recursive approach is asymptotically faster.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.recurrence-relation` (recurrences in general) and `math.alg.logarithm` (computing $\\log_ba$, the exponent central to this technique).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.recurrence-relation`, `math.alg.logarithm`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.algorithm-complexity` (the broader analysis context this technique serves).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
