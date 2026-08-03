@@ -105,7 +105,14 @@ export function policyStage(a: PolicyAdapters): Stage<KernelState, KernelState> 
       // silently widen.
       const maxParagraphs = state.view?.isFirstLessonContext === true
         ? 2
-        : responseBudget(a.contentRegister, teachingState?.consecutiveFailures ?? 0)
+        : responseBudget(
+            a.contentRegister,
+            teachingState?.consecutiveFailures ?? 0,
+            // Same success term as the route, from the same promoted TSM
+            // counters — the shadow must mirror the shipping formula exactly
+            // or parity reports a divergence that is not real.
+            (teachingState?.counters.correctAtCheck ?? 0) + (teachingState?.counters.correctAtPractice ?? 0),
+          )
 
       // visualClass: the route's exact expression —
       //   learnerRequested ? available : decideVisualFirst(available, state, move)

@@ -107,6 +107,10 @@ export interface TeachingStateView {
     observeFailures: number
     questionsAskedSinceTeach: number
     teachSegmentsSinceQuestion: number
+    /** Verified success on the CURRENT concept. Read by the register budget
+     *  so pacing can respond to demonstrated mastery, not only to struggle. */
+    correctAtCheck: number
+    correctAtPractice: number
   }
   transitionThisTurn: {
     from: string | null

@@ -52,6 +52,8 @@ export function tsmStepStage(a: TsmAdapters): Stage<KernelState, KernelState> {
           observeFailures: cs?.observeFailures ?? 0,
           questionsAskedSinceTeach: cs?.questionsAskedSinceTeach ?? 0,
           teachSegmentsSinceQuestion: cs?.teachSegmentsSinceQuestion ?? 0,
+          correctAtCheck: cs?.correctAtCheck ?? 0,
+          correctAtPractice: cs?.correctAtPractice ?? 0,
         },
         transitionThisTurn: {
           from: a.previousPhase ?? null,

@@ -796,15 +796,46 @@ function decideNextMoveHeuristic(state: ConversationState, ctx: NextMoveContext)
 export type Register = 'beginner' | 'intermediate' | 'expert'
 
 /**
- * Server-decided response budget. Struggle makes responses SHORTER,
- * never longer — a flooded mind gets less text, not more
- * (foundations/04 P5). null = unlimited.
+ * Server-decided response budget. null = unlimited.
+ *
+ * TWO evidence terms, and the second one was missing (production audit
+ * 2026-08-03).
+ *
+ * STRUGGLE makes responses SHORTER, never longer — a flooded mind gets less
+ * text, not more (foundations/04 P5). That half always worked.
+ *
+ * MASTERY must shorten them too, and did not. `register` is a pure function of
+ * the learner's PROFILE (resolveContentRegister reads grade / currentLevel /
+ * targetLevel — all static onboarding values, never re-derived), and
+ * `consecutiveFailures` only ever registers struggle. So no amount of
+ * demonstrated success could move this budget: a learner who self-reported
+ * beginner kept a 4-paragraph budget after twenty correct answers, and an
+ * expert who was never struggling had NO budget at all. That is the reported
+ * "even after many consecutive correct answers the tutor still behaves like
+ * the student is a beginner", and the textbook-length responses with it.
+ *
+ * `demonstratedCorrect` is the learner's verified success on the CURRENT
+ * concept — ConversationState's own correctAtCheck + correctAtPractice, the
+ * counters the ladder already maintains. No new state, no second mastery
+ * model, and it resets with the concept exactly as the ladder does.
+ *
+ * The >= 2 threshold is the one this runtime already uses everywhere for
+ * "repeated evidence" (struggle here, worked-example-first, FOUNDATION_REBUILD,
+ * remediation gating) — deliberately the same number, not a new one.
+ *
+ * Struggle still wins when both apply: a learner who has answered correctly
+ * twice and then failed twice is struggling NOW.
  */
-export function responseBudget(register: Register, consecutiveFailures: number): number | null {
+export function responseBudget(
+  register: Register,
+  consecutiveFailures: number,
+  demonstratedCorrect = 0,
+): number | null {
   const struggling = consecutiveFailures >= 2
-  if (register === 'beginner') return struggling ? 2 : 4
-  if (register === 'intermediate') return struggling ? 4 : 7
-  return struggling ? 6 : null
+  const fluent = !struggling && demonstratedCorrect >= 2
+  if (register === 'beginner') return struggling ? 2 : fluent ? 2 : 4
+  if (register === 'intermediate') return struggling ? 4 : fluent ? 4 : 7
+  return struggling ? 6 : fluent ? 6 : null
 }
 
 // ── Learner autonomy detection (moved out of route.ts for testability) ────────

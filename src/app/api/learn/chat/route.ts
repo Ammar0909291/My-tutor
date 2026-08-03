@@ -2029,7 +2029,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // the route changed.
           routeMaxParagraphsHoisted = firstLessonActiveHoisted
             ? 2
-            : responseBudget(contentRegister, conversationStateHoisted.consecutiveFailures)
+            : responseBudget(
+                contentRegister,
+                conversationStateHoisted.consecutiveFailures,
+                // The success term. ConversationState is already the owner of
+                // demonstrated mastery on this concept; the budget simply had
+                // no input for it, so pacing could never respond to success.
+                conversationStateHoisted.correctAtCheck + conversationStateHoisted.correctAtPractice,
+              )
           // Single move owner (kernel/policyMove) — computed once here and
           // reused by the shadow pipeline and the verifier context, so the two
           // can never disagree about what move this turn is.
