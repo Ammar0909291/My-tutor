@@ -615,10 +615,43 @@ export async function POST(req: Request) {
         const libSubject = findLibrarySubject(subjectCode)
         if (libSubject) {
           const lessonSlugs = libSubject.modules.flatMap((m) => m.nodes.map((n) => n.slug))
-          const { detectMisconceptions, buildMisconceptionBlock, buildRemediationStrategy } = await import('@/lib/school/adaptive/misconceptionEngine')
+          const { detectMisconceptions, buildMisconceptionBlock, buildRemediationStrategy, isRemediationWarranted } = await import('@/lib/school/adaptive/misconceptionEngine')
           const misconceptions = await detectMisconceptions(userId, subjectCode, lessonSlugs, '')
+          // Observation is unconditional — the CUE must still SEE the learner's
+          // misconception history every turn, and the Decision Engine reads it
+          // from here. Only the PROMPT INJECTION below is gated.
           cueObservations.misconceptions = misconceptions
-          const block = buildMisconceptionBlock(misconceptions)
+
+          // REMEDIATION IS A RESPONSE TO EVIDENCE, NOT A LESSON STAGE.
+          //
+          // detectMisconceptions() looks back 30 DAYS across EVERY concept in
+          // the subject and knows nothing about this turn. So once a learner had
+          // made any mistake anywhere in the subject, this block — plus an
+          // explicit "run this remediation" strategy for a HIGH-confidence
+          // entry — was appended to the system prompt on EVERY turn for the
+          // rest of the session, no matter how the learner was actually doing.
+          //
+          // Production: the learner answered "Oxygen" correctly and was
+          // immediately given a large misconception lecture; answered "2 : 1"
+          // correctly and was immediately given another scripted block. The
+          // TURN DIRECTIVE had decided a single next move, and this block sat
+          // above it ordering a second, contradictory action.
+          //
+          // The gate uses evidence the route has already computed at this
+          // point, and the SAME repeated-failure threshold the runtime already
+          // uses elsewhere for worked-example-first and FOUNDATION_REBUILD
+          // (sessionFailureCount >= 2). Nothing new is introduced and no
+          // threshold is invented.
+          const lastSignalForRemediation = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+            ? snapshot.lastSignal as { correctness?: boolean; confusion?: boolean }
+            : null
+          const remediationWarranted = isRemediationWarranted({
+            lastSignalCorrect: lastSignalForRemediation?.correctness ?? null,
+            lastSignalConfusion: lastSignalForRemediation?.confusion ?? null,
+            sessionFailureCount: snapshotSessionFailureCount,
+          })
+
+          const block = remediationWarranted ? buildMisconceptionBlock(misconceptions) : null
           if (block) {
             systemPrompt += block
             const topHighConfidence = misconceptions.find((m) => m.confidence === 'HIGH')

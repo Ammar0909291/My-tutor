@@ -852,6 +852,44 @@ export async function getChapterMisconceptions(
  * Only includes MEDIUM and HIGH confidence misconceptions.
  * Returns an empty string when there are no actionable misconceptions.
  */
+/**
+ * Is remediation warranted THIS TURN?
+ *
+ * detectMisconceptions() answers "has this learner ever misconceived
+ * anything in this subject" — a 30-day lookback across every concept, with no
+ * knowledge of the current turn. That is the right question for OBSERVATION
+ * and the wrong question for ACTION: injecting a misconception lecture on its
+ * answer alone made remediation a mandatory lesson stage rather than a
+ * response to evidence.
+ *
+ * Production: a learner who answered "Oxygen" correctly was immediately given
+ * a large misconception lecture; one who answered "2 : 1" correctly was given
+ * another scripted block. Remediation is a tool, so it fires on evidence that
+ * the learner currently needs it:
+ *
+ *   - the last graded signal was WRONG, or
+ *   - the learner exhibited confusion, or
+ *   - they have failed repeatedly this episode (the same >= 2 threshold the
+ *     runtime already uses for worked-example-first / FOUNDATION_REBUILD).
+ *
+ * A correct last answer is explicitly not remediable — that is the "advance
+ * naturally" branch.
+ *
+ * Pure. No I/O, no clock.
+ */
+export function isRemediationWarranted(ev: {
+  lastSignalCorrect?: boolean | null
+  lastSignalConfusion?: boolean | null
+  sessionFailureCount?: number | null
+}): boolean {
+  if (ev.lastSignalCorrect === false) return true
+  if (ev.lastSignalConfusion === true) return true
+  const fails = typeof ev.sessionFailureCount === 'number' && Number.isFinite(ev.sessionFailureCount)
+    ? ev.sessionFailureCount
+    : 0
+  return fails >= 2
+}
+
 export function buildMisconceptionBlock(misconceptions: Misconception[]): string {
   const actionable = misconceptions.filter((m) => m.confidence !== 'LOW')
   if (actionable.length === 0) return ''
