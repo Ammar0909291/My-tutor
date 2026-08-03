@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.dilation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.dilation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dcfaeb40e6e161ed501c5f74fc9c4201328ae59e0e1ba6d477e0ca7e981ad26a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.dilation.md": "sha256:fddc6ec68e28521bbf88d896e58b25443cea60f118a677438180c5b2b96ae8ab"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.dilation",
+    "name": "Dilation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.transformations",
+      "math.arith.ratios"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.dilation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.dilation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.dilation.md": "sha256:fddc6ec68e28521bbf88d896e58b25443cea60f118a677438180c5b2b96ae8ab"
+      },
+      "contentHash": "sha256:e1b9e4e22867746bce65958d11523dffb1550bfc9fc036b4db881b50804e5e5f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.dilation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.dilation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.dilation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.dilation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.dilation.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.dilation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.dilation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.dilation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.dilation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.dilation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.dilation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.dilation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.dilation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.dilation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.dilation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply a dilation with SCALE FACTOR $k$ about a center $C$ — every point's DISTANCE from $C$ gets multiplied by $k$, producing a figure SIMILAR to (same shape, generally different size from) the original.\n- LO2: Recognize the meaning of different scale factor RANGES: $k>1$ ENLARGES the figure, $0<k<1$ SHRINKS it, and $k=1$ leaves it UNCHANGED — and (less commonly at this level) negative $k$ additionally flips the figure through the center.\n- LO3: Apply the coordinate rule for dilation CENTERED AT THE ORIGIN: $(x,y)\\to(kx,ky)$ — and recognize that dilation about a DIFFERENT center requires an analogous translate-scale-translate-back process (paralleling `math.geom.rotation`'s non-origin-center handling).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.dilation",
+      "title": "ONLY-ONE-COORDINATE-SCALED-BY-K-INSTEAD-OF-BOTH",
+      "content": "| MC-1 | ONLY-ONE-COORDINATE-SCALED-BY-K-INSTEAD-OF-BOTH | Multiplying only one coordinate (x or y) by the scale factor k, rather than both coordinates equally | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.dilation",
+      "title": "ANY-POSITIVE-SCALE-FACTOR-ASSUMED-TO-ENLARGE-RATHER-THAN-DISTINGUISHING-ABOVE-BELOW-ONE",
+      "content": "| MC-2 | ANY-POSITIVE-SCALE-FACTOR-ASSUMED-TO-ENLARGE-RATHER-THAN-DISTINGUISHING-ABOVE-BELOW-ONE | Assuming any positive scale factor enlarges the figure, rather than recognizing values between 0 and 1 shrink it | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.dilation",
+      "title": "Scale Both Coordinates by the Same Factor k (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Scale Both Coordinates by the Same Factor k (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.dilation",
+      "title": "The k=1 Threshold Distinguishes Enlarging from Shrinking (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The k=1 Threshold Distinguishes Enlarging from Shrinking (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.dilation",
+      "title": "Dilation Produces a Similar Figure with Proportional Sides (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Dilation Produces a Similar Figure with Proportional Sides (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.dilation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.dilation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Dilate the point $(5,-2)$ by scale factor $k=3$, centered at the origin.\n  2. Dilate the point $(8,4)$ by scale factor $k=0.25$, centered at the origin, and describe whether the figure enlarges or shrinks.\n  3. Explain, in one sentence, why a scale factor between 0 and 1 shrinks a figure rather than enlarging it.\n  4. For a triangle dilated by scale factor $k=5$, explain what happens to its side lengths and its angle measures.\n- **P76 (Transfer Probe, mode = independence)**: \"An architect is scaling down a building's floor plan to fit on a smaller printed page, using a dilation with scale factor $k=0.1$ (reducing all dimensions to 10% of actual size), centered at one corner of the original plan. (a) Explain why this dilation preserves the floor plan's overall SHAPE (all angles and proportions) even though the SIZE changes dramatically. (b) If a wall in the original plan measures 40 feet, find its length on the scaled-down printed version.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.dilation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.transformations` (the general concept) and `math.arith.ratios` (the scale factor itself is a ratio).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.dilation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.dilation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.transformations`, `math.arith.ratios`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.similar-triangles` (the resulting proportional-similarity relationship).\n- **Parent**: `math.geom.transformations`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.dilation.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
