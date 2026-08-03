@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Check, Play } from 'lucide-react'
-import { useLanguage } from '@/components/ui/LanguageToggle'
+import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { speakText } from '@/lib/tts'
 import type { TeachingLang, VoiceType } from '@/lib/tts'
 import { useCountry } from '@/components/Providers'
@@ -129,6 +129,13 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
           <span className="text-sm" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
             {t('ob_step')} {currentStep} {t('ob_of')} {totalSteps}
           </span>
+          {/* Onboarding runs before the Profile row exists, so /api/settings
+              always reports teachingLanguage='en' here and the wizard renders
+              in English unless localStorage was already set on an earlier
+              page. Every other pre-dashboard screen (login, signup, reset,
+              landing) offers this toggle; without it onboarding was the one
+              place a learner could not choose their language. */}
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </div>
