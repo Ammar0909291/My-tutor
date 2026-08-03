@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.radius-of-convergence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.radius-of-convergence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3d8324c32dfc6198e49dcf8a8f6cb21d98c0c085577b761c4b92d72a7f90694c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.radius-of-convergence.md": "sha256:9f134219b2d72612d9ea42516d81254dfb8b7d08764666c9ab36b26aad22285b"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.radius-of-convergence",
+    "name": "Radius of Convergence",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.power-series",
+      "math.seq.ratio-test"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.radius-of-convergence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.radius-of-convergence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.radius-of-convergence.md": "sha256:9f134219b2d72612d9ea42516d81254dfb8b7d08764666c9ab36b26aad22285b"
+      },
+      "contentHash": "sha256:7ee439e9a83fed63b558f0b3aab44b0b1bcbe99938582d2bd9beefafe43fcce9",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.radius-of-convergence.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.radius-of-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.radius-of-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.radius-of-convergence.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.radius-of-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.radius-of-convergence\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.radius-of-convergence.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.radius-of-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.radius-of-convergence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.radius-of-convergence.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.radius-of-convergence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.radius-of-convergence\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.radius-of-convergence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Learning Objectives",
+      "content": "- LO1: Find the RADIUS of convergence $R$ of a power series $\\sum c_n(x-a)^n$ by applying the RATIO TEST to the series' terms, solving for the range of $x$ where the ratio's limit is less than 1.\n- LO2: State that the power series converges ABSOLUTELY for $|x-a|<R$ and DIVERGES for $|x-a|>R$ — but that the ENDPOINTS $x=a\\pm R$ require SEPARATE, individual checking (the ratio test is INCONCLUSIVE exactly at the boundary, giving limit exactly 1).\n- LO3: Correctly report the full INTERVAL of convergence (not just the radius) by explicitly testing EACH endpoint individually and stating whether it's included or excluded.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "RATIO-TEST-LIMIT-OF-ZERO-MISINTERPRETED-AS-RADIUS-ZERO",
+      "content": "| MC-1 | RATIO-TEST-LIMIT-OF-ZERO-MISINTERPRETED-AS-RADIUS-ZERO | Misinterpreting a ratio-test limit of 0 (true for all x) as meaning the radius of convergence is 0, rather than infinite | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "ENDPOINTS-ASSUMED-TO-BEHAVE-IDENTICALLY-WITHOUT-SEPARATE-CHECKING",
+      "content": "| MC-2 | ENDPOINTS-ASSUMED-TO-BEHAVE-IDENTICALLY-WITHOUT-SEPARATE-CHECKING | Assuming both endpoints of the interval of convergence must behave the same way, without checking each one as an independent series | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Interpreting the Ratio Test's Limit Correctly (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Interpreting the Ratio Test's Limit Correctly (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Each Endpoint Is a Separate, Independent Check (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Each Endpoint Is a Separate, Independent Check (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Standard Ratio-Test Application for a Finite Radius (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Standard Ratio-Test Application for a Finite Radius (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Find the radius of convergence of $\\sum_{n=0}^{\\infty}\\frac{x^n}{2^n}$.\n  2. Find the radius and full interval of convergence of $\\sum_{n=1}^{\\infty}\\frac{(x+1)^n}{n^2}$, checking both endpoints.\n  3. Explain, in one sentence, why the ratio test's limit equaling exactly 1 signals that a SEPARATE check is needed at that point.\n  4. Find the radius of convergence of $\\sum_{n=0}^{\\infty}n!\\,x^n$.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer approximates a nonlinear circuit's response using a power series $\\sum c_n V^n$ (voltage $V$ raised to increasing powers), and needs to know the exact voltage RANGE over which this approximation is mathematically valid (i.e., where the series converges). (a) Explain what finding the radius of convergence $R$ would tell the engineer about the maximum safe voltage magnitude for using this approximation. (b) Explain why, even after finding $R$, the engineer would still need to separately investigate the behavior at exactly $V=R$ and $V=-R$ before fully characterizing the approximation's valid range.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.power-series` (the series form being analyzed) and `math.seq.ratio-test` (the primary tool for finding $R$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.radius-of-convergence/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.radius-of-convergence",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.power-series`, `math.seq.ratio-test`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.calc.power-series`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.radius-of-convergence.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

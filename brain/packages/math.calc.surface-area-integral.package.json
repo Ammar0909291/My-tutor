@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.surface-area-integral-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.surface-area-integral",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:25b044b9e91429521fe2bb107470e944594a80e6b60df818dedac2723b587774",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.surface-area-integral.md": "sha256:829f43cb5f25219ae38f2f98e810d44c638080219f7284d22ad4c8295552fe56"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.surface-area-integral",
+    "name": "Surface Area of Revolution",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.arc-length"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.surface-area-integral-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.surface-area-integral (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.surface-area-integral.md": "sha256:829f43cb5f25219ae38f2f98e810d44c638080219f7284d22ad4c8295552fe56"
+      },
+      "contentHash": "sha256:af9cc7a48378e10ecd30327ed8bf41a9204392c6570660d4af44b758a1119862",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-area-integral.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-area-integral.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-area-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-area-integral\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-area-integral.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-area-integral.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-area-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-area-integral\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-area-integral.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-area-integral.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-area-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-area-integral\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.surface-area-integral.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.surface-area-integral.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.surface-area-integral"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.surface-area-integral\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.surface-area-integral/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply the surface-area-of-revolution formula $S=2\\pi\\int_a^bf(x)\\sqrt{1+[f'(x)]^2}\\,dx$ for rotating $y=f(x)$ about the $x$-axis.\n- LO2: Recognize the formula's TWO components: $\\sqrt{1+[f'(x)]^2}\\,dx$ is the ARC LENGTH element (from `math.calc.arc-length`), and $2\\pi f(x)$ is the CIRCUMFERENCE of the circle traced by that arc element as it rotates — the formula is genuinely \"circumference times arc length,\" summed via integration, NOT simply the arc length formula with an extra factor tacked on arbitrarily.\n- LO3: Correctly compute $f'(x)$ FIRST and substitute it into the square root BEFORE integrating — a common setup error skips or mishandles this derivative step.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "ARC-LENGTH-FACTOR-OMITTED-FROM-SURFACE-AREA-FORMULA",
+      "content": "| MC-1 | ARC-LENGTH-FACTOR-OMITTED-FROM-SURFACE-AREA-FORMULA | Integrating 2π∫f(x)dx alone, omitting the essential arc-length factor √(1+[f'(x)]²) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "DERIVATIVE-MISHANDLED-OR-NOT-SQUARED-CORRECTLY-IN-SETUP",
+      "content": "| MC-2 | DERIVATIVE-MISHANDLED-OR-NOT-SQUARED-CORRECTLY-IN-SETUP | Computing or squaring f'(x) incorrectly when setting up the arc-length factor, producing a wrong integral | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "The Arc-Length Factor Is Essential, Not Optional (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Arc-Length Factor Is Essential, Not Optional (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "Circumference Times Arc Length, Verified on a Simple Case (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Circumference Times Arc Length, Verified on a Simple Case (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "Compute f'(x) Carefully and Square It Correctly Before Integrating (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Compute f'(x) Carefully and Square It Correctly Before Integrating (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.65×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Set up (do not evaluate) the surface-area integral for $f(x)=x^2$ from $x=0$ to $x=2$, rotated about the $x$-axis.\n  2. Explain, in one sentence, why the surface-area formula includes the arc-length factor $\\sqrt{1+[f'(x)]^2}$ rather than just $2\\pi f(x)$ alone.\n  3. Verify the surface-area formula reduces to the known cone lateral surface area formula for $f(x)=\\frac{r}{h}x$ (a straight line from the origin) rotated from $x=0$ to $x=h$.\n  4. Find $f'(x)$ and set up (do not evaluate) the surface-area integral for $f(x)=\\sin x$ from $x=0$ to $x=\\pi$.\n- **P76 (Transfer Probe, mode = independence)**: \"A manufacturer needs to compute the exact amount of sheet metal required to fabricate a curved satellite dish, whose cross-sectional profile (from the central axis outward) follows $f(x)=0.1x^2$ (a parabola) for $x$ from 0 to 5 (meters), rotated about the central axis. (a) Set up the surface-area-of-revolution integral for this dish, computing $f'(x)$ first. (b) Explain why simply using the dish's projected (flat, 2D) area would UNDERESTIMATE the actual sheet metal needed, connecting to the arc-length factor's role in accounting for the dish's true curved shape.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.arc-length` — the surface area formula directly reuses its arc-length differential $\\sqrt{1+[f'(x)]^2}\\,dx$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.surface-area-integral/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.surface-area-integral",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.arc-length`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.surface-area` (the general geometric concept this technique computes for revolution surfaces specifically).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.surface-area-integral.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
