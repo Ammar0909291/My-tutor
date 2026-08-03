@@ -13,18 +13,13 @@
  * existing, untouched time-based and mistake-severity-based engines.
  */
 import { prisma } from '@/lib/db/prisma'
-import { ALL_KG_NODES } from '@/lib/education'
 import {
   getVisualLearningProfile,
   detectVisualWeaknesses,
   type VisualWeaknessEntry,
 } from '@/lib/visuals/visualMasteryProfile'
 
-const NODE_TITLES = new Map(ALL_KG_NODES.map((n) => [n.id, n.title]))
-
-function titleFor(topicSlug: string): string {
-  return NODE_TITLES.get(topicSlug) ?? topicSlug.replace(/[-_]/g, ' ')
-}
+import { resolveTopicTitle as titleFor } from './topicTitle'
 
 /** Minimal shape this module needs from a `TopicProgress` row — callers may pass full Prisma rows. */
 export interface TopicProgressRow {

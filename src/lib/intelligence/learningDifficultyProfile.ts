@@ -14,16 +14,11 @@
  * resolve difficulty (see docs/EDUCATIONAL_INTELLIGENCE_DIFFICULTY_AUDIT.md).
  */
 import { prisma } from '@/lib/db/prisma'
-import { ALL_KG_NODES } from '@/lib/education'
 import { getRevisionProfile, type RevisionProfile } from './revisionProfile'
 import { generatePracticeTargets } from './practiceTargets'
 import { generateRetestCandidates, type RetestCandidatePlan } from './retestCandidates'
 
-const NODE_TITLES = new Map(ALL_KG_NODES.map((n) => [n.id, n.title]))
-
-function titleFor(topicSlug: string): string {
-  return NODE_TITLES.get(topicSlug) ?? topicSlug.replace(/[-_]/g, ' ')
-}
+import { resolveTopicTitle as titleFor } from './topicTitle'
 
 export type DifficultyLevel = 'low' | 'medium' | 'high'
 
