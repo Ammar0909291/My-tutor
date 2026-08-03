@@ -29,6 +29,49 @@ export type TeachingStepName = 'DISCOVERY' | 'TEACHING' | 'ASSESSMENT'
 
 export const TEACHING_STEPS: TeachingStepName[] = ['DISCOVERY', 'TEACHING', 'ASSESSMENT']
 
+/**
+ * The step this concept is on, DERIVED from the canonical lesson stage.
+ *
+ * ROOT CAUSE THIS REPLACES (production audit 2026-08-03). This module used to
+ * advance its own persisted pointer from `contextSnapshot.lastSignal`
+ * (advanceTeachingStepIndex, below), which made it a SECOND stage machine
+ * running beside ConversationState.phase — the canonical owner. The two
+ * advance on different evidence and provably disagree:
+ *
+ *   same turn, same evidence (a WRONG answer):
+ *     canonical  phase GUIDE -> DEMONSTRATE   (phaseDown: re-show)
+ *     executor   step  DISCOVERY -> TEACHING  (advance)
+ *   opposite directions.
+ *
+ *   and the executor's pointer is TERMINAL at ASSESSMENT:
+ *     advanceTeachingStepIndex(2, correct)   -> 2
+ *     advanceTeachingStepIndex(2, wrong)     -> 2
+ *     advanceTeachingStepIndex(2, confusion) -> 2
+ *   so once a concept reached ASSESSMENT the executor rendered the ASSESSMENT
+ *   contract on every later turn of that concept, forever — while the contract
+ *   itself declares it is "the ONLY thing the LLM is allowed to render".
+ *
+ * Deriving the step from the phase keeps this module doing its real job —
+ * selecting the authored content for the current step — while leaving
+ * ConversationState.phase the single owner of WHICH step that is. The split
+ * mirrors isDeliveryPhase()'s own: OBSERVE opens, DEMONSTRATE/GUIDE teach, and
+ * the mastery gates assess.
+ *
+ * Pure. No new state: the persisted index becomes a record of the derived
+ * value rather than an independent pointer.
+ */
+export function teachingStepIndexForPhase(phase: string | null | undefined): number {
+  switch (phase) {
+    case 'OBSERVE': return 0
+    case 'DEMONSTRATE':
+    case 'GUIDE': return 1
+    case 'CHECK':
+    case 'PRACTICE':
+    case 'TRANSFER': return 2
+    default: return 0
+  }
+}
+
 export interface TeachingStepContract {
   step: TeachingStepName
   stepIndex: number

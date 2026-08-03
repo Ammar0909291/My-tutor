@@ -1188,7 +1188,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // gating is needed here.
                 let currentStepBlock: string | null = null
                 const {
-                  hasTeachingPlan, readTeachingStepIndex, advanceTeachingStepIndex,
+                  hasTeachingPlan, readTeachingStepIndex, teachingStepIndexForPhase,
                   buildTeachingStepContract, renderTeachingStepContractBlock,
                 } = await import('@/lib/teaching/teachingSequenceExecutor')
                 if (hasTeachingPlan(ebContext)) {
@@ -1198,17 +1198,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   // block-scoped TDZ shadows the outer variable for the whole
                   // enclosing block, not just after its declaration line.
                   const rawSnapshot = learnSession.contextSnapshot as Record<string, unknown> | null
-                  const { stepIndex: priorStepIndex, isFirstTurnOfConcept } =
+                  // readTeachingStepIndex is still the owner of "is this the
+                  // first turn of this concept" (it compares the persisted
+                  // concept id). Its stepIndex is no longer used to ADVANCE.
+                  const { isFirstTurnOfConcept } =
                     readTeachingStepIndex(rawSnapshot, activeConceptIdForDecide)
-                  const priorLastSignal = (rawSnapshot?.lastSignal && typeof rawSnapshot.lastSignal === 'object')
-                    ? rawSnapshot.lastSignal as { correctness?: boolean; confusion?: boolean }
-                    : null
-                  // A freshly-changed concept always starts at DISCOVERY,
-                  // regardless of a stale lastSignal left over from the
-                  // previous concept.
+                  // STAGE HAS ONE OWNER: ConversationState.phase.
+                  //
+                  // This used to call advanceTeachingStepIndex(priorStepIndex,
+                  // priorLastSignal) — a second stage machine advancing on
+                  // different evidence than the canonical one, and provably
+                  // disagreeing with it (see teachingStepIndexForPhase's note:
+                  // a wrong answer moves the phase DOWN and moved this pointer
+                  // UP, and the pointer was terminal at ASSESSMENT so it
+                  // rendered the assessment contract forever).
+                  //
+                  // The phase is read from the SAME persisted state the stage
+                  // machine itself reads, keyed on the same concept, so a
+                  // concept change still resets to OBSERVE -> DISCOVERY and the
+                  // explicit first-turn reset below stays consistent with it.
+                  const { readConversationState } = await import('@/lib/teaching/conversationState')
+                  const canonicalPhase = readConversationState(
+                    rawSnapshot?.conversationState, activeConceptIdForDecide,
+                  ).phase
                   const nextStepIndex = isFirstTurnOfConcept
                     ? 0
-                    : advanceTeachingStepIndex(priorStepIndex, priorLastSignal)
+                    : teachingStepIndexForPhase(canonicalPhase)
                   const contract = buildTeachingStepContract(ebContext!, nextStepIndex, isFirstTurnOfConcept)
                   currentStepBlock = renderTeachingStepContractBlock(contract)
                   teachingStepUpdateHoisted = {
