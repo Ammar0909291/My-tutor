@@ -351,6 +351,69 @@ describe('integration — real visualRegistry.ts source', () => {
     expect(entry).toBeDefined()
     expect(entry!.primary).not.toBe('force_diagram')
   })
+
+  // The orphan detector existed and was unit-tested against synthetic
+  // fixtures, but was never pointed at the real registry — which is how
+  // seven dead physics keys shipped. These run it against real data.
+  const ALL_KG_IDS = (() => {
+    const ids = new Set<string>()
+    for (const s of ['mathematics', 'physics', 'chemistry', 'biology', 'computer-science', 'english']) {
+      const g = JSON.parse(fs.readFileSync(path.join(process.cwd(), `docs/${s}/kg/graph.json`), 'utf8'))
+      for (const c of g.concepts) ids.add(c.id)
+    }
+    return ids
+  })()
+
+  it('physics has ZERO orphan registry keys', () => {
+    const physOrphans = findOrphanEntries(parsed, ALL_KG_IDS)
+      .filter((o) => o.key.startsWith('phys.'))
+      .map((o) => `${o.key} (line ${o.line})`)
+    expect(physOrphans).toEqual([])
+  })
+
+  it('every physics registry key names a real concept in the physics KG', () => {
+    const physKg = new Set<string>(
+      JSON.parse(fs.readFileSync(path.join(process.cwd(), 'docs/physics/kg/graph.json'), 'utf8'))
+        .concepts.map((c: { id: string }) => c.id),
+    )
+    const bad = parsed.conceptEntries
+      .filter((e) => e.key.startsWith('phys.') && !physKg.has(e.key))
+      .map((e) => e.key)
+    expect(bad).toEqual([])
+  })
+
+  it('the remapped oscillation + circuit concepts resolve to their dedicated renderer', () => {
+    // These were authored under ids that exist in no KG (phys.mech.pendulum,
+    // phys.mech.simple-harmonic-motion, phys.em.current, phys.em.series-parallel),
+    // so the dedicated renderer was unreachable and each fell back to a
+    // generic domain default.
+    const expected: Record<string, string> = {
+      'phys.wave.pendulum': 'three_pendulum_motion',
+      'phys.wave.shm': 'three_pendulum_motion',
+      'phys.em.electric-current': 'circuit_diagram',
+      'phys.em.dc-circuits': 'circuit_diagram',
+    }
+    for (const [key, primary] of Object.entries(expected)) {
+      const entry = parsed.conceptEntries.find((e) => e.key === key)
+      expect(entry, `${key} must have an explicit registry entry`).toBeDefined()
+      expect(entry!.primary).toBe(primary)
+    }
+  })
+
+  it('NEGATIVE CONTROL: the orphan baseline never contains a physics key', () => {
+    const baseline = fs.readFileSync(path.join(process.cwd(), 'scripts/ci/visual-orphan-baseline.txt'), 'utf8')
+      .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'))
+    expect(baseline.filter((k) => k.startsWith('phys.'))).toEqual([])
+  })
+
+  it('NEGATIVE CONTROL: baselining is not a way to silence a real orphan', () => {
+    // Every baselined key must still BE an orphan; a stale entry would let a
+    // future real orphan hide behind it.
+    const baseline = fs.readFileSync(path.join(process.cwd(), 'scripts/ci/visual-orphan-baseline.txt'), 'utf8')
+      .split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'))
+    const orphanKeys = new Set(findOrphanEntries(parsed, ALL_KG_IDS).map((o) => o.key))
+    expect(baseline.filter((k) => !orphanKeys.has(k))).toEqual([])
+  })
 })
 
 // ── Orphan detection against real multi-subject KG ────────────────────────────

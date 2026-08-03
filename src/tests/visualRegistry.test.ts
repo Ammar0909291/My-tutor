@@ -28,8 +28,11 @@ describe('visualRegistry', () => {
   })
 
   it('returns scene generator for concept with one', () => {
-    // phys.mech.collisions was an orphan (no such KG concept); use the real
-    // elastic-collisions concept that carries the same 'collision' generator.
+    // 'phys.mech.collisions' was a stale/invented concept ID that never
+    // existed in the canonical KG (docs/physics/kg/graph.json) — the real
+    // concepts are collisions-elastic and collisions-inelastic, which already
+    // carried this exact mapping. Same correction as chem.bond.vsepr above,
+    // applied during the physics production-hardening pass.
     expect(getConceptSceneGenerator('phys.mech.collisions-elastic')).toBe('collision')
   })
 

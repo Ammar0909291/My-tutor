@@ -1,0 +1,65 @@
+# Visualization Registry — accepted orphan baseline (ratchet).
+#
+# An orphan is a CONCEPT_VISUALS key matching no concept in any shipped
+# Knowledge Graph: authored content sitting under a typo'd or stale id, so
+# the renderer it names is unreachable and the concept it meant to serve
+# silently falls through to a domain default or keyword matching.
+#
+# Every key below predates the physics production-hardening pass and belongs
+# to a subject that pass was scoped away from. They are recorded here so CI
+# can fail on any NEW orphan in ANY subject while these are worked off.
+#
+# Rules: never add a key to unblock CI — fix the mapping instead. Removing a
+# key here is the goal; the validator reports stale baseline entries so this
+# file can only shrink. Physics is deliberately absent: it is at zero.
+#
+# Generated from the registry + all six KGs; see
+# scripts/validate-visualization-coverage.ts.
+bio.cell.cell-division
+bio.eco.ecosystems
+bio.eco.energy-flow
+bio.eco.food-chains
+bio.eco.water-cycle
+bio.gen.dihybrid-cross
+bio.gen.mendels-laws
+bio.gen.monohybrid-cross
+bio.mol.dna-structure
+cs.algo.searching
+cs.algo.sorting
+cs.db.relational-databases
+cs.ds.arrays
+cs.ds.linked-lists
+cs.ds.stacks-queues
+math.alg.linear-equations
+math.alg.linear-inequalities
+math.alg.polynomials
+math.alg.quadratic-equations
+math.arith.integers
+math.arith.rational-numbers
+math.arith.real-numbers
+math.calc.applications-derivative
+math.calc.differentiation
+math.calc.integration
+math.calc.maxima-minima
+math.geom.3d-geometry
+math.geom.angle-sum
+math.geom.area-perimeter
+math.geom.circles
+math.geom.congruence
+math.geom.coordinate-geometry
+math.geom.heights-distances
+math.geom.polygons
+math.geom.quadrilaterals
+math.geom.section-formula
+math.geom.similarity
+math.geom.straight-lines
+math.geom.surface-area-volume
+math.geom.triangles
+math.stat.data-representation
+math.stat.frequency-distribution
+math.stat.mean-median-mode
+math.stat.probability
+math.trig.trigonometric-identities
+math.trig.trigonometric-ratios
+math.vec.vector-operations
+math.vec.vectors
