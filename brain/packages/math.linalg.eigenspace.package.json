@@ -1,0 +1,295 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.eigenspace-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.eigenspace",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:483c9a1eb42f3822b44fdb8f9bd861177a0b5dc844061b2d1394f91d13b94b77",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.eigenspace.md": "sha256:7f36cc4ee00ef850ca39349211e72d2fbd304fd16d9a4ed4950388151af23811"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.eigenspace",
+    "name": "Eigenspace",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.eigenvalues",
+      "math.linalg.null-space"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.eigenspace-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.eigenspace (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.eigenspace.md": "sha256:7f36cc4ee00ef850ca39349211e72d2fbd304fd16d9a4ed4950388151af23811"
+      },
+      "contentHash": "sha256:087b57c423055185e8a20cb4a1006d11e6eb6989efc774fb3e0962c01f17cc3f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.eigenspace.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.eigenspace.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.eigenspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.eigenspace\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.eigenspace.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.eigenspace.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.eigenspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.eigenspace\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.eigenspace.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.eigenspace.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.eigenspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.eigenspace\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.eigenspace.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.eigenspace.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.eigenspace"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.eigenspace\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.eigenspace/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Learning Objectives",
+      "content": "- LO1: Find the eigenspace $E_\\lambda=\\ker(A-\\lambda I)=\\{v:Av=\\lambda v\\}$ for a given eigenvalue $\\lambda$, by solving the homogeneous system $(A-\\lambda I)v=0$.\n- LO2: Determine the GEOMETRIC MULTIPLICITY of $\\lambda$ as $\\dim(E_\\lambda)$, and compare it against the ALGEBRAIC MULTIPLICITY (the root's multiplicity in the characteristic polynomial).\n- LO3: State the inequality: algebraic multiplicity $\\ge$ geometric multiplicity ALWAYS, with EQUALITY specifically characterizing when a matrix is DIAGONALIZABLE (for every eigenvalue).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "ALGEBRAIC-AND-GEOMETRIC-MULTIPLICITY-ASSUMED-ALWAYS-EQUAL",
+      "content": "| MC-1 | ALGEBRAIC-AND-GEOMETRIC-MULTIPLICITY-ASSUMED-ALWAYS-EQUAL | Believing algebraic and geometric multiplicity must always match, missing that strict inequality (algebraic > geometric) is a genuine, common possibility | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "GEOMETRIC-MULTIPLICITY-COMPUTED-WITHOUT-ROW-REDUCTION",
+      "content": "| MC-2 | GEOMETRIC-MULTIPLICITY-COMPUTED-WITHOUT-ROW-REDUCTION | Guessing or assuming an eigenspace's dimension rather than actually row-reducing $(A-\\lambda I)$ to find its null space dimension precisely | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Solve (A−λI)v = 0 to Find the Eigenspace (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Solve (A−λI)v = 0 to Find the Eigenspace (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Algebraic and Geometric Multiplicity Can Genuinely Differ (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Algebraic and Geometric Multiplicity Can Genuinely Differ (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Equality for Every Eigenvalue Means Diagonalizable (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Equality for Every Eigenvalue Means Diagonalizable (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the eigenspace $E_4$ for $A=\\begin{pmatrix}4&0\\\\0&4\\end{pmatrix}$.\n  2. For $A=\\begin{pmatrix}5&1\\\\0&5\\end{pmatrix}$, find the algebraic and geometric multiplicity of $\\lambda=5$, and determine whether they're equal.\n  3. Given a matrix with an eigenvalue of algebraic multiplicity 3 and geometric multiplicity 2, determine whether the matrix is diagonalizable, and justify.\n  4. Explain, in one sentence, why geometric multiplicity can never EXCEED algebraic multiplicity.\n- **P76 (Transfer Probe, mode = independence)**: \"A vibration-analysis engineer computes a structure's stiffness matrix and finds an eigenvalue $\\lambda=10$ (representing a resonant frequency) with algebraic multiplicity 3 (a repeated root in the characteristic polynomial). (a) Explain what it would mean PHYSICALLY if the geometric multiplicity turns out to be LESS than 3 (say, only 2) — specifically, that fewer independent vibration mode shapes exist at this frequency than the algebraic count alone would suggest. (b) Explain, using this lesson's diagonalizability criterion, why this specific mismatch (algebraic 3, geometric 2) would mean the structure's full stiffness matrix is NOT diagonalizable, and why this could matter for the engineer's subsequent analysis techniques (which often assume diagonalizability for simplification).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.eigenvalues` (what eigenvalues are) and `math.linalg.null-space` (the kernel-computation technique this eigenspace directly applies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.eigenspace/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.eigenspace",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.eigenvalues`, `math.linalg.null-space`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.characteristic-polynomial` (the algebraic-multiplicity source), `math.linalg.diagonalization` (the concept this equality criterion directly enables).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.eigenspace.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
