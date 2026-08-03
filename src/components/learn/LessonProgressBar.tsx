@@ -13,7 +13,18 @@
  * candy palette.
  */
 
-import { buildLessonProgress, LESSON_STAGES } from '@/lib/teaching/lessonProgress'
+import { buildLessonProgress, LESSON_STAGES, type ProgressPhase } from '@/lib/teaching/lessonProgress'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import type { TranslationKey } from '@/lib/i18n'
+
+const STAGE_LABEL_KEYS: Record<ProgressPhase, { label: TranslationKey; short: TranslationKey }> = {
+  OBSERVE:      { label: 'lesson_stage_observe',     short: 'lesson_stage_observe_short'     },
+  DEMONSTRATE:  { label: 'lesson_stage_demonstrate', short: 'lesson_stage_demonstrate_short' },
+  GUIDE:        { label: 'lesson_stage_guide',       short: 'lesson_stage_guide_short'       },
+  CHECK:        { label: 'lesson_stage_check',       short: 'lesson_stage_check_short'       },
+  PRACTICE:     { label: 'lesson_stage_practice',    short: 'lesson_stage_practice_short'    },
+  TRANSFER:     { label: 'lesson_stage_transfer',    short: 'lesson_stage_transfer_short'    },
+}
 
 export function LessonProgressBar({
   phase,
@@ -22,6 +33,7 @@ export function LessonProgressBar({
   phase: string | undefined
   masteryVerified?: boolean
 }) {
+  const { t } = useLanguage()
   const progress = buildLessonProgress(phase, masteryVerified)
   // No trustworthy phase yet (lesson not started) — render nothing rather
   // than an empty bar implying the lesson is underway.
@@ -43,10 +55,14 @@ export function LessonProgressBar({
     >
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 8 }}>
         <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
-          {progress.complete ? 'Lesson complete' : progress.stage.label}
+          {progress.complete
+            ? t('lesson_progress_complete')
+            : t(STAGE_LABEL_KEYS[progress.stage.phase].label)}
         </span>
         <span style={{ fontSize: 11, color: 'var(--text-secondary)', fontVariantNumeric: 'tabular-nums' }}>
-          Step {progress.stageIndex + 1} of {progress.totalStages}
+          {t('lesson_progress_step')
+            .replace('{step}', String(progress.stageIndex + 1))
+            .replace('{total}', String(progress.totalStages))}
         </span>
       </div>
 
@@ -59,8 +75,8 @@ export function LessonProgressBar({
         aria-valuenow={progress.percent}
         aria-valuetext={
           progress.complete
-            ? 'Lesson complete'
-            : `${progress.stage.label}, step ${progress.stageIndex + 1} of ${progress.totalStages}`
+            ? t('lesson_progress_complete')
+            : `${t(STAGE_LABEL_KEYS[progress.stage.phase].label)}, ${t('lesson_progress_step').replace('{step}', String(progress.stageIndex + 1)).replace('{total}', String(progress.totalStages))}`
         }
         style={{ display: 'flex', gap: 3, height: 6 }}
       >
@@ -110,7 +126,7 @@ export function LessonProgressBar({
                 transition: 'color 320ms ease, opacity 320ms ease',
               }}
             >
-              {stage.short}
+              {t(STAGE_LABEL_KEYS[stage.phase].short)}
             </span>
           )
         })}

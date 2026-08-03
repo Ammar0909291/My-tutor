@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
+import type { Lang } from '@/lib/i18n'
 import { generateJSON, buildCurriculumPrompt } from '@/lib/ai/client'
 import { prisma } from '@/lib/db/prisma'
 import type { Curriculum } from '@/types'
-import { findLibrarySubject, renderCurriculumTree } from '@/lib/curriculum/subjectCatalog'
-import { getKnowledgeGraph, getAvailableNodes } from '@/lib/curriculum/knowledgeGraph'
+import { findLibrarySubject, renderCurriculumTree, moduleTitleLabel } from '@/lib/curriculum/subjectCatalog'
+import { getKnowledgeGraph, getAvailableNodes, localizeKGModuleTitle } from '@/lib/curriculum/knowledgeGraph'
 import { resolveCurriculumSource } from '@/lib/curriculum/resolveCurriculumSource'
 import { computeCurriculumEntryOrder, getPlacementFloorSlugs } from '@/lib/curriculum/placement'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
@@ -34,7 +35,7 @@ export async function GET(req: Request) {
       }),
       prisma.profile.findUnique({
         where: { userId: session.user.id },
-        select: { currentLevel: true },
+        select: { currentLevel: true, teachingLanguage: true },
       }),
     ])
 
@@ -44,6 +45,7 @@ export async function GET(req: Request) {
       topicProgressRows.filter((r) => r.status === 'COMPLETED' || r.status === 'MASTERED' || r.status === 'REVISION').map((r) => r.topicSlug)
     )
     const level = normalizeToCanonicalLevel(profile?.currentLevel)
+    const lang = (profile?.teachingLanguage ?? 'en') as Lang
     // Placement (see src/lib/curriculum/placement.ts): nodes before the
     // learner's level-appropriate entry point are unlocked for prerequisite
     // purposes ONLY — never merged into completedSlugs/topicProgressRows,
@@ -67,7 +69,7 @@ export async function GET(req: Request) {
           id: `${subject}-${modIdx + 1}-${nodeIdx + 1}`,
           subjectCode: subject,
           unit: modIdx + 1,
-          unitTitle: module.title,
+          unitTitle: localizeKGModuleTitle(module.title, lang),
           lesson: nodeIdx + 1,
           lessonTitle: node.title,
           lessonGoal: node.description,
@@ -95,7 +97,7 @@ export async function GET(req: Request) {
           id: `${subject}-${modIdx + 1}-${nodeIdx + 1}`,
           subjectCode: subject,
           unit: modIdx + 1,
-          unitTitle: module.title,
+          unitTitle: moduleTitleLabel(module.title, lang),
           lesson: nodeIdx + 1,
           lessonTitle: node.title,
           lessonGoal: node.title,

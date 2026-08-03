@@ -1,6 +1,7 @@
 'use client'
 import { useCallback, useEffect, useState } from 'react'
 import { X, Loader2, TrendingUp, TrendingDown, Minus, Target, BookOpen, Brain } from 'lucide-react'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 interface KnowledgeGap {
   topicSlug: string
@@ -59,96 +60,12 @@ export function invalidateInsightsCache() {
   insightsCache.clear()
 }
 
-const T = {
-  ru: {
-    learnerIntel: 'Профиль обучения',
-    noSignal: 'Пройди несколько уроков и практик — тогда появится твой адаптивный профиль.',
-    title: 'Аналитика практики',
-    loading: 'Загрузка данных…',
-    noData: 'Пока нет данных. Пройди несколько практик, чтобы увидеть аналитику.',
-    performance: 'Последние результаты',
-    mistakes: 'Частые ошибки',
-    gaps: 'Пробелы в знаниях',
-    targetedPractice: 'Целевая практика',
-    startTargeted: 'Начать целевую практику',
-    difficulty: 'Рекомендуемая сложность',
-    diffEasy: 'Лёгкий',
-    diffMedium: 'Средний',
-    diffHard: 'Сложный',
-    sessions: 'сессий',
-    mistakes_count: 'ошибок',
-    avg: 'Средний балл',
-    noMistakes: 'Нет ошибок! Отличная работа.',
-    noGaps: 'Явных пробелов не обнаружено.',
-    focusOn: 'Фокус на',
-    reviewTopic: 'Повторить тему',
-    trend: 'Тренд',
-    improving: 'Улучшается',
-    stable: 'Стабильно',
-    declining: 'Снижается',
-  },
-  en: {
-    learnerIntel: 'Learning Intelligence',
-    noSignal: 'Complete a few lessons and practice sessions — your adaptive profile will appear here.',
-    title: 'Practice Insights',
-    loading: 'Loading insights…',
-    noData: 'No data yet. Complete a few practice sessions to see your insights.',
-    performance: 'Recent performance',
-    mistakes: 'Common mistakes',
-    gaps: 'Knowledge gaps',
-    targetedPractice: 'Targeted practice',
-    startTargeted: 'Start targeted practice',
-    difficulty: 'Recommended difficulty',
-    diffEasy: 'Easy',
-    diffMedium: 'Medium',
-    diffHard: 'Hard',
-    sessions: 'sessions',
-    mistakes_count: 'mistakes',
-    avg: 'Avg score',
-    noMistakes: 'No mistakes! Great work.',
-    noGaps: 'No obvious gaps detected.',
-    focusOn: 'Focus on',
-    reviewTopic: 'Review topic',
-    trend: 'Trend',
-    improving: 'Improving',
-    stable: 'Stable',
-    declining: 'Declining',
-  },
-  hi: {
-    learnerIntel: 'सीखने की प्रोफ़ाइल',
-    noSignal: 'कुछ पाठ और अभ्यास पूरे करें — आपकी अनुकूली प्रोफ़ाइल यहाँ दिखेगी।',
-    title: 'अभ्यास विश्लेषण',
-    loading: 'डेटा लोड हो रहा है…',
-    noData: 'अभी तक कोई डेटा नहीं। विश्लेषण के लिए कुछ अभ्यास पूरे करें।',
-    performance: 'हालिया प्रदर्शन',
-    mistakes: 'सामान्य गलतियाँ',
-    gaps: 'ज्ञान की कमियाँ',
-    targetedPractice: 'लक्षित अभ्यास',
-    startTargeted: 'लक्षित अभ्यास शुरू करें',
-    difficulty: 'अनुशंसित कठिनाई',
-    diffEasy: 'आसान',
-    diffMedium: 'मध्यम',
-    diffHard: 'कठिन',
-    sessions: 'सत्र',
-    mistakes_count: 'गलतियाँ',
-    avg: 'औसत अंक',
-    noMistakes: 'कोई गलती नहीं! शानदार काम।',
-    noGaps: 'कोई स्पष्ट कमी नहीं मिली।',
-    focusOn: 'फोकस',
-    reviewTopic: 'विषय दोहराएँ',
-    trend: 'रुझान',
-    improving: 'सुधर रहा है',
-    stable: 'स्थिर',
-    declining: 'घट रहा है',
-  },
-}
-
 function formatCategory(category: string): string {
   return category.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
-export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en', onClose, onStartTargetedPractice }: Props) {
-  const t = T[teachingLanguage] ?? T.en
+export function InsightsPanel({ subjectSlug, topicSlug, onClose, onStartTargetedPractice }: Omit<Props, 'teachingLanguage'> & { teachingLanguage?: string }) {
+  const { t } = useLanguage()
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<AnalysisData | null>(null)
   const [profileData, setProfileData] = useState<LearnerProfileData | null>(null)
@@ -184,8 +101,8 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
   useEffect(() => { load() }, [load])
 
   const scoreColor = (s: number) => s >= 80 ? 'var(--green)' : s >= 60 ? 'var(--yellow)' : 'var(--red)'
-  const diffLabel = data?.recommendedDifficulty === 1 ? t.diffEasy
-    : data?.recommendedDifficulty === 3 ? t.diffHard : t.diffMedium
+  const diffLabel = data?.recommendedDifficulty === 1 ? t('insights_diff_easy')
+    : data?.recommendedDifficulty === 3 ? t('insights_diff_hard') : t('insights_diff_medium')
 
   // Compute trend from last 5 scores
   const trend = (() => {
@@ -200,6 +117,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
 
   const TrendIcon = trend === 'improving' ? TrendingUp : trend === 'declining' ? TrendingDown : Minus
   const trendColor = trend === 'improving' ? 'var(--green)' : trend === 'declining' ? 'var(--red)' : 'var(--text-secondary)'
+  const trendLabel = trend === 'improving' ? t('insights_improving') : trend === 'declining' ? t('insights_declining') : t('insights_stable')
 
   return (
     <div style={{
@@ -219,10 +137,10 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <span style={{ fontSize: 14, color: '#F59E0B' }}>📊</span>
-          <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>{t.title}</span>
+          <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>{t('insights_title')}</span>
           {data && (
             <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
-              {data.sessionCount} {t.sessions}
+              {data.sessionCount} {t('insights_sessions')}
             </span>
           )}
         </div>
@@ -237,7 +155,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
         {loading && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 12 }}>
             <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', color: '#F59E0B' }} />
-            <p style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{t.loading}</p>
+            <p style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{t('insights_loading')}</p>
           </div>
         )}
 
@@ -247,11 +165,11 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
               <Brain size={12} style={{ color: '#A78BFA' }} />
               <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                {(t as any).learnerIntel}
+                {t('insights_learner_intel')}
               </span>
             </div>
             {!profileData?.hasSignal ? (
-              <p style={{ fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.6 }}>{(t as any).noSignal}</p>
+              <p style={{ fontSize: 11, color: 'var(--text-dim)', lineHeight: 1.6 }}>{t('insights_no_signal')}</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {(profileData?.insights ?? []).map((ins) => {
@@ -274,7 +192,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
         {!loading && (!data || data.sessionCount === 0) && (
           <div style={{ textAlign: 'center', padding: '32px 16px' }}>
             <div style={{ fontSize: 32, marginBottom: 12 }}>📝</div>
-            <p style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.6 }}>{t.noData}</p>
+            <p style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.6 }}>{t('insights_no_data')}</p>
           </div>
         )}
 
@@ -284,11 +202,11 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
             <div style={{ padding: 12, borderRadius: 10, background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', marginBottom: 12 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                 <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  {t.performance}
+                  {t('insights_performance')}
                 </span>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                   <TrendIcon size={12} style={{ color: trendColor }} />
-                  <span style={{ fontSize: 10, color: trendColor }}>{t[trend as 'improving' | 'stable' | 'declining']}</span>
+                  <span style={{ fontSize: 10, color: trendColor }}>{trendLabel}</span>
                 </div>
               </div>
 
@@ -304,10 +222,10 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>
-                  {t.avg}: <span style={{ fontWeight: 700, color: data.avgScore !== null ? scoreColor(data.avgScore) : 'var(--text-dim)' }}>{data.avgScore ?? '—'}%</span>
+                  {t('insights_avg')}: <span style={{ fontWeight: 700, color: data.avgScore !== null ? scoreColor(data.avgScore) : 'var(--text-dim)' }}>{data.avgScore ?? '—'}%</span>
                 </span>
                 <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>
-                  {data.totalMistakes} {t.mistakes_count}
+                  {data.totalMistakes} {t('insights_mistakes_count')}
                 </span>
               </div>
             </div>
@@ -317,11 +235,11 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
                 <Target size={12} style={{ color: 'var(--red)' }} />
                 <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  {t.mistakes}
+                  {t('insights_mistakes')}
                 </span>
               </div>
               {data.categories.length === 0
-                ? <p style={{ fontSize: 11, color: 'var(--green)' }}>{t.noMistakes}</p>
+                ? <p style={{ fontSize: 11, color: 'var(--green)' }}>{t('insights_no_mistakes')}</p>
                 : data.categories.slice(0, 5).map((cat) => (
                   <div key={cat.category} style={{ marginBottom: 6 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
@@ -349,7 +267,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
                   <BookOpen size={12} style={{ color: '#79C0FF' }} />
                   <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    {t.gaps}
+                    {t('insights_gaps')}
                   </span>
                 </div>
                 {data.gaps.slice(0, 5).map((gap, i) => (
@@ -371,7 +289,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
             {/* Recommended difficulty */}
             <div style={{ padding: 12, borderRadius: 10, background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', marginBottom: 12 }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{t.difficulty}</span>
+                <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{t('insights_difficulty')}</span>
                 <span style={{
                   fontSize: 11, fontWeight: 700, padding: '2px 10px', borderRadius: 12,
                   background: data.recommendedDifficulty === 1 ? 'rgba(63,185,80,0.12)'
@@ -399,7 +317,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, teachingLanguage = 'en',
               background: '#F59E0B', color: '#fff', border: 'none', fontWeight: 700, fontSize: 13,
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             }}>
-            🎯 {t.startTargeted}
+            🎯 {t('insights_start_targeted')}
             {data.recommendedFocusCategories.length > 0 && (
               <span style={{ fontSize: 10, opacity: 0.85, fontWeight: 400 }}>
                 · {data.recommendedFocusCategories.slice(0, 2).map(formatCategory).join(', ')}
