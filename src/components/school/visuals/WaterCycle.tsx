@@ -3,8 +3,10 @@
 // Builds the scene in teaching order: ground → water → sun → cloud → evaporation → precipitation.
 
 import anim from './visualAnim.module.css'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 export function WaterCycle({ revealStep = Infinity }: { revealStep?: number }) {
+  const { t } = useLanguage()
   const show = (s: number) => revealStep >= s
   return (
     <svg viewBox="0 0 300 160" width="100%" style={{ maxWidth: 320 }} aria-hidden="true">
@@ -40,7 +42,7 @@ export function WaterCycle({ revealStep = Infinity }: { revealStep?: number }) {
       {show(5) && (
         <g className={anim.reveal}>
           <path d="M 240 100 C 240 60 200 40 130 30" stroke="#E3B341" strokeWidth={1.5} fill="none" strokeDasharray="4,3" markerEnd="url(#arr)" pathLength={1} className={anim.drawLine} />
-          <text x={185} y={52} fontSize={9} fill="#E3B341" fontWeight={600}>Evaporation</text>
+          <text x={185} y={52} fontSize={9} fill="#E3B341" fontWeight={600}>{t('viz_evaporation')}</text>
         </g>
       )}
       {/* Step 6 — precipitation falls + runoff returns */}
@@ -48,8 +50,8 @@ export function WaterCycle({ revealStep = Infinity }: { revealStep?: number }) {
         <g className={anim.reveal}>
           <path d="M 80 36 C 70 60 60 90 50 120" stroke="#3B82F6" strokeWidth={1.5} fill="none" markerEnd="url(#arrB)" pathLength={1} className={anim.drawLine} />
           <path d="M 180 120 C 200 125 220 122 240 120" stroke="#3B82F6" strokeWidth={1.5} fill="none" markerEnd="url(#arrB)" />
-          <text x={22} y={80} fontSize={9} fill="#3B82F6" fontWeight={600}>Precipitation</text>
-          <text x={188} y={140} fontSize={9} fill="#3B82F6" fontWeight={600}>Runoff</text>
+          <text x={22} y={80} fontSize={9} fill="#3B82F6" fontWeight={600}>{t('viz_precipitation')}</text>
+          <text x={188} y={140} fontSize={9} fill="#3B82F6" fontWeight={600}>{t('viz_runoff')}</text>
         </g>
       )}
       <defs>

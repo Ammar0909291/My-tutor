@@ -3,8 +3,10 @@
 // Reveals one force arrow per step so each force is taught individually.
 
 import anim from './visualAnim.module.css'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 export function ForceDiagram({ revealStep = Infinity }: { revealStep?: number }) {
+  const { t } = useLanguage()
   const cx = 150, cy = 90, boxW = 60, boxH = 40
   const show = (s: number) => revealStep >= s
 
@@ -18,21 +20,21 @@ export function ForceDiagram({ revealStep = Infinity }: { revealStep?: number })
             <line key={x} x1={x} y1={130} x2={x - 8} y2={140} stroke="var(--text-secondary)" strokeWidth={1} />
           ))}
           <rect x={cx - boxW / 2} y={cy - boxH / 2} width={boxW} height={boxH} rx={4} fill="var(--bg-elevated)" stroke="#FF6B5E" strokeWidth={2} />
-          <text x={cx} y={cy + 5} textAnchor="middle" fontSize={11} fontWeight={700} fill="var(--text-primary)">Object</text>
+          <text x={cx} y={cy + 5} textAnchor="middle" fontSize={11} fontWeight={700} fill="var(--text-primary)">{t('viz_object')}</text>
         </g>
       )}
       {/* Step 2 — Applied force */}
       {show(2) && (
         <g className={anim.reveal}>
           <line x1={cx + boxW / 2} y1={cy} x2={cx + boxW / 2 + 45} y2={cy} stroke="#22A06B" strokeWidth={2.5} markerEnd="url(#gArr)" pathLength={1} strokeDasharray={1} className={anim.drawLine} />
-          <text x={cx + boxW / 2 + 22} y={cy - 7} textAnchor="middle" fontSize={10} fill="#22A06B" fontWeight={600}>Applied</text>
+          <text x={cx + boxW / 2 + 22} y={cy - 7} textAnchor="middle" fontSize={10} fill="#22A06B" fontWeight={600}>{t('viz_applied')}</text>
         </g>
       )}
       {/* Step 3 — Friction */}
       {show(3) && (
         <g className={anim.reveal}>
           <line x1={cx - boxW / 2} y1={cy} x2={cx - boxW / 2 - 40} y2={cy} stroke="#3B82F6" strokeWidth={2.5} markerEnd="url(#bArr)" pathLength={1} strokeDasharray={1} className={anim.drawLine} />
-          <text x={cx - boxW / 2 - 20} y={cy - 7} textAnchor="middle" fontSize={10} fill="#3B82F6" fontWeight={600}>Friction</text>
+          <text x={cx - boxW / 2 - 20} y={cy - 7} textAnchor="middle" fontSize={10} fill="#3B82F6" fontWeight={600}>{t('viz_friction')}</text>
         </g>
       )}
       {/* Step 4 — Weight */}
@@ -46,7 +48,7 @@ export function ForceDiagram({ revealStep = Infinity }: { revealStep?: number })
       {show(5) && (
         <g className={anim.reveal}>
           <line x1={cx} y1={cy - boxH / 2} x2={cx} y2={cy - boxH / 2 - 35} stroke="#8B5CF6" strokeWidth={2.5} markerEnd="url(#pArr)" pathLength={1} strokeDasharray={1} className={anim.drawLine} />
-          <text x={cx + 22} y={cy - boxH / 2 - 18} textAnchor="middle" fontSize={10} fill="#8B5CF6" fontWeight={600}>Normal (N)</text>
+          <text x={cx + 22} y={cy - boxH / 2 - 18} textAnchor="middle" fontSize={10} fill="#8B5CF6" fontWeight={600}>{t('viz_normal')}</text>
         </g>
       )}
 

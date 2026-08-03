@@ -2,10 +2,12 @@
 // Geometry Shapes — Sprint BW · animated Sprint R.1
 
 import anim from './visualAnim.module.css'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 const TRI = '#FF6B5E', RECT = '#8B5CF6', CIRC = '#22A06B'
 
 export function GeometryShapes({ revealStep = Infinity }: { revealStep?: number }) {
+  const { t } = useLanguage()
   const show = (s: number) => revealStep >= s
   return (
     <svg viewBox="0 0 300 100" width="100%" style={{ maxWidth: 320 }} aria-hidden="true">
@@ -29,9 +31,9 @@ export function GeometryShapes({ revealStep = Infinity }: { revealStep?: number 
       {/* Step 3 — name each shape */}
       {show(3) && (
         <g className={anim.writeIn}>
-          <text x={50} y={95} textAnchor="middle" fontSize={10} fill="var(--text-secondary)">Triangle</text>
-          <text x={150} y={95} textAnchor="middle" fontSize={10} fill="var(--text-secondary)">Rectangle</text>
-          <text x={250} y={95} textAnchor="middle" fontSize={10} fill="var(--text-secondary)">Circle</text>
+          <text x={50} y={95} textAnchor="middle" fontSize={10} fill="var(--text-secondary)">{t('viz_triangle')}</text>
+          <text x={150} y={95} textAnchor="middle" fontSize={10} fill="var(--text-secondary)">{t('viz_rectangle')}</text>
+          <text x={250} y={95} textAnchor="middle" fontSize={10} fill="var(--text-secondary)">{t('viz_circle')}</text>
         </g>
       )}
       {/* Step 4 — reveal the formula / key fact */}
