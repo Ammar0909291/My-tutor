@@ -16,7 +16,7 @@ bloom:               understand
 difficulty:          3 (proficient)
 mastery_threshold:   0.85
 estimated_hours:     8
-requires:            [math.alg.variable, math.found.set-theory]
+requires:            [math.found.variable, math.found.set-theory]
 unlocks:             [math.func.linear-function, math.func.quadratic-function,
                       math.func.composite-function, math.func.inverse-function]
 cross_links:         [math.found.set-theory]

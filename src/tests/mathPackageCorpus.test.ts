@@ -3,12 +3,9 @@
  * test.ts enforces for physics, applied to the mathematics blueprint corpus
  * (Mathematics production-readiness sprint, feature parity with physics).
  *
- * One documented, permanent exception: math.func.function-concept cites
- * prerequisite `math.alg.variable`, which does not exist in the canonical
- * mathematics KG (docs/mathematics/kg/graph.json) — a Curriculum Production
- * Pipeline content gap, not a compiler defect. It is therefore the one
- * blueprint in the corpus with no committed package artifact; this is
- * tracked here explicitly rather than silently excluded.
+ * All 908 blueprints compile. The former exception (math.func.function-concept
+ * citing math.alg.variable) was resolved by correcting the prerequisite
+ * reference to math.found.variable, which has always existed in the KG.
  */
 import { describe, it, expect } from 'vitest'
 import fs from 'fs'
@@ -22,9 +19,7 @@ const PACKAGE_DIR = path.join(process.cwd(), 'brain', 'packages')
 /** Known, permanent content gaps — not a compiler/parser problem. Each entry
  *  must cite the reason; growing this set silently is not allowed (every
  *  addition needs a code-review-visible justification, same as this one). */
-const KNOWN_CONTENT_GAPS: Record<string, string> = {
-  'math.func.function-concept': 'cites prerequisite math.alg.variable, which does not exist in the canonical mathematics KG',
-}
+const KNOWN_CONTENT_GAPS: Record<string, string> = {}
 
 const mathConceptIds = fs.readdirSync(BLUEPRINT_DIR)
   .filter((f) => f.startsWith('math.') && f.endsWith('.md'))
@@ -35,7 +30,7 @@ const compilableConceptIds = mathConceptIds.filter((id) => !(id in KNOWN_CONTENT
 
 describe('mathematics blueprint corpus — every blueprint compiles (except documented content gaps)', () => {
   it('has the full mathematics blueprint corpus on disk', () => {
-    expect(mathConceptIds.length).toBeGreaterThanOrEqual(529)
+    expect(mathConceptIds.length).toBeGreaterThanOrEqual(908)
   })
 
   it('compiles every non-gapped mathematics blueprint to a valid DRAFT package', () => {
