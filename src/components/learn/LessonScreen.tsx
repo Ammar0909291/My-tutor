@@ -4575,7 +4575,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {lessonCompletion && (
               <div
                 role="status"
-                aria-label="Lesson complete"
+                aria-label={t('lc_complete')}
                 style={{
                   flexShrink: 0,
                   borderTop: '1px solid var(--border-subtle)',
@@ -4587,28 +4587,28 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 }}
               >
                 <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-primary)' }}>
-                  {lessonCompletion.fullyMastered ? '\u2713 Lesson complete' : '\u2713 Lesson finished'}
+                  {lessonCompletion.fullyMastered ? `\u2713 ${t('lc_complete')}` : `\u2713 ${t('lc_finished')}`}
                   {lessonCompletion.lessonTitle ? ` \u2014 ${lessonCompletion.lessonTitle}` : ''}
                 </div>
 
                 {lessonCompletion.mastered.length > 0 && (
                   <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-                    <strong style={{ color: 'var(--text-primary)' }}>Mastered:</strong>{' '}
+                    <strong style={{ color: 'var(--text-primary)' }}>{t('lc_mastered')}</strong>{' '}
                     {lessonCompletion.mastered.join(', ')}
                   </div>
                 )}
 
                 {lessonCompletion.needsReview.length > 0 && (
                   <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-                    <strong style={{ color: 'var(--text-primary)' }}>To review later:</strong>{' '}
+                    <strong style={{ color: 'var(--text-primary)' }}>{t('lc_review')}</strong>{' '}
                     {lessonCompletion.needsReview.join(', ')}
                   </div>
                 )}
 
                 {typeof lessonCompletion.durationSeconds === 'number' && (
                   <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
-                    <strong style={{ color: 'var(--text-primary)' }}>Time spent:</strong>{' '}
-                    {Math.max(1, Math.round(lessonCompletion.durationSeconds / 60))} min
+                    <strong style={{ color: 'var(--text-primary)' }}>{t('lc_time')}</strong>{' '}
+                    {Math.max(1, Math.round(lessonCompletion.durationSeconds / 60))} {t('lc_min')}
                   </div>
                 )}
 
@@ -4632,7 +4632,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     className="btn-primary"
                     style={{ marginTop: 4, padding: '10px 14px', borderRadius: 10, fontWeight: 800, fontSize: 13, border: 'none', cursor: 'pointer' }}
                   >
-                    Start next lesson
+                    {t('lc_next')}
                   </button>
                 )}
               </div>
@@ -4646,7 +4646,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {activeMcq && !isStreaming && !lessonCompletion && (
               <div
                 role="group"
-                aria-label="Answer choices"
+                aria-label={t('lc_answers_aria')}
                 style={{
                   flexShrink: 0,
                   borderTop: '1px solid var(--border-subtle)',
