@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.long-multiplication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.long-multiplication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8f20d62055226b4968a7109c1bfe861110c35f2fe7786f9c2f564d01425530d5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.long-multiplication.md": "sha256:6529ff4bfe2419ff1e172433e6e1b227a31b51e31d7b1ea0964e84f608bebe13"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.long-multiplication",
+    "name": "Long Multiplication",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.arith.multiplication-table",
+      "math.arith.carrying"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.long-multiplication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.long-multiplication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.long-multiplication.md": "sha256:6529ff4bfe2419ff1e172433e6e1b227a31b51e31d7b1ea0964e84f608bebe13"
+      },
+      "contentHash": "sha256:f421536cd82e863bfebddb84e2a8f56e19887b3f7622a0351628aa167440ec67",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.long-multiplication.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.long-multiplication.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.long-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.long-multiplication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.long-multiplication.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.long-multiplication.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.long-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.long-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.long-multiplication.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.long-multiplication.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.long-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.long-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.long-multiplication/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "Learning Objectives",
+      "content": "- LO1: Multiply a multi-digit number by a single-digit number using the standard column algorithm, applying carrying as needed.\n- LO2: Multiply two multi-digit numbers by computing PARTIAL PRODUCTS (one per digit of the second factor) and adding them together, correctly shifting each partial product by its place value.\n- LO3: Correctly align (shift) each partial product according to the place value of the digit that produced it — a common structural step distinct from the multiplication itself.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "PARTIAL-PRODUCT-SHIFT-OMITTED",
+      "content": "| MC-1 | PARTIAL-PRODUCT-SHIFT-OMITTED | Adding partial products without shifting the ones corresponding to tens (or higher) digits of the multiplier, understating the true product | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "CARRY-DROPPED-WITHIN-A-PARTIAL-PRODUCT",
+      "content": "| MC-2 | CARRY-DROPPED-WITHIN-A-PARTIAL-PRODUCT | Forgetting to carry (or cascading carries) while computing an individual partial product, corrupting that specific partial product's value | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "WRONG-FACTOR-USED-AS-THE-DIGIT-SOURCE",
+      "content": "| MC-3 | WRONG-FACTOR-USED-AS-THE-DIGIT-SOURCE | Decomposing the wrong factor into digits (e.g. breaking apart the first factor instead of the second), producing a structurally different — though sometimes numerically similar-looking — computation | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "Single-Digit Multiplication with Carrying (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Single-Digit Multiplication with Carrying (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "Partial Products Must Be Shifted by Their Digit's Place Value (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Partial Products Must Be Shifted by Their Digit's Place Value (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Multiply $489\\times6$ using the single-digit column algorithm.\n  2. Multiply $34\\times56$, computing both partial products and shifting the second correctly before adding.\n  3. Multiply $17\\times203$ (a three-digit second factor), computing all three partial products with correct shifts.\n  4. Explain, in one sentence, why the tens-digit partial product in a two-digit multiplication must be shifted one place left before adding.\n- **P76 (Transfer Probe, mode = independence)**: \"A rectangular garden plot measures 34 meters by 27 meters. (a) Compute its area using long multiplication, showing both partial products and their shifts explicitly. (b) A student computes the partial products as 34×7=238 and 34×2=68, then adds them directly as 238+68=306 — verify whether this matches the true area, and if not, explain precisely which step was skipped and how it should be corrected.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.multiplication-table` (instant single-digit product recall, used throughout) and `math.arith.carrying` (needed within each partial-product computation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.arith.long-multiplication/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.long-multiplication",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.multiplication-table`, `math.arith.carrying`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.arith.long-division` (the inverse standard algorithm, which itself requires this concept per the KG).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.long-multiplication.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
