@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.measures-of-center-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.measures-of-center",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6604ebd1b66e347ee61cfe2a911c0e319dc39312cf832eb3c1a34285c8df4eac",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.measures-of-center.md": "sha256:f310626cb1d6b8ecfa82a1ca9ce6f6b9b378b3f558ef73ee1a6bd6f9ae3d89bd"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.measures-of-center",
+    "name": "Measures of Center",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.stats.descriptive-statistics",
+      "math.arith.fractions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.measures-of-center-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.measures-of-center (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.measures-of-center.md": "sha256:f310626cb1d6b8ecfa82a1ca9ce6f6b9b378b3f558ef73ee1a6bd6f9ae3d89bd"
+      },
+      "contentHash": "sha256:dfa7984c945a76324a51c934475229874eea30db5938fea508f6a04cf086ba7e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.measures-of-center.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.measures-of-center.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.measures-of-center"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.measures-of-center\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.measures-of-center.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.measures-of-center.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.measures-of-center"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.measures-of-center\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.measures-of-center.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.measures-of-center.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.measures-of-center"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.measures-of-center\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.measures-of-center.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.measures-of-center.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.measures-of-center"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.measures-of-center\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.measures-of-center/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the MEAN $\\bar{x}=\\frac{\\sum x_i}{n}$ (sum of all values divided by count), the MEDIAN (the middle value when SORTED — average of the two middle values if $n$ is EVEN), and the MODE (the most frequently occurring value).\n- LO2: Recognize the MEAN is SENSITIVE to outliers (a single extreme value can shift it substantially), while the MEDIAN is ROBUST (largely unaffected by extreme values, since it depends only on POSITION in the sorted order, not magnitude).\n- LO3: Recognize a dataset may have ZERO, ONE, or MULTIPLE modes (unlike mean and median, which always exist as single well-defined values for a numeric dataset) — and correctly compute the median by first SORTING the data, a step that's easy to skip.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "MEAN-USED-UNCRITICALLY-AS-THE-MEASURE-OF-CENTER-DESPITE-OUTLIERS",
+      "content": "| MC-1 | MEAN-USED-UNCRITICALLY-AS-THE-MEASURE-OF-CENTER-DESPITE-OUTLIERS | Using the mean as the default measure of center even when the dataset contains extreme outliers that badly distort it | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "MEDIAN-COMPUTED-WITHOUT-SORTING-OR-WITHOUT-AVERAGING-THE-TWO-MIDDLE-VALUES-FOR-EVEN-N",
+      "content": "| MC-2 | MEDIAN-COMPUTED-WITHOUT-SORTING-OR-WITHOUT-AVERAGING-THE-TWO-MIDDLE-VALUES-FOR-EVEN-N | Finding the median without first sorting the data, or failing to average the two middle values when n is even | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Mean Is Outlier-Sensitive, Median Is Robust (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Mean Is Outlier-Sensitive, Median Is Robust (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Sort First, Then Average the Two Middle Values for Even n (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Sort First, Then Average the Two Middle Values for Even n (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Mode May Not Exist or May Have Multiple Values (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mode May Not Exist or May Have Multiple Values (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.95×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the mean, median, and mode of $\\{4,4,6,8,10\\}$.\n  2. Find the median of $\\{15,3,9,21\\}$ (unsorted), showing the sorting step.\n  3. Explain why the median is more \"robust\" than the mean when a dataset has an extreme outlier.\n  4. Find the mode of $\\{1,2,3,4,5\\}$, and explain what this tells you about whether every dataset has a mode.\n- **P76 (Transfer Probe, mode = independence)**: \"A real estate analyst is summarizing home sale prices in a neighborhood, where most homes sold between \\$300,000-\\$400,000, but one mansion sold for \\$5,000,000. (a) Explain why reporting the MEAN sale price to describe 'a typical home' in this neighborhood would be misleading. (b) Explain why the MEDIAN sale price would give a more representative picture of typical home prices in this specific scenario.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.descriptive-statistics` (the broader context of summarizing data) and `math.arith.fractions` (needed for the mean's division and the median's averaging of two middle values).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.measures-of-center/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.measures-of-center",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.descriptive-statistics`, `math.arith.fractions`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.measures-of-spread`.\n- **Parent**: `math.stats.descriptive-statistics`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.measures-of-center.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

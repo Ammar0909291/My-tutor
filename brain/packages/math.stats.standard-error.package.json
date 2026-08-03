@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.standard-error-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.standard-error",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:09f815f87c202b6545befc6eabf28aec8d8f70bd960aad588d023780db0894f4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.standard-error.md": "sha256:8af0c3903338a0649d2645c661a591e68012487461665aefc8d05468c9f2dfd8"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.standard-error",
+    "name": "Standard Error",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.stats.sampling-distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.standard-error-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.standard-error (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.standard-error.md": "sha256:8af0c3903338a0649d2645c661a591e68012487461665aefc8d05468c9f2dfd8"
+      },
+      "contentHash": "sha256:b8c3c3b9c3d7ae5d263b30faf88f24cb2de711800779211d84fc157e773f04bc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.standard-error.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.standard-error.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.standard-error"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.standard-error\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.standard-error.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.standard-error.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.standard-error"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.standard-error\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.standard-error.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.standard-error.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.standard-error"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.standard-error\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.standard-error.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.standard-error.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.standard-error"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.standard-error\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.standard-error/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.standard-error",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the standard error of the mean $SE(\\bar{X})=\\frac{\\sigma}{\\sqrt{n}}$ (using the known population standard deviation $\\sigma$) or $\\frac{s}{\\sqrt{n}}$ (using the SAMPLE standard deviation $s$, when $\\sigma$ is unknown) — and recognize the standard error is fundamentally a SAMPLE SIZE-adjusted version of the standard deviation.\n- LO2: Recognize the standard error DECREASES as $n$ increases — specifically, since $n$ appears under a SQUARE ROOT in the denominator, QUADRUPLING $n$ only HALVES the standard error (NOT reducing it to a quarter) — a common miscalculation of the relationship's scaling.\n- LO3: Recognize the standard error IS, by definition, the STANDARD DEVIATION of the SAMPLING DISTRIBUTION (from `math.stats.sampling-distribution`) — it measures how much the SAMPLE MEAN itself would vary across repeated samples, a fundamentally DIFFERENT quantity from the standard deviation of the raw DATA within one single sample.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.standard-error",
+      "title": "STANDARD-ERROR-COMPUTED-WITHOUT-DIVIDING-BY-SQUARE-ROOT-OF-N",
+      "content": "| MC-1 | STANDARD-ERROR-COMPUTED-WITHOUT-DIVIDING-BY-SQUARE-ROOT-OF-N | Reporting the raw standard deviation, or dividing by n instead of the square root of n, when computing the standard error | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.standard-error",
+      "title": "SAMPLE-SIZE-INCREASE-ASSUMED-TO-SCALE-STANDARD-ERROR-PROPORTIONALLY-RATHER-THAN-VIA-SQUARE-ROOT",
+      "content": "| MC-2 | SAMPLE-SIZE-INCREASE-ASSUMED-TO-SCALE-STANDARD-ERROR-PROPORTIONALLY-RATHER-THAN-VIA-SQUARE-ROOT | Assuming the standard error scales directly (proportionally) with sample size changes, rather than via the square root relationship | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.standard-error",
+      "title": "Dividing by the Square Root of n, Not n Itself (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Dividing by the Square Root of n, Not n Itself (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.standard-error",
+      "title": "Quadrupling n Only Halves SE, Due to the Square Root (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Quadrupling n Only Halves SE, Due to the Square Root (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.standard-error",
+      "title": "Standard Error and Sample Standard Deviation Answer Different Questions (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Standard Error and Sample Standard Deviation Answer Different Questions (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.standard-error",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.standard-error",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Compute the standard error for $n=36$, $s=18$.\n  2. If $SE=6$ for $n=9$, find the new $SE$ if $n$ is increased to $36$ (quadrupled).\n  3. Explain, in one sentence, why quadrupling the sample size only halves the standard error, rather than quartering it.\n  4. Explain the difference between \"the standard deviation of a sample's data\" and \"the standard error of the sample mean.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A polling company wants to reduce its survey's margin of error (closely related to the standard error) by increasing the sample size, currently at $n=400$ respondents. (a) Explain why simply DOUBLING the number of respondents to $n=800$ would NOT halve the standard error, and estimate roughly how much larger $n$ would need to be to actually halve it. (b) Explain why the standard error, not the raw response variability itself, is the relevant quantity for describing how precisely the poll estimates the true population opinion.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.standard-error",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.sampling-distribution` — the standard error IS this distribution's standard deviation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.standard-error/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.standard-error",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.sampling-distribution`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.confidence-interval`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.standard-error.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
