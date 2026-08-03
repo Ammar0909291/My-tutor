@@ -13,7 +13,7 @@ and this file's summary row should be corrected to match.
 |---|---|---|---|
 | mathematics | 908 | 224 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 56 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`, `line-equation`, `vectors-3d`, `polygon-angle-sum`, `platonic-solids`, `translation`, `reflection`, `dilation` — `math.geom` domain IN PROGRESS, 56/69, Wave 11 complete, Wave 12 next), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
-| english | 216 | 9 | Pre-existing 3: `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts`. Batch 1 (2026-08-03, English Educational Brain program, this session): `eng.phonetics.speech-sounds-overview`, `eng.phonics.alphabet-recognition`, `eng.phonics.rhyming`, `eng.phonetics.articulation-organs`, `eng.phonics.blending-segmenting`, `eng.writing.handwriting-and-formation` — the full topological level-1/level-2 authoring queue. 207 concepts remain; see Delivery history below. |
+| english | 216 | 11 | Pre-existing 3: `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts`. Batch 1 (2026-08-03): `eng.phonetics.speech-sounds-overview`, `eng.phonics.alphabet-recognition`, `eng.phonics.rhyming`, `eng.phonetics.articulation-organs`, `eng.phonics.blending-segmenting`, `eng.writing.handwriting-and-formation` (levels 1–2). Batch 2 (2026-08-03): `eng.phonetics.consonant-sounds`, `eng.phonetics.vowel-sounds` (level 3). 205 concepts remain; see Delivery history below. |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
@@ -4603,3 +4603,43 @@ standard workflow. Full validation before commit: KG validator PASS (all 6
 subjects, English 216/216 reachable, unchanged), `npx tsc --noEmit` clean,
 existing test suite green, no runtime/KG/Blueprint/Teaching Asset file
 touched.
+
+### English — Batch 2: topological level 3 (2026-08-03, English Educational Brain authoring program)
+
+Continuing directly after Batch 1. Authored the 2 concepts at topological
+level 3 — the full frontier unlocked once level 2 completed:
+`eng.phonetics.consonant-sounds` and `eng.phonetics.vowel-sounds`, both
+direct children of `eng.phonetics.articulation-organs`. Both had existing,
+substantial Blueprints, reused by reference for the Misconception Register,
+Concrete Anchor, Conceptual Development Sequence, Worked Examples, Mastery
+Probe Set, and Session Architecture — same authoring pattern as Batch 1.
+
+No new misconceptions authored this batch (both concepts' Blueprint
+registers were judged sufficient); instead, this batch surfaced a
+cross-batch structural pattern worth recording once rather than as repeated
+isolated findings: **all four `eng.phonetics.*` nodes authored so far**
+(`speech-sounds-overview`, `articulation-organs`, and this batch's
+`consonant-sounds` and `vowel-sounds`) **have a genuine, unencoded
+mechanism-level `cross_links` gap to physics** (voicing/vibration frequency,
+source-filter resonance, acoustic phonetics generally) — recorded as a
+single consolidated recommendation in `consonant-sounds`' and
+`vowel-sounds`' Curriculum Feedback sections that the Curriculum Production
+Pipeline audit the entire phonetics domain for this class of missing edge
+in one pass, rather than continuing to receive it as four separate
+findings. Also recorded, as an open question rather than a defect: the
+consonant concept's Blueprint carries an explicit "the three dimensions
+are independent" misconception that the vowel concept's Blueprint has no
+structural parallel for, despite the analogous risk being plausible —
+flagged for the Pipeline to assess against real learner data.
+
+English 9/216 → **11/216**. 205 concepts remain. Both level-3 concepts have
+`unlocks: []` in the KG (terminal analytic nodes) — the next authoring
+frontier is topological level 4: `eng.phonetics.ipa-basics`,
+`eng.phonics.consonants`, `eng.phonics.short-vowels`,
+`eng.phonics.sight-words`, all with existing Blueprints. All five tracking
+files (`COVERAGE.md`, `ROADMAP.md`, `QUALITY.md`,
+`EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`) updated in the same
+commit. Full validation: KG validator PASS (all 6 subjects, English
+216/216 reachable, unchanged), `npx tsc --noEmit` clean, existing test
+suite green (4017 passed / 9 skipped), no runtime/KG/Blueprint/Teaching
+Asset file touched.

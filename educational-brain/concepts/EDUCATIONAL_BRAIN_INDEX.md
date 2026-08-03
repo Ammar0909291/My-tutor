@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 9 READY)
+## english (216 concepts, 11 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1297,7 +1297,7 @@ its subject KG.
 | phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.articulation-organs.md` | READY |
 | phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.consonant-sounds.md` | READY |
 | phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | No | — | MISSING |
@@ -1307,7 +1307,7 @@ its subject KG.
 | phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.speech-sounds-overview.md` | READY |
 | phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.vowel-sounds.md` | READY |
 | phonics | `eng.phonics.alphabet-recognition` | Alphabet Recognition | Yes | Yes | `educational-brain/concepts/english/eng.phonics.alphabet-recognition.md` | READY |
 | phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | Yes | `educational-brain/concepts/english/eng.phonics.blending-segmenting.md` | READY |
 | phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | No | — | MISSING |

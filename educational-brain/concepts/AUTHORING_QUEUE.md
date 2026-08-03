@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1118** (= 1,775 KG concepts − 657 already `READY`, per
+Total queued: **1116** (= 1,775 KG concepts − 659 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batch 1's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-2's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -537,8 +537,9 @@ authored English Batch 1 (topological level 2), moved to READY.
 **Rows 25-27 removed 2026-07-26** — `math.geom.line-segment`,
 `math.geom.ray`, `math.geom.plane` authored math.geom Wave 3, moved to
 READY.
-| 28 | english | 3 | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification |
-| 29 | english | 3 | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification |
+**Rows 28-29 removed 2026-08-03** — `eng.phonetics.consonant-sounds`,
+`eng.phonetics.vowel-sounds` authored English Batch 2 (topological level
+3), moved to READY.
 | 30 | biology | 3 | `bio.found.five-kingdom` | Five Kingdom Classification |
 | 31 | biology | 3 | `bio.found.binomial-nomenclature` | Binomial Nomenclature |
 | 32 | biology | 3 | `bio.cell.cell-theory` | Cell Theory |

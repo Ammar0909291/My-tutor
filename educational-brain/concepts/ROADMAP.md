@@ -13,14 +13,14 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **657** |
-| Remaining | **1,118** |
-| Completion percentage | **37.01%** |
+| Concepts with an Educational Brain entry | **659** |
+| Remaining | **1,116** |
+| Completion percentage | **37.13%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 9 english + 186 chemistry + 0 biology + 0 computer_science = 657.
-English updated after Batch 1 of the English Educational Brain authoring
-program (6 concepts, topological levels 1–2); the other subjects' figures
++ 11 english + 186 chemistry + 0 biology + 0 computer_science = 659.
+English updated after Batch 2 of the English Educational Brain authoring
+program (2 concepts, topological level 3); the other subjects' figures
 are taken as already-recorded in §2 below, not re-audited this session,
 per this session's "English only" scope.)*
 
@@ -32,7 +32,7 @@ per this session's "English only" scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 9 | 4.17% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 11 | 5.09% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -617,7 +617,22 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**English Batch 1 (this batch, English Educational Brain authoring
+**English Batch 2 (this batch)**: continuing directly after Batch 1.
+Authored the 2 concepts at topological level 3, both direct children of
+`eng.phonetics.articulation-organs`: `eng.phonetics.consonant-sounds`,
+`eng.phonetics.vowel-sounds`. Both had existing Blueprints, reused by
+reference. Surfaced a consolidated cross-batch finding (all 4
+`eng.phonetics.*` nodes authored so far share a genuine missing physics
+cross-link) rather than repeating it as 4 isolated findings — recorded once
+in `COVERAGE.md`'s Delivery history and in the two entries' own Curriculum
+Feedback sections. English EB reached 11/216 (5.09%). True total: **659**
+EB entries (238 physics + 224 mathematics + 11 english + 186 chemistry),
+out of 1,775 total KG concepts — 1,116 remaining, 37.13%. Both level-3
+concepts are terminal (`unlocks: []`); next candidates (topological level
+4): `eng.phonetics.ipa-basics`, `eng.phonics.consonants`,
+`eng.phonics.short-vowels`, `eng.phonics.sight-words`.
+
+**English Batch 1 (prior batch, English Educational Brain authoring
 program restarted 2026-08-03)**: audited English's Educational Brain state
 fresh (3/216 — KG, Blueprints, and Teaching Assets are each already
 216/216 complete; only this layer lagged) and computed the exact
@@ -628,12 +643,7 @@ recognition`, `eng.phonics.rhyming` (level 1); `eng.phonetics.articulation-
 organs`, `eng.phonics.blending-segmenting`, `eng.writing.handwriting-and-
 formation` (level 2). All 6 had existing Blueprints, reused by reference
 per `EDUCATIONAL_BRAIN_STANDARD.md`'s ownership boundary. English EB
-reached 9/216 (4.17%). True total: **657** EB entries (238 physics + 224
-mathematics + 9 english + 186 chemistry), out of 1,775 total KG concepts —
-1,118 remaining, 37.01%. Full detail, including 3 new misconceptions and
-several Curriculum Feedback findings, in `COVERAGE.md`'s Delivery history.
-Next candidates (topological level 3): `eng.phonetics.consonant-sounds`,
-`eng.phonetics.vowel-sounds`.
+reached 9/216 (4.17%). True total at that point: 657 entries.
 
 **Physics Wave 24 (prior batch, FINAL WAVE — explicit exception, standing
 Curriculum Completion Program 8-step cycle)**: continuing the same cycle
