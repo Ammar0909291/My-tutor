@@ -19,6 +19,8 @@
 import {
   type CoachAnswers, type CoachQuestionId, nextCoachQuestion,
 } from '@/lib/coach/onboardingInterview'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import type { TranslationKey } from '@/lib/i18n'
 
 /** The questions this step owns — the surrounding wizard owns the other two. */
 const STEP_QUESTIONS: CoachQuestionId[] = ['goal', 'studyTime', 'learningStyle', 'confidence']
@@ -34,6 +36,16 @@ export function CoachInterviewStep({
   onBack: () => void
   onComplete: () => void
 }) {
+  const { t } = useLanguage()
+
+  // Look up a localized question prompt by question id (e.g. 'goal' → 'coach_goal_prompt')
+  const localizedPrompt = (questionId: string) =>
+    t(('coach_' + questionId.toLowerCase() + '_prompt') as TranslationKey)
+
+  // Look up a localized option label (e.g. 'goal' + 'school_exams' → 'coach_goal_school_exams')
+  const localizedOption = (questionId: string, optionValue: string) =>
+    t(('coach_' + questionId.toLowerCase() + '_' + optionValue) as TranslationKey)
+
   // Only consider this step's questions when deciding what to show, by
   // treating the wizard-owned answers as already satisfied.
   const scoped: CoachAnswers = {
@@ -52,14 +64,14 @@ export function CoachInterviewStep({
           className="text-2xl md:text-3xl font-black mb-2"
           style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}
         >
-          That&apos;s everything I need
+          {t('coach_done_title')}
         </h1>
         <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-          I&apos;ll set your tutor up to match how you like to learn.
+          {t('coach_done_sub')}
         </p>
         <div className="flex gap-3">
-          <button onClick={onBack} className="btn-ghost flex-1 py-3">Back</button>
-          <button onClick={onComplete} className="btn-primary flex-1 py-3 font-bold">Continue</button>
+          <button onClick={onBack} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
+          <button onClick={onComplete} className="btn-primary flex-1 py-3 font-bold">{t('coach_done_continue')}</button>
         </div>
       </div>
     )
@@ -77,13 +89,15 @@ export function CoachInterviewStep({
   return (
     <div className="animate-scale-in">
       <p className="text-xs font-semibold mb-2" style={{ color: 'var(--text-dim)' }}>
-        Coach · question {answeredCount + 1} of {STEP_QUESTIONS.length}
+        {t('coach_q_progress')
+          .replace('{n}', String(answeredCount + 1))
+          .replace('{total}', String(STEP_QUESTIONS.length))}
       </p>
       <h1
         className="text-2xl md:text-3xl font-black mb-6"
         style={{ fontFamily: 'var(--font-heading)', color: 'var(--text-primary)' }}
       >
-        {question.prompt}
+        {localizedPrompt(question.id) || question.prompt}
       </h1>
 
       <div className="flex flex-col gap-2.5 mb-6">
@@ -101,14 +115,14 @@ export function CoachInterviewStep({
                 color: 'var(--text-primary)',
               }}
             >
-              {option.label}
+              {localizedOption(question.id, option.value) || option.label}
             </button>
           )
         })}
       </div>
 
       <div className="flex gap-3">
-        <button onClick={goBack} className="btn-ghost flex-1 py-3">Back</button>
+        <button onClick={goBack} className="btn-ghost flex-1 py-3">{t('ob_back')}</button>
       </div>
     </div>
   )
