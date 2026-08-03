@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.derivative-ln-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.derivative-ln",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fd8cc5e342fdd02dcd0fa0f234b27c6e5387551ee8b8c36dddb7462d3cf647e3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.derivative-ln.md": "sha256:d427c74b5d3a118980ab80300da12c3285073f84e50be74a4c28f568a99ab8e8"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.derivative-ln",
+    "name": "Derivative of Logarithmic Functions",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.chain-rule",
+      "math.func.logarithmic-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.derivative-ln-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.derivative-ln (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.derivative-ln.md": "sha256:d427c74b5d3a118980ab80300da12c3285073f84e50be74a4c28f568a99ab8e8"
+      },
+      "contentHash": "sha256:b14b6b3d763b66bca6768ca39e8f6948d22ac6d0bd919b8704caa774fd435764",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-ln.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-ln.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-ln"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-ln\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-ln.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-ln.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-ln"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-ln\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-ln.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-ln.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-ln"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-ln\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-ln.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-ln.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-ln"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-ln\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.derivative-ln/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Learning Objectives",
+      "content": "- LO1: State $\\frac{d}{dx}\\ln x=\\frac{1}{x}$ (for $x>0$), and the general-base rule $\\frac{d}{dx}\\log_a x=\\frac{1}{x\\ln a}$, recognizing $\\ln x$ as the special case where $\\ln a=\\ln e=1$.\n- LO2: Apply the CHAIN RULE when the argument of the logarithm is a function: $\\frac{d}{dx}\\ln(g(x))=\\frac{g'(x)}{g(x)}$ — NOT simply $\\frac{1}{g(x)}$, which omits the required chain-rule factor.\n- LO3: Recognize LOGARITHMIC DIFFERENTIATION as a technique for simplifying products/quotients/powers before differentiating — take $\\ln$ of both sides FIRST (turning products into sums, quotients into differences, and powers into products via log rules), then differentiate implicitly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "GENERAL-BASE-LOG-DERIVATIVE-MISSING-LN-A-FACTOR",
+      "content": "| MC-1 | GENERAL-BASE-LOG-DERIVATIVE-MISSING-LN-A-FACTOR | Applying ln(x)'s simple 1/x rule to every log base, omitting the required ln(a) factor for bases other than e | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "CHAIN-RULE-FACTOR-OMITTED-FOR-LOG-OF-A-FUNCTION",
+      "content": "| MC-2 | CHAIN-RULE-FACTOR-OMITTED-FOR-LOG-OF-A-FUNCTION | Omitting the chain-rule factor g'(x) when differentiating ln(g(x)) for a non-trivial argument function g(x) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Natural Log Is the Unique Exception; General Bases Need ln(a) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Natural Log Is the Unique Exception; General Bases Need ln(a) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Chain Rule Factor Is Mandatory for a Function Argument (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Chain Rule Factor Is Mandatory for a Function Argument (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Taking Logs First Simplifies Products, Quotients, and Variable Powers (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Taking Logs First Simplifies Products, Quotients, and Variable Powers (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Differentiate $f(x)=\\log_2x$.\n  2. Differentiate $f(x)=\\ln(3x^2+5)$.\n  3. Use logarithmic differentiation to differentiate $y=x^{\\sin x}$.\n  4. Use logarithmic differentiation to differentiate $y=\\frac{(x+1)^3\\sqrt{x-2}}{x^4}$.\n- **P76 (Transfer Probe, mode = independence)**: \"A chemist studies a reaction whose rate constant depends on temperature via a complicated expression $k(T)=\\frac{A\\cdot T^{3/2}\\cdot e^{-E/RT}}{(1+BT)^2}$ (a product and quotient of several factors, with a variable-power term). (a) Explain why logarithmic differentiation — taking $\\ln$ of both sides before differentiating — is a more practical strategy here than trying to apply the product and quotient rules directly to this expression. (b) Write the first two log-rule transformations you would apply to $\\ln k(T)$ before differentiating (you do not need to complete the full differentiation).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.chain-rule` (needed whenever the log's argument is a function) and `math.func.logarithmic-function` (the function class being differentiated).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-ln/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.derivative-ln",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.chain-rule`, `math.func.logarithmic-function`.\n- **Unlocks**: none recorded in the KG (child `math.calc.logarithmic-differentiation` builds directly on LO3).\n- **Related**: `math.calc.derivative-exponential` (the inverse function's derivative, sharing the identical base-$e$-exception structure).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-ln.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
