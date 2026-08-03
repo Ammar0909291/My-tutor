@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.substitution-method-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.substitution-method",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dc0193e6192ef02a8f2c39bf75a6981e4a01da3ea96ec08cc7018419056c4128",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.substitution-method.md": "sha256:e6d9dd6d3c9561ee42b3644b2e31cedba513acd824f75af67cdd6619d95a99b4"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.substitution-method",
+    "name": "Substitution Method",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.system-linear-equations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.substitution-method-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.substitution-method (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.substitution-method.md": "sha256:e6d9dd6d3c9561ee42b3644b2e31cedba513acd824f75af67cdd6619d95a99b4"
+      },
+      "contentHash": "sha256:9fab26e2479d93951a106274f7b85d45bea34b230b74f20dbe14d1db0bfc666a",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.substitution-method.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.substitution-method.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.substitution-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.substitution-method\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.substitution-method.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.substitution-method.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.substitution-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.substitution-method\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.substitution-method.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.substitution-method.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.substitution-method"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.substitution-method\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.substitution-method/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.substitution-method",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve a system of two linear equations by isolating one variable in ONE equation, then substituting that expression into the OTHER equation.\n- LO2: Back-substitute the found value into the isolated expression to find the SECOND variable, completing the full solution pair.\n- LO3: Recognize when the substitution method produces a FALSE numerical statement (no solution — inconsistent system) or a TRUE statement independent of the variables (infinitely many solutions — dependent system).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.substitution-method",
+      "title": "INCONSISTENT-SYSTEM-FALSE-STATEMENT-MISINTERPRETED",
+      "content": "| MC-1 | INCONSISTENT-SYSTEM-FALSE-STATEMENT-MISINTERPRETED | Reaching a false numerical statement (like $2=-4$) during substitution and failing to correctly conclude \"no solution,\" instead misreading it or abandoning the problem | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.substitution-method",
+      "title": "DEPENDENT-SYSTEM-TRUE-STATEMENT-CONFUSED-WITH-NO-SOLUTION",
+      "content": "| MC-2 | DEPENDENT-SYSTEM-TRUE-STATEMENT-CONFUSED-WITH-NO-SOLUTION | Reaching a true numerical statement (like $6=6$) and incorrectly concluding \"no solution\" instead of \"infinitely many solutions,\" conflating the two opposite outcomes | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.substitution-method",
+      "title": "BACK-SUBSTITUTION-STEP-OMITTED",
+      "content": "| MC-3 | BACK-SUBSTITUTION-STEP-OMITTED | Solving for the first variable but forgetting to back-substitute to find the second, leaving the solution incomplete (only one coordinate found) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.substitution-method",
+      "title": "Isolate, Substitute, Solve, Back-Substitute (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Isolate, Substitute, Solve, Back-Substitute (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.substitution-method",
+      "title": "False Statement Means No Solution; True Statement Means Infinite Solutions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"False Statement Means No Solution; True Statement Means Infinite Solutions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.substitution-method",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.substitution-method",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Solve the system $y=x+4$ and $2x+y=10$ using substitution.\n  2. Solve the system $y=5x-2$ and $y=5x+3$, and classify the outcome (unique solution, no solution, or infinitely many).\n  3. Solve the system $x=2y+1$ and $3x-6y=3$, and classify the outcome.\n  4. Explain, in one sentence, how to distinguish \"no solution\" from \"infinitely many solutions\" when the variable cancels out during substitution.\n- **P76 (Transfer Probe, mode = independence)**: \"Two mobile phone plans are modeled by cost equations: Plan A: $C=0.10m+20$ (where $m$ is minutes used); Plan B: $C=0.10m+35$. (a) Attempt to solve this system using substitution to find a minute usage $m$ where both plans cost the same, and interpret what the resulting equation tells you about whether such a break-even point exists. (b) Explain, using this lesson's inconsistent-system idea, what this result means in practical terms for someone comparing the two phone plans (hint: compare the plans' per-minute rates).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.substitution-method",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.system-linear-equations` (what a system of equations is, and what solving it means).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.substitution-method/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.substitution-method",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.system-linear-equations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared; a common alternative technique (elimination method) is not authored as a separate entry in this batch.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.substitution-method.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
