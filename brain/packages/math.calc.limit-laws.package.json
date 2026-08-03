@@ -1,0 +1,262 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.limit-laws-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.limit-laws",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4e02f4041b265a264be2029dcdb49d6c815ce7becbd420ef29e0443c4cba8f21",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.limit-laws.md": "sha256:f196220b75653680f91a53ac47b25cd2d9bdcd6640987eab610a8dcb12c5d4a6"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.calc.limit-laws",
+    "name": "Limit Laws",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.limits"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.limit-laws-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.limit-laws (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.limit-laws.md": "sha256:f196220b75653680f91a53ac47b25cd2d9bdcd6640987eab610a8dcb12c5d4a6"
+      },
+      "contentHash": "sha256:acd53516def0b14dfe4aa9e9e91be78b25318f45ab2db0c8205c0780bbf2f41b",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.limit-laws.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limit-laws.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limit-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limit-laws\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limit-laws.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limit-laws.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limit-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limit-laws\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.limit-laws.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.limit-laws.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.limit-laws"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.limit-laws\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.limit-laws/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.limit-laws",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply the SUM/DIFFERENCE law $\\lim(f\\pm g)=\\lim f\\pm\\lim g$ and the PRODUCT law $\\lim(fg)=(\\lim f)(\\lim g)$, PROVIDED both individual limits exist.\n- LO2: Apply the QUOTIENT law $\\lim(f/g)=(\\lim f)/(\\lim g)$ ONLY when $\\lim g\\ne0$ — recognizing that a zero denominator limit invalidates the law entirely (requiring a different technique, e.g. factoring or L'Hôpital's rule, not this law).\n- LO3: Apply the POWER law $\\lim(f^n)=(\\lim f)^n$, and recognize that combining several limit laws in sequence (e.g. sum then product) requires each INDIVIDUAL piece's limit to exist first, before combining.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.limit-laws",
+      "title": "QUOTIENT-LAW-APPLIED-DESPITE-ZERO-DENOMINATOR-LIMIT",
+      "content": "| MC-1 | QUOTIENT-LAW-APPLIED-DESPITE-ZERO-DENOMINATOR-LIMIT | Mechanically applying the quotient law even when the denominator's limit is 0, rather than recognizing the law's precondition has failed and a different technique is needed | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.limit-laws",
+      "title": "LIMIT-LAWS-COMBINED-WITHOUT-VERIFYING-EACH-PIECE-EXISTS-FIRST",
+      "content": "| MC-2 | LIMIT-LAWS-COMBINED-WITHOUT-VERIFYING-EACH-PIECE-EXISTS-FIRST | Combining several limit laws in sequence without first confirming each individual piece's limit exists | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limit-laws",
+      "title": "Sum, Product, and Power Laws Combine Piece by Piece (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Sum, Product, and Power Laws Combine Piece by Piece (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limit-laws",
+      "title": "Quotient Law Requires Nonzero Denominator Limit (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Quotient Law Requires Nonzero Denominator Limit (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.limit-laws",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.limit-laws",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Given $\\lim_{x\\to0}f(x)=4$, $\\lim_{x\\to0}g(x)=-2$, find $\\lim_{x\\to0}[f(x)-g(x)]$ and $\\lim_{x\\to0}[f(x)g(x)]$.\n  2. Given $\\lim_{x\\to3}f(x)=10$, $\\lim_{x\\to3}g(x)=0$, explain why the quotient law cannot be used to evaluate $\\lim_{x\\to3}[f(x)/g(x)]$, and what should be done instead.\n  3. Given $\\lim_{x\\to5}f(x)=2$, find $\\lim_{x\\to5}[f(x)^3]$.\n  4. Given $\\lim_{x\\to1}f(x)=3$, $\\lim_{x\\to1}g(x)=4$, $\\lim_{x\\to1}h(x)=2$, find $\\lim_{x\\to1}[f(x)g(x)+h(x)]$, showing which law is applied at each step.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer models a signal's total power as $P(x)=A(x)^2+B(x)\\cdot C(x)$, where $\\lim_{x\\to x_0}A(x)=3$, $\\lim_{x\\to x_0}B(x)=5$, and $\\lim_{x\\to x_0}C(x)=0$ (the third component's contribution vanishes at $x_0$). (a) Using the limit laws, find $\\lim_{x\\to x_0}P(x)$, showing each law applied. (b) If instead the engineer needed $\\lim_{x\\to x_0}[A(x)/C(x)]$, explain why the quotient law cannot be used here, and what this signals about needing a more careful analysis of how $A(x)$ and $C(x)$ behave near $x_0$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.limit-laws",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.limits` (the basic definition and evaluation of limits) — these laws formalize how limits combine algebraically.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.limit-laws/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.limit-laws",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.limits`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.calc.limits`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.limit-laws.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
