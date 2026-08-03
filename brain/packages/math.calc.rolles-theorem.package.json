@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.rolles-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.rolles-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1f29a6cee579a5e7f522ac37094830bf5e9bf9a385b21d5282cd2e3746b925b9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.rolles-theorem.md": "sha256:6acaa9d4004e7ecbbd7c67a1792416d6f788df92b6b644d4238717f7c1e6c472"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.rolles-theorem",
+    "name": "Rolle's Theorem",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.calc.mean-value-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.rolles-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.rolles-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.rolles-theorem.md": "sha256:6acaa9d4004e7ecbbd7c67a1792416d6f788df92b6b644d4238717f7c1e6c472"
+      },
+      "contentHash": "sha256:3fca1b0345b15bc4b90dac6e91d8604517312f577ffd91e00356c5de6f312712",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.rolles-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.rolles-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.rolles-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.rolles-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.rolles-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.rolles-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.rolles-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.rolles-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.rolles-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.rolles-theorem.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.rolles-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.rolles-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.rolles-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.rolles-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.rolles-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.rolles-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.rolles-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State Rolle's Theorem's THREE hypotheses precisely: $f$ continuous on $[a,b]$, differentiable on $(a,b)$, AND $f(a)=f(b)$ — and recognize that ALL THREE must hold before the conclusion (existence of $c$ with $f'(c)=0$) is guaranteed.\n- LO2: Recognize Rolle's Theorem as the SPECIAL CASE of the Mean Value Theorem where the endpoint values are EQUAL — MVT's conclusion $f'(c)=\\frac{f(b)-f(a)}{b-a}$ collapses to $f'(c)=0$ exactly when $f(a)=f(b)$ (making the average rate of change zero).\n- LO3: Recognize that when a hypothesis FAILS, the conclusion may still happen to hold by coincidence, but is NOT GUARANTEED — the theorem's power is in the guarantee, not in every individual case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "EQUAL-ENDPOINT-HYPOTHESIS-NOT-EXPLICITLY-VERIFIED",
+      "content": "| MC-1 | EQUAL-ENDPOINT-HYPOTHESIS-NOT-EXPLICITLY-VERIFIED | Solving for c directly without first explicitly confirming f(a)=f(b) actually holds | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "PARTIAL-HYPOTHESIS-SATISFACTION-ASSUMED-TO-STILL-GUARANTEE-THE-CONCLUSION",
+      "content": "| MC-2 | PARTIAL-HYPOTHESIS-SATISFACTION-ASSUMED-TO-STILL-GUARANTEE-THE-CONCLUSION | Assuming the theorem's conclusion still approximately holds when only some (not all) of its three hypotheses are satisfied | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "Verify All Three Hypotheses Explicitly Before Applying the Theorem (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Verify All Three Hypotheses Explicitly Before Applying the Theorem (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "A Failed Hypothesis Voids the Guarantee, Even If Others Hold (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Failed Hypothesis Voids the Guarantee, Even If Others Hold (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "Rolle's Theorem as MVT's Special Case (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Rolle's Theorem as MVT's Special Case (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Verify Rolle's theorem applies to $f(x)=x^2-2x$ on $[0,2]$, and find $c$.\n  2. Explain why Rolle's theorem does NOT apply to $f(x)=1/x$ on $[-1,1]$ (identify which hypothesis fails).\n  3. Explain, in one sentence, why Rolle's theorem is a special case of the Mean Value Theorem.\n  4. For $f(x)=\\sqrt[3]{x}$ on $[-1,1]$ (where $f(-1)=-1\\ne1=f(1)$... note the endpoints actually aren't equal here — instead verify differentiability fails at $x=0$ for the related function $g(x)=|x|^{2/3}$ on the same interval with $g(-1)=g(1)=1$), determine whether Rolle's theorem applies and justify.\n- **P76 (Transfer Probe, mode = independence)**: \"A ball is thrown straight up and returns to the SAME height 4 seconds later ($h(0)=h(4)$, where $h(t)$ is height as a function of time). (a) Using Rolle's theorem, explain why there must be some instant during the flight when the ball's velocity is EXACTLY zero, and identify what that instant physically represents. (b) Explain why this conclusion depends on the height function being differentiable everywhere during the flight (i.e., no instantaneous, corner-like changes in velocity) — what would have to go wrong physically for this guarantee to fail?\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.mean-value-theorem` — Rolle's theorem is its direct special case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.rolles-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.rolles-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.mean-value-theorem`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.calc.mean-value-theorem` (Rolle's theorem is its direct special case).\n- **Parent**: `math.calc.mean-value-theorem`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.rolles-theorem.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
