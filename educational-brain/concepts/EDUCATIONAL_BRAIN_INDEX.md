@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 15 READY)
+## english (216 concepts, 19 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1300,22 +1300,22 @@ its subject KG.
 | phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.consonant-sounds.md` | READY |
 | phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.ipa-basics.md` | READY |
-| phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.minimal-pairs.md` | READY |
 | phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.prosody` | Prosody | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.speech-sounds-overview.md` | READY |
-| phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.syllable-stress.md` | READY |
 | phonetics | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.vowel-sounds.md` | READY |
 | phonics | `eng.phonics.alphabet-recognition` | Alphabet Recognition | Yes | Yes | `educational-brain/concepts/english/eng.phonics.alphabet-recognition.md` | READY |
 | phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | Yes | `educational-brain/concepts/english/eng.phonics.blending-segmenting.md` | READY |
-| phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | No | — | MISSING |
+| phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonant-blends.md` | READY |
 | phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonants.md` | READY |
 | phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | No | — | MISSING |
 | phonics | `eng.phonics.digraphs` | Consonant and Vowel Digraphs | Yes | No | — | MISSING |
 | phonics | `eng.phonics.letter-sound-correspondence` | Letter-Sound Correspondence | Yes | Yes | `educational-brain/concepts/english/eng.phonics.letter-sound-correspondence.md` | READY |
-| phonics | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E | Yes | No | — | MISSING |
+| phonics | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E | Yes | Yes | `educational-brain/concepts/english/eng.phonics.long-vowels-silent-e.md` | READY |
 | phonics | `eng.phonics.phonemic-awareness` | Phonemic Awareness | Yes | Yes | `educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` | READY |
 | phonics | `eng.phonics.print-concepts` | Print Concepts | Yes | Yes | `educational-brain/concepts/english/eng.phonics.print-concepts.md` | READY |
 | phonics | `eng.phonics.rhyming` | Rhyming | Yes | Yes | `educational-brain/concepts/english/eng.phonics.rhyming.md` | READY |

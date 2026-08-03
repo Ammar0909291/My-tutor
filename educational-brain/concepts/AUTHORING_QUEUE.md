@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1112** (= 1,775 KG concepts − 663 already `READY`, per
+Total queued: **1108** (= 1,775 KG concepts − 667 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-3's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-4's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -613,10 +613,10 @@ Wave 5, moved to READY.
 | 92 | mathematics | 5 | `math.graph.graph-invariants` | Graph Invariants |
 | 93 | mathematics | 5 | `math.graph.graph-operations` | Graph Operations |
 | 94 | mathematics | 5 | `math.graph.matching` | Matching |
-| 95 | english | 5 | `eng.phonics.consonant-blends` | Consonant Blends |
-| 96 | english | 5 | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E |
-| 97 | english | 5 | `eng.phonetics.minimal-pairs` | Minimal Pairs |
-| 98 | english | 5 | `eng.phonetics.syllable-stress` | Word Stress |
+**Rows 95-98 removed 2026-08-03** — `eng.phonics.consonant-blends`,
+`eng.phonics.long-vowels-silent-e`, `eng.phonetics.minimal-pairs`,
+`eng.phonetics.syllable-stress` authored English Batch 4 (topological
+level 5), moved to READY.
 | 99 | biology | 5 | `bio.cell.cell-membrane-transport` | Cell Membrane and Transport |
 | 100 | biology | 5 | `bio.cell.nucleus-chromosomes` | Nucleus and Chromosomes |
 | 101 | biology | 5 | `bio.cell.mitochondria-energy` | Mitochondria and Energy Organelles |
