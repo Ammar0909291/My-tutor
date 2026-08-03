@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.polar-curves-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.polar-curves",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ca5ccefe01dce0ad651503556cabc8ee03592eecf25d892295b426104bb87757",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.polar-curves.md": "sha256:9470a32ed839612186b010b15c2033554b05a042816ed57d54572a3df026dc47"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.polar-curves",
+    "name": "Polar Curves",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.geom.polar-coordinates"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.polar-curves-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.polar-curves (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.polar-curves.md": "sha256:9470a32ed839612186b010b15c2033554b05a042816ed57d54572a3df026dc47"
+      },
+      "contentHash": "sha256:6f08a8ba9a29f87dc453d4e2300a33d015dd135578b50781cebcb4a4eae01430",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.polar-curves.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polar-curves.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polar-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polar-curves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polar-curves.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polar-curves.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polar-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polar-curves\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polar-curves.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polar-curves.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polar-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polar-curves\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polar-curves.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polar-curves.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polar-curves"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polar-curves\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.polar-curves/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Learning Objectives",
+      "content": "- LO1: Plot a POLAR CURVE $r=f(\\theta)$ by computing $r$ at several values of $\\theta$ and marking each resulting $(r,\\theta)$ point — recognizing that, unlike Cartesian $y=f(x)$ plotting, a NEGATIVE $r$ value means plotting the point in the OPPOSITE direction from $\\theta$ (i.e., at angle $\\theta+180°$).\n- LO2: Recognize the KEY POLAR CURVE FAMILIES by their characteristic equation FORM — CARDIOID ($r=a(1+\\cos\\theta)$ or similar, a heart-like single loop), ROSE curves ($r=a\\cos(n\\theta)$ or $r=a\\sin(n\\theta)$, producing petal patterns), LEMNISCATE ($r^2=a^2\\cos(2\\theta)$, a figure-eight), and ARCHIMEDEAN SPIRAL ($r=a\\theta$, a spiral expanding steadily outward).\n- LO3: For ROSE curves specifically, determine the NUMBER of petals from $n$: if $n$ is ODD, there are EXACTLY $n$ petals; if $n$ is EVEN, there are $2n$ petals — a genuinely non-obvious counting rule that must be applied carefully, not assumed to always equal $n$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.polar-curves",
+      "title": "NEGATIVE-R-PLOTTED-ON-SAME-RAY-INSTEAD-OF-ANGLE-FLIPPED-180-DEGREES",
+      "content": "| MC-1 | NEGATIVE-R-PLOTTED-ON-SAME-RAY-INSTEAD-OF-ANGLE-FLIPPED-180-DEGREES | Plotting a negative r value on the same ray at the given angle, rather than correctly flipping the angle by 180° | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.polar-curves",
+      "title": "ROSE-CURVE-PETAL-COUNT-ASSUMED-TO-ALWAYS-EQUAL-N-REGARDLESS-OF-PARITY",
+      "content": "| MC-2 | ROSE-CURVE-PETAL-COUNT-ASSUMED-TO-ALWAYS-EQUAL-N-REGARDLESS-OF-PARITY | Assuming a rose curve's petal count always equals n, without checking whether n is even (giving 2n petals) or odd (giving n petals) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Negative r Flips the Angle by 180°, Not Just the Distance's Sign (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Negative r Flips the Angle by 180°, Not Just the Distance's Sign (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Recognizing Curve Families by Equation Form (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Recognizing Curve Families by Equation Form (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Rose Petal Count Depends on Even/Odd n (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Rose Petal Count Depends on Even/Odd n (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Plot the point given by $r=-4$ at $\\theta=90°$, describing where it actually appears.\n  2. Identify the curve family for $r=5\\theta$.\n  3. Identify the curve family for $r=2\\sin(5\\theta)$, and find its petal count.\n  4. Identify the curve family for $r=3\\cos(2\\theta)$, and find its petal count.\n- **P76 (Transfer Probe, mode = independence)**: \"A radar antenna's signal-strength pattern (measuring how strongly it transmits in each direction) is modeled by the polar equation $r=4\\cos(2\\theta)$ (a rose-curve pattern), and an engineer needs to know how many distinct 'lobes' (directions of strong signal) the antenna produces. (a) Determine the number of petals/lobes this pattern has, being careful about the even/odd rule. (b) Explain what it would mean, physically, if the equation gave a negative $r$ value at some angle $\\theta$ — connecting to the angle-flip interpretation from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.polar-coordinates` — polar curves are functions expressed directly in this coordinate system.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.polar-curves/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.polar-curves",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.polar-coordinates`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polar-curves.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

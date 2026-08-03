@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.platonic-solids-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.platonic-solids",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0cfd310de5d3c78276a0b007d8a737386f2ef3bef78c5611906b4e44ab06f626",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.platonic-solids.md": "sha256:480b8da8dafa2e5982d90474e0619ec9d627bef34b37137bb68cf4c89b3bb12f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.platonic-solids",
+    "name": "Platonic Solids",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.solid-3d",
+      "math.geom.regular-polygon"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.platonic-solids-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.platonic-solids (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.platonic-solids.md": "sha256:480b8da8dafa2e5982d90474e0619ec9d627bef34b37137bb68cf4c89b3bb12f"
+      },
+      "contentHash": "sha256:bd740e23f550b8b9706b5447da02e537a93dbecf950619fe50ea4aad364769e8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.platonic-solids.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.platonic-solids.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.platonic-solids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.platonic-solids\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.platonic-solids.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.platonic-solids.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.platonic-solids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.platonic-solids\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.platonic-solids.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.platonic-solids.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.platonic-solids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.platonic-solids\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.platonic-solids.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.platonic-solids.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.platonic-solids"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.platonic-solids\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.platonic-solids/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify the FIVE Platonic solids — TETRAHEDRON (4 triangular faces), CUBE (6 square faces), OCTAHEDRON (8 triangular faces), DODECAHEDRON (12 pentagonal faces), ICOSAHEDRON (20 triangular faces) — each built from a SINGLE type of `math.geom.regular-polygon` face, with the SAME number of faces meeting at every vertex.\n- LO2: Recognize that these are the ONLY FIVE convex regular polyhedra that exist in 3D — this is NOT an incomplete list awaiting more discoveries, but a mathematically COMPLETE and PROVEN classification (first rigorously established by Euclid).\n- LO3: Connect to `math.top.euler-characteristic`: verify EULER'S FORMULA $V-E+F=2$ (vertices minus edges plus faces equals 2) holds for each Platonic solid — a genuine topological invariant, not a coincidence specific to these five shapes.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "TRIANGULAR-FACED-PLATONIC-SOLIDS-CONFUSED-WITH-EACH-OTHER",
+      "content": "| MC-1 | TRIANGULAR-FACED-PLATONIC-SOLIDS-CONFUSED-WITH-EACH-OTHER | Confusing the tetrahedron, octahedron, and icosahedron (all triangular-faced) with each other, without tracking their distinct face/vertex counts | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "EULERS-FORMULA-ASSUMED-TO-HOLD-FOR-ONLY-SOME-PLATONIC-SOLIDS-NOT-ALL",
+      "content": "| MC-2 | EULERS-FORMULA-ASSUMED-TO-HOLD-FOR-ONLY-SOME-PLATONIC-SOLIDS-NOT-ALL | Assuming Euler's formula (V-E+F=2) holds for only some Platonic solids rather than recognizing it as a genuine invariant for all convex polyhedra | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Distinguishing the Three Triangular-Faced Solids by Face Count (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Distinguishing the Three Triangular-Faced Solids by Face Count (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Why Exactly Five: The Vertex-Angle-Sum Constraint (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Why Exactly Five: The Vertex-Angle-Sum Constraint (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Euler's Formula Holds for All Five, as a Genuine Invariant (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Euler's Formula Holds for All Five, as a Genuine Invariant (reused procedure)\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Name all five Platonic solids and their face shapes.\n  2. Explain why the octahedron and icosahedron, despite both having triangular faces, are different solids.\n  3. Verify Euler's formula for the tetrahedron ($V=4$, $E=6$, $F=4$).\n  4. Explain, at a high level, why regular hexagons cannot form a sixth Platonic solid.\n- **P76 (Transfer Probe, mode = independence)**: \"A game designer creating a set of 'fair' dice (where every face has an equal chance of landing up, due to full geometric symmetry) wants to use Platonic solids as the dice shapes, since their perfect regularity guarantees fairness. (a) Explain why a Platonic solid's uniform face-and-vertex structure makes it a naturally 'fair' die shape. (b) Explain why the designer cannot simply invent a NEW sixth Platonic-solid-based die shape with, say, hexagonal faces, connecting to the completeness of Euclid's classification.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.solid-3d` (3D solids generally) and `math.geom.regular-polygon` (each Platonic solid's faces are regular polygons).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.platonic-solids/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.platonic-solids",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.solid-3d`, `math.geom.regular-polygon`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-links**: `math.top.euler-characteristic` (the general topological invariant this concept exemplifies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.platonic-solids.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
