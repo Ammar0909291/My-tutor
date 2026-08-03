@@ -1,0 +1,262 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.angle-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.angle-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4e7d2929e6a2b177727d4082b0c89d4ddac713f1d3c7b65e4042aea907f19f62",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.angle-types.md": "sha256:820aa7012ac94551702d097b69bbc61b61731aa6acf91258cb308c9161c19ae6"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.angle-types",
+    "name": "Types of Angles",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.geom.angle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.angle-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.angle-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.angle-types.md": "sha256:820aa7012ac94551702d097b69bbc61b61731aa6acf91258cb308c9161c19ae6"
+      },
+      "contentHash": "sha256:72c82202b1183d0ec5d10062a93b9e88a77f964b145f695df7a9fb1057afa14e",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-types.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-types.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-types\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-types.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-types.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.angle-types.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.angle-types.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.angle-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.angle-types\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.angle-types/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.angle-types",
+      "title": "Learning Objectives",
+      "content": "- LO1: Classify an angle as ACUTE (between $0°$ and $90°$, EXCLUSIVE of both endpoints), RIGHT (exactly $90°$), OBTUSE (between $90°$ and $180°$), STRAIGHT (exactly $180°$), or REFLEX (between $180°$ and $360°$), given its measure.\n- LO2: Correctly handle the BOUNDARY cases — $90°$ is RIGHT (not acute or obtuse), and $180°$ is STRAIGHT (not obtuse or reflex) — these exact-value categories are distinct from the open-interval ranges around them.\n- LO3: Recognize that a reflex angle and its corresponding \"regular\" angle (measuring less than $180°$) are the SAME two rays, just measured on OPPOSITE sides — the reflex measure is $360°$ minus the smaller angle's measure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-types",
+      "title": "BOUNDARY-ANGLE-VALUES-MISCLASSIFIED-AS-ADJACENT-OPEN-INTERVAL-CATEGORY",
+      "content": "| MC-1 | BOUNDARY-ANGLE-VALUES-MISCLASSIFIED-AS-ADJACENT-OPEN-INTERVAL-CATEGORY | Classifying an exact boundary angle (90° or 180°) as belonging to an adjacent open-interval category (acute/obtuse or obtuse/reflex) instead of its own exact category | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.angle-types",
+      "title": "REFLEX-ANGLE-COMPUTED-AS-SUPPLEMENTARY-INSTEAD-OF-360-MINUS-THE-ANGLE",
+      "content": "| MC-2 | REFLEX-ANGLE-COMPUTED-AS-SUPPLEMENTARY-INSTEAD-OF-360-MINUS-THE-ANGLE | Computing a reflex angle as 180° minus the given angle (confusing it with a supplementary angle) instead of 360° minus the given angle | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-types",
+      "title": "Boundary Values (90°, 180°) Are Their Own Exact Categories (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Boundary Values (90°, 180°) Are Their Own Exact Categories (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-types",
+      "title": "Reflex Angle Equals 360° Minus the Smaller Angle (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Reflex Angle Equals 360° Minus the Smaller Angle (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.angle-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.angle-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.95×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Classify angles of $30°$, $180°$, and $200°$.\n  2. Classify an angle of exactly $90°$, explaining why it is not acute or obtuse.\n  3. Given a $55°$ angle between two rays, find the reflex angle.\n  4. Explain, in one sentence, the difference between a reflex angle and a supplementary angle.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotic arm's joint can rotate through any angle from $0°$ to $360°$. A technician needs to program the joint to move to a position forming a $250°$ angle from its starting orientation. (a) Classify this $250°$ angle. (b) Find the smaller ('non-reflex') angle between the arm's start and end positions, and explain the relationship between these two angle measures.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.angle-types",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.angle` (the basic concept of an angle and its measure).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.angle-types/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.angle-types",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.angle`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.angle-measurement`.\n- **Parent**: `math.geom.angle`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.angle-types.md",
+        "startLine": 86,
+        "endLine": 93
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
