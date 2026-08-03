@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.exponential-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.exponential-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c55c4dc62ad6b23762930a6bf1938d4d2a13125066de6e56abb52e687ddf00b0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.exponential-equations.md": "sha256:e9b4f37c8d2f8cf4fbb5bf183da6d7e6a7c8850da2f27e88af3bf8b372c9bfc6"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.exponential-equations",
+    "name": "Exponential Equations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.exponential-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.exponential-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.exponential-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.exponential-equations.md": "sha256:e9b4f37c8d2f8cf4fbb5bf183da6d7e6a7c8850da2f27e88af3bf8b372c9bfc6"
+      },
+      "contentHash": "sha256:6537a5c55545d68680d194ad7c65d169b58a224fba350fa25f8de7fd1c3ceb61",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.exponential-equations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponential-equations.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponential-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponential-equations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponential-equations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponential-equations.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponential-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponential-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponential-equations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponential-equations.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponential-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponential-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.exponential-equations.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.exponential-equations.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.exponential-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.exponential-equations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.exponential-equations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve an exponential equation by expressing BOTH SIDES as powers of the SAME base, then equating the exponents directly.\n- LO2: Solve an exponential equation that does NOT have a convenient common base by taking the LOGARITHM of both sides.\n- LO3: Recognize when the same-base method is applicable (both sides can be rewritten as powers of one common base) versus when logarithms are genuinely necessary.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "SAME-BASE-METHOD-FORCED-WITHOUT-A-GENUINE-COMMON-BASE",
+      "content": "| MC-1 | SAME-BASE-METHOD-FORCED-WITHOUT-A-GENUINE-COMMON-BASE | Attempting to apply the same-base method when no clean common base actually exists between the two sides, rather than switching to logarithms | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "LOGARITHM-POWER-RULE-MISAPPLIED",
+      "content": "| MC-2 | LOGARITHM-POWER-RULE-MISAPPLIED | Incorrectly applying $\\log(a^x)=x\\log a$, e.g. distributing the exponent to the wrong side or swapping which quantity it multiplies | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "EXPONENTIAL-EQUATION-SOLUTION-LEFT-UNCHECKED",
+      "content": "| MC-3 | EXPONENTIAL-EQUATION-SOLUTION-LEFT-UNCHECKED | Not verifying a found solution by substituting back into the original exponential equation, missing a possible arithmetic error along the way | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "Same Base, Then Equate Exponents (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Same Base, Then Equate Exponents (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "Recognizing When Same-Base Doesn't Apply (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Recognizing When Same-Base Doesn't Apply (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "The Power Rule Brings the Exponent Down Correctly (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Power Rule Brings the Exponent Down Correctly (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Solve $5^{2x-1}=125$ using the same-base method.\n  2. Solve $4^x=50$ using logarithms.\n  3. Determine whether $9^x=27$ can be solved using the same-base method, and solve it if so.\n  4. Explain, in one sentence, when the same-base method is applicable versus when logarithms are needed.\n- **P76 (Transfer Probe, mode = independence)**: \"A bacteria population doubles every 3 hours, modeled by $P(t)=P_0\\times2^{t/3}$. A scientist wants to know when the population will reach 10 times its initial size, i.e. solve $10=2^{t/3}$ for $t$. (a) Determine whether the same-base method applies here (can 10 be written as a clean power of 2?), and if not, solve using logarithms instead. (b) Explain, using this lesson's power rule discussion, exactly how the exponent $t/3$ gets brought down during the logarithm step, showing each piece of the resulting equation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.exponential-function` (the general form $a^x$ and its behavior) — this concept solves equations where the variable sits in the exponent.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.exponential-equations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.exponential-equations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.exponential-function`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.logarithmic-equations` (the companion equation type, and `math.alg.change-of-base` (needed for logarithm computations in bases not directly available)).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.exponential-equations.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
