@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1116** (= 1,775 KG concepts − 659 already `READY`, per
+Total queued: **1112** (= 1,775 KG concepts − 663 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-2's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-3's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -564,10 +564,10 @@ Wave 4 part 2, moved to READY.
 | 47 | mathematics | 4 | `math.top.topological-space` | Topological Space |
 | 48 | mathematics | 4 | `math.meas.sigma-algebra` | σ-Algebra |
 | 49 | mathematics | 4 | `math.graph.graph` | Graph |
-| 50 | english | 4 | `eng.phonics.consonants` | Consonant Sounds |
-| 51 | english | 4 | `eng.phonics.short-vowels` | Short Vowel Sounds |
-| 52 | english | 4 | `eng.phonics.sight-words` | High-Frequency Sight Words |
-| 53 | english | 4 | `eng.phonetics.ipa-basics` | IPA Basics for English |
+**Rows 50-53 removed 2026-08-03** — `eng.phonics.consonants`,
+`eng.phonics.short-vowels`, `eng.phonics.sight-words`,
+`eng.phonetics.ipa-basics` authored English Batch 3 (topological level 4),
+moved to READY.
 | 54 | biology | 4 | `bio.found.viruses-viroids-lichens` | Viruses, Viroids and Lichens |
 | 55 | biology | 4 | `bio.cell.prokaryotic-cell` | Prokaryotic Cell Structure |
 | 56 | biology | 4 | `bio.cell.eukaryotic-cell` | Eukaryotic Cell Structure |

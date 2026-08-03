@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 11 READY)
+## english (216 concepts, 15 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1299,7 +1299,7 @@ its subject KG.
 | phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.consonant-sounds.md` | READY |
 | phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.ipa-basics.md` | READY |
 | phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.prosody` | Prosody | Yes | No | — | MISSING |
@@ -1311,7 +1311,7 @@ its subject KG.
 | phonics | `eng.phonics.alphabet-recognition` | Alphabet Recognition | Yes | Yes | `educational-brain/concepts/english/eng.phonics.alphabet-recognition.md` | READY |
 | phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | Yes | `educational-brain/concepts/english/eng.phonics.blending-segmenting.md` | READY |
 | phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | No | — | MISSING |
-| phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | No | — | MISSING |
+| phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonants.md` | READY |
 | phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | No | — | MISSING |
 | phonics | `eng.phonics.digraphs` | Consonant and Vowel Digraphs | Yes | No | — | MISSING |
 | phonics | `eng.phonics.letter-sound-correspondence` | Letter-Sound Correspondence | Yes | Yes | `educational-brain/concepts/english/eng.phonics.letter-sound-correspondence.md` | READY |
@@ -1319,8 +1319,8 @@ its subject KG.
 | phonics | `eng.phonics.phonemic-awareness` | Phonemic Awareness | Yes | Yes | `educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` | READY |
 | phonics | `eng.phonics.print-concepts` | Print Concepts | Yes | Yes | `educational-brain/concepts/english/eng.phonics.print-concepts.md` | READY |
 | phonics | `eng.phonics.rhyming` | Rhyming | Yes | Yes | `educational-brain/concepts/english/eng.phonics.rhyming.md` | READY |
-| phonics | `eng.phonics.short-vowels` | Short Vowel Sounds | Yes | No | — | MISSING |
-| phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | No | — | MISSING |
+| phonics | `eng.phonics.short-vowels` | Short Vowel Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.short-vowels.md` | READY |
+| phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | Yes | `educational-brain/concepts/english/eng.phonics.sight-words.md` | READY |
 | phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | No | — | MISSING |
 | reading | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone | Yes | No | — | MISSING |
 | reading | `eng.reading.close-reading` | Close Reading | Yes | No | — | MISSING |
