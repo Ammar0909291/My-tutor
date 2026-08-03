@@ -53,30 +53,33 @@ rather than hand-edit when entries change.
   migration debt (76 = 71 + 5), not introduced this batch — rewriting
   another session's freshly authored files remains out of scope.
 
-## Aggregate summary (601 entries)
+## Aggregate summary (614 entries)
 
-Adds `math.geom.line-equation` (Blueprint), `math.geom.vectors-3d` (Blueprint),
-`math.geom.polygon-angle-sum`, `math.geom.platonic-solids`,
-`math.geom.translation`, `math.geom.reflection`, and
-`math.geom.dilation` (7 concepts, 2026-07-28, Batch 56, Wave 11)
-on top of the prior 594-entry state. 2 have Blueprints; 5 have none. All numbers
-below were recomputed fresh. Note: this ledger's chemistry row count (136)
-understates chemistry's true 186/186-complete state (CLAUDE.md) — a
-pre-existing gap outside this batch's mathematics-only scope, not
-corrected here.
+Adds `math.geom.conic-sections`, `math.geom.cross-product`,
+`math.geom.curvature`, `math.geom.differential-geometry-curves`,
+`math.geom.differential-geometry-surfaces`, `math.geom.dot-product`,
+`math.geom.ellipse`, `math.geom.frenet-serret`, `math.geom.hyperbola`,
+`math.geom.parabola`, `math.geom.polar-coordinates`,
+`math.geom.polar-curves`, and `math.geom.rotation` (13 concepts,
+2026-08-03, Batch 57, Waves A–C, math.geom DOMAIN CERTIFIED 69/69)
+on top of the prior 601-entry state. All 13 have Blueprints (confirmed
+via filesystem check). All numbers below were recomputed fresh. Note:
+this ledger's chemistry row count (136) understates chemistry's true
+186/186-complete state (CLAUDE.md) — a pre-existing gap outside this
+batch's mathematics-only scope, not corrected here.
 
 | Field | Count | Note |
 |---|---|---|
-| Blueprint | 362 / 601 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 22 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`, `dilation`, `platonic-solids`, `polygon-angle-sum`, `reflection`, `translation`) — none of these 87 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file |
-| Educational Brain | 601 / 601 | trivially true (this is the entry list) |
-| Mental Model | 601 / 601 | |
-| Misconceptions | 601 / 601 | |
-| Analogies | 601 / 601 | |
-| Recovery Strategy | 601 / 601 | |
-| Assessment Signals | 601 / 601 | |
-| Tutor Actions | 531 / 601 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
-| Cross-links | 531 / 601 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
-| Version History | 524 / 599 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
+| Blueprint | 375 / 614 | see methodology note above — 24 `math.found` + 28 `math.arith` + 13 `math.nt` + 22 `math.geom` (`perimeter`, `length`, `angle-types`, `triangle-types`, `triangle-angle-sum`, `pythagorean-converse`, `triangle-centers`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`, `dilation`, `platonic-solids`, `polygon-angle-sum`, `reflection`, `translation`) — none of these 87 have a Blueprint — + all chemistry entries genuinely lack a `docs/curriculum/blueprints/` file; all 13 Batch 57 concepts have Blueprints (✓) |
+| Educational Brain | 614 / 614 | trivially true (this is the entry list) |
+| Mental Model | 614 / 614 | |
+| Misconceptions | 614 / 614 | |
+| Analogies | 614 / 614 | |
+| Recovery Strategy | 614 / 614 | |
+| Assessment Signals | 614 / 614 | |
+| Tutor Actions | 544 / 614 | see methodology note above — 70 pre-existing TEMPLATE.md-era entries (other subjects) remain non-Standard; all math.found Quality Gate 3 violations found this program are now repaired |
+| Cross-links | 544 / 614 | all Standard-format entries discuss cross-subject connections, including honest "none found" conclusions; the remaining 70 pre-Standard entries use a different section name |
+| Version History | 537 / 612 | the remaining 70 pre-existing TEMPLATE.md-era entries correctly read ✗; all entries authored or repaired under the current Standard read ✓ |
 
 ## Per-concept ledger
 
@@ -474,16 +477,26 @@ corrected here.
 | `math.geom.circle-parts` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.circle-theorems` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.congruent-triangles` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.conic-sections` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.coordinate-plane` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.cross-product` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.curvature` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.differential-geometry-curves` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.differential-geometry-surfaces` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.dilation` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.distance-formula` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.dot-product` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.ellipse` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.frenet-serret` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.geometric-constructions` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.geometric-proof` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.hyperbola` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.length` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line-equation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.line-segment` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.midpoint-formula` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.parabola` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.parallel-lines` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.parallelogram` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.perimeter` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -491,6 +504,8 @@ corrected here.
 | `math.geom.plane` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.platonic-solids` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.point` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.polar-coordinates` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.polar-curves` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.polygon` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.polygon-angle-sum` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.pythagorean-converse` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -502,6 +517,7 @@ corrected here.
 | `math.geom.reflection` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.regular-polygon` | mathematics | ✗ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.right-triangle` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `math.geom.rotation` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.similar-triangles` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.slope` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `math.geom.solid-3d` | mathematics | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |

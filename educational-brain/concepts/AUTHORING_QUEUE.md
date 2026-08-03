@@ -1275,8 +1275,8 @@ math.geom Wave 6, moved to READY.
 **Row 703 removed 2026-07-26** — `math.geom.distance-formula` authored
 math.geom Wave 8, moved to READY.
 **Row 704 removed 2026-07-28** — `math.geom.dilation` authored Batch 56 Wave 11, moved to READY.
-| 705 | mathematics | 18 | `math.geom.cross-product` | Cross Product |
-| 706 | mathematics | 18 | `math.geom.differential-geometry-curves` | Curves in Space |
+**Row 705 removed 2026-08-03** — `math.geom.cross-product` authored math.geom Wave A, moved to READY.
+**Row 706 removed 2026-08-03** — `math.geom.differential-geometry-curves` authored math.geom Wave B, moved to READY.
 | 707 | mathematics | 18 | `math.seq.divergent-sequence` | Divergent Sequence |
 | 708 | mathematics | 18 | `math.seq.series-convergence` | Convergence of Series |
 | 709 | mathematics | 18 | `math.calc.squeeze-theorem` | Squeeze Theorem |
@@ -1437,7 +1437,7 @@ authored math.nt Wave 6 part 1, moved to READY.
 | 848 | mathematics | 20 | `math.alg.exponential-equations` | Exponential Equations |
 | 849 | mathematics | 20 | `math.alg.logarithm` | Logarithm |
 | 850 | mathematics | 20 | `math.alg.pascals-triangle` | Pascal's Triangle |
-| 851 | mathematics | 20 | `math.geom.curvature` | Curvature |
+**Row 851 removed 2026-08-03** — `math.geom.curvature` authored math.geom Wave C, moved to READY.
 | 852 | mathematics | 20 | `math.trig.basic-ratios` | Six Trigonometric Ratios |
 | 853 | mathematics | 20 | `math.trig.unit-circle` | Unit Circle |
 | 854 | mathematics | 20 | `math.trig.law-of-sines` | Law of Sines |
@@ -1511,8 +1511,8 @@ authored math.nt Wave 4, moved to READY.
 | 919 | mathematics | 21 | `math.alg.rationalizing-denominators` | Rationalizing the Denominator |
 | 920 | mathematics | 21 | `math.alg.logarithm-properties` | Logarithm Properties |
 | 921 | mathematics | 21 | `math.alg.natural-logarithm` | Natural Logarithm |
-| 922 | mathematics | 21 | `math.geom.frenet-serret` | Frenet-Serret Formulas |
-| 923 | mathematics | 21 | `math.geom.differential-geometry-surfaces` | Differential Geometry of Surfaces |
+**Row 922 removed 2026-08-03** — `math.geom.frenet-serret` authored math.geom Wave C, moved to READY.
+**Row 923 removed 2026-08-03** — `math.geom.differential-geometry-surfaces` authored math.geom Wave C, moved to READY.
 | 924 | mathematics | 21 | `math.trig.special-angles` | Trigonometric Values at Special Angles |
 | 925 | mathematics | 21 | `math.trig.reference-angles` | Reference Angles |
 | 926 | mathematics | 21 | `math.trig.trig-functions` | Trigonometric Functions |
@@ -1574,9 +1574,9 @@ math.nt Wave 5 part 1, moved to READY.
 | 980 | mathematics | 22 | `math.alg.polynomial-division` | Polynomial Division |
 | 981 | mathematics | 22 | `math.alg.change-of-base` | Change of Base Formula |
 | 982 | mathematics | 22 | `math.alg.logarithmic-equations` | Logarithmic Equations |
-| 983 | mathematics | 22 | `math.geom.polar-coordinates` | Polar Coordinates |
-| 984 | mathematics | 22 | `math.geom.rotation` | Rotation |
-| 985 | mathematics | 22 | `math.geom.dot-product` | Dot Product |
+**Row 983 removed 2026-08-03** — `math.geom.polar-coordinates` authored math.geom Wave A, moved to READY.
+**Row 984 removed 2026-08-03** — `math.geom.rotation` authored math.geom Wave A, moved to READY.
+**Row 985 removed 2026-08-03** — `math.geom.dot-product` authored math.geom Wave A, moved to READY.
 | 986 | mathematics | 22 | `math.trig.amplitude-period-phase` | Amplitude, Period, Phase Shift |
 | 987 | mathematics | 22 | `math.trig.trig-identities` | Trigonometric Identities |
 | 988 | mathematics | 22 | `math.trig.inverse-trig` | Inverse Trigonometric Functions |
@@ -1638,7 +1638,7 @@ math.nt Wave 7, moved to READY.
 | 1042 | mathematics | 23 | `math.alg.absolute-value-equations` | Absolute Value Equations and Inequalities |
 | 1043 | mathematics | 23 | `math.alg.linear-equation-2var` | Linear Equation in Two Variables |
 | 1044 | mathematics | 23 | `math.alg.remainder-theorem` | Remainder Theorem |
-| 1045 | mathematics | 23 | `math.geom.polar-curves` | Polar Curves |
+**Row 1045 removed 2026-08-03** — `math.geom.polar-curves` authored math.geom Wave B, moved to READY.
 | 1046 | mathematics | 23 | `math.trig.trig-graphs` | Graphs of Trigonometric Functions |
 | 1047 | mathematics | 23 | `math.trig.pythagorean-identities` | Pythagorean Identities |
 | 1048 | mathematics | 23 | `math.trig.reciprocal-identities` | Reciprocal Identities |
@@ -1855,7 +1855,7 @@ math.nt Wave 8, moved to READY.
 | 1255 | mathematics | 29 | `math.nt.prime-number-theorem` | Prime Number Theorem |
 | 1256 | mathematics | 29 | `math.alg.completing-the-square` | Completing the Square |
 | 1257 | mathematics | 29 | `math.alg.polynomial-roots` | Polynomial Roots (Real and Complex) |
-| 1258 | mathematics | 29 | `math.geom.conic-sections` | Conic Sections |
+**Row 1258 removed 2026-08-03** — `math.geom.conic-sections` authored math.geom Wave A, moved to READY.
 | 1259 | mathematics | 29 | `math.func.quadratic-function` | Quadratic Function |
 | 1260 | mathematics | 29 | `math.de.harmonic-functions` | Harmonic Functions |
 | 1261 | mathematics | 29 | `math.de.poisson-equation` | Poisson's Equation |
@@ -1886,9 +1886,9 @@ math.nt Wave 8, moved to READY.
 | 1286 | mathematics | 30 | `math.alg.fundamental-theorem-algebra` | Fundamental Theorem of Algebra |
 | 1287 | mathematics | 30 | `math.alg.polynomial-inequality` | Polynomial Inequality |
 | 1288 | mathematics | 30 | `math.alg.vietas-formulas` | Vieta's Formulas |
-| 1289 | mathematics | 30 | `math.geom.parabola` | Parabola |
-| 1290 | mathematics | 30 | `math.geom.ellipse` | Ellipse |
-| 1291 | mathematics | 30 | `math.geom.hyperbola` | Hyperbola |
+**Row 1289 removed 2026-08-03** — `math.geom.parabola` authored math.geom Wave B, moved to READY.
+**Row 1290 removed 2026-08-03** — `math.geom.ellipse` authored math.geom Wave B, moved to READY.
+**Row 1291 removed 2026-08-03** — `math.geom.hyperbola` authored math.geom Wave B, moved to READY.
 | 1292 | mathematics | 30 | `math.func.vertex-form` | Vertex Form of a Quadratic |
 | 1293 | mathematics | 30 | `math.func.polynomial-function` | Polynomial Function |
 | 1294 | mathematics | 30 | `math.calc.partial-fractions` | Partial Fraction Decomposition |

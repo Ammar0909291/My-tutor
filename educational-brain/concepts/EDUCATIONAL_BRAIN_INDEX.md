@@ -15,7 +15,7 @@ definition has no KG concept to anchor a row to). `INVALID_REFERENCE` =
 this concept's own `requires`/`unlocks` contains a broken reference within
 its subject KG.
 
-## mathematics (908 concepts, 224 READY)
+## mathematics (908 concepts, 237 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | abst | `math.abst.algebraic-extension` | Algebraic Extension | Yes | No | — | MISSING |
@@ -525,26 +525,26 @@ its subject KG.
 | geom | `math.geom.circle-parts` | Parts of a Circle | No | Yes | `mathematics/math.geom.circle-parts.md` | READY |
 | geom | `math.geom.circle-theorems` | Circle Theorems | No | Yes | `mathematics/math.geom.circle-theorems.md` | READY |
 | geom | `math.geom.congruent-triangles` | Congruent Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.congruent-triangles.md` | READY |
-| geom | `math.geom.conic-sections` | Conic Sections | Yes | No | — | MISSING |
+| geom | `math.geom.conic-sections` | Conic Sections | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.conic-sections.md` | READY |
 | geom | `math.geom.coordinate-plane` | Coordinate Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.coordinate-plane.md` | READY |
-| geom | `math.geom.cross-product` | Cross Product | No | No | — | MISSING |
-| geom | `math.geom.curvature` | Curvature | Yes | No | — | MISSING |
-| geom | `math.geom.differential-geometry-curves` | Curves in Space | Yes | No | — | MISSING |
-| geom | `math.geom.differential-geometry-surfaces` | Differential Geometry of Surfaces | Yes | No | — | MISSING |
+| geom | `math.geom.cross-product` | Cross Product | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.cross-product.md` | READY |
+| geom | `math.geom.curvature` | Curvature | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.curvature.md` | READY |
+| geom | `math.geom.differential-geometry-curves` | Curves in Space | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.differential-geometry-curves.md` | READY |
+| geom | `math.geom.differential-geometry-surfaces` | Differential Geometry of Surfaces | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.differential-geometry-surfaces.md` | READY |
 | geom | `math.geom.dilation` | Dilation | No | Yes | `educational-brain/concepts/mathematics/math.geom.dilation.md` | READY |
 | geom | `math.geom.distance-formula` | Distance Formula | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.distance-formula.md` | READY |
-| geom | `math.geom.dot-product` | Dot Product | Yes | No | — | MISSING |
-| geom | `math.geom.ellipse` | Ellipse | No | No | — | MISSING |
-| geom | `math.geom.frenet-serret` | Frenet-Serret Formulas | No | No | — | MISSING |
+| geom | `math.geom.dot-product` | Dot Product | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.dot-product.md` | READY |
+| geom | `math.geom.ellipse` | Ellipse | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.ellipse.md` | READY |
+| geom | `math.geom.frenet-serret` | Frenet-Serret Formulas | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.frenet-serret.md` | READY |
 | geom | `math.geom.geometric-constructions` | Geometric Constructions | No | Yes | `mathematics/math.geom.geometric-constructions.md` | READY |
 | geom | `math.geom.geometric-proof` | Geometric Proof | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.geometric-proof.md` | READY |
-| geom | `math.geom.hyperbola` | Hyperbola | No | No | — | MISSING |
+| geom | `math.geom.hyperbola` | Hyperbola | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.hyperbola.md` | READY |
 | geom | `math.geom.length` | Length | No | Yes | `educational-brain/concepts/mathematics/math.geom.length.md` | READY |
 | geom | `math.geom.line` | Line | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line.md` | READY |
 | geom | `math.geom.line-equation` | Equations of Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line-equation.md` | READY |
 | geom | `math.geom.line-segment` | Line Segment | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.line-segment.md` | READY |
 | geom | `math.geom.midpoint-formula` | Midpoint Formula | No | Yes | `mathematics/math.geom.midpoint-formula.md` | READY |
-| geom | `math.geom.parabola` | Parabola | No | No | — | MISSING |
+| geom | `math.geom.parabola` | Parabola | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.parabola.md` | READY |
 | geom | `math.geom.parallel-lines` | Parallel Lines | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.parallel-lines.md` | READY |
 | geom | `math.geom.parallelogram` | Parallelogram | No | Yes | `educational-brain/concepts/mathematics/math.geom.parallelogram.md` | READY |
 | geom | `math.geom.perimeter` | Perimeter | No | Yes | `educational-brain/concepts/mathematics/math.geom.perimeter.md` | READY |
@@ -552,8 +552,8 @@ its subject KG.
 | geom | `math.geom.plane` | Plane | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.plane.md` | READY |
 | geom | `math.geom.platonic-solids` | Platonic Solids | No | Yes | `educational-brain/concepts/mathematics/math.geom.platonic-solids.md` | READY |
 | geom | `math.geom.point` | Point | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.point.md` | READY |
-| geom | `math.geom.polar-coordinates` | Polar Coordinates | Yes | No | — | MISSING |
-| geom | `math.geom.polar-curves` | Polar Curves | No | No | — | MISSING |
+| geom | `math.geom.polar-coordinates` | Polar Coordinates | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.polar-coordinates.md` | READY |
+| geom | `math.geom.polar-curves` | Polar Curves | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.polar-curves.md` | READY |
 | geom | `math.geom.polygon` | Polygon | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.polygon.md` | READY |
 | geom | `math.geom.polygon-angle-sum` | Polygon Angle Sum | No | Yes | `educational-brain/concepts/mathematics/math.geom.polygon-angle-sum.md` | READY |
 | geom | `math.geom.pythagorean-converse` | Converse of the Pythagorean Theorem | No | Yes | `educational-brain/concepts/mathematics/math.geom.pythagorean-converse.md` | READY |
@@ -564,7 +564,7 @@ its subject KG.
 | geom | `math.geom.reflection` | Reflection | No | Yes | `educational-brain/concepts/mathematics/math.geom.reflection.md` | READY |
 | geom | `math.geom.regular-polygon` | Regular Polygon | No | Yes | `educational-brain/concepts/mathematics/math.geom.regular-polygon.md` | READY |
 | geom | `math.geom.right-triangle` | Right Triangle | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.right-triangle.md` | READY |
-| geom | `math.geom.rotation` | Rotation | No | No | — | MISSING |
+| geom | `math.geom.rotation` | Rotation | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.rotation.md` | READY |
 | geom | `math.geom.similar-triangles` | Similar Triangles | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.similar-triangles.md` | READY |
 | geom | `math.geom.slope` | Slope | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.slope.md` | READY |
 | geom | `math.geom.solid-3d` | Three-Dimensional Solids | Yes | Yes | `educational-brain/concepts/mathematics/math.geom.solid-3d.md` | READY |
