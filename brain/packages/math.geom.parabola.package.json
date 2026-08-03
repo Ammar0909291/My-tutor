@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.parabola-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.parabola",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9f767e62537721c013a32c91d88172cf49034f3f65612cf26d028fcd112abb98",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.parabola.md": "sha256:895b9fd53ff519387d039cb170134316fd115d663fa1dcd65fcb1319171b2609"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.parabola",
+    "name": "Parabola",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.geom.conic-sections",
+      "math.alg.quadratic-equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.parabola-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.parabola (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.parabola.md": "sha256:895b9fd53ff519387d039cb170134316fd115d663fa1dcd65fcb1319171b2609"
+      },
+      "contentHash": "sha256:ac4f010dc53af089840579944a82dae57172eb1f3f8de406116247925c86b90e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.parabola.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parabola.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parabola"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parabola\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parabola.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parabola.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parabola"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parabola\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parabola.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parabola.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parabola"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parabola\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.parabola.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.parabola.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.parabola"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.parabola\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.parabola/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.parabola",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a parabola as the set of points EQUIDISTANT from a fixed FOCUS point and a fixed DIRECTRIX line — every point on the parabola satisfies distance-to-focus $=$ distance-to-directrix, EXACTLY.\n- LO2: Recognize that $y=ax^2+bx+c$ produces a parabola opening UP or DOWN (vertical axis of symmetry), while $x=ay^2+by+c$ produces one opening LEFT or RIGHT (horizontal axis of symmetry) — the roles of $x$ and $y$ SWAP between these two forms, and confusing which variable is squared produces the wrong orientation.\n- LO3: Recognize the sign of the leading coefficient $a$ determines the OPENING DIRECTION — for $y=ax^2+\\ldots$, $a>0$ opens UP, $a<0$ opens DOWN (analogously LEFT/RIGHT for the $x=ay^2+\\ldots$ form).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.parabola",
+      "title": "Y-EQUALS-AND-X-EQUALS-PARABOLA-FORMS-TREATED-AS-INTERCHANGEABLE",
+      "content": "| MC-1 | Y-EQUALS-AND-X-EQUALS-PARABOLA-FORMS-TREATED-AS-INTERCHANGEABLE | Treating y=ax²+bx+c and x=ay²+by+c as interchangeable forms describing the same shape, rather than recognizing the orientation swap | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.parabola",
+      "title": "SIGN-OF-A-ASSUMED-TO-ONLY-AFFECT-STEEPNESS-NOT-OPENING-DIRECTION",
+      "content": "| MC-2 | SIGN-OF-A-ASSUMED-TO-ONLY-AFFECT-STEEPNESS-NOT-OPENING-DIRECTION | Assuming the sign of the leading coefficient a only affects the parabola's steepness/width, missing its role in determining the opening direction | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parabola",
+      "title": "Verifying the Equidistant Focus-Directrix Definition (reused procedure)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Verifying the Equidistant Focus-Directrix Definition (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parabola",
+      "title": "Which Variable Is Squared Determines Vertical vs. Horizontal Orientation (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Which Variable Is Squared Determines Vertical vs. Horizontal Orientation (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parabola",
+      "title": "The Sign of a Determines Opening Direction, Not Just Steepness (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Sign of a Determines Opening Direction, Not Just Steepness (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.parabola",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.parabola",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. State the opening direction of $y=5x^2-3x+2$.\n  2. State the opening direction of $x=-4y^2+y-1$.\n  3. Explain, in one sentence, why $y=ax^2+bx+c$ and $x=ay^2+by+c$ (with the same $a,b,c$) describe parabolas with different orientations.\n  4. For $y=-\\frac{1}{2}x^2+4$, state the opening direction and explain the role of the negative sign.\n- **P76 (Transfer Probe, mode = independence)**: \"A satellite dish's cross-sectional shape (in 2D profile) is a parabola, designed so that all incoming parallel radio signals reflect toward a single collection point — the FOCUS. (a) Explain, using the focus-directrix definition, why this reflective property makes physical sense for concentrating signals at one point. (b) If the dish's cross-section is modeled by $x=0.05y^2$ (a horizontal-opening parabola), explain why this form (rather than $y=0.05x^2$) is appropriate for a dish oriented to open sideways rather than upward.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.parabola",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.conic-sections` (the general family this belongs to) and `math.alg.quadratic-equation` (the algebraic form $y=ax^2+bx+c$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.parabola/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.parabola",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.conic-sections`, `math.alg.quadratic-equation`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-links**: `math.func.quadratic-function` (the functional/algebraic treatment of the same curve).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.parabola.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.ellipse-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.ellipse",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:548a22aecd8bed743dda854bb3035a6e58c86eb74b9986b825b395bddd66f675",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.ellipse.md": "sha256:f360bd8d635e0e4133652c7bf90f0f5c65853c88bbe31941d4485be574680d1d"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.ellipse",
+    "name": "Ellipse",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.geom.conic-sections"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.ellipse-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.ellipse (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.ellipse.md": "sha256:f360bd8d635e0e4133652c7bf90f0f5c65853c88bbe31941d4485be574680d1d"
+      },
+      "contentHash": "sha256:a3d5ea63ea337151278badc5c4290b6fe4f2ba667e44be790eb74f06b1558ebe",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.ellipse.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.ellipse.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.ellipse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.ellipse\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.ellipse.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.ellipse.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.ellipse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.ellipse\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.ellipse.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.ellipse.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.ellipse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.ellipse\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.ellipse.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.ellipse.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.ellipse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.ellipse\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.ellipse/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.ellipse",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an ellipse as the set of points where the SUM of distances to two fixed FOCI is a CONSTANT — for every point $P$ on the ellipse, distance($P$, focus 1) $+$ distance($P$, focus 2) $=$ a fixed total.\n- LO2: Apply the standard equation $\\frac{x^2}{a^2}+\\frac{y^2}{b^2}=1$, correctly identifying which of $a,b$ is LARGER — the LARGER value corresponds to the SEMI-MAJOR axis (the longer direction), and its associated variable's axis is where the foci lie.\n- LO3: Recognize a CIRCLE as the SPECIAL CASE of an ellipse where $a=b$ (equivalently, where the two foci COINCIDE at a single center point) — a circle is not a fundamentally different shape from an ellipse, but its most symmetric special case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.ellipse",
+      "title": "MAJOR-AXIS-ASSUMED-FROM-VARIABLE-POSITION-RATHER-THAN-COMPARING-DENOMINATORS",
+      "content": "| MC-1 | MAJOR-AXIS-ASSUMED-FROM-VARIABLE-POSITION-RATHER-THAN-COMPARING-DENOMINATORS | Assuming the major axis is always associated with whichever variable is written first (conventionally x), without comparing the actual denominator values | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.ellipse",
+      "title": "CIRCLE-AND-ELLIPSE-TREATED-AS-COMPLETELY-SEPARATE-UNRELATED-SHAPE-CATEGORIES",
+      "content": "| MC-2 | CIRCLE-AND-ELLIPSE-TREATED-AS-COMPLETELY-SEPARATE-UNRELATED-SHAPE-CATEGORIES | Treating circles and ellipses as entirely separate shape categories, rather than recognizing a circle as the special a=b case of an ellipse | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.ellipse",
+      "title": "Verifying the Constant-Sum-of-Distances Definition (reused procedure)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Verifying the Constant-Sum-of-Distances Definition (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.ellipse",
+      "title": "The Larger Denominator Determines the Major Axis, Not Position in the Equation (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Larger Denominator Determines the Major Axis, Not Position in the Equation (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.ellipse",
+      "title": "Circles Are the a=b Special Case of Ellipses (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Circles Are the a=b Special Case of Ellipses (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.ellipse",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.ellipse",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For an ellipse with foci at $(-4,0)$ and $(4,0)$ and constant sum 12, verify the point $(6,0)$ lies on this ellipse.\n  2. Determine the major axis direction for $\\frac{x^2}{49}+\\frac{y^2}{4}=1$.\n  3. Determine the major axis direction for $\\frac{x^2}{4}+\\frac{y^2}{100}=1$.\n  4. Explain, in one sentence, why a circle is considered a special case of an ellipse rather than a completely different shape.\n- **P76 (Transfer Probe, mode = independence)**: \"An astronomer models a planet's orbit around the Sun as an ellipse, with the Sun located at ONE of the two foci (not the center), per Kepler's first law of planetary motion. (a) Explain, using the ellipse's constant-sum-of-distances definition, why the planet's distance from the Sun genuinely VARIES throughout its orbit (rather than staying constant, as it would if the orbit were a circle centered on the Sun). (b) Explain under what special condition (relating $a$ and $b$) the orbit would become a perfect circle, and what would happen to the second focus in that case.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.ellipse",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.conic-sections` — the ellipse is one of the four conic section types.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.ellipse/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.ellipse",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.conic-sections`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.circle` (the special case), `math.geom.hyperbola` (the other two-foci conic, using difference instead of sum).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.ellipse.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
