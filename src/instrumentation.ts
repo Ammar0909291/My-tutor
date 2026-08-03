@@ -52,7 +52,7 @@ async function bootstrapAssets() {
 
     try {
       // Load seed arrays first so we know the expected total before querying.
-      const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug } =
+      const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug, seedOwnershipWhere } =
         await import('./lib/teaching/assets/brainSeedAssets')
       const { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } =
         await import('./lib/teaching/assets/authoredSeedAssets')
@@ -63,14 +63,19 @@ async function bootstrapAssets() {
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
       const EXPECTED_TOTAL = ALL_EXPLANATIONS.length + ALL_PROBES.length
 
-      const existing = await prisma.assetIdentity.count()
+      // Count ONLY the rows this bootstrap owns (see seedOwnershipWhere).
+      // A bare count() here measured the shared table — including the
+      // unbounded AI_AUTHORED/DRAFT rows written by explanationMemory's
+      // capture path — so captured drafts alone could satisfy the guard and
+      // permanently suppress seeding of the authored assets.
+      const existing = await prisma.assetIdentity.count({ where: seedOwnershipWhere() as never })
       if (existing >= EXPECTED_TOTAL) {
-        console.log(`[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} rows present — skipping`)
+        console.log(`[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} seed-owned rows present — skipping`)
         return
       }
 
       console.log(
-        `[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} rows present — seeding missing assets...`
+        `[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} seed-owned rows present — seeding missing assets...`
       )
 
       let created = 0

@@ -54,6 +54,42 @@ export function seedCanonicalSlug(
   return `${conceptId}:${familyKind}:${SEED_LANGUAGE}:${gradeBand.toLowerCase()}`
 }
 
+/** Subjects the automatic cold-start bootstrap (src/instrumentation.ts) seeds. */
+export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english'] as const
+
+/**
+ * Prisma `where` matching EXACTLY the AssetIdentity rows the seed bootstrap
+ * owns — nothing else.
+ *
+ * `assetIdentity` is a SHARED table with a second, unbounded writer:
+ * explanationMemory.ts's `captureGeneratedExplanation()` inserts an
+ * AI_AUTHORED/DRAFT row after LLM generations. A bare `count()` therefore
+ * measures traffic volume, not seed completeness — so a bootstrap guard built
+ * on it silently flips to "already seeded" once captured drafts alone reach
+ * the expected total, and the authored HUMAN_CURATOR assets are then never
+ * inserted at all.
+ *
+ * Three predicates, each excluding one competing writer:
+ *   authorKind HUMAN_CURATOR — excludes every AI_AUTHORED capture row.
+ *   authorId  SEED_AUTHOR_ID — excludes any other human curator's rows.
+ *   tags hasSome <subjects>  — excludes the subjects only the manual script
+ *                              seeds (chemistry/biology/computer_science),
+ *                              which share authorKind and authorId but are
+ *                              not part of this bootstrap's corpus.
+ *
+ * Seed rows are tagged `[subjectSlug, familyKind]`, so matching on subject
+ * slugs cannot collide with familyKind values.
+ */
+export function seedOwnershipWhere(
+  subjects: readonly string[] = BOOTSTRAP_SEED_SUBJECTS,
+): { authorKind: 'HUMAN_CURATOR'; authorId: string; tags: { hasSome: string[] } } {
+  return {
+    authorKind: 'HUMAN_CURATOR',
+    authorId: SEED_AUTHOR_ID,
+    tags: { hasSome: [...subjects] },
+  }
+}
+
 // ─── math.arith.fractions ─────────────────────────────────────────────────────
 
 const FRACTIONS = 'math.arith.fractions'
