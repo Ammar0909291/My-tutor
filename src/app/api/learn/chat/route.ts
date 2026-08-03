@@ -2110,6 +2110,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // responseBudget(beginner)=4 paragraphs conflicts with that and
             // must be overridden for every first-lesson turn.
             maxParagraphs: routeMaxParagraphsHoisted,
+            // The value the route already computed for the verifier context and
+            // the parity facts — now also reaching the SERVED prompt, through
+            // the same owner that carries the length budget.
+            maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
             workedExampleFirst,
             visualType: (learnerRequestHoisted === 'diagram' || explainDifferentlyNeedsVisual)
               ? availableVisual

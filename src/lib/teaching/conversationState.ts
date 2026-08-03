@@ -72,6 +72,56 @@ export const PHASE_MAX_QUESTION_STAGE: Record<TeachingPhase, number> = {
   TRANSFER: 7,
 }
 
+/** The lowest stage that is a real check rather than a warm-up. Stage 1
+ *  (observation) is an opener, not a follow-up to a correct answer. */
+const MIN_FOLLOWUP_STAGE = 1
+
+/**
+ * WHICH question stage to ask this turn — the follow-up selector.
+ *
+ * PRODUCTION GAP THIS CLOSES. The QUESTION STAGE POLICY (base prompt) already
+ * defines the follow-up vocabulary as a 1-7 ladder: 1 Observation,
+ * 2 Recognition, 3 Identification, 4 Simple reasoning, 5 Application,
+ * 6 Calculation, 7 Transfer. PHASE_MAX_QUESTION_STAGE already publishes a
+ * CEILING per phase. But nothing ever SELECTED a stage — the directive stated
+ * only "never ask above N", so every follow-up was the model's free choice and
+ * it settled on the same one ("How did you figure that out?", a Stage 4
+ * reasoning probe) turn after turn.
+ *
+ * The ladder is therefore the canonical owner of follow-up form; it was
+ * publishing half its answer. This selects from the SAME learner state the
+ * ladder already maintains, and applies the policy's OWN two rules rather than
+ * inventing pedagogy:
+ *
+ *   "if the student cannot answer, drop one stage lower" -> struggle demotes
+ *   "never skip more than one stage upward"              -> success promotes by 1
+ *
+ * Demonstrated success on THIS concept raises the stage; current struggle
+ * lowers it; the phase ceiling always wins. A learner answering correctly
+ * therefore climbs recognition -> identification -> reasoning -> application ->
+ * transfer instead of being asked to explain their reasoning forever, and the
+ * variety is a consequence of the ladder moving, not of a template list.
+ *
+ * No new state, no second teaching system: inputs are ConversationState's own
+ * counters and the existing ceiling table.
+ *
+ * Pure and total. Returns null when this turn asks nothing.
+ */
+export function selectQuestionStage(
+  state: ConversationState,
+  nextMove: NextMove,
+): number | null {
+  if (nextMove !== 'ask') return null
+  const ceiling = PHASE_MAX_QUESTION_STAGE[state.phase] ?? 2
+  const correct = (state.correctAtCheck ?? 0) + (state.correctAtPractice ?? 0)
+  const failures = state.consecutiveFailures ?? 0
+  // Base: the floor of what this phase treats as a real check.
+  const base = Math.max(MIN_FOLLOWUP_STAGE, Math.min(2, ceiling))
+  // Success climbs one stage per demonstrated correct answer; struggle drops.
+  const raw = base + Math.max(0, correct) - Math.max(0, failures)
+  return Math.max(MIN_FOLLOWUP_STAGE, Math.min(ceiling, raw))
+}
+
 export interface ConversationState {
   phase: TeachingPhase
   conceptId: string | null
@@ -1089,6 +1139,15 @@ export interface TurnDirectiveParams {
   state: ConversationState
   nextMove: NextMove
   maxParagraphs: number | null
+  /** How many NEW concepts/terms this turn may introduce.
+   *
+   *  The route has always COMPUTED this (contentRegister === 'beginner' ? 1 : 2)
+   *  but only ever handed it to the flag-gated verifier context and to the
+   *  parity comparison — it never reached the served prompt, so nothing bounded
+   *  how much new material one turn could open. That is how a single Molarity
+   *  turn also introduced Molality, Mole Fraction, ppm, ppb and Dilution.
+   *  Omitted/null keeps the previous wording exactly. */
+  maxNewTerms?: number | null
   /** Phase F flag, for the SHOW wording. */
   workedExampleFirst: boolean
   /** Phase G: server-decided visual for this turn (detectVisual output),
@@ -1206,6 +1265,23 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
     lines.push('- STAY ON CURRENT EXAMPLE: do not introduce a second example, molecule, compound, or entity until the learner answers at least one question about the current one correctly. One confirmed correct signal per sub-example before moving on.')
   }
   lines.push(`- Question stage ceiling: Stage ${PHASE_MAX_QUESTION_STAGE[p.state.phase]} (see QUESTION STAGE POLICY). Never ask above it this turn.`)
+  // The ladder now publishes a SELECTION, not only a ceiling — see
+  // selectQuestionStage(). Without this the follow-up form was the model's free
+  // choice every turn, and it repeated one Stage-4 reasoning probe.
+  {
+    const stage = selectQuestionStage(p.state, p.nextMove)
+    if (stage !== null) {
+      lines.push(`- Question stage THIS TURN: Stage ${stage}. Ask at this stage, not below it — the ceiling above is the limit, this is the target.`)
+    }
+  }
+  // Bounded release of new material. The budget is per TURN, not per lesson.
+  if (typeof p.maxNewTerms === 'number') {
+    lines.push(
+      `- New-concept budget: at most ${p.maxNewTerms} new concept${p.maxNewTerms === 1 ? '' : 's'}/term${p.maxNewTerms === 1 ? '' : 's'} this turn. ` +
+      'Teach it fully rather than listing several. Anything further belongs to a later turn or a later lesson — ' +
+      'if the learner asks about one, name it in a clause and move on, do not open it.',
+    )
+  }
   // B.13-17: context-aware acknowledgement replaces generic openers.
   if (p.acknowledgementContext) {
     const ackLine = buildAcknowledgementInstruction(p.acknowledgementContext)
