@@ -21,11 +21,12 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1124** (= 1,775 KG concepts − 651 already `READY`, per
-`ROADMAP.md`'s §1 Totals as updated 2026-07-28 — this header was stale
+Total queued: **1118** (= 1,775 KG concepts − 657 already `READY`, per
+`ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's and math.geom Wave 10's positions below).
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batch 1's
+positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -511,9 +512,9 @@ the program's default cross-subject priority order (`math.found` Wave
 | 2 | computer_science | 0 | `cs.found.intro-computers` | Introduction to Computers |
 **Row 3 removed 2026-07-26** — `math.geom.point` authored math.geom
 Wave 1, moved to READY.
-| 4 | english | 1 | `eng.phonics.alphabet-recognition` | Alphabet Recognition |
-| 5 | english | 1 | `eng.phonics.rhyming` | Rhyming |
-| 6 | english | 1 | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds |
+**Rows 4–6 removed 2026-08-03** — `eng.phonics.alphabet-recognition`,
+`eng.phonics.rhyming`, `eng.phonetics.speech-sounds-overview` authored
+English Batch 1 (topological level 1), moved to READY.
 | 7 | biology | 1 | `bio.found.characteristics-of-life` | Characteristics of Living Organisms |
 | 8 | computer_science | 1 | `cs.found.computer-organisation` | Computer Organisation |
 | 9 | computer_science | 1 | `cs.found.number-systems` | Number Systems |
@@ -522,9 +523,9 @@ Wave 1, moved to READY.
 | 12 | computer_science | 1 | `cs.sec.cyber-ethics-safety` | Cyber Ethics and Online Safety |
 **Row 13 removed 2026-07-26** — `math.geom.line` authored math.geom
 Wave 2, moved to READY.
-| 14 | english | 2 | `eng.phonics.blending-segmenting` | Blending and Segmenting |
-| 15 | english | 2 | `eng.phonetics.articulation-organs` | Organs of Articulation |
-| 16 | english | 2 | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation |
+**Rows 14–16 removed 2026-08-03** — `eng.phonics.blending-segmenting`,
+`eng.phonetics.articulation-organs`, `eng.writing.handwriting-and-formation`
+authored English Batch 1 (topological level 2), moved to READY.
 | 17 | biology | 2 | `bio.found.classification-need` | Need for Classification |
 | 18 | biology | 2 | `bio.found.microscopy-basics` | Microscopy and Laboratory Techniques |
 | 19 | biology | 2 | `bio.found.biomes-levels-of-organisation` | Levels of Biological Organisation |

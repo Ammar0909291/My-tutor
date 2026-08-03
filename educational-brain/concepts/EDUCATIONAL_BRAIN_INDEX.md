@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 3 READY)
+## english (216 concepts, 9 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1295,7 +1295,7 @@ its subject KG.
 | literature | `eng.literature.symbolism` | Symbolism | Yes | No | — | MISSING |
 | literature | `eng.literature.theme-and-message` | Theme and Message | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.articulation-organs.md` | READY |
 | phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | No | — | MISSING |
@@ -1305,11 +1305,11 @@ its subject KG.
 | phonetics | `eng.phonetics.prosody` | Prosody | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.speech-sounds-overview.md` | READY |
 | phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification | Yes | No | — | MISSING |
-| phonics | `eng.phonics.alphabet-recognition` | Alphabet Recognition | Yes | No | — | MISSING |
-| phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | No | — | MISSING |
+| phonics | `eng.phonics.alphabet-recognition` | Alphabet Recognition | Yes | Yes | `educational-brain/concepts/english/eng.phonics.alphabet-recognition.md` | READY |
+| phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | Yes | `educational-brain/concepts/english/eng.phonics.blending-segmenting.md` | READY |
 | phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | No | — | MISSING |
 | phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | No | — | MISSING |
 | phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | No | — | MISSING |
@@ -1318,7 +1318,7 @@ its subject KG.
 | phonics | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E | Yes | No | — | MISSING |
 | phonics | `eng.phonics.phonemic-awareness` | Phonemic Awareness | Yes | Yes | `educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` | READY |
 | phonics | `eng.phonics.print-concepts` | Print Concepts | Yes | Yes | `educational-brain/concepts/english/eng.phonics.print-concepts.md` | READY |
-| phonics | `eng.phonics.rhyming` | Rhyming | Yes | No | — | MISSING |
+| phonics | `eng.phonics.rhyming` | Rhyming | Yes | Yes | `educational-brain/concepts/english/eng.phonics.rhyming.md` | READY |
 | phonics | `eng.phonics.short-vowels` | Short Vowel Sounds | Yes | No | — | MISSING |
 | phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | No | — | MISSING |
 | phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | No | — | MISSING |
@@ -1375,7 +1375,7 @@ its subject KG.
 | writing | `eng.writing.editing-and-proofreading` | Editing and Proofreading | Yes | No | — | MISSING |
 | writing | `eng.writing.essay-structure` | Essay Structure | Yes | No | — | MISSING |
 | writing | `eng.writing.expository-writing` | Expository Writing | Yes | No | — | MISSING |
-| writing | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation | Yes | No | — | MISSING |
+| writing | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation | Yes | Yes | `educational-brain/concepts/english/eng.writing.handwriting-and-formation.md` | READY |
 | writing | `eng.writing.narrative-writing` | Narrative Writing | Yes | No | — | MISSING |
 | writing | `eng.writing.outlining-and-planning` | Outlining and Planning | Yes | No | — | MISSING |
 | writing | `eng.writing.paragraph-structure` | Paragraph Structure | Yes | No | — | MISSING |
