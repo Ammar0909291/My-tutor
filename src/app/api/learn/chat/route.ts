@@ -714,7 +714,46 @@ export async function POST(req: Request) {
                 hasPrerequisiteGap: snapshotLastPrereqGap !== null,
               },
             )
-            systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
+            // MILESTONE 6 SUPPRESSION — this block was missed.
+            //
+            // dispatcher.ts's contract: when the Brain runtime is ON, the
+            // Brain's execution block is the prompt's SINGLE decision
+            // authority, and "the legacy decision blocks ... are suppressed at
+            // their injection sites. Their engines keep RUNNING ... they just
+            // no longer speak with decision authority in the prompt."
+            //
+            // It was applied to three sites (TEACHING ENGINE DECISION, the
+            // LAST-ANSWER READ overlay, buildActionProcedureBlock) and to
+            // buildTeachingActionBlock. It was never applied here — and of
+            // those, buildTeachingActionBlock and buildLessonPlanBlock are now
+            // stubs returning '', so ACTIVE TEACHING STRATEGY is the last LIVE
+            // block that speaks with decision authority alongside the TURN
+            // DIRECTIVE.
+            //
+            // What it emits is a second, competing pedagogical objective:
+            //   "Action directive: <STRATEGY_ACTION_DIRECTIVE[type]>"
+            // whose values are literally teaching actions, independent of the
+            // TURN DIRECTIVE's nextMove —
+            //   FOUNDATION_REBUILD    'Lead with a worked example before theory.'
+            //   ACCELERATED_GROWTH    'Challenge with a harder variant after explaining.'  (TWO actions)
+            //   APPLICATION_FOCUS     'End this response with the inline practice question...'
+            //   CONFIDENCE_CORRECTION 'Open with a real-world analogy first.'
+            // plus a plural "Instructions for this session:" list and
+            // "Apply this strategy throughout the session", which makes it
+            // persist on EVERY turn regardless of what the turn directive
+            // decided. That is how EXPLANATION + WORKED EXAMPLE + ASSESSMENT
+            // survive into one response.
+            //
+            // The strategy ENGINE is untouched: teachingStrategy is still
+            // computed and strategyHoisted / outputBias / hintBias below still
+            // consume it, exactly as the Milestone 6 contract requires. Only
+            // its prompt VOICE is suppressed, and only when the Brain owns
+            // decisions (flag off ⇒ byte-identical to before).
+            const { legacyDecisionBlocksSuppressed: _legacySuppressed } =
+              await import('@/lib/understanding/dispatcher')
+            if (!_legacySuppressed()) {
+              systemPrompt += buildTeachingStrategyBlock(teachingStrategy)
+            }
 
             const { deriveOutputBias, deriveHintBias } = await import('@/lib/school/adaptive/teachingOutputBias')
             strategyHoisted = teachingStrategy.type
