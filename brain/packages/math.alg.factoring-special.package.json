@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.factoring-special-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.factoring-special",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c4ffd7bca2b8910379f0b70ec317ef114f0a8280f24df7e897e772b6b00a2b09",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.factoring-special.md": "sha256:d5528de948adc0e50f71fc894f98ef12c23463f158c776ab24cd4340567bb89d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.factoring-special",
+    "name": "Special Factoring Formulas",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.factoring"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.factoring-special-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.factoring-special (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.factoring-special.md": "sha256:d5528de948adc0e50f71fc894f98ef12c23463f158c776ab24cd4340567bb89d"
+      },
+      "contentHash": "sha256:ca6d123a12a229beb90d8c47ba1882c1915c0bcdb5322af1224a898001b6d492",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-special.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-special.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-special"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-special\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-special.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-special.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-special"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-special\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-special.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-special.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-special"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-special\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.factoring-special.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.factoring-special.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.factoring-special"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.factoring-special\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.factoring-special/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Learning Objectives",
+      "content": "- LO1: Factor a DIFFERENCE OF SQUARES $a^2-b^2=(a+b)(a-b)$, recognizing this pattern in expressions where both terms are perfect squares.\n- LO2: Factor a SUM or DIFFERENCE OF CUBES $a^3\\pm b^3=(a\\pm b)(a^2\\mp ab+b^2)$, correctly tracking the sign pattern (the sign in the binomial factor matches the original; the middle term's sign in the trinomial factor is OPPOSITE).\n- LO3: Recognize and correctly expand a PERFECT SQUARE TRINOMIAL $(a\\pm b)^2=a^2\\pm2ab+b^2$ in both directions (expanding a binomial square, and factoring a trinomial matching this pattern).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-special",
+      "title": "SUM-OF-SQUARES-INCORRECTLY-FACTORED-LIKE-DIFFERENCE",
+      "content": "| MC-1 | SUM-OF-SQUARES-INCORRECTLY-FACTORED-LIKE-DIFFERENCE | Attempting to apply the difference-of-squares pattern to a sum of squares, which does not factor over the reals | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-special",
+      "title": "CUBE-FACTORING-TRINOMIAL-MIDDLE-SIGN-REVERSED",
+      "content": "| MC-2 | CUBE-FACTORING-TRINOMIAL-MIDDLE-SIGN-REVERSED | Using the wrong sign for the middle term of the trinomial factor when factoring a sum or difference of cubes | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.factoring-special",
+      "title": "PERFECT-SQUARE-TRINOMIAL-MIDDLE-TERM-NOT-VERIFIED",
+      "content": "| MC-3 | PERFECT-SQUARE-TRINOMIAL-MIDDLE-TERM-NOT-VERIFIED | Assuming a trinomial with two perfect-square terms automatically qualifies as a perfect square trinomial, without checking the middle term equals exactly $2ab$ | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Difference of Squares, No Sum-of-Squares Analog (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Difference of Squares, No Sum-of-Squares Analog (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Cubes: Binomial Sign Matches, Trinomial Middle Sign Is Opposite (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Cubes: Binomial Sign Matches, Trinomial Middle Sign Is Opposite (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Perfect Square Trinomial: Check the Middle Term Exactly (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Perfect Square Trinomial: Check the Middle Term Exactly (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Factor $16x^2-49$.\n  2. Factor $x^3-27$, tracking the sign pattern carefully.\n  3. Determine whether $x^2-14x+49$ is a perfect square trinomial, and factor it if so.\n  4. Determine whether $4x^2+9$ can be factored over the reals, and explain why or why not.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs to factor the expression $x^3+64$ representing a volume-difference formula in a design calculation. (a) Apply the sum-of-cubes formula to factor this expression, being careful with the sign pattern. (b) Verify your factorization is correct by fully expanding your answer back out and confirming it matches the original $x^3+64$, explaining why this verification step is a reliable way to catch a sign error even without re-deriving the formula from scratch.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.factoring` (the general factoring concept) — these are specific, high-value MEMORIZED patterns worth recognizing instantly rather than re-deriving.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.factoring-special/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.factoring-special",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.factoring`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.factoring-special.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
