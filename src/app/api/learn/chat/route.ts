@@ -4193,10 +4193,37 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             })
           }
 
-          if (teachingHistoryHoisted && selectedStrategyHoisted !== null) {
+          // TEACHING MEMORY IS WRITTEN ON EVERY TAUGHT TURN.
+          //
+          // This persist used to require `selectedStrategyHoisted !== null`.
+          // That variable is assigned in exactly ONE place — inside
+          // `if (learnerRequestHoisted === 'explain_differently')` — so the
+          // whole ledger (explanationCount, strategiesUsed, mcqAsked,
+          // explanationsServed, confidence, frustration, mastery) was persisted
+          // only on the rare turns where the learner explicitly asked for a
+          // different explanation. Every ordinary teaching turn taught
+          // something and recorded nothing.
+          //
+          // The read at ~1694 is unconditional, so the next turn re-read a
+          // ledger that had never been updated: buildTeachingMemoryBlock told
+          // the model nothing had been taught yet, and it explained the same
+          // concept again. That is the "teaching memory appears partially
+          // forgotten" symptom — partially, because the rare
+          // explain_differently turns DID write, so the ledger was stale rather
+          // than empty. It is also why an identical MCQ could be re-asked:
+          // recordMcqAsked sits inside this same block.
+          //
+          // The strategy index is the only field that is genuinely
+          // strategy-scoped, so it is the only one still conditional; every
+          // other field is turn-general and now always folds. No new state, no
+          // duplicated counter — the same single owner, written when it should
+          // always have been.
+          if (teachingHistoryHoisted) {
             const { updateTeachingHistory, computeFrustration, computeMastery, readTeachingHistory } = await import('@/lib/teaching/teachingHistory')
             const updatedHistory = updateTeachingHistory(teachingHistoryHoisted, {
-              strategiesUsed: [...new Set([...teachingHistoryHoisted.strategiesUsed, selectedStrategyHoisted])],
+              strategiesUsed: selectedStrategyHoisted !== null
+                ? [...new Set([...teachingHistoryHoisted.strategiesUsed, selectedStrategyHoisted])]
+                : teachingHistoryHoisted.strategiesUsed,
               explanationCount: teachingHistoryHoisted.explanationCount + 1,
               frustration: computeFrustration(
                 conversationStateHoisted?.consecutiveFailures ?? 0,
@@ -4240,7 +4267,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const base = readTeachingHistory(fresh.teachingHistory, historyConceptId)
               return {
                 teachingHistory: updateTeachingHistory(base, {
-                  strategiesUsed: [...new Set([...base.strategiesUsed, capturedStrategy])],
+                  // Same strategy-scoping as the primary fold above: a turn
+                  // with no selected strategy must not invent one when
+                  // re-folding onto a concurrently-updated base.
+                  strategiesUsed: capturedStrategy !== null
+                    ? [...new Set([...base.strategiesUsed, capturedStrategy])]
+                    : base.strategiesUsed,
                   explanationCount: base.explanationCount + 1,
                   frustration: computeFrustration(
                     conversationStateHoisted?.consecutiveFailures ?? 0,
