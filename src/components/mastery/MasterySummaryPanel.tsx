@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 interface Props {
   variant?: string
@@ -23,6 +24,7 @@ function humanize(s: string) {
 }
 
 export default function MasterySummaryPanel(_props: Props) {
+  const { t } = useLanguage()
   const [data, setData] = useState<MasteryData | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -83,7 +85,7 @@ export default function MasterySummaryPanel(_props: Props) {
       {/* Mastery progress */}
       <div className="space-y-1">
         <div className="flex justify-between text-xs" style={{ color: 'var(--text-secondary)' }}>
-          <span>Avg. Mastery</span>
+          <span>{t('mastery_avg')}</span>
           <span>{data.averageMastery}%</span>
         </div>
         <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--border-subtle)' }}>
@@ -96,7 +98,7 @@ export default function MasterySummaryPanel(_props: Props) {
 
       {/* Confidence */}
       <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-secondary)' }}>
-        <span>Confidence score:</span>
+        <span>{t('mastery_confidence')}</span>
         <span className="font-medium" style={{ color: 'var(--text-primary)' }}>{data.confidenceScore}/100</span>
         <span>· Pace:</span>
         <span className="font-medium" style={{ color: 'var(--text-primary)' }}>{data.learningPace}</span>

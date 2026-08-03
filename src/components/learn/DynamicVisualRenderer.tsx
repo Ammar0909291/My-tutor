@@ -27,6 +27,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Loader2 } from 'lucide-react'
 import { Card, Pill } from '@/components/ui/candy'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 const RENDER_TIMEOUT_MS = 8000
 
@@ -83,6 +84,7 @@ export interface DynamicVisualRendererProps {
 type Status = 'loading' | 'ready' | 'error'
 
 export function DynamicVisualRenderer({ code }: DynamicVisualRendererProps) {
+  const { t } = useLanguage()
   const [status, setStatus] = useState<Status>('loading')
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
@@ -114,7 +116,7 @@ export function DynamicVisualRenderer({ code }: DynamicVisualRendererProps) {
 
   return (
     <Card style={{ padding: 16, position: 'relative' }}>
-      <Pill style={{ position: 'absolute', top: 12, right: 12, fontSize: 11 }}>AI Generated Visual</Pill>
+      <Pill style={{ position: 'absolute', top: 12, right: 12, fontSize: 11 }}>{t('viz_ai_generated')}</Pill>
       {status === 'loading' && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '24px 0', color: 'var(--candy-text-muted, #888)' }}>
           <Loader2 size={18} className="animate-spin" />
@@ -123,7 +125,7 @@ export function DynamicVisualRenderer({ code }: DynamicVisualRendererProps) {
       )}
       <iframe
         ref={iframeRef}
-        title="AI generated visualization"
+        title={t('viz_ai_generated')}
         sandbox="allow-scripts"
         srcDoc={buildSandboxDocument(code)}
         style={{

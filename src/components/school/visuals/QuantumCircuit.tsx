@@ -5,8 +5,10 @@
 // Steps: 1 qubit lines → 2 H gate → 3 CNOT → 4 measurement → 5 result bits.
 
 import anim from './visualAnim.module.css'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 export function QuantumCircuit({ revealStep = Infinity }: { revealStep?: number }) {
+  const { t } = useLanguage()
   const show = (s: number) => revealStep >= s
   const x0 = 50, x1 = 260
   const q0 = 60, q1 = 115
@@ -37,7 +39,7 @@ export function QuantumCircuit({ revealStep = Infinity }: { revealStep?: number 
           <circle cx={xCNOT} cy={q1} r={9} fill="none" stroke="#8B5CF6" strokeWidth={2} />
           <line x1={xCNOT - 9} y1={q1} x2={xCNOT + 9} y2={q1} stroke="#8B5CF6" strokeWidth={2} />
           <line x1={xCNOT} y1={q1 - 9} x2={xCNOT} y2={q1 + 9} stroke="#8B5CF6" strokeWidth={2} />
-          <text x={xCNOT} y={q1 + 26} textAnchor="middle" fontSize={8} fill="#8B5CF6" fontWeight={700}>CNOT (entangle)</text>
+          <text x={xCNOT} y={q1 + 26} textAnchor="middle" fontSize={8} fill="#8B5CF6" fontWeight={700}>{t('viz_cnot')}</text>
         </g>
       )}
       {/* Step 4 — measurement gates */}
