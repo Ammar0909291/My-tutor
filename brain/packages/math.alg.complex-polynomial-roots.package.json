@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.complex-polynomial-roots-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.complex-polynomial-roots",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:235124687a8a5da474ee72b1b9c56a53f015fa573027789cc026ec24fb8dd43d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md": "sha256:d4263881def69eb4fb404fd312b01f2042d4fb4c40dd8c73fd0ceb05e2189041"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.complex-polynomial-roots",
+    "name": "Complex Polynomial Roots",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.fundamental-theorem-algebra",
+      "math.found.complex-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.complex-polynomial-roots-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.complex-polynomial-roots (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md": "sha256:d4263881def69eb4fb404fd312b01f2042d4fb4c40dd8c73fd0ceb05e2189041"
+      },
+      "contentHash": "sha256:c3b8c2e1b3de1cadc4f6f2d3ed6f3f68be56e6c40fe5b41999729d31d438701a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.complex-polynomial-roots.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.complex-polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.complex-polynomial-roots\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.complex-polynomial-roots.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.complex-polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.complex-polynomial-roots\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.complex-polynomial-roots.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.complex-polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.complex-polynomial-roots\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.complex-polynomial-roots.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.complex-polynomial-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.complex-polynomial-roots\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.complex-polynomial-roots/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Learning Objectives",
+      "content": "- LO1: Given one non-real complex root $a+bi$ of a polynomial with REAL coefficients, immediately state its conjugate $a-bi$ is also a root, without further computation.\n- LO2: Use the Fundamental Theorem of Algebra together with the conjugate-pair property to determine the FULL set of roots of a real-coefficient polynomial, given partial root information.\n- LO3: Factor a real-coefficient polynomial into linear factors (for real roots) and IRREDUCIBLE QUADRATIC factors (one per complex-conjugate root pair) over the real numbers.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "CONJUGATE-PAIR-INFERENCE-TREATED-AS-NEEDING-VERIFICATION",
+      "content": "| MC-1 | CONJUGATE-PAIR-INFERENCE-TREATED-AS-NEEDING-VERIFICATION | Attempting to separately verify that a root's complex conjugate is also a root, rather than recognizing this as a guaranteed consequence of real coefficients | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "COMPLEX-CONJUGATE-PAIR-FACTORED-AS-SEPARATE-COMPLEX-LINEAR-FACTORS-OVER-REALS",
+      "content": "| MC-2 | COMPLEX-CONJUGATE-PAIR-FACTORED-AS-SEPARATE-COMPLEX-LINEAR-FACTORS-OVER-REALS | Writing individual complex linear factors when a \"factor over the reals\" is required, rather than combining the conjugate pair into one real irreducible quadratic | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "ROOT-COUNT-MISMATCHED-AGAINST-POLYNOMIAL-DEGREE",
+      "content": "| MC-3 | ROOT-COUNT-MISMATCHED-AGAINST-POLYNOMIAL-DEGREE | Failing to account for ALL roots implied by the polynomial's degree (via FTA), missing a root that the conjugate-pair property would otherwise supply | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Conjugate Pairs Are Automatic, No Verification Needed (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Conjugate Pairs Are Automatic, No Verification Needed (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Combine FTA and Conjugate Pairs to Find All Roots (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Combine FTA and Conjugate Pairs to Find All Roots (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Complex Conjugate Pairs Combine into ONE Real Quadratic Factor (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Complex Conjugate Pairs Combine into ONE Real Quadratic Factor (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given that a real-coefficient polynomial has root $3-5i$, state another root it must have, and explain why no further verification is needed.\n  2. A degree-5 real-coefficient polynomial has roots $1,2,4+i$. Determine the remaining roots, using FTA and the conjugate-pair property.\n  3. Multiply $(x-(2+i))(x-(2-i))$ to find the irreducible quadratic factor corresponding to this conjugate pair.\n  4. Factor a real-coefficient polynomial with roots $-1, 3+2i, 3-2i$ over the reals.\n- **P76 (Transfer Probe, mode = independence)**: \"A control-systems engineer analyzes a real-coefficient characteristic polynomial (degree 4) for a physical system and finds two roots: $-2$ (real) and $1+3i$ (complex). (a) Determine the two remaining roots using the theorems from this lesson, explaining your reasoning at each step. (b) Factor the full degree-4 polynomial over the real numbers, and explain why the engineer's system analysis (which typically requires real-coefficient factors to interpret physical behavior) can proceed even though two of the four roots are individually non-real.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.fundamental-theorem-algebra` (a degree-$n$ polynomial has exactly $n$ roots counting multiplicity, over the complex numbers) and `math.found.complex-numbers` (complex conjugates and their properties).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.complex-polynomial-roots/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.complex-polynomial-roots",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.fundamental-theorem-algebra`, `math.found.complex-numbers`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.rational-root-theorem` (a sibling root-finding technique addressing a different subset of possible roots).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.complex-polynomial-roots.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
