@@ -22,8 +22,25 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = localStorage.getItem('mytutor_lang') as Lang | null
-    if (stored && ['ru', 'en', 'hi'].includes(stored)) setLangState(stored)
-    setMounted(true)
+    if (stored && ['ru', 'en', 'hi'].includes(stored)) {
+      setLangState(stored)
+      setMounted(true)
+    } else {
+      // No localStorage preference — fetch the server-stored teachingLanguage so
+      // users on a new device (or after clearing storage) immediately see their
+      // chosen language instead of the English default.
+      fetch('/api/settings')
+        .then((r) => r.json())
+        .then((data) => {
+          const serverLang = data?.teachingLanguage as Lang | undefined
+          if (serverLang && ['ru', 'en', 'hi'].includes(serverLang)) {
+            setLangState(serverLang)
+            localStorage.setItem('mytutor_lang', serverLang)
+          }
+        })
+        .catch(() => {})
+        .finally(() => { setMounted(true) })
+    }
   }, [])
 
   const effectiveLang = mounted ? lang : 'en'

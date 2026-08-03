@@ -731,6 +731,7 @@ function QuickActionsAndCheck({
   sendMessage: (sid: string, text: string, showInUI?: boolean, voiceSignal?: VoiceTimingSignal) => Promise<void>
   setActiveTab: (tab: ActiveTab) => void
 }) {
+  const { t } = useLanguage()
   const ICONS = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }
   const actions = QUICK_ACTIONS[teachingLanguage] ?? QUICK_ACTIONS.en
 
@@ -745,7 +746,7 @@ function QuickActionsAndCheck({
       {/* What would you like to do? */}
       <div>
         <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>
-          {teachingLanguage === 'ru' ? 'Что бы вы хотели сделать?' : 'What would you like to do?'}
+          {t('lesson_what_to_do')}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {actions.map((a) => {
@@ -794,6 +795,7 @@ function FloatingQuickActions(props: {
   sendMessage: (sid: string, text: string, showInUI?: boolean, voiceSignal?: VoiceTimingSignal) => Promise<void>
   setActiveTab: (tab: ActiveTab) => void
 }) {
+  const { t } = useLanguage()
   return (
     // Root cause of the panel never actually expanding on hover: both children
     // below are `position: absolute`, taken out of normal flow entirely — a
@@ -853,7 +855,7 @@ function FloatingQuickActions(props: {
           too, not inline style values. */}
       <div
         role="region"
-        aria-label={props.teachingLanguage === 'ru' ? 'Быстрые действия' : 'Quick actions'}
+        aria-label={t('lesson_quick_actions')}
         style={{
           overflow: 'hidden',
           maxHeight: 340, background: 'var(--bg-surface)',
@@ -1960,11 +1962,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           : m)
         : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: false, provider: data.provider }])
     } catch (err) {
-      const recoveryText = teachingLanguage === 'ru'
-        ? 'Ой, связь прервалась. Попробуй ещё раз.'
-        : teachingLanguage === 'hi'
-        ? 'Connection ruk gaya. Dobara try karo.'
-        : 'Sorry, something went wrong loading the lesson. Please try again.'
+      const recoveryText = t('lesson_load_error')
       setMessages((p) => p.some((m) => m.id === aid)
         ? p.map((m) => m.id === aid ? { ...m, content: recoveryText, streaming: false } : m)
         : [...p, { id: aid, role: 'assistant' as const, content: recoveryText, ts: Date.now(), streaming: false }])
@@ -2554,15 +2552,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             let errBody: { error?: string } = {}
             try { errBody = JSON.parse(rawBody) } catch { /* non-JSON */ }
             console.error('STT error:', errBody.error)
-            alert(teachingLanguage === 'ru'
-              ? 'Не удалось распознать речь. Попробуйте ещё раз.'
-              : 'Speech recognition failed. Please try again.')
+            alert(t('lesson_stt_error'))
           }
         } catch (err) {
           console.error('STT request error:', err)
-          alert(teachingLanguage === 'ru'
-            ? 'Ошибка соединения при распознавании речи.'
-            : 'Connection error during speech recognition.')
+          alert(t('lesson_stt_connection_error'))
         }
         setMicState('idle')
         textareaRef.current?.focus()
@@ -2574,17 +2568,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       console.error('Microphone access error:', err.name, err.message)
       setMicState('idle')
       if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        alert(teachingLanguage === 'ru'
-          ? 'Доступ к микрофону запрещён. Разрешите доступ в настройках браузера.'
-          : 'Microphone permission denied. Please allow microphone access in browser settings.')
+        alert(t('lesson_mic_denied'))
       } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
-        alert(teachingLanguage === 'ru'
-          ? 'Микрофон не найден. Подключите микрофон и попробуйте снова.'
-          : 'No microphone found. Please connect a microphone and try again.')
+        alert(t('lesson_mic_not_found'))
       } else {
-        alert(teachingLanguage === 'ru'
-          ? 'Не удалось получить доступ к микрофону.'
-          : 'Could not access the microphone.')
+        alert(t('lesson_mic_error'))
       }
     }
   }
@@ -2796,10 +2784,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
   }
 
   // ── Voice buttons (short labels) ──────────────────────────────────────────
-  const voiceShortLabel = { male: 'M', female: 'F', warm: 'W' }
-  if (mounted && teachingLanguage === 'ru') {
-    voiceShortLabel.male = 'М'; voiceShortLabel.female = 'Ж'; voiceShortLabel.warm = 'Т'
-  }
+  const voiceShortLabel = { male: t('lesson_voice_male'), female: t('lesson_voice_female'), warm: t('lesson_voice_warm') }
 
   // ── Layout ────────────────────────────────────────────────────────────────
   // ── Left icon nav rail (Learn window redesign) ──────────────────────────
@@ -2807,12 +2792,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
   const goalDoneMin = Math.min(goalTargetMin, todayBaselineMinutes + Math.floor(elapsed / 60))
   const goalPct = Math.round((goalDoneMin / goalTargetMin) * 100)
   const NAV_ITEMS: { key: string; label: string; icon: React.ReactNode; href?: string; onClick?: () => void; active?: boolean }[] = [
-    { key: 'learn', label: teachingLanguage === 'ru' ? 'Учёба' : 'Learn', icon: <BookOpen size={20} />, href: '/learn', active: true },
-    { key: 'practice', label: teachingLanguage === 'ru' ? 'Практика' : 'Practice', icon: <Dumbbell size={20} />, onClick: () => currentLessonData?.topicSlug && setPracticeOpen((v) => !v) },
-    { key: 'progress', label: teachingLanguage === 'ru' ? 'Прогресс' : 'Progress', icon: <BarChart3 size={20} />, href: '/progress' },
-    { key: 'library', label: teachingLanguage === 'ru' ? 'Библиотека' : 'Library', icon: <LibraryIcon size={20} />, href: '/library' },
-    { key: 'profile', label: teachingLanguage === 'ru' ? 'Профиль' : 'Profile', icon: <User size={20} />, href: '/settings' },
-    { key: 'settings', label: teachingLanguage === 'ru' ? 'Настройки' : 'Settings', icon: <SettingsIcon size={20} />, href: '/settings' },
+    { key: 'learn', label: t('nav_learn'), icon: <BookOpen size={20} />, href: '/learn', active: true },
+    { key: 'practice', label: t('nav_practice'), icon: <Dumbbell size={20} />, onClick: () => currentLessonData?.topicSlug && setPracticeOpen((v) => !v) },
+    { key: 'progress', label: t('nav_progress'), icon: <BarChart3 size={20} />, href: '/progress' },
+    { key: 'library', label: t('nav_library'), icon: <LibraryIcon size={20} />, href: '/library' },
+    { key: 'profile', label: t('nav_profile'), icon: <User size={20} />, href: '/settings' },
+    { key: 'settings', label: t('nav_settings_label'), icon: <SettingsIcon size={20} />, href: '/settings' },
   ]
 
   return (
@@ -2846,7 +2831,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         {/* Today's Goal ring — real cross-session minutes today (StudySession) + this session's live elapsed time, vs a 60-min target */}
         <div style={{ width: '100%', padding: '10px 6px', textAlign: 'center' }}>
           <p style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--text-dim)', marginBottom: 8 }}>
-            {teachingLanguage === 'ru' ? 'Цель на день' : "Today's Goal"}
+            {t('lesson_today_goal')}
           </p>
           <div style={{ position: 'relative', width: 56, height: 56, margin: '0 auto' }}>
             <svg width={56} height={56} viewBox="0 0 56 56" style={{ transform: 'rotate(-90deg)' }}>
@@ -2861,7 +2846,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           </div>
           <p style={{ fontSize: 9.5, color: 'var(--text-dim)', marginTop: 6 }}>{goalDoneMin} / {goalTargetMin} min</p>
           <Link href="/progress" style={{ fontSize: 9.5, color: UI.indigo, fontWeight: 700, textDecoration: 'none', display: 'inline-block', marginTop: 2 }}>
-            {teachingLanguage === 'ru' ? 'Прогресс →' : 'View Progress →'}
+            {t('lesson_view_progress')}
           </Link>
         </div>
       </nav>
@@ -2875,7 +2860,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             <EagleMascot variant="hero" size={72} className="mx-auto mb-2" />
             <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--coral)', fontFamily: 'var(--font-baloo2)' }}>+10 XP</div>
             <div style={{ fontSize: 13, marginTop: 4, color: 'var(--text-secondary)' }}>
-              {teachingLanguage === 'ru' ? 'Урок завершён!' : 'Lesson complete!'}
+              {t('lesson_complete_excl')}
             </div>
           </Card>
         </div>
@@ -2884,11 +2869,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       {/* Lesson-switch confirmation dialog (P0 UX — UI-owned navigation) */}
       {lessonSwitchDialog && currentLessonData && (() => {
         const { target, isReview, isRestart } = lessonSwitchDialog
-        const isRu = teachingLanguage === 'ru'
-        const isHi = teachingLanguage === 'hi'
-        const title = isRestart
-          ? (isRu ? 'Начать урок заново?' : isHi ? 'Lesson restart karein?' : 'Restart this lesson?')
-          : (isRu ? 'Перейти к другому уроку?' : isHi ? 'Dusre lesson mein jaayein?' : 'Leave current lesson?')
+        const title = isRestart ? t('lesson_dialog_restart_title') : t('lesson_dialog_leave_title')
         return (
           <div
             role="dialog"
@@ -2918,36 +2899,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
               {isReview ? (
                 <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
-                  {isRu
-                    ? `Вы уже завершили этот урок. Хотите повторить «${target.lessonTitle}»?`
-                    : isHi
-                    ? `Aapne yeh lesson pehle se complete kiya hai. Kya aap "${target.lessonTitle}" review karna chahenge?`
-                    : `You have already completed this lesson. Would you like to review "${target.lessonTitle}" again?`}
+                  {t('lesson_dialog_review').replace('{lesson}', target.lessonTitle)}
                 </p>
               ) : isRestart ? (
                 <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
-                  {isRu
-                    ? `Tutor Max начнёт урок «${target.lessonTitle}» заново. Прогресс урока и освоение сохранены.`
-                    : isHi
-                    ? `Tutor Max "${target.lessonTitle}" dobara shuru karega. Aapka progress aur mastery save hai.`
-                    : `Tutor Max will restart "${target.lessonTitle}" from the beginning. Your progress and mastery are saved.`}
+                  {t('lesson_dialog_restart_body').replace('{lesson}', target.lessonTitle)}
                 </p>
               ) : (
                 <>
                   <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 10 }}>
-                    {isRu
-                      ? <><strong style={{ color: 'var(--text-primary)' }}>Сейчас:</strong> {currentLessonData.lessonTitle}<br/><strong style={{ color: 'var(--text-primary)' }}>Перейти к:</strong> {target.lessonTitle}</>
-                      : isHi
-                      ? <><strong style={{ color: 'var(--text-primary)' }}>Abhi:</strong> {currentLessonData.lessonTitle}<br/><strong style={{ color: 'var(--text-primary)' }}>Jaana hai:</strong> {target.lessonTitle}</>
-                      : <><strong style={{ color: 'var(--text-primary)' }}>Currently studying:</strong> {currentLessonData.lessonTitle}<br/><strong style={{ color: 'var(--text-primary)' }}>Switch to:</strong> {target.lessonTitle}</>}
+                    <strong style={{ color: 'var(--text-primary)' }}>{t('lesson_dialog_currently')}</strong> {currentLessonData.lessonTitle}<br/>
+                    <strong style={{ color: 'var(--text-primary)' }}>{t('lesson_dialog_switch_to')}</strong> {target.lessonTitle}
                   </p>
                   <ul style={{ fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.7, paddingLeft: 18, marginBottom: 18 }}>
-                    {(isRu
-                      ? ['ваш текущий прогресс сохранён', 'незавершённое освоение зафиксировано', 'вы можете вернуться в любое время']
-                      : isHi
-                      ? ['aapka current progress save hai', 'adhura mastery record mein hai', 'aap kabhi bhi resume kar sakte hain']
-                      : ['your current progress is saved', 'unfinished mastery remains recorded', 'you can resume anytime']
-                    ).map((line) => <li key={line}>{line}</li>)}
+                    {[t('lesson_dialog_progress_saved'), t('lesson_dialog_mastery_saved'), t('lesson_dialog_can_resume')]
+                      .map((line) => <li key={line}>{line}</li>)}
                   </ul>
                 </>
               )}
@@ -2961,7 +2927,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     fontSize: 13, fontWeight: 500, cursor: 'pointer',
                   }}
                 >
-                  {isRu ? 'Отмена' : isHi ? 'Cancel' : 'Cancel'}
+                  {t('lesson_dialog_cancel')}
                 </button>
                 <button
                   onClick={confirmLessonSwitch}
@@ -2971,7 +2937,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     fontSize: 13, fontWeight: 600, cursor: 'pointer',
                   }}
                 >
-                  {isRu ? 'Продолжить' : isHi ? 'Continue' : 'Continue'}
+                  {t('lesson_dialog_confirm')}
                 </button>
               </div>
             </div>
@@ -3011,7 +2977,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           <div className="hidden sm:block" style={{ lineHeight: 1.15 }}>
             <p style={{ fontSize: 13.5, fontWeight: 800, color: 'var(--text-primary)' }}>My Tutor</p>
             <p style={{ fontSize: 9.5, color: 'var(--text-dim)', fontWeight: 500 }}>
-              {teachingLanguage === 'ru' ? 'Личный ИИ-репетитор' : 'Personal AI Tutor'}
+              {t('lesson_personal_tutor')}
             </p>
           </div>
         </Link>
@@ -3211,7 +3177,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               for this exact avatar (src/components/dashboard/v2/NavHeader.tsx),
               rather than inventing a second, inconsistent account surface. */}
           <Link href="/settings" title={displayName ?? 'Student'}
-            aria-label={teachingLanguage === 'ru' ? 'Настройки профиля' : 'Profile settings'}
+            aria-label={t('lesson_profile_settings')}
             style={{
               width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
               background: UI.indigo, color: '#fff', fontSize: 12.5, fontWeight: 800,
@@ -3227,7 +3193,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       <div className="flex md:hidden shrink-0" style={{ background: 'var(--bg-surface)', padding: 8, gap: 6, boxShadow: '0 4px 0 var(--border-subtle)' }}>
         {(['curriculum', 'code', 'chat'] as ActiveTab[]).map((tab, i) => {
           const icons = ['📚', '💻', '💬']
-          const labels = teachingLanguage === 'ru' ? ['Урок', 'Код', 'Чат'] : ['Lesson', 'Code', 'Chat']
+          const labels = [t('lesson_tab_lesson'), t('lesson_tab_code'), t('lesson_tab_chat')]
           const isActive = activeTab === tab
           return (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{
@@ -3270,11 +3236,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {/* Header */}
             <PanelHeader>
               <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>
-                {teachingLanguage === 'ru' ? 'Программа обучения' : 'Learning Roadmap'}
+                {t('lesson_roadmap')}
               </span>
               {totalLessons > 0 && currentLessonData && (
                 <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-dim)' }}>
-                  {currentLessonData.order} {teachingLanguage === 'ru' ? 'из' : 'of'} {totalLessons}
+                  {currentLessonData.order} {t('lesson_of')} {totalLessons}
                 </span>
               )}
               {/* Maximize/restore — desktop only */}
@@ -3294,7 +3260,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   <div style={{ height: '100%', width: `${xpProgress}%`, background: UI.indigo, borderRadius: 3, transition: 'width 600ms ease' }} />
                 </div>
                 <p style={{ fontSize: 10.5, color: 'var(--text-dim)', fontWeight: 700, marginTop: 5 }}>
-                  {xpProgress}% {teachingLanguage === 'ru' ? 'завершено' : 'Complete'}
+                  {xpProgress}% {t('lesson_complete_pct')}
                 </p>
               </div>
             )}
@@ -3343,7 +3309,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {currentLessonData?.lessonGoal && (
               <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)', background: `${UI.indigo}0c` }}>
                 <p style={{ fontSize: 10, color: UI.indigo, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
-                  🎯 {teachingLanguage === 'ru' ? 'Цель' : 'Goal'}
+                  🎯 {t('lesson_goal_label')}
                 </p>
                 <p style={{ fontSize: 11, color: 'var(--text-primary)', marginTop: 3, lineHeight: 1.4 }}>{currentLessonData.lessonGoal}</p>
               </div>
@@ -3360,7 +3326,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 {curriculumProgress.completedLessons.includes(currentLessonData.order) ? (
                   <button
                     onClick={() => handleLessonRestart(currentLessonData.order, (currentLessonData as { topicSlug?: string }).topicSlug)}
-                    title={teachingLanguage === 'ru' ? 'Нажмите, чтобы начать урок заново' : 'Click to restart this lesson'}
+                    title={t('lesson_restart_title')}
                     style={{
                       width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                       padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, cursor: 'pointer',
@@ -3368,16 +3334,14 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       border: '1px solid rgba(63,185,80,0.3)',
                     }}>
                     <span>{t('lesson_completed_btn')}</span>
-                    <span style={{ opacity: 0.7, fontSize: 10 }}>↺ {teachingLanguage === 'ru' ? 'Начать заново' : 'Restart'}</span>
+                    <span style={{ opacity: 0.7, fontSize: 10 }}>↺ {t('lesson_restart_btn')}</span>
                   </button>
                 ) : skipConfirm ? (
                   /* Mastery gate (Bug 4): completion without verified mastery is
                      an explicit choice, never a silent skip. Default: Continue. */
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     <p style={{ fontSize: 11, color: 'var(--text-primary)', lineHeight: 1.5 }}>
-                      {teachingLanguage === 'ru'
-                        ? 'Вы ещё не подтвердили усвоение этого урока.'
-                        : "You haven't mastered this lesson yet."}
+                      {t('lesson_not_mastered_gate')}
                     </p>
                     <button
                       onClick={() => setSkipConfirm(false)}
@@ -3386,7 +3350,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                         background: UI.indigo, color: '#fff', border: 'none',
                       }}>
-                      {teachingLanguage === 'ru' ? '📚 Продолжить обучение' : '📚 Continue Learning'}
+                      📚 {t('lesson_continue_learning')}
                     </button>
                     <button
                       onClick={() => { setSkipConfirm(false); handleSkipAnyway(currentLessonData.order, currentLessonData) }}
@@ -3394,7 +3358,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         width: '100%', padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
                         background: 'transparent', color: 'var(--text-dim)', border: '1px solid var(--border-subtle)',
                       }}>
-                      {teachingLanguage === 'ru' ? 'Пропустить всё равно' : 'Skip Anyway'}
+                      {t('lesson_skip_anyway')}
                     </button>
                   </div>
                 ) : (
@@ -3432,8 +3396,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {curriculumUnits.length === 0 ? (
                 <div style={{ padding: 16, fontSize: 12, color: 'var(--text-dim)', textAlign: 'center' }}>
                   {!curriculumLoaded
-                    ? (teachingLanguage === 'ru' ? 'Загрузка программы...' : 'Loading curriculum...')
-                    : (teachingLanguage === 'ru' ? 'Для этого предмета пока нет структурированной программы.' : 'No structured lesson plan for this subject yet.')}
+                    ? t('lesson_loading_curriculum')
+                    : t('lesson_no_curriculum')}
                 </div>
               ) : curriculumUnits.map((unit) => {
                 const unitComplete = unit.totalLessons > 0 && unit.completedCount === unit.totalLessons
@@ -3570,7 +3534,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                         fontSize: 9, fontWeight: 700, padding: '1px 6px', borderRadius: 10,
                                         background: `${UI.indigo}18`, color: UI.indigo,
                                       }}>
-                                        {teachingLanguage === 'ru' ? 'Текущий' : 'Current'}
+                                        {t('lesson_current_label')}
                                       </span>
                                       {sessionId && !assessmentLoading && (
                                         <button
@@ -3714,7 +3678,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               <div style={{ padding: '10px 12px', borderTop: '1px solid var(--border-subtle)', flexShrink: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
                   <span style={{ fontSize: 10, color: 'var(--border-emphasis)' }}>
-                    {teachingLanguage === 'ru' ? 'Завершено' : 'Complete'}
+                    {t('lesson_complete_label')}
                   </span>
                   <span style={{ fontSize: 10, color: 'var(--text-secondary)' }}>
                     {curriculumProgress.completedLessons.length} / {totalLessons}
@@ -3753,10 +3717,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 }}><Network size={15} /></span>
                 <span style={{ flex: 1, minWidth: 0 }}>
                   <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
-                    {teachingLanguage === 'ru' ? 'Карта знаний' : 'Knowledge Map'}
+                    {t('lesson_knowledge_map')}
                   </p>
                   <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
-                    {teachingLanguage === 'ru' ? 'Как эта тема связана' : 'See how this topic connects'}
+                    {t('lesson_knowledge_map_sub')}
                   </p>
                 </span>
                 <ChevronDown size={13} style={{ color: 'var(--text-dim)', transform: knowledgeMapOpen ? 'rotate(180deg)' : 'rotate(-90deg)', transition: 'transform 150ms', flexShrink: 0 }} />
@@ -3773,10 +3737,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 }}><ListChecks size={15} /></span>
                 <span style={{ flex: 1, minWidth: 0 }}>
                   <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
-                    {teachingLanguage === 'ru' ? 'Обзор раздела' : 'Unit Overview'}
+                    {t('lesson_unit_overview')}
                   </p>
                   <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
-                    {teachingLanguage === 'ru' ? 'Все темы этого раздела' : 'See all concepts in this unit'}
+                    {t('lesson_unit_overview_sub')}
                   </p>
                 </span>
                 <ChevronDown size={13} style={{ color: 'var(--text-dim)', transform: 'rotate(-90deg)', flexShrink: 0 }} />
@@ -3825,7 +3789,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 }}
                 onMouseEnter={(e) => { if (!copied) { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--coral)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--coral)' } }}
                 onMouseLeave={(e) => { if (!copied) { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border-default)'; (e.currentTarget as HTMLButtonElement).style.color = 'var(--text-secondary)' } }}>
-                {copied ? <><Check size={10} strokeWidth={3} /> ✓ {teachingLanguage === 'ru' ? 'Скопировано!' : 'Copied!'}</> : <><Copy size={10} /> {teachingLanguage === 'ru' ? 'Копировать' : 'Copy'}</>}
+                {copied ? <><Check size={10} strokeWidth={3} /> ✓ {t('lesson_copied')}</> : <><Copy size={10} /> {t('lesson_copy')}</>}
               </button>
               {/* Maximize/restore — desktop only */}
               <button
@@ -3867,9 +3831,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 {isStreaming
                   ? <span style={{ color: 'var(--coral)', display: 'flex', alignItems: 'center', gap: 4 }}>
                       <span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', border: '1.5px solid var(--coral)', borderTopColor: 'transparent', animation: 'spin 0.8s linear infinite' }} />
-                      {teachingLanguage === 'ru' ? 'Репетитор пишет...' : 'Tutor is writing...'}
+                      {t('lesson_tutor_writing')}
                     </span>
-                  : <span style={{ color: 'var(--green)' }}>● {teachingLanguage === 'ru' ? 'Готово' : 'Ready'}</span>
+                  : <span style={{ color: 'var(--green)' }}>● {t('lesson_ready')}</span>
                 }
               </span>
               {isNotebook ? (
@@ -3897,7 +3861,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.color = 'var(--border-emphasis)' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)' }}>
                 {terminalOpen ? <ChevronDown size={11} /> : <ChevronUp size={11} />}
-                {teachingLanguage === 'ru' ? '▶ Терминал' : '▶ Terminal'}
+                ▶ {t('lesson_terminal')}
               </span>
               {terminalOpen && (
                 <button onClick={(e) => { e.stopPropagation(); handleRunCode() }}
@@ -3908,8 +3872,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     display: 'flex', alignItems: 'center', gap: 4, opacity: isRunning ? 0.5 : 1,
                   }}>
                   {isRunning
-                    ? <><Loader2 size={10} className="animate-spin" />{teachingLanguage === 'ru' ? 'Запуск...' : 'Running...'}</>
-                    : <><Play size={10} fill="currentColor" strokeWidth={0} />{teachingLanguage === 'ru' ? 'Запустить' : 'Run'}</>}
+                    ? <><Loader2 size={10} className="animate-spin" />{t('lesson_running')}</>
+                    : <><Play size={10} fill="currentColor" strokeWidth={0} />{t('lesson_run')}</>}
                 </button>
               )}
             </div>}
@@ -3922,7 +3886,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               }}>
                 <div style={{ flex: 1, overflowY: 'auto', padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 12, lineHeight: 1.6 }}>
                   {isRunning
-                    ? <span style={{ color: 'var(--yellow)' }}>{`> ${teachingLanguage === 'ru' ? 'Выполнение...' : 'Running...'}`}</span>
+                    ? <span style={{ color: 'var(--yellow)' }}>{`> ${t('lesson_executing')}`}</span>
                     : terminalOutput
                     ? <>
                         <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: terminalIsError ? 'var(--red)' : 'var(--green)', margin: 0 }}>{terminalOutput}</pre>
@@ -3972,11 +3936,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {/* Info */}
               <div style={{ flex: 1 }}>
                 <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-                  {teachingLanguage === 'ru' ? 'Репетитор Макс' : 'Tutor Max'}
+                  {t('lesson_tutor_max')}
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 2 }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', animation: 'blink 2s infinite', display: 'inline-block' }} />
-                  <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{teachingLanguage === 'ru' ? 'онлайн' : 'online'}</span>
+                  <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{t('lesson_online')}</span>
                 </div>
               </div>
 
@@ -4003,7 +3967,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         fontSize: 11, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.indigo}44`,
                         background: `${UI.indigo}14`, color: UI.indigo,
                       }}>
-                      <ThumbsUp size={12} /> {teachingLanguage === 'ru' ? 'Понял' : 'I get it'}
+                      <ThumbsUp size={12} /> {t('lesson_got_it')}
                     </button>
                     <button
                       onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true)}
@@ -4013,7 +3977,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         fontSize: 11, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.red}44`,
                         background: UI.redBg, color: UI.red,
                       }}>
-                      <ThumbsDown size={12} /> {teachingLanguage === 'ru' ? 'Не понял' : 'Not clear'}
+                      <ThumbsDown size={12} /> {t('lesson_not_clear')}
                     </button>
                   </div>
                 )
@@ -4023,8 +3987,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {currentLessonData && (
                 <button
                   onClick={() => toggleBookmark(currentLessonData.order)}
-                  title={teachingLanguage === 'ru' ? 'Сохранить урок' : 'Bookmark this lesson'}
-                  aria-label={teachingLanguage === 'ru' ? 'Сохранить урок' : 'Bookmark this lesson'}
+                  title={t('lesson_bookmark')}
+                  aria-label={t('lesson_bookmark')}
                   aria-pressed={bookmarkedLessons.has(currentLessonData.order)}
                   style={{
                     width: 30, height: 30, borderRadius: 8, flexShrink: 0, border: '1px solid var(--border-default)',
@@ -4039,8 +4003,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {/* More menu — houses Practice / Insights / Maximize, decluttering the input row */}
               <div style={{ position: 'relative', flexShrink: 0 }}>
                 <button onClick={() => setMoreMenuOpen((v) => !v)}
-                  title={teachingLanguage === 'ru' ? 'Ещё' : 'More options'}
-                  aria-label={teachingLanguage === 'ru' ? 'Ещё' : 'More options'}
+                  title={t('lesson_more_options')}
+                  aria-label={t('lesson_more_options')}
                   aria-haspopup="menu"
                   aria-expanded={moreMenuOpen}
                   style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', color: 'var(--text-dim)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -4057,13 +4021,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       {currentLessonData?.topicSlug && (
                         <button onClick={() => { setInsightsOpen(false); setPracticeOpen((v) => !v); setMoreMenuOpen(false) }}
                           style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                          ✏️ {teachingLanguage === 'ru' ? 'Практика' : 'Practice'}
+                          ✏️ {t('nav_practice')}
                         </button>
                       )}
                       {currentLessonData?.topicSlug && (
                         <button onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v); setMoreMenuOpen(false) }}
                           style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                          📊 {teachingLanguage === 'ru' ? 'Аналитика' : 'Practice insights'}
+                          📊 {t('lesson_insights_btn')}
                         </button>
                       )}
                       <button
@@ -4396,7 +4360,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     {!isUser && !msg.streaming && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                         <EagleMascot variant="logo" size={20} />
-                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--border-emphasis)' }}>{teachingLanguage === 'ru' ? 'Репетитор Макс' : 'Tutor Max'}</span>
+                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--border-emphasis)' }}>{t('lesson_tutor_max')}</span>
                         {/* Provider badge — every real provider now gets a
                             visible, correctly-labeled indicator. See the API
                             response in src/app/api/learn/chat/route.ts:
@@ -4509,9 +4473,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           practice={msg.inlinePractice}
                           onAnswered={(correct) => {
                             if (!sessionId) return
-                            const text = correct
-                              ? (teachingLanguage === 'ru' ? 'Правильно.' : teachingLanguage === 'hi' ? 'Sahi jawab diya.' : 'Got it right.')
-                              : (teachingLanguage === 'ru' ? 'Неправильно.' : teachingLanguage === 'hi' ? 'Galat jawab diya.' : 'Got that wrong.')
+                            const text = correct ? t('lesson_got_right') : t('lesson_got_wrong')
                             sendMessage(sessionId, text, false)
                           }}
                         />
@@ -4547,7 +4509,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {isStreaming && messages.at(-1)?.streaming && !messages.at(-1)?.content && (
                 <Pill style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--text-secondary)', background: 'var(--bg-elevated)', padding: '6px 12px' }}>
                   <TypingDots />
-                  <span>{teachingLanguage === 'ru' ? 'Думает...' : 'Thinking...'}</span>
+                  <span>{t('lesson_thinking_dots')}</span>
                 </Pill>
               )}
 
@@ -4561,9 +4523,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   display: 'flex', flexDirection: 'column', gap: 8,
                 }}>
                   <p style={{ fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.5 }}>
-                    {teachingLanguage === 'ru'
-                      ? 'Вы ещё не подтвердили усвоение этого урока. Что дальше?'
-                      : "You haven't mastered this lesson yet. What next?"}
+                    {t('lesson_not_mastered_next')}
                   </p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                     <button
@@ -4576,7 +4536,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         padding: '7px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
                         background: UI.indigo, color: '#fff', border: 'none',
                       }}>
-                      {teachingLanguage === 'ru' ? '📚 Продолжить обучение' : '📚 Continue Learning'}
+                      📚 {t('lesson_continue_learning')}
                     </button>
                     <button
                       onClick={() => {
@@ -4587,7 +4547,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         padding: '7px 14px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
                         background: 'transparent', color: 'var(--text-dim)', border: '1px solid var(--border-subtle)',
                       }}>
-                      {teachingLanguage === 'ru' ? 'Пропустить всё равно' : 'Skip Anyway'}
+                      {t('lesson_skip_anyway')}
                     </button>
                   </div>
                 </div>
@@ -4746,7 +4706,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={selectedImage.preview} alt="preview" style={{ width: 36, height: 36, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border-subtle)' }} />
-                  <span style={{ fontSize: 11, color: UI.indigo, flex: 1 }}>📸 {teachingLanguage === 'ru' ? 'Изображение выбрано' : 'Image selected'}</span>
+                  <span style={{ fontSize: 11, color: UI.indigo, flex: 1 }}>📸 {t('lesson_image_selected')}</span>
                   <button onClick={() => setSelectedImage(null)} style={{ color: 'var(--border-emphasis)', background: 'none', border: 'none', cursor: 'pointer' }}><X size={13} /></button>
                 </div>
               )}
@@ -4772,8 +4732,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 }}>
                   <input ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt" className="hidden" onChange={handleFileSelect} />
                   <button onClick={() => fileInputRef.current?.click()} disabled={isStreaming || !sessionId}
-                    title={teachingLanguage === 'ru' ? 'Прикрепить файл' : 'Attach file'}
-                    aria-label={teachingLanguage === 'ru' ? 'Прикрепить файл' : 'Attach file'}
+                    title={t('lesson_attach_file')}
+                    aria-label={t('lesson_attach_file')}
                     style={{
                       width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', border: 'none',
                       background: attachedFile ? UI.indigo : 'transparent',
@@ -4785,8 +4745,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
                   <input ref={imageInputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleImageSelect} />
                   <button onClick={() => imageInputRef.current?.click()} disabled={isStreaming || !sessionId}
-                    title={teachingLanguage === 'ru' ? 'Фото' : 'Photo'}
-                    aria-label={teachingLanguage === 'ru' ? 'Фото' : 'Photo'}
+                    title={t('lesson_photo')}
+                    aria-label={t('lesson_photo')}
                     style={{
                       width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', fontSize: 14, border: 'none',
                       background: selectedImage ? UI.indigo : 'transparent',
@@ -4815,8 +4775,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   {micSupported && (
                     <button onClick={handleMicClick} disabled={isStreaming || !sessionId || micState === 'processing'}
                       className={micState === 'recording' ? 'mic-rec' : ''}
-                      title={micState === 'recording' ? (teachingLanguage === 'ru' ? 'Остановить запись' : 'Stop recording') : (teachingLanguage === 'ru' ? 'Голосовой ввод' : 'Voice input')}
-                      aria-label={micState === 'recording' ? (teachingLanguage === 'ru' ? 'Остановить запись' : 'Stop recording') : (teachingLanguage === 'ru' ? 'Голосовой ввод' : 'Voice input')}
+                      title={micState === 'recording' ? t('lesson_stop_recording') : t('lesson_voice_input')}
+                      aria-label={micState === 'recording' ? t('lesson_stop_recording') : t('lesson_voice_input')}
                       style={{
                         width: 28, height: 28, borderRadius: '50%', flexShrink: 0, border: 'none',
                         cursor: micState === 'processing' ? 'not-allowed' : 'pointer',
@@ -4835,8 +4795,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 {/* Send — separate circular indigo button, matching the mockup */}
                 <button onClick={handleSend}
                   disabled={(!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId}
-                  title={teachingLanguage === 'ru' ? 'Отправить' : 'Send'}
-                  aria-label={teachingLanguage === 'ru' ? 'Отправить' : 'Send'}
+                  title={t('lesson_send')}
+                  aria-label={t('lesson_send')}
                   style={{
                     width: 40, height: 40, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none',
                     background: UI.indigo, color: '#fff',
@@ -4850,7 +4810,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {/* Disclaimer + current topic breadcrumb — matches mockup's footer row */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: 8 }}>
                 <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
-                  ⓘ {teachingLanguage === 'ru' ? 'ИИ может ошибаться. Проверяйте важное.' : 'AI can make mistakes. Check important info.'}
+                  ⓘ {t('lesson_ai_disclaimer')}
                 </p>
                 {currentUnit && (
                   <span style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 600, whiteSpace: 'nowrap' }}>

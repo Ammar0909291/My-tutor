@@ -157,7 +157,7 @@ function LoginForm() {
           <div className="flex items-center gap-3 mb-6">
             <EagleMascot variant="hero" size={56} />
             <div>
-              <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>Welcome back</h1>
+              <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>{t('login_title')}</h1>
               <p style={{ fontSize: 13, color: 'var(--candy-ink-soft)', margin: 0 }}>{t('login_sub')}</p>
             </div>
           </div>

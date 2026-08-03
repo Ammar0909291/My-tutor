@@ -4,6 +4,7 @@ import {
   computeLessonLockState,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
 } from '@/lib/curriculum/lessonNavigation'
+import { useLanguage } from '@/components/ui/LanguageToggle'
 
 interface LessonNavigationPanelProps {
   previousLesson: CurriculumLesson | null
@@ -24,19 +25,24 @@ const INDIGO = '#6C5CE7'
 const GREEN = '#22C55E'
 const AMBER = '#F59E0B'
 
+type BadgeLabels = {
+  mastered: string; inRevision: string; completed: string
+  inProgress: string; locked: string; notStarted: string
+}
+
 function statusBadge(lesson: CurriculumLesson | null, ctx: {
   progress: CurriculumProgress
   topicProgressMap: Record<string, TopicProgressEntry>
   availableTopicSlugs: string[]
-}): { icon: string; color: string; label: string } | null {
+}, labels: BadgeLabels): { icon: string; color: string; label: string } | null {
   if (!lesson) return null
   const state = computeLessonLockState(lesson, ctx)
-  if (state.isMastered) return { icon: '⭐', color: GREEN, label: 'Mastered' }
-  if (state.isRevision) return { icon: '🔁', color: '#79C0FF', label: 'In revision' }
-  if (state.isCompleted) return { icon: '✅', color: GREEN, label: 'Completed' }
-  if (state.isCurrent) return { icon: '●', color: INDIGO, label: 'In progress' }
-  if (state.isLocked) return { icon: '🔒', color: 'var(--text-dim)', label: 'Locked' }
-  return { icon: '○', color: 'var(--text-dim)', label: 'Not started' }
+  if (state.isMastered) return { icon: '⭐', color: GREEN, label: labels.mastered }
+  if (state.isRevision) return { icon: '🔁', color: '#79C0FF', label: labels.inRevision }
+  if (state.isCompleted) return { icon: '✅', color: GREEN, label: labels.completed }
+  if (state.isCurrent) return { icon: '●', color: INDIGO, label: labels.inProgress }
+  if (state.isLocked) return { icon: '🔒', color: 'var(--text-dim)', label: labels.locked }
+  return { icon: '○', color: 'var(--text-dim)', label: labels.notStarted }
 }
 
 /**
@@ -49,15 +55,22 @@ function statusBadge(lesson: CurriculumLesson | null, ctx: {
  */
 export function LessonNavigationPanel({
   previousLesson, currentLesson, nextLesson, totalLessons,
-  progress, topicProgressMap, availableTopicSlugs, teachingLanguage,
+  progress, topicProgressMap, availableTopicSlugs,
   disabled, onPrevious, onCurrent, onNext,
 }: LessonNavigationPanelProps) {
+  const { t } = useLanguage()
   if (!currentLesson) return null
-  const isRu = teachingLanguage === 'ru'
-  const isHi = teachingLanguage === 'hi'
   const ctx = { progress, topicProgressMap, availableTopicSlugs }
+  const badgeLabels: BadgeLabels = {
+    mastered: t('status_mastered'),
+    inRevision: t('status_in_revision'),
+    completed: t('module_status_completed'),
+    inProgress: t('module_status_in_progress'),
+    locked: t('module_status_locked'),
+    notStarted: t('status_not_started'),
+  }
 
-  const currentBadge = statusBadge(currentLesson, ctx)
+  const currentBadge = statusBadge(currentLesson, ctx, badgeLabels)
   const isCurrentCompleted = progress.completedLessons.includes(currentLesson.order)
   // Free navigation: Next is clickable whenever a next lesson exists, exactly
   // like Previous always is — matches the explicit product decision that a
@@ -67,9 +80,7 @@ export function LessonNavigationPanel({
   const nextEnabled = !disabled && !!nextLesson
   const nextState = nextLesson ? computeLessonLockState(nextLesson, ctx) : null
   const nextLockedReason = nextLesson && nextState?.isLocked
-    ? (isRu ? 'Заблокировано — выполните текущий урок и предпосылки'
-        : isHi ? 'Locked — pehle current lesson aur prerequisites complete karo'
-        : 'Locked — finish the current lesson and its prerequisites first')
+    ? t('nav_locked_reason')
     : undefined
 
   const slotStyle = (accent?: string): React.CSSProperties => ({
@@ -95,7 +106,7 @@ export function LessonNavigationPanel({
   return (
     <div
       role="navigation"
-      aria-label={isRu ? 'Навигация по урокам' : isHi ? 'Lesson navigation' : 'Lesson navigation'}
+      aria-label={t('nav_lesson_area')}
       style={{
         display: 'flex', gap: 6, padding: '8px 12px',
         borderBottom: '1px solid var(--border-subtle)', alignItems: 'stretch',
@@ -106,26 +117,26 @@ export function LessonNavigationPanel({
         onClick={onPrevious}
         disabled={disabled || !previousLesson}
         title={previousLesson ? previousLesson.lessonTitle : undefined}
-        aria-label={isRu ? 'Предыдущий урок' : 'Previous lesson'}
+        aria-label={`${t('nav_previous')} урок`}
         style={{
           ...slotStyle(),
           textAlign: 'left', cursor: previousLesson && !disabled ? 'pointer' : 'default',
           opacity: previousLesson ? 1 : 0.45,
         }}
       >
-        <span style={labelStyle}>← {isRu ? 'Предыдущий' : isHi ? 'Pichla' : 'Previous'}</span>
+        <span style={labelStyle}>← {t('nav_previous')}</span>
         {previousLesson ? (
           <>
             <span style={titleStyle}>{previousLesson.lessonTitle}</span>
             <span style={conceptStyle}>{previousLesson.topicSlug ?? previousLesson.unitTitle}</span>
             {(() => {
-              const b = statusBadge(previousLesson, ctx)
+              const b = statusBadge(previousLesson, ctx, badgeLabels)
               return b ? <span style={{ fontSize: 10, color: b.color }}>{b.icon} {b.label}</span> : null
             })()}
           </>
         ) : (
           <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>
-            {isRu ? 'Нет предыдущего урока' : 'No earlier lesson'}
+            {t('nav_no_previous')}
           </span>
         )}
       </button>
@@ -134,8 +145,8 @@ export function LessonNavigationPanel({
       <button
         onClick={onCurrent}
         disabled={disabled || !onCurrent}
-        title={isRu ? 'Начать урок заново' : 'Restart this lesson'}
-        aria-label={isRu ? 'Текущий урок' : isHi ? 'Current lesson' : 'Current lesson'}
+        title={t('nav_restart_lesson')}
+        aria-label={t('nav_current_lesson')}
         style={{
           ...slotStyle(INDIGO),
           textAlign: 'left',
@@ -143,7 +154,7 @@ export function LessonNavigationPanel({
         }}
       >
         <span style={{ ...labelStyle, color: INDIGO }}>
-          {isRu ? 'Текущий' : isHi ? 'Current' : 'Current'}
+          {t('nav_current_lesson')}
           {totalLessons > 0 && (
             <span style={{ marginLeft: 6, fontWeight: 700, color: 'var(--text-dim)' }}>
               {currentLesson.order} / {totalLessons}
@@ -162,7 +173,7 @@ export function LessonNavigationPanel({
         onClick={onNext}
         disabled={!nextEnabled}
         title={nextLockedReason ?? (nextLesson ? nextLesson.lessonTitle : undefined)}
-        aria-label={isRu ? 'Следующий урок' : 'Next lesson'}
+        aria-label={t('nav_next_lesson')}
         aria-disabled={!nextEnabled}
         style={{
           ...slotStyle(isCurrentCompleted && nextEnabled ? GREEN : undefined),
@@ -172,24 +183,24 @@ export function LessonNavigationPanel({
       >
         <span style={{ ...labelStyle, color: isCurrentCompleted && nextEnabled ? GREEN : undefined }}>
           {isCurrentCompleted && nextEnabled
-            ? (isRu ? '✅ Продолжить →' : isHi ? '✅ Continue →' : '✅ Continue to Next Lesson →')
-            : `${isRu ? 'Следующий' : isHi ? 'Agla' : 'Next'} →`}
+            ? t('nav_continue_next')
+            : `${t('nav_next_lesson')} →`}
         </span>
         {nextLesson ? (
           <>
             <span style={titleStyle}>{nextLesson.lessonTitle}</span>
             <span style={conceptStyle}>{nextLesson.topicSlug ?? nextLesson.unitTitle}</span>
             {nextState?.isLocked ? (
-              <span style={{ fontSize: 10, color: AMBER }}>🔒 {isRu ? 'Заблокировано' : 'Locked'}</span>
+              <span style={{ fontSize: 10, color: AMBER }}>🔒 {t('module_status_locked')}</span>
             ) : !isCurrentCompleted ? (
               <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>
-                {isRu ? 'Завершите текущий урок' : 'Finish the current lesson first'}
+                {t('nav_finish_current')}
               </span>
             ) : null}
           </>
         ) : (
           <span style={{ fontSize: 10, color: 'var(--text-dim)' }}>
-            {isRu ? 'Это последний урок' : 'This is the last lesson'}
+            {t('nav_no_next')}
           </span>
         )}
       </button>
