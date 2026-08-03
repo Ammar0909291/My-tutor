@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.ci-proportion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.ci-proportion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:242a210df00d7ca02d2a042b5cd41f764dee831aa452b3e586a976294cebe5d4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.ci-proportion.md": "sha256:304294e41b327756589afbfd6108a34e1c171af0da0ba1cedc8c2d013244f117"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.ci-proportion",
+    "name": "Confidence Interval for a Proportion",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.stats.confidence-interval"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.ci-proportion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.ci-proportion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.ci-proportion.md": "sha256:304294e41b327756589afbfd6108a34e1c171af0da0ba1cedc8c2d013244f117"
+      },
+      "contentHash": "sha256:93abeaf7004d4a2c8508ed322192b275a6494ab3dfac282593dcf40c480bf03a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-proportion.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-proportion.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-proportion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-proportion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-proportion.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-proportion.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-proportion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-proportion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-proportion.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-proportion.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-proportion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-proportion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-proportion.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-proportion.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-proportion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-proportion\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.ci-proportion/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the confidence interval for a proportion $\\hat{p}\\pm z_{\\alpha/2}\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$, using the SAMPLE proportion $\\hat{p}$ and its associated standard error formula.\n- LO2: Verify the LARGE-SAMPLE CONDITION — $n\\hat{p}\\ge10$ AND $n(1-\\hat{p})\\ge10$ — BEFORE constructing the interval, recognizing this checks whether the NORMAL APPROXIMATION to the underlying binomial distribution is trustworthy; skipping this check risks an invalid interval when the sample is too small or the proportion too extreme.\n- LO3: Recognize that BOTH conditions ($n\\hat{p}\\ge10$ AND $n(1-\\hat{p})\\ge10$) must hold TOGETHER — checking only one and assuming the other automatically follows is insufficient, since a very SKEWED $\\hat{p}$ (close to 0 or 1) can satisfy one condition easily while badly failing the other.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "STANDARD-ERROR-FORMULA-FOR-PROPORTION-MISCONSTRUCTED",
+      "content": "| MC-1 | STANDARD-ERROR-FORMULA-FOR-PROPORTION-MISCONSTRUCTED | Using an incorrect variance/standard error formula (e.g. p̂² instead of p̂(1-p̂), or omitting division by n) when constructing the confidence interval | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "ONLY-ONE-LARGE-SAMPLE-CONDITION-CHECKED-INSTEAD-OF-BOTH",
+      "content": "| MC-2 | ONLY-ONE-LARGE-SAMPLE-CONDITION-CHECKED-INSTEAD-OF-BOTH | Verifying only one of the two required large-sample conditions (n×p̂≥10 or n×(1-p̂)≥10), rather than checking both independently | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "Reproducing the p̂(1-p̂)/n Formula Exactly (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Reproducing the p̂(1-p̂)/n Formula Exactly (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "Checking Both Large-Sample Conditions Independently (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Checking Both Large-Sample Conditions Independently (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "A Well-Behaved Case Satisfying Both Conditions (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"A Well-Behaved Case Satisfying Both Conditions (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Construct a 95% confidence interval for $p$, given $\\hat{p}=0.3$, $n=150$.\n  2. Verify whether the large-sample condition holds for $\\hat{p}=0.05$, $n=100$, checking both parts.\n  3. Verify whether the large-sample condition holds for $\\hat{p}=0.5$, $n=15$, checking both parts.\n  4. Explain, in one sentence, why both n×p̂≥10 and n×(1-p̂)≥10 must be checked, rather than just one.\n- **P76 (Transfer Probe, mode = independence)**: \"A marketing analyst surveys 50 customers and finds that only 2 of them (4%) reported being aware of a new product. The analyst wants to construct a 95% confidence interval for the true awareness proportion. (a) Check whether the large-sample condition holds for this data, verifying both parts explicitly. (b) Explain what the analyst should do if the condition fails, rather than constructing the standard normal-approximation interval anyway.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.confidence-interval` — this is a specific application to proportions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.ci-proportion/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.ci-proportion",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.confidence-interval`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.confidence-interval`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-proportion.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
