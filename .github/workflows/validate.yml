@@ -67,8 +67,12 @@ jobs:
       # (a KG concept silently resolving to an unrelated visual) before it
       # ships. Read-only over visualRegistry.ts's source text and every
       # committed docs/*/kg/graph.json — never touches runtime behavior.
-      # Fails only on Incorrect Mapping / Broken References / Duplicate
-      # Mappings; Expected Null / Intentional Fallback / Orphan Entries are
-      # warnings the report surfaces but do not block CI.
+      # Fails on Incorrect Mapping / Broken References / Duplicate Mappings,
+      # and on any ORPHAN key (a registry key matching no concept in any
+      # shipped KG) that is not recorded in scripts/ci/visual-orphan-baseline.txt.
+      # Orphans were warn-only until the physics hardening pass, which is how
+      # seven dead physics keys shipped past this gate; the baseline keeps the
+      # remaining pre-existing ones visible without blocking, and can only
+      # shrink. Expected Null / Intentional Fallback remain warnings.
       - name: Visualization Registry coverage
         run: npx tsx scripts/validate-visualization-coverage.ts

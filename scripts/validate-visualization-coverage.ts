@@ -19,7 +19,8 @@
  *
  * Exit codes: 0 = PASS or PASS_WITH_WARNINGS, 1 = FAIL
  *   FAIL only on: Incorrect Mapping > 0, Broken References > 0, Duplicates > 0
- *   WARN (does not fail) on: Expected Null, Intentional Fallback, Orphan Entries
+ *   FAIL on: Orphan Entries not listed in scripts/ci/visual-orphan-baseline.txt
+ *   WARN (does not fail) on: Expected Null, Intentional Fallback, baselined orphans
  */
 
 import fs from 'fs'
@@ -29,6 +30,21 @@ import {
   type CoverageCategory,
 } from '../src/lib/teaching/visualCoverageValidator'
 import { VISUAL_META } from '../src/lib/school/visuals/visualTypes'
+
+const BASELINE_PATH_REL = 'scripts/ci/visual-orphan-baseline.txt'
+
+/** Accepted pre-existing orphans; see the file header for the rules. */
+const ORPHAN_BASELINE: Set<string> = (() => {
+  const p = path.join(process.cwd(), BASELINE_PATH_REL)
+  if (!fs.existsSync(p)) return new Set<string>()
+  return new Set(
+    fs.readFileSync(p, 'utf8')
+      .split('\n')
+      .map((l) => l.trim())
+      .filter((l) => l.length > 0 && !l.startsWith('#')),
+  )
+})()
+
 
 const REGISTRY_PATH = path.join(process.cwd(), 'src/lib/teaching/visualRegistry.ts')
 const SCENE_ROUTER_PATH = path.join(process.cwd(), 'src/lib/teaching/sceneGenerators/sceneRouter.ts')
@@ -136,15 +152,43 @@ function main() {
     }
   }
 
-  if (report.orphans.length > 0) {
-    console.log('\n🟠 ORPHAN REGISTRY ENTRIES (warning only):')
-    for (const o of report.orphans) {
+  // Orphan ratchet: a key matching no concept in any shipped KG means its
+  // renderer is unreachable and the concept it meant to serve silently falls
+  // through to a domain default. Orphans used to be warn-only, which is how
+  // seven physics orphans shipped past this very gate. Pre-existing orphans
+  // in subjects outside the current hardening scope are baselined so they
+  // stay visible without blocking; anything new fails.
+  const newOrphans = report.orphans.filter((o) => !ORPHAN_BASELINE.has(o.key))
+  const baselinedOrphans = report.orphans.filter((o) => ORPHAN_BASELINE.has(o.key))
+  const staleBaseline = [...ORPHAN_BASELINE].filter(
+    (k) => !report.orphans.some((o) => o.key === k),
+  ).sort()
+
+  if (baselinedOrphans.length > 0) {
+    console.log(`\n🟠 ORPHAN REGISTRY ENTRIES — baselined (${baselinedOrphans.length}, warning only):`)
+    for (const o of baselinedOrphans) {
       console.log(`  ${o.key} (line ${o.line}) — no matching concept in any Knowledge Graph`)
     }
   }
 
+  if (staleBaseline.length > 0) {
+    console.log(`\n🧹 STALE BASELINE ENTRIES (${staleBaseline.length}) — no longer orphans, remove from`)
+    console.log(`   ${BASELINE_PATH_REL}:`)
+    for (const k of staleBaseline) console.log(`  ${k}`)
+  }
+
+  if (newOrphans.length > 0) {
+    console.log(`\n🔴 NEW ORPHAN REGISTRY ENTRIES (${newOrphans.length}) — BLOCKING:`)
+    for (const o of newOrphans) {
+      console.log(`  ${o.key} (line ${o.line}) — no matching concept in any Knowledge Graph`)
+    }
+    console.log('\n  Fix the mapping to a real concept id, or delete the entry if the')
+    console.log(`  concept it served is already covered. Do NOT add it to ${BASELINE_PATH_REL}.`)
+  }
+
+  const passes = report.passes && newOrphans.length === 0
   console.log('\n' + line)
-  console.log(`STATUS: ${report.passes ? 'PASS' : 'FAIL'}`)
+  console.log(`STATUS: ${passes ? 'PASS' : 'FAIL'}`)
   console.log(line)
 
   if (!subjectArg && !jsonOutput) {
@@ -164,7 +208,7 @@ function main() {
 
   console.log(`\nLegend: ${Object.entries(CATEGORY_LABEL).map(([k, v]) => v).join('  ')}`)
 
-  process.exit(report.passes ? 0 : 1)
+  process.exit(report.passes && newOrphans.length === 0 ? 0 : 1)
 }
 
 main()
