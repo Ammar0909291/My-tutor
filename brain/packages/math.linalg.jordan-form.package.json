@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.jordan-form-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.jordan-form",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ebe59afc945761ec799ee650dd417e8ba6ba850349eee3f974c47f598286f151",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.jordan-form.md": "sha256:c412555c43ff89fbf2a307c4f65fb377238a4334d92ad5170defac1b32a1720c"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.jordan-form",
+    "name": "Jordan Normal Form",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.linalg.eigenvalues",
+      "math.linalg.diagonalization"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.jordan-form-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.jordan-form (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.jordan-form.md": "sha256:c412555c43ff89fbf2a307c4f65fb377238a4334d92ad5170defac1b32a1720c"
+      },
+      "contentHash": "sha256:5451cbc6c35b12d14b6d5b282e6f1e27df3761c07aea845e0d10fb0d58502126",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.jordan-form.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.jordan-form.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.jordan-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.jordan-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.jordan-form.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.jordan-form.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.jordan-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.jordan-form\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.jordan-form.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.jordan-form.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.jordan-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.jordan-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.jordan-form.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.jordan-form.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.jordan-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.jordan-form\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.jordan-form/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Learning Objectives",
+      "content": "- LO1: State that EVERY matrix over $\\mathbb{C}$ (even a non-diagonalizable one) is similar to a JORDAN NORMAL FORM — a block-diagonal matrix built from Jordan blocks $J_k(\\lambda)$, each having $\\lambda$ on the diagonal and 1's on the SUPERDIAGONAL (immediately above the diagonal), with all other entries 0.\n- LO2: Determine the SIZE and NUMBER of Jordan blocks for a given eigenvalue from the gap between its ALGEBRAIC multiplicity (total multiplicity as a characteristic-polynomial root) and its GEOMETRIC multiplicity (eigenspace dimension) — a diagonalizable matrix is exactly the special case where every Jordan block has size 1 (i.e., algebraic = geometric multiplicity for every eigenvalue).\n- LO3: Recognize Jordan form as the GENERALIZATION of diagonalization, not a replacement for it — when a matrix IS diagonalizable, its Jordan form IS simply the diagonal matrix $D$ (all blocks size 1); Jordan form only introduces genuinely new structure (superdiagonal 1's) when diagonalization fails.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "JORDAN-BLOCK-ONES-PLACED-ON-SUBDIAGONAL-INSTEAD-OF-SUPERDIAGONAL",
+      "content": "| MC-1 | JORDAN-BLOCK-ONES-PLACED-ON-SUBDIAGONAL-INSTEAD-OF-SUPERDIAGONAL | Placing the Jordan block's 1's below the diagonal instead of on the superdiagonal (immediately above) | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "ALGEBRAIC-MULTIPLICITY-CONFUSED-WITH-BLOCK-COUNT-RATHER-THAN-TOTAL-BLOCK-SIZE",
+      "content": "| MC-2 | ALGEBRAIC-MULTIPLICITY-CONFUSED-WITH-BLOCK-COUNT-RATHER-THAN-TOTAL-BLOCK-SIZE | Using algebraic multiplicity to determine the NUMBER of Jordan blocks, rather than recognizing geometric multiplicity gives the block count and algebraic multiplicity gives the blocks' combined size | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Jordan Blocks Have 1's on the SUPERdiagonal (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Jordan Blocks Have 1's on the SUPERdiagonal (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Geometric Multiplicity Gives Block Count, Algebraic Gives Total Size (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Geometric Multiplicity Gives Block Count, Algebraic Gives Total Size (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Diagonalizable Matrices Are Jordan Form with All Size-1 Blocks (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Diagonalizable Matrices Are Jordan Form with All Size-1 Blocks (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Write the Jordan block $J_3(-2)$ explicitly as a $3\\times3$ matrix.\n  2. For eigenvalue $\\lambda=4$ with algebraic multiplicity 4 and geometric multiplicity 2, determine the possible Jordan block sizes (noting there may be more than one valid partition summing to 4 with exactly 2 blocks — e.g. sizes 2+2 or 3+1 — both consistent with geometric multiplicity 2).\n  3. For eigenvalue $\\lambda=1$ with algebraic multiplicity 2 and geometric multiplicity 2, determine the Jordan block structure and state whether this eigenvalue's contribution is genuinely diagonalizable.\n  4. Explain, in one sentence, why a matrix's Jordan form equals its diagonalization exactly when every eigenvalue's algebraic and geometric multiplicities match.\n- **P76 (Transfer Probe, mode = independence)**: \"A mechanical system's state matrix $A$ has a single eigenvalue $\\lambda=0$ with algebraic multiplicity 3, but the system exhibits genuinely 'resonant' behavior where perturbations grow polynomially (not just exponentially) over time — a signature that the system is NOT diagonalizable. (a) Given this resonant behavior, what can you conclude about the geometric multiplicity of $\\lambda=0$ relative to its algebraic multiplicity (3)? (b) If the geometric multiplicity turns out to be exactly 1, determine the Jordan block structure, and explain how a SINGLE large Jordan block (versus multiple smaller ones) connects to the system exhibiting this more complex, non-decoupled resonant behavior.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.eigenvalues` (needed for algebraic multiplicities) and `math.linalg.diagonalization` (needed to recognize Jordan form as its generalization, and to understand the algebraic-vs-geometric-multiplicity gap that Jordan blocks resolve).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.jordan-form/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.jordan-form",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.eigenvalues`, `math.linalg.diagonalization`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.diagonalization` (Jordan form is its direct generalization to non-diagonalizable matrices).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.jordan-form.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
