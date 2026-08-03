@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.triple-integrals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.triple-integrals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9fbf0ba4bfd90059c4e38ea3225196c46159db51261052fbed0904bf09d231b8",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.triple-integrals.md": "sha256:6f489c19a780b88e637705e3857829200e9af4d02568e21876e1091441ebe2b8"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.triple-integrals",
+    "name": "Triple Integrals",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.double-integrals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.triple-integrals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.triple-integrals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.triple-integrals.md": "sha256:6f489c19a780b88e637705e3857829200e9af4d02568e21876e1091441ebe2b8"
+      },
+      "contentHash": "sha256:093707aa944c5df2c8a35155a75cc8e3dfe43a6aae8e9dba1c4107cba4e9a0ab",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.triple-integrals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.triple-integrals.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.triple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.triple-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.triple-integrals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.triple-integrals.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.triple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.triple-integrals\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.triple-integrals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.triple-integrals.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.triple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.triple-integrals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.triple-integrals.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.triple-integrals.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.triple-integrals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.triple-integrals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.triple-integrals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Set up and evaluate a triple integral $\\iiint_Ef(x,y,z)\\,dV$ as an ITERATED integral, correctly determining the bounds for each variable by carefully analyzing the region $E$'s shape (INNERMOST bounds may depend on the outer variables; outermost bounds must be constants).\n- LO2: Convert a triple integral to CYLINDRICAL coordinates $(r,\\theta,z)$ (using $dV=r\\,dr\\,d\\theta\\,dz$) when the region has CIRCULAR SYMMETRY around the $z$-axis, recognizing the extra factor of $r$ is required (NOT optional) whenever switching from Cartesian to cylindrical.\n- LO3: Convert a triple integral to SPHERICAL coordinates $(\\rho,\\phi,\\theta)$ (using $dV=\\rho^2\\sin\\phi\\,d\\rho\\,d\\phi\\,d\\theta$) when the region has SPHERICAL symmetry, recognizing the correct volume element includes BOTH a $\\rho^2$ factor AND a $\\sin\\phi$ factor — omitting either produces an incorrect result.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "ITERATED-INTEGRAL-BOUNDS-SET-UP-WITH-CIRCULAR-DEPENDENCY",
+      "content": "| MC-1 | ITERATED-INTEGRAL-BOUNDS-SET-UP-WITH-CIRCULAR-DEPENDENCY | Setting up triple integral bounds where variables depend on each other circularly, rather than forming a genuine nested nesting hierarchy | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "COORDINATE-CONVERSION-VOLUME-ELEMENT-SCALING-FACTOR-OMITTED",
+      "content": "| MC-2 | COORDINATE-CONVERSION-VOLUME-ELEMENT-SCALING-FACTOR-OMITTED | Omitting the required scaling factor(s) (r for cylindrical; ρ² and/or sin(φ) for spherical) when converting the volume element to a new coordinate system | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Bounds Must Form a Genuine Nested Hierarchy (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Bounds Must Form a Genuine Nested Hierarchy (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Cylindrical Coordinates Require the Extra r Factor (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Cylindrical Coordinates Require the Extra r Factor (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Spherical Coordinates Require BOTH ρ² and sin(φ) Factors (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Spherical Coordinates Require BOTH ρ² and sin(φ) Factors (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Set up (do not evaluate) $\\iiint_Ef\\,dV$ where $E$ is bounded by $0\\le x\\le2$, $0\\le y\\le x^2$, $0\\le z\\le x+y$.\n  2. Convert $\\iiint_Ef\\,dV$ to cylindrical coordinates for a circularly-symmetric region, writing the full volume element.\n  3. Convert $\\iiint_Ef\\,dV$ to spherical coordinates for a spherically-symmetric region, writing the full volume element.\n  4. Explain, in one sentence, why the spherical volume element requires both a ρ² factor and a sin(φ) factor.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist needs to compute the total mass of a spherical planet with a density that varies with distance from the center, $\\delta(\\rho)$ (denser near the core), by integrating $\\iiint_E\\delta(\\rho)\\,dV$ over the planet's volume. (a) Explain why spherical coordinates are the natural choice for this integral, given the density depends only on $\\rho$. (b) Write the full spherical-coordinate integral setup (including the correct volume element), and explain why omitting the sin(φ) factor would produce an incorrect total mass, even though the density function itself doesn't explicitly depend on φ.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.double-integrals` — triple integrals extend the same iterated-integral and region-analysis principles to one more dimension.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.triple-integrals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.triple-integrals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.double-integrals`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.calc.multiple-integrals`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.triple-integrals.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

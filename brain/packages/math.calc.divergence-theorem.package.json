@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.divergence-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.divergence-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3d6d7cba95e2215402a51c55b75dfb3f0d1cf0132355296639f8234b10444688",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.divergence-theorem.md": "sha256:d29c9a4ac3d0da786b271fcf0ce16bea7c329a2a996ca336923ce771615ddcb6"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.divergence-theorem",
+    "name": "Divergence Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.surface-integrals",
+      "math.calc.curl-divergence"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.divergence-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.divergence-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.divergence-theorem.md": "sha256:d29c9a4ac3d0da786b271fcf0ce16bea7c329a2a996ca336923ce771615ddcb6"
+      },
+      "contentHash": "sha256:a302ae28d62d91de61cf8bcef13c16212a4a705f605b5171d1192ceb4727af91",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.divergence-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.divergence-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.divergence-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.divergence-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.divergence-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.divergence-theorem.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.divergence-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.divergence-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.divergence-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.divergence-theorem.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.divergence-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.divergence-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.divergence-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.divergence-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.divergence-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.divergence-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.divergence-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Divergence Theorem $\\iiint_E\\nabla\\cdot F\\,dV=\\iint_SF\\cdot dS$, where $S$ is the CLOSED boundary surface of solid region $E$, oriented with an OUTWARD-pointing normal.\n- LO2: Use the theorem to convert a difficult SURFACE FLUX integral into an often-easier VOLUME integral of divergence (or vice versa), choosing whichever direction is computationally simpler for the specific $F$ and region $E$.\n- LO3: Recognize that the Divergence Theorem requires $S$ to be a CLOSED surface (fully enclosing a solid region) — it does NOT apply directly to an open surface (like a single hemisphere without its flat base), which instead requires Stokes' theorem or direct computation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "VOLUME-INTEGRAL-SHORTCUT-NOT-RECOGNIZED-BEFORE-ATTEMPTING-DIRECT-SURFACE-COMPUTATION",
+      "content": "| MC-1 | VOLUME-INTEGRAL-SHORTCUT-NOT-RECOGNIZED-BEFORE-ATTEMPTING-DIRECT-SURFACE-COMPUTATION | Attempting to directly compute a difficult surface flux integral without first checking whether the Divergence Theorem offers a simpler volume-integral route | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "DIVERGENCE-THEOREM-APPLIED-DIRECTLY-TO-AN-OPEN-NON-CLOSED-SURFACE",
+      "content": "| MC-2 | DIVERGENCE-THEOREM-APPLIED-DIRECTLY-TO-AN-OPEN-NON-CLOSED-SURFACE | Applying the Divergence Theorem formula directly to an open surface that doesn't fully enclose a solid region, rather than closing it first or using a different technique | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "Converting a Surface Flux Integral into a Volume Integral (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Converting a Surface Flux Integral into a Volume Integral (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "The Theorem Requires a Genuinely Closed Surface (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Theorem Requires a Genuinely Closed Surface (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "Avoiding Multiple Separate Surface Integrals via One Volume Integral (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Avoiding Multiple Separate Surface Integrals via One Volume Integral (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.60×5⌉ = 3/5.\n\n- **P77 (4-problem set)**:\n  1. For $F=(2x,2y,2z)$ and $E$ the solid unit ball, use the Divergence Theorem to find $\\iint_SF\\cdot dS$.\n  2. Explain, in one sentence, why the Divergence Theorem cannot be applied directly to a single open hemisphere surface (without its flat base).\n  3. Describe the strategy for computing the flux through an open hemisphere using the Divergence Theorem indirectly (via capping and subtracting).\n  4. For $F=(x^2,y^2,z^2)$ and $E$ a solid cube $[0,2]^3$, set up (do not evaluate) the volume integral given by the Divergence Theorem, instead of six separate surface integrals.\n- **P76 (Transfer Probe, mode = independence)**: \"A fluid dynamics engineer needs to compute the net flow rate of fluid OUT of a complicated-shaped tank (with an irregular, multi-piece boundary surface), given the fluid's velocity field $F$ throughout the tank's interior. (a) Explain why using the Divergence Theorem — converting the flux integral into a volume integral of $\\nabla\\cdot F$ over the tank's interior — could be dramatically more practical than parametrizing and integrating over each irregular boundary piece separately. (b) Explain what physical significance a POSITIVE value of $\\nabla\\cdot F$ at some interior point would have, connecting to the idea of that point being a 'source' contributing to net outward flow.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.surface-integrals` (the flux integral $\\iint_SF\\cdot dS$) and `math.calc.curl-divergence` (computing $\\nabla\\cdot F$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.divergence-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.divergence-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.surface-integrals`, `math.calc.curl-divergence`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.calc.stokes-theorem` (the analogous theorem relating surface integrals of curl to boundary-curve circulation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.divergence-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
