@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.normal-approximation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.normal-approximation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3a1c8087fe87cb78027b446426dfd2fc9b52e2414cb2b20772561aad342fad03",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.normal-approximation.md": "sha256:1e5ee67b40c244592fa95dd159ecbc93401559972a344656140709102c45b1d5"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.normal-approximation",
+    "name": "Normal Approximation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.prob.clt",
+      "math.stats.normal-distribution"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.normal-approximation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.normal-approximation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.normal-approximation.md": "sha256:1e5ee67b40c244592fa95dd159ecbc93401559972a344656140709102c45b1d5"
+      },
+      "contentHash": "sha256:0b90f56ef834d7dfbce66be6fdda833e229dce49d74316d8b38653d7bc83ce6f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.normal-approximation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.normal-approximation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.normal-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.normal-approximation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.normal-approximation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.normal-approximation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.normal-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.normal-approximation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.normal-approximation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.normal-approximation.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.normal-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.normal-approximation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.normal-approximation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.normal-approximation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.normal-approximation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.normal-approximation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.normal-approximation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the NORMAL APPROXIMATION to the BINOMIAL — $\\text{Bin}(n,p)\\approx N(np,np(1-p))$ for LARGE $n$ — using mean $np$ and variance $np(1-p)$ as the approximating normal distribution's parameters.\n- LO2: Apply the NORMAL APPROXIMATION to the POISSON — $\\text{Poisson}(\\lambda)\\approx N(\\lambda,\\lambda)$ for LARGE $\\lambda$ — recognizing this uses the SAME mean and variance value $\\lambda$ (a special Poisson property, since a Poisson distribution's mean equals its variance).\n- LO3: Apply the CONTINUITY CORRECTION $P(X\\le k)\\approx P(Y\\le k+0.5)$ (using the continuous normal $Y$ to approximate the discrete $X$) — recognizing this correction genuinely IMPROVES the approximation's accuracy, and that OMITTING it (or applying it in the wrong direction, e.g. for $P(X\\ge k)$ vs. $P(X\\le k)$) systematically biases the approximate probability.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "APPROXIMATING-NORMAL-PARAMETERS-SIMPLIFIED-OR-PARTIALLY-COMPUTED",
+      "content": "| MC-1 | APPROXIMATING-NORMAL-PARAMETERS-SIMPLIFIED-OR-PARTIALLY-COMPUTED | Using a simplified or partial version of the np/np(1-p) formulas for the approximating normal's mean and variance, rather than the full correct computation | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "CONTINUITY-CORRECTION-OMITTED-OR-APPLIED-IN-THE-WRONG-DIRECTION",
+      "content": "| MC-2 | CONTINUITY-CORRECTION-OMITTED-OR-APPLIED-IN-THE-WRONG-DIRECTION | Omitting the continuity correction entirely, or applying its +0.5/-0.5 adjustment in the wrong direction for the given inequality type | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "Approximating Normal Parameters Are np and np(1-p) Exactly, Not Simplified Versions (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Approximating Normal Parameters Are np and np(1-p) Exactly, Not Simplified Versions (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "Poisson's Mean-Equals-Variance Property Carries into Its Approximation (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Poisson's Mean-Equals-Variance Property Carries into Its Approximation (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "The Continuity Correction Improves Accuracy and Shouldn't Be Skipped (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Continuity Correction Improves Accuracy and Shouldn't Be Skipped (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. State the mean and variance of the normal approximation to $\\text{Bin}(200,0.4)$.\n  2. State the mean and variance of the normal approximation to $\\text{Poisson}(75)$.\n  3. Using the continuity correction, approximate $P(X\\ge20)$ for $X\\sim\\text{Bin}(50,0.3)$ (mean 15, variance 10.5).\n  4. Explain, in one sentence, why the continuity correction is needed when approximating a discrete distribution with a continuous one.\n- **P76 (Transfer Probe, mode = independence)**: \"A call center receives an average of 120 calls per hour (modeled as Poisson with $\\lambda=120$, a large value), and a manager wants to estimate the probability of receiving fewer than 100 calls in a given hour without computing the exact Poisson probabilities directly. (a) Explain why a normal approximation is appropriate here, given the large $\\lambda$. (b) Set up (but do not fully evaluate) the normal approximation calculation, including the continuity correction, for $P(X<100)$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.clt` (the Central Limit Theorem, the deep justification for why these approximations work) and `math.stats.normal-distribution` (the approximating distribution itself).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.normal-approximation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.normal-approximation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.clt`, `math.stats.normal-distribution`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-links**: `math.prob.clt`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.normal-approximation.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

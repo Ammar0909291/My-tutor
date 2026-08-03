@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.lhopitals-rule-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.lhopitals-rule",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:438b143852d302b677501ba9f30c015c0a0fc586d9adef0ba1f5e9a3858fa633",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.lhopitals-rule.md": "sha256:d0adaceebf0464f876c958849b8d4fdb0641e1de59fc70c59c5742845e23b15a"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.lhopitals-rule",
+    "name": "L'Hôpital's Rule",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.derivative-definition",
+      "math.calc.limits"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.lhopitals-rule-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.lhopitals-rule (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.lhopitals-rule.md": "sha256:d0adaceebf0464f876c958849b8d4fdb0641e1de59fc70c59c5742845e23b15a"
+      },
+      "contentHash": "sha256:ece8327a536b31c57c14672dcc8461eb19947e04d97cf7c2bdc0b4e90dc65aff",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.lhopitals-rule.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.lhopitals-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.lhopitals-rule\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.lhopitals-rule.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.lhopitals-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.lhopitals-rule\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.lhopitals-rule.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.lhopitals-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.lhopitals-rule\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.lhopitals-rule.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.lhopitals-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.lhopitals-rule\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.lhopitals-rule/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply L'Hôpital's rule — if $\\lim\\frac{f}{g}$ is INDETERMINATE of the form $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$, then $\\lim\\frac{f}{g}=\\lim\\frac{f'}{g'}$ (under appropriate conditions) — and VERIFY the indeterminate form FIRST, since applying the rule when the form is NOT indeterminate produces a wrong answer.\n- LO2: Handle OTHER indeterminate forms ($0\\cdot\\infty$, $\\infty-\\infty$, $1^\\infty$, $0^0$, $\\infty^0$) by first ALGEBRAICALLY REWRITING them into a $0/0$ or $\\infty/\\infty$ quotient form before applying L'Hôpital's rule directly.\n- LO3: Recognize that L'Hôpital's rule may need to be applied MULTIPLE times in succession if, after one application, the resulting limit is STILL indeterminate.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "LHOPITALS-RULE-APPLIED-TO-A-NON-INDETERMINATE-FORM",
+      "content": "| MC-1 | LHOPITALS-RULE-APPLIED-TO-A-NON-INDETERMINATE-FORM | Applying L'Hôpital's rule to a limit that isn't genuinely 0/0 or ∞/∞, without checking the form first, producing an incorrect result | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "OTHER-INDETERMINATE-FORMS-NOT-REWRITTEN-AS-A-QUOTIENT-FIRST",
+      "content": "| MC-2 | OTHER-INDETERMINATE-FORMS-NOT-REWRITTEN-AS-A-QUOTIENT-FIRST | Attempting to apply L'Hôpital's rule directly to a non-quotient indeterminate form (like 0·∞) without first rewriting it algebraically into a genuine 0/0 or ∞/∞ quotient | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Verify the Indeterminate Form Before Applying the Rule (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Verify the Indeterminate Form Before Applying the Rule (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Rewrite Other Indeterminate Forms into a Quotient First (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Rewrite Other Indeterminate Forms into a Quotient First (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Reapplying the Rule When Still Indeterminate (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Reapplying the Rule When Still Indeterminate (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Evaluate $\\lim_{x\\to0}\\frac{e^x-1}{x}$ using L'Hôpital's rule, first verifying the indeterminate form.\n  2. Explain why L'Hôpital's rule cannot be applied directly to $\\lim_{x\\to2}\\frac{x+3}{x-2}$, and state what this limit actually is.\n  3. Rewrite $\\lim_{x\\to\\infty}x\\cdot e^{-x}$ (a $\\infty\\cdot0$ form) into a quotient suitable for L'Hôpital's rule, then evaluate.\n  4. Evaluate $\\lim_{x\\to0}\\frac{x^2}{1-\\cos x}$, applying L'Hôpital's rule as many times as needed.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist analyzing small-angle oscillations needs $\\lim_{\\theta\\to0}\\frac{\\sin\\theta-\\theta}{\\theta^3}$ (a term that appears in a higher-order approximation of a pendulum's motion). (a) Verify this is a genuinely indeterminate form before proceeding. (b) Evaluate the limit using L'Hôpital's rule, applying it as many times as necessary, and explain how you knew when to stop applying it further.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.derivative-definition` (the derivatives $f'$, $g'$ the rule uses) and `math.calc.limits` (the limit being evaluated, and recognizing indeterminate forms).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.lhopitals-rule/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.lhopitals-rule",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.derivative-definition`, `math.calc.limits`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.lhopitals-rule.md",
+        "startLine": 94,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

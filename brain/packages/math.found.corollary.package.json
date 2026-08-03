@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.corollary-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.corollary",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:73ecc8b2748d4bbee0afb8bf98d9be014632cef3f26c221d33450a34722bd4ef",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.corollary.md": "sha256:3a8dc282637a333e9457524ee3316bf47398292cc9505d654efd4b0e01c02d88"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.corollary",
+    "name": "Corollary",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.corollary-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.corollary (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.corollary.md": "sha256:3a8dc282637a333e9457524ee3316bf47398292cc9505d654efd4b0e01c02d88"
+      },
+      "contentHash": "sha256:48778d9e26770f8773367667e03ff0febd208e7d8072130bdc2ef95013f3ea9e",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.corollary.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.corollary.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.corollary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.corollary\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.corollary.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.corollary.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.corollary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.corollary\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.corollary.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.corollary.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.corollary"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.corollary\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.corollary/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.corollary",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **corollary** as a result that follows EASILY from an already-proved theorem, typically via a brief additional step or a direct substitution, rather than requiring substantial new proof work.\n- LO2: Given a theorem, derive a specific corollary by direct substitution or a short additional argument, citing the parent theorem explicitly rather than re-proving its content.\n- LO3: Distinguish a corollary (a quick consequence) from a lemma (a stepping stone TOWARD a larger result, `math.found.lemma`) — the two sit on OPPOSITE sides of their associated theorem in the logical flow of a text.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.corollary/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.corollary",
+      "title": "COROLLARY-AND-LEMMA-PLACEMENT-CONFUSED",
+      "content": "| MC-1 | COROLLARY-AND-LEMMA-PLACEMENT-CONFUSED | Confusing a corollary's \"comes after, easy consequence\" relationship to its theorem with a lemma's \"comes before, stepping stone\" relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.corollary/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.corollary",
+      "title": "COROLLARY-REQUIRED-TO-BE-PURE-SUBSTITUTION-ONLY",
+      "content": "| MC-2 | COROLLARY-REQUIRED-TO-BE-PURE-SUBSTITUTION-ONLY | Believing a corollary can never involve any additional reasoning step beyond direct substitution, rejecting valid corollaries that include a small extra argument | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.corollary/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.corollary",
+      "title": "Derive a Corollary by Direct Substitution (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Derive a Corollary by Direct Substitution (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.corollary/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.corollary",
+      "title": "\"Easy\" Doesn't Mean \"Zero Additional Work\" (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"\\\"Easy\\\" Doesn't Mean \\\"Zero Additional Work\\\" (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.corollary/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.corollary",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.corollary/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.corollary",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given the (hypothetical, taken as established) theorem \"every square number is nonnegative,\" derive the corollary that $(-5)^2\\ge0$ by direct substitution.\n  2. Given the theorem from Example 1 ($n$-gon angle sum), derive the corollary for a hexagon ($n=6$).\n  3. Explain, in one sentence, the difference in WHEN a lemma and a corollary each appear relative to their associated theorem in a written proof.\n  4. Given a theorem \"every prime greater than 2 is odd,\" state whether \"7 is odd\" would count as a meaningful corollary of it, and explain why direct-verification examples like this are usually too trivial to be worth stating as formal corollaries (contrast with a genuinely useful, general special case).\n- **P76 (Transfer Probe, mode = independence)**: \"A physics-adjacent theorem (taken as given for this exercise) states: 'for any two objects with masses $m_1,m_2$ separated by distance $r$, the gravitational force between them is $F=Gm_1m_2/r^2$.' (a) Derive a corollary for the SPECIFIC case where $m_1=m_2=m$ (equal masses), simplifying the formula accordingly. (b) A colleague proposes stating, as a SEPARATE lemma (rather than corollary), the sub-fact 'inverse-square relationships decrease rapidly with distance' used earlier to help derive the general theorem in the first place. Explain, using this lesson's lemma/corollary distinction, why this sub-fact's PLACEMENT (before vs. after the main theorem) determines whether it should be labeled a lemma or a corollary.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.corollary/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.corollary",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.theorem` — a corollary derives its content directly and easily from an already-established theorem, contributing no substantial new proof machinery of its own.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.corollary/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.corollary",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.theorem`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.lemma` (the opposite-direction sibling category this concept is directly contrasted against, sharing the same parent prerequisite `math.found.theorem`).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.corollary.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

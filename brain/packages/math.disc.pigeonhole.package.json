@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.pigeonhole-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.pigeonhole",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:924261edfe32dc1523a6c9756295fcf28029f72e5453edd954b8dbea76344a2a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.pigeonhole.md": "sha256:7d20300a63aef177016aefebf69fc43c5b2b609a7a7f42790d12ea9b9035f0b1"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.pigeonhole",
+    "name": "Pigeonhole Principle",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.counting-principles"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.pigeonhole-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.pigeonhole (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.pigeonhole.md": "sha256:7d20300a63aef177016aefebf69fc43c5b2b609a7a7f42790d12ea9b9035f0b1"
+      },
+      "contentHash": "sha256:93bf6ecf0bb6f0e3e2f13baedd9448dad96a8a5a13bc778dc4fd179fa1643ccb",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.pigeonhole/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply the basic pigeonhole principle: placing $n+1$ objects into $n$ containers guarantees at least one container holds $\\ge2$ objects.\n- LO2: Apply the GENERALIZED pigeonhole principle: placing $N$ objects into $k$ containers guarantees at least one container holds $\\ge\\lceil N/k\\rceil$ objects.\n- LO3: Identify, in a word problem, WHAT plays the role of \"objects\" and WHAT plays the role of \"containers\" — the genuinely hard step in applying this principle, since neither is usually labeled explicitly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "GENERALIZED-PIGEONHOLE-ROUNDED-DOWN",
+      "content": "| MC-1 | GENERALIZED-PIGEONHOLE-ROUNDED-DOWN | Using the floor (or no rounding) of $N/k$ instead of the ceiling, understating the guaranteed minimum overload | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "CONTAINERS-EXPECTED-TO-BE-PRE-LABELED",
+      "content": "| MC-2 | CONTAINERS-EXPECTED-TO-BE-PRE-LABELED | Expecting a word problem to explicitly identify \"objects\" and \"containers,\" rather than recognizing that designing an appropriate container structure is often the actual problem-solving task | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "PIGEONHOLE-CONCLUSION-OVERSTATED-AS-IDENTIFYING-SPECIFICS",
+      "content": "| MC-3 | PIGEONHOLE-CONCLUSION-OVERSTATED-AS-IDENTIFYING-SPECIFICS | Believing the pigeonhole principle identifies WHICH specific objects/container is overloaded, rather than only guaranteeing that SOME overload exists | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Objects and Containers, Basic Case (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Objects and Containers, Basic Case (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Generalized Principle Uses the CEILING of the Average (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Generalized Principle Uses the CEILING of the Average (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Designing the Containers Is the Hard Step (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Designing the Containers Is the Hard Step (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Prove that among any 8 people, at least two share the same day of the week they were born on.\n  2. In a group of 50 students, using the generalized pigeonhole principle, find the minimum number guaranteed to share the same birth month.\n  3. Prove that if 6 integers are chosen from $\\{1,2,\\ldots,10\\}$, at least two must sum to 11 (hint: design pairs $\\{1,10\\},\\{2,9\\},\\ldots$ as the 5 \"containers\").\n  4. Explain, in one sentence, why the pigeonhole principle can prove a coincidence EXISTS without identifying which specific objects are involved.\n- **P76 (Transfer Probe, mode = independence)**: \"A network administrator has 500 devices that must each be assigned one of 24 available IP address ranges. (a) Using the generalized pigeonhole principle, determine the minimum number of devices guaranteed to share the SAME IP range. (b) A colleague designs a DIFFERENT container structure — grouping devices by which of 3 physical server racks they're connected to instead of by IP range — and asks whether the same pigeonhole reasoning still applies. Explain, using Example 3's container-design idea, what would need to be true about this rack-based grouping for the pigeonhole argument to still guarantee a meaningful overload.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.counting-principles` (the basic counting reasoning this existence-proof technique builds on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.counting-principles`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

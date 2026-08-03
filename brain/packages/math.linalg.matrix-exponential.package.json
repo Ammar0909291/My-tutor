@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.matrix-exponential-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.matrix-exponential",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c561f58c82f0e282a98ece5d2478725938ea7d231c0f2bd6e89068baa7e714be",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.matrix-exponential.md": "sha256:3c8e2f9bf99c8ddf8b011e3cf228a6afffb3c646333a655498587c6fd0fb85ef"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.matrix-exponential",
+    "name": "Matrix Exponential",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.diagonalization",
+      "math.seq.series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.matrix-exponential-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.matrix-exponential (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.matrix-exponential.md": "sha256:3c8e2f9bf99c8ddf8b011e3cf228a6afffb3c646333a655498587c6fd0fb85ef"
+      },
+      "contentHash": "sha256:852897cff9e2c390469764c7853a510cab2da0ff5762f4048b21c6f83f0e6160",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-exponential.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-exponential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-exponential.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-exponential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-exponential.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-exponential\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-exponential.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-exponential\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.matrix-exponential/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the matrix exponential's SERIES DEFINITION $e^A=\\sum_{k=0}^{\\infty}\\frac{A^k}{k!}=I+A+\\frac{A^2}{2!}+\\frac{A^3}{3!}+\\cdots$ — the direct matrix analogue of the scalar exponential's Taylor series.\n- LO2: For a DIAGONALIZABLE matrix $A=PDP^{-1}$, compute $e^A=Pe^DP^{-1}$ efficiently, where $e^D$ is diagonal with entries $e^{\\lambda_i}$ (NOT $\\lambda_i$ itself, and NOT computed by exponentiating $D$'s entries via the series — the diagonal case collapses the whole series into simple scalar exponentials).\n- LO3: Use $x(t)=e^{At}x(0)$ to express the solution to the linear system of differential equations $x'=Ax$, and state the defining property $\\frac{d}{dt}e^{At}=Ae^{At}$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "E-TO-D-DIAGONAL-ENTRIES-COMPUTED-INCORRECTLY",
+      "content": "| MC-1 | E-TO-D-DIAGONAL-ENTRIES-COMPUTED-INCORRECTLY | Computing e^D's diagonal entries as the eigenvalue raised to e, or leaving them unchanged, instead of e raised to each eigenvalue's power | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "E-TO-AT-CONFUSED-WITH-T-TIMES-E-TO-A",
+      "content": "| MC-2 | E-TO-AT-CONFUSED-WITH-T-TIMES-E-TO-A | Treating e^{At} as t times the fixed matrix e^A, rather than a genuinely t-dependent matrix recomputed for each t | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "e^D Exponentiates Eigenvalues as Scalar Exponents, Not Bases or Unchanged Values (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"e^D Exponentiates Eigenvalues as Scalar Exponents, Not Bases or Unchanged Values (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "Applying Diagonalization to e^A (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Applying Diagonalization to e^A (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "e^{At} Is a t-Dependent Matrix, Not t Times a Fixed Matrix (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"e^{At} Is a t-Dependent Matrix, Not t Times a Fixed Matrix (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $e^A$ for $A=\\begin{pmatrix}0&0\\\\0&5\\end{pmatrix}$.\n  2. Given $A=PDP^{-1}$ with $D=\\text{diag}(1,-2)$, write $e^D$ explicitly.\n  3. Write the solution $x(t)=e^{At}x(0)$ for $A=\\text{diag}(4,-3)$ and $x(0)=(2,1)$.\n  4. Explain, in one sentence, why $e^{At}$ cannot simply be written as $t\\cdot e^A$.\n- **P76 (Transfer Probe, mode = independence)**: \"A chemical reaction network's concentration vector $x(t)$ (two interacting species) evolves according to $x'=Ax$ with $A=\\begin{pmatrix}-2&0\\\\0&-0.5\\end{pmatrix}$ (each species decaying at its own independent rate) and initial concentrations $x(0)=(10,10)$. (a) Write the solution $x(t)=e^{At}x(0)$ explicitly, and evaluate the concentration of each species at $t=1$. (b) Explain, using the eigenvalue signs, why BOTH concentrations decay toward 0 as $t\\to\\infty$, and why the first species (eigenvalue $-2$) decays much FASTER than the second (eigenvalue $-0.5$).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.diagonalization` (needed for the efficient $Pe^DP^{-1}$ computation) and `math.seq.series` (needed to understand the infinite-series definition and its convergence).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-exponential/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.matrix-exponential",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.diagonalization`, `math.seq.series`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-links**: `math.de.systems-matrix-method` (the matrix exponential is the closed-form solution technique for linear systems of differential equations).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-exponential.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

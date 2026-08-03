@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.perimeter-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.perimeter",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:34b8fc58d1ff6ecfd520a1c8b14fca707725b2d63dcf749c9eb5b0a7aeee6f24",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.perimeter.md": "sha256:dce5062c9e6f28ed5e0b7bb8790fa3e2479ede722c18a919bc9387100079d108"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.perimeter",
+    "name": "Perimeter",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.line-segment"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.perimeter-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.perimeter (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.perimeter.md": "sha256:dce5062c9e6f28ed5e0b7bb8790fa3e2479ede722c18a919bc9387100079d108"
+      },
+      "contentHash": "sha256:f5b0060373ba8be4a01a98ab3ca43c8f10be029dd4612958a1ab9c09d5071571",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.perimeter.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.perimeter.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.perimeter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.perimeter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.perimeter.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.perimeter.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.perimeter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.perimeter\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.perimeter.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.perimeter.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.perimeter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.perimeter\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.perimeter.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.perimeter.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.perimeter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.perimeter\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.perimeter/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.perimeter",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the PERIMETER of a polygon as the SUM of all its side lengths — every side counted exactly ONCE, going all the way around the boundary.\n- LO2: Recognize that for a CIRCLE specifically, the perimeter is called the CIRCUMFERENCE (a special name for the same underlying \"total boundary length\" concept) — not a different kind of measurement.\n- LO3: Distinguish PERIMETER (a boundary LENGTH, measured in linear units like cm or m) from AREA (a measurement of the ENCLOSED region, measured in SQUARED units like cm² or m²) — these are fundamentally different quantities that should never be confused or added together.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.perimeter",
+      "title": "NOT-ALL-SIDES-SUMMED-WHEN-COMPUTING-PERIMETER",
+      "content": "| MC-1 | NOT-ALL-SIDES-SUMMED-WHEN-COMPUTING-PERIMETER | Summing only some sides (e.g. one of each unique length) rather than every individual side of the boundary | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.perimeter",
+      "title": "PERIMETER-AND-AREA-CONFLATED-OR-ADDED-TOGETHER",
+      "content": "| MC-2 | PERIMETER-AND-AREA-CONFLATED-OR-ADDED-TOGETHER | Confusing perimeter (a length) with area (a squared-length quantity), especially when their numeric values happen to coincide in a specific example | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.perimeter",
+      "title": "Sum Every Side of the Boundary, Not Just One of Each Unique Length (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Sum Every Side of the Boundary, Not Just One of Each Unique Length (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.perimeter",
+      "title": "Circumference Is Just a Circle's Perimeter (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Circumference Is Just a Circle's Perimeter (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.perimeter",
+      "title": "Perimeter (Length) and Area (Squared-Length) Are Never Interchangeable (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Perimeter (Length) and Area (Squared-Length) Are Never Interchangeable (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.perimeter",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.perimeter",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the perimeter of a rectangle with length 12 and width 7.\n  2. Find the perimeter of a triangle with sides 5, 7, and 9.\n  3. Explain, in one sentence, why a circle's perimeter is called its circumference.\n  4. For a rectangle with length 6 and width 3, find both the perimeter and the area, and explain why these two values (though both numbers) represent different kinds of quantities.\n- **P76 (Transfer Probe, mode = independence)**: \"A homeowner needs to buy fencing (sold by the linear foot) to enclose a rectangular backyard measuring 30 ft by 20 ft, and SEPARATELY needs to buy sod (sold by the square foot) to cover the entire yard. (a) Calculate how many linear feet of fencing are needed. (b) Calculate how many square feet of sod are needed. (c) Explain why these two calculations use fundamentally different formulas and units, even though both describe the same backyard.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.perimeter",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.line-segment` (the basic length concept being summed).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.perimeter/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.perimeter",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.line-segment`.\n- **Unlocks**: `math.geom.circle-circumference`.\n- **Related**: `math.geom.area` (the fundamentally different but often-confused companion measurement).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.perimeter.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

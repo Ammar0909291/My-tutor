@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.inclusion-exclusion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.inclusion-exclusion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c914f67edf1a681dc925f9e3d8448765948ef9e9b39c4af85dc63945431b3f35",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md": "sha256:9eb3a6013030fbed9bcc077be47e239597e6c68a9116b6ab029a867db34ba936"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.inclusion-exclusion",
+    "name": "Inclusion-Exclusion Principle",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.combinations",
+      "math.found.set-operations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.inclusion-exclusion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.inclusion-exclusion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md": "sha256:9eb3a6013030fbed9bcc077be47e239597e6c68a9116b6ab029a867db34ba936"
+      },
+      "contentHash": "sha256:7f119d583651cce183d6b98dfea484dd1bf16d8276612d393e4abe6148a5f5a3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.inclusion-exclusion/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the two-set inclusion-exclusion formula $|A\\cup B|=|A|+|B|-|A\\cap B|$ to count elements with at least one of two properties.\n- LO2: Apply the three-set inclusion-exclusion formula $|A\\cup B\\cup C|=|A|+|B|+|C|-|A\\cap B|-|A\\cap C|-|B\\cap C|+|A\\cap B\\cap C|$, correctly tracking the alternating add/subtract pattern.\n- LO3: Explain WHY simple addition of individual set sizes over-counts elements in multiple sets, and how each correction term compensates for a specific level of over/under-counting.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "TRIPLE-INTERSECTION-CORRECTION-OMITTED",
+      "content": "| MC-1 | TRIPLE-INTERSECTION-CORRECTION-OMITTED | Stopping the three-set inclusion-exclusion computation after subtracting pairwise intersections, omitting the final add-back of the triple intersection | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "INTERSECTION-COUNTS-MISIDENTIFIED-FROM-PROBLEM-STATEMENT",
+      "content": "| MC-2 | INTERSECTION-COUNTS-MISIDENTIFIED-FROM-PROBLEM-STATEMENT | Misreading which stated overlap value corresponds to which specific pairwise or triple intersection in a word problem | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "UNION-SIZE-COMPUTED-AS-SIMPLE-SUM",
+      "content": "| MC-3 | UNION-SIZE-COMPUTED-AS-SIMPLE-SUM | Adding individual set sizes directly without any intersection correction, ignoring double-counting entirely | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Two-Set Case via Venn Diagram (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two-Set Case via Venn Diagram (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Three-Set Case: the Full Alternating Pattern (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Three-Set Case: the Full Alternating Pattern (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Tracing an Element's Count Justifies the Formula (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Tracing an Element's Count Justifies the Formula (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Among 80 people, 45 own a car, 30 own a bike, and 15 own both. How many own at least one?\n  2. Among 200 students, 100 take math, 90 take physics, 70 take chemistry; 40 take math and physics, 35 take math and chemistry, 30 take physics and chemistry; 15 take all three. How many take at least one subject?\n  3. Given a flawed three-set computation that stops after the pairwise subtraction step, identify the missing term and correct the final answer.\n  4. Explain, using an element-tracing argument like Example 3's, why the triple-intersection term in the three-set formula is ADDED rather than subtracted.\n- **P76 (Transfer Probe, mode = independence)**: \"A company surveys 300 employees about which of three benefits they use: gym membership (120), health insurance top-up (150), commuter pass (90). Overlaps: gym+insurance (40), gym+commuter (25), insurance+commuter (35), all three (10). (a) Compute the number of employees using at least one benefit. (b) An HR analyst computes only $120+150+90-40-25-35=260$ and stops there — explain precisely what this number actually represents (hint: trace what happened to employees using all three benefits) and what the correct final answer should be.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.combinations` (used within applied inclusion-exclusion problems to count each intersection term) and `math.found.set-operations` (union and intersection, the operations this principle directly relates).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.combinations`, `math.found.set-operations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared; the KG description notes this principle is used to derive Euler's totient function and the derangement formula, both elsewhere in the curriculum.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

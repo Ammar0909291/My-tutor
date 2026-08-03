@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.z-test-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.z-test",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a2ca78be4646784f249cf32ab436654d7f719cabb13d571732457f26cfee5436",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.z-test.md": "sha256:6f61b354939e64d97a02709d3b1e4ab5d83aca70fa698579ee960976aa7a3e27"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.z-test",
+    "name": "z-Test",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.hypothesis-testing",
+      "math.prob.standard-normal"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.z-test-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.z-test (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.z-test.md": "sha256:6f61b354939e64d97a02709d3b1e4ab5d83aca70fa698579ee960976aa7a3e27"
+      },
+      "contentHash": "sha256:c957b7a4dc9ad215d9ed843e5a4133a2c614641a396e3e0bd67ea56cba22c0fb",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.z-test.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.z-test.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.z-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.z-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.z-test.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.z-test.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.z-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.z-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.z-test.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.z-test.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.z-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.z-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.z-test.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.z-test.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.z-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.z-test\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.z-test/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.z-test",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the $z$-test for $H_0:\\mu=\\mu_0$ WHEN $\\sigma$ is KNOWN, computing $Z=\\frac{\\bar{X}-\\mu_0}{\\sigma/\\sqrt{n}}$, which follows a standard normal distribution $N(0,1)$ UNDER $H_0$.\n- LO2: Compare the computed $Z$ statistic to the appropriate CRITICAL VALUE — $z_{\\alpha/2}$ for a TWO-TAILED test (checking both directions of departure from $\\mu_0$), or $z_\\alpha$ for a ONE-TAILED test (checking only ONE specific direction) — using the WRONG critical value (two-tailed when one-tailed is appropriate, or vice versa) changes the decision threshold incorrectly.\n- LO3: Recognize the $z$-test REQUIRES $\\sigma$ to be genuinely KNOWN — this is a comparatively RARE practical situation (most real analyses estimate $\\sigma$ from the sample, requiring `math.stats.t-test` instead); recognize when the $z$-test's known-$\\sigma$ assumption doesn't actually hold in a given scenario.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.z-test",
+      "title": "SAMPLE-STANDARD-DEVIATION-SUBSTITUTED-FOR-KNOWN-SIGMA-WITHOUT-SWITCHING-TO-T-TEST",
+      "content": "| MC-1 | SAMPLE-STANDARD-DEVIATION-SUBSTITUTED-FOR-KNOWN-SIGMA-WITHOUT-SWITCHING-TO-T-TEST | Substituting the sample standard deviation s for σ in the z-test formula without recognizing this requires switching to the t-test instead | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.z-test",
+      "title": "SAME-CRITICAL-VALUE-USED-REGARDLESS-OF-ONE-TAILED-OR-TWO-TAILED-STRUCTURE",
+      "content": "| MC-2 | SAME-CRITICAL-VALUE-USED-REGARDLESS-OF-ONE-TAILED-OR-TWO-TAILED-STRUCTURE | Using the same critical value regardless of whether the test is one-tailed or two-tailed, potentially reversing the correct decision | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.z-test",
+      "title": "The z-Test Requires σ Genuinely Known (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The z-Test Requires σ Genuinely Known (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.z-test",
+      "title": "One-Tailed vs. Two-Tailed Critical Values Change the Decision (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"One-Tailed vs. Two-Tailed Critical Values Change the Decision (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.z-test",
+      "title": "Recognizing When the z-Test's Assumption Fails (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Recognizing When the z-Test's Assumption Fails (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.z-test",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.z-test",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Test $H_0:\\mu=50$ against $H_a:\\mu\\ne50$, given $\\bar{x}=53$, $\\sigma=6$ (known), $n=36$, at $\\alpha=0.05$.\n  2. For $Z=1.8$ at $\\alpha=0.05$, determine the decision for a one-tailed test with $H_a:\\mu>\\mu_0$.\n  3. For the same $Z=1.8$ at $\\alpha=0.05$, determine the decision for a two-tailed test.\n  4. Explain, in one sentence, why the z-test requires knowing σ, rather than estimating it from the sample.\n- **P76 (Transfer Probe, mode = independence)**: \"A manufacturing process for machined parts has a well-established, historically KNOWN standard deviation of 0.02mm (from decades of quality records), and a quality engineer wants to test whether today's batch's mean diameter differs from the target specification of 10mm, based on a sample of 50 parts with sample mean 10.008mm. (a) Explain why the z-test (rather than the t-test) is appropriate here, given the historically known σ. (b) Compute the test statistic and determine whether the batch's mean significantly differs from the target at α=0.05 (two-tailed), using $z_{0.025}\\approx1.96$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.z-test",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.hypothesis-testing` (the general framework) and `math.prob.standard-normal` (the reference distribution for the $Z$ statistic).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.z-test/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.z-test",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.hypothesis-testing`, `math.prob.standard-normal`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.t-test` (the more commonly applicable alternative when σ is unknown).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.z-test.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

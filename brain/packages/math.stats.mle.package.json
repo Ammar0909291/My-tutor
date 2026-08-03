@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.mle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.mle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ecf86615d2684f3d50fc869dcf21641903bd078825f41e68b2cf949a81e5715f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.mle.md": "sha256:7ea6f28e90b387a37aab824c84b8a9622101890cf41617adec3e0aa672e1e78c"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.mle",
+    "name": "Maximum Likelihood Estimation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.stats.estimator",
+      "math.calc.derivative-rules",
+      "math.prob.pdf"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.mle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.mle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.mle.md": "sha256:7ea6f28e90b387a37aab824c84b8a9622101890cf41617adec3e0aa672e1e78c"
+      },
+      "contentHash": "sha256:d6e7247c4a119cb9b0f6d4c80dc9c88953f995da48ef986033a34c0f93171935",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.mle.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.mle.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.mle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.mle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.mle.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.mle.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.mle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.mle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.mle.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.mle.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.mle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.mle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.mle.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.mle.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.mle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.mle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.mle/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.mle",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the LIKELIHOOD function $L(\\theta)=\\prod_i f(x_i|\\theta)$ (the PRODUCT of the density/probability function evaluated at each observed data point, treated as a function of the unknown parameter $\\theta$) — and choose $\\hat\\theta=\\text{argmax}_\\theta L(\\theta)$, the value MAXIMIZING this function.\n- LO2: Apply the LOG-LIKELIHOOD trick — maximize $\\log L(\\theta)=\\sum_i\\log f(x_i|\\theta)$ instead of $L(\\theta)$ directly — recognizing this is VALID because $\\log$ is a MONOTONICALLY INCREASING function (so the MAXIMIZING $\\theta$ is identical for $L$ and $\\log L$), while converting a PRODUCT into a much more tractable SUM for differentiation.\n- LO3: Find the MLE by setting the SCORE $\\frac{\\partial\\log L}{\\partial\\theta}=0$ and solving — and recognize MLEs have three important large-sample properties: they are CONSISTENT, ASYMPTOTICALLY NORMAL, and ASYMPTOTICALLY EFFICIENT (achieving the lowest possible variance among consistent estimators, in the large-sample limit).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.mle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.mle",
+      "title": "RAW-PRODUCT-LIKELIHOOD-DIFFERENTIATED-DIRECTLY-INSTEAD-OF-TAKING-THE-LOG-FIRST",
+      "content": "| MC-1 | RAW-PRODUCT-LIKELIHOOD-DIFFERENTIATED-DIRECTLY-INSTEAD-OF-TAKING-THE-LOG-FIRST | Attempting to differentiate the raw product-form likelihood directly, rather than first converting to the log-likelihood sum for tractability | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.mle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.mle",
+      "title": "SCORE-EXPRESSION-LEFT-UNSOLVED-INSTEAD-OF-SET-TO-ZERO-AND-SOLVED-FOR-THETA",
+      "content": "| MC-2 | SCORE-EXPRESSION-LEFT-UNSOLVED-INSTEAD-OF-SET-TO-ZERO-AND-SOLVED-FOR-THETA | Stopping at the derivative (score) expression without setting it to zero and solving for the parameter, leaving the MLE unfound | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.mle/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.mle",
+      "title": "Take the Log First to Convert the Product into a Sum (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Take the Log First to Convert the Product into a Sum (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.mle/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.mle",
+      "title": "Setting the Score to Zero and Solving, Not Stopping at the Derivative (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Setting the Score to Zero and Solving, Not Stopping at the Derivative (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.mle/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.mle",
+      "title": "MLE's Three Large-Sample Guarantees (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"MLE's Three Large-Sample Guarantees (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.mle/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.mle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.mle/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.mle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. For data from a Poisson distribution with rate $\\lambda$ (probability mass $f(x|\\lambda)=\\frac{\\lambda^xe^{-\\lambda}}{x!}$), write the log-likelihood for $n$ observations.\n  2. Continuing problem 1, find the MLE $\\hat\\lambda$ by setting the score to zero and solving.\n  3. Explain, in one sentence, why maximizing the log-likelihood gives the same answer as maximizing the likelihood directly.\n  4. State the three key large-sample properties of MLEs.\n- **P76 (Transfer Probe, mode = independence)**: \"A biologist collects data on the number of mutations observed per gene sample, modeling this count with a Poisson distribution of unknown rate $\\lambda$ (the average mutation rate), and wants to estimate $\\lambda$ from the collected data using MLE. (a) Explain why the biologist would take the LOG of the likelihood function before attempting to maximize it. (b) Explain why the resulting MLE is expected to become increasingly accurate as the biologist collects more gene samples, connecting to MLE's consistency property.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.mle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.mle",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.estimator` (the general estimation framework), `math.calc.derivative-rules` (needed to maximize the log-likelihood), and `math.prob.pdf` (the density function $f(x|\\theta)$ used to build the likelihood).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.mle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.mle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.estimator`, `math.calc.derivative-rules`, `math.prob.pdf`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.method-of-moments` (an alternative, simpler-to-compute estimation method).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.mle.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

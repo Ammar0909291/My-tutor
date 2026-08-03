@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.predicate-logic-disc-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.predicate-logic-disc",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b2457bf55863563e32bdbdd977a7ecb3308eeb4ead95abb5fbc2b5b37966c888",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md": "sha256:58d8f307eebb2e10aa64bb81fc76aa5e9b8e36d08d86f85b89280425e773f3fb"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.predicate-logic-disc",
+    "name": "Predicate Logic in Discrete Mathematics",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.predicate-logic",
+      "math.disc.propositional-logic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.predicate-logic-disc-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.predicate-logic-disc (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md": "sha256:58d8f307eebb2e10aa64bb81fc76aa5e9b8e36d08d86f85b89280425e773f3fb"
+      },
+      "contentHash": "sha256:35ae3a0f85a18fe596f40201a25175397a33d1ef7747d043aed913b17976bced",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.predicate-logic-disc/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Learning Objectives",
+      "content": "- LO1: Select an appropriate proof technique (direct, contrapositive, contradiction, induction, or counterexample) for a given discrete-mathematics claim, justifying the choice based on the claim's structure.\n- LO2: Apply proof by induction to a claim about a discrete structure indexed by a natural number (e.g. a formula for a sum, a property of a sequence, a graph-theoretic claim for all $n$).\n- LO3: Disprove a FALSE universally-quantified claim by producing a single counterexample, and recognize this is the ONLY valid way to disprove such a claim (no amount of confirming cases suffices).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "MANY-CONFIRMING-CASES-TREATED-AS-APPROACHING-PROOF",
+      "content": "| MC-1 | MANY-CONFIRMING-CASES-TREATED-AS-APPROACHING-PROOF | Believing a long run of confirming test cases provides meaningful evidence toward proving a universal claim, rather than recognizing a single counterexample fully disproves it regardless of prior confirmations | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "PROOF-TECHNIQUE-CHOSEN-WITHOUT-STRUCTURAL-JUSTIFICATION",
+      "content": "| MC-2 | PROOF-TECHNIQUE-CHOSEN-WITHOUT-STRUCTURAL-JUSTIFICATION | Selecting a proof technique arbitrarily or by habit rather than recognizing the specific structural cue (indexed claim, non-existence claim, etc.) that motivates the choice | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "INDUCTIVE-STEP-ASSUMES-THE-CONCLUSION",
+      "content": "| MC-3 | INDUCTIVE-STEP-ASSUMES-THE-CONCLUSION | In an induction proof, circularly assuming the very statement being proved (for $n+1$) rather than deriving it FROM the $n$-case assumption | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Recognizing When Induction Is the Natural Fit (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Recognizing When Induction Is the Natural Fit (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "One Counterexample Disproves, No Matter How Many Cases Confirmed First (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"One Counterexample Disproves, No Matter How Many Cases Confirmed First (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Structural Cues for Technique Selection (Primitive P64: Conceptual Shift, second instance)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Structural Cues for Technique Selection (Primitive P64: Conceptual Shift, second instance)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Prove by induction: $\\forall n\\ge1$, $1+3+5+\\cdots+(2n-1)=n^2$.\n  2. Disprove the claim \"$\\forall n\\ge0$, $2^n+1$ is prime\" by finding a counterexample (hint: check $n=5$).\n  3. Select and justify an appropriate proof technique for \"there is no largest even integer,\" then carry out the proof.\n  4. Explain, in one sentence, why testing a claim for many specific values of $n$ can never substitute for a genuine proof of a universal claim.\n- **P76 (Transfer Probe, mode = independence)**: \"A programmer claims: 'for every positive integer $n$, my sorting function correctly sorts any list of $n$ items — I've tested it on lists of size 1 through 1000 and it always works.' (a) Explain, using this lesson's counterexample-disproof idea, why this testing evidence — however extensive — does not constitute a proof that the function works for ALL $n$. (b) Propose, in general terms, what kind of argument (naming the proof technique) WOULD be needed to genuinely establish the function's correctness for every possible list size, and explain why this technique is a natural fit for a claim about 'every $n$.'\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.predicate-logic` (quantifiers $\\forall,\\exists$ and their formal meaning) and `math.disc.propositional-logic` (the connectives this concept's proof techniques combine with quantified statements).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.predicate-logic`, `math.disc.propositional-logic`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.proof-by-induction`, `math.found.proof-by-contradiction` (this concept applies those already-authored general techniques specifically within discrete-mathematics contexts, reused by reference rather than re-derived).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

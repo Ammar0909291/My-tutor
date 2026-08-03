@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.nonparametric-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.nonparametric",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4ede037faba26619e9327d131720646aa8501d458a95785da0ad7c0c3867e03c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.nonparametric.md": "sha256:389ac741f470c1290044fd918d4777a419ec65e3914bc5f13250d3a68235ee78"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.nonparametric",
+    "name": "Nonparametric Tests",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.stats.hypothesis-testing"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.nonparametric-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.nonparametric (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.nonparametric.md": "sha256:389ac741f470c1290044fd918d4777a419ec65e3914bc5f13250d3a68235ee78"
+      },
+      "contentHash": "sha256:d9b3a9d2f0821a1121f883c7c7e31e0789b7e11f2d7f6deedc9ecf6420e98f59",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.nonparametric.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.nonparametric.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.nonparametric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.nonparametric\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.nonparametric.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.nonparametric.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.nonparametric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.nonparametric\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.nonparametric.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.nonparametric.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.nonparametric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.nonparametric\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.nonparametric.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.nonparametric.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.nonparametric"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.nonparametric\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.nonparametric/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Learning Objectives",
+      "content": "- LO1: Recognize NONPARAMETRIC tests as making NO assumption about the underlying data's DISTRIBUTIONAL shape (unlike `math.stats.t-test`, which assumes approximate normality) — making them the appropriate choice when normality is genuinely violated, especially for SMALL samples where the Central Limit Theorem's rescue doesn't yet apply.\n- LO2: Match the correct nonparametric test to its SCENARIO — the Wilcoxon SIGNED-RANK test for PAIRED data (the nonparametric analogue of the paired $t$-test), the Mann-Whitney U test for TWO INDEPENDENT samples (the analogue of the two-sample $t$-test), and Kruskal-Wallis for $k$ (more than two) INDEPENDENT samples (the analogue of one-way ANOVA) — using the WRONG test for the data's actual structure (paired vs. independent, two vs. more groups) is a common mismatch.\n- LO3: Recognize these tests are based on RANKS of the data rather than the EXACT numeric values — this is precisely WHY they don't require distributional assumptions (ranks discard some information about exact magnitudes, but gain ROBUSTNESS to non-normality and outliers in exchange).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.nonparametric",
+      "title": "T-TEST-DEFAULTED-TO-REGARDLESS-OF-SAMPLE-SIZE-OR-DISTRIBUTION-SHAPE",
+      "content": "| MC-1 | T-TEST-DEFAULTED-TO-REGARDLESS-OF-SAMPLE-SIZE-OR-DISTRIBUTION-SHAPE | Defaulting to a t-test regardless of sample size or apparent distribution shape, without considering a nonparametric alternative when appropriate | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.nonparametric",
+      "title": "WRONG-NONPARAMETRIC-TEST-USED-FOR-PAIRED-VS-INDEPENDENT-DATA-STRUCTURE",
+      "content": "| MC-2 | WRONG-NONPARAMETRIC-TEST-USED-FOR-PAIRED-VS-INDEPENDENT-DATA-STRUCTURE | Using the wrong nonparametric test (e.g. Mann-Whitney for genuinely paired data) that doesn't match the data's actual paired or independent structure | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Choosing Nonparametric Tests When Normality Is Questionable, Especially for Small n (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Choosing Nonparametric Tests When Normality Is Questionable, Especially for Small n (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Matching Paired vs. Independent Data to the Correct Nonparametric Test (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Matching Paired vs. Independent Data to the Correct Nonparametric Test (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Ranks Provide Robustness to Outliers (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Ranks Provide Robustness to Outliers (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Explain why a nonparametric test might be preferred for a small sample with visibly skewed data.\n  2. Determine which nonparametric test is appropriate for comparing THREE independent groups' non-normal data.\n  3. Determine which nonparametric test is appropriate for comparing TWO independent groups' non-normal data.\n  4. Explain why nonparametric tests based on ranks are more robust to outliers than tests based on exact values.\n- **P76 (Transfer Probe, mode = independence)**: \"A researcher studying customer satisfaction scores (on a 1-10 scale, with a notably skewed distribution due to many customers giving extreme scores of either 1 or 10) wants to compare satisfaction between two INDEPENDENT groups of customers who received different service approaches. (a) Explain why a nonparametric test would be a reasonable choice here, given the skewed distribution. (b) Identify the specific nonparametric test appropriate for comparing these two independent groups.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.hypothesis-testing` — nonparametric tests are alternative test procedures within the same general framework.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.nonparametric/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.nonparametric",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.hypothesis-testing`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.t-test` (the parametric counterpart these tests serve as alternatives to).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.nonparametric.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

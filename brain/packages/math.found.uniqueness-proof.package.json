@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.uniqueness-proof-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.uniqueness-proof",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1c5880355e9547ebba93af01f03778febb5ca5fbe6e47b50187f6d591e4d02b5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.uniqueness-proof.md": "sha256:fc1e298c93974e695f34999d7d6450f85565b7141fb1806acb1acf6a1904c7c0"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.uniqueness-proof",
+    "name": "Uniqueness Proof",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.existence-proof"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.uniqueness-proof-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.uniqueness-proof (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.uniqueness-proof.md": "sha256:fc1e298c93974e695f34999d7d6450f85565b7141fb1806acb1acf6a1904c7c0"
+      },
+      "contentHash": "sha256:f3288bd1db2ae2148af1b245f34bdc6251392e96a2d1278994c7c0fd1e1d012f",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.uniqueness-proof.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.uniqueness-proof.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.uniqueness-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.uniqueness-proof\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.uniqueness-proof.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.uniqueness-proof.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.uniqueness-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.uniqueness-proof\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.uniqueness-proof.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.uniqueness-proof.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.uniqueness-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.uniqueness-proof\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.uniqueness-proof/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write a uniqueness proof using the standard technique: assume TWO objects $x_1,x_2$ both satisfy the property, then prove $x_1=x_2$.\n- LO2: Combine an existence proof and a uniqueness proof into a full \"there exists a UNIQUE $x$ such that...\" claim, recognizing both halves are independently required.\n- LO3: Recognize that a uniqueness proof alone (without existence) proves only \"AT MOST one object satisfies $P$\" — it does not, by itself, establish that any such object exists at all.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "UNIQUENESS-PROOF-MISTAKEN-FOR-EXISTENCE-PROOF",
+      "content": "| MC-1 | UNIQUENESS-PROOF-MISTAKEN-FOR-EXISTENCE-PROOF | Believing a completed uniqueness proof (at most one) alone establishes that an object satisfying the property exists | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "TWO-OBJECT-ASSUMPTION-MISREAD-AS-ASSUMING-DIFFERENCE",
+      "content": "| MC-2 | TWO-OBJECT-ASSUMPTION-MISREAD-AS-ASSUMING-DIFFERENCE | Starting a uniqueness proof by assuming $x_1\\ne x_2$ (as if setting up a proof by contradiction against distinctness) rather than assuming both merely satisfy $P$, without presupposing they differ | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "Assume Two Objects, Prove They're Equal (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Assume Two Objects, Prove They're Equal (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "Existence and Uniqueness Are Two Separate Halves (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Existence and Uniqueness Are Two Separate Halves (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Prove the uniqueness half: \"if $a>0$, the equation $x^2=a$ has at most one POSITIVE solution\" (assume $x_1,x_2>0$ both satisfy $x_1^2=a=x_2^2$, derive $x_1=x_2$).\n  2. Combine with an existence argument (informally citing that $\\sqrt a$ exists) to state the full \"exists and is unique\" claim for item 1.\n  3. Given a false equation like \"$x=x+2$,\" explain why a uniqueness-style argument on it would still (vacuously) show \"at most one solution,\" and why this is not a meaningful positive result.\n  4. Prove both existence and uniqueness for \"every real number has a unique additive inverse\" ($-a$ satisfies $a+(-a)=0$; assume $b_1,b_2$ both satisfy $a+b_1=0=a+b_2$, derive $b_1=b_2$).\n- **P76 (Transfer Probe, mode = independence)**: \"A committee bylaw states: 'there is a unique person authorized to sign contracts on the organization's behalf.' (a) Explain what TWO separate things this claim asserts, using this lesson's existence/uniqueness distinction. (b) A new employee argues, 'the bylaw proves such a person exists, since it says so.' Explain why the WORD 'unique' in the bylaw's phrasing does not, by itself, logically guarantee that such an authorized person actually exists — connecting your answer to Example 2's vacuous-uniqueness case — and what separate evidence would be needed to confirm existence.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.existence-proof` — uniqueness proofs are typically paired with (but logically distinct from) existence proofs, together forming the full \"exists and is unique\" claim.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.uniqueness-proof/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.uniqueness-proof",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.existence-proof`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.existence-proof` (the companion half of the full \"exists and is unique\" claim).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uniqueness-proof.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.consistency-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.consistency",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d73c3fc0d4f4325d7c7a97c5215188cf51d49581a8b6834e70c28917610eb82f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.consistency.md": "sha256:edf1ecd0e35dd2ce97417c747cca61b6d3fdd8480da40572d0775cb583f052ac"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.consistency",
+    "name": "Consistency of Estimators",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.stats.estimator",
+      "math.prob.convergence-types"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.consistency-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.consistency (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.consistency.md": "sha256:edf1ecd0e35dd2ce97417c747cca61b6d3fdd8480da40572d0775cb583f052ac"
+      },
+      "contentHash": "sha256:64c05833d279e6570e6890645487f3f7be013d3ec20be8440be7cdc73f070df1",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.consistency.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.consistency.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.consistency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.consistency.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.consistency.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.consistency\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.consistency.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.consistency.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.consistency\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.consistency.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.consistency.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.consistency"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.consistency\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.consistency/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.consistency",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define CONSISTENCY — an estimator $\\hat\\theta_n$ (indexed by sample size $n$) is consistent if $\\hat\\theta_n\\to^P\\theta$ as $n\\to\\infty$ (converges IN PROBABILITY to the true parameter, from `math.prob.convergence-types`) — a statement about LARGE-SAMPLE behavior, NOT about any single fixed-size sample.\n- LO2: Apply the SUFFICIENT condition: if BOTH bias$\\to0$ AND variance$\\to0$ as $n\\to\\infty$, then the estimator is consistent — and recognize this is a SUFFICIENT (not necessary) condition, i.e. an estimator could in principle be consistent via a different route, but this bias/variance-both-vanish route is the most common practical check.\n- LO3: Recognize the Law of Large Numbers (LLN) directly implies the SAMPLE MEAN is a consistent estimator of the population mean — connecting this abstract definition to a concrete, already-familiar result.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.consistency",
+      "title": "CONSISTENCY-INTERPRETED-AS-A-FIXED-SAMPLE-SIZE-ACCURACY-GUARANTEE",
+      "content": "| MC-1 | CONSISTENCY-INTERPRETED-AS-A-FIXED-SAMPLE-SIZE-ACCURACY-GUARANTEE | Interpreting \"consistent\" as meaning the estimator is accurate for any sample size, rather than correctly understanding it as a purely asymptotic (large-n-limit) property | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.consistency",
+      "title": "ONLY-ONE-OF-BIAS-OR-VARIANCE-CONDITIONS-CHECKED-FOR-THE-SUFFICIENT-CRITERION",
+      "content": "| MC-2 | ONLY-ONE-OF-BIAS-OR-VARIANCE-CONDITIONS-CHECKED-FOR-THE-SUFFICIENT-CRITERION | Checking only bias→0 or only variance→0, rather than verifying both conditions together as the sufficient criterion requires | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.consistency",
+      "title": "Consistency Is an Asymptotic Property, Not a Fixed-n Accuracy Guarantee (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Consistency Is an Asymptotic Property, Not a Fixed-n Accuracy Guarantee (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.consistency",
+      "title": "Checking Both Bias→0 AND Variance→0 Together (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Checking Both Bias→0 AND Variance→0 Together (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.consistency",
+      "title": "Sample Mean's Consistency as a Direct LLN Restatement (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Sample Mean's Consistency as a Direct LLN Restatement (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.consistency",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.consistency",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Explain, in one sentence, what it means for an estimator to be \"consistent.\"\n  2. For an estimator with bias $\\to0$ but variance approaching a NONZERO constant as $n\\to\\infty$, determine whether the sufficient condition for consistency is satisfied, and justify.\n  3. Explain why the sample mean's consistency is a direct consequence of the Law of Large Numbers.\n  4. Explain why consistency alone does not guarantee an estimator is accurate for a small sample size like $n=5$.\n- **P76 (Transfer Probe, mode = independence)**: \"A quality-control engineer at a manufacturing plant uses an estimator for the average defect rate, based on inspecting a sample of products, and is told the estimator is 'consistent.' (a) Explain what this consistency property does and does NOT guarantee about the estimator's accuracy for a specific small daily sample of 20 products. (b) Explain what would need to be true about the estimator's bias and variance as the daily sample size grows, for this consistency property to hold via the standard sufficient condition.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.consistency",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.estimator` (the object being characterized) and `math.prob.convergence-types` (needed for the \"converges in probability\" definition underlying consistency).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.consistency/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.consistency",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.estimator`, `math.prob.convergence-types`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.estimator`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.consistency.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

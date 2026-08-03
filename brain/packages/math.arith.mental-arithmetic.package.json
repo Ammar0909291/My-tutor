@@ -1,0 +1,280 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.mental-arithmetic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.mental-arithmetic",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d648784dfcac7bc822a7a0f645b687efb7c2adf90cc1014c0da94a2847111276",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.mental-arithmetic.md": "sha256:dc7614e7a0d07193ceb1c49dd1047ee36ef213802e2b5222a6b585622bbe1086"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.mental-arithmetic",
+    "name": "Mental Arithmetic",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.arith.mental-addition",
+      "math.arith.mental-multiplication"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.mental-arithmetic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.mental-arithmetic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.mental-arithmetic.md": "sha256:dc7614e7a0d07193ceb1c49dd1047ee36ef213802e2b5222a6b585622bbe1086"
+      },
+      "contentHash": "sha256:17cdd7566d3b7906e892b80ffc7e04e924001829155a24c57bc9d47d90ec750c",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-arithmetic.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-arithmetic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-arithmetic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-arithmetic.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-arithmetic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-arithmetic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-arithmetic.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-arithmetic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-arithmetic\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.mental-arithmetic/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "Learning Objectives",
+      "content": "- LO1: Integrate mental addition and mental multiplication strategies fluently within a single multi-step computation, without resorting to written columns.\n- LO2: Apply **compensation** — adjust one number to a convenient value, compute, then correct for the adjustment (e.g. $47+29 = 47+30-1$).\n- LO3: Select, among several applicable mental strategies (decomposition, compensation, doubling/halving, memorized facts), whichever is most efficient for the specific numbers at hand.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "COMPENSATION-CORRECTION-STEP-OMITTED",
+      "content": "| MC-1 | COMPENSATION-CORRECTION-STEP-OMITTED | Computing with a rounded number but forgetting to correct the result back for the amount rounded, reporting the rounded-computation's answer as final | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "COMPENSATION-CORRECTION-DIRECTION-REVERSED",
+      "content": "| MC-2 | COMPENSATION-CORRECTION-DIRECTION-REVERSED | Applying the wrong direction of correction (adding when subtraction was needed, or vice versa), especially when switching between addition and subtraction contexts | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "STRATEGY-NOT-SWITCHED-MID-MULTISTEP-PROBLEM",
+      "content": "| MC-3 | STRATEGY-NOT-SWITCHED-MID-MULTISTEP-PROBLEM | Continuing to force one single strategy (e.g. only decomposition) across an entire multi-step problem, rather than selecting the most efficient strategy fresh at each individual step | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "Compensation: Round, Compute, Correct Back (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Compensation: Round, Compute, Correct Back (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "Correction Direction Depends on the Operation and What Was Rounded (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Correction Direction Depends on the Operation and What Was Rounded (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $69+27$ using compensation, showing the rounding and correction steps.\n  2. Compute $72-38$ using compensation, being careful about the correction direction.\n  3. Compute $8\\times49$ mentally using compensation ($8\\times50$ minus a correction), showing all steps.\n  4. Compute $5\\times12+18$ mentally, integrating a multiplication strategy and an addition strategy in sequence.\n- **P76 (Transfer Probe, mode = independence)**: \"A shopper mentally tracks a running total while buying items priced \\$19, \\$8, and \\$23. (a) Compute the running total mentally, choosing an efficient strategy (compensation, making tens, or decomposition) for each addition step, and narrate which strategy you used at each step and why. (b) After buying a fourth item, the shopper needs to compute $7\\times19$ for a bulk discount calculation — use compensation to compute this mentally, and explain how the correction step here differs in mechanics from the addition-based corrections used in part (a).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.mental-addition` and `math.arith.mental-multiplication` (the two operation-specific strategy sets this concept integrates and extends with compensation and multi-step fluency).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.arith.mental-arithmetic/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.mental-arithmetic",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.mental-addition`, `math.arith.mental-multiplication`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.arith.estimation` (a closely related but distinct skill — estimation accepts approximate answers, while mental arithmetic here still targets exact results via smart strategy use).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-arithmetic.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

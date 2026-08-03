@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.triangle-angle-sum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.triangle-angle-sum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e86fd3f8d8703f431cec781f31087912fbd8db6a36532e240232703873b488fa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md": "sha256:8b55026c65a965e1a945f0043b9a929f54de0b3352b3385a7444004eabe0369a"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.triangle-angle-sum",
+    "name": "Triangle Angle Sum Theorem",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.triangle",
+      "math.geom.parallel-lines"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.triangle-angle-sum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.triangle-angle-sum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md": "sha256:8b55026c65a965e1a945f0043b9a929f54de0b3352b3385a7444004eabe0369a"
+      },
+      "contentHash": "sha256:6f5032b2fed3f68f9fad19dc2ac29c8c0348fa406db804883e544906ec7cf85a",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-angle-sum.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-angle-sum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-angle-sum.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-angle-sum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-angle-sum.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-angle-sum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-angle-sum.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-angle-sum\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.triangle-angle-sum/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Triangle Angle Sum Theorem — the three INTERIOR angles of ANY triangle sum to exactly $180°$ — and use it to find a MISSING angle given the other two.\n- LO2: Understand the PROOF sketch using a PARALLEL LINE drawn through one vertex (parallel to the opposite side), using `math.geom.parallel-lines`'s alternate-interior-angle properties to show the three angles form a straight line (hence $180°$) — recognizing this as a genuine PROOF, not merely an empirically observed pattern.\n- LO3: Recognize this theorem holds SPECIFICALLY in EUCLIDEAN geometry — it does NOT hold universally in all geometric systems (e.g. on a curved/spherical surface, triangle angles can sum to MORE than $180°$), a boundary worth being aware of even at this introductory level.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "MISSING-ANGLE-COMPUTATION-STOPS-AT-SUM-OF-KNOWN-ANGLES-WITHOUT-SUBTRACTING-FROM-180",
+      "content": "| MC-1 | MISSING-ANGLE-COMPUTATION-STOPS-AT-SUM-OF-KNOWN-ANGLES-WITHOUT-SUBTRACTING-FROM-180 | Summing the two known angles and stopping there, without completing the final subtraction from 180° to isolate the missing angle | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "ANGLE-SUM-THEOREM-TREATED-AS-UNIVERSALLY-TRUE-REGARDLESS-OF-GEOMETRIC-CONTEXT",
+      "content": "| MC-2 | ANGLE-SUM-THEOREM-TREATED-AS-UNIVERSALLY-TRUE-REGARDLESS-OF-GEOMETRIC-CONTEXT | Treating the 180° angle sum as an absolute truth for any triangle in any geometric context, rather than recognizing it as specific to Euclidean (flat) geometry | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "Subtract from 180° to Isolate the Missing Angle (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Subtract from 180° to Isolate the Missing Angle (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "The Parallel-Line Proof Construction (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Parallel-Line Proof Construction (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "The Theorem Is Euclidean-Specific, Not Universally True (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"The Theorem Is Euclidean-Specific, Not Universally True (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.95×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. A triangle has angles $40°$ and $85°$. Find the third angle.\n  2. Explain, in your own words, how drawing a parallel line through a triangle's vertex proves the angle sum theorem.\n  3. Explain why the Triangle Angle Sum Theorem specifically applies to Euclidean (flat) geometry.\n  4. A triangle has angles $x$, $2x$, and $3x$. Find $x$ and each angle.\n- **P76 (Transfer Probe, mode = independence)**: \"An architect is designing a triangular roof truss and has measured two of the truss's three angles as $35°$ and $95°$ during a site survey. (a) Use the Triangle Angle Sum Theorem to find the third angle. (b) Explain why this theorem gives the architect complete confidence in the third angle's value without needing to physically measure it, given the truss is a genuine flat (Euclidean) triangle.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.triangle` (the object being analyzed) and `math.geom.parallel-lines` (the key tool in the standard proof).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-angle-sum/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.triangle-angle-sum",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.triangle`, `math.geom.parallel-lines`.\n- **Unlocks**: `math.geom.polygon-angle-sum`.\n- **Related**: `math.geom.parallel-lines` (the key tool in the standard proof).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-angle-sum.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

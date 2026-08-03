@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.set-difference-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.set-difference",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c39cd372b6612e7ac709c11e7d1001f6113aab8ee96534fc3513433e42da63a2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.set-difference.md": "sha256:c5d2195ee0f843c7fd7a6027ae9544f5a543d7c5a9a41e87f5e7ce7cf3fa96ec"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.set-difference",
+    "name": "Set Difference",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.set-operations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.set-difference-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.set-difference (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.set-difference.md": "sha256:c5d2195ee0f843c7fd7a6027ae9544f5a543d7c5a9a41e87f5e7ce7cf3fa96ec"
+      },
+      "contentHash": "sha256:7883f844e26390ae53e219cf33f3be8408ba8f86541123fc27e1ee5ba872f906",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.set-difference.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-difference.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-difference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-difference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-difference.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-difference.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-difference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-difference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.set-difference.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.set-difference.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.set-difference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.set-difference\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.set-difference/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.set-difference",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute $A\\setminus B$ for given finite sets, keeping only elements of $A$ that are NOT in $B$.\n- LO2: Prove, by counterexample, that set difference is NOT symmetric: $A\\setminus B\\ne B\\setminus A$ in general.\n- LO3: State $A\\setminus B=A\\cap B^c$ (difference expressed via intersection with a complement), connecting this concept to `math.found.complement`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.set-difference",
+      "title": "SET-DIFFERENCE-ASSUMED-SYMMETRIC",
+      "content": "| MC-1 | SET-DIFFERENCE-ASSUMED-SYMMETRIC | Believing $A\\setminus B=B\\setminus A$, over-generalizing from union/intersection's genuine symmetry | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.set-difference",
+      "title": "DIFFERENCE-COMPLEMENT-EQUIVALENCE-NOT-RECOGNIZED",
+      "content": "| MC-2 | DIFFERENCE-COMPLEMENT-EQUIVALENCE-NOT-RECOGNIZED | Failing to connect $A\\setminus B$ with $A\\cap B^c$, treating the two as unrelated computations rather than the same operation expressed differently | Minor |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-difference",
+      "title": "Keep Only What's in A but Not in B (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Keep Only What's in A but Not in B (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-difference",
+      "title": "Difference as Intersection with a Complement (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Difference as Intersection with a Complement (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.set-difference",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.set-difference",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $A\\setminus B$ for $A=\\{a,b,c,d,e\\}$, $B=\\{b,d,f\\}$.\n  2. For the same $A,B$ as item 1, compute $B\\setminus A$ and confirm it differs from $A\\setminus B$.\n  3. Given $A=\\{2,4,6,8,10\\}$, $B=\\{4,8\\}$ (here $B\\subseteq A$), compute $A\\setminus B$ and describe, in general, what $A\\setminus B$ equals whenever $B\\subseteq A$.\n  4. Compute $B\\setminus A$ for the same $A,B$ as item 3, and explain why the result is $\\emptyset$.\n- **P76 (Transfer Probe, mode = independence)**: \"A company's full employee list is $E$; the list of employees who completed mandatory training is $T$ (with $T\\subseteq E$). (a) Using set difference, express the set of employees who have NOT completed training, and explain in context what $T\\setminus E$ would represent instead (and why it should be empty, given $T\\subseteq E$). (b) A manager asks for 'the employees in $T$ but not $E$' and separately 'the employees in $E$ but not $T$,' insisting these describe the same group. Explain, using the asymmetry of set difference, why the manager is mistaken and what each phrase actually describes.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.set-difference",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set-operations` (this is the third of the four operations named there, isolated here for focused practice).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.set-difference/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.set-difference",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set-operations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.complement` (this concept's Example 3 anticipates and directly connects to that concept's own material — cited by reference, not duplicated).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.set-difference.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

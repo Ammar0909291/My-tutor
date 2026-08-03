@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.planar-graph-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.planar-graph",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6547f04ee7da89af35506f5d954d5b770e28430b380bb2ae992cab6ed758901e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.planar-graph.md": "sha256:a61bdaaad814342fed8cf1e4f9ac1bfbb702bf1e743af7a86952b4dc11521f62"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.planar-graph",
+    "name": "Planar Graphs",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.planar-graph-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.planar-graph (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.planar-graph.md": "sha256:a61bdaaad814342fed8cf1e4f9ac1bfbb702bf1e743af7a86952b4dc11521f62"
+      },
+      "contentHash": "sha256:7b0d7d8dfd48e4581357ef8bad3e22fd930d7b56a8e089338f6711af13a912c8",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.planar-graph/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Learning Objectives",
+      "content": "- LO1: Determine whether a small graph is planar by attempting to redraw it without edge crossings, recognizing that a graph DRAWN with crossings may still BE planar if a crossing-free redrawing exists.\n- LO2: Apply Euler's formula $V-E+F=2$ for a connected planar graph, solving for any one of $V$, $E$, $F$ given the other two.\n- LO3: Apply the edge bound $E\\le3V-6$ (for $V\\ge3$) as a NECESSARY (but not sufficient) condition for planarity — a graph violating this bound is definitely non-planar, but satisfying it does not guarantee planarity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.planar-graph",
+      "title": "CROSSING-IN-ONE-DRAWING-ASSUMED-TO-PROVE-NON-PLANARITY",
+      "content": "| MC-1 | CROSSING-IN-ONE-DRAWING-ASSUMED-TO-PROVE-NON-PLANARITY | Concluding a graph is non-planar directly from one drawing with crossings, without attempting to find a crossing-free redrawing | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.planar-graph",
+      "title": "EDGE-BOUND-TREATED-AS-SUFFICIENT-FOR-PLANARITY",
+      "content": "| MC-2 | EDGE-BOUND-TREATED-AS-SUFFICIENT-FOR-PLANARITY | Believing satisfying $E\\le3V-6$ guarantees a graph is planar, rather than recognizing it only rules OUT planarity when violated | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.planar-graph",
+      "title": "EULERS-FORMULA-APPLIED-TO-A-DISCONNECTED-GRAPH",
+      "content": "| MC-3 | EULERS-FORMULA-APPLIED-TO-A-DISCONNECTED-GRAPH | Applying $V-E+F=2$ directly to a disconnected planar graph, without the required adjustment for multiple components | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "A Crossing in One Drawing Doesn't Prove Non-Planarity (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"A Crossing in One Drawing Doesn't Prove Non-Planarity (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Euler's Formula Connects V, E, F (Primitive P64: Conceptual Shift, second instance)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Euler's Formula Connects V, E, F (Primitive P64: Conceptual Shift, second instance)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Edge Bound: Necessary, Not Sufficient (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Edge Bound: Necessary, Not Sufficient (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given a graph drawn with 2 edge crossings, explain what would need to be true to determine whether it is genuinely planar.\n  2. Given a connected planar graph with $V=8, F=6$, find $E$ using Euler's formula.\n  3. Given a graph with $V=7, E=16$, apply the edge bound to determine whether it can be planar.\n  4. Explain, in one sentence, why satisfying $E\\le3V-6$ does not guarantee a graph is planar.\n- **P76 (Transfer Probe, mode = independence)**: \"A circuit board designer wants to lay out a set of components and connections on a SINGLE layer (no wires crossing, since crossing wires would short-circuit on one physical layer). (a) Explain, using this lesson's definitions, why determining whether this layout is possible is exactly a planarity question about the connection graph. (b) The designer's graph has $V=10$ components and $E=25$ required connections; apply the edge bound to determine whether a valid single-layer (planar) layout is even POSSIBLE, and explain what the designer would need to do if the bound is violated.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.graph` (vertices and edges) — planarity is a drawing/embedding property of a graph's abstract structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.graph`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.graph-coloring` (the Four Color Theorem applies specifically to planar graphs).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

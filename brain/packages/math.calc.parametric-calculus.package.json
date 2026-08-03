@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.parametric-calculus-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.parametric-calculus",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4a5a647244319df194af6ec53c1df03b4e7f34a8736f62f381734156421c1cb7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.parametric-calculus.md": "sha256:9c4586e8e044ef6ce1f874f703ef3522d100d4103d67c57f5459d15f705ed9f4"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.parametric-calculus",
+    "name": "Calculus of Parametric Curves",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.parametric-curves",
+      "math.calc.chain-rule",
+      "math.calc.definite-integral"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.parametric-calculus-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.parametric-calculus (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.parametric-calculus.md": "sha256:9c4586e8e044ef6ce1f874f703ef3522d100d4103d67c57f5459d15f705ed9f4"
+      },
+      "contentHash": "sha256:af10d911a70b04787c1cbab7e22d15af715b097eae4bb73b23716e76cf41c539",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.parametric-calculus.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.parametric-calculus.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.parametric-calculus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.parametric-calculus\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.parametric-calculus.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.parametric-calculus.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.parametric-calculus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.parametric-calculus\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.parametric-calculus.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.parametric-calculus.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.parametric-calculus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.parametric-calculus\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.parametric-calculus.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.parametric-calculus.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.parametric-calculus"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.parametric-calculus\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.parametric-calculus/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute $\\frac{dy}{dx}$ for a parametric curve $x(t),y(t)$ as $\\frac{dy/dt}{dx/dt}$ — NOT $\\frac{dy}{dt}$ or $\\frac{dx}{dt}$ alone, and requiring $\\frac{dx}{dt}\\ne0$ at the point in question.\n- LO2: Compute the arc length of a parametric curve as $L=\\int\\sqrt{(dx/dt)^2+(dy/dt)^2}\\,dt$ — recognizing this as the direct parametric analogue of the Pythagorean \"distance traveled\" idea, generalizing `math.calc.arc-length`'s $y=f(x)$ formula.\n- LO3: Recognize that computing the SECOND derivative $\\frac{d^2y}{dx^2}$ for a parametric curve requires differentiating $\\frac{dy}{dx}$ (itself a function of $t$) WITH RESPECT TO $t$ AGAIN, then dividing by $\\frac{dx}{dt}$ ONCE MORE — NOT simply squaring or repeating the first-derivative formula naively.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "PARAMETRIC-DY-DX-COMPUTED-AS-DY-DT-ALONE-WITHOUT-DIVIDING-BY-DX-DT",
+      "content": "| MC-1 | PARAMETRIC-DY-DX-COMPUTED-AS-DY-DT-ALONE-WITHOUT-DIVIDING-BY-DX-DT | Computing dy/dx as simply dy/dt, omitting the required division by dx/dt | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "ARC-LENGTH-FORMULA-MISSING-THE-SQUARING-STEP-ON-EACH-DERIVATIVE-TERM",
+      "content": "| MC-2 | ARC-LENGTH-FORMULA-MISSING-THE-SQUARING-STEP-ON-EACH-DERIVATIVE-TERM | Omitting the squaring of dx/dt and dy/dt before adding them under the square root in the parametric arc-length formula | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "dy/dx Requires Dividing by dx/dt, Never Just dy/dt Alone (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"dy/dx Requires Dividing by dx/dt, Never Just dy/dt Alone (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "Arc Length Requires Squaring Both Derivative Terms Before Adding (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Arc Length Requires Squaring Both Derivative Terms Before Adding (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "Second Derivative Is a Genuine Two-Step Process (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Second Derivative Is a Genuine Two-Step Process (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For $x(t)=3t$, $y(t)=t^2$, find $\\frac{dy}{dx}$.\n  2. Set up (do not evaluate) the arc length integral for $x(t)=t^2$, $y(t)=t^3$ from $t=0$ to $t=2$.\n  3. For $x(t)=t$, $y(t)=t^2$, find $\\frac{d^2y}{dx^2}$.\n  4. Explain, in one sentence, why the parametric arc-length formula squares both $dx/dt$ and $dy/dt$ before adding them under the square root.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotics engineer tracks a robotic arm's end-effector tracing a path given parametrically by $x(t)=2\\cos t$, $y(t)=2\\sin t$ (a circular path of radius 2, as a function of time $t$). (a) Find $\\frac{dy}{dx}$ at $t=\\pi/4$, and explain what this slope represents about the arm's instantaneous path direction at that moment. (b) Set up the arc-length integral for the total path length traced from $t=0$ to $t=2\\pi$, and verify your setup gives a sensible result by comparing it to the known circumference formula for a circle of radius 2.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.parametric-curves` (the curve representation itself), `math.calc.chain-rule` (needed to relate $t$-derivatives to $x$-derivatives), and `math.calc.definite-integral` (needed for the arc-length integral).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.parametric-calculus/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.parametric-calculus",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.parametric-curves`, `math.calc.chain-rule`, `math.calc.definite-integral`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.parametric-calculus.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

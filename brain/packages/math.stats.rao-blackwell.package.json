@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.rao-blackwell-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.rao-blackwell",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:60efe9d9da65bb21063296f8984fad4990b495848f073ad9d6e2ad1fc17d779c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.rao-blackwell.md": "sha256:530ab44b0691b12cabaf5b6181b0a8bd0bb20eada389a7469064b7f599453891"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.rao-blackwell",
+    "name": "Rao-Blackwell Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.sufficient-statistic",
+      "math.stats.bias-variance"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.rao-blackwell-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.rao-blackwell (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.rao-blackwell.md": "sha256:530ab44b0691b12cabaf5b6181b0a8bd0bb20eada389a7469064b7f599453891"
+      },
+      "contentHash": "sha256:417f5b59e7c7e888f81832d6ba253d88c083e262c1cc6976e25453381589ef5f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.rao-blackwell.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.rao-blackwell.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.rao-blackwell"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.rao-blackwell\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.rao-blackwell.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.rao-blackwell.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.rao-blackwell"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.rao-blackwell\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.rao-blackwell.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.rao-blackwell.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.rao-blackwell"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.rao-blackwell\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.rao-blackwell.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.rao-blackwell.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.rao-blackwell"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.rao-blackwell\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.rao-blackwell/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Rao-Blackwell theorem — if $\\hat\\theta$ is an UNBIASED estimator of $\\theta$ and $T$ is a SUFFICIENT statistic for $\\theta$ (from `math.stats.sufficient-statistic`), then $\\tilde\\theta=E[\\hat\\theta\\mid T]$ is ALSO unbiased, and has MSE (from `math.stats.bias-variance`) NO GREATER than $\\hat\\theta$'s.\n- LO2: Recognize the theorem's guarantee is \"NO GREATER\" (i.e., $\\le$), NOT \"STRICTLY LESS\" — conditioning on a sufficient statistic can sometimes leave the estimator UNCHANGED (if $\\hat\\theta$ was already a function of $T$ alone), but NEVER makes it WORSE — the theorem gives a one-directional, non-strict improvement guarantee.\n- LO3: Recognize \"Rao-Blackwellization\" as a PROCEDURE for IMPROVING a given unbiased estimator — starting from ANY unbiased $\\hat\\theta$ (even a \"crude\" or inefficient one) and a KNOWN sufficient statistic $T$, computing $E[\\hat\\theta\\mid T]$ SYSTEMATICALLY produces an estimator that is AT LEAST as good, often strictly better.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "THEOREM-APPLIED-STARTING-FROM-A-BIASED-ESTIMATOR-EXPECTING-UNBIASEDNESS",
+      "content": "| MC-1 | THEOREM-APPLIED-STARTING-FROM-A-BIASED-ESTIMATOR-EXPECTING-UNBIASEDNESS | Attempting to apply the Rao-Blackwell theorem starting from a biased estimator, expecting the conclusion of unbiasedness despite the theorem's precondition not being met | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "RAO-BLACKWELLIZATION-EXPECTED-TO-ALWAYS-PRODUCE-STRICT-IMPROVEMENT",
+      "content": "| MC-2 | RAO-BLACKWELLIZATION-EXPECTED-TO-ALWAYS-PRODUCE-STRICT-IMPROVEMENT | Expecting Rao-Blackwellization to always strictly improve an estimator's MSE, rather than recognizing the theorem's \"no greater than\" guarantee allows for exact equality | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "The Theorem Requires Starting from an Already-Unbiased Estimator (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Theorem Requires Starting from an Already-Unbiased Estimator (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "\"No Greater Than\" Allows for Exact Equality, Not Just Strict Improvement (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"\\\"No Greater Than\\\" Allows for Exact Equality, Not Just Strict Improvement (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "Rao-Blackwellization as a Systematic Estimator-Improvement Recipe (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Rao-Blackwellization as a Systematic Estimator-Improvement Recipe (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. State the Rao-Blackwell theorem's two key conclusions about $\\tilde\\theta=E[\\hat\\theta\\mid T]$.\n  2. Explain why the theorem requires $\\hat\\theta$ to already be unbiased before it applies.\n  3. Explain what happens to Rao-Blackwellization when $\\hat\\theta$ is already a function of the sufficient statistic $T$.\n  4. Explain, in one sentence, why Rao-Blackwellization is described as a \"systematic improvement recipe\" rather than an ad hoc technique.\n- **P76 (Transfer Probe, mode = independence)**: \"A statistician has constructed a simple but wasteful unbiased estimator for a Poisson rate parameter, using only the FIRST observation in a sample of size 50 (ignoring the other 49), and knows the sample total (or equivalently the sample mean) is a sufficient statistic for this parameter. (a) Explain why Rao-Blackwellizing this crude estimator — conditioning it on the sufficient statistic — is guaranteed to produce an estimator at least as good, and likely much better. (b) Explain why this guarantee doesn't require any new cleverness or insight about the specific problem, just the mechanical application of the theorem.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.sufficient-statistic` (the key statistic being conditioned on) and `math.stats.bias-variance` (the MSE framework used to compare estimators).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.rao-blackwell/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.rao-blackwell",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.sufficient-statistic`, `math.stats.bias-variance`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.rao-blackwell.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.ogf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.ogf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6caf852915218bc08fd944bffe78f7799ff43a3308e29c9ec73bfd75d743e68c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.ogf.md": "sha256:aed58e595c7922377c270fd3b11e7006aef72c457a676d60ecd387a25ff523f7"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.ogf",
+    "name": "Ordinary Generating Functions",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.disc.generating-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.ogf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.ogf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.ogf.md": "sha256:aed58e595c7922377c270fd3b11e7006aef72c457a676d60ecd387a25ff523f7"
+      },
+      "contentHash": "sha256:9527c88a7577ed460687b21af5ac59c524ad7071ea3a4bc741be86a591a65693",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.ogf.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.ogf.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.ogf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.ogf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.ogf.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.ogf.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.ogf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.ogf\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.ogf.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.ogf.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.ogf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.ogf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.ogf.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.ogf.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.ogf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.ogf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.ogf/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.ogf",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write the OGF $A(x)=\\sum_{n\\ge0}a_nx^n$ for a given sequence, and recover sequence terms as coefficients from a given OGF.\n- LO2: Compute the product of two OGFs and interpret the result as the CONVOLUTION of the two original sequences.\n- LO3: Use partial fraction decomposition of a rational OGF to extract a closed-form formula for its sequence's general term, connecting back to `math.disc.linear-recurrence`'s characteristic-root solutions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.ogf",
+      "title": "OGF-PRODUCT-TREATED-AS-POINTWISE-MULTIPLICATION",
+      "content": "| MC-1 | OGF-PRODUCT-TREATED-AS-POINTWISE-MULTIPLICATION | Believing the product of two generating functions corresponds to term-by-term multiplication of the underlying sequences, rather than convolution | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.ogf",
+      "title": "PARTIAL-FRACTION-CONSTANTS-MISCOMPUTED",
+      "content": "| MC-2 | PARTIAL-FRACTION-CONSTANTS-MISCOMPUTED | Making an algebraic error solving for the partial-fraction decomposition's constants, propagating an incorrect closed-form sequence formula | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.ogf",
+      "title": "OGF-COEFFICIENT-EXTRACTION-INDEX-CONFUSED",
+      "content": "| MC-3 | OGF-COEFFICIENT-EXTRACTION-INDEX-CONFUSED | Confusing which power of $x$ corresponds to which sequence index when reading a coefficient off an OGF, especially for series with shifted or scaled exponents | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.ogf",
+      "title": "OGF as a Coefficient-Extraction Device (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"OGF as a Coefficient-Extraction Device (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.ogf",
+      "title": "Product Means Convolution, Not Pointwise Multiplication (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Product Means Convolution, Not Pointwise Multiplication (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.ogf",
+      "title": "Partial Fractions Recover a Closed Form (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Partial Fractions Recover a Closed Form (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.ogf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.ogf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Write the OGF for the sequence $a_n=5^n$.\n  2. Given $A(x)=\\frac{1}{1-4x}$, state the sequence it represents.\n  3. Compute the coefficient of $x^3$ in the product $\\frac{1}{1-x}\\cdot\\frac{1}{1-x}$ using the convolution formula, and verify it matches the closed form $(n+1)$ from Example 2.\n  4. Decompose $\\frac{1}{(1-x)(1-4x)}$ via partial fractions and find the closed-form formula for its sequence.\n- **P76 (Transfer Probe, mode = independence)**: \"A vending machine problem asks for the number of ways to make change for $n$ cents using only 1-cent and 5-cent coins (unlimited supply of each, order doesn't matter). (a) The OGF for using only 1-cent coins is $\\frac{1}{1-x}$ (any number of 1-cent coins), and for only 5-cent coins is $\\frac{1}{1-x^5}$ (any number of 5-cent coins, contributing multiples of 5 to the total). Explain, using this lesson's product-as-convolution idea, why the OGF for using BOTH coin types together is the PRODUCT $\\frac{1}{(1-x)(1-x^5)}$, not some other combination. (b) Without fully decomposing it, describe in general terms what kind of closed-form answer you would expect this product's partial-fraction decomposition to eventually yield, based on Example 3's pattern.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.ogf",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.generating-functions` (the general encoding-a-sequence-as-a-power-series idea this concept specializes into the \"ordinary,\" unlabeled-structure case).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.ogf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.ogf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.generating-functions`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.egf` (the labeled-structure counterpart), `math.disc.linear-recurrence` (the closed-form solution technique this concept's partial-fraction method directly parallels and reinforces).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.ogf.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

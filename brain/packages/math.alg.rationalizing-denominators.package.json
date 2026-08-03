@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.rationalizing-denominators-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.rationalizing-denominators",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b5037194a7d1df9a6b3d6e39ea00e6852cb816a56ddc67ced198e83f23d6194b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md": "sha256:4c807b176785d36abf501c4b9d12f6ffa5a66209d84991a16a0bf1237324391f"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.rationalizing-denominators",
+    "name": "Rationalizing Denominators",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.simplifying-radicals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.rationalizing-denominators-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.rationalizing-denominators (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md": "sha256:4c807b176785d36abf501c4b9d12f6ffa5a66209d84991a16a0bf1237324391f"
+      },
+      "contentHash": "sha256:f3eec015238c1b14c6e8b6d5ddb8644637c702f6a49005117993578214f46c92",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.rationalizing-denominators.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.rationalizing-denominators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.rationalizing-denominators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.rationalizing-denominators.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.rationalizing-denominators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.rationalizing-denominators\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.rationalizing-denominators.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.rationalizing-denominators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.rationalizing-denominators\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.rationalizing-denominators.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.rationalizing-denominators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.rationalizing-denominators\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.rationalizing-denominators/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Learning Objectives",
+      "content": "- LO1: Rationalize a denominator containing a SINGLE radical term by multiplying numerator and denominator by that SAME radical.\n- LO2: Rationalize a denominator containing a BINOMIAL with a radical (e.g. $a+\\sqrt b$) by multiplying numerator and denominator by its CONJUGATE ($a-\\sqrt b$), using the difference-of-squares pattern to eliminate the radical.\n- LO3: Recognize that multiplying by \"the same thing over itself\" (radical/radical or conjugate/conjugate) is equivalent to multiplying by 1, preserving the fraction's value while changing its FORM.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "WRONG-RADICAL-USED-AS-MULTIPLIER",
+      "content": "| MC-1 | WRONG-RADICAL-USED-AS-MULTIPLIER | Multiplying by a radical that doesn't match the denominator's own radical, failing to properly rationalize | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "CONJUGATE-NOT-USED-FOR-BINOMIAL-RADICAL-DENOMINATOR",
+      "content": "| MC-2 | CONJUGATE-NOT-USED-FOR-BINOMIAL-RADICAL-DENOMINATOR | Attempting to rationalize a binomial radical denominator by multiplying by the radical alone rather than the full conjugate | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "CONJUGATE-SIGN-NOT-FLIPPED-CORRECTLY",
+      "content": "| MC-3 | CONJUGATE-SIGN-NOT-FLIPPED-CORRECTLY | When forming a conjugate, failing to flip only the sign between the two terms (e.g. flipping both signs, or the wrong one) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Single Radical: Multiply by That Same Radical Over Itself (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Single Radical: Multiply by That Same Radical Over Itself (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Binomial Denominator Needs the Conjugate, Not the Radical Alone (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Binomial Denominator Needs the Conjugate, Not the Radical Alone (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Verify: Multiplying by a Form of 1 Preserves Value (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Verify: Multiplying by a Form of 1 Preserves Value (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Rationalize $\\frac{7}{\\sqrt3}$.\n  2. Rationalize $\\frac{5}{2+\\sqrt3}$ using the conjugate.\n  3. Rationalize $\\frac{4}{\\sqrt7-1}$ using the conjugate.\n  4. Explain, in one sentence, why multiplying numerator and denominator by the same quantity doesn't change the fraction's value.\n- **P76 (Transfer Probe, mode = independence)**: \"A physics formula for a wave's amplitude ratio includes the expression $\\frac{1}{\\sqrt2-1}$. (a) Rationalize this denominator using the conjugate. (b) A colleague instead tries multiplying numerator and denominator by $\\sqrt2$ alone (not the full conjugate) — show what result this produces, and explain, using this lesson's distinction, why this attempt fails to fully rationalize the denominator.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.simplifying-radicals` (radical manipulation this technique relies on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.rationalizing-denominators/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.rationalizing-denominators",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.simplifying-radicals`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.factoring-special` (the difference-of-squares pattern this technique's conjugate step relies on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.rationalizing-denominators.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

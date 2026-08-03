@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.derivative-exponential-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.derivative-exponential",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:12d99319711801e723f2d4e1ed15d5204c461fce654b51f7980251658f1a3818",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.derivative-exponential.md": "sha256:fa20e88b48c25dce6168db2a96713a367ded81a3b3d037fb8575e072dcf3c399"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.derivative-exponential",
+    "name": "Derivative of Exponential Functions",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.calc.chain-rule",
+      "math.func.exponential-function"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.derivative-exponential-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.derivative-exponential (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.derivative-exponential.md": "sha256:fa20e88b48c25dce6168db2a96713a367ded81a3b3d037fb8575e072dcf3c399"
+      },
+      "contentHash": "sha256:0a4a59b96d2fb082352e1f65c26a2b551ef4ad2615871227cabba0d438c6fa8c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-exponential.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-exponential.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-exponential\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-exponential.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-exponential.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-exponential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-exponential.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-exponential.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-exponential\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-exponential.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-exponential.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-exponential"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-exponential\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.derivative-exponential/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the special property $\\frac{d}{dx}e^x=e^x$ — $e^x$ is its OWN derivative, unlike every other exponential base.\n- LO2: State the general rule $\\frac{d}{dx}a^x=a^x\\ln a$ for any base $a>0$, and recognize $e^x$ as the special case where $\\ln e=1$, making the extra factor disappear ($e^x\\cdot1=e^x$).\n- LO3: Apply the CHAIN RULE when the exponent is itself a function of $x$: $\\frac{d}{dx}e^{g(x)}=e^{g(x)}\\cdot g'(x)$ (and similarly $\\frac{d}{dx}a^{g(x)}=a^{g(x)}\\ln a\\cdot g'(x)$) — recognizing that skipping the chain-rule factor $g'(x)$ is a common omission.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "GENERAL-BASE-EXPONENTIAL-DERIVATIVE-MISSING-LN-A-FACTOR",
+      "content": "| MC-1 | GENERAL-BASE-EXPONENTIAL-DERIVATIVE-MISSING-LN-A-FACTOR | Applying e^x's simple self-derivative rule to every exponential base, omitting the required ln(a) factor for bases other than e | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "CHAIN-RULE-FACTOR-OMITTED-WHEN-EXPONENT-IS-A-FUNCTION",
+      "content": "| MC-2 | CHAIN-RULE-FACTOR-OMITTED-WHEN-EXPONENT-IS-A-FUNCTION | Omitting the chain-rule factor g'(x) when differentiating e^{g(x)} or a^{g(x)} for a non-trivial exponent function g(x) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Base e Is the Unique Exception; General Bases Need ln(a) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Base e Is the Unique Exception; General Bases Need ln(a) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Chain Rule Factor Is Mandatory Whenever the Exponent Isn't Plain x (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Chain Rule Factor Is Mandatory Whenever the Exponent Isn't Plain x (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Combining Both Factors for a General Base with a Function Exponent (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Combining Both Factors for a General Base with a Function Exponent (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Differentiate $f(x)=5^x$.\n  2. Differentiate $f(x)=e^{7x}$.\n  3. Differentiate $f(x)=e^{x^2+1}$.\n  4. Differentiate $f(x)=4^{2x}$.\n- **P76 (Transfer Probe, mode = independence)**: \"A bacterial population grows according to $P(t)=P_0\\cdot e^{0.3t}$ (population as a function of time $t$ in hours), while a competing model proposed by a colleague uses $Q(t)=P_0\\cdot2^{0.3t}$ instead. (a) Find $P'(t)$ and $Q'(t)$, being careful about which formula needs an extra logarithmic factor. (b) Explain why the two growth-RATE formulas differ even though both models start from the same $P_0$ and use the same exponent $0.3t$ — connecting to the base-$e$-vs-general-base distinction from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.chain-rule` (needed whenever the exponent isn't simply $x$) and `math.func.exponential-function` (the function class being differentiated).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-exponential/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.derivative-exponential",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.chain-rule`, `math.func.exponential-function`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.calc.derivative-ln` (the inverse function's derivative, derived via a closely related technique).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-exponential.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

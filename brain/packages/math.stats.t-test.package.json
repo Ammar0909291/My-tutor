@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.t-test-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.t-test",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:edc955553e64a197204c3583918dbd15843bf2cc57681552e82d4921e0e6eb20",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.t-test.md": "sha256:8fed25d49dfa243e9901a97a256ab7b93431455af5e6087e3f1fe1e5c801febe"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.t-test",
+    "name": "t-Test",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.stats.hypothesis-testing",
+      "math.prob.continuous-distributions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.t-test-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.t-test (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.t-test.md": "sha256:8fed25d49dfa243e9901a97a256ab7b93431455af5e6087e3f1fe1e5c801febe"
+      },
+      "contentHash": "sha256:dc9af42e6024a00c0383565a3b88f689ac3462d957191c8a13f3d236d1ff76ea",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.t-test.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.t-test.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.t-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.t-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.t-test.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.t-test.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.t-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.t-test\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.t-test.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.t-test.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.t-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.t-test\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.t-test.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.t-test.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.t-test"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.t-test\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.t-test/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.t-test",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the ONE-SAMPLE $t$-test for $H_0:\\mu=\\mu_0$ WHEN $\\sigma$ is UNKNOWN (the common practical case), computing $T=\\frac{\\bar{X}-\\mu_0}{S/\\sqrt{n}}\\sim t(n-1)$.\n- LO2: Distinguish the THREE $t$-test variants — ONE-SAMPLE (comparing one group's mean to a fixed value), TWO-SAMPLE (comparing two INDEPENDENT groups' means), and PAIRED (comparing MATCHED pairs, e.g. before/after measurements on the SAME subjects) — recognizing the PAIRED test is fundamentally different: it first computes DIFFERENCES within each pair, then runs a ONE-SAMPLE test on those differences, rather than treating the two groups as independent.\n- LO3: Recognize the $t$-test is generally ROBUST to violations of the normality assumption for LARGE sample sizes (by the Central Limit Theorem's influence on $\\bar{X}$'s own distribution) — but this robustness should NOT be assumed automatically for SMALL samples, where normality violations can genuinely compromise the test's validity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.t-test",
+      "title": "NORMAL-DISTRIBUTION-CRITICAL-VALUE-USED-INSTEAD-OF-T-DISTRIBUTION",
+      "content": "| MC-1 | NORMAL-DISTRIBUTION-CRITICAL-VALUE-USED-INSTEAD-OF-T-DISTRIBUTION | Using the normal distribution's critical value instead of the t-distribution's (with n-1 degrees of freedom), when σ is estimated rather than known | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.t-test",
+      "title": "MATCHED-PAIR-DATA-TREATED-AS-TWO-INDEPENDENT-GROUPS-IGNORING-THE-PAIRING-STRUCTURE",
+      "content": "| MC-2 | MATCHED-PAIR-DATA-TREATED-AS-TWO-INDEPENDENT-GROUPS-IGNORING-THE-PAIRING-STRUCTURE | Analyzing matched-pair (paired) data as if it were two independent groups, discarding the valuable pairing information a paired t-test would exploit | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.t-test",
+      "title": "Using the t-Distribution's Critical Value with n-1 Degrees of Freedom (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Using the t-Distribution's Critical Value with n-1 Degrees of Freedom (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.t-test",
+      "title": "Paired Data Requires the Paired t-Test, Not the Two-Sample Test (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Paired Data Requires the Paired t-Test, Not the Two-Sample Test (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.t-test",
+      "title": "Robustness to Non-Normality Is a Large-Sample Property (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Robustness to Non-Normality Is a Large-Sample Property (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.t-test",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.t-test",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Test $H_0:\\mu=15$ against $H_a:\\mu\\ne15$, given $\\bar{x}=16.5$, $s=3$, $n=16$, at $\\alpha=0.05$ (using $t_{0.025,15}\\approx2.131$).\n  2. A study measures the same 20 students' test scores before and after a tutoring program. Determine which $t$-test variant is appropriate and explain why.\n  3. Explain, in one sentence, why the paired t-test analyzes within-pair differences rather than treating the two measurement sets as independent groups.\n  4. Explain why the t-test's robustness to non-normality is stronger for large samples than for small samples.\n- **P76 (Transfer Probe, mode = independence)**: \"A nutrition researcher measures each of 30 participants' cholesterol levels before starting a new diet, and again after 8 weeks on the diet, wanting to test whether the diet significantly changed cholesterol levels. (a) Identify which t-test variant is appropriate for this study design, and explain why treating the before/after measurements as two independent groups would be a mistake. (b) Explain why, given the sample size of 30, the researcher can be reasonably (though not unconditionally) confident in the test's validity even if cholesterol levels aren't perfectly normally distributed in the population.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.t-test",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.hypothesis-testing` (the general framework) and `math.prob.continuous-distributions` (needed for the $t$-distribution).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.t-test/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.t-test",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.hypothesis-testing`, `math.prob.continuous-distributions`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.z-test`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.t-test.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

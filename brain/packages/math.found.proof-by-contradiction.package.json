@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.proof-by-contradiction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.proof-by-contradiction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:54419b45eadd84ef165b234a6331c0eb1ace25c04ea1eb0dcf31d38236c610de",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.proof-by-contradiction.md": "sha256:2a3953db63bfdda7bf0d1400ee0c8d92dcea1e86516aeb7c584d5c2dcbd0a006"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.proof-by-contradiction",
+    "name": "Proof by Contradiction",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.found.proof",
+      "math.found.logical-connectives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.proof-by-contradiction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.proof-by-contradiction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.proof-by-contradiction.md": "sha256:2a3953db63bfdda7bf0d1400ee0c8d92dcea1e86516aeb7c584d5c2dcbd0a006"
+      },
+      "contentHash": "sha256:ab5d27b392249dbe57b9c53c6edf407efdfabd82b043f609ab086137bc9262e1",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-contradiction.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-contradiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-contradiction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-contradiction.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-contradiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-contradiction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-contradiction.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-contradiction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-contradiction\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.proof-by-contradiction/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write a proof by contradiction: assume $\\neg Q$ (the negation of the target statement), derive a logical contradiction (a statement $R\\land\\neg R$), and conclude $Q$ must be true.\n- LO2: Correctly negate a compound or quantified statement as the starting assumption (e.g. negating \"$\\sqrt2$ is irrational\" to \"$\\sqrt2$ is rational, i.e. $\\sqrt2=a/b$ in lowest terms\").\n- LO3: Distinguish a genuine contradiction (two statements that cannot both be true) from a merely surprising or unwanted — but not actually contradictory — result.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "SURPRISE-MISTAKEN-FOR-CONTRADICTION",
+      "content": "| MC-1 | SURPRISE-MISTAKEN-FOR-CONTRADICTION | Treating an unusual, large, or complicated intermediate result as itself a contradiction, without identifying the specific pair of mutually exclusive statements | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "NEGATION-STATED-IMPRECISELY",
+      "content": "| MC-2 | NEGATION-STATED-IMPRECISELY | Negating the target claim vaguely or incorrectly rather than with the same logical precision as the original statement, especially for quantified or compound claims | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "HYPOTHESIS-DROPPED-DURING-DERIVATION",
+      "content": "| MC-3 | HYPOTHESIS-DROPPED-DURING-DERIVATION | Losing track of the original hypothesis $P$ partway through the contradiction chain, deriving a contradiction unrelated to the actual assumption made | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "Assume the Negation, Chase It to an Impossibility (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Assume the Negation, Chase It to an Impossibility (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "Precise Negation of the Target Statement (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Precise Negation of the Target Statement (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Write the precise negation used as the starting assumption to prove \"there is no smallest positive rational number\" by contradiction.\n  2. Prove by contradiction: \"if $n^2$ is odd, then $n$ is odd\" (assume $n$ even, derive $n^2$ even, contradicting the hypothesis).\n  3. Given a partially-worked contradiction proof, identify the exact two statements ($R$ and $\\neg R$) that constitute the contradiction.\n  4. Explain, for the claim \"the sum of a rational and an irrational number is irrational,\" why assuming the sum IS rational (rather than assuming the irrational number is rational) is the correct starting negation.\n- **P76 (Transfer Probe, mode = independence)**: \"A game-theory argument claims: 'in this game, no strategy can guarantee a win for the second player.' A proof by contradiction is attempted by assuming a winning strategy $S$ exists for the second player. (a) Outline, in general terms, what kind of impossibility the proof would need to derive from the existence of $S$ to complete the contradiction (it need not be a real, verified game argument). (b) Explain why merely showing $S$ 'seems complicated' or 'requires many steps' would NOT constitute a valid contradiction, connecting this to Example 2's largest-prime lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.proof` and `math.found.logical-connectives` (negation $\\neg$ and conjunction $\\land$, needed to state \"$R\\land\\neg R$\" precisely).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contradiction/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.proof-by-contradiction",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.proof`, `math.found.logical-connectives`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.direct-proof`, `math.found.proof-by-contrapositive` (siblings; this concept's Teaching Notes below justify why $\\sqrt2$'s irrationality is the canonical choice over these alternatives).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contradiction.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

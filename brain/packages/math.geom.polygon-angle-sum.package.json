@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.polygon-angle-sum-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.polygon-angle-sum",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fc211571da043ea9a680390d7070bb20a1296e9ba38cc75d0f2e62f30374f56a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md": "sha256:e456258ced6457f3d227cef7d6cc8681ab4fdf7023b8407745535c89a99b94f0"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.polygon-angle-sum",
+    "name": "Polygon Angle Sum",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.geom.triangle-angle-sum",
+      "math.geom.polygon"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.polygon-angle-sum-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.polygon-angle-sum (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md": "sha256:e456258ced6457f3d227cef7d6cc8681ab4fdf7023b8407745535c89a99b94f0"
+      },
+      "contentHash": "sha256:016db1e27d50a8d079e003fa2970df676dd25dc5964619232d43df67d426581d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.polygon-angle-sum.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polygon-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polygon-angle-sum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polygon-angle-sum.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polygon-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polygon-angle-sum\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polygon-angle-sum.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polygon-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polygon-angle-sum\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.polygon-angle-sum.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.polygon-angle-sum"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.polygon-angle-sum\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.polygon-angle-sum/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply the polygon angle sum formula — the interior angles of a convex $n$-gon sum to $(n-2)\\times180°$ — GENERALIZING `math.geom.triangle-angle-sum`'s $180°$ result (the $n=3$ special case: $(3-2)\\times180°=180°$).\n- LO2: Understand the DERIVATION — drawing diagonals from ONE vertex of an $n$-gon divides it into EXACTLY $(n-2)$ non-overlapping TRIANGLES, and since each triangle's angles sum to $180°$ (from `math.geom.triangle-angle-sum`), the whole polygon's angle sum is $(n-2)$ triangles times $180°$ each.\n- LO3: For a REGULAR $n$-gon specifically, find EACH individual interior angle as $\\frac{(n-2)\\times180°}{n}$ (the TOTAL sum divided EVENLY among the $n$ equal angles) — recognizing this division step is needed ONLY for regular polygons, where all angles are equal; for an IRREGULAR polygon, only the TOTAL sum is determined, not each individual angle.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "POLYGON-ANGLE-SUM-COMPUTED-USING-N-INSTEAD-OF-N-MINUS-2",
+      "content": "| MC-1 | POLYGON-ANGLE-SUM-COMPUTED-USING-N-INSTEAD-OF-N-MINUS-2 | Computing the angle sum as n×180° instead of the correct (n-2)×180°, omitting the essential -2 adjustment | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "ANGLE-SUM-DIVIDED-BY-N-FOR-AN-IRREGULAR-POLYGON-TO-FIND-INDIVIDUAL-ANGLES",
+      "content": "| MC-2 | ANGLE-SUM-DIVIDED-BY-N-FOR-AN-IRREGULAR-POLYGON-TO-FIND-INDIVIDUAL-ANGLES | Attempting to divide the total angle sum by n to find \"each angle\" for an irregular polygon, where individual angles are not all equal | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "The (n-2) Adjustment Is Essential, Not n Alone (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The (n-2) Adjustment Is Essential, Not n Alone (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "Triangulation from One Vertex Produces Exactly (n-2) Triangles (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Triangulation from One Vertex Produces Exactly (n-2) Triangles (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "Dividing by n for Each Angle Is Valid Only for Regular Polygons (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Dividing by n for Each Angle Is Valid Only for Regular Polygons (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the interior angle sum of a decagon ($n=10$).\n  2. Explain, in one sentence, why the formula uses $(n-2)$ rather than $n$.\n  3. Find each interior angle of a regular pentagon ($n=5$).\n  4. Explain why you cannot find each individual angle of an IRREGULAR hexagon using only this theorem, even though you CAN find the total sum.\n- **P76 (Transfer Probe, mode = independence)**: \"An architect is designing a gazebo with a regular heptagonal (7-sided) floor plan, and needs to know the exact interior angle at each corner to cut the wall panels precisely. (a) Find the total interior angle sum for this 7-sided shape. (b) Since the gazebo's floor plan is regular (all sides and angles equal), find the exact angle needed at each corner.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.triangle-angle-sum` (the $n=3$ base case this generalizes, and the key tool in the triangulation-based proof) and `math.geom.polygon` (the general shape).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.polygon-angle-sum/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.polygon-angle-sum",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.triangle-angle-sum`, `math.geom.polygon`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.regular-polygon`.\n- **Parent**: `math.geom.polygon`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.polygon-angle-sum.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

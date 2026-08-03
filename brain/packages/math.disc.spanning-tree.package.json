@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.spanning-tree-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.spanning-tree",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:96806e72c81f39c5e9005aeb38e43fb5d151111d9a87e0a21900bc0d016b2f1c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.spanning-tree.md": "sha256:ebba44ff47ab3ec48bcb45453451db17c82b52f680285ffca2cbc7a0a21e1ee8"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.spanning-tree",
+    "name": "Spanning Trees",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.disc.graph-trees"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.spanning-tree-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.spanning-tree (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.spanning-tree.md": "sha256:ebba44ff47ab3ec48bcb45453451db17c82b52f680285ffca2cbc7a0a21e1ee8"
+      },
+      "contentHash": "sha256:a85cc34be665a7495196014624e78a2b0b10214f622417a18b00759312331edf",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.spanning-tree/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify whether a given subgraph is a valid spanning tree of a graph $G$ (uses ALL $n$ vertices, exactly $n-1$ edges, and contains NO cycles).\n- LO2: Execute Kruskal's algorithm (greedily add the smallest-weight edge that doesn't create a cycle) to find a minimum spanning tree (MST).\n- LO3: Execute Prim's algorithm (greedily grow a tree from a starting vertex, always adding the smallest-weight edge connecting the tree to a new vertex) to find an MST, and recognize both algorithms can produce the SAME or DIFFERENT valid MSTs when weights include ties.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "SPANNING-TREE-VALIDITY-CHECKED-ONLY-BY-VERTEX-COVERAGE",
+      "content": "| MC-1 | SPANNING-TREE-VALIDITY-CHECKED-ONLY-BY-VERTEX-COVERAGE | Verifying a candidate spanning tree covers all vertices without also checking the exact edge count and acyclic condition | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "PRIM-AND-KRUSKAL-ASSUMED-TO-PRODUCE-IDENTICAL-EDGE-SETS",
+      "content": "| MC-2 | PRIM-AND-KRUSKAL-ASSUMED-TO-PRODUCE-IDENTICAL-EDGE-SETS | Believing both algorithms must always select the exact same specific edges, rather than recognizing both only guarantee the same minimum TOTAL weight | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "CYCLE-CHECK-SKIPPED-DURING-KRUSKALS-ALGORITHM",
+      "content": "| MC-3 | CYCLE-CHECK-SKIPPED-DURING-KRUSKALS-ALGORITHM | Adding an edge during Kruskal's algorithm without checking whether its two endpoints are already connected, potentially introducing a cycle | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Spanning Tree Requires Exactly n−1 Edges and No Cycles (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Spanning Tree Requires Exactly n−1 Edges and No Cycles (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Kruskal's: Sort, Then Greedily Add Without Creating Cycles (Primitive P64: Conceptual Shift, second instance)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Kruskal's: Sort, Then Greedily Add Without Creating Cycles (Primitive P64: Conceptual Shift, second instance)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Prim's vs. Kruskal's: Same Guarantee, Possibly Different Process (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Prim's vs. Kruskal's: Same Guarantee, Possibly Different Process (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Given a 6-vertex graph, state how many edges any valid spanning tree of it must have.\n  2. Given a weighted graph with 5 edges among 4 vertices, apply Kruskal's algorithm to find the MST and its total weight.\n  3. Apply Prim's algorithm (starting from a specified vertex) to the same graph from problem 2, and verify the total weight matches Kruskal's result.\n  4. Explain, in one sentence, why a spanning tree cannot contain a cycle even if that would let it reuse fewer distinct vertices.\n- **P76 (Transfer Probe, mode = independence)**: \"A telecom company wants to connect 6 towns with fiber-optic cable at minimum total cost, where the cost of connecting each pair of towns (that CAN be directly connected) is known and varies. (a) Model this as a weighted graph and explain, using this lesson's definitions, why the solution the company wants is precisely a minimum spanning tree. (b) The company's engineer runs Kruskal's algorithm and gets one cable layout; a second engineer runs Prim's algorithm starting from a different town and gets a layout using slightly different specific cable routes but the identical total cost — explain, using this lesson's tie-breaking discussion, why both layouts can be considered equally valid, optimal solutions.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.graph-trees` (what a tree is — connected, acyclic) — a spanning tree is specifically a tree that uses every vertex of a larger graph.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.graph-trees`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.graph-representation` (informally, the graph structures this concept's algorithms operate on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

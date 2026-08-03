@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.method-of-moments-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.method-of-moments",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dc1fdc93eec6379f73630e1b05488bd944e26b4b7a8a386b5f6bc02e3cc3873f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.method-of-moments.md": "sha256:8b7aea00d58e810c54f7d55f8adb2789733be1317d4e811f45c4533150514f45"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.method-of-moments",
+    "name": "Method of Moments",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.stats.estimator",
+      "math.prob.moments"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.method-of-moments-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.method-of-moments (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.method-of-moments.md": "sha256:8b7aea00d58e810c54f7d55f8adb2789733be1317d4e811f45c4533150514f45"
+      },
+      "contentHash": "sha256:b60646c9b199eaf32a1bef40191bd672a942c22e944631a30ba0713973e14cea",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.method-of-moments.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.method-of-moments.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.method-of-moments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.method-of-moments\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.method-of-moments.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.method-of-moments.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.method-of-moments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.method-of-moments\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.method-of-moments.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.method-of-moments.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.method-of-moments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.method-of-moments\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.method-of-moments.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.method-of-moments.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.method-of-moments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.method-of-moments\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.method-of-moments/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the Method of Moments procedure — set the THEORETICAL moment $E[X^k]$ (a formula involving the unknown parameter(s), from `math.prob.moments`) EQUAL to the corresponding SAMPLE moment $\\frac{\\sum x_i^k}{n}$ (computed directly from the data), then solve for the parameter.\n- LO2: For a distribution with MULTIPLE unknown parameters, use MULTIPLE moment equations (first moment, second moment, etc. — as many equations as there are unknown parameters) SIMULTANEOUSLY, solving the resulting SYSTEM — using only ONE moment equation when TWO parameters are unknown leaves the system UNDERDETERMINED.\n- LO3: Recognize the Method of Moments is GENERALLY simpler to compute than MLE (no calculus/optimization required, just algebraic equation-solving) but is generally LESS EFFICIENT (higher variance) than MLE — making it a useful FALLBACK specifically when the MLE's likelihood function is analytically INTRACTABLE.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "THEORETICAL-MOMENT-MATCHED-TO-THE-WRONG-SAMPLE-STATISTIC",
+      "content": "| MC-1 | THEORETICAL-MOMENT-MATCHED-TO-THE-WRONG-SAMPLE-STATISTIC | Setting a theoretical moment equal to a mismatched sample statistic (e.g. sample variance instead of sample mean for the first moment) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "MULTIPLE-PARAMETERS-ESTIMATED-USING-ONLY-ONE-MOMENT-EQUATION-LEAVING-SYSTEM-UNDERDETERMINED",
+      "content": "| MC-2 | MULTIPLE-PARAMETERS-ESTIMATED-USING-ONLY-ONE-MOMENT-EQUATION-LEAVING-SYSTEM-UNDERDETERMINED | Attempting to estimate multiple unknown parameters using only a single moment equation, rather than setting up as many equations as unknown parameters | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Matching the k-th Theoretical Moment to the k-th Sample Moment (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Matching the k-th Theoretical Moment to the k-th Sample Moment (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Multiple Parameters Require Multiple Simultaneous Moment Equations (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multiple Parameters Require Multiple Simultaneous Moment Equations (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Method of Moments as a Practical Fallback When MLE Is Intractable (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Method of Moments as a Practical Fallback When MLE Is Intractable (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For data from a Poisson distribution with rate $\\lambda$ (where $E[X]=\\lambda$), estimate $\\lambda$ using the Method of Moments, given sample mean $\\bar{x}=3.2$.\n  2. Explain why estimating both parameters of a two-parameter distribution requires two moment equations, not just one.\n  3. Explain, in one sentence, the main tradeoff between Method of Moments and MLE.\n  4. Describe a realistic scenario where you'd prefer Method of Moments over MLE.\n- **P76 (Transfer Probe, mode = independence)**: \"A researcher is fitting a complicated mixture distribution to some ecological data (species abundance counts), and finds that the distribution's likelihood function involves an intractable integral with no closed-form derivative, making MLE computationally infeasible. (a) Explain why the Method of Moments could serve as a practical alternative in this scenario. (b) Explain what tradeoff the researcher accepts by using Method of Moments instead of MLE, even though it sidesteps the computational difficulty.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.estimator` (the general estimation framework) and `math.prob.moments` (the theoretical moment formulas $E[X^k]$ being matched).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.method-of-moments/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.method-of-moments",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.estimator`, `math.prob.moments`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.mle` (the more efficient but computationally heavier alternative).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.method-of-moments.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

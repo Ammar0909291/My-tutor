@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.linear-regression-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.linear-regression",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:62e9db770886d374132709b0238866551483da9fe6c55dc9dee082bd52454842",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.linear-regression.md": "sha256:55ea050921bdb3b0c13e90805fd00b83886e8415b6e3f216d033af07952b04aa"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.linear-regression",
+    "name": "Simple Linear Regression",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.stats.correlation",
+      "math.linalg.least-squares"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.linear-regression-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.linear-regression (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.linear-regression.md": "sha256:55ea050921bdb3b0c13e90805fd00b83886e8415b6e3f216d033af07952b04aa"
+      },
+      "contentHash": "sha256:50cb0a1cd974dc2ead9106b8c5edc97aee98a5f7d3c6ab10bc4d95ea44ebad94",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.linear-regression.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.linear-regression.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.linear-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.linear-regression\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.linear-regression.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.linear-regression.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.linear-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.linear-regression\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.linear-regression.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.linear-regression.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.linear-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.linear-regression\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.linear-regression.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.linear-regression.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.linear-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.linear-regression\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.linear-regression/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.linear-regression",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the simple linear regression MODEL $Y=\\beta_0+\\beta_1X+\\varepsilon$, $\\varepsilon\\sim N(0,\\sigma^2)$ — and compute the OLS (ordinary least squares) coefficient estimates $\\hat\\beta_1=\\frac{S_{xy}}{S_{xx}}$ and $\\hat\\beta_0=\\bar{y}-\\hat\\beta_1\\bar{x}$, connecting to `math.linalg.least-squares`'s general minimization framework.\n- LO2: Perform INFERENCE on the SLOPE $\\beta_1$ — constructing a $t$-based confidence interval or hypothesis test (typically $H_0:\\beta_1=0$, \"no linear relationship\") — and recognize a NON-SIGNIFICANT slope test does NOT mean $X$ and $Y$ are unrelated, only that no significant LINEAR relationship was detected (mirroring `math.stats.correlation`'s linear-specific limitation).\n- LO3: Interpret $R^2=\\frac{SS_{\\text{Reg}}}{SS_{\\text{Total}}}$ as the PROPORTION of variance in $Y$ \"explained\" by the linear relationship with $X$ — and recognize a HIGH $R^2$ does NOT validate the model's assumptions; RESIDUAL DIAGNOSTICS (checking residual patterns for non-linearity, non-constant variance, non-normality) must be examined SEPARATELY, even when $R^2$ looks impressively high.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.linear-regression",
+      "title": "INTERCEPT-COMPUTED-WITHOUT-FIRST-FINDING-THE-SLOPE-IN-CORRECT-ORDER",
+      "content": "| MC-1 | INTERCEPT-COMPUTED-WITHOUT-FIRST-FINDING-THE-SLOPE-IN-CORRECT-ORDER | Attempting to compute the intercept β̂₀ without first computing the slope β̂₁, or applying the formulas in the wrong sequential order | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.linear-regression",
+      "title": "NON-SIGNIFICANT-SLOPE-TEST-CONCLUDED-AS-NO-RELATIONSHIP-AT-ALL",
+      "content": "| MC-2 | NON-SIGNIFICANT-SLOPE-TEST-CONCLUDED-AS-NO-RELATIONSHIP-AT-ALL | Concluding X and Y have no relationship whatsoever from a non-significant linear slope test, missing the possibility of an undetected non-linear relationship | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.linear-regression",
+      "title": "Computing β̂₁ Before β̂₀, in the Correct Sequential Order (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Computing β̂₁ Before β̂₀, in the Correct Sequential Order (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.linear-regression",
+      "title": "Non-Significant Slope Doesn't Rule Out a Non-Linear Relationship (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Non-Significant Slope Doesn't Rule Out a Non-Linear Relationship (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.linear-regression",
+      "title": "High R² Doesn't Validate Model Assumptions; Check Residuals Separately (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"High R² Doesn't Validate Model Assumptions; Check Residuals Separately (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.linear-regression",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.linear-regression",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. For $S_{xy}=60$, $S_{xx}=15$, $\\bar{x}=8$, $\\bar{y}=20$, compute $\\hat\\beta_1$ and $\\hat\\beta_0$.\n  2. Explain why failing to reject $H_0:\\beta_1=0$ does not necessarily mean $X$ and $Y$ have no relationship at all.\n  3. Explain, in one sentence, what $R^2=0.7$ means about the model's fit.\n  4. Explain why a high $R^2$ alone does not guarantee the regression model's assumptions are satisfied.\n- **P76 (Transfer Probe, mode = independence)**: \"An economist fits a simple linear regression predicting monthly sales revenue from advertising spend, obtaining $R^2=0.88$ (seemingly a strong fit), but a residual plot reveals a clear curved (U-shaped) pattern rather than random scatter. (a) Explain what this residual pattern suggests about whether a linear model is truly appropriate here, despite the high $R^2$. (b) Explain what the economist should investigate or consider changing about the model, given this diagnostic finding.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.linear-regression",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.correlation` (the linear-association concept this model formalizes) and `math.linalg.least-squares` (the general minimization framework OLS is a specific instance of).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.linear-regression/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.linear-regression",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.correlation`, `math.linalg.least-squares`.\n- **Unlocks**: `math.stats.multiple-regression`.\n- **Cross-links**: `math.linalg.least-squares`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.linear-regression.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

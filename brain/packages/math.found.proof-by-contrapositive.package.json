@@ -1,0 +1,281 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.proof-by-contrapositive-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.proof-by-contrapositive",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:85880e16a658210751adf000391892e032f0449c23921868094c3eba46126c8c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md": "sha256:abf0b82d63b5f58acc62160edf1ec235b753d42e63dd0304109027f5d31dfcba"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.proof-by-contrapositive",
+    "name": "Proof by Contrapositive",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.found.proof",
+      "math.found.logical-connectives"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.proof-by-contrapositive-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.proof-by-contrapositive (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md": "sha256:abf0b82d63b5f58acc62160edf1ec235b753d42e63dd0304109027f5d31dfcba"
+      },
+      "contentHash": "sha256:2685dbeb0bdfe10a0600343f3b44359080d3671666461f612248ff24aea2e4e2",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-contrapositive.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-contrapositive"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-contrapositive\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-contrapositive.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-contrapositive"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-contrapositive\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-contrapositive.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-contrapositive"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-contrapositive\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.proof-by-contrapositive/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "Learning Objectives",
+      "content": "- LO1: Form the contrapositive $\\neg Q\\Rightarrow\\neg P$ of a given conditional $P\\Rightarrow Q$, correctly negating both parts.\n- LO2: Prove $P\\Rightarrow Q$ by directly proving $\\neg Q\\Rightarrow\\neg P$ instead, citing the logical equivalence of a conditional and its contrapositive.\n- LO3: Recognize when contrapositive is the natural choice — typically when $\\neg Q$ gives a more concrete, algebraically-workable starting point than $P$ does.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "STRICT-INEQUALITY-NEGATED-TO-STRICT",
+      "content": "| MC-1 | STRICT-INEQUALITY-NEGATED-TO-STRICT | Negating $>$ to $<$ (or $<$ to $>$) instead of the correct non-strict form ($\\le$ or $\\ge$), silently dropping the boundary case | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "CONTRAPOSITIVE-CONFUSED-WITH-CONVERSE",
+      "content": "| MC-2 | CONTRAPOSITIVE-CONFUSED-WITH-CONVERSE | Forming $Q\\Rightarrow P$ (the converse, NOT logically equivalent to $P\\Rightarrow Q$) instead of $\\neg Q\\Rightarrow\\neg P$ (the true contrapositive) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "CONTRAPOSITIVE-CHOSEN-WITHOUT-CAUSE",
+      "content": "| MC-3 | CONTRAPOSITIVE-CHOSEN-WITHOUT-CAUSE | Reaching for contrapositive by default/habit rather than recognizing the specific structural cue (negated conclusion gives an easier forward handle) that motivates the choice | Minor |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "Form the Contrapositive, Then Prove It Directly (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Form the Contrapositive, Then Prove It Directly (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "Negating Both Parts Precisely, and Choosing Contrapositive Deliberately (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Negating Both Parts Precisely, and Choosing Contrapositive Deliberately (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Form the contrapositive of \"if $n$ is prime and $n>2$, then $n$ is odd,\" negating both parts precisely.\n  2. Prove by contrapositive: \"if $3n+2$ is odd, then $n$ is odd.\"\n  3. Given the conditional \"if $x+y\\ge10$, then $x\\ge5$ or $y\\ge5$,\" form its contrapositive and explain why it is easier to prove directly than the original.\n  4. State the contrapositive of \"if a quadrilateral is a square, then it is a rectangle,\" and verify it is a true statement (irrespective of whether the original is easy or hard to prove directly).\n- **P76 (Transfer Probe, mode = independence)**: \"A claim states: 'if a graph has more edges than $\\binom{n}{2}-n+2$ (for $n$ vertices), then it is connected' — assume the details of this bound are correct for this task. (a) Form the contrapositive of this claim, negating both the edge-count condition and 'connected' precisely. (b) Explain, in general terms (without needing graph-theory machinery), why starting from 'the graph is DISCONNECTED' (the negated conclusion) might give a more concrete structural handle — e.g. a description of two separate components — than starting from the original edge-count hypothesis.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.proof` and `math.found.logical-connectives` (negation, and the equivalence $P\\Rightarrow Q \\equiv \\neg Q\\Rightarrow\\neg P$ this technique exploits).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-contrapositive/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.proof-by-contrapositive",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.proof`, `math.found.logical-connectives`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.direct-proof` (Example 1 here directly references and resolves that blueprint's own flawed-attempt example), `math.found.proof-by-contradiction`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-contrapositive.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

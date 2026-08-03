@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.logarithmic-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.logarithmic-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:339bfdfb344baad340203cdc81ceda0efa25540b4d7b0e4817db8ef65ce21488",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.logarithmic-equations.md": "sha256:7e2bcbc6f97ebf20274338313a3677e072496cf719781f1597d1e2962a2af651"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.logarithmic-equations",
+    "name": "Logarithmic Equations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.logarithm-properties",
+      "math.alg.exponential-equations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.logarithmic-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.logarithmic-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.logarithmic-equations.md": "sha256:7e2bcbc6f97ebf20274338313a3677e072496cf719781f1597d1e2962a2af651"
+      },
+      "contentHash": "sha256:7316317bd2f024edec1987c6723c1e6352ce2d12f1e2c0ebf2092e7f3a07c3e2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithmic-equations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithmic-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithmic-equations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithmic-equations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithmic-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithmic-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithmic-equations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithmic-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithmic-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.logarithmic-equations.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.logarithmic-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.logarithmic-equations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.logarithmic-equations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve a logarithmic equation by CONDENSING multiple logarithm terms into a single logarithm (using log properties), then EXPONENTIATING both sides to eliminate the logarithm.\n- LO2: Solve the resulting algebraic equation using appropriate prior techniques.\n- LO3: Check every candidate solution against the DOMAIN of the original logarithms (arguments must be POSITIVE), correctly identifying and discarding EXTRANEOUS solutions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "LOGARITHMIC-EQUATION-CANDIDATES-NOT-DOMAIN-CHECKED",
+      "content": "| MC-1 | LOGARITHMIC-EQUATION-CANDIDATES-NOT-DOMAIN-CHECKED | Accepting a candidate solution without checking that every original logarithm's argument is positive, missing an extraneous solution | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "LOGARITHMIC-EQUATION-SOLVED-BEFORE-CONDENSING",
+      "content": "| MC-2 | LOGARITHMIC-EQUATION-SOLVED-BEFORE-CONDENSING | Attempting to manipulate separate logarithm terms individually before first condensing them into a single logarithm, complicating the solution process | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "LOGARITHM-CONDENSING-RULE-MISAPPLIED",
+      "content": "| MC-3 | LOGARITHM-CONDENSING-RULE-MISAPPLIED | Using the wrong log property (e.g. adding instead of multiplying arguments, or vice versa) when condensing multiple log terms | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Condense, Then Exponentiate (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Condense, Then Exponentiate (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Domain Check Catches Extraneous Solutions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Domain Check Catches Extraneous Solutions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Condense First, Even When Comparing Two Logs Directly (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Condense First, Even When Comparing Two Logs Directly (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Solve $\\log_3(x)+\\log_3(x+6)=3$, checking for extraneous solutions.\n  2. Solve $\\log(2x+1)-\\log(x-1)=\\log(4)$, condensing before solving.\n  3. Solve $\\log_5(x-1)=2$, checking the domain of the result.\n  4. Explain, in one sentence, why exponentiating both sides of a logarithmic equation can introduce extraneous solutions.\n- **P76 (Transfer Probe, mode = independence)**: \"A seismologist uses the Richter scale formula involving $\\log_{10}(x)-\\log_{10}(y)=M$ (relating two earthquake amplitudes $x,y$ to a magnitude difference $M$). Given a specific equation $\\log_{10}(x+5)+\\log_{10}(x-5)=2$ arising from a related calculation, (a) condense and solve for $x$, finding all algebraic candidates. (b) Check each candidate against the domain requirements of the ORIGINAL logarithms (both $x+5>0$ and $x-5>0$), explaining what it would mean physically/practically if one candidate turns out to be extraneous in this seismological context.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.logarithm-properties` (condensing logarithms via product/quotient/power rules) and `math.alg.exponential-equations` (the exponentiation step this concept's solving process mirrors in reverse).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.logarithmic-equations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.logarithmic-equations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.logarithm-properties`, `math.alg.exponential-equations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.radical-equations` (the structurally parallel extraneous-solution-checking discipline for a different equation type).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.logarithmic-equations.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.diagonalization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.diagonalization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1e398d259b913741208ccf0d17bd134d4933ce2b364af21d7e07f46f7ded168e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.diagonalization.md": "sha256:17e0f28784ca3728599cc9cd07a26c74e4a36bf29da71d9dcdbd9b8afe36bf49"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.diagonalization",
+    "name": "Diagonalization",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.eigenvalues",
+      "math.linalg.eigenspace",
+      "math.linalg.matrix-inverse"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.diagonalization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.diagonalization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.diagonalization.md": "sha256:17e0f28784ca3728599cc9cd07a26c74e4a36bf29da71d9dcdbd9b8afe36bf49"
+      },
+      "contentHash": "sha256:28b055bf8107507845e0981bccb7eec3e4eedaf60ef111d297f2bf55e9c17ecd",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.diagonalization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.diagonalization.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.diagonalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.diagonalization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.diagonalization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.diagonalization.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.diagonalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.diagonalization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.diagonalization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.diagonalization.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.diagonalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.diagonalization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.diagonalization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.diagonalization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.diagonalization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.diagonalization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.diagonalization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the diagonalizability criterion — an $n\\times n$ matrix $A$ is diagonalizable IF AND ONLY IF it has $n$ LINEARLY INDEPENDENT eigenvectors — and build $A=PDP^{-1}$ by placing eigenvectors as columns of $P$ and the corresponding eigenvalues as $D=\\text{diag}(\\lambda_1,\\ldots,\\lambda_n)$, IN MATCHING ORDER.\n- LO2: Compute matrix powers efficiently via $A^k=PD^kP^{-1}$ — raising a DIAGONAL matrix to a power is just raising each diagonal entry to that power, avoiding repeated matrix multiplication.\n- LO3: Recognize when a matrix is NOT diagonalizable — when an eigenvalue's algebraic multiplicity exceeds its eigenspace's dimension (geometric multiplicity), there aren't enough independent eigenvectors to fill $P$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "EIGENVECTOR-EIGENVALUE-ORDER-MISMATCHED-BETWEEN-P-AND-D",
+      "content": "| MC-1 | EIGENVECTOR-EIGENVALUE-ORDER-MISMATCHED-BETWEEN-P-AND-D | Placing eigenvectors in $P$ and eigenvalues in $D$ without matching column order, producing an incorrect factorization | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "REPEATED-EIGENVALUE-DIAGONALIZABILITY-ASSUMED-WITHOUT-CHECKING-MULTIPLICITIES",
+      "content": "| MC-2 | REPEATED-EIGENVALUE-DIAGONALIZABILITY-ASSUMED-WITHOUT-CHECKING-MULTIPLICITIES | Assuming a repeated eigenvalue automatically determines diagonalizability (either way) without comparing algebraic and geometric multiplicities | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Eigenvector Columns Must Match Eigenvalue Order in D (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Eigenvector Columns Must Match Eigenvalue Order in D (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Diagonal Powers Are Entrywise (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Diagonal Powers Are Entrywise (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Check Geometric vs. Algebraic Multiplicity Before Concluding (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Check Geometric vs. Algebraic Multiplicity Before Concluding (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Diagonalize $A=\\begin{pmatrix}3&0\\\\0&1\\end{pmatrix}$ having eigenvalues 3 (eigenvector $(1,0)$) and 1 (eigenvector $(0,1)$) — a case already diagonal, verify $P=D=$ identity-column setups still apply correctly.\n  2. Given $A=PDP^{-1}$ with $D=\\text{diag}(2,-1)$, compute $A^4$ using the diagonalized power shortcut.\n  3. For a matrix with eigenvalue 3 having algebraic multiplicity 2 but a 2-dimensional eigenspace, determine diagonalizability and justify.\n  4. For a matrix with eigenvalue 5 having algebraic multiplicity 3 but only a 1-dimensional eigenspace, determine diagonalizability and justify.\n- **P76 (Transfer Probe, mode = independence)**: \"A population-growth model uses a transition matrix $A=\\begin{pmatrix}0.9&0.2\\\\0.1&0.8\\end{pmatrix}$ (with eigenvalues 1 and 0.7, and known corresponding eigenvectors) to predict a two-region population distribution after many years. (a) Explain why diagonalizing $A$ makes computing the population distribution after, say, 50 years dramatically more practical than multiplying $A$ by itself 50 times. (b) Using the diagonalized form conceptually (without full numeric computation), explain what happens to the population distribution as the number of years grows very large, given that one eigenvalue (0.7) is less than 1 and shrinks toward 0 under repeated powering, while the other (1) does not shrink at all.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.eigenvalues` (computing $\\lambda$), `math.linalg.eigenspace` (finding eigenvectors and their span), and `math.linalg.matrix-inverse` (needed to form $P^{-1}$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.diagonalization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.diagonalization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.eigenvalues`, `math.linalg.eigenspace`, `math.linalg.matrix-inverse`.\n- **Unlocks**: `math.linalg.matrix-exponential`.\n- **Related**: `math.linalg.spectral-theorem`, `math.linalg.jordan-form` (the generalization when a matrix is NOT diagonalizable).\n- **Cross-links**: `math.de.systems-matrix-method` (diagonalization is the key technique for solving linear systems of differential equations).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.diagonalization.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

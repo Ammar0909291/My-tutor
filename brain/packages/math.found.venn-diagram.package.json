@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.venn-diagram-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.venn-diagram",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ac140eb25390b881a3661a56173e81351bddf9f6cb8e190fca161fb8ea1bc9c2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.venn-diagram.md": "sha256:5218045acb02e898b580e883fb3128263e1b346ec1a42205ccbe7a20caf1e068"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.venn-diagram",
+    "name": "Venn Diagram",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.set-operations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.venn-diagram-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.venn-diagram (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.venn-diagram.md": "sha256:5218045acb02e898b580e883fb3128263e1b346ec1a42205ccbe7a20caf1e068"
+      },
+      "contentHash": "sha256:3f16b0d85cfe5fe04b137cc5518a8f0061c64a90d2db06aeccac3ffedde9f312",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.venn-diagram.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.venn-diagram.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.venn-diagram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.venn-diagram\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.venn-diagram.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.venn-diagram.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.venn-diagram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.venn-diagram\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.venn-diagram.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.venn-diagram.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.venn-diagram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.venn-diagram\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.venn-diagram/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.venn-diagram",
+      "title": "Learning Objectives",
+      "content": "- LO1: Draw a correctly-labeled Venn diagram for two or three sets within a universal rectangle, shading a specified region (e.g. $A\\cup B$, $A\\cap B\\cap C$, $A\\setminus B$).\n- LO2: Read a shaded Venn diagram and correctly state, in set notation, which combination of operations it represents.\n- LO3: Use a Venn diagram to verify a set identity (e.g. De Morgan's law) by shading both sides separately and confirming the shaded regions match exactly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.venn-diagram",
+      "title": "DIAGRAM-READ-BY-SETS-DRAWN-NOT-REGIONS-SHADED",
+      "content": "| MC-1 | DIAGRAM-READ-BY-SETS-DRAWN-NOT-REGIONS-SHADED | Interpreting a Venn diagram based on which circles are present rather than precisely which sub-regions are shaded | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.venn-diagram",
+      "title": "ASYMMETRIC-OPERATION-SHADED-SYMMETRICALLY",
+      "content": "| MC-2 | ASYMMETRIC-OPERATION-SHADED-SYMMETRICALLY | When shading $A\\setminus B$ or a similarly directional operation, shading the wrong \"side\" of the overlap, treating the operation as if it were symmetric | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.venn-diagram",
+      "title": "REGION-COUNT-MISCOUNTED-FOR-MULTIPLE-SETS",
+      "content": "| MC-3 | REGION-COUNT-MISCOUNTED-FOR-MULTIPLE-SETS | Failing to identify all $2^n$ distinct regions for $n$ overlapping circles, missing some combination of memberships (e.g. forgetting the \"in none of the sets\" outer region) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.venn-diagram",
+      "title": "Every Region Corresponds to Exactly One Membership Combination (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Every Region Corresponds to Exactly One Membership Combination (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.venn-diagram",
+      "title": "Verify an Identity by Shading Both Sides Separately (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Verify an Identity by Shading Both Sides Separately (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.venn-diagram",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.venn-diagram",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Draw a two-circle Venn diagram and shade $A\\cup B$ entirely.\n  2. Draw a two-circle Venn diagram and shade $B\\setminus A$ specifically (not $A\\setminus B$).\n  3. Given a three-circle diagram with only the very center region (all three circles overlapping) shaded, state the corresponding set expression ($A\\cap B\\cap C$).\n  4. Use two separate Venn diagrams to verify $(A\\cap B)^c=A^c\\cup B^c$ by shading each side and comparing.\n- **P76 (Transfer Probe, mode = independence)**: \"A market-research firm surveys customers on three product features: 'likes Feature X,' 'likes Feature Y,' 'likes Feature Z.' (a) Sketch (describe in words, region by region, if you cannot draw) a three-circle Venn diagram representing these three groups, and identify which region represents 'customers who like exactly Feature X alone, and neither Y nor Z.' (b) The firm wants to identify 'customers who like at least one of X or Y, but do NOT like Z.' Express this using set notation and describe precisely which region(s) of the Venn diagram this corresponds to.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.venn-diagram",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set-operations` (union, intersection, difference, complement) — this concept formalizes the informal overlapping-circle sketches already used to teach those operations into a standard, general-purpose diagram tool.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.venn-diagram/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.venn-diagram",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set-operations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.set-difference` (MC-2's repair reuses its asymmetry result by direct reference), `math.found.complement` (Example 3 mirrors its independent-verification approach to De Morgan's law, now visually).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.venn-diagram.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

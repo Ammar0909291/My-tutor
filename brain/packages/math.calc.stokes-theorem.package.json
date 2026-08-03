@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.stokes-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.stokes-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cb975c216d098319fa52ac9fccb82a4c79c6f594227be380ff66aa705888413c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.stokes-theorem.md": "sha256:111a0992d2eea7d352fa8b8073dbf7df988e11d8c305e0f2d2efa728a7149627"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.stokes-theorem",
+    "name": "Stokes' Theorem",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.6,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.surface-integrals",
+      "math.calc.curl-divergence",
+      "math.calc.greens-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.stokes-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.stokes-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.stokes-theorem.md": "sha256:111a0992d2eea7d352fa8b8073dbf7df988e11d8c305e0f2d2efa728a7149627"
+      },
+      "contentHash": "sha256:6a9d3c949f1dfce7419b3fb55eb64a76001ab2e5f5cf918bb7921a5cae279240",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.stokes-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.stokes-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.stokes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.stokes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.stokes-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.stokes-theorem.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.stokes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.stokes-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.stokes-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.stokes-theorem.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.stokes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.stokes-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.stokes-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.stokes-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.stokes-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.stokes-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.stokes-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State Stokes' theorem $\\iint_S(\\nabla\\times F)\\cdot dS=\\oint_CF\\cdot dr$, where $C$ is the BOUNDARY curve of surface $S$, correctly oriented CONSISTENTLY with $S$'s chosen normal direction (via the right-hand rule).\n- LO2: Recognize Stokes' theorem as the direct 3D GENERALIZATION of `math.calc.greens-theorem` — Green's theorem is the SPECIAL CASE where $S$ is a FLAT region in the $xy$-plane (so $\\nabla\\times F$'s relevant component reduces to Green's theorem's scalar curl).\n- LO3: Use Stokes' theorem to convert a difficult LINE integral into an EASIER surface integral (or vice versa) — choosing the direction of conversion based on which side is computationally simpler for the SPECIFIC surface/curve involved.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "BOUNDARY-CURVE-ORIENTATION-INCONSISTENT-WITH-SURFACE-NORMAL",
+      "content": "| MC-1 | BOUNDARY-CURVE-ORIENTATION-INCONSISTENT-WITH-SURFACE-NORMAL | Orienting the boundary curve C inconsistently with the surface S's chosen normal direction, introducing a sign error | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "HARDER-SIDE-OF-STOKES-THEOREM-COMPUTED-WITHOUT-CHECKING-FOR-AN-EASIER-ALTERNATIVE",
+      "content": "| MC-2 | HARDER-SIDE-OF-STOKES-THEOREM-COMPUTED-WITHOUT-CHECKING-FOR-AN-EASIER-ALTERNATIVE | Directly computing the more difficult side of Stokes' theorem's equation without first checking whether the other side offers a significant computational shortcut | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Orient the Boundary Curve Consistently with the Surface's Normal (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Orient the Boundary Curve Consistently with the Surface's Normal (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Green's Theorem Is Stokes' Theorem's Flat Special Case (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Green's Theorem Is Stokes' Theorem's Flat Special Case (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Choose Whichever Side of the Equation Is Easier to Compute (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Choose Whichever Side of the Equation Is Easier to Compute (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.60×5⌉ = 3/5.\n\n- **P77 (4-problem set)**:\n  1. For a disk-shaped surface $S$ with upward normal, state the correct orientation of its boundary circle $C$.\n  2. Explain, in one sentence, how Green's theorem emerges as a special case of Stokes' theorem.\n  3. Given $\\nabla\\times F=0$ for a vector field $F$, evaluate $\\oint_CF\\cdot dr$ for any closed curve $C$, and justify using Stokes' theorem.\n  4. Explain when it would be preferable to compute the surface integral side of Stokes' theorem rather than the line integral side, and vice versa.\n- **P76 (Transfer Probe, mode = independence)**: \"An electromagnetics engineer needs to verify Faraday's law relationship between the electric field's circulation around a wire loop and the changing magnetic flux through a surface bounded by that loop — mathematically expressed via Stokes' theorem applied to the electric field's curl. (a) Explain, in physical terms, why choosing a DIFFERENT (but still boundary-consistent) surface for the same wire loop should give the SAME flux integral result, connecting to Stokes' theorem's surface-independence property. (b) Explain why correctly matching the surface's normal direction to the loop's circulation direction (via the right-hand rule) is essential for getting a physically meaningful (correctly signed) result.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 3/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.surface-integrals` (the surface integral $\\iint_S(\\nabla\\times F)\\cdot dS$), `math.calc.curl-divergence` (computing $\\nabla\\times F$), and `math.calc.greens-theorem` (the 2D special case this generalizes).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.stokes-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.stokes-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.surface-integrals`, `math.calc.curl-divergence`, `math.calc.greens-theorem`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.calc.divergence-theorem` (the analogous theorem relating volume integrals of divergence to surface flux).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.stokes-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

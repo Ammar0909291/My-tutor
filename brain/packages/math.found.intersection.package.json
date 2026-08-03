@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.intersection-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.intersection",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1eefd1ac36c242f6c263de597e59043303382edf5cba44fe434776cccd2e0aa7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.intersection.md": "sha256:c23a3579f12c3a56e113359162164091463697e293b124aaf99d7719cc8c06e7"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.intersection",
+    "name": "Intersection",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.set-operations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.intersection-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.intersection (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.intersection.md": "sha256:c23a3579f12c3a56e113359162164091463697e293b124aaf99d7719cc8c06e7"
+      },
+      "contentHash": "sha256:e1aa5f8c95ffe86a3c1eb0d94c055e927cbb9f18b4c814fc8aba3d1dd19576b9",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.intersection.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.intersection.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.intersection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.intersection\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.intersection.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.intersection.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.intersection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.intersection\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.intersection.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.intersection.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.intersection"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.intersection\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.intersection/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.intersection",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute $A\\cap B$ for given finite sets, listing only elements present in BOTH $A$ and $B$.\n- LO2: Recognize when $A\\cap B=\\emptyset$ (disjoint sets) and correctly report the empty set rather than treating \"no shared elements\" as an error or undefined case.\n- LO3: State and apply $|A\\cap B|\\le\\min(|A|,|B|)$ — intersection never has more elements than the smaller of the two sets.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.intersection/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.intersection",
+      "title": "EMPTY-INTERSECTION-TREATED-AS-UNDEFINED",
+      "content": "| MC-1 | EMPTY-INTERSECTION-TREATED-AS-UNDEFINED | Reporting \"no answer\" or an error for a disjoint pair instead of the valid result $\\emptyset$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.found.intersection/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.intersection",
+      "title": "INTERSECTION-SIZE-ASSUMED-UNBOUNDED-BY-SMALLER-SET",
+      "content": "| MC-2 | INTERSECTION-SIZE-ASSUMED-UNBOUNDED-BY-SMALLER-SET | Failing to recognize that $|A\\cap B|$ can never exceed $\\min(|A|,|B|)$, e.g. proposing an intersection larger than one of the original sets | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.intersection/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.intersection",
+      "title": "Only Elements in Both Sets Survive (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Only Elements in Both Sets Survive (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.intersection/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.intersection",
+      "title": "Intersection Size Is Bounded by the Smaller Set (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Intersection Size Is Bounded by the Smaller Set (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.intersection/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.intersection",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.intersection/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.intersection",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $A\\cap B$ for $A=\\{a,b,c,d\\}$, $B=\\{c,d,e,f\\}$.\n  2. Compute $A\\cap B$ for two disjoint sets and state the result explicitly as $\\emptyset$, not \"no answer.\"\n  3. Given $|A|=4$, determine the maximum possible value of $|A\\cap B|$ for any set $B$, and describe the condition on $B$ under which this maximum is achieved.\n  4. Given $A=\\{$multiples of 6 up to 30$\\}$ and $B=\\{$multiples of 4 up to 30$\\}$, compute $A\\cap B$ (multiples of 12: $\\{12,24\\}$).\n- **P76 (Transfer Probe, mode = independence)**: \"A hospital wants to identify patients who are BOTH over 65 years old AND diagnosed with diabetes, from two separately-maintained lists: 'Patients over 65' (340 people) and 'Patients with diabetes' (210 people). (a) Using this lesson's intersection concept, explain what the target patient group corresponds to mathematically, and state the maximum and minimum number of people it could possibly contain, given the two list sizes. (b) If the hospital's query returns zero matching patients, explain why this is a valid, meaningful result rather than a sign that the query is broken.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.intersection/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.intersection",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set-operations`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.intersection/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.intersection",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set-operations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.union` (the paired operation), `math.found.empty-set` (MC-1's repair reuses its result directly).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.intersection.md",
+        "startLine": 82,
+        "endLine": 88
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

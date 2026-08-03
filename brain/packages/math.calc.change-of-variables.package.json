@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.change-of-variables-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.change-of-variables",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b916777578e59b0af68aaae94b74686c6641cef48a976852003c6eab59d788da",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.change-of-variables.md": "sha256:5c50cff6c9b3abd21aa41a0b4244dddd3cbd43b1552a57c71292d68b2b324190"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.change-of-variables",
+    "name": "Change of Variables (Jacobian)",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.multiple-integrals",
+      "math.linalg.determinant"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.change-of-variables-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.change-of-variables (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.change-of-variables.md": "sha256:5c50cff6c9b3abd21aa41a0b4244dddd3cbd43b1552a57c71292d68b2b324190"
+      },
+      "contentHash": "sha256:9995019b32ce727e649c00c6c31ea407177a20be87bf8bacca3e6114ee478d1d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.change-of-variables.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.change-of-variables.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.change-of-variables"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.change-of-variables\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.change-of-variables.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.change-of-variables.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.change-of-variables"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.change-of-variables\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.change-of-variables.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.change-of-variables.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.change-of-variables"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.change-of-variables\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.change-of-variables.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.change-of-variables.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.change-of-variables"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.change-of-variables\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.change-of-variables/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the JACOBIAN DETERMINANT $\\frac{\\partial(x,y)}{\\partial(u,v)}=\\det\\begin{pmatrix}\\partial x/\\partial u&\\partial x/\\partial v\\\\\\partial y/\\partial u&\\partial y/\\partial v\\end{pmatrix}$ for a substitution $(x,y)=T(u,v)$, using `math.linalg.determinant`.\n- LO2: Apply the change-of-variables formula $\\iint f\\,dA=\\iint f(T(u,v))\\left|\\frac{\\partial(x,y)}{\\partial(u,v)}\\right|du\\,dv$ — taking the ABSOLUTE VALUE of the Jacobian determinant (a NEGATIVE determinant would represent an orientation-reversing transformation, but AREA is always positive, so the absolute value is essential, never optional).\n- LO3: Recognize the Jacobian determinant as the LOCAL SCALING FACTOR for area (or volume) under the transformation $T$ — a Jacobian of magnitude 2 means the transformation locally DOUBLES area near that point, connecting this concept to `math.linalg.determinant`'s geometric meaning as a scaling factor.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "JACOBIAN-MATRIX-ROWS-AND-COLUMNS-SET-UP-INCONSISTENTLY",
+      "content": "| MC-1 | JACOBIAN-MATRIX-ROWS-AND-COLUMNS-SET-UP-INCONSISTENTLY | Setting up the Jacobian matrix with mismatched or inconsistent row/column conventions, producing an incorrect determinant | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "JACOBIAN-SIGNED-VALUE-USED-INSTEAD-OF-ABSOLUTE-VALUE-IN-THE-FORMULA",
+      "content": "| MC-2 | JACOBIAN-SIGNED-VALUE-USED-INSTEAD-OF-ABSOLUTE-VALUE-IN-THE-FORMULA | Using the Jacobian's signed value directly in the change-of-variables formula, rather than its required absolute value | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Setting Up the Jacobian Matrix with a Consistent Row/Column Convention (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Setting Up the Jacobian Matrix with a Consistent Row/Column Convention (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Absolute Value Is Mandatory in the Change-of-Variables Formula (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Absolute Value Is Mandatory in the Change-of-Variables Formula (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Jacobian as the Local (or Global, for Linear Maps) Scaling Factor (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Jacobian as the Local (or Global, for Linear Maps) Scaling Factor (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Compute the Jacobian $\\frac{\\partial(x,y)}{\\partial(u,v)}$ for $x=u+v$, $y=u-v$.\n  2. Given a Jacobian of $-5$ at a point, state the correct scaling factor to use in the change-of-variables formula.\n  3. For the linear transformation $x=4u$, $y=u+v$, compute the Jacobian and interpret it as an area-scaling factor.\n  4. Explain, in one sentence, why the absolute value of the Jacobian is used in the change-of-variables formula, even though the Jacobian itself can be negative.\n- **P76 (Transfer Probe, mode = independence)**: \"An image-processing algorithm applies a nonlinear geometric warp $T(u,v)=(x,y)$ to a photograph (e.g. correcting for lens distortion), and needs to know how much a small region's AREA changes at each point after the warp, to correctly redistribute pixel brightness values. (a) Explain how the Jacobian determinant of $T$ at a given point answers exactly this question. (b) Explain why the algorithm must use the ABSOLUTE VALUE of the Jacobian for this brightness-redistribution purpose, even in regions where the warp happens to flip orientation (producing a negative Jacobian there).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.multiple-integrals` (the integrals being transformed) and `math.linalg.determinant` (needed to compute the Jacobian and understand its scaling-factor interpretation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.change-of-variables/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.change-of-variables",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.multiple-integrals`, `math.linalg.determinant`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.change-of-variables.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

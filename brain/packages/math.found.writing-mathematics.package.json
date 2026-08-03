@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.writing-mathematics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.writing-mathematics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:810c0511e54334b53c8f801012f3ae145d3de7f964bdd3e032d492d000636d4d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.writing-mathematics.md": "sha256:e29a08a36bd0965919834b8fb986cc5f45345d0fd1d7c62088bd007f1cf9f3fa"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.writing-mathematics",
+    "name": "Writing Mathematics",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.reading-mathematics",
+      "math.found.proof"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.writing-mathematics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.writing-mathematics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.writing-mathematics.md": "sha256:e29a08a36bd0965919834b8fb986cc5f45345d0fd1d7c62088bd007f1cf9f3fa"
+      },
+      "contentHash": "sha256:c62d1dfb33c5f75296dfcc4786c427ae76a3ab5529a03385432331f55cd01fd5",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.writing-mathematics.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.writing-mathematics.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.writing-mathematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.writing-mathematics\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.writing-mathematics.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.writing-mathematics.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.writing-mathematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.writing-mathematics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.writing-mathematics.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.writing-mathematics.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.writing-mathematics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.writing-mathematics\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.writing-mathematics/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write a proof using complete sentences and standard connective phrases (\"since,\" \"therefore,\" \"assume,\" \"it follows that\"), rather than a bare, disconnected sequence of symbolic steps.\n- LO2: State every proof's assumptions, quantifiers, and conclusion EXPLICITLY at the start and end, rather than leaving them for the reader to infer from context.\n- LO3: Balance rigor and readability — include enough justification for every step to be independently verifiable, without excessive, distracting over-explanation of routine algebra.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "BARE-SYMBOLIC-CHAIN-SUBSTITUTED-FOR-CONNECTED-PROSE",
+      "content": "| MC-1 | BARE-SYMBOLIC-CHAIN-SUBSTITUTED-FOR-CONNECTED-PROSE | Writing a technically-correct sequence of symbolic steps without the connective language needed for a reader to identify each step's logical role | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "PROOF-GOAL-LEFT-IMPLICIT-UNTIL-THE-END",
+      "content": "| MC-2 | PROOF-GOAL-LEFT-IMPLICIT-UNTIL-THE-END | Beginning a proof directly with algebra/computation without first stating what is being proved, forcing the reader to infer the target retroactively | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "JUSTIFICATION-EFFORT-MISALLOCATED",
+      "content": "| MC-3 | JUSTIFICATION-EFFORT-MISALLOCATED | Over-explaining routine, expected manipulations while under-explaining the genuinely key inferential steps that carry the proof's actual logical weight | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "Write in Full Sentences with Explicit Connectives (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Write in Full Sentences with Explicit Connectives (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "State the Goal Before the Argument (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"State the Goal Before the Argument (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Rewrite a given bare-symbol proof fragment into full sentences with explicit connective language.\n  2. Write the opening sentence (goal statement) for a proof of \"if $a$ and $b$ are both odd, then $ab$ is odd,\" before writing the proof itself.\n  3. Given a proof that over-explains a routine algebraic expansion step by step while GLOSSING OVER the actual key inferential step, identify which parts should be condensed and which need more explicit justification.\n  4. Write a complete, well-structured proof (goal stated first, full sentences, explicit conclusion marker) of \"the product of two even integers is divisible by 4.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A student submits the following as a complete proof: '$x=2k+1$. $x^2-1=4k^2+4k=4k(k+1)$.' (a) Rewrite this as a well-structured proof following this lesson's principles — state the goal, use full sentences with connectives, and make the concluding claim explicit (that $x^2-1$ is divisible by 4 whenever $x$ is odd). (b) Explain, using this lesson's rigor-vs-readability balance principle, which specific step in your rewritten version most needs an explicit justification, and which routine algebraic manipulation needs none.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.reading-mathematics` (the complementary comprehension skill — this concept is its production-side counterpart) and `math.found.proof` (the content being written, already understood; this concept teaches how to WRITE it well).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.writing-mathematics/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.writing-mathematics",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.reading-mathematics`, `math.found.proof`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.reading-mathematics` (the direct comprehension-side counterpart to this concept's production-side skill — together forming a complete input/output pair for engaging with formal mathematical text).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.writing-mathematics.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

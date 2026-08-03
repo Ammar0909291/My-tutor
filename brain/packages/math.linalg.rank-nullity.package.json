@@ -1,0 +1,265 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.rank-nullity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.rank-nullity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a3368c83f99f3fe51e415559aa96c640b1a392e0e1d3949beba51ec2a4cf4ce3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.rank-nullity.md": "sha256:8eefce6d67188ce963a1cd09ed15c7f08b8d0a35168cf729bc2f07989de79c6a"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.linalg.rank-nullity",
+    "name": "Rank-Nullity Theorem",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.rank",
+      "math.linalg.null-space",
+      "math.linalg.column-space",
+      "math.linalg.dimension"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.rank-nullity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.rank-nullity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.rank-nullity.md": "sha256:8eefce6d67188ce963a1cd09ed15c7f08b8d0a35168cf729bc2f07989de79c6a"
+      },
+      "contentHash": "sha256:c583923da90219686c0cf68fa37ee91461aeb97d7a9dbfb2f01bb0a2ad88ef3e",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.rank-nullity.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.rank-nullity.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.rank-nullity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.rank-nullity\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.rank-nullity.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.rank-nullity.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.rank-nullity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.rank-nullity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.rank-nullity.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.rank-nullity.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.rank-nullity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.rank-nullity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.rank-nullity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Rank-Nullity theorem $\\text{rank}(T)+\\text{nullity}(T)=\\dim(V)$, and apply it to find one quantity given the other two.\n- LO2: Correctly identify $\\dim(V)$ as the dimension of the DOMAIN (for a matrix $A$, this is $n$, the number of COLUMNS — NOT the number of rows).\n- LO3: Use the theorem to determine a linear map's injectivity WITHOUT directly computing the kernel — if $\\text{rank}(T)=\\dim(V)$, then $\\text{nullity}(T)=0$, forcing $\\ker(T)=\\{0\\}$ and hence injectivity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "DIM-V-COMPUTED-FROM-ROWS-INSTEAD-OF-COLUMNS",
+      "content": "| MC-1 | DIM-V-COMPUTED-FROM-ROWS-INSTEAD-OF-COLUMNS | Using a matrix's row count instead of its column count for $\\dim(V)$ in the Rank-Nullity theorem | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "INJECTIVITY-CHECKED-VIA-HIGH-RANK-RATHER-THAN-EXACT-EQUALITY",
+      "content": "| MC-2 | INJECTIVITY-CHECKED-VIA-HIGH-RANK-RATHER-THAN-EXACT-EQUALITY | Assuming a \"high\" or \"mostly full\" rank is sufficient for injectivity, rather than requiring EXACT equality between rank and $\\dim(V)$ | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "Rank + Nullity = dim(V), Using COLUMNS for Matrices (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Rank + Nullity = dim(V), Using COLUMNS for Matrices (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "Full Rank Exactly Equal to dim(V) Means Injective (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Full Rank Exactly Equal to dim(V) Means Injective (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. For a $2\\times7$ matrix with rank 2, find the nullity.\n  2. For a $5\\times5$ matrix with nullity 0, determine injectivity and justify using the theorem.\n  3. For a linear map $T:\\mathbb{R}^6\\to\\mathbb{R}^4$ with $\\text{rank}(T)=4$, find $\\text{nullity}(T)$.\n  4. Explain, in one sentence, why $\\dim(V)$ in the Rank-Nullity theorem refers to the domain's dimension, not the codomain's.\n- **P76 (Transfer Probe, mode = independence)**: \"A data-encoding scheme uses a linear map $T:\\mathbb{R}^{10}\\to\\mathbb{R}^6$ (encoding 10 raw values into a 6-value compressed representation) with $\\text{rank}(T)=6$ (the encoding uses the full output space). (a) Use the Rank-Nullity theorem to find $\\text{nullity}(T)$, and explain what this tells you about whether the encoding is REVERSIBLE (injective) — i.e., whether the original 10 values can always be uniquely recovered from the 6-value encoding. (b) Explain, in practical terms, what a NONZERO nullity means for this encoding scheme — specifically, that multiple different original inputs could produce the IDENTICAL encoded output, a genuine information-loss concern.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.rank`, `math.linalg.null-space`, `math.linalg.column-space`, and `math.linalg.dimension` — this theorem synthesizes all four into one constraining equation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.rank-nullity/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.rank-nullity",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.rank`, `math.linalg.null-space`, `math.linalg.column-space`, `math.linalg.dimension`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.kernel-image` (the general linear-map version of rank and nullity this theorem constrains).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank-nullity.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

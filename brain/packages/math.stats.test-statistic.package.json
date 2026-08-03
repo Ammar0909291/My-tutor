@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.test-statistic-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.test-statistic",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e83c2bcb03d8bbcbdc024a21cd9e86021bb1968cedead71493e6de3240fc84b9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.test-statistic.md": "sha256:aef63a2cb00f8afc45dc1647a9d69b364bf0bbeb3af6b8ff1e512590fd4eca4a"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.test-statistic",
+    "name": "Test Statistic",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.hypothesis-testing"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.test-statistic-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.test-statistic (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.test-statistic.md": "sha256:aef63a2cb00f8afc45dc1647a9d69b364bf0bbeb3af6b8ff1e512590fd4eca4a"
+      },
+      "contentHash": "sha256:f72241017b947ceac73234895ecd8f53e5d18f72e6a106783b15e84c7fe89b3e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.test-statistic.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.test-statistic.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.test-statistic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.test-statistic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.test-statistic.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.test-statistic.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.test-statistic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.test-statistic\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.test-statistic.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.test-statistic.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.test-statistic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.test-statistic\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.test-statistic.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.test-statistic.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.test-statistic"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.test-statistic\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.test-statistic/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.test-statistic",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a TEST STATISTIC as a function of the SAMPLE DATA, computed to measure the EVIDENCE against the null hypothesis $H_0$ — a single number SUMMARIZING how far the observed data departs from what $H_0$ predicts.\n- LO2: Recognize that UNDER $H_0$ (assuming it's TRUE), the test statistic has a KNOWN, SPECIFIC distribution ($z$, $t$, $\\chi^2$, or $F$, depending on the test) — this KNOWN reference distribution is what makes computing a $p$-value possible.\n- LO3: Understand the LOGIC of comparing the OBSERVED test statistic value to this NULL distribution to compute a $p$-value — a LARGE test statistic magnitude (far into the tail of the null distribution) corresponds to a SMALL $p$-value, indicating STRONG evidence against $H_0$; recognizing this INVERSE relationship (extreme statistic $\\leftrightarrow$ small $p$-value) is essential, not an arbitrary convention.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.test-statistic",
+      "title": "TEST-STATISTIC-VALUE-TREATED-AS-A-BARE-NUMBER-DISCONNECTED-FROM-THE-NULL-DISTRIBUTION",
+      "content": "| MC-1 | TEST-STATISTIC-VALUE-TREATED-AS-A-BARE-NUMBER-DISCONNECTED-FROM-THE-NULL-DISTRIBUTION | Treating the test statistic's numeric value as meaningful on its own, without connecting its magnitude to its position relative to the known null distribution | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.test-statistic",
+      "title": "LARGER-TEST-STATISTIC-ASSUMED-TO-CORRESPOND-TO-LARGER-P-VALUE",
+      "content": "| MC-2 | LARGER-TEST-STATISTIC-ASSUMED-TO-CORRESPOND-TO-LARGER-P-VALUE | Assuming a larger test statistic magnitude corresponds to a larger p-value, rather than the correct inverse relationship (more extreme statistic means smaller p-value) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.test-statistic",
+      "title": "Test Statistic Magnitude Reflects Surprise Under H₀ (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Test Statistic Magnitude Reflects Surprise Under H₀ (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.test-statistic",
+      "title": "Different Tests Use Different Reference Distributions (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Different Tests Use Different Reference Distributions (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.test-statistic",
+      "title": "More Extreme Statistic Means Smaller p-value, Not Larger (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"More Extreme Statistic Means Smaller p-value, Not Larger (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.test-statistic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.test-statistic",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Explain why a test statistic of $z=3.2$ provides stronger evidence against $H_0$ than $z=0.5$.\n  2. State which reference distribution is used for a two-sample $t$-test.\n  3. Given two test statistics, one at the 99th percentile of the null distribution and one at the 60th percentile, determine which has the smaller p-value.\n  4. Explain, in one sentence, why the test statistic's distribution \"under $H_0$\" being known is essential for computing a p-value.\n- **P76 (Transfer Probe, mode = independence)**: \"A clinical trial computes a test statistic of $t=4.1$ (with an associated null distribution being the $t$-distribution) to test whether a new treatment has any effect, versus a separate trial for a different drug producing $t=0.8$. (a) Explain which trial provides stronger evidence against its null hypothesis (no treatment effect), connecting to how extreme each test statistic is relative to the null distribution. (b) Explain why simply reporting 't=4.1' or 't=0.8' without reference to the null distribution would be uninterpretable as evidence.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.test-statistic",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.hypothesis-testing` — the test statistic is the central computational tool within that broader framework.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.test-statistic/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.test-statistic",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.hypothesis-testing`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.hypothesis-testing`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.test-statistic.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

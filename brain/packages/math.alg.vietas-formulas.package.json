@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.vietas-formulas-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.vietas-formulas",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4ec9415d282f5cf16908e2757a59e156ab6f6ce9a55e511bb16b34d258eb6918",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.vietas-formulas.md": "sha256:bcfdb6f99360682f58b249b2aafa030865dc45ddbed6bddce943f2a0606946f9"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.vietas-formulas",
+    "name": "Vieta's Formulas",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.polynomial-roots"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.vietas-formulas-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.vietas-formulas (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.vietas-formulas.md": "sha256:bcfdb6f99360682f58b249b2aafa030865dc45ddbed6bddce943f2a0606946f9"
+      },
+      "contentHash": "sha256:40277050d87cfcb1129b563e0b784db351ebda711b9ddaf83db51e2e8ef07004",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.vietas-formulas.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.vietas-formulas.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.vietas-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.vietas-formulas\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.vietas-formulas.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.vietas-formulas.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.vietas-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.vietas-formulas\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.vietas-formulas.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.vietas-formulas.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.vietas-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.vietas-formulas\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.vietas-formulas.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.vietas-formulas.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.vietas-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.vietas-formulas\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.vietas-formulas/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Learning Objectives",
+      "content": "- LO1: For a quadratic $ax^2+bx+c$, state the sum of roots as $-b/a$ and the product of roots as $c/a$, and use these to answer questions about the roots WITHOUT solving the quadratic directly.\n- LO2: Extend Vieta's formulas to a CUBIC $ax^3+bx^2+cx+d$, correctly stating the sum of roots, sum of pairwise products, and product of all three roots.\n- LO3: Use Vieta's formulas in REVERSE — given desired root properties (e.g. a specific sum and product), construct a polynomial having those roots.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "LEADING-COEFFICIENT-DIVISION-OMITTED-IN-VIETAS-FORMULAS",
+      "content": "| MC-1 | LEADING-COEFFICIENT-DIVISION-OMITTED-IN-VIETAS-FORMULAS | Computing sum/product of roots as $-b$ and $c$ directly, forgetting to divide by the leading coefficient $a$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "CUBIC-VIETAS-SIGN-PATTERN-MISAPPLIED",
+      "content": "| MC-2 | CUBIC-VIETAS-SIGN-PATTERN-MISAPPLIED | Applying the alternating sign pattern of cubic Vieta's formulas incorrectly, not tracking the actual signs of the coefficients involved | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "VIETAS-FORMULAS-REVERSE-DIRECTION-NOT-RECOGNIZED",
+      "content": "| MC-3 | VIETAS-FORMULAS-REVERSE-DIRECTION-NOT-RECOGNIZED | Not recognizing that Vieta's formulas can be used in reverse (from desired root properties to constructing a matching polynomial), attempting a full root-solving approach unnecessarily | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Quadratic Formulas: Always Divide by a (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Quadratic Formulas: Always Divide by a (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Cubic Case: Track the Alternating Sign Pattern Carefully (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Cubic Case: Track the Alternating Sign Pattern Carefully (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Working in Reverse: From Root Properties to a Polynomial (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Working in Reverse: From Root Properties to a Polynomial (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For $3x^2+5x-2=0$, find the sum and product of roots using Vieta's formulas.\n  2. For $x^3+2x^2-5x-6=0$, find the sum of roots, sum of pairwise products, and product of roots.\n  3. Construct a quadratic whose roots sum to $-4$ and multiply to $3$.\n  4. Given that a quadratic's roots have sum $10$ and product $21$, determine the roots WITHOUT using the quadratic formula (hint: find two numbers with this sum and product directly).\n- **P76 (Transfer Probe, mode = independence)**: \"An economist models a supply-demand equilibrium with a quadratic $2x^2-9x+k=0$ where $x$ represents price and $k$ is an unknown market parameter. Market research indicates the two equilibrium prices should sum to exactly 4.5. (a) Use Vieta's formulas to verify whether the given quadratic's structure (specifically, its $a$ and $b$ coefficients) is ALREADY consistent with this sum requirement, without needing to know $k$. (b) If the economist ALSO learns the product of the two equilibrium prices should be 5, use this information to solve for the unknown parameter $k$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.polynomial-roots` (what roots are) — Vieta's formulas connect a polynomial's COEFFICIENTS directly to symmetric functions of its roots, without needing to find the roots individually.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.vietas-formulas/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.vietas-formulas",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.polynomial-roots`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.vietas-formulas.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

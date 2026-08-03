@@ -1,0 +1,261 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.scientific-notation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.scientific-notation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:76ecb90909e52e291fa23710e47735a6c958f3abca04cd0ef18876ee49a76fdb",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.scientific-notation.md": "sha256:fd24e7c9660da9c7e6d182c5bf8d8a27baae88c2ea575614e77b4e0e4a875b92"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.scientific-notation",
+    "name": "Scientific Notation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.exponentiation",
+      "math.arith.decimals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.scientific-notation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.scientific-notation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.scientific-notation.md": "sha256:fd24e7c9660da9c7e6d182c5bf8d8a27baae88c2ea575614e77b4e0e4a875b92"
+      },
+      "contentHash": "sha256:5dbe49a39c3f1dffbe7b64092926a687afa232cf2ed8933076e1ed559a6d8202",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.scientific-notation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.scientific-notation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.scientific-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.scientific-notation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.scientific-notation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.scientific-notation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.scientific-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.scientific-notation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.scientific-notation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.scientific-notation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.scientific-notation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.scientific-notation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.scientific-notation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Convert a standard-form number (large or small) into scientific notation $a\\times10^n$ with $1\\le|a|<10$.\n- LO2: Convert a number from scientific notation back into standard form.\n- LO3: Correctly determine the SIGN of the exponent $n$ — positive for numbers $\\ge10$, negative for numbers strictly between 0 and 1.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "EXPONENT-SIGN-REVERSED-FOR-SMALL-NUMBERS",
+      "content": "| MC-1 | EXPONENT-SIGN-REVERSED-FOR-SMALL-NUMBERS | Assigning a positive exponent to a small number's scientific notation (or vice versa), regardless of the direction the decimal point actually moved | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "COEFFICIENT-RANGE-VIOLATED",
+      "content": "| MC-2 | COEFFICIENT-RANGE-VIOLATED | Writing the coefficient $a$ outside the required range $1\\le|a|<10$ (e.g. leaving it as $45\\times10^3$ instead of $4.5\\times10^4$) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "Move the Decimal Point Until One Digit Remains Before It (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Move the Decimal Point Until One Digit Remains Before It (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "Direction of the Shift Determines the Exponent's Sign (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Direction of the Shift Determines the Exponent's Sign (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Convert $780{,}000$ to scientific notation.\n  2. Convert $0.0000091$ to scientific notation, being careful with the exponent's sign.\n  3. Convert $2.3\\times10^6$ to standard form.\n  4. Convert $7.1\\times10^{-5}$ to standard form.\n- **P76 (Transfer Probe, mode = independence)**: \"A biology textbook states the diameter of a typical bacterium as approximately $0.000002$ meters, and the population of a large city as approximately $8{,}400{,}000$ people. (a) Convert both quantities to scientific notation. (b) Explain, using this lesson's sign rule, why the bacterium's exponent is negative while the city's population exponent is positive, even though both required moving the decimal point roughly the same number of places (6 places for the bacterium's diameter, versus about 6-7 for the population).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.exponentiation` (what $10^n$ means) and `math.arith.decimals` (the decimal representation being restructured into this compact form).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.arith.scientific-notation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.scientific-notation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.exponentiation`, `math.arith.decimals`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.scientific-notation.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

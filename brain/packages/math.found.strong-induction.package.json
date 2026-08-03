@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.strong-induction-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.strong-induction",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:069b84c556899888cc1f19a7d6441508bd970b498b96ac64eec9c8dc5ccb9d31",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.strong-induction.md": "sha256:21ddccf531d26524efc83b1806710bb9ac83d5a5857a944d3f9e76ae5d0c9eed"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.strong-induction",
+    "name": "Strong Induction",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.proof-by-induction"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.strong-induction-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.strong-induction (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.strong-induction.md": "sha256:21ddccf531d26524efc83b1806710bb9ac83d5a5857a944d3f9e76ae5d0c9eed"
+      },
+      "contentHash": "sha256:31e2413d97def7f2d562fa41b86d01a0ddb91ba9e2d14c3dce574d05717f9e89",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.strong-induction.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.strong-induction.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.strong-induction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.strong-induction\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.strong-induction.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.strong-induction.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.strong-induction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.strong-induction\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.strong-induction.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.strong-induction.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.strong-induction"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.strong-induction\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.strong-induction/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.strong-induction",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the strong-induction principle: to prove $P(n)$ for all $n\\ge n_0$, prove the base case $P(n_0)$, then prove that $P(n_0),\\ldots,P(n)$ ALL true together imply $P(n+1)$.\n- LO2: Identify when ordinary (weak) induction's single prior case $P(n)$ is insufficient and the full range $P(n_0),\\ldots,P(n)$ is genuinely needed to derive $P(n+1)$.\n- LO3: Write a strong-induction proof for a recursively-structured claim (e.g. every integer $>1$ has a prime factorization) that fails under ordinary induction's single-prior-case assumption.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.strong-induction",
+      "title": "SINGLE-PRIOR-CASE-ASSUMED-SUFFICIENT",
+      "content": "| MC-1 | SINGLE-PRIOR-CASE-ASSUMED-SUFFICIENT | Believing the single immediately-prior case $P(n)$ always suffices for the inductive step, missing that some recursive structures reach back to arbitrary earlier values | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.strong-induction",
+      "title": "BASE-CASE-COUNT-NOT-MATCHED-TO-STEP-REACH",
+      "content": "| MC-2 | BASE-CASE-COUNT-NOT-MATCHED-TO-STEP-REACH | Verifying only one base case regardless of how far back the inductive step actually reaches, leaving some small values un-seeded | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.strong-induction",
+      "title": "STRONG-AND-WEAK-INDUCTION-ASSUMED-DIFFERENT-IN-POWER",
+      "content": "| MC-3 | STRONG-AND-WEAK-INDUCTION-ASSUMED-DIFFERENT-IN-POWER | Believing strong induction can prove genuinely MORE statements than weak induction, rather than recognizing they are logically equivalent in what they can establish | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.strong-induction",
+      "title": "The Strong Hypothesis Reaches Back Further Than One Step (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Strong Hypothesis Reaches Back Further Than One Step (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.strong-induction",
+      "title": "Multiple Base Cases When the Step Reaches Back Several Places (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multiple Base Cases When the Step Reaches Back Several Places (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.strong-induction",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.strong-induction",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. State the strong-induction principle precisely, contrasting its inductive hypothesis with ordinary induction's.\n  2. Prove by strong induction: every integer $n\\ge2$ can be written as a sum of distinct powers of 2 (binary representation), explaining why the step for $n+1$ may need a value far below $n$.\n  3. Determine, for the recurrence $a_n=a_{n-2}+a_{n-3}$ with given base values $a_0,a_1,a_2$, how many base cases must be directly verified before a strong-induction step can begin, and why.\n  4. Explain in one sentence why strong and weak induction are logically equivalent in proving power, even though strong induction is the more natural CHOICE for certain recursive structures.\n- **P76 (Transfer Probe, mode = independence)**: \"A vending machine only accepts 4¢ and 7¢ tokens. (a) Determine, by direct search, the smallest value $N$ such that every integer amount $\\ge N$ can be made using some combination of 4¢ and 7¢ tokens (you do not need the general Chicken McNugget formula — just verify small cases directly). (b) Using strong induction starting from $N$, explain — following Example 3's postage-stamp structure — exactly how many base cases above $N$ must be checked before the general inductive step (adding one 4¢ token to a smaller achievable amount) can take over, and why.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.strong-induction",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.proof-by-induction` (the base case + inductive step skeleton; strong induction differs only in what the inductive step is allowed to assume).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 27,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.strong-induction/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.strong-induction",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.proof-by-induction`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.well-ordering-principle` (an alternative formulation of the same underlying guarantee about $\\mathbb{N}$, not yet authored in this domain pass).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.strong-induction.md",
+        "startLine": 85,
+        "endLine": 91
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.related-rates-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.related-rates",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:88db4e9d906faa20a0cbff3b014f1b508f6a827732c1fcf551362619f12dc896",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.related-rates.md": "sha256:afdf5cc220e6bbe6f5abb0ea8324a1e4c4b680ad2e635a83e46ad741878dbfbf"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.related-rates",
+    "name": "Related Rates",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.calc.implicit-differentiation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.related-rates-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.related-rates (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.related-rates.md": "sha256:afdf5cc220e6bbe6f5abb0ea8324a1e4c4b680ad2e635a83e46ad741878dbfbf"
+      },
+      "contentHash": "sha256:810803856ee1adcfb470c89c6debc604488f9c10ed1b16fd4c497d8c2bd81299",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.related-rates.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.related-rates.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.related-rates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.related-rates\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.related-rates.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.related-rates.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.related-rates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.related-rates\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.related-rates.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.related-rates.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.related-rates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.related-rates\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.related-rates.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.related-rates.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.related-rates"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.related-rates\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.related-rates/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.related-rates",
+      "title": "Learning Objectives",
+      "content": "- LO1: Set up a related-rates problem by identifying an EQUATION relating the quantities involved (from geometry or a given relationship), then differentiate BOTH sides with respect to TIME $t$ using implicit differentiation — every variable quantity gets a $\\frac{d(\\cdot)}{dt}$ term via the chain rule.\n- LO2: Correctly distinguish GIVEN rates (known numerical values, often at a specific instant) from the UNKNOWN rate being solved for, and substitute numerical values ONLY AFTER differentiating — never before.\n- LO3: Recognize that a well-posed related-rates problem specifies the instant at which rates are evaluated, and that quantities may be genuinely CONSTANT (rate 0) at that instant even if they vary at other times.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.related-rates",
+      "title": "NUMERICAL-VALUES-SUBSTITUTED-BEFORE-DIFFERENTIATING",
+      "content": "| MC-1 | NUMERICAL-VALUES-SUBSTITUTED-BEFORE-DIFFERENTIATING | Substituting a specific numerical value for a variable before differentiating, incorrectly treating it as a constant and destroying the relationship | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.related-rates",
+      "title": "DEGENERATE-RATE-RESULT-ASSUMED-TO-BE-A-SETUP-ERROR",
+      "content": "| MC-2 | DEGENERATE-RATE-RESULT-ASSUMED-TO-BE-A-SETUP-ERROR | Assuming any zero or undefined rate result must indicate a setup mistake, rather than recognizing it can be a genuine feature of that specific instant | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.related-rates",
+      "title": "Differentiate Symbolically First, Substitute Numbers After (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Differentiate Symbolically First, Substitute Numbers After (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.related-rates",
+      "title": "Substituting Given Values to Solve for the Unknown Rate (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Substituting Given Values to Solve for the Unknown Rate (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.related-rates",
+      "title": "Degenerate Rates (Zero or Undefined) Can Be Genuine, Not Errors (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Degenerate Rates (Zero or Undefined) Can Be Genuine, Not Errors (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.related-rates",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.related-rates",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For a cube with side length $s$, differentiate $V=s^3$ with respect to time to find $\\frac{dV}{dt}$ in terms of $s$ and $\\frac{ds}{dt}$.\n  2. A circle's area $A=\\pi r^2$ grows with $\\frac{dr}{dt}=3$ cm/s. Find $\\frac{dA}{dt}$ when $r=4$ cm.\n  3. Explain, in one sentence, why substituting a numerical value for a variable BEFORE differentiating in a related-rates problem is incorrect.\n  4. For the ladder problem (Example 3), explain what it physically means for $\\frac{dy}{dt}$ to become undefined at $y=0$.\n- **P76 (Transfer Probe, mode = independence)**: \"Water is draining from a conical tank (radius shrinking proportionally with height, related by the cone's geometry) at a known rate $\\frac{dV}{dt}=-5$ m³/min. (a) Set up the geometric relationship between the cone's volume $V$, radius $r$, and height $h$ (using the fact that $r$ and $h$ are proportional for a fixed cone shape), then differentiate with respect to time to relate $\\frac{dV}{dt}$, $\\frac{dh}{dt}$, and $h$. (b) Explain why you must NOT substitute the tank's current numerical water height into the volume equation before completing the differentiation step.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.related-rates",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.implicit-differentiation` — related rates is exactly implicit differentiation performed with respect to time.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.related-rates/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.related-rates",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.implicit-differentiation`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.related-rates.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

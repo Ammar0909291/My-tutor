@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.continuity-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.continuity-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:05eb62d796a8063eec951c9e049ab38521eea56b0065fd44da85609608223785",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.continuity-types.md": "sha256:f070ef7682d136b743f2c6cd9845f4cfdfecb121879d340d09c4e21f6bb5b8b4"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.continuity-types",
+    "name": "Types of Discontinuity",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.continuity",
+      "math.calc.one-sided-limits"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.continuity-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.continuity-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.continuity-types.md": "sha256:f070ef7682d136b743f2c6cd9845f4cfdfecb121879d340d09c4e21f6bb5b8b4"
+      },
+      "contentHash": "sha256:ebe1b230c3347d478ba0a6572d6bf353c68f59675ce8a22d80025f2a2877257b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.continuity-types.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.continuity-types.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.continuity-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.continuity-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.continuity-types.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.continuity-types.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.continuity-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.continuity-types\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.continuity-types.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.continuity-types.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.continuity-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.continuity-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.continuity-types.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.continuity-types.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.continuity-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.continuity-types\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.continuity-types/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Learning Objectives",
+      "content": "- LO1: Classify a REMOVABLE discontinuity (a \"hole\") — where $\\lim_{x\\to a}f(x)$ EXISTS (both one-sided limits agree) but either $f(a)$ is undefined or $f(a)\\ne\\lim_{x\\to a}f(x)$.\n- LO2: Classify a JUMP discontinuity — where the LEFT and RIGHT one-sided limits BOTH exist but are DIFFERENT from each other, so no overall two-sided limit exists.\n- LO3: Classify an INFINITE discontinuity — where at least one one-sided limit is $\\pm\\infty$ (a vertical asymptote), and distinguish this from a jump discontinuity where both one-sided limits are FINITE but merely unequal.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.continuity-types",
+      "title": "ZERO-DENOMINATOR-ASSUMED-TO-ALWAYS-MEAN-INFINITE-DISCONTINUITY",
+      "content": "| MC-1 | ZERO-DENOMINATOR-ASSUMED-TO-ALWAYS-MEAN-INFINITE-DISCONTINUITY | Assuming any zero-denominator point is automatically an infinite discontinuity, without checking whether the numerator cancels to produce a removable case instead | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.continuity-types",
+      "title": "REMOVABILITY-JUDGED-BY-WHETHER-F-OF-A-IS-DEFINED-RATHER-THAN-WHETHER-ONE-SIDED-LIMITS-AGREE",
+      "content": "| MC-2 | REMOVABILITY-JUDGED-BY-WHETHER-F-OF-A-IS-DEFINED-RATHER-THAN-WHETHER-ONE-SIDED-LIMITS-AGREE | Classifying a discontinuity as removable based on whether f(a) is defined, rather than checking whether the one-sided limits themselves agree | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Removable Discontinuity Requires the Two-Sided Limit to Exist Despite the Zero Denominator (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Removable Discontinuity Requires the Two-Sided Limit to Exist Despite the Zero Denominator (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Jump vs. Removable: Do Both One-Sided Limits Actually Agree? (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Jump vs. Removable: Do Both One-Sided Limits Actually Agree? (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Infinite Discontinuity: At Least One Side Is Unbounded, Not Just Unequal (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Infinite Discontinuity: At Least One Side Is Unbounded, Not Just Unequal (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Classify the discontinuity of $f(x)=\\frac{x^2-9}{x-3}$ at $x=3$.\n  2. Classify the discontinuity of a piecewise function with left limit 2 and right limit 5 at some point $a$.\n  3. Classify the discontinuity of $f(x)=1/x^2$ at $x=0$.\n  4. Explain, in one sentence, the key difference between a jump discontinuity and an infinite discontinuity.\n- **P76 (Transfer Probe, mode = independence)**: \"A shipping company's cost function $C(x)$ (cost as a function of package weight $x$) has a genuine JUMP at $x=5$kg (a flat-rate pricing tier boundary: costs \\$10 for anything under 5kg, then jumps to a \\$15 flat rate at exactly 5kg and above) — while a SEPARATE mathematical model $f(x)=\\frac{x^2-25}{x-5}$ used internally for a cost-estimation formula has a discontinuity at $x=5$ that turns out to be removable after simplification. (a) Explain why the shipping cost's jump at $x=5$kg genuinely cannot be 'patched' by redefining a single value, unlike the cost-estimation formula's discontinuity. (b) Classify $f(x)=\\frac{x^2-25}{x-5}$'s discontinuity at $x=5$, showing your work.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.continuity` (the definition of continuity being violated) and `math.calc.one-sided-limits` (needed to examine left/right behavior separately for classification).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.continuity-types/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.continuity-types",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.continuity`, `math.calc.one-sided-limits`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.calc.continuity`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.continuity-types.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

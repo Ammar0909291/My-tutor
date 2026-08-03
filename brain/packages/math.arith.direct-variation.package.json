@@ -1,0 +1,263 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.direct-variation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.direct-variation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:674686d8da8688026006235503a0e499c226a14599334476299edf6970f6fa70",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.direct-variation.md": "sha256:7d93b88327096263725e82b0f14022b0ffef9b4592644d79d907f3fa5b578fee"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.direct-variation",
+    "name": "Direct Variation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.proportion"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.direct-variation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.direct-variation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.direct-variation.md": "sha256:7d93b88327096263725e82b0f14022b0ffef9b4592644d79d907f3fa5b578fee"
+      },
+      "contentHash": "sha256:e4e12d24685cddda0c31a7e8ad41e4c9f744c9d14e6b85a866c8f0b7e4bd9b66",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.direct-variation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.direct-variation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.direct-variation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.direct-variation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.direct-variation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.direct-variation.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.direct-variation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.direct-variation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.direct-variation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.direct-variation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.direct-variation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.direct-variation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.direct-variation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.direct-variation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Determine whether a given table, equation, or graph represents direct variation, and if so, find the constant of variation $k$.\n- LO2: Use $y=kx$ to find an unknown value of $x$ or $y$ given the other and $k$.\n- LO3: Recognize that direct variation's defining feature is the graph passing through the ORIGIN $(0,0)$ — a linear relationship with a nonzero $y$-intercept is NOT direct variation, even if it looks similarly \"straight-line.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.direct-variation",
+      "title": "ANY-LINEAR-RELATIONSHIP-ASSUMED-DIRECT-VARIATION",
+      "content": "| MC-1 | ANY-LINEAR-RELATIONSHIP-ASSUMED-DIRECT-VARIATION | Believing any straight-line relationship $y=mx+b$ qualifies as direct variation, without checking that $b=0$ specifically | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.direct-variation",
+      "title": "INCREASING-TOGETHER-MISTAKEN-FOR-CONSTANT-RATIO",
+      "content": "| MC-2 | INCREASING-TOGETHER-MISTAKEN-FOR-CONSTANT-RATIO | Concluding direct variation merely because $y$ increases as $x$ increases, without verifying the ratio $y/x$ is identical across all data points | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.direct-variation",
+      "title": "Find k by Checking the Ratio Is Constant (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Find k by Checking the Ratio Is Constant (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.direct-variation",
+      "title": "The Origin Test, and Checking Every Pair Not Just Trend (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Origin Test, and Checking Every Pair Not Just Trend (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.direct-variation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.direct-variation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given the table $x=3,y=12$; $x=6,y=24$; $x=9,y=36$, determine whether this represents direct variation and find $k$ if so.\n  2. Given $y=5x$, find $y$ when $x=7$, and find $x$ when $y=45$.\n  3. Determine whether $y=4x-1$ represents direct variation, justifying using the origin test.\n  4. Given the table $x=2,y=6$; $x=4,y=11$; $x=6,y=17$, determine whether it represents direct variation, checking the ratio for EVERY pair.\n- **P76 (Transfer Probe, mode = independence)**: \"A recipe states that the amount of water needed varies directly with the amount of rice: 2 cups of rice needs 3 cups of water. (a) Find the constant of variation $k$ and write the equation relating water $(w)$ to rice $(r)$. (b) A student instead proposes the relationship $w=1.5r+0.5$ based on a slightly different data point they misremembered — explain, using the origin test from this lesson, why this proposed relationship could NOT be a genuine direct variation, regardless of whether it happens to fit one data point.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.direct-variation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.proportion` (equal ratios — direct variation is the functional/graphical form of exactly this idea, $\\frac{y}{x}=k$ constant).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.direct-variation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.direct-variation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.proportion`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.arith.inverse-variation` (the complementary $y=k/x$ relationship, contrasted directly in that concept's own blueprint).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.direct-variation.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

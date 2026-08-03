@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.boolean-circuits-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.boolean-circuits",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:31ec126c7b7d694aca5e303e72f7887a61f18025338d73d47c1ec62f8dc2428c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.boolean-circuits.md": "sha256:19af257050b71063acdcb3a6785895cfb96f51daabdbf08e1d51c4bc08e9b637"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.boolean-circuits",
+    "name": "Boolean Circuits",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.disc.propositional-logic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.boolean-circuits-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.boolean-circuits (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.boolean-circuits.md": "sha256:19af257050b71063acdcb3a6785895cfb96f51daabdbf08e1d51c4bc08e9b637"
+      },
+      "contentHash": "sha256:1da28faa6a9ceb8fc5728d522de1ac782be422bb6697717875333725012b12e5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.boolean-circuits.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.boolean-circuits.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.boolean-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.boolean-circuits\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.boolean-circuits.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.boolean-circuits.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.boolean-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.boolean-circuits\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.boolean-circuits.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.boolean-circuits.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.boolean-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.boolean-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.boolean-circuits.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.boolean-circuits.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.boolean-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.boolean-circuits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.boolean-circuits/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Learning Objectives",
+      "content": "- LO1: Evaluate a Boolean circuit's output for given input values by tracing signals through AND, OR, NOT, NAND, NOR, and XOR gates.\n- LO2: Construct a Boolean circuit (or its symbolic expression) implementing a given truth table or logical statement.\n- LO3: Simplify a Boolean expression/circuit using a Karnaugh map, correctly grouping adjacent 1's in POWERS-OF-TWO-sized blocks to find a minimal equivalent expression.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "XOR-CONFUSED-WITH-OR",
+      "content": "| MC-1 | XOR-CONFUSED-WITH-OR | Evaluating XOR as if it were OR (outputting 1 whenever at least one input is 1), rather than specifically when the inputs differ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "KARNAUGH-MAP-GROUP-NOT-MAXIMIZED",
+      "content": "| MC-2 | KARNAUGH-MAP-GROUP-NOT-MAXIMIZED | Grouping K-map 1's into smaller valid blocks instead of finding the largest available power-of-2 group, leaving the simplification incomplete | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "GATE-EVALUATION-ORDER-IGNORES-PARENTHESES",
+      "content": "| MC-3 | GATE-EVALUATION-ORDER-IGNORES-PARENTHESES | Evaluating a multi-gate expression in the wrong order, ignoring the grouping structure (parentheses) that determines which sub-expressions combine first | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Evaluate Gate by Gate, XOR Means \"Differ\" Not \"Either\" (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Evaluate Gate by Gate, XOR Means \\\"Differ\\\" Not \\\"Either\\\" (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Building a Circuit from a Truth Table (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Building a Circuit from a Truth Table (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Karnaugh Map: Always Use the Largest Valid Group (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Karnaugh Map: Always Use the Largest Valid Group (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Evaluate $(A\\text{ OR }B)\\text{ AND }(\\text{NOT }C)$ for $A=0,B=1,C=0$.\n  2. Evaluate $A\\text{ XOR }B\\text{ XOR }C$ for $A=1,B=1,C=0$.\n  3. Construct a Boolean expression implementing a function that outputs 1 exactly when at least 2 of 3 inputs $A,B,C$ are 1 (a majority function).\n  4. Given a K-map with a group of 8 adjacent 1's available (spanning all values of one variable and half the values of the others), state which variable(s) drop out of the simplified expression.\n- **P76 (Transfer Probe, mode = independence)**: \"A digital alarm system should trigger (output 1) if a door sensor ($D$) is open AND the system is armed ($S$), OR if a fire sensor ($F$) is triggered regardless of arming status. (a) Write the Boolean expression for this alarm logic using AND, OR, and any needed NOT gates. (b) Evaluate the circuit for the specific case $D=1, S=0, F=0$ (door open, but system NOT armed, no fire), and explain in plain language why the alarm does or does not trigger in this scenario, connecting your answer back to the circuit's logical structure.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.propositional-logic` (AND, OR, NOT and truth tables) — Boolean circuits are the electronic/gate-based physical implementation of exactly this logical structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.boolean-circuits/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.boolean-circuits",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.propositional-logic`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-link**: `math.found.set-operations` — verified present via directory listing; Teaching Action A02 draws the parallel between Boolean circuit construction (OR of AND-terms) and set theory's union-of-intersections structure, closing the P76_mode=cross-link probe opportunity this blueprint's own set-operations counterpart (`math.found.set-operations`'s Component 7) had left as independence-mode pending this concept's authoring.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.boolean-circuits.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

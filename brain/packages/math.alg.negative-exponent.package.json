@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.negative-exponent-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.negative-exponent",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bd8fee4a02d8df7012b6c37a05c2d89ffba4963f2d4b803e741f6412a4a6fd8f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.negative-exponent.md": "sha256:1bf7287426d8452a2c151c2c11ee241350aa59d75ad9e3c1cfad2eeda648f4bc"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.negative-exponent",
+    "name": "Negative Exponent",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.alg.exponent-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.negative-exponent-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.negative-exponent (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.negative-exponent.md": "sha256:1bf7287426d8452a2c151c2c11ee241350aa59d75ad9e3c1cfad2eeda648f4bc"
+      },
+      "contentHash": "sha256:aea3a06137d40cdea07cecb450b86505334edae6d4c19dce768688679a5017f3",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.negative-exponent.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.negative-exponent.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.negative-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.negative-exponent\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.negative-exponent.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.negative-exponent.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.negative-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.negative-exponent\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.negative-exponent.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.negative-exponent.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.negative-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.negative-exponent\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.negative-exponent.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.negative-exponent.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.negative-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.negative-exponent\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.negative-exponent/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Learning Objectives",
+      "content": "- LO1: Rewrite $a^{-n}$ as $\\frac{1}{a^n}$, and conversely rewrite $\\frac{1}{a^n}$ as $a^{-n}$.\n- LO2: Simplify expressions containing negative exponents in DENOMINATORS, correctly recognizing $\\frac{1}{a^{-n}}=a^n$ (a negative exponent in the denominator flips to a positive exponent in the numerator).\n- LO3: Correctly distinguish a NEGATIVE exponent (which produces a reciprocal, NOT a negative number) from a negative BASE or a negative overall VALUE — a negative exponent does not, by itself, make the result negative.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "NEGATIVE-EXPONENT-IN-DENOMINATOR-MISHANDLED",
+      "content": "| MC-1 | NEGATIVE-EXPONENT-IN-DENOMINATOR-MISHANDLED | Incorrectly canceling or misplacing a negative exponent found in a denominator, rather than correctly flipping it to a positive exponent in the numerator | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "NEGATIVE-EXPONENT-ASSUMED-TO-PRODUCE-NEGATIVE-VALUE",
+      "content": "| MC-2 | NEGATIVE-EXPONENT-ASSUMED-TO-PRODUCE-NEGATIVE-VALUE | Believing a negative exponent automatically makes the result negative, conflating exponent sign with output sign | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Negative Exponent Means Take the Reciprocal (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Negative Exponent Means Take the Reciprocal (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Flipping Between Numerator and Denominator (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Flipping Between Numerator and Denominator (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Negative Exponent ≠ Negative Value (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Negative Exponent ≠ Negative Value (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Rewrite $4^{-3}$ as a fraction and evaluate it.\n  2. Simplify $\\frac{7}{y^{-2}}$.\n  3. Determine whether $5^{-2}$ is positive or negative, and state its value.\n  4. Simplify $\\frac{x^{-4}}{y^{-2}}$, correctly flipping both negative exponents.\n- **P76 (Transfer Probe, mode = independence)**: \"A physics formula for light intensity includes the term $d^{-2}$ (inverse-square law), where $d$ is distance. (a) Rewrite $d^{-2}$ using positive-exponent notation, and explain what this reveals about how intensity changes as distance increases (does the expression grow or shrink as $d$ grows?). (b) A student argues that since the exponent is negative, the intensity term itself must be negative — explain, using this lesson's negative-exponent-vs-negative-value distinction, why this reasoning is incorrect, and what the exponent's sign actually tells us here.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.exponent-rules` (the general laws this concept's negative-exponent rule extends).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.negative-exponent/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.negative-exponent",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.exponent-rules`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.zero-exponent` (a sibling special-case exponent rule).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.negative-exponent.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

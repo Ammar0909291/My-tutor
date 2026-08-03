@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.credible-interval-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.credible-interval",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0f48b29208e650c9b0d20beeb5e3a15144c05cfc51e7e3dc54e8e5c1ac14f321",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.credible-interval.md": "sha256:e5cb52f02257c2e85e8e8b2637bafcc7283c343d257e91f0491f732679d7880a"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.credible-interval",
+    "name": "Credible Interval",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.bayesian-inference"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.credible-interval-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.credible-interval (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.credible-interval.md": "sha256:e5cb52f02257c2e85e8e8b2637bafcc7283c343d257e91f0491f732679d7880a"
+      },
+      "contentHash": "sha256:caccb3dfcb9e3aef793105c187f0b85c41611f75e943c6ce6d3769ebc5c0350d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.credible-interval.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.credible-interval.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.credible-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.credible-interval\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.credible-interval.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.credible-interval.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.credible-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.credible-interval\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.credible-interval.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.credible-interval.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.credible-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.credible-interval\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.credible-interval.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.credible-interval.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.credible-interval"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.credible-interval\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.credible-interval/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.credible-interval",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a 95% CREDIBLE interval $[a,b]$ as satisfying $P(\\theta\\in[a,b]\\mid\\text{data})=0.95$ — a DIRECT probability statement about where the parameter $\\theta$ itself likely lies, GIVEN the observed data and the posterior distribution (from `math.stats.bayesian-inference`).\n- LO2: Contrast this DIRECT interpretation against `math.stats.confidence-interval`'s INDIRECT (frequentist) interpretation — a credible interval genuinely says \"there's a 95% probability $\\theta$ is in this range,\" while a confidence interval's 95% refers to the PROCEDURE's long-run capture rate, NEVER a direct probability statement about the specific computed interval containing the fixed $\\theta$.\n- LO3: Recognize the HIGHEST POSTERIOR DENSITY (HPD) interval as the NARROWEST possible credible interval at a given confidence level — for a given posterior distribution, MULTIPLE different intervals could each achieve \"95% probability containing $\\theta$,\" but the HPD interval is specifically the SHORTEST one among all these valid options (achieved by including only the highest-density regions of the posterior).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.credible-interval",
+      "title": "CREDIBLE-INTERVAL-INTERPRETED-USING-FREQUENTIST-PROCEDURAL-LANGUAGE-INSTEAD-OF-DIRECT-PROBABILITY",
+      "content": "| MC-1 | CREDIBLE-INTERVAL-INTERPRETED-USING-FREQUENTIST-PROCEDURAL-LANGUAGE-INSTEAD-OF-DIRECT-PROBABILITY | Interpreting a credible interval using frequentist \"repeated sampling\" procedural language, rather than its correct direct-probability-about-θ meaning | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.credible-interval",
+      "title": "CREDIBLE-AND-CONFIDENCE-INTERVALS-TREATED-AS-INTERCHANGEABLE-MEANING-THE-SAME-THING",
+      "content": "| MC-2 | CREDIBLE-AND-CONFIDENCE-INTERVALS-TREATED-AS-INTERCHANGEABLE-MEANING-THE-SAME-THING | Treating credible intervals and confidence intervals as interchangeable, meaning the same underlying probability claim despite arising from different statistical philosophies | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.credible-interval",
+      "title": "Credible Interval Is a Direct Probability Statement About θ (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Credible Interval Is a Direct Probability Statement About θ (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.credible-interval",
+      "title": "Credible vs. Confidence Interval: Genuinely Different Probability Claims (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Credible vs. Confidence Interval: Genuinely Different Probability Claims (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.credible-interval",
+      "title": "HPD Coincides with Equal-Tailed Only for Symmetric Posteriors (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"HPD Coincides with Equal-Tailed Only for Symmetric Posteriors (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.credible-interval",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.credible-interval",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. State the precise direct-probability interpretation of a 90% credible interval $[0.4,0.6]$ for a proportion.\n  2. Explain, in one sentence, the key interpretive difference between a credible interval and a confidence interval.\n  3. Explain why the HPD interval and the equal-tailed credible interval coincide for a symmetric posterior but generally differ for a skewed one.\n  4. Explain why the HPD interval is described as the \"narrowest\" credible interval at a given confidence level.\n- **P76 (Transfer Probe, mode = independence)**: \"A biologist estimates a species' true population growth rate using Bayesian methods, obtaining a genuinely SKEWED posterior distribution (since growth rates can't be negative but can be arbitrarily large, producing a long right tail), and needs to report a 95% interval for this rate. (a) Explain why choosing the HPD interval, rather than the simpler equal-tailed interval, would produce a genuinely narrower and more informative range given this skewed posterior. (b) Explain what the resulting 95% HPD interval would directly tell other researchers about the true growth rate, in a way a frequentist confidence interval technically would not.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.credible-interval",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.bayesian-inference` — the credible interval is constructed directly from the posterior distribution this framework produces.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.credible-interval/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.credible-interval",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.bayesian-inference`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.stats.confidence-interval` (the contrasting frequentist counterpart).\n- **Parent**: `math.stats.bayesian-inference`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.credible-interval.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

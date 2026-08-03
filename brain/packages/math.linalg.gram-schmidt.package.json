@@ -1,0 +1,312 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.gram-schmidt-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.gram-schmidt",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:3129e3502104b150ecac23c15e1896922afead3f783472cce601ae313a4cbd3f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.gram-schmidt.md": "sha256:914f6c3cc0265e3475540e293ebdf5e1962458c537474371d259628dd8512838"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.gram-schmidt",
+    "name": "Gram-Schmidt Process",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.orthogonal-basis",
+      "math.linalg.projection"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.gram-schmidt-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.gram-schmidt (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.gram-schmidt.md": "sha256:914f6c3cc0265e3475540e293ebdf5e1962458c537474371d259628dd8512838"
+      },
+      "contentHash": "sha256:4b7d187f3f6e16df5620d931ef643534695ed5e5e1ab485d6f9efd69858278f4",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.gram-schmidt.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.gram-schmidt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.gram-schmidt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.gram-schmidt.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.gram-schmidt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.gram-schmidt\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.gram-schmidt.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.gram-schmidt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.gram-schmidt\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.gram-schmidt.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.gram-schmidt"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.gram-schmidt\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.gram-schmidt/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the Gram-Schmidt process to convert a linearly independent set $\\{v_1,\\ldots,v_k\\}$ into an ORTHOGONAL set, by iteratively subtracting each new vector's PROJECTIONS onto all PREVIOUSLY constructed orthogonal vectors.\n- LO2: NORMALIZE the resulting orthogonal set into an ORTHONORMAL basis (each vector's norm scaled to exactly 1).\n- LO3: Correctly subtract projections onto ALL previously constructed vectors (not just the immediately preceding one) when processing each new vector — a common structural oversight for the third vector onward.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "GRAM-SCHMIDT-PROJECTION-SUBTRACTED-ONLY-FROM-IMMEDIATE-PREDECESSOR",
+      "content": "| MC-1 | GRAM-SCHMIDT-PROJECTION-SUBTRACTED-ONLY-FROM-IMMEDIATE-PREDECESSOR | Subtracting the projection onto only the most recently constructed orthogonal vector, rather than onto ALL previously constructed vectors | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "ORTHOGONALIZATION-AND-NORMALIZATION-STEPS-CONFLATED",
+      "content": "| MC-2 | ORTHOGONALIZATION-AND-NORMALIZATION-STEPS-CONFLATED | Normalizing vectors partway through the orthogonalization process rather than completing all orthogonalization first, potentially corrupting later projection computations | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "ORTHOGONALITY-RESULT-NOT-VERIFIED",
+      "content": "| MC-3 | ORTHOGONALITY-RESULT-NOT-VERIFIED | Not checking the constructed vectors' pairwise dot products equal zero, missing a computational error in the projection subtraction steps | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Subtract the Projection onto the First Constructed Vector (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Subtract the Projection onto the First Constructed Vector (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Every New Vector Subtracts Projections onto ALL Previous Vectors (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Every New Vector Subtracts Projections onto ALL Previous Vectors (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Normalize Last, After All Orthogonalization Is Complete (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Normalize Last, After All Orthogonalization Is Complete (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Orthogonalize $v_1=(1,0,0)$, $v_2=(1,1,0)$, finding $u_1,u_2$.\n  2. Continue with $v_3=(1,1,1)$, finding $u_3$ (subtracting projections onto BOTH $u_1$ and $u_2$).\n  3. Normalize the orthogonal set $\\{(1,0,0),(0,2,0),(0,0,3)\\}$ into an orthonormal set.\n  4. Explain, in one sentence, why the third vector in a Gram-Schmidt process requires subtracting TWO projections, not just one.\n- **P76 (Transfer Probe, mode = independence)**: \"A signal-processing engineer needs to find an orthonormal basis for a 3-dimensional signal subspace spanned by three measured signal vectors $v_1,v_2,v_3$ (linearly independent but not orthogonal), so that signal components can be analyzed independently along each basis direction. (a) Outline the Gram-Schmidt steps needed to construct $u_1,u_2,u_3$ from $v_1,v_2,v_3$, being explicit about which projections must be subtracted at each step. (b) Explain, in engineering terms, why an ORTHOGONAL (or orthonormal) basis specifically is valuable here — connecting to the idea that components along orthogonal directions can be analyzed independently, without one direction's signal 'leaking' into another's measurement.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.orthogonal-basis` (what an orthogonal/orthonormal basis is) and `math.linalg.projection` (the vector-projection operation this process repeatedly applies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.gram-schmidt/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.gram-schmidt",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.orthogonal-basis`, `math.linalg.projection`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.qr-factorization` (the direct application this process underlies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.gram-schmidt.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

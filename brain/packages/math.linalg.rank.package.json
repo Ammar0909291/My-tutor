@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.rank-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.rank",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e041400b57f5569629e97a9a3a85b981f9d276da222278a38588a006ab7915f0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.rank.md": "sha256:725fd45c79660848e02ef5a87b85e29ad187ac0aa16f26d72c9ef4d0c7fbbd85"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.rank",
+    "name": "Rank of a Matrix",
+    "difficultyRaw": "proficient",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.row-echelon"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.rank-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.rank (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.rank.md": "sha256:725fd45c79660848e02ef5a87b85e29ad187ac0aa16f26d72c9ef4d0c7fbbd85"
+      },
+      "contentHash": "sha256:c708540f17ffe42c3336c735aa29f8e2ccfe7ad9bcf411fa683bb67911bb5518",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.rank.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.rank.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.rank"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.rank\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.rank.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.rank.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.rank"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.rank\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.rank.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.rank.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.rank"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.rank\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.rank.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.rank.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.rank"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.rank\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.rank/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.rank",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute a matrix's rank by row-reducing to row echelon form (REF) and counting the number of PIVOTS.\n- LO2: State that ROW RANK equals COLUMN RANK always — the dimension of the row space and the dimension of the column space are the same number, a non-obvious but universal fact.\n- LO3: Use rank to determine the EXISTENCE and UNIQUENESS of solutions to $Ax=b$: comparing the rank of $A$ against the rank of the augmented matrix $[A|b]$, and against the number of unknowns.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.rank",
+      "title": "EXISTENCE-CHECKED-VIA-RANK-A-ALONE",
+      "content": "| MC-1 | EXISTENCE-CHECKED-VIA-RANK-A-ALONE | Checking only $\\text{rank}(A)$'s value to determine solution existence, without comparing it against $\\text{rank}([A|b])$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.rank",
+      "title": "CONSISTENCY-ASSUMED-TO-IMPLY-UNIQUENESS",
+      "content": "| MC-2 | CONSISTENCY-ASSUMED-TO-IMPLY-UNIQUENESS | Believing a consistent (solvable) system automatically has a unique solution, without separately checking rank against the number of unknowns | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.rank",
+      "title": "PIVOT-COUNT-MISCOMPUTED-DURING-ROW-REDUCTION",
+      "content": "| MC-3 | PIVOT-COUNT-MISCOMPUTED-DURING-ROW-REDUCTION | Miscounting pivots during row reduction, e.g. counting a row of all zeros as contributing a pivot | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.rank",
+      "title": "Row Reduce, Count Pivots (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Row Reduce, Count Pivots (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.rank",
+      "title": "Existence Requires Comparing rank(A) to rank([A|b]) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Existence Requires Comparing rank(A) to rank([A|b]) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.rank",
+      "title": "Uniqueness Is a Separate Question from Existence (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Uniqueness Is a Separate Question from Existence (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.rank",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.rank",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the rank of $\\begin{pmatrix}1&0&2\\\\2&1&5\\\\0&1&1\\end{pmatrix}$ via row reduction.\n  2. Given $\\text{rank}(A)=3$ and $\\text{rank}([A|b])=3$ for a system with 3 unknowns, determine whether the system has a unique solution, no solution, or infinitely many, and justify.\n  3. Given $\\text{rank}(A)=2$ and $\\text{rank}([A|b])=3$, determine the solvability of the system.\n  4. Given $\\text{rank}(A)=2$ and $\\text{rank}([A|b])=2$ for a system with 4 unknowns, determine whether the solution (if it exists) is unique, and justify.\n- **P76 (Transfer Probe, mode = independence)**: \"A structural engineer sets up a system of equations $Ax=b$ modeling forces in a truss with 4 unknown tension values and 4 equilibrium equations. Row-reducing the coefficient matrix $A$ gives rank 3 (not full rank 4), and the augmented matrix $[A|b]$ also has rank 3. (a) Determine whether this system has a solution, and if so, whether it is unique — explain your reasoning using both rank comparisons from this lesson. (b) Explain, in engineering terms, what 'infinitely many solutions' might mean physically for a truss system (hint: consider whether some tension values might be under-determined by the given equilibrium equations alone).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.rank",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.row-echelon` (row reduction, producing the pivot structure this concept counts).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.rank/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.rank",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.row-echelon`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.rank-nullity` (the theorem directly extending this concept's dimension-counting logic).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.rank.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

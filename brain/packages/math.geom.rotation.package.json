@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.rotation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.rotation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:514fff58d368828e562f85d17cc8da57b5e122daa72b7762d8ad67d1dce7c1a6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.rotation.md": "sha256:0c22ba9dbaf1b375c6881bcffd0788050f382e333c8d9535492ab629619f8867"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.rotation",
+    "name": "Rotation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.geom.transformations",
+      "math.trig.trig-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.rotation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.rotation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.rotation.md": "sha256:0c22ba9dbaf1b375c6881bcffd0788050f382e333c8d9535492ab629619f8867"
+      },
+      "contentHash": "sha256:8b2ec3a14cbb7d8de1947a34fcd10e65a7c24c8b10d124c8b7ba60d154a2289b",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.rotation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.rotation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.rotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.rotation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.rotation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.rotation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.rotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.rotation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.rotation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.rotation.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.rotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.rotation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.rotation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.rotation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.rotation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.rotation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.rotation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.rotation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply a rotation by angle $\\theta$ about a FIXED CENTER — turning every point of the figure by the SAME angle $\\theta$ (in the SAME direction, conventionally COUNTERCLOCKWISE for positive $\\theta$), preserving each point's distance FROM the center.\n- LO2: Apply the 2×2 rotation matrix $\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{pmatrix}$ to rotate a point $(x,y)$ about the ORIGIN, connecting to `math.trig.trig-functions`.\n- LO3: Recognize that rotation about a NON-ORIGIN center requires a THREE-STEP process — TRANSLATE the center to the origin, ROTATE using the standard matrix, then TRANSLATE BACK — a common shortcut error applies the origin-centered matrix directly to a point when rotating about a different center.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.rotation",
+      "title": "ROTATION-MATRIX-SIGN-CONVENTION-REVERSED-PRODUCING-WRONG-DIRECTION",
+      "content": "| MC-1 | ROTATION-MATRIX-SIGN-CONVENTION-REVERSED-PRODUCING-WRONG-DIRECTION | Reversing the rotation matrix's sign convention, producing a clockwise rotation instead of the standard counterclockwise direction for a positive angle | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.rotation",
+      "title": "ROTATION-MATRIX-APPLIED-DIRECTLY-TO-A-NON-ORIGIN-CENTERED-ROTATION",
+      "content": "| MC-2 | ROTATION-MATRIX-APPLIED-DIRECTLY-TO-A-NON-ORIGIN-CENTERED-ROTATION | Applying the standard origin-centered rotation matrix directly to a point when the true center of rotation is elsewhere, skipping the required translate-rotate-translate-back process | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.rotation",
+      "title": "Applying the Rotation Matrix with the Correct Sign Convention (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Applying the Rotation Matrix with the Correct Sign Convention (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.rotation",
+      "title": "Distance from the Center Is Preserved (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Distance from the Center Is Preserved (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.rotation",
+      "title": "Rotating About a Non-Origin Center Requires Translate-Rotate-Translate-Back (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Rotating About a Non-Origin Center Requires Translate-Rotate-Translate-Back (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.rotation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.rotation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Rotate the point $(0,4)$ by $90°$ about the origin using the rotation matrix.\n  2. Verify that the point's distance from the origin is preserved after the rotation in problem 1.\n  3. Rotate the point $(6,3)$ by $90°$ about the center $(3,3)$, using the full three-step process.\n  4. Explain, in one sentence, why the rotation matrix cannot be applied directly to a point when rotating about a non-origin center.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotic arm's gripper needs to rotate a held object by $180°$ around a specific pivot point on the workbench (not the robot's own coordinate origin), located at $(10,5)$ in the workspace's coordinate system. (a) Describe the three-step process the control software must use to correctly compute the object's new position after this rotation. (b) Explain what would go wrong if the software's programmer mistakenly applied the standard rotation matrix directly to the object's coordinates, without first accounting for the pivot point's location.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.rotation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.transformations` (the general concept) and `math.trig.trig-functions` (needed for the rotation matrix's $\\cos\\theta$/$\\sin\\theta$ entries).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.rotation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.rotation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.transformations`, `math.trig.trig-functions`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.rotation-matrix` (the general linear-algebra treatment of this matrix).\n- **Parent**: `math.geom.transformations`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.rotation.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.directional-derivative-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.directional-derivative",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0da382a598f1c7571b08e8d8c5e38804beb2ddc38361672dcbb1bb031b9d406e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.directional-derivative.md": "sha256:2a16f9183e94f94125bb25968aec98da3b58215fa20c884d8ebee446fa2a5bc4"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.directional-derivative",
+    "name": "Directional Derivative",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.gradient"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.directional-derivative-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.directional-derivative (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.directional-derivative.md": "sha256:2a16f9183e94f94125bb25968aec98da3b58215fa20c884d8ebee446fa2a5bc4"
+      },
+      "contentHash": "sha256:47b9c0742218e3f8548b2e49b461d90c828c87c9a5dd3f806da0df7f78e46f46",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.directional-derivative.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.directional-derivative.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.directional-derivative"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.directional-derivative\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.directional-derivative.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.directional-derivative.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.directional-derivative"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.directional-derivative\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.directional-derivative.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.directional-derivative.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.directional-derivative"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.directional-derivative\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.directional-derivative.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.directional-derivative.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.directional-derivative"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.directional-derivative\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.directional-derivative/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the directional derivative $D_uf=\\nabla f\\cdot u$, requiring $u$ to be a UNIT vector — if given a non-unit direction vector, it must be NORMALIZED first, or the formula gives an incorrect (scaled) result.\n- LO2: State that the directional derivative is MAXIMIZED when $u$ points in the SAME direction as $\\nabla f$ (giving the maximum rate of increase, equal to $|\\nabla f|$), and MINIMIZED (most negative) when $u$ points OPPOSITE to $\\nabla f$.\n- LO3: Recognize the standard partial derivatives $f_x$ and $f_y$ as the SPECIAL CASES of the directional derivative in the directions $u=(1,0)$ and $u=(0,1)$ respectively.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "DIRECTION-VECTOR-NOT-NORMALIZED-BEFORE-APPLYING-THE-FORMULA",
+      "content": "| MC-1 | DIRECTION-VECTOR-NOT-NORMALIZED-BEFORE-APPLYING-THE-FORMULA | Computing the directional derivative using a non-unit direction vector directly, without normalizing it first | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "MAXIMUM-RATE-REPORTED-AS-GRADIENT-COMPONENTS-RATHER-THAN-ITS-MAGNITUDE",
+      "content": "| MC-2 | MAXIMUM-RATE-REPORTED-AS-GRADIENT-COMPONENTS-RATHER-THAN-ITS-MAGNITUDE | Reporting the gradient's components directly as the maximum directional derivative value, rather than correctly using the gradient's magnitude | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Normalize the Direction Vector Before Applying the Formula (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Normalize the Direction Vector Before Applying the Formula (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Maximum Rate Is the Gradient's Magnitude, in the Gradient's Own Direction (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Maximum Rate Is the Gradient's Magnitude, in the Gradient's Own Direction (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Partial Derivatives Are Directional Derivatives Along the Axes (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Partial Derivatives Are Directional Derivatives Along the Axes (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Find the directional derivative of $f(x,y)=xy^2$ at $(2,1)$ in the direction of $v=(1,1)$ (normalizing first).\n  2. Find the direction and magnitude of the maximum rate of increase of $f(x,y)=x^2+y^2$ at $(1,3)$.\n  3. Confirm that $D_{(0,1)}f=f_y$ for $f(x,y)=x^3y$ at $(1,2)$.\n  4. Explain, in one sentence, why the direction vector in the directional derivative formula must be a unit vector.\n- **P76 (Transfer Probe, mode = independence)**: \"A hiker standing at a specific point on a mountainside (modeled by an elevation function $f(x,y)$) wants to know how steeply the trail rises if they walk in a specific compass direction (NOT necessarily straight uphill). (a) Explain how the directional derivative formula answers this question, and why the direction vector representing their walking direction must first be converted to a unit vector. (b) Explain what direction the hiker should walk to gain elevation as fast as possible, and how steep that climb would be, in terms of the gradient at their current position.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.gradient` — the directional derivative is computed directly as the gradient dotted with a direction.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.directional-derivative/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.directional-derivative",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.gradient`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.calc.gradient` (the directional derivative is computed directly from it).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.directional-derivative.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

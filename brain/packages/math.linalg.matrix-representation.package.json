@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.matrix-representation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.matrix-representation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a1fff641fca9ef2e5b12162e39f98bea87e27610d98f05cf760f9f200d2fb720",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.matrix-representation.md": "sha256:872c6fadf7ecea039b9e1d10df04a3bb5d24e9dfaeb7cab20b2df4a82049df0b"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.matrix-representation",
+    "name": "Matrix Representation of Linear Maps",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.linear-map",
+      "math.linalg.basis"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.matrix-representation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.matrix-representation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.matrix-representation.md": "sha256:872c6fadf7ecea039b9e1d10df04a3bb5d24e9dfaeb7cab20b2df4a82049df0b"
+      },
+      "contentHash": "sha256:578b6f39f3e3fdfdb06cd8f8c58e2ab145478f17f1d7fb6a8bf095cde7186bce",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-representation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-representation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-representation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-representation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-representation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-representation.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-representation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-representation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-representation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-representation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.matrix-representation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the matrix representation $[T]_{\\gamma\\beta}$ of a linear map $T:V\\to W$ relative to ordered bases $\\beta$ of $V$ and $\\gamma$ of $W$: each COLUMN $j$ is the coordinate vector $[T(b_j)]_\\gamma$ of the $j$-th basis vector's image.\n- LO2: Use a constructed matrix representation to compute $T(v)$ for a specific vector $v$, by finding $[v]_\\beta$ and multiplying by the matrix.\n- LO3: Verify that matrix multiplication corresponds to COMPOSITION of linear maps: $[T\\circ S]=[T][S]$ — composing two linear maps corresponds to multiplying their matrix representations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "MATRIX-REPRESENTATION-BUILT-FROM-WRONG-VECTORS",
+      "content": "| MC-1 | MATRIX-REPRESENTATION-BUILT-FROM-WRONG-VECTORS | Constructing the matrix from $T$ applied to vectors other than the specific basis vectors of $\\beta$, in order | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "COMPOSITION-MATRIX-MULTIPLICATION-ORDER-REVERSED",
+      "content": "| MC-2 | COMPOSITION-MATRIX-MULTIPLICATION-ORDER-REVERSED | Computing $[S][T]$ instead of $[T][S]$ for the composition $T\\circ S$, reversing the required matrix multiplication order | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "COORDINATE-VECTOR-NOT-USED-FOR-NON-STANDARD-BASIS",
+      "content": "| MC-3 | COORDINATE-VECTOR-NOT-USED-FOR-NON-STANDARD-BASIS | When $\\beta$ or $\\gamma$ is a NON-STANDARD basis, using the vector's standard components directly rather than its actual coordinates relative to that basis | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Apply T to Each Basis Vector, Column by Column (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Apply T to Each Basis Vector, Column by Column (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Multiply the Matrix by the Coordinate Vector (Primitive P64: Conceptual Shift, second instance)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multiply the Matrix by the Coordinate Vector (Primitive P64: Conceptual Shift, second instance)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Composition Order Matters: [T∘S] = [T][S], Not [S][T] (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Composition Order Matters: [T∘S] = [T][S], Not [S][T] (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Construct $[T]$ for $T(x,y)=(3x-y,x+2y)$ relative to the standard basis.\n  2. Using your matrix from problem 1, compute $T(5,2)$ via matrix-vector multiplication, verifying against the direct function definition.\n  3. For $T(x,y)=(x+2y,3x)$ and $S(x,y)=(y,x)$, find $[T\\circ S]$ by matrix multiplication.\n  4. Explain, in one sentence, why $[T\\circ S]=[T][S]$ and not $[S][T]$.\n- **P76 (Transfer Probe, mode = independence)**: \"A computer graphics pipeline applies two transformations to a 2D shape in sequence: first a rotation $R$, then a scaling $S$ (i.e. the combined effect is $S\\circ R$). (a) Given matrix representations $[R]=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$ (90° rotation) and $[S]=\\begin{pmatrix}2&0\\\\0&2\\end{pmatrix}$ (uniform scaling by 2), find the matrix representing the combined transformation $S\\circ R$. (b) A junior developer instead computes $[R][S]$ (the reversed order) — explain, using this lesson's composition-order rule, what transformation THIS actually represents instead, and why the visual result on screen would differ from the intended rotate-then-scale effect.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.linear-map` (linear transformations) and `math.linalg.basis` (ordered bases, the reference frames this matrix representation depends on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-representation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.matrix-representation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.linear-map`, `math.linalg.basis`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.coordinates` (the basis-relative coordinate vectors this matrix representation's columns and inputs both rely on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-representation.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

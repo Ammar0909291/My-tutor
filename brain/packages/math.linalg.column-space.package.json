@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.column-space-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.column-space",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:fcf72b898149b0c26fef232d69fde0100a9495f8067168f4ad21be4122c0a1ec",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.column-space.md": "sha256:f47ad47b093d41fea7202bbcf77b485749f7d99ae60d2e542ff94a92c761a671"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.column-space",
+    "name": "Column Space",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.subspace",
+      "math.linalg.span"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.column-space-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.column-space (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.column-space.md": "sha256:f47ad47b093d41fea7202bbcf77b485749f7d99ae60d2e542ff94a92c761a671"
+      },
+      "contentHash": "sha256:afe09919978bec94580a2c3908be8e0ced5c99f1f54afbfb0b000ec1b6d18334",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.column-space.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.column-space.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.column-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.column-space\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.column-space.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.column-space.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.column-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.column-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.column-space.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.column-space.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.column-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.column-space\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.column-space.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.column-space.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.column-space"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.column-space\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.column-space/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.column-space",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the column space $C(A)=\\{Ax:x\\in\\mathbb{R}^n\\}$ as the SPAN of $A$'s columns, and find a spanning set for it directly from $A$'s columns.\n- LO2: Use the column space to determine whether $Ax=b$ is CONSISTENT: a solution exists if and only if $b\\in C(A)$.\n- LO3: State that $\\dim(C(A))=\\text{rank}(A)$, connecting column space directly to the already-mastered rank concept.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.column-space",
+      "title": "COLUMN-SPACE-MEMBERSHIP-CHECKED-PARTIALLY",
+      "content": "| MC-1 | COLUMN-SPACE-MEMBERSHIP-CHECKED-PARTIALLY | Verifying only some components of the required linear-combination system when checking whether $b\\in C(A)$, rather than confirming all components simultaneously | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.column-space",
+      "title": "COLUMN-SPACE-DIMENSION-ASSUMED-EQUAL-TO-COLUMN-COUNT",
+      "content": "| MC-2 | COLUMN-SPACE-DIMENSION-ASSUMED-EQUAL-TO-COLUMN-COUNT | Believing $\\dim(C(A))$ always equals the number of columns in $A$, rather than the rank (which can be smaller when columns are dependent) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.column-space",
+      "title": "Column Space Is the Span of A's Columns (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Column Space Is the Span of A's Columns (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.column-space",
+      "title": "Checking b ∈ C(A) Requires ALL Components to Match Simultaneously (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Checking b ∈ C(A) Requires ALL Components to Match Simultaneously (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.column-space",
+      "title": "Column Space Dimension Is Rank, Not Column Count (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Column Space Dimension Is Rank, Not Column Count (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.column-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.column-space",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find a spanning set for the column space of $\\begin{pmatrix}1&2\\\\4&5\\end{pmatrix}$.\n  2. Determine whether $b=(3,7)$ is in the column space of $\\begin{pmatrix}1&2\\\\2&4\\end{pmatrix}$, showing the full check.\n  3. Given rank$(A)=2$ for a $2\\times4$ matrix $A$, state $\\dim(C(A))$.\n  4. Explain, in one sentence, why the column space's dimension can be less than the number of columns in the matrix.\n- **P76 (Transfer Probe, mode = independence)**: \"A network flow problem models possible flow patterns as $Ax$ for a matrix $A$ representing pipe connections, with $x$ representing flow rates. An engineer wants to know if a specific target flow vector $b$ is physically achievable given the pipe network's structure. (a) Explain, using this lesson's consistency criterion, why checking whether $b\\in C(A)$ is exactly the right mathematical question to answer 'is this target flow achievable?' (b) If the pipe network has 5 pipes ($A$ has 5 columns) but the engineer computes $\\text{rank}(A)=3$, explain what this means about the DIMENSION of achievable flow patterns, even though there are 5 individual pipes to control.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.column-space",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.subspace` (what a subspace is) and `math.linalg.span` (the spanning-set concept this column space is defined via).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.column-space/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.column-space",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.subspace`, `math.linalg.span`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.rank` (the dimension-computing theorem this concept directly cites), `math.linalg.kernel-image` (a companion concept for linear transformations more generally).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.column-space.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.pseudoinverse-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.pseudoinverse",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:04211d22c3fbcb3340da13c4aec0a8ebd0e9f501fadfc85693297d21eeb3c6ea",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.pseudoinverse.md": "sha256:333a89d94a168d53cc92f94722d159b2a39b18df0e59adc4eeb2b9c24962ce09"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.pseudoinverse",
+    "name": "Moore-Penrose Pseudoinverse",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.svd"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.pseudoinverse-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.pseudoinverse (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.pseudoinverse.md": "sha256:333a89d94a168d53cc92f94722d159b2a39b18df0e59adc4eeb2b9c24962ce09"
+      },
+      "contentHash": "sha256:67434f1c061e004632a96ca95ba667f5812254230bf3a0cd4dff93e96ea25f2c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.pseudoinverse.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.pseudoinverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.pseudoinverse\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.pseudoinverse.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.pseudoinverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.pseudoinverse\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.pseudoinverse.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.pseudoinverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.pseudoinverse\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.pseudoinverse.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.pseudoinverse"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.pseudoinverse\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.pseudoinverse/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the pseudoinverse $A^+=V\\Sigma^+U^T$ from a matrix's SVD $A=U\\Sigma V^T$, where $\\Sigma^+$ INVERTS each NONZERO singular value (i.e., $\\sigma_i\\to1/\\sigma_i$) and leaves ZERO singular values as ZERO (never attempting to invert 0, which would be undefined).\n- LO2: Use $\\hat{x}=A^+b$ to find the MINIMUM-NORM least-squares solution to $Ax=b$ — for ANY matrix $A$, even ones with no exact solution (overdetermined) or infinitely many solutions (underdetermined) — recognizing this as the pseudoinverse's genuine universal applicability, unlike the ordinary inverse which requires a square, invertible matrix.\n- LO3: Recognize that when $A$ IS square and invertible, $A^+=A^{-1}$ EXACTLY — the pseudoinverse generalizes the ordinary inverse rather than replacing it.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "ZERO-SINGULAR-VALUES-INCORRECTLY-INVERTED-OR-TREATED-AS-UNDEFINED-IN-SIGMA-PLUS",
+      "content": "| MC-1 | ZERO-SINGULAR-VALUES-INCORRECTLY-INVERTED-OR-TREATED-AS-UNDEFINED-IN-SIGMA-PLUS | Attempting to invert zero singular values in Σ⁺ (producing an undefined result) instead of correctly leaving them as exactly 0 | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "PSEUDOINVERSE-ASSUMED-ALWAYS-DIFFERENT-FROM-ORDINARY-INVERSE",
+      "content": "| MC-2 | PSEUDOINVERSE-ASSUMED-ALWAYS-DIFFERENT-FROM-ORDINARY-INVERSE | Believing the pseudoinverse always differs from the ordinary inverse, rather than recognizing they coincide exactly when A is square and invertible | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Σ⁺ Inverts Nonzero Entries, Leaves Zero Entries as Zero (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Σ⁺ Inverts Nonzero Entries, Leaves Zero Entries as Zero (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Minimum-Norm Solution Among Infinitely Many (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Minimum-Norm Solution Among Infinitely Many (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Pseudoinverse Equals Ordinary Inverse When It Exists (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Pseudoinverse Equals Ordinary Inverse When It Exists (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given $\\Sigma=\\text{diag}(4,0,2)$, construct $\\Sigma^+$.\n  2. Explain, in one sentence, why a zero singular value in $\\Sigma^+$ must remain 0 rather than being inverted.\n  3. For an invertible $3\\times3$ matrix $A$, state the relationship between $A^+$ and $A^{-1}$.\n  4. Explain what \"minimum-norm\" means for the solution $\\hat{x}=A^+b$ when $Ax=b$ has infinitely many exact solutions.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotic arm with more joints (degrees of freedom) than needed for a given task has infinitely many joint-angle configurations $x$ that achieve a desired end-effector position $b$ (an underdetermined system $Ax=b$, where $A$ maps joint angles to position). (a) Explain why using the pseudoinverse's solution $\\hat{x}=A^+b$ is a sensible engineering choice among the infinitely many valid joint configurations, connecting to the minimum-norm property. (b) In physical terms, explain what a 'minimum-norm' joint-angle solution might correspond to (e.g., the smallest overall joint movement/effort) and why that's often a desirable criterion in robotics.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.svd` — the pseudoinverse is built directly from a matrix's SVD.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.pseudoinverse/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.pseudoinverse",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.svd`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.least-squares` (the pseudoinverse's minimum-norm solution IS the least-squares solution for the underdetermined/overdetermined cases).\n- **Parent**: `math.linalg.svd`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.pseudoinverse.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

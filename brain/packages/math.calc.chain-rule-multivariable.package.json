@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.chain-rule-multivariable-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.chain-rule-multivariable",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:372f355d343ca4c64b916a085404fa1c53af913d215a4e5a882ea6ef133046f4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md": "sha256:f0518e5af77c412a1b76e799619a5e4e891873dece28d8f1d8f82f039afb5aac"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.chain-rule-multivariable",
+    "name": "Multivariable Chain Rule",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.partial-derivatives",
+      "math.calc.chain-rule"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.chain-rule-multivariable-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.chain-rule-multivariable (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md": "sha256:f0518e5af77c412a1b76e799619a5e4e891873dece28d8f1d8f82f039afb5aac"
+      },
+      "contentHash": "sha256:6350bccb72b4565032db6f6a5c57de428db3b0f0776eba614b8060c9d2aa008e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.chain-rule-multivariable.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.chain-rule-multivariable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.chain-rule-multivariable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.chain-rule-multivariable.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.chain-rule-multivariable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.chain-rule-multivariable\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.chain-rule-multivariable.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.chain-rule-multivariable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.chain-rule-multivariable\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.chain-rule-multivariable.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.chain-rule-multivariable"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.chain-rule-multivariable\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.chain-rule-multivariable/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the multivariable chain rule $\\frac{dz}{dt}=\\frac{\\partial z}{\\partial x}\\frac{dx}{dt}+\\frac{\\partial z}{\\partial y}\\frac{dy}{dt}$ when $z=f(x,y)$ and $x,y$ are BOTH functions of a single variable $t$ — summing the contribution through EACH intermediate variable's path.\n- LO2: Draw the DEPENDENCY TREE (showing $z$ depending on $x,y$, each of which depends on $t$) BEFORE writing the formula, to correctly identify EVERY path from $z$ down to $t$ — omitting a path (a missing branch) produces an incomplete, incorrect formula.\n- LO3: Apply the analogous rule when $x,y$ depend on TWO variables $s,t$ instead of one — e.g. $\\frac{\\partial z}{\\partial s}=\\frac{\\partial z}{\\partial x}\\frac{\\partial x}{\\partial s}+\\frac{\\partial z}{\\partial y}\\frac{\\partial y}{\\partial s}$ — recognizing that each PARTIAL (not total) derivative with respect to $s$ still sums over every intermediate path, but uses $\\partial$ throughout rather than mixing in any $d/dt$-style total derivatives.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "DEPENDENCY-TREE-PATH-OMITTED-FROM-CHAIN-RULE-SUM",
+      "content": "| MC-1 | DEPENDENCY-TREE-PATH-OMITTED-FROM-CHAIN-RULE-SUM | Omitting one branch/path of the dependency tree from the chain-rule sum, producing an incomplete formula that misses a genuine source of change | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "TOTAL-DERIVATIVE-NOTATION-MIXED-IN-WHEN-MULTIPLE-INPUT-VARIABLES-EXIST",
+      "content": "| MC-2 | TOTAL-DERIVATIVE-NOTATION-MIXED-IN-WHEN-MULTIPLE-INPUT-VARIABLES-EXIST | Using total-derivative (d/dt) notation for a variable that actually depends on multiple input variables, rather than consistently using partial derivatives | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Draw the Dependency Tree and Sum Every Path (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Draw the Dependency Tree and Sum Every Path (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Verifying the Chain Rule Against Direct Substitution (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Verifying the Chain Rule Against Direct Substitution (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Use Partial Derivatives Throughout When Multiple Input Variables Exist (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Use Partial Derivatives Throughout When Multiple Input Variables Exist (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For $z=xy$, $x=\\cos t$, $y=\\sin t$, find $\\frac{dz}{dt}$ using the multivariable chain rule, first drawing the dependency tree.\n  2. Verify your answer to problem 1 by directly substituting $x,y$ into $z=xy$ and differentiating.\n  3. For $z=x^2y^3$, $x=s^2t$, $y=st^2$, find $\\frac{\\partial z}{\\partial t}$.\n  4. Explain, in one sentence, why every branch of the dependency tree must contribute a term to the chain-rule sum.\n- **P76 (Transfer Probe, mode = independence)**: \"A meteorologist models atmospheric pressure $P(x,y)$ as a function of geographic position, and a weather balloon's position $x(t),y(t)$ changes over time as it drifts. (a) Explain how the multivariable chain rule lets the meteorologist find the RATE OF CHANGE of pressure experienced by the balloon, $\\frac{dP}{dt}$, without needing to substitute the balloon's full trajectory into $P$ directly. (b) Draw (describe) the dependency tree for this scenario, and identify what each branch physically represents.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.partial-derivatives` (the building blocks $\\partial z/\\partial x$, etc.) and `math.calc.chain-rule` (the single-variable version this generalizes).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.chain-rule-multivariable/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.chain-rule-multivariable",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.partial-derivatives`, `math.calc.chain-rule`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.chain-rule-multivariable.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

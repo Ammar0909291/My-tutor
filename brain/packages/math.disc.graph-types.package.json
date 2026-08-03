@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4d804652b7092268fd73b1c9f4be1b323c0b1d886b6d7afc802ccd8dc3b8a377",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph-types.md": "sha256:bf2730423e09cbf35a5802e015b74bc025c3941d5090c803d38c264adf7fc017"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.disc.graph-types",
+    "name": "Graph Types",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.disc.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph-types.md": "sha256:bf2730423e09cbf35a5802e015b74bc025c3941d5090c803d38c264adf7fc017"
+      },
+      "contentHash": "sha256:7841c71b4f300f89532af0c7ab22482d2f2c6be7fbff81bd82cb907544fd9b24",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph-types/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph-types",
+      "title": "Learning Objectives",
+      "content": "- LO1: Distinguish a SIMPLE graph (no loops, no multiple edges between the same pair) from a MULTIGRAPH (multiple edges allowed, possibly loops).\n- LO2: Identify a COMPLETE graph $K_n$ (every pair of vertices connected) and compute its edge count $\\binom{n}{2}$.\n- LO3: Identify a BIPARTITE graph (vertices splittable into two sets with edges only BETWEEN the sets, never within one) and a REGULAR graph (every vertex has the same degree).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-types",
+      "title": "COMPLETE-GRAPH-EDGE-COUNT-MISCOMPUTED",
+      "content": "| MC-1 | COMPLETE-GRAPH-EDGE-COUNT-MISCOMPUTED | Computing $K_n$'s edge count as $n^2$ or $n$ rather than the correct $\\binom{n}{2}$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-types",
+      "title": "BIPARTITE-AND-REGULAR-ASSUMED-RELATED",
+      "content": "| MC-2 | BIPARTITE-AND-REGULAR-ASSUMED-RELATED | Believing bipartite-ness implies (or is implied by) regularity, rather than recognizing these as independent graph properties | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-types",
+      "title": "MULTIGRAPH-EDGES-COLLAPSED-INTO-ONE",
+      "content": "| MC-3 | MULTIGRAPH-EDGES-COLLAPSED-INTO-ONE | Simplifying away genuinely distinct parallel edges in a multigraph scenario, treating multiple real connections as a single edge | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "Simple vs. Multigraph, and Complete Graphs (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Simple vs. Multigraph, and Complete Graphs (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "Bipartite and Regular Are Independent Properties (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Bipartite and Regular Are Independent Properties (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Determine whether a graph modeling co-authorship (an edge whenever two researchers have co-authored MULTIPLE distinct papers together, with a separate edge per paper) is simple or a multigraph.\n  2. Compute the number of edges in $K_7$.\n  3. Determine whether a graph representing students (set $U$) enrolled in courses (set $V$), with an edge for each enrollment, is bipartite, and explain why.\n  4. Given a graph where every vertex has degree 4, state whether this alone determines if the graph is bipartite, and justify your answer.\n- **P76 (Transfer Probe, mode = independence)**: \"A chess tournament is modeled as a graph where vertices are players and an edge connects two players if they have played each other exactly once (the tournament is a round-robin, so every pair plays exactly once). (a) Determine whether this graph is simple or a multigraph, and whether it is complete — explain both classifications using this lesson's definitions. (b) If every player instead plays each opponent exactly TWICE (once at each other's home venue), determine how this changes the simple/multigraph classification, and explain what the new edge count would be for 6 players.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.graph-types",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.graph` (the basic definition of a graph — vertices and edges) — this concept classifies graphs into named structural families.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.graph-types",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.graph`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.graph-coloring` (bipartite graphs are exactly the 2-colorable graphs, a connection this concept sets up), `math.disc.planar-graph`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.power-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.power",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4af2965b697f33a0f4c97c624f9957abd4c28a4787854e692429caf674fcf19c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.power.md": "sha256:eff8dee6e7df2283ebf3edf25761d11c594d0b58e955b9a25bffd001494791d5"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.power",
+    "name": "Power of a Test",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.type-errors"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.power-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.power (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.power.md": "sha256:eff8dee6e7df2283ebf3edf25761d11c594d0b58e955b9a25bffd001494791d5"
+      },
+      "contentHash": "sha256:43d95bd53da7c0ed05fa19565896df827ebe855450801fc2427bffac6f37467f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.power.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.power.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.power\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.power.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.power.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.power.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.power.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.power\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.power.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.power.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.power\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.power/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.power",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define POWER $=P(\\text{reject }H_0\\mid H_1\\text{ true})=1-\\beta$ — the PROBABILITY of correctly detecting a real effect when one genuinely exists — and recognize this is DIRECTLY related to $\\beta$ (Type II error rate), NOT a separate, independent quantity.\n- LO2: Identify the THREE factors that INCREASE power — larger SAMPLE SIZE, larger EFFECT SIZE (the true difference being detected), and larger $\\alpha$ (a more lenient significance threshold) — and recognize each factor's increase comes with its OWN tradeoff (larger $n$ costs resources; effect size isn't researcher-controlled; larger $\\alpha$ increases Type I error risk).\n- LO3: Apply POWER ANALYSIS conceptually — determining the REQUIRED sample size BEFORE collecting data, to ensure adequate power for detecting a meaningfully-sized effect — recognizing this is a PLANNING tool used PRIOR to a study, not a post-hoc justification computed after already seeing the results.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.power/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.power",
+      "title": "POWER-AND-BETA-TREATED-AS-UNRELATED-QUANTITIES-REQUIRING-SEPARATE-COMPUTATION",
+      "content": "| MC-1 | POWER-AND-BETA-TREATED-AS-UNRELATED-QUANTITIES-REQUIRING-SEPARATE-COMPUTATION | Treating power and β (Type II error rate) as independent, separately-computed quantities rather than recognizing power is directly 1 minus β | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.power/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.power",
+      "title": "POWER-INCREASING-ACTIONS-ASSUMED-COST-FREE-WITHOUT-RECOGNIZING-THEIR-TRADEOFFS",
+      "content": "| MC-2 | POWER-INCREASING-ACTIONS-ASSUMED-COST-FREE-WITHOUT-RECOGNIZING-THEIR-TRADEOFFS | Assuming a power-increasing action (like raising α or sample size) is a universally beneficial improvement with no accompanying cost or tradeoff | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.power/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.power",
+      "title": "Power Is Directly 1 Minus Beta, Not a Separately Computed Quantity (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Power Is Directly 1 Minus Beta, Not a Separately Computed Quantity (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.power/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.power",
+      "title": "Every Power-Increasing Factor Has a Genuine Tradeoff (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Every Power-Increasing Factor Has a Genuine Tradeoff (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.power/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.power",
+      "title": "Power Analysis Is a Pre-Study Planning Tool, Not a Post-Hoc Justification (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Power Analysis Is a Pre-Study Planning Tool, Not a Post-Hoc Justification (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.power/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.power",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.power/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.power",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given $\\beta=0.35$, find the power.\n  2. List the three factors that increase a test's power.\n  3. Explain the tradeoff involved in increasing power by raising $\\alpha$.\n  4. Explain why power analysis should be conducted before data collection, rather than after seeing non-significant results.\n- **P76 (Transfer Probe, mode = independence)**: \"A clinical trial is being planned to test a new medication, and the research team needs to determine how many patients to enroll to have adequate power (80%) to detect a clinically meaningful improvement, before the trial begins. (a) Explain why conducting this power analysis BEFORE the trial (using an assumed effect size from prior research) is the appropriate approach, rather than waiting to see the trial's results first. (b) Explain how increasing the planned sample size would affect the trial's power, and what practical tradeoff this involves for the research team.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.power/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.power",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.type-errors` — power is directly defined in terms of the Type II error rate $\\beta$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.power/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.power",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.type-errors`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.hypothesis-testing`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.power.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

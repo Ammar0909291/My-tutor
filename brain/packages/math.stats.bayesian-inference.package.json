@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.bayesian-inference-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.bayesian-inference",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6a7f2db9fb2542b83988380220f728a19d36b53dadd564f62d619578470f24ca",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.bayesian-inference.md": "sha256:3b990e4b0e3b52e0909e2c3b11eeb659dc4cc15febb3e1c4875e6155a29a1ebc"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.bayesian-inference",
+    "name": "Bayesian Statistics",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.prob.bayes-theorem",
+      "math.stats.mle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.bayesian-inference-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.bayesian-inference (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.bayesian-inference.md": "sha256:3b990e4b0e3b52e0909e2c3b11eeb659dc4cc15febb3e1c4875e6155a29a1ebc"
+      },
+      "contentHash": "sha256:407918e1ac68e020ddff171ee65a4e0d12ba2f7d4ee1e6856f33690849740f5e",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.bayesian-inference.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.bayesian-inference.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.bayesian-inference\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.bayesian-inference.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.bayesian-inference.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.bayesian-inference.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.bayesian-inference.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.bayesian-inference\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.bayesian-inference.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.bayesian-inference.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.bayesian-inference"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.bayesian-inference\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.bayesian-inference/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Bayesian FRAMEWORK's core move: treating the parameter $\\theta$ ITSELF as RANDOM, with a PRIOR distribution $\\pi(\\theta)$ (representing belief BEFORE seeing data) — a fundamentally different starting point from frequentist statistics, which treats $\\theta$ as a FIXED (though unknown) constant.\n- LO2: Apply Bayes' theorem to compute the POSTERIOR $\\pi(\\theta|x)\\propto L(x|\\theta)\\pi(\\theta)$ (prior TIMES likelihood, proportional to the posterior) — recognizing this combines PRIOR belief with the OBSERVED DATA's evidence (the likelihood, from `math.stats.mle`) into an UPDATED belief.\n- LO3: Contrast the Bayesian paradigm's DIRECT probability statements about $\\theta$ (e.g. \"there's a 95% probability $\\theta$ is in this interval,\" from `math.stats.credible-interval`) against the frequentist paradigm's INDIRECT statements (confidence intervals and $p$-values, which are probability statements about the PROCEDURE or the DATA, never DIRECTLY about the fixed parameter itself) — these are genuinely DIFFERENT philosophical frameworks, not just different notations for the same idea.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "BAYESIAN-AND-FREQUENTIST-FRAMEWORKS-TREATED-AS-MERELY-NOTATIONAL-VARIANTS",
+      "content": "| MC-1 | BAYESIAN-AND-FREQUENTIST-FRAMEWORKS-TREATED-AS-MERELY-NOTATIONAL-VARIANTS | Treating Bayesian and frequentist statistics as different notations for computing the same underlying thing, rather than recognizing they are genuinely different philosophical frameworks | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "POSTERIOR-COMPUTED-USING-ONLY-THE-PRIOR-OR-ONLY-THE-LIKELIHOOD",
+      "content": "| MC-2 | POSTERIOR-COMPUTED-USING-ONLY-THE-PRIOR-OR-ONLY-THE-LIKELIHOOD | Computing the posterior distribution using only the prior or only the likelihood, omitting the required multiplication of both together | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Frequentist vs. Bayesian: Fixed Parameter vs. Random Parameter (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Frequentist vs. Bayesian: Fixed Parameter vs. Random Parameter (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Posterior Requires Multiplying Both Prior and Likelihood Together (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Posterior Requires Multiplying Both Prior and Likelihood Together (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Credible Intervals Are Direct; Confidence Intervals Are Indirect Probability Statements (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Credible Intervals Are Direct; Confidence Intervals Are Indirect Probability Statements (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Explain, in one sentence, how Bayesian and frequentist statistics fundamentally differ in their treatment of the parameter θ.\n  2. For a Beta(1,1) prior and likelihood $L(x|p)=p^2(1-p)$, state the (unnormalized) posterior.\n  3. Explain why the posterior is proportional to the PRODUCT of the prior and likelihood, not either alone.\n  4. Explain the interpretive difference between a Bayesian credible interval and a frequentist confidence interval.\n- **P76 (Transfer Probe, mode = independence)**: \"A data scientist at a tech company is estimating the true click-through rate of a new website button, starting with a prior belief based on similar past buttons (a Beta distribution reflecting typical click rates), and plans to update this belief as new click data arrives. (a) Explain why this scenario naturally fits the Bayesian framework's core idea of updating a prior belief with observed data. (b) Explain what a 90% Bayesian credible interval for the click-through rate would directly tell the data scientist, in a way a 90% frequentist confidence interval technically would not.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.prob.bayes-theorem` (the mathematical tool underlying the posterior computation) and `math.stats.mle` (the likelihood function this framework reuses and reweights by the prior).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.bayesian-inference/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.bayesian-inference",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.prob.bayes-theorem`, `math.stats.mle`.\n- **Unlocks**: none recorded in the KG (children `math.stats.conjugate-prior`, `math.stats.credible-interval` build directly on this concept).\n- **Related**: `math.prob.bayesian-inference`.\n- **Cross-links**: `math.prob.bayesian-inference`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.bayesian-inference.md",
+        "startLine": 94,
+        "endLine": 101
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

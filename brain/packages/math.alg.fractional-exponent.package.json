@@ -1,0 +1,263 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.fractional-exponent-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.fractional-exponent",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:71ef22faa06703cde929440e1950a4a8fd2eaada738abe3a47b2469b3c26b969",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.fractional-exponent.md": "sha256:44a3800a4bc95f9a2078e9fd6b5123c838718d6fd72c1eafde7a8f3d8d6e9b6b"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.fractional-exponent",
+    "name": "Fractional Exponents",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.exponent-rules",
+      "math.alg.radicals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.fractional-exponent-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.fractional-exponent (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.fractional-exponent.md": "sha256:44a3800a4bc95f9a2078e9fd6b5123c838718d6fd72c1eafde7a8f3d8d6e9b6b"
+      },
+      "contentHash": "sha256:2a004634f3a1efaf7aaca909779abc03e54bd7e1154e70a5eb0fb75b4f30c574",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.fractional-exponent.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.fractional-exponent.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.fractional-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.fractional-exponent\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.fractional-exponent.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.fractional-exponent.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.fractional-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.fractional-exponent\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.fractional-exponent.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.fractional-exponent.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.fractional-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.fractional-exponent\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.fractional-exponent/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "Learning Objectives",
+      "content": "- LO1: Convert between fractional-exponent notation $a^{m/n}$ and radical notation $\\sqrt[n]{a^m}$ or $(\\sqrt[n]{a})^m$.\n- LO2: Evaluate a fractional-exponent expression by choosing the MORE CONVENIENT of the two equivalent forms — usually taking the root FIRST (smaller numbers) rather than the power first (potentially much larger numbers).\n- LO3: Correctly identify the ROLE of each part of the fraction $m/n$: the DENOMINATOR $n$ is the root's index, the NUMERATOR $m$ is the power — not the reverse.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "POWER-FIRST-COMPUTATION-ORDER-DEFAULTED-TO-INEFFICIENTLY",
+      "content": "| MC-1 | POWER-FIRST-COMPUTATION-ORDER-DEFAULTED-TO-INEFFICIENTLY | Computing the power before the root by default, producing unnecessarily large intermediate numbers rather than choosing the more efficient root-first order | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "FRACTIONAL-EXPONENT-NUMERATOR-DENOMINATOR-ROLES-SWAPPED",
+      "content": "| MC-2 | FRACTIONAL-EXPONENT-NUMERATOR-DENOMINATOR-ROLES-SWAPPED | Using the fraction's numerator as the root index and the denominator as the power, reversing the correct roles | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "Denominator Is the Root, Numerator Is the Power (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Denominator Is the Root, Numerator Is the Power (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "Root First Keeps Numbers Smaller (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Root First Keeps Numbers Smaller (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Convert $9^{3/2}$ to radical notation (both forms) and evaluate.\n  2. Evaluate $32^{2/5}$, choosing the more efficient computational order.\n  3. Evaluate $81^{3/4}$, correctly identifying which part of the fraction is the root index and which is the power.\n  4. Explain, in one sentence, why taking the root first is generally more efficient than raising to the power first when evaluating a fractional exponent by hand.\n- **P76 (Transfer Probe, mode = independence)**: \"A biology growth-rate formula includes the term $t^{5/2}$ where $t$ is time in some model. (a) Rewrite $t^{5/2}$ in radical notation, correctly identifying which number is the root index and which is the power. (b) For a specific value $t=4$, evaluate $4^{5/2}$ using the more computationally efficient order (root first), showing your work, and explain why this order was preferable to computing $4^5$ first.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.exponent-rules` (the general exponent laws this notation must remain consistent with) and `math.alg.radicals` (root notation, the other half of this concept's equivalence).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.fractional-exponent/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.fractional-exponent",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.exponent-rules`, `math.alg.radicals`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.fractional-exponent.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

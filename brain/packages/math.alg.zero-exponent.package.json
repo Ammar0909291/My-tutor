@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.zero-exponent-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.zero-exponent",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:28b09273b885528b6eb6faceb3ce228f6419039efe4a36f689c1e47766efa462",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.zero-exponent.md": "sha256:4318945c17d49d9d99483e2d6ef7c7b8874b6c36e51154337db9ffeda95a54a3"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.zero-exponent",
+    "name": "Zero Exponent",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.alg.exponent-rules"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.zero-exponent-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.zero-exponent (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.zero-exponent.md": "sha256:4318945c17d49d9d99483e2d6ef7c7b8874b6c36e51154337db9ffeda95a54a3"
+      },
+      "contentHash": "sha256:c671db2ef4385c3b3cf3e2dbb7771771ef13ff2dfcc0494dce9285654e4e95c4",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.zero-exponent.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.zero-exponent.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.zero-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.zero-exponent\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.zero-exponent.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.zero-exponent.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.zero-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.zero-exponent\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.zero-exponent.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.zero-exponent.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.zero-exponent"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.zero-exponent\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.zero-exponent/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "Learning Objectives",
+      "content": "- LO1: State that $a^0=1$ for any NONZERO base $a$, and apply this directly in simplification.\n- LO2: Derive WHY $a^0=1$ using the quotient rule $\\frac{a^n}{a^n}=a^{n-n}=a^0$, connecting it to the fact that any nonzero number divided by itself equals 1.\n- LO3: Recognize that $0^0$ is a special, UNDEFINED (or context-dependent, by convention) case — the rule $a^0=1$ explicitly requires $a\\ne0$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "ZERO-EXPONENT-ASSUMED-TO-PRODUCE-ZERO",
+      "content": "| MC-1 | ZERO-EXPONENT-ASSUMED-TO-PRODUCE-ZERO | Believing $a^0=0$, confusing the exponent's value (zero) with the resulting output (which is actually 1) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "ZERO-TO-THE-ZERO-ASSUMED-COVERED-BY-THE-RULE",
+      "content": "| MC-2 | ZERO-TO-THE-ZERO-ASSUMED-COVERED-BY-THE-RULE | Applying $a^0=1$ to the case $a=0$ without recognizing this specific case requires separate treatment | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "The Quotient Rule Forces a^0 = 1 (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Quotient Rule Forces a^0 = 1 (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "The Nonzero-Base Requirement: 0^0 Is Special (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Nonzero-Base Requirement: 0^0 Is Special (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.95×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Simplify $12^0$.\n  2. Simplify $(-3)^0$.\n  3. Derive $8^0=1$ using the quotient rule, showing the intermediate steps.\n  4. Explain, in one sentence, why $0^0$ is not automatically covered by the rule $a^0=1$.\n- **P76 (Transfer Probe, mode = independence)**: \"A scientific formula includes the term $(1+r)^0$ where $r$ represents an interest rate variable that could, in principle, take any value including making the base zero in a special edge case. (a) Evaluate $(1+r)^0$ for a typical nonzero base value like $r=0.05$ (giving base $1.05$), and explain using this lesson's rule why the result is $1$ regardless of the SPECIFIC nonzero value of $1+r$. (b) Explain what would need special attention if $r=-1$ (making the base exactly $1+(-1)=0$), connecting to this lesson's discussion of the $0^0$ special case.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.exponent-rules` (the general laws of exponents, including the quotient rule this concept's derivation relies on).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.zero-exponent/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.zero-exponent",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.exponent-rules`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.negative-exponent` (a sibling special-case exponent rule, also derivable from the quotient rule).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.zero-exponent.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

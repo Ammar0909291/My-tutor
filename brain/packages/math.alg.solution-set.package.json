@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.solution-set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.solution-set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:cebee6ca83a02a30ad8e2d423046188a74b8b6519830b25c9eaf25e0af785a2e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.solution-set.md": "sha256:d9a1fd46a1eaecdeb0c0030211f02ea6587583f9642a4e6a3478e0b4e1f182b4"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.solution-set",
+    "name": "Solution Set",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.alg.equation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.solution-set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.solution-set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.solution-set.md": "sha256:d9a1fd46a1eaecdeb0c0030211f02ea6587583f9642a4e6a3478e0b4e1f182b4"
+      },
+      "contentHash": "sha256:73bcbe6b5fabd925d5fc2fd33361a0404ac330d2ecabef30e91a97db81416c81",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.solution-set.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.solution-set.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.solution-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.solution-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.solution-set.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.solution-set.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.solution-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.solution-set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.solution-set.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.solution-set.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.solution-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.solution-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.solution-set.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.solution-set.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.solution-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.solution-set\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.solution-set/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.solution-set",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the solution set of a given simple equation or inequality using correct set notation.\n- LO2: Recognize when a solution set is EMPTY ($\\varnothing$, no values satisfy the equation), FINITE (a specific finite list of values), or INFINITE (e.g. all reals in an interval).\n- LO3: Distinguish \"solving an equation\" (finding its solution set) from merely finding \"a solution\" (one member of that set) — recognizing an equation can have more than one solution, and a complete answer requires the FULL set.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.solution-set",
+      "title": "ALL-REALS-SOLUTION-SET-CONFUSED-WITH-EMPTY-SET",
+      "content": "| MC-1 | ALL-REALS-SOLUTION-SET-CONFUSED-WITH-EMPTY-SET | Confusing an \"always true\" resulting statement (solution set = all reals) with a \"no solution\" outcome (solution set = empty) when the variable cancels out | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.solution-set",
+      "title": "SINGLE-FOUND-SOLUTION-REPORTED-AS-COMPLETE-ANSWER",
+      "content": "| MC-2 | SINGLE-FOUND-SOLUTION-REPORTED-AS-COMPLETE-ANSWER | Stopping after finding one value that satisfies an equation, without checking for or reporting additional solutions | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.solution-set",
+      "title": "Solution Sets Can Be Empty, Finite, or Infinite (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Solution Sets Can Be Empty, Finite, or Infinite (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.solution-set",
+      "title": "Empty vs. Infinite: Check the Resulting Statement's Truth (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Empty vs. Infinite: Check the Resulting Statement's Truth (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.solution-set",
+      "title": "A Complete Solution Set, Not Just One Value (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"A Complete Solution Set, Not Just One Value (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.solution-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.solution-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. State the solution set of $x^2-4=0$.\n  2. Determine whether $2x+1=2x-3$ has an empty, finite, or infinite solution set, and state it.\n  3. Determine whether $5(x+1)=5x+5$ has an empty, finite, or infinite solution set, and state it.\n  4. Given that $x=4$ satisfies $x^2-16=0$, determine whether this is the complete solution set, and if not, find the rest.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs all values of $x$ (a design parameter) satisfying $x^2-7x+10=0$ for a structural constraint. (a) Find the complete solution set. (b) A colleague reports only 'x=5 works' as the final answer to the design team — explain, using this lesson's complete-solution-set idea, why this answer is incomplete and could lead to a missed valid design option.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.solution-set",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.equation` (what an equation is) — the solution set is precisely the collection of values making a given equation (or inequality) true.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.solution-set/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.solution-set",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.equation`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.solution-set.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.two-way-anova-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.two-way-anova",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a424433f24188f368e64b835151a977dd0a43d3b25fb963086cf5e1ab05401f9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.two-way-anova.md": "sha256:bfcb2383b31a3a5771b95ebb968b46410ea3f82d72adcfe8243a0312af3bc0ab"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.two-way-anova",
+    "name": "Two-Way ANOVA",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.stats.anova"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.two-way-anova-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.two-way-anova (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.two-way-anova.md": "sha256:bfcb2383b31a3a5771b95ebb968b46410ea3f82d72adcfe8243a0312af3bc0ab"
+      },
+      "contentHash": "sha256:33ddcb4af45028d1cad2c949a9e8b6ee1c22d5a31dba5a0fe6ce80e1463e8384",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.two-way-anova.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.two-way-anova.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.two-way-anova"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.two-way-anova\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.two-way-anova.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.two-way-anova.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.two-way-anova"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.two-way-anova\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.two-way-anova.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.two-way-anova.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.two-way-anova"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.two-way-anova\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.two-way-anova.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.two-way-anova.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.two-way-anova"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.two-way-anova\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.two-way-anova/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "Learning Objectives",
+      "content": "- LO1: Extend one-way `math.stats.anova` to TWO categorical FACTORS simultaneously, testing THREE distinct effects: the MAIN EFFECT of Factor A, the MAIN EFFECT of Factor B, and the INTERACTION effect between A and B — these are THREE SEPARATE hypotheses, each with its own test.\n- LO2: Interpret an INTERACTION effect — an interaction exists when the effect of ONE factor DEPENDS on the LEVEL of the OTHER factor (e.g. a drug's effectiveness differs by patient age group) — and recognize a SIGNIFICANT interaction changes how the MAIN EFFECTS themselves should be interpreted (a main effect's \"average\" impact can be MISLEADING if a strong interaction exists, since the effect may go in different directions across different subgroups).\n- LO3: Recognize BLOCKING as a design technique to REDUCE RESIDUAL (unexplained) variance by GROUPING similar experimental units together (e.g. blocking by \"day of experiment\" to account for day-to-day variability) — distinct from testing a genuine factor of scientific interest; a BLOCKING variable is included to control noise, not because its own effect is the research question.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "TWO-WAY-ANOVA-TREATED-AS-TESTING-ONE-COMBINED-HYPOTHESIS-RATHER-THAN-THREE-SEPARATE-EFFECTS",
+      "content": "| MC-1 | TWO-WAY-ANOVA-TREATED-AS-TESTING-ONE-COMBINED-HYPOTHESIS-RATHER-THAN-THREE-SEPARATE-EFFECTS | Treating two-way ANOVA as testing a single combined \"does anything matter\" hypothesis, rather than recognizing it decomposes into three separately-testable effects | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "SIGNIFICANT-INTERACTION-OVERLOOKED-WHILE-ONLY-MAIN-EFFECTS-ARE-REPORTED",
+      "content": "| MC-2 | SIGNIFICANT-INTERACTION-OVERLOOKED-WHILE-ONLY-MAIN-EFFECTS-ARE-REPORTED | Reporting and interpreting only the main effects while overlooking or downplaying a significant interaction that changes the correct interpretation | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "Two-Way ANOVA Tests Three Separate Hypotheses (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two-Way ANOVA Tests Three Separate Hypotheses (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "A Significant Interaction Can Mask or Complicate Main Effect Interpretation (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Significant Interaction Can Mask or Complicate Main Effect Interpretation (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "Blocking Controls Noise, Not a Genuine Research Factor (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Blocking Controls Noise, Not a Genuine Research Factor (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For a study on \"teaching method\" and \"class size\" affecting test scores, list the three hypotheses a two-way ANOVA would test.\n  2. Explain what a significant interaction between two factors means, in your own words.\n  3. Explain why interpreting only the main effects can be misleading when a significant interaction is present.\n  4. Explain the difference between a blocking factor and a genuine research-interest factor in an experimental design.\n- **P76 (Transfer Probe, mode = independence)**: \"A company tests whether a new employee training program (Factor A: trained vs. untrained) and work shift (Factor B: morning vs. evening) affect productivity, and finds a significant interaction — the training program boosts productivity substantially for morning-shift workers but has almost no effect for evening-shift workers. (a) Explain why simply reporting 'training has a significant main effect' (averaged across both shifts) would misrepresent this finding. (b) Explain what practical recommendation the company should make, given this specific interaction pattern, rather than a blanket 'roll out training to everyone' recommendation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.anova` (one-way ANOVA, the direct predecessor this concept extends).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.two-way-anova/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.two-way-anova",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.anova`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.anova`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.two-way-anova.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
