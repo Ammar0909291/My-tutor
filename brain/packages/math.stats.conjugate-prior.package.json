@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.conjugate-prior-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.conjugate-prior",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bb65e2ca677939d0408d202dcdef13ebc7418e6bdc7b09128faaa3f24e94c6e5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.conjugate-prior.md": "sha256:e808214714d2d93f337cd2ce1acd78d3bc2cfc7d6f409da72c094dab336ec808"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.conjugate-prior",
+    "name": "Conjugate Prior",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.stats.bayesian-inference"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.conjugate-prior-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.conjugate-prior (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.conjugate-prior.md": "sha256:e808214714d2d93f337cd2ce1acd78d3bc2cfc7d6f409da72c094dab336ec808"
+      },
+      "contentHash": "sha256:b5fcc173a92cddc1768db4c990a78f14854a6b0e767da147125ee9d67c919734",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.conjugate-prior.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.conjugate-prior.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.conjugate-prior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.conjugate-prior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.conjugate-prior.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.conjugate-prior.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.conjugate-prior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.conjugate-prior\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.conjugate-prior.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.conjugate-prior.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.conjugate-prior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.conjugate-prior\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.conjugate-prior.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.conjugate-prior.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.conjugate-prior"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.conjugate-prior\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.conjugate-prior/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a CONJUGATE PRIOR as a prior distribution FAMILY that is CLOSED under Bayesian updating — when the likelihood comes from the MATCHING conjugate family, the POSTERIOR has the SAME distributional FORM as the prior, just with UPDATED parameters.\n- LO2: Apply the classic Beta-Binomial conjugacy — a Beta$(\\alpha,\\beta)$ prior combined with a Binomial likelihood (observing $k$ successes in $n$ trials) produces a Beta$(\\alpha+k,\\beta+n-k)$ POSTERIOR — recognizing the UPDATE RULE (add successes to $\\alpha$, add failures to $\\beta$) rather than re-deriving the full posterior computation from scratch each time.\n- LO3: Recognize the PRACTICAL VALUE of conjugacy — it avoids needing to numerically integrate or approximate the posterior (which can be analytically INTRACTABLE for non-conjugate prior/likelihood pairs) — conjugate priors are chosen partly for MATHEMATICAL CONVENIENCE, not necessarily because they represent the \"most accurate\" possible prior belief.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "BETA-BINOMIAL-UPDATE-ADDS-TOTAL-TRIALS-INSTEAD-OF-FAILURES-TO-BETA",
+      "content": "| MC-1 | BETA-BINOMIAL-UPDATE-ADDS-TOTAL-TRIALS-INSTEAD-OF-FAILURES-TO-BETA | Adding the total number of trials n (rather than specifically the failures, n-k) to the β parameter when applying the Beta-Binomial conjugate update rule | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "CONJUGATE-PRIOR-SELECTION-FOR-CONVENIENCE-VIEWED-AS-METHODOLOGICALLY-ILLEGITIMATE",
+      "content": "| MC-2 | CONJUGATE-PRIOR-SELECTION-FOR-CONVENIENCE-VIEWED-AS-METHODOLOGICALLY-ILLEGITIMATE | Viewing the choice of a conjugate prior for computational convenience as methodologically invalid or \"cheating,\" rather than a legitimate, well-established practical tradeoff | Minor |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Beta-Binomial Update: Add Successes to α, Failures (Not Total Trials) to β (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Beta-Binomial Update: Add Successes to α, Failures (Not Total Trials) to β (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Same Family, Updated Parameters — What \"Conjugate\" Means (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Same Family, Updated Parameters — What \\\"Conjugate\\\" Means (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Conjugacy Is a Legitimate Computational Convenience Tradeoff (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Conjugacy Is a Legitimate Computational Convenience Tradeoff (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For a Beta$(1,1)$ prior and 4 successes out of 6 trials, find the posterior.\n  2. For a Beta$(5,2)$ prior and 3 successes out of 8 trials, find the posterior.\n  3. Explain, in one sentence, what it means for a prior/likelihood pair to be \"conjugate.\"\n  4. Explain why conjugate priors are practically valuable, connecting to the alternative of numerical integration for non-conjugate cases.\n- **P76 (Transfer Probe, mode = independence)**: \"An A/B testing platform continuously updates its belief about a website variant's true conversion rate as new visitor data streams in throughout the day, using a Beta prior updated with each new batch of Binomial (success/failure) conversion data. (a) Explain why using a Beta-Binomial conjugate setup allows the platform to update its belief instantly with each new data batch, without complex recomputation. (b) If the prior starts as Beta(10,10) and the first day's data shows 45 conversions out of 100 visitors, find the updated posterior.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.bayesian-inference` — conjugate priors are a specific, computationally convenient technique within that general framework.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.conjugate-prior/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.conjugate-prior",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.bayesian-inference`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.bayesian-inference`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.conjugate-prior.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
