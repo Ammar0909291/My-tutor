@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.hasse-diagram-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.hasse-diagram",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:54580e8c95cd053b9f4cbd59fe8c8205d19cab60235e25ce723dd2d7cb20328c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.hasse-diagram.md": "sha256:21f85926824eb60fe0dd26588bed82704478d22d83e9384eabca6cf899b0f06d"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.hasse-diagram",
+    "name": "Hasse Diagram",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.partial-order"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.hasse-diagram-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.hasse-diagram (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.hasse-diagram.md": "sha256:21f85926824eb60fe0dd26588bed82704478d22d83e9384eabca6cf899b0f06d"
+      },
+      "contentHash": "sha256:ce9447fbde45c769b872727ddb1d5a40c1e309b39964ebfdd65700a3f9dcee77",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.hasse-diagram.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.hasse-diagram.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.hasse-diagram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.hasse-diagram\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.hasse-diagram.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.hasse-diagram.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.hasse-diagram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.hasse-diagram\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.hasse-diagram.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.hasse-diagram.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.hasse-diagram"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.hasse-diagram\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.hasse-diagram/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "Learning Objectives",
+      "content": "- LO1: Draw a Hasse diagram for a given finite partially ordered set, showing ONLY immediate (covering) relationships, with higher elements drawn above lower ones and no arrowheads or self-loops.\n- LO2: Read a Hasse diagram to determine whether one element is $\\le$ another, by tracing upward paths (not just direct edges).\n- LO3: Explain why transitive and reflexive edges are OMITTED from a Hasse diagram even though the partial order itself still holds them.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "ORDER-RELATION-READ-ONLY-FROM-DIRECT-EDGES",
+      "content": "| MC-1 | ORDER-RELATION-READ-ONLY-FROM-DIRECT-EDGES | Determining $a\\le b$ only by checking for a direct edge, missing indirect relationships established via a longer upward path | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "NON-COVERING-EDGE-DRAWN-REDUNDANTLY",
+      "content": "| MC-2 | NON-COVERING-EDGE-DRAWN-REDUNDANTLY | Drawing a direct edge for a relationship already implied by a shorter path (e.g. drawing $1$-$6$ in addition to $1$-$2$-$6$), missing that only COVERING relationships should be drawn | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "INCOMPARABLE-ELEMENTS-ASSUMED-RELATED",
+      "content": "| MC-3 | INCOMPARABLE-ELEMENTS-ASSUMED-RELATED | Assuming any two elements in the diagram must be comparable (one $\\le$ the other), missing that a PARTIAL order permits pairs with no path connecting them either way | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "Draw Only Covering (Immediate) Relationships (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Draw Only Covering (Immediate) Relationships (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "Trace Upward Paths, Not Just Direct Edges (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Trace Upward Paths, Not Just Direct Edges (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Draw the Hasse diagram for the divisibility order on $\\{1,2,4,8\\}$.\n  2. Draw the Hasse diagram for the subset order ($\\subseteq$) on the power set of $\\{a,b\\}$: $\\{\\emptyset,\\{a\\},\\{b\\},\\{a,b\\}\\}$.\n  3. Given a Hasse diagram for the divisibility order on $\\{1,2,3,4,6,12\\}$, determine whether $2\\le12$ by tracing a path (not requiring a direct edge).\n  4. Explain why a Hasse diagram for the divisibility order on $\\{1,2,3,4,6,12\\}$ would NOT include a direct edge between 1 and 12, even though $1$ divides $12$.\n- **P76 (Transfer Probe, mode = independence)**: \"A company's organizational reporting structure has a 'reports to' relationship: Analyst reports to Manager, Manager reports to Director, Director reports to VP. (a) Draw (describe in words if needed) a Hasse-diagram-style picture of this hierarchy, connecting only DIRECT (immediate) reporting relationships. (b) Using the diagram, determine whether Analyst 'reports up to' VP (even indirectly, through the chain), and explain why no direct Analyst-VP edge is needed to establish this, connecting your reasoning to the path-tracing rule from this lesson.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.partial-order` ($\\le$, reflexive/antisymmetric/transitive) — a Hasse diagram is a visual shorthand for exactly this structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.hasse-diagram/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.hasse-diagram",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.partial-order`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-link**: KG lists `math.graph.graph` as a cross-link. Verified via directory listing that no blueprint yet exists at `docs/curriculum/blueprints/math.graph.graph.md`. Per the established P76_mode rule, this blueprint uses **independence** mode. A future revision may add a genuine cross-link probe connecting Hasse diagrams' directed-edge structure directly to general graph theory once that concept is authored.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.hasse-diagram.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

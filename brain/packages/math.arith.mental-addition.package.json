@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.mental-addition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.mental-addition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e47da395185ffe4354d8bbf2f760e133801f71a17e0830beb7718607a4ba09ad",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.mental-addition.md": "sha256:9b49c9c3451790a7c6f5877be5397595315b083bb276a33bc2e606266cb480b6"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.mental-addition",
+    "name": "Mental Addition",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.arith.addition"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.mental-addition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.mental-addition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.mental-addition.md": "sha256:9b49c9c3451790a7c6f5877be5397595315b083bb276a33bc2e606266cb480b6"
+      },
+      "contentHash": "sha256:486b6c210d0c5bd7603ed455248feb3cdc6a8fcb36c3dccbea2f9d162ba07e59",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-addition.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-addition.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-addition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-addition.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-addition.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-addition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-addition.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-addition.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-addition\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.mental-addition/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.mental-addition",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the **\"making tens\"** strategy — decompose one addend to complete the other to the nearest ten, then add the remainder.\n- LO2: Apply **decomposition** — split numbers into place-value parts (tens and ones), add like parts separately, then recombine.\n- LO3: Select the mental strategy best suited to a given pair of addends (e.g. making tens works cleanly when one addend is close to a multiple of ten; decomposition works well for two multi-digit numbers with no near-ten shortcut).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-addition",
+      "title": "DECOMPOSED-PARTIAL-SUMS-CONCATENATED-NOT-ADDED",
+      "content": "| MC-1 | DECOMPOSED-PARTIAL-SUMS-CONCATENATED-NOT-ADDED | Placing decomposition's tens-sum and ones-sum side by side as digits (e.g. \"5015\") instead of genuinely adding them together | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-addition",
+      "title": "MAKING-TENS-AMOUNT-BORROWED-INCORRECTLY",
+      "content": "| MC-2 | MAKING-TENS-AMOUNT-BORROWED-INCORRECTLY | Miscalculating how much to move from one addend to complete the other to ten (e.g. taking the wrong amount, or taking it from the wrong addend) | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-addition",
+      "title": "ONES-SUM-CARRY-DROPPED-DURING-DECOMPOSITION",
+      "content": "| MC-3 | ONES-SUM-CARRY-DROPPED-DURING-DECOMPOSITION | When the ones-place partial sum itself exceeds 9 (e.g. $34+27$'s $4+7=11$), failing to carry that extra ten into the tens total during recombination | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-addition",
+      "title": "Making Tens: Borrow to Complete the Nearest Ten (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Making Tens: Borrow to Complete the Nearest Ten (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-addition",
+      "title": "Decomposition: Add Tens, Add Ones, Then Combine Correctly (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Decomposition: Add Tens, Add Ones, Then Combine Correctly (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-addition",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mental-addition",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Add $7+8$ mentally using making tens, narrating each step.\n  2. Add $56+29$ mentally using decomposition, showing the tens-sum and ones-sum before the final combination.\n  3. Add $19+6$ mentally, selecting and justifying whichever strategy (making tens or decomposition) is more efficient here.\n  4. Add $34+27$ mentally using decomposition, being careful the ones-sum ($4+7=11$) itself requires a small carry into the tens total.\n- **P76 (Transfer Probe, mode = independence)**: \"While shopping without a calculator, a customer mentally adds the cost of three items: \\$8, \\$17, and \\$23. (a) Choose and apply an efficient mental strategy (making tens and/or decomposition) to find the total, narrating your reasoning. (b) Explain why adding \\$8 and \\$17 by 'making tens' first (rather than starting with \\$17 and \\$23) might be the smarter order to pick, connecting your answer to Example 3's strategy-selection idea.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.mental-addition",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.addition` (the operation itself) — mental addition supplies FASTER strategies for computing the same sums without the written column algorithm.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.mental-addition/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.mental-addition",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.addition`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared; conceptually parallel to `math.arith.carrying`'s regrouping logic, applied mentally rather than in written columns.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-addition.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

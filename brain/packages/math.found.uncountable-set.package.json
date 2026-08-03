@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.uncountable-set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.uncountable-set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:65ad3ab758bf4a25f1a10d4704f6ee5c4e05e4181aee19a9f5c9391b2b613193",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.uncountable-set.md": "sha256:2ae7878c0fce2772324ea08ef4b01e832dc8dc5dd8a756d85e3df394cd6a8962"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.uncountable-set",
+    "name": "Uncountable Set",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.countable-set"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.uncountable-set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.uncountable-set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.uncountable-set.md": "sha256:2ae7878c0fce2772324ea08ef4b01e832dc8dc5dd8a756d85e3df394cd6a8962"
+      },
+      "contentHash": "sha256:0927235f358ef118471c5d302767b5a569339ce3feaffbf175699136d3a57c8f",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.uncountable-set.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.uncountable-set.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.uncountable-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.uncountable-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.uncountable-set.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.uncountable-set.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.uncountable-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.uncountable-set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.uncountable-set.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.uncountable-set.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.uncountable-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.uncountable-set\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.uncountable-set/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.uncountable-set",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define an **uncountable set** as one with cardinality STRICTLY GREATER than $\\mathbb{N}$'s — no bijection with $\\mathbb{N}$ can exist, no matter how it's constructed.\n- LO2: Reproduce Cantor's diagonal argument to show $\\mathbb{R}$ (or the interval $(0,1)$) is uncountable, by assuming a complete enumeration exists and constructing a number provably missing from it.\n- LO3: Distinguish \"no enumeration has been FOUND yet\" from \"provably NO enumeration can exist\" — uncountability is a genuine impossibility proof, not merely a difficulty.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.uncountable-set",
+      "title": "UNCOUNTABILITY-TREATED-AS-UNSOLVED-SEARCH-PROBLEM",
+      "content": "| MC-1 | UNCOUNTABILITY-TREATED-AS-UNSOLVED-SEARCH-PROBLEM | Believing a cleverer enumeration scheme might eventually be found for $\\mathbb{R}$, rather than recognizing the diagonal argument proves NO enumeration can ever exist | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.uncountable-set",
+      "title": "DIAGONAL-ARGUMENT-MISAPPLIED-TO-A-FINITE-OR-INCOMPLETE-LIST",
+      "content": "| MC-2 | DIAGONAL-ARGUMENT-MISAPPLIED-TO-A-FINITE-OR-INCOMPLETE-LIST | Constructing a \"diagonal number\" against a list that is not actually claimed to be complete, missing that the argument's force comes specifically from contradicting an assumed COMPLETE enumeration | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.uncountable-set",
+      "title": "ALL-INFINITE-SETS-ASSUMED-SAME-SIZE",
+      "content": "| MC-3 | ALL-INFINITE-SETS-ASSUMED-SAME-SIZE | Believing all infinite sets have the \"same\" size simply because they are all infinite, missing that $|\\mathbb{R}|>|\\mathbb{N}|$ demonstrates genuinely different infinite cardinalities | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.uncountable-set",
+      "title": "Construct the Diagonal Number Explicitly (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Construct the Diagonal Number Explicitly (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.uncountable-set",
+      "title": "Provable Impossibility vs. Not-Yet-Found (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Provable Impossibility vs. Not-Yet-Found (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.uncountable-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.uncountable-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given a (short, 4-number) hypothetical enumeration of numbers in $(0,1)$, construct the diagonal number $y$ explicitly and verify it differs from all 4 listed numbers.\n  2. Explain, in one paragraph, why the diagonal argument constitutes a proof by contradiction, identifying the assumed statement and the derived impossibility.\n  3. State whether $|\\mathbb{R}|=|\\mathbb{N}|$, $|\\mathbb{R}|<|\\mathbb{N}|$, or $|\\mathbb{R}|>|\\mathbb{N}|$, and justify using Cantor's argument.\n  4. Explain why finding a bijection between $\\mathbb{Z}$ and $\\mathbb{N}$ was possible (per `math.found.countable-set`) while no such bijection can EVER be found between $\\mathbb{R}$ and $\\mathbb{N}$ — connect to what specifically differs about the two situations.\n- **P76 (Transfer Probe, mode = independence)**: \"A student claims: 'if we had infinite time and infinite computing power, we could eventually list every real number in $(0,1)$, one at a time, just like listing the rationals.' (a) Explain, using the diagonal argument's logic, why this claim is false regardless of how much time or computational power is available — the issue is not practical difficulty. (b) Describe, in your own words, what the diagonal construction guarantees about ANY proposed list, however it is generated, and why this makes the impossibility a matter of pure logic rather than resources.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.uncountable-set",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.countable-set` (the direct contrast this concept establishes: a set that fails to be countable, PROVABLY, not just apparently).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.uncountable-set/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.uncountable-set",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.countable-set`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.proof-by-contradiction` (the diagonal argument's logical structure is a direct instance of this technique, reused by reference rather than re-derived).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.uncountable-set.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

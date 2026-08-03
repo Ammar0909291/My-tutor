@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.finite-set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.finite-set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:442365d39e8c186d87dc91f58579f4ae3d2cae31e5549e82722109a4ef6dfddf",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.finite-set.md": "sha256:44a5664e9b1d89b814cff52e158913424cfd3ca1655fb347155b788f06b49c4b"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.finite-set",
+    "name": "Finite Set",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.cardinality"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.finite-set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.finite-set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.finite-set.md": "sha256:44a5664e9b1d89b814cff52e158913424cfd3ca1655fb347155b788f06b49c4b"
+      },
+      "contentHash": "sha256:0aa92ae00ac27076e7c7cb9065f0de443b4d34ec2312308e4ee92ff81bf62975",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.finite-set.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.finite-set.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.finite-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.finite-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.finite-set.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.finite-set.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.finite-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.finite-set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.finite-set.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.finite-set.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.finite-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.finite-set\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.finite-set/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.finite-set",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **finite set** as one whose elements can be counted with a natural number $n$, equivalently one in bijection with $\\{1,2,\\ldots,n\\}$.\n- LO2: Determine whether a given set (described explicitly, by a formula, or by a bounding condition) is finite, and if so, state its exact size $n$.\n- LO3: Recognize that $\\emptyset$ is finite (with $n=0$), and that a finite set's size $n$ is always a well-defined, unique natural number.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.finite-set",
+      "title": "EMPTY-SET-TREATED-AS-NEITHER-FINITE-NOR-INFINITE",
+      "content": "| MC-1 | EMPTY-SET-TREATED-AS-NEITHER-FINITE-NOR-INFINITE | Believing $\\emptyset$ falls outside the finite/infinite classification rather than recognizing it as finite with size 0 | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.finite-set",
+      "title": "CONDITION-DEFINED-SET-ASSUMED-INFINITE-BY-DEFAULT",
+      "content": "| MC-2 | CONDITION-DEFINED-SET-ASSUMED-INFINITE-BY-DEFAULT | Assuming any set described by an algebraic condition (rather than an explicit list) must be infinite, without checking whether the condition actually bounds it | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.finite-set",
+      "title": "Finiteness via Bijection to {1,...,n} (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Finiteness via Bijection to {1,...,n} (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.finite-set",
+      "title": "A Condition-Defined Set Can Still Be Finite (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"A Condition-Defined Set Can Still Be Finite (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.finite-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.finite-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. State $|A|$ for $A=\\{$days of the week$\\}$, and describe the bijection to $\\{1,\\ldots,7\\}$.\n  2. Determine whether $\\{n\\in\\mathbb{N} : n^2<100\\}$ is finite, and if so, state its exact size.\n  3. State whether $\\{\\emptyset\\}$ (the set containing the empty set as its one element) is finite, and give its size (distinguishing this from $\\emptyset$ itself, per `math.found.empty-set`).\n  4. Explain why $\\{n\\in\\mathbb{Z} : n>5\\}$ is NOT finite, describing what goes wrong when attempting to bound it with any single $n$.\n- **P76 (Transfer Probe, mode = independence)**: \"A librarian is cataloging 'all books in the library published before the year 1500.' (a) Explain, using this lesson's definition, why this set is finite even without knowing its exact size in advance — what property of the defining condition (publication before a fixed year, from a physical, bounded collection) guarantees finiteness. (b) Contrast this with 'all possible titles a book published before 1500 COULD have had' — explain why this second set, despite sounding similarly bounded by the same year condition, is not actually finite, connecting your reasoning to what makes a condition genuinely bound a set's size.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.finite-set",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.cardinality` (the general notion of \"size\" for a set) — finiteness is the property that makes cardinality directly countable by an ordinary natural number.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.finite-set/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.finite-set",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.cardinality`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.countable-set` (the next concept in this domain wave, which builds on the finite/infinite distinction established here), `math.found.empty-set` (P77 item 3 directly reuses its $\\emptyset$ vs. $\\{\\emptyset\\}$ distinction).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.finite-set.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

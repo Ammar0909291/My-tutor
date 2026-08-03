@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.countable-set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.countable-set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:737f0e5a32b9a44d646d3d720e668bb08e62dd46a3492b54a83f0a0af730dfe2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.countable-set.md": "sha256:46f78c9bac58f19064c081a0ea062f9787ea8a92def888c3bdd49901ef597108"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.countable-set",
+    "name": "Countable Set",
+    "difficultyRaw": "developing",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.cardinality",
+      "math.found.natural-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.countable-set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.countable-set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.countable-set.md": "sha256:46f78c9bac58f19064c081a0ea062f9787ea8a92def888c3bdd49901ef597108"
+      },
+      "contentHash": "sha256:1da14bbc97bcec7ca48e7e60863b6de0f204712d9013904ff977e1909b9a37bc",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.countable-set.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.countable-set.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.countable-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.countable-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.countable-set.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.countable-set.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.countable-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.countable-set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.countable-set.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.countable-set.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.countable-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.countable-set\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.countable-set/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.countable-set",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define a **countable set** as one that is either finite or in bijection with $\\mathbb{N}$, and define **countably infinite** as the specific case of infinite-but-countable.\n- LO2: Construct (or describe) an explicit bijection or enumeration scheme showing a given infinite set is countable, even when the set appears \"larger\" than $\\mathbb{N}$ at first glance (e.g. $\\mathbb{Z}$).\n- LO3: Recognize that countability is NOT about a set's apparent \"size\" or whether it contains $\\mathbb{N}$ as a subset, but strictly about the existence of a bijection.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.countable-set",
+      "title": "PROPER-SUPERSET-ASSUMED-STRICTLY-LARGER-FOR-INFINITE-SETS",
+      "content": "| MC-1 | PROPER-SUPERSET-ASSUMED-STRICTLY-LARGER-FOR-INFINITE-SETS | Applying the finite-set intuition \"a proper superset is strictly bigger\" to infinite sets, where a proper superset can have the exact same cardinality | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.countable-set",
+      "title": "DENSITY-CONFUSED-WITH-UNCOUNTABILITY",
+      "content": "| MC-2 | DENSITY-CONFUSED-WITH-UNCOUNTABILITY | Assuming a \"dense\" set (like $\\mathbb{Q}$, with no gaps between elements) must be uncountable, missing that density and countability are unrelated properties | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.countable-set",
+      "title": "ENUMERATION-SCHEME-ASSUMED-TO-REQUIRE-NATURAL-ORDER",
+      "content": "| MC-3 | ENUMERATION-SCHEME-ASSUMED-TO-REQUIRE-NATURAL-ORDER | Believing an enumeration must list elements in their natural numeric order (e.g. $\\mathbb{Z}$ must be listed $\\ldots,-2,-1,0,1,2,\\ldots$), missing that ANY order achieving a bijection with $\\mathbb{N}$ suffices | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.countable-set",
+      "title": "Construct an Explicit Enumeration (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Construct an Explicit Enumeration (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.countable-set",
+      "title": "Density Does Not Prevent Countability (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Density Does Not Prevent Countability (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.countable-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.countable-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Describe an explicit bijection (enumeration) between $\\mathbb{N}$ and the set of even natural numbers $\\{0,2,4,6,\\ldots\\}$, and explain why this shows the even numbers are countable despite being a proper subset of $\\mathbb{N}$.\n  2. State whether the union of two countable sets is always countable (yes), and sketch, in general terms, why an interleaving enumeration scheme (alternating between the two sets' own enumerations) would work.\n  3. Explain, in one paragraph, why \"a set is countable\" does not mean \"a set is small\" — connect to Example 3's broken intuition.\n  4. Given that $\\mathbb{N}$ and $\\mathbb{Z}$ are both countably infinite, state whether they therefore have the SAME cardinality, and justify using the bijection definition.\n- **P76 (Transfer Probe, mode = independence)**: \"A hotel has infinitely many rooms, numbered $1,2,3,\\ldots$, all currently full (this is the classical 'Hilbert's Hotel' scenario). (a) A new guest arrives. Using an enumeration-shifting idea analogous to this lesson's bijection constructions, describe how the hotel could accommodate the new guest without evicting anyone, by having every existing guest move to a new room. (b) Explain why this is only possible because the hotel's room set is COUNTABLY infinite (in bijection with $\\mathbb{N}$) — connect your answer to why the same trick could not obviously work for an uncountable set of rooms (you do not need to have studied uncountability formally yet — simply state, informally, why a genuine bijection-based reshuffling needs the countable structure).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.countable-set",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.cardinality` and `math.found.natural-numbers` ($\\mathbb{N}$, the benchmark set countability is measured against).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.countable-set/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.countable-set",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.cardinality`, `math.found.natural-numbers`.\n- **Unlocks**: `math.found.uncountable-set` (the direct complement — a set that is provably NOT countable, established by contrast against this concept's positive constructions).\n- **Related**: `math.found.finite-set` (countability's finite case).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.countable-set.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

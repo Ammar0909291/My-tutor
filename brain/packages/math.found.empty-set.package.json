@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.empty-set-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.empty-set",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ed7f8e010d8eed4358b9f75802a85644a17f7fe4d161419fcc476884bada1ac3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.empty-set.md": "sha256:d93a969448d951f47fc520b5b6f0bd378b3478fc0e9a568fa60dd7ecfa542239"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.empty-set",
+    "name": "Empty Set",
+    "difficultyRaw": "foundational",
+    "bloom": "remember",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.set"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.empty-set-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.empty-set (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.empty-set.md": "sha256:d93a969448d951f47fc520b5b6f0bd378b3478fc0e9a568fa60dd7ecfa542239"
+      },
+      "contentHash": "sha256:406077a8848481d1dc4d040a9af6d6f3cf6883777fcc7570d19e2d42555f041e",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.empty-set.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.empty-set.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.empty-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.empty-set\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.empty-set.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.empty-set.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.empty-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.empty-set\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.empty-set.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.empty-set.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.empty-set"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.empty-set\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.empty-set/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.empty-set",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the empty set $\\emptyset$ as the unique set containing no elements, and recognize both notations $\\emptyset$ and $\\{\\}$.\n- LO2: Prove (or state the standard argument for) why $\\emptyset\\subseteq A$ for EVERY set $A$, including $A=\\emptyset$ itself.\n- LO3: Distinguish $\\emptyset$ (a set with zero elements) from $\\{\\emptyset\\}$ (a set with ONE element, that element being the empty set itself).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.empty-set",
+      "title": "SUBSET-PROOF-EXPECTED-TO-CHECK-ELEMENTS",
+      "content": "| MC-1 | SUBSET-PROOF-EXPECTED-TO-CHECK-ELEMENTS | Expecting to verify $\\emptyset\\subseteq A$ by exhibiting or checking specific elements, rather than recognizing the argument is vacuously true since $\\emptyset$ has none | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.empty-set",
+      "title": "EMPTY-SET-CONFUSED-WITH-SET-CONTAINING-EMPTY-SET",
+      "content": "| MC-2 | EMPTY-SET-CONFUSED-WITH-SET-CONTAINING-EMPTY-SET | Treating $\\emptyset$ and $\\{\\emptyset\\}$ as the same object, missing that the latter has exactly one element | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.empty-set",
+      "title": "EMPTY-SET-TREATED-AS-UNDEFINED-OR-ERROR",
+      "content": "| MC-3 | EMPTY-SET-TREATED-AS-UNDEFINED-OR-ERROR | Treating a computation that yields $\\emptyset$ (e.g. an intersection of disjoint sets) as an error or \"no answer\" rather than a valid, ordinary result | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.empty-set",
+      "title": "The Empty Set as a Genuine, Ordinary Result (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Empty Set as a Genuine, Ordinary Result (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.empty-set",
+      "title": "$\\emptyset$ vs. $\\{\\emptyset\\}$: Zero Elements vs. One Element (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$\\\\emptyset$ vs. $\\\\{\\\\emptyset\\\\}$: Zero Elements vs. One Element (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.empty-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.empty-set",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.95×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $A\\cap B$ for $A=\\{2,4,6\\}$, $B=\\{1,3,5\\}$, and state whether the result is $\\emptyset$ or undefined.\n  2. State whether $\\emptyset\\subseteq\\emptyset$ is true, and justify using the vacuous-truth argument.\n  3. Determine the number of elements in each of $\\emptyset$, $\\{\\emptyset\\}$, and $\\{\\emptyset,\\{\\emptyset\\}\\}$.\n  4. State whether $\\emptyset\\in\\{1,2,3\\}$ is true or false, and explain the type distinction involved (this asks about MEMBERSHIP of the empty set as an object, not about subset-hood).\n- **P76 (Transfer Probe, mode = independence)**: \"A database query for 'all customers who ordered a product that does not exist in the catalog' returns no rows. (a) Explain, using this lesson's concept, what mathematical object this empty result set corresponds to, and why receiving zero rows is a meaningful, correct answer rather than an error. (b) A second query asks for 'all customers whose order history is an empty list' and separately for 'all customers whose order history is a list containing exactly one empty order' — explain, connecting to the $\\emptyset$ vs. $\\{\\emptyset\\}$ distinction from this lesson, why these two queries are asking genuinely different questions.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.empty-set",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.set` (the general notion of a set as a collection of elements) — the empty set is the boundary case with zero elements.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.empty-set/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.empty-set",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.set`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.set` (this concept is the boundary/zero-element case of the general definition).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.empty-set.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

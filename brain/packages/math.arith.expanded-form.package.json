@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.expanded-form-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.expanded-form",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bdfd4fd7fb9a402aea6f66e39615a6c30501982881ec8f16603a3bb664f34b1d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.expanded-form.md": "sha256:69371626e07ad935bb136eaafbab146eea8cf119e49895d16f3f1435d192928c"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.expanded-form",
+    "name": "Expanded Form",
+    "difficultyRaw": "foundational",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.arith.place-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.expanded-form-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.expanded-form (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.expanded-form.md": "sha256:69371626e07ad935bb136eaafbab146eea8cf119e49895d16f3f1435d192928c"
+      },
+      "contentHash": "sha256:780967167c4bd6d7f784f41f0d1c8f8c76efa6cb41b2ef9b2c3b418d6decf1ac",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.expanded-form.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.expanded-form.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.expanded-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.expanded-form\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.expanded-form.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.expanded-form.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.expanded-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.expanded-form\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.expanded-form.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.expanded-form.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.expanded-form"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.expanded-form\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.expanded-form/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.expanded-form",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write any given multi-digit whole number in expanded form (sum of each digit times its place value).\n- LO2: Reconstruct the standard (compact) form of a number from its expanded form.\n- LO3: Correctly handle a zero digit in expanded form — recognizing it contributes nothing to the sum, without introducing a spurious \"0\" term or skipping the place value entirely.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.expanded-form",
+      "title": "ZERO-DIGIT-PLACE-VALUE-MISHANDLED",
+      "content": "| MC-1 | ZERO-DIGIT-PLACE-VALUE-MISHANDLED | Dropping a zero digit's place-value slot entirely (shifting subsequent digits) rather than correctly omitting only its zero-valued TERM while preserving place structure | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.expanded-form",
+      "title": "RECONSTRUCTION-ZERO-PLACEHOLDER-OMITTED",
+      "content": "| MC-2 | RECONSTRUCTION-ZERO-PLACEHOLDER-OMITTED | When reconstructing standard form from expanded form, failing to insert a \"0\" placeholder digit for a place value with no corresponding term | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.expanded-form",
+      "title": "Sum of Digit-Times-Place-Value (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Sum of Digit-Times-Place-Value (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.expanded-form",
+      "title": "Reconstructing from Expanded Form, Zeros as Placeholders (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Reconstructing from Expanded Form, Zeros as Placeholders (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.expanded-form",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.expanded-form",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Write $52{,}681$ in expanded form.\n  2. Reconstruct the standard form from $70{,}000+3{,}000+40+2$.\n  3. Write $10{,}206$ in expanded form, handling both zero digits correctly.\n  4. Reconstruct the standard form from $9{,}000+7$, correctly inserting placeholder zeros for the missing hundreds and tens places.\n- **P76 (Transfer Probe, mode = independence)**: \"A student is asked to add $3{,}040$ and $2{,}005$ using expanded form as an intermediate step. (a) Write both numbers in expanded form. (b) Add the corresponding place-value terms (thousands with thousands, hundreds with hundreds, etc.) to find the sum, being careful with the places where one or both numbers have a zero digit. (c) Reconstruct the final standard-form answer, inserting any needed placeholder zeros.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.expanded-form",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.place-value` (each digit's value depends on its position — expanded form is the explicit written-out version of exactly this idea).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.expanded-form/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.expanded-form",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.place-value`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.expanded-form.md",
+        "startLine": 82,
+        "endLine": 88
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

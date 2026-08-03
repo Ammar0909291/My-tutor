@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.proof-by-cases-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.proof-by-cases",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1a4522dddee2ee0a4660c2b9d30b1899b04b33e6de5771c148e981082cf46703",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.proof-by-cases.md": "sha256:7d9447e8b9af94e09ae7f28b923cc22e716ca669d708b489bb554f40b900dda5"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.proof-by-cases",
+    "name": "Proof by Cases",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.proof"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.proof-by-cases-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.proof-by-cases (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.proof-by-cases.md": "sha256:7d9447e8b9af94e09ae7f28b923cc22e716ca669d708b489bb554f40b900dda5"
+      },
+      "contentHash": "sha256:1709cb8cf158c5f8bf521ac6c85ca0b96c8f0e542bf4e500384eec8a8620ed95",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-cases.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-cases.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-cases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-cases\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-cases.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-cases.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-cases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-cases\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proof-by-cases.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proof-by-cases.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proof-by-cases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proof-by-cases\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.proof-by-cases/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "Learning Objectives",
+      "content": "- LO1: Partition a claim's possibility space into finitely many cases that are jointly EXHAUSTIVE (cover every possibility, no gaps) and prove the statement within each case separately.\n- LO2: Verify a proposed case split is genuinely exhaustive by checking no possibility is left uncovered — cases need not be mutually exclusive, but must jointly cover everything.\n- LO3: Choose a case split whose individual cases are each easier to handle directly than the undivided general claim.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "CASE-SPLIT-ACCEPTED-WITHOUT-EXHAUSTIVENESS-CHECK",
+      "content": "| MC-1 | CASE-SPLIT-ACCEPTED-WITHOUT-EXHAUSTIVENESS-CHECK | Proceeding to prove each listed case without verifying that every possibility genuinely falls into at least one case | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "OVERLAPPING-CASES-ASSUMED-INVALID",
+      "content": "| MC-2 | OVERLAPPING-CASES-ASSUMED-INVALID | Believing cases must be mutually exclusive (non-overlapping) for a proof by cases to be valid, when only joint exhaustiveness is actually required | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "BOUNDARY-VALUE-DROPPED-BETWEEN-CASES",
+      "content": "| MC-3 | BOUNDARY-VALUE-DROPPED-BETWEEN-CASES | Splitting a continuous or ordered range (e.g. \"$x>0$\" and \"$x<0$\") in a way that silently omits a boundary value (e.g. $x=0$) from both cases | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "Partition, Then Prove Each Case Directly (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Partition, Then Prove Each Case Directly (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "Overlap Is Fine; Gaps Are Not (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Overlap Is Fine; Gaps Are Not (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Prove by cases: \"for any integer $n$, $n^3-n$ is divisible by 3\" using $n\\equiv0,1,2\\pmod3$ as the case split (verify this split is exhaustive first).\n  2. Given a proposed 3-case split of \"for any real $x\\ne0$, $x^2>0$\" into \"$x>1$,\" \"$0<x<1$,\" \"$x<0$,\" identify the missing case (the boundary $x=1$ is covered by \"$x>1$\" if inclusive — check the exact boundary conventions stated) and correct the split if a genuine gap exists.\n  3. Prove by cases: \"for any two integers $a,b$, $\\max(a,b)+\\min(a,b)=a+b$,\" splitting on $a\\ge b$ vs. $a<b$.\n  4. Explain why a case split into \"$x$ is prime\" and \"$x$ is composite\" is NOT exhaustive over all positive integers, and name the missing case.\n- **P76 (Transfer Probe, mode = independence)**: \"A store's shipping-cost rule is described as: 'if the order weighs under 5 kg, shipping is \\$4; if the order weighs 5 kg or more, shipping is \\$4 plus \\$1 per additional kg over 5.' (a) Identify the two cases this rule splits into, and verify they are jointly exhaustive over all possible order weights $w\\ge0$ (check the boundary at exactly $w=5$ kg carefully). (b) A colleague proposes an alternative three-case split — 'under 5 kg,' 'exactly 5 kg,' 'over 5 kg' — and asks whether the extra case is necessary for exhaustiveness or merely redundant. Answer, connecting your reasoning to Example 3's overlap-is-fine principle.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.proof` (what a valid proof requires) — this concept structures a proof as several smaller direct sub-proofs, one per case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 27,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.proof-by-cases/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.proof-by-cases",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.proof`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.direct-proof` (each individual case within a proof-by-cases is itself typically a small direct proof, reusing that concept's machinery rather than a new proof architecture).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proof-by-cases.md",
+        "startLine": 85,
+        "endLine": 91
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

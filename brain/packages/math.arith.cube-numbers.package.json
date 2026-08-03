@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.cube-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.cube-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:014fbde592ed25dc69ddbe7e163356d367b21013b1dbca9c5c39b8ab564816ad",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.cube-numbers.md": "sha256:5c3097b24ac3768f26efee5d21178d90abef7eac13834ca10890579ce429f448"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.cube-numbers",
+    "name": "Cube Numbers",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.arith.exponentiation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.cube-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.cube-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.cube-numbers.md": "sha256:5c3097b24ac3768f26efee5d21178d90abef7eac13834ca10890579ce429f448"
+      },
+      "contentHash": "sha256:73eda586033a948b7aa376cdc541327d75cfd4c25f8e0a14d306dc8140ffe0bf",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.cube-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.cube-numbers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.cube-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.cube-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.cube-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.cube-numbers.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.cube-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.cube-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.cube-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.cube-numbers.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.cube-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.cube-numbers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.cube-numbers/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute $n^3$ for small integers $n$ (1 through 10) and recall these values fluently.\n- LO2: Recognize a given number as a perfect cube (or determine it is not) by checking against the known list or via cube-root estimation.\n- LO3: Connect cube numbers to their geometric meaning — the volume of a cube with integer side length $n$ — distinguishing this from square numbers' area meaning.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "PERFECT-CUBE-CONFUSED-WITH-PERFECT-SQUARE",
+      "content": "| MC-1 | PERFECT-CUBE-CONFUSED-WITH-PERFECT-SQUARE | Misidentifying whether a number is a perfect cube by conflating it with (the more familiar) perfect-square status | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "CUBING-COMPUTED-AS-MULTIPLYING-BY-THREE",
+      "content": "| MC-2 | CUBING-COMPUTED-AS-MULTIPLYING-BY-THREE | Computing $n^3$ as $n\\times3$ rather than $n\\times n\\times n$, confusing the exponent with a multiplicative factor | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "Physical Cube Arrays for Small Cube Numbers (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Physical Cube Arrays for Small Cube Numbers (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "Cube (Volume) vs. Square (Area): Different Meanings, Different Growth (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Cube (Volume) vs. Square (Area): Different Meanings, Different Growth (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $7^3$ and $9^3$ from recall or direct multiplication.\n  2. Determine whether $200$ is a perfect cube, identifying the two nearest cube numbers if not.\n  3. A cube-shaped box has side length $5$ cm; find its volume, showing the cubing computation explicitly.\n  4. Explain, in one sentence, why $4^3\\ne4\\times3$ (a common miscomputation), stating what $4^3$ actually means.\n- **P76 (Transfer Probe, mode = independence)**: \"A shipping company uses cube-shaped crates with side lengths of 2 ft, 4 ft, and 6 ft. (a) Compute the volume of each crate size. (b) A warehouse worker claims that doubling a crate's side length (e.g. from 2 ft to 4 ft) should double its volume — check this claim directly using your computed volumes, and explain, using the cubing relationship from this lesson, why volume actually scales by a factor of $2^3=8$, not 2, when the side length doubles.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.exponentiation` (what $n^3$ means as repeated multiplication) — this concept is the specific, frequently-used case of cubing, worth memorizing directly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.arith.cube-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.cube-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.exponentiation`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared; conceptually paired with square numbers (a related but distinct concept elsewhere in the domain).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.cube-numbers.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

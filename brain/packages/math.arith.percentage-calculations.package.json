@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.percentage-calculations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.percentage-calculations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0c83c338eecc7edf1c4044d13d5c638e9a3ccab4c73a3fd2589ddc09782d78b1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.percentage-calculations.md": "sha256:13e6d4ca447fe978b6dda7428c71886ef36fc0418767e24e83e46fe81543bc49"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.percentage-calculations",
+    "name": "Percentage Calculations",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.arith.percentages"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.percentage-calculations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.percentage-calculations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.percentage-calculations.md": "sha256:13e6d4ca447fe978b6dda7428c71886ef36fc0418767e24e83e46fe81543bc49"
+      },
+      "contentHash": "sha256:6404d893ea33209b54bb21d48527d2ac1667cdfc263aff72cd4f36ddcb11dbeb",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.percentage-calculations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.percentage-calculations.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.percentage-calculations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.percentage-calculations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.percentage-calculations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.percentage-calculations.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.percentage-calculations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.percentage-calculations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.percentage-calculations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.percentage-calculations.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.percentage-calculations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.percentage-calculations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.percentage-calculations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute a percentage OF a given quantity (e.g. \"what is 20% of 150?\").\n- LO2: Determine WHAT PERCENT one number is of another (e.g. \"30 is what percent of 120?\").\n- LO3: Find the WHOLE, given a part and the percent it represents (e.g. \"40 is 25% of what number?\").",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "PERCENT-CALCULATION-DIVISION-DIRECTION-REVERSED",
+      "content": "| MC-1 | PERCENT-CALCULATION-DIVISION-DIRECTION-REVERSED | When finding what percent one number is of another, dividing the whole by the part instead of the part by the whole | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "FIND-THE-WHOLE-COMPUTED-BY-MULTIPLYING-INSTEAD-OF-DIVIDING",
+      "content": "| MC-2 | FIND-THE-WHOLE-COMPUTED-BY-MULTIPLYING-INSTEAD-OF-DIVIDING | Using the \"find the part\" operation (multiply) when the problem actually asks to find the whole (requiring division) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "DISCOUNT-OR-INCREASE-PERCENT-APPLIED-TO-WRONG-BASE",
+      "content": "| MC-3 | DISCOUNT-OR-INCREASE-PERCENT-APPLIED-TO-WRONG-BASE | In a discount/markup scenario, applying the percent to the final amount instead of the recognizing the final amount already represents (100% − discount%) or (100% + markup%) of the original | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "Identify Which Quantity Is Missing (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Identify Which Quantity Is Missing (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "Finding the Whole Requires Division, Not Multiplication (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Finding the Whole Requires Division, Not Multiplication (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find 35% of 80.\n  2. 18 is what percent of 45?\n  3. 63 is 70% of what number?\n  4. Given a problem statement, identify which of the three quantities (part, percent, whole) is unknown, without yet solving.\n- **P76 (Transfer Probe, mode = independence)**: \"A store advertises that a jacket's sale price of \\$56 represents a 30% discount off the original price. (a) Identify which quantity (part, percent, whole) is unknown here — noting carefully that \\$56 is NOT 30% of the original price, but rather 70% of it (100% − 30% discount) — and compute the original price. (b) Explain, using this lesson's find-the-whole rule, why simply computing $56\\div0.30$ would give a WRONG answer to this particular problem, and what the correct setup should be instead.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.percentages` (percent as \"per hundred,\" and its equivalence to a fraction over 100 or a decimal) — this concept applies that representation to three distinct calculation types.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.percentage-calculations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.percentage-calculations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.percentages`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.percentage-calculations.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

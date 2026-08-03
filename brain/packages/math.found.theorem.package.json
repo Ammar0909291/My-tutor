@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a8eecd08e88a823f10a7ec8e36d53f94e5edfe91313b513fa88b4399330c27c3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.theorem.md": "sha256:a9b9dc397785cd6dd358d6609a1a539957653e17bef93c7953d34c3de5fd63c5"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.theorem",
+    "name": "Theorem",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.found.axiom",
+      "math.found.proof"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.theorem.md": "sha256:a9b9dc397785cd6dd358d6609a1a539957653e17bef93c7953d34c3de5fd63c5"
+      },
+      "contentHash": "sha256:7de2105c68f5f01dbc3ed236edf50d81697ee8d523ecd221c1320fedfb6ac987",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.theorem.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.theorem.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define \"theorem\" as a statement rigorously proved from axioms and/or previously established theorems, and distinguish it from an axiom (accepted without proof) and a conjecture (believed but not yet proved).\n- LO2: Trace a given theorem's justification chain back through the specific axioms and prior theorems it ultimately rests on.\n- LO3: Recognize that a theorem's TRUTH status is permanent once correctly proved — unlike a conjecture, a genuinely proved theorem cannot later be \"disproved\" (only a FLAWED proof can be retracted, in which case the statement reverts to conjecture status).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.theorem",
+      "title": "EVIDENCE-MISTAKEN-FOR-PROOF",
+      "content": "| MC-1 | EVIDENCE-MISTAKEN-FOR-PROOF | Believing strong numerical evidence, wide belief, or an unproven-but-plausible pattern is sufficient to call a statement a theorem | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.theorem",
+      "title": "THEOREM-ASSUMED-DISPROVABLE-BY-LATER-EVIDENCE",
+      "content": "| MC-2 | THEOREM-ASSUMED-DISPROVABLE-BY-LATER-EVIDENCE | Believing a genuinely proved theorem could later be shown false by new evidence, analogous to empirical scientific laws | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.theorem",
+      "title": "THEOREM-CHAIN-TRACED-ONLY-ONE-STEP",
+      "content": "| MC-3 | THEOREM-CHAIN-TRACED-ONLY-ONE-STEP | Stopping the justification-chain trace at the first cited prior result, without recognizing that result itself traces further back to axioms | Minor |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.theorem",
+      "title": "The Hierarchy: Axiom → Theorem, and Tracing the Chain (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Hierarchy: Axiom → Theorem, and Tracing the Chain (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.theorem",
+      "title": "Evidence Is Not Proof (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Evidence Is Not Proof (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.theorem/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given a short statement and its proof outline, identify which lines are justified by axioms and which by previously established theorems.\n  2. Explain, in one paragraph, why \"the Collatz Conjecture has been verified for all starting values up to $2^{68}$\" does NOT make it a theorem.\n  3. Describe what happens to a statement's status if a published proof of it is later found to contain an unjustified step — does the statement become false, unproved, or unchanged?\n  4. State whether every true mathematical statement must eventually be provable as a theorem, or whether this is itself an open question (connect to Gödel's incompleteness at a conceptual, non-technical level if the student has prior exposure — otherwise, accept \"not all true statements are known to be provable\" as sufficient).\n- **P76 (Transfer Probe, mode = independence)**: \"A student announces, 'I've checked this formula for the first 10,000 positive integers and it always works, so it's now a theorem.' (a) Explain precisely what is wrong with this claim, using the theorem/conjecture distinction from this lesson. (b) Describe what ADDITIONAL kind of argument (not just more numerical checking) would actually be needed to promote the claim to theorem status, referencing the axiom-and-prior-theorem chain from Example 1.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.axiom` (statements accepted without proof) and `math.found.proof` (the rigor standard a theorem must meet) — a theorem is precisely a statement that has cleared that standard, resting ultimately on axioms.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.axiom`, `math.found.proof`.\n- **Unlocks**: `math.found.lemma` (a theorem used as a stepping-stone within a larger proof), `math.found.corollary` (a near-immediate consequence of a theorem).\n- **Related**: `math.found.conjecture` (the not-yet-proved counterpart this concept is directly contrasted against).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.theorem.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

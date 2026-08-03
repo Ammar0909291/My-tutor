@@ -1,0 +1,263 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.irrational-roots-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.irrational-roots",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ca383fb2c40539fe1747b74196890478c26f35fc31d030c2e904fc077d018ad3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.irrational-roots.md": "sha256:846f3a489ee292f3499775407086896b50cd296ec0984da6b57d82548816fb54"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.irrational-roots",
+    "name": "Irrational Roots",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.square-roots",
+      "math.found.irrational-numbers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.irrational-roots-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.irrational-roots (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.irrational-roots.md": "sha256:846f3a489ee292f3499775407086896b50cd296ec0984da6b57d82548816fb54"
+      },
+      "contentHash": "sha256:cb03d31f09ee59aa53bd9d2cddfb2ea86c77549243e0bae115d034c62e4fd579",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.irrational-roots.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.irrational-roots.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.irrational-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.irrational-roots\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.irrational-roots.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.irrational-roots.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.irrational-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.irrational-roots\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.irrational-roots.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.irrational-roots.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.irrational-roots"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.irrational-roots\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.irrational-roots/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "Learning Objectives",
+      "content": "- LO1: Determine whether the square root of a given positive integer is rational (a perfect square) or irrational (not a perfect square).\n- LO2: Estimate the approximate value of an irrational square root by locating it between two consecutive perfect squares' roots.\n- LO3: Explain, at a conceptual level, WHY the square root of a non-perfect-square integer is irrational, citing the uniqueness of prime factorization (an integer's square has every prime factor appearing an EVEN number of times).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "SQUARE-ROOT-ESTIMATED-BY-LINEAR-MIDPOINT-INTERPOLATION",
+      "content": "| MC-1 | SQUARE-ROOT-ESTIMATED-BY-LINEAR-MIDPOINT-INTERPOLATION | Assuming a square root's value lies at the linear midpoint between two bounding perfect-square roots, ignoring the curve's actual concave shape | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "IRRATIONALITY-CLASSIFICATION-ACCEPTED-WITHOUT-UNDERSTANDING-WHY",
+      "content": "| MC-2 | IRRATIONALITY-CLASSIFICATION-ACCEPTED-WITHOUT-UNDERSTANDING-WHY | Correctly classifying a root as irrational (via the \"not a perfect square\" rule) without being able to explain the underlying prime-factorization parity reason | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "Locate Between Consecutive Perfect Squares (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Locate Between Consecutive Perfect Squares (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "The Prime-Factorization Parity Argument (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Prime-Factorization Parity Argument (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Classify $\\sqrt{81}$ and $\\sqrt{90}$ as rational or irrational, justifying each.\n  2. Estimate $\\sqrt{20}$ by locating it between two consecutive perfect-square roots, and state whether it is closer to the lower or upper bound.\n  3. Explain, using the prime-factorization parity argument, why $\\sqrt{12}$ is irrational.\n  4. Given that $\\sqrt2$'s irrationality was proved in `math.found.proof-by-contradiction`, explain how this concept's general parity argument for $\\sqrt n$ specializes to reproduce that exact same proof when $n=2$.\n- **P76 (Transfer Probe, mode = independence)**: \"A carpenter needs to cut a diagonal brace for a square frame with side length 10 (the diagonal length is $\\sqrt{200}$ by the Pythagorean relationship, taken as given here). (a) Determine whether $\\sqrt{200}$ is rational or irrational, and estimate its approximate value by locating it between two consecutive perfect squares. (b) Explain to the carpenter, in plain terms grounded in this lesson's parity argument, why no EXACT fraction-of-an-inch measurement will ever perfectly capture this diagonal length, no matter how finely measured.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.square-roots` (what a square root represents) and `math.found.irrational-numbers` (numbers that cannot be expressed as a ratio of integers) — this concept identifies WHICH square roots fall into that category and why.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.arith.irrational-roots/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.irrational-roots",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.square-roots`, `math.found.irrational-numbers`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.proof-by-contradiction` (the specific $\\sqrt2$ case this concept's general argument directly generalizes, reused by reference rather than re-derived from scratch).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.irrational-roots.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

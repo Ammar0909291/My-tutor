@@ -1,0 +1,261 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.estimation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.estimation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:dc67b2e6e2d22c4818199f8848f0d27222fa8740712360ddc832ae451d0afa2e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.estimation.md": "sha256:1c43c9d1f68583b2dadf5d351be2a8f5141e18f1feed89a108c981fb5f38c761"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.estimation",
+    "name": "Estimation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.arith.rounding"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.estimation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.estimation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.estimation.md": "sha256:1c43c9d1f68583b2dadf5d351be2a8f5141e18f1feed89a108c981fb5f38c761"
+      },
+      "contentHash": "sha256:802021db4629a40a0a7c165369776f74bdfa5ed11be5c6e1e30e1c119bacd239",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.estimation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.estimation.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.estimation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.estimation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.estimation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.estimation.md#TA-A02 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.estimation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.estimation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.estimation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.estimation.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.estimation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.estimation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.estimation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.estimation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Estimate the result of a calculation by rounding each number to a convenient place value before computing.\n- LO2: Use an estimate to check whether an EXACT computed answer is reasonable, catching gross errors (e.g. a misplaced decimal point or a dropped digit).\n- LO3: Choose a rounding precision appropriate to the situation — overly coarse rounding can make an estimate uselessly imprecise, while overly fine rounding defeats the purpose of quick estimation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.estimation",
+      "title": "ESTIMATION-SKIPPED-AS-A-REASONABLENESS-CHECK",
+      "content": "| MC-1 | ESTIMATION-SKIPPED-AS-A-REASONABLENESS-CHECK | Trusting an exact computed answer without ever comparing it against a quick estimate, missing an opportunity to catch gross computational errors | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.estimation",
+      "title": "ROUNDING-PRECISION-CHOSEN-WITHOUT-REGARD-TO-USEFULNESS",
+      "content": "| MC-2 | ROUNDING-PRECISION-CHOSEN-WITHOUT-REGARD-TO-USEFULNESS | Rounding to an arbitrary or habitual place value (e.g. always \"nearest hundred\") regardless of whether it preserves enough information to be a useful estimate for the numbers involved | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.estimation",
+      "title": "Round First, Then Compute Quickly (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Round First, Then Compute Quickly (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.estimation",
+      "title": "Estimates Catch Gross Errors, and Precision Must Match the Numbers (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Estimates Catch Gross Errors, and Precision Must Match the Numbers (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.estimation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.estimation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Estimate $412+689$ by rounding each number to the nearest hundred.\n  2. Estimate $73\\times48$ by rounding to the nearest ten, then compare against the exact value $3{,}504$ to assess reasonableness.\n  3. Given an exact computed answer that differs drastically from a sound quick estimate, explain what this discrepancy suggests and what should be done next.\n  4. For estimating $8\\times12$, explain why rounding both numbers to the nearest ten (giving $10\\times10=100$) is reasonable, while rounding to the nearest hundred (giving $0\\times0=0$) is not, despite both being \"valid\" rounding operations.\n- **P76 (Transfer Probe, mode = independence)**: \"A cashier's till shows a total of \\$1{,}245.00 for a customer's cart of 3 items priced at approximately \\$8, \\$15, and \\$22. (a) Use estimation (rounding each price appropriately) to quickly assess whether \\$1{,}245.00 is a plausible total for this cart. (b) Explain, using this lesson's error-catching idea, what the huge discrepancy between your estimate and the till's total most likely indicates, and what precision of rounding made this discrepancy easy to spot quickly.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.estimation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.rounding` (approximating a number to a given place value) — estimation applies rounding strategically BEFORE computing, to get a fast approximate result.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.arith.estimation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.estimation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.rounding`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.estimation.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

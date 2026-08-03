@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.conjecture-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.conjecture",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1094c889745fea00c315811413bd87b80865c04d67bd6c144b908ec672e13952",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.conjecture.md": "sha256:f370b2c1bd0c870fb96595b5deeac6c4921af009072e1496d4be800afdd2b9d9"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.conjecture",
+    "name": "Conjecture",
+    "difficultyRaw": "developing",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.found.mathematical-thinking",
+      "math.found.proof"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.conjecture-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.conjecture (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.conjecture.md": "sha256:f370b2c1bd0c870fb96595b5deeac6c4921af009072e1496d4be800afdd2b9d9"
+      },
+      "contentHash": "sha256:a7b35b46277fa7298f1fdf4b65cf2dd06605a09716cdd4b738bfb0fe4ee18cf6",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.conjecture.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.conjecture.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.conjecture"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.conjecture\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.conjecture.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.conjecture.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.conjecture"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.conjecture\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.conjecture.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.conjecture.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.conjecture"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.conjecture\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.conjecture/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.conjecture",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define \"conjecture\" as a statement believed true on the basis of evidence or intuition but not yet proven or disproven, and correctly classify a given statement as conjecture, theorem, or disproved claim.\n- LO2: Evaluate the STRENGTH of the evidence behind a conjecture (pattern from small cases, computational verification, partial proofs of special cases) without conflating that strength with proof.\n- LO3: State what resolving a conjecture means — either finding a valid proof (promoting it to theorem) or finding a counterexample (disproving it) — and recognize a conjecture can also remain permanently open.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.conjecture",
+      "title": "LONGSTANDING-EVIDENCE-TREATED-AS-INCREASING-PROOF",
+      "content": "| MC-1 | LONGSTANDING-EVIDENCE-TREATED-AS-INCREASING-PROOF | Believing a conjecture becomes progressively \"more proved\" or safer to assume the longer it stands unrefuted with supporting evidence | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.conjecture",
+      "title": "COUNTEREXAMPLE-STRENGTH-CONFUSED-WITH-CONFIRMING-EVIDENCE",
+      "content": "| MC-2 | COUNTEREXAMPLE-STRENGTH-CONFUSED-WITH-CONFIRMING-EVIDENCE | Failing to recognize the fundamental asymmetry that one counterexample fully disproves a universal claim, while no finite amount of confirming evidence fully proves one | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.conjecture",
+      "title": "CONJECTURE-ASSUMED-ALWAYS-EVENTUALLY-RESOLVABLE",
+      "content": "| MC-3 | CONJECTURE-ASSUMED-ALWAYS-EVENTUALLY-RESOLVABLE | Assuming every conjecture must eventually be either proved or disproved, missing that some statements can remain permanently open or even be formally undecidable | Minor |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.conjecture",
+      "title": "Three Possible Fates: Proved, Disproved, Open (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Three Possible Fates: Proved, Disproved, Open (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.conjecture",
+      "title": "One Counterexample Disproves; No Amount of Confirming Evidence Proves (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"One Counterexample Disproves; No Amount of Confirming Evidence Proves (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.conjecture",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.conjecture",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Classify each of three given statements (one proved theorem, one disproved former-conjecture, one currently-open conjecture) correctly, citing what evidence exists for each.\n  2. Explain why finding a single counterexample to \"every odd prime greater than 2 can be written as a sum of three primes\" (a specific instance, hypothetically) would instantly refute the general claim, regardless of how many prior cases were verified.\n  3. Describe the difference between the KIND of confidence a mathematician has in a well-evidenced open conjecture versus a proved theorem, even when both are subjectively \"believed.\"\n  4. Given a pattern observed for $n=1$ through $n=20$, state what would be needed to promote the pattern from \"observed regularity\" to \"proved theorem.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A researcher has verified a certain conjecture computationally for all values up to $10^{18}$ and reports this in a paper as strong supporting evidence. (a) Explain precisely what this verification does and does NOT establish about the conjecture's truth for ALL values, using the counterexample-asymmetry rule from this lesson. (b) Describe, in general terms, what kind of additional argument would be needed to either fully prove or fully disprove the conjecture, and explain why finding value $10^{18}+1$ to also satisfy it would not change the conjecture's formal status.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.conjecture",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.mathematical-thinking` (the general practice of forming and testing mathematical ideas) and `math.found.proof` (the standard a conjecture has NOT yet met, distinguishing it from a theorem).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 27,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.conjecture/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.conjecture",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.mathematical-thinking`, `math.found.proof`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.theorem` (a conjecture's proved fate), `math.found.proof` (the standard that resolves a conjecture one way or the other).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.conjecture.md",
+        "startLine": 85,
+        "endLine": 91
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
