@@ -1,0 +1,315 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.cofactor-expansion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.cofactor-expansion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:247d77a8752f862ef61cb21221d275063bba5e2508d0f005973b41851db22f2a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md": "sha256:e0a2a59668adc6ce7ca62d9e1fe76ab4686e368b9bebdc2ad4c21b589cfefc8c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.cofactor-expansion",
+    "name": "Cofactor Expansion",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.determinant"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.cofactor-expansion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.cofactor-expansion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md": "sha256:e0a2a59668adc6ce7ca62d9e1fe76ab4686e368b9bebdc2ad4c21b589cfefc8c"
+      },
+      "contentHash": "sha256:94a8bb7b5440e70cd0ae6826bc2baf4b078d05087c57aed034c330aa05d18724",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.cofactor-expansion.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cofactor-expansion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cofactor-expansion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cofactor-expansion.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cofactor-expansion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cofactor-expansion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cofactor-expansion.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md#TA-A03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cofactor-expansion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cofactor-expansion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cofactor-expansion.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cofactor-expansion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cofactor-expansion\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.cofactor-expansion/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute a matrix's MINOR $M_{ij}$ (the determinant of the submatrix formed by deleting row $i$ and column $j$) and COFACTOR $C_{ij}=(-1)^{i+j}M_{ij}$.\n- LO2: Compute a determinant via cofactor expansion along ANY row or column: $\\det(A)=\\sum_ja_{ij}C_{ij}$, correctly matching entries to their corresponding cofactors.\n- LO3: Choose an EFFICIENT row or column for expansion (one with the most zero entries) to minimize computation, and recognize this method's factorial time complexity makes it impractical for large matrices.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "COFACTOR-SIGN-ALTERNATION-NOT-TRACKED-CORRECTLY",
+      "content": "| MC-1 | COFACTOR-SIGN-ALTERNATION-NOT-TRACKED-CORRECTLY | Applying the same sign to every cofactor term, rather than correctly tracking the checkerboard $(-1)^{i+j}$ pattern position by position | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "EXPANSION-ROW-COLUMN-CHOSEN-WITHOUT-EFFICIENCY-CONSIDERATION",
+      "content": "| MC-2 | EXPANSION-ROW-COLUMN-CHOSEN-WITHOUT-EFFICIENCY-CONSIDERATION | Expanding along an arbitrary row or column without checking for zeros first, doing unnecessary extra computation | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "DIFFERENT-EXPANSION-CHOICES-ASSUMED-TO-GIVE-DIFFERENT-RESULTS",
+      "content": "| MC-3 | DIFFERENT-EXPANSION-CHOICES-ASSUMED-TO-GIVE-DIFFERENT-RESULTS | Believing the determinant's value could differ depending on which row/column is chosen for expansion | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Compute Minors and Cofactors, Tracking the Sign Carefully (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Compute Minors and Cofactors, Tracking the Sign Carefully (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Choose the Row/Column with the Most Zeros for Efficiency (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Choose the Row/Column with the Most Zeros for Efficiency (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Any Row or Column Gives the Same Determinant (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Any Row or Column Gives the Same Determinant (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 15,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Compute the minor $M_{23}$ and cofactor $C_{23}$ of $\\begin{pmatrix}1&2&3\\\\4&5&6\\\\7&8&9\\end{pmatrix}$.\n  2. Compute $\\det\\begin{pmatrix}3&0&2\\\\1&4&0\\\\5&1&2\\end{pmatrix}$ by expanding along the most efficient row or column.\n  3. Compute the SAME determinant from problem 2 by expanding along a DIFFERENT row/column, verifying the result matches.\n  4. Explain, in one sentence, why cofactor expansion is impractical for very large matrices.\n- **P76 (Transfer Probe, mode = independence)**: \"A structural analysis requires computing the determinant of a $4\\times4$ stiffness-related matrix that has an entire row with three zero entries. (a) Explain, using this lesson's efficiency discussion, why expanding along THAT specific row would be the smart computational choice. (b) Explain, using this lesson's complexity discussion, why for a much larger matrix (say $20\\times20$), cofactor expansion would become impractical even with zero-exploiting row choices, and why engineers instead rely on other methods (like row reduction) for large-scale problems.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 21,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.determinant` (what a determinant computes) — this concept provides a general recursive computation method.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.cofactor-expansion/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.cofactor-expansion",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.determinant`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.det-properties` (further determinant properties this method's results must remain consistent with).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cofactor-expansion.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
