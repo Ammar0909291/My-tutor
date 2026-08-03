@@ -13,10 +13,16 @@ import { CoachInterviewStep } from '@/components/onboarding/CoachInterviewStep'
 import type { CoachAnswers } from '@/lib/coach/onboardingInterview'
 import { describeFromAnswers } from '@/lib/coach/learnerProfile'
 
+// Shown on first paint, and whenever /api/subjects/library cannot be reached.
+// Keep this list in sync with EDUCATIONAL_BRAIN_SUBJECTS (subjectRollout.ts) —
+// it is what the learner sees before the fetch resolves, so any rolled-out
+// subject missing here is invisible for that window (and permanently, if the
+// request fails). Names render via the ob_subj_<slug> translation keys.
 const FALLBACK_SUBJECTS = [
   { id: 'english',     slug: 'english',     name: 'English',     icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
   { id: 'mathematics', slug: 'mathematics', name: 'Mathematics', icon: '∑',   accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
   { id: 'physics',     slug: 'physics',     name: 'Physics',     icon: '⚛️',  accent: '#3178C6', subAccent: 'rgba(49,120,198,0.08)' },
+  { id: 'chemistry',   slug: 'chemistry',   name: 'Chemistry',   icon: '🧪',  accent: '#A371F7', subAccent: 'rgba(163,113,247,0.08)' },
 ]
 
 const VOICES = [
