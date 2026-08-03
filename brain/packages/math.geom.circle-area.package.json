@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.circle-area-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.circle-area",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4bf68fc416f105564359913c6783c39c97db3f28e5b76726c0b724c897e1c80a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.circle-area.md": "sha256:0c006dd4ca8923294a78d64fc90a6957e825248d1bf292368fdba6aced5bed1e"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.circle-area",
+    "name": "Area of a Circle",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.circle",
+      "math.geom.area"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.circle-area-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.circle-area (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.circle-area.md": "sha256:0c006dd4ca8923294a78d64fc90a6957e825248d1bf292368fdba6aced5bed1e"
+      },
+      "contentHash": "sha256:0621d3ca47b18e0697aa7b8ab4922e5384538d4a48512eff0b3a34b567365cfc",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-area.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-area.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-area\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-area.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-area.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-area\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-area.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-area.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-area\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-area.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-area.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-area"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-area\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.circle-area/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.circle-area",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the circle area formula $A=\\pi r^2$, using the RADIUS specifically — a common error uses the diameter directly in place of $r$.\n- LO2: Correctly convert a given DIAMETER to radius (dividing by 2) BEFORE applying the area formula, when only the diameter is provided.\n- LO3: Understand (at a conceptual level, without full derivation) that $A=\\pi r^2$ can be justified as the LIMIT of inscribed regular polygon areas as the number of sides $n\\to\\infty$ (connecting to `math.geom.regular-polygon`'s limiting-circle idea) — the formula isn't an arbitrary rule but a genuine consequence of this limiting process.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.circle-area",
+      "title": "DIAMETER-SUBSTITUTED-DIRECTLY-FOR-RADIUS-IN-AREA-FORMULA",
+      "content": "| MC-1 | DIAMETER-SUBSTITUTED-DIRECTLY-FOR-RADIUS-IN-AREA-FORMULA | Plugging a given diameter value directly into the area formula in place of r, producing an answer 4 times too large | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.circle-area",
+      "title": "AREA-FORMULA-TREATED-AS-ARBITRARY-WITHOUT-CONNECTING-TO-THE-POLYGON-LIMIT-JUSTIFICATION",
+      "content": "| MC-2 | AREA-FORMULA-TREATED-AS-ARBITRARY-WITHOUT-CONNECTING-TO-THE-POLYGON-LIMIT-JUSTIFICATION | Treating πr² as an arbitrary memorized rule without recognizing its justification as the limit of inscribed regular polygon areas | Minor |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-area",
+      "title": "The Formula Requires Radius, Not Diameter (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Formula Requires Radius, Not Diameter (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-area",
+      "title": "Convert Diameter to Radius First When Necessary (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Convert Diameter to Radius First When Necessary (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-area",
+      "title": "Connecting the Formula to the Polygon-Limit Justification (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Connecting the Formula to the Polygon-Limit Justification (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-area",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.circle-area",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the area of a circle with radius 9.\n  2. Find the area of a circle with diameter 14, converting to radius first.\n  3. Explain, in one sentence, why using the diameter directly in place of r in the area formula gives an answer 4 times too large.\n  4. Explain how the sequence of inscribed regular polygons with increasing side counts justifies the circle area formula.\n- **P76 (Transfer Probe, mode = independence)**: \"A pizza company advertises a 'large' pizza as having a 16-inch DIAMETER, and a customer wants to know the actual area of pizza they're getting to compare value against a competitor's pizza measured by radius. (a) Calculate the large pizza's area, being careful to convert diameter to radius first. (b) Explain what mistake the customer would make (and how much they'd overestimate the area) if they plugged the 16-inch diameter directly into the area formula as if it were the radius.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.circle-area",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.circle` (the shape itself) and `math.geom.area` (the general concept of enclosed-region measurement).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.circle-area/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.circle-area",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.circle`, `math.geom.area`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.circle-circumference`, `math.geom.regular-polygon` (the limiting-process justification).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-area.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
