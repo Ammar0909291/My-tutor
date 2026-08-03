@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.experimental-design-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.experimental-design",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7f1b15fa4335b742410c5a23e062b4bb9820e2e82572c0016bcf3a76b7f7dca5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.experimental-design.md": "sha256:4e30ba158f8786b5c4fbc9c30e5511278baae94a57b847dd86904ddab4535553"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.experimental-design",
+    "name": "Experimental Design",
+    "difficultyRaw": "expert",
+    "bloom": "evaluate",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.stats.sampling",
+      "math.stats.anova"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.experimental-design-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.experimental-design (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.experimental-design.md": "sha256:4e30ba158f8786b5c4fbc9c30e5511278baae94a57b847dd86904ddab4535553"
+      },
+      "contentHash": "sha256:10b3cc3a2ad2a28d469adedabf8a08811f44da0affc49ff4950bd61c47241630",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.experimental-design.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.experimental-design.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.experimental-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.experimental-design\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.experimental-design.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.experimental-design.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.experimental-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.experimental-design\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.experimental-design.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.experimental-design.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.experimental-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.experimental-design\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.experimental-design.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.experimental-design.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.experimental-design"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.experimental-design\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.experimental-design/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the THREE core principles of experimental design — RANDOMIZATION (assigning treatments to units RANDOMLY, not by any systematic or convenient rule), REPLICATION (using SUFFICIENT sample size to distinguish real effects from random noise), and BLOCKING (grouping similar units together to REDUCE noise, from `math.stats.two-way-anova`'s treatment of blocking).\n- LO2: Recognize RANDOMIZATION specifically as the tool that CONTROLS FOR CONFOUNDING and enables CAUSAL inference — by randomly assigning treatments, any OTHER variable (known or unknown) is, on average, equally distributed across treatment groups, ruling out systematic confounding as an alternative explanation for observed differences.\n- LO3: Distinguish the KEY DESIGN TYPES — Completely Randomized Design (CRD, simplest, no blocking), Randomized Complete Block Design (RCBD, incorporates blocking), and Factorial designs (multiple factors tested simultaneously, connecting to `math.stats.two-way-anova`) — and recognize each addresses a DIFFERENT practical concern (simplicity vs. noise reduction vs. studying multiple factors' effects and interactions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.experimental-design",
+      "title": "OBSERVATIONAL-NON-RANDOMIZED-DATA-ASSUMED-TO-SUPPORT-THE-SAME-CAUSAL-CONCLUSIONS-AS-RANDOMIZED-EXPERIMENTS",
+      "content": "| MC-1 | OBSERVATIONAL-NON-RANDOMIZED-DATA-ASSUMED-TO-SUPPORT-THE-SAME-CAUSAL-CONCLUSIONS-AS-RANDOMIZED-EXPERIMENTS | Assuming observational (non-randomized) data can support the same strength of causal conclusion as a properly randomized experiment | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.experimental-design",
+      "title": "BLOCKING-OPPORTUNITY-ON-A-KNOWN-NOISE-SOURCE-MISSED-IN-FAVOR-OF-A-SIMPLER-CRD",
+      "content": "| MC-2 | BLOCKING-OPPORTUNITY-ON-A-KNOWN-NOISE-SOURCE-MISSED-IN-FAVOR-OF-A-SIMPLER-CRD | Using a simple Completely Randomized Design even when a known, exploitable source of variability is available to block on, missing an opportunity to improve precision | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Randomization Rules Out Confounding, Enabling Causal Claims (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Randomization Rules Out Confounding, Enabling Causal Claims (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Blocking on a Known Noise Source Improves Precision (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Blocking on a Known Noise Source Improves Precision (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Factorial Designs Capture Interactions That Separate Experiments Would Miss (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Factorial Designs Capture Interactions That Separate Experiments Would Miss (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Explain, in one sentence, why random assignment of treatments controls for confounding variables.\n  2. Determine whether a CRD or RCBD is more appropriate for an experiment run across 3 different schools with distinct student populations, and justify.\n  3. Explain why a factorial design captures information that two separate single-factor experiments would miss.\n  4. Explain why an observational (non-randomized) study of an existing behavior (e.g. comparing outcomes for people who already exercise vs. don't) cannot support the same strength of causal conclusion as a randomized experiment.\n- **P76 (Transfer Probe, mode = independence)**: \"A pharmaceutical company wants to test whether a new drug reduces blood pressure, and is choosing between (a) randomly assigning patients to receive the drug or a placebo, versus (b) simply comparing blood pressure outcomes between patients who happen to already be taking a similar over-the-counter supplement versus those who aren't. (a) Explain why design (a) — the randomized approach — would allow a much stronger causal claim about the drug's effectiveness. (b) Identify a plausible confounding variable that could undermine a causal conclusion drawn from design (b)'s observational comparison.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.sampling` (the broader data-collection context) and `math.stats.anova` (the analysis framework these designs typically feed into).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.experimental-design/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.experimental-design",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.sampling`, `math.stats.anova`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.experimental-design.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
