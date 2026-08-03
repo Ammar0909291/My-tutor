@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.change-of-basis-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.change-of-basis",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ef6c8b41759f61d6864739c3cfff08cf47d25e19f2042ae8d1c6069c6645b54a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.change-of-basis.md": "sha256:3279414a964ab76c6ec141a8e5e32f3023292eaa21928a1e89b7670859a58114"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.change-of-basis",
+    "name": "Change of Basis",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.coordinates",
+      "math.linalg.matrix-inverse"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.change-of-basis-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.change-of-basis (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.change-of-basis.md": "sha256:3279414a964ab76c6ec141a8e5e32f3023292eaa21928a1e89b7670859a58114"
+      },
+      "contentHash": "sha256:fe5e23d9dd42d93490f651d6e8099c8e61d77a47ed417f7038b069cb67b8446c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.change-of-basis.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.change-of-basis.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.change-of-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.change-of-basis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.change-of-basis.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.change-of-basis.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.change-of-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.change-of-basis\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.change-of-basis.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.change-of-basis.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.change-of-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.change-of-basis\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.change-of-basis.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.change-of-basis.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.change-of-basis"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.change-of-basis\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.change-of-basis/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the change-of-basis matrix $P_{\\beta\\to\\gamma}$ (whose columns are $\\beta$'s basis vectors expressed in $\\gamma$-coordinates), and use it to convert $[v]_\\beta$ into $[v]_\\gamma$ via $[v]_\\gamma=P[v]_\\beta$.\n- LO2: Convert coordinates in the OTHER direction ($\\gamma\\to\\beta$) using $P^{-1}$, correctly recognizing which matrix inverts which conversion.\n- LO3: Apply the similarity relation $B=P^{-1}AP$ relating a linear map's matrix representations in two different bases.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "CHANGE-OF-BASIS-MATRIX-BUILT-FROM-WRONG-BASIS",
+      "content": "| MC-1 | CHANGE-OF-BASIS-MATRIX-BUILT-FROM-WRONG-BASIS | Constructing $P_{\\beta\\to\\gamma}$'s columns from $\\gamma$'s vectors instead of $\\beta$'s, reversing the conversion direction the matrix actually performs | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "REVERSE-CONVERSION-USES-P-INSTEAD-OF-P-INVERSE",
+      "content": "| MC-2 | REVERSE-CONVERSION-USES-P-INSTEAD-OF-P-INVERSE | Applying $P$ again (rather than $P^{-1}$) when converting coordinates in the reverse direction | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "P's Columns Come from the SOURCE Basis, in TARGET Coordinates (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"P's Columns Come from the SOURCE Basis, in TARGET Coordinates (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "Reverse Direction Uses the Inverse Matrix (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Reverse Direction Uses the Inverse Matrix (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "Similarity Relates Matrix Representations Across Bases (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Similarity Relates Matrix Representations Across Bases (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Construct $P_{\\beta\\to\\gamma}$ for $\\beta=\\{(2,0),(0,3)\\}$ and $\\gamma$ = standard basis.\n  2. Using your matrix from problem 1, convert $[v]_\\beta=(4,5)$ to standard coordinates.\n  3. Convert the standard-coordinate result from problem 2 back to $\\beta$-coordinates using $P^{-1}$, verifying you recover $(4,5)$.\n  4. Explain, in one sentence, why the reverse coordinate conversion requires the inverse matrix rather than the original.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotics arm's joint-angle sensors report positions in a NON-STANDARD basis $\\beta$ aligned with the arm's mechanical linkages, but the control software needs positions in STANDARD $(x,y)$ workspace coordinates for collision detection. (a) Given a change-of-basis matrix $P_{\\beta\\to\\text{standard}}$, explain how to convert a sensor reading $[v]_\\beta$ into workspace coordinates. (b) If the control software needs to convert a DETECTED workspace collision point back into the arm's joint-angle basis (to determine which joint to adjust), explain which matrix ($P$ or $P^{-1}$) is needed for this reverse conversion, and why using the wrong one would give a meaningless result for the robot's joint adjustments.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.coordinates` (coordinate vectors relative to a basis) and `math.linalg.matrix-inverse` (needed for the reverse-direction conversion and the similarity relation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.change-of-basis/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.change-of-basis",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.coordinates`, `math.linalg.matrix-inverse`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.diagonalization` (a special, especially useful case of a basis change making a matrix representation as simple as possible).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.change-of-basis.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
