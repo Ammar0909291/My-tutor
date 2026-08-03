@@ -20,11 +20,44 @@
  *  - foundations/03 §5    register never infantilized for adults
  */
 
+import { isDeliveryPhase, type TeachingPhase } from './conversationState'
+
 export interface FirstLessonContext {
   isSchoolMode: boolean
   currentLevel: string | null | undefined
   currentLessonOrder: number | null | undefined
   completedLessonCount: number
+  /**
+   * The stage machine's current phase, when known.
+   *
+   * PRODUCTION FIX 2026-08-02. Every other field here is a static property of
+   * the LEARNER, so without this the guard was true on every single turn of
+   * lesson one, forever — it had no notion of progress WITHIN the lesson.
+   * conversationReader then reported conversationIntent='first_lesson' on
+   * every turn, and D0c-FIRST-LESSON-PROTOCOL preempted the entire ladder
+   * below it.
+   *
+   * Production evidence, one session, decision rules across 28 turns:
+   *   16x D0c-FIRST-LESSON-PROTOCOL
+   *    6x D0-RECOVERY-PREEMPT
+   *    4x D0a-LESSON-ALREADY-COMPLETE
+   *    2x D0b-CLOSING-PROTECT
+   * Zero decisions from ANY rule below the preempt band — no memory hit, no
+   * diagnosis, no practice, no progression rule ever ran. The same 12 turns
+   * logged `fallback_reason=First lesson`, so Explanation Memory never served
+   * either.
+   *
+   * first-lesson/04 §1 describes lesson one as a FLOW that ends
+   * (anchor -> demonstrate -> explain-after -> echo -> ONE solo -> close), not
+   * a permanent mode. That flow is exactly the delivery phases, so the
+   * protocol governs the OPENING of lesson one and hands the turn back to the
+   * ordinary ladder once the machine reaches CHECK — the point at which the
+   * learner is being assessed rather than introduced.
+   *
+   * Omitted/null preserves the previous behaviour, so callers that do not have
+   * a phase yet (e.g. before the state machine has run) are unchanged.
+   */
+  phase?: TeachingPhase | null
 }
 
 /**
@@ -33,13 +66,16 @@ export interface FirstLessonContext {
  * lesson 1, so entry lesson IS lesson 1 — src/lib/curriculum/placement.ts
  * returns 1 for beginners) and has completed nothing yet. School mode is
  * out of scope (board-prescribed sequence, per placement.ts's own note).
+ *
+ * …and only while lesson one is still in its OPENING. See `phase` above.
  */
 export function isFirstLessonContext(ctx: FirstLessonContext): boolean {
   return (
     !ctx.isSchoolMode &&
     (ctx.currentLevel ?? 'beginner') === 'beginner' &&
     (ctx.currentLessonOrder ?? 1) === 1 &&
-    ctx.completedLessonCount === 0
+    ctx.completedLessonCount === 0 &&
+    (ctx.phase == null || isDeliveryPhase(ctx.phase))
   )
 }
 

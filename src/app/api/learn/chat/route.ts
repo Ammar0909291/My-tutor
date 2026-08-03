@@ -1649,11 +1649,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // require an explicit objective/why-it-matters/connection instead of
         // only the first-lesson block covering that ground (lesson one only).
         // Reused verbatim at Step 3 below — no duplicate isFirstLessonContext call.
+        //
+        // The stage machine has not run yet at this point in the turn, so the
+        // phase is read from the SAME persisted state it will read
+        // (readConversationState, keyed on the same resolved concept). No
+        // second source of truth, and a concept change still resets to OBSERVE
+        // — which correctly keeps the first-lesson protocol active for a
+        // genuinely fresh lesson-one concept.
+        const firstLessonPhase = await (async () => {
+          try {
+            const { readConversationState } = await import('@/lib/teaching/conversationState')
+            return readConversationState(
+              snapshot?.conversationState,
+              resolvedConceptId ?? snapshotCurrentConceptId ?? null,
+            ).phase
+          } catch { return null }
+        })()
         const isFirstLessonContextHoisted = isFirstLessonContext({
           isSchoolMode: false,
           currentLevel: profile?.currentLevel,
           currentLessonOrder: lessonCtx?.currentLesson,
           completedLessonCount: studentProgress?.completedLessons?.length ?? 0,
+          // The stage machine's phase — the missing "progress within lesson
+          // one" dimension. Without it the protocol re-asserted itself on
+          // every turn and D0c preempted the whole progression ladder. See
+          // isFirstLessonContext()'s own note for the production evidence.
+          phase: firstLessonPhase,
         })
 
         // Session lifecycle (07 §8): boundary measured from real message
