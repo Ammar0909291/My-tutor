@@ -123,7 +123,7 @@ function ResetPasswordForm() {
             <div className="flex items-center gap-3 mb-6">
               <EagleMascot variant="hero" size={56} />
               <div>
-                <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>Create a new password</h1>
+                <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>{t('reset_title')}</h1>
                 <p style={{ fontSize: 13, color: 'var(--candy-ink-soft)', margin: 0 }}>{t('reset_sub')}</p>
               </div>
             </div>
