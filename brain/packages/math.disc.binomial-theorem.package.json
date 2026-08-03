@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.binomial-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.binomial-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0527d11943d7895b3456f717536978ed598cd7e0b23d9fc0bc76eae623c2643c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.binomial-theorem.md": "sha256:a847cd4a7b306ad4aba6288b904639cf3dcff72bef71df8ef40c243f2fab9345"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.binomial-theorem",
+    "name": "Binomial Theorem",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.combinations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.binomial-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.binomial-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.binomial-theorem.md": "sha256:a847cd4a7b306ad4aba6288b904639cf3dcff72bef71df8ef40c243f2fab9345"
+      },
+      "contentHash": "sha256:f5e9633c25b5d7a3c186a65bd2376a9c83a6da35717392522e23aff56c64dd6c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.binomial-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.binomial-theorem.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.binomial-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.binomial-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.binomial-theorem.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.binomial-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.binomial-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.binomial-theorem.md#TA-A03 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.binomial-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.binomial-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.binomial-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.binomial-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.binomial-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.binomial-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: Expand $(x+y)^n$ for a given small $n$ using the binomial theorem $(x+y)^n=\\sum_{k=0}^n\\binom{n}{k}x^ky^{n-k}$.\n- LO2: Find a SPECIFIC term (e.g. the term containing $x^3y^5$) of a binomial expansion without expanding the entire expression, using the general term formula $\\binom{n}{k}x^ky^{n-k}$.\n- LO3: Correctly handle a NEGATIVE or non-unit coefficient inside one of the binomial's terms (e.g. $(x-2y)^n$), tracking sign and coefficient powers through every term of the expansion.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "SUBSTITUTED-TERM-SIGN-OR-COEFFICIENT-DROPPED",
+      "content": "| MC-1 | SUBSTITUTED-TERM-SIGN-OR-COEFFICIENT-DROPPED | When a term like $(-2y)$ or $(3x)$ replaces a simple variable in the binomial, failing to raise its full sign/coefficient to the required power at each step | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "GENERAL-TERM-EXPONENTS-MISASSIGNED",
+      "content": "| MC-2 | GENERAL-TERM-EXPONENTS-MISASSIGNED | Assigning the exponent $k$ to the wrong one of the two binomial terms (swapping which term gets $k$ and which gets $n-k$) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "BINOMIAL-COEFFICIENT-MISCOMPUTED",
+      "content": "| MC-3 | BINOMIAL-COEFFICIENT-MISCOMPUTED | Computing $\\binom{n}{k}$ incorrectly, independent of the rest of the expansion (an error in the underlying combinations formula, not the theorem's own structure) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "Expand Term by Term Using Binomial Coefficients (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Expand Term by Term Using Binomial Coefficients (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "The General Term Extracts a Specific Coefficient Directly (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The General Term Extracts a Specific Coefficient Directly (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 7,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "Every Part of a Substituted Term Gets Raised to the Power (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Every Part of a Substituted Term Gets Raised to the Power (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 11,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Expand $(x+y)^5$ fully using the binomial theorem.\n  2. Find the term containing $x^4$ in the expansion of $(x+3)^6$ without expanding fully.\n  3. Expand $(2x-y)^3$, tracking coefficients and signs correctly.\n  4. State the sum of the exponents of $x$ and $y$ in ANY single term of the expansion of $(x+y)^n$, and explain why this must always hold.\n- **P76 (Transfer Probe, mode = independence)**: \"A probability problem models the number of heads in 6 coin flips using the expansion of $(p+q)^6$, where $p$ is the probability of heads and $q$ of tails. (a) Write out the general term of this expansion for exactly $k$ heads, and explain what $\\binom{6}{k}$ represents in this context (connecting back to combinations). (b) Find the specific term corresponding to exactly 4 heads, being careful to substitute $p$ and $q$'s roles correctly (not accidentally swapping which variable's exponent is $k$).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.combinations` (the binomial coefficients $\\binom{n}{k}$ this theorem uses directly as the expansion's coefficients).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.binomial-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.binomial-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.combinations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared; the multinomial theorem is mentioned as a generalization within the KG description but not authored as a separate entry in this batch.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.binomial-theorem.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
