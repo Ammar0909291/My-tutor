@@ -304,7 +304,24 @@ describe('resolveResponseVisual', () => {
     // The model may pick a MORE specific visual than the registry default
     // (e.g. three_newton_forces vs the generic force_diagram) — never
     // discard a real answer just because the deterministic path exists.
-    expect(resolveResponseVisual('three_newton_forces', true, 'force_diagram')).toBe('three_newton_forces')
+    //
+    // UPDATED 2026-08-02: the intent is unchanged, but the call now passes the
+    // concept's own legal set, exactly as route.ts does. That set is what
+    // makes "more specific" meaningful — three_newton_forces is a legitimate
+    // choice for phys.mech.newtons-first-law precisely because the concept
+    // registers it. Without the set the model was an unbounded second owner of
+    // visualization selection (production: an atom model on Mole Concept).
+    expect(resolveResponseVisual(
+      'three_newton_forces', true, 'force_diagram',
+      ['three_newton_forces', 'force_diagram'],
+    )).toBe('three_newton_forces')
+  })
+
+  it('a tag OUTSIDE the concept set never wins, however specific it looks', () => {
+    expect(resolveResponseVisual(
+      'three_atomic_structure', true, 'force_diagram',
+      ['three_newton_forces', 'force_diagram'],
+    )).toBe('force_diagram')
   })
 
   it('falls back to the available visual when the LLM omitted the tag and force-render applies', () => {

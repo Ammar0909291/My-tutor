@@ -430,6 +430,12 @@ export async function POST(req: Request) {
     // exists instead of rendering it" gap: the tag becomes advisory only
     // (still parsed/preferred when present), never the sole path to render.
     let availableVisualHoisted: string | null = null
+    // The visuals THIS CONCEPT legally has (VisualEntry.all), or null when the
+    // concept has no registry entry. Read from the same registry lookup that
+    // already computes availableVisualHoisted, so there is no second source of
+    // truth — it is the concept's own list, used to bound what the LLM's
+    // VISUAL:<type> tag is allowed to select. See resolveResponseVisual().
+    let allowedVisualsHoisted: readonly string[] | null = null
     let forceVisualRenderHoisted = false
     let conceptPreviouslyMasteredHoisted = false
     // Library Mode duplication cleanup: this used to be set from
@@ -1934,8 +1940,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { PHASE_MAX_QUESTION_STAGE } = await import('@/lib/teaching/conversationState')
           evidenceStageCeilingHoisted = PHASE_MAX_QUESTION_STAGE[conversationStateHoisted.phase]
           const { detectVisual } = await import('@/lib/school/visuals/detectVisual')
-          const { getConceptVisualType } = await import('@/lib/teaching/visualRegistry')
+          const { getConceptVisualType, lookupConceptVisual } = await import('@/lib/teaching/visualRegistry')
           const registryVisual = getConceptVisualType(convConceptId)
+          // Same lookup, same concept id — the legal set for this concept.
+          allowedVisualsHoisted = lookupConceptVisual(convConceptId)?.all ?? null
           const availableVisual = registryVisual ?? detectVisual({
             subjectSlug: subjectCode,
             chapterTitle: lessonCtx?.unitTitle ?? '',
@@ -2918,6 +2926,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null,
           forceVisualRenderHoisted || forceForPromise,
           availableVisualHoisted as import('@/lib/school/visuals/visualTypes').VisualType | null,
+          allowedVisualsHoisted as readonly import('@/lib/school/visuals/visualTypes').VisualType[] | null,
         )
       }
 

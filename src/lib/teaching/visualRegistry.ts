@@ -495,8 +495,48 @@ export function resolveResponseVisual(
   llmTag: VisualType | null,
   forceRender: boolean,
   availableVisual: VisualType | null,
+  /**
+   * The visuals this CONCEPT legally has (VisualEntry.all), or null when the
+   * concept has no registry entry at all.
+   *
+   * CANONICAL OWNERSHIP (production fix 2026-08-02). The LLM's own
+   * VISUAL:<type> tag used to win outright, which made the model a SECOND
+   * owner of visualization selection — and one with no binding to concept
+   * identity whatsoever. It could emit VISUAL:three_atomic_structure while
+   * teaching Mole Concept, Mixtures or Stoichiometry, and the runtime
+   * attached it. Removing a bad domain default could not fix that, because
+   * the registry's answer was being overridden after the fact.
+   *
+   * The concept now owns WHICH visuals are legal; the model may only choose
+   * among them. A tag inside the concept's own set is still honoured — that
+   * is the documented reason the tag wins (it may be a more specific match
+   * than the primary). A tag outside it is not a choice the model is
+   * entitled to make, so the concept's own visual is used instead.
+   *
+   * Omitted / null preserves the previous behaviour exactly, so subjects with
+   * no canonical KG entry (and detectVisual-driven matches) are unchanged.
+   */
+  allowedForConcept?: readonly VisualType[] | null,
 ): VisualType | null {
-  if (llmTag) return llmTag
+  if (llmTag) {
+    // 1. The concept has a registered set — the model may pick inside it only.
+    if (allowedForConcept && allowedForConcept.length > 0) {
+      if (allowedForConcept.includes(llmTag)) return llmTag
+      // Asked for something this concept does not have. It still wanted a
+      // visual, and the concept has a correct one — serve that.
+      return availableVisual ?? null
+    }
+    // 2. No registered set, but the runtime resolved a visual for this lesson
+    //    anyway (detectVisual's title match). That is the only concept-derived
+    //    answer available, so it is the one that may be shown.
+    if (availableVisual) return availableVisual
+    // 3. The runtime has NO concept-derived visual for this concept. The model
+    //    may not invent one: an unvalidated tag is exactly how a visual built
+    //    for atomic structure ended up on Mole Concept. This matches the
+    //    registry's own standing rule for unmapped concepts — no visual is
+    //    claimed rather than a wrong one shown.
+    return null
+  }
   if (forceRender && availableVisual) return availableVisual
   return null
 }

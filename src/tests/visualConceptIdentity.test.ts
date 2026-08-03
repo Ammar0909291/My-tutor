@@ -21,7 +21,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
-import { lookupConceptVisual, getConceptVisualType } from '@/lib/teaching/visualRegistry'
+import { lookupConceptVisual, getConceptVisualType, resolveResponseVisual } from '@/lib/teaching/visualRegistry'
 import { detectVisual } from '@/lib/school/visuals/detectVisual'
 
 interface KgConcept { id: string; name: string }
@@ -127,5 +127,85 @@ describe('the same concept always resolves to the same visual', () => {
   it('a null concept id never resolves to a visual', () => {
     expect(lookupConceptVisual(null)).toBeNull()
     expect(getConceptVisualType(null)).toBeNull()
+  })
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECOND OWNER: the LLM's VISUAL:<type> tag.
+//
+// Removing the bad domain default was not sufficient in production, because
+// resolveResponseVisual() honoured the model's own tag OUTRIGHT:
+//
+//   if (llmTag) return llmTag
+//
+// That made the LLM a second owner of visualization selection, with no binding
+// to concept identity at all — it could emit VISUAL:three_atomic_structure
+// while teaching Mole Concept and the runtime attached it. The concept now
+// owns which visuals are LEGAL; the model may only choose among them.
+// ─────────────────────────────────────────────────────────────────────────────
+describe('concept identity bounds what the model may select', () => {
+  const ALLOWED = ['three_crystal_lattice'] as const
+
+  it('rejects a model tag the concept does not have, and serves the concept visual', () => {
+    const r = resolveResponseVisual(
+      'three_atomic_structure' as never, false, 'three_crystal_lattice' as never, ALLOWED as never,
+    )
+    expect(r).toBe('three_crystal_lattice')
+  })
+
+  it('still honours a model tag INSIDE the concept set (it may be more specific)', () => {
+    const allowed = ['three_bond_formation', 'three_molecular_shapes'] as const
+    const r = resolveResponseVisual(
+      'three_molecular_shapes' as never, false, 'three_bond_formation' as never, allowed as never,
+    )
+    expect(r).toBe('three_molecular_shapes')
+  })
+
+  it('an illegal tag on a concept with no visual of its own attaches nothing', () => {
+    // Never substitute an unrelated visual just because the model asked.
+    const r = resolveResponseVisual('three_atomic_structure' as never, false, null, ALLOWED as never)
+    expect(r).toBeNull()
+  })
+
+  it('a detectVisual-resolved lesson still shows its own visual', () => {
+    // No registry entry, but the runtime DID resolve one from the lesson
+    // title. That is the only concept-derived answer, so it is what shows —
+    // whatever the model tagged.
+    expect(resolveResponseVisual('three_atomic_structure' as never, false, 'food_chain' as never, null))
+      .toBe('food_chain')
+    expect(resolveResponseVisual('food_chain' as never, false, 'food_chain' as never, null))
+      .toBe('food_chain')
+  })
+
+  it('the model may NOT invent a visual for a concept the runtime has none for', () => {
+    // The last hole: with no registry entry AND no detectVisual match there is
+    // no concept-derived visual at all, so an unvalidated model tag must not
+    // be attached. This is how an atom model reached "Nature of Matter".
+    expect(resolveResponseVisual('three_atomic_structure' as never, false, null, null)).toBeNull()
+    expect(resolveResponseVisual('three_atomic_structure' as never, false, null, [] as never)).toBeNull()
+    expect(resolveResponseVisual('food_chain' as never, false, null)).toBeNull()
+  })
+
+  it('the force-render path is unaffected', () => {
+    expect(resolveResponseVisual(null, true, 'three_crystal_lattice' as never, ALLOWED as never))
+      .toBe('three_crystal_lattice')
+    expect(resolveResponseVisual(null, false, 'three_crystal_lattice' as never, ALLOWED as never))
+      .toBeNull()
+  })
+
+  it('end to end: no chem.found concept can be rendered with an atom model', () => {
+    // The model emits the worst possible tag on every foundations concept.
+    for (const c of chemFound) {
+      const entry = lookupConceptVisual(c.id)
+      const resolved = resolveResponseVisual(
+        'three_atomic_structure' as never,
+        false,
+        (entry?.primary ?? null) as never,
+        (entry?.all ?? null) as never,
+      )
+      if (resolved && ATOMIC_VISUALS.has(resolved)) {
+        expect(isAtomicConcept(c.name), `${c.id} ("${c.name}") -> ${resolved}`).toBe(true)
+      }
+    }
   })
 })
