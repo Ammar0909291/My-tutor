@@ -22,6 +22,11 @@ export async function generateAIResponse(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
   maxTokens = 800,
+  // Retained for signature compatibility with all four existing call sites.
+  // It became unused when the timeout copy moved out (P19 GAP 1): this
+  // function no longer produces learner-facing text in any language, so it has
+  // nothing to localise. Removing the parameter would be a caller-touching
+  // refactor beyond the verified gaps.
   lang: 'ru' | 'en' | 'hi' = 'en',
 ): Promise<string> {
   await consumeAIBudget() // propagates AIBudgetExceededError — callers already handle thrown provider errors
@@ -38,15 +43,29 @@ export async function generateAIResponse(
     })
     return result.text ?? ''
   } catch (error: any) {
+    // P19 GAP 1: PROPAGATE. This used to special-case a timeout and return
+    // canned learner-facing text ("Taking longer than usual…", plus ru/hi)
+    // instead of throwing — a third competing degraded template, and the only
+    // one that could be mistaken for a real answer by its callers.
+    //
+    // It was learner-visible: /api/sessions/[sessionId]/messages awaited this
+    // value and persisted it straight into the transcript as an ASSISTANT
+    // message, so an outage was written to the database as something the tutor
+    // said, and survived every reload. kernel/stages/render.ts had the mirror
+    // problem — it labelled the same string provider:'llm', so
+    // isDegradedProvider() could not see it and conversationState folded an
+    // outage as real teaching.
+    //
+    // routeAI was fixed the same way in 80aadfb ("routeAI must REPORT failure,
+    // never absorb it"); this is its sibling client, which was missed. Every
+    // caller was checked before this change and all of them already handle a
+    // throw: sessions/[id]/messages -> 500, learn/run -> 500,
+    // generateVisualizationCode -> null, coach/quiz via chatWithFallback ->
+    // 500/502, and kernel render -> the degraded driver below.
+    //
+    // Degraded COPY is not this layer's job. A provider client reports what
+    // happened; the caller decides what the learner sees.
     console.error('[ai/client] generateAIResponse failed:', error.message)
-    if (error.message?.includes('timeout') || error.message?.includes('timed out')) {
-      const timeoutMsg: Record<string, string> = {
-        en: 'Taking longer than usual. Please try again.',
-        ru: 'Думаю дольше обычного. Попробуй ещё раз.',
-        hi: 'Thoda time lag raha hai. Please try again.',
-      }
-      return timeoutMsg[lang] || timeoutMsg.en
-    }
     throw error
   }
 }

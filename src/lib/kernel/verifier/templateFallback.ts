@@ -17,6 +17,7 @@
  * confirm this).
  */
 import type { PolicyMove } from '../types'
+import { degradedCopy } from '@/lib/teaching/degradedCopy'
 
 export type FallbackKind = 'SHOW_EASIEST_LEGAL' | 'ECHO_MICROWIN' | 'WARM_CLOSE'
 
@@ -69,15 +70,14 @@ export function chooseFallback(chain: string[]): FallbackKind {
  * product is broken.
  */
 export function renderOutage(consecutiveFailures: number, base: FallbackKind, ctx: TemplateContext): string {
-  const n = Number.isFinite(consecutiveFailures) ? Math.max(1, Math.floor(consecutiveFailures)) : 1
-  if (n === 1) return renderFallback(base, ctx)
-  if (n === 2) {
-    return "I'm still getting my thoughts together on that one — give me a moment and try again."
-  }
-  // Third and beyond: stop pretending this is a teaching turn. Silence about
-  // an outage reads as a broken product, which is exactly what happened.
-  return "Something on my side isn't responding right now, so I can't teach this properly yet. "
-       + "This isn't anything you did. Please try again in a moment — your progress is saved."
+  // P19: the escalation copy now lives in the shared catalog
+  // (lib/teaching/degradedCopy.ts) so the server channel and the client
+  // transport channel cannot drift apart again. The EXECUTION path is
+  // unchanged — this is still the only place the chat route gets its degraded
+  // text — and the rung-1 teaching template stays here, because a K5 policy
+  // template is teaching-shaped content, not apology copy.
+  const copy = degradedCopy({ channel: 'server_degraded', consecutiveFailures })
+  return copy ?? renderFallback(base, ctx)
 }
 
 /** The template renderer suppresses questions; guarantees no LLM call. */

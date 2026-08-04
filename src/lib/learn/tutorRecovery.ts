@@ -10,7 +10,9 @@
  * explains the real situation and points at a recovery instead of repeating.
  */
 
-export type TeachingLang = 'ru' | 'en' | 'hi'
+import { degradedCopy, type TeachingLang } from '@/lib/teaching/degradedCopy'
+
+export type { TeachingLang }
 
 /**
  * True when the server returned a soft AI fallback (the model timed out and
@@ -33,18 +35,20 @@ export function isFallbackResponse(
  * the student never sees the same sentence looping.
  */
 export function pickRecoveryMessage(consecutiveFailures: number, lang: TeachingLang): string {
-  const escalate = consecutiveFailures >= 2
-  if (lang === 'ru') {
-    return escalate
-      ? 'Похоже, я никак не могу связаться с сервером — это неполадка на нашей стороне, не у тебя. Подожди пару секунд и отправь ещё раз, а если не пройдёт — обнови страницу.'
-      : 'Ой, связь прервалась на секунду. Можешь повторить или просто отправь сообщение ещё раз — я на месте.'
-  }
-  if (lang === 'hi') {
-    return escalate
-      ? 'Lagta hai main server se connect nahin kar pa raha — yeh humari taraf ki dikkat hai, aapki nahin. Do second ruk kar phir se bhejein, aur na chale to page refresh karein.'
-      : 'Oops, connection ek second ke liye ruk gaya. Dobara try karo — main yahin hoon.'
-  }
-  return escalate
-    ? "I'm still not able to reach the server — this looks like a connection problem on our side, not yours. Give it a moment and send again, and refresh the page if it keeps happening."
-    : "Sorry, I got cut off there for a second. Go ahead and try again — I'm still here."
+  // P19: this function no longer owns any wording. It used to carry its own
+  // copy of the escalation ladder in three languages, in parallel with the
+  // server ladder in templateFallback.ts — and a production transcript showed
+  // both reaching the same learner in one session, because the two ladders
+  // fire on opposite sides of the HTTP boundary and neither knew about the
+  // other. The strings moved to lib/teaching/degradedCopy.ts verbatim; this
+  // stays as the client channel's entry point so LessonScreen is untouched.
+  //
+  // The catalog is a pure, zero-import module, so it bundles for the browser
+  // and still renders correct copy when the server is unreachable — precisely
+  // when this path runs.
+  return degradedCopy({
+    channel: 'client_transport',
+    consecutiveFailures,
+    lang,
+  }) as string // client_transport always returns copy; only rung-1 server is null
 }
