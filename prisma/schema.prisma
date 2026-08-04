@@ -659,6 +659,14 @@ model StudentProgress {
   isCompleted       Boolean   @default(false)
   completedAt       DateTime?
   completionPercent Int       @default(0)
+  // Subject Prelude (P1). Nullable timestamp of when this learner finished
+  // the subject's prelude. Lives here because StudentProgress is already the
+  // canonical per-(user, subject) record — the exact grain the prelude needs —
+  // so this adds no new table and no new ownership. Deliberately NOT part of
+  // any mastery/progress computation: nothing except the prelude gate reads
+  // it, so it can never affect currentLesson, completedLessons or
+  // completionPercent.
+  preludeViewedAt   DateTime?
   updatedAt         DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

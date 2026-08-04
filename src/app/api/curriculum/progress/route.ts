@@ -24,6 +24,21 @@ const schema = z.object({
   topicSlug: z.string().optional(),
 })
 
+/**
+ * Subject Prelude completion (P1). Handled by a dedicated POST on THIS route
+ * rather than a new endpoint: StudentProgress is the row being written, and
+ * this route is already its canonical owner. A separate route would create a
+ * second writer for the same record — the duplicate-ownership problem this
+ * feature was explicitly asked to avoid.
+ *
+ * It writes preludeViewedAt and NOTHING else: no currentLesson, no
+ * completedLessons, no XP, no completion percent. That is what keeps the
+ * prelude unable to affect mastery or lesson progression.
+ */
+const preludeSchema = z.object({
+  subjectCode: z.string(),
+})
+
 const resetSchema = z.object({
   subjectCode: z.string(),
   lessonOrder: z.number().int().positive(),
@@ -293,6 +308,42 @@ export async function PATCH(req: Request) {
       return NextResponse.json({ success: false, error: err.errors[0].message }, { status: 400 })
     }
     console.error('[PATCH /api/curriculum/progress]', err)
+    return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
+  }
+}
+
+/**
+ * POST — mark this subject's prelude as completed for the current learner.
+ *
+ * Idempotent: replaying the prelude and finishing it again simply refreshes
+ * the timestamp; it can never un-complete it, and it never touches lesson
+ * state. Upserts because a learner reaches the prelude BEFORE Lesson 1, so
+ * their StudentProgress row may not exist yet — creating it with the default
+ * currentLesson (1) and no completed lessons is exactly the correct
+ * pre-Lesson-1 state, identical to what the first lesson interaction would
+ * have created.
+ */
+export async function POST(req: Request) {
+  const session = await auth()
+  if (!session?.user?.id) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 })
+
+  try {
+    const { subjectCode } = preludeSchema.parse(await req.json())
+    const now = new Date()
+
+    const progress = await prisma.studentProgress.upsert({
+      where: { userId_subjectCode: { userId: session.user.id, subjectCode } },
+      update: { preludeViewedAt: now },
+      create: { userId: session.user.id, subjectCode, preludeViewedAt: now },
+      select: { subjectCode: true, currentLesson: true, completedLessons: true, preludeViewedAt: true },
+    })
+
+    return NextResponse.json({ success: true, preludeViewedAt: progress.preludeViewedAt, progress })
+  } catch (err) {
+    if (err instanceof z.ZodError) {
+      return NextResponse.json({ success: false, error: 'Invalid request' }, { status: 400 })
+    }
+    console.error('[POST /api/curriculum/progress]', err)
     return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 })
   }
 }
