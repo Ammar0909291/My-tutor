@@ -4,6 +4,18 @@ const nextConfig = {
   experimental: {
     // Next.js 14.2 still uses the experimental key; top-level serverExternalPackages is 15+
     serverComponentsExternalPackages: ["@prisma/client", "bcryptjs", "ioredis"],
+    // P20 FIX: src/instrumentation.ts (the Knowledge Asset bootstrap) had never
+    // run in production. In Next.js 14 the instrumentation hook is opt-in and
+    // defaults to false (node_modules/next/dist/server/config-shared.js:136):
+    //   · build/index.js:479-484 excludes instrumentation.ts from the build
+    //     output entirely unless this flag is set, and
+    //   · next-server.js:475 only calls register() when this flag is truthy.
+    // So the file compiled, type-checked and unit-tested cleanly while being
+    // dead code in every deployment — no error, no log, simply never invoked.
+    // Every AssetIdentity row in production came from the manual seed script
+    // instead, which is why authored assets sat in whatever state that script
+    // last wrote. Stable (non-experimental) in Next.js 15+.
+    instrumentationHook: true,
     // BUG-1 FIX: Next.js output-file tracing only follows static import()
     // statements — it never traces fs.readFileSync calls with computed paths.
     // Without this, Vercel serverless functions that call getKnowledgeGraph()

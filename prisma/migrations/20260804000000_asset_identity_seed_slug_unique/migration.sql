@@ -1,0 +1,43 @@
+-- P20 blocker: make the seed bootstrap's concurrency guarantee real.
+--
+-- src/instrumentation.ts seeds authored assets with a find-then-create pair:
+--
+--     const dup = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
+--     if (dup) { skipped++; continue }
+--     await prisma.assetIdentity.create({ ... })
+--
+-- and catches P2002 on the create, with a comment asserting a "unique
+-- constraint on canonicalSlug". No such constraint existed: asset_identity
+-- carried only a NON-unique index on ("canonicalSlug", status), so Postgres
+-- never raised 23505, Prisma never surfaced P2002, and that catch was dead
+-- code guarding an unsynchronised TOCTOU window. Every serverless instance
+-- runs this loop once per cold start, so concurrent cold starts could each
+-- pass the findFirst and each insert the same asset — duplicate ACTIVE rows
+-- for one canonicalSlug, breaking ADR 14 4.1 ("at most one ACTIVE per
+-- canonicalSlug") and inflating the ACTIVE counts that sufficiency.ts and
+-- repositoryStats.ts report as coverage.
+--
+-- The index is PARTIAL, scoped to the seed lineage, because the two writers
+-- have deliberately different slug semantics:
+--
+--   seed rows (authorId = 'EDUCATIONAL_BRAIN_SEED')
+--       4-segment slug conceptId:familyKind:language:gradeBand, always
+--       version 1, exactly one row per slug. Uniqueness is the invariant.
+--
+--   capture rows (explanationMemory.captureGeneratedExplanation)
+--       3-segment slug conceptId:familyKind:language, MANY versions per slug
+--       by design (ADR 14 version chain; production holds up to 82 rows for a
+--       single slug). A table-wide unique index would break that path.
+--
+-- Scoping by authorId keeps the version chain untouched while making the
+-- bootstrap's insert atomic. Verified against production before writing:
+-- 1996 seed rows / 1996 distinct seed slugs (0 duplicates), and no slug is
+-- shared between the seed and capture lineages, so this index builds cleanly.
+--
+-- Not CONCURRENTLY: Prisma runs each migration inside a transaction, and
+-- CREATE INDEX CONCURRENTLY cannot run in one. asset_identity is small
+-- (~2.7k rows), so the brief ACCESS EXCLUSIVE lock is negligible.
+
+CREATE UNIQUE INDEX IF NOT EXISTS "asset_identity_seed_slug_key"
+  ON "asset_identity" ("canonicalSlug")
+  WHERE "authorId" = 'EDUCATIONAL_BRAIN_SEED';
