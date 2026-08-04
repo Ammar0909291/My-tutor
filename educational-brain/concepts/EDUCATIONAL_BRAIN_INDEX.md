@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 36 READY)
+## english (216 concepts, 40 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1345,14 +1345,14 @@ its subject KG.
 | speaking | `eng.speaking.non-verbal-communication` | Non-Verbal Communication | Yes | No | — | MISSING |
 | speaking | `eng.speaking.oral-fluency` | Oral Fluency | Yes | Yes | `educational-brain/concepts/english/eng.speaking.oral-fluency.md` | READY |
 | speaking | `eng.speaking.presentation-skills` | Presentation Skills | Yes | No | — | MISSING |
-| speaking | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation | Yes | No | — | MISSING |
+| speaking | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation | Yes | Yes | `educational-brain/concepts/english/eng.speaking.pronunciation-in-conversation.md` | READY |
 | speaking | `eng.speaking.public-speaking-basics` | Public Speaking Basics | Yes | No | — | MISSING |
 | speaking | `eng.speaking.storytelling-orally` | Oral Storytelling | Yes | No | — | MISSING |
 | vocab | `eng.vocab.academic-vocabulary` | Academic Vocabulary | Yes | No | — | MISSING |
 | vocab | `eng.vocab.collocations` | Collocations | Yes | No | — | MISSING |
 | vocab | `eng.vocab.compound-words` | Compound Words | Yes | No | — | MISSING |
 | vocab | `eng.vocab.connotation-denotation` | Connotation and Denotation | Yes | No | — | MISSING |
-| vocab | `eng.vocab.context-clues` | Context Clues | Yes | No | — | MISSING |
+| vocab | `eng.vocab.context-clues` | Context Clues | Yes | Yes | `educational-brain/concepts/english/eng.vocab.context-clues.md` | READY |
 | vocab | `eng.vocab.etymology` | Etymology | Yes | No | — | MISSING |
 | vocab | `eng.vocab.homonyms-homophones` | Homonyms and Homophones | Yes | No | — | MISSING |
 | vocab | `eng.vocab.idioms` | Idioms | Yes | No | — | MISSING |
@@ -1363,9 +1363,9 @@ its subject KG.
 | vocab | `eng.vocab.roots-and-origins` | Greek and Latin Roots | Yes | No | — | MISSING |
 | vocab | `eng.vocab.semantic-fields` | Semantic Fields | Yes | No | — | MISSING |
 | vocab | `eng.vocab.suffixes` | Suffixes | Yes | No | — | MISSING |
-| vocab | `eng.vocab.synonyms-antonyms` | Synonyms and Antonyms | Yes | No | — | MISSING |
+| vocab | `eng.vocab.synonyms-antonyms` | Synonyms and Antonyms | Yes | Yes | `educational-brain/concepts/english/eng.vocab.synonyms-antonyms.md` | READY |
 | vocab | `eng.vocab.thesaurus-and-dictionary-skills` | Thesaurus and Dictionary Skills | Yes | No | — | MISSING |
-| vocab | `eng.vocab.word-families` | Word Families | Yes | No | — | MISSING |
+| vocab | `eng.vocab.word-families` | Word Families | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-families.md` | READY |
 | vocab | `eng.vocab.word-formation-processes` | Word Formation Processes | Yes | No | — | MISSING |
 | vocab | `eng.vocab.word-recognition` | Word Recognition | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-recognition.md` | READY |
 | writing | `eng.writing.citations-and-referencing` | Citations and Referencing | Yes | No | — | MISSING |

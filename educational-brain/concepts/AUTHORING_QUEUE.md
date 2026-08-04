@@ -21,7 +21,7 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1091** (= 1,775 KG concepts − 684 already `READY`, per
+Total queued: **1087** (= 1,775 KG concepts − 688 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
@@ -860,10 +860,7 @@ Wave 11, moved to READY.
 | 323 | mathematics | 10 | `math.top.homology` | Homology |
 | 324 | mathematics | 10 | `math.cat.natural-transformation` | Natural Transformation |
 | 325-329,331 | english | 10 | *(rows removed 2026-08-03 — English Batch 9 part 1)* | moved to READY: `eng.phonetics.accents-and-dialects`, `eng.grammar.word-classes-overview`, `eng.listening.listening-for-gist`, `eng.listening.distinguishing-sounds-in-speech` |
-| 326 | english | 10 | `eng.vocab.context-clues` | Context Clues |
-| 327 | english | 10 | `eng.vocab.synonyms-antonyms` | Synonyms and Antonyms |
-| 328 | english | 10 | `eng.vocab.word-families` | Word Families |
-| 332 | english | 10 | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation |
+| 326-328,332 | english | 10 | *(rows removed 2026-08-03 — English Batch 9 part 2)* | moved to READY: `eng.vocab.context-clues`, `eng.vocab.synonyms-antonyms`, `eng.vocab.word-families`, `eng.speaking.pronunciation-in-conversation` |
 | 333 | biology | 10 | `bio.mol.translation-genetic-code` | Translation and the Genetic Code |
 | 334 | biology | 10 | `bio.gen.gene-interactions` | Gene Interactions and Extensions of Mendelism |
 | 335 | biology | 10 | `bio.repro.fertilisation-development` | Fertilisation and Embryonic Development |

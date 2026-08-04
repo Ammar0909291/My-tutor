@@ -13,15 +13,15 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **684** |
-| Remaining | **1,091** |
-| Completion percentage | **38.54%** |
+| Concepts with an Educational Brain entry | **688** |
+| Remaining | **1,087** |
+| Completion percentage | **38.76%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 36 english + 186 chemistry + 0 biology + 0 computer_science = 684.
-English updated after Batch 9 part 1 of the English Educational Brain
-authoring program (4 concepts, topological level 10); the other
-subjects' figures are taken as already-recorded in §2 below, not
++ 40 english + 186 chemistry + 0 biology + 0 computer_science = 688.
+English updated after Batch 9 part 2 of the English Educational Brain
+authoring program (4 concepts, completing topological level 10); the
+other subjects' figures are taken as already-recorded in §2 below, not
 re-audited this session, per this session's "English only" scope.)*
 
 ---
@@ -32,7 +32,7 @@ re-audited this session, per this session's "English only" scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 36 | 16.67% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 40 | 18.52% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -617,7 +617,25 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**English Batch 9 (this batch, part 1 of 2)**: continuing directly after
+**English Batch 9 (this batch, part 2 of 2)**: completing level 10 after
+part 1. Authored the remaining 4 concepts: `eng.vocab.context-clues`,
+`eng.vocab.synonyms-antonyms`, `eng.vocab.word-families` (all unlocked by
+`eng.vocab.word-recognition`), and `eng.speaking.pronunciation-in-
+conversation` (unlocked by `eng.speaking.oral-fluency`, cross-linked to
+`eng.phonetics.prosody`). All 4 had existing Blueprints, reused by
+reference. Confirmed a second, independent instance of the accent/
+identity affect-sensitivity pattern (first flagged at `eng.phonetics.
+accents-and-dialects` in part 1) at this concept's native-like-accent
+misconception, and a second instance of the honesty/revision-readiness
+mastery-standard pattern (first flagged at `eng.vocab.word-recognition`)
+at `eng.vocab.context-clues`. English EB reached 40/216 (18.52%). True
+total: **688** EB entries (238 physics + 224 mathematics + 40 english +
+186 chemistry), out of 1,775 total KG concepts — 1,087 remaining,
+38.76%. Level 10 (8 concepts total) is now complete; level 11 candidates
+not yet computed, deferred to the next batch's start per this program's
+fresh-recomputation discipline.
+
+**English Batch 9 (prior batch, part 1 of 2)**: continuing directly after
 Batch 8. Recomputed the topological queue fresh — confirmed exactly 8
 concepts at level 10, the largest single level so far, split into two
 parts of 4. Part 1: `eng.grammar.word-classes-overview` (first
@@ -629,9 +647,6 @@ parts of 4. Part 1: `eng.grammar.word-classes-overview` (first
 reused by reference. English EB reached 36/216 (16.67%). True total:
 **684** EB entries (238 physics + 224 mathematics + 36 english + 186
 chemistry), out of 1,775 total KG concepts — 1,091 remaining, 38.54%.
-Next candidates (level 10, part 2, to be confirmed fresh): `eng.speaking.
-pronunciation-in-conversation`, `eng.vocab.context-clues`, `eng.vocab.
-synonyms-antonyms`, `eng.vocab.word-families`.
 
 **English Batch 8 (prior batch)**: continuing directly after Batch 7.
 Recomputed the topological queue fresh — confirmed exactly 4 concepts at
