@@ -5,10 +5,16 @@
  *   Reader   (reader.ts)          — read-only views per asset kind
  *   Assembler (lessonAssembler.ts) — Student State + Package → Lesson Context
  *
- * `buildLessonContextForConcept` is the single serving-seam entry point:
- * route.ts calls it behind ENABLE_PACKAGE_RUNTIME=1 and falls back to the
- * legacy blueprint path whenever it returns null (missing artifact, any
- * validation failure). Blueprint markdown is never read on this path.
+ * `buildLessonContextForConcept` is the single serving-seam function; it is
+ * exported for tests and tools that operate on compiled package artifacts.
+ *
+ * NOTE: The route.ts call site that previously invoked this behind the
+ * ENABLE_PACKAGE_RUNTIME flag was REMOVED (a zero-behavior-change cleanup,
+ * since that flag was never on in any environment). The canonical serving path
+ * is now AssetIdentity / Explanation Memory (assembleLesson() in
+ * src/lib/teaching/assets/pipeline.ts); see servingPathCanonicality.test.ts
+ * for the machine-readable proof. This module, its compiler, its tests, and
+ * the compiled brain/packages/ artifacts are all retained for tooling use.
  */
 export * from './types'
 export {

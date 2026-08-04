@@ -42,9 +42,6 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.friction':               { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
   'phys.mech.momentum':               { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
   'phys.mech.impulse':                { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
-  'phys.mech.collisions':             { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
-  'phys.mech.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
-  'phys.mech.simple-harmonic-motion': { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   'phys.mech.torque':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'torque_diagram' },
   // P2 fix: these two keys did not match any real KG concept ID ('phys.mech.
   // gravitation' vs the KG's 'phys.mech.universal-gravitation'; 'phys.mech.
@@ -146,14 +143,12 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   'phys.opt.mirrors':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   'phys.opt.lenses':                  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
-  'phys.opt.ray-diagrams':            { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
 
   // Physics — Electricity
-  'phys.em.current':                  { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+  'phys.em.electric-current':         { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
   'phys.em.ohms-law':                 { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
-  'phys.em.series-parallel':          { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+  'phys.em.dc-circuits':              { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
   'phys.em.kirchhoffs-laws':          { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
-  'phys.em.electric-circuits':        { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
 
   // Physics — Kinematics (P0 fix: these are NOT force/dynamics concepts —
   // 'phys.mech.displacement' had no exact entry here, so it fell through to
@@ -176,6 +171,13 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.relative-motion':        { primary: 'number_line', all: ['number_line'] },
   'phys.mech.kinematics-1d':          { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'kinematics_graphs' },
   'phys.mech.kinematics-2d':          { primary: 'coordinate_plane', all: ['coordinate_plane'], sceneGenerator: 'kinematics_graphs' },
+
+  // Physics — Waves (P1 fix: pendulum and SHM belong to phys.wave.* in the KG,
+  // not phys.mech.*; the prior orphan keys phys.mech.pendulum and
+  // phys.mech.simple-harmonic-motion were silently unreachable at runtime).
+  'phys.wave.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
+  'phys.wave.shm':                    { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
+  'phys.wave.shm-energy':             { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
 
   // Chemistry — Atomic structure
   // NOTE (corrected): these 5 keys previously used a stale chem.found.* /
