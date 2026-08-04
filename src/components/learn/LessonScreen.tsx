@@ -28,6 +28,9 @@ import {
   computeLessonLockState, findPreviousLesson, findNextLesson,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
 } from '@/lib/curriculum/lessonNavigation'
+import {
+  planLessonAdvance, decideLessonEntryMode, lessonInitModeFor,
+} from '@/lib/curriculum/lessonTransition'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
@@ -1089,6 +1092,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const messagesAreaRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const initializedRef = useRef(false)
+  // completeAndAdvance is defined below callLessonInit, but sendMessage (the
+  // [LESSON_COMPLETE] auto-complete path) is defined ABOVE both. Putting it in
+  // sendMessage's dependency array would read the binding before it is
+  // initialised — a TDZ crash the type-checker cannot see. This ref always
+  // points at the current one, so the auto-complete path can never capture a
+  // stale sessionId/curriculum snapshot either.
+  const completeAndAdvanceRef = useRef<
+    (order: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }, opts?: { mastered?: boolean }) => Promise<void>
+  >(async () => {})
   // Stability P0: how many chat turns in a row have failed. Drives the
   // escalation from the warm "got cut off" line to a real "connection problem
   // on our side" message so the student never sees the same sentence loop.
@@ -1801,7 +1813,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       if (hasCompletion) {
         const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
         if (currentLessonData) {
-          handleLessonComplete(currentLessonData.order, currentLessonData)
+          // Canonical transition: records completion AND moves the session on.
+          // Previously handleLessonComplete, which did only the former.
+          void completeAndAdvanceRef.current(currentLessonData.order, currentLessonData)
           // Update knowledge-graph TopicProgress and recompute unlocked nodes
           if (currentLessonData.topicSlug) {
             const topicSlug = currentLessonData.topicSlug
@@ -1972,6 +1986,48 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     }
   }, [teachingLanguage, curriculumLessons.length, curriculumProgress.completedLessons])
 
+  /**
+   * THE CANONICAL LESSON TRANSITION — the single path every completion uses:
+   * auto-complete ([LESSON_COMPLETE]), the "Complete lesson" button, the
+   * completion card's "Next lesson" button, and "Skip anyway".
+   *
+   * Before this existed, three of those four called handleLessonComplete
+   * directly. That records progress SERVER-side but performs no client
+   * transition, so the learner stayed in the finished lesson's chat while the
+   * roadmap moved on — the production bug. handleLessonComplete is still the
+   * one owner of the progress PATCH; this wraps it with the session
+   * transition that must always accompany it, so the two can no longer be
+   * performed separately by accident.
+   *
+   * Teaching never starts automatically: like every other entry point, this
+   * lands on the "Start Lesson" preview and stores the work for that click.
+   */
+  const completeAndAdvance = useCallback(async (
+    lessonOrder: number,
+    lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string },
+    opts?: { mastered?: boolean },
+  ) => {
+    const mastered = opts?.mastered ?? true
+    const newProgress = await handleLessonComplete(lessonOrder, lesson, mastered)
+    // A failed PATCH must not fake a transition: staying put with progress
+    // intact is recoverable, advancing on unsaved progress is not.
+    if (!newProgress || !sessionId) return
+    const plan = planLessonAdvance(lessonOrder, curriculumLessons, newProgress, topicProgressMap, { mastered })
+    if (!plan.next || !plan.nextEntryMode) return // curriculum finished
+    const next = plan.next
+    const initMode = lessonInitModeFor(plan.nextEntryMode)
+    setMessages([])
+    setLessonStarted(false)
+    initializedRef.current = false
+    setPendingLesson(next)
+    pendingLessonRunRef.current = async () => {
+      await callLessonInit(sessionId, initMode, next)
+      setActiveTab('chat')
+    }
+  }, [handleLessonComplete, curriculumLessons, topicProgressMap, sessionId, callLessonInit])
+
+  completeAndAdvanceRef.current = completeAndAdvance
+
   // P0-4 fix: "Skip Anyway" used to call handleLessonComplete directly —
   // indistinguishable from a genuine mastery-verified completion (no gap
   // recorded, and the chat session kept re-teaching the skipped concept
@@ -1984,19 +2040,8 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // the learner sees the "Start Lesson" welcome screen and the server
   // resets conversationState to OBSERVE before teaching begins.
   const handleSkipAnyway = useCallback(async (lessonOrder: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }) => {
-    const newProgress = await handleLessonComplete(lessonOrder, lesson, false)
-    if (!newProgress || !sessionId) return
-    const next = findNextLesson(curriculumLessons, newProgress)
-    if (!next) return
-    setMessages([])
-    setLessonStarted(false)
-    initializedRef.current = false
-    setPendingLesson(next)
-    pendingLessonRunRef.current = async () => {
-      await callLessonInit(sessionId, 'next', next)
-      setActiveTab('chat')
-    }
-  }, [handleLessonComplete, curriculumLessons, sessionId, callLessonInit])
+    await completeAndAdvance(lessonOrder, lesson, { mastered: false })
+  }, [completeAndAdvance])
 
   // Start revision mode for a completed/mastered topic — the richer
   // "previous lesson" restoration: patches TopicProgress to REVISION
@@ -2085,10 +2130,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           await handleLessonComplete(priorOrder, priorLesson, false)
         }
       }
-      await callLessonInit(sessionId, 'next', target)
+      // Same decision every other entry point uses: a lesson the learner has
+      // never started gets its introduction, not a resume.
+      const entryMode = decideLessonEntryMode({ lesson: target, progress: curriculumProgress, topicProgressMap })
+      await callLessonInit(sessionId, lessonInitModeFor(entryMode), target)
       setActiveTab('chat')
     }
-  }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, callLessonInit, startRevision, handleLessonComplete])
+  }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, handleLessonComplete])
 
   // Open the next lesson. Free navigation: the Lesson Navigation Panel's
   // Next button is always enabled whenever a next lesson exists (matches
@@ -2273,7 +2321,26 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // session whose history came back empty (e.g. a prior attempt died before
       // the tutor replied) must still fall through to the opening prompt —
       // otherwise messages stays [] and the connect screen never resolves.
-      if (data.resumed && restoredAny) return
+      // P0-4 ROOT CAUSE. This used to be the whole decision: "does this
+      // SUBJECT's session have history? then send no opening." But a lesson
+      // INTRODUCTION is per-LESSON, and this condition is true for every
+      // returning learner regardless of which lesson they are opening — so
+      // entering a brand-new lesson (including by picking it manually from the
+      // roadmap, then landing here rather than on the switch path because no
+      // session existed yet) silently skipped its introduction.
+      //
+      // Resume is now earned by evidence about THIS lesson, not by the
+      // existence of subject history. Everything else still returns early
+      // exactly as before, so genuine mid-lesson resumes are unchanged.
+      const entryLesson = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? null
+      const entryMode = entryLesson
+        ? decideLessonEntryMode({
+            lesson: entryLesson,
+            progress: curriculumProgress,
+            topicProgressMap,
+          })
+        : 'resume' // no curriculum (school mode / no KG): preserve prior behaviour
+      if (data.resumed && restoredAny && entryMode !== 'introduction') return
 
       const lessonRef = resumeLessonTitle
         ? (resumeUnitTitle ? `"${resumeLessonTitle}" (${resumeUnitTitle})` : `"${resumeLessonTitle}"`)
@@ -3364,7 +3431,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 ) : (
                   <button
                     onClick={() => masteryState?.verified
-                      ? handleLessonComplete(currentLessonData.order, currentLessonData)
+                      ? void completeAndAdvance(currentLessonData.order, currentLessonData)
                       : setSkipConfirm(true)}
                     style={{
                       width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
@@ -4616,17 +4683,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   <button
                     type="button"
                     onClick={() => {
-                      // Unlock + advance through the EXISTING owner of lesson
-                      // progress (/api/curriculum/progress), then start the next
-                      // lesson. Teaching never begins automatically.
-                      // handleLessonComplete is the existing client owner of
-                      // lesson advancement: it posts to /api/curriculum/progress
-                      // (the server-side owner of completedLessons and
-                      // currentLesson) and syncs local progress. Reused rather
-                      // than adding a second advancement path.
+                      // completeAndAdvance is the canonical transition: it
+                      // records completion through /api/curriculum/progress
+                      // (still the server-side owner of completedLessons and
+                      // currentLesson) AND moves the client session to the next
+                      // lesson. This used to call handleLessonComplete, which
+                      // does only the first half — the reason the learner
+                      // stayed on the finished lesson. Teaching still never
+                      // begins automatically: this lands on "Start Lesson".
                       setLessonCompletion(null)
                       if (currentLessonData) {
-                        void handleLessonComplete(currentLessonData.order, currentLessonData)
+                        void completeAndAdvance(currentLessonData.order, currentLessonData)
                       }
                     }}
                     className="btn-primary"
