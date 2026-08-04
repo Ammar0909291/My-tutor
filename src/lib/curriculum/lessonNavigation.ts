@@ -28,6 +28,11 @@ export interface CurriculumProgress {
   isCompleted?: boolean
   completedAt?: string | null
   completionPercent?: number
+  /** Subject Prelude (P1) — when the learner finished this subject's prelude.
+   *  Optional and read ONLY by the prelude gate; no lesson-progression or
+   *  mastery computation consults it. Absent for learners who predate it,
+   *  which correctly reads as "not yet seen". */
+  preludeViewedAt?: string | null
 }
 
 export interface TopicProgressEntry {

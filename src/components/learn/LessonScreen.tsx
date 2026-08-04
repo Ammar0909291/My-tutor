@@ -31,6 +31,8 @@ import {
 import {
   planLessonAdvance, decideLessonEntryMode, lessonInitModeFor,
 } from '@/lib/curriculum/lessonTransition'
+import SubjectPreludeScreen from '@/components/learn/SubjectPreludeScreen'
+import { getSubjectPrelude, shouldShowPrelude, isPreludeCompleted } from '@/lib/curriculum/subjectPrelude'
 import { FinalAssessmentModal } from '@/components/learn/FinalAssessmentModal'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
@@ -1098,6 +1100,19 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // initialised — a TDZ crash the type-checker cannot see. This ref always
   // points at the current one, so the auto-complete path can never capture a
   // stale sessionId/curriculum snapshot either.
+  // ─── Subject Prelude (P1) ────────────────────────────────────────────────
+  // Local UI state only. The durable fact is StudentProgress.preludeViewedAt,
+  // which arrives on curriculumProgress; these three drive presentation.
+  //
+  // preludeDismissed exists so that finishing the prelude shows Lesson 1
+  // IMMEDIATELY, without waiting for the curriculum refetch to report the new
+  // timestamp. Without it the gate would briefly re-render after completion —
+  // the same stale-read flicker that makes a one-time screen look like it
+  // reappeared.
+  const [preludeDismissed, setPreludeDismissed] = useState(false)
+  const [preludeReplay, setPreludeReplay] = useState(false)
+  const [preludeSaving, setPreludeSaving] = useState(false)
+
   const completeAndAdvanceRef = useRef<
     (order: number, lesson?: { lessonTitle: string; lessonGoal: string; topicSlug?: string }, opts?: { mastered?: boolean }) => Promise<void>
   >(async () => {})
@@ -1985,6 +2000,52 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       setIsStreaming(false)
     }
   }, [teachingLanguage, curriculumLessons.length, curriculumProgress.completedLessons])
+
+  const subjectPrelude = useMemo(() => getSubjectPrelude(subjectSlug), [subjectSlug])
+
+  // The gate. Replay is explicit and always wins; otherwise it shows exactly
+  // once, on first entry, and never again after completion.
+  const preludeVisible = !preludeDismissed && shouldShowPrelude({
+    subjectSlug,
+    preludeViewedAt: curriculumProgress.preludeViewedAt,
+    replayRequested: preludeReplay,
+  })
+
+  /**
+   * Record completion and continue. Writes ONLY preludeViewedAt, through the
+   * existing StudentProgress owner (/api/curriculum/progress). Touches no
+   * lesson state, so it cannot affect mastery or progression.
+   *
+   * The screen is dismissed even if the write fails: a learner who has read
+   * the prelude must never be trapped behind it by a network error. The worst
+   * case is that it is offered once more on a later visit, which is a far
+   * better failure than a blocked subject.
+   */
+  const completePrelude = useCallback(async () => {
+    setPreludeSaving(true)
+    try {
+      const res = await fetch('/api/curriculum/progress', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectCode: subjectSlug }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (data?.success && data.preludeViewedAt) {
+        setCurriculumProgress((prev) => ({ ...prev, preludeViewedAt: data.preludeViewedAt }))
+      }
+    } catch { /* dismissed regardless — see above */ }
+    setPreludeSaving(false)
+    setPreludeReplay(false)
+    setPreludeDismissed(true)
+  }, [subjectSlug])
+
+  /** Replay from Subject Overview. Never clears the stored timestamp — a
+   *  replay is a view, not an un-completion. */
+  const replayPrelude = useCallback(() => {
+    setPreludeDismissed(false)
+    setPreludeReplay(true)
+    setActiveTab('chat')
+  }, [])
 
   /**
    * THE CANONICAL LESSON TRANSITION — the single path every completion uses:
@@ -3458,6 +3519,26 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               </div>
             )}
 
+            {/* Subject Prelude replay (P1). Offered from Subject Overview only,
+                and only once the prelude has actually been completed — before
+                that it is about to be shown automatically, so a "revisit" link
+                would be nonsense. Replay never clears the stored timestamp. */}
+            {subjectPrelude && !preludeVisible && isPreludeCompleted(curriculumProgress.preludeViewedAt) && (
+              <button
+                type="button"
+                onClick={replayPrelude}
+                data-testid="subject-prelude-replay"
+                style={{
+                  margin: '8px 12px 0', padding: '8px 10px', borderRadius: 10, cursor: 'pointer',
+                  background: 'transparent', color: 'var(--text-secondary)',
+                  border: '1px solid var(--border-subtle)', fontSize: 11.5, fontWeight: 600,
+                  textAlign: 'left',
+                }}
+              >
+                {t('prelude_replay_btn')}
+              </button>
+            )}
+
             {/* Curriculum tree */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '8px 0' }}>
               {curriculumUnits.length === 0 ? (
@@ -4282,10 +4363,31 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               className="dot-grid"
               style={{ flex: 1, overflowY: 'auto', padding: 12, display: 'flex', flexDirection: 'column', gap: 14, background: 'var(--bg-void)', position: 'relative' }}>
 
+              {/* SUBJECT PRELUDE (P1) — sits IN FRONT of the Start Lesson gate,
+                  which is the single chokepoint every lesson-entry path already
+                  funnels through (first open, refresh, roadmap pick, deep link).
+                  Placing it here is what makes "never enter Lesson 1 immediately
+                  on first entry" true for every one of those paths without any
+                  of them knowing the prelude exists.
+
+                  It renders only while the lesson has NOT started, so it can
+                  never interrupt teaching in progress, and it writes nothing
+                  except its own timestamp. */}
+              {!lessonStarted && messages.length === 0 && preludeVisible && subjectPrelude && (
+                <SubjectPreludeScreen
+                  prelude={subjectPrelude}
+                  subjectName={subjectName}
+                  isReplay={preludeReplay}
+                  busy={preludeSaving}
+                  continueLabel={preludeReplay ? t('prelude_done_btn') : t('prelude_continue_btn')}
+                  onContinue={() => { void completePrelude() }}
+                />
+              )}
+
               {/* FIX 1 (stabilization): "Start Lesson" gate — selecting/opening a
                   lesson only selects it; the AI does not start teaching until the
                   learner presses this button. */}
-              {!lessonStarted && messages.length === 0 && (() => {
+              {!lessonStarted && messages.length === 0 && !preludeVisible && (() => {
                 // P0 (lesson start flow): this is the ONE chokepoint every
                 // lesson-entry path funnels through before teaching begins —
                 // first open, refresh, and (after the routing fix below) every
