@@ -104,8 +104,20 @@
   1:1. `prisma migrate deploy` is confirmed a genuine no-op on every deploy — **no drift, resolved,
   not a risk.** (Prior note, 2026-07-26 Engineering Program close-out, is superseded: it had
   flagged this as unverified and originally mis-stated the project as `db push`-only.)
-- AI: Groq primary (`openai/gpt-oss-20b`), YandexGPT fallback (Russia only, `country === 'ru'`;
-  itself falls back to Groq on missing credentials or any error). Redis optional (app runs without it).
+- AI (**corrected 2026-08-04, verified against the code**): the provider chain is
+  **Gemini primary (`gemini-3.5-flash-lite`) -> OpenRouter -> Groq (`openai/gpt-oss-20b`,
+  last-resort)**, assembled in `src/lib/ai/router.ts`; providers with no configured API key are
+  filtered out. **There is NO YandexGPT LLM provider** — `src/lib/ai/providers/` contains only
+  `gemini.ts`, `openrouter.ts`, `groq.ts`. YandexGPT was deliberately removed by commit
+  `52152a18` ("feat(ai): production AI provider layer — Gemini primary, OpenRouter fallback",
+  whose body reads "Replace Groq/YandexGPT with Google Gemini"); Groq was later reinstated as a
+  third tier, Yandex was not. The prior text on this line ("Groq primary, YandexGPT fallback,
+  Russia only, `country === 'ru'`") described a system that no longer exists and had been stale
+  since that commit. Russian learners are served by the same chain as everyone else — this is by
+  design, not a regression. `routeAI`'s `country` parameter is vestigial: it is logged and read
+  by no provider. **Yandex IS still live for Russian text-to-speech** (`/api/tts`, gated on
+  `lang === 'ru'` + `YANDEX_API_KEY`/`YANDEX_FOLDER_ID`) — a separate integration, unaffected.
+  Redis optional (app runs without it).
 - KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`.
   Misconception data is runtime (`MistakeRecord`), NOT in the static KG type.
 - Admin gated by `ADMIN_EMAILS` env var (not a DB flag).

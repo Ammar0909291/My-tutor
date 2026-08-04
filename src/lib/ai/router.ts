@@ -142,6 +142,12 @@ export interface RouteAIResult {
 export async function routeAI(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
+  // VESTIGIAL. This was the YandexGPT routing signal ('ru' -> YandexGPT).
+  // 52152a18 replaced Groq/YandexGPT with Gemini + OpenRouter and no
+  // replacement provider is country-aware, so this now affects nothing: it is
+  // logged below and read by no provider. Retained because three call sites
+  // pass it and it remains useful in logs; if a region-specific provider is
+  // ever added, this is the parameter it would key on.
   country: string,
   maxTokens = 800,
   // Retained positionally (three call sites pass it) but no longer read: since

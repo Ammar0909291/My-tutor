@@ -374,9 +374,21 @@ export async function POST(req: Request) {
     }
 
     const profileCountry = (profile as any)?.country ?? 'global'
-    // Route to YandexGPT whenever EITHER signal says Russian — country alone
-    // can silently disagree with teachingLanguage (e.g. legacy profiles from
-    // before the country field existed), which used to skip Yandex entirely.
+    // VESTIGIAL — routeAI no longer routes on country, and there is no
+    // YandexGPT provider. This comment used to read "Route to YandexGPT
+    // whenever EITHER signal says Russian", which stopped being true when
+    // 52152a18 ("feat(ai): production AI provider layer") replaced
+    // Groq/YandexGPT with Gemini + OpenRouter. The provider chain is now
+    // Gemini -> OpenRouter -> Groq for EVERY language, and src/lib/ai/router.ts
+    // consumes `country` in exactly one place: a console.log. No provider file
+    // reads it at all.
+    //
+    // Kept, not deleted: it is still the correct value to log, removing it
+    // would touch three call-site signatures for no behavioural gain, and if a
+    // Russia-specific provider is ever reinstated this is where that decision
+    // belongs. Yandex IS still used for Russian TEXT-TO-SPEECH (/api/tts,
+    // gated on lang === 'ru') — that is a separate, live integration and is
+    // unaffected by any of the above.
     const country = teachingLang === 'ru' ? 'ru' : profileCountry
     // Drives NOTATION RULES in buildTutorSystemPrompt (IPA/phonetic notation
     // gating) — derived only from level/grade, never from subject, so it
@@ -2878,7 +2890,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         text = routed.text
         provider = routed.provider
         finishReason = routed.finishReason
-        // Milestone 4 metrics: an LLM-rendered turn (Groq/Yandex called).
+        // Milestone 4 metrics: an LLM-rendered turn (a provider was called).
         try { (await import('@/lib/understanding/brainMetrics')).recordServe('llm') } catch { /* observability only */ }
         // Structured provider log — shows when Groq IS called and the exact,
         // never-silent reason Explanation Memory didn't serve this turn
