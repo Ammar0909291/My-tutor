@@ -2687,9 +2687,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // and is then outnumbered by ~60 English instruction blocks; restating
       // it here is what stops Russian learners receiving English or
       // half-English turns. Renders '' for English — see outputLanguage.ts.
+      //
+      // Hoisted because the verifier's constrained re-render appends its own
+      // English violation appendix AFTER this whole prompt (see the rerender
+      // callback below). Re-appending the SAME string there is what keeps the
+      // contract last on repair turns too; sharing one variable is what makes
+      // it impossible for the two positions to carry different text.
+      let outputLanguageBlockHoisted = ''
       {
         const { buildOutputLanguageBlock } = await import('@/lib/teaching/outputLanguage')
-        systemPrompt += buildOutputLanguageBlock(teachingLang)
+        outputLanguageBlockHoisted = buildOutputLanguageBlock(teachingLang)
+        systemPrompt += outputLanguageBlockHoisted
       }
 
       // Initialised so the compiler can see every branch is covered once the
@@ -3217,7 +3225,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               rerender: async (violationAppendix) => {
                 const routed = await routeAI(
                   [...historyMessages, { role: 'user', content: message }],
-                  systemPrompt + violationAppendix,
+                  // The violation appendix is English machine instruction and
+                  // correctly stays English — but it lands AFTER the language
+                  // contract, which is precisely the burial this whole fix
+                  // exists to prevent. Re-appending the same block restores
+                  // the contract to last position on repair turns, which are
+                  // higher-risk than ordinary ones: the model has already
+                  // produced output the runtime rejected. '' for English, so
+                  // English re-renders are unchanged.
+                  systemPrompt + violationAppendix + outputLanguageBlockHoisted,
                   country,
                   2048, // see the primary routeAI() call above for why this was raised from 1024
                   teachingLang,
