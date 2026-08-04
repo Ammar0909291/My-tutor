@@ -189,8 +189,18 @@ describe('lesson summary — from demonstrated evidence', () => {
     expect(notFixed.misconceptionsCorrected).toBe(false)
   })
 
-  it('falls back to the concept id when no title is known', () => {
-    expect(conceptOutcome(st({ conceptId: 'math.x' }), '  ').title).toBe('math.x')
+  it('never falls back to the concept id when no title is known', () => {
+    // WAS: expected 'math.x' — this test asserted that an unknown title falls
+    // back to the raw concept id. That behaviour was a production defect, not
+    // a contract: this `title` is rendered verbatim into the lesson close and
+    // the completion card, so internal ids like `chem.found.states-of-matter`
+    // were shown to learners. The scenario is kept; the expectation is
+    // corrected to the intended behaviour (a generic phrase reads as prose,
+    // an id reads as a bug). See src/tests/curriculumLocalization.test.ts for
+    // the full id-leak guard across every language.
+    const { title } = conceptOutcome(st({ conceptId: 'math.x' }), '  ')
+    expect(title).toBe('this concept')
+    expect(title).not.toBe('math.x')
   })
 
   it('aggregates the three required buckets', () => {

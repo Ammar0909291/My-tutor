@@ -14,6 +14,7 @@
 
 import type { ConversationState } from './conversationState'
 import { evaluateConceptBudget, hasDemonstratedMastery } from './conceptBudget'
+import { safeConceptTitle } from '@/lib/curriculum/knowledgeGraph'
 
 export interface ConceptOutcome {
   conceptId: string
@@ -31,12 +32,22 @@ export interface ConceptOutcome {
 export function conceptOutcome(
   state: ConversationState,
   title?: string | null,
+  /** Learner's teaching language. Defaults to 'en' so existing callers are
+   *  unchanged; supplying it localizes the concept name. */
+  lang: string = 'en',
 ): ConceptOutcome {
   const mastered = hasDemonstratedMastery(state)
   const budget = evaluateConceptBudget(state)
   return {
     conceptId: state.conceptId ?? 'unknown',
-    title: title?.trim() || state.conceptId || 'this concept',
+    // NEVER falls back to the concept id. It used to (`|| state.conceptId`),
+    // which is how internal ids like `chem.found.states-of-matter` reached the
+    // learner's completion screen: this title is rendered verbatim into the
+    // lesson close and the summary block. safeConceptTitle resolves a
+    // localized name, then the KG's English name, and rejects an id at every
+    // step; when nothing presentable exists the generic phrase is used, since
+    // an unnamed concept reads as prose while a leaked id reads as a bug.
+    title: safeConceptTitle(state.conceptId, title, lang) ?? 'this concept',
     // A concept is only "mastered" on the server's own evidence; anything
     // else — including a spent budget — is honestly reported as needing
     // review rather than quietly counted as done.

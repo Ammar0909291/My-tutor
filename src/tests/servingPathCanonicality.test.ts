@@ -95,7 +95,7 @@ describe('route.ts structural lock: canonical KG is the source of truth for conc
   )
 
   it('getKnowledgeGraph is called before the legacy curriculum-rows branch decides lessonCtx', () => {
-    const kgCallIndex = ROUTE_SOURCE.indexOf("const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')")
+    const kgCallIndex = ROUTE_SOURCE.search(/const \{[^}]*\bgetKnowledgeGraph\b[^}]*\}\s*=\s*\n?\s*await import\('@\/lib\/curriculum\/knowledgeGraph'\)/)
     const legacyBranchIndex = ROUTE_SOURCE.indexOf('if (lessonCtx === null && curriculumLessons.length > 0)')
     expect(kgCallIndex).toBeGreaterThan(-1)
     expect(legacyBranchIndex).toBeGreaterThan(-1)
@@ -113,12 +113,15 @@ describe('route.ts structural lock: canonical KG is the source of truth for conc
       ROUTE_SOURCE.indexOf('let resolvedConceptId: string | null = null'),
       ROUTE_SOURCE.indexOf('// For Subject Library subjects without a knowledge graph'),
     )
-    const matches = conceptResolutionSection.match(/const \{ getKnowledgeGraph \} = await import\('@\/lib\/curriculum\/knowledgeGraph'\)/g) ?? []
+    // Tolerates additional names in the same destructure (the block also
+    // pulls in the localizers) and a line wrap — the lock is about there
+    // being exactly ONE KG import here, not about what else it imports.
+    const matches = conceptResolutionSection.match(/const \{[^}]*\bgetKnowledgeGraph\b[^}]*\}\s*=\s*\n?\s*await import\('@\/lib\/curriculum\/knowledgeGraph'\)/g) ?? []
     expect(matches).toHaveLength(1)
   })
 
   it('resolvedConceptId is assigned inside the KG-priority block, not gated behind the legacy branch', () => {
-    const kgBlockStart = ROUTE_SOURCE.indexOf("const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')")
+    const kgBlockStart = ROUTE_SOURCE.search(/const \{[^}]*\bgetKnowledgeGraph\b[^}]*\}\s*=\s*\n?\s*await import\('@\/lib\/curriculum\/knowledgeGraph'\)/)
     const legacyBranchIndex = ROUTE_SOURCE.indexOf('if (lessonCtx === null && curriculumLessons.length > 0)')
     const resolvedAssignIndex = ROUTE_SOURCE.indexOf('resolvedConceptId = currentLesson.topicSlug')
     expect(resolvedAssignIndex).toBeGreaterThan(kgBlockStart)

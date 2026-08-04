@@ -12,6 +12,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ProcessFlowSpec } from '@/lib/visuals/visualSpec'
 import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
+import { useLanguage } from '@/components/ui/LanguageToggle'
+import { localizeVisualLabel, type VisualLang } from '@/lib/visuals/visualLabels'
 
 const STEP_W = 150
 const STEP_H = 56
@@ -79,6 +81,20 @@ export function ProcessFlowRenderer({
   const { order, swap, isCorrect } = useReorder(spec.steps.length, !!spec.interactive)
   const orderedSteps = spec.interactive ? order.map((i) => spec.steps[i]) : spec.steps
 
+  // Localize for DISPLAY only. spec.steps stays canonical English because it
+  // is also the reorder answer key and the mastery emitter's concept label —
+  // translating the model would change engine state, not just presentation.
+  const { lang, t } = useLanguage()
+  const vLang = (lang ?? 'en') as VisualLang
+  // A step is { title, note? }; only the title is a closed-vocabulary label.
+  // `note` is free prose authored per-spec and is left untouched.
+  const displaySteps = orderedSteps.map((step) => ({
+    ...step,
+    title: localizeVisualLabel(step.title, vLang),
+  }))
+  const displayTitle = localizeVisualLabel(spec.title, vLang)
+  const processBadge = t('viz_badge_process')
+
   const hasChallenge = !!spec.challenge
 
   // Sprint L: mastery emission — see GraphRenderer for the shared pattern.
@@ -123,8 +139,8 @@ export function ProcessFlowRenderer({
   }
 
   return orientation === 'horizontal'
-    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={wrappedSwap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
-    : <VerticalFlow spec={spec} wrapRef={ref} width={width} steps={orderedSteps} interactive={!!spec.interactive} order={order} swap={wrappedSwap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
+    ? <HorizontalFlow spec={spec} wrapRef={ref} width={width} steps={displaySteps} displayTitle={displayTitle} badgeLabel={processBadge} interactive={!!spec.interactive} order={order} swap={wrappedSwap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
+    : <VerticalFlow spec={spec} wrapRef={ref} width={width} steps={displaySteps} displayTitle={displayTitle} badgeLabel={processBadge} interactive={!!spec.interactive} order={order} swap={wrappedSwap} isCorrect={isCorrect} hasChallenge={hasChallenge} />
 }
 
 interface FlowProps {
@@ -132,6 +148,8 @@ interface FlowProps {
   wrapRef: React.MutableRefObject<HTMLDivElement | null>
   width: number
   steps: ProcessFlowSpec['steps']
+  displayTitle: string
+  badgeLabel: string
   interactive: boolean
   order: number[]
   swap: (i: number, j: number) => void
@@ -150,15 +168,15 @@ function ReorderFeedback({ interactive, isCorrect, hasChallenge }: { interactive
   )
 }
 
-function VerticalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect, hasChallenge }: FlowProps) {
+function VerticalFlow({ spec, wrapRef, width, steps, displayTitle, badgeLabel, interactive, swap, isCorrect, hasChallenge }: FlowProps) {
   const boxW = Math.min(STEP_W + 60, width - 16)
   const cx = width / 2
   const h = steps.length * STEP_H + (steps.length - 1) * GAP + 16
 
   return (
-    <Card title={spec.title} badge="PROCESS">
+    <Card title={displayTitle} badge={badgeLabel}>
       <div ref={wrapRef} style={{ width: '100%' }}>
-        <svg width={width} height={h} role="img" aria-label={`${spec.title} process flow`} style={{ display: 'block' }}>
+        <svg width={width} height={h} role="img" aria-label={`${displayTitle} process flow`} style={{ display: 'block' }}>
           {steps.map((step, i) => {
             const y = i * (STEP_H + GAP) + 8
             return (
@@ -184,16 +202,16 @@ function VerticalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrec
   )
 }
 
-function HorizontalFlow({ spec, wrapRef, width, steps, interactive, swap, isCorrect, hasChallenge }: FlowProps) {
+function HorizontalFlow({ spec, wrapRef, width, steps, displayTitle, badgeLabel, interactive, swap, isCorrect, hasChallenge }: FlowProps) {
   const n = steps.length
   const totalW = n * STEP_W + (n - 1) * GAP
   const startX = Math.max(8, (width - totalW) / 2)
   const h = STEP_H + 16 + (interactive ? 20 : 0)
 
   return (
-    <Card title={spec.title} badge="PROCESS">
+    <Card title={displayTitle} badge={badgeLabel}>
       <div ref={wrapRef} style={{ width: '100%', overflowX: 'auto' }}>
-        <svg width={Math.max(width, totalW + 16)} height={h} role="img" aria-label={`${spec.title} process flow`} style={{ display: 'block' }}>
+        <svg width={Math.max(width, totalW + 16)} height={h} role="img" aria-label={`${displayTitle} process flow`} style={{ display: 'block' }}>
           {steps.map((step, i) => {
             const x = startX + i * (STEP_W + GAP)
             const y = 8

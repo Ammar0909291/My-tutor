@@ -85,7 +85,10 @@ describe('pending question cleared / repeated Brain prompt impossible', () => {
     // Without this the next turn re-enters CHECK believing no reflection
     // question has been asked and asks the identical one again.
     const finalise = ROUTE.slice(ROUTE.indexOf('cleanText = buildLessonCloseText('))
-    expect(finalise.slice(0, 1400)).toContain('reflectionAskedThisEntry: true')
+    // Window widened from 1400: localizing the close added an options
+    // object to the call above, pushing this marker to ~1441 chars. The
+    // invariant (marked spent on the finalising turn) is unchanged.
+    expect(finalise.slice(0, 2000)).toContain('reflectionAskedThisEntry: true')
   })
 
   it('the close text cannot itself be recorded as a new question', () => {

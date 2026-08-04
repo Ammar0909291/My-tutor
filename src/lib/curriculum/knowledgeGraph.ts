@@ -429,6 +429,105 @@ export function localizeKGModuleTitle(englishTitle: string, lang: string): strin
   return (row as Record<string, string>)[lang] ?? englishTitle
 }
 
+/**
+ * Learner-facing translations for individual KG CONCEPT titles, keyed by the
+ * canonical concept id.
+ *
+ * Keyed by ID rather than by English title (which is how DOMAIN_LABEL_I18N
+ * above works) because concept titles are not unique across subjects — a
+ * title collision would silently mistranslate one subject's concept with
+ * another's. Domain labels are few and globally unique, so keying them by
+ * text is safe; ~1,750 concept titles are neither.
+ *
+ * NOT stored in the KG JSON: `docs/{subject}/kg/graph.json` is owned by the
+ * external Curriculum Production Pipeline and its 10-field schema is frozen
+ * (see CLAUDE.md). This is a display layer over the KG, not a change to it.
+ *
+ * NOT stored in src/lib/i18n.ts: that file owns UI CHROME strings addressed
+ * by a TranslationKey union. Curriculum display names are a different data
+ * class — addressed by curriculum id, versioned with the curriculum, and
+ * unbounded in number. Mixing them would put ~1,750 curriculum rows into the
+ * UI string union.
+ *
+ * COVERAGE IS PARTIAL BY DESIGN AND THAT IS SAFE. An untranslated concept
+ * falls back to its English KG title, which is readable — never to its id,
+ * which is not (see safeConceptTitle). Populating the remaining subjects is
+ * content production, not a code change.
+ */
+const CONCEPT_TITLE_I18N: Record<string, { ru: string; hi: string }> = {
+  // ── Chemistry · Chemical Foundations (chem.found.*) ───────────────────────
+  'chem.found.matter':              { ru: 'Природа вещества',                       hi: 'पदार्थ की प्रकृति' },
+  'chem.found.states-of-matter':    { ru: 'Агрегатные состояния вещества',          hi: 'पदार्थ की अवस्थाएँ' },
+  'chem.found.pure-substances':     { ru: 'Чистые вещества и смеси',                hi: 'शुद्ध पदार्थ और मिश्रण' },
+  'chem.found.measurement':         { ru: 'Физические величины и единицы СИ',       hi: 'भौतिक राशियाँ और SI मात्रक' },
+  'chem.found.significant-figures': { ru: 'Значащие цифры и анализ погрешностей',   hi: 'सार्थक अंक और त्रुटि विश्लेषण' },
+  'chem.found.mole-concept':        { ru: 'Понятие моля и число Авогадро',          hi: 'मोल संकल्पना और आवोगाद्रो संख्या' },
+  'chem.found.stoichiometry':       { ru: 'Стехиометрия',                           hi: 'रससमीकरणमिति' },
+  'chem.found.concentration':       { ru: 'Единицы концентрации',                   hi: 'सांद्रता के मात्रक' },
+}
+
+/**
+ * Does this string look like an internal curriculum id rather than a title?
+ *
+ * Curriculum ids are dot-qualified lowercase slugs — `chem.found.matter`,
+ * `math.arith.fractions`, `phys.mech.newtons-first-law`. A learner must never
+ * see one; several render paths fall back to the id when a title is missing,
+ * which is how `chem.found.states-of-matter` reached the completion screen.
+ */
+export function looksLikeConceptId(value: string | null | undefined): boolean {
+  const s = value?.trim()
+  if (!s) return false
+  return /^[a-z][a-z0-9]*(\.[a-z0-9][a-z0-9-]*){1,}$/.test(s)
+}
+
+/**
+ * The single resolver for a learner-facing concept name.
+ *
+ * Order: localized title → English KG title → the supplied fallback title →
+ * a generic phrase. An id is rejected at every step, so no caller can leak
+ * one by passing it as the "title" (which is exactly what the lesson-summary
+ * path was doing).
+ *
+ * Returns null when nothing presentable exists, so callers can omit the name
+ * entirely rather than print a placeholder — an omitted name reads as normal
+ * prose; a leaked id reads as a bug.
+ */
+export function safeConceptTitle(
+  conceptId: string | null | undefined,
+  fallbackTitle: string | null | undefined,
+  lang: string,
+): string | null {
+  const id = conceptId?.trim() || null
+
+  if (id && lang !== 'en') {
+    const row = CONCEPT_TITLE_I18N[id]
+    const localized = row ? (row as Record<string, string>)[lang] : undefined
+    if (localized) return localized
+  }
+
+  // The KG's own English title — readable, and correct for English learners.
+  if (id) {
+    const node = getKGNode(id)
+    const kgTitle = node?.title?.trim()
+    if (kgTitle && !looksLikeConceptId(kgTitle)) return kgTitle
+  }
+
+  const fallback = fallbackTitle?.trim()
+  if (fallback && !looksLikeConceptId(fallback)) return fallback
+
+  return null
+}
+
+/** Localize a KG node/lesson title when its concept id is known. Falls back to
+ *  the English title, never to an id. */
+export function localizeKGNodeTitle(
+  conceptId: string | null | undefined,
+  englishTitle: string,
+  lang: string,
+): string {
+  return safeConceptTitle(conceptId, englishTitle, lang) ?? englishTitle
+}
+
 // ── Subject → raw node array ──────────────────────────────────────────────────
 
 function resolveNodes(subjectSlug: string): KnowledgeNode[] | null {

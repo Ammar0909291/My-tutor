@@ -25,6 +25,8 @@
 
 import type { LessonAttemptOutcome } from './lessonAttempt'
 import type { LessonSummary } from './lessonSummary'
+import { t, type Lang } from '@/lib/i18n'
+import { safeConceptTitle } from '@/lib/curriculum/knowledgeGraph'
 
 /**
  * The concepts a lesson requires. Sourced from the caller's already-resolved
@@ -101,11 +103,20 @@ export function buildCompletionPayload(
   attempt: LessonAttemptOutcome,
   summary: LessonSummary,
   currentLessonOrder: number | null,
+  /** Learner's language + resolved concept, so the completion CARD renders a
+   *  localized lesson name. Optional: omitting them reproduces the previous
+   *  English-title behaviour exactly, so existing callers are unchanged. */
+  opts?: { lang?: Lang; conceptId?: string | null },
 ): LessonCompletionPayload {
+  const lang: Lang = opts?.lang ?? 'en'
   return {
     complete: true,
     lessonKey: attempt.lessonKey,
-    lessonTitle: attempt.lessonTitle,
+    // The card rendered "Урок завершён — Nature of Matter": its Russian half
+    // is a UI string from i18n, its title half came straight from the KG in
+    // English. Same resolver as the close text, so card and message can never
+    // disagree — and an internal id can reach neither.
+    lessonTitle: safeConceptTitle(opts?.conceptId, attempt.lessonTitle, lang) ?? attempt.lessonTitle,
     durationSeconds: attempt.durationSeconds,
     completedAt: attempt.completedAt ? attempt.completedAt.toISOString() : null,
     mastered: summary.mastered.map((o) => o.conceptId),
@@ -142,22 +153,47 @@ export function buildCompletionPayload(
 export function buildLessonCloseText(
   lessonTitle: string | null | undefined,
   summary: Pick<LessonSummary, 'mastered' | 'needsReview'>,
-  opts?: { alreadyFinished?: boolean },
+  opts?: { alreadyFinished?: boolean; lang?: Lang; conceptId?: string | null },
 ): string {
-  const title = lessonTitle?.trim() || 'this lesson'
+  // WHY THIS TEXT WAS ENGLISH FOR RUSSIAN LEARNERS, AND WHY NO PROMPT FIX
+  // COULD HAVE REACHED IT. Everything above in this file is deliberately
+  // deterministic: the close is rendered by the RUNTIME from persisted
+  // evidence and REPLACES the model's outgoing text (see the note on this
+  // function above). That design is correct and is not changed here — but it
+  // also means the close never passes through the LLM, so the system-prompt
+  // language contract has no effect on it. It was the one learner-facing
+  // string in the teaching path authored entirely in code, which is exactly
+  // why it survived the language work that fixed everything around it.
+  const lang: Lang = opts?.lang ?? 'en'
+
+  // Localized lesson name; never an internal curriculum id.
+  const title = safeConceptTitle(opts?.conceptId, lessonTitle, lang)
+
   const parts: string[] = [
     opts?.alreadyFinished
-      ? `You've already finished ${title}.`
-      : `That's ${title} finished — nice work.`,
+      ? title
+        ? t(lang, 'lesson_close_already').replace('{title}', title)
+        : t(lang, 'lesson_close_already_untitled')
+      : title
+        ? t(lang, 'lesson_close_done').replace('{title}', title)
+        : t(lang, 'lesson_close_done_untitled'),
   ]
   if (summary.mastered.length > 0) {
-    parts.push(`You mastered: ${summary.mastered.map((o) => o.title).join(', ')}.`)
+    parts.push(t(lang, 'lesson_close_mastered').replace('{items}', conceptNames(summary.mastered, lang)))
   }
   if (summary.needsReview.length > 0) {
-    parts.push(`Worth another look later: ${summary.needsReview.map((o) => o.title).join(', ')}.`)
+    parts.push(t(lang, 'lesson_close_review').replace('{items}', conceptNames(summary.needsReview, lang)))
   }
-  parts.push('Press "Start next lesson" whenever you\'re ready to carry on.')
+  parts.push(t(lang, 'lesson_close_next'))
   return parts.join(' ')
+}
+
+/** Concept names for the close, resolved through the same id-rejecting
+ *  resolver the summary uses, so neither surface can leak an id. */
+function conceptNames(outcomes: { conceptId: string; title: string }[], lang: Lang): string {
+  return outcomes
+    .map((o) => safeConceptTitle(o.conceptId, o.title, lang) ?? t(lang, 'lesson_close_generic_concept'))
+    .join(', ')
 }
 
 /**

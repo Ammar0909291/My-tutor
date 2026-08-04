@@ -252,18 +252,28 @@ export async function POST(req: Request) {
     // confirmed via SUBJECT_ADAPTERS/resolveNodes), so this reordering is a
     // no-op for them: they fall through to the legacy-table branch exactly
     // as before, unchanged.
+    // Hoisted above the lesson synthesis below, which needs it to localize
+    // unit/lesson titles. Depends only on `profile`, loaded far earlier.
+    const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
+
     try {
-      const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
+      const { getKnowledgeGraph, localizeKGModuleTitle, localizeKGNodeTitle } =
+        await import('@/lib/curriculum/knowledgeGraph')
       const graph = getKnowledgeGraph(subjectCode)
       if (graph) {
         let order = 1
+        // /api/curriculum already localizes module titles at its own identical
+        // synthesis (see its `unitTitle: localizeKGModuleTitle(...)`), but this
+        // copy did not — so the same unit rendered as "Основы химии" in the
+        // curriculum panel and "Chemical Foundations" in the lesson footer,
+        // from two code paths that are otherwise line-for-line equivalent.
         const syntheticLessons = graph.modules.flatMap((module, modIdx) =>
           module.nodes.map((node, nodeIdx) => ({
             subjectCode,
             unit: modIdx + 1,
-            unitTitle: module.title,
+            unitTitle: localizeKGModuleTitle(module.title, teachingLang),
             lesson: nodeIdx + 1,
-            lessonTitle: node.title,
+            lessonTitle: localizeKGNodeTitle(node.slug, node.title, teachingLang),
             lessonGoal: (node as any).description ?? node.title,
             order: order++,
             topicSlug: node.slug,
@@ -363,7 +373,6 @@ export async function POST(req: Request) {
       }
     }
 
-    const teachingLang = (profile?.teachingLanguage ?? 'en') as 'ru' | 'en' | 'hi'
     const profileCountry = (profile as any)?.country ?? 'global'
     // Route to YandexGPT whenever EITHER signal says Russian — country alone
     // can silently disagree with teachingLanguage (e.g. legacy profiles from
@@ -2750,7 +2759,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // Same builder the finalising turn uses, so the two closes cannot
             // drift into two different messages.
             const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
-            text = buildLessonCloseText(attempt.lessonTitle, summary, { alreadyFinished: true })
+            text = buildLessonCloseText(attempt.lessonTitle, summary, {
+              alreadyFinished: true, lang: teachingLang, conceptId: resolvedConceptId,
+            })
             provider = 'memory'
             memoryFallbackReasonCode = 'lesson_complete'
             try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
@@ -4102,6 +4113,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                       await store.finalizeLessonAttempt(prisma, id, folded)
                     lessonCompletionHoisted = buildCompletionPayload(
                       finalOutcome, summary, lessonCtx?.currentLesson ?? null,
+                      { lang: teachingLang, conceptId: resolvedConceptId },
                     )
                     // ── THE COMPLETING TURN MUST NOT ALSO TEACH ────────────
                     // The completion GATE (lessonCompletedHoisted -> D-0a ->
@@ -4128,7 +4140,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     // source — buildLessonCloseText is the one builder the
                     // already-complete serve path uses too.
                     const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
-                    cleanText = buildLessonCloseText(finalOutcome.lessonTitle, summary)
+                    cleanText = buildLessonCloseText(finalOutcome.lessonTitle, summary, {
+                      lang: teachingLang, conceptId: resolvedConceptId,
+                    })
                     // Nothing that solicits a further answer may ride along:
                     // a tappable question or a hint would re-open the lesson
                     // the learner has just been told is finished.
