@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 19 READY)
+## english (216 concepts, 22 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1301,10 +1301,10 @@ its subject KG.
 | phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.ipa-basics.md` | READY |
 | phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.minimal-pairs.md` | READY |
-| phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.phonetic-transcription.md` | READY |
 | phonetics | `eng.phonetics.prosody` | Prosody | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.sentence-stress.md` | READY |
 | phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.speech-sounds-overview.md` | READY |
 | phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.syllable-stress.md` | READY |
 | phonetics | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.vowel-sounds.md` | READY |
@@ -1313,7 +1313,7 @@ its subject KG.
 | phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonant-blends.md` | READY |
 | phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonants.md` | READY |
 | phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | No | — | MISSING |
-| phonics | `eng.phonics.digraphs` | Consonant and Vowel Digraphs | Yes | No | — | MISSING |
+| phonics | `eng.phonics.digraphs` | Consonant and Vowel Digraphs | Yes | Yes | `educational-brain/concepts/english/eng.phonics.digraphs.md` | READY |
 | phonics | `eng.phonics.letter-sound-correspondence` | Letter-Sound Correspondence | Yes | Yes | `educational-brain/concepts/english/eng.phonics.letter-sound-correspondence.md` | READY |
 | phonics | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E | Yes | Yes | `educational-brain/concepts/english/eng.phonics.long-vowels-silent-e.md` | READY |
 | phonics | `eng.phonics.phonemic-awareness` | Phonemic Awareness | Yes | Yes | `educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` | READY |

@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1108** (= 1,775 KG concepts − 667 already `READY`, per
+Total queued: **1105** (= 1,775 KG concepts − 670 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-4's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-5's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -663,9 +663,9 @@ math.geom Wave 6, moved to READY.
 | 136 | mathematics | 6 | `math.meas.abstract-measure-spaces` | Abstract Measure Spaces |
 | 137 | mathematics | 6 | `math.graph.connectivity` | Connectivity |
 | 138 | mathematics | 6 | `math.graph.graph-coloring` | Graph Coloring |
-| 139 | english | 6 | `eng.phonics.digraphs` | Consonant and Vowel Digraphs |
-| 140 | english | 6 | `eng.phonetics.sentence-stress` | Sentence Stress |
-| 141 | english | 6 | `eng.phonetics.phonetic-transcription` | Phonetic Transcription |
+**Rows 139-141 removed 2026-08-03** — `eng.phonics.digraphs`,
+`eng.phonetics.sentence-stress`, `eng.phonetics.phonetic-transcription`
+authored English Batch 5 (topological level 6), moved to READY.
 | 142 | biology | 6 | `bio.cell.cytoskeleton` | Cytoskeleton and Cell Motility |
 | 143 | biology | 6 | `bio.cell.cell-cycle` | The Cell Cycle |
 | 144 | biology | 6 | `bio.cell.cell-signalling` | Cell Signalling |

@@ -13,7 +13,7 @@ and this file's summary row should be corrected to match.
 |---|---|---|---|
 | mathematics | 908 | 224 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 56 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`, `line-equation`, `vectors-3d`, `polygon-angle-sum`, `platonic-solids`, `translation`, `reflection`, `dilation` — `math.geom` domain IN PROGRESS, 56/69, Wave 11 complete, Wave 12 next), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
-| english | 216 | 19 | Pre-existing 3: `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts`. Batch 1 (2026-08-03): `eng.phonetics.speech-sounds-overview`, `eng.phonics.alphabet-recognition`, `eng.phonics.rhyming`, `eng.phonetics.articulation-organs`, `eng.phonics.blending-segmenting`, `eng.writing.handwriting-and-formation` (levels 1–2). Batch 2 (2026-08-03): `eng.phonetics.consonant-sounds`, `eng.phonetics.vowel-sounds` (level 3). Batch 3 (2026-08-03): `eng.phonetics.ipa-basics`, `eng.phonics.consonants`, `eng.phonics.short-vowels`, `eng.phonics.sight-words` (level 4). Batch 4 (2026-08-03): `eng.phonetics.minimal-pairs`, `eng.phonetics.syllable-stress`, `eng.phonics.consonant-blends`, `eng.phonics.long-vowels-silent-e` (level 5). 197 concepts remain; see Delivery history below. |
+| english | 216 | 22 | Pre-existing 3: `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts`. Batch 1 (2026-08-03): `eng.phonetics.speech-sounds-overview`, `eng.phonics.alphabet-recognition`, `eng.phonics.rhyming`, `eng.phonetics.articulation-organs`, `eng.phonics.blending-segmenting`, `eng.writing.handwriting-and-formation` (levels 1–2). Batch 2 (2026-08-03): `eng.phonetics.consonant-sounds`, `eng.phonetics.vowel-sounds` (level 3). Batch 3 (2026-08-03): `eng.phonetics.ipa-basics`, `eng.phonics.consonants`, `eng.phonics.short-vowels`, `eng.phonics.sight-words` (level 4). Batch 4 (2026-08-03): `eng.phonetics.minimal-pairs`, `eng.phonetics.syllable-stress`, `eng.phonics.consonant-blends`, `eng.phonics.long-vowels-silent-e` (level 5). Batch 5 (2026-08-03): `eng.phonetics.phonetic-transcription`, `eng.phonetics.sentence-stress`, `eng.phonics.digraphs` (level 6). 194 concepts remain; see Delivery history below. |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
@@ -4729,3 +4729,55 @@ be computed fresh next batch. All five tracking files updated in the same
 commit. Full validation: KG validator PASS (all 6 subjects, English
 216/216 reachable, unchanged), `npx tsc --noEmit` clean, existing test
 suite green, no runtime/KG/Blueprint/Teaching Asset file touched.
+
+### English — Batch 5: topological level 6 (2026-08-03, English Educational Brain authoring program)
+
+Continuing directly after Batch 4. Recomputed the topological queue fresh
+from the live KG rather than assuming the prior batch's forward-looking
+guess — confirmed exactly 3 concepts at level 6: `eng.phonetics.phonetic-
+transcription` (unlocked by both `eng.phonetics.ipa-basics` and
+`eng.phonetics.minimal-pairs`), `eng.phonetics.sentence-stress` (unlocked
+by `eng.phonetics.syllable-stress`), `eng.phonics.digraphs` (unlocked by
+`eng.phonics.consonant-blends` and `eng.phonics.short-vowels`). All 3 had
+existing, substantial Blueprints, reused by reference.
+
+Notable findings: (1) `eng.phonetics.phonetic-transcription`'s first
+misconception is the seventh identified instance of the notation-induced
+pattern, and its second misconception — expecting one single correct
+transcription — is a genuinely new category within this program's
+overgeneralisation catalogue: an overgeneralisation of "one correct
+answer" imported from nearly every other skill in the curriculum, now
+meeting a domain (real dialect variation) that is honestly, legitimately
+multi-valued; (2) the missing-physics-cross-link pattern was confirmed
+inherited rather than independently re-discovered at both
+`phonetic-transcription` (synthesising every underlying phonetics
+concept's acoustic content) and `eng.phonetics.sentence-stress` (a direct
+scaling-up of `eng.phonetics.syllable-stress`'s identical link) — the
+Pipeline audit recommendation is now understood to be systemic across the
+whole `eng.phonetics.*` domain rather than concept-by-concept;
+(3) `eng.phonics.digraphs`' first misconception is notable as the freshest,
+most-immediate instance of negative transfer catalogued in this program —
+drawing on knowledge secured in the literal preceding lesson
+(`eng.phonics.consonant-blends`) rather than knowledge from well earlier
+in the curriculum, a specific sub-pattern worth flagging to the Pipeline
+for concepts that immediately follow a closely related prior concept;
+(4) `eng.phonics.digraphs`' second misconception was clarified as
+targeting a genuinely different kind of repair than this program's other
+rule-plus-exception-list concepts — a calibrated-confidence stance for a
+category that is honestly less reliable, not a completable exception
+list — and a genuine Blueprint coverage gap was found (MP-5 doesn't fully
+verify this repair) and recorded as Curriculum Feedback, not fixed;
+(5) an informal cross-concept dependency was identified between
+`eng.phonetics.phonetic-transcription`'s connected-speech task and
+`eng.phonetics.sentence-stress`, not encoded in the KG's formal
+prerequisite graph — recorded for the Pipeline's awareness, not treated
+as a defect since both concepts' own prerequisite chains remain
+independently well-formed.
+
+English 19/216 → **22/216**. 194 concepts remain. Next candidates
+(topological level 7, to be confirmed fresh next batch): `eng.phonetics.
+intonation-patterns`, `eng.phonics.syllable-types`. All five tracking
+files updated in the same commit. Full validation: KG validator PASS (all
+6 subjects, English 216/216 reachable, unchanged), `npx tsc --noEmit`
+clean, existing test suite green, no runtime/KG/Blueprint/Teaching Asset
+file touched.
