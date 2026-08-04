@@ -222,8 +222,22 @@ export function buildTutorSystemPrompt(
   // Beginner-aware tuning of the two universal laws below — a register-scoped
   // sentence inside the existing principles, NOT a separate prompt block
   // (keeps the prompt stack flat; see 2026-07-14 teaching-quality work).
+  //
+  // Localised per teachingLanguage. This sentence is appended INSIDE the
+  // question-stage principle of the base prompt — i.e. mid-paragraph, in
+  // prose the rest of which is already in the learner's language — so an
+  // English-only version put an English sentence in the middle of the Russian
+  // and Hindi prompts on every turn for every beginner. That is distinct from
+  // the route's ~60 appended teaching blocks, which are separate, clearly
+  // demarcated machine instructions and are correctly left in English (see
+  // src/lib/teaching/outputLanguage.ts).
+  const beginnerTuningByLang: Record<'ru' | 'en' | 'hi', string> = {
+    en: ' This student is a beginner: start at Stage 1, ask at most ONE question per response, prefer demonstrating over asking, and introduce at most ONE new term per response.',
+    ru: ' Этот студент — новичок: начинай со ступени 1, задавай не больше ОДНОГО вопроса за ответ, показывай чаще, чем спрашиваешь, и вводи не больше ОДНОГО нового термина за ответ.',
+    hi: ' Yeh student beginner hai: Stage 1 se shuru karein, ek response mein zyada se zyada EK sawaal poochein, poochne se zyada dikhayein, aur ek response mein zyada se zyada EK naya term introduce karein.',
+  }
   const beginnerTuning = contentRegister === 'beginner'
-    ? ' This student is a beginner: start at Stage 1, ask at most ONE question per response, prefer demonstrating over asking, and introduce at most ONE new term per response.'
+    ? beginnerTuningByLang[teachingLanguage]
     : ''
 
   if (teachingLanguage === 'en') {
