@@ -54,6 +54,42 @@ export function seedCanonicalSlug(
   return `${conceptId}:${familyKind}:${SEED_LANGUAGE}:${gradeBand.toLowerCase()}`
 }
 
+/** Subjects the automatic cold-start bootstrap (src/instrumentation.ts) seeds. */
+export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english'] as const
+
+/**
+ * Prisma `where` matching EXACTLY the AssetIdentity rows the seed bootstrap
+ * owns — nothing else.
+ *
+ * `assetIdentity` is a SHARED table with three writers, and every predicate
+ * below excludes exactly one of the other two:
+ *
+ *   authorKind HUMAN_CURATOR — excludes explanationMemory /
+ *       teachingActionRepository's `capture*` path, which inserts
+ *       AI_AUTHORED/DRAFT rows after LLM generations. Those rows are governed
+ *       by the admin review flow (reviewExplanationAsset / reviewProbeAsset)
+ *       and this bootstrap must never touch them.
+ *   authorId SEED_AUTHOR_ID  — excludes any other human curator's rows.
+ *   tags hasSome <subjects>  — excludes the subjects only the manual script
+ *       seeds (chemistry/biology/computer_science). Those share authorKind and
+ *       authorId but are not part of this bootstrap's corpus.
+ *
+ * Seed rows are tagged `[subjectSlug, familyKind]` (see src/instrumentation.ts),
+ * so matching on subject slugs cannot collide with familyKind values.
+ *
+ * Used for BOTH the completeness guard and the status-convergence step, so a
+ * single predicate defines bootstrap ownership in one place.
+ */
+export function seedOwnershipWhere(
+  subjects: readonly string[] = BOOTSTRAP_SEED_SUBJECTS,
+): { authorKind: 'HUMAN_CURATOR'; authorId: string; tags: { hasSome: string[] } } {
+  return {
+    authorKind: 'HUMAN_CURATOR',
+    authorId: SEED_AUTHOR_ID,
+    tags: { hasSome: [...subjects] },
+  }
+}
+
 // ─── math.arith.fractions ─────────────────────────────────────────────────────
 
 const FRACTIONS = 'math.arith.fractions'
