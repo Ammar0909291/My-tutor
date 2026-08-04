@@ -2680,6 +2680,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // OUTPUT LANGUAGE — must be the LAST block appended, after every
+      // teaching block including the two that assert they override
+      // everything above them (FIRST LESSON PROTOCOL, RECOVERY). The
+      // language contract is stated once at the very top of the base prompt
+      // and is then outnumbered by ~60 English instruction blocks; restating
+      // it here is what stops Russian learners receiving English or
+      // half-English turns. Renders '' for English — see outputLanguage.ts.
+      {
+        const { buildOutputLanguageBlock } = await import('@/lib/teaching/outputLanguage')
+        systemPrompt += buildOutputLanguageBlock(teachingLang)
+      }
+
       // Initialised so the compiler can see every branch is covered once the
       // P13 deterministic branch was added. These placeholders are always
       // overwritten: the lesson-complete branch, the memory branch and the
