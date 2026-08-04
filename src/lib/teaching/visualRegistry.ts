@@ -143,12 +143,62 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   'phys.opt.mirrors':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   'phys.opt.lenses':                  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  // Lens power (1/f) is the SAME physical setup the ray_optics generator
+  // already models (a single thin lens, object/image/focal-length) — power
+  // is just 1/f of that identical lens, not a different phenomenon. Reuses
+  // the lenses mapping rather than inventing a second entry for one formula.
+  'phys.opt.lens-power':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  // Young's Double-Slit Experiment IS the double_slit visual — exact title
+  // match, and the visual's own description ("particles... build up a
+  // wave-like interference pattern") is this experiment. Deliberately NOT
+  // extended to 'diffraction' (single-slit has a different fringe pattern —
+  // fewer/wider slits — showing a two-slit diagram for it would misstate the
+  // apparatus) or 'wave-optics' (the general introduction, not this specific
+  // experiment) — see the P0 audit note below on this file's own standard.
+  'phys.opt.youngs-experiment':       { primary: 'double_slit', all: ['double_slit', 'three_double_slit'] },
+  // P0 (Physics production-completeness audit): 'total-internal-reflection',
+  // 'optical-instruments' (compound eye/microscope/telescope systems — the
+  // ray_optics generator models exactly ONE lens/mirror, not a system),
+  // 'dispersion' (prism wavelength-splitting, no image-formation formula),
+  // 'nature-of-light', 'diffraction', 'single-slit', 'polarization' and
+  // 'brewsters-law' have NO existing visual that genuinely fits — left
+  // unmapped, an intentional Category-C decision (see the P2 audit comment
+  // at DOMAIN_VISUALS below for why the 'phys.opt' blanket default that used
+  // to catch all of these — showing a static force diagram for "Diffraction
+  // of Light" — was removed rather than kept).
 
-  // Physics — Electricity
+  // Physics — Electricity (circuits — a genuine visual family)
   'phys.em.electric-current':         { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
   'phys.em.ohms-law':                 { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
   'phys.em.dc-circuits':              { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
   'phys.em.kirchhoffs-laws':          { primary: 'circuit_diagram', all: ['circuit_diagram'], sceneGenerator: 'electric_circuit' },
+  // P0 audit: these 10 concepts previously reached circuit_diagram only via
+  // the 'phys.em' blanket domain default — correctly, since they genuinely
+  // ARE circuit topics (a battery/wire/resistor network is the right picture
+  // for a Wheatstone bridge or an RC-charging curve's underlying circuit).
+  // Promoted to exact entries so removing that default (below) does not lose
+  // this legitimate coverage — only the field/magnetism concepts the same
+  // default was WRONGLY covering.
+  'phys.em.resistivity':              { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.wheatstone-bridge':        { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.potentiometer':            { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.electrical-power':         { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.emf':                      { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.rc-circuits':              { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.lc-circuits':              { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.ac-basics':                { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.self-inductance':          { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  'phys.em.mutual-inductance':        { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  // P0 audit: 21 phys.em concepts are electrostatics/magnetism, NOT circuits
+  // — electric-charge, coulombs-law, electric-field, electric-dipole,
+  // gauss-law, electric-potential, capacitance, dielectrics, energy-
+  // capacitor, magnetic-field, magnetic-force, biot-savart, amperes-law,
+  // solenoid, magnetic-materials, magnetic-dipole, magnetic-flux, faradays-
+  // law, lenzs-law, maxwells-equations, electromagnetic-waves. Before this
+  // fix ALL of them silently inherited circuit_diagram — a battery/wire/
+  // bulb picture — via the domain default. No existing visual type models a
+  // field-lines diagram, so these are correctly left unmapped rather than
+  // stretched onto a circuit picture (see DOMAIN_VISUALS below).
 
   // Physics — Kinematics (P0 fix: these are NOT force/dynamics concepts —
   // 'phys.mech.displacement' had no exact entry here, so it fell through to
@@ -178,6 +228,123 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.wave.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   'phys.wave.shm':                    { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   'phys.wave.shm-energy':             { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
+  // P0 audit: the remaining 14 phys.wave concepts (wave-properties,
+  // transverse/longitudinal-waves, wave-speed, superposition, interference,
+  // standing-waves, sound-waves, sound-intensity, doppler-effect, beats,
+  // spring-mass, damped/forced-oscillations) previously inherited
+  // force_diagram from the domain default below — wrong for all of them (a
+  // static force arrow does not depict a travelling wave, a Doppler shift, or
+  // a resonance curve). No existing visual type genuinely fits any of these;
+  // intentionally left unmapped (see DOMAIN_VISUALS below for the removal).
+
+  // Physics — Quantum Mechanics (P0 audit: 0 of 19 phys.qm concepts had ANY
+  // visual — not even a wrong one, since no domain default existed for
+  // phys.qm. Meanwhile 14 dedicated quantum visual types (double_slit,
+  // wave_function, potential_well, quantum_tunneling, bloch_sphere,
+  // energy_level_diagram, quantum_circuit, stern_gerlach, entanglement_pair,
+  // plus their three_* 3D counterparts) were fully built and wired into
+  // VisualCard.tsx's render switch but referenced by NOTHING in this
+  // registry — the single largest coverage gap on the platform, and the
+  // cheapest to close: the content already exists. Only concepts with a
+  // genuine visual match are mapped; the rest (operators, pauli-exclusion,
+  // perturbation-theory, variational-method, wkb-approximation, identical-
+  // particles, angular-momentum-addition, scattering-theory-born-
+  // approximation, s-matrix-basics, density-matrix, uncertainty-principle,
+  // harmonic-oscillator-qm) have no existing visual that depicts them
+  // correctly and are left unmapped rather than stretched onto a
+  // near-but-wrong asset — e.g. 'harmonic-oscillator-qm' is NOT mapped to
+  // potential_well: that visual's own description is specifically "an
+  // INFINITE SQUARE WELL", a different potential shape from the parabolic
+  // harmonic-oscillator well, and showing the wrong potential shape would
+  // misteach the concept rather than merely under-illustrate it.
+  'phys.qm.wave-function':            { primary: 'wave_function', all: ['wave_function'] },
+  // The equation's own canonical textbook figure IS its solution ψ(x) — the
+  // same asset as wave-function above; teaching "what does solving this
+  // equation produce" via the solution shape is standard, not a stretch.
+  'phys.qm.schrodinger-equation':     { primary: 'wave_function', all: ['wave_function'] },
+  // Exact title match: "Particle in an Infinite Square Well" IS the
+  // potential_well visual's own description.
+  'phys.qm.particle-in-box':          { primary: 'potential_well', all: ['potential_well'] },
+  'phys.qm.hydrogen-atom-qm':         { primary: 'three_hydrogen_orbital', all: ['three_hydrogen_orbital'] },
+  // The concept's own KG title is "Electron Spin and the Stern-Gerlach
+  // Experiment" — naming the visual exactly.
+  'phys.qm.spin':                     { primary: 'stern_gerlach', all: ['stern_gerlach', 'three_stern_gerlach'] },
+  'phys.qm.quantum-tunneling':        { primary: 'quantum_tunneling', all: ['quantum_tunneling', 'three_quantum_tunneling'] },
+  // Selection rules govern which atomic transitions are allowed — exactly
+  // what energy_level_diagram depicts (absorption/emission producing a
+  // spectral line).
+  'phys.qm.selection-rules':          { primary: 'energy_level_diagram', all: ['energy_level_diagram'] },
+
+  // Physics — Modern Physics (P0 audit: 0 of 21 previously mapped; the three
+  // below reuse the quantum visuals just wired above rather than duplicate
+  // logic. The rest — photoelectric-effect, photons, compton-effect,
+  // de-broglie, x-rays, radioactivity family, nuclear-fission/fusion/models,
+  // binding-energy, energy-bands, and the whole semiconductor sub-area
+  // (semiconductor-classification through diode-rectification) — have no
+  // existing visual that fits: three_atomic_structure depicts a STATIC atom
+  // (nucleus + electron shells), not a decay/fission/fusion PROCESS, and
+  // circuit_diagram is a battery-wire-bulb circuit, not a diode/band-diagram
+  // schematic — both would misrepresent rather than merely under-illustrate.
+  // Left unmapped.
+  // The double-slit build-up of an interference pattern FROM PARTICLES is
+  // literally the textbook demonstration of wave-particle duality (the
+  // visual's own description: "particles passing through two slits build up
+  // a wave-like interference pattern").
+  'phys.mod.wave-particle-duality':   { primary: 'double_slit', all: ['double_slit', 'three_double_slit'] },
+  // The Bohr model's entire content IS quantized energy levels with photon
+  // emission/absorption on transitions — energy_level_diagram's exact
+  // description.
+  'phys.mod.bohr-model':              { primary: 'energy_level_diagram', all: ['energy_level_diagram'] },
+  'phys.mod.atomic-spectra':          { primary: 'energy_level_diagram', all: ['energy_level_diagram'] },
+
+  // Physics — Thermodynamics (P0 audit: 0 of 18 previously mapped, and no
+  // thermodynamics-specific visual type exists on the platform. Three
+  // concepts are literally "plot this on P-V axes" content, and
+  // coordinate_plane is a genuinely generic, unlabeled axis grid (no
+  // asserted curve shape — see the P0 caution below on phys.stat for why an
+  // asserted-shape visual is NOT reused this freely), matching the same
+  // generic-axes reuse already established for math.calc/math.stat's domain
+  // defaults. The rest (temperature, zeroth-law, thermal-expansion, heat-
+  // transfer, specific-heat, calorimetry, phase-transitions, kinetic-theory,
+  // first-law, internal-energy, second-law, entropy, heat-engines,
+  // refrigerators, third-law) are conceptual/qualitative at this level, not
+  // literally a curve a student plots, and are left unmapped rather than
+  // stretched onto axes that don't represent them.
+  'phys.therm.ideal-gas-law':             { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  'phys.therm.thermodynamic-processes':   { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  'phys.therm.carnot-cycle':              { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+
+  // Physics — Statistical Mechanics (P0 audit: 0 of 15 previously mapped.
+  // three_statistical_distribution exists (built for Data Science) but its
+  // renderer draws a FIXED, hardcoded symmetric bell curve (verified by
+  // reading StatisticalDistribution3D.tsx — not parametrized by content) —
+  // so it is mapped ONLY to the one concept that is teaching the general
+  // IDEA of "here is what a probability distribution looks like: axes, data,
+  // a histogram, a curve, mean and spread", not asserting any specific named
+  // distribution's actual shape. It is deliberately NOT mapped to maxwell-
+  // boltzmann (a skewed, non-bell speed distribution), fermi-dirac or bose-
+  // einstein (step-like/divergent occupation functions) — the fixed bell
+  // shape would depict the WRONG curve for all three, which is the exact
+  // failure mode this whole registry exists to prevent. The remaining 11
+  // concepts (boltzmann-factor, partition-function, entropy-statistical,
+  // free-energy, grand-canonical-ensemble, chemical-potential, fluctuations-
+  // correlations, phase-transitions, ising-model, phase-transitions-
+  // critical-phenomena, monte-carlo-basics) are formalism/abstract with no
+  // fitting visual and are left unmapped.
+  'phys.stat.probability-basics':         { primary: 'three_statistical_distribution', all: ['three_statistical_distribution'] },
+
+  // Physics — Particle Physics, Relativity, Astrophysics: INTENTIONAL ZERO
+  // COVERAGE (P0 audit). Verified against src/lib/school/visuals/
+  // visualTypes.ts: no particle-collision/detector, spacetime-curvature/
+  // Minkowski-diagram, or stellar-structure/cosmology visual type exists
+  // anywhere on the platform — this is a genuine missing-content gap
+  // (Category B), not an oversight in this registry. Documented here rather
+  // than left silent, per this file's "exact, domain-appropriate, or
+  // intentional no-visual decision" standard: phys.particle (16 concepts),
+  // phys.rel (8 concepts), phys.astro (6 concepts) correctly fall through to
+  // detectVisual()'s keyword match or an honest no-visual response. Building
+  // new renderer components for these is future content work, not a
+  // registry-data fix.
 
   // Chemistry — Atomic structure
   // NOTE (corrected): these 5 keys previously used a stale chem.found.* /
@@ -329,10 +496,33 @@ const DOMAIN_VISUALS: DomainRule[] = [
   // inheriting an unrelated force diagram. The lookup ALGORITHM (three
   // tiers, checked in this order) is unchanged — only this one row of
   // domain-default DATA was removed.
-  domainRule('phys.em',    'circuit_diagram', ['circuit_diagram']),
-  domainRule('phys.opt',   'force_diagram', ['force_diagram']),
-  domainRule('phys.wave',  'force_diagram', ['force_diagram']),
-  domainRule('phys.meas',  'three_vector_visualization', ['three_vector_visualization']),
+  //
+  // REMOVED (P0 physics production-completeness audit): domainRule(
+  // 'phys.em', 'circuit_diagram', ...), domainRule('phys.opt',
+  // 'force_diagram', ...), domainRule('phys.wave', 'force_diagram', ...),
+  // domainRule('phys.meas', 'three_vector_visualization', ...).
+  //
+  // Same defect class as the chem.found removal below, found by directly
+  // computing what these four defaults actually caught: 61 concepts across
+  // the four domains were reaching a visual ONLY through these blanket
+  // rules, and the large majority of them were WRONG —
+  //   phys.em    circuit_diagram for 21 field/magnetism concepts
+  //              (Gauss's Law, Magnetic Field and Field Lines, ...)
+  //   phys.opt   force_diagram for 9 non-ray-optics concepts
+  //              (Diffraction of Light, Young's Double-Slit Experiment, ...)
+  //   phys.wave  force_diagram for 14 wave/oscillation concepts
+  //              (Doppler Effect, Standing Waves, Beats, ...)
+  //   phys.meas  three_vector_visualization for 5 non-vector concepts
+  //              (SI Units and Measurement, Significant Figures, ...)
+  // Each domain is visually heterogeneous, not uniform (exactly the
+  // chem.found pattern: a handful of concepts genuinely fit the domain's
+  // "obvious" visual, the rest do not). Every concept in these four domains
+  // for which an existing visual genuinely fits now has an explicit
+  // CONCEPT_VISUALS entry above (10 promoted for phys.em's real circuit
+  // subset, 2 added for phys.opt, plus the pre-existing exact entries for
+  // all four); everything else correctly falls through to Tier 3
+  // (detectVisual's keyword match) or an honest no-visual response instead
+  // of a wrong domain-wide substitution.
 
   // Chemistry domains
   domainRule('chem.bond',   'three_bond_formation', ['three_bond_formation', 'three_molecular_shapes']),

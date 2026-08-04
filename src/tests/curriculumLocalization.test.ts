@@ -83,6 +83,18 @@ describe('lesson titles are localized', () => {
     expect(localizeKGModuleTitle('Chemical Foundations', 'ru')).toBe('Основы химии')
     expect(localizeKGModuleTitle('Chemical Foundations', 'en')).toBe('Chemical Foundations')
   })
+
+  // P0 physics production-completeness audit: physics's entry domain
+  // (phys.meas.*) seeded as a bounded first batch — every physics learner
+  // reaches these concepts first, in any language.
+  it('localizes the physics entry domain (phys.meas.*) into Russian and Hindi', () => {
+    expect(localizeKGNodeTitle('phys.meas.units', 'SI Units and Measurement', 'ru'))
+      .toBe('Единицы СИ и измерение')
+    expect(localizeKGNodeTitle('phys.meas.units', 'SI Units and Measurement', 'hi'))
+      .toBe('SI मात्रक और मापन')
+    expect(localizeKGNodeTitle('phys.meas.vector-products', 'Dot and Cross Products', 'ru'))
+      .toBe('Скалярное и векторное произведения')
+  })
 })
 
 describe('completion messages localize', () => {

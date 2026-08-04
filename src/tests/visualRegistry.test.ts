@@ -41,14 +41,19 @@ describe('visualRegistry', () => {
   })
 
   // ── Tier 2: domain prefix fallback ─────────────────────────────────────
-  // (phys.em still carries a domain default — used here to test the
-  // mechanism itself, since phys.mech's default was deliberately removed;
-  // see the P2 section below for that.)
+  // (chem.bond still carries a domain default — used here to test the
+  // mechanism itself. phys.mech's default was deliberately removed, see the
+  // P2 section below; the P0 physics production-completeness audit removed
+  // phys.em/phys.opt/phys.wave/phys.meas's defaults for the same reason —
+  // each domain turned out to be visually heterogeneous, so a blanket
+  // fallback was WRONG for most of its remaining concepts. chem.bond is
+  // genuinely uniform (every concept under it is a bonding-visual fit),
+  // which is exactly the property a domain default is supposed to assert.)
 
   it('falls back to domain visual when no exact match', () => {
-    const entry = lookupConceptVisual('phys.em.some-unlisted-concept')
+    const entry = lookupConceptVisual('chem.bond.some-unlisted-concept')
     expect(entry).not.toBeNull()
-    expect(entry!.primary).toBe('circuit_diagram')
+    expect(entry!.primary).toBe('three_bond_formation')
   })
 
   it('matches the longest domain prefix', () => {
@@ -58,9 +63,20 @@ describe('visualRegistry', () => {
   })
 
   it('domain match returns all available types', () => {
-    const entry = lookupConceptVisual('phys.em.unknown-electricity')
-    expect(entry!.all).toEqual(['circuit_diagram'])
+    const entry = lookupConceptVisual('chem.bond.unknown-bonding')
+    expect(entry!.all).toEqual(['three_bond_formation', 'three_molecular_shapes'])
   })
+
+  // P0 audit regression lock: phys.em/opt/wave/meas no longer have a domain
+  // default at all — an unlisted concept under any of them must fall all
+  // the way through to null (Tier 3 / honest no-visual), never a
+  // substituted circuit/force/vector visual it doesn't depict.
+  it.each(['phys.em', 'phys.opt', 'phys.wave', 'phys.meas'])(
+    '%s has no domain default — an unlisted concept resolves to null, not a wrong substitution',
+    (prefix) => {
+      expect(lookupConceptVisual(`${prefix}.some-unlisted-concept`)).toBeNull()
+    },
+  )
 
   // ── Null cases ─────────────────────────────────────────────────────────
 
@@ -84,9 +100,9 @@ describe('visualRegistry', () => {
 
   it('exact concept match overrides domain default', () => {
     const exact = getConceptVisualType('phys.mech.projectile-motion')
-    const domain = lookupConceptVisual('phys.em.some-other')
+    const domain = lookupConceptVisual('chem.bond.some-other')
     expect(exact).toBe('three_projectile_motion')
-    expect(domain!.primary).toBe('circuit_diagram')
+    expect(domain!.primary).toBe('three_bond_formation')
   })
 
   // ── Cross-subject coverage checks ──────────────────────────────────────

@@ -464,6 +464,23 @@ const CONCEPT_TITLE_I18N: Record<string, { ru: string; hi: string }> = {
   'chem.found.mole-concept':        { ru: 'Понятие моля и число Авогадро',          hi: 'मोल संकल्पना और आवोगाद्रो संख्या' },
   'chem.found.stoichiometry':       { ru: 'Стехиометрия',                           hi: 'रससमीकरणमिति' },
   'chem.found.concentration':       { ru: 'Единицы концентрации',                   hi: 'सांद्रता के मात्रक' },
+
+  // ── Physics · Measurement (phys.meas.*) — the subject's entry domain, so
+  // every physics learner encounters these concepts first regardless of
+  // language. Seeded here (P0 physics production-completeness audit) as a
+  // bounded first batch, following the same incremental-batch precedent the
+  // Curriculum Completion Program already established for chemistry's own
+  // entry domain (see COVERAGE.md). The remaining ~230 physics concepts are
+  // content production for a future batch, not faked here — untranslated
+  // ones correctly degrade to their readable English KG title (never an id).
+  'phys.meas.units':              { ru: 'Единицы СИ и измерение',                 hi: 'SI मात्रक और मापन' },
+  'phys.meas.scalars-vectors':    { ru: 'Скалярные и векторные величины',         hi: 'अदिश और सदिश राशियाँ' },
+  'phys.meas.dimensions':         { ru: 'Анализ размерностей',                    hi: 'विमीय विश्लेषण' },
+  'phys.meas.errors':             { ru: 'Погрешности измерений и неопределённость', hi: 'मापन त्रुटियाँ और अनिश्चितता' },
+  'phys.meas.significant-figures':{ ru: 'Значащие цифры и точность',              hi: 'सार्थक अंक और परिशुद्धता' },
+  'phys.meas.vector-addition':    { ru: 'Сложение и разложение векторов',         hi: 'सदिश योग और विभाजन' },
+  'phys.meas.vector-products':    { ru: 'Скалярное и векторное произведения',     hi: 'बिंदु और क्रॉस गुणनफल' },
+  'phys.meas.unit-conversion':    { ru: 'Перевод единиц и приставки',             hi: 'मात्रक रूपांतरण और उपसर्ग' },
 }
 
 /**
