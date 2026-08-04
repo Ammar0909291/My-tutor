@@ -104,19 +104,27 @@
   1:1. `prisma migrate deploy` is confirmed a genuine no-op on every deploy — **no drift, resolved,
   not a risk.** (Prior note, 2026-07-26 Engineering Program close-out, is superseded: it had
   flagged this as unverified and originally mis-stated the project as `db push`-only.)
-- AI (**corrected 2026-08-04, verified against the code**): the provider chain is
-  **Gemini primary (`gemini-3.5-flash-lite`) -> OpenRouter -> Groq (`openai/gpt-oss-20b`,
-  last-resort)**, assembled in `src/lib/ai/router.ts`; providers with no configured API key are
-  filtered out. **There is NO YandexGPT LLM provider** — `src/lib/ai/providers/` contains only
-  `gemini.ts`, `openrouter.ts`, `groq.ts`. YandexGPT was deliberately removed by commit
-  `52152a18` ("feat(ai): production AI provider layer — Gemini primary, OpenRouter fallback",
-  whose body reads "Replace Groq/YandexGPT with Google Gemini"); Groq was later reinstated as a
-  third tier, Yandex was not. The prior text on this line ("Groq primary, YandexGPT fallback,
-  Russia only, `country === 'ru'`") described a system that no longer exists and had been stale
-  since that commit. Russian learners are served by the same chain as everyone else — this is by
-  design, not a regression. `routeAI`'s `country` parameter is vestigial: it is logged and read
-  by no provider. **Yandex IS still live for Russian text-to-speech** (`/api/tts`, gated on
-  `lang === 'ru'` + `YANDEX_API_KEY`/`YANDEX_FOLDER_ID`) — a separate integration, unaffected.
+- AI (**YandexGPT restored 2026-08-04 as an intentional product decision; supersedes the
+  2026-08-04 "there is NO YandexGPT LLM provider" note below**): provider selection keys off the
+  learner's **selected teaching language and NOTHING else** — never their country. Two chains,
+  both assembled in `src/lib/ai/router.ts`:
+  - `teachingLanguage === 'ru'` → **YandexGPT (`yandexgpt-lite/latest`) -> Gemini
+    (`gemini-3.5-flash-lite`) -> OpenRouter -> Groq (`openai/gpt-oss-20b`)**
+  - every other language → **Gemini -> OpenRouter -> Groq** (byte-for-byte the prior chain)
+  So Russian in India/Poland/Russia all get YandexGPT, and English in Russia gets Gemini.
+  `chainKeyForLanguage()` in `router.ts` is the **single provider-selection authority** — it
+  takes a language and no country, so nothing else may branch on either to pick a provider.
+  Providers with no configured API key are still filtered out; Yandex requires BOTH
+  `YANDEX_API_KEY` and `YANDEX_FOLDER_ID` (the folder id forms the model URI), and without them
+  the Russian chain simply starts at Gemini. `AI_PROVIDER_MODE=gemini_only` still overrides both
+  chains. `routeAI`'s `country` parameter remains **not a routing signal** — logged only, read by
+  no provider. **Yandex is also live for Russian text-to-speech** (`/api/tts`, gated on the same
+  `lang === 'ru'` signal) — LLM and TTS deliberately share one language signal.
+  History: YandexGPT was removed by `52152a18` ("feat(ai): production AI provider layer"), which
+  replaced Groq/YandexGPT with Gemini + OpenRouter; `970f46a2` then corrected the stale docs that
+  still claimed Russian used it. That removal is now deliberately reversed — but on language, not
+  on `country === 'ru'` as the pre-`52152a18` router did. Guarded by
+  `src/tests/aiProviderChainTruth.test.ts` and `src/tests/aiRussianLanguageRouting.test.ts`.
   Redis optional (app runs without it).
 - KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`.
   Misconception data is runtime (`MistakeRecord`), NOT in the static KG type.
