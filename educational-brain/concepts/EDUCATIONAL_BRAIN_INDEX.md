@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 28 READY)
+## english (216 concepts, 32 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1261,7 +1261,7 @@ its subject KG.
 | linguistics | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.what-is-linguistics` | What Is Linguistics? | Yes | No | — | MISSING |
-| listening | `eng.listening.active-listening` | Active Listening | Yes | No | — | MISSING |
+| listening | `eng.listening.active-listening` | Active Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.active-listening.md` | READY |
 | listening | `eng.listening.critical-listening` | Critical Listening | Yes | No | — | MISSING |
 | listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | No | — | MISSING |
 | listening | `eng.listening.following-instructions` | Following Spoken Instructions | Yes | No | — | MISSING |
@@ -1303,7 +1303,7 @@ its subject KG.
 | phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.minimal-pairs.md` | READY |
 | phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.phonetic-transcription.md` | READY |
 | phonetics | `eng.phonetics.prosody` | Prosody | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.prosody.md` | READY |
-| phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.rhythm-and-timing.md` | READY |
 | phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.sentence-stress.md` | READY |
 | phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.speech-sounds-overview.md` | READY |
 | phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.syllable-stress.md` | READY |
@@ -1343,7 +1343,7 @@ its subject KG.
 | speaking | `eng.speaking.debate-skills` | Debate Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.discussion-skills` | Discussion Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.non-verbal-communication` | Non-Verbal Communication | Yes | No | — | MISSING |
-| speaking | `eng.speaking.oral-fluency` | Oral Fluency | Yes | No | — | MISSING |
+| speaking | `eng.speaking.oral-fluency` | Oral Fluency | Yes | Yes | `educational-brain/concepts/english/eng.speaking.oral-fluency.md` | READY |
 | speaking | `eng.speaking.presentation-skills` | Presentation Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation | Yes | No | — | MISSING |
 | speaking | `eng.speaking.public-speaking-basics` | Public Speaking Basics | Yes | No | — | MISSING |
@@ -1367,7 +1367,7 @@ its subject KG.
 | vocab | `eng.vocab.thesaurus-and-dictionary-skills` | Thesaurus and Dictionary Skills | Yes | No | — | MISSING |
 | vocab | `eng.vocab.word-families` | Word Families | Yes | No | — | MISSING |
 | vocab | `eng.vocab.word-formation-processes` | Word Formation Processes | Yes | No | — | MISSING |
-| vocab | `eng.vocab.word-recognition` | Word Recognition | Yes | No | — | MISSING |
+| vocab | `eng.vocab.word-recognition` | Word Recognition | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-recognition.md` | READY |
 | writing | `eng.writing.citations-and-referencing` | Citations and Referencing | Yes | No | — | MISSING |
 | writing | `eng.writing.creative-writing-forms` | Creative Writing Forms | Yes | No | — | MISSING |
 | writing | `eng.writing.descriptive-writing` | Descriptive Writing | Yes | No | — | MISSING |

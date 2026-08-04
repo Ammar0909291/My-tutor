@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1099** (= 1,775 KG concepts − 676 already `READY`, per
+Total queued: **1095** (= 1,775 KG concepts − 680 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-7's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-8's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -824,10 +824,7 @@ math.geom Wave 8, moved to READY.
 | 285 | mathematics | 9 | `math.meas.l2-space` | L² Space |
 | 286 | mathematics | 9 | `math.cat.morphism-types` | Types of Morphisms |
 | 287 | mathematics | 9 | `math.cat.functor` | Functor |
-| 288 | english | 9 | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing |
-| 289 | english | 9 | `eng.vocab.word-recognition` | Word Recognition |
-| 290 | english | 9 | `eng.listening.active-listening` | Active Listening |
-| 291 | english | 9 | `eng.speaking.oral-fluency` | Oral Fluency |
+| 288-291 | english | 9 | *(rows removed 2026-08-03 — English Batch 8)* | moved to READY: `eng.phonetics.rhythm-and-timing`, `eng.vocab.word-recognition`, `eng.listening.active-listening`, `eng.speaking.oral-fluency` |
 | 292 | biology | 9 | `bio.mol.transcription` | Transcription |
 | 293 | biology | 9 | `bio.gen.mendelian-genetics` | Mendelian Genetics |
 | 294 | biology | 9 | `bio.plant.plant-respiration` | Respiration in Plants |
