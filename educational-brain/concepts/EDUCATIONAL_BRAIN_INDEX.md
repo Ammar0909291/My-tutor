@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 24 READY)
+## english (216 concepts, 28 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1296,13 +1296,13 @@ its subject KG.
 | literature | `eng.literature.theme-and-message` | Theme and Message | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.articulation-organs.md` | READY |
-| phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.connected-speech.md` | READY |
 | phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.consonant-sounds.md` | READY |
 | phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.intonation-patterns.md` | READY |
 | phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.ipa-basics.md` | READY |
 | phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.minimal-pairs.md` | READY |
 | phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.phonetic-transcription.md` | READY |
-| phonetics | `eng.phonetics.prosody` | Prosody | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.prosody` | Prosody | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.prosody.md` | READY |
 | phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.sentence-stress.md` | READY |
 | phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.speech-sounds-overview.md` | READY |
@@ -1312,7 +1312,7 @@ its subject KG.
 | phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | Yes | `educational-brain/concepts/english/eng.phonics.blending-segmenting.md` | READY |
 | phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonant-blends.md` | READY |
 | phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonants.md` | READY |
-| phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | No | — | MISSING |
+| phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | Yes | `educational-brain/concepts/english/eng.phonics.decoding-fluency.md` | READY |
 | phonics | `eng.phonics.digraphs` | Consonant and Vowel Digraphs | Yes | Yes | `educational-brain/concepts/english/eng.phonics.digraphs.md` | READY |
 | phonics | `eng.phonics.letter-sound-correspondence` | Letter-Sound Correspondence | Yes | Yes | `educational-brain/concepts/english/eng.phonics.letter-sound-correspondence.md` | READY |
 | phonics | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E | Yes | Yes | `educational-brain/concepts/english/eng.phonics.long-vowels-silent-e.md` | READY |
@@ -1382,7 +1382,7 @@ its subject KG.
 | writing | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics | Yes | No | — | MISSING |
 | writing | `eng.writing.revising-for-content` | Revising for Content | Yes | No | — | MISSING |
 | writing | `eng.writing.sentence-writing` | Sentence Writing | Yes | No | — | MISSING |
-| writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | No | — | MISSING |
+| writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | Yes | `educational-brain/concepts/english/eng.writing.spelling-strategies.md` | READY |
 | writing | `eng.writing.supporting-details` | Supporting Details | Yes | No | — | MISSING |
 | writing | `eng.writing.the-writing-process` | The Writing Process | Yes | No | — | MISSING |
 | writing | `eng.writing.thesis-statements` | Thesis Statements | Yes | No | — | MISSING |

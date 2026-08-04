@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1103** (= 1,775 KG concepts − 672 already `READY`, per
+Total queued: **1099** (= 1,775 KG concepts − 676 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-6's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-7's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -771,10 +771,10 @@ math.geom Wave 8, moved to READY.
 | 231 | mathematics | 8 | `math.graph.minimum-spanning-tree` | Minimum Spanning Tree |
 | 232 | mathematics | 8 | `math.graph.random-graph` | Random Graphs |
 | 233 | mathematics | 8 | `math.cat.category` | Category |
-| 234 | english | 8 | `eng.phonics.decoding-fluency` | Decoding Fluency |
-| 235 | english | 8 | `eng.phonetics.connected-speech` | Connected Speech |
-| 236 | english | 8 | `eng.phonetics.prosody` | Prosody |
-| 237 | english | 8 | `eng.writing.spelling-strategies` | Spelling Strategies |
+**Rows 234-237 removed 2026-08-03** — `eng.phonics.decoding-fluency`,
+`eng.phonetics.connected-speech`, `eng.phonetics.prosody`, `eng.writing.
+spelling-strategies` authored English Batch 7 (topological level 8),
+moved to READY.
 | 238 | biology | 8 | `bio.cell.meiosis` | Meiosis |
 | 239 | biology | 8 | `bio.mol.dna-replication` | DNA Replication |
 | 240 | biology | 8 | `bio.evo.natural-selection` | Natural Selection and Darwinism |
