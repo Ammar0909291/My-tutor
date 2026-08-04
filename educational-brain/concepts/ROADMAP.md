@@ -13,14 +13,14 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **670** |
-| Remaining | **1,105** |
-| Completion percentage | **37.75%** |
+| Concepts with an Educational Brain entry | **672** |
+| Remaining | **1,103** |
+| Completion percentage | **37.86%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 22 english + 186 chemistry + 0 biology + 0 computer_science = 670.
-English updated after Batch 5 of the English Educational Brain authoring
-program (3 concepts, topological level 6); the other subjects' figures
++ 24 english + 186 chemistry + 0 biology + 0 computer_science = 672.
+English updated after Batch 6 of the English Educational Brain authoring
+program (2 concepts, topological level 7); the other subjects' figures
 are taken as already-recorded in §2 below, not re-audited this session,
 per this session's "English only" scope.)*
 
@@ -32,7 +32,7 @@ per this session's "English only" scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 22 | 10.19% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 24 | 11.11% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -617,7 +617,22 @@ current-batch entry below.**
 
 ## 4. Current batch
 
-**English Batch 5 (this batch)**: continuing directly after Batch 4.
+**English Batch 6 (this batch)**: continuing directly after Batch 5.
+Recomputed the topological queue fresh — confirmed exactly 2 concepts at
+level 7: `eng.phonetics.intonation-patterns`, `eng.phonics.syllable-
+types`. Both had existing Blueprints, reused by reference. Confirmed the
+missing-physics-cross-link pattern at a ninth site (inherited, not
+independently discovered) and identified the largest-scale single-rule-
+overgeneralisation instance yet in this program (`syllable-types`' six
+categories) — full detail in `COVERAGE.md`'s Delivery history. English EB
+reached 24/216 (11.11%). True total: **672** EB entries (238 physics +
+224 mathematics + 24 english + 186 chemistry), out of 1,775 total KG
+concepts — 1,103 remaining, 37.86%. Next candidates (topological level 8,
+to be confirmed fresh): `eng.phonetics.connected-speech`, `eng.phonetics.
+prosody`, `eng.phonics.decoding-fluency`, `eng.writing.spelling-
+strategies`.
+
+**English Batch 5 (prior batch)**: continuing directly after Batch 4.
 Recomputed the topological queue fresh from the live KG — confirmed
 exactly 3 concepts at level 6: `eng.phonetics.phonetic-transcription`,
 `eng.phonetics.sentence-stress`, `eng.phonics.digraphs`. All 3 had

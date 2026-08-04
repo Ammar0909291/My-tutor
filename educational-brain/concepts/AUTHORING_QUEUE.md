@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1105** (= 1,775 KG concepts − 670 already `READY`, per
+Total queued: **1103** (= 1,775 KG concepts − 672 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-5's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-6's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -723,8 +723,9 @@ math.geom Wave 7, moved to READY.
 | 187 | mathematics | 7 | `math.graph.maximum-flow` | Maximum Flow |
 | 188 | mathematics | 7 | `math.graph.eulerian-circuit` | Eulerian Circuit |
 | 189 | mathematics | 7 | `math.graph.hamiltonian-cycle` | Hamiltonian Cycle |
-| 190 | english | 7 | `eng.phonics.syllable-types` | Syllable Types |
-| 191 | english | 7 | `eng.phonetics.intonation-patterns` | Intonation Patterns |
+**Rows 190-191 removed 2026-08-03** — `eng.phonics.syllable-types`,
+`eng.phonetics.intonation-patterns` authored English Batch 6 (topological
+level 7), moved to READY.
 | 192 | biology | 7 | `bio.cell.mitosis` | Mitosis |
 | 193 | biology | 7 | `bio.mol.enzymes` | Enzymes and Enzyme Kinetics |
 | 194 | biology | 7 | `bio.evo.evidence-for-evolution` | Evidence for Evolution |

@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 22 READY)
+## english (216 concepts, 24 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1298,7 +1298,7 @@ its subject KG.
 | phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.articulation-organs.md` | READY |
 | phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | No | — | MISSING |
 | phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.consonant-sounds.md` | READY |
-| phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.intonation-patterns.md` | READY |
 | phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.ipa-basics.md` | READY |
 | phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.minimal-pairs.md` | READY |
 | phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.phonetic-transcription.md` | READY |
@@ -1321,7 +1321,7 @@ its subject KG.
 | phonics | `eng.phonics.rhyming` | Rhyming | Yes | Yes | `educational-brain/concepts/english/eng.phonics.rhyming.md` | READY |
 | phonics | `eng.phonics.short-vowels` | Short Vowel Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.short-vowels.md` | READY |
 | phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | Yes | `educational-brain/concepts/english/eng.phonics.sight-words.md` | READY |
-| phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | No | — | MISSING |
+| phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | Yes | `educational-brain/concepts/english/eng.phonics.syllable-types.md` | READY |
 | reading | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone | Yes | No | — | MISSING |
 | reading | `eng.reading.close-reading` | Close Reading | Yes | No | — | MISSING |
 | reading | `eng.reading.compare-and-contrast-texts` | Comparing and Contrasting Texts | Yes | No | — | MISSING |
