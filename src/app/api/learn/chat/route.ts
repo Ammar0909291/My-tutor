@@ -2411,10 +2411,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Explanation Memory / Teaching Action Repository (approved exception to
       // ADR 14's implementation gate — see WAVE_0_APPROVAL_CHECKLIST.md W1-4/
       // W4-1/W4-3). Tries to assemble the turn from previously reviewed,
-      // ACTIVE Knowledge Assets before paying for an LLM call. Safe no-op
-      // today: nothing is ACTIVE until a human reviewer promotes a DRAFT via
-      // the admin review endpoint, so assembleLesson() always returns null
-      // and the LLM path below runs exactly as before.
+      // ACTIVE Knowledge Assets before paying for an LLM call.
+      //
+      // NOT a no-op. src/instrumentation.ts seeds the authored corpus
+      // (brainSeedAssets + authoredSeedAssets — mathematics, physics, english)
+      // as ACTIVE/HUMAN_CURATOR on cold start, so this path serves authored
+      // content for any seeded concept without per-asset review. The admin
+      // promote/reject endpoint governs the separate AI_AUTHORED DRAFT lineage
+      // produced by live capture, not the seeded corpus.
+      //
+      // An earlier version of this comment claimed nothing is ever ACTIVE and
+      // assembleLesson() always returns null. That predated the bootstrap
+      // actually running (its Next.js instrumentation hook was never enabled,
+      // so the module was dead code in production) and it is what sent a
+      // release audit to the wrong conclusion. Corrected alongside the merge
+      // that enabled the hook.
       //
       // Canonical serving path (see EDUCATIONAL_BRAIN_BIBLE.md §6.3): this IS
       // the canonical authored-content serving path — the only one that can
