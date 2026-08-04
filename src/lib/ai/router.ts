@@ -1,6 +1,7 @@
 import { consumeAIBudget } from '@/lib/ai/budget'
 import { captureError } from '@/lib/monitoring'
 import { createGeminiProvider } from './providers/gemini'
+import { createYandexProvider } from './providers/yandex'
 import { createOpenRouterProvider } from './providers/openrouter'
 import { createGroqProvider } from './providers/groq'
 import { createFailoverRouter } from './providers/failoverRouter'
@@ -32,6 +33,14 @@ export function resolveGeminiModel(configured: string | undefined): string {
   }
   return configured
 }
+// ─── YandexGPT (Russian TEACHING LANGUAGE only — never country) ───────────────
+// Restored 2026-08-04 as an intentional product decision. Both credentials are
+// required: YANDEX_FOLDER_ID is part of the model URI, not merely a header, so
+// "configured" means both are present.
+const YANDEX_API_KEY = process.env.YANDEX_API_KEY ?? ''
+const YANDEX_FOLDER_ID = process.env.YANDEX_FOLDER_ID ?? ''
+const YANDEX_MODEL = process.env.YANDEX_MODEL ?? 'yandexgpt-lite/latest'
+
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? ''
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat-v3.1'
 // Third-tier automatic fallback — the model this app ran on before the
@@ -40,7 +49,28 @@ const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat
 const GROQ_API_KEY = process.env.GROQ_API_KEY ?? ''
 const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'
 
-let _router: ReturnType<typeof createFailoverRouter> | null = null
+/** The teaching language the learner selected. This is the ONLY routing signal. */
+export type TeachingLanguage = 'ru' | 'en' | 'hi'
+
+/**
+ * Which provider chain a teaching language maps to. THE SINGLE
+ * PROVIDER-SELECTION AUTHORITY — nothing else in the codebase may branch on
+ * language (or on country) to pick a provider.
+ *
+ * Explicitly NOT country-based. The pre-52152a18 router keyed YandexGPT off
+ * `country === 'ru'`, which is the wrong signal twice over: a Russian-speaking
+ * learner in India or Poland got an English-tuned provider, and an
+ * English-speaking learner in Russia got YandexGPT. The learner's selected
+ * teaching language is what the model has to actually produce, so it is what
+ * selects the model — the same signal /api/tts already keys its Yandex voice
+ * off (see src/app/api/tts/route.ts), which is what keeps TTS and LLM
+ * consistent rather than two independent notions of "is this Russian".
+ */
+export function chainKeyForLanguage(lang: TeachingLanguage | undefined): 'ru' | 'default' {
+  return lang === 'ru' ? 'ru' : 'default'
+}
+
+const _routers = new Map<'ru' | 'default', ReturnType<typeof createFailoverRouter>>
 
 /**
  * P17 — GEMINI-ONLY ISOLATION MODE (diagnostic, runtime switch only).
@@ -60,8 +90,10 @@ export function isGeminiOnlyMode(): boolean {
   return (process.env.AI_PROVIDER_MODE ?? '').trim().toLowerCase() === 'gemini_only'
 }
 
-function getRouter() {
-  if (_router) return _router
+function getRouter(lang?: TeachingLanguage) {
+  const chain = chainKeyForLanguage(lang)
+  const cached = _routers.get(chain)
+  if (cached) return cached
 
   if (isGeminiOnlyMode()) {
     // One provider in the list means the failover loop has nothing to fail
@@ -76,12 +108,18 @@ function getRouter() {
     // the learner would get a blank 504 instead of the fallback this mode is
     // specified to return "immediately". It also doubles the apparent Gemini
     // failure count, which would corrupt the very measurement being taken.
+    //
+    // Language does not widen this: gemini_only means gemini only, for Russian
+    // too. The diagnostic exists to measure Gemini in isolation, and a Russian
+    // turn silently routed to YandexGPT would corrupt that measurement exactly
+    // as a failover hop would.
     console.log('[ai/router] AI_PROVIDER_MODE=gemini_only — failover and same-provider retry disabled for this deployment')
-    _router = createFailoverRouter({
+    const geminiOnly = createFailoverRouter({
       providers: [createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)],
       disableSameProviderRetry: true,
     })
-    return _router
+    _routers.set(chain, geminiOnly)
+    return geminiOnly
   }
 
   // Production evidence (Vercel runtime errors, 2026-07-25/26): OpenRouter
@@ -95,7 +133,19 @@ function getRouter() {
   // empty-key provider could never have succeeded anyway. GROQ_API_KEY is
   // the one credential this app has always required (CLAUDE.md/.env.example),
   // so the chain is never empty in practice.
+  //
+  // Russian prepends YandexGPT to that same chain; every other tier, and the
+  // chain for every other language, is byte-for-byte what it was before. The
+  // Yandex tier is subject to the identical empty-key filter — it needs BOTH
+  // credentials, so an unset YANDEX_FOLDER_ID drops it rather than spending a
+  // guaranteed-fail round-trip on a request whose model URI cannot be formed.
   const candidates: Array<{ key: string; provider: AIProvider }> = [
+    ...(chain === 'ru'
+      ? [{
+          key: YANDEX_API_KEY && YANDEX_FOLDER_ID ? YANDEX_API_KEY : '',
+          provider: createYandexProvider(YANDEX_API_KEY, YANDEX_FOLDER_ID, YANDEX_MODEL),
+        }]
+      : []),
     { key: GEMINI_API_KEY, provider: createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL) },
     { key: OPENROUTER_API_KEY, provider: createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL) },
     { key: GROQ_API_KEY, provider: createGroqProvider(GROQ_API_KEY, GROQ_MODEL) },
@@ -119,14 +169,18 @@ function getRouter() {
   // retry removes 30_500 ms from the worst case and costs nothing a learner
   // can observe — a retryable failure now fails over to the next provider
   // instead of re-asking the one that just failed.
-  _router = createFailoverRouter({
+  const router = createFailoverRouter({
     providers: providers.length > 0 ? providers : candidates.map((c) => c.provider),
     disableSameProviderRetry: true,
   })
-  return _router
+  _routers.set(chain, router)
+  return router
 }
 
-export function getAIRouter() { return getRouter() }
+/** Chain for the given teaching language; omit for the default (non-Russian)
+ *  chain. Callers that generate no learner-facing prose (JSON, internal
+ *  analysis) should omit it. */
+export function getAIRouter(lang?: TeachingLanguage) { return getRouter(lang) }
 
 // ─── Main router ─────────────────────────────────────────────────────────────
 /** Conversation turns forwarded to the provider. See the note at the one use
@@ -142,21 +196,24 @@ export interface RouteAIResult {
 export async function routeAI(
   messages: { role: 'user' | 'assistant'; content: string }[],
   systemPrompt: string,
-  // VESTIGIAL. This was the YandexGPT routing signal ('ru' -> YandexGPT).
-  // 52152a18 replaced Groq/YandexGPT with Gemini + OpenRouter and no
-  // replacement provider is country-aware, so this now affects nothing: it is
-  // logged below and read by no provider. Retained because three call sites
-  // pass it and it remains useful in logs; if a region-specific provider is
-  // ever added, this is the parameter it would key on.
+  // NOT A ROUTING SIGNAL — deliberately. This was the YandexGPT selector
+  // before 52152a18 (`country === 'ru'`), and restoring YandexGPT on the
+  // learner's language rather than their location is the whole point of the
+  // 2026-08-04 change: Russian in India, Poland or Russia all route to
+  // YandexGPT, and English in Russia does not. Kept because it is genuinely
+  // useful in logs, and read by no provider.
   country: string,
   maxTokens = 800,
-  // Retained positionally (three call sites pass it) but no longer read: since
-  // routeAI stopped authoring learner-facing copy it has no text to localise.
-  // Degraded copy — and its localisation — belong to the caller's fallback.
-  _lang: 'ru' | 'en' | 'hi' = 'en',
+  // THE routing signal: the learner's selected teaching language. Every call
+  // site already passed it (chat route, verifier re-render, lesson-init), so
+  // wiring it into provider selection needed no call-site changes.
+  lang: TeachingLanguage = 'en',
   _meta?: Record<string, unknown>,
 ): Promise<RouteAIResult> {
-  console.log('[ai/router] routing request, country =', country)
+  console.log(
+    `[ai/router] routing request, teaching_language=${lang} chain=${chainKeyForLanguage(lang)}` +
+    ` country=${country} (country is not a routing signal)`,
+  )
 
   await consumeAIBudget()
 
@@ -182,7 +239,7 @@ export async function routeAI(
   }
 
   try {
-    const result = await getRouter().complete(req)
+    const result = await getRouter(lang).complete(req)
     console.log(
       `[ai/router] success provider=${result.provider} finish_reason=${result.finishReason}` +
       ` chars=${result.text.length}`,
