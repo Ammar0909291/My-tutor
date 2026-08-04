@@ -352,3 +352,58 @@ describe('integration — real visualRegistry.ts source', () => {
     expect(entry!.primary).not.toBe('force_diagram')
   })
 })
+
+// ── Orphan detection against real multi-subject KG ────────────────────────────
+//
+// ROOT CAUSE this locks in: registry keys that reference concept IDs that do
+// not exist in any canonical KG are silently unreachable at runtime — their
+// visual is authored but never served, and the concept they were meant to
+// cover gets no visual. This was the production condition for 7 physics
+// entries (wrong domain prefix, non-existent sub-IDs). The fix removed/
+// renamed all 7; this test ensures no regression introduces a new orphan.
+//
+// The universe passed to findOrphanEntries must be ALL KG IDs across ALL
+// subjects — not just physics — so entries for chemistry, biology, maths, etc.
+// are not misflagged as orphans when the check runs in a CI context that sees
+// the whole registry.
+
+describe('integration — zero orphan entries across all canonical KGs', () => {
+  const registryPath = path.join(process.cwd(), 'src/lib/teaching/visualRegistry.ts')
+  const source = fs.readFileSync(registryPath, 'utf8')
+  const parsed = parseVisualRegistrySource(source)
+
+  const KG_PATHS = [
+    'docs/mathematics/kg/graph.json',
+    'docs/physics/kg/graph.json',
+    'docs/chemistry/kg/graph.json',
+    'docs/biology/kg/graph.json',
+    'docs/computer-science/kg/graph.json',
+    'docs/english/kg/graph.json',
+  ]
+
+  const allKgIds = new Set<string>()
+  for (const kgPath of KG_PATHS) {
+    const full = path.join(process.cwd(), kgPath)
+    const kg = JSON.parse(fs.readFileSync(full, 'utf8'))
+    for (const c of kg.concepts as Array<{ id: string }>) allKgIds.add(c.id)
+  }
+
+  it('all 6 KGs loaded and provide at least 1,700 concept IDs for the orphan check', () => {
+    // Validates the universe itself so a missing KG file doesn't silently make
+    // the orphan check trivially pass by flagging everything (or nothing).
+    expect(allKgIds.size).toBeGreaterThan(1700)
+  })
+
+  it('every PHYSICS CONCEPT_VISUALS key matches a canonical phys.* KG concept ID', () => {
+    // Scope: physics hardening session. Pre-existing orphans in math/bio/cs
+    // use legacy IDs that predate the canonical KGs and are tracked separately;
+    // they are not regressions introduced here and are not fixed in this session.
+    // This test locks in the physics fix specifically: after renaming/removing
+    // the 7 physics orphans (phys.mech.pendulum → phys.wave.pendulum, etc.),
+    // zero phys.* registry keys may reference a non-existent KG concept ID.
+    const allOrphans = findOrphanEntries(parsed, allKgIds)
+    const physicsOrphans = allOrphans.filter((o) => o.key.startsWith('phys.'))
+    // Report the offenders if any remain, so a failing CI message is actionable.
+    expect(physicsOrphans.map((o) => o.key)).toEqual([])
+  })
+})

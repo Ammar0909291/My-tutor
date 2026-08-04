@@ -28,7 +28,9 @@ describe('visualRegistry', () => {
   })
 
   it('returns scene generator for concept with one', () => {
-    expect(getConceptSceneGenerator('phys.mech.collisions')).toBe('collision')
+    // phys.mech.collisions was an orphan (no such KG concept); use the real
+    // elastic-collisions concept that carries the same 'collision' generator.
+    expect(getConceptSceneGenerator('phys.mech.collisions-elastic')).toBe('collision')
   })
 
   it('returns null scene generator for concept without one', () => {

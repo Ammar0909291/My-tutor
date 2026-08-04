@@ -26,7 +26,10 @@ const physicsConceptIds = fs.readdirSync(BLUEPRINT_DIR)
 
 describe('physics blueprint corpus — every blueprint compiles', () => {
   it('has the full physics corpus on disk', () => {
-    expect(physicsConceptIds.length).toBeGreaterThanOrEqual(217)
+    // Exact count: 238 after the phys.particle.* (16) and phys.mod.* semiconductor
+    // (6) KG extension. A loose >= threshold would let future regressions pass
+    // silently; an exact count catches any dropped blueprint immediately.
+    expect(physicsConceptIds.length).toBe(238)
   })
 
   it('compiles every physics blueprint to a valid DRAFT package', () => {
