@@ -25,9 +25,17 @@
  *    never reach the state the serving path requires.
  *  - Partial-seed safe: COUNT < expected triggers a resume run; per-slug
  *    dedup skips already-inserted rows and inserts the missing ones.
- *  - Concurrency safe: P2002 (unique constraint on canonicalSlug) is caught
- *    per-asset and treated as skip, so two simultaneous cold starts both
- *    converge on a complete catalogue without aborting each other.
+ *  - Concurrency safe: the findFirst/create pair below is a TOCTOU window, so
+ *    atomicity is enforced in the database by the PARTIAL unique index
+ *    asset_identity_seed_slug_key ON ("canonicalSlug")
+ *    WHERE "authorId" = 'EDUCATIONAL_BRAIN_SEED'
+ *    (prisma/migrations/20260804000000_asset_identity_seed_slug_unique).
+ *    A losing racer gets P2002, which is caught per-asset and treated as a
+ *    skip, so simultaneous cold starts converge on one complete catalogue
+ *    without duplicating rows or aborting each other. The index is scoped to
+ *    the seed lineage so the capture path's many-versions-per-slug chain is
+ *    unaffected. NOTE: before that migration this claim was false — no unique
+ *    constraint existed, so P2002 could never fire and this catch was dead.
  *  - Never blocks request handling — runs in the background after the
  *    server is ready (Next.js calls register() before the first request).
  *  - Opt-out: set DISABLE_ASSET_BOOTSTRAP=true to skip entirely, or

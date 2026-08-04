@@ -2718,6 +2718,17 @@ model AssetIdentity {
   parentVersionId String? // self-FK: previous version in same canonicalSlug group
 
   canonicalSlug String // deterministic hash of (conceptId, familyKind, language)
+  // NOT unique table-wide: the capture path versions many rows under one
+  // canonicalSlug (parentVersionId chain above). A PARTIAL unique index
+  // constrains ONLY the seed lineage, where exactly one row per slug is the
+  // invariant:
+  //   asset_identity_seed_slug_key ON ("canonicalSlug")
+  //     WHERE "authorId" = 'EDUCATIONAL_BRAIN_SEED'
+  // Prisma cannot express a filtered index, so it lives in
+  // prisma/migrations/20260804000000_asset_identity_seed_slug_unique. It is
+  // invisible to this datamodel but real in the database — `migrate diff`
+  // reports no drift for it. Do not add @@unique([canonicalSlug]): that would
+  // break the version chain.
 
   // Evidence — single writer: Evidence Engine (ADR 13)
   qualityScore      Float @default(0)

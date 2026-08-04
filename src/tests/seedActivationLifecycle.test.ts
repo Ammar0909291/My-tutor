@@ -160,3 +160,52 @@ describe('P20 D2 — instrumentation.ts uses ownership-scoped queries', () => {
     expect(src).toMatch(/DISABLE_ASSET_BOOTSTRAP/)
   })
 })
+
+// ── D3: the find-then-create race is closed in the database ──────────────────
+//
+// Verified empirically against a real Postgres + the real Prisma client before
+// these guards were written: 12 concurrent creates of one seed slug produced
+// exactly 1 row and 11 P2002 rejections; AI_AUTHORED still wrote 5 versions
+// under a single shared slug; `prisma migrate diff` reported no drift.
+// These tests keep that arrangement from silently regressing.
+
+describe('P20 D3 — seed-slug uniqueness is enforced by a partial index', () => {
+  const MIGRATION = 'prisma/migrations/20260804000000_asset_identity_seed_slug_unique/migration.sql'
+  const sql = fs.readFileSync(path.join(process.cwd(), MIGRATION), 'utf8')
+  const schema = fs.readFileSync(path.join(process.cwd(), 'prisma/schema.prisma'), 'utf8')
+  const instrumentation = fs.readFileSync(path.join(process.cwd(), 'src/instrumentation.ts'), 'utf8')
+
+  it('the migration creates a UNIQUE index on canonicalSlug', () => {
+    expect(sql).toMatch(/CREATE\s+UNIQUE\s+INDEX[\s\S]*"canonicalSlug"/i)
+  })
+
+  it('the index is PARTIAL — scoped by a WHERE clause', () => {
+    // Without the WHERE clause this index would break the capture path's
+    // version chain, which legitimately stores many rows per canonicalSlug.
+    expect(sql).toMatch(/WHERE\s+"authorId"\s*=/i)
+  })
+
+  it('the index predicate matches SEED_AUTHOR_ID exactly (SQL cannot drift from TS)', () => {
+    // If SEED_AUTHOR_ID is ever changed in TypeScript without updating the
+    // migration, the index would silently stop covering seed rows and the
+    // race would reopen with no test failing anywhere else.
+    expect(sql).toContain(`'${SEED_AUTHOR_ID}'`)
+  })
+
+  it('NEGATIVE CONTROL: no table-wide unique on canonicalSlug in the datamodel', () => {
+    // A table-wide @@unique([canonicalSlug]) would make captureGeneratedExplanation
+    // fail on every version after the first.
+    //
+    // Comments are stripped first: the schema's own note next to canonicalSlug
+    // warns "Do not add @@unique([canonicalSlug])", and matching raw text would
+    // read that warning as the very declaration it forbids.
+    const datamodel = schema.replace(/\/\/.*$/gm, '')
+    expect(datamodel).not.toMatch(/@@unique\(\[\s*canonicalSlug\s*\]\)/)
+    expect(datamodel).not.toMatch(/canonicalSlug\s+String\s+@unique/)
+  })
+
+  it('the bootstrap still treats P2002 as a skip (now reachable, previously dead)', () => {
+    expect(instrumentation).toMatch(/P2002/)
+    expect(instrumentation).toMatch(/code === 'P2002'/)
+  })
+})
