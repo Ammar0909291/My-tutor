@@ -21,11 +21,11 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1095** (= 1,775 KG concepts − 680 already `READY`, per
+Total queued: **1091** (= 1,775 KG concepts − 684 already `READY`, per
 `ROADMAP.md`'s §1 Totals as updated 2026-08-03 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-8's
+at math.found Waves 7-10's, math.geom Wave 10's, and English Batches 1-9's
 positions below).
 
 **Domain Certification Mode override (binding until `math.found` reaches
@@ -859,13 +859,10 @@ Wave 11, moved to READY.
 | 322 | mathematics | 10 | `math.top.fundamental-group` | Fundamental Group |
 | 323 | mathematics | 10 | `math.top.homology` | Homology |
 | 324 | mathematics | 10 | `math.cat.natural-transformation` | Natural Transformation |
-| 325 | english | 10 | `eng.phonetics.accents-and-dialects` | Accents and Dialects |
+| 325-329,331 | english | 10 | *(rows removed 2026-08-03 — English Batch 9 part 1)* | moved to READY: `eng.phonetics.accents-and-dialects`, `eng.grammar.word-classes-overview`, `eng.listening.listening-for-gist`, `eng.listening.distinguishing-sounds-in-speech` |
 | 326 | english | 10 | `eng.vocab.context-clues` | Context Clues |
 | 327 | english | 10 | `eng.vocab.synonyms-antonyms` | Synonyms and Antonyms |
 | 328 | english | 10 | `eng.vocab.word-families` | Word Families |
-| 329 | english | 10 | `eng.grammar.word-classes-overview` | Overview of Word Classes |
-| 330 | english | 10 | `eng.listening.listening-for-gist` | Listening for Gist |
-| 331 | english | 10 | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech |
 | 332 | english | 10 | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation |
 | 333 | biology | 10 | `bio.mol.translation-genetic-code` | Translation and the Genetic Code |
 | 334 | biology | 10 | `bio.gen.gene-interactions` | Gene Interactions and Extensions of Mendelism |

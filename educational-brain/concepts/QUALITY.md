@@ -712,6 +712,10 @@ corrected here.
 | `eng.phonetics.rhythm-and-timing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.speaking.oral-fluency` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.vocab.word-recognition` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.grammar.word-classes-overview` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.listening.distinguishing-sounds-in-speech` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.listening.listening-for-gist` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.phonetics.accents-and-dialects` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## What this ledger means for the next batch
 

@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 32 READY)
+## english (216 concepts, 36 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1241,7 +1241,7 @@ its subject KG.
 | grammar | `eng.grammar.subject-verb-agreement` | Subject-Verb Agreement | Yes | No | — | MISSING |
 | grammar | `eng.grammar.tense-consistency` | Tense Consistency | Yes | No | — | MISSING |
 | grammar | `eng.grammar.verbs` | Verbs | Yes | No | — | MISSING |
-| grammar | `eng.grammar.word-classes-overview` | Overview of Word Classes | Yes | No | — | MISSING |
+| grammar | `eng.grammar.word-classes-overview` | Overview of Word Classes | Yes | Yes | `educational-brain/concepts/english/eng.grammar.word-classes-overview.md` | READY |
 | grammar | `eng.grammar.word-order` | Basic Word Order | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism | Yes | No | — | MISSING |
@@ -1263,11 +1263,11 @@ its subject KG.
 | linguistics | `eng.linguistics.what-is-linguistics` | What Is Linguistics? | Yes | No | — | MISSING |
 | listening | `eng.listening.active-listening` | Active Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.active-listening.md` | READY |
 | listening | `eng.listening.critical-listening` | Critical Listening | Yes | No | — | MISSING |
-| listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | No | — | MISSING |
+| listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | Yes | `educational-brain/concepts/english/eng.listening.distinguishing-sounds-in-speech.md` | READY |
 | listening | `eng.listening.following-instructions` | Following Spoken Instructions | Yes | No | — | MISSING |
 | listening | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies | Yes | No | — | MISSING |
 | listening | `eng.listening.listening-for-detail` | Listening for Detail | Yes | No | — | MISSING |
-| listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | No | — | MISSING |
+| listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-gist.md` | READY |
 | listening | `eng.listening.note-taking-while-listening` | Note-Taking While Listening | Yes | No | — | MISSING |
 | literature | `eng.literature.character-development` | Character Development | Yes | No | — | MISSING |
 | literature | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature | Yes | No | — | MISSING |
@@ -1294,7 +1294,7 @@ its subject KG.
 | literature | `eng.literature.short-story-study` | Short Story Study | Yes | No | — | MISSING |
 | literature | `eng.literature.symbolism` | Symbolism | Yes | No | — | MISSING |
 | literature | `eng.literature.theme-and-message` | Theme and Message | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.accents-and-dialects.md` | READY |
 | phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.articulation-organs.md` | READY |
 | phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.connected-speech.md` | READY |
 | phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.consonant-sounds.md` | READY |
