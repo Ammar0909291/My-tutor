@@ -13,7 +13,7 @@ and this file's summary row should be corrected to match.
 |---|---|---|---|
 | mathematics | 908 | 224 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 56 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`, `line-equation`, `vectors-3d`, `polygon-angle-sum`, `platonic-solids`, `translation`, `reflection`, `dilation` — `math.geom` domain IN PROGRESS, 56/69, Wave 11 complete, Wave 12 next), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
-| english | 216 | 3 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness` (previously uncounted here — corrected), `eng.phonics.print-concepts` (2026-07-22, this batch) — **both of English's zero-prerequisite entry nodes are now covered** |
+| english | 216 | 6 | `eng.phonics.letter-sound-correspondence`, `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` (both zero-prerequisite entry nodes covered) + `eng.phonics.alphabet-recognition`, `eng.phonics.rhyming`, `eng.phonetics.speech-sounds-overview` (2026-08-04, level-1 batch — the first concepts authored beyond the two entry nodes; all 3 conform to `EDUCATIONAL_BRAIN_STANDARD.md`'s 21-section format, unlike the 3 pre-Standard entries above) — see Delivery history |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
 | biology | 108 | 0 | — (KG count 89→108 per the Pipeline's 2026-07-22 v2.0.0 freeze, a concurrent external change) |
 | computer_science | 119 | 0 | — |
@@ -4542,3 +4542,75 @@ concepts remain in `math.geom`; Wave 12 has 1 immediately unlocked candidate
 prerequisites not yet in the EB. All six tracking files updated in the same
 commit; re-validated 0 duplicates, 0 orphans, 0 broken KG references, 0
 invalid Blueprint references across all 224 mathematics entries.
+
+### Batch — English level-1 (2026-08-04)
+
+**Explicit subject-scope instruction**: the owner directed this session
+specifically at English ("English is now the active implementation
+subject on THIS account... Mathematics is being implemented on another
+account... do NOT duplicate work across accounts"), overriding the
+global cross-subject interleaving order for this batch only — the same
+precedent as the 2026-07-22 Physics Wave 6 exception recorded earlier in
+this file. Mathematics, Physics, and Chemistry were not touched.
+
+Authored the 3 concepts at English's dependency level 1 — every concept
+whose sole prerequisite is one of the two already-`READY` zero-
+prerequisite entry nodes, verified programmatically against the live
+English KG's `requires` edges (matches `AUTHORING_QUEUE.md`'s own
+level-1 row set exactly): `eng.phonics.alphabet-recognition` (requires
+`eng.phonics.print-concepts`), `eng.phonics.rhyming` and
+`eng.phonetics.speech-sounds-overview` (both require
+`eng.phonics.phonemic-awareness`). All 3 had existing Blueprints, read
+in full and reused by reference (misconceptions, concrete anchors,
+worked examples, mastery probe sets, session architecture) per the
+Standard's ownership boundary — no Blueprint content restated. All 3
+also had existing seeded runtime assets discovered in
+`authoredSeedAssets.ts` (`ALPHA`, `RHYME`, `SNDO` constant blocks,
+sourced from the Blueprints directly since no EB entry existed at
+seeding time) — `eng.phonics.rhyming` is the one exception, confirmed to
+have zero seeded assets, recorded honestly in its own Runtime Asset
+References section rather than assumed present.
+
+**First English entries authored to the full 21-section
+`EDUCATIONAL_BRAIN_STANDARD.md`** (the 3 pre-existing English entries
+use the earlier 15-section `TEMPLATE.md` format, per the Standard's own
+§6 migration note — not reconciled retroactively this batch, consistent
+with that note's explicit deferral). One new misconception per concept
+was authored via the birth-taxonomy diagnostic procedure, beyond what
+each Blueprint already documents, each verified genuinely distinct in
+mechanism and scope from both its own Blueprint's misconceptions and
+every other misconception already in the tree:
+`MC-NONMIRROR-SHAPE-CONFUSION` (alphabet-recognition, Type 2 —
+n/h/m-style stroke-count confusion, distinct from the Blueprint's
+mirror-orientation b/d/p/q confusion), `MC-SYLLABLE-COUNT-MUST-MATCH`
+(rhyming, Type 5 — an over-restrictive length constraint layered onto an
+otherwise-correct ending check), `MC-VOICING-IS-LOUDNESS`
+(speech-sounds-overview, Type 2 — perceived loudness substituted for the
+vocal-cord-vibration mechanism TA-2 targets).
+
+Two deliberately different Discovery Questions designs were argued
+across the batch, demonstrating the choice is genuinely concept-driven
+rather than defaulted: `alphabet-recognition` argues direct instruction
+(pure arbitrary convention — names, case, sequence order — nothing to
+discover), while `rhyming` and `speech-sounds-overview` each argue a
+full 6-step discovery design, but for two different reasons —
+`rhyming`'s discovery target is an inducible RULE (match the ending
+sound), while `speech-sounds-overview`'s is an inducible EMPIRICAL FACT
+about English specifically (sounds and letters do not correspond
+one-to-one), a distinction made explicit in the latter's own Discovery
+Questions section rather than treating "discovery" as one undifferentiated
+choice.
+
+`english` 3/216 → **6/216**. Level-2 candidates already visible in
+`AUTHORING_QUEUE.md` (`eng.phonics.blending-segmenting`,
+`eng.phonetics.articulation-organs`, `eng.writing.handwriting-and-
+formation`) but deliberately NOT started this batch, per the standing
+"one small bounded batch per turn" discipline and this task's explicit
+"stop after one logical batch" instruction. All 8 `QUALITY_GATES.md`
+gates verified programmatically for all 3 entries (KG existence,
+Blueprint existence, exact 21-heading match in order, cross-link
+resolution, non-empty Curriculum Feedback, dated Version History); full
+corpus re-validated after this batch: 654 total EB entries, 0 orphans, 0
+duplicate filenames across all 6 subjects. `EDUCATIONAL_BRAIN_INDEX.md`,
+`ROADMAP.md`, and `QUALITY.md` updated in the same batch. No KG,
+Blueprint, or runtime file was modified.

@@ -13,16 +13,19 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **651** |
-| Remaining | **1,124** |
-| Completion percentage | **36.68%** |
+| Concepts with an Educational Brain entry | **654** |
+| Remaining | **1,121** |
+| Completion percentage | **36.85%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 3 english + 186 chemistry + 0 biology + 0 computer_science = 651.
-Mathematics updated after Batch 56 (7 concepts, math.geom Wave 11);
-the other subjects' figures are taken as already-recorded in §2 below,
-not re-audited by this batch, per this program's "mathematics only"
-ongoing scope.)*
++ 6 english + 186 chemistry + 0 biology + 0 computer_science = 654.
+English updated after the level-1 batch (3 concepts:
+`eng.phonics.alphabet-recognition`, `eng.phonics.rhyming`,
+`eng.phonetics.speech-sounds-overview`), per this session's explicit
+"English is now the active implementation subject" instruction —
+mathematics/physics/chemistry figures are taken as already-recorded in
+§2 below, not re-audited by this batch, per that same instruction's
+"do not touch other subjects" scope.)*
 
 ---
 
@@ -32,7 +35,7 @@ ongoing scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 3 | 1.39% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 6 | 2.78% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1247,3 +1250,30 @@ history for the reconciliation record.
 Authored 8 concepts: chem.alc.diols, chem.alc.ethers, chem.alc.phenols, chem.carb.aldehydes,
 chem.hyd.alkynes, chem.nitro.amines, chem.poly.addition, chem.sol.osmosis.
 Chemistry: 157 → 165/186 (88.71%). New domains: chem.carb, chem.poly.
+
+#### English level 1 — 2026-08-04
+
+Explicit subject-scope instruction: "English is now the active
+implementation subject on THIS account... Mathematics is being
+implemented on another account... Physics is entering
+production-hardening. Chemistry is complete. Do NOT duplicate work
+across accounts." Mathematics, Physics, and Chemistry were not touched
+this batch.
+
+Authored 3 concepts at English's dependency level 1 (every concept
+whose sole prerequisite is one of the two already-`READY`
+zero-prerequisite entry nodes): `eng.phonics.alphabet-recognition`,
+`eng.phonics.rhyming`, `eng.phonetics.speech-sounds-overview`. All 3
+conform to the full 21-section `EDUCATIONAL_BRAIN_STANDARD.md` — the
+first English entries authored to that Standard rather than the earlier
+15-section `TEMPLATE.md` format the 3 pre-existing English entries use.
+All 8 `QUALITY_GATES.md` gates verified programmatically for each.
+
+English: 3 → **6/216** (2.78%). True total: **654** EB entries (224
+mathematics + 238 physics + 6 english + 186 chemistry + 0 biology + 0
+computer_science), out of 1,775 total KG concepts — 1,121 remaining,
+36.85%. Level-2 candidates already computed
+(`eng.phonics.blending-segmenting`, `eng.phonetics.articulation-organs`,
+`eng.writing.handwriting-and-formation`) but deliberately not started
+this batch, per the standing one-batch-per-turn discipline. Full detail:
+`COVERAGE.md`'s Delivery history.

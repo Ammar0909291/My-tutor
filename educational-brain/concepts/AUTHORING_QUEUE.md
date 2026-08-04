@@ -21,11 +21,19 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1124** (= 1,775 KG concepts − 651 already `READY`, per
-`ROADMAP.md`'s §1 Totals as updated 2026-07-28 — this header was stale
+Total queued: **1121** (= 1,775 KG concepts − 654 already `READY`, per
+`ROADMAP.md`'s §1 Totals as updated 2026-08-04 — this header was stale
 at 1524/251 from an earlier point in the project; row numbers within the
 table below are not fully renumbered to match, see the row-removal notes
 at math.found Waves 7-10's and math.geom Wave 10's positions below).
+**Known drift, not corrected this batch** (pre-existing, not introduced
+here): the table's own pipe-row count is 1,171, and several inline
+"Total remaining after this wave" notes further down (e.g. the note
+immediately preceding this batch's row removal, "1,361") do not match
+either the 1121 header figure or the 1,171 row count — reconciling the
+full table is a cross-subject audit outside this batch's English-only
+scope; this batch's own removal (rows 4-6, see above) is independently
+verified correct.
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -511,9 +519,9 @@ the program's default cross-subject priority order (`math.found` Wave
 | 2 | computer_science | 0 | `cs.found.intro-computers` | Introduction to Computers |
 **Row 3 removed 2026-07-26** — `math.geom.point` authored math.geom
 Wave 1, moved to READY.
-| 4 | english | 1 | `eng.phonics.alphabet-recognition` | Alphabet Recognition |
-| 5 | english | 1 | `eng.phonics.rhyming` | Rhyming |
-| 6 | english | 1 | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds |
+**Rows 4-6 removed 2026-08-04** — `eng.phonics.alphabet-recognition`,
+`eng.phonics.rhyming`, `eng.phonetics.speech-sounds-overview` authored
+(English level-1 batch), moved to READY.
 | 7 | biology | 1 | `bio.found.characteristics-of-life` | Characteristics of Living Organisms |
 | 8 | computer_science | 1 | `cs.found.computer-organisation` | Computer Organisation |
 | 9 | computer_science | 1 | `cs.found.number-systems` | Number Systems |
