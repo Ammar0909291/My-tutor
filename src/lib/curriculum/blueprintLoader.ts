@@ -15,29 +15,34 @@
  *   - Voice teaching: "what to listen for" detection cues
  *   - Explanation library: opening scenario (youngest/most concrete entry)
  *
- * Three blueprint formats exist in the corpus; all are handled:
+ * PARSING IS SCHEMA-AWARE, NOT ORDINAL-KEYED (P0, 2026-08-05).
  *
- *   Format A — Component-format (133 blueprints):
- *     Headers: "## Component N — Name"
- *     → extractComponentConceptSpine/MC/Explanations (full injection)
+ * The corpus contains several authoring generations that share the
+ * "## Component N — Title" header grammar but order their components
+ * differently, plus "## Section N — Title", "## N. Title" and "## C2 — Title"
+ * variants. The loader previously dispatched on a format guess and then read
+ * sections by ORDINAL POSITION, so any generation whose ordering differed from
+ * the one the extractors were written against parsed to
+ * `misconceptions: [], explanations: []` while still reporting `found: true` —
+ * 958 of 1,333 blueprints (71.9%), including 214 of English's 216.
  *
- *   Format B — Protocol-format (47 blueprints, "## N. Title"):
- *     Section 1 = Learning Objectives, Section 5 = Protocol Library.
- *     → Concept spine extracted from Section 1 boundary statement +
- *       "**Core idea:**" / "**Key vocabulary:**" header fields when present.
- *     → Misconceptions: not in MC-N format; zero MC entries (graceful).
- *     → Explanations: not in Explanation X format; zero entries (graceful).
+ * The loader now:
+ *   1. tokenizes every "## " heading into {ordinal, title, body}, whatever the
+ *      heading grammar (parseSections / splitHeading);
+ *   2. resolves sections BY MEANING against title vocabularies built from a
+ *      census of the real corpus (MISCONCEPTION_SECTIONS / EXPLANATION_SECTIONS
+ *      / SPINE_SECTIONS) — ordinals are retained but never load-bearing;
+ *   3. reads fields tolerantly (readField): case-insensitive, with space,
+ *      underscore and hyphen interchangeable, an optional [Pnn]/(Pnn) protocol
+ *      tag, and bolded or plain bullet labels all accepted;
+ *   4. reports any section that is PRESENT but yielded nothing via
+ *      BlueprintContent.diagnostics, which loadBlueprintContent console.warn's.
+ *      Silent data loss is a defect, never an outcome.
  *
- *   Format C — Section-format (14 blueprints, "## Section N — Name"):
- *     Section 1 = Concept Spine ("**Core Claim:**" or "**One-sentence definition:**")
- *     Section 4 = Misconception Library ("### MC-N:")
- *     Section 5 = Explanation Library ("### Explanation X — ")
- *     → Full injection (spine uses "**Core Claim:**" as fallback for definition).
- *
- * Sections parsed (Phase 1D):
- *   Section 1 — Concept Spine   (definition, why-it-matters, quantities table)
- *   Section 4 — Misconception Library  (MC entries: title, probe, bridge, fix)
- *   Section 5 — Explanation Library    (Explanation A/B/C full texts)
+ * Adding a new authoring generation therefore means adding a title pattern or
+ * a field alias — not a new format branch. Coverage is locked by
+ * src/tests/blueprintLoaderSchema.test.ts, which asserts zero diagnostics and
+ * zero empty parses across the entire on-disk corpus.
  *
  * Sections intentionally NOT parsed (blueprint file):
  *   Section 2  Four-Stage CPA+ Mental Model
@@ -121,12 +126,24 @@ export interface ConceptSpine {
 
 export interface BlueprintContent {
   conceptId: string
-  /** Section 1 — Concept Spine, or null for old-format blueprints. */
+  /** Concept spine (definition / why-it-matters), or null when unauthored. */
   conceptSpine: ConceptSpine | null
-  /** Section 4 — Misconception Library entries (may be empty). */
+  /** Misconception entries. Empty ONLY when the blueprint authors none. */
   misconceptions: MisconceptionEntry[]
-  /** Section 5 — Explanation Library entries (may be empty). */
+  /** Explanation entries. Empty ONLY when the blueprint authors none. */
   explanations: ExplanationEntry[]
+  /**
+   * Loud-failure channel. Non-empty means a role section was PRESENT in the
+   * markdown but produced zero entries — the silent-data-loss condition that
+   * cost 958 of 1,333 blueprints their authored content before the parser
+   * became schema-aware. Each diagnostic is also console.warn'd once per
+   * concept by loadBlueprintContent, and is asserted empty across the whole
+   * corpus by src/tests/blueprintLoaderSchema.test.ts.
+   *
+   * Optional in the type so existing constructors of this shape keep
+   * compiling; always populated by the loader itself.
+   */
+  diagnostics?: string[]
 }
 
 export type BlueprintContentResult =
@@ -285,383 +302,566 @@ function extractConceptProfile(content: string): {
   return { difficulty, bloom, masteryThreshold, estimatedHours, sessionCap: null }
 }
 
-// ── Content extractors (Phase 1D) ─────────────────────────────────────────────
-
-/**
- * Extracts the raw text of a numbered section using the new-format header
- * pattern "## Section N — Name". Returns null for old-format blueprints.
- */
-function extractNewFormatSection(content: string, sectionNum: number): string | null {
-  // Match "## Section N — ..." up to the next "## Section" header or end of file.
-  const startRe = new RegExp(`## Section ${sectionNum} — [^\\n]+\\n`)
-  const endRe = /^## Section \d+ — /m
-
-  const startMatch = startRe.exec(content)
-  if (!startMatch) return null
-
-  const afterStart = content.slice(startMatch.index + startMatch[0].length)
-  const endMatch = endRe.exec(afterStart)
-  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
-}
-
-function extractConceptSpine(content: string): ConceptSpine | null {
-  const raw = extractNewFormatSection(content, 1)
-  if (!raw) return null
-
-  const definition =
-    /\*\*One-sentence definition:\*\*\s*\n([^\n]+)/.exec(raw)?.[1]?.trim() ??
-    /\*\*Core Claim:\*\*\s+([^\n]+)/.exec(raw)?.[1]?.trim() ??
-    ''
-  const whyMatch = /\*\*Why it matters:\*\*\s*\n([\s\S]+?)(?=\n\*\*|$)/.exec(raw)
-  const whyItMatters = whyMatch?.[1]?.trim() ?? ''
-
-  // Extract the core quantities/relations markdown table, if present.
-  const tableMatch = /(\|[^\n]+\|\n\|[-| :]+\|\n(?:\|[^\n]+\|\n?)+)/.exec(raw)
-  const quantitiesTable = tableMatch?.[1]?.trim() ?? null
-
-  if (!definition && !whyItMatters) return null
-  return { definition, whyItMatters, quantitiesTable }
-}
-
-function extractMisconceptions(content: string): MisconceptionEntry[] {
-  const raw = extractNewFormatSection(content, 4)
-  if (!raw) return []
-
-  // Split by "### MC-N:" subsection headers.
-  const entries: MisconceptionEntry[] = []
-  const mcBlocks = raw.split(/(?=### MC-\d+:)/).filter(b => b.trim().startsWith('### MC-'))
-
-  for (const block of mcBlocks) {
-    const idMatch = /### (MC-\d+): "([^"]+)"/.exec(block)
-    if (!idMatch) continue
-    const id = idMatch[1]
-    const title = idMatch[2].trim()
-
-    const probe = /\*\*Probe question:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
-    const phrase = /\*\*Characteristic phrase:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
-    const bridge = /\*\*Bridge \(P30\):\*\*\s*"?([\s\S]+?)(?=\n\*\*|$)/.exec(block)?.[1]?.trim() ?? ''
-    const replacement = /\*\*Replacement concept \(P31\):\*\*\s*([\s\S]+?)(?=\n\*\*|$)/.exec(block)?.[1]?.trim() ?? ''
-
-    entries.push({ id, title, probeQuestion: probe, characteristicPhrase: phrase, bridge, replacementConcept: replacement })
-  }
-
-  return entries
-}
-
-function extractExplanations(content: string): ExplanationEntry[] {
-  const raw = extractNewFormatSection(content, 5)
-  if (!raw) return []
-
-  const entries: ExplanationEntry[] = []
-  // Split by "### Explanation X — Label" subsection headers.
-  const blocks = raw.split(/(?=### Explanation [A-Z] — )/).filter(b => b.trim().startsWith('### Explanation '))
-
-  for (const block of blocks) {
-    const headerMatch = /### Explanation ([A-Z]) — ([^\n]+)/.exec(block)
-    if (!headerMatch) continue
-    const id = headerMatch[1]
-    const label = headerMatch[2].trim()
-    // Strip the header line; the rest is the explanation text.
-    const text = block.slice(block.indexOf('\n') + 1).trim()
-    entries.push({ id, label, text })
-  }
-
-  return entries
-}
-
-// ── Protocol-format extractors (Format B: ## N. Title) ───────────────────────
+// ── Schema-aware section engine (P0 — replaces ordinal-keyed extractors) ─────
 //
-// 47 blueprints use a numbered-section format (## 0. Concept Profile,
-// ## 1. Learning Objective, ## 6. Misconception Engine, etc.).  The standard
-// Section-format and Component-format extractors do not match these headers,
-// so all three injections returned empty/null for these foundational concepts.
-// These extractors recover spine, misconceptions, and a learning-objective
-// explanation from the Protocol-format structure.
-
-function extractSpineFormatSection(content: string, sectionNum: number): string | null {
-  // Matches "## N. Title" (no dash — only digits followed by dot).
-  const startRe = new RegExp(`## ${sectionNum}\\. [^\\n]+\\n`)
-  const endRe = /^## \d+\. /m
-
-  const startMatch = startRe.exec(content)
-  if (!startMatch) return null
-
-  const afterStart = content.slice(startMatch.index + startMatch[0].length)
-  const endMatch = endRe.exec(afterStart)
-  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
-}
-
-function extractSpineFormatConceptSpine(content: string): ConceptSpine | null {
-  const raw = extractSpineFormatSection(content, 1)
-  if (!raw) return null
-
-  const definition =
-    /\*\*One-sentence definition:\*\*\s+([^\n]+)/.exec(raw)?.[1]?.trim() ??
-    /\*\*Core Claim:\*\*\s+([^\n]+)/.exec(raw)?.[1]?.trim() ??
-    ''
-  const whyMatch = /\*\*(?:Why it matters|The core insight):\*\*\s+([\s\S]+?)(?=\n\*\*|$)/.exec(raw)
-  const whyItMatters = whyMatch?.[1]?.trim() ?? ''
-  const tableMatch = /(\|[^\n]+\|\n\|[-| :]+\|\n(?:\|[^\n]+\|\n?)+)/.exec(raw)
-  const quantitiesTable = tableMatch?.[1]?.trim() ?? null
-
-  if (!definition && !whyItMatters) return null
-  return { definition, whyItMatters, quantitiesTable }
-}
-
-function extractSpineFormatMisconceptions(content: string): MisconceptionEntry[] {
-  const raw = extractSpineFormatSection(content, 4)
-  if (!raw) return []
-
-  const entries: MisconceptionEntry[] = []
-  // Split on "### MC-N:" style headers used in Spine-format.
-  const blocks = raw.split(/(?=### MC-\d+:)/).filter(b => /^### MC-\d+:/.test(b))
-
-  let seq = 0
-  for (const block of blocks) {
-    seq++
-    const headerMatch = /### (MC-\d+): "?([^"\n]+)"?/.exec(block)
-    if (!headerMatch) continue
-    const id = headerMatch[1]
-    const title = headerMatch[2].trim()
-
-    const probe = /- \*\*Probe:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
-    const phrase = /- \*\*Characteristic phrase:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
-    const bridge = /- \*\*Bridge \[P30\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n###|$)/.exec(block)?.[1]?.trim() ?? ''
-    const replacement = /- \*\*Replacement \[P31\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n###|$)/.exec(block)?.[1]?.trim() ?? ''
-
-    entries.push({ id, title, probeQuestion: probe, characteristicPhrase: phrase, bridge, replacementConcept: replacement })
-  }
-  return entries
-}
-
-function extractSpineFormatExplanations(content: string): ExplanationEntry[] {
-  const raw = extractSpineFormatSection(content, 5)
-  if (!raw) return []
-
-  const entries: ExplanationEntry[] = []
-  // Format: "**Explanation A — Label:**" (bold, not ### heading)
-  const blocks = raw.split(/(?=\*\*Explanation [A-Z] — )/).filter(b => /^\*\*Explanation [A-Z] — /.test(b))
-
-  for (const block of blocks) {
-    const headerMatch = /\*\*Explanation ([A-Z]) — ([^*:]+)(?:\*\*:?|\*\*)\s*\n/.exec(block)
-    if (!headerMatch) continue
-    const id = headerMatch[1]
-    const label = headerMatch[2].trim()
-    const text = block.slice(block.indexOf('\n') + 1).trim()
-    entries.push({ id, label, text })
-  }
-  return entries
-}
-
-function extractProtocolSection(content: string, sectionNum: number): string | null {
-  const startRe = new RegExp(`## ${sectionNum}\\. [^\\n]+\\n`)
-  const endRe = /^## \d+\. /m
-
-  const startMatch = startRe.exec(content)
-  if (!startMatch) return null
-
-  const afterStart = content.slice(startMatch.index + startMatch[0].length)
-  const endMatch = endRe.exec(afterStart)
-  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
-}
-
-function extractProtocolConceptSpine(content: string): ConceptSpine | null {
-  const raw = extractProtocolSection(content, 0)
-  if (!raw) return null
-
-  const coreIdea = /\*\*Core idea:\*\*\s*([^\n]+(?:\n(?!\*\*)[^\n]+)*)/.exec(raw)?.[1]?.trim()
-  const vocabMatch = /\*\*Key vocabulary:\*\*\s*([^\n]+)/.exec(raw)
-
-  // Fallback: build a minimal definition from the concept name when no Core idea field.
-  const nameMatch = /^name:\s*(.+)$/m.exec(raw)
-  const domainMatch = /^domain:\s*(.+)$/m.exec(raw)
-  const fallbackDef = nameMatch
-    ? `${nameMatch[1].trim()} — a concept in ${domainMatch?.[1]?.trim() ?? 'physics'}.`
-    : ''
-
-  const definition = coreIdea ?? fallbackDef
-  const whyItMatters = vocabMatch ? `Key vocabulary: ${vocabMatch[1].trim()}` : ''
-
-  if (!definition && !whyItMatters) return null
-  return { definition, whyItMatters, quantitiesTable: null }
-}
-
-function extractProtocolMisconceptions(content: string): MisconceptionEntry[] {
-  const raw = extractProtocolSection(content, 6)
-  if (!raw) return []
-
-  const entries: MisconceptionEntry[] = []
-  const blocks = raw.split(/(?=### MC-\d+ — )/).filter(b => /^### MC-\d+ — /.test(b))
-
-  let seq = 0
-  for (const block of blocks) {
-    seq++
-    const headerMatch = /### (MC-\d+) — ([^\n]+)/.exec(block)
-    if (!headerMatch) continue
-    const id = headerMatch[1]
-    const title = headerMatch[2].trim()
-
-    const symptom = /\*\*Observable symptom:\*\*\s*([^\n]+(?:\n(?!\*\*)[^\n]+)*)/.exec(block)?.[1]?.trim() ?? ''
-    const repairMatch = /\*\*Repair chain:\*\*\s*([^\n]+)/.exec(block)
-    const bridge = repairMatch ? repairMatch[1].trim() : ''
-
-    entries.push({ id, title, probeQuestion: symptom, characteristicPhrase: symptom.slice(0, 80), bridge, replacementConcept: '' })
-  }
-  return entries
-}
-
-function extractProtocolExplanations(content: string): ExplanationEntry[] {
-  const raw = extractProtocolSection(content, 1)
-  if (!raw) return []
-
-  // Use the Learning Objective section as a single explanation entry.
-  const text = raw.replace(/\*\*Accuracy threshold:[^*]+\*\*/g, '').trim()
-  if (!text) return []
-  return [{ id: 'A', label: 'Learning Objective', text }]
-}
-
-// ── Component-format extractors (Phase 2) ────────────────────────────────────
+// WHY THIS EXISTS
+// The previous extractors keyed on a section's ORDINAL POSITION within a
+// format ("Component 1 is explanations, Component 3 is misconceptions").
+// That is not a property the corpus guarantees. At least three authoring
+// generations emit `## Component N — Title` headers with mutually
+// incompatible orderings:
 //
-// 144 PACKAGE_READY + 51 READY blueprints use the older "## Component N —"
-// format. Phase 2 activates these by mapping Component-format sections to the
-// same BlueprintContent shape used by the new Section-format, so all physics
-// blueprints feed into the Phase 1D prompt injection without file changes.
+//   physics    Component 1 = Concept Explanation Blocks
+//              Component 3 = Misconception Engine
+//   english    Component 1 = Misconception Register        (≠ explanations)
+//              Component 3 = Concrete Anchor [P06]         (≠ misconceptions)
+//   mathematics Component 3 = Core Explanation
+//              Component 6 = Misconception Registry
 //
-// Mapping:
-//   Component 0 (Concept Identity)  → ConceptSpine (minimal — name + domain)
-//   Component 1 (Explanation Blocks) → explanations[]
-//   Component 3 (Misconception Engine) → misconceptions[]
+// Because `isComponentFormat()` only tested for the literal string
+// "## Component 0 — ", all three matched the physics extractors, and the two
+// that did not share physics' ordering silently produced
+// `misconceptions: [], explanations: []` while still reporting `found: true`.
+// Measured impact before this change: 958 of 1,333 blueprints (71.9%) parsed
+// to empty content, including 214 of English's 216.
+//
+// The engine below resolves sections BY MEANING (heading title) rather than by
+// ordinal, tolerates every heading grammar in the corpus, and parses fields
+// case-, separator- and protocol-tag-insensitively. Ordinals are still read
+// and retained, but are never load-bearing.
 
-/** True when the blueprint uses the old Component-format headers. */
-function isComponentFormat(content: string): boolean {
-  return /^## Component 0 — /m.test(content)
-}
-
-/** True when the blueprint uses the Protocol-format headers (## N. Title, ## 0. Concept Profile). */
-function isProtocolFormat(content: string): boolean {
-  return /^## 0\. Concept Profile/m.test(content)
-}
-
-/**
- * True when the blueprint uses the Spine-format headers
- * (## 0. Concept Metadata, ## 1. Concept Spine, ## 4. Misconception Library).
- * 24 phys.mod/qm/rel/stat blueprints use this format.
- */
-function isSpineFormat(content: string): boolean {
-  return /^## 0\. Concept Metadata/m.test(content)
-}
-
-/**
- * Extracts the raw text of a component section.
- * Returns null if the component header is absent.
- */
-function extractComponentSection(content: string, componentNum: number): string | null {
-  const startRe = new RegExp(`## Component ${componentNum} — [^\\n]+\\n`)
-  const endRe = /^## Component \d+ — /m
-
-  const startMatch = startRe.exec(content)
-  if (!startMatch) return null
-
-  const afterStart = content.slice(startMatch.index + startMatch[0].length)
-  const endMatch = endRe.exec(afterStart)
-  return endMatch ? afterStart.slice(0, endMatch.index).trim() : afterStart.trim()
+/** One `## ` section of a blueprint, normalized across every heading grammar. */
+interface BlueprintSection {
+  /** Ordinal when the heading carried one (`Component 3`, `Section 4`, `6.`). */
+  ordinal: number | null
+  /** Heading text with any ordinal prefix removed. */
+  title: string
+  /** Match key: lowercased, protocol tags and punctuation stripped. */
+  key: string
+  /** Everything between this heading and the next `## ` heading. */
+  body: string
 }
 
 /**
- * Builds a minimal ConceptSpine from Component 0's YAML block.
- * Returns null if the identity block is missing.
+ * Splits a `## ` heading into its optional ordinal and its title.
+ * Handles every prefix grammar present in the corpus:
+ *   "Component 3 — Concrete Anchor [P06]"   → 3, "Concrete Anchor [P06]"
+ *   "Section 4 — Misconception Library"     → 4, "Misconception Library"
+ *   "6. Misconception Engine"               → 6, "Misconception Engine"
+ *   "Misconception Library"                 → null, "Misconception Library"
  */
-function extractComponentConceptSpine(content: string): ConceptSpine | null {
-  const raw = extractComponentSection(content, 0)
-  if (!raw) return null
+function splitHeading(raw: string): { ordinal: number | null; title: string } {
+  const labelled = /^(?:component|section|part|module)\s+(\d+)\s*[—–\-:.]*\s*(.*)$/i.exec(raw)
+  if (labelled) return { ordinal: Number(labelled[1]), title: labelled[2].trim() }
 
-  // Pull from the YAML block inside Component 0.
-  const yamlBlock = /```(?:yaml)?\s*([\s\S]*?)```/.exec(raw)?.[1] ?? ''
-  const field = (key: string): string =>
-    new RegExp(`^\\s*${key}:\\s*(.+)$`, 'm').exec(yamlBlock)?.[1]?.trim() ?? ''
+  const numbered = /^(\d+)\s*[.)]\s*(.*)$/.exec(raw)
+  if (numbered) return { ordinal: Number(numbered[1]), title: numbered[2].trim() }
 
-  const name = field('name')
-  const domain = field('domain')
-  if (!name) return null
+  // Abbreviated component headers used by ~20 phys.qm/phys.stat blueprints:
+  // "## C2 — Misconception Register", "## S4 — …".
+  const abbreviated = /^[A-Z]{1,2}(\d+)\s*[—–\-:.]+\s*(.+)$/.exec(raw)
+  if (abbreviated) return { ordinal: Number(abbreviated[1]), title: abbreviated[2].trim() }
 
-  return {
-    definition: `${name} is a concept in ${domain || 'physics'}.`,
-    whyItMatters: '',
-    quantitiesTable: null,
-  }
+  return { ordinal: null, title: raw.trim() }
 }
 
 /**
- * Maps Component 1's "### Block 1-X — Title" subsections to ExplanationEntry[].
- * Block 1-A → id="A", Block 1-B → id="B", etc.
+ * Normalizes a heading title for matching. Strips protocol tags ("[P06]",
+ * "(P30)"), collapses all non-alphanumerics to single spaces, lowercases.
+ * "Concrete Anchor [P06]" → "concrete anchor"
+ * "Concept Explanation (Multi-Tier)" → "concept explanation multi tier"
  */
-function extractComponentExplanations(content: string): ExplanationEntry[] {
-  const raw = extractComponentSection(content, 1)
-  if (!raw) return []
+function normalizeHeadingKey(title: string): string {
+  return title
+    .replace(/[[(]\s*P\d+\s*[\])]/gi, ' ')
+    .replace(/[^a-z0-9]+/gi, ' ')
+    .trim()
+    .toLowerCase()
+}
 
-  const entries: ExplanationEntry[] = []
-  const blocks = raw.split(/(?=### Block 1-[A-Z] — )/).filter(b => /^### Block 1-[A-Z] — /.test(b))
-
-  for (const block of blocks) {
-    const headerMatch = /### Block 1-([A-Z]) — ([^\n]+)/.exec(block)
-    if (!headerMatch) continue
-    const id = headerMatch[1]
-    const label = headerMatch[2].trim()
-    const text = block.slice(block.indexOf('\n') + 1).trim()
-    entries.push({ id, label, text })
+/** Tokenizes a blueprint into its `## ` sections. Format-agnostic. */
+function parseSections(content: string): BlueprintSection[] {
+  const heads: Array<{ start: number; end: number; raw: string }> = []
+  const re = /^##[ \t]+(.+?)[ \t]*$/gm
+  let m: RegExpExecArray | null
+  while ((m = re.exec(content)) !== null) {
+    heads.push({ start: m.index, end: m.index + m[0].length, raw: m[1] })
   }
 
-  return entries
+  return heads.map((h, i) => {
+    const bodyEnd = i + 1 < heads.length ? heads[i + 1].start : content.length
+    const { ordinal, title } = splitHeading(h.raw)
+    return { ordinal, title, key: normalizeHeadingKey(title), body: content.slice(h.end, bodyEnd).trim() }
+  })
 }
 
 /**
- * Maps Component 3's "### MC-SLUG" subsections to MisconceptionEntry[].
- * Assigns sequential ids MC-1, MC-2, … (Component format uses slug keys,
- * not numeric ids).
+ * Returns every section whose key matches one of `patterns`, ordered by
+ * pattern priority (earlier pattern = higher priority), then by document
+ * order. Priority matters when a blueprint carries both a registry and a
+ * repair protocol — e.g. "Misconception Register" must outrank
+ * "Protocol B (Misconception Repair)".
  */
-function extractComponentMisconceptions(content: string): MisconceptionEntry[] {
-  const raw = extractComponentSection(content, 3)
-  if (!raw) return []
+function sectionsByRole(sections: BlueprintSection[], patterns: RegExp[]): BlueprintSection[] {
+  const out: BlueprintSection[] = []
+  for (const pattern of patterns) {
+    for (const s of sections) {
+      if (pattern.test(s.key) && !out.includes(s)) out.push(s)
+    }
+  }
+  return out
+}
+
+// Role vocabularies, highest priority first. Every entry below was taken from
+// an actual heading census of docs/curriculum/blueprints (1,333 files) — none
+// is speculative.
+const MISCONCEPTION_SECTIONS = [
+  /^misconception (registry|register|engine|library|profiles)/,
+  /^misconceptions?$/,
+  /\bmisconception\b/,
+]
+
+const EXPLANATION_SECTIONS = [
+  /^concept explanation/,
+  /^explanation library$/,
+  /^explanations?$/,
+  /^core explanation/,
+  /^conceptual development sequence/,
+  /^concrete anchor/,
+  /^narrative spine/,
+  /^learning objectives?$/,
+  /\bexplanation\b/,
+]
+
+const SPINE_SECTIONS = [
+  /^concept spine$/,
+  /^core idea/,
+  /^concept profile$/,
+  /^concept metadata$/,
+  /^concept identity/,
+  /^concept snapshot$/,
+  /^metadata/,
+  /^cognitive map$/,
+  /^learning objectives?$/,
+]
+
+// ── Tolerant field reading ────────────────────────────────────────────────────
+//
+// The same logical field is spelled differently by each generation:
+//   **trigger_signal:**        (physics Misconception Engine)
+//   **Trigger signal:**        (english Misconception Register, physics Profiles)
+//   **Probe question:**        (Section format)
+//   - **Probe:**               (Spine format)
+//   **Bridge (P30):**          (Section format — parentheses)
+//   **Bridge text [P30]:**     (english — brackets)
+//   **bridge_text [P30]:**     (physics)
+//
+// readField() treats underscore and space as equivalent, ignores case, and
+// tolerates an optional [Pnn]/(Pnn) protocol tag and an optional leading
+// list bullet. This is what makes the parser generation-proof rather than
+// generation-specific.
+
+/**
+ * Builds the alias fragment: "bridge text" → "bridge[\s_-]+text".
+ * Space, underscore and hyphen are all treated as the same separator, so
+ * "one sentence definition" matches "One-sentence definition",
+ * "One_sentence_definition" and "one sentence definition" alike.
+ */
+function aliasPattern(alias: string): string {
+  return alias.trim().split(/\s+/).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('[\\s_-]+')
+}
+
+/**
+ * Reads the first field in `block` matching any of `aliases`.
+ * Returns '' when no alias is present — callers decide whether that is fatal.
+ */
+function readField(block: string, aliases: string[]): string {
+  for (const alias of aliases) {
+    const pat = aliasPattern(alias)
+    const tag = `(?:[ \\t]*[[(][ \\t]*P\\d+[ \\t]*[\\])])?`
+    const stop = `(?=\\n[ \\t]*(?:[-*+][ \\t]*)?\\*\\*|\\n[ \\t]*[-*+][ \\t]*[A-Z][^\\n:]{0,40}:|\\n[ \\t]*#{2,}|\\n[ \\t]*---|$)`
+
+    const candidates = [
+      // **Label [Pnn]:**  /  - **Label:**  — colon inside or outside the bold
+      `(?:^|\\n)[ \\t]*(?:[-*+][ \\t]*)?\\*\\*[ \\t]*${pat}${tag}[ \\t]*:?[ \\t]*\\*\\*[ \\t]*:?[ \\t]*([\\s\\S]*?)${stop}`,
+      // - Label: value  — unbolded bullet fields (math.found.* generation)
+      `(?:^|\\n)[ \\t]*[-*+][ \\t]*${pat}${tag}[ \\t]*:[ \\t]*([\\s\\S]*?)${stop}`,
+    ]
+
+    for (const source of candidates) {
+      const hit = new RegExp(source, 'i').exec(block)
+      if (hit) {
+        const value = hit[1].trim().replace(/^"|"$/g, '').replace(/\s+/g, ' ').trim()
+        if (value) return value
+      }
+    }
+  }
+  return ''
+}
+
+/** Humanizes a slug id: "MC-C-AND-G-ARE-SINGLE" → "C And G Are Single". */
+function humanizeSlug(slug: string): string {
+  return slug
+    .replace(/^MC[-–—]?/i, '')
+    .replace(/[-_]+/g, ' ')
+    .trim()
+    .toLowerCase()
+    .replace(/\b\w/g, c => c.toUpperCase())
+}
+
+/** First quoted span, else first sentence — used when no explicit phrase field. */
+function derivePhrase(probe: string): string {
+  const quoted = /"([^"]{10,})"/.exec(probe)
+  if (quoted) return quoted[1].trim()
+  return probe.split(/(?<=[.!?])\s/)[0]?.trim() ?? ''
+}
+
+// ── Misconception extraction ──────────────────────────────────────────────────
+
+const PROBE_ALIASES = [
+  'trigger signal', 'probe question', 'probe', 'observable symptom',
+  'conflict evidence', 'detection', 'symptom', 'trigger',
+]
+const PHRASE_ALIASES = [
+  'characteristic phrase', 'diagnostic phrase', 'student says', 'student phrase',
+]
+const BRIDGE_ALIASES = [
+  'bridge text', 'bridge', 'repair chain', 'correction path', 'repair', 'correction',
+  'root cause',
+]
+const REPLACEMENT_ALIASES = [
+  'replacement text', 'replacement concept', 'correct understanding', 'replacement', 'install',
+]
+
+/**
+ * Parses `### MC-…` entry blocks. Covers every heading shape in the corpus:
+ *   ### MC-1: "Title"          ### MC-1 — Title
+ *   ### MC-1: Title            ### MC-SERIES-CAPACITORS-ADD-DIRECTLY
+ * Numeric ids are preserved verbatim; slug ids are renumbered sequentially
+ * (MC-1, MC-2, …) with the slug humanized into the title, matching the
+ * long-standing behaviour of the physics Component extractor.
+ */
+function extractMisconceptionBlocks(body: string): MisconceptionEntry[] {
+  // Two header grammars carry MC entries:
+  //   ### MC-…                       (component / spine / section / protocol)
+  //   **MC-1 (FOUNDATIONAL) — Title**  (math.found.* bold-header generation)
+  const headerGrammars = [
+    /^###[ \t]+(MC[-–—]?[A-Za-z0-9][A-Za-z0-9_-]*)[ \t]*(?:[:—–-][ \t]*)?(.*)$/gm,
+    /^\*\*(MC[-–—]?[A-Za-z0-9][A-Za-z0-9_-]*)[^*\n—–]*?[—–:-][ \t]*([^*\n]+?)\*\*[ \t]*$/gm,
+  ]
+
+  let heads: Array<{ start: number; end: number; id: string; title: string }> = []
+  for (const proto of headerGrammars) {
+    const re = new RegExp(proto.source, proto.flags)
+    const found: typeof heads = []
+    let m: RegExpExecArray | null
+    while ((m = re.exec(body)) !== null) {
+      found.push({ start: m.index, end: m.index + m[0].length, id: m[1].trim(), title: m[2].trim() })
+    }
+    if (found.length > 0) { heads = found; break }
+  }
+  if (heads.length === 0) return []
+
+  return heads.map((h, i) => {
+    const block = body.slice(h.end, i + 1 < heads.length ? heads[i + 1].start : body.length)
+    const isNumeric = /^MC[-–—]?\d+$/i.test(h.id)
+    const title = (h.title.replace(/^"|"$/g, '').trim() || humanizeSlug(h.id)) || `Misconception ${i + 1}`
+    const probe = readField(block, PROBE_ALIASES)
+    const phrase = readField(block, PHRASE_ALIASES) || derivePhrase(probe)
+    return {
+      id: isNumeric ? h.id.replace(/^MC[-–—]?/i, 'MC-') : `MC-${i + 1}`,
+      title,
+      probeQuestion: probe,
+      characteristicPhrase: phrase,
+      bridge: readField(block, BRIDGE_ALIASES),
+      replacementConcept: readField(block, REPLACEMENT_ALIASES),
+    }
+  })
+}
+
+/**
+ * Parses the markdown-table misconception registry used by ~569 mathematics
+ * blueprints: `| ID | Label | Description | Severity |`.
+ *
+ * Repair text for these lives in a sibling `### Protocol B — Repair Actions`
+ * list (`- **B01 (targets MC-1)**: …`) inside the SAME section body, so it is
+ * matched back onto each row here rather than being discarded.
+ */
+function extractMisconceptionTable(body: string): MisconceptionEntry[] {
+  const rows = body.split('\n').map(l => l.trim()).filter(l => l.startsWith('|') && l.endsWith('|'))
+  if (rows.length < 2) return []
+
+  /**
+   * Splits a table row into cells on WHITESPACE-DELIMITED pipes only.
+   *
+   * Physics blueprints embed Dirac notation directly in table cells
+   * ("|ψ⟩ = Σcₙ|n⟩"). Those pipes have no surrounding space, whereas every
+   * genuine column delimiter in the corpus does. Splitting naively on "|"
+   * shredded those rows into the wrong columns and silently truncated the
+   * misconception text at the first ket.
+   */
+  const cells = (row: string): string[] => {
+    const inner = row.replace(/^\|/, '').replace(/\|$/, '')
+    // Strict pass: a delimiter has whitespace on BOTH sides. "|ψ⟩" (space
+    // before, glyph after) and "Σcₙ|n⟩" (no space either side) both survive.
+    const strict = inner.split(/[ \t]\|[ \t]/).map(c => c.trim())
+    if (strict.length > 1) return strict
+    // Fall back to a naive split for tables authored without padding.
+    return inner.split('|').map(c => c.trim())
+  }
+
+  const header = cells(rows[0]).map(h => h.toLowerCase())
+  const idCol = header.findIndex(h => /^id$/.test(h))
+  const labelCol = header.findIndex(h => /label|^name$/.test(h))
+  const descCol = header.findIndex(h =>
+    /description|detail|belief|misconception|statement|surface pattern|pattern|symptom|behaviou?r/.test(h))
+  const phraseCol = header.findIndex(h =>
+    /diagnostic phrase|characteristic phrase|^phrase|trigger/.test(h))
+  const bridgeCol = header.findIndex(h => /root cause|^cause|repair|bridge/.test(h))
+  const fixCol = header.findIndex(h =>
+    /correct understanding|correction|replacement|^fix/.test(h))
+  if (idCol === -1 || (labelCol === -1 && descCol === -1)) return []
+
+  // Repair actions keyed by the MC id they target.
+  const repairs = new Map<string, string>()
+  const repairRe = /^[ \t]*[-*+][ \t]*\*\*[^*]*?\(targets[ \t]+(MC[-–—]?\d+)\)\*\*[ \t]*:?[ \t]*([\s\S]*?)(?=\n[ \t]*[-*+][ \t]*\*\*|\n[ \t]*#{2,}|$)/gim
+  let r: RegExpExecArray | null
+  while ((r = repairRe.exec(body)) !== null) {
+    repairs.set(r[1].toUpperCase().replace(/^MC[-–—]?/, 'MC-'), r[2].trim().replace(/\s+/g, ' '))
+  }
 
   const entries: MisconceptionEntry[] = []
-  // Split by "### MC-" slug headers.
-  const blocks = raw.split(/(?=### MC-)/).filter(b => b.trim().startsWith('### MC-'))
-
-  let seq = 0
-  for (const block of blocks) {
-    seq++
-    const headerMatch = /### (MC-[A-Z0-9_-]+)/.exec(block)
-    if (!headerMatch) continue
-
-    // Convert slug to readable title: MC-RMS-IS-AVERAGE → "RMS Is Average"
-    const slugTitle = headerMatch[1]
-      .replace(/^MC-/, '')
-      .replace(/-/g, ' ')
-      .toLowerCase()
-      .replace(/\b\w/g, c => c.toUpperCase())
-
-    const id = `MC-${seq}`
-
-    // Extract fields from bullet-style entries.
-    const trigger = /\*\*trigger_signal:\*\*\s*"?([^"\n]+)"?/.exec(block)?.[1]?.trim() ?? ''
-    const bridge = /\*\*bridge_text \[P30\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n---|\n##|$)/.exec(block)?.[1]?.trim() ?? ''
-    const replacement = /\*\*replacement_text \[P31\]:\*\*\s*"?([\s\S]+?)(?=\n- \*\*|\n---|\n##|$)/.exec(block)?.[1]?.trim() ?? ''
-
-    // Characteristic phrase: extract the quoted part of the trigger signal.
-    const phraseMatch = /"([^"]{10,})"/.exec(trigger)
-    const characteristicPhrase = phraseMatch?.[1]?.trim() ?? trigger.split('.')[0]?.trim() ?? ''
-
+  for (const row of rows.slice(1)) {
+    // Skip the markdown separator row (|---|---|), whose pipes carry no
+    // surrounding whitespace and so survive the cell splitter as one blob.
+    if (/^[|\s:-]+$/.test(row)) continue
+    const c = cells(row)
+    const rawId = (c[idCol] ?? '').replace(/`/g, '').trim()
+    // Numeric ids (MC-1) are kept verbatim; slug ids (MC-DM-MIXED-IS-…) are
+    // renumbered sequentially, matching extractMisconceptionBlocks.
+    if (!/^MC[-–—]/i.test(rawId)) continue
+    const numeric = /^MC[-–—]?\d+$/i.test(rawId)
+    const id = numeric ? rawId.toUpperCase().replace(/^MC[-–—]?/, 'MC-') : `MC-${entries.length + 1}`
+    const label = labelCol >= 0 ? c[labelCol] ?? '' : ''
+    const description = descCol >= 0 ? c[descCol] ?? '' : ''
+    const phrase = phraseCol >= 0 ? c[phraseCol] ?? '' : ''
+    const fix = fixCol >= 0 ? c[fixCol] ?? '' : ''
+    const title =
+      (label ? humanizeSlug(label) : '') ||
+      (!numeric ? humanizeSlug(rawId) : '') ||
+      description.slice(0, 80) ||
+      id
     entries.push({
       id,
-      title: slugTitle,
-      probeQuestion: trigger,
-      characteristicPhrase,
-      bridge,
-      replacementConcept: replacement,
+      title,
+      probeQuestion: description,
+      characteristicPhrase: phrase || derivePhrase(description) || description.slice(0, 80),
+      bridge: repairs.get(id) || (bridgeCol >= 0 ? c[bridgeCol] ?? '' : ''),
+      replacementConcept: fix,
     })
   }
-
   return entries
+}
+
+// ── Explanation extraction ────────────────────────────────────────────────────
+
+/**
+ * Block-lead grammars for explanation entries, in priority order. Each capture
+ * pair is (id, label). Every pattern below corresponds to a real, counted
+ * grammar in the corpus.
+ */
+const EXPLANATION_BLOCK_RES: RegExp[] = [
+  // ### Explanation A — Intuitive        (Section format)
+  /^###[ \t]+Explanation[ \t]+([A-Z0-9]+)[ \t]*[—–:-][ \t]*(.+)$/gm,
+  // **Explanation A — Intuitive:**       (Spine format)
+  /^\*\*Explanation[ \t]+([A-Z0-9]+)[ \t]*[—–:-][ \t]*([^*]+?)\*\*:?[ \t]*$/gm,
+  // ### Block 1-A — Title                (physics Component)
+  /^###[ \t]+Block[ \t]+[\d]+[-.]([A-Z0-9]+)[ \t]*[—–:-][ \t]*(.+)$/gm,
+  // **TA-1 — Title [C]**                 (english Conceptual Development Sequence)
+  /^\*\*(TA-\d+)[ \t]*[—–:-][ \t]*([^*]+?)\*\*[ \t]*$/gm,
+  // **Anchor scene — Title**             (english Concrete Anchor)
+  /^\*\*(Anchor scene)[ \t]*[—–:-][ \t]*([^*]+?)\*\*[ \t]*$/gm,
+]
+
+/** Splits a section body on the first block grammar that matches it. */
+function extractExplanationBlocks(body: string): ExplanationEntry[] {
+  for (const proto of EXPLANATION_BLOCK_RES) {
+    const re = new RegExp(proto.source, proto.flags)
+    const heads: Array<{ start: number; end: number; id: string; label: string }> = []
+    let m: RegExpExecArray | null
+    while ((m = re.exec(body)) !== null) {
+      heads.push({ start: m.index, end: m.index + m[0].length, id: m[1].trim(), label: m[2].trim() })
+    }
+    if (heads.length === 0) continue
+    return heads.map((h, i) => ({
+      id: h.id,
+      label: h.label,
+      text: body.slice(h.end, i + 1 < heads.length ? heads[i + 1].start : body.length).trim(),
+    }))
+  }
+  return []
+}
+
+/**
+ * Fallback for prose sections that carry no block grammar — notably the ~382
+ * mathematics "Core Explanation" sections, which are bold-lead paragraphs:
+ *   **The minimal polynomial requires three conditions**: <prose>
+ * Each bold lead-in becomes one explanation entry. If there are no bold
+ * lead-ins either, the whole section becomes a single entry, which is what
+ * guarantees a present section can never parse to zero.
+ */
+function extractExplanationProse(body: string, sectionTitle: string): ExplanationEntry[] {
+  const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const re = /^\*\*([^*\n]{3,160}?)\*\*[ \t]*:?[ \t]*/gm
+  const heads: Array<{ start: number; end: number; label: string }> = []
+  let m: RegExpExecArray | null
+  while ((m = re.exec(body)) !== null) {
+    heads.push({ start: m.index, end: m.index + m[0].length, label: m[1].trim() })
+  }
+
+  if (heads.length > 0) {
+    const entries: ExplanationEntry[] = []
+
+    // Prose sitting BEFORE the first bold lead-in is real explanation text and
+    // must not be dropped just because it carries no label of its own.
+    const preamble = body.slice(0, heads[0].start).trim()
+    if (preamble.length > 0) entries.push({ id: 'A', label: sectionTitle, text: preamble })
+
+    heads.forEach((h, i) => {
+      const text = body.slice(h.end, i + 1 < heads.length ? heads[i + 1].start : body.length).trim()
+      if (text.length > 0) {
+        entries.push({ id: LETTERS[entries.length] ?? `X${entries.length}`, label: h.label, text })
+      }
+    })
+    return entries
+  }
+
+  const text = body.trim()
+  return text.length > 0 ? [{ id: 'A', label: sectionTitle, text }] : []
+}
+
+// ── Concept spine extraction ──────────────────────────────────────────────────
+
+const DEFINITION_ALIASES = ['one sentence definition', 'core claim', 'core idea', 'definition', 'concept statement']
+const WHY_ALIASES = ['why it matters', 'the core insight', 'core insight', 'significance', 'key vocabulary']
+
+/**
+ * Builds the ConceptSpine from the highest-priority identity/spine section.
+ * Falls back through: explicit definition field → YAML `name`/`domain` block
+ * (Component-format identity sections) → first bold lead-in → first paragraph.
+ */
+function extractSpine(sections: BlueprintSection[]): ConceptSpine | null {
+  for (const s of sectionsByRole(sections, SPINE_SECTIONS)) {
+    let definition = readField(s.body, DEFINITION_ALIASES)
+
+    if (!definition) {
+      const yaml = /```(?:yaml)?\s*([\s\S]*?)```/.exec(s.body)?.[1] ?? ''
+      // Key spelling and colon spacing both vary by generation
+      // ("name: X", "display_name      : X", "concept_name: X").
+      const yamlField = (k: string): string =>
+        new RegExp(`^[ \\t]*${k}[ \\t]*:[ \\t]*(.+)$`, 'im')
+          .exec(yaml)?.[1]?.trim().replace(/^["']|["']$/g, '').replace(/\s+#.*$/, '') ?? ''
+      const name = yamlField('name') || yamlField('display_name') || yamlField('concept_name')
+      if (name) {
+        const domain = yamlField('domain')
+        definition = domain ? `${name} is a concept in ${domain}.` : `${name}.`
+      }
+    }
+
+    if (!definition) {
+      // `| Field | Value |` metadata tables — the generation used by ~580
+      // mathematics blueprints, which carry no YAML block and no prose spine.
+      const tableField = (k: string): string =>
+        new RegExp(`^\\|\\s*${k}\\s*\\|\\s*([^|\\n]+?)\\s*\\|`, 'im')
+          .exec(s.body)?.[1]?.replace(/`/g, '').trim() ?? ''
+      const name = tableField('concept_name') || tableField('concept name') || tableField('name')
+      if (name) {
+        const domain = tableField('domain')
+        definition = domain ? `${name} is a concept in ${domain}.` : `${name}.`
+      }
+    }
+
+    if (!definition) {
+      // Anchored to the section's FIRST non-empty line on purpose. Scanning the
+      // whole body would happily return a mid-section label such as
+      // "**Notation:**" in preference to the opening definitional paragraph
+      // that precedes it.
+      const firstLine = s.body.split('\n').map(l => l.trim()).find(l => l.length > 0) ?? ''
+      const boldLead = /^(?:[-*+][ \t]*)?\*\*([^*\n]{3,200}?)\*\*[ \t]*:?[ \t]*(.*)$/.exec(firstLine)
+      if (boldLead) definition = `${boldLead[1].trim()}${boldLead[2].trim() ? `: ${boldLead[2].trim()}` : ''}`
+    }
+
+    if (!definition) {
+      // Paragraph fallback. Sub-headings are stripped rather than skipped so a
+      // section that opens with "### Target Knowledge State" still yields its
+      // prose instead of falling through to nothing.
+      const para = s.body
+        .split(/\n\s*\n/)
+        .map(p => p.replace(/^(?:[ \t]*#{1,6}[^\n]*\n)+/, '').trim())
+        .find(p => p.length > 20 && !p.startsWith('|') && !p.startsWith('```'))
+      if (para) definition = para.replace(/\s+/g, ' ').slice(0, 400)
+    }
+
+    const whyItMatters = readField(s.body, WHY_ALIASES)
+    const quantitiesTable = /(\|[^\n]+\|\n\|[-| :]+\|\n(?:\|[^\n]+\|\n?)+)/.exec(s.body)?.[1]?.trim() ?? null
+
+    if (definition || whyItMatters) return { definition, whyItMatters, quantitiesTable }
+  }
+  return null
+}
+
+// ── Top-level content assembly ────────────────────────────────────────────────
+
+/** Hard cap on explanation entries so a verbose section cannot flood the prompt. */
+const MAX_EXPLANATIONS = 8
+
+/**
+ * Parses a blueprint's educational content using the schema-aware engine.
+ *
+ * `diagnostics` is the loud-failure channel required by the P0 remit: an entry
+ * is appended whenever a role section IS PRESENT but yielded zero entries —
+ * i.e. exactly the silent-data-loss condition this change exists to eliminate.
+ */
+export function parseBlueprintContent(conceptId: string, raw: string): BlueprintContent {
+  const sections = parseSections(raw)
+  const diagnostics: string[] = []
+
+  const mcSections = sectionsByRole(sections, MISCONCEPTION_SECTIONS)
+  let misconceptions: MisconceptionEntry[] = []
+  for (const s of mcSections) {
+    const parsed = extractMisconceptionBlocks(s.body)
+    const entries = parsed.length > 0 ? parsed : extractMisconceptionTable(s.body)
+    if (entries.length > 0) { misconceptions = entries; break }
+  }
+  if (misconceptions.length === 0 && mcSections.length > 0) {
+    diagnostics.push(
+      `misconception section(s) present but unparseable: ${mcSections.map(s => `"${s.title}"`).join(', ')}`,
+    )
+  }
+
+  const expSections = sectionsByRole(sections, EXPLANATION_SECTIONS)
+  const explanations: ExplanationEntry[] = []
+  for (const s of expSections) {
+    if (explanations.length >= MAX_EXPLANATIONS) break
+    const blocks = extractExplanationBlocks(s.body)
+    const entries = blocks.length > 0 ? blocks : extractExplanationProse(s.body, s.title)
+    for (const e of entries) {
+      if (explanations.length >= MAX_EXPLANATIONS) break
+      if (e.text.length > 0) explanations.push(e)
+    }
+  }
+  if (explanations.length === 0 && expSections.length > 0) {
+    diagnostics.push(
+      `explanation section(s) present but unparseable: ${expSections.map(s => `"${s.title}"`).join(', ')}`,
+    )
+  }
+
+  const conceptSpine = extractSpine(sections)
+  if (!conceptSpine && sectionsByRole(sections, SPINE_SECTIONS).length > 0) {
+    diagnostics.push('spine section present but yielded no definition')
+  }
+
+  return { conceptId, conceptSpine, misconceptions, explanations, diagnostics }
 }
 
 // ── EB Concept Entry parsers (TQ-1 / TQ-2) ───────────────────────────────────
@@ -1012,40 +1212,18 @@ export function loadBlueprintContent(conceptId: string): BlueprintContentResult 
   }
 
   try {
-    let content: BlueprintContent
-    if (isComponentFormat(rawContent)) {
-      // Phase 2: Component-format blueprint (## Component N —).
-      content = {
-        conceptId,
-        conceptSpine: extractComponentConceptSpine(rawContent),
-        misconceptions: extractComponentMisconceptions(rawContent),
-        explanations: extractComponentExplanations(rawContent),
-      }
-    } else if (isProtocolFormat(rawContent)) {
-      // Protocol-format blueprint (## N. Title, ## 0. Concept Profile — 47 foundational blueprints).
-      content = {
-        conceptId,
-        conceptSpine: extractProtocolConceptSpine(rawContent),
-        misconceptions: extractProtocolMisconceptions(rawContent),
-        explanations: extractProtocolExplanations(rawContent),
-      }
-    } else if (isSpineFormat(rawContent)) {
-      // Spine-format blueprint (## 0. Concept Metadata, ## 1. Concept Spine — 24 blueprints).
-      content = {
-        conceptId,
-        conceptSpine: extractSpineFormatConceptSpine(rawContent),
-        misconceptions: extractSpineFormatMisconceptions(rawContent),
-        explanations: extractSpineFormatExplanations(rawContent),
-      }
-    } else {
-      // Section-format blueprint (## Section N — Name — 14 blueprints).
-      content = {
-        conceptId,
-        conceptSpine: extractConceptSpine(rawContent),
-        misconceptions: extractMisconceptions(rawContent),
-        explanations: extractExplanations(rawContent),
-      }
+    // Schema-aware parse — one path for every authoring generation. Sections
+    // are resolved by MEANING (heading title), never by ordinal position, so a
+    // new generation that reorders its components cannot silently zero out its
+    // own content the way the previous ordinal-keyed dispatch did.
+    const content = parseBlueprintContent(conceptId, rawContent)
+
+    // Fail loudly. A present-but-unparseable section is a parser defect, not a
+    // sparse blueprint, and must never pass unnoticed again.
+    for (const d of content.diagnostics ?? []) {
+      console.warn(`[blueprintLoader] ${conceptId}: ${d}`)
     }
+
     contentCache.set(conceptId, content)
     return { found: true, content }
   } catch (err) {
