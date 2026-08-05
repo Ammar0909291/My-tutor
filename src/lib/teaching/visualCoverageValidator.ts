@@ -273,7 +273,25 @@ export function classifyConcept(
 ): ConceptClassification {
   const exact = parsed.conceptEntries.find((e) => e.key === conceptId)
   if (exact) {
-    if (exact.primary === 'force_diagram' && looksLikeForceDiagramMisassignment(conceptName)) {
+    // Scoped to classical mechanics — the domain this heuristic was written
+    // for and the ONLY domain whose entries it actually protects (all 8
+    // force_diagram entries without a sceneGenerator are phys.mech.*).
+    //
+    // KINEMATICS_ENERGY_FLUID_ONLY_WORDS is a MECHANICS vocabulary, so
+    // applying it to another domain is a category error rather than a
+    // detection. It produced exactly one false positive:
+    // phys.opt.lens-power, "Power of a Lens and Lens Combinations" — optical
+    // power is measured in dioptres, not watts, and the entry follows the
+    // same primary + sceneGenerator: 'ray_optics' convention as its four
+    // sibling optics entries, which escape only because their names happen to
+    // contain no trigger word.
+    //
+    // Deliberately NOT fixed by exempting any entry with a sceneGenerator:
+    // 12 of the 20 force_diagram entries delegate to one, including 7
+    // phys.mech.* entries, so that exemption would blind the guard on 60% of
+    // its surface. Domain scoping loses no detection the guard performs today.
+    const isMechanics = conceptId.startsWith('phys.mech.')
+    if (exact.primary === 'force_diagram' && isMechanics && looksLikeForceDiagramMisassignment(conceptName)) {
       return {
         conceptId, conceptName, category: 'D_INCORRECT', visual: exact.primary,
         reason: `Concept name "${conceptName}" matches a pure kinematics/energy/fluid pattern with no dynamics word present, but resolves to force_diagram`,

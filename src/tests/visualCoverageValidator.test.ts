@@ -190,6 +190,26 @@ describe('classifyConcept — Category D end-to-end', () => {
     expect(result.visual).toBe('force_diagram')
   })
 
+  // The heuristic's word list is a MECHANICS vocabulary, so it is applied only
+  // to phys.mech.*. These two tests pin both halves of that scoping: the guard
+  // must keep firing where it was written to fire, and must not fire outside it.
+  it('does NOT flag an optics concept whose name collides with a mechanics word', () => {
+    // "Power of a Lens" is dioptres, not watts. This exact entry — which uses
+    // the same primary + sceneGenerator convention as every other phys.opt
+    // entry — was a false positive that failed CI on four consecutive commits.
+    const source = makeSource(`  'phys.opt.lens-power': { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },`)
+    const parsed = parseVisualRegistrySource(source)
+    const result = classifyConcept('phys.opt.lens-power', 'Power of a Lens and Lens Combinations', parsed)
+    expect(result.category).toBe('A_EXACT')
+  })
+
+  it('STILL flags the same name pattern inside phys.mech — the guard is scoped, not removed', () => {
+    const source = makeSource(`  'phys.mech.power': { primary: 'force_diagram', all: ['force_diagram'] },`)
+    const parsed = parseVisualRegistrySource(source)
+    const result = classifyConcept('phys.mech.power', 'Power and Efficiency', parsed)
+    expect(result.category).toBe('D_INCORRECT')
+  })
+
   it('classifies the SAME concept as A_EXACT once it is remapped to a correct visual', () => {
     const source = makeSource(`  'phys.mech.displacement': { primary: 'number_line', all: ['number_line'] },`)
     const parsed = parseVisualRegistrySource(source)
@@ -263,9 +283,14 @@ describe('auditVisualizationCoverage — CI pass/fail semantics', () => {
   })
 
   it('fails when an Incorrect mapping exists', () => {
-    const source = makeSource(`  'a.b.velocity': { primary: 'force_diagram', all: ['force_diagram'] },`)
+    // Uses a real phys.mech.* id rather than the synthetic `a.b.*` convention
+    // the neighbouring fixtures use: the Category D heuristic is scoped to
+    // classical mechanics (its word list is a mechanics vocabulary), so the
+    // concept id is semantically load-bearing here. The assertion — an
+    // Incorrect mapping must fail CI — is unchanged.
+    const source = makeSource(`  'phys.mech.velocity': { primary: 'force_diagram', all: ['force_diagram'] },`)
     const parsed = parseVisualRegistrySource(source)
-    const report = auditVisualizationCoverage([{ id: 'a.b.velocity', name: 'Speed and Velocity' }], parsed, validTypes, validScenes)
+    const report = auditVisualizationCoverage([{ id: 'phys.mech.velocity', name: 'Speed and Velocity' }], parsed, validTypes, validScenes)
     expect(report.passes).toBe(false)
   })
 
