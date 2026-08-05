@@ -132,12 +132,19 @@ describe('P20 D2 — seedOwnershipWhere selects exactly the bootstrap corpus', (
 describe('P20 D2 — instrumentation.ts uses ownership-scoped queries', () => {
   const src = fs.readFileSync(path.join(process.cwd(), 'src/instrumentation.ts'), 'utf8')
 
-  it('the completeness guard is scoped, never a bare count()', () => {
+  it('the completeness guard is scoped, never an unscoped aggregate', () => {
     // A bare count() measures the shared table — including the unbounded
     // AI_AUTHORED capture rows — so it reports traffic volume, not seed
     // completeness, and eventually suppresses seeding permanently.
     expect(src).not.toMatch(/assetIdentity\.count\(\s*\)/)
-    expect(src).toMatch(/assetIdentity\.count\(\s*\{\s*where:\s*seedOwnershipWhere\(\)/)
+    expect(src).not.toMatch(/assetIdentity\.groupBy\(\s*\)/)
+    // Remediation Item 4 replaced count() with a DISTINCT canonicalSlug count
+    // so both sides of the guard are identities. The invariant this test
+    // protects is the SCOPING, not the method, so it now accepts either —
+    // and still requires seedOwnershipWhere() on whichever is used.
+    expect(src).toMatch(
+      /assetIdentity\.(count|groupBy)\(\s*\{[\s\S]{0,200}?where:\s*seedOwnershipWhere\(\)/,
+    )
   })
 
   it('converges seed-owned DRAFT rows to ACTIVE', () => {

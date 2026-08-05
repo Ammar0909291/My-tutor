@@ -82,8 +82,6 @@ async function bootstrapAssets() {
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
-      const EXPECTED_TOTAL = ALL_EXPLANATIONS.length + ALL_PROBES.length
-
       // ── Step 0: pre-flight duplicate-identity check ────────────────────────
       //
       // Remediation Item 3. Must run before Step 1, not merely before the
@@ -174,16 +172,47 @@ async function bootstrapAssets() {
       // A bare count() measured the SHARED table, including the unbounded
       // AI_AUTHORED rows the capture path appends after LLM generations. That
       // measured traffic volume, not seed completeness: once captured drafts
-      // alone reached EXPECTED_TOTAL, every later cold start concluded the
+      // alone reached the target, every later cold start concluded the
       // catalogue was complete and the authored assets were never inserted.
-      const existing = await prisma.assetIdentity.count({ where: seedOwnershipWhere() as never })
-      if (existing >= EXPECTED_TOTAL) {
-        console.log(`[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} seed-owned rows present — skipping`)
+      // seedOwnershipWhere() fixes that half by scoping to rows this bootstrap
+      // owns.
+      //
+      // The other half is UNITS (Remediation Item 4). This compared
+      //     ALL_EXPLANATIONS.length + ALL_PROBES.length   — authored ITEMS
+      // against
+      //     count(seed-owned rows)                        — stored IDENTITIES
+      // which are different quantities. The loops below insert at most one row
+      // per canonicalSlug, so the row count can never exceed the number of
+      // DISTINCT identities in the dataset. Whenever the dataset carried more
+      // items than distinct identities the target was unreachable by
+      // construction, the guard could never fire, and every cold start re-ran
+      // the full per-item loop forever.
+      //
+      // Both sides are now distinct canonical identities:
+      //   expected — identityCheck.distinctIdentities, the exact set Step 0
+      //     just validated and the loops below will attempt to create. Reusing
+      //     it keeps one source of truth rather than a second derivation that
+      //     could drift.
+      //   stored   — a DISTINCT canonicalSlug count, not a row count. Rows and
+      //     identities coincide today only because a partial unique index
+      //     covers authorId = SEED_AUTHOR_ID; counting distinct slugs states
+      //     the invariant directly instead of depending on that index.
+      const EXPECTED_IDENTITIES = identityCheck.distinctIdentities
+      const storedIdentities = (
+        await prisma.assetIdentity.groupBy({
+          by: ['canonicalSlug'],
+          where: seedOwnershipWhere() as never,
+        })
+      ).length
+      if (storedIdentities >= EXPECTED_IDENTITIES) {
+        console.log(
+          `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present — skipping`
+        )
         return
       }
 
       console.log(
-        `[instrumentation] asset bootstrap: ${existing}/${EXPECTED_TOTAL} seed-owned rows present — seeding missing assets...`
+        `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present — seeding missing assets...`
       )
 
       let created = 0
@@ -275,7 +304,7 @@ async function bootstrapAssets() {
       }
 
       console.log(
-        `[instrumentation] asset bootstrap complete: created=${created} skipped=${skipped} total=${EXPECTED_TOTAL}`
+        `[instrumentation] asset bootstrap complete: created=${created} skipped=${skipped} total=${EXPECTED_IDENTITIES}`
       )
     } finally {
       await prisma.$disconnect()
