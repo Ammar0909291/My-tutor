@@ -2078,13 +2078,24 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const next = plan.next
     const initMode = lessonInitModeFor(plan.nextEntryMode)
     setMessages([])
-    setLessonStarted(false)
-    initializedRef.current = false
-    setPendingLesson(next)
-    pendingLessonRunRef.current = async () => {
-      await callLessonInit(sessionId, initMode, next)
-      setActiveTab('chat')
-    }
+
+    // P0 (lesson continuation): automatic progression must not wait for a click.
+    // Previous fixes corrected WHICH lesson was staged and in what mode — that
+    // part was always right. The defect was the hand-off: this used to set
+    // pendingLesson + pendingLessonRunRef and return, parking the learner on the
+    // "Start Lesson" preview (gated on `!lessonStarted && messages.length === 0`)
+    // whose button is the ONLY caller of pendingLessonRunRef. That gate is
+    // correct for MANUAL navigation and wrong for completion. Both keep sharing
+    // callLessonInit — one implementation — but not the gesture. Taking
+    // ownership here mirrors the Start Lesson click; initializedRef is the same
+    // take-over marker startLesson() sets, so a late history restore cannot
+    // clobber this turn.
+    setPendingLesson(null)
+    pendingLessonRunRef.current = null
+    setLessonStarted(true)
+    initializedRef.current = true
+    setActiveTab('chat')
+    await callLessonInit(sessionId, initMode, next)
   }, [handleLessonComplete, curriculumLessons, topicProgressMap, sessionId, callLessonInit])
 
   completeAndAdvanceRef.current = completeAndAdvance

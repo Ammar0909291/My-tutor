@@ -218,7 +218,14 @@ describe('every completion entry point uses the canonical transition', () => {
   it('completeAndAdvance both records completion and starts the next lesson', () => {
     const start = SRC.indexOf('const completeAndAdvance = useCallback')
     expect(start).toBeGreaterThan(-1)
-    const body = SRC.slice(start, start + 1800)
+    // Bounded by the ref assignment that immediately follows the callback
+    // rather than by a fixed character count: the previous `start + 1800`
+    // window silently excluded the tail of the function whenever the body or
+    // its comments grew, failing on documentation changes that altered no
+    // behaviour. The four assertions below are the actual invariant.
+    const end = SRC.indexOf('completeAndAdvanceRef.current = completeAndAdvance', start)
+    expect(end).toBeGreaterThan(start)
+    const body = SRC.slice(start, end)
     expect(body).toContain('handleLessonComplete(')
     expect(body).toContain('planLessonAdvance(')
     expect(body).toContain('callLessonInit(')
