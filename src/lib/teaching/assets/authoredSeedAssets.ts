@@ -217,7 +217,7 @@ const VEL_PROBES: SeedProbe[] = [
   {
     conceptId: VEL,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A swimmer swims one full length of a pool and back to the start block in 100 s, swimming hard the whole way. Her average velocity for the swim is…',
     choices: [
@@ -793,7 +793,7 @@ const MOM_PROBES: SeedProbe[] = [
   {
     conceptId: MOM,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'Which has more momentum: a 0.5 kg football kicked at 30 m/s, or a 900 kg car creeping at 1 m/s?',
     choices: [
@@ -1885,7 +1885,7 @@ const WORK_PROBES: SeedProbe[] = [
   {
     conceptId: WORK,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A box slides 5 m to the right while friction acts on it. The work done by friction is…',
     choices: [
@@ -2972,7 +2972,7 @@ const WAV_PROBES: SeedProbe[] = [
   {
     conceptId: WAV,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A wave passes a duck floating on a pond. What does the duck do?',
     choices: [
@@ -3055,7 +3055,7 @@ const FRIC_PROBES: SeedProbe[] = [
   {
     conceptId: FRIC,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A box rests on a 30\u00b0 incline. What normal force does the surface exert?',
     choices: [
@@ -3793,7 +3793,7 @@ const TEMP_PROBES: SeedProbe[] = [
   {
     conceptId: TEMP,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A 200\u00b0C steel nail is dropped into a 20\u00b0C swimming pool. Which way does heat flow?',
     choices: [
@@ -4039,7 +4039,7 @@ const PROJ_PROBES: SeedProbe[] = [
   {
     conceptId: PROJ,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A 1 kg ball and a 5 kg ball are thrown horizontally at the same speed from the same height (no air resistance). Which lands first?',
     choices: [
@@ -4120,7 +4120,7 @@ const GRAV_PROBES: SeedProbe[] = [
   {
     conceptId: GRAV,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'Why do astronauts on the ISS (400 km altitude) feel weightless?',
     choices: [
@@ -4204,7 +4204,7 @@ const HT_PROBES: SeedProbe[] = [
   {
     conceptId: HT,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'The Sun heats the Earth across 150 million km of vacuum. Which mechanism carries the energy?',
     choices: [
@@ -6342,7 +6342,7 @@ const TORQ_PROBES: SeedProbe[] = [
   {
     conceptId: TORQ,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'Which produces more torque about a pivot: 50 N applied at r = 0.1 m, or 10 N applied (perpendicular) at r = 1 m?',
     choices: [
@@ -9509,7 +9509,7 @@ const FBD_PROBES: SeedProbe[] = [
   {
     conceptId: FBD,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A puck slides across frictionless ice at constant velocity, with nothing touching it. Which horizontal force belongs on its free-body diagram?',
     choices: [
@@ -10376,7 +10376,7 @@ const CINEL_PROBES: SeedProbe[] = [
   {
     conceptId: CINEL,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'Two cars collide and stick together, crumpling severely. Is total momentum conserved in this collision?',
     choices: [
@@ -13486,7 +13486,7 @@ const BUOY_PROBES: SeedProbe[] = [
   {
     conceptId: BUOY,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A 1 kg steel ball sinks in water; a 1000 kg steel ship floats. What determines whether an object floats or sinks?',
     choices: [
@@ -32019,7 +32019,7 @@ const VADD_PROBES: SeedProbe[] = [
   {
     conceptId: VADD,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A box is pulled with a 3 N force pointing east and a 4 N force pointing north, at the same time. What is the magnitude of the single resultant force?',
     choices: [
@@ -32079,7 +32079,7 @@ const DIMN_PROBES: SeedProbe[] = [
   {
     conceptId: DIMN,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A desk edge measures 1.5 metres, and the exact same edge measures about 5 feet. Do metres and feet represent different dimensions?',
     choices: [
@@ -32087,7 +32087,7 @@ const DIMN_PROBES: SeedProbe[] = [
       { text: 'Yes — different units mean different dimensions, since the numbers 1.5 and 5 are completely different', isCorrect: false, misconceptionId: `${DIMN}:MC-UNITS-ARE-DIMENSIONS` },
     ],
     correctValue: 'no, same dimension different units',
-    difficulty: ProbeDifficulty.DEVELOPING,
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
     targetedMisconceptions: [`${DIMN}:MC-UNITS-ARE-DIMENSIONS`],
     source: `${DIMN_SRC} — MC-UNITS-ARE-DIMENSIONS trigger case as probe, distractor-mapped`,
   },
@@ -32139,7 +32139,7 @@ const ERRS_PROBES: SeedProbe[] = [
   {
     conceptId: ERRS,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'Three worn rulers all consistently read 12.41 cm on the same object every time, but all three start 2 mm past the true zero mark. Are these readings precise, accurate, both, or neither?',
     choices: [
@@ -32199,7 +32199,7 @@ const SGFG_PROBES: SeedProbe[] = [
   {
     conceptId: SGFG,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A ruler measures only to the nearest millimetre. A calculator, using that measurement, outputs an area of 7.853975 cm². How many of these digits are actually trustworthy?',
     choices: [
@@ -32259,7 +32259,7 @@ const UCNV_PROBES: SeedProbe[] = [
   {
     conceptId: UCNV,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'A 1-metre stick is measured against centimetre marks and spans exactly 100 of them. Does converting from metres (1) to centimetres (100) mean the stick got longer?',
     choices: [
@@ -39945,7 +39945,7 @@ const UNITS_ASSESS_PROBES: SeedProbe[] = [
   {
     conceptId: UNITS,
     subjectSlug: 'physics',
-    probeKind: 'mcq',
+    probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'DIAGNOSTIC (pre-teaching entry check): Is the SI base unit for temperature the degree Celsius (°C) or the kelvin (K)?',
     choices: [
@@ -39997,7 +39997,7 @@ const UNITS_ASSESS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'RETRIEVAL PRACTICE (Day 21, spaced schedule): A physicist records a temperature of 37°C. Express this in SI base units.',
     correctValue: '310.15 K',
-    difficulty: ProbeDifficulty.DEVELOPING,
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
     targetedMisconceptions: [`${UNITS}:MC-1`],
     source: `${UNITS_SRC} — Section 9 Retrieval Schedule, Day 21 spaced-repetition item`,
   },
@@ -40059,7 +40059,7 @@ const SV_ASSESS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'RETRIEVAL PRACTICE (Day 21, spaced schedule): A ball is thrown upward and returns to the thrower\'s hand. What is its distance travelled? What is its displacement?',
     correctValue: 'distance = 2h (up and back down); displacement = 0',
-    difficulty: ProbeDifficulty.DEVELOPING,
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
     targetedMisconceptions: [`${SV}:MC-2`],
     source: `${SV_SRC} — Section 9 Retrieval Schedule, Day 21 spaced-repetition item`,
   },
@@ -40191,7 +40191,7 @@ const ERRS_ASSESS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'RETRIEVAL PRACTICE (Interval 3, 10 days): A balance reads 0.5 g high on everything. You average 50 readings — is the result accurate? Explain.',
     correctValue: 'no — systematic error survives averaging; only random error is reduced by averaging',
-    difficulty: ProbeDifficulty.PROFICIENT,
+    difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${ERRS}:MC-AVERAGING-FIXES-ALL`],
     source: `${ERRS_SRC} — Section 9 Retrieval Schedule, Interval 3 (10 days)`,
   },
@@ -40257,7 +40257,7 @@ const SGFG_ASSESS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'RETRIEVAL PRACTICE (Interval 3, 10 days): 12.11 g + 0.3 g — report the value to correct precision, and explain why.',
     correctValue: '12.4 g (limited by the least precise measurement, 0.3 g, to 1 decimal place)',
-    difficulty: ProbeDifficulty.PROFICIENT,
+    difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${SGFG}:MC-MORE-DIGITS-BETTER`],
     source: `${SGFG_SRC} — Section 9 Retrieval Schedule, Interval 3 (10 days)`,
   },
@@ -40389,7 +40389,7 @@ const VPRD_ASSESS_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'RETRIEVAL PRACTICE (Interval 4, 21 days): A 20 N force acts at 90° to a 0.3 m spanner. Find the torque magnitude and say its product type.',
     correctValue: '6 N·m; cross product',
-    difficulty: ProbeDifficulty.PROFICIENT,
+    difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [],
     source: `${VPRD_SRC} — Section 9 Retrieval Schedule, Interval 4 (21 days)`,
   },
