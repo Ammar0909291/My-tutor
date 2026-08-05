@@ -21,6 +21,7 @@
 import { PrismaClient, AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } from '@prisma/client'
 import {
   SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
+  buildProbeSlugResolver,
 } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
 import { hashContent } from '../../src/lib/teaching/assets/similarity'
@@ -56,6 +57,11 @@ async function main() {
   // rationale. Same validator, same ordering contract: the dedup below keys on
   // canonicalSlug alone, so a colliding dataset would seed the first item and
   // silently drop the rest. Refuse before the first write rather than discard.
+  // ADR 14 13 (Item 6): ladder rungs get a difficulty segment; singletons
+  // keep the identity they already have. One resolver, used for BOTH the
+  // pre-flight check and the write loop, so they can never disagree.
+  const probeSlug = buildProbeSlugResolver(ALL_PROBES)
+
   const identityCheck = validateSeedIdentities([
     ...ALL_EXPLANATIONS.map((e) => ({
       canonicalSlug: seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand),
@@ -68,7 +74,7 @@ async function main() {
       source: e.source,
     })),
     ...ALL_PROBES.map((p) => ({
-      canonicalSlug: seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand),
+      canonicalSlug: probeSlug(p),
       family: 'PROBE' as const,
       conceptId: p.conceptId,
       subjectSlug: p.subjectSlug,
@@ -128,7 +134,7 @@ async function main() {
   }
 
   for (const p of ALL_PROBES) {
-    const canonicalSlug = seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand)
+    const canonicalSlug = probeSlug(p)
     if (dryRun) { created++; console.log(`would create PROBE: ${canonicalSlug}`); continue }
     const existing = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
     if (existing) { skipped++; console.log(`skip (exists): ${canonicalSlug}`); continue }

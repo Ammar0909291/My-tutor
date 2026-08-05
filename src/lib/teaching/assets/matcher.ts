@@ -5,12 +5,42 @@
  * matching ADR 14 §6's guidance that pgvector embedding similarity is a
  * Phase 3+ concern, not required for the hot retrieval path.
  */
-import { GradeBand, AssetStatus } from '@prisma/client'
+import { GradeBand, AssetStatus, ProbeDifficulty } from '@prisma/client'
 import type { StudentState } from './studentState'
 
 const GRADE_BAND_ORDER: GradeBand[] = [
   GradeBand.EARLY, GradeBand.ELEMENTARY, GradeBand.MIDDLE, GradeBand.HIGH, GradeBand.UNDERGRADUATE, GradeBand.ADULT,
 ]
+
+/** ADR 14 §4.4's four rungs, in ascending demand. */
+const DIFFICULTY_LADDER: ProbeDifficulty[] = [
+  ProbeDifficulty.FOUNDATIONAL, ProbeDifficulty.DEVELOPING,
+  ProbeDifficulty.PROFICIENT, ProbeDifficulty.ADVANCED,
+]
+
+/**
+ * Ladder-proximity bonus (ADR 14 §13 — Remediation Item 6).
+ *
+ * BONUS-ONLY by design, never a penalty or a hard filter. Two consequences
+ * that matter for backward compatibility:
+ *   - an asset with no difficulty (every EXPLANATION, and any probe authored
+ *     before this field mattered) scores EXACTLY what it scored before;
+ *   - a learner with no targetDifficulty likewise sees unchanged scoring.
+ * So nothing can fall below DEFAULT_CONFIDENCE_THRESHOLD as a result of this
+ * term — it can only re-rank candidates that were previously tied, which is
+ * precisely the ladder case it exists to resolve.
+ */
+export function difficultyProximityBonus(
+  target?: ProbeDifficulty | null,
+  assetDifficulty?: ProbeDifficulty | null,
+): number {
+  if (!target || !assetDifficulty) return 0
+  const t = DIFFICULTY_LADDER.indexOf(target)
+  const a = DIFFICULTY_LADDER.indexOf(assetDifficulty)
+  if (t < 0 || a < 0) return 0
+  const rungs = Math.abs(t - a)
+  return rungs === 0 ? 10 : rungs === 1 ? 6 : rungs === 2 ? 3 : 0
+}
 
 function gradeBandDistance(a: GradeBand, b: GradeBand): number {
   return Math.abs(GRADE_BAND_ORDER.indexOf(a) - GRADE_BAND_ORDER.indexOf(b))
@@ -61,6 +91,12 @@ export interface MatchableAsset {
   qualityConfidence: number
   tags: string[]
   incompatibilities: string[]
+  /**
+   * ProbeAsset.difficulty, carried through so the ladder is visible to the
+   * scorer (ADR 14 §13). Absent/null for EXPLANATION assets and for any probe
+   * whose difficulty was not projected — both score as before.
+   */
+  difficulty?: ProbeDifficulty | null
 }
 
 export interface MatchOptions {
@@ -105,6 +141,9 @@ export function scoreMatch(state: StudentState, asset: MatchableAsset, options: 
   // never required. A brand-new ACTIVE asset (qualityScore=0) still scores
   // 75 on an exact gradeBand match, comfortably above the default threshold.
   score += Math.min(10, asset.qualityScore * asset.qualityConfidence * 10)
+
+  // Ladder proximity (ADR 14 §13). Bonus-only — see difficultyProximityBonus.
+  score += difficultyProximityBonus(state.targetDifficulty, asset.difficulty)
 
   return Math.min(100, Math.round(score))
 }

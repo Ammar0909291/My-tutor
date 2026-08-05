@@ -37,6 +37,13 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
     const candidates = await prisma.assetIdentity.findMany({
       where: { family: AssetFamily.PROBE, conceptId: state.conceptId, language: state.language, status: AssetStatus.ACTIVE },
       include: { probeAsset: true },
+      // Deterministic candidate order (ADR 14 §13 — Remediation Item 6). A
+      // ladder puts several probes on one concept whose scores can still tie
+      // after the proximity bonus; pickBest keeps the FIRST best-scoring
+      // candidate, so without a stable order the winner would depend on
+      // whatever order Postgres happened to return. assetId is unique, so this
+      // makes selection reproducible for identical inputs.
+      orderBy: { assetId: 'asc' },
       take: 50,
     })
 
@@ -45,7 +52,11 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       .map((c) => ({
         assetId: c.assetId, conceptId: c.conceptId, language: c.language, gradeBand: c.gradeBand,
         status: c.status, qualityScore: c.qualityScore, qualityConfidence: c.qualityConfidence,
-        tags: c.tags, incompatibilities: c.incompatibilities, probeAsset: c.probeAsset,
+        tags: c.tags, incompatibilities: c.incompatibilities,
+        // Carried so scoreMatch can see the ladder rung — previously dropped
+        // here, which is why difficulty could never influence selection.
+        difficulty: c.probeAsset!.difficulty,
+        probeAsset: c.probeAsset,
       }))
 
     const best = pickBest(state, rows, options)

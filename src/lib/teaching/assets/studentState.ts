@@ -9,7 +9,7 @@
  * default to ADULT, matching the placeholder already hardcoded at the one
  * live EvidenceEngine call site in route.ts.
  */
-import { GradeBand } from '@prisma/client'
+import { GradeBand, ProbeDifficulty } from '@prisma/client'
 
 export interface StudentState {
   conceptId: string
@@ -17,7 +17,44 @@ export interface StudentState {
   language: string // BCP-47, e.g. "en", "ru", "hi"
   gradeBand: GradeBand
   experienceLevel?: 'beginner' | 'intermediate' | 'expert'
+  /**
+   * Which rung of a difficulty ladder suits this learner right now
+   * (ADR 14 §13 — Remediation Item 6). Optional: when absent, difficulty
+   * contributes nothing to scoring and selection behaves exactly as it did
+   * before ladders existed.
+   */
+  targetDifficulty?: ProbeDifficulty
   userMessage: string
+}
+
+/**
+ * Derive the target ladder rung from signals StudentState ALREADY carries.
+ *
+ * ADR 14 §13 names TeachingDecision.bloom_level as the upstream source, but
+ * that would require threading a new value in through route.ts's prompt
+ * assembly. experienceLevel (already inferred from Profile.currentLevel /
+ * targetLevel) and gradeBand (already mapped from Profile.grade) express the
+ * same "how demanding should this be" signal and are already present at every
+ * call site, so no serving code, prompt or schema has to change to make
+ * difficulty a live ranking signal.
+ *
+ * Returns undefined when there is no signal at all, which keeps scoring
+ * identical to pre-Item-6 behaviour rather than guessing a rung.
+ */
+export function resolveTargetDifficulty(
+  experienceLevel?: StudentState['experienceLevel'],
+  gradeBand?: GradeBand,
+): ProbeDifficulty | undefined {
+  if (experienceLevel === 'beginner') return ProbeDifficulty.FOUNDATIONAL
+  if (experienceLevel === 'intermediate') return ProbeDifficulty.DEVELOPING
+  if (experienceLevel === 'expert') return ProbeDifficulty.PROFICIENT
+  // No self-reported level: fall back to the band's typical demand. EARLY and
+  // ELEMENTARY learners get the foundational rung; UNDERGRADUATE the
+  // proficient one. MIDDLE/HIGH/ADULT span the whole ladder, so they stay
+  // unset rather than being pushed to a rung on no evidence.
+  if (gradeBand === GradeBand.EARLY || gradeBand === GradeBand.ELEMENTARY) return ProbeDifficulty.FOUNDATIONAL
+  if (gradeBand === GradeBand.UNDERGRADUATE) return ProbeDifficulty.PROFICIENT
+  return undefined
 }
 
 export interface StudentStateInput {
@@ -72,12 +109,15 @@ export function resolveContentRegister(input: {
 }
 
 export function buildStudentState(input: StudentStateInput): StudentState {
+  const gradeBand = gradeToGradeBand(input.grade)
+  const experienceLevel = inferExperienceLevel(input.currentLevel, input.targetLevel)
   return {
     conceptId: input.conceptId,
     subjectSlug: input.subjectSlug,
     language: input.teachingLanguage,
-    gradeBand: gradeToGradeBand(input.grade),
-    experienceLevel: inferExperienceLevel(input.currentLevel, input.targetLevel),
+    gradeBand,
+    experienceLevel,
+    targetDifficulty: resolveTargetDifficulty(experienceLevel, gradeBand),
     userMessage: input.userMessage,
   }
 }

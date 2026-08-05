@@ -50,8 +50,53 @@ export function seedCanonicalSlug(
   conceptId: string,
   familyKind: string,
   gradeBand: GradeBand,
+  difficulty?: ProbeDifficulty | null,
 ): string {
-  return `${conceptId}:${familyKind}:${SEED_LANGUAGE}:${gradeBand.toLowerCase()}`
+  const base = `${conceptId}:${familyKind}:${SEED_LANGUAGE}:${gradeBand.toLowerCase()}`
+  return difficulty ? `${base}:${String(difficulty).toLowerCase()}` : base
+}
+
+/**
+ * Ladder-aware probe slug resolver — ADR 14 §13 (Remediation Item 6).
+ *
+ * A "difficulty ladder" is several probes deliberately authored for one
+ * (conceptId, probeKind, gradeBand) slot at different ProbeDifficulty rungs.
+ * ADR 14 §4.5 allows at most one ACTIVE asset per canonicalSlug, so rungs can
+ * only coexist if difficulty participates in the identity.
+ *
+ * Difficulty is appended ONLY to slots that actually carry a ladder:
+ *
+ *   singleton slot  ->  conceptId:kind:lang:band            (UNCHANGED)
+ *   ladder slot     ->  conceptId:kind:lang:band:difficulty (extended)
+ *
+ * so every already-authored singleton — which today is every probe in
+ * mathematics, chemistry, biology, computer science and English, and the
+ * majority of physics — keeps the identity it already has. Only the rungs
+ * that currently collide gain a segment.
+ *
+ * TRADE-OFF, stated explicitly: this makes a probe's identity a function of
+ * the dataset it ships in, not of the probe alone. Adding a second rung to a
+ * previously-singleton slot changes that slot's identity and orphans its
+ * seeded row, so such a slot must be re-seeded. The alternative — appending
+ * difficulty unconditionally — is sibling-independent but re-identifies all
+ * 2,483 probes across all six subjects, which is the larger break. Item 3's
+ * fail-fast validation makes the resolver's input deterministic and
+ * duplicate-free, so the resolution is reproducible across all three writers.
+ */
+export function buildProbeSlugResolver<
+  T extends { conceptId: string; probeKind: string; gradeBand: GradeBand; difficulty: ProbeDifficulty },
+>(probes: readonly T[]): (probe: T) => string {
+  const slotCounts = new Map<string, number>()
+  for (const p of probes) {
+    const base = seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand)
+    slotCounts.set(base, (slotCounts.get(base) ?? 0) + 1)
+  }
+  return (probe: T) => {
+    const base = seedCanonicalSlug(probe.conceptId, probe.probeKind, probe.gradeBand)
+    return (slotCounts.get(base) ?? 0) > 1
+      ? seedCanonicalSlug(probe.conceptId, probe.probeKind, probe.gradeBand, probe.difficulty)
+      : base
+  }
 }
 
 /** Subjects the automatic cold-start bootstrap (src/instrumentation.ts) seeds. */

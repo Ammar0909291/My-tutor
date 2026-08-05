@@ -73,7 +73,8 @@ async function bootstrapAssets() {
 
     try {
       // Load seed arrays first so we know the expected total before querying.
-      const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug, seedOwnershipWhere } =
+      const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
+        buildProbeSlugResolver, seedOwnershipWhere } =
         await import('./lib/teaching/assets/brainSeedAssets')
       const { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } =
         await import('./lib/teaching/assets/authoredSeedAssets')
@@ -82,6 +83,11 @@ async function bootstrapAssets() {
 
       const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS]
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
+      // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
+      // slots keep the identity they already have. One resolver drives BOTH
+      // the pre-flight check and the write loop so they cannot disagree.
+      const probeSlug = buildProbeSlugResolver(ALL_PROBES)
+
       // ── Step 0: pre-flight duplicate-identity check ────────────────────────
       //
       // Remediation Item 3. Must run before Step 1, not merely before the
@@ -112,7 +118,7 @@ async function bootstrapAssets() {
           source: e.source,
         })),
         ...ALL_PROBES.map((p) => ({
-          canonicalSlug: seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand),
+          canonicalSlug: probeSlug(p),
           family: 'PROBE' as const,
           conceptId: p.conceptId,
           subjectSlug: p.subjectSlug,
@@ -261,7 +267,7 @@ async function bootstrapAssets() {
       }
 
       for (const p of ALL_PROBES) {
-        const canonicalSlug = seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand)
+        const canonicalSlug = probeSlug(p)
         const dup = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
         if (dup) { skipped++; continue }
         try {
