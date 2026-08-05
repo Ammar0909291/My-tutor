@@ -84,6 +84,61 @@ async function bootstrapAssets() {
       const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
       const EXPECTED_TOTAL = ALL_EXPLANATIONS.length + ALL_PROBES.length
 
+      // ── Step 0: pre-flight duplicate-identity check ────────────────────────
+      //
+      // Remediation Item 3. Must run before Step 1, not merely before the
+      // create loops: Step 1's updateMany is itself a database write, and the
+      // contract is that an invalid dataset produces ZERO writes of any kind.
+      //
+      // Deliberately NOT process.exit() here, unlike the standalone scripts.
+      // This module runs inside the Next.js server process via register(); a
+      // process.exit would take the whole application down on boot. Refusing
+      // to seed and returning is the equivalent outcome for a server hook —
+      // no rows written — without turning a data-quality fault into an outage.
+      // bootstrapAssets() is already fire-and-forget, so returning here is
+      // non-fatal by construction.
+      //
+      // The report is bounded here (it would otherwise repeat in full on every
+      // cold start); the seed scripts print the complete, unbounded list.
+      const { validateSeedIdentities, formatSeedIdentityReport, previewOf } =
+        await import('./lib/teaching/assets/seedIdentityValidation')
+      const identityCheck = validateSeedIdentities([
+        ...ALL_EXPLANATIONS.map((e) => ({
+          canonicalSlug: seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand),
+          family: 'EXPLANATION' as const,
+          conceptId: e.conceptId,
+          subjectSlug: e.subjectSlug,
+          familyKind: e.familyKind,
+          gradeBand: String(e.gradeBand),
+          preview: previewOf(e.content),
+          source: e.source,
+        })),
+        ...ALL_PROBES.map((p) => ({
+          canonicalSlug: seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand),
+          family: 'PROBE' as const,
+          conceptId: p.conceptId,
+          subjectSlug: p.subjectSlug,
+          familyKind: p.probeKind,
+          gradeBand: String(p.gradeBand),
+          preview: previewOf(p.stem),
+          source: p.source,
+        })),
+      ])
+      if (!identityCheck.ok) {
+        console.error(
+          formatSeedIdentityReport(identityCheck, {
+            writer: 'instrumentation asset bootstrap',
+            maxConflicts: 10,
+          }),
+        )
+        console.error(
+          '[instrumentation] asset bootstrap ABORTED before any write — ' +
+            'duplicate canonical identities in the seed dataset. No rows created, ' +
+            'no statuses converged. Existing rows are untouched and continue to serve.',
+        )
+        return
+      }
+
       // ── Step 1: converge status on rows this bootstrap already owns ────────
       //
       // Presence is not the same as being served. `create` below writes ACTIVE

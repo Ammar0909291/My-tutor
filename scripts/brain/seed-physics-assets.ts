@@ -24,6 +24,9 @@ import {
 } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
 import { hashContent } from '../../src/lib/teaching/assets/similarity'
+import {
+  validateSeedIdentities, formatSeedIdentityReport, previewOf,
+} from '../../src/lib/teaching/assets/seedIdentityValidation'
 
 const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS].filter((e) => e.subjectSlug === 'physics')
 const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.subjectSlug === 'physics')
@@ -48,6 +51,40 @@ async function main() {
     }
   }
   console.log(`KG check passed: ${allConceptIds.size} physics concept ids resolved against the live KG`)
+
+  // Guard 2 (Remediation Item 3) — see seed-knowledge-assets.ts for the full
+  // rationale. Same validator, same ordering contract: the dedup below keys on
+  // canonicalSlug alone, so a colliding dataset would seed the first item and
+  // silently drop the rest. Refuse before the first write rather than discard.
+  const identityCheck = validateSeedIdentities([
+    ...ALL_EXPLANATIONS.map((e) => ({
+      canonicalSlug: seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand),
+      family: 'EXPLANATION' as const,
+      conceptId: e.conceptId,
+      subjectSlug: e.subjectSlug,
+      familyKind: e.familyKind,
+      gradeBand: String(e.gradeBand),
+      preview: previewOf(e.content),
+      source: e.source,
+    })),
+    ...ALL_PROBES.map((p) => ({
+      canonicalSlug: seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand),
+      family: 'PROBE' as const,
+      conceptId: p.conceptId,
+      subjectSlug: p.subjectSlug,
+      familyKind: p.probeKind,
+      gradeBand: String(p.gradeBand),
+      preview: previewOf(p.stem),
+      source: p.source,
+    })),
+  ])
+  if (!identityCheck.ok) {
+    console.error(formatSeedIdentityReport(identityCheck, { writer: 'seed-physics-assets' }))
+    process.exit(1)
+  }
+  console.log(
+    `Identity check passed: ${identityCheck.totalItems} items, ${identityCheck.distinctIdentities} distinct identities, 0 duplicates`,
+  )
 
   let created = 0
   let skipped = 0

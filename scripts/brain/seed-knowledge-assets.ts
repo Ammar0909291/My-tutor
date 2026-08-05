@@ -41,6 +41,9 @@ import { CS_EXPLANATIONS, CS_PROBES } from '../../src/lib/teaching/assets/csSeed
 const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS, ...BIOLOGY_EXPLANATIONS, ...CS_EXPLANATIONS]
 const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...BIOLOGY_PROBES, ...CS_PROBES]
 import { hashContent } from '../../src/lib/teaching/assets/similarity'
+import {
+  validateSeedIdentities, formatSeedIdentityReport, previewOf,
+} from '../../src/lib/teaching/assets/seedIdentityValidation'
 
 const prisma = new PrismaClient()
 
@@ -66,6 +69,44 @@ async function main() {
     }
   }
   console.log(`KG check passed: ${allConceptIds.size} concept ids resolved against live canonical KGs`)
+
+  // Guard 2 (Remediation Item 3): refuse a dataset in which two authored
+  // assets claim one canonical identity. The per-item dedup below keys on
+  // canonicalSlug alone and `continue`s on a hit, so such a dataset would seed
+  // the first item and silently drop the rest. Built in the SAME order the
+  // loops below run (explanations, then probes) so the report's "KEPT" row is
+  // the item that would actually have won. Runs before the first write —
+  // including in --dry-run, where it is the cheapest way to get the full
+  // duplicate report without touching the database.
+  const identityCheck = validateSeedIdentities([
+    ...ALL_EXPLANATIONS.map((e) => ({
+      canonicalSlug: seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand),
+      family: 'EXPLANATION' as const,
+      conceptId: e.conceptId,
+      subjectSlug: e.subjectSlug,
+      familyKind: e.familyKind,
+      gradeBand: String(e.gradeBand),
+      preview: previewOf(e.content),
+      source: e.source,
+    })),
+    ...ALL_PROBES.map((p) => ({
+      canonicalSlug: seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand),
+      family: 'PROBE' as const,
+      conceptId: p.conceptId,
+      subjectSlug: p.subjectSlug,
+      familyKind: p.probeKind,
+      gradeBand: String(p.gradeBand),
+      preview: previewOf(p.stem),
+      source: p.source,
+    })),
+  ])
+  if (!identityCheck.ok) {
+    console.error(formatSeedIdentityReport(identityCheck, { writer: 'seed-knowledge-assets' }))
+    process.exit(1)
+  }
+  console.log(
+    `Identity check passed: ${identityCheck.totalItems} items, ${identityCheck.distinctIdentities} distinct identities, 0 duplicates`,
+  )
 
   let created = 0
   let skipped = 0
