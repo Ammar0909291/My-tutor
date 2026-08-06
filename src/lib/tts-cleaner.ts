@@ -96,6 +96,18 @@ function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
 
+// A stage label in a presentational pipeline ("Intuition", "Guided Practice",
+// "Проверка"): a short run of ordinary words in any of the three teaching
+// scripts. Digits, operators and formula-shaped tokens all disqualify it,
+// which is exactly what keeps a chemical equation ("2H2 + O2 -> 2H2O") and a
+// limit ("x -> 0") off the pipeline path and on the spoken-arrow path below.
+const PIPELINE_STAGE_RE =
+  /^[A-Za-zÀ-ɏЀ-ӿऀ-ॿ][A-Za-zÀ-ɏЀ-ӿऀ-ॿ'’ -]*$/
+
+function isPipelineStage(term: string): boolean {
+  return term.length > 0 && term.length <= 32 && PIPELINE_STAGE_RE.test(term)
+}
+
 function pluralize(value: string, singular: string): string {
   return `${value} ${singular}${parseFloat(value) === 1 ? '' : 's'}`
 }
@@ -154,6 +166,15 @@ export function cleanTextForTTS(text: string): string {
   t = t.replace(/^\s*\|\s*(.*?)\s*\|\s*$/gm, (_, row: string) =>
     row.split('|').map((cell: string) => cell.trim()).filter(Boolean).join(', '))
   t = t.replace(/\s*\|\s*/g, ', ')
+  // "/" is spoken only where it carries meaning. A slash with whitespace on
+  // BOTH sides is a UI separator — the lesson opening's own confidence check
+  // ("I already know it / I've seen it before / Completely new to me") is the
+  // motivating case — and becomes a natural pause. A tight slash between
+  // characters is educational ("3/4", "m/s", "km/h", "and/or") and is left
+  // exactly as written for the voice to read. Same whitespace-as-signal test
+  // the "+" rule below already uses, for the same reason: spacing is the only
+  // reliable separator-vs-operator evidence available in plain text.
+  t = t.replace(/\s+\/\s+/g, ', ')
   // Numbered lists → natural spoken ordinals ("1. Foo" → "First, Foo") rather
   // than silently deleting the marker and leaving disconnected fragments.
   const ORDINALS = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth']
@@ -238,10 +259,43 @@ export function cleanTextForTTS(text: string): string {
 
   // Math and comparison symbols — multi-character forms before single-character ones
   t = t.replace(/−/g, '-') // normalize unicode minus to ascii hyphen
-  // "leads to" reads naturally for both a chemical equation and a general
-  // causal/sequence arrow — a single unconditional rendering rather than
-  // guessing chemistry-vs-general context after formulas are already words.
-  t = t.replace(/→/g, ' leads to ')
+  // Arrows split two ways, because they do two unrelated jobs in this app.
+  //
+  // A PRESENTATIONAL PIPELINE — the lesson roadmap, "Intuition -> Explanation
+  // -> Examples -> Guided Practice -> Mastery Check -> Summary" — is a visual
+  // device. A teacher reading it aloud lists the stages; they never say "leads
+  // to" five times. The arrows stay on screen and are spoken as the pauses
+  // between items in a list, which is the whole "arrows are visual only"
+  // requirement. Rendering the connector as punctuation rather than an English
+  // word is deliberate: this same cleaner runs for Russian and Hindi lessons,
+  // where an injected English "then" would be wrong.
+  //
+  // An EDUCATIONAL ARROW — "2H2 + O2 -> 2H2O", "x -> 0" — carries the meaning
+  // of the statement, so it keeps "leads to". Deleting it would make the
+  // spoken form of an equation say something different from the written one,
+  // which is the failure this change exists to avoid, not cause.
+  //
+  // Three or more stages, every one of them a plain word phrase, is the
+  // pipeline signature; anything else falls through to "leads to" — i.e. the
+  // previous unconditional behaviour is still the default, never the exception.
+  t = t.replace(/[^\n→]+(?:\s*→\s*[^\n→]+)+/g, (chain: string) => {
+    const terms = chain.split('→').map((s) => s.trim()).filter(Boolean)
+    // The first term usually carries the sentence lead-in that introduces the
+    // chain ("Today's roadmap: Intuition"). Split it off so the lead-in is
+    // still spoken and the stage itself is tested on its own merits.
+    const first = terms[0]
+    // Only ':' and an em dash introduce a chain in practice. A plain hyphen is
+    // deliberately excluded — it lives inside ordinary stage labels
+    // ("Multi-part"), where splitting on it would corrupt the label.
+    const sepIdx = Math.max(first.lastIndexOf(':'), first.lastIndexOf('—'))
+    const leadIn = sepIdx >= 0 ? first.slice(0, sepIdx + 1).trim() : ''
+    const stages = sepIdx >= 0 ? [first.slice(sepIdx + 1).trim(), ...terms.slice(1)] : terms
+
+    if (stages.length >= 3 && stages.every(isPipelineStage)) {
+      return `${leadIn ? `${leadIn} ` : ''}${stages.join(', ')}`
+    }
+    return terms.join(' leads to ')
+  })
   t = t.replace(/<=/g, ' less than or equal to ')
   t = t.replace(/>=/g, ' greater than or equal to ')
   t = t.replace(/≤/g, ' less than or equal to ')

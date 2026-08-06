@@ -12,6 +12,18 @@ export const VOICE_SETTINGS: Record<VoiceType, { pitch: number; rate: number }> 
 // Shared by the settings API and the Tutor Max voice-speed picker — single source of truth.
 export const VOICE_SPEED_OPTIONS = [0.5, 0.75, 1.0, 1.25, 1.5] as const
 
+// A lesson opening is the one moment the learner is being welcomed rather than
+// taught, and at the configured teaching rate it lands rushed. This trims the
+// rate for the introduction ONLY (the lesson-opening message and the subject
+// prelude) — the teaching turns that follow keep the learner's chosen speed
+// untouched, which is the explicit requirement.
+//
+// A multiplier rather than a fixed rate on purpose: a learner who deliberately
+// set 1.5x still gets a proportionally calmer opening instead of having their
+// preference overridden. speakText clamps the product to its usual 0.5–2.0
+// range, so no combination can produce an unusable rate.
+export const INTRO_SPEECH_RATE_FACTOR = 0.85
+
 // Languages with a real server-side TTS provider wired up in /api/tts
 // (hi -> Sarvam, ru -> Yandex). 'en' has none and is expected to fall back
 // to the browser's speechSynthesis by design. This drives the client's

@@ -11,9 +11,10 @@ import {
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { useCountry, useTheme } from '@/components/Providers'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
-import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, SERVER_TTS_LANGS, LANG_LOCALE, canUseSpeechRecognition, type VoiceType, type TeachingLang } from '@/lib/tts'
+import { speakText, stopSpeaking, VOICE_SPEED_OPTIONS, INTRO_SPEECH_RATE_FACTOR, SERVER_TTS_LANGS, LANG_LOCALE, canUseSpeechRecognition, type VoiceType, type TeachingLang } from '@/lib/tts'
 import { voicePlayback } from '@/lib/voice/playbackManager'
 import { cleanTextForTTS } from '@/lib/tts-cleaner'
+import { parseFamiliarityQuestion, type FamiliarityQuestion } from '@/lib/learn/familiarityQuestion'
 import type { VoiceTimingSignal } from '@/lib/voice/voiceSignal'
 import { fetchWithTimeout } from '@/lib/net/timeout'
 import { isFallbackResponse, pickRecoveryMessage } from '@/lib/learn/tutorRecovery'
@@ -609,6 +610,64 @@ function InlinePracticePrompt({ practice, onAnswered }: { practice: InlinePracti
           {correct ? '✓ Correct!' : `✗ Not quite — the answer is "${practice.answer}".`}
         </p>
       )}
+    </Card>
+  )
+}
+
+// The prelude is not a chat message, but the playback manager keys on an id to
+// guarantee only one thing is ever speaking. A reserved constant gives it one
+// that no message can collide with, so pressing play on the prelude stops any
+// tutor turn and vice versa — the single-owner invariant the manager exists for.
+const PRELUDE_SPEECH_ID = 'subject-prelude'
+
+// ─── Familiarity check (lesson introduction) ───────────────────────────────────
+// Single-choice surface for the opening's confidence question. The parsing
+// lives in lib/learn/familiarityQuestion.ts; this is only how it looks.
+function FamiliarityChoice({ parsed, onChoose }: { parsed: FamiliarityQuestion; onChoose: (option: string) => void }) {
+  const [selected, setSelected] = useState<string | null>(null)
+
+  return (
+    <Card style={{ padding: 16, maxWidth: '90%' }} data-testid="familiarity-choice">
+      <p style={{ fontSize: 13.5, fontWeight: 700, lineHeight: 1.5, color: 'var(--text-primary)', margin: '0 0 10px' }}>
+        {parsed.question}
+      </p>
+      {/* radiogroup, not a list of buttons: the control has to ANNOUNCE that
+          exactly one answer is expected, which is the whole point of the
+          change. Keyboard and screen-reader users get that for free. */}
+      <div role="radiogroup" aria-label={parsed.question} style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {parsed.options.map((opt) => {
+          const isSelected = selected === opt
+          return (
+            <CandyButton
+              key={opt}
+              role="radio"
+              aria-checked={isSelected}
+              // Locked after the first pick: this answer is sent to the tutor
+              // as a chat turn, and a second one would contradict the first.
+              disabled={selected !== null}
+              onClick={() => { if (selected === null) { setSelected(opt); onChoose(opt) } }}
+              shadowColor={isSelected ? 'var(--indigo, #6366f1)' : 'var(--border-subtle)'}
+              style={{
+                width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 10,
+                padding: '10px 14px', borderRadius: 12,
+                background: isSelected ? 'rgba(99,102,241,0.12)' : 'var(--bg-elevated, transparent)',
+                border: `2px solid ${isSelected ? '#6366f1' : 'var(--border-subtle)'}`,
+                fontSize: 13, fontWeight: 600, color: 'var(--text-primary)',
+                opacity: selected !== null && !isSelected ? 0.5 : 1,
+              }}
+            >
+              <span style={{
+                width: 18, height: 18, borderRadius: '50%', flexShrink: 0,
+                border: `2px solid ${isSelected ? '#6366f1' : 'var(--border-emphasis, #9ca3af)'}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {isSelected && <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#6366f1' }} />}
+              </span>
+              <span>{opt}</span>
+            </CandyButton>
+          )
+        })}
+      </div>
     </Card>
   )
 }
@@ -1494,7 +1553,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // stops + disposes whatever was playing before this begins, so two voices can
   // never overlap. The disposer returned by each source is what the manager
   // calls to halt output synchronously.
-  const handleSpeak = useCallback((id: string, text: string) => {
+  const handleSpeak = useCallback((id: string, text: string, opts?: { intro?: boolean }) => {
+    // Introductions (the lesson opening and the subject prelude) are spoken a
+    // touch slower than teaching turns — see INTRO_SPEECH_RATE_FACTOR. The
+    // learner's chosen speed is scaled, never replaced, and speakText clamps
+    // the result. Section-to-section pauses need no extra work: cleanTextForTTS
+    // turns each paragraph break into a sentence boundary and speakText already
+    // breathes between sentence segments.
+    const rate = opts?.intro ? speed * INTRO_SPEECH_RATE_FACTOR : speed
     voicePlayback.start(id, {
       start: ({ onEnded }) => {
         if (SERVER_TTS_LANGS.includes(teachingLanguage)) {
@@ -1502,10 +1568,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             { text, lang: teachingLanguage, voice: voiceType, country },
             onEnded,
             // Fallback keeps prior behaviour: never silence on a TTS failure.
-            () => speakText(text, teachingLanguage, voiceType, onEnded, country, speed),
+            () => speakText(text, teachingLanguage, voiceType, onEnded, country, rate),
           )
         }
-        speakText(text, teachingLanguage, voiceType, onEnded, country, speed)
+        speakText(text, teachingLanguage, voiceType, onEnded, country, rate)
         return () => { stopSpeaking() }
       },
     })
@@ -1521,7 +1587,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (id) {
       const msg = messages.find((m) => m.id === id)
       voicePlayback.stop()
-      if (msg) handleSpeak(id, msg.content)
+      // Restart at the same pacing it was playing at, so changing voice or
+      // speed mid-introduction doesn't silently switch it to teaching pace.
+      if (msg) handleSpeak(id, msg.content, { intro: messages.find((m) => m.role === 'assistant')?.id === id })
     }
   }, [messages, handleSpeak])
   const handleSpeedChange = useCallback((s: number) => {
@@ -1536,7 +1604,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (id) {
       const msg = messages.find((m) => m.id === id)
       voicePlayback.stop()
-      if (msg) handleSpeak(id, msg.content)
+      // Restart at the same pacing it was playing at, so changing voice or
+      // speed mid-introduction doesn't silently switch it to teaching pace.
+      if (msg) handleSpeak(id, msg.content, { intro: messages.find((m) => m.role === 'assistant')?.id === id })
     }
   }, [messages, handleSpeak])
 
@@ -2445,11 +2515,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
 1. ПРИВЕТСТВИЕ + ПОЗИЦИЯ — Представься как "Репетитор Макс". Назови тему урока из контекста. Скажи студенту точно, где он находится: "Сегодня — урок X из Y". Если есть данные о предыдущем и следующем уроке — назови их.
 2. ВРЕМЯ — Напиши "Примерное время: X–Y минут". Оцени по сложности цели урока: простая/узкая тема → 8–10 мин; стандартная → 12–15 мин; сложная/многоконцептная → 18–20 мин.
-3. ЦЕЛЬ УРОКА — 3–5 пунктов, каждый начинается с ✓. Последний пункт всегда: "✓ Объяснить это другому человеку своими словами."
-4. ЗАЧЕМ ЭТО ВАЖНО — 2–3 конкретных применения из разных областей (назови области). Используй название и цель урока — никаких общих слов.
+3. ЦЕЛИ УРОКА — сначала напиши строку "К концу этого урока ты сможешь:", затем 3–5 пунктов, каждый начинается с ✓. Последний пункт всегда: "✓ Объяснить это другому человеку своими словами." Говори "урок", а не "глава".
+4. ЗАЧЕМ ЭТОТ УРОК ВАЖЕН — 2–3 конкретных применения из разных областей (назови области). Используй название и цель урока — никаких общих слов.
 5. ЧТО НУЖНО ЗНАТЬ ЗАРАНЕЕ — перечисли предварительные знания. Если completedLessons показывает, что нужные темы пройдены — скажи об этом.
-6. ПЛАН УРОКА — Интуиция → Объяснение → Примеры → Практика → Проверка → Итог.
-7. КРЮЧОК ЛЮБОПЫТСТВА — одна неожиданная или контринтуитивная мысль о теме.
+6. ПЛАН УРОКА — начни с короткой вводной фразы с двоеточием, затем этапы в одну строку: "Вот как пройдёт сегодняшний урок: Интуиция → Объяснение → Примеры → Практика → Проверка → Итог." Стрелки видны только на экране — вслух этапы просто перечисляются, поэтому вводная фраза и делает звучание естественным. Названия этапов — обычные слова, без цифр.
+7. А ТЫ ЗНАЛ? — начни со слов "А ты знал?" и приведи одну неожиданную или контринтуитивную мысль о теме. Пиши так, как любопытный человек рассказывает что-то интересное, а не как учебник излагает факт.
 8. ПРОВЕРКА УВЕРЕННОСТИ — задай ОДИН вопрос: "Прежде чем начать — насколько ты знаком с этой темой? 🟢 Уже знаю / 🟡 Слышал раньше / 🔴 Совсем новое". Только один вопрос — не превращай в викторину. Если студент отвечает своими словами — принимай и двигайся дальше.
 9. НАЧИНАЙ ОБУЧЕНИЕ — ориентируйся на ответ: 🟢 → быстро к проверке; 🟡 → интуиция + краткое напоминание; 🔴 или нет ответа → с нуля, с конкретного жизненного примера.
 
@@ -2464,11 +2534,11 @@ Warmly greet karein, 1–2 sentences mein pichla session recap karein, phir waha
 
 1. SWAGAT + POSITION — "Tutor Max" ke roop mein parichay dein. Lesson ka topic context se batayein. Student ko exactly batayein: "Aaj aap Lesson X of Y par hain". Pichle aur agle lesson ka naam ho to woh bhi batayein.
 2. SAMAY — "Estimated time: X–Y minutes" likhein. Lesson goal ki complexity se andaza lagayein: simple/focused → 8–10 min; standard → 12–15 min; complex/multi-concept → 18–20 min.
-3. LESSON GOAL — 3–5 bullet points, har ek ✓ se shuru ho. Aakhri bullet hamesha: "✓ Is idea ko apne words mein kisi aur ko explain kar paana."
-4. YEH KYUN ZAROORI HAI — 2–3 concrete real-world applications alag-alag fields se (fields ka naam lo). Lesson title aur goal se infer karein — generic mat bolein.
+3. LESSON KE OBJECTIVES — pehle line likhein "Is lesson ke end tak aap ye kar paayenge:", phir 3–5 bullet points, har ek ✓ se shuru ho. Aakhri bullet hamesha: "✓ Is idea ko apne words mein kisi aur ko explain kar paana." "Lesson" kahein, "chapter" nahin.
+4. YEH LESSON KYUN ZAROORI HAI — 2–3 concrete real-world applications alag-alag fields se (fields ka naam lo). Lesson title aur goal se infer karein — generic mat bolein.
 5. PREREQUISITES — pehle se kya jaanna chahiye. Agar completedLessons se pata chale ki related topics cover ho chuke hain to woh bata dein.
-6. AAJ KA ROADMAP — Intuition → Explanation → Examples → Practice → Mastery Check → Summary.
-7. CURIOSITY HOOK — ek aisa surprising ya counterintuitive thought jo student ko jaannaane par majboor kare.
+6. AAJ KA ROADMAP — ek chhoti si intro line colon ke saath likhein, phir stages ek line mein: "Aaj ka lesson aise chalega: Intuition → Explanation → Examples → Practice → Mastery Check → Summary." Arrows sirf screen par dikhte hain — bolte waqt stages sirf list hote hain — isliye intro line hi ise natural banati hai. Stage names simple words mein, bina numbers ke.
+7. DID YOU KNOW? — "Did you know?" se shuru karein aur ek surprising ya counterintuitive baat batayein jo student ko aur jaanne par majboor kare. Aise likhein jaise ek curious insaan kuch interesting bata raha ho, textbook ki tarah nahin.
 8. CONFIDENCE CHECK — SIRF EK sawaal poochhein: "Shuru karne se pehle — is topic se aap kitne parichit hain? 🟢 Pehle se jaanta hoon / 🟡 Suna hai pehle / 🔴 Bilkul naya hai". Sirf ek sawaal — quiz mat banao. Agar student apne words mein jawab de to normal aage badho.
 9. PADHANA SHURU KAREIN — jawab ke hisaab se: 🟢 → seedha verification par jao; 🟡 → intuition + brief refresher; 🔴 ya koi jawab nahin → scratch se, ek concrete real-life example se.
 
@@ -2480,13 +2550,13 @@ Greet them warmly. In 1–2 sentences recap what was covered last time, then con
           // New learner — world-class 9-step lesson opening
           : `A new lesson is beginning. Open the lesson in exactly this structure — do not skip any section. Keep the entire opening under 280 words.${positionCtx ? `\n${positionCtx}` : ''}
 
-1. WELCOME + LESSON POSITION — Introduce yourself as "Tutor Max". State today's topic from the lesson context. Tell the student exactly where they are: "Today you're starting Lesson X of Y." If previous and next lesson titles are available, name them: "Yesterday: [title]. Next up: [title]."
+1. WELCOME + LESSON POSITION — Introduce yourself as "Tutor Max". State today's topic from the lesson context. Tell the student exactly where they are: "Today you're starting Lesson X of Y." If previous and next lesson titles are available, name them: "Previously: [title]. Next: [title]." Never say "Yesterday" — students do not study every day, so "Previously" is the only wording that is always true.
 2. ESTIMATED DURATION — Write "Estimated time: X–Y minutes." Calibrate from the lesson goal complexity: short/focused topic → 8–10 min; standard lesson → 12–15 min; complex/multi-concept → 18–20 min.
-3. LEARNING GOAL — 3–5 bullet points each starting with ✓. Final bullet always: "✓ Explain this to someone else in plain words."
-4. WHY THIS MATTERS — 2–3 concrete real-world applications from different fields (name the fields). Use the lesson title and goal to infer — never be generic.
+3. LEARNING OBJECTIVES — introduce them before listing them. Write the line "By the end of this lesson, you will be able to:" and then 3–5 bullet points each starting with ✓. Final bullet always: "✓ Explain this to someone else in plain words." Say "lesson", never "chapter".
+4. WHY THIS LESSON MATTERS — 2–3 concrete real-world applications from different fields (name the fields). Use the lesson title and goal to infer — never be generic.
 5. PREREQUISITES — list what the student should already know. If completedLessons shows they have covered the relevant prior topics, say so.
-6. LESSON ROADMAP — Intuition → Explanation → Examples → Guided Practice → Mastery Check → Summary.
-7. CURIOSITY HOOK — one surprising or counterintuitive thought that makes the student want to find out more.
+6. LESSON ROADMAP — introduce it with a short lead-in sentence ending in a colon, then the stages on one line: "Here's how today will go: Intuition → Explanation → Examples → Guided Practice → Mastery Check → Summary." The arrows are read on screen only — spoken aloud the stages are simply listed — so the lead-in sentence is what makes it sound natural. Keep the stage names to plain words with no numbers.
+7. DID YOU KNOW? — open with "Did you know?" and give one surprising or counterintuitive thought that makes the student want to find out more. Write it the way a curious person mentions something interesting, not the way a textbook states a fact.
 8. CONFIDENCE CHECK — ask ONE question: "Before we begin — how familiar are you with this topic? 🟢 I already know it / 🟡 I've seen it before / 🔴 Completely new to me." ONE question only — do not turn it into a quiz. If the learner answers naturally instead of selecting an option, accept it and continue.
 9. BEGIN TEACHING — calibrate to the answer: 🟢 → move to verification quickly; 🟡 → start from intuition with a brief refresher; 🔴 or no answer → start from scratch with a concrete, real-life scenario the student already knows.
 
@@ -2794,6 +2864,18 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
   // WhatsApp-style windowed rendering: the slice actually mounted in the DOM.
   // Full history stays in `messages`; this is render-only.
   const visibleMessages = useMemo(() => messages.slice(-visibleCount), [messages, visibleCount])
+
+  // The lesson introduction is the FIRST tutor turn of the current lesson, and
+  // `messages` is cleared on every lesson transition (setMessages([]) in
+  // completeAndAdvance / confirmLessonSwitch), so "first assistant message"
+  // identifies it without a new flag, a new ref, or any change to how messages
+  // are produced. Two things key off it: the introduction is spoken at the
+  // calmer introduction rate, and it is the only turn whose familiarity check
+  // is promoted to a single-choice control.
+  const introMessageId = useMemo(
+    () => messages.find((m) => m.role === 'assistant')?.id ?? null,
+    [messages],
+  )
 
   // Preview cache — computed over the VISIBLE window only, so a 5000-message
   // history never pays string processing for messages that aren't mounted.
@@ -4392,6 +4474,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   busy={preludeSaving}
                   continueLabel={preludeReplay ? t('prelude_done_btn') : t('prelude_continue_btn')}
                   onContinue={() => { void completePrelude() }}
+                  // Same voice pipeline as every tutor message: the shared
+                  // playback manager, the learner's saved voice and speed, and
+                  // the same play/stop semantics. `intro: true` gives it the
+                  // calmer opening pace rather than the teaching pace.
+                  onSpeak={(text) => handleSpeak(PRELUDE_SPEECH_ID, text, { intro: true })}
+                  onStopSpeak={handleStopSpeech}
+                  isSpeaking={speakingId === PRELUDE_SPEECH_ID}
+                  playLabel={t('lesson_play')}
+                  stopLabel={t('lesson_stop')}
                 />
               )}
 
@@ -4531,7 +4622,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 const isSpeaking = speakingId === msg.id
                 const cached = previewCache[msg.id]
                 const isExpanded = expanded[msg.id] ?? false
-                const displayText = cached ? (cached.hasMore && !isExpanded ? cached.preview : cached.full) : stripCode(msg.content)
+                const rawDisplayText = cached ? (cached.hasMore && !isExpanded ? cached.preview : cached.full) : stripCode(msg.content)
+                const isIntro = !isUser && msg.id === introMessageId
+                // Parsed from the message the tutor actually sent, never
+                // fabricated: no match (or a malformed one) leaves the original
+                // sentence exactly where it was.
+                const familiarity = isIntro && !msg.streaming ? parseFamiliarityQuestion(msg.content) : null
+                // Printed text drops the line only when the control below is
+                // actually rendering it, so the question is never shown twice
+                // and never disappears without a replacement. msg.content is
+                // untouched, so the spoken introduction still includes it.
+                const displayText = familiarity
+                  ? rawDisplayText.replace(familiarity.line, '').replace(/\n{3,}/g, '\n\n').trim()
+                  : rawDisplayText
 
                 return (
                   <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start', animation: 'fadeUp 200ms ease-out both' }}>
@@ -4587,7 +4690,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
                               {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
                             </span>
-                            <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content)}
+                            <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content, { intro: isIntro })}
                               depth={2} activeDepth={0} shadowColor={isSpeaking ? 'var(--coral-hover)' : 'var(--border-subtle)'}
                               style={{
                                 display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 10, border: 'none',
@@ -4655,6 +4758,22 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             if (!sessionId) return
                             const text = correct ? t('lesson_got_right') : t('lesson_got_wrong')
                             sendMessage(sessionId, text, false)
+                          }}
+                        />
+                      </div>
+                    )}
+
+                    {/* Lesson introduction: the confidence check, promoted from a
+                        slash-separated sentence to a single-choice control. The
+                        chosen option is sent as the learner's reply, which is
+                        exactly what typing it did — same runtime, new surface. */}
+                    {familiarity && (
+                      <div style={{ animation: 'fadeUp 300ms ease-out both' }}>
+                        <FamiliarityChoice
+                          parsed={familiarity}
+                          onChoose={(option) => {
+                            if (!sessionId) return
+                            void sendMessage(sessionId, option, false)
                           }}
                         />
                       </div>

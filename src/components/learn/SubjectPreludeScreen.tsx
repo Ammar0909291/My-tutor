@@ -9,7 +9,9 @@
  * caller owns the transition into Lesson 1.
  */
 
+import { Play, Square } from 'lucide-react'
 import type { SubjectPrelude } from '@/lib/curriculum/subjectPrelude'
+import { buildPreludeNarration } from '@/lib/curriculum/preludeNarration'
 
 const UI = { indigo: '#6366f1' }
 
@@ -50,10 +52,23 @@ export interface SubjectPreludeScreenProps {
   /** True when this is a replay from Subject Overview rather than first entry. */
   isReplay?: boolean
   busy?: boolean
+  /**
+   * Narrate the introduction. The caller owns the voice pipeline entirely —
+   * this screen never touches speechSynthesis, /api/tts, the playback manager
+   * or the learner's voice/speed settings, so there is exactly one TTS
+   * implementation in the app and this is a caller of it, not a second one.
+   * Omitted (school mode, tests) simply hides the button.
+   */
+  onSpeak?: (text: string) => void
+  onStopSpeak?: () => void
+  isSpeaking?: boolean
+  playLabel?: string
+  stopLabel?: string
 }
 
 export default function SubjectPreludeScreen({
   prelude, subjectName, onContinue, continueLabel, isReplay = false, busy = false,
+  onSpeak, onStopSpeak, isSpeaking = false, playLabel = 'Listen', stopLabel = 'Stop',
 }: SubjectPreludeScreenProps) {
   return (
     <div
@@ -64,9 +79,31 @@ export default function SubjectPreludeScreen({
       }}
     >
       <header style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: UI.indigo }}>
-          {subjectName}
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', color: UI.indigo }}>
+            {subjectName}
+          </span>
+          {onSpeak && (
+            <button
+              type="button"
+              data-testid="subject-prelude-listen"
+              aria-label={isSpeaking ? stopLabel : playLabel}
+              onClick={() => (isSpeaking ? onStopSpeak?.() : onSpeak(buildPreludeNarration(prelude, subjectName)))}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0,
+                padding: '5px 12px', borderRadius: 999, cursor: 'pointer',
+                fontSize: 11.5, fontWeight: 700,
+                border: `1px solid ${isSpeaking ? 'var(--coral, #f97362)' : 'var(--border-subtle)'}`,
+                background: isSpeaking ? 'var(--coral, #f97362)' : 'var(--bg-elevated, transparent)',
+                color: isSpeaking ? '#fff' : 'var(--text-secondary)',
+              }}
+            >
+              {isSpeaking
+                ? <><Square size={9} fill="currentColor" strokeWidth={0} />{stopLabel}</>
+                : <><Play size={9} fill="currentColor" strokeWidth={0} />{playLabel}</>}
+            </button>
+          )}
+        </div>
         <Paragraph>{prelude.welcome}</Paragraph>
       </header>
 
