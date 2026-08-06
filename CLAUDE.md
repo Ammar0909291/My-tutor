@@ -21,6 +21,12 @@
   exempt: if the report risks becoming very long, that is still not a reason to drop the single
   fence or the git-info section — split across multiple responses if needed (each response still
   fully fenced), never abandon the format because the content is large.
+- **Reinforced 2026-08-06, after a second live violation**: an end-of-turn summary (confirming a
+  commit was pushed) was delivered as short free-form prose with no fence and no explicit git-info
+  section, immediately after the git operations it should have reported on. The rule already
+  covered this exactly — short/simple-seeming turns (a single commit+push, not just long
+  multi-phase audits) are NOT exempt either. Every turn's closing message, regardless of length or
+  apparent simplicity, goes in one fence with git info inside it.
 
 ## Workflow preference (ALWAYS follow — updated 2026-07-07, supersedes the prior version below)
 - On EVERY prompt: first read and understand it the way the lead developer on this project would
