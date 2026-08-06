@@ -2088,6 +2088,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cueObservations.availableVisual = availableVisual
           cueObservations.visualDetectionRan = true
           availableVisualHoisted = availableVisual
+          // VIE integration point (Visualization Migration, phase 1 — additive
+          // only). Runs the Visualization Intelligence Engine against the VKR
+          // for this turn's concept and records the result for observability.
+          // Deliberately does NOT influence availableVisual/responseVisual —
+          // ADR 12's live renderer selection above remains the sole rendering
+          // authority until the VKR reaches coverage parity; see CueObservations
+          // .visualizationIntent's own doc comment for why.
+          {
+            const { buildVisualIntentFromRegistry } = await import('@/lib/teaching/visualIntelligenceEngine')
+            cueObservations.visualizationIntent = buildVisualIntentFromRegistry(convConceptId)
+            cueObservations.vieExecuted = true
+          }
           // D.23-30: Visual Intelligence block for the conversation state
           // machine path. ADR 15: alreadyShown now uses RRM ground truth
           // instead of the phase-counter heuristic.

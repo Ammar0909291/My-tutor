@@ -42,6 +42,18 @@ export interface CueObservations {
   misconceptions?: Misconception[]
   availableVisual?: string | null
   visualDetectionRan?: boolean
+  /**
+   * Visualization Intelligence Engine (VIE) integration point. When the
+   * Visualization Knowledge Registry has an authored entry for the turn's
+   * concept, route.ts runs the VIE and records the resulting VisualIntent
+   * here — observation only. This does NOT drive rendering: ADR 12's live
+   * renderer selection (visualRegistry.ts / detectVisual.ts, `availableVisual`
+   * above) is unchanged and remains authoritative until VKR coverage and an
+   * intent->renderer mapping exist to replace it without regressing the
+   * ~1,630 KG concepts the VKR does not yet cover.
+   */
+  visualizationIntent?: import('@/lib/teaching/visualIntent').VisualIntent | null
+  vieExecuted?: boolean
 }
 
 export interface UnderstandingInputs {
