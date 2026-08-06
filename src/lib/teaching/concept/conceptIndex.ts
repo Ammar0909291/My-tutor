@@ -53,6 +53,22 @@ export function normalizeKey(text: string): string {
 }
 
 /**
+ * The head of a KG title, i.e. the part before a gloss separator.
+ *
+ * Canonical KG titles frequently carry an explanatory suffix:
+ *   "Newton's Second Law — F=ma"      -> "Newton's Second Law"
+ *   "Newton's First Law — Inertia"    -> "Newton's First Law"
+ * A learner writes the head, never the gloss, so requiring the whole title
+ * made those concepts unmatchable. Splits on em/en dash, a spaced hyphen, or
+ * a colon — all deterministic punctuation rules, not semantic matching.
+ * Returns null when the title has no gloss.
+ */
+export function titleHead(title: string): string | null {
+  const head = title.split(/\s+[—–]\s+|\s+-\s+|:\s+/)[0]?.trim()
+  return head && head.length > 0 && head !== title.trim() ? head : null
+}
+
+/**
  * Acronym for a multi-word title: initials of the significant words.
  * Returns null when the title yields fewer than 2 significant words or an
  * acronym shorter than 2 characters.
@@ -169,6 +185,16 @@ export function resolveConceptMatches(
     const significant = titleTokens.filter(t => !STOP_WORDS.has(t))
     if (significant.length > 0 && containsTokenRun(messageTokens, titleTokens)) {
       candidates.push({ method: ExtractionMethod.NORMALIZED_TITLE, text: entry.title, tokens: titleTokens.length })
+    }
+
+    // 4b. The title's head, when the KG title carries a gloss suffix. The
+    //     learner writes "Newton's Second Law", never "— F=ma".
+    const head = titleHead(entry.title)
+    if (head) {
+      const headTokens = normalizeToTokens(head)
+      if (headTokens.length > 0 && containsTokenRun(messageTokens, headTokens)) {
+        candidates.push({ method: ExtractionMethod.NORMALIZED_TITLE, text: head, tokens: headTokens.length })
+      }
     }
 
     // 5. Acronym, only when written in caps by the student.
