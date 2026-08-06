@@ -2133,6 +2133,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerRequestHoisted === 'explain_differently' && remediationTier >= 3 && availableVisual !== null
           forceVisualRenderHoisted =
             shouldForceVisualRender(learnerRequestHoisted, availableVisual) || explainDifferentlyNeedsVisual
+          // Brain SHADOW MODE (production migration Phase 1/4). Runs the
+          // completed Brain alongside the legacy path and LOGS ONLY: no value
+          // computed here is read by any production code path, no LLM call is
+          // made, and captureShadow() never throws. Gated on
+          // BRAIN_RUNTIME_MODE, which defaults to off — with the flag unset
+          // this block does nothing at all.
+          const { currentBrainMode, BrainMode } = await import('@/lib/teaching/runtime/brainRuntimeEntry')
+          if (currentBrainMode().mode !== BrainMode.OFF) {
+            try {
+              const { captureShadow, compareToLegacy, summariseShadow } =
+                await import('@/lib/teaching/runtime/brainShadow')
+              const shadow = captureShadow({
+                message,
+                activeLessonConceptId: convConceptId,
+                subjectSlug: subjectCode,
+                language: teachingLang,
+                previousConceptId: snapshotCurrentConceptId,
+                learnerRequest: learnerRequestHoisted,
+              })
+              if (shadow) {
+                const mismatches = compareToLegacy({
+                  conceptId: convConceptId,
+                  visualResolved: availableVisual !== null,
+                  learnerRequest: learnerRequestHoisted,
+                }, shadow)
+                console.log(summariseShadow(shadow, mismatches))
+                for (const m of mismatches) {
+                  console.log(`[brain/shadow] mismatch ${m.kind}: legacy=${m.legacy} brain=${m.brain} — ${m.note}`)
+                }
+              }
+            } catch {
+              // Shadow mode must never affect a turn.
+            }
+          }
           // One detection, two consumers: the turn directive below and the
           // conversation-state fold after the LLM call.
           lowSignalAckHoisted = isLowSignalAcknowledgement(message)
