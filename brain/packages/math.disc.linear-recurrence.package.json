@@ -1,0 +1,520 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.linear-recurrence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.linear-recurrence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1ece14d4754dfb360a8a78d973b97045c52dbcb8a5997d6ac8ec9e7f0eeea2f9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.linear-recurrence.md": "sha256:93a6c0f7af89fe494282da44a558d71e78584f93c8856bcad2fa7445a9c333bb"
+    },
+    "assetCount": 16,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 11,
+      "mastery_probe": 1
+    },
+    "ruleCount": 11
+  },
+  "concept": {
+    "conceptId": "math.disc.linear-recurrence",
+    "name": "Linear Recurrences",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.disc.recurrence-relation",
+      "math.alg.polynomial-roots"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.linear-recurrence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.linear-recurrence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.linear-recurrence.md": "sha256:93a6c0f7af89fe494282da44a558d71e78584f93c8856bcad2fa7445a9c333bb"
+      },
+      "contentHash": "sha256:3e9044e4e3a03e7f980d2aa22cefeebb27169d15e0e6ac180fc75e90882d3146",
+      "ruleCount": 11,
+      "bandCounts": {
+        "3": 11
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.linear-recurrence.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.linear-recurrence.md#TA-9 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.linear-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.linear-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.linear-recurrence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "Learning Objective",
+      "content": "The student solves linear recurrences with constant coefficients by the characteristic equation method: for aₙ = c₁aₙ₋₁ + c₂aₙ₋₂ + ⋯ + cₖaₙ₋ₖ, form the characteristic polynomial r^k = c₁r^{k−1} + ⋯ + cₖ; find its roots; write the general solution as a linear combination of terms rⁿ for distinct roots or nʲrⁿ for a root r of multiplicity j+1; apply initial conditions to determine the constants; solves the Fibonacci recurrence explicitly (Binet's formula); handles non-homogeneous recurrences by adding a particular solution; and recognises the connection to linear ODEs with constant coefficients.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "CHARACTERISTIC-ROOT-IS-THE-TERM",
+      "content": "| MC-1 | CHARACTERISTIC-ROOT-IS-THE-TERM | Student confuses the characteristic root r with the term aₙ; writes \"aₙ=r\" or \"the root is aₙ\" instead of understanding that each root r contributes the term rⁿ (or nrⁿ for repeated roots) to the general solution; doesn't see that the solution to a recurrence is a FUNCTION of n, not a constant | Type 4 — notation-induced (the characteristic equation r²=c₁r+c₂ uses r as the unknown, and solving it gives numbers r₁,r₂; students conflate these numbers with the sequence values; the leap \"root r → term rⁿ\" is the conceptual bridge that needs explicit articulation — it mirrors the ODE substitution eˡᵗ where λ is the root of the characteristic equation) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "REPEATED-ROOT-OMITS-POLYNOMIAL-FACTOR",
+      "content": "| MC-2 | REPEATED-ROOT-OMITS-POLYNOMIAL-FACTOR | Student correctly identifies that r is a repeated root but writes the general solution as c₁rⁿ + c₂rⁿ = (c₁+c₂)rⁿ — a single term — instead of c₁rⁿ + c₂nrⁿ; loses the n-polynomial factor that multiplies repeated-root terms | Type 4 — notation-induced (for distinct roots, the formula is c₁r₁ⁿ+c₂r₂ⁿ — the two terms look similar; when r₁=r₂=r, students mechanically write two copies of the same formula: c₁rⁿ+c₂rⁿ = (c₁+c₂)rⁿ; the polynomial factor n that must distinguish them is not taught as an analogy until ODEs are studied; the analogy to e^{rt} and te^{rt} for repeated ODE roots is the correct model) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "GENERAL-SOLUTION-WITHOUT-INITIAL-CONDITIONS-IS-THE-ANSWER",
+      "content": "| MC-3 | GENERAL-SOLUTION-WITHOUT-INITIAL-CONDITIONS-IS-THE-ANSWER | Student writes the general solution (with undetermined constants A, B) and reports it as the answer without applying the initial conditions to fix A and B; the general solution represents an infinite family of sequences satisfying the recurrence — the SPECIFIC sequence matching the problem's initial values is found only by solving the system of equations from the initial conditions | Type 5 — instruction-induced (instructors often spend more time deriving the general solution than solving for constants; the \"general solution\" is emphasised as the conceptual achievement; students disengage after finding it, missing the final concrete step of pinning the constants from the given aₙ values at small n) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "CORRECT → \"Char. poly: rᵏ−c₁rᵏ⁻¹−⋯−cₖ=0. Distinct roots: Σ Aᵢrᵢⁿ. Repeated root r multiplicity m: (A₀+A₁n+⋯+Aₘ₋₁nᵐ⁻¹)rⁿ. Apply ICs to get constants. Fibonacci: Binet's formula.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Char. poly: rᵏ−c₁rᵏ⁻¹−⋯−cₖ=0. Distinct roots: Σ Aᵢrᵢⁿ. Repeated root r multiplicity m: (A₀+A₁n+⋯+Aₘ₋₁nᵐ⁻¹)rⁿ. Apply ICs to get constants. Fibonacci: Binet's formula.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "PARTIAL (MC-2: repeated root omits polynomial) → \"Repeated root r of multiplicity 2: you need TWO LINEARLY INDEPENDENT solutions for a second-order recurrence. If you take rⁿ twice you get rⁿ and rⁿ — they're the same function! You need a SECOND independent solution: nrⁿ (verified: substitute nrⁿ into aₙ=c₁aₙ₋₁+c₂aₙ₋₂; if r is a double root, nrⁿ satisfies the recurrence exactly). General solution: (A+Bn)rⁿ. This is the exact analogue of the ODE solution (A+Bt)e^{rt} for a double root of the characteristic polynomial.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-2: repeated root omits polynomial) → \\\"Repeated root r of multiplicity 2: you need TWO LINEARLY INDEPENDENT solutions for a second-order recurrence. If you take rⁿ twice you get rⁿ and rⁿ — they're the same function! You need a SECOND independent solution: nrⁿ (verified: substitute nrⁿ into aₙ=c₁aₙ₋₁+c₂aₙ₋₂; if r is a double root, nrⁿ satisfies the recurrence exactly). General solution: (A+Bn)rⁿ. This is the exact analogue of the ODE solution (A+Bt)e^{rt} for a double root of the characteristic polynomial.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "NO_RESPONSE → \"aₙ=6aₙ₋₁−9aₙ₋₂, a₀=2, a₁=3. Char. eq.: r²−6r+9=0 → (r−3)²=0 → r=3, double root. General solution: (A+Bn)·3ⁿ. IC a₀=2: A·1=2 → A=2. IC a₁=3: (2+B)·3=3 → 2+B=1 → B=−1. Solution: aₙ=(2−n)·3ⁿ.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"aₙ=6aₙ₋₁−9aₙ₋₂, a₀=2, a₁=3. Char. eq.: r²−6r+9=0 → (r−3)²=0 → r=3, double root. General solution: (A+Bn)·3ⁿ. IC a₀=2: A·1=2 → A=2. IC a₁=3: (2+B)·3=3 → 2+B=1 → B=−1. Solution: aₙ=(2−n)·3ⁿ.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 65,
+        "endLine": 65
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "f(n) = dⁿ: try aₙ^(p) = Cdⁿ (if d is not a characteristic root); if d IS a root of multiplicity m, try Cnᵐdⁿ.",
+      "content": "{\"id\":\"TA-5\",\"title\":\"f(n) = dⁿ: try aₙ^(p) = Cdⁿ (if d is not a characteristic root); if d IS a root of multiplicity m, try Cnᵐdⁿ.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "f(n) = polynomial of degree t: try aₙ^(p) = polynomial of degree t; if 1 is a characteristic root of multiplicity m, multiply by nᵐ.",
+      "content": "{\"id\":\"TA-6\",\"title\":\"f(n) = polynomial of degree t: try aₙ^(p) = polynomial of degree t; if 1 is a characteristic root of multiplicity m, multiply by nᵐ.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "f(n) = combination: superposition principle — try sum of corresponding particular forms.",
+      "content": "{\"id\":\"TA-7\",\"title\":\"f(n) = combination: superposition principle — try sum of corresponding particular forms.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "CORRECT → \"Non-homogeneous: particular solution (undetermined coefficients) + homogeneous general solution. Superposition for sums. Apply ICs to fix constants AFTER adding particular solution. Same characteristic equation structure as linear ODEs.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-8\",\"title\":\"CORRECT → \\\"Non-homogeneous: particular solution (undetermined coefficients) + homogeneous general solution. Superposition for sums. Apply ICs to fix constants AFTER adding particular solution. Same characteristic equation structure as linear ODEs.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "PARTIAL (MC-3: general solution is the answer) → \"The general solution (with free constants A,B,...) is a FAMILY of sequences — one for each assignment of values to A, B. The specific problem specifies initial conditions a₀, a₁, …. You MUST substitute these into the general solution to solve for A, B, giving the UNIQUE solution to the initial value problem. Skipping this step leaves an infinite-parameter family, not a specific sequence. Example: for Fₙ=Aφⁿ+Bψⁿ, both A=0,B=0 (all zeros) and A=1/√5, B=−1/√5 (Fibonacci) satisfy the recurrence — only the ICs distinguish them.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"PARTIAL (MC-3: general solution is the answer) → \\\"The general solution (with free constants A,B,...) is a FAMILY of sequences — one for each assignment of values to A, B. The specific problem specifies initial conditions a₀, a₁, …. You MUST substitute these into the general solution to solve for A, B, giving the UNIQUE solution to the initial value problem. Skipping this step leaves an infinite-parameter family, not a specific sequence. Example: for Fₙ=Aφⁿ+Bψⁿ, both A=0,B=0 (all zeros) and A=1/√5, B=−1/√5 (Fibonacci) satisfy the recurrence — only the ICs distinguish them.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 92,
+        "endLine": 92
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 93,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "NO_RESPONSE → \"aₙ = 5aₙ₋₁ − 6aₙ₋₂ + 2ⁿ, a₀=1, a₁=2. Homogeneous: r²−5r+6=0 → (r−2)(r−3)=0, roots r=2,3. aₙ^(h)=A·2ⁿ+B·3ⁿ. Particular: f(n)=2ⁿ, but r=2 IS a char. root → try aₙ^(p)=Cn·2ⁿ. Substitute: Cn·2ⁿ=5C(n−1)2ⁿ⁻¹−6C(n−2)2ⁿ⁻²+2ⁿ. Factor out 2ⁿ⁻²: C·4n=5C·2(n−1)−6C(n−2)+4 → 4Cn=10Cn−10C−6Cn+12C+4 → 4Cn=4Cn+2C+4 → 2C=−4 → C=−2. So aₙ=A·2ⁿ+B·3ⁿ−2n·2ⁿ=(A−2n)·2ⁿ+B·3ⁿ. ICs: a₀=A+B=1; a₁=(A−2)·2+B·3=2→2A+3B=6. Solve: A=−3,B=4. Solution: (−3−2n)·2ⁿ+4·3ⁿ.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-11\",\"title\":\"NO_RESPONSE → \\\"aₙ = 5aₙ₋₁ − 6aₙ₋₂ + 2ⁿ, a₀=1, a₁=2. Homogeneous: r²−5r+6=0 → (r−2)(r−3)=0, roots r=2,3. aₙ^(h)=A·2ⁿ+B·3ⁿ. Particular: f(n)=2ⁿ, but r=2 IS a char. root → try aₙ^(p)=Cn·2ⁿ. Substitute: Cn·2ⁿ=5C(n−1)2ⁿ⁻¹−6C(n−2)2ⁿ⁻²+2ⁿ. Factor out 2ⁿ⁻²: C·4n=5C·2(n−1)−6C(n−2)+4 → 4Cn=10Cn−10C−6Cn+12C+4 → 4Cn=4Cn+2C+4 → 2C=−4 → C=−2. So aₙ=A·2ⁿ+B·3ⁿ−2n·2ⁿ=(A−2n)·2ⁿ+B·3ⁿ. ICs: a₀=A+B=1; a₁=(A−2)·2+B·3=2→2A+3B=6. Solve: A=−3,B=4. Solution: (−3−2n)·2ⁿ+4·3ⁿ.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 94,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "math.disc.linear-recurrence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.linear-recurrence",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Solve each recurrence with the given initial conditions: (a) aₙ=5aₙ₋₁−6aₙ₋₂, a₀=1, a₁=0; (b) aₙ=4aₙ₋₁−4aₙ₋₂, a₀=0, a₁=1; (c) aₙ=2aₙ₋₁−aₙ₋₂, a₀=3, a₁=4; (d) aₙ=aₙ₋₁+aₙ₋₂+aₙ₋₃, a₀=0, a₁=0, a₂=1.\n2. Prove Binet's formula Fₙ=(φⁿ−ψⁿ)/√5 where φ=(1+√5)/2 and ψ=(1−√5)/2 by: (a) verifying Fₙ satisfies the Fibonacci recurrence; (b) checking F₀=0 and F₁=1.\n3. Solve the non-homogeneous recurrence aₙ=3aₙ₋₁+2ⁿ, a₀=1. Identify whether 2 is a characteristic root; handle accordingly.\n4. The Lucas numbers satisfy Lₙ=Lₙ₋₁+Lₙ₋₂ with L₀=2, L₁=1. Solve using the characteristic equation (same as Fibonacci) and express Lₙ in terms of φ and ψ. Show Lₙ=φⁿ+ψⁿ.\n5. A savings account starts with £100. Each month, the balance grows by 1% interest and £50 is deposited. Write and solve the non-homogeneous recurrence for the balance aₙ after n months. (Hint: aₙ=1.01aₙ₋₁+50; particular solution: try C·1.01ⁿ... but wait, 1.01 IS the characteristic root; handle appropriately.)\n\n**P55 — Reflect & Consolidate:** \"Homogeneous: char. eq. rᵏ−c₁rᵏ⁻¹−⋯=0; distinct roots: Σ Aᵢrᵢⁿ; repeated root r mult. m: polynomial factor nᵐ⁻¹ times rⁿ. Non-homogeneous: particular solution + homogeneous; apply ICs to full solution. Fibonacci: Binet's formula. Connection to ODEs: rⁿ ↔ eˡᵗ.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.de.char-equation):**\n(a) Generating functions and linear recurrences: the ordinary generating function A(x)=Σaₙxⁿ for a linear recurrence can be found by multiplying the recurrence by xⁿ and summing over n. For Fibonacci: A(x)=x/(1−x−x²); partial fractions in terms of φ and ψ give the closed form, identical to the characteristic equation method. Derive A(x) for Fibonacci and verify that the coefficient extraction matches Binet's formula. (b) Matrix diagonalisation: the recurrence vector (aₙ, aₙ₋₁) = M·(aₙ₋₁, aₙ₋₂) where M is the companion matrix of the characteristic polynomial. Then (aₙ, aₙ₋₁)=Mⁿ·(a₁,a₀). For Fibonacci, M=[[1,1],[1,0]]; Mⁿ has entries involving Fibonacci numbers. Show Mⁿ=P·diag(φⁿ,ψⁿ)·P⁻¹ where P is the matrix of eigenvectors, and that this gives Binet's formula directly. (c) The Skolem–Mahler–Lech theorem: for a linear recurrence aₙ with rational initial conditions and rational coefficients, the set {n : aₙ=0} is eventually periodic. This is a deep number-theoretic fact. Compare with the trivial observation that an nth-degree polynomial has at most n roots — linear recurrences behave much more regularly than arbitrary sequences but are harder to analyse than polynomials.\n\n**P75 — Mastery Assessment:**\n\"(a) Solve aₙ=2aₙ₋₁+aₙ₋₂−2aₙ₋₃, a₀=1, a₁=0, a₂=−1. Find the characteristic polynomial, its roots, and apply initial conditions. (b) Show that for any linear recurrence with distinct real characteristic roots r₁>r₂>0, the ratio aₙ/aₙ₋₁→r₁ as n→∞ (the dominant root dominates). Use this to show Fₙ₊₁/Fₙ→φ≈1.618. (c) Find the general solution to aₙ=aₙ₋₂+2n. Is the particular solution a polynomial? Of what degree? Apply to find the specific solution with a₀=0, a₁=0. (d) What is the relationship between the recurrence aₙ=paₙ₋₁+qaₙ₋₂ having two real roots vs. complex roots vs. a repeated root, in terms of the discriminant p²+4q? Describe the qualitative behavior of each type of sequence.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the repeated-root polynomial factor and the non-homogeneous particular solution method\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.recurrence-relation or math.alg.polynomial-roots; reassign\n\n**P78 — Completion:** Linear Recurrences certified. Student sets up and solves the characteristic equation for homogeneous linear recurrences; writes the correct general solution for distinct and repeated roots; applies initial conditions to determine constants; solves non-homogeneous recurrences by adding a particular solution; derives Binet's formula for Fibonacci; and recognises the structural parallel with linear ODEs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.linear-recurrence.md",
+        "startLine": 108,
+        "endLine": 132
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

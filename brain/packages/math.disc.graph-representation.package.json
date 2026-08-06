@@ -1,0 +1,486 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-representation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph-representation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:bc6819a5b92c0790f43c17d825bdeb2a6c5b47f27bd26b7fecf0a43b1e4dfe45",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph-representation.md": "sha256:3633a23386fa1ce14de98b668fd38b3b3f368979234b7b1b48fde8a221a13dd8"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 10,
+      "mastery_probe": 1
+    },
+    "ruleCount": 10
+  },
+  "concept": {
+    "conceptId": "math.disc.graph-representation",
+    "name": "Graph Representation",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.graph",
+      "math.linalg.matrix"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-representation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph-representation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph-representation.md": "sha256:3633a23386fa1ce14de98b668fd38b3b3f368979234b7b1b48fde8a221a13dd8"
+      },
+      "contentHash": "sha256:7d51caf67cb36d2c36dd7d69fd6a127f2329e71fb16a6e9d3d347781d8bcfa8c",
+      "ruleCount": 10,
+      "bandCounts": {
+        "3": 10
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-2 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-8 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-representation.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-representation.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-representation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-representation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph-representation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph-representation",
+      "title": "Learning Objective",
+      "content": "The student represents graphs using adjacency matrices, incidence matrices, and adjacency lists; converts among these representations; reads structural properties (degree, adjacency, connectivity) from each representation; computes matrix powers to count walks; and selects the appropriate representation for a given algorithmic task (dense graph → adjacency matrix; sparse graph → adjacency list).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-representation",
+      "title": "ADJACENCY-MATRIX-IS-ALWAYS-SYMMETRIC",
+      "content": "| MC-1 | ADJACENCY-MATRIX-IS-ALWAYS-SYMMETRIC | Student assumes the adjacency matrix of a digraph is symmetric; applies symmetric-matrix properties (e.g., A = Aᵀ) to directed graphs; misses that for digraphs Aᵢⱼ=1 means edge i→j exists, which does NOT imply Aⱼᵢ=1 (edge j→i) | Type 5 — instruction-induced (undirected graphs are always presented first; their adjacency matrix IS symmetric; when digraphs are introduced, the asymmetry of the matrix is underemphasised, leaving students with the residual assumption of symmetry) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-representation",
+      "title": "MATRIX-POWER-Aᵏ-COUNTS-PATHS",
+      "content": "| MC-2 | MATRIX-POWER-Aᵏ-COUNTS-PATHS | Student thinks the (i,j) entry of Aᵏ counts the number of simple PATHS of length k from i to j; in reality it counts WALKS of length k (vertex repetitions allowed); for k=2, A²[i,i] counts closed walks of length 2 (equals deg(i) for simple graphs), not the number of simple cycles | Type 5 — instruction-induced (the statement \"A² counts walks\" is correct; the phrase \"walk\" is often loosely called \"path\" in early courses; students then carry the confusion into algorithms and derive wrong counts for simple paths, which is actually NP-hard to count) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-representation",
+      "title": "ADJACENCY-LIST-IS-JUST-A-LIST",
+      "content": "| MC-3 | ADJACENCY-LIST-IS-JUST-A-LIST | Student treats the adjacency list as merely a compact way to write down edges; misses that it is a specific data structure — typically an array of linked lists or hash sets — where the algorithmic consequence is O(1) adjacency check with careful implementation and O(deg(v)) iteration over neighbours, making it optimal for sparse graphs in BFS/DFS | Type 3 — language contamination (\"list\" in everyday language is just an enumeration; in algorithm design, \"adjacency list\" is a specific data structure with distinct O-notation guarantees: space O(V+E), adjacency check O(deg(v)) vs. adjacency matrix's O(1) adjacency but O(V²) space) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "CORRECT → \"A: n×n, Aᵢⱼ=1 iff adjacent, symmetric for undirected. Aᵏ[i,j] counts walks of length k. B: incidence matrix, each column = one edge's endpoints.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"A: n×n, Aᵢⱼ=1 iff adjacent, symmetric for undirected. Aᵏ[i,j] counts walks of length k. B: incidence matrix, each column = one edge's endpoints.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "PARTIAL (MC-2: matrix power counts paths) → \"Aᵏ[i,j] counts WALKS of length k — walks allow revisiting vertices and edges. A 'walk' is NOT the same as a 'path' (which forbids repetitions). For k=2: A²[i,i] = Σⱼ A[i,j]·A[j,i] = Σⱼ A²[i,j] = deg(i) (counts walks i→j→i for each neighbour j). This counts closed walks of length 2, not triangles. Counting simple paths of a given length is NP-hard in general — Aᵏ does NOT solve this.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-2: matrix power counts paths) → \\\"Aᵏ[i,j] counts WALKS of length k — walks allow revisiting vertices and edges. A 'walk' is NOT the same as a 'path' (which forbids repetitions). For k=2: A²[i,i] = Σⱼ A[i,j]·A[j,i] = Σⱼ A²[i,j] = deg(i) (counts walks i→j→i for each neighbour j). This counts closed walks of length 2, not triangles. Counting simple paths of a given length is NP-hard in general — Aᵏ does NOT solve this.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "NO_RESPONSE → \"For K₃ (triangle, vertices 1,2,3): A=[[0,1,1],[1,0,1],[1,1,0]]. A²=[[2,1,1],[1,2,1],[1,1,2]]. A²[1,1]=2 (walks: 1→2→1 and 1→3→1). A³[1,1] = ? Row 1 of A²: [2,1,1]. Column 1 of A: [0,1,1]. A³[1,1]=0·2+1·1+1·1=2. Walks of length 3 from 1 back to 1: 1→2→3→1 and 1→3→2→1. 2 closed walks of length 3.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"For K₃ (triangle, vertices 1,2,3): A=[[0,1,1],[1,0,1],[1,1,0]]. A²=[[2,1,1],[1,2,1],[1,1,2]]. A²[1,1]=2 (walks: 1→2→1 and 1→3→1). A³[1,1] = ? Row 1 of A²: [2,1,1]. Column 1 of A: [0,1,1]. A³[1,1]=0·2+1·1+1·1=2. Walks of length 3 from 1 back to 1: 1→2→3→1 and 1→3→2→1. 2 closed walks of length 3.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "Dense graph (E ≈ V²): adjacency matrix (fast edge check, space not wasted).",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Dense graph (E ≈ V²): adjacency matrix (fast edge check, space not wasted).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "Sparse graph (E ≪ V²): adjacency list (space O(V+E), BFS/DFS run in O(V+E)).",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Sparse graph (E ≪ V²): adjacency list (space O(V+E), BFS/DFS run in O(V+E)).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "CORRECT → \"Adjacency list: space O(V+E), edge check O(deg). Matrix: O(V²) space, O(1) edge check. Dense: matrix. Sparse: list. Laplacian L=D−A: λ₂>0 iff connected.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Adjacency list: space O(V+E), edge check O(deg). Matrix: O(V²) space, O(1) edge check. Dense: matrix. Sparse: list. Laplacian L=D−A: λ₂>0 iff connected.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "PARTIAL (MC-1: digraph matrix is symmetric) → \"For a DIRECTED graph, A[i][j] = 1 means edge i→j; A[j][i] = 1 means edge j→i — these are INDEPENDENT. An asymmetric adjacency matrix is the rule for digraphs, not the exception. The only digraph with a symmetric adjacency matrix is one where every directed edge is paired with its reverse (a symmetric digraph, which is essentially an undirected graph stored as two antiparallel directed edges). Never assume symmetry for a digraph without checking.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (MC-1: digraph matrix is symmetric) → \\\"For a DIRECTED graph, A[i][j] = 1 means edge i→j; A[j][i] = 1 means edge j→i — these are INDEPENDENT. An asymmetric adjacency matrix is the rule for digraphs, not the exception. The only digraph with a symmetric adjacency matrix is one where every directed edge is paired with its reverse (a symmetric digraph, which is essentially an undirected graph stored as two antiparallel directed edges). Never assume symmetry for a digraph without checking.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-representation",
+      "title": "NO_RESPONSE → \"Path graph P₄: 1−2−3−4. A=[0100|1010|0101|0010]. A²[1,3]=1 (walk 1→2→3). A²[1,1]=1 (walk 1→2→1). Adjacency list: 1:[2], 2:[1,3], 3:[2,4], 4:[3]. Space: 4+4=8 entries total. Compare adjacency matrix: 16 entries (4×4).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"Path graph P₄: 1−2−3−4. A=[0100|1010|0101|0010]. A²[1,3]=1 (walk 1→2→3). A²[1,1]=1 (walk 1→2→1). Adjacency list: 1:[2], 2:[1,3], 3:[2,4], 4:[3]. Space: 4+4=8 entries total. Compare adjacency matrix: 16 entries (4×4).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.disc.graph-representation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph-representation",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Given the adjacency matrix A of K₄, compute A² and A³. Identify what the diagonal entries of A² and A³ represent (in terms of walks). How many triangles does K₄ contain? (Hint: triangles = Tr(A³)/6.)\n2. Draw the graph represented by the adjacency list: 1:[2,4], 2:[1,3], 3:[2,4,5], 4:[1,3], 5:[3]. Write its adjacency matrix and compute its number of edges. Is it bipartite?\n3. A graph G has V=1,000,000 vertices and E=3,000,000 edges (sparse). A graph H has V=1,000 vertices and E=400,000 edges (dense, E≈V²/2.5). For each, which representation is more space-efficient? By what factor?\n4. For the directed graph with 4 vertices and edges {1→2, 2→3, 3→4, 4→1, 1→3}: write the adjacency matrix A. Compute A²[1,3]. Verify by listing all walks of length 2 from vertex 1 to vertex 3.\n5. Write the incidence matrix B for the graph with vertices {a,b,c,d} and edges {e₁=ab, e₂=bc, e₃=cd, e₄=da, e₅=ac}. Compute BBᵀ and interpret its entries.\n\n**P55 — Reflect & Consolidate:** \"Adjacency matrix: O(V²) space, O(1) edge check, symmetric for undirected, Aᵏ[i,j]=walks of length k. Incidence matrix: V×E, each column = edge endpoints. Adjacency list: O(V+E) space, O(deg) edge check, optimal for BFS/DFS on sparse graphs. Choose: dense→matrix, sparse→list.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Spectral graph theory: the eigenvalues of the adjacency matrix A of a d-regular graph lie in [−d, d] with d the largest eigenvalue. The number of closed walks of length k is Tr(Aᵏ) = Σᵢ λᵢᵏ. For a d-regular bipartite graph, −d is also an eigenvalue. Use this to show: a d-regular graph is bipartite iff −d is an eigenvalue of A. (b) The Laplacian L=D−A: prove that the number of spanning trees of G equals any cofactor of L (Matrix-Tree Theorem / Kirchhoff). For Kₙ: all eigenvalues of L are 0 (once) and n (n−1 times), giving τ(Kₙ)=n^{n−2} (Cayley's formula via the Matrix-Tree Theorem). (c) Compressed graph representations for massive graphs: in the WebGraph model (used for the web graph with billions of vertices), vertices are ordered and neighbourhoods are encoded as sorted difference lists (delta-encoded integers) with reference compression (copy common sub-lists from nearby vertices). Estimate the bits-per-edge for a scale-free graph (power-law degree distribution) under this scheme vs. a plain adjacency list.\n\n**P75 — Mastery Assessment:**\n\"(a) Given the matrix A = [[0,1,1,0],[1,0,1,1],[1,1,0,1],[0,1,1,0]], draw the corresponding graph, compute its degree sequence, and determine whether it is bipartite. (b) For the graph in (a), compute A² and use the diagonal to find the degree sequence (verify against your drawing). (c) A directed graph has adjacency matrix A = [[0,1,0],[0,0,1],[1,0,0]]. Compute A³ and explain what A³[1,1] represents. What is the period of this directed graph? (d) Compare the space and time complexity of BFS on a graph with V=10⁶ vertices and E=10⁷ edges using (i) adjacency matrix, (ii) adjacency list. Which would you choose, and why?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW matrix power walk-counting and the directed/undirected symmetry distinction\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.graph or math.linalg.matrix; reassign\n\n**P78 — Completion:** Graph Representation certified. Student constructs adjacency matrices, incidence matrices, and adjacency lists for undirected and directed graphs; interprets matrix powers as walk counts; selects representations based on density and algorithmic requirements; and applies the diagonal walk-counting identity to compute graph properties.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-representation.md",
+        "startLine": 101,
+        "endLine": 125
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

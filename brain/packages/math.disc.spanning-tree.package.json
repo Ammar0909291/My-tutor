@@ -1,0 +1,451 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.spanning-tree-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.spanning-tree",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:aeb7651c49d742692fff282c3fc9741f2ec9d2c77627e38d013bc49921f3b396",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.spanning-tree.md": "sha256:9c9aac4cdaa163a68fe381210c6c7b0193a27154191eabb6955a286ba1f2fc97"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 9,
+      "mastery_probe": 1
+    },
+    "ruleCount": 9
+  },
+  "concept": {
+    "conceptId": "math.disc.spanning-tree",
+    "name": "Spanning Trees",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.disc.graph-trees"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.spanning-tree-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.spanning-tree (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.spanning-tree.md": "sha256:9c9aac4cdaa163a68fe381210c6c7b0193a27154191eabb6955a286ba1f2fc97"
+      },
+      "contentHash": "sha256:fe6bf41fd42c884a4419e09f22c99d0f96da77dba2888baba76b204802504f12",
+      "ruleCount": 9,
+      "bandCounts": {
+        "3": 9
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-3 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-7 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.spanning-tree.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.spanning-tree.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.spanning-tree"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.spanning-tree\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.spanning-tree/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "Learning Objective",
+      "content": "The student defines a spanning tree of a connected graph G as a connected acyclic subgraph containing all vertices; proves that any spanning tree of Kₙ has exactly n−1 edges and that every connected graph has at least one spanning tree; states and applies Cayley's formula (the number of labelled spanning trees of Kₙ is nⁿ⁻²); applies Kruskal's algorithm (add cheapest edge that doesn't form a cycle) and Prim's algorithm (grow a tree greedily from a start vertex, adding cheapest edge to an unvisited vertex) to find minimum spanning trees of weighted graphs; and uses the cut property and cycle property to verify MST correctness.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "SPANNING-TREE-CAN-HAVE-CYCLES",
+      "content": "| MC-1 | SPANNING-TREE-CAN-HAVE-CYCLES | Student includes a cycle in what they call a spanning tree; draws a subgraph connecting all vertices but with an extra edge forming a loop; forgets that a tree is ACYCLIC by definition — a spanning tree uses exactly n−1 edges in a connected spanning subgraph, and any connected subgraph with n−1 edges on n vertices is automatically acyclic | Type 5 — instruction-induced (the word \"spanning\" is taught as \"covers all vertices\"; students focus on the spanning part and relax the tree part; the two conditions — connects all vertices + acyclic — together force exactly n−1 edges, which students may not have internalised as a theorem before attempting spanning-tree problems) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "KRUSKAL-GREEDY-IS-NOT-GLOBALLY-OPTIMAL",
+      "content": "| MC-2 | KRUSKAL-GREEDY-IS-NOT-GLOBALLY-OPTIMAL | Student believes Kruskal's algorithm finds a locally good but possibly globally suboptimal spanning tree — analogising to cases where greedy algorithms fail; doesn't recognise that the cut property guarantees global optimality for MST; applies Kruskal mechanically without confidence in its correctness | Type 1 — overgeneralisation (many greedy algorithms are suboptimal — greedy coin change, greedy TSP; students generalise \"greedy is approximate\" to MST; the key insight is that the cut property for MSTs is a special structural property that makes the greedy choice at every step provably safe — not all optimisation problems have this \"greedy stays ahead\" structure) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "MST-IS-UNIQUE",
+      "content": "| MC-3 | MST-IS-UNIQUE | Student assumes the MST of a weighted graph is always unique; doesn't recognise that when two edges have equal weight, multiple MSTs may exist with the same total weight; the uniqueness theorem says the MST is unique when ALL edge weights are distinct | Type 5 — instruction-induced (textbook examples use distinct weights, producing a unique MST; students generalise this as a general property; the corrected version: with distinct weights, the MST is unique; with ties, any algorithm that breaks ties consistently produces one valid MST, but multiple MSTs of the same total weight may exist) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "K₁: 1⁻¹=1 (just the single vertex). K₂: 2⁰=1 (one edge). K₃: 3¹=3 (three trees). K₄: 4²=16 (verify by enumeration).",
+      "content": "{\"id\":\"TA-1\",\"title\":\"K₁: 1⁻¹=1 (just the single vertex). K₂: 2⁰=1 (one edge). K₃: 3¹=3 (three trees). K₄: 4²=16 (verify by enumeration).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "CORRECT → \"Spanning tree: connected acyclic, uses all V, exactly n−1 edges. Every connected graph has one. Cayley: nⁿ⁻² labelled spanning trees of Kₙ. Equivalences: tree↔connected n−1 edges↔acyclic n−1 edges.\" → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"CORRECT → \\\"Spanning tree: connected acyclic, uses all V, exactly n−1 edges. Every connected graph has one. Cayley: nⁿ⁻² labelled spanning trees of Kₙ. Equivalences: tree↔connected n−1 edges↔acyclic n−1 edges.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "PARTIAL (MC-1: spanning tree can have cycles) → \"A spanning tree has TWO mandatory properties: (1) SPANNING — it includes every vertex. (2) TREE — it is connected and ACYCLIC. A 'connected spanning subgraph' that has a cycle is a connected spanning GRAPH, not a spanning TREE. The tree property forces exactly n−1 edges: fewer → disconnected; more → cycle. Quick check: count edges. If your spanning subgraph has ≥n edges, it has a cycle and is not a tree. If it has n−1 edges and is connected, it is automatically acyclic.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"PARTIAL (MC-1: spanning tree can have cycles) → \\\"A spanning tree has TWO mandatory properties: (1) SPANNING — it includes every vertex. (2) TREE — it is connected and ACYCLIC. A 'connected spanning subgraph' that has a cycle is a connected spanning GRAPH, not a spanning TREE. The tree property forces exactly n−1 edges: fewer → disconnected; more → cycle. Quick check: count edges. If your spanning subgraph has ≥n edges, it has a cycle and is not a tree. If it has n−1 edges and is connected, it is automatically acyclic.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "NO_RESPONSE → \"K₃ spanning trees: vertices {1,2,3}, edges {12,13,23}. Spanning trees are subsets of 2 edges that connect all 3 vertices: {12,13} (tree: 1-2, 1-3, no cycle ✓), {12,23} (tree: 2-1-? wait: 1-2-3, connected ✓), {13,23} (tree: 1-3-2 ✓). Total: 3 = 3¹ = 3^{3−2}. Cayley's formula confirmed for n=3.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"NO_RESPONSE → \\\"K₃ spanning trees: vertices {1,2,3}, edges {12,13,23}. Spanning trees are subsets of 2 edges that connect all 3 vertices: {12,13} (tree: 1-2, 1-3, no cycle ✓), {12,23} (tree: 2-1-? wait: 1-2-3, connected ✓), {13,23} (tree: 1-3-2 ✓). Total: 3 = 3¹ = 3^{3−2}. Cayley's formula confirmed for n=3.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "CORRECT → \"MST: minimum total weight spanning tree. Cut property: min edge across any cut is in some MST. Cycle property: max edge in any cycle is in no MST. Kruskal: sort edges, add if no cycle (O(E log E)). Prim: grow from start, add cheapest edge to unvisited vertex (O(E log V)).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-6\",\"title\":\"CORRECT → \\\"MST: minimum total weight spanning tree. Cut property: min edge across any cut is in some MST. Cycle property: max edge in any cycle is in no MST. Kruskal: sort edges, add if no cycle (O(E log E)). Prim: grow from start, add cheapest edge to unvisited vertex (O(E log V)).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "PARTIAL (MC-2: Kruskal is only locally optimal) → \"Kruskal is GLOBALLY optimal. The proof uses the CUT PROPERTY: when Kruskal considers edge e=(u,v), u and v are in different connected components of the current forest. The set of vertices in u's component forms one side S of a cut. All edges cheaper than e that cross this cut were processed earlier — they were either added (and connected components within S or within V\\S) or caused a cycle (meaning both endpoints were already connected within the same component). So e is the minimum-weight edge crossing (S, V\\S). By the cut property, e belongs to some MST. Applying this argument at every step proves global optimality.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"PARTIAL (MC-2: Kruskal is only locally optimal) → \\\"Kruskal is GLOBALLY optimal. The proof uses the CUT PROPERTY: when Kruskal considers edge e=(u,v), u and v are in different connected components of the current forest. The set of vertices in u's component forms one side S of a cut. All edges cheaper than e that cross this cut were processed earlier — they were either added (and connected components within S or within V\\\\S) or caused a cycle (meaning both endpoints were already connected within the same component). So e is the minimum-weight edge crossing (S, V\\\\S). By the cut property, e belongs to some MST. Applying this argument at every step proves global optimality.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 90,
+        "endLine": 90
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "NO_RESPONSE → \"Run Kruskal on 4 vertices {1,2,3,4} with edges: 1-2:1, 2-3:2, 3-4:3, 1-3:4, 1-4:5, 2-4:6. Sorted: 1-2(1), 2-3(2), 3-4(3), 1-3(4), 1-4(5), 2-4(6). Step 1: add 1-2. Step 2: add 2-3 (no cycle). Step 3: add 3-4 (no cycle). Now n−1=3 edges. MST: {1-2, 2-3, 3-4}, weight=1+2+3=6. Check: is 1-3 needed? No — 1-2-3 already connects 1 and 3. ✓\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"NO_RESPONSE → \\\"Run Kruskal on 4 vertices {1,2,3,4} with edges: 1-2:1, 2-3:2, 3-4:3, 1-3:4, 1-4:5, 2-4:6. Sorted: 1-2(1), 2-3(2), 3-4(3), 1-3(4), 1-4(5), 2-4(6). Step 1: add 1-2. Step 2: add 2-3 (no cycle). Step 3: add 3-4 (no cycle). Now n−1=3 edges. MST: {1-2, 2-3, 3-4}, weight=1+2+3=6. Check: is 1-3 needed? No — 1-2-3 already connects 1 and 3. ✓\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 91,
+        "endLine": 91
+      }
+    },
+    {
+      "assetId": "math.disc.spanning-tree/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.spanning-tree",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Find all spanning trees of the complete graph K₄ by enumeration. Verify Cayley's formula: should be 4²=16.\n2. Run Kruskal's algorithm on the graph with vertices {A,B,C,D,E} and weighted edges: AB:4, AC:2, AD:7, BC:3, BD:5, BE:8, CD:1, CE:6, DE:9. Show each step. State the MST edges and total weight.\n3. Prove the cut property: given a weighted connected graph G with distinct edge weights, the minimum-weight edge e crossing any cut (S, V\\S) belongs to every MST. (Hint: suppose T is an MST without e; adding e to T creates a cycle; that cycle contains another edge e' crossing the cut; since w(e)<w(e'), replacing e' with e gives a cheaper spanning tree — contradiction.)\n4. Run Prim's algorithm on the same graph as problem 2, starting from vertex A. Show the order in which vertices and edges are added. Verify that the result is the same MST as Kruskal.\n5. Borůvka's algorithm (1926): in each round, for every connected component, add the cheapest edge leaving that component (breaking ties consistently). Repeat until one component remains. Verify this finds an MST on the problem 2 graph by running it and checking each round. How many rounds does it take? What is the time complexity per round (use the cut property to argue correctness)?\n\n**P55 — Reflect & Consolidate:** \"Spanning tree: connected acyclic, n vertices → n−1 edges. Cayley: nⁿ⁻² labelled spanning trees of Kₙ. MST: minimum total weight. Cut property: min-weight cut edge is in some MST. Kruskal: sort edges, add if no cycle, O(E log E). Prim: grow tree, add cheapest unvisited vertex, O(E log V). Distinct weights → unique MST. Equal weights → possibly multiple MSTs with same total weight.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.graph.minimum-spanning-tree):**\n(a) Matrix-Tree theorem: the number of spanning trees of any graph G equals any cofactor of the Laplacian matrix L=D−A (where D is the degree matrix). Compute the number of spanning trees of the Petersen graph (V=10, E=15, 3-regular → each diagonal entry of L is 3). The answer is 2,000; derive it from any 9×9 minor of L using the theorem. Contrast with Cayley's formula for complete graphs. (b) Randomised MST: Karger, Klein, and Tarjan (1995) gave a linear-time randomised algorithm for MST, using random sampling to reduce the number of edges that need processing. The key lemma: for any MST T and any random subgraph H (each edge kept independently with probability p), the number of edges in G\\H that are NOT heavier than the T-path maximum in H has expected value ≤ n/p. Explain why this sampling lemma enables recursion and why it beats sorting-based approaches. (c) Minimum spanning arborescence (directed MST): for a directed graph (digraph), a spanning arborescence rooted at r is a directed spanning tree where every vertex has exactly one path from r. Edmonds' algorithm (Chu-Liu/Edmonds, 1967) finds the minimum spanning arborescence in O(EV) time. The algorithm contracts cycles in a greedy fashion — explain the structural difference from undirected MST and why the cut property must be generalised.\n\n**P75 — Mastery Assessment:**\n\"(a) A network of 6 cities has road costs: 1-2:5, 1-3:3, 2-4:2, 2-5:8, 3-4:4, 3-6:6, 4-5:1, 5-6:7. Find the MST using Kruskal's algorithm. Show each edge considered in order and state whether it's added or rejected (and why). (b) Prove that if T is a spanning tree of G and e∉T is any edge, then T+e contains exactly one cycle. Use this to show that if removing some edge f from that cycle and adding e produces a lighter tree, then T was not an MST. (c) How many spanning trees does the cycle graph C₅ have? (Hint: use the Matrix-Tree theorem with the 5×5 Laplacian.) Verify your answer is 5 by enumeration (each spanning tree of C₅ is C₅ minus one edge). (d) In Prim's algorithm, why must you always add the minimum-weight edge from any tree vertex to any non-tree vertex (not just from the most recently added vertex)? Give a specific example graph where restricting to the most recently added vertex gives a suboptimal result.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the cut property proof and the Kruskal/Prim complexity comparison\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.graph-trees; reassign\n\n**P78 — Completion:** Spanning Trees certified. Student defines spanning trees, proves the n−1-edge characterisation, states Cayley's formula, applies Kruskal's and Prim's algorithms with correctness justification via the cut property, uses the cycle property to verify non-MST edges, and handles the distinct-vs-tied-weight MST uniqueness question.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.spanning-tree.md",
+        "startLine": 105,
+        "endLine": 129
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,417 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1ac6120a32cfd28d5e84e486a2d2264f14d4e55473b1c12fa529a6f28e11eaec",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph-types.md": "sha256:1d1d47a7bd809bb9296f5fe5a3b6a00ef5d273b424af42533a4925b6c439507a"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.disc.graph-types",
+    "name": "Graph Types",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.disc.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph-types.md": "sha256:1d1d47a7bd809bb9296f5fe5a3b6a00ef5d273b424af42533a4925b6c439507a"
+      },
+      "contentHash": "sha256:fa27d6f14497d526a4c87095a8262e9fe4773b2f31ce043a3a372007350186ea",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-types.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-types.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph-types/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph-types",
+      "title": "Learning Objective",
+      "content": "The student classifies graphs by structural type: distinguishes simple graphs from multigraphs and pseudographs; identifies complete graphs Kₙ (every pair adjacent), bipartite graphs (vertices 2-colourable, no odd cycles), and complete bipartite graphs Kₘ,ₙ; recognises directed graphs (digraphs) and weighted graphs; computes degree sequences and verifies the handshaking lemma (Σdeg(v) = 2|E|); and uses the handshaking lemma to deduce parity constraints (number of odd-degree vertices is even).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-types",
+      "title": "BIPARTITE-MEANS-TWO-COMPONENTS",
+      "content": "| MC-1 | BIPARTITE-MEANS-TWO-COMPONENTS | Student thinks a bipartite graph has two disconnected components; doesn't realise a bipartite graph CAN be connected — the two parts are vertex colour classes, not components; K₂,₃ is connected and bipartite | Type 3 — language contamination (\"bi\" + \"partite\" = two parts; students interpret \"parts\" as separate components, forgetting that cross-edges (which bipartite allows and requires) connect the two parts into a single connected graph) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-types",
+      "title": "COMPLETE-MEANS-ALL-EDGES-POSSIBLE",
+      "content": "| MC-2 | COMPLETE-MEANS-ALL-EDGES-POSSIBLE | Student conflates \"complete\" with \"as many edges as possible given constraints\"; applies it to bipartite graphs, saying K₃ is a subset of K₂,₃; misses that in Kₙ EVERY pair of the n vertices is adjacent, while in Kₘ,ₙ only cross-partition pairs are adjacent — the two are different maximality notions | Type 5 — instruction-induced (Kₙ is always introduced first as \"the complete graph\"; then Kₘ,ₙ is introduced with the same word \"complete\" in a different sense; without explicitly naming the two different maximality criteria, students conflate them) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-types",
+      "title": "HANDSHAKING-IS-ABOUT-HANDSHAKES",
+      "content": "| MC-3 | HANDSHAKING-IS-ABOUT-HANDSHAKES | Student treats the handshaking lemma as a combinatorial curiosity about social events, not a universal algebraic identity about any graph; misses that it applies to directed, weighted, and multigraphs with appropriate degree definitions (in-degree + out-degree for digraphs, multiplicity-counted for multigraphs) | Type 3 — language contamination (the \"handshaking\" mnemonic — each edge represents two people shaking hands — is vivid but domain-specific; students don't extend it to digraphs where \"handshaking\" is asymmetric or to multigraphs where multiple handshakes between the same pair count separately) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "CORRECT → \"Kₙ: all C(n,2) edges. Bipartite: 2-colourable, no odd cycle. Kₘ,ₙ: mn cross-edges. Digraph: directed edges. Handshaking: Σdeg=2|E|, so #odd-degree vertices is even.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"Kₙ: all C(n,2) edges. Bipartite: 2-colourable, no odd cycle. Kₘ,ₙ: mn cross-edges. Digraph: directed edges. Handshaking: Σdeg=2|E|, so #odd-degree vertices is even.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "PARTIAL (MC-1: bipartite = two components) → \"A bipartite graph is NOT necessarily disconnected. K₂,₃ is bipartite AND connected: every vertex in the 2-part is adjacent to all 3 vertices in the 3-part. The DEFINITION of bipartite is: vertex set can be partitioned into X and Y such that every edge goes between X and Y. Connected bipartite graphs are common (K₂,₃, cycles C₄, C₆, …). Disconnected bipartite graphs exist too, but bipartiteness is about colouring, not connectivity.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: bipartite = two components) → \\\"A bipartite graph is NOT necessarily disconnected. K₂,₃ is bipartite AND connected: every vertex in the 2-part is adjacent to all 3 vertices in the 3-part. The DEFINITION of bipartite is: vertex set can be partitioned into X and Y such that every edge goes between X and Y. Connected bipartite graphs are common (K₂,₃, cycles C₄, C₆, …). Disconnected bipartite graphs exist too, but bipartiteness is about colouring, not connectivity.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "NO_RESPONSE → \"Is K₃,₃ bipartite? YES — it has two parts of size 3. Is K₅ bipartite? NO — every vertex has degree 4, and the odd cycle K₃ (triangle) is a subgraph. Verify handshaking for K₄: Σdeg = 4·3 = 12 = 2·6 = 2|E|. ✓\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Is K₃,₃ bipartite? YES — it has two parts of size 3. Is K₅ bipartite? NO — every vertex has degree 4, and the odd cycle K₃ (triangle) is a subgraph. Verify handshaking for K₄: Σdeg = 4·3 = 12 = 2·6 = 2|E|. ✓\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "CORRECT → \"Degree sequence encodes structure. Erdős-Gallai: degree sequence of simple graph iff sum even + k-sum bound. Digraph: Σout = Σin = |E|. Bipartite: no odd cycle, 2-colourable by BFS.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Degree sequence encodes structure. Erdős-Gallai: degree sequence of simple graph iff sum even + k-sum bound. Digraph: Σout = Σin = |E|. Bipartite: no odd cycle, 2-colourable by BFS.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "PARTIAL (MC-3: handshaking only for simple graphs) → \"The handshaking lemma extends to ALL graph types: multigraph — each parallel edge contributes to both endpoints' degree (count multiplicity); pseudograph — a loop at v contributes 2 to deg(v) (one for each endpoint, which happen to be the same vertex); digraph — replace degree with in-degree + out-degree at each vertex, and Σ(in + out) = 2|E|. The algebraic identity Σdeg=2|E| holds in all cases.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-3: handshaking only for simple graphs) → \\\"The handshaking lemma extends to ALL graph types: multigraph — each parallel edge contributes to both endpoints' degree (count multiplicity); pseudograph — a loop at v contributes 2 to deg(v) (one for each endpoint, which happen to be the same vertex); digraph — replace degree with in-degree + out-degree at each vertex, and Σ(in + out) = 2|E|. The algebraic identity Σdeg=2|E| holds in all cases.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-types",
+      "title": "NO_RESPONSE → \"Degree sequence [4,3,3,2,2]: sum=14 (even). Is it graphical? Apply Erdős-Gallai at k=1: d₁=4 ≤ 0 + min(3,1)+min(3,1)+min(2,1)+min(2,1) = 0+1+1+1+1 = 4. ✓ At k=2: 4+3=7 ≤ 2·1 + min(3,2)+min(2,2)+min(2,2) = 2+2+2+2 = 8. ✓ Valid degree sequence.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Degree sequence [4,3,3,2,2]: sum=14 (even). Is it graphical? Apply Erdős-Gallai at k=1: d₁=4 ≤ 0 + min(3,1)+min(3,1)+min(2,1)+min(2,1) = 0+1+1+1+1 = 4. ✓ At k=2: 4+3=7 ≤ 2·1 + min(3,2)+min(2,2)+min(2,2) = 2+2+2+2 = 8. ✓ Valid degree sequence.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.disc.graph-types/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph-types",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. For K₅: compute |E|, the degree of every vertex, and verify the handshaking lemma. Is K₅ bipartite? Justify.\n2. Draw K₂,₄ and K₃,₃. For each: list the degree sequence, compute |E|, and verify the handshaking lemma.\n3. A graph has 10 vertices, each with degree 3 (3-regular). How many edges does it have? Show your reasoning.\n4. Prove: in any graph, the number of vertices with odd degree is even. (Use the handshaking lemma.)\n5. A bipartite graph G has parts X and Y with |X|=4, |Y|=6. What is the maximum number of edges G can have? What graph achieves this maximum, and what are its degree sequences for each part?\n\n**P55 — Reflect & Consolidate:** \"Kₙ: all C(n,2) edges, degree n−1. Bipartite: 2-colour partition, no odd cycles; Kₘ,ₙ: mn cross-edges. Multigraph: parallel edges. Digraph: in-degree + out-degree. Handshaking: Σdeg=2|E|; #odd-degree vertices is even. Bipartite test: BFS 2-colouring.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Ramsey theory: R(s,t) is the smallest n such that every 2-colouring of the edges of Kₙ contains a monochromatic Kₛ or Kₜ. The simplest case R(3,3)=6: show that any 2-colouring of K₆'s edges contains a monochromatic triangle. (b) Turán's theorem: the maximum number of edges in a simple n-vertex graph with no Kₙ₊₁ subgraph is achieved by the complete r-partite Turán graph T(n,r). For r=2 (triangle-free): ex(n,K₃) = ⌊n²/4⌋. Prove the triangle-free case by showing any graph exceeding ⌊n²/4⌋ edges must contain a triangle. (c) Friendship theorem: if any two vertices of G have exactly one common neighbour, then G is a \"windmill\" (several triangles sharing a common hub vertex). Explain the key step in Ramsey's proof: assuming G is regular and using eigenvector analysis of the adjacency matrix.\n\n**P75 — Mastery Assessment:**\n\"(a) Prove that if G is a simple graph on n vertices with more than C(n−1,2) edges, then G is connected. (b) A 4-regular bipartite graph has equal-sized parts. Find the smallest possible number of vertices. Justify. (c) A tournament is a directed graph obtained by orienting each edge of Kₙ. Show that every tournament has a Hamiltonian path (a directed path through all vertices). (d) The Petersen graph has 10 vertices, each of degree 3. How many edges does it have? Is it bipartite? Justify your answer about bipartiteness using the cycle characterisation.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW bipartite characterisation via odd cycles and the handshaking corollary\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.graph; reassign\n\n**P78 — Completion:** Graph Types certified. Student classifies Kₙ, Kₘ,ₙ, bipartite, directed, weighted, and multigraphs; applies the handshaking lemma to derive degree-sum constraints; recognises that bipartite graphs may be connected; and uses odd-cycle characterisation of bipartite graphs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-types.md",
+        "startLine": 95,
+        "endLine": 119
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

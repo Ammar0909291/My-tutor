@@ -1,0 +1,418 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.inclusion-exclusion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.inclusion-exclusion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8d3499babcd588d74cae59270c93d1c99217ee7a4eb8455a4287f5a6d0b04ec0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md": "sha256:2932ca7be0fffba2957020baf0418027e2fef3aea68eda15715b55559456a596"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.disc.inclusion-exclusion",
+    "name": "Inclusion-Exclusion Principle",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.combinations",
+      "math.found.set-operations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.inclusion-exclusion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.inclusion-exclusion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md": "sha256:2932ca7be0fffba2957020baf0418027e2fef3aea68eda15715b55559456a596"
+      },
+      "contentHash": "sha256:8ef8c527a77cfe7b03e9269dcabef22a449df17a0063cc383b178599b82bbe2b",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-2 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-6 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.inclusion-exclusion.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.inclusion-exclusion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.inclusion-exclusion\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.inclusion-exclusion/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "Learning Objective",
+      "content": "The student states and applies the inclusion-exclusion principle for n sets: |A₁∪⋯∪Aₙ| = Σ|Aᵢ| − Σ|Aᵢ∩Aⱼ| + Σ|Aᵢ∩Aⱼ∩Aₖ| − ⋯ ± |A₁∩⋯∩Aₙ|; identifies when a problem requires inclusion-exclusion by the presence of \"at least one\" or \"at most k\" constraints; applies the formula to count surjective functions, derangements (existence only), and solutions to combinatorial problems with forbidden positions; uses the complementary form to count elements in none of the sets; and verifies the formula for small cases.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "INCLUSION-EXCLUSION-ALWAYS-SUBTRACTS",
+      "content": "| MC-1 | INCLUSION-EXCLUSION-ALWAYS-SUBTRACTS | Student always applies IE as \"total minus bad,\" forgetting that the full formula alternates signs (+individual −pairs +triples −⋯); in problems with three or more properties, drops the triple (and higher) intersection terms, giving wrong counts | Type 5 — instruction-induced (the two-set case |A∪B|=|A|+|B|−|A∩B| is taught first and memorised as \"add individual, subtract overlap\"; when three or more sets are introduced, students extend this as \"add individual, subtract ALL overlaps\" without adding back the triple intersections — a systematic sign error) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "IE-COUNTS-ELEMENTS-IN-ANY-SET",
+      "content": "| MC-2 | IE-COUNTS-ELEMENTS-IN-ANY-SET | Student confuses |A₁∪⋯∪Aₙ| (at least one property) with the complementary count |U|−|A₁∪⋯∪Aₙ| (no property); applies the IE formula but doesn't subtract from |U| when the problem asks for elements with NONE of the properties | Type 3 — language contamination (\"none of the properties\" problems use IE to count the union (those with ≥1 property) and then complement; students compute the union sum correctly but report it as the answer instead of |U|−union) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "SURJECTION-FORMULA-IS-kⁿ",
+      "content": "| MC-3 | SURJECTION-FORMULA-IS-kⁿ | Student thinks the number of surjections from an n-set to a k-set is just kⁿ − (non-surjections excluded by an ad hoc argument); doesn't use the systematic IE formula: Σⱼ₌₀ᵏ (−1)ʲC(k,j)(k−j)ⁿ | Type 5 — instruction-induced (surjection counting is often posed as \"subtract the non-onto functions\" without making the IE structure explicit; students develop ad hoc exclusion arguments for k=2 (correct) or k=3 (partially correct) and generalise incorrectly to larger k) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "CORRECT → \"IE: Σ|Aᵢ|−Σ|Aᵢ∩Aⱼ|+Σ|Aᵢ∩Aⱼ∩Aₖ|−⋯ Each element in m sets contributes 1. Complement: |U|−|union| = elements in none.\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"IE: Σ|Aᵢ|−Σ|Aᵢ∩Aⱼ|+Σ|Aᵢ∩Aⱼ∩Aₖ|−⋯ Each element in m sets contributes 1. Complement: |U|−|union| = elements in none.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "PARTIAL (MC-1: drops triple intersection) → \"For 3 or more sets: the alternating pattern is +individual −pairs +triples −quadruples ⋯ You MUST include the triple intersection term with a PLUS sign. In the Venn diagram for 3 sets: |A∩B∩C| is first over-counted at the individual level (+3 times), then over-corrected at the pair level (−3 times), then needs +1 more to restore its true single count. Omitting the triple term gives |A∪B∪C| = 105 − 37 = 68 instead of the correct 73 — off by 5.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-1: drops triple intersection) → \\\"For 3 or more sets: the alternating pattern is +individual −pairs +triples −quadruples ⋯ You MUST include the triple intersection term with a PLUS sign. In the Venn diagram for 3 sets: |A∩B∩C| is first over-counted at the individual level (+3 times), then over-corrected at the pair level (−3 times), then needs +1 more to restore its true single count. Omitting the triple term gives |A∪B∪C| = 105 − 37 = 68 instead of the correct 73 — off by 5.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "NO_RESPONSE → \"Integers from 1 to 100 divisible by 2 or 3 or 5: |A₂|=50, |A₃|=33, |A₅|=20; |A₂∩A₃|=|A₆|=16, |A₂∩A₅|=|A₁₀|=10, |A₃∩A₅|=|A₁₅|=6; |A₂∩A₃∩A₅|=|A₃₀|=3. IE: 50+33+20−16−10−6+3=74 integers.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Integers from 1 to 100 divisible by 2 or 3 or 5: |A₂|=50, |A₃|=33, |A₅|=20; |A₂∩A₃|=|A₆|=16, |A₂∩A₅|=|A₁₀|=10, |A₃∩A₅|=|A₁₅|=6; |A₂∩A₃∩A₅|=|A₃₀|=3. IE: 50+33+20−16−10−6+3=74 integers.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "CORRECT → \"Surjections: Σ(−1)ʲC(k,j)(k−j)ⁿ. Derangements: n!Σ(−1)ʲ/j!. IE handles 'at least one missing' → complement gives 'all present' = surjections.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Surjections: Σ(−1)ʲC(k,j)(k−j)ⁿ. Derangements: n!Σ(−1)ʲ/j!. IE handles 'at least one missing' → complement gives 'all present' = surjections.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "PARTIAL (MC-3: surjection = kⁿ minus ad hoc) → \"The systematic surjection formula is Σⱼ₌₀ᵏ(−1)ʲC(k,j)(k−j)ⁿ. For k=2: 2ⁿ−2·1=2ⁿ−2 (correct, and this ad hoc works). For k=3: 3ⁿ−3·2ⁿ+3·1ⁿ (this is the IE formula — there is an extra +3·1ⁿ term that ad hoc reasoning often omits). For k=3,n=3: 27−24+3=6 (the 3!=6 bijections, correct). Ad hoc: 27−3·8=3 (wrong — misses the triple intersection).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-3: surjection = kⁿ minus ad hoc) → \\\"The systematic surjection formula is Σⱼ₌₀ᵏ(−1)ʲC(k,j)(k−j)ⁿ. For k=2: 2ⁿ−2·1=2ⁿ−2 (correct, and this ad hoc works). For k=3: 3ⁿ−3·2ⁿ+3·1ⁿ (this is the IE formula — there is an extra +3·1ⁿ term that ad hoc reasoning often omits). For k=3,n=3: 27−24+3=6 (the 3!=6 bijections, correct). Ad hoc: 27−3·8=3 (wrong — misses the triple intersection).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "NO_RESPONSE → \"Count 4-letter words over alphabet {a,b,c,d,e} (5 letters) that use ALL 5 letters... impossible (4 < 5). Try: 5-letter words using all 5 letters = surjections from 5 to 5 = 5! = 120 (derangements are a special case of surjections with forbidden positions). Surjections from 5 to 4 (use at least 3 of 4 letters): Σ(−1)ʲC(4,j)(4−j)⁵ = 4⁵−4·3⁵+6·2⁵−4·1⁵+0 = 1024−972+192−4=240.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"Count 4-letter words over alphabet {a,b,c,d,e} (5 letters) that use ALL 5 letters... impossible (4 < 5). Try: 5-letter words using all 5 letters = surjections from 5 to 5 = 5! = 120 (derangements are a special case of surjections with forbidden positions). Surjections from 5 to 4 (use at least 3 of 4 letters): Σ(−1)ʲC(4,j)(4−j)⁵ = 4⁵−4·3⁵+6·2⁵−4·1⁵+0 = 1024−972+192−4=240.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.disc.inclusion-exclusion/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.inclusion-exclusion",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. In a group of 200 students: 120 study mathematics, 90 study physics, 75 study chemistry. 45 study both math and physics, 35 study both math and chemistry, 20 study both physics and chemistry, 10 study all three. How many study at least one subject? How many study none?\n2. Count surjective functions from a 5-element set to a 3-element set.\n3. Count integers from 1 to 1000 that are divisible by at least one of 3, 5, 7. (Use IE with |Aᵢ| = ⌊1000/i⌋.)\n4. Count 6-letter strings over {A, B, C, D} that use every letter at least once. (k=4, n=6.)\n5. Derive the formula for derangements D_n using IE: let Aᵢ = {permutations with σ(i)=i}. Compute |Aᵢ|, |Aᵢ∩Aⱼ|, …, then write D_n = n! − |A₁∪⋯∪Aₙ|.\n\n**P55 — Reflect & Consolidate:** \"IE: |∪Aᵢ|=Σ|Aᵢ|−Σ|Aᵢ∩Aⱼ|+⋯ Each element in m sets contributes exactly 1. Complement: |U|−|union| = elements in none. Surjections: Σ(−1)ʲC(k,j)(k−j)ⁿ. Sign alternates: +individual, −pairs, +triples.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Möbius inversion on posets: the inclusion-exclusion principle is a special case of Möbius inversion on the Boolean lattice 2^[n]. The Möbius function μ(x,y) on a poset satisfies Σ_{z: x≤z≤y} μ(x,z) = [x=y]. For 2^[n], μ(S,T) = (−1)^{|T|−|S|} — recovering the IE sign pattern. Explain how the Möbius function on the divisor lattice (poset by divisibility) gives the classical Möbius function μ(n) used in the Möbius inversion formula in number theory: Σ_{d|n} μ(d) = [n=1]. (b) Principle of sieve and the sieve of Eratosthenes: the count of integers ≤ N coprime to a product p₁p₂⋯pₖ is given by IE: N·Π(1−1/pᵢ) in the limit → φ(n)/n formula for Euler's totient. Derive φ(n) = n·Π_{p|n}(1−1/p) using IE. (c) Rook polynomial: the problème des ménages asks for the number of ways to seat n married couples at a circular table so that no husband and wife are adjacent. Define the rook polynomial of the forbidden board and explain how IE on the rooks gives the exact count. What is the rook polynomial for the problème des ménages?\n\n**P75 — Mastery Assessment:**\n\"(a) 100 integers from 1 to 100: how many are NOT divisible by 2, 3, or 5? (b) Compute the number of surjective functions from a 7-element set to a 4-element set. (c) Prove: D_n = (n−1)(D_{n−1} + D_{n−2}). (Hint: consider where element 1 goes and whether the element that went to position 1's original position goes back to 1's current position.) (d) A class of 40 students takes three exams. 25 pass Exam 1, 22 pass Exam 2, 18 pass Exam 3. 14 pass both 1 and 2, 10 pass both 1 and 3, 8 pass both 2 and 3, and 5 pass all three. How many students pass at least two exams? How many pass exactly one exam?\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the surjection formula and the sign pattern for 3+ sets\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.combinations or math.found.set-operations; reassign\n\n**P78 — Completion:** Inclusion-Exclusion certified. Student applies the IE formula with correct alternating signs for 2, 3, and n sets; computes complementary counts; derives the surjection formula; connects IE to derangements; and handles problems with \"at least one\" and \"none\" framings correctly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.inclusion-exclusion.md",
+        "startLine": 101,
+        "endLine": 125
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

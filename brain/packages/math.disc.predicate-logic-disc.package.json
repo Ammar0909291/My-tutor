@@ -1,0 +1,928 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.predicate-logic-disc-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.predicate-logic-disc",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b3a4b96b039d1a8510156651da3836b6894049acfed3bd4048d11ebdad760c89",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md": "sha256:1d341d26e4214f7b82cbb80bdec202b40fc39face9837497566e54f2d289aff4"
+    },
+    "assetCount": 28,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 23,
+      "mastery_probe": 1
+    },
+    "ruleCount": 23
+  },
+  "concept": {
+    "conceptId": "math.disc.predicate-logic-disc",
+    "name": "Predicate Logic in Discrete Mathematics",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.predicate-logic",
+      "math.disc.propositional-logic"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.predicate-logic-disc-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.predicate-logic-disc (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md": "sha256:1d341d26e4214f7b82cbb80bdec202b40fc39face9837497566e54f2d289aff4"
+      },
+      "contentHash": "sha256:26edc07110efd2bd410ef0801d5585e2e451dd2d9ca0a61cf8e867a3721d561b",
+      "ruleCount": 23,
+      "bandCounts": {
+        "3": 23
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-12",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-17 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-20",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-21 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-23",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-23",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.predicate-logic-disc.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.predicate-logic-disc"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.predicate-logic-disc\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.predicate-logic-disc/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Learning Objective",
+      "content": "The student translates English mathematical statements involving \"for all,\" \"there exists,\" and \"there exists a unique\" into first-order logic notation and back; negates quantified statements correctly (¬∀x P(x) ≡ ∃x ¬P(x); ¬∃x P(x) ≡ ∀x ¬P(x)); handles nested quantifiers and identifies when quantifier order matters (∀x∃y R(x,y) vs. ∃y∀x R(x,y)); applies universal and existential instantiation and generalisation as proof steps; constructs proofs of universally quantified statements by choosing an arbitrary representative; refutes a universal claim by exhibiting a counterexample; and distinguishes free and bound variables.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "QUANTIFIER-ORDER-COMMUTES",
+      "content": "| MC-1 | QUANTIFIER-ORDER-COMMUTES | Student treats ∀x∃y and ∃y∀x as equivalent; writes \"∀x∃y R(x,y)\" when they mean \"∃y∀x R(x,y)\" or vice versa; fails to see that the latter requires a SINGLE witness y that works for ALL x, while the former allows y to depend on x | Type 4 — notation-induced (both statements use the same two quantifiers and the same variable names; the difference is in order — which quantifier is outer; students read them left-to-right and see the same \"symbols\" without recognising that the outer quantifier determines what depends on what; the canonical example: \"every student has some professor\" (∀s∃p: professor(p,s)) vs. \"some professor teaches every student\" (∃p∀s: professor(p,s)) — very different claims) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "NEGATION-FLIPS-PREDICATE-NOT-QUANTIFIER",
+      "content": "| MC-2 | NEGATION-FLIPS-PREDICATE-NOT-QUANTIFIER | Student negates \"∀x P(x)\" as \"∀x ¬P(x)\" (flips the predicate but not the quantifier); fails to apply the De Morgan analogy — to negate a universally quantified statement, BOTH the quantifier changes to existential AND the predicate is negated: ¬∀x P(x) ≡ ∃x ¬P(x) | Type 1 — overgeneralisation (students correctly negate propositional \"not\" and apply \"double negation\" to simple predicates; when they see ¬∀x P(x) they distribute the negation inward without changing the quantifier, treating ∀ as transparent; the quantifier-type swap is not an analogy to anything in propositional logic — it requires the De Morgan law for quantifiers) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "COUNTEREXAMPLE-REFUTES-EXISTENTIAL",
+      "content": "| MC-3 | COUNTEREXAMPLE-REFUTES-EXISTENTIAL | Student gives a counterexample to refute an existential statement \"∃x P(x)\" rather than a universal; a single counterexample refutes \"∀x P(x)\" (by providing an x with ¬P(x)), but to refute \"∃x P(x)\" you must show that NO x satisfies P(x) — a single non-example is insufficient | Type 1 — overgeneralisation (\"counterexample\" is associated with disproving a claim; students deploy it against any claim without reading the quantifier; one x with P(x) false proves \"not all x satisfy P\", but one x with P(x) false says nothing about \"there exists x with P(x)\" when another x might satisfy it) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Universal: ∀x P(x) — \"for every x in D, P(x) holds.\" Equivalent: conjunction over all elements of D.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Universal: ∀x P(x) — \\\"for every x in D, P(x) holds.\\\" Equivalent: conjunction over all elements of D.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 41,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Existential: ∃x P(x) — \"there exists at least one x in D such that P(x) holds.\" Equivalent: disjunction over all elements.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Existential: ∃x P(x) — \\\"there exists at least one x in D such that P(x) holds.\\\" Equivalent: disjunction over all elements.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 42,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "Unique existence: ∃!x P(x) — \"there exists exactly one x such that P(x).\" Defined as ∃x(P(x) ∧ ∀y(P(y) → y=x)).",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Unique existence: ∃!x P(x) — \\\"there exists exactly one x such that P(x).\\\" Defined as ∃x(P(x) ∧ ∀y(P(y) → y=x)).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 43,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "¬∀x P(x) ≡ ∃x ¬P(x)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"¬∀x P(x) ≡ ∃x ¬P(x)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 46,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "¬∃x P(x) ≡ ∀x ¬P(x)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"¬∃x P(x) ≡ ∀x ¬P(x)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "\"Every even number has an even square\" → ∀x(even(x) → even(x²))",
+      "content": "{\"id\":\"TA-6\",\"title\":\"\\\"Every even number has an even square\\\" → ∀x(even(x) → even(x²))\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "\"There is a prime greater than 1,000\" → ∃x(prime(x) ∧ x>1000)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"\\\"There is a prime greater than 1,000\\\" → ∃x(prime(x) ∧ x>1000)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "\"No integer is both even and odd\" → ¬∃x(even(x) ∧ odd(x)) ≡ ∀x¬(even(x) ∧ odd(x))",
+      "content": "{\"id\":\"TA-8\",\"title\":\"\\\"No integer is both even and odd\\\" → ¬∃x(even(x) ∧ odd(x)) ≡ ∀x¬(even(x) ∧ odd(x))\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "\"Every positive integer has a prime factor\" → ∀x(x>1 → ∃p(prime(p) ∧ p|x))",
+      "content": "{\"id\":\"TA-9\",\"title\":\"\\\"Every positive integer has a prime factor\\\" → ∀x(x>1 → ∃p(prime(p) ∧ p|x))\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "∀x∃y R(x,y): for every integer x, there exists an integer y with x<y. TRUE (take y=x+1).",
+      "content": "{\"id\":\"TA-10\",\"title\":\"∀x∃y R(x,y): for every integer x, there exists an integer y with x<y. TRUE (take y=x+1).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 57,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "∃y∀x R(x,y): there exists a single integer y greater than every integer. FALSE.",
+      "content": "{\"id\":\"TA-11\",\"title\":\"∃y∀x R(x,y): there exists a single integer y greater than every integer. FALSE.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "To prove ∀x P(x): let x be an arbitrary element; prove P(x) without using any specific property of x. (Universal generalisation — the \"let x be arbitrary\" setup.)",
+      "content": "{\"id\":\"TA-12\",\"title\":\"To prove ∀x P(x): let x be an arbitrary element; prove P(x) without using any specific property of x. (Universal generalisation — the \\\"let x be arbitrary\\\" setup.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "To prove ∃x P(x): exhibit a specific x and verify P(x) holds. (Existential instantiation — the \"take x=…\" setup.)",
+      "content": "{\"id\":\"TA-13\",\"title\":\"To prove ∃x P(x): exhibit a specific x and verify P(x) holds. (Existential instantiation — the \\\"take x=…\\\" setup.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "To refute ∀x P(x): exhibit a COUNTEREXAMPLE — one specific x with ¬P(x).",
+      "content": "{\"id\":\"TA-14\",\"title\":\"To refute ∀x P(x): exhibit a COUNTEREXAMPLE — one specific x with ¬P(x).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "To refute ∃x P(x): prove ∀x ¬P(x) — no element satisfies P.",
+      "content": "{\"id\":\"TA-15\",\"title\":\"To refute ∃x P(x): prove ∀x ¬P(x) — no element satisfies P.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "CORRECT → \"∀x∃y ≠ ∃y∀x (y may depend on x in the first). ¬∀xP(x)=∃x¬P(x). Prove ∀: arbitrary element; prove ∃: exhibit; refute ∀: counterexample; refute ∃: prove negation for all x.\" → A02",
+      "content": "{\"id\":\"TA-16\",\"title\":\"CORRECT → \\\"∀x∃y ≠ ∃y∀x (y may depend on x in the first). ¬∀xP(x)=∃x¬P(x). Prove ∀: arbitrary element; prove ∃: exhibit; refute ∀: counterexample; refute ∃: prove negation for all x.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 67,
+        "endLine": 67
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "PARTIAL (MC-1: quantifier order commutes) → \"QUANTIFIER ORDER changes the claim fundamentally. Draw the grid model: domain {1,2,3}, R(x,y) means x divides y. ∀x∃y R(x,y): for each row x, some y in that row works. For x=1: y=1✓. For x=2: y=2✓. For x=3: y=3✓. TRUE. ∃y∀x R(x,y): some single column y works for ALL rows. Is there a y divisible by 1, 2, and 3? Yes: y=6 (if 6 is in domain). But if domain is {1,2,3}: y must be divisible by 1,2,3 simultaneously — no such y in {1,2,3}. FALSE. SAME predicate, DIFFERENT order → DIFFERENT truth values.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-17\",\"title\":\"PARTIAL (MC-1: quantifier order commutes) → \\\"QUANTIFIER ORDER changes the claim fundamentally. Draw the grid model: domain {1,2,3}, R(x,y) means x divides y. ∀x∃y R(x,y): for each row x, some y in that row works. For x=1: y=1✓. For x=2: y=2✓. For x=3: y=3✓. TRUE. ∃y∀x R(x,y): some single column y works for ALL rows. Is there a y divisible by 1, 2, and 3? Yes: y=6 (if 6 is in domain). But if domain is {1,2,3}: y must be divisible by 1,2,3 simultaneously — no such y in {1,2,3}. FALSE. SAME predicate, DIFFERENT order → DIFFERENT truth values.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 68,
+        "endLine": 68
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-18\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 69,
+        "endLine": 69
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "NO_RESPONSE → \"Negate: ¬(∀x∃y (x<y)). Step 1: ¬∀x → ∃x¬. Step 2: ¬∃y → ∀y¬. Step 3: ¬(x<y) → x≥y. Result: ∃x∀y(x≥y). English: there exists an integer x that is ≥ every integer — i.e., a largest integer. This is false over ℤ, confirming the original is true.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-19\",\"title\":\"NO_RESPONSE → \\\"Negate: ¬(∀x∃y (x<y)). Step 1: ¬∀x → ∃x¬. Step 2: ¬∃y → ∀y¬. Step 3: ¬(x<y) → x≥y. Result: ∃x∀y(x≥y). English: there exists an integer x that is ≥ every integer — i.e., a largest integer. This is false over ℤ, confirming the original is true.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 70,
+        "endLine": 70
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "CORRECT → \"Universal generalisation: prove P(x) for arbitrary x → conclude ∀x. Existential instantiation: fresh constant c from ∃x P(x). Counterexample refutes ∀, not ∃. Bounded quantifiers: ∀x<N is ∀x(x<N→). Negations push inward, flip quantifier type.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-20\",\"title\":\"CORRECT → \\\"Universal generalisation: prove P(x) for arbitrary x → conclude ∀x. Existential instantiation: fresh constant c from ∃x P(x). Counterexample refutes ∀, not ∃. Bounded quantifiers: ∀x<N is ∀x(x<N→). Negations push inward, flip quantifier type.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 98,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "PARTIAL (MC-2: negation flips predicate only) → \"Negating a quantified statement requires TWO simultaneous changes: (1) the quantifier type FLIPS (∀↔∃); (2) the predicate is NEGATED. Think of De Morgan: ¬(P∧Q)=¬P∨¬Q flips ∧ to ∨; analogously ¬∀xP(x) flips ∀ to ∃ AND negates P(x). Drill: ¬(∀x∃y(R(x,y)∧x<y)). Outer quantifier ∀→∃: ∃x. Inner ∃→∀: ∀y. Predicate: ¬(R(x,y)∧x<y)=¬R(x,y)∨x≥y. Result: ∃x∀y(¬R(x,y)∨x≥y).\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"PARTIAL (MC-2: negation flips predicate only) → \\\"Negating a quantified statement requires TWO simultaneous changes: (1) the quantifier type FLIPS (∀↔∃); (2) the predicate is NEGATED. Think of De Morgan: ¬(P∧Q)=¬P∨¬Q flips ∧ to ∨; analogously ¬∀xP(x) flips ∀ to ∃ AND negates P(x). Drill: ¬(∀x∃y(R(x,y)∧x<y)). Outer quantifier ∀→∃: ∃x. Inner ∃→∀: ∀y. Predicate: ¬(R(x,y)∧x<y)=¬R(x,y)∨x≥y. Result: ∃x∀y(¬R(x,y)∨x≥y).\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 99,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-22\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 100,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/teaching_action_meta/TA-23",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "NO_RESPONSE → \"Prove: ∀m∀n(m and n both odd → m·n is odd). Let m,n be arbitrary odd integers. Then m=2a+1 and n=2b+1 for some integers a,b (existential instantiation from 'odd'). m·n=(2a+1)(2b+1)=4ab+2a+2b+1=2(2ab+a+b)+1. This is odd (integer 2ab+a+b times 2, plus 1). Since m,n were arbitrary: ∀m∀n(odd(m)∧odd(n)→odd(m·n)). ✓\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-23\",\"title\":\"NO_RESPONSE → \\\"Prove: ∀m∀n(m and n both odd → m·n is odd). Let m,n be arbitrary odd integers. Then m=2a+1 and n=2b+1 for some integers a,b (existential instantiation from 'odd'). m·n=(2a+1)(2b+1)=4ab+2a+2b+1=2(2ab+a+b)+1. This is odd (integer 2ab+a+b times 2, plus 1). Since m,n were arbitrary: ∀m∀n(odd(m)∧odd(n)→odd(m·n)). ✓\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-23",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 101,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "math.disc.predicate-logic-disc/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.predicate-logic-disc",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Translate each to predicate logic (domain = integers): (a) \"Some integer is divisible by every positive integer\"; (b) \"For every prime p, there is a prime q>p\"; (c) \"No integer equals its own square except 0 and 1\"; (d) \"There exist integers m, n such that m²+n²=5.\"\n2. Negate each statement and simplify to a statement without leading negations: (a) ∀x(P(x)→Q(x)); (b) ∃x∀y(R(x,y)∨S(y)); (c) ∀x∃!y T(x,y).\n3. Prove: ∀n∈ℤ, if n² is odd then n is odd. (Use proof by contrapositive: assume n is even, show n² is even. Translate using quantifiers explicitly.)\n4. Refute each claim by finding the sharpest counterexample: (a) ∀x∈ℝ, x²≥x; (b) ∀m,n∈ℤ, if m and n are divisible by 3 then m+n is divisible by 9.\n5. Let D = {1,2,3,4,5}. For each, determine truth value and justify: (a) ∀x∈D ∃y∈D (x+y=6); (b) ∃x∈D ∀y∈D (x·y=y); (c) ∀x∈D ∀y∈D (x<y → x²<y²).\n\n**P55 — Reflect & Consolidate:** \"∀x P(x): all; ∃x P(x): some. ¬∀xP=∃x¬P; ¬∃xP=∀x¬P. Quantifier order matters: ∀x∃y ≠ ∃y∀x. Prove ∀: arbitrary element. Prove ∃: exhibit. Refute ∀: counterexample. Refute ∃: prove ∀¬. Nested quantifiers negate inward one step at a time, flipping each quantifier type.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.found.predicate-logic):**\n(a) Completeness of first-order logic: Gödel's Completeness Theorem states that a first-order sentence φ is a logical tautology (true in every model) iff φ has a formal proof. In contrast, Gödel's Incompleteness Theorem says any consistent first-order theory extending Peano Arithmetic has true sentences with no proof. Explain the apparent paradox: how can logic be both complete (valid=provable) and incomplete (some truths have no proofs in specific theories)? (b) Quantifier alternation and complexity: a Π₁ statement (∀x P(x) with P decidable) is falsifiable (one counterexample); a Σ₁ statement (∃x P(x) with P decidable) is verifiable (one witness). A Π₂ statement (∀x∃y R(x,y)) requires both: for every x, find a witness y. The halting problem is a Σ₁ statement (∃ computation that halts). The Riemann Hypothesis is Π₁ (for all s with Re(s)=1/2, ζ(s)≠0) with P computably checkable. Explain why the quantifier complexity of a statement determines its verifiability/falsifiability structure. (c) Decision procedures: the first-order theory of (ℤ,+,<) (Presburger arithmetic, no multiplication) is decidable — every sentence has an algorithmic truth value. Adding multiplication gives Peano Arithmetic, which is undecidable (Gödel). Connect the expressiveness gained by multiplication to the loss of decidability and contrast with propositional logic, which has SAT as NP-complete but decidable.\n\n**P75 — Mastery Assessment:**\n\"(a) Translate and evaluate (domain = real numbers): 'For every ε>0 there exists δ>0 such that |x−a|<δ implies |f(x)−L|<ε.' This is the definition of lim_{x→a} f(x)=L. Write the negation (definition of 'f has no limit L at a') and give its English meaning. (b) Prove using universal generalisation: ∀n∈ℕ, n²+n is even. (c) Determine truth and falsity and give evidence: (i) ∀x∈ℝ ∃y∈ℝ (xy=1); (ii) ∃y∈ℝ ∀x∈ℝ (xy=1). (d) Negate completely, pushing all ¬ inward: ¬(∀x>0)(∃y)(∀z<y)(P(x,z) → ¬Q(x,z)).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW nested-quantifier ordering and the full negation-pushdown procedure\n- Score ≤ 3/5 → PREREQUISITE GAP in math.found.predicate-logic or math.disc.propositional-logic; reassign\n\n**P78 — Completion:** Predicate Logic in Discrete Mathematics certified. Student translates multi-quantifier English statements into first-order logic; correctly negates by applying De Morgan laws for quantifiers; identifies when quantifier order changes meaning; constructs proofs using universal generalisation and existential instantiation; and refutes universals with counterexamples and existentials with exhaustive negations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.predicate-logic-disc.md",
+        "startLine": 115,
+        "endLine": 139
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,244 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.divide-conquer-recurrence-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.divide-conquer-recurrence",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c393cc11b5e140ac7c55b86b1a176dceeddcff4f67065cb4b7d77f1fe9c45a1f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md": "sha256:cd556250b1fcc97cf7820f7c004a186ee33994f91bb65f5a244526de7a43627e"
+    },
+    "assetCount": 8,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.disc.divide-conquer-recurrence",
+    "name": "Divide and Conquer Recurrences",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.recurrence-relation",
+      "math.alg.logarithm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.divide-conquer-recurrence-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.divide-conquer-recurrence (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md": "sha256:cd556250b1fcc97cf7820f7c004a186ee33994f91bb65f5a244526de7a43627e"
+      },
+      "contentHash": "sha256:aca8fc973b08cd31658a28b39d13793b3ec678881ca2b35f91678ef292fe5381",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.divide-conquer-recurrence.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.divide-conquer-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.divide-conquer-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.divide-conquer-recurrence.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.divide-conquer-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.divide-conquer-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.divide-conquer-recurrence.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.divide-conquer-recurrence"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.divide-conquer-recurrence\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Learning Objective",
+      "content": "The student sets up the divide-and-conquer recurrence T(n) = aT(n/b) + f(n) for a given algorithm (identifying a subproblems of size n/b with combination cost f(n)); applies all three cases of the Master Theorem to obtain closed-form Θ-bounds; recognises when the theorem does not apply (non-polynomial f(n), non-constant a/b); verifies results on canonical examples (merge sort T(n)=2T(n/2)+Θ(n)→Θ(n log n), binary search T(n)=T(n/2)+Θ(1)→Θ(log n), Karatsuba T(n)=3T(n/2)+Θ(n)→Θ(n^{log₂3})); and applies the Akra–Bazzi extension for unequal subproblem sizes.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "MASTER-THEOREM-ALWAYS-APPLIES",
+      "content": "| MC-1 | MASTER-THEOREM-ALWAYS-APPLIES | Student applies the Master Theorem to recurrences outside its domain — non-polynomial f(n) (e.g. f(n)=n log n falls on the Case 2 boundary and requires logarithmic adjustment; f(n)=2ⁿ is clearly non-polynomial and the theorem gives no answer), unequal partition sizes (T(n)=T(n/3)+T(2n/3)+n), or non-constant a or b | Type 5 — instruction-induced (the Master Theorem is presented as the universal divide-and-conquer solver; its applicability conditions are stated but never drilled as hard checks; students reach for it automatically without verifying f(n) is polynomial and the split is uniform) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "WRONG-CRITICAL-EXPONENT",
+      "content": "| MC-2 | WRONG-CRITICAL-EXPONENT | Student computes log_b a incorrectly — confusing a and b (uses log_a b instead of log_b a), or forgetting that the critical exponent is log_b a and not a/b or a−b | Type 4 — notation-induced (the formula T(n)=aT(n/b)+f(n) has a and b appearing symmetrically to the eye; the asymmetric role they play in log_b a is counter-intuitive; a numerical example: a=8, b=2 gives log₂ 8=3, not log₈ 2=1/3 — the two values differ by a factor of 9) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "CASE-BOUNDARY-CONFUSION",
+      "content": "| MC-3 | CASE-BOUNDARY-CONFUSION | Student confuses the three Master Theorem cases: applies Case 1 when f(n) is polynomially smaller than n^{log_b a} but uses the wrong direction; conflates Case 1 (f smaller, answer is n^{log_b a}) with Case 3 (f larger, answer is f(n)) | Type 4 — notation-induced (Cases 1 and 3 both involve a polynomial gap between f(n) and n^{log_b a} but in opposite directions; students memorise the formula structure without anchoring which case applies when; the \"if f is smaller, the recursion tree dominates; if f is larger, the root dominates\" intuition from the tree picture is the antidote but is rarely emphasised) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Case 1:",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Case 1:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Case 2:",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Case 2:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 49,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "Case 3:",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Case 3:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 50,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "math.disc.divide-conquer-recurrence/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.divide-conquer-recurrence",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Apply the Master Theorem to each: (a) T(n)=5T(n/5)+n; (b) T(n)=7T(n/2)+n²; (c) T(n)=3T(n/9)+1; (d) T(n)=T(n/2)+log n; (e) T(n)=2T(n/2)+n log n. Identify the case and state the Θ-bound.\n2. The Strassen matrix multiplication algorithm computes a product of two n×n matrices using 7 multiplications of n/2×n/2 matrices plus O(n²) additions. Write its recurrence and apply the Master Theorem to show T(n)=Θ(n^{log₂7}).\n3. For the non-uniform recurrence T(n)=T(n/3)+T(2n/3)+n, use the recursion tree method to show T(n)=O(n log n). (Hint: show every level costs exactly n and count the number of levels.)\n4. Use the substitution method to prove T(n)=2T(⌊n/2⌋)+n=O(n log n). Be careful with the floor; assume T(1)=1 and show the inductive step closes with a specific choice of constant c.\n5. Algorithm X solves a problem of size n by dividing it into a=4 subproblems of size n/2 and doing Θ(n²) work to combine. Algorithm Y divides into 2 subproblems of size n/2 with Θ(n²) work. Compare their asymptotic complexities and explain which is faster and why.\n\n**P55 — Reflect & Consolidate:** \"T(n)=aT(n/b)+f(n): c*=log_b a. Case 1: f polynomially smaller → Θ(n^{c*}). Case 2: f matches n^{c*}·log^k → Θ(n^{c*}·log^{k+1}n). Case 3: f polynomially larger + regularity → Θ(f(n)). Non-uniform splits: Akra–Bazzi or tree. Merge sort: Case 2, Θ(n log n). Binary search: Case 2, Θ(log n). Karatsuba: Case 1, Θ(n^{log₂3}).\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) The Akra–Bazzi theorem: prove that for T(n)=aT(n/b)+f(n) with p=log_b a, the integral formula T(n)=Θ(nᵖ(1+∫₁ⁿ f(u)/u^{p+1}du)) reduces to the three Master Theorem cases when f(n)=nᵈ: verify Case 1 (d<p → integral converges to a constant → T=Θ(nᵖ)), Case 2 (d=p → integral gives log n → T=Θ(nᵖ log n)), Case 3 (d>p → integral grows as n^{d−p} → T=Θ(nᵈ)). (b) Lower-bound matching: the Ω lower bound for merge sort is Ω(n log n) via the comparison-based sorting lower bound (any comparison tree for n elements has at least n! leaves → depth ≥ log₂(n!), and Stirling gives log₂(n!)=Θ(n log n)). Explain why this lower bound and the Master-Theorem upper bound Θ(n log n) together prove merge sort is optimal. (c) Integer multiplication history: the grade-school algorithm runs in Θ(n²) (two n-digit numbers → n² digit multiplications). Karatsuba uses 3 multiplications of ⌈n/2⌉-digit numbers → Θ(n^{log₂3}≈n^{1.585}). The Schönhage–Strassen algorithm achieves Θ(n log n log log n) via FFT-based polynomial multiplication. Describe the mathematical structure that lets FFT replace the 3-multiplication divide-and-conquer with a completely different paradigm.\n\n**P75 — Mastery Assessment:**\n\"(a) Solve T(n)=4T(n/2)+n² log n completely, identifying the case and finding the Θ-bound. (b) A recursive algorithm for the closest-pair-of-points problem has recurrence T(n)=2T(n/2)+Θ(n). State the bound and identify which sorting step makes the combination cost O(n). (c) Consider T(n)=T(n−1)+n. Is this a divide-and-conquer recurrence? Apply the appropriate method (not Master Theorem) and find T(n)=Θ(n²). Explain why Master Theorem doesn't apply. (d) An algorithm divides a problem into 3 subproblems of sizes n/4, n/4, n/2 with O(n) combination. Use Akra–Bazzi to find p, then compute T(n).\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the Master Theorem case identification and Akra–Bazzi integral formula\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.recurrence-relation or math.alg.logarithm; reassign\n\n**P78 — Completion:** Divide and Conquer Recurrences certified. Student sets up T(n)=aT(n/b)+f(n) from algorithm descriptions; identifies a, b, f(n) and computes c*=log_b a; applies all three Master Theorem cases; recognises applicability limits; uses the recursion tree and substitution as alternatives; and applies Akra–Bazzi for non-uniform splits.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.divide-conquer-recurrence.md",
+        "startLine": 103,
+        "endLine": 127
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

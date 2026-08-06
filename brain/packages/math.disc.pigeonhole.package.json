@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.pigeonhole-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.pigeonhole",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7ef11d13e42082c8e6a02e95e0618b5557b9200486ff2b541885fd398b2c56d7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.pigeonhole.md": "sha256:998f07c9cec03cf57308bef2288a0a32e45f72629576ad4fad15465f154713a3"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.pigeonhole",
+    "name": "Pigeonhole Principle",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.counting-principles"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.pigeonhole-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.pigeonhole (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.pigeonhole.md": "sha256:998f07c9cec03cf57308bef2288a0a32e45f72629576ad4fad15465f154713a3"
+      },
+      "contentHash": "sha256:e9a6807366c0eb833b7bbfdd2f3431569937d855bf659dffa8893714199a93d2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.pigeonhole.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.pigeonhole.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.pigeonhole"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.pigeonhole\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.pigeonhole/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Learning Objective",
+      "content": "The student states and applies the pigeonhole principle in its basic form (n+1 objects in n holes → some hole has ≥2) and generalised form (m objects in n holes → some hole has ≥⌈m/n⌉); sets up the pigeons and holes correctly for a given problem by identifying the objects and the categories; applies the principle to number theory (repeated remainders, Dirichlet approximation), combinatorics (repeated sum/difference, colouring), and the birthday problem; and recognises that the principle is non-constructive (guarantees existence without finding the specific hole).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "PIGEONHOLE-IS-A-FORMULA-NOT-AN-ARGUMENT",
+      "content": "| MC-1 | PIGEONHOLE-IS-A-FORMULA-NOT-AN-ARGUMENT | Student memorises \"n+1 into n gives ≥2 in one hole\" as a formula and applies it mechanically without identifying the pigeons and holes; fails on non-obvious problems where the objects and categories require creative definition | Type 5 — instruction-induced (the principle is always stated formally first, then examples follow; students learn to recognise the n+1→n pattern but not the meta-skill of CHOOSING the categories cleverly for the problem at hand — e.g., using intervals as holes or remainder classes as holes) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "PIGEONHOLE-GUARANTEES-THE-MAXIMUM",
+      "content": "| MC-2 | PIGEONHOLE-GUARANTEES-THE-MAXIMUM | Student thinks ⌈m/n⌉ is an exact value for the maximum category size, not a lower bound; says \"some hole has exactly ⌈m/n⌉ objects\"; misses that the principle only guarantees AT LEAST ⌈m/n⌉, not exactly — the actual maximum could be much larger | Type 4 — notation-induced (⌈m/n⌉ is written as a single value; students treat it as an equality constraint, not a floor; the \"≥\" in \"some hole has ≥⌈m/n⌉\" is underemphasised compared to computing the numerical answer) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "THE-PRINCIPLE-FINDS-THE-COLLISION",
+      "content": "| MC-3 | THE-PRINCIPLE-FINDS-THE-COLLISION | Student believes the pigeonhole principle identifies WHICH objects share a category, or which hole is the full one; uses it to find a specific example rather than just proving one exists | Type 1 — overgeneralisation (after seeing the principle applied in examples where the collision is obvious, students assume the proof identifies it; in non-constructive applications — e.g., Dirichlet's approximation theorem, existence of two points at integer distance — the principle only guarantees existence; the specific collision may be unknown) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Birthday problem (worst case):",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Birthday problem (worst case):\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Same remainder mod 5:",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Same remainder mod 5:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Repeated digit in decimal:",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Repeated digit in decimal:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "Points at integer distance:",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Points at integer distance:\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.disc.pigeonhole/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.pigeonhole",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Prove: among any n+1 integers from {1, 2, …, 2n}, some two integers are consecutive (differ by 1). Set up the pigeons and holes explicitly, then apply the principle.\n2. Dirichlet approximation: use the pigeonhole principle to show that for any irrational α, there are infinitely many fractions p/q (in lowest terms) satisfying |α − p/q| < 1/q². (Hint: apply the theorem for N=1,2,3,… and argue the approximations must be distinct.)\n3. A chess tournament has 11 players who each play every other player exactly once. Show that at some point during the tournament, two players have played the same number of games so far.\n4. Prove Erdős-Szekeres: any sequence of more than (r−1)(s−1) distinct reals has an increasing subsequence of length r or a decreasing subsequence of length s. (Use the labelling argument from A02.)\n5. Among any 10 integers, some two have the property that their difference is divisible by 9. Prove this and find the minimum number of integers guaranteeing that some three have pairwise differences divisible by 9.\n\n**P55 — Reflect & Consolidate:** \"Pigeonhole: m objects, n holes → some hole ≥⌈m/n⌉. Non-constructive. Key skill: creative hole design (remainders, intervals, parity classes). Dirichlet: N+1 fractional parts in N intervals → rational approximation within 1/(qN). Erdős-Szekeres: rs+1 → monotone subsequence r+1 or s+1.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Probabilistic pigeonhole: the expected number of objects in a uniformly random hole when m balls are placed uniformly in n bins is m/n. By the first moment method (linearity of expectation), prove that the maximum load is ≥m/n (a strengthening of the generalised pigeonhole). Extend to show: if m = 2n log n balls are placed in n bins, the maximum load is at least 2 log n with probability →1 (Chernoff bound sketch). (b) Ramsey numbers and pigeonhole: prove R(3,3)=6 by showing: (1) in K₆ with edges 2-coloured red/blue, some vertex has ≥3 edges of the same colour (pigeonhole on degree 5 split into 2 colours); (2) from those 3 edges, either a triangle of that colour exists or the opposite colour gives a triangle. Extend to prove R(3,3)≤6. (c) Van der Waerden's theorem (statement only): for any r-colouring of {1,…,N} for N large enough (N≥W(k;r)), there is a monochromatic arithmetic progression of length k. Explain why the pigeonhole principle alone cannot prove this (the holes are not finitely many in a direct sense) and what the compactness argument that is used instead says about the limits of the principle.\n\n**P75 — Mastery Assessment:**\n\"(a) Prove: among any 5 points with integer coordinates in the plane, some two have a midpoint with integer coordinates. (b) Show that in any group of 13 people, either 4 people were born in the same month, or 4 people were born in different seasons. (Use generalised pigeonhole twice.) (c) A student claims: 'By pigeonhole, among any 366 people some 2 share a birthday — so among 732 people some 3 share a birthday.' Explain why this reasoning is WRONG, and give the correct minimum number of people needed to guarantee 3 share a birthday. (d) Prove Dirichlet's theorem: for any real α and any N, ∃ integers p, q with 1 ≤ q ≤ N and |qα − p| < 1/N. (Write the full argument using the N+1 fractional parts {0},{α},…,{Nα} and N equal subintervals.)\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the generalised form (⌈m/n⌉) and the creative hole-design step\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.counting-principles; reassign\n\n**P78 — Completion:** Pigeonhole Principle certified. Student sets up the pigeons and holes for both standard and creative problems; applies both basic and generalised forms; identifies the non-constructive nature of the conclusion; uses the principle in number-theoretic and geometric contexts; and applies the Dirichlet approximation theorem as a pigeonhole application.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.pigeonhole.md",
+        "startLine": 95,
+        "endLine": 119
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

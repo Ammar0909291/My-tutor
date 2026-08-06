@@ -1,0 +1,893 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.graph-coloring-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.graph-coloring",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e1f36c3199d7743ab8fa1da1fa0da4aa80c44cfaa5b684d9f47d3af6e3f0a920",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.graph-coloring.md": "sha256:521cb596cc67efd0c2d516319dd09f57ab7773d762e6f22bcac94f7b5334f1b5"
+    },
+    "assetCount": 27,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 22,
+      "mastery_probe": 1
+    },
+    "ruleCount": 22
+  },
+  "concept": {
+    "conceptId": "math.disc.graph-coloring",
+    "name": "Graph Coloring",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.graph-coloring-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.graph-coloring (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.graph-coloring.md": "sha256:521cb596cc67efd0c2d516319dd09f57ab7773d762e6f22bcac94f7b5334f1b5"
+      },
+      "contentHash": "sha256:51313e5d2b7de6ee5fb2843871bfa1a7226ed10c3c3c6896a5b7712df8d509c3",
+      "ruleCount": 22,
+      "bandCounts": {
+        "3": 22
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-11",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-11",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-12",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-12 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-13",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-13",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-14",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-14",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-15",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-15",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-16",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-16",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-17",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-17",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-18",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-18",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-19",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-19",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-20",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-20 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-21",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-21",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-22",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-22",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.graph-coloring.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.graph-coloring.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.graph-coloring"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.graph-coloring\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.graph-coloring/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Learning Objective",
+      "content": "The student defines proper vertex coloring and the chromatic number χ(G); applies the greedy coloring algorithm and identifies that greedy gives an upper bound ≤ Δ(G)+1 (maximum degree plus one); states Brooks' theorem (χ(G) ≤ Δ(G) unless G is a complete graph or odd cycle); recognises that χ(Kₙ)=n, χ(bipartite)≤2 (bipartite iff 2-colorable), χ(odd cycle)=3, χ(even cycle)=2; states the Four Color Theorem (every planar graph is 4-colorable); computes the chromatic polynomial P(G,k) for trees and small graphs; and distinguishes vertex, edge, and list colorings.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "CHROMATIC-NUMBER-EQUALS-GREEDY-COLORS",
+      "content": "| MC-1 | CHROMATIC-NUMBER-EQUALS-GREEDY-COLORS | Student believes the number of colors produced by the greedy algorithm equals χ(G); applies greedy and reports that number as the exact chromatic number without verifying it's a lower bound too; misses that greedy is order-dependent and may use more colors than necessary | Type 5 — instruction-induced (greedy coloring is the first algorithm taught; it always produces a valid coloring; students conflate \"a valid coloring\" with \"the minimum coloring\"; the gap: greedy gives χ(G) ≤ greedy-count ≤ Δ+1, not χ(G) = greedy-count — the lower bound proof needs a different argument, e.g. clique number ω(G) ≤ χ(G)) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "FOUR-COLOR-THEOREM-IS-OBVIOUS",
+      "content": "| MC-2 | FOUR-COLOR-THEOREM-IS-OBVIOUS | Student treats the Four Color Theorem as trivially obvious (\"just use four colors\") without grasping that it is one of the deepest results in combinatorics and that no short human-verifiable proof exists; or conversely, tries to prove it by hand in a few lines | Type 1 — overgeneralisation (students are told \"every planar graph needs ≤4 colors\" and think \"I can see why\"; in fact the proof requires checking 1,936 configurations by computer and is the first major theorem proved this way; the real difficulty is lower-bounding — proving some planar graph needs exactly 4 — not upper-bounding) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "CHROMATIC-POLYNOMIAL-IS-CHROMATIC-NUMBER",
+      "content": "| MC-3 | CHROMATIC-POLYNOMIAL-IS-CHROMATIC-NUMBER | Student confuses P(G,k) (the number of proper colorings using AT MOST k colors, a polynomial in k) with χ(G) (the minimum k for which P(G,k)>0); says \"the chromatic polynomial is 3\" when they mean χ(G)=3; or tries to substitute k=1 into P(G,k) to find the chromatic number | Type 4 — notation-induced (P(G,k) and χ(G) use the same variable k; the polynomial P evaluates to a number for each specific k; the chromatic number χ(G) is the smallest k where P(G,k)>0, which students must find by solving P(G,k)=0, not by substituting a value they already know) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Clique lower bound: χ(G) ≥ ω(G) (clique number — maximum complete subgraph size). (A k-clique needs k distinct colors.)",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Clique lower bound: χ(G) ≥ ω(G) (clique number — maximum complete subgraph size). (A k-clique needs k distinct colors.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 43,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Odd cycle: χ(odd cycle) = 3 (bipartiteness breaks down).",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Odd cycle: χ(odd cycle) = 3 (bipartiteness breaks down).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 44,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Greedy upper bound: χ(G) ≤ Δ(G)+1 (order vertices arbitrarily; each vertex has at most Δ(G) neighbors already colored → at most Δ(G) forbidden colors → one of Δ(G)+1 colors is always available).",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Greedy upper bound: χ(G) ≤ Δ(G)+1 (order vertices arbitrarily; each vertex has at most Δ(G) neighbors already colored → at most Δ(G) forbidden colors → one of Δ(G)+1 colors is always available).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 47,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "**Brooks' theorem:** For a connected graph G that is NOT a complete graph Kₙ and NOT an odd cycle, χ(G) ≤ Δ(G). (The maximum-degree bound can be tightened by 1 for \"generic\" graphs.)",
+      "content": "{\"id\":\"TA-4\",\"title\":\"**Brooks' theorem:** For a connected graph G that is NOT a complete graph Kₙ and NOT an odd cycle, χ(G) ≤ Δ(G). (The maximum-degree bound can be tightened by 1 for \\\"generic\\\" graphs.)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 48,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Trees and forests: χ = 2 (bipartite).",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Trees and forests: χ = 2 (bipartite).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 51,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Bipartite graphs: χ = 2 iff no odd cycle.",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Bipartite graphs: χ = 2 iff no odd cycle.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Complete graph Kₙ: χ = n.",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Complete graph Kₙ: χ = n.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Cycle Cₙ: χ = 2 if n even; 3 if n odd.",
+      "content": "{\"id\":\"TA-8\",\"title\":\"Cycle Cₙ: χ = 2 if n even; 3 if n odd.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 54,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Petersen graph: χ = 3.",
+      "content": "{\"id\":\"TA-9\",\"title\":\"Petersen graph: χ = 3.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 55,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Planar graphs: χ ≤ 4 (Four Color Theorem, 1976, Appel–Haken; computer-assisted).",
+      "content": "{\"id\":\"TA-10\",\"title\":\"Planar graphs: χ ≤ 4 (Four Color Theorem, 1976, Appel–Haken; computer-assisted).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 56,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-11",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "CORRECT → \"χ(G)=min colors needed. Greedy ≤ Δ+1 (upper bound). Brooks: ≤ Δ for non-Kₙ non-odd-cycle. Lower bound: χ≥ω. Bipartite↔χ≤2. Four Color: planar→χ≤4.\" → A02",
+      "content": "{\"id\":\"TA-11\",\"title\":\"CORRECT → \\\"χ(G)=min colors needed. Greedy ≤ Δ+1 (upper bound). Brooks: ≤ Δ for non-Kₙ non-odd-cycle. Lower bound: χ≥ω. Bipartite↔χ≤2. Four Color: planar→χ≤4.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-11",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-12",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "PARTIAL (MC-1: greedy = chromatic number) → \"Greedy gives A valid coloring but NOT necessarily the MINIMUM. Counter-example: for a path P₃ (1−2−3), the greedy with ordering 1,3,2 might give colors A,A,B (2 colors=χ(P₃)=2, fine). But for C₅ ordered 1,2,3,4,5: colors A,B,A,B,A — vertex 5 is adjacent to 4 (B) and 1 (A), forcing a third color C → greedy gives 3 = χ(C₅). For a different graph, greedy might give more: a 5-vertex graph where greedy gives 4 but χ=3. To PROVE χ(G)=k you need: (1) exhibit a valid k-coloring [upper bound], (2) prove no (k−1)-coloring exists [lower bound — usually via a k-clique or odd-cycle argument].\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-12\",\"title\":\"PARTIAL (MC-1: greedy = chromatic number) → \\\"Greedy gives A valid coloring but NOT necessarily the MINIMUM. Counter-example: for a path P₃ (1−2−3), the greedy with ordering 1,3,2 might give colors A,A,B (2 colors=χ(P₃)=2, fine). But for C₅ ordered 1,2,3,4,5: colors A,B,A,B,A — vertex 5 is adjacent to 4 (B) and 1 (A), forcing a third color C → greedy gives 3 = χ(C₅). For a different graph, greedy might give more: a 5-vertex graph where greedy gives 4 but χ=3. To PROVE χ(G)=k you need: (1) exhibit a valid k-coloring [upper bound], (2) prove no (k−1)-coloring exists [lower bound — usually via a k-clique or odd-cycle argument].\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-12",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-13",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-13\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-13",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-14",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "NO_RESPONSE → \"K₄ coloring: vertex 1 gets A; vertex 2 (adj to 1) gets B; vertex 3 (adj to 1,2) gets C; vertex 4 (adj to 1,2,3) gets D. 4 colors needed. Is χ(K₄)=4? Lower bound: K₄ is itself a 4-clique → ω(K₄)=4 → χ≥4. Upper bound: 4-coloring just exhibited. → χ(K₄)=4. ✓\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-14\",\"title\":\"NO_RESPONSE → \\\"K₄ coloring: vertex 1 gets A; vertex 2 (adj to 1) gets B; vertex 3 (adj to 1,2) gets C; vertex 4 (adj to 1,2,3) gets D. 4 colors needed. Is χ(K₄)=4? Lower bound: K₄ is itself a 4-clique → ω(K₄)=4 → χ≥4. Upper bound: 4-coloring just exhibited. → χ(K₄)=4. ✓\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-14",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-15",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Tree on n vertices: P(Tₙ,k) = k(k−1)ⁿ⁻¹.",
+      "content": "{\"id\":\"TA-15\",\"title\":\"Tree on n vertices: P(Tₙ,k) = k(k−1)ⁿ⁻¹.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-15",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-16",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Cycle Cₙ: P(Cₙ,k) = (k−1)ⁿ + (−1)ⁿ(k−1).",
+      "content": "{\"id\":\"TA-16\",\"title\":\"Cycle Cₙ: P(Cₙ,k) = (k−1)ⁿ + (−1)ⁿ(k−1).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-16",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-17",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "P(K₃,k) = k(k−1)(k−2).",
+      "content": "{\"id\":\"TA-17\",\"title\":\"P(K₃,k) = k(k−1)(k−2).\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-17",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-18",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "Finding χ: χ(G) = smallest positive integer k with P(G,k) > 0.",
+      "content": "{\"id\":\"TA-18\",\"title\":\"Finding χ: χ(G) = smallest positive integer k with P(G,k) > 0.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-18",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-19",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "CORRECT → \"P(G,k): deletion-contraction, P(Tₙ,k)=k(k−1)ⁿ⁻¹. Vizing: χ'∈{Δ,Δ+1}. List coloring: χₗ≥χ. Four Color Theorem: χ≤4 for planar graphs.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-19\",\"title\":\"CORRECT → \\\"P(G,k): deletion-contraction, P(Tₙ,k)=k(k−1)ⁿ⁻¹. Vizing: χ'∈{Δ,Δ+1}. List coloring: χₗ≥χ. Four Color Theorem: χ≤4 for planar graphs.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-19",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-20",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "PARTIAL (MC-3: polynomial confused with chromatic number) → \"P(G,k) is a POLYNOMIAL in k — it gives the COUNT of valid k-colorings for each specific k value. The chromatic number χ(G) is a single INTEGER — the smallest k for which P(G,k)>0. For K₃: P(K₃,k)=k(k−1)(k−2). At k=1: P=0 (can't color triangle with 1 color). At k=2: P=0 (can't color triangle with 2 colors). At k=3: P=6 (6 ways to 3-color K₃). So χ(K₃)=3. The chromatic polynomial is a FUNCTION, the chromatic number is its smallest positive root.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-20\",\"title\":\"PARTIAL (MC-3: polynomial confused with chromatic number) → \\\"P(G,k) is a POLYNOMIAL in k — it gives the COUNT of valid k-colorings for each specific k value. The chromatic number χ(G) is a single INTEGER — the smallest k for which P(G,k)>0. For K₃: P(K₃,k)=k(k−1)(k−2). At k=1: P=0 (can't color triangle with 1 color). At k=2: P=0 (can't color triangle with 2 colors). At k=3: P=6 (6 ways to 3-color K₃). So χ(K₃)=3. The chromatic polynomial is a FUNCTION, the chromatic number is its smallest positive root.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-20",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-21",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-21\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-21",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/teaching_action_meta/TA-22",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "NO_RESPONSE → \"P(C₄,k): C₄ is 4-cycle. P(C₄,k)=(k−1)⁴+(−1)⁴(k−1)=(k−1)⁴+(k−1)=(k−1)[(k−1)³+1]. At k=2: (1)(2)=2 (two 2-colorings of a 4-cycle: ABAB and BABA). χ(C₄)=2 (even cycle). At k=1: (0)(1)=0 ✓.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-22\",\"title\":\"NO_RESPONSE → \\\"P(C₄,k): C₄ is 4-cycle. P(C₄,k)=(k−1)⁴+(−1)⁴(k−1)=(k−1)⁴+(k−1)=(k−1)[(k−1)³+1]. At k=2: (1)(2)=2 (two 2-colorings of a 4-cycle: ABAB and BABA). χ(C₄)=2 (even cycle). At k=1: (0)(1)=0 ✓.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-22",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.disc.graph-coloring/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.graph-coloring",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Compute χ(G) for each: (a) K₅; (b) K_{3,3} (complete bipartite); (c) C₇; (d) the Petersen graph (χ=3, prove it: exhibit a 3-coloring and show 2 is impossible since the graph contains an odd cycle). State the clique lower bound and an explicit coloring for each.\n2. Compute P(G,k) using deletion-contraction for the diamond graph (K₄ minus one edge). Find χ from the polynomial by identifying its smallest positive root.\n3. Brooks' theorem application: determine which connected graphs on 6 vertices with maximum degree 3 satisfy χ=3 vs χ=2. Identify the condition that lets you improve the Δ+1=4 bound to the Brooks bound of Δ=3 vs. the tighter χ=2 (bipartite) case.\n4. A compiler must assign registers to 5 variables; each pair that is simultaneously live must get different registers. The interference graph has edges: {a,b},{a,c},{b,c},{c,d},{d,e},{a,e}. Find χ of this interference graph — that is the minimum number of registers needed.\n5. Edge coloring: prove that K_{2n} (complete graph on an even number of vertices) has chromatic index χ'=2n−1. (Hint: exhibit a 1-factorization — a partition of the edges into perfect matchings.)\n\n**P55 — Reflect & Consolidate:** \"χ(G)=min colors. Upper bounds: greedy≤Δ+1, Brooks≤Δ (non-Kₙ, non-odd-cycle), Four Color≤4 for planar. Lower bounds: χ≥ω (clique), χ≥3 for odd cycles. P(G,k) counts k-colorings; χ=smallest positive root. Edge coloring: Vizing χ'∈{Δ,Δ+1}. Applications: register allocation, scheduling, frequency assignment.\"\n\n**P76 — Transfer Probe (Cross-link mode: math.graph.graph-coloring):**\n(a) Graph coloring and scheduling: given n courses and m pairs of courses that share students (cannot be scheduled simultaneously), model as a graph coloring problem and show the minimum number of time slots equals χ. If the conflict graph is interval-representable (an interval graph), show χ equals the maximum clique size (interval graphs are perfect graphs). (b) Perfect graphs: the Perfect Graph Theorem (Chudnovsky et al., 2006) states that a graph is perfect (χ(H)=ω(H) for every induced subgraph H) iff it contains no odd hole (induced odd cycle ≥5) and no odd antihole (complement of an odd cycle ≥5). Verify that bipartite graphs and chordal graphs are perfect, and that C₅ is not. (c) Fractional coloring: the fractional chromatic number χ_f(G) = inf{k/r : G is (k,r)-colorable}, where (k,r)-colorable means each vertex gets a set of r colors from {1,…,k} with adjacent vertices getting disjoint sets. Show χ_f(G) ≤ χ(G) and χ_f(C₅)=5/2 (fractional chromatic number of an odd cycle Cₙ is n/⌊n/2⌋).\n\n**P75 — Mastery Assessment:**\n\"(a) A map of 5 countries requires coloring so that adjacent countries get different colors. Model the dual graph (countries = vertices, shared border = edge). If country 3 is adjacent to all others, what can you immediately conclude about χ? Find χ of the specific graph K₁+C₄ (vertex v adjacent to all of C₄). (b) Compute P(C₄,k) using deletion-contraction and verify that χ(C₄)=2. (c) State and apply Brooks' theorem to the Petersen graph (Δ=3). Does Brooks' bound equal χ? (d) A frequency assignment problem requires assigning one of k radio frequencies to each of 6 transmitters so that transmitters within 50km of each other use different frequencies. The conflict graph is: 1-2, 1-3, 2-4, 3-4, 3-5, 4-6, 5-6. Find χ and exhibit an optimal coloring.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the two-part χ-proof structure and the deletion-contraction formula\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.graph; reassign\n\n**P78 — Completion:** Graph Coloring certified. Student defines proper coloring and chromatic number; proves χ bounds using clique lower bounds, greedy and Brooks upper bounds; states the Four Color Theorem; computes chromatic polynomials via deletion-contraction; states Vizing's theorem for edge coloring; and applies graph coloring to scheduling and register-allocation problems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.graph-coloring.md",
+        "startLine": 103,
+        "endLine": 127
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

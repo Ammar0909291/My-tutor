@@ -1,0 +1,417 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.stars-bars-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.stars-bars",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b663cfb3f86f4303c7eabdcb7ac3cfe9242ede301aeeebc815e3db504cab2649",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.stars-bars.md": "sha256:7a85dd0b8b1122d8653e18ea2230001bace8064b87e1975637f0747b391151c3"
+    },
+    "assetCount": 13,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 8,
+      "mastery_probe": 1
+    },
+    "ruleCount": 8
+  },
+  "concept": {
+    "conceptId": "math.disc.stars-bars",
+    "name": "Stars and Bars",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.combinations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.stars-bars-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.stars-bars (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.stars-bars.md": "sha256:7a85dd0b8b1122d8653e18ea2230001bace8064b87e1975637f0747b391151c3"
+      },
+      "contentHash": "sha256:4292dd349aa8650dc10f1b56bb628fde4d45ab41fe736c0ad0c06365aeada4c1",
+      "ruleCount": 8,
+      "bandCounts": {
+        "3": 8
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-2 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-6 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stars-bars.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stars-bars.md#TA-8",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stars-bars"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stars-bars\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.stars-bars/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.stars-bars",
+      "title": "Learning Objective",
+      "content": "The student applies the stars-and-bars technique to count the number of ways to distribute n identical objects among k distinct bins: C(n+k−1, k−1) for unrestricted distributions; C(n−k+k−1, k−1) = C(n−1, k−1) when each bin has at least one object; and handles upper-bound restrictions using inclusion-exclusion layered on top; translates word problems (integer solutions to equations, distributing coins, filling orders) into the stars-and-bars framework by identifying the \"stars\" and \"bars.\"",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.stars-bars",
+      "title": "STARS-BARS-FOR-DISTINCT-OBJECTS",
+      "content": "| MC-1 | STARS-BARS-FOR-DISTINCT-OBJECTS | Student applies C(n+k−1, k−1) when distributing DISTINCT (not identical) objects; forgets that stars-and-bars requires the objects to be INDISTINGUISHABLE (identical); for distinct objects, each distribution is a function from n objects to k bins, giving kⁿ arrangements | Type 5 — instruction-induced (stars-and-bars is taught immediately after permutations/combinations; the \"distributing objects\" framing sounds similar; students don't register that the formula changes fundamentally based on whether objects are identical or distinct) |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.stars-bars",
+      "title": "AT-LEAST-ONE-MEANS-REPLACE-n-BY-n+1",
+      "content": "| MC-2 | AT-LEAST-ONE-MEANS-REPLACE-n-BY-n+1 | Student handles the \"each bin has ≥1 object\" constraint by adding 1 to n instead of subtracting 1 from n; uses C(n+k, k−1) instead of C(n−1, k−1) | Type 4 — notation-induced (the constraint \"each bin gets at least 1\" is implemented by substituting yᵢ = xᵢ − 1 → Σyᵢ = n − k; students manipulate n − k → C((n−k)+k−1, k−1) = C(n−1, k−1), but routinely make sign errors because the algebra requires careful tracking of the substitution direction) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.stars-bars",
+      "title": "BARS-COUNT-EQUALS-BINS-COUNT",
+      "content": "| MC-3 | BARS-COUNT-EQUALS-BINS-COUNT | Student uses k bars instead of k−1 bars when setting up the formula; derives C(n+k, k) or C(n+k, n) instead of C(n+k−1, k−1) | Type 4 — notation-induced (for k bins, there are k−1 dividers — one between each adjacent pair of bins; k bins require k−1 dividers, not k; students add bars equal to the bin count rather than the bin-gap count, an off-by-one error that seems counter-intuitive until the one-row arrangement is visualised: [bin1 | bin2 | … | bink] has k−1 bars separating k regions) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "CORRECT → \"C(n+k−1,k−1) for identical objects in k bins (0 or more each). C(n−1,k−1) for at-least-1. Identical objects: stars-and-bars. Distinct objects: kⁿ or k! × …\" → A02",
+      "content": "{\"id\":\"TA-1\",\"title\":\"CORRECT → \\\"C(n+k−1,k−1) for identical objects in k bins (0 or more each). C(n−1,k−1) for at-least-1. Identical objects: stars-and-bars. Distinct objects: kⁿ or k! × …\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "PARTIAL (MC-3: uses k bars) → \"For k bins, there are k−1 DIVIDERS — draw a single row with k sections: [bin₁ | bin₂ | bin₃] uses 2 bars for 3 bins. In general, k bins need k−1 bars between adjacent bins. The formula is C(n+k−1, k−1), NOT C(n+k, k). Draw it: for n=3, k=2: total symbols = 3+1=4; arrange 1 bar among 4 positions: C(4,1)=4 ways. Check directly: (0,3),(1,2),(2,1),(3,0) — exactly 4. ✓\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-2\",\"title\":\"PARTIAL (MC-3: uses k bars) → \\\"For k bins, there are k−1 DIVIDERS — draw a single row with k sections: [bin₁ | bin₂ | bin₃] uses 2 bars for 3 bins. In general, k bins need k−1 bars between adjacent bins. The formula is C(n+k−1, k−1), NOT C(n+k, k). Draw it: for n=3, k=2: total symbols = 3+1=4; arrange 1 bar among 4 positions: C(4,1)=4 ways. Check directly: (0,3),(1,2),(2,1),(3,0) — exactly 4. ✓\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 62,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 63,
+        "endLine": 63
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "NO_RESPONSE → \"Count solutions to a+b+c+d=8, a,b,c,d≥0: n=8, k=4 bins. C(8+3,3)=C(11,3)=165. Now with all ≥1: substitute aᵢ=bᵢ+1, Σbᵢ=4, C(4+3,3)=C(7,3)=35.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"NO_RESPONSE → \\\"Count solutions to a+b+c+d=8, a,b,c,d≥0: n=8, k=4 bins. C(8+3,3)=C(11,3)=165. Now with all ≥1: substitute aᵢ=bᵢ+1, Σbᵢ=4, C(4+3,3)=C(7,3)=35.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 64,
+        "endLine": 64
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "CORRECT → \"Upper bound: inclusion-exclusion on top. Each Aᵢ (bin≥u+1): substitute yᵢ=xᵢ−(u+1), apply stars-and-bars. Sum alternates signs. Multiset coefficient = C(n+k−1,n).\" → Gate (P91)",
+      "content": "{\"id\":\"TA-5\",\"title\":\"CORRECT → \\\"Upper bound: inclusion-exclusion on top. Each Aᵢ (bin≥u+1): substitute yᵢ=xᵢ−(u+1), apply stars-and-bars. Sum alternates signs. Multiset coefficient = C(n+k−1,n).\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "PARTIAL (MC-1: stars-bars for distinct objects) → \"Stars-and-bars REQUIRES the objects to be IDENTICAL (interchangeable). If the objects are DISTINCT (labelled), each distribution is a FUNCTION from the set of n objects to the set of k bins. Number of such functions = kⁿ. Example: distributing 3 distinct coins into 4 piggy banks: 4³=64 ways. Distributing 3 IDENTICAL coins into 4 banks: C(3+3,3)=C(6,3)=20 ways. The problem statement must specify identical or distinct.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-6\",\"title\":\"PARTIAL (MC-1: stars-bars for distinct objects) → \\\"Stars-and-bars REQUIRES the objects to be IDENTICAL (interchangeable). If the objects are DISTINCT (labelled), each distribution is a FUNCTION from the set of n objects to the set of k bins. Number of such functions = kⁿ. Example: distributing 3 distinct coins into 4 piggy banks: 4³=64 ways. Distributing 3 IDENTICAL coins into 4 banks: C(3+3,3)=C(6,3)=20 ways. The problem statement must specify identical or distinct.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stars-bars",
+      "title": "NO_RESPONSE → \"How many ways to write 10 as an ordered sum of 4 non-negative integers? Same as distributing 10 into 4 bins: C(10+3,3)=C(13,3)=286. With each part at least 2: substitute xᵢ=yᵢ+2, Σyᵢ=2, C(2+3,3)=C(5,3)=10.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"NO_RESPONSE → \\\"How many ways to write 10 as an ordered sum of 4 non-negative integers? Same as distributing 10 into 4 bins: C(10+3,3)=C(13,3)=286. With each part at least 2: substitute xᵢ=yᵢ+2, Σyᵢ=2, C(2+3,3)=C(5,3)=10.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.disc.stars-bars/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.stars-bars",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. Count the non-negative integer solutions to x₁+x₂+x₃+x₄=12. Then count the positive integer solutions (each xᵢ≥1).\n2. A store has 4 flavours of ice cream. How many ways can a customer order a bowl with exactly 6 scoops? (Scoops of the same flavour are identical.)\n3. Count integer solutions to x₁+x₂+x₃=15 where 0≤xᵢ≤7 for each i. Use inclusion-exclusion.\n4. How many ways can 8 identical red balls and 6 identical blue balls be distributed into 3 distinct boxes? (Treat each colour independently and multiply.)\n5. A vending machine has 5 distinct buttons (beverages). A buyer purchases exactly 3 drinks (identical in price; distinguished only by which button was pressed). How many distinct purchase sequences are there? How many distinct purchase combinations (order doesn't matter)?\n\n**P55 — Reflect & Consolidate:** \"Identical objects in k bins: C(n+k−1,k−1). At-least-one: C(n−1,k−1). Identical ≠ distinct: for distinct objects use kⁿ (functions). Upper-bound restriction: inclusion-exclusion on top. Multiset size n from k types: C(n+k−1,n).\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Lattice path counting: the number of lattice paths from (0,0) to (m,n) using unit steps right (R) and up (U) is C(m+n,m). Show that this is the same as distributing m identical R-steps among n+1 \"columns\" (one per U-step plus start and end), connecting stars-and-bars to path counting. (b) Generating functions for stars-and-bars: the ordinary generating function for the number of ways to distribute any number of identical objects among k bins is 1/(1−x)ᵏ = Σ_{n≥0} C(n+k−1,k−1) xⁿ. Derive this by expanding each 1/(1−x) factor and multiplying. (c) Integer partition asymptotic: the number of integer partitions of n (identical objects in identical bins) satisfies p(n) ∼ (1/4n√3) exp(π√(2n/3)) (Hardy-Ramanujan). Contrast this with stars-and-bars C(n+k−1,k−1) ∼ nᵏ⁻¹/((k−1)!) for fixed k, showing that identical-bin counting grows exponentially faster than identical-object-in-distinct-bins counting.\n\n**P75 — Mastery Assessment:**\n\"(a) How many ways can 20 identical books be distributed among 5 students if each student must receive at least 2 books and at most 7 books? (b) A bag contains 12 identical red marbles, 8 identical blue marbles, and 5 identical green marbles. Count the number of ways to select a handful of 10 marbles. (c) How many non-negative integer solutions does x+y+z=25 have? How many with x≤10, y≤10, z≤10? (Use inclusion-exclusion for the second part.) (d) Classify each problem as: (i) distinct objects/distinct bins; (ii) identical objects/distinct bins; (iii) identical objects/identical bins; (iv) other. State the correct formula. Problems: arranging 5 books on a shelf; seating 5 people at 5 chairs; choosing 5 coins from a pile of identical pennies for distribution into 4 envelopes; partitioning 7 into 3 positive parts.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the identical-vs-distinct distinction and the at-least-one substitution\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.combinations; reassign\n\n**P78 — Completion:** Stars and Bars certified. Student derives and applies C(n+k−1,k−1) for identical objects in distinct bins; handles at-least-one constraints via substitution; applies inclusion-exclusion for upper-bound restrictions; distinguishes identical from distinct objects; and interprets the formula as counting multisets and lattice paths.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stars-bars.md",
+        "startLine": 100,
+        "endLine": 124
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

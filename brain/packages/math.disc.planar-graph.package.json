@@ -1,0 +1,485 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.planar-graph-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.planar-graph",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c3b5b8ab1f0a5e94f1dd1de07217f3b5e032ffbc7c20389c735e59f0916d46cd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.planar-graph.md": "sha256:3a2c24bf26c0d6aa65ccb88367aa0bd93a2bc0934552345a9d35a99bace7d01e"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 10,
+      "mastery_probe": 1
+    },
+    "ruleCount": 10
+  },
+  "concept": {
+    "conceptId": "math.disc.planar-graph",
+    "name": "Planar Graphs",
+    "difficultyRaw": "proficient",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.disc.graph"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.planar-graph-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.planar-graph (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.planar-graph.md": "sha256:3a2c24bf26c0d6aa65ccb88367aa0bd93a2bc0934552345a9d35a99bace7d01e"
+      },
+      "contentHash": "sha256:266e55ba72606f6c026926d48133a2ac875a688e5dae01d32a39c510cb237e8c",
+      "ruleCount": 10,
+      "bandCounts": {
+        "3": 10
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-10",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-10",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-4 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "CLOSURE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-8",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-8 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.planar-graph.TA-9",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.planar-graph.md#TA-9",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.planar-graph"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.planar-graph\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.planar-graph/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.planar-graph",
+      "title": "Learning Objective",
+      "content": "The student defines planarity (a graph is planar iff it can be drawn in the plane with no edge crossings); applies Euler's formula V−E+F=2 for connected planar graphs and derives the edge-density bound E≤3V−6; uses the bound E≤2V−4 for triangle-free planar graphs; applies Kuratowski's theorem (G is planar iff it contains no subdivision of K₅ or K₃,₃ as a subgraph) and Wagner's theorem (no K₅ or K₃,₃ minor) to certify non-planarity; verifies K₅ and K₃,₃ are non-planar; and computes the genus and outerplanarity of small graphs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 18,
+        "endLine": 21
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.planar-graph",
+      "title": "EULER-FORMULA-FOR-DISCONNECTED",
+      "content": "| MC-1 | EULER-FORMULA-FOR-DISCONNECTED | Student applies V−E+F=2 to a disconnected planar graph; the correct formula for a disconnected planar graph with C connected components is V−E+F=C+1; for C=1 (connected) this reduces to the standard V−E+F=2 | Type 5 — instruction-induced (Euler's formula is always stated and proved for connected graphs; students then apply it reflexively to any planar graph without checking connectivity; a disconnected graph splits a plane face differently — each component adds one face region \"internally\") |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 28,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.planar-graph",
+      "title": "KURATOWSKI-SUBDIVISION-VS-SUBGRAPH",
+      "content": "| MC-2 | KURATOWSKI-SUBDIVISION-VS-SUBGRAPH | Student confuses \"contains K₅ or K₃,₃ as a subgraph\" with \"contains a subdivision of K₅ or K₃,₃\"; the correct statement is SUBDIVISION — intermediate vertices may be inserted on edges; a graph with K₅ as a strict subgraph is obviously non-planar, but K₅ subdivisions (with extra degree-2 vertices on edges) are just as non-planar; both directions of Kuratowski's theorem use \"subdivision,\" not \"subgraph\" | Type 4 — notation-induced (\"contains K₅ or K₃,₃\" is the common shorthand; \"subdivision\" is the precise term; students memorise the shorthand and then apply it as if a strict subgraph were required, missing the case where K₅ is hidden inside a larger graph with extra vertices on the edges) |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 29,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.planar-graph",
+      "title": "E-LESS-THAN-3V-MINUS-6-IS-SUFFICIENT",
+      "content": "| MC-3 | E-LESS-THAN-3V-MINUS-6-IS-SUFFICIENT | Student treats E≤3V−6 as a SUFFICIENT condition for planarity — concluding \"this graph satisfies E≤3V−6, so it is planar\"; the bound is necessary but NOT sufficient; there exist non-planar graphs satisfying E≤3V−6 if they are not simple, and the inequality is a quick NON-PLANARITY test only in the direction \"if E>3V−6 then definitely non-planar\" | Type 5 — instruction-induced (the bound is taught as a non-planarity test — \"if violated then non-planar\"; students flip the logic to \"if satisfied then planar\"; K₃,₃ itself satisfies E=9=3·6−6+3=12 not quite — actually K₃,₃: V=6, E=9, 3V−6=12, so K₃,₃ DOES satisfy the 3V−6 bound, confirming that the bound is not sufficient; the tighter triangle-free bound 2V−4 catches K₃,₃) |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 30,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "K₅: V=5, E=10. 3V−6=9 < 10 → E>3V−6 → K₅ is NOT planar.",
+      "content": "{\"id\":\"TA-1\",\"title\":\"K₅: V=5, E=10. 3V−6=9 < 10 → E>3V−6 → K₅ is NOT planar.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 52,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "K₃,₃: V=6, E=9. 3V−6=12 ≥ 9 (bound not violated!). But K₃,₃ is bipartite (no odd cycles) → triangle-free → E≤2V−4=8 < 9 → K₃,₃ is NOT planar.",
+      "content": "{\"id\":\"TA-2\",\"title\":\"K₃,₃: V=6, E=9. 3V−6=12 ≥ 9 (bound not violated!). But K₃,₃ is bipartite (no odd cycles) → triangle-free → E≤2V−4=8 < 9 → K₃,₃ is NOT planar.\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 53,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "CORRECT → \"Euler: V−E+F=2 for connected planar. E≤3V−6 for simple planar. K₅: E=10>9=3·5−6, non-planar. K₃,₃: triangle-free bound E=9>8=2·6−4, non-planar. Bound is necessary, not sufficient.\" → A02",
+      "content": "{\"id\":\"TA-3\",\"title\":\"CORRECT → \\\"Euler: V−E+F=2 for connected planar. E≤3V−6 for simple planar. K₅: E=10>9=3·5−6, non-planar. K₃,₃: triangle-free bound E=9>8=2·6−4, non-planar. Bound is necessary, not sufficient.\\\" → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 58,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "PARTIAL (MC-3: bound is sufficient) → \"E≤3V−6 is NECESSARY for planarity — if a graph violates it, it CANNOT be planar. But it is NOT SUFFICIENT — satisfying it does not guarantee planarity. Key counter-direction: K₃,₃ has V=6, E=9, and 3V−6=12 ≥ 9, so it SATISFIES the 3V−6 bound — yet K₃,₃ is non-planar. For K₃,₃ you need the tighter TRIANGLE-FREE bound: 2V−4=8 < 9. The correct reasoning chain: E>3V−6 → definitely non-planar. E≤3V−6 → maybe planar, further checking needed (Kuratowski's theorem).\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-4\",\"title\":\"PARTIAL (MC-3: bound is sufficient) → \\\"E≤3V−6 is NECESSARY for planarity — if a graph violates it, it CANNOT be planar. But it is NOT SUFFICIENT — satisfying it does not guarantee planarity. Key counter-direction: K₃,₃ has V=6, E=9, and 3V−6=12 ≥ 9, so it SATISFIES the 3V−6 bound — yet K₃,₃ is non-planar. For K₃,₃ you need the tighter TRIANGLE-FREE bound: 2V−4=8 < 9. The correct reasoning chain: E>3V−6 → definitely non-planar. E≤3V−6 → maybe planar, further checking needed (Kuratowski's theorem).\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 59,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "INCORRECT → TB-R01 → A02",
+      "content": "{\"id\":\"TA-5\",\"title\":\"INCORRECT → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 60,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "NO_RESPONSE → \"Petersen graph: V=10, E=15. 3V−6=24 ≥ 15 — bound satisfied. Triangle-free? Petersen graph HAS 5-cycles (not triangle-free, wait — it has girth 5, so it IS triangle-free). E=15, 2V−4=16 ≥ 15 — even the triangle-free bound is satisfied! Yet the Petersen graph is non-planar (contains a K₃,₃ subdivision). This confirms: density bounds are not sufficient for planarity.\" → TB-R01 → A02",
+      "content": "{\"id\":\"TA-6\",\"title\":\"NO_RESPONSE → \\\"Petersen graph: V=10, E=15. 3V−6=24 ≥ 15 — bound satisfied. Triangle-free? Petersen graph HAS 5-cycles (not triangle-free, wait — it has girth 5, so it IS triangle-free). E=15, 2V−4=16 ≥ 15 — even the triangle-free bound is satisfied! Yet the Petersen graph is non-planar (contains a K₃,₃ subdivision). This confirms: density bounds are not sufficient for planarity.\\\" → TB-R01 → A02\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 61,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "CORRECT → \"Kuratowski: planar iff no K₅/K₃,₃ SUBDIVISION. Wagner: iff no K₅/K₃,₃ MINOR. Outerplanar: all vertices on outer face, E≤2V−3. Genus g: V−E+F=2−2g. O(V) planarity testing.\" → Gate (P91)",
+      "content": "{\"id\":\"TA-7\",\"title\":\"CORRECT → \\\"Kuratowski: planar iff no K₅/K₃,₃ SUBDIVISION. Wagner: iff no K₅/K₃,₃ MINOR. Outerplanar: all vertices on outer face, E≤2V−3. Genus g: V−E+F=2−2g. O(V) planarity testing.\\\" → Gate (P91)\",\"primitives\":[\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-8",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "PARTIAL (MC-2: subdivision vs. subgraph) → \"SUBDIVISION of K₅: start with K₅ and insert any number of degree-2 vertices into any of its 10 edges. The resulting graph still has the same 'topological shape' as K₅ and is equally non-planar. Kuratowski's theorem says: G is non-planar iff some such subdivided K₅ (or K₃,₃) appears as a SUBGRAPH of G. This is more general than 'K₅ appears as a strict subgraph' — it catches the case where K₅ is embedded inside G with extra vertices on its edges.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-8\",\"title\":\"PARTIAL (MC-2: subdivision vs. subgraph) → \\\"SUBDIVISION of K₅: start with K₅ and insert any number of degree-2 vertices into any of its 10 edges. The resulting graph still has the same 'topological shape' as K₅ and is equally non-planar. Kuratowski's theorem says: G is non-planar iff some such subdivided K₅ (or K₃,₃) appears as a SUBGRAPH of G. This is more general than 'K₅ appears as a strict subgraph' — it catches the case where K₅ is embedded inside G with extra vertices on its edges.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-8",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-9",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "INCORRECT → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-9\",\"title\":\"INCORRECT → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-9",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/teaching_action_meta/TA-10",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.planar-graph",
+      "title": "NO_RESPONSE → \"Prove the Petersen graph is non-planar by finding a K₃,₃ subdivision: label the outer 5-cycle 1-2-3-4-5 and the inner pentagram with {6=center-connections}. Select vertices {1,3,5} as one part and {2,4,6} as the other. Trace 9 vertex-disjoint paths connecting each pair — they exist within the Petersen graph's structure → K₃,₃ subdivision found → non-planar by Kuratowski.\" → TB-R02 → Gate",
+      "content": "{\"id\":\"TA-10\",\"title\":\"NO_RESPONSE → \\\"Prove the Petersen graph is non-planar by finding a K₃,₃ subdivision: label the outer 5-cycle 1-2-3-4-5 and the inner pentagram with {6=center-connections}. Select vertices {1,3,5} as one part and {2,4,6} as the other. Trace 9 vertex-disjoint paths connecting each pair — they exist within the Petersen graph's structure → K₃,₃ subdivision found → non-planar by Kuratowski.\\\" → TB-R02 → Gate\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-10",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.planar-graph/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.planar-graph",
+      "title": "P91 Mastery Gate Sequence",
+      "content": "**P77 — Problem Set (5 items):**\n1. A connected plane graph has V=12, E=18. Apply Euler's formula to find F. How many faces are there? If every face has ≥4 edges on its boundary, derive the tightest possible upper bound on E given V=12.\n2. Prove that K₃,₃ is non-planar in two ways: (a) using the triangle-free edge bound E≤2V−4; (b) using Euler's formula directly — assume K₃,₃ is planar, derive the number of faces via Euler, then show a contradiction using the minimum-face-size argument.\n3. Which of the following are planar? For each, either exhibit a planar drawing or prove non-planarity using edge bounds or Kuratowski: (a) K₄; (b) K₅ minus one edge; (c) K_{2,4}; (d) the Petersen graph; (e) a 3-regular bipartite graph on 8 vertices.\n4. A graph G has V=8, E=12, and every face in a plane embedding has exactly 4 edges on its boundary. Find F using Euler's formula and verify consistency with the face-edge incidence count 4F=2E.\n5. Prove that every planar graph has at least one vertex of degree ≤5. (Hint: suppose all degrees ≥6, derive a lower bound on E using handshaking, and compare with the planar upper bound E≤3V−6 to get a contradiction.)\n\n**P55 — Reflect & Consolidate:** \"Euler: V−E+F=2 (connected planar). E≤3V−6 for simple planar; E≤2V−4 for triangle-free planar. K₅ (E=10>3·5−6=9) and K₃,₃ (E=9>2·6−4=8) are non-planar. Kuratowski: planar iff no K₅ or K₃,₃ SUBDIVISION. Minimum degree ≤5 in any planar graph → Four Color Theorem proof strategy.\"\n\n**P76 — Transfer Probe (Independence mode):**\n(a) Fáry's theorem: every planar graph can be drawn with ALL edges as straight line segments (no curves needed). Prove for triangulations (maximal planar graphs) by induction: find a vertex v of degree ≤5, remove it, triangulate the resulting face, apply induction to get a straight-line embedding of G−v, then show v can be re-inserted in the interior of its face with straight edges to all its neighbors. (b) Crossing number: the crossing number cr(G) is the minimum number of crossings over all drawings of G in the plane. Prove cr(K₅)=1 (draw K₅ with exactly one crossing — it exists; show 0 crossings is impossible since K₅ is non-planar). Show cr(Kₙ) ≥ (1/5)C(n,2)C(n−2,2)/4 using the crossing-number inequality: for every graph G with E>3V, cr(G)≥E³/(33.75V²). (c) Topological graph theory: a graph G embeds on an orientable surface of genus g iff V−E+F=2−2g (Euler characteristic 2−2g). The genus of the complete graph Kₙ is γ(Kₙ)=⌈(n−3)(n−4)/12⌉. Compute γ(K₅)=1 and γ(K₆)=1, verifying that K₅ and K₆ both embed on a torus but not a sphere.\n\n**P75 — Mastery Assessment:**\n\"(a) A connected plane graph has all faces triangles and V=10. Find E and F using Euler's formula together with the triangulation constraint 3F=2E. (b) Prove the five-color theorem: every planar graph is 5-colorable. (Hint: planar graph has a vertex of degree ≤5; remove it; apply induction; reinsert and argue that 5 colors suffice by using the minimal-degree bound and the structure of the degree-5 case.) (c) Is the graph with vertices {a,b,c,d,e,f} and edge set forming a 3×2 grid (a-b-c on top, d-e-f on bottom, with rungs a-d, b-e, c-f) planar? Prove your answer. (d) A simple connected planar graph G has V=6, E=12. Is this possible? If so, exhibit such a graph; if not, prove it violates a planar constraint.\"\n\n**P74 — Routing Decision:**\n- Score ≥ 5/5 → MASTERED\n- Score 4/5 → REVIEW the edge-density bounds and Kuratowski subdivision definition\n- Score ≤ 3/5 → PREREQUISITE GAP in math.disc.graph; reassign\n\n**P78 — Completion:** Planar Graphs certified. Student applies Euler's formula for connected plane graphs; derives and uses edge-density bounds (E≤3V−6, E≤2V−4) as non-planarity tests; proves K₅ and K₃,₃ are non-planar; states Kuratowski's theorem correctly (subdivision, not subgraph); and computes face counts for given planar embeddings.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.planar-graph.md",
+        "startLine": 96,
+        "endLine": 120
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
