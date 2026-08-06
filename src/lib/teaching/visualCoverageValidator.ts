@@ -230,6 +230,19 @@ const DYNAMICS_LEGITIMIZING_WORDS = [
   'inclined', 'free body', 'newton', 'momentum', 'torque', 'interaction',
 ]
 
+// CI false positive found 2026-08-06: 'power' in KINEMATICS_ENERGY_FLUID_ONLY_WORDS
+// means MECHANICAL power (work/time) — the intended sense for that list. But
+// phys.opt.lens-power ("Power of a Lens and Lens Combinations") uses the SAME
+// English word for OPTICAL power (a lens's focusing strength in dioptres, 1/f),
+// an unrelated physics quantity. Its force_diagram mapping (shared by every
+// sibling phys.opt.* concept — reflection, refraction, mirrors, lenses — all
+// backed by sceneGenerator: 'ray_optics') is correct; only the word-matching
+// heuristic was wrong for this one concept. Scoped narrowly to the exact
+// ambiguous term (optics-context word present) rather than removing 'power'
+// from the shared list, which would blind the heuristic to genuine future
+// mechanical-power misassignments elsewhere.
+const OPTICS_CONTEXT_OVERRIDE_WORDS = ['lens']
+
 /**
  * True when a force_diagram assignment for this concept name matches the
  * observed bug pattern: a pure kinematics/energy/fluid term with no
@@ -237,6 +250,7 @@ const DYNAMICS_LEGITIMIZING_WORDS = [
  */
 export function looksLikeForceDiagramMisassignment(conceptName: string): boolean {
   const lower = conceptName.toLowerCase()
+  if (OPTICS_CONTEXT_OVERRIDE_WORDS.some((w) => lower.includes(w))) return false
   const hasKinematicWord = KINEMATICS_ENERGY_FLUID_ONLY_WORDS.some((w) => lower.includes(w))
   const hasDynamicsWord = DYNAMICS_LEGITIMIZING_WORDS.some((w) => lower.includes(w))
   return hasKinematicWord && !hasDynamicsWord
