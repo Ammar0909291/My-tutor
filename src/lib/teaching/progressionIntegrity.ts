@@ -132,14 +132,43 @@ export interface LessonLike {
  * What changes is the precedence, which removes the second owner from the
  * decision rather than trying to keep two owners in sync.
  *
+ * ── PERSISTED ACTIVE LESSON: the tier above the counter ───────────────────
+ *
+ * currentLesson answers "how far has this learner got?" — it is MONOTONIC by
+ * construction (Math.max on every completion) and therefore structurally
+ * incapable of expressing "the learner went BACK to revise lesson 7". Before
+ * `activeLessonSlug` existed, an explicit navigation to an earlier lesson was
+ * known only to the browser: the server kept resolving the furthest lesson, so
+ * the UI showed one lesson while the tutor taught another.
+ *
+ * `activeLessonSlug` is that missing fact, and only that fact: the lesson the
+ * learner explicitly selected. It outranks the counter because a deliberate
+ * choice outranks an inference. It carries NO timestamp and NO expiry —
+ * validity is lifecycle-determined (an explicit selection sets it, completion
+ * clears it), never time-determined. NULL, the state of every pre-existing
+ * row, means "no explicit selection in effect" and falls straight through to
+ * the previous behaviour, so this tier is purely additive.
+ *
+ * A slug that no longer resolves against `lessons` (curriculum re-authored,
+ * subject changed) is IGNORED rather than treated as an error — the remaining
+ * tiers still produce an answer, so a stale pointer degrades to the old
+ * behaviour instead of breaking the lesson.
+ *
  * Pure and total: no I/O, no clock, never throws, order-invariant.
  */
 export function selectCurrentLesson<T extends LessonLike>(
   lessons: readonly T[],
   studentCurrentLesson: number | null | undefined,
   topicProgressRows: readonly TopicProgressRowLike[],
+  activeLessonSlug?: string | null,
 ): T | null {
   if (!Array.isArray(lessons) || lessons.length === 0) return null
+
+  // 0. Explicit learner selection — the only fact that can point backward.
+  if (typeof activeLessonSlug === 'string' && activeLessonSlug.trim() !== '') {
+    const byActive = lessons.find((l) => l && l.topicSlug === activeLessonSlug)
+    if (byActive) return byActive
+  }
 
   // 1. Authoritative owner.
   if (typeof studentCurrentLesson === 'number' && Number.isFinite(studentCurrentLesson)) {

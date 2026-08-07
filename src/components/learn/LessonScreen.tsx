@@ -2045,6 +2045,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           lessonTitle: lesson.lessonTitle,
           lessonGoal: lesson.lessonGoal,
           lessonOrder: lesson.order,
+          // Persisted Active Lesson: the server records this as the learner's
+          // explicit selection, so the next chat turn resolves the SAME lesson
+          // the client is displaying instead of re-deriving the furthest one.
+          topicSlug: lesson.topicSlug,
           unitTitle: lesson.unitTitle,
           totalLessons: curriculumLessons.length,
           completedLessons: curriculumProgress.completedLessons,

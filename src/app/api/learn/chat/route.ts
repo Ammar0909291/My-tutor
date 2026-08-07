@@ -289,7 +289,7 @@ export async function POST(req: Request) {
           // older unfinished topic instead of starting the next lesson. See
           // selectCurrentLesson's header.
           const currentLesson =
-            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
+            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, (studentProgress as any)?.activeLessonSlug)
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
             topicProgressRows
@@ -349,7 +349,7 @@ export async function POST(req: Request) {
             const topicProgressRows = topicProgressRowsShared
             // OBJECTIVE 2: same authoritative-owner precedence as the KG branch.
             const currentLesson =
-              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
+              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, (studentProgress as any)?.activeLessonSlug)
               ?? syntheticLessons[0]
             const completedSlugs = new Set(
               topicProgressRows
@@ -4032,7 +4032,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const lowered = computeCurriculumEntryOrder(graph, levelBelow(placementLevelHoisted))
                 prisma.studentProgress.update({
                   where: { userId_subjectCode: { userId, subjectCode: progressCode } },
-                  data: { currentLesson: lowered },
+                  // activeLessonSlug is cleared with it: this adjustment is
+                  // meaningless if a stale explicit selection still outranks
+                  // the lowered position in selectCurrentLesson. Found while
+                  // auditing writers for the Persisted Active Lesson — this is
+                  // the third and last writer of currentLesson.
+                  data: { currentLesson: lowered, activeLessonSlug: null },
                 }).catch(() => {})
               }
             }

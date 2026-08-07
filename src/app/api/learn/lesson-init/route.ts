@@ -42,6 +42,7 @@ const schema = z.object({
   lessonTitle: z.string().min(1),
   lessonGoal: z.string().optional(),
   lessonOrder: z.number().int().positive().optional(),
+  topicSlug: z.string().min(1).optional(),
   unitTitle: z.string().optional(),
   totalLessons: z.number().int().positive().optional(),
   completedLessons: z.array(z.number()).optional(),
@@ -64,7 +65,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Invalid request' }, { status: 400 })
     }
     const {
-      sessionId, mode, lessonTitle, lessonGoal, lessonOrder,
+      sessionId, mode, lessonTitle, lessonGoal, lessonOrder, topicSlug,
       unitTitle, totalLessons, completedLessons, teachingLanguage,
     } = parsed.data
 
@@ -78,6 +79,37 @@ export async function POST(req: Request) {
     })
     if (!learnSession) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
+    }
+
+    // ── Persisted Active Lesson: the ONE writer of activeLessonSlug ────────
+    //
+    // This endpoint is reached only by an EXPLICIT learner action — opening a
+    // lesson, restarting it, revising it, or moving to the next one. That is
+    // precisely the fact `activeLessonSlug` records, and it is the fact that
+    // was previously lost: the browser passed the chosen lesson in this very
+    // payload and the server used it for the prompt, then discarded it, so the
+    // next chat turn re-derived the furthest lesson instead of this one.
+    //
+    // Deliberately NOT wrapped in Math.max or any monotonic guard — moving
+    // BACKWARD is the whole point. Fire-and-forget: a persistence failure must
+    // never cost the learner their lesson opening, and the next explicit
+    // navigation rewrites it anyway.
+    if (topicSlug) {
+      const subjectCode = learnSession.subject.slug
+      prisma.studentProgress.upsert({
+        where: { userId_subjectCode: { userId, subjectCode } },
+        create: {
+          userId,
+          subjectCode,
+          activeLessonSlug: topicSlug,
+          ...(lessonOrder ? { currentLesson: lessonOrder } : {}),
+          lastStudiedAt: new Date(),
+        },
+        // Only the pointer moves. currentLesson is a different fact with a
+        // different owner (/api/curriculum/progress) and is not touched here —
+        // opening lesson 7 for revision must not rewind furthest-progress.
+        update: { activeLessonSlug: topicSlug, lastStudiedAt: new Date() },
+      }).catch((err) => console.warn('[lesson-init] activeLessonSlug persist skipped:', err))
     }
 
     // Load profile (name, level, goals, country)
