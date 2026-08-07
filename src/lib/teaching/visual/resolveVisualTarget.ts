@@ -16,11 +16,76 @@
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import { resolveConceptMatches } from '@/lib/teaching/concept/conceptIndex'
 import { buildConceptIndexFromKnowledgeGraph } from '@/lib/teaching/concept/conceptIndexSource'
+import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
 import type { ConceptIndexEntry } from '@/lib/teaching/concept/conceptUnderstanding'
 import type { ArchetypeContext } from './archetypes'
 
 /** Minimum confidence before a learner-named concept may override the lesson. */
 const EXCURSION_CONFIDENCE_FLOOR = 0.6
+
+// ── Medium vs topic ───────────────────────────────────────────────────────
+//
+// RELEASE BLOCKER this fixes: "show me a graph" during a Kinematics lesson
+// resolved to math.disc.graph — the graph-THEORY concept — and left the
+// lesson on an excursion, with the visual contract asserting a vertices-and-
+// edges figure was correct. The learner asked for a velocity-time graph.
+//
+// The words that name a visual MEDIUM are also, for a handful of them, real
+// KG concept titles: "Graph", "Chart". The concept matcher cannot tell them
+// apart because both readings are identical to it — verified: "show me a
+// graph" and "teach me graph" both produce {math.disc.graph, EXACT_TITLE,
+// confidence 0.95, 1 token}. No existing confidence score, method or token
+// count separates them, so the distinction has to come from how the word is
+// USED, not from the match.
+//
+// The rule below is that distinction and nothing more: a one-word title that
+// is medium vocabulary counts as a concept ONLY when a teaching cue governs
+// it. Everything else — including every multi-word title such as "Graph
+// Coloring" or "Graph of a Function" — is untouched.
+const MEDIUM_NOUNS: ReadonlySet<string> = new Set(VISUAL_MEDIUM_NOUNS)
+
+/** Words that mark the following noun as a TOPIC being taught, not a medium. */
+const TEACHING_CUE = new Set([
+  'teach', 'teaches', 'teaching', 'taught',
+  'learn', 'learning', 'study', 'studying', 'understand', 'understanding',
+  'explain', 'explains', 'explaining', 'define', 'defines', 'definition',
+  'what', 'whats', 'about', 'meaning',
+])
+
+/** How many preceding tokens may carry the cue ("what is a graph" needs 3). */
+const CUE_WINDOW = 3
+
+function tokens(text: string): string[] {
+  return text.toLowerCase().replace(/[^a-z0-9\s]+/g, ' ').split(/\s+/).filter(Boolean)
+}
+
+/**
+ * Is this matched title a medium word being used AS a medium?
+ *
+ * True  → "show me a graph", "draw a graph", "graph it",
+ *          "teach me vector with graph"   (the noun is the medium)
+ * False → "teach me graph", "what is a graph", "explain graph theory"
+ *          (a teaching cue governs the noun — it is the topic)
+ * False → any multi-word title, and any title that is not medium vocabulary
+ *          ("Trees", "Sets" are concepts, never media).
+ */
+export function isMediumUsage(message: string, matchedText: string): boolean {
+  const matched = tokens(matchedText)
+  if (matched.length !== 1) return false
+  const noun = matched[0]
+  if (!MEDIUM_NOUNS.has(noun)) return false
+
+  const words = tokens(message)
+  // Check EVERY occurrence: the noun is a topic if any occurrence is governed
+  // by a teaching cue. "teach me vector with graph" has no such occurrence.
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] !== noun) continue
+    for (let back = 1; back <= CUE_WINDOW && i - back >= 0; back++) {
+      if (TEACHING_CUE.has(words[i - back])) return false
+    }
+  }
+  return true
+}
 
 export interface VisualTarget extends ArchetypeContext {
   /** True when the learner named a concept other than the lesson's. */
@@ -70,7 +135,12 @@ export function resolveVisualTarget(
   let requested: string | null = null
   try {
     const matches = resolveConceptMatches(message ?? '', conceptIndex(), preferredSubject ?? null)
-    const best = matches.find((m) => m.confidence >= EXCURSION_CONFIDENCE_FLOOR) ?? null
+    // Drop medium-word matches BEFORE picking the best one, so a genuine
+    // concept sitting behind them still wins: "show me vector graph" ranks
+    // {Graph, Graph, Vector} and must resolve to Vector, not Graph.
+    const best = matches.find(
+      (m) => m.confidence >= EXCURSION_CONFIDENCE_FLOOR && !isMediumUsage(message ?? '', m.matchedText),
+    ) ?? null
     requested = best?.conceptId ?? null
   } catch {
     requested = null      // resolution failure must never break the turn
