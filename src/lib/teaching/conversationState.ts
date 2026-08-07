@@ -31,6 +31,7 @@ import {
   type LegalityReason,
 } from './questionLegality'
 import { buildCapabilityRepairLine } from './capabilityModel'
+import { buildGranularityDirective } from './teachingGranularity'
 
 export type TeachingPhase =
   | 'OBSERVE' | 'DEMONSTRATE' | 'GUIDE' | 'CHECK' | 'PRACTICE' | 'TRANSFER'
@@ -1139,6 +1140,10 @@ export interface TurnDirectiveParams {
   state: ConversationState
   nextMove: NextMove
   maxParagraphs: number | null
+  /** How complete this turn's explanation must be (teachingGranularity.ts).
+   *  Optional so every existing caller compiles and behaves exactly as before
+   *  when omitted. */
+  granularity?: import('@/lib/teaching/teachingGranularity').TeachingLevel | null
   /** How many NEW concepts/terms this turn may introduce.
    *
    *  The route has always COMPUTED this (contentRegister === 'beginner' ? 1 : 2)
@@ -1300,6 +1305,13 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   }
   if (p.maxParagraphs !== null) {
     lines.push(`- Length budget: at most ${p.maxParagraphs} short paragraphs. If the learner is struggling, shorter is better — never longer.`)
+  }
+  // Stated immediately AFTER the length ceiling, deliberately: the ceiling is
+  // the only other length instruction in this directive and it points one way.
+  // Production showed seven consecutive one-sentence turns because nothing
+  // expressed a floor. See teachingGranularity.ts for the evidence.
+  if (p.granularity) {
+    lines.push(buildGranularityDirective(p.granularity))
   }
   if (p.nextMove === 'show' && p.workedExampleFirst) {
     lines.push('- Demonstrate first: this learner needs to SEE it work before being asked anything (worked-example-first is in force).')

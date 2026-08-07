@@ -1953,6 +1953,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             detectLearnerRequest, buildLearnerRequestBlock,
             buildUnreadExplanationBlock,
           } = await import('@/lib/teaching/masteryGate')
+          const { decideTeachingGranularity } = await import('@/lib/teaching/teachingGranularity')
           const convConceptId = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
 
@@ -2240,6 +2241,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // responseBudget(beginner)=4 paragraphs conflicts with that and
             // must be overridden for every first-lesson turn.
             maxParagraphs: routeMaxParagraphsHoisted,
+            // Teaching granularity (L1/L2/L3). Decided from the SAME evidence
+            // the rest of this block already has — the state machine's failure
+            // counters, the learner's own request, the remediation tier and the
+            // recovery guard — so it introduces no new detector and no new
+            // signal. REMEDIAL is unreachable without evidenced confusion.
+            granularity: decideTeachingGranularity({
+              state: conversationStateHoisted,
+              learnerRequest: learnerRequestHoisted,
+              remediationTier,
+              recoveryKey: recoveryKeyHoisted,
+            }),
             // The value the route already computed for the verifier context and
             // the parity facts — now also reaching the SERVED prompt, through
             // the same owner that carries the length budget.
