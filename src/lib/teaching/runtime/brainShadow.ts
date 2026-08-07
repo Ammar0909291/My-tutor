@@ -29,17 +29,25 @@ import type { PromptPackage } from '../generation/promptPackage'
 import type { ProviderRequest } from '../generation/providerAdapter'
 
 // ── Concept index memoisation ─────────────────────────────────────────────
-// Building the index walks every KG concept. It is pure and immutable, so one
-// build per process is correct and keeps shadow mode off the request's
-// critical path cost.
-const indexCache = new Map<string, readonly ConceptIndexEntry[]>()
+// ONE GLOBAL INDEX across every subject. Production proved subject scoping was
+// a defect: a chemistry lesson could not resolve "vector" at all, even though
+// the Knowledge Graph contains it. Subject is now only a RANKING signal
+// (`preferredSubject`), never a filter — concepts are never hidden because of
+// the lesson's subject.
+//
+// Built once per process: pure, immutable, and off the request's critical path
+// after the first call.
+let globalIndex: readonly ConceptIndexEntry[] | null = null
 
-export function conceptIndexFor(subjectSlug: string): readonly ConceptIndexEntry[] {
-  const cached = indexCache.get(subjectSlug)
-  if (cached) return cached
-  const built = buildConceptIndexFromKnowledgeGraph([subjectSlug])
-  indexCache.set(subjectSlug, built)
-  return built
+export function globalConceptIndex(): readonly ConceptIndexEntry[] {
+  if (!globalIndex) globalIndex = buildConceptIndexFromKnowledgeGraph()
+  return globalIndex
+}
+
+/** Retained name for existing callers. The argument is now the RANKING
+ *  preference only; the returned index is always global. */
+export function conceptIndexFor(_subjectSlug: string): readonly ConceptIndexEntry[] {
+  return globalConceptIndex()
 }
 
 // ── Shadow capture ────────────────────────────────────────────────────────
@@ -72,7 +80,8 @@ export function captureShadow(inputs: ShadowInputs): ShadowCapture | null {
     const concepts = understandConcepts({
       message: inputs.message,
       activeLessonConceptId: inputs.activeLessonConceptId,
-      index: conceptIndexFor(inputs.subjectSlug),
+      index: globalConceptIndex(),
+      preferredSubject: inputs.subjectSlug,
       context: { previousConceptId: inputs.previousConceptId ?? null },
     })
 

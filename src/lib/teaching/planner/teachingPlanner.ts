@@ -37,13 +37,20 @@ import {
 // restate the verb forms the existing detector already owns.
 
 const RETURN_TO_LESSON_RE = /\b(back\s+to\s+(the\s+)?(lesson|topic|chapter)|resume\s+(the\s+)?lesson|continue\s+(the\s+)?lesson|where\s+we(?:'?re|\s+were)\s+(left|up\s+to)|carry\s+on\s+with)\b/i
-const CHANGE_TOPIC_RE = /\b(switch\s+to|change\s+(the\s+)?topic|move\s+on\s+to|let'?s\s+do|skip\s+(this|ahead)|instead\s+of\s+this|forget\s+(this|that)|stop\s+(this|the)\s+lesson)\b/i
+// "next topic" / "move to next topic" are the most frequent topic-change
+// phrasings in the production transcripts; they were previously unmatched.
+const CHANGE_TOPIC_RE = /\b(switch\s+to|change\s+(the\s+)?topic|move\s+(on\s+)?to|next\s+topic|let'?s\s+do|skip\s+(this|ahead)|instead\s+of\s+this|forget\s+(this|that)|stop\s+(this|the)\s+lesson)\b/i
 const COMPARE_RE = /\b(compare|comparison|difference\s+between|differences\s+between|versus|vs\.?|contrast|how\s+(is|are)\s+.{1,40}\s+different|same\s+as)\b/i
 const QUIZ_RE = /\b(quiz|test\s+me|ask\s+me|practice\s+questions?|give\s+me\s+(a\s+)?(question|problem)s?\s+to|mcq|check\s+(my\s+)?understanding)\b/i
 const SOLVE_RE = /\b(solve|calculate|compute|work\s+(this|it)\s+out|find\s+the\s+value|what\s+is\s+the\s+answer|how\s+do\s+i\s+(solve|calculate)|step[\s-]by[\s-]step)\b/i
 const REVISE_RE = /\b(revise|revision|review|recap|refresh|go\s+over\s+(it|this|that)\s+again|remind\s+me)\b/i
 const DEFINE_RE = /\b(define|definition\s+of|what\s+(is|are)\s+(a|an|the)?\s*\w|what\s+does\s+.{1,40}\s+mean|meaning\s+of)\b/i
 const VISUALIZATION_NOUN_RE = /\b(visuali[sz]ation|visuals?)\b/i
+/** A bare teaching request with no concept named — "Explain", "Explain it.",
+ *  "Re explain", "teach me ...". Production shows learners issue these
+ *  constantly; they were falling through to UNKNOWN. */
+const TEACH_REQUEST_RE = /^\s*(re[\s-]?explain|explain|teach\s+me|tell\s+me\s+about|describe|go\s+(over|through))\b/i
+
 const FOLLOW_UP_RE = /\b(why|how\s+come|what\s+about\s+(it|that|this)|and\s+then|so\s+then|tell\s+me\s+more|go\s+on|continue|elaborate|expand\s+on\s+(it|that|this))\b/i
 
 /** Pronoun-only reference with no new concept named — a continuation of the
@@ -140,6 +147,14 @@ function classifyIntent(inputs: PlannerInputs, namedConcepts: readonly ResolvedC
   //    actually named; otherwise "what is it?" is a follow-up.
   if (DEFINE_RE.test(message) && namesAConcept) {
     return { intent: TeachingIntent.DEFINE_TERM, confidence: 0.8, reason: 'Definition requested for a named concept.' }
+  }
+
+  // 5b. The existing `explain_differently` signal (masteryGate) had no intent
+  //     mapping at all, so real remediation requests — "I don't understand,
+  //     explain differently", among the most common turns in production —
+  //     classified as UNKNOWN. It re-explains the concept already in play.
+  if (inputs.learnerRequest === 'explain_differently') {
+    return { intent: TeachingIntent.EXPLAIN_CONCEPT, confidence: 0.85, reason: 'Re-explanation requested (existing explain_differently signal).' }
   }
 
   // 6. A named concept with no other marker is an explanation request.

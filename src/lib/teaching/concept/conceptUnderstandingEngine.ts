@@ -82,7 +82,7 @@ export function understandConcepts(inputs: ConceptUnderstandingInputs): ConceptU
     return unresolvedResult(inputs, ['Empty message — nothing to resolve.'])
   }
 
-  const matches = resolveConceptMatches(message, inputs.index)
+  const matches = resolveConceptMatches(message, inputs.index, inputs.preferredSubject ?? null)
 
   // ── 1. Concepts named in the message ────────────────────────────────────
   if (matches.length > 0) {

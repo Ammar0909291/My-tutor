@@ -92,8 +92,12 @@ export interface ConceptUnderstandingInputs {
   message: string
   /** The concept the active lesson is teaching, or null. */
   activeLessonConceptId: string | null
-  /** The searchable concept index (see `conceptIndex.ts`). */
+  /** The searchable concept index (see `conceptIndex.ts`). GLOBAL — every
+   *  subject. Concepts are never hidden because of the lesson's subject. */
   index: readonly ConceptIndexEntry[]
+  /** The active lesson's subject. A RANKING SIGNAL ONLY: it breaks ties in
+   *  favour of the subject being taught, and never filters anything out. */
+  preferredSubject?: string | null
   context?: ConceptConversationContext
 }
 

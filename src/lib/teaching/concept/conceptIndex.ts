@@ -134,12 +134,22 @@ function uppercaseTokens(message: string): ReadonlySet<string> {
 
 /**
  * Rank matches deterministically: confidence desc, then longer matched span
- * (more specific) desc, then conceptId asc as the final stable tie-break.
+ * (more specific) desc, then the lesson's own subject, then conceptId asc as
+ * the final stable tie-break.
+ *
+ * `preferredSubject` is a RANKING signal only. It reorders equally-strong
+ * matches so a chemistry lesson prefers a chemistry reading; it never removes
+ * a concept, which is what let a chemistry lesson hide "vector" entirely.
  */
-export function rankMatches(matches: readonly ConceptMatch[]): readonly ConceptMatch[] {
+export function rankMatches(
+  matches: readonly ConceptMatch[],
+  preferredSubject?: string | null,
+): readonly ConceptMatch[] {
+  const preferred = (m: ConceptMatch) => (preferredSubject && m.subject === preferredSubject ? 0 : 1)
   return [...matches].sort((a, b) =>
     b.confidence - a.confidence ||
     b.matchedTokenCount - a.matchedTokenCount ||
+    preferred(a) - preferred(b) ||
     a.conceptId.localeCompare(b.conceptId))
 }
 
@@ -150,6 +160,7 @@ export function rankMatches(matches: readonly ConceptMatch[]): readonly ConceptM
 export function resolveConceptMatches(
   message: string,
   index: readonly ConceptIndexEntry[],
+  preferredSubject?: string | null,
 ): readonly ConceptMatch[] {
   const raw = message ?? ''
   if (raw.trim() === '') return []
@@ -218,5 +229,5 @@ export function resolveConceptMatches(
     })
   }
 
-  return rankMatches(out)
+  return rankMatches(out, preferredSubject)
 }
