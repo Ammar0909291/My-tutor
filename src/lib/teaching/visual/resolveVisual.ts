@@ -13,18 +13,27 @@
  *   • and the model is TOLD what is being rendered rather than being the thing
  *     that decides whether a visual exists.
  *
+ * It answers three questions in a fixed order, and the order is the design:
+ *
+ *   1. CONTINUITY   — is a figure already on screen that should stay there?
+ *   2. TARGET       — if not, which concept are we drawing?
+ *   3. FIGURE       — purpose → representation → renderer (renderer LAST).
+ *
  * ASCII is a decision this function returns, not a prompt default someone else
- * falls into. It is reachable only when the concept cannot be identified at all
- * or when every archetype in the ladder declined — both genuinely exceptional.
+ * falls into. It is reachable only when no concept resolves at all or when
+ * every archetype in the ladder declined — both genuinely exceptional.
  *
  * Pure, synchronous, no LLM, no network, no database.
  */
 
-import { getConceptVisualType, lookupConceptVisual } from '@/lib/teaching/visualRegistry'
+import { getConceptVisualType, lookupConceptVisual, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
+import { buildCanonicalScene } from './conceptSceneParams'
+import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, renderArchetype, type ArchetypeContext } from './archetypes'
 import { conceptRepresentations } from './conceptArchetype'
 import { resolveVisualTarget } from './resolveVisualTarget'
+import { decideContinuity, tickSession, type VisualSession } from './session'
 import { asciiDecision, type EducationalPurpose, type VisualDecision } from './types'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
@@ -40,6 +49,13 @@ export interface ResolveVisualInput {
   learnerRequest?: LearnerVisualRequest
   /** Remediation attempts so far — drives purpose, not representation. */
   remediationTier?: number
+  /** The figure currently on the learner's screen, from contextSnapshot. */
+  activeSession?: VisualSession | null
+  /**
+   * Whether the tutor's previous turn ended in a question. A short reply to a
+   * question is an ANSWER, and an answer must never move the figure.
+   */
+  lastAssistantAskedQuestion?: boolean
 }
 
 /**
@@ -58,74 +74,185 @@ function resolvePurpose(
   return archetypeDefault
 }
 
-/**
- * Resolve the turn's visualization.
- *
- * Ladder, highest teaching quality first:
- *   1. REGISTRY   — a curated concept→visual binding exists (hand-verified).
- *   2. ARCHETYPE  — the Educational Archetype Engine, walking the concept's
- *                   ordered representation candidates until one renders.
- *   3. ASCII      — emergency only.
- */
-export function resolveVisual(input: ResolveVisualInput): VisualDecision {
-  const target = resolveVisualTarget(input.message, input.lessonConceptId, input.subject)
-
-  // No concept in any canonical KG matched — a genuinely off-curriculum ask.
-  if (!target) {
-    return asciiDecision('no-resolvable-concept', null, null, resolvePurpose(input, 'explain'))
+function contextFor(conceptId: string): ArchetypeContext | null {
+  const node = getKGNode(conceptId)
+  if (!node) return null
+  return {
+    conceptId,
+    title: node.title,
+    description: node.description ?? '',
+    prerequisites: node.prerequisites ?? [],
+    difficulty: node.difficulty,
   }
+}
 
-  const ctx: ArchetypeContext = {
-    conceptId: target.conceptId,
-    title: target.title,
-    description: target.description,
-    prerequisites: target.prerequisites,
-    difficulty: target.difficulty,
+/**
+ * Build the figure for one concept. Deterministic, so re-deriving it on a held
+ * turn reproduces byte-identical output — which is what lets continuity be
+ * stateless about the payload itself and store only the concept's identity.
+ */
+function buildDecision(
+  ctx: ArchetypeContext,
+  input: ResolveVisualInput,
+  excursion: boolean,
+  returnToConceptId: string | null,
+  continuityReason: string,
+  heldTurns: number,
+): VisualDecision | null {
+  const finish = (
+    partial: Omit<VisualDecision, 'session' | 'continuityReason'>,
+  ): VisualDecision => ({
+    ...partial,
+    continuityReason,
+    session: partial.graphical && partial.representation
+      ? {
+          conceptId: ctx.conceptId,
+          representation: partial.representation,
+          renderer: partial.payload.renderer,
+          returnToConceptId,
+          turns: heldTurns,
+        }
+      : null,
+  })
+
+  // ── Tier 0: registry-named DETERMINISTIC SCENE GENERATOR ──────────────────
+  // visualRegistry has recorded a concept→generator binding for 60 concepts
+  // since long before V2, and getConceptSceneGenerator() had ZERO production
+  // callers — the binding existed, the generator existed, and nothing ever
+  // joined them. This is that join.
+  //
+  // Ranked ABOVE the generic VisualCard because a generator's output is
+  // parameter-driven and concept-specific (it prints the actual resultant,
+  // the actual angle sum, the actual total resistance), where the card is one
+  // fixed illustration reused across every concept that names it. No LLM: the
+  // parameter EXTRACTORS are what needed a model, and canonical parameters
+  // replace them entirely.
+  const generatorKind = getConceptSceneGenerator(ctx.conceptId)
+  const generatedScene = buildCanonicalScene(generatorKind)
+  if (generatedScene) {
+    return finish({
+      purpose: resolvePurpose(input, 'demonstrate'),
+      representation: representationForVisualType(getConceptVisualType(ctx.conceptId) ?? 'number_line'),
+      payload: { renderer: 'scene', sceneSpec: generatedScene },
+      graphical: true,
+      source: 'registry',
+      provenance: `generator:${ctx.conceptId}:${generatorKind}`,
+      conceptId: ctx.conceptId,
+      conceptTitle: ctx.title,
+      excursion,
+      allowed: null,
+    })
   }
 
   // ── Tier 1: curated registry binding ───────────────────────────────────────
-  const registryVisual = getConceptVisualType(target.conceptId)
+  const registryVisual = getConceptVisualType(ctx.conceptId)
   if (registryVisual) {
-    const entry = lookupConceptVisual(target.conceptId)
-    return {
+    const entry = lookupConceptVisual(ctx.conceptId)
+    return finish({
       purpose: resolvePurpose(input, 'explain'),
       representation: representationForVisualType(registryVisual),
       payload: { renderer: 'card', visualType: registryVisual },
       graphical: true,
       source: 'registry',
-      provenance: `registry:${target.conceptId}:${registryVisual}`,
-      conceptId: target.conceptId,
-      conceptTitle: target.title,
-      excursion: target.excursion,
+      provenance: `registry:${ctx.conceptId}:${registryVisual}`,
+      conceptId: ctx.conceptId,
+      conceptTitle: ctx.title,
+      excursion,
       allowed: entry?.all ?? [registryVisual],
-    }
+    })
   }
 
   // ── Tier 2: Educational Archetype Engine ───────────────────────────────────
   for (const representation of conceptRepresentations(ctx)) {
     const payload = renderArchetype(representation, ctx)
     if (!payload) continue        // archetype declined — try the next rung
-    return {
+    return finish({
       purpose: resolvePurpose(input, ARCHETYPES[representation]?.purpose ?? 'explain'),
       representation,
       payload,
       graphical: true,
       source: 'archetype',
       provenance: `archetype:${representation}:${payload.renderer}`,
-      conceptId: target.conceptId,
-      conceptTitle: target.title,
-      excursion: target.excursion,
+      conceptId: ctx.conceptId,
+      conceptTitle: ctx.title,
+      excursion,
       allowed: payload.renderer === 'card' ? [payload.visualType] : null,
+    })
+  }
+
+  return null
+}
+
+/** Resolve the turn's visualization. */
+export function resolveVisual(input: ResolveVisualInput): VisualDecision {
+  const session = input.activeSession ?? null
+  const lastAsked = input.lastAssistantAskedQuestion ?? false
+
+  // ── 1. What did the learner name this turn (if anything)? ─────────────────
+  const target = resolveVisualTarget(input.message, input.lessonConceptId, input.subject)
+  const requestedConceptId = target?.origin === 'learner-request' ? target.conceptId : null
+
+  // ── 2. Does the figure already on screen survive this turn? ───────────────
+  const action = decideContinuity({
+    session,
+    message: input.message,
+    lessonConceptId: input.lessonConceptId,
+    requestedConceptId,
+    lastAssistantAskedQuestion: lastAsked,
+  })
+
+  let conceptId: string | null
+  let returnToConceptId: string | null
+  let heldTurns: number
+
+  if (action.kind === 'hold') {
+    const ticked = tickSession(action.session)
+    conceptId = ticked.conceptId
+    returnToConceptId = ticked.returnToConceptId
+    heldTurns = ticked.turns
+  } else {
+    conceptId = action.targetConceptId
+    // An excursion begins when the new figure is NOT the lesson's own concept.
+    returnToConceptId =
+      conceptId && input.lessonConceptId && conceptId !== input.lessonConceptId
+        ? input.lessonConceptId
+        : null
+    heldTurns = 0
+  }
+
+  if (!conceptId) {
+    return {
+      ...asciiDecision('no-resolvable-concept', null, null, resolvePurpose(input, 'explain')),
+      continuityReason: action.reason,
+      session: null,
     }
   }
 
-  // ── Tier 3: ASCII, emergency only ──────────────────────────────────────────
-  return asciiDecision(
-    'all-archetypes-declined',
-    target.conceptId,
-    target.title,
-    resolvePurpose(input, 'explain'),
+  const ctx = contextFor(conceptId)
+  if (!ctx) {
+    return {
+      ...asciiDecision('concept-not-in-kg', conceptId, null, resolvePurpose(input, 'explain')),
+      continuityReason: action.reason,
+      session: null,
+    }
+  }
+
+  // ── 3. Draw it ────────────────────────────────────────────────────────────
+  const decision = buildDecision(
+    ctx,
+    input,
+    returnToConceptId !== null,
+    returnToConceptId,
+    action.reason,
+    heldTurns,
   )
+  if (decision) return decision
+
+  return {
+    ...asciiDecision('all-archetypes-declined', ctx.conceptId, ctx.title, resolvePurpose(input, 'explain')),
+    continuityReason: action.reason,
+    session: null,
+  }
 }
 
 /**

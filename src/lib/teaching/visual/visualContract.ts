@@ -71,12 +71,29 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
     'the words support it.',
   )
 
+  // CONTINUITY. The same figure persisting across turns is the normal case in a
+  // real lesson: the tutor asks, the learner answers, the tutor corrects — all
+  // against ONE diagram. Saying so stops the model from narrating a new figure
+  // ("here is another diagram") when nothing on screen actually changed.
+  const held = (decision.session?.turns ?? 0) > 0
+  if (held) {
+    lines.push(
+      'CONTINUITY: this is the SAME figure that was already on screen last ' +
+      'turn — it has not changed and has not been redrawn. Continue the ' +
+      'current explanation against it. Do not re-introduce it, do not ' +
+      'announce a new diagram, and do not describe it from scratch.',
+    )
+  }
+
   if (decision.excursion) {
     lines.push(
       `CONCEPT EXCURSION: the learner asked about ${what}, which is NOT the ` +
       'current lesson\'s concept. Teach what they asked, using the figure. ' +
-      'When they are satisfied, offer to return to the lesson — do not force ' +
-      'them back mid-explanation, and do not refuse the excursion.',
+      'The figure STAYS on this concept for the whole excursion — through ' +
+      'your questions, their answers, and any correction — so keep teaching ' +
+      `${what} until they signal they are done. When they are satisfied, ` +
+      'offer to return to the lesson; do not force them back mid-explanation, ' +
+      'and do not refuse the excursion.',
     )
   }
 

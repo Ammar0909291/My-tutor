@@ -22,6 +22,7 @@
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import type { VisualSession } from './session'
 
 /**
  * Why a visual is being shown this turn. Drives the teaching contract injected
@@ -150,6 +151,19 @@ export interface VisualDecision {
    * honoured if it appears in this set.
    */
   allowed: readonly VisualType[] | null
+  /**
+   * The visualization surface to persist for the next turn. Null when nothing
+   * graphical is on screen. Written to contextSnapshot by the chat route; read
+   * back as `activeSession` so the figure survives follow-ups, answers and
+   * corrections instead of being re-derived from each message in isolation.
+   */
+  session: VisualSession | null
+  /**
+   * Why the figure was held or switched this turn — 'continuity',
+   * 'explicit-new-topic-request', 'learner-answering-not-requesting', … Logged
+   * so a visual swap is always explainable after the fact.
+   */
+  continuityReason: string
 }
 
 /** Convenience constructor for the terminal, non-graphical decision. */
@@ -170,5 +184,7 @@ export function asciiDecision(
     conceptTitle,
     excursion: false,
     allowed: null,
+    session: null,
+    continuityReason: 'ascii',
   }
 }

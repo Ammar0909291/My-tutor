@@ -2151,12 +2151,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             try {
               const { resolveVisual } = await import('@/lib/teaching/visual/resolveVisual')
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
+              const { parseVisualSession } = await import('@/lib/teaching/visual/session')
+              // Visual continuity: the figure already on the learner's screen,
+              // read back from contextSnapshot. Without this the resolver would
+              // re-derive a visual from each message in isolation — which is how
+              // an ANSWER ("the starting point") could swap a vector figure for
+              // a geometry one mid-correction.
+              const activeVisualSession = parseVisualSession(
+                (learnSession.contextSnapshot as Record<string, unknown> | null)?.visualSession,
+              )
               const decision = resolveVisual({
                 message,
                 lessonConceptId: convConceptId,
                 subject: subjectCode,
                 learnerRequest: learnerRequestHoisted,
                 remediationTier,
+                activeSession: activeVisualSession,
+                lastAssistantAskedQuestion:
+                  (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
               })
               visualDecisionHoisted = decision
               // The contract tells the model what is ALREADY on screen, so it
@@ -2176,6 +2188,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 renderer: decision.payload.renderer,
                 graphical: decision.graphical,
                 provenance: decision.provenance,
+                continuity: decision.continuityReason,
+                heldTurns: decision.session?.turns ?? 0,
               })
             } catch (err) {
               console.warn('[visual-v2] resolver failed, falling back to legacy pipelines:', err)
@@ -4589,6 +4603,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
           const narrativeUpdate = narrativeStateHoisted ? { narrativeState: narrativeStateHoisted } : {}
 
+          // Visual Resolver V2 — persist the active visualization surface so the
+          // next turn can HOLD it. Cleared explicitly when nothing graphical is
+          // on screen, so a stale figure can never be resurrected.
+          const visualSessionUpdate: Record<string, unknown> = visualDecisionHoisted
+            ? { visualSession: visualDecisionHoisted.session }
+            : {}
+
           // STEP 2 (instrumentation) — progression telemetry. Measurement
           // only: nothing here gates a turn or changes learner-visible
           // output. Rides the same contextSnapshot persist as every other
@@ -4651,7 +4672,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ).renderedRealityLog
           }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0 || rrmEntryThisTurn) {
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0 || Object.keys(visualSessionUpdate).length > 0 || rrmEntryThisTurn) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -4663,6 +4684,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...narrativeUpdate,
               ...(turnHistoryUpdateHoisted ?? {}),
               ...progressionUpdate,
+              ...visualSessionUpdate,
               // Option B — Teaching Sequence Executor: persist the runtime-
               // selected step so the next turn (or a resumed session) reads
               // it back via readTeachingStepIndex() instead of restarting.
