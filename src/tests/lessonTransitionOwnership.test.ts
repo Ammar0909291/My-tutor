@@ -144,7 +144,13 @@ describe('the concept pointer is derived, not authoritative', () => {
   })
 
   it('the route no longer re-derives lesson identity from the lagging cache', () => {
-    expect(src).toContain('selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)')
+    // Updated for the Persisted Active Lesson: the call now also passes the
+    // learner's explicit selection, which is the tier ABOVE currentLesson. The
+    // property this test protects is unchanged — the route delegates to the one
+    // selector and never re-derives identity from topic_progress itself.
+    expect(src).toContain(
+      'selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)',
+    )
   })
 })
 

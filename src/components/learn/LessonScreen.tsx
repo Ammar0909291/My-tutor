@@ -28,6 +28,7 @@ import { LessonProgressBar } from '@/components/learn/LessonProgressBar'
 import {
   computeLessonLockState, findPreviousLesson, findNextLesson,
   type CurriculumLesson, type CurriculumProgress, type TopicProgressEntry,
+  resolveActiveLesson,
 } from '@/lib/curriculum/lessonNavigation'
 import {
   planLessonAdvance, decideLessonEntryMode, lessonInitModeFor,
@@ -1795,10 +1796,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // pre-action state and must not clobber the authoritative one that
       // already landed (see progressGenerationRef declaration above).
       if (typeof data.lessonOrder === 'number' && progressGenerationRef.current === dispatchGeneration) {
+        // data.lessonOrder is the server's FULLY RESOLVED answer — it already
+        // ran selectCurrentLesson including the activeLessonSlug tier. So the
+        // local slug must be cleared as this lands, or a completion (which
+        // clears the slug server-side and advances the order) would leave a
+        // stale pointer here that outranks the new order and pinned the UI to
+        // the finished lesson.
         setCurriculumProgress((prev) =>
-          prev.currentLesson === data.lessonOrder && (!data.completedLessons || prev.completedLessons.length === data.completedLessons.length)
+          prev.currentLesson === data.lessonOrder && prev.activeLessonSlug == null && (!data.completedLessons || prev.completedLessons.length === data.completedLessons.length)
             ? prev
-            : { ...prev, currentLesson: data.lessonOrder!, completedLessons: data.completedLessons ?? prev.completedLessons })
+            : { ...prev, currentLesson: data.lessonOrder!, activeLessonSlug: null, completedLessons: data.completedLessons ?? prev.completedLessons })
       }
       // Mastery gate: the server's per-turn evidence summary is the single
       // source of truth for whether Complete/Next is evidence-backed.
@@ -1896,7 +1903,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const { hasCompletion, cleanText: textAfterCompletion } = parseLessonCompletionTag(full)
       full = textAfterCompletion
       if (hasCompletion) {
-        const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
+        const currentLessonData = resolveActiveLesson(curriculumLessons, curriculumProgress)
         if (currentLessonData) {
           // Canonical transition: records completion AND moves the session on.
           // Previously handleLessonComplete, which did only the former.
@@ -1934,7 +1941,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       full = textAfterAssessment
       if (assessment) {
         const { correctness, reasoning, confidence } = assessment
-        const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson)
+        const currentLessonData = resolveActiveLesson(curriculumLessons, curriculumProgress)
         const topicSlug = currentLessonData?.topicSlug
         if (topicSlug) {
           setAssessmentLoading(true)
@@ -2045,6 +2052,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           lessonTitle: lesson.lessonTitle,
           lessonGoal: lesson.lessonGoal,
           lessonOrder: lesson.order,
+          // Persisted Active Lesson: the server records this as the learner's
+          // explicit selection, so the next chat turn resolves the SAME lesson
+          // the client is displaying instead of re-deriving the furthest one.
+          topicSlug: lesson.topicSlug,
           unitTitle: lesson.unitTitle,
           totalLessons: curriculumLessons.length,
           completedLessons: curriculumProgress.completedLessons,
@@ -2901,7 +2912,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
   }, [visibleMessages, previewCache, expanded])
 
   // Curriculum derived
-  const currentLessonData = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0] ?? null
+  const currentLessonData = resolveActiveLesson(curriculumLessons, curriculumProgress)
   const nextLessonData = findNextLesson(curriculumLessons, curriculumProgress)
   const previousLessonData = findPreviousLesson(curriculumLessons, curriculumProgress)
   const totalLessons = curriculumLessons.length

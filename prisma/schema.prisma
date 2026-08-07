@@ -667,6 +667,28 @@ model StudentProgress {
   // it, so it can never affect currentLesson, completedLessons or
   // completionPercent.
   preludeViewedAt   DateTime?
+  // Persisted Active Lesson. The topicSlug of the lesson the learner is
+  // actually sitting in, as chosen by an explicit navigation/revision action.
+  //
+  // Why it exists: `currentLesson` is a MONOTONIC furthest-progress counter
+  // (/api/curriculum/progress raises it with Math.max and never lowers it), so
+  // it cannot represent "the learner went back to revise lesson 7". The client
+  // knew the real lesson and the server had no record of it — that is the
+  // production divergence where the UI showed "Scalar and Vector Quantities"
+  // while the tutor kept teaching Calorimetry.
+  //
+  // Deliberately NO timestamp and NO expiration: validity is determined by
+  // lifecycle (an explicit navigation sets it, completion clears it), never by
+  // elapsed time. NULL means "no override — currentLesson governs", which is
+  // exactly the pre-existing behaviour, so every existing row is already
+  // correct without a backfill.
+  //
+  // Single writer per fact: this field is written ONLY by an explicit lesson
+  // selection (/api/learn/lesson-init) and cleared by lesson completion and by
+  // the silent placement downward adjustment. Concept excursions NEVER write
+  // it. It is never wrapped in Math.max — unlike currentLesson it is allowed,
+  // and required, to move backward.
+  activeLessonSlug  String?
   updatedAt         DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

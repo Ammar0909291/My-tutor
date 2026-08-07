@@ -289,7 +289,7 @@ export async function POST(req: Request) {
           // older unfinished topic instead of starting the next lesson. See
           // selectCurrentLesson's header.
           const currentLesson =
-            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
+            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
             topicProgressRows
@@ -349,7 +349,7 @@ export async function POST(req: Request) {
             const topicProgressRows = topicProgressRowsShared
             // OBJECTIVE 2: same authoritative-owner precedence as the KG branch.
             const currentLesson =
-              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows)
+              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)
               ?? syntheticLessons[0]
             const completedSlugs = new Set(
               topicProgressRows
@@ -2088,6 +2088,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cueObservations.availableVisual = availableVisual
           cueObservations.visualDetectionRan = true
           availableVisualHoisted = availableVisual
+          // VIE integration point (Visualization Migration, phase 1 — additive
+          // only). Runs the Visualization Intelligence Engine against the VKR
+          // for this turn's concept and records the result for observability.
+          // Deliberately does NOT influence availableVisual/responseVisual —
+          // ADR 12's live renderer selection above remains the sole rendering
+          // authority until the VKR reaches coverage parity; see CueObservations
+          // .visualizationIntent's own doc comment for why.
+          {
+            const { buildVisualIntentFromRegistry } = await import('@/lib/teaching/visualIntelligenceEngine')
+            cueObservations.visualizationIntent = buildVisualIntentFromRegistry(convConceptId)
+            cueObservations.vieExecuted = true
+          }
           // D.23-30: Visual Intelligence block for the conversation state
           // machine path. ADR 15: alreadyShown now uses RRM ground truth
           // instead of the phase-counter heuristic.
@@ -2121,6 +2133,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerRequestHoisted === 'explain_differently' && remediationTier >= 3 && availableVisual !== null
           forceVisualRenderHoisted =
             shouldForceVisualRender(learnerRequestHoisted, availableVisual) || explainDifferentlyNeedsVisual
+          // Brain SHADOW MODE (production migration Phase 1/4). Runs the
+          // completed Brain alongside the legacy path and LOGS ONLY: no value
+          // computed here is read by any production code path, no LLM call is
+          // made, and captureShadow() never throws. Gated on
+          // BRAIN_RUNTIME_MODE, which defaults to off — with the flag unset
+          // this block does nothing at all.
+          const { currentBrainMode, BrainMode } = await import('@/lib/teaching/runtime/brainRuntimeEntry')
+          if (currentBrainMode().mode !== BrainMode.OFF) {
+            try {
+              const { captureShadow, compareToLegacy, summariseShadow } =
+                await import('@/lib/teaching/runtime/brainShadow')
+              const shadow = captureShadow({
+                message,
+                activeLessonConceptId: convConceptId,
+                subjectSlug: subjectCode,
+                language: teachingLang,
+                previousConceptId: snapshotCurrentConceptId,
+                learnerRequest: learnerRequestHoisted,
+              })
+              if (shadow) {
+                const mismatches = compareToLegacy({
+                  conceptId: convConceptId,
+                  visualResolved: availableVisual !== null,
+                  learnerRequest: learnerRequestHoisted,
+                }, shadow)
+                console.log(summariseShadow(shadow, mismatches))
+                for (const m of mismatches) {
+                  console.log(`[brain/shadow] mismatch ${m.kind}: legacy=${m.legacy} brain=${m.brain} — ${m.note}`)
+                }
+              }
+            } catch {
+              // Shadow mode must never affect a turn.
+            }
+          }
           // One detection, two consumers: the turn directive below and the
           // conversation-state fold after the LLM call.
           lowSignalAckHoisted = isLowSignalAcknowledgement(message)
@@ -3986,7 +4032,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const lowered = computeCurriculumEntryOrder(graph, levelBelow(placementLevelHoisted))
                 prisma.studentProgress.update({
                   where: { userId_subjectCode: { userId, subjectCode: progressCode } },
-                  data: { currentLesson: lowered },
+                  // activeLessonSlug is cleared with it: this adjustment is
+                  // meaningless if a stale explicit selection still outranks
+                  // the lowered position in selectCurrentLesson. Found while
+                  // auditing writers for the Persisted Active Lesson — this is
+                  // the third and last writer of currentLesson.
+                  data: { currentLesson: lowered, activeLessonSlug: null },
                 }).catch(() => {})
               }
             }

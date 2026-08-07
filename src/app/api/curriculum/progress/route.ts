@@ -168,6 +168,12 @@ export async function PATCH(req: Request) {
         subjectCode,
         currentLesson: completedLesson + 1,
         completedLessons,
+        // Persisted Active Lesson: finishing a lesson ENDS the explicit
+        // selection that opened it. Clearing rather than advancing keeps one
+        // writer per fact — currentLesson (advanced just above) then governs,
+        // which is the correct next lesson by construction. Setting a second
+        // field to a derived value here would create two facts that can skew.
+        activeLessonSlug: null,
         lastStudiedAt: new Date(),
         completionPercent,
         isCompleted,
@@ -175,6 +181,7 @@ export async function PATCH(req: Request) {
       },
       update: {
         currentLesson: Math.max((existing?.currentLesson ?? 1), completedLesson + 1),
+        activeLessonSlug: null,   // see the create branch — completion ends the selection
         // completedLessons for existing rows is managed by the atomic raw UPDATE above
         lastStudiedAt: new Date(),
         updatedAt: new Date(),
