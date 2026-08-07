@@ -218,7 +218,16 @@ export function buildMasteryGateBlock(): string {
 
 export type LearnerRequest = 'diagram' | 'real_life_example' | 'explain_differently'
 
-const DIAGRAM_RE = /\b(diagram|visuali[sz]e|show\s+me|picture|draw|drawing|graph|chart|animation|simulation|image)\b/i
+// `visuali[sz](?:e|ation)` covers the VERB (visualize/visualise) and the NOUN
+// (visualization/visualisation). Production evidence: 10 learner messages used
+// the noun and none was detected, so "Explain me vector with visualization"
+// received no DIAGRAM directive while "…with a diagram" — same request, same
+// session — did. The noun now behaves exactly like the other visual nouns
+// already in this alternation (diagram, picture, image). Deliberately NOT
+// widened to bare "visual"/"visuals": that is the Teaching Planner's matcher
+// (teachingPlanner.ts), which is non-authoritative and combines it with intent
+// before acting; this regex commands a turn-overriding directive on its own.
+const DIAGRAM_RE = /\b(diagram|visuali[sz](?:e|ation)|show\s+me|picture|draw|drawing|graph|chart|animation|simulation|image)\b/i
 const EXAMPLE_RE = /\b(real[\s-]?life|real[\s-]?world|example|application|story|use\s+case|everyday)\b/i
 const EXPLAIN_DIFF_RE = /\b(explain\s+(it\s+)?(differently|again|another\s+way|in\s+a\s+different\s+way|more\s+simply|simpler)|different\s+explanation|another\s+explanation|say\s+it\s+differently|i\s+(don'?t|do\s+not)\s+understand|i(?:'?m|\s+am)\s+(confused|lost)|no\s+idea|not\s+following|didn'?t\s+get\s+(it|that)|makes?\s+no\s+sense)\b/i
 

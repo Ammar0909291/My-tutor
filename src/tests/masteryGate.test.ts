@@ -174,6 +174,40 @@ describe('learner-request → forced TeachingAction', () => {
     'real-life example request detected: %j', (msg) => expect(detectLearnerRequest(msg)).toBe('real_life_example'),
   )
 
+  // ── Visualization NOUN forms ────────────────────────────────────────────
+  // DIAGRAM_RE matched the verb (visualize/visualise) but not the noun
+  // (visualization/visualisation), so these real production messages produced
+  // NO learner request at all and the DIAGRAM directive was never injected.
+  // Every string below except the two bare forms is a verbatim production
+  // message from the `messages` table.
+  it.each([
+    'Explain me vector with visualization',
+    'Teach me vector with visualization',
+    'Teach me vector with visualization.',
+    'Explain completely with visualization',
+    'Newton’s Second Law explain with visualization',
+    'teach me vector with visualization',
+    'visualization',
+    'visualisation',
+  ])('visualization noun detected as a diagram request: %j', (msg) =>
+    expect(detectLearnerRequest(msg)).toBe('diagram'),
+  )
+
+  // The verb forms this regex already covered — unchanged by the widening.
+  it.each(['visualize', 'visualise', 'visualize this', 'can you visualise it?'])(
+    'visualization verb still detected: %j', (msg) => expect(detectLearnerRequest(msg)).toBe('diagram'),
+  )
+
+  // The sibling visual nouns whose behaviour the noun forms now match.
+  it.each(['show me a diagram', 'show me an image', 'show me a picture'])(
+    'sibling visual noun unchanged: %j', (msg) => expect(detectLearnerRequest(msg)).toBe('diagram'),
+  )
+
+  it('does NOT widen to bare "visual"/"visuals" — that is the planner’s matcher', () => {
+    expect(detectLearnerRequest('visual')).toBeNull()
+    expect(detectLearnerRequest('any visuals?')).toBeNull()
+  })
+
   it('diagram action forbids another prose paragraph and leads with the visual', () => {
     const block = buildLearnerRequestBlock('diagram', 'number_line')
     expect(block).toContain('TEACHING ACTION: DIAGRAM')
@@ -238,6 +272,14 @@ describe('explain-differently remediation', () => {
 
   it('confusion outranks the medium it mentions ("I don\'t understand the diagram")', () => {
     expect(detectLearnerRequest("I don't understand the diagram")).toBe('explain_differently')
+  })
+
+  it('precedence is unchanged for the newly-matched noun forms', () => {
+    // EXPLAIN_DIFF_RE is tested before DIAGRAM_RE (detectLearnerRequest's
+    // documented priority), so widening DIAGRAM_RE must not let the noun
+    // capture a confusion statement that mentions it.
+    expect(detectLearnerRequest("I don't understand the visualization")).toBe('explain_differently')
+    expect(detectLearnerRequest("I'm confused by this visualisation")).toBe('explain_differently')
   })
 
   it('each strategy produces structurally distinct directives (7-strategy system)', () => {
