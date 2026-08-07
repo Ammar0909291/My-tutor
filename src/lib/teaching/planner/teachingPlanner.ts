@@ -162,6 +162,14 @@ function classifyIntent(inputs: PlannerInputs, namedConcepts: readonly ResolvedC
     return { intent: TeachingIntent.EXPLAIN_CONCEPT, confidence: 0.75, reason: 'A concept is explicitly named with no more specific request marker.' }
   }
 
+  // 6b. A bare teaching request with no concept named still asks to be taught;
+  //     the target falls back to the concept already in play. Production is
+  //     full of these ("Explain", "Explain it.", "Re explain"), and they were
+  //     falling through to CONTINUE_LESSON / UNKNOWN.
+  if (TEACH_REQUEST_RE.test(message)) {
+    return { intent: TeachingIntent.EXPLAIN_CONCEPT, confidence: 0.7, reason: 'Bare teaching request with no concept named; targets the concept already in play.' }
+  }
+
   // 7. No concept named: a continuation marker or bare pronoun reference is a
   //    follow-up on whatever we were already doing.
   if (FOLLOW_UP_RE.test(message) || (QUESTION_RE.test(message) && PRONOUN_REFERENCE_RE.test(message))) {
