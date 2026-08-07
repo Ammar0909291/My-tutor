@@ -297,7 +297,7 @@ function realLifeExampleDirective(hasEstablishedExample: boolean): string {
  * additive/optional so pre-existing callers default to false (first-example
  * wording), matching prior behavior.
  */
-const STRATEGY_BLOCKS: Record<number, (vis: string | null, prereqId: string | null) => string> = {
+const STRATEGY_BLOCKS: Record<number, (vis: string | null, prereqId: string | null, visualAttached?: boolean) => string> = {
   0: () =>
     '\n\nTEACHING ACTION: STRATEGY 0 — CONCISE EXPLANATION. ' +
     'Give the shortest possible correct explanation: one sentence of core idea, one concrete example sentence. ' +
@@ -313,9 +313,11 @@ const STRATEGY_BLOCKS: Record<number, (vis: string | null, prereqId: string | nu
     'Walk the concept through that analogy step by step. ' +
     'Do NOT repeat any analogy already used this lesson (the server tracks this). ' +
     'No definitions, no questions this turn.',
-  3: (vis) =>
+  3: (vis, _prereq, visualAttached) =>
     '\n\nTEACHING ACTION: STRATEGY 3 — VISUAL DEMONSTRATION. ' +
-    (vis
+    (visualAttached
+      ? 'The teaching engine has ALREADY attached a graphical figure to this response and the learner can see it — teach directly to that figure (see the VISUAL CONTRACT block). Do NOT draw an ASCII diagram.'
+      : vis
       ? `Lead with the visual: emit the VISUAL:${vis} tag first, then at most two short sentences pointing at what to look at.`
       : 'Build the picture in text: a labelled ASCII/structured diagram or a precise step-by-step visual description ("imagine a horizontal line; on its left end…"), then one sentence of guidance.') +
     ' Words support the visual, not the other way around. No prose explanation this turn.',
@@ -345,13 +347,17 @@ export function buildLearnerRequestBlock(
   hasEstablishedExample = false,
   strategyIndex?: number,
   prerequisiteId?: string | null,
+  /** Visual Resolver V2: a real figure is already attached to this response. */
+  visualAlreadyAttached = false,
 ): string {
   switch (request) {
     case 'diagram':
       return (
         '\n\nTEACHING ACTION: DIAGRAM (learner-requested — overrides the turn move). ' +
         'The student asked to SEE it. Do NOT reply with another prose paragraph. ' +
-        (availableVisualType
+        (visualAlreadyAttached
+          ? 'The teaching engine has ALREADY attached a graphical figure to this response and the learner can see it — teach directly to that figure (see the VISUAL CONTRACT block). Do NOT draw an ASCII diagram.'
+          : availableVisualType
           ? `Lead with the visual: emit the VISUAL:${availableVisualType} tag first, then at most two short sentences pointing at what to look at.`
           : 'Build the picture in text: a labelled ASCII/structured diagram or a precise step-by-step visual description ("imagine a horizontal line; on its left end…"), then one sentence of guidance.') +
         ' No new abstract explanation this turn.'
@@ -362,12 +368,12 @@ export function buildLearnerRequestBlock(
       if (typeof strategyIndex === 'number' && strategyIndex >= 0 && strategyIndex <= 6) {
         const builder = STRATEGY_BLOCKS[strategyIndex]
         if (builder) {
-          return builder(availableVisualType, prerequisiteId ?? null) +
+          return builder(availableVisualType, prerequisiteId ?? null, visualAlreadyAttached) +
             `\n- Strategy ${strategyIndex} of 7 (server-selected, never repeat a previous strategy).` +
             `\n- Strategies already attempted this lesson: ${remediationTier}. Do NOT reuse any previous approach.`
         }
       }
-      return STRATEGY_BLOCKS[0]!(availableVisualType, prerequisiteId ?? null)
+      return STRATEGY_BLOCKS[0]!(availableVisualType, prerequisiteId ?? null, visualAlreadyAttached)
     }
   }
 }

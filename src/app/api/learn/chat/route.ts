@@ -17,6 +17,7 @@ import { generateRoutedScene, isParametricSceneGenerationEnabled, routeSceneGene
 import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/teaching/visuals/generateVisualizationCode'
 import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
 import { decideVisualization } from '@/lib/teaching/visualizationDecision'
+import { isVisualResolverV2Enabled } from '@/lib/teaching/visual/flag'
 import { decide } from '@/lib/teaching-engine'
 import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
@@ -458,6 +459,12 @@ export async function POST(req: Request) {
     // VISUAL:<type> tag is allowed to select. See resolveResponseVisual().
     let allowedVisualsHoisted: readonly string[] | null = null
     let forceVisualRenderHoisted = false
+    // Visual Resolver V2 — the single visualization authority. Computed ONCE,
+    // pre-LLM, from concept identity (never from the model's own prose). When
+    // present it supersedes the four legacy post-LLM pipelines entirely; the
+    // legacy path remains intact and is used whenever this is null (resolver
+    // disabled, or no concept in scope). See src/lib/teaching/visual/.
+    let visualDecisionHoisted: import('@/lib/teaching/visual/types').VisualDecision | null = null
     let conceptPreviouslyMasteredHoisted = false
     // Library Mode duplication cleanup: this used to be set from
     // spacedRevision.ts's per-turn revision block (removed — see the
@@ -2133,6 +2140,48 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             learnerRequestHoisted === 'explain_differently' && remediationTier >= 3 && availableVisual !== null
           forceVisualRenderHoisted =
             shouldForceVisualRender(learnerRequestHoisted, availableVisual) || explainDifferentlyNeedsVisual
+
+          // ── Visual Resolver V2 ────────────────────────────────────────────
+          // Decide the turn's visualization here, BEFORE the LLM, from the
+          // concept the learner actually asked about. Graphical output is the
+          // default; ASCII is returned only when no concept resolves or every
+          // archetype declines. Non-fatal: on any failure visualDecisionHoisted
+          // stays null and the legacy pipelines below run exactly as before.
+          if (isVisualResolverV2Enabled()) {
+            try {
+              const { resolveVisual } = await import('@/lib/teaching/visual/resolveVisual')
+              const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
+              const decision = resolveVisual({
+                message,
+                lessonConceptId: convConceptId,
+                subject: subjectCode,
+                learnerRequest: learnerRequestHoisted,
+                remediationTier,
+              })
+              visualDecisionHoisted = decision
+              // The contract tells the model what is ALREADY on screen, so it
+              // teaches to that figure instead of deciding whether one exists.
+              systemPrompt += buildVisualContractBlock(decision)
+              if (decision.payload.renderer === 'card') {
+                // Keep the legacy hoisted vars coherent for the RRM log and the
+                // canonical-ownership clamp further down.
+                availableVisualHoisted = decision.payload.visualType
+                allowedVisualsHoisted = decision.allowed
+              }
+              console.log('[visual-v2]', {
+                concept: decision.conceptId,
+                excursion: decision.excursion,
+                purpose: decision.purpose,
+                representation: decision.representation,
+                renderer: decision.payload.renderer,
+                graphical: decision.graphical,
+                provenance: decision.provenance,
+              })
+            } catch (err) {
+              console.warn('[visual-v2] resolver failed, falling back to legacy pipelines:', err)
+              visualDecisionHoisted = null
+            }
+          }
           // Brain SHADOW MODE (production migration Phase 1/4). Runs the
           // completed Brain alongside the legacy path and LOGS ONLY: no value
           // computed here is read by any production code path, no LLM call is
@@ -2230,9 +2279,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 learnerRequestHoisted, availableVisual, remediationTier,
                 hasEstablishedExample, selectedStrategyHoisted,
                 teachingHistoryHoisted.prerequisiteAttempts.length > 0 ? null : (convConceptId ?? null),
+                visualDecisionHoisted?.graphical ?? false,
               )
             } else {
-              systemPrompt += buildLearnerRequestBlock(learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample)
+              systemPrompt += buildLearnerRequestBlock(
+                learnerRequestHoisted, availableVisual, remediationTier, hasEstablishedExample,
+                undefined, undefined, visualDecisionHoisted?.graphical ?? false,
+              )
             }
           }
           // Bug 8 — the client reports whether the previous long (collapsed)
@@ -3566,6 +3619,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         reasoning: dvDecision.reasoning,
       })
       if (
+        !visualDecisionHoisted &&      // V2 already decided — never pay for an LLM visual call
         !detectedVisualSpec &&
         !detectedSceneSpec &&
         dvFlag &&
@@ -3664,6 +3718,42 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Hoisted out of the strategy-log block below so the P0 Brain
       // compliance check (further down) can reuse it unconditionally —
       // same computation, not duplicated.
+      // ── Visual Resolver V2: final authority ──────────────────────────────
+      // When V2 produced a decision it REPLACES whatever the legacy pipelines
+      // and bias guards above arrived at. Exactly one payload is assigned and
+      // every other channel is cleared, so "two visuals at once" is impossible
+      // by construction rather than by the post-hoc nulling guard above.
+      //
+      // The LLM's own VISUAL:<type> tag is still honoured, but only as a
+      // REFINEMENT: it may pick a different type within the concept's legal set
+      // (decision.allowed) and is otherwise discarded. That preserves the
+      // 2026-08-02 canonical-ownership fix — the model can never introduce a
+      // visual belonging to a different concept.
+      if (visualDecisionHoisted) {
+        const decision = visualDecisionHoisted
+        const llmTag = responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null
+        responseVisual = null
+        detectedVisualSpec = null
+        detectedSceneSpec = null
+        dynamicVisualizationCode = null
+
+        switch (decision.payload.renderer) {
+          case 'card': {
+            const legal = decision.allowed ?? [decision.payload.visualType]
+            responseVisual = llmTag && legal.includes(llmTag) ? llmTag : decision.payload.visualType
+            break
+          }
+          case 'spec':
+            detectedVisualSpec = decision.payload.visualSpec
+            break
+          case 'scene':
+            detectedSceneSpec = decision.payload.sceneSpec
+            break
+          case 'ascii':
+            break   // intentionally nothing — the contract block asked for text
+        }
+      }
+
       const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
 
       // ADR 15: create RRM entry after visual pipeline resolution.
