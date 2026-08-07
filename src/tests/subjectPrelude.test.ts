@@ -186,7 +186,11 @@ describe('prelude wiring in LessonScreen', () => {
     expect(SRC).toContain('preludeVisible && subjectPrelude')
     // The Start Lesson preview is suppressed while the prelude is up, so the
     // learner cannot reach Lesson 1 around it on first entry.
-    expect(SRC).toContain("!lessonStarted && messages.length === 0 && !preludeVisible")
+    // `entryGateReady` was inserted between them so neither overlay renders
+    // before curriculum + history have loaded (the ~2s flash). The property
+    // this test protects — the Start Lesson preview stays suppressed while the
+    // prelude is up — is unchanged.
+    expect(SRC).toContain("!lessonStarted && messages.length === 0 && entryGateReady && !preludeVisible")
   })
 
   it('PRELUDE COMPLETION → LESSON 1: completing dismisses the gate immediately', () => {

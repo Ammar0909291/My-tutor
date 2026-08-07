@@ -955,6 +955,7 @@ export const translations = {
     coach_time_120: '2 часа',
     /* ── Sprint N: Progression & Completion ── */
     start_lesson_btn: '▶ Начать урок',
+    resume_lesson_btn: '▶ Продолжить урок',
     lesson_preview_lesson_label: 'Урок',
     lesson_preview_about_label: 'О чём этот урок',
     lesson_preview_prereqs_label: 'Стоит повторить перед началом',
@@ -2265,6 +2266,7 @@ export const translations = {
     coach_time_120: '2 hours',
     /* ── Sprint N: Progression & Completion ── */
     start_lesson_btn: '▶ Start Lesson',
+    resume_lesson_btn: '▶ Resume Lesson',
     lesson_preview_lesson_label: 'Lesson',
     lesson_preview_about_label: 'What this lesson is about',
     lesson_preview_prereqs_label: 'Worth reviewing first',
@@ -3564,6 +3566,7 @@ export const translations = {
     coach_time_120: '2 hours',
     /* ── Sprint N: Progression & Completion ── */
     start_lesson_btn: '▶ पाठ शुरू करें',
+    resume_lesson_btn: '▶ पाठ जारी रखें',
     lesson_preview_lesson_label: 'Lesson',
     lesson_preview_about_label: 'Yeh lesson kis baare mein hai',
     lesson_preview_prereqs_label: 'Shuru karne se pehle revise karein',

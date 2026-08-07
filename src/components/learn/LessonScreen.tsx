@@ -1033,6 +1033,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Curriculum
   const [curriculumLessons, setCurriculumLessons] = useState<CurriculumLesson[]>([])
   const [curriculumLoaded, setCurriculumLoaded] = useState(false)
+  // True once the mount-time history restore has settled (any outcome).
+  // Pairs with curriculumLoaded to form the entry-overlay gate below: both
+  // facts must be known before we can say whether the prelude or the
+  // Start-Lesson panel belongs on screen.
+  const [historyHydrated, setHistoryHydrated] = useState(false)
   const [curriculumProgress, setCurriculumProgress] = useState<CurriculumProgress>({ currentLesson: 1, completedLessons: [] })
   // P0 (lesson-state desync): curriculumProgress.currentLesson is the single
   // scalar the header, roadmap tree, and LessonNavigationPanel all read (via
@@ -1275,6 +1280,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         // the (now hidden) button were somehow triggered.
         initializedRef.current = true
       } catch { /* non-fatal — welcome screen fallback stays intact */ }
+      finally {
+        // Every path above — success, any of the seven early returns, or a
+        // throw — must mark hydration done. Until this flips, the entry
+        // overlays render nothing rather than guessing, which is what stops
+        // the Start-Lesson panel flashing for the ~1s this fetch takes.
+        if (!cancelled) setHistoryHydrated(true)
+      }
     })()
     return () => { cancelled = true }
     // subjectSlug drives remount via learn/page.tsx key; other props are
@@ -2086,7 +2098,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
   // The gate. Replay is explicit and always wins; otherwise it shows exactly
   // once, on first entry, and never again after completion.
-  const preludeVisible = !preludeDismissed && shouldShowPrelude({
+  //
+  // `curriculumLoaded` is load-bearing, not defensive. curriculumProgress is
+  // seeded as { currentLesson: 1, completedLessons: [] } with NO
+  // preludeViewedAt, so before the fetch resolves isPreludeCompleted(undefined)
+  // is false and the gate answers "show" for every learner — including one who
+  // finished the prelude months ago. That is the reported bug: the subject
+  // introduction appearing on every lesson change and every refresh, then
+  // vanishing ~2s later when the real timestamp arrives. Asking the gate a
+  // question we cannot yet answer is what produced the flash.
+  const entryGateReady = curriculumLoaded && historyHydrated
+  const preludeVisible = entryGateReady && !preludeDismissed && shouldShowPrelude({
     subjectSlug,
     preludeViewedAt: curriculumProgress.preludeViewedAt,
     replayRequested: preludeReplay,
@@ -4500,7 +4522,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {/* FIX 1 (stabilization): "Start Lesson" gate — selecting/opening a
                   lesson only selects it; the AI does not start teaching until the
                   learner presses this button. */}
-              {!lessonStarted && messages.length === 0 && !preludeVisible && (() => {
+              {!lessonStarted && messages.length === 0 && entryGateReady && !preludeVisible && (() => {
                 // P0 (lesson start flow): this is the ONE chokepoint every
                 // lesson-entry path funnels through before teaching begins —
                 // first open, refresh, and (after the routing fix below) every
@@ -4517,6 +4539,16 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 // what Tutor Max actually says never disagree.
                 const goalLen = previewLesson?.lessonGoal?.length ?? 0
                 const durationEstimate = goalLen === 0 ? null : goalLen < 60 ? '8–10 min' : goalLen < 160 ? '12–15 min' : '18–20 min'
+                // Start vs Resume. Reuses decideLessonEntryMode — the same
+                // helper that already decides which opening the tutor gives —
+                // so the button label can never disagree with what pressing it
+                // actually does. 'resume' (saved progress on THIS lesson) and
+                // 'review' (already completed) both mean the learner has been
+                // here before; only 'introduction' is a genuine first start.
+                const previewEntryMode = previewLesson
+                  ? decideLessonEntryMode({ lesson: previewLesson, progress: curriculumProgress, topicProgressMap })
+                  : 'introduction'
+                const isResume = previewEntryMode === 'resume' || previewEntryMode === 'review'
                 return (
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 32, paddingBottom: 32, paddingLeft: 20, paddingRight: 20 }}>
                     <EagleMascot variant="hero" size={52} />
@@ -4579,7 +4611,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer',
                         background: UI.indigo, color: '#fff', border: 'none', marginTop: 4,
                       }}>
-                      {t('start_lesson_btn')}
+                      {isResume ? t('resume_lesson_btn') : t('start_lesson_btn')}
                     </button>
                   </div>
                 )
