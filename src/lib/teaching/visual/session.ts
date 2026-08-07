@@ -112,6 +112,8 @@ export function decideContinuity(input: {
   lessonConceptId: string | null
   requestedConceptId: string | null
   lastAssistantAskedQuestion: boolean
+  /** True when the turn is an explicit visual request ("show me a graph"). */
+  visualRequested?: boolean
 }): ContinuityAction {
   const { session, message, lessonConceptId, requestedConceptId, lastAssistantAskedQuestion } = input
 
@@ -153,6 +155,31 @@ export function decideContinuity(input: {
     return { kind: 'switch', targetConceptId: requestedConceptId, reason: 'explicit-new-topic-request' }
   }
 
+  // A visual request that names NO concept means "draw what we are studying".
+  //
+  // PRODUCTION DEFECT this fixes (observed 17:42:23Z, session cmsj5569t): the
+  // learner was in a Calorimetry lesson with a vector excursion still open
+  // from three turns earlier, typed "Show me graph", and the screen kept the
+  // 3D vector figure — heldTurns 2 — while the tutor talked about thermal
+  // exchange. Three things disagreed at once: the request, the figure and the
+  // lesson.
+  //
+  // Cause: once medium words stopped resolving to concepts (they used to
+  // hijack to graph THEORY), `requestedConceptId` for "show me a graph" is
+  // correctly null — and a null request fell through to the catch-all hold,
+  // which silently extended an unrelated excursion. Asking for a picture is
+  // an ACTIVE request, not a passive turn: it targets the lesson, and it ends
+  // the excursion. Only fires when the figure is actually somewhere else, so
+  // a request while already on the lesson concept still holds.
+  if (
+    input.visualRequested &&
+    !requestedConceptId &&
+    lessonConceptId &&
+    session.conceptId !== lessonConceptId
+  ) {
+    return { kind: 'switch', targetConceptId: lessonConceptId, reason: 'visual-request-returns-to-lesson' }
+  }
+
   // Everything else — follow-ups, corrections, "why?", "I don't get it",
   // incidental concept mentions — keeps the current figure on screen.
   return { kind: 'hold', session, reason: 'continuity' }
@@ -175,6 +202,11 @@ export function parseVisualSession(raw: unknown): VisualSession | null {
     representation: v.representation as Representation,
     renderer: v.renderer as RendererKind,
     returnToConceptId: typeof v.returnToConceptId === 'string' ? v.returnToConceptId : null,
-    turns: typeof v.turns === 'number' && Number.isFinite(v.turns) ? v.turns : 0,
+    // Clamped at 0: a negative count (corrupt snapshot, hand-edited row) would
+    // push the MAX_EXCURSION_TURNS safety valve further away instead of nearer.
+    turns:
+      typeof v.turns === 'number' && Number.isFinite(v.turns) && v.turns > 0
+        ? Math.floor(v.turns)
+        : 0,
   }
 }

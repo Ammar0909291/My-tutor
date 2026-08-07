@@ -193,12 +193,25 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   const requestedConceptId = target?.origin === 'learner-request' ? target.conceptId : null
 
   // ── 2. Does the figure already on screen survive this turn? ───────────────
+  // A held figure whose concept has left the Knowledge Graph (renamed or
+  // deleted between sessions — contextSnapshot outlives KG edits) would be
+  // held anyway and then fail the KG lookup below, spending a turn on ASCII
+  // that names a concept which no longer exists. Drop it up front so the
+  // learner gets the lesson's own figure instead.
+  // The typeof guard also makes this total for a session that bypassed
+  // parseVisualSession with a non-string conceptId — getKGNode would throw.
+  const liveSession =
+    session && typeof session.conceptId === 'string' && contextFor(session.conceptId)
+      ? session
+      : null
+
   const action = decideContinuity({
-    session,
+    session: liveSession,
     message: input.message,
     lessonConceptId: input.lessonConceptId,
     requestedConceptId,
     lastAssistantAskedQuestion: lastAsked,
+    visualRequested: input.learnerRequest === 'diagram',
   })
 
   let conceptId: string | null
