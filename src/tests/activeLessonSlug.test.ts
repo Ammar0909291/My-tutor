@@ -9,6 +9,8 @@
  */
 import { describe, it, expect } from 'vitest'
 import { selectCurrentLesson } from '@/lib/teaching/progressionIntegrity'
+import { resolveActiveLesson } from '@/lib/curriculum/lessonNavigation'
+import type { CurriculumLesson, CurriculumProgress } from '@/lib/curriculum/lessonNavigation'
 
 const SCALARS = 'phys.meas.scalars-vectors'
 const CALORIMETRY = 'phys.therm.calorimetry'
@@ -85,5 +87,62 @@ describe('selectCurrentLesson · activeLessonSlug tier', () => {
   it('after completion clears the pointer, the advanced counter governs', () => {
     // /api/curriculum/progress raises currentLesson and sets the slug to NULL.
     expect(selectCurrentLesson(lessons, 74, [], null)?.topicSlug).toBe(CALORIMETRY)
+  })
+})
+
+// ── H-2: the client must resolve the SAME lesson as the server ────────────
+
+const clientLessons: CurriculumLesson[] = [
+  { id: 'p-1-7', subjectCode: 'physics', unit: 1, unitTitle: 'Measurement', lesson: 7, lessonTitle: 'Scalar and Vector Quantities', lessonGoal: '', order: 7, topicSlug: SCALARS },
+  { id: 'p-9-74', subjectCode: 'physics', unit: 9, unitTitle: 'Thermodynamics', lesson: 4, lessonTitle: 'Calorimetry', lessonGoal: '', order: 74, topicSlug: CALORIMETRY },
+]
+const progress = (p: Partial<CurriculumProgress>): CurriculumProgress =>
+  ({ currentLesson: 74, completedLessons: [], ...p })
+
+describe('resolveActiveLesson · client/server agreement', () => {
+  it('client agrees with the server on the revision case', () => {
+    const client = resolveActiveLesson(clientLessons, progress({ activeLessonSlug: SCALARS }))
+    const server = selectCurrentLesson(lessons, 74, [], SCALARS)
+    expect(client?.topicSlug).toBe(SCALARS)
+    expect(client?.topicSlug).toBe(server?.topicSlug)
+    expect(client?.order).toBe(server?.order)
+  })
+
+  it('client agrees with the server on the Calorimetry (no override) case', () => {
+    const client = resolveActiveLesson(clientLessons, progress({ activeLessonSlug: null }))
+    const server = selectCurrentLesson(lessons, 74, [], null)
+    expect(client?.topicSlug).toBe(CALORIMETRY)
+    expect(client?.topicSlug).toBe(server?.topicSlug)
+  })
+
+  it('absent activeLessonSlug is the pre-existing client behaviour exactly', () => {
+    expect(resolveActiveLesson(clientLessons, progress({}))?.order).toBe(74)
+  })
+
+  it('a stale slug degrades to currentLesson rather than breaking the screen', () => {
+    expect(resolveActiveLesson(clientLessons, progress({ activeLessonSlug: 'gone.away' }))?.order).toBe(74)
+  })
+
+  it('legacy lessons with no topicSlug keep the old order-based behaviour', () => {
+    const legacy: CurriculumLesson[] = [
+      { id: 'c-1', subjectCode: 'c', unit: 1, unitTitle: 'U', lesson: 1, lessonTitle: 'Pointers', lessonGoal: '', order: 1 },
+      { id: 'c-2', subjectCode: 'c', unit: 1, unitTitle: 'U', lesson: 2, lessonTitle: 'Structs', lessonGoal: '', order: 2 },
+    ]
+    expect(resolveActiveLesson(legacy, { currentLesson: 2, completedLessons: [] })?.order).toBe(2)
+    expect(resolveActiveLesson(legacy, { currentLesson: 99, completedLessons: [] })?.order).toBe(1)
+  })
+
+  it('an empty lesson list returns null', () => {
+    expect(resolveActiveLesson([], progress({ activeLessonSlug: SCALARS }))).toBeNull()
+  })
+
+  it('completion: clearing the slug moves the client off the finished lesson', () => {
+    // The hazard the chat reconciliation guards: after completing lesson 7 the
+    // server advances the order AND clears the slug. If the client kept the
+    // stale slug, tier 0 would pin it to the lesson just finished.
+    const stale = resolveActiveLesson(clientLessons, progress({ currentLesson: 74, activeLessonSlug: SCALARS }))
+    expect(stale?.order).toBe(7)
+    const reconciled = resolveActiveLesson(clientLessons, progress({ currentLesson: 74, activeLessonSlug: null }))
+    expect(reconciled?.order).toBe(74)
   })
 })

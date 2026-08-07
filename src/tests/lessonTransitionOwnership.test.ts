@@ -149,7 +149,7 @@ describe('the concept pointer is derived, not authoritative', () => {
     // property this test protects is unchanged — the route delegates to the one
     // selector and never re-derives identity from topic_progress itself.
     expect(src).toContain(
-      'selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, (studentProgress as any)?.activeLessonSlug)',
+      'selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)',
     )
   })
 })

@@ -81,6 +81,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Session not found' }, { status: 404 })
     }
 
+    // Load profile (name, level, goals, country). Hoisted above the
+    // Persisted Active Lesson write because that write needs `currentLevel`
+    // to compute the placement entry order for a brand-new row (see below).
+    const profile = await prisma.profile.findUnique({ where: { userId } }).catch(() => null)
+
     // ── Persisted Active Lesson: the ONE writer of activeLessonSlug ────────
     //
     // This endpoint is reached only by an EXPLICIT learner action — opening a
@@ -91,29 +96,56 @@ export async function POST(req: Request) {
     // next chat turn re-derived the furthest lesson instead of this one.
     //
     // Deliberately NOT wrapped in Math.max or any monotonic guard — moving
-    // BACKWARD is the whole point. Fire-and-forget: a persistence failure must
-    // never cost the learner their lesson opening, and the next explicit
-    // navigation rewrites it anyway.
+    // BACKWARD is the whole point.
+    //
+    // AWAITED, inside try/catch. It was previously fire-and-forget so a slow
+    // write could never delay the lesson, but on a serverless runtime an
+    // un-awaited promise can be reclaimed when the invocation ends — a
+    // silently dropped write here reproduces the exact divergence this field
+    // exists to remove, with nothing surfaced. One indexed upsert costs
+    // single-digit milliseconds against an LLM call that costs seconds, so
+    // awaiting is the cheaper side of the trade. The catch preserves the
+    // original guarantee: the learner still receives their lesson if the
+    // write fails, and lesson-init never crashes because of it.
     if (topicSlug) {
       const subjectCode = learnSession.subject.slug
-      prisma.studentProgress.upsert({
-        where: { userId_subjectCode: { userId, subjectCode } },
-        create: {
-          userId,
-          subjectCode,
-          activeLessonSlug: topicSlug,
-          ...(lessonOrder ? { currentLesson: lessonOrder } : {}),
-          lastStudiedAt: new Date(),
-        },
-        // Only the pointer moves. currentLesson is a different fact with a
-        // different owner (/api/curriculum/progress) and is not touched here —
-        // opening lesson 7 for revision must not rewind furthest-progress.
-        update: { activeLessonSlug: topicSlug, lastStudiedAt: new Date() },
-      }).catch((err) => console.warn('[lesson-init] activeLessonSlug persist skipped:', err))
-    }
+      try {
+        // A brand-new row must NOT be stamped with the opened lesson's order.
+        // currentLesson means "furthest progress", and opening a lesson is not
+        // progress — an advanced learner whose placement entry order is 32 who
+        // opens lesson 5 would otherwise have their placement position lowered
+        // to 5 permanently, because a real row suppresses the placement
+        // default that /api/curriculum and the dashboard fall back to. The
+        // opened lesson is carried by activeLessonSlug; currentLesson gets the
+        // same placement entry order those two readers would have defaulted
+        // to, via the existing helper. Existing rows are untouched.
+        const { getKnowledgeGraph } = await import('@/lib/curriculum/knowledgeGraph')
+        const { computeCurriculumEntryOrder } = await import('@/lib/curriculum/placement')
+        const { normalizeToCanonicalLevel } = await import('@/lib/curriculum/levels')
+        const graph = getKnowledgeGraph(subjectCode)
+        const entryOrder = graph
+          ? computeCurriculumEntryOrder(graph, normalizeToCanonicalLevel(profile?.currentLevel))
+          : undefined
 
-    // Load profile (name, level, goals, country)
-    const profile = await prisma.profile.findUnique({ where: { userId } }).catch(() => null)
+        await prisma.studentProgress.upsert({
+          where: { userId_subjectCode: { userId, subjectCode } },
+          create: {
+            userId,
+            subjectCode,
+            activeLessonSlug: topicSlug,
+            ...(entryOrder ? { currentLesson: entryOrder } : {}),
+            lastStudiedAt: new Date(),
+          },
+          // Only the pointer moves. currentLesson is a different fact with a
+          // different owner (/api/curriculum/progress) and is deliberately not
+          // touched here — opening lesson 7 for revision must never rewind
+          // furthest-progress.
+          update: { activeLessonSlug: topicSlug, lastStudiedAt: new Date() },
+        })
+      } catch (err) {
+        console.warn('[lesson-init] activeLessonSlug persist failed:', err)
+      }
+    }
 
     // Derive country for LLM routing — same logic as route.ts
     const profileCountry = profile?.country ?? 'global'

@@ -8,6 +8,7 @@ import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 import { getKnowledgeGraph } from '@/lib/curriculum/knowledgeGraph'
 import { computeCurriculumEntryOrder } from '@/lib/curriculum/placement'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
+import { selectCurrentLesson } from '@/lib/teaching/progressionIntegrity'
 import { getLeagueForXP, currentWeekString } from '@/lib/xp'
 import { t, type Lang } from '@/lib/i18n'
 import type {
@@ -264,12 +265,18 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
   // a timeout there throws and surfaces the app-wide error.tsx boundary
   // ("Something went wrong"), which is what this was found investigating.
   console.log('[Q2] studentProgress')
-  let studentProgressList: { subjectCode: string; currentLesson: number; completedLessons: number[]; lastStudiedAt: Date | null; lastLessonTitle: string | null; completionPercent: number }[] = []
+  let studentProgressList: { subjectCode: string; currentLesson: number; activeLessonSlug: string | null; completedLessons: number[]; lastStudiedAt: Date | null; lastLessonTitle: string | null; completionPercent: number }[] = []
   const studentProgressPromise = withRetry(() => prisma.studentProgress.findMany({
     where: { userId, subjectCode: { in: slugs.length > 0 ? slugs : [''] } },
     select: {
       subjectCode: true,
       currentLesson: true,
+      // Persisted Active Lesson. Without this the dashboard resolved the
+      // lesson from currentLesson alone — the monotonic furthest-progress
+      // counter — so a learner revising lesson 7 saw "Continue → Calorimetry
+      // (74)" here while /learn correctly taught lesson 7. Selecting it lets
+      // the dashboard run the SAME canonical selector the chat route runs.
+      activeLessonSlug: true,
       completedLessons: true,
       lastStudiedAt: true,
       lastLessonTitle: true,
@@ -293,6 +300,44 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
     return graph ? computeCurriculumEntryOrder(graph, curriculumLevel) : 1
   }
 
+  /**
+   * Resolve the lesson this subject is actually sitting on, using the SAME
+   * canonical selector as /api/learn/chat — never a second implementation of
+   * the precedence. Dashboard and /learn disagreeing is the bug this closes.
+   *
+   * The dashboard has no topic_progress rows loaded (it never did), so the
+   * selector's middle tier is empty here and precedence reduces to
+   * activeLessonSlug -> currentLesson -> first lesson. That is exactly the
+   * chat route's answer whenever an explicit selection exists, which is the
+   * only case where the two previously diverged.
+   *
+   * Returns null for subjects with no Knowledge Graph (legacy curriculums),
+   * where every caller keeps its existing number-only behaviour.
+   */
+  const resolveLesson = (
+    slug: string,
+    sp: { currentLesson: number; activeLessonSlug: string | null } | undefined,
+  ): { order: number; lessonTitle: string } | null => {
+    const graph = getKnowledgeGraph(slug)
+    if (!graph) return null
+    let order = 0
+    const lessons = graph.modules.flatMap((module) =>
+      module.nodes.map((node) => ({
+        order: ++order,
+        topicSlug: node.slug,
+        lessonTitle: node.title,
+      })),
+    )
+    if (lessons.length === 0) return null
+    const selected = selectCurrentLesson(
+      lessons,
+      sp?.currentLesson ?? defaultCurrentLesson(slug),
+      [],
+      sp?.activeLessonSlug,
+    )
+    return selected ? { order: selected.order, lessonTitle: selected.lessonTitle } : null
+  }
+
   const activePs = [...enrolledSubjects].sort((a, b) => {
     const ta = spMap.get(a.subject.slug)?.lastStudiedAt?.getTime() ?? 0
     const tb = spMap.get(b.subject.slug)?.lastStudiedAt?.getTime() ?? 0
@@ -303,18 +348,29 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
     const slug = activePs.subject.slug
     const sp = spMap.get(slug)
     const lib = findLibrarySubject(slug)
-    const lessonNum = sp?.currentLesson ?? defaultCurrentLesson(slug)
+    const resolved = resolveLesson(slug, sp)
+    const lessonNum = resolved?.order ?? sp?.currentLesson ?? defaultCurrentLesson(slug)
+    // When the selector resolved a lesson, its title is authoritative and must
+    // win over lastLessonTitle — otherwise the card could show lesson 7's
+    // number beside lesson 74's title, which is worse than the bug it fixes.
+    const lessonTitle = resolved?.lessonTitle ?? sp?.lastLessonTitle ?? null
     const href = `/learn?subject=${slug}`
     continueLesson = {
       emoji: lib?.icon ?? '📘',
       label: `${lib?.name ?? activePs.subject.name} · ${t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum))}`,
-      title: sp?.lastLessonTitle ?? t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum)),
+      title: lessonTitle ?? t(dashLang, 'dashx_lesson_n').replace('{n}', String(lessonNum)),
       xpReward: 10,
       estimatedMinutes: 5,
       href,
     }
     practiceModes = buildPracticeModes(href, dashLang)
-    skillPath = buildLibrarySkillPath(sp ?? { currentLesson: lessonNum, completedLessons: [] }, lib?.icon ?? '📘', dashLang)
+    // The skill path highlights the CURRENT node, so it must use the same
+    // resolved lesson — not the raw counter — or the ring would centre on a
+    // different lesson than the card above it.
+    skillPath = buildLibrarySkillPath(
+      { currentLesson: lessonNum, completedLessons: sp?.completedLessons ?? [] },
+      lib?.icon ?? '📘', dashLang,
+    )
   } else {
     continueLesson = emptyContinueLesson(dashLang)
     practiceModes = buildPracticeModes('/learn', dashLang)
@@ -332,8 +388,8 @@ export async function getDashboardV2Data(userId: string): Promise<DashboardV2Dat
       icon: lib?.icon ?? '📘',
       color: colors.color,
       bgColor: colors.bgColor,
-      currentLesson: sp?.currentLesson ?? defaultCurrentLesson(slug),
-      lastLessonTitle: sp?.lastLessonTitle ?? null,
+      currentLesson: resolveLesson(slug, sp)?.order ?? sp?.currentLesson ?? defaultCurrentLesson(slug),
+      lastLessonTitle: resolveLesson(slug, sp)?.lessonTitle ?? sp?.lastLessonTitle ?? null,
       completionPercent: sp?.completionPercent ?? 0,
       href: `/learn?subject=${slug}`,
     }

@@ -289,7 +289,7 @@ export async function POST(req: Request) {
           // older unfinished topic instead of starting the next lesson. See
           // selectCurrentLesson's header.
           const currentLesson =
-            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, (studentProgress as any)?.activeLessonSlug)
+            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
             topicProgressRows
@@ -349,7 +349,7 @@ export async function POST(req: Request) {
             const topicProgressRows = topicProgressRowsShared
             // OBJECTIVE 2: same authoritative-owner precedence as the KG branch.
             const currentLesson =
-              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, (studentProgress as any)?.activeLessonSlug)
+              selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)
               ?? syntheticLessons[0]
             const completedSlugs = new Set(
               topicProgressRows
