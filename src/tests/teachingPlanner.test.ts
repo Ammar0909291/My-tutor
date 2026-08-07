@@ -206,13 +206,23 @@ describe('Teaching Planner · determinism and purity', () => {
     expect(JSON.stringify({ ...inputs, resolveConcept: undefined })).toBe(snapshot)
   })
 
-  it('ranks equal-confidence concepts deterministically by conceptId', () => {
+  it('ranks equal-confidence concepts deterministically, preserving caller order', () => {
+    // CONTRACT CHANGE (production hardening). This previously asserted a
+    // conceptId-ascending tie-break, which DISCARDED the richer ordering the
+    // resolver had already computed (matched-span length, then lesson subject).
+    // Live evidence: with several titles tied at 0.95 the alphabetically-first
+    // id won, and the planner targeted `math.alg.term` while Concept
+    // Understanding's own primary was `phys.meas.scalars-vectors`. Ties now
+    // keep the caller's order — still fully deterministic, because that input
+    // order is itself deterministic.
     const tied: ConceptResolver = () => [
       { conceptId: 'zzz.b', title: 'B', confidence: 0.8 },
       { conceptId: 'aaa.a', title: 'A', confidence: 0.8 },
     ]
     const plan = planTeachingTurn({ message: 'explain them', activeLessonConceptId: CALORIMETRY, resolveConcept: tied })
-    expect(plan.targetConceptId).toBe('aaa.a')
+    expect(plan.targetConceptId).toBe('zzz.b')
+    // Repeat runs must agree — determinism is preserved, only the rule changed.
+    expect(planTeachingTurn({ message: 'explain them', activeLessonConceptId: CALORIMETRY, resolveConcept: tied }).targetConceptId).toBe('zzz.b')
   })
 
   it('plans without a resolver: intent still classified, concept unresolved', () => {

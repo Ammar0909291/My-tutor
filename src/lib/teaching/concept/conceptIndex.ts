@@ -11,6 +11,11 @@ import {
   type ConceptIndexEntry, type ConceptMatch,
 } from './conceptUnderstanding'
 
+/** A one-token concept title is admitted only in a message at or under this
+ *  many normalized tokens. See the specificity floor in
+ *  `resolveConceptMatches`. */
+export const SINGLE_TOKEN_MATCH_MAX_MESSAGE_TOKENS = 25
+
 // ── Normalization ─────────────────────────────────────────────────────────
 
 /** Words that carry no identifying weight and must never match alone. */
@@ -77,7 +82,10 @@ export function deriveAcronym(title: string): string | null {
   const words = normalizeToTokens(title).filter(t => !STOP_WORDS.has(t))
   if (words.length < 2) return null
   const acronym = words.map(w => w[0]).join('').toUpperCase()
-  return acronym.length >= 2 ? acronym : null
+  // Minimum 3 letters. Production evidence: a 2-letter acronym matched the
+  // ordinary words "DO NOT" in a long message and resolved
+  // "Damped Oscillations". SHM/RSA/GCD are unaffected.
+  return acronym.length >= 3 ? acronym : null
 }
 
 // ── Index construction ────────────────────────────────────────────────────
@@ -170,6 +178,21 @@ export function resolveConceptMatches(
   const upperTokens = uppercaseTokens(raw)
   const out: ConceptMatch[] = []
 
+  // SPECIFICITY FLOOR (production hardening).
+  //
+  // 213 canonical KG titles are a single word, and many are ordinary English:
+  // Term, Field, Power, Work, Current, Set, Tree, Variable, Vector. Matching
+  // those anywhere in a long message is noise, not a concept request — a
+  // 3,459-character message produced 13 matches (Term, Field, Power, Tree,
+  // Variable, …) none of which the learner had asked about.
+  //
+  // A learner asking about a concept says so briefly ("what is vector?",
+  // "teach me vector with visualization"). So a ONE-TOKEN title is admitted
+  // only in a short, focused message. Multi-token titles are unaffected at any
+  // length, and an explicit concept id always matches. Deterministic, no
+  // fuzzy/AI matching.
+  const focusedMessage = messageTokens.length <= SINGLE_TOKEN_MATCH_MAX_MESSAGE_TOKENS
+
   for (const entry of index) {
     const candidates: { method: ExtractionMethod; text: string; tokens: number }[] = []
 
@@ -178,9 +201,14 @@ export function resolveConceptMatches(
       candidates.push({ method: ExtractionMethod.CONCEPT_ID, text: entry.conceptId, tokens: entry.conceptId.split('.').length })
     }
 
-    // 2. Exact title (case-insensitive, punctuation intact).
-    if (entry.title && lowerRaw.includes(entry.title.toLowerCase())) {
-      candidates.push({ method: ExtractionMethod.EXACT_TITLE, text: entry.title, tokens: normalizeToTokens(entry.title).length })
+    // 2. Exact title (case-insensitive), on TOKEN BOUNDARIES. A raw substring
+    //    test also fired on fragments inside longer words.
+    const exactTokens = normalizeToTokens(entry.title)
+    if (entry.title
+      && lowerRaw.includes(entry.title.toLowerCase())
+      && containsTokenRun(messageTokens, exactTokens)
+      && (exactTokens.length > 1 || focusedMessage)) {
+      candidates.push({ method: ExtractionMethod.EXACT_TITLE, text: entry.title, tokens: exactTokens.length })
     }
 
     // 3. Registered aliases.
@@ -194,7 +222,8 @@ export function resolveConceptMatches(
     // 4. Normalized title — case, punctuation, possessives, plurals.
     const titleTokens = normalizeToTokens(entry.title)
     const significant = titleTokens.filter(t => !STOP_WORDS.has(t))
-    if (significant.length > 0 && containsTokenRun(messageTokens, titleTokens)) {
+    if (significant.length > 0 && containsTokenRun(messageTokens, titleTokens)
+      && (titleTokens.length > 1 || focusedMessage)) {
       candidates.push({ method: ExtractionMethod.NORMALIZED_TITLE, text: entry.title, tokens: titleTokens.length })
     }
 
@@ -203,14 +232,15 @@ export function resolveConceptMatches(
     const head = titleHead(entry.title)
     if (head) {
       const headTokens = normalizeToTokens(head)
-      if (headTokens.length > 0 && containsTokenRun(messageTokens, headTokens)) {
+      if (headTokens.length > 0 && containsTokenRun(messageTokens, headTokens)
+        && (headTokens.length > 1 || focusedMessage)) {
         candidates.push({ method: ExtractionMethod.NORMALIZED_TITLE, text: head, tokens: headTokens.length })
       }
     }
 
     // 5. Acronym, only when written in caps by the student.
     const acronym = deriveAcronym(entry.title)
-    if (acronym && upperTokens.has(acronym)) {
+    if (acronym && upperTokens.has(acronym) && focusedMessage) {
       candidates.push({ method: ExtractionMethod.ACRONYM, text: acronym, tokens: 1 })
     }
 

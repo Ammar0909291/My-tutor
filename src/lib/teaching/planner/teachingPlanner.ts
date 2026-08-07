@@ -64,11 +64,20 @@ const QUESTION_RE = /\?\s*$|^\s*(what|why|how|when|where|which|who|can|could|do|
 
 // ── Concept resolution ────────────────────────────────────────────────────
 
-/** Deterministic ranking: confidence desc, then conceptId asc as the
- *  tie-break so equal-confidence matches never reorder between runs. */
+/**
+ * Deterministic ranking: confidence desc, ties keeping the caller's order.
+ *
+ * The tie-break used to be `conceptId` ascending, which DISCARDED the richer
+ * ordering the resolver had already computed (matched-span length, then the
+ * lesson's own subject). Production evidence: several titles matched at
+ * confidence 0.95, and the alphabetically-first id won — the planner targeted
+ * `math.alg.term` while Concept Understanding's own primary was
+ * `phys.meas.scalars-vectors`. Array.prototype.sort is stable, so dropping the
+ * alphabetical tie-break preserves the caller's ranking and stays fully
+ * deterministic (the input order is itself deterministic).
+ */
 function rankConcepts(matches: readonly ResolvedConcept[]): readonly ResolvedConcept[] {
-  return [...matches].sort((a, b) =>
-    b.confidence - a.confidence || a.conceptId.localeCompare(b.conceptId))
+  return [...matches].sort((a, b) => b.confidence - a.confidence)
 }
 
 function resolveConcepts(inputs: PlannerInputs): readonly ResolvedConcept[] {
