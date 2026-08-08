@@ -12,7 +12,8 @@ import { MessageRole } from '@prisma/client'
 import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
 import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
 import { buildSceneSpec } from '@/lib/teaching/buildSceneSpec'
-import { generateSceneSpec, isAiSceneGenerationEnabled } from '@/lib/teaching/generateSceneSpec'
+import { generateSceneSpec } from '@/lib/teaching/generateSceneSpec'
+import { isRuntimeSceneGenerationAllowed } from '@/lib/teaching/visual/flag'
 import { generateRoutedScene, isParametricSceneGenerationEnabled, routeSceneGenerator } from '@/lib/teaching/sceneGenerators/sceneRouter'
 import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/teaching/visuals/generateVisualizationCode'
 import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
@@ -3638,7 +3639,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // a failed/blocked LLM call degrades to null and the turn proceeds unchanged.
       // This is the production wiring, drafted and ready to enable once the
       // feasibility probe confirms usable output on a Groq-reachable network.
-      if (!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec && isAiSceneGenerationEnabled()) {
+      //
+      // ROLLBACK SAFETY (2026-08-08). This path is unreachable while V2 owns
+      // the turn, but `!v2OwnsVisual` is exactly the state VISUAL_RESOLVER_V2=0
+      // produces — so on the rollback path it would otherwise run on the global
+      // flag alone, ignoring VISUAL_AI_SCENE_ALLOWLIST and generating for ANY
+      // concept. It now asks the same authority the V2 engine asks, so the
+      // scoped canary holds in both directions.
+      //
+      // It FAILS CLOSED when no trustworthy concept id exists: this generator
+      // is seeded from tutor prose and has no concept of its own, so an
+      // unidentifiable turn must not generate rather than be allowed through.
+      const legacySceneConceptId =
+        resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? null
+      if (
+        !v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec &&
+        isRuntimeSceneGenerationAllowed(legacySceneConceptId)
+      ) {
         try {
           detectedSceneSpec = await generateSceneSpec(cleanText)
         } catch { /* non-fatal */ }

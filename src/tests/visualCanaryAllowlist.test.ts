@@ -8,6 +8,8 @@
  * generation.
  */
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { readFileSync } from 'fs'
+import { join } from 'path'
 import {
   isRuntimeSceneGenerationAllowed, runtimeSceneAllowlist,
 } from '@/lib/teaching/visual/flag'
@@ -279,5 +281,72 @@ describe('nothing else changes', () => {
       { cacheClient: coldCache() as never, generate: async () => drift })
     expect(bad.payload).toBeNull()
     expect(bad.provenance).toBe('no-figure:engine-not-anchored-to-concept')
+  })
+})
+
+// ── rollback-path safety ─────────────────────────────────────────────────────
+// The legacy drafted generator in route.ts is unreachable while V2 owns the
+// turn, but `!v2OwnsVisual` is precisely what VISUAL_RESOLVER_V2=0 produces.
+// On that rollback path it previously ran on the global flag alone and would
+// have generated for ANY concept, ignoring the allowlist.
+
+describe('the V2 rollback path cannot bypass the allowlist', () => {
+  const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
+
+  it('the legacy generator is gated by the same authority, not the raw flag', () => {
+    expect(ROUTE).toMatch(
+      /!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec &&\s*isRuntimeSceneGenerationAllowed\(legacySceneConceptId\)/,
+    )
+    // The unscoped global check must be gone from the route entirely.
+    expect(ROUTE).not.toMatch(/isAiSceneGenerationEnabled\(\)/)
+  })
+
+  it('10. no duplicated env parsing — one authority, one parser', () => {
+    // The route may MENTION the variables in comments; what matters is that it
+    // never reads them. All parsing lives in the flag module.
+    expect(ROUTE).not.toMatch(/process\.env\.ENABLE_AI_SCENE_GENERATION/)
+    expect(ROUTE).not.toMatch(/process\.env\.VISUAL_AI_SCENE_ALLOWLIST/)
+    expect(ROUTE).toContain("import { isRuntimeSceneGenerationAllowed } from '@/lib/teaching/visual/flag'")
+    // And the engine does not parse them either.
+    const ENGINE = readFileSync(join(process.cwd(), 'src/lib/teaching/visual/visualEngine.ts'), 'utf8')
+    expect(ENGINE).not.toMatch(/process\.env\./)
+  })
+
+  it('6. fails closed when no trustworthy concept id exists', () => {
+    on(); allow(CALORIMETRY)
+    // The legacy generator is prose-seeded and has no concept of its own; an
+    // unidentifiable turn must not generate.
+    expect(isRuntimeSceneGenerationAllowed(null)).toBe(false)
+    expect(ROUTE).toMatch(
+      /const legacySceneConceptId =\s*resolvedConceptId \?\? snapshotCurrentConceptId \?\? libraryConceptNodeIdHoisted \?\? null/,
+    )
+  })
+
+  it('the six flag/allowlist states resolve as required', () => {
+    // V2 ON/OFF does not change this helper — it is the same authority on both
+    // paths, which is the property the rollback hazard needed.
+    const cases: Array<[string, string | null, string, boolean]> = [
+      ['A/F flag OFF',                 null,        CALORIMETRY, false],
+      ['B/D flag ON + allowlisted',    CALORIMETRY, CALORIMETRY, true],
+      ['C/E flag ON + not allowlisted', PROJECTILE, CALORIMETRY, false],
+    ]
+    for (const [name, list, concept, expected] of cases) {
+      delete process.env.ENABLE_AI_SCENE_GENERATION
+      delete process.env.VISUAL_AI_SCENE_ALLOWLIST
+      if (list) { on(); allow(list) }
+      expect(isRuntimeSceneGenerationAllowed(concept), name).toBe(expected)
+    }
+  })
+
+  it('9. generated cache stays gated under rollback', async () => {
+    // Same helper gates the cache read, so a V2 rollback cannot resurrect a
+    // cached generated scene for a non-allowlisted concept.
+    on(); allow(PROJECTILE)
+    const r = await generateConceptScene(ctxFor(CALORIMETRY), {
+      cacheClient: warmCache() as never,
+      generate: async () => calorimetryScene(),
+    })
+    expect(r.ok).toBe(false)
+    if (!r.ok) expect(r.reason).toBe('flag-off')
   })
 })

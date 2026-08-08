@@ -93,7 +93,14 @@ describe('V2 is the only selector when it decided the turn', () => {
     expect(ROUTE).toMatch(/if \(!v2OwnsVisual\) \{\s*try \{\s*detectedVisualSpec = planVisualTeaching/)
     expect(ROUTE).toMatch(/if \(!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec && !parametricRouteMatched\)/)
     expect(ROUTE).toMatch(/if \(!v2OwnsVisual && !detectedVisualSpec && isParametricSceneGenerationEnabled\(\)\)/)
-    expect(ROUTE).toMatch(/if \(!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec && isAiSceneGenerationEnabled\(\)\)/)
+    // The AI scene generator's gate got STRICTER on 2026-08-08: v2OwnsVisual
+    // still guards it, and it now also requires the concept to be on the
+    // runtime-generation allowlist, so a V2 rollback cannot re-enable it
+    // globally. Same intent as before — legacy cannot run when V2 owns the
+    // turn — with an extra condition, never a weaker one.
+    expect(ROUTE).toMatch(
+      /!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec &&\s*isRuntimeSceneGenerationAllowed\(legacySceneConceptId\)/,
+    )
     expect(ROUTE).toMatch(/const dvFlag = !v2OwnsVisual && isDynamicVisualizationEnabled\(\)/)
   })
 
