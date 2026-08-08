@@ -178,14 +178,22 @@ describe('every completion entry point uses the canonical transition', () => {
     // moves the session, so every call must be awaited and live in one of the
     // two transitioning owners:
     //   completeAndAdvance   -> advances to the NEXT lesson
-    //   confirmLessonSwitch  -> advances to a CHOSEN lesson (records the prior
-    //                           one as a silent skip on the way)
-    // These are genuinely different operations, which is why the switch path
-    // is not folded into completeAndAdvance.
-    const fireAndForget = SRC.match(/(?<!await )\bhandleLessonComplete\(/g) ?? []
+    //
+    // FREE LESSON SURFING (Option B) narrowed this to ONE owner.
+    // confirmLessonSwitch used to record the prior lesson as a silent
+    // completion on the way to the chosen one; that appended to
+    // completedLessons regardless of the `mastered` flag, so clicking forward
+    // through the roadmap marked lessons COMPLETED that were never studied.
+    // It now records SKIPPED via markLessonSkipped() and completes nothing.
+    //
+    // Comments are stripped before matching: the switch path documents the
+    // removed call by name, which would otherwise look like a fire-and-forget
+    // call site.
+    const CODE = SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*/g, '')
+    const fireAndForget = CODE.match(/(?<!await )\bhandleLessonComplete\(/g) ?? []
     expect(fireAndForget).toHaveLength(0)
 
-    const owners = ['const completeAndAdvance = useCallback', 'const confirmLessonSwitch = useCallback']
+    const owners = ['const completeAndAdvance = useCallback']
     const ranges = owners.map((sig) => {
       const start = SRC.indexOf(sig)
       expect(start, `${sig} not found`).toBeGreaterThan(-1)
@@ -209,8 +217,13 @@ describe('every completion entry point uses the canonical transition', () => {
 
   it('the chosen-lesson switch path also starts the target lesson', () => {
     const start = SRC.indexOf('const confirmLessonSwitch = useCallback')
-    const body = SRC.slice(start, start + 2200)
-    expect(body).toContain('await handleLessonComplete(')
+    // Widened from 2200: the Option B rationale comment sits inside this
+    // callback and pushed the tail of the body past the old window.
+    const body = SRC.slice(start, start + 3400)
+    // Option B: the switch records a SKIP, never a completion.
+    expect(body).not.toContain('await handleLessonComplete(')
+    expect(body).toContain('await markLessonSkipped(')
+    expect(body).toContain('resetLessonContext()')
     expect(body).toContain('callLessonInit(')
     expect(body).toContain('decideLessonEntryMode(')
   })

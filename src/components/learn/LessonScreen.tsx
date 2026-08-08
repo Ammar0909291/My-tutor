@@ -2245,6 +2245,55 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setActiveTab('chat')
   }, [subjectSlug, sessionId, callLessonInit])
 
+  /**
+   * Mark a lesson SKIPPED because the learner navigated away from it before
+   * finishing. Returns once the write has landed so a lesson switch cannot
+   * race ahead of the record.
+   *
+   * MASTERY INTEGRITY: this is the ONLY thing free navigation may record.
+   * SKIPPED does not enter completedLessons, does not satisfy prerequisites
+   * (availableNodes is recomputed from the server after the write), and never
+   * becomes COMPLETED or MASTERED. Visiting twenty lessons therefore leaves
+   * twenty SKIPPED rows and a completion count of zero.
+   *
+   * Genuinely finished lessons are never downgraded — a COMPLETED, MASTERED or
+   * REVISION row is left exactly as it is.
+   */
+  const markLessonSkipped = useCallback(async (lesson: CurriculumLesson | null) => {
+    const topicSlug = lesson?.topicSlug
+    if (!topicSlug) return
+    const status = topicProgressMap[topicSlug]?.status
+    if (status === 'COMPLETED' || status === 'MASTERED' || status === 'REVISION') return
+    try {
+      const res = await fetch('/api/topic-progress', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subjectSlug, topicSlug, action: 'skip' }),
+      })
+      const d = await res.json()
+      if (d?.success) {
+        setTopicProgressMap((prev) => ({
+          ...prev,
+          [topicSlug]: { status: d.topicProgress.status, masteryPct: d.topicProgress.masteryPct },
+        }))
+      }
+    } catch { /* non-fatal — navigation must never be blocked by this record */ }
+  }, [subjectSlug, topicProgressMap])
+
+  /**
+   * Everything that must NOT survive a lesson switch. Tutor conversation,
+   * visual session and excursion state are all per-lesson; carrying any of
+   * them into the next lesson is how a vector figure ends up on screen during
+   * Calorimetry. contextSnapshot's visualSession is server-owned and is reset
+   * by the lesson-init turn itself; this clears the client half.
+   */
+  const resetLessonContext = useCallback(() => {
+    setMessages([])
+    setRevisionTopic(null)
+    setAssessmentLoading(false)
+    initializedRef.current = false
+  }, [])
+
   // Show a confirmation dialog before switching to any lesson (P0 UX).
   // Free navigation: the Lesson Navigation Panel's Previous/Next buttons and
   // the Learning Roadmap tree are no longer lock-gated in the UI (lock state
@@ -2292,26 +2341,32 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       return
     }
 
-    // Forward navigation: if the current lesson hasn't been recorded as
-    // completed yet (e.g. [LESSON_COMPLETE] never fired this turn), record
-    // it now as a non-celebrated completion so curriculum progress actually
-    // advances — same mechanism "Skip Anyway" already uses, just silent
-    // here since the student is choosing to move on via the nav panel.
+    // Forward navigation — FREE LESSON SURFING (Option B).
+    //
+    // This previously called handleLessonComplete(priorOrder, …, false), which
+    // appends to StudentProgress.completedLessons regardless of the `mastered`
+    // flag (that flag only suppresses XP and confetti). So clicking forward
+    // through the roadmap silently marked every lesson behind you COMPLETED —
+    // a learner could "finish" a curriculum without answering a question, and
+    // the fake completions satisfied downstream prerequisites.
+    //
+    // The lesson the learner is LEAVING is now recorded SKIPPED instead, and
+    // only when it was not genuinely finished. Nothing advances
+    // completedLessons. Position still moves because activeLessonSlug is
+    // written by lesson-init on the target.
     pendingLessonRunRef.current = async () => {
-      const priorOrder = target.order - 1
-      if (priorOrder >= 1 && !curriculumProgress.completedLessons.includes(priorOrder)) {
-        const priorLesson = curriculumLessons.find((l) => l.order === priorOrder)
-        if (priorLesson) {
-          await handleLessonComplete(priorOrder, priorLesson, false)
-        }
-      }
+      // The lesson being left, resolved through the canonical selector rather
+      // than a captured local — this callback is created before the derived
+      // currentLessonData exists.
+      await markLessonSkipped(resolveActiveLesson(curriculumLessons, curriculumProgress))
+      resetLessonContext()
       // Same decision every other entry point uses: a lesson the learner has
       // never started gets its introduction, not a resume.
       const entryMode = decideLessonEntryMode({ lesson: target, progress: curriculumProgress, topicProgressMap })
       await callLessonInit(sessionId, lessonInitModeFor(entryMode), target)
       setActiveTab('chat')
     }
-  }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, handleLessonComplete])
+  }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext])
 
   // Open the next lesson. Free navigation: the Lesson Navigation Panel's
   // Next button is always enabled whenever a next lesson exists (matches
@@ -3124,6 +3179,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       {lessonSwitchDialog && currentLessonData && (() => {
         const { target, isReview, isRestart } = lessonSwitchDialog
         const title = isRestart ? t('lesson_dialog_restart_title') : t('lesson_dialog_leave_title')
+        // Is the lesson being LEFT genuinely finished? Only then is there no
+        // incomplete-work warning to give.
+        const leavingStatus = currentLessonData.topicSlug ? topicProgressMap[currentLessonData.topicSlug]?.status : undefined
+        const isCompletedNow =
+          leavingStatus === 'COMPLETED' || leavingStatus === 'MASTERED' ||
+          curriculumProgress.completedLessons.includes(currentLessonData.order)
+        const targetMissingPrereqs: { slug: string; title: string }[] =
+          (target.topicSlug ? lockReasons[target.topicSlug]?.missingPrereqs : undefined) ?? []
+        const AMBER_TEXT = '#f59e0b'
         return (
           <div
             role="dialog"
@@ -3165,10 +3229,30 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     <strong style={{ color: 'var(--text-primary)' }}>{t('lesson_dialog_currently')}</strong> {currentLessonData.lessonTitle}<br/>
                     <strong style={{ color: 'var(--text-primary)' }}>{t('lesson_dialog_switch_to')}</strong> {target.lessonTitle}
                   </p>
+                  {/* Free surfing (Option B): leaving early records SKIPPED,
+                      never COMPLETED. Say so plainly — the learner is choosing
+                      between finishing and a visible gap in their record. */}
+                  {!isCompletedNow && (
+                    <p style={{ fontSize: 12, color: AMBER_TEXT, lineHeight: 1.6, marginBottom: 10 }}>
+                      {t('lesson_dialog_incomplete_warning')}
+                    </p>
+                  )}
                   <ul style={{ fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.7, paddingLeft: 18, marginBottom: 18 }}>
                     {[t('lesson_dialog_progress_saved'), t('lesson_dialog_mastery_saved'), t('lesson_dialog_can_resume')]
                       .map((line) => <li key={line}>{line}</li>)}
                   </ul>
+                  {/* Prerequisites are GUIDANCE, never access control. The
+                      target opens either way; this only tells the learner what
+                      it normally builds on. */}
+                  {targetMissingPrereqs.length > 0 && (
+                    <div style={{ fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: 18 }}>
+                      <p style={{ marginBottom: 4 }}>{t('lesson_dialog_prereq_intro')}</p>
+                      <ul style={{ paddingLeft: 18, marginBottom: 6 }}>
+                        {targetMissingPrereqs.map((p) => <li key={p.slug}>{p.title}</li>)}
+                      </ul>
+                      <p>{t('lesson_dialog_prereq_choice')}</p>
+                    </div>
+                  )}
                 </>
               )}
 
