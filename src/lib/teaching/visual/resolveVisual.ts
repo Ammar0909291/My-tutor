@@ -35,7 +35,9 @@ import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
 import { resolveVisualTarget } from './resolveVisualTarget'
 import { decideContinuity, tickSession, type VisualSession } from './session'
-import { noFigureDecision, type EducationalPurpose, type VisualDecision } from './types'
+import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
+import { generateConceptScene } from './visualEngine'
+import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
 
@@ -288,4 +290,77 @@ function representationForVisualType(visualType: VisualType) {
     if (archetype.card === visualType) return archetype.representation
   }
   return 'labelled_figure' as const
+}
+
+/**
+ * THE AUTHORITY for a turn, including runtime generation.
+ *
+ * resolveVisual() above stays pure and synchronous: it is the decision, and it
+ * is what the 1,775-concept audits and every determinism test call. This is the
+ * same decision plus the one step that cannot be synchronous — asking the
+ * Visualization Engine to build a figure for a concept that has no curated one.
+ *
+ * The order is the architecture and there is no fourth branch:
+ *
+ *   1. CURATED    — a concept generator or curated binding exists  -> use it
+ *   2. GENERATED  — the engine builds one for THIS concept and it passes
+ *                   semantic validation                            -> use it
+ *   3. NONE       — anything else, including every rejection       -> no figure
+ *
+ * A rejected generation is never repaired and never replaced. Continuity is
+ * untouched: generation is attempted only on a turn that produced no figure at
+ * all, so a held figure can never be overwritten by a generated one.
+ */
+export async function resolveVisualForTurn(
+  input: ResolveVisualInput,
+  deps: Parameters<typeof generateConceptScene>[1] = {},
+): Promise<VisualDecision> {
+  const decision = resolveVisual(input)
+
+  // 1. CURATED — already faithful, nothing to add.
+  if (decision.graphical) return decision
+
+  // No concept resolved at all: there is nothing to generate a figure OF.
+  if (!decision.conceptId) return decision
+  const ctx = contextFor(decision.conceptId)
+  if (!ctx) return decision
+
+  // 2. GENERATED — attempted only here, and only for a turn that would
+  //    otherwise show nothing.
+  const result = await generateConceptScene(ctx, deps)
+  if (!result.ok) {
+    // 3. NONE — carry the reason so a rejection is auditable rather than silent.
+    return { ...decision, provenance: `no-figure:engine-${result.reason}` }
+  }
+
+  const representation = representationForSceneType(result.scene.sceneType)
+  return {
+    ...decision,
+    representation,
+    payload: { renderer: 'scene', sceneSpec: result.scene },
+    graphical: true,
+    source: 'generated',
+    provenance: `generated:${ctx.conceptId}:${result.cached ? 'cached' : 'fresh'}`,
+    session: {
+      conceptId: ctx.conceptId,
+      representation,
+      renderer: 'scene',
+      returnToConceptId: decision.excursion ? (input.lessonConceptId ?? null) : null,
+      turns: 0,
+    },
+  }
+}
+
+/**
+ * A generated scene declares its own sceneType; this maps that to the teaching
+ * vocabulary the contract speaks. Honest and coarse on purpose — it names the
+ * KIND of figure, never a claim about its contents.
+ */
+function representationForSceneType(sceneType: SceneSpec['sceneType']): Representation {
+  switch (sceneType) {
+    case 'process':    return 'process'
+    case 'comparison': return 'comparison'
+    case 'plot':       return 'graph'
+    default:           return 'labelled_figure'
+  }
 }

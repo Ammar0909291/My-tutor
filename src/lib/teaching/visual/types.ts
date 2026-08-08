@@ -115,8 +115,18 @@ export type VisualPayload =
   | { renderer: 'scene'; sceneSpec: SceneSpec }
   | { renderer: 'ascii' }
 
-/** Where the decision came from. Logged verbatim so every visual is auditable. */
-export type VisualSource = 'registry' | 'archetype' | 'none'
+/**
+ * Where the decision came from. Logged verbatim so every visual is auditable.
+ *
+ *   registry  — a curated concept binding or a canonical scene generator
+ *   generated — the Visualization Engine built it for this concept and it
+ *               passed semantic validation
+ *   archetype — RETIRED as a source (2026-08-08). The Educational Archetype
+ *               Engine is no longer consulted by the resolver; the member is
+ *               kept so historical logs still parse.
+ *   none      — no faithful figure exists; payload is null
+ */
+export type VisualSource = 'registry' | 'generated' | 'archetype' | 'none'
 
 /**
  * The single answer for the turn. Exactly one payload — it is structurally

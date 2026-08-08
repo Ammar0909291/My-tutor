@@ -2158,7 +2158,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // stays null and the legacy pipelines below run exactly as before.
           if (isVisualResolverV2Enabled()) {
             try {
-              const { resolveVisual } = await import('@/lib/teaching/visual/resolveVisual')
+              const { resolveVisualForTurn } = await import('@/lib/teaching/visual/resolveVisual')
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
               const { parseVisualSession } = await import('@/lib/teaching/visual/session')
               // Visual continuity: the figure already on the learner's screen,
@@ -2169,7 +2169,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const activeVisualSession = parseVisualSession(
                 (learnSession.contextSnapshot as Record<string, unknown> | null)?.visualSession,
               )
-              const decision = resolveVisual({
+              // ONE authority, including runtime generation: curated figure ->
+              // engine-generated figure -> no figure. Awaited because the
+              // engine may call the model; a cached or flag-off path returns
+              // without any network at all.
+              const decision = await resolveVisualForTurn({
                 message,
                 lessonConceptId: convConceptId,
                 subject: subjectCode,
