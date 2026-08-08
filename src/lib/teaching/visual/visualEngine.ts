@@ -31,7 +31,7 @@
 
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
-import { isAiSceneGenerationEnabled } from '@/lib/teaching/generateSceneSpec'
+import { isRuntimeSceneGenerationAllowed } from './flag'
 import {
   getCachedVisualization, saveVisualization, type VisualizationCacheClient,
 } from '@/lib/teaching/visuals/visualizationCache'
@@ -358,13 +358,17 @@ export async function generateConceptScene(
   deps: {
     cacheClient?: VisualizationCacheClient
     generate?: (prompt: string, maxTokens?: number) => Promise<unknown>
-    enabled?: () => boolean
+    /** Authorization override for tests; production uses the allowlist authority. */
+    enabled?: (conceptId: string) => boolean
     /** The turn's teaching purpose — guidance for generation, see the prompt. */
     purpose?: string
   } = {},
 ): Promise<EngineResult> {
-  const enabled = deps.enabled ?? isAiSceneGenerationEnabled
-  if (!enabled()) return { ok: false, reason: 'flag-off' }
+  // Authorization FIRST, before the cache is touched: the allowlist gates
+  // eligibility, so removing a concept (or the flag) stops cached generated
+  // scenes being served, not merely new generations.
+  const enabled = deps.enabled ?? isRuntimeSceneGenerationAllowed
+  if (!enabled(ctx.conceptId)) return { ok: false, reason: 'flag-off' }
   if (!ctx.title?.trim() && !ctx.description?.trim()) return { ok: false, reason: 'no-source-text' }
 
   const key = `${CACHE_PREFIX}${ctx.conceptId}`

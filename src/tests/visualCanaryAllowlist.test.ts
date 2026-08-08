@@ -1,0 +1,283 @@
+/**
+ * The scoped runtime-generation canary.
+ *
+ * Runtime generation had one global switch, so enabling it would have exposed
+ * every uncurated concept (1,279 of 1,775) at once. Permission is now the
+ * conjunction of a global flag and an explicit concept allowlist, and it is
+ * checked before the cache is read — so it gates eligibility, not just
+ * generation.
+ */
+import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import {
+  isRuntimeSceneGenerationAllowed, runtimeSceneAllowlist,
+} from '@/lib/teaching/visual/flag'
+import { generateConceptScene } from '@/lib/teaching/visual/visualEngine'
+import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
+import { buildVisualContractBlock } from '@/lib/teaching/visual/visualContract'
+import { parseVisualSession } from '@/lib/teaching/visual/session'
+import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
+import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+
+const CALORIMETRY = 'phys.therm.calorimetry'
+const PROJECTILE = 'phys.mech.projectile-motion'   // curated generator
+const DIM = 'phys.meas.dimensional-analysis'
+
+const ctxFor = (conceptId: string) => {
+  const n = getKGNode(conceptId)!
+  return {
+    conceptId, title: n.title, description: n.description ?? '',
+    prerequisites: n.prerequisites ?? [], difficulty: n.difficulty,
+  }
+}
+
+/** A scene that genuinely depicts calorimetry — accepted when authorized. */
+const calorimetryScene = (): SceneSpec => ({
+  id: 'gen', title: 'Calorimetry: heat between two bodies', sceneType: 'diagram',
+  teachingGoal: 'Show heat flowing until both reach one temperature.',
+  steps: [
+    { narration: 'A hot body meets a cold body.', objects: [
+      { type: 'node', position: [-2, 0, 0], text: 'hot body' },
+      { type: 'node', position: [2, 0, 0], text: 'cold body' },
+    ] },
+    { narration: 'Heat flows until they are equal.', objects: [
+      { type: 'arrow', from: [-1, 0, 0], to: [1, 0, 0], text: 'heat exchange' },
+    ] },
+  ],
+})
+
+/** A cache already holding that accepted scene, keyed as the engine keys it. */
+const warmCache = () => ({
+  visualizationCache: {
+    findUnique: async ({ where }: { where: { conceptKey: string } }) =>
+      where.conceptKey === `scene:v1:${CALORIMETRY}`
+        ? { code: JSON.stringify(calorimetryScene()) }
+        : null,
+    update: async () => undefined,
+    create: async () => undefined,
+  },
+})
+
+const coldCache = () => ({
+  visualizationCache: {
+    findUnique: async () => null,
+    update: async () => undefined,
+    create: async () => undefined,
+  },
+})
+
+const ORIGINAL = { ...process.env }
+beforeEach(() => {
+  delete process.env.ENABLE_AI_SCENE_GENERATION
+  delete process.env.VISUAL_AI_SCENE_ALLOWLIST
+})
+afterEach(() => {
+  process.env.ENABLE_AI_SCENE_GENERATION = ORIGINAL.ENABLE_AI_SCENE_GENERATION
+  process.env.VISUAL_AI_SCENE_ALLOWLIST = ORIGINAL.VISUAL_AI_SCENE_ALLOWLIST
+})
+
+const on = () => { process.env.ENABLE_AI_SCENE_GENERATION = 'true' }
+const allow = (v: string) => { process.env.VISUAL_AI_SCENE_ALLOWLIST = v }
+
+describe('permission is the conjunction of flag AND allowlist', () => {
+  it('1. flag OFF + allowlisted concept => DENIED', () => {
+    allow(CALORIMETRY)
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+    process.env.ENABLE_AI_SCENE_GENERATION = 'false'
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+  })
+
+  it('2. flag ON + empty allowlist => DENIED (empty never means "all")', () => {
+    on()
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+    allow('')
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+    allow('   ')
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+    allow(',,,')
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+  })
+
+  it('3. flag ON + non-allowlisted concept => DENIED', () => {
+    on(); allow(PROJECTILE)
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+  })
+
+  it('4. flag ON + exact allowlisted concept => ALLOWED', () => {
+    on(); allow(CALORIMETRY)
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(true)
+  })
+
+  it('5. whitespace around entries and lookups is normalized', () => {
+    on(); allow(`  ${CALORIMETRY} ,  ${PROJECTILE}  `)
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(true)
+    expect(isRuntimeSceneGenerationAllowed(`  ${PROJECTILE}  `)).toBe(true)
+  })
+
+  it('6. multiple ids all work', () => {
+    on(); allow(`${CALORIMETRY},${PROJECTILE},phys.opt.reflection`)
+    for (const id of [CALORIMETRY, PROJECTILE, 'phys.opt.reflection']) {
+      expect(isRuntimeSceneGenerationAllowed(id)).toBe(true)
+    }
+    expect(runtimeSceneAllowlist().size).toBe(3)
+  })
+
+  it('7+8. duplicates and empty entries are harmless', () => {
+    on(); allow(`${CALORIMETRY},,${CALORIMETRY}, ,${CALORIMETRY}`)
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(true)
+    expect(runtimeSceneAllowlist().size).toBe(1)
+  })
+
+  it('9. wildcards match nothing — a canary must not widen by typo', () => {
+    on()
+    for (const pattern of ['*', 'phys.*', 'phys.', '.*', 'phys.therm.*', '%']) {
+      allow(pattern)
+      expect(isRuntimeSceneGenerationAllowed(CALORIMETRY), pattern).toBe(false)
+    }
+  })
+
+  it('10. a subject name is not a concept id', () => {
+    on()
+    for (const subject of ['physics', 'phys', 'Physics']) {
+      allow(subject)
+      expect(isRuntimeSceneGenerationAllowed(CALORIMETRY), subject).toBe(false)
+    }
+  })
+
+  it('11. the mechanism is subject-agnostic', () => {
+    on(); allow('eng.phonics.phonemic-awareness')
+    expect(isRuntimeSceneGenerationAllowed('eng.phonics.phonemic-awareness')).toBe(true)
+    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+  })
+
+  it('a null/empty conceptId is never allowed', () => {
+    on(); allow(CALORIMETRY)
+    expect(isRuntimeSceneGenerationAllowed(null)).toBe(false)
+    expect(isRuntimeSceneGenerationAllowed(undefined)).toBe(false)
+    expect(isRuntimeSceneGenerationAllowed('')).toBe(false)
+  })
+})
+
+describe('the allowlist gates the CACHE, not just generation', () => {
+  const scene = calorimetryScene()
+
+  it('A. flag ON + allowlisted => a cached scene may be served', async () => {
+    on(); allow(CALORIMETRY)
+    const r = await generateConceptScene(ctxFor(CALORIMETRY), {
+      cacheClient: warmCache() as never,
+      generate: async () => { throw new Error('must not generate — cache should hit') },
+    })
+    expect(r.ok).toBe(true)
+    if (r.ok) expect(r.cached).toBe(true)
+  })
+
+  it('B. flag ON + NOT allowlisted => cached scene MUST NOT be served', async () => {
+    on(); allow(PROJECTILE)
+    const r = await generateConceptScene(ctxFor(CALORIMETRY), {
+      cacheClient: warmCache() as never,
+      generate: async () => scene,
+    })
+    expect(r.ok).toBe(false)
+    if (!r.ok) expect(r.reason).toBe('flag-off')
+  })
+
+  it('C. flag OFF + allowlisted => cached scene MUST NOT be served', async () => {
+    allow(CALORIMETRY)
+    const r = await generateConceptScene(ctxFor(CALORIMETRY), {
+      cacheClient: warmCache() as never,
+      generate: async () => scene,
+    })
+    expect(r.ok).toBe(false)
+    if (!r.ok) expect(r.reason).toBe('flag-off')
+  })
+
+  it('15. an empty allowlist can generate nothing, cold cache or warm', async () => {
+    on()
+    for (const cache of [coldCache(), warmCache()]) {
+      const r = await generateConceptScene(ctxFor(CALORIMETRY), {
+        cacheClient: cache as never, generate: async () => scene,
+      })
+      expect(r.ok).toBe(false)
+    }
+  })
+})
+
+describe('nothing else changes', () => {
+  it('12. curated visuals are unaffected by the allowlist', async () => {
+    // Denied by every setting, yet the curated generator still renders.
+    for (const setup of [() => {}, () => { on() }, () => { on(); allow('phys.nothing') }]) {
+      setup()
+      const d = await resolveVisualForTurn(
+        { message: '', lessonConceptId: PROJECTILE, subject: 'physics', learnerRequest: 'diagram' },
+        { cacheClient: coldCache() as never },
+      )
+      expect(d.source).toBe('registry')
+      expect(d.graphical).toBe(true)
+      expect(d.provenance).toContain('generator:')
+    }
+  })
+
+  it('an unauthorized concept still yields NO FIGURE, never a substitute', async () => {
+    on()
+    const d = await resolveVisualForTurn(
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { cacheClient: warmCache() as never, generate: async () => calorimetryScene() },
+    )
+    expect(d.payload).toBeNull()
+    expect(d.graphical).toBe(false)
+    expect(d.source).toBe('none')
+    const block = buildVisualContractBlock(d)
+    expect(block).toContain('NO FIGURE IS ATTACHED')
+    expect(block).not.toContain('ALREADY BEING RENDERED')
+  })
+
+  it('continuity, excursion and lesson-change behaviour are untouched', async () => {
+    on(); allow(CALORIMETRY)
+    const p = (s: unknown) => (s ? parseVisualSession(JSON.parse(JSON.stringify(s))) : null)
+    const deps = { cacheClient: coldCache() as never, generate: async () => calorimetryScene() }
+
+    const open = await resolveVisualForTurn(
+      { message: 'Show projectile motion.', lessonConceptId: DIM, subject: 'physics', learnerRequest: 'diagram' }, deps)
+    expect(open.conceptId).toBe(PROJECTILE)
+    expect(open.excursion).toBe(true)
+
+    const answer = await resolveVisualForTurn(
+      { message: 'ok', lessonConceptId: DIM, subject: 'physics',
+        activeSession: p(open.session), lastAssistantAskedQuestion: true }, deps)
+    expect(answer.conceptId).toBe(PROJECTILE)
+    expect(answer.continuityReason).toBe('learner-answering-not-requesting')
+
+    const moved = await resolveVisualForTurn(
+      { message: 'continue', lessonConceptId: 'phys.mech.momentum', subject: 'physics',
+        activeSession: p(open.session) }, deps)
+    expect(moved.continuityReason).toBe('lesson-changed')
+    expect(moved.conceptId).toBe('phys.mech.momentum')
+
+    const medium = await resolveVisualForTurn(
+      { message: 'show me a graph', lessonConceptId: 'phys.mech.kinematics-1d',
+        subject: 'physics', learnerRequest: 'diagram' }, deps)
+    expect(medium.conceptId).toBe('phys.mech.kinematics-1d')
+  })
+
+  it('an authorized concept generates and stays semantically gated', async () => {
+    on(); allow(CALORIMETRY)
+    const good = await resolveVisualForTurn(
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { cacheClient: coldCache() as never, generate: async () => calorimetryScene() })
+    expect(good.source).toBe('generated')
+    expect(good.payload).not.toBeNull()
+
+    // Authorization does not bypass the semantic gate.
+    const drift: SceneSpec = {
+      id: 'd', title: 'Wave Function psi(x)', sceneType: 'plot',
+      steps: [{ narration: 'psi oscillates', objects: [
+        { type: 'point', position: [0, 0, 0], text: 'psi' },
+        { type: 'point', position: [1, 0, 0], text: 'probability density' },
+      ] }],
+    }
+    const bad = await resolveVisualForTurn(
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { cacheClient: coldCache() as never, generate: async () => drift })
+    expect(bad.payload).toBeNull()
+    expect(bad.provenance).toBe('no-figure:engine-not-anchored-to-concept')
+  })
+})
