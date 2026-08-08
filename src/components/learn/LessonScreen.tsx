@@ -53,8 +53,20 @@ import styles from './LessonScreen.module.css'
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false })
 // react-three-fiber needs a real DOM/WebGL context — load client-only, same as Monaco.
-const SceneSpecRenderer = dynamic(
-  () => import('@/components/school/visuals/SceneSpecRenderer').then((m) => m.SceneSpecRenderer),
+/**
+ * The frame every attached figure renders inside. Previously each render slot
+ * repeated `maxWidth: '90%'`, which shrank the figure below the message bubble
+ * it belongs to — a teaching diagram is the point of the turn, not a footnote.
+ * The renderers cap their own width, so the frame simply stops constraining it.
+ */
+const VISUAL_FRAME: React.CSSProperties = {
+  width: '100%',
+  maxWidth: '100%',
+  animation: 'fadeUp 300ms ease-out both',
+}
+
+const SceneSpecFigure = dynamic(
+  () => import('@/components/school/visuals/SceneSpecFigure').then((m) => m.SceneSpecFigure),
   { ssr: false },
 )
 // Renders inside a sandboxed iframe (see DynamicVisualRenderer.tsx) — no need
@@ -4837,7 +4849,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
                     {!isUser && !msg.streaming && msg.visual && (
-                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
+                      <div style={VISUAL_FRAME}>
                         <VisualCard
                           type={msg.visual as VisualType}
                           autoPlay
@@ -4852,7 +4864,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         when a tutor message carries a VisualSpec; absent on every
                         existing lesson, so those render exactly as before (zero regression). */}
                     {!isUser && !msg.streaming && msg.visualSpec && (
-                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
+                      <div style={VISUAL_FRAME}>
                         <VisualRenderer spec={msg.visualSpec} />
                       </div>
                     )}
@@ -4861,8 +4873,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         the deterministic detector found no 2D VisualSpec for this
                         message, so a reply never carries both. */}
                     {!isUser && !msg.streaming && msg.sceneSpec && (
-                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
-                        <SceneSpecRenderer spec={msg.sceneSpec} />
+                      <div style={VISUAL_FRAME}>
+                        <SceneSpecFigure spec={msg.sceneSpec} />
                       </div>
                     )}
 
@@ -4870,7 +4882,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         no deterministic VisualSpec/SceneSpec fired for this message
                         (see route.ts). Runs the AI-generated code in a sandboxed iframe. */}
                     {!isUser && !msg.streaming && msg.dynamicVisualizationCode && (
-                      <div style={{ maxWidth: '90%', animation: 'fadeUp 300ms ease-out both' }}>
+                      <div style={VISUAL_FRAME}>
                         <DynamicVisualRenderer code={msg.dynamicVisualizationCode} />
                       </div>
                     )}

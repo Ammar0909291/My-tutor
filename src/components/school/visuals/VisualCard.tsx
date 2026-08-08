@@ -276,7 +276,7 @@ export function VisualCard({ type, autoPlay = true, speed = 1, hasNarration, nar
         border: '1px solid var(--border-subtle)',
         background: 'var(--bg-surface)',
         padding: '10px 12px',
-        maxWidth: 360,
+        maxWidth: 560,
       }}
     >
       {/* header */}
@@ -288,7 +288,7 @@ export function VisualCard({ type, autoPlay = true, speed = 1, hasNarration, nar
         }}>
           Visual Aid
         </span>
-        <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--text-secondary)' }}>
+        <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-secondary)' }}>
           {meta.title}
         </span>
       </div>
@@ -310,7 +310,7 @@ export function VisualCard({ type, autoPlay = true, speed = 1, hasNarration, nar
       />
 
       {/* screen-reader / fallback description */}
-      <p style={{ margin: '6px 0 0', fontSize: 10, color: 'var(--text-dim)', lineHeight: 1.4 }}>
+      <p style={{ margin: '6px 0 0', fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.45 }}>
         {meta.description}
       </p>
     </div>

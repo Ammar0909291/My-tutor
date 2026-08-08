@@ -52,7 +52,11 @@ export function ThreeDVisual({
       style={{
         width: '100%',
         aspectRatio: '4 / 3',
-        maxHeight: 360,
+        // A teaching figure has to be legible before it is tidy. 360px capped
+        // 3D scenes small enough that labels crowded the geometry; the floor
+        // stops a narrow container collapsing the scene to a strip.
+        minHeight: 300,
+        maxHeight: 520,
         borderRadius: 12,
         overflow: 'hidden',
         background: 'var(--bg-elevated)',

@@ -12,6 +12,7 @@
  */
 
 import { clamp } from './conceptText'
+import { buildSemanticsBlock, describeVisualPayload } from './visualSemantics'
 import type { EducationalPurpose, VisualDecision } from './types'
 
 const PURPOSE_INSTRUCTION: Record<EducationalPurpose, string> = {
@@ -60,15 +61,31 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
   )
   lines.push(PURPOSE_INSTRUCTION[decision.purpose])
 
+  // WHAT IS ACTUALLY ON SCREEN. Derived from the payload the client will
+  // render, never from the model's imagination. When the payload yields no
+  // nameable element the block is empty and rule (4) below degrades to a
+  // truthful generic reference rather than an invented one.
+  const semantics = describeVisualPayload(decision.payload)
+  const semanticsBlock = buildSemanticsBlock(semantics)
+  if (semanticsBlock) lines.push('WHAT THE LEARNER SEES: ' + semanticsBlock)
+
+  const referenceRule = semantics.elements.length
+    ? '(4) Refer to the figure by its REAL elements, named above, and by those ' +
+      'only. Never mention a colour, label, axis, arrow or object that is not ' +
+      'in that list — if it is not listed, it is not on screen.'
+    : '(4) Refer to the figure truthfully but generally ("the figure beside ' +
+      'this message shows…"). You do NOT know its individual labels or ' +
+      'colours, so name none of them rather than guessing.'
+
   // Hard prohibitions — each one closes a specific observed production failure.
   lines.push(
     'RULES: (1) Do NOT draw an ASCII diagram — a real figure is already ' +
     'displayed and a second one competes with it. (2) Do NOT say "imagine" or ' +
     '"picture in your mind" — they are LOOKING at it. (3) Do NOT promise a ' +
     'diagram in future tense ("here is a diagram I would draw") — it is ' +
-    'already there. (4) Refer to it directly: "look at the arrow", "notice ' +
-    'where the two lines meet". (5) Keep the words short — the figure leads, ' +
-    'the words support it.',
+    `already there. ${referenceRule} (5) Keep the words short — the figure ` +
+    'leads, the words support it. (6) Do not open with a bare "look at the ' +
+    'figure on your screen" — say what in it matters and why.',
   )
 
   // CONTINUITY. The same figure persisting across turns is the normal case in a
