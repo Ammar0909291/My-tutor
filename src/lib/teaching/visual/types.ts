@@ -128,9 +128,17 @@ export interface VisualDecision {
   purpose: EducationalPurpose
   /** Decided SECOND. Null only when nothing graphical could be chosen. */
   representation: Representation | null
-  /** Decided LAST. */
-  payload: VisualPayload
-  /** True for every payload except ascii. The product metric. */
+  /**
+   * Decided LAST. NULL when no faithful figure exists for this concept.
+   *
+   * A null payload is a SUCCESSFUL outcome, not a failure: the system has
+   * checked its curated bindings and its scene generators, found nothing that
+   * honestly depicts this concept, and is declining to substitute something
+   * else. Correct explanation with no figure beats a wrong figure explained
+   * confidently.
+   */
+  payload: VisualPayload | null
+  /** True only when a faithful payload is attached. The product metric. */
   graphical: boolean
   /** Which layer produced this. */
   source: VisualSource
@@ -166,25 +174,38 @@ export interface VisualDecision {
   continuityReason: string
 }
 
-/** Convenience constructor for the terminal, non-graphical decision. */
-export function asciiDecision(
+/**
+ * The terminal, non-graphical decision: NO FIGURE.
+ *
+ * Reached when the concept has neither a curated visual binding nor a scene
+ * generator — the common case, by design, since only 496 of 1,775 concepts
+ * have a faithful figure today. The tutor is told plainly that nothing is on
+ * screen and teaches in words.
+ */
+export function noFigureDecision(
   reason: string,
   conceptId: string | null = null,
   conceptTitle: string | null = null,
   purpose: EducationalPurpose = 'explain',
+  /**
+   * Excursions survive the absence of a figure. The learner asked about
+   * something other than the lesson; that fact still governs what the tutor
+   * teaches this turn, whether or not a picture exists to teach it with.
+   */
+  excursion = false,
 ): VisualDecision {
   return {
     purpose,
     representation: null,
-    payload: { renderer: 'ascii' },
+    payload: null,
     graphical: false,
     source: 'none',
-    provenance: `ascii:${reason}`,
+    provenance: `no-figure:${reason}`,
     conceptId,
     conceptTitle,
-    excursion: false,
+    excursion,
     allowed: null,
     session: null,
-    continuityReason: 'ascii',
+    continuityReason: 'no-figure',
   }
 }

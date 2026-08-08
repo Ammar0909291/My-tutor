@@ -19,9 +19,11 @@
  *   2. TARGET       — if not, which concept are we drawing?
  *   3. FIGURE       — purpose → representation → renderer (renderer LAST).
  *
- * ASCII is a decision this function returns, not a prompt default someone else
- * falls into. It is reachable only when no concept resolves at all or when
- * every archetype in the ladder declined — both genuinely exceptional.
+ * NO FIGURE is a decision this function returns, not a prompt default someone
+ * else falls into. It is returned whenever the concept has no curated visual
+ * binding and no scene generator — which is the majority of the curriculum
+ * today, and is the correct answer: a wrong figure explained confidently is
+ * worse for a learner than a correct explanation with no figure.
  *
  * Pure, synchronous, no LLM, no network, no database.
  */
@@ -30,11 +32,10 @@ import { getConceptVisualType, lookupConceptVisual, getConceptSceneGenerator } f
 import { buildCanonicalScene } from './conceptSceneParams'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
-import { ARCHETYPES, renderArchetype, type ArchetypeContext } from './archetypes'
-import { conceptRepresentations } from './conceptArchetype'
+import { ARCHETYPES, type ArchetypeContext } from './archetypes'
 import { resolveVisualTarget } from './resolveVisualTarget'
 import { decideContinuity, tickSession, type VisualSession } from './session'
-import { asciiDecision, type EducationalPurpose, type VisualDecision } from './types'
+import { noFigureDecision, type EducationalPurpose, type VisualDecision } from './types'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
 
@@ -104,7 +105,7 @@ function buildDecision(
   ): VisualDecision => ({
     ...partial,
     continuityReason,
-    session: partial.graphical && partial.representation
+    session: partial.graphical && partial.representation && partial.payload
       ? {
           conceptId: ctx.conceptId,
           representation: partial.representation,
@@ -164,24 +165,26 @@ function buildDecision(
     })
   }
 
-  // ── Tier 2: Educational Archetype Engine ───────────────────────────────────
-  for (const representation of conceptRepresentations(ctx)) {
-    const payload = renderArchetype(representation, ctx)
-    if (!payload) continue        // archetype declined — try the next rung
-    return finish({
-      purpose: resolvePurpose(input, ARCHETYPES[representation]?.purpose ?? 'explain'),
-      representation,
-      payload,
-      graphical: true,
-      source: 'archetype',
-      provenance: `archetype:${representation}:${payload.renderer}`,
-      conceptId: ctx.conceptId,
-      conceptTitle: ctx.title,
-      excursion,
-      allowed: payload.renderer === 'card' ? [payload.visualType] : null,
-    })
-  }
-
+  // ── NO TIER 2 ─────────────────────────────────────────────────────────────
+  // The Educational Archetype Engine used to sit here and guarantee a figure
+  // for every concept. It is deliberately NOT consulted any more, because what
+  // it produced was a figure of the concept's SHAPE, not of the concept:
+  //
+  //   phys.therm.calorimetry      -> "3D Data Visualization" stock card
+  //   eng.phonics.phonemic-awareness -> "Wave Function psi(x)" — a child
+  //                                  learning letter sounds was shown a
+  //                                  quantum wavefunction, because the
+  //                                  keyword table matched "sound"/"wave"
+  //   phys.therm.first-law        -> a DNA-style node-and-path scene labelled
+  //                                  with fragments of its own description
+  //
+  // Those figures then went to the model under a contract asserting a correct
+  // figure was on screen, which is how the tutor came to describe an incident
+  // ray, a reflected ray and a normal line against a triangle and a circle.
+  //
+  // The engine itself is untouched and still unit-tested; it is simply no
+  // longer an authority on what a learner sees. Returning null here is a
+  // SUCCESSFUL outcome: no faithful figure exists, so none is attached.
   return null
 }
 
@@ -237,7 +240,7 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
 
   if (!conceptId) {
     return {
-      ...asciiDecision('no-resolvable-concept', null, null, resolvePurpose(input, 'explain')),
+      ...noFigureDecision('no-resolvable-concept', null, null, resolvePurpose(input, 'explain')),
       continuityReason: action.reason,
       session: null,
     }
@@ -246,7 +249,7 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   const ctx = contextFor(conceptId)
   if (!ctx) {
     return {
-      ...asciiDecision('concept-not-in-kg', conceptId, null, resolvePurpose(input, 'explain')),
+      ...noFigureDecision('concept-not-in-kg', conceptId, null, resolvePurpose(input, 'explain')),
       continuityReason: action.reason,
       session: null,
     }
@@ -264,7 +267,13 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   if (decision) return decision
 
   return {
-    ...asciiDecision('all-archetypes-declined', ctx.conceptId, ctx.title, resolvePurpose(input, 'explain')),
+    ...noFigureDecision(
+      'no-faithful-visual',
+      ctx.conceptId,
+      ctx.title,
+      resolvePurpose(input, 'explain'),
+      returnToConceptId !== null,
+    ),
     continuityReason: action.reason,
     session: null,
   }

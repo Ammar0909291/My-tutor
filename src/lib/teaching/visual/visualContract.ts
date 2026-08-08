@@ -34,17 +34,25 @@ const PURPOSE_INSTRUCTION: Record<EducationalPurpose, string> = {
 export function buildVisualContractBlock(decision: VisualDecision | null): string {
   if (!decision) return ''
 
-  // ── Emergency path: no graphic could be produced ──────────────────────────
-  // This is the ONLY place ASCII is ever requested, and it is reached only when
-  // resolveVisual() exhausted the registry AND every archetype in the ladder.
-  if (!decision.graphical) {
+  // ── NO FIGURE ─────────────────────────────────────────────────────────────
+  // Not an error and not exceptional: most concepts have no curated visual and
+  // no scene generator, and the system now declines to substitute a figure of
+  // something else rather than letting the model teach against it. The only
+  // job here is to make sure the model knows the screen is empty, so it never
+  // refers to a figure that does not exist.
+  if (!decision.graphical || !decision.payload) {
     return (
-      '\n\nVISUAL CONTRACT: NO FIGURE AVAILABLE (exceptional). ' +
-      'No graphical visualization could be produced for this request, so you ' +
-      'must build the picture in words: a labelled ASCII figure, or a precise ' +
-      'step-by-step spatial description ("imagine a horizontal line; on its ' +
-      'left end…"). Keep it small and labelled. Do not claim a diagram is ' +
-      'displayed on screen — none is.'
+      '\n\nVISUAL CONTRACT: NO FIGURE IS ATTACHED TO THIS RESPONSE. ' +
+      'The learner\'s screen shows your words and nothing else. Teach this ' +
+      'concept normally in prose — a clear explanation, an example, a question. ' +
+      'RULES: (1) Do NOT say "look at the figure/diagram/image", "as you can ' +
+      'see", "on your screen", or anything else implying a picture exists. ' +
+      '(2) Do NOT describe arrows, colours, axes, labels or objects as though ' +
+      'they were visible. (3) Do NOT promise a diagram you cannot attach. ' +
+      '(4) You MAY use ordinary spatial language to build a mental picture ' +
+      '("imagine a ball thrown at an angle") — that is describing an idea, not ' +
+      'claiming a figure. (5) Do not apologise for the absence of a diagram; ' +
+      'a clear explanation is the complete answer.'
     )
   }
 

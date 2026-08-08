@@ -2183,7 +2183,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // The contract tells the model what is ALREADY on screen, so it
               // teaches to that figure instead of deciding whether one exists.
               systemPrompt += buildVisualContractBlock(decision)
-              if (decision.payload.renderer === 'card') {
+              if (decision.payload?.renderer === 'card') {
                 // Keep the legacy hoisted vars coherent for the RRM log and the
                 // canonical-ownership clamp further down.
                 availableVisualHoisted = decision.payload.visualType
@@ -2194,7 +2194,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 excursion: decision.excursion,
                 purpose: decision.purpose,
                 representation: decision.representation,
-                renderer: decision.payload.renderer,
+                renderer: decision.payload?.renderer ?? 'none',
                 graphical: decision.graphical,
                 provenance: decision.provenance,
                 continuity: decision.continuityReason,
@@ -3783,7 +3783,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         detectedSceneSpec = null
         dynamicVisualizationCode = null
 
-        switch (decision.payload.renderer) {
+        // A null payload is the NO-FIGURE decision: the concept has no faithful
+        // visual, so every channel stays null and the learner sees text only.
+        // This is a successful outcome, not a failure to render.
+        switch (decision.payload?.renderer) {
           case 'card': {
             const legal = decision.allowed ?? [decision.payload.visualType]
             responseVisual = llmTag && legal.includes(llmTag) ? llmTag : decision.payload.visualType
@@ -3795,8 +3798,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           case 'scene':
             detectedSceneSpec = decision.payload.sceneSpec
             break
-          case 'ascii':
-            break   // intentionally nothing — the contract block asked for text
+          default:
+            break   // no payload (or the retired ascii member) — attach nothing
         }
       }
 

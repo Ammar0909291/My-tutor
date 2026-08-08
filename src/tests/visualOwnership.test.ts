@@ -51,7 +51,9 @@ describe('the concept, not the generator kind, decides the figure', () => {
     // A dihybrid cross drawn as a single-gene Punnett square teaches the wrong
     // thing; falling through to the card is the correct answer.
     expect(buildCanonicalScene('punnett_square', 'bio.gen.dihybrid-cross')).toBeNull()
-    expect(figureFor('bio.gen.dihybrid-cross').payload.renderer).not.toBe('scene')
+    // No generator and no curated card for this concept => no figure at all,
+    // rather than a single-gene Punnett square standing in for a dihybrid one.
+    expect(figureFor('bio.gen.dihybrid-cross').payload?.renderer).not.toBe('scene')
   })
 
   it('an unmapped concept still gets its kind default', () => {

@@ -21,44 +21,84 @@ function allConcepts() {
   return out
 }
 
-// ── THE coverage invariant ───────────────────────────────────────────────────
-// This is the test that protects the architecture. Before V2, 456/1775 concepts
-// (25.7%) could render a graphic and the rest fell to an ASCII prompt. If a KG
-// edit, an archetype change, or a mapping regression ever pushes a concept back
-// to text, this fails in CI rather than silently in front of a learner.
-describe('Visual Resolver V2 — graphical coverage invariant', () => {
-  it('produces a GRAPHICAL visual for every concept in every canonical KG', () => {
-    const failures: string[] = []
+// ── THE semantic safety invariant ────────────────────────────────────────────
+// This replaces the former "every concept must be graphical" invariant, which
+// was RETIRED on 2026-08-08 because it was the mechanism of the worst failure
+// the product has produced. Guaranteeing a figure for all 1,775 concepts meant
+// substituting one when nothing faithful existed:
+//
+//   phys.therm.calorimetry         -> "3D Data Visualization" stock card
+//   eng.phonics.phonemic-awareness -> "Wave Function psi(x)" (a child learning
+//                                     letter sounds, shown a quantum wavefunction)
+//   phys.opt.reflection            -> "Geometry Shapes", while the tutor
+//                                     described incident ray, reflected ray and
+//                                     normal — none of which were on screen
+//
+// Coverage is no longer the invariant. FAITHFULNESS is: a concept either gets
+// a figure that is genuinely its own, or it gets none. This test is strictly
+// stronger — the old one permitted every failure above.
+describe('Visual Resolver V2 — semantic safety invariant', () => {
+  it('never fabricates a figure: every visual is curated or generated, or absent', () => {
+    const fabricated: string[] = []
+    const inconsistent: string[] = []
     for (const c of allConcepts()) {
-      const decision = resolveVisual({
+      const d = resolveVisual({
         message: '',
         lessonConceptId: c.id,
         subject: c.subject,
         learnerRequest: 'diagram',
       })
-      if (!decision.graphical) failures.push(`${c.id} — ${c.title}`)
+      // A visual may ONLY come from a curated binding or a scene generator.
+      if (d.graphical && d.source !== 'registry') fabricated.push(`${c.id} — source ${d.source}`)
+      // graphical and payload must agree, always and in both directions.
+      if (d.graphical !== (d.payload !== null)) inconsistent.push(`${c.id}`)
     }
-    expect(failures, `concepts falling through to ASCII:\n${failures.slice(0, 20).join('\n')}`).toEqual([])
+    expect(fabricated, `concepts given a fabricated visual:\n${fabricated.slice(0, 20).join('\n')}`).toEqual([])
+    expect(inconsistent, `graphical/payload disagreement:\n${inconsistent.slice(0, 20).join('\n')}`).toEqual([])
   })
 
-  it('covers a meaningful share from the curated registry, not archetypes alone', () => {
+  it('an unsupported concept receives NO visual, not a substitute', () => {
+    // Calorimetry has no curated binding and no generator. It used to receive
+    // the "3D Data Visualization" card. It must now receive nothing at all.
+    const d = resolveVisual({
+      message: '', lessonConceptId: 'phys.therm.calorimetry',
+      subject: 'physics', learnerRequest: 'diagram',
+    })
+    expect(d.payload).toBeNull()
+    expect(d.graphical).toBe(false)
+    expect(d.source).toBe('none')
+    expect(d.provenance).toContain('no-faithful-visual')
+  })
+
+  it('English phonics is never handed a physics figure', () => {
+    // The single most damning case the archetype engine produced.
+    const d = resolveVisual({
+      message: '', lessonConceptId: 'eng.phonics.phonemic-awareness',
+      subject: 'english', learnerRequest: 'diagram',
+    })
+    expect(d.payload).toBeNull()
+    expect(JSON.stringify(d)).not.toMatch(/wave|quantum/i)
+  })
+
+  it('the curated corpus is still fully wired — coverage must not collapse', () => {
     let registry = 0
     for (const c of allConcepts()) {
       const d = resolveVisual({ message: '', lessonConceptId: c.id, subject: c.subject })
       if (d.source === 'registry') registry++
     }
-    // Guards against a regression that silently bypasses curated bindings —
-    // archetypes are the floor, never a replacement for hand-verified visuals.
-    expect(registry).toBeGreaterThan(400)
+    // Faithful coverage is 496/1775 today. This guards the opposite regression
+    // from the one above: silently bypassing curated bindings and showing
+    // nothing where a real, hand-verified figure exists.
+    expect(registry).toBeGreaterThan(450)
   })
 
   it('never emits a payload the client cannot render', () => {
     for (const c of allConcepts()) {
       const d = resolveVisual({ message: '', lessonConceptId: c.id, subject: c.subject })
-      if (d.payload.renderer === 'spec') {
+      if (d.payload?.renderer === 'spec') {
         expect(parseVisualSpec(d.payload.visualSpec), `${c.id} produced an invalid VisualSpec`).not.toBeNull()
       }
-      if (d.payload.renderer === 'scene') {
+      if (d.payload?.renderer === 'scene') {
         const result = validateSceneSpec(d.payload.sceneSpec)
         expect(result.valid, `${c.id} produced an invalid SceneSpec: ${JSON.stringify(result.errors)}`).toBe(true)
       }
@@ -116,7 +156,10 @@ describe('Visual Resolver V2 — concept excursions', () => {
     })
     expect(d.excursion).toBe(false)
     expect(d.conceptId).toBe('phys.therm.calorimetry')
-    expect(d.graphical).toBe(true)
+    // Calorimetry has no faithful figure, so none is attached — the assertion
+    // that matters here is that the TARGET did not move, not that a picture
+    // appeared.
+    expect(d.payload).toBeNull()
   })
 
   it('target resolution reports its origin honestly', () => {
@@ -127,35 +170,52 @@ describe('Visual Resolver V2 — concept excursions', () => {
   })
 })
 
-// ── ASCII is emergency-only ──────────────────────────────────────────────────
-describe('Visual Resolver V2 — ASCII is the emergency path', () => {
-  it('falls to ASCII ONLY when no concept resolves at all', () => {
+// ── NO FIGURE is a safe, honest outcome ──────────────────────────────────────
+// Formerly "ASCII is the emergency path". Two things changed on 2026-08-08:
+// no-figure is now the COMMON case rather than an emergency, and the contract
+// no longer asks the model to compensate by drawing ASCII art — it asks it to
+// teach in prose. What these tests protect is unchanged and is the only thing
+// that ever mattered: the model must never be told a figure exists when it
+// does not.
+describe('Visual Resolver V2 — the no-figure contract', () => {
+  it('returns no figure when no concept resolves at all', () => {
     const d = resolveVisual({ message: 'tell me a joke about pirates', lessonConceptId: null })
     expect(d.graphical).toBe(false)
-    expect(d.provenance).toBe('ascii:no-resolvable-concept')
+    expect(d.payload).toBeNull()
+    expect(d.provenance).toBe('no-figure:no-resolvable-concept')
   })
 
-  it('a registry MISS alone never produces ASCII (the old root cause)', () => {
-    // phys.therm.calorimetry has no registry row and no phys.therm domain rule —
-    // in production this exact concept produced an ASCII instruction.
+  it('a concept with no curated visual and no generator returns no figure', () => {
     const d = resolveVisual({ message: '', lessonConceptId: 'phys.therm.calorimetry', learnerRequest: 'diagram' })
-    expect(d.source).toBe('archetype')
-    expect(d.graphical).toBe(true)
+    expect(d.source).toBe('none')
+    expect(d.graphical).toBe(false)
+    expect(d.payload).toBeNull()
   })
 
-  it('the contract block forbids ASCII whenever a figure is attached', () => {
-    const d = resolveVisual({ message: '', lessonConceptId: 'phys.therm.calorimetry', learnerRequest: 'diagram' })
+  it('the contract NEVER claims a figure when none is attached', () => {
+    for (const d of [
+      resolveVisual({ message: '', lessonConceptId: 'phys.therm.calorimetry', learnerRequest: 'diagram' }),
+      resolveVisual({ message: 'tell me a joke about pirates', lessonConceptId: null }),
+    ]) {
+      const block = buildVisualContractBlock(d)
+      expect(block).toContain('NO FIGURE IS ATTACHED')
+      expect(block).not.toContain('ALREADY BEING RENDERED')
+      // The phrase appears only inside the prohibition, never as an instruction.
+      expect(block).toMatch(/Do NOT say "look at the figure/)
+      expect(block).toContain('shows your words and nothing else')
+      // It must not tell the tutor to compensate with drawn output either.
+      expect(block).not.toMatch(/ASCII/i)
+    }
+  })
+
+  it('the contract still forbids ASCII when a real figure IS attached', () => {
+    const d = resolveVisual({
+      message: '', lessonConceptId: 'phys.mech.projectile-motion', learnerRequest: 'diagram',
+    })
     const block = buildVisualContractBlock(d)
+    expect(d.graphical).toBe(true)
     expect(block).toContain('ALREADY BEING RENDERED')
     expect(block).toContain('Do NOT draw an ASCII diagram')
-    expect(block).not.toContain('imagine a horizontal line')
-  })
-
-  it('the contract block requests ASCII only on the non-graphical decision', () => {
-    const d = resolveVisual({ message: 'tell me a joke about pirates', lessonConceptId: null })
-    const block = buildVisualContractBlock(d)
-    expect(block).toContain('NO FIGURE AVAILABLE')
-    expect(block).toContain('ASCII')
   })
 })
 

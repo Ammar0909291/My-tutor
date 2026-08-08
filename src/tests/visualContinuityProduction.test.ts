@@ -39,8 +39,13 @@ describe('a visual request with no named concept returns to the lesson', () => {
     const d = decide('Show me graph', { activeSession: session })
     expect(d.conceptId).toBe(CALORIMETRY)
     expect(d.excursion).toBe(false)
-    expect(d.graphical).toBe(true)
     expect(d.continuityReason).toBe('visual-request-returns-to-lesson')
+    // Calorimetry has no curated visual and no scene generator. Under the
+    // 2026-08-08 safety policy that means NO figure — the stale vector figure
+    // is still gone, which is what this test exists to prove, and nothing
+    // fabricated took its place.
+    expect(d.payload).toBeNull()
+    expect(d.graphical).toBe(false)
   })
 
   it('does not churn when the figure is already the lesson concept', () => {
@@ -80,7 +85,10 @@ describe('session hardening', () => {
       lastAssistantAskedQuestion: true,
     })
     expect(d.conceptId).toBe(CALORIMETRY)
-    expect(d.graphical).toBe(true)
+    // Degrading to the lesson concept is the point; whether the lesson concept
+    // itself has a faithful figure is a separate matter (calorimetry has none).
+    expect(d.provenance).not.toContain('phys.deleted.gone')
+    expect(d.payload).toBeNull()
   })
 
   it('a session with wrong field types never throws', () => {
