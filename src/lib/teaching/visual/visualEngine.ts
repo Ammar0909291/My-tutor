@@ -229,18 +229,17 @@ export function crossConceptChallenger(
   }
   if (labelWords.size === 0) return null
 
-  const score = (title: string, aliases?: readonly string[]): number => {
-    const words = new Set([...contentWords(title), ...(aliases ?? []).flatMap((a) => [...contentWords(a)])])
+  const score = (words: ReadonlySet<string>): number => {
     let n = 0
     for (const w of words) if (labelWords.has(w)) n++
     return n
   }
 
-  const targetScore = score(ctx.title)
+  const targetScore = score(contentWords(ctx.title))
   let best: { conceptId: string; score: number } | null = null
-  for (const entry of conceptIndexEntries()) {
+  for (const entry of scoredIndex()) {
     if (entry.conceptId === ctx.conceptId) continue
-    const s = score(entry.title, entry.aliases)
+    const s = score(entry.words)
     if (s === 0) continue
     if (!best || s > best.score || (s === best.score && entry.conceptId < best.conceptId)) {
       best = { conceptId: entry.conceptId, score: s }
@@ -253,10 +252,23 @@ export function crossConceptChallenger(
   return null
 }
 
-// The index is static in-memory KG data; build once per process.
-let cachedIndex: readonly ConceptIndexEntry[] | null = null
-function conceptIndexEntries(): readonly ConceptIndexEntry[] {
-  if (!cachedIndex) cachedIndex = buildConceptIndexFromKnowledgeGraph()
+/**
+ * The index is static in-memory KG data, and its titles tokenize to the same
+ * words every time — so tokenize once per process rather than re-splitting
+ * 1,775 titles on every validation. Measured: this is the whole cost of the
+ * cross-concept check.
+ */
+let cachedIndex: readonly { conceptId: string; words: ReadonlySet<string> }[] | null = null
+function scoredIndex(): readonly { conceptId: string; words: ReadonlySet<string> }[] {
+  if (!cachedIndex) {
+    cachedIndex = buildConceptIndexFromKnowledgeGraph().map((entry: ConceptIndexEntry) => ({
+      conceptId: entry.conceptId,
+      words: new Set([
+        ...contentWords(entry.title),
+        ...(entry.aliases ?? []).flatMap((a) => [...contentWords(a)]),
+      ]),
+    }))
+  }
   return cachedIndex
 }
 

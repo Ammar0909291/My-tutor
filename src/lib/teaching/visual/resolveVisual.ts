@@ -240,6 +240,14 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     heldTurns = 0
   }
 
+  // The lesson can move onto the concept the held figure is already showing —
+  // the learner navigated there, or the excursion's own topic became the
+  // lesson. The excursion is over at that moment. Without this, the decision
+  // keeps the stale returnToConceptId and the contract emits "the learner
+  // asked about X, which is NOT the current lesson's concept" about the very
+  // concept being taught. Found by the 100,000-turn simulation (17 turns).
+  if (conceptId && conceptId === input.lessonConceptId) returnToConceptId = null
+
   if (!conceptId) {
     return {
       ...noFigureDecision('no-resolvable-concept', null, null, resolvePurpose(input, 'explain')),
