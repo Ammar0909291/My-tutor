@@ -327,7 +327,7 @@ export async function resolveVisualForTurn(
 
   // 2. GENERATED — attempted only here, and only for a turn that would
   //    otherwise show nothing.
-  const result = await generateConceptScene(ctx, deps)
+  const result = await generateConceptScene(ctx, { purpose: decision.purpose, ...deps })
   if (!result.ok) {
     // 3. NONE — carry the reason so a rejection is auditable rather than silent.
     return { ...decision, provenance: `no-figure:engine-${result.reason}` }

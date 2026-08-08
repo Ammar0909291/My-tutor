@@ -35,18 +35,53 @@ import { isAiSceneGenerationEnabled } from '@/lib/teaching/generateSceneSpec'
 import {
   getCachedVisualization, saveVisualization, type VisualizationCacheClient,
 } from '@/lib/teaching/visuals/visualizationCache'
+import { buildConceptIndexFromKnowledgeGraph } from '@/lib/teaching/concept/conceptIndexSource'
+import type { ConceptIndexEntry } from '@/lib/teaching/concept/conceptUnderstanding'
 import type { SceneObject, SceneSpec } from '@/lib/teaching/sceneSpec'
 import type { ArchetypeContext } from './archetypes'
 
 /** Cache namespace. Disjoint from the dynamic-code engine's own keys. */
 const CACHE_PREFIX = 'scene:v1:'
 
-/** Object types SceneSpecRenderer actually paints — bar/surface are skipped. */
+/**
+ * Object types SceneSpecRenderer actually paints, read from its switch:
+ * point/node/particle -> MolecularNode3D, vector/arrow -> Vector3D,
+ * label -> Html text, path/trajectory -> marker group, bond -> BondLine.
+ * bar and surface hit the default branch and return null — they are NOT drawn
+ * and must never count toward anything.
+ */
 const DRAWN: ReadonlySet<SceneObject['type']> = new Set<SceneObject['type']>([
   'point', 'particle', 'node', 'vector', 'arrow', 'bond', 'label', 'path', 'trajectory',
 ])
 
+/**
+ * Drawn objects that carry GEOMETRY rather than just text. A `label` is a
+ * floating string: satisfying the anchor with labels alone is the same cheap
+ * trick as repeating the title, so at least one anchored object must come from
+ * this set.
+ */
+const GEOMETRIC: ReadonlySet<SceneObject['type']> = new Set<SceneObject['type']>([
+  'point', 'particle', 'node', 'vector', 'arrow', 'bond', 'path', 'trajectory',
+])
+
 const MIN_DRAWN_OBJECTS = 2
+
+/** Distinct anchored objects required before a scene is believed. */
+const MIN_ANCHORED_OBJECTS = 2
+
+/**
+ * How much more strongly another concept may match the object labels before
+ * the scene is treated as depicting that other concept.
+ *
+ * Calibrated once, by measurement, against the 1,320-evaluation matrix — not
+ * tuned per case. Margin 1 caught 40 more mixed-content scenes but began
+ * rejecting correct ones: a faithful catalysis figure labelled "catalysis /
+ * homogeneous / heterogeneous" lost to a more specific SIBLING concept. A
+ * neighbouring concept scoring higher is not evidence of a wrong figure, so
+ * the margin stays at 2 and the residual mixed-content case is reported as a
+ * known limit rather than paid for with false rejections of correct figures.
+ */
+const CROSS_CONCEPT_MARGIN = 2
 
 /** Words too common to prove a scene is about anything in particular. */
 const STOPWORDS = new Set([
@@ -73,47 +108,156 @@ export type EngineResult =
 
 // ── semantic validation ──────────────────────────────────────────────────────
 
-function contentWords(text: string): Set<string> {
+function contentWords(text: string, keepGeneric = false): Set<string> {
   const out = new Set<string>()
   for (const w of text.toLowerCase().replace(/[^a-z0-9\s]+/g, ' ').split(/\s+/)) {
-    if (w.length < 4 || STOPWORDS.has(w)) continue
+    if (w.length < 4) continue
+    // The stopword list exists to stop generic SCENE text proving anything.
+    // A concept's own title is the thing being anchored TO, so it keeps every
+    // word: "Print Concepts" must not be reduced to "print" and then fail for
+    // having only one usable word.
+    if (!keepGeneric && STOPWORDS.has(w)) continue
     // Fold a trailing plural so "vectors" anchors to "vector".
     out.add(w.endsWith('s') && w.length > 4 ? w.slice(0, -1) : w)
   }
   return out
 }
 
-/** Every word the learner will actually read on the figure. */
-function sceneVocabulary(scene: SceneSpec): string {
-  const parts = [scene.title, scene.teachingGoal ?? '', scene.ariaLabel ?? '']
-  for (const step of scene.steps ?? []) {
-    parts.push(step.narration ?? '')
-    for (const obj of step.objects ?? []) parts.push(obj.text ?? '')
-  }
-  return parts.join(' ')
+/** Every drawn object, paired with its own label text. */
+function drawnObjects(scene: SceneSpec): SceneObject[] {
+  return (scene.steps ?? []).flatMap((s) => s.objects ?? []).filter((o) => DRAWN.has(o.type))
 }
 
 /**
  * Is this scene demonstrably ABOUT the concept it was generated for?
  *
- * A generated figure carries no inherent proof of subject. Requiring shared
- * vocabulary with the concept's own title (or, failing that, two words from its
- * description) is a deterministic anti-drift check: it is exactly what
- * distinguishes a phonics scene from a quantum-mechanics one when the concept
- * is Phonemic Awareness.
+ * MEASURED FAILURE THIS REPLACES (2026-08-08, 480-evaluation experiment):
+ * anchoring on the whole scene text — title, teachingGoal, ariaLabel,
+ * narration and labels together — accepted 120 of 120 deliberately adversarial
+ * scenes. Those scenes named the target concept in the title and narration
+ * while every drawn object belonged to a different concept. Title and narration
+ * are free text the generator controls, so echoing the concept name is the
+ * cheapest possible way to pass, which is exactly what a weak generation does.
+ *
+ * The anchor is therefore computed ONLY over the labels of objects the renderer
+ * actually paints. Title, teachingGoal, ariaLabel and narration are ignored
+ * entirely: they are what the learner is TOLD, and the question here is what
+ * the learner is SHOWN.
+ *
+ * Two independent conditions must hold:
+ *   1. at least two DISTINCT drawn objects whose own text matches the concept's
+ *      vocabulary, at least one of them geometry-bearing (a pair of floating
+ *      labels is text, not a figure);
+ *   2. no other KG concept matches those labels substantially better than the
+ *      target does (see crossConceptChallenger).
  */
 export function isAnchoredToConcept(scene: SceneSpec, ctx: ArchetypeContext): boolean {
-  const vocabulary = contentWords(sceneVocabulary(scene))
-  if (vocabulary.size === 0) return false
+  return anchorReport(scene, ctx).anchored
+}
 
-  for (const word of contentWords(ctx.title)) {
-    if (vocabulary.has(word)) return true
+export interface AnchorReport {
+  anchored: boolean
+  /** Distinct anchored object labels, in scene order. */
+  matchedLabels: string[]
+  /** True when at least one anchored object carries geometry. */
+  hasGeometricAnchor: boolean
+  /** A better-matching concept, when one exists. */
+  challenger: { conceptId: string; score: number; targetScore: number } | null
+}
+
+export function anchorReport(scene: SceneSpec, ctx: ArchetypeContext): AnchorReport {
+  const conceptWords = new Set([...contentWords(ctx.title, true), ...contentWords(ctx.description)])
+
+  const matched: string[] = []
+  const seen = new Set<string>()
+  let hasGeometricAnchor = false
+
+  for (const obj of drawnObjects(scene)) {
+    const label = (obj.text ?? '').trim()
+    if (!label) continue
+    const key = label.toLowerCase()
+    if (seen.has(key)) continue                 // repeating one label is one object
+    // The label is tokenized WITHOUT the stopword filter, because the filter's
+    // job is to stop generic words proving anything — and `conceptWords` is
+    // already derived from this concept alone. A label reading "concepts" can
+    // therefore only anchor a concept whose own title says "Concepts"
+    // (eng.phonics.print-concepts), never a concept that merely mentions one.
+    const words = contentWords(label, true)
+    let hit = false
+    for (const w of words) if (conceptWords.has(w)) { hit = true; break }
+    if (!hit) continue
+    seen.add(key)
+    matched.push(label)
+    if (GEOMETRIC.has(obj.type)) hasGeometricAnchor = true
   }
-  let fromDescription = 0
-  for (const word of contentWords(ctx.description)) {
-    if (vocabulary.has(word) && ++fromDescription >= 2) return true
+
+  const challenger = crossConceptChallenger(scene, ctx)
+  const anchored =
+    matched.length >= MIN_ANCHORED_OBJECTS && hasGeometricAnchor && challenger === null
+
+  return { anchored, matchedLabels: matched, hasGeometricAnchor, challenger }
+}
+
+/**
+ * NEGATIVE CROSS-CONCEPT CHECK.
+ *
+ * Passing the positive anchor is not proof, because a scene can carry the
+ * target's vocabulary AND another concept's content at the same time. This asks
+ * the opposite question: of every concept in the canonical KGs, does one match
+ * these object labels substantially better than the target?
+ *
+ * SCORE, deterministic and documented:
+ *   score(concept) = number of DISTINCT content words from that concept's title
+ *                    (and its registered aliases) that appear in the drawn
+ *                    object labels.
+ * The existing concept index is the only source — no second graph is built, no
+ * KG data is modified, no model is called.
+ *
+ * A challenger is returned when  score(other) >= score(target) + 2. The margin
+ * tolerates incidental overlap (a "vector" label in a momentum scene) while
+ * catching a scene whose labels are demonstrably another concept's. Ties and
+ * equal scores never produce a challenger, and the winner is chosen by score
+ * then by conceptId, so the result cannot depend on index ordering.
+ */
+export function crossConceptChallenger(
+  scene: SceneSpec,
+  ctx: ArchetypeContext,
+): { conceptId: string; score: number; targetScore: number } | null {
+  const labelWords = new Set<string>()
+  for (const obj of drawnObjects(scene)) {
+    for (const w of contentWords(obj.text ?? '')) labelWords.add(w)
   }
-  return false
+  if (labelWords.size === 0) return null
+
+  const score = (title: string, aliases?: readonly string[]): number => {
+    const words = new Set([...contentWords(title), ...(aliases ?? []).flatMap((a) => [...contentWords(a)])])
+    let n = 0
+    for (const w of words) if (labelWords.has(w)) n++
+    return n
+  }
+
+  const targetScore = score(ctx.title)
+  let best: { conceptId: string; score: number } | null = null
+  for (const entry of conceptIndexEntries()) {
+    if (entry.conceptId === ctx.conceptId) continue
+    const s = score(entry.title, entry.aliases)
+    if (s === 0) continue
+    if (!best || s > best.score || (s === best.score && entry.conceptId < best.conceptId)) {
+      best = { conceptId: entry.conceptId, score: s }
+    }
+  }
+
+  if (best && best.score >= targetScore + CROSS_CONCEPT_MARGIN) {
+    return { conceptId: best.conceptId, score: best.score, targetScore }
+  }
+  return null
+}
+
+// The index is static in-memory KG data; build once per process.
+let cachedIndex: readonly ConceptIndexEntry[] | null = null
+function conceptIndexEntries(): readonly ConceptIndexEntry[] {
+  if (!cachedIndex) cachedIndex = buildConceptIndexFromKnowledgeGraph()
+  return cachedIndex
 }
 
 /**
@@ -147,8 +291,27 @@ export function validateGeneratedScene(
  * the structural difference from generateSceneSpec(), which summarises whatever
  * the model just said and therefore drifts with it.
  */
-export function buildConceptScenePrompt(ctx: ArchetypeContext): string {
+export function buildConceptScenePrompt(
+  ctx: ArchetypeContext,
+  /**
+   * The turn's teaching PURPOSE, when known.
+   *
+   * STEP 4 finding: `purpose` is safe to pass — it is decided first, from the
+   * teaching situation (learner asked to see something / third failed attempt /
+   * archetype default), it exists for every turn, and it never depends on a
+   * keyword table. `representation` is NOT passed: for an uncurated concept the
+   * only way to obtain one is conceptRepresentations(), the archetype keyword
+   * table that produced a quantum wavefunction for English phonics. Feeding
+   * that back in would reintroduce the retired failure through the prompt.
+   * Purpose is therefore supplied as GUIDANCE only; no hard sceneType gate is
+   * added, because calibrating one requires real-model output that has not yet
+   * been measured.
+   */
+  purpose?: string,
+): string {
+  const purposeLine = purpose ? `\nTeaching purpose for this turn: ${purpose}. Shape the figure to serve it.\n` : ''
   return `Generate a 3D teaching visualization for ONE specific curriculum concept.
+${purposeLine}
 
 Concept id: ${ctx.conceptId}
 Concept title: ${ctx.title}
@@ -184,6 +347,8 @@ export async function generateConceptScene(
     cacheClient?: VisualizationCacheClient
     generate?: (prompt: string, maxTokens?: number) => Promise<unknown>
     enabled?: () => boolean
+    /** The turn's teaching purpose — guidance for generation, see the prompt. */
+    purpose?: string
   } = {},
 ): Promise<EngineResult> {
   const enabled = deps.enabled ?? isAiSceneGenerationEnabled
@@ -206,7 +371,7 @@ export async function generateConceptScene(
   // 2. Generate.
   let raw: unknown = null
   try {
-    raw = await (deps.generate ?? generateJSON)(buildConceptScenePrompt(ctx), 1400)
+    raw = await (deps.generate ?? generateJSON)(buildConceptScenePrompt(ctx, deps.purpose), 1400)
   } catch {
     return { ok: false, reason: 'generation-failed' }
   }

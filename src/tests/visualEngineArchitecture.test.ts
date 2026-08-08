@@ -16,7 +16,7 @@ import { describe, it, expect } from 'vitest'
 import { resolveVisual, resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
 import {
   generateConceptScene, validateGeneratedScene, isAnchoredToConcept,
-  buildConceptScenePrompt,
+  buildConceptScenePrompt, anchorReport, crossConceptChallenger,
 } from '@/lib/teaching/visual/visualEngine'
 import { buildVisualContractBlock } from '@/lib/teaching/visual/visualContract'
 import { describeVisualPayload } from '@/lib/teaching/visual/visualSemantics'
@@ -387,5 +387,154 @@ describe('malformed payloads and legacy isolation', () => {
     expect(prompt).toContain(getKGNode(CALORIMETRY)!.title)
     // The instruction that makes refusal possible must be present.
     expect(prompt).toMatch(/return exactly: null/)
+  })
+})
+
+// ── object-level anchoring (2026-08-08 hardening) ────────────────────────────
+// The measured failure this closes: whole-scene lexical anchoring accepted
+// 120/120 adversarial scenes — right title, wrong picture. The anchor is now
+// computed only over the labels of objects the renderer actually paints.
+
+describe('the semantic gate anchors on what is DRAWN, not what is SAID', () => {
+  const ctx = ctxFor(CALORIMETRY)
+  const scene = (objects: unknown[], extra: Partial<SceneSpec> = {}): SceneSpec => ({
+    id: 's', title: 'Calorimetry', sceneType: 'diagram',
+    steps: [{ narration: 'Calorimetry in action.', objects: objects as never }],
+    ...extra,
+  })
+
+  it('a title naming the concept proves nothing', () => {
+    // Legal title, correct concept named, objects belonging to another concept.
+    const r = validateGeneratedScene(scene([
+      { type: 'node', position: [0, 0, 0], text: 'fermi' },
+      { type: 'node', position: [1, 0, 0], text: 'dirac' },
+    ]), ctx)
+    expect(r.ok).toBe(false)
+    if (!r.ok) expect(r.reason).toBe('not-anchored-to-concept')
+  })
+
+  it('spamming the title is rejected before the anchor even runs', () => {
+    // validateSceneSpec caps title length, so this fails structurally first —
+    // both gates close the same door.
+    const r = validateGeneratedScene(scene(
+      [{ type: 'node', position: [0, 0, 0], text: 'fermi' },
+       { type: 'node', position: [1, 0, 0], text: 'dirac' }],
+      { title: Array(20).fill('Calorimetry').join(' ') },
+    ), ctx)
+    expect(r.ok).toBe(false)
+  })
+
+  it('narration naming the concept proves nothing', () => {
+    const r = validateGeneratedScene({
+      id: 's', title: 'Figure', sceneType: 'diagram',
+      steps: [{ narration: 'Calorimetry. Calorimetry. Calorimetry measures heat exchange.',
+        objects: [{ type: 'node', position: [0, 0, 0], text: 'fermi' },
+                  { type: 'node', position: [1, 0, 0], text: 'dirac' }] }],
+    }, ctx)
+    expect(r.ok).toBe(false)
+  })
+
+  it('one matching object is not enough — two DISTINCT ones are required', () => {
+    expect(validateGeneratedScene(scene([
+      { type: 'node', position: [0, 0, 0], text: 'calorimetry' },
+      { type: 'node', position: [1, 0, 0], text: 'fermi' },
+    ]), ctx).ok).toBe(false)
+    // …and repeating the same label is still one object.
+    expect(validateGeneratedScene(scene([
+      { type: 'node', position: [0, 0, 0], text: 'calorimetry' },
+      { type: 'node', position: [1, 0, 0], text: 'Calorimetry' },
+      { type: 'node', position: [2, 0, 0], text: 'fermi' },
+    ]), ctx).ok).toBe(false)
+  })
+
+  it('objects the renderer skips cannot anchor anything', () => {
+    // bar/surface hit SceneSpecRenderer's default branch and draw nothing.
+    const r = validateGeneratedScene(scene([
+      { type: 'bar', position: [0, 0, 0], text: 'calorimetry' },
+      { type: 'surface', position: [1, 0, 0], text: 'heat exchange' },
+      { type: 'node', position: [2, 0, 0], text: 'fermi' },
+      { type: 'node', position: [3, 0, 0], text: 'dirac' },
+    ]), ctx)
+    expect(r.ok).toBe(false)
+  })
+
+  it('floating labels alone cannot anchor — one anchor must carry geometry', () => {
+    const r = validateGeneratedScene(scene([
+      { type: 'label', position: [0, 0, 0], text: 'calorimetry' },
+      { type: 'label', position: [1, 0, 0], text: 'heat' },
+      { type: 'node', position: [2, 0, 0], text: 'fermi' },
+    ]), ctx)
+    expect(r.ok).toBe(false)
+    expect(anchorReport(scene([
+      { type: 'label', position: [0, 0, 0], text: 'calorimetry' },
+      { type: 'label', position: [1, 0, 0], text: 'heat' },
+    ]), ctx).hasGeometricAnchor).toBe(false)
+  })
+
+  it('a genuinely faithful scene still passes', () => {
+    const r = validateGeneratedScene(scene([
+      { type: 'node', position: [0, 0, 0], text: 'hot body' },
+      { type: 'node', position: [1, 0, 0], text: 'cold body' },
+      { type: 'arrow', from: [0, 0, 0], to: [1, 0, 0], text: 'heat exchange' },
+    ]), ctx)
+    expect(r.ok).toBe(true)
+  })
+})
+
+describe('the negative cross-concept check', () => {
+  it('rejects labels that belong to another concept far more than this one', () => {
+    const ctx = ctxFor(CALORIMETRY)
+    const stolen: SceneSpec = {
+      id: 's', title: 'Calorimetry', sceneType: 'diagram',
+      steps: [{ narration: 'x', objects: [
+        { type: 'node', position: [0, 0, 0], text: 'heat' },
+        { type: 'node', position: [1, 0, 0], text: 'projectile motion trajectory' },
+        { type: 'arrow', from: [0, 0, 0], to: [1, 0, 0], text: 'projectile motion' },
+      ] }],
+    }
+    const challenger = crossConceptChallenger(stolen, ctx)
+    expect(challenger).not.toBeNull()
+    expect(challenger!.score).toBeGreaterThanOrEqual(challenger!.targetScore + 2)
+  })
+
+  it('is deterministic and independent of index order', () => {
+    const ctx = ctxFor(CALORIMETRY)
+    const s: SceneSpec = {
+      id: 's', title: 'x', sceneType: 'diagram',
+      steps: [{ narration: 'x', objects: [
+        { type: 'node', position: [0, 0, 0], text: 'projectile motion' },
+        { type: 'node', position: [1, 0, 0], text: 'trajectory launch' },
+      ] }],
+    }
+    const runs = new Set(Array.from({ length: 5 }, () => JSON.stringify(crossConceptChallenger(s, ctx))))
+    expect(runs.size).toBe(1)
+  })
+
+  it('does not fire for a faithful scene whose neighbours share vocabulary', () => {
+    // A correct catalysis figure must not lose to a more specific sibling.
+    const ctx = ctxFor('chem.kinet.catalysis')
+    const s: SceneSpec = {
+      id: 's', title: 'Catalysis', sceneType: 'diagram',
+      steps: [{ narration: 'x', objects: [
+        { type: 'node', position: [0, 0, 0], text: 'catalysis' },
+        { type: 'node', position: [1, 0, 0], text: 'catalyst' },
+      ] }],
+    }
+    expect(crossConceptChallenger(s, ctx)).toBeNull()
+  })
+})
+
+describe('purpose is passed to generation, representation is not', () => {
+  it('the prompt carries the teaching purpose when known', () => {
+    expect(buildConceptScenePrompt(ctxFor(CALORIMETRY), 'demonstrate'))
+      .toMatch(/Teaching purpose for this turn: demonstrate/)
+    expect(buildConceptScenePrompt(ctxFor(CALORIMETRY))).not.toMatch(/Teaching purpose/)
+  })
+
+  it('representation is never derived from the archetype keyword table', () => {
+    // conceptRepresentations() is the table that gave English phonics a
+    // wavefunction; feeding it back through the prompt would reintroduce it.
+    const prompt = buildConceptScenePrompt(ctxFor(PHONICS), 'explain')
+    expect(prompt).not.toMatch(/wave|quantum/i)
   })
 })
