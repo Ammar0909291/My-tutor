@@ -10,7 +10,13 @@ import { parseVisualSession } from '@/lib/teaching/visual/session'
 import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
 
 const CALORIMETRY = 'phys.therm.calorimetry'
-const VECTOR = 'math.linalg.vector'
+// The subject-local reading rule (2026-08-08) changed WHICH vector concept a
+// physics learner reaches: "vector" from a physics lesson now resolves to
+// physics' own Scalar and Vector Quantities — which carries the real vector
+// scene generator — instead of travelling to math.linalg.vector's card. These
+// tests still assert exactly what they always did: the concept behind the
+// medium word wins, and it is not the lesson's concept.
+const VECTOR = 'phys.meas.scalars-vectors'
 
 const decide = (message: string, opts: Partial<Parameters<typeof resolveVisual>[0]> = {}) =>
   resolveVisual({

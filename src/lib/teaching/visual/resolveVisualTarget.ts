@@ -157,6 +157,56 @@ function isLessonTopicRestated(matchedTitle: string, lessonTitle: string | null)
   return b.includes(a) || a.includes(b)
 }
 
+/**
+ * SUBJECT-LOCAL READING — the defect this closes.
+ *
+ * Production, 2026-08-08, lesson "Dimensional Analysis" (physics):
+ *   learner: "Show reflection using a ray diagram"
+ *   rendered: the "Geometry Shapes" card (triangle, rectangle, circle)
+ *   tutor:   "Notice in the geometry shapes figure on your screen … a ray of
+ *             light coming in (the incident ray) hits the surface"
+ * — a figure with no ray, no surface and no normal, described as if it had all
+ * three.
+ *
+ * Cause: "Reflection" is an EXACT_TITLE match for math.geom.reflection (the
+ * geometric transformation) at 0.95, and the matcher never surfaces
+ * phys.opt.reflection, whose title is the longer "Reflection and Laws of
+ * Reflection". Preferring a same-subject CANDIDATE cannot help when the
+ * subject's own concept is not a candidate at all.
+ *
+ * So when the winning match comes from another subject, look the same word up
+ * inside the lesson's subject directly: a physics learner who says "reflection"
+ * means optical reflection. Deterministic, index-only, no LLM. Returns null
+ * when the subject has no such concept, leaving the cross-subject excursion
+ * intact — "explain photosynthesis" from a physics lesson still reaches biology.
+ */
+function subjectLocalReading(
+  matchedText: string,
+  lessonPrefix: string | null,
+  index: readonly ConceptIndexEntry[],
+): string | null {
+  if (!lessonPrefix) return null
+  const word = normalizeTitle(matchedText)
+  if (!word) return null
+
+  let best: { conceptId: string; length: number } | null = null
+  for (const entry of index) {
+    if (idPrefix(entry.conceptId) !== lessonPrefix) continue
+    const title = normalizeTitle(entry.title)
+    // Whole-word containment only: "Reflection and Laws of Reflection"
+    // contains "reflection"; "Refraction" does not contain it at all.
+    if (!new RegExp(`\\b${escapeRegex(word)}\\b`).test(title)) continue
+    // The shortest qualifying title is the most on-topic one — a longer title
+    // mentions the word incidentally alongside other ideas.
+    if (!best || title.length < best.length) best = { conceptId: entry.conceptId, length: title.length }
+  }
+  return best?.conceptId ?? null
+}
+
+function escapeRegex(text: string): string {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
 export interface VisualTarget extends ArchetypeContext {
   /** True when the learner named a concept other than the lesson's. */
   excursion: boolean
@@ -225,6 +275,12 @@ export function resolveVisualTarget(
       viable[0] ??
       null
     requested = best?.conceptId ?? null
+
+    // The winner belongs to another subject: check whether the learner's own
+    // subject has a concept of that name before travelling to a foreign one.
+    if (best && lessonPrefix && idPrefix(best.conceptId) !== lessonPrefix) {
+      requested = subjectLocalReading(best.matchedText, lessonPrefix, conceptIndex()) ?? requested
+    }
 
     // A shorter name for the lesson's own topic is the lesson, not a trip away
     // from it — keep the lesson concept and its registry binding.

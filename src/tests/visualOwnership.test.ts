@@ -147,3 +147,37 @@ describe('incidental vocabulary never hijacks the figure', () => {
     expect(ask('what is a graph', 'phys.mech.kinematics-1d').conceptId).toBe('math.disc.graph')
   })
 })
+
+describe('PRODUCTION 2026-08-08 — a physics word must get its physics concept', () => {
+  // Observed in a live Dimensional Analysis lesson: "Show reflection using a
+  // ray diagram" rendered the "Geometry Shapes" card (triangle, rectangle,
+  // circle) while the tutor said "a ray of light coming in (the incident ray)
+  // hits the surface" — a figure with no ray, no surface and no normal,
+  // described as though it had all three. math.geom.reflection is an
+  // EXACT_TITLE match at 0.95; phys.opt.reflection ("Reflection and Laws of
+  // Reflection") was never even a candidate.
+  const ask = (message: string, lessonConceptId: string) =>
+    resolveVisual({ message, lessonConceptId, subject: 'physics', learnerRequest: 'diagram' })
+
+  const DIMENSIONAL = 'phys.meas.dimensional-analysis'
+
+  it('"Show reflection using a ray diagram" reaches optical reflection', () => {
+    const d = ask('Show reflection using a ray diagram', DIMENSIONAL)
+    expect(d.conceptId).toBe('phys.opt.reflection')
+    expect(d.payload.renderer).toBe('scene')
+    expect(d.provenance).toContain('ray_optics')
+  })
+
+  it('the whole matrix resolves inside physics from an unrelated lesson', () => {
+    expect(ask('Show me the vector visualization.', DIMENSIONAL).conceptId).toBe('phys.meas.scalars-vectors')
+    expect(ask('Explain vector addition with a visualization.', DIMENSIONAL).conceptId).toBe('phys.meas.vector-addition')
+    expect(ask('Show a free-body diagram of a block on an inclined plane.', DIMENSIONAL).conceptId).toBe('phys.mech.free-body-diagram')
+    expect(ask('Show projectile motion.', DIMENSIONAL).conceptId).toBe('phys.mech.projectile-motion')
+    expect(ask('Show an inelastic collision.', DIMENSIONAL).conceptId).toBe('phys.mech.collisions-inelastic')
+  })
+
+  it('a subject with no local reading still excurses across subjects', () => {
+    // The rule must not trap a learner inside their subject.
+    expect(ask('explain photosynthesis with a diagram', DIMENSIONAL).conceptId).toBe('bio.plant.photosynthesis')
+  })
+})

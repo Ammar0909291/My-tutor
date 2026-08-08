@@ -61,7 +61,12 @@ const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false 
  */
 const VISUAL_FRAME: React.CSSProperties = {
   width: '100%',
-  maxWidth: '100%',
+  // A figure needs a READING width, not the full chat column. Letting it span
+  // the column on a wide desktop produced a very wide, short box: the 3D scene
+  // fits itself vertically, so the objects shrank to the middle of a mostly
+  // empty rectangle. 720px keeps the aspect ratio near 4:3, which is what the
+  // scene cameras are framed for, and it still fills a narrow viewport.
+  maxWidth: 'min(100%, 720px)',
   // Opacity-only entrance. fadeUp animates transform: translateY, and a WebGL
   // canvas mounted inside a transforming box measures itself mid-animation —
   // the observed "3D figure renders partially, or not at all, until something
