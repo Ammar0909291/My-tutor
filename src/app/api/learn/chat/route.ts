@@ -2114,11 +2114,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
           const { hasVisualBeenRendered, buildRenderedRealityBlock } = await import('@/lib/teaching/renderedRealityModel')
           const visualAlreadyShown = hasVisualBeenRendered(snapshotRRMLog, availableVisual)
-          systemPrompt += buildVisualIntelligenceBlock(
-            availableVisual,
-            lessonCtx?.lessonTitle ?? null,
-            visualAlreadyShown,
-          )
+          // Legacy visual-intelligence guidance is built from detectVisual()'s
+          // keyword match on the LESSON TITLE, which can name a different
+          // figure than the one V2 is actually attaching — two conflicting
+          // instructions in one prompt, and the observed source of the tutor
+          // describing a figure the learner is not looking at. Under V2 the
+          // Visual Contract is the only visual instruction.
+          if (!isVisualResolverV2Enabled()) {
+            systemPrompt += buildVisualIntelligenceBlock(
+              availableVisual,
+              lessonCtx?.lessonTitle ?? null,
+              visualAlreadyShown,
+            )
+          }
           // ADR 15: inject RENDERED REALITY block — ground truth of what
           // the learner's screen currently shows.
           systemPrompt += buildRenderedRealityBlock(snapshotRRMLog)
@@ -3549,10 +3557,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // them — no AI reasoning, no LLM parsing, no prompt changes. Non-fatal —
       // falls back to undefined on any error so a lesson never breaks because
       // of this. Never persisted; attached to the JSON response only.
+      // ARCHITECTURE: when the Visual Resolver V2 decided this turn, it is the
+      // ONLY authority. The legacy pipelines below used to run anyway and were
+      // overwritten afterwards, which meant keyword-matching the model's own
+      // prose still executed (and, for the dynamic engine, could still cost an
+      // LLM call) on every visual turn. They are now skipped outright. Legacy
+      // selection participates only when V2 produced nothing — i.e. when
+      // VISUAL_RESOLVER_V2=0 or the resolver block did not run — which is the
+      // rollback path and nothing else.
+      const v2OwnsVisual = Boolean(visualDecisionHoisted)
+
       let detectedVisualSpec: ReturnType<typeof buildVisualSpec> = null
-      try {
-        detectedVisualSpec = planVisualTeaching(cleanText).spec
-      } catch { /* non-fatal */ }
+      if (!v2OwnsVisual) {
+        try {
+          detectedVisualSpec = planVisualTeaching(cleanText).spec
+        } catch { /* non-fatal */ }
+      }
 
       let detectedSceneSpec: ReturnType<typeof buildSceneSpec> = null
       let dynamicVisualizationCode: string | null = null
@@ -3582,7 +3602,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // specific (but failed) case. Showing nothing is correct per buildSceneSpec's
       // own "wrong scene is worse than none" design.
       let parametricRouteMatched = false
-      if (!detectedVisualSpec && isParametricSceneGenerationEnabled()) {
+      if (!v2OwnsVisual && !detectedVisualSpec && isParametricSceneGenerationEnabled()) {
         parametricRouteMatched = routeSceneGenerator(cleanText) !== null
         console.log('[scene-debug] parametric scene router invoked for text:', cleanText.slice(0, 200))
         try {
@@ -3600,7 +3620,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // carries both a 2D diagram and a 3D scene, a generic vector arrow never
       // preempts a real projectile/circular/pendulum/collision/etc. scene, and it
       // never papers over a recognized-but-failed parametric route either.
-      if (!detectedVisualSpec && !detectedSceneSpec && !parametricRouteMatched) {
+      if (!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec && !parametricRouteMatched) {
         try {
           detectedSceneSpec = buildSceneSpec(cleanText)
         } catch { /* non-fatal */ }
@@ -3614,7 +3634,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // a failed/blocked LLM call degrades to null and the turn proceeds unchanged.
       // This is the production wiring, drafted and ready to enable once the
       // feasibility probe confirms usable output on a Groq-reachable network.
-      if (!detectedVisualSpec && !detectedSceneSpec && isAiSceneGenerationEnabled()) {
+      if (!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec && isAiSceneGenerationEnabled()) {
         try {
           detectedSceneSpec = await generateSceneSpec(cleanText)
         } catch { /* non-fatal */ }
@@ -3634,7 +3654,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // fire, so a "no visual" turn in the UI is traceable in the dev-server
       // log instead of silently invisible. Cheap (one decideVisualization() per
       // turn, already deterministic & no-network) and harmless if left in.
-      const dvFlag = isDynamicVisualizationEnabled()
+      const dvFlag = !v2OwnsVisual && isDynamicVisualizationEnabled()
       const dvDecision = decideVisualization(cleanText)
       console.log('[dynamic-debug] gates:', {
         visualSpecAlreadySet: !!detectedVisualSpec,

@@ -87,6 +87,76 @@ export function isMediumUsage(message: string, matchedText: string): boolean {
   return true
 }
 
+/**
+ * INCIDENTAL VOCABULARY — the defect this closes.
+ *
+ * Every single-word KG title is an EXACT_TITLE match at confidence 0.95, which
+ * outranks the longer, correct, same-subject match. Measured against the live
+ * KGs, in a physics lesson:
+ *
+ *   "free-body diagram of a block on a rough inclined PLANE" -> math.geom.plane
+ *        (0.95) beat phys.mech.free-body-diagram (0.85) — the learner asked for
+ *        an FBD and the resolver went on a geometry excursion.
+ *   "light refracts through a convex lens using RAY diagrams" -> math.geom.ray
+ *   "how REFLECTION works"                                    -> math.geom.reflection
+ *        (the geometric transformation, not the optical phenomenon)
+ *
+ * In each case the word is incidental — it names a thing inside the sentence,
+ * not the topic being requested. The distinction is the same one isMediumUsage
+ * already draws: a bare one-word title counts as a topic only when a teaching
+ * cue governs it, or when it IS the whole request ("vectors").
+ */
+function isIncidentalWord(message: string, matchedText: string): boolean {
+  const matched = tokens(matchedText)
+  if (matched.length !== 1) return false        // multi-word titles are specific
+  const noun = matched[0]
+  const words = tokens(message)
+  // "vectors" / "vectors please" — the request IS the word.
+  if (words.length <= 2) return false
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] !== noun && !words[i].startsWith(noun)) continue
+    for (let back = 1; back <= CUE_WINDOW && i - back >= 0; back++) {
+      if (REQUEST_CUE.has(words[i - back])) return false   // governed → a topic
+    }
+  }
+  return true
+}
+
+/**
+ * Topic governance for the incidental rule. Wider than TEACHING_CUE because a
+ * request verb governs a topic just as a teaching verb does — "show me VECTOR
+ * graph" asks for vectors. It stays separate from TEACHING_CUE so that
+ * isMediumUsage is unaffected: "show me a GRAPH" must remain a medium request,
+ * not a request for graph theory.
+ */
+const REQUEST_CUE = new Set([
+  ...TEACHING_CUE,
+  'show', 'draw', 'illustrate', 'visualize', 'visualise', 'demonstrate', 'see',
+])
+
+/** The canonical KG id prefix a concept belongs to (`phys`, `math`, …). */
+function idPrefix(conceptId: string): string {
+  return conceptId.split('.')[0] ?? ''
+}
+
+function normalizeTitle(title: string): string {
+  return title.toLowerCase().replace(/[^a-z0-9\s]+/g, ' ').replace(/s\b/g, '').trim()
+}
+
+/**
+ * Is the matched concept simply the lesson's own topic under a shorter name?
+ * "Vector" inside a "Scalars and Vectors" lesson is not an excursion — it is
+ * the lesson, and drawing a different subject's node instead loses the lesson's
+ * own registry binding.
+ */
+function isLessonTopicRestated(matchedTitle: string, lessonTitle: string | null): boolean {
+  if (!lessonTitle) return false
+  const a = normalizeTitle(matchedTitle)
+  const b = normalizeTitle(lessonTitle)
+  if (!a || !b) return false
+  return b.includes(a) || a.includes(b)
+}
+
 export interface VisualTarget extends ArchetypeContext {
   /** True when the learner named a concept other than the lesson's. */
   excursion: boolean
@@ -135,13 +205,38 @@ export function resolveVisualTarget(
   let requested: string | null = null
   try {
     const matches = resolveConceptMatches(message ?? '', conceptIndex(), preferredSubject ?? null)
-    // Drop medium-word matches BEFORE picking the best one, so a genuine
-    // concept sitting behind them still wins: "show me vector graph" ranks
-    // {Graph, Graph, Vector} and must resolve to Vector, not Graph.
-    const best = matches.find(
-      (m) => m.confidence >= EXCURSION_CONFIDENCE_FLOOR && !isMediumUsage(message ?? '', m.matchedText),
-    ) ?? null
+    // Drop medium-word and incidental-vocabulary matches BEFORE picking the
+    // best one, so a genuine concept sitting behind them still wins: "show me
+    // vector graph" ranks {Graph, Graph, Vector} and must resolve to Vector;
+    // "free-body diagram … inclined plane" ranks {Plane, Free Body Diagrams}
+    // and must resolve to Free Body Diagrams.
+    const viable = matches.filter(
+      (m) =>
+        m.confidence >= EXCURSION_CONFIDENCE_FLOOR &&
+        !isMediumUsage(message ?? '', m.matchedText) &&
+        !isIncidentalWord(message ?? '', m.matchedText),
+    )
+    // Same-subject candidates win over an equally-confident foreign one. The
+    // lesson's own id prefix is the subject signal — it needs no mapping table
+    // and cannot disagree with the KG.
+    const lessonPrefix = lessonConceptId ? idPrefix(lessonConceptId) : null
+    const best =
+      (lessonPrefix ? viable.find((m) => idPrefix(m.conceptId) === lessonPrefix) : null) ??
+      viable[0] ??
+      null
     requested = best?.conceptId ?? null
+
+    // A shorter name for the lesson's own topic is the lesson, not a trip away
+    // from it — keep the lesson concept and its registry binding.
+    if (
+      requested &&
+      lessonConceptId &&
+      requested !== lessonConceptId &&
+      best &&
+      isLessonTopicRestated(best.matchedText, getKGNode(lessonConceptId)?.title ?? null)
+    ) {
+      requested = null
+    }
   } catch {
     requested = null      // resolution failure must never break the turn
   }

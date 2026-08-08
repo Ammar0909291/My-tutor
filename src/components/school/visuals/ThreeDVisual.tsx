@@ -54,9 +54,11 @@ export function ThreeDVisual({
         aspectRatio: '4 / 3',
         // A teaching figure has to be legible before it is tidy. 360px capped
         // 3D scenes small enough that labels crowded the geometry; the floor
-        // stops a narrow container collapsing the scene to a strip.
-        minHeight: 300,
-        maxHeight: 520,
+        // stops a narrow container collapsing the scene to a strip. The 60vh
+        // term keeps a tall figure inside the chat viewport on short windows,
+        // so it is never taller than the space available to read it in.
+        minHeight: 260,
+        maxHeight: 'min(520px, 60vh)',
         borderRadius: 12,
         overflow: 'hidden',
         background: 'var(--bg-elevated)',
@@ -67,6 +69,13 @@ export function ThreeDVisual({
         dpr={[1, 2]}
         camera={{ position: [0, 0, cameraDistance], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
+        // The container's height depends on aspect-ratio and viewport terms
+        // that settle after first paint; without an explicit resize observer
+        // policy the first frame can be drawn against a stale (often zero or
+        // near-zero) box and never redrawn. Debouncing on resize only, with
+        // scroll observation off, makes the canvas re-measure once layout has
+        // settled instead of racing it.
+        resize={{ scroll: false, debounce: { scroll: 0, resize: 50 } }}
       >
         <ambientLight intensity={0.6} />
         <directionalLight position={[4, 4, 4]} intensity={0.9} />
@@ -74,7 +83,10 @@ export function ThreeDVisual({
         <Suspense fallback={null}>{children}</Suspense>
         {enableControls && (
           <OrbitControls
-            enablePan={false}
+            // Pan was disabled, so a learner who zoomed in could not bring the
+            // part they were looking at back into frame. Zoom without pan is a
+            // trap; both are enabled together.
+            enablePan
             autoRotate={!reducedMotion}
             autoRotateSpeed={0.6}
             minDistance={cameraDistance * 0.5}

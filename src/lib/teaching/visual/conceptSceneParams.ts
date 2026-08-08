@@ -155,13 +155,57 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
 }
 
 /**
- * Build the canonical scene for a registry-named generator kind.
+ * PER-CONCEPT PARAMETERS — the requested concept, not just its generator kind,
+ * determines what is drawn.
  *
- * Returns null for an unknown kind or a throwing builder, so the caller falls
- * back to the concept's VisualCard exactly as before — activation can never
- * make a concept less visual than it already was.
+ * One canonical parameter set per generator kind was too coarse: several
+ * concepts share a generator but need a different instance of it, and the
+ * kind-level default silently taught the wrong case. Observed:
+ *
+ *   phys.opt.reflection / .mirrors  -> ray_optics, whose default is a CONVEX
+ *       LENS. A learner asking about reflection was shown refraction.
+ *   phys.mech.collisions-inelastic  -> collision, whose default is ELASTIC.
+ *   bio.cell.meiosis                -> cell_division, whose default is MITOSIS.
+ *
+ * A concept may also map to `null` here, which means "this generator cannot
+ * faithfully draw this concept" — the resolver then falls through to the
+ * concept's VisualCard rather than showing a figure of something else.
  */
-export function buildCanonicalScene(kind: string | null): SceneSpec | null {
+const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
+  // Reflection and mirrors are mirror problems, not lens problems.
+  'phys.opt.reflection': () => buildRayOpticsScene({ opticsType: 'concave_mirror', objectDistance: 30, focalLength: 10, objectHeight: 5 }),
+  'phys.opt.mirrors':    () => buildRayOpticsScene({ opticsType: 'concave_mirror', objectDistance: 30, focalLength: 10, objectHeight: 5 }),
+
+  // The inelastic concept must show the inelastic case — the carts stick.
+  'phys.mech.collisions-inelastic': () => buildCollisionScene({ m1: 2, m2: 1, u1: 3, u2: -2, collisionType: 'perfectly_inelastic' }),
+
+  // Meiosis is not mitosis; the generator already models both.
+  'bio.cell.meiosis': () => buildCellDivisionScene({ divisionType: 'meiosis' }),
+
+  // The Punnett generator is single-gene by construction (genotypes are two
+  // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
+  // thing, so no scene is produced and the concept's card is used instead.
+  'bio.gen.dihybrid-cross': () => null,
+}
+
+/**
+ * Build the canonical scene for a concept, falling back to its generator kind's
+ * default parameters.
+ *
+ * Returns null for an unknown kind, a concept explicitly mapped to null, or a
+ * throwing builder, so the caller falls back to the concept's VisualCard
+ * exactly as before — activation can never make a concept less visual than it
+ * already was.
+ */
+export function buildCanonicalScene(kind: string | null, conceptId?: string | null): SceneSpec | null {
+  const override = conceptId ? CONCEPT_SCENES[conceptId] : undefined
+  if (override) {
+    try {
+      return override()
+    } catch {
+      return null
+    }
+  }
   if (!kind) return null
   const build = CANONICAL_SCENES[kind]
   if (!build) return null
@@ -171,6 +215,9 @@ export function buildCanonicalScene(kind: string | null): SceneSpec | null {
     return null
   }
 }
+
+/** Concepts with their own parameters — for coverage tests. */
+export const CONCEPT_SCENE_OVERRIDES = Object.keys(CONCEPT_SCENES)
 
 /** Generator kinds with canonical parameters — for coverage tests. */
 export const ACTIVATED_SCENE_KINDS = Object.keys(CANONICAL_SCENES)

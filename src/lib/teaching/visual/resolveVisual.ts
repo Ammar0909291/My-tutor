@@ -128,7 +128,9 @@ function buildDecision(
   // parameter EXTRACTORS are what needed a model, and canonical parameters
   // replace them entirely.
   const generatorKind = getConceptSceneGenerator(ctx.conceptId)
-  const generatedScene = buildCanonicalScene(generatorKind)
+  // Concept first, generator kind second — a shared generator must still draw
+  // THIS concept's case (reflection is a mirror, not a lens).
+  const generatedScene = buildCanonicalScene(generatorKind, ctx.conceptId)
   if (generatedScene) {
     return finish({
       purpose: resolvePurpose(input, 'demonstrate'),

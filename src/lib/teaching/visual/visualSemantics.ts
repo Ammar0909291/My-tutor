@@ -183,9 +183,11 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
   }
   if (semantics.steps.length) {
     parts.push(
-      `It is revealed in ${semantics.steps.length} stages, which the learner ` +
-      'steps through: ' + semantics.steps.map((s, i) => `(${i + 1}) ${clamp(s, 120)}`).join(' ') +
-      '. Teach one stage at a time and let them advance.',
+      `It is built in ${semantics.steps.length} stages, shown complete but ` +
+      'walkable one stage at a time by the learner: ' +
+      semantics.steps.map((s, i) => `(${i + 1}) ${clamp(s, 120)}`).join(' ') +
+      '. Teach it in that order, and invite them to walk the stages if they ' +
+      'want to see it built up.',
     )
   }
   return parts.join(' ')

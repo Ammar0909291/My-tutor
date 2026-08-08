@@ -62,7 +62,11 @@ const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false 
 const VISUAL_FRAME: React.CSSProperties = {
   width: '100%',
   maxWidth: '100%',
-  animation: 'fadeUp 300ms ease-out both',
+  // Opacity-only entrance. fadeUp animates transform: translateY, and a WebGL
+  // canvas mounted inside a transforming box measures itself mid-animation —
+  // the observed "3D figure renders partially, or not at all, until something
+  // else forces a resize". Fading alone never changes the box.
+  animation: 'fadeIn 300ms ease-out both',
 }
 
 const SceneSpecFigure = dynamic(
