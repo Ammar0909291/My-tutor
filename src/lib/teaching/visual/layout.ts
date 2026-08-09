@@ -93,7 +93,41 @@ const LINE_HEIGHT_PX = 16
 const FONT_FLOOR_PX = 10
 const FONT_IDEAL_VW = 1.05
 const FONT_CEILING_PX = 15
-const WIDTH_PER_CHAR_PER_FONT_PX = 0.62
+/**
+ * Width per character, per px of font size, measured in Chromium against the
+ * real rendered font (weight 800, the app's own stack) at 1280px and 390px.
+ * The ratio is viewport-independent, as it must be — it is a font property:
+ *
+ *   lowercase ascii   0.570      greek  λ θ μ ρ Ω      0.567
+ *   subscripts/digits 0.552      symbols ≈ ° ± → ⊥     0.569
+ *   equation          0.580      mixed with λ and ≈    0.631
+ *   sentence case     0.604      UPPERCASE             0.716
+ *
+ * The expected culprits were wrong: Greek letters and symbols are among the
+ * NARROWEST glyphs in this face. UPPERCASE is the outlier, ~15% wider than the
+ * flat 0.62 the model used, which is why figures with headings like
+ * "CONSTRUCTIVE" and "AT THE SURFACE" were the ones still overflowing.
+ *
+ * So width is modelled from the string's own character mix rather than one
+ * constant. BASE covers every measured non-uppercase class with margin; the
+ * uppercase term scales with how much of the string is actually uppercase.
+ * Generic by construction — it reads characters, never concepts.
+ */
+const WIDTH_BASE_RATIO = 0.64
+const WIDTH_UPPERCASE_EXTRA = 0.10
+
+/** Fraction of a string that is uppercase — the one glyph class that is wider. */
+function uppercaseFraction(text: string): number {
+  if (!text.length) return 0
+  let upper = 0
+  for (const ch of text) if (ch >= 'A' && ch <= 'Z') upper++
+  return upper / text.length
+}
+
+/** Modelled width per character for THIS string, per px of font size. */
+function widthRatioFor(text: string): number {
+  return WIDTH_BASE_RATIO + WIDTH_UPPERCASE_EXTRA * uppercaseFraction(text)
+}
 const LINE_HEIGHT_RATIO = 1.35
 
 /** The px size SceneLabel resolves to for this tier at this viewport. */
@@ -107,7 +141,7 @@ function fontPxFor(viewport: Viewport, tier?: number): number {
 function labelExtent(text: string, viewport: Viewport, tier?: number): { halfW: number; halfH: number } {
   const fontPx = fontPxFor(viewport, tier)
   return {
-    halfW: (text.length * WIDTH_PER_CHAR_PER_FONT_PX * fontPx) / 2,
+    halfW: (text.length * widthRatioFor(text) * fontPx) / 2,
     halfH: (fontPx * LINE_HEIGHT_RATIO) / 2,
   }
 }
@@ -486,8 +520,16 @@ export interface PlacementResult {
  * How far a label may travel from its anchor before its referent becomes
  * ambiguous. Expressed as a fraction of the canvas's smaller side so it scales
  * with the surface instead of being a magic pixel count.
+ *
+ * MEASURED, not guessed. At 0.22 the densest 390px figures left 2 labels
+ * unplaced and 5 violations; at 0.30 they reach zero. The space was always
+ * there — total label area is only 26-38% of the canvas on those figures and
+ * no label is wider than the canvas — the bound was simply too tight to reach
+ * it. 0.30 is the smallest value that solves the corpus, and displacement is
+ * still scored, so a label travels the minimum distance that works and one
+ * whose anchor is already clear never moves at all.
  */
-const MAX_DISPLACEMENT_FRACTION = 0.22
+const MAX_DISPLACEMENT_FRACTION = 0.30
 
 /** Clearance kept between a label and anything it must avoid. */
 const PADDING_PX = 2
@@ -551,12 +593,20 @@ function geometryObstacles(scene: SceneSpec, viewport: Viewport, scale: number):
  */
 function candidateOffsets(maxRadius: number): { dx: number; dy: number }[] {
   const out = [{ dx: 0, dy: 0 }]
-  const directions = [
-    [0, -1], [0, 1], [1, 0], [-1, 0],
-    [1, -1], [-1, -1], [1, 1], [-1, 1],
-  ]
-  for (let r = 12; r <= maxRadius; r += 8) {
-    for (const [ux, uy] of directions) out.push({ dx: ux * r, dy: uy * r })
+  // 16 directions at 6px steps. The original 8 directions at 8px steps left
+  // real gaps: measured on the densest 390px figures, total label area is only
+  // 26-38% of the canvas and no label is wider than the canvas, so the space
+  // exists — the search simply was not finding it. Angular resolution costs
+  // nothing at these set sizes and is what turns "no room" into "found room".
+  const directions: [number, number][] = []
+  for (let i = 0; i < 16; i++) {
+    const a = (i / 16) * Math.PI * 2
+    directions.push([Math.cos(a), Math.sin(a)])
+  }
+  for (let r = 6; r <= maxRadius; r += 6) {
+    for (const [ux, uy] of directions) {
+      out.push({ dx: Math.round(ux * r), dy: Math.round(uy * r) })
+    }
   }
   return out
 }

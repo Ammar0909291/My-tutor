@@ -41,12 +41,11 @@ function pilotScene(conceptId: string): SceneSpec {
  * Lower them as figures are repositioned; never raise one.
  */
 const MOBILE_BASELINE: Record<string, number> = {
-  // Re-recorded after the placement solver landed. Six of the seven figures now
-  // place every label safely at 390px; TIR is the one figure whose label
-  // density still exceeds what a 282px canvas can hold, and those three are
-  // KEPT and reported rather than hidden. Lower these as placement improves;
-  // never raise one.
-  'phys.opt.total-internal-reflection': 3,
+  // ZERO for every pilot figure at 390px. Reached generically: a
+  // character-class-aware width model (uppercase is 0.716 px/char/font-px, not
+  // the flat 0.62 assumed before) plus a displacement bound measured at the
+  // smallest value that solves the corpus. No scene was edited. Never raise one.
+  'phys.opt.total-internal-reflection': 0,
   'phys.wave.transverse-waves': 0,
   'phys.wave.interference': 0,
   'phys.therm.calorimetry': 0,

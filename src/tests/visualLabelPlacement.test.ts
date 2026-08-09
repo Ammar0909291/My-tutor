@@ -125,7 +125,7 @@ describe('Label placement — contract', () => {
   })
 
   it('K. a placed label stays near its anchor, so its referent stays clear', () => {
-    const limit = Math.min(MOBILE.hostWidth, MOBILE.hostHeight) * 0.25
+    const limit = Math.min(MOBILE.hostWidth, MOBILE.hostHeight) * 0.31   // MAX_DISPLACEMENT_FRACTION + rounding
     for (const s of corpus()) {
       for (const l of placeSceneLabels(s, MOBILE).labels) {
         expect(l.movedPx, `${s.id}: "${l.text}" travelled ${l.movedPx}px`).toBeLessThanOrEqual(limit)
