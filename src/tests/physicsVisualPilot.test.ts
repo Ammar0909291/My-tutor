@@ -52,7 +52,7 @@ const PILOT: Pilot[] = [
   {
     id: 'phys.therm.calorimetry',
     title: 'Calorimetry',
-    mustDraw: ['insulated', 'water', 'hot block', 'thermometer', 'heat flows hot', 'final temperature'],
+    mustDraw: ['insulated', 'water', 'hot block', 'thermometer', 'heat flows hot', 'same T_f'],
   },
   {
     id: 'phys.therm.first-law',
@@ -287,5 +287,94 @@ describe('nothing outside the pilot changed', () => {
 
   it('domain illustrations are still domain-scoped', () => {
     expect(ask('math.calc.limits').asset?.scope).toBe('domain')
+  })
+})
+
+// ── M4.1 visual-quality regressions ─────────────────────────────────────────
+// Each of these encodes a defect that browser inspection found and that no
+// structural test caught. They are deterministic proxies, not a substitute for
+// looking at the figure — the browser remains the final gate — but each one
+// would have failed on the version that shipped in M4.
+
+describe('M4.1 — visual quality invariants', () => {
+  const labelsOf = (id: string) =>
+    visibleObjects(sceneOf(id), Infinity).filter((o) => o.type === 'label')
+
+  it.each(PILOT)('$id labels are NAMES, not sentences', ({ id }) => {
+    // The canvas carries names; explanation is the tutor's job. A label long
+    // enough to be a sentence is one the learner has to stop and read.
+    for (const l of labelsOf(id)) {
+      expect((l.text ?? '').length, `${id}: "${l.text}" is too long for a figure label`)
+        .toBeLessThanOrEqual(34)
+    }
+  })
+
+  it.each(PILOT)('$id has no two labels close enough to collide', ({ id }) => {
+    // Deterministic proxy for the overlap the browser measures: labels render
+    // horizontally, so a shared y band plus a small x gap is a collision.
+    const ls = labelsOf(id)
+    for (let i = 0; i < ls.length; i++) {
+      for (let j = i + 1; j < ls.length; j++) {
+        const a = ls[i].position!, b = ls[j].position!
+        const dy = Math.abs(a[1] - b[1])
+        const dx = Math.abs(a[0] - b[0])
+        const tooClose = dy < 0.42 && dx < 1.9
+        expect(tooClose, `${id}: "${ls[i].text}" and "${ls[j].text}" are too close (dx=${dx.toFixed(2)}, dy=${dy.toFixed(2)})`)
+          .toBe(false)
+      }
+    }
+  })
+
+  it.each(PILOT)('$id uses the shared typographic tiers, not one flat size', ({ id }) => {
+    const sizes = new Set(labelsOf(id).map((l) => l.size))
+    expect(sizes.has(undefined), `${id} has an untiered label`).toBe(false)
+    expect(sizes.size, `${id} uses only one type size`).toBeGreaterThan(1)
+  })
+
+  it.each(PILOT)('$id draws no dark-on-dark text', ({ id }) => {
+    // The canvas is dark. The first pilot draft used slate-800 ink, which
+    // rendered as invisible text the contract nonetheless described.
+    for (const o of visibleObjects(sceneOf(id), Infinity)) {
+      const c = o.color
+      if (!c || !c.startsWith('#') || c.length !== 7) continue
+      const lum = (parseInt(c.slice(1, 3), 16) * 0.299 + parseInt(c.slice(3, 5), 16) * 0.587 + parseInt(c.slice(5, 7), 16) * 0.114) / 255
+      expect(lum, `${id}: ${c} on "${o.text ?? o.type}" is too dark for this canvas`).toBeGreaterThan(0.28)
+    }
+  })
+
+  it('total internal reflection never contradicts itself', () => {
+    // The M4 bug: steps are cumulative, so a step-4 label reading "no refracted
+    // ray above the boundary" was on screen at the same time as step 2's
+    // refracted ray. Any absence claim must name its own case or its own place.
+    const texts = labelsOf('phys.opt.total-internal-reflection').map((l) => (l.text ?? '').toLowerCase())
+    const absence = texts.filter((t) => /\bno\b|nothing|none/.test(t))
+    expect(absence.length).toBeGreaterThan(0)          // it must still make the point
+    for (const t of absence) {
+      expect(t, `"${t}" claims absence for the whole figure`).toMatch(/here|③/)
+    }
+  })
+
+  it('total internal reflection ray geometry matches the physics', () => {
+    // θc = arcsin(n₂/n₁) = 41.8° for glass→air. The three cases must straddle
+    // it, and the case-② refracted ray must genuinely lie along the boundary.
+    const scene = sceneOf('phys.opt.total-internal-reflection')
+    const arrows = visibleObjects(scene, Infinity).filter((o) => o.type === 'arrow')
+    const grazing = arrows.find((a) => Math.abs((a.to?.[1] ?? 9)) < 0.12 && (a.to?.[0] ?? 0) > 1)
+    expect(grazing, 'no ray grazing along the boundary').toBeTruthy()
+
+    // Case ③ reflects: it must END BELOW the boundary, back inside the glass.
+    const strike = 3.2
+    const reflected = arrows.find((a) => Math.abs((a.from?.[0] ?? 0) - strike) < 0.01 && (a.to?.[1] ?? 0) < 0)
+    expect(reflected, 'case ③ does not reflect back into the denser medium').toBeTruthy()
+
+    // …and nothing is drawn above the boundary at ③'s strike point.
+    // Rays only. A `bond` above the boundary at ③ is the NORMAL, which
+    // correctly extends into both media and is not light.
+    const RAY = new Set(['arrow', 'vector', 'path', 'trajectory'])
+    const aboveAtC = visibleObjects(scene, Infinity).filter((o) =>
+      RAY.has(o.type)
+        && [o.position?.[0], o.to?.[0]].some((x) => x !== undefined && Math.abs(x - strike) < 0.6)
+        && [o.position?.[1], o.to?.[1]].some((y) => y !== undefined && y > 0.3))
+    expect(aboveAtC, 'a ray escapes above ③, contradicting total internal reflection').toHaveLength(0)
   })
 })

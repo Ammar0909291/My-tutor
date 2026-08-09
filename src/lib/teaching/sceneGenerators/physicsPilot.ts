@@ -346,7 +346,7 @@ export function buildCalorimetryScene(): SceneSpec {
           'container, the heat the block lost equals the heat the water gained — and that single ' +
           'equation is what you solve.',
         objects: [
-          label('both end at one final temperature T_f', [0, 2.85, 0], ROLE.result, 'primary'),
+          label('both reach the same T_f', [0, 2.85, 0], ROLE.result, 'primary'),
           label('heat lost = heat gained', [0, -3.55, 0], ROLE.result, 'detail'),
         ],
       },
