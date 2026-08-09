@@ -2,7 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import {
   VIEWPORTS, checkSceneLayout, checkSceneLayoutAllViewports, projectLabelBoxes, isLayoutSafe,
+  frameReport, fitSceneToFrame, MIN_FRAME_FILL,
 } from '@/lib/teaching/visual/layout'
+import { resolveVisual as resolveVisualForFraming } from '@/lib/teaching/visual/resolveVisual'
 import { buildCanonicalScene, ACTIVATED_SCENE_KINDS } from '@/lib/teaching/visual/conceptSceneParams'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
@@ -44,7 +46,9 @@ const MOBILE_BASELINE: Record<string, number> = {
   'phys.wave.interference': 0,
   'phys.therm.calorimetry': 2,
   'phys.therm.first-law': 0,
-  'phys.mech.viscosity': 4,
+  // Framing dropped this from 4 to 1: the figure was 16% off-centre, so
+  // re-centring it separated three colliding label pairs at 390px.
+  'phys.mech.viscosity': 1,
   'phys.mech.surface-tension': 2,
 }
 
@@ -169,5 +173,108 @@ describe('Layout safety — generator scenes', () => {
     // A floor, not a target: this guards against a change that makes generator
     // figures broadly unreadable on the primary surface.
     expect(clean / total).toBeGreaterThan(0.5)
+  })
+})
+
+
+// ── Framing contract ─────────────────────────────────────────────────────────
+// The production Vector Addition failure: a payload with correct geometry and
+// correct labels, drawn at 6.6% of the frame's area in one quadrant, which the
+// learner experienced as thin lines, empty space and absent labels.
+describe('Framing contract', () => {
+  const vectorScene = (): SceneSpec => {
+    const d = resolveVisualForFraming({
+      message: '', lessonConceptId: 'phys.meas.vector-addition',
+      subject: 'physics', learnerRequest: 'diagram',
+    })
+    if (d.payload?.renderer !== 'scene') throw new Error('vector-addition did not resolve to a scene')
+    return d.payload.sceneSpec
+  }
+
+  it('every deterministic scene now fills at least half its frame', () => {
+    const thin: string[] = []
+    for (const kind of ACTIVATED_SCENE_KINDS) {
+      const scene = buildCanonicalScene(kind)
+      if (!scene) continue
+      const report = frameReport(scene)
+      if (report.fill < MIN_FRAME_FILL) thin.push(`${kind}: ${(100 * report.fill).toFixed(0)}%`)
+    }
+    expect(thin, `scenes under-filling their frame:\n${thin.join('\n')}`).toEqual([])
+  })
+
+  it('the Vector Addition figure is well framed and centred', () => {
+    const report = frameReport(vectorScene())
+    expect(report.fill).toBeGreaterThanOrEqual(MIN_FRAME_FILL)
+    expect(report.offCentre).toBeLessThanOrEqual(0.15)
+    expect(report.ok).toBe(true)
+  })
+
+  // PEDAGOGICAL FIDELITY — a scene existing is not success. This asserts the
+  // figure demonstrates the RELATIONSHIP the tutor describes.
+  it('the Vector Addition figure demonstrates the tip-to-tail construction', () => {
+    const scene = vectorScene()
+    const vectors = scene.steps.flatMap((s) => s.objects).filter((o) => o.type === 'vector' && o.from && o.to)
+    const len = (o: typeof vectors[number]) => Math.hypot(o.to![0] - o.from![0], o.to![1] - o.from![1])
+
+    const a = vectors.find((v) => /\bA\b/.test(v.text ?? ''))!
+    const bMoved = vectors.find((v) => /moved/i.test(v.text ?? ''))!
+    const r = vectors.find((v) => /\bR\b/.test(v.text ?? ''))!
+    expect(a, 'no vector A').toBeTruthy()
+    expect(bMoved, 'no tip-to-tail translated B').toBeTruthy()
+    expect(r, 'no resultant R').toBeTruthy()
+
+    // B is drawn from A's TIP — the construction, not two arrows from origin.
+    expect(bMoved.from![0]).toBeCloseTo(a.to![0], 3)
+    expect(bMoved.from![1]).toBeCloseTo(a.to![1], 3)
+
+    // R closes the triangle: origin -> B-moved's head.
+    expect(r.from![0]).toBeCloseTo(a.from![0], 3)
+    expect(r.to![0]).toBeCloseTo(bMoved.to![0], 3)
+    expect(r.to![1]).toBeCloseTo(bMoved.to![1], 3)
+
+    // The 3-4-5 proportions the tutor states must hold in the drawing itself.
+    expect(len(bMoved) / len(a)).toBeCloseTo(4 / 3, 2)
+    expect(len(r) / len(a)).toBeCloseTo(5 / 3, 2)
+  })
+
+  it('re-framing preserves every distance ratio and angle exactly', () => {
+    const before = buildCanonicalScene('projectile')!
+    const after = fitSceneToFrame(before)
+    const pts = (s: SceneSpec) => s.steps.flatMap((st) => st.objects)
+      .flatMap((o) => [o.position, o.from, o.to, ...(o.points ?? [])].filter(Boolean) as number[][])
+    const p0 = pts(before), p1 = pts(after)
+    expect(p1).toHaveLength(p0.length)
+    // A rigid translation: every point moves by the SAME vector.
+    const dx = p1[0][0] - p0[0][0], dy = p1[0][1] - p0[0][1]
+    for (let i = 0; i < p0.length; i++) {
+      expect(p1[i][0] - p0[i][0]).toBeCloseTo(dx, 6)
+      expect(p1[i][1] - p0[i][1]).toBeCloseTo(dy, 6)
+    }
+  })
+
+  it('leaves an already well-framed scene untouched', () => {
+    const good: SceneSpec = {
+      id: 'g', title: 'g', sceneType: 'diagram', cameraDistance: 12,
+      steps: [{ objects: [
+        { type: 'vector', from: [-6, -5, 0], to: [6, 5, 0] },
+      ] }],
+    }
+    expect(fitSceneToFrame(good)).toBe(good)   // identity, not a copy
+  })
+
+  it('does not touch labels, ordering, narration or object count', () => {
+    const before = buildCanonicalScene('triangle')!
+    const after = fitSceneToFrame(before)
+    const texts = (s: SceneSpec) => s.steps.flatMap((st) => st.objects.map((o) => o.text ?? ''))
+    expect(texts(after)).toEqual(texts(before))
+    expect(after.steps.map((s) => s.narration)).toEqual(before.steps.map((s) => s.narration))
+    expect(after.title).toBe(before.title)
+  })
+
+  it('is deterministic', () => {
+    const a = JSON.stringify(fitSceneToFrame(buildCanonicalScene('vector')!))
+    for (let i = 0; i < 10; i++) {
+      expect(JSON.stringify(fitSceneToFrame(buildCanonicalScene('vector')!))).toBe(a)
+    }
   })
 })
