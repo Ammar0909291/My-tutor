@@ -194,7 +194,11 @@ describe('Visual continuity — snapshot persistence', () => {
     const block = buildVisualContractBlock(held)
     expect(block).toContain('CONTINUITY')
     expect(block).toContain('SAME figure')
-    expect(block).toContain('CONCEPT EXCURSION')
+    // The excursion's TEACHING lifecycle moved to the EXCURSION DIRECTIVE
+    // (teaching/excursion.ts), which is emitted with or without a figure — the
+    // visual contract now states only what is true of the picture itself.
+    expect(block).toContain('EXCURSION FIGURE')
+    expect(block).toContain('STAYS on screen')
     expect(block).toContain('Do NOT draw an ASCII diagram')
   })
 
