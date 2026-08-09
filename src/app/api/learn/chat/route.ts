@@ -475,6 +475,10 @@ export async function POST(req: Request) {
     // legacy path remains intact and is used whenever this is null (resolver
     // disabled, or no concept in scope). See src/lib/teaching/visual/.
     let visualDecisionHoisted: import('@/lib/teaching/visual/types').VisualDecision | null = null
+    // OFF-LESSON CONCEPT EXCURSION (teaching/excursion.ts). The Teaching Engine
+    // owns the lifecycle; this carries its decision to the snapshot persist at
+    // the end of the turn. Null when the excursion block never ran.
+    let excursionDecisionHoisted: import('@/lib/teaching/excursion').ExcursionDecision | null = null
     let conceptPreviouslyMasteredHoisted = false
     // Library Mode duplication cleanup: this used to be set from
     // spacedRevision.ts's per-turn revision block (removed — see the
@@ -2162,6 +2166,48 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // FAILS CLOSED. A throw is not a licence to guess: it yields the same
           // NO-FIGURE decision as an honest decline, so the learner sees text
           // and the tutor is told the screen is empty.
+          // ── OFF-LESSON CONCEPT EXCURSION ──────────────────────────────────
+          // TWO IDENTITIES, decided here, before anything reads either:
+          //
+          //   convConceptId          — the curriculum LESSON. Owns progress.
+          //   teachingTargetConceptId — what this turn TEACHES.
+          //
+          // They are the same value on an ordinary turn. They diverge when the
+          // learner explicitly asks about another concept ("explain viscosity")
+          // while sitting in a lesson: the Teaching Engine opens an excursion,
+          // the turn teaches the requested concept, and the lesson is PAUSED —
+          // StudentProgress, activeLessonSlug, TopicProgress and mastery are
+          // all keyed to convConceptId and are untouched by any of this.
+          //
+          // Before this, one variable meant both things, so a learner's own
+          // question could never become the turn's subject: the request was
+          // resolved (if at all) inside the visual layer and discarded.
+          const { resolveRequestedConceptId } = await import('@/lib/teaching/concept/requestedConcept')
+          const { parseExcursionState, decideExcursion, buildExcursionDirective } =
+            await import('@/lib/teaching/excursion')
+          const requestedConceptIdThisTurn = resolveRequestedConceptId(message, convConceptId, subjectCode)
+          const excursionDecision = decideExcursion({
+            state: parseExcursionState(
+              (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
+            ),
+            message,
+            lessonConceptId: convConceptId,
+            requestedConceptId: requestedConceptIdThisTurn,
+            lastAssistantAskedQuestion:
+              (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
+          })
+          excursionDecisionHoisted = excursionDecision
+          const teachingTargetConceptId = excursionDecision.targetConceptId ?? convConceptId
+          console.log('[excursion]', {
+            lesson: convConceptId,
+            target: teachingTargetConceptId,
+            requested: requestedConceptIdThisTurn,
+            transition: excursionDecision.transition,
+            active: excursionDecision.state.active,
+            returnTo: excursionDecision.returnToConceptId,
+            turns: excursionDecision.state.turns,
+          })
+
           {
             try {
               const { resolveVisualForTurn } = await import('@/lib/teaching/visual/resolveVisual')
@@ -2181,7 +2227,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // without any network at all.
               const decision = await resolveVisualForTurn({
                 message,
-                lessonConceptId: convConceptId,
+                // THE TEACHING TARGET, not the lesson: on an excursion the
+                // figure must depict what is being taught. The excursion's
+                // return anchor and open/closed state come from the Teaching
+                // Engine — the visual layer never decides either.
+                lessonConceptId: teachingTargetConceptId,
+                excursionReturnToConceptId: excursionDecision.returnToConceptId,
+                excursionActive: excursionDecision.state.active,
                 subject: subjectCode,
                 learnerRequest: learnerRequestHoisted,
                 remediationTier,
@@ -2221,7 +2273,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const { noFigureDecision } = await import('@/lib/teaching/visual/types')
                 const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
                 const decision = {
-                  ...noFigureDecision('resolver-error', convConceptId, null, 'explain' as const),
+                  ...noFigureDecision('resolver-error', teachingTargetConceptId, null, 'explain' as const),
                   continuityReason: 'resolver-error',
                   session: null,
                 }
@@ -2272,6 +2324,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // One detection, two consumers: the turn directive below and the
           // conversation-state fold after the LLM call.
           lowSignalAckHoisted = isLowSignalAcknowledgement(message)
+          // The title of whatever this turn is actually teaching. Null unless
+          // an excursion is open, so ordinary turns keep the lesson's title.
+          const excursionTeachingTitle = excursionDecision.state.active
+            ? ((await import('@/lib/curriculum/knowledgeGraph')).getKGNode(teachingTargetConceptId ?? '')?.title ?? null)
+            : null
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
@@ -2301,8 +2358,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             firstLessonActive: firstLessonActiveHoisted,
             legalityRationale: moveDecision.rationale,
             directiveJustIssued: recoveryKeyHoisted === 'too_many_questions',
-            // Bug 1: anchor OBSERVE hook to the lesson concept being taught.
-            lessonTitle: lessonCtx?.lessonTitle ?? null,
+            // Bug 1: anchor OBSERVE hook to the concept being taught.
+            //
+            // On an excursion that is the EXCURSION TARGET, not the lesson.
+            // Passing the lesson title here while the tutor was teaching a
+            // side concept is what produced "The anchor MUST be drawn from
+            // 'SI Units and Measurement' itself" in the middle of a viscosity
+            // explanation — the directive and the learner's own question
+            // pulling in opposite directions inside one prompt.
+            lessonTitle: excursionTeachingTitle ?? lessonCtx?.lessonTitle ?? null,
             // Bug 2: flag bare acknowledgements so the directive forces a
             // concrete check question rather than a repeat of the same prose.
             lowSignalAcknowledgement: lowSignalAckHoisted,
@@ -2325,6 +2389,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 conversationStateHoisted, prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
               )
             })(),
+          })
+          // THE EXCURSION DIRECTIVE — injected AFTER the turn directive so it
+          // governs the turn's subject, and independently of the VISUAL
+          // CONTRACT so an excursion works for the ~99% of concepts that have
+          // no authored figure. Empty string on an ordinary turn.
+          systemPrompt += buildExcursionDirective({
+            decision: excursionDecision,
+            targetTitle: excursionTeachingTitle
+              ?? (await import('@/lib/curriculum/knowledgeGraph')).getKGNode(
+                excursionDecision.state.targetConceptId ?? '',
+              )?.title
+              ?? null,
+            lessonTitle: lessonCtx?.lessonTitle ?? null,
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =
@@ -4494,6 +4571,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ? { visualSession: visualDecisionHoisted.session }
             : {}
 
+          // OFF-LESSON CONCEPT EXCURSION — persist the standing detour so the
+          // next turn continues it (a doubt keeps teaching the side concept)
+          // or finds it closed. Written unconditionally once decided, so a
+          // closed excursion is actively cleared rather than left to expire.
+          // Lesson state is NOT written here and never is: this key is the
+          // whole of the excursion's footprint.
+          const excursionUpdate: Record<string, unknown> = excursionDecisionHoisted
+            ? { excursion: excursionDecisionHoisted.state }
+            : {}
+
           // STEP 2 (instrumentation) — progression telemetry. Measurement
           // only: nothing here gates a turn or changes learner-visible
           // output. Rides the same contextSnapshot persist as every other
@@ -4556,7 +4643,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ).renderedRealityLog
           }
 
-          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0 || Object.keys(visualSessionUpdate).length > 0 || rrmEntryThisTurn) {
+          if (conceptChanged || teachingSignal || Object.keys(placementUpdate).length > 0 || Object.keys(episodeUpdate).length > 0 || Object.keys(failureCountUpdate).length > 0 || Object.keys(conversationStateUpdate).length > 0 || Object.keys(narrativeUpdate).length > 0 || teachingStepUpdateHoisted || turnHistoryUpdateHoisted || Object.keys(progressionUpdate).length > 0 || Object.keys(visualSessionUpdate).length > 0 || Object.keys(excursionUpdate).length > 0 || rrmEntryThisTurn) {
             // Atomic JSONB merge (same pattern as the school snapshot above).
             const libSnapshotDelta = {
               ...(conceptChanged ? { currentConceptNodeId: newLibConceptId } : {}),
@@ -4569,6 +4656,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ...(turnHistoryUpdateHoisted ?? {}),
               ...progressionUpdate,
               ...visualSessionUpdate,
+              ...excursionUpdate,
               // Option B — Teaching Sequence Executor: persist the runtime-
               // selected step so the next turn (or a resumed session) reads
               // it back via readTeachingStepIndex() instead of restarting.

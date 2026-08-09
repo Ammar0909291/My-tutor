@@ -46,8 +46,28 @@ export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_di
 export interface ResolveVisualInput {
   /** The learner's raw message this turn. */
   message: string
-  /** The concept of the lesson currently in progress, if any. */
+  /**
+   * The concept this turn is TEACHING — the excursion target when one is open,
+   * otherwise the lesson's own concept. The visual layer draws what is being
+   * taught; it does not decide what that is.
+   */
   lessonConceptId: string | null
+  /**
+   * The lesson owed a return, supplied by the Teaching Engine's excursion
+   * state (`teaching/excursion.ts`). Present ONLY while an excursion is open.
+   *
+   * The visual layer does not compute this and does not end it: excursion
+   * lifecycle is the Teaching Engine's, and this is the one value the figure
+   * needs from it so a "go back" request knows where back is.
+   */
+  excursionReturnToConceptId?: string | null
+  /**
+   * Whether the Teaching Engine considers an excursion open this turn.
+   * `false` RELEASES a held excursion figure — when teaching has returned to
+   * the lesson, the figure from the detour must not stay on screen. Omitted by
+   * callers that have no excursion state, which leaves behaviour unchanged.
+   */
+  excursionActive?: boolean
   /** Subject slug, used only to break ties in concept matching. */
   subject?: string | null
   /** Deterministic learner-request classification from the existing detector. */
@@ -299,10 +319,22 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   // learner gets the lesson's own figure instead.
   // The typeof guard also makes this total for a session that bypassed
   // parseVisualSession with a non-string conceptId — getKGNode would throw.
-  const liveSession =
+  let liveSession =
     session && typeof session.conceptId === 'string' && contextFor(session.conceptId)
       ? session
       : null
+
+  // The Teaching Engine closed the excursion: the detour's figure is released
+  // with it. Without this the learner returns to the lesson while an unrelated
+  // figure stays on screen — the same "three things disagree at once" state
+  // decideContinuity's visual-request rule was written for, arriving from the
+  // teaching side instead of the request side.
+  const excursionReleased =
+    input.excursionActive === false &&
+    liveSession !== null &&
+    liveSession.returnToConceptId !== null &&
+    liveSession.conceptId !== input.lessonConceptId
+  if (excursionReleased) liveSession = null
 
   const action = decideContinuity({
     session: liveSession,
@@ -317,18 +349,24 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   let returnToConceptId: string | null
   let heldTurns: number
 
+  // The Teaching Engine's excursion state, when the caller has one, is the
+  // authority on what the figure is a detour FROM. Derived locally only for
+  // callers that supply none (tests, the dev harness, the audits).
+  const teachingReturnTo = input.excursionReturnToConceptId ?? null
+
   if (action.kind === 'hold') {
     const ticked = tickSession(action.session)
     conceptId = ticked.conceptId
-    returnToConceptId = ticked.returnToConceptId
+    returnToConceptId = teachingReturnTo ?? ticked.returnToConceptId
     heldTurns = ticked.turns
   } else {
     conceptId = action.targetConceptId
     // An excursion begins when the new figure is NOT the lesson's own concept.
     returnToConceptId =
-      conceptId && input.lessonConceptId && conceptId !== input.lessonConceptId
+      teachingReturnTo ??
+      (conceptId && input.lessonConceptId && conceptId !== input.lessonConceptId
         ? input.lessonConceptId
-        : null
+        : null)
     heldTurns = 0
   }
 
@@ -338,7 +376,13 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   // keeps the stale returnToConceptId and the contract emits "the learner
   // asked about X, which is NOT the current lesson's concept" about the very
   // concept being taught. Found by the 100,000-turn simulation (17 turns).
-  if (conceptId && conceptId === input.lessonConceptId) returnToConceptId = null
+  //
+  // With a Teaching-Engine anchor the same rule holds against THAT anchor: the
+  // figure is a detour only while it is not showing the concept it must return
+  // to. `lessonConceptId` is the teaching target in that mode, so testing it
+  // would compare the target against itself and never fire.
+  const returnAnchor = teachingReturnTo ?? input.lessonConceptId
+  if (conceptId && conceptId === returnAnchor) returnToConceptId = null
 
   if (!conceptId) {
     return {
@@ -455,7 +499,9 @@ export async function resolveVisualForTurn(
       conceptTitle: ctx.title,
       purpose: decision.purpose,
       excursion: decision.excursion,
-      returnToConceptId: decision.excursion ? (input.lessonConceptId ?? null) : null,
+      returnToConceptId: decision.excursion
+        ? (input.excursionReturnToConceptId ?? input.lessonConceptId ?? null)
+        : null,
     },
     asset,
   )
@@ -475,7 +521,9 @@ export async function resolveVisualForTurn(
       conceptId: admission.asset.conceptId,
       representation,
       renderer: admission.asset.renderer,
-      returnToConceptId: decision.excursion ? (input.lessonConceptId ?? null) : null,
+      returnToConceptId: decision.excursion
+        ? (input.excursionReturnToConceptId ?? input.lessonConceptId ?? null)
+        : null,
       turns: 0,
     },
   }

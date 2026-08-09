@@ -155,16 +155,25 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
     )
   }
 
+  // EXCURSION — FIGURE SCOPE ONLY.
+  //
+  // This block used to carry the excursion's teaching lifecycle ("keep teaching
+  // until they signal they are done, then offer to return"). It sat AFTER the
+  // NO-FIGURE early return above, so a concept with no authored figure — most
+  // of the curriculum — received no excursion guidance at all, and the tutor
+  // drifted back to the lesson inside the same response. That lifecycle now
+  // belongs to the EXCURSION DIRECTIVE (teaching/excursion.ts), which is built
+  // from the Teaching Engine's own state and is emitted whether or not a figure
+  // exists. What remains here is the one thing that is genuinely about the
+  // picture: it depicts the side concept, and it does not move while that
+  // concept is being taught.
   if (decision.excursion) {
     lines.push(
-      `CONCEPT EXCURSION: the learner asked about ${what}, which is NOT the ` +
-      'current lesson\'s concept. Teach what they asked' +
-      (asset.scope === 'domain' ? ' in your own words. ' : ', using the figure. ') +
-      'The figure STAYS on this concept for the whole excursion — through ' +
-      'your questions, their answers, and any correction — so keep teaching ' +
-      `${what} until they signal they are done. When they are satisfied, ` +
-      'offer to return to the lesson; do not force them back mid-explanation, ' +
-      'and do not refuse the excursion.',
+      `EXCURSION FIGURE: this figure depicts ${what} — the concept the learner ` +
+      'asked about, not the lesson\'s own concept. It STAYS on screen through ' +
+      'your questions, their answers and any correction, so do not announce a ' +
+      'new diagram and do not describe the lesson\'s concept against it. Follow ' +
+      'the EXCURSION DIRECTIVE for when the side question ends.',
     )
   }
 
