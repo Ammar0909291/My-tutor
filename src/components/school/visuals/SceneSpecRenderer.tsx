@@ -66,14 +66,29 @@ function renderObject(obj: SceneObject, key: number) {
           thickness={obj.thickness ?? 0.05}
         />
       )
-    case 'label':
+    case 'label': {
+      // Typographic tier (M4.1). `size` is a MULTIPLIER on the base label size,
+      // so a scene can give its heading, its object names and its fine print
+      // three distinguishable weights instead of one flat 11px wall of text.
+      // Omitted (every pre-existing scene) => 1 => byte-identical to before.
+      const scale = typeof obj.size === 'number' && obj.size > 0 ? Math.min(obj.size, 3) : 1
       return (
         <Html key={key} position={obj.position ?? [0, 0, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: obj.color ?? '#5B8DEF', whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
+          <span style={{
+            fontSize: 11 * scale,
+            fontWeight: scale >= 1.4 ? 800 : 700,
+            letterSpacing: scale >= 1.4 ? '0.02em' : undefined,
+            color: obj.color ?? '#5B8DEF',
+            whiteSpace: 'nowrap',
+            // A heavier shadow at larger sizes keeps headings legible where they
+            // cross a bright ray or a wave.
+            textShadow: scale >= 1.4 ? '0 1px 4px rgba(0,0,0,0.85)' : '0 0 3px rgba(0,0,0,0.6)',
+          }}>
             {obj.text}
           </span>
         </Html>
       )
+    }
     case 'path':
     case 'trajectory':
       // Render the ordered points as small markers (spike: no spline geometry yet).
