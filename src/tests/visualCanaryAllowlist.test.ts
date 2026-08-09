@@ -293,10 +293,16 @@ describe('nothing else changes', () => {
 describe('the V2 rollback path cannot bypass the allowlist', () => {
   const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
-  it('the legacy generator is gated by the same authority, not the raw flag', () => {
-    expect(ROUTE).toMatch(
-      /!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec &&\s*isRuntimeSceneGenerationAllowed\(legacySceneConceptId\)/,
-    )
+  it('the legacy prose-seeded generator is gone from the route entirely', () => {
+    // Stronger than the previous assertion, which only required the generator
+    // to be GATED on !v2OwnsVisual + the allowlist. M1 removed the call, so
+    // there is no rollback path that can reach it under any flag combination.
+    const CODE = ROUTE.split('\n')
+      .filter((line) => !line.trim().startsWith('//') && !line.trim().startsWith('*'))
+      .join('\n')
+    expect(CODE).not.toContain('generateSceneSpec(')
+    expect(CODE).not.toContain('v2OwnsVisual')
+    expect(CODE).not.toContain('legacySceneConceptId')
     // The unscoped global check must be gone from the route entirely.
     expect(ROUTE).not.toMatch(/isAiSceneGenerationEnabled\(\)/)
   })
@@ -306,20 +312,22 @@ describe('the V2 rollback path cannot bypass the allowlist', () => {
     // never reads them. All parsing lives in the flag module.
     expect(ROUTE).not.toMatch(/process\.env\.ENABLE_AI_SCENE_GENERATION/)
     expect(ROUTE).not.toMatch(/process\.env\.VISUAL_AI_SCENE_ALLOWLIST/)
-    expect(ROUTE).toContain("import { isRuntimeSceneGenerationAllowed } from '@/lib/teaching/visual/flag'")
-    // And the engine does not parse them either.
+    // The route no longer consults the gate at all (M1): the only runtime
+    // generation path is inside the engine, which is where the gate now lives.
     const ENGINE = readFileSync(join(process.cwd(), 'src/lib/teaching/visual/visualEngine.ts'), 'utf8')
+    expect(ENGINE).toContain("import { isRuntimeSceneGenerationAllowed } from './flag'")
+    // And the engine does not parse them either.
     expect(ENGINE).not.toMatch(/process\.env\./)
   })
 
   it('6. fails closed when no trustworthy concept id exists', () => {
     on(); allow(CALORIMETRY)
-    // The legacy generator is prose-seeded and has no concept of its own; an
-    // unidentifiable turn must not generate.
+    // Unchanged behavioural guarantee: no concept id, no generation. The route
+    // half of this assertion went away with the prose-seeded generator that
+    // needed it — the engine is seeded from a resolved concept by construction.
     expect(isRuntimeSceneGenerationAllowed(null)).toBe(false)
-    expect(ROUTE).toMatch(
-      /const legacySceneConceptId =\s*resolvedConceptId \?\? snapshotCurrentConceptId \?\? libraryConceptNodeIdHoisted \?\? null/,
-    )
+    expect(isRuntimeSceneGenerationAllowed(undefined)).toBe(false)
+    expect(isRuntimeSceneGenerationAllowed('')).toBe(false)
   })
 
   it('the six flag/allowlist states resolve as required', () => {

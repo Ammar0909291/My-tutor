@@ -87,31 +87,68 @@ describe('a staged scene really has stages', () => {
   })
 })
 
-describe('V2 is the only selector when it decided the turn', () => {
-  it('every legacy pipeline is gated on v2OwnsVisual', () => {
-    expect(ROUTE).toMatch(/const v2OwnsVisual = Boolean\(visualDecisionHoisted\)/)
-    expect(ROUTE).toMatch(/if \(!v2OwnsVisual\) \{\s*try \{\s*detectedVisualSpec = planVisualTeaching/)
-    expect(ROUTE).toMatch(/if \(!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec && !parametricRouteMatched\)/)
-    expect(ROUTE).toMatch(/if \(!v2OwnsVisual && !detectedVisualSpec && isParametricSceneGenerationEnabled\(\)\)/)
-    // The AI scene generator's gate got STRICTER on 2026-08-08: v2OwnsVisual
-    // still guards it, and it now also requires the concept to be on the
-    // runtime-generation allowlist, so a V2 rollback cannot re-enable it
-    // globally. Same intent as before — legacy cannot run when V2 owns the
-    // turn — with an extra condition, never a weaker one.
-    expect(ROUTE).toMatch(
-      /!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec &&\s*isRuntimeSceneGenerationAllowed\(legacySceneConceptId\)/,
-    )
-    expect(ROUTE).toMatch(/const dvFlag = !v2OwnsVisual && isDynamicVisualizationEnabled\(\)/)
+describe('the resolver is the only runtime visual authority (M1)', () => {
+  // These assertions used to require that each legacy pipeline was GATED on
+  // `v2OwnsVisual`. M1 replaced gating with removal, so they now require the
+  // strictly stronger property: the pipelines are not in the route at all.
+  // A gate can be inverted by a flag or skipped by an early throw; an absent
+  // call cannot.
+
+  // Only executable code counts — every one of these names still appears in
+  // the route's comments, which is where the history is deliberately recorded.
+  const CODE = ROUTE.split('\n')
+    .filter((line) => !line.trim().startsWith('//') && !line.trim().startsWith('*'))
+    .join('\n')
+
+  it('no legacy prose-seeded pipeline is invoked by the route', () => {
+    for (const call of [
+      'planVisualTeaching(',
+      'routeSceneGenerator(',
+      'generateRoutedScene(',
+      'buildSceneSpec(',
+      'generateSceneSpec(',
+      'generateVisualizationCode(',
+      'decideVisualization(',
+    ]) {
+      expect(CODE, `${call} must not run at request time`).not.toContain(call)
+    }
   })
 
-  it('the legacy lesson-title visual guidance is not injected under V2', () => {
+  it('the v2OwnsVisual switch between authorities is gone', () => {
+    expect(CODE).not.toContain('v2OwnsVisual')
+    expect(CODE).not.toContain('isVisualResolverV2Enabled')
+    expect(CODE).not.toContain('parametricRouteMatched')
+    expect(CODE).not.toContain('legacySceneConceptId')
+  })
+
+  it('the legacy lesson-title visual guidance is never injected', () => {
     // Two conflicting visual instructions in one prompt is how the tutor ended
-    // up describing a figure the learner was not looking at.
-    expect(ROUTE).toMatch(/if \(!isVisualResolverV2Enabled\(\)\) \{\s*systemPrompt \+= buildVisualIntelligenceBlock/)
+    // up describing a figure the learner was not looking at. The Visual
+    // Contract is now the only visual instruction, unconditionally.
+    expect(CODE).not.toContain('buildVisualIntelligenceBlock')
   })
 
-  it('the rollback switch still exists', () => {
-    expect(ROUTE).toMatch(/isVisualResolverV2Enabled\(\)/)
+  it('the authority clamp is unconditional and clears every channel first', () => {
+    // The clamp used to be `if (visualDecisionHoisted)`, so a turn on which the
+    // resolver never ran kept whatever the legacy pipelines had produced.
+    expect(CODE).not.toMatch(/if \(visualDecisionHoisted\) \{/)
+    expect(CODE).toMatch(
+      /const decision = visualDecisionHoisted\s*\n\s*const llmTag[^\n]*\n\s*responseVisual = null\s*\n\s*detectedVisualSpec = null\s*\n\s*detectedSceneSpec = null\s*\n\s*dynamicVisualizationCode = null/,
+    )
+  })
+
+  it('the resolver failure path fails closed to a no-figure decision', () => {
+    expect(CODE).toMatch(/noFigureDecision\('resolver-error'/)
+  })
+
+  it('the visual channels have exactly one writer', () => {
+    // Assignments to a visual channel, excluding their declarations. Every one
+    // must live inside the clamp: 3 clears + 2 payload assignments, and
+    // responseVisual's clear + its card-case refinement.
+    const assignments = CODE.split('\n').filter((l) =>
+      /^\s*(detectedVisualSpec|detectedSceneSpec|dynamicVisualizationCode) = /.test(l),
+    )
+    expect(assignments).toHaveLength(5)
   })
 })
 

@@ -9,16 +9,25 @@ import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
 import { MessageRole } from '@prisma/client'
-import { buildVisualSpec } from '@/lib/visuals/visualSpecBuilder'
-import { planVisualTeaching } from '@/lib/visuals/teachingStrategy'
-import { buildSceneSpec } from '@/lib/teaching/buildSceneSpec'
-import { generateSceneSpec } from '@/lib/teaching/generateSceneSpec'
-import { isRuntimeSceneGenerationAllowed } from '@/lib/teaching/visual/flag'
-import { generateRoutedScene, isParametricSceneGenerationEnabled, routeSceneGenerator } from '@/lib/teaching/sceneGenerators/sceneRouter'
-import { generateVisualizationCode, isDynamicVisualizationEnabled } from '@/lib/teaching/visuals/generateVisualizationCode'
-import { getCachedVisualization, saveVisualization, normalizeConceptKey } from '@/lib/teaching/visuals/visualizationCache'
-import { decideVisualization } from '@/lib/teaching/visualizationDecision'
-import { isVisualResolverV2Enabled } from '@/lib/teaching/visual/flag'
+// ── M1: the visualization runtime fails closed ───────────────────────────────
+// Four legacy post-LLM visualization authorities used to run here and each
+// seeded a figure from the TUTOR'S OWN PROSE rather than from the concept:
+// planVisualTeaching(), the parametric scene router, buildSceneSpec() and the
+// dynamic-code engine. Measured consequences on real explanations — a Total
+// Internal Reflection lesson saying "ray diagram" routed to ray_optics (a
+// mirror), Calorimetry saying "bodies collide" routed to `collision`, Wave
+// Interference saying "real image" routed to ray_optics, Viscosity saying
+// "initial velocity" routed to `projectile`.
+//
+// They are no longer consulted at request time. resolveVisualForTurn() is the
+// ONE runtime visual authority and the single writer of the response's visual
+// channels. A resolver that declines AND a resolver that throws now produce the
+// same thing: NO VISUAL. There is deliberately no switch between them.
+//
+// The generator/engine modules stay on disk — they remain authoring backends
+// for future asset production; only their runtime authority was removed.
+import type { VisualSpec } from '@/lib/visuals/visualSpec'
+import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { decide } from '@/lib/teaching-engine'
 import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
@@ -2112,22 +2121,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // D.23-30: Visual Intelligence block for the conversation state
           // machine path. ADR 15: alreadyShown now uses RRM ground truth
           // instead of the phase-counter heuristic.
-          const { buildVisualIntelligenceBlock } = await import('@/lib/teaching/visualIntelligence')
-          const { hasVisualBeenRendered, buildRenderedRealityBlock } = await import('@/lib/teaching/renderedRealityModel')
-          const visualAlreadyShown = hasVisualBeenRendered(snapshotRRMLog, availableVisual)
-          // Legacy visual-intelligence guidance is built from detectVisual()'s
-          // keyword match on the LESSON TITLE, which can name a different
-          // figure than the one V2 is actually attaching — two conflicting
+          const { buildRenderedRealityBlock } = await import('@/lib/teaching/renderedRealityModel')
+          // M1: buildVisualIntelligenceBlock() used to be injected here whenever
+          // the resolver was disabled. It is built from detectVisual()'s keyword
+          // match on the LESSON TITLE, so it could name a different figure than
+          // the one actually being attached — two conflicting visual
           // instructions in one prompt, and the observed source of the tutor
-          // describing a figure the learner is not looking at. Under V2 the
-          // Visual Contract is the only visual instruction.
-          if (!isVisualResolverV2Enabled()) {
-            systemPrompt += buildVisualIntelligenceBlock(
-              availableVisual,
-              lessonCtx?.lessonTitle ?? null,
-              visualAlreadyShown,
-            )
-          }
+          // describing a figure the learner is not looking at. The Visual
+          // Contract is now the only visual instruction in the prompt, always.
           // ADR 15: inject RENDERED REALITY block — ground truth of what
           // the learner's screen currently shows.
           systemPrompt += buildRenderedRealityBlock(snapshotRRMLog)
@@ -2151,13 +2152,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           forceVisualRenderHoisted =
             shouldForceVisualRender(learnerRequestHoisted, availableVisual) || explainDifferentlyNeedsVisual
 
-          // ── Visual Resolver V2 ────────────────────────────────────────────
+          // ── THE visual authority ──────────────────────────────────────────
           // Decide the turn's visualization here, BEFORE the LLM, from the
-          // concept the learner actually asked about. Graphical output is the
-          // default; ASCII is returned only when no concept resolves or every
-          // archetype declines. Non-fatal: on any failure visualDecisionHoisted
-          // stays null and the legacy pipelines below run exactly as before.
-          if (isVisualResolverV2Enabled()) {
+          // concept the learner actually asked about — never from the model's
+          // prose. Runs unconditionally: there is no longer a second pipeline
+          // for it to be switched against, so a flag choosing between
+          // authorities would have nothing to choose.
+          //
+          // FAILS CLOSED. A throw is not a licence to guess: it yields the same
+          // NO-FIGURE decision as an honest decline, so the learner sees text
+          // and the tutor is told the screen is empty.
+          {
             try {
               const { resolveVisualForTurn } = await import('@/lib/teaching/visual/resolveVisual')
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
@@ -2206,8 +2211,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 heldTurns: decision.session?.turns ?? 0,
               })
             } catch (err) {
-              console.warn('[visual-v2] resolver failed, falling back to legacy pipelines:', err)
-              visualDecisionHoisted = null
+              // FAIL CLOSED. Previously this set the decision to null, which
+              // handed the turn to four prose-keyword pipelines — a resolver
+              // crash was the most likely way to get a WRONG figure. Now the
+              // failure is itself a decision: no figure, and a contract that
+              // tells the tutor the screen is empty.
+              console.warn('[visual] resolver failed — no figure this turn:', err)
+              try {
+                const { noFigureDecision } = await import('@/lib/teaching/visual/types')
+                const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
+                const decision = {
+                  ...noFigureDecision('resolver-error', convConceptId, null, 'explain' as const),
+                  continuityReason: 'resolver-error',
+                  session: null,
+                }
+                visualDecisionHoisted = decision
+                systemPrompt += buildVisualContractBlock(decision)
+              } catch {
+                // Even the no-figure path failed. Leave the decision null; the
+                // unconditional clamp below still clears every visual channel,
+                // so the turn degrades to text rather than to a guessed figure.
+                visualDecisionHoisted = null
+              }
             }
           }
           // Brain SHADOW MODE (production migration Phase 1/4). Runs the
@@ -3555,248 +3580,51 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         masteryGatePendingHoisted = true
       }
 
-      // Sprint C/H: deterministic, rule-based visual detection on the final
-      // tutor text, now routed through the Teaching Strategy Engine (Sprint H)
-      // so a visual only appears when the strategy actually requests one, and
-      // carries `interactive`/`challenge` only when the strategy calls for
-      // them — no AI reasoning, no LLM parsing, no prompt changes. Non-fatal —
-      // falls back to undefined on any error so a lesson never breaks because
-      // of this. Never persisted; attached to the JSON response only.
-      // ARCHITECTURE: when the Visual Resolver V2 decided this turn, it is the
-      // ONLY authority. The legacy pipelines below used to run anyway and were
-      // overwritten afterwards, which meant keyword-matching the model's own
-      // prose still executed (and, for the dynamic engine, could still cost an
-      // LLM call) on every visual turn. They are now skipped outright. Legacy
-      // selection participates only when V2 produced nothing — i.e. when
-      // VISUAL_RESOLVER_V2=0 or the resolver block did not run — which is the
-      // rollback path and nothing else.
-      const v2OwnsVisual = Boolean(visualDecisionHoisted)
-
-      let detectedVisualSpec: ReturnType<typeof buildVisualSpec> = null
-      if (!v2OwnsVisual) {
-        try {
-          detectedVisualSpec = planVisualTeaching(cleanText).spec
-        } catch { /* non-fatal */ }
-      }
-
-      let detectedSceneSpec: ReturnType<typeof buildSceneSpec> = null
+      // ── Visual channels ──────────────────────────────────────────────────
+      // Declared empty and written in exactly ONE place: the authority clamp
+      // below. Nothing between the model's reply and that clamp may put a
+      // figure on the learner's screen.
+      //
+      // Four legacy pipelines used to run here, each deriving a figure from
+      // `cleanText` — the tutor's own prose — with no concept input at all:
+      //   planVisualTeaching()            2D spec from prose keywords
+      //   routeSceneGenerator()/generateRoutedScene()  parametric scene from prose
+      //   buildSceneSpec()                3D scene from prose regex
+      //   generateVisualizationCode()     LLM-authored component from prose
+      // They were gated on `v2OwnsVisual`, so they activated precisely when the
+      // authority had failed — the moment guessing is least defensible. That
+      // gate, and the pipelines behind it, are gone. The modules remain on disk
+      // as authoring backends; they are simply not runtime authorities.
+      let detectedVisualSpec: VisualSpec | null = null
+      let detectedSceneSpec: SceneSpec | null = null
       let dynamicVisualizationCode: string | null = null
 
-      // Part 2 (option C, FLAG-GATED): parameter-driven routed scene generation
-      // (src/lib/teaching/sceneGenerators/sceneRouter.ts) — 9 textbook-standard
-      // scene types where the LLM only extracts parameters and deterministic
-      // code computes all geometry, with an independent consistency check as a
-      // safety net. Dead by default — generateRoutedScene() only fires when
-      // ENABLE_PARAMETRIC_SCENE_GENERATION === 'true'. Checked BEFORE the generic
-      // buildSceneSpec fallback below (bug fix): buildSceneSpec's bare-word
-      // VECTOR_RE (/velocity|acceleration|force|.../) matches almost any motion
-      // explanation — including projectile/circular/pendulum/collision text —
-      // and was firing first, producing a generic "auto-vector" scene and
-      // permanently blocking the specific routed generator from ever running.
-      // Non-fatal: any failure at any pipeline stage degrades to null (logged,
-      // not thrown) and the turn proceeds unchanged.
-      // Did the text match a SPECIFIC parametric-router rule (projectile, circular,
-      // vector, etc.)? Tracked separately from whether generateRoutedScene actually
-      // produced a scene: extraction/build/consistency can still fail downstream
-      // (e.g. the LLM can't pull two clean vector magnitudes out of a Newton's-
-      // second-law explanation that never states two forces numerically). In that
-      // case the text is still recognizably circular-motion/vector-flavored, so the
-      // generic buildSceneSpec fallback below must NOT run — its bare-word VECTOR_RE
-      // would otherwise paper over the failure with a misleading generic single-
-      // arrow "auto-vector" scene for text the router already identified as a
-      // specific (but failed) case. Showing nothing is correct per buildSceneSpec's
-      // own "wrong scene is worse than none" design.
-      let parametricRouteMatched = false
-      if (!v2OwnsVisual && !detectedVisualSpec && isParametricSceneGenerationEnabled()) {
-        parametricRouteMatched = routeSceneGenerator(cleanText) !== null
-        console.log('[scene-debug] parametric scene router invoked for text:', cleanText.slice(0, 200))
-        try {
-          detectedSceneSpec = await generateRoutedScene(cleanText)
-        } catch (err) {
-          console.log('[scene-debug] generateRoutedScene threw:', err)
-        }
-        console.log('[scene-debug] parametric scene router result:', detectedSceneSpec ? detectedSceneSpec.id : null)
-      }
-
-      // Deterministic, rule-based 3D scene detection (vectors/molecules/coordinate
-      // space) — same non-fatal, no-AI-call pattern as detectedVisualSpec above.
-      // Generic fallback only: fires when nothing more specific (the 2D pipeline
-      // or the parametric router above) matched OR failed, so a message never
-      // carries both a 2D diagram and a 3D scene, a generic vector arrow never
-      // preempts a real projectile/circular/pendulum/collision/etc. scene, and it
-      // never papers over a recognized-but-failed parametric route either.
-      if (!v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec && !parametricRouteMatched) {
-        try {
-          detectedSceneSpec = buildSceneSpec(cleanText)
-        } catch { /* non-fatal */ }
-      }
-
-      // Part 2 (DRAFT, FLAG-GATED): AI SceneSpec generation. Dead by default —
-      // generateSceneSpec() returns null unless ENABLE_AI_SCENE_GENERATION === 'true'.
-      // Runs only when neither deterministic pipeline produced anything, so it can
-      // never override a trusted deterministic visual, and its output is already
-      // structurally validated (validateSceneSpec) inside the generator. Non-fatal:
-      // a failed/blocked LLM call degrades to null and the turn proceeds unchanged.
-      // This is the production wiring, drafted and ready to enable once the
-      // feasibility probe confirms usable output on a Groq-reachable network.
+      // ── THE authority clamp — the single writer of every visual channel ──
       //
-      // ROLLBACK SAFETY (2026-08-08). This path is unreachable while V2 owns
-      // the turn, but `!v2OwnsVisual` is exactly the state VISUAL_RESOLVER_V2=0
-      // produces — so on the rollback path it would otherwise run on the global
-      // flag alone, ignoring VISUAL_AI_SCENE_ALLOWLIST and generating for ANY
-      // concept. It now asks the same authority the V2 engine asks, so the
-      // scoped canary holds in both directions.
+      // Runs UNCONDITIONALLY. It used to be `if (visualDecisionHoisted)`, which
+      // meant a turn where the resolver never ran kept whatever the legacy
+      // pipelines and the model's own tag had produced. Now every channel is
+      // cleared first and refilled only from the decision, so the three states
+      // that matter collapse to two outcomes:
       //
-      // It FAILS CLOSED when no trustworthy concept id exists: this generator
-      // is seeded from tutor prose and has no concept of its own, so an
-      // unidentifiable turn must not generate rather than be allowed through.
-      const legacySceneConceptId =
-        resolvedConceptId ?? snapshotCurrentConceptId ?? libraryConceptNodeIdHoisted ?? null
-      if (
-        !v2OwnsVisual && !detectedVisualSpec && !detectedSceneSpec &&
-        isRuntimeSceneGenerationAllowed(legacySceneConceptId)
-      ) {
-        try {
-          detectedSceneSpec = await generateSceneSpec(cleanText)
-        } catch { /* non-fatal */ }
-      }
-
-      // Dynamic 2D Visualization Engine: unlimited-domain fallback for when no
-      // deterministic, parametric, or AI SceneSpec pipeline above produced a
-      // visual. Generates a small React component from the explanation text
-      // and ships it to the client as a string — it is never executed on the
-      // server or in this app's render tree; DynamicVisualRenderer.tsx runs it
-      // inside a sandboxed, opaque-origin iframe. Gated on the deterministic
-      // decideVisualization() heuristic (no extra LLM call to decide whether to
-      // visualize) and its own flag, default OFF. Non-fatal: any failure at any
-      // stage degrades to null and the turn proceeds unchanged.
-      // TEMP DEBUG (dynamic-visual diagnosis sprint — remove once verified) —
-      // surfaces exactly which gate is closing when the dynamic engine doesn't
-      // fire, so a "no visual" turn in the UI is traceable in the dev-server
-      // log instead of silently invisible. Cheap (one decideVisualization() per
-      // turn, already deterministic & no-network) and harmless if left in.
-      const dvFlag = !v2OwnsVisual && isDynamicVisualizationEnabled()
-      const dvDecision = decideVisualization(cleanText)
-      console.log('[dynamic-debug] gates:', {
-        visualSpecAlreadySet: !!detectedVisualSpec,
-        sceneSpecAlreadySet: !!detectedSceneSpec,
-        flagEnabled: dvFlag,
-        shouldVisualize: dvDecision.shouldVisualize,
-        category: dvDecision.category,
-        reasoning: dvDecision.reasoning,
-      })
-      if (
-        !visualDecisionHoisted &&      // V2 already decided — never pay for an LLM visual call
-        !detectedVisualSpec &&
-        !detectedSceneSpec &&
-        dvFlag &&
-        dvDecision.shouldVisualize
-      ) {
-        try {
-          const conceptKey = normalizeConceptKey(cleanText)
-          const cached = await getCachedVisualization(conceptKey)
-          if (cached) {
-            dynamicVisualizationCode = cached.code
-            console.log('[dynamic-debug] cache HIT for concept:', conceptKey.slice(0, 60))
-          } else {
-            console.log('[dynamic-debug] cache MISS; calling LLM for concept:', conceptKey.slice(0, 60))
-            const generated = await generateVisualizationCode(cleanText)
-            if (generated) {
-              dynamicVisualizationCode = generated.code
-              await saveVisualization(conceptKey, generated.code)
-              console.log('[dynamic-debug] LLM returned code; bytes:', generated.code.length)
-            } else {
-              console.log('[dynamic-debug] LLM returned null (both 3D + 2D passes failed — most often: missing/invalid GROQ_API_KEY)')
-            }
-          }
-        } catch (err) {
-          console.log('[dynamic-debug] threw:', err)
-        }
-      }
-
-      // Teaching Strategy Engine (docs/TEACHING_ENGINE_SPEC.md): let the per-turn
-      // teaching strategy cast an ADVISORY bias over the deterministic 2D visual
-      // candidate above. Additive and null-guarded — on any non-school turn,
-      // missing strategy, or error, outputBiasHoisted is null and this is skipped,
-      // leaving today's behavior unchanged. Never fabricates a spec; the
-      // "never two visuals" guard below still runs last and stays authoritative.
-      //   • SUPPRESS_OPTIONAL: drop the candidate only if it is OPTIONAL
-      //     (non-interactive AND no challenge payload — isOptionalVisual).
-      //   • PROMOTE: keep the candidate as-is (it is already a trusted spec); its
-      //     spec-intended effect on the LLM's own VISUAL tag is the existing default
-      //     when no deterministic spec fired, so nothing extra is done here.
-      // (Explicit "student asked for a visual" override is deferred — see the spec's
-      //  Risk #3; the keyword heuristic is unproven and intentionally out of scope here.)
-      if (strategyHoisted && outputBiasHoisted && detectedVisualSpec) {
-        try {
-          const { isOptionalVisual } = await import('@/lib/school/adaptive/teachingOutputBias')
-          if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && isOptionalVisual(detectedVisualSpec)) {
-            detectedVisualSpec = null
-          }
-        } catch { /* non-fatal — output bias is purely advisory */ }
-      }
-
-      // Sprint W gap fix: the bias above only ever inspected detectedVisualSpec —
-      // the LLM's own free-text VISUAL:<type> tag (responseVisual) was never bias-
-      // weighted at all, so a MOMENTUM_RECOVERY/CONFIDENCE_BUILDING/CONFIDENCE_CORRECTION
-      // turn could still surface a model-suggested visual the strategy explicitly wants
-      // to suppress. responseVisual carries no interactive/challenge payload (it is
-      // just a string), so it is unconditionally OPTIONAL whenever present — see
-      // isOptionalVisualTag. Independent of, and runs alongside, the block above.
-      // forceVisualRenderHoisted (explicit "show me a diagram" request) is
-      // exempt from SUPPRESS_OPTIONAL: a learner-requested visual is never
-      // "optional" by definition — suppressing it here would reintroduce
-      // the exact bug this closes (AI describes instead of rendering).
-      if (strategyHoisted && outputBiasHoisted && responseVisual && !forceVisualRenderHoisted) {
-        try {
-          const { isOptionalVisualTag } = await import('@/lib/school/adaptive/teachingOutputBias')
-          if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && isOptionalVisualTag(responseVisual)) {
-            responseVisual = null
-          }
-        } catch { /* non-fatal — output bias is purely advisory */ }
-      }
-
-      // Sprint W gap C remainder: sceneSpec (rule-based/parametric/free-form,
-      // audit items #3/#4/#5) was never inspected by the bias module at all.
-      // isRequiredSceneSpec is always true when a scene is present — see its
-      // doc comment for why no suppression actually happens here — but this
-      // makes that policy explicit and auditable instead of leaving sceneSpec
-      // as a silent blind spot in the bias layer.
-      if (strategyHoisted && outputBiasHoisted && detectedSceneSpec) {
-        try {
-          const { isRequiredSceneSpec } = await import('@/lib/school/adaptive/teachingOutputBias')
-          if (outputBiasHoisted.kind === 'SUPPRESS_OPTIONAL' && !isRequiredSceneSpec(detectedSceneSpec)) {
-            detectedSceneSpec = null
-          }
-        } catch { /* non-fatal — output bias is purely advisory */ }
-      }
-
-      // Extend the "never show two visuals for one explanation" guard above to
-      // the one pairing it missed: responseVisual (the LLM's own VISUAL:<type>
-      // tag, parsed earlier) is computed independently of both deterministic
-      // pipelines, so it could previously coexist with detectedVisualSpec or
-      // detectedSceneSpec and render a duplicate/conflicting visual alongside
-      // one of them. The deterministic pipelines are the trusted signal here —
-      // suppress the free-text LLM tag whenever either of them already fired.
-      if (detectedVisualSpec || detectedSceneSpec) {
-        responseVisual = null
-      }
-
-      // Hoisted out of the strategy-log block below so the P0 Brain
-      // compliance check (further down) can reuse it unconditionally —
-      // same computation, not duplicated.
-      // ── Visual Resolver V2: final authority ──────────────────────────────
-      // When V2 produced a decision it REPLACES whatever the legacy pipelines
-      // and bias guards above arrived at. Exactly one payload is assigned and
-      // every other channel is cleared, so "two visuals at once" is impossible
-      // by construction rather than by the post-hoc nulling guard above.
+      //   resolver produced a figure  -> exactly that figure, and only it
+      //   resolver declined          -> NO VISUAL
+      //   resolver threw / never ran -> NO VISUAL   (identical to declining)
       //
-      // The LLM's own VISUAL:<type> tag is still honoured, but only as a
-      // REFINEMENT: it may pick a different type within the concept's legal set
-      // (decision.allowed) and is otherwise discarded. That preserves the
-      // 2026-08-02 canonical-ownership fix — the model can never introduce a
-      // visual belonging to a different concept.
-      if (visualDecisionHoisted) {
+      // There is no path from here to a figure the authority did not choose.
+      //
+      // The model's own VISUAL:<type> tag survives only as a REFINEMENT: it may
+      // pick a different type WITHIN the concept's legal set (decision.allowed)
+      // and is otherwise discarded, preserving the 2026-08-02 canonical-
+      // ownership fix — the model can never introduce another concept's visual.
+      //
+      // The teaching-strategy SUPPRESS_OPTIONAL bias blocks that used to sit
+      // here were removed with the pipelines they filtered. They inspected
+      // detectedVisualSpec/detectedSceneSpec, which no longer hold anything at
+      // this point, and post-hoc suppression of a single-authority decision
+      // would be a second authority by another name. Suppression belongs on the
+      // resolver's INPUT, not on its output; that is a later milestone.
+      {
         const decision = visualDecisionHoisted
         const llmTag = responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null
         responseVisual = null
@@ -3807,7 +3635,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // A null payload is the NO-FIGURE decision: the concept has no faithful
         // visual, so every channel stays null and the learner sees text only.
         // This is a successful outcome, not a failure to render.
-        switch (decision.payload?.renderer) {
+        switch (decision?.payload?.renderer) {
           case 'card': {
             const legal = decision.allowed ?? [decision.payload.visualType]
             responseVisual = llmTag && legal.includes(llmTag) ? llmTag : decision.payload.visualType
@@ -3820,7 +3648,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             detectedSceneSpec = decision.payload.sceneSpec
             break
           default:
-            break   // no payload (or the retired ascii member) — attach nothing
+            break   // no decision, no payload, or the retired ascii member
         }
       }
 

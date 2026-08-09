@@ -1,21 +1,17 @@
-/**
- * Visual Resolver V2 rollout switch.
+/*
+ * `isVisualResolverV2Enabled()` was removed here (M1).
  *
- * ON by default: V2's whole purpose is to make graphical visualization the
- * default, so shipping it behind an opt-in flag would preserve the exact
- * behaviour it exists to replace. Set `VISUAL_RESOLVER_V2=0` (or `false`) to
- * fall back to the legacy four-pipeline path — an escape hatch for incident
- * response, not a long-term configuration.
+ * It was a MIGRATION flag whose own contract said it would be deleted "once V2
+ * is validated in production, at which point the legacy pipelines and their own
+ * capability flags are deleted with it". M1 deleted those pipelines, so the
+ * switch had nothing left to switch TO: with the resolver as the only
+ * authority, `VISUAL_RESOLVER_V2=0` would have meant "silently show no visuals
+ * ever" rather than "roll back", which is a worse outcome than the incident it
+ * was meant to mitigate. Rollback is now `git revert` of the M1 commit.
  *
- * This is a MIGRATION flag, not a capability flag. It is scheduled for removal
- * once V2 is validated in production, at which point the legacy pipelines and
- * their own three capability flags are deleted with it.
+ * The runtime-generation allowlist below is a CAPABILITY gate, not a migration
+ * flag, and is unchanged.
  */
-export function isVisualResolverV2Enabled(): boolean {
-  const raw = process.env.VISUAL_RESOLVER_V2
-  if (raw === undefined || raw === '') return true
-  return raw !== '0' && raw.toLowerCase() !== 'false'
-}
 
 /**
  * Runtime scene-generation authorization — the ONE authority.
