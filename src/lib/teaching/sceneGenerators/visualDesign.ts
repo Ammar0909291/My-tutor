@@ -37,9 +37,14 @@
 import type { SceneObject, Vec3 } from '@/lib/teaching/sceneSpec'
 
 // ── semantic palette ─────────────────────────────────────────────────────────
-// Tuned for the dark canvas the renderer paints on. Nothing darker than
-// slate-400 appears: dark ink on this background renders as invisible text,
-// which is how a figure ends up describing parts nobody can see.
+// ROLE holds each role's DARK-THEME value, and is also the wire format: a
+// scene stores these hexes in `obj.color`, so a scene is authored once and is
+// identical in both themes. The theme is applied at RENDER time by
+// themeColor() below — see ROLE_LIGHT.
+//
+// Nothing darker than slate-400 appears here: dark ink on the dark canvas
+// renders as invisible text, which is how a figure ends up describing parts
+// nobody can see.
 
 export const ROLE = {
   /** Inert apparatus and reference geometry: boundaries, walls, plates, axes. */
@@ -55,6 +60,65 @@ export const ROLE = {
   /** The result, the key relationship, the contrast case. */
   result: '#22c55e',
 } as const
+
+export type Role = keyof typeof ROLE
+
+// ── the same roles, readable on a light surface ──────────────────────────────
+//
+// THE DEFECT THIS CLOSES. Every role above was chosen against `--bg-surface`
+// in dark (#161B22) and baked into the scene at generation time. The figure
+// surface is themed (`var(--bg-surface)`, #F6F8FA in light) but the ink was
+// not, so switching to day theme painted #e2e8f0 text on a #F6F8FA panel:
+// measured 1.09:1, i.e. invisible. Reproduced in Chromium before this fix —
+// "air · rarer, n₂" and "glass · denser, n₁" were unreadable in Total Internal
+// Reflection while the coloured rays survived.
+//
+// These are the SAME six roles, not a second palette: red still means the
+// driving/incoming quantity in both themes, violet is still a construction
+// aid. Only the luminance flips, so the colour language a learner has already
+// learned still holds when they change the theme. Every value clears 4.5:1
+// against the light surface (#F6F8FA) — asserted in
+// src/tests/visualThemeTokens.test.ts, which computes the ratios rather than
+// trusting this comment.
+export const ROLE_LIGHT: Record<Role, string> = {
+  reference: '#475569',   // slate-600  — apparatus reads as grey, not as ink
+  ink:       '#0f172a',   // slate-900  — body text
+  input:     '#b91c1c',   // red-700
+  output:    '#1d4ed8',   // blue-700
+  aid:       '#6d28d9',   // violet-700
+  result:    '#15803d',   // green-700  — green-500 is 1.9:1 on white
+}
+
+/** Which role a stored colour represents, or null when it is not one of ours. */
+export function roleOf(color: string | null | undefined): Role | null {
+  if (!color) return null
+  const hex = color.toLowerCase()
+  for (const [role, value] of Object.entries(ROLE) as [Role, string][]) {
+    if (value.toLowerCase() === hex) return role
+  }
+  return null
+}
+
+/**
+ * Resolve a stored scene colour for the theme being rendered.
+ *
+ * The one function the renderer calls. A colour that belongs to the semantic
+ * palette is mapped role-wise; anything else (pre-M4.1 scenes, generator
+ * defaults) is returned untouched, so no existing figure changes.
+ *
+ * Pure and synchronous — the same scene payload therefore serves both themes,
+ * which is what keeps one asset per concept and keeps a restored figure
+ * byte-identical to the live one.
+ */
+export function themeColor(
+  color: string | null | undefined,
+  theme: 'dark' | 'light',
+): string | undefined {
+  if (!color) return undefined
+  if (theme !== 'light') return color
+  const role = roleOf(color)
+  return role ? ROLE_LIGHT[role] : color
+}
 
 // ── typographic tiers ────────────────────────────────────────────────────────
 // Three sizes, not one. `size` is a multiplier the renderer applies to its base

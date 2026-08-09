@@ -18,6 +18,8 @@ import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
 import { visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
+import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
+import { useTheme, type Theme } from '@/components/Providers'
 
 /** Plain (headless) connecting cylinder between two atoms — a chemical bond has no direction/arrowhead. */
 function BondLine({ from, to, color = '#9aa4b2', thickness = 0.04 }: { from: [number, number, number]; to: [number, number, number]; color?: string; thickness?: number }) {
@@ -40,7 +42,11 @@ function BondLine({ from, to, color = '#9aa4b2', thickness = 0.04 }: { from: [nu
   )
 }
 
-function renderObject(obj: SceneObject, key: number) {
+function renderObject(obj: SceneObject, key: number, theme: Theme) {
+  // ONE mapping point. Scene colours are stored as their dark-theme value and
+  // resolved role-wise here, so the same payload serves both themes and no
+  // scene, asset or persistence path is theme-specific.
+  const color = themeColor(obj.color, theme)
   switch (obj.type) {
     case 'point':
     case 'node':
@@ -50,7 +56,7 @@ function renderObject(obj: SceneObject, key: number) {
           key={key}
           position={obj.position ?? [0, 0, 0]}
           radius={obj.radius ?? (obj.type === 'node' ? 0.3 : 0.1)}
-          color={obj.color ?? '#5B8DEF'}
+          color={color ?? '#5B8DEF'}
           label={obj.text}
         />
       )
@@ -61,7 +67,7 @@ function renderObject(obj: SceneObject, key: number) {
           key={key}
           start={obj.from ?? [0, 0, 0]}
           end={obj.to ?? [1, 0, 0]}
-          color={obj.color ?? '#5B8DEF'}
+          color={color ?? '#5B8DEF'}
           label={obj.text}
           thickness={obj.thickness ?? 0.05}
         />
@@ -78,11 +84,15 @@ function renderObject(obj: SceneObject, key: number) {
             fontSize: 11 * scale,
             fontWeight: scale >= 1.4 ? 800 : 700,
             letterSpacing: scale >= 1.4 ? '0.02em' : undefined,
-            color: obj.color ?? '#5B8DEF',
+            color: color ?? '#5B8DEF',
             whiteSpace: 'nowrap',
-            // A heavier shadow at larger sizes keeps headings legible where they
-            // cross a bright ray or a wave.
-            textShadow: scale >= 1.4 ? '0 1px 4px rgba(0,0,0,0.85)' : '0 0 3px rgba(0,0,0,0.6)',
+            // A halo in the SURFACE's colour, not a fixed black one: the shadow
+            // exists to separate a label from a ray or a wave crossing behind
+            // it, and a black glow around dark text on a light panel does the
+            // opposite of that.
+            textShadow: theme === 'light'
+              ? (scale >= 1.4 ? '0 1px 4px rgba(255,255,255,0.95)' : '0 0 3px rgba(255,255,255,0.9)')
+              : (scale >= 1.4 ? '0 1px 4px rgba(0,0,0,0.85)' : '0 0 3px rgba(0,0,0,0.6)'),
           }}>
             {obj.text}
           </span>
@@ -95,7 +105,7 @@ function renderObject(obj: SceneObject, key: number) {
       return (
         <group key={key}>
           {(obj.points ?? []).map((p, i) => (
-            <MolecularNode3D key={i} position={p} radius={obj.radius ?? 0.06} color={obj.color ?? '#FFD166'} />
+            <MolecularNode3D key={i} position={p} radius={obj.radius ?? 0.06} color={color ?? '#FFD166'} />
           ))}
         </group>
       )
@@ -105,7 +115,7 @@ function renderObject(obj: SceneObject, key: number) {
           key={key}
           from={obj.from ?? [0, 0, 0]}
           to={obj.to ?? [1, 0, 0]}
-          color={obj.color ?? '#9aa4b2'}
+          color={color ?? '#9aa4b2'}
           thickness={obj.thickness ?? 0.04}
         />
       )
@@ -122,6 +132,11 @@ interface SceneSpecRendererProps {
 }
 
 export function SceneSpecRenderer({ spec, revealStep = Infinity }: SceneSpecRendererProps) {
+  // Read HERE, not inside the scene graph: <Canvas> mounts its own React
+  // reconciler root, and app context does not cross that boundary. renderObject
+  // is a plain call made during this component's render, so the value is
+  // captured on the DOM side and every object below is already resolved.
+  const { theme } = useTheme()
   const objects = visibleObjects(spec, revealStep)
   return (
     <ThreeDVisual
@@ -129,7 +144,7 @@ export function SceneSpecRenderer({ spec, revealStep = Infinity }: SceneSpecRend
       cameraDistance={spec.cameraDistance ?? 7}
       ariaLabel={spec.ariaLabel ?? spec.title}
     >
-      <group>{objects.map((obj, i) => renderObject(obj, i))}</group>
+      <group>{objects.map((obj, i) => renderObject(obj, i, theme))}</group>
     </ThreeDVisual>
   )
 }
