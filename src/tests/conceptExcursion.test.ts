@@ -405,9 +405,11 @@ describe('the EXCURSION DIRECTIVE is independent of the visual contract', () => 
       lessonTitle: 'SI Units and Measurement',
     })
     expect(directive).toMatch(/PAUSED, NOT REPLACED/)
-    expect(directive).toMatch(/doubts/i)
-    expect(directive).toMatch(/do NOT open, anchor, or illustrate this turn with/i)
-    expect(directive).toMatch(/only when they.*satisfied/i)
+    expect(directive).toMatch(/ask whether they still have a doubt/i)
+    expect(directive).toMatch(/Do NOT teach, open, anchor, illustrate or ask a question belonging to/i)
+    expect(directive).toMatch(/ONLY a clear statement of understanding from the learner ends this/i)
+    // A doubt is not an ending — the production failure this wording closes.
+    expect(directive).toMatch(/CONFUSION DOES NOT END THIS/i)
   })
 
   it('it is empty on an ordinary lesson turn', () => {

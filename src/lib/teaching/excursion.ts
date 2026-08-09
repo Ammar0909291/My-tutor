@@ -325,16 +325,34 @@ export function buildExcursionDirective(input: {
 
   return (
     `\n\n${opening} ` +
-    `THE LESSON ${lesson} IS PAUSED, NOT REPLACED — the learner has not left it and their ` +
-    'progress in it is untouched. ' +
+    `THE LEARNER IS CURRENTLY LEARNING ${target}. THE LESSON ${lesson} IS PAUSED, ` +
+    'NOT REPLACED — the learner has not left it and their progress in it is ' +
+    'untouched. ' +
+    // THIS OVERRIDE CLAUSE IS LOAD-BEARING. Blocks above this one are written
+    // for an ordinary lesson turn and several of them name the lesson as the
+    // thing to teach, resume or wrap up. Read together with a confused learner
+    // they produced, in production, "we'll come back to this concept later"
+    // and "next time we will return to our lesson on scalar and vector
+    // quantities" — about a concept the learner had asked for and was still
+    // asking about.
+    'THIS BLOCK OVERRIDES every instruction above it that tells you to return ' +
+    `to, continue, resume, wrap up, close or forecast ${lesson}, however it is ` +
+    'worded. Where they disagree with this block, this block wins. ' +
     'RULES: (1) Teach ' + target + ' directly and properly, at the same standard as ' +
     'any lesson content — this is real teaching, not a two-line aside. ' +
-    '(2) Do NOT open, anchor, or illustrate this turn with ' + lesson + ', and do NOT ' +
-    'steer back to it mid-explanation. (3) After explaining, ask whether they have ' +
-    'any doubts about ' + target + ' specifically. (4) If they raise a doubt, stay ' +
-    'here and re-explain differently — the lesson keeps waiting. (5) Only when they ' +
-    'signal they are satisfied, offer to go back to ' + lesson + ' — offer it, do not ' +
-    'force it. (6) Any figure attached to this response belongs to ' + target + '; ' +
+    '(2) Do NOT teach, open, anchor, illustrate or ask a question belonging to ' +
+    lesson + ' this turn, and do NOT steer back to it mid-explanation. It may be ' +
+    'named ONLY as the paused destination you will return to later. ' +
+    '(3) After explaining, ask whether they still have a doubt about ' + target + '. ' +
+    '(4) CONFUSION DOES NOT END THIS. If they say they do not understand, are ' +
+    'confused, or still do not get it — however many times — that is a reason to ' +
+    'teach ' + target + ' AGAIN with a different representation, never a reason to ' +
+    'leave it. Do NOT defer, postpone or park it, do NOT promise it for another ' +
+    'day or another session, do NOT wrap the session up, and do NOT pivot to the ' +
+    'lesson or to a simpler point of the lesson. Re-explain, then ask again. ' +
+    '(5) ONLY a clear statement of understanding from the learner ends this. When ' +
+    'that comes, offer to go back to ' + lesson + ' — offer it, do not force it. ' +
+    '(6) Any figure attached to this response belongs to ' + target + '; ' +
     'follow the VISUAL CONTRACT for it if one is present. ' +
     '(7) The lesson is NOT finished and cannot finish this turn: do NOT emit ' +
     '[LESSON_COMPLETE], do NOT write a lesson-closing summary, and do NOT ' +

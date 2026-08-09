@@ -533,7 +533,37 @@ export function isDontKnowSignal(key: FailureStateKey | null): boolean {
  * further). Optional with default false so pre-existing callers keep their
  * exact prior behavior.
  */
-export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean, sessionFailureCount = 0, preDemonstration = false): string {
+export interface RecoveryScopeOptions {
+  /**
+   * The title of the concept an OFF-LESSON EXCURSION is currently teaching
+   * (`teaching/excursion.ts`), or null/absent on an ordinary lesson turn.
+   *
+   * WHY RECOVERY NEEDS THIS. Recovery owns HOW to answer distress, and that
+   * is untouched. But two of its escalation rungs also answer a question that
+   * is NOT theirs — WHICH concept to teach next: "we'll come back to this and
+   * move to a simpler related point" (2+ failures) and "close this concept for
+   * today ... return to it next session" (4+). On a lesson turn those are
+   * correct. Mid-excursion they are the exact opposite of correct, and were
+   * observed in production reading, verbatim, as:
+   *
+   *   learner: "I still don't understand it"
+   *   tutor:   "I hear you ... let's pause on that for today. Next time, we
+   *             will return to our lesson on scalar and vector quantities."
+   *
+   * The learner had asked for that side concept two turns earlier and was
+   * still asking. Confusion about a thing you asked to learn is a reason to
+   * TEACH IT AGAIN, never a reason to take it away.
+   */
+  excursionTargetTitle?: string | null
+}
+
+export function buildRecoveryBlock(
+  key: FailureStateKey,
+  isFirstLesson: boolean,
+  sessionFailureCount = 0,
+  preDemonstration = false,
+  scope?: RecoveryScopeOptions,
+): string {
   const script = SCRIPTS[key]
   const body = (isFirstLesson && script.lessonOne) ? script.lessonOne
     : (preDemonstration && script.preDemonstration) ? script.preDemonstration
@@ -552,8 +582,33 @@ export function buildRecoveryBlock(key: FailureStateKey, isFirstLesson: boolean,
   // words as the first. S1's V-REC-REPEAT (kernel/verifier/history.ts) is
   // the detector that would have caught a violation of this; this rung is
   // the source-side fix that makes the violation structurally rarer.
+  // MID-EXCURSION the rungs keep escalating VARIETY but may never escalate
+  // to abandonment: the concept the learner asked for is not the runtime's to
+  // withdraw. The affect law is untouched — still validate, still shrink,
+  // still no new content, still no question-answering-a-question.
+  const excursionTarget = scope?.excursionTargetTitle?.trim() || null
   let escalation = ''
-  if (sessionFailureCount >= 4) {
+  if (excursionTarget) {
+    const target = `"${excursionTarget}"`
+    escalation =
+      `\n- STAY ON ${target.toUpperCase()} (an off-lesson question the learner ` +
+      'asked for is open — see the EXCURSION DIRECTIVE): being confused about ' +
+      'it is a reason to teach it again, NOT a reason to leave it. Do NOT ' +
+      'defer, postpone or park it, do NOT promise it for another day or another ' +
+      'session, do NOT wrap up the session, and do NOT pivot to the paused ' +
+      'lesson or to any of its points.\n' +
+      `- Change representation again — a different concrete example, a different ` +
+      `everyday object, a smaller piece of ${target} — then ask whether they ` +
+      'still have a doubt about it. Only the learner saying they understand ' +
+      'ends this, and until then the answer to confusion is another explanation.'
+    if (sessionFailureCount >= 2) {
+      escalation +=
+        '\n- REPEATED STRUGGLE (2+ this session): do not reuse any wording, ' +
+        'example or analogy already used for it. Shrink to the single smallest ' +
+        'piece that can be shown, and show it — no questions this turn beyond ' +
+        'the doubt check above.'
+    }
+  } else if (sessionFailureCount >= 4) {
     escalation =
       '\n- AFFECT BUDGET EXHAUSTED (4+ failures this session): Close this concept ' +
       'for today. Acknowledge the struggle warmly, tell the learner you will return ' +

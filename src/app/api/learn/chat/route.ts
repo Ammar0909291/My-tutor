@@ -484,6 +484,8 @@ export async function POST(req: Request) {
     // all far below this block — read the same single answer the prompt side
     // used, instead of each re-deriving it (or, as before, not knowing at all).
     let excursionActiveHoisted = false
+    /** Title of the excursion's target concept, or null on an ordinary turn. */
+    let excursionTeachingTitleHoisted: string | null = null
     let conceptPreviouslyMasteredHoisted = false
     // Library Mode duplication cleanup: this used to be set from
     // spacedRevision.ts's per-turn revision block (removed — see the
@@ -1811,6 +1813,74 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           phase: firstLessonPhase,
         })
 
+        // ── OFF-LESSON CONCEPT EXCURSION — decided FIRST ─────────────────
+        // Placed ahead of the session-lifecycle and prompt blocks below
+        // because they must all know whether the lesson is paused. It used to
+        // sit further down, next to the visual resolver, which is why the
+        // SESSION CLOSE block (injected here, above it) could still order the
+        // tutor to wrap the session up mid-excursion.
+        const excursionLessonConceptId =
+          libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
+        const excursionPriorAskedQuestion = await (async () => {
+          try {
+            const { readConversationState } = await import('@/lib/teaching/conversationState')
+            const prior = readConversationState(snapshot?.conversationState, excursionLessonConceptId)
+            return (prior.questionsAskedSinceTeach ?? 0) > 0
+          } catch { return false }
+        })()
+        // ── OFF-LESSON CONCEPT EXCURSION ──────────────────────────────────
+        // TWO IDENTITIES, decided here, before anything reads either:
+        //
+        //   convConceptId          — the curriculum LESSON. Owns progress.
+        //   teachingTargetConceptId — what this turn TEACHES.
+        //
+        // They are the same value on an ordinary turn. They diverge when the
+        // learner explicitly asks about another concept ("explain viscosity")
+        // while sitting in a lesson: the Teaching Engine opens an excursion,
+        // the turn teaches the requested concept, and the lesson is PAUSED —
+        // StudentProgress, activeLessonSlug, TopicProgress and mastery are
+        // all keyed to convConceptId and are untouched by any of this.
+        //
+        // Before this, one variable meant both things, so a learner's own
+        // question could never become the turn's subject: the request was
+        // resolved (if at all) inside the visual layer and discarded.
+        const { resolveRequestedConceptId } = await import('@/lib/teaching/concept/requestedConcept')
+        const { parseExcursionState, decideExcursion, buildExcursionDirective } =
+          await import('@/lib/teaching/excursion')
+        const requestedConceptIdThisTurn = resolveRequestedConceptId(message, excursionLessonConceptId, subjectCode)
+        const excursionDecision = decideExcursion({
+          state: parseExcursionState(
+            (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
+          ),
+          message,
+          lessonConceptId: excursionLessonConceptId,
+          requestedConceptId: requestedConceptIdThisTurn,
+          lastAssistantAskedQuestion: excursionPriorAskedQuestion,
+        })
+        excursionDecisionHoisted = excursionDecision
+        const teachingTargetConceptId = excursionDecision.targetConceptId ?? excursionLessonConceptId
+        console.log('[excursion]', {
+          lesson: excursionLessonConceptId,
+          target: teachingTargetConceptId,
+          requested: requestedConceptIdThisTurn,
+          transition: excursionDecision.transition,
+          active: excursionDecision.state.active,
+          returnTo: excursionDecision.returnToConceptId,
+          turns: excursionDecision.state.turns,
+        })
+        // ONE attribution question, asked once. Everything that would credit
+        // THIS turn to the lesson — the phase/mastery ladder, the
+        // TopicProgress checkpoint, the completion gate — reads this rather
+        // than re-deciding. See excursion.ts's turnCountsForLesson().
+        const { turnCountsForLesson } = await import('@/lib/teaching/excursion')
+        const lessonTurnForLesson = turnCountsForLesson(excursionDecision)
+        excursionActiveHoisted = !lessonTurnForLesson
+        // The title of what this turn actually teaches. Null unless an
+        // excursion is open, so ordinary turns keep the lesson's own title.
+        excursionTeachingTitleHoisted = excursionDecision.state.active
+          ? ((await import('@/lib/curriculum/knowledgeGraph')).getKGNode(teachingTargetConceptId ?? '')?.title ?? null)
+          : null
+
         // Session lifecycle (07 §8): boundary measured from real message
         // timestamps — the newest loaded message predates this turn's user
         // insert, so the gap is genuine learner inactivity, never LLM-claimed.
@@ -1872,9 +1942,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 previousLessonTitle: studentProgress?.lastLessonTitle ?? null,
               } : null,
             })
-          } else if (sessionEpisodeHoisted.phase === 'CLOSING') {
+          } else if (sessionEpisodeHoisted.phase === 'CLOSING' && !excursionActiveHoisted) {
             // Affect budget spent earlier this session (07 §6): the close
             // instruction holds until a boundary resets the episode.
+            //
+            // NOT while an excursion is open. This block orders the tutor to
+            // stop and "forecast the next session", and mid-excursion that
+            // rendered in production as "let's pause on that for today — next
+            // time we will return to our lesson on scalar and vector
+            // quantities", while the learner was still asking about the side
+            // concept they had requested. The protection is DEFERRED, not
+            // removed: the episode stays CLOSING, so the close fires on the
+            // first lesson turn after the excursion ends.
             systemPrompt += buildAffectCloseBlock()
           }
         }
@@ -1976,54 +2055,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const convConceptId = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
 
-          // ── OFF-LESSON CONCEPT EXCURSION ──────────────────────────────────
-          // TWO IDENTITIES, decided here, before anything reads either:
-          //
-          //   convConceptId          — the curriculum LESSON. Owns progress.
-          //   teachingTargetConceptId — what this turn TEACHES.
-          //
-          // They are the same value on an ordinary turn. They diverge when the
-          // learner explicitly asks about another concept ("explain viscosity")
-          // while sitting in a lesson: the Teaching Engine opens an excursion,
-          // the turn teaches the requested concept, and the lesson is PAUSED —
-          // StudentProgress, activeLessonSlug, TopicProgress and mastery are
-          // all keyed to convConceptId and are untouched by any of this.
-          //
-          // Before this, one variable meant both things, so a learner's own
-          // question could never become the turn's subject: the request was
-          // resolved (if at all) inside the visual layer and discarded.
-          const { resolveRequestedConceptId } = await import('@/lib/teaching/concept/requestedConcept')
-          const { parseExcursionState, decideExcursion, buildExcursionDirective } =
-            await import('@/lib/teaching/excursion')
-          const requestedConceptIdThisTurn = resolveRequestedConceptId(message, convConceptId, subjectCode)
-          const excursionDecision = decideExcursion({
-            state: parseExcursionState(
-              (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
-            ),
-            message,
-            lessonConceptId: convConceptId,
-            requestedConceptId: requestedConceptIdThisTurn,
-            lastAssistantAskedQuestion:
-              (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
-          })
-          excursionDecisionHoisted = excursionDecision
-          const teachingTargetConceptId = excursionDecision.targetConceptId ?? convConceptId
-          console.log('[excursion]', {
-            lesson: convConceptId,
-            target: teachingTargetConceptId,
-            requested: requestedConceptIdThisTurn,
-            transition: excursionDecision.transition,
-            active: excursionDecision.state.active,
-            returnTo: excursionDecision.returnToConceptId,
-            turns: excursionDecision.state.turns,
-          })
-          // ONE attribution question, asked once. Everything that would credit
-          // THIS turn to the lesson — the phase/mastery ladder, the
-          // TopicProgress checkpoint, the completion gate — reads this rather
-          // than re-deciding. See excursion.ts's turnCountsForLesson().
-          const { turnCountsForLesson } = await import('@/lib/teaching/excursion')
-          const lessonTurnHoistedLocal = turnCountsForLesson(excursionDecision)
-          excursionActiveHoisted = !lessonTurnHoistedLocal
 
           // S2 (Runtime Redesign Mission Part 5): objective state resets on
           // the same conceptId change conversationState does — one
@@ -2345,11 +2376,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // One detection, two consumers: the turn directive below and the
           // conversation-state fold after the LLM call.
           lowSignalAckHoisted = isLowSignalAcknowledgement(message)
-          // The title of whatever this turn is actually teaching. Null unless
-          // an excursion is open, so ordinary turns keep the lesson's title.
-          const excursionTeachingTitle = excursionDecision.state.active
-            ? ((await import('@/lib/curriculum/knowledgeGraph')).getKGNode(teachingTargetConceptId ?? '')?.title ?? null)
-            : null
           systemPrompt += buildTurnDirective({
             state: conversationStateHoisted,
             nextMove,
@@ -2387,7 +2413,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // 'SI Units and Measurement' itself" in the middle of a viscosity
             // explanation — the directive and the learner's own question
             // pulling in opposite directions inside one prompt.
-            lessonTitle: excursionTeachingTitle ?? lessonCtx?.lessonTitle ?? null,
+            lessonTitle: excursionTeachingTitleHoisted ?? lessonCtx?.lessonTitle ?? null,
             // Bug 2: flag bare acknowledgements so the directive forces a
             // concrete check question rather than a repeat of the same prose.
             lowSignalAcknowledgement: lowSignalAckHoisted,
@@ -2410,19 +2436,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 conversationStateHoisted, prevSig, recoveryKeyHoisted !== null, navigationRequestHoisted,
               )
             })(),
-          })
-          // THE EXCURSION DIRECTIVE — injected AFTER the turn directive so it
-          // governs the turn's subject, and independently of the VISUAL
-          // CONTRACT so an excursion works for the ~99% of concepts that have
-          // no authored figure. Empty string on an ordinary turn.
-          systemPrompt += buildExcursionDirective({
-            decision: excursionDecision,
-            targetTitle: excursionTeachingTitle
-              ?? (await import('@/lib/curriculum/knowledgeGraph')).getKGNode(
-                excursionDecision.state.targetConceptId ?? '',
-              )?.title
-              ?? null,
-            lessonTitle: lessonCtx?.lessonTitle ?? null,
           })
           if (learnerRequestHoisted) {
             const hasEstablishedExample =
@@ -2490,6 +2503,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           systemPrompt += buildRecoveryBlock(
             recoveryKeyHoisted, firstLessonActiveHoisted, snapshotSessionFailureCount,
             conversationStateHoisted?.demonstrated !== true,
+            // Recovery still owns HOW to answer distress and still preempts
+            // every teaching instruction. It must not also decide to abandon
+            // a concept the learner asked for — see RecoveryScopeOptions.
+            { excursionTargetTitle: excursionTeachingTitleHoisted },
           )
         }
 
@@ -2506,6 +2523,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           systemPrompt += buildSignalRepairBlock()
           signalRepairFiredHoisted = true
         }
+
+        // THE EXCURSION DIRECTIVE — injected LAST, after RECOVERY.
+        //
+        // Ordering is the fix, not a preference. RECOVERY declares itself
+        // "PREEMPTS EVERYTHING ABOVE", and the excursion directive used to sit
+        // above it — so on the two turns that matter most (a learner voicing
+        // confusion about the concept they asked for) the last word the model
+        // read was an instruction to shrink, defer and pivot away.
+        //
+        // The two blocks answer different questions and both keep their
+        // authority: RECOVERY still owns HOW to respond to distress (validate,
+        // shrink, no new content, no question), and this owns WHICH concept
+        // that response is about. Nothing here softens the affect band.
+        //
+        // It is also independent of the VISUAL CONTRACT, so an excursion works
+        // for the ~99% of concepts that have no authored figure.
+        systemPrompt += buildExcursionDirective({
+          decision: excursionDecision,
+          targetTitle: excursionTeachingTitleHoisted
+            ?? (await import('@/lib/curriculum/knowledgeGraph')).getKGNode(
+              excursionDecision.state.targetConceptId ?? '',
+            )?.title
+            ?? null,
+          lessonTitle: lessonCtx?.lessonTitle ?? null,
+        })
       } catch (err) {
         console.warn('[learn/chat] wave-0 brain blocks skipped:', err)
       }
@@ -3998,7 +4040,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // frozen. Synthesize a false-signal failure event here so the
         // session lifecycle advances toward CLOSING at the same rate as
         // a learner-signaled failure would.
-        if (sessionEpisodeHoisted) {
+        // `!excursionActiveHoisted`: the same attribution boundary the ladder
+        // and the completion gate use. A learner working through a concept
+        // THEY asked for is not in a failure spiral on the lesson, and
+        // spending the lesson session's affect budget on their side-question
+        // doubts is what drove the episode to CLOSING and produced "let's
+        // pause on that for today". The budget is not disabled — excursion
+        // doubts simply do not pay into the paused lesson's arc.
+        if (sessionEpisodeHoisted && !excursionActiveHoisted) {
           try {
             const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
             const syntheticSignal = { correctness: false as const, confidence: undefined, confusion: true }
@@ -4213,9 +4262,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               episodeUpdate = { sessionEpisode: sessionEpisodeHoisted }
             } else {
               const { applySignalToEpisode } = await import('@/lib/teaching/sessionLifecycle')
-              const nextEpisode = applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
-                isFirstLesson: firstLessonActiveHoisted,
-              })
+              // Same boundary as the synthetic recovery failure above: a wrong
+              // answer about the side concept is not a failure on the paused
+              // lesson, so it does not spend that session's affect budget.
+              const nextEpisode = excursionActiveHoisted
+                ? sessionEpisodeHoisted
+                : applySignalToEpisode(sessionEpisodeHoisted, teachingSignal, {
+                    isFirstLesson: firstLessonActiveHoisted,
+                  })
               if (sessionEpisodeFreshHoisted || nextEpisode !== sessionEpisodeHoisted) {
                 episodeUpdate = { sessionEpisode: nextEpisode }
               }
