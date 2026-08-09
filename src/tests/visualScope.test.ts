@@ -128,17 +128,28 @@ describe('the three acceptable states, and nothing else', () => {
     }
   })
 
-  it('the historical failures still receive no figure at all', () => {
+  it('the historical failures now receive their OWN concept figure', () => {
+    // These seven had no asset through M1-M3; the M4 pilot authored one for each.
+    // What must never change is that whatever they receive belongs to them and
+    // is not a general illustration standing in for a concept figure.
     for (const id of [
       'phys.opt.total-internal-reflection', 'phys.therm.calorimetry',
       'phys.wave.interference', 'phys.mech.viscosity', 'phys.therm.first-law',
       'phys.wave.transverse-waves', 'phys.mech.surface-tension',
     ]) {
       const d = ask(id)
-      expect(d.graphical, id).toBe(false)
-      expect(d.asset, id).toBeNull()
-      expect(buildVisualContractBlock(d), id).toContain('NO FIGURE IS ATTACHED')
+      expect(d.graphical, id).toBe(true)
+      expect(d.asset!.conceptId, id).toBe(id)
+      expect(d.asset!.scope, id).toBe('concept')
+      expect(buildVisualContractBlock(d), id).not.toContain('NO FIGURE IS ATTACHED')
     }
+  })
+
+  it('a concept that genuinely has no asset still receives no figure', () => {
+    const d = ask('phys.mech.kinetic-energy')
+    expect(d.graphical).toBe(false)
+    expect(d.asset).toBeNull()
+    expect(buildVisualContractBlock(d)).toContain('NO FIGURE IS ATTACHED')
   })
 
   it('a retired binding is still not a domain illustration in disguise', () => {
@@ -158,7 +169,7 @@ describe('the critical invariant', () => {
       'phys.mech.newtons-first-law', 'phys.opt.mirrors', 'phys.em.ohms-law',
       'math.calc.limits', 'math.geom.circle-theorems', 'math.arith.long-division',
       'phys.therm.carnot-cycle', 'phys.opt.refraction', 'bio.cell.mitosis',
-      'phys.opt.total-internal-reflection', 'bio.cell.apoptosis',
+      'phys.mech.kinetic-energy', 'bio.cell.apoptosis',
     ]
     for (const id of sample) {
       const d = ask(id)

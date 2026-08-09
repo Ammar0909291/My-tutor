@@ -65,15 +65,20 @@ const HIJACK_CASES = [
   },
 ] as const
 
-/** Concepts Phase 0 measured as NO FIGURE under the authority. */
+/**
+ * Concepts that genuinely have no asset today.
+ *
+ * This list used to be the seven Phase 0 cases. The M4 Physics pilot authored a
+ * real figure for each of those, so they no longer demonstrate the no-asset
+ * path — these do. The invariant under test is unchanged: a concept with no
+ * asset gets no figure, however the request is phrased.
+ */
 const NO_ASSET_CONCEPTS = [
-  'phys.opt.total-internal-reflection',
-  'phys.therm.calorimetry',
-  'phys.therm.first-law',
-  'phys.wave.transverse-waves',
-  'phys.mech.viscosity',
-  'phys.mech.surface-tension',
-  'phys.wave.interference',
+  'phys.mech.kinetic-energy',
+  'phys.mech.potential-energy',
+  'phys.mech.power',
+  'phys.meas.errors',
+  'phys.mech.escape-velocity',
 ] as const
 
 describe('the prose routers still misroute — which is why they are not authorities', () => {
@@ -86,18 +91,28 @@ describe('the prose routers still misroute — which is why they are not authori
 })
 
 describe('prose can no longer reach the learner', () => {
-  it.each(HIJACK_CASES)('$label: the authority declines regardless of prose', ({ concept, prose }) => {
+  it.each(HIJACK_CASES)('$label: prose never selects the figure', ({ concept, prose }) => {
     // The learner's own message is the only text the authority reads, and it
-    // reads it to identify a CONCEPT, never to pick a picture. Feeding it the
-    // exact prose that hijacked the old pipelines must not produce a figure.
+    // reads it to identify a CONCEPT, never to pick a picture.
+    //
+    // Until M4 these concepts had no asset, so the assertion was simply "no
+    // figure". They now have authored figures, which makes the test STRONGER:
+    // feeding the exact prose that used to hijack the old pipelines must still
+    // yield THIS concept's own figure, never the one the prose routes to.
     const decision = resolveVisual({
       message: prose,
       lessonConceptId: concept,
       subject: 'physics',
       learnerRequest: 'diagram',
     })
-    expect(decision.graphical).toBe(false)
-    expect(decision.payload).toBeNull()
+    expect(decision.asset?.conceptId).toBe(concept)
+    expect(decision.asset?.scope).toBe('concept')
+    // Byte-identical to the figure the same concept gets from a neutral request:
+    // the prose changed nothing at all.
+    const neutral = resolveVisual({
+      message: 'explain this', lessonConceptId: concept, subject: 'physics',
+    })
+    expect(decision.payload).toEqual(neutral.payload)
   })
 
   it.each(NO_ASSET_CONCEPTS)('%s asks for a diagram and honestly gets none', async (concept) => {
@@ -138,25 +153,28 @@ describe('curated assets are untouched by M1', () => {
     expect(decision.provenance).toBe('generator:phys.opt.mirrors:ray_optics')
   })
 
-  it('the ray_optics scene belongs to Spherical Mirrors and not to its neighbour', () => {
-    // The optics concepts sit next to each other in the KG and only one has a
-    // faithful asset. That asymmetry must stay visible rather than being
-    // papered over by giving the neighbour the same figure.
-    const tir = resolveVisual({
-      message: 'explain with diagram',
-      lessonConceptId: 'phys.opt.total-internal-reflection',
-      subject: 'physics',
-      learnerRequest: 'diagram',
+  it('the mirror scene stays with Spherical Mirrors and never leaks to its neighbour', () => {
+    // Both optics concepts now have a figure. They must not be the SAME figure:
+    // serving the concave-mirror image construction for total internal
+    // reflection is the original defect this whole programme started from.
+    const mirrors = resolveVisual({
+      message: 'explain with diagram', lessonConceptId: 'phys.opt.mirrors',
+      subject: 'physics', learnerRequest: 'diagram',
     })
-    expect(tir.payload).toBeNull()
+    const tir = resolveVisual({
+      message: 'explain with diagram', lessonConceptId: 'phys.opt.total-internal-reflection',
+      subject: 'physics', learnerRequest: 'diagram',
+    })
+    expect(tir.asset?.conceptId).toBe('phys.opt.total-internal-reflection')
+    expect(tir.payload).not.toEqual(mirrors.payload)
   })
 })
 
 describe('the no-figure contract', () => {
   it('a declining decision tells the tutor the screen is empty', () => {
     const decision = resolveVisual({
-      message: 'explain total internal reflection with a ray diagram',
-      lessonConceptId: 'phys.opt.total-internal-reflection',
+      message: 'explain kinetic energy with a ray diagram',
+      lessonConceptId: 'phys.mech.kinetic-energy',
       subject: 'physics',
       learnerRequest: 'diagram',
     })
@@ -172,7 +190,7 @@ describe('the no-figure contract', () => {
     // This is the M1 fail-closed path: route.ts turns a thrown resolver into
     // this decision instead of into four prose-keyword pipelines.
     const errored = {
-      ...noFigureDecision('resolver-error', 'phys.opt.total-internal-reflection', null, 'explain' as const),
+      ...noFigureDecision('resolver-error', 'phys.mech.kinetic-energy', null, 'explain' as const),
       continuityReason: 'resolver-error',
       session: null,
     }
@@ -182,7 +200,7 @@ describe('the no-figure contract', () => {
 
     const declined = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.opt.total-internal-reflection',
+      lessonConceptId: 'phys.mech.kinetic-energy',
       subject: 'physics',
       learnerRequest: 'diagram',
     })

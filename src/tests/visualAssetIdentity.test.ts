@@ -293,9 +293,10 @@ describe('derived identity is visible and counted', () => {
 
 describe('G/H. the tutor is told about the admitted asset, or about nothing', () => {
   it('no admitted asset yields the NO FIGURE contract', () => {
+    // Assetless fixture: TIR gained an authored figure in the M4 pilot.
     const d = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.opt.total-internal-reflection',
+      lessonConceptId: 'phys.mech.kinetic-energy',
       subject: 'physics',
       learnerRequest: 'diagram',
     })

@@ -37,6 +37,11 @@ import { buildCircuitScene } from '@/lib/teaching/sceneGenerators/electricCircui
 import { buildKinematicsGraphScene } from '@/lib/teaching/sceneGenerators/kinematicsGraphs'
 import { buildTorqueScene } from '@/lib/teaching/sceneGenerators/torqueDiagram'
 import { buildGravitationOrbitScene } from '@/lib/teaching/sceneGenerators/gravitationOrbit'
+import {
+  buildCalorimetryScene, buildFirstLawScene, buildSurfaceTensionScene,
+  buildTotalInternalReflectionScene, buildTransverseWaveScene,
+  buildViscosityScene, buildWaveInterferenceScene,
+} from '@/lib/teaching/sceneGenerators/physicsPilot'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildCoordinateGeometryLineScene } from '@/lib/teaching/sceneGenerators/coordinateGeometryLine'
 import { buildHeightsAndDistancesScene } from '@/lib/teaching/sceneGenerators/heightsAndDistances'
@@ -219,6 +224,22 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     centralMass: 5.97e24,
     orbitRadius: 4.2164e7,
   }),
+
+  // ── M4 Physics visual authoring pilot ────────────────────────────────────
+  // The seven concepts the visualization programme started from. Each had NO
+  // figure — correctly, since the only figures ever offered for them were
+  // keyword-matched from the tutor's prose (a concave mirror for total internal
+  // reflection, a two-cart collision for calorimetry, a projectile parabola for
+  // viscosity) and M1 removed that path. These are authored replacements: plain
+  // SceneSpecs built only from primitives SceneSpecRenderer paints, resolved
+  // through the same registry -> admission -> contract path as everything else.
+  'phys.opt.total-internal-reflection': buildTotalInternalReflectionScene,
+  'phys.wave.transverse-waves':         buildTransverseWaveScene,
+  'phys.wave.interference':             buildWaveInterferenceScene,
+  'phys.therm.calorimetry':             buildCalorimetryScene,
+  'phys.therm.first-law':               buildFirstLawScene,
+  'phys.mech.viscosity':                buildViscosityScene,
+  'phys.mech.surface-tension':          buildSurfaceTensionScene,
 }
 
 /**

@@ -20,7 +20,13 @@ import { parseVisualSession } from '@/lib/teaching/visual/session'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
-const CALORIMETRY = 'phys.therm.calorimetry'
+// M4 note: the engine fixture concept must have NO curated asset, or the
+// resolver never reaches the engine. It was phys.therm.calorimetry until the
+// M4 Physics pilot authored a real figure for that concept; it is now
+// phys.mech.kinetic-energy, which is still genuinely assetless. The scene
+// fixtures below were re-vocabularised to match, since the engine's anchor
+// check compares the scene's own labels with the concept's KG text.
+const CALORIMETRY = 'phys.mech.kinetic-energy'
 const PROJECTILE = 'phys.mech.projectile-motion'   // curated generator
 const DIM = 'phys.meas.dimensional-analysis'
 
@@ -32,17 +38,17 @@ const ctxFor = (conceptId: string) => {
   }
 }
 
-/** A scene that genuinely depicts calorimetry — accepted when authorized. */
+/** A scene that genuinely depicts kinetic energy — accepted when authorized. */
 const calorimetryScene = (): SceneSpec => ({
-  id: 'gen', title: 'Calorimetry: heat between two bodies', sceneType: 'diagram',
-  teachingGoal: 'Show heat flowing until both reach one temperature.',
+  id: 'gen', title: 'Kinetic energy of a moving mass', sceneType: 'diagram',
+  teachingGoal: 'Show how kinetic energy grows with speed.',
   steps: [
-    { narration: 'A hot body meets a cold body.', objects: [
-      { type: 'node', position: [-2, 0, 0], text: 'hot body' },
-      { type: 'node', position: [2, 0, 0], text: 'cold body' },
+    { narration: 'A mass moves with some velocity.', objects: [
+      { type: 'node', position: [-2, 0, 0], text: 'moving mass — kinetic energy' },
+      { type: 'node', position: [2, 0, 0], text: 'faster mass — more kinetic energy' },
     ] },
-    { narration: 'Heat flows until they are equal.', objects: [
-      { type: 'arrow', from: [-1, 0, 0], to: [1, 0, 0], text: 'heat exchange' },
+    { narration: 'Kinetic energy grows with the square of velocity.', objects: [
+      { type: 'arrow', from: [-1, 0, 0], to: [1, 0, 0], text: 'velocity v' },
     ] },
   ],
 })

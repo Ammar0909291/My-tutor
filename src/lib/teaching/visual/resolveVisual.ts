@@ -214,7 +214,18 @@ function buildDecision(
           : `generator:kind-default:${generatorKind}`,
         conceptId: ctx.conceptId,
         conceptTitle: ctx.title,
-        representation: representationForVisualType(getConceptVisualType(ctx.conceptId) ?? 'number_line'),
+        // The representation names the KIND of figure. Prefer the concept's own
+        // registry visual type when it has one; otherwise read it off the scene
+        // the generator actually produced. It used to fall back to a hardcoded
+        // 'number_line', which was harmless while every generator-bound concept
+        // also had a registry row — and would have introduced the M4 pilot's
+        // ray diagrams and wave figures to the tutor as number lines.
+        representation: (() => {
+          const registryVisual = getConceptVisualType(ctx.conceptId)
+          return registryVisual
+            ? representationForVisualType(registryVisual)
+            : representationForSceneType(generatedScene.sceneType)
+        })(),
         payload: { renderer: 'scene', sceneSpec: generatedScene },
         provenance,
       }),

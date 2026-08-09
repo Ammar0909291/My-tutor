@@ -9,6 +9,11 @@ import { extractSteps, extractKeyTerms, extractComparisonPair } from '@/lib/teac
 import { parseVisualSpec } from '@/lib/visuals/visualSpec'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 
+// M4 note: this fixture concept must have NO asset. It was phys.therm.calorimetry
+// until the M4 Physics pilot authored a real figure for that concept; it is now
+// phys.mech.kinetic-energy, which is still genuinely assetless. The invariants
+// under test are unchanged.
+
 const SUBJECTS = ['mathematics', 'physics', 'chemistry', 'biology', 'computer_science', 'english'] as const
 
 function allConcepts() {
@@ -27,7 +32,7 @@ function allConcepts() {
 // the product has produced. Guaranteeing a figure for all 1,775 concepts meant
 // substituting one when nothing faithful existed:
 //
-//   phys.therm.calorimetry         -> "3D Data Visualization" stock card
+//   phys.mech.kinetic-energy         -> "3D Data Visualization" stock card
 //   eng.phonics.phonemic-awareness -> "Wave Function psi(x)" (a child learning
 //                                     letter sounds, shown a quantum wavefunction)
 //   phys.opt.reflection            -> "Geometry Shapes", while the tutor
@@ -61,7 +66,7 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
     // Calorimetry has no curated binding and no generator. It used to receive
     // the "3D Data Visualization" card. It must now receive nothing at all.
     const d = resolveVisual({
-      message: '', lessonConceptId: 'phys.therm.calorimetry',
+      message: '', lessonConceptId: 'phys.mech.kinetic-energy',
       subject: 'physics', learnerRequest: 'diagram',
     })
     expect(d.payload).toBeNull()
@@ -109,7 +114,7 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
 // ── determinism ──────────────────────────────────────────────────────────────
 describe('Visual Resolver V2 — determinism', () => {
   it('returns byte-identical decisions across repeated calls', () => {
-    const input = { message: 'teach me vectors with a diagram', lessonConceptId: 'phys.therm.calorimetry', subject: 'physics' as const }
+    const input = { message: 'teach me vectors with a diagram', lessonConceptId: 'phys.mech.kinetic-energy', subject: 'physics' as const }
     const first = JSON.stringify(resolveVisual(input))
     for (let i = 0; i < 25; i++) expect(JSON.stringify(resolveVisual(input))).toBe(first)
   })
@@ -128,20 +133,20 @@ describe('Visual Resolver V2 — concept excursions', () => {
   it('draws the concept the learner NAMED, not the lesson they are sitting in', () => {
     const d = resolveVisual({
       message: 'Teach me vectors with diagram.',
-      lessonConceptId: 'phys.therm.calorimetry',
+      lessonConceptId: 'phys.mech.kinetic-energy',
       subject: 'physics',
       learnerRequest: 'diagram',
     })
     expect(d.excursion).toBe(true)
     expect(d.graphical).toBe(true)
     expect(d.representation).toBe('vector')
-    expect(d.conceptId).not.toBe('phys.therm.calorimetry')
+    expect(d.conceptId).not.toBe('phys.mech.kinetic-energy')
   })
 
   it('handles the noun form "visualization" identically to "diagram"', () => {
     const d = resolveVisual({
       message: 'Explain me vector with visualization',
-      lessonConceptId: 'phys.therm.calorimetry',
+      lessonConceptId: 'phys.mech.kinetic-energy',
       learnerRequest: 'diagram',
     })
     expect(d.representation).toBe('vector')
@@ -151,11 +156,11 @@ describe('Visual Resolver V2 — concept excursions', () => {
   it('stays on the lesson concept when the learner names nothing', () => {
     const d = resolveVisual({
       message: 'explain this again please',
-      lessonConceptId: 'phys.therm.calorimetry',
+      lessonConceptId: 'phys.mech.kinetic-energy',
       learnerRequest: 'explain_differently',
     })
     expect(d.excursion).toBe(false)
-    expect(d.conceptId).toBe('phys.therm.calorimetry')
+    expect(d.conceptId).toBe('phys.mech.kinetic-energy')
     // Calorimetry has no faithful figure, so none is attached — the assertion
     // that matters here is that the TARGET did not move, not that a picture
     // appeared.
@@ -163,9 +168,9 @@ describe('Visual Resolver V2 — concept excursions', () => {
   })
 
   it('target resolution reports its origin honestly', () => {
-    const learner = resolveVisualTarget('what is a triangle', 'phys.therm.calorimetry')
+    const learner = resolveVisualTarget('what is a triangle', 'phys.mech.kinetic-energy')
     expect(learner?.origin).toBe('learner-request')
-    const lesson = resolveVisualTarget('ok thanks', 'phys.therm.calorimetry')
+    const lesson = resolveVisualTarget('ok thanks', 'phys.mech.kinetic-energy')
     expect(lesson?.origin).toBe('lesson-concept')
   })
 })
@@ -186,7 +191,7 @@ describe('Visual Resolver V2 — the no-figure contract', () => {
   })
 
   it('a concept with no curated visual and no generator returns no figure', () => {
-    const d = resolveVisual({ message: '', lessonConceptId: 'phys.therm.calorimetry', learnerRequest: 'diagram' })
+    const d = resolveVisual({ message: '', lessonConceptId: 'phys.mech.kinetic-energy', learnerRequest: 'diagram' })
     expect(d.source).toBe('none')
     expect(d.graphical).toBe(false)
     expect(d.payload).toBeNull()
@@ -194,7 +199,7 @@ describe('Visual Resolver V2 — the no-figure contract', () => {
 
   it('the contract NEVER claims a figure when none is attached', () => {
     for (const d of [
-      resolveVisual({ message: '', lessonConceptId: 'phys.therm.calorimetry', learnerRequest: 'diagram' }),
+      resolveVisual({ message: '', lessonConceptId: 'phys.mech.kinetic-energy', learnerRequest: 'diagram' }),
       resolveVisual({ message: 'tell me a joke about pirates', lessonConceptId: null }),
     ]) {
       const block = buildVisualContractBlock(d)

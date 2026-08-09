@@ -27,7 +27,13 @@ import type { ArchetypeContext } from '@/lib/teaching/visual/archetypes'
 
 // ── fixtures ─────────────────────────────────────────────────────────────────
 
-const CALORIMETRY = 'phys.therm.calorimetry'      // no curated visual
+// M4 note: the engine fixture concept must have NO curated asset, or the
+// resolver never reaches the engine. It was phys.therm.calorimetry until the
+// M4 Physics pilot authored a real figure for that concept; it is now
+// phys.mech.kinetic-energy, which is still genuinely assetless. The scene
+// fixtures below were re-vocabularised to match, since the engine's anchor
+// check compares the scene's own labels with the concept's KG text.
+const CALORIMETRY = 'phys.mech.kinetic-energy'          // no curated visual
 const PROJECTILE  = 'phys.mech.projectile-motion' // canonical generator
 const NEWTON2     = 'phys.mech.newtons-second-law'// curated card
 const PHONICS     = 'eng.phonics.phonemic-awareness'
@@ -41,17 +47,17 @@ const ctxFor = (conceptId: string): ArchetypeContext => {
   }
 }
 
-/** A scene that genuinely depicts calorimetry, in its own vocabulary. */
+/** A scene that genuinely depicts kinetic energy, in its own vocabulary. */
 const faithfulCalorimetryScene = (): SceneSpec => ({
-  id: 'gen-calorimetry', title: 'Calorimetry: heat transferred between two bodies',
-  sceneType: 'diagram', teachingGoal: 'Show heat flowing until both reach one temperature.',
+  id: 'gen-kinetic-energy', title: 'Kinetic energy of a moving mass',
+  sceneType: 'diagram', teachingGoal: 'Show how kinetic energy grows with speed.',
   steps: [
-    { narration: 'A hot body and a cold body are placed in contact.', objects: [
-      { type: 'node', position: [-2, 0, 0], text: 'hot body' },
-      { type: 'node', position: [2, 0, 0], text: 'cold body' },
+    { narration: 'A mass moves with some velocity.', objects: [
+      { type: 'node', position: [-2, 0, 0], text: 'moving mass — kinetic energy' },
+      { type: 'node', position: [2, 0, 0], text: 'faster mass — more kinetic energy' },
     ] },
-    { narration: 'Heat flows from hot to cold until the temperature is equal.', objects: [
-      { type: 'arrow', from: [-1.5, 0, 0], to: [1.5, 0, 0], text: 'heat Q' },
+    { narration: 'Kinetic energy depends on the square of the velocity.', objects: [
+      { type: 'arrow', from: [-1.5, 0, 0], to: [1.5, 0, 0], text: 'velocity v' },
     ] },
   ],
 })
@@ -259,8 +265,8 @@ describe('payload and contract invariants hold in both directions', () => {
     )
     const block = buildVisualContractBlock(accepted)
     expect(block).toContain('ALREADY BEING RENDERED')
-    expect(block).toContain('hot body')          // a label that is really drawn
-    expect(block).toContain('heat Q')
+    expect(block).toContain('moving mass')       // a label that is really drawn
+    expect(block).toContain('velocity v')
 
     const rejected = await resolveVisualForTurn(
       { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
@@ -405,7 +411,11 @@ describe('malformed payloads and legacy isolation', () => {
 // computed only over the labels of objects the renderer actually paints.
 
 describe('the semantic gate anchors on what is DRAWN, not what is SAID', () => {
-  const ctx = ctxFor(CALORIMETRY)
+  // validateGeneratedScene is pure — it compares a scene against a concept
+  // context and never consults the registry — so this block keeps using
+  // calorimetry's own vocabulary even though that concept now has a curated
+  // figure and no longer reaches the engine in production.
+  const ctx = ctxFor('phys.therm.calorimetry')
   const scene = (objects: unknown[], extra: Partial<SceneSpec> = {}): SceneSpec => ({
     id: 's', title: 'Calorimetry', sceneType: 'diagram',
     steps: [{ narration: 'Calorimetry in action.', objects: objects as never }],

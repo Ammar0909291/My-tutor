@@ -105,9 +105,10 @@ describe('B2 changed nothing else', () => {
     }
   })
 
-  it('only two overrides were added', () => {
-    // 5 pre-existing (reflection, mirrors, inelastic, meiosis, dihybrid) + 2.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(7)
+  it('B2 added exactly its two overrides', () => {
+    // 5 pre-existing (reflection, mirrors, inelastic, meiosis, dihybrid)
+    // + 2 from B2 + 7 from the M4 Physics pilot = 14.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(14)
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.mech.satellites')
   })

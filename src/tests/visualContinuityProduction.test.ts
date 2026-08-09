@@ -9,7 +9,12 @@ import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import { parseVisualSession } from '@/lib/teaching/visual/session'
 import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
 
-const CALORIMETRY = 'phys.therm.calorimetry'
+// M4 note: this fixture concept must have NO asset. It was phys.therm.calorimetry
+// until the M4 Physics pilot authored a real figure for that concept; it is now
+// phys.mech.kinetic-energy, which is still genuinely assetless. The invariants
+// under test are unchanged.
+
+const CALORIMETRY = 'phys.mech.kinetic-energy'
 // The subject-local reading rule (2026-08-08) changed WHICH vector concept a
 // physics learner reaches: "vector" from a physics lesson now resolves to
 // physics' own Scalar and Vector Quantities — which carries the real vector
