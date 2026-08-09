@@ -186,6 +186,39 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
   // thing, so no scene is produced and the concept's card is used instead.
   'bio.gen.dihybrid-cross': () => null,
+
+  // ── M3-B stage B2: kind-defaults split into the concept's own case ────────
+  // Both reuse an existing generator with different parameters. No generator
+  // was modified and no new geometry was written; the cases the audit found
+  // that DO need new geometry are recorded as "requires authoring" instead of
+  // being approximated here.
+
+  // Kirchhoff's laws were drawn as the kind default: a SERIES loop of two
+  // resistors. A series loop has no junction, so KCL — current in equals
+  // current out at a node — cannot be demonstrated on it at all. The parallel
+  // configuration has junctions, and the generator already narrates the total
+  // current "split across the branches", which is the current law itself.
+  // (phys.em.dc-circuits keeps the series default: it is the concept's other
+  // half, and the two now draw genuinely different circuits.)
+  'phys.em.kirchhoffs-laws': () => buildCircuitScene({
+    components: [
+      { type: 'resistor', value: 10, unit: 'ohm' },
+      { type: 'resistor', value: 20, unit: 'ohm' },
+    ],
+    connection: 'parallel',
+    voltage: 12,
+  }),
+
+  // "Artificial Satellites and Geostationary Orbits" was drawn at the generator's
+  // default 7,000 km radius — a low Earth orbit with a 97-minute period, which is
+  // the one orbit a geostationary satellite is not in. Using the real
+  // geostationary radius makes the generator derive T ≈ 23.9 h (the sidereal
+  // day) from v = sqrt(GM/r), so the defining property of the concept is what
+  // the figure actually shows.
+  'phys.mech.satellites': () => buildGravitationOrbitScene({
+    centralMass: 5.97e24,
+    orbitRadius: 4.2164e7,
+  }),
 }
 
 /**
