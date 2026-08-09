@@ -26,30 +26,88 @@ import { clamp } from './conceptText'
 export interface VisualSemantics {
   /** One-line truthful description of the figure as a whole. */
   caption: string | null
-  /** Named things the learner can literally see (labels, plotted curve, …). */
+  /**
+   * Named things the learner can literally see. Kept for callers that want one
+   * flat list; it is `readable` followed by `geometry`.
+   */
   elements: string[]
+  /**
+   * TEXT THE LEARNER CAN READ — every label the renderer will draw, verbatim.
+   *
+   * Separated from geometry because it is the highest-value grounding there is
+   * and it was being crowded out: one flat 8-item budget, filled in object
+   * order, spent its slots on unlabelled shapes and dropped the labels that
+   * carry the teaching. Total Internal Reflection kept "① θ < θc" and lost
+   * "② θ = θc", "③ θ > θc", "grazes the surface" and "all reflected back" —
+   * i.e. the model was told about one of the three cases the figure exists to
+   * contrast, which is exactly the case-confusion the grounding gates forbid.
+   */
+  readable: string[]
+  /** Shapes with no text of their own, summarised by kind and count. */
+  geometry: string[]
+  /**
+   * Relationships written ON the figure (anything containing "="), lifted out
+   * so the contract can ask for them in words instead of read as characters.
+   */
+  equations: string[]
   /** Authored step narrations, in reveal order. Empty when not stepped. */
   steps: string[]
 }
 
-const EMPTY: VisualSemantics = { caption: null, elements: [], steps: [] }
+const EMPTY: VisualSemantics = {
+  caption: null, elements: [], readable: [], geometry: [], equations: [], steps: [],
+}
 
-const MAX_ELEMENTS = 8
+/** Labels are the teaching; every one of them earns a slot before geometry. */
+const MAX_READABLE = 14
+const MAX_GEOMETRY = 5
 const MAX_STEPS = 6
 
-/** Human-readable noun for a scene object, used only when it carries no text. */
+/**
+ * Human-readable noun for a scene object that carries no text of its own.
+ *
+ * NAMES THE SHAPE, NEVER ITS MEANING. `bond` used to read "a bond between two
+ * atoms", which is true only in a chemistry scene — the renderer draws the same
+ * plain cylinder for a plate, a boundary, an axis or a hatch mark. Production,
+ * 2026-08-09, viscosity figure: the tutor opened with "we can see the text
+ * label labelled \"THICK\" alongside a bond between two atoms", verbatim from
+ * this table, in a figure about fluid shearing that contains no atoms at all.
+ * The viscosity scene has 26 of these (plates and layer lines) and total
+ * internal reflection has 15 (the boundary and its hatching).
+ *
+ * A neutral shape noun is true in every scene, so it can never invent physics;
+ * what a line MEANS reaches the model through the label beside it and through
+ * the authored narration, both of which are real data.
+ */
 const OBJECT_NOUN: Record<SceneObject['type'], string> = {
   point: 'a marked point',
-  particle: 'a particle',
-  node: 'a node',
-  vector: 'an arrow (vector)',
+  particle: 'a small round marker',
+  node: 'a marked point',
+  vector: 'an arrow',
   arrow: 'an arrow',
-  bond: 'a bond between two atoms',
+  bond: 'a straight line',
   label: 'a text label',
-  path: 'a traced path',
-  trajectory: 'a traced trajectory',
+  path: 'a plotted curve',
+  trajectory: 'a plotted curve',
   bar: 'a bar',
   surface: 'a surface',
+}
+
+/** Plural form for the geometry summary, so counts read naturally. */
+const OBJECT_PLURAL: Partial<Record<SceneObject['type'], string>> = {
+  point: 'marked points',
+  particle: 'small round markers',
+  node: 'marked points',
+  vector: 'arrows',
+  arrow: 'arrows',
+  bond: 'straight lines',
+  path: 'plotted curves',
+  trajectory: 'plotted curves',
+}
+
+/** Does this label state a relationship rather than name a thing? */
+function isEquation(text: string): boolean {
+  return /[=∝]/.test(text)
 }
 
 /** Objects the SceneSpecRenderer actually draws — `bar`/`surface` are skipped. */
@@ -70,19 +128,38 @@ function dedupe(values: string[]): string[] {
 }
 
 function fromScene(spec: SceneSpec): VisualSemantics {
-  const elements: string[] = []
+  // Read the drawn objects once, splitting text from shape. Both halves come
+  // from the payload the renderer will paint — nothing here is inferred.
+  const texts: string[] = []
+  const equations: string[] = []
+  const shapeCounts = new Map<SceneObject['type'], number>()
+
   for (const step of spec.steps ?? []) {
     for (const obj of step.objects ?? []) {
       // Never describe something the renderer will not draw.
       if (!DRAWN.has(obj.type)) continue
       const text = typeof obj.text === 'string' ? obj.text.trim() : ''
-      elements.push(
-        text
-          ? `${OBJECT_NOUN[obj.type]} labelled "${clamp(text, 40)}"`
-          : OBJECT_NOUN[obj.type],
-      )
+      if (text) {
+        // A label's TEXT is what the learner reads, whatever shape carries it.
+        // EVERY label goes into `texts`, including the relationships: pulling
+        // an equation OUT of the readable list cost total internal reflection
+        // its middle case ("② θ = θc" contains "="), leaving the model with
+        // cases ① and ③ and a gap where the critical angle should be.
+        // `equations` is an ADDITIONAL view of the same labels, never a move.
+        texts.push(clamp(text, 60))
+        if (isEquation(text)) equations.push(clamp(text, 60))
+      } else {
+        shapeCounts.set(obj.type, (shapeCounts.get(obj.type) ?? 0) + 1)
+      }
     }
   }
+
+  const readable = dedupe(texts).slice(0, MAX_READABLE)
+  const geometry = [...shapeCounts.entries()]
+    // Densest shapes first: what dominates the picture is what a learner sees.
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, MAX_GEOMETRY)
+    .map(([type, n]) => (n === 1 ? OBJECT_NOUN[type] : `${n} ${OBJECT_PLURAL[type] ?? OBJECT_NOUN[type]}`))
 
   const steps = dedupe(
     (spec.steps ?? [])
@@ -91,12 +168,18 @@ function fromScene(spec: SceneSpec): VisualSemantics {
   ).slice(0, MAX_STEPS)
 
   const caption = spec.teachingGoal?.trim()
-    ? `${clamp(spec.title, 60)} — ${clamp(spec.teachingGoal.trim(), 120)}`
+    ? `${clamp(spec.title, 60)} — ${clamp(spec.teachingGoal.trim(), 160)}`
     : clamp(spec.title, 60)
 
   return {
     caption: caption || null,
-    elements: dedupe(elements).slice(0, MAX_ELEMENTS),
+    elements: [
+      ...readable.map((t) => `text reading "${t}"`),
+      ...geometry,
+    ],
+    readable,
+    geometry,
+    equations: dedupe(equations).slice(0, 3),
     // A one-step scene is not "stepped"; saying so would invite the model to
     // announce stages that do not exist.
     steps: sceneStepCount(spec) > 1 ? steps : [],
@@ -147,7 +230,8 @@ function fromSpec(spec: VisualSpec): VisualSemantics {
     }
   }
 
-  return { caption, elements: dedupe(elements).slice(0, MAX_ELEMENTS), steps: [] }
+  const flat = dedupe(elements).slice(0, MAX_READABLE)
+  return { caption, elements: flat, readable: [], geometry: flat, equations: [], steps: [] }
 }
 
 /**
@@ -162,7 +246,11 @@ export function describeVisualPayload(payload: VisualPayload | null | undefined)
     case 'card': {
       const meta = VISUAL_META[payload.visualType]
       if (!meta) return EMPTY
-      return { caption: clamp(meta.title, 60), elements: [clamp(meta.description, 160)], steps: [] }
+      const described = [clamp(meta.description, 160)]
+      return {
+        caption: clamp(meta.title, 60), elements: described,
+        readable: [], geometry: described, equations: [], steps: [],
+      }
     }
     default: return EMPTY
   }
@@ -175,18 +263,54 @@ export function describeVisualPayload(payload: VisualPayload | null | undefined)
 export function buildSemanticsBlock(semantics: VisualSemantics): string {
   const parts: string[] = []
   if (semantics.caption) parts.push(`The figure is: ${semantics.caption}.`)
-  if (semantics.elements.length) {
+
+  // ── WHAT IS PRESENT ────────────────────────────────────────────────────────
+  // Text first and complete: it is the only part of the figure a learner can
+  // quote back, and the part the tutor is most likely to invent.
+  if (semantics.readable.length) {
+    parts.push(
+      'TEXT WRITTEN ON THE FIGURE, exactly as the learner reads it: ' +
+      semantics.readable.map((t) => `"${t}"`).join(', ') +
+      '. Use these words when you point at parts of it.',
+    )
+  }
+  if (semantics.geometry.length) {
+    parts.push(
+      'Drawn without text of their own: ' + semantics.geometry.join(', ') +
+      '. These are shapes — what each one MEANS is given by the text beside it ' +
+      'and by the stages below, never by their shape alone.',
+    )
+  }
+  // The flat list stays, because it is what the contract's "name only these"
+  // rule points at, and callers with no readable/geometry split still work.
+  if (!semantics.readable.length && !semantics.geometry.length && semantics.elements.length) {
     parts.push(
       'It contains EXACTLY these elements, and nothing else you may name: ' +
       semantics.elements.map((e) => `- ${e}`).join(' ') + '.',
     )
   }
+
+  // ── RELATIONSHIPS WRITTEN ON IT ────────────────────────────────────────────
+  if (semantics.equations.length) {
+    parts.push(
+      'Written on the figure as a relationship: ' +
+      semantics.equations.map((e) => `"${e}"`).join(', ') +
+      '. SAY IT IN WORDS as you would to a learner, naming each quantity — ' +
+      'do not read the symbols or the punctuation out one by one, do not spell ' +
+      'out Greek letters as characters, and do not restate it as markup.',
+    )
+  }
+
+  // ── WHAT IT MEANS ──────────────────────────────────────────────────────────
+  // The authored narrations ARE the relationships. They are the only source of
+  // meaning in the payload, so they are quoted, never paraphrased into claims.
   if (semantics.steps.length) {
     parts.push(
       `It is built in ${semantics.steps.length} stages, shown complete but ` +
       'walkable one stage at a time by the learner: ' +
-      semantics.steps.map((s, i) => `(${i + 1}) ${clamp(s, 120)}`).join(' ') +
-      '. Teach it in that order, and invite them to walk the stages if they ' +
+      semantics.steps.map((s, i) => `(${i + 1}) ${clamp(s, 220)}`).join(' ') +
+      '. These stages are what the figure MEANS: teach it in that order, keep ' +
+      'each stage\'s claim intact, and invite them to walk the stages if they ' +
       'want to see it built up.',
     )
   }
