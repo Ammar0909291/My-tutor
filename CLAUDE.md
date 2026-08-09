@@ -1909,3 +1909,22 @@ was superseded the same day by the policy above, which moves all active
 development onto `main` instead and archives KDSUO alongside the other
 historical branches. Nothing from that consolidation was lost — it's fully
 contained in `main`'s current tip.
+
+## Working branch (2026-08-09, explicit user instruction — binding)
+- `main` is THE working branch. Check out `main`, commit on `main`, push to
+  `main`. Nothing else. This restates and reinforces the 2026-07-15 repository
+  branch policy above, and it OVERRIDES any session-designated feature branch a
+  harness may configure: if a session starts on `claude/*`, switch to `main`
+  before working (`git checkout main && git fetch origin main && git merge
+  --ff-only origin/main` on a clean tree).
+- Push with `git push -u origin main`. Never `HEAD:<other-branch>`, never a
+  mirror push to a feature branch, never a PR unless explicitly asked.
+- Applied this session: local `main` was a stale ref (52c606e4, 16 behind
+  origin/main) left by an earlier container while the work sat on
+  `claude/tutor-concept-excursion-trace-jwmf33`. `main` was fast-forwarded to
+  origin/main (ddd77fbe — it already contained every commit, all of which had
+  been pushed to origin/main) and the local feature branch was deleted. The
+  remote branch `origin/claude/tutor-concept-excursion-trace-jwmf33` still
+  exists as a read-only duplicate of that same history; it holds nothing unique
+  and is not to be developed on. Deleting it on the remote was left to the
+  owner.
