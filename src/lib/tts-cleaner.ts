@@ -59,6 +59,7 @@ const CURRENCY_NAMES: Record<string, string> = {
 }
 
 import { speakifyIpaNotation } from '@/lib/text/ipaToSpeech'
+import { speakifyMathNotation } from '@/lib/text/latexToSpeech'
 
 // Greek letters → spoken names. Ordered so uppercase entries come first
 // (Sigma before sigma) to avoid an uppercase char being caught by a shorter
@@ -114,6 +115,14 @@ function pluralize(value: string, singular: string): string {
 
 export function cleanTextForTTS(text: string): string {
   let t = text
+  // MATHEMATICAL NOTATION FIRST. LaTeX is the one input class this cleaner had
+  // no rule for at all, so "$F = \\eta A \\frac{dv}{dy}$" reached the speech
+  // provider with its dollar signs, backslash commands and braces intact.
+  // Runs BEFORE everything below because it converts TeX into ordinary text —
+  // Greek names, "over", "squared" — which the existing Unicode and symbol
+  // rules then handle exactly as they always have. Ordinary prose is returned
+  // untouched: every rule in that module is anchored to a TeX construct.
+  t = speakifyMathNotation(t)
   // P0 (Lesson Flow sprint, item 6): IPA transcriptions ("/kæt/", connected
   // speech like "/aɪ æm ˈɡoʊɪŋ tə ðə stɔːr/") used to be silently DELETED
   // here via stripIpaNotation() — a phonics lesson teaching a pronunciation
@@ -258,7 +267,13 @@ export function cleanTextForTTS(text: string): string {
   }
 
   // Math and comparison symbols — multi-character forms before single-character ones
-  t = t.replace(/−/g, '-') // normalize unicode minus to ascii hyphen
+  // U+2212 MINUS SIGN is unambiguously arithmetic — unlike the ASCII hyphen it
+  // is never a word-joiner or a dash — so it is SPOKEN rather than folded into
+  // "-" and then dropped by the voice. The first law is written "ΔU = Q − W"
+  // with this character; folding it left "Delta U equals Q W", which states a
+  // different physical relationship. An ASCII hyphen keeps its old, cautious
+  // handling below (digits only).
+  t = t.replace(/\s*−\s*/g, ' minus ')
   // Arrows split two ways, because they do two unrelated jobs in this app.
   //
   // A PRESENTATIONAL PIPELINE — the lesson roadmap, "Intuition -> Explanation
