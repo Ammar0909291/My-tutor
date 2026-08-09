@@ -106,14 +106,110 @@ export const CONCEPT_ALIASES: Readonly<Record<string, readonly string[]>> = {
   'bio.mol.dna-replication': ['dna copying'],
 }
 
+// ── Compound titles ───────────────────────────────────────────────────────
+//
+// THE DEFECT THIS CLOSES (production, physics lesson "SI Units and
+// Measurement"):
+//
+//   learner: "explain Viscosity diagram"
+//   resolved: nothing
+//
+// The concept is phys.mech.viscosity, titled "Viscosity and Stokes' Law". Every
+// match path above needs either the WHOLE title, an alias, or a title HEAD —
+// and titleHead() only splits on a gloss separator (— – - :), which a
+// conjunction is not. So the learner's own word for the concept could not
+// reach it, the turn stayed on the lesson, and the authored figure was never
+// requested. 341 of the 1,775 canonical titles are compound in exactly this
+// way ("Surface Tension and Capillarity", "Total Internal Reflection and
+// Critical Angle").
+//
+// The rule below is the narrowest thing that fixes the class, and it is NOT
+// substring matching: a title is split on conjunctions only, and a conjunct is
+// admitted ONLY when it names exactly one concept in the entire corpus.
+//
+//   • multi-word conjunct  -> admitted when exactly one concept owns it
+//   • single-word conjunct -> admitted when the word occurs in exactly ONE
+//     title in the whole corpus (document frequency 1)
+//
+// The single-word floor is what keeps ordinary topic vocabulary out. Measured
+// against the live KGs: "viscosity" (df 1) and "capillarity" (df 1) are
+// admitted; "energy" (df 19, from "Relativistic Momentum and Energy"),
+// "addition" (df 10), "multiplication" (df 8) and "measurement" (df 3) are all
+// rejected — each would otherwise have hijacked an unrelated request.
+//
+// Ranked at 0.8, below NORMALIZED_TITLE, so a concept whose FULL title is the
+// phrase always wins: "reflection" still resolves to math.geom.reflection, not
+// to the conjunct inside phys.opt.reflection.
+
+/** Conjunction/list separators. Deliberately not a general phrase splitter. */
+const TITLE_CONJUNCTION = /\s+and\s+|\s+or\s+|\s*&\s*|\s*,\s*|\s*\/\s*/i
+
+/** Split a compound title into its conjuncts; empty when it is not compound. */
+function titleConjuncts(title: string): string[] {
+  const parts = title.split(TITLE_CONJUNCTION).map(p => p.trim()).filter(p => p.length > 0)
+  return parts.length > 1 ? parts : []
+}
+
+/**
+ * Derive each entry's unambiguous title conjuncts. Corpus-wide by
+ * construction — the ambiguity test cannot be made per-entry, which is why
+ * this lives in the index builder and not in the matcher.
+ */
+export function deriveTitleComponents(
+  entries: readonly ConceptIndexEntry[],
+): ReadonlyMap<string, readonly string[]> {
+  // Document frequency: how many titles contain each significant token.
+  const docFreq = new Map<string, number>()
+  for (const e of entries) {
+    for (const token of new Set(normalizeToTokens(e.title))) {
+      docFreq.set(token, (docFreq.get(token) ?? 0) + 1)
+    }
+  }
+
+  // Ownership: which concepts claim each conjunct.
+  const owners = new Map<string, Set<string>>()
+  const candidates = new Map<string, string[]>()
+  for (const e of entries) {
+    const fullKey = normalizeKey(e.title)
+    for (const part of titleConjuncts(e.title)) {
+      const key = normalizeKey(part)
+      // A conjunct that normalizes away (stop words only) or that reproduces
+      // the whole title carries no new reach.
+      if (!key || key === fullKey) continue
+      if (!owners.has(key)) owners.set(key, new Set())
+      owners.get(key)!.add(e.conceptId)
+      const list = candidates.get(e.conceptId) ?? []
+      if (!list.includes(part)) list.push(part)
+      candidates.set(e.conceptId, list)
+    }
+  }
+
+  const out = new Map<string, readonly string[]>()
+  for (const [conceptId, parts] of candidates) {
+    const kept = parts.filter(part => {
+      const key = normalizeKey(part)
+      const claimants = owners.get(key)
+      if (!claimants || claimants.size !== 1) return false      // ambiguous conjunct
+      const tokens = normalizeToTokens(part).filter(t => !STOP_WORDS.has(t))
+      if (tokens.length === 0) return false
+      if (tokens.length === 1) return (docFreq.get(tokens[0]) ?? 0) === 1 // generic-word floor
+      return true
+    })
+    if (kept.length > 0) out.set(conceptId, kept)
+  }
+  return out
+}
+
 /**
  * Build a searchable index from raw entries. Pure — this is the form used by
  * tests and by any caller that already has concept records in hand.
  */
 export function buildConceptIndex(entries: readonly ConceptIndexEntry[]): readonly ConceptIndexEntry[] {
+  const components = deriveTitleComponents(entries)
   return entries.map(e => ({
     ...e,
     aliases: [...(e.aliases ?? []), ...(CONCEPT_ALIASES[e.conceptId] ?? [])],
+    components: [...(e.components ?? []), ...(components.get(e.conceptId) ?? [])],
   }))
 }
 
@@ -236,6 +332,21 @@ export function resolveConceptMatches(
         && (headTokens.length > 1 || focusedMessage)) {
         candidates.push({ method: ExtractionMethod.NORMALIZED_TITLE, text: head, tokens: headTokens.length })
       }
+    }
+
+    // 4c. An unambiguous conjunct of a compound title ("Viscosity" inside
+    //     "Viscosity and Stokes' Law"). Subject to the SAME specificity floor
+    //     as a one-word title: admitted only in a short, focused message.
+    for (const component of entry.components ?? []) {
+      const componentTokens = normalizeToTokens(component)
+      if (componentTokens.length === 0) continue
+      if (!containsTokenRun(messageTokens, componentTokens)) continue
+      if (componentTokens.length === 1 && !focusedMessage) continue
+      candidates.push({
+        method: ExtractionMethod.TITLE_COMPONENT,
+        text: component,
+        tokens: componentTokens.length,
+      })
     }
 
     // 5. Acronym, only when written in caps by the student.

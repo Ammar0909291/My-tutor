@@ -26,6 +26,14 @@ export const ExtractionMethod = {
   ALIAS: 'ALIAS',
   /** Matched after normalization (case, punctuation, possessives, plurals). */
   NORMALIZED_TITLE: 'NORMALIZED_TITLE',
+  /**
+   * Matched a CONJUNCT of a compound KG title — "Viscosity" inside
+   * "Viscosity and Stokes' Law". Admitted only for conjuncts that name
+   * exactly one concept in the whole corpus; see `deriveTitleComponents()`.
+   * Ranked BELOW a full title so a concept whose whole title is the phrase
+   * always outranks a concept that merely contains it.
+   */
+  TITLE_COMPONENT: 'TITLE_COMPONENT',
   /** Matched an uppercase acronym derived from a multi-word title. */
   ACRONYM: 'ACRONYM',
   /** No concept named; resolved from the conversation context supplied. */
@@ -44,6 +52,7 @@ export const METHOD_CONFIDENCE: Readonly<Record<ExtractionMethod, number>> = {
   EXACT_TITLE: 0.95,
   ALIAS: 0.9,
   NORMALIZED_TITLE: 0.85,
+  TITLE_COMPONENT: 0.8,
   ACRONYM: 0.7,
   CONVERSATION_REFERENCE: 0.6,
   LESSON_CONTEXT: 0.5,
@@ -60,6 +69,12 @@ export interface ConceptIndexEntry {
   subject: string
   /** Additional surface forms that should resolve to this concept. */
   aliases?: readonly string[]
+  /**
+   * Conjuncts of a compound title that name THIS concept unambiguously across
+   * the whole corpus. Derived by `buildConceptIndex()` — never authored, never
+   * read from the KG. Empty for the large majority of concepts.
+   */
+  components?: readonly string[]
 }
 
 /** A single resolved mention of a concept in the message. */
