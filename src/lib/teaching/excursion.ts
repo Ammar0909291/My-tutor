@@ -226,6 +226,39 @@ function none(lessonConceptId: string | null): ExcursionDecision {
   }
 }
 
+/**
+ * DOES THIS TURN'S EVIDENCE BELONG TO THE LESSON?
+ *
+ * The single attribution question, asked once per turn and answered in one
+ * place. While an excursion is open the answer is NO: the learner is answering
+ * questions about the side concept, so crediting those answers to the lesson's
+ * ladder is a category error — and it was a load-bearing one. The lesson's
+ * mastery counters are what the completion gate reads, so an excursion turn
+ * could manufacture the very evidence that "finished" the lesson the learner
+ * had stepped away from, while the side concept's figure was still on screen.
+ *
+ * Everything downstream of this reads one boolean rather than re-deciding:
+ *
+ *   false -> the lesson's conversation state is FROZEN (no phase advance, no
+ *            mastery credit), its TopicProgress checkpoint is not written, and
+ *            completion is not authorized.
+ *   true  -> ordinary turn, every existing path behaves exactly as before.
+ *
+ * It says nothing about history: a lesson already completed before the
+ * excursion opened stays completed. This only governs what THIS turn may
+ * newly create.
+ */
+export function turnCountsForLesson(
+  decision: Pick<ExcursionDecision, 'state' | 'justClosed'>,
+): boolean {
+  // `justClosed` is included on purpose. The closing turn is the RETURN turn:
+  // the learner said "got it, thanks" and the tutor walks back to the lesson.
+  // A turn that resumes a lesson cannot also finish it — otherwise satisfaction
+  // with the side question would hand the lesson a completion it never earned,
+  // which is the same fabrication one turn later.
+  return !decision.state.active && !decision.justClosed
+}
+
 /** Narrow unknown JSONB back into an ExcursionState. */
 export function parseExcursionState(raw: unknown): ExcursionState {
   if (!raw || typeof raw !== 'object') return NO_EXCURSION
@@ -302,6 +335,11 @@ export function buildExcursionDirective(input: {
     'here and re-explain differently — the lesson keeps waiting. (5) Only when they ' +
     'signal they are satisfied, offer to go back to ' + lesson + ' — offer it, do not ' +
     'force it. (6) Any figure attached to this response belongs to ' + target + '; ' +
-    'follow the VISUAL CONTRACT for it if one is present.'
+    'follow the VISUAL CONTRACT for it if one is present. ' +
+    '(7) The lesson is NOT finished and cannot finish this turn: do NOT emit ' +
+    '[LESSON_COMPLETE], do NOT write a lesson-closing summary, and do NOT ' +
+    'congratulate the learner on completing ' + lesson + '. The server enforces ' +
+    'this regardless of what you emit — a completion tag on this turn is ' +
+    'stripped before the learner sees it.'
   )
 }

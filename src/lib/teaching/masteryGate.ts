@@ -120,6 +120,20 @@ export interface CompletionGateResult {
   suppressed: boolean
 }
 
+export interface CompletionGateOptions {
+  /**
+   * True when the Teaching Engine has an OFF-LESSON CONCEPT EXCURSION open
+   * (`teaching/excursion.ts`). The lesson is paused, so this turn cannot
+   * finish it — see the rule inside gateLessonCompletion.
+   *
+   * Optional and defaulting to false, so every existing caller keeps exactly
+   * its previous behaviour; only a caller that HAS excursion state can pause
+   * the gate, and a caller that forgets it fails toward the old, evidence-only
+   * behaviour rather than toward silently completing.
+   */
+  excursionActive?: boolean
+}
+
 const LESSON_COMPLETE_RE = /\s*\[LESSON_COMPLETE\]\s*/gi
 
 /**
@@ -132,10 +146,29 @@ const LESSON_COMPLETE_RE = /\s*\[LESSON_COMPLETE\]\s*/gi
 export function gateLessonCompletion(
   text: string,
   state: ConversationState | null,
+  opts?: CompletionGateOptions,
 ): CompletionGateResult {
   const hasTag = /\[LESSON_COMPLETE\]/i.test(text)
   if (!hasTag) return { cleanText: text, authorized: false, suppressed: false }
-  if (masteryVerifiedStrict(state)) {
+  // THE LESSON IS PAUSED, SO IT CANNOT FINISH.
+  //
+  // Production defect this closes: mid-excursion the learner said "I still
+  // don't understand it" and the app rendered "That's SI Units and Measurement
+  // finished — nice work" with the Viscosity figure still on screen. The tag
+  // was authorized because this gate reads ONE thing — the lesson concept's
+  // accumulated mastery counters — and had no idea a side question was open.
+  // Those counters are not evidence about THIS turn, and (before the
+  // attribution fix at the fold site) an excursion turn's own SIGNAL could
+  // even raise them, so a detour could manufacture the mastery that completed
+  // the lesson the learner had walked away from.
+  //
+  // Checked BEFORE the evidence test, so no amount of evidence overrides it,
+  // and it strips rather than passes — the client's completion PATCH is driven
+  // by this tag, so removing it prevents the StudentProgress/TopicProgress
+  // transition itself rather than hiding it. A lesson genuinely completed
+  // BEFORE the excursion opened is untouched: that completion is already
+  // persisted and nothing here rewrites it.
+  if (!opts?.excursionActive && masteryVerifiedStrict(state)) {
     return { cleanText: text, authorized: true, suppressed: false }
   }
   return {

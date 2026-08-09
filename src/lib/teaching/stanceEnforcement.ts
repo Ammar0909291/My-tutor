@@ -72,6 +72,14 @@ export interface StanceEnforcementInput {
    *  supply this same boolean in a future integration without changing
    *  this module's contract. */
   misconceptionActive: boolean
+  /**
+   * True when an off-lesson concept excursion is open this turn
+   * (`teaching/excursion.ts`). The lesson is PAUSED for completion purposes:
+   * a detour must never finish the lesson it detoured from. Forwarded to the
+   * existing gate rather than checked here, so completion authority stays in
+   * one function.
+   */
+  excursionActive?: boolean
 }
 
 /** Prose patterns claiming a misconception is resolved. Deliberately
@@ -96,12 +104,16 @@ export function enforceStance(input: StanceEnforcementInput): StanceVerdict {
   // requires mastery, not conversation completion" / "false mastery
   // cannot advance". Delegates entirely to the existing gate — this is
   // the SAME check, not a parallel one.
-  const completion = gateLessonCompletion(input.text, input.state)
+  const completion = gateLessonCompletion(input.text, input.state, {
+    excursionActive: input.excursionActive,
+  })
   const cleanText = completion.cleanText
   if (completion.suppressed) {
     violations.push({
       code: 'FALSE_MASTERY_COMPLETION',
-      detail: '[LESSON_COMPLETE] was emitted without verified mastery evidence (masteryVerified(state) === false) and was stripped',
+      detail: input.excursionActive
+        ? '[LESSON_COMPLETE] was emitted while an off-lesson concept excursion was open — the lesson is paused, not finished — and was stripped'
+        : '[LESSON_COMPLETE] was emitted without verified mastery evidence (masteryVerified(state) === false) and was stripped',
     })
   }
 

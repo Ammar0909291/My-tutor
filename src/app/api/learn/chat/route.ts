@@ -479,6 +479,11 @@ export async function POST(req: Request) {
     // owns the lifecycle; this carries its decision to the snapshot persist at
     // the end of the turn. Null when the excursion block never ran.
     let excursionDecisionHoisted: import('@/lib/teaching/excursion').ExcursionDecision | null = null
+    // THE LESSON IS PAUSED. Hoisted so the response-side attribution points —
+    // the state fold, the completion gate and the TopicProgress checkpoint,
+    // all far below this block — read the same single answer the prompt side
+    // used, instead of each re-deriving it (or, as before, not knowing at all).
+    let excursionActiveHoisted = false
     let conceptPreviouslyMasteredHoisted = false
     // Library Mode duplication cleanup: this used to be set from
     // spacedRevision.ts's per-turn revision block (removed — see the
@@ -1971,6 +1976,54 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const convConceptId = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
 
+          // ── OFF-LESSON CONCEPT EXCURSION ──────────────────────────────────
+          // TWO IDENTITIES, decided here, before anything reads either:
+          //
+          //   convConceptId          — the curriculum LESSON. Owns progress.
+          //   teachingTargetConceptId — what this turn TEACHES.
+          //
+          // They are the same value on an ordinary turn. They diverge when the
+          // learner explicitly asks about another concept ("explain viscosity")
+          // while sitting in a lesson: the Teaching Engine opens an excursion,
+          // the turn teaches the requested concept, and the lesson is PAUSED —
+          // StudentProgress, activeLessonSlug, TopicProgress and mastery are
+          // all keyed to convConceptId and are untouched by any of this.
+          //
+          // Before this, one variable meant both things, so a learner's own
+          // question could never become the turn's subject: the request was
+          // resolved (if at all) inside the visual layer and discarded.
+          const { resolveRequestedConceptId } = await import('@/lib/teaching/concept/requestedConcept')
+          const { parseExcursionState, decideExcursion, buildExcursionDirective } =
+            await import('@/lib/teaching/excursion')
+          const requestedConceptIdThisTurn = resolveRequestedConceptId(message, convConceptId, subjectCode)
+          const excursionDecision = decideExcursion({
+            state: parseExcursionState(
+              (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
+            ),
+            message,
+            lessonConceptId: convConceptId,
+            requestedConceptId: requestedConceptIdThisTurn,
+            lastAssistantAskedQuestion:
+              (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
+          })
+          excursionDecisionHoisted = excursionDecision
+          const teachingTargetConceptId = excursionDecision.targetConceptId ?? convConceptId
+          console.log('[excursion]', {
+            lesson: convConceptId,
+            target: teachingTargetConceptId,
+            requested: requestedConceptIdThisTurn,
+            transition: excursionDecision.transition,
+            active: excursionDecision.state.active,
+            returnTo: excursionDecision.returnToConceptId,
+            turns: excursionDecision.state.turns,
+          })
+          // ONE attribution question, asked once. Everything that would credit
+          // THIS turn to the lesson — the phase/mastery ladder, the
+          // TopicProgress checkpoint, the completion gate — reads this rather
+          // than re-deciding. See excursion.ts's turnCountsForLesson().
+          const { turnCountsForLesson } = await import('@/lib/teaching/excursion')
+          const lessonTurnHoistedLocal = turnCountsForLesson(excursionDecision)
+          excursionActiveHoisted = !lessonTurnHoistedLocal
 
           // S2 (Runtime Redesign Mission Part 5): objective state resets on
           // the same conceptId change conversationState does — one
@@ -1991,7 +2044,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // response-side gate strips it regardless). Never a silent skip.
           if (detectAutonomyRequest(message)) {
             evidenceAutonomyHoisted = true
-            if (masteryVerified(conversationStateHoisted)) {
+            // An open excursion pauses the lesson, so "move on" cannot mean
+            // "finish the lesson" this turn: both branches below invite
+            // [LESSON_COMPLETE] (buildAutonomyBlock outright, the narrative
+            // close as its precondition). The gate would strip the tag anyway
+            // — this stops the tutor from writing the closing summary that
+            // produced "That's SI Units and Measurement finished" on top of a
+            // Viscosity figure. The excursion directive already tells it what
+            // to do with the request.
+            if (excursionActiveHoisted) {
+              // nothing: the EXCURSION DIRECTIVE governs this turn.
+            } else if (masteryVerified(conversationStateHoisted)) {
               // Loop 2: even with mastery verified, if the narrative arc is
               // incomplete, inject a close block instead of full autonomy —
               // the tutor must circle back before concluding.
@@ -2005,7 +2068,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               systemPrompt += buildMasteryGateBlock()
               masteryGatePendingHoisted = true
             }
-          } else if (detectNavigationRequest(message)) {
+          } else if (detectNavigationRequest(message) && !excursionActiveHoisted) {
             // A.2: explicit navigation ("teach me about X", "go back to Y")
             // is acknowledged warmly; mastery-verified → auto-complete so
             // the system can navigate; otherwise note what's left.
@@ -2166,48 +2229,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // FAILS CLOSED. A throw is not a licence to guess: it yields the same
           // NO-FIGURE decision as an honest decline, so the learner sees text
           // and the tutor is told the screen is empty.
-          // ── OFF-LESSON CONCEPT EXCURSION ──────────────────────────────────
-          // TWO IDENTITIES, decided here, before anything reads either:
-          //
-          //   convConceptId          — the curriculum LESSON. Owns progress.
-          //   teachingTargetConceptId — what this turn TEACHES.
-          //
-          // They are the same value on an ordinary turn. They diverge when the
-          // learner explicitly asks about another concept ("explain viscosity")
-          // while sitting in a lesson: the Teaching Engine opens an excursion,
-          // the turn teaches the requested concept, and the lesson is PAUSED —
-          // StudentProgress, activeLessonSlug, TopicProgress and mastery are
-          // all keyed to convConceptId and are untouched by any of this.
-          //
-          // Before this, one variable meant both things, so a learner's own
-          // question could never become the turn's subject: the request was
-          // resolved (if at all) inside the visual layer and discarded.
-          const { resolveRequestedConceptId } = await import('@/lib/teaching/concept/requestedConcept')
-          const { parseExcursionState, decideExcursion, buildExcursionDirective } =
-            await import('@/lib/teaching/excursion')
-          const requestedConceptIdThisTurn = resolveRequestedConceptId(message, convConceptId, subjectCode)
-          const excursionDecision = decideExcursion({
-            state: parseExcursionState(
-              (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
-            ),
-            message,
-            lessonConceptId: convConceptId,
-            requestedConceptId: requestedConceptIdThisTurn,
-            lastAssistantAskedQuestion:
-              (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
-          })
-          excursionDecisionHoisted = excursionDecision
-          const teachingTargetConceptId = excursionDecision.targetConceptId ?? convConceptId
-          console.log('[excursion]', {
-            lesson: convConceptId,
-            target: teachingTargetConceptId,
-            requested: requestedConceptIdThisTurn,
-            transition: excursionDecision.transition,
-            active: excursionDecision.state.active,
-            returnTo: excursionDecision.returnToConceptId,
-            turns: excursionDecision.state.turns,
-          })
-
           {
             try {
               const { resolveVisualForTurn } = await import('@/lib/teaching/visual/resolveVisual')
@@ -2440,7 +2461,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // rather than generating transfer questions indefinitely.
           if (!evidenceAutonomyHoisted && !navigationRequestHoisted && !recoveryKeyHoisted && !learnerRequestHoisted) {
             const { shouldConcludeNaturally, buildNaturalConclusionBlock } = await import('@/lib/teaching/masteryGate')
-            if (shouldConcludeNaturally(conversationStateHoisted)) {
+            // Surplus evidence on the LESSON cannot conclude it while the
+            // learner is mid-excursion — the evidence is about a concept they
+            // stepped away from, and the block's whole instruction is to
+            // append [LESSON_COMPLETE].
+            if (!excursionActiveHoisted && shouldConcludeNaturally(conversationStateHoisted)) {
               systemPrompt += buildNaturalConclusionBlock()
             }
           }
@@ -3600,26 +3625,42 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const parityViolationThisTurn = !!(
             evidenceMoveHoisted === 'ask' && !askedQuestionThisTurn
           )
-          conversationStateAfterTurnHoisted = advanceConversationState(conversationStateHoisted, {
-            askedQuestion: askedQuestionThisTurn,
-            signalCorrect: teachingSignal?.correctness ?? null,
-            recoveryFired: recoveryKeyHoisted !== null,
-            learnerRequest: learnerRequestHoisted,
-            misconceptionDetected: teachingSignal?.phrase !== undefined,
-            isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
-            strategyUsed: selectedStrategyHoisted ?? undefined,
-            signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
-            dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
-            learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
-            signalVerificationStatus: signalVerificationStatusHoisted,
-            parityViolation: parityViolationThisTurn,
-            // RS P-3: an outage template taught nothing, so it must not be
-            // folded as a give. See TurnEvidence.degradedTurn.
-            degradedTurn: isDegradedProvider(provider),
-            // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
-            // CHECK); the mastery gates still require a real answer.
-            acknowledgement: lowSignalAckHoisted,
-          })
+          // THE LESSON'S LADDER IS FROZEN WHILE THE LESSON IS PAUSED.
+          //
+          // This fold is where a turn's evidence becomes the lesson's mastery.
+          // On an excursion turn the learner was answering questions about the
+          // SIDE concept, so folding that SIGNAL here credited correctAtCheck /
+          // correctAtPractice for a lesson they had stepped away from — and
+          // those are exactly the counters the completion gate reads. A detour
+          // could therefore manufacture the mastery that "finished" the lesson.
+          //
+          // Assigning the unchanged state (rather than skipping the fold) is
+          // deliberate: the persist block further down folds a FALLBACK when
+          // conversationStateAfterTurnHoisted is null, so skipping would have
+          // been silently undone there. Paused means paused — no phase
+          // advance, no mastery credit, no counters moved.
+          conversationStateAfterTurnHoisted = excursionActiveHoisted
+            ? conversationStateHoisted
+            : advanceConversationState(conversationStateHoisted, {
+              askedQuestion: askedQuestionThisTurn,
+              signalCorrect: teachingSignal?.correctness ?? null,
+              recoveryFired: recoveryKeyHoisted !== null,
+              learnerRequest: learnerRequestHoisted,
+              misconceptionDetected: teachingSignal?.phrase !== undefined,
+              isPriorKnowledgeProbe: isPriorKnowledgeProbe(cleanText),
+              strategyUsed: selectedStrategyHoisted ?? undefined,
+              signalConfidence: teachingSignal?.confidence as 'high' | 'medium' | 'low' | undefined,
+              dontKnowSignal: isDontKnowSignal(recoveryKeyHoisted),
+              learnerIssuedDirective: recoveryKeyHoisted === 'too_many_questions',
+              signalVerificationStatus: signalVerificationStatusHoisted,
+              parityViolation: parityViolationThisTurn,
+              // RS P-3: an outage template taught nothing, so it must not be
+              // folded as a give. See TurnEvidence.degradedTurn.
+              degradedTurn: isDegradedProvider(provider),
+              // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
+              // CHECK); the mastery gates still require a real answer.
+              acknowledgement: lowSignalAckHoisted,
+            })
 
           // Loop 2: advance narrative state with this turn's evidence
           if (narrativeStateHoisted) {
@@ -3635,6 +3676,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const stanceVerdict = enforceStance({
             text: cleanText,
             state: conversationStateAfterTurnHoisted,
+            // The answer to "why did completion fire while an excursion was
+            // open?": the gate was never told. It is now an explicit input,
+            // checked ahead of the evidence test.
+            excursionActive: excursionActiveHoisted,
             move: evidenceMoveHoisted === 'teach' ? 'teach' : evidenceMoveHoisted === 'show' ? 'show' : evidenceMoveHoisted === 'ask' ? 'ask' : null,
             misconceptionActive: conversationStateAfterTurnHoisted.misconceptionDetectedThisLesson,
           })
@@ -4016,7 +4061,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // must not certify mastery (assessment/05 §3: gates need delayed +
       // transfer components; those stay owned by the existing completion/
       // assessment flows).
-      if (resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
+      // `!excursionActiveHoisted`: this checkpoint writes TopicProgress for the
+      // LESSON concept from this turn's SIGNAL. During an excursion the signal
+      // is about the side concept, so writing it here recorded progress on a
+      // lesson the learner was not working on — the same mis-attribution as the
+      // ladder fold above, in the database rather than the snapshot.
+      if (!excursionActiveHoisted && resolvedConceptId && teachingSignal && teachingSignal.correctness !== undefined) {
         const signalCorrect = teachingSignal.correctness
         const signalConfidence = teachingSignal.confidence
         ;(async () => {
