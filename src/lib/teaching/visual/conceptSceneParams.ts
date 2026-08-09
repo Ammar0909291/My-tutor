@@ -26,6 +26,7 @@
  */
 
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { fitSceneToFrame } from './layout'
 import { buildProjectileScene } from '@/lib/teaching/sceneGenerators/projectileMotion'
 import { buildTriangleScene } from '@/lib/teaching/sceneGenerators/triangleAngleSum'
 import { buildVectorScene } from '@/lib/teaching/sceneGenerators/vectorAddition'
@@ -255,7 +256,7 @@ export function buildCanonicalScene(kind: string | null, conceptId?: string | nu
   const override = conceptId ? CONCEPT_SCENES[conceptId] : undefined
   if (override) {
     try {
-      return override()
+      return frame(override())
     } catch {
       return null
     }
@@ -264,10 +265,33 @@ export function buildCanonicalScene(kind: string | null, conceptId?: string | nu
   const build = CANONICAL_SCENES[kind]
   if (!build) return null
   try {
-    return build()
+    return frame(build())
   } catch {
     return null
   }
+}
+
+/**
+ * THE FRAMING BOUNDARY — the single place every deterministic scene passes
+ * through on its way to the resolver, and therefore the only place framing
+ * needs to be applied.
+ *
+ * Each builder chooses `cameraDistance` from a constant of its own with no
+ * relation to the geometry it just produced: `VISUAL_MAX * 2.5` here,
+ * `Math.max(qMax, price) * 2.5` there, and one literal 500. Measured across the
+ * corpus, 20 of 36 scenes filled under half their frame — the Vector Addition
+ * figure a learner was actually shown occupied 6.6% of the canvas, pushed into
+ * one quadrant, which is why its correct labels and correct geometry were
+ * nonetheless unreadable.
+ *
+ * `fitSceneToFrame` re-frames ONLY a scene that measures badly, by a rigid
+ * translation plus a camera distance derived from the geometry's own extent.
+ * A well-framed scene is returned unchanged, so the seven hand-tuned M4 pilot
+ * figures (56-64% fill) are byte-identical. Nothing is scaled, relabelled or
+ * reordered — every distance and angle in the figure survives exactly.
+ */
+function frame(scene: SceneSpec | null): SceneSpec | null {
+  return scene ? fitSceneToFrame(scene) : null
 }
 
 /** Concepts with their own parameters — for coverage tests. */

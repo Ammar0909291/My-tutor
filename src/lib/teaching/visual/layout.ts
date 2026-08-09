@@ -220,3 +220,151 @@ export function checkSceneLayoutAllViewports(scene: SceneSpec): LayoutReport[] {
 export function isLayoutSafe(scene: SceneSpec): boolean {
   return checkSceneLayoutAllViewports(scene).every((report) => report.ok)
 }
+
+// ── Framing ──────────────────────────────────────────────────────────────────
+/**
+ * THE FRAMING CONTRACT.
+ *
+ * Measured failure this exists to close (production, Vector Addition, the
+ * `vector` generator's canonical 3-4-5 figure):
+ *
+ *   geometry   x[0, 10.8]  y[0, 14.4]      span 10.8 x 14.4
+ *   camera     distance 45               visible 56.0 x 42.0
+ *   fill       19.3% of width, 34.3% of height, 6.6% of area
+ *   centre     centroid (5.4, 7.2) against a frame centred on (0, 0)
+ *
+ * The payload was CORRECT — A(3) at 0°, B(4) at 90°, B moved tip-to-tail, and
+ * R(5), each labelled, with narration matching the tutor's words exactly. The
+ * renderer drew precisely what it was given. The figure was nonetheless
+ * unreadable, because it was drawn at 6.6% of the frame's area, pushed into one
+ * quadrant, leaving 93% of the canvas empty. Thin lines and vanishing labels
+ * are symptoms of that one cause.
+ *
+ * It is not one generator's mistake. Each scene builder picks `cameraDistance`
+ * independently, from constants with no relation to the geometry it just
+ * produced (`VISUAL_MAX * 2.5`, `Math.max(qMax, price) * 2.5`, and one literal
+ * 500). Measured across the whole corpus, 20 of 36 scenes fill under half their
+ * frame. Nothing in the engine ever compared the two numbers.
+ *
+ * `layout.ts` already owned "will this figure read at this viewport" for label
+ * boxes; framing is the same question about the geometry, so it belongs here
+ * rather than in a new module.
+ */
+
+/** A figure should occupy at least this fraction of its frame's larger axis. */
+export const MIN_FRAME_FILL = 0.5
+
+/** What `fitSceneToFrame` aims for — comfortably filled, with breathing room. */
+export const TARGET_FRAME_FILL = 0.78
+
+export interface FrameReport {
+  /** Fraction of the frame spanned by the geometry, on its better axis. */
+  fill: number
+  /** Fraction of the frame's area covered by the geometry's bounding box. */
+  areaFill: number
+  /** How far the geometry's centroid sits from the frame centre, 0 = centred. */
+  offCentre: number
+  cameraDistance: number
+  ok: boolean
+}
+
+interface Extent { minX: number; maxX: number; minY: number; maxY: number }
+
+/** Bounding box of every drawable coordinate in the scene, or null when empty. */
+function sceneExtent(scene: SceneSpec): Extent | null {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      const points = [obj.position, obj.from, obj.to, ...(obj.points ?? [])].filter(Boolean) as Vec3[]
+      for (const p of points) {
+        minX = Math.min(minX, p[0]); maxX = Math.max(maxX, p[0])
+        minY = Math.min(minY, p[1]); maxY = Math.max(maxY, p[1])
+      }
+    }
+  }
+  return minX > maxX ? null : { minX, maxX, minY, maxY }
+}
+
+/** Half-extents of the camera frustum at the z = 0 plane, for a 4:3 canvas. */
+function frustum(cameraDistance: number): { halfW: number; halfH: number } {
+  const halfH = Math.tan(FOV_RADIANS / 2) * cameraDistance
+  return { halfW: halfH * (4 / 3), halfH }
+}
+
+/** Does this figure actually fill the frame it is drawn in? */
+export function frameReport(scene: SceneSpec): FrameReport {
+  const cameraDistance = scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE
+  const extent = sceneExtent(scene)
+  if (!extent) {
+    return { fill: 0, areaFill: 0, offCentre: 0, cameraDistance, ok: false }
+  }
+  const { halfW, halfH } = frustum(cameraDistance)
+  const fillW = (extent.maxX - extent.minX) / (2 * halfW)
+  const fillH = (extent.maxY - extent.minY) / (2 * halfH)
+  const offCentre = Math.max(
+    Math.abs((extent.minX + extent.maxX) / 2) / halfW,
+    Math.abs((extent.minY + extent.maxY) / 2) / halfH,
+  )
+  const fill = Math.max(fillW, fillH)
+  return {
+    fill,
+    areaFill: fillW * fillH,
+    offCentre,
+    cameraDistance,
+    ok: fill >= MIN_FRAME_FILL && offCentre <= 0.15,
+  }
+}
+
+/**
+ * Re-frame a scene so its own geometry fills the frame.
+ *
+ * Two operations, both information-preserving:
+ *   1. a rigid TRANSLATION putting the geometry's centroid at the frame centre
+ *      — every distance, angle and relationship is unchanged, because every
+ *      coordinate moves by the same vector;
+ *   2. a camera distance derived from the geometry's extent instead of from a
+ *      constant.
+ *
+ * Nothing is scaled, nothing is reordered, no object is added or removed, and
+ * no label is touched. A scene that already frames itself well is returned
+ * UNCHANGED (same object identity), so well-composed figures — including the
+ * seven hand-tuned M4 pilot figures, which measure 56-64% — are byte-identical.
+ *
+ * Subject-agnostic by construction: it reads coordinates, never concepts.
+ */
+export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
+  const before = frameReport(scene)
+  if (before.ok || before.fill === 0) return scene
+
+  const extent = sceneExtent(scene)
+  if (!extent) return scene
+
+  const cx = (extent.minX + extent.maxX) / 2
+  const cy = (extent.minY + extent.maxY) / 2
+  const spanX = extent.maxX - extent.minX
+  const spanY = extent.maxY - extent.minY
+
+  // Distance at which the larger span reaches TARGET_FRAME_FILL of its axis.
+  const tan = Math.tan(FOV_RADIANS / 2)
+  const neededForHeight = spanY / (2 * TARGET_FRAME_FILL * tan)
+  const neededForWidth = spanX / (2 * TARGET_FRAME_FILL * tan * (4 / 3))
+  const distance = Math.max(neededForHeight, neededForWidth)
+  if (!Number.isFinite(distance) || distance <= 0) return scene
+
+  const shift = (p: Vec3): Vec3 => [p[0] - cx, p[1] - cy, p[2]]
+
+  return {
+    ...scene,
+    cameraDistance: Math.round(distance * 10) / 10,
+    steps: (scene.steps ?? []).map((step) => ({
+      ...step,
+      objects: (step.objects ?? []).map((obj) => ({
+        ...obj,
+        ...(obj.position ? { position: shift(obj.position) } : {}),
+        ...(obj.from ? { from: shift(obj.from) } : {}),
+        ...(obj.to ? { to: shift(obj.to) } : {}),
+        ...(obj.points ? { points: obj.points.map(shift) } : {}),
+      })),
+    })),
+  }
+}
