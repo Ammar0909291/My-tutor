@@ -9,6 +9,20 @@
 import { SceneLabel } from './SceneLabel'
 import type { Theme } from '@/components/Providers'
 
+/**
+ * Where a node's text belongs: just above the sphere, clear of its surface.
+ *
+ * Exported so a figure can hand the label to the placement layer rather than
+ * drawing it here, where nothing knows what else is on the canvas. One
+ * definition of the anchor, used by both routes.
+ */
+export function nodeLabelAnchor(
+  position: [number, number, number],
+  radius = 0.3,
+): [number, number, number] {
+  return [position[0], position[1] + radius + 0.22, position[2]]
+}
+
 export interface MolecularNode3DProps {
   /** Center position of the node. */
   position: [number, number, number]
@@ -34,7 +48,7 @@ export function MolecularNode3D({ position, radius = 0.3, label, color = '#5B8DE
       {label && (
         <SceneLabel
           text={label}
-          position={[position[0], position[1] + radius + 0.22, position[2]]}
+          position={nodeLabelAnchor(position, radius)}
           color={color}
           theme={theme}
           tier={labelTier}

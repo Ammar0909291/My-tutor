@@ -11,9 +11,13 @@ import { useMemo, useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import type { Mesh } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
-import { Vector3D } from './Vector3D'
+import { Vector3D, vectorLabelAnchor } from './Vector3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
 const RADIUS = 2.5
+const CAMERA_DISTANCE = 9
 
 function orbitPoints(steps = 48) {
   const pts: [number, number, number][] = []
@@ -24,7 +28,7 @@ function orbitPoints(steps = 48) {
   return pts
 }
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showPath = revealStep >= 1
   const showBody = revealStep >= 2
   const showVelocity = revealStep >= 3
@@ -49,6 +53,22 @@ function Scene({ revealStep }: { revealStep: number }) {
   const tangent: [number, number, number] = [-Math.sin(angle.current), 0, Math.cos(angle.current)]
   const inward: [number, number, number] = [-bodyPos[0] / RADIUS, 0, -bodyPos[2] / RADIUS]
 
+  const velocityTip: [number, number, number] = [bodyPos[0] + tangent[0] * 1.3, bodyPos[1], bodyPos[2] + tangent[2] * 1.3]
+  const forceTip: [number, number, number] = [bodyPos[0] + inward[0] * 1.1, bodyPos[1], bodyPos[2] + inward[2] * 1.1]
+
+  const labels: LayerLabel[] = []
+  const obstacles: SceneObject[] = []
+  if (showPath) obstacles.push({ type: 'path', points: path })
+  if (showBody) obstacles.push({ type: 'node', position: bodyPos, radius: 0.22 })
+  if (showVelocity) {
+    obstacles.push({ type: 'vector', from: bodyPos, to: velocityTip })
+    labels.push({ text: 'v', position: vectorLabelAnchor(bodyPos, velocityTip), color: '#81C784' })
+  }
+  if (showCentripetal) {
+    obstacles.push({ type: 'vector', from: bodyPos, to: forceTip })
+    labels.push({ text: 'Fc', position: vectorLabelAnchor(bodyPos, forceTip), color: '#FF6B6B' })
+  }
+
   return (
     <group>
       {showPath && (
@@ -69,41 +89,31 @@ function Scene({ revealStep }: { revealStep: number }) {
         </mesh>
       )}
 
-      {showVelocity && (
-        <Vector3D
-          start={bodyPos}
-          end={[bodyPos[0] + tangent[0] * 1.3, bodyPos[1], bodyPos[2] + tangent[2] * 1.3]}
-          color="#81C784"
-          label="v"
-        />
-      )}
+      {showVelocity && <Vector3D start={bodyPos} end={velocityTip} color="#81C784" />}
 
-      {showCentripetal && (
-        <Vector3D
-          start={bodyPos}
-          end={[bodyPos[0] + inward[0] * 1.1, bodyPos[1], bodyPos[2] + inward[2] * 1.1]}
-          color="#FF6B6B"
-          label="Fc"
-        />
-      )}
+      {showCentripetal && <Vector3D start={bodyPos} end={forceTip} color="#FF6B6B" />}
 
       {/* center marker */}
       <mesh position={[0, 0, 0]}>
         <sphereGeometry args={[0.06, 8, 8]} />
         <meshBasicMaterial color="#FFB74D" />
       </mesh>
+
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function CircularMotion3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={9}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D circular motion: the orbit path, a moving body, its tangential velocity vector, the inward centripetal force vector, and the body animating around the full path with both vectors live"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

@@ -8,6 +8,26 @@
  */
 import { Vector3D } from './Vector3D'
 
+/**
+ * The end point this arrow will reach — the same arithmetic the component
+ * uses. Exported so a figure can anchor a label there and let the placement
+ * layer solve it with the rest.
+ */
+export function forceArrowTip(
+  origin: [number, number, number],
+  direction: [number, number, number],
+  magnitude: number,
+  scale = 0.4,
+): [number, number, number] {
+  const len = Math.hypot(...direction) || 1
+  const arm = magnitude * scale
+  return [
+    origin[0] + (direction[0] / len) * arm,
+    origin[1] + (direction[1] / len) * arm,
+    origin[2] + (direction[2] / len) * arm,
+  ]
+}
+
 export interface ForceArrow3DProps {
   /** Point the force acts from. */
   origin: [number, number, number]

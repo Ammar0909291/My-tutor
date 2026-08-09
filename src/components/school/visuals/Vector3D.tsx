@@ -11,6 +11,25 @@ import { Quaternion, Vector3 } from 'three'
 import { SceneLabel } from './SceneLabel'
 import type { Theme } from '@/components/Providers'
 
+/**
+ * Where a vector's text belongs: at the arrow head.
+ *
+ * Exported so a figure can hand the label to the placement layer rather than
+ * drawing it here, where nothing knows what else is on the canvas. It mirrors
+ * the tip computed below, so both routes anchor at exactly the same point.
+ */
+export function vectorLabelAnchor(
+  start: [number, number, number],
+  end: [number, number, number],
+  lengthScale = 1,
+): [number, number, number] {
+  return [
+    start[0] + (end[0] - start[0]) * lengthScale,
+    start[1] + (end[1] - start[1]) * lengthScale,
+    start[2] + (end[2] - start[2]) * lengthScale,
+  ]
+}
+
 export interface Vector3DProps {
   /** Tail position of the vector. */
   start: [number, number, number]

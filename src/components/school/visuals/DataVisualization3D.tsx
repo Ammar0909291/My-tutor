@@ -6,23 +6,52 @@
  * Teaches relationships, trends, and correlation. Reuses ThreeDVisual +
  * MolecularNode3D + Vector3D (no new primitives).
  */
-import { Html } from '@react-three/drei'
+import { useMemo } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
 import { MolecularNode3D } from './MolecularNode3D'
-import { Vector3D } from './Vector3D'
+import { Vector3D, vectorLabelAnchor } from './Vector3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
+import { ROLE, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 
+const CAMERA_DISTANCE = 10
+const TREND_FROM: [number, number, number] = [-2.4, -1.1, 0]
+const TREND_TO: [number, number, number] = [2.6, 1.6, 0]
 const BARS = [1.2, 2.0, 1.6, 2.6, 2.2]
 // Scatter points trending upward (x, y) — a positive relationship.
 const SCATTER: [number, number][] = [
   [-2.2, -1.0], [-1.4, -0.6], [-0.6, 0.0], [0.2, 0.3], [1.0, 0.8], [1.8, 1.2], [2.4, 1.5],
 ]
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showDataset = revealStep >= 1
   const showBars = revealStep >= 2
   const showScatter = revealStep >= 3
   const showTrend = revealStep >= 4
   const compare = revealStep >= 5
+
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (compare) {
+      BARS.forEach((h, i) => obstacles.push({ type: 'node', position: [-3 + i * 0.55, -1.4 + h / 2, 0], radius: Math.max(0.2, h / 2) }))
+      SCATTER.forEach(([x, y]) => obstacles.push({ type: 'point', position: [x * 0.6 + 1.6, y, 0], radius: 0.1 }))
+      obstacles.push({ type: 'vector', from: [0.3, -1.0, 0], to: [3.0, 1.0, 0] })
+      labels.push({ text: 'Bar chart vs scatter — different views of the same data', position: [0, -2.2, 0], color: themeColor(ROLE.ink, theme) ?? ROLE.ink })
+      return { labels, obstacles }
+    }
+    if (showScatter) {
+      SCATTER.forEach(([x, y]) => obstacles.push({ type: 'point', position: [x, y, 0], radius: 0.1 }))
+      if (showTrend) {
+        obstacles.push({ type: 'vector', from: TREND_FROM, to: TREND_TO })
+        labels.push({ text: 'trend', position: vectorLabelAnchor(TREND_FROM, TREND_TO), color: '#FFD166' })
+      }
+    } else if (showBars) {
+      BARS.forEach((h, i) => obstacles.push({ type: 'node', position: [-1.1 + i * 0.55, -1.4 + h / 2, 0], radius: Math.max(0.2, h / 2) }))
+    }
+    return { labels, obstacles }
+  }, [compare, showBars, showScatter, showTrend, theme])
 
   if (compare) {
     return (
@@ -36,11 +65,7 @@ function Scene({ revealStep }: { revealStep: number }) {
         ))}
         {SCATTER.map(([x, y], i) => <MolecularNode3D key={`s${i}`} position={[x * 0.6 + 1.6, y, 0]} radius={0.1} color="#81C784" />)}
         <Vector3D start={[0.3, -1.0, 0]} end={[3.0, 1.0, 0]} color="#FFD166" thickness={0.03} />
-        <Html position={[0, -2.2, 0]} center distanceFactor={9} style={{ pointerEvents: 'none' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#fff', whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.7)' }}>
-            Bar chart vs scatter — different views of the same data
-          </span>
-        </Html>
+        <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
       </group>
     )
   }
@@ -61,21 +86,24 @@ function Scene({ revealStep }: { revealStep: number }) {
       {showScatter && (
         <group>
           {SCATTER.map(([x, y], i) => <MolecularNode3D key={`s${i}`} position={[x, y, 0]} radius={0.1} color="#81C784" />)}
-          {showTrend && <Vector3D start={[-2.4, -1.1, 0]} end={[2.6, 1.6, 0]} color="#FFD166" thickness={0.03} label="trend" />}
+          {showTrend && <Vector3D start={TREND_FROM} end={TREND_TO} color="#FFD166" thickness={0.03} />}
         </group>
       )}
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function DataVisualization3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={10}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D data visualization: a dataset, a bar chart, a scatter plot, a trend line, and a comparison view showing relationships and trends"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

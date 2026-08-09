@@ -6,17 +6,38 @@
  *   summed, residual shown) · 5 balanced-force state (object at rest, forces
  *   cancel). Reuses ThreeDVisual + ForceArrow3D.
  */
+import { useMemo } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
-import { ForceArrow3D } from './ForceArrow3D'
+import { ForceArrow3D, forceArrowTip } from './ForceArrow3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
+const CAMERA_DISTANCE = 8
+const FORCE_ORIGIN: [number, number, number] = [0, 0, 0]
 const OBJECT: [number, number, number] = [0, 0.5, 0]
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showObject = revealStep >= 1
   const showGravity = revealStep >= 2
   const showNormal = revealStep >= 3
   const showNet = revealStep >= 4
   const balanced = revealStep >= 5
+
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (showObject) obstacles.push({ type: 'node', position: OBJECT, radius: 0.5 })
+    const force = (show: boolean, direction: [number, number, number], color: string, text: string) => {
+      if (!show) return
+      const tip = forceArrowTip(FORCE_ORIGIN, direction, 3)
+      obstacles.push({ type: 'vector', from: FORCE_ORIGIN, to: tip })
+      labels.push({ text, position: tip, color })
+    }
+    force(showGravity, [0, -1, 0], '#FF6B6B', 'Fg')
+    force(showNormal, [0, 1, 0], '#4DD0E1', 'N')
+    return { labels, obstacles }
+  }, [showObject, showGravity, showNormal])
 
   return (
     <group>
@@ -33,11 +54,11 @@ function Scene({ revealStep }: { revealStep: number }) {
       )}
 
       {showGravity && (
-        <ForceArrow3D origin={[0, 0, 0]} direction={[0, -1, 0]} magnitude={3} color="#FF6B6B" label="Fg" />
+        <ForceArrow3D origin={FORCE_ORIGIN} direction={[0, -1, 0]} magnitude={3} color="#FF6B6B" />
       )}
 
       {showNormal && (
-        <ForceArrow3D origin={[0, 0, 0]} direction={[0, 1, 0]} magnitude={3} color="#4DD0E1" label="N" />
+        <ForceArrow3D origin={FORCE_ORIGIN} direction={[0, 1, 0]} magnitude={3} color="#4DD0E1" />
       )}
 
       {showNet && !balanced && (
@@ -55,18 +76,22 @@ function Scene({ revealStep }: { revealStep: number }) {
           <meshStandardMaterial color="#81C784" emissive="#81C784" emissiveIntensity={0.5} />
         </mesh>
       )}
+
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function NewtonForces3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={8}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D Newton's forces: a resting object, the gravity force vector, the normal force vector, the net-force explanation, and the final balanced-force state where the forces cancel"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

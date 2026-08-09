@@ -5,12 +5,16 @@
  * algorithm, taught as a flow (NOT a full algorithm engine) —
  *   1 unsorted data · 2 comparison · 3 swap · 4 progress · 5 sorted result.
  * Bars are fixed, hand-authored snapshots of one swap and the final result.
- * Reuses ThreeDVisual + Html label (no new primitives).
+ * Reuses ThreeDVisual; its caption goes through the shared label layer.
  */
-import { Html } from '@react-three/drei'
 import { ThreeDVisual } from './ThreeDVisual'
+import { SceneLabelLayer } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
 const SLOT_X = [-2.4, -1.2, 0, 1.2, 2.4]
+const CAMERA_DISTANCE = 9
+const CAPTION_AT: [number, number, number] = [0, -2.4, 0]
 
 // Fixed per-step snapshots of bar heights (value of each element). Hand-authored
 // so the visual stays a simple teaching flow rather than a live sort.
@@ -37,32 +41,47 @@ function Bars({ heights, highlight, swap }: { heights: number[]; highlight?: [nu
   )
 }
 
-function caption(text: string, color: string) {
+/** The one step of the flow this reveal shows: its bars and its caption. */
+function stepOf(revealStep: number) {
+  if (revealStep >= 5) return { heights: SORTED, text: 'Sorted result — smallest to largest', color: '#81C784' }
+  if (revealStep >= 4) return { heights: PROGRESS, text: 'Progress — the data is becoming ordered', color: '#5B8DEF' }
+  if (revealStep >= 3) return { heights: AFTER_SWAP, text: 'Swap — out-of-order pair is exchanged', color: '#FF6B6B', highlight: [0, 1] as [number, number], swap: true }
+  if (revealStep >= 2) return { heights: UNSORTED, text: 'Comparison — is the left bar bigger than the right?', color: '#FFD166', highlight: [0, 1] as [number, number] }
+  return { heights: UNSORTED, text: 'Unsorted data', color: '#9AA5B8' }
+}
+
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
+  const step = stepOf(revealStep)
+  // Each bar as an obstacle at its own centre, so the caption is solved against
+  // the columns rather than printed across them.
+  const obstacles: SceneObject[] = step.heights.map((h, i) => ({
+    type: 'node' as const,
+    position: [SLOT_X[i], (h * 0.6) / 2 - 1.5, 0] as [number, number, number],
+    radius: Math.max(0.35, (h * 0.6) / 2),
+  }))
   return (
-    <Html position={[0, -2.4, 0]} center distanceFactor={9} style={{ pointerEvents: 'none' }}>
-      <span style={{ fontSize: 11, fontWeight: 700, color, whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-        {text}
-      </span>
-    </Html>
+    <group>
+      <Bars heights={step.heights} highlight={step.highlight} swap={step.swap} />
+      <SceneLabelLayer
+        labels={[{ text: step.text, position: CAPTION_AT, color: step.color }]}
+        obstacles={obstacles}
+        cameraDistance={CAMERA_DISTANCE}
+        theme={theme}
+      />
+    </group>
   )
 }
 
-function Scene({ revealStep }: { revealStep: number }) {
-  if (revealStep >= 5) return <group><Bars heights={SORTED} /> {caption('Sorted result — smallest to largest', '#81C784')}</group>
-  if (revealStep >= 4) return <group><Bars heights={PROGRESS} /> {caption('Progress — the data is becoming ordered', '#5B8DEF')}</group>
-  if (revealStep >= 3) return <group><Bars heights={AFTER_SWAP} highlight={[0, 1]} swap /> {caption('Swap — out-of-order pair is exchanged', '#FF6B6B')}</group>
-  if (revealStep >= 2) return <group><Bars heights={UNSORTED} highlight={[0, 1]} /> {caption('Comparison — is the left bar bigger than the right?', '#FFD166')}</group>
-  return <group><Bars heights={UNSORTED} /> {caption('Unsorted data', '#9AA5B8')}</group>
-}
-
 export function AlgorithmVisualization3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={9}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D sorting algorithm flow: unsorted bars, a comparison of two bars, a swap, partial progress, and the final sorted result"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

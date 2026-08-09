@@ -10,8 +10,12 @@ import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import type { Mesh } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
-import { Vector3D } from './Vector3D'
+import { Vector3D, vectorLabelAnchor } from './Vector3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
+const CAMERA_DISTANCE = 9
 const LAUNCH: [number, number, number] = [-4, 0, 0]
 const G = 4
 const V0X = 2.2
@@ -31,7 +35,7 @@ function arcPoints(steps = 60) {
   return pts
 }
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showGround = revealStep >= 1
   const showLaunch = revealStep >= 2
   const showPath = revealStep >= 3
@@ -39,6 +43,26 @@ function Scene({ revealStep }: { revealStep: number }) {
   const completed = revealStep >= 5
 
   const path = useMemo(() => arcPoints(), [])
+
+  const VELOCITY: { end: [number, number, number]; color: string; text: string }[] = [
+    { end: [LAUNCH[0] + V0X, LAUNCH[1], LAUNCH[2]], color: '#FFB74D', text: 'vₓ' },
+    { end: [LAUNCH[0], LAUNCH[1] + V0Y, LAUNCH[2]], color: '#4DD0E1', text: 'vy' },
+    { end: [LAUNCH[0] + V0X, LAUNCH[1] + V0Y, LAUNCH[2]], color: '#FF6B6B', text: 'v' },
+  ]
+
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (showPath) obstacles.push({ type: 'path', points: path })
+    if (showVelocity) {
+      for (const v of VELOCITY) {
+        obstacles.push({ type: 'vector', from: LAUNCH, to: v.end })
+        labels.push({ text: v.text, position: vectorLabelAnchor(LAUNCH, v.end), color: v.color })
+      }
+    }
+    return { labels, obstacles }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showPath, showVelocity, path])
   const ballRef = useRef<Mesh>(null)
   const elapsed = useRef(0)
 
@@ -79,9 +103,9 @@ function Scene({ revealStep }: { revealStep: number }) {
 
       {showVelocity && (
         <group>
-          <Vector3D start={LAUNCH} end={[LAUNCH[0] + V0X, LAUNCH[1], LAUNCH[2]]} color="#FFB74D" label="vₓ" />
-          <Vector3D start={LAUNCH} end={[LAUNCH[0], LAUNCH[1] + V0Y, LAUNCH[2]]} color="#4DD0E1" label="vy" />
-          <Vector3D start={LAUNCH} end={[LAUNCH[0] + V0X, LAUNCH[1] + V0Y, LAUNCH[2]]} color="#FF6B6B" label="v" />
+          {VELOCITY.map((v) => (
+            <Vector3D key={v.text} start={LAUNCH} end={v.end} color={v.color} />
+          ))}
         </group>
       )}
 
@@ -91,18 +115,22 @@ function Scene({ revealStep }: { revealStep: number }) {
           <meshStandardMaterial color="#FF6B6B" emissive="#FF6B6B" emissiveIntensity={0.4} />
         </mesh>
       )}
+
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function ProjectileMotion3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={9}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D projectile motion: a ground plane, a launch point, the traced parabolic path, the decomposed launch velocity vector, and the projectile animating along its completed trajectory"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

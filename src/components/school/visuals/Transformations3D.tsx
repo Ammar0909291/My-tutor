@@ -4,9 +4,13 @@
  * revealStep-gated: 1 original shape · 2 translation · 3 rotation · 4 scaling ·
  * 5 final comparison view. Reuses ThreeDVisual; plain Three.js box geometry.
  */
-import { Html } from '@react-three/drei'
+import { useMemo } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
+const CAMERA_DISTANCE = 9
 const ORIGINAL_POS: [number, number, number] = [0, 0, 0]
 const TRANSLATED_POS: [number, number, number] = [2.2, 0.8, 0]
 const ROTATION: [number, number, number] = [0, Math.PI / 4, Math.PI / 6]
@@ -14,12 +18,22 @@ const SCALE: [number, number, number] = [1.5, 1.5, 1.5]
 
 const ROW_POS: [number, number, number][] = [[-3, 0, 0], [-1, 0, 0], [1, 0, 0], [3, 0, 0]]
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showOriginal = revealStep >= 1
   const showTranslation = revealStep >= 2
   const showRotation = revealStep >= 3
   const showScaling = revealStep >= 4
   const compare = revealStep >= 5
+
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (compare) {
+      for (const p of ROW_POS) obstacles.push({ type: 'node', position: p, radius: 0.6 })
+      labels.push({ text: 'Original · Translation · Rotation · Scaling', position: [0, -1.1, 0], color: '#9AA5B8' })
+    }
+    return { labels, obstacles }
+  }, [compare])
 
   return (
     <group>
@@ -69,25 +83,23 @@ function Scene({ revealStep }: { revealStep: number }) {
             <boxGeometry args={[0.9, 0.9, 0.9]} />
             <meshStandardMaterial color="#81C784" />
           </mesh>
-          <Html position={[0, -1.1, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#9AA5B8', whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-              Original · Translation · Rotation · Scaling
-            </span>
-          </Html>
         </>
       )}
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function Transformations3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={9}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D geometric transformations: an original cube, then its translation, rotation, and scaling, each introduced in turn, then a side-by-side comparison view"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

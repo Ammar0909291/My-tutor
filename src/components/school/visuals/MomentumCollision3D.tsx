@@ -10,13 +10,17 @@ import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import type { Mesh } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
-import { Vector3D } from './Vector3D'
+import { Vector3D, vectorLabelAnchor } from './Vector3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
+const CAMERA_DISTANCE = 9
 const START_A: [number, number, number] = [-3, 0.5, 0]
 const START_B: [number, number, number] = [3, 0.5, 0]
 const MEET = 0
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showObjects = revealStep >= 1
   const showVectors = revealStep >= 2
   const colliding = revealStep >= 3
@@ -40,6 +44,32 @@ function Scene({ revealStep }: { revealStep: number }) {
     }
   })
 
+  const preA: [number, number, number] = [START_A[0] + 1.5, START_A[1], 0]
+  const preB: [number, number, number] = [START_B[0] - 1.2, START_B[1], 0]
+  const postAFrom: [number, number, number] = [MEET - 0.3, 0.5, 0]
+  const postATo: [number, number, number] = [MEET - 1.3, 0.5, 0]
+  const postBFrom: [number, number, number] = [MEET + 1.5, 0.5, 0]
+  const postBTo: [number, number, number] = [MEET + 2.5, 0.5, 0]
+
+  const labels: LayerLabel[] = []
+  const obstacles: SceneObject[] = []
+  if (showObjects) {
+    obstacles.push({ type: 'node', position: START_A, radius: 0.4 })
+    obstacles.push({ type: 'node', position: START_B, radius: 0.3 })
+  }
+  if (showVectors && !colliding) {
+    obstacles.push({ type: 'vector', from: START_A, to: preA })
+    obstacles.push({ type: 'vector', from: START_B, to: preB })
+    labels.push({ text: 'vA', position: vectorLabelAnchor(START_A, preA), color: '#81C784' })
+    labels.push({ text: 'vB', position: vectorLabelAnchor(START_B, preB), color: '#FFB74D' })
+  }
+  if (finalState) {
+    obstacles.push({ type: 'vector', from: postAFrom, to: postATo })
+    obstacles.push({ type: 'vector', from: postBFrom, to: postBTo })
+    labels.push({ text: "vA'", position: vectorLabelAnchor(postAFrom, postATo), color: '#5B8DEF' })
+    labels.push({ text: "vB'", position: vectorLabelAnchor(postBFrom, postBTo), color: '#FF6B6B' })
+  }
+
   return (
     <group>
       <mesh position={[0, -0.05, 0]} rotation={[-Math.PI / 2, 0, 0]}>
@@ -62,8 +92,8 @@ function Scene({ revealStep }: { revealStep: number }) {
 
       {showVectors && !colliding && (
         <>
-          <Vector3D start={START_A} end={[START_A[0] + 1.5, START_A[1], 0]} color="#81C784" label="vA" />
-          <Vector3D start={START_B} end={[START_B[0] - 1.2, START_B[1], 0]} color="#FFB74D" label="vB" />
+          <Vector3D start={START_A} end={preA} color="#81C784" />
+          <Vector3D start={START_B} end={preB} color="#FFB74D" />
         </>
       )}
 
@@ -76,22 +106,26 @@ function Scene({ revealStep }: { revealStep: number }) {
 
       {finalState && (
         <>
-          <Vector3D start={[MEET - 0.3, 0.5, 0]} end={[MEET - 1.3, 0.5, 0]} color="#5B8DEF" label="vA'" />
-          <Vector3D start={[MEET + 1.5, 0.5, 0]} end={[MEET + 2.5, 0.5, 0]} color="#FF6B6B" label="vB'" />
+          <Vector3D start={postAFrom} end={postATo} color="#5B8DEF" />
+          <Vector3D start={postBFrom} end={postBTo} color="#FF6B6B" />
         </>
       )}
+
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function MomentumCollision3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={9}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D momentum collision: two objects with motion vectors, the moment of collision, the momentum transfer between them, and the final post-collision velocities"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

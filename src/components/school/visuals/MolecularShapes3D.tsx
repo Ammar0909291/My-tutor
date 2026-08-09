@@ -6,15 +6,22 @@
  *   1 atoms · 2 bonds · 3 geometry (tetrahedral arrangement) ·
  *   4 bond angles (labeled) · 5 final molecule.
  * Reuses ThreeDVisual + MolecularNode3D + Bond3D.
+ *
+ * Every label — the atom names included — is declared to SceneLabelLayer, so
+ * the whole set is solved together against the canvas and the geometry.
  */
-import { Html } from '@react-three/drei'
+import { useMemo } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
-import { MolecularNode3D } from './MolecularNode3D'
+import { MolecularNode3D, nodeLabelAnchor } from './MolecularNode3D'
 import { Bond3D } from './Bond3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
 const CENTER: [number, number, number] = [0, 0, 0]
 // Tetrahedral vertex directions, scaled to bond length.
 const BOND_LEN = 1.4
+const CAMERA_DISTANCE = 6
 const OUTER: [number, number, number][] = [
   [1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1],
 ].map((v) => {
@@ -22,20 +29,43 @@ const OUTER: [number, number, number][] = [
   return [v[0] / len * BOND_LEN, v[1] / len * BOND_LEN, v[2] / len * BOND_LEN] as [number, number, number]
 })
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showAtoms = revealStep >= 1
   const showBonds = revealStep >= 2
   const showGeometry = revealStep >= 3
   const showAngles = revealStep >= 4
   const completed = revealStep >= 5
 
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (showAtoms) {
+      obstacles.push({ type: 'node', position: CENTER, radius: 0.32 })
+      labels.push({ text: 'C', position: nodeLabelAnchor(CENTER, 0.32), color: '#5B8DEF' })
+      for (const p of OUTER) {
+        obstacles.push({ type: 'node', position: p, radius: 0.22 })
+        labels.push({ text: 'H', position: nodeLabelAnchor(p, 0.22), color: '#81C784' })
+      }
+    }
+    if (showBonds) {
+      for (const p of OUTER) obstacles.push({ type: 'bond', from: CENTER, to: p })
+    }
+    if (showAngles) {
+      labels.push({ text: '109.5° tetrahedral angles', position: [0, BOND_LEN * 0.55, 0], color: '#FFB74D' })
+    }
+    if (completed) {
+      labels.push({ text: 'Tetrahedral molecule', position: [0, -BOND_LEN * 1.2, 0], color: '#5B8DEF' })
+    }
+    return { labels, obstacles }
+  }, [showAtoms, showBonds, showAngles, completed])
+
   return (
     <group>
       {showAtoms && (
         <>
-          <MolecularNode3D position={CENTER} radius={0.32} color="#5B8DEF" label="C" />
+          <MolecularNode3D position={CENTER} radius={0.32} color="#5B8DEF" />
           {OUTER.map((p, i) => (
-            <MolecularNode3D key={i} position={p} radius={0.22} color="#81C784" label="H" />
+            <MolecularNode3D key={i} position={p} radius={0.22} color="#81C784" />
           ))}
         </>
       )}
@@ -50,33 +80,23 @@ function Scene({ revealStep }: { revealStep: number }) {
         </mesh>
       )}
 
-      {showAngles && (
-        <Html position={[0, BOND_LEN * 0.55, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#FFB74D', whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-            109.5° tetrahedral angles
-          </span>
-        </Html>
-      )}
-
-      {completed && (
-        <Html position={[0, -BOND_LEN * 1.2, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#5B8DEF', whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-            Tetrahedral molecule
-          </span>
-        </Html>
-      )}
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function MolecularShapes3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={6}
+      cameraDistance={CAMERA_DISTANCE}
+      // Labelled figure: a moving camera moves every label with it, and no
+      // placement survives that. Manual orbit still works.
+      autoRotate={false}
       ariaLabel="3D molecular shapes: a tetrahedral molecule built up from its atoms, bonds, overall geometry, labeled bond angles, and the final molecule"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

@@ -9,7 +9,22 @@
  */
 import { useMemo } from 'react'
 import { Quaternion, Vector3 } from 'three'
-import { Html } from '@react-three/drei'
+import { SceneLabel } from './SceneLabel'
+import type { Theme } from '@/components/Providers'
+
+/**
+ * Where a bond's text belongs: the midpoint of the bar.
+ *
+ * Exported so a figure can hand the label to the placement layer instead of
+ * drawing it here, where nothing knows what else is on the canvas. The
+ * arithmetic lives in one place so the anchor is identical either way.
+ */
+export function bondLabelAnchor(
+  atomA: [number, number, number],
+  atomB: [number, number, number],
+): [number, number, number] {
+  return [(atomA[0] + atomB[0]) / 2, (atomA[1] + atomB[1]) / 2, (atomA[2] + atomB[2]) / 2]
+}
 
 export interface Bond3DProps {
   /** Position of the first atom (bond endpoint A). */
@@ -22,9 +37,13 @@ export interface Bond3DProps {
   label?: string
   /** Bond color (CSS color string). */
   color?: string
+  /** Active theme, for the label's halo. Prop, not hook — see SceneLabel. */
+  theme?: Theme
+  /** Typographic tier for the label. */
+  labelTier?: number
 }
 
-export function Bond3D({ atomA, atomB, bondOrder = 1, label, color = '#9AA5B8' }: Bond3DProps) {
+export function Bond3D({ atomA, atomB, bondOrder = 1, label, color = '#9AA5B8', theme = 'dark', labelTier }: Bond3DProps) {
   const { strands, quaternion, length, mid } = useMemo(() => {
     const a = new Vector3(...atomA)
     const b = new Vector3(...atomB)
@@ -58,11 +77,7 @@ export function Bond3D({ atomA, atomB, bondOrder = 1, label, color = '#9AA5B8' }
         </mesh>
       ))}
       {label && (
-        <Html position={mid} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-          <span style={{ fontSize: 10, fontWeight: 600, color, whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-            {label}
-          </span>
-        </Html>
+        <SceneLabel text={label} position={mid} color={color} theme={theme} tier={labelTier} />
       )}
     </group>
   )

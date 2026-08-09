@@ -13,15 +13,12 @@
  */
 import { useMemo } from 'react'
 import { Quaternion, Vector3 } from 'three'
-import { SceneLabel } from './SceneLabel'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
 import { visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
-import { useThree } from '@react-three/fiber'
-import {
-  placeSceneLabels, sceneTextObjects, screenToWorld, viewportFromCanvas,
-} from '@/lib/teaching/visual/layout'
+import { sceneTextObjects } from '@/lib/teaching/visual/layout'
 import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { useTheme, type Theme } from '@/components/Providers'
 
@@ -129,53 +126,38 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
  *
  * Labels cannot be positioned one at a time: avoiding another label requires
  * knowing where that other label ended up. So `renderObject` draws geometry
- * only, and this component draws all the text, after solving positions for the
- * whole set at once.
+ * only, and the text is drawn after solving positions for the whole set.
  *
- * It reads the LIVE canvas size from react-three-fiber rather than a modelled
- * viewport, so placement responds to the real surface — and, because it is
- * derived from the SceneSpec plus the current size, the same persisted visual
- * re-solves correctly on a different device after a refresh. Nothing about
- * placement is persisted.
+ * The solving and drawing now live in `SceneLabelLayer`, which the three.js
+ * VisualCard figures share — this function's whole job is to translate a
+ * SceneSpec into the terms that layer speaks. Nothing about placement is
+ * persisted: it derives from the spec plus the live canvas size, so the same
+ * restored visual re-solves correctly on a different device.
  */
 function PlacedLabels({
   objects, cameraDistance, theme,
 }: { objects: SceneObject[]; cameraDistance: number; theme: Theme }) {
-  const size = useThree((s) => s.size)
-
-  const placed = useMemo(() => {
-    const viewport = viewportFromCanvas(size.width, size.height)
-    // A scene of exactly the VISIBLE objects, so reveal steps are respected and
-    // the solver's ordering matches sceneTextObjects() below, index for index.
+  const { labels, obstacles } = useMemo(() => {
     const scene: SceneSpec = {
       id: 'labels', title: '', sceneType: 'diagram', cameraDistance,
       steps: [{ objects }],
     }
-    const sources = sceneTextObjects(scene)
-    const { labels } = placeSceneLabels(scene, viewport)
-    return labels.map((label, i) => ({
-      label,
-      source: sources[i]?.object,
-      position: screenToWorld(label.x, label.y, viewport, cameraDistance),
-    }))
-  }, [objects, cameraDistance, size.width, size.height])
+    return {
+      labels: sceneTextObjects(scene).map(({ text, position, object }): LayerLabel => ({
+        text,
+        position,
+        color: themeColor(object.color, theme) ?? '#5B8DEF',
+        // `size` is a typographic tier ONLY on label objects; elsewhere it is
+        // an extent, so it must not drive typography.
+        tier: object.type === 'label' ? object.size : undefined,
+      })),
+      // Every object is something to stay clear of, including the ones that
+      // carry text — the layer strips that text so nothing is counted twice.
+      obstacles: objects,
+    }
+  }, [objects, cameraDistance, theme])
 
-  return (
-    <>
-      {placed.map(({ label, source, position }, i) => (
-        <SceneLabel
-          key={i}
-          text={label.text}
-          position={position}
-          color={themeColor(source?.color, theme) ?? '#5B8DEF'}
-          theme={theme}
-          // `size` is a typographic tier ONLY on label objects; elsewhere it is
-          // an extent, so it must not drive typography.
-          tier={source?.type === 'label' ? source.size : undefined}
-        />
-      ))}
-    </>
-  )
+  return <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={cameraDistance} theme={theme} />
 }
 
 interface SceneSpecRendererProps {

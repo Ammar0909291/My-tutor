@@ -46,6 +46,7 @@
 import { Html } from '@react-three/drei'
 import type { Theme } from '@/components/Providers'
 import type { Vec3 } from '@/lib/teaching/sceneSpec'
+import { LABEL_LINE_HEIGHT_RATIO } from '@/lib/teaching/visual/layout'
 
 /**
  * RESPONSIVE SIZE, ONE RULE FOR EVERY SCENE.
@@ -78,9 +79,20 @@ export interface SceneLabelProps {
    * instead of one flat wall of text. Omitted => 1 => historic behaviour.
    */
   tier?: number
+  /**
+   * Wrap the label at this many pixels instead of running it on one line.
+   *
+   * Set ONLY by the placement layer, and only for text too wide for the canvas
+   * to hold on a single line — where the alternatives are all forbidden:
+   * shrinking crosses the readability floor, shortening rewrites teaching text,
+   * and leaving it be gets the end of the sentence cut off by the container.
+   * The value is the same width the solver reserved, so the box the model
+   * planned for and the box the browser paints are one box.
+   */
+  maxWidthPx?: number
 }
 
-export function SceneLabel({ text, position, color, theme, tier }: SceneLabelProps) {
+export function SceneLabel({ text, position, color, theme, tier, maxWidthPx }: SceneLabelProps) {
   const scale = typeof tier === 'number' && tier > 0 ? Math.min(tier, 3) : 1
   const heading = scale >= HEADING_TIER
 
@@ -95,7 +107,20 @@ export function SceneLabel({ text, position, color, theme, tier }: SceneLabelPro
           fontWeight: heading ? 800 : 700,
           letterSpacing: heading ? '0.02em' : undefined,
           color,
-          whiteSpace: 'nowrap',
+          // `width`, not `maxWidth`: drei's <Html> wrapper is a zero-width
+          // absolutely-positioned box, so an inline-block inside it shrinks to
+          // its minimum content width — measured, that wrapped a caption to ONE
+          // WORD PER LINE, 58px wide and 242px tall. Stating the width makes the
+          // painted box the same box the solver reserved.
+          ...(maxWidthPx
+            ? {
+                whiteSpace: 'normal' as const,
+                width: maxWidthPx,
+                textAlign: 'center' as const,
+                display: 'inline-block',
+                lineHeight: LABEL_LINE_HEIGHT_RATIO,
+              }
+            : { whiteSpace: 'nowrap' as const }),
           // A halo in the SURFACE's colour, not a fixed black one. The shadow
           // exists to separate a label from a ray or a wave crossing behind it;
           // a black glow around dark text on a light panel does the opposite.

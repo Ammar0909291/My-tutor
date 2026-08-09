@@ -128,7 +128,14 @@ function uppercaseFraction(text: string): number {
 function widthRatioFor(text: string): number {
   return WIDTH_BASE_RATIO + WIDTH_UPPERCASE_EXTRA * uppercaseFraction(text)
 }
-const LINE_HEIGHT_RATIO = 1.35
+/**
+ * Line height as a multiple of font size. Exported because a WRAPPED label
+ * must be painted with exactly this ratio: the browser's own `normal` measured
+ * 1.5 here, and a box 10% taller than the one the solver reserved is a box
+ * that overlaps the label above it.
+ */
+export const LABEL_LINE_HEIGHT_RATIO = 1.35
+const LINE_HEIGHT_RATIO = LABEL_LINE_HEIGHT_RATIO
 
 /** The px size SceneLabel resolves to for this tier at this viewport. */
 function fontPxFor(viewport: Viewport, tier?: number): number {
@@ -137,13 +144,60 @@ function fontPxFor(viewport: Viewport, tier?: number): number {
   return Math.min(Math.max(ideal, FONT_FLOOR_PX * scale), FONT_CEILING_PX * scale)
 }
 
+/**
+ * Fraction of the canvas a single line of label may occupy before it wraps.
+ *
+ * A label WIDER THAN THE CANVAS cannot be placed at all: every candidate
+ * position overflows, so the solver keeps the authored spot and the text is
+ * cut off by the container. Measured on the VisualCard corpus, two captions
+ * are in exactly that position at every viewport — 69 characters against a
+ * 330px canvas. Wrapping is the only fix that keeps every word: shrinking
+ * would cross the readability floor and shortening would rewrite teaching
+ * text, and both are forbidden.
+ */
+const MAX_LINE_FRACTION = 0.92
+
+/**
+ * How wide one line of this label may be here, or null when it fits already.
+ *
+ * Exported so the RENDERER can constrain the same label to the same width the
+ * solver reserved for it. Two different answers would put the text back where
+ * the model cannot see it.
+ */
+export function labelWrapWidth(text: string, viewport: Viewport, tier?: number): number | null {
+  const fontPx = fontPxFor(viewport, tier)
+  const singleLine = text.length * widthRatioFor(text) * fontPx
+  const available = viewport.hostWidth * MAX_LINE_FRACTION
+  return singleLine > available ? available : null
+}
+
 /** The box that text will occupy, from its own resolved font size. */
 function labelExtent(text: string, viewport: Viewport, tier?: number): { halfW: number; halfH: number } {
   const fontPx = fontPxFor(viewport, tier)
-  return {
-    halfW: (text.length * widthRatioFor(text) * fontPx) / 2,
-    halfH: (fontPx * LINE_HEIGHT_RATIO) / 2,
+  const singleLine = text.length * widthRatioFor(text) * fontPx
+  const wrapAt = labelWrapWidth(text, viewport, tier)
+  if (wrapAt === null) {
+    return { halfW: singleLine / 2, halfH: (fontPx * LINE_HEIGHT_RATIO) / 2 }
   }
+  // Count the lines the browser will actually produce, by laying the words out
+  // the way it does. Dividing total width by line width instead would be a
+  // guess in the WRONG direction here: over-stating a wrapped label's height
+  // makes the solver believe there is nowhere to put it, and an unplaceable
+  // label is left overlapping — the exact failure this is meant to prevent.
+  const perChar = widthRatioFor(text) * fontPx
+  let lines = 1
+  let lineWidth = 0
+  for (const word of text.split(/\s+/)) {
+    const wordWidth = word.length * perChar
+    const withSpace = lineWidth === 0 ? wordWidth : lineWidth + perChar + wordWidth
+    if (withSpace > wrapAt && lineWidth > 0) {
+      lines++
+      lineWidth = wordWidth
+    } else {
+      lineWidth = withSpace
+    }
+  }
+  return { halfW: wrapAt / 2, halfH: (lines * fontPx * LINE_HEIGHT_RATIO) / 2 }
 }
 
 /** A label object's typographic tier; `size` means an extent on every other type. */
@@ -538,9 +592,18 @@ const PADDING_PX = 2
  * Geometry-overlap scoring. The cap stops a dense sampled curve from
  * outweighing every other consideration; the weight sets how many pixels of
  * travel one unit of overlap is worth.
+ *
+ * RAISED 7 -> 20 on the VisualCard corpus. Those figures are denser than the
+ * SceneSpec ones this was tuned against: inspected in Chromium at 390px, the
+ * data-structure comparison put its "Stack — LIFO" caption across the ARRAY's
+ * cells, because the few pixels of travel needed to clear them cost more than
+ * the overlap did. At 20 every caption in that figure sits in free space, and
+ * the seven M4 pilot figures re-measured unchanged — still zero collisions,
+ * zero clipped, at both themes. Displacement is still scored, so a label whose
+ * anchor is already clear never moves at all.
  */
 const GEOMETRY_HIT_CAP = 6
-const GEOMETRY_WEIGHT = 7
+const GEOMETRY_WEIGHT = 20
 
 function boxesOverlap(a: Box, b: Box, pad = PADDING_PX): boolean {
   return !(a.right + pad <= b.left || b.right + pad <= a.left ||
@@ -703,11 +766,23 @@ export function screenToWorld(
   return [(x - viewport.hostWidth / 2) / scale, (viewport.hostHeight / 2 - y) / scale, z]
 }
 
-/** Build a Viewport from a live canvas size, for runtime use by the renderer. */
-export function viewportFromCanvas(width: number, height: number): Viewport {
+/**
+ * Build a Viewport from a live canvas size, for runtime use by the renderer.
+ *
+ * `browserWidth` matters and is NOT the canvas width: `SceneLabel` sizes text
+ * in `vw`, which the browser resolves against the WINDOW. Measured on the
+ * VisualCard surface, where the card is capped at 560px inside a 1280px
+ * window, assuming the two are the same under-modelled every label by more
+ * than half its width — and a solver that thinks labels are small places them
+ * where the real ones do not fit. Callers that know the window width pass it;
+ * the canvas width remains the fallback, which is what full-bleed figures had
+ * all along.
+ */
+export function viewportFromCanvas(width: number, height: number, browserWidth?: number): Viewport {
+  const window = browserWidth && browserWidth > 0 ? browserWidth : width
   return {
-    name: width <= 480 ? 'mobile' : width <= 800 ? 'tablet' : 'desktop',
-    browserWidth: width,
+    name: window <= 480 ? 'mobile' : window <= 800 ? 'tablet' : 'desktop',
+    browserWidth: window,
     hostWidth: Math.max(1, Math.round(width)),
     hostHeight: Math.max(1, Math.round(height)),
   }

@@ -4,13 +4,17 @@
  * revealStep-gated: 1 cube · 2 sphere · 3 cylinder · 4 cone · 5 comparison
  * view (all four side by side). Reuses ThreeDVisual; plain Three.js solids.
  */
-import { Html } from '@react-three/drei'
+import { useMemo } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
+const CAMERA_DISTANCE = 9
 const SOLO_POS: [number, number, number] = [0, 0, 0]
 const ROW_POS: [number, number, number][] = [[-3, 0, 0], [-1, 0, 0], [1, 0, 0], [3, 0, 0]]
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showCube = revealStep >= 1
   const showSphere = revealStep >= 2
   const showCylinder = revealStep >= 3
@@ -21,6 +25,16 @@ function Scene({ revealStep }: { revealStep: number }) {
   const spherePos = compare ? ROW_POS[1] : SOLO_POS
   const cylinderPos = compare ? ROW_POS[2] : SOLO_POS
   const conePos = compare ? ROW_POS[3] : SOLO_POS
+
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (compare) {
+      for (const p of ROW_POS) obstacles.push({ type: 'node', position: p, radius: 0.55 })
+      labels.push({ text: 'Cube · Sphere · Cylinder · Cone', position: [0, -1.1, 0], color: '#9AA5B8' })
+    }
+    return { labels, obstacles }
+  }, [compare])
 
   return (
     <group>
@@ -43,25 +57,23 @@ function Scene({ revealStep }: { revealStep: number }) {
           <mesh position={ROW_POS[1]}><sphereGeometry args={[0.55, 24, 24]} /><meshStandardMaterial color="#5B8DEF" /></mesh>
           <mesh position={ROW_POS[2]}><cylinderGeometry args={[0.45, 0.45, 1.0, 24]} /><meshStandardMaterial color="#81C784" /></mesh>
           <mesh position={ROW_POS[3]}><coneGeometry args={[0.5, 1.0, 24]} /><meshStandardMaterial color="#FFB74D" /></mesh>
-          <Html position={[0, -1.1, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: '#9AA5B8', whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-              Cube · Sphere · Cylinder · Cone
-            </span>
-          </Html>
         </>
       )}
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function GeometricSolids3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={9}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D geometric solids: a cube, a sphere, a cylinder, a cone, each introduced in turn, then a side-by-side comparison view"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

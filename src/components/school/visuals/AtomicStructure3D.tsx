@@ -10,8 +10,11 @@ import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import type { Group } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
-import { MolecularNode3D } from './MolecularNode3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
+const CAMERA_DISTANCE = 8
 const SHELL_RADII = [1.0, 1.7, 2.4]
 const SHELL_COUNTS = [2, 4, 4]
 
@@ -59,12 +62,26 @@ function ShellRing({ radius, electronCount, spin }: { radius: number; electronCo
   )
 }
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showNucleus = revealStep >= 1
   const showProtonsNeutrons = revealStep >= 2
   const showShell1 = revealStep >= 3
   const showAllShells = revealStep >= 4
   const completed = revealStep >= 5
+
+  const labels: LayerLabel[] = []
+  const obstacles: SceneObject[] = []
+  if (showNucleus) obstacles.push({ type: 'node', position: [0, 0, 0], radius: 0.32 })
+  // The shells are rings the caption must not be printed across; each is
+  // sampled at the seats its electrons occupy.
+  const shellsShown = showAllShells ? SHELL_RADII : showShell1 ? SHELL_RADII.slice(0, 1) : []
+  shellsShown.forEach((r, i) => {
+    for (let k = 0; k < SHELL_COUNTS[i]; k++) {
+      const a = (k / SHELL_COUNTS[i]) * Math.PI * 2
+      obstacles.push({ type: 'point', position: [Math.cos(a) * r, 0, Math.sin(a) * r], radius: 0.08 })
+    }
+  })
+  if (completed) labels.push({ text: 'Completed atom', position: [0, -2.9, 0], color: '#FFB74D' })
 
   return (
     <group>
@@ -84,19 +101,26 @@ function Scene({ revealStep }: { revealStep: number }) {
         </>
       )}
 
-      {showNucleus && <MolecularNode3D position={[0, -2.9, 0]} radius={0.001} label={completed ? 'Completed atom' : undefined} color="#FFB74D" />}
+      <SceneLabelLayer
+        labels={labels}
+        obstacles={obstacles}
+        cameraDistance={CAMERA_DISTANCE}
+        theme={theme}
+      />
     </group>
   )
 }
 
 export function AtomicStructure3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={8}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D atomic structure: a nucleus with protons and neutrons, surrounded by electron shells with orbiting electrons"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }

@@ -8,8 +8,20 @@
 import { useMemo } from 'react'
 import { PlaneGeometry } from 'three'
 import { ThreeDVisual } from './ThreeDVisual'
-import { Vector3D } from './Vector3D'
+import { Vector3D, vectorLabelAnchor } from './Vector3D'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
 
+const CAMERA_DISTANCE = 8
+const ORIGIN: [number, number, number] = [0, 0, 0]
+// The axes group is counter-rotated back to world orientation, so these ends
+// are already world coordinates — which is what the label layer needs.
+const AXES: { end: [number, number, number]; color: string; text: string }[] = [
+  { end: [3, 0, 0], color: '#FF6B6B', text: 'x' },
+  { end: [0, 3, 0], color: '#81C784', text: 'z (height)' },
+  { end: [0, 0, 3], color: '#5B8DEF', text: 'y' },
+]
 const SIZE = 3
 const SEGMENTS = 24
 
@@ -27,7 +39,7 @@ function buildSurfaceGeometry() {
   return geom
 }
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showAxes = revealStep >= 1
   const showGrid = revealStep >= 2
   const showSurface = revealStep >= 3
@@ -36,13 +48,29 @@ function Scene({ revealStep }: { revealStep: number }) {
 
   const surfaceGeom = useMemo(() => buildSurfaceGeometry(), [])
 
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (showAxes) {
+      for (const axis of AXES) {
+        obstacles.push({ type: 'vector', from: ORIGIN, to: axis.end })
+        labels.push({ text: axis.text, position: vectorLabelAnchor(ORIGIN, axis.end), color: axis.color })
+      }
+    }
+    return { labels, obstacles }
+  }, [showAxes])
+
   return (
-    <group rotation={[-Math.PI / 2, 0, 0]}>
+    <group>
+      {/* The label layer sits OUTSIDE the rotated group: placement returns
+          world coordinates, and a rotated parent would re-rotate them. */}
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
+      <group rotation={[-Math.PI / 2, 0, 0]}>
       {showAxes && (
         <group rotation={[Math.PI / 2, 0, 0]}>
-          <Vector3D start={[0, 0, 0]} end={[3, 0, 0]} color="#FF6B6B" label="x" />
-          <Vector3D start={[0, 0, 0]} end={[0, 3, 0]} color="#81C784" label="z (height)" />
-          <Vector3D start={[0, 0, 0]} end={[0, 0, 3]} color="#5B8DEF" label="y" />
+          {AXES.map((axis) => (
+            <Vector3D key={axis.text} start={ORIGIN} end={axis.end} color={axis.color} />
+          ))}
         </group>
       )}
 
@@ -66,18 +94,21 @@ function Scene({ revealStep }: { revealStep: number }) {
             <meshBasicMaterial color="#FFB74D" transparent opacity={0.6} side={2} />
           </mesh>
         ))}
+      </group>
     </group>
   )
 }
 
 export function SurfaceVisualization3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={8}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D surface visualization of z = x squared plus y squared: axes, a flat grid, the generated curved surface, contour rings, and the completed shaded surface"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }
