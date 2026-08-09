@@ -124,6 +124,22 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
       'this message shows…"). You do NOT know its individual labels or ' +
       'colours, so name none of them rather than guessing.'
 
+  // ── WHAT MUST NOT BE CLAIMED ───────────────────────────────────────────────
+  // The rules above say "name only what is listed". These say what may not be
+  // ASSERTED about the things that are listed, which is where the observed
+  // drift actually happened: the figure was named correctly and then given
+  // properties it does not show. Everything here is derivable from the payload
+  // (it either states a number, a mechanism and a unit, or it does not), so
+  // this is a boundary on claims, never a scene-specific script.
+  const forbidRule =
+    '(7) Do NOT state a measurement, a numerical value, a unit, or a named ' +
+    'mechanism that the figure does not itself show — no temperatures, no ' +
+    'angles in degrees, no speeds, and no molecular or atomic explanation ' +
+    'unless the text listed above says so. A shape is a shape: a line is not a ' +
+    'bond, a marker is not a particle, and a curve is not data. If the learner ' +
+    'asks for a value the figure does not carry, say plainly that this figure ' +
+    'shows the relationship rather than the numbers, and teach the relationship.'
+
   // Hard prohibitions — each one closes a specific observed production failure.
   // Rule (5) differs by scope: a concept figure LEADS the explanation, whereas a
   // general illustration must not, or the tutor ends up teaching from a picture
@@ -138,7 +154,24 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
     '"picture in your mind" — they are LOOKING at it. (3) Do NOT promise a ' +
     'diagram in future tense ("here is a diagram I would draw") — it is ' +
     `already there. ${referenceRule} ${leadRule} (6) Do not open with a bare ` +
-    '"look at the figure on your screen" — say what in it matters and why.',
+    '"look at the figure on your screen" — say what in it matters and why. ' +
+    forbidRule,
+  )
+
+  // ── THE FIGURE'S CONCEPT IS THIS TURN'S SUBJECT ────────────────────────────
+  // Observed drift: the tutor described the viscosity figure accurately and
+  // then, in the same reply, pivoted to the lesson and asked an SI-Units
+  // question. The figure and the question came from two different concepts, so
+  // the learner was looking at one thing and being examined on another.
+  //
+  // The identity here is the ADMITTED ASSET's, which is the same concept the
+  // Teaching Engine set as this turn's target — the contract does not choose
+  // it and cannot disagree with it.
+  lines.push(
+    `GROUNDING: everything you say this turn is about ${what}. Any question you ` +
+    'ask must be answerable FROM THIS FIGURE — point at the text or the shape ' +
+    'that carries the answer. Do not ask about, or pivot to, a different ' +
+    'concept while this figure is on screen, however related it seems.',
   )
 
   // CONTINUITY. The same figure persisting across turns is the normal case in a

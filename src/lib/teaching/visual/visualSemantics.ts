@@ -262,39 +262,48 @@ export function describeVisualPayload(payload: VisualPayload | null | undefined)
  */
 export function buildSemanticsBlock(semantics: VisualSemantics): string {
   const parts: string[] = []
+  // Read defensively. This builds PROMPT TEXT from a value that may have been
+  // constructed before these fields existed (an older asset, a hand-built
+  // object); a missing array must degrade to "say less", never to a throw that
+  // costs the turn its whole visual contract.
+  const readable = semantics.readable ?? []
+  const geometry = semantics.geometry ?? []
+  const equations = semantics.equations ?? []
+  const elements = semantics.elements ?? []
+  const steps = semantics.steps ?? []
   if (semantics.caption) parts.push(`The figure is: ${semantics.caption}.`)
 
   // ── WHAT IS PRESENT ────────────────────────────────────────────────────────
   // Text first and complete: it is the only part of the figure a learner can
   // quote back, and the part the tutor is most likely to invent.
-  if (semantics.readable.length) {
+  if (readable.length) {
     parts.push(
       'TEXT WRITTEN ON THE FIGURE, exactly as the learner reads it: ' +
-      semantics.readable.map((t) => `"${t}"`).join(', ') +
+      readable.map((t) => `"${t}"`).join(', ') +
       '. Use these words when you point at parts of it.',
     )
   }
-  if (semantics.geometry.length) {
+  if (geometry.length) {
     parts.push(
-      'Drawn without text of their own: ' + semantics.geometry.join(', ') +
+      'Drawn without text of their own: ' + geometry.join(', ') +
       '. These are shapes — what each one MEANS is given by the text beside it ' +
       'and by the stages below, never by their shape alone.',
     )
   }
   // The flat list stays, because it is what the contract's "name only these"
   // rule points at, and callers with no readable/geometry split still work.
-  if (!semantics.readable.length && !semantics.geometry.length && semantics.elements.length) {
+  if (!readable.length && !geometry.length && elements.length) {
     parts.push(
       'It contains EXACTLY these elements, and nothing else you may name: ' +
-      semantics.elements.map((e) => `- ${e}`).join(' ') + '.',
+      elements.map((e) => `- ${e}`).join(' ') + '.',
     )
   }
 
   // ── RELATIONSHIPS WRITTEN ON IT ────────────────────────────────────────────
-  if (semantics.equations.length) {
+  if (equations.length) {
     parts.push(
       'Written on the figure as a relationship: ' +
-      semantics.equations.map((e) => `"${e}"`).join(', ') +
+      equations.map((e) => `"${e}"`).join(', ') +
       '. SAY IT IN WORDS as you would to a learner, naming each quantity — ' +
       'do not read the symbols or the punctuation out one by one, do not spell ' +
       'out Greek letters as characters, and do not restate it as markup.',
@@ -304,11 +313,11 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
   // ── WHAT IT MEANS ──────────────────────────────────────────────────────────
   // The authored narrations ARE the relationships. They are the only source of
   // meaning in the payload, so they are quoted, never paraphrased into claims.
-  if (semantics.steps.length) {
+  if (steps.length) {
     parts.push(
-      `It is built in ${semantics.steps.length} stages, shown complete but ` +
+      `It is built in ${steps.length} stages, shown complete but ` +
       'walkable one stage at a time by the learner: ' +
-      semantics.steps.map((s, i) => `(${i + 1}) ${clamp(s, 220)}`).join(' ') +
+      steps.map((s, i) => `(${i + 1}) ${clamp(s, 220)}`).join(' ') +
       '. These stages are what the figure MEANS: teach it in that order, keep ' +
       'each stage\'s claim intact, and invite them to walk the stages if they ' +
       'want to see it built up.',

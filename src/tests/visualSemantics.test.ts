@@ -47,8 +47,13 @@ describe('scene payloads yield only what the renderer draws', () => {
         { type: 'label', position: [1, 1, 0], text: 'resultant' },
       ] }]),
     })
-    expect(s.elements).toContain('an arrow (vector) labelled "v₁"')
-    expect(s.elements).toContain('a text label labelled "resultant"')
+    // P3 grounding: a label's TEXT is what the learner reads, whatever shape
+    // carries it, so both texts arrive verbatim and the shapes are summarised
+    // separately. The property is unchanged — nothing drawn is omitted, and
+    // nothing not drawn is named.
+    expect(s.readable).toEqual(['v₁', 'resultant'])
+    expect(s.elements).toContain('text reading "v₁"')
+    expect(s.elements).toContain('text reading "resultant"')
     expect(s.caption).toContain('Vector Addition')
   })
 
@@ -64,7 +69,8 @@ describe('scene payloads yield only what the renderer draws', () => {
       ] }]),
     })
     expect(s.elements.join(' ')).not.toMatch(/income|surface/)
-    expect(s.elements).toContain('a node labelled "A"')
+    expect(s.readable).toEqual(['A'])
+    expect(s.elements).toContain('text reading "A"')
   })
 
   it('reports stages only when the scene really has more than one', () => {
@@ -131,7 +137,8 @@ describe('the contract block teaches from the real figure', () => {
       sceneSpec: scene([{ objects: [{ type: 'vector', text: 'v₁' }] }]),
     }))
     expect(block).toContain('WHAT THE LEARNER SEES')
-    expect(block).toContain('an arrow (vector) labelled "v₁"')
+    expect(block).toContain('TEXT WRITTEN ON THE FIGURE')
+    expect(block).toContain('"v₁"')
     expect(block).toMatch(/named above, and by those\s+only/)
     // The invented examples that trained the old failure are gone.
     expect(block).not.toContain('look at the arrow')
@@ -154,6 +161,13 @@ describe('the contract block teaches from the real figure', () => {
   })
 
   it('an empty semantics object produces no block at all', () => {
-    expect(buildSemanticsBlock({ caption: null, elements: [], steps: [] })).toBe('')
+    expect(buildSemanticsBlock({
+      caption: null, elements: [], readable: [], geometry: [], equations: [], steps: [],
+    })).toBe('')
+    // A value built before the P3 fields existed must degrade to "say less",
+    // never throw: this builds the prompt's only description of the figure.
+    expect(buildSemanticsBlock({ caption: null, elements: [], steps: [] } as never)).toBe('')
+    expect(buildSemanticsBlock({ caption: 'A figure', elements: [], steps: [] } as never))
+      .toBe('The figure is: A figure.')
   })
 })
