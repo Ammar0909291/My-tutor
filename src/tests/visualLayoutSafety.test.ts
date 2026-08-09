@@ -41,13 +41,14 @@ function pilotScene(conceptId: string): SceneSpec {
  * Lower them as figures are repositioned; never raise one.
  */
 const MOBILE_BASELINE: Record<string, number> = {
+  // Re-recorded after the placement solver landed. Six of the seven figures now
+  // place every label safely at 390px; TIR is the one figure whose label
+  // density still exceeds what a 282px canvas can hold, and those three are
+  // KEPT and reported rather than hidden. Lower these as placement improves;
+  // never raise one.
   'phys.opt.total-internal-reflection': 3,
   'phys.wave.transverse-waves': 0,
   'phys.wave.interference': 0,
-  // Repositioned to zero: the three figures the M4 release gate found printing
-  // a caption across the geometry it named. Their captions now sit a full
-  // screen line-height apart — and with framing re-centring them on top of
-  // that, all three are clean at every viewport. The ratchet holds them there.
   'phys.therm.calorimetry': 0,
   'phys.therm.first-law': 0,
   'phys.mech.viscosity': 0,
@@ -77,27 +78,50 @@ describe('Layout safety — model', () => {
     expect(VIEWPORTS.map((v) => v.browserWidth)).toEqual([1280, 768, 390])
   })
 
-  it('label boxes are viewport-independent in size — the root cause', () => {
-    // Labels render at a fixed pixel size, so the SAME text occupies the same
-    // width on a 992px canvas and a 282px one. That is precisely why density
-    // rises on mobile, and why a scene-unit-only check cannot see it.
+  it('label boxes now scale with the viewport — the old root cause is gone', () => {
+    // ORIGINALLY this asserted the opposite: labels rendered at a FIXED pixel
+    // size, so the same text occupied the same width on a 992px canvas and a
+    // 282px one, and density rose until labels collided. SceneLabel is now
+    // responsive (clamp with a readability floor), so a narrow canvas gets
+    // narrower text. The assertion is inverted deliberately — it pins the fix
+    // rather than the defect it replaced.
     const scene = pilotScene('phys.therm.calorimetry')
     const wide = projectLabelBoxes(scene, VIEWPORTS[0])
     const narrow = projectLabelBoxes(scene, VIEWPORTS[2])
-    expect(narrow[0].right - narrow[0].left).toBeCloseTo(wide[0].right - wide[0].left, 5)
+    expect(narrow[0].right - narrow[0].left).toBeLessThan(wide[0].right - wide[0].left)
   })
 
-  it('detects a collision that genuinely exists', () => {
+  it('two labels on the same point are SEPARATED, not merely reported', () => {
+    // This assertion changed meaning when the placement solver landed. It used
+    // to prove the predicate could SEE a collision; the predicate now evaluates
+    // placed positions, so on a canvas with room the collision is solved and
+    // there is nothing left to report. That is the stronger outcome.
     const colliding: SceneSpec = {
-      id: 't', title: 't', sceneType: 'diagram',
+      id: 't', title: 't', sceneType: 'diagram', cameraDistance: 12,
       steps: [{ objects: [
         { type: 'label', text: 'the very same spot', position: [0, 0, 0] },
         { type: 'label', text: 'also the same spot', position: [0, 0, 0] },
       ] }],
     }
     const report = checkSceneLayout(colliding, VIEWPORTS[0])
-    expect(report.ok).toBe(false)
-    expect(report.violations.some((v) => v.kind === 'label-collision')).toBe(true)
+    expect(report.violations.filter((v) => v.kind === 'label-collision')).toEqual([])
+    expect(report.ok).toBe(true)
+  })
+
+  it('still reports a collision the solver genuinely cannot resolve', () => {
+    // A canvas with no free space anywhere: the labels are kept and the
+    // overlap is reported, never hidden.
+    const impossible: SceneSpec = {
+      id: 't', title: 't', sceneType: 'diagram', cameraDistance: 12,
+      steps: [{ objects: [
+        { type: 'label', text: 'a very long label indeed', position: [0, 0, 0] },
+        { type: 'label', text: 'another very long label', position: [0, 0, 0] },
+      ] }],
+    }
+    const tiny = { name: 'mobile' as const, browserWidth: 390, hostWidth: 90, hostHeight: 60 }
+    const report = checkSceneLayout(impossible, tiny)
+    expect(report.labelCount).toBe(2)          // both kept
+    expect(report.violations.length).toBeGreaterThan(0)
   })
 
   it('detects text pushed outside the drawing area', () => {

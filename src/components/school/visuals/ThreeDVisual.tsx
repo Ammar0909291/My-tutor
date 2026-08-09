@@ -22,6 +22,13 @@ interface ThreeDVisualProps {
   cameraDistance?: number
   /** Allow user orbit/zoom/pan (default true; disabled automatically under reduced motion is NOT assumed — rotation auto-spin is what reduced motion disables). */
   enableControls?: boolean
+  /**
+   * Slow orbit of the camera. Delightful on an exploratory 3D object, wrong on
+   * a labelled teaching diagram: while the camera moves, every label's screen
+   * position moves with it, so no placement can keep text inside the canvas or
+   * clear of other text. Defaults to true so existing callers are unchanged.
+   */
+  autoRotate?: boolean
 }
 
 /** Detects the user's OS-level reduced-motion preference (no new narration/animation architecture — purely gates autorotation). */
@@ -42,6 +49,7 @@ export function ThreeDVisual({
   ariaLabel,
   cameraDistance = 6,
   enableControls = true,
+  autoRotate = true,
 }: ThreeDVisualProps) {
   const reducedMotion = usePrefersReducedMotion()
 
@@ -87,7 +95,7 @@ export function ThreeDVisual({
             // part they were looking at back into frame. Zoom without pan is a
             // trap; both are enabled together.
             enablePan
-            autoRotate={!reducedMotion}
+            autoRotate={autoRotate && !reducedMotion}
             autoRotateSpeed={0.6}
             minDistance={cameraDistance * 0.5}
             maxDistance={cameraDistance * 2}

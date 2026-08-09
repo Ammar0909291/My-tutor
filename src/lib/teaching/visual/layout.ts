@@ -73,6 +73,51 @@ const CHAR_WIDTH_PX = 5.6
 const LINE_HEIGHT_PX = 16
 
 /**
+ * RESPONSIVE LABEL METRICS — the model of what SceneLabel actually paints.
+ *
+ * The single constant above was calibrated when labels were a fixed 16px, and
+ * it was measured from TRUNCATED sample strings, so it under-counted characters
+ * and came out too small. Re-measured in Chromium against the real renderer at
+ * 390px: "rest position" 13 chars -> 82px, "crest" 5 -> 41px,
+ * "one wavelength λ" 16 -> 144px. Against each label's own font size that is a
+ * consistent 0.59-0.64 px per character per px of font.
+ *
+ * An under-estimating model is the worst kind here: the solver believes a label
+ * fits, places it, and the learner sees it hang off the canvas — which is
+ * exactly what was still happening on mobile after the solver landed. 0.62 sits
+ * at the top of the measured range so the model errs wide.
+ *
+ * These mirror SceneLabel's own clamp(FLOOR, IDEAL_VW, CEILING) scaled by tier.
+ * If that declaration changes, these change with it.
+ */
+const FONT_FLOOR_PX = 10
+const FONT_IDEAL_VW = 1.05
+const FONT_CEILING_PX = 15
+const WIDTH_PER_CHAR_PER_FONT_PX = 0.62
+const LINE_HEIGHT_RATIO = 1.35
+
+/** The px size SceneLabel resolves to for this tier at this viewport. */
+function fontPxFor(viewport: Viewport, tier?: number): number {
+  const scale = typeof tier === 'number' && tier > 0 ? Math.min(tier, 3) : 1
+  const ideal = (FONT_IDEAL_VW * scale * viewport.browserWidth) / 100
+  return Math.min(Math.max(ideal, FONT_FLOOR_PX * scale), FONT_CEILING_PX * scale)
+}
+
+/** The box that text will occupy, from its own resolved font size. */
+function labelExtent(text: string, viewport: Viewport, tier?: number): { halfW: number; halfH: number } {
+  const fontPx = fontPxFor(viewport, tier)
+  return {
+    halfW: (text.length * WIDTH_PER_CHAR_PER_FONT_PX * fontPx) / 2,
+    halfH: (fontPx * LINE_HEIGHT_RATIO) / 2,
+  }
+}
+
+/** A label object's typographic tier; `size` means an extent on every other type. */
+function tierOf(object: SceneObject): number | undefined {
+  return object.type === 'label' ? object.size : undefined
+}
+
+/**
  * `SceneSpecRenderer` sets `whiteSpace: 'nowrap'`, so a label never wraps —
  * its width grows without bound with its text. Modelled exactly as rendered.
  */
@@ -101,15 +146,22 @@ function pixelsPerUnit(viewport: Viewport, cameraDistance: number): number {
   return viewport.hostHeight / (2 * halfHeightWorld)
 }
 
-/** Every object that will paint text, with the anchor it paints at. */
-function textObjects(scene: SceneSpec): { text: string; position: Vec3 }[] {
-  const out: { text: string; position: Vec3 }[] = []
+/**
+ * Every object that will paint text, with the anchor it paints at and the
+ * object it came from, in a STABLE order.
+ *
+ * Exported because the renderer zips the solver's output back onto these
+ * objects by index to recover each label's colour and tier. One ordering,
+ * shared by the model and the renderer, so the two cannot drift apart.
+ */
+export function sceneTextObjects(scene: SceneSpec): { text: string; position: Vec3; object: SceneObject }[] {
+  const out: { text: string; position: Vec3; object: SceneObject }[] = []
   for (const step of scene.steps ?? []) {
     for (const obj of step.objects ?? []) {
       const text = (obj.text ?? '').trim()
       if (!text) continue
       const position = anchorOf(obj)
-      if (position) out.push({ text, position })
+      if (position) out.push({ text, position, object: obj })
     }
   }
   return out
@@ -141,12 +193,11 @@ export function projectLabelBoxes(scene: SceneSpec, viewport: Viewport): LabelBo
   const cx = viewport.hostWidth / 2
   const cy = viewport.hostHeight / 2
 
-  return textObjects(scene).map(({ text, position }) => {
+  return sceneTextObjects(scene).map(({ text, position, object }) => {
     // drei's <Html center> centres the box on its anchor.
     const screenX = cx + position[0] * scale
     const screenY = cy - position[1] * scale
-    const halfW = (text.length * CHAR_WIDTH_PX) / 2
-    const halfH = LINE_HEIGHT_PX / 2
+    const { halfW, halfH } = labelExtent(text, viewport, tierOf(object))
     return {
       text,
       left: screenX - halfW,
@@ -172,7 +223,15 @@ function overlapArea(a: LabelBox, b: LabelBox): number {
  * printed on top of other text.
  */
 export function checkSceneLayout(scene: SceneSpec, viewport: Viewport): LayoutReport {
-  const boxes = projectLabelBoxes(scene, viewport)
+  // Evaluate what the learner will ACTUALLY see. The renderer runs the
+  // placement solver, so checking authored anchors would be checking a
+  // position no one is shown — the model and the runtime must agree.
+  const placement = placeSceneLabels(scene, viewport)
+  const tiers = sceneTextObjects(scene).map(({ object }) => tierOf(object))
+  const boxes: LabelBox[] = placement.labels.map((l, i) => {
+    const { halfW, halfH } = labelExtent(l.text, viewport, tiers[i])
+    return { text: l.text, left: l.x - halfW, right: l.x + halfW, top: l.y - halfH, bottom: l.y + halfH }
+  })
   const violations: LayoutViolation[] = []
 
   for (const box of boxes) {
@@ -366,5 +425,240 @@ export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
         ...(obj.points ? { points: obj.points.map(shift) } : {}),
       })),
     })),
+  }
+}
+
+// ── Label placement solver ───────────────────────────────────────────────────
+/**
+ * THE PLACEMENT CONTRACT.
+ *
+ * Typography is solved: labels are readable, theme-correct and never hidden.
+ * What remained, measured in Chromium at 390px, is WHERE they sit — 8 labels
+ * outside the 282px canvas and 7 overlapping another label.
+ *
+ * This solver adjusts POSITION ONLY. It never deletes, hides, replaces or
+ * rewrites a label, never shrinks one below the readability floor, and never
+ * changes what a label says. When it cannot find a safe spot it KEEPS the
+ * authored position and reports the failure, so an unplaceable label is a
+ * visible diagnostic rather than silently missing teaching information.
+ *
+ * ON GEOMETRY OWNERSHIP — the question this design had to answer honestly.
+ * Measured across the corpus: 61 labels are carried BY a geometry object, so
+ * their referent is intrinsic and needs no metadata. 116 are standalone `label`
+ * objects carrying only a coordinate; SceneSpec has no field linking them to
+ * geometry, and `id`/`properties` are used for diffing and generator-private
+ * data, never for ownership.
+ *
+ * That gap does NOT block this work, and it is deliberately not filled by
+ * guessing. Ownership would only be needed to PERMIT a label to overlap its own
+ * referent — which is not wanted. Treating all geometry as an obstacle and
+ * keeping the label near its authored anchor is both stricter and inference-free.
+ * The authored anchor IS the association the author chose; bounding displacement
+ * preserves it.
+ */
+
+/** Screen-space rectangle. */
+interface Box { left: number; right: number; top: number; bottom: number }
+
+/** A label after the solver has run. */
+export interface PlacedLabel {
+  text: string
+  /** Where the author put it, in screen px. */
+  anchorX: number
+  anchorY: number
+  /** Where it will actually be drawn, in screen px. */
+  x: number
+  y: number
+  /** Displacement applied, in px. */
+  movedPx: number
+  /** False when no safe placement existed; the authored position is kept. */
+  ok: boolean
+  reason?: 'no-safe-placement'
+}
+
+export interface PlacementResult {
+  labels: PlacedLabel[]
+  /** Labels the solver could not place safely. Never hidden — reported. */
+  unresolved: number
+}
+
+/**
+ * How far a label may travel from its anchor before its referent becomes
+ * ambiguous. Expressed as a fraction of the canvas's smaller side so it scales
+ * with the surface instead of being a magic pixel count.
+ */
+const MAX_DISPLACEMENT_FRACTION = 0.22
+
+/** Clearance kept between a label and anything it must avoid. */
+const PADDING_PX = 2
+
+/**
+ * Geometry-overlap scoring. The cap stops a dense sampled curve from
+ * outweighing every other consideration; the weight sets how many pixels of
+ * travel one unit of overlap is worth.
+ */
+const GEOMETRY_HIT_CAP = 6
+const GEOMETRY_WEIGHT = 7
+
+function boxesOverlap(a: Box, b: Box, pad = PADDING_PX): boolean {
+  return !(a.right + pad <= b.left || b.right + pad <= a.left ||
+           a.bottom + pad <= b.top || b.bottom + pad <= a.top)
+}
+
+function boxFor(x: number, y: number, text: string, viewport: Viewport, tier?: number): Box {
+  const { halfW, halfH } = labelExtent(text, viewport, tier)
+  return { left: x - halfW, right: x + halfW, top: y - halfH, bottom: y + halfH }
+}
+
+/**
+ * Geometry projected into screen space, as obstacles.
+ *
+ * Segments (vector/arrow/bond) are sampled rather than treated as their
+ * bounding box: a long diagonal arrow's bounding box covers a huge empty area
+ * and would push labels away from space that is genuinely free.
+ */
+function geometryObstacles(scene: SceneSpec, viewport: Viewport, scale: number): Box[] {
+  const cx = viewport.hostWidth / 2
+  const cy = viewport.hostHeight / 2
+  const toScreen = (p: Vec3) => ({ x: cx + p[0] * scale, y: cy - p[1] * scale })
+  const out: Box[] = []
+  const dot = (x: number, y: number, r: number) => out.push({ left: x - r, right: x + r, top: y - r, bottom: y + r })
+
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      if (obj.type === 'label') continue          // labels are handled separately
+      if (obj.from && obj.to) {
+        const a = toScreen(obj.from), b = toScreen(obj.to)
+        const steps = 12
+        for (let i = 0; i <= steps; i++) {
+          dot(a.x + ((b.x - a.x) * i) / steps, a.y + ((b.y - a.y) * i) / steps, 3)
+        }
+      } else if (obj.points?.length) {
+        for (const p of obj.points) { const s = toScreen(p); dot(s.x, s.y, 3) }
+      } else if (obj.position) {
+        const s = toScreen(obj.position)
+        dot(s.x, s.y, Math.max(3, (obj.radius ?? 0.2) * scale))
+      }
+    }
+  }
+  return out
+}
+
+/**
+ * Candidate offsets, in a FIXED order — the authored spot first, then rings of
+ * increasing radius. Deterministic by construction: no randomness, no search
+ * heuristics that depend on iteration order elsewhere.
+ */
+function candidateOffsets(maxRadius: number): { dx: number; dy: number }[] {
+  const out = [{ dx: 0, dy: 0 }]
+  const directions = [
+    [0, -1], [0, 1], [1, 0], [-1, 0],
+    [1, -1], [-1, -1], [1, 1], [-1, 1],
+  ]
+  for (let r = 12; r <= maxRadius; r += 8) {
+    for (const [ux, uy] of directions) out.push({ dx: ux * r, dy: uy * r })
+  }
+  return out
+}
+
+/**
+ * Solve label positions for one scene at one viewport.
+ *
+ * Priority order, applied as hard constraints then a deterministic score:
+ *   1. inside the canvas            (hard)
+ *   2. clear of already-placed labels (hard)
+ *   3. clear of geometry            (scored — a figure with no free space must
+ *                                    still show its labels)
+ *   4. closest to the authored position (scored)
+ *
+ * Readability is untouched: this function moves boxes, it never resizes them.
+ */
+export function placeSceneLabels(scene: SceneSpec, viewport: Viewport): PlacementResult {
+  const scale = pixelsPerUnit(viewport, scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE)
+  const anchors = projectLabelBoxes(scene, viewport)
+  const tiers = sceneTextObjects(scene).map(({ object }) => tierOf(object))
+  const obstacles = geometryObstacles(scene, viewport, scale)
+  const maxDisplacement = Math.min(viewport.hostWidth, viewport.hostHeight) * MAX_DISPLACEMENT_FRACTION
+  const offsets = candidateOffsets(maxDisplacement)
+
+  const placedBoxes: Box[] = []
+  const labels: PlacedLabel[] = []
+  let unresolved = 0
+
+  for (const [index, anchor] of anchors.entries()) {
+    const tier = tiers[index]
+    const ax = (anchor.left + anchor.right) / 2
+    const ay = (anchor.top + anchor.bottom) / 2
+
+    let best: { x: number; y: number; score: number } | null = null
+
+    for (const { dx, dy } of offsets) {
+      const x = ax + dx
+      const y = ay + dy
+      const box = boxFor(x, y, anchor.text, viewport, tier)
+
+      // 1. hard: inside the canvas
+      if (box.left < 0 || box.right > viewport.hostWidth || box.top < 0 || box.bottom > viewport.hostHeight) continue
+      // 2. hard: clear of labels already placed this pass
+      if (placedBoxes.some((p) => boxesOverlap(box, p))) continue
+
+      // 3 + 4. scored
+      // Geometry overlap is capped and weighted modestly against displacement.
+      // Unbounded, a label beside a long sampled arrow scores so badly that it
+      // flees across the figure — which fixes an overlap by destroying the
+      // association. Capped, a label moves only when nearby space is genuinely
+      // clearer, and a label whose authored spot is already clean never moves.
+      const geometryHits = Math.min(
+        obstacles.reduce((n, o) => n + (boxesOverlap(box, o, 0) ? 1 : 0), 0),
+        GEOMETRY_HIT_CAP,
+      )
+      const displacement = Math.hypot(dx, dy)
+      const score = geometryHits * GEOMETRY_WEIGHT + displacement
+      if (!best || score < best.score) best = { x, y, score }
+      // The authored position, clear of everything, is unbeatable — stop early
+      // so an already-good label is provably never moved.
+      if (score === 0) break
+    }
+
+    if (best) {
+      const box = boxFor(best.x, best.y, anchor.text, viewport, tier)
+      placedBoxes.push(box)
+      labels.push({
+        text: anchor.text, anchorX: ax, anchorY: ay, x: best.x, y: best.y,
+        movedPx: Math.round(Math.hypot(best.x - ax, best.y - ay)),
+        ok: true,
+      })
+    } else {
+      // FAIL VISIBLY: keep the authored position, report it, never hide.
+      placedBoxes.push(boxFor(ax, ay, anchor.text, viewport, tier))
+      labels.push({
+        text: anchor.text, anchorX: ax, anchorY: ay, x: ax, y: ay,
+        movedPx: 0, ok: false, reason: 'no-safe-placement',
+      })
+      unresolved++
+    }
+  }
+
+  return { labels, unresolved }
+}
+
+/**
+ * Convert a solved screen position back into the world coordinate the renderer
+ * draws at. The projection is linear on the z = 0 plane, so this is exact.
+ */
+export function screenToWorld(
+  x: number, y: number, viewport: Viewport, cameraDistance: number, z = 0,
+): Vec3 {
+  const scale = pixelsPerUnit(viewport, cameraDistance)
+  return [(x - viewport.hostWidth / 2) / scale, (viewport.hostHeight / 2 - y) / scale, z]
+}
+
+/** Build a Viewport from a live canvas size, for runtime use by the renderer. */
+export function viewportFromCanvas(width: number, height: number): Viewport {
+  return {
+    name: width <= 480 ? 'mobile' : width <= 800 ? 'tablet' : 'desktop',
+    browserWidth: width,
+    hostWidth: Math.max(1, Math.round(width)),
+    hostHeight: Math.max(1, Math.round(height)),
   }
 }

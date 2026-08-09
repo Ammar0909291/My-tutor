@@ -18,6 +18,10 @@ import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
 import { visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
+import { useThree } from '@react-three/fiber'
+import {
+  placeSceneLabels, sceneTextObjects, screenToWorld, viewportFromCanvas,
+} from '@/lib/teaching/visual/layout'
 import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { useTheme, type Theme } from '@/components/Providers'
 
@@ -57,8 +61,6 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
           position={obj.position ?? [0, 0, 0]}
           radius={obj.radius ?? (obj.type === 'node' ? 0.3 : 0.1)}
           color={color ?? '#5B8DEF'}
-          label={obj.text}
-          theme={theme}
         />
       )
     case 'vector':
@@ -69,22 +71,12 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
           start={obj.from ?? [0, 0, 0]}
           end={obj.to ?? [1, 0, 0]}
           color={color ?? '#5B8DEF'}
-          label={obj.text}
           thickness={obj.thickness ?? 0.05}
-          theme={theme}
         />
       )
     case 'label':
-      return (
-        <SceneLabel
-          key={key}
-          text={obj.text ?? ''}
-          position={obj.position ?? [0, 0, 0]}
-          color={color ?? '#5B8DEF'}
-          theme={theme}
-          tier={obj.size}
-        />
-      )
+      // Drawn by <PlacedLabels/>, which solves every label's position together.
+      return null
     case 'path':
     case 'trajectory':
       // Render the ordered points as small markers (spike: no spline geometry yet).
@@ -96,14 +88,6 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
           {(obj.points ?? []).map((p, i) => (
             <MolecularNode3D key={i} position={p} radius={obj.radius ?? 0.06} color={color ?? '#FFD166'} theme={theme} />
           ))}
-          {obj.text && (obj.points?.length ?? 0) > 0 && (
-            <SceneLabel
-              text={obj.text}
-              position={obj.points![Math.floor(obj.points!.length / 2)]}
-              color={color ?? '#FFD166'}
-              theme={theme}
-            />
-          )}
         </group>
       )
     case 'bond':
@@ -130,14 +114,6 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
             <boxGeometry args={[extent, thickness, thickness]} />
             <meshStandardMaterial color={color ?? '#5B8DEF'} />
           </mesh>
-          {obj.text && (
-            <SceneLabel
-              text={obj.text}
-              position={[at[0], at[1] + thickness / 2 + 0.5, at[2]]}
-              color={color ?? '#5B8DEF'}
-              theme={theme}
-            />
-          )}
         </group>
       )
     }
@@ -146,6 +122,60 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
       // returns null rather than guessing at a height-field representation.
       return null
   }
+}
+
+/**
+ * THE LABEL LAYER — every label in the scene, placed together.
+ *
+ * Labels cannot be positioned one at a time: avoiding another label requires
+ * knowing where that other label ended up. So `renderObject` draws geometry
+ * only, and this component draws all the text, after solving positions for the
+ * whole set at once.
+ *
+ * It reads the LIVE canvas size from react-three-fiber rather than a modelled
+ * viewport, so placement responds to the real surface — and, because it is
+ * derived from the SceneSpec plus the current size, the same persisted visual
+ * re-solves correctly on a different device after a refresh. Nothing about
+ * placement is persisted.
+ */
+function PlacedLabels({
+  objects, cameraDistance, theme,
+}: { objects: SceneObject[]; cameraDistance: number; theme: Theme }) {
+  const size = useThree((s) => s.size)
+
+  const placed = useMemo(() => {
+    const viewport = viewportFromCanvas(size.width, size.height)
+    // A scene of exactly the VISIBLE objects, so reveal steps are respected and
+    // the solver's ordering matches sceneTextObjects() below, index for index.
+    const scene: SceneSpec = {
+      id: 'labels', title: '', sceneType: 'diagram', cameraDistance,
+      steps: [{ objects }],
+    }
+    const sources = sceneTextObjects(scene)
+    const { labels } = placeSceneLabels(scene, viewport)
+    return labels.map((label, i) => ({
+      label,
+      source: sources[i]?.object,
+      position: screenToWorld(label.x, label.y, viewport, cameraDistance),
+    }))
+  }, [objects, cameraDistance, size.width, size.height])
+
+  return (
+    <>
+      {placed.map(({ label, source, position }, i) => (
+        <SceneLabel
+          key={i}
+          text={label.text}
+          position={position}
+          color={themeColor(source?.color, theme) ?? '#5B8DEF'}
+          theme={theme}
+          // `size` is a typographic tier ONLY on label objects; elsewhere it is
+          // an extent, so it must not drive typography.
+          tier={source?.type === 'label' ? source.size : undefined}
+        />
+      ))}
+    </>
+  )
 }
 
 interface SceneSpecRendererProps {
@@ -166,8 +196,17 @@ export function SceneSpecRenderer({ spec, revealStep = Infinity }: SceneSpecRend
       revealStep={revealStep}
       cameraDistance={spec.cameraDistance ?? 7}
       ariaLabel={spec.ariaLabel ?? spec.title}
+      // A labelled teaching figure is a diagram, not a turntable. While the
+      // camera orbits, every label's screen position orbits with it, so
+      // containment and separation cannot be guaranteed for even one frame —
+      // and the layout model's fixed-camera projection stops being true.
+      // Pan and zoom stay enabled; only the automatic motion stops.
+      autoRotate={false}
     >
-      <group>{objects.map((obj, i) => renderObject(obj, i, theme))}</group>
+      <group>
+        {objects.map((obj, i) => renderObject(obj, i, theme))}
+        <PlacedLabels objects={objects} cameraDistance={spec.cameraDistance ?? 7} theme={theme} />
+      </group>
     </ThreeDVisual>
   )
 }
