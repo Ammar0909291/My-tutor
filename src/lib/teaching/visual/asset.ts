@@ -35,6 +35,7 @@
 
 import type { VisualPayload, RendererKind, Representation, EducationalPurpose } from './types'
 import { describeVisualPayload, type VisualSemantics } from './visualSemantics'
+import { scopeForAsset, type VisualScope } from './scope'
 
 /**
  * Where an asset came from, and — read through IDENTITY_STRENGTH below —
@@ -111,6 +112,19 @@ export interface VisualAsset {
   provenance: AssetProvenance
   /** Convenience mirror of IDENTITY_STRENGTH[provenance]; see the module doc. */
   identity: IdentityStrength
+  /**
+   * What this asset is entitled to CLAIM (M3-B/B4).
+   *
+   * 'concept' — it depicts this concept; the tutor may teach from it by name.
+   * 'domain'  — it is a general illustration related to the topic. It still
+   *             renders, but the tutor may not introduce it as a figure OF the
+   *             concept. See scope.ts for how this is decided.
+   *
+   * Identity (`conceptId`) says WHO the asset belongs to; scope says WHETHER it
+   * shows them. An asset can be correctly owned and still not depict its owner,
+   * which is the case for 372 of the domain-prefix figures.
+   */
+  scope: VisualScope
 }
 
 export type AdmissionRejection =
@@ -137,6 +151,7 @@ export function makeVisualAsset(input: {
     renderer: input.payload.renderer,
     semantics: describeVisualPayload(input.payload),
     identity: IDENTITY_STRENGTH[input.provenance],
+    scope: scopeForAsset(input.provenance, input.conceptId),
   }
 }
 

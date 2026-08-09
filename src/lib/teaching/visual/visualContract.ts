@@ -76,12 +76,36 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
   lines.push(
     '\n\nVISUAL CONTRACT: A FIGURE IS ALREADY BEING RENDERED ON THE LEARNER\'S SCREEN.',
   )
-  lines.push(
-    `A ${asset.representation ?? 'diagram'} of ${what} is attached to THIS response ` +
-    'and the learner can see it right now. It was selected by the teaching ' +
-    'engine, not by you.',
-  )
-  lines.push(PURPOSE_INSTRUCTION[decision.purpose])
+
+  // ── SCOPE (M3-B/B4) — what this figure may be CLAIMED to be ───────────────
+  // A domain illustration is a real, on-topic picture that does not depict the
+  // concept: one bare coordinate plane serves all 76 calculus concepts, one
+  // shapes card all 67 geometry concepts. Introducing those as "a figure of
+  // <concept>" was the last false claim left in the pipeline. The picture still
+  // renders — it is only barred from claiming to be something it is not.
+  if (asset.scope === 'domain') {
+    lines.push(
+      `It is a GENERAL ILLUSTRATION for this topic — NOT a figure of ${what}. ` +
+      'Introduce it honestly, in a few words, as a general picture related to ' +
+      'the topic, then teach the concept itself in your own words.',
+    )
+    lines.push(
+      `HARD LIMITS: (1) Do NOT say "this diagram shows ${what}", "as you can see ` +
+      'in the figure, the concept works like this", or anything else claiming ' +
+      'the picture demonstrates the concept. (2) Do NOT read a property, a ' +
+      'relationship, a result or a conclusion off it that it does not contain. ' +
+      '(3) Do NOT build your explanation on it — it is beside your words, not ' +
+      'carrying them. (4) You MAY point at what it genuinely does show, named ' +
+      'below, when that helps orient the learner.',
+    )
+  } else {
+    lines.push(
+      `A ${asset.representation ?? 'diagram'} of ${what} is attached to THIS response ` +
+      'and the learner can see it right now. It was selected by the teaching ' +
+      'engine, not by you.',
+    )
+    lines.push(PURPOSE_INSTRUCTION[decision.purpose])
+  }
 
   // WHAT IS ACTUALLY ON SCREEN. Read off the ADMITTED ASSET's own semantics,
   // which were computed from the payload the client will render — never from
@@ -101,14 +125,20 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
       'colours, so name none of them rather than guessing.'
 
   // Hard prohibitions — each one closes a specific observed production failure.
+  // Rule (5) differs by scope: a concept figure LEADS the explanation, whereas a
+  // general illustration must not, or the tutor ends up teaching from a picture
+  // that does not contain the concept.
+  const leadRule = asset.scope === 'domain'
+    ? '(5) Your WORDS carry this explanation; the picture is beside them, not ' +
+      'part of them.'
+    : '(5) Keep the words short — the figure leads, the words support it.'
   lines.push(
     'RULES: (1) Do NOT draw an ASCII diagram — a real figure is already ' +
     'displayed and a second one competes with it. (2) Do NOT say "imagine" or ' +
     '"picture in your mind" — they are LOOKING at it. (3) Do NOT promise a ' +
     'diagram in future tense ("here is a diagram I would draw") — it is ' +
-    `already there. ${referenceRule} (5) Keep the words short — the figure ` +
-    'leads, the words support it. (6) Do not open with a bare "look at the ' +
-    'figure on your screen" — say what in it matters and why.',
+    `already there. ${referenceRule} ${leadRule} (6) Do not open with a bare ` +
+    '"look at the figure on your screen" — say what in it matters and why.',
   )
 
   // CONTINUITY. The same figure persisting across turns is the normal case in a
@@ -128,7 +158,8 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
   if (decision.excursion) {
     lines.push(
       `CONCEPT EXCURSION: the learner asked about ${what}, which is NOT the ` +
-      'current lesson\'s concept. Teach what they asked, using the figure. ' +
+      'current lesson\'s concept. Teach what they asked' +
+      (asset.scope === 'domain' ? ' in your own words. ' : ', using the figure. ') +
       'The figure STAYS on this concept for the whole excursion — through ' +
       'your questions, their answers, and any correction — so keep teaching ' +
       `${what} until they signal they are done. When they are satisfied, ` +
