@@ -42,10 +42,13 @@ const MOBILE_BASELINE: Record<string, number> = {
   'phys.opt.total-internal-reflection': 3,
   'phys.wave.transverse-waves': 0,
   'phys.wave.interference': 0,
-  'phys.therm.calorimetry': 2,
+  // Repositioned to zero: the three figures the M4 release gate found printing
+  // a caption across the geometry it named. Their captions now sit a full
+  // screen line-height apart, so the ratchet holds them at clean.
+  'phys.therm.calorimetry': 0,
   'phys.therm.first-law': 0,
-  'phys.mech.viscosity': 4,
-  'phys.mech.surface-tension': 2,
+  'phys.mech.viscosity': 0,
+  'phys.mech.surface-tension': 0,
 }
 
 describe('Layout safety — model', () => {
