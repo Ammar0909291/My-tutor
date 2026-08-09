@@ -597,15 +597,38 @@ const DOMAIN_VISUALS: DomainRule[] = [
  * to detectVisual's title-keyword match).
  */
 export function lookupConceptVisual(conceptId: string | null): VisualEntry | null {
+  return lookupConceptVisualBinding(conceptId)?.entry ?? null
+}
+
+/**
+ * The same lookup, plus WHO the binding actually names (M2).
+ *
+ * `lookupConceptVisual` answers "which visual?" and throws away the one fact
+ * the identity boundary needs: whether a human named THIS concept, or named a
+ * prefix that this concept happens to fall under.
+ *
+ *   tier 'exact'  — CONCEPT_VISUALS has a row keyed by this exact concept id.
+ *                   `scope === conceptId`; the identity is DECLARED.
+ *   tier 'domain' — a DOMAIN_VISUALS rule matched by prefix. `scope` is that
+ *                   PREFIX ('math.arith'), not the concept. The concept-level
+ *                   identity is therefore DERIVED by widening, and is recorded
+ *                   as such rather than presented as a curated binding.
+ *
+ * Additive: DOMAIN_VISUALS and its 394 entries are untouched, and
+ * lookupConceptVisual's behaviour is byte-for-byte what it was.
+ */
+export function lookupConceptVisualBinding(
+  conceptId: string | null,
+): { entry: VisualEntry; scope: string; tier: 'exact' | 'domain' } | null {
   if (!conceptId) return null
 
   // Tier 1: exact match
   const exact = CONCEPT_VISUALS[conceptId]
-  if (exact) return exact
+  if (exact) return { entry: exact, scope: conceptId, tier: 'exact' }
 
   // Tier 2: domain prefix (longest match first)
   for (const rule of DOMAIN_VISUALS) {
-    if (conceptId.startsWith(rule.prefix)) return rule.entry
+    if (conceptId.startsWith(rule.prefix)) return { entry: rule.entry, scope: rule.prefix, tier: 'domain' }
   }
 
   return null

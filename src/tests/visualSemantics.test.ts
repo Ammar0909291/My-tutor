@@ -9,6 +9,7 @@
 import { describe, it, expect } from 'vitest'
 import { describeVisualPayload, buildSemanticsBlock } from '@/lib/teaching/visual/visualSemantics'
 import { buildVisualContractBlock } from '@/lib/teaching/visual/visualContract'
+import { makeVisualAsset } from '@/lib/teaching/visual/asset'
 import type { VisualDecision, VisualPayload } from '@/lib/teaching/visual/types'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
@@ -16,12 +17,26 @@ const scene = (steps: SceneSpec['steps'], extra: Partial<SceneSpec> = {}): Scene
   id: 's', title: 'Vector Addition', sceneType: 'diagram', steps, ...extra,
 })
 
-const decision = (payload: VisualPayload): VisualDecision => ({
-  purpose: 'explain', representation: 'vector', payload, graphical: true,
-  source: 'registry', provenance: 'test', conceptId: 'phys.meas.vectors',
-  conceptTitle: 'Vectors', excursion: false, allowed: null, session: null,
-  continuityReason: 'no-active-session',
-})
+// M2: the contract reads its figure off the ADMITTED ASSET, so the fixture
+// builds one through the real factory rather than hand-rolling a decision with
+// a bare payload. Same inputs, same assertions — the semantics now travel the
+// same path they do in production.
+const decision = (payload: VisualPayload): VisualDecision => {
+  const asset = makeVisualAsset({
+    assetId: 'test',
+    conceptId: 'phys.meas.vectors',
+    conceptTitle: 'Vectors',
+    representation: 'vector',
+    payload,
+    provenance: 'curated',
+  })
+  return {
+    purpose: 'explain', representation: 'vector', payload, asset, graphical: true,
+    source: 'registry', provenance: 'test', conceptId: 'phys.meas.vectors',
+    conceptTitle: 'Vectors', excursion: false, allowed: null, session: null,
+    continuityReason: 'no-active-session',
+  }
+}
 
 describe('scene payloads yield only what the renderer draws', () => {
   it('names labelled objects verbatim', () => {

@@ -12,7 +12,7 @@
  */
 
 import { clamp } from './conceptText'
-import { buildSemanticsBlock, describeVisualPayload } from './visualSemantics'
+import { buildSemanticsBlock } from './visualSemantics'
 import type { EducationalPurpose, VisualDecision } from './types'
 
 const PURPOSE_INSTRUCTION: Record<EducationalPurpose, string> = {
@@ -40,7 +40,11 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
   // something else rather than letting the model teach against it. The only
   // job here is to make sure the model knows the screen is empty, so it never
   // refers to a figure that does not exist.
-  if (!decision.graphical || !decision.payload) {
+  //
+  // M2: an ADMITTED ASSET is required, not merely a payload. A decision without
+  // one never reaches the tutor as a figure, so "something is on screen" and
+  // "the tutor was told about it" cannot come apart.
+  if (!decision.graphical || !decision.asset) {
     return (
       '\n\nVISUAL CONTRACT: NO FIGURE IS ATTACHED TO THIS RESPONSE. ' +
       'The learner\'s screen shows your words and nothing else. Teach this ' +
@@ -56,24 +60,35 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
     )
   }
 
-  const what = decision.conceptTitle ? `"${clamp(decision.conceptTitle, 60)}"` : 'this concept'
+  // M2 — IDENTITY COMES FROM THE ASSET, NOT FROM THE REQUEST.
+  //
+  // This used to read decision.conceptTitle, i.e. the concept that was ASKED
+  // FOR. If the attached figure had belonged to anything else, the sentence
+  // below would still have named the requested concept and the tutor would have
+  // taught the wrong figure under the right name. It now names whatever the
+  // admitted asset says it depicts; admission has already guaranteed the two
+  // agree, so this is the same string by construction — and it stays the same
+  // string only for as long as that guarantee holds, which is the point.
+  const asset = decision.asset
+  const what = asset.conceptTitle ? `"${clamp(asset.conceptTitle, 60)}"` : 'this concept'
   const lines: string[] = []
 
   lines.push(
     '\n\nVISUAL CONTRACT: A FIGURE IS ALREADY BEING RENDERED ON THE LEARNER\'S SCREEN.',
   )
   lines.push(
-    `A ${decision.representation ?? 'diagram'} of ${what} is attached to THIS response ` +
+    `A ${asset.representation ?? 'diagram'} of ${what} is attached to THIS response ` +
     'and the learner can see it right now. It was selected by the teaching ' +
     'engine, not by you.',
   )
   lines.push(PURPOSE_INSTRUCTION[decision.purpose])
 
-  // WHAT IS ACTUALLY ON SCREEN. Derived from the payload the client will
-  // render, never from the model's imagination. When the payload yields no
-  // nameable element the block is empty and rule (4) below degrades to a
-  // truthful generic reference rather than an invented one.
-  const semantics = describeVisualPayload(decision.payload)
+  // WHAT IS ACTUALLY ON SCREEN. Read off the ADMITTED ASSET's own semantics,
+  // which were computed from the payload the client will render — never from
+  // the model's imagination, and never recomputed here from a different source.
+  // When the asset yields no nameable element the block is empty and rule (4)
+  // below degrades to a truthful generic reference rather than an invented one.
+  const semantics = asset.semantics
   const semanticsBlock = buildSemanticsBlock(semantics)
   if (semanticsBlock) lines.push('WHAT THE LEARNER SEES: ' + semanticsBlock)
 

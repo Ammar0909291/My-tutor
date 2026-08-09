@@ -28,8 +28,9 @@
  * Pure, synchronous, no LLM, no network, no database.
  */
 
-import { getConceptVisualType, lookupConceptVisual, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
-import { buildCanonicalScene } from './conceptSceneParams'
+import { getConceptVisualType, lookupConceptVisualBinding, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
+import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from './conceptSceneParams'
+import { admitVisualAsset, makeVisualAsset, type AssetProvenance, type VisualAsset, type VisualIntent } from './asset'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
@@ -102,21 +103,67 @@ function buildDecision(
   continuityReason: string,
   heldTurns: number,
 ): VisualDecision | null {
-  const finish = (
-    partial: Omit<VisualDecision, 'session' | 'continuityReason'>,
-  ): VisualDecision => ({
-    ...partial,
-    continuityReason,
-    session: partial.graphical && partial.representation && partial.payload
-      ? {
-          conceptId: ctx.conceptId,
-          representation: partial.representation,
-          renderer: partial.payload.renderer,
-          returnToConceptId,
-          turns: heldTurns,
-        }
-      : null,
-  })
+  // The identity this turn is asking for. Built ONCE, from the resolved target,
+  // and compared against whatever asset a tier offers — never recomputed from
+  // the asset itself, which would make the comparison a tautology.
+  const intent: VisualIntent = {
+    conceptId: ctx.conceptId,
+    conceptTitle: ctx.title,
+    purpose: resolvePurpose(input, 'explain'),
+    excursion,
+    returnToConceptId,
+  }
+
+  /**
+   * Offer an asset to the admission gate. An asset that is not admitted is not
+   * downgraded, substituted or repaired — the tier simply produced nothing, and
+   * the next tier (or NO FIGURE) follows. This is the only path from a tier to
+   * a payload.
+   */
+  const offer = (
+    asset: VisualAsset,
+    purpose: EducationalPurpose,
+    source: VisualDecision['source'],
+    allowed: readonly VisualType[] | null,
+  ): VisualDecision | null => {
+    const admission = admitVisualAsset({ ...intent, purpose }, asset)
+    if (!admission.ok) {
+      // Auditable, and terminal for this tier.
+      return {
+        ...noFigureDecision(
+          `rejected:${admission.reason}`,
+          ctx.conceptId,
+          ctx.title,
+          purpose,
+          excursion,
+        ),
+        continuityReason,
+        session: null,
+      }
+    }
+    const admitted = admission.asset
+    return {
+      purpose,
+      representation: admitted.representation,
+      payload: admitted.payload,
+      asset: admitted,
+      graphical: true,
+      source,
+      provenance: admitted.assetId,
+      conceptId: admitted.conceptId,
+      conceptTitle: admitted.conceptTitle,
+      excursion,
+      allowed,
+      continuityReason,
+      session: {
+        conceptId: admitted.conceptId,
+        representation: admitted.representation,
+        renderer: admitted.renderer,
+        returnToConceptId,
+        turns: heldTurns,
+      },
+    }
+  }
 
   // ── Tier 0: registry-named DETERMINISTIC SCENE GENERATOR ──────────────────
   // visualRegistry has recorded a concept→generator binding for 60 concepts
@@ -135,36 +182,55 @@ function buildDecision(
   // THIS concept's case (reflection is a mirror, not a lens).
   const generatedScene = buildCanonicalScene(generatorKind, ctx.conceptId)
   if (generatedScene) {
-    return finish({
-      purpose: resolvePurpose(input, 'demonstrate'),
-      representation: representationForVisualType(getConceptVisualType(ctx.conceptId) ?? 'number_line'),
-      payload: { renderer: 'scene', sceneSpec: generatedScene },
-      graphical: true,
-      source: 'registry',
-      provenance: `generator:${ctx.conceptId}:${generatorKind}`,
-      conceptId: ctx.conceptId,
-      conceptTitle: ctx.title,
-      excursion,
-      allowed: null,
-    })
+    // A concept with its own authored parameters owns its figure. A concept
+    // that only names a generator KIND is served that kind's shared canonical
+    // instance, so its concept-level identity is widened from the kind rather
+    // than declared — recorded, not hidden. See asset.ts's module doc.
+    const conceptOwned = CONCEPT_SCENE_OVERRIDES.includes(ctx.conceptId)
+    const provenance: AssetProvenance = conceptOwned ? 'generator' : 'generator-default'
+    return offer(
+      makeVisualAsset({
+        // The `generator:` prefix is preserved for both so log format and the
+        // existing provenance assertions are untouched; the honest distinction
+        // lives in `provenance`/`identity`, which is what M3 will query, and is
+        // spelled out in the id rather than hidden.
+        assetId: conceptOwned
+          ? `generator:${ctx.conceptId}:${generatorKind}`
+          : `generator:kind-default:${generatorKind}`,
+        conceptId: ctx.conceptId,
+        conceptTitle: ctx.title,
+        representation: representationForVisualType(getConceptVisualType(ctx.conceptId) ?? 'number_line'),
+        payload: { renderer: 'scene', sceneSpec: generatedScene },
+        provenance,
+      }),
+      resolvePurpose(input, 'demonstrate'),
+      'registry',
+      null,
+    )
   }
 
   // ── Tier 1: curated registry binding ───────────────────────────────────────
-  const registryVisual = getConceptVisualType(ctx.conceptId)
-  if (registryVisual) {
-    const entry = lookupConceptVisual(ctx.conceptId)
-    return finish({
-      purpose: resolvePurpose(input, 'explain'),
-      representation: representationForVisualType(registryVisual),
-      payload: { renderer: 'card', visualType: registryVisual },
-      graphical: true,
-      source: 'registry',
-      provenance: `registry:${ctx.conceptId}:${registryVisual}`,
-      conceptId: ctx.conceptId,
-      conceptTitle: ctx.title,
-      excursion,
-      allowed: entry?.all ?? [registryVisual],
-    })
+  const binding = lookupConceptVisualBinding(ctx.conceptId)
+  if (binding) {
+    const registryVisual = binding.entry.primary
+    // 'exact' means a human wrote a row for THIS concept. 'domain' means a
+    // prefix rule matched, so the binding names 'math.arith', not the concept.
+    const declared = binding.tier === 'exact'
+    return offer(
+      makeVisualAsset({
+        assetId: declared
+          ? `registry:${ctx.conceptId}:${registryVisual}`
+          : `registry:domain-default:${binding.scope}:${registryVisual}`,
+        conceptId: ctx.conceptId,
+        conceptTitle: ctx.title,
+        representation: representationForVisualType(registryVisual),
+        payload: { renderer: 'card', visualType: registryVisual },
+        provenance: declared ? 'curated' : 'domain-default',
+      }),
+      resolvePurpose(input, 'explain'),
+      'registry',
+      binding.entry.all ?? [registryVisual],
+    )
   }
 
   // ── NO TIER 2 ─────────────────────────────────────────────────────────────
@@ -342,17 +408,47 @@ export async function resolveVisualForTurn(
   }
 
   const representation = representationForSceneType(result.scene.sceneType)
+
+  // A generated scene is an asset like any other and is admitted like any
+  // other. This is also the CACHE boundary: generateConceptScene() may have
+  // returned a scene stored under a previous turn's key, so identity is
+  // re-checked here rather than being inherited from the cache lookup. A cache
+  // hit is evidence that a scene EXISTS, never evidence that it is this
+  // concept's.
+  const asset = makeVisualAsset({
+    assetId: `generated:${ctx.conceptId}:${result.cached ? 'cached' : 'fresh'}`,
+    conceptId: ctx.conceptId,
+    conceptTitle: ctx.title,
+    representation,
+    payload: { renderer: 'scene', sceneSpec: result.scene },
+    provenance: 'engine',
+  })
+  const admission = admitVisualAsset(
+    {
+      conceptId: ctx.conceptId,
+      conceptTitle: ctx.title,
+      purpose: decision.purpose,
+      excursion: decision.excursion,
+      returnToConceptId: decision.excursion ? (input.lessonConceptId ?? null) : null,
+    },
+    asset,
+  )
+  if (!admission.ok) {
+    return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
+  }
+
   return {
     ...decision,
     representation,
-    payload: { renderer: 'scene', sceneSpec: result.scene },
+    payload: admission.asset.payload,
+    asset: admission.asset,
     graphical: true,
     source: 'generated',
-    provenance: `generated:${ctx.conceptId}:${result.cached ? 'cached' : 'fresh'}`,
+    provenance: admission.asset.assetId,
     session: {
-      conceptId: ctx.conceptId,
+      conceptId: admission.asset.conceptId,
       representation,
-      renderer: 'scene',
+      renderer: admission.asset.renderer,
       returnToConceptId: decision.excursion ? (input.lessonConceptId ?? null) : null,
       turns: 0,
     },

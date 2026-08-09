@@ -23,6 +23,7 @@ import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import type { VisualSession } from './session'
+import type { VisualAsset } from './asset'
 
 /**
  * Why a visual is being shown this turn. Drives the teaching contract injected
@@ -148,6 +149,17 @@ export interface VisualDecision {
    * confidently.
    */
   payload: VisualPayload | null
+  /**
+   * The ADMITTED asset this payload came from (M2), or null when no figure was
+   * admitted. Carries the identity of the concept the figure belongs to, which
+   * `payload` alone never did.
+   *
+   * `payload` is kept as the drawable channel the route already consumes, and
+   * is always `asset.payload` when an asset exists — one value, two names, so
+   * no consumer had to change. Anything that needs to know WHOSE figure this
+   * is must read `asset`, never `conceptId`: the latter says who was asked for.
+   */
+  asset: VisualAsset | null
   /** True only when a faithful payload is attached. The product metric. */
   graphical: boolean
   /** Which layer produced this. */
@@ -208,6 +220,7 @@ export function noFigureDecision(
     purpose,
     representation: null,
     payload: null,
+    asset: null,
     graphical: false,
     source: 'none',
     provenance: `no-figure:${reason}`,
