@@ -299,8 +299,48 @@ export async function POST(req: Request) {
           // cache first is why "Continue" after a completed lesson resumed an
           // older unfinished topic instead of starting the next lesson. See
           // selectCurrentLesson's header.
+          // PLACEMENT ENTRY ORDER — the third reader finally joins the other two.
+          //
+          // THE PRODUCTION DEFECT THIS CLOSES. A brand-new advanced learner has
+          // no StudentProgress row yet. /api/curriculum and getDashboardV2Data
+          // both answer that state with `computeCurriculumEntryOrder(graph,
+          // level)` — for physics/advanced that is order 32, "Conservative and
+          // Non-Conservative Forces". THIS resolver had no such default, so
+          // selectCurrentLesson fell through to its last tier, lessons[0], and
+          // answered lesson 1, "SI Units and Measurement".
+          //
+          // Both answers were then used at once, in the same session (verified
+          // in production, 2026-08-09): the client opened lesson 32 and the
+          // tutor announced "Today you're starting Lesson 32 of 238 … Conservative
+          // and Non-Conservative Forces", while every server-side identity —
+          // lessonCtx, resolvedConceptId, convConceptId, and therefore the
+          // excursion's returnToConceptId — said phys.meas.units. When the
+          // learner finished a Viscosity excursion the tutor "returned" to SI
+          // Units and taught it, because that is the lesson the server had been
+          // holding all along. The excursion recorded its anchor faithfully; the
+          // anchor it was given was the wrong lesson.
+          //
+          // Same helper, same condition (`only when no real row exists`) and
+          // same precedence as /api/curriculum's own `progress ?? defaultProgress`
+          // — this introduces no second placement rule and no second lesson
+          // identity. A learner WITH a row is completely unaffected.
+          let placementEntryOrder: number | null = null
+          if (!studentProgress) {
+            try {
+              const { computeCurriculumEntryOrder } = await import('@/lib/curriculum/placement')
+              const { normalizeToCanonicalLevel } = await import('@/lib/curriculum/levels')
+              placementEntryOrder = computeCurriculumEntryOrder(
+                graph, normalizeToCanonicalLevel(profile?.currentLevel),
+              )
+            } catch { placementEntryOrder = null }   // degrade to the old behaviour
+          }
           const currentLesson =
-            selectCurrentLesson(syntheticLessons, studentProgress?.currentLesson, topicProgressRows, studentProgress?.activeLessonSlug)
+            selectCurrentLesson(
+              syntheticLessons,
+              studentProgress?.currentLesson ?? placementEntryOrder,
+              topicProgressRows,
+              studentProgress?.activeLessonSlug,
+            )
             ?? syntheticLessons[0]
           const completedSlugs = new Set(
             topicProgressRows
@@ -1819,8 +1859,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // sit further down, next to the visual resolver, which is why the
         // SESSION CLOSE block (injected here, above it) could still order the
         // tutor to wrap the session up mid-excursion.
+        // THE RETURN ANCHOR COMES FROM THE AUTHORITATIVE LESSON, NOT A POINTER.
+        //
+        // `resolvedConceptId` is this turn's answer from selectCurrentLesson —
+        // activeLessonSlug -> StudentProgress.currentLesson -> placement entry
+        // order -> first lesson, the same ladder /api/curriculum and the
+        // dashboard walk. It is the only one of these three that is derived
+        // from the learner's real position.
+        //
+        // `snapshotCurrentConceptId` is a per-session cache that can hold an
+        // older concept (it is seeded from the module's ENTRY concept when a
+        // session starts before any lesson identity resolves), and reading it
+        // ahead of the authoritative value is how a stale pointer becomes the
+        // lesson an excursion promises to return to. libraryConceptNodeIdHoisted
+        // is itself `resolvedConceptId ?? snapshot ?? entry`, so this ordering
+        // agrees with it in every case except that one — where this is right and
+        // it is wrong.
         const excursionLessonConceptId =
-          libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
+          resolvedConceptId ?? libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? null
         const excursionPriorAskedQuestion = await (async () => {
           try {
             const { readConversationState } = await import('@/lib/teaching/conversationState')
