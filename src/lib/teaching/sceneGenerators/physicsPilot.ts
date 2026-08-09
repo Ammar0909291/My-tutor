@@ -1,5 +1,5 @@
 /**
- * Physics visual authoring pilot (M4) — seven concept-specific scenes.
+ * Physics visual authoring pilot — seven concept-specific scenes.
  *
  * These are the seven concepts the whole visualization programme started from.
  * Before M1 they were served a figure keyword-matched from the tutor's own
@@ -10,167 +10,136 @@
  * fix: an actual figure for each, authored rather than guessed.
  *
  * WHAT THIS IS NOT. Not a new engine and not a new renderer. Every scene is a
- * plain SceneSpec built from the primitives SceneSpecRenderer already paints —
- * point/node/particle, vector/arrow, bond, label, path/trajectory — and each
- * goes through the same registry → resolver → admission → contract path as
- * every other asset. No LLM, no network, no generated code, no SVG, no canvas.
+ * plain SceneSpec built from the primitives SceneSpecRenderer already paints,
+ * and each goes through the same registry → resolver → admission → contract
+ * path as every other asset. No LLM, no network, no generated code.
  *
- * AUTHORING RULES followed by every scene here:
- *   • Only objects the renderer actually draws. `bar` and `surface` return null
- *     from the renderer's switch, so they are never used.
- *   • Every object that carries meaning carries its own label text, because the
- *     tutor contract's semantics are DERIVED from these objects. A part with no
- *     text is a part the tutor is not told about — which is correct, and the
- *     reason nothing here is decorative.
- *   • Steps are CUMULATIVE: objects from step i stay on screen at step i+1.
- *     Scenes that contrast two cases put them side by side rather than
- *     overdrawing the same space.
- *   • Coordinates stay inside roughly ±5 so the default camera frames the whole
- *     figure without clipping, and labels are offset off the geometry they name.
+ * ── AUTHORING RULES (M4.1) ──────────────────────────────────────────────────
+ *  1. One shared visual language. Colour, type size and geometry helpers come
+ *     from visualDesign.ts; no scene invents its own palette.
+ *  2. Labels are NAMES, not sentences. "normal", "crest", "heat in". The
+ *     explanation is the tutor's job, and the contract feeds it from these
+ *     same labels.
+ *  3. Every label has one clear referent and sits clear of the geometry it
+ *     names. Arrow/bond text is avoided: it renders at the midpoint, on top of
+ *     the thing it describes.
+ *  4. STEPS ARE CUMULATIVE. Objects from step i remain on screen at step i+1,
+ *     and the default view is the COMPLETE figure. Therefore no annotation may
+ *     make a claim that is only true during its own step — a label reading "no
+ *     refracted ray" while an earlier step's refracted ray is still on screen
+ *     is a figure that contradicts itself. Case-specific statements are scoped
+ *     to their own region of the canvas.
+ *  5. Coordinates stay inside ±5 so the camera frames everything without
+ *     clipping at any viewport width.
  */
 
-import type { SceneObject, SceneSpec, Vec3 } from '@/lib/teaching/sceneSpec'
-
-// ── shared helpers ───────────────────────────────────────────────────────────
-
-// The scene canvas is DARK. These match the palette the existing generators
-// already use (slate-400 construction lines, vivid primaries for meaning), so
-// every label is legible against it. A dark ink colour here renders as
-// invisible text, which is how a figure ends up describing parts nobody can see.
-const INK = '#e2e8f0'      // slate-200 — default label text
-const HOT = '#ef4444'      // red — the hot body, the light ray, the driving quantity
-const COLD = '#3b82f6'     // blue — the cool body, water, the second wave
-const ACCENT = '#a78bfa'   // violet — construction aids (normal, gradient)
-const MUTED = '#94a3b8'    // slate-400 — boundaries, walls, plates
-const GOOD = '#22c55e'     // green — the result / the contrast case
-
-/** A sampled sine curve — the only curve any of these scenes needs. */
-function sinePath(opts: {
-  x0: number; x1: number; amplitude: number; wavelength: number
-  yOffset?: number; phase?: number; samples?: number
-}): Vec3[] {
-  const { x0, x1, amplitude, wavelength, yOffset = 0, phase = 0, samples = 48 } = opts
-  const pts: Vec3[] = []
-  for (let i = 0; i <= samples; i++) {
-    const x = x0 + ((x1 - x0) * i) / samples
-    const y = yOffset + amplitude * Math.sin((2 * Math.PI * (x - x0)) / wavelength + phase)
-    pts.push([round(x), round(y), 0])
-  }
-  return pts
-}
-
-function round(n: number): number {
-  return Math.round(n * 1000) / 1000
-}
-
-function label(text: string, position: Vec3, color = INK): SceneObject {
-  return { type: 'label', position, text, color }
-}
-
-function arrow(from: Vec3, to: Vec3, text: string | undefined, color = INK): SceneObject {
-  return { type: 'arrow', from, to, ...(text ? { text } : {}), color, thickness: 0.05 }
-}
-
-/**
- * A straight construction line (boundary, wall, tube side, plate).
- *
- * Takes NO text: SceneSpecRenderer draws `bond` as a bare cylinder and never
- * paints a label on it, so text here would be described to the tutor by the
- * contract and never shown to the learner — the precise mismatch this whole
- * programme exists to prevent. Name a line with a separate label() beside it.
- */
-function line(from: Vec3, to: Vec3, color = MUTED): SceneObject {
-  return { type: 'bond', from, to, color, thickness: 0.04 }
-}
-
-/**
- * A sampled curve. SceneSpecRenderer draws `path` as a MARKER PER POINT, not as
- * a stroked polyline, so this is only correct for densely sampled curves — a
- * two-point "path" renders as two dots and reads as nothing at all. Straight
- * segments must use line() (a bond), which is drawn as a solid cylinder.
- */
-function curve(points: Vec3[], text: string | undefined, color: string): SceneObject {
-  if (points.length < 8) throw new Error('curve() needs a densely sampled path; use line() for straight segments')
-  return { type: 'path', points, ...(text ? { text } : {}), color }
-}
-
-function dot(position: Vec3, text: string | undefined, color: string, radius = 0.16): SceneObject {
-  return { type: 'node', position, ...(text ? { text } : {}), color, radius }
-}
+import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import {
+  ROLE, arrow, box, curve, dot, hatch, heading, label, line, sinePath,
+} from './visualDesign'
 
 // ── 1. Total Internal Reflection ─────────────────────────────────────────────
 
 /**
- * The regression case. Three incidence angles side by side against ONE boundary,
- * so the learner sees the progression that defines the critical angle rather
- * than a single frozen ray. Deliberately NOT the concave-mirror figure that used
- * to be served here: this scene has a boundary, a normal and two media, which
- * that one never had.
+ * The regression case, and the hardest layout in the pilot.
+ *
+ * Three incidence angles against ONE boundary, each striking at its own point
+ * so the three cases never overlap and each can carry its own annotation. The
+ * progression IS the concept: the refracted ray swings further from the normal,
+ * lies flat at the critical angle, and is gone beyond it.
+ *
+ * SEMANTIC CORRECTNESS. Case ③ has no refracted ray drawn, and the only
+ * statement about that fact — "nothing escapes here" — sits directly above ③'s
+ * own strike point, where the canvas is genuinely empty. It is deliberately not
+ * a claim about the figure as a whole, because case ① legitimately shows a
+ * refracted ray and the steps are cumulative.
+ *
+ * Physics: n₁ = 1.5 (glass), n₂ = 1 (air) → θc = 41.8°. The three angles drawn
+ * are 30° (< θc), 41.8° (= θc) and 58° (> θc), and each ray's geometry is
+ * computed from its angle rather than eyeballed.
  */
 export function buildTotalInternalReflectionScene(): SceneSpec {
+  // Ray geometry from real angles, measured from the normal (vertical).
+  const rad = (deg: number) => (deg * Math.PI) / 180
+  const r = (n: number) => Math.round(n * 100) / 100
+  /** Incident ray arriving at `hit` from below-left at θ from the normal. */
+  const incoming = (hitX: number, deg: number, len: number) =>
+    [r(hitX - Math.sin(rad(deg)) * len), r(-Math.cos(rad(deg)) * len), 0] as [number, number, number]
+  /** Ray leaving `hit` upward-right at θ from the normal. */
+  const outgoing = (hitX: number, deg: number, len: number) =>
+    [r(hitX + Math.sin(rad(deg)) * len), r(Math.cos(rad(deg)) * len), 0] as [number, number, number]
+
+  const A = -3.2, B = 0, C = 3.2          // the three strike points
+  const THETA_C = 41.8
+
   return {
     id: 'phys-tir',
-    title: 'Total Internal Reflection at a glass–air boundary',
+    title: 'Total internal reflection at a glass–air boundary',
     sceneType: 'diagram',
     cameraDistance: 13,
     teachingGoal:
-      'Show how the refracted ray bends further from the normal as the angle of incidence grows, ' +
-      'grazes the surface at the critical angle, and disappears beyond it so all the light stays ' +
-      'inside the denser medium.',
+      'Show the refracted ray swinging further from the normal as the angle of incidence grows, ' +
+      'lying flat along the boundary at the critical angle, and vanishing beyond it so all the ' +
+      'light stays inside the glass.',
     ariaLabel:
-      'A horizontal glass–air boundary with a vertical normal. Three rays travel up through the ' +
-      'glass at increasing angles: the first refracts into the air, the second grazes along the ' +
-      'boundary at the critical angle, and the third is reflected entirely back into the glass.',
+      'A horizontal glass–air boundary. Three light rays travel up through the glass and strike ' +
+      'it at three separate points, at angles below, equal to, and above the critical angle. The ' +
+      'first refracts out into the air, the second runs flat along the boundary, and the third is ' +
+      'reflected entirely back into the glass with no ray above the boundary at that point.',
     steps: [
       {
         narration:
-          'Light travels inside the glass and meets the boundary with the air above. The dashed ' +
-          'vertical line is the normal — every angle is measured from it, never from the surface.',
+          'Light inside the glass meets the boundary with the air above. Every angle is measured ' +
+          'from the normal — the line perpendicular to the surface — never from the surface itself.',
         objects: [
-          line([-4.6, 0, 0], [4.6, 0, 0]),
-          line([0, -2.6, 0], [0, 2.6, 0], ACCENT),
-          label('boundary: glass below, air above', [-2.6, 0.45, 0], MUTED),
-          label('normal', [0.55, 2.5, 0], ACCENT),
-          label('air (rarer, n₂)', [-4.0, 1.6, 0], COLD),
-          label('glass (denser, n₁)', [-4.0, -1.4, 0], HOT),
+          line([-5.0, 0, 0], [5.0, 0, 0], ROLE.reference, 0.05),
+          ...hatch(-4.6, 4.6, 0, 11, 0.34),
+          label('air · rarer, n₂', [-4.15, 3.15, 0], ROLE.ink, 'primary'),
+          label('glass · denser, n₁', [-3.9, -0.55, 0], ROLE.ink, 'primary'),
+          line([B, -1.5, 0], [B, 1.9, 0], ROLE.aid, 0.03),
+          label('normal', [0.62, 2.3, 0], ROLE.aid, 'detail'),
         ],
       },
       {
         narration:
-          'At a small angle of incidence most of the light crosses into the air, bending AWAY ' +
-          'from the normal because it speeds up in the rarer medium.',
+          'Below the critical angle the light crosses into the air, bending away from the normal ' +
+          'because it speeds up in the rarer medium.',
         objects: [
-          arrow([-3.6, -2.4, 0], [-1.2, 0, 0], undefined, HOT),
-          arrow([-1.2, 0, 0], [0.5, 2.4, 0], undefined, COLD),
-          dot([-1.2, 0, 0], undefined, HOT, 0.1),
-          label('① small θ₁ — incident ray', [-3.9, -3.1, 0], HOT),
-          label('refracted ray bends away from the normal', [-0.6, 3.0, 0], COLD),
+          line([A, -1.3, 0], [A, 1.6, 0], ROLE.aid, 0.03),
+          arrow(incoming(A, 30, 2.1), [A, 0, 0], ROLE.input),
+          arrow([A, 0, 0], outgoing(A, 48.6, 2.1), ROLE.output),
+          dot([A, 0, 0], ROLE.input, 0.1),
+          label('① θ < θc', [-4.35, -2.35, 0], ROLE.input, 'primary'),
+          label('escapes', [-1.75, 1.95, 0], ROLE.output, 'detail'),
         ],
       },
       {
         narration:
-          'Increase the angle and the refracted ray bends further over. At one particular angle — ' +
-          'the critical angle — it runs flat along the boundary itself.',
+          'At one particular angle — the critical angle — the refracted ray comes so far over that ' +
+          'it runs flat along the boundary itself.',
         objects: [
-          arrow([-2.4, -2.4, 0], [0, 0, 0], undefined, HOT),
-          arrow([0, 0, 0], [3.2, 0.12, 0], undefined, GOOD),
-          label('② θ₁ = θc — incident ray at the critical angle', [-1.2, -3.7, 0], HOT),
-          label('refracted ray grazes the surface (θ₂ = 90°)', [3.0, 0.75, 0], GOOD),
-          label('critical angle θc:  sin θc = n₂ / n₁', [2.6, -1.4, 0], GOOD),
+          arrow(incoming(B, THETA_C, 2.1), [B, 0, 0], ROLE.input),
+          arrow([B, 0, 0], [1.95, 0.06, 0], ROLE.result),
+          dot([B, 0, 0], ROLE.input, 0.1),
+          label('② θ = θc', [-1.75, -2.05, 0], ROLE.input, 'primary'),
+          label('grazes the surface', [1.6, 0.75, 0], ROLE.result, 'detail'),
+          label('sin θc = n₂ / n₁', [-0.55, -3.7, 0], ROLE.result, 'detail'),
         ],
       },
       {
         narration:
-          'Past the critical angle there is no refracted ray left to bend — none of the light ' +
-          'escapes. All of it is reflected back into the glass, with the angle of reflection ' +
-          'equal to the angle of incidence. That is total internal reflection.',
+          'Past the critical angle there is no refracted ray left to bend. Every bit of the light ' +
+          'is reflected back into the glass — total internal reflection.',
         objects: [
-          arrow([-0.9, -2.6, 0], [1.4, 0, 0], undefined, HOT),
-          arrow([1.4, 0, 0], [3.7, -2.6, 0], undefined, HOT),
-          dot([1.4, 0, 0], undefined, HOT, 0.1),
-          label('③ θ₁ > θc — incident ray', [-1.6, -4.3, 0], HOT),
-          label('totally reflected ray — stays in the glass', [3.3, -3.2, 0], HOT),
-          label('no refracted ray above the boundary', [1.4, 1.9, 0], MUTED),
+          line([C, -1.3, 0], [C, 1.6, 0], ROLE.aid, 0.03),
+          arrow(incoming(C, 58, 2.1), [C, 0, 0], ROLE.input),
+          arrow([C, 0, 0], [r(C + Math.sin(rad(58)) * 2.1), r(-Math.cos(rad(58)) * 2.1), 0], ROLE.input),
+          dot([C, 0, 0], ROLE.input, 0.1),
+          label('③ θ > θc', [1.0, -2.6, 0], ROLE.input, 'primary'),
+          // Scoped to ③'s own strike point, where the canvas really is empty.
+          // Not a claim about the whole figure — ① genuinely refracts.
+          label('nothing escapes here', [3.45, 1.6, 0], ROLE.reference, 'detail'),
+          label('all reflected back', [4.3, -1.95, 0], ROLE.input, 'detail'),
         ],
       },
     ],
@@ -179,57 +148,67 @@ export function buildTotalInternalReflectionScene(): SceneSpec {
 
 // ── 2. Transverse Waves ──────────────────────────────────────────────────────
 
+/**
+ * The teaching message is a right angle: the wave goes one way, the medium moves
+ * across it. So the two direction arrows are drawn as an explicit L with a
+ * right-angle tick between them, rather than being described in a sentence.
+ */
 export function buildTransverseWaveScene(): SceneSpec {
-  const wave = sinePath({ x0: -4.4, x1: 4.4, amplitude: 1.3, wavelength: 4.4 })
+  const wave = sinePath({ x0: -4.5, x1: 4.5, amplitude: 1.25, wavelength: 4.5 })
   return {
     id: 'phys-transverse-wave',
-    title: 'Transverse wave: displacement across the direction of travel',
+    title: 'Transverse wave: the medium moves across the direction of travel',
     sceneType: 'diagram',
     cameraDistance: 12,
     teachingGoal:
-      'Show that in a transverse wave the medium moves perpendicular to the direction the wave ' +
-      'travels, and name the crest, the trough and the wavelength on the same figure.',
+      'Show that the wave travels horizontally while each particle of the medium only moves up ' +
+      'and down — the two directions are perpendicular — and name the crest, trough and wavelength.',
     ariaLabel:
-      'A sine-shaped wave on a horizontal rest line, with a crest and a trough marked, an arrow ' +
-      'showing the wave travelling to the right, and a separate vertical arrow showing a particle ' +
-      'of the medium moving up and down.',
+      'A sine-shaped wave on a horizontal rest line, with a crest and a trough marked and one ' +
+      'wavelength spanned between two crests. A horizontal arrow shows the wave travelling right; ' +
+      'a vertical arrow on the wave shows a particle moving up and down, and a right-angle mark ' +
+      'between the two shows they are perpendicular.',
     steps: [
       {
         narration:
-          'Here is the shape of the wave at one instant. The straight line is where the medium ' +
-          'would sit if the wave were not passing.',
+          'This is the shape of the wave at one instant. The straight line is where the medium ' +
+          'would rest if no wave were passing.',
         objects: [
-          line([-4.6, 0, 0], [4.6, 0, 0]),
-          label('rest position of the medium', [-2.9, -0.5, 0], MUTED),
-          curve(wave, 'the wave', COLD),
+          line([-4.8, 0, 0], [4.8, 0, 0], ROLE.reference, 0.03),
+          curve(wave, ROLE.output),
+          label('rest position', [-3.15, -0.5, 0], ROLE.reference, 'detail'),
+        ],
+      },
+      {
+        narration: 'The high points are crests, the low points troughs, and one wavelength spans crest to crest.',
+        objects: [
+          dot([-3.38, 1.25, 0], ROLE.result, 0.19),
+          label('crest', [-3.38, 1.85, 0], ROLE.result, 'primary'),
+          dot([-1.13, -1.25, 0], ROLE.aid, 0.19),
+          label('trough', [-1.13, -1.85, 0], ROLE.aid, 'primary'),
+          dot([1.12, 1.25, 0], ROLE.result, 0.19),
+          line([-3.38, 2.55, 0], [1.12, 2.55, 0], ROLE.ink, 0.03),
+          label('one wavelength λ', [-1.13, 3.05, 0], ROLE.ink, 'primary'),
+        ],
+      },
+      {
+        narration: 'The wave itself travels to the right.',
+        objects: [
+          arrow([1.7, -2.85, 0], [4.5, -2.85, 0], ROLE.result),
+          label('wave travels', [3.1, -3.35, 0], ROLE.result, 'primary'),
         ],
       },
       {
         narration:
-          'The high points are crests and the low points are troughs. One full wavelength is the ' +
-          'distance from one crest to the next.',
+          'But the medium does not travel with it. Each particle only moves up and down, straight ' +
+          'across the direction of travel. That right angle is what makes the wave transverse.',
         objects: [
-          dot([-3.3, 1.3, 0], 'crest', GOOD, 0.18),
-          dot([-1.1, -1.3, 0], 'trough', ACCENT, 0.18),
-          dot([1.1, 1.3, 0], 'the next crest', GOOD, 0.18),
-          line([-3.3, 2.0, 0], [1.1, 2.0, 0], INK),
-          label('one wavelength λ', [-1.1, 2.4, 0], INK),
-        ],
-      },
-      {
-        narration:
-          'The wave itself travels sideways, to the right.',
-        objects: [
-          arrow([-4.2, -2.3, 0], [-1.2, -2.3, 0], 'direction the wave travels', INK),
-        ],
-      },
-      {
-        narration:
-          'But the medium does not travel with it. Each particle only moves up and down — across ' +
-          'the direction of travel. That perpendicular motion is what makes the wave transverse.',
-        objects: [
-          arrow([3.3, -1.3, 0], [3.3, 1.3, 0], 'a particle moves up and down only', HOT),
-          label('particle motion ⟂ wave travel', [3.3, 2.2, 0], HOT),
+          arrow([3.37, -1.25, 0], [3.37, 1.25, 0], ROLE.input),
+          label('particle moves', [4.15, 1.75, 0], ROLE.input, 'primary'),
+          // An explicit right-angle mark between the two directions.
+          line([3.37, -2.85, 0], [3.82, -2.85, 0], ROLE.ink, 0.025),
+          line([3.82, -2.85, 0], [3.82, -2.4, 0], ROLE.ink, 0.025),
+          label('90°', [4.35, -2.6, 0], ROLE.ink, 'detail'),
         ],
       },
     ],
@@ -239,43 +218,46 @@ export function buildTransverseWaveScene(): SceneSpec {
 // ── 3. Wave Interference ─────────────────────────────────────────────────────
 
 /**
- * Two cases side by side rather than stacked: steps are cumulative, so drawing
- * the out-of-phase pair in the same space as the in-phase pair would leave four
- * overlapping curves and teach nothing.
+ * Two cases side by side. Steps are cumulative, so drawing the out-of-phase pair
+ * in the same space as the in-phase pair would leave four tangled curves; the
+ * contrast is carried by panel position and by geometry (a tall wave against a
+ * flat line), not by colour alone.
  */
 export function buildWaveInterferenceScene(): SceneSpec {
-  const LEFT = { x0: -4.6, x1: -0.4 }
-  const RIGHT = { x0: 0.4, x1: 4.6 }
+  const L = { x0: -4.7, x1: -0.5 }
+  const R = { x0: 0.5, x1: 4.7 }
   const wl = 2.1
-  const a = 0.62
+  const a = 0.58
   return {
     id: 'phys-wave-interference',
     title: 'Interference: waves that add, and waves that cancel',
     sceneType: 'comparison',
     cameraDistance: 13,
     teachingGoal:
-      'Show that two overlapping waves add displacement by displacement: in phase they build a ' +
-      'bigger wave, half a wavelength apart they cancel to nothing.',
+      'Show that two overlapping waves add displacement by displacement: in step they build a ' +
+      'bigger wave, half a wavelength apart they cancel to a flat line.',
     ariaLabel:
-      'Two panels. On the left, two identical waves in phase and their larger combined wave. On ' +
-      'the right, two waves half a wavelength apart and their combined result, a flat line.',
+      'Two panels. On the left, two identical waves in step and, below them, their combined wave ' +
+      'at double the height. On the right, two waves half a wavelength apart and, below them, ' +
+      'their combined result: a flat line.',
     steps: [
       {
-        narration:
-          'On the left, two waves arrive exactly in step — every crest lines up with a crest.',
+        narration: 'On the left, two waves arrive exactly in step — every crest lines up with a crest.',
         objects: [
-          label('CONSTRUCTIVE', [-2.5, 3.1, 0], GOOD),
-          curve(sinePath({ ...LEFT, amplitude: a, wavelength: wl, yOffset: 2.0 }), 'wave 1', COLD),
-          curve(sinePath({ ...LEFT, amplitude: a, wavelength: wl, yOffset: 0.9 }), 'wave 2 (in phase)', ACCENT),
+          heading('CONSTRUCTIVE', [-2.6, 3.35, 0], ROLE.result),
+          curve(sinePath({ ...L, amplitude: a, wavelength: wl, yOffset: 2.1 }), ROLE.output),
+          curve(sinePath({ ...L, amplitude: a, wavelength: wl, yOffset: 1.0 }), ROLE.aid),
+          label('wave 1', [-4.95, 2.1, 0], ROLE.output, 'detail'),
+          label('wave 2', [-4.95, 1.0, 0], ROLE.aid, 'detail'),
         ],
       },
       {
         narration:
-          'Add them displacement by displacement and the crests reinforce: the combined wave is ' +
-          'twice as tall. Crest plus crest gives a bigger crest.',
+          'Add them displacement by displacement and the crests reinforce. Crest plus crest gives ' +
+          'a crest twice as tall.',
         objects: [
-          curve(sinePath({ ...LEFT, amplitude: 2 * a, wavelength: wl, yOffset: -1.4 }), 'combined wave: amplitude doubles', GOOD),
-          label('crest + crest → bigger crest', [-2.5, -3.0, 0], GOOD),
+          curve(sinePath({ ...L, amplitude: 2 * a, wavelength: wl, yOffset: -1.5 }), ROLE.result),
+          label('twice as tall', [-2.6, -3.05, 0], ROLE.result, 'primary'),
         ],
       },
       {
@@ -283,9 +265,10 @@ export function buildWaveInterferenceScene(): SceneSpec {
           'On the right the second wave is shifted by half a wavelength, so every crest of one ' +
           'meets a trough of the other.',
         objects: [
-          label('DESTRUCTIVE', [2.5, 3.1, 0], HOT),
-          curve(sinePath({ ...RIGHT, amplitude: a, wavelength: wl, yOffset: 2.0 }), 'wave 1', COLD),
-          curve(sinePath({ ...RIGHT, amplitude: a, wavelength: wl, yOffset: 0.9, phase: Math.PI }), 'wave 2 (half a wavelength behind)', ACCENT),
+          heading('DESTRUCTIVE', [2.6, 3.35, 0], ROLE.input),
+          curve(sinePath({ ...R, amplitude: a, wavelength: wl, yOffset: 2.1 }), ROLE.output),
+          curve(sinePath({ ...R, amplitude: a, wavelength: wl, yOffset: 1.0, phase: Math.PI }), ROLE.aid),
+          label('half a wavelength apart', [2.6, 0.05, 0], ROLE.ink, 'detail'),
         ],
       },
       {
@@ -293,9 +276,8 @@ export function buildWaveInterferenceScene(): SceneSpec {
           'Now the displacements are equal and opposite everywhere, so they add to zero. The ' +
           'combined wave is a flat line — the waves have cancelled.',
         objects: [
-          line([RIGHT.x0, -1.4, 0], [RIGHT.x1, -1.4, 0], HOT),
-          label('combined wave: flat — they cancel', [2.5, -1.9, 0], HOT),
-          label('crest + trough → nothing', [2.5, -3.0, 0], HOT),
+          line([R.x0, -1.5, 0], [R.x1, -1.5, 0], ROLE.input, 0.06),
+          label('cancels to nothing', [2.6, -4.15, 0], ROLE.input, 'primary'),
         ],
       },
     ],
@@ -307,68 +289,65 @@ export function buildWaveInterferenceScene(): SceneSpec {
 export function buildCalorimetryScene(): SceneSpec {
   return {
     id: 'phys-calorimetry',
-    title: 'Calorimetry: heat lost by the hot body = heat gained by the water',
+    title: 'Calorimetry: what the hot body loses, the water gains',
     sceneType: 'process',
     cameraDistance: 13,
     teachingGoal:
-      'Show heat flowing from a hot body into surrounding water inside an insulated calorimeter ' +
-      'until both reach one common final temperature, and tie that to the energy balance.',
+      'Show heat flowing out of a hot body into the water around it inside an insulated ' +
+      'calorimeter, until both settle at one common final temperature.',
     ariaLabel:
-      'An insulated calorimeter containing water, with a thermometer. A hot metal block sits in ' +
-      'the water, arrows show heat flowing from the block into the water, and both end at the ' +
-      'same final temperature.',
+      'An insulated calorimeter, hatched on the outside, holding water with a thermometer in it. ' +
+      'A hot block sits in the water and three arrows show heat flowing outward from the block ' +
+      'into the water. Both end at one final temperature.',
     steps: [
       {
         narration:
-          'A calorimeter is an insulated container, so essentially no heat leaks out to the room. ' +
-          'Whatever one thing inside loses, another thing inside gains.',
+          'A calorimeter is an insulated container. Almost no heat leaks to the room, so whatever ' +
+          'one thing inside loses, another thing inside gains.',
         objects: [
-          line([-3.0, 2.2, 0], [-3.0, -2.2, 0]),
-          line([-3.0, -2.2, 0], [3.0, -2.2, 0]),
-          line([3.0, -2.2, 0], [3.0, 2.2, 0]),
-          line([-3.0, 1.1, 0], [3.0, 1.1, 0], COLD),
-          label('insulated calorimeter', [-3.7, 2.5, 0], MUTED),
-          label('water surface', [3.7, 1.1, 0], COLD),
-          label('water: mass m_w, specific heat c_w, starts at 25 °C', [0, -3.0, 0], COLD),
+          line([-3.0, 2.3, 0], [-3.0, -2.1, 0], ROLE.reference, 0.06),
+          line([-3.0, -2.1, 0], [3.0, -2.1, 0], ROLE.reference, 0.06),
+          line([3.0, -2.1, 0], [3.0, 2.3, 0], ROLE.reference, 0.06),
+          ...hatch(-2.9, 2.9, -2.15, 10, 0.32),
+          label('insulated', [0, -2.95, 0], ROLE.reference, 'detail'),
+          line([-3.0, 1.15, 0], [3.0, 1.15, 0], ROLE.output, 0.045),
+          label('water', [-2.15, 0.5, 0], ROLE.output, 'primary'),
+        ],
+      },
+      {
+        narration: 'A thermometer reads the water temperature — the number you actually measure.',
+        objects: [
+          line([2.2, 3.1, 0], [2.2, 0.25, 0], ROLE.ink, 0.035),
+          dot([2.2, 0.15, 0], ROLE.input, 0.14),
+          label('thermometer', [2.2, 3.55, 0], ROLE.ink, 'detail'),
+        ],
+      },
+      {
+        narration: 'Drop in a block hotter than the water, and energy starts moving.',
+        objects: [
+          dot([-1.1, -0.5, 0], ROLE.input, 0.45),
+          label('hot block', [-1.1, -1.45, 0], ROLE.input, 'primary'),
         ],
       },
       {
         narration:
-          'A thermometer reads the temperature of the water — that is the number you actually ' +
-          'measure in the experiment.',
+          'Heat always travels from hotter to colder — out of the block, into the water. Never the ' +
+          'other way round on its own.',
         objects: [
-          line([2.1, 3.0, 0], [2.1, 0.2, 0], INK),
-          label('thermometer', [2.1, 3.35, 0], INK),
-          dot([2.1, 0.1, 0], undefined, HOT, 0.13),
+          arrow([-0.6, -0.15, 0], [0.75, 0.5, 0], ROLE.input),
+          arrow([-0.6, -0.85, 0], [0.75, -1.5, 0], ROLE.input),
+          arrow([-1.6, -0.15, 0], [-2.5, 0.5, 0], ROLE.input),
+          label('heat flows hot → cold', [1.05, -0.42, 0], ROLE.input, 'primary'),
         ],
       },
       {
         narration:
-          'Drop in a hot metal block at 100 °C. It is hotter than the water around it, so energy ' +
-          'starts moving.',
+          'The flow stops when both reach the same temperature. Because nothing escaped the ' +
+          'container, the heat the block lost equals the heat the water gained — and that single ' +
+          'equation is what you solve.',
         objects: [
-          dot([-1.2, -0.4, 0], 'hot metal block, 100 °C', HOT, 0.42),
-        ],
-      },
-      {
-        narration:
-          'Heat always flows from hotter to colder — out of the block and into the water. Never ' +
-          'the other way round on its own.',
-        objects: [
-          arrow([-0.75, -0.05, 0], [0.5, 0.55, 0], 'heat flows hot → cold', HOT),
-          arrow([-0.75, -0.75, 0], [0.5, -1.35, 0], 'Q', HOT),
-          arrow([-1.65, -0.05, 0], [-2.5, 0.55, 0], 'Q', HOT),
-        ],
-      },
-      {
-        narration:
-          'The flow stops when both reach the SAME final temperature. Because the container is ' +
-          'insulated, the heat the block lost equals the heat the water gained — and that single ' +
-          'equation is what lets you solve for the unknown.',
-        objects: [
-          label('both settle at one final temperature T_f', [0, 2.7, 0], GOOD),
-          label('heat lost by metal = heat gained by water', [0, -3.6, 0], GOOD),
-          label('m c ΔT (metal) = m c ΔT (water)', [0, -4.2, 0], INK),
+          label('both end at one final temperature T_f', [0, 2.85, 0], ROLE.result, 'primary'),
+          label('heat lost = heat gained', [0, -3.55, 0], ROLE.result, 'detail'),
         ],
       },
     ],
@@ -380,54 +359,50 @@ export function buildCalorimetryScene(): SceneSpec {
 export function buildFirstLawScene(): SceneSpec {
   return {
     id: 'phys-first-law',
-    title: 'First Law of Thermodynamics: ΔU = Q − W',
+    title: 'First law of thermodynamics: ΔU = Q − W',
     sceneType: 'diagram',
     cameraDistance: 13,
     teachingGoal:
-      'Show the energy bookkeeping of a closed system: heat added in, work done out, and the ' +
-      'internal energy left over as the difference.',
+      'Show the energy bookkeeping of a closed system: heat crossing the boundary inwards, work ' +
+      'crossing it outwards, and the internal energy left over as the difference.',
     ariaLabel:
-      'A box representing a gas system. An arrow labelled Q points into it from the left, an ' +
-      'arrow labelled W points out of it to the right, and the change in internal energy inside ' +
-      'the box is the difference between them.',
+      'A box representing a gas system. A red arrow labelled Q in points into it from the left, a ' +
+      'blue arrow labelled W out points away to the right, and the change in internal energy sits ' +
+      'inside the box. Below, the equation delta U equals Q minus W.',
     steps: [
       {
         narration:
-          'Draw a boundary around the thing you are studying — here, a gas. Everything inside is ' +
-          'the system; everything outside is the surroundings.',
+          'Draw a boundary around the thing you are studying. Inside is the system; outside is ' +
+          'everything else.',
         objects: [
-          line([-1.7, 1.5, 0], [1.7, 1.5, 0]),
-          line([1.7, 1.5, 0], [1.7, -1.5, 0]),
-          line([1.7, -1.5, 0], [-1.7, -1.5, 0]),
-          line([-1.7, -1.5, 0], [-1.7, 1.5, 0]),
-          label('the system (a gas)', [0, 1.95, 0], MUTED),
-          label('surroundings', [0, 3.2, 0], MUTED),
+          ...box(-1.75, -1.55, 1.75, 1.55),
+          label('the system', [0, 2.05, 0], ROLE.reference, 'primary'),
+        ],
+      },
+      {
+        narration: 'Add heat. Energy crosses the boundary inwards — that is Q, and the system gains it.',
+        objects: [
+          arrow([-4.6, 0, 0], [-1.95, 0, 0], ROLE.input),
+          label('Q in', [-3.25, 0.6, 0], ROLE.input, 'primary'),
         ],
       },
       {
         narration:
-          'Add heat to it. Energy crosses the boundary inwards — that is Q, and it counts as ' +
-          'positive because the system gains it.',
+          'The gas expands and pushes on its surroundings. Energy crosses the boundary outwards as ' +
+          'work — that is W, and the system spends it.',
         objects: [
-          arrow([-4.4, 0, 0], [-1.9, 0, 0], 'Q = heat added IN (+)', HOT),
+          arrow([1.95, 0, 0], [4.6, 0, 0], ROLE.output),
+          label('W out', [3.25, 0.6, 0], ROLE.output, 'primary'),
         ],
       },
       {
         narration:
-          'The gas expands and pushes on its surroundings. Energy crosses the boundary outwards ' +
-          'as work — that is W, and the system spends it.',
+          'Whatever is left over stays inside as internal energy. Nothing is created or destroyed ' +
+          'here — it is only counted: what came in, minus what went out.',
         objects: [
-          arrow([1.9, 0, 0], [4.4, 0, 0], 'W = work done BY the system (−)', COLD),
-        ],
-      },
-      {
-        narration:
-          'Whatever is left over stays inside as internal energy. Energy is not created or ' +
-          'destroyed here — it is only counted: what came in, minus what went out.',
-        objects: [
-          dot([0, 0, 0], 'ΔU = change in internal energy', ACCENT, 0.3),
-          label('ΔU = Q − W', [0, -2.6, 0], GOOD),
-          label('energy in − energy out = energy kept', [0, -3.3, 0], INK),
+          dot([0, 0, 0], ROLE.aid, 0.34),
+          label('ΔU', [0, 0.85, 0], ROLE.aid, 'primary'),
+          heading('ΔU = Q − W', [0, -2.75, 0], ROLE.result),
         ],
       },
     ],
@@ -437,76 +412,72 @@ export function buildFirstLawScene(): SceneSpec {
 // ── 6. Viscosity ─────────────────────────────────────────────────────────────
 
 export function buildViscosityScene(): SceneSpec {
-  const layerY = [0, 0.75, 1.5, 2.25, 3.0]
-  const thick = layerY.map((y, i) => ({ y, v: (i / (layerY.length - 1)) * 1.5 }))
-  const thin = layerY.map((y, i) => ({ y, v: (i / (layerY.length - 1)) * 2.6 }))
+  const ys = [0, 0.75, 1.5, 2.25, 3.0]
+  const speeds = (max: number) => ys.map((y, i) => ({ y, v: (i / (ys.length - 1)) * max }))
+  const thick = speeds(1.35)
+  const thin = speeds(2.7)
   return {
     id: 'phys-viscosity',
-    title: 'Viscosity: fluid layers sliding over each other',
+    title: 'Viscosity: how strongly a fluid resists being sheared',
     sceneType: 'comparison',
     cameraDistance: 14,
     teachingGoal:
-      'Show that a fluid shears in layers whose speed increases with height, that viscosity is ' +
-      'the resistance to that sliding, and that a thinner fluid develops a steeper velocity ' +
-      'gradient under the same pull.',
+      'Show a fluid shearing in layers whose speed rises with height, and that a thinner fluid ' +
+      'develops a steeper velocity gradient under the same pull.',
     ariaLabel:
-      'Two panels, each with a stationary bottom plate and a moving top plate separated by fluid ' +
-      'layers. Velocity arrows grow from zero at the bottom to a maximum at the top; the arrows ' +
-      'in the low-viscosity panel grow more steeply.',
+      'Two panels, each with a fixed bottom plate and a moving top plate with fluid between them. ' +
+      'Velocity arrows grow from nothing at the bottom plate to a maximum at the top. The arrows ' +
+      'in the low-viscosity panel on the right grow much longer over the same height.',
     steps: [
       {
         narration:
-          'A fluid between two plates. The bottom plate is fixed; the top plate is dragged ' +
-          'sideways. The fluid does not move as one block — it shears into layers.',
+          'Fluid between two plates. The bottom plate is fixed, the top one is dragged sideways, ' +
+          'and the fluid does not move as a block — it shears into layers.',
         objects: [
-          label('THICK FLUID (high viscosity)', [-2.6, 4.0, 0], ACCENT),
-          line([-4.8, 0, 0], [-0.4, 0, 0]),
-          line([-4.8, 3.0, 0], [-0.4, 3.0, 0]),
-          label('plate dragged sideways →', [-2.6, 3.35, 0], MUTED),
-          label('stationary plate — fluid here does not move', [-2.6, -0.35, 0], MUTED),
-          ...thick.slice(1, -1).map((l) => line([-4.8, l.y, 0], [-0.4, l.y, 0], MUTED)),
-          label('fluid layers', [-2.6, -0.75, 0], MUTED),
+          heading('THICK', [-2.6, 4.25, 0], ROLE.aid),
+          line([-4.9, 0, 0], [-0.3, 0, 0], ROLE.reference, 0.07),
+          line([-4.9, 3.0, 0], [-0.3, 3.0, 0], ROLE.reference, 0.07),
+          ...hatch(-4.8, -0.4, 0, 8, 0.28),
+          ...thick.slice(1, -1).map((l) => line([-4.9, l.y, 0], [-0.3, l.y, 0], ROLE.reference, 0.02)),
+          label('plate dragged →', [-2.6, 3.45, 0], ROLE.reference, 'detail'),
+          label('fixed plate', [-2.6, -0.75, 0], ROLE.reference, 'detail'),
         ],
       },
       {
         narration:
-          'Each layer moves a little faster than the one below it: zero at the fixed plate, ' +
-          'fastest at the moving one. That steady change of speed with height is the velocity ' +
-          'gradient.',
+          'Each layer slides a little faster than the one below it — nothing at the fixed plate, ' +
+          'fastest at the moving one. That steady rise in speed with height is the velocity gradient.',
         objects: [
-          ...thick.map((l, i) =>
-            l.v > 0.01
-              ? arrow([-4.8, l.y, 0], [-4.8 + l.v, l.y, 0], i === thick.length - 1 ? 'fastest layer' : undefined, ACCENT)
-              : dot([-4.8, l.y, 0], 'speed zero at the fixed plate', ACCENT, 0.12),
+          ...thick.map((l) =>
+            l.v > 0.01 ? arrow([-4.9, l.y, 0], [-4.9 + l.v, l.y, 0], ROLE.aid) : dot([-4.9, l.y, 0], ROLE.aid, 0.11),
           ),
-          label('velocity gradient dv/dy', [-2.4, 1.5, 0], ACCENT),
+          label('velocity gradient', [-2.15, 1.5, 0], ROLE.aid, 'primary'),
         ],
       },
       {
         narration:
-          'Viscosity is how strongly the fluid resists that sliding. The more viscous it is, the ' +
-          'more force you need to keep the top plate moving at the same speed.',
+          'Viscosity is how hard the fluid fights that sliding. The more viscous it is, the more ' +
+          'force you need to keep the top plate moving at the same speed.',
         objects: [
-          label('viscous force F = η A (dv/dy)', [-2.6, -1.5, 0], INK),
-          label('η = viscosity — the resistance to shear', [-2.6, -2.2, 0], INK),
+          label('F = η A (dv/dy)', [-2.6, -1.45, 0], ROLE.ink, 'detail'),
         ],
       },
       {
         narration:
-          'Now the same experiment with a thinner fluid. It resists less, so under the same pull ' +
-          'the layers slip further ahead of each other — a steeper velocity gradient. That ' +
-          'difference IS the difference in viscosity.',
+          'The same experiment with a thinner fluid. It resists less, so under the same pull the ' +
+          'layers slip much further ahead of each other — a steeper gradient. That difference is ' +
+          'the difference in viscosity.',
         objects: [
-          label('THIN FLUID (low viscosity)', [2.6, 4.0, 0], GOOD),
-          line([0.4, 0, 0], [4.8, 0, 0]),
-          line([0.4, 3.0, 0], [4.8, 3.0, 0]),
-          label('same plate, same pull →', [2.6, 3.35, 0], MUTED),
-          label('stationary plate', [2.6, -0.35, 0], MUTED),
-          ...thin.slice(1, -1).map((l) => line([0.4, l.y, 0], [4.8, l.y, 0], MUTED)),
+          heading('THIN', [2.6, 4.25, 0], ROLE.result),
+          line([0.3, 0, 0], [4.9, 0, 0], ROLE.reference, 0.07),
+          line([0.3, 3.0, 0], [4.9, 3.0, 0], ROLE.reference, 0.07),
+          ...hatch(0.4, 4.8, 0, 8, 0.28),
+          ...thin.slice(1, -1).map((l) => line([0.3, l.y, 0], [4.9, l.y, 0], ROLE.reference, 0.02)),
+          label('same pull →', [2.6, 3.45, 0], ROLE.reference, 'detail'),
           ...thin.map((l) =>
-            l.v > 0.01 ? arrow([0.4, l.y, 0], [0.4 + l.v, l.y, 0], undefined, GOOD) : dot([0.4, l.y, 0], undefined, GOOD, 0.12),
+            l.v > 0.01 ? arrow([0.3, l.y, 0], [0.3 + l.v, l.y, 0], ROLE.result) : dot([0.3, l.y, 0], ROLE.result, 0.11),
           ),
-          label('lower η → steeper gradient, fluid flows more easily', [2.6, -1.5, 0], GOOD),
+          label('lower η · steeper gradient', [2.6, -2.2, 0], ROLE.result, 'primary'),
         ],
       },
     ],
@@ -515,6 +486,12 @@ export function buildViscosityScene(): SceneSpec {
 
 // ── 7. Surface Tension and Capillarity ───────────────────────────────────────
 
+/**
+ * Two linked phenomena, so two panels: the molecular cause on the left, the
+ * visible consequence on the right. The key asymmetry — a surface molecule has
+ * no neighbours above it — is carried by a MISSING arrow, which reads without
+ * relying on colour at all.
+ */
 export function buildSurfaceTensionScene(): SceneSpec {
   return {
     id: 'phys-surface-tension',
@@ -522,68 +499,71 @@ export function buildSurfaceTensionScene(): SceneSpec {
     sceneType: 'comparison',
     cameraDistance: 14,
     teachingGoal:
-      'Show why a liquid surface behaves like a stretched skin — surface molecules are pulled ' +
-      'inwards because they have no neighbours above — and then show that same tension pulling ' +
-      'liquid up a narrow tube.',
+      'Show why a liquid surface behaves like a stretched skin — a surface molecule is pulled ' +
+      'inwards because nothing pulls it up — and then show that same tension lifting liquid up a ' +
+      'narrow tube.',
     ariaLabel:
-      'Two panels. On the left, a molecule deep in a liquid pulled equally in all directions and ' +
-      'a molecule at the surface pulled only inwards. On the right, a narrow tube standing in a ' +
-      'liquid, with the level inside the tube risen above the outside level and a curved meniscus.',
+      'Two panels. On the left, a molecule deep in the liquid with four balanced force arrows, and ' +
+      'a molecule at the surface with arrows to the sides and downwards but none upwards. On the ' +
+      'right, a narrow tube standing in a liquid, with the level inside the tube higher than the ' +
+      'level outside and a curved meniscus at the top of the column.',
     steps: [
       {
         narration:
-          'Deep inside a liquid, a molecule is surrounded on every side. Its neighbours pull it ' +
-          'equally in all directions, so the pulls cancel out.',
+          'Deep inside the liquid a molecule is surrounded on every side. Its neighbours pull it ' +
+          'equally in all directions, so the pulls cancel.',
         objects: [
-          label('WHY THE SURFACE IS SPECIAL', [-2.6, 3.6, 0], ACCENT),
-          label('liquid surface', [-4.3, 2.05, 0], COLD),
-          line([-4.8, 1.6, 0], [-0.4, 1.6, 0], COLD),
-          dot([-2.6, -0.4, 0], 'molecule deep inside', COLD, 0.2),
-          arrow([-2.6, -0.4, 0], [-1.8, -0.4, 0], undefined, MUTED),
-          arrow([-2.6, -0.4, 0], [-3.4, -0.4, 0], undefined, MUTED),
-          arrow([-2.6, -0.4, 0], [-2.6, 0.4, 0], undefined, MUTED),
-          arrow([-2.6, -0.4, 0], [-2.6, -1.2, 0], 'pulled equally in all directions — no net force', MUTED),
+          heading('AT THE SURFACE', [-3.0, 4.35, 0], ROLE.aid),
+          line([-4.9, 1.7, 0], [-0.5, 1.7, 0], ROLE.output, 0.05),
+          label('liquid surface', [-4.2, 2.4, 0], ROLE.output, 'detail'),
+          dot([-2.7, -0.5, 0], ROLE.output, 0.22),
+          arrow([-2.7, -0.5, 0], [-1.85, -0.5, 0], ROLE.reference),
+          arrow([-2.7, -0.5, 0], [-3.55, -0.5, 0], ROLE.reference),
+          arrow([-2.7, -0.5, 0], [-2.7, 0.35, 0], ROLE.reference),
+          arrow([-2.7, -0.5, 0], [-2.7, -1.35, 0], ROLE.reference),
+          label('balanced', [-2.7, -1.8, 0], ROLE.reference, 'detail'),
         ],
       },
       {
         narration:
-          'A molecule sitting AT the surface has no neighbours above it. The sideways pulls still ' +
-          'cancel, but the upward pull is missing, so it feels a net tug downwards into the ' +
-          'liquid.',
+          'A molecule sitting at the surface has no neighbours above it. The sideways pulls still ' +
+          'cancel, but the upward pull is missing, so it feels a net tug down into the liquid.',
         objects: [
-          dot([-1.4, 1.6, 0], 'molecule at the surface', HOT, 0.2),
-          arrow([-1.4, 1.6, 0], [-1.4, 0.7, 0], 'net inward pull — nothing pulls it up', HOT),
+          dot([-1.35, 1.7, 0], ROLE.input, 0.22),
+          arrow([-1.35, 1.7, 0], [-0.65, 1.7, 0], ROLE.reference),
+          arrow([-1.35, 1.7, 0], [-2.05, 1.7, 0], ROLE.reference),
+          arrow([-1.35, 1.7, 0], [-1.35, 0.85, 0], ROLE.input),
+          label('nothing pulls it up', [-2.4, 2.9, 0], ROLE.input, 'primary'),
         ],
       },
       {
         narration:
-          'Every surface molecule feels that same inward tug, so the surface pulls itself as ' +
-          'tight as it can. It behaves like a stretched skin under tension along its own plane.',
+          'Every surface molecule feels that same inward tug, so the surface pulls itself as tight ' +
+          'as it can and behaves like a stretched skin under tension.',
         objects: [
-          arrow([-2.9, 1.6, 0], [-4.4, 1.6, 0], undefined, GOOD),
-          arrow([-2.3, 1.6, 0], [-0.8, 1.6, 0], undefined, GOOD),
-          label('tension along the surface pulls it tight', [-2.6, 2.55, 0], GOOD),
-          label('surface acts like a stretched skin', [-2.6, 3.05, 0], GOOD),
+          arrow([-3.1, 1.7, 0], [-4.6, 1.7, 0], ROLE.result),
+          arrow([-2.3, 1.7, 0], [-0.8, 1.7, 0], ROLE.result),
+          label('tension along the surface', [-3.0, 0.8, 0], ROLE.result, 'primary'),
         ],
       },
       {
         narration:
-          'Now stand a narrow tube in the liquid. The same tension, pulling where the liquid ' +
-          'meets the glass, drags the column upwards until its weight balances the pull.',
+          'Stand a narrow tube in the liquid and that same tension, pulling where the liquid meets ' +
+          'the glass, drags the column upwards until its weight balances the pull.',
         objects: [
-          label('CAPILLARY RISE', [2.6, 3.6, 0], ACCENT),
-          line([0.4, 0.4, 0], [4.8, 0.4, 0], COLD),
-          line([1.7, 3.0, 0], [1.7, -1.2, 0]),
-          line([3.3, 3.0, 0], [3.3, -1.2, 0]),
-          label('narrow tube', [2.5, 3.3, 0], MUTED),
-          label('liquid level outside', [4.5, 0.05, 0], COLD),
-          line([1.7, 2.0, 0], [2.2, 1.78, 0], COLD),
-          line([2.2, 1.78, 0], [2.8, 1.78, 0], COLD),
-          line([2.8, 1.78, 0], [3.3, 2.0, 0], COLD),
-          label('curved meniscus', [2.5, 2.35, 0], COLD),
-          arrow([2.5, 0.5, 0], [2.5, 1.6, 0], undefined, GOOD),
-          label('liquid climbs the tube — rise h', [4.6, 1.1, 0], GOOD),
-          label('h = 2T cos θ / (ρ g r) — narrower tube, higher rise', [2.6, -2.1, 0], INK),
+          heading('CAPILLARY RISE', [2.9, 4.35, 0], ROLE.aid),
+          line([0.6, 0.35, 0], [4.9, 0.35, 0], ROLE.output, 0.05),
+          label('level outside', [4.35, -0.3, 0], ROLE.output, 'detail'),
+          line([1.85, 3.1, 0], [1.85, -1.3, 0], ROLE.reference, 0.05),
+          line([3.45, 3.1, 0], [3.45, -1.3, 0], ROLE.reference, 0.05),
+          label('narrow tube', [4.5, 3.4, 0], ROLE.reference, 'detail'),
+          line([1.85, 2.05, 0], [2.35, 1.82, 0], ROLE.output, 0.04),
+          line([2.35, 1.82, 0], [2.95, 1.82, 0], ROLE.output, 0.04),
+          line([2.95, 1.82, 0], [3.45, 2.05, 0], ROLE.output, 0.04),
+          label('meniscus', [2.65, 2.5, 0], ROLE.output, 'detail'),
+          arrow([2.65, 0.55, 0], [2.65, 1.6, 0], ROLE.result),
+          label('liquid climbs · rise h', [2.65, -1.1, 0], ROLE.result, 'primary'),
+          label('h = 2T cos θ / ρgr', [2.65, -2.55, 0], ROLE.ink, 'detail'),
         ],
       },
     ],

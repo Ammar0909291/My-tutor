@@ -36,37 +36,38 @@ const PILOT: Pilot[] = [
   {
     id: 'phys.opt.total-internal-reflection',
     title: 'Total Internal Reflection and Critical Angle',
-    mustDraw: ['boundary', 'normal', 'incident ray', 'reflected ray', 'critical angle', 'glass', 'air'],
+    // Named as the figure now labels them (M4.1 shortened every label to a NAME).
+    mustDraw: ['normal', 'glass', 'air', 'θ < θc', 'θ = θc', 'θ > θc', 'reflected back', 'sin θc'],
   },
   {
     id: 'phys.wave.transverse-waves',
     title: 'Transverse Waves',
-    mustDraw: ['crest', 'trough', 'wavelength', 'direction the wave travels', 'up and down'],
+    mustDraw: ['crest', 'trough', 'wavelength', 'wave travels', 'particle moves', '90°'],
   },
   {
     id: 'phys.wave.interference',
     title: 'Wave Interference',
-    mustDraw: ['wave 1', 'wave 2', 'constructive', 'destructive', 'cancel'],
+    mustDraw: ['wave 1', 'wave 2', 'constructive', 'destructive', 'cancels', 'twice as tall'],
   },
   {
     id: 'phys.therm.calorimetry',
     title: 'Calorimetry',
-    mustDraw: ['calorimeter', 'water', 'hot metal block', 'thermometer', 'heat flows hot', 'final temperature'],
+    mustDraw: ['insulated', 'water', 'hot block', 'thermometer', 'heat flows hot', 'final temperature'],
   },
   {
     id: 'phys.therm.first-law',
     title: 'First Law of Thermodynamics',
-    mustDraw: ['the system', 'heat added IN', 'work done BY', 'internal energy', 'ΔU = Q − W'],
+    mustDraw: ['the system', 'Q in', 'W out', 'ΔU', 'ΔU = Q − W'],
   },
   {
     id: 'phys.mech.viscosity',
     title: "Viscosity and Stokes' Law",
-    mustDraw: ['stationary plate', 'fluid layers', 'velocity gradient', 'viscous force', 'low viscosity'],
+    mustDraw: ['fixed plate', 'plate dragged', 'velocity gradient', 'η A (dv/dy)', 'THICK', 'THIN', 'steeper gradient'],
   },
   {
     id: 'phys.mech.surface-tension',
     title: 'Surface Tension and Capillarity',
-    mustDraw: ['liquid surface', 'molecule at the surface', 'tension along the surface', 'narrow tube', 'meniscus', 'climbs the tube'],
+    mustDraw: ['liquid surface', 'nothing pulls it up', 'tension along the surface', 'narrow tube', 'meniscus', 'liquid climbs'],
   },
 ]
 
@@ -164,8 +165,8 @@ describe('each figure actually contains what the concept needs', () => {
   it('total internal reflection draws the parts the old mirror figure never had', () => {
     const text = drawnText(sceneOf('phys.opt.total-internal-reflection'))
     expect(text).toContain('normal')
-    expect(text).toContain('boundary')
-    expect(text).toContain('stays in the glass')
+    expect(text).toContain('glass')
+    expect(text).toContain('all reflected back')
     // And it is NOT the concave-mirror image-construction figure.
     expect(text).not.toContain('concave mirror')
     expect(text).not.toContain('focal')
@@ -180,8 +181,8 @@ describe('each figure actually contains what the concept needs', () => {
 
   it('interference shows both outcomes, not one generic wave', () => {
     const text = drawnText(sceneOf('phys.wave.interference'))
-    expect(text).toContain('amplitude doubles')
-    expect(text).toContain('flat')
+    expect(text).toContain('twice as tall')
+    expect(text).toContain('cancels to nothing')
   })
 
   it('viscosity shows the gradient and the comparison, not a single blob', () => {
