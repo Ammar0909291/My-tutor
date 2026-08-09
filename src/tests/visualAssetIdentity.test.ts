@@ -228,13 +228,13 @@ describe('F. curated visuals still work, unchanged', () => {
   it('a concept-authored scene resolves with declared identity', () => {
     const d = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.opt.reflection',
+      lessonConceptId: 'phys.opt.mirrors',
       subject: 'physics',
       learnerRequest: 'diagram',
     })
     expect(d.graphical).toBe(true)
     expect(d.payload?.renderer).toBe('scene')
-    expect(d.asset?.conceptId).toBe('phys.opt.reflection')
+    expect(d.asset?.conceptId).toBe('phys.opt.mirrors')
     expect(d.asset?.provenance).toBe('generator')
     expect(d.asset?.identity).toBe('declared')
   })

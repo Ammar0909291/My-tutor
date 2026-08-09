@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { buildCanonicalScene, ACTIVATED_SCENE_KINDS } from '@/lib/teaching/visual/conceptSceneParams'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
+import { isRetiredVisualBinding } from '@/lib/teaching/visual/retired'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import { getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
 import { getKnowledgeGraph, getAllNodes } from '@/lib/curriculum/knowledgeGraph'
@@ -78,6 +79,10 @@ describe('Scene generator activation — reaches the resolver', () => {
       for (const node of getAllNodes(graph)) {
         const kind = getConceptSceneGenerator(node.id)
         if (!kind || !ACTIVATED_SCENE_KINDS.includes(kind)) continue
+        // A binding retired in M3-B/B1 is deliberately not served — the figure
+        // depicted a different situation. Skipped here, asserted in
+        // visualRetiredBindings.test.ts.
+        if (isRetiredVisualBinding(node.id)) continue
         const d = resolveVisual({ message: '', lessonConceptId: node.id, subject })
         if (d.payload.renderer !== 'scene') misses.push(`${node.id} (${kind}) -> ${d.payload.renderer}`)
       }

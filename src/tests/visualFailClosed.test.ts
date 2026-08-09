@@ -129,19 +129,19 @@ describe('curated assets are untouched by M1', () => {
   it('a concept-bound scene generator still resolves to its scene', () => {
     const decision = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.opt.reflection',
+      lessonConceptId: 'phys.opt.mirrors',
       subject: 'physics',
       learnerRequest: 'diagram',
     })
     expect(decision.graphical).toBe(true)
     expect(decision.payload?.renderer).toBe('scene')
-    expect(decision.provenance).toBe('generator:phys.opt.reflection:ray_optics')
+    expect(decision.provenance).toBe('generator:phys.opt.mirrors:ray_optics')
   })
 
-  it('the ray_optics scene belongs to Reflection and not to its neighbour', () => {
-    // The two optics concepts sit next to each other in the KG and only one
-    // has an asset. That asymmetry must stay visible rather than being papered
-    // over by giving the neighbour the same figure.
+  it('the ray_optics scene belongs to Spherical Mirrors and not to its neighbour', () => {
+    // The optics concepts sit next to each other in the KG and only one has a
+    // faithful asset. That asymmetry must stay visible rather than being
+    // papered over by giving the neighbour the same figure.
     const tir = resolveVisual({
       message: 'explain with diagram',
       lessonConceptId: 'phys.opt.total-internal-reflection',

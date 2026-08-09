@@ -187,13 +187,22 @@ describe('the historical failures cannot recur', () => {
     if (!result.ok) expect(result.reason).toBe('not-anchored-to-concept')
   })
 
-  it('9. reflection is a mirror, not a lens that happened to be nearby', async () => {
+  it('9. a mirror concept is a mirror, not the lens that shares its generator', async () => {
+    // Same invariant as before — a shared generator must draw THIS concept's
+    // case, never the kind default — asserted on phys.opt.mirrors, which still
+    // carries the concave-mirror override. It was previously asserted on
+    // phys.opt.reflection, whose binding B1 retired: that figure is an
+    // image-construction diagram with no normal and no equal angles, so it
+    // could not teach the laws of reflection.
     const d = await resolveVisualForTurn(
-      { message: 'Show reflection using a ray diagram', lessonConceptId: DIM,
+      // Asked directly on the concept: this test is about which CASE a shared
+      // generator draws, not about concept targeting (covered in
+      // visualOwnership.test.ts), so the target is set rather than matched.
+      { message: 'Show me this with a ray diagram', lessonConceptId: 'phys.opt.mirrors',
         subject: 'physics', learnerRequest: 'diagram' },
       engine(null),
     )
-    expect(d.conceptId).toBe('phys.opt.reflection')
+    expect(d.conceptId).toBe('phys.opt.mirrors')
     const semantics = describeVisualPayload(d.payload)
     expect(semantics.elements.join(' ')).toMatch(/mirror/i)
     expect(semantics.caption).not.toMatch(/convex lens/i)

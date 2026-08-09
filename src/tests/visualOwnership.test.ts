@@ -171,8 +171,15 @@ describe('incidental vocabulary never hijacks the figure', () => {
 
   it('optical reflection is not the geometric transformation', () => {
     const d = ask('Show me how reflection works with a diagram.', 'phys.opt.reflection')
+    // The invariant here is CONCEPT TARGETING: the physics word must reach the
+    // physics concept, not math.geom.reflection. That is unchanged.
     expect(d.conceptId).toBe('phys.opt.reflection')
-    expect(d.provenance).toContain('ray_optics')
+    // Its FIGURE was retired in M3-B/B1: the concave-mirror image-construction
+    // diagram contains no incident ray, no normal and no equal angles, so it
+    // cannot teach "Laws of Reflection". Targeting the right concept and having
+    // no faithful figure for it are now separate facts, and both are asserted.
+    expect(d.graphical).toBe(false)
+    expect(d.provenance).toBe('no-figure:retired-binding')
   })
 
   it('the lesson topic under a shorter name stays on the lesson', () => {
@@ -210,8 +217,13 @@ describe('PRODUCTION 2026-08-08 — a physics word must get its physics concept'
   it('"Show reflection using a ray diagram" reaches optical reflection', () => {
     const d = ask('Show reflection using a ray diagram', DIMENSIONAL)
     expect(d.conceptId).toBe('phys.opt.reflection')
-    expect(d.payload.renderer).toBe('scene')
-    expect(d.provenance).toContain('ray_optics')
+    // The production failure this guards was rendering the GEOMETRY SHAPES card
+    // for this request. That must still be impossible — and after B1 the answer
+    // is no figure at all rather than a mirror diagram, which is stronger: the
+    // learner cannot be shown any figure for a concept we cannot draw faithfully.
+    expect(d.conceptId).not.toBe('math.geom.reflection')
+    expect(d.payload).toBeNull()
+    expect(d.graphical).toBe(false)
   })
 
   it('the whole matrix resolves inside physics from an unrelated lesson', () => {

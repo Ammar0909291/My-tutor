@@ -31,6 +31,7 @@
 import { getConceptVisualType, lookupConceptVisualBinding, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from './conceptSceneParams'
 import { admitVisualAsset, makeVisualAsset, type AssetProvenance, type VisualAsset, type VisualIntent } from './asset'
+import { isRetiredVisualBinding } from './retired'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
@@ -162,6 +163,20 @@ function buildDecision(
         returnToConceptId,
         turns: heldTurns,
       },
+    }
+  }
+
+  // ── Tier −1: RETIRED BINDINGS ─────────────────────────────────────────────
+  // Checked before every tier, so a concept whose asset was found to depict
+  // something else cannot be picked up again by a broader rule — the curated
+  // row, the domain-prefix rule and the scene generator are all downstream of
+  // this line. Returning early is the whole mechanism; see retired.ts for the
+  // per-concept audit evidence.
+  if (isRetiredVisualBinding(ctx.conceptId)) {
+    return {
+      ...noFigureDecision('retired-binding', ctx.conceptId, ctx.title, intent.purpose, excursion),
+      continuityReason,
+      session: null,
     }
   }
 
