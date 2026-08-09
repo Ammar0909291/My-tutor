@@ -6,7 +6,8 @@
  * element data, no bonding rules) — mirrors Vector3D's role as a generic
  * geometric building block, reusable for atoms, particles, or any labeled node.
  */
-import { Html } from '@react-three/drei'
+import { SceneLabel } from './SceneLabel'
+import type { Theme } from '@/components/Providers'
 
 export interface MolecularNode3DProps {
   /** Center position of the node. */
@@ -17,9 +18,13 @@ export interface MolecularNode3DProps {
   label?: string
   /** Sphere color (CSS color string). */
   color?: string
+  /** Active theme, for the label's halo. Prop, not hook — see SceneLabel. */
+  theme?: Theme
+  /** Typographic tier for the label. */
+  labelTier?: number
 }
 
-export function MolecularNode3D({ position, radius = 0.3, label, color = '#5B8DEF' }: MolecularNode3DProps) {
+export function MolecularNode3D({ position, radius = 0.3, label, color = '#5B8DEF', theme = 'dark', labelTier }: MolecularNode3DProps) {
   return (
     <group>
       <mesh position={position}>
@@ -27,11 +32,13 @@ export function MolecularNode3D({ position, radius = 0.3, label, color = '#5B8DE
         <meshStandardMaterial color={color} />
       </mesh>
       {label && (
-        <Html position={[position[0], position[1] + radius + 0.22, position[2]]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color, whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-            {label}
-          </span>
-        </Html>
+        <SceneLabel
+          text={label}
+          position={[position[0], position[1] + radius + 0.22, position[2]]}
+          color={color}
+          theme={theme}
+          tier={labelTier}
+        />
       )}
     </group>
   )

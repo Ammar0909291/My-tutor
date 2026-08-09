@@ -13,7 +13,7 @@
  */
 import { useMemo } from 'react'
 import { Quaternion, Vector3 } from 'three'
-import { Html } from '@react-three/drei'
+import { SceneLabel } from './SceneLabel'
 import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
@@ -58,6 +58,7 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
           radius={obj.radius ?? (obj.type === 'node' ? 0.3 : 0.1)}
           color={color ?? '#5B8DEF'}
           label={obj.text}
+          theme={theme}
         />
       )
     case 'vector':
@@ -70,43 +71,39 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
           color={color ?? '#5B8DEF'}
           label={obj.text}
           thickness={obj.thickness ?? 0.05}
+          theme={theme}
         />
       )
-    case 'label': {
-      // Typographic tier (M4.1). `size` is a MULTIPLIER on the base label size,
-      // so a scene can give its heading, its object names and its fine print
-      // three distinguishable weights instead of one flat 11px wall of text.
-      // Omitted (every pre-existing scene) => 1 => byte-identical to before.
-      const scale = typeof obj.size === 'number' && obj.size > 0 ? Math.min(obj.size, 3) : 1
+    case 'label':
       return (
-        <Html key={key} position={obj.position ?? [0, 0, 0]} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-          <span style={{
-            fontSize: 11 * scale,
-            fontWeight: scale >= 1.4 ? 800 : 700,
-            letterSpacing: scale >= 1.4 ? '0.02em' : undefined,
-            color: color ?? '#5B8DEF',
-            whiteSpace: 'nowrap',
-            // A halo in the SURFACE's colour, not a fixed black one: the shadow
-            // exists to separate a label from a ray or a wave crossing behind
-            // it, and a black glow around dark text on a light panel does the
-            // opposite of that.
-            textShadow: theme === 'light'
-              ? (scale >= 1.4 ? '0 1px 4px rgba(255,255,255,0.95)' : '0 0 3px rgba(255,255,255,0.9)')
-              : (scale >= 1.4 ? '0 1px 4px rgba(0,0,0,0.85)' : '0 0 3px rgba(0,0,0,0.6)'),
-          }}>
-            {obj.text}
-          </span>
-        </Html>
+        <SceneLabel
+          key={key}
+          text={obj.text ?? ''}
+          position={obj.position ?? [0, 0, 0]}
+          color={color ?? '#5B8DEF'}
+          theme={theme}
+          tier={obj.size}
+        />
       )
-    }
     case 'path':
     case 'trajectory':
       // Render the ordered points as small markers (spike: no spline geometry yet).
+      // The path's own text used to be dropped: markers were drawn and the
+      // label silently discarded. Any text a scene declares must reach the
+      // learner, so it is drawn once at the path's midpoint.
       return (
         <group key={key}>
           {(obj.points ?? []).map((p, i) => (
-            <MolecularNode3D key={i} position={p} radius={obj.radius ?? 0.06} color={color ?? '#FFD166'} />
+            <MolecularNode3D key={i} position={p} radius={obj.radius ?? 0.06} color={color ?? '#FFD166'} theme={theme} />
           ))}
+          {obj.text && (obj.points?.length ?? 0) > 0 && (
+            <SceneLabel
+              text={obj.text}
+              position={obj.points![Math.floor(obj.points!.length / 2)]}
+              color={color ?? '#FFD166'}
+              theme={theme}
+            />
+          )}
         </group>
       )
     case 'bond':
@@ -119,8 +116,34 @@ function renderObject(obj: SceneObject, key: number, theme: Theme) {
           thickness={obj.thickness ?? 0.04}
         />
       )
+    case 'bar': {
+      // `bar` was reaching `default` and returning null, so its GEOMETRY AND
+      // its label were both discarded — a scene could declare a bar chart and
+      // the learner would see nothing at all. `size` is the bar's extent and
+      // `position` its centre, matching what the generators emit.
+      const extent = typeof obj.size === 'number' && obj.size > 0 ? obj.size : 1
+      const thickness = obj.radius ?? 1.4
+      const at = obj.position ?? [0, 0, 0]
+      return (
+        <group key={key}>
+          <mesh position={at}>
+            <boxGeometry args={[extent, thickness, thickness]} />
+            <meshStandardMaterial color={color ?? '#5B8DEF'} />
+          </mesh>
+          {obj.text && (
+            <SceneLabel
+              text={obj.text}
+              position={[at[0], at[1] + thickness / 2 + 0.5, at[2]]}
+              color={color ?? '#5B8DEF'}
+              theme={theme}
+            />
+          )}
+        </group>
+      )
+    }
     default:
-      // bar / surface not handled yet — skipped harmlessly.
+      // `surface` remains unimplemented — it has no producer in the corpus. It
+      // returns null rather than guessing at a height-field representation.
       return null
   }
 }

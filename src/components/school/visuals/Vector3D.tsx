@@ -8,7 +8,8 @@
  */
 import { useMemo } from 'react'
 import { Quaternion, Vector3 } from 'three'
-import { Html } from '@react-three/drei'
+import { SceneLabel } from './SceneLabel'
+import type { Theme } from '@/components/Providers'
 
 export interface Vector3DProps {
   /** Tail position of the vector. */
@@ -23,6 +24,14 @@ export interface Vector3DProps {
   lengthScale?: number
   /** Shaft radius — lets callers emphasize magnitude visually. */
   thickness?: number
+  /**
+   * Active theme, for the label's halo. A prop and not a hook: this component
+   * renders inside <Canvas>, whose reconciler root app context does not cross.
+   * Defaults to 'dark' so existing callers are byte-identical.
+   */
+  theme?: Theme
+  /** Typographic tier for the label. */
+  labelTier?: number
 }
 
 export function Vector3D({
@@ -32,6 +41,8 @@ export function Vector3D({
   label,
   lengthScale = 1,
   thickness = 0.05,
+  theme = 'dark',
+  labelTier,
 }: Vector3DProps) {
   const { shaftPosition, shaftLength, headPosition, quaternion, tip } = useMemo(() => {
     const startV = new Vector3(...start)
@@ -68,11 +79,7 @@ export function Vector3D({
         <meshStandardMaterial color={color} />
       </mesh>
       {label && (
-        <Html position={tip} center distanceFactor={8} style={{ pointerEvents: 'none' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color, whiteSpace: 'nowrap', textShadow: '0 0 3px rgba(0,0,0,0.6)' }}>
-            {label}
-          </span>
-        </Html>
+        <SceneLabel text={label} position={tip} color={color} theme={theme} tier={labelTier} />
       )}
     </group>
   )

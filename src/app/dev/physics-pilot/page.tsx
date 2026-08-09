@@ -20,6 +20,14 @@ import { buildVisualContractBlock } from '@/lib/teaching/visual/visualContract'
  */
 export const metadata = { robots: { index: false, follow: false } }
 
+/**
+ * Fixtures, not a topic list. The first seven are the M4 pilot figures, whose
+ * text is entirely `label` objects. The last two are added ONLY because they
+ * exercise the other two label primitives — `vector` labels through Vector3D
+ * and `node` labels through MolecularNode3D — which no M4 figure uses, and
+ * which were the two paths that ignored the theme. Without them a browser pass
+ * over this page cannot see either path at all.
+ */
 const PILOT = [
   'phys.opt.total-internal-reflection',
   'phys.wave.transverse-waves',
@@ -28,6 +36,8 @@ const PILOT = [
   'phys.therm.first-law',
   'phys.mech.viscosity',
   'phys.mech.surface-tension',
+  'phys.meas.scalars-vectors',   // Vector3D label path
+  'chem.bond.vsepr',             // MolecularNode3D label path
 ] as const
 
 export default function PhysicsPilotPage() {
