@@ -309,7 +309,7 @@ export function buildCalorimetryScene(): SceneSpec {
           line([-3.0, -2.1, 0], [3.0, -2.1, 0], ROLE.reference, 0.06),
           line([3.0, -2.1, 0], [3.0, 2.3, 0], ROLE.reference, 0.06),
           ...hatch(-2.9, 2.9, -2.15, 10, 0.32),
-          label('insulated', [0, -2.95, 0], ROLE.reference, 'detail'),
+          label('insulated', [0, -3.85, 0], ROLE.reference, 'detail'),
           line([-3.0, 1.15, 0], [3.0, 1.15, 0], ROLE.output, 0.045),
           label('water', [-2.15, 0.5, 0], ROLE.output, 'primary'),
         ],
@@ -326,7 +326,7 @@ export function buildCalorimetryScene(): SceneSpec {
         narration: 'Drop in a block hotter than the water, and energy starts moving.',
         objects: [
           dot([-1.1, -0.5, 0], ROLE.input, 0.45),
-          label('hot block', [-1.1, -1.45, 0], ROLE.input, 'primary'),
+          label('hot block', [-1.1, -1.75, 0], ROLE.input, 'primary'),
         ],
       },
       {
@@ -337,7 +337,13 @@ export function buildCalorimetryScene(): SceneSpec {
           arrow([-0.6, -0.15, 0], [0.75, 0.5, 0], ROLE.input),
           arrow([-0.6, -0.85, 0], [0.75, -1.5, 0], ROLE.input),
           arrow([-1.6, -0.15, 0], [-2.5, 0.5, 0], ROLE.input),
-          label('heat flows hot → cold', [1.05, -0.42, 0], ROLE.input, 'primary'),
+          // Out of the vessel. At [1.05, -0.42] this label crossed the hot
+          // block itself (x -1.55..-0.65, y -0.95..-0.05) and ran past the
+          // right wall (x=3) to x≈3.9. It is 5.8 world units wide and the
+          // vessel is 6.0 across, so no interior placement clears both the
+          // block and the walls. The three arrows carry the direction inside;
+          // the words now sit in the clear band beneath the vessel.
+          label('heat flows hot → cold', [0, -2.9, 0], ROLE.input, 'primary'),
         ],
       },
       {
@@ -346,8 +352,13 @@ export function buildCalorimetryScene(): SceneSpec {
           'container, the heat the block lost equals the heat the water gained — and that single ' +
           'equation is what you solve.',
         objects: [
-          label('both reach the same T_f', [0, 2.85, 0], ROLE.result, 'primary'),
-          label('heat lost = heat gained', [0, -3.55, 0], ROLE.result, 'detail'),
+          // The equilibrium line clears both the vessel top (y=2.3) and the
+          // thermometer stem; the balance equation is the last row of the
+          // caption stack under the vessel. Rows there are a full line-height
+          // apart in SCREEN terms — at 390px one text line is 0.75 scene units,
+          // so a 0.65-unit gap that looks generous on a laptop still overprints.
+          label('both reach the same T_f', [-1.7, 2.75, 0], ROLE.result, 'primary'),
+          label('heat lost = heat gained', [0, -4.8, 0], ROLE.result, 'detail'),
         ],
       },
     ],
@@ -434,7 +445,7 @@ export function buildViscosityScene(): SceneSpec {
           'Fluid between two plates. The bottom plate is fixed, the top one is dragged sideways, ' +
           'and the fluid does not move as a block — it shears into layers.',
         objects: [
-          heading('THICK', [-2.6, 4.25, 0], ROLE.aid),
+          heading('THICK', [-2.6, 4.45, 0], ROLE.aid),
           line([-4.9, 0, 0], [-0.3, 0, 0], ROLE.reference, 0.07),
           line([-4.9, 3.0, 0], [-0.3, 3.0, 0], ROLE.reference, 0.07),
           ...hatch(-4.8, -0.4, 0, 8, 0.28),
@@ -451,7 +462,13 @@ export function buildViscosityScene(): SceneSpec {
           ...thick.map((l) =>
             l.v > 0.01 ? arrow([-4.9, l.y, 0], [-4.9 + l.v, l.y, 0], ROLE.aid) : dot([-4.9, l.y, 0], ROLE.aid, 0.11),
           ),
-          label('velocity gradient', [-2.15, 1.5, 0], ROLE.aid, 'primary'),
+          // Below its own panel, not inside the arrow field. At [-2.15, 1.5]
+          // this label sat ON the y=1.5 layer line, overlapped that layer's
+          // arrow, and its right edge reached x≈0.17 — past the THICK panel
+          // (ends -0.3) and up against THIN, so it read as belonging to both.
+          // It is wider than one panel at 390px, so the only honest home is
+          // the full-width band under the panel it describes.
+          label('velocity gradient', [-2.6, -1.8, 0], ROLE.aid, 'primary'),
         ],
       },
       {
@@ -459,7 +476,9 @@ export function buildViscosityScene(): SceneSpec {
           'Viscosity is how hard the fluid fights that sliding. The more viscous it is, the more ' +
           'force you need to keep the top plate moving at the same speed.',
         objects: [
-          label('F = η A (dv/dy)', [-2.6, -1.45, 0], ROLE.ink, 'detail'),
+          // Centred under BOTH panels: the law governs the thick and the thin
+          // fluid alike, and hanging it under THICK alone implied otherwise.
+          label('F = η A (dv/dy)', [0, -3.9, 0], ROLE.ink, 'detail'),
         ],
       },
       {
@@ -468,7 +487,7 @@ export function buildViscosityScene(): SceneSpec {
           'layers slip much further ahead of each other — a steeper gradient. That difference is ' +
           'the difference in viscosity.',
         objects: [
-          heading('THIN', [2.6, 4.25, 0], ROLE.result),
+          heading('THIN', [2.6, 4.45, 0], ROLE.result),
           line([0.3, 0, 0], [4.9, 0, 0], ROLE.reference, 0.07),
           line([0.3, 3.0, 0], [4.9, 3.0, 0], ROLE.reference, 0.07),
           ...hatch(0.4, 4.8, 0, 8, 0.28),
@@ -477,7 +496,7 @@ export function buildViscosityScene(): SceneSpec {
           ...thin.map((l) =>
             l.v > 0.01 ? arrow([0.3, l.y, 0], [0.3 + l.v, l.y, 0], ROLE.result) : dot([0.3, l.y, 0], ROLE.result, 0.11),
           ),
-          label('lower η · steeper gradient', [2.6, -2.2, 0], ROLE.result, 'primary'),
+          label('lower η · steeper gradient', [2.6, -2.85, 0], ROLE.result, 'primary'),
         ],
       },
     ],
@@ -533,7 +552,7 @@ export function buildSurfaceTensionScene(): SceneSpec {
           arrow([-1.35, 1.7, 0], [-0.65, 1.7, 0], ROLE.reference),
           arrow([-1.35, 1.7, 0], [-2.05, 1.7, 0], ROLE.reference),
           arrow([-1.35, 1.7, 0], [-1.35, 0.85, 0], ROLE.input),
-          label('nothing pulls it up', [-2.4, 2.9, 0], ROLE.input, 'primary'),
+          label('nothing pulls it up', [-2.4, 3.3, 0], ROLE.input, 'primary'),
         ],
       },
       {
@@ -543,7 +562,12 @@ export function buildSurfaceTensionScene(): SceneSpec {
         objects: [
           arrow([-3.1, 1.7, 0], [-4.6, 1.7, 0], ROLE.result),
           arrow([-2.3, 1.7, 0], [-0.8, 1.7, 0], ROLE.result),
-          label('tension along the surface', [-3.0, 0.8, 0], ROLE.result, 'primary'),
+          // The panel has no interior gap wide enough for this: at y=0.8 the
+          // box swallowed the bulk molecule's upward arrow (tip y=0.35), and at
+          // y=-2.75 it met the capillary equation across the panel divide. The
+          // two arrows above carry the sideways pull; the words sit in the
+          // clear band below the whole panel.
+          label('tension along the surface', [-3.0, -3.65, 0], ROLE.result, 'primary'),
         ],
       },
       {
@@ -562,8 +586,11 @@ export function buildSurfaceTensionScene(): SceneSpec {
           line([2.95, 1.82, 0], [3.45, 2.05, 0], ROLE.output, 0.04),
           label('meniscus', [2.65, 2.5, 0], ROLE.output, 'detail'),
           arrow([2.65, 0.55, 0], [2.65, 1.6, 0], ROLE.result),
-          label('liquid climbs · rise h', [2.65, -1.1, 0], ROLE.result, 'primary'),
-          label('h = 2T cos θ / ρgr', [2.65, -2.55, 0], ROLE.ink, 'detail'),
+          // Below the tube, not across it. At y=-1.1 the label's box reached
+          // y=-1.59 and both tube walls end at y=-1.3, so each wall was drawn
+          // straight through the text.
+          label('liquid climbs · rise h', [2.65, -1.9, 0], ROLE.result, 'primary'),
+          label('h = 2T cos θ / ρgr', [2.65, -2.75, 0], ROLE.ink, 'detail'),
         ],
       },
     ],
