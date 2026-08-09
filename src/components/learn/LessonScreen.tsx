@@ -2565,6 +2565,42 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         restoredAny = true
       }
 
+      // ── RESTORE THE ACTIVE FIGURE ────────────────────────────────────────
+      //
+      // The figure hangs off a message in this component's state and arrives
+      // only inside a chat response, so a refresh rebuilt the conversation
+      // without it — the tutor's words kept pointing at a picture that was no
+      // longer there.
+      //
+      // The server re-derived it (POST /api/sessions -> restoreVisualSession),
+      // through the resolver and the admission gate, from the identity in
+      // contextSnapshot.visualSession. Nothing here selects a concept or
+      // builds an asset: this attaches an already-admitted payload to the last
+      // ASSISTANT message, which is the turn the learner was looking at.
+      //
+      // Applied AFTER both restore paths above, so an empty initial visual
+      // state can never overwrite it.
+      if (restoredAny && data.restoredVisual) {
+        const rv = data.restoredVisual as {
+          conceptId?: string; sceneSpec?: unknown; visual?: string; visualSpec?: unknown
+        }
+        // Defense in depth, identical to the live path: a payload that does
+        // not validate is dropped rather than rendered.
+        const scene = rv.sceneSpec as SceneSpec | undefined
+        const validScene = scene && validateSceneSpec(scene).valid ? scene : undefined
+        const validSpec = parseVisualSpec(rv.visualSpec) ?? undefined
+        const visualType = typeof rv.visual === 'string' ? rv.visual : undefined
+        if (validScene || validSpec || visualType) {
+          setMessages((prev) => {
+            const lastAssistant = [...prev].reverse().find((m) => m.role === 'assistant')
+            if (!lastAssistant) return prev
+            return prev.map((m) => m.id === lastAssistant.id
+              ? { ...m, sceneSpec: validScene, visualSpec: validSpec, visual: visualType }
+              : m)
+          })
+        }
+      }
+
       // A resumed (still-active) session keeps its flow — no new opening
       // prompt. A NEW session with restored history still gets the opening
       // prompt so Tutor Max greets and continues, appended below the history.

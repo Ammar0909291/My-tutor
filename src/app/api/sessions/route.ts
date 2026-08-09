@@ -95,7 +95,51 @@ export async function POST(req: Request) {
     }));
 
     if (existingSession) {
-      return NextResponse.json({ success: true, data: existingSession, resumed: true }, { status: 200 });
+      // ── RESTORE THE FIGURE THAT WAS ON SCREEN ────────────────────────────
+      //
+      // The payload is never stored: it is delivered once inside the chat
+      // response and lives in React state on that message, so a refresh used
+      // to restore the words and drop the picture while the tutor was still
+      // teaching against it.
+      //
+      // What IS stored is the figure's IDENTITY, in
+      // contextSnapshot.visualSession, and resolveVisual is deterministic —
+      // so this re-derives the payload through the same authority and the
+      // same admission gate rather than caching or trusting anything. The
+      // browser sends nothing and cannot ask for a concept: it receives the
+      // result of the server re-running its own resolver.
+      //
+      // Never throws: a restore failure degrades to no figure, which is the
+      // pre-existing behaviour.
+      let restoredVisual:
+        | { conceptId: string; sceneSpec?: unknown; visual?: string; visualSpec?: unknown }
+        | null = null;
+      try {
+        const { restoreVisualSession } = await import('@/lib/teaching/visual/resolveVisual');
+        const snapshot = existingSession.contextSnapshot as Record<string, unknown> | null;
+        const decision = restoreVisualSession(snapshot?.visualSession);
+        const payload = decision?.payload;
+        if (payload && decision?.asset) {
+          // One branch per renderer the payload union declares — the client
+          // renders each through its own existing component, exactly as it
+          // does for a live turn. An unhandled renderer restores nothing
+          // rather than guessing a shape.
+          const conceptId = decision.asset.conceptId;
+          if (payload.renderer === 'scene') {
+            restoredVisual = { conceptId, sceneSpec: payload.sceneSpec };
+          } else if (payload.renderer === 'card') {
+            restoredVisual = { conceptId, visual: payload.visualType };
+          } else if (payload.renderer === 'spec') {
+            restoredVisual = { conceptId, visualSpec: payload.visualSpec };
+          }
+        }
+      } catch (err) {
+        console.warn('[sessions] visual restore skipped:', err);
+      }
+      return NextResponse.json(
+        { success: true, data: existingSession, resumed: true, restoredVisual },
+        { status: 200 },
+      );
     }
 
     // Close any stale ACTIVE sessions older than 24h (sendBeacon may not have fired

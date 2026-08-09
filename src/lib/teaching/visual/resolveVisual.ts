@@ -36,7 +36,7 @@ import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
 import { resolveVisualTarget } from './resolveVisualTarget'
-import { decideContinuity, tickSession, type VisualSession } from './session'
+import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
 import { generateConceptScene } from './visualEngine'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
@@ -527,6 +527,55 @@ export async function resolveVisualForTurn(
       turns: 0,
     },
   }
+}
+
+/**
+ * REHYDRATION — the figure that was on screen before the page reloaded.
+ *
+ * THE DEFECT THIS CLOSES. The figure is delivered once, inside the chat
+ * response, and the client hangs it on that message in React state. Nothing
+ * about the payload is stored on the message row, and /api/sessions/history
+ * cannot return what was never written — so every refresh restored the words
+ * and dropped the picture, mid-explanation, with the tutor still talking about
+ * "the figure on your screen".
+ *
+ * The fix is NOT to persist the payload. `resolveVisual` is pure and
+ * deterministic — re-deriving a held figure reproduces byte-identical output,
+ * which is exactly why continuity stores only the concept's identity. That
+ * identity is already persisted, in `contextSnapshot.visualSession`. So the
+ * restore is a re-derivation, not a cache read, and it runs through this
+ * module's own tiers and the admission gate like any other turn:
+ *
+ *   persisted identity -> resolveVisual (hold) -> admission -> payload
+ *
+ * Which is what makes it safe. The browser supplies nothing; a retired
+ * binding still yields NO FIGURE, a domain illustration is still scoped as a
+ * domain illustration, an id that has left the KG still yields nothing, and a
+ * corrupt snapshot is rejected by parseVisualSession before it gets here.
+ *
+ * Called with an EMPTY message on purpose: there is no learner turn to
+ * interpret, so nothing may move the figure. Empty text takes decideContinuity's
+ * answer-shaped branch, which HOLDs — the one behaviour a restore wants.
+ *
+ * Returns null whenever there is no faithful figure to restore, which is a
+ * successful outcome and the common one.
+ */
+export function restoreVisualSession(raw: unknown): VisualDecision | null {
+  const session = parseVisualSession(raw)
+  if (!session) return null
+  const decision = resolveVisual({
+    message: '',
+    lessonConceptId: session.conceptId,
+    // Carried so the restored decision reports the same excursion relationship
+    // the live turn did. The Teaching Engine still owns the lifecycle; this
+    // reads its recorded anchor and decides nothing about it.
+    excursionReturnToConceptId: session.returnToConceptId,
+    excursionActive: session.returnToConceptId !== null,
+    activeSession: session,
+    lastAssistantAskedQuestion: false,
+  })
+  // An admitted asset or nothing — the same bar the live path clears.
+  return decision.graphical && decision.asset ? decision : null
 }
 
 /**
