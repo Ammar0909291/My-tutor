@@ -304,9 +304,13 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
     parts.push(
       'Written on the figure as a relationship: ' +
       equations.map((e) => `"${e}"`).join(', ') +
-      '. SAY IT IN WORDS as you would to a learner, naming each quantity — ' +
-      'do not read the symbols or the punctuation out one by one, do not spell ' +
-      'out Greek letters as characters, and do not restate it as markup.',
+      '. SAY IT IN WORDS as you would to a learner, naming each quantity using ' +
+      'THE FIGURE\'S OWN WORDS listed above — the figure labels what its ' +
+      'symbols mean, so read the relationship with those names rather than the ' +
+      'letters. Do not read the symbols or the punctuation out one by one, do ' +
+      'not spell out Greek letters as characters, do not write it as LaTeX or ' +
+      'wrap it in dollar signs, and do not invent a meaning for a symbol the ' +
+      'figure does not name.',
     )
   }
 
