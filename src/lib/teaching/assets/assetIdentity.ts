@@ -42,6 +42,12 @@ export type ExplanationKind =
   | 'exam_oriented'
   | 'common_misconception_note'
 
+// familyKind discriminator values for the Visual family (ADR 14 §4.3).
+// 'concept_figure' is what the runtime Visualization Engine writes: one figure
+// OF a concept, in whichever form the engine chose (a SceneSpec or a
+// VisualSpec — the renderer column carries which, not this).
+export type VisualKind = 'concept_figure'
+
 // familyKind discriminator values for the Probe family (ADR 14 §4.4).
 // 'fill_blank' added (automatic probe extraction, 2026-07) — same additive
 // pattern as ExplanationKind above, no schema change (familyKind is a plain

@@ -2821,6 +2821,47 @@ model VisualAsset {
   @@map("visual_assets")
 }
 
+/// Every attempt the Visualization Engine made to draw a concept — accepted or
+/// rejected. AssetIdentity can only hold a figure that EXISTS, so before this
+/// table a rejection had nowhere to go and was discarded, leaving "the
+/// generator is weak" and "the rule is too strict" indistinguishable. The
+/// rejected payload is kept for exactly that reason: the 7-of-7 false-reject
+/// finding was legible only because the rejected figures were still readable.
+///
+/// Append-only, additive, and read by nothing on the teaching path — a write
+/// here must never be able to affect what a learner sees.
+model VisualGenerationOutcome {
+  id           String   @id @default(cuid())
+  conceptId    String
+  conceptTitle String
+  /// 'off' | 'reviewed' | 'auto' — an outcome is only readable against the
+  /// policy in force when it ran.
+  policy       String
+  accepted     Boolean
+  /// Accepted AND shown to the learner this turn. Distinct from `accepted`:
+  /// under the reviewed policy a valid figure is held, not served.
+  served       Boolean  @default(false)
+  /// EngineRejection reason; null when accepted.
+  reason       String?
+  /// True when the figure came from the permanent cache — i.e. cost no call.
+  cached       Boolean  @default(false)
+  model        String?
+  elapsedMs    Int
+  /// 'scene' | 'spec' for an accepted figure; null for a rejection.
+  renderer     String?
+  /// The accepted figure, or the raw model output that was rejected.
+  payload      Json?
+  /// The AssetIdentity row written for an accepted figure, when one was.
+  /// Deliberately NOT a foreign key: the audit trail outlives the asset.
+  assetId      String?
+  createdAt    DateTime @default(now())
+
+  @@index([conceptId, createdAt])
+  @@index([accepted, reason])
+  @@index([createdAt])
+  @@map("visual_generation_outcome")
+}
+
 // Probe family table (ADR 14 §4.4).
 model ProbeAsset {
   assetId                String          @id

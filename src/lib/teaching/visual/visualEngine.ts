@@ -466,7 +466,11 @@ export async function generateConceptScene(
    * authored gold-standard figures, a pattern that was invisible precisely
    * because rejections were discarded.
    */
-  const finish = async (result: EngineResult, cached = false): Promise<EngineResult> => {
+  const finish = async (
+    result: EngineResult,
+    cached = false,
+    rejectedPayload?: unknown,
+  ): Promise<EngineResult> => {
     await recordGenerationOutcome(
       {
         conceptId: ctx.conceptId,
@@ -475,8 +479,13 @@ export async function generateConceptScene(
         elapsedMs: Date.now() - startedAt,
         cached,
         result: result.ok
-          ? { ok: true, scene: result.scene, served: servesImmediately(policy) }
-          : { ok: false, reason: result.reason, scene: null },
+          ? {
+              ok: true,
+              scene: result.scene,
+              served: servesImmediately(policy),
+              figure: { kind: 'scene', scene: result.scene },
+            }
+          : { ok: false, reason: result.reason, scene: null, payload: rejectedPayload },
       },
       deps.outcomeSink,
     )
@@ -524,7 +533,7 @@ export async function generateConceptScene(
   // 3. Validate. A rejected scene is never cached — it must not be served to
   //    the next learner who asks about this concept.
   const result = validateGeneratedScene(raw, ctx)
-  if (!result.ok) return await finish(result)
+  if (!result.ok) return await finish(result, false, raw)
 
   try {
     await saveVisualization(key, JSON.stringify(result.scene), deps.cacheClient)
@@ -677,7 +686,11 @@ export async function generateConceptFigure(
   if (!enabled(ctx.conceptId)) return { ok: false, reason: 'flag-off' }
   if (!ctx.title?.trim() && !ctx.description?.trim()) return { ok: false, reason: 'no-source-text' }
 
-  const finish = async (result: FigureResult, cached = false): Promise<FigureResult> => {
+  const finish = async (
+    result: FigureResult,
+    cached = false,
+    rejectedPayload?: unknown,
+  ): Promise<FigureResult> => {
     await recordGenerationOutcome(
       {
         conceptId: ctx.conceptId,
@@ -686,10 +699,16 @@ export async function generateConceptFigure(
         elapsedMs: Date.now() - startedAt,
         cached,
         result: result.ok
-          // The outcome record carries a scene when there is one; a spec's
-          // shape is its own audit trail and is not forced into a SceneSpec.
-          ? { ok: true, scene: result.figure.kind === 'scene' ? result.figure.scene : EMPTY_SCENE, served: servesImmediately(policy) }
-          : { ok: false, reason: result.reason, scene: null },
+          // `scene` cannot hold a spec and carries the placeholder for one;
+          // `figure` carries whichever form the model actually chose, and is
+          // what a reader should trust.
+          ? {
+              ok: true,
+              scene: result.figure.kind === 'scene' ? result.figure.scene : EMPTY_SCENE,
+              served: servesImmediately(policy),
+              figure: result.figure,
+            }
+          : { ok: false, reason: result.reason, scene: null, payload: rejectedPayload },
       },
       deps.outcomeSink,
     )
@@ -722,7 +741,7 @@ export async function generateConceptFigure(
   if (!raw) return await finish({ ok: false, reason: overBudget ? 'budget-exceeded' : 'generation-failed' })
 
   const validated = validateGeneratedFigure(raw, ctx)
-  if (!validated.ok) return await finish(validated)
+  if (!validated.ok) return await finish(validated, false, raw)
 
   try {
     await saveVisualization(key, JSON.stringify(raw), deps.cacheClient)

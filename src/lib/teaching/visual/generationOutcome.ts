@@ -29,7 +29,7 @@
  */
 
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
-import type { EngineRejection } from './visualEngine'
+import type { EngineRejection, GeneratedFigure } from './visualEngine'
 import type { ServicePolicy } from './generationPolicy'
 
 export interface GenerationOutcome {
@@ -44,8 +44,34 @@ export interface GenerationOutcome {
   /** The model that produced it, when one was called. */
   model?: string
   result:
-    | { ok: true; scene: SceneSpec; served: boolean }
-    | { ok: false; reason: EngineRejection; scene: SceneSpec | null }
+    | {
+        ok: true
+        scene: SceneSpec
+        served: boolean
+        /**
+         * The figure in the form the model actually chose. `scene` above cannot
+         * represent a VisualSpec and carries an EMPTY placeholder for one, which
+         * would have written blank evidence rows for every generated graph,
+         * number line, geometry figure and process flow. Readers prefer this.
+         */
+        figure?: GeneratedFigure
+      }
+    | {
+        ok: false
+        reason: EngineRejection
+        scene: SceneSpec | null
+        /**
+         * WHAT WAS REJECTED, verbatim.
+         *
+         * The module's own justification is telling a weak generator from an
+         * over-strict rule, and a rejection with no payload cannot distinguish
+         * them: the 7-of-7 false-reject finding was only legible because the
+         * rejected figures were still in front of us. Recording the reason
+         * without the artefact would have reproduced exactly the blindness this
+         * file exists to remove.
+         */
+        payload?: unknown
+      }
 }
 
 /**

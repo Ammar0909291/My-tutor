@@ -2319,6 +2319,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           {
             try {
               const { resolveVisualForTurn } = await import('@/lib/teaching/visual/resolveVisual')
+              // Every generation attempt this turn makes — accepted or
+              // rejected — is written down. Purely additive: the sink is read
+              // by nothing on this path, and a failure inside it is swallowed,
+              // so it can never change what the learner sees.
+              const { prismaGenerationOutcomeSink } = await import(
+                '@/lib/teaching/visual/generationOutcomeStore'
+              )
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
               const { parseVisualSession } = await import('@/lib/teaching/visual/session')
               // Visual continuity: the figure already on the learner's screen,
@@ -2348,7 +2355,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 activeSession: activeVisualSession,
                 lastAssistantAskedQuestion:
                   (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
-              })
+              }, { outcomeSink: prismaGenerationOutcomeSink })
               visualDecisionHoisted = decision
               // The contract tells the model what is ALREADY on screen, so it
               // teaches to that figure instead of deciding whether one exists.
