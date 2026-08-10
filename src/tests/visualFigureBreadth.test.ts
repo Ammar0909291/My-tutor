@@ -208,3 +208,40 @@ describe('the same guarantees as the scene path', () => {
     expect(seen).toHaveLength(1)
   })
 })
+
+describe('declining is an answer', () => {
+  it('THE MODEL MAY SAY NO, and it is recorded as declining rather than failing', () => {
+    const r = validateGeneratedFigure({ type: 'none' }, ctx)
+    expect(r.ok).toBe(false)
+    expect(r.ok === false && r.reason).toBe('no-suitable-form')
+  })
+
+  it('the prompt offers the decline, or the model fills the closed set anyway', () => {
+    const prompt = buildConceptFigurePrompt(ctx)
+    expect(prompt).toContain('"type":"none"')
+  })
+
+  it('A LIST IS NOT A PROCESS — the prompt says so in as many words', () => {
+    // Measured 2026-08-10 against the real model: without this rule it drew the
+    // seven SI base units and the characteristics of a living organism as
+    // ordered process flows, asserting a sequence neither concept has. With it,
+    // both are declined.
+    const prompt = buildConceptFigurePrompt(ctx)
+    expect(prompt).toContain('ORDER IS REAL')
+    expect(prompt).toMatch(/are NOT processes/)
+  })
+
+  it('declining still yields NO FIGURE through the resolver, never a substitute', async () => {
+    const d = await resolveVisualForTurn(
+      { message: 'show me a diagram', lessonConceptId: CONCEPT, subject: 'mathematics', learnerRequest: 'diagram' },
+      {
+        enabled: () => true,
+        policy: 'auto',
+        cacheClient: emptyCache(),
+        generate: async () => ({ type: 'none' }),
+      },
+    )
+    expect(d.graphical).toBe(false)
+    expect(d.provenance).toContain('no-suitable-form')
+  })
+})

@@ -144,6 +144,16 @@ export type EngineRejection =
   | 'nothing-drawable'
   | 'no-narration'
   | 'not-anchored-to-concept'
+  /**
+   * The model was asked for a figure and said no honest one exists. This is a
+   * SUCCESSFUL outcome of asking, and it is distinguished from every other
+   * rejection because it means the opposite of them: the other reasons say the
+   * attempt failed, this one says the attempt correctly declined. Without an
+   * explicit way to decline, the model fills the closed set anyway — measured
+   * 2026-08-10, it rendered the seven SI base units and the characteristics of
+   * life as ordered PROCESSES, asserting a sequence neither concept has.
+   */
+  | 'no-suitable-form'
 
 export type EngineResult =
   | { ok: true; scene: SceneSpec; cached: boolean }
@@ -644,7 +654,18 @@ C. geometry       one shape with real measurements      {"type":"geometry","shap
                   shape is triangle | rectangle | circle | angle
 D. process_flow   an ordered sequence of named steps    {"type":"process_flow","title":"...","steps":[{"title":"..."},{"title":"..."}]}
                   2-12 steps, each title <= 60 characters
+                  ONLY when the ORDER IS REAL — step 2 happens after step 1, or
+                  because of it. A LIST of things that coexist (the seven SI
+                  base units; the characteristics of a living organism) and a
+                  CLASSIFICATION (matter divides into pure substances and
+                  mixtures) are NOT processes. Drawing either as a flow asserts
+                  a sequence the concept does not have, which is worse than
+                  drawing nothing.
 E. scene          a labelled 3D diagram, when none of A-D fits
+F. none           {"type":"none"} — no honest figure of this concept exists in
+                  any form above. THIS IS A CORRECT ANSWER and is expected
+                  often: most concepts are not pictures. Choose it rather than
+                  forcing a concept into the nearest shape.
 
 Choose by what the concept IS, not by what looks impressive: a relationship
 between two quantities is a graph, a procedure is a process flow, a measured
@@ -761,6 +782,12 @@ export function validateGeneratedFigure(
   raw: unknown,
   ctx: ArchetypeContext,
 ): { ok: true; figure: GeneratedFigure; cached: boolean } | { ok: false; reason: EngineRejection } {
+  // The model declining is not the model failing. Recorded distinctly so a
+  // review of the outcomes can tell "we asked and there is no figure here"
+  // apart from "we asked and something went wrong".
+  if (raw && typeof raw === 'object' && (raw as { type?: unknown }).type === 'none') {
+    return { ok: false, reason: 'no-suitable-form' }
+  }
   const kind = classifyFigure(raw)
   if (kind === 'scene') {
     const result = validateGeneratedScene(raw, ctx)
