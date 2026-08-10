@@ -1941,6 +1941,45 @@
 - Production integrity re-verified: 10 ACTIVE visuals, 0 DRAFT, 0 concepts with two ACTIVE,
   0 orphan identities, 48 outcome rows.
 
+## Visualization Engine — completion pass (2026-08-10, later session)
+- **The per-session budget was never enforced.** `resolveVisualForTurn` accepted
+  `sessionGenerationCount`; route.ts never passed it, and `checkBudgets` skips the session cap
+  when it is undefined — so the 500/day cap was the only bound. Wired via `contextSnapshot`
+  (per-session by construction, no migration): the decision now reports `generationSpent`, and
+  the count advances ONLY on a turn that actually made a provider call (cached / approved /
+  declined all cost nothing). A corrupt or negative stored count reads as the cap, not zero.
+- **The engine drew the LESSON when the learner asked about something else.** Measured in a
+  `phys.meas.units` lesson: "Explain Kubernetes pod scheduling" -> target `phys.meas.units`,
+  origin `lesson-concept`. No downstream gate can catch this — they all ask "is this a good
+  figure of the concept it claims", and it is; the CLAIM is wrong. New rule
+  (`requestTargetsSomethingElse`, `resolveVisualTarget.ts`): on the FALLBACK only, on an explicit
+  request only, and only with positive evidence a different topic was named (>=2 topic-shaped
+  words sharing NO vocabulary with the concept that would be drawn) -> NO FIGURE. Withholds a NEW
+  figure only; a held one stays with continuity. Not a teaching decision, excursion lifecycle
+  untouched. Measured on 22 real phrasings (`visualOffCurriculumRequest.test.ts`).
+  **Still open (reported, not guessed):** DRAWING that off-KG topic needs a title AND grounding
+  text; the platform has no description of an arbitrary learner-named topic, so the engine
+  declines. A learner-named off-KG topic becomes drawable the moment a grounding source exists.
+- **Critic calibration 6 -> 28 hand-judged cases**, including `cs.prog.python-basics` (the
+  recorded miss) which is now REJECTED with an accurate reason. Best run: precision 100%,
+  recall 81.8%, **DANGEROUS FALSE ACCEPTS 0**. Recall varies run to run (54.5%-81.8%) because
+  the PROVIDER times out, not because the critic changed — the calibration pass now runs with
+  `budgetMs: 0`, and a timed-out judge is reported as a timeout instead of "unreadable shape".
+- **Grounding excludes nothing**: 1775/1775 KG concepts across all 6 subjects clear the
+  40-char floor (`scripts/visual/measure-grounding.ts`, no provider, no DB).
+- **The 2-turn runtime harness was lying, in both directions.** Its in-process cache stub
+  applied `getCachedVisualization`'s `renderCount` bump as a content write, storing `undefined`
+  — so every cache HIT destroyed the row and the script measured free/paid/free/paid. Fixed to
+  merge like Prisma; extended to 4 turns because 2 cannot tell "cache broken" from "turn 1 held".
+  **Re-verified against the real model:** KG concept -> turn 1 generate+judge (2 calls), turns
+  2-4 **0 calls**, identical figure. Off-KG topic (no KG node, no allowlist) -> deadline expiry
+  on a slow provider (16s generation vs the 9s turn deadline) = NO FIGURE and the lesson
+  continues, then generate+judge, then **0 calls** for every later turn, identical figure.
+- **Production verification BLOCKED, not passed:** Supabase MCP lists 0 projects this session,
+  so no DB state could be read; Vercel runtime logs show **zero requests in 24h**, so there is
+  no production traffic to inspect. Generation also remains disabled in production until a human
+  sets the env vars (unchanged from the previous session's note below).
+
 - **STILL BLOCKED (generation only, not serving) — the one thing that keeps this OFF for learners:** Vercel environment
   variables cannot be set from this session (the Vercel MCP surface exposes projects/deployments/
   logs/docs but no env-var tool, and there is no `VERCEL_TOKEN` in the sandbox). Generation stays

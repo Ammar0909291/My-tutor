@@ -36,9 +36,20 @@ const cacheClient = {
   visualizationCache: {
     findUnique: async ({ where }: { where: { conceptKey: string } }) =>
       rows.has(where.conceptKey) ? { code: rows.get(where.conceptKey)! } : null,
+    /**
+     * MERGE, NEVER OVERWRITE.
+     *
+     * `getCachedVisualization` bumps `renderCount` on every read, so a hit
+     * arrives here as `{ data: { renderCount: { increment: 1 } } }` with no
+     * `code` at all. Assigning `data.code` blindly stored `undefined` — so
+     * every successful read DESTROYED the row it had just served, and the
+     * harness measured a cache that worked on alternate turns: free, paid,
+     * free, paid. Nothing was wrong with the engine; the instrument was.
+     * Prisma leaves untouched columns alone, and so must this.
+     */
     update: async (args: unknown) => {
-      const a = args as { where: { conceptKey: string }; data: { code: string } }
-      rows.set(a.where.conceptKey, a.data.code)
+      const a = args as { where: { conceptKey: string }; data: { code?: string } }
+      if (typeof a.data?.code === 'string') rows.set(a.where.conceptKey, a.data.code)
     },
     create: async ({ data }: { data: { conceptKey: string; code: string } }) => {
       rows.set(data.conceptKey, data.code)
@@ -96,17 +107,32 @@ async function run() {
       console.log(`          ${JSON.stringify(p.visualSpec ?? p.sceneSpec).slice(0, 220)}`)
     }
 
-    providerCalls = 0
-    const second = await resolveVisualForTurn(
-      { message: c.message, lessonConceptId: c.lessonConceptId, subject: 'physics', learnerRequest: 'diagram' },
-      deps,
-    )
-    const secondCalls = providerCalls
-    console.log(`  turn 2  ${second.graphical ? 'FIGURE' : 'no figure'}  calls=${secondCalls}` +
-      `  ${secondCalls === 0 ? '← FREE' : '← STILL PAYING'}`)
+    // THREE TURNS, NOT TWO.
+    //
+    // Two cannot tell "the cache is not working" from "turn 1 was held". A
+    // held turn writes the FIGURE cache but deliberately writes no verdict —
+    // only a PASS is ever cached — so turn 2 legitimately pays for a judge and
+    // pays for nothing else. It is turn 3, the first turn after a figure has
+    // both been generated and passed, that carries the claim: zero calls.
+    // Measured with a two-turn harness, that turn was never run and the script
+    // printed "STILL PAYING" for correct behaviour.
+    const later: { graphical: boolean; calls: number; payload: unknown }[] = []
+    for (let turn = 2; turn <= 4; turn++) {
+      providerCalls = 0
+      const d = await resolveVisualForTurn(
+        { message: c.message, lessonConceptId: c.lessonConceptId, subject: 'physics', learnerRequest: 'diagram' },
+        deps,
+      )
+      later.push({ graphical: d.graphical, calls: providerCalls, payload: d.payload })
+      console.log(`  turn ${turn}  ${d.graphical ? 'FIGURE' : 'no figure'}  calls=${providerCalls}` +
+        `  ${providerCalls === 0 ? '← FREE' : '← paid'}`)
+    }
 
-    const identical = JSON.stringify(second.payload) === JSON.stringify(first.payload)
-    console.log(`  same figure served twice: ${identical}`)
+    const served = [first, ...later].filter((t) => t.graphical)
+    const settled = later[later.length - 1]
+    console.log(`  every served figure identical: ` +
+      `${served.length > 1 ? served.every((t) => JSON.stringify(t.payload) === JSON.stringify(served[0].payload)) : 'n/a (fewer than two served)'}`)
+    console.log(`  settled state: ${settled.graphical ? 'FIGURE' : 'no figure'} at ${settled.calls} provider calls`)
   }
 
   console.log(`\ncache rows written: ${[...rows.keys()].join(', ')}`)
