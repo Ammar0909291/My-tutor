@@ -25,6 +25,12 @@ import { getKnowledgeGraph, getAllNodes, getKGNode } from '@/lib/curriculum/know
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import type { ArchetypeContext } from '@/lib/teaching/visual/archetypes'
 
+// Generation is bounded by budgets now, and an unreadable budget counts as
+// exhausted — a safety bound must fail in the safe direction. These tests are
+// about other things, so they state a budget with room in it.
+const openBudget = { countToday: async () => 0 }
+
+
 // The critic is a separate gate with its own tests; these are about the
 // payload path, so they supply a passing judge rather than a live model.
 const passingCritic = async () => ({
@@ -98,6 +104,7 @@ const engine = (scene: unknown) => ({
   // figure must say the concept is trusted to serve.
   policy: 'auto' as const,
   critic: passingCritic,
+  budgetReader: openBudget,
   generate: async () => scene,
   cacheClient: {
     visualizationCache: {
@@ -394,6 +401,7 @@ describe('malformed payloads and legacy isolation', () => {
     await generateConceptScene(ctxFor(CALORIMETRY), {
       enabled: () => true,
       critic: passingCritic,
+      budgetReader: openBudget,
       generate: async () => driftingScene(),
       cacheClient: { visualizationCache: {
         findUnique: async () => null,
@@ -410,6 +418,7 @@ describe('malformed payloads and legacy isolation', () => {
     const result = await generateConceptScene(ctxFor(CALORIMETRY), {
       enabled: () => true,
       critic: passingCritic,
+      budgetReader: openBudget,
       generate: async () => null,
       cacheClient: { visualizationCache: {
         findUnique: async () => ({ code: JSON.stringify(driftingScene()) }),

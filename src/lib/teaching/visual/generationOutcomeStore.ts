@@ -38,6 +38,7 @@ import type { VisualKind } from '@/lib/teaching/assets/assetIdentity'
 import { hashContent } from '@/lib/teaching/assets/similarity'
 import type { GenerationOutcome, GenerationOutcomeSink } from './generationOutcome'
 import type { GeneratedFigure } from './visualEngine'
+import type { BudgetReader } from './generationBudget'
 
 const FAMILY_KIND: VisualKind = 'concept_figure'
 
@@ -275,4 +276,26 @@ export async function findActiveVisualFigure(conceptId: string): Promise<Generat
     console.warn('[visual-outcome] approved-figure lookup failed:', err)
     return null
   }
+}
+
+/**
+ * The platform's generation count for the last 24 hours.
+ *
+ * Read from the outcome table because every instance writes to it: an
+ * in-memory counter on serverless bounds one lambda, which is to say it bounds
+ * nothing. Cached hits are excluded — they cost no provider call, so counting
+ * them would spend the budget on work that never happened.
+ *
+ * Throwing is deliberate rather than returning 0: `checkBudgetsLive` treats an
+ * unreadable budget as exhausted, and a counter that silently reported zero
+ * while the database was unreachable would remove the bound at exactly the
+ * moment nothing else is working either.
+ */
+export const prismaBudgetReader: BudgetReader = {
+  async countToday(): Promise<number> {
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000)
+    return prisma.visualGenerationOutcome.count({
+      where: { createdAt: { gte: since }, cached: false },
+    })
+  },
 }

@@ -2326,9 +2326,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // …and a figure a human already approved is served ahead of
               // generating a new one, which is what makes the review queue
               // reach a learner at all.
-              const { prismaGenerationOutcomeSink, findActiveVisualFigure } = await import(
-                '@/lib/teaching/visual/generationOutcomeStore'
-              )
+              //
+              // The budget reader is what bounds generation now that
+              // eligibility is a rule rather than a typed list of ids: an
+              // unreadable count is treated as exhausted, so the bound fails
+              // in the safe direction.
+              const { prismaGenerationOutcomeSink, findActiveVisualFigure, prismaBudgetReader } =
+                await import('@/lib/teaching/visual/generationOutcomeStore')
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
               const { parseVisualSession } = await import('@/lib/teaching/visual/session')
               // Visual continuity: the figure already on the learner's screen,
@@ -2361,6 +2365,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               }, {
                 outcomeSink: prismaGenerationOutcomeSink,
                 findApprovedFigure: findActiveVisualFigure,
+                budgetReader: prismaBudgetReader,
+                // GROUNDING FOR AN OFF-CURRICULUM TOPIC. The lesson's own title
+                // and description are what the tutor is teaching from, so they
+                // are what a figure of it must be drawn from and judged
+                // against. Absent or too thin, the engine declines rather than
+                // guessing from a bare title.
+                // The lesson's own title and goal — which is exactly the case
+                // this path exists for: route.ts's own comment names "Subject
+                // Library subjects without a knowledge graph (Spanish,
+                // JavaScript, etc.)", and those have never been able to receive
+                // a figure. Thin or missing text is declined by the identity
+                // rule rather than guessed at.
+                runtimeTopic: {
+                  title: lessonCtx?.lessonTitle ?? null,
+                  description: lessonCtx?.lessonGoal ?? null,
+                },
               })
               visualDecisionHoisted = decision
               // The contract tells the model what is ALREADY on screen, so it

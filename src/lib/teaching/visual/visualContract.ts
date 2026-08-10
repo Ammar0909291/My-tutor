@@ -77,6 +77,23 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
     '\n\nVISUAL CONTRACT: A FIGURE IS ALREADY BEING RENDERED ON THE LEARNER\'S SCREEN.',
   )
 
+  // ── PROVENANCE — curriculum, or a topic raised in conversation ────────────
+  // A figure of an off-curriculum topic is a real figure of that topic, so it
+  // is NOT scoped down. What it lacks is a curated description behind it: no
+  // authored prerequisites, no reviewed wording, no place in the graph. Saying
+  // so keeps the tutor from presenting it with the authority of taught
+  // material, which is the specific over-claim this provenance exists to stop.
+  if (asset.provenance === 'engine-runtime-topic') {
+    lines.push(
+      'This figure was built for a topic raised in conversation, not one drawn ' +
+      'from the curriculum. Teach it normally and describe the figure exactly ' +
+      'as faithfully as any other — but do NOT present it as the course\'s own ' +
+      'material, do NOT cite it as the syllabus definition, and if the learner ' +
+      'needs the authoritative treatment, say it sits outside the curriculum ' +
+      'you have been given.',
+    )
+  }
+
   // ── SCOPE (M3-B/B4) — what this figure may be CLAIMED to be ───────────────
   // A domain illustration is a real, on-topic picture that does not depict the
   // concept: one bare coordinate plane serves all 76 calculus concepts, one

@@ -6,6 +6,12 @@ import {
 import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
 import { SUPPORTED_VISUAL_TYPES } from '@/lib/visuals/visualSpec'
 
+// Generation is bounded by budgets now, and an unreadable budget counts as
+// exhausted — a safety bound must fail in the safe direction. These tests are
+// about other things, so they state a budget with room in it.
+const openBudget = { countToday: async () => 0 }
+
+
 // The critic is a separate gate with its own tests; these are about the
 // payload path, so they supply a passing judge rather than a live model.
 const passingCritic = async () => ({
@@ -153,6 +159,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         policy: 'auto',
         cacheClient: emptyCache(),
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
       },
     )
@@ -169,6 +176,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         policy: 'reviewed',
         cacheClient: emptyCache(),
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
       },
     )
@@ -184,6 +192,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         policy: 'auto',
         cacheClient: emptyCache(),
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => ({ type: 'sankey', nodes: [] }),
       },
     )
@@ -212,6 +221,7 @@ describe('the same guarantees as the scene path', () => {
     const r = await generateConceptFigure(ctx, {
       enabled: () => true, policy: 'auto', budgetMs: 20, cacheClient: emptyCache(),
       critic: passingCritic,
+      budgetReader: openBudget,
       generate: () => new Promise((resolve) => setTimeout(() => resolve({ type: 'graph', equation: 'x' }), 300)),
     })
     expect(r.ok).toBe(false)
@@ -224,6 +234,7 @@ describe('the same guarantees as the scene path', () => {
       enabled: () => true, policy: 'reviewed', cacheClient: emptyCache(),
       outcomeSink: { record: async (o) => { seen.push(o) } },
       critic: passingCritic,
+      budgetReader: openBudget,
       generate: async () => ({ type: 'sankey' }),
     })
     expect(seen).toHaveLength(1)
@@ -260,6 +271,7 @@ describe('declining is an answer', () => {
         policy: 'auto',
         cacheClient: emptyCache(),
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => ({ type: 'none' }),
       },
     )

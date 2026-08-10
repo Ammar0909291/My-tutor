@@ -97,8 +97,11 @@ describe('Canary concept — identity', () => {
 })
 
 describe('Canary concept — eligibility', () => {
-  it('is NOT eligible while the flag and allowlist are unset', () => {
-    expect(isRuntimeSceneGenerationAllowed(CANARY)).toBe(false)
+  it('IS eligible with nothing configured — no id has to be typed first', () => {
+    // The inversion. This file was written when eligibility was an
+    // enumeration; the engine now has to reach topics nobody listed, and the
+    // bounds are grounding, budgets and the critic rather than a list.
+    expect(isRuntimeSceneGenerationAllowed(CANARY)).toBe(true)
     expect(runtimeSceneAllowlist().size).toBe(0)
   })
 
@@ -112,8 +115,11 @@ describe('Canary concept — eligibility', () => {
     expect(isRuntimeSceneGenerationAllowed('mathematics')).toBe(false)
   })
 
-  it('the allowlist alone, without the flag, grants nothing', () => {
+  it('a narrowing excludes everything outside it, and the kill switch beats both', () => {
     process.env.VISUAL_AI_SCENE_ALLOWLIST = CANARY
+    expect(isRuntimeSceneGenerationAllowed(CANARY)).toBe(true)
+    expect(isRuntimeSceneGenerationAllowed(NOT_THE_CANARY)).toBe(false)
+    process.env.ENABLE_AI_SCENE_GENERATION = 'false'
     expect(isRuntimeSceneGenerationAllowed(CANARY)).toBe(false)
   })
 
@@ -148,7 +154,11 @@ describe('Canary concept — the generation path, up to the provider boundary', 
     let invoked = false
     await resolveVisualForTurn(
       { message: 'Explain vector addition with a diagram', lessonConceptId: CANARY, subject: 'mathematics', learnerRequest: 'diagram' },
-      { generate: async () => { invoked = true; return null }, cacheClient: null as never },
+      {
+        generate: async () => { invoked = true; return null },
+        cacheClient: null as never,
+        budgetReader: { countToday: async () => 0 },
+      },
     )
     expect(invoked, 'generation must be reachable for the enabled canary').toBe(true)
   })
@@ -159,7 +169,11 @@ describe('Canary concept — the generation path, up to the provider boundary', 
     let invoked = false
     await resolveVisualForTurn(
       { message: '', lessonConceptId: 'phys.mech.kinetic-energy', subject: 'physics', learnerRequest: 'diagram' },
-      { generate: async () => { invoked = true; return null }, cacheClient: null as never },
+      {
+        generate: async () => { invoked = true; return null },
+        cacheClient: null as never,
+        budgetReader: { countToday: async () => 0 },
+      },
     )
     expect(invoked, 'only the allowlisted concept may generate').toBe(false)
   })

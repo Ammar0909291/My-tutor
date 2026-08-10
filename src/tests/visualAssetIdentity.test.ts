@@ -285,7 +285,10 @@ describe('derived identity is visible and counted', () => {
     for (const [provenance, strength] of Object.entries(IDENTITY_STRENGTH)) {
       expect(['declared', 'derived'], provenance).toContain(strength)
     }
-    expect(Object.keys(IDENTITY_STRENGTH)).toHaveLength(5)
+    // Every provenance the union declares must be classified — an unlisted one
+    // would default to nothing and silently lose its identity strength.
+    expect(Object.keys(IDENTITY_STRENGTH)).toHaveLength(6)
+    expect(IDENTITY_STRENGTH['engine-runtime-topic']).toBe('declared')
   })
 })
 

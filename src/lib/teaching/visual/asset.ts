@@ -56,6 +56,15 @@ export type AssetProvenance =
   | 'curated'
   | 'generator'
   | 'engine'
+  /**
+   * Generated for a topic the curriculum does not contain — raised in
+   * conversation rather than authored into the Knowledge Graph. The figure is
+   * still OF that topic (identity is declared, not widened), but the topic
+   * itself carries no curated description, prerequisites or place in a graph,
+   * and the tutor contract says so rather than letting it be mistaken for
+   * curriculum.
+   */
+  | 'engine-runtime-topic'
   | 'domain-default'
   | 'generator-default'
 
@@ -66,6 +75,7 @@ export const IDENTITY_STRENGTH: Record<AssetProvenance, IdentityStrength> = {
   'curated': 'declared',
   'generator': 'declared',
   'engine': 'declared',
+  'engine-runtime-topic': 'declared',
   'domain-default': 'derived',
   'generator-default': 'derived',
 }

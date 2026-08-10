@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import {
-  resolveServicePolicy, servesImmediately, autoServeList, generationPolicySummary,
+  resolveServicePolicy, servesImmediately, reviewOnlyList, generationPolicySummary,
 } from '@/lib/teaching/visual/generationPolicy'
 import {
   recordGenerationOutcome, describeOutcome, type GenerationOutcome, type GenerationOutcomeSink,
@@ -9,14 +9,17 @@ import { generateConceptScene } from '@/lib/teaching/visual/visualEngine'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 /**
- * TRUST, NOT MERELY ELIGIBILITY.
+ * ELIGIBILITY IS A RULE NOW, AND IT IS STILL BOUNDED.
  *
- * The allowlist answers "may this concept be generated". It cannot answer "may
- * the result be shown to a child", and until now nothing did — a validated
- * scene went straight to a learner. These tests pin the separation, and pin the
- * property the first real measurement showed matters most: a REJECTION is
- * recorded, because a discarded rejection makes a weak generator and an
- * over-strict rule look identical.
+ * Policy used to come from two hand-typed lists. It cannot: the engine has to
+ * work for topics nobody enumerated in advance. What replaced them is a rule —
+ * kill switch, optional narrowing, grounding, budgets — and these tests pin the
+ * parts of it that could go wrong quietly.
+ *
+ * The property that matters most is what a PASS is allowed to mean. It makes a
+ * figure eligible to SERVE. It never promotes anything to ACTIVE, at any
+ * confidence: that stays a human decision, and a policy that could grant it
+ * would convert one model's opinion into the platform's own content.
  */
 
 const CONCEPT = 'phys.mech.viscosity'
@@ -24,75 +27,83 @@ const ORIGINAL = {
   flag: process.env.ENABLE_AI_SCENE_GENERATION,
   allow: process.env.VISUAL_AI_SCENE_ALLOWLIST,
   auto: process.env.VISUAL_AI_SCENE_AUTO,
+  review: process.env.VISUAL_AI_SCENE_REVIEW_ONLY,
 }
 
 beforeEach(() => {
   delete process.env.ENABLE_AI_SCENE_GENERATION
   delete process.env.VISUAL_AI_SCENE_ALLOWLIST
   delete process.env.VISUAL_AI_SCENE_AUTO
+  delete process.env.VISUAL_AI_SCENE_REVIEW_ONLY
 })
 afterEach(() => {
   process.env.ENABLE_AI_SCENE_GENERATION = ORIGINAL.flag
   process.env.VISUAL_AI_SCENE_ALLOWLIST = ORIGINAL.allow
   process.env.VISUAL_AI_SCENE_AUTO = ORIGINAL.auto
+  process.env.VISUAL_AI_SCENE_REVIEW_ONLY = ORIGINAL.review
 })
 
-const eligible = () => {
-  process.env.ENABLE_AI_SCENE_GENERATION = 'true'
-  process.env.VISUAL_AI_SCENE_ALLOWLIST = CONCEPT
-}
-
 describe('service policy', () => {
-  it('is off when generation is not enabled at all', () => {
+  it('NO ENUMERATION IS REQUIRED — a topic nobody listed still has a policy', () => {
+    // The whole point of the rewrite: an engine that can only draw concepts
+    // someone typed cannot draw the topic a learner actually raised.
+    expect(resolveServicePolicy('phys.some.topic.nobody.listed')).toBe('auto')
+  })
+
+  it('THE KILL SWITCH DEMOTES EVERYTHING AT ONCE', () => {
+    for (const off of ['false', '0', 'off', 'no', 'FALSE', ' Off ']) {
+      process.env.ENABLE_AI_SCENE_GENERATION = off
+      expect(resolveServicePolicy(CONCEPT), off).toBe('off')
+    }
+  })
+
+  it('a missing flag does not silently disable the engine', () => {
+    // The failure this file has already had once, in the other direction: a
+    // migration flag whose absence would have meant "show no visuals ever".
+    delete process.env.ENABLE_AI_SCENE_GENERATION
+    expect(resolveServicePolicy(CONCEPT)).toBe('auto')
+  })
+
+  it('an explicit narrowing still excludes everything outside it', () => {
+    process.env.VISUAL_AI_SCENE_ALLOWLIST = 'phys.therm.calorimetry'
+    expect(resolveServicePolicy(CONCEPT)).toBe('off')
+    expect(resolveServicePolicy('phys.therm.calorimetry')).toBe('auto')
+  })
+
+  it('the narrowing has no wildcard — it cannot be widened by a typo', () => {
+    process.env.VISUAL_AI_SCENE_ALLOWLIST = 'phys.*, physics, *'
     expect(resolveServicePolicy(CONCEPT)).toBe('off')
   })
 
-  it('is off for a concept that is not allowlisted, even if it is auto-listed', () => {
-    process.env.ENABLE_AI_SCENE_GENERATION = 'true'
-    process.env.VISUAL_AI_SCENE_AUTO = CONCEPT
-    // Eligibility is the master gate: auto-serve cannot smuggle in a concept
-    // the allowlist never admitted.
-    expect(resolveServicePolicy(CONCEPT)).toBe('off')
-  })
-
-  it('defaults an eligible concept to REVIEWED, not to serving', () => {
-    eligible()
+  it('the review-only list holds a topic back whatever the critic says', () => {
+    process.env.VISUAL_AI_SCENE_REVIEW_ONLY = CONCEPT
     expect(resolveServicePolicy(CONCEPT)).toBe('reviewed')
     expect(servesImmediately('reviewed')).toBe(false)
+    expect(resolveServicePolicy('phys.therm.calorimetry')).toBe('auto')
   })
 
-  it('serves only when the concept is named in the separate auto list', () => {
-    eligible()
-    process.env.VISUAL_AI_SCENE_AUTO = CONCEPT
-    expect(resolveServicePolicy(CONCEPT)).toBe('auto')
+  it('the review-only list is empty by default and never means "all"', () => {
+    expect(reviewOnlyList().size).toBe(0)
+    process.env.VISUAL_AI_SCENE_REVIEW_ONLY = '   '
+    expect(reviewOnlyList().size).toBe(0)
+  })
+
+  it('SERVING IS NOT PROMOTION — no policy value grants ACTIVE', () => {
+    // `servesImmediately` answers whether a figure may be shown, never whether
+    // it becomes the platform's content. Nothing here returns a status.
+    for (const policy of ['off', 'reviewed', 'auto'] as const) {
+      expect(typeof servesImmediately(policy)).toBe('boolean')
+    }
     expect(servesImmediately('auto')).toBe(true)
+    expect(servesImmediately('off')).toBe(false)
   })
 
-  it('the auto list has no wildcard and empty never means all', () => {
-    eligible()
-    process.env.VISUAL_AI_SCENE_AUTO = 'phys.*, physics, *'
-    expect(autoServeList().has(CONCEPT)).toBe(false)
-    expect(resolveServicePolicy(CONCEPT)).toBe('reviewed')
-    process.env.VISUAL_AI_SCENE_AUTO = '   '
-    expect(autoServeList().size).toBe(0)
-  })
-
-  it('switching the flag off demotes every concept at once', () => {
-    eligible()
-    process.env.VISUAL_AI_SCENE_AUTO = CONCEPT
-    expect(resolveServicePolicy(CONCEPT)).toBe('auto')
-    delete process.env.ENABLE_AI_SCENE_GENERATION
-    expect(resolveServicePolicy(CONCEPT)).toBe('off')
-  })
-
-  it('summarises what generation is actually doing right now', () => {
-    eligible()
-    process.env.VISUAL_AI_SCENE_ALLOWLIST = `${CONCEPT},phys.therm.calorimetry`
-    process.env.VISUAL_AI_SCENE_AUTO = CONCEPT
-    expect(generationPolicySummary()).toEqual([
-      { conceptId: 'phys.mech.viscosity', policy: 'auto' },
-      { conceptId: 'phys.therm.calorimetry', policy: 'reviewed' },
-    ])
+  it('describes the rule rather than enumerating concepts it cannot list', () => {
+    expect(generationPolicySummary().scope).toBe('rule-based')
+    process.env.VISUAL_AI_SCENE_ALLOWLIST = CONCEPT
+    expect(generationPolicySummary().scope).toBe('narrowed')
+    process.env.ENABLE_AI_SCENE_GENERATION = 'false'
+    expect(generationPolicySummary().scope).toBe('disabled')
   })
 })
 

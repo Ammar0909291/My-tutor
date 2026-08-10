@@ -2,6 +2,12 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
 import type { GeneratedFigure } from '@/lib/teaching/visual/visualEngine'
 
+// Generation is bounded by budgets now, and an unreadable budget counts as
+// exhausted — a safety bound must fail in the safe direction. These tests are
+// about other things, so they state a budget with room in it.
+const openBudget = { countToday: async () => 0 }
+
+
 // The critic is a separate gate with its own tests; these are about the
 // payload path, so they supply a passing judge rather than a live model.
 const passingCritic = async () => ({
@@ -73,6 +79,7 @@ describe('the approved tier', () => {
         policy: 'reviewed',
         findApprovedFigure: async () => approved,
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => { throw new Error('generation must not be reached') },
       },
     )
@@ -89,6 +96,7 @@ describe('the approved tier', () => {
         policy: 'auto',
         findApprovedFigure: async () => approved,
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => { called = true; return null },
       },
     )
@@ -121,6 +129,7 @@ describe('the approved tier', () => {
           spec: { type: 'process_flow', title: 'Photosynthesis', steps: [] } as never,
         }),
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => null,
       },
     )
@@ -142,6 +151,7 @@ describe('the approved tier', () => {
           },
         },
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
       },
     )
@@ -166,6 +176,7 @@ describe('the approved tier', () => {
         policy: 'reviewed',
         findApprovedFigure: async () => { throw new Error('database unreachable') },
         critic: passingCritic,
+        budgetReader: openBudget,
         generate: async () => null,
       },
     ).catch(() => 'threw' as const)

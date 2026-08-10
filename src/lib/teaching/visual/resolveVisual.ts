@@ -42,6 +42,10 @@ import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, t
 import { resolveServicePolicy, servesImmediately } from './generationPolicy'
 import { decideVisualNeed, mayIntroduceFigure } from './visualNeed'
 import { criticiseFigure, type CriticReport } from './figureCritic'
+import { kgTopicIdentity, runtimeTopicIdentity, type TopicIdentity } from './topicIdentity'
+import { checkBudgetsLive, type BudgetReader } from './generationBudget'
+import { readVerdict, writeVerdict } from './verdictCache'
+import { startDeadline, NO_DEADLINE, type Deadline } from './turnDeadline'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
@@ -505,7 +509,20 @@ export async function resolveVisualForTurn(
      * tests can drive it; production always uses the real critic, because a
      * critic that a caller can omit is a gate that a caller can forget.
      */
-    critic?: (figure: GeneratedFigure, ctx: ArchetypeContext) => Promise<CriticReport>
+    critic?: (figure: GeneratedFigure, ctx: ArchetypeContext, budgetMs: number) => Promise<CriticReport>
+    /**
+     * GROUNDING TEXT for a topic the curriculum does not contain. Supplied by
+     * the caller that knows what is being taught; without it an off-KG topic
+     * yields no identity and therefore no figure, which is the correct refusal
+     * rather than a guess from a bare title.
+     */
+    runtimeTopic?: { title?: string | null; description?: string | null }
+    /** Generations already made in this session, for the session budget. */
+    sessionGenerationCount?: number
+    /** Reads the platform's daily generation count. Unreadable ⇒ over budget. */
+    budgetReader?: BudgetReader
+    /** The single wall-clock bound on generate + validate + judge. */
+    deadline?: Deadline
   } = {},
 ): Promise<VisualDecision> {
   let decision = resolveVisual(input)
@@ -513,9 +530,17 @@ export async function resolveVisualForTurn(
   // 1. CURATED — already faithful, nothing to add.
   if (decision.graphical) return decision
 
-  // No concept resolved at all: there is nothing to generate a figure OF.
-  if (!decision.conceptId) return decision
-  const ctx = contextFor(decision.conceptId)
+  // ── TOPIC IDENTITY ────────────────────────────────────────────────────────
+  // Curriculum first; a topic the KG has never heard of still gets a stable
+  // identity when the caller can supply grounding text to draw from and to be
+  // judged against. Without either, there is nothing to generate a figure OF —
+  // and that is a refusal, not a fallback to something adjacent.
+  const ctx: TopicIdentity | null =
+    (decision.conceptId ? kgTopicIdentity(decision.conceptId) : null) ??
+    runtimeTopicIdentity({
+      title: deps.runtimeTopic?.title ?? decision.conceptTitle,
+      description: deps.runtimeTopic?.description,
+    })
   if (!ctx) return decision
 
   /**
@@ -536,7 +561,9 @@ export async function resolveVisualForTurn(
       payload: figure.kind === 'scene'
         ? { renderer: 'scene', sceneSpec: figure.scene }
         : { renderer: 'spec', visualSpec: figure.spec },
-      provenance: 'engine',
+      // Carries WHERE the topic came from, so the contract can decline to
+      // present an off-curriculum topic as curriculum.
+      provenance: ctx.provenance === 'runtime' ? 'engine-runtime-topic' : 'engine',
     })
     const returnTo = decision.excursion
       ? (input.excursionReturnToConceptId ?? input.lessonConceptId ?? null)
@@ -601,9 +628,26 @@ export async function resolveVisualForTurn(
     }
   }
 
-  // 3. GENERATED — attempted only here, and only for a turn that would
-  //    otherwise show nothing.
-  const result = await generateConceptFigure(ctx, { purpose: decision.purpose, ...deps })
+  // ── 3. GENERATED ──────────────────────────────────────────────────────────
+  // Attempted only here, and only on a turn that would otherwise show nothing.
+  //
+  // ONE DEADLINE covers generation, validation and the judge together, because
+  // a learner experiences the wait and not the stages. Each stage receives only
+  // what remains, so a slow generation eats the judge's share rather than
+  // adding to it.
+  const deadline = deps.deadline ?? startDeadline()
+
+  // BUDGETS — the bound that replaced the allowlist. A count scales where an
+  // enumeration does not, and an unreadable counter is treated as exhausted:
+  // a safety bound must fail in the safe direction.
+  const budget = await checkBudgetsLive(deps.sessionGenerationCount, deps.budgetReader)
+  if (!budget.ok) return { ...decision, provenance: `no-figure:${budget.reason}` }
+
+  if (deadline.expired()) return { ...decision, provenance: 'no-figure:deadline-before-generation' }
+
+  const result = await generateConceptFigure(ctx, {
+    purpose: decision.purpose, ...deps, budgetMs: deadline.remaining(),
+  })
   if (!result.ok) {
     // 3. NONE — carry the reason so a rejection is auditable rather than silent.
     return { ...decision, provenance: `no-figure:engine-${result.reason}` }
@@ -621,25 +665,39 @@ export async function resolveVisualForTurn(
     return { ...decision, provenance: 'no-figure:held-for-review' }
   }
 
-  // NOTHING UNVETTED REACHES A LEARNER.
+  // ── NOTHING UNVETTED REACHES A LEARNER ────────────────────────────────────
   //
-  // 'auto' is the only path on which a figure is served the moment it is
-  // generated, without a human or the offline pipeline having looked at it.
-  // Structural validity and lexical anchoring do not carry that weight:
-  // measured on the first two real cohorts, figures that passed both asserted
-  // an order the concept does not have (the seven SI base units as a process)
-  // and drew gravitational potential energy as a DOWNWARD parabola while
-  // titling itself U(h) = mgh. So the critic runs here too, and only a
-  // 'promote' is served — an uncertain or unreachable judge yields NO FIGURE,
-  // which is an ordinary successful outcome of this engine.
+  // Structural validity and lexical anchoring do not carry this weight.
+  // Measured across two real cohorts, figures that passed both asserted an
+  // order the concept does not have (the seven SI base units as a process) and
+  // drew gravitational potential energy as a DOWNWARD parabola while titling
+  // itself U(h) = mgh. So an independent critic judges relevance, correctness,
+  // explanatory value, grounding and rendering, and only a PROMOTE is served.
   //
-  // The offline pipeline (`vet-cohort`) is the cheap way to get the same
-  // guarantee: it promotes to ACTIVE, the APPROVED tier above serves it, and
-  // no learner ever waits for a judge.
-  const critic = deps.critic ?? criticiseFigure
-  const critique = await critic(result.figure, ctx)
-  if (critique.decision !== 'promote') {
-    return { ...decision, provenance: `no-figure:critic-${critique.decision}` }
+  // A CACHED PASS SKIPS THE JUDGE, AND NOTHING ELSE. The same figure judged
+  // against the same text yields the same answer, so asking again buys nothing
+  // and costs a model call on every turn of every learner forever — which is
+  // the real price of running this across thousands of topics. The cached
+  // verdict claims only what it can: this figure passed these checks against
+  // this text on this date. It is NOT a promotion; the asset stays DRAFT and
+  // ACTIVE remains a human decision through the review lifecycle.
+  const figurePayload = result.figure.kind === 'scene' ? result.figure.scene : result.figure.spec
+  const cachedPass = await readVerdict(ctx, figurePayload, deps.cacheClient)
+
+  if (!cachedPass) {
+    if (deadline.expired()) {
+      // Out of time before the judge could answer. The figure is ABANDONED,
+      // never served half-checked — the generation still populated the cache,
+      // so the next learner will not wait for it.
+      return { ...decision, provenance: 'no-figure:deadline-before-critic' }
+    }
+    const critic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
+    const critique = await critic(result.figure, ctx, deadline.remaining())
+    if (critique.decision !== 'promote') {
+      return { ...decision, provenance: `no-figure:critic-${critique.decision}` }
+    }
+    // Best-effort and not awaited: this learner already has their figure.
+    void writeVerdict(ctx, figurePayload, critique, deps.cacheClient)
   }
 
   // The model chose the form; the payload follows it rather than the other way

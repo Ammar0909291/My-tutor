@@ -20,6 +20,12 @@ import { parseVisualSession } from '@/lib/teaching/visual/session'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
+// Generation is bounded by budgets now, and an unreadable budget counts as
+// exhausted — a safety bound must fail in the safe direction. These tests are
+// about other things, so they state a budget with room in it.
+const openBudget = { countToday: async () => 0 }
+
+
 // This file is about AUTHORIZATION, not about figure quality; the critic has
 // its own tests. A passing judge keeps these assertions on the allowlist.
 const passingCritic = async () => ({
@@ -116,22 +122,26 @@ const allow = (v: string) => {
 }
 
 describe('permission is the conjunction of flag AND allowlist', () => {
-  it('1. flag OFF + allowlisted concept => DENIED', () => {
+  it('1. THE KILL SWITCH DENIES, whatever the narrowing says', () => {
     allow(CALORIMETRY)
-    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
     process.env.ENABLE_AI_SCENE_GENERATION = 'false'
     expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+    for (const off of ['0', 'off', 'no', ' FALSE ']) {
+      process.env.ENABLE_AI_SCENE_GENERATION = off
+      expect(isRuntimeSceneGenerationAllowed(CALORIMETRY), off).toBe(false)
+    }
   })
 
-  it('2. flag ON + empty allowlist => DENIED (empty never means "all")', () => {
+  it('2. NO NARROWING means the rule decides, not "nothing"', () => {
+    // The inversion. An engine that can only draw enumerated ids cannot draw
+    // the topic a learner raised, and the curriculum is heading for thousands.
+    // Eligibility is bounded by grounding and budgets instead — neither of
+    // which lives in this function, which only answers flag AND narrowing.
     on()
-    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
-    allow('')
-    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
-    allow('   ')
-    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
-    allow(',,,')
-    expect(isRuntimeSceneGenerationAllowed(CALORIMETRY)).toBe(false)
+    for (const empty of ['', '   ', ',,,']) {
+      allow(empty)
+      expect(isRuntimeSceneGenerationAllowed(CALORIMETRY), JSON.stringify(empty)).toBe(true)
+    }
   })
 
   it('3. flag ON + non-allowlisted concept => DENIED', () => {
@@ -201,6 +211,7 @@ describe('the allowlist gates the CACHE, not just generation', () => {
     on(); allow(CALORIMETRY)
     const r = await generateConceptScene(ctxFor(CALORIMETRY), {
       cacheClient: warmCache() as never,
+      budgetReader: openBudget,
       generate: async () => { throw new Error('must not generate — cache should hit') },
     })
     expect(r.ok).toBe(true)
@@ -211,30 +222,45 @@ describe('the allowlist gates the CACHE, not just generation', () => {
     on(); allow(PROJECTILE)
     const r = await generateConceptScene(ctxFor(CALORIMETRY), {
       cacheClient: warmCache() as never,
+      budgetReader: openBudget,
       generate: async () => scene,
     })
     expect(r.ok).toBe(false)
     if (!r.ok) expect(r.reason).toBe('flag-off')
   })
 
-  it('C. flag OFF + allowlisted => cached scene MUST NOT be served', async () => {
+  it('C. KILLED + allowlisted => cached scene MUST NOT be served', async () => {
+    // Eligibility is read BEFORE the cache, so throwing the switch withdraws
+    // figures that were already generated rather than merely stopping new ones.
     allow(CALORIMETRY)
+    process.env.ENABLE_AI_SCENE_GENERATION = 'false'
     const r = await generateConceptScene(ctxFor(CALORIMETRY), {
       cacheClient: warmCache() as never,
+      budgetReader: openBudget,
       generate: async () => scene,
     })
     expect(r.ok).toBe(false)
     if (!r.ok) expect(r.reason).toBe('flag-off')
   })
 
-  it('15. an empty allowlist can generate nothing, cold cache or warm', async () => {
-    on()
+  it('15. THE KILL SWITCH STOPS BOTH PATHS — cold cache and warm', async () => {
+    process.env.ENABLE_AI_SCENE_GENERATION = 'off'
     for (const cache of [coldCache(), warmCache()]) {
       const r = await generateConceptScene(ctxFor(CALORIMETRY), {
-        cacheClient: cache as never, generate: async () => scene,
+        cacheClient: cache as never, budgetReader: openBudget, generate: async () => scene,
       })
       expect(r.ok).toBe(false)
+      if (!r.ok) expect(r.reason).toBe('flag-off')
     }
+  })
+
+  it('15b. with no narrowing, an unlisted concept IS eligible', async () => {
+    // The inversion, at the engine boundary rather than the helper's.
+    on()
+    const r = await generateConceptScene(ctxFor(CALORIMETRY), {
+      cacheClient: warmCache() as never, budgetReader: openBudget, generate: async () => scene,
+    })
+    expect(r.ok).toBe(true)
   })
 })
 
@@ -270,7 +296,7 @@ describe('nothing else changes', () => {
   it('continuity, excursion and lesson-change behaviour are untouched', async () => {
     on(); allow(CALORIMETRY)
     const p = (s: unknown) => (s ? parseVisualSession(JSON.parse(JSON.stringify(s))) : null)
-    const deps = { cacheClient: coldCache() as never, critic: passingCritic, generate: async () => calorimetryScene() }
+    const deps = { cacheClient: coldCache() as never, critic: passingCritic, budgetReader: openBudget, generate: async () => calorimetryScene() }
 
     const open = await resolveVisualForTurn(
       { message: 'Show projectile motion.', lessonConceptId: DIM, subject: 'physics', learnerRequest: 'diagram' }, deps)
@@ -299,7 +325,7 @@ describe('nothing else changes', () => {
     on(); allow(CALORIMETRY)
     const good = await resolveVisualForTurn(
       { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
-      { cacheClient: coldCache() as never, critic: passingCritic, generate: async () => calorimetryScene() })
+      { cacheClient: coldCache() as never, critic: passingCritic, budgetReader: openBudget, generate: async () => calorimetryScene() })
     expect(good.source).toBe('generated')
     expect(good.payload).not.toBeNull()
 
@@ -313,7 +339,7 @@ describe('nothing else changes', () => {
     }
     const bad = await resolveVisualForTurn(
       { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
-      { cacheClient: coldCache() as never, critic: passingCritic, generate: async () => drift })
+      { cacheClient: coldCache() as never, critic: passingCritic, budgetReader: openBudget, generate: async () => drift })
     expect(bad.payload).toBeNull()
     expect(bad.provenance).toBe('no-figure:engine-not-anchored-to-concept')
   })
@@ -368,16 +394,19 @@ describe('the V2 rollback path cannot bypass the allowlist', () => {
   it('the six flag/allowlist states resolve as required', () => {
     // V2 ON/OFF does not change this helper — it is the same authority on both
     // paths, which is the property the rollback hazard needed.
-    const cases: Array<[string, string | null, string, boolean]> = [
-      ['A/F flag OFF',                 null,        CALORIMETRY, false],
-      ['B/D flag ON + allowlisted',    CALORIMETRY, CALORIMETRY, true],
-      ['C/E flag ON + not allowlisted', PROJECTILE, CALORIMETRY, false],
+    const cases: Array<[string, string | null, boolean, string, boolean]> = [
+      // name                          narrowing     killed  concept      allowed
+      ['no narrowing, not killed',      null,        false,  CALORIMETRY, true],
+      ['killed, whatever the list',     CALORIMETRY, true,   CALORIMETRY, false],
+      ['narrowed to this concept',      CALORIMETRY, false,  CALORIMETRY, true],
+      ['narrowed to another concept',   PROJECTILE,  false,  CALORIMETRY, false],
     ]
-    for (const [name, list, concept, expected] of cases) {
+    for (const [name, list, killed, concept, expected] of cases) {
       delete process.env.ENABLE_AI_SCENE_GENERATION
       delete process.env.VISUAL_AI_SCENE_ALLOWLIST
-  delete process.env.VISUAL_AI_SCENE_AUTO
-      if (list) { on(); allow(list) }
+      delete process.env.VISUAL_AI_SCENE_AUTO
+      if (list) allow(list)
+      if (killed) process.env.ENABLE_AI_SCENE_GENERATION = 'false'
       expect(isRuntimeSceneGenerationAllowed(concept), name).toBe(expected)
     }
   })
@@ -385,9 +414,10 @@ describe('the V2 rollback path cannot bypass the allowlist', () => {
   it('9. generated cache stays gated under rollback', async () => {
     // Same helper gates the cache read, so a V2 rollback cannot resurrect a
     // cached generated scene for a non-allowlisted concept.
-    on(); allow(PROJECTILE)
+    allow(PROJECTILE)
     const r = await generateConceptScene(ctxFor(CALORIMETRY), {
       cacheClient: warmCache() as never,
+      budgetReader: openBudget,
       generate: async () => calorimetryScene(),
     })
     expect(r.ok).toBe(false)
