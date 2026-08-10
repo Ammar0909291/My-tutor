@@ -39,6 +39,8 @@ import { buildConceptIndexFromKnowledgeGraph } from '@/lib/teaching/concept/conc
 import type { ConceptIndexEntry } from '@/lib/teaching/concept/conceptUnderstanding'
 import type { SceneObject, SceneSpec } from '@/lib/teaching/sceneSpec'
 import type { ArchetypeContext } from './archetypes'
+import { resolveServicePolicy, servesImmediately, type ServicePolicy } from './generationPolicy'
+import { recordGenerationOutcome, type GenerationOutcomeSink } from './generationOutcome'
 
 /** Cache namespace. Disjoint from the dynamic-code engine's own keys. */
 const CACHE_PREFIX = 'scene:v1:'
@@ -413,12 +415,49 @@ export async function generateConceptScene(
     enabled?: (conceptId: string) => boolean
     /** The turn's teaching purpose — guidance for generation, see the prompt. */
     purpose?: string
+    /**
+     * Where every attempt is written down, accepted or rejected. Optional: with
+     * no sink the engine behaves exactly as before, which is what keeps the
+     * audit trail from ever being able to fail a lesson.
+     */
+    outcomeSink?: GenerationOutcomeSink
+    /** Policy override for tests; production reads it from the env authority. */
+    policy?: ServicePolicy
   } = {},
 ): Promise<EngineResult> {
+  const startedAt = Date.now()
   // Authorization FIRST, before the cache is touched: the allowlist gates
   // eligibility, so removing a concept (or the flag) stops cached generated
   // scenes being served, not merely new generations.
   const enabled = deps.enabled ?? isRuntimeSceneGenerationAllowed
+  const policy = deps.policy ?? resolveServicePolicy(ctx.conceptId)
+
+  /**
+   * Record the attempt, then return the caller's result unchanged.
+   *
+   * A REJECTION IS RECORDED TOO — that is the whole point. Measured
+   * 2026-08-10: the anchor rule rejected 7 of 7 of this repository's own
+   * authored gold-standard figures, a pattern that was invisible precisely
+   * because rejections were discarded.
+   */
+  const finish = async (result: EngineResult, cached = false): Promise<EngineResult> => {
+    await recordGenerationOutcome(
+      {
+        conceptId: ctx.conceptId,
+        conceptTitle: ctx.title,
+        policy,
+        elapsedMs: Date.now() - startedAt,
+        cached,
+        result: result.ok
+          ? { ok: true, scene: result.scene, served: servesImmediately(policy) }
+          : { ok: false, reason: result.reason, scene: null },
+      },
+      deps.outcomeSink,
+    )
+    return result
+  }
+
+  // Not eligible at all: nothing was attempted, so there is nothing to record.
   if (!enabled(ctx.conceptId)) return { ok: false, reason: 'flag-off' }
   if (!ctx.title?.trim() && !ctx.description?.trim()) return { ok: false, reason: 'no-source-text' }
 
@@ -431,7 +470,7 @@ export async function generateConceptScene(
     if (cached?.code) {
       const parsed = JSON.parse(cached.code) as unknown
       const result = validateGeneratedScene(parsed, ctx)
-      if (result.ok) return { ...result, cached: true }
+      if (result.ok) return await finish({ ...result, cached: true }, true)
     }
   } catch { /* unparseable or unreachable cache — fall through and regenerate */ }
 
@@ -440,18 +479,18 @@ export async function generateConceptScene(
   try {
     raw = await (deps.generate ?? generateJSON)(buildConceptScenePrompt(ctx, deps.purpose), MAX_SCENE_TOKENS)
   } catch {
-    return { ok: false, reason: 'generation-failed' }
+    return await finish({ ok: false, reason: 'generation-failed' })
   }
-  if (!raw) return { ok: false, reason: 'generation-failed' }
+  if (!raw) return await finish({ ok: false, reason: 'generation-failed' })
 
   // 3. Validate. A rejected scene is never cached — it must not be served to
   //    the next learner who asks about this concept.
   const result = validateGeneratedScene(raw, ctx)
-  if (!result.ok) return result
+  if (!result.ok) return await finish(result)
 
   try {
     await saveVisualization(key, JSON.stringify(result.scene), deps.cacheClient)
   } catch { /* cache write is best-effort; the scene is still usable this turn */ }
 
-  return result
+  return await finish(result)
 }

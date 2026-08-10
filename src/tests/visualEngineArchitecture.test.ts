@@ -76,6 +76,11 @@ const driftingScene = (): SceneSpec => ({
 
 const engine = (scene: unknown) => ({
   enabled: () => true,
+  // These tests exercise the generate-AND-SERVE path. Since the trust
+  // lifecycle landed, eligibility alone yields a scene that is generated,
+  // validated and HELD for review, so a test that wants to observe a served
+  // figure must say the concept is trusted to serve.
+  policy: 'auto' as const,
   generate: async () => scene,
   cacheClient: {
     visualizationCache: {

@@ -77,6 +77,7 @@ const ORIGINAL = { ...process.env }
 beforeEach(() => {
   delete process.env.ENABLE_AI_SCENE_GENERATION
   delete process.env.VISUAL_AI_SCENE_ALLOWLIST
+  delete process.env.VISUAL_AI_SCENE_AUTO
 })
 afterEach(() => {
   process.env.ENABLE_AI_SCENE_GENERATION = ORIGINAL.ENABLE_AI_SCENE_GENERATION
@@ -84,7 +85,19 @@ afterEach(() => {
 })
 
 const on = () => { process.env.ENABLE_AI_SCENE_GENERATION = 'true' }
-const allow = (v: string) => { process.env.VISUAL_AI_SCENE_ALLOWLIST = v }
+/**
+ * Authorize a concept for generation.
+ *
+ * `VISUAL_AI_SCENE_AUTO` is set alongside the allowlist because these tests
+ * exercise the generate-AND-SERVE path. Since the trust lifecycle landed,
+ * eligibility alone yields a scene that is generated, validated and HELD for
+ * review — so a test that wants to observe a served figure must say that the
+ * concept is trusted to serve, which is the separation the policy exists for.
+ */
+const allow = (v: string) => {
+  process.env.VISUAL_AI_SCENE_ALLOWLIST = v
+  process.env.VISUAL_AI_SCENE_AUTO = v
+}
 
 describe('permission is the conjunction of flag AND allowlist', () => {
   it('1. flag OFF + allowlisted concept => DENIED', () => {
@@ -347,6 +360,7 @@ describe('the V2 rollback path cannot bypass the allowlist', () => {
     for (const [name, list, concept, expected] of cases) {
       delete process.env.ENABLE_AI_SCENE_GENERATION
       delete process.env.VISUAL_AI_SCENE_ALLOWLIST
+  delete process.env.VISUAL_AI_SCENE_AUTO
       if (list) { on(); allow(list) }
       expect(isRuntimeSceneGenerationAllowed(concept), name).toBe(expected)
     }

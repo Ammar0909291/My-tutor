@@ -39,6 +39,7 @@ import { resolveVisualTarget } from './resolveVisualTarget'
 import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
 import { generateConceptScene } from './visualEngine'
+import { resolveServicePolicy, servesImmediately } from './generationPolicy'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
@@ -475,6 +476,18 @@ export async function resolveVisualForTurn(
   if (!result.ok) {
     // 3. NONE — carry the reason so a rejection is auditable rather than silent.
     return { ...decision, provenance: `no-figure:engine-${result.reason}` }
+  }
+
+  // A VALID SCENE IS NOT AUTOMATICALLY A SERVED SCENE.
+  //
+  // Under the 'reviewed' policy the figure has been generated, validated and
+  // written down — and is held until a human promotes it. The learner sees text
+  // this turn, which is an ordinary successful outcome of this engine, not a
+  // failure. Only 'auto' serves on validation alone.
+  // The injected policy is honoured here as well as inside the engine, so a
+  // caller has ONE override point rather than two that can disagree.
+  if (!servesImmediately(deps.policy ?? resolveServicePolicy(ctx.conceptId))) {
+    return { ...decision, provenance: 'no-figure:held-for-review' }
   }
 
   const representation = representationForSceneType(result.scene.sceneType)
