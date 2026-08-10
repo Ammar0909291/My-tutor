@@ -194,6 +194,21 @@ export interface VisualDecision {
    * so a visual swap is always explainable after the fact.
    */
   continuityReason: string
+  /**
+   * True when THIS turn spent a generation attempt — a real provider call,
+   * whether the figure was then served, held or rejected.
+   *
+   * It exists so the per-session budget can be enforced. The daily budget is
+   * counted from the outcome table because every instance writes there; a
+   * SESSION has no such table, and adding one would be a migration for a
+   * counter. The caller already persists a per-session snapshot every turn, so
+   * the engine reports what it spent and the session's own store remembers it.
+   *
+   * A cached figure, an approved figure and a declined turn all leave this
+   * false: they cost nothing, so they must not consume a budget that exists to
+   * bound cost.
+   */
+  generationSpent?: boolean
 }
 
 /**

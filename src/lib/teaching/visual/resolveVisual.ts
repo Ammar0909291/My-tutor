@@ -35,7 +35,7 @@ import { isRetiredVisualBinding } from './retired'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
-import { resolveVisualTarget } from './resolveVisualTarget'
+import { resolveVisualTarget, requestTargetsSomethingElse } from './resolveVisualTarget'
 import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
 import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, type GeneratedFigure } from './visualEngine'
@@ -318,6 +318,23 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   const target = resolveVisualTarget(input.message, input.lessonConceptId, input.subject)
   const requestedConceptId = target?.origin === 'learner-request' ? target.conceptId : null
 
+  /**
+   * THE LEARNER ASKED ABOUT SOMETHING THE CURRICULUM DOES NOT CONTAIN.
+   *
+   * The target above fell back to the lesson, and the request has nothing in
+   * common with it — so the only figure available would be a figure of a
+   * different topic than the one that was asked about. No downstream gate can
+   * catch that: they all ask "is this a good figure of the concept it claims",
+   * and it is. Answering it here is the only place the claim itself is still
+   * in question.
+   *
+   * NOTHING is drawn and nothing is switched: a figure already on screen is
+   * left to continuity, exactly as the need gate does, so a learner asking a
+   * side question never has the figure they are reading taken away.
+   */
+  const offTopicRequest =
+    target !== null && !session && requestTargetsSomethingElse(input.message, target)
+
   // ── 2. Does the figure already on screen survive this turn? ───────────────
   // A held figure whose concept has left the Knowledge Graph (renamed or
   // deleted between sessions — contextSnapshot outlives KG edits) would be
@@ -364,6 +381,19 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     return {
       ...noFigureDecision(`suppressed:${need.reason}`, null, null, resolvePurpose(input, 'explain'), false),
       continuityReason: `need:${need.need}`,
+      session: null,
+    }
+  }
+
+  // The request is about a topic the curriculum cannot name, and the only
+  // figure on offer is of something else. Declining is the whole answer — no
+  // substitution, no nearest neighbour. Grouped with the need gate because it
+  // is the same kind of decision: whether a NEW figure may be introduced at
+  // all, asked before any tier runs.
+  if (offTopicRequest) {
+    return {
+      ...noFigureDecision('request-names-an-uncatalogued-topic', null, null, resolvePurpose(input, 'explain'), false),
+      continuityReason: 'request-off-topic',
       session: null,
     }
   }
@@ -648,6 +678,20 @@ export async function resolveVisualForTurn(
   const result = await generateConceptFigure(ctx, {
     purpose: decision.purpose, ...deps, budgetMs: deadline.remaining(),
   })
+  /**
+   * WHAT THIS TURN ACTUALLY SPENT.
+   *
+   * A cache hit costs nothing, so it must not consume a budget whose whole
+   * purpose is to bound cost — otherwise a lesson that keeps returning to one
+   * topic would exhaust its session budget on figures it never paid for. Every
+   * other outcome of the call above spent a generation, including the rejected
+   * ones: a rejection costs the same provider call an acceptance does, and a
+   * budget that only counted successes would bound the cheap case and let the
+   * expensive one run free.
+   */
+  const spent = !(result.ok && result.cached)
+  decision = { ...decision, generationSpent: spent }
+
   if (!result.ok) {
     // 3. NONE — carry the reason so a rejection is auditable rather than silent.
     return { ...decision, provenance: `no-figure:engine-${result.reason}` }

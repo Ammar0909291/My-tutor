@@ -515,6 +515,10 @@ export async function POST(req: Request) {
     // legacy path remains intact and is used whenever this is null (resolver
     // disabled, or no concept in scope). See src/lib/teaching/visual/.
     let visualDecisionHoisted: import('@/lib/teaching/visual/types').VisualDecision | null = null
+    // Generations this session has already spent, read from the snapshot before
+    // the resolver runs and written back after it. Hoisted because the read and
+    // the write sit in different blocks of this handler.
+    let visualGenerationCountHoisted = 0
     // OFF-LESSON CONCEPT EXCURSION (teaching/excursion.ts). The Teaching Engine
     // owns the lifecycle; this carries its decision to the snapshot persist at
     // the end of the turn. Null when the excursion block never ran.
@@ -2343,6 +2347,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const activeVisualSession = parseVisualSession(
                 (learnSession.contextSnapshot as Record<string, unknown> | null)?.visualSession,
               )
+              // THE PER-SESSION GENERATION BUDGET's counter.
+              //
+              // The daily budget is read from the outcome table because every
+              // instance writes there. A SESSION has no such table, and adding
+              // one would be a migration for a counter — so the count rides the
+              // snapshot this route already writes every turn, which is
+              // per-session by construction and survives across lambdas because
+              // it is a database row.
+              //
+              // Read defensively: a missing, corrupt or negative value must not
+              // hand the session an unbounded budget, so anything unusable
+              // counts as zero spent ONLY when it is genuinely absent, and a
+              // malformed number is treated as the cap rather than as zero.
+              const rawGenCount = (learnSession.contextSnapshot as Record<string, unknown> | null)
+                ?.visualGenerationCount
+              const visualGenerationCount =
+                rawGenCount === undefined || rawGenCount === null
+                  ? 0
+                  : typeof rawGenCount === 'number' && Number.isFinite(rawGenCount) && rawGenCount >= 0
+                    ? Math.floor(rawGenCount)
+                    : Number.MAX_SAFE_INTEGER
+              visualGenerationCountHoisted = visualGenerationCount
               // ONE authority, including runtime generation: curated figure ->
               // engine-generated figure -> no figure. Awaited because the
               // engine may call the model; a cached or flag-off path returns
@@ -2366,6 +2392,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 outcomeSink: prismaGenerationOutcomeSink,
                 findApprovedFigure: findActiveVisualFigure,
                 budgetReader: prismaBudgetReader,
+                // Without this the resolver's session cap was accepted and
+                // never supplied, so `checkBudgets` skipped it entirely and one
+                // learner could generate without a per-session bound.
+                sessionGenerationCount: visualGenerationCount,
                 // GROUNDING FOR AN OFF-CURRICULUM TOPIC. The lesson's own title
                 // and description are what the tutor is teaching from, so they
                 // are what a figure of it must be drawn from and judged
@@ -4761,7 +4791,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // next turn can HOLD it. Cleared explicitly when nothing graphical is
           // on screen, so a stale figure can never be resurrected.
           const visualSessionUpdate: Record<string, unknown> = visualDecisionHoisted
-            ? { visualSession: visualDecisionHoisted.session }
+            ? {
+                visualSession: visualDecisionHoisted.session,
+                // The per-session generation budget's counter. Incremented only
+                // on a turn that actually spent a provider call — a cached, an
+                // approved and a declined figure all cost nothing and must not
+                // consume a bound that exists to limit cost.
+                ...(visualDecisionHoisted.generationSpent
+                  ? { visualGenerationCount: visualGenerationCountHoisted + 1 }
+                  : {}),
+              }
             : {}
 
           // OFF-LESSON CONCEPT EXCURSION — persist the standing detour so the

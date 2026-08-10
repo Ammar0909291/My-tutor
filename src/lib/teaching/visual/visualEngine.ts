@@ -161,7 +161,12 @@ export type EngineResult =
 
 // ── semantic validation ──────────────────────────────────────────────────────
 
-function contentWords(text: string, keepGeneric = false): Set<string> {
+/**
+ * The engine's own vocabulary test, exported because targeting needs the SAME
+ * one. Two tokenisers would eventually disagree about what a word is, and then
+ * a figure could be anchored to a concept by one rule and disowned by another.
+ */
+export function contentWords(text: string, keepGeneric = false): Set<string> {
   const out = new Set<string>()
   for (const w of text.toLowerCase().replace(/[^a-z0-9\s]+/g, ' ').split(/\s+/)) {
     if (w.length < 4) continue

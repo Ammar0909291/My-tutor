@@ -305,13 +305,21 @@ export async function criticiseFigure(
   try {
     const judging = (deps.generate ?? generateJSON)(buildCriticPrompt(figure, ctx), 700)
     const budgetMs = deps.budgetMs ?? JUDGE_BUDGET_MS
+    // A TIMEOUT AND A BAD ANSWER ARE DIFFERENT FAILURES, and reporting both as
+    // "unreadable shape" made the calibration corpus unreadable in turn: four
+    // of twenty judged cases showed it, and re-running them one at a time
+    // produced clean verdicts, so most were the clock and not the model. Both
+    // still resolve to UNSURE — the behaviour is unchanged and safe — but the
+    // audit now says which happened.
+    const TIMED_OUT = Symbol('judge-timeout')
     const raw = budgetMs > 0
       ? await Promise.race([
           judging,
-          new Promise<null>((resolve) => setTimeout(() => resolve(null), budgetMs)),
+          new Promise<typeof TIMED_OUT>((resolve) => setTimeout(() => resolve(TIMED_OUT), budgetMs)),
         ])
       : await judging
-    const obj = raw as Record<string, unknown> | null
+    const timedOut = raw === TIMED_OUT
+    const obj = timedOut ? null : (raw as Record<string, unknown> | null)
     const relevance = readVerdict(obj?.relevance)
     const correctness = readVerdict(obj?.correctness)
     const explanatoryValue = readVerdict(obj?.explanatoryValue)
@@ -321,7 +329,9 @@ export async function criticiseFigure(
       dimensions.explanatoryValue = explanatoryValue
       judged = true
     } else {
-      const reason = 'judge replied in an unreadable shape'
+      const reason = timedOut
+        ? `judge did not answer within ${budgetMs}ms`
+        : 'judge replied in an unreadable shape'
       dimensions.relevance = { verdict: 'unsure', reason }
       dimensions.correctness = { verdict: 'unsure', reason }
       dimensions.explanatoryValue = { verdict: 'unsure', reason }

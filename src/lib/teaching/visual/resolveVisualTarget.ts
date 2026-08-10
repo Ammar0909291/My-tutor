@@ -17,6 +17,8 @@
 
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import { resolveRequestedConceptId } from '@/lib/teaching/concept/requestedConcept'
+import { isExplicitTopicRequest } from './session'
+import { contentWords } from './visualEngine'
 import type { ArchetypeContext } from './archetypes'
 
 export {
@@ -78,4 +80,97 @@ export function resolveVisualTarget(
   }
 
   return null
+}
+
+/**
+ * DID THE LEARNER ASK ABOUT SOMETHING THIS FIGURE IS NOT?
+ *
+ * ── THE DEFECT ──────────────────────────────────────────────────────────────
+ * Step 1 above matches the learner's words against a KG index, and step 3 falls
+ * back to the lesson when nothing matched. For a topic the curriculum has never
+ * heard of, step 1 CANNOT match — so a learner in an SI-units lesson who types
+ * "Explain Kubernetes pod scheduling" silently targets SI Units and
+ * Measurement. Measured, exactly that: target `phys.meas.units`, origin
+ * `lesson-concept`. With generation enabled the engine would draw a correct,
+ * well-judged figure of SI units while the tutor answered about Kubernetes.
+ *
+ * That is the wrong-figure failure this engine exists to prevent, and it is the
+ * one shape of it no downstream gate can catch: every check downstream asks
+ * "is this a good figure of the concept it claims", and the answer is yes. The
+ * claim itself is what is wrong.
+ *
+ * ── THE TEST, AND WHY IT IS THIS ONE ────────────────────────────────────────
+ * Only on the FALLBACK — when the learner explicitly asked to be taught
+ * something and the curriculum could not name it. Then: does the request share
+ * ANY vocabulary with the topic that would be drawn?
+ *
+ *   "Explain Kubernetes pod scheduling"  vs  SI Units   -> nothing in common
+ *   "Explain why SI units matter here"   vs  SI Units   -> "units"
+ *   "what is this?"                      vs  anything   -> no content words
+ *   "show me a diagram"                  vs  anything   -> no content words
+ *
+ * ZERO overlap is a deliberately weak bar to clear, because a false suppression
+ * costs a learner a figure they could have had, and a false pass teaches them
+ * the wrong picture. One shared content word is enough to believe the request
+ * is about the lesson. And no keyword table decides it: the comparison is the
+ * learner's own words against the concept's own words, so it works identically
+ * for a topic nobody has enumerated.
+ *
+ * NOT a teaching decision. It does not open, close or redirect an excursion —
+ * the Teaching Engine owns all of that and is untouched. It answers one visual
+ * question: may this figure claim to be what the learner asked for.
+ */
+export function requestTargetsSomethingElse(message: string, target: VisualTarget): boolean {
+  // Only the fallback can be wrong in this way. A concept the learner actually
+  // named IS what they asked for, by construction.
+  if (target.origin !== 'lesson-concept') return false
+  if (!isExplicitTopicRequest(message)) return false
+
+  const named = namedTopicWords(message)
+  // POSITIVE EVIDENCE REQUIRED. Silence is not a mismatch: "explain this
+  // again", "explain it more simply", "show me a diagram" name no topic, and
+  // suppressing those would take a figure away from the very turns that most
+  // need one. Two surviving words is the bar because one is routinely an
+  // adverb the discourse list has not seen — measured on real phrasings,
+  // "simply", "properly", "slowly" all survive alone, and none of them is a
+  // topic. Two unrelated content words in a row is a noun phrase.
+  if (named.length < MIN_NAMED_TOPIC_WORDS) return false
+
+  const drawn = contentWords(`${target.title} ${target.description ?? ''}`, true)
+  for (const word of named) if (drawn.has(word)) return false
+  return true
+}
+
+/** How many topic-shaped words a request must carry before it names a topic. */
+const MIN_NAMED_TOPIC_WORDS = 2
+
+/**
+ * ENGLISH DISCOURSE WORDS — words that are not a topic in any subject.
+ *
+ * This is deliberately a list about ENGLISH, not about subjects. It contains no
+ * concept, no domain and no topic, so it does not grow when the curriculum
+ * does, and it cannot become the keyword table that decides WHAT to draw — the
+ * archetype-engine failure this codebase already made once. It only helps
+ * answer whether the learner named anything at all.
+ *
+ * The engine's own stopwords cover generic FIGURE vocabulary; these cover
+ * generic REQUEST vocabulary, which is a different set: a learner says "explain
+ * it again more simply", and none of those five words is a subject.
+ */
+const DISCOURSE_WORDS = new Set([
+  'explain', 'describe', 'tell', 'teach', 'demonstrate', 'illustrate', 'draw',
+  'again', 'please', 'more', 'simply', 'simpler', 'simple', 'easier', 'easy',
+  'slowly', 'properly', 'clearly', 'better', 'differently', 'another', 'other',
+  'about', 'like', 'want', 'need', 'know', 'think', 'mean', 'means', 'meaning',
+  'really', 'actually', 'just', 'still', 'also', 'thing', 'things', 'stuff',
+  'part', 'parts', 'bit', 'little', 'much', 'many', 'some', 'any', 'these',
+  'those', 'there', 'here', 'again', 'okay', 'thanks', 'thank', 'sorry',
+  'help', 'give', 'make', 'take', 'come', 'goes', 'went', 'does', 'done',
+  'cannot', 'dont', 'doesnt', 'didnt', 'wont', 'lets', 'would', 'could',
+  'should', 'might', 'will', 'shall', 'been', 'being', 'said', 'says',
+])
+
+/** The topic-shaped words in a request: content words that are not discourse. */
+function namedTopicWords(message: string): string[] {
+  return [...contentWords(message)].filter((w) => !DISCOURSE_WORDS.has(w))
 }
