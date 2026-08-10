@@ -38,7 +38,7 @@ import { ARCHETYPES, type ArchetypeContext } from './archetypes'
 import { resolveVisualTarget } from './resolveVisualTarget'
 import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
-import { generateConceptScene } from './visualEngine'
+import { generateConceptFigure, generateConceptScene } from './visualEngine'
 import { resolveServicePolicy, servesImmediately } from './generationPolicy'
 import { decideVisualNeed, mayIntroduceFigure } from './visualNeed'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
@@ -498,7 +498,7 @@ export async function resolveVisualForTurn(
 
   // 2. GENERATED — attempted only here, and only for a turn that would
   //    otherwise show nothing.
-  const result = await generateConceptScene(ctx, { purpose: decision.purpose, ...deps })
+  const result = await generateConceptFigure(ctx, { purpose: decision.purpose, ...deps })
   if (!result.ok) {
     // 3. NONE — carry the reason so a rejection is auditable rather than silent.
     return { ...decision, provenance: `no-figure:engine-${result.reason}` }
@@ -516,7 +516,12 @@ export async function resolveVisualForTurn(
     return { ...decision, provenance: 'no-figure:held-for-review' }
   }
 
-  const representation = representationForSceneType(result.scene.sceneType)
+  // The model chose the form; the payload follows it rather than the other way
+  // round. A generated spec is admitted exactly like a generated scene.
+  const figure = result.figure
+  const representation = figure.kind === 'scene'
+    ? representationForSceneType(figure.scene.sceneType)
+    : representationForVisualType(figure.spec.type as VisualType)
 
   // A generated scene is an asset like any other and is admitted like any
   // other. This is also the CACHE boundary: generateConceptScene() may have
@@ -529,7 +534,9 @@ export async function resolveVisualForTurn(
     conceptId: ctx.conceptId,
     conceptTitle: ctx.title,
     representation,
-    payload: { renderer: 'scene', sceneSpec: result.scene },
+    payload: figure.kind === 'scene'
+      ? { renderer: 'scene', sceneSpec: figure.scene }
+      : { renderer: 'spec', visualSpec: figure.spec },
     provenance: 'engine',
   })
   const admission = admitVisualAsset(

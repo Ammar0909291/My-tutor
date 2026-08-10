@@ -38,6 +38,7 @@ import {
 import { buildConceptIndexFromKnowledgeGraph } from '@/lib/teaching/concept/conceptIndexSource'
 import type { ConceptIndexEntry } from '@/lib/teaching/concept/conceptUnderstanding'
 import type { SceneObject, SceneSpec } from '@/lib/teaching/sceneSpec'
+import { parseVisualSpec, SUPPORTED_VISUAL_TYPES, type VisualSpec } from '@/lib/visuals/visualSpec'
 import type { ArchetypeContext } from './archetypes'
 import { resolveServicePolicy, servesImmediately, type ServicePolicy } from './generationPolicy'
 import { recordGenerationOutcome, type GenerationOutcomeSink } from './generationOutcome'
@@ -530,4 +531,227 @@ export async function generateConceptScene(
   } catch { /* cache write is best-effort; the scene is still usable this turn */ }
 
   return await finish(result)
+}
+
+// ── REPRESENTATION BREADTH (A4) ──────────────────────────────────────────────
+
+/**
+ * NOT EVERY CONCEPT IS A 3D SCENE.
+ *
+ * Generation could emit exactly one thing: a SceneSpec. Four other renderers
+ * are live and received nothing generated — graph, number line, geometry and
+ * process flow — so whole families of concepts (functions, statistics,
+ * procedures, sequences) had no generatable form and fell back to text or to a
+ * shared domain illustration.
+ *
+ * The model now CHOOSES, in one call, from a CLOSED set. It cannot invent a
+ * renderer: an unrecognised shape is a rejection, never a fallback, which is
+ * the same rule the scene path already lives by.
+ *
+ * WHY THE SPEC BAR IS DIFFERENT FROM THE SCENE BAR, and honestly so. A scene
+ * is free-form: any 3D objects with any labels, which is exactly why it needs
+ * the label-anchoring rule that the 480-evaluation experiment forced. A
+ * VisualSpec is not free-form — zod fixes its shape, and a `graph` is an
+ * equation, a `number_line` is a range, a `geometry` is a named shape with
+ * numbers. There is no room in that structure to smuggle in another concept's
+ * content, so anchoring is applied where a spec actually carries prose (its
+ * title and step titles) and is not demanded of an equation, which has no
+ * vocabulary to match. Demanding it anyway would repeat the false-reject
+ * failure measured on 2026-08-10, where the anchor rule rejected 7 of 7 of
+ * this repository's own authored gold-standard figures.
+ */
+
+/** What a generated figure turned out to be. Closed by construction. */
+export type GeneratedFigure =
+  | { kind: 'scene'; scene: SceneSpec }
+  | { kind: 'spec'; spec: VisualSpec }
+
+export type FigureResult =
+  | { ok: true; figure: GeneratedFigure; cached: boolean }
+  | { ok: false; reason: EngineRejection }
+
+/** Free prose a spec carries. Numbers and equations are deliberately excluded. */
+function specProse(spec: VisualSpec): string[] {
+  const out: string[] = []
+  if ('title' in spec && typeof spec.title === 'string') out.push(spec.title)
+  if (spec.type === 'process_flow') {
+    for (const step of spec.steps) {
+      if (typeof step === 'string') out.push(step)
+      else {
+        if (step.title) out.push(step.title)
+        if (step.note) out.push(step.note)
+      }
+    }
+  }
+  return out.filter((s) => s.trim())
+}
+
+/**
+ * Is this spec about the concept it was generated for?
+ *
+ * ONE matched term is enough, against the scene path's two, and the reason is
+ * structural rather than lenient: a spec's shape is already fixed by zod, so
+ * the question "is this secretly another concept's figure?" barely arises. A
+ * spec that carries NO prose at all — a bare graph of an equation — cannot be
+ * anchored lexically and is accepted on its structure, because rejecting every
+ * equation for failing to contain English would reject the representation
+ * itself.
+ */
+export function isSpecAnchoredToConcept(spec: VisualSpec, ctx: ArchetypeContext): boolean {
+  const prose = specProse(spec)
+  if (prose.length === 0) return true
+  const conceptWords = new Set([...contentWords(ctx.title, true), ...contentWords(ctx.description)])
+  for (const line of prose) {
+    for (const w of contentWords(line, true)) if (conceptWords.has(w)) return true
+  }
+  return false
+}
+
+/** Which member of the closed set this raw response is, if any. */
+function classifyFigure(raw: unknown): 'scene' | 'spec' | null {
+  if (!raw || typeof raw !== 'object') return null
+  const o = raw as Record<string, unknown>
+  if (Array.isArray(o.steps) && !o.type) return 'scene'
+  if (typeof o.type === 'string' && (SUPPORTED_VISUAL_TYPES as readonly string[]).includes(o.type)) return 'spec'
+  // A process_flow also has `steps`, so `type` is checked first above.
+  if (Array.isArray(o.steps)) return 'scene'
+  return null
+}
+
+export function buildConceptFigurePrompt(ctx: ArchetypeContext, purpose?: string): string {
+  const purposeLine = purpose ? `\nTeaching purpose for this turn: ${purpose}. Shape the figure to serve it.\n` : ''
+  return `Choose the ONE best figure for a curriculum concept, then produce it.
+${purposeLine}
+Concept id: ${ctx.conceptId}
+Concept title: ${ctx.title}
+What it covers: ${ctx.description}
+
+Pick exactly one of these five forms. Nothing else is renderable — if none of
+them can depict this concept honestly, return exactly: null
+
+A. graph          a function of one variable            {"type":"graph","equation":"2x + 1","title":"..."}
+B. number_line    positions or ranges on a line         {"type":"number_line","start":-5,"end":5,"highlight":[0,3],"title":"..."}
+C. geometry       one shape with real measurements      {"type":"geometry","shape":"triangle","base":8,"height":5}
+                  shape is triangle | rectangle | circle | angle
+D. process_flow   an ordered sequence of named steps    {"type":"process_flow","title":"...","steps":[{"title":"..."},{"title":"..."}]}
+                  2-12 steps, each title <= 60 characters
+E. scene          a labelled 3D diagram, when none of A-D fits
+
+Choose by what the concept IS, not by what looks impressive: a relationship
+between two quantities is a graph, a procedure is a process flow, a measured
+shape is geometry. Prefer A-D when one of them genuinely fits — they read
+better on a phone than a 3D scene does.
+
+For form E only, use this shape:
+
+type Vec3 = [number, number, number]
+type SceneObjectType = 'point'|'particle'|'node'|'vector'|'arrow'|'bond'|'label'|'path'|'trajectory'
+interface SceneObject { type: SceneObjectType; id?: string; position?: Vec3; from?: Vec3; to?: Vec3; points?: Vec3[]; text?: string; color?: string; radius?: number; thickness?: number }
+interface SceneStep { narration?: string; objects: SceneObject[] }
+interface SceneSpec { id: string; title: string; sceneType: 'diagram'|'simulation'|'process'|'comparison'|'plot'; teachingGoal?: string; cameraDistance?: number; ariaLabel?: string; steps: SceneStep[] }
+
+STEPS ARE CUMULATIVE. Everything drawn in step 1 is STILL ON SCREEN in step 2,
+so each step lists only what is NEWLY revealed, every object id is unique
+across the whole scene, and no label may state something only true during its
+own step. 2-5 steps, each with a one-sentence narration. At least two drawn
+objects overall, labelled with real terms from this concept. Coordinates
+roughly -5..5.
+
+Output ONLY the JSON object.`
+}
+
+/**
+ * Generate a figure of whichever form fits, under the same contract as scenes.
+ *
+ * Eligibility, the permanent cache, the outcome record and NO-FIGURE-on-any-
+ * rejection are identical to `generateConceptScene`, because they are the same
+ * code path — this differs only in what the model is allowed to return.
+ */
+export async function generateConceptFigure(
+  ctx: ArchetypeContext,
+  deps: Parameters<typeof generateConceptScene>[1] = {},
+): Promise<FigureResult> {
+  const startedAt = Date.now()
+  const enabled = deps.enabled ?? isRuntimeSceneGenerationAllowed
+  const policy = deps.policy ?? resolveServicePolicy(ctx.conceptId)
+  if (!enabled(ctx.conceptId)) return { ok: false, reason: 'flag-off' }
+  if (!ctx.title?.trim() && !ctx.description?.trim()) return { ok: false, reason: 'no-source-text' }
+
+  const finish = async (result: FigureResult, cached = false): Promise<FigureResult> => {
+    await recordGenerationOutcome(
+      {
+        conceptId: ctx.conceptId,
+        conceptTitle: ctx.title,
+        policy,
+        elapsedMs: Date.now() - startedAt,
+        cached,
+        result: result.ok
+          // The outcome record carries a scene when there is one; a spec's
+          // shape is its own audit trail and is not forced into a SceneSpec.
+          ? { ok: true, scene: result.figure.kind === 'scene' ? result.figure.scene : EMPTY_SCENE, served: servesImmediately(policy) }
+          : { ok: false, reason: result.reason, scene: null },
+      },
+      deps.outcomeSink,
+    )
+    return result
+  }
+
+  const key = `${CACHE_PREFIX}fig:${ctx.conceptId}`
+  try {
+    const cached = await getCachedVisualization(key, deps.cacheClient)
+    if (cached?.code) {
+      const validated = validateGeneratedFigure(JSON.parse(cached.code) as unknown, ctx)
+      if (validated.ok) return await finish({ ...validated, cached: true }, true)
+    }
+  } catch { /* unreachable or unparseable cache — regenerate */ }
+
+  let raw: unknown = null
+  let overBudget = false
+  try {
+    const budgetMs = deps.budgetMs ?? ON_TURN_BUDGET_MS
+    const generation = (deps.generate ?? generateJSON)(buildConceptFigurePrompt(ctx, deps.purpose), MAX_SCENE_TOKENS)
+    raw = budgetMs > 0
+      ? await Promise.race([
+          generation,
+          new Promise<null>((resolve) => setTimeout(() => { overBudget = true; resolve(null) }, budgetMs)),
+        ])
+      : await generation
+  } catch {
+    return await finish({ ok: false, reason: 'generation-failed' })
+  }
+  if (!raw) return await finish({ ok: false, reason: overBudget ? 'budget-exceeded' : 'generation-failed' })
+
+  const validated = validateGeneratedFigure(raw, ctx)
+  if (!validated.ok) return await finish(validated)
+
+  try {
+    await saveVisualization(key, JSON.stringify(raw), deps.cacheClient)
+  } catch { /* best-effort */ }
+
+  return await finish(validated)
+}
+
+/** An empty scene, used only where the outcome record's shape needs one. */
+const EMPTY_SCENE: SceneSpec = { id: 'spec', title: '', sceneType: 'diagram', steps: [] }
+
+/**
+ * Validate whichever form the model chose. An unrecognised shape is a
+ * rejection — the closed set is closed.
+ */
+export function validateGeneratedFigure(
+  raw: unknown,
+  ctx: ArchetypeContext,
+): { ok: true; figure: GeneratedFigure; cached: boolean } | { ok: false; reason: EngineRejection } {
+  const kind = classifyFigure(raw)
+  if (kind === 'scene') {
+    const result = validateGeneratedScene(raw, ctx)
+    return result.ok ? { ok: true, figure: { kind: 'scene', scene: result.scene }, cached: false } : result
+  }
+  if (kind === 'spec') {
+    const spec = parseVisualSpec(raw)
+    if (!spec) return { ok: false, reason: 'structurally-invalid' }
+    if (!isSpecAnchoredToConcept(spec, ctx)) return { ok: false, reason: 'not-anchored-to-concept' }
+    return { ok: true, figure: { kind: 'spec', spec }, cached: false }
+  }
+  return { ok: false, reason: 'structurally-invalid' }
 }
