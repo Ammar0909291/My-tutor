@@ -123,3 +123,27 @@ describe('the judge is not shown how the figure was made', () => {
     }))).toEqual(['T', 'a', 'b', 'n'])
   })
 })
+
+describe('the judge has a deadline', () => {
+  it('A SLOW JUDGE HOLDS rather than holding the lesson open', async () => {
+    const r = await criticiseFigure(good, ctx, {
+      budgetMs: 20,
+      generate: () => new Promise((resolve) => setTimeout(() => resolve(allPass()), 400)),
+    })
+    expect(r.decision).toBe('hold')
+    expect(r.judged).toBe(false)
+  })
+
+  it('the same judgement inside the deadline is used', async () => {
+    const r = await criticiseFigure(good, ctx, { budgetMs: 2000, generate: allPass })
+    expect(r.decision).toBe('promote')
+  })
+
+  it('budget 0 disables the clock — nobody waits on an offline vetting pass', async () => {
+    const r = await criticiseFigure(good, ctx, {
+      budgetMs: 0,
+      generate: () => new Promise((resolve) => setTimeout(() => resolve(allPass()), 60)),
+    })
+    expect(r.decision).toBe('promote')
+  })
+})

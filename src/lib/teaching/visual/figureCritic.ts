@@ -71,6 +71,13 @@ export interface CriticReport {
   judged: boolean
 }
 
+/**
+ * The judge's share of a turn. Generation already has its own budget; this
+ * bounds the second call so the worst case a learner can experience is both
+ * budgets, not an open-ended wait.
+ */
+const JUDGE_BUDGET_MS = 5000
+
 const DIMENSIONS: CriticDimension[] = [
   'relevance', 'correctness', 'explanatoryValue', 'grounding', 'rendering',
 ]
@@ -249,7 +256,16 @@ function readVerdict(raw: unknown): { verdict: DimensionVerdict; reason: string 
 export async function criticiseFigure(
   figure: GeneratedFigure,
   ctx: ArchetypeContext,
-  deps: { generate?: (prompt: string, maxTokens?: number) => Promise<unknown> } = {},
+  deps: {
+    generate?: (prompt: string, maxTokens?: number) => Promise<unknown>
+    /**
+     * How long to wait for the judge. A learner is on the other end of this on
+     * the live path, and a judge that never answers must not hold a lesson
+     * open — it times out into UNSURE, which is HOLD, which is no figure.
+     * 0 disables the clock, which is what the offline vetting pass wants.
+     */
+    budgetMs?: number
+  } = {},
 ): Promise<CriticReport> {
   const dimensions = {
     relevance: { verdict: 'unsure' as DimensionVerdict, reason: 'not judged' },
@@ -265,7 +281,14 @@ export async function criticiseFigure(
 
   let judged = false
   try {
-    const raw = await (deps.generate ?? generateJSON)(buildCriticPrompt(figure, ctx), 700)
+    const judging = (deps.generate ?? generateJSON)(buildCriticPrompt(figure, ctx), 700)
+    const budgetMs = deps.budgetMs ?? JUDGE_BUDGET_MS
+    const raw = budgetMs > 0
+      ? await Promise.race([
+          judging,
+          new Promise<null>((resolve) => setTimeout(() => resolve(null), budgetMs)),
+        ])
+      : await judging
     const obj = raw as Record<string, unknown> | null
     const relevance = readVerdict(obj?.relevance)
     const correctness = readVerdict(obj?.correctness)
