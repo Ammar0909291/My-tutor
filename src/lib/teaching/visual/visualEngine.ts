@@ -56,18 +56,38 @@ const DRAWN: ReadonlySet<SceneObject['type']> = new Set<SceneObject['type']>([
 
 /**
  * Drawn objects that carry GEOMETRY rather than just text. A `label` is a
- * floating string: satisfying the anchor with labels alone is the same cheap
- * trick as repeating the title, so at least one anchored object must come from
- * this set.
+ * floating string, so a scene made only of labels is text, not a figure — the
+ * anchor requires the scene to contain objects from this set. It does NOT
+ * require the concept's words to sit ON them; see isAnchoredToConcept for the
+ * measurement that changed that.
  */
 const GEOMETRIC: ReadonlySet<SceneObject['type']> = new Set<SceneObject['type']>([
   'point', 'particle', 'node', 'vector', 'arrow', 'bond', 'path', 'trajectory',
 ])
 
+/**
+ * Output budget for one scene.
+ *
+ * MEASURED: at 1400 the model's JSON was TRUNCATED mid-object on a richer
+ * concept (bio.cell.mitosis, cut at ~3.9k characters), which surfaces as an
+ * unparseable response and a silent `generation-failed` — indistinguishable
+ * from a provider outage. A cap costs nothing unless the model actually writes
+ * up to it, so the honest setting is one that fits the largest legitimate
+ * scene rather than one that quietly truncates the most detailed concepts.
+ */
+const MAX_SCENE_TOKENS = 3000
+
 const MIN_DRAWN_OBJECTS = 2
 
 /** Distinct anchored objects required before a scene is believed. */
 const MIN_ANCHORED_OBJECTS = 2
+
+/**
+ * Geometry a scene must actually contain before its labels mean anything.
+ * Two, matching MIN_ANCHORED_OBJECTS: one shape and one caption is a diagram of
+ * nothing, and every authored figure in the corpus carries far more.
+ */
+const MIN_GEOMETRIC_OBJECTS = 2
 
 /**
  * How much more strongly another concept may match the object labels before
@@ -144,12 +164,28 @@ function drawnObjects(scene: SceneSpec): SceneObject[] {
  * entirely: they are what the learner is TOLD, and the question here is what
  * the learner is SHOWN.
  *
- * Two independent conditions must hold:
+ * Three independent conditions must hold:
  *   1. at least two DISTINCT drawn objects whose own text matches the concept's
- *      vocabulary, at least one of them geometry-bearing (a pair of floating
- *      labels is text, not a figure);
- *   2. no other KG concept matches those labels substantially better than the
+ *      vocabulary;
+ *   2. the scene actually CONTAINS geometry — at least two drawn objects that
+ *      are not floating text (a pair of labels is text, not a figure);
+ *   3. no other KG concept matches those labels substantially better than the
  *      target does (see crossConceptChallenger).
+ *
+ * WHY (2) IS ABOUT THE SCENE AND NOT ABOUT THE MATCHED TEXT — measured.
+ * This clause used to require that the CONCEPT'S VOCABULARY sit in the `text`
+ * of a geometry-bearing object. Run against this repository's own authored,
+ * browser-verified gold standard, that rejected 7 of 7 M4 pilot figures —
+ * including one carrying four correct concept labels — because the authored
+ * corpus deliberately puts text on standalone `label` objects. physicsPilot's
+ * own authoring rules say why: "Arrow/bond text is avoided: it renders at the
+ * midpoint, on top of the thing it describes."
+ *
+ * So the old clause contradicted the engine's own authoring guidance and was a
+ * false-reject machine, not a quality filter. The intent it was protecting —
+ * "floating labels alone are not a figure" — is preserved exactly: a scene of
+ * text with no geometry still fails, because the geometry is now counted
+ * directly instead of being inferred from where the words happen to sit.
  */
 export function isAnchoredToConcept(scene: SceneSpec, ctx: ArchetypeContext): boolean {
   return anchorReport(scene, ctx).anchored
@@ -159,8 +195,11 @@ export interface AnchorReport {
   anchored: boolean
   /** Distinct anchored object labels, in scene order. */
   matchedLabels: string[]
-  /** True when at least one anchored object carries geometry. */
-  hasGeometricAnchor: boolean
+  /**
+   * Drawn objects that are not floating text. This is a property of the SCENE,
+   * not of where the matched words sit — see the note on isAnchoredToConcept.
+   */
+  geometricObjects: number
   /** A better-matching concept, when one exists. */
   challenger: { conceptId: string; score: number; targetScore: number } | null
 }
@@ -170,9 +209,10 @@ export function anchorReport(scene: SceneSpec, ctx: ArchetypeContext): AnchorRep
 
   const matched: string[] = []
   const seen = new Set<string>()
-  let hasGeometricAnchor = false
+  let geometricObjects = 0
 
   for (const obj of drawnObjects(scene)) {
+    if (GEOMETRIC.has(obj.type)) geometricObjects++
     const label = (obj.text ?? '').trim()
     if (!label) continue
     const key = label.toLowerCase()
@@ -188,14 +228,15 @@ export function anchorReport(scene: SceneSpec, ctx: ArchetypeContext): AnchorRep
     if (!hit) continue
     seen.add(key)
     matched.push(label)
-    if (GEOMETRIC.has(obj.type)) hasGeometricAnchor = true
   }
 
   const challenger = crossConceptChallenger(scene, ctx)
   const anchored =
-    matched.length >= MIN_ANCHORED_OBJECTS && hasGeometricAnchor && challenger === null
+    matched.length >= MIN_ANCHORED_OBJECTS &&
+    geometricObjects >= MIN_GEOMETRIC_OBJECTS &&
+    challenger === null
 
-  return { anchored, matchedLabels: matched, hasGeometricAnchor, challenger }
+  return { anchored, matchedLabels: matched, geometricObjects, challenger }
 }
 
 /**
@@ -340,6 +381,16 @@ interface SceneObject { type: SceneObjectType; id?: string; position?: Vec3; fro
 interface SceneStep { narration?: string; objects: SceneObject[] }
 interface SceneSpec { id: string; title: string; sceneType: 'diagram'|'simulation'|'process'|'comparison'|'plot'; teachingGoal?: string; cameraDistance?: number; ariaLabel?: string; steps: SceneStep[] }
 
+STEPS ARE CUMULATIVE. Everything drawn in step 1 is STILL ON SCREEN in step 2,
+and the default view is the complete figure. So each step lists only what is
+NEWLY revealed — never re-declare an object to keep it visible — and every
+object id must be unique across the whole scene. Two objects may not share an
+id even in different steps. Omit id entirely if you do not need one.
+
+Because the steps accumulate, no narration or label may state something that is
+only true during its own step: a label reading "nothing here yet" is wrong the
+moment a later step fills that space.
+
 Rules: 2-5 steps, each with a one-sentence narration naming what appears. At
 least two drawn objects overall. Label the objects with real terms from this
 concept. Coordinates small and plausible (roughly -5..5). Output ONLY the
@@ -387,7 +438,7 @@ export async function generateConceptScene(
   // 2. Generate.
   let raw: unknown = null
   try {
-    raw = await (deps.generate ?? generateJSON)(buildConceptScenePrompt(ctx, deps.purpose), 1400)
+    raw = await (deps.generate ?? generateJSON)(buildConceptScenePrompt(ctx, deps.purpose), MAX_SCENE_TOKENS)
   } catch {
     return { ok: false, reason: 'generation-failed' }
   }

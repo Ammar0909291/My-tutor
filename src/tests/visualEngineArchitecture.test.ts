@@ -477,17 +477,40 @@ describe('the semantic gate anchors on what is DRAWN, not what is SAID', () => {
     expect(r.ok).toBe(false)
   })
 
-  it('floating labels alone cannot anchor — one anchor must carry geometry', () => {
+  it('floating labels alone cannot anchor — the scene must contain geometry', () => {
+    // Two concept labels and a single unrelated node: the scene has one
+    // geometric object, which is a caption next to a dot, not a figure.
     const r = validateGeneratedScene(scene([
       { type: 'label', position: [0, 0, 0], text: 'calorimetry' },
       { type: 'label', position: [1, 0, 0], text: 'heat' },
       { type: 'node', position: [2, 0, 0], text: 'fermi' },
     ]), ctx)
     expect(r.ok).toBe(false)
+    // Pure text, no geometry at all.
     expect(anchorReport(scene([
       { type: 'label', position: [0, 0, 0], text: 'calorimetry' },
       { type: 'label', position: [1, 0, 0], text: 'heat' },
-    ]), ctx).hasGeometricAnchor).toBe(false)
+    ]), ctx).geometricObjects).toBe(0)
+  })
+
+  it('does NOT reject a figure for putting its words on labels instead of geometry', () => {
+    // THE MEASURED REGRESSION. The clause used to demand that the concept's
+    // vocabulary sit in the `text` of a geometry-bearing object. Run against
+    // this repository's own authored, browser-verified gold standard that
+    // rejected 7 of 7 M4 pilot figures — because the authored corpus
+    // deliberately captions with standalone `label` objects, exactly as
+    // physicsPilot's authoring rules instruct ("Arrow/bond text is avoided:
+    // it renders at the midpoint, on top of the thing it describes").
+    //
+    // A scene with real geometry, captioned the authored way, must pass.
+    const r = validateGeneratedScene(scene([
+      { type: 'node', position: [0, 0, 0] },
+      { type: 'node', position: [1, 0, 0] },
+      { type: 'arrow', from: [0, 0, 0], to: [1, 0, 0] },
+      { type: 'label', position: [0, 1, 0], text: 'heat flows hot to cold' },
+      { type: 'label', position: [1, 1, 0], text: 'calorimetry vessel' },
+    ]), ctx)
+    expect(r.ok, `rejected an authored-style figure: ${(r as { reason?: string }).reason}`).toBe(true)
   })
 
   it('a genuinely faithful scene still passes', () => {
