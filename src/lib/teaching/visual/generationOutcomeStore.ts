@@ -202,3 +202,77 @@ export const prismaGenerationOutcomeSink: GenerationOutcomeSink = {
     }
   },
 }
+
+// ── REVIEW ───────────────────────────────────────────────────────────────────
+//
+// A DRAFT nobody can see is not a review queue, it is a landfill. These two
+// functions are the visual family's half of the same admin endpoint the
+// explanation and probe families already use, deliberately mirroring
+// `explanationMemory.ts` rather than inventing a second review vocabulary.
+
+/** The visual DRAFTs awaiting a human, newest first. */
+export async function listVisualsForReview(status: AssetStatus = AssetStatus.DRAFT) {
+  return prisma.assetIdentity.findMany({
+    where: { family: AssetFamily.VISUAL, status },
+    include: { visualAsset: true },
+    orderBy: { createdAt: 'desc' },
+    take: 100,
+  })
+}
+
+/**
+ * Approving never overwrites the previously-approved figure: the old ACTIVE
+ * asset in the same lineage is DEPRECATED (preserved, just no longer served),
+ * so at most one ACTIVE per canonicalSlug holds for visuals exactly as it does
+ * for explanations (ADR 14 §4.1).
+ */
+export async function reviewVisualAsset(assetId: string, action: 'approve' | 'reject') {
+  if (action === 'reject') {
+    return prisma.assetIdentity.update({ where: { assetId }, data: { status: AssetStatus.RETIRED } })
+  }
+
+  const target = await prisma.assetIdentity.findUniqueOrThrow({ where: { assetId } })
+  await prisma.assetIdentity.updateMany({
+    where: {
+      canonicalSlug: target.canonicalSlug,
+      family: AssetFamily.VISUAL,
+      status: AssetStatus.ACTIVE,
+      assetId: { not: assetId },
+    },
+    data: { status: AssetStatus.DEPRECATED, deprecationReason: `Superseded by newer approved version ${assetId}` },
+  })
+  return prisma.assetIdentity.update({ where: { assetId }, data: { status: AssetStatus.ACTIVE } })
+}
+
+/**
+ * The APPROVED figure for a concept, if a human has promoted one.
+ *
+ * This is the far end of the review loop. Without it, approving a DRAFT
+ * changed a status column and nothing else — the reviewer's decision would
+ * never have reached a learner, and 'reviewed' would have meant "generate,
+ * hold, and forget". Only ACTIVE is ever read, which is the same rule
+ * `findBestExplanation` lives by.
+ *
+ * Returns the figure in the engine's own vocabulary so the caller admits it
+ * through the same gate as any other asset; a row whose payload no longer
+ * parses as a figure is treated as absent rather than repaired.
+ */
+export async function findActiveVisualFigure(conceptId: string): Promise<GeneratedFigure | null> {
+  try {
+    const row = await prisma.assetIdentity.findFirst({
+      where: { conceptId, family: AssetFamily.VISUAL, status: AssetStatus.ACTIVE },
+      include: { visualAsset: true },
+      orderBy: { version: 'desc' },
+    })
+    const payload = row?.visualAsset?.specPayload
+    if (!payload || typeof payload !== 'object') return null
+    return row.visualAsset!.renderer === VisualRenderer.VISUAL_SPEC
+      ? { kind: 'spec', spec: payload as GeneratedFigure extends { kind: 'spec'; spec: infer S } ? S : never }
+      : { kind: 'scene', scene: payload as GeneratedFigure extends { kind: 'scene'; scene: infer S } ? S : never }
+  } catch (err) {
+    // A lookup failure must degrade to "no approved figure", never to a
+    // failed turn: the learner's lesson does not depend on the review queue.
+    console.warn('[visual-outcome] approved-figure lookup failed:', err)
+    return null
+  }
+}

@@ -2323,7 +2323,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // rejected — is written down. Purely additive: the sink is read
               // by nothing on this path, and a failure inside it is swallowed,
               // so it can never change what the learner sees.
-              const { prismaGenerationOutcomeSink } = await import(
+              // …and a figure a human already approved is served ahead of
+              // generating a new one, which is what makes the review queue
+              // reach a learner at all.
+              const { prismaGenerationOutcomeSink, findActiveVisualFigure } = await import(
                 '@/lib/teaching/visual/generationOutcomeStore'
               )
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
@@ -2355,7 +2358,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 activeSession: activeVisualSession,
                 lastAssistantAskedQuestion:
                   (conversationStateHoisted?.questionsAskedSinceTeach ?? 0) > 0,
-              }, { outcomeSink: prismaGenerationOutcomeSink })
+              }, {
+                outcomeSink: prismaGenerationOutcomeSink,
+                findApprovedFigure: findActiveVisualFigure,
+              })
               visualDecisionHoisted = decision
               // The contract tells the model what is ALREADY on screen, so it
               // teaches to that figure instead of deciding whether one exists.

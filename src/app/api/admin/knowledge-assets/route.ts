@@ -6,6 +6,13 @@ import {
   listExplanationsForReview, reviewExplanationAsset,
   listProbesForReview, reviewProbeAsset,
 } from '@/lib/teaching/assets'
+// The Visualization Engine writes its accepted figures as DRAFT visual assets.
+// Without this family they would have had no reviewer, which makes a DRAFT a
+// landfill rather than a queue — and holding-for-review is the entire safety
+// argument for enabling runtime generation at all.
+import {
+  listVisualsForReview, reviewVisualAsset,
+} from '@/lib/teaching/visual/generationOutcomeStore'
 import { AssetStatus } from '@prisma/client'
 
 // Admin-only review queue for Explanation Memory / Teaching Action Repository
@@ -23,7 +30,7 @@ async function requireAdmin() {
 }
 
 const querySchema = z.object({
-  family: z.enum(['explanation', 'probe']).default('explanation'),
+  family: z.enum(['explanation', 'probe', 'visual']).default('explanation'),
   status: z.enum(['DRAFT', 'REVIEW', 'ACTIVE', 'DEPRECATED', 'RETIRED']).default('DRAFT'),
 })
 
@@ -39,15 +46,16 @@ export async function GET(req: Request) {
   if (!parsed.success) return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 })
 
   const status = AssetStatus[parsed.data.status]
-  const assets = parsed.data.family === 'probe'
-    ? await listProbesForReview(status)
+  const assets =
+    parsed.data.family === 'probe' ? await listProbesForReview(status)
+    : parsed.data.family === 'visual' ? await listVisualsForReview(status)
     : await listExplanationsForReview(status)
 
   return NextResponse.json({ success: true, family: parsed.data.family, assets })
 }
 
 const reviewSchema = z.object({
-  family: z.enum(['explanation', 'probe']),
+  family: z.enum(['explanation', 'probe', 'visual']),
   assetId: z.string(),
   action: z.enum(['approve', 'reject']),
 })
@@ -60,8 +68,9 @@ export async function PATCH(req: Request) {
     const body = await req.json()
     const { family, assetId, action } = reviewSchema.parse(body)
 
-    const asset = family === 'probe'
-      ? await reviewProbeAsset(assetId, action)
+    const asset =
+      family === 'probe' ? await reviewProbeAsset(assetId, action)
+      : family === 'visual' ? await reviewVisualAsset(assetId, action)
       : await reviewExplanationAsset(assetId, action)
 
     return NextResponse.json({ success: true, asset })

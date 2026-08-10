@@ -38,7 +38,7 @@ import { ARCHETYPES, type ArchetypeContext } from './archetypes'
 import { resolveVisualTarget } from './resolveVisualTarget'
 import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
-import { generateConceptFigure, generateConceptScene } from './visualEngine'
+import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, type GeneratedFigure } from './visualEngine'
 import { resolveServicePolicy, servesImmediately } from './generationPolicy'
 import { decideVisualNeed, mayIntroduceFigure } from './visualNeed'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
@@ -474,9 +474,17 @@ function representationForVisualType(visualType: VisualType) {
  * The order is the architecture and there is no fourth branch:
  *
  *   1. CURATED    — a concept generator or curated binding exists  -> use it
- *   2. GENERATED  — the engine builds one for THIS concept and it passes
+ *   2. APPROVED   — a human promoted a generated figure for THIS concept to
+ *                   ACTIVE                                         -> use it
+ *   3. GENERATED  — the engine builds one for THIS concept and it passes
  *                   semantic validation                            -> use it
- *   3. NONE       — anything else, including every rejection       -> no figure
+ *   4. NONE       — anything else, including every rejection       -> no figure
+ *
+ * APPROVED sits above GENERATED because a reviewed figure is strictly better
+ * evidence than an unreviewed one, and below CURATED because a hand-authored
+ * binding is better still. It is also what makes the 'reviewed' policy mean
+ * anything: without this tier, approving a DRAFT would move a status column
+ * and never reach a learner.
  *
  * A rejected generation is never repaired and never replaced. Continuity is
  * untouched: generation is attempted only on a turn that produced no figure at
@@ -484,9 +492,16 @@ function representationForVisualType(visualType: VisualType) {
  */
 export async function resolveVisualForTurn(
   input: ResolveVisualInput,
-  deps: Parameters<typeof generateConceptScene>[1] = {},
+  deps: Parameters<typeof generateConceptScene>[1] & {
+    /**
+     * Reads the approved figure for a concept. Injected rather than imported
+     * so this module stays free of the database — with no reader supplied the
+     * tier is simply absent, which is what every test and the dev harness want.
+     */
+    findApprovedFigure?: (conceptId: string) => Promise<GeneratedFigure | null>
+  } = {},
 ): Promise<VisualDecision> {
-  const decision = resolveVisual(input)
+  let decision = resolveVisual(input)
 
   // 1. CURATED — already faithful, nothing to add.
   if (decision.graphical) return decision
@@ -496,7 +511,90 @@ export async function resolveVisualForTurn(
   const ctx = contextFor(decision.conceptId)
   if (!ctx) return decision
 
-  // 2. GENERATED — attempted only here, and only for a turn that would
+  /**
+   * Turn a figure into this turn's decision, through the SAME admission gate
+   * every other tier uses. Shared by APPROVED and GENERATED deliberately: two
+   * copies of an admission call is how a second authority starts.
+   */
+  const serve = (figure: GeneratedFigure, assetId: string): VisualDecision => {
+    const representation = figure.kind === 'scene'
+      ? representationForSceneType(figure.scene.sceneType)
+      : representationForVisualType(figure.spec.type as VisualType)
+
+    const asset = makeVisualAsset({
+      assetId,
+      conceptId: ctx.conceptId,
+      conceptTitle: ctx.title,
+      representation,
+      payload: figure.kind === 'scene'
+        ? { renderer: 'scene', sceneSpec: figure.scene }
+        : { renderer: 'spec', visualSpec: figure.spec },
+      provenance: 'engine',
+    })
+    const returnTo = decision.excursion
+      ? (input.excursionReturnToConceptId ?? input.lessonConceptId ?? null)
+      : null
+    const admission = admitVisualAsset(
+      {
+        conceptId: ctx.conceptId,
+        conceptTitle: ctx.title,
+        purpose: decision.purpose,
+        excursion: decision.excursion,
+        returnToConceptId: returnTo,
+      },
+      asset,
+    )
+    if (!admission.ok) return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
+
+    return {
+      ...decision,
+      representation,
+      payload: admission.asset.payload,
+      asset: admission.asset,
+      graphical: true,
+      source: 'generated',
+      provenance: admission.asset.assetId,
+      session: {
+        conceptId: admission.asset.conceptId,
+        representation,
+        renderer: admission.asset.renderer,
+        returnToConceptId: returnTo,
+        turns: 0,
+      },
+    }
+  }
+
+  // 2. APPROVED — a human already looked at a figure for this concept and
+  //    promoted it. Checked BEFORE generation, so an approved concept costs no
+  //    provider call and no on-turn latency, and so a reviewer's decision is
+  //    what the learner actually sees.
+  //
+  //    RE-VALIDATED, NEVER TRUSTED ON APPROVAL ALONE — the same rule the cache
+  //    path lives by. Approval is evidence a human once looked at this figure,
+  //    not evidence that it still depicts this concept: the KG text may have
+  //    changed since, and admission cannot catch that on its own because the
+  //    identity it compares is the one this function supplies, which would make
+  //    the check a tautology. Measured while building this tier: an approved
+  //    figure of photosynthesis was admitted for a linear function.
+  if (deps.findApprovedFigure) {
+    let approved: GeneratedFigure | null = null
+    try {
+      approved = await deps.findApprovedFigure(ctx.conceptId)
+    } catch {
+      // The review queue is not allowed to fail a lesson.
+      approved = null
+    }
+    if (approved) {
+      const payload = approved.kind === 'scene' ? approved.scene : approved.spec
+      const revalidated = validateGeneratedFigure(payload, ctx)
+      if (revalidated.ok) return serve(revalidated.figure, `approved:${ctx.conceptId}`)
+      // A figure that no longer matches its concept is NOT repaired and NOT
+      // substituted; the turn falls through to generation like any other.
+      decision = { ...decision, provenance: `no-figure:approved-${revalidated.reason}` }
+    }
+  }
+
+  // 3. GENERATED — attempted only here, and only for a turn that would
   //    otherwise show nothing.
   const result = await generateConceptFigure(ctx, { purpose: decision.purpose, ...deps })
   if (!result.ok) {
@@ -518,61 +616,12 @@ export async function resolveVisualForTurn(
 
   // The model chose the form; the payload follows it rather than the other way
   // round. A generated spec is admitted exactly like a generated scene.
-  const figure = result.figure
-  const representation = figure.kind === 'scene'
-    ? representationForSceneType(figure.scene.sceneType)
-    : representationForVisualType(figure.spec.type as VisualType)
-
-  // A generated scene is an asset like any other and is admitted like any
-  // other. This is also the CACHE boundary: generateConceptScene() may have
-  // returned a scene stored under a previous turn's key, so identity is
-  // re-checked here rather than being inherited from the cache lookup. A cache
-  // hit is evidence that a scene EXISTS, never evidence that it is this
-  // concept's.
-  const asset = makeVisualAsset({
-    assetId: `generated:${ctx.conceptId}:${result.cached ? 'cached' : 'fresh'}`,
-    conceptId: ctx.conceptId,
-    conceptTitle: ctx.title,
-    representation,
-    payload: figure.kind === 'scene'
-      ? { renderer: 'scene', sceneSpec: figure.scene }
-      : { renderer: 'spec', visualSpec: figure.spec },
-    provenance: 'engine',
-  })
-  const admission = admitVisualAsset(
-    {
-      conceptId: ctx.conceptId,
-      conceptTitle: ctx.title,
-      purpose: decision.purpose,
-      excursion: decision.excursion,
-      returnToConceptId: decision.excursion
-        ? (input.excursionReturnToConceptId ?? input.lessonConceptId ?? null)
-        : null,
-    },
-    asset,
-  )
-  if (!admission.ok) {
-    return { ...decision, provenance: `no-figure:rejected-${admission.reason}` }
-  }
-
-  return {
-    ...decision,
-    representation,
-    payload: admission.asset.payload,
-    asset: admission.asset,
-    graphical: true,
-    source: 'generated',
-    provenance: admission.asset.assetId,
-    session: {
-      conceptId: admission.asset.conceptId,
-      representation,
-      renderer: admission.asset.renderer,
-      returnToConceptId: decision.excursion
-        ? (input.excursionReturnToConceptId ?? input.lessonConceptId ?? null)
-        : null,
-      turns: 0,
-    },
-  }
+  //
+  // This is also the CACHE boundary: generation may have returned a figure
+  // stored under a previous turn's key, so identity is re-checked by the
+  // admission gate rather than inherited from the cache lookup. A cache hit is
+  // evidence that a figure EXISTS, never evidence that it is this concept's.
+  return serve(result.figure, `generated:${ctx.conceptId}:${result.cached ? 'cached' : 'fresh'}`)
 }
 
 /**
