@@ -1879,7 +1879,31 @@
   `visual_generation_outcome` 8 rows. 1,279 of 1,775 concepts (72%) are uncurated, i.e. the real
   surface generation serves — domain-default registry bindings cover far more concepts than the
   "26.7% get a figure" figure implied, so generation never fires for them.
-- **STILL BLOCKED — the one thing that keeps this OFF for learners:** Vercel environment
+- **The critic (2026-08-10, later session) — generated figures are now self-validated.**
+  `src/lib/teaching/visual/figureCritic.ts`. Two layers: STATIC (free, deterministic —
+  equation compiles and varies, number-line highlights in range, scene layout safe at every
+  viewport, figure carries words the tutor can speak from) and JUDGED (one model call, separate
+  prompt never shown the generation rules, answering relevance / correctness / explanatoryValue).
+  Five dimensions; `promote` needs all five to pass; ANY `unsure` — including an unreachable or
+  unreadable judge — resolves to HOLD, never promote. The critic never repairs.
+  **Calibrated before being trusted** (`scripts/visual/calibrate-critic.ts`): 6 hand-judged cases,
+  6/6 agreement, 0 known-bad promoted. It also gates the on-turn `auto` path, so the one route
+  that serves a figure the moment it is generated cannot serve an unvetted one.
+- **Vetted cohort pipeline** (`scripts/visual/vet-cohort.ts`): generate → STATIC → judge → decide,
+  offline. 40 concepts, one per subject family: **40 generation calls + 14 judge calls** (the judge
+  is skipped for figures the generator declined). Result: 26 declined by the generator
+  (`no-suitable-form`), 4 rejected by the critic, 1 rejected by reviewer override
+  (`cs.prog.python-basics` — conflated interpreter internals with `print()`/`input()` usage; the
+  critic had passed it, so its precision is NOT 100%), 9 promoted. The critic's best catch: a
+  figure titled "Gravitational Potential Energy U(h) = mgh" plotting `-0.5x^2 + 8`.
+- **Production is SERVING, with no Vercel change needed.** 10 ACTIVE visual assets
+  (`asset_identity` family=VISUAL), 11 `visual_assets`, 10 warm `visualization_cache` rows,
+  48 `visual_generation_outcome` rows. Integrity verified: 0 concepts with two ACTIVE, 0 orphan
+  identities. **Key architectural fact:** the APPROVED tier does NOT consult
+  `ENABLE_AI_SCENE_GENERATION` or the allowlist — an ACTIVE visual asset is reviewed content, in
+  the same class as a curated binding, and serves regardless. The env flags gate GENERATION only.
+  To stop a served figure, set its asset to DEPRECATED (one statement).
+- **STILL BLOCKED (generation only, not serving) — the one thing that keeps this OFF for learners:** Vercel environment
   variables cannot be set from this session (the Vercel MCP surface exposes projects/deployments/
   logs/docs but no env-var tool, and there is no `VERCEL_TOKEN` in the sandbox). Generation stays
   disabled in production until a human sets `ENABLE_AI_SCENE_GENERATION=true` and
