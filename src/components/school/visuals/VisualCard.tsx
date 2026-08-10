@@ -14,6 +14,7 @@
  */
 
 import { useEffect, useState } from 'react'
+import { useFigureLegibility, FIGURE_TEXT_FLOOR_PX } from './useFigureLegibility'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { VISUAL_META } from '@/lib/school/visuals/visualTypes'
 import { useTeachingPlayback } from '@/hooks/useTeachingPlayback'
@@ -203,6 +204,8 @@ function VisualComponent({ type, revealStep }: { type: VisualType; revealStep: n
 }
 
 export function VisualCard({ type, autoPlay = true, speed = 1, hasNarration, narrationTimeline }: VisualCardProps) {
+  // ONE owner for 2D figure width and type legibility — see useFigureLegibility.
+  const figureRef = useFigureLegibility<HTMLDivElement>()
   const meta = VISUAL_META[type]
   const stepCount = VISUAL_STEP_COUNTS[type]
 
@@ -282,7 +285,9 @@ export function VisualCard({ type, autoPlay = true, speed = 1, hasNarration, nar
       {/* header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
         <span style={{
-          fontSize: 9, fontWeight: 700, letterSpacing: 1,
+          // FIGURE_TEXT_FLOOR_PX: the card's own chrome obeys the same
+          // readability floor as the figure it frames.
+          fontSize: FIGURE_TEXT_FLOOR_PX, fontWeight: 700, letterSpacing: 1,
           textTransform: 'uppercase', color: 'var(--coral)',
           background: 'var(--coral-muted)', padding: '2px 7px', borderRadius: 20,
         }}>
@@ -293,8 +298,9 @@ export function VisualCard({ type, autoPlay = true, speed = 1, hasNarration, nar
         </span>
       </div>
 
-      {/* diagram */}
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      {/* diagram — the frame owns figure width and enforces the readability
+          floor here, so a figure never has to know the surface it landed on. */}
+      <div ref={figureRef} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <VisualComponent type={type} revealStep={playback.revealStep} />
       </div>
 

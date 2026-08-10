@@ -1,4 +1,5 @@
 'use client'
+import { FIGURE_TEXT_FLOOR_PX } from '@/components/school/visuals/useFigureLegibility'
 /**
  * GeometryRenderer — Visual Learning Sprint D (Geometry Engine).
  *
@@ -537,7 +538,8 @@ const cardStyle: React.CSSProperties = {
   maxWidth: 440,
 }
 const badgeStyle: React.CSSProperties = {
-  fontSize: 9, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase',
+  // FIGURE_TEXT_FLOOR_PX — chrome obeys the same readability floor as the figure.
+  fontSize: FIGURE_TEXT_FLOOR_PX, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase',
   color: 'var(--coral, #F78166)', background: 'var(--coral-muted, rgba(247,129,102,0.12))',
   padding: '2px 7px', borderRadius: 20,
 }

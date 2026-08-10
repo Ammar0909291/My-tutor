@@ -10,6 +10,7 @@
  * (visualSpec.ts) and one `case` below. No other call site changes.
  */
 import { VisualErrorBoundary } from './VisualErrorBoundary'
+import { useFigureLegibility } from '@/components/school/visuals/useFigureLegibility'
 import { GraphRenderer } from './GraphRenderer'
 import { NumberLineRenderer } from './NumberLineRenderer'
 import { GeometryRenderer } from './GeometryRenderer'
@@ -55,7 +56,15 @@ function dispatch(
 }
 
 export function VisualRenderer({ spec, raw, onMasteryEvent, masteryContext }: VisualRendererProps) {
+  // The same width/readability owner the card frame uses, so a VisualSpec figure
+  // obeys the floor for exactly the same reason an authored card does. Called
+  // before any early return — it is a hook, and the corpus has one owner.
+  const figureRef = useFigureLegibility<HTMLDivElement>()
   const resolved = spec ?? (raw !== undefined ? parseVisualSpec(raw) : null)
   if (!resolved) return null
-  return <VisualErrorBoundary>{dispatch(resolved, onMasteryEvent, masteryContext)}</VisualErrorBoundary>
+  return (
+    <div ref={figureRef} style={{ width: '100%' }}>
+      <VisualErrorBoundary>{dispatch(resolved, onMasteryEvent, masteryContext)}</VisualErrorBoundary>
+    </div>
+  )
 }

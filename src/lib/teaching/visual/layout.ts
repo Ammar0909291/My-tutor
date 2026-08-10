@@ -546,7 +546,7 @@ export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
  */
 
 /** Screen-space rectangle. */
-interface Box { left: number; right: number; top: number; bottom: number }
+export interface Box { left: number; right: number; top: number; bottom: number }
 
 /** A label after the solver has run. */
 export interface PlacedLabel {
@@ -608,11 +608,6 @@ const GEOMETRY_WEIGHT = 20
 function boxesOverlap(a: Box, b: Box, pad = PADDING_PX): boolean {
   return !(a.right + pad <= b.left || b.right + pad <= a.left ||
            a.bottom + pad <= b.top || b.bottom + pad <= a.top)
-}
-
-function boxFor(x: number, y: number, text: string, viewport: Viewport, tier?: number): Box {
-  const { halfW, halfH } = labelExtent(text, viewport, tier)
-  return { left: x - halfW, right: x + halfW, top: y - halfH, bottom: y + halfH }
 }
 
 /**
@@ -690,30 +685,97 @@ export function placeSceneLabels(scene: SceneSpec, viewport: Viewport): Placemen
   const scale = pixelsPerUnit(viewport, scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE)
   const anchors = projectLabelBoxes(scene, viewport)
   const tiers = sceneTextObjects(scene).map(({ object }) => tierOf(object))
-  const obstacles = geometryObstacles(scene, viewport, scale)
-  const maxDisplacement = Math.min(viewport.hostWidth, viewport.hostHeight) * MAX_DISPLACEMENT_FRACTION
+
+  // The 3D projection: world units through the camera frustum. Everything after
+  // this line is the shared solver, which never learns which projection it got.
+  const items: PlacementItem[] = anchors.map((anchor, index) => {
+    const { halfW, halfH } = labelExtent(anchor.text, viewport, tiers[index])
+    return {
+      text: anchor.text,
+      x: (anchor.left + anchor.right) / 2,
+      y: (anchor.top + anchor.bottom) / 2,
+      halfW, halfH,
+    }
+  })
+
+  return solveLabelPlacement(items, geometryObstacles(scene, viewport, scale), {
+    width: viewport.hostWidth, height: viewport.hostHeight,
+  })
+}
+
+/**
+ * One label, already projected into screen space by whichever projection its
+ * medium uses, with the size it will actually be drawn at.
+ */
+export interface PlacementItem {
+  text: string
+  /** Authored centre, in screen px relative to the figure's top-left. */
+  x: number
+  y: number
+  /** Half the rendered box, in screen px. */
+  halfW: number
+  halfH: number
+}
+
+/**
+ * THE SOLVER. Projection-blind by construction: it is handed screen-space
+ * boxes and screen-space obstacles and knows nothing about cameras, viewBoxes,
+ * three.js or SVG.
+ *
+ * Two projections feed it today — `placeSceneLabels` (world units through the
+ * camera frustum, for the three.js half of the corpus) and the SVG figure pass
+ * (viewBox user units scaled by renderedWidth / viewBoxWidth, for the 2D half).
+ * Both mediums had the same defect for the same reason, so both are owed the
+ * same fix, and a second solver would only guarantee they drift apart.
+ *
+ * Priority order, applied as hard constraints then a deterministic score:
+ *   1. inside the figure              (hard)
+ *   2. clear of already-placed labels (hard)
+ *   3. clear of geometry              (scored — a figure with no free space
+ *                                      must still show its labels)
+ *   4. closest to the authored position (scored)
+ *
+ * Readability is untouched: this function moves boxes, it never resizes them.
+ */
+export function solveLabelPlacement(
+  items: PlacementItem[],
+  obstacles: Box[],
+  bounds: { width: number; height: number },
+): PlacementResult {
+  const maxDisplacement = Math.min(bounds.width, bounds.height) * MAX_DISPLACEMENT_FRACTION
   const offsets = candidateOffsets(maxDisplacement)
 
   const placedBoxes: Box[] = []
-  const labels: PlacedLabel[] = []
+  const labels: PlacedLabel[] = new Array(items.length)
   let unresolved = 0
 
-  for (const [index, anchor] of anchors.entries()) {
-    const tier = tiers[index]
-    const ax = (anchor.left + anchor.right) / 2
-    const ay = (anchor.top + anchor.bottom) / 2
+  // AUTHORED ORDER. Placement is greedy, so order decides who gets the free
+  // space first. Ordering by box area — largest, least-flexible label first —
+  // was tried and MEASURED on the whole 2D corpus: it fixed two collisions and
+  // caused two others, a wash, while perturbing every already-validated 3D
+  // figure. Authored order is kept because it is the author's own order and it
+  // is the one the browser evidence covers.
+  const order = items.map((item, index) => ({ item, index }))
+
+  for (const { item, index } of order) {
+    const ax = item.x
+    const ay = item.y
+    const box = (x: number, y: number): Box => ({
+      left: x - item.halfW, right: x + item.halfW, top: y - item.halfH, bottom: y + item.halfH,
+    })
 
     let best: { x: number; y: number; score: number } | null = null
 
     for (const { dx, dy } of offsets) {
       const x = ax + dx
       const y = ay + dy
-      const box = boxFor(x, y, anchor.text, viewport, tier)
+      const candidate = box(x, y)
 
-      // 1. hard: inside the canvas
-      if (box.left < 0 || box.right > viewport.hostWidth || box.top < 0 || box.bottom > viewport.hostHeight) continue
+      // 1. hard: inside the figure
+      if (candidate.left < 0 || candidate.right > bounds.width ||
+          candidate.top < 0 || candidate.bottom > bounds.height) continue
       // 2. hard: clear of labels already placed this pass
-      if (placedBoxes.some((p) => boxesOverlap(box, p))) continue
+      if (placedBoxes.some((p) => boxesOverlap(candidate, p))) continue
 
       // 3 + 4. scored
       // Geometry overlap is capped and weighted modestly against displacement.
@@ -722,11 +784,10 @@ export function placeSceneLabels(scene: SceneSpec, viewport: Viewport): Placemen
       // association. Capped, a label moves only when nearby space is genuinely
       // clearer, and a label whose authored spot is already clean never moves.
       const geometryHits = Math.min(
-        obstacles.reduce((n, o) => n + (boxesOverlap(box, o, 0) ? 1 : 0), 0),
+        obstacles.reduce((n, o) => n + (boxesOverlap(candidate, o, 0) ? 1 : 0), 0),
         GEOMETRY_HIT_CAP,
       )
-      const displacement = Math.hypot(dx, dy)
-      const score = geometryHits * GEOMETRY_WEIGHT + displacement
+      const score = geometryHits * GEOMETRY_WEIGHT + Math.hypot(dx, dy)
       if (!best || score < best.score) best = { x, y, score }
       // The authored position, clear of everything, is unbeatable — stop early
       // so an already-good label is provably never moved.
@@ -734,20 +795,19 @@ export function placeSceneLabels(scene: SceneSpec, viewport: Viewport): Placemen
     }
 
     if (best) {
-      const box = boxFor(best.x, best.y, anchor.text, viewport, tier)
-      placedBoxes.push(box)
-      labels.push({
-        text: anchor.text, anchorX: ax, anchorY: ay, x: best.x, y: best.y,
+      placedBoxes.push(box(best.x, best.y))
+      labels[index] = {
+        text: item.text, anchorX: ax, anchorY: ay, x: best.x, y: best.y,
         movedPx: Math.round(Math.hypot(best.x - ax, best.y - ay)),
         ok: true,
-      })
+      }
     } else {
       // FAIL VISIBLY: keep the authored position, report it, never hide.
-      placedBoxes.push(boxFor(ax, ay, anchor.text, viewport, tier))
-      labels.push({
-        text: anchor.text, anchorX: ax, anchorY: ay, x: ax, y: ay,
+      placedBoxes.push(box(ax, ay))
+      labels[index] = {
+        text: item.text, anchorX: ax, anchorY: ay, x: ax, y: ay,
         movedPx: 0, ok: false, reason: 'no-safe-placement',
-      })
+      }
       unresolved++
     }
   }
