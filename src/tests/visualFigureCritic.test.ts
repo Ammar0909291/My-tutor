@@ -147,3 +147,32 @@ describe('the judge has a deadline', () => {
     expect(r.decision).toBe('promote')
   })
 })
+
+describe('text a renderer draws literally', () => {
+  const spec2 = (s: unknown): GeneratedFigure => ({ kind: 'spec', spec: s as never })
+
+  it('RAW LATEX IS REJECTED — these renderers print it, they do not typeset it', () => {
+    // Found by running the real pipeline: a correct kinetic-energy graph came
+    // back titled "Kinetic Energy ($E_k = \\frac{1}{2}mv^2$ for $m=2$ kg)".
+    // The judge passed it, because it can read what the notation means.
+    for (const title of [
+      'Kinetic Energy ($E_k = \\frac{1}{2}mv^2$)',
+      'Area = \\frac{1}{2}bh',
+      'Angle \\theta between them',
+      'Value \\(x\\)',
+    ]) {
+      const r = checkGrounding(spec2({ type: 'graph', equation: 'x^2', title }))
+      expect(r.verdict, title).toBe('fail')
+    }
+  })
+
+  it('ordinary notation is untouched', () => {
+    for (const title of [
+      'Kinetic Energy vs Velocity (m = 2 kg)',
+      'y = mx + c',
+      'Area of a triangle: 1/2 × base × height',
+    ]) {
+      expect(checkGrounding(spec2({ type: 'graph', equation: 'x^2', title })).verdict, title).toBe('pass')
+    }
+  })
+})

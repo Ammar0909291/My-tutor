@@ -164,6 +164,22 @@ export function checkRendering(figure: GeneratedFigure): { verdict: DimensionVer
 }
 
 /**
+ * Raw LaTeX in text a renderer draws as plain characters.
+ *
+ * Found by running the real pipeline, not by reading code: a kinetic-energy
+ * graph came back titled `Kinetic Energy ($E_k = \frac{1}{2}mv^2$ for $m=2$
+ * kg)`. The figure was correct; the title would have been drawn to a learner
+ * verbatim, backslashes and all. The critic's judge passed it, because it reads
+ * the source and can see what the notation MEANS — which is exactly the class of
+ * defect a deterministic check catches better than a model does.
+ */
+const LATEX_MARKERS = /\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int)\b|\$[^$]+\$|\\\(|\\\[/
+
+export function containsRawLatex(text: string): boolean {
+  return LATEX_MARKERS.test(text)
+}
+
+/**
  * GROUNDING — can the tutor talk about this figure from what it carries?
  *
  * The visual contract hands the model the figure's own words and forbids
@@ -177,6 +193,12 @@ export function checkGrounding(
 ): { verdict: DimensionVerdict; reason: string } {
   const texts = figureText(figure).map((t) => t.trim()).filter(Boolean)
   if (texts.length === 0) return { verdict: 'fail', reason: 'the figure carries no words at all' }
+
+  // These renderers draw text as text. LaTeX in a label is not typeset, it is
+  // printed — and the tutor is told to speak the figure's own words, so the
+  // markup reaches the learner twice.
+  const latex = texts.find(containsRawLatex)
+  if (latex) return { verdict: 'fail', reason: `raw LaTeX would be drawn literally: ${latex.slice(0, 60)}` }
 
   // A figure whose ONLY word is its own title states its name and nothing
   // else: there is nothing for the tutor to explain from it.
