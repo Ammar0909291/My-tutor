@@ -40,6 +40,7 @@ import { decideContinuity, parseVisualSession, tickSession, type VisualSession }
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
 import { generateConceptScene } from './visualEngine'
 import { resolveServicePolicy, servesImmediately } from './generationPolicy'
+import { decideVisualNeed, mayIntroduceFigure } from './visualNeed'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
@@ -336,6 +337,31 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     liveSession.returnToConceptId !== null &&
     liveSession.conceptId !== input.lessonConceptId
   if (excursionReleased) liveSession = null
+
+  // ── DOES A FIGURE HELP ON THIS TURN? ──────────────────────────────────────
+  // Asked on the INPUT side, before any tier runs, which is where route.ts's
+  // own comment says suppression belongs. It withholds a NEW figure only:
+  // with something already on screen, `mayIntroduceFigure` defers to
+  // continuity, so an answering learner never has the figure they are looking
+  // at taken away mid-thought.
+  const need = decideVisualNeed({
+    message: input.message,
+    learnerRequest: input.learnerRequest,
+    remediationTier: input.remediationTier,
+    lastAssistantAskedQuestion: lastAsked,
+    activeSession: liveSession,
+  })
+  // The RAW session, not the sanitised one: a figure whose concept has since
+  // left the KG was still on the learner's screen, so this is a continuity
+  // turn and continuity must be allowed to degrade it to the lesson. Passing
+  // liveSession here would let suppression hijack that and return nothing.
+  if (!mayIntroduceFigure(need, input.activeSession ?? liveSession)) {
+    return {
+      ...noFigureDecision(`suppressed:${need.reason}`, null, null, resolvePurpose(input, 'explain'), false),
+      continuityReason: `need:${need.need}`,
+      session: null,
+    }
+  }
 
   const action = decideContinuity({
     session: liveSession,
