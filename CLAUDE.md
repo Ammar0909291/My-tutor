@@ -1903,6 +1903,44 @@
   `ENABLE_AI_SCENE_GENERATION` or the allowlist — an ACTIVE visual asset is reviewed content, in
   the same class as a curated binding, and serves regardless. The env flags gate GENERATION only.
   To stop a served figure, set its asset to DEPRECATED (one statement).
+## Visualization Engine — generic runtime engine (2026-08-10, later session)
+- **Eligibility stopped being a list.** `flag.ts` inverted: `ENABLE_AI_SCENE_GENERATION` is now a
+  KILL SWITCH (only `false`/`0`/`off`/`no` disables; unset permits), and `VISUAL_AI_SCENE_ALLOWLIST`
+  is an OPTIONAL NARROWING — empty no longer means "nothing". **Empty does NOT mean unrestricted**:
+  four independent conditions bound generation — kill switch, optional narrowing, GROUNDING
+  (`topicIdentity.MIN_GROUNDING_CHARS`, a topic with no describable text cannot be drawn or judged),
+  and BUDGETS. `VISUAL_AI_SCENE_AUTO` is replaced by `VISUAL_AI_SCENE_REVIEW_ONLY` (opt-in hold
+  list); default policy is `auto` = generate → judge → serve what passes.
+- **Source-agnostic topic identity** (`topicIdentity.ts`). Identity was `getKGNode(id) ?? null`, so a
+  topic outside the KG could never get a figure at any setting. Now: KG first, else a runtime
+  identity from title + grounding text, id = `topic:<sha1(normalised title)>` so the same topic
+  always hits the same cache row. Carries `provenance`, which reaches the tutor contract as
+  `engine-runtime-topic` — the figure is real but is NOT presented as course material.
+  Route grounding comes from `lessonCtx.lessonTitle` / `lessonGoal` (the "Subject Library subjects
+  without a knowledge graph" case route.ts already names).
+- **Budgets replaced the allowlist's blast-radius job** (`generationBudget.ts`): perSession 6,
+  perDay 500, counted from `visual_generation_outcome` where `cached=false` (shared across
+  instances; an in-memory counter bounds one lambda i.e. nothing). **An unreadable count is treated
+  as EXHAUSTED** — a safety bound fails in the safe direction. Verified against production: the
+  reader's query returns 48 for the last 24h.
+- **Verdict cache** (`verdictCache.ts`) — the answer to per-turn judging cost, and the reason
+  critic-PASS→ACTIVE was REJECTED by the owner and reverted. Stores only a PASS, under
+  `scene:v1:verdict:<id>`, invalidated by changed grounding hash, changed figure fingerprint, or
+  90-day TTL. **A PASS means eligible-to-serve, never proven, and NOTHING promotes to ACTIVE —
+  that stays human-only through `/api/admin/knowledge-assets`.**
+- **One deadline** (`turnDeadline.ts`, 9s) covering generate + validate + judge; each stage gets
+  what remains. Expiry before the judge ABANDONS the figure (never serves it unjudged); the
+  generation still populates the cache for the next learner.
+- **Deterministic LaTeX check** added to the critic's STATIC layer after the real pipeline returned
+  a title `Kinetic Energy ($E_k = \frac{1}{2}mv^2$ ...)` — these renderers print LaTeX, they do not
+  typeset it, and the judge passed it because it can read what the notation means.
+- **VERIFIED END TO END with the real model** (`scripts/visual/verify-runtime-path.ts`, 4 calls):
+  an OFF-CURRICULUM topic (no KG node, no allowlist entry) generated a correct process flow,
+  was judged and served — and **turn 2 cost 0 provider calls** and served the identical figure.
+  Same for a KG concept. This is the property that makes thousands of topics affordable.
+- Production integrity re-verified: 10 ACTIVE visuals, 0 DRAFT, 0 concepts with two ACTIVE,
+  0 orphan identities, 48 outcome rows.
+
 - **STILL BLOCKED (generation only, not serving) — the one thing that keeps this OFF for learners:** Vercel environment
   variables cannot be set from this session (the Vercel MCP surface exposes projects/deployments/
   logs/docs but no env-var tool, and there is no `VERCEL_TOKEN` in the sandbox). Generation stays
