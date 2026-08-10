@@ -25,6 +25,22 @@ import { getKnowledgeGraph, getAllNodes, getKGNode } from '@/lib/curriculum/know
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import type { ArchetypeContext } from '@/lib/teaching/visual/archetypes'
 
+// The critic is a separate gate with its own tests; these are about the
+// payload path, so they supply a passing judge rather than a live model.
+const passingCritic = async () => ({
+  dimensions: {
+    relevance: { verdict: 'pass' as const, reason: '' },
+    correctness: { verdict: 'pass' as const, reason: '' },
+    explanatoryValue: { verdict: 'pass' as const, reason: '' },
+    grounding: { verdict: 'pass' as const, reason: '' },
+    rendering: { verdict: 'pass' as const, reason: '' },
+  },
+  decision: 'promote' as const,
+  confidence: 1,
+  judged: true,
+})
+
+
 // ── fixtures ─────────────────────────────────────────────────────────────────
 
 // M4 note: the engine fixture concept must have NO curated asset, or the
@@ -81,6 +97,7 @@ const engine = (scene: unknown) => ({
   // validated and HELD for review, so a test that wants to observe a served
   // figure must say the concept is trusted to serve.
   policy: 'auto' as const,
+  critic: passingCritic,
   generate: async () => scene,
   cacheClient: {
     visualizationCache: {
@@ -376,6 +393,7 @@ describe('malformed payloads and legacy isolation', () => {
     let written = 0
     await generateConceptScene(ctxFor(CALORIMETRY), {
       enabled: () => true,
+      critic: passingCritic,
       generate: async () => driftingScene(),
       cacheClient: { visualizationCache: {
         findUnique: async () => null,
@@ -391,6 +409,7 @@ describe('malformed payloads and legacy isolation', () => {
     // rejected exactly like a fresh one.
     const result = await generateConceptScene(ctxFor(CALORIMETRY), {
       enabled: () => true,
+      critic: passingCritic,
       generate: async () => null,
       cacheClient: { visualizationCache: {
         findUnique: async () => ({ code: JSON.stringify(driftingScene()) }),

@@ -41,6 +41,7 @@ import { noFigureDecision, type EducationalPurpose, type Representation, type Vi
 import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, type GeneratedFigure } from './visualEngine'
 import { resolveServicePolicy, servesImmediately } from './generationPolicy'
 import { decideVisualNeed, mayIntroduceFigure } from './visualNeed'
+import { criticiseFigure, type CriticReport } from './figureCritic'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
@@ -499,6 +500,12 @@ export async function resolveVisualForTurn(
      * tier is simply absent, which is what every test and the dev harness want.
      */
     findApprovedFigure?: (conceptId: string) => Promise<GeneratedFigure | null>
+    /**
+     * Judges a freshly generated figure before it is served. Injected only so
+     * tests can drive it; production always uses the real critic, because a
+     * critic that a caller can omit is a gate that a caller can forget.
+     */
+    critic?: (figure: GeneratedFigure, ctx: ArchetypeContext) => Promise<CriticReport>
   } = {},
 ): Promise<VisualDecision> {
   let decision = resolveVisual(input)
@@ -612,6 +619,27 @@ export async function resolveVisualForTurn(
   // caller has ONE override point rather than two that can disagree.
   if (!servesImmediately(deps.policy ?? resolveServicePolicy(ctx.conceptId))) {
     return { ...decision, provenance: 'no-figure:held-for-review' }
+  }
+
+  // NOTHING UNVETTED REACHES A LEARNER.
+  //
+  // 'auto' is the only path on which a figure is served the moment it is
+  // generated, without a human or the offline pipeline having looked at it.
+  // Structural validity and lexical anchoring do not carry that weight:
+  // measured on the first two real cohorts, figures that passed both asserted
+  // an order the concept does not have (the seven SI base units as a process)
+  // and drew gravitational potential energy as a DOWNWARD parabola while
+  // titling itself U(h) = mgh. So the critic runs here too, and only a
+  // 'promote' is served — an uncertain or unreachable judge yields NO FIGURE,
+  // which is an ordinary successful outcome of this engine.
+  //
+  // The offline pipeline (`vet-cohort`) is the cheap way to get the same
+  // guarantee: it promotes to ACTIVE, the APPROVED tier above serves it, and
+  // no learner ever waits for a judge.
+  const critic = deps.critic ?? criticiseFigure
+  const critique = await critic(result.figure, ctx)
+  if (critique.decision !== 'promote') {
+    return { ...decision, provenance: `no-figure:critic-${critique.decision}` }
   }
 
   // The model chose the form; the payload follows it rather than the other way

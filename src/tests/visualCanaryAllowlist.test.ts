@@ -20,6 +20,22 @@ import { parseVisualSession } from '@/lib/teaching/visual/session'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
+// This file is about AUTHORIZATION, not about figure quality; the critic has
+// its own tests. A passing judge keeps these assertions on the allowlist.
+const passingCritic = async () => ({
+  dimensions: {
+    relevance: { verdict: 'pass' as const, reason: '' },
+    correctness: { verdict: 'pass' as const, reason: '' },
+    explanatoryValue: { verdict: 'pass' as const, reason: '' },
+    grounding: { verdict: 'pass' as const, reason: '' },
+    rendering: { verdict: 'pass' as const, reason: '' },
+  },
+  decision: 'promote' as const,
+  confidence: 1,
+  judged: true,
+})
+
+
 // M4 note: the engine fixture concept must have NO curated asset, or the
 // resolver never reaches the engine. It was phys.therm.calorimetry until the
 // M4 Physics pilot authored a real figure for that concept; it is now
@@ -254,7 +270,7 @@ describe('nothing else changes', () => {
   it('continuity, excursion and lesson-change behaviour are untouched', async () => {
     on(); allow(CALORIMETRY)
     const p = (s: unknown) => (s ? parseVisualSession(JSON.parse(JSON.stringify(s))) : null)
-    const deps = { cacheClient: coldCache() as never, generate: async () => calorimetryScene() }
+    const deps = { cacheClient: coldCache() as never, critic: passingCritic, generate: async () => calorimetryScene() }
 
     const open = await resolveVisualForTurn(
       { message: 'Show projectile motion.', lessonConceptId: DIM, subject: 'physics', learnerRequest: 'diagram' }, deps)
@@ -283,7 +299,7 @@ describe('nothing else changes', () => {
     on(); allow(CALORIMETRY)
     const good = await resolveVisualForTurn(
       { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
-      { cacheClient: coldCache() as never, generate: async () => calorimetryScene() })
+      { cacheClient: coldCache() as never, critic: passingCritic, generate: async () => calorimetryScene() })
     expect(good.source).toBe('generated')
     expect(good.payload).not.toBeNull()
 
@@ -297,7 +313,7 @@ describe('nothing else changes', () => {
     }
     const bad = await resolveVisualForTurn(
       { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
-      { cacheClient: coldCache() as never, generate: async () => drift })
+      { cacheClient: coldCache() as never, critic: passingCritic, generate: async () => drift })
     expect(bad.payload).toBeNull()
     expect(bad.provenance).toBe('no-figure:engine-not-anchored-to-concept')
   })

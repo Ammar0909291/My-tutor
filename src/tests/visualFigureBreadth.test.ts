@@ -6,6 +6,22 @@ import {
 import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
 import { SUPPORTED_VISUAL_TYPES } from '@/lib/visuals/visualSpec'
 
+// The critic is a separate gate with its own tests; these are about the
+// payload path, so they supply a passing judge rather than a live model.
+const passingCritic = async () => ({
+  dimensions: {
+    relevance: { verdict: 'pass' as const, reason: '' },
+    correctness: { verdict: 'pass' as const, reason: '' },
+    explanatoryValue: { verdict: 'pass' as const, reason: '' },
+    grounding: { verdict: 'pass' as const, reason: '' },
+    rendering: { verdict: 'pass' as const, reason: '' },
+  },
+  decision: 'promote' as const,
+  confidence: 1,
+  judged: true,
+})
+
+
 /**
  * NOT EVERY CONCEPT IS A 3D SCENE.
  *
@@ -136,6 +152,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         enabled: () => true,
         policy: 'auto',
         cacheClient: emptyCache(),
+        critic: passingCritic,
         generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
       },
     )
@@ -151,6 +168,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         enabled: () => true,
         policy: 'reviewed',
         cacheClient: emptyCache(),
+        critic: passingCritic,
         generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
       },
     )
@@ -165,6 +183,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         enabled: () => true,
         policy: 'auto',
         cacheClient: emptyCache(),
+        critic: passingCritic,
         generate: async () => ({ type: 'sankey', nodes: [] }),
       },
     )
@@ -192,6 +211,7 @@ describe('the same guarantees as the scene path', () => {
   it('a slow provider yields budget-exceeded, not a hanging turn', async () => {
     const r = await generateConceptFigure(ctx, {
       enabled: () => true, policy: 'auto', budgetMs: 20, cacheClient: emptyCache(),
+      critic: passingCritic,
       generate: () => new Promise((resolve) => setTimeout(() => resolve({ type: 'graph', equation: 'x' }), 300)),
     })
     expect(r.ok).toBe(false)
@@ -203,6 +223,7 @@ describe('the same guarantees as the scene path', () => {
     await generateConceptFigure(ctx, {
       enabled: () => true, policy: 'reviewed', cacheClient: emptyCache(),
       outcomeSink: { record: async (o) => { seen.push(o) } },
+      critic: passingCritic,
       generate: async () => ({ type: 'sankey' }),
     })
     expect(seen).toHaveLength(1)
@@ -238,6 +259,7 @@ describe('declining is an answer', () => {
         enabled: () => true,
         policy: 'auto',
         cacheClient: emptyCache(),
+        critic: passingCritic,
         generate: async () => ({ type: 'none' }),
       },
     )

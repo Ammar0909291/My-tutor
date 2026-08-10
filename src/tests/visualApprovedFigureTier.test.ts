@@ -2,6 +2,22 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
 import type { GeneratedFigure } from '@/lib/teaching/visual/visualEngine'
 
+// The critic is a separate gate with its own tests; these are about the
+// payload path, so they supply a passing judge rather than a live model.
+const passingCritic = async () => ({
+  dimensions: {
+    relevance: { verdict: 'pass' as const, reason: '' },
+    correctness: { verdict: 'pass' as const, reason: '' },
+    explanatoryValue: { verdict: 'pass' as const, reason: '' },
+    grounding: { verdict: 'pass' as const, reason: '' },
+    rendering: { verdict: 'pass' as const, reason: '' },
+  },
+  decision: 'promote' as const,
+  confidence: 1,
+  judged: true,
+})
+
+
 /**
  * REVIEW HAS TO REACH A LEARNER, OR IT IS NOT REVIEW.
  *
@@ -56,6 +72,7 @@ describe('the approved tier', () => {
         enabled: () => true,
         policy: 'reviewed',
         findApprovedFigure: async () => approved,
+        critic: passingCritic,
         generate: async () => { throw new Error('generation must not be reached') },
       },
     )
@@ -71,6 +88,7 @@ describe('the approved tier', () => {
         enabled: () => true,
         policy: 'auto',
         findApprovedFigure: async () => approved,
+        critic: passingCritic,
         generate: async () => { called = true; return null },
       },
     )
@@ -102,6 +120,7 @@ describe('the approved tier', () => {
           // A perfectly valid figure that is not this concept's.
           spec: { type: 'process_flow', title: 'Photosynthesis', steps: [] } as never,
         }),
+        critic: passingCritic,
         generate: async () => null,
       },
     )
@@ -122,6 +141,7 @@ describe('the approved tier', () => {
             create: async () => undefined,
           },
         },
+        critic: passingCritic,
         generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
       },
     )
@@ -145,6 +165,7 @@ describe('the approved tier', () => {
         enabled: () => true,
         policy: 'reviewed',
         findApprovedFigure: async () => { throw new Error('database unreachable') },
+        critic: passingCritic,
         generate: async () => null,
       },
     ).catch(() => 'threw' as const)
