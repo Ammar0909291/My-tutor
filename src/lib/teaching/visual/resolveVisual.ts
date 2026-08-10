@@ -45,7 +45,7 @@ import { criticiseFigure, type CriticReport } from './figureCritic'
 import { kgTopicIdentity, runtimeTopicIdentity, isRuntimeTopicId, type TopicIdentity } from './topicIdentity'
 import { requestedTopicIdentity } from './requestedTopic'
 import { checkBudgetsLive, type BudgetReader } from './generationBudget'
-import { readVerdict, writeVerdict } from './verdictCache'
+import { readVerdict, writeVerdict, readDecline, writeDecline } from './verdictCache'
 import { getCachedVisualization } from '@/lib/teaching/visuals/visualizationCache'
 import { startDeadline, NO_DEADLINE, type Deadline } from './turnDeadline'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
@@ -722,6 +722,16 @@ export async function resolveVisualForTurn(
 
   if (deadline.expired()) return { ...decision, provenance: 'no-figure:deadline-before-generation' }
 
+  // ALREADY ASKED, ALREADY ANSWERED.
+  //
+  // A topic the generator deliberately declined does not become drawable on the
+  // next turn. Without this, every declining topic cost a provider call per
+  // learner per turn forever — and declines are the COMMON case, not the rare
+  // one (26 of 40 on the last measured cohort). Checked before generation for
+  // the same reason the figure cache is: the cheapest call is the one not made.
+  const declined = await readDecline(ctx, deps.cacheClient)
+  if (declined) return { ...decision, provenance: 'no-figure:declined-cached' }
+
   const result = await generateConceptFigure(ctx, {
     purpose: decision.purpose, ...deps, budgetMs: deadline.remaining(),
   })
@@ -740,6 +750,10 @@ export async function resolveVisualForTurn(
   decision = { ...decision, generationSpent: spent }
 
   if (!result.ok) {
+    // Remember a DELIBERATE decline so the next learner does not pay to be told
+    // the same thing. Only 'no-suitable-form' is stored — transient and
+    // variance-prone rejections are deliberately not; see verdictCache.
+    void writeDecline(ctx, result.reason, deps.cacheClient)
     // 3. NONE — carry the reason so a rejection is auditable rather than silent.
     return { ...decision, provenance: `no-figure:engine-${result.reason}` }
   }

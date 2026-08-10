@@ -121,3 +121,86 @@ export async function writeVerdict(
     await saveVisualization(verdictKey(ctx.conceptId), JSON.stringify(verdict), client)
   } catch { /* best-effort by design */ }
 }
+
+// ── THE DECLINE CACHE ────────────────────────────────────────────────────────
+//
+// THE DEFECT THIS CLOSES, measured by the six-category canary: a topic the
+// generator honestly declines cost ONE PROVIDER CALL ON EVERY TURN, forever.
+// Turn 1, turn 2, turn 3 — each paid again, because only successes were
+// cached. Across thousands of topics that is not a rounding error, it is the
+// DOMINANT cost: on the 40-concept cohort 26 of 40 declined, so the common
+// path was the uncached one, and it is paid per learner per turn without limit.
+//
+// A decline is a fact about the topic, not about the moment. "There is no
+// honest figure of Abstraction" does not become false on the next turn, so
+// remembering it is not a shortcut — re-asking is the waste.
+//
+// ONLY `no-suitable-form` IS CACHED, and that restriction is the whole safety
+// of this. It is the model's deliberate, considered answer to a question it was
+// explicitly offered a way to decline. Every other rejection is either
+// transient (generation-failed, budget-exceeded, a deadline) or VARIANT:
+// `not-anchored-to-concept` was measured producing different verdicts for the
+// same topic on consecutive runs, so caching it would freeze one unlucky roll
+// into a permanent refusal.
+
+const DECLINE_PREFIX = 'scene:v1:decline:'
+
+/**
+ * Shorter than a verdict's. A decline says "no figure exists for this text",
+ * which is a claim about today's generator as much as about the topic — so it
+ * is revisited sooner than a pass, whose figure already exists and is fixed.
+ */
+export const DECLINE_TTL_MS = 30 * 24 * 60 * 60 * 1000
+
+export interface CachedDecline {
+  reason: 'no-suitable-form'
+  grounding: string
+  declinedAt: number
+}
+
+export function declineKey(conceptId: string): string {
+  return `${DECLINE_PREFIX}${conceptId}`
+}
+
+/**
+ * Whether this topic was already, deliberately declined against this same text.
+ *
+ * Null — meaning "try again" — for changed grounding, an expired record, or an
+ * unreadable cache. Every one resolves toward doing the work rather than
+ * assuming the old answer still holds.
+ */
+export async function readDecline(
+  ctx: ArchetypeContext,
+  client?: VisualizationCacheClient,
+  now: number = Date.now(),
+): Promise<CachedDecline | null> {
+  try {
+    const row = await getCachedVisualization(declineKey(ctx.conceptId), client)
+    if (!row?.code) return null
+    const parsed = JSON.parse(row.code) as CachedDecline
+    if (parsed?.reason !== 'no-suitable-form') return null
+    if (parsed.grounding !== groundingHash(ctx)) return null
+    if (now - parsed.declinedAt > DECLINE_TTL_MS) return null
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+/** Remember a deliberate decline. Best-effort, exactly like a verdict. */
+export async function writeDecline(
+  ctx: ArchetypeContext,
+  reason: string,
+  client?: VisualizationCacheClient,
+  now: number = Date.now(),
+): Promise<void> {
+  if (reason !== 'no-suitable-form') return
+  const record: CachedDecline = {
+    reason: 'no-suitable-form',
+    grounding: groundingHash(ctx),
+    declinedAt: now,
+  }
+  try {
+    await saveVisualization(declineKey(ctx.conceptId), JSON.stringify(record), client)
+  } catch { /* best-effort by design */ }
+}
