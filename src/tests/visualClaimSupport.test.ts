@@ -43,18 +43,27 @@ describe('the measured failure', () => {
   })
 
   it('MUST NOT PASS — the title compares two lines the figure does not draw', async () => {
-    // Even with a judge that approves everything, the deterministic layer
-    // refuses: a graph draws one curve, so a comparison is not on screen.
-    const r = await criticiseFigure(THE_FAILURE, ctx, { generate: judgeAllPass })
-    expect(r.decision).not.toBe('promote')
+    // Caught by the JUDGE, not mechanically: on a graph "A vs B" is usually
+    // the axis convention, so only a reader who knows what the words MEAN can
+    // tell this from "concentration vs time". Measured: the judge does, 4/4.
+    const r = await criticiseFigure(THE_FAILURE, ctx, {
+      generate: async () => ({
+        relevance: { verdict: 'pass', reason: '' },
+        correctness: { verdict: 'pass', reason: '' },
+        explanatoryValue: { verdict: 'pass', reason: '' },
+        claimSupport: { verdict: 'fail', reason: 'no secant or tangent geometry is in the data' },
+      }),
+    })
+    expect(r.decision).toBe('reject')
     expect(r.dimensions.claimSupport.verdict).toBe('fail')
   })
 
-  it('is caught for FREE — the judge is never even called', async () => {
+  it('a NON-graph comparison with nothing to compare is caught for FREE', async () => {
     let called = false
-    const r = await criticiseFigure(THE_FAILURE, ctx, {
-      generate: async () => { called = true; return judgeAllPass() },
-    })
+    const r = await criticiseFigure(
+      spec({ type: 'number_line', start: 0, end: 10, title: 'Rational vs Irrational' }), ctx,
+      { generate: async () => { called = true; return judgeAllPass() } },
+    )
     expect(r.decision).toBe('reject')
     expect(called).toBe(false)
   })
@@ -98,7 +107,26 @@ describe('the deterministic rule is generic, not topic-shaped', () => {
       'Speed vs. Velocity',
     ]) {
       expect(claimsComparison(title), title).toBe(true)
-      expect(checkClaimSupport(spec({ type: 'graph', equation: 'x', title })).verdict, title).toBe('fail')
+      // A number line has no axes to name, so the claim is unambiguous there.
+      expect(checkClaimSupport(
+        spec({ type: 'number_line', start: 0, end: 5, title }),
+      ).verdict, title).toBe('fail')
+    }
+  })
+
+  it('A GRAPH IS EXEMPT — "Y vs X" is the axis convention, not two curves', () => {
+    // Measured on seed 77321: the mechanical rule rejected
+    // "Concentration vs. Time (Reaction Rate)", which is a correct figure.
+    // The judge separates axis naming from a real two-object comparison
+    // (4 of 4 on these cases); the mechanical layer cannot, so it stays out.
+    for (const title of [
+      'Concentration vs. Time (Reaction Rate)',
+      'Velocity versus Time',
+      'Numerical Differentiation: Tangent vs Secant Approximations',
+    ]) {
+      expect(checkClaimSupport(
+        spec({ type: 'graph', equation: 'x^2', title }),
+      ).verdict, title).toBe('pass')
     }
   })
 

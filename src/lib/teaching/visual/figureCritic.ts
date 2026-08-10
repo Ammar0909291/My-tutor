@@ -275,7 +275,25 @@ export function checkClaimSupport(
   const title = figureText(figure)[0] ?? ''
   const drawn = drawnElementCount(figure)
 
-  if (claimsComparison(title) && drawn < 2) {
+  /**
+   * A GRAPH IS EXEMPT, and the exemption is the measurement talking.
+   *
+   * On a graph "A vs B" is overwhelmingly the AXIS convention — "concentration
+   * versus time" names the two axes, not two curves — so the mechanical rule
+   * cannot tell that from "tangent vs secant", which really does promise two
+   * objects. Measured on the seed-77321 cohort it rejected
+   * "Concentration vs. Time (Reaction Rate)", a correct figure: a false
+   * rejection, which costs coverage and teaches nothing.
+   *
+   * The judge separates the two reliably — measured 4 of 4 on exactly these
+   * cases, including both directions — so a graph's comparison claim is left
+   * to it. This layer keeps only what a payload genuinely settles: on every
+   * other form there are no axes to name, so a comparison title with fewer
+   * than two drawn elements is unambiguously unsupported.
+   */
+  const isGraph = figure.kind === 'spec' && (figure.spec as { type?: string }).type === 'graph'
+
+  if (!isGraph && claimsComparison(title) && drawn < 2) {
     return {
       verdict: 'fail',
       reason: `the title compares two things but the figure draws ${drawn} — the comparison is not on screen`,
@@ -341,6 +359,15 @@ short sentence of reason.
                      subject is not enough — they must be true about THIS
                      DIAGRAM. Judge only what the data shows; do not imagine a
                      renderer adding anything the data does not specify.
+                     BUT do not fail a figure for lacking something this data
+                     FORMAT cannot express. A graph carries one equation and no
+                     axis labels or units — the renderer draws and scales the
+                     axes — so "concentration vs time" plotted as a function of
+                     a generic variable is SUPPORTED, and naming the axes is the
+                     ordinary convention for a graph's title rather than a claim
+                     that two curves are drawn. Fail only when a NAMED OBJECT,
+                     curve, region or annotation is genuinely absent from the
+                     data.
 
 FAILING IS NORMAL AND EXPECTED. Most generated diagrams are wrong in at least
 one of these ways, and saying so is the useful answer. Do not look for a
