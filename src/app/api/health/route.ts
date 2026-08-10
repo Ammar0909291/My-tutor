@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db/prisma'
 import { redis } from '@/lib/redis/client'
 import { missingRequiredEnv } from '@/lib/env'
 import { snapshotProviderMetrics } from '@/lib/ai/providers/metrics'
+import { generationPolicySummary } from '@/lib/teaching/visual/generationPolicy'
 
 export const dynamic = 'force-dynamic'
 
@@ -47,8 +48,31 @@ export async function GET() {
   const missing = missingRequiredEnv()
   const ai = snapshotProviderMetrics()
 
+  /**
+   * What the visualization engine is actually permitted to do IN THIS
+   * DEPLOYMENT.
+   *
+   * Added because there was no way to answer it from outside. Whether
+   * generation is live depends on environment variables read inside the
+   * running lambda, and the alternative to reporting it is inferring it from
+   * whether figures happen to appear — which cannot distinguish "disabled"
+   * from "enabled but nothing eligible yet". Both are silent, and they call
+   * for opposite responses.
+   *
+   * `scope: 'rule-based'` is the load-bearing value: it says eligibility is
+   * decided by grounding and budget for every topic, rather than by an
+   * enumeration. A non-empty `narrowedTo` would mean a hidden allowlist is
+   * still restricting the engine.
+   *
+   * Reports PRESENCE only, never a key or any part of one.
+   */
+  const visual = {
+    ...generationPolicySummary(),
+    providerKey: Boolean(process.env.GEMINI_API_KEY),
+  }
+
   return NextResponse.json(
-    { status: db ? 'ok' : 'degraded', db, redis: redisStatus, ai, config: { missing } },
+    { status: db ? 'ok' : 'degraded', db, redis: redisStatus, ai, visual, config: { missing } },
     { status: db ? 200 : 503 },
   )
 }
