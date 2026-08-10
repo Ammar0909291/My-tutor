@@ -1848,6 +1848,48 @@
   `npx tsx scripts/brain/seed-knowledge-assets.ts --draft` run from an environment with real
   `DATABASE_URL` access (idempotent, completes everything remaining in one run).
 
+## Visualization Engine — runtime readiness (2026-08-10)
+- **Outcome audit trail is live.** New additive table `visual_generation_outcome` (Prisma model
+  `VisualGenerationOutcome`, migration `20260810120000_visual_generation_outcome`, applied to
+  production via Supabase MCP and registered in `_prisma_migrations` so `prisma migrate deploy`
+  stays a no-op; RLS enabled, matching the standing all-public-tables posture). Every generation
+  attempt is recorded with the artefact — the accepted figure, or the raw model output that was
+  rejected. `prismaGenerationOutcomeSink` in `src/lib/teaching/visual/generationOutcomeStore.ts`
+  is wired into `route.ts`; accepted figures also write an AssetIdentity(VISUAL) + VisualAsset
+  pair, always DRAFT, deduped by content hash. No code path promotes to ACTIVE.
+- **The review loop now has both ends.** `/api/admin/knowledge-assets` gained a `visual` family
+  (it knew only explanation/probe), and `resolveVisualForTurn` gained an APPROVED tier between
+  CURATED and GENERATED that serves ACTIVE visual assets. The approved figure is RE-VALIDATED via
+  `validateGeneratedFigure`, never trusted on approval alone — writing the test found an approved
+  photosynthesis figure being admitted for a linear function, because admission compares the
+  identity the resolver itself supplies.
+- **First real cohort, 17 provider calls total (gemini-3.5-flash-lite).** 8 concepts, one per
+  subject family: all 8 accepted, and reading them found 3 confidently wrong in the same way — a
+  LIST or CLASSIFICATION drawn as an ordered `process_flow` (the seven SI base units; matter's
+  taxonomy; the characteristics of life). Cause: the closed set had no exit, so a concept that is
+  none of the five forms gets bent into the nearest, and `process_flow` is bendiest (6 of 8 chose
+  it). Fix: a sixth answer, `{"type":"none"}` → rejection reason `no-suitable-form`, stated in the
+  prompt as a CORRECT and expected outcome, plus an explicit "a list is not a process" rule.
+  Re-measured: all 3 decline, the kinetic-energy control is unchanged. **Honest trade-off:** the
+  rule also now declines 3 concepts that arguably ARE ordered (mathematical thinking; phonemic
+  awareness; data-types reassignment) — acceptance went 8/8 → 2/5. Erring toward decline matches
+  this engine's stance, but it is a real swing and was NOT tuned away on 8 data points.
+- **Production state:** `visualization_cache` 2 warm rows, `asset_identity` 2 VISUAL DRAFTs
+  awaiting review (math.func.linear-function, phys.mech.kinetic-energy — both graphs),
+  `visual_generation_outcome` 8 rows. 1,279 of 1,775 concepts (72%) are uncurated, i.e. the real
+  surface generation serves — domain-default registry bindings cover far more concepts than the
+  "26.7% get a figure" figure implied, so generation never fires for them.
+- **STILL BLOCKED — the one thing that keeps this OFF for learners:** Vercel environment
+  variables cannot be set from this session (the Vercel MCP surface exposes projects/deployments/
+  logs/docs but no env-var tool, and there is no `VERCEL_TOKEN` in the sandbox). Generation stays
+  disabled in production until a human sets `ENABLE_AI_SCENE_GENERATION=true` and
+  `VISUAL_AI_SCENE_ALLOWLIST` (leave `VISUAL_AI_SCENE_AUTO` EMPTY, so policy resolves to
+  `reviewed` and nothing reaches a learner unreviewed).
+- **Unrelated production finding, NOT changed:** Supabase security advisor shows exactly one
+  ERROR — `public.lesson_attempts` has RLS disabled, a regression from the documented
+  0-ERROR baseline. Left alone deliberately: unrelated to this work and it alters shared
+  production security config on an unfamiliar table. Needs an owner decision.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
