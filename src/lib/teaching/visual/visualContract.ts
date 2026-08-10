@@ -31,7 +31,15 @@ const PURPOSE_INSTRUCTION: Record<EducationalPurpose, string> = {
  * Returns '' when there is nothing to say (no decision) so callers can append
  * unconditionally.
  */
-export function buildVisualContractBlock(decision: VisualDecision | null): string {
+export function buildVisualContractBlock(
+  decision: VisualDecision | null,
+  /**
+   * Whether the learner ASKED to be shown something on this turn. Optional, so
+   * every existing caller and test is unchanged; supplied by the chat route,
+   * which is the only place that knows.
+   */
+  opts: { learnerAskedForAVisual?: boolean } = {},
+): string {
   if (!decision) return ''
 
   // ── NO FIGURE ─────────────────────────────────────────────────────────────
@@ -55,8 +63,29 @@ export function buildVisualContractBlock(decision: VisualDecision | null): strin
       'they were visible. (3) Do NOT promise a diagram you cannot attach. ' +
       '(4) You MAY use ordinary spatial language to build a mental picture ' +
       '("imagine a ball thrown at an angle") — that is describing an idea, not ' +
-      'claiming a figure. (5) Do not apologise for the absence of a diagram; ' +
-      'a clear explanation is the complete answer.'
+      'claiming a figure. ' +
+      // RULE 5 DEPENDS ON WHETHER THEY ASKED, and until now it did not.
+      //
+      // "Do not apologise for the absence of a diagram" is right on an
+      // ordinary turn and wrong the moment a learner has asked for one.
+      // Measured in a real six-turn session: the student asked to be shown a
+      // picture twice and received another analogy each time, with no
+      // acknowledgement that they had asked for anything. From their side the
+      // request simply vanished, which reads as not being listened to.
+      //
+      // Answering it costs one clause and claims nothing false: the figure is
+      // still absent, the explanation still carries the teaching, and the
+      // tutor is forbidden — below — from promising one later.
+      (opts.learnerAskedForAVisual
+        ? '(5) THE LEARNER ASKED TO BE SHOWN SOMETHING AND NO FIGURE IS ' +
+          'AVAILABLE THIS TURN. Acknowledge that in ONE short clause before ' +
+          'you continue — plainly, without apologising at length and without ' +
+          'blaming a system they cannot see ("I can\'t show you a picture of ' +
+          'this one, so let me describe it…"). Then give the clearest ' +
+          'word-picture you can. Do NOT ignore the request, and do NOT ' +
+          'promise a diagram later — you cannot attach one.'
+        : '(5) Do not apologise for the absence of a diagram; ' +
+          'a clear explanation is the complete answer.')
     )
   }
 

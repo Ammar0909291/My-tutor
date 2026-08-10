@@ -2425,7 +2425,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               visualDecisionHoisted = decision
               // The contract tells the model what is ALREADY on screen, so it
               // teaches to that figure instead of deciding whether one exists.
-              systemPrompt += buildVisualContractBlock(decision)
+              // The learner asked to be shown something. When no figure is
+              // available the contract now says so out loud instead of letting
+              // the turn read as though nothing was asked.
+              systemPrompt += buildVisualContractBlock(decision, {
+                learnerAskedForAVisual: learnerRequestHoisted === 'diagram',
+              })
               if (decision.payload?.renderer === 'card') {
                 // Keep the legacy hoisted vars coherent for the RRM log and the
                 // canonical-ownership clamp further down.
@@ -2459,7 +2464,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   session: null,
                 }
                 visualDecisionHoisted = decision
-                systemPrompt += buildVisualContractBlock(decision)
+                // A resolver crash is still a turn where the learner asked to
+                // be shown something. They get the same acknowledgement they
+                // would get from an honest decline — the failure is ours, and
+                // silence would read to them exactly like being ignored.
+                systemPrompt += buildVisualContractBlock(decision, {
+                  learnerAskedForAVisual: learnerRequestHoisted === 'diagram',
+                })
               } catch {
                 // Even the no-figure path failed. Leave the decision null; the
                 // unconditional clamp below still clears every visual channel,
