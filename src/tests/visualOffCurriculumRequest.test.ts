@@ -77,6 +77,14 @@ describe('Off-curriculum request — the rule fires only on a named topic', () =
   const IN_LESSON_QUESTIONS: [string, string, string][] = [
     ['what is energy exactly', 'phys.meas.units', 'physics'],
     ['what is an atom made of', 'chem.found.matter', 'chemistry'],
+    // The OPENING TURN OF EVERY LESSON, measured in the running app: the rule
+    // scanned the whole sentence, so a learner describing THEMSELVES ("I am a
+    // complete beginner") was read as naming a topic — {complete, beginner,
+    // topic}, none of them physics — and the lesson's own concept was
+    // suppressed before any tier ran.
+    ['I am a complete beginner. Please explain this topic to me.', 'phys.meas.units', 'physics'],
+    ['I am a complete beginner. Please explain this topic to me.', 'chem.found.matter', 'chemistry'],
+    ['can you teach me this please', 'phys.meas.units', 'physics'],
   ]
 
   for (const [message, lesson, subject] of IN_LESSON_QUESTIONS) {

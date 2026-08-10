@@ -18,6 +18,7 @@
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/requestedConcept'
 import { isExplicitTopicRequest } from './session'
+import { extractRequestedTopic } from './requestedTopic'
 import { contentWords } from './visualEngine'
 import type { ArchetypeContext } from './archetypes'
 
@@ -126,15 +127,27 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
   if (target.origin !== 'lesson-concept') return false
   if (!isExplicitTopicRequest(message)) return false
 
-  const named = namedTopicWords(message)
-  // POSITIVE EVIDENCE REQUIRED. Silence is not a mismatch: "explain this
-  // again", "explain it more simply", "show me a diagram" name no topic, and
-  // suppressing those would take a figure away from the very turns that most
-  // need one. Two surviving words is the bar because one is routinely an
-  // adverb the discourse list has not seen — measured on real phrasings,
-  // "simply", "properly", "slowly" all survive alone, and none of them is a
-  // topic. Two unrelated content words in a row is a noun phrase.
-  if (named.length < MIN_NAMED_TOPIC_WORDS) return false
+  // THE TOPIC PHRASE, not the whole sentence.
+  //
+  // This used to scan every content word in the message, which meant a learner
+  // who says anything about THEMSELVES was read as naming a topic. Measured in
+  // the real app, on the opening turn of every lesson:
+  //
+  //     "I am a complete beginner. Please explain this topic to me."
+  //        -> named {complete, beginner, topic} -> none is physics vocabulary
+  //        -> suppressed, concept null, no figure possible
+  //
+  // `extractRequestedTopic` already answers "what did they name?" for the
+  // grounding path — it takes what follows the request phrase and stops at the
+  // end of the clause. Using it here makes ONE definition of a named topic
+  // serve both, and deletes the second word list this module was keeping.
+  const requested = extractRequestedTopic(message)
+  if (!requested) return false
+  const named = [...requested.words]
+  // POSITIVE EVIDENCE REQUIRED, and `extractRequestedTopic` already applies
+  // it: a phrase with fewer than two content words is not a name, so it
+  // returns null above and nothing is suppressed. "explain this again",
+  // "explain it more simply" and "show me a diagram" all land there.
 
   const drawn = contentWords(`${target.title} ${target.description ?? ''}`, true)
   for (const word of named) if (drawn.has(word)) return false
@@ -193,38 +206,4 @@ function subjectKnowsAnyOf(words: readonly string[], conceptId: string): boolean
 /** Test seam — the vocabularies are derived from the KG and memoized with it. */
 export function __resetSubjectVocabularies(): void {
   subjectVocabularies.clear()
-}
-
-/** How many topic-shaped words a request must carry before it names a topic. */
-const MIN_NAMED_TOPIC_WORDS = 2
-
-/**
- * ENGLISH DISCOURSE WORDS — words that are not a topic in any subject.
- *
- * This is deliberately a list about ENGLISH, not about subjects. It contains no
- * concept, no domain and no topic, so it does not grow when the curriculum
- * does, and it cannot become the keyword table that decides WHAT to draw — the
- * archetype-engine failure this codebase already made once. It only helps
- * answer whether the learner named anything at all.
- *
- * The engine's own stopwords cover generic FIGURE vocabulary; these cover
- * generic REQUEST vocabulary, which is a different set: a learner says "explain
- * it again more simply", and none of those five words is a subject.
- */
-const DISCOURSE_WORDS = new Set([
-  'explain', 'describe', 'tell', 'teach', 'demonstrate', 'illustrate', 'draw',
-  'again', 'please', 'more', 'simply', 'simpler', 'simple', 'easier', 'easy',
-  'slowly', 'properly', 'clearly', 'better', 'differently', 'another', 'other',
-  'about', 'like', 'want', 'need', 'know', 'think', 'mean', 'means', 'meaning',
-  'really', 'actually', 'just', 'still', 'also', 'thing', 'things', 'stuff',
-  'part', 'parts', 'bit', 'little', 'much', 'many', 'some', 'any', 'these',
-  'those', 'there', 'here', 'again', 'okay', 'thanks', 'thank', 'sorry',
-  'help', 'give', 'make', 'take', 'come', 'goes', 'went', 'does', 'done',
-  'cannot', 'dont', 'doesnt', 'didnt', 'wont', 'lets', 'would', 'could',
-  'should', 'might', 'will', 'shall', 'been', 'being', 'said', 'says',
-])
-
-/** The topic-shaped words in a request: content words that are not discourse. */
-function namedTopicWords(message: string): string[] {
-  return [...contentWords(message)].filter((w) => !DISCOURSE_WORDS.has(w))
 }
