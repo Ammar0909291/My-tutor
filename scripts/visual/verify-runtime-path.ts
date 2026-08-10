@@ -75,6 +75,27 @@ const CASES = [
     message: 'show me a diagram',
     runtimeTopic: undefined,
   },
+  {
+    // THE CASE THE ENGINE COULD NOT DO AT ALL. The learner is sitting in a
+    // PHYSICS lesson and asks about something the curriculum has never heard
+    // of, describing it in their own words. The figure must be of what they
+    // asked about — never of the physics lesson they happen to be in — and the
+    // only grounding is their own sentence.
+    name: 'REQUESTED OFF-CURRICULUM TOPIC (learner-grounded, inside a physics lesson)',
+    lessonConceptId: 'phys.meas.units',
+    message:
+      'Explain Kubernetes pod scheduling — the scheduler filters out nodes that ' +
+      'cannot run the pod, then scores the remaining ones and binds the pod to the best',
+    runtimeTopic: undefined,
+  },
+  {
+    // The same request WITHOUT the learner saying what they mean. There is
+    // nothing to draw from, so the correct answer is no figure and no call.
+    name: 'REQUESTED OFF-CURRICULUM TOPIC (ungrounded — must decline, must not call)',
+    lessonConceptId: 'phys.meas.units',
+    message: 'Explain Kubernetes pod scheduling',
+    runtimeTopic: undefined,
+  },
 ]
 
 async function run() {

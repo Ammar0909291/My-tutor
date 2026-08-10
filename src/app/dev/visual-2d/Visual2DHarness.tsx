@@ -38,6 +38,33 @@ const SPECS: { name: string; spec: VisualSpec }[] = [
   { name: 'spec:number_line', spec: { type: 'number_line', start: -5, end: 5, highlight: [-3, 0, 4], title: 'Integers around zero' } },
   { name: 'spec:geometry:triangle', spec: { type: 'geometry', shape: 'triangle', base: 8, height: 5 } },
   { name: 'spec:geometry:circle', spec: { type: 'geometry', shape: 'circle', radius: 4 } },
+  // ── REAL GENERATED OUTPUT ─────────────────────────────────────────────────
+  // Not invented fixtures: these two are the verbatim payloads the engine
+  // produced through gemini-3.5-flash-lite and served after the critic passed
+  // them — a curriculum concept and a topic the curriculum has never heard of.
+  // The authored corpus was measured in a browser; the figures a learner
+  // actually gets from runtime generation had never been.
+  {
+    name: 'generated:kg:kinetic-energy',
+    spec: {
+      type: 'graph',
+      equation: '0.5 * x^2',
+      title: 'Kinetic Energy as a Function of Velocity (m = 1 kg)',
+    },
+  },
+  {
+    name: 'generated:runtime-topic:kubernetes',
+    spec: {
+      type: 'process_flow',
+      title: 'Kubernetes Pod Scheduling Lifecycle',
+      steps: [
+        { title: 'Pending Pod Creation' },
+        { title: 'Filtering Nodes (Predicates)' },
+        { title: 'Scoring Feasible Nodes (Priorities)' },
+        { title: 'Binding Pod to Node' },
+      ],
+    },
+  },
   {
     name: 'spec:process_flow',
     spec: {

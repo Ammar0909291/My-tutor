@@ -1980,6 +1980,40 @@
   no production traffic to inspect. Generation also remains disabled in production until a human
   sets the env vars (unchanged from the previous session's note below).
 
+## Visualization Engine — generic coverage closed (2026-08-10, final pass)
+- **A topic the curriculum has never heard of can now be drawn.** Two things are needed and the
+  KG was quietly supplying both: a NAME (identity/cache/provenance) and TEXT (to draw from and be
+  judged against). `requestedTopic.ts` obtains both for an off-KG topic — the name from the
+  request itself (`extractRequestedTopic`, stops at the end of the clause, looks nothing up), the
+  text from the LEARNER'S OWN WORDS only (this turn + their earlier messages about the same
+  topic). **Never the model's**: judging generated output against generated prose asks a model
+  whether it agrees with itself. Enforced structurally — a test fails if the module ever reads
+  assistant text.
+- **A request is not a description.** "Explain Kubernetes pod scheduling" is 33 chars, below the
+  grounding floor → `no-figure:requested-topic-not-grounded`, 0 provider calls. Padding with the
+  title does not help: substance counts content words that are NOT the topic's own name.
+  Grounding does NOT certify the learner is right — the critic's `correctness` judges the figure
+  against the world, so a faithful drawing of a misconception is rejected there.
+- **Generated figures now survive a refresh.** A KG figure restores by RE-DERIVING (deterministic).
+  A runtime topic has nothing to derive from and its id is a hash of its title — so every
+  generated figure returned null from restore and vanished on reload. The topic's words now ride
+  `contextSnapshot.visualSession.topic`, and `restoreRuntimeTopicSession` reads the figure back
+  from the cache it was already written to: **no model call**, re-validated, and gated on the
+  stored PASS (missing/expired/different-figure ⇒ restores nothing). Carrying the words is safe
+  because the id is a hash of them — a hand-edited snapshot cannot attach a description to a
+  cached figure.
+- **VERIFIED, real model, provider calls counted** (`scripts/visual/verify-runtime-path.ts`, now
+  4 cases × 4 turns): KG concept → 2 calls then **0,0,0**, identical figure. Requested off-KG
+  topic inside a PHYSICS lesson → a "Kubernetes Pod Scheduling Lifecycle" process flow (NOT
+  physics), then **0,0,0**. Ungrounded request → **0 calls on every turn**, declines.
+- **Generated figures measured in a browser** (the two real payloads added to `/dev/visual-2d`):
+  0 below the 10px floor, 0 collisions, 0 clipped, 0 hidden — both themes × 390/768/1280.
+- **Scalability proved structurally** (`visualGenericScalability.test.ts`): 1000 unseen topics →
+  1000 distinct stable ids; one topic asked 5 ways → 1 cache row; no engine module branches on a
+  concept id (curated tiers excluded by name); kill switch still stops everything at once.
+- **Production**: latest deployment READY on this work; **Supabase MCP lists 0 projects, so DB
+  integrity is UNVERIFIED this session**; Vercel runtime logs show no traffic to inspect.
+
 - **STILL BLOCKED (generation only, not serving) — the one thing that keeps this OFF for learners:** Vercel environment
   variables cannot be set from this session (the Vercel MCP surface exposes projects/deployments/
   logs/docs but no env-var tool, and there is no `VERCEL_TOKEN` in the sandbox). Generation stays
