@@ -1,52 +1,35 @@
 'use client'
-/**
- * STRESS-COHORT EVIDENCE — the learner's own renderers, payloads produced by
- * the real engine during the seeded 30-topic run (seed 20260810).
- * Dev-only; 404s in production. No rendering code of its own.
- */
+/** SEED 77321 COHORT EVIDENCE — learner renderers, real engine payloads. Dev-only. */
 import dynamic from 'next/dynamic'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
-
-const SceneSpecFigure = dynamic(
-  () => import('@/components/school/visuals/SceneSpecFigure').then((m) => m.SceneSpecFigure),
-  { ssr: false },
-)
-
+const SceneSpecFigure = dynamic(() => import('@/components/school/visuals/SceneSpecFigure').then((m) => m.SceneSpecFigure), { ssr: false })
 function Case({ id, topic, note, children }: { id: string; topic: string; note: string; children: React.ReactNode }) {
-  return (
-    <section data-evidence={id} style={{ marginBottom: 40 }}>
-      <h2 style={{ fontSize: 14, margin: '0 0 2px', color: 'var(--text-primary, #e6edf3)' }}>{topic}</h2>
-      <p style={{ fontSize: 11, margin: '0 0 10px', color: 'var(--text-secondary, #8b949e)' }}>{note}</p>
-      {children}
-    </section>
-  )
+  return (<section data-evidence={id} style={{ marginBottom: 40 }}>
+    <h2 style={{ fontSize: 14, margin: '0 0 2px', color: 'var(--text-primary, #e6edf3)' }}>{topic}</h2>
+    <p style={{ fontSize: 11, margin: '0 0 10px', color: 'var(--text-secondary, #8b949e)' }}>{note}</p>
+    {children}</section>)
 }
 
-const P0 = {"type": "scene", "id": "generalized-coordinates-config-space", "title": "Configuration Space and Generalized Coordinates", "sceneType": "diagram", "teachingGoal": "Demonstrate how a constrained mechanical system is described by a minimal set of independent generalized coordinates.", "cameraDistance": 12, "ariaLabel": "A 3D diagram showing a double pendulum system constrained in a plane, parameterized by generalized coordinates theta 1 and theta 2.", "steps": [{"narration": "Consider a double pendulum moving in a 2D plane, consisting of two point masses connected by rigid rods.", "objects": [{"type": "particle", "id": "origin", "position": [0, 0, 0], "radius": 0.15, "color": "#333333"}, {"type": "label", "id": "origin_label", "position": [0, 0.4, 0], "text": "Pivot (0,0)"}, {"type": "particle", "id": "mass1", "position": [2, -2, 0], "radius": 0.2, "color": "#2563eb"}, {"type": "label", "id": "m1_label", "position": [2.3, -2, 0], "text": "m\u2081"}, {"type": "bond", "id": "rod1", "from": [0, 0, 0], "to": [2, -2, 0], "thickness": 0.05, "color": "#64748b"}, {"type": "particle", "id": "mass2", "position": [4, -3, 0], "radius": 0.2, "color": "#dc2626"}, {"type": "label", "id": "m2_label", "position": [4.3, -3, 0], "text": "m\u2082"}, {"type": "bond", "id": "rod2", "from": [2, -2, 0], "to": [4, -3, 0], "thickness": 0.05, "color": "#64748b"}]}, {"narration": "While the system uses four Cartesian coordinates (x\u2081, y\u2081, x\u2082, y\u2082), the rigid rod constraints reduce the degrees of freedom to just two.", "objects": [{"type": "path", "id": "constraint_note", "points": [[-3, 3, 0], [3, 3, 0]], "color": "#94a3b8"}, {"type": "label", "id": "constraints_text", "position": [0, 3.5, 0], "text": "Holonomic Constraints: x\u2081\u00b2 + y\u2081\u00b2 = L\u2081\u00b2, (x\u2082-x\u2081)\u00b2 + (y\u2082-y\u2081)\u00b2 = L\u2082\u00b2"}]}, {"narration": "We parameterize the configuration space entirely using independent generalized coordinates: angle \u03b8\u2081 and angle \u03b8\u2082.", "objects": [{"type": "vector", "id": "angle1_arc", "from": [0, -1, 0], "to": [1, -1, 0], "color": "#16a34a", "thickness": 0.03}, {"type": "label", "id": "q1_label", "position": [1.2, -0.8, 0], "text": "q\u2081 = \u03b8\u2081"}, {"type": "vector", "id": "angle2_arc", "from": [2, -2.5, 0], "to": [2.8, -2.5, 0], "color": "#16a34a", "thickness": 0.03}, {"type": "label", "id": "q2_label", "position": [3.1, -2.3, 0], "text": "q\u2082 = \u03b8\u2082"}, {"type": "label", "id": "dof_summary", "position": [0, -4.5, 0], "text": "2 Degrees of Freedom = 2 Generalized Coordinates"}]}]} as unknown as SceneSpec
-const P1 = {"type": "process_flow", "title": "Reactivity Trend of Alkali Metals", "steps": [{"title": "Increase in atomic radius down the group"}, {"title": "Decreased nuclear attraction on valence electron"}, {"title": "Greater ease of losing the single s-electron"}, {"title": "Increased vigour of reaction with water and oxygen"}]} as unknown as VisualSpec
-const P2 = {"type": "process_flow", "title": "Constructing the Lebesgue Integral for f \u2265 0", "steps": [{"title": "Deconstruct the range into vertical slices"}, {"title": "Approximate f from below with simple functions \u03c6"}, {"title": "Integrate each simple function \u03c6 by measure of its slices"}, {"title": "Take the supremum over all valid simple functions \u03c6"}]} as unknown as VisualSpec
-const P3 = {"type": "graph", "equation": "x^2", "title": "Numerical Differentiation: Tangent vs Secant Approximations"} as unknown as VisualSpec
+const P0 = {"type": "number_line", "start": 0, "end": 14, "highlight": [7], "title": "The pH Scale (0 to 14, Neutral at 7)"} as unknown as VisualSpec
+const P1 = {"type": "scene", "id": "chem_state_liquids_properties", "title": "Liquid State Properties: Evaporation and Vapour Pressure", "sceneType": "diagram", "teachingGoal": "Demonstrate how energetic molecules escape the liquid surface during evaporation, creating vapour pressure.", "cameraDistance": 12, "ariaLabel": "3D diagram showing liquid molecules in a container, with some escaping as vapour to demonstrate evaporation and vapour pressure.", "steps": [{"narration": "Liquid molecules are held together by intermolecular forces in a constant state of thermal motion.", "objects": [{"type": "particle", "id": "liq_1", "position": [-1, -2, 0], "color": "#3b82f6", "radius": 0.4}, {"type": "particle", "id": "liq_2", "position": [0, -2, 0.5], "color": "#3b82f6", "radius": 0.4}, {"type": "particle", "id": "liq_3", "position": [1, -1.8, -0.5], "color": "#3b82f6", "radius": 0.4}, {"type": "particle", "id": "liq_4", "position": [-0.5, -1, -0.3], "color": "#3b82f6", "radius": 0.4}, {"type": "particle", "id": "liq_5", "position": [0.5, -1.2, 0.2], "color": "#3b82f6", "radius": 0.4}, {"type": "label", "id": "lbl_liquid", "position": [-2.5, -1.5, 0], "text": "Liquid Phase"}]}, {"narration": "Molecules near the surface with higher kinetic energy overcome attractive forces and evaporate.", "objects": [{"type": "vector", "id": "v_escape", "from": [0, -0.8, 0], "to": [0, 1.5, 0], "color": "#10b981", "thickness": 0.08}, {"type": "particle", "id": "vap_1", "position": [0, 1.8, 0], "color": "#60a5fa", "radius": 0.4}, {"type": "label", "id": "lbl_evap", "position": [0.8, 0.5, 0], "text": "Evaporation"}]}, {"narration": "The accumulation of escaped gas particles above the liquid exerts a vapour pressure.", "objects": [{"type": "particle", "id": "vap_2", "position": [-1.5, 2.2, 0.5], "color": "#60a5fa", "radius": 0.4}, {"type": "particle", "id": "vap_3", "position": [1.5, 2.5, -0.5], "color": "#60a5fa", "radius": 0.4}, {"type": "arrow", "id": "p_down_1", "from": [-1.5, 3.5, 0.5], "to": [-1.5, 2.7, 0.5], "color": "#ef4444", "thickness": 0.05}, {"type": "arrow", "id": "p_down_2", "from": [1.5, 3.8, -0.5], "to": [1.5, 2.9, -0.5], "color": "#ef4444", "thickness": 0.05}, {"type": "label", "id": "lbl_vpressure", "position": [0, 3.5, 0], "text": "Vapour Pressure"}]}]} as unknown as SceneSpec
+const P2 = {"type": "process_flow", "title": "Solving Linear Diophantine Equations: ax + by = c", "steps": [{"title": "Check Solvability via GCD"}, {"title": "Find One Particular Solution"}, {"title": "Generate Infinitely Many Solutions"}]} as unknown as VisualSpec
 
 export function Evidence() {
   return (
     <main style={{ maxWidth: 560, margin: '0 auto', padding: 16 }}>
-      <Case id="phys-mech-generalized-coordinates" topic="phys.mech.generalized-coordinates — Generalized Coordinates and Configuration Space"
-        note="physics · runtime-generated · scene/diagram · critic PASS · served">
-        <SceneSpecFigure spec={P0} />
+      <Case id="chem-equil-kw-ph" topic="chem.equil.kw-ph — Water Ionization and pH"
+        note="chemistry · runtime-generated · number_line · critic PASS · served">
+        <VisualRenderer spec={P0} />
       </Case>
-      <Case id="chem-sblock-alkali" topic="chem.sblock.alkali — Alkali Metals"
-        note="chemistry · runtime-generated · process_flow · critic PASS · served">
-        <VisualRenderer spec={P1} />
+      <Case id="chem-state-liquids" topic="chem.state.liquids — Liquid State Properties"
+        note="chemistry · runtime-generated · scene/diagram · critic PASS · served">
+        <SceneSpecFigure spec={P1} />
       </Case>
-      <Case id="math-meas-lebesgue-integral" topic="math.meas.lebesgue-integral — Lebesgue Integral"
+      <Case id="math-nt-linear-diophantine" topic="math.nt.linear-diophantine — Linear Diophantine Equations"
         note="mathematics · runtime-generated · process_flow · critic PASS · served">
         <VisualRenderer spec={P2} />
-      </Case>
-      <Case id="math-num-numerical-differentiation" topic="math.num.numerical-differentiation — Numerical Differentiation"
-        note="mathematics · runtime-generated · graph · critic PASS · served">
-        <VisualRenderer spec={P3} />
       </Case>
     </main>
   )
