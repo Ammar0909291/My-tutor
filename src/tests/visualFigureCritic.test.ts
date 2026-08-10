@@ -25,6 +25,7 @@ const allPass = async () => ({
   relevance: { verdict: 'pass', reason: 'r' },
   correctness: { verdict: 'pass', reason: 'c' },
   explanatoryValue: { verdict: 'pass', reason: 'e' },
+  claimSupport: { verdict: 'pass', reason: 's' },
 })
 
 describe('an approval must never happen by accident', () => {
@@ -48,6 +49,7 @@ describe('an approval must never happen by accident', () => {
         relevance: { verdict: 'pass', reason: '' },
         correctness: { verdict: 'unsure', reason: 'cannot tell' },
         explanatoryValue: { verdict: 'pass', reason: '' },
+        claimSupport: { verdict: 'pass', reason: '' },
       }),
     })
     expect(r.decision).toBe('hold')
@@ -59,6 +61,7 @@ describe('an approval must never happen by accident', () => {
         relevance: { verdict: 'pass', reason: '' },
         correctness: { verdict: 'fail', reason: 'asserts an order that does not exist' },
         explanatoryValue: { verdict: 'pass', reason: '' },
+        claimSupport: { verdict: 'pass', reason: '' },
       }),
     })
     expect(r.decision).toBe('reject')

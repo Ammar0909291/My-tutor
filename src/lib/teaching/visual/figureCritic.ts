@@ -58,6 +58,19 @@ export type CriticDimension =
   | 'grounding'
   /** Will it survive being drawn, at every viewport? */
   | 'rendering'
+  /**
+   * Does the figure CONTAIN what its own words promise?
+   *
+   * A title is a claim about the picture. "Tangent vs Secant Approximations"
+   * asserts two lines are drawn; a graph spec draws exactly one curve and no
+   * annotations, so that title is false about its own payload no matter how
+   * correct the curve is. Measured on a random 30-topic cohort: that exact
+   * figure passed relevance, correctness AND explanatory value, because each
+   * of those asks about the CONCEPT and none asks whether the words match the
+   * drawing. A learner would then hear the tutor describe two lines that are
+   * not on their screen.
+   */
+  | 'claimSupport'
 
 export type DimensionVerdict = 'pass' | 'fail' | 'unsure'
 
@@ -79,8 +92,47 @@ export interface CriticReport {
 const JUDGE_BUDGET_MS = 5000
 
 const DIMENSIONS: CriticDimension[] = [
-  'relevance', 'correctness', 'explanatoryValue', 'grounding', 'rendering',
+  'relevance', 'correctness', 'explanatoryValue', 'grounding', 'rendering', 'claimSupport',
 ]
+
+/**
+ * WHAT EACH FORM CAN ACTUALLY DRAW, read off the renderers' own schemas.
+ *
+ * This is the mechanical half of claim support: not an opinion about the
+ * topic, but a fact about the payload. A `graph` carries ONE equation and no
+ * annotation fields, so it renders one curve — it cannot draw a second
+ * function, a tangent, a chord, a shaded region or a marked point, whatever
+ * its title says. Counting what a payload can put on screen is therefore
+ * enough to catch a title that promises more than one thing.
+ */
+function drawnElementCount(figure: GeneratedFigure): number {
+  if (figure.kind === 'scene') {
+    return figure.scene.steps.reduce((n, s) => n + (s.objects?.length ?? 0), 0)
+  }
+  const spec = figure.spec as VisualSpec & Record<string, unknown>
+  switch (spec.type) {
+    // One equation, one curve. No annotation layer exists in the schema.
+    case 'graph': return 1
+    case 'number_line': return Array.isArray(spec.highlight) ? spec.highlight.length : 0
+    case 'process_flow': return Array.isArray(spec.steps) ? spec.steps.length : 0
+    // One shape with its measurements.
+    case 'geometry': return 1
+    default: return 0
+  }
+}
+
+/**
+ * Does the title claim MORE THAN ONE thing is drawn?
+ *
+ * Deliberately narrow. It looks for explicit comparison markers rather than
+ * trying to parse English: "A vs B", "A versus B", "A compared with B",
+ * "A against B". Those are unambiguous claims that two things are on screen,
+ * which is exactly the family the measured failure belongs to, and a rule that
+ * fires only on them will not reject a figure for being descriptive.
+ */
+export function claimsComparison(text: string): boolean {
+  return /\b(?:vs\.?|versus|compared\s+(?:to|with)|against)\b/i.test(text)
+}
 
 /** The figure's own words, in reading order. */
 export function figureText(figure: GeneratedFigure): string[] {
@@ -208,9 +260,38 @@ export function checkGrounding(
   return { verdict: 'pass', reason: `${texts.length} text elements the tutor can speak from` }
 }
 
+/**
+ * CLAIM SUPPORT, mechanically.
+ *
+ * Only the part that the payload settles on its own. A comparison claim needs
+ * at least two drawn elements; a figure that draws one cannot be showing two
+ * things side by side. Everything subtler — a title naming a specific object
+ * that is simply absent — is left to the judge, because deciding it needs to
+ * know what the words MEAN and this layer deliberately does not.
+ */
+export function checkClaimSupport(
+  figure: GeneratedFigure,
+): { verdict: DimensionVerdict; reason: string } {
+  const title = figureText(figure)[0] ?? ''
+  const drawn = drawnElementCount(figure)
+
+  if (claimsComparison(title) && drawn < 2) {
+    return {
+      verdict: 'fail',
+      reason: `the title compares two things but the figure draws ${drawn} — the comparison is not on screen`,
+    }
+  }
+  // Not proven supported, only not proven false. The judge decides the rest.
+  return { verdict: 'pass', reason: 'no unsupported multiplicity claim in the title' }
+}
+
 /** The deterministic half. Free, and it can only ever reject. */
 export function staticChecks(figure: GeneratedFigure) {
-  return { rendering: checkRendering(figure), grounding: checkGrounding(figure) }
+  return {
+    rendering: checkRendering(figure),
+    grounding: checkGrounding(figure),
+    claimSupport: checkClaimSupport(figure),
+  }
 }
 
 /**
@@ -233,7 +314,7 @@ THE CONCEPT THE STUDENT IS LEARNING
 THE DIAGRAM, as data
 ${JSON.stringify(payload, null, 1)}
 
-Answer three questions about it. For each: "pass", "fail", or "unsure", and one
+Answer four questions about it. For each: "pass", "fail", or "unsure", and one
 short sentence of reason.
 
 1. relevance         Is this a diagram OF that concept — not of its topic, not
@@ -248,6 +329,18 @@ short sentence of reason.
                      this, or does it only name things they would have to
                      already understand? A diagram that restates the title in
                      boxes teaches nothing.
+4. claimSupport      Does the diagram CONTAIN everything its own words promise?
+                     Read the title, labels and annotations as CLAIMS ABOUT THE
+                     PICTURE, then check the data for each one. If the title
+                     names an object, a curve, a line, a region, a relationship,
+                     a comparison or a process stage, that thing must actually
+                     be in the data. A title saying "X and Y" when only X is
+                     drawn fails. A title promising a tangent, an intersection,
+                     a shaded area or a second quantity fails when the data
+                     contains only one curve. The words being TRUE about the
+                     subject is not enough — they must be true about THIS
+                     DIAGRAM. Judge only what the data shows; do not imagine a
+                     renderer adding anything the data does not specify.
 
 FAILING IS NORMAL AND EXPECTED. Most generated diagrams are wrong in at least
 one of these ways, and saying so is the useful answer. Do not look for a
@@ -257,7 +350,8 @@ reading that makes a bad diagram acceptable. If you are genuinely torn, say
 Reply with ONLY this JSON:
 {"relevance":{"verdict":"pass|fail|unsure","reason":"..."},
  "correctness":{"verdict":"pass|fail|unsure","reason":"..."},
- "explanatoryValue":{"verdict":"pass|fail|unsure","reason":"..."}}`
+ "explanatoryValue":{"verdict":"pass|fail|unsure","reason":"..."},
+ "claimSupport":{"verdict":"pass|fail|unsure","reason":"..."}}`
 }
 
 function readVerdict(raw: unknown): { verdict: DimensionVerdict; reason: string } | null {
@@ -298,7 +392,13 @@ export async function criticiseFigure(
 
   // STATIC can reject on its own, and when it does the model is never called:
   // a figure that will not render is not made acceptable by being relevant.
-  const staticFailed = dimensions.rendering.verdict === 'fail' || dimensions.grounding.verdict === 'fail'
+  // A claim the payload mechanically contradicts is as terminal as a figure
+  // that cannot render: no reading of the concept makes a title true about a
+  // picture that does not contain what it names.
+  const staticFailed =
+    dimensions.rendering.verdict === 'fail' ||
+    dimensions.grounding.verdict === 'fail' ||
+    dimensions.claimSupport.verdict === 'fail'
   if (staticFailed) return finalise(dimensions, false)
 
   let judged = false
@@ -323,10 +423,15 @@ export async function criticiseFigure(
     const relevance = readVerdict(obj?.relevance)
     const correctness = readVerdict(obj?.correctness)
     const explanatoryValue = readVerdict(obj?.explanatoryValue)
-    if (relevance && correctness && explanatoryValue) {
+    const claimSupport = readVerdict(obj?.claimSupport)
+    if (relevance && correctness && explanatoryValue && claimSupport) {
       dimensions.relevance = relevance
       dimensions.correctness = correctness
       dimensions.explanatoryValue = explanatoryValue
+      // The deterministic check can only ever REJECT; where it passed, the
+      // judge's reading is what decides, so a judged fail must not be
+      // overwritten by the mechanical "nothing proven false".
+      if (dimensions.claimSupport.verdict === 'pass') dimensions.claimSupport = claimSupport
       judged = true
     } else {
       const reason = timedOut
