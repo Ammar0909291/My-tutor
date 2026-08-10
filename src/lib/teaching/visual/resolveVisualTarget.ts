@@ -16,7 +16,7 @@
  */
 
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
-import { resolveRequestedConceptId } from '@/lib/teaching/concept/requestedConcept'
+import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/requestedConcept'
 import { isExplicitTopicRequest } from './session'
 import { contentWords } from './visualEngine'
 import type { ArchetypeContext } from './archetypes'
@@ -138,7 +138,61 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
 
   const drawn = contentWords(`${target.title} ${target.description ?? ''}`, true)
   for (const word of named) if (drawn.has(word)) return false
-  return true
+
+  // IS THIS EVEN OFF-CURRICULUM?
+  //
+  // Everything above tests the request against ONE concept — the lesson's. That
+  // is not the same question. Measured in a real six-turn session, "what is
+  // energy exactly" inside an SI-units lesson and "what is an atom made of"
+  // inside a Nature-of-Matter lesson both reached here: two topic-shaped words,
+  // no overlap with the lesson's own text, suppressed. Both are ordinary
+  // in-lesson physics and chemistry questions, and both lost their figure.
+  //
+  // The discriminator that was missing is the curriculum itself. "Energy" and
+  // "atom" are concepts it teaches; "Kubernetes" is not a word it has ever
+  // heard. A request built from vocabulary the curriculum knows is a question
+  // about the subject being studied, even when the lesson's own concept does
+  // not happen to use those words — and the lesson's figure is a defensible
+  // neighbour for it. Only a request made entirely of words the curriculum has
+  // never seen is genuinely somewhere else.
+  return !subjectKnowsAnyOf(named, target.conceptId)
+}
+
+/**
+ * The vocabulary of ONE subject — every content word in its concept titles.
+ *
+ * Per subject, not per curriculum, and that is the whole point. Measured: with
+ * the test run against ALL subjects, "Explain Kubernetes pod scheduling" was
+ * treated as in-curriculum because "scheduling" appears in the computer-science
+ * graph, so the physics learner would have been shown an SI-units figure again.
+ * A physics lesson is answered from physics vocabulary; a word the subject being
+ * studied has never used is evidence the question left it.
+ *
+ * Keyed by the id prefix the KG already uses (phys, chem, math, bio, cs, eng),
+ * so it needs no list of subjects and gains one automatically when the
+ * curriculum does.
+ */
+const subjectVocabularies = new Map<string, Set<string>>()
+
+function subjectKnowsAnyOf(words: readonly string[], conceptId: string): boolean {
+  const prefix = conceptId.split('.')[0]
+  let vocab = subjectVocabularies.get(prefix)
+  if (!vocab) {
+    vocab = new Set<string>()
+    for (const entry of conceptIndex()) {
+      if (entry.conceptId.split('.')[0] !== prefix) continue
+      for (const w of contentWords(entry.title, true)) vocab.add(w)
+      for (const alias of entry.aliases ?? []) for (const w of contentWords(alias, true)) vocab.add(w)
+    }
+    subjectVocabularies.set(prefix, vocab)
+  }
+  for (const w of words) if (vocab.has(w)) return true
+  return false
+}
+
+/** Test seam — the vocabularies are derived from the KG and memoized with it. */
+export function __resetSubjectVocabularies(): void {
+  subjectVocabularies.clear()
 }
 
 /** How many topic-shaped words a request must carry before it names a topic. */

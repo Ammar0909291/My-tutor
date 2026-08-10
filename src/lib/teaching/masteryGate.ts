@@ -266,8 +266,8 @@ export type LearnerRequest = 'diagram' | 'real_life_example' | 'explain_differen
  *
  * Exported because the visual target resolver needs exactly this list to tell
  * "show me a graph" (medium) from "teach me graph" (topic). Defining a second
- * list there would be two sources of truth for one vocabulary, so DIAGRAM_RE
- * below is built FROM this array rather than repeating it.
+ * list there would be two sources of truth for one vocabulary, so the request
+ * grammar below is built FROM this array rather than repeating it.
  *
  * Nouns only: "show me", "draw" and "visualize" are verbs — they can never
  * collide with a concept title, so they stay in the regex alone.
@@ -277,10 +277,117 @@ export const VISUAL_MEDIUM_NOUNS = [
   'graph', 'chart', 'animation', 'simulation', 'image',
 ] as const
 
-const DIAGRAM_RE = new RegExp(
-  `\\b(diagram|visuali[sz](?:e|ation)|show\\s+me|picture|draw|drawing|graph|chart|animation|simulation|image)\\b`,
+/**
+ * ── ASKING FOR A PICTURE, AS OPPOSED TO MENTIONING ONE ──────────────────────
+ *
+ * The previous rule was: any medium noun anywhere in the message is a diagram
+ * request. Measured against 37 real phrasings, that is wrong in both
+ * directions at once.
+ *
+ * IT FIRED WHEN NOBODY ASKED
+ *     "picture this: a ball rolling"          -> diagram
+ *     "I get the picture"                     -> diagram
+ *     "the graph of my grades is going down"  -> diagram
+ * IT STAYED SILENT WHEN SOMEBODY DID
+ *     "can you illustrate that" · "sketch it" · "show it visually"
+ *     "I need to see this visually" · "any visual for this?"
+ *
+ * The distinction is grammatical, not lexical: a request either uses a verb
+ * that can only mean "produce a visual", or it puts a medium noun inside an
+ * ordinary English construction for asking. So the rule is built from those
+ * two parts, over the SAME exported noun vocabulary the target resolver uses
+ * to tell a medium from a topic — not from a list of phrases anyone has heard.
+ */
+
+/**
+ * Verbs that mean "produce a visual" and nothing else. No noun required: a
+ * learner who types "sketch it" has asked, and there is no other reading.
+ * `picture`, `graph`, `chart` and `diagram` are deliberately NOT here — each is
+ * also a NOUN, and "I don't understand the diagram" must stay a statement of
+ * confusion rather than becoming a request for one. They are covered by the
+ * weaker mention rule below, which sits underneath confusion.
+ */
+const VISUAL_VERB_RE = /\b(draw|sketch|illustrate|visuali[sz]e)\b/i
+
+/**
+ * "show me" with no object. Kept from the previous rule rather than dropped:
+ * in a tutoring turn an unqualified "show me" is a request to be SHOWN, and
+ * removing it would narrow behaviour that has shipped for months while fixing
+ * a different defect. It survives every measured negative — no idiom in the
+ * corpus ("I get the picture", "picture this", "the graph of my grades") gets
+ * near it.
+ */
+const SHOW_ME_RE = /\b(?:show|showing)\s+(?:me|us)\b/i
+
+/** The medium being named. Built from the shared vocabulary, plus the forms
+ *  that only ever appear in requests. */
+const MEDIUM_NOUN = `(?:${[...VISUAL_MEDIUM_NOUNS, 'illustration', 'sketch'].join('|')})`
+
+/**
+ * A medium noun inside a construction that ASKS for it. Each alternative is a
+ * general English request frame, so it generalises past the examples that
+ * motivated it:
+ *
+ *   show / give / make me a <noun>        "show me a picture"
+ *   can I see a <noun>                    "can I see a diagram of that"
+ *   is there a <noun>                     "is there a picture"
+ *   do you have a <noun>                  "do you have a diagram"
+ *   want / need to see ... <noun>         "I need to see this visually"
+ *   a <noun> would help                   "a diagram would help"
+ *   any <noun>                            "any visual for this?"
+ *   show it <noun>ly                      "show it visually"
+ */
+const MEDIUM_REQUEST_RE = new RegExp(
+  [
+    `\\b(?:show|give|send|make|create|display|add|put)\\s+(?:me|us)?\\s*(?:a|an|the|some)?\\s*${MEDIUM_NOUN}\\b`,
+    `\\b(?:show|explain|teach|do)\\s+(?:it|this|that|me)?\\s*${MEDIUM_NOUN}\\b`,
+    `\\b(?:can|could|would|will|may)\\s+(?:you|i|we)\\s+(?:\\w+\\s+){0,3}?${MEDIUM_NOUN}\\b`,
+    `\\b(?:is|are)\\s+there\\s+(?:a|an|any|some)?\\s*${MEDIUM_NOUN}\\b`,
+    `\\b(?:do|did|have)\\s+you\\s+(?:have|got)\\s+(?:a|an|any)?\\s*${MEDIUM_NOUN}\\b`,
+    `\\b(?:want|need|like|love)\\s+(?:to\\s+see\\s+)?(?:\\w+\\s+){0,3}?${MEDIUM_NOUN}\\b`,
+    `\\b${MEDIUM_NOUN}\\s+(?:would|will|might|could)\\s+help\\b`,
+    `\\bany\\s+${MEDIUM_NOUN}\\b`,
+    `\\blet\\s+(?:me|us)\\s+see\\s+(?:a|an|the)?\\s*${MEDIUM_NOUN}\\b`,
+    // "show it visually", "I need to see this visually" — an adverb, not a
+    // noun, so it cannot be spelled with MEDIUM_NOUN. Kept to request frames
+    // only: bare "visual"/"visuals" belongs to the Teaching Planner's
+    // non-authoritative matcher, and widening to it here is forbidden.
+    `\\b(?:show|see|explain|draw|do|need|want)\\s+(?:\\w+\\s+){0,3}?visually\\b`,
+  ].join('|'),
   'i',
 )
+
+/**
+ * A medium noun used as a VERB is not a request: "picture this", "graph it".
+ * Checked before the verb rule so the one construction that reads as a request
+ * but never is cannot slip through it.
+ */
+const MEDIUM_AS_VERB_RE = /\bpicture\s+(?:this|that)\b/i
+
+/**
+ * Did the learner ASK to be shown something? The strong reading — a verb that
+ * can only mean "produce a visual", a bare "show me", or a medium noun inside
+ * a request frame. Only this outranks a statement of confusion.
+ */
+export function asksForAVisual(text: string): boolean {
+  if (MEDIUM_AS_VERB_RE.test(text)) return false
+  return VISUAL_VERB_RE.test(text) || SHOW_ME_RE.test(text) || MEDIUM_REQUEST_RE.test(text)
+}
+
+/**
+ * Did the learner merely NAME a medium? The weak reading, and the rule that
+ * shipped before this one: production evidence showed "Explain me vector with
+ * visualization" is a diagram request even though it contains no request frame.
+ *
+ * It stays BELOW confusion, which is the distinction the old single rule could
+ * not express: "I don't understand the diagram" names a medium and is not a
+ * request for one, while "I do not understand. Can you show me a picture?" is.
+ */
+export function mentionsAVisualMedium(text: string): boolean {
+  if (MEDIUM_AS_VERB_RE.test(text)) return false
+  return new RegExp(`\\b${MEDIUM_NOUN}\\b`, 'i').test(text)
+}
+
 const EXAMPLE_RE = /\b(real[\s-]?life|real[\s-]?world|example|application|story|use\s+case|everyday)\b/i
 const EXPLAIN_DIFF_RE = /\b(explain\s+(it\s+)?(differently|again|another\s+way|in\s+a\s+different\s+way|more\s+simply|simpler)|different\s+explanation|another\s+explanation|say\s+it\s+differently|i\s+(don'?t|do\s+not)\s+understand|i(?:'?m|\s+am)\s+(confused|lost)|no\s+idea|not\s+following|didn'?t\s+get\s+(it|that)|makes?\s+no\s+sense)\b/i
 
@@ -293,8 +400,23 @@ const EXPLAIN_DIFF_RE = /\b(explain\s+(it\s+)?(differently|again|another\s+way|i
 export function detectLearnerRequest(message: string): LearnerRequest | null {
   const text = message.trim()
   if (!text) return null
+  // AN EXPLICIT ASK OUTRANKS A STATEMENT OF CONFUSION.
+  //
+  // This order was the other way round, and it is what silenced the request
+  // measured in the real walkthrough: "I do not understand. Can you show me a
+  // picture?" matched the confusion rule first and was classified
+  // explain_differently, so `purpose` stayed 'explain' and the engine was
+  // never asked for a figure. The learner had already said HOW to fix the
+  // confusion; treating the vaguer half of their sentence as the whole of it
+  // discards the specific instruction they gave.
+  //
+  // Confusion alone still routes to explain_differently — the change only
+  // affects messages that contain BOTH, where the visual is the more specific
+  // request of the two.
+  if (asksForAVisual(text)) return 'diagram'
   if (EXPLAIN_DIFF_RE.test(text)) return 'explain_differently'
-  if (DIAGRAM_RE.test(text)) return 'diagram'
+  // A bare mention, below confusion — see mentionsAVisualMedium.
+  if (mentionsAVisualMedium(text)) return 'diagram'
   if (EXAMPLE_RE.test(text)) return 'real_life_example'
   return null
 }
