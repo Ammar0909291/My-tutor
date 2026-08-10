@@ -1,21 +1,9 @@
 'use client'
-
 /**
- * VISUAL EVIDENCE — the learner's own renderers, the engine's own payloads.
- *
- * This page adds NO rendering code. It mounts the three components
- * `LessonScreen` mounts — `VisualRenderer` for a VisualSpec and
- * `SceneSpecFigure` for a SceneSpec — with payloads copied verbatim from what
- * the engine produced in a real run. If a figure reads badly here it reads
- * badly in a lesson, because it is the same component drawing the same data.
- *
- * It exists because production is behind authentication and cannot be
- * screenshotted from this environment, and because a screenshot of a
- * hand-built mock proves nothing about the product.
- *
- * Dev-only: the route 404s in production.
+ * STRESS-COHORT EVIDENCE — the learner's own renderers, payloads produced by
+ * the real engine during the seeded 30-topic run (seed 20260810).
+ * Dev-only; 404s in production. No rendering code of its own.
  */
-
 import dynamic from 'next/dynamic'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
@@ -26,109 +14,39 @@ const SceneSpecFigure = dynamic(
   { ssr: false },
 )
 
-/** phys.mech.kinetic-energy — KG concept, generated this session, served. */
-const KG_GRAPH: VisualSpec = {
-  type: 'graph',
-  equation: '0.5 * 2 * x^2',
-  title: 'Kinetic Energy as a Function of Velocity (m = 2 kg)',
-} as VisualSpec
-
-/** topic:7e1bc769a989f449 — NO KG node. Grounded only by the learner's words. */
-const NON_KG_FLOW: VisualSpec = {
-  type: 'process_flow',
-  title: 'Kubernetes Pod Scheduling Lifecycle',
-  steps: [
-    { title: 'Pod Creation Request' },
-    { title: 'Filtering Nodes (Predicates)' },
-    { title: 'Scoring Nodes (Priorities)' },
-    { title: 'Binding Pod to Best Node' },
-  ],
-} as VisualSpec
-
-/** chem.found.stoichiometry — KG concept, generated this session, served. */
-const KG_FLOW: VisualSpec = {
-  type: 'process_flow',
-  title: 'Stoichiometric Calculation Steps',
-  steps: [
-    { title: 'Write and balance equation' },
-    { title: 'Convert given mass to moles' },
-    { title: 'Apply mole ratio from coefficients' },
-    { title: 'Calculate yield or final mass' },
-  ],
-} as VisualSpec
-
-/** bio.found.viruses-viroids-lichens — read back from the ACTIVE production asset. */
-const SCENE: SceneSpec = {
-  id: 'bio.found.viruses-viroids-lichens',
-  title: 'Viruses, Viroids, and Lichens',
-  sceneType: 'diagram',
-  teachingGoal: 'Compare the structures of a typical virus, a viroid, and a lichen symbiosis.',
-  cameraDistance: 14,
-  ariaLabel:
-    'A 3D educational diagram illustrating a virus with capsid and genome, a naked viroid RNA, and a lichen mutualistic association.',
-  steps: [
-    {
-      narration: 'A typical virus consists of a protein capsid protecting its genetic material, either DNA or RNA.',
-      objects: [
-        { id: 'capsid', type: 'node', text: 'Protein Capsid', color: '#3b82f6', radius: 1.2, position: [-3, 0, 0] },
-        { id: 'viral_genome', type: 'path', color: '#ef4444', thickness: 0.1,
-          points: [[-3.5, 0, 0], [-3.2, 0.3, 0], [-2.8, -0.3, 0], [-2.5, 0, 0]] },
-        { id: 'virus_label', type: 'label', text: 'Typical Virus (Acellular)', position: [-3, -2, 0] },
-      ],
-    },
-    {
-      narration: 'Viroids are even simpler infectious agents consisting solely of a naked, single-stranded circular RNA molecule without a protein coat.',
-      objects: [
-        { id: 'viroid_rna', type: 'path', color: '#10b981', thickness: 0.12,
-          points: [[0, 0.8, 0], [0.6, 0.4, 0], [0.6, -0.4, 0], [0, -0.8, 0], [-0.6, -0.4, 0], [-0.6, 0.4, 0], [0, 0.8, 0]] },
-        { id: 'viroid_label', type: 'label', text: 'Viroid (Naked RNA)', position: [0, -2, 0] },
-      ],
-    },
-    {
-      narration: 'Lichens represent a symbiotic mutualism between a fungal partner and a photosynthetic algal or cyanobacterial partner.',
-      objects: [
-        { id: 'fungus_partner', type: 'node', text: 'Fungal Mycobiont', color: '#8b5cf6', radius: 1, position: [3, 0.5, 0] },
-        { id: 'algal_partner', type: 'node', text: 'Algal Phycobiont', color: '#84cc16', radius: 0.7, position: [3, -0.8, 0] },
-        { id: 'symbiosis_link', type: 'bond', from: [3, 0.2, 0], to: [3, -0.4, 0], color: '#d97706', thickness: 0.08 },
-        { id: 'lichen_label', type: 'label', text: 'Lichen (Symbiotic Association)', position: [3, -2.2, 0] },
-      ],
-    },
-  ],
-} as SceneSpec
-
-function Case({ id, topic, note, children }: {
-  id: string; topic: string; note: string; children: React.ReactNode
-}) {
+function Case({ id, topic, note, children }: { id: string; topic: string; note: string; children: React.ReactNode }) {
   return (
     <section data-evidence={id} style={{ marginBottom: 40 }}>
-      <h2 style={{ fontSize: 15, margin: '0 0 2px', color: 'var(--text-primary, #e6edf3)' }}>{topic}</h2>
-      <p style={{ fontSize: 12, margin: '0 0 10px', color: 'var(--text-secondary, #8b949e)' }}>{note}</p>
+      <h2 style={{ fontSize: 14, margin: '0 0 2px', color: 'var(--text-primary, #e6edf3)' }}>{topic}</h2>
+      <p style={{ fontSize: 11, margin: '0 0 10px', color: 'var(--text-secondary, #8b949e)' }}>{note}</p>
       {children}
     </section>
   )
 }
 
+const P0 = {"type": "scene", "id": "generalized-coordinates-config-space", "title": "Configuration Space and Generalized Coordinates", "sceneType": "diagram", "teachingGoal": "Demonstrate how a constrained mechanical system is described by a minimal set of independent generalized coordinates.", "cameraDistance": 12, "ariaLabel": "A 3D diagram showing a double pendulum system constrained in a plane, parameterized by generalized coordinates theta 1 and theta 2.", "steps": [{"narration": "Consider a double pendulum moving in a 2D plane, consisting of two point masses connected by rigid rods.", "objects": [{"type": "particle", "id": "origin", "position": [0, 0, 0], "radius": 0.15, "color": "#333333"}, {"type": "label", "id": "origin_label", "position": [0, 0.4, 0], "text": "Pivot (0,0)"}, {"type": "particle", "id": "mass1", "position": [2, -2, 0], "radius": 0.2, "color": "#2563eb"}, {"type": "label", "id": "m1_label", "position": [2.3, -2, 0], "text": "m\u2081"}, {"type": "bond", "id": "rod1", "from": [0, 0, 0], "to": [2, -2, 0], "thickness": 0.05, "color": "#64748b"}, {"type": "particle", "id": "mass2", "position": [4, -3, 0], "radius": 0.2, "color": "#dc2626"}, {"type": "label", "id": "m2_label", "position": [4.3, -3, 0], "text": "m\u2082"}, {"type": "bond", "id": "rod2", "from": [2, -2, 0], "to": [4, -3, 0], "thickness": 0.05, "color": "#64748b"}]}, {"narration": "While the system uses four Cartesian coordinates (x\u2081, y\u2081, x\u2082, y\u2082), the rigid rod constraints reduce the degrees of freedom to just two.", "objects": [{"type": "path", "id": "constraint_note", "points": [[-3, 3, 0], [3, 3, 0]], "color": "#94a3b8"}, {"type": "label", "id": "constraints_text", "position": [0, 3.5, 0], "text": "Holonomic Constraints: x\u2081\u00b2 + y\u2081\u00b2 = L\u2081\u00b2, (x\u2082-x\u2081)\u00b2 + (y\u2082-y\u2081)\u00b2 = L\u2082\u00b2"}]}, {"narration": "We parameterize the configuration space entirely using independent generalized coordinates: angle \u03b8\u2081 and angle \u03b8\u2082.", "objects": [{"type": "vector", "id": "angle1_arc", "from": [0, -1, 0], "to": [1, -1, 0], "color": "#16a34a", "thickness": 0.03}, {"type": "label", "id": "q1_label", "position": [1.2, -0.8, 0], "text": "q\u2081 = \u03b8\u2081"}, {"type": "vector", "id": "angle2_arc", "from": [2, -2.5, 0], "to": [2.8, -2.5, 0], "color": "#16a34a", "thickness": 0.03}, {"type": "label", "id": "q2_label", "position": [3.1, -2.3, 0], "text": "q\u2082 = \u03b8\u2082"}, {"type": "label", "id": "dof_summary", "position": [0, -4.5, 0], "text": "2 Degrees of Freedom = 2 Generalized Coordinates"}]}]} as unknown as SceneSpec
+const P1 = {"type": "process_flow", "title": "Reactivity Trend of Alkali Metals", "steps": [{"title": "Increase in atomic radius down the group"}, {"title": "Decreased nuclear attraction on valence electron"}, {"title": "Greater ease of losing the single s-electron"}, {"title": "Increased vigour of reaction with water and oxygen"}]} as unknown as VisualSpec
+const P2 = {"type": "process_flow", "title": "Constructing the Lebesgue Integral for f \u2265 0", "steps": [{"title": "Deconstruct the range into vertical slices"}, {"title": "Approximate f from below with simple functions \u03c6"}, {"title": "Integrate each simple function \u03c6 by measure of its slices"}, {"title": "Take the supremum over all valid simple functions \u03c6"}]} as unknown as VisualSpec
+const P3 = {"type": "graph", "equation": "x^2", "title": "Numerical Differentiation: Tangent vs Secant Approximations"} as unknown as VisualSpec
+
 export function Evidence() {
   return (
     <main style={{ maxWidth: 560, margin: '0 auto', padding: 16 }}>
-      <Case id="kg-graph" topic="phys.mech.kinetic-energy — KG concept"
-        note="Generated at runtime, critic PASS, served. Renderer: VisualRenderer (graph).">
-        <VisualRenderer spec={KG_GRAPH} />
+      <Case id="phys-mech-generalized-coordinates" topic="phys.mech.generalized-coordinates — Generalized Coordinates and Configuration Space"
+        note="physics · runtime-generated · scene/diagram · critic PASS · served">
+        <SceneSpecFigure spec={P0} />
       </Case>
-
-      <Case id="non-kg-flow" topic="Kubernetes Pod Scheduling — NO KG node"
-        note="topic:7e1bc769a989f449. Grounded only by the learner's own sentence. Renderer: VisualRenderer (process_flow).">
-        <VisualRenderer spec={NON_KG_FLOW} />
+      <Case id="chem-sblock-alkali" topic="chem.sblock.alkali — Alkali Metals"
+        note="chemistry · runtime-generated · process_flow · critic PASS · served">
+        <VisualRenderer spec={P1} />
       </Case>
-
-      <Case id="kg-flow" topic="chem.found.stoichiometry — KG concept"
-        note="Generated at runtime, critic PASS, served. Renderer: VisualRenderer (process_flow).">
-        <VisualRenderer spec={KG_FLOW} />
+      <Case id="math-meas-lebesgue-integral" topic="math.meas.lebesgue-integral — Lebesgue Integral"
+        note="mathematics · runtime-generated · process_flow · critic PASS · served">
+        <VisualRenderer spec={P2} />
       </Case>
-
-      <Case id="scene" topic="bio.found.viruses-viroids-lichens — 3D scene"
-        note="Read back from the ACTIVE production asset. Renderer: SceneSpecFigure (three.js).">
-        <SceneSpecFigure spec={SCENE} />
+      <Case id="math-num-numerical-differentiation" topic="math.num.numerical-differentiation — Numerical Differentiation"
+        note="mathematics · runtime-generated · graph · critic PASS · served">
+        <VisualRenderer spec={P3} />
       </Case>
     </main>
   )

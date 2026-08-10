@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { writeVerdict, readVerdict } from '@/lib/teaching/visual/verdictCache'
 import {
   readDecline, writeDecline, declineKey, DECLINE_TTL_MS,
 } from '@/lib/teaching/visual/verdictCache'
@@ -93,5 +94,47 @@ describe('remembering a deliberate decline', () => {
     const s = store()
     s.rows.set(declineKey(ctx.conceptId), '{not json')
     expect(await readDecline(ctx, s.client)).toBeNull()
+  })
+})
+
+describe('remembering a settled REJECT, but never a HOLD', () => {
+  const figure = { type: 'graph', equation: '2x + 1' }
+
+  const report = (decision: 'promote' | 'reject' | 'hold') => ({
+    dimensions: {
+      relevance: { verdict: 'pass' as const, reason: '' },
+      correctness: { verdict: 'pass' as const, reason: '' },
+      explanatoryValue: { verdict: 'pass' as const, reason: '' },
+      grounding: { verdict: 'pass' as const, reason: '' },
+      rendering: { verdict: 'pass' as const, reason: '' },
+    },
+    decision,
+    confidence: 1,
+    judged: true,
+  })
+
+  it('A REJECT IS REMEMBERED — the figure is frozen, so re-judging buys nothing', async () => {
+    const s = store()
+    await writeVerdict(ctx, figure, report('reject'), s.client)
+    const back = await readVerdict(ctx, figure, s.client)
+    expect(back?.decision).toBe('reject')
+  })
+
+  it('A HOLD IS NEVER REMEMBERED — it is usually about the moment', async () => {
+    const s = store()
+    await writeVerdict(ctx, figure, report('hold'), s.client)
+    expect(await readVerdict(ctx, figure, s.client)).toBeNull()
+  })
+
+  it('a cached reject does not cover a DIFFERENT figure', async () => {
+    const s = store()
+    await writeVerdict(ctx, figure, report('reject'), s.client)
+    expect(await readVerdict(ctx, { type: 'graph', equation: 'x^2' }, s.client)).toBeNull()
+  })
+
+  it('a cached reject is re-opened when the grounding text changes', async () => {
+    const s = store()
+    await writeVerdict(ctx, figure, report('reject'), s.client)
+    expect(await readVerdict({ ...ctx, description: 'entirely different text' }, figure, s.client)).toBeNull()
   })
 })

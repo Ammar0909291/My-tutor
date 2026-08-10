@@ -27,11 +27,14 @@
  * here would mean serving a figure that was validated against text nobody can
  * read any more.
  *
- * ── ONLY A PASS IS WORTH CACHING ────────────────────────────────────────────
- * A HOLD is frequently about the moment, not the figure — a judge that timed
- * out or could not be reached. Caching that would turn a transient outage into
- * a permanent refusal for a topic. Failures are recorded in the outcome table
- * for diagnosis and are not cached as decisions.
+ * ── A SETTLED ANSWER IS WORTH CACHING; AN UNSETTLED ONE IS NOT ──────────────
+ * PROMOTE and REJECT are both judgements about a FIGURE, and the figure is
+ * already frozen in the figure cache — so asking again is the same question
+ * about the same input, and buys nothing.
+ *
+ * A HOLD is frequently about the MOMENT rather than the figure: a judge that
+ * timed out or could not be reached. Caching that would turn a transient
+ * outage into a permanent refusal for a topic, so it is never stored.
  *
  * Storage reuses `visualization_cache` under its own key prefix. No schema
  * change, and the figure rows already written stay valid.
@@ -48,7 +51,21 @@ const VERDICT_PREFIX = 'scene:v1:verdict:'
 export const VERDICT_TTL_MS = 90 * 24 * 60 * 60 * 1000
 
 export interface CachedVerdict {
-  decision: 'promote'
+  /**
+   * REJECT is cached as well as PROMOTE, and HOLD is not. The distinction is
+   * whether the answer was about the FIGURE or about the MOMENT.
+   *
+   * The figure is already frozen in the figure cache, so re-judging a rejected
+   * one asks an identical question about identical input and gets the identical
+   * answer — for one model call, per learner, per turn, forever. Measured on a
+   * 30-topic random cohort: 2 of 30 topics did exactly that, indefinitely.
+   *
+   * A HOLD is still never cached, because it is frequently a timeout or an
+   * unreachable judge — caching that would turn one bad minute into a permanent
+   * refusal. And the fingerprint below keeps even a cached REJECT honest: change
+   * the figure and it is judged afresh.
+   */
+  decision: 'promote' | 'reject'
   confidence: number
   /** Fingerprint of the title+description the figure was judged against. */
   grounding: string
@@ -87,7 +104,7 @@ export async function readVerdict(
     const row = await getCachedVisualization(verdictKey(ctx.conceptId), client)
     if (!row?.code) return null
     const parsed = JSON.parse(row.code) as CachedVerdict
-    if (parsed?.decision !== 'promote') return null
+    if (parsed?.decision !== 'promote' && parsed?.decision !== 'reject') return null
     if (parsed.grounding !== groundingHash(ctx)) return null
     if (parsed.figure !== figureFingerprint(figurePayload)) return null
     if (now - parsed.judgedAt > VERDICT_TTL_MS) return null
@@ -109,9 +126,9 @@ export async function writeVerdict(
   client?: VisualizationCacheClient,
   now: number = Date.now(),
 ): Promise<void> {
-  if (report.decision !== 'promote') return
+  if (report.decision !== 'promote' && report.decision !== 'reject') return
   const verdict: CachedVerdict = {
-    decision: 'promote',
+    decision: report.decision,
     confidence: report.confidence,
     grounding: groundingHash(ctx),
     figure: figureFingerprint(figurePayload),

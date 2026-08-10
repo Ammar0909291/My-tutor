@@ -787,9 +787,17 @@ export async function resolveVisualForTurn(
   // this text on this date. It is NOT a promotion; the asset stays DRAFT and
   // ACTIVE remains a human decision through the review lifecycle.
   const figurePayload = result.figure.kind === 'scene' ? result.figure.scene : result.figure.spec
-  const cachedPass = await readVerdict(ctx, figurePayload, deps.cacheClient)
+  const cached = await readVerdict(ctx, figurePayload, deps.cacheClient)
 
-  if (!cachedPass) {
+  // A REJECT is remembered as firmly as a PASS. The figure is frozen in the
+  // figure cache, so re-judging it asks an identical question about identical
+  // input — measured on a 30-topic random cohort, 2 of 30 paid a model call for
+  // that answer on every turn, indefinitely.
+  if (cached?.decision === 'reject') {
+    return { ...decision, provenance: 'no-figure:critic-reject-cached' }
+  }
+
+  if (!cached) {
     if (deadline.expired()) {
       // Out of time before the judge could answer. The figure is ABANDONED,
       // never served half-checked — the generation still populated the cache,
@@ -799,6 +807,9 @@ export async function resolveVisualForTurn(
     const critic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
     const critique = await critic(result.figure, ctx, deadline.remaining())
     if (critique.decision !== 'promote') {
+      // A settled REJECT is stored so the next learner does not pay for it; a
+      // HOLD deliberately is not, because it is usually about the moment.
+      void writeVerdict(ctx, figurePayload, critique, deps.cacheClient)
       return { ...decision, provenance: `no-figure:critic-${critique.decision}` }
     }
     // Best-effort and not awaited: this learner already has their figure.

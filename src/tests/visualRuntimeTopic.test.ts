@@ -171,11 +171,24 @@ describe('the verdict cache — cheap to re-serve, never a promotion', () => {
     expect(await readVerdict(ctx, figure, s.client)).not.toBeNull()
   })
 
-  it('ONLY A PASS IS STORED — a transient hold must not become permanent', async () => {
+  it('A HOLD IS NEVER STORED — a transient hold must not become permanent', async () => {
+    // A hold is usually about the MOMENT — a judge that timed out or could not
+    // be reached — so storing it would turn one bad minute into a permanent
+    // refusal for a topic.
     const s = store()
     await writeVerdict(ctx, figure, { ...promote, decision: 'hold' }, s.client)
-    await writeVerdict(ctx, figure, { ...promote, decision: 'reject' }, s.client)
     expect(s.rows.size).toBe(0)
+  })
+
+  it('A REJECT IS STORED — the figure is frozen, so re-judging it buys nothing', async () => {
+    // Changed deliberately after the seeded 30-topic cohort measured 2 of 30
+    // topics paying a model call to re-judge an identical cached figure on
+    // every turn, indefinitely. The fingerprint keeps it honest: a different
+    // figure is judged afresh.
+    const s = store()
+    await writeVerdict(ctx, figure, { ...promote, decision: 'reject' }, s.client)
+    expect(s.rows.size).toBe(1)
+    expect((await readVerdict(ctx, figure, s.client))?.decision).toBe('reject')
   })
 
   it('A CHANGED FIGURE IS NOT COVERED by the old verdict', async () => {
