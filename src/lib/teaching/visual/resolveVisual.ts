@@ -38,17 +38,28 @@ import { ARCHETYPES, type ArchetypeContext } from './archetypes'
 import { resolveVisualTarget, requestTargetsSomethingElse } from './resolveVisualTarget'
 import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
-import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, type GeneratedFigure } from './visualEngine'
+import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, figureCacheKey, type GeneratedFigure } from './visualEngine'
 import { resolveServicePolicy, servesImmediately } from './generationPolicy'
 import { decideVisualNeed, mayIntroduceFigure } from './visualNeed'
 import { criticiseFigure, type CriticReport } from './figureCritic'
-import { kgTopicIdentity, runtimeTopicIdentity, type TopicIdentity } from './topicIdentity'
+import { kgTopicIdentity, runtimeTopicIdentity, isRuntimeTopicId, type TopicIdentity } from './topicIdentity'
+import { requestedTopicIdentity } from './requestedTopic'
 import { checkBudgetsLive, type BudgetReader } from './generationBudget'
 import { readVerdict, writeVerdict } from './verdictCache'
+import { getCachedVisualization } from '@/lib/teaching/visuals/visualizationCache'
 import { startDeadline, NO_DEADLINE, type Deadline } from './turnDeadline'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type LearnerVisualRequest = 'diagram' | 'real_life_example' | 'explain_differently' | null
+
+/**
+ * The learner named a topic the curriculum does not contain. Declared once
+ * because the pure decision writes it and the async tier reads it back to know
+ * that generation must be grounded in the request rather than the lesson — two
+ * spellings of the same string would silently disable that handoff.
+ */
+const OFF_CURRICULUM_REASON = 'request-names-an-uncatalogued-topic'
+export const OFF_CURRICULUM_REQUEST = `no-figure:${OFF_CURRICULUM_REASON}`
 
 export interface ResolveVisualInput {
   /** The learner's raw message this turn. */
@@ -392,7 +403,7 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   // all, asked before any tier runs.
   if (offTopicRequest) {
     return {
-      ...noFigureDecision('request-names-an-uncatalogued-topic', null, null, resolvePurpose(input, 'explain'), false),
+      ...noFigureDecision(OFF_CURRICULUM_REASON, null, null, resolvePurpose(input, 'explain'), false),
       continuityReason: 'request-off-topic',
       session: null,
     }
@@ -547,6 +558,13 @@ export async function resolveVisualForTurn(
      * rather than a guess from a bare title.
      */
     runtimeTopic?: { title?: string | null; description?: string | null }
+    /**
+     * The learner's OWN earlier messages this session, oldest first. The only
+     * grounding source for a topic they named that the curriculum lacks — see
+     * `requestedTopic.ts`. Never assistant text: judging generated output
+     * against generated prose asks a model whether it agrees with itself.
+     */
+    priorLearnerMessages?: readonly string[]
     /** Generations already made in this session, for the session budget. */
     sessionGenerationCount?: number
     /** Reads the platform's daily generation count. Unreadable ⇒ over budget. */
@@ -565,13 +583,35 @@ export async function resolveVisualForTurn(
   // identity when the caller can supply grounding text to draw from and to be
   // judged against. Without either, there is nothing to generate a figure OF —
   // and that is a refusal, not a fallback to something adjacent.
-  const ctx: TopicIdentity | null =
-    (decision.conceptId ? kgTopicIdentity(decision.conceptId) : null) ??
-    runtimeTopicIdentity({
-      title: deps.runtimeTopic?.title ?? decision.conceptTitle,
-      description: deps.runtimeTopic?.description,
-    })
-  if (!ctx) return decision
+  /**
+   * A TOPIC THE LEARNER NAMED THAT THE CURRICULUM DOES NOT CONTAIN.
+   *
+   * `resolveVisual` has already refused to draw the lesson for this turn — the
+   * request was about something else, and a figure of the lesson would be a
+   * figure of the wrong thing. Drawing what they DID ask about needs a name and
+   * some text, and both come from their own words; see `requestedTopic.ts` for
+   * why that source and no other.
+   *
+   * The lesson's grounding is deliberately unreachable from here. Falling back
+   * to it would reintroduce, one line lower, exactly the defect the refusal
+   * above exists to prevent.
+   */
+  const namedOffCurriculumTopic = decision.provenance === OFF_CURRICULUM_REQUEST
+  const ctx: TopicIdentity | null = namedOffCurriculumTopic
+    ? requestedTopicIdentity(input.message, deps.priorLearnerMessages ?? [])
+    : (decision.conceptId ? kgTopicIdentity(decision.conceptId) : null) ??
+      runtimeTopicIdentity({
+        title: deps.runtimeTopic?.title ?? decision.conceptTitle,
+        description: deps.runtimeTopic?.description,
+      })
+  if (!ctx) {
+    // Declining for want of grounding is a normal outcome, and it is recorded
+    // as its own reason: it is the difference between "nothing to draw" and
+    // "nothing worth drawing", and only one of them is fixed by more text.
+    return namedOffCurriculumTopic
+      ? { ...decision, provenance: 'no-figure:requested-topic-not-grounded' }
+      : decision
+  }
 
   /**
    * Turn a figure into this turn's decision, through the SAME admission gate
@@ -624,6 +664,13 @@ export async function resolveVisualForTurn(
         renderer: admission.asset.renderer,
         returnToConceptId: returnTo,
         turns: 0,
+        // A runtime topic carries its own words, because nothing else can:
+        // its id is a hash of the title and the curriculum has no entry to
+        // re-derive it from. Without this the figure survives every follow-up
+        // turn and then vanishes on refresh.
+        ...(ctx.provenance === 'runtime'
+          ? { topic: { title: ctx.title, description: ctx.description ?? '' } }
+          : {}),
       },
     }
   }
@@ -785,6 +832,85 @@ export async function resolveVisualForTurn(
  * Returns null whenever there is no faithful figure to restore, which is a
  * successful outcome and the common one.
  */
+export async function restoreRuntimeTopicSession(
+  raw: unknown,
+  deps: { cacheClient?: Parameters<typeof readVerdict>[2] } = {},
+): Promise<VisualDecision | null> {
+  const session = parseVisualSession(raw)
+  if (!session || !isRuntimeTopicId(session.conceptId) || !session.topic) return null
+
+  // THE SNAPSHOT IS NOT TRUSTED. The id is a hash of the title, so re-deriving
+  // it is a free integrity check: a hand-edited row cannot attach an arbitrary
+  // description to a cached figure, because the pair would no longer hash to
+  // the id the figure is stored under.
+  const ctx = runtimeTopicIdentity(session.topic)
+  if (!ctx || ctx.conceptId !== session.conceptId) return null
+
+  // The figure and its PASS were both written when it was first served. Read
+  // them back; write nothing, call nothing, generate nothing.
+  const row = await getCachedVisualization(figureCacheKey(ctx.conceptId), deps.cacheClient as never)
+    .catch(() => null)
+  if (!row?.code) return null
+
+  let stored: unknown
+  try { stored = JSON.parse(row.code) } catch { return null }
+
+  const first = validateGeneratedFigure(stored, ctx)
+  if (!first.ok) return null
+  const figure = first.figure
+  const payload = figure.kind === 'scene' ? figure.scene : figure.spec
+
+  // THE SAME BAR THE LIVE PATH CLEARS, and for the same reason. A cache row is
+  // evidence a figure EXISTS, never evidence that it is this topic's and never
+  // evidence that a critic passed it. Both are re-checked here: a verdict that
+  // has expired, or that was recorded against different grounding or a
+  // different figure, restores NOTHING rather than something plausible.
+  const verdict = await readVerdict(ctx, payload, deps.cacheClient).catch(() => null)
+  if (!verdict) return null
+
+  const representation = figure.kind === 'scene'
+    ? representationForSceneType(figure.scene.sceneType)
+    : representationForVisualType(figure.spec.type as VisualType)
+
+  const asset = makeVisualAsset({
+    assetId: `restored:${session.conceptId}`,
+    conceptId: ctx.conceptId,
+    conceptTitle: ctx.title,
+    representation,
+    payload: figure.kind === 'scene'
+      ? { renderer: 'scene', sceneSpec: figure.scene }
+      : { renderer: 'spec', visualSpec: figure.spec },
+    provenance: 'engine-runtime-topic',
+  })
+  const admission = admitVisualAsset(
+    {
+      conceptId: ctx.conceptId,
+      conceptTitle: ctx.title,
+      purpose: 'explain',
+      excursion: session.returnToConceptId !== null,
+      returnToConceptId: session.returnToConceptId,
+    },
+    asset,
+  )
+  if (!admission.ok) return null
+
+  return {
+    purpose: 'explain',
+    representation,
+    payload: admission.asset.payload,
+    asset: admission.asset,
+    graphical: true,
+    source: 'generated',
+    provenance: `restored:${ctx.conceptId}`,
+    conceptId: ctx.conceptId,
+    conceptTitle: ctx.title,
+    excursion: session.returnToConceptId !== null,
+    allowed: null,
+    session,
+    continuityReason: 'restored',
+  }
+}
+
 export function restoreVisualSession(raw: unknown): VisualDecision | null {
   const session = parseVisualSession(raw)
   if (!session) return null

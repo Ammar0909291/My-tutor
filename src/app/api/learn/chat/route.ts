@@ -2411,6 +2411,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   title: lessonCtx?.lessonTitle ?? null,
                   description: lessonCtx?.lessonGoal ?? null,
                 },
+                // GROUNDING FOR A TOPIC THE LEARNER NAMED THAT THE CURRICULUM
+                // DOES NOT CONTAIN. Their OWN earlier messages, oldest first —
+                // never the tutor's, because judging generated output against
+                // generated prose asks a model whether it agrees with itself.
+                // Thin or absent, the engine declines; it never writes a
+                // description in order to have one.
+                priorLearnerMessages: [...learnSession.messages]
+                  .reverse()
+                  .filter((m) => m.role === MessageRole.USER)
+                  .map((m) => m.content),
               })
               visualDecisionHoisted = decision
               // The contract tells the model what is ALREADY on screen, so it

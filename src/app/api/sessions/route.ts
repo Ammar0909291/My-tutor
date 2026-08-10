@@ -115,9 +115,17 @@ export async function POST(req: Request) {
         | { conceptId: string; sceneSpec?: unknown; visual?: string; visualSpec?: unknown }
         | null = null;
       try {
-        const { restoreVisualSession } = await import('@/lib/teaching/visual/resolveVisual');
+        const { restoreVisualSession, restoreRuntimeTopicSession } =
+          await import('@/lib/teaching/visual/resolveVisual');
         const snapshot = existingSession.contextSnapshot as Record<string, unknown> | null;
-        const decision = restoreVisualSession(snapshot?.visualSession);
+        // A curriculum figure is RE-DERIVED (deterministic, no I/O). A figure of
+        // a topic the curriculum does not contain cannot be — there is nothing
+        // to derive from — so it is read back from the cache it was written to,
+        // re-validated and re-checked against its stored verdict. Neither path
+        // calls a model; a refresh must never cost a generation.
+        const decision =
+          restoreVisualSession(snapshot?.visualSession) ??
+          (await restoreRuntimeTopicSession(snapshot?.visualSession));
         const payload = decision?.payload;
         if (payload && decision?.asset) {
           // One branch per renderer the payload union declares — the client

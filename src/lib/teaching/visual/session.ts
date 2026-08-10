@@ -41,6 +41,22 @@ export interface VisualSession {
   returnToConceptId: string | null
   /** Turns this figure has been continuously on screen (safety valve). */
   turns: number
+  /**
+   * The topic's own words, for a figure of something the curriculum does not
+   * contain.
+   *
+   * A KG figure is restored by RE-DERIVING it: `resolveVisual` is deterministic,
+   * so the concept id alone is enough and the payload never needs storing. A
+   * runtime topic has no curriculum entry to re-derive from, and its id is a
+   * hash of its title — which cannot be turned back into words. Without this,
+   * a generated figure survived every follow-up turn and then vanished on
+   * refresh, mid-explanation, with the tutor still talking about it.
+   *
+   * Present ONLY for runtime topics. It is not trusted on sight: the id is
+   * re-derived from this title and must match, so a hand-edited snapshot cannot
+   * attach an arbitrary description to a cached figure.
+   */
+  topic?: { title: string; description: string }
 }
 
 /**
@@ -67,6 +83,20 @@ const RETURN_REQUEST_RE =
  */
 export function isExplicitTopicRequest(message: string): boolean {
   return TOPIC_REQUEST_RE.test(message ?? '')
+}
+
+/**
+ * The request phrase itself — "explain", "teach me", "what is" — and where it
+ * ends.
+ *
+ * Exported so that naming the requested TOPIC uses the same rule that decides
+ * a request happened at all. Two rules would eventually disagree about what a
+ * request is, and then the engine could name a topic from an utterance it does
+ * not consider a request, or refuse to name one from an utterance it does.
+ */
+export function matchTopicRequest(message: string): { phrase: string; end: number } | null {
+  const m = TOPIC_REQUEST_RE.exec(message ?? '')
+  return m ? { phrase: m[0], end: m.index + m[0].length } : null
 }
 
 /** Did the learner ask to go back to what they were doing before? */
@@ -208,5 +238,15 @@ export function parseVisualSession(raw: unknown): VisualSession | null {
       typeof v.turns === 'number' && Number.isFinite(v.turns) && v.turns > 0
         ? Math.floor(v.turns)
         : 0,
+    ...parseTopic(v.topic),
   }
+}
+
+/** The runtime topic's words, when the snapshot carries a usable pair. */
+function parseTopic(raw: unknown): { topic?: { title: string; description: string } } {
+  if (!raw || typeof raw !== 'object') return {}
+  const t = raw as Record<string, unknown>
+  if (typeof t.title !== 'string' || !t.title.trim()) return {}
+  if (typeof t.description !== 'string' || !t.description.trim()) return {}
+  return { topic: { title: t.title, description: t.description } }
 }

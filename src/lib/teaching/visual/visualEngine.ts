@@ -47,6 +47,15 @@ import { recordGenerationOutcome, type GenerationOutcomeSink } from './generatio
 const CACHE_PREFIX = 'scene:v1:'
 
 /**
+ * Where a generated figure lives. Exported because RESTORING one after a page
+ * reload reads the same row this writes — a second spelling of the key would
+ * restore nothing and look exactly like a cache miss.
+ */
+export function figureCacheKey(conceptId: string): string {
+  return `${CACHE_PREFIX}fig:${conceptId}`
+}
+
+/**
  * Object types SceneSpecRenderer actually paints, read from its switch:
  * point/node/particle -> MolecularNode3D, vector/arrow -> Vector3D,
  * label -> Html text, path/trajectory -> marker group, bond -> BondLine.
@@ -741,7 +750,7 @@ export async function generateConceptFigure(
     return result
   }
 
-  const key = `${CACHE_PREFIX}fig:${ctx.conceptId}`
+  const key = figureCacheKey(ctx.conceptId)
   try {
     const cached = await getCachedVisualization(key, deps.cacheClient)
     if (cached?.code) {
