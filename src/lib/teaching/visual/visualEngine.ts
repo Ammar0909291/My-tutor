@@ -79,6 +79,25 @@ const GEOMETRIC: ReadonlySet<SceneObject['type']> = new Set<SceneObject['type']>
  */
 const MAX_SCENE_TOKENS = 3000
 
+/**
+ * How long a learner's turn may wait for a figure that does not exist yet.
+ *
+ * Generation runs INLINE on the first turn that reaches an uncurated concept,
+ * so the first learner pays the full model latency mid-lesson. Measured on
+ * gemini-3.5-flash-lite, a scene takes 2.0-4.2s — acceptable, until the day a
+ * provider is slow and a teaching turn hangs behind it.
+ *
+ * The budget makes the failure mode explicit and cheap: exceed it and the turn
+ * proceeds with NO FIGURE, which this engine already treats as an ordinary
+ * successful outcome rather than an error. The generation is not cancelled —
+ * nothing can un-send an HTTP request — it is simply no longer waited for, and
+ * whatever it produces still reaches the cache for the next learner.
+ *
+ * Warming (see sceneWarming.ts) is what removes the wait entirely; this is the
+ * guard for the concepts warming has not reached yet.
+ */
+const ON_TURN_BUDGET_MS = 8000
+
 const MIN_DRAWN_OBJECTS = 2
 
 /** Distinct anchored objects required before a scene is believed. */
@@ -117,6 +136,7 @@ const STOPWORDS = new Set([
 
 export type EngineRejection =
   | 'flag-off'
+  | 'budget-exceeded'
   | 'no-source-text'
   | 'generation-failed'
   | 'structurally-invalid'
@@ -423,6 +443,11 @@ export async function generateConceptScene(
     outcomeSink?: GenerationOutcomeSink
     /** Policy override for tests; production reads it from the env authority. */
     policy?: ServicePolicy
+    /**
+     * How long to wait for generation. 0 disables the budget entirely, which is
+     * what the offline warming pass wants — nobody is waiting for it there.
+     */
+    budgetMs?: number
   } = {},
 ): Promise<EngineResult> {
   const startedAt = Date.now()
@@ -476,12 +501,24 @@ export async function generateConceptScene(
 
   // 2. Generate.
   let raw: unknown = null
+  let overBudget = false
   try {
-    raw = await (deps.generate ?? generateJSON)(buildConceptScenePrompt(ctx, deps.purpose), MAX_SCENE_TOKENS)
+    const budgetMs = deps.budgetMs ?? ON_TURN_BUDGET_MS
+    const generation = (deps.generate ?? generateJSON)(
+      buildConceptScenePrompt(ctx, deps.purpose), MAX_SCENE_TOKENS,
+    )
+    // The generation keeps running and still populates the cache for the next
+    // learner; this turn simply stops waiting for it.
+    raw = budgetMs > 0
+      ? await Promise.race([
+          generation,
+          new Promise<null>((resolve) => setTimeout(() => { overBudget = true; resolve(null) }, budgetMs)),
+        ])
+      : await generation
   } catch {
     return await finish({ ok: false, reason: 'generation-failed' })
   }
-  if (!raw) return await finish({ ok: false, reason: 'generation-failed' })
+  if (!raw) return await finish({ ok: false, reason: overBudget ? 'budget-exceeded' : 'generation-failed' })
 
   // 3. Validate. A rejected scene is never cached — it must not be served to
   //    the next learner who asks about this concept.
