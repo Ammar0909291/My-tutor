@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 192 READY)
+## english (216 concepts, 195 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1187,7 +1187,7 @@ its subject KG.
 | composition | `eng.composition.academic-writing-conventions` | Academic Writing Conventions | Yes | No | — | MISSING |
 | composition | `eng.composition.argumentation-basics` | Argumentation Basics | Yes | No | — | MISSING |
 | composition | `eng.composition.audience-and-purpose` | Audience and Purpose | Yes | Yes | `educational-brain/concepts/english/eng.composition.audience-and-purpose.md` | READY |
-| composition | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning | Yes | No | — | MISSING |
+| composition | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning | Yes | Yes | `educational-brain/concepts/english/eng.composition.claim-evidence-reasoning.md` | READY |
 | composition | `eng.composition.comparative-essay-writing` | Comparative Essay Writing | Yes | No | — | MISSING |
 | composition | `eng.composition.counterargument-and-rebuttal` | Counterargument and Rebuttal | Yes | No | — | MISSING |
 | composition | `eng.composition.editing-for-style` | Editing for Style | Yes | No | — | MISSING |
@@ -1197,7 +1197,7 @@ its subject KG.
 | composition | `eng.composition.plagiarism-and-citation-ethics` | Plagiarism and Citation Ethics | Yes | No | — | MISSING |
 | composition | `eng.composition.research-paper-writing` | Research Paper Writing | Yes | No | — | MISSING |
 | composition | `eng.composition.rhetorical-analysis` | Rhetorical Analysis | Yes | No | — | MISSING |
-| composition | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos | Yes | No | — | MISSING |
+| composition | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-appeals.md` | READY |
 | composition | `eng.composition.rhetorical-devices` | Rhetorical Devices | Yes | No | — | MISSING |
 | composition | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone | Yes | No | — | MISSING |
 | grammar | `eng.grammar.active-and-passive-voice` | Active and Passive Voice | Yes | Yes | `educational-brain/concepts/english/eng.grammar.active-and-passive-voice.md` | READY |
@@ -1368,7 +1368,7 @@ its subject KG.
 | vocab | `eng.vocab.word-families` | Word Families | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-families.md` | READY |
 | vocab | `eng.vocab.word-formation-processes` | Word Formation Processes | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-formation-processes.md` | READY |
 | vocab | `eng.vocab.word-recognition` | Word Recognition | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-recognition.md` | READY |
-| writing | `eng.writing.citations-and-referencing` | Citations and Referencing | Yes | No | — | MISSING |
+| writing | `eng.writing.citations-and-referencing` | Citations and Referencing | Yes | Yes | `educational-brain/concepts/english/eng.writing.citations-and-referencing.md` | READY |
 | writing | `eng.writing.creative-writing-forms` | Creative Writing Forms | Yes | Yes | `educational-brain/concepts/english/eng.writing.creative-writing-forms.md` | READY |
 | writing | `eng.writing.descriptive-writing` | Descriptive Writing | Yes | Yes | — | READY |
 | writing | `eng.writing.drafting` | Drafting | Yes | Yes | `educational-brain/concepts/english/eng.writing.drafting.md` | READY |

@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **935** (= 1,775 KG concepts − 840 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 22 completion,
+Total queued: **932** (= 1,775 KG concepts − 843 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 23 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1750,9 +1750,6 @@ math.nt Wave 8, moved to READY.
 | 1305 | mathematics | 30 | `math.cx.analytic-continuation` | Analytic Continuation |
 | 1306 | mathematics | 30 | `math.cx.residue` | Residue |
 | 1307 | mathematics | 30 | `math.num.cholesky` | Cholesky Factorization (Numerical) |
-| 1308 | english | 30 | `eng.writing.citations-and-referencing` | Citations and Referencing |
-| 1309 | english | 30 | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning |
-| 1310 | english | 30 | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos |
 | 1311 | mathematics | 31 | `math.alg.discriminant` | Discriminant |
 | 1312 | mathematics | 31 | `math.alg.complex-polynomial-roots` | Complex Roots of Polynomials |
 | 1313 | mathematics | 31 | `math.alg.rational-inequality` | Rational Inequality |
