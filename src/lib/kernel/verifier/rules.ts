@@ -473,10 +473,80 @@ export const RULES = [
   vAssess, vComplete,
   vTag,
   vQ1, vQ2, vStage, vVocName, vVocFormula, vVocReg,
-  vTerms, vLen, vCap, vRec, vClose, vPraise, vReact,
+  vTerms, vLen, vCap, vRec, vClose, vPraise, vReact, vAffirm,
   // S1 — history-aware, LOG severity (see block above). Ordered last: none
   // of them strip or reject, so their position cannot affect any earlier
   // rule's view of the text.
   vDupExact, vDupNear, vDupQuestion, vRecRepeat, vOscillate,
   vObj, vNoProgress,
 ] as const
+
+// ── V-AFFIRM · opens by agreeing with a definition the LEARNER proposed ──────
+//
+// MEASURED, TWICE, IN PRODUCTION, ON THE FIRST CONCEPT IN PHYSICS.
+//
+//   learner "is a unit just the name of the thing youre counting"
+//   tutor   "Yes, exactly" … then a correct definition
+//   learner "ok so if i count 5 apples the unit is apples right"
+//   tutor   "That is completely right—when you are counting fruit,
+//            'apples' is the unit"
+//
+// "Apples" is not a unit; it is a countable object, and counting is
+// dimensionless. The learner walked away holding a false idea because they
+// heard the agreement first — the correct definition that followed reads as
+// elaboration, not correction.
+//
+// A PROMPT RULE WAS TRIED FIRST AND MEASURED INSUFFICIENT. It banned "yes",
+// "exactly", "spot on" and "that is right"; the model replied "That is
+// correct" and restated the misconception. Enumerating forbidden phrases
+// teaches which PHRASES to avoid, not which CLAIMS to refuse — so the check
+// has to live on the OUTPUT, where it is a total function of the draft and
+// cannot be talked around.
+//
+// SCOPE, deliberately narrow. It fires only when the learner FLOATED a
+// definition — "is X just Y?", "so X is Y right?", "does that mean …" — and
+// the draft OPENS with bare agreement. It is silent when:
+//   • the learner answered a question the tutor asked (no proposal shape), so
+//     confirming a correct answer is untouched;
+//   • agreement appears later in the draft rather than as the opener;
+//   • the learner asked an ordinary question ("what is a unit?").
+//
+// It does NOT decide whether the learner was right — that is not decidable
+// here, and it is not the point. Even a learner who is roughly right is badly
+// served by "yes" plus a silent substitution: the tutor should say the correct
+// formulation in its own words. Rejecting costs one re-render; agreeing with a
+// wrong claim costs the concept.
+const LEARNER_PROPOSES_RE =
+  /\b(?:is|are|isn'?t|aren'?t)\s+(?:it|that|this|a|an|the)?\s*\w[\w\s-]{0,40}?\s+just\s+/i
+// The trailing "right" tag needs NO question mark. Measured: the real learner
+// typed "ok so if i count 5 apples the unit is apples right" — no "?" at all —
+// and an earlier version of this pattern required one, so the worst of the two
+// production failures walked straight through. Beginners punctuate loosely;
+// a rule that depends on punctuation is a rule that misses beginners.
+const LEARNER_PROPOSES_ALT_RE =
+  /(?:\bso\b[\s\S]{0,90}\bright\b\s*[?.!]?\s*$|\bdoes\s+that\s+mean\b|\bis\s+that\s+(?:the\s+same|because)\b|\bso\s+it'?s\b[\s\S]{0,60}\?|,\s*right\s*[?.!]?\s*$|\bmeans?\s+(?:it|that|the)\b[\s\S]{0,60}\?)/i
+
+const BARE_AGREEMENT_OPENER_RE =
+  /^\s*(?:yes|yeah|yep|yup|exactly|correct|right|true|absolutely|precisely|indeed|spot\s+on|perfect|100%|of\s+course|that(?:'|’)?s\s+(?:right|correct|it|exactly\s+right)|that\s+is\s+(?:right|correct|completely\s+right|exactly\s+right)|you(?:'|’)?re\s+(?:right|correct))\b/i
+
+export function vAffirm(text: string, ctx: VerifierContext): Violation | null {
+  const learner = (ctx.learnerText ?? '').trim()
+  if (!learner) return null
+  const proposes =
+    LEARNER_PROPOSES_RE.test(learner) || LEARNER_PROPOSES_ALT_RE.test(learner)
+  if (!proposes) return null
+
+  const clean = withoutCodeFences(text).trim()
+  if (!clean) return null
+  const opener = BARE_AGREEMENT_OPENER_RE.exec(clean)
+  if (!opener) return null
+
+  return {
+    code: 'V-AFFIRM',
+    severity: 'REJECT',
+    matched: opener[0].slice(0, 80),
+    detail:
+      'the learner proposed a definition; do not open by agreeing. State the ' +
+      'correct formulation yourself, naming any difference explicitly.',
+  }
+}

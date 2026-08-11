@@ -36,6 +36,7 @@ export const RULE_CODES = [
   'V-PRAISE',   // banned praise/mockery for current affect band
   'V-REACT',    // (LOG-only in v1) REACT mandated but missing
   'V-CLOSE',    // CLOSE move introduces new content (RS I-14)
+  'V-AFFIRM',   // opens by agreeing with a definition the LEARNER proposed
   // S1 (Runtime Redesign Mission, Part 3/4) — history-aware rules. All LOG
   // severity for now: thresholds are unvalidated against real traffic, and
   // this codebase's own promotion discipline (eos-runtime/flags.ts) is
@@ -75,6 +76,7 @@ export const SEVERITY: Record<RuleCode, Severity> = {
   'V-PRAISE':    'REJECT',
   'V-REACT':     'LOG',
   'V-CLOSE':     'REJECT',
+  'V-AFFIRM':    'REJECT',
   // S1 — LOG only until real-traffic false-positive rates are measured
   // (design report §S7: "never flip all at once").
   'V-DUP-EXACT':    'LOG',

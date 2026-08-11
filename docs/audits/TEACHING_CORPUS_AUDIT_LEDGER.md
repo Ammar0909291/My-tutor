@@ -486,3 +486,51 @@ To produce them, run from any machine with ordinary internet:
 
     AUDIT_EMAIL=... AUDIT_PASSWORD=... \
       npx tsx scripts/audit/capture-topic.ts phys.meas.units "your probe here"
+
+## V-AFFIRM — deterministic output rule (commit pending, this turn)
+
+The prompt rule was measured insufficient (see the replay above: it banned
+"yes/exactly/spot on/that is right", the model said "That is correct"). The
+check now lives on the OUTPUT, in K5, where it is a total function of the draft
+and cannot be talked around.
+
+`vAffirm` REJECTS a draft when BOTH hold:
+- the learner FLOATED a definition — "is X just Y?", "so X is Y right", "does
+  that mean…" — and
+- the draft OPENS with bare agreement (16 openers matched, incl. "That is
+  correct", the one that defeated the prompt).
+
+Silent when the learner ANSWERED a tutor question (confirming a correct answer
+is untouched), when agreement appears later rather than as the opener, and on
+ordinary questions.
+
+**A detector bug caught by its own test:** the first pattern required a "?" on
+the trailing "right" tag. The real learner typed *"ok so if i count 5 apples the
+unit is apples right"* — no question mark — so the worse of the two production
+failures walked straight through. Beginners punctuate loosely; a rule that
+depends on punctuation is a rule that misses beginners. Fixed and covered.
+
+Tests: `src/tests/verifierAffirmRule.test.ts`, 11 cases.
+Suite 295 files / 6,364 passed / 9 skipped; tsc clean.
+
+### ⚠ INERT IN PRODUCTION — owner action required
+
+K5 is wired into the chat route (`route.ts` ~3711 → `verifierGate`) and
+`learnerText` is supplied, but the whole subsystem is gated on
+`ENABLE_EOS_RUNTIME` / `VERIFIER_MODE`, which are **not set in Vercel**. So
+V-AFFIRM is correct, tested, and will not fire for a learner until a human
+enables it. This session cannot set Vercel env vars (no env-var tool, no
+VERCEL_TOKEN) — the same standing limitation recorded for the visual flags.
+
+**Owner action:** set `VERIFIER_MODE=enforce` (or `ENABLE_EOS_RUNTIME=1`) in
+Vercel production, then replay Topic 1. Until then Topic 1 stays FAILED.
+
+### NEXT EXACT ACTION
+1. (owner) enable the verifier flag in Vercel.
+2. Replay `phys.meas.units` with the two production probes; assert on the
+   CLAIM, not a phrase list.
+3. If green → mark Topic 1 VERIFIED, preserve its working explanation as a
+   moat asset, then Topic 2 (`phys.meas.dimensions`).
+4. If the flag cannot be enabled, promote V-AFFIRM's logic into the always-on
+   path instead of the flagged one — that is a code change within my authority
+   and does not need the owner.
