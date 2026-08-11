@@ -904,6 +904,9 @@ corrected here.
 | `eng.composition.comparative-essay-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.research-paper-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.academic-writing-conventions` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.plagiarism-and-citation-ethics` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.editing-for-style` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.academic-writing-advanced` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## What this ledger means for the next batch
 
@@ -954,3 +957,16 @@ scheme). English row count in this ledger: 205 → 206. The aggregate
 summary table above remains a mathematics-scoped snapshot, not
 recomputed globally this batch, per this file's own standing note —
 per-row data for English is authoritative and current as of this batch.
+
+## English Batch 28 addition (2026-08-11)
+
+Adds 3 English rows (`eng.composition.plagiarism-and-citation-ethics`,
+`eng.composition.editing-for-style`,
+`eng.communication.academic-writing-advanced` — the first
+`eng.communication.*` row in this ledger), all with existing Blueprints
+reused by reference, all sections present (full ✓ row per the current
+`EDUCATIONAL_BRAIN_STANDARD.md` heading scheme). English row count in
+this ledger: 206 → 209. The aggregate summary table above remains a
+mathematics-scoped snapshot, not recomputed globally this batch, per
+this file's own standing note — per-row data for English is
+authoritative and current as of this batch.

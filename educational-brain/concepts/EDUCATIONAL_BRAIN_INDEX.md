@@ -1169,10 +1169,10 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 206 READY)
+## english (216 concepts, 209 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
-| communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
+| communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | Yes | `educational-brain/concepts/english/eng.communication.academic-writing-advanced.md` | READY |
 | communication | `eng.communication.business-writing` | Business Writing | Yes | No | — | MISSING |
 | communication | `eng.communication.cross-cultural-communication` | Cross-Cultural Communication | Yes | Yes | `educational-brain/concepts/english/eng.communication.cross-cultural-communication.md` | READY |
 | communication | `eng.communication.digital-communication` | Digital Communication | Yes | Yes | `educational-brain/concepts/english/eng.communication.digital-communication.md` | READY |
@@ -1190,11 +1190,11 @@ its subject KG.
 | composition | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning | Yes | Yes | `educational-brain/concepts/english/eng.composition.claim-evidence-reasoning.md` | READY |
 | composition | `eng.composition.comparative-essay-writing` | Comparative Essay Writing | Yes | Yes | `educational-brain/concepts/english/eng.composition.comparative-essay-writing.md` | READY |
 | composition | `eng.composition.counterargument-and-rebuttal` | Counterargument and Rebuttal | Yes | Yes | `educational-brain/concepts/english/eng.composition.counterargument-and-rebuttal.md` | READY |
-| composition | `eng.composition.editing-for-style` | Editing for Style | Yes | No | — | MISSING |
+| composition | `eng.composition.editing-for-style` | Editing for Style | Yes | Yes | `educational-brain/concepts/english/eng.composition.editing-for-style.md` | READY |
 | composition | `eng.composition.figurative-language-in-composition` | Figurative Language in Composition | Yes | Yes | `educational-brain/concepts/english/eng.composition.figurative-language-in-composition.md` | READY |
 | composition | `eng.composition.logical-fallacies` | Logical Fallacies | Yes | Yes | `educational-brain/concepts/english/eng.composition.logical-fallacies.md` | READY |
 | composition | `eng.composition.persuasive-techniques` | Advanced Persuasive Techniques | Yes | Yes | `educational-brain/concepts/english/eng.composition.persuasive-techniques.md` | READY |
-| composition | `eng.composition.plagiarism-and-citation-ethics` | Plagiarism and Citation Ethics | Yes | No | — | MISSING |
+| composition | `eng.composition.plagiarism-and-citation-ethics` | Plagiarism and Citation Ethics | Yes | Yes | `educational-brain/concepts/english/eng.composition.plagiarism-and-citation-ethics.md` | READY |
 | composition | `eng.composition.research-paper-writing` | Research Paper Writing | Yes | Yes | `educational-brain/concepts/english/eng.composition.research-paper-writing.md` | READY |
 | composition | `eng.composition.rhetorical-analysis` | Rhetorical Analysis | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-analysis.md` | READY |
 | composition | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-appeals.md` | READY |
