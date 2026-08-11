@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 118 READY)
+## english (216 concepts, 120 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1252,7 +1252,7 @@ its subject KG.
 | linguistics | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.language-families` | Language Families | Yes | No | — | MISSING |
-| linguistics | `eng.linguistics.morphology-intro` | Introduction to Morphology | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.morphology-intro` | Introduction to Morphology | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.morphology-intro.md` | READY |
 | linguistics | `eng.linguistics.phonology-intro` | Introduction to Phonology | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.phonology-intro.md` | READY |
 | linguistics | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics | Yes | No | — | MISSING |
@@ -1323,7 +1323,7 @@ its subject KG.
 | phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | Yes | `educational-brain/concepts/english/eng.phonics.sight-words.md` | READY |
 | phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | Yes | `educational-brain/concepts/english/eng.phonics.syllable-types.md` | READY |
 | reading | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone | Yes | Yes | `educational-brain/concepts/english/eng.reading.authors-purpose-and-tone.md` | READY |
-| reading | `eng.reading.close-reading` | Close Reading | Yes | No | — | MISSING |
+| reading | `eng.reading.close-reading` | Close Reading | Yes | Yes | `educational-brain/concepts/english/eng.reading.close-reading.md` | READY |
 | reading | `eng.reading.compare-and-contrast-texts` | Comparing and Contrasting Texts | Yes | Yes | `educational-brain/concepts/english/eng.reading.compare-and-contrast-texts.md` | READY |
 | reading | `eng.reading.critical-reading` | Critical Reading | Yes | No | — | MISSING |
 | reading | `eng.reading.evaluating-sources` | Evaluating Sources | Yes | No | — | MISSING |

@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1009** (= 1,775 KG concepts − 766 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 12 continuation,
+Total queued: **1007** (= 1,775 KG concepts − 768 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 12 part 2 continuation,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1154,7 +1154,6 @@ authored math.geom Wave 7, moved to READY.
 | 659 | mathematics | 17 | `math.real.connectedness` | Connectedness |
 | 660 | mathematics | 17 | `math.real.pointwise-convergence` | Pointwise Convergence |
 | 661 | mathematics | 17 | `math.graph.ramsey-theory` | Ramsey Theory |
-| 665 | english | 17 | `eng.reading.close-reading` | Close Reading |
 | 667 | chemistry | 17 | `chem.sol.osmosis` | Osmosis and Osmotic Pressure |
 | 668 | chemistry | 17 | `chem.hyd.alkynes` | Alkynes |
 | 669 | chemistry | 17 | `chem.alc.phenols` | Phenols |
@@ -1475,7 +1474,6 @@ authored math.nt Wave 4, moved to READY.
 | 963 | english | 21 | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion |
 | 964 | english | 21 | `eng.literature.literary-devices-overview` | Overview of Literary Devices |
 | 965 | english | 21 | `eng.literature.prose-nonfiction` | Prose Nonfiction |
-| 967 | english | 21 | `eng.linguistics.morphology-intro` | Introduction to Morphology |
 | 968 | chemistry | 21 | `chem.bio.nucleic-acids` | Nucleic Acids |
 | 969 | chemistry | 21 | `chem.bio.vitamins` | Vitamins and Hormones |
 | 970 | chemistry | 21 | `chem.bio.enzyme-kinetics` | Enzyme Kinetics |
