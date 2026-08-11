@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 205 READY)
+## english (216 concepts, 206 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1184,7 +1184,7 @@ its subject KG.
 | communication | `eng.communication.professional-communication` | Professional Communication | Yes | No | — | MISSING |
 | communication | `eng.communication.research-methodology-writing` | Writing Research Methodology | Yes | No | — | MISSING |
 | communication | `eng.communication.technical-writing` | Technical Writing | Yes | No | — | MISSING |
-| composition | `eng.composition.academic-writing-conventions` | Academic Writing Conventions | Yes | No | — | MISSING |
+| composition | `eng.composition.academic-writing-conventions` | Academic Writing Conventions | Yes | Yes | `educational-brain/concepts/english/eng.composition.academic-writing-conventions.md` | READY |
 | composition | `eng.composition.argumentation-basics` | Argumentation Basics | Yes | Yes | `educational-brain/concepts/english/eng.composition.argumentation-basics.md` | READY |
 | composition | `eng.composition.audience-and-purpose` | Audience and Purpose | Yes | Yes | `educational-brain/concepts/english/eng.composition.audience-and-purpose.md` | READY |
 | composition | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning | Yes | Yes | `educational-brain/concepts/english/eng.composition.claim-evidence-reasoning.md` | READY |

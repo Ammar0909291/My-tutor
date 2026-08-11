@@ -903,6 +903,7 @@ corrected here.
 | `eng.composition.persuasive-techniques` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.comparative-essay-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.research-paper-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.academic-writing-conventions` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## What this ledger means for the next batch
 
@@ -943,3 +944,13 @@ this ledger: 201 → 205. The aggregate summary table above remains a
 mathematics-scoped snapshot, not recomputed globally this batch, per
 this file's own standing note — per-row data for English is
 authoritative and current as of this batch.
+
+## English Batch 27 addition (2026-08-11)
+
+Adds 1 English row (`eng.composition.academic-writing-conventions`),
+with an existing Blueprint reused by reference, all sections present
+(full ✓ row per the current `EDUCATIONAL_BRAIN_STANDARD.md` heading
+scheme). English row count in this ledger: 205 → 206. The aggregate
+summary table above remains a mathematics-scoped snapshot, not
+recomputed globally this batch, per this file's own standing note —
+per-row data for English is authoritative and current as of this batch.
