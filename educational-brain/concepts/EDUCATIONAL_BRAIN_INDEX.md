@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 195 READY)
+## english (216 concepts, 197 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1185,7 +1185,7 @@ its subject KG.
 | communication | `eng.communication.research-methodology-writing` | Writing Research Methodology | Yes | No | — | MISSING |
 | communication | `eng.communication.technical-writing` | Technical Writing | Yes | No | — | MISSING |
 | composition | `eng.composition.academic-writing-conventions` | Academic Writing Conventions | Yes | No | — | MISSING |
-| composition | `eng.composition.argumentation-basics` | Argumentation Basics | Yes | No | — | MISSING |
+| composition | `eng.composition.argumentation-basics` | Argumentation Basics | Yes | Yes | `educational-brain/concepts/english/eng.composition.argumentation-basics.md` | READY |
 | composition | `eng.composition.audience-and-purpose` | Audience and Purpose | Yes | Yes | `educational-brain/concepts/english/eng.composition.audience-and-purpose.md` | READY |
 | composition | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning | Yes | Yes | `educational-brain/concepts/english/eng.composition.claim-evidence-reasoning.md` | READY |
 | composition | `eng.composition.comparative-essay-writing` | Comparative Essay Writing | Yes | No | — | MISSING |
@@ -1198,7 +1198,7 @@ its subject KG.
 | composition | `eng.composition.research-paper-writing` | Research Paper Writing | Yes | No | — | MISSING |
 | composition | `eng.composition.rhetorical-analysis` | Rhetorical Analysis | Yes | No | — | MISSING |
 | composition | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-appeals.md` | READY |
-| composition | `eng.composition.rhetorical-devices` | Rhetorical Devices | Yes | No | — | MISSING |
+| composition | `eng.composition.rhetorical-devices` | Rhetorical Devices | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-devices.md` | READY |
 | composition | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone | Yes | No | — | MISSING |
 | grammar | `eng.grammar.active-and-passive-voice` | Active and Passive Voice | Yes | Yes | `educational-brain/concepts/english/eng.grammar.active-and-passive-voice.md` | READY |
 | grammar | `eng.grammar.adjectives` | Adjectives | Yes | Yes | `educational-brain/concepts/english/eng.grammar.adjectives.md` | READY |

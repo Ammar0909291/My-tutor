@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **932** (= 1,775 KG concepts − 843 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 23 completion,
+Total queued: **930** (= 1,775 KG concepts − 845 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 24 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1765,8 +1765,6 @@ math.nt Wave 8, moved to READY.
 | 1323 | mathematics | 31 | `math.cx.maximum-modulus` | Maximum Modulus Principle |
 | 1324 | mathematics | 31 | `math.cx.riemann-surface` | Riemann Surface |
 | 1325 | mathematics | 31 | `math.cx.riemann-zeta` | Riemann Zeta Function |
-| 1326 | english | 31 | `eng.composition.argumentation-basics` | Argumentation Basics |
-| 1327 | english | 31 | `eng.composition.rhetorical-devices` | Rhetorical Devices |
 | 1328 | mathematics | 32 | `math.nt.riemann-hypothesis` | Riemann Hypothesis |
 | 1329 | mathematics | 32 | `math.func.vertical-asymptote` | Vertical Asymptote |
 | 1330 | mathematics | 32 | `math.func.horizontal-asymptote` | Horizontal Asymptote |
