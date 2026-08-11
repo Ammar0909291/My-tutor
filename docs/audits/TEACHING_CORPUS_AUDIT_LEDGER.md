@@ -129,3 +129,27 @@ explicit anti-vacuity anchor pinning the real restored figure
 assertion in that file would pass if restoration silently returned nothing.
 
 Suite 293 files / 6,332 passed / 9 skipped; tsc clean; build clean.
+
+### Production verification — PASSED (2026-08-11, `dpl_ADzbE1UW…` READY, commit `6989d51a`)
+
+Real learner account (`suaibamr@gmail.com`), normal credentials sign-in,
+session `cmsop6py8000hjl04ox1feza4`, physics / Free Body Diagrams.
+
+1. Asked for a diagram -> `visual: force_diagram` served.
+2. `GET /api/sessions/history` fetched THREE times (three page refreshes):
+   identical every time — `visuals` carried exactly one entry, keyed to
+   message `cmsoytgpf0005i504hyds6h1f`, `force_diagram`,
+   `phys.mech.free-body-diagram`. Same identity, same figure, no drift.
+3. Then asked "What is thermal conductivity?" — an unresolved topic, which
+   correctly returned `visual: None`.
+4. Refreshed again. The figure STAYED on the message that showed it. The last
+   ASSISTANT message is now the thermal-conductivity answer, and it carries
+   NO figure.
+
+Step 4 is the decisive one. Under the previous code the force diagram would
+have been re-attached to the thermal-conductivity message, because the client
+attached the session's current figure to the last assistant message by
+position. That is the D10 defect, and it is demonstrably gone.
+
+199 older messages restore no figure — they predate the column. Correct and
+expected: the fix records figures from now on, and does not fabricate history.
