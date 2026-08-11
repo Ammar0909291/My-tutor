@@ -13,19 +13,21 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **754** |
-| Remaining | **1,021** |
-| Completion percentage | **42.48%** |
+| Concepts with an Educational Brain entry | **758** |
+| Remaining | **1,017** |
+| Completion percentage | **42.70%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 106 english + 186 chemistry + 0 biology + 0 computer_science = 754.
-English corrected 2026-08-11 from a stale 6 to the true 106 — this file
-had not been updated across ~93 English batches authored directly on
-`main` via commit-message-only tracking, plus 7 newly-reconciled
-concepts from a parallel feature branch; see `AUTHORING_QUEUE.md`'s
-English branch-reconciliation note for the full audit. Mathematics/
-physics/chemistry figures are taken as already-recorded below, not
-re-audited this session, per this session's English-only scope.)*
++ 110 english + 186 chemistry + 0 biology + 0 computer_science = 758.
+English corrected 2026-08-11 from a stale 6 to 106 via branch
+reconciliation (this file had not been updated across ~93 English
+batches authored directly on `main` via commit-message-only tracking,
+plus 7 newly-reconciled concepts from a parallel feature branch — see
+`AUTHORING_QUEUE.md`'s English branch-reconciliation note for the full
+audit), then continued in the same session to 110 (Batch 10: 4 concepts
+at the newly-unlocked frontier — see §6). Mathematics/physics/chemistry
+figures are taken as already-recorded below, not re-audited this
+session, per this session's English-only scope.)*
 
 ---
 
@@ -35,7 +37,7 @@ re-audited this session, per this session's English-only scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 106 | 49.07% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 110 | 50.93% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1201,6 +1203,33 @@ completion constraint) takes precedence over that file's literal row
 order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
+
+**English Batch 10 (2026-08-11, continuing directly after the branch
+reconciliation, same session, autonomous loop per standing instruction)**:
+recomputed the topological queue fresh against the true 106-concept
+baseline — 9 concepts had every prerequisite already satisfied:
+`eng.listening.listening-for-detail`, `eng.speaking.conversation-skills`,
+`eng.communication.digital-communication`, `eng.reading.authors-purpose-
+and-tone`, `eng.reading.compare-and-contrast-texts`, `eng.reading.genre-
+recognition`, `eng.reading.predicting-and-confirming`, `eng.writing.
+sentence-writing`, `eng.linguistics.what-is-linguistics`. Authored 4 of
+the 9 this batch: `eng.listening.listening-for-detail` (unlocked by
+`eng.listening.listening-for-gist`), `eng.speaking.conversation-skills`
+(unlocked by `eng.speaking.pronunciation-in-conversation`),
+`eng.reading.predicting-and-confirming` (unlocked by `eng.reading.
+inference-in-reading`, confirmed terminal — `unlocks: []`), and
+`eng.reading.authors-purpose-and-tone` (unlocked by `eng.reading.
+inference-in-reading`, cross-linked to `eng.reading.close-reading`). All
+4 had existing Blueprints (2 marked `status: draft` in their own
+Component 0 — confirmed this does not block EB authoring, per this
+program's established convention), reused by reference. English EB
+reached 110/216 (50.93%). True total: **758** EB entries (238 physics +
+224 mathematics + 110 english + 186 chemistry), out of 1,775 total KG
+concepts — 1,017 remaining, 42.70%. Remaining 5 already-unlocked
+candidates (`eng.communication.digital-communication`, `eng.reading.
+compare-and-contrast-texts`, `eng.reading.genre-recognition`,
+`eng.writing.sentence-writing`, `eng.linguistics.what-is-linguistics`)
+deferred to the next batch.
 
 **English branch-reconciliation (2026-08-11)**: this session picked up a
 separate English-authoring feature branch

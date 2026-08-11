@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 106 READY)
+## english (216 concepts, 110 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1266,7 +1266,7 @@ its subject KG.
 | listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | Yes | `educational-brain/concepts/english/eng.listening.distinguishing-sounds-in-speech.md` | READY |
 | listening | `eng.listening.following-instructions` | Following Spoken Instructions | Yes | No | — | MISSING |
 | listening | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies | Yes | No | — | MISSING |
-| listening | `eng.listening.listening-for-detail` | Listening for Detail | Yes | No | — | MISSING |
+| listening | `eng.listening.listening-for-detail` | Listening for Detail | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-detail.md` | READY |
 | listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-gist.md` | READY |
 | listening | `eng.listening.note-taking-while-listening` | Note-Taking While Listening | Yes | No | — | MISSING |
 | literature | `eng.literature.character-development` | Character Development | Yes | No | — | MISSING |
@@ -1322,7 +1322,7 @@ its subject KG.
 | phonics | `eng.phonics.short-vowels` | Short Vowel Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.short-vowels.md` | READY |
 | phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | Yes | `educational-brain/concepts/english/eng.phonics.sight-words.md` | READY |
 | phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | Yes | `educational-brain/concepts/english/eng.phonics.syllable-types.md` | READY |
-| reading | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone | Yes | No | — | MISSING |
+| reading | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone | Yes | Yes | `educational-brain/concepts/english/eng.reading.authors-purpose-and-tone.md` | READY |
 | reading | `eng.reading.close-reading` | Close Reading | Yes | No | — | MISSING |
 | reading | `eng.reading.compare-and-contrast-texts` | Comparing and Contrasting Texts | Yes | No | — | MISSING |
 | reading | `eng.reading.critical-reading` | Critical Reading | Yes | No | — | MISSING |
@@ -1331,7 +1331,7 @@ its subject KG.
 | reading | `eng.reading.inference-in-reading` | Inference in Reading | Yes | Yes | `educational-brain/concepts/english/eng.reading.inference-in-reading.md` | READY |
 | reading | `eng.reading.literal-comprehension` | Literal Comprehension | Yes | Yes | `educational-brain/concepts/english/eng.reading.literal-comprehension.md` | READY |
 | reading | `eng.reading.main-idea-and-details` | Main Idea and Supporting Details | Yes | Yes | `educational-brain/concepts/english/eng.reading.main-idea-and-details.md` | READY |
-| reading | `eng.reading.predicting-and-confirming` | Predicting and Confirming | Yes | No | — | MISSING |
+| reading | `eng.reading.predicting-and-confirming` | Predicting and Confirming | Yes | Yes | `educational-brain/concepts/english/eng.reading.predicting-and-confirming.md` | READY |
 | reading | `eng.reading.print-to-meaning` | From Print to Meaning | Yes | Yes | `educational-brain/concepts/english/eng.reading.print-to-meaning.md` | READY |
 | reading | `eng.reading.reading-across-genres` | Reading Across Genres | Yes | No | — | MISSING |
 | reading | `eng.reading.reading-fluency` | Reading Fluency | Yes | Yes | `educational-brain/concepts/english/eng.reading.reading-fluency.md` | READY |
@@ -1339,7 +1339,7 @@ its subject KG.
 | reading | `eng.reading.summarizing` | Summarizing | Yes | Yes | `educational-brain/concepts/english/eng.reading.summarizing.md` | READY |
 | reading | `eng.reading.text-structure` | Text Structure | Yes | Yes | `educational-brain/concepts/english/eng.reading.text-structure.md` | READY |
 | speaking | `eng.speaking.asking-and-answering-questions` | Asking and Answering Questions | Yes | No | — | MISSING |
-| speaking | `eng.speaking.conversation-skills` | Conversation Skills | Yes | No | — | MISSING |
+| speaking | `eng.speaking.conversation-skills` | Conversation Skills | Yes | Yes | `educational-brain/concepts/english/eng.speaking.conversation-skills.md` | READY |
 | speaking | `eng.speaking.debate-skills` | Debate Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.discussion-skills` | Discussion Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.non-verbal-communication` | Non-Verbal Communication | Yes | No | — | MISSING |

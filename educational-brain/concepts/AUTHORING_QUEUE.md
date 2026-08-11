@@ -21,9 +21,9 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1021** (= 1,775 KG concepts − 754 already `READY`, per
-`ROADMAP.md`'s §1 Totals as reconciled 2026-08-11 — see the English
-branch-reconciliation note below). This header was stale at 1524/251
+Total queued: **1017** (= 1,775 KG concepts − 758 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 10 continuation,
+2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
 math.found Waves 7-10's and math.geom Wave 10's positions below.
@@ -898,8 +898,6 @@ Domain Certification), moved to READY.
 | 363 | mathematics | 11 | `math.cat.functor-category` | Functor Category |
 | 364 | mathematics | 11 | `math.cat.limits` | Limits and Colimits |
 | 365 | mathematics | 11 | `math.cat.adjunction` | Adjunction |
-| 377 | english | 11 | `eng.listening.listening-for-detail` | Listening for Detail |
-| 378 | english | 11 | `eng.speaking.conversation-skills` | Conversation Skills |
 | 379 | biology | 11 | `bio.mol.gene-regulation` | Regulation of Gene Expression |
 | 380 | biology | 11 | `bio.gen.chromosomal-theory-linkage` | Chromosomal Theory and Linkage |
 | 381 | biology | 11 | `bio.repro.reproductive-health` | Reproductive Health and Contraception |
@@ -1087,9 +1085,7 @@ math.geom Wave 5, moved to READY.
 | 591 | mathematics | 16 | `math.real.archimedean` | Archimedean Property |
 | 592 | mathematics | 16 | `math.real.convergence-sequences` | Convergence of Sequences |
 | 593 | mathematics | 16 | `math.real.open-sets` | Open and Closed Sets |
-| 596 | english | 16 | `eng.reading.predicting-and-confirming` | Predicting and Confirming |
 | 597 | english | 16 | `eng.reading.genre-recognition` | Genre Recognition |
-| 598 | english | 16 | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone |
 | 599 | english | 16 | `eng.reading.compare-and-contrast-texts` | Comparing and Contrasting Texts |
 | 600 | english | 16 | `eng.speaking.debate-skills` | Debate Skills |
 | 601 | chemistry | 16 | `chem.sol.colligative` | Colligative Properties |
