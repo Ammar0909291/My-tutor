@@ -449,3 +449,40 @@ starts by implementing (1).
 | VERIFIED | 0 |
 | FAILED (unresolved) | 1 — `phys.meas.units` |
 | REMAINING | 423 |
+
+## Screenshots per topic — script ready, capture BLOCKED in this sandbox
+
+`scripts/audit/capture-topic.ts` drives real Chromium against real production:
+signs in through the actual login form, opens the topic, optionally sends one
+probe, and writes `docs/audits/screenshots/<conceptId>.png`. Credentials come
+from `AUDIT_EMAIL` / `AUDIT_PASSWORD`, so the file is safe to commit.
+
+**It cannot run here.** Chromium fails with `net::ERR_CONNECTION_RESET` on
+EVERY host through the sandbox's egress proxy — verified against
+`https://example.com`, not just the app, so it is not app-specific and not a
+TLS-trust problem. curl through the same proxy returns 200 for the same URL.
+The proxy's own status endpoint logs the browser's traffic as
+`"kind":"not_connect", "detail":"non-CONNECT request: GET http://clients2.google.com"`.
+
+Tried and rejected, in order:
+- `chromium.launch({ proxy: { server: HTTPS_PROXY } })` — reset
+- explicit `--proxy-server=` arg plus `--disable-background-networking`
+  and `--disable-component-update` — reset
+- pointing `executablePath` at the pre-installed `/opt/pw-browsers/chromium-1194`
+  binary (the npm playwright copy is a different build and would otherwise
+  demand a download) — fixed the launch, did not fix the network
+
+NOT attempted, deliberately: disabling TLS verification or `ignoreHTTPSErrors`.
+That would trade a real security property for a picture.
+
+**What this does NOT block:** the audit itself. Every finding so far is from
+real authenticated HTTP against production, with full response text recorded
+in this ledger — that is stronger evidence of what the tutor SAID than a
+screenshot. What screenshots would add is what the learner SEES: whether a
+figure rendered, whether it sits beside the right message, whether layout
+holds. That evidence is currently unavailable from this environment.
+
+To produce them, run from any machine with ordinary internet:
+
+    AUDIT_EMAIL=... AUDIT_PASSWORD=... \
+      npx tsx scripts/audit/capture-topic.ts phys.meas.units "your probe here"
