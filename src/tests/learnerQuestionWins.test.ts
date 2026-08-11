@@ -204,3 +204,32 @@ describe('a check must test understanding, not ask for a self-report', () => {
     expect(prompt).toMatch(/never end a turn with/i)
   })
 })
+
+describe('the filters and the matcher agree about what a word is', () => {
+  // R2/R3, measured 2026-08-11. `requestedConcept` kept its OWN tokenizer —
+  // lowercase and strip punctuation, with no spelling fold and no
+  // singularization — while the matcher used the normalised one. The matcher
+  // found "Hybridization" for "orbital hybridisation" at 0.85; the incidental-
+  // vocabulary filter then looked for a word equal to or beginning with
+  // "hybridization", found only "hybridisation", judged the match incidental
+  // and dropped it. Null → no excursion → the tutor taught hybridisation while
+  // the lesson's ionic-crystal figure stayed on screen.
+  //
+  // The American spelling resolved perfectly throughout, which is how this
+  // stayed invisible.
+  it.each([
+    ['British, with a modifier', 'What is orbital hybridisation?'],
+    ['American, with a modifier', 'What is orbital hybridization?'],
+    ['British, bare', 'What is hybridisation?'],
+    ['a named orbital form', 'Explain sp3 hybridisation'],
+  ])('resolves %s', (_label, message) => {
+    expect(resolveRequestedConceptId(message, CHEM_LESSON, 'chemistry')).toBe('chem.bond.hybridization')
+  })
+
+  it('still refuses discourse words after the tokenizers were unified', () => {
+    // The unification must not have loosened the incidental guard.
+    for (const m of ['can you explain that part again', 'explain it more simply', 'show me a diagram']) {
+      expect(resolveRequestedConceptId(m, PHYS_LESSON, 'physics'), m).toBeNull()
+    }
+  })
+})

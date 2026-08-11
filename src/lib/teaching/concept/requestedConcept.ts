@@ -61,8 +61,27 @@ const TEACHING_CUE = new Set([
 /** How many preceding tokens may carry the cue ("what is a graph" needs 3). */
 const CUE_WINDOW = 3
 
+/**
+ * ONE tokenizer, shared with the matcher.
+ *
+ * This used to be a second, simpler one: lowercase and strip punctuation, with
+ * no spelling fold and no singularization. That made the FILTERS disagree with
+ * the MATCHER about what a word is, and a disagreement here reads as a missing
+ * concept. Measured:
+ *
+ *   "What is orbital hybridisation?"
+ *     matcher : Hybridization, NORMALIZED_TITLE 0.85   (the fold worked)
+ *     filter  : message words ["what","is","orbital","hybridisation"] — none
+ *               equals or begins with "hybridization", so no governing cue was
+ *               found, the match was judged INCIDENTAL and dropped
+ *     result  : null → no excursion → the tutor answered about hybridisation
+ *               while the lesson's ionic-crystal figure stayed on screen
+ *
+ * The American spelling resolved perfectly the whole time, which is exactly
+ * how a defect like this stays invisible.
+ */
 function tokens(text: string): string[] {
-  return text.toLowerCase().replace(/[^a-z0-9\s]+/g, ' ').split(/\s+/).filter(Boolean)
+  return normalizeToTokens(text)
 }
 
 /**
