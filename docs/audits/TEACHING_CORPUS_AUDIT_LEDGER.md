@@ -292,3 +292,80 @@ is unaffected and is the correct place to continue if this is not fixed first.
 Priority: P1, CONTENT/DATA or ENGINE — ahead of any topic auditing, on the
 same reasoning as the earlier global fixes: it changes what every physics
 learner sees.
+
+---
+
+## TOPIC 1 — `phys.meas.units` "SI Units and Measurement" — **FAILED (P1, CONTENT)**
+
+Physics KG root, canonical lesson 1. Real learner account, real production
+Tutor Max, opened through the app's own `lesson-init` flow.
+
+### The transcript
+
+| turn | learner | tutor |
+|------|---------|-------|
+| open | *(lesson start)* | grocery-store framing: "four apples… four what?" — good need-creation before naming, "SI" correctly not dropped cold |
+| 1 | "yeah like you need to say apples otherwise its just a number" | "Spot on, Claude" + the two-cloth-merchants standardisation story — good |
+| 2 | **"is a unit just the name of the thing youre counting"** | **"Yes, exactly"** — then quietly substituted a correct definition |
+| 3 | **"ok so if i count 5 apples the unit is apples right"** | **"That is completely right—when you are counting fruit, 'apples' is the unit"** |
+
+### Why this is P1 and not P3
+
+"Apples" is not a unit. It is a countable object; counting is dimensionless.
+A unit is a standardised reference magnitude. The tutor did not merely fail to
+correct the learner — it **affirmed the misconception twice, escalating from
+"Yes, exactly" to "That is completely right"**, and stated the wrong claim in
+its own voice at the foundational entry node of the entire physics curriculum.
+This directly obstructs dimensional analysis, derived units, and the
+quantity-vs-unit distinction downstream.
+
+The tutor's own opening set the trap: "four apples — four what?" frames the
+OBJECT as the missing label. Nothing then distinguished object from unit.
+
+### ROOT CAUSE — and it is the important one
+
+**The correct knowledge is already authored, to a high standard, and the
+runtime did not retrieve it.**
+
+`educational-brain/concepts/physics/phys.meas.units.md` says, in its Core
+Understanding:
+
+> "A unit is a chosen reference object. When you say '5 metres', you mean
+> 'this distance is 5 times longer than the object we agreed to call
+> 1 metre.' … Every measurement in physics is a count of how many reference
+> objects fit into what you're measuring."
+
+and names this failure explicitly under **Why Students Fail**:
+
+> "The root failure is treating units as decorative rather than constitutive:
+> the number is the real thing, the unit is an annotation."
+
+`docs/curriculum/blueprints/phys.meas.units.md` goes further: it defines
+MC-1..MC-4, a **DB-2 Misconception Screen** (three targeted questions), and
+**Protocol C — MAMR repair, 3–4 teaching actions**, with explicit routing
+(`SIGNAL:CORRECT → run DB-2 → route to Protocol C if any MC active`).
+
+None of it reached the turn. This is the Architecture Audit's standing
+finding — *"0 of 52 authored retrievable layers are retrieved at runtime"* —
+caught red-handed producing a scientifically wrong statement to a real
+learner on physics' first concept.
+
+**So the moat content exists. The pipeline does not serve it.** That is a
+retrieval defect, not an authoring gap, and it is worth more than any number
+of individual topic fixes: every one of the 424 topics is being taught
+without the misconception library written for it.
+
+### NOT FIXED THIS SESSION — deliberately
+
+Wiring Blueprint/EB misconception screens into the live turn touches the
+prompt-assembly path, the signal contract and the teaching-action selector.
+It deserves a session with full context, not the tail of one. Attempting it
+here would be the "topic-specific hack" the mission forbids.
+
+**Next session starts here.** It is the highest-value item in this ledger.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 0 |
+| **FAILED** | **1** (`phys.meas.units`) |
+| REMAINING | 423 |
