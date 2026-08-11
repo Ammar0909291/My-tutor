@@ -182,3 +182,26 @@ a dedicated session rather than changed in passing.
 
 Tests: 57 in `unresolvedTopicExcursion.test.ts` (was 46).
 Suite 293 files / 6,343 passed / 9 skipped; tsc clean; build clean.
+
+### D1/D2/D3 production verification — PASSED (`dpl_7BHGq4nb…` READY, commit `50ad65d9`)
+
+Real learner account, physics / Free Body Diagrams, session `cmsop6py8…`.
+
+- **D2** — "Show me a real-life example of this" (the exact shape that had
+  been captured as `targetTopicTitle = "real-life example of this"`) did NOT
+  open a new excursion. `turns` advanced 0 -> 1 with `targetTopicTitle`
+  unchanged, and the tutor gave a real-life example OF THE ACTIVE TOPIC
+  (barefoot on concrete vs a wooden deck). Correct on both halves: it stayed,
+  and it answered.
+- **D1** — "How does a catalyst work?", the exact question that previously
+  ended with *"Connecting this back to our overarching physics journey…
+  much like drawing a Free Body Diagram"*, now contains none of
+  `connecting this back / back to our / our journey / overarching /
+  builds the / prepares you / reinforces / as with our lesson`. It taught the
+  catalyst and ended on a catalyst question.
+- **D3** — a correct confident answer drew praise ("Spot on") and a transfer
+  extension into industrial catalysis, with no `roadmap / completed a key
+  concept / unlocked / syllabus / navigation panel / progress` claim.
+
+All three were checked by scanning the real response text for the exact
+phrases the defects produced, not by impression.
