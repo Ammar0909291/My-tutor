@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 6 READY)
+## english (216 concepts, 106 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1200,49 +1200,49 @@ its subject KG.
 | composition | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos | Yes | No | — | MISSING |
 | composition | `eng.composition.rhetorical-devices` | Rhetorical Devices | Yes | No | — | MISSING |
 | composition | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone | Yes | No | — | MISSING |
-| grammar | `eng.grammar.active-and-passive-voice` | Active and Passive Voice | Yes | No | — | MISSING |
-| grammar | `eng.grammar.adjectives` | Adjectives | Yes | No | — | MISSING |
-| grammar | `eng.grammar.adverbs` | Adverbs | Yes | No | — | MISSING |
-| grammar | `eng.grammar.apostrophes` | Apostrophes | Yes | No | — | MISSING |
-| grammar | `eng.grammar.articles-and-determiners` | Articles and Determiners | Yes | No | — | MISSING |
-| grammar | `eng.grammar.capitalization-rules` | Capitalization Rules | Yes | No | — | MISSING |
-| grammar | `eng.grammar.clauses` | Independent and Dependent Clauses | Yes | No | — | MISSING |
-| grammar | `eng.grammar.colons-semicolons-dashes` | Colons, Semicolons, and Dashes | Yes | No | — | MISSING |
-| grammar | `eng.grammar.comma-usage` | Comma Usage | Yes | No | — | MISSING |
-| grammar | `eng.grammar.comparatives-and-superlatives` | Comparatives and Superlatives | Yes | No | — | MISSING |
-| grammar | `eng.grammar.complex-sentences` | Complex Sentences | Yes | No | — | MISSING |
-| grammar | `eng.grammar.compound-sentences` | Compound Sentences | Yes | No | — | MISSING |
-| grammar | `eng.grammar.conditionals` | Conditional Sentences | Yes | No | — | MISSING |
-| grammar | `eng.grammar.conjunctions` | Conjunctions | Yes | No | — | MISSING |
-| grammar | `eng.grammar.direct-and-indirect-speech` | Direct and Indirect Speech | Yes | No | — | MISSING |
-| grammar | `eng.grammar.end-punctuation` | End Punctuation | Yes | No | — | MISSING |
-| grammar | `eng.grammar.future-tenses` | Future Tenses | Yes | No | — | MISSING |
-| grammar | `eng.grammar.gerunds-and-infinitives` | Gerunds and Infinitives | Yes | No | — | MISSING |
-| grammar | `eng.grammar.interjections` | Interjections | Yes | No | — | MISSING |
-| grammar | `eng.grammar.modals` | Modal Verbs | Yes | No | — | MISSING |
-| grammar | `eng.grammar.negation` | Negation | Yes | No | — | MISSING |
-| grammar | `eng.grammar.nouns` | Nouns | Yes | No | — | MISSING |
-| grammar | `eng.grammar.parallel-structure` | Parallel Structure | Yes | No | — | MISSING |
-| grammar | `eng.grammar.participles-and-participial-phrases` | Participles and Participial Phrases | Yes | No | — | MISSING |
-| grammar | `eng.grammar.past-tenses` | Past Tenses | Yes | No | — | MISSING |
-| grammar | `eng.grammar.phrases` | Phrases | Yes | No | — | MISSING |
-| grammar | `eng.grammar.prepositions` | Prepositions | Yes | No | — | MISSING |
-| grammar | `eng.grammar.present-tenses` | Present Tenses | Yes | No | — | MISSING |
-| grammar | `eng.grammar.pronoun-antecedent-agreement` | Pronoun-Antecedent Agreement | Yes | No | — | MISSING |
-| grammar | `eng.grammar.pronouns` | Pronouns | Yes | No | — | MISSING |
-| grammar | `eng.grammar.question-formation` | Question Formation | Yes | No | — | MISSING |
-| grammar | `eng.grammar.quotation-marks` | Quotation Marks | Yes | No | — | MISSING |
-| grammar | `eng.grammar.run-on-sentences-and-comma-splices` | Run-On Sentences and Comma Splices | Yes | No | — | MISSING |
-| grammar | `eng.grammar.sentence-combining` | Sentence Combining | Yes | No | — | MISSING |
-| grammar | `eng.grammar.sentence-fragments` | Sentence Fragments | Yes | No | — | MISSING |
-| grammar | `eng.grammar.sentence-types-by-function` | Sentence Types by Function | Yes | No | — | MISSING |
-| grammar | `eng.grammar.simple-sentences` | Simple Sentences | Yes | No | — | MISSING |
-| grammar | `eng.grammar.subject-and-predicate` | Subject and Predicate | Yes | No | — | MISSING |
-| grammar | `eng.grammar.subject-verb-agreement` | Subject-Verb Agreement | Yes | No | — | MISSING |
-| grammar | `eng.grammar.tense-consistency` | Tense Consistency | Yes | No | — | MISSING |
-| grammar | `eng.grammar.verbs` | Verbs | Yes | No | — | MISSING |
-| grammar | `eng.grammar.word-classes-overview` | Overview of Word Classes | Yes | No | — | MISSING |
-| grammar | `eng.grammar.word-order` | Basic Word Order | Yes | No | — | MISSING |
+| grammar | `eng.grammar.active-and-passive-voice` | Active and Passive Voice | Yes | Yes | `educational-brain/concepts/english/eng.grammar.active-and-passive-voice.md` | READY |
+| grammar | `eng.grammar.adjectives` | Adjectives | Yes | Yes | `educational-brain/concepts/english/eng.grammar.adjectives.md` | READY |
+| grammar | `eng.grammar.adverbs` | Adverbs | Yes | Yes | `educational-brain/concepts/english/eng.grammar.adverbs.md` | READY |
+| grammar | `eng.grammar.apostrophes` | Apostrophes | Yes | Yes | `educational-brain/concepts/english/eng.grammar.apostrophes.md` | READY |
+| grammar | `eng.grammar.articles-and-determiners` | Articles and Determiners | Yes | Yes | `educational-brain/concepts/english/eng.grammar.articles-and-determiners.md` | READY |
+| grammar | `eng.grammar.capitalization-rules` | Capitalization Rules | Yes | Yes | `educational-brain/concepts/english/eng.grammar.capitalization-rules.md` | READY |
+| grammar | `eng.grammar.clauses` | Independent and Dependent Clauses | Yes | Yes | `educational-brain/concepts/english/eng.grammar.clauses.md` | READY |
+| grammar | `eng.grammar.colons-semicolons-dashes` | Colons, Semicolons, and Dashes | Yes | Yes | `educational-brain/concepts/english/eng.grammar.colons-semicolons-dashes.md` | READY |
+| grammar | `eng.grammar.comma-usage` | Comma Usage | Yes | Yes | `educational-brain/concepts/english/eng.grammar.comma-usage.md` | READY |
+| grammar | `eng.grammar.comparatives-and-superlatives` | Comparatives and Superlatives | Yes | Yes | `educational-brain/concepts/english/eng.grammar.comparatives-and-superlatives.md` | READY |
+| grammar | `eng.grammar.complex-sentences` | Complex Sentences | Yes | Yes | `educational-brain/concepts/english/eng.grammar.complex-sentences.md` | READY |
+| grammar | `eng.grammar.compound-sentences` | Compound Sentences | Yes | Yes | `educational-brain/concepts/english/eng.grammar.compound-sentences.md` | READY |
+| grammar | `eng.grammar.conditionals` | Conditional Sentences | Yes | Yes | `educational-brain/concepts/english/eng.grammar.conditionals.md` | READY |
+| grammar | `eng.grammar.conjunctions` | Conjunctions | Yes | Yes | `educational-brain/concepts/english/eng.grammar.conjunctions.md` | READY |
+| grammar | `eng.grammar.direct-and-indirect-speech` | Direct and Indirect Speech | Yes | Yes | `educational-brain/concepts/english/eng.grammar.direct-and-indirect-speech.md` | READY |
+| grammar | `eng.grammar.end-punctuation` | End Punctuation | Yes | Yes | `educational-brain/concepts/english/eng.grammar.end-punctuation.md` | READY |
+| grammar | `eng.grammar.future-tenses` | Future Tenses | Yes | Yes | `educational-brain/concepts/english/eng.grammar.future-tenses.md` | READY |
+| grammar | `eng.grammar.gerunds-and-infinitives` | Gerunds and Infinitives | Yes | Yes | `educational-brain/concepts/english/eng.grammar.gerunds-and-infinitives.md` | READY |
+| grammar | `eng.grammar.interjections` | Interjections | Yes | Yes | `educational-brain/concepts/english/eng.grammar.interjections.md` | READY |
+| grammar | `eng.grammar.modals` | Modal Verbs | Yes | Yes | `educational-brain/concepts/english/eng.grammar.modals.md` | READY |
+| grammar | `eng.grammar.negation` | Negation | Yes | Yes | `educational-brain/concepts/english/eng.grammar.negation.md` | READY |
+| grammar | `eng.grammar.nouns` | Nouns | Yes | Yes | `educational-brain/concepts/english/eng.grammar.nouns.md` | READY |
+| grammar | `eng.grammar.parallel-structure` | Parallel Structure | Yes | Yes | `educational-brain/concepts/english/eng.grammar.parallel-structure.md` | READY |
+| grammar | `eng.grammar.participles-and-participial-phrases` | Participles and Participial Phrases | Yes | Yes | `educational-brain/concepts/english/eng.grammar.participles-and-participial-phrases.md` | READY |
+| grammar | `eng.grammar.past-tenses` | Past Tenses | Yes | Yes | `educational-brain/concepts/english/eng.grammar.past-tenses.md` | READY |
+| grammar | `eng.grammar.phrases` | Phrases | Yes | Yes | `educational-brain/concepts/english/eng.grammar.phrases.md` | READY |
+| grammar | `eng.grammar.prepositions` | Prepositions | Yes | Yes | `educational-brain/concepts/english/eng.grammar.prepositions.md` | READY |
+| grammar | `eng.grammar.present-tenses` | Present Tenses | Yes | Yes | `educational-brain/concepts/english/eng.grammar.present-tenses.md` | READY |
+| grammar | `eng.grammar.pronoun-antecedent-agreement` | Pronoun-Antecedent Agreement | Yes | Yes | `educational-brain/concepts/english/eng.grammar.pronoun-antecedent-agreement.md` | READY |
+| grammar | `eng.grammar.pronouns` | Pronouns | Yes | Yes | `educational-brain/concepts/english/eng.grammar.pronouns.md` | READY |
+| grammar | `eng.grammar.question-formation` | Question Formation | Yes | Yes | `educational-brain/concepts/english/eng.grammar.question-formation.md` | READY |
+| grammar | `eng.grammar.quotation-marks` | Quotation Marks | Yes | Yes | `educational-brain/concepts/english/eng.grammar.quotation-marks.md` | READY |
+| grammar | `eng.grammar.run-on-sentences-and-comma-splices` | Run-On Sentences and Comma Splices | Yes | Yes | `educational-brain/concepts/english/eng.grammar.run-on-sentences-and-comma-splices.md` | READY |
+| grammar | `eng.grammar.sentence-combining` | Sentence Combining | Yes | Yes | `educational-brain/concepts/english/eng.grammar.sentence-combining.md` | READY |
+| grammar | `eng.grammar.sentence-fragments` | Sentence Fragments | Yes | Yes | `educational-brain/concepts/english/eng.grammar.sentence-fragments.md` | READY |
+| grammar | `eng.grammar.sentence-types-by-function` | Sentence Types by Function | Yes | Yes | `educational-brain/concepts/english/eng.grammar.sentence-types-by-function.md` | READY |
+| grammar | `eng.grammar.simple-sentences` | Simple Sentences | Yes | Yes | `educational-brain/concepts/english/eng.grammar.simple-sentences.md` | READY |
+| grammar | `eng.grammar.subject-and-predicate` | Subject and Predicate | Yes | Yes | `educational-brain/concepts/english/eng.grammar.subject-and-predicate.md` | READY |
+| grammar | `eng.grammar.subject-verb-agreement` | Subject-Verb Agreement | Yes | Yes | `educational-brain/concepts/english/eng.grammar.subject-verb-agreement.md` | READY |
+| grammar | `eng.grammar.tense-consistency` | Tense Consistency | Yes | Yes | `educational-brain/concepts/english/eng.grammar.tense-consistency.md` | READY |
+| grammar | `eng.grammar.verbs` | Verbs | Yes | Yes | `educational-brain/concepts/english/eng.grammar.verbs.md` | READY |
+| grammar | `eng.grammar.word-classes-overview` | Overview of Word Classes | Yes | Yes | `educational-brain/concepts/english/eng.grammar.word-classes-overview.md` | READY |
+| grammar | `eng.grammar.word-order` | Basic Word Order | Yes | Yes | `educational-brain/concepts/english/eng.grammar.word-order.md` | READY |
 | linguistics | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.computational-linguistics-intro` | Introduction to Computational Linguistics | Yes | No | — | MISSING |
@@ -1261,13 +1261,13 @@ its subject KG.
 | linguistics | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.what-is-linguistics` | What Is Linguistics? | Yes | No | — | MISSING |
-| listening | `eng.listening.active-listening` | Active Listening | Yes | No | — | MISSING |
+| listening | `eng.listening.active-listening` | Active Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.active-listening.md` | READY |
 | listening | `eng.listening.critical-listening` | Critical Listening | Yes | No | — | MISSING |
-| listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | No | — | MISSING |
+| listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | Yes | `educational-brain/concepts/english/eng.listening.distinguishing-sounds-in-speech.md` | READY |
 | listening | `eng.listening.following-instructions` | Following Spoken Instructions | Yes | No | — | MISSING |
 | listening | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies | Yes | No | — | MISSING |
 | listening | `eng.listening.listening-for-detail` | Listening for Detail | Yes | No | — | MISSING |
-| listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | No | — | MISSING |
+| listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-gist.md` | READY |
 | listening | `eng.listening.note-taking-while-listening` | Note-Taking While Listening | Yes | No | — | MISSING |
 | literature | `eng.literature.character-development` | Character Development | Yes | No | — | MISSING |
 | literature | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature | Yes | No | — | MISSING |
@@ -1294,80 +1294,80 @@ its subject KG.
 | literature | `eng.literature.short-story-study` | Short Story Study | Yes | No | — | MISSING |
 | literature | `eng.literature.symbolism` | Symbolism | Yes | No | — | MISSING |
 | literature | `eng.literature.theme-and-message` | Theme and Message | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.prosody` | Prosody | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.accents-and-dialects.md` | READY |
+| phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.articulation-organs.md` | READY |
+| phonetics | `eng.phonetics.connected-speech` | Connected Speech | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.connected-speech.md` | READY |
+| phonetics | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.consonant-sounds.md` | READY |
+| phonetics | `eng.phonetics.intonation-patterns` | Intonation Patterns | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.intonation-patterns.md` | READY |
+| phonetics | `eng.phonetics.ipa-basics` | IPA Basics for English | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.ipa-basics.md` | READY |
+| phonetics | `eng.phonetics.minimal-pairs` | Minimal Pairs | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.minimal-pairs.md` | READY |
+| phonetics | `eng.phonetics.phonetic-transcription` | Phonetic Transcription | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.phonetic-transcription.md` | READY |
+| phonetics | `eng.phonetics.prosody` | Prosody | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.prosody.md` | READY |
+| phonetics | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.rhythm-and-timing.md` | READY |
+| phonetics | `eng.phonetics.sentence-stress` | Sentence Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.sentence-stress.md` | READY |
 | phonetics | `eng.phonetics.speech-sounds-overview` | Overview of Speech Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.speech-sounds-overview.md` | READY |
-| phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | No | — | MISSING |
-| phonetics | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification | Yes | No | — | MISSING |
+| phonetics | `eng.phonetics.syllable-stress` | Word Stress | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.syllable-stress.md` | READY |
+| phonetics | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.vowel-sounds.md` | READY |
 | phonics | `eng.phonics.alphabet-recognition` | Alphabet Recognition | Yes | Yes | `educational-brain/concepts/english/eng.phonics.alphabet-recognition.md` | READY |
-| phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | No | — | MISSING |
-| phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | No | — | MISSING |
-| phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | No | — | MISSING |
-| phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | No | — | MISSING |
-| phonics | `eng.phonics.digraphs` | Consonant and Vowel Digraphs | Yes | No | — | MISSING |
+| phonics | `eng.phonics.blending-segmenting` | Blending and Segmenting | Yes | Yes | `educational-brain/concepts/english/eng.phonics.blending-segmenting.md` | READY |
+| phonics | `eng.phonics.consonant-blends` | Consonant Blends | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonant-blends.md` | READY |
+| phonics | `eng.phonics.consonants` | Consonant Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.consonants.md` | READY |
+| phonics | `eng.phonics.decoding-fluency` | Decoding Fluency | Yes | Yes | `educational-brain/concepts/english/eng.phonics.decoding-fluency.md` | READY |
+| phonics | `eng.phonics.digraphs` | Consonant and Vowel Digraphs | Yes | Yes | `educational-brain/concepts/english/eng.phonics.digraphs.md` | READY |
 | phonics | `eng.phonics.letter-sound-correspondence` | Letter-Sound Correspondence | Yes | Yes | `educational-brain/concepts/english/eng.phonics.letter-sound-correspondence.md` | READY |
-| phonics | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E | Yes | No | — | MISSING |
+| phonics | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E | Yes | Yes | `educational-brain/concepts/english/eng.phonics.long-vowels-silent-e.md` | READY |
 | phonics | `eng.phonics.phonemic-awareness` | Phonemic Awareness | Yes | Yes | `educational-brain/concepts/english/eng.phonics.phonemic-awareness.md` | READY |
 | phonics | `eng.phonics.print-concepts` | Print Concepts | Yes | Yes | `educational-brain/concepts/english/eng.phonics.print-concepts.md` | READY |
 | phonics | `eng.phonics.rhyming` | Rhyming | Yes | Yes | `educational-brain/concepts/english/eng.phonics.rhyming.md` | READY |
-| phonics | `eng.phonics.short-vowels` | Short Vowel Sounds | Yes | No | — | MISSING |
-| phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | No | — | MISSING |
-| phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | No | — | MISSING |
+| phonics | `eng.phonics.short-vowels` | Short Vowel Sounds | Yes | Yes | `educational-brain/concepts/english/eng.phonics.short-vowels.md` | READY |
+| phonics | `eng.phonics.sight-words` | High-Frequency Sight Words | Yes | Yes | `educational-brain/concepts/english/eng.phonics.sight-words.md` | READY |
+| phonics | `eng.phonics.syllable-types` | Syllable Types | Yes | Yes | `educational-brain/concepts/english/eng.phonics.syllable-types.md` | READY |
 | reading | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone | Yes | No | — | MISSING |
 | reading | `eng.reading.close-reading` | Close Reading | Yes | No | — | MISSING |
 | reading | `eng.reading.compare-and-contrast-texts` | Comparing and Contrasting Texts | Yes | No | — | MISSING |
 | reading | `eng.reading.critical-reading` | Critical Reading | Yes | No | — | MISSING |
 | reading | `eng.reading.evaluating-sources` | Evaluating Sources | Yes | No | — | MISSING |
 | reading | `eng.reading.genre-recognition` | Genre Recognition | Yes | No | — | MISSING |
-| reading | `eng.reading.inference-in-reading` | Inference in Reading | Yes | No | — | MISSING |
-| reading | `eng.reading.literal-comprehension` | Literal Comprehension | Yes | No | — | MISSING |
-| reading | `eng.reading.main-idea-and-details` | Main Idea and Supporting Details | Yes | No | — | MISSING |
+| reading | `eng.reading.inference-in-reading` | Inference in Reading | Yes | Yes | `educational-brain/concepts/english/eng.reading.inference-in-reading.md` | READY |
+| reading | `eng.reading.literal-comprehension` | Literal Comprehension | Yes | Yes | `educational-brain/concepts/english/eng.reading.literal-comprehension.md` | READY |
+| reading | `eng.reading.main-idea-and-details` | Main Idea and Supporting Details | Yes | Yes | `educational-brain/concepts/english/eng.reading.main-idea-and-details.md` | READY |
 | reading | `eng.reading.predicting-and-confirming` | Predicting and Confirming | Yes | No | — | MISSING |
-| reading | `eng.reading.print-to-meaning` | From Print to Meaning | Yes | No | — | MISSING |
+| reading | `eng.reading.print-to-meaning` | From Print to Meaning | Yes | Yes | `educational-brain/concepts/english/eng.reading.print-to-meaning.md` | READY |
 | reading | `eng.reading.reading-across-genres` | Reading Across Genres | Yes | No | — | MISSING |
-| reading | `eng.reading.reading-fluency` | Reading Fluency | Yes | No | — | MISSING |
-| reading | `eng.reading.skimming-and-scanning` | Skimming and Scanning | Yes | No | — | MISSING |
-| reading | `eng.reading.summarizing` | Summarizing | Yes | No | — | MISSING |
-| reading | `eng.reading.text-structure` | Text Structure | Yes | No | — | MISSING |
+| reading | `eng.reading.reading-fluency` | Reading Fluency | Yes | Yes | `educational-brain/concepts/english/eng.reading.reading-fluency.md` | READY |
+| reading | `eng.reading.skimming-and-scanning` | Skimming and Scanning | Yes | Yes | `educational-brain/concepts/english/eng.reading.skimming-and-scanning.md` | READY |
+| reading | `eng.reading.summarizing` | Summarizing | Yes | Yes | `educational-brain/concepts/english/eng.reading.summarizing.md` | READY |
+| reading | `eng.reading.text-structure` | Text Structure | Yes | Yes | `educational-brain/concepts/english/eng.reading.text-structure.md` | READY |
 | speaking | `eng.speaking.asking-and-answering-questions` | Asking and Answering Questions | Yes | No | — | MISSING |
 | speaking | `eng.speaking.conversation-skills` | Conversation Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.debate-skills` | Debate Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.discussion-skills` | Discussion Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.non-verbal-communication` | Non-Verbal Communication | Yes | No | — | MISSING |
-| speaking | `eng.speaking.oral-fluency` | Oral Fluency | Yes | No | — | MISSING |
+| speaking | `eng.speaking.oral-fluency` | Oral Fluency | Yes | Yes | `educational-brain/concepts/english/eng.speaking.oral-fluency.md` | READY |
 | speaking | `eng.speaking.presentation-skills` | Presentation Skills | Yes | No | — | MISSING |
-| speaking | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation | Yes | No | — | MISSING |
+| speaking | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation | Yes | Yes | `educational-brain/concepts/english/eng.speaking.pronunciation-in-conversation.md` | READY |
 | speaking | `eng.speaking.public-speaking-basics` | Public Speaking Basics | Yes | No | — | MISSING |
 | speaking | `eng.speaking.storytelling-orally` | Oral Storytelling | Yes | No | — | MISSING |
-| vocab | `eng.vocab.academic-vocabulary` | Academic Vocabulary | Yes | No | — | MISSING |
-| vocab | `eng.vocab.collocations` | Collocations | Yes | No | — | MISSING |
-| vocab | `eng.vocab.compound-words` | Compound Words | Yes | No | — | MISSING |
-| vocab | `eng.vocab.connotation-denotation` | Connotation and Denotation | Yes | No | — | MISSING |
-| vocab | `eng.vocab.context-clues` | Context Clues | Yes | No | — | MISSING |
-| vocab | `eng.vocab.etymology` | Etymology | Yes | No | — | MISSING |
-| vocab | `eng.vocab.homonyms-homophones` | Homonyms and Homophones | Yes | No | — | MISSING |
-| vocab | `eng.vocab.idioms` | Idioms | Yes | No | — | MISSING |
-| vocab | `eng.vocab.multiple-meaning-words` | Multiple-Meaning Words | Yes | No | — | MISSING |
-| vocab | `eng.vocab.phrasal-verbs` | Phrasal Verbs | Yes | No | — | MISSING |
-| vocab | `eng.vocab.prefixes` | Prefixes | Yes | No | — | MISSING |
-| vocab | `eng.vocab.register-and-formality` | Register and Formality | Yes | No | — | MISSING |
-| vocab | `eng.vocab.roots-and-origins` | Greek and Latin Roots | Yes | No | — | MISSING |
-| vocab | `eng.vocab.semantic-fields` | Semantic Fields | Yes | No | — | MISSING |
-| vocab | `eng.vocab.suffixes` | Suffixes | Yes | No | — | MISSING |
-| vocab | `eng.vocab.synonyms-antonyms` | Synonyms and Antonyms | Yes | No | — | MISSING |
-| vocab | `eng.vocab.thesaurus-and-dictionary-skills` | Thesaurus and Dictionary Skills | Yes | No | — | MISSING |
-| vocab | `eng.vocab.word-families` | Word Families | Yes | No | — | MISSING |
-| vocab | `eng.vocab.word-formation-processes` | Word Formation Processes | Yes | No | — | MISSING |
-| vocab | `eng.vocab.word-recognition` | Word Recognition | Yes | No | — | MISSING |
+| vocab | `eng.vocab.academic-vocabulary` | Academic Vocabulary | Yes | Yes | `educational-brain/concepts/english/eng.vocab.academic-vocabulary.md` | READY |
+| vocab | `eng.vocab.collocations` | Collocations | Yes | Yes | `educational-brain/concepts/english/eng.vocab.collocations.md` | READY |
+| vocab | `eng.vocab.compound-words` | Compound Words | Yes | Yes | `educational-brain/concepts/english/eng.vocab.compound-words.md` | READY |
+| vocab | `eng.vocab.connotation-denotation` | Connotation and Denotation | Yes | Yes | `educational-brain/concepts/english/eng.vocab.connotation-denotation.md` | READY |
+| vocab | `eng.vocab.context-clues` | Context Clues | Yes | Yes | `educational-brain/concepts/english/eng.vocab.context-clues.md` | READY |
+| vocab | `eng.vocab.etymology` | Etymology | Yes | Yes | `educational-brain/concepts/english/eng.vocab.etymology.md` | READY |
+| vocab | `eng.vocab.homonyms-homophones` | Homonyms and Homophones | Yes | Yes | `educational-brain/concepts/english/eng.vocab.homonyms-homophones.md` | READY |
+| vocab | `eng.vocab.idioms` | Idioms | Yes | Yes | `educational-brain/concepts/english/eng.vocab.idioms.md` | READY |
+| vocab | `eng.vocab.multiple-meaning-words` | Multiple-Meaning Words | Yes | Yes | `educational-brain/concepts/english/eng.vocab.multiple-meaning-words.md` | READY |
+| vocab | `eng.vocab.phrasal-verbs` | Phrasal Verbs | Yes | Yes | `educational-brain/concepts/english/eng.vocab.phrasal-verbs.md` | READY |
+| vocab | `eng.vocab.prefixes` | Prefixes | Yes | Yes | `educational-brain/concepts/english/eng.vocab.prefixes.md` | READY |
+| vocab | `eng.vocab.register-and-formality` | Register and Formality | Yes | Yes | `educational-brain/concepts/english/eng.vocab.register-and-formality.md` | READY |
+| vocab | `eng.vocab.roots-and-origins` | Greek and Latin Roots | Yes | Yes | `educational-brain/concepts/english/eng.vocab.roots-and-origins.md` | READY |
+| vocab | `eng.vocab.semantic-fields` | Semantic Fields | Yes | Yes | `educational-brain/concepts/english/eng.vocab.semantic-fields.md` | READY |
+| vocab | `eng.vocab.suffixes` | Suffixes | Yes | Yes | `educational-brain/concepts/english/eng.vocab.suffixes.md` | READY |
+| vocab | `eng.vocab.synonyms-antonyms` | Synonyms and Antonyms | Yes | Yes | `educational-brain/concepts/english/eng.vocab.synonyms-antonyms.md` | READY |
+| vocab | `eng.vocab.thesaurus-and-dictionary-skills` | Thesaurus and Dictionary Skills | Yes | Yes | `educational-brain/concepts/english/eng.vocab.thesaurus-and-dictionary-skills.md` | READY |
+| vocab | `eng.vocab.word-families` | Word Families | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-families.md` | READY |
+| vocab | `eng.vocab.word-formation-processes` | Word Formation Processes | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-formation-processes.md` | READY |
+| vocab | `eng.vocab.word-recognition` | Word Recognition | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-recognition.md` | READY |
 | writing | `eng.writing.citations-and-referencing` | Citations and Referencing | Yes | No | — | MISSING |
 | writing | `eng.writing.creative-writing-forms` | Creative Writing Forms | Yes | No | — | MISSING |
 | writing | `eng.writing.descriptive-writing` | Descriptive Writing | Yes | No | — | MISSING |
@@ -1375,14 +1375,14 @@ its subject KG.
 | writing | `eng.writing.editing-and-proofreading` | Editing and Proofreading | Yes | No | — | MISSING |
 | writing | `eng.writing.essay-structure` | Essay Structure | Yes | No | — | MISSING |
 | writing | `eng.writing.expository-writing` | Expository Writing | Yes | No | — | MISSING |
-| writing | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation | Yes | No | — | MISSING |
+| writing | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation | Yes | Yes | `educational-brain/concepts/english/eng.writing.handwriting-and-formation.md` | READY |
 | writing | `eng.writing.narrative-writing` | Narrative Writing | Yes | No | — | MISSING |
 | writing | `eng.writing.outlining-and-planning` | Outlining and Planning | Yes | No | — | MISSING |
 | writing | `eng.writing.paragraph-structure` | Paragraph Structure | Yes | No | — | MISSING |
 | writing | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics | Yes | No | — | MISSING |
 | writing | `eng.writing.revising-for-content` | Revising for Content | Yes | No | — | MISSING |
 | writing | `eng.writing.sentence-writing` | Sentence Writing | Yes | No | — | MISSING |
-| writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | No | — | MISSING |
+| writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | Yes | `educational-brain/concepts/english/eng.writing.spelling-strategies.md` | READY |
 | writing | `eng.writing.supporting-details` | Supporting Details | Yes | No | — | MISSING |
 | writing | `eng.writing.the-writing-process` | The Writing Process | Yes | No | — | MISSING |
 | writing | `eng.writing.thesis-statements` | Thesis Statements | Yes | No | — | MISSING |

@@ -21,19 +21,42 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1121** (= 1,775 KG concepts − 654 already `READY`, per
-`ROADMAP.md`'s §1 Totals as updated 2026-08-04 — this header was stale
-at 1524/251 from an earlier point in the project; row numbers within the
-table below are not fully renumbered to match, see the row-removal notes
-at math.found Waves 7-10's and math.geom Wave 10's positions below).
+Total queued: **1021** (= 1,775 KG concepts − 754 already `READY`, per
+`ROADMAP.md`'s §1 Totals as reconciled 2026-08-11 — see the English
+branch-reconciliation note below). This header was stale at 1524/251
+from an earlier point in the project; row numbers within the table below
+are not fully renumbered to match, see the row-removal notes at
+math.found Waves 7-10's and math.geom Wave 10's positions below.
 **Known drift, not corrected this batch** (pre-existing, not introduced
-here): the table's own pipe-row count is 1,171, and several inline
-"Total remaining after this wave" notes further down (e.g. the note
-immediately preceding this batch's row removal, "1,361") do not match
-either the 1121 header figure or the 1,171 row count — reconciling the
-full table is a cross-subject audit outside this batch's English-only
-scope; this batch's own removal (rows 4-6, see above) is independently
-verified correct.
+here): the table's own pipe-row count and several inline "Total
+remaining after this wave" notes further down do not match the header
+figure exactly for the non-English subjects — reconciling the full
+table for those subjects is a cross-subject audit outside this batch's
+scope.
+
+**English branch-reconciliation note (2026-08-11)**: a separate feature
+branch (`claude/english-brain-authoring-454l1i`) had independently
+authored English concepts in parallel with direct-to-`main` sessions,
+without either side being aware of the other's progress. Audited both:
+`main` had reached 99/216 (batches tracked via commit messages, not this
+file, up through `eng.reading.*`), while the feature branch had reached
+40/216 with only 7 concepts (`eng.listening.active-listening`,
+`eng.listening.distinguishing-sounds-in-speech`,
+`eng.listening.listening-for-gist`, `eng.speaking.oral-fluency`,
+`eng.speaking.pronunciation-in-conversation`,
+`eng.writing.handwriting-and-formation`,
+`eng.writing.spelling-strategies`) not already present on `main`; the
+other 33 feature-branch files were confirmed to duplicate concepts `main`
+had already authored independently (verified as substantively different,
+longer-form content on `main`'s side — `main`'s versions were kept,
+the feature-branch duplicates were discarded, not merged). The 7
+genuinely new files were added directly to `main`, bringing English to
+**106/216**. This file's 100 now-stale English rows (for concepts `main`
+had already authored but this queue never reflected, since English
+batches were tracked via commit messages rather than this file) were
+removed in the same reconciliation; the 7 newly-added concepts' rows were
+also removed as now-`READY`. 110 English rows remain, matching
+216 − 106 exactly.
 
 **Domain Certification Mode override (binding until `math.found` reaches
 82/82, EXPLICITLY SUSPENDED for physics-specific batches by direct user
@@ -530,9 +553,6 @@ Wave 1, moved to READY.
 | 12 | computer_science | 1 | `cs.sec.cyber-ethics-safety` | Cyber Ethics and Online Safety |
 **Row 13 removed 2026-07-26** — `math.geom.line` authored math.geom
 Wave 2, moved to READY.
-| 14 | english | 2 | `eng.phonics.blending-segmenting` | Blending and Segmenting |
-| 15 | english | 2 | `eng.phonetics.articulation-organs` | Organs of Articulation |
-| 16 | english | 2 | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation |
 | 17 | biology | 2 | `bio.found.classification-need` | Need for Classification |
 | 18 | biology | 2 | `bio.found.microscopy-basics` | Microscopy and Laboratory Techniques |
 | 19 | biology | 2 | `bio.found.biomes-levels-of-organisation` | Levels of Biological Organisation |
@@ -544,8 +564,6 @@ Wave 2, moved to READY.
 **Rows 25-27 removed 2026-07-26** — `math.geom.line-segment`,
 `math.geom.ray`, `math.geom.plane` authored math.geom Wave 3, moved to
 READY.
-| 28 | english | 3 | `eng.phonetics.consonant-sounds` | Consonant Phoneme Classification |
-| 29 | english | 3 | `eng.phonetics.vowel-sounds` | Vowel Phoneme Classification |
 | 30 | biology | 3 | `bio.found.five-kingdom` | Five Kingdom Classification |
 | 31 | biology | 3 | `bio.found.binomial-nomenclature` | Binomial Nomenclature |
 | 32 | biology | 3 | `bio.cell.cell-theory` | Cell Theory |
@@ -570,10 +588,6 @@ Wave 4 part 2, moved to READY.
 | 47 | mathematics | 4 | `math.top.topological-space` | Topological Space |
 | 48 | mathematics | 4 | `math.meas.sigma-algebra` | σ-Algebra |
 | 49 | mathematics | 4 | `math.graph.graph` | Graph |
-| 50 | english | 4 | `eng.phonics.consonants` | Consonant Sounds |
-| 51 | english | 4 | `eng.phonics.short-vowels` | Short Vowel Sounds |
-| 52 | english | 4 | `eng.phonics.sight-words` | High-Frequency Sight Words |
-| 53 | english | 4 | `eng.phonetics.ipa-basics` | IPA Basics for English |
 | 54 | biology | 4 | `bio.found.viruses-viroids-lichens` | Viruses, Viroids and Lichens |
 | 55 | biology | 4 | `bio.cell.prokaryotic-cell` | Prokaryotic Cell Structure |
 | 56 | biology | 4 | `bio.cell.eukaryotic-cell` | Eukaryotic Cell Structure |
@@ -619,10 +633,6 @@ Wave 5, moved to READY.
 | 92 | mathematics | 5 | `math.graph.graph-invariants` | Graph Invariants |
 | 93 | mathematics | 5 | `math.graph.graph-operations` | Graph Operations |
 | 94 | mathematics | 5 | `math.graph.matching` | Matching |
-| 95 | english | 5 | `eng.phonics.consonant-blends` | Consonant Blends |
-| 96 | english | 5 | `eng.phonics.long-vowels-silent-e` | Long Vowels and Silent E |
-| 97 | english | 5 | `eng.phonetics.minimal-pairs` | Minimal Pairs |
-| 98 | english | 5 | `eng.phonetics.syllable-stress` | Word Stress |
 | 99 | biology | 5 | `bio.cell.cell-membrane-transport` | Cell Membrane and Transport |
 | 100 | biology | 5 | `bio.cell.nucleus-chromosomes` | Nucleus and Chromosomes |
 | 101 | biology | 5 | `bio.cell.mitochondria-energy` | Mitochondria and Energy Organelles |
@@ -669,9 +679,6 @@ math.geom Wave 6, moved to READY.
 | 136 | mathematics | 6 | `math.meas.abstract-measure-spaces` | Abstract Measure Spaces |
 | 137 | mathematics | 6 | `math.graph.connectivity` | Connectivity |
 | 138 | mathematics | 6 | `math.graph.graph-coloring` | Graph Coloring |
-| 139 | english | 6 | `eng.phonics.digraphs` | Consonant and Vowel Digraphs |
-| 140 | english | 6 | `eng.phonetics.sentence-stress` | Sentence Stress |
-| 141 | english | 6 | `eng.phonetics.phonetic-transcription` | Phonetic Transcription |
 | 142 | biology | 6 | `bio.cell.cytoskeleton` | Cytoskeleton and Cell Motility |
 | 143 | biology | 6 | `bio.cell.cell-cycle` | The Cell Cycle |
 | 144 | biology | 6 | `bio.cell.cell-signalling` | Cell Signalling |
@@ -729,8 +736,6 @@ math.geom Wave 7, moved to READY.
 | 187 | mathematics | 7 | `math.graph.maximum-flow` | Maximum Flow |
 | 188 | mathematics | 7 | `math.graph.eulerian-circuit` | Eulerian Circuit |
 | 189 | mathematics | 7 | `math.graph.hamiltonian-cycle` | Hamiltonian Cycle |
-| 190 | english | 7 | `eng.phonics.syllable-types` | Syllable Types |
-| 191 | english | 7 | `eng.phonetics.intonation-patterns` | Intonation Patterns |
 | 192 | biology | 7 | `bio.cell.mitosis` | Mitosis |
 | 193 | biology | 7 | `bio.mol.enzymes` | Enzymes and Enzyme Kinetics |
 | 194 | biology | 7 | `bio.evo.evidence-for-evolution` | Evidence for Evolution |
@@ -776,10 +781,6 @@ math.geom Wave 8, moved to READY.
 | 231 | mathematics | 8 | `math.graph.minimum-spanning-tree` | Minimum Spanning Tree |
 | 232 | mathematics | 8 | `math.graph.random-graph` | Random Graphs |
 | 233 | mathematics | 8 | `math.cat.category` | Category |
-| 234 | english | 8 | `eng.phonics.decoding-fluency` | Decoding Fluency |
-| 235 | english | 8 | `eng.phonetics.connected-speech` | Connected Speech |
-| 236 | english | 8 | `eng.phonetics.prosody` | Prosody |
-| 237 | english | 8 | `eng.writing.spelling-strategies` | Spelling Strategies |
 | 238 | biology | 8 | `bio.cell.meiosis` | Meiosis |
 | 239 | biology | 8 | `bio.mol.dna-replication` | DNA Replication |
 | 240 | biology | 8 | `bio.evo.natural-selection` | Natural Selection and Darwinism |
@@ -829,10 +830,6 @@ math.geom Wave 8, moved to READY.
 | 285 | mathematics | 9 | `math.meas.l2-space` | L² Space |
 | 286 | mathematics | 9 | `math.cat.morphism-types` | Types of Morphisms |
 | 287 | mathematics | 9 | `math.cat.functor` | Functor |
-| 288 | english | 9 | `eng.phonetics.rhythm-and-timing` | Rhythm and Timing |
-| 289 | english | 9 | `eng.vocab.word-recognition` | Word Recognition |
-| 290 | english | 9 | `eng.listening.active-listening` | Active Listening |
-| 291 | english | 9 | `eng.speaking.oral-fluency` | Oral Fluency |
 | 292 | biology | 9 | `bio.mol.transcription` | Transcription |
 | 293 | biology | 9 | `bio.gen.mendelian-genetics` | Mendelian Genetics |
 | 294 | biology | 9 | `bio.plant.plant-respiration` | Respiration in Plants |
@@ -867,14 +864,6 @@ Wave 11, moved to READY.
 | 322 | mathematics | 10 | `math.top.fundamental-group` | Fundamental Group |
 | 323 | mathematics | 10 | `math.top.homology` | Homology |
 | 324 | mathematics | 10 | `math.cat.natural-transformation` | Natural Transformation |
-| 325 | english | 10 | `eng.phonetics.accents-and-dialects` | Accents and Dialects |
-| 326 | english | 10 | `eng.vocab.context-clues` | Context Clues |
-| 327 | english | 10 | `eng.vocab.synonyms-antonyms` | Synonyms and Antonyms |
-| 328 | english | 10 | `eng.vocab.word-families` | Word Families |
-| 329 | english | 10 | `eng.grammar.word-classes-overview` | Overview of Word Classes |
-| 330 | english | 10 | `eng.listening.listening-for-gist` | Listening for Gist |
-| 331 | english | 10 | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech |
-| 332 | english | 10 | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation |
 | 333 | biology | 10 | `bio.mol.translation-genetic-code` | Translation and the Genetic Code |
 | 334 | biology | 10 | `bio.gen.gene-interactions` | Gene Interactions and Extensions of Mendelism |
 | 335 | biology | 10 | `bio.repro.fertilisation-development` | Fertilisation and Embryonic Development |
@@ -909,17 +898,6 @@ Domain Certification), moved to READY.
 | 363 | mathematics | 11 | `math.cat.functor-category` | Functor Category |
 | 364 | mathematics | 11 | `math.cat.limits` | Limits and Colimits |
 | 365 | mathematics | 11 | `math.cat.adjunction` | Adjunction |
-| 366 | english | 11 | `eng.vocab.compound-words` | Compound Words |
-| 367 | english | 11 | `eng.vocab.prefixes` | Prefixes |
-| 368 | english | 11 | `eng.vocab.suffixes` | Suffixes |
-| 369 | english | 11 | `eng.vocab.homonyms-homophones` | Homonyms and Homophones |
-| 370 | english | 11 | `eng.vocab.connotation-denotation` | Connotation and Denotation |
-| 371 | english | 11 | `eng.grammar.nouns` | Nouns |
-| 372 | english | 11 | `eng.grammar.verbs` | Verbs |
-| 373 | english | 11 | `eng.grammar.prepositions` | Prepositions |
-| 374 | english | 11 | `eng.grammar.conjunctions` | Conjunctions |
-| 375 | english | 11 | `eng.grammar.interjections` | Interjections |
-| 376 | english | 11 | `eng.reading.print-to-meaning` | From Print to Meaning |
 | 377 | english | 11 | `eng.listening.listening-for-detail` | Listening for Detail |
 | 378 | english | 11 | `eng.speaking.conversation-skills` | Conversation Skills |
 | 379 | biology | 11 | `bio.mol.gene-regulation` | Regulation of Gene Expression |
@@ -952,16 +930,6 @@ number-line` authored math.arith Wave 3, moved to READY.
 | 407 | mathematics | 12 | `math.cat.monad` | Monad |
 | 408 | mathematics | 12 | `math.cat.tensor-product` | Tensor Product (Categorical) |
 | 409 | mathematics | 12 | `math.cat.topos` | Topos |
-| 410 | english | 12 | `eng.vocab.roots-and-origins` | Greek and Latin Roots |
-| 411 | english | 12 | `eng.vocab.multiple-meaning-words` | Multiple-Meaning Words |
-| 412 | english | 12 | `eng.vocab.collocations` | Collocations |
-| 413 | english | 12 | `eng.vocab.register-and-formality` | Register and Formality |
-| 414 | english | 12 | `eng.grammar.pronouns` | Pronouns |
-| 415 | english | 12 | `eng.grammar.adjectives` | Adjectives |
-| 416 | english | 12 | `eng.grammar.articles-and-determiners` | Articles and Determiners |
-| 417 | english | 12 | `eng.grammar.subject-and-predicate` | Subject and Predicate |
-| 418 | english | 12 | `eng.grammar.present-tenses` | Present Tenses |
-| 419 | english | 12 | `eng.reading.reading-fluency` | Reading Fluency |
 | 420 | english | 12 | `eng.listening.following-instructions` | Following Spoken Instructions |
 | 421 | english | 12 | `eng.listening.note-taking-while-listening` | Note-Taking While Listening |
 | 422 | english | 12 | `eng.speaking.asking-and-answering-questions` | Asking and Answering Questions |
@@ -999,20 +967,6 @@ Wave 4 part 2, moved to READY.
 | 452 | mathematics | 13 | `math.abst.field` | Field |
 | 453 | mathematics | 13 | `math.cat.representable-functor` | Representable Functor |
 | 454 | mathematics | 13 | `math.cat.higher-category` | Higher Category Theory |
-| 455 | english | 13 | `eng.vocab.word-formation-processes` | Word Formation Processes |
-| 456 | english | 13 | `eng.vocab.idioms` | Idioms |
-| 457 | english | 13 | `eng.vocab.phrasal-verbs` | Phrasal Verbs |
-| 458 | english | 13 | `eng.vocab.etymology` | Etymology |
-| 459 | english | 13 | `eng.vocab.thesaurus-and-dictionary-skills` | Thesaurus and Dictionary Skills |
-| 460 | english | 13 | `eng.grammar.adverbs` | Adverbs |
-| 461 | english | 13 | `eng.grammar.word-order` | Basic Word Order |
-| 462 | english | 13 | `eng.grammar.past-tenses` | Past Tenses |
-| 463 | english | 13 | `eng.grammar.future-tenses` | Future Tenses |
-| 464 | english | 13 | `eng.grammar.modals` | Modal Verbs |
-| 465 | english | 13 | `eng.grammar.gerunds-and-infinitives` | Gerunds and Infinitives |
-| 466 | english | 13 | `eng.grammar.subject-verb-agreement` | Subject-Verb Agreement |
-| 467 | english | 13 | `eng.reading.literal-comprehension` | Literal Comprehension |
-| 468 | english | 13 | `eng.reading.skimming-and-scanning` | Skimming and Scanning |
 | 469 | english | 13 | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies |
 | 470 | english | 13 | `eng.speaking.discussion-skills` | Discussion Skills |
 | 471 | english | 13 | `eng.communication.digital-communication` | Digital Communication |
@@ -1045,16 +999,6 @@ to READY.
 | 495 | mathematics | 14 | `math.abst.first-isomorphism-theorem` | First Isomorphism Theorem |
 | 496 | mathematics | 14 | `math.abst.ufd` | Unique Factorization Domain |
 | 497 | mathematics | 14 | `math.abst.field-extension` | Field Extension |
-| 498 | english | 14 | `eng.vocab.academic-vocabulary` | Academic Vocabulary |
-| 499 | english | 14 | `eng.vocab.semantic-fields` | Semantic Fields |
-| 500 | english | 14 | `eng.grammar.sentence-types-by-function` | Sentence Types by Function |
-| 501 | english | 14 | `eng.grammar.phrases` | Phrases |
-| 502 | english | 14 | `eng.grammar.tense-consistency` | Tense Consistency |
-| 503 | english | 14 | `eng.grammar.conditionals` | Conditional Sentences |
-| 504 | english | 14 | `eng.grammar.participles-and-participial-phrases` | Participles and Participial Phrases |
-| 505 | english | 14 | `eng.grammar.pronoun-antecedent-agreement` | Pronoun-Antecedent Agreement |
-| 506 | english | 14 | `eng.grammar.comparatives-and-superlatives` | Comparatives and Superlatives |
-| 507 | english | 14 | `eng.reading.main-idea-and-details` | Main Idea and Supporting Details |
 | 508 | english | 14 | `eng.listening.critical-listening` | Critical Listening |
 | 509 | english | 14 | `eng.speaking.public-speaking-basics` | Public Speaking Basics |
 | 510 | biology | 14 | `bio.evo.modern-synthesis-speciation` | Modern Synthesis and Speciation |
@@ -1087,15 +1031,6 @@ math.geom Wave 4 part 1, moved to READY.
 | 531 | mathematics | 15 | `math.abst.algebraic-extension` | Algebraic Extension |
 | 532 | mathematics | 15 | `math.real.completeness` | Completeness of ℝ |
 | 533 | mathematics | 15 | `math.real.metric-space` | Metric Space |
-| 534 | english | 15 | `eng.grammar.question-formation` | Question Formation |
-| 535 | english | 15 | `eng.grammar.negation` | Negation |
-| 536 | english | 15 | `eng.grammar.clauses` | Independent and Dependent Clauses |
-| 537 | english | 15 | `eng.grammar.active-and-passive-voice` | Active and Passive Voice |
-| 538 | english | 15 | `eng.grammar.direct-and-indirect-speech` | Direct and Indirect Speech |
-| 539 | english | 15 | `eng.grammar.capitalization-rules` | Capitalization Rules |
-| 540 | english | 15 | `eng.reading.inference-in-reading` | Inference in Reading |
-| 541 | english | 15 | `eng.reading.summarizing` | Summarizing |
-| 542 | english | 15 | `eng.reading.text-structure` | Text Structure |
 | 543 | english | 15 | `eng.speaking.presentation-skills` | Presentation Skills |
 | 544 | chemistry | 15 | `chem.state.phase-diagram` | Phase Diagrams |
 | 545 | chemistry | 15 | `chem.sol.vapour-pressure` | Vapour Pressure of Solutions |
@@ -1152,8 +1087,6 @@ math.geom Wave 5, moved to READY.
 | 591 | mathematics | 16 | `math.real.archimedean` | Archimedean Property |
 | 592 | mathematics | 16 | `math.real.convergence-sequences` | Convergence of Sequences |
 | 593 | mathematics | 16 | `math.real.open-sets` | Open and Closed Sets |
-| 594 | english | 16 | `eng.grammar.simple-sentences` | Simple Sentences |
-| 595 | english | 16 | `eng.grammar.end-punctuation` | End Punctuation |
 | 596 | english | 16 | `eng.reading.predicting-and-confirming` | Predicting and Confirming |
 | 597 | english | 16 | `eng.reading.genre-recognition` | Genre Recognition |
 | 598 | english | 16 | `eng.reading.authors-purpose-and-tone` | Author's Purpose and Tone |
@@ -1230,9 +1163,6 @@ authored math.geom Wave 7, moved to READY.
 | 659 | mathematics | 17 | `math.real.connectedness` | Connectedness |
 | 660 | mathematics | 17 | `math.real.pointwise-convergence` | Pointwise Convergence |
 | 661 | mathematics | 17 | `math.graph.ramsey-theory` | Ramsey Theory |
-| 662 | english | 17 | `eng.grammar.compound-sentences` | Compound Sentences |
-| 663 | english | 17 | `eng.grammar.comma-usage` | Comma Usage |
-| 664 | english | 17 | `eng.grammar.sentence-fragments` | Sentence Fragments |
 | 665 | english | 17 | `eng.reading.close-reading` | Close Reading |
 | 666 | english | 17 | `eng.writing.sentence-writing` | Sentence Writing |
 | 667 | chemistry | 17 | `chem.sol.osmosis` | Osmosis and Osmotic Pressure |
@@ -1312,12 +1242,6 @@ math.geom Wave 8, moved to READY.
 | 731 | mathematics | 18 | `math.real.continuity-rigorous` | Continuity (ε-δ) |
 | 732 | mathematics | 18 | `math.opt.convex-set` | Convex Set |
 | 733 | mathematics | 18 | `math.graph.shortest-path` | Shortest Path Algorithms |
-| 734 | english | 18 | `eng.grammar.complex-sentences` | Complex Sentences |
-| 735 | english | 18 | `eng.grammar.parallel-structure` | Parallel Structure |
-| 736 | english | 18 | `eng.grammar.apostrophes` | Apostrophes |
-| 737 | english | 18 | `eng.grammar.quotation-marks` | Quotation Marks |
-| 738 | english | 18 | `eng.grammar.colons-semicolons-dashes` | Colons, Semicolons, and Dashes |
-| 739 | english | 18 | `eng.grammar.run-on-sentences-and-comma-splices` | Run-On Sentences and Comma Splices |
 | 740 | english | 18 | `eng.reading.critical-reading` | Critical Reading |
 | 741 | english | 18 | `eng.writing.paragraph-structure` | Paragraph Structure |
 | 742 | english | 18 | `eng.literature.narrative-elements` | Narrative Elements |
@@ -1405,7 +1329,6 @@ math.nt Wave 6 part 1, moved to READY.
 | 814 | mathematics | 19 | `math.real.uniform-convergence` | Uniform Convergence |
 | 815 | mathematics | 19 | `math.real.baire-category` | Baire Category Theorem |
 | 816 | mathematics | 19 | `math.graph.extremal-graph-theory` | Extremal Graph Theory |
-| 817 | english | 19 | `eng.grammar.sentence-combining` | Sentence Combining |
 | 818 | english | 19 | `eng.reading.evaluating-sources` | Evaluating Sources |
 | 819 | english | 19 | `eng.writing.topic-sentences` | Topic Sentences |
 | 820 | english | 19 | `eng.literature.plot-structure` | Plot Structure |

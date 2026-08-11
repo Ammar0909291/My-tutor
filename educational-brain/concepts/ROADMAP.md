@@ -13,19 +13,19 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **654** |
-| Remaining | **1,121** |
-| Completion percentage | **36.85%** |
+| Concepts with an Educational Brain entry | **754** |
+| Remaining | **1,021** |
+| Completion percentage | **42.48%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 6 english + 186 chemistry + 0 biology + 0 computer_science = 654.
-English updated after the level-1 batch (3 concepts:
-`eng.phonics.alphabet-recognition`, `eng.phonics.rhyming`,
-`eng.phonetics.speech-sounds-overview`), per this session's explicit
-"English is now the active implementation subject" instruction —
-mathematics/physics/chemistry figures are taken as already-recorded in
-§2 below, not re-audited by this batch, per that same instruction's
-"do not touch other subjects" scope.)*
++ 106 english + 186 chemistry + 0 biology + 0 computer_science = 754.
+English corrected 2026-08-11 from a stale 6 to the true 106 — this file
+had not been updated across ~93 English batches authored directly on
+`main` via commit-message-only tracking, plus 7 newly-reconciled
+concepts from a parallel feature branch; see `AUTHORING_QUEUE.md`'s
+English branch-reconciliation note for the full audit. Mathematics/
+physics/chemistry figures are taken as already-recorded below, not
+re-audited this session, per this session's English-only scope.)*
 
 ---
 
@@ -35,7 +35,7 @@ mathematics/physics/chemistry figures are taken as already-recorded in
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 6 | 2.78% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 106 | 49.07% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1201,6 +1201,37 @@ completion constraint) takes precedence over that file's literal row
 order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
+
+**English branch-reconciliation (2026-08-11)**: this session picked up a
+separate English-authoring feature branch
+(`claude/english-brain-authoring-454l1i`) that had been developing in
+parallel with direct-to-`main` English sessions, unaware of each other.
+Audit: `main` had reached 99/216 via ~46+ batches tracked entirely
+through commit messages (this file's own English tracking had gone
+stale at 6/216 since the level-1 batch and was never updated across all
+of it); the feature branch had reached 40/216, of which 33 concepts
+duplicated ones `main` had already authored (in every checked case,
+`main`'s version was the more fully developed one — kept as canonical,
+the duplicate discarded) and 7 were genuinely new
+(`eng.listening.active-listening`, `eng.listening.distinguishing-sounds-
+in-speech`, `eng.listening.listening-for-gist`, `eng.speaking.oral-
+fluency`, `eng.speaking.pronunciation-in-conversation`,
+`eng.writing.handwriting-and-formation`, `eng.writing.spelling-
+strategies`). All 7 had their prerequisites already satisfied on `main`
+(`eng.phonics.alphabet-recognition`, `eng.phonics.syllable-types`,
+`eng.phonetics.prosody`, `eng.phonetics.connected-speech`,
+`eng.phonetics.minimal-pairs` — all already `READY`), and all 7 pass
+`EDUCATIONAL_BRAIN_STANDARD.md`'s 21-heading structural check. Added
+directly to `main`, bringing English to **106/216 (49.07%)**. This
+file's §1/§2 figures and `AUTHORING_QUEUE.md`'s stale English rows
+(100 of them, for concepts already authored but never removed from the
+queue) were corrected in the same pass — full detail in
+`AUTHORING_QUEUE.md`'s own reconciliation note. KG validator re-run:
+PASS, 216/216 reachable, 0 failures/warnings, unchanged. `npx tsc
+--noEmit` clean; full suite green. No KG, Blueprint, or other-subject
+file touched. Continuing in autonomous loop per standing instruction:
+next step computes English's fresh topological queue against the true
+106-concept baseline and resumes batch-by-batch authoring.
 
 **Batch 57 (math.geom Wave 12)**: compute the set of `math.geom` nodes
 whose prerequisites are all now READY after Wave 11's 7 new entries
