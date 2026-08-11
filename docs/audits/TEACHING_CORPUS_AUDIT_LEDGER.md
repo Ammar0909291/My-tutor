@@ -206,7 +206,53 @@ Real learner account, physics / Free Body Diagrams, session `cmsop6py8…`.
 All three were checked by scanning the real response text for the exact
 phrases the defects produced, not by impression.
 
-## BLOCKER — `GET /api/curriculum?subject=physics` returns HTTP 500 in production
+## BLOCKER — production DATABASE degraded (was mis-framed as a physics defect)
+
+> **CORRECTION.** This section was first written as "the physics curriculum
+> endpoint is broken". That framing was WRONG and is corrected below the fold.
+> The stack trace shows Prisma **P1008 Socket timeout**, on `Curriculum` AND
+> `Profile`, `count=2 users=2` — the database is not responding. Chemistry
+> returned 200 because it happened to get a responsive connection, not because
+> physics has a defect. Nothing subject-specific is wrong.
+
+### What the trace actually says
+
+```
+[GET /api/curriculum] PrismaClientKnownRequestError
+Invalid `prisma.curriculum.findMany()` invocation:
+Socket timeout (the database failed to respond to a query within the
+configured timeout)
+code: 'P1008', meta: { modelName: 'Curriculum' }
+```
+and a second cluster, same window, same code, `modelName: 'Profile'`.
+
+### It then got worse, which confirms it
+
+Minutes later, credentials sign-in began failing on the SAME account and the
+SAME flow that had worked repeatedly: `POST /api/auth/callback/credentials`
+returns 302, but `GET /api/auth/session` returns `null`. That is the expected
+symptom of this outage, by design — `authorize()` wraps its user lookup in
+`withTimeout`, so an unresponsive database surfaces as an ordinary failed
+login rather than a hang.
+
+**So the platform is currently not usable for any learner, in any subject.**
+This is infrastructure, not code: it is not caused by anything in this
+session's commits, and no code change fixes it. It needs an owner with
+Supabase/pooler access (this session's Supabase MCP lists 0 projects).
+
+### Ruled out along the way (kept — the eliminations are still valid)
+
+- Not authentication logic — chemistry succeeded on the identical cookie
+  while physics failed, in the same minute.
+- Not KG parsing — `getKnowledgeGraph` loads both subjects cleanly.
+- Not the physics KG's growth to 238 concepts — the entire pure pipeline
+  (`getAvailableNodes`, `getPlacementFloorSlugs`,
+  `computeCurriculumEntryOrder`, `localizeKGModuleTitle`, synthetic-lesson
+  build) runs clean for physics AND chemistry in-process.
+- Not this session's changes — chemistry runs the same route and passed.
+
+### Original entry, left for the record
+
 
 Found while opening Topic 1 of the physics audit. **This is a live learner
 defect, not a test-harness problem:** a real authenticated learner cannot load
