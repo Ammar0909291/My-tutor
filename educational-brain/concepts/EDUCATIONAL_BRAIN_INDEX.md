@@ -1169,14 +1169,14 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 162 READY)
+## english (216 concepts, 172 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
 | communication | `eng.communication.business-writing` | Business Writing | Yes | No | — | MISSING |
-| communication | `eng.communication.cross-cultural-communication` | Cross-Cultural Communication | Yes | No | — | MISSING |
+| communication | `eng.communication.cross-cultural-communication` | Cross-Cultural Communication | Yes | Yes | `educational-brain/concepts/english/eng.communication.cross-cultural-communication.md` | READY |
 | communication | `eng.communication.digital-communication` | Digital Communication | Yes | Yes | `educational-brain/concepts/english/eng.communication.digital-communication.md` | READY |
-| communication | `eng.communication.discourse-markers-advanced` | Advanced Discourse Markers | Yes | No | — | MISSING |
+| communication | `eng.communication.discourse-markers-advanced` | Advanced Discourse Markers | Yes | Yes | `educational-brain/concepts/english/eng.communication.discourse-markers-advanced.md` | READY |
 | communication | `eng.communication.editing-for-publication` | Editing for Publication | Yes | No | — | MISSING |
 | communication | `eng.communication.media-literacy` | Media Literacy | Yes | Yes | — | READY |
 | communication | `eng.communication.negotiation-language` | Negotiation Language | Yes | No | — | MISSING |
@@ -1243,11 +1243,11 @@ its subject KG.
 | grammar | `eng.grammar.verbs` | Verbs | Yes | Yes | `educational-brain/concepts/english/eng.grammar.verbs.md` | READY |
 | grammar | `eng.grammar.word-classes-overview` | Overview of Word Classes | Yes | Yes | `educational-brain/concepts/english/eng.grammar.word-classes-overview.md` | READY |
 | grammar | `eng.grammar.word-order` | Basic Word Order | Yes | Yes | `educational-brain/concepts/english/eng.grammar.word-order.md` | READY |
-| linguistics | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.applied-linguistics-intro.md` | READY |
 | linguistics | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.computational-linguistics-intro` | Introduction to Computational Linguistics | Yes | No | — | MISSING |
-| linguistics | `eng.linguistics.corpus-linguistics-intro` | Introduction to Corpus Linguistics | Yes | No | — | MISSING |
-| linguistics | `eng.linguistics.dialectology` | Dialectology | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.corpus-linguistics-intro` | Introduction to Corpus Linguistics | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.corpus-linguistics-intro.md` | READY |
+| linguistics | `eng.linguistics.dialectology` | Dialectology | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.dialectology.md` | READY |
 | linguistics | `eng.linguistics.discourse-analysis-intro` | Introduction to Discourse Analysis | Yes | Yes | — | READY |
 | linguistics | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics | Yes | Yes | — | READY |
 | linguistics | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition | Yes | Yes | — | READY |
@@ -1275,18 +1275,18 @@ its subject KG.
 | literature | `eng.literature.dramatic-structure` | Dramatic Structure | Yes | Yes | — | READY |
 | literature | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense | Yes | Yes | — | READY |
 | literature | `eng.literature.imagery` | Imagery | Yes | No | — | MISSING |
-| literature | `eng.literature.irony` | Irony | Yes | No | — | MISSING |
+| literature | `eng.literature.irony` | Irony | Yes | Yes | `educational-brain/concepts/english/eng.literature.irony.md` | READY |
 | literature | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism | Yes | No | — | MISSING |
 | literature | `eng.literature.literary-devices-overview` | Overview of Literary Devices | Yes | Yes | — | READY |
 | literature | `eng.literature.literary-genres-overview` | Overview of Literary Genres | Yes | No | — | MISSING |
 | literature | `eng.literature.literary-periods-survey` | Survey of Literary Periods | Yes | No | — | MISSING |
-| literature | `eng.literature.metaphor-and-simile` | Metaphor and Simile | Yes | No | — | MISSING |
+| literature | `eng.literature.metaphor-and-simile` | Metaphor and Simile | Yes | Yes | `educational-brain/concepts/english/eng.literature.metaphor-and-simile.md` | READY |
 | literature | `eng.literature.meter-and-rhyme` | Meter and Rhyme | Yes | No | — | MISSING |
 | literature | `eng.literature.narrative-elements` | Narrative Elements | Yes | Yes | — | READY |
 | literature | `eng.literature.novel-study` | Novel Study | Yes | No | — | MISSING |
 | literature | `eng.literature.plot-structure` | Plot Structure | Yes | Yes | — | READY |
 | literature | `eng.literature.poetic-forms` | Poetic Forms | Yes | No | — | MISSING |
-| literature | `eng.literature.poetry-basics` | Poetry Basics | Yes | No | — | MISSING |
+| literature | `eng.literature.poetry-basics` | Poetry Basics | Yes | Yes | `educational-brain/concepts/english/eng.literature.poetry-basics.md` | READY |
 | literature | `eng.literature.point-of-view` | Point of View | Yes | Yes | — | READY |
 | literature | `eng.literature.prose-fiction` | Prose Fiction | Yes | Yes | — | READY |
 | literature | `eng.literature.prose-nonfiction` | Prose Nonfiction | Yes | Yes | — | READY |
@@ -1369,7 +1369,7 @@ its subject KG.
 | vocab | `eng.vocab.word-formation-processes` | Word Formation Processes | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-formation-processes.md` | READY |
 | vocab | `eng.vocab.word-recognition` | Word Recognition | Yes | Yes | `educational-brain/concepts/english/eng.vocab.word-recognition.md` | READY |
 | writing | `eng.writing.citations-and-referencing` | Citations and Referencing | Yes | No | — | MISSING |
-| writing | `eng.writing.creative-writing-forms` | Creative Writing Forms | Yes | No | — | MISSING |
+| writing | `eng.writing.creative-writing-forms` | Creative Writing Forms | Yes | Yes | `educational-brain/concepts/english/eng.writing.creative-writing-forms.md` | READY |
 | writing | `eng.writing.descriptive-writing` | Descriptive Writing | Yes | Yes | — | READY |
 | writing | `eng.writing.drafting` | Drafting | Yes | No | — | MISSING |
 | writing | `eng.writing.editing-and-proofreading` | Editing and Proofreading | Yes | No | — | MISSING |
@@ -1384,7 +1384,7 @@ its subject KG.
 | writing | `eng.writing.sentence-writing` | Sentence Writing | Yes | Yes | `educational-brain/concepts/english/eng.writing.sentence-writing.md` | READY |
 | writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | Yes | `educational-brain/concepts/english/eng.writing.spelling-strategies.md` | READY |
 | writing | `eng.writing.supporting-details` | Supporting Details | Yes | Yes | — | READY |
-| writing | `eng.writing.the-writing-process` | The Writing Process | Yes | No | — | MISSING |
+| writing | `eng.writing.the-writing-process` | The Writing Process | Yes | Yes | `educational-brain/concepts/english/eng.writing.the-writing-process.md` | READY |
 | writing | `eng.writing.thesis-statements` | Thesis Statements | Yes | No | — | MISSING |
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | Yes | — | READY |
 | writing | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion | Yes | Yes | — | READY |

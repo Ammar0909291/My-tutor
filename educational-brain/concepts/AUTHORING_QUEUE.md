@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **965** (= 1,775 KG concepts − 810 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 16 completion,
+Total queued: **955** (= 1,775 KG concepts − 820 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 17 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1509,9 +1509,6 @@ math.nt Wave 5 part 1, moved to READY.
 | 1027 | mathematics | 22 | `math.opt.unconstrained-optimization` | Unconstrained Optimization |
 | 1028 | mathematics | 22 | `math.opt.convex-function` | Convex Function |
 | 1029 | mathematics | 22 | `math.graph.algebraic-graph-theory` | Algebraic Graph Theory |
-| 1034 | english | 22 | `eng.literature.metaphor-and-simile` | Metaphor and Simile |
-| 1035 | english | 22 | `eng.literature.irony` | Irony |
-| 1036 | english | 22 | `eng.literature.poetry-basics` | Poetry Basics |
 **Row 1039 removed 2026-07-26** — `math.nt.linear-diophantine` authored
 math.nt Wave 6 part 2, moved to READY.
 **Row 1040 removed 2026-07-26** — `math.nt.rsa-basics` authored
@@ -1550,8 +1547,6 @@ math.nt Wave 7, moved to READY.
 | 1072 | mathematics | 23 | `math.opt.convex-optimization` | Convex Optimization |
 | 1073 | mathematics | 23 | `math.opt.lagrange-multipliers` | Lagrange Multipliers |
 | 1074 | mathematics | 23 | `math.opt.gradient-methods` | Gradient Descent |
-| 1075 | english | 23 | `eng.writing.the-writing-process` | The Writing Process |
-| 1076 | english | 23 | `eng.writing.creative-writing-forms` | Creative Writing Forms |
 | 1077 | english | 23 | `eng.literature.symbolism` | Symbolism |
 | 1078 | english | 23 | `eng.literature.imagery` | Imagery |
 | 1079 | english | 23 | `eng.literature.poetic-forms` | Poetic Forms |
@@ -1656,11 +1651,6 @@ math.nt Wave 8, moved to READY.
 | 1181 | mathematics | 26 | `math.opt.linear-programming` | Linear Programming |
 | 1182 | english | 26 | `eng.writing.revising-for-content` | Revising for Content |
 | 1183 | english | 26 | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature |
-| 1184 | english | 26 | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics |
-| 1185 | english | 26 | `eng.linguistics.dialectology` | Dialectology |
-| 1186 | english | 26 | `eng.linguistics.corpus-linguistics-intro` | Introduction to Corpus Linguistics |
-| 1187 | english | 26 | `eng.communication.discourse-markers-advanced` | Advanced Discourse Markers |
-| 1188 | english | 26 | `eng.communication.cross-cultural-communication` | Cross-Cultural Communication |
 | 1189 | mathematics | 27 | `math.nt.number-fields` | Number Fields |
 | 1190 | mathematics | 27 | `math.alg.factoring-trinomials` | Factoring Trinomials |
 | 1191 | mathematics | 27 | `math.alg.rational-expressions-addition` | Addition of Rational Expressions |
