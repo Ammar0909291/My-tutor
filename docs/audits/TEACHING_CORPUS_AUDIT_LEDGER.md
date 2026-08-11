@@ -205,3 +205,44 @@ Real learner account, physics / Free Body Diagrams, session `cmsop6py8…`.
 
 All three were checked by scanning the real response text for the exact
 phrases the defects produced, not by impression.
+
+## BLOCKER — `GET /api/curriculum?subject=physics` returns HTTP 500 in production
+
+Found while opening Topic 1 of the physics audit. **This is a live learner
+defect, not a test-harness problem:** a real authenticated learner cannot load
+the physics curriculum at all.
+
+| request | result |
+|---------|--------|
+| `GET /api/curriculum?subject=physics` | **HTTP 500** `{"success":false,"error":"Internal server error"}` — reproduced twice |
+| `GET /api/curriculum?subject=chemistry` | HTTP 200, lessons render (`chemistry-1-1` "Nature of Matter" …) |
+
+Measured on commit `50ad65d9`, real account, valid session (the same cookie
+returns 200 for chemistry, so this is not auth).
+
+Ruled OUT so far:
+- Not authentication — chemistry succeeds on the identical cookie.
+- Not KG loading — `getKnowledgeGraph('physics')` and `('chemistry')` both
+  load cleanly in-process, so the throw is not the graph parse.
+- Not the recent teaching-engine or visual-persistence changes — chemistry
+  exercises the same route and passes.
+
+Still to determine (next session starts here):
+- physics `Curriculum` rows in the database vs chemistry's;
+- the unlocked-node computation over the physics graph, which grew
+  216 -> 238 concepts when the Particle Physics domain and the semiconductor
+  concepts were added (`docs/physics/kg/graph.json`);
+- `selectCurrentLesson` against this learner's physics `StudentProgress`
+  (currentLesson 21, `activeLessonSlug` set).
+Vercel runtime-log queries timed out over the project and returned nothing
+when scoped to the deployment, so the stack trace has not been read yet —
+get it first rather than guessing.
+
+**Impact on the corpus audit:** physics Topic 1 cannot be opened through the
+app's normal lesson-init flow until this is fixed, because the UI's lesson
+list comes from this endpoint. Physics topics are therefore BLOCKED; chemistry
+is unaffected and is the correct place to continue if this is not fixed first.
+
+Priority: P1, CONTENT/DATA or ENGINE — ahead of any topic auditing, on the
+same reasoning as the earlier global fixes: it changes what every physics
+learner sees.
