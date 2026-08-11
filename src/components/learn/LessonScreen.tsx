@@ -4379,7 +4379,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 </button>
               )}
 
-              {/* More menu — houses Practice / Insights / Maximize, decluttering the input row */}
+              {/* Maximize/restore — desktop only. Was buried inside the "More"
+                  menu below (two clicks, and no visible way to tell the panel
+                  was maximized without opening it); every other panel
+                  (curriculum, code) already has this as a direct one-click
+                  header button, so the chat panel now matches that pattern. */}
+              <button
+                className="hidden md:flex"
+                onClick={() => setMaximizedPanel(maximizedPanel === 'chat' ? null : 'chat')}
+                title={maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
+                aria-label={maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
+                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 12, flexShrink: 0 }}>
+                {maximizedPanel === 'chat' ? '⊡' : '⊞'}
+              </button>
+
+              {/* More menu — houses Practice / Insights, decluttering the input row */}
               <div style={{ position: 'relative', flexShrink: 0 }}>
                 <button onClick={() => setMoreMenuOpen((v) => !v)}
                   title={t('lesson_more_options')}
@@ -4409,12 +4423,6 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           📊 {t('lesson_insights_btn')}
                         </button>
                       )}
-                      <button
-                        className="hidden md:flex"
-                        onClick={() => { setMaximizedPanel(maximizedPanel === 'chat' ? null : 'chat'); setMoreMenuOpen(false) }}
-                        style={{ alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                        {maximizedPanel === 'chat' ? '⊡' : '⊞'} {maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
-                      </button>
                     </div>
                   </>
                 )}
