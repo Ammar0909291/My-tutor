@@ -102,3 +102,30 @@ restored figure attaches to its own message id, which is what closes D10.
 | date | commit | what |
 |------|--------|------|
 | 2026-08-11 | (pending) | ledger created; Phase 0 complete; D8/D10/D12 root cause measured |
+
+## D8/D10/D12 — FIXED (2026-08-11, commit `6989d51a`)
+
+`Message.visualSession` (Json?, additive, nullable) records the figure a
+message actually displayed — IDENTITY, never payload. `messageVisuals.ts` is
+the single restore authority for both read paths (`/api/sessions/history` and
+the `/api/sessions` resume), keyed by message id.
+
+| defect | before | after |
+|--------|--------|-------|
+| D8 visual disappears after refresh | every historical figure lost; at most one survived | each message restores the figure it showed |
+| D9 historical visual regenerated | already satisfied | still satisfied — asserted by a test that THROWS if a model is called |
+| D10 attached to the wrong message | attached to the last ASSISTANT message by position | keyed by message id; positional path is legacy-only |
+| D11 in DB but not reconstructed | did not apply — never written | now written and reconstructed |
+| D12 not part of the learning record | client state only | persisted on the message |
+
+Legacy conversations (rows predating the column) keep the positional
+session-level restore, gated on no message carrying its own identity — so
+older conversations do not lose their current figure, and a positional guess
+is never made once real per-message evidence exists.
+
+Tests: `src/tests/visualHistoryPersistence.test.ts`, 10 cases, including an
+explicit anti-vacuity anchor pinning the real restored figure
+(`card` / `force_diagram` for `phys.mech.free-body-diagram`) — every other
+assertion in that file would pass if restoration silently returned nothing.
+
+Suite 293 files / 6,332 passed / 9 skipped; tsc clean; build clean.
