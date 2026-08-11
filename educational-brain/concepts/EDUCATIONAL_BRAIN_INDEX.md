@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 115 READY)
+## english (216 concepts, 118 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1253,7 +1253,7 @@ its subject KG.
 | linguistics | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.language-families` | Language Families | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.morphology-intro` | Introduction to Morphology | Yes | No | — | MISSING |
-| linguistics | `eng.linguistics.phonology-intro` | Introduction to Phonology | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.phonology-intro` | Introduction to Phonology | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.phonology-intro.md` | READY |
 | linguistics | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.semantics-intro` | Introduction to Semantics | Yes | No | — | MISSING |
@@ -1264,11 +1264,11 @@ its subject KG.
 | listening | `eng.listening.active-listening` | Active Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.active-listening.md` | READY |
 | listening | `eng.listening.critical-listening` | Critical Listening | Yes | No | — | MISSING |
 | listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | Yes | `educational-brain/concepts/english/eng.listening.distinguishing-sounds-in-speech.md` | READY |
-| listening | `eng.listening.following-instructions` | Following Spoken Instructions | Yes | No | — | MISSING |
+| listening | `eng.listening.following-instructions` | Following Spoken Instructions | Yes | Yes | `educational-brain/concepts/english/eng.listening.following-instructions.md` | READY |
 | listening | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies | Yes | No | — | MISSING |
 | listening | `eng.listening.listening-for-detail` | Listening for Detail | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-detail.md` | READY |
 | listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-gist.md` | READY |
-| listening | `eng.listening.note-taking-while-listening` | Note-Taking While Listening | Yes | No | — | MISSING |
+| listening | `eng.listening.note-taking-while-listening` | Note-Taking While Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.note-taking-while-listening.md` | READY |
 | literature | `eng.literature.character-development` | Character Development | Yes | No | — | MISSING |
 | literature | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature | Yes | No | — | MISSING |
 | literature | `eng.literature.drama-basics` | Drama Basics | Yes | No | — | MISSING |

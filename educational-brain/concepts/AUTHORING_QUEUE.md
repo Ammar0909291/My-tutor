@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1012** (= 1,775 KG concepts − 763 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 11 continuation,
+Total queued: **1009** (= 1,775 KG concepts − 766 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 12 continuation,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -928,8 +928,6 @@ number-line` authored math.arith Wave 3, moved to READY.
 | 407 | mathematics | 12 | `math.cat.monad` | Monad |
 | 408 | mathematics | 12 | `math.cat.tensor-product` | Tensor Product (Categorical) |
 | 409 | mathematics | 12 | `math.cat.topos` | Topos |
-| 420 | english | 12 | `eng.listening.following-instructions` | Following Spoken Instructions |
-| 421 | english | 12 | `eng.listening.note-taking-while-listening` | Note-Taking While Listening |
 | 422 | english | 12 | `eng.speaking.asking-and-answering-questions` | Asking and Answering Questions |
 | 423 | english | 12 | `eng.speaking.storytelling-orally` | Oral Storytelling |
 | 424 | english | 12 | `eng.speaking.non-verbal-communication` | Non-Verbal Communication |
@@ -1477,7 +1475,6 @@ authored math.nt Wave 4, moved to READY.
 | 963 | english | 21 | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion |
 | 964 | english | 21 | `eng.literature.literary-devices-overview` | Overview of Literary Devices |
 | 965 | english | 21 | `eng.literature.prose-nonfiction` | Prose Nonfiction |
-| 966 | english | 21 | `eng.linguistics.phonology-intro` | Introduction to Phonology |
 | 967 | english | 21 | `eng.linguistics.morphology-intro` | Introduction to Morphology |
 | 968 | chemistry | 21 | `chem.bio.nucleic-acids` | Nucleic Acids |
 | 969 | chemistry | 21 | `chem.bio.vitamins` | Vitamins and Hormones |
