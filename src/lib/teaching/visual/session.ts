@@ -74,6 +74,51 @@ export const MAX_EXCURSION_TURNS = 40
 const TOPIC_REQUEST_RE =
   /\b(teach|show|explain|describe|demonstrate|illustrate|draw|visuali[sz]e|what\s+(?:is|are|was|were)|what'?s|tell\s+me\s+about|help\s+me\s+(?:with|understand)|move\s+on\s+to|switch\s+to|change\s+to|let'?s\s+(?:do|try|learn|study)|now\s+(?:do|teach|explain)|i\s+want\s+to\s+learn|can\s+you\s+(?:teach|show|explain))\b/i
 
+/**
+ * QUESTION FORMS — weaker than a request to be taught, and deliberately kept
+ * separate from it.
+ *
+ * A 40-topic production run showed six ordinary phrasings were invisible to
+ * TOPIC_REQUEST_RE: "What happens during electrolysis?", "Why does light bend
+ * when it enters water?", "How does a catalyst work?", "What causes friction?"
+ * and friends. Every guard built on "did the learner name a topic" was
+ * therefore skipped for them — including the one that stops the LESSON's
+ * figure being served for somebody else's topic.
+ *
+ * WHY THEY ARE NOT SIMPLY ADDED TO THE LIST ABOVE. Measured: doing that broke
+ * `visualSessionRestore` — "why does temperature change it?", a follow-up
+ * ABOUT the viscosity figure on screen, became a topic request and released
+ * the figure the learner was reading. The strong forms mean "teach me
+ * something"; these mean "I have a question", and a question is very often
+ * about what is already in front of them.
+ *
+ * So: these NEVER move the teaching target and NEVER evict a figure. They are
+ * consulted only where the question is whether a NEW figure may claim to be
+ * what the learner asked about.
+ *
+ * Each requires something to follow the verb, so "Why?", "Why is that?",
+ * "How come?" and "why not?" stay out; and each matches as a LOOKAHEAD past
+ * the verb, so the topic's own first word is never consumed.
+ */
+const QUESTION_FORM_RE =
+  /\b(?:what\s+happens\s+(?:to|during|when|if|in|after)\s+|what\s+causes\s+|why\s+(?:does|do|did|is|are|was|were)\s+(?!(?:that|this|it|there|they|he|she|we|you)\b)|how\s+(?:does|do|did)\s+(?!(?:that|this|it|they|we|you)\b))/i
+
+/**
+ * Did the learner ask a QUESTION ABOUT a topic, in the weaker sense above?
+ * True for the strong request forms too, so callers get one answer.
+ */
+export function isTopicQuestion(message: string): boolean {
+  return TOPIC_REQUEST_RE.test(message ?? '') || QUESTION_FORM_RE.test(message ?? '')
+}
+
+/** The question phrase and where it ends — the weak family's counterpart. */
+export function matchTopicQuestion(message: string): { phrase: string; end: number } | null {
+  const strong = matchTopicRequest(message ?? '')
+  if (strong) return strong
+  const m = QUESTION_FORM_RE.exec(message ?? '')
+  return m ? { phrase: m[0], end: m.index + m[0].length } : null
+}
+
 const RETURN_REQUEST_RE =
   /\b(back\s+to|go\s+back|return\s+to|resume|carry\s+on\s+with|continue\s+(?:with|the\s+lesson)|finish\s+the\s+lesson|done\s+with\s+(?:this|that)|got\s+it,?\s+(?:back|continue)|let'?s\s+get\s+back)\b/i
 

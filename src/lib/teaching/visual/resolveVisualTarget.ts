@@ -17,7 +17,7 @@
 
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/requestedConcept'
-import { isExplicitTopicRequest } from './session'
+import { isTopicQuestion } from './session'
 import { extractRequestedTopic } from './requestedTopic'
 import { contentWords } from './visualEngine'
 import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
@@ -140,7 +140,9 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
   // Only the fallback can be wrong in this way. A concept the learner actually
   // named IS what they asked for, by construction.
   if (target.origin !== 'lesson-concept') return false
-  if (!isExplicitTopicRequest(message)) return false
+  // The WEAK family too — see QUESTION_FORM_RE. It governs only this
+  // predicate, never the teaching target and never an eviction.
+  if (!isTopicQuestion(message)) return false
 
   // THE TOPIC PHRASE, not the whole sentence.
   //
@@ -171,7 +173,7 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
   // reading. Here the only thing at stake is whether a NEW figure of the wrong
   // concept gets drawn, and this engine's whole stance is that no figure beats
   // a wrong one.
-  const requested = extractRequestedTopic(message, 1)
+  const requested = extractRequestedTopic(message, 1, true)
   if (!requested) return false
   const named = [...requested.words]
 

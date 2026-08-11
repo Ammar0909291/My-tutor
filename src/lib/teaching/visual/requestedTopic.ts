@@ -43,7 +43,7 @@
  * Pure and synchronous. No model, no network, no database, no KG.
  */
 
-import { matchTopicRequest } from './session'
+import { matchTopicRequest, matchTopicQuestion } from './session'
 import { contentWords } from './visualEngine'
 import { runtimeTopicIdentity, type TopicIdentity } from './topicIdentity'
 
@@ -161,8 +161,11 @@ export function extractRequestedTopic(
    * received were the lesson's picture on somebody else's topic.
    */
   minWords: number = MIN_TITLE_WORDS,
+  /** Also accept the weaker QUESTION forms ("why does X", "what causes X").
+   *  Passed by the suppression path only, for the same reason `minWords` is. */
+  includeQuestionForms = false,
 ): RequestedTopic | null {
-  const request = matchTopicRequest(message ?? '')
+  const request = includeQuestionForms ? matchTopicQuestion(message ?? '') : matchTopicRequest(message ?? '')
   if (!request) return null
 
   const after = (message ?? '').slice(request.end)

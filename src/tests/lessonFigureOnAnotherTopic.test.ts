@@ -64,18 +64,57 @@ describe('a single-word topic is still a topic', () => {
     }
   })
 
-  // KNOWN RECALL GAP, recorded rather than tuned away. `isExplicitTopicRequest`
-  // recognises "what is/are", "explain", "teach me", "show me" and friends —
-  // but NOT "what happens during X" or "why does X…". Both are ordinary
-  // learner phrasings and both were observed in the 40-topic run, and for both
-  // this guard never runs at all, so the lesson's figure is still served.
-  // Widening that regex touches the shared definition of a request used by the
-  // excursion lifecycle too, so it is reported, not changed here.
-  it('does not yet recognise "what happens during…" or "why does…" as requests', () => {
-    for (const m of ['What happens during electrolysis?', 'Why does light bend when it enters water?']) {
-      const t = targetFor(m, PHYS_LESSON, 'physics')
-      expect(t && requestTargetsSomethingElse(m, t), m).toBe(false)
+  // CLOSED 2026-08-11. This case previously PINNED a recall gap: neither
+  // "What happens during electrolysis?" nor "Why does light bend when it
+  // enters water?" was recognised as naming a topic, so this guard never ran
+  // for them and the lesson's figure was served anyway — which is how a
+  // refraction question still received a free-body diagram after the guard
+  // itself had been fixed.
+  //
+  // They are now recognised by a SEPARATE, weaker family (QUESTION_FORM_RE)
+  // that governs this predicate only. Adding them to the strong request list
+  // was measured first and rejected: it made "why does temperature change it?"
+  // — a follow-up about the figure on screen — evict that figure.
+  it.each([
+    ['what happens during', 'What happens during electrolysis?', CHEM_LESSON, 'chemistry'],
+    ['why does', 'Why does light bend when it enters water?', PHYS_LESSON, 'physics'],
+    ['what causes', 'What causes friction?', PHYS_LESSON, 'physics'],
+    ['how does', 'How does a catalyst work?', CHEM_LESSON, 'chemistry'],
+  ])('recognises "%s" and refuses the lesson figure', (_l, message, lesson, subject) => {
+    const t = targetFor(message, lesson, subject)
+    if (t && t.origin === 'lesson-concept') {
+      expect(requestTargetsSomethingElse(message, t), message).toBe(true)
     }
+  })
+
+  it.each([
+    ['a bare why', 'Why?'],
+    ['a pronoun why', 'Why is that?'],
+    ['how come', 'How come?'],
+  ])('still does not treat %s as naming a new topic', (_l, message) => {
+    // These are follow-ups. Treating them as topic requests would let a
+    // one-word aside move the teaching target or evict a figure being read.
+    const t = targetFor(message, PHYS_LESSON, 'physics')
+    if (t && t.origin === 'lesson-concept') {
+      expect(requestTargetsSomethingElse(message, t), message).toBe(false)
+    }
+  })
+
+  it('a follow-up about the figure on screen never evicts it', () => {
+    // "why does temperature change it?" belongs to the WEAK family, which is
+    // consulted only for whether a NEW figure may be introduced. Eviction is
+    // the continuity layer's decision and reads the STRONG family only — the
+    // measurement that forced these two families apart.
+    const held = {
+      conceptId: 'phys.mech.viscosity', representation: 'graph' as const,
+      renderer: 'graph' as const, returnToConceptId: null, turns: 1,
+    }
+    const d = resolveVisual({
+      message: 'why does temperature change it?',
+      lessonConceptId: 'phys.mech.viscosity',
+      activeSession: held, subject: 'physics', lastAssistantAskedQuestion: true,
+    })
+    expect(d.conceptId).toBe('phys.mech.viscosity')
   })
 })
 
