@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 131 READY)
+## english (216 concepts, 143 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1250,28 +1250,28 @@ its subject KG.
 | linguistics | `eng.linguistics.dialectology` | Dialectology | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.discourse-analysis-intro` | Introduction to Discourse Analysis | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics | Yes | Yes | — | READY |
-| linguistics | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition | Yes | No | — | MISSING |
-| linguistics | `eng.linguistics.language-families` | Language Families | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition | Yes | Yes | — | READY |
+| linguistics | `eng.linguistics.language-families` | Language Families | Yes | Yes | — | READY |
 | linguistics | `eng.linguistics.morphology-intro` | Introduction to Morphology | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.morphology-intro.md` | READY |
 | linguistics | `eng.linguistics.phonology-intro` | Introduction to Phonology | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.phonology-intro.md` | READY |
 | linguistics | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics | Yes | No | — | MISSING |
-| linguistics | `eng.linguistics.semantics-intro` | Introduction to Semantics | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.semantics-intro` | Introduction to Semantics | Yes | Yes | — | READY |
 | linguistics | `eng.linguistics.sociolinguistics-intro` | Introduction to Sociolinguistics | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory | Yes | Yes | — | READY |
 | linguistics | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies | Yes | No | — | MISSING |
 | linguistics | `eng.linguistics.what-is-linguistics` | What Is Linguistics? | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.what-is-linguistics.md` | READY |
 | listening | `eng.listening.active-listening` | Active Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.active-listening.md` | READY |
-| listening | `eng.listening.critical-listening` | Critical Listening | Yes | No | — | MISSING |
+| listening | `eng.listening.critical-listening` | Critical Listening | Yes | Yes | — | READY |
 | listening | `eng.listening.distinguishing-sounds-in-speech` | Distinguishing Sounds in Speech | Yes | Yes | `educational-brain/concepts/english/eng.listening.distinguishing-sounds-in-speech.md` | READY |
 | listening | `eng.listening.following-instructions` | Following Spoken Instructions | Yes | Yes | `educational-brain/concepts/english/eng.listening.following-instructions.md` | READY |
 | listening | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies | Yes | Yes | — | READY |
 | listening | `eng.listening.listening-for-detail` | Listening for Detail | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-detail.md` | READY |
 | listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-gist.md` | READY |
 | listening | `eng.listening.note-taking-while-listening` | Note-Taking While Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.note-taking-while-listening.md` | READY |
-| literature | `eng.literature.character-development` | Character Development | Yes | No | — | MISSING |
+| literature | `eng.literature.character-development` | Character Development | Yes | Yes | — | READY |
 | literature | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature | Yes | No | — | MISSING |
-| literature | `eng.literature.drama-basics` | Drama Basics | Yes | No | — | MISSING |
+| literature | `eng.literature.drama-basics` | Drama Basics | Yes | Yes | — | READY |
 | literature | `eng.literature.dramatic-structure` | Dramatic Structure | Yes | No | — | MISSING |
 | literature | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense | Yes | No | — | MISSING |
 | literature | `eng.literature.imagery` | Imagery | Yes | No | — | MISSING |
@@ -1284,13 +1284,13 @@ its subject KG.
 | literature | `eng.literature.meter-and-rhyme` | Meter and Rhyme | Yes | No | — | MISSING |
 | literature | `eng.literature.narrative-elements` | Narrative Elements | Yes | Yes | — | READY |
 | literature | `eng.literature.novel-study` | Novel Study | Yes | No | — | MISSING |
-| literature | `eng.literature.plot-structure` | Plot Structure | Yes | No | — | MISSING |
+| literature | `eng.literature.plot-structure` | Plot Structure | Yes | Yes | — | READY |
 | literature | `eng.literature.poetic-forms` | Poetic Forms | Yes | No | — | MISSING |
 | literature | `eng.literature.poetry-basics` | Poetry Basics | Yes | No | — | MISSING |
-| literature | `eng.literature.point-of-view` | Point of View | Yes | No | — | MISSING |
+| literature | `eng.literature.point-of-view` | Point of View | Yes | Yes | — | READY |
 | literature | `eng.literature.prose-fiction` | Prose Fiction | Yes | No | — | MISSING |
 | literature | `eng.literature.prose-nonfiction` | Prose Nonfiction | Yes | No | — | MISSING |
-| literature | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere | Yes | No | — | MISSING |
+| literature | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere | Yes | Yes | — | READY |
 | literature | `eng.literature.short-story-study` | Short Story Study | Yes | No | — | MISSING |
 | literature | `eng.literature.symbolism` | Symbolism | Yes | No | — | MISSING |
 | literature | `eng.literature.theme-and-message` | Theme and Message | Yes | No | — | MISSING |
@@ -1326,7 +1326,7 @@ its subject KG.
 | reading | `eng.reading.close-reading` | Close Reading | Yes | Yes | `educational-brain/concepts/english/eng.reading.close-reading.md` | READY |
 | reading | `eng.reading.compare-and-contrast-texts` | Comparing and Contrasting Texts | Yes | Yes | `educational-brain/concepts/english/eng.reading.compare-and-contrast-texts.md` | READY |
 | reading | `eng.reading.critical-reading` | Critical Reading | Yes | Yes | — | READY |
-| reading | `eng.reading.evaluating-sources` | Evaluating Sources | Yes | No | — | MISSING |
+| reading | `eng.reading.evaluating-sources` | Evaluating Sources | Yes | Yes | — | READY |
 | reading | `eng.reading.genre-recognition` | Genre Recognition | Yes | Yes | `educational-brain/concepts/english/eng.reading.genre-recognition.md` | READY |
 | reading | `eng.reading.inference-in-reading` | Inference in Reading | Yes | Yes | `educational-brain/concepts/english/eng.reading.inference-in-reading.md` | READY |
 | reading | `eng.reading.literal-comprehension` | Literal Comprehension | Yes | Yes | `educational-brain/concepts/english/eng.reading.literal-comprehension.md` | READY |
@@ -1346,7 +1346,7 @@ its subject KG.
 | speaking | `eng.speaking.oral-fluency` | Oral Fluency | Yes | Yes | `educational-brain/concepts/english/eng.speaking.oral-fluency.md` | READY |
 | speaking | `eng.speaking.presentation-skills` | Presentation Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation | Yes | Yes | `educational-brain/concepts/english/eng.speaking.pronunciation-in-conversation.md` | READY |
-| speaking | `eng.speaking.public-speaking-basics` | Public Speaking Basics | Yes | No | — | MISSING |
+| speaking | `eng.speaking.public-speaking-basics` | Public Speaking Basics | Yes | Yes | — | READY |
 | speaking | `eng.speaking.storytelling-orally` | Oral Storytelling | Yes | Yes | `educational-brain/concepts/english/eng.speaking.storytelling-orally.md` | READY |
 | vocab | `eng.vocab.academic-vocabulary` | Academic Vocabulary | Yes | Yes | `educational-brain/concepts/english/eng.vocab.academic-vocabulary.md` | READY |
 | vocab | `eng.vocab.collocations` | Collocations | Yes | Yes | `educational-brain/concepts/english/eng.vocab.collocations.md` | READY |
@@ -1383,7 +1383,7 @@ its subject KG.
 | writing | `eng.writing.revising-for-content` | Revising for Content | Yes | No | — | MISSING |
 | writing | `eng.writing.sentence-writing` | Sentence Writing | Yes | Yes | `educational-brain/concepts/english/eng.writing.sentence-writing.md` | READY |
 | writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | Yes | `educational-brain/concepts/english/eng.writing.spelling-strategies.md` | READY |
-| writing | `eng.writing.supporting-details` | Supporting Details | Yes | No | — | MISSING |
+| writing | `eng.writing.supporting-details` | Supporting Details | Yes | Yes | — | READY |
 | writing | `eng.writing.the-writing-process` | The Writing Process | Yes | No | — | MISSING |
 | writing | `eng.writing.thesis-statements` | Thesis Statements | Yes | No | — | MISSING |
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | Yes | — | READY |

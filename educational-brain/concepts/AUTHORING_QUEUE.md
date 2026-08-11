@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **996** (= 1,775 KG concepts − 779 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 13 completion,
+Total queued: **984** (= 1,775 KG concepts − 791 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 14 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -989,8 +989,6 @@ to READY.
 | 495 | mathematics | 14 | `math.abst.first-isomorphism-theorem` | First Isomorphism Theorem |
 | 496 | mathematics | 14 | `math.abst.ufd` | Unique Factorization Domain |
 | 497 | mathematics | 14 | `math.abst.field-extension` | Field Extension |
-| 508 | english | 14 | `eng.listening.critical-listening` | Critical Listening |
-| 509 | english | 14 | `eng.speaking.public-speaking-basics` | Public Speaking Basics |
 | 510 | biology | 14 | `bio.evo.modern-synthesis-speciation` | Modern Synthesis and Speciation |
 | 511 | biology | 14 | `bio.biotech.biotech-principles` | Principles of Biotechnology |
 | 512 | computer_science | 14 | `cs.data.comprehensions-iterators` | Comprehensions, Iterators and Generators |
@@ -1310,12 +1308,6 @@ math.nt Wave 6 part 1, moved to READY.
 | 814 | mathematics | 19 | `math.real.uniform-convergence` | Uniform Convergence |
 | 815 | mathematics | 19 | `math.real.baire-category` | Baire Category Theorem |
 | 816 | mathematics | 19 | `math.graph.extremal-graph-theory` | Extremal Graph Theory |
-| 818 | english | 19 | `eng.reading.evaluating-sources` | Evaluating Sources |
-| 820 | english | 19 | `eng.literature.plot-structure` | Plot Structure |
-| 821 | english | 19 | `eng.literature.character-development` | Character Development |
-| 822 | english | 19 | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere |
-| 823 | english | 19 | `eng.literature.point-of-view` | Point of View |
-| 824 | english | 19 | `eng.literature.drama-basics` | Drama Basics |
 | 825 | chemistry | 19 | `chem.carb.alpha-reactions` | Alpha-Carbon Reactions |
 | 826 | chemistry | 19 | `chem.carb.derivatives` | Carboxylic Acid Derivatives |
 | 827 | chemistry | 19 | `chem.carb.spectro` | Spectroscopic ID of Carbonyls |
@@ -1394,7 +1386,6 @@ authored math.nt Wave 6 part 1, moved to READY.
 | 894 | mathematics | 20 | `math.num.root-finding` | Root-Finding Methods |
 | 895 | mathematics | 20 | `math.opt.dynamic-programming` | Dynamic Programming |
 | 896 | english | 20 | `eng.reading.reading-across-genres` | Reading Across Genres |
-| 897 | english | 20 | `eng.writing.supporting-details` | Supporting Details |
 | 898 | english | 20 | `eng.literature.theme-and-message` | Theme and Message |
 | 899 | english | 20 | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense |
 | 900 | english | 20 | `eng.literature.dramatic-structure` | Dramatic Structure |
@@ -1580,9 +1571,6 @@ math.nt Wave 7, moved to READY.
 | 1078 | english | 23 | `eng.literature.imagery` | Imagery |
 | 1079 | english | 23 | `eng.literature.poetic-forms` | Poetic Forms |
 | 1080 | english | 23 | `eng.literature.literary-genres-overview` | Overview of Literary Genres |
-| 1081 | english | 23 | `eng.linguistics.semantics-intro` | Introduction to Semantics |
-| 1082 | english | 23 | `eng.linguistics.language-families` | Language Families |
-| 1083 | english | 23 | `eng.linguistics.language-acquisition-intro` | Introduction to Language Acquisition |
 **Row 1084 removed 2026-07-26** — `math.nt.general-diophantine`
 authored math.nt Wave 7, moved to READY.
 | 1085 | mathematics | 24 | `math.alg.inequality-2var` | Linear Inequality in Two Variables |
