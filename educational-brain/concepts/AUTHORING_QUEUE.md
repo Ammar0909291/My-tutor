@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1003** (= 1,775 KG concepts − 772 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 12 completion,
+Total queued: **996** (= 1,775 KG concepts − 779 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 13 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -960,8 +960,6 @@ Wave 4 part 2, moved to READY.
 | 452 | mathematics | 13 | `math.abst.field` | Field |
 | 453 | mathematics | 13 | `math.cat.representable-functor` | Representable Functor |
 | 454 | mathematics | 13 | `math.cat.higher-category` | Higher Category Theory |
-| 469 | english | 13 | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies |
-| 470 | english | 13 | `eng.speaking.discussion-skills` | Discussion Skills |
 | 472 | biology | 13 | `bio.gen.population-genetics` | Population Genetics |
 | 473 | biology | 13 | `bio.gen.genetic-engineering` | Genetic Engineering and Recombinant DNA |
 | 474 | biology | 13 | `bio.dev.stem-cells-regeneration` | Stem Cells and Regeneration |
@@ -1228,8 +1226,6 @@ math.geom Wave 8, moved to READY.
 | 731 | mathematics | 18 | `math.real.continuity-rigorous` | Continuity (ε-δ) |
 | 732 | mathematics | 18 | `math.opt.convex-set` | Convex Set |
 | 733 | mathematics | 18 | `math.graph.shortest-path` | Shortest Path Algorithms |
-| 740 | english | 18 | `eng.reading.critical-reading` | Critical Reading |
-| 742 | english | 18 | `eng.literature.narrative-elements` | Narrative Elements |
 | 743 | chemistry | 18 | `chem.alc.epoxides` | Epoxides |
 | 744 | chemistry | 18 | `chem.alc.protection` | Protecting Group Strategy |
 | 745 | chemistry | 18 | `chem.carb.ketones` | Ketones |
@@ -1315,7 +1311,6 @@ math.nt Wave 6 part 1, moved to READY.
 | 815 | mathematics | 19 | `math.real.baire-category` | Baire Category Theorem |
 | 816 | mathematics | 19 | `math.graph.extremal-graph-theory` | Extremal Graph Theory |
 | 818 | english | 19 | `eng.reading.evaluating-sources` | Evaluating Sources |
-| 819 | english | 19 | `eng.writing.topic-sentences` | Topic Sentences |
 | 820 | english | 19 | `eng.literature.plot-structure` | Plot Structure |
 | 821 | english | 19 | `eng.literature.character-development` | Character Development |
 | 822 | english | 19 | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere |
@@ -1541,8 +1536,6 @@ math.nt Wave 5 part 1, moved to READY.
 | 1034 | english | 22 | `eng.literature.metaphor-and-simile` | Metaphor and Simile |
 | 1035 | english | 22 | `eng.literature.irony` | Irony |
 | 1036 | english | 22 | `eng.literature.poetry-basics` | Poetry Basics |
-| 1037 | english | 22 | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory |
-| 1038 | english | 22 | `eng.linguistics.historical-linguistics-intro` | Introduction to Historical Linguistics |
 **Row 1039 removed 2026-07-26** — `math.nt.linear-diophantine` authored
 math.nt Wave 6 part 2, moved to READY.
 **Row 1040 removed 2026-07-26** — `math.nt.rsa-basics` authored
