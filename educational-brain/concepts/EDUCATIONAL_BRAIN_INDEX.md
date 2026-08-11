@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 184 READY)
+## english (216 concepts, 187 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1276,14 +1276,14 @@ its subject KG.
 | literature | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense | Yes | Yes | — | READY |
 | literature | `eng.literature.imagery` | Imagery | Yes | Yes | `educational-brain/concepts/english/eng.literature.imagery.md` | READY |
 | literature | `eng.literature.irony` | Irony | Yes | Yes | `educational-brain/concepts/english/eng.literature.irony.md` | READY |
-| literature | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism | Yes | No | — | MISSING |
+| literature | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism | Yes | Yes | `educational-brain/concepts/english/eng.literature.literary-criticism-intro.md` | READY |
 | literature | `eng.literature.literary-devices-overview` | Overview of Literary Devices | Yes | Yes | — | READY |
 | literature | `eng.literature.literary-genres-overview` | Overview of Literary Genres | Yes | Yes | `educational-brain/concepts/english/eng.literature.literary-genres-overview.md` | READY |
 | literature | `eng.literature.literary-periods-survey` | Survey of Literary Periods | Yes | Yes | `educational-brain/concepts/english/eng.literature.literary-periods-survey.md` | READY |
 | literature | `eng.literature.metaphor-and-simile` | Metaphor and Simile | Yes | Yes | `educational-brain/concepts/english/eng.literature.metaphor-and-simile.md` | READY |
 | literature | `eng.literature.meter-and-rhyme` | Meter and Rhyme | Yes | Yes | `educational-brain/concepts/english/eng.literature.meter-and-rhyme.md` | READY |
 | literature | `eng.literature.narrative-elements` | Narrative Elements | Yes | Yes | — | READY |
-| literature | `eng.literature.novel-study` | Novel Study | Yes | No | — | MISSING |
+| literature | `eng.literature.novel-study` | Novel Study | Yes | Yes | `educational-brain/concepts/english/eng.literature.novel-study.md` | READY |
 | literature | `eng.literature.plot-structure` | Plot Structure | Yes | Yes | — | READY |
 | literature | `eng.literature.poetic-forms` | Poetic Forms | Yes | Yes | `educational-brain/concepts/english/eng.literature.poetic-forms.md` | READY |
 | literature | `eng.literature.poetry-basics` | Poetry Basics | Yes | Yes | `educational-brain/concepts/english/eng.literature.poetry-basics.md` | READY |
@@ -1380,7 +1380,7 @@ its subject KG.
 | writing | `eng.writing.outlining-and-planning` | Outlining and Planning | Yes | Yes | `educational-brain/concepts/english/eng.writing.outlining-and-planning.md` | READY |
 | writing | `eng.writing.paragraph-structure` | Paragraph Structure | Yes | Yes | `educational-brain/concepts/english/eng.writing.paragraph-structure.md` | READY |
 | writing | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics | Yes | Yes | — | READY |
-| writing | `eng.writing.revising-for-content` | Revising for Content | Yes | No | — | MISSING |
+| writing | `eng.writing.revising-for-content` | Revising for Content | Yes | Yes | `educational-brain/concepts/english/eng.writing.revising-for-content.md` | READY |
 | writing | `eng.writing.sentence-writing` | Sentence Writing | Yes | Yes | `educational-brain/concepts/english/eng.writing.sentence-writing.md` | READY |
 | writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | Yes | `educational-brain/concepts/english/eng.writing.spelling-strategies.md` | READY |
 | writing | `eng.writing.supporting-details` | Supporting Details | Yes | Yes | — | READY |

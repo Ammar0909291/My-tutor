@@ -878,6 +878,10 @@ corrected here.
 | `eng.literature.literary-periods-survey` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.linguistics.translation-studies-intro` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
+| `eng.writing.revising-for-content` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.literature.novel-study` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.literature.literary-criticism-intro` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+
 ## What this ledger means for the next batch
 
 No entry is blocked or defective. Version History and Tutor Actions will

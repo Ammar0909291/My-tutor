@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **943** (= 1,775 KG concepts − 832 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 19 completion,
+Total queued: **940** (= 1,775 KG concepts − 835 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 20 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1615,8 +1615,6 @@ math.nt Wave 8, moved to READY.
 | 1151 | mathematics | 25 | `math.fnal.distributions` | Distributions |
 | 1152 | mathematics | 25 | `math.num.euler-method` | Euler's Method (Numerical ODE) |
 | 1153 | mathematics | 25 | `math.opt.kkt` | KKT Conditions |
-| 1155 | english | 25 | `eng.literature.novel-study` | Novel Study |
-| 1156 | english | 25 | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism |
 | 1159 | mathematics | 26 | `math.nt.algebraic-integers` | Algebraic Integers |
 | 1160 | mathematics | 26 | `math.alg.factoring-gcf` | Factoring out the GCF |
 | 1161 | mathematics | 26 | `math.alg.factoring-special` | Special Factoring Patterns |
@@ -1640,7 +1638,6 @@ math.nt Wave 8, moved to READY.
 | 1179 | mathematics | 26 | `math.num.iterative-linear` | Iterative Methods for Linear Systems |
 | 1180 | mathematics | 26 | `math.num.runge-kutta` | Runge-Kutta Methods |
 | 1181 | mathematics | 26 | `math.opt.linear-programming` | Linear Programming |
-| 1182 | english | 26 | `eng.writing.revising-for-content` | Revising for Content |
 | 1183 | english | 26 | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature |
 | 1189 | mathematics | 27 | `math.nt.number-fields` | Number Fields |
 | 1190 | mathematics | 27 | `math.alg.factoring-trinomials` | Factoring Trinomials |
