@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1007** (= 1,775 KG concepts − 768 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 12 part 2 continuation,
+Total queued: **1003** (= 1,775 KG concepts − 772 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 12 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -928,9 +928,6 @@ number-line` authored math.arith Wave 3, moved to READY.
 | 407 | mathematics | 12 | `math.cat.monad` | Monad |
 | 408 | mathematics | 12 | `math.cat.tensor-product` | Tensor Product (Categorical) |
 | 409 | mathematics | 12 | `math.cat.topos` | Topos |
-| 422 | english | 12 | `eng.speaking.asking-and-answering-questions` | Asking and Answering Questions |
-| 423 | english | 12 | `eng.speaking.storytelling-orally` | Oral Storytelling |
-| 424 | english | 12 | `eng.speaking.non-verbal-communication` | Non-Verbal Communication |
 | 425 | biology | 12 | `bio.gen.pedigree-human-genetics` | Pedigree Analysis and Human Genetic Disorders |
 | 426 | biology | 12 | `bio.gen.mutations` | Mutations |
 | 427 | biology | 12 | `bio.dev.morphogenesis-differentiation` | Morphogenesis and Cell Differentiation |
@@ -1232,7 +1229,6 @@ math.geom Wave 8, moved to READY.
 | 732 | mathematics | 18 | `math.opt.convex-set` | Convex Set |
 | 733 | mathematics | 18 | `math.graph.shortest-path` | Shortest Path Algorithms |
 | 740 | english | 18 | `eng.reading.critical-reading` | Critical Reading |
-| 741 | english | 18 | `eng.writing.paragraph-structure` | Paragraph Structure |
 | 742 | english | 18 | `eng.literature.narrative-elements` | Narrative Elements |
 | 743 | chemistry | 18 | `chem.alc.epoxides` | Epoxides |
 | 744 | chemistry | 18 | `chem.alc.protection` | Protecting Group Strategy |

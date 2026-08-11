@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 120 READY)
+## english (216 concepts, 124 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1338,16 +1338,16 @@ its subject KG.
 | reading | `eng.reading.skimming-and-scanning` | Skimming and Scanning | Yes | Yes | `educational-brain/concepts/english/eng.reading.skimming-and-scanning.md` | READY |
 | reading | `eng.reading.summarizing` | Summarizing | Yes | Yes | `educational-brain/concepts/english/eng.reading.summarizing.md` | READY |
 | reading | `eng.reading.text-structure` | Text Structure | Yes | Yes | `educational-brain/concepts/english/eng.reading.text-structure.md` | READY |
-| speaking | `eng.speaking.asking-and-answering-questions` | Asking and Answering Questions | Yes | No | — | MISSING |
+| speaking | `eng.speaking.asking-and-answering-questions` | Asking and Answering Questions | Yes | Yes | `educational-brain/concepts/english/eng.speaking.asking-and-answering-questions.md` | READY |
 | speaking | `eng.speaking.conversation-skills` | Conversation Skills | Yes | Yes | `educational-brain/concepts/english/eng.speaking.conversation-skills.md` | READY |
 | speaking | `eng.speaking.debate-skills` | Debate Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.discussion-skills` | Discussion Skills | Yes | No | — | MISSING |
-| speaking | `eng.speaking.non-verbal-communication` | Non-Verbal Communication | Yes | No | — | MISSING |
+| speaking | `eng.speaking.non-verbal-communication` | Non-Verbal Communication | Yes | Yes | `educational-brain/concepts/english/eng.speaking.non-verbal-communication.md` | READY |
 | speaking | `eng.speaking.oral-fluency` | Oral Fluency | Yes | Yes | `educational-brain/concepts/english/eng.speaking.oral-fluency.md` | READY |
 | speaking | `eng.speaking.presentation-skills` | Presentation Skills | Yes | No | — | MISSING |
 | speaking | `eng.speaking.pronunciation-in-conversation` | Pronunciation in Conversation | Yes | Yes | `educational-brain/concepts/english/eng.speaking.pronunciation-in-conversation.md` | READY |
 | speaking | `eng.speaking.public-speaking-basics` | Public Speaking Basics | Yes | No | — | MISSING |
-| speaking | `eng.speaking.storytelling-orally` | Oral Storytelling | Yes | No | — | MISSING |
+| speaking | `eng.speaking.storytelling-orally` | Oral Storytelling | Yes | Yes | `educational-brain/concepts/english/eng.speaking.storytelling-orally.md` | READY |
 | vocab | `eng.vocab.academic-vocabulary` | Academic Vocabulary | Yes | Yes | `educational-brain/concepts/english/eng.vocab.academic-vocabulary.md` | READY |
 | vocab | `eng.vocab.collocations` | Collocations | Yes | Yes | `educational-brain/concepts/english/eng.vocab.collocations.md` | READY |
 | vocab | `eng.vocab.compound-words` | Compound Words | Yes | Yes | `educational-brain/concepts/english/eng.vocab.compound-words.md` | READY |
@@ -1378,7 +1378,7 @@ its subject KG.
 | writing | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation | Yes | Yes | `educational-brain/concepts/english/eng.writing.handwriting-and-formation.md` | READY |
 | writing | `eng.writing.narrative-writing` | Narrative Writing | Yes | No | — | MISSING |
 | writing | `eng.writing.outlining-and-planning` | Outlining and Planning | Yes | No | — | MISSING |
-| writing | `eng.writing.paragraph-structure` | Paragraph Structure | Yes | No | — | MISSING |
+| writing | `eng.writing.paragraph-structure` | Paragraph Structure | Yes | Yes | `educational-brain/concepts/english/eng.writing.paragraph-structure.md` | READY |
 | writing | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics | Yes | No | — | MISSING |
 | writing | `eng.writing.revising-for-content` | Revising for Content | Yes | No | — | MISSING |
 | writing | `eng.writing.sentence-writing` | Sentence Writing | Yes | Yes | `educational-brain/concepts/english/eng.writing.sentence-writing.md` | READY |
