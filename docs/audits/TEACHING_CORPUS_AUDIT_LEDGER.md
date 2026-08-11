@@ -402,3 +402,50 @@ here would be the "topic-specific hack" the mission forbids.
 | VERIFIED | 0 |
 | **FAILED** | **1** (`phys.meas.units`) |
 | REMAINING | 423 |
+
+### REPLAY OF TOPIC 1 AFTER THE FIX — **STILL FAILS**
+
+Verified live: `dpl_F5LujzRU…` READY, commit `53d6cc47`, holding
+`my-tutor-flame.vercel.app`. So the fix IS deployed and this is not a
+stale-build result.
+
+Replayed the exact misconception on a fresh lesson-init of `phys.meas.units`:
+
+> me: "is a unit just the name of the thing youre counting"
+>
+> tutor: **"That is correct**—a unit tells us the specific name of the thing
+> or standard being counted or measured…"
+
+**Same defect, new wording.** It opened with agreement and restated the
+misconception. The banned openers were "yes / exactly / spot on / that is
+right"; the model used *"That is correct"*. Listing forbidden phrases teaches
+the model which phrases to avoid, not which CLAIMS to refuse.
+
+A second, separate lesson: my own pass/fail detector scanned for
+`that is completely right` and missed `that is correct`, and initially printed
+"NO — corrected". The transcript is the evidence, not the detector. Any future
+replay must assert on the CLAIM, not on a phrase list.
+
+**Conclusion: a prompt rule is the wrong lever for this.** The two shipped
+changes are still net-positive and stay — 208 EB misconceptions now reach the
+prompt where 0 did, which is real — but neither closes the defect. What is
+needed is something deterministic that does not depend on the model policing
+its own opener. Candidates, in order of expected robustness:
+
+1. **A verifier pass.** The repo already has an output verifier (K5). Give it
+   the concept's misconception list and reject a turn whose opening agrees
+   with a claim matching one, forcing a regeneration. Deterministic on the
+   OUTPUT, not on the model's willingness.
+2. **A structured signal.** Have the model classify the learner's turn
+   (`<!--SIGNAL-->` already exists) as proposing-a-claim, and gate the reply
+   template on it server-side.
+3. Prompt strengthening alone — already tried, measured, insufficient.
+
+**TOPIC 1 STATUS: FAILED, unresolved.** Do not mark VERIFIED. Next session
+starts by implementing (1).
+
+| status | value |
+|--------|-------|
+| VERIFIED | 0 |
+| FAILED (unresolved) | 1 — `phys.meas.units` |
+| REMAINING | 423 |
