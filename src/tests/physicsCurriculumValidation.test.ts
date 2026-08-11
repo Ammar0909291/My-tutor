@@ -430,9 +430,19 @@ describe('Layer 6: Full Pipeline — partially correct (hedged wrong)', () => {
 })
 
 describe('Layer 6: Full Pipeline — mastery achieved (confident correct)', () => {
-  it('every concept: mastery-level answer → CONTINUE_LESSON/PRACTICE/ESCALATE', () => {
+  it('every concept: mastery-level answer → ADVANCE_DIFFICULTY/CONTINUE_LESSON/PRACTICE/ESCALATE', () => {
     const failures: { id: string; decision: string; rule: string }[] = []
+    // ADVANCE_DIFFICULTY added 2026-08-11. This case feeds the engine a
+    // CONFIDENT, CORRECT, unhedged answer with zero failures banked — the D1
+    // grid's fluent-mastery quadrant — and previously accepted only outcomes
+    // that keep the learner where they are. Production measured the cost of
+    // that: learners who stated ΔG = ΔH − TΔS and who balanced H₂ + O₂ → H₂O
+    // correctly were praised and then returned to the lesson's opening
+    // material, and mastery adaptation was rated 3/10 against 8/10 for
+    // wrong-answer handling. Advancing a learner who has just demonstrated the
+    // idea is the correct answer for this input, so it belongs in the set.
     const validDecisions = new Set([
+      'ADVANCE_DIFFICULTY',
       'CONTINUE_LESSON', 'PRACTICE', 'ESCALATE_TO_LLM',
       'SERVE_EXPLANATION_MEMORY',
     ])

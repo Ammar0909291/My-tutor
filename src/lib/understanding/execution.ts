@@ -56,6 +56,14 @@ const RENDER_ROLES: Partial<Record<TeachingDecision['decision'], { role: string;
     role: 'speak',
     directive: 'Continue the lesson exactly where the lesson plan above left off — the next step only, at the current pace.',
   },
+  ADVANCE_DIFFICULTY: {
+    role: 'present',
+    // The mirror of PRACTICE, and deliberately worded as strictly: PRACTICE
+    // forbids advancing, this forbids repeating. A learner who has just shown
+    // they own the idea and is answered with the same idea again learns that
+    // demonstrating understanding buys them nothing.
+    directive: 'The learner has just demonstrated this correctly and confidently. Do NOT re-explain it, do NOT restate what they just said back to them, and do NOT return to earlier material. Acknowledge it in one short clause, then RAISE THE DEMAND on the SAME concept: a harder case, an application to a new situation, an edge case, or a question that asks them to justify WHY. One step harder, not five — and if they falter, drop straight back to consolidation.',
+  },
 }
 
 export interface ExecutionBlockOptions {

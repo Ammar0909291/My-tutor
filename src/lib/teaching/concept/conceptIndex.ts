@@ -37,9 +37,30 @@ export function singularize(token: string): string {
 }
 
 /**
+ * British -ise spellings folded onto the -ize forms the KG titles use.
+ *
+ * MEASURED DEFECT: the KG contains "Hybridization"; a learner typing
+ * "What is hybridisation?" matched NOTHING and their question could not become
+ * the teaching target. The product's own tutor prose is British ("metres",
+ * "visualise"), so this is the spelling many learners will use.
+ *
+ * Safe because it cannot merge two different concepts: -ise and -ize are the
+ * same word. Deliberately limited to that one family — "colour"/"color" is a
+ * different rule with worse edge cases, and nothing measured needed it.
+ */
+function foldSpelling(token: string): string {
+  return token
+    .replace(/isation$/, 'ization')
+    .replace(/isations$/, 'izations')
+    .replace(/ise$/, 'ize')
+    .replace(/ised$/, 'ized')
+    .replace(/ising$/, 'izing')
+}
+
+/**
  * Normalize free text to comparable tokens: lowercase, possessives stripped,
  * punctuation removed (including curly apostrophes and hyphens), whitespace
- * collapsed, each token singularized.
+ * collapsed, spelling folded, each token singularized.
  */
 export function normalizeToTokens(text: string): string[] {
   return text
@@ -49,6 +70,7 @@ export function normalizeToTokens(text: string): string[] {
     .replace(/[^a-z0-9\s]+/g, ' ')            // drop remaining punctuation/hyphens
     .split(/\s+/)
     .filter(t => t.length > 0)
+    .map(foldSpelling)
     .map(singularize)
 }
 

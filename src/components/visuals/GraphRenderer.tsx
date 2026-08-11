@@ -275,7 +275,20 @@ export function GraphRenderer({
     )
   }
 
-  const liveEquation = model ? formatLinearEquation(model.m, model.b) : `y = ${spec.equation.replace(/^\s*y\s*=\s*/i, '')}`
+  // WHAT THE LEARNER READS UNDER THE TITLE.
+  //
+  // This used to be the raw equation string, always. A learner was shown
+  // "y = 0.5 * 2 * x^2" as the caption of a kinetic-energy graph — the
+  // engine's internal expression, asterisks and all, presented as if it were
+  // teaching notation. When the spec says what the axes mean, that is the
+  // honest caption; the equation stays available to the interactive model and
+  // to the aria-label, which is where it belongs.
+  const axisCaption = spec.xLabel?.trim() && spec.yLabel?.trim()
+    ? `${spec.yLabel.trim()} against ${spec.xLabel.trim()}`
+    : null
+  const liveEquation = model
+    ? formatLinearEquation(model.m, model.b)
+    : (axisCaption ?? `y = ${spec.equation.replace(/^\s*y\s*=\s*/i, '')}`)
 
   const challengeGoalText = challenge && [
     challenge.targetSlope !== undefined ? `slope = ${challenge.targetSlope}` : null,
@@ -312,6 +325,21 @@ export function GraphRenderer({
           {gridLines.ys.map((y) => Math.abs(y) > 1e-9 && (
             <text key={`ty${y}`} x={Math.min(w - 8, Math.max(10, axisY + 6))} y={toSy(y) + 3} fontSize={10} fill="var(--text-dim, #888)">{formatTick(y)}</text>
           ))}
+          {/* AXIS NAMES — what each axis actually measures.
+              Anchored to the plot edges rather than to the origin, so they
+              stay on screen at every pan and zoom. Drawn at 11px, above the
+              10px tick labels, and given the plot background so a tick digit
+              underneath can never collide with a word. */}
+          {spec.xLabel?.trim() && (
+            <text x={w - 6} y={h - 6} fontSize={11} textAnchor="end" fontWeight={600}
+                  fill="var(--text-secondary, #6b7280)" stroke="var(--surface, #0d1117)" strokeWidth={3}
+                  paintOrder="stroke">{spec.xLabel.trim()}</text>
+          )}
+          {spec.yLabel?.trim() && (
+            <text x={6} y={12} fontSize={11} textAnchor="start" fontWeight={600}
+                  fill="var(--text-secondary, #6b7280)" stroke="var(--surface, #0d1117)" strokeWidth={3}
+                  paintOrder="stroke">{spec.yLabel.trim()}</text>
+          )}
           {/* curve */}
           <path d={pathD} fill="none" stroke="var(--coral, #F78166)" strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
           {/* Sprint F: drag handles for the linear model (interactive only) */}

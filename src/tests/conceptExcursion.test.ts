@@ -398,14 +398,21 @@ describe('the EXCURSION DIRECTIVE is independent of the visual contract', () => 
     expect(directive).toContain("Viscosity and Stokes' Law")
   })
 
-  it('it tells the tutor the lesson is paused, asks for doubts, and defers the return', () => {
+  it('it tells the tutor the lesson is paused, checks understanding, and defers the return', () => {
     const directive = buildExcursionDirective({
       decision: open,
       targetTitle: "Viscosity and Stokes' Law",
       lessonTitle: 'SI Units and Measurement',
     })
     expect(directive).toMatch(/PAUSED, NOT REPLACED/)
-    expect(directive).toMatch(/ask whether they still have a doubt/i)
+    // CORRECTED 2026-08-11. This asserted "ask whether they still have a
+    // doubt", which production measured at 17% of turns and which tests
+    // nothing: a learner who does not yet know what they misunderstood cannot
+    // answer it, and "no" closes the detour on no evidence. The rule now asks
+    // for a check that produces some. The close condition (rule 5) is
+    // unchanged and still asserted below.
+    expect(directive).toMatch(/ONE short question that makes them USE/i)
+    expect(directive).toMatch(/Never ask "any doubts\?"/i)
     expect(directive).toMatch(/Do NOT teach, open, anchor, illustrate or ask a question belonging to/i)
     expect(directive).toMatch(/ONLY a clear statement of understanding from the learner ends this/i)
     // A doubt is not an ending — the production failure this wording closes.

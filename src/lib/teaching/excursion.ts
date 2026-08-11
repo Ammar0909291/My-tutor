@@ -343,7 +343,16 @@ export function buildExcursionDirective(input: {
     '(2) Do NOT teach, open, anchor, illustrate or ask a question belonging to ' +
     lesson + ' this turn, and do NOT steer back to it mid-explanation. It may be ' +
     'named ONLY as the paused destination you will return to later. ' +
-    '(3) After explaining, ask whether they still have a doubt about ' + target + '. ' +
+    // (3) USED TO READ: "ask whether they still have a doubt about <target>".
+    // Measured at 17% of production turns, and it is not a check — a learner
+    // who does not know what they misunderstood cannot answer it, and "no"
+    // ends the detour on no evidence at all. The excursion still closes only
+    // on a statement of understanding (rule 5); this just makes the question
+    // one that produces some.
+    '(3) After explaining, end with ONE short question that makes them USE ' +
+    target + ' — predict an outcome, apply it to a new case, put it in their ' +
+    'own words, or answer a one-step problem. Never ask "any doubts?", "is ' +
+    'that clear?" or "do you still have a doubt" — those test nothing. ' +
     '(4) CONFUSION DOES NOT END THIS. If they say they do not understand, are ' +
     'confused, or still do not get it — however many times — that is a reason to ' +
     'teach ' + target + ' AGAIN with a different representation, never a reason to ' +

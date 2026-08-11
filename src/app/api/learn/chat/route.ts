@@ -3595,6 +3595,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         cleanText = stripRawImageUrls(cleanText)
       } catch { /* non-fatal */ }
 
+      // MATHS THE LEARNER CAN READ. Models write inline maths as `$…$`; the
+      // renderer typesets `$$…$$` and `\(…\)` and deliberately ignores single
+      // dollars because they collide with currency. So the two conventions
+      // disagreed and the learner read the markup — measured on screen:
+      // "$T = 2\pi\sqrt{\frac{L}{g}}$". This translates one convention into
+      // the other so the EXISTING KaTeX path typesets it; nothing new renders
+      // anything, and `$5` is left alone.
+      //
+      // Applied here so it covers every source of learner-visible text on this
+      // route, including content served straight from Explanation Memory.
+      try {
+        const { normalizeMathDelimiters } = await import('@/lib/text/mathDelimiters')
+        cleanText = normalizeMathDelimiters(cleanText)
+      } catch { /* non-fatal — raw text is still better than no answer */ }
+
       // K6 — EOS Runtime integration: run the K5 Output Verifier on the
       // cleaned text. Off by default; behind ENABLE_OUTPUT_VERIFIER (or the
       // master ENABLE_EOS_RUNTIME). Failures follow the RS §9.3 protocol:

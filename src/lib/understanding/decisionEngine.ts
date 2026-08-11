@@ -46,6 +46,7 @@ export type TeachingDecisionType =
   | 'TEACH_DIRECTLY'           // stop probing — no known prerequisite to target; explain with an example
   | 'CONTINUE_LESSON'          // progression is healthy — proceed
   | 'PRACTICE'                 // consolidate before advancing (D1 FRAGILE quadrant)
+  | 'ADVANCE_DIFFICULTY'       // sustained fluent mastery — raise the demand (D1 grid, advance trigger)
   | 'VISUALIZATION'            // serve the already-detected visual aid
   | 'SERVE_LESSON_COMPLETE'    // lesson already finished — answer from persisted evidence
   | 'ESCALATE_TO_LLM'          // open conversation / recovery / insufficient evidence
@@ -362,6 +363,45 @@ export function decideTeaching(u: StudentTurnUnderstanding): TeachingDecision {
       return make(u, 'PRACTICE', 'D5-FRAGILE-CONSOLIDATE',
         ['Last answer wrong or failure banked this session: the D1 grid routes FRAGILE to consolidation practice, not advancement.'],
         ['masteryState'],
+        { conceptId: topicId(u.currentTopic.value) })
+    }
+
+    // D-6 — SUSTAINED MASTERY: stop repeating, raise the demand.
+    //
+    // ── THE GAP THIS CLOSES ─────────────────────────────────────────────────
+    // The audit rated wrong-answer handling 8/10 and mastery adaptation 3/10.
+    // Measured: a learner stated ΔG = ΔH − TΔS correctly and unprompted, and a
+    // learner balanced H₂ + O₂ → H₂O correctly, and both were answered with
+    // praise followed by a return to the lesson's opening material. Only one
+    // topic in twenty escalated.
+    //
+    // The instruction to escalate DID exist — teachingStrategy's
+    // ACCELERATED_GROWTH carries "Challenge with a harder variant after
+    // explaining" — but its prompt voice is suppressed when the Brain owns
+    // decisions (see route.ts), and no Decision Engine rule replaced it. So
+    // the system could recognise mastery and had nowhere to route it. This is
+    // that missing rung, in the engine that already owns D5's mirror image.
+    //
+    // ── NOT ON ONE LUCKY ANSWER ─────────────────────────────────────────────
+    // Every condition below must hold: the answer was RIGHT, it was given
+    // CONFIDENTLY (a hedge is D5's FRAGILE, not this), nothing has failed this
+    // session, and the learner is actually engaged with the thread. That is
+    // the D1 grid's fluent-mastery quadrant, and it is deliberately harder to
+    // reach than D7's ordinary "keep going".
+    if (
+      u.masteryState.value === 'progressing' &&
+      u.confidence.value === 'high' &&
+      !u.conversationSummary.hedged &&
+      // ANSWERING only. An acknowledgement ("ok", "got it") is not a
+      // demonstration — it is the learner saying they are ready, and raising
+      // the demand on it would be exactly the "one lucky answer" escalation
+      // this rule must not make. Those turns keep D7's ordinary continue.
+      u.studentIntent.value === 'answering'
+    ) {
+      return make(u, 'ADVANCE_DIFFICULTY', 'D6-MASTERY-ADVANCE',
+        ['Correct AND confident with no failures banked this session: the D1 grid’s fluent-mastery quadrant advances rather than consolidating.',
+         'Repeating material the learner has demonstrated is how a tutor loses a strong student — raise the demand instead: application, an edge case, or a transfer question.'],
+        ['masteryState', 'confidence', 'studentIntent'],
         { conceptId: topicId(u.currentTopic.value) })
     }
 

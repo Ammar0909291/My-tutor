@@ -133,6 +133,11 @@ const ENGINE_ROUTES: Record<TeachingDecisionType, { executor: DispatchExecutor; 
     engine: 'lesson runtime (composed lesson plan blocks already injected)',
     note: 'Healthy progression; the lesson plan directs the renderer.',
   },
+  ADVANCE_DIFFICULTY: {
+    executor: 'LLM_RENDERER',
+    engine: 'lesson runtime + teachingStrategy ACCELERATED_GROWTH semantics',
+    note: 'Sustained fluent mastery: do not repeat or re-explain — raise the demand with an application, an edge case, or a transfer question.',
+  },
   SERVE_LESSON_COMPLETE: {
     executor: 'LESSON_COMPLETE',
     engine: 'lessonAttempt/summaryFromAttempt (P6.5 persisted evidence) + P6.6 completion payload',

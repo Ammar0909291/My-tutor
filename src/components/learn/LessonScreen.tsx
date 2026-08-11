@@ -5204,6 +5204,41 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 </div>
               )}
 
+              {/* QUICK ACTIONS, WHERE THE LEARNER ACTUALLY IS.
+                  These exist in the right-hand panel, but that panel is
+                  COLLAPSED by default on desktop: measured in production, the
+                  "Give me a diagram" button sat at x=1294 in a 1280px viewport
+                  — present in the DOM, impossible to click, and reachable only
+                  by first discovering an unlabelled tab on the screen edge. A
+                  learner who wants a diagram should not have to find a panel.
+                  Same actions, same handler, same single request path — this
+                  adds no second way to ask for anything. */}
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
+                {(QUICK_ACTIONS[teachingLanguage] ?? QUICK_ACTIONS.en).map((a) => {
+                  const Icon = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }[a.icon]
+                  return (
+                    <button
+                      key={a.key}
+                      onClick={() => { if (sessionId) { void sendMessage(sessionId, a.prompt, true); } }}
+                      disabled={!sessionId || isStreaming}
+                      aria-label={a.label}
+                      title={a.label}
+                      style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 5,
+                        minHeight: 32, padding: '6px 11px', borderRadius: 16,
+                        border: '1px solid var(--border-default)', background: 'var(--bg-surface)',
+                        color: 'var(--text-secondary)', fontSize: 12, fontWeight: 600,
+                        cursor: sessionId && !isStreaming ? 'pointer' : 'not-allowed',
+                        opacity: sessionId && !isStreaming ? 1 : 0.5,
+                      }}
+                    >
+                      <Icon size={13} style={{ flexShrink: 0 }} />
+                      {a.label}
+                    </button>
+                  )
+                })}
+              </div>
+
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 {/* Pill: attach + camera + textarea + mic, one rounded container */}
                 <div style={{

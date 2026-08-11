@@ -152,7 +152,7 @@ describe('the approved tier', () => {
         },
         critic: passingCritic,
         budgetReader: openBudget,
-        generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
+        generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function', xLabel: 'x', yLabel: 'y = 2x + 1' }),
       },
     )
     expect(d.graphical).toBe(true)

@@ -15,6 +15,7 @@ import { prisma } from '@/lib/db/prisma'
 import { AssetFamily, AssetStatus, AuthorKind, ProbeDifficulty, GradeBand } from '@prisma/client'
 import type { ProbeKind, ProbeChoice } from './assetIdentity'
 import type { StudentState } from './studentState'
+import { findAuthorScaffolding } from './learnerAdmission'
 import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
 import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch, type ExplanationServingMode, type ExplanationFallbackReason } from './explanationMemory'
 import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
@@ -58,6 +59,21 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         difficulty: c.probeAsset!.difficulty,
         probeAsset: c.probeAsset,
       }))
+      // THE LEARNER ADMISSION BOUNDARY, same rule as Explanation Memory.
+      // A probe is spoken to the learner too, and its stem and choices come
+      // from the same authored corpus — bracketed authoring labels such as
+      // "[correct]" belong to a reviewer, never to a student. Relevance is NOT
+      // asked of a probe: a probe deliberately follows the explanation rather
+      // than the learner's wording, and refusing it on vocabulary would strip
+      // legitimate checks. Register alone decides.
+      .filter((row) => {
+        const probe = row.probeAsset!
+        const text = [probe.stem, ...(Array.isArray(probe.choices) ? probe.choices.map((c) => JSON.stringify(c)) : [])].join(' ')
+        const scaffolding = findAuthorScaffolding(text)
+        if (!scaffolding) return true
+        console.warn(`[teachingActionRepository] refused probe ${row.assetId} for learner: ${scaffolding}`)
+        return false
+      })
 
     const best = pickBest(state, rows, options)
     if (best) {

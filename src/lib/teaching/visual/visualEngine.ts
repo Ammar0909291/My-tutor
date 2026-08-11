@@ -153,6 +153,8 @@ export type EngineRejection =
   | 'nothing-drawable'
   | 'no-narration'
   | 'not-anchored-to-concept'
+  /** A generated graph whose axes carry no learner-readable names. */
+  | 'unlabelled-axes'
   /**
    * The model was asked for a figure and said no honest one exists. This is a
    * SUCCESSFUL outcome of asking, and it is distinguished from every other
@@ -662,7 +664,15 @@ What it covers: ${ctx.description}
 Pick exactly one of these five forms. Nothing else is renderable — if none of
 them can depict this concept honestly, return exactly: null
 
-A. graph          a function of one variable            {"type":"graph","equation":"2x + 1","title":"..."}
+A. graph          a function of one variable            {"type":"graph","equation":"2x + 1","title":"...","xLabel":"Time (s)","yLabel":"Distance (m)"}
+                  xLabel and yLabel are REQUIRED and are what the AXES MEAN in
+                  the learner's words, with units in brackets where the
+                  quantity has them. Never "x" or "y". A graph whose axes are
+                  unnamed is a picture of nothing, and the tutor will describe
+                  quantities the learner cannot find on the screen.
+                  Choose a domain that is PHYSICALLY MEANINGFUL: if the
+                  quantity cannot be negative (speed, mass, time elapsed,
+                  concentration), start the domain at 0.
 B. number_line    positions or ranges on a line         {"type":"number_line","start":-5,"end":5,"highlight":[0,3],"title":"..."}
 C. geometry       one shape with real measurements      {"type":"geometry","shape":"triangle","base":8,"height":5}
                   shape is triangle | rectangle | circle | angle
@@ -754,7 +764,7 @@ export async function generateConceptFigure(
   try {
     const cached = await getCachedVisualization(key, deps.cacheClient)
     if (cached?.code) {
-      const validated = validateGeneratedFigure(JSON.parse(cached.code) as unknown, ctx)
+      const validated = validateGeneratedFigure(JSON.parse(cached.code) as unknown, ctx, { requireAxisLabels: true })
       if (validated.ok) return await finish({ ...validated, cached: true }, true)
     }
   } catch { /* unreachable or unparseable cache — regenerate */ }
@@ -775,7 +785,7 @@ export async function generateConceptFigure(
   }
   if (!raw) return await finish({ ok: false, reason: overBudget ? 'budget-exceeded' : 'generation-failed' })
 
-  const validated = validateGeneratedFigure(raw, ctx)
+  const validated = validateGeneratedFigure(raw, ctx, { requireAxisLabels: true })
   if (!validated.ok) return await finish(validated, false, raw)
 
   try {
@@ -795,6 +805,17 @@ const EMPTY_SCENE: SceneSpec = { id: 'spec', title: '', sceneType: 'diagram', st
 export function validateGeneratedFigure(
   raw: unknown,
   ctx: ArchetypeContext,
+  /**
+   * Require a generated graph to name its axes.
+   *
+   * Passed by the GENERATION sites only. The approved tier and the session
+   * restore re-validate content a human already reviewed or a learner is
+   * already looking at; applying a new authoring requirement there would
+   * silently retire curated figures and blank a figure mid-explanation, which
+   * are both worse for the learner than the thing the rule is protecting them
+   * from. New figures must clear the bar; existing ones are not re-litigated.
+   */
+  opts: { requireAxisLabels?: boolean } = {},
 ): { ok: true; figure: GeneratedFigure; cached: boolean } | { ok: false; reason: EngineRejection } {
   // The model declining is not the model failing. Recorded distinctly so a
   // review of the outcomes can tell "we asked and there is no figure here"
@@ -811,6 +832,19 @@ export function validateGeneratedFigure(
     const spec = parseVisualSpec(raw)
     if (!spec) return { ok: false, reason: 'structurally-invalid' }
     if (!isSpecAnchoredToConcept(spec, ctx)) return { ok: false, reason: 'not-anchored-to-concept' }
+    // A GENERATED graph must say what its axes mean.
+    //
+    // Measured: a kinetic-energy graph reached a learner with bare −5…5 ticks
+    // and no axis names, while the tutor talked about "velocity on the
+    // horizontal axis". The learner cannot check a claim about a quantity that
+    // is not written anywhere, and this engine's whole stance is that an
+    // honest empty screen beats a figure that has to be taken on trust.
+    //
+    // Applied to GENERATION only — curated and authored specs predate this
+    // field and are served by other tiers that never call this function.
+    if (opts.requireAxisLabels && spec.type === 'graph' && !(spec.xLabel?.trim() && spec.yLabel?.trim())) {
+      return { ok: false, reason: 'unlabelled-axes' }
+    }
     return { ok: true, figure: { kind: 'spec', spec }, cached: false }
   }
   return { ok: false, reason: 'structurally-invalid' }

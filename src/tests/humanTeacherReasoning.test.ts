@@ -127,9 +127,23 @@ function expertExpectation(category: Category, state: StateName): TeachingDecisi
   if (state === 'memory') return 'SERVE_EXPLANATION_MEMORY'
   if (state === 'fragile') return 'PRACTICE'
   if (state === 'progressing') {
-    // A hedged answer is grounded before advancing; a confident answer or
-    // acknowledgement continues the lesson.
-    return category === 'hedgedAnswer' ? 'ESCALATE_TO_LLM' : 'CONTINUE_LESSON'
+    // A hedged answer is grounded before advancing.
+    if (category === 'hedgedAnswer') return 'ESCALATE_TO_LLM'
+    // A CONFIDENT, CORRECT ANSWER earns a harder step — corrected 2026-08-11.
+    //
+    // This oracle previously expected CONTINUE_LESSON here, i.e. an excellent
+    // teacher simply carries on. Production disagreed: learners who stated
+    // ΔG = ΔH − TΔS unprompted and who balanced H₂ + O₂ → H₂O correctly were
+    // praised and then walked back through the lesson's opening material, and
+    // the audit rated mastery adaptation 3/10 against 8/10 for wrong-answer
+    // handling. An expert teacher who has just watched a learner demonstrate
+    // the idea asks something harder — that is what the demonstration was for.
+    //
+    // An ACKNOWLEDGEMENT is deliberately NOT included: "ok" is readiness, not
+    // evidence, and advancing on it would be the lucky-answer escalation this
+    // oracle should keep catching.
+    if (category === 'confidentAnswer') return 'ADVANCE_DIFFICULTY'
+    return 'CONTINUE_LESSON'
   }
   return 'ESCALATE_TO_LLM' // base: no evidence — respond naturally
 }

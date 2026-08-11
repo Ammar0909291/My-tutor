@@ -17,6 +17,7 @@ import type { StudentState } from './studentState'
 import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
 import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
+import { admitForLearner } from './learnerAdmission'
 
 // P0 (Explanation Memory serving metadata — observability only, ADR 13/14
 // aligned): `servingMode`/`exactGradeMatch`/`fallbackUsed`/`fallbackReason`
@@ -77,7 +78,7 @@ export async function findBestExplanation(
       take: 50, // small per-concept catalogue expected; caps a pathological hot concept
     })
 
-    const rows: ExplanationCandidateRow[] = candidates
+    let rows: ExplanationCandidateRow[] = candidates
       .filter((c) => c.explanationAsset)
       .map((c) => ({
         assetId: c.assetId,
@@ -92,6 +93,28 @@ export async function findBestExplanation(
         familyKind: c.familyKind,
         explanationAsset: c.explanationAsset,
       }))
+
+    // ── THE LEARNER ADMISSION BOUNDARY ────────────────────────────────────
+    // Applied to the CANDIDATES, not to the winner, for two reasons: both the
+    // normal pass and the grade-band fallback below are covered by
+    // construction, and a refused asset cannot shadow an admissible sibling
+    // that would have served the learner perfectly well.
+    //
+    // 184 of the 1,335 ACTIVE explanation assets in production carry
+    // author-facing markup ("Trap:", "FALSE —"). Capture-time validation
+    // cannot reach a single one of them; this is the boundary that can.
+    const admissible: ExplanationCandidateRow[] = []
+    for (const row of rows) {
+      const verdict = admitForLearner({
+        content: row.explanationAsset!.content,
+        userMessage: state.userMessage,
+      })
+      if (verdict.admit) { admissible.push(row); continue }
+      console.warn(
+        `[explanationMemory] refused ${row.assetId} for learner: ${verdict.reason} — ${verdict.evidence}`,
+      )
+    }
+    rows = admissible
 
     const best = pickBest(state, rows, options)
     if (best) {

@@ -79,7 +79,7 @@ describe('the closed set', () => {
   })
 
   it('accepts a graph spec', () => {
-    const r = validateGeneratedFigure({ type: 'graph', equation: '2x + 1', title: 'Linear function' }, ctx)
+    const r = validateGeneratedFigure({ type: 'graph', equation: '2x + 1', title: 'Linear function', xLabel: 'x', yLabel: 'y = 2x + 1' }, ctx)
     expect(r.ok).toBe(true)
     expect(r.ok && r.figure.kind).toBe('spec')
   })
@@ -160,7 +160,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         cacheClient: emptyCache(),
         critic: passingCritic,
         budgetReader: openBudget,
-        generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
+        generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function', xLabel: 'x', yLabel: 'y = 2x + 1' }),
       },
     )
     expect(d.graphical).toBe(true)
@@ -177,7 +177,7 @@ describe('a generated spec reaches the learner the same way a scene does', () =>
         cacheClient: emptyCache(),
         critic: passingCritic,
         budgetReader: openBudget,
-        generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
+        generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function', xLabel: 'x', yLabel: 'y = 2x + 1' }),
       },
     )
     expect(d.graphical).toBe(false)
@@ -222,7 +222,7 @@ describe('the same guarantees as the scene path', () => {
       enabled: () => true, policy: 'auto', budgetMs: 20, cacheClient: emptyCache(),
       critic: passingCritic,
       budgetReader: openBudget,
-      generate: () => new Promise((resolve) => setTimeout(() => resolve({ type: 'graph', equation: 'x' }), 300)),
+      generate: () => new Promise((resolve) => setTimeout(() => resolve({ type: 'graph', equation: 'x', xLabel: 'x', yLabel: 'y' }), 300)),
     })
     expect(r.ok).toBe(false)
     expect(r.ok === false && r.reason).toBe('budget-exceeded')

@@ -55,6 +55,20 @@ export const graphSpecSchema = z.object({
   type: z.literal('graph'),
   equation: z.string().min(1).max(120),
   title: z.string().max(80).optional(),
+  /**
+   * What the axes MEAN, in the learner's language, with units where they
+   * exist: "Velocity (m/s)", "Kinetic energy (J)".
+   *
+   * MEASURED DEFECT: a learner received a graph titled "Kinetic Energy as a
+   * Function of Velocity (m = 2 kg)" whose axes carried nothing but the
+   * numbers −5…5, while the tutor said "as the velocity increases along the
+   * horizontal axis, the kinetic energy on the vertical axis rises" —
+   * describing labels that were not on the screen. Optional so every existing
+   * spec stays valid; REQUIRED of a generated graph by
+   * `validateGeneratedFigure`, which is where the learner-facing bar belongs.
+   */
+  xLabel: z.string().max(40).optional(),
+  yLabel: z.string().max(40).optional(),
   // Optional initial visible x-range; the renderer is pan/zoomable regardless.
   domain: z.tuple([z.number(), z.number()]).optional(),
   // Sprint F: opt-in drag interaction (draggable slope/intercept for linear

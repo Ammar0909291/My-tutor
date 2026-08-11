@@ -57,7 +57,7 @@ describe('what the engine hands the sink', () => {
     const { seen, sink } = collect()
     await generateConceptFigure(ctx, {
       enabled: () => true, policy: 'auto', cacheClient: emptyCache(), outcomeSink: sink,
-      generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function' }),
+      generate: async () => ({ type: 'graph', equation: '2x + 1', title: 'Linear function', xLabel: 'x', yLabel: 'y = 2x + 1' }),
     })
     expect(seen).toHaveLength(1)
     const result = seen[0].result
