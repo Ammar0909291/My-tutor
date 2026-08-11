@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **955** (= 1,775 KG concepts − 820 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 17 completion,
+Total queued: **948** (= 1,775 KG concepts − 827 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 18 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1547,10 +1547,6 @@ math.nt Wave 7, moved to READY.
 | 1072 | mathematics | 23 | `math.opt.convex-optimization` | Convex Optimization |
 | 1073 | mathematics | 23 | `math.opt.lagrange-multipliers` | Lagrange Multipliers |
 | 1074 | mathematics | 23 | `math.opt.gradient-methods` | Gradient Descent |
-| 1077 | english | 23 | `eng.literature.symbolism` | Symbolism |
-| 1078 | english | 23 | `eng.literature.imagery` | Imagery |
-| 1079 | english | 23 | `eng.literature.poetic-forms` | Poetic Forms |
-| 1080 | english | 23 | `eng.literature.literary-genres-overview` | Overview of Literary Genres |
 **Row 1084 removed 2026-07-26** — `math.nt.general-diophantine`
 authored math.nt Wave 7, moved to READY.
 | 1085 | mathematics | 24 | `math.alg.inequality-2var` | Linear Inequality in Two Variables |
@@ -1587,7 +1583,6 @@ authored math.nt Wave 7, moved to READY.
 | 1116 | mathematics | 24 | `math.opt.duality` | Duality Theory |
 | 1117 | mathematics | 24 | `math.opt.stochastic-gradient` | Stochastic Gradient Descent |
 | 1118 | mathematics | 24 | `math.opt.newton-optimization` | Newton's Method for Optimization |
-| 1119 | english | 24 | `eng.writing.outlining-and-planning` | Outlining and Planning |
 | 1120 | english | 24 | `eng.literature.meter-and-rhyme` | Meter and Rhyme |
 | 1121 | english | 24 | `eng.literature.short-story-study` | Short Story Study |
 | 1122 | english | 24 | `eng.literature.literary-periods-survey` | Survey of Literary Periods |
@@ -1681,8 +1676,6 @@ math.nt Wave 8, moved to READY.
 | 1216 | mathematics | 27 | `math.opt.semidefinite-programming` | Semidefinite Programming |
 | 1217 | mathematics | 27 | `math.opt.integer-programming` | Integer Programming |
 | 1218 | english | 27 | `eng.writing.editing-and-proofreading` | Editing and Proofreading |
-| 1219 | english | 27 | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism |
-| 1220 | english | 27 | `eng.linguistics.computational-linguistics-intro` | Introduction to Computational Linguistics |
 | 1221 | mathematics | 28 | `math.alg.quadratic-equation` | Quadratic Equation |
 | 1222 | mathematics | 28 | `math.de.variation-of-parameters` | Variation of Parameters |
 | 1223 | mathematics | 28 | `math.de.bessel-equation` | Bessel's Equation |

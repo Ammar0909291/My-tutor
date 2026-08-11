@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 172 READY)
+## english (216 concepts, 179 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1244,8 +1244,8 @@ its subject KG.
 | grammar | `eng.grammar.word-classes-overview` | Overview of Word Classes | Yes | Yes | `educational-brain/concepts/english/eng.grammar.word-classes-overview.md` | READY |
 | grammar | `eng.grammar.word-order` | Basic Word Order | Yes | Yes | `educational-brain/concepts/english/eng.grammar.word-order.md` | READY |
 | linguistics | `eng.linguistics.applied-linguistics-intro` | Introduction to Applied Linguistics | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.applied-linguistics-intro.md` | READY |
-| linguistics | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism | Yes | No | — | MISSING |
-| linguistics | `eng.linguistics.computational-linguistics-intro` | Introduction to Computational Linguistics | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.bilingualism-and-multilingualism` | Bilingualism and Multilingualism | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.bilingualism-and-multilingualism.md` | READY |
+| linguistics | `eng.linguistics.computational-linguistics-intro` | Introduction to Computational Linguistics | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.computational-linguistics-intro.md` | READY |
 | linguistics | `eng.linguistics.corpus-linguistics-intro` | Introduction to Corpus Linguistics | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.corpus-linguistics-intro.md` | READY |
 | linguistics | `eng.linguistics.dialectology` | Dialectology | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.dialectology.md` | READY |
 | linguistics | `eng.linguistics.discourse-analysis-intro` | Introduction to Discourse Analysis | Yes | Yes | — | READY |
@@ -1274,25 +1274,25 @@ its subject KG.
 | literature | `eng.literature.drama-basics` | Drama Basics | Yes | Yes | — | READY |
 | literature | `eng.literature.dramatic-structure` | Dramatic Structure | Yes | Yes | — | READY |
 | literature | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense | Yes | Yes | — | READY |
-| literature | `eng.literature.imagery` | Imagery | Yes | No | — | MISSING |
+| literature | `eng.literature.imagery` | Imagery | Yes | Yes | `educational-brain/concepts/english/eng.literature.imagery.md` | READY |
 | literature | `eng.literature.irony` | Irony | Yes | Yes | `educational-brain/concepts/english/eng.literature.irony.md` | READY |
 | literature | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism | Yes | No | — | MISSING |
 | literature | `eng.literature.literary-devices-overview` | Overview of Literary Devices | Yes | Yes | — | READY |
-| literature | `eng.literature.literary-genres-overview` | Overview of Literary Genres | Yes | No | — | MISSING |
+| literature | `eng.literature.literary-genres-overview` | Overview of Literary Genres | Yes | Yes | `educational-brain/concepts/english/eng.literature.literary-genres-overview.md` | READY |
 | literature | `eng.literature.literary-periods-survey` | Survey of Literary Periods | Yes | No | — | MISSING |
 | literature | `eng.literature.metaphor-and-simile` | Metaphor and Simile | Yes | Yes | `educational-brain/concepts/english/eng.literature.metaphor-and-simile.md` | READY |
 | literature | `eng.literature.meter-and-rhyme` | Meter and Rhyme | Yes | No | — | MISSING |
 | literature | `eng.literature.narrative-elements` | Narrative Elements | Yes | Yes | — | READY |
 | literature | `eng.literature.novel-study` | Novel Study | Yes | No | — | MISSING |
 | literature | `eng.literature.plot-structure` | Plot Structure | Yes | Yes | — | READY |
-| literature | `eng.literature.poetic-forms` | Poetic Forms | Yes | No | — | MISSING |
+| literature | `eng.literature.poetic-forms` | Poetic Forms | Yes | Yes | `educational-brain/concepts/english/eng.literature.poetic-forms.md` | READY |
 | literature | `eng.literature.poetry-basics` | Poetry Basics | Yes | Yes | `educational-brain/concepts/english/eng.literature.poetry-basics.md` | READY |
 | literature | `eng.literature.point-of-view` | Point of View | Yes | Yes | — | READY |
 | literature | `eng.literature.prose-fiction` | Prose Fiction | Yes | Yes | — | READY |
 | literature | `eng.literature.prose-nonfiction` | Prose Nonfiction | Yes | Yes | — | READY |
 | literature | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere | Yes | Yes | — | READY |
 | literature | `eng.literature.short-story-study` | Short Story Study | Yes | No | — | MISSING |
-| literature | `eng.literature.symbolism` | Symbolism | Yes | No | — | MISSING |
+| literature | `eng.literature.symbolism` | Symbolism | Yes | Yes | `educational-brain/concepts/english/eng.literature.symbolism.md` | READY |
 | literature | `eng.literature.theme-and-message` | Theme and Message | Yes | Yes | — | READY |
 | phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.accents-and-dialects.md` | READY |
 | phonetics | `eng.phonetics.articulation-organs` | Organs of Articulation | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.articulation-organs.md` | READY |
@@ -1377,7 +1377,7 @@ its subject KG.
 | writing | `eng.writing.expository-writing` | Expository Writing | Yes | Yes | — | READY |
 | writing | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation | Yes | Yes | `educational-brain/concepts/english/eng.writing.handwriting-and-formation.md` | READY |
 | writing | `eng.writing.narrative-writing` | Narrative Writing | Yes | Yes | — | READY |
-| writing | `eng.writing.outlining-and-planning` | Outlining and Planning | Yes | No | — | MISSING |
+| writing | `eng.writing.outlining-and-planning` | Outlining and Planning | Yes | Yes | `educational-brain/concepts/english/eng.writing.outlining-and-planning.md` | READY |
 | writing | `eng.writing.paragraph-structure` | Paragraph Structure | Yes | Yes | `educational-brain/concepts/english/eng.writing.paragraph-structure.md` | READY |
 | writing | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics | Yes | Yes | — | READY |
 | writing | `eng.writing.revising-for-content` | Revising for Content | Yes | No | — | MISSING |
