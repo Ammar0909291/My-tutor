@@ -2069,6 +2069,8 @@
   a catalyst work?") is closed by the WEAK detector family (`isTopicQuestion`), which governs
   `requestTargetsSomethingElse` only. Adding those forms to the STRONG family was measured first
   and rejected: it made "why does temperature change it?" evict the figure being read.
+- **CLOSED 2026-08-11 (commit `317e872`) — see "Unresolved-topic excursion" below.** The item as
+  originally written follows, unedited, because its diagnosis was exactly right.
 - **OPEN, and the most important one — question protection is resolution-dependent.** Measured in
   production AFTER this deploy: "What is thermal conductivity?" in a Free Body Diagram lesson gets
   one correct sentence about heat, then "Now, let's connect this back to our current lesson on Free
@@ -2084,6 +2086,55 @@
 - Full suite 291 files / 6,276 passed / 9 skipped; `npx tsc --noEmit` clean; `npm run build`
   clean. Commits `348b1f6`, `1e8bcff` on `main`, deployed (`dpl_J1hdYo4Z…`, READY, aliased to
   my-tutor-flame.vercel.app).
+
+## Unresolved-topic excursion (2026-08-11, commit `317e872` on `main`)
+- **Closes the OPEN item above.** An excursion may now target a TITLE when it cannot target a KG
+  id, so the deterministic protection no longer switches itself off for the questions that need it
+  most. `ExcursionState` gains `targetTopicTitle`; exactly one of it and `targetConceptId` is set
+  while an excursion runs. The lifecycle is unchanged and keyed to neither — the lesson is still
+  the return anchor, no nesting, confusion still does not close it, satisfaction still does, the
+  turn limit still applies, and `turnCountsForLesson` still freezes the lesson's ladder. The one
+  thing an unresolved excursion cannot do is name a curriculum concept, so it draws no figure and
+  claims no asset.
+- **Recall and restraint pull against each other, and both are measured.** Opening needs a wider
+  net than `isExplicitTopicRequest`: it matches "explain X"/"teach me X" but NOT "What causes
+  friction?" or "How does a catalyst work?". Widening alone is dangerous — across 31 risky
+  phrasings, "What is the answer?", "What is the next step?", "What is the formula?", "What is my
+  score?" and "How do I solve this?" all NAME something the lesson does not mention and would each
+  have split a lesson in half. `namedTopicUnknownTo()` (in `requestedTopic.ts`, extracted from
+  `requestTargetsSomethingElse` so ONE definition serves the visual layer and the Teaching Engine)
+  applies three filters: it is a name at all; it is not purely a medium noun or lesson machinery
+  (`DISCOURSE_NOUNS`, the measured sibling of `isMediumWord` — **one real word is enough to
+  survive it**, so "chemical formula" and "first law" are unaffected); and it shares no vocabulary
+  with the topic ALREADY being taught, which is what keeps "why?", "I am lost" and every in-lesson
+  follow-up exactly where they are. `excursion.ts` stays KG-free and pure: the third filter needs
+  the curriculum's text, so the ROUTE applies it and the caller's contract is documented on the
+  `requestedTopicTitle` field.
+- **No figure is relabelled.** Directive rule (6) read "any figure attached belongs to <target>"
+  for every excursion; on an unresolved-topic excursion that was false — no figure of that topic
+  can exist, so any figure present is the paused lesson's, and the clause told the model to
+  relabel it. It now splits on whether a concept exists. The route also passes the visual resolver
+  `lessonConceptId: null` on those turns, so a NEW lesson figure cannot be introduced while the
+  tutor answers about something else; a figure already on screen is still left to continuity and
+  keeps its own identity.
+- **Measured offline against the real resolver and the real KG** (`unresolvedTopicExcursion.test.ts`,
+  46 cases): all five production questions — thermal conductivity, moles, why light bends, what
+  causes friction, how a catalyst works — open an excursion with `transition: 'started'`, target
+  the learner's own words, and anchor the return to the lesson. 30 of 31 restraint phrasings stay
+  put; follow-ups continue the excursion; "got it, thanks" closes it; a second topic switches
+  without nesting.
+- **PRE-EXISTING defect found, NOT fixed (out of scope):** "what is the point of this?" resolves to
+  `math.geom.point` via `resolveRequestedConceptId` — a resolver false positive that predates this
+  change and takes the RESOLVED path, so it opened a (wrong) excursion before this commit too.
+  Touching the resolver is what produced the L1 qualifier defect; flagged for a dedicated session.
+- **Production learner verification NOT performed — BLOCKED on credentials.** No account password
+  is available to this session, `DATABASE_URL` is unset, and Supabase MCP lists 0 projects, so a
+  throwaway account could be created but never cleaned up. Vercel SSO protection is ON for
+  `*.vercel.app` (`all_except_custom_domains`); `my-tutor-flame.vercel.app` is the unprotected
+  learner-facing alias and answers 200. Everything above is offline measurement against the real
+  modules, not a live-session transcript.
+- Suite 292 files / 6,322 passed / 9 skipped; `npx tsc --noEmit` clean; `npm run build` clean.
+
 - **AssetIdentity state, read directly from production this session** (supersedes the older
   counts above): 1,589 ACTIVE HUMAN_CURATOR EXPLANATION rows over **683 of 1,775 concepts
   (38.5%)**, 1,533 ACTIVE PROBE rows over 604 concepts, 10 ACTIVE VISUAL. Per subject (explanation
