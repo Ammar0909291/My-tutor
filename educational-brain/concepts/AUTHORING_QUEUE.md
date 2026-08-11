@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **918** (= 1,775 KG concepts − 857 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 28 completion,
+Total queued: **915** (= 1,775 KG concepts − 860 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 29 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1780,9 +1780,6 @@ math.nt Wave 8, moved to READY.
 | 1344 | mathematics | 33 | `math.cx.fundamental-theorem-algebra` | Fundamental Theorem of Algebra (Complex Analysis) |
 | 1345 | mathematics | 33 | `math.cx.rouche-theorem` | Rouché's Theorem |
 | 1350 | mathematics | 34 | `math.de.resonance` | Resonance |
-| 1355 | english | 36 | `eng.communication.research-methodology-writing` | Writing Research Methodology |
-| 1356 | english | 36 | `eng.communication.technical-writing` | Technical Writing |
-| 1357 | english | 36 | `eng.communication.business-writing` | Business Writing |
 | 1358 | english | 37 | `eng.communication.professional-communication` | Professional Communication |
 | 1359 | english | 37 | `eng.communication.presentation-design` | Presentation Design |
 | 1360 | english | 37 | `eng.communication.editing-for-publication` | Editing for Publication |

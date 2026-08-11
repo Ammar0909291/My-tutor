@@ -13,19 +13,19 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **857** |
-| Remaining | **918** |
-| Completion percentage | **48.28%** |
+| Concepts with an Educational Brain entry | **860** |
+| Remaining | **915** |
+| Completion percentage | **48.45%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 209 english + 186 chemistry + 0 biology + 0 computer_science = 857.
-English reached 206 through Batch 27 (full per-batch history in prior
-revisions of this file and in git commit messages), then Batch 28 (3,
-level-28 frontier BATCH COMPLETE: `eng.composition.plagiarism-and-
-citation-ethics`, `eng.composition.editing-for-style`,
-`eng.communication.academic-writing-advanced`) to 209. Mathematics/
-physics/chemistry figures are taken as already-recorded below, not
-re-audited this session, per this session's English-only scope.)*
++ 212 english + 186 chemistry + 0 biology + 0 computer_science = 860.
+English reached 209 through Batch 28 (full per-batch history in prior
+revisions of this file and in git commit messages), then Batch 29 (3,
+level-29 frontier BATCH COMPLETE: `eng.communication.research-
+methodology-writing`, `eng.communication.technical-writing`,
+`eng.communication.business-writing`) to 212. Mathematics/physics/
+chemistry figures are taken as already-recorded below, not re-audited
+this session, per this session's English-only scope.)*
 
 ---
 
@@ -35,7 +35,7 @@ re-audited this session, per this session's English-only scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 209 | 96.76% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 212 | 98.15% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1201,6 +1201,23 @@ completion constraint) takes precedence over that file's literal row
 order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
+
+**English Batch 29, BATCH COMPLETE (2026-08-11, autonomous /loop dynamic
+mode, continuing directly after Batch 28)**: computed the fresh
+topological queue against the true 209-concept baseline — 7 concepts
+missing, 3 "ready now" (all prerequisites satisfied):
+`eng.communication.research-methodology-writing`,
+`eng.communication.technical-writing`,
+`eng.communication.business-writing`. All 3 had existing Blueprints,
+reused by reference. English EB reached 212/216 (98.15%). True total:
+**860** EB entries (238 physics + 224 mathematics + 212 english + 186
+chemistry), out of 1,775 total KG concepts — 915 remaining, 48.45%.
+This fully clears the level-29 frontier; only 4 English concepts
+remain. The next loop iteration must recompute the topological queue
+fresh against the true 212-concept baseline (3 "ready now" concepts
+already identified: `eng.communication.professional-communication`,
+`eng.communication.presentation-design`,
+`eng.communication.editing-for-publication`).
 
 **English Batch 28, BATCH COMPLETE (2026-08-11, autonomous /loop dynamic
 mode, continuing directly after Batch 27)**: computed the fresh

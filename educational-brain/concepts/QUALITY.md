@@ -907,6 +907,9 @@ corrected here.
 | `eng.composition.plagiarism-and-citation-ethics` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.editing-for-style` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.communication.academic-writing-advanced` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.research-methodology-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.technical-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.business-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## What this ledger means for the next batch
 
@@ -970,3 +973,16 @@ this ledger: 206 → 209. The aggregate summary table above remains a
 mathematics-scoped snapshot, not recomputed globally this batch, per
 this file's own standing note — per-row data for English is
 authoritative and current as of this batch.
+
+## English Batch 29 addition (2026-08-11)
+
+Adds 3 English rows (`eng.communication.research-methodology-writing`,
+`eng.communication.technical-writing`,
+`eng.communication.business-writing`), all with existing Blueprints
+reused by reference, all sections present (full ✓ row per the current
+`EDUCATIONAL_BRAIN_STANDARD.md` heading scheme). English row count in
+this ledger: 209 → 212. Only 4 English concepts remain unauthored. The
+aggregate summary table above remains a mathematics-scoped snapshot,
+not recomputed globally this batch, per this file's own standing note
+— per-row data for English is authoritative and current as of this
+batch.
