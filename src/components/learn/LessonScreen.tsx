@@ -2430,6 +2430,38 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // older messages. UI-only: the AI context window is built separately
       // inside /api/learn/chat and is untouched by this restore.
       let restoredAny = false
+      // True once ANY restored message carried its own figure. It is what
+      // decides whether the legacy session-level fallback below may run: a
+      // conversation that records per-message figures must never also have one
+      // attached by position. See the fallback's own note.
+      let anyMessageVisual = false
+
+      /**
+       * Attach each restored figure to the message that actually showed it.
+       *
+       * Keyed by message id, never by position. The server has already run the
+       * resolver and the admission gate; this validates the payload once more
+       * before rendering — the same defense-in-depth the live path applies, so
+       * a payload that does not validate is dropped rather than drawn.
+       */
+      const withRestoredVisuals = (msgs: ChatMsg[], visuals: unknown): ChatMsg[] => {
+        if (!visuals || typeof visuals !== 'object') return msgs
+        const byId = visuals as Record<string, {
+          conceptId?: string; sceneSpec?: unknown; visual?: string; visualSpec?: unknown
+        }>
+        return msgs.map((m) => {
+          const rv = byId[m.id]
+          if (!rv) return m
+          const scene = rv.sceneSpec as SceneSpec | undefined
+          const validScene = scene && validateSceneSpec(scene).valid ? scene : undefined
+          const validSpec = parseVisualSpec(rv.visualSpec) ?? undefined
+          const visualType = typeof rv.visual === 'string' ? rv.visual : undefined
+          if (!validScene && !validSpec && !visualType) return m
+          anyMessageVisual = true
+          return { ...m, sceneSpec: validScene, visualSpec: validSpec, visual: visualType }
+        })
+      }
+
       try {
         const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000)
         const hist = await histRes.json()
@@ -2445,7 +2477,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               provider: m.provider ?? undefined,
             }))
           if (restored.length > 0) {
-            setMessages(restored)
+            setMessages(withRestoredVisuals(restored, hist?.data?.visuals))
             restoredAny = true
           }
         }
@@ -2464,7 +2496,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             ts: new Date(m.createdAt).getTime(),
             provider: m.provider ?? undefined,
           }))
-        setMessages(restored)
+        setMessages(withRestoredVisuals(restored, (data as { messageVisuals?: unknown }).messageVisuals))
         restoredAny = true
       }
 
@@ -2478,12 +2510,28 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // The server re-derived it (POST /api/sessions -> restoreVisualSession),
       // through the resolver and the admission gate, from the identity in
       // contextSnapshot.visualSession. Nothing here selects a concept or
-      // builds an asset: this attaches an already-admitted payload to the last
-      // ASSISTANT message, which is the turn the learner was looking at.
+      // builds an asset.
+      //
+      // ── LEGACY ONLY, AND THAT IS THE POINT ──────────────────────────────
+      // This attaches the SESSION's single current figure to the last
+      // ASSISTANT message — by POSITION. That is exactly the mis-attribution
+      // defect (D10): the last assistant message is not necessarily the turn
+      // that showed the figure, and during an excursion the recent turns
+      // legitimately showed none while the session slot still held the
+      // lesson's.
+      //
+      // Messages now record the figure they displayed
+      // (`Message.visualSession`), and the per-message restore above attaches
+      // each one by ID. So this positional path runs ONLY for a conversation
+      // where no message carries its own identity — i.e. rows written before
+      // that column existed. Removing it outright would take the current
+      // figure away from those older conversations on refresh; keeping it
+      // conditional means a positional guess is never made once real
+      // per-message evidence exists.
       //
       // Applied AFTER both restore paths above, so an empty initial visual
       // state can never overwrite it.
-      if (restoredAny && data.restoredVisual) {
+      if (restoredAny && !anyMessageVisual && data.restoredVisual) {
         const rv = data.restoredVisual as {
           conceptId?: string; sceneSpec?: unknown; visual?: string; visualSpec?: unknown
         }

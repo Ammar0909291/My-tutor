@@ -8,7 +8,7 @@ import { routeAI } from '@/lib/ai/router'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
 import { checkRateLimit, rateLimitResponse } from '@/lib/rateLimit'
 import { captureError } from '@/lib/monitoring'
-import { MessageRole } from '@prisma/client'
+import { MessageRole, type Prisma } from '@prisma/client'
 // ── M1: the visualization runtime fails closed ───────────────────────────────
 // Four legacy post-LLM visualization authorities used to run here and each
 // seeded a figure from the TUTOR'S OWN PROSE rather than from the concept:
@@ -4123,13 +4123,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // ever runs ahead of an unapplied migration). Persisting `provider`
       // is a nice-to-have for the badge, not core to the turn — degrade to
       // writing the message without it rather than 500ing the whole chat.
+      // THE FIGURE THIS MESSAGE SHOWED, recorded ON the message.
+      //
+      // Identity only — the same VisualSession the session slot already holds.
+      // The payload is never copied: restoreVisualSession() re-derives it
+      // through the resolver and the same admission gate this turn cleared, so
+      // a history reload costs 0 LLM calls and 0 generation calls.
+      //
+      // Written ONLY when this turn actually put a figure on screen. A turn
+      // that showed nothing stores null, which is what stops a later reload
+      // from lending this message somebody else's picture.
+      const displayedVisualSession =
+        visualDecisionHoisted?.graphical && visualDecisionHoisted.session
+          ? (visualDecisionHoisted.session as unknown as Prisma.InputJsonValue)
+          : undefined
+
       let assistantMessage
       try {
         assistantMessage = await withRetry(() => prisma.message.create({
-          data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText, provider },
+          data: {
+            sessionId, role: MessageRole.ASSISTANT, content: cleanText, provider,
+            ...(displayedVisualSession ? { visualSession: displayedVisualSession } : {}),
+          },
         }))
       } catch (err) {
-        console.error('[learn/chat] message.create with provider failed, retrying without it:', err)
+        // Same degradation rule as `provider`: the turn must never fail because
+        // of a column a deploy has not applied yet. The teaching is the point;
+        // the figure's identity is a nice-to-have on this write.
+        console.error('[learn/chat] message.create with provider/visual failed, retrying without them:', err)
         assistantMessage = await withRetry(() => prisma.message.create({
           data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
         }))

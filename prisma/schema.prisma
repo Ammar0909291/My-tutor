@@ -560,6 +560,26 @@ model Message {
   // client's AI badge survives a page reload / history restore instead
   // of only existing for the current in-memory turn.
   provider     String?
+  /// THE FIGURE THIS MESSAGE ACTUALLY DISPLAYED.
+  ///
+  /// A diagram the tutor taught with is part of the learner's teaching record,
+  /// not disposable UI state. Before this column the figure lived only in
+  /// React state and in ONE session-level slot
+  /// (`LearnSession.contextSnapshot.visualSession`), so a refresh restored at
+  /// most the most-recent figure — and re-attached it to whatever the last
+  /// ASSISTANT message happened to be, which is not necessarily the message
+  /// that showed it.
+  ///
+  /// Stores the IDENTITY, never the payload: the same `VisualSession` object
+  /// the session slot already holds ({conceptId, representation, renderer,
+  /// returnToConceptId, turns, topic?}). `restoreVisualSession()` re-derives
+  /// the payload deterministically through the resolver and the same
+  /// admission gate the live turn cleared, so a history reload costs 0 LLM
+  /// calls and 0 visual-generation calls, and no asset is duplicated.
+  ///
+  /// Null for USER messages, for assistant turns that showed no figure, and
+  /// for every row written before this column existed.
+  visualSession Json?
   createdAt    DateTime    @default(now())
 
   session LearnSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)

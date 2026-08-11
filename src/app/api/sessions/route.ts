@@ -144,8 +144,22 @@ export async function POST(req: Request) {
       } catch (err) {
         console.warn('[sessions] visual restore skipped:', err);
       }
+      // PER-MESSAGE FIGURES, for the messages this resume returns.
+      //
+      // `restoredVisual` above is the SESSION's current figure — one slot,
+      // and the client used to hang it off whichever message happened to be
+      // last. This is the record of what each message actually showed, keyed
+      // by message id, so nothing is attached by position. Same deterministic
+      // authority, still 0 model calls and 0 generation calls.
+      let messageVisuals: Record<string, unknown> = {};
+      try {
+        const { restoreMessageVisuals } = await import('@/lib/teaching/visual/messageVisuals');
+        messageVisuals = await restoreMessageVisuals(existingSession.messages ?? []);
+      } catch (err) {
+        console.warn('[sessions] per-message visual restore skipped:', err);
+      }
       return NextResponse.json(
-        { success: true, data: existingSession, resumed: true, restoredVisual },
+        { success: true, data: existingSession, resumed: true, restoredVisual, messageVisuals },
         { status: 200 },
       );
     }

@@ -109,14 +109,29 @@ export async function GET(req: Request) {
       where,
       orderBy: [{ createdAt: 'desc' as const }, { id: 'desc' as const }],
       take: HISTORY_DISPLAY_LIMIT,
-      select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true },
+      select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true, visualSession: true },
     }))
     const messages = raw.reverse().map(stripControlMarkup)
+
+    // THE FIGURES THIS HISTORY SHOWED, restored per message.
+    //
+    // Identity in, payload out, through the same deterministic resolver and
+    // admission gate the live turns cleared: 0 model calls, 0 generation
+    // calls. Keyed by message id so each figure returns to the message that
+    // actually displayed it — the client must never re-attach one by
+    // position. See messageVisuals.ts.
+    const { restoreMessageVisuals } = await import('@/lib/teaching/visual/messageVisuals')
+    const visuals = await restoreMessageVisuals(raw)
+    // The raw identity stays server-side. The client receives the restored,
+    // already-admitted payload and cannot ask for a concept — same rule the
+    // resume path follows.
+    const wire = messages.map(({ visualSession: _identity, ...m }) => m)
 
     return NextResponse.json({
       success: true,
       data: {
-        messages,
+        messages: wire,
+        visuals,
         // The cursor for the NEXT (older) page, or null at the beginning of
         // history. Derived from the raw page, never from the stripped copy.
         nextCursor: raw.length === HISTORY_DISPLAY_LIMIT ? messages[0]?.id ?? null : null,
@@ -138,10 +153,15 @@ export async function GET(req: Request) {
         select: { id: true, role: true, content: true, createdAt: true, sessionId: true },
       }))
       const messages = rawFallback.reverse().map(stripControlMarkup)
+      // No `visuals` key would leave the client unable to tell "this history
+      // has no figures" from "this response predates the feature". An empty
+      // map says the former, which is the correct degradation: history still
+      // renders, without pictures.
       return NextResponse.json({
         success: true,
         data: {
           messages,
+          visuals: {},
           nextCursor: rawFallback.length === HISTORY_DISPLAY_LIMIT ? messages[0]?.id ?? null : null,
           hasMore: rawFallback.length === HISTORY_DISPLAY_LIMIT,
         },
