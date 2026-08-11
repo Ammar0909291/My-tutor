@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **1017** (= 1,775 KG concepts − 758 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 10 continuation,
+Total queued: **1012** (= 1,775 KG concepts − 763 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 11 continuation,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -967,7 +967,6 @@ Wave 4 part 2, moved to READY.
 | 454 | mathematics | 13 | `math.cat.higher-category` | Higher Category Theory |
 | 469 | english | 13 | `eng.listening.listening-comprehension-strategies` | Listening Comprehension Strategies |
 | 470 | english | 13 | `eng.speaking.discussion-skills` | Discussion Skills |
-| 471 | english | 13 | `eng.communication.digital-communication` | Digital Communication |
 | 472 | biology | 13 | `bio.gen.population-genetics` | Population Genetics |
 | 473 | biology | 13 | `bio.gen.genetic-engineering` | Genetic Engineering and Recombinant DNA |
 | 474 | biology | 13 | `bio.dev.stem-cells-regeneration` | Stem Cells and Regeneration |
@@ -1085,8 +1084,6 @@ math.geom Wave 5, moved to READY.
 | 591 | mathematics | 16 | `math.real.archimedean` | Archimedean Property |
 | 592 | mathematics | 16 | `math.real.convergence-sequences` | Convergence of Sequences |
 | 593 | mathematics | 16 | `math.real.open-sets` | Open and Closed Sets |
-| 597 | english | 16 | `eng.reading.genre-recognition` | Genre Recognition |
-| 599 | english | 16 | `eng.reading.compare-and-contrast-texts` | Comparing and Contrasting Texts |
 | 600 | english | 16 | `eng.speaking.debate-skills` | Debate Skills |
 | 601 | chemistry | 16 | `chem.sol.colligative` | Colligative Properties |
 | 602 | chemistry | 16 | `chem.sol.activity` | Activity and Non-ideal Solutions |
@@ -1160,7 +1157,6 @@ authored math.geom Wave 7, moved to READY.
 | 660 | mathematics | 17 | `math.real.pointwise-convergence` | Pointwise Convergence |
 | 661 | mathematics | 17 | `math.graph.ramsey-theory` | Ramsey Theory |
 | 665 | english | 17 | `eng.reading.close-reading` | Close Reading |
-| 666 | english | 17 | `eng.writing.sentence-writing` | Sentence Writing |
 | 667 | chemistry | 17 | `chem.sol.osmosis` | Osmosis and Osmotic Pressure |
 | 668 | chemistry | 17 | `chem.hyd.alkynes` | Alkynes |
 | 669 | chemistry | 17 | `chem.alc.phenols` | Phenols |
@@ -1415,7 +1411,6 @@ authored math.nt Wave 6 part 1, moved to READY.
 | 899 | english | 20 | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense |
 | 900 | english | 20 | `eng.literature.dramatic-structure` | Dramatic Structure |
 | 901 | english | 20 | `eng.literature.prose-fiction` | Prose Fiction |
-| 902 | english | 20 | `eng.linguistics.what-is-linguistics` | What Is Linguistics? |
 | 903 | english | 20 | `eng.communication.media-literacy` | Media Literacy |
 | 904 | chemistry | 20 | `chem.carb.named-reactions` | Named Carbonyl Reactions |
 | 905 | chemistry | 20 | `chem.bio.proteins` | Proteins |

@@ -13,9 +13,9 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **758** |
-| Remaining | **1,017** |
-| Completion percentage | **42.70%** |
+| Concepts with an Educational Brain entry | **763** |
+| Remaining | **1,012** |
+| Completion percentage | **42.99%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
 + 110 english + 186 chemistry + 0 biology + 0 computer_science = 758.
@@ -37,7 +37,7 @@ session, per this session's English-only scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 110 | 50.93% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 115 | 53.24% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1204,8 +1204,31 @@ order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**English Batch 10 (2026-08-11, continuing directly after the branch
-reconciliation, same session, autonomous loop per standing instruction)**:
+**English Batch 11 (2026-08-11, continuing directly after Batch 10, same
+session, autonomous loop per standing instruction)**: authored the
+remaining 5 of the 9 already-unlocked candidates identified in Batch 10:
+`eng.communication.digital-communication` (first `eng.communication.*`
+entry, unlocked by `eng.vocab.register-and-formality`), `eng.reading.
+compare-and-contrast-texts` (unlocked jointly by `eng.reading.text-
+structure` and `eng.reading.summarizing`), `eng.reading.genre-
+recognition` (unlocked by `eng.reading.text-structure`, confirmed
+terminal — `unlocks: []`), `eng.writing.sentence-writing` (unlocked
+jointly by `eng.grammar.simple-sentences` and `eng.writing.spelling-
+strategies`), and `eng.linguistics.what-is-linguistics` (first direct
+`eng.linguistics.*` entry, unlocked jointly by `eng.grammar.sentence-
+combining` and `eng.phonetics.prosody`). All 5 had existing Blueprints
+(3 marked `status: draft`, confirmed non-blocking per this program's
+established convention), reused by reference. English EB reached
+115/216 (53.24%). True total: **763** EB entries (238 physics + 224
+mathematics + 115 english + 186 chemistry), out of 1,775 total KG
+concepts — 1,012 remaining, 42.99%. This batch fully clears the level-11
+frontier identified after the branch reconciliation; the next batch must
+recompute the topological queue fresh against the true 115-concept
+baseline.
+
+**English Batch 10 (prior batch, 2026-08-11, continuing directly after
+the branch reconciliation, same session, autonomous loop per standing
+instruction)**:
 recomputed the topological queue fresh against the true 106-concept
 baseline — 9 concepts had every prerequisite already satisfied:
 `eng.listening.listening-for-detail`, `eng.speaking.conversation-skills`,
