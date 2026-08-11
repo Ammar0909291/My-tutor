@@ -37,11 +37,29 @@ import { isExplicitTopicRequest, isReturnRequest, looksLikeAnswer, MAX_EXCURSION
 
 export { MAX_EXCURSION_TURNS }
 
+/**
+ * How long a learner-named topic title may be once it is persisted.
+ *
+ * Matches `requestedTopic.ts`'s own MAX_TITLE_CHARS, which is where every
+ * title reaching this module is produced. Restated rather than imported so a
+ * corrupt snapshot is bounded by this module's own rule, not by a constant
+ * that happens to live in the visual layer.
+ */
+const MAX_TOPIC_TITLE_CHARS = 90
+
 /** The standing excursion, persisted in contextSnapshot.excursion. */
 export interface ExcursionState {
   active: boolean
   /** The concept being taught while the excursion runs. */
   targetConceptId: string | null
+  /**
+   * WHAT THE LEARNER CALLED IT, when the curriculum has no concept for it.
+   *
+   * See the UNRESOLVED TOPICS note above `decideExcursion`. Exactly one of
+   * this and `targetConceptId` is set while an excursion is open: a resolved
+   * excursion carries the concept id, an unresolved one carries the title.
+   */
+  targetTopicTitle: string | null
   /** The lesson concept owed a return. Set once, at the start, never nested. */
   returnToConceptId: string | null
   /** Turns this excursion has been open (safety valve). */
@@ -51,6 +69,7 @@ export interface ExcursionState {
 export const NO_EXCURSION: ExcursionState = {
   active: false,
   targetConceptId: null,
+  targetTopicTitle: null,
   returnToConceptId: null,
   turns: 0,
 }
@@ -72,6 +91,11 @@ export interface ExcursionDecision {
   state: ExcursionState
   /** The concept this turn should TEACH. Never null when a lesson exists. */
   targetConceptId: string | null
+  /**
+   * The title of the topic this turn should teach, when it has no concept id.
+   * Null on every ordinary turn and on every resolved excursion.
+   */
+  targetTopicTitle: string | null
   /** The lesson owed a return, while the excursion is open. */
   returnToConceptId: string | null
   transition: ExcursionTransition
@@ -121,6 +145,24 @@ export interface ExcursionInput {
   lessonConceptId: string | null
   /** The concept the learner explicitly named, from requestedConcept.ts. */
   requestedConceptId: string | null
+  /**
+   * WHAT THE LEARNER CALLED THE TOPIC, when `requestedConceptId` is null.
+   *
+   * THE CALLER'S CONTRACT: pass a title ONLY for a request that genuinely
+   * names something other than what is already being taught — i.e. the result
+   * of `namedTopicUnknownTo`, which applies the three filters that make that
+   * true (a name at all; not a medium noun; no vocabulary shared with the
+   * topic in progress). This module cannot apply them itself: the third needs
+   * the curriculum's text, and keeping this file free of the KG is what lets
+   * the whole lifecycle stay pure and exhaustively testable.
+   *
+   * A caller that passes a raw phrase instead will open excursions on ordinary
+   * follow-ups. `null` is always the safe value.
+   *
+   * Ignored whenever `requestedConceptId` is set: a topic the KG can name is
+   * always better identified by its id.
+   */
+  requestedTopicTitle: string | null
   /** Whether the tutor's previous turn ended in a question. */
   lastAssistantAskedQuestion: boolean
 }
@@ -132,14 +174,49 @@ export interface ExcursionInput {
  * satisfaction signal, satisfaction beats the answer-hold, and the answer-hold
  * beats starting anything new — so a reply to the tutor's own question can
  * never be mistaken for a request to leave the lesson.
+ *
+ * ── UNRESOLVED TOPICS: WHY AN EXCURSION MAY HAVE NO CONCEPT ID ──────────────
+ * This used to open ONLY on a resolved `requestedConceptId`, i.e. only when the
+ * learner asked about something the Knowledge Graph already contains. So the
+ * deterministic protection — the whole reason this module exists — switched
+ * itself OFF for precisely the questions that need it most:
+ *
+ *   lesson:  "Free Body Diagrams"     (phys.mech.free-body-diagrams)
+ *   learner: "What is thermal conductivity?"
+ *   tutor:   one correct sentence about heat, then "Now, let's connect this
+ *            back to our current lesson on Free Body Diagrams"
+ *
+ * The physics KG genuinely has no thermal-conductivity concept, so
+ * `requestedConceptId` was null, so no excursion opened, so every prompt block
+ * above stayed anchored to the lesson and the model was steered back. Nothing
+ * was broken — the protection simply never ran. Making the resolver stricter
+ * (2026-08-11's qualifier fix, which correctly stopped "thermal conductivity"
+ * resolving to ELECTRICAL conductivity) made this MORE common, not less.
+ *
+ * A teacher does not need a curriculum node to take a question seriously. The
+ * excursion therefore targets a TITLE when it cannot target an id. Everything
+ * the lifecycle does is unchanged and keyed to neither: the return anchor is
+ * still the lesson, confusion still does not close it, satisfaction still does,
+ * `turnCountsForLesson` still freezes the lesson's ladder. The only thing an
+ * unresolved excursion cannot do is name a curriculum concept — so it draws no
+ * figure and claims no asset, which is honest rather than degraded.
  */
 export function decideExcursion(input: ExcursionInput): ExcursionDecision {
   const { state, message, lessonConceptId, requestedConceptId } = input
-  const active = state.active && state.targetConceptId !== null
+  // Truthiness, not `!== null`: a state literal written before this field
+  // existed (a persisted snapshot, an older caller) carries `undefined`, and
+  // `undefined !== null` would have declared every such excursion active with
+  // nothing to teach. An empty string is no target either.
+  const active = state.active && Boolean(state.targetConceptId || state.targetTopicTitle)
+
+  // A topic title is only ever consulted when the curriculum could not name the
+  // request. It never competes with a resolved concept.
+  const requestedTopicTitle = requestedConceptId ? null : (input.requestedTopicTitle ?? null)
 
   const closed = (transition: ExcursionTransition): ExcursionDecision => ({
     state: NO_EXCURSION,
     targetConceptId: lessonConceptId,
+    targetTopicTitle: null,
     returnToConceptId: null,
     transition,
     justClosed: active,
@@ -151,6 +228,7 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
     return {
       state: NO_EXCURSION,
       targetConceptId: requestedConceptId,
+      targetTopicTitle: null,
       returnToConceptId: null,
       transition: 'none',
       justClosed: false,
@@ -191,12 +269,48 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
       state: {
         active: true,
         targetConceptId: requestedConceptId,
+        targetTopicTitle: null,
         returnToConceptId: lessonConceptId,
         turns: 0,
       },
       targetConceptId: requestedConceptId,
+      targetTopicTitle: null,
       returnToConceptId: lessonConceptId,
       transition: active && state.targetConceptId !== requestedConceptId ? 'switched' : 'started',
+      justClosed: false,
+    }
+  }
+
+  // THE SAME REQUEST, FOR A TOPIC THE CURRICULUM CANNOT NAME.
+  //
+  // The qualifying gate is the caller's `namedTopicUnknownTo` — see the field
+  // doc on `requestedTopicTitle` for why it cannot live here. It is DIFFERENT
+  // from `isExplicitTopicRequest` above, and deliberately: the strong family
+  // matches "explain X" and "teach me X" but not "What causes friction?" or
+  // "How does a catalyst work?", which is how learners actually ask, and which
+  // this branch exists to stop losing.
+  //
+  // Everything that must not open an excursion is already excluded and cannot
+  // reach this line: an answer to the tutor's own question (the answer-hold
+  // above), a return request, a satisfaction signal, and — inside
+  // `namedTopicUnknownTo` — "why?", "I am lost", "show me a diagram", and any
+  // follow-up sharing vocabulary with the topic in progress.
+  if (requestedTopicTitle) {
+    const switched = active && state.targetTopicTitle !== requestedTopicTitle
+    return {
+      state: {
+        active: true,
+        targetConceptId: null,
+        targetTopicTitle: requestedTopicTitle,
+        returnToConceptId: lessonConceptId,
+        turns: 0,
+      },
+      // Null on purpose: there is no concept, and inventing one — the lesson's
+      // most of all — is the exact failure this branch exists to end.
+      targetConceptId: null,
+      targetTopicTitle: requestedTopicTitle,
+      returnToConceptId: lessonConceptId,
+      transition: switched ? 'switched' : 'started',
       justClosed: false,
     }
   }
@@ -210,6 +324,7 @@ function held(state: ExcursionState, transition: ExcursionTransition): Excursion
   return {
     state: { ...state, turns: state.turns + 1 },
     targetConceptId: state.targetConceptId,
+    targetTopicTitle: state.targetTopicTitle,
     returnToConceptId: state.returnToConceptId,
     transition,
     justClosed: false,
@@ -220,6 +335,7 @@ function none(lessonConceptId: string | null): ExcursionDecision {
   return {
     state: NO_EXCURSION,
     targetConceptId: lessonConceptId,
+    targetTopicTitle: null,
     returnToConceptId: null,
     transition: 'none',
     justClosed: false,
@@ -264,10 +380,21 @@ export function parseExcursionState(raw: unknown): ExcursionState {
   if (!raw || typeof raw !== 'object') return NO_EXCURSION
   const v = raw as Record<string, unknown>
   if (v.active !== true) return NO_EXCURSION
-  if (typeof v.targetConceptId !== 'string' || !v.targetConceptId) return NO_EXCURSION
+  const targetConceptId =
+    typeof v.targetConceptId === 'string' && v.targetConceptId ? v.targetConceptId : null
+  // Trimmed and length-capped on the way back in: this reaches a prompt, and a
+  // snapshot is a database row that outlives the code that wrote it.
+  const rawTitle = typeof v.targetTopicTitle === 'string' ? v.targetTopicTitle.trim() : ''
+  const targetTopicTitle = rawTitle ? rawTitle.slice(0, MAX_TOPIC_TITLE_CHARS) : null
+  // An excursion with neither identity has nothing to teach — the same
+  // "no target means no excursion" rule as before, now asked of both.
+  if (!targetConceptId && !targetTopicTitle) return NO_EXCURSION
   return {
     active: true,
-    targetConceptId: v.targetConceptId,
+    targetConceptId,
+    // A concept id always wins, so a hand-edited row cannot attach a title of
+    // its own to a real concept and have the prompt announce it.
+    targetTopicTitle: targetConceptId ? null : targetTopicTitle,
     returnToConceptId:
       typeof v.returnToConceptId === 'string' && v.returnToConceptId ? v.returnToConceptId : null,
     // Clamped at 0: a negative count (corrupt snapshot, hand-edited row) would
@@ -303,6 +430,10 @@ export function buildExcursionDirective(input: {
   const { decision, targetTitle, lessonTitle } = input
   const target = targetTitle ? `"${targetTitle}"` : 'the concept the learner asked about'
   const lesson = lessonTitle ? `"${lessonTitle}"` : 'the current lesson'
+  // The learner named something the curriculum has no concept for. The
+  // lifecycle is identical; two sentences of the directive are not — see
+  // rule (6) and the opening below.
+  const unresolvedTopic = decision.state.active && !decision.state.targetConceptId
 
   if (decision.justClosed) {
     return (
@@ -361,8 +492,23 @@ export function buildExcursionDirective(input: {
     'lesson or to a simpler point of the lesson. Re-explain, then ask again. ' +
     '(5) ONLY a clear statement of understanding from the learner ends this. When ' +
     'that comes, offer to go back to ' + lesson + ' — offer it, do not force it. ' +
-    '(6) Any figure attached to this response belongs to ' + target + '; ' +
-    'follow the VISUAL CONTRACT for it if one is present. ' +
+    // (6) SPLITS ON WHETHER THE TARGET IS A CURRICULUM CONCEPT.
+    //
+    // The unqualified version of this clause used to run for every excursion,
+    // and on an unresolved-topic excursion it was false: no figure OF that
+    // topic can exist, because nothing authored or generated it. Any figure
+    // present is the paused lesson's, still on screen from before the question
+    // — so "any figure attached belongs to <target>" instructed the model to
+    // relabel the lesson's picture as the learner's new topic. A correct
+    // figure, presented as a figure of something it is not.
+    (unresolvedTopic
+      ? '(6) There is NO figure of ' + target + ' in this response. If a figure is ' +
+        'present it belongs to ' + lesson + ' and was already on screen: do NOT ' +
+        'describe it as, label it as, or explain it as a picture of ' + target + '. ' +
+        'Either leave it alone or say plainly which one it is. Teach ' + target +
+        ' in words. '
+      : '(6) Any figure attached to this response belongs to ' + target + '; ' +
+        'follow the VISUAL CONTRACT for it if one is present. ') +
     '(7) The lesson is NOT finished and cannot finish this turn: do NOT emit ' +
     '[LESSON_COMPLETE], do NOT write a lesson-closing summary, and do NOT ' +
     'congratulate the learner on completing ' + lesson + '. The server enforces ' +

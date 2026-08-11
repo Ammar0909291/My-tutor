@@ -309,8 +309,12 @@ describe('12 · a second off-lesson concept replaces the target, never nests', (
 describe('13 · an excursion never writes lesson state', () => {
   it('the decision carries no progress fields at all', () => {
     const t = turn({ message: 'explain viscosity' })
+    // Still an exhaustive whitelist — the assertion is that NO progress field
+    // can appear here, and it fails if one ever does. `targetTopicTitle` is
+    // the identity of a topic the KG cannot name (see excursion.ts's
+    // UNRESOLVED TOPICS note), which is teaching state, not progress.
     expect(Object.keys(t.excursion.state).sort()).toEqual(
-      ['active', 'returnToConceptId', 'targetConceptId', 'turns'],
+      ['active', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
     )
     // The lesson identity handed in is returned untouched as the return anchor.
     expect(t.excursion.returnToConceptId).toBe(LESSON)

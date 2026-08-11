@@ -46,6 +46,7 @@
 import { matchTopicRequest, matchTopicQuestion } from './session'
 import { contentWords } from './visualEngine'
 import { runtimeTopicIdentity, type TopicIdentity } from './topicIdentity'
+import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
 
 /**
  * Connectives that can only ever sit BETWEEN the request phrase and the topic.
@@ -185,6 +186,106 @@ export function extractRequestedTopic(
   if (topicWords.size < minWords) return null
 
   return { title, words: topicWords }
+}
+
+/**
+ * Is this word about the FORM of an answer rather than its subject?
+ *
+ * Reads the engine's existing medium-noun list; no second list is kept. Lived
+ * in `resolveVisualTarget.ts` until the teaching layer needed the same
+ * distinction — it belongs with the rest of "what did the learner name".
+ * `contentWords` folds a trailing plural, so entries are compared folded.
+ */
+export function isMediumWord(word: string): boolean {
+  for (const noun of VISUAL_MEDIUM_NOUNS) {
+    const folded = noun.endsWith('s') && noun.length > 4 ? noun.slice(0, -1) : noun
+    if (word === folded || word === noun) return true
+  }
+  return word === 'illustration' || word === 'sketch' || word === 'figure' || word === 'plot'
+}
+
+/**
+ * Words about the LESSON'S MACHINERY rather than its subject.
+ *
+ * The sibling of `isMediumWord`, found the same way it was: by measuring. With
+ * a one-word floor and the weak question family, "What is the answer?", "What
+ * is the next step?", "What is the formula?", "What is my score?" and "How do
+ * I solve this?" all NAME something — "answer", "step", "formula", "score",
+ * "solve" — and none of them shares vocabulary with the lesson's concept. So
+ * each one read as a request to be taught something else, and would have split
+ * the lesson in half over an ordinary in-lesson question. 8 of 31 measured.
+ *
+ * A list about how tutoring is talked about, not about any subject: it cannot
+ * grow when the curriculum does, and it never decides WHAT to teach — only
+ * that a phrase made of nothing but these has not named a topic.
+ *
+ * Deliberately NOT here: "unit", "law", "force", "energy" and every other word
+ * that is both ordinary English and real subject matter. And the rule below
+ * needs only ONE word to survive this list, so "chemical formula", "first law"
+ * and "percentage difference" all still name their topic.
+ */
+const DISCOURSE_NOUNS = new Set([
+  // the apparatus of an exercise
+  'answer', 'question', 'step', 'part', 'example', 'formula', 'difference',
+  'problem', 'exercise', 'solution', 'mistake', 'error', 'result', 'reason',
+  'way', 'method', 'rule', 'idea', 'meaning', 'word', 'note', 'point',
+  // the apparatus of a course
+  'lesson', 'topic', 'chapter', 'test', 'quiz', 'exam', 'homework',
+  'assignment', 'score', 'mark', 'grade', 'progress',
+  // task verbs — what to DO, never what it is ABOUT
+  'solve', 'calculate', 'explain', 'understand', 'learn', 'study', 'know',
+  'mean', 'work', 'do',
+  // position words, safe here because one surviving word is enough
+  'next', 'last', 'first', 'previous', 'other',
+])
+
+/**
+ * THE TOPIC THE LEARNER NAMED, WHEN IT IS NOT THE ONE ALREADY BEING TAUGHT.
+ *
+ * Extracted from `requestTargetsSomethingElse`, which asked exactly this
+ * question of the visual layer and answered it well. Two callers now need it
+ * and they need it for different reasons, so the shared half lives here and
+ * each keeps its own gates:
+ *
+ *   the visual layer  — may this figure claim to be what they asked for?
+ *   the Teaching Engine — is this a question about something else, which the
+ *                         excursion lifecycle must take rather than steer away
+ *                         from? (see excursion.ts's UNRESOLVED TOPICS note)
+ *
+ * Three filters, in order, each earning its place:
+ *
+ *   1. A NAME. `extractRequestedTopic` with the weak question family and a
+ *      one-word floor — "What causes friction?", "How does a catalyst work?"
+ *      and "Teach me about moles" are how learners actually ask, and all three
+ *      fall under the two-word floor that protects a figure already on screen.
+ *      "Why?", "explain that again" and "I am lost" name nothing and stop here.
+ *   2. A MEDIUM IS NOT A TOPIC. "show me a diagram" names "diagram" — a word
+ *      about the form of the answer. Those requests mean "about what we are
+ *      studying", so they are not somewhere else.
+ *   3. NOT THE THING ALREADY BEING TAUGHT. One shared content word with the
+ *      current topic's own title or description is enough to believe the
+ *      question is about it. Deliberately a weak bar: a false "somewhere else"
+ *      splits a lesson in half over a follow-up, and "why does temperature
+ *      change it?" inside a thermal lesson must stay exactly where it is.
+ *
+ * No keyword table and no curriculum lookup: the learner's own words against
+ * the taught topic's own words, so it behaves identically for a topic nobody
+ * has ever authored.
+ */
+export function namedTopicUnknownTo(message: string, taughtText: string): RequestedTopic | null {
+  const requested = extractRequestedTopic(message, 1, true)
+  if (!requested) return null
+
+  const named = [...requested.words]
+  // ONE surviving word is enough. A phrase made ENTIRELY of medium nouns and
+  // lesson machinery has named no subject; a phrase with any real word in it
+  // has, so "chemical formula" and "first law" are unaffected.
+  if (named.every((w) => isMediumWord(w) || DISCOURSE_NOUNS.has(w))) return null
+
+  const taught = contentWords(taughtText ?? '', true)
+  for (const word of named) if (taught.has(word)) return null
+
+  return requested
 }
 
 /**

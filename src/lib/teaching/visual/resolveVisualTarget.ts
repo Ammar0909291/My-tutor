@@ -18,9 +18,8 @@
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/requestedConcept'
 import { isTopicQuestion } from './session'
-import { extractRequestedTopic } from './requestedTopic'
+import { extractRequestedTopic, isMediumWord } from './requestedTopic'
 import { contentWords } from './visualEngine'
-import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
 import type { ArchetypeContext } from './archetypes'
 
 export {
@@ -122,19 +121,6 @@ export function resolveVisualTarget(
  * the Teaching Engine owns all of that and is untouched. It answers one visual
  * question: may this figure claim to be what the learner asked for.
  */
-
-/**
- * Is this word about the FORM of an answer rather than its subject?
- * Reads the engine's existing medium-noun list; no second list is kept here.
- * `contentWords` folds a trailing plural, so the entries are compared folded.
- */
-function isMediumWord(word: string): boolean {
-  for (const noun of VISUAL_MEDIUM_NOUNS) {
-    const folded = noun.endsWith('s') && noun.length > 4 ? noun.slice(0, -1) : noun
-    if (word === folded || word === noun) return true
-  }
-  return word === 'illustration' || word === 'sketch' || word === 'figure' || word === 'plot'
-}
 
 export function requestTargetsSomethingElse(message: string, target: VisualTarget): boolean {
   // Only the fallback can be wrong in this way. A concept the learner actually

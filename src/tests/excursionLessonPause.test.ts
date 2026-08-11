@@ -261,8 +261,11 @@ describe('CASE D — a completion earned BEFORE the excursion is preserved', () 
     // client's PATCH on a tag, and by nothing in this path — so an already
     // completed lesson is untouched by construction. The excursion state
     // itself carries no progress fields at all.
+    // Still exhaustive: it fails the moment a progress field appears here.
+    // `targetTopicTitle` names a topic the KG does not contain (excursion.ts's
+    // UNRESOLVED TOPICS note) — teaching state, not progress.
     expect(Object.keys(NO_EXCURSION).sort()).toEqual(
-      ['active', 'returnToConceptId', 'targetConceptId', 'turns'],
+      ['active', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
     )
   })
 })

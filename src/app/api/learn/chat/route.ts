@@ -1908,21 +1908,63 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { parseExcursionState, decideExcursion, buildExcursionDirective } =
           await import('@/lib/teaching/excursion')
         const requestedConceptIdThisTurn = resolveRequestedConceptId(message, excursionLessonConceptId, subjectCode)
+        // THE TOPIC THE CURRICULUM COULD NOT NAME.
+        //
+        // Only consulted when the resolver returned nothing. `namedTopicUnknownTo`
+        // is deterministic and looks nothing up, so it names a topic the KG has
+        // never heard of exactly as well as one it has — and it withholds a name
+        // for anything about the topic ALREADY being taught, which is what keeps
+        // "why?", "I am lost" and ordinary in-lesson follow-ups where they are.
+        // See excursion.ts's UNRESOLVED TOPICS note.
+        //
+        // The comparison text is what this turn is actually teaching: the
+        // lesson's own words, plus the open excursion's topic when there is one,
+        // so a follow-up about the side topic continues it instead of restarting
+        // it under a slightly different name.
+        const priorExcursionState = parseExcursionState(
+          (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
+        )
+        const requestedTopicTitleThisTurn = await (async () => {
+          if (requestedConceptIdThisTurn) return null
+          const { namedTopicUnknownTo } = await import('@/lib/teaching/visual/requestedTopic')
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const lessonNode = excursionLessonConceptId ? getKGNode(excursionLessonConceptId) : null
+          const activeTopic = priorExcursionState.active
+            ? (priorExcursionState.targetTopicTitle
+              ?? getKGNode(priorExcursionState.targetConceptId ?? '')?.title
+              ?? '')
+            : ''
+          const taughtText = [
+            lessonNode?.title ?? '',
+            lessonNode?.description ?? '',
+            activeTopic,
+          ].join(' ')
+          return namedTopicUnknownTo(message, taughtText)?.title ?? null
+        })()
         const excursionDecision = decideExcursion({
-          state: parseExcursionState(
-            (learnSession.contextSnapshot as Record<string, unknown> | null)?.excursion,
-          ),
+          state: priorExcursionState,
           message,
           lessonConceptId: excursionLessonConceptId,
           requestedConceptId: requestedConceptIdThisTurn,
+          requestedTopicTitle: requestedTopicTitleThisTurn,
           lastAssistantAskedQuestion: excursionPriorAskedQuestion,
         })
         excursionDecisionHoisted = excursionDecision
         const teachingTargetConceptId = excursionDecision.targetConceptId ?? excursionLessonConceptId
+        // An excursion whose target is a topic the KG cannot name. It has no
+        // concept id at all, so `teachingTargetConceptId` above has fallen back
+        // to the LESSON's — correct for the blocks that need some concept to
+        // exist, and wrong for anything that would then present the lesson's
+        // material as the answer to the learner's question. The visual layer is
+        // the one place that would, so it is given nothing to draw.
+        const unresolvedTopicExcursion =
+          excursionDecision.state.active && !excursionDecision.targetConceptId
         console.log('[excursion]', {
           lesson: excursionLessonConceptId,
           target: teachingTargetConceptId,
           requested: requestedConceptIdThisTurn,
+          requestedTopic: requestedTopicTitleThisTurn,
+          unresolvedTopic: excursionDecision.state.targetTopicTitle,
           transition: excursionDecision.transition,
           active: excursionDecision.state.active,
           returnTo: excursionDecision.returnToConceptId,
@@ -1937,8 +1979,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         excursionActiveHoisted = !lessonTurnForLesson
         // The title of what this turn actually teaches. Null unless an
         // excursion is open, so ordinary turns keep the lesson's own title.
+        // On an unresolved-topic excursion the title is the learner's own
+        // words — there is no KG node to read one from, and reading the
+        // lesson's would name the wrong thing in every block that uses this.
         excursionTeachingTitleHoisted = excursionDecision.state.active
-          ? ((await import('@/lib/curriculum/knowledgeGraph')).getKGNode(teachingTargetConceptId ?? '')?.title ?? null)
+          ? (excursionDecision.targetTopicTitle
+            ?? (await import('@/lib/curriculum/knowledgeGraph')).getKGNode(teachingTargetConceptId ?? '')?.title
+            ?? null)
           : null
 
         // Session lifecycle (07 §8): boundary measured from real message
@@ -2382,7 +2429,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // figure must depict what is being taught. The excursion's
                 // return anchor and open/closed state come from the Teaching
                 // Engine — the visual layer never decides either.
-                lessonConceptId: teachingTargetConceptId,
+                //
+                // NULL on an unresolved-topic excursion. The teaching target
+                // there is a title the curriculum cannot name, so there is no
+                // concept to depict; passing the fallback would let the
+                // resolver introduce a NEW figure of the paused lesson while
+                // the tutor answers about something else. A figure already on
+                // the learner's screen is still left to continuity, and keeps
+                // its own identity — see excursion.ts's directive rule (6).
+                lessonConceptId: unresolvedTopicExcursion ? null : teachingTargetConceptId,
                 excursionReturnToConceptId: excursionDecision.returnToConceptId,
                 excursionActive: excursionDecision.state.active,
                 subject: subjectCode,
