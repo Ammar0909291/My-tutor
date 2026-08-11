@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **984** (= 1,775 KG concepts − 791 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 14 completion,
+Total queued: **974** (= 1,775 KG concepts − 801 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 15 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1019,7 +1019,6 @@ math.geom Wave 4 part 1, moved to READY.
 | 531 | mathematics | 15 | `math.abst.algebraic-extension` | Algebraic Extension |
 | 532 | mathematics | 15 | `math.real.completeness` | Completeness of ℝ |
 | 533 | mathematics | 15 | `math.real.metric-space` | Metric Space |
-| 543 | english | 15 | `eng.speaking.presentation-skills` | Presentation Skills |
 | 544 | chemistry | 15 | `chem.state.phase-diagram` | Phase Diagrams |
 | 545 | chemistry | 15 | `chem.sol.vapour-pressure` | Vapour Pressure of Solutions |
 | 546 | chemistry | 15 | `chem.elect.nernst` | Nernst Equation |
@@ -1385,12 +1384,6 @@ authored math.nt Wave 6 part 1, moved to READY.
 | 893 | mathematics | 20 | `math.num.floating-point` | Floating-Point Arithmetic |
 | 894 | mathematics | 20 | `math.num.root-finding` | Root-Finding Methods |
 | 895 | mathematics | 20 | `math.opt.dynamic-programming` | Dynamic Programming |
-| 896 | english | 20 | `eng.reading.reading-across-genres` | Reading Across Genres |
-| 898 | english | 20 | `eng.literature.theme-and-message` | Theme and Message |
-| 899 | english | 20 | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense |
-| 900 | english | 20 | `eng.literature.dramatic-structure` | Dramatic Structure |
-| 901 | english | 20 | `eng.literature.prose-fiction` | Prose Fiction |
-| 903 | english | 20 | `eng.communication.media-literacy` | Media Literacy |
 | 904 | chemistry | 20 | `chem.carb.named-reactions` | Named Carbonyl Reactions |
 | 905 | chemistry | 20 | `chem.bio.proteins` | Proteins |
 | 906 | chemistry | 20 | `chem.bio.lipids` | Lipids |
@@ -1453,7 +1446,6 @@ authored math.nt Wave 4, moved to READY.
 | 960 | mathematics | 21 | `math.fnal.completeness` | Completeness |
 | 961 | mathematics | 21 | `math.num.error-analysis` | Error Analysis |
 | 962 | mathematics | 21 | `math.num.newtons-method` | Newton's Method |
-| 963 | english | 21 | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion |
 | 964 | english | 21 | `eng.literature.literary-devices-overview` | Overview of Literary Devices |
 | 965 | english | 21 | `eng.literature.prose-nonfiction` | Prose Nonfiction |
 | 968 | chemistry | 21 | `chem.bio.nucleic-acids` | Nucleic Acids |
@@ -1611,8 +1603,6 @@ authored math.nt Wave 7, moved to READY.
 | 1120 | english | 24 | `eng.literature.meter-and-rhyme` | Meter and Rhyme |
 | 1121 | english | 24 | `eng.literature.short-story-study` | Short Story Study |
 | 1122 | english | 24 | `eng.literature.literary-periods-survey` | Survey of Literary Periods |
-| 1123 | english | 24 | `eng.linguistics.pragmatics-intro` | Introduction to Pragmatics |
-| 1124 | english | 24 | `eng.linguistics.psycholinguistics-intro` | Introduction to Psycholinguistics |
 **Row 1125 removed 2026-07-26** — `math.nt.pythagorean-triples`
 authored as a small bounded cross-domain step in math.geom Wave 7,
 unblocked by `math.geom.pythagorean-theorem`, moved to READY.
