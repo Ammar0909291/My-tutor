@@ -388,6 +388,78 @@ export function mentionsAVisualMedium(text: string): boolean {
   return new RegExp(`\\b${MEDIUM_NOUN}\\b`, 'i').test(text)
 }
 
+// ── WHICH FORM WAS ASKED FOR ──────────────────────────────────────────────
+//
+// THE DEFECT THIS SERVES (production, measured 2026-08-11):
+//
+//   lesson: Ohm's Law · learner: "Can you graph this?"
+//   attached: the curated `electric_circuit` scene — a circuit diagram
+//
+// and every other phrasing returned the identical figure: "show me a graph of
+// this", "can you draw a diagram", "show me an animation". The medium the
+// learner named reached nothing at all. The harm is not the circuit — that is
+// the right curated figure for Ohm's Law — it is the tutor then narrating it
+// as though it were the graph that was asked for.
+//
+// This function reports the form ONLY. It does not choose, reorder, or veto a
+// figure: curated and approved content keeps its authority, and the medium
+// noun never overrides the tier order. What it enables is honesty about the
+// difference — see `buildVisualContractBlock`.
+//
+// Only forms whose meaning is unmistakable are reported. "diagram", "picture",
+// "drawing", "image", "visualisation", "sketch" and "illustration" are generic
+// words for "something visual" and constrain nothing, so they return null.
+
+/** A visual form specific enough that showing a different one is a mismatch. */
+export type RequestedVisualForm =
+  /** A plot of one quantity against another. */
+  | 'plot'
+  /** Something that moves. */
+  | 'motion'
+
+/** Build a request-frame regex over a restricted noun set. */
+function mediumRequestFor(nouns: readonly string[]): RegExp {
+  const noun = `(?:${nouns.join('|')})`
+  return new RegExp(
+    [
+      `\\b(?:show|give|send|make|create|display|add|put|draw|plot)\\s+(?:me|us)?\\s*(?:a|an|the|some)?\\s*${noun}\\b`,
+      `\\b(?:show|explain|teach|do)\\s+(?:it|this|that|me)?\\s*${noun}\\b`,
+      `\\b(?:can|could|would|will|may)\\s+(?:you|i|we)\\s+(?:\\w+\\s+){0,3}?${noun}\\b`,
+      `\\b(?:is|are)\\s+there\\s+(?:a|an|any|some)?\\s*${noun}\\b`,
+      `\\b(?:do|did|have)\\s+you\\s+(?:have|got)\\s+(?:a|an|any)?\\s*${noun}\\b`,
+      `\\b(?:want|need|like|love)\\s+(?:to\\s+see\\s+)?(?:\\w+\\s+){0,3}?${noun}\\b`,
+      `\\b${noun}\\s+(?:would|will|might|could)\\s+help\\b`,
+      `\\bany\\s+${noun}\\b`,
+      `\\blet\\s+(?:me|us)\\s+see\\s+(?:a|an|the)?\\s*${noun}\\b`,
+    ].join('|'),
+    'i',
+  )
+}
+
+// "graph" and "chart" are already shared vocabulary; "plot" is added here and
+// ONLY here, because it is form-specific by definition and never a generic
+// word for a picture. VISUAL_MEDIUM_NOUNS is deliberately left alone — it
+// drives whether a visual was requested at all, which this must not change.
+const PLOT_REQUEST_RE = mediumRequestFor(['graph', 'graphs', 'chart', 'charts', 'plot', 'plots'])
+const MOTION_REQUEST_RE = mediumRequestFor(['animation', 'animations', 'simulation', 'simulations'])
+
+// The imperative. "graph it", "plot this" — the one place a medium word used
+// as a VERB names a form rather than a picture, which is why it is read here
+// and nowhere else. `MEDIUM_AS_VERB_RE` still governs "picture this".
+const PLOT_IMPERATIVE_RE = /\b(?:graph|plot|chart)\s+(?:it|this|that|these|them)\b/i
+const MOTION_IMPERATIVE_RE = /\b(?:animate|simulate)\s+(?:it|this|that|these|them)\b/i
+
+/**
+ * The specific visual form the learner asked for, or null when they named a
+ * generic medium, named none, or were not asking.
+ */
+export function requestedVisualForm(text: string): RequestedVisualForm | null {
+  if (!text || MEDIUM_AS_VERB_RE.test(text)) return null
+  if (PLOT_REQUEST_RE.test(text) || PLOT_IMPERATIVE_RE.test(text)) return 'plot'
+  if (MOTION_REQUEST_RE.test(text) || MOTION_IMPERATIVE_RE.test(text)) return 'motion'
+  return null
+}
+
 const EXAMPLE_RE = /\b(real[\s-]?life|real[\s-]?world|example|application|story|use\s+case|everyday)\b/i
 const EXPLAIN_DIFF_RE = /\b(explain\s+(it\s+)?(differently|again|another\s+way|in\s+a\s+different\s+way|more\s+simply|simpler)|different\s+explanation|another\s+explanation|say\s+it\s+differently|i\s+(don'?t|do\s+not)\s+understand|i(?:'?m|\s+am)\s+(confused|lost)|no\s+idea|not\s+following|didn'?t\s+get\s+(it|that)|makes?\s+no\s+sense)\b/i
 

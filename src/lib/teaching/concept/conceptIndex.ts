@@ -237,17 +237,116 @@ export function buildConceptIndex(entries: readonly ConceptIndexEntry[]): readon
 
 // ── Matching ──────────────────────────────────────────────────────────────
 
-/** Does `needle` appear as a contiguous token run inside `haystack`? */
-function containsTokenRun(haystack: readonly string[], needle: readonly string[]): boolean {
-  if (needle.length === 0 || needle.length > haystack.length) return false
+/** Index of the first contiguous run of `needle` inside `haystack`, or -1. */
+function indexOfTokenRun(haystack: readonly string[], needle: readonly string[]): number {
+  if (needle.length === 0 || needle.length > haystack.length) return -1
   for (let i = 0; i <= haystack.length - needle.length; i++) {
     let hit = true
     for (let j = 0; j < needle.length; j++) {
       if (haystack[i + j] !== needle[j]) { hit = false; break }
     }
-    if (hit) return true
+    if (hit) return i
   }
-  return false
+  return -1
+}
+
+/** Does `needle` appear as a contiguous token run inside `haystack`? */
+function containsTokenRun(haystack: readonly string[], needle: readonly string[]): boolean {
+  return indexOfTokenRun(haystack, needle) >= 0
+}
+
+// ── The dropped qualifier ─────────────────────────────────────────────────
+//
+// THE DEFECT THIS CLOSES (production, measured 2026-08-11):
+//
+//   learner: "What is thermal conductivity?"
+//   resolved: phys.em.resistivity — "Resistivity and Conductivity"
+//
+// which is ELECTRICAL conductivity. The learner asked about heat and the
+// engine handed the tutor a concept about current. "Conductivity" is an
+// unambiguous conjunct of that compound title (df 1 across all 1,775
+// concepts), so TITLE_COMPONENT matched it and silently discarded the word
+// that carried the learner's actual meaning.
+//
+// Corpus uniqueness is a claim about the KG, not about the sentence. When a
+// learner QUALIFIES a one-word conjunct, they have named something narrower
+// than the conjunct, and its uniqueness no longer covers what they said.
+//
+// The test is evidence-based and corpus-derived, never a word list: the
+// qualifier is looked up in the titles of the whole corpus, and the match is
+// dropped only when every domain that uses that qualifier is a DIFFERENT
+// domain from the concept about to be returned.
+//
+//   "thermal conductivity"    "thermal" is used only by phys.therm titles
+//                             (Thermal Expansion, Thermal Equilibrium);
+//                             phys.em.resistivity is phys.em      -> DROPPED
+//   "electrical conductivity" "electrical" is used by phys.em.electrical-power,
+//                             the same domain                     -> KEPT
+//   "conductivity"            no qualifier                        -> KEPT
+//
+// It fails SAFE in both directions that matter: a qualifier the corpus has
+// never seen is no evidence at all and changes nothing, and a dropped match
+// costs a concept id, never a wrong one.
+//
+// SCOPE: single-word TITLE_COMPONENT matches only — the one tier admitted
+// purely on the corpus-uniqueness of a common noun. A full-title match is
+// direct evidence and is never second-guessed, which is why "orbital
+// hybridisation" (NORMALIZED_TITLE on chem.bond.hybridization, whose text
+// contains no "orbital") is untouched, as are "angular momentum", "magnetic
+// flux" and "specific heat capacity" — all EXACT_TITLE.
+
+/** The KG domain a concept belongs to: `phys.em` from `phys.em.resistivity`.
+ *  Subjects without a domain segment fall back to the subject itself. */
+function conceptDomain(entry: ConceptIndexEntry): string {
+  const parts = entry.conceptId.split('.')
+  return parts.length >= 3 ? parts.slice(0, 2).join('.') : entry.subject
+}
+
+/** qualifier token -> every domain whose TITLES use it. Corpus-derived. */
+function buildQualifierDomains(index: readonly ConceptIndexEntry[]): ReadonlyMap<string, ReadonlySet<string>> {
+  const map = new Map<string, Set<string>>()
+  for (const entry of index) {
+    const domain = conceptDomain(entry)
+    for (const token of new Set(normalizeToTokens(entry.title))) {
+      if (STOP_WORDS.has(token)) continue
+      if (!map.has(token)) map.set(token, new Set())
+      map.get(token)!.add(domain)
+    }
+  }
+  return map
+}
+
+/** Memoized per index array — the map is a pure function of the corpus. */
+const qualifierDomainCache = new WeakMap<object, ReadonlyMap<string, ReadonlySet<string>>>()
+function qualifierDomains(index: readonly ConceptIndexEntry[]): ReadonlyMap<string, ReadonlySet<string>> {
+  const key = index as unknown as object
+  let cached = qualifierDomainCache.get(key)
+  if (!cached) {
+    cached = buildQualifierDomains(index)
+    qualifierDomainCache.set(key, cached)
+  }
+  return cached
+}
+
+/**
+ * Does `qualifier`, sitting immediately in front of a one-word conjunct,
+ * contradict the concept that conjunct would return?
+ */
+export function qualifierContradictsConcept(
+  qualifier: string,
+  entry: ConceptIndexEntry,
+  domains: ReadonlyMap<string, ReadonlySet<string>>,
+): boolean {
+  if (STOP_WORDS.has(qualifier)) return false
+  // The concept's own words never contradict it.
+  if (normalizeToTokens(entry.title).includes(qualifier)) return false
+  if (normalizeToTokens(entry.conceptId.replace(/[.\-]/g, ' ')).includes(qualifier)) return false
+  const used = domains.get(qualifier)
+  // The corpus must have a SINGLE, unambiguous opinion about where this word
+  // belongs. A word used by two or more domains ("real", "electron", "multiple",
+  // "absolute") is ordinary vocabulary and is no evidence of anything.
+  if (!used || used.size !== 1) return false
+  return !used.has(conceptDomain(entry))
 }
 
 /** Uppercase tokens in the ORIGINAL message — acronyms only match when the
@@ -362,8 +461,13 @@ export function resolveConceptMatches(
     for (const component of entry.components ?? []) {
       const componentTokens = normalizeToTokens(component)
       if (componentTokens.length === 0) continue
-      if (!containsTokenRun(messageTokens, componentTokens)) continue
+      const at = indexOfTokenRun(messageTokens, componentTokens)
+      if (at < 0) continue
       if (componentTokens.length === 1 && !focusedMessage) continue
+      // A qualifier the learner put in front of a one-word conjunct is part
+      // of what they named. See "The dropped qualifier" above.
+      if (componentTokens.length === 1 && at > 0
+        && qualifierContradictsConcept(messageTokens[at - 1], entry, qualifierDomains(index))) continue
       candidates.push({
         method: ExtractionMethod.TITLE_COMPONENT,
         text: component,

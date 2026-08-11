@@ -2338,6 +2338,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const { prismaGenerationOutcomeSink, findActiveVisualFigure, prismaBudgetReader } =
                 await import('@/lib/teaching/visual/generationOutcomeStore')
               const { buildVisualContractBlock } = await import('@/lib/teaching/visual/visualContract')
+              // The SPECIFIC form the learner named, if any. Reported to the
+              // contract only — it never selects or reorders a figure.
+              const { requestedVisualForm } = await import('@/lib/teaching/masteryGate')
               const { parseVisualSession } = await import('@/lib/teaching/visual/session')
               // Visual continuity: the figure already on the learner's screen,
               // read back from contextSnapshot. Without this the resolver would
@@ -2430,6 +2433,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // the turn read as though nothing was asked.
               systemPrompt += buildVisualContractBlock(decision, {
                 learnerAskedForAVisual: learnerRequestHoisted === 'diagram',
+                requestedForm: requestedVisualForm(message),
               })
               if (decision.payload?.renderer === 'card') {
                 // Keep the legacy hoisted vars coherent for the RRM log and the

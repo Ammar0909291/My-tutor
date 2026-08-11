@@ -13,7 +13,52 @@
 
 import { clamp } from './conceptText'
 import { buildSemanticsBlock } from './visualSemantics'
-import type { EducationalPurpose, VisualDecision } from './types'
+import type { RequestedVisualForm } from '@/lib/teaching/masteryGate'
+import type { EducationalPurpose, Representation, VisualDecision } from './types'
+
+// ── THE FORM THE LEARNER ASKED FOR vs THE FORM ON SCREEN ────────────────────
+//
+// Measured in production, 2026-08-11, in an Ohm's Law lesson: "Can you graph
+// this?" attached the curated `electric_circuit` scene, and so did "show me a
+// graph of this", "can you draw a diagram" and "show me an animation" —
+// identical figure, four different requests.
+//
+// The circuit is the RIGHT curated figure for Ohm's Law and it keeps its
+// authority: nothing here removes it, replaces it, or reorders a tier. What was
+// wrong is that the tutor was then told only "a circuit of Ohm's Law is
+// attached" and went on to present it as the graph that had been asked for.
+//
+// So the mismatch is DECLARED, not resolved. The learner still gets the best
+// figure the hierarchy has, and gets told plainly that it is not the form they
+// asked for — which is what a teacher with one chart on the wall would say.
+
+/** Representations that ARE a plot of one quantity against another. */
+const PLOT_REPRESENTATIONS: ReadonlySet<Representation> = new Set<Representation>([
+  'graph', 'chart', 'motion_graph', 'coordinate_system', 'number_line', 'periodic_trend',
+])
+
+/** Representations that depict something MOVING. */
+const MOTION_REPRESENTATIONS: ReadonlySet<Representation> = new Set<Representation>([
+  'projectile', 'circular_motion', 'pendulum', 'collision', 'orbit', 'wave',
+  'motion_graph', 'water_cycle', 'process', 'algorithm',
+])
+
+/** Does the attached figure satisfy the form the learner named? */
+export function figureMatchesRequestedForm(
+  representation: Representation | null | undefined,
+  form: RequestedVisualForm | null | undefined,
+): boolean {
+  if (!form) return true                 // nothing specific was asked for
+  if (!representation) return false      // unknown form cannot be claimed to match
+  return form === 'plot'
+    ? PLOT_REPRESENTATIONS.has(representation)
+    : MOTION_REPRESENTATIONS.has(representation)
+}
+
+const FORM_WORD: Record<RequestedVisualForm, string> = {
+  plot: 'a graph — one quantity plotted against another',
+  motion: 'an animation — something that moves',
+}
 
 const PURPOSE_INSTRUCTION: Record<EducationalPurpose, string> = {
   explain:     'Use the figure to carry the explanation. Point at its parts in the order they matter.',
@@ -38,7 +83,15 @@ export function buildVisualContractBlock(
    * every existing caller and test is unchanged; supplied by the chat route,
    * which is the only place that knows.
    */
-  opts: { learnerAskedForAVisual?: boolean } = {},
+  opts: {
+    learnerAskedForAVisual?: boolean
+    /**
+     * The SPECIFIC form the learner asked for this turn, when they named one.
+     * Reported only — it never selects, reorders or vetoes a figure. See the
+     * mismatch rule below.
+     */
+    requestedForm?: RequestedVisualForm | null
+  } = {},
 ): string {
   if (!decision) return ''
 
@@ -158,6 +211,21 @@ export function buildVisualContractBlock(
   // the model's imagination, and never recomputed here from a different source.
   // When the asset yields no nameable element the block is empty and rule (4)
   // below degrades to a truthful generic reference rather than an invented one.
+  // ── THE FORM THAT WAS ASKED FOR ────────────────────────────────────────────
+  // Declared, never resolved: the figure above stays exactly as the hierarchy
+  // chose it. This only stops the tutor calling it something it is not.
+  if (opts.requestedForm && !figureMatchesRequestedForm(asset.representation, opts.requestedForm)) {
+    lines.push(
+      `FORM MISMATCH: the learner asked for ${FORM_WORD[opts.requestedForm]}. What is ` +
+      `attached is ${asset.representation ? `a ${asset.representation.replace(/_/g, ' ')}` : 'a different kind of figure'}, ` +
+      'which is the best figure this topic has. Say so in ONE short clause before ' +
+      'you use it ("I don\'t have a graph of this, but here is the circuit it ' +
+      'describes…"). Then teach from what IS on screen. Do NOT call it a graph, ' +
+      'do NOT describe axes, curves or plotted values it does not have, and do ' +
+      'NOT promise the requested form later — you cannot attach one.',
+    )
+  }
+
   const semantics = asset.semantics
   const semanticsBlock = buildSemanticsBlock(semantics)
   if (semanticsBlock) lines.push('WHAT THE LEARNER SEES: ' + semanticsBlock)
