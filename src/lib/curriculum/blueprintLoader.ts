@@ -179,6 +179,14 @@ export interface EBConceptContext {
    */
   antiAnalogies: string[]
   /**
+   * The Educational Brain entry's own `## Misconceptions` library.
+   *
+   * Merged into the KNOWN MISCONCEPTIONS prompt section AFTER the Blueprint's
+   * register, deduped against it. See parseEBMisconceptions for the audit
+   * finding that made this necessary.
+   */
+  ebMisconceptions: EBMisconception[]
+  /**
    * TQ-1: Voice detection cues from Voice teaching "what to listen for".
    * Each entry maps a learner utterance pattern to its diagnostic implication.
    */
@@ -1040,6 +1048,109 @@ function parseEBOpeningScenario(content: string): string | null {
   return null
 }
 
+/**
+ * THE EDUCATIONAL BRAIN'S OWN MISCONCEPTION LIBRARY.
+ *
+ * ── WHY THIS EXISTS ─────────────────────────────────────────────────────────
+ * Found by auditing Topic 1 (`phys.meas.units`) as a real learner against real
+ * production. The learner offered a misconception — "is a unit just the name of
+ * the thing youre counting" — and the tutor answered "Yes, exactly", then
+ * "That is completely right—when you are counting fruit, 'apples' is the unit."
+ * Scientifically wrong, in the tutor's own voice, at the first concept in
+ * physics.
+ *
+ * The obvious diagnosis was "misconception screens never reach runtime", and it
+ * was WRONG — measured before being acted on. The Blueprint register loads
+ * fine: 4 misconceptions parsed and reached the prompt. But all four are about
+ * SI NAMING (Celsius vs kelvin, mass vs weight, litre/hour as base units, gram
+ * vs kilogram). None covers what a beginner actually does on turn three.
+ *
+ * The Educational Brain entry for the same concept DOES carry the right layer —
+ * M1 "Units are interchangeable labels on the same number", with authored
+ * symptom phrases, a verbatim detection probe and a recovery route — and
+ * `EBConceptContext` had no field for it, so 424 authored misconception
+ * libraries were parsed for opening scenarios and anti-analogies while their
+ * richest section was dropped on the floor.
+ *
+ * This is the generalized fix: one parser, every concept that has an entry.
+ * It adds a SOURCE of misconception knowledge and no second notion of what a
+ * misconception is — Blueprint entries keep their existing authority and are
+ * emitted first; these are merged after and deduped, never replacing them.
+ */
+export interface EBMisconception {
+  /** Authored label, e.g. "M1". */
+  id: string
+  /** The claim itself, as authored. */
+  title: string
+  /** What a learner holding it says or does — the detection surface. */
+  symptom: string | null
+  /** The authored probe, verbatim where one exists. */
+  probe: string | null
+  /** How to repair it. */
+  recovery: string | null
+}
+
+/**
+ * Parse `## Misconceptions` from an EB concept entry.
+ *
+ * The authored shape is stable across the corpus:
+ *
+ *     **M1 — Units are interchangeable labels on the same number**
+ *     - *Why*: ...
+ *     - *Symptom / phrases*: ...
+ *     - *Detection probe (verbatim)*: "..."
+ *     - *Recovery*: ...
+ *
+ * Field labels vary a little between batches (`Detection probe`,
+ * `Detection probe (verbatim)`, `Symptom`, `Symptom / phrases`), so matching is
+ * on the label's stem rather than an exact string. An entry that yields only a
+ * title is still returned: knowing the claim exists is what stops the tutor
+ * agreeing with it, and that is the failure this closes.
+ */
+function parseEBMisconceptions(content: string): EBMisconception[] {
+  const raw = extractEBSection(content, 'Misconceptions', 'Misconception library', 'Misconception Library')
+  if (!raw) return []
+
+  const out: EBMisconception[] = []
+  // Split on the bolded heading that opens each entry, keeping the heading.
+  const blocks = raw.split(/\n(?=\s*\*\*\s*M\d+\s*[—–-])/)
+
+  for (const block of blocks) {
+    const head = /\*\*\s*(M\d+)\s*[—–-]\s*([^*\n]+?)\s*\*\*/.exec(block)
+    if (!head) continue
+
+    const field = (...stems: string[]): string | null => {
+      for (const stem of stems) {
+        // `- *Label ...*: body` — body runs to the next bulleted field or the
+        // end of the block, so a wrapped multi-line value survives intact.
+        const re = new RegExp(
+          `\\*\\s*${stem}[^*]*\\*\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*-\\s*\\*|\\n\\s*\\*\\*\\s*M\\d|$)`,
+          'i',
+        )
+        const m = re.exec(block)
+        if (m?.[1]) {
+          const v = m[1].replace(/\s+/g, ' ').trim()
+          if (v) return v.slice(0, 400)
+        }
+      }
+      return null
+    }
+
+    out.push({
+      id: head[1],
+      title: head[2].trim(),
+      symptom: field('Symptom'),
+      probe: field('Detection probe', 'Probe'),
+      recovery: field('Recovery'),
+    })
+    // Budget guard: a handful is what a prompt can act on, and every concept
+    // entry pays this cost on every turn.
+    if (out.length >= 6) break
+  }
+
+  return out
+}
+
 // ── P1: Teaching Sequence / Tutor Actions / Discovery / Assessment ──────────
 
 /**
@@ -1128,6 +1239,7 @@ export function loadEBConceptContext(conceptId: string): EBConceptContextResult 
       recoveryShrinkTo: shrinkTo,
       recoveryTriggers: triggers,
       antiAnalogies: parseEBAntiAnalogies(raw),
+      ebMisconceptions: parseEBMisconceptions(raw),
       voiceDetectionCues: parseEBVoiceDetectionCues(raw),
       openingScenario: parseEBOpeningScenario(raw),
       teachingSequence: parseEBTeachingSequence(raw),
@@ -1306,6 +1418,70 @@ export function buildBlueprintContextBlock(
       if (mc.bridge) lines.push(`  Correction: ${mc.bridge}`)
       if (mc.replacementConcept) lines.push(`  Install: ${mc.replacementConcept}`)
     }
+  }
+
+  // The Educational Brain's own misconception library.
+  //
+  // Emitted AFTER the Blueprint's register and deduped against it: the
+  // Blueprint keeps its existing authority, this adds the layer that was
+  // being dropped. Opened as its own headed list when the Blueprint had none,
+  // so a concept with only an EB entry still gets the warning.
+  //
+  // The instruction is deliberately stronger than the Blueprint section's
+  // "watch for these". Watching was not the failure — the tutor AGREED with
+  // the learner's misconception and then restated it as fact. What was
+  // missing is the explicit prohibition on affirming one.
+  const ebMcs = ebContext?.ebMisconceptions ?? []
+  if (ebMcs.length > 0) {
+    const seen = new Set(
+      content.misconceptions.map((m) => (m.title ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()),
+    )
+    const fresh = ebMcs.filter((m) => {
+      const key = (m.title ?? '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim()
+      return key && !seen.has(key)
+    })
+    if (fresh.length > 0) {
+      if (!hasContent) {
+        lines.push('\n\nBLUEPRINT CONTEXT')
+        lines.push(`Concept: ${content.conceptId}`)
+        hasContent = true
+      }
+      lines.push(
+        content.misconceptions.length > 0
+          ? '\nFURTHER KNOWN MISCONCEPTIONS (Educational Brain):'
+          : '\nKNOWN MISCONCEPTIONS — watch for these and address them directly if the student shows signs:',
+      )
+      for (const mc of fresh) {
+        lines.push(`\n${mc.id}: "${mc.title}"`)
+        if (mc.symptom) lines.push(`  Watch for: ${mc.symptom}`)
+        if (mc.probe) lines.push(`  Probe: ${mc.probe}`)
+        if (mc.recovery) lines.push(`  Repair: ${mc.recovery}`)
+      }
+    }
+  }
+
+  // THE RULE THAT WAS MISSING, and the reason this whole section exists.
+  //
+  // Listing misconceptions only helps if the model does not agree with one
+  // when the learner proposes it. Measured on `phys.meas.units`: the learner
+  // asked "is a unit just the name of the thing youre counting" and got "Yes,
+  // exactly", then "That is completely right—when you are counting fruit,
+  // 'apples' is the unit." A wrong claim, twice, in the tutor's own voice.
+  //
+  // Emitted whenever any misconception knowledge is present, from either
+  // source, because the failure is not concept-specific.
+  if (content.misconceptions.length > 0 || ebMcs.length > 0) {
+    lines.push(
+      '\nNEVER CONFIRM A WRONG CLAIM. If the student proposes something ' +
+      'incorrect — including as a question ("is it just X?", "so it\'s X ' +
+      'right?") — do NOT open with "yes", "exactly", "that is right", "spot ' +
+      'on" or any other agreement, and do not agree first and correct ' +
+      'afterwards. Say plainly that it is not quite right, say what is ' +
+      'actually true, and only then build on it. Agreeing and then quietly ' +
+      'substituting the correct idea leaves the student holding the wrong ' +
+      'one, because they heard the agreement. This applies even when their ' +
+      'phrasing is close to correct: name the difference explicitly.',
+    )
   }
 
   // Section 5 — Explanation Library
