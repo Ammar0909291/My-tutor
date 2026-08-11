@@ -403,10 +403,10 @@ function LessonDocument({ text }: { text: string }) {
       {blocks.map((b, idx) => {
         if (b.type === 'heading') {
           const styles = b.level === 1
-            ? { fontSize: 27, fontWeight: 800, marginTop: idx === 0 ? 0 : 28, marginBottom: 10, letterSpacing: '-0.01em' }
+            ? { fontSize: 32.4, fontWeight: 800, marginTop: idx === 0 ? 0 : 28, marginBottom: 10, letterSpacing: '-0.01em' }
             : b.level === 2
-            ? { fontSize: 20, fontWeight: 750, marginTop: 26, marginBottom: 10 }
-            : { fontSize: 16.5, fontWeight: 700, marginTop: 18, marginBottom: 6 }
+            ? { fontSize: 24, fontWeight: 750, marginTop: 26, marginBottom: 10 }
+            : { fontSize: 19.8, fontWeight: 700, marginTop: 18, marginBottom: 6 }
           return (
             <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: 10, ...styles }}>
               {b.level === 2 && <span style={{ width: 4, height: 18, borderRadius: 2, background: 'var(--coral)', flexShrink: 0 }} />}
@@ -421,10 +421,10 @@ function LessonDocument({ text }: { text: string }) {
               margin: '16px 0', padding: '14px 16px', borderRadius: 12,
               background: cs.bg, borderLeft: `3px solid ${cs.color}`,
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, fontSize: 12, fontWeight: 700, color: cs.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                <span style={{ fontSize: 14 }}>{cs.icon}</span>{cs.label}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6, fontSize: 14.4, fontWeight: 700, color: cs.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: 16.8 }}>{cs.icon}</span>{cs.label}
               </div>
-              <div style={{ fontSize: 15, lineHeight: 1.7 }}>
+              <div style={{ fontSize: 18, lineHeight: 1.7 }}>
                 {b.lines.map((l, j) => l.trim()
                   ? <p key={j} style={{ margin: j === 0 ? 0 : '4px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline, mathBlocks)}</p>
                   : <div key={j} style={{ height: 6 }} />)}
@@ -439,7 +439,7 @@ function LessonDocument({ text }: { text: string }) {
               <pre key={idx} style={{
                 margin: '16px 0', padding: '14px 16px', borderRadius: 12,
                 background: 'var(--bg-void)', border: '1px solid var(--panel-border)',
-                fontFamily: 'var(--font-mono)', fontSize: 13.5, lineHeight: 1.6, overflowX: 'auto',
+                fontFamily: 'var(--font-mono)', fontSize: 16.2, lineHeight: 1.6, overflowX: 'auto',
               }}>{b.text}</pre>
             )
           }
@@ -449,10 +449,10 @@ function LessonDocument({ text }: { text: string }) {
               margin: '16px 0', padding: '14px 16px', borderRadius: 12,
               background: cs.bg, border: `1px solid ${cs.color}33`,
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, fontSize: 12, fontWeight: 700, color: cs.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                <span style={{ fontSize: 14 }}>{cs.icon}</span>{b.lang ? b.lang : cs.label}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, fontSize: 14.4, fontWeight: 700, color: cs.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: 16.8 }}>{cs.icon}</span>{b.lang ? b.lang : cs.label}
               </div>
-              <pre style={{ margin: 0, fontFamily: 'var(--font-mono)', fontSize: 13.5, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: 'var(--text-secondary)' }}>{b.text}</pre>
+              <pre style={{ margin: 0, fontFamily: 'var(--font-mono)', fontSize: 16.2, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', color: 'var(--text-secondary)' }}>{b.text}</pre>
             </div>
           )
         }
@@ -460,7 +460,7 @@ function LessonDocument({ text }: { text: string }) {
           return (
             <div key={idx} style={{ margin: '10px 0', display: 'flex', flexDirection: 'column', gap: 6 }}>
               {b.items.map((item, j) => (
-                <div key={j} style={{ display: 'flex', gap: 10, fontSize: 15, lineHeight: 1.65 }}>
+                <div key={j} style={{ display: 'flex', gap: 10, fontSize: 18, lineHeight: 1.65 }}>
                   <span style={{ flexShrink: 0, color: 'var(--coral)', fontWeight: 700, fontFamily: b.ordered ? 'var(--font-mono)' : undefined }}>
                     {b.ordered ? `${j + 1}.` : '▸'}
                   </span>
@@ -471,7 +471,7 @@ function LessonDocument({ text }: { text: string }) {
           )
         }
         return (
-          <div key={idx} style={{ margin: '12px 0', fontSize: 15.5, lineHeight: 1.75 }}>
+          <div key={idx} style={{ margin: '12px 0', fontSize: 18.6, lineHeight: 1.75 }}>
             {b.lines.map((l, j) => <p key={j} style={{ margin: j === 0 ? 0 : '6px 0 0' }}>{renderInline(l, `${idx}-${j}`, codeInline, mathBlocks)}</p>)}
           </div>
         )
@@ -514,7 +514,7 @@ function AiBadge({ provider }: { provider: string }) {
         height: 14,
         padding: '0 6px',
         borderRadius: 999,
-        fontSize: 9,
+        fontSize: 10.8,
         fontWeight: 700,
         letterSpacing: 0.5,
         color: '#fff',
@@ -525,7 +525,7 @@ function AiBadge({ provider }: { provider: string }) {
         userSelect: 'none',
       }}
     >
-      <span aria-hidden style={{ fontSize: 7, opacity: 0.9 }}>✦</span>
+      <span aria-hidden style={{ fontSize: 8.4, opacity: 0.9 }}>✦</span>
       AI
     </span>
   )
@@ -552,7 +552,7 @@ function MemoryBadge() {
         height: 14,
         padding: '0 6px',
         borderRadius: 999,
-        fontSize: 9,
+        fontSize: 10.8,
         fontWeight: 700,
         letterSpacing: 0.5,
         color: '#fff',
@@ -563,7 +563,7 @@ function MemoryBadge() {
         userSelect: 'none',
       }}
     >
-      <span aria-hidden style={{ fontSize: 8 }}>🧠</span>
+      <span aria-hidden style={{ fontSize: 9.6 }}>🧠</span>
       Brain
     </span>
   )
@@ -584,7 +584,7 @@ function InlinePracticePrompt({ practice, onAnswered }: { practice: InlinePracti
       <Pill color="var(--candy-purple, var(--coral))" style={{ marginBottom: 10 }}>
         🎯 Quick check
       </Pill>
-      <p style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.5, color: 'var(--text-primary)', margin: '0 0 12px' }}>
+      <p style={{ fontSize: 16.8, fontWeight: 700, lineHeight: 1.5, color: 'var(--text-primary)', margin: '0 0 12px' }}>
         {practice.question}
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -611,12 +611,12 @@ function InlinePracticePrompt({ practice, onAnswered }: { practice: InlinePracti
               style={{
                 width: '100%', textAlign: 'left', display: 'flex', alignItems: 'center', gap: 10,
                 padding: '10px 14px', borderRadius: 12, background: bg, border,
-                fontSize: 13, fontWeight: 600, color: 'var(--text-primary)',
+                fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)',
               }}
             >
               <span style={{
                 width: 24, height: 24, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 11, fontWeight: 800, flexShrink: 0, background: 'var(--border-subtle)', color: 'var(--text-dim)',
+                fontSize: 13.2, fontWeight: 800, flexShrink: 0, background: 'var(--border-subtle)', color: 'var(--text-dim)',
               }}>
                 {['A', 'B', 'C', 'D'][i]}
               </span>
@@ -628,7 +628,7 @@ function InlinePracticePrompt({ practice, onAnswered }: { practice: InlinePracti
         })}
       </div>
       {selected !== null && (
-        <p style={{ fontSize: 12, fontWeight: 700, margin: '10px 0 0', color: correct ? 'var(--green, #22c55e)' : 'var(--red, #ef4444)' }}>
+        <p style={{ fontSize: 14.4, fontWeight: 700, margin: '10px 0 0', color: correct ? 'var(--green, #22c55e)' : 'var(--red, #ef4444)' }}>
           {correct ? '✓ Correct!' : `✗ Not quite — the answer is "${practice.answer}".`}
         </p>
       )}
@@ -650,7 +650,7 @@ function FamiliarityChoice({ parsed, onChoose }: { parsed: FamiliarityQuestion; 
 
   return (
     <Card style={{ padding: 16, maxWidth: '90%' }} data-testid="familiarity-choice">
-      <p style={{ fontSize: 13.5, fontWeight: 700, lineHeight: 1.5, color: 'var(--text-primary)', margin: '0 0 10px' }}>
+      <p style={{ fontSize: 16.2, fontWeight: 700, lineHeight: 1.5, color: 'var(--text-primary)', margin: '0 0 10px' }}>
         {parsed.question}
       </p>
       {/* radiogroup, not a list of buttons: the control has to ANNOUNCE that
@@ -674,7 +674,7 @@ function FamiliarityChoice({ parsed, onChoose }: { parsed: FamiliarityQuestion; 
                 padding: '10px 14px', borderRadius: 12,
                 background: isSelected ? 'rgba(99,102,241,0.12)' : 'var(--bg-elevated, transparent)',
                 border: `2px solid ${isSelected ? '#6366f1' : 'var(--border-subtle)'}`,
-                fontSize: 13, fontWeight: 600, color: 'var(--text-primary)',
+                fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)',
                 opacity: selected !== null && !isSelected ? 0.5 : 1,
               }}
             >
@@ -712,7 +712,7 @@ function HintCard({ hint }: { hint: string }) {
         style={{
           width: '100%', display: 'flex', alignItems: 'center', gap: 10,
           background: 'transparent', padding: 0,
-          fontSize: 13, fontWeight: 700, color: 'var(--text-primary)',
+          fontSize: 15.6, fontWeight: 700, color: 'var(--text-primary)',
         }}
       >
         <Lightbulb size={17} style={{ flexShrink: 0, color: 'var(--candy-yellow-d)' }} />
@@ -720,7 +720,7 @@ function HintCard({ hint }: { hint: string }) {
         {revealed ? <ChevronUp size={15} style={{ marginLeft: 'auto', color: 'var(--text-dim)' }} /> : <ChevronDown size={15} style={{ marginLeft: 'auto', color: 'var(--text-dim)' }} />}
       </CandyButton>
       {revealed && (
-        <p style={{ fontSize: 13, fontWeight: 500, lineHeight: 1.5, color: 'var(--text-primary)', margin: '10px 0 0' }}>
+        <p style={{ fontSize: 15.6, fontWeight: 500, lineHeight: 1.5, color: 'var(--text-primary)', margin: '10px 0 0' }}>
           {hint}
         </p>
       )}
@@ -831,7 +831,7 @@ function QuickActionsAndCheck({
     <div style={{ flex: 1, overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 16 }}>
       {/* What would you like to do? */}
       <div>
-        <p style={{ fontSize: 12.5, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>
+        <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>
           {t('lesson_what_to_do')}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -849,7 +849,7 @@ function QuickActionsAndCheck({
                 style={{
                   display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderRadius: 10,
                   background: c.bg, color: c.fg, border: 'none', cursor: sessionId ? 'pointer' : 'not-allowed',
-                  fontSize: 12.5, fontWeight: 700, textAlign: 'left',
+                  fontSize: 15, fontWeight: 700, textAlign: 'left',
                 }}>
                 <Icon size={15} style={{ flexShrink: 0 }} />
                 {a.label}
@@ -3090,7 +3090,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center' }}>
             <button
               onClick={retryInit}
-              style={{ padding: '9px 20px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
+              style={{ padding: '9px 20px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
               {t('lesson_connect_retry')}
             </button>
             <Link href="/dashboard" className="text-sm" style={{ color: 'var(--coral)' }}>{t('lesson_back_base')}</Link>
@@ -3137,7 +3137,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               background: item.active ? `${UI.indigo}14` : 'transparent',
             }}>
               {item.icon}
-              <span style={{ fontSize: 9.5, fontWeight: item.active ? 700 : 500, textAlign: 'center' }}>{item.label}</span>
+              <span style={{ fontSize: 11.4, fontWeight: item.active ? 700 : 500, textAlign: 'center' }}>{item.label}</span>
             </div>
           )
           return item.href
@@ -3149,7 +3149,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
         {/* Today's Goal ring — real cross-session minutes today (StudySession) + this session's live elapsed time, vs a 60-min target */}
         <div style={{ width: '100%', padding: '10px 6px', textAlign: 'center' }}>
-          <p style={{ fontSize: 9.5, fontWeight: 700, color: 'var(--text-dim)', marginBottom: 8 }}>
+          <p style={{ fontSize: 11.4, fontWeight: 700, color: 'var(--text-dim)', marginBottom: 8 }}>
             {t('lesson_today_goal')}
           </p>
           <div style={{ position: 'relative', width: 56, height: 56, margin: '0 auto' }}>
@@ -3159,12 +3159,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 strokeDasharray={2 * Math.PI * 24} strokeDashoffset={2 * Math.PI * 24 * (1 - goalPct / 100)}
                 style={{ transition: 'stroke-dashoffset 600ms ease' }} />
             </svg>
-            <span style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: 'var(--text-primary)' }}>
+            <span style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14.4, fontWeight: 800, color: 'var(--text-primary)' }}>
               {goalPct}%
             </span>
           </div>
-          <p style={{ fontSize: 9.5, color: 'var(--text-dim)', marginTop: 6 }}>{goalDoneMin} / {goalTargetMin} min</p>
-          <Link href="/progress" style={{ fontSize: 9.5, color: UI.indigo, fontWeight: 700, textDecoration: 'none', display: 'inline-block', marginTop: 2 }}>
+          <p style={{ fontSize: 11.4, color: 'var(--text-dim)', marginTop: 6 }}>{goalDoneMin} / {goalTargetMin} min</p>
+          <Link href="/progress" style={{ fontSize: 11.4, color: UI.indigo, fontWeight: 700, textDecoration: 'none', display: 'inline-block', marginTop: 2 }}>
             {t('lesson_view_progress')}
           </Link>
         </div>
@@ -3177,8 +3177,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         <div className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center">
           <Card className="animate-bounce" style={{ padding: '20px 28px', textAlign: 'center', boxShadow: '0 4px 0 var(--coral)' }}>
             <EagleMascot variant="hero" size={72} className="mx-auto mb-2" />
-            <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--coral)', fontFamily: 'var(--font-baloo2)' }}>+10 XP</div>
-            <div style={{ fontSize: 13, marginTop: 4, color: 'var(--text-secondary)' }}>
+            <div style={{ fontSize: 26.4, fontWeight: 800, color: 'var(--coral)', fontFamily: 'var(--font-baloo2)' }}>+10 XP</div>
+            <div style={{ fontSize: 15.6, marginTop: 4, color: 'var(--text-secondary)' }}>
               {t('lesson_complete_excl')}
             </div>
           </Card>
@@ -3221,21 +3221,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 boxShadow: '0 20px 60px rgba(0,0,0,0.45)',
               }}
             >
-              <h3 style={{ fontSize: 15, fontWeight: 700, marginBottom: 12, color: 'var(--text-primary)' }}>
+              <h3 style={{ fontSize: 18, fontWeight: 700, marginBottom: 12, color: 'var(--text-primary)' }}>
                 {title}
               </h3>
 
               {isReview ? (
-                <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
+                <p style={{ fontSize: 15.6, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
                   {t('lesson_dialog_review').replace('{lesson}', target.lessonTitle)}
                 </p>
               ) : isRestart ? (
-                <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
+                <p style={{ fontSize: 15.6, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 18 }}>
                   {t('lesson_dialog_restart_body').replace('{lesson}', target.lessonTitle)}
                 </p>
               ) : (
                 <>
-                  <p style={{ fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 10 }}>
+                  <p style={{ fontSize: 15.6, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 10 }}>
                     <strong style={{ color: 'var(--text-primary)' }}>{t('lesson_dialog_currently')}</strong> {currentLessonData.lessonTitle}<br/>
                     <strong style={{ color: 'var(--text-primary)' }}>{t('lesson_dialog_switch_to')}</strong> {target.lessonTitle}
                   </p>
@@ -3243,11 +3243,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       never COMPLETED. Say so plainly — the learner is choosing
                       between finishing and a visible gap in their record. */}
                   {!isCompletedNow && (
-                    <p style={{ fontSize: 12, color: AMBER_TEXT, lineHeight: 1.6, marginBottom: 10 }}>
+                    <p style={{ fontSize: 14.4, color: AMBER_TEXT, lineHeight: 1.6, marginBottom: 10 }}>
                       {t('lesson_dialog_incomplete_warning')}
                     </p>
                   )}
-                  <ul style={{ fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.7, paddingLeft: 18, marginBottom: 18 }}>
+                  <ul style={{ fontSize: 14.4, color: 'var(--text-dim)', lineHeight: 1.7, paddingLeft: 18, marginBottom: 18 }}>
                     {[t('lesson_dialog_progress_saved'), t('lesson_dialog_mastery_saved'), t('lesson_dialog_can_resume')]
                       .map((line) => <li key={line}>{line}</li>)}
                   </ul>
@@ -3255,7 +3255,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       target opens either way; this only tells the learner what
                       it normally builds on. */}
                   {targetMissingPrereqs.length > 0 && (
-                    <div style={{ fontSize: 12, color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: 18 }}>
+                    <div style={{ fontSize: 14.4, color: 'var(--text-dim)', lineHeight: 1.7, marginBottom: 18 }}>
                       <p style={{ marginBottom: 4 }}>{t('lesson_dialog_prereq_intro')}</p>
                       <ul style={{ paddingLeft: 18, marginBottom: 6 }}>
                         {targetMissingPrereqs.map((p) => <li key={p.slug}>{p.title}</li>)}
@@ -3272,7 +3272,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   style={{
                     padding: '8px 16px', borderRadius: 8, border: '1px solid var(--border-subtle)',
                     background: 'transparent', color: 'var(--text-secondary)',
-                    fontSize: 13, fontWeight: 500, cursor: 'pointer',
+                    fontSize: 15.6, fontWeight: 500, cursor: 'pointer',
                   }}
                 >
                   {t('lesson_dialog_cancel')}
@@ -3282,7 +3282,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   style={{
                     padding: '8px 18px', borderRadius: 8, border: 'none',
                     background: UI.indigo, color: '#fff',
-                    fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                    fontSize: 15.6, fontWeight: 600, cursor: 'pointer',
                   }}
                 >
                   {t('lesson_dialog_confirm')}
@@ -3323,8 +3323,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             <BookOpen size={17} />
           </div>
           <div className="hidden sm:block" style={{ lineHeight: 1.15 }}>
-            <p style={{ fontSize: 13.5, fontWeight: 800, color: 'var(--text-primary)' }}>My Tutor</p>
-            <p style={{ fontSize: 9.5, color: 'var(--text-dim)', fontWeight: 500 }}>
+            <p style={{ fontSize: 16.2, fontWeight: 800, color: 'var(--text-primary)' }}>My Tutor</p>
+            <p style={{ fontSize: 11.4, color: 'var(--text-dim)', fontWeight: 500 }}>
               {t('lesson_personal_tutor')}
             </p>
           </div>
@@ -3336,7 +3336,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             const otherSubjects = (subjects ?? []).filter((s) => s.slug !== subjectSlug)
             if (otherSubjects.length === 0) {
               return (
-                <span style={{ padding: '2px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent, border: `1px solid ${badge.accent}44`, flexShrink: 0 }}>
+                <span style={{ padding: '2px 10px', borderRadius: 20, fontSize: 13.2, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent, border: `1px solid ${badge.accent}44`, flexShrink: 0 }}>
                   {badge.label}
                 </span>
               )
@@ -3352,7 +3352,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   aria-expanded={subjectMenuOpen}
                   style={{
                     display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer',
-                    padding: '2px 8px 2px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700,
+                    padding: '2px 8px 2px 10px', borderRadius: 20, fontSize: 13.2, fontWeight: 700,
                     background: `${badge.accent}22`, color: badge.accent, border: `1px solid ${badge.accent}44`,
                   }}>
                   {badge.label}
@@ -3367,10 +3367,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden',
                     }}>
                       <div style={{ padding: '8px 12px', borderBottom: '1px solid var(--border-subtle)' }}>
-                        <div style={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)' }}>
+                        <div style={{ fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)' }}>
                           {t('learn_select_subject')}
                         </div>
-                        <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 2 }}>
+                        <div style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2 }}>
                           {(subjects ?? []).length} {t('learn_enrolled_count_many')} {t('learn_current_subject').toLowerCase()}: {subjectName}
                         </div>
                       </div>
@@ -3383,7 +3383,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             onClick={() => setSubjectMenuOpen(false)}
                             style={{
                               display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px',
-                              fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', textDecoration: 'none',
+                              fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', textDecoration: 'none',
                             }}
                             onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'var(--bg-hover)' }}
                             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = 'transparent' }}>
@@ -3398,12 +3398,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               </div>
             )
           })()}
-          <span style={{ color: 'var(--text-dim)', fontSize: 12 }}>·</span>
-          <span className="max-w-[120px] sm:max-w-[240px]" style={{ fontSize: 12, color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+          <span style={{ color: 'var(--text-dim)', fontSize: 14.4 }}>·</span>
+          <span className="max-w-[120px] sm:max-w-[240px]" style={{ fontSize: 14.4, color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {currentLessonData ? currentLessonData.lessonTitle : subjectName}
           </span>
-          <span className="hidden sm:inline" style={{ color: 'var(--text-dim)', fontSize: 12 }}>·</span>
-          <span className="hidden sm:inline" style={{ fontSize: 12, fontFamily: 'var(--font-mono)', fontVariantNumeric: 'tabular-nums', color: 'var(--text-secondary)', flexShrink: 0 }}>
+          <span className="hidden sm:inline" style={{ color: 'var(--text-dim)', fontSize: 14.4 }}>·</span>
+          <span className="hidden sm:inline" style={{ fontSize: 14.4, fontFamily: 'var(--font-mono)', fontVariantNumeric: 'tabular-nums', color: 'var(--text-secondary)', flexShrink: 0 }}>
             {formatTimer(elapsed)}
           </span>
           <div style={{ position: 'relative' }}>
@@ -3414,7 +3414,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               aria-expanded={langMenuOpen}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5, height: 30, padding: '0 10px', borderRadius: 8,
-                fontSize: 11.5, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
+                fontSize: 13.8, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
                 background: langMenuOpen ? `${UI.indigo}18` : 'var(--bg-elevated)',
                 color: langMenuOpen ? UI.indigo : 'var(--text-secondary)',
                 border: `1px solid ${langMenuOpen ? `${UI.indigo}55` : 'var(--border-default)'}`,
@@ -3432,13 +3432,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
                   boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
                 }}>
-                  <div style={{ padding: '8px 16px 6px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', borderBottom: '1px solid var(--border-subtle)' }}>
+                  <div style={{ padding: '8px 16px 6px', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', borderBottom: '1px solid var(--border-subtle)' }}>
                     {t('settings_lang')}
                   </div>
                   {(['en', 'ru', 'hi'] as TeachingLang[]).map((l) => (
                     <button key={l} onClick={() => handleLanguageChange(l)}
                       style={{
-                        padding: '8px 16px', fontSize: 12.5, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
+                        padding: '8px 16px', fontSize: 15, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
                         display: 'flex', alignItems: 'center', gap: 8,
                         background: teachingLanguage === l ? 'rgba(247,129,102,0.12)' : 'transparent',
                         color: teachingLanguage === l ? 'var(--coral)' : 'var(--text-primary)',
@@ -3461,7 +3461,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 <button key={k} onClick={() => handleVoiceChange(k)}
                   title={VOICE_LABELS_BY_LANG[uiLang as TeachingLang]?.[k] ?? VOICE_LABELS_BY_LANG.en[k]}
                   style={{
-                    width: 26, height: 26, borderRadius: 8, fontSize: 10.5, fontWeight: 700, cursor: 'pointer',
+                    width: 26, height: 26, borderRadius: 8, fontSize: 12.6, fontWeight: 700, cursor: 'pointer',
                     background: isActive ? UI.indigo : 'var(--bg-elevated)',
                     color: isActive ? '#fff' : 'var(--text-dim)',
                     border: 'none', transition: 'all 150ms',
@@ -3479,7 +3479,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               aria-expanded={speedMenuOpen}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5,
-                height: 30, padding: '0 10px', borderRadius: 8, fontSize: 11.5, fontWeight: 700, cursor: 'pointer',
+                height: 30, padding: '0 10px', borderRadius: 8, fontSize: 13.8, fontWeight: 700, cursor: 'pointer',
                 whiteSpace: 'nowrap', flexShrink: 0,
                 background: speedMenuOpen ? `${UI.indigo}18` : 'var(--bg-elevated)',
                 color: speedMenuOpen ? UI.indigo : 'var(--text-secondary)',
@@ -3498,13 +3498,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
                   boxShadow: '0 8px 24px rgba(0,0,0,0.4)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
                 }}>
-                  <div style={{ padding: '8px 16px 6px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', borderBottom: '1px solid var(--border-subtle)' }}>
+                  <div style={{ padding: '8px 16px 6px', fontSize: 12, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-dim)', borderBottom: '1px solid var(--border-subtle)' }}>
                     {t('settings_voice_speed')}
                   </div>
                   {VOICE_SPEED_OPTIONS.map((s) => (
                     <button key={s} onClick={() => handleSpeedChange(s)}
                       style={{
-                        padding: '8px 16px', fontSize: 12.5, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
+                        padding: '8px 16px', fontSize: 15, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
                         background: speed === s ? `${UI.indigo}18` : 'transparent',
                         color: speed === s ? UI.indigo : 'var(--text-primary)',
                       }}
@@ -3528,7 +3528,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             aria-label={t('lesson_profile_settings')}
             style={{
               width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
-              background: UI.indigo, color: '#fff', fontSize: 12.5, fontWeight: 800,
+              background: UI.indigo, color: '#fff', fontSize: 15, fontWeight: 800,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               textDecoration: 'none', cursor: 'pointer',
             }}>
@@ -3545,7 +3545,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           const isActive = activeTab === tab
           return (
             <button key={tab} onClick={() => setActiveTab(tab)} style={{
-              flex: 1, height: 40, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+              flex: 1, height: 40, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
               borderRadius: 14, border: 'none',
               background: isActive ? 'var(--coral)' : 'var(--bg-elevated)',
               color: isActive ? '#fff' : 'var(--text-secondary)',
@@ -3583,11 +3583,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             className={activeTab !== 'curriculum' ? 'hidden md:flex' : 'flex'}>
             {/* Header */}
             <PanelHeader>
-              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>
+              <span style={{ fontSize: 15.6, fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>
                 {t('lesson_roadmap')}
               </span>
               {totalLessons > 0 && currentLessonData && (
-                <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-dim)' }}>
+                <span style={{ fontSize: 13.2, fontWeight: 700, color: 'var(--text-dim)' }}>
                   {currentLessonData.order} {t('lesson_of')} {totalLessons}
                 </span>
               )}
@@ -3597,7 +3597,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 onClick={() => setMaximizedPanel(maximizedPanel === 'curriculum' ? null : 'curriculum')}
                 title={maximizedPanel === 'curriculum' ? t('learn_restore') : t('learn_maximize')}
                 aria-label={maximizedPanel === 'curriculum' ? t('learn_restore') : t('learn_maximize')}
-                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 12, flexShrink: 0 }}>
+                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 14.4, flexShrink: 0 }}>
                 {maximizedPanel === 'curriculum' ? '⊡' : '⊞'}
               </button>
             </PanelHeader>
@@ -3608,7 +3608,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 <div style={{ height: 6, borderRadius: 3, background: 'var(--bg-elevated)', overflow: 'hidden' }}>
                   <div style={{ height: '100%', width: `${xpProgress}%`, background: UI.indigo, borderRadius: 3, transition: 'width 600ms ease' }} />
                 </div>
-                <p style={{ fontSize: 10.5, color: 'var(--text-dim)', fontWeight: 700, marginTop: 5 }}>
+                <p style={{ fontSize: 12.6, color: 'var(--text-dim)', fontWeight: 700, marginTop: 5 }}>
                   {xpProgress}% {t('lesson_complete_pct')}
                 </p>
               </div>
@@ -3639,13 +3639,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 background: 'rgba(121,192,255,0.08)',
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6,
               }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: '#79C0FF' }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#79C0FF' }}>
                   {t('revision_mode')}: {revisionTopic.lessonTitle}
                 </span>
                 <button
                   onClick={() => setRevisionTopic(null)}
                   style={{
-                    fontSize: 9, padding: '2px 6px', borderRadius: 4, cursor: 'pointer', flexShrink: 0,
+                    fontSize: 10.8, padding: '2px 6px', borderRadius: 4, cursor: 'pointer', flexShrink: 0,
                     background: 'rgba(121,192,255,0.12)', color: '#79C0FF',
                     border: '1px solid rgba(121,192,255,0.3)', fontWeight: 600,
                   }}>
@@ -3657,10 +3657,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {/* Goal card for current lesson */}
             {currentLessonData?.lessonGoal && (
               <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)', background: `${UI.indigo}0c` }}>
-                <p style={{ fontSize: 10, color: UI.indigo, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
+                <p style={{ fontSize: 12, color: UI.indigo, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
                   🎯 {t('lesson_goal_label')}
                 </p>
-                <p style={{ fontSize: 11, color: 'var(--text-primary)', marginTop: 3, lineHeight: 1.4 }}>{currentLessonData.lessonGoal}</p>
+                <p style={{ fontSize: 13.2, color: 'var(--text-primary)', marginTop: 3, lineHeight: 1.4 }}>{currentLessonData.lessonGoal}</p>
               </div>
             )}
 
@@ -3668,7 +3668,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {currentLessonData && totalLessons > 0 && (
               <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)' }}>
                 <div style={{ marginBottom: 8 }}>
-                  <span style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 600 }}>
+                  <span style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 600 }}>
                     {t('progress_lesson_label')} {currentLessonData.order} / {totalLessons}
                   </span>
                 </div>
@@ -3678,25 +3678,25 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     title={t('lesson_restart_title')}
                     style={{
                       width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                      padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                      padding: '7px 10px', borderRadius: 8, fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
                       background: 'rgba(63,185,80,0.1)', color: 'var(--green)',
                       border: '1px solid rgba(63,185,80,0.3)',
                     }}>
                     <span>{t('lesson_completed_btn')}</span>
-                    <span style={{ opacity: 0.7, fontSize: 10 }}>↺ {t('lesson_restart_btn')}</span>
+                    <span style={{ opacity: 0.7, fontSize: 12 }}>↺ {t('lesson_restart_btn')}</span>
                   </button>
                 ) : skipConfirm ? (
                   /* Mastery gate (Bug 4): completion without verified mastery is
                      an explicit choice, never a silent skip. Default: Continue. */
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    <p style={{ fontSize: 11, color: 'var(--text-primary)', lineHeight: 1.5 }}>
+                    <p style={{ fontSize: 13.2, color: 'var(--text-primary)', lineHeight: 1.5 }}>
                       {t('lesson_not_mastered_gate')}
                     </p>
                     <button
                       onClick={() => setSkipConfirm(false)}
                       autoFocus
                       style={{
-                        width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                        width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
                         background: UI.indigo, color: '#fff', border: 'none',
                       }}>
                       📚 {t('lesson_continue_learning')}
@@ -3704,7 +3704,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     <button
                       onClick={() => { setSkipConfirm(false); handleSkipAnyway(currentLessonData.order, currentLessonData) }}
                       style={{
-                        width: '100%', padding: '7px 10px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
+                        width: '100%', padding: '7px 10px', borderRadius: 8, fontSize: 13.2, fontWeight: 600, cursor: 'pointer',
                         background: 'transparent', color: 'var(--text-dim)', border: '1px solid var(--border-subtle)',
                       }}>
                       {t('lesson_skip_anyway')}
@@ -3716,7 +3716,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       ? void completeAndAdvance(currentLessonData.order, currentLessonData)
                       : setSkipConfirm(true)}
                     style={{
-                      width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                      width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
                       background: UI.indigo, color: '#fff', border: 'none',
                     }}>
                     {t('complete_lesson_btn')}
@@ -3728,11 +3728,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {/* Subject completed banner + Final Assessment (Sprint N — TASK 4/5) */}
             {curriculumProgress.isCompleted && (
               <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)', background: 'rgba(86,211,100,0.06)' }}>
-                <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)' }}>{t('subject_complete_title')}</p>
-                <p style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 2 }}>{t('subject_complete_sub')}</p>
+                <p style={{ fontSize: 13.2, fontWeight: 700, color: 'var(--green)' }}>{t('subject_complete_title')}</p>
+                <p style={{ fontSize: 12, color: 'var(--text-dim)', marginTop: 2 }}>{t('subject_complete_sub')}</p>
                 <button onClick={() => setFinalAssessmentOpen(true)}
                   style={{
-                    marginTop: 8, width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                    marginTop: 8, width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
                     background: 'rgba(86,211,100,0.15)', color: 'var(--green)', border: '1px solid rgba(86,211,100,0.35)',
                   }}>
                   🏆 {t('take_final_assessment')}
@@ -3752,7 +3752,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 style={{
                   margin: '8px 12px 0', padding: '8px 10px', borderRadius: 10, cursor: 'pointer',
                   background: 'transparent', color: 'var(--text-secondary)',
-                  border: '1px solid var(--border-subtle)', fontSize: 11.5, fontWeight: 600,
+                  border: '1px solid var(--border-subtle)', fontSize: 13.8, fontWeight: 600,
                   textAlign: 'left',
                 }}
               >
@@ -3763,7 +3763,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {/* Curriculum tree */}
             <div style={{ flex: 1, overflowY: 'auto', padding: '8px 0' }}>
               {curriculumUnits.length === 0 ? (
-                <div style={{ padding: 16, fontSize: 12, color: 'var(--text-dim)', textAlign: 'center' }}>
+                <div style={{ padding: 16, fontSize: 14.4, color: 'var(--text-dim)', textAlign: 'center' }}>
                   {!curriculumLoaded
                     ? t('lesson_loading_curriculum')
                     : t('lesson_no_curriculum')}
@@ -3786,21 +3786,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     }}
                   >
                     <span style={{
-                      fontSize: 9, color: 'var(--text-dim)', flexShrink: 0,
+                      fontSize: 10.8, color: 'var(--text-dim)', flexShrink: 0,
                       transform: expandedUnits.includes(unit.number) ? 'rotate(90deg)' : 'none',
                       transition: 'transform 200ms', display: 'inline-block',
                     }}>▶</span>
                     <span style={{
                       background: unitComplete ? 'rgba(63,185,80,0.15)' : `${UI.indigo}18`,
                       color: unitComplete ? 'var(--green)' : UI.indigo,
-                      borderRadius: 4, padding: '1px 5px', fontSize: 9, fontWeight: 700, flexShrink: 0,
+                      borderRadius: 4, padding: '1px 5px', fontSize: 10.8, fontWeight: 700, flexShrink: 0,
                     }}>{unitComplete ? '✅' : `U${unit.number}`}</span>
                     <span style={{
-                      fontSize: 10, fontWeight: 600, color: 'var(--text-secondary)',
+                      fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)',
                       textTransform: 'uppercase', letterSpacing: '0.04em', flex: 1,
                       overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
                     }}>{unit.title}</span>
-                    <span style={{ fontSize: 10, color: unitComplete ? 'var(--green)' : 'var(--text-dim)', flexShrink: 0 }}>
+                    <span style={{ fontSize: 12, color: unitComplete ? 'var(--green)' : 'var(--text-dim)', flexShrink: 0 }}>
                       {unitComplete ? t('unit_complete_badge') : `${unit.completedCount}/${unit.totalLessons} · ${unitPct}%`}
                     </span>
                   </div>
@@ -3868,12 +3868,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 opacity: isLocked ? 0.6 : 1,
                               }}
                             >
-                              <span style={{ fontSize: 11, marginTop: 1, flexShrink: 0, color: iconColor }}>
+                              <span style={{ fontSize: 13.2, marginTop: 1, flexShrink: 0, color: iconColor }}>
                                 {icon}
                               </span>
                               <div style={{ flex: 1, minWidth: 0 }}>
                                 <div style={{
-                                  fontSize: 11, lineHeight: 1.3,
+                                  fontSize: 13.2, lineHeight: 1.3,
                                   fontWeight: isCurrent ? 600 : 400,
                                   color: (isCompleted || isMastered) ? 'var(--border-emphasis)'
                                     : isRevision ? '#79C0FF'
@@ -3885,12 +3885,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 }}>
                                   {lesson.order}. {lesson.lessonTitle}
                                   {topicData && topicData.masteryPct > 0 && (isCompleted || isMastered || isRevision) && (
-                                    <span style={{ marginLeft: 4, fontSize: 9, color: 'var(--text-dim)', fontWeight: 400 }}>
+                                    <span style={{ marginLeft: 4, fontSize: 10.8, color: 'var(--text-dim)', fontWeight: 400 }}>
                                       {topicData.masteryPct}%
                                     </span>
                                   )}
                                   {isRevision && topicData?.revisionCount && topicData.revisionCount > 0 && (
-                                    <span style={{ marginLeft: 4, fontSize: 9, color: '#79C0FF', fontWeight: 600 }}>
+                                    <span style={{ marginLeft: 4, fontSize: 10.8, color: '#79C0FF', fontWeight: 600 }}>
                                       ×{topicData.revisionCount}
                                     </span>
                                   )}
@@ -3900,7 +3900,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                   {isCurrent && (
                                     <>
                                       <span style={{
-                                        fontSize: 9, fontWeight: 700, padding: '1px 6px', borderRadius: 10,
+                                        fontSize: 10.8, fontWeight: 700, padding: '1px 6px', borderRadius: 10,
                                         background: `${UI.indigo}18`, color: UI.indigo,
                                       }}>
                                         {t('lesson_current_label')}
@@ -3918,7 +3918,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                             setActiveTab('chat')
                                           }}
                                           style={{
-                                            fontSize: 9, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
+                                            fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
                                             background: `${UI.indigo}18`, color: UI.indigo,
                                             border: `1px solid ${UI.indigo}4d`, fontWeight: 600,
                                           }}>
@@ -3926,7 +3926,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                         </button>
                                       )}
                                       {assessmentLoading && (
-                                        <span style={{ fontSize: 9, color: 'var(--text-dim)' }}>{t('assess_loading')}</span>
+                                        <span style={{ fontSize: 10.8, color: 'var(--text-dim)' }}>{t('assess_loading')}</span>
                                       )}
                                     </>
                                   )}
@@ -3934,7 +3934,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                     <button
                                       onClick={(e) => { e.stopPropagation(); startRevision(lesson) }}
                                       style={{
-                                        fontSize: 9, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
+                                        fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
                                         background: 'rgba(121,192,255,0.1)', color: '#79C0FF',
                                         border: '1px solid rgba(121,192,255,0.3)', fontWeight: 600,
                                       }}>
@@ -3945,7 +3945,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                     <button
                                       onClick={(e) => { e.stopPropagation(); initiateSkip(lesson) }}
                                       style={{
-                                        fontSize: 9, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
+                                        fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
                                         background: 'rgba(245,158,11,0.08)', color: '#F59E0B',
                                         border: '1px solid rgba(245,158,11,0.25)', fontWeight: 600,
                                       }}>
@@ -3956,7 +3956,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                     <button
                                       onClick={(e) => { e.stopPropagation(); lesson.topicSlug && resumeTopic(lesson.topicSlug) }}
                                       style={{
-                                        fontSize: 9, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
+                                        fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
                                         background: 'rgba(245,158,11,0.1)', color: '#F59E0B',
                                         border: '1px solid rgba(245,158,11,0.3)', fontWeight: 600,
                                       }}>
@@ -3983,7 +3983,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                       aria-label={`${t('kg_prereqs_needed')}: ${lesson.lessonTitle}`}
                                       aria-expanded={isLockExpanded}
                                       style={{
-                                        fontSize: 10, color: 'var(--text-dim)', background: 'transparent',
+                                        fontSize: 12, color: 'var(--text-dim)', background: 'transparent',
                                         border: 'none', padding: '5px 2px', minHeight: 24, cursor: 'pointer',
                                         fontFamily: 'inherit', textAlign: 'left',
                                       }}>
@@ -4002,19 +4002,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 background: 'rgba(245,158,11,0.07)',
                                 border: '1px solid rgba(245,158,11,0.25)',
                               }}>
-                                <div style={{ fontSize: 9, fontWeight: 700, color: '#F59E0B', marginBottom: 4 }}>
+                                <div style={{ fontSize: 10.8, fontWeight: 700, color: '#F59E0B', marginBottom: 4 }}>
                                   ⚠ {t('skip_warning')}
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 6 }}>
                                   {skipWarning.unlocks.map((u) => (
-                                    <span key={u.slug} style={{ fontSize: 9, color: 'var(--text-dim)' }}>• {u.title}</span>
+                                    <span key={u.slug} style={{ fontSize: 10.8, color: 'var(--text-dim)' }}>• {u.title}</span>
                                   ))}
                                 </div>
                                 <div style={{ display: 'flex', gap: 4 }}>
                                   <button
                                     onClick={() => confirmSkip(skipWarning.topicSlug)}
                                     style={{
-                                      fontSize: 9, padding: '2px 7px', borderRadius: 4, cursor: 'pointer',
+                                      fontSize: 10.8, padding: '2px 7px', borderRadius: 4, cursor: 'pointer',
                                       background: 'rgba(245,158,11,0.15)', color: '#F59E0B',
                                       border: '1px solid rgba(245,158,11,0.4)', fontWeight: 700,
                                     }}>
@@ -4023,7 +4023,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                   <button
                                     onClick={() => setSkipWarning(null)}
                                     style={{
-                                      fontSize: 9, padding: '2px 7px', borderRadius: 4, cursor: 'pointer',
+                                      fontSize: 10.8, padding: '2px 7px', borderRadius: 4, cursor: 'pointer',
                                       background: 'transparent', color: 'var(--text-dim)',
                                       border: '1px solid var(--border-default)', fontWeight: 600,
                                     }}>
@@ -4056,10 +4056,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             {totalLessons > 0 && (
               <div style={{ padding: '10px 12px', borderTop: '1px solid var(--border-subtle)', flexShrink: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
-                  <span style={{ fontSize: 10, color: 'var(--border-emphasis)' }}>
+                  <span style={{ fontSize: 12, color: 'var(--border-emphasis)' }}>
                     {t('lesson_complete_label')}
                   </span>
-                  <span style={{ fontSize: 10, color: 'var(--text-secondary)' }}>
+                  <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
                     {curriculumProgress.completedLessons.length} / {totalLessons}
                   </span>
                 </div>
@@ -4072,10 +4072,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 </div>
                 {/* Sprint N — TASK 2: Subject / Unit progress % summary */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 6, gap: 8 }}>
-                  <span style={{ fontSize: 9, color: 'var(--text-dim)' }}>
+                  <span style={{ fontSize: 10.8, color: 'var(--text-dim)' }}>
                     {currentUnit ? `${t('unit_progress_label')} (U${currentUnit.number}): ${currentUnitPct}%` : ''}
                   </span>
-                  <span style={{ fontSize: 9, color: 'var(--text-dim)', fontWeight: 700 }}>
+                  <span style={{ fontSize: 10.8, color: 'var(--text-dim)', fontWeight: 700 }}>
                     {t('subject_progress_label')}: {xpProgress}%
                   </span>
                 </div>
@@ -4095,10 +4095,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   background: `${UI.indigo}18`, color: UI.indigo,
                 }}><Network size={15} /></span>
                 <span style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
+                  <p style={{ fontSize: 14.4, fontWeight: 700, color: 'var(--text-primary)' }}>
                     {t('lesson_knowledge_map')}
                   </p>
-                  <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
+                  <p style={{ fontSize: 12, color: 'var(--text-dim)' }}>
                     {t('lesson_knowledge_map_sub')}
                   </p>
                 </span>
@@ -4115,10 +4115,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   background: 'rgba(63,185,80,0.15)', color: 'var(--green)',
                 }}><ListChecks size={15} /></span>
                 <span style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
+                  <p style={{ fontSize: 14.4, fontWeight: 700, color: 'var(--text-primary)' }}>
                     {t('lesson_unit_overview')}
                   </p>
-                  <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
+                  <p style={{ fontSize: 12, color: 'var(--text-dim)' }}>
                     {t('lesson_unit_overview_sub')}
                   </p>
                 </span>
@@ -4153,13 +4153,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             <>
             {/* Header */}
             <PanelHeader>
-              <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 10, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent }}>{badge.label}</span>
-              <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{filename}</span>
-              <span style={{ color: 'var(--coral)', fontSize: 12, animation: 'blink 1s infinite' }}>_</span>
+              <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 12, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent }}>{badge.label}</span>
+              <span style={{ fontSize: 14.4, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{filename}</span>
+              <span style={{ color: 'var(--coral)', fontSize: 14.4, animation: 'blink 1s infinite' }}>_</span>
               <div style={{ flex: 1 }} />
               <button onClick={handleCopy}
                 style={{
-                  padding: '3px 10px', borderRadius: 6, fontSize: 11, cursor: 'pointer',
+                  padding: '3px 10px', borderRadius: 6, fontSize: 13.2, cursor: 'pointer',
                   background: 'transparent',
                   color: copied ? 'var(--green)' : 'var(--text-secondary)',
                   border: `1px solid ${copied ? 'rgba(63,185,80,0.4)' : 'var(--border-default)'}`,
@@ -4175,7 +4175,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 onClick={() => setMaximizedPanel(maximizedPanel === 'code' ? null : 'code')}
                 title={maximizedPanel === 'code' ? t('learn_restore') : t('learn_maximize')}
                 aria-label={maximizedPanel === 'code' ? t('learn_restore') : t('learn_maximize')}
-                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 12, flexShrink: 0 }}>
+                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 14.4, flexShrink: 0 }}>
                 {maximizedPanel === 'code' ? '⊡' : '⊞'}
               </button>
             </PanelHeader>
@@ -4186,7 +4186,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   height="100%" language={language} value={code} theme={monacoTheme}
                   beforeMount={handleEditorBeforeMount}
                   options={{
-                    readOnly: true, fontSize: 14, lineHeight: 1.7,
+                    readOnly: true, fontSize: 16.8, lineHeight: 1.7,
                     fontFamily: 'var(--font-mono), "JetBrains Mono", "Fira Code", monospace',
                     fontLigatures: true,
                     minimap: { enabled: false }, scrollBeyondLastLine: false, wordWrap: 'on',
@@ -4203,7 +4203,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             <div style={{
               height: 28, display: 'flex', alignItems: 'center', padding: '0 12px',
               background: 'var(--bg-surface)', borderTop: '1px solid var(--border-subtle)',
-              fontSize: 11, fontFamily: isNotebook ? undefined : 'var(--font-mono)', color: 'var(--border-emphasis)',
+              fontSize: 13.2, fontFamily: isNotebook ? undefined : 'var(--font-mono)', color: 'var(--border-emphasis)',
               justifyContent: 'space-between', flexShrink: 0,
             }}>
               <span>
@@ -4233,7 +4233,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 height: 28, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 padding: '0 12px', background: 'var(--bg-void)', borderTop: '2px solid var(--panel-border)',
                 boxShadow: 'inset 0 1px 4px rgba(0,0,0,0.2)',
-                cursor: 'pointer', fontSize: 12, color: 'var(--border-emphasis)', flexShrink: 0,
+                cursor: 'pointer', fontSize: 14.4, color: 'var(--border-emphasis)', flexShrink: 0,
                 transition: 'color 150ms',
               }}
               onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.color = 'var(--text-primary)' }}
@@ -4246,7 +4246,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 <button onClick={(e) => { e.stopPropagation(); handleRunCode() }}
                   disabled={isRunning}
                   style={{
-                    padding: '2px 10px', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                    padding: '2px 10px', borderRadius: 6, fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
                     background: 'rgba(247,129,102,0.1)', color: 'var(--coral)', border: '1px solid rgba(247,129,102,0.3)',
                     display: 'flex', alignItems: 'center', gap: 4, opacity: isRunning ? 0.5 : 1,
                   }}>
@@ -4263,7 +4263,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 height: 180, background: 'var(--bg-void)', borderTop: '2px solid var(--panel-border)',
                 borderRadius: '0 0 16px 16px', display: 'flex', flexDirection: 'column', flexShrink: 0,
               }}>
-                <div style={{ flex: 1, overflowY: 'auto', padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 12, lineHeight: 1.6 }}>
+                <div style={{ flex: 1, overflowY: 'auto', padding: '8px 12px', fontFamily: 'var(--font-mono)', fontSize: 14.4, lineHeight: 1.6 }}>
                   {isRunning
                     ? <span style={{ color: 'var(--yellow)' }}>{`> ${t('lesson_executing')}`}</span>
                     : terminalOutput
@@ -4277,14 +4277,14 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   }
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', borderTop: '1px solid var(--border-subtle)', flexShrink: 0 }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-dim)' }}>stdin:</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13.2, color: 'var(--text-dim)' }}>stdin:</span>
                   <input
                     type="text"
                     value={stdinInput}
                     onChange={(e) => setStdinInput(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleRunCode() } }}
                     placeholder={t('lesson_terminal_stdin')}
-                    style={{ flex: 1, background: 'transparent', fontFamily: 'var(--font-mono)', fontSize: 11, outline: 'none', color: 'var(--text-primary)', caretColor: 'var(--green)', border: 'none' }}
+                    style={{ flex: 1, background: 'transparent', fontFamily: 'var(--font-mono)', fontSize: 13.2, outline: 'none', color: 'var(--text-primary)', caretColor: 'var(--green)', border: 'none' }}
                   />
                 </div>
               </div>
@@ -4314,12 +4314,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
               {/* Info */}
               <div style={{ flex: 1 }}>
-                <p style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
+                <p style={{ fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)' }}>
                   {t('lesson_tutor_max')}
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 2 }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--green)', animation: 'blink 2s infinite', display: 'inline-block' }} />
-                  <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{t('lesson_online')}</span>
+                  <span style={{ fontSize: 13.2, color: 'var(--text-secondary)' }}>{t('lesson_online')}</span>
                 </div>
               </div>
 
@@ -4343,7 +4343,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       disabled={isStreaming || !sessionId}
                       style={{
                         display: 'flex', alignItems: 'center', gap: 4, padding: '5px 10px', borderRadius: 20,
-                        fontSize: 11, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.indigo}44`,
+                        fontSize: 13.2, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.indigo}44`,
                         background: `${UI.indigo}14`, color: UI.indigo,
                       }}>
                       <ThumbsUp size={12} /> {t('lesson_got_it')}
@@ -4353,7 +4353,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       disabled={isStreaming || !sessionId}
                       style={{
                         display: 'flex', alignItems: 'center', gap: 4, padding: '5px 10px', borderRadius: 20,
-                        fontSize: 11, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.red}44`,
+                        fontSize: 13.2, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.red}44`,
                         background: UI.redBg, color: UI.red,
                       }}>
                       <ThumbsDown size={12} /> {t('lesson_not_clear')}
@@ -4389,7 +4389,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 onClick={() => setMaximizedPanel(maximizedPanel === 'chat' ? null : 'chat')}
                 title={maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
                 aria-label={maximizedPanel === 'chat' ? t('learn_restore') : t('learn_maximize')}
-                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 12, flexShrink: 0 }}>
+                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 14.4, flexShrink: 0 }}>
                 {maximizedPanel === 'chat' ? '⊡' : '⊞'}
               </button>
 
@@ -4413,13 +4413,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     }}>
                       {currentLessonData?.topicSlug && (
                         <button onClick={() => { setInsightsOpen(false); setPracticeOpen((v) => !v); setMoreMenuOpen(false) }}
-                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
                           ✏️ {t('nav_practice')}
                         </button>
                       )}
                       {currentLessonData?.topicSlug && (
                         <button onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v); setMoreMenuOpen(false) }}
-                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 12.5, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
+                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
                           📊 {t('lesson_insights_btn')}
                         </button>
                       )}
@@ -4667,35 +4667,35 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     <EagleMascot variant="hero" size={52} />
                     {previewLesson && (
                       <div style={{ maxWidth: 420, width: '100%', display: 'flex', flexDirection: 'column', gap: 10, textAlign: 'center' }}>
-                        <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        <p style={{ fontSize: 13.2, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                           {totalLessons > 0 ? `${t('lesson_preview_lesson_label')} ${previewLesson.order} / ${totalLessons}` : `${t('lesson_preview_lesson_label')} ${previewLesson.order}`}
                           {previewLesson.unitTitle ? ` · ${previewLesson.unitTitle}` : ''}
                         </p>
-                        <p style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)' }}>
+                        <p style={{ fontSize: 19.2, fontWeight: 700, color: 'var(--text-primary)' }}>
                           {previewLesson.lessonTitle}
                         </p>
                         {previewLesson.lessonGoal && (
                           <div style={{ textAlign: 'left', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '10px 14px' }}>
-                            <p style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 4 }}>
+                            <p style={{ fontSize: 12.6, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 4 }}>
                               {t('lesson_preview_about_label')}
                             </p>
-                            <p style={{ fontSize: 12.5, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                            <p style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                               {previewLesson.lessonGoal}
                             </p>
                           </div>
                         )}
                         {missingPrereqs && missingPrereqs.length > 0 && (
                           <div style={{ textAlign: 'left', background: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)', borderRadius: 12, padding: '10px 14px' }}>
-                            <p style={{ fontSize: 10.5, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 4 }}>
+                            <p style={{ fontSize: 12.6, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 4 }}>
                               {t('lesson_preview_prereqs_label')}
                             </p>
-                            <p style={{ fontSize: 12.5, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                            <p style={{ fontSize: 15, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
                               {missingPrereqs.map((p) => p.title).join(', ')}
                             </p>
                           </div>
                         )}
                         {durationEstimate && (
-                          <p style={{ fontSize: 11.5, color: 'var(--text-dim)' }}>
+                          <p style={{ fontSize: 13.8, color: 'var(--text-dim)' }}>
                             {t('lesson_preview_duration_label')}: {durationEstimate}
                           </p>
                         )}
@@ -4721,7 +4721,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         }
                       }}
                       style={{
-                        padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer',
+                        padding: '10px 22px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer',
                         background: UI.indigo, color: '#fff', border: 'none', marginTop: 4,
                       }}>
                       {isResume ? t('resume_lesson_btn') : t('start_lesson_btn')}
@@ -4734,7 +4734,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {lessonStarted && messages.length === 0 && !connectStalled && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 40 }}>
                   <EagleMascot variant="hero" size={56} />
-                  <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
+                  <p style={{ fontSize: 15.6, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
                   <div style={{ display: 'flex', gap: 6 }}>
                     <span className="typing-dot" /><span className="typing-dot" /><span className="typing-dot" />
                   </div>
@@ -4745,11 +4745,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   forever. Offer a real recovery instead. */}
               {lessonStarted && messages.length === 0 && connectStalled && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 14, paddingTop: 40, textAlign: 'center' }}>
-                  <div style={{ fontSize: 32 }}>⚠</div>
-                  <p style={{ fontSize: 13.5, color: 'var(--text-secondary)', maxWidth: 320 }}>{t('lesson_connect_failed')}</p>
+                  <div style={{ fontSize: 38.4 }}>⚠</div>
+                  <p style={{ fontSize: 16.2, color: 'var(--text-secondary)', maxWidth: 320 }}>{t('lesson_connect_failed')}</p>
                   <button
                     onClick={retryInit}
-                    style={{ padding: '10px 22px', borderRadius: 12, fontSize: 13.5, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
+                    style={{ padding: '10px 22px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
                     {t('lesson_connect_retry')}
                   </button>
                 </div>
@@ -4767,7 +4767,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       setVisibleCount((c) => Math.min(c + HISTORY_RENDER_WINDOW, messages.length))
                       requestAnimationFrame(() => { if (el) el.scrollTop += el.scrollHeight - prevHeight })
                     }}
-                    style={{ fontSize: 11, color: 'var(--text-secondary)', background: 'var(--bg-secondary)', border: '1px solid var(--border-default)', borderRadius: 999, padding: '4px 12px', cursor: 'pointer' }}
+                    style={{ fontSize: 13.2, color: 'var(--text-secondary)', background: 'var(--bg-secondary)', border: '1px solid var(--border-default)', borderRadius: 999, padding: '4px 12px', cursor: 'pointer' }}
                   >
                     ↑ {messages.length - visibleCount} earlier message{messages.length - visibleCount === 1 ? '' : 's'}
                   </button>
@@ -4799,7 +4799,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     {!isUser && !msg.streaming && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                         <EagleMascot variant="logo" size={20} />
-                        <span style={{ fontSize: 10, fontWeight: 600, color: 'var(--border-emphasis)' }}>{t('lesson_tutor_max')}</span>
+                        <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--border-emphasis)' }}>{t('lesson_tutor_max')}</span>
                         {/* Provider badge — every real provider now gets a
                             visible, correctly-labeled indicator. See the API
                             response in src/app/api/learn/chat/route.ts:
@@ -4827,7 +4827,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         transition: 'border-color 200ms',
                       }}>
                         {msg.content
-                          ? <div className="animate-message" style={{ fontSize: 13.5, lineHeight: 1.7, color: 'var(--text-primary)' }}>
+                          ? <div className="animate-message" style={{ fontSize: 16.2, lineHeight: 1.7, color: 'var(--text-primary)' }}>
                               <MessageContent text={displayText} isUser={false} />
                             </div>
                           : <TypingDots />
@@ -4835,7 +4835,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
                         {cached?.hasMore && (
                           <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
-                            style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 11, fontWeight: 600, color: UI.indigo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                            style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 4, fontSize: 13.2, fontWeight: 600, color: UI.indigo, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
                             {isExpanded ? t('lesson_collapse') : t('lesson_read_more')}
                             <ChevronDown size={11} style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 200ms' }} />
                           </button>
@@ -4843,14 +4843,14 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
                         {!msg.streaming && msg.content && (
                           <div style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+                            <span style={{ fontSize: 12, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
                               {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
                             </span>
                             <CandyButton onClick={() => isSpeaking ? handleStopSpeech() : handleSpeak(msg.id, msg.content, { intro: isIntro })}
                               depth={2} activeDepth={0} shadowColor={isSpeaking ? 'var(--coral-hover)' : 'var(--border-subtle)'}
                               style={{
                                 display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 10, border: 'none',
-                                fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                                fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
                                 background: isSpeaking ? 'var(--coral)' : 'var(--bg-elevated)',
                                 color: isSpeaking ? '#fff' : 'var(--text-dim)',
                               }}>
@@ -4946,12 +4946,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     {isUser && (
                       <div style={{ animation: 'slideInRight 200ms ease-out both', maxWidth: '75%' }}>
                         <div style={{
-                          padding: '12px 14px', borderRadius: '18px 18px 4px 18px', fontSize: 13, lineHeight: 1.5,
+                          padding: '12px 14px', borderRadius: '18px 18px 4px 18px', fontSize: 15.6, lineHeight: 1.5,
                           background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`, color: '#fff',
                         }}>
                           <MessageContent text={displayText} isUser={true} />
                         </div>
-                        <p style={{ fontSize: 10, color: 'var(--text-dim)', textAlign: 'right', marginTop: 3, fontFamily: 'var(--font-mono)' }}>
+                        <p style={{ fontSize: 12, color: 'var(--text-dim)', textAlign: 'right', marginTop: 3, fontFamily: 'var(--font-mono)' }}>
                           {new Date(msg.ts).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false })}
                         </p>
                       </div>
@@ -4962,7 +4962,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
               {/* Thinking — candy Pill */}
               {isStreaming && messages.at(-1)?.streaming && !messages.at(-1)?.content && (
-                <Pill style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 8, fontSize: 12, color: 'var(--text-secondary)', background: 'var(--bg-elevated)', padding: '6px 12px' }}>
+                <Pill style={{ display: 'inline-flex', alignSelf: 'flex-start', alignItems: 'center', gap: 8, fontSize: 14.4, color: 'var(--text-secondary)', background: 'var(--bg-elevated)', padding: '6px 12px' }}>
                   <TypingDots />
                   <span>{t('lesson_thinking_dots')}</span>
                 </Pill>
@@ -4977,7 +4977,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   background: `${UI.indigo}0c`, border: `1px solid ${UI.indigo}33`,
                   display: 'flex', flexDirection: 'column', gap: 8,
                 }}>
-                  <p style={{ fontSize: 12, color: 'var(--text-primary)', lineHeight: 1.5 }}>
+                  <p style={{ fontSize: 14.4, color: 'var(--text-primary)', lineHeight: 1.5 }}>
                     {t('lesson_not_mastered_next')}
                   </p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -4988,7 +4988,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       }}
                       disabled={isStreaming || !sessionId}
                       style={{
-                        padding: '7px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                        padding: '7px 14px', borderRadius: 8, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
                         background: UI.indigo, color: '#fff', border: 'none',
                       }}>
                       📚 {t('lesson_continue_learning')}
@@ -4999,7 +4999,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         handleSkipAnyway(currentLessonData.order, currentLessonData)
                       }}
                       style={{
-                        padding: '7px 14px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer',
+                        padding: '7px 14px', borderRadius: 8, fontSize: 13.2, fontWeight: 600, cursor: 'pointer',
                         background: 'transparent', color: 'var(--text-dim)', border: '1px solid var(--border-subtle)',
                       }}>
                       {t('lesson_skip_anyway')}
@@ -5016,7 +5016,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   style={{
                     position: 'sticky', bottom: 8, alignSelf: 'flex-end',
                     width: 26, height: 26, borderRadius: '50%',
-                    background: 'var(--coral)', color: 'var(--text-inverse)', fontSize: 12, border: 'none', cursor: 'pointer',
+                    background: 'var(--coral)', color: 'var(--text-inverse)', fontSize: 14.4, border: 'none', cursor: 'pointer',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     boxShadow: '0 2px 8px rgba(247,129,102,0.4)',
                   }}>↓</button>
@@ -5041,27 +5041,27 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   gap: 8,
                 }}
               >
-                <div style={{ fontSize: 15, fontWeight: 800, color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--text-primary)' }}>
                   {lessonCompletion.fullyMastered ? `\u2713 ${t('lc_complete')}` : `\u2713 ${t('lc_finished')}`}
                   {lessonCompletion.lessonTitle ? ` \u2014 ${lessonCompletion.lessonTitle}` : ''}
                 </div>
 
                 {lessonCompletion.mastered.length > 0 && (
-                  <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                  <div style={{ fontSize: 14.4, color: 'var(--text-secondary)' }}>
                     <strong style={{ color: 'var(--text-primary)' }}>{t('lc_mastered')}</strong>{' '}
                     {lessonCompletion.mastered.join(', ')}
                   </div>
                 )}
 
                 {lessonCompletion.needsReview.length > 0 && (
-                  <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                  <div style={{ fontSize: 14.4, color: 'var(--text-secondary)' }}>
                     <strong style={{ color: 'var(--text-primary)' }}>{t('lc_review')}</strong>{' '}
                     {lessonCompletion.needsReview.join(', ')}
                   </div>
                 )}
 
                 {typeof lessonCompletion.durationSeconds === 'number' && (
-                  <div style={{ fontSize: 12, color: 'var(--text-secondary)' }}>
+                  <div style={{ fontSize: 14.4, color: 'var(--text-secondary)' }}>
                     <strong style={{ color: 'var(--text-primary)' }}>{t('lc_time')}</strong>{' '}
                     {Math.max(1, Math.round(lessonCompletion.durationSeconds / 60))} {t('lc_min')}
                   </div>
@@ -5085,7 +5085,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       }
                     }}
                     className="btn-primary"
-                    style={{ marginTop: 4, padding: '10px 14px', borderRadius: 10, fontWeight: 800, fontSize: 13, border: 'none', cursor: 'pointer' }}
+                    style={{ marginTop: 4, padding: '10px 14px', borderRadius: 10, fontWeight: 800, fontSize: 15.6, border: 'none', cursor: 'pointer' }}
                   >
                     {t('lc_next')}
                   </button>
@@ -5112,7 +5112,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   gap: 6,
                 }}
               >
-                <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>
+                <div style={{ fontSize: 14.4, fontWeight: 700, color: 'var(--text-primary)' }}>
                   {activeMcq.question}
                 </div>
                 {activeMcq.options.map((option, i) => (
@@ -5137,7 +5137,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       border: '1px solid var(--border-subtle)',
                       background: 'var(--bg-card)',
                       color: 'var(--text-primary)',
-                      fontSize: 13,
+                      fontSize: 15.6,
                       fontWeight: 600,
                       cursor: isStreaming ? 'not-allowed' : 'pointer',
                       opacity: isStreaming ? 0.6 : 1,
@@ -5161,7 +5161,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={selectedImage.preview} alt="preview" style={{ width: 36, height: 36, objectFit: 'cover', borderRadius: 6, border: '1px solid var(--border-subtle)' }} />
-                  <span style={{ fontSize: 11, color: UI.indigo, flex: 1 }}>📸 {t('lesson_image_selected')}</span>
+                  <span style={{ fontSize: 13.2, color: UI.indigo, flex: 1 }}>📸 {t('lesson_image_selected')}</span>
                   <button onClick={() => setSelectedImage(null)} style={{ color: 'var(--border-emphasis)', background: 'none', border: 'none', cursor: 'pointer' }}><X size={13} /></button>
                 </div>
               )}
@@ -5169,7 +5169,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {/* File badge */}
               {attachedFile && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 8, fontSize: 11, fontWeight: 500, background: 'rgba(121,192,255,0.1)', color: 'var(--blue)', border: '1px solid rgba(121,192,255,0.2)' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 4, padding: '3px 10px', borderRadius: 8, fontSize: 13.2, fontWeight: 500, background: 'rgba(121,192,255,0.1)', color: 'var(--blue)', border: '1px solid rgba(121,192,255,0.2)' }}>
                     <Paperclip size={10} /> {attachedFile.name}
                   </span>
                   <button onClick={() => setAttachedFile(null)} style={{ color: 'var(--border-emphasis)', background: 'none', border: 'none', cursor: 'pointer' }}><X size={13} /></button>
@@ -5199,7 +5199,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         display: 'inline-flex', alignItems: 'center', gap: 5,
                         minHeight: 32, padding: '6px 11px', borderRadius: 16,
                         border: '1px solid var(--border-default)', background: 'var(--bg-surface)',
-                        color: 'var(--text-secondary)', fontSize: 12, fontWeight: 600,
+                        color: 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
                         cursor: sessionId && !isStreaming ? 'pointer' : 'not-allowed',
                         opacity: sessionId && !isStreaming ? 1 : 0.5,
                       }}
@@ -5238,7 +5238,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     title={t('lesson_photo')}
                     aria-label={t('lesson_photo')}
                     style={{
-                      width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', fontSize: 14, border: 'none',
+                      width: 28, height: 28, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', fontSize: 16.8, border: 'none',
                       background: selectedImage ? UI.indigo : 'transparent',
                       color: selectedImage ? '#fff' : 'var(--text-dim)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -5255,7 +5255,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     placeholder={micState === 'recording' ? t('lesson_recording') : micState === 'processing' ? t('lesson_processing') : isStreaming ? t('lesson_responding') : t('lesson_placeholder')}
                     rows={1}
                     style={{
-                      flex: 1, padding: '6px 4px', resize: 'none', outline: 'none', fontSize: 13, lineHeight: 1.5,
+                      flex: 1, padding: '6px 4px', resize: 'none', outline: 'none', fontSize: 15.6, lineHeight: 1.5,
                       background: 'transparent', border: 'none', color: 'var(--text-primary)',
                       fontFamily: 'inherit', minHeight: 28, maxHeight: 96,
                     }}
@@ -5276,7 +5276,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         opacity: micState === 'processing' ? 0.6 : 1,
                       }}>
                       {micState === 'recording'
-                        ? <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 6.5, fontWeight: 700, gap: 1 }}><Mic size={11} />REC</span>
+                        ? <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 7.8, fontWeight: 700, gap: 1 }}><Mic size={11} />REC</span>
                         : <Mic size={14} />}
                     </button>
                   )}
@@ -5299,11 +5299,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
               {/* Disclaimer + current topic breadcrumb — matches mockup's footer row */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: 8 }}>
-                <p style={{ fontSize: 10, color: 'var(--text-dim)' }}>
+                <p style={{ fontSize: 12, color: 'var(--text-dim)' }}>
                   ⓘ {t('lesson_ai_disclaimer')}
                 </p>
                 {currentUnit && (
-                  <span style={{ fontSize: 10, color: 'var(--text-dim)', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                  <span style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 600, whiteSpace: 'nowrap' }}>
                     {currentUnit.title}
                   </span>
                 )}
