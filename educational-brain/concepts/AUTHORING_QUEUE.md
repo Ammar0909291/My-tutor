@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **948** (= 1,775 KG concepts − 827 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 18 completion,
+Total queued: **943** (= 1,775 KG concepts − 832 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 19 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1583,9 +1583,6 @@ authored math.nt Wave 7, moved to READY.
 | 1116 | mathematics | 24 | `math.opt.duality` | Duality Theory |
 | 1117 | mathematics | 24 | `math.opt.stochastic-gradient` | Stochastic Gradient Descent |
 | 1118 | mathematics | 24 | `math.opt.newton-optimization` | Newton's Method for Optimization |
-| 1120 | english | 24 | `eng.literature.meter-and-rhyme` | Meter and Rhyme |
-| 1121 | english | 24 | `eng.literature.short-story-study` | Short Story Study |
-| 1122 | english | 24 | `eng.literature.literary-periods-survey` | Survey of Literary Periods |
 **Row 1125 removed 2026-07-26** — `math.nt.pythagorean-triples`
 authored as a small bounded cross-domain step in math.geom Wave 7,
 unblocked by `math.geom.pythagorean-theorem`, moved to READY.
@@ -1618,7 +1615,6 @@ math.nt Wave 8, moved to READY.
 | 1151 | mathematics | 25 | `math.fnal.distributions` | Distributions |
 | 1152 | mathematics | 25 | `math.num.euler-method` | Euler's Method (Numerical ODE) |
 | 1153 | mathematics | 25 | `math.opt.kkt` | KKT Conditions |
-| 1154 | english | 25 | `eng.writing.drafting` | Drafting |
 | 1155 | english | 25 | `eng.literature.novel-study` | Novel Study |
 | 1156 | english | 25 | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism |
 | 1159 | mathematics | 26 | `math.nt.algebraic-integers` | Algebraic Integers |
@@ -1709,7 +1705,6 @@ math.nt Wave 8, moved to READY.
 | 1251 | mathematics | 28 | `math.num.svd` | SVD (Numerical) |
 | 1252 | mathematics | 28 | `math.opt.pca` | Principal Component Analysis |
 | 1253 | english | 28 | `eng.writing.essay-structure` | Essay Structure |
-| 1254 | english | 28 | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies |
 | 1255 | mathematics | 29 | `math.nt.prime-number-theorem` | Prime Number Theorem |
 | 1256 | mathematics | 29 | `math.alg.completing-the-square` | Completing the Square |
 | 1257 | mathematics | 29 | `math.alg.polynomial-roots` | Polynomial Roots (Real and Complex) |

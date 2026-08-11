@@ -13,12 +13,12 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **827** |
-| Remaining | **948** |
-| Completion percentage | **46.59%** |
+| Concepts with an Educational Brain entry | **832** |
+| Remaining | **943** |
+| Completion percentage | **46.87%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 179 english + 186 chemistry + 0 biology + 0 computer_science = 827.
++ 184 english + 186 chemistry + 0 biology + 0 computer_science = 832.
 English corrected 2026-08-11 from a stale 6 to 106 via branch
 reconciliation (this file had not been updated across ~93 English
 batches authored directly on `main` via commit-message-only tracking,
@@ -28,10 +28,11 @@ audit), then continued in the same session through Batch 10 (4), Batch
 11 (5), Batch 12 (9), Batch 13 (7, level-13 frontier BATCH COMPLETE),
 Batch 14 (12, level-14 frontier BATCH COMPLETE), Batch 15 (10,
 level-15 frontier BATCH COMPLETE), Batch 16 (9, level-16 frontier
-BATCH COMPLETE), Batch 17 (10, level-17 frontier BATCH COMPLETE), and
-Batch 18 (7, level-18 frontier BATCH COMPLETE) to 179. Mathematics/
-physics/chemistry figures are taken as already-recorded below, not
-re-audited this session, per this session's English-only scope.)*
+BATCH COMPLETE), Batch 17 (10, level-17 frontier BATCH COMPLETE),
+Batch 18 (7, level-18 frontier BATCH COMPLETE), and Batch 19 (5,
+level-19 frontier BATCH COMPLETE) to 184. Mathematics/physics/chemistry
+figures are taken as already-recorded below, not re-audited this
+session, per this session's English-only scope.)*
 
 ---
 
@@ -41,7 +42,7 @@ re-audited this session, per this session's English-only scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 179 | 82.87% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 184 | 85.19% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1208,7 +1209,23 @@ order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**English Batch 18, BATCH COMPLETE (2026-08-11, autonomous /loop dynamic
+**English Batch 19, BATCH COMPLETE (2026-08-11, autonomous /loop dynamic
+mode, continuing directly after Batch 18)**: computed the fresh
+topological queue against the true 179-concept baseline — 37 concepts
+missing, 5 "ready now" (all prerequisites satisfied): `eng.writing.
+drafting`, `eng.literature.meter-and-rhyme`, `eng.literature.short-
+story-study`, `eng.literature.literary-periods-survey`, `eng.
+linguistics.translation-studies-intro`. All 5 had existing Blueprints,
+reused by reference. English EB reached 184/216 (85.19%). True total:
+**832** EB entries (238 physics + 224 mathematics + 184 english + 186
+chemistry), out of 1,775 total KG concepts — 943 remaining, 46.87%.
+This fully clears the level-19 frontier; the next loop iteration must
+recompute the topological queue fresh against the true 184-concept
+baseline (3 "ready now" concepts already identified: `eng.writing.
+revising-for-content`, `eng.literature.novel-study`, `eng.literature.
+literary-criticism-intro`).
+
+**English Batch 18 (prior batch, 2026-08-11, autonomous /loop dynamic
 mode, continuing directly after Batch 17)**: computed the fresh
 topological queue against the true 172-concept baseline — 44 concepts
 missing, 7 "ready now" (all prerequisites satisfied): `eng.writing.
@@ -1219,12 +1236,7 @@ genres-overview`, `eng.linguistics.bilingualism-and-multilingualism`,
 Blueprints, reused by reference. English EB reached 179/216 (82.87%).
 True total: **827** EB entries (238 physics + 224 mathematics + 179
 english + 186 chemistry), out of 1,775 total KG concepts — 948
-remaining, 46.59%. This fully clears the level-18 frontier; the next
-loop iteration must recompute the topological queue fresh against the
-true 179-concept baseline (5 "ready now" concepts already identified:
-`eng.writing.drafting`, `eng.literature.meter-and-rhyme`, `eng.
-literature.short-story-study`, `eng.literature.literary-periods-
-survey`, `eng.linguistics.translation-studies-intro`).
+remaining, 46.59%. This fully clears the level-18 frontier.
 
 **English Batch 17 (prior batch, 2026-08-11, autonomous /loop dynamic
 mode, continuing directly after Batch 16)**: computed the fresh

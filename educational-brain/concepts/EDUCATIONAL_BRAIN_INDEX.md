@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 179 READY)
+## english (216 concepts, 184 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1259,7 +1259,7 @@ its subject KG.
 | linguistics | `eng.linguistics.semantics-intro` | Introduction to Semantics | Yes | Yes | — | READY |
 | linguistics | `eng.linguistics.sociolinguistics-intro` | Introduction to Sociolinguistics | Yes | Yes | — | READY |
 | linguistics | `eng.linguistics.syntax-theory-intro` | Introduction to Syntactic Theory | Yes | Yes | — | READY |
-| linguistics | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies | Yes | No | — | MISSING |
+| linguistics | `eng.linguistics.translation-studies-intro` | Introduction to Translation Studies | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.translation-studies-intro.md` | READY |
 | linguistics | `eng.linguistics.what-is-linguistics` | What Is Linguistics? | Yes | Yes | `educational-brain/concepts/english/eng.linguistics.what-is-linguistics.md` | READY |
 | listening | `eng.listening.active-listening` | Active Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.active-listening.md` | READY |
 | listening | `eng.listening.critical-listening` | Critical Listening | Yes | Yes | — | READY |
@@ -1279,9 +1279,9 @@ its subject KG.
 | literature | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism | Yes | No | — | MISSING |
 | literature | `eng.literature.literary-devices-overview` | Overview of Literary Devices | Yes | Yes | — | READY |
 | literature | `eng.literature.literary-genres-overview` | Overview of Literary Genres | Yes | Yes | `educational-brain/concepts/english/eng.literature.literary-genres-overview.md` | READY |
-| literature | `eng.literature.literary-periods-survey` | Survey of Literary Periods | Yes | No | — | MISSING |
+| literature | `eng.literature.literary-periods-survey` | Survey of Literary Periods | Yes | Yes | `educational-brain/concepts/english/eng.literature.literary-periods-survey.md` | READY |
 | literature | `eng.literature.metaphor-and-simile` | Metaphor and Simile | Yes | Yes | `educational-brain/concepts/english/eng.literature.metaphor-and-simile.md` | READY |
-| literature | `eng.literature.meter-and-rhyme` | Meter and Rhyme | Yes | No | — | MISSING |
+| literature | `eng.literature.meter-and-rhyme` | Meter and Rhyme | Yes | Yes | `educational-brain/concepts/english/eng.literature.meter-and-rhyme.md` | READY |
 | literature | `eng.literature.narrative-elements` | Narrative Elements | Yes | Yes | — | READY |
 | literature | `eng.literature.novel-study` | Novel Study | Yes | No | — | MISSING |
 | literature | `eng.literature.plot-structure` | Plot Structure | Yes | Yes | — | READY |
@@ -1291,7 +1291,7 @@ its subject KG.
 | literature | `eng.literature.prose-fiction` | Prose Fiction | Yes | Yes | — | READY |
 | literature | `eng.literature.prose-nonfiction` | Prose Nonfiction | Yes | Yes | — | READY |
 | literature | `eng.literature.setting-and-atmosphere` | Setting and Atmosphere | Yes | Yes | — | READY |
-| literature | `eng.literature.short-story-study` | Short Story Study | Yes | No | — | MISSING |
+| literature | `eng.literature.short-story-study` | Short Story Study | Yes | Yes | `educational-brain/concepts/english/eng.literature.short-story-study.md` | READY |
 | literature | `eng.literature.symbolism` | Symbolism | Yes | Yes | `educational-brain/concepts/english/eng.literature.symbolism.md` | READY |
 | literature | `eng.literature.theme-and-message` | Theme and Message | Yes | Yes | — | READY |
 | phonetics | `eng.phonetics.accents-and-dialects` | Accents and Dialects | Yes | Yes | `educational-brain/concepts/english/eng.phonetics.accents-and-dialects.md` | READY |
@@ -1371,7 +1371,7 @@ its subject KG.
 | writing | `eng.writing.citations-and-referencing` | Citations and Referencing | Yes | No | — | MISSING |
 | writing | `eng.writing.creative-writing-forms` | Creative Writing Forms | Yes | Yes | `educational-brain/concepts/english/eng.writing.creative-writing-forms.md` | READY |
 | writing | `eng.writing.descriptive-writing` | Descriptive Writing | Yes | Yes | — | READY |
-| writing | `eng.writing.drafting` | Drafting | Yes | No | — | MISSING |
+| writing | `eng.writing.drafting` | Drafting | Yes | Yes | `educational-brain/concepts/english/eng.writing.drafting.md` | READY |
 | writing | `eng.writing.editing-and-proofreading` | Editing and Proofreading | Yes | No | — | MISSING |
 | writing | `eng.writing.essay-structure` | Essay Structure | Yes | No | — | MISSING |
 | writing | `eng.writing.expository-writing` | Expository Writing | Yes | Yes | — | READY |
