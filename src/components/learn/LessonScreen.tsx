@@ -3643,7 +3643,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 className="hidden md:flex"
                 onClick={() => setMaximizedPanel(maximizedPanel === 'curriculum' ? null : 'curriculum')}
                 title={maximizedPanel === 'curriculum' ? t('learn_restore') : t('learn_maximize')}
-                style={{ width: 22, height: 22, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 11, flexShrink: 0 }}>
+                aria-label={maximizedPanel === 'curriculum' ? t('learn_restore') : t('learn_maximize')}
+                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 12, flexShrink: 0 }}>
                 {maximizedPanel === 'curriculum' ? '⊡' : '⊞'}
               </button>
             </PanelHeader>
@@ -4019,9 +4020,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                         e.stopPropagation()
                                         setExpandedLockedTopic((prev) => prev === lesson.topicSlug ? null : lesson.topicSlug!)
                                       }}
+                                      // MEASURED at 1280×800 on the real account: SEVEN of these
+                                      // are on screen at once, every one reading exactly
+                                      // "Prerequisites needed ▼" with nothing saying which lesson
+                                      // it belongs to, and each about 11px tall. Naming the lesson
+                                      // makes them distinguishable to a screen reader and to
+                                      // anyone tabbing; the padding brings the hit area up to the
+                                      // 24px minimum. Nothing is removed or relocated.
+                                      aria-label={`${t('kg_prereqs_needed')}: ${lesson.lessonTitle}`}
+                                      aria-expanded={isLockExpanded}
                                       style={{
-                                        fontSize: 9, color: 'var(--text-dim)', background: 'transparent',
-                                        border: 'none', padding: 0, cursor: 'pointer', fontFamily: 'inherit',
+                                        fontSize: 10, color: 'var(--text-dim)', background: 'transparent',
+                                        border: 'none', padding: '5px 2px', minHeight: 24, cursor: 'pointer',
+                                        fontFamily: 'inherit', textAlign: 'left',
                                       }}>
                                       {t('kg_prereqs_needed')} {isLockExpanded ? '▲' : '▼'}
                                     </button>
@@ -4211,7 +4222,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 className="hidden md:flex"
                 onClick={() => setMaximizedPanel(maximizedPanel === 'code' ? null : 'code')}
                 title={maximizedPanel === 'code' ? t('learn_restore') : t('learn_maximize')}
-                style={{ width: 22, height: 22, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 11, flexShrink: 0 }}>
+                aria-label={maximizedPanel === 'code' ? t('learn_restore') : t('learn_maximize')}
+                style={{ width: 26, height: 26, borderRadius: 4, border: '1px solid var(--border-default)', background: 'transparent', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', color: 'var(--text-dim)', fontSize: 12, flexShrink: 0 }}>
                 {maximizedPanel === 'code' ? '⊡' : '⊞'}
               </button>
             </PanelHeader>

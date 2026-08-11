@@ -1176,6 +1176,7 @@ export const translations = {
     /* ── Lesson Navigation Panel ── */
     nav_lesson_area: 'Навигация по урокам',
     nav_previous: 'Предыдущий',
+    nav_previous_lesson: 'Предыдущий урок',
     nav_current_lesson: 'Текущий',
     nav_next_lesson: 'Следующий',
     nav_no_previous: 'Нет предыдущего урока',
@@ -2490,6 +2491,7 @@ export const translations = {
     /* ── Lesson Navigation Panel ── */
     nav_lesson_area: 'Lesson navigation',
     nav_previous: 'Previous',
+    nav_previous_lesson: 'Previous lesson',
     nav_current_lesson: 'Current',
     nav_next_lesson: 'Next',
     nav_no_previous: 'No earlier lesson',
@@ -3805,6 +3807,7 @@ export const translations = {
     /* ── Lesson Navigation Panel ── */
     nav_lesson_area: 'Lesson navigation',
     nav_previous: 'Pichla',
+    nav_previous_lesson: 'Pichla lesson',
     nav_current_lesson: 'Current',
     nav_next_lesson: 'Agla',
     nav_no_previous: 'No earlier lesson',

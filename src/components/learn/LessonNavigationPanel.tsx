@@ -117,7 +117,7 @@ export function LessonNavigationPanel({
         onClick={onPrevious}
         disabled={disabled || !previousLesson}
         title={previousLesson ? previousLesson.lessonTitle : undefined}
-        aria-label={`${t('nav_previous')} урок`}
+        aria-label={t('nav_previous_lesson')}
         style={{
           ...slotStyle(),
           textAlign: 'left', cursor: previousLesson && !disabled ? 'pointer' : 'default',
