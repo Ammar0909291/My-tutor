@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **937** (= 1,775 KG concepts − 838 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 21 completion,
+Total queued: **935** (= 1,775 KG concepts − 840 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 22 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1726,8 +1726,6 @@ math.nt Wave 8, moved to READY.
 | 1279 | mathematics | 29 | `math.cx.riemann-mapping` | Riemann Mapping Theorem |
 | 1280 | mathematics | 29 | `math.fnal.special-functions` | Special Functions |
 | 1281 | mathematics | 29 | `math.num.lu-factorization` | LU Factorization (Numerical) |
-| 1282 | english | 29 | `eng.writing.thesis-statements` | Thesis Statements |
-| 1283 | english | 29 | `eng.composition.audience-and-purpose` | Audience and Purpose |
 | 1284 | mathematics | 30 | `math.alg.quadratic-formula` | Quadratic Formula |
 | 1285 | mathematics | 30 | `math.alg.rational-root-theorem` | Rational Root Theorem |
 | 1286 | mathematics | 30 | `math.alg.fundamental-theorem-algebra` | Fundamental Theorem of Algebra |

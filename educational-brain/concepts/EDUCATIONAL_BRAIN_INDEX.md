@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 190 READY)
+## english (216 concepts, 192 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1186,7 +1186,7 @@ its subject KG.
 | communication | `eng.communication.technical-writing` | Technical Writing | Yes | No | — | MISSING |
 | composition | `eng.composition.academic-writing-conventions` | Academic Writing Conventions | Yes | No | — | MISSING |
 | composition | `eng.composition.argumentation-basics` | Argumentation Basics | Yes | No | — | MISSING |
-| composition | `eng.composition.audience-and-purpose` | Audience and Purpose | Yes | No | — | MISSING |
+| composition | `eng.composition.audience-and-purpose` | Audience and Purpose | Yes | Yes | `educational-brain/concepts/english/eng.composition.audience-and-purpose.md` | READY |
 | composition | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning | Yes | No | — | MISSING |
 | composition | `eng.composition.comparative-essay-writing` | Comparative Essay Writing | Yes | No | — | MISSING |
 | composition | `eng.composition.counterargument-and-rebuttal` | Counterargument and Rebuttal | Yes | No | — | MISSING |
@@ -1385,7 +1385,7 @@ its subject KG.
 | writing | `eng.writing.spelling-strategies` | Spelling Strategies | Yes | Yes | `educational-brain/concepts/english/eng.writing.spelling-strategies.md` | READY |
 | writing | `eng.writing.supporting-details` | Supporting Details | Yes | Yes | — | READY |
 | writing | `eng.writing.the-writing-process` | The Writing Process | Yes | Yes | `educational-brain/concepts/english/eng.writing.the-writing-process.md` | READY |
-| writing | `eng.writing.thesis-statements` | Thesis Statements | Yes | No | — | MISSING |
+| writing | `eng.writing.thesis-statements` | Thesis Statements | Yes | Yes | `educational-brain/concepts/english/eng.writing.thesis-statements.md` | READY |
 | writing | `eng.writing.topic-sentences` | Topic Sentences | Yes | Yes | — | READY |
 | writing | `eng.writing.transitions-and-cohesion` | Transitions and Cohesion | Yes | Yes | — | READY |
 

@@ -13,12 +13,12 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **838** |
-| Remaining | **937** |
-| Completion percentage | **47.21%** |
+| Concepts with an Educational Brain entry | **840** |
+| Remaining | **935** |
+| Completion percentage | **47.32%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 190 english + 186 chemistry + 0 biology + 0 computer_science = 838.
++ 192 english + 186 chemistry + 0 biology + 0 computer_science = 840.
 English corrected 2026-08-11 from a stale 6 to 106 via branch
 reconciliation (this file had not been updated across ~93 English
 batches authored directly on `main` via commit-message-only tracking,
@@ -31,10 +31,10 @@ level-15 frontier BATCH COMPLETE), Batch 16 (9, level-16 frontier
 BATCH COMPLETE), Batch 17 (10, level-17 frontier BATCH COMPLETE),
 Batch 18 (7, level-18 frontier BATCH COMPLETE), Batch 19 (5, level-19
 frontier BATCH COMPLETE), Batch 20 (3, level-20 frontier BATCH
-COMPLETE), and Batch 21 (3, level-21 frontier BATCH COMPLETE) to 190.
-Mathematics/physics/chemistry figures are taken as already-recorded
-below, not re-audited this session, per this session's English-only
-scope.)*
+COMPLETE), Batch 21 (3, level-21 frontier BATCH COMPLETE), and Batch 22
+(2, level-22 frontier BATCH COMPLETE) to 192. Mathematics/physics/
+chemistry figures are taken as already-recorded below, not re-audited
+this session, per this session's English-only scope.)*
 
 ---
 
@@ -44,7 +44,7 @@ scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 190 | 87.96% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 192 | 88.89% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1211,7 +1211,21 @@ order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
 
-**English Batch 21, BATCH COMPLETE (2026-08-11, autonomous /loop dynamic
+**English Batch 22, BATCH COMPLETE (2026-08-11, autonomous /loop dynamic
+mode, continuing directly after Batch 21)**: computed the fresh
+topological queue against the true 190-concept baseline — 26 concepts
+missing, 2 "ready now" (all prerequisites satisfied): `eng.writing.
+thesis-statements`, `eng.composition.audience-and-purpose`. Both had
+existing Blueprints, reused by reference. English EB reached 192/216
+(88.89%). True total: **840** EB entries (238 physics + 224 mathematics
++ 192 english + 186 chemistry), out of 1,775 total KG concepts — 935
+remaining, 47.32%. This fully clears the level-22 frontier; the next
+loop iteration must recompute the topological queue fresh against the
+true 192-concept baseline (3 "ready now" concepts already identified:
+`eng.writing.citations-and-referencing`, `eng.composition.claim-
+evidence-reasoning`, `eng.composition.rhetorical-appeals`).
+
+**English Batch 21 (prior batch, 2026-08-11, autonomous /loop dynamic
 mode, continuing directly after Batch 20)**: computed the fresh
 topological queue against the true 187-concept baseline — 29 concepts
 missing, 2 "ready now" (all prerequisites satisfied): `eng.writing.
@@ -1224,12 +1238,7 @@ at that point) — authored in the same batch. All 3 had existing
 Blueprints, reused by reference. English EB reached 190/216 (87.96%).
 True total: **838** EB entries (238 physics + 224 mathematics + 190
 english + 186 chemistry), out of 1,775 total KG concepts — 937
-remaining, 47.21%. This fully clears the level-21 frontier; the next
-loop iteration must recompute the topological queue fresh against the
-true 190-concept baseline (2 "ready now" concepts already identified:
-`eng.writing.thesis-statements`, `eng.composition.audience-and-
-purpose` — the first two nodes of the newly-unlocked composition
-chain).
+remaining, 47.21%. This fully clears the level-21 frontier.
 
 **English Batch 20 (prior batch, 2026-08-11, autonomous /loop dynamic
 mode, continuing directly after Batch 19)**: computed the fresh

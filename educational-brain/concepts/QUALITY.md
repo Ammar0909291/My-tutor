@@ -886,6 +886,9 @@ corrected here.
 | `eng.literature.comparative-literature-intro` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.writing.essay-structure` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
+| `eng.writing.thesis-statements` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.audience-and-purpose` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+
 ## What this ledger means for the next batch
 
 No entry is blocked or defective. Version History and Tutor Actions will
