@@ -35,7 +35,7 @@ import { isRetiredVisualBinding } from './retired'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import { ARCHETYPES, type ArchetypeContext } from './archetypes'
-import { resolveVisualTarget, requestTargetsSomethingElse } from './resolveVisualTarget'
+import { resolveVisualTarget, requestTargetsSomethingElse, requestLeavesActiveFigure } from './resolveVisualTarget'
 import { decideContinuity, parseVisualSession, tickSession, type VisualSession } from './session'
 import { noFigureDecision, type EducationalPurpose, type Representation, type VisualDecision } from './types'
 import { generateConceptFigure, generateConceptScene, validateGeneratedFigure, figureCacheKey, type GeneratedFigure } from './visualEngine'
@@ -409,6 +409,19 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     }
   }
 
+  // THE WORDS OF THE FIGURE ACTUALLY ON SCREEN, so continuity can be asked
+  // whether the learner has moved off it. A curriculum figure describes itself
+  // through its KG node; a runtime topic carries its own title and description
+  // in the session because there is no node to re-derive them from. Empty when
+  // there is no figure, and the predicate then returns false.
+  const activeFigureText = liveSession
+    ? (() => {
+        const ctx = contextFor(liveSession.conceptId)
+        if (ctx) return `${ctx.title} ${ctx.description ?? ''}`
+        return liveSession.topic ? `${liveSession.topic.title} ${liveSession.topic.description}` : ''
+      })()
+    : ''
+
   const action = decideContinuity({
     session: liveSession,
     message: input.message,
@@ -416,6 +429,8 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
     requestedConceptId,
     lastAssistantAskedQuestion: lastAsked,
     visualRequested: input.learnerRequest === 'diagram',
+    requestLeftActiveFigure:
+      liveSession !== null && requestLeavesActiveFigure(input.message, activeFigureText),
   })
 
   let conceptId: string | null

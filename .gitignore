@@ -58,3 +58,6 @@ public/vendor/dynamic-visuals/
 # audit driver) used for a one-off P0 runtime audit against a local dev DB —
 # not part of the app, never meant to ship.
 scripts/_audit/
+
+# Local audit harness (session-scoped, never shipped)
+.audit/

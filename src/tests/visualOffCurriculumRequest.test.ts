@@ -148,11 +148,53 @@ describe('Off-curriculum request — what the authority returns', () => {
     expect(d.conceptId).toBeNull()
   })
 
-  it('never takes away a figure already on the learner screen', () => {
-    // Suppression withholds a NEW figure; a held one belongs to continuity.
-    // Getting this backwards would blank the screen mid-explanation.
+  it('releases a held figure when the learner leaves its topic', () => {
+    // CORRECTED 2026-08-11, from production. This case asserted the opposite —
+    // that a held figure is never taken away, on the reasoning that suppression
+    // withholds NEW figures while held ones belong to continuity, and that
+    // releasing would blank the screen mid-explanation.
+    //
+    // That reasoning treats a held figure as inert. It is not. `visualContract`
+    // binds the whole turn to whatever is on screen:
+    //
+    //   "GROUNDING: everything you say this turn is about <figure>. Any
+    //    question you ask must be answerable FROM THIS FIGURE … Do not ask
+    //    about, or pivot to, a different concept while this figure is on
+    //    screen, however related it seems."
+    //
+    // So holding here does not merely leave an irrelevant picture up — it
+    // instructs the tutor to answer a Kubernetes question about vector
+    // addition. Measured in production with SI units held against a
+    // kinetic-energy graph: "the mass of two kilograms and the units of speed
+    // on the axes are built directly from those fundamental base units", said
+    // of axes labelled Velocity and Kinetic Energy.
+    //
+    // The original intent — never blank the screen mid-explanation — is intact
+    // and covered in visualStaleFigureAfterTopicChange.test.ts: releasing needs
+    // a NAMED topic, so "explain that again", "explain it more simply", "show
+    // me a diagram", "why?" and answers to the tutor all still hold.
     const d = resolveVisual({
       message: 'Explain Kubernetes pod scheduling',
+      lessonConceptId: 'phys.meas.vector-addition',
+      subject: 'physics',
+      activeSession: {
+        conceptId: 'phys.meas.vector-addition',
+        representation: 'vector',
+        renderer: 'scene',
+        returnToConceptId: null,
+        turns: 1,
+      },
+      lastAssistantAskedQuestion: false,
+    })
+    expect(d.graphical).toBe(false)
+    expect(d.continuityReason).toBe('named-topic-left-the-figure')
+    // And it does not substitute the lesson's own figure for the one it let go.
+    expect(d.conceptId).toBeNull()
+  })
+
+  it('keeps a held figure when the learner is still on its topic', () => {
+    const d = resolveVisual({
+      message: 'Explain vector addition again, I did not follow',
       lessonConceptId: 'phys.meas.vector-addition',
       subject: 'physics',
       activeSession: {

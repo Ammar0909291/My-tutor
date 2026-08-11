@@ -172,6 +172,70 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
 }
 
 /**
+ * HAS THE LEARNER MOVED OFF THE TOPIC THE ON-SCREEN FIGURE DEPICTS?
+ *
+ * ── THE DEFECT ──────────────────────────────────────────────────────────────
+ * Measured in the running app, in a real session, three turns in a row. A
+ * kinetic-energy graph was on screen; the learner then asked about SI units:
+ *
+ *   "What are SI units and why do we need them?"
+ *   → figure held: "Kinetic Energy as a Function of Velocity (m = 2 kg)"
+ *   → tutor: "Look at the plotted curve on your screen: the mass of two
+ *             kilograms uses the SI unit for mass…"
+ *   → and by the third turn, about base units:
+ *     "the mass of two kilograms and the units of speed on the axes are built
+ *      directly from those fundamental base units."
+ *
+ * The axes are Velocity and Kinetic Energy. There is no mass on the screen.
+ * The tutor is instructed to teach from the figure's own words, so a figure
+ * held past its topic does not merely sit there being irrelevant — it is
+ * narrated, confidently, into a description of something the learner is not
+ * looking at.
+ *
+ * ── WHY CONTINUITY HELD IT ──────────────────────────────────────────────────
+ * `decideContinuity` may move the screen to a different concept only when the
+ * curriculum can NAME that concept. "SI units" does not clear the excursion
+ * confidence floor (2 of the 4 words in "SI Units and Measurement"), so
+ * `requestedConceptId` was null, the switch branch could not fire, and the turn
+ * fell through to the catch-all hold that exists for follow-ups and answers.
+ *
+ * So the hold was reached by a request to be taught something else — the one
+ * kind of turn it was never meant to cover. The engine's other guard against
+ * this, `requestTargetsSomethingElse`, is skipped whenever a figure is already
+ * on screen, deliberately, so that a side question cannot snatch away the
+ * figure a learner is reading. That left nobody asking the question.
+ *
+ * ── THE TEST ────────────────────────────────────────────────────────────────
+ * The same one its sibling uses, pointed at the figure instead of the lesson:
+ * `extractRequestedTopic` says what the learner named — it needs two content
+ * words, so "explain that again", "explain it more simply" and "show me a
+ * diagram" name nothing and can never release a figure — and the named words
+ * are compared against the on-screen figure's OWN words.
+ *
+ *   "What are SI units…"          vs Kinetic Energy   -> nothing shared -> release
+ *   "What is kinetic energy?"     vs Kinetic Energy   -> shared         -> hold
+ *   "What is field strength?"     vs Electric Field   -> shared         -> hold
+ *   "Explain that again"          vs anything         -> named nothing  -> hold
+ *
+ * Releasing is not the same as replacing: the caller switches to whatever the
+ * learner actually named, which is null in exactly this case, and a null target
+ * draws NO figure. That is the intended outcome — this engine already treats an
+ * honest empty screen as an ordinary success, and it is strictly better than
+ * either the stale figure or a second unrelated one.
+ */
+export function requestLeavesActiveFigure(message: string, figureText: string): boolean {
+  const requested = extractRequestedTopic(message)
+  if (!requested) return false
+
+  const drawn = contentWords(figureText, true)
+  // No words to compare against is not evidence of a topic change. Say no.
+  if (drawn.size === 0) return false
+
+  for (const word of requested.words) if (drawn.has(word)) return false
+  return true
+}
+
+/**
  * The vocabulary of ONE subject — every content word in its concept titles.
  *
  * Per subject, not per curriculum, and that is the whole point. Measured: with

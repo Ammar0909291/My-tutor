@@ -144,6 +144,17 @@ export function decideContinuity(input: {
   lastAssistantAskedQuestion: boolean
   /** True when the turn is an explicit visual request ("show me a graph"). */
   visualRequested?: boolean
+  /**
+   * True when the learner named a topic that shares no vocabulary with the
+   * figure currently on screen — see `requestLeavesActiveFigure`.
+   *
+   * Passed in rather than computed here for two reasons. This module is pure
+   * predicates over its inputs and knows nothing of the Knowledge Graph, and
+   * the words of the on-screen figure live with the caller; and naming a topic
+   * is already defined once, in `requestedTopic`, which imports from this file
+   * — deriving it here would close that loop.
+   */
+  requestLeftActiveFigure?: boolean
 }): ContinuityAction {
   const { session, message, lessonConceptId, requestedConceptId, lastAssistantAskedQuestion } = input
 
@@ -208,6 +219,30 @@ export function decideContinuity(input: {
     session.conceptId !== lessonConceptId
   ) {
     return { kind: 'switch', targetConceptId: lessonConceptId, reason: 'visual-request-returns-to-lesson' }
+  }
+
+  // THE LEARNER ASKED ABOUT SOMETHING THIS FIGURE IS NOT.
+  //
+  // The switch branch above can only fire when the curriculum can NAME what
+  // they asked for. When it cannot — "What are SI units and why do we need
+  // them?" sits below the excursion confidence floor — the turn used to fall
+  // into the catch-all hold below and keep an unrelated figure on screen,
+  // which the tutor then narrated as though it depicted the new topic.
+  // Measured in production: a kinetic-energy graph explained, over three
+  // consecutive turns, as a figure about base units.
+  //
+  // A hold is for follow-ups, answers and corrections. A request to be taught
+  // a different subject is none of those, so the figure is RELEASED — to the
+  // concept they named if one is known, and otherwise to nothing at all. An
+  // empty screen with a correct explanation is this engine's preferred
+  // outcome; a confidently mis-narrated figure is the failure it exists to
+  // prevent.
+  if (input.requestLeftActiveFigure) {
+    return {
+      kind: 'switch',
+      targetConceptId: requestedConceptId,
+      reason: 'named-topic-left-the-figure',
+    }
   }
 
   // Everything else — follow-ups, corrections, "why?", "I don't get it",
