@@ -343,6 +343,10 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
    * left to continuity, exactly as the need gate does, so a learner asking a
    * side question never has the figure they are reading taken away.
    */
+  // `!session` stays: a figure already on the learner's screen belongs to
+  // continuity, and removing this exemption made a side question able to blank
+  // a figure mid-explanation (13 suite failures, all of them right to fail).
+  // This predicate governs only whether a NEW figure may be introduced.
   const offTopicRequest =
     target !== null && !session && requestTargetsSomethingElse(input.message, target)
 

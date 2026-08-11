@@ -58,6 +58,14 @@ import { runtimeTopicIdentity, type TopicIdentity } from './topicIdentity'
 const LEADING_CONNECTIVES = new Set([
   'me', 'us', 'to', 'about', 'the', 'a', 'an', 'that', 'this', 'it', 'more',
   'again', 'please', 'briefly', 'exactly', 'basically', 'simply', 'how',
+  // Added 2026-08-11, when one content word became enough to NAME a topic for
+  // the suppression test. These sit between the request and the real topic and
+  // are never the topic themselves: "explain this TOPIC to me" and "explain
+  // DIFFERENTLY" would otherwise name "topic" and "differently" and read as
+  // requests for something other than the lesson. Same role as "again" and
+  // "simply", which were already here. A list about English, not about
+  // subjects — it cannot grow when the curriculum does.
+  'topic', 'differently', 'simpler', 'detail', 'thing', 'stuff', 'bit',
 ])
 
 /** Where a named topic stops: the sentence does, or the learner's aside does. */
@@ -133,7 +141,27 @@ export interface RequestedTopic {
  * and stops at the end of the clause. It does not look anything up, so it works
  * identically for a topic that exists and one nobody has ever authored.
  */
-export function extractRequestedTopic(message: string): RequestedTopic | null {
+export function extractRequestedTopic(
+  message: string,
+  /**
+   * How many content words a phrase needs before it counts as a NAME.
+   *
+   * Two by default, and that default is load-bearing: it is what stops
+   * "explain that again", "explain it more simply" and "show me a diagram"
+   * from naming anything, which in turn stops them taking away a figure the
+   * learner is reading or grounding a generation on a discourse fragment.
+   *
+   * ONE is passed by the suppression path only, and the asymmetry is the
+   * point. Withholding a NEW figure costs a learner a picture they never had;
+   * removing one mid-explanation, or drawing the wrong concept, costs them
+   * more. Measured across 40 fresh topics: single-word topics — "isotopes",
+   * "titration", "electrolysis", "isomers" — are the commonest way a learner
+   * names something, and every one of them slipped past this floor, so the
+   * lesson's own curated card was served instead. 46 of 62 figures a learner
+   * received were the lesson's picture on somebody else's topic.
+   */
+  minWords: number = MIN_TITLE_WORDS,
+): RequestedTopic | null {
   const request = matchTopicRequest(message ?? '')
   if (!request) return null
 
@@ -151,7 +179,7 @@ export function extractRequestedTopic(message: string): RequestedTopic | null {
   if (!title) return null
 
   const topicWords = contentWords(title)
-  if (topicWords.size < MIN_TITLE_WORDS) return null
+  if (topicWords.size < minWords) return null
 
   return { title, words: topicWords }
 }

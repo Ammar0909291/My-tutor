@@ -56,8 +56,17 @@ describe('Off-curriculum request — the rule fires only on a named topic', () =
    */
   const KNOWN_MISSES = [
     'what is transformer attention',
-    'show me how mortgage amortisation works',
   ]
+
+  // WAS a known miss ("fails safe" = the lesson figure was shown anyway).
+  // Suppressed correctly since the subject-vocabulary escape hatch was
+  // removed on 2026-08-11 — mortgage amortisation is not a physics neighbour.
+  const NOW_SUPPRESSED_WAS_A_MISS = ['show me how mortgage amortisation works']
+  for (const message of NOW_SUPPRESSED_WAS_A_MISS) {
+    it(`no longer a miss: "${message}"`, () => {
+      expect(requestTargetsSomethingElse(message, target(message))).toBe(true)
+    })
+  }
 
   for (const message of KNOWN_MISSES) {
     it(`known miss, fails safe: "${message}"`, () => {
@@ -74,9 +83,37 @@ describe('Off-curriculum request — the rule fires only on a named topic', () =
   // MEASURED IN A REAL SESSION, and wrong before the subject-vocabulary test:
   // both of these are ordinary in-lesson questions that were being suppressed
   // as off-curriculum, taking the figure with them.
-  const IN_LESSON_QUESTIONS: [string, string, string][] = [
+  // CORRECTED 2026-08-11, by a 40-topic / 80-turn production measurement.
+  //
+  // These two asserted that a question built from SUBJECT vocabulary keeps the
+  // lesson's figure — the "defensible neighbour" rule. Measured at scale, that
+  // rule produced 46 wrong figures out of the 62 a learner received: an
+  // ionic-crystal lattice for titration, isotopes, moles, pH and electrolysis;
+  // a free-body diagram for the refraction of light, including in answer to
+  // "Draw it for me." Every one of those took this exit, because every one of
+  // those words is vocabulary its subject knows.
+  //
+  // "energy" is not a neighbour of SI Units and "atom" is a neighbour of
+  // Nature of Matter only when that lesson's own text says so — which is what
+  // the surviving check tests. So both now SUPPRESS unless the lesson's own
+  // title or description carries the word, and the engine shows no figure
+  // instead of a confidently narrated wrong one.
+  const NEIGHBOUR_QUESTIONS: [string, string, string][] = [
     ['what is energy exactly', 'phys.meas.units', 'physics'],
     ['what is an atom made of', 'chem.found.matter', 'chemistry'],
+  ]
+  for (const [message, lesson, subject] of NEIGHBOUR_QUESTIONS) {
+    it(`no longer claims the lesson figure: "${message}"`, () => {
+      const t = resolveVisualTarget(message, lesson, subject)!
+      const suppressed = requestTargetsSomethingElse(message, t)
+      // Suppressed unless the lesson's OWN words carry the named term.
+      const lessonText = `${t.title} ${t.description ?? ''}`.toLowerCase()
+      const named = message.toLowerCase().includes('energy') ? 'energy' : 'atom'
+      expect(suppressed).toBe(!lessonText.includes(named))
+    })
+  }
+
+  const IN_LESSON_QUESTIONS: [string, string, string][] = [
     // The OPENING TURN OF EVERY LESSON, measured in the running app: the rule
     // scanned the whole sentence, so a learner describing THEMSELVES ("I am a
     // complete beginner") was read as naming a topic — {complete, beginner,

@@ -20,6 +20,7 @@ import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/
 import { isExplicitTopicRequest } from './session'
 import { extractRequestedTopic } from './requestedTopic'
 import { contentWords } from './visualEngine'
+import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
 import type { ArchetypeContext } from './archetypes'
 
 export {
@@ -121,6 +122,20 @@ export function resolveVisualTarget(
  * the Teaching Engine owns all of that and is untouched. It answers one visual
  * question: may this figure claim to be what the learner asked for.
  */
+
+/**
+ * Is this word about the FORM of an answer rather than its subject?
+ * Reads the engine's existing medium-noun list; no second list is kept here.
+ * `contentWords` folds a trailing plural, so the entries are compared folded.
+ */
+function isMediumWord(word: string): boolean {
+  for (const noun of VISUAL_MEDIUM_NOUNS) {
+    const folded = noun.endsWith('s') && noun.length > 4 ? noun.slice(0, -1) : noun
+    if (word === folded || word === noun) return true
+  }
+  return word === 'illustration' || word === 'sketch' || word === 'figure' || word === 'plot'
+}
+
 export function requestTargetsSomethingElse(message: string, target: VisualTarget): boolean {
   // Only the fallback can be wrong in this way. A concept the learner actually
   // named IS what they asked for, by construction.
@@ -141,9 +156,32 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
   // grounding path — it takes what follows the request phrase and stops at the
   // end of the clause. Using it here makes ONE definition of a named topic
   // serve both, and deletes the second word list this module was keeping.
-  const requested = extractRequestedTopic(message)
+  // ONE content word is enough HERE. Measured across 40 fresh topics: the
+  // commonest way a learner names a topic is with a single noun —
+  // "What are isotopes?", "What is a titration?", "What are isomers?" — and
+  // every one of them fell under the two-word floor, so this predicate said
+  // "they named nothing", the lesson's own curated card was served, and the
+  // tutor narrated it. 46 of the 62 figures a learner received were the
+  // lesson's picture on somebody else's topic: a crystal lattice for
+  // titration, a free-body diagram for the refraction of light — the latter
+  // in answer to "Draw it for me."
+  //
+  // The two-word floor still governs everywhere else, because everywhere else
+  // the cost is different: there it protects a figure the learner is already
+  // reading. Here the only thing at stake is whether a NEW figure of the wrong
+  // concept gets drawn, and this engine's whole stance is that no figure beats
+  // a wrong one.
+  const requested = extractRequestedTopic(message, 1)
   if (!requested) return false
   const named = [...requested.words]
+
+  // A MEDIUM IS NOT A TOPIC. Dropping to one word means "show me a graph",
+  // "draw a diagram", "can you show a picture" now name "graph" / "diagram" /
+  // "picture" — words about the FORM of the answer, not its subject. Those
+  // requests mean "draw what we are studying", so they must fall through to
+  // the lesson rather than suppress it. `VISUAL_MEDIUM_NOUNS` is the list the
+  // engine already keeps for exactly this distinction; there is no second one.
+  if (named.every((w) => isMediumWord(w))) return false
   // POSITIVE EVIDENCE REQUIRED, and `extractRequestedTopic` already applies
   // it: a phrase with fewer than two content words is not a name, so it
   // returns null above and nothing is suppressed. "explain this again",
@@ -168,7 +206,28 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
   // not happen to use those words — and the lesson's figure is a defensible
   // neighbour for it. Only a request made entirely of words the curriculum has
   // never seen is genuinely somewhere else.
-  return !subjectKnowsAnyOf(named, target.conceptId)
+  // THE ESCAPE HATCH THAT USED TO SIT HERE, AND WHY IT IS GONE.
+  //
+  // It read: `return !subjectKnowsAnyOf(named, target.conceptId)` — i.e. a
+  // request built from words the SUBJECT knows anywhere in its corpus was
+  // treated as a question about the subject being studied, and the lesson's
+  // figure was called "a defensible neighbour" for it.
+  //
+  // Measured across 40 fresh topics, that premise does not hold. "titration",
+  // "electrolysis", "isotopes" and "light" are all chemistry/physics
+  // vocabulary, so every one of them took this exit — and what the learner
+  // then saw was an ionic-crystal lattice for a titration question and a
+  // free-body diagram for the refraction of light. A neighbour is a concept
+  // that helps explain the question; these were simply a different concept's
+  // picture, narrated as if it belonged.
+  //
+  // What remains is the check above, which is the honest one: if any word the
+  // learner named appears in the LESSON'S OWN title or description, the
+  // lesson's figure is genuinely about what they asked and is kept. That is
+  // what still protects "Explain why SI units matter here" in an SI-units
+  // lesson, and "what is an atom made of" in a lesson whose description talks
+  // about atoms. Nothing else earns the fallback.
+  return true
 }
 
 /**
