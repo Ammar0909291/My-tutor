@@ -355,7 +355,40 @@ retrieval defect, not an authoring gap, and it is worth more than any number
 of individual topic fixes: every one of the 424 topics is being taught
 without the misconception library written for it.
 
-### NOT FIXED THIS SESSION — deliberately
+### CORRECTION — the root cause above was WRONG, and here is the measured one
+
+"Misconception screens never reach runtime" is FALSE. Measured before acting:
+the Blueprint register for `phys.meas.units` loads fine — 4 misconceptions
+parsed and reached the prompt. But all four are about SI NAMING (Celsius vs
+kelvin, mass vs weight, litre as a base unit, gram vs kilogram). None is what a
+beginner does on turn three.
+
+Two real defects, both now FIXED (commit `53d6cc47`):
+
+1. **`EBConceptContext` had no misconception field.** 424 Educational Brain
+   entries were parsed for opening scenarios, anti-analogies and voice cues
+   while their richest section — symptom phrases, verbatim detection probes,
+   repair routes — was never read. `parseEBMisconceptions` adds it, merged
+   AFTER the Blueprint register and deduped, so the Blueprint keeps authority.
+   Corpus scan: 424 concepts, **208 EB misconceptions now available**, 54
+   concepts gain a second source. `phys.meas.units` gains M1 *"Units are
+   interchangeable labels on the same number"* with its authored probe and the
+   Mars Climate Orbiter repair.
+   *Honest limit:* the remaining entries use heading/field variants this parser
+   does not yet match. Recorded, not papered over — a follow-up should widen it.
+
+2. **Nothing told the model not to AGREE with a misconception.** This is the
+   actual failure: not a missed warning, but active confirmation. A
+   **NEVER CONFIRM A WRONG CLAIM** rule now fires whenever any misconception
+   knowledge is present — every audited concept. It names the exact openers
+   that failed ("yes", "exactly", "spot on", "that is right"), closes the
+   agree-then-quietly-correct move, and covers the QUESTION form the learner
+   used ("is it just X?", "so it's X right?"), not only flat assertions.
+
+Tests: `src/tests/ebMisconceptionRetrieval.test.ts`, 11 cases.
+Suite 294 files / 6,353 passed; tsc clean; build clean.
+
+### Superseded — the original (incorrect) diagnosis, kept for the record
 
 Wiring Blueprint/EB misconception screens into the live turn touches the
 prompt-assembly path, the signal contract and the teaching-action selector.
