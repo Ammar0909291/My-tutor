@@ -895,6 +895,10 @@ corrected here.
 
 | `eng.composition.argumentation-basics` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.rhetorical-devices` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.counterargument-and-rebuttal` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.logical-fallacies` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.figurative-language-in-composition` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.rhetorical-analysis` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## What this ledger means for the next batch
 
@@ -907,3 +911,18 @@ authors more Blueprints — chemistry, biology, and computer_science have
 no Blueprint production track and are not expected to gain one; their EB
 entries are sourced directly from KG descriptions and standard subject
 pedagogy, per this program's Layer-ownership mapping.
+
+## English Batch 25 addition (2026-08-11)
+
+Adds 4 English rows (`eng.composition.counterargument-and-rebuttal`,
+`eng.composition.logical-fallacies`,
+`eng.composition.figurative-language-in-composition`,
+`eng.composition.rhetorical-analysis`), all with existing Blueprints
+reused by reference, all sections present (full ✓ row per the current
+`EDUCATIONAL_BRAIN_STANDARD.md` heading scheme). English row count in
+this ledger: 197 → 201. The aggregate summary table above remains a
+mathematics-scoped snapshot (601 entries, last recomputed for a
+mathematics batch) and is not recomputed globally this batch, consistent
+with this file's own standing note that the aggregate undercounts
+chemistry and is not kept in lockstep with every subject's batches —
+per-row data for English is authoritative and current as of this batch.

@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **930** (= 1,775 KG concepts − 845 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 24 completion,
+Total queued: **926** (= 1,775 KG concepts − 849 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 25 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1776,10 +1776,6 @@ math.nt Wave 8, moved to READY.
 | 1336 | mathematics | 32 | `math.cx.liouville-theorem` | Liouville's Theorem |
 | 1337 | mathematics | 32 | `math.cx.real-integral-residues` | Evaluating Real Integrals via Residues |
 | 1338 | mathematics | 32 | `math.cx.argument-principle` | Argument Principle |
-| 1339 | english | 32 | `eng.composition.counterargument-and-rebuttal` | Counterargument and Rebuttal |
-| 1340 | english | 32 | `eng.composition.logical-fallacies` | Logical Fallacies |
-| 1341 | english | 32 | `eng.composition.figurative-language-in-composition` | Figurative Language in Composition |
-| 1342 | english | 32 | `eng.composition.rhetorical-analysis` | Rhetorical Analysis |
 | 1343 | mathematics | 33 | `math.de.harmonic-oscillator` | Harmonic Oscillator |
 | 1344 | mathematics | 33 | `math.cx.fundamental-theorem-algebra` | Fundamental Theorem of Algebra (Complex Analysis) |
 | 1345 | mathematics | 33 | `math.cx.rouche-theorem` | Rouché's Theorem |
