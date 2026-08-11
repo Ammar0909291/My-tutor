@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **940** (= 1,775 KG concepts − 835 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 20 completion,
+Total queued: **937** (= 1,775 KG concepts − 838 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 21 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1638,7 +1638,6 @@ math.nt Wave 8, moved to READY.
 | 1179 | mathematics | 26 | `math.num.iterative-linear` | Iterative Methods for Linear Systems |
 | 1180 | mathematics | 26 | `math.num.runge-kutta` | Runge-Kutta Methods |
 | 1181 | mathematics | 26 | `math.opt.linear-programming` | Linear Programming |
-| 1183 | english | 26 | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature |
 | 1189 | mathematics | 27 | `math.nt.number-fields` | Number Fields |
 | 1190 | mathematics | 27 | `math.alg.factoring-trinomials` | Factoring Trinomials |
 | 1191 | mathematics | 27 | `math.alg.rational-expressions-addition` | Addition of Rational Expressions |
@@ -1668,7 +1667,6 @@ math.nt Wave 8, moved to READY.
 | 1215 | mathematics | 27 | `math.opt.quadratic-programming` | Quadratic Programming |
 | 1216 | mathematics | 27 | `math.opt.semidefinite-programming` | Semidefinite Programming |
 | 1217 | mathematics | 27 | `math.opt.integer-programming` | Integer Programming |
-| 1218 | english | 27 | `eng.writing.editing-and-proofreading` | Editing and Proofreading |
 | 1221 | mathematics | 28 | `math.alg.quadratic-equation` | Quadratic Equation |
 | 1222 | mathematics | 28 | `math.de.variation-of-parameters` | Variation of Parameters |
 | 1223 | mathematics | 28 | `math.de.bessel-equation` | Bessel's Equation |
@@ -1701,7 +1699,6 @@ math.nt Wave 8, moved to READY.
 | 1250 | mathematics | 28 | `math.cx.conformal-mapping` | Conformal Mapping |
 | 1251 | mathematics | 28 | `math.num.svd` | SVD (Numerical) |
 | 1252 | mathematics | 28 | `math.opt.pca` | Principal Component Analysis |
-| 1253 | english | 28 | `eng.writing.essay-structure` | Essay Structure |
 | 1255 | mathematics | 29 | `math.nt.prime-number-theorem` | Prime Number Theorem |
 | 1256 | mathematics | 29 | `math.alg.completing-the-square` | Completing the Square |
 | 1257 | mathematics | 29 | `math.alg.polynomial-roots` | Polynomial Roots (Real and Complex) |

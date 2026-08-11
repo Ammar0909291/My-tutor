@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 187 READY)
+## english (216 concepts, 190 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1270,7 +1270,7 @@ its subject KG.
 | listening | `eng.listening.listening-for-gist` | Listening for Gist | Yes | Yes | `educational-brain/concepts/english/eng.listening.listening-for-gist.md` | READY |
 | listening | `eng.listening.note-taking-while-listening` | Note-Taking While Listening | Yes | Yes | `educational-brain/concepts/english/eng.listening.note-taking-while-listening.md` | READY |
 | literature | `eng.literature.character-development` | Character Development | Yes | Yes | — | READY |
-| literature | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature | Yes | No | — | MISSING |
+| literature | `eng.literature.comparative-literature-intro` | Introduction to Comparative Literature | Yes | Yes | `educational-brain/concepts/english/eng.literature.comparative-literature-intro.md` | READY |
 | literature | `eng.literature.drama-basics` | Drama Basics | Yes | Yes | — | READY |
 | literature | `eng.literature.dramatic-structure` | Dramatic Structure | Yes | Yes | — | READY |
 | literature | `eng.literature.foreshadowing-and-suspense` | Foreshadowing and Suspense | Yes | Yes | — | READY |
@@ -1372,8 +1372,8 @@ its subject KG.
 | writing | `eng.writing.creative-writing-forms` | Creative Writing Forms | Yes | Yes | `educational-brain/concepts/english/eng.writing.creative-writing-forms.md` | READY |
 | writing | `eng.writing.descriptive-writing` | Descriptive Writing | Yes | Yes | — | READY |
 | writing | `eng.writing.drafting` | Drafting | Yes | Yes | `educational-brain/concepts/english/eng.writing.drafting.md` | READY |
-| writing | `eng.writing.editing-and-proofreading` | Editing and Proofreading | Yes | No | — | MISSING |
-| writing | `eng.writing.essay-structure` | Essay Structure | Yes | No | — | MISSING |
+| writing | `eng.writing.editing-and-proofreading` | Editing and Proofreading | Yes | Yes | `educational-brain/concepts/english/eng.writing.editing-and-proofreading.md` | READY |
+| writing | `eng.writing.essay-structure` | Essay Structure | Yes | Yes | `educational-brain/concepts/english/eng.writing.essay-structure.md` | READY |
 | writing | `eng.writing.expository-writing` | Expository Writing | Yes | Yes | — | READY |
 | writing | `eng.writing.handwriting-and-formation` | Handwriting and Letter Formation | Yes | Yes | `educational-brain/concepts/english/eng.writing.handwriting-and-formation.md` | READY |
 | writing | `eng.writing.narrative-writing` | Narrative Writing | Yes | Yes | — | READY |
