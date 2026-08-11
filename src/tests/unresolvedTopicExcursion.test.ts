@@ -356,3 +356,77 @@ describe('the excursion state round-trips through the snapshot', () => {
     expect(decision.state.active).toBe(false)
   })
 })
+
+// ── 6. THE THREE DEFECTS MEASURED IN PRODUCTION ─────────────────────────────
+
+describe('production defects D1, D2, D3', () => {
+  /**
+   * D2 — a request for a different PRESENTATION of the current topic is not a
+   * request for a different topic. Captured live: the session snapshot held
+   * excursion.targetTopicTitle = "real-life example of this", so asking for an
+   * example of the lesson split the lesson in half.
+   */
+  const PRESENTATION_REQUESTS = [
+    'show me a real-life example of this',
+    'give me a real-life example of this',
+    'can you give me a real life example',
+    'show me an everyday example',
+    'give me another example',
+    'give me a practical example',
+    'can you explain this more simply',
+  ]
+
+  for (const message of PRESENTATION_REQUESTS) {
+    it(`D2 — stays in the lesson: ${message}`, () => {
+      const t = turn({ message })
+      expect(t.requestedTopicTitle).toBeNull()
+      expect(t.decision.state.active).toBe(false)
+    })
+  }
+
+  it('D2 — a genuine topic is still not swallowed by the presentation words', () => {
+    // One surviving word is enough, which is the only reason those words are
+    // safe to list at all.
+    const taught = 'Free Body Diagram forces acting on a body'
+    expect(namedTopicUnknownTo('explain half-life', taught)).not.toBeNull()
+    expect(namedTopicUnknownTo('teach me about life processes', taught)).not.toBeNull()
+    expect(namedTopicUnknownTo('explain simple machines', taught)).not.toBeNull()
+    expect(namedTopicUnknownTo('what are real gases?', taught)).not.toBeNull()
+  })
+
+  it('D1 — the directive forbids inventing a bridge to the lesson', () => {
+    const decision = turn({ message: 'Why does light bend when it enters water?' }).decision
+    const block = buildExcursionDirective({
+      decision, targetTitle: decision.targetTopicTitle, lessonTitle: 'Free Body Diagrams',
+    })
+    expect(block).toContain('do NOT build a BRIDGE between the two')
+    expect(block).toContain('connecting this back to')
+    expect(block).toContain('Two topics being in the same subject is NOT a connection')
+  })
+
+  it('D3 — the directive forbids claiming progress for a topic with no concept', () => {
+    const decision = turn({ message: 'What is thermal conductivity?' }).decision
+    const block = buildExcursionDirective({
+      decision, targetTitle: decision.targetTopicTitle, lessonTitle: 'Free Body Diagrams',
+    })
+    expect(block).toContain('no progress of any kind is recorded for it')
+    expect(block).toContain('Praise their understanding')
+  })
+
+  it('D3 — a RESOLVED excursion keeps its normal progress language', () => {
+    // The clause is scoped to topics the curriculum does not contain. A real
+    // concept does record progress, and must not be told otherwise.
+    const decision = decideExcursion({
+      state: NO_EXCURSION,
+      message: 'explain viscosity',
+      lessonConceptId: PHYS_LESSON,
+      requestedConceptId: 'phys.fluid.viscosity',
+      requestedTopicTitle: null,
+      lastAssistantAskedQuestion: false,
+    })
+    const block = buildExcursionDirective({
+      decision, targetTitle: 'Viscosity', lessonTitle: 'Free Body Diagrams',
+    })
+    expect(block).not.toContain('no progress of any kind is recorded for it')
+  })
+})

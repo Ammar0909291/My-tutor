@@ -237,6 +237,26 @@ const DISCOURSE_NOUNS = new Set([
   'mean', 'work', 'do',
   // position words, safe here because one surviving word is enough
   'next', 'last', 'first', 'previous', 'other',
+  // WHAT KIND OF PRESENTATION, not what subject.
+  //
+  // Added after a real production capture: the session snapshot held
+  //   excursion.targetTopicTitle = "real-life example of this"
+  // because "show me a real-life example of this" names {real, life} — words
+  // the lesson's own text does not contain, so the guard let them through and
+  // a request for a different presentation of the CURRENT topic split the
+  // lesson in half.
+  //
+  // Note this could NOT be solved with `detectLearnerRequest`, which was the
+  // obvious reuse and was measured before being rejected: it returns
+  // 'real_life_example' for "give me a real-life example of FRICTION" too, so
+  // gating on it would have suppressed genuine topic requests. The words are
+  // the discriminator, not the request form.
+  //
+  // Every one of these is safe only because ONE surviving word is enough:
+  // "simple machines", "real gases", "half-life" and "life processes" all
+  // keep a real word and are unaffected.
+  'real', 'life', 'everyday', 'practical', 'simple', 'basic', 'easy',
+  'quick', 'short', 'another', 'different',
 ])
 
 /**

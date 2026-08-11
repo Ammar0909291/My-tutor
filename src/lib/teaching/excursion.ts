@@ -474,6 +474,23 @@ export function buildExcursionDirective(input: {
     '(2) Do NOT teach, open, anchor, illustrate or ask a question belonging to ' +
     lesson + ' this turn, and do NOT steer back to it mid-explanation. It may be ' +
     'named ONLY as the paused destination you will return to later. ' +
+    // THE BRIDGE SENTENCE. Measured in production on 2 of 5 real learner
+    // questions, and it slipped past the clause above because the model was
+    // not "steering back" — it kept teaching the side topic. It was
+    // CONNECTING: "Connecting this back to our journey, understanding how
+    // waves change direction at boundaries builds the precise spatial
+    // reasoning you need for tracking forces in Free Body Diagrams." That
+    // link is invented. Refraction does not build toward free-body diagrams,
+    // and a learner told it does has been taught something false about how
+    // the subject fits together — on the exact turn they trusted the tutor
+    // enough to ask their own question.
+    'In particular, do NOT build a BRIDGE between the two: do not say the ' +
+    'side topic connects to, relates to, builds toward, prepares you for, ' +
+    'reinforces or helps with ' + lesson + ', and do not open a sentence with ' +
+    '"connecting this back to", "tying this back to", "as with our lesson on" ' +
+    'or any equivalent. Two topics being in the same subject is NOT a ' +
+    'connection. If a genuine, specific link exists the learner asked about, ' +
+    'you may state it plainly — otherwise say nothing about the lesson at all. ' +
     // (3) USED TO READ: "ask whether they still have a doubt about <target>".
     // Measured at 17% of production turns, and it is not a check — a learner
     // who does not know what they misunderstood cannot answer it, and "no"
@@ -513,6 +530,21 @@ export function buildExcursionDirective(input: {
     '[LESSON_COMPLETE], do NOT write a lesson-closing summary, and do NOT ' +
     'congratulate the learner on completing ' + lesson + '. The server enforces ' +
     'this regardless of what you emit — a completion tag on this turn is ' +
-    'stripped before the learner sees it.'
+    'stripped before the learner sees it.' +
+    // (8) ONLY for a topic the curriculum does not contain. Measured in
+    // production: after a correct answer about thermal conductivity the tutor
+    // said "You've completed a key concept in your thermal physics roadmap."
+    // There is no such concept and no such roadmap entry — nothing was
+    // recorded, nothing advanced, and the learner was told otherwise. Praise
+    // for understanding is right and stays; the invented bookkeeping is what
+    // must go.
+    (unresolvedTopic
+      ? ' (8) ' + target + ' is NOT part of this learner\'s curriculum, so no ' +
+        'progress of any kind is recorded for it. Praise their understanding ' +
+        'freely, but do NOT say they have completed a concept, unlocked ' +
+        'anything, advanced a roadmap or syllabus, or moved forward in any ' +
+        'plan — none of that happened. Do not refer them to a progress screen ' +
+        'or navigation control to find it.'
+      : '')
   )
 }
