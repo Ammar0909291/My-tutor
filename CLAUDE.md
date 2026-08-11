@@ -2025,6 +2025,71 @@
   0-ERROR baseline. Left alone deliberately: unrelated to this work and it alters shared
   production security config on an unfamiliar table. Needs an owner decision.
 
+## Learner-experience remediation (2026-08-11, production-verified)
+- **L1 — the dropped qualifier.** "What is thermal conductivity?" resolved to `phys.em.resistivity`
+  ("Resistivity and Conductivity"), i.e. ELECTRICAL conductivity: the learner asked about heat and
+  the engine handed the tutor a concept about current. Cause: `deriveTitleComponents` admits a
+  one-word conjunct of a compound title when that word occurs in exactly ONE title across all
+  1,775 concepts. "Conductivity" clears that bar because the corpus has no thermal-conductivity
+  concept — corpus uniqueness is a claim about the KG's COMPLETENESS and was being read as a claim
+  about the world. Fix (`conceptIndex.ts`): a one-word TITLE_COMPONENT match is dropped when the
+  token immediately in front of it is a qualifier the corpus assigns, unambiguously (exactly one
+  domain), to a DIFFERENT domain. Corpus-derived, no phrase list, nothing mentioning heat.
+  Measured across every "<word> <conjunct>" phrase occurring in the corpus: 461 phrases, 49
+  affected, most of them the same defect elsewhere ("scope resolution" and "collision resolution"
+  were being answered with the physics concept "Vector Addition and Resolution"). Never applies
+  above TITLE_COMPONENT, which is why "orbital hybridisation" is untouched (chem.bond.hybridization
+  matches on its FULL title and its text contains no "orbital" — any rule demanding the qualifier
+  appear in the matched concept would have broken it). **"thermal conductivity" now resolves to
+  NOTHING**: the physics KG genuinely has no such concept, and `phys.therm.heat-transfer` is a
+  different thing. Adding it is Curriculum Pipeline work, deliberately not faked with an alias.
+  Guard: `src/tests/qualifiedConceptResolution.test.ts`.
+- **L3 — the requested form.** In an Ohm's Law lesson, "Can you graph this?", "show me a graph of
+  this", "can you draw a diagram" and "show me an animation" all attached the identical curated
+  `electric_circuit` scene. The circuit is the RIGHT curated figure and keeps its authority —
+  nothing was removed, demoted or reordered, and a medium noun never overrides the tier order.
+  What harmed the learner was the tutor then presenting that circuit as the graph it had been
+  asked for. `requestedVisualForm()` (`masteryGate.ts`) reports plot/motion for unmistakable forms
+  only; `buildVisualContractBlock` DECLARES the mismatch instead of resolving it.
+  **Production-verified**: "Can you graph this?" now answers "I don't have a graph of this, but
+  here is the circuit it describes…". Guard: `src/tests/requestedVisualForm.test.ts`.
+- **L4 — UI density: the earlier number was wrong.** The previously reported "~112 desktop
+  controls" was an instrument error — it counted every interactive element in the DOM, including
+  the Play/"Read more" buttons on 100 scrolled-off earlier messages. Measured against the
+  VIEWPORT on the real account: 44 controls at 1280, 28 at 1024, 48 at 768, and mobile 390 renders
+  correctly. Dense, but not a crisis, so NO structural redesign was made and none is proposed on
+  this evidence. What the measurement did surface: a hardcoded Russian noun in an aria-label
+  (`${t('nav_previous')} урок` → "Previous урок" in English and "Pichla урок" in Hindi; fixed with
+  a real `nav_previous_lesson` key in all three language blocks), seven simultaneous buttons all
+  reading "Prerequisites needed ▼" with no indication of which lesson (now carry the lesson title
+  + aria-expanded + a 24px hit area), and two 22×22 glyph-only maximize buttons announced as "⊞"
+  (now 26×26 with aria-label). Guard: `src/tests/lessonNavigationLabels.test.ts`.
+- **L2 — verified passing, deliberately untouched** per instruction. Question-form recall
+  ("What happens during electrolysis?", "Why does light bend…", "What causes friction?", "How does
+  a catalyst work?") is closed by the WEAK detector family (`isTopicQuestion`), which governs
+  `requestTargetsSomethingElse` only. Adding those forms to the STRONG family was measured first
+  and rejected: it made "why does temperature change it?" evict the figure being read.
+- **OPEN, and the most important one — question protection is resolution-dependent.** Measured in
+  production AFTER this deploy: "What is thermal conductivity?" in a Free Body Diagram lesson gets
+  one correct sentence about heat, then "Now, let's connect this back to our current lesson on Free
+  Body Diagrams" — the exact forced steer-back P0-1 was meant to end. The P0-1 rule is present and
+  correct in both `client.ts` and `conceptAnchor.ts`, but the DETERMINISTIC protection is the
+  excursion lifecycle, and `decideExcursion` opens only on a resolved KG `requestedConceptId`. So
+  when a learner names a topic the curriculum does not contain, the protection disappears exactly
+  when it is most needed — and L1's fix makes that case MORE common, since it now correctly
+  resolves such topics to nothing instead of to a wrong concept. Closing it means letting an
+  excursion target a topic the KG does not have (the same shape `requestedTopic.ts` already gives
+  the visual engine), which touches excursion state, persistence and the visual target — not a
+  small change, and NOT attempted as a prompt patch.
+- Full suite 291 files / 6,276 passed / 9 skipped; `npx tsc --noEmit` clean; `npm run build`
+  clean. Commits `348b1f6`, `1e8bcff` on `main`, deployed (`dpl_J1hdYo4Z…`, READY, aliased to
+  my-tutor-flame.vercel.app).
+- **AssetIdentity state, read directly from production this session** (supersedes the older
+  counts above): 1,589 ACTIVE HUMAN_CURATOR EXPLANATION rows over **683 of 1,775 concepts
+  (38.5%)**, 1,533 ACTIVE PROBE rows over 604 concepts, 10 ACTIVE VISUAL. Per subject (explanation
+  concepts): physics 238/238, english 216/216, chemistry 186/186, mathematics 43/908, biology 0,
+  computer_science 0. Biology and CS remain the only subjects with no authored serving content.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
