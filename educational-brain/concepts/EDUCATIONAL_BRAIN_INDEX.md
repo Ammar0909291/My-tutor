@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 212 READY)
+## english (216 concepts, 216 READY — 100% COMPLETE)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | Yes | `educational-brain/concepts/english/eng.communication.academic-writing-advanced.md` | READY |
@@ -1177,11 +1177,11 @@ its subject KG.
 | communication | `eng.communication.cross-cultural-communication` | Cross-Cultural Communication | Yes | Yes | `educational-brain/concepts/english/eng.communication.cross-cultural-communication.md` | READY |
 | communication | `eng.communication.digital-communication` | Digital Communication | Yes | Yes | `educational-brain/concepts/english/eng.communication.digital-communication.md` | READY |
 | communication | `eng.communication.discourse-markers-advanced` | Advanced Discourse Markers | Yes | Yes | `educational-brain/concepts/english/eng.communication.discourse-markers-advanced.md` | READY |
-| communication | `eng.communication.editing-for-publication` | Editing for Publication | Yes | No | — | MISSING |
+| communication | `eng.communication.editing-for-publication` | Editing for Publication | Yes | Yes | `educational-brain/concepts/english/eng.communication.editing-for-publication.md` | READY |
 | communication | `eng.communication.media-literacy` | Media Literacy | Yes | Yes | — | READY |
-| communication | `eng.communication.negotiation-language` | Negotiation Language | Yes | No | — | MISSING |
-| communication | `eng.communication.presentation-design` | Presentation Design | Yes | No | — | MISSING |
-| communication | `eng.communication.professional-communication` | Professional Communication | Yes | No | — | MISSING |
+| communication | `eng.communication.negotiation-language` | Negotiation Language | Yes | Yes | `educational-brain/concepts/english/eng.communication.negotiation-language.md` | READY |
+| communication | `eng.communication.presentation-design` | Presentation Design | Yes | Yes | `educational-brain/concepts/english/eng.communication.presentation-design.md` | READY |
+| communication | `eng.communication.professional-communication` | Professional Communication | Yes | Yes | `educational-brain/concepts/english/eng.communication.professional-communication.md` | READY |
 | communication | `eng.communication.research-methodology-writing` | Writing Research Methodology | Yes | Yes | `educational-brain/concepts/english/eng.communication.research-methodology-writing.md` | READY |
 | communication | `eng.communication.technical-writing` | Technical Writing | Yes | Yes | `educational-brain/concepts/english/eng.communication.technical-writing.md` | READY |
 | composition | `eng.composition.academic-writing-conventions` | Academic Writing Conventions | Yes | Yes | `educational-brain/concepts/english/eng.composition.academic-writing-conventions.md` | READY |

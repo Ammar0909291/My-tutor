@@ -21,9 +21,10 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **915** (= 1,775 KG concepts − 860 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 29 completion,
-2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
+Total queued: **911** (= 1,775 KG concepts − 864 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 30 completion — ENGLISH
+NOW 100% COMPLETE, no English rows remain in this queue — 2026-08-11 —
+see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
 math.found Waves 7-10's and math.geom Wave 10's positions below.
@@ -1780,7 +1781,3 @@ math.nt Wave 8, moved to READY.
 | 1344 | mathematics | 33 | `math.cx.fundamental-theorem-algebra` | Fundamental Theorem of Algebra (Complex Analysis) |
 | 1345 | mathematics | 33 | `math.cx.rouche-theorem` | Rouché's Theorem |
 | 1350 | mathematics | 34 | `math.de.resonance` | Resonance |
-| 1358 | english | 37 | `eng.communication.professional-communication` | Professional Communication |
-| 1359 | english | 37 | `eng.communication.presentation-design` | Presentation Design |
-| 1360 | english | 37 | `eng.communication.editing-for-publication` | Editing for Publication |
-| 1361 | english | 38 | `eng.communication.negotiation-language` | Negotiation Language |

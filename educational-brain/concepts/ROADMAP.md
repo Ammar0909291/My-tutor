@@ -13,19 +13,22 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **860** |
-| Remaining | **915** |
-| Completion percentage | **48.45%** |
+| Concepts with an Educational Brain entry | **864** |
+| Remaining | **911** |
+| Completion percentage | **48.68%** |
 
 *(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 212 english + 186 chemistry + 0 biology + 0 computer_science = 860.
-English reached 209 through Batch 28 (full per-batch history in prior
-revisions of this file and in git commit messages), then Batch 29 (3,
-level-29 frontier BATCH COMPLETE: `eng.communication.research-
-methodology-writing`, `eng.communication.technical-writing`,
-`eng.communication.business-writing`) to 212. Mathematics/physics/
-chemistry figures are taken as already-recorded below, not re-audited
-this session, per this session's English-only scope.)*
++ 216 english + 186 chemistry + 0 biology + 0 computer_science = 864.
+English reached 212 through Batch 29 (full per-batch history in prior
+revisions of this file and in git commit messages), then Batch 30 — the
+FINAL BATCH (4, level-30 frontier BATCH COMPLETE:
+`eng.communication.professional-communication`,
+`eng.communication.presentation-design`,
+`eng.communication.editing-for-publication`,
+`eng.communication.negotiation-language`) — to **216/216, ENGLISH
+100% COMPLETE**. Mathematics/physics/chemistry figures are taken as
+already-recorded below, not re-audited this session, per this
+session's English-only scope.)*
 
 ---
 
@@ -35,7 +38,7 @@ this session, per this session's English-only scope.)*
 |---|---|---|---|---|---|
 | mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
-| english | 216 | 212 | 98.15% | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) |
+| english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
 | biology | 108 | 0 | 0.00% | `bio.found.what-is-biology` | No |
 | computer_science | 119 | 0 | 0.00% | `cs.found.intro-computers` | No |
@@ -1201,6 +1204,29 @@ completion constraint) takes precedence over that file's literal row
 order until `math.found` is complete, unless overridden per item 4.
 
 ## 6. Next batch
+
+**English Batch 30 — FINAL BATCH, ENGLISH 100% COMPLETE (2026-08-11,
+autonomous /loop dynamic mode, continuing directly after Batch 29)**:
+computed the fresh topological queue against the true 212-concept
+baseline — 4 concepts missing, 3 "ready now" (all prerequisites
+satisfied): `eng.communication.professional-communication`,
+`eng.communication.presentation-design`,
+`eng.communication.editing-for-publication`. All 3 had existing
+Blueprints, reused by reference. Authoring `professional-communication`
+in this same batch unblocked the English KG's one remaining concept,
+`eng.communication.negotiation-language` (its sole prerequisite) — also
+authored this batch, closing English to **216/216 (100.00%)**. True
+total: **864** EB entries (238 physics + 224 mathematics + 216 english +
+186 chemistry), out of 1,775 total KG concepts — 911 remaining, 48.68%.
+Verified programmatically: 0 English KG concepts remain without an
+Educational Brain entry. **This closes the multi-session English
+Educational Brain authoring program (Batches 1-30, started 2026-07-10).**
+No further English batches are needed; the standing `/loop` task's
+"finish 216 entries" goal is achieved. Future English EB work (Standard
+migration for the 6 pre-Standard-format entries flagged in the Batch
+9/10 forensic audits, or reconciling KG/Blueprint metadata drift items
+noted along the way) is a distinct, separate task from this program's
+scope, not a continuation of it.
 
 **English Batch 29, BATCH COMPLETE (2026-08-11, autonomous /loop dynamic
 mode, continuing directly after Batch 28)**: computed the fresh

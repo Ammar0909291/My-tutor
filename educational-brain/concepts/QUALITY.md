@@ -910,6 +910,10 @@ corrected here.
 | `eng.communication.research-methodology-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.communication.technical-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.communication.business-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.professional-communication` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.presentation-design` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.editing-for-publication` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.communication.negotiation-language` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## What this ledger means for the next batch
 
@@ -986,3 +990,19 @@ aggregate summary table above remains a mathematics-scoped snapshot,
 not recomputed globally this batch, per this file's own standing note
 — per-row data for English is authoritative and current as of this
 batch.
+
+## English Batch 30 — FINAL BATCH, ENGLISH 100% COMPLETE (2026-08-11)
+
+Adds the final 4 English rows (`eng.communication.professional-communication`,
+`eng.communication.presentation-design`,
+`eng.communication.editing-for-publication`,
+`eng.communication.negotiation-language`), all with existing Blueprints
+reused by reference, all sections present (full ✓ row per the current
+`EDUCATIONAL_BRAIN_STANDARD.md` heading scheme). English row count in
+this ledger: 212 → **216 — every English KG concept now has an
+Educational Brain entry.** The aggregate summary table above remains a
+mathematics-scoped snapshot, not recomputed globally this batch, per
+this file's own standing note — per-row data for English is
+authoritative and complete as of this batch. This closes the
+multi-session English Educational Brain authoring program (Batches
+1-30, started 2026-07-10).
