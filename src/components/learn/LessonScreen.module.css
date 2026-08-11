@@ -15,6 +15,16 @@
  * Monaco keeps its own dedicated editor theme (defineTheme in LessonScreen) —
  * a code editor staying on its own palette is expected and intentional.
  */
+/* Fallback-then-override pair: browsers without dvh support keep 100vh;
+   browsers with it get the correct dynamic viewport height, so the
+   maximized/fullscreen Learn panel isn't clipped or oversized by mobile
+   browser chrome (address bar show/hide) — the later declaration wins
+   only where the unit is understood, per the CSS cascade. */
+.learnRoot {
+  height: 100vh;
+  height: 100dvh;
+}
+
 .learnCandy {
   composes: candyTheme from '../ui/candy/tokens.module.css';
 
