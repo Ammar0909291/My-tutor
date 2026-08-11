@@ -153,3 +153,32 @@ position. That is the D10 defect, and it is demonstrably gone.
 
 199 older messages restore no figure — they predate the column. Correct and
 expected: the fix records figures from now on, and does not fabricate history.
+
+## D1/D2/D3 — FIXED (2026-08-11, commit `50ad65d9`)
+
+All three were measured on REAL learner turns in production, not predicted.
+
+| id | defect | evidence | fix |
+|----|--------|----------|-----|
+| D1 | invented bridge back to the lesson during an excursion | 2 of 5 production questions: *"Connecting this back to our journey, understanding how waves change direction at boundaries builds the precise spatial reasoning you need for tracking forces in Free Body Diagrams."* | directive rule (2) forbids the bridge move by name, including the "connecting this back to" opener; states that sharing a subject is not a connection |
+| D2 | presentation request opened a bogus excursion | live snapshot held `excursion.targetTopicTitle = "real-life example of this"` | presentation adjectives (`real, life, everyday, practical, simple, basic, easy, quick, short, another, different`) join `DISCOURSE_NOUNS` |
+| D3 | unsupported progress claim | *"You've completed a key concept in your thermal physics roadmap."* — no such concept, nothing recorded | new directive clause, scoped to topics with no KG concept: keep the praise, drop the bookkeeping |
+
+**A rejected fix, recorded because the rejection is the finding:** D2 looked
+like a job for `detectLearnerRequest`, which already classifies
+"real_life_example". Measured first — it also fires on *"give me a real-life
+example of FRICTION"*, a genuine topic request, so gating on it would have
+suppressed real excursions. The WORDS discriminate, not the request form.
+
+The adjectives are safe only because ONE surviving word is enough:
+"simple machines", "real gases", "half-life", "life processes" all still name
+their topic, and each is a test.
+
+**KNOWN LIMITATION, recorded not fixed:** *"give me a real-life example of
+friction"* extracts no topic at all and stays in the lesson. It predates this
+change and fails safe. Fixing it means altering the request-phrase regex —
+the same surface that produced the L1 qualifier defect — so it is deferred to
+a dedicated session rather than changed in passing.
+
+Tests: 57 in `unresolvedTopicExcursion.test.ts` (was 46).
+Suite 293 files / 6,343 passed / 9 skipped; tsc clean; build clean.
