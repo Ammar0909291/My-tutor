@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **974** (= 1,775 KG concepts − 801 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 15 completion,
+Total queued: **965** (= 1,775 KG concepts − 810 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 16 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1074,7 +1074,6 @@ math.geom Wave 5, moved to READY.
 | 591 | mathematics | 16 | `math.real.archimedean` | Archimedean Property |
 | 592 | mathematics | 16 | `math.real.convergence-sequences` | Convergence of Sequences |
 | 593 | mathematics | 16 | `math.real.open-sets` | Open and Closed Sets |
-| 600 | english | 16 | `eng.speaking.debate-skills` | Debate Skills |
 | 601 | chemistry | 16 | `chem.sol.colligative` | Colligative Properties |
 | 602 | chemistry | 16 | `chem.sol.activity` | Activity and Non-ideal Solutions |
 | 603 | chemistry | 16 | `chem.elect.concentration-cell` | Concentration Cells |
@@ -1446,8 +1445,6 @@ authored math.nt Wave 4, moved to READY.
 | 960 | mathematics | 21 | `math.fnal.completeness` | Completeness |
 | 961 | mathematics | 21 | `math.num.error-analysis` | Error Analysis |
 | 962 | mathematics | 21 | `math.num.newtons-method` | Newton's Method |
-| 964 | english | 21 | `eng.literature.literary-devices-overview` | Overview of Literary Devices |
-| 965 | english | 21 | `eng.literature.prose-nonfiction` | Prose Nonfiction |
 | 968 | chemistry | 21 | `chem.bio.nucleic-acids` | Nucleic Acids |
 | 969 | chemistry | 21 | `chem.bio.vitamins` | Vitamins and Hormones |
 | 970 | chemistry | 21 | `chem.bio.enzyme-kinetics` | Enzyme Kinetics |
@@ -1512,10 +1509,6 @@ math.nt Wave 5 part 1, moved to READY.
 | 1027 | mathematics | 22 | `math.opt.unconstrained-optimization` | Unconstrained Optimization |
 | 1028 | mathematics | 22 | `math.opt.convex-function` | Convex Function |
 | 1029 | mathematics | 22 | `math.graph.algebraic-graph-theory` | Algebraic Graph Theory |
-| 1030 | english | 22 | `eng.writing.narrative-writing` | Narrative Writing |
-| 1031 | english | 22 | `eng.writing.descriptive-writing` | Descriptive Writing |
-| 1032 | english | 22 | `eng.writing.expository-writing` | Expository Writing |
-| 1033 | english | 22 | `eng.writing.persuasive-writing-basics` | Persuasive Writing Basics |
 | 1034 | english | 22 | `eng.literature.metaphor-and-simile` | Metaphor and Simile |
 | 1035 | english | 22 | `eng.literature.irony` | Irony |
 | 1036 | english | 22 | `eng.literature.poetry-basics` | Poetry Basics |
@@ -1638,8 +1631,6 @@ math.nt Wave 8, moved to READY.
 | 1154 | english | 25 | `eng.writing.drafting` | Drafting |
 | 1155 | english | 25 | `eng.literature.novel-study` | Novel Study |
 | 1156 | english | 25 | `eng.literature.literary-criticism-intro` | Introduction to Literary Criticism |
-| 1157 | english | 25 | `eng.linguistics.discourse-analysis-intro` | Introduction to Discourse Analysis |
-| 1158 | english | 25 | `eng.linguistics.sociolinguistics-intro` | Introduction to Sociolinguistics |
 | 1159 | mathematics | 26 | `math.nt.algebraic-integers` | Algebraic Integers |
 | 1160 | mathematics | 26 | `math.alg.factoring-gcf` | Factoring out the GCF |
 | 1161 | mathematics | 26 | `math.alg.factoring-special` | Special Factoring Patterns |
