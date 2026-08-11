@@ -899,6 +899,10 @@ corrected here.
 | `eng.composition.logical-fallacies` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.figurative-language-in-composition` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 | `eng.composition.rhetorical-analysis` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.style-voice-and-tone` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.persuasive-techniques` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.comparative-essay-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
+| `eng.composition.research-paper-writing` | english | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## What this ledger means for the next batch
 
@@ -926,3 +930,16 @@ mathematics batch) and is not recomputed globally this batch, consistent
 with this file's own standing note that the aggregate undercounts
 chemistry and is not kept in lockstep with every subject's batches —
 per-row data for English is authoritative and current as of this batch.
+
+## English Batch 26 addition (2026-08-11)
+
+Adds 4 English rows (`eng.composition.style-voice-and-tone`,
+`eng.composition.persuasive-techniques`,
+`eng.composition.comparative-essay-writing`,
+`eng.composition.research-paper-writing`), all with existing Blueprints
+reused by reference, all sections present (full ✓ row per the current
+`EDUCATIONAL_BRAIN_STANDARD.md` heading scheme). English row count in
+this ledger: 201 → 205. The aggregate summary table above remains a
+mathematics-scoped snapshot, not recomputed globally this batch, per
+this file's own standing note — per-row data for English is
+authoritative and current as of this batch.

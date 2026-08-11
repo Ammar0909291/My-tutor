@@ -21,8 +21,8 @@ this queue; everything else is ordered by two rules only:
    Production Pipeline) — the one remaining tie-break, deterministic and
    reproducible, not a preference.
 
-Total queued: **926** (= 1,775 KG concepts − 849 already `READY`, per
-`ROADMAP.md`'s §1 Totals as of the English Batch 25 completion,
+Total queued: **922** (= 1,775 KG concepts − 853 already `READY`, per
+`ROADMAP.md`'s §1 Totals as of the English Batch 26 completion,
 2026-08-11 — see the English branch-reconciliation note below). This header was stale at 1524/251
 from an earlier point in the project; row numbers within the table below
 are not fully renumbered to match, see the row-removal notes at
@@ -1779,10 +1779,6 @@ math.nt Wave 8, moved to READY.
 | 1343 | mathematics | 33 | `math.de.harmonic-oscillator` | Harmonic Oscillator |
 | 1344 | mathematics | 33 | `math.cx.fundamental-theorem-algebra` | Fundamental Theorem of Algebra (Complex Analysis) |
 | 1345 | mathematics | 33 | `math.cx.rouche-theorem` | Rouché's Theorem |
-| 1346 | english | 33 | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone |
-| 1347 | english | 33 | `eng.composition.persuasive-techniques` | Advanced Persuasive Techniques |
-| 1348 | english | 33 | `eng.composition.comparative-essay-writing` | Comparative Essay Writing |
-| 1349 | english | 33 | `eng.composition.research-paper-writing` | Research Paper Writing |
 | 1350 | mathematics | 34 | `math.de.resonance` | Resonance |
 | 1351 | english | 34 | `eng.composition.academic-writing-conventions` | Academic Writing Conventions |
 | 1352 | english | 35 | `eng.composition.plagiarism-and-citation-ethics` | Plagiarism and Citation Ethics |

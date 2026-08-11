@@ -1169,7 +1169,7 @@ its subject KG.
 | wave | `phys.wave.wave-properties` | Wave Properties: Amplitude, Period, Frequency | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-properties.md` | READY |
 | wave | `phys.wave.wave-speed` | Wave Speed and the Wave Equation | Yes | Yes | `educational-brain/concepts/physics/phys.wave.wave-speed.md` | READY |
 
-## english (216 concepts, 201 READY)
+## english (216 concepts, 205 READY)
 | Domain | KG ID | Concept Name | Blueprint | EB Entry | EB File | Status |
 |---|---|---|---|---|---|---|
 | communication | `eng.communication.academic-writing-advanced` | Advanced Academic Writing | Yes | No | — | MISSING |
@@ -1188,18 +1188,18 @@ its subject KG.
 | composition | `eng.composition.argumentation-basics` | Argumentation Basics | Yes | Yes | `educational-brain/concepts/english/eng.composition.argumentation-basics.md` | READY |
 | composition | `eng.composition.audience-and-purpose` | Audience and Purpose | Yes | Yes | `educational-brain/concepts/english/eng.composition.audience-and-purpose.md` | READY |
 | composition | `eng.composition.claim-evidence-reasoning` | Claim, Evidence, and Reasoning | Yes | Yes | `educational-brain/concepts/english/eng.composition.claim-evidence-reasoning.md` | READY |
-| composition | `eng.composition.comparative-essay-writing` | Comparative Essay Writing | Yes | No | — | MISSING |
+| composition | `eng.composition.comparative-essay-writing` | Comparative Essay Writing | Yes | Yes | `educational-brain/concepts/english/eng.composition.comparative-essay-writing.md` | READY |
 | composition | `eng.composition.counterargument-and-rebuttal` | Counterargument and Rebuttal | Yes | Yes | `educational-brain/concepts/english/eng.composition.counterargument-and-rebuttal.md` | READY |
 | composition | `eng.composition.editing-for-style` | Editing for Style | Yes | No | — | MISSING |
 | composition | `eng.composition.figurative-language-in-composition` | Figurative Language in Composition | Yes | Yes | `educational-brain/concepts/english/eng.composition.figurative-language-in-composition.md` | READY |
 | composition | `eng.composition.logical-fallacies` | Logical Fallacies | Yes | Yes | `educational-brain/concepts/english/eng.composition.logical-fallacies.md` | READY |
-| composition | `eng.composition.persuasive-techniques` | Advanced Persuasive Techniques | Yes | No | — | MISSING |
+| composition | `eng.composition.persuasive-techniques` | Advanced Persuasive Techniques | Yes | Yes | `educational-brain/concepts/english/eng.composition.persuasive-techniques.md` | READY |
 | composition | `eng.composition.plagiarism-and-citation-ethics` | Plagiarism and Citation Ethics | Yes | No | — | MISSING |
-| composition | `eng.composition.research-paper-writing` | Research Paper Writing | Yes | No | — | MISSING |
+| composition | `eng.composition.research-paper-writing` | Research Paper Writing | Yes | Yes | `educational-brain/concepts/english/eng.composition.research-paper-writing.md` | READY |
 | composition | `eng.composition.rhetorical-analysis` | Rhetorical Analysis | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-analysis.md` | READY |
 | composition | `eng.composition.rhetorical-appeals` | Rhetorical Appeals: Ethos, Pathos, Logos | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-appeals.md` | READY |
 | composition | `eng.composition.rhetorical-devices` | Rhetorical Devices | Yes | Yes | `educational-brain/concepts/english/eng.composition.rhetorical-devices.md` | READY |
-| composition | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone | Yes | No | — | MISSING |
+| composition | `eng.composition.style-voice-and-tone` | Style, Voice, and Tone | Yes | Yes | `educational-brain/concepts/english/eng.composition.style-voice-and-tone.md` | READY |
 | grammar | `eng.grammar.active-and-passive-voice` | Active and Passive Voice | Yes | Yes | `educational-brain/concepts/english/eng.grammar.active-and-passive-voice.md` | READY |
 | grammar | `eng.grammar.adjectives` | Adjectives | Yes | Yes | `educational-brain/concepts/english/eng.grammar.adjectives.md` | READY |
 | grammar | `eng.grammar.adverbs` | Adverbs | Yes | Yes | `educational-brain/concepts/english/eng.grammar.adverbs.md` | READY |
