@@ -2373,6 +2373,7 @@ a clean session.** Clearing a blocker alone is never sufficient.
 | 2026-08-12 | 1 | Supabase MCP: 0 projects |
 | 2026-08-12 | 2 | Supabase MCP reconnected under a new name, then disconnected; on reconnection still **0 projects**. B-1/B-2/B-3 remain blocked. |
 | 2026-08-12 | 3 | B-1/B-2/B-3: Supabase MCP **0 projects** — still blocked. B-4: retried Chromium against `example.com` with the installed `/opt/pw-browsers/chromium-1194` binary (the npm default path no longer exists — it points at `chromium_headless_shell-1228`, absent). The launch HUNG to timeout rather than erroring, which is the proxy signature, not a missing binary. Still blocked. |
+| 2026-08-12 | 4 | B-1/B-2/B-3: Supabase MCP **0 projects**. B-4: `page.goto: net::ERR_CONNECTION_RESET at https://example.com/` — the documented proxy signature, reproduced cleanly with `--no-sandbox` and a bounded timeout. All four still blocked. |
 
 ---
 
