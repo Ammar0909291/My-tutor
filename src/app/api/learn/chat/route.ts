@@ -3713,8 +3713,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // or something threw before the first log and the surrounding catch ate
       // it. This line sits OUTSIDE both the condition and the try, so it prints
       // either way.
-      console.log('[affirm-guard-entry]', { assembled: assembled !== null })
-      if (!assembled) {
+      // ── WHY THIS IS `servedFromMemory` AND NOT `assembled` ────────────────
+      //
+      // This block gated on `!assembled`, on the reasonable-sounding premise
+      // that an assembled turn is human-curated content and needs no output
+      // verification. The premise is false: `assembled` only means a lesson was
+      // ASSEMBLED, not that it was SERVED. The serve site (see `text =
+      // assembled.text` above) additionally requires `serveFromMemory`, which
+      // the Brain can and does refuse — it escalates to the LLM while
+      // `assembled` stays non-null.
+      //
+      // Measured on a real audit turn:
+      //   [affirm-guard-entry] { assembled: true }
+      //   provider=gemini  explanationMemoryServes=0  memoryServingMode=null
+      //   fallback_reason="Brain decision"
+      // The LLM wrote the answer and the ENTIRE output verifier — the K5 gate
+      // and the affirmation safety floor — was skipped, because a lesson had
+      // merely been assembled. That is how "Claude, exactly right!" reached a
+      // learner on a proposal turn with no distinguishing move.
+      //
+      // The trap is worse than one turn: assembly succeeds more often as the
+      // moat grows, so **the better the asset library gets, the more turns lose
+      // output verification.** A safety layer that decays as the product
+      // improves is the wrong shape.
+      //
+      // Now it skips verification only when the served text genuinely IS the
+      // curated asset — the same condition the serve site uses.
+      const servedFromMemory = !serveLessonComplete && assembled !== null && serveFromMemory
+      console.log('[affirm-guard-entry]', {
+        assembled: assembled !== null,
+        servedFromMemory,
+        willVerify: !servedFromMemory,
+      })
+      if (!servedFromMemory) {
         try {
           const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
           const eosFlags = readEosFlags()

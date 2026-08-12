@@ -146,3 +146,64 @@ describe('the rule requires a distinguishing move, not the absence of a phrase',
     expect(vAffirm('Great! That is correct.', ctx('the metre'))).toBeNull()
   })
 })
+
+/**
+ * THE GATE THAT SILENTLY DISABLED THE VERIFIER.
+ *
+ * The output-verifier block was gated on `!assembled`, on the premise that an
+ * assembled turn is curated content needing no verification. `assembled` only
+ * means a lesson was ASSEMBLED; serving it additionally requires
+ * `serveFromMemory`, which the Brain can refuse — it escalates to the LLM while
+ * `assembled` stays non-null.
+ *
+ * Measured on a real audit turn:
+ *   [affirm-guard-entry] { assembled: true }
+ *   provider=gemini  explanationMemoryServes=0  memoryServingMode=null
+ *
+ * The LLM wrote the answer and the whole verifier was skipped. Worse, assembly
+ * succeeds MORE often as the moat grows — so the better the asset library got,
+ * the more turns would lose verification. These tests pin the corrected gate.
+ */
+describe('the verifier gate follows what was SERVED, not what was assembled', () => {
+  /** Mirrors route.ts exactly. */
+  const servedFromMemory = (i: {
+    serveLessonComplete: boolean; assembled: boolean; serveFromMemory: boolean
+  }) => !i.serveLessonComplete && i.assembled && i.serveFromMemory
+
+  it('VERIFIES the turn that was measured slipping through', () => {
+    // assembled, but the Brain escalated to the LLM — the real production shape.
+    expect(servedFromMemory({
+      serveLessonComplete: false, assembled: true, serveFromMemory: false,
+    })).toBe(false)
+  })
+
+  it('skips verification only for genuinely curated, served content', () => {
+    expect(servedFromMemory({
+      serveLessonComplete: false, assembled: true, serveFromMemory: true,
+    })).toBe(true)
+  })
+
+  it('verifies an ordinary LLM turn with nothing assembled', () => {
+    expect(servedFromMemory({
+      serveLessonComplete: false, assembled: false, serveFromMemory: false,
+    })).toBe(false)
+  })
+
+  it('verifies a lesson-complete turn even when memory would have served', () => {
+    // The completion path writes its own text, so the asset is not what ships.
+    expect(servedFromMemory({
+      serveLessonComplete: true, assembled: true, serveFromMemory: true,
+    })).toBe(false)
+  })
+
+  it('coverage does not shrink as the moat grows', () => {
+    // The property that makes the old gate wrong: with the old rule, every
+    // additional successful assembly REMOVED a turn from verification. With
+    // the new rule, assembly alone changes nothing.
+    const oldGate = (assembled: boolean) => !assembled
+    const newGate = (assembled: boolean, served: boolean) =>
+      !servedFromMemory({ serveLessonComplete: false, assembled, serveFromMemory: served })
+    expect(oldGate(true)).toBe(false)            // old: assembled ⇒ unverified
+    expect(newGate(true, false)).toBe(true)      // new: still verified
+  })
+})
