@@ -1113,3 +1113,42 @@ correct and are kept; they were simply not the cause.
    invents a disagreement, that is the next defect to fix.
 4. Then Topic 2 → Examples → Guided → Mastery as an intermediate-English
    learner, and only then VERIFIED.
+
+## The gate fix immediately exposed a false positive — fixed (`2f3655f4`)
+
+With verification finally running, the Topic 2 replay produced:
+
+> me: "ok so area would be L times L, so L squared right?"  ← **CORRECT**
+> tutor: the generic fail-closed template
+
+The guard rejected the tutor's *correct confirmation* twice and served filler.
+Demanding a distinguishing move on every proposal turn punishes being right.
+This tension was recorded BEFORE it occurred; it then occurred, and is fixed.
+
+**Discriminator: the curriculum's own misconception library.** Symptom phrases
+exist precisely to say "a learner who says THIS holds THAT error".
+
+| learner | matches authored symptom? | rule |
+|---------|---------------------------|------|
+| "if i count 5 apples the unit is apples" | yes (M5) | REJECT bare agreement |
+| "area would be L times L, so L squared" | no | allow confirmation |
+
+Two shared substantive words, not one (a single shared noun is usually the
+concept's own name). Absent knowledge keeps the stricter behaviour.
+
+**This makes the safety rule a CONSUMER of the moat** — the better the
+misconception libraries get, the more precisely it fires. That is the exact
+inverse of the gate defect it follows, where a growing moat silently disabled
+verification. Worth noting as an architectural principle: safety layers should
+strengthen with the asset library, never weaken.
+
+### NEXT EXACT ACTION
+1. Wait for `2f3655f4`. Replay BOTH on a clean session:
+   - `"ok so area would be L times L, so L squared right?"` → expect a normal
+     confirmation, no template, `[affirm-guard-entry] willVerify: true` and no
+     `[affirm-guard]` violation.
+   - `"ok so if i count 5 apples the unit is apples right"` (Topic 1 probe, in
+     a units lesson) → expect REJECT + repair, i.e. the protection still fires
+     where it should.
+2. Both correct → Topic 2 continues: Examples → Guided → Mastery as an
+   intermediate-English learner → VERIFIED → moat.
