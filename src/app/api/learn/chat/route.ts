@@ -3867,12 +3867,52 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // is touched ONLY when the learner floated a definition and the
             // draft opened by agreeing with it.
             const { vAffirm } = await import('@/lib/kernel/verifier/rules')
+            // The concept this turn taught — the excursion's target when one is
+            // open, else the lesson's. Used only to retrieve the authored
+            // correction below.
+            const teachingConceptIdForRepair =
+              excursionDecisionHoisted?.targetConceptId
+              ?? libraryConceptNodeIdHoisted
+              ?? snapshotCurrentConceptId
+              ?? null
             const affirmCtx = { learnerText: message } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
             const firstViolation = vAffirm(cleanText, affirmCtx)
             if (firstViolation) {
               // One regeneration, carrying the violation as instruction — the
               // same appendix shape the full loop uses.
+              // THE REPAIR CARRIES THE AUTHORED CORRECTION, NOT JUST A BAN.
+              //
+              // First measured attempt used a prohibition alone and the retry
+              // ALSO affirmed, so the guard fell closed to a template — safe,
+              // but the learner got no teaching. The reason is visible once
+              // stated: "a unit is the name of the thing you're counting" is
+              // not obviously false in everyday language, so telling the model
+              // "don't agree" leaves it with nothing to say instead.
+              //
+              // So the repair hands it the curriculum's OWN correction — the
+              // concept spine definition and any authored misconception repair
+              // for this concept. Retrieval, not invention: the same Blueprint
+              // and Educational Brain material the prompt already uses.
+              let authored = ''
+              try {
+                const { loadBlueprintContent, loadEBConceptContext } =
+                  await import('@/lib/curriculum/blueprintLoader')
+                const cid = teachingConceptIdForRepair
+                if (cid) {
+                  const bp = loadBlueprintContent(cid)
+                  if (bp.found && bp.content.conceptSpine?.definition) {
+                    authored += `\nThe curriculum defines this concept as: ${bp.content.conceptSpine.definition}`
+                  }
+                  const eb = loadEBConceptContext(cid)
+                  if (eb.found && eb.context.ebMisconceptions.length > 0) {
+                    const m = eb.context.ebMisconceptions[0]
+                    authored += `\nA known misconception here is "${m.title}".`
+                    if (m.recovery) authored += ` The authored repair: ${m.recovery}`
+                  }
+                }
+              } catch { /* the repair still runs without authored material */ }
+
               const appendix =
                 '\n\nOUTPUT REJECTED (server-side check). The learner PROPOSED a ' +
                 'definition and your reply opened by agreeing with it ' +
@@ -3880,7 +3920,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 'State the correct idea yourself in plain words, name explicitly ' +
                 'how it differs from what they said, and only then build on it. ' +
                 'If part of what they said was right, say which part and which ' +
-                'part was not. Re-answer their question now.'
+                'part was not.' + authored +
+                '\nAnswer in easy beginner language: short sentences, everyday ' +
+                'words, one idea at a time, and explain any technical word you ' +
+                'use. End with one short question that makes them USE the idea. ' +
+                'Re-answer their question now.'
               let repaired = cleanText
               try {
                 const routed = await routeAI(
