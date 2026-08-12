@@ -3870,10 +3870,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // The concept this turn taught — the excursion's target when one is
             // open, else the lesson's. Used only to retrieve the authored
             // correction below.
+            // `resolvedConceptId` is included and ordered LAST-but-real:
+            // measured in production, a fresh session's opening turns have no
+            // snapshot concept and no library node yet, so the lookup returned
+            // null and the learner got the GENERIC template instead of the
+            // curriculum's definition — the exact outcome this fallback was
+            // written to replace. The route logs `resolvedConceptId=
+            // phys.meas.units` on those very turns, so it is the value that
+            // was available all along.
             const teachingConceptIdForRepair =
               excursionDecisionHoisted?.targetConceptId
               ?? libraryConceptNodeIdHoisted
               ?? snapshotCurrentConceptId
+              ?? resolvedConceptId
               ?? null
             const affirmCtx = { learnerText: message } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
