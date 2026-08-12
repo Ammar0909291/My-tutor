@@ -3768,7 +3768,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // viable teaching move (one concrete check question) so the learner gets
       // something actionable. Runs on Library turns only (assembled turns are
       // human-curated and never filler).
-      if (!assembled) {
+      //
+      // AND NOT WHEN THE TURN'S QUESTION LIVES IN A STRUCTURED CHANNEL.
+      //
+      // Measured in production twice, byte-identically, on `phys.meas.errors`:
+      // the learner saw "Let me ask you something concrete about Measurement
+      // Errors and Uncertainty: what's one thing you notice or find surprising
+      // about what we just covered?" WHILE a tappable MCQ sat beside it asking
+      // something completely different and concrete ("Can you eliminate all
+      // error if you are extremely careful?"). Two questions, mismatched, one
+      // of them generic.
+      //
+      // The two rules contradict each other. `buildMcqInstruction` tells the
+      // model: "Write the question ONCE: put it in the tag, and do NOT also
+      // re-type the question and its options in your visible message — the app
+      // renders them as tappable buttons." A model that OBEYS that leaves a
+      // short lead-in with no "?" in it — and the MCQ tag has already been
+      // parsed and stripped by this point, so `detectFillerTurn` sees exactly
+      // the shape it is built to catch and overwrites the turn.
+      //
+      // So compliance with the assessment contract was being punished, and the
+      // better the model behaved the more often the learner got filler. The
+      // turn is not content-free; its content is in `mcqHoisted`.
+      if (!assembled && !mcqHoisted) {
         try {
           const { detectFillerTurn } = await import('@/lib/teaching/conversationState')
           if (detectFillerTurn(cleanText)) {
