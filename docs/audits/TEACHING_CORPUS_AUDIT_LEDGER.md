@@ -3430,3 +3430,61 @@ exactly the insight the anti-recall probe authored in `8777a47` tests for.
    completed-lesson gate is fixed — the two blockers in front of E6.
 2. Continue playing the learner through Topic 3 `phys.meas.errors`.
 3. Moat: 103 concepts remain (em 32, mod 21, qm 19, particle 16, stat 15).
+
+---
+
+# FIRST REAL SWEEP — 6/6 CHECKED, 0 ERRORED (2026-08-12, `915cf8b` live)
+
+The sweep has never completed before in this audit. Both blockers cleared
+today: the environment's egress policy (owner) and the completed-lesson gate
+(`767943e`). Plus `NODE_USE_ENV_PROXY=1`, without which Node's built-in fetch
+ignores the proxy — that, not the app, was every prior "Host not i…".
+
+```
+reached verified: 1/6 checked (6 requested)
+E6 × 12
+```
+
+## The ladder MOVES now
+
+Before today every topic sat at `check 0, practice 0` forever. Now:
+
+| topic | ladder tail |
+|---|---|
+| `phys.meas.dimensions` | … PRACTICE(1/1) → **TRANSFER(1/2)** |
+| `phys.meas.vector-addition` | … CHECK(1/1) → **PRACTICE(2/1)** |
+| `phys.meas.scalars-vectors` | … PRACTICE(1/1) |
+
+`phys.meas.dimensions` reached CHECK 1 + PRACTICE 2 — the mastery threshold —
+which is the first time any topic has done so against production. The
+gate-assessment work and the lesson re-entry fix are both demonstrably live.
+
+## E6 IS NOT CLOSED — 12 occurrences across 6 topics
+
+`question asked at CHECK/PRACTICE without an MCQ tag`. The server-owned
+assessment (`c40c216a`) fires when `findBestProbe` returns a probe and the
+turn is recognised as a gate; 12 gate turns still went out as prose. So the
+acceptance criterion (`E6 = 0`) is **NOT met**, and **no topic is marked
+VERIFIED** — including `phys.meas.dimensions`, whose ladder reached the
+threshold. A ladder that advances is not the same as a gate that always
+carries gradeable evidence.
+
+Two candidate causes, neither yet measured, recorded so the next iteration
+starts from a hypothesis rather than a guess:
+1. the probe corpus runs dry mid-lesson — a concept has 3 gradeable probes but
+   `excludeProbeStem` has already spent them, so the gate falls back to prose;
+2. the turn is not classified as a gate phase at the moment the server would
+   attach the MCQ, so `buildGateAssessmentBlock` never runs.
+
+Distinguishing them needs the `[ladder]` line's `move`/`mcqAsked` fields read
+against `findBestProbe`'s return on the same turn — a runtime-log join, now
+possible since production is both drivable and readable.
+
+## Status
+
+| | |
+|---|---|
+| VERIFIED | 1 / 424 — unchanged, deliberately |
+| sweep | 6/6 checked, 0 errored, exit 1 (findings) |
+| E6 | 12 — not closed |
+| moat | 43 concepts closed, 7 domains complete, 103 remain |
