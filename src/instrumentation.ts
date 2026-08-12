@@ -25,7 +25,19 @@
  *    never reach the state the serving path requires.
  *  - Partial-seed safe: COUNT < expected triggers a resume run; per-slug
  *    dedup skips already-inserted rows and inserts the missing ones.
- *  - Concurrency safe: the findFirst/create pair below is a TOCTOU window, so
+ *  - One prefetch, not a query per asset: a single indexed read of the seed
+ *    lineage answers "does this slug exist, and does it have content" for all
+ *    ~2,920 assets at once. The previous per-asset findFirst meant 2,920
+ *    sequential round trips, and one socket timeout anywhere in them threw out
+ *    of the entire run — measured in production as "2379/2920 seed identities
+ *    present" logged for weeks with "complete" never once logged.
+ *  - Self-healing: an identity whose CONTENT row is missing gets the child
+ *    created rather than being skipped forever. 737 probe and 255 explanation
+ *    identities were found ACTIVE-but-hollow, which is what starved the
+ *    mastery gate of gradeable probes (E6).
+ *  - Per-asset failures are non-fatal and counted, so a flaky database
+ *    converges across cold starts instead of restarting from zero each time.
+ *  - Concurrency safe: the check/create pair below is a TOCTOU window, so
  *    atomicity is enforced in the database by the PARTIAL unique index
  *    asset_identity_seed_slug_key ON ("canonicalSlug")
  *    WHERE "authorId" = 'EDUCATIONAL_BRAIN_SEED'
@@ -249,8 +261,61 @@ async function bootstrapAssets() {
         `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present — seeding missing assets...`
       )
 
+      // ── ONE QUERY INSTEAD OF 2,920 ────────────────────────────────────────
+      //
+      // MEASURED IN PRODUCTION (2026-08-12). The bootstrap logged
+      // "2379/2920 seed identities present — seeding missing assets…" on every
+      // single request for WEEKS and never once logged "complete". The reason
+      // is in the logs beside it:
+      //
+      //   asset bootstrap DB error (will retry on next start):
+      //     Invalid `prisma.assetIdentity.findFirst()` invocation: Socket timeout
+      //
+      // The loops below did ONE findFirst PER ASSET — 2,920 sequential round
+      // trips against a database that intermittently times out. Any single
+      // timeout throws out of the whole run, and the next cold start begins
+      // again from the top, hits another timeout somewhere in the same 2,920,
+      // and dies again. The catalogue could never converge, which is why 737
+      // probe identities and 255 explanation identities sat hollow and why the
+      // mastery gate had nothing gradeable to serve (E6).
+      //
+      // The per-asset query was never necessary: every slug is known up front.
+      // One indexed read of the seed lineage answers all 2,920 questions at
+      // once — does this slug exist, and does it have content — and the loops
+      // become pure in-memory decisions with writes only where work is
+      // genuinely needed. On a healthy catalogue that is ONE query and zero
+      // writes, versus 2,920 queries before.
+      //
+      // The TOCTOU window is unchanged in kind (it was always there) and is
+      // still closed the same way: the partial unique index makes a losing
+      // racer fail with P2002, which is caught per-asset as a skip.
+      const existing = new Map<string, { assetId: string; hasContent: boolean }>()
+      for (const row of await prisma.assetIdentity.findMany({
+        where: seedOwnershipWhere() as never,
+        select: {
+          assetId: true,
+          canonicalSlug: true,
+          probeAsset: { select: { assetId: true } },
+          explanationAsset: { select: { assetId: true } },
+        },
+      })) {
+        // Last write wins on a duplicate slug, which cannot happen under the
+        // partial unique index — recorded so the Map's behaviour is stated
+        // rather than assumed.
+        existing.set(row.canonicalSlug, {
+          assetId: row.assetId,
+          hasContent: row.probeAsset !== null || row.explanationAsset !== null,
+        })
+      }
+
       let created = 0
       let skipped = 0
+      // Per-asset write failures. NOT fatal: on a database that intermittently
+      // times out, one failed row must not discard the 2,900 that would have
+      // succeeded — that all-or-nothing behaviour is precisely why the
+      // catalogue never converged. Counted and logged loudly, and the next
+      // cold start retries whatever is still missing.
+      let failed = 0
       // Content rows written for an identity that already existed but was
       // hollow. Counted separately from `created` so the log distinguishes
       // "new asset" from "repaired a shell", which are different events.
@@ -282,12 +347,9 @@ async function bootstrapAssets() {
       // and evidence rows keyed on assetId keep pointing at the same asset.
       for (const e of ALL_EXPLANATIONS) {
         const canonicalSlug = seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)
-        const dup = await prisma.assetIdentity.findFirst({
-          where: { canonicalSlug },
-          include: { explanationAsset: true },
-        })
+        const dup = existing.get(canonicalSlug)
         if (dup) {
-          if (!dup.explanationAsset) {
+          if (!dup.hasContent) {
             try {
               await prisma.explanationAsset.create({
                 data: {
@@ -343,7 +405,8 @@ async function bootstrapAssets() {
         } catch (createErr: any) {
           // P2002 = concurrent cold start already inserted this slug — safe to skip.
           if (createErr?.code === 'P2002') { skipped++; continue }
-          throw createErr
+          failed++
+          continue
         }
       }
 
@@ -352,12 +415,9 @@ async function bootstrapAssets() {
       // loop for the full measurement and reasoning.
       for (const p of ALL_PROBES) {
         const canonicalSlug = probeSlug(p)
-        const dup = await prisma.assetIdentity.findFirst({
-          where: { canonicalSlug },
-          include: { probeAsset: true },
-        })
+        const dup = existing.get(canonicalSlug)
         if (dup) {
-          if (!dup.probeAsset) {
+          if (!dup.hasContent) {
             try {
               await prisma.probeAsset.create({
                 data: {
@@ -414,13 +474,15 @@ async function bootstrapAssets() {
           created++
         } catch (createErr: any) {
           if (createErr?.code === 'P2002') { skipped++; continue }
-          throw createErr
+          failed++
+          continue
         }
       }
 
       console.log(
         `[instrumentation] asset bootstrap complete: created=${created} repaired=${repaired}` +
-        ` skipped=${skipped} total=${EXPECTED_IDENTITIES}`
+        ` skipped=${skipped} failed=${failed} total=${EXPECTED_IDENTITIES}` +
+        (failed > 0 ? ' — some writes failed (likely DB timeouts); the next cold start retries them' : '')
       )
     } finally {
       await prisma.$disconnect()

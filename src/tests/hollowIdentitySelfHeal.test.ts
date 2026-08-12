@@ -40,16 +40,34 @@ import path from 'path'
  * MISSING BRANCH, not wrong logic inside one.
  */
 const SRC = readFileSync(path.join(process.cwd(), 'src/instrumentation.ts'), 'utf8')
+/** Comments quote the old error text verbatim, so "is it gone?" must ask the CODE. */
+const CODE = SRC.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^[ \t]*\/\/.*$/gm, '')
 
 describe('the asset bootstrap repairs hollow identities', () => {
-  it('loads the child relation when checking for a duplicate — it cannot repair what it did not read', () => {
-    expect(SRC).toMatch(/include:\s*\{\s*explanationAsset:\s*true\s*\}/)
-    expect(SRC).toMatch(/include:\s*\{\s*probeAsset:\s*true\s*\}/)
+  it('learns which identities have content from ONE prefetch, not a query per asset', () => {
+    // The per-asset findFirst was 2,920 sequential round trips against a
+    // database that intermittently times out; a single timeout threw out of
+    // the whole run, so the catalogue could never converge. Production logged
+    // "2379/2920 ... seeding missing assets" for weeks and never once logged
+    // "complete".
+    expect(SRC).toMatch(/const existing = new Map<string, \{ assetId: string; hasContent: boolean \}>/)
+    expect(SRC).toMatch(/prisma\.assetIdentity\.findMany\(/)
+    expect(SRC).toMatch(/hasContent: row\.probeAsset !== null \|\| row\.explanationAsset !== null/)
+    // The old pattern must be gone from the seeding loops entirely.
+    expect(CODE).not.toMatch(/prisma\.assetIdentity\.findFirst\(/)
+  })
+
+  it('a single failed write does not discard the rest of the run', () => {
+    // All-or-nothing is exactly why the catalogue never converged.
+    expect(SRC).toMatch(/let failed = 0/)
+    expect(SRC).toMatch(/failed\+\+/)
+    expect(SRC).toMatch(/failed=\$\{failed\}/)
+    // No unconditional rethrow left in the per-asset create path.
+    expect(CODE).not.toMatch(/throw createErr/)
   })
 
   it('creates the MISSING CHILD for an existing identity, both families', () => {
-    expect(SRC).toMatch(/if \(!dup\.explanationAsset\)/)
-    expect(SRC).toMatch(/if \(!dup\.probeAsset\)/)
+    expect(SRC).toMatch(/if \(!dup\.hasContent\)/)
     expect(SRC).toMatch(/prisma\.explanationAsset\.create\(/)
     expect(SRC).toMatch(/prisma\.probeAsset\.create\(/)
   })
@@ -57,8 +75,8 @@ describe('the asset bootstrap repairs hollow identities', () => {
   it('repairs by adding the child, never by deleting the identity', () => {
     // Deleting would collide with the partial unique index on canonicalSlug,
     // churn the assetId, and orphan every evidence row already keyed to it.
-    expect(SRC).not.toMatch(/assetIdentity\.delete/)
-    expect(SRC).not.toMatch(/assetIdentity\.deleteMany/)
+    expect(CODE).not.toMatch(/assetIdentity\.delete/)
+    expect(CODE).not.toMatch(/assetIdentity\.deleteMany/)
   })
 
   it('the early-return gate counts HOLLOW identities, not just identities', () => {
