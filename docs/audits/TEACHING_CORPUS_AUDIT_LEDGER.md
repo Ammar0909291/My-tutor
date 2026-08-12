@@ -876,3 +876,61 @@ Mastery, then VERIFIED.
 4. Standing method note, learned the hard way: **the raw API response is not
    the learner's screen.** Judge wording and teaching from it; never judge
    rendering from it.
+
+## Topic 2 continued — teaching holds; ONE OPEN QUESTION about the guard
+
+> me: "wait why does it matter, cant i just use whatever units i want"
+> tutor: dimensional homogeneity as an error-check — *"every single term in a
+> valid equation must have the exact same dimensions… if one side is length
+> over time but the other is length multiplied by time, you immediately know a
+> mistake happened, long before you plug in any numbers."* Correct and useful.
+> Minor (P3, not actioned): it motivates via "a competitive exam under time
+> pressure", which is defensible for this product's audience but is not the
+> most fundamental reason. Not manufacturing a defect out of it.
+
+> me: "ok so area would be L times L, so L squared right?"   ← learner is RIGHT
+> tutor: *"Spot on, Claude! Area is length times length, so its dimension is
+> L²… Volume is length times width times height — what do you think the
+> dimension of volume would be?"* Correct, and correctly confirms.
+
+### OPEN — the guard did not fire here, and I cannot yet say why
+
+That last turn is a learner PROPOSAL ("so … right?") answered with a bare
+agreement opener ("Spot on") and — as far as I can read it — no distinguishing
+marker. V-AFFIRM should therefore have rejected it. Vercel runtime logs show
+**no `[affirm-guard]` line at all** in that window, so the guard did not fire.
+
+Three candidate explanations, none yet tested:
+1. `eosFlags.outputVerifier` is TRUE in production, so the FULL gate ran
+   instead of the always-on branch — different logging, possibly `shadow`
+   mode. (Earlier turns DID log `[affirm-guard]`, so the branch was live then;
+   what changed is unknown.)
+2. The proposal regex did not match this phrasing after all.
+3. The draft contains a marker I am not spotting by eye.
+
+**This matters in BOTH directions**, which is why it is not being guessed at:
+- if the guard is silently OFF, Topic 1's verification stands (it was measured
+  live) but future topics are unprotected;
+- if the guard is ON and simply did not match, that is correct behaviour here —
+  the learner WAS right and "Spot on" is the right answer — but it means the
+  rule's proposal detector is narrower than believed.
+
+There is also a genuine design tension recorded now rather than discovered
+later: **requiring a distinguishing marker is wrong when the learner is
+correct.** Forcing a distinction where none exists is bad teaching. The rule
+must not punish a right answer.
+
+### NEXT EXACT ACTION
+1. Determine which branch ran: add the resolved `eosFlags.outputVerifier` and
+   the proposal-match boolean to the existing `[excursion]`-style logging (one
+   line, no behaviour change), deploy, re-run the "area … right?" turn.
+2. Then, based on the answer:
+   - full gate running → decide deliberately which path owns V-AFFIRM;
+   - detector too narrow → widen only with measured phrasings;
+   - marker rule over-firing on correct proposals → add a CORRECTNESS-aware
+     exemption (e.g. skip when the draft neither negates nor qualifies AND the
+     learner's proposition matches an authored correct formulation).
+3. Only then continue Topic 2 to Mastery and mark VERIFIED.
+
+**TOPIC 2: IN PROGRESS.** Teaching quality strong on 4 probes; blocked on
+knowing whether the safety rule is actually live.
