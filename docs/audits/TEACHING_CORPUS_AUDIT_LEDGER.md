@@ -1283,3 +1283,60 @@ result is read. Neither contaminated run is recorded as a defect.
 2. Then Topic 3 `phys.meas.errors`, and onward through the corpus.
 3. Re-run a spot check on any earlier probe whose result predates `b53e93ea` —
    every measurement taken before it ran WITHOUT the authored corpus.
+
+---
+
+# 🔴🔴 P0 — WRONG LEARNER NAME + WRONG-TOPIC CONTENT SERVED
+
+Found on Topic 2, clean session, real production, after `b53e93ea`.
+
+> me: "so speed is L then? because it is distance"
+>
+> tutor: **"Mohammad Suaib, wave interference happens when two water waves
+> overlap on a pond**, combining to make either a much higher crest where they
+> meet or completely flattening out. Good question — now, back to Dimensional
+> Analysis, let's examine a physical formula…"
+
+## Three defects in one turn
+
+1. **WRONG NAME — possible cross-learner data leak.** The account's display
+   name is **"Claude"**. The tutor addressed the learner as **"Mohammad
+   Suaib"**. That name appears nowhere in this session. Until proven otherwise
+   this must be treated as a POSSIBLE PRIVACY INCIDENT — another learner's
+   name, or a name embedded in a stored asset, reaching a different learner.
+2. **WRONG TOPIC.** Wave interference on a pond, served inside a Dimensional
+   Analysis lesson, in answer to a question about speed.
+3. **THE QUESTION WAS IGNORED.** "so speed is L then?" is a real misconception
+   (speed is L/T). It was neither answered nor corrected — the turn pivoted
+   straight to "now, back to Dimensional Analysis".
+
+## Leading hypotheses — NOT yet tested, do not act on these before measuring
+
+- an Explanation Memory / AssetIdentity row whose stored content contains both
+  a learner name and wave-interference text was matched and served;
+- newly-shipped corpus (`b53e93ea`) changed retrieval matching and surfaced an
+  asset that was previously unreachable;
+- a cross-session cache key collision.
+
+**This turn came AFTER the bundle fix**, so it may be a consequence of the
+authored corpus becoming reachable for the first time. That would make it a
+regression introduced by `b53e93ea` — which must be checked before anything
+else, since that commit is otherwise a large win.
+
+## IMMEDIATE NEXT ACTION (highest priority, ahead of all topic work)
+1. Pull runtime logs for session `cmspqvazn0001l504p4m7u7dt` / the Topic 2
+   session and read `memoryServingMode`, `memoryAssetId`, `explanationMemory`
+   lines for that turn. Determine whether the text came from a stored asset.
+2. If an asset: fetch it by id and inspect its content for the name string.
+   Search `authoredSeedAssets.ts` / `brainSeedAssets.ts` / DB for
+   "Mohammad Suaib" and for "wave interference".
+3. If the name originates from ANOTHER learner's data, stop and escalate to the
+   owner as a privacy incident before continuing the audit.
+4. If it originates from a seeded/authored asset, that asset must be corrected
+   or quarantined — a shared teaching asset must never carry a personal name.
+5. Only then resume Topic 2.
+
+## STATUS
+- Topic 2 `phys.meas.dimensions` — **FAILED** (this turn). Earlier probes on
+  this topic were good; this one is disqualifying.
+- Topic 1 — VERIFIED, unaffected.
