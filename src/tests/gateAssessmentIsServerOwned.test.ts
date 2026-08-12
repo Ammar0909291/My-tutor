@@ -170,10 +170,47 @@ describe('the authored corpus actually converts', () => {
     // Pinned as a MAXIMUM: authoring more probes must never fail this test,
     // losing them must. Ratcheted 145 -> 139 (six phys.mech concepts) -> 131
     // (five phys.therm: carnot-cycle, entropy, heat-engines, refrigerators,
-    // third-law; three phys.wave: beats, forced-oscillations, interference).
+    // third-law; three phys.wave: beats, forced-oscillations, interference)
+    // -> 117 (six phys.astro + eight phys.rel).
     // Tighten this number whenever more are authored.
-    expect(short).toBeLessThanOrEqual(131)
+    expect(short).toBeLessThanOrEqual(117)
     expect(counts.size).toBe(conceptsWithGradeable.size)
+  })
+
+  /**
+   * THE COUNT ABOVE IS BLIND TO GRADE BAND, AND THAT HID A REAL GAP.
+   *
+   * `findBestProbe` scores gradeBand, so the three probes a concept needs must
+   * be reachable by ONE learner. A concept holding UNDERGRADUATE=2 + HIGH=1
+   * counts as 3 above, yet neither learner ever gets three and the last gate
+   * still falls back to the model.
+   *
+   * Found by auditing band distribution rather than totals: four concepts were
+   * in this state — phys.mech.hookes-law (pre-existing, MIDDLE=1/HIGH=2) and
+   * three created while authoring this very batch, by putting a HIGH probe on
+   * concepts whose siblings were all UNDERGRADUATE. All four are fixed; this
+   * test stops the mistake being made again, in either direction.
+   */
+  it('every covered concept reaches three gradeable probes WITHIN a single grade band', () => {
+    const byConcept = new Map<string, Map<string, number>>()
+    for (const p of physics) {
+      if (!probeToMcq({ stem: p.stem, choices: p.choices ?? null })) continue
+      if (!byConcept.has(p.conceptId)) byConcept.set(p.conceptId, new Map())
+      const bands = byConcept.get(p.conceptId)!
+      const band = String(p.gradeBand)
+      bands.set(band, (bands.get(band) ?? 0) + 1)
+    }
+
+    const splitOnly: string[] = []
+    for (const [conceptId, bands] of byConcept) {
+      const total = [...bands.values()].reduce((a, b) => a + b, 0)
+      if (total < 3) continue // genuinely short — already counted by the ratchet above
+      if (![...bands.values()].some((n) => n >= 3)) {
+        splitOnly.push(`${conceptId} (${[...bands].map(([b, n]) => `${b}=${n}`).join(' ')})`)
+      }
+    }
+
+    expect(splitOnly).toEqual([])
   })
 })
 

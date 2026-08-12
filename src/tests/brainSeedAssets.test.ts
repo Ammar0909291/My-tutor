@@ -135,17 +135,19 @@ describe('authoredSeedAssets — canonical slug uniqueness', () => {
     // is deliberately NOT attempted here — this test exists so the number
     // can only go DOWN. A new colliding probe fails immediately instead of
     // disappearing silently, which is what let this go unnoticed before.
-    // 407 -> 411 (six phys.mech) -> 419 (five phys.therm + three phys.wave)
-    // as third gradeable MCQs were authored. These probes are NOT lost:
-    // one legacy collision is added per new ladder rung by construction.
-    // `probeSlug` here is the LEGACY
-    // pre-Item-6 identity, which has no difficulty segment, so every ladder
-    // rung beyond the first counts as a collision by construction. The live
+    // Raised as third gradeable MCQs were authored for the audit's moat:
+    // 407 -> 411 (six phys.mech) -> 419 (five phys.therm, three phys.wave)
+    // -> 434 (six phys.astro, eight phys.rel, plus a HIGH-band probe for
+    // phys.mech.hookes-law and three grade-band corrections).
+    //
+    // Those probes are NOT lost. `probeSlug` here is the LEGACY pre-Item-6
+    // identity, which carries no difficulty segment, so every ladder rung
+    // beyond the first counts as a collision by construction. The LIVE
     // identity is `buildProbeSlugResolver`, and difficultyLadderIdentity.test.ts
-    // asserts it maps every authored probe to a UNIQUE slug (0 discarded) —
-    // that is the real invariant. This number stays as a ratchet on the legacy
-    // measure so an accidental collision still cannot pass unnoticed.
-    const KNOWN_DISCARDED = 419
+    // asserts it maps every authored probe to a unique slug (0 discarded) —
+    // that is the real invariant. This stays a ratchet on the legacy measure
+    // so an accidental collision still cannot pass unnoticed.
+    const KNOWN_DISCARDED = 434
     const slugs = ALL_PROBES.filter((p) => isPhysics(p.conceptId)).map(probeSlug)
     expect(discarded(slugs)).toBeLessThanOrEqual(KNOWN_DISCARDED)
   })

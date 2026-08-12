@@ -3113,3 +3113,102 @@ says so, so the raise cannot later read as papering over a loss.
 3. Offline until then: continue third gradeable probes — `phys.therm` (5) and
    `phys.wave` (3) are the next shortest, same method, same one-rung-per-slot
    rule checked across every seed corpus.
+
+---
+
+# ITERATION — 2026-08-12 (cont.) · moat production across Physics
+
+Blocked queue retried first: B-4/B-5 still `403 CONNECT` on
+`my-tutor-flame.vercel.app:443`; Supabase still reachable. Nothing marked
+VERIFIED — no production evidence exists, and none can be gathered here.
+
+## Third gate probes — 29 concepts closed across four domains
+
+| domain | concepts | rung strategy |
+|---|---|---|
+| `phys.mech` | 6 (prior batch) | free rung per concept |
+| `phys.therm` | 5 | carnot, entropy, heat-engines, refrigerators, third-law |
+| `phys.wave` | 3 | beats, forced-oscillations, interference |
+| `phys.astro` | 6 | black-holes, cosmology, dark-matter, gravitational-waves, stellar-evolution, stellar-structure |
+| `phys.rel` | 8 | length-contraction, lorentz-transform, mass-energy, postulates, relativistic-momentum, simultaneity, spacetime, time-dilation |
+| `phys.mech.hookes-law` | 1 | band correction, see below |
+
+Short-concept ratchet **145 → 117**. Every probe is the gradeable form of
+pedagogy the blueprint already authored — a documented misconception as the
+trapped distractor, or the blueprint's own P4-b method with fresh numbers.
+None invents pedagogy.
+
+Two probes are deliberately FLUENCY items rather than misconception screens
+(`phys.wave.interference`, `phys.rel.simultaneity`): both of those concepts'
+authored misconceptions already had gradeable probes, and the third graded
+answer a gate needs is PRACTICE, not a third screen. Stated in the code.
+
+## THE DEFECT I INTRODUCED, AND CAUGHT — grade-band splitting
+
+The legacy collision ratchet rose by **11 for 14 new probes**. That is the
+wrong number, and chasing it rather than accepting it found a real defect.
+
+Three concepts (`phys.astro.black-holes`, `phys.astro.cosmology`,
+`phys.rel.time-dilation`) hold their existing gradeable probes at
+**UNDERGRADUATE**; I had authored the new ones at **HIGH**. No legacy
+collision — because they are different slots. And that is exactly the problem:
+
+> `findBestProbe` scores gradeBand, so the three probes a concept needs must be
+> reachable by ONE learner. UNDERGRADUATE=2 + HIGH=1 counts as three and gives
+> nobody three.
+
+**My probes had not closed the gap for either learner.** All three moved to
+UNDERGRADUATE (rung DEVELOPING, free there).
+
+Auditing band distribution instead of totals then found a **pre-existing**
+instance the metric had always hidden: `phys.mech.hookes-law`, MIDDLE=1 /
+HIGH=2, counted as covered since before this audit began. Closed with a
+HIGH-band probe targeting `MC-KBIG-MEANS-MORE-EXTENSION`, which previously had
+a gradeable probe only at MIDDLE.
+
+**Root-cause fix, not just the four instances:** a new assertion in
+`gateAssessmentIsServerOwned.test.ts` requires every concept counted as covered
+to reach three gradeable probes *within a single band*. It fails in either
+direction — authoring into the wrong band, or losing a probe from the right
+one. The old total-only ratchet stays, since it still catches outright loss.
+
+This is the second time this iteration that an unexpected number, chased
+rather than rationalised, produced the real finding.
+
+## Data-integrity findings — recorded, NOT fixed (pipeline-owned)
+
+1. **Four probes cite misconception ids no blueprint defines:**
+   `MC-SUBSTANCE-AFFECTS-EFFICIENCY` (carnot-cycle),
+   `MC-MUST-USE-ACTUAL-PATH` (entropy), `MC-BEATS-REVEAL-DIRECTION` (beats),
+   `MC-ENERGY-DESTROYED-AT-MINIMA` (interference). Dangling references: nothing
+   can retrieve a repair for them.
+2. **Two blueprints use inconsistent id variants for one misconception** —
+   `MC-ALWAYS-INCREASES-FOR-EVERY-SYSTEM` vs
+   `MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM` (entropy);
+   `MC-100-PERCENT-EFFICIENCY` vs `MC-100-PERCENT-EFFICIENCY-IS-POSSIBLE`
+   (heat-engines).
+
+Both are Curriculum-Production-Pipeline territory; no KG or Blueprint file was
+modified.
+
+## Remaining shortfall — measured, by domain
+
+```
+em 32   mod 21   qm 19   particle 16   stat 15   opt 14   TOTAL 117
+```
+`meas`, `mech`, `therm`, `wave`, `astro`, `rel` are complete at three
+gradeable probes per concept, within band.
+
+## Validation
+
+310 test files / 6,598 passed / 9 skipped · `tsc --noEmit` clean ·
+`npm run build` clean.
+
+## NEXT EXACT ACTION
+1. Retry B-3, B-4, B-5; log it. B-5 needs **egress + credentials**.
+2. Offline: continue third probes — `phys.opt` (14) and `phys.stat` (15) are
+   the next smallest. Check the free rung across ALL seed corpora AND author
+   into the band the concept's existing probes already use.
+3. When production access exists: run the sweep (it now exits non-zero unless
+   topics actually ran), require `E6 = 0`, then drive Topic 3
+   `phys.meas.errors` to `verified`.

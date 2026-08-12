@@ -6981,6 +6981,27 @@ const TDIL_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${TDIL}:MC-2`],
     source: `${TDIL_SRC} — MC-2 probe question verbatim, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-4
+    // (MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS), which had no gradeable probe.
+    // Rung DEVELOPING (PROFICIENT is taken).
+    conceptId: TDIL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    // UNDERGRADUATE — same band as this concept's other gradeable probes;
+    // see the note on BH_PROBES' third MCQ.
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: GPS satellites orbit at about 4 km/s — utterly negligible next to the speed of light. Does time dilation matter for them?',
+    choices: [
+      { text: 'Yes — the shift is tiny but real, and if it were not corrected GPS positions would drift by kilometres a day', isCorrect: true },
+      { text: 'No — time dilation only matters for objects moving close to the speed of light', isCorrect: false, misconceptionId: `${TDIL}:MC-4` },
+      { text: 'No — the effect exists but cancels exactly over a full orbit', isCorrect: false },
+    ],
+    correctValue: 'it matters — dilation is continuous in v, not a threshold effect; GPS applies both the special- and general-relativistic corrections',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TDIL}:MC-4`],
+    source: `${TDIL_SRC} — MC-4 (MC-TIME-DILATION-ONLY-FOR-FAST-OBJECTS), distractor-mapped`,
+  },
 ]
 
 // ─── math.nt.prime-number ────────────────────────────────────────────────────
@@ -7145,6 +7166,30 @@ const BH_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BH}:MC-1`],
     source: `${BH_SRC} — MC-1 probe question verbatim, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Targets MC-3, the blueprint misconception with no
+    // gradeable probe (MC-1 and MC-2 already have one).
+    // Rung DEVELOPING — mcq/HIGH is free there (PROFICIENT is taken).
+    conceptId: BH,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    // UNDERGRADUATE, matching this concept's other gradeable probes. A HIGH
+    // probe here would NOT close the gap: the gate serves within a band, so
+    // splitting 3 probes across two bands leaves both learners short.
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Can anything ever leave a black hole?',
+    choices: [
+      { text: 'Yes — quantum effects at the horizon let it radiate slowly (Hawking radiation), so it can eventually evaporate', isCorrect: true },
+      { text: 'No — nothing escapes a black hole under any circumstances, classical or quantum', isCorrect: false, misconceptionId: `${BH}:MC-3` },
+      { text: 'Yes — anything can escape if it simply travels fast enough', isCorrect: false },
+    ],
+    correctValue: 'yes — Hawking radiation is a quantum process at the horizon; the CLASSICAL statement "nothing escapes" is not the whole story',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BH}:MC-3`],
+    source: `${BH_SRC} — MC-3 (nothing escapes, even quantum mechanically), distractor-mapped`,
+  },
 ]
 
 // ─── phys.astro.cosmology ────────────────────────────────────────────────────
@@ -7229,6 +7274,26 @@ const COSM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${COSM}:MC-2`],
     source: `${COSM_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-3, which had
+    // no gradeable probe. Rung DEVELOPING (PROFICIENT is taken).
+    conceptId: COSM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    // UNDERGRADUATE — same band as this concept's other gradeable probes;
+    // see the note on BH_PROBES' third MCQ.
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Light from a distant galaxy arrives redshifted. What actually causes that redshift?',
+    choices: [
+      { text: 'Space itself expanded while the light was in transit, stretching its wavelength', isCorrect: true },
+      { text: 'The galaxy is rushing away through space, so it is an ordinary Doppler shift', isCorrect: false, misconceptionId: `${COSM}:MC-3` },
+      { text: 'The light lost energy to friction on the long journey', isCorrect: false },
+    ],
+    correctValue: 'expansion of space stretches the wavelength in flight — cosmological redshift is NOT a Doppler shift through space',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COSM}:MC-3`],
+    source: `${COSM_SRC} — MC-3 (cosmological redshift is a Doppler shift), distractor-mapped`,
   },
 ]
 
@@ -32381,6 +32446,24 @@ const DMTR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DMTR}:MC-3`],
     source: `${DMTR_SRC} — MC-3 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-2, which had
+    // no gradeable probe (MC-1 and MC-3 already do). Rung DEVELOPING.
+    conceptId: DMTR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Are dark matter and dark energy two names for the same unknown stuff?',
+    choices: [
+      { text: 'No — dark matter ATTRACTS and clumps into halos; dark energy pushes the expansion of the universe to accelerate', isCorrect: true },
+      { text: 'Yes — both are just labels for the unknown mass-energy in the universe', isCorrect: false, misconceptionId: `${DMTR}:MC-2` },
+      { text: 'Yes — dark energy is what dark matter turns into over time', isCorrect: false, misconceptionId: `${DMTR}:MC-2` },
+    ],
+    correctValue: 'they are opposite in effect: dark matter is gravitationally attractive and clusters; dark energy drives accelerating expansion',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DMTR}:MC-2`],
+    source: `${DMTR_SRC} — MC-2 (dark matter and dark energy conflated), distractor-mapped`,
+  },
 ]
 
 // ─── phys.astro.stellar-structure ────────────────────────────────────────────
@@ -32440,6 +32523,24 @@ const STLS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${STLS}:MC-2`],
     source: `${STLS_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-3, which had
+    // no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: STLS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: As a main-sequence star ages, does it slide along the main sequence to a different position?',
+    choices: [
+      { text: 'No — it stays near the position its MASS fixed, then leaves the main sequence entirely for the giant branch', isCorrect: true },
+      { text: 'Yes — it slides down the main sequence as it burns through its fuel', isCorrect: false, misconceptionId: `${STLS}:MC-3` },
+      { text: 'Yes — it climbs up the main sequence as its core grows hotter', isCorrect: false, misconceptionId: `${STLS}:MC-3` },
+    ],
+    correctValue: 'the main sequence is a MASS sequence, not an age track — a star sits nearly still on it, then departs to the giant branch',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${STLS}:MC-3`],
+    source: `${STLS_SRC} — MC-3 (stars move along the main sequence as they age), distractor-mapped`,
   },
 ]
 
@@ -32501,6 +32602,24 @@ const GRAW_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${GRAW}:MC-3`],
     source: `${GRAW_SRC} — MC-3 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-4, which had
+    // no gradeable probe. Rung DEVELOPING.
+    conceptId: GRAW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You wave your arm in a circle. Are you emitting gravitational waves, and could LIGO detect them?',
+    choices: [
+      { text: 'Emitting yes, in principle — but far too weakly to detect; LIGO needs enormous masses in violent, asymmetric acceleration', isCorrect: true },
+      { text: 'Yes to both — any accelerating mass makes waves a detector can pick up', isCorrect: false, misconceptionId: `${GRAW}:MC-4` },
+      { text: 'No to both — only black holes and neutron stars emit gravitational waves at all', isCorrect: false },
+    ],
+    correctValue: 'in principle yes, detectably no — the strain from a human arm is many orders of magnitude below any instrument threshold',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GRAW}:MC-4`],
+    source: `${GRAW_SRC} — MC-4 (any accelerating mass produces detectable waves), distractor-mapped`,
+  },
 ]
 
 // ─── phys.astro.stellar-evolution ────────────────────────────────────────────
@@ -32560,6 +32679,24 @@ const STLE_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${STLE}:MC-4`],
     source: `${STLE_SRC} — MC-4 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-2, which had
+    // no gradeable probe (MC-1 and MC-4 already do). Rung DEVELOPING.
+    conceptId: STLE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A massive star builds an iron core and then collapses. Why does fusion stop at iron?',
+    choices: [
+      { text: 'Fusing iron COSTS energy rather than releasing it — iron sits at the peak of binding energy per nucleon', isCorrect: true },
+      { text: 'Iron fusion still releases energy, but the star simply runs out of iron to fuse', isCorrect: false, misconceptionId: `${STLE}:MC-2` },
+      { text: 'Iron is too heavy to move, so it sinks out of the burning region', isCorrect: false },
+    ],
+    correctValue: 'iron has the highest binding energy per nucleon, so fusing it ABSORBS energy; the core loses its pressure support and collapses',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${STLE}:MC-2`],
+    source: `${STLE_SRC} — MC-2 (fusing iron releases energy), distractor-mapped`,
   },
 ]
 
@@ -36101,6 +36238,25 @@ const POST_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${POST}:MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES`],
     source: `${POST_SRC} — MC-2/MC-POSTULATE-1-APPLIES-TO-ALL-FRAMES trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-3
+    // (MC-SIMULTANEITY-IS-AN-ILLUSION), which had no gradeable probe.
+    // Rung PROFICIENT — DEVELOPING is taken here.
+    conceptId: POST,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two events are simultaneous in your frame but NOT in a frame moving past you. Is one of you simply mistaken?',
+    choices: [
+      { text: 'Neither — simultaneity is genuinely frame-dependent, and both frames are correct about their own measurements', isCorrect: true },
+      { text: 'Yes — there is a true answer, and one frame is being fooled by signal delays', isCorrect: false, misconceptionId: `${POST}:MC-3` },
+      { text: 'Yes — whoever is at rest is right, since motion distorts the measurement', isCorrect: false, misconceptionId: `${POST}:MC-3` },
+    ],
+    correctValue: 'both are correct — relativity of simultaneity is a real consequence of the postulates, not an illusion or a measurement error, and there is no preferred frame',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POST}:MC-3`],
+    source: `${POST_SRC} — MC-3 (MC-SIMULTANEITY-IS-AN-ILLUSION), distractor-mapped`,
+  },
 ]
 
 // ─── phys.rel.simultaneity ──────────────────────────────────────────────────────
@@ -36160,6 +36316,27 @@ const SIML_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SIML}:MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING`],
     source: `${SIML_SRC} — MC-2/MC-SIMULTANEITY-AFFECTS-CAUSAL-ORDERING trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. A pure FLUENCY item,
+    // deliberately NOT a misconception screen: this concept has only two
+    // authored misconceptions and BOTH already have a gradeable probe. The
+    // third graded answer a gate needs is PRACTICE, not a third screen.
+    // Rung DEVELOPING (PROFICIENT is taken).
+    conceptId: SIML,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Lightning strikes both ends of a train at the same instant IN THE GROUND FRAME. A passenger sits at the middle of the train, which is moving forward. Which flash reaches the passenger first?',
+    choices: [
+      { text: 'The one from the FRONT — the passenger is travelling toward that light while it is in transit', isCorrect: true },
+      { text: 'Both at once — the passenger is exactly midway between the two strikes', isCorrect: false },
+      { text: 'The one from the REAR — that light is chasing the passenger and so arrives sooner', isCorrect: false },
+    ],
+    correctValue: 'the front flash — the passenger moves toward it during the flight time, which is why the passenger concludes the strikes were NOT simultaneous',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${SIML_SRC} — Einstein's train thought experiment as a gradeable fluency item`,
   },
 ]
 
@@ -36221,6 +36398,24 @@ const LRTZ_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${LRTZ}:MC-2`],
     source: `${LRTZ_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-3, which had
+    // no gradeable probe. Rung DEVELOPING (PROFICIENT is taken).
+    conceptId: LRTZ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A ship moves at 0.5c relative to Earth and launches a probe forward at 0.5c relative to the ship. How fast is the probe in Earth’s frame?',
+    choices: [
+      { text: '0.8c — velocities combine as (u′+v)/(1+u′v/c²) = 1.0c / 1.25', isCorrect: true },
+      { text: '1.0c — the two speeds simply add', isCorrect: false, misconceptionId: `${LRTZ}:MC-3` },
+      { text: '0.5c — the probe cannot go faster than the ship that launched it', isCorrect: false },
+    ],
+    correctValue: '0.8c — relativistic velocity addition; simple addition would exceed or reach c, which no massive object can do',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LRTZ}:MC-3`],
+    source: `${LRTZ_SRC} — MC-3 (velocity addition gives u = u′ + v), distractor-mapped`,
+  },
 ]
 
 // ─── phys.rel.length-contraction ────────────────────────────────────────────────
@@ -36280,6 +36475,24 @@ const LCON_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${LCON}:MC-2`],
     source: `${LCON_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-3, which had
+    // no gradeable probe. Rung PROFICIENT — DEVELOPING is taken here.
+    conceptId: LCON,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A rod is 1.00 m in its own rest frame and measures 0.80 m in your frame. Which length is the REAL one?',
+    choices: [
+      { text: 'Both are real — 1.00 m is the proper length in the rod’s frame, 0.80 m is genuinely what your frame measures', isCorrect: true },
+      { text: 'The 1.00 m is real; the 0.80 m is only an apparent or optical effect', isCorrect: false, misconceptionId: `${LCON}:MC-3` },
+      { text: 'The 0.80 m is real; the rod only looks 1.00 m to someone riding with it', isCorrect: false, misconceptionId: `${LCON}:MC-3` },
+    ],
+    correctValue: 'both — length is frame-dependent, and no frame is privileged; the rest-frame value is called PROPER length, not "the real one"',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCON}:MC-3`],
+    source: `${LCON_SRC} — MC-3 (L₀ is "apparent", L is "real"), distractor-mapped`,
   },
 ]
 
@@ -36341,6 +36554,24 @@ const SPTM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${SPTM}:MC-2`],
     source: `${SPTM_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-4, which had
+    // no gradeable probe. Rung DEVELOPING (PROFICIENT is taken).
+    conceptId: SPTM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A clock travels a path through spacetime. Different observers, moving differently, each compute the time it recorded. Do they agree?',
+    choices: [
+      { text: 'Yes — proper time along a worldline is INVARIANT; every observer computes the same elapsed reading', isCorrect: true },
+      { text: 'No — proper time depends on who is observing, like length and coordinate time do', isCorrect: false, misconceptionId: `${SPTM}:MC-4` },
+      { text: 'Only if the observers are all moving at the same speed as each other', isCorrect: false, misconceptionId: `${SPTM}:MC-4` },
+    ],
+    correctValue: 'they agree — proper time is the spacetime interval along the worldline, an invariant; coordinate time is what differs between frames',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SPTM}:MC-4`],
+    source: `${SPTM_SRC} — MC-4 (proper time is observer-dependent), distractor-mapped`,
+  },
 ]
 
 // ─── phys.rel.relativistic-momentum ─────────────────────────────────────────────
@@ -36401,6 +36632,24 @@ const RMOM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${RMOM}:MC-2`],
     source: `${RMOM_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-3, which had
+    // no gradeable probe. Rung DEVELOPING (PROFICIENT is taken).
+    conceptId: RMOM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A proton is accelerated to 0.99c. What happens to its MASS?',
+    choices: [
+      { text: 'Nothing — mass is invariant; it is the momentum and energy that grow by the factor γ', isCorrect: true },
+      { text: 'It increases — the moving proton really is more massive (γm is its true mass)', isCorrect: false, misconceptionId: `${RMOM}:MC-3` },
+      { text: 'It decreases, because energy is being converted away from rest mass', isCorrect: false },
+    ],
+    correctValue: 'mass is an invariant property; modern usage puts γ with momentum (p = γmv) and energy (E = γmc²), not with mass',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RMOM}:MC-3`],
+    source: `${RMOM_SRC} — MC-3 (relativistic mass γm is the real mass), distractor-mapped`,
+  },
 ]
 
 // ─── phys.rel.mass-energy ───────────────────────────────────────────────────────
@@ -36460,6 +36709,24 @@ const MEQ_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${MEQ}:MC-2`],
     source: `${MEQ_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on BH_PROBES. Targets MC-3, which had
+    // no gradeable probe. Rung DEVELOPING (PROFICIENT is taken).
+    conceptId: MEQ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A high-energy photon converts into an electron and a positron. Has mass been created out of nothing?',
+    choices: [
+      { text: 'No — the photon’s ENERGY became mass; E = mc² is a conversion, and total energy is conserved throughout', isCorrect: true },
+      { text: 'Yes — pair production genuinely creates matter from nothing', isCorrect: false, misconceptionId: `${MEQ}:MC-3` },
+      { text: 'No — the electron and positron were already inside the photon', isCorrect: false },
+    ],
+    correctValue: 'energy was converted into rest mass, not created; the photon must carry at least 2m_ec² for this to be possible',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MEQ}:MC-3`],
+    source: `${MEQ_SRC} — MC-3 (pair production creates mass from nothing), distractor-mapped`,
   },
 ]
 
@@ -43576,6 +43843,28 @@ const HOOKE_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [],
     source: `${HOOKE_SRC} — Component 6 Mastery Probe Set MP-4`,
+  },
+  {
+    // THIRD gradeable MCQ **AT THE HIGH BAND**. This concept already counted as
+    // covered on a raw total of 3, but the three were split MIDDLE=1 / HIGH=2 —
+    // and the gate serves within a band, so no learner ever had three. A
+    // pre-existing case, found by auditing band distribution rather than totals.
+    // Targets MC-KBIG-MEANS-MORE-EXTENSION, which had a gradeable probe only at
+    // MIDDLE. Rung DEVELOPING — mcq/HIGH is free there (FOUNDATIONAL is taken).
+    conceptId: HOOKE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Spring A has k = 200 N/m and spring B has k = 800 N/m. The SAME 20 N force is applied to each. Which stretches further?',
+    choices: [
+      { text: 'Spring A — x = F/k, so 20/200 = 0.10 m versus 20/800 = 0.025 m', isCorrect: true },
+      { text: 'Spring B — a bigger k means a bigger extension', isCorrect: false, misconceptionId: `${HOOKE}:MC-KBIG-MEANS-MORE-EXTENSION` },
+      { text: 'Both the same — the applied force is identical', isCorrect: false, misconceptionId: `${HOOKE}:MC-KBIG-MEANS-MORE-EXTENSION` },
+    ],
+    correctValue: 'Spring A, 0.10 m against 0.025 m — k is STIFFNESS, so a larger k means the spring resists more and extends LESS for the same force',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HOOKE}:MC-KBIG-MEANS-MORE-EXTENSION`],
+    source: `${HOOKE_SRC} — MC-KBIG-MEANS-MORE-EXTENSION, distractor-mapped (HIGH-band counterpart of the MIDDLE probe)`,
   },
 ]
 
