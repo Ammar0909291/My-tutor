@@ -4224,8 +4224,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Written ONLY when this turn actually put a figure on screen. A turn
       // that showed nothing stores null, which is what stops a later reload
       // from lending this message somebody else's picture.
+      // D6 — A HELD LESSON FIGURE IS NOT THIS MESSAGE'S FIGURE.
+      //
+      // Found by reading the learner's own restored history after the
+      // persistence fix shipped: two CATALYST answers had a FREE-BODY DIAGRAM
+      // recorded beside them. Faithful to the screen — continuity keeps a
+      // figure the learner is mid-read rather than yanking it away — but wrong
+      // as a record. On screen it was a passing oddity; stored, it is a
+      // permanent claim that this explanation had that picture.
+      //
+      // So: record the figure only when it depicts what this turn TAUGHT. An
+      // excursion turn whose figure still belongs to the paused lesson records
+      // nothing, and `restoreMessageVisuals` already treats absent as "this
+      // message showed no figure" rather than "look elsewhere".
+      //
+      // Deliberately narrow — it changes what is WRITTEN, never what is shown.
+      // Continuity on screen is untouched.
+      const figureBelongsToThisTurn = (() => {
+        const session = visualDecisionHoisted?.session
+        if (!session) return false
+        const excursionOpen = excursionDecisionHoisted?.state.active === true
+        if (!excursionOpen) return true
+        const taught = excursionDecisionHoisted?.targetConceptId ?? null
+        // An unresolved-topic excursion has no concept at all, so no figure can
+        // depict it — nothing is recorded, which is the honest answer.
+        if (!taught) return false
+        return session.conceptId === taught
+      })()
+
       const displayedVisualSession =
-        visualDecisionHoisted?.graphical && visualDecisionHoisted.session
+        visualDecisionHoisted?.graphical && visualDecisionHoisted.session && figureBelongsToThisTurn
           ? (visualDecisionHoisted.session as unknown as Prisma.InputJsonValue)
           : undefined
 

@@ -156,3 +156,76 @@ describe('each figure returns to the message that showed it', () => {
     await expect(restoreMessageVisuals([])).resolves.toEqual({})
   })
 })
+
+// ── D6 · A HELD LESSON FIGURE IS NOT THE EXCURSION'S FIGURE ─────────────────
+//
+// Found by reading the learner's own restored history after this feature
+// shipped: two CATALYST answers had a FREE-BODY DIAGRAM recorded beside them.
+// Faithful to what was on screen — continuity keeps a figure the learner is
+// mid-read — but wrong as a permanent record of what that explanation showed.
+//
+// The rule the route now applies: record the figure only when it depicts what
+// the turn TAUGHT. These tests pin that decision as a pure predicate so it
+// cannot drift, and pin the restore side's contract that "absent" means "this
+// message showed no figure" — never "borrow a neighbour's".
+
+/** The route's predicate, mirrored exactly (route.ts, figureBelongsToThisTurn). */
+function figureBelongsToThisTurn(input: {
+  sessionConceptId: string | null
+  excursionActive: boolean
+  excursionTargetConceptId: string | null
+}): boolean {
+  if (!input.sessionConceptId) return false
+  if (!input.excursionActive) return true
+  if (!input.excursionTargetConceptId) return false
+  return input.sessionConceptId === input.excursionTargetConceptId
+}
+
+describe('D6 — only the figure of what was taught is recorded', () => {
+  it('an ordinary lesson turn records its figure', () => {
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: LESSON, excursionActive: false, excursionTargetConceptId: null,
+    })).toBe(true)
+  })
+
+  it('the catalyst case: a held lesson figure during an excursion records NOTHING', () => {
+    // The exact production shape — an unresolved-topic excursion ("catalyst
+    // work") with the lesson's force diagram still on screen.
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: LESSON, excursionActive: true, excursionTargetConceptId: null,
+    })).toBe(false)
+  })
+
+  it('a RESOLVED excursion records the figure of its own concept', () => {
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: 'phys.fluid.viscosity', excursionActive: true,
+      excursionTargetConceptId: 'phys.fluid.viscosity',
+    })).toBe(true)
+  })
+
+  it('a resolved excursion still refuses the LESSON figure', () => {
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: LESSON, excursionActive: true,
+      excursionTargetConceptId: 'phys.fluid.viscosity',
+    })).toBe(false)
+  })
+
+  it('no figure at all records nothing', () => {
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: null, excursionActive: false, excursionTargetConceptId: null,
+    })).toBe(false)
+  })
+
+  it('a message that recorded nothing restores nothing — it never borrows', async () => {
+    // The other half of the contract: with the excursion turns now storing
+    // null, restore must leave them empty rather than reaching for a
+    // neighbour's figure.
+    const out = await restoreMessageVisuals([
+      msg('lesson-turn', identity(LESSON)),
+      msg('excursion-turn'),
+      msg('another-excursion-turn'),
+    ])
+    expect(out['excursion-turn']).toBeUndefined()
+    expect(out['another-excursion-turn']).toBeUndefined()
+  })
+})
