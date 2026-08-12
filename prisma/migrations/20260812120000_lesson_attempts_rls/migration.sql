@@ -1,0 +1,45 @@
+-- Security fix: public.lesson_attempts was created (20260802010000) after the
+-- 2026-07-26 RLS sweep that enabled RLS on all other public tables, and that
+-- sweep was itself applied as an undocumented, unversioned production-only
+-- change (no migration file exists anywhere in this repo for it). This table
+-- was simply missed by a process gap, not by design. This migration is the
+-- first RLS statement ever checked into version control for this project.
+--
+-- What this table holds: per-learner, per-lesson outcome evidence (concepts
+-- mastered/needing review, misconceptions corrected, timing, a summary the
+-- tutor is allowed to verbalise) — genuinely private, learner-specific data,
+-- scoped by the "userId" column (FK -> users.id).
+--
+-- Access model, verified by reading every call site (src/lib/teaching/
+-- lessonAttemptStore.ts is the only module that touches this table; its
+-- callers in src/app/api/learn/chat/route.ts and .../lesson-init/route.ts
+-- always pass userId from the server-side NextAuth session,
+-- `authSession?.user?.id` — never from client-supplied input):
+--   - The browser never talks to Postgres or the Supabase Data API directly.
+--     There is no @supabase/supabase-js dependency in this project and no
+--     NEXT_PUBLIC_SUPABASE_* env var — Supabase is used purely as a managed
+--     Postgres host, reached only through Prisma from Next.js server code.
+--   - The app's DATABASE_URL connects as the `postgres` role, which carries
+--     rolbypassrls=true (previously verified directly against production —
+--     see CLAUDE.md's "Architecture facts" migration-drift correction and
+--     the 2026-07-26 RLS-sweep note). Enabling RLS therefore does NOT change
+--     any behaviour for server-side Prisma reads/writes — they bypass RLS
+--     exactly as every other already-RLS-enabled table's server access does.
+--   - This app does not use Supabase Auth, so there is no `auth.uid()` /
+--     JWT claim that could ever correspond to this table's "userId" (a
+--     NextAuth-issued id). Writing auth.uid()-keyed policies would be
+--     theatre: they would never match any row, for any role.
+--   - Net result: the `anon` and `authenticated` Supabase roles (the ones a
+--     future Data API / anon-key exposure would use) have no legitimate
+--     access path to this table at all today. The least-privilege policy is
+--     therefore to enable RLS and grant NO policies to those roles — a
+--     default-deny posture — rather than author a policy that can never be
+--     satisfied or, worse, an always-true permissive policy that would only
+--     exist to silence the advisor.
+--
+-- If a genuine client-facing use case for this table appears later (e.g. a
+-- direct Supabase client read), add a scoped SELECT policy then, keyed to
+-- whatever identity mechanism is actually wired to Postgres at that time —
+-- do not add one speculatively now.
+
+ALTER TABLE "lesson_attempts" ENABLE ROW LEVEL SECURITY;

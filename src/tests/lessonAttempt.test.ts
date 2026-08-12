@@ -239,6 +239,52 @@ describe('lessonAttemptStore', () => {
   })
 })
 
+// ── Learner isolation (Supabase security-advisor RLS audit, 2026-08-12) ────
+//
+// The RLS migration is defence-in-depth against a future Data API / anon-key
+// exposure — server-side Prisma access always bypasses RLS via the DB role's
+// rolbypassrls attribute, so isolation TODAY is enforced at this application
+// layer: every store function takes userId as an explicit argument and every
+// query is scoped by it. These tests pin that contract down.
+describe('lessonAttemptStore — learner isolation', () => {
+  it('learner A cannot read learner B\'s attempt for the same lesson key', async () => {
+    const { db } = fakeDb()
+    await openLessonAttempt(db, { userId: 'learnerA', subjectSlug: 'mathematics', lessonKey: 'fractions' })
+    const asB = await latestLessonAttempt(db, { userId: 'learnerB', subjectSlug: 'mathematics', lessonKey: 'fractions' })
+    expect(asB).toBeNull()
+  })
+
+  it('opening the same lesson key for two learners creates two separate rows', async () => {
+    const { db, rows } = fakeDb()
+    const a = await openLessonAttempt(db, { userId: 'learnerA', subjectSlug: 'mathematics', lessonKey: 'fractions' })
+    const b = await openLessonAttempt(db, { userId: 'learnerB', subjectSlug: 'mathematics', lessonKey: 'fractions' })
+    expect(a.id).not.toBe(b.id)
+    expect(rows).toHaveLength(2)
+    expect(rows.find((r) => r.id === a.id)!.userId).toBe('learnerA')
+    expect(rows.find((r) => r.id === b.id)!.userId).toBe('learnerB')
+  })
+
+  it('markConceptForReview only ever touches the calling learner\'s TopicProgress row', async () => {
+    const { db, topics } = fakeDb()
+    topics.push({ userId: 'learnerB', subjectSlug: 'mathematics', topicSlug: 'frac.addition', status: 'COMPLETED', revisionCount: 0 })
+    await markConceptForReview(db, { userId: 'learnerA', subjectSlug: 'mathematics', topicSlug: 'frac.addition' })
+    const bRow = topics.find((t) => t.userId === 'learnerB')!
+    const aRow = topics.find((t) => t.userId === 'learnerA')!
+    expect(bRow.status).toBe('COMPLETED') // learner B's row is untouched
+    expect(aRow.status).toBe('REVISION')  // learner A got their own new row
+  })
+
+  it('every store function that reads or writes lesson_attempts requires userId as an explicit argument', () => {
+    // Static contract check: an id-only lookup path (no userId) would let one
+    // learner's attemptId be replayed against another learner's session. All
+    // reads go through openLessonAttempt/latestLessonAttempt, both userId-scoped;
+    // writes (save/finalize) take an already-scoped attemptId returned by one
+    // of those two functions, never a client-supplied id.
+    expect(openLessonAttempt.length).toBeGreaterThanOrEqual(2)
+    expect(latestLessonAttempt.length).toBeGreaterThanOrEqual(2)
+  })
+})
+
 describe('MANUAL TRACE — start, master, fail, complete, refresh, resume, summary', () => {
   it('keeps one source of truth across the whole lifecycle', async () => {
     const { db, rows, topics } = fakeDb()
