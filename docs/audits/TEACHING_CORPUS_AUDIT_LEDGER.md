@@ -2320,3 +2320,55 @@ rather than deleted — it is the evidence the fix targets the right input.
 3. Then Topic 3 to its mastery gate → VERIFIED + moat, then Topic 4.
 4. Owner queue unchanged: deprecate `f22e5673-…`; survey the 1,589 ACTIVE
    explanation rows; recurrent Prisma P1008.
+
+---
+
+# 📌 BLOCKED QUEUE — durable, never skipped (standing protocol, 2026-08-12)
+
+**Rules.** A blocked topic is never abandoned. Each entry names the EXACT
+blocker and the EXACT action required to clear it. The audit continues with the
+next UNBLOCKED topic, and blocked entries are RETRIED periodically — every
+iteration that touches the ledger. **A blocked topic can become VERIFIED only
+after (a) its blocker is resolved AND (b) it passes the full learner audit from
+a clean session.** Clearing a blocker alone is never sufficient.
+
+## B-1 · `phys.meas.dimensions` (Topic 2) — BLOCKED
+
+| field | value |
+|-------|-------|
+| **Blocker** | AssetIdentity row `f22e5673-4b1f-473a-bec8-4fbb9637c0c0` is ACTIVE and serving. Concept `phys.meas.dimensions`, family EXPLANATION, `servingMode: exact_match`, confidence 75. Its content is wrong-topic (wave interference) and carries a learner's name. |
+| **Required action** | Set that row to DEPRECATED. One statement. Owner-only: this session cannot write to production, and the audit mandate forbids altering production records. |
+| **Why I cannot do it** | Supabase MCP lists **0 projects**. Retried 2026-08-12 (attempt 2) — still 0. |
+| **Code side** | DONE (`22dc4852`). New captures of this shape are rejected; the gate cannot retract what is already stored. |
+| **Re-verify after clearing** | Full learner audit of Topic 2 from a clean session — the asset must not serve, AND the teaching must pass on its own merits. |
+
+## B-2 · Cross-corpus asset hygiene — BLOCKED (not topic-scoped)
+
+| field | value |
+|-------|-------|
+| **Blocker** | Same: no production DB read. |
+| **Required action** | Survey the 1,589 ACTIVE explanation rows for embedded learner names and session-bound discourse. One capture path produced all of them, so `f22e5673-…` is unlikely to be alone. |
+| **Impact if unaddressed** | Every affected row keeps serving. This does not block a specific topic; it can silently fail ANY topic, which is why it sits in this queue rather than under one heading. |
+
+## B-3 · Recurrent Prisma P1008 socket timeouts — BLOCKED
+
+| field | value |
+|-------|-------|
+| **Blocker** | No Supabase/pooler access. |
+| **Required action** | Owner to inspect pooler mode and connection limits. Observed failing ANOTHER real learner's `studentProgress` and evidence-spine writes while their teaching turns completed. |
+| **Status** | Not observed in the last several windows; recurrent, not resolved. |
+
+## B-4 · Screenshots (one per topic) — BLOCKED
+
+| field | value |
+|-------|-------|
+| **Blocker** | Chromium fails `net::ERR_CONNECTION_RESET` on EVERY host through this sandbox's egress proxy — verified against `example.com`, so not app-specific. |
+| **Required action** | Run `scripts/audit/capture-topic.ts` from any machine with ordinary internet. |
+| **Explicitly NOT done** | Disabling TLS verification, which would trade a real security property for a picture. |
+| **What it does NOT block** | The audit itself — every finding is from real authenticated HTTP with full response text recorded here. |
+
+## Retry log
+| date | attempt | result |
+|------|---------|--------|
+| 2026-08-12 | 1 | Supabase MCP: 0 projects |
+| 2026-08-12 | 2 | Supabase MCP reconnected under a new name, then disconnected; on reconnection still **0 projects**. B-1/B-2/B-3 remain blocked. |
