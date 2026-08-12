@@ -3844,6 +3844,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const affirmCtx = { learnerText: message, knownMisconceptionText } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
             const firstViolation = vAffirm(cleanText, affirmCtx)
+            // The gate PASSES offline for this exact learner/concept pair, so a
+            // production REJECT means the rule saw no misconception knowledge
+            // and fell back to its conservative branch. Log the one value that
+            // separates "knowledge missing" from "knowledge matched".
+            console.log('[affirm-guard-known]', {
+              conceptId: teachingConceptIdForRepair,
+              knownChars: knownMisconceptionText.trim().length,
+            })
             // Which branch ran, and did the rule even consider this turn?
             // Added after a production turn that SHOULD have tripped the guard
             // produced no log line at all, leaving three untestable
