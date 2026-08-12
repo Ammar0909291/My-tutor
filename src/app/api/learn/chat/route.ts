@@ -3636,6 +3636,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             gradeBand: memoryState.gradeBand,
             rawContent: text,
             authorId: 'SYSTEM_AI',
+            // The gate needs this to reject a captured personal address
+            // exactly rather than by shape. Measured: an asset opening
+            // "Mohammad Suaib, …" was captured, stored and served twice.
+            learnerName: profile?.displayName ?? session.user.name ?? null,
           })
         }
       }

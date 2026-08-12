@@ -33,6 +33,10 @@ export interface IngestLessonInput {
   gradeBand: GradeBand
   rawContent: string
   authorId: string
+  /** The learner whose turn produced this text. Passed to the reusability gate
+   *  so a captured personal address is rejected exactly rather than by shape.
+   *  A shared asset carrying one learner's name leaks it to every other. */
+  learnerName?: string | null
 }
 
 export interface IngestedExplanation {
@@ -72,6 +76,7 @@ export async function ingestGeneratedLesson(input: IngestLessonInput): Promise<I
         language: input.language,
         content: section.content,
         familyKind: section.familyKind,
+        learnerName: input.learnerName ?? null,
       })
 
       let outcome: CaptureOutcome
