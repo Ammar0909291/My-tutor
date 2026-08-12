@@ -2143,3 +2143,96 @@ graded turn here came from the deterministic path.
 3. Owner queue (unchanged, still unreachable from this session):
    deprecate `f22e5673-…`; survey the 1,589 ACTIVE explanation rows for names
    and session-bound discourse; recurrent Prisma P1008.
+
+---
+
+# TOPIC 3 — `phys.meas.errors` "Measurement Errors and Uncertainty" — IN PROGRESS
+
+Clean session `cmspy7qxj0001kz04vx5a3tn5`, real production, real learner account.
+
+## Teaching quality: STRONG
+
+Opening: a wooden ruler and a paperclip, ending on an observation question.
+Concrete before abstract, no term dropped cold.
+
+> me: "its hard to line it up exactly. but if i am careful there should be no
+> error right? error means i made a mistake"
+> tutor: *"Claude, that is a very common thought! **But actually, even if you
+> are the most careful person in the world, an error is not a mistake you
+> made.** … the tool itself has a physical limit to its smallest division…
+> Measurement errors and uncertainty are a built-in feature of every
+> measurement tool, **not a human failure**."*
+
+That is **EB M1** ("Error means mistake; a careful experimenter has no error")
+repaired in its own authored terms. Correct, explicit, and in everyday words.
+
+> me: "so uncertainty is like a range, not one number? but why does it matter,
+> cant i just say 10"
+> tutor: confirms (the learner IS right), then answers the motivation —
+> *"simply saying '10' hides crucial information about how precise your
+> measurement was"*. The affirmation guard correctly did NOT fire: the learner's
+> words match no authored misconception symptom. The discriminator working as
+> designed, in the direction that protects a correct learner.
+
+The ladder climbed OBSERVE → DEMONSTRATE → GUIDE → CHECK on graded MCQs.
+
+## An EIGHTH instrument error of mine, caught before reporting
+
+The tutor said *"Look at the number line on your screen"* and my harness printed
+`visual: None` — which reads as a fabricated reference to a picture that is not
+there. **The figure was real.** It rides `visualSpec`
+(`{type: 'number_line', start: 9.5, end: 10.5, highlight: [9.8, 10.2]}`), and
+the prose matched it exactly. My harness read one channel of four. Fixed:
+`ask2.sh` and `ladder.sh` now print `visualSpec` / `sceneSpec` /
+`dynamicVisualizationCode`, and `mcqa.sh` now sends the option TEXT, which is
+what `LessonScreen` actually sends on a tap.
+
+---
+
+# 🔴 DEFECT — a held figure was re-introduced on every turn (`77acd810`)
+
+**Five of six consecutive turns** re-described the same `number_line` with its
+full numeric range (all five quoted verbatim in the test file).
+
+## Why no existing rule caught it
+
+**Nothing there is false.** The figure exists, the numbers are its real numbers,
+and every fabrication rule in the visual contract is satisfied. `WHAT THE
+LEARNER SEES` plus *"refer to the figure by its REAL elements"* is precisely
+what produces this, and it fires again, identically, on every held turn. The
+contract had **no notion of a SECOND turn with the same figure**.
+
+It is a TEACHING defect rather than a truth defect, and it lands hardest on the
+learner this audit is run for: someone reading at intermediate level spends
+limited attention re-reading a description they already have, and a tutor that
+re-introduces the same picture every turn reads as one that has forgotten it
+already did.
+
+## The fix
+
+`session.turns` is the held count the engine already keeps (0 on the turn a
+figure first appears), so this needed no new plumbing. Turn one introduces the
+figure exactly as before; from turn two the tutor points at the ONE part it is
+using and spends the rest of the turn on new teaching.
+
+**Bounded deliberately:** it relaxes no fabrication rule — the clause says so
+explicitly and a test asserts it — and it does not push toward the opposite
+failure, a figure on screen that the words never refer to.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` |
+| IN PROGRESS | 1 — `phys.meas.errors` |
+| REMAINING | 421 |
+| Global fixes this run | 23 |
+
+## NEXT EXACT ACTION
+1. Confirm `77acd810` READY, then re-run Topic 3 on a clean session and count
+   how many held-figure turns re-describe the range. Expect the introduction
+   once and brief references after.
+2. Finish Topic 3 to its mastery gate; probe EB **M2** (random vs systematic
+   errors treated as interchangeable) and **M4** (the "true value" is exactly
+   the average) — both authored, neither yet exercised.
+3. Owner queue, unchanged: deprecate `f22e5673-…` (blocks Topic 2); survey the
+   1,589 ACTIVE explanation rows; recurrent Prisma P1008.
