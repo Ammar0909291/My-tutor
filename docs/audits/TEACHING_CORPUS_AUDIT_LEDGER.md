@@ -1352,3 +1352,91 @@ else, since that commit is otherwise a large win.
 - Topic 2 `phys.meas.dimensions` — **FAILED** (this turn). Earlier probes on
   this topic were good; this one is disqualifying.
 - Topic 1 — VERIFIED, unaffected.
+
+---
+
+# 🔴 P0 — THE TUTOR READ AUTHORING METADATA ALOUD (`6d6d283f`)
+
+Found on the FIRST probe of a clean Topic 2 session, before any of the
+carried-over investigation could start. Real production, real learner account.
+
+> me: "i dont really get what a dimension is, isnt that just how many sides a
+> shape has"
+>
+> tutor: *"Let's check that one carefully rather than me just agreeing — this
+> is a place where it is easy to mix two things up.*
+>
+> ***concept_id: phys.meas.dimensions name: Dimensional Analysis domain:
+> Measurement & Units (Physics) difficulty: developing (3) bloom: apply
+> prerequisites: [phys.meas.units] mastery_threshold: 0.75 estimated_hours: 3
+> cross_links: [] session_cap: 7 TAs (estimated_hours ≥ 1h → PA-3 hard limit)
+> cpa_entry_stage: C …***
+>
+> *Tell me in your own words what part of that is different from what you were
+> picturing."*
+
+## Two defects, and why they only became reachable now
+
+Both were latent until `b53e93ea` shipped the authored corpus into the
+serverless bundle. Before that the loader returned "not found" for every
+concept, so this path always fell through to the generic template and the
+defect could not be seen.
+
+1. **`extractSpine` accepted a metadata block as the concept's DEFINITION.**
+   77 of 1,347 blueprints open their spine section with an unfenced
+   `key: value` profile — no ``` fence, so the YAML branch never saw it; no
+   leading `|`, so the paragraph filter admitted it. Those 77 concepts were
+   also feeding the dump into the `BLUEPRINT CONTEXT` prompt block as the
+   concept's definition, on every turn, for every learner.
+2. **The affirmation guard's last resort SPOKE the spine.** The spine is
+   written for an AUTHOR. Its ordinary case is a mastery rubric
+   (`[Boundary statement] A student who achieves mastery demonstrates:`) —
+   honest content, and still the wrong thing to say to a beginner.
+
+## The fix, split to match
+
+- `looksLikeMetadata()` (exported, shared) refuses the metadata case in the
+  loader. Skipping falls THROUGH to the next spine section rather than blanking
+  the spine — re-scan: **0 metadata spines, 1347/1347 still have a definition**.
+  It catches both generations, which share almost no key name (`concept_id:` /
+  `SESSION_TA_CAP:`), so a hardcoded key list alone would have missed one.
+- The spoken text now leads with the **Knowledge Graph description** — the one
+  place the curriculum states a concept in a single learner-facing sentence —
+  behind a `readsAsProse()` gate that also guards the blueprint backup.
+  Verified: all **424** audited physics + chemistry concepts have a speakable
+  description, so the last resort cannot go missing exactly when it is needed.
+
+## The carried-over Topic 2 P1, investigated
+
+The "wave interference … on a pond" turn: **not from a stored asset.**
+`pond` and `two water waves overlap` appear nowhere in the repository; the
+`phys.wave.interference` seed content is dense and technical (speakers,
+calorimeter, fringe visibility) and shares no wording with what was served;
+neither the `phys.meas.dimensions` blueprint nor its EB entry mentions
+interference. The `"Good question — now, back to <lesson>"` shape it ended on
+exists only inside a CODE COMMENT in `conceptAnchor.ts`, describing the
+banned P0-1 behaviour — it is not in any prompt.
+
+Production DB could not be queried to check for a served ACTIVE asset:
+**Supabase MCP still lists 0 projects.** So the finding is bounded honestly —
+ruled out as authored-corpus content, not yet ruled out as a DB row.
+
+## STATUS
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| FAILED / IN PROGRESS | 1 — `phys.meas.dimensions` |
+| REMAINING | 422 |
+| Moat explanations | 1 |
+| Global fixes this run | 14 |
+
+## NEXT EXACT ACTION
+1. Confirm `6d6d283f` is READY in production.
+2. `./clean.sh` for `phys.meas.dimensions`, then re-run the same first probe.
+   Expect a real explanation of what a dimension is — no `concept_id:`, no
+   `bloom:`, no `mastery_threshold:` anywhere in the reply.
+3. Then Topic 2 forward: the "speed is L" misconception (it is L/T, and the
+   original turn IGNORED it), then Examples → Guided → Mastery → VERIFIED.
+4. Re-probe: any concept measured before `6d6d283f` whose reply hit the
+   affirm-guard last resort may have been served metadata.
