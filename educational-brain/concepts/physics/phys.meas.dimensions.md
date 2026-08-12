@@ -144,6 +144,43 @@ dimensionally wrong**
 - *Verification*: items that require recognising dimensionless ratios; equations
   involving trigonometric functions (no units issue).
 
+**M5 — A derived quantity takes the dimension of the quantity it is "about"
+(speed is L, because speed is about distance)**
+- *Why*: type 1, overgeneralisation, with a type 4 (notation-induced) accelerant.
+  The learner has just correctly learned "the dimension of distance is L" and
+  extends it by association: speed is *described using* distance, so speed *is*
+  L. The notation reinforces it — speed is written as a fraction, and a beginner
+  reads the top line as "the thing" and the bottom line as an afterthought about
+  how it was obtained. The divisor is dropped, not disbelieved. This is the
+  gateway error for every derived quantity: the same move gives density = M,
+  pressure = M, and acceleration = L.
+- *Symptom / phrases*: "so speed is L then? because it is distance"; "speed is
+  just how far you go, so it's length"; names only the numerator when asked for
+  a derived dimension; agrees that speed is measured in metres per second while
+  still writing its dimension as [L].
+- *Detection probe (verbatim)*: "Two cars each travel 100 metres. One takes 5
+  seconds, the other takes 50 seconds. Did they travel the same distance? Do they
+  have the same speed?" (Same distance; different speed.) Then: "So if the
+  distance is identical and the speed is not, can speed be the same kind of thing
+  as distance?" A learner holding M5 says yes to the first, hesitates on the
+  second, and cannot say what changed.
+- *Recovery*: do not begin with the formula. Begin with the counter-case above —
+  the learner must SEE two situations with identical length and different speed
+  before any symbol appears, because that is the observation the misconception
+  cannot survive. Then name it: speed is not a length, it is a length *per*
+  something, and the "per" is not decoration — it is half the quantity. Only then
+  the notation: distance ÷ time, so L ÷ T, written [LT⁻¹]. Close by generalising
+  it once, so the repair transfers instead of being memorised for speed alone:
+  "any time you see the word 'per', two dimensions are involved, not one."
+- *Verification*: ask for the dimension of a DIFFERENT derived quantity the
+  learner has not been walked through (density, pressure) — if only the numerator
+  comes back, M5 is still active and only the speed case was patched. Delayed
+  re-check one session later, since this one reverts under load.
+- *Provenance*: authored 2026-08-12 from a measured production failure. A real
+  learner wrote exactly "so speed is L then? because it is distance" and the turn
+  neither answered nor corrected it. None of M1–M4, and neither Blueprint
+  register entry (MC-1 units-vs-dimensions, MC-2 adding unlike terms), covers it.
+
 ## Analogies
 
 - **Best analogy**: type-checking in a programming language. In typed languages,

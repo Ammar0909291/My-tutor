@@ -1155,8 +1155,15 @@ function parseEBMisconceptions(content: string): EBMisconception[] {
   const blocks = raw.split(/\n(?=\s*\*\*\s*M\d+\s*[—–-])/)
 
   for (const block of blocks) {
-    const head = /\*\*\s*(M\d+)\s*[—–-]\s*([^*\n]+?)\s*\*\*/.exec(block)
+    // The title may WRAP. `[^*\n]` used to forbid that, and a wrapped heading
+    // failed the match — which silently discarded the entire entry, body and
+    // all. Corpus scan: 9 authored misconceptions across 8 files, including
+    // `phys.meas.dimensions` M4, never reached a prompt for that reason.
+    // Newlines are allowed and collapsed; the length bound and `[^*]` keep it
+    // from running past a missing closing `**` into the body.
+    const head = /\*\*\s*(M\d+)\s*[—–-]\s*([^*]{3,300}?)\s*\*\*/.exec(block)
     if (!head) continue
+    head[2] = head[2].replace(/\s+/g, ' ').trim()
 
     const field = (...stems: string[]): string | null => {
       for (const stem of stems) {

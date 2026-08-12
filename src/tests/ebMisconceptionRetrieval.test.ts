@@ -150,6 +150,98 @@ describe('parsing is defensive', () => {
   })
 })
 
+/**
+ * A WRAPPED HEADING SILENTLY DISCARDED THE WHOLE ENTRY.
+ *
+ * The head regex used `[^*\n]` for the title, so a misconception whose heading
+ * ran onto a second line failed to match — and a block that fails the head
+ * match is skipped entirely, body and all. Found while reading the authored
+ * registers for `phys.meas.dimensions` and noticing the loader returned three
+ * entries where the file plainly has four. Corpus scan: 9 authored
+ * misconceptions across 8 files were being dropped this way.
+ */
+describe('a misconception heading that wraps is still parsed', () => {
+  it('recovers the entry the wrap was hiding', () => {
+    const eb = loadEBConceptContext('phys.meas.dimensions')
+    expect(eb.found).toBe(true)
+    if (!eb.found) return
+    const m4 = eb.context.ebMisconceptions.find((m) => m.id === 'M4')
+    expect(m4, 'M4 wraps its title across two lines').toBeDefined()
+    // The title is rejoined as one line rather than carrying the newline into
+    // the prompt.
+    expect(m4!.title).not.toContain('\n')
+    expect(m4!.title).toContain('Dimensionless quantities')
+    expect(m4!.title).toContain('dimensionally wrong')
+    // The body survived too — the point of the fix is the whole entry, not the
+    // heading.
+    expect(m4!.probe).toBeTruthy()
+    expect(m4!.recovery).toBeTruthy()
+  })
+
+  it('does not run past a heading into the body', () => {
+    // The permissive `[^*]` must stay bounded, or a block with an unbalanced
+    // `**` would swallow paragraphs of prose as a "title".
+    const eb = loadEBConceptContext('phys.meas.dimensions')
+    if (!eb.found) throw new Error('fixture lost its EB entry')
+    for (const m of eb.context.ebMisconceptions) {
+      expect(m.title.length, m.id).toBeLessThan(180)
+      expect(m.title).not.toContain('*Why*')
+    }
+  })
+})
+
+/**
+ * M5 for `phys.meas.dimensions` — authored from a measured production failure.
+ *
+ *   me    "so speed is L then? because it is distance"
+ *   tutor (answered about wave interference, then steered back — the
+ *          misconception was neither answered nor corrected)
+ *
+ * Speed is L/T. None of M1–M4, and neither Blueprint register entry, covered
+ * the move that produced it: dropping the divisor of a derived quantity.
+ */
+describe('dimensions M5 — the dropped divisor', () => {
+  const DIM = 'phys.meas.dimensions'
+
+  it('is authored, parsed, and carries a detection surface', () => {
+    const eb = loadEBConceptContext(DIM)
+    expect(eb.found).toBe(true)
+    if (!eb.found) return
+    const m5 = eb.context.ebMisconceptions.find((m) => m.id === 'M5')
+    expect(m5, 'M5 must exist — it is the failure Topic 2 exposed').toBeDefined()
+    expect(m5!.symptom!.toLowerCase()).toContain('speed is l')
+    expect(m5!.probe).toBeTruthy()
+    expect(m5!.recovery).toBeTruthy()
+  })
+
+  it('carries the learner\'s verbatim words, which is what makes it MATCH', () => {
+    // The affirmation guard discriminates a wrong learner from a right one by
+    // overlapping their words with the authored symptom phrases. A symptom
+    // written in the author's vocabulary instead of the learner's would parse
+    // fine and never fire.
+    const eb = loadEBConceptContext(DIM)
+    if (!eb.found) throw new Error('fixture lost its EB entry')
+    const known = eb.context.ebMisconceptions
+      .map((m) => `${m.title} ${m.symptom ?? ''}`).join(' ').toLowerCase()
+    const learner = 'so speed is L then? because it is distance'.toLowerCase()
+    const learnerWords = new Set(learner.split(/[^a-z]+/).filter((w) => w.length > 2))
+    const overlap = new Set(
+      known.split(/[^a-z]+/).filter((w) => w.length > 2 && learnerWords.has(w)),
+    )
+    // The guard's threshold is two substantive words; a single shared noun is
+    // usually just the concept's own name.
+    expect(overlap.size).toBeGreaterThanOrEqual(2)
+    expect(overlap.has('speed')).toBe(true)
+    expect(overlap.has('distance')).toBe(true)
+  })
+
+  it('reaches the prompt block alongside the never-confirm rule', () => {
+    const block = blockFor(DIM)!
+    expect(block).toContain('M5:')
+    expect(block).toContain('NEVER CONFIRM A WRONG CLAIM')
+  })
+})
+
 describe('M5 — the misconception the corpus audit actually found', () => {
   it('is authored and parsed', () => {
     const eb = loadEBConceptContext(UNITS)
