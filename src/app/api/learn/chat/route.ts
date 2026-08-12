@@ -3706,6 +3706,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       let eosVerifierTagsHoisted: string[] = []
       let eosVerifierUsedTemplate = false
       let eosVerifierAttempts: 1 | 2 = 1
+      // Un-swallowable probe. The guard produced NO log at all on an audit turn
+      // while logging normally on another learner's turns in the same
+      // deployment, which leaves two candidates that the existing logging
+      // cannot separate: `assembled` was truthy so the whole block was skipped,
+      // or something threw before the first log and the surrounding catch ate
+      // it. This line sits OUTSIDE both the condition and the try, so it prints
+      // either way.
+      console.log('[affirm-guard-entry]', { assembled: assembled !== null })
       if (!assembled) {
         try {
           const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
@@ -4050,6 +4058,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }))
           }
         } catch (err) {
+          // Was silent before. A guard that fails invisibly is indistinguishable
+          // from a guard that passed, which is exactly the ambiguity this
+          // investigation has been fighting.
+          console.error('[affirm-guard-error] the verifier block threw:', err)
           // Fail-open: never break the turn on verifier failure.
           console.warn('[learn/chat] EOS verifier gate skipped:', err)
         }
