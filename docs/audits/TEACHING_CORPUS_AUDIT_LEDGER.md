@@ -3712,3 +3712,78 @@ is reversible and the rows are provably unservable.
 
 VERIFIED 1/424 — unchanged. E6 is now fully explained, with the closing action
 identified and outside this session's reach.
+
+---
+
+# E6 CLOSURE ATTEMPT — deprecation DONE and verified; seeding BLOCKED
+
+## A hypothesis of mine, DISPROVED by the pre-check I ran before writing
+
+Two iterations ago I concluded the 737 orphans were "stale identities from the
+retired pre-Item-6 4-part slug scheme". **That was wrong**, and the owner
+approved the write on that reasoning. The pre-check breakdown:
+
+| family | slug parts | has content | rows |
+|---|---|---|---|
+| PROBE | 4 | **yes** | **728** |
+| PROBE | 4 | no | 737 |
+| PROBE | 5 | yes | 68 |
+| EXPLANATION | 4 | yes | 1,335 |
+
+**4-part slugs are the NORMAL form** — 728 probes and 1,335 explanations use
+them and have content. The difficulty segment applies only to probe ladder
+rungs. Slug shape is not the discriminator; the missing CONTENT ROW is. The
+count of 737 was right, the reason was not, and the write was re-justified on
+the correct criterion before executing.
+
+## The write (owner-approved), and its verification
+
+Criterion: `family=PROBE AND status=ACTIVE AND no probe_assets row`.
+
+| check | before | after |
+|---|---|---|
+| orphan ACTIVE probes | 737 | **0** |
+| ACTIVE probes WITH content | 796 | **796** — untouched |
+| ACTIVE explanations WITH content | 1,335 | **1,335** — untouched |
+| `evidence_events` | 2,381 | **2,381** — intact |
+| DEPRECATED total | 3 | 740 |
+
+Pre-check confirmed **0 evidence_events referenced any target row**, so no
+accumulated evidence was orphaned. No row deleted, no content or evidence
+relationship altered, reversible by setting status back to ACTIVE.
+
+## E6 IS NOT CLOSED, and the deprecation was never going to close it
+
+`active_gradeable` is **793 — unchanged** by the cleanup. Removing unservable
+rows removes pollution; it does not create servable probes. Per audited
+concept:
+
+| concept | gradeable | explanations |
+|---|---|---|
+| `phys.meas.dimensions` | **0** | 0 |
+| `phys.meas.errors` | **0** | 0 |
+| `phys.meas.significant-figures` | **0** | 0 |
+| `phys.meas.unit-conversion` | **0** | 0 |
+| `phys.meas.vector-addition` | **0** | 0 |
+| `phys.meas.vector-products` | 0 | 2 |
+| `phys.meas.units` | 1 | 5 |
+| `phys.meas.scalars-vectors` | 1 | 3 |
+
+**Six of eight audited concepts have ZERO gradeable probes** where the repo
+holds 3–5 each. The gate cannot attach an authored MCQ that is not in the
+database, so E6 is guaranteed until the catalogue is seeded.
+
+## BLOCKED — the seed run needs a credential this session does not have
+
+`npx tsx scripts/brain/seed-knowledge-assets.ts` is the correct mechanism (and
+the only one that should be used — the fire-and-forget bootstrap has never
+completed once in 24h of logs). It requires `DATABASE_URL`, which is **UNSET**
+here, and Supabase MCP does not expose the database password. So the seed
+cannot be run from this session.
+
+**E6 remains OPEN. No sweep was re-run, because a sweep now could only
+re-measure the same missing corpus.**
+
+## NEXT
+Run the seed script from an environment holding `DATABASE_URL`, then re-run
+the sweep and require `E6 = 0` before any topic moves to VERIFIED.

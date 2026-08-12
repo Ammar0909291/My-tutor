@@ -58,6 +58,17 @@ const MonacoEditor = dynamic(() => import('@monaco-editor/react'), { ssr: false 
  * it belongs to — a teaching diagram is the point of the turn, not a footnote.
  * The renderers cap their own width, so the frame simply stops constraining it.
  */
+/* Canvas mode: the figure fills its half. VISUAL_FRAME's 720px reading width
+ * is correct for a full-width chat column and wrong here — it would leave the
+ * right half visibly part-empty, which reads as a broken split rather than one
+ * panel. The renderers keep their own intrinsic sizing and aspect ratio; only
+ * the box they sit in changes. */
+const CANVAS_VISUAL_FRAME: React.CSSProperties = {
+  width: '100%',
+  maxWidth: '100%',
+  animation: 'fadeIn 300ms ease-out both',
+}
+
 const VISUAL_FRAME: React.CSSProperties = {
   width: '100%',
   // A figure needs a READING width, not the full chat column. Letting it span
@@ -4703,8 +4714,23 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   ? rawDisplayText.replace(familiarity.line, '').replace(/\n{3,}/g, '\n\n').trim()
                   : rawDisplayText
 
+                // ── INVISIBLE TWO-COLUMN TEACHING CANVAS ─────────────────
+                // A tutor turn carrying a figure becomes ONE panel with two
+                // halves: explanation left, figure right, 50/50, no divider and
+                // no card edges between them. Every existing renderer is reused
+                // untouched — this is geometry only, so a figure is never
+                // redrawn or simplified to fit.
+                //
+                // A turn with NO figure keeps the current single-bubble look
+                // exactly. The canvas exists to pair an explanation with its
+                // diagram; imposing a half-width column on a plain message
+                // would just make prose harder to read for no gain.
+                const hasCanvasVisual = !isUser && !msg.streaming && Boolean(
+                  msg.visual || msg.visualSpec || msg.sceneSpec || msg.dynamicVisualizationCode
+                )
+
                 return (
-                  <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start', animation: 'fadeUp 200ms ease-out both' }}>
+                  <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: isUser ? 'flex-end' : 'flex-start', animation: 'fadeUp 200ms ease-out both', ...(hasCanvasVisual ? { width: '100%' } : null) }}>
 
                     {/* Tutor avatar row — EagleMascot replaces the generic initials avatar */}
                     {!isUser && !msg.streaming && (
@@ -4726,15 +4752,29 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       </div>
                     )}
 
-                    {/* Tutor bubble — candy Card surface (flat shadow, no glow) */}
+                    {/* Teaching canvas — grid ONLY when a figure is present. */}
+                    <div
+                      className={hasCanvasVisual ? styles.teachingCanvas : undefined}
+                      style={hasCanvasVisual ? undefined : { display: 'contents' }}
+                    >
+                    <div className={hasCanvasVisual ? styles.canvasText : undefined} style={hasCanvasVisual ? undefined : { display: 'contents' }}>
+                    {/* Tutor bubble — candy Card surface (flat shadow, no glow).
+                        Inside the canvas the card's own chrome is removed: a
+                        border or a surface colour here is exactly what would
+                        make the learner see TWO cards instead of one panel. The
+                        text then sits directly on the canvas, and the grid gap
+                        is the only separation. Outside the canvas it is
+                        unchanged. */}
                     {!isUser && (
                       <Card className="group/bubble" style={{
-                        maxWidth: '90%',
-                        background: 'var(--bg-surface)',
+                        maxWidth: hasCanvasVisual ? '100%' : '90%',
+                        background: hasCanvasVisual ? 'transparent' : 'var(--bg-surface)',
                         borderRadius: 14,
-                        border: `1px solid ${isSpeaking ? `${UI.indigo}55` : 'var(--border-subtle)'}`,
-                        padding: '14px 16px',
-                        boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+                        border: hasCanvasVisual
+                          ? '1px solid transparent'
+                          : `1px solid ${isSpeaking ? `${UI.indigo}55` : 'var(--border-subtle)'}`,
+                        padding: hasCanvasVisual ? '2px 0 0' : '14px 16px',
+                        boxShadow: hasCanvasVisual ? 'none' : '0 1px 2px rgba(0,0,0,0.04)',
                         transition: 'border-color 200ms',
                       }}>
                         {msg.content
@@ -4774,10 +4814,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
                       </Card>
                     )}
+                    </div>{/* /left half */}
+
+                    {/* RIGHT HALF — every existing figure renderer, unchanged.
+                        In canvas mode these fill their column; with no figure
+                        present this wrapper is display:contents and the tree is
+                        structurally identical to before. */}
+                    <div className={hasCanvasVisual ? styles.canvasVisual : undefined} style={hasCanvasVisual ? undefined : { display: 'contents' }}>
 
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
                     {!isUser && !msg.streaming && msg.visual && (
-                      <div style={VISUAL_FRAME}>
+                      <div style={hasCanvasVisual ? CANVAS_VISUAL_FRAME : VISUAL_FRAME}>
                         <VisualCard
                           type={msg.visual as VisualType}
                           autoPlay
@@ -4792,7 +4839,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         when a tutor message carries a VisualSpec; absent on every
                         existing lesson, so those render exactly as before (zero regression). */}
                     {!isUser && !msg.streaming && msg.visualSpec && (
-                      <div style={VISUAL_FRAME}>
+                      <div style={hasCanvasVisual ? CANVAS_VISUAL_FRAME : VISUAL_FRAME}>
                         <VisualRenderer spec={msg.visualSpec} />
                       </div>
                     )}
@@ -4801,7 +4848,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         the deterministic detector found no 2D VisualSpec for this
                         message, so a reply never carries both. */}
                     {!isUser && !msg.streaming && msg.sceneSpec && (
-                      <div style={VISUAL_FRAME}>
+                      <div style={hasCanvasVisual ? CANVAS_VISUAL_FRAME : VISUAL_FRAME}>
                         <SceneSpecFigure spec={msg.sceneSpec} />
                       </div>
                     )}
@@ -4810,13 +4857,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         no deterministic VisualSpec/SceneSpec fired for this message
                         (see route.ts). Runs the AI-generated code in a sandboxed iframe. */}
                     {!isUser && !msg.streaming && msg.dynamicVisualizationCode && (
-                      <div style={VISUAL_FRAME}>
+                      <div style={hasCanvasVisual ? CANVAS_VISUAL_FRAME : VISUAL_FRAME}>
                         <DynamicVisualRenderer code={msg.dynamicVisualizationCode} />
                       </div>
                     )}
 
+                    </div>{/* /right half */}
+                    </div>{/* /teaching canvas */}
+
                     {/* Sprint W: inline practice MCQ — structured candy card, replacing
-                        the old plain-text question the AI used to type out itself. */}
+                        the old plain-text question the AI used to type out itself.
+                        Deliberately OUTSIDE the canvas: the MCQ stays the small
+                        separate wizard, and it must span the full width rather
+                        than be squeezed into half a column. */}
                     {!isUser && !msg.streaming && msg.inlinePractice && (
                       <div style={{ animation: 'fadeUp 300ms ease-out both' }}>
                         <InlinePracticePrompt
