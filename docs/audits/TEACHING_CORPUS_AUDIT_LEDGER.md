@@ -1152,3 +1152,77 @@ strengthen with the asset library, never weaken.
      where it should.
 2. Both correct → Topic 2 continues: Examples → Guided → Mastery as an
    intermediate-English learner → VERIFIED → moat.
+
+---
+
+# 🔴 THE BIGGEST FINDING — the authored teaching corpus was never deployed
+
+`b53e93ea`. One line of `next.config.js`.
+
+```js
+outputFileTracingIncludes: { '/**': ['./docs/**/*.json'] }   // JSON ONLY
+```
+
+The Knowledge Graphs are JSON, so they shipped and worked — which is precisely
+what hid this. Every hand-authored teaching file is MARKDOWN:
+
+| corpus | path | files | traced? |
+|--------|------|-------|---------|
+| Blueprints | `docs/curriculum/blueprints/*.md` | 1,347 | **NO** |
+| Educational Brain | `educational-brain/concepts/**/*.md` | 875 | **NO** |
+
+`blueprintLoader` reads them with `readFileSync(process.cwd() + …)`. Untraced
+files do not exist in a Vercel serverless bundle, so every call hit ENOENT and
+returned "not found" **for every concept, on every turn, since deployment**.
+
+### What this means was never in a production prompt
+
+- the entire `BLUEPRINT CONTEXT` block
+- `KNOWN MISCONCEPTIONS` (both registers)
+- the `NEVER CONFIRM A WRONG CLAIM` rule (it is built inside that block)
+- opening scenarios, teaching sequences, tutor actions, anti-analogies,
+  voice cues, discovery questions
+
+### Measured, not inferred
+
+```
+[affirm-guard-known] { conceptId: 'phys.meas.dimensions', knownChars: 0 }
+```
+against **555 characters** for the same concept loaded in-process.
+
+### It explains the standing architecture finding
+
+`validation/07-architecture-audit.md` records that "0 of 52 authored
+retrievable layers are retrieved at runtime". That was read as a pipeline-design
+gap for months. **The cause was that the files were not deployed.**
+
+### CORRECTIONS THIS FORCES TO MY OWN EARLIER CLAIMS
+
+Recorded, not quietly dropped:
+1. **M5 cannot have improved Topic 1 in production.** It was authored, parsed
+   locally, and never shipped. Topic 1's measured improvement came from the
+   prompt (`client.ts`) and repair-path changes alone. Topic 1 remains VERIFIED
+   — it was measured on real learner-visible output — but the attribution in
+   its entry was wrong.
+2. **The misconception-gated verifier had nothing to gate on** in production
+   (`knownChars: 0`), which is why a CORRECT learner was rejected: the rule
+   fell back to its conservative branch, exactly as designed for missing
+   knowledge. The rule is right; it was starved.
+3. Earlier ledger text implying EB misconceptions "now reach the prompt" was
+   true locally and false in production until this commit.
+
+### Why no test caught it
+The loader is correct and the files exist in every environment a test runs in.
+This was a CONFIGURATION mismatch between what is read and what is shipped, so
+`authoredKnowledgeShips.test.ts` asserts the config against the loader's own
+paths rather than testing behaviour.
+
+## NEXT EXACT ACTION
+1. Verify `b53e93ea` deployed, then re-run Probe A. Expect
+   `[affirm-guard-known] knownChars > 0` — the first time authored knowledge
+   has ever reached a production turn.
+2. Probe A must then be CONFIRMED normally (learner is right, no misconception
+   match). Probe B (apples/units) must be REJECTED and repaired.
+3. Re-run Topic 1's two probes: its behaviour may change now that the real
+   corpus is present — re-verify rather than assume the VERIFIED status holds.
+4. Then Topic 2 → Mastery → VERIFIED → moat → Topic 3.
