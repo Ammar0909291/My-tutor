@@ -1226,3 +1226,60 @@ paths rather than testing behaviour.
 3. Re-run Topic 1's two probes: its behaviour may change now that the real
    corpus is present — re-verify rather than assume the VERIFIED status holds.
 4. Then Topic 2 → Mastery → VERIFIED → moat → Topic 3.
+
+---
+
+# ✅ PROBES A AND B BOTH PASS — authored knowledge is live in production
+
+Clean sessions, real learner account, commit `b53e93ea` (the bundle fix).
+
+## Probe A — learner is CORRECT (dimensions lesson)
+> me: "ok so area would be L times L, so L squared right?"
+> tutor: *"**Spot on**, Claude! Area is length times length, so its dimension
+> is indeed written as length squared… imagine stretching that into the third
+> dimension to fill a box… that's volume, L cubed… we never accidentally add a
+> length to an area, just like you wouldn't add 5 metres to 3 kilograms. If
+> velocity is distance divided by time… what are the dimensions of velocity?"*
+
+Confirmed normally. **No false rejection, no template, teaching continues.**
+The false positive is gone.
+
+## Probe B — KNOWN MISCONCEPTION (units lesson)
+> me: "ok so if i count 5 apples the unit is apples right"
+> tutor: *"Claude, that is a very natural thought, **but it is not quite
+> right**. An apple is just the object you are counting, **not an agreed
+> standard size**. Because **one apple can be small and another can be huge**,
+> 'five apples' tells us the count, but it does not tell us the exact size…
+> a **unit** is a specific, agreed-upon reference amount—like one metre—so that
+> everyone around the world means the exact same thing."*
+
+**This is M5's authored repair, verbatim in substance** — "HOW MANY is the
+count; OF WHAT AGREED AMOUNT is the unit… an apple is not a fixed size". The
+Educational Brain entry authored during this audit is now demonstrably shaping
+a production answer. That has never previously been true for any authored
+entry.
+
+Against the intermediate-English standard: short sentences, everyday words
+("small", "huge"), one idea at a time, the technical term introduced and
+immediately defined, explicit correction with a concrete REASON rather than a
+bare "no".
+
+## Method note — two contaminated runs, discarded not reported
+A transient SSL failure made `lesson-init` fail silently, leaving the session
+on the previous lesson; the reply then drifted into dimensional analysis and
+affirmed the misconception. That was MY harness, not the product. `clean.sh`
+now prints the lesson-init text so a failed setup is visible before the probe
+result is read. Neither contaminated run is recorded as a defect.
+
+## STATUS
+- Topic 1 `phys.meas.units` — **VERIFIED**, and now re-confirmed with the real
+  corpus present (probe B above is Topic 1's own probe).
+- Topic 2 `phys.meas.dimensions` — probe A passes; remaining stages
+  (Examples → Guided → Mastery) still to run before VERIFIED.
+
+## NEXT EXACT ACTION
+1. Topic 2 through Examples → Guided → Mastery as an intermediate-English
+   learner; then VERIFIED + moat asset.
+2. Then Topic 3 `phys.meas.errors`, and onward through the corpus.
+3. Re-run a spot check on any earlier probe whose result predates `b53e93ea` —
+   every measurement taken before it ran WITHOUT the authored corpus.
