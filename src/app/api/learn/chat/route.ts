@@ -3710,7 +3710,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
           const eosFlags = readEosFlags()
-          if (eosFlags.outputVerifier) {
+          // ── SAFETY FLOOR: V-AFFIRM RUNS WHETHER OR NOT EOS IS ENABLED ─────
+          //
+          // The full verifier is flag-gated (VERIFIER_MODE / ENABLE_EOS_RUNTIME)
+          // and those flags are unset in production, which meant the ONE rule
+          // that stops the tutor confirming a learner's misconception could
+          // never fire for a real learner. Measured on `phys.meas.units`:
+          //
+          //   learner "is a unit just the name of the thing youre counting"
+          //   tutor   "That is correct—…"                    <- served
+          //
+          // Confirming a false claim is a teaching-safety failure, not a style
+          // preference, so it does not belong behind an optional flag.
+          //
+          // HOW, without forking the architecture: the SAME gate, the SAME
+          // rerender closure and the SAME template fallback run — only the
+          // CONTEXT differs. A deliberately permissive context is built so
+          // that every other REJECT rule is structurally unable to fire
+          // (budgets far above any real draft, all vocabulary and formula
+          // locks open, no capability bans, calm affect, no assessment or
+          // completion authorization in play). What remains is V-AFFIRM,
+          // whose trigger is the learner's own words and the draft's opening,
+          // neither of which this context can suppress.
+          //
+          // So a learner gets the safety floor always, and enabling the flag
+          // still upgrades them to the full rule set with no duplicated work.
+          const runFullVerifier = eosFlags.outputVerifier
+          if (runFullVerifier) {
             // Move mapping. RECOVER and CLOSE are checked FIRST and are not
             // derivable from evidenceMoveHoisted: decideNextMove() returns
             // 'teach' on a recovery turn, and the session layer owns CLOSING
@@ -3826,6 +3852,71 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             snapshotRederivers.push((fresh) => ({
               verifierMetrics: foldVerifierMetrics(fresh.verifierMetrics as never, turnOutcome),
             }))
+          } else {
+            // THE SAFETY FLOOR, run directly rather than through the full gate.
+            //
+            // Reusing `verifierGate` with a deliberately permissive context was
+            // tried first and abandoned on inspection: `maxQuestions` is typed
+            // `0 | 1`, and V-Q2 rejects any TEACH/SHOW/RECOVER/CLOSE draft that
+            // ends in a question — which is most good teaching turns. A
+            // "permissive" context is not actually reachable, so that route
+            // would have regenerated ordinary turns for reasons unrelated to
+            // safety and charged a model call for each.
+            //
+            // Running the single rule directly has no such side effects: a turn
+            // is touched ONLY when the learner floated a definition and the
+            // draft opened by agreeing with it.
+            const { vAffirm } = await import('@/lib/kernel/verifier/rules')
+            const affirmCtx = { learnerText: message } as unknown as
+              import('@/lib/kernel/verifier').VerifierContext
+            const firstViolation = vAffirm(cleanText, affirmCtx)
+            if (firstViolation) {
+              // One regeneration, carrying the violation as instruction — the
+              // same appendix shape the full loop uses.
+              const appendix =
+                '\n\nOUTPUT REJECTED (server-side check). The learner PROPOSED a ' +
+                'definition and your reply opened by agreeing with it ' +
+                `("${firstViolation.matched ?? ''}"). Do NOT open with agreement. ` +
+                'State the correct idea yourself in plain words, name explicitly ' +
+                'how it differs from what they said, and only then build on it. ' +
+                'If part of what they said was right, say which part and which ' +
+                'part was not. Re-answer their question now.'
+              let repaired = cleanText
+              try {
+                const routed = await routeAI(
+                  [...historyMessages, { role: 'user', content: message }],
+                  systemPrompt + appendix + outputLanguageBlockHoisted,
+                  country, 2048, teachingLang,
+                  { userId, subject: learnSession.subject.slug },
+                )
+                repaired = routed.text
+                if (contentRegister === 'beginner') repaired = stripIpaNotation(repaired)
+              } catch (regenErr) {
+                console.warn('[affirm-guard] regeneration failed:', regenErr)
+              }
+              // FAIL CLOSED. If the retry still opens by agreeing, the draft is
+              // not served: a deterministic template replaces it. Serving the
+              // second draft "because it is probably better" is exactly the
+              // trade this guard exists to refuse — a confirmed misconception
+              // is worse than a plain, safe turn.
+              const stillViolating = vAffirm(repaired, affirmCtx) !== null
+              if (stillViolating) {
+                const { chooseFallback, renderFallback } = await import('@/lib/kernel/verifier')
+                cleanText = renderFallback(
+                  chooseFallback(['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE']),
+                  { learnerText: message } as never,
+                )
+                eosVerifierUsedTemplate = true
+              } else {
+                cleanText = repaired
+              }
+              eosVerifierAttempts = 2
+              console.log('[affirm-guard]', {
+                matched: firstViolation.matched,
+                repaired: !stillViolating,
+                usedTemplate: stillViolating,
+              })
+            }
           }
         } catch (err) {
           // Fail-open: never break the turn on verifier failure.
