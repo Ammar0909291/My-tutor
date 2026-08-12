@@ -1588,3 +1588,91 @@ worse defect than the one it repairs.
    ("the second one, they must be identical types"). Determine whether prose
    selection of an MCQ option is scored at all — if not, every learner who types
    their answer instead of clicking is accruing no evidence.
+
+---
+
+# 🔴🔴 SUSPECTED P0 — THE MASTERY LADDER DOES NOT MOVE
+
+Found while driving Topic 2 to its mastery gate. **Not yet root-caused — the
+diagnostic is deployed and the next iteration reads it.** Recorded now because
+the measurement is solid even though the cause is not.
+
+## The measurement
+
+Clean session `cmspvz1sa0001kw04hp5bfa2j`, real production, real learner
+account. Every turn's `mastery` object comes from
+`conversationStateAfterTurnHoisted`, i.e. AFTER this turn's evidence is folded.
+
+| turn | learner | phase | check | practice |
+|------|---------|-------|-------|----------|
+| 1 | "a dimension is the type of quantity, like length is L, not the unit we measure it in" — CORRECT | OBSERVE | 0 | 0 |
+| 2 | "yes, i am ready" — acknowledgement | OBSERVE | 0 | 0 |
+| 3 | "the dimension of area is L squared, because it is length times length" — CORRECT | OBSERVE | 0 | 0 |
+
+The tutor agreed each answer was right ("that is spot-on", "that is completely
+correct"). The ladder did not move on ANY of them — not on the success path,
+not on the acknowledgement path.
+
+Earlier the same day, a different clean session showed the same thing across
+five turns, ending with the completion card that produced the P0 above.
+
+## Why this would be the most serious finding of the audit
+
+`correctAtCheck` only increments at `phase === 'CHECK'`; `correctAtPractice`
+only at `PRACTICE`. If the ladder never leaves OBSERVE, neither counter can
+ever move, `masteryVerifiedStrict` can never be true, and **no learner can
+complete any lesson, ever.** That is consistent with `completedLessons: []`
+throughout this audit.
+
+## What the existing logs DO say
+
+- `[affirm-guard-known] { knownChars: 1140 }` — authored knowledge IS reaching
+  the prompt. The bundle fix holds.
+- `[affirm-guard-scope] { branch: 'unconditional', considered: true }` — the
+  safety floor runs on these turns.
+- CUE: `masteryState: {"value":"unknown","source":"unavailable"}` and
+  `uncertainty: ["masteryState: no evidence available this turn"]`, every turn.
+- Brain: `D0d-SESSION-OPENING-PROTOCOL` on every turn, `conversationIntent:
+  session_opening` — the opening protocol never completes. Per the session
+  lifecycle's own rule, OPENING→CORE happens on the first ANSWERED SIGNAL.
+- No P1008 errors in this window, so the recurring DB degradation is NOT an
+  obvious contributor here.
+
+## Ruled IN by reading the code (not yet by measurement)
+
+`buildSignalInstruction()` is appended to the system prompt UNCONDITIONALLY
+(`route.ts` ~1724), so the model is definitely being asked for the tag. The
+fold at ~4232 reads `teachingSignal?.correctness ?? null`, and
+`advanceConversationState` advances OBSERVE→DEMONSTRATE only when
+`signalCorrect === true` (or on a bare acknowledgement).
+
+## Candidates, NOT acted on before measuring
+
+1. the model never emits `<!--SIGNAL-->`;
+2. it emits one without `correctness`;
+3. the fold runs and the transition is gated somewhere else.
+
+CUE's "masteryState unavailable" and the stuck opening protocol are consistent
+with ALL THREE, so neither settles it. **Five hypotheses in this audit have
+already been wrong and instrumenting settled every one** — so `38d0f843` adds a
+single `[ladder]` line printing tag presence, parsed correctness,
+acknowledgement, excursion, askedQuestion, and the phase either side of the
+fold with both counters. No behaviour change.
+
+## Honest scope note
+`"yes, i am ready"` may simply not match `isBareAcknowledgement` (its known set
+is "got it / ok / next / continue / go / thanks / done" …). That would explain
+turn 2 and NOT turns 1 and 3, which were substantive correct answers.
+
+## NEXT EXACT ACTION
+1. Wait for `38d0f843`, run a clean session, answer correctly, read `[ladder]`.
+2. Branch on what it says:
+   - `signalTag: false` → the model is not complying with a mandatory
+     instruction. Root cause is prompt/compliance; the deterministic fix is to
+     stop depending on LLM self-report for the ladder (foundations/03 §7 already
+     calls the SIGNAL a substitute for instrumentation, not equivalent to it).
+   - `signalTag: true, correctness: null` → parser/emission mismatch.
+   - `phaseBefore` already OBSERVE each turn with a true signal → the fold's
+     input is right and the transition or the PERSIST is wrong.
+3. Fix, add a regression test that fails on a frozen ladder, then resume Topic 2
+   to its gate and mark VERIFIED.
