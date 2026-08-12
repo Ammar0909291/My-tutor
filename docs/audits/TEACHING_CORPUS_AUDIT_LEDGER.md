@@ -736,3 +736,59 @@ what the curriculum asserts, and carries the distinction the drafts missed.
    the FIRST draft, not the repair: inject the matched misconception's symptom
    phrases into the main prompt when the learner's message matches them, so the
    first attempt is forewarned instead of corrected afterwards.
+
+---
+
+# ✅ TOPIC 1 — `phys.meas.units` — **VERIFIED** (replay #7, 2026-08-12)
+
+Clean session (`cmspkzsh40001js047t8b15qu`), real learner account, real
+production, commit `23048c95`. Both probes in ONE run.
+
+> **probe 1** "is a unit just the name of the thing youre counting"
+> *"A unit is **not just** the name of the object itself, but the specific
+> standard size we use to measure it. When you measure a pencil, the object is
+> a pencil, but the unit is the centimetre… Imagine two people measuring a
+> piece of wood: one says five spans of a hand, the other three foot-lengths.
+> Because their hands and feet are different sizes, they would argue about how
+> big the wood actually is…"* + MCQ testing object vs unit.
+
+> **probe 2** "ok so if i count 5 apples the unit is apples right"
+> *"When you count 5 apples, 'apples' tells you WHAT kind of items you have,
+> **but it is not a standard measurement unit because an apple can be small or
+> large**… Imagine a recipe telling you to add '3 apples' of sugar instead of
+> grams — the recipe wouldn't work because the amount would change depending on
+> the size of the apples!"* + MCQ testing the correct unit.
+
+Against the stated criteria: rejects/corrects the misconception ✅ ·
+distinguishes object from unit ✅ · explains counting ≠ measuring ✅ ·
+scientifically accurate ✅ (an apple is not a fixed size — the exact reason) ·
+easy beginner language ✅ · does not merely say "no" ✅ · checks understanding
+with a meaningful question ✅.
+
+*(My detector reported "explicit correction: NO" — a THIRD false negative, this
+time missing "but it is not a standard measurement unit". Widened. Three times
+now an instrument of mine misread a result and the transcript settled it; that
+is the standing lesson of this audit.)*
+
+## MOAT — first asset preserved
+
+`authoredSeedAssets.ts` gains a `misconception_repair` for `phys.meas.units`
+targeting **EB M5**, authored FROM the verified transcript: the object/unit
+split, the "an apple is not a fixed size" reason, and the recipe contrast that
+made it land. Not speculative — this exact teaching was measured failing, then
+measured working. Blueprint MCs do not cover M5 (all four are SI naming).
+
+| status | value |
+|--------|-------|
+| **VERIFIED** | **1** — `phys.meas.units` |
+| FAILED | 0 |
+| REMAINING | 423 |
+| Moat explanations | 1 |
+| Global fixes this run | 8 |
+
+## NEXT EXACT ACTION
+**Topic 2 — `phys.meas.dimensions`.** Open with `clean.sh` (adapted for the new
+lessonTitle/order/topicSlug), play a weak learner through Intro→Explain→
+Examples→Guided→Mastery, then Phase B professor analysis. The affirmation guard,
+M5 retrieval and the teaching fallback are all live and apply to every topic —
+no known global defect is outstanding.

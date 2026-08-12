@@ -51,6 +51,41 @@ const UNITS_EXPLANATIONS: SeedExplanation[] = [
   {
     conceptId: UNITS,
     subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.MIDDLE,
+    // ── VERIFIED IN PRODUCTION, then preserved ────────────────────────────
+    // This repair is not speculative authoring. The corpus audit played a
+    // genuinely weak learner against live Tutor Max on this concept and got
+    // the misconception CONFIRMED twice ("Yes, exactly"; "That is completely
+    // right—when you are counting fruit, 'apples' is the unit"). After the
+    // affirmation guard and the M5 entry shipped, the same two probes were
+    // replayed on a clean session and produced correct, explicit, beginner-
+    // level corrections. What follows is that verified teaching, generalised
+    // from the transcript — the object/unit split, the "an apple is not a
+    // fixed size" reason, and the recipe contrast that made it land.
+    //
+    // It targets EB M5, which the Blueprint register does not carry: all four
+    // blueprint MCs for this concept are about SI NAMING, and none is what a
+    // beginner actually does on turn three.
+    content:
+      'If you count 5 apples, "apples" tells you WHAT you counted — it does ' +
+      'not tell anyone how big anything is. That is the difference between a ' +
+      'thing and a unit. A unit is an agreed amount that everybody has ' +
+      'promised to compare against, and an apple is not one, because apples ' +
+      'come in different sizes. Two people can both honestly say "5 apples" ' +
+      'and be holding very different amounts of fruit.\n\n' +
+      'Try it with a recipe. "Add 200 grams of sugar" works anywhere in the ' +
+      'world. "Add 3 apples of sugar" does not, because nobody knows how much ' +
+      'sugar an apple is. The gram is a unit; the apple is a thing.\n\n' +
+      'So a number in science answers two questions, not one. HOW MANY is the ' +
+      'count. OF WHAT AGREED AMOUNT is the unit. Counting apples only ever ' +
+      'answers the first one.',
+    targetedMisconceptions: [`${UNITS}:M5`],
+    source: `${UNITS_SRC} + educational-brain/concepts/physics/phys.meas.units.md §Misconceptions M5 — authored from a PRODUCTION-VERIFIED repair (corpus audit Topic 1, replay #7, both probes passing on a clean session)`,
+  },
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
     familyKind: 'core_explanation',
     gradeBand: GradeBand.HIGH,
     // Contrast / classification: base vs derived vs non-SI — the discrimination skill
