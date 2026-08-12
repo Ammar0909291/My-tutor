@@ -934,3 +934,49 @@ must not punish a right answer.
 
 **TOPIC 2: IN PROGRESS.** Teaching quality strong on 4 probes; blocked on
 knowing whether the safety rule is actually live.
+
+## The open question, narrowed offline — the rule is correct; it did not ENFORCE
+
+Ran `vAffirm` against the exact production strings, offline, no deploy needed:
+
+```
+vAffirm verdict      : REJECT (matched: "Spot on")
+proposal detected    : true
+distinguishing marker: none
+```
+
+So candidates 2 and 3 are **eliminated**: the proposal regex matches, no marker
+is present, and the rule rejects that draft deterministically. The rule is
+working as designed.
+
+But the learner received that exact "Spot on…" text. A rejecting guard would
+have served either a repaired draft or the fallback. **Therefore the guard did
+not enforce on that turn** — candidate 1.
+
+Most likely `eosFlags.outputVerifier` is TRUE in production, so the always-on
+branch is skipped and the FULL gate runs instead, in `shadow` mode — which logs
+and does not replace. That would mean the safety floor I added never executes
+in production, because it only runs in the `else`.
+
+*(Caveat, stated because it bit me before: the "no `[affirm-guard]` log"
+evidence came from an 8-minute window that may simply have missed the turn.
+The served text is the stronger evidence, and it says the same thing.)*
+
+### What this does and does not change
+
+- **Topic 1 stays VERIFIED.** Its two probes were measured live and passed on
+  the tutor's actual output. That result is real either way.
+- **But the safety net may not be live**, which means Topic 1 passed on model
+  behaviour rather than on enforcement — and future topics are unprotected.
+
+### NEXT EXACT ACTION
+1. `3bce247e` (deployed, instruments both branches) → run the "area … right?"
+   turn → read `[affirm-guard-scope]`. It prints `outputVerifierFlag`,
+   `verifierMode`, and whether the always-on branch considered the turn.
+2. If `outputVerifierFlag: true` + `verifierMode: 'shadow'` — the fix is to
+   stop making the safety floor conditional on the flag being OFF. Run
+   `vAffirm` unconditionally BEFORE the branch, so enforcement does not depend
+   on which mode the full gate happens to be in. That is a small reordering,
+   not a redesign.
+3. Re-verify Topic 1's probe 2 with enforcement genuinely on, then continue
+   Topic 2 to Mastery.
