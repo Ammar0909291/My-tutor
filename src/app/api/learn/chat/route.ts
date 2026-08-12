@@ -563,6 +563,11 @@ export async function POST(req: Request) {
     // reason as hintHoisted — attached to the JSON response once cleanText is
     // finalized, so the client can render tappable options.
     let mcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    // The MCQ the PREVIOUS turn asked, read back from the session snapshot so
+    // this turn's reply can be graded against its stored correctIndex. Written
+    // at the end of the turn that asks; cleared once graded, so one question is
+    // never graded twice.
+    let pendingMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
     // P6.6: the lesson-completion payload for this turn, when the final
     // required concept closed. Hoisted like the others so it can be attached
     // to the JSON response once cleanText is finalized.
@@ -1808,6 +1813,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { isLowSignalAcknowledgement: isAckForPrompt } =
           await import('@/lib/teaching/conversationState')
         questionLedgerHoisted = readLedgerForPrompt(snapshot?.questionLedger)
+        // Same snapshot, same turn — the pending MCQ rides the mechanism the
+        // ledger already uses rather than introducing a second store.
+        const rawPending = (snapshot as { pendingMcq?: unknown } | null)?.pendingMcq
+        if (rawPending && typeof rawPending === 'object') {
+          const p = rawPending as { question?: unknown; options?: unknown; correctIndex?: unknown }
+          if (typeof p.question === 'string' && Array.isArray(p.options)
+            && p.options.every((o) => typeof o === 'string')
+            && typeof p.correctIndex === 'number'
+            && p.correctIndex >= 0 && p.correctIndex < p.options.length) {
+            pendingMcqHoisted = { question: p.question, options: p.options as string[], correctIndex: p.correctIndex }
+          }
+        }
         systemPrompt += buildAntiRepetitionBlock(questionLedgerHoisted, {
           learnerAcknowledged: isAckForPrompt(message),
         })
@@ -3518,6 +3535,55 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         if (isBareAcknowledgement(message)) teachingSignal = null
       }
 
+      // ── DETERMINISTIC MCQ GRADING ────────────────────────────────────────
+      //
+      // The ladder's only source of correctness was the LLM's own SIGNAL tag.
+      // Measured in production on a correct answer the tutor itself called
+      // "spot-on": `[ladder] { signalTag: false, correctness: null }` — the tag
+      // was simply never emitted, and the instruction for it is appended to
+      // every prompt unconditionally, so this is non-compliance rather than a
+      // wiring gap. Hanging the whole mastery system off one optional-looking
+      // tag means a model that skips it silently freezes every learner, with no
+      // error anywhere.
+      //
+      // An MCQ is the one form where correctness is not a judgement: the tutor
+      // declared the right answer when it wrote the question. So when the
+      // PREVIOUS turn asked one, this reply is graded against the stored
+      // `correctIndex` — real instrumentation, no model call, no cost.
+      //
+      // It WINS over the tag when it resolves, because ground truth beats
+      // self-report; it returns null (never "wrong") when the reply cannot be
+      // matched to an option, leaving the existing path untouched. Fabricating
+      // an answer the learner did not give would write false evidence into a
+      // permanent record, which is worse than the freeze this repairs.
+      let mcqGradedThisTurn: { chosenIndex: number | null; correct: boolean | null } | null = null
+      if (pendingMcqHoisted) {
+        try {
+          const { gradeMcqAnswer, mcqConfidence } = await import('@/lib/teaching/mcq')
+          const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+          if (!isBareAcknowledgement(message)) {
+            const graded = gradeMcqAnswer(message, pendingMcqHoisted)
+            if (graded.correct !== null) {
+              mcqGradedThisTurn = graded
+              const lastAsst = learnSession.messages.find((m: { role: string }) => m.role === 'ASSISTANT')
+              const latencyMs = lastAsst
+                ? Math.max(0, turnReceivedAt - new Date((lastAsst as { createdAt: Date }).createdAt).getTime())
+                : null
+              teachingSignal = {
+                ...(teachingSignal ?? {}),
+                correctness: graded.correct,
+                confidence: mcqConfidence(graded.correct, latencyMs),
+              }
+            }
+          }
+          console.log('[mcq-grade]', {
+            asked: pendingMcqHoisted.question.slice(0, 60),
+            chosen: mcqGradedThisTurn?.chosenIndex ?? null,
+            correct: mcqGradedThisTurn?.correct ?? null,
+          })
+        } catch (err) { console.warn('[mcq-grade] failed:', err) }
+      }
+
       // Architectural Root Cause Fix: cross-check the SIGNAL against
       // independently observable evidence before it drives mastery state.
       // A CONTRADICTED signal is overridden (text wins over tag); a
@@ -4940,6 +5006,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
           // A healthy turn clears the outage streak; an outage turn carries it.
           conversationStateUpdate.consecutiveOutages = consecutiveOutagesHoisted
+          // Persist THIS turn's question so the next turn can grade the reply
+          // against its stored correctIndex; write null when the turn asked
+          // nothing, so a stale MCQ can never grade an unrelated later message.
+          // UNCONDITIONAL on purpose: the first draft of this sat inside
+          // `if (teachingHistoryHoisted)`, which is exactly the mistake that
+          // left the teaching ledger stale for months (see the note above it).
+          conversationStateUpdate.pendingMcq = mcqHoisted
+            ? { question: mcqHoisted.question, options: mcqHoisted.options, correctIndex: mcqHoisted.correctIndex }
+            : null
           // P6.5: fold a CLOSED concept into the lesson attempt — the single
           // owner of lesson-scoped outcomes. A concept closes exactly two ways
           // (mastered, or budget spent), and isConceptClosed owns that test so

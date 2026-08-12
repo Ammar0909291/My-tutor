@@ -138,3 +138,138 @@ export function buildMcqInstruction(): string {
     'Those stay open-ended. Never mention this tag to the student.'
   )
 }
+
+// ── Deterministic grading ────────────────────────────────────────────────────
+//
+// WHY THIS EXISTS.
+//
+// The mastery ladder's only source of correctness was `<!--SIGNAL-->`, which is
+// the LLM's self-report about the learner's last message. Measured in
+// production, corpus audit, real learner account, on a correct answer the tutor
+// itself called "spot-on":
+//
+//   [ladder] { signalTag: false, correctness: null, phaseBefore: 'OBSERVE',
+//              phaseAfter: 'OBSERVE', check: 0, practice: 0 }
+//
+// The tag was never emitted. The instruction for it is appended to every system
+// prompt unconditionally, so this is non-compliance, not a wiring gap — and
+// `foundations/03 §7` already records that the SIGNAL is "a substitute for real
+// instrumentation, not equivalent to it". Hanging the entire mastery system off
+// it means a model that skips one optional-looking tag silently freezes every
+// learner's progress, with no error anywhere.
+//
+// An MCQ is the one assessment form where correctness is NOT a judgement call:
+// the tutor already declared the right answer when it wrote the question. So
+// when the previous turn asked one, this turn's reply can be graded server-side
+// against the stored `correctIndex` — real instrumentation, no model, no cost.
+// `mcqConfidence()` above was written for exactly this and had no caller.
+//
+// CONSERVATIVE BY CONSTRUCTION. An unresolvable reply returns null and the
+// existing SIGNAL path is left to handle it. Fabricating an answer the learner
+// did not give would put false evidence into their permanent record, which is
+// worse than the freeze this repairs.
+
+/**
+ * Ordinal words a learner might use instead of a letter.
+ *
+ * The English NUMBER words (one/two/three/four) are deliberately ABSENT. Their
+ * first draft included them and this module's own test caught the consequence
+ * immediately: "the third one" contains "one", so it resolved to option 1 — the
+ * filler noun in "the Nth one" read as the numeral. That is precisely the class
+ * of silent mis-grade this grader exists to avoid, so the ambiguous forms are
+ * dropped rather than disambiguated. "Number two" now refuses instead of
+ * guessing, which is the correct trade.
+ */
+const ORDINALS: Record<string, number> = {
+  first: 0, '1': 0, '1st': 0,
+  second: 1, '2': 1, '2nd': 1,
+  third: 2, '3': 2, '3rd': 2,
+  fourth: 3, '4': 3, '4th': 3,
+}
+
+/** Words that explicitly announce a letter choice, so "a" can be told from the article. */
+const LETTER_MARKERS = new Set(['option', 'answer', 'choice', 'pick', 'select', 'letter'])
+
+const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim()
+const words = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
+
+/**
+ * Resolve a learner's free-text reply to one of the offered options.
+ *
+ * Returns `null` whenever the answer is ambiguous or unrecognisable — including
+ * when two options match equally well, which is the case that would otherwise
+ * quietly grade the wrong one.
+ */
+export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null {
+  const n = norm(message)
+  if (!n) return null
+  const tokens = n.split(' ')
+  const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
+
+  // 1. A bare letter, alone or as "option b" / "b)" — normalisation has already
+  //    removed the bracket. Standalone-token matching alone is NOT enough, and
+  //    this module's own test caught why: "a dimension is about quantity" — the
+  //    shape of a real answer this learner typed — has "a" as a standalone
+  //    token and was graded as selecting option A. The English indefinite
+  //    article is the one option key that is also an ordinary word, so it needs
+  //    an explicit marker; b/c/d are not English words and are safe in the
+  //    positions a learner actually puts them ("b) they must be identical").
+  for (let i = 0; i < limit; i++) {
+    const key = OPTION_KEYS[i]
+    const pos = tokens.indexOf(key)
+    if (pos === -1) continue
+    const marked = pos > 0 && LETTER_MARKERS.has(tokens[pos - 1])
+    const alone = tokens.length === 1
+    if (key === 'a' ? (marked || alone) : (marked || alone || pos === 0 || pos === tokens.length - 1)) {
+      return i
+    }
+  }
+
+  // 2. An ordinal ("the second one", "number 2"). Bounded by the option count
+  //    so "the third one" against a 2-option question resolves to nothing
+  //    rather than to a question that was never asked.
+  for (const t of tokens) {
+    const idx = ORDINALS[t]
+    if (idx === undefined) continue
+    // Out of range REFUSES rather than falling through to a weaker rule: the
+    // learner named a position, and it is not one this question offered.
+    // Continuing would let a text-similarity match answer a question they were
+    // plainly not answering.
+    return idx < mcq.options.length ? idx : null
+  }
+
+  // 3. The option's own text, quoted or paraphrased closely enough to contain
+  //    it. Ambiguity is fatal: if two options are both contained, neither wins.
+  const contained = mcq.options
+    .map((o, i) => ({ i, hit: norm(o).length >= 6 && n.includes(norm(o)) }))
+    .filter((x) => x.hit)
+  if (contained.length === 1) return contained[0].i
+
+  // 4. DISTINCTIVE words only — the words that belong to exactly one option.
+  //    Shared vocabulary is what every distractor has in common with the right
+  //    answer, so scoring on it would grade the topic rather than the choice.
+  const counts = new Map<string, number>()
+  for (const o of mcq.options) for (const w of new Set(words(o))) counts.set(w, (counts.get(w) ?? 0) + 1)
+  const scores = mcq.options.map((o) => {
+    const distinctive = [...new Set(words(o))].filter((w) => counts.get(w) === 1)
+    return distinctive.filter((w) => tokens.includes(w)).length
+  })
+  const best = Math.max(...scores)
+  if (best >= 2 && scores.filter((s) => s === best).length === 1) return scores.indexOf(best)
+
+  return null
+}
+
+/**
+ * Grade a reply against the MCQ the previous turn asked.
+ *
+ * `correct: null` means "not gradeable here" — never "wrong".
+ */
+export function gradeMcqAnswer(
+  message: string,
+  mcq: TutorMCQ,
+): { chosenIndex: number | null; correct: boolean | null } {
+  const chosenIndex = resolveMcqChoice(message, mcq)
+  if (chosenIndex === null) return { chosenIndex: null, correct: null }
+  return { chosenIndex, correct: chosenIndex === mcq.correctIndex }
+}
