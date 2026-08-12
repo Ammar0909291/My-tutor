@@ -97,3 +97,52 @@ describe('it is deterministic and total', () => {
     }
   })
 })
+
+/**
+ * THE INVERSION — measured, after enumerating openers lost twice.
+ *
+ * Banned "yes/exactly/spot on/that is right" -> production said "That is
+ * correct". Widened -> production said "Claude, you hit that nail right on
+ * the head… 'apples' is indeed the unit." There is no finite list of ways to
+ * agree, so the rule now requires the one thing every correction has: a
+ * DISTINGUISHING marker.
+ */
+describe('the rule requires a distinguishing move, not the absence of a phrase', () => {
+  const PROPOSAL = 'ok so if i count 5 apples the unit is apples right'
+
+  it('rejects the production draft that defeated the opener list', () => {
+    const draft = 'Claude, you hit that nail right on the head. When you count five apples, "apples" is indeed the unit telling us what whole item you are counting. In science, we use specific standard units so a measurement means the same thing anywhere.'
+    const v = vAffirm(draft, ctx(PROPOSAL))
+    expect(v, 'this exact draft was served to a real learner').not.toBeNull()
+  })
+
+  it('rejects agreement dressed in praise, with no correction anywhere', () => {
+    for (const draft of [
+      'Great thinking! That is how units work — you name what you count.',
+      'You nailed it. The unit is whatever object you are counting.',
+      'Bingo. Apples would be the unit there.',
+      'Well said — that is the idea.',
+    ]) {
+      expect(vAffirm(draft, ctx(PROPOSAL)), draft).not.toBeNull()
+    }
+  })
+
+  it('accepts the real production answer that DID distinguish', () => {
+    // Verbatim from the clean-session replay: no agreement opener, an explicit
+    // "not just", beginner language, ends on a question that uses the idea.
+    const good = 'Claude, that is a really sharp question. A unit is not just the name of the thing itself, but the agreed-on size or amount we use to count it—like saying "one metre" tells us the exact size of the length we measured.'
+    expect(vAffirm(good, ctx('is a unit just the name of the thing youre counting'))).toBeNull()
+  })
+
+  it('accepts a learner who was RIGHT, when the reply adds precision', () => {
+    // The rule must not punish a correct proposal — it asks for the
+    // distinguishing move, which good teaching makes anyway.
+    const draft = 'Yes — and to be precise, the unit is the agreed amount you compare against, not the object itself.'
+    expect(vAffirm(draft, ctx('so the metre is the unit of length right?'))).toBeNull()
+  })
+
+  it('still ignores turns where the learner proposed nothing', () => {
+    expect(vAffirm('Yes, exactly right — 10 metres.', ctx('10 metres'))).toBeNull()
+    expect(vAffirm('Great! That is correct.', ctx('the metre'))).toBeNull()
+  })
+})

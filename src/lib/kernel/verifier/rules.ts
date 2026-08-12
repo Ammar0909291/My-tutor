@@ -529,6 +529,30 @@ const LEARNER_PROPOSES_ALT_RE =
 const BARE_AGREEMENT_OPENER_RE =
   /^\s*(?:yes|yeah|yep|yup|exactly|correct|right|true|absolutely|precisely|indeed|spot\s+on|perfect|100%|of\s+course|that(?:'|’)?s\s+(?:right|correct|it|exactly\s+right)|that\s+is\s+(?:right|correct|completely\s+right|exactly\s+right)|you(?:'|’)?re\s+(?:right|correct))\b/i
 
+/**
+ * THE ONE THING A CORRECTION ALWAYS HAS.
+ *
+ * Enumerating ways to agree is a losing game, and it was measured losing
+ * twice. The banned openers were "yes / exactly / spot on / that is right";
+ * production answered "That is correct". They were widened; production
+ * answered "Claude, you hit that nail right on the head… 'apples' is indeed
+ * the unit." There is no finite list of ways to say yes.
+ *
+ * So the burden is inverted. When the learner FLOATS a definition, the reply
+ * must contain at least one DISTINGUISHING marker — the move every real
+ * correction or qualification makes, whether the learner was wrong ("not
+ * quite", "is not"), partly right ("partly", "more than just"), or right and
+ * owed precision ("to be precise", "the difference is"). A draft that
+ * contains none of them has not distinguished anything; it has only agreed,
+ * however it phrased that.
+ *
+ * This is fail-closed by construction: an unfamiliar way of agreeing no longer
+ * slips through, because the check is for the presence of the correction move,
+ * not the absence of an agreement phrase.
+ */
+const DISTINGUISHING_MARKER_RE =
+  /\b(not\s+quite|not\s+exactly|not\s+just|not\s+the\s+same|isn'?t|is\s+not|are\s+not|aren'?t|rather\s+than|more\s+than\s+just|instead\s+of|careful|to\s+be\s+precise|precisely\s+speaking|partly|partially|close|almost|but\s+not|however|the\s+difference|differs?\s+from|actually|strictly\s+speaking|watch\s+out|common\s+mix[- ]?up|easy\s+to\s+confuse)\b/i
+
 export function vAffirm(text: string, ctx: VerifierContext): Violation | null {
   const learner = (ctx.learnerText ?? '').trim()
   if (!learner) return null
@@ -538,15 +562,22 @@ export function vAffirm(text: string, ctx: VerifierContext): Violation | null {
 
   const clean = withoutCodeFences(text).trim()
   if (!clean) return null
-  const opener = BARE_AGREEMENT_OPENER_RE.exec(clean)
-  if (!opener) return null
 
+  // The reply distinguished its own formulation from the learner's. That is
+  // the teaching move this rule exists to require, so nothing further is
+  // asked — including when the learner happened to be right.
+  if (DISTINGUISHING_MARKER_RE.test(clean)) return null
+
+  const opener = BARE_AGREEMENT_OPENER_RE.exec(clean)
   return {
     code: 'V-AFFIRM',
     severity: 'REJECT',
-    matched: opener[0].slice(0, 80),
+    // The opener when there is a recognisable one, else the sentence that
+    // agreed — the appendix quotes this back, so it has to be the real span.
+    matched: (opener?.[0] ?? clean.split(/(?<=[.!?])\s/)[0] ?? clean).slice(0, 80),
     detail:
-      'the learner proposed a definition; do not open by agreeing. State the ' +
-      'correct formulation yourself, naming any difference explicitly.',
+      'the learner proposed a definition and the reply agreed without ' +
+      'distinguishing anything. State the correct formulation yourself and ' +
+      'name explicitly how it differs from what they said.',
   }
 }
