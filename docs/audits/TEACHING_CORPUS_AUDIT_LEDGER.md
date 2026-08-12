@@ -792,3 +792,60 @@ lessonTitle/order/topicSlug), play a weak learner through Intro→Explain→
 Examples→Guided→Mastery, then Phase B professor analysis. The affirmation guard,
 M5 retrieval and the teaching fallback are all live and apply to every topic —
 no known global defect is outstanding.
+
+---
+
+# TOPIC 2 — `phys.meas.dimensions` "Dimensional Analysis" — IN PROGRESS
+
+Clean session `cmspl8m630001i304ewsjroix`, real production, commit `23048c95`.
+
+## Teaching quality: STRONG so far
+
+> me: "i dont really get what a dimension is, isnt that just how many sides a
+> shape has"
+> tutor: *"In geometry, yes, a dimension refers to height, width, or depth…
+> **In physics, a dimension means something different**: it is the fundamental
+> nature of a physical quantity… whether you measure distance in metres, feet
+> or miles, the fundamental dimension is always length, which we write with the
+> capital letter L."*
+
+Handles the geometry/physics homonym exactly right — validates the intuition,
+then contrasts explicitly instead of confirming or dismissing.
+
+> me: "so speed has dimension L then because its distance"   ← plausible wrong
+> tutor: *"You are on the right track connecting it to distance, **but speed is
+> actually a little bit different** because it combines two things… speed is
+> distance divided by time, its dimension is length over time."*
+
+A wrong answer corrected without discouragement. The affirmation guard is not
+being tripped because the drafts genuinely distinguish — which is the point.
+
+## DEFECT — P2, learner-visible: raw LaTeX in chat prose
+
+The same turn ended with:
+
+    ...or \( L / T \) (length over time).
+
+`\( … \)` is a LaTeX delimiter. The chat surface renders markdown, not TeX —
+the visualization work already established that "these renderers print LaTeX,
+they do not typeset it" and added a deterministic LaTeX check to the FIGURE
+critic's static layer. Chat prose has no equivalent guard, so a beginner is
+shown literal backslashes and parentheses in the middle of a sentence that is
+otherwise well taught.
+
+Classification: PROMPT or OUTPUT-SANITISATION (not content — the physics is
+right). Blast radius: EVERY topic that mentions a formula or symbol, i.e. most
+of physics and chemistry. This is a GLOBAL defect, so per the standing rule the
+topic pointer does not advance until it is fixed.
+
+**TOPIC 2 STATUS: FAILED (LaTeX leak).** Teaching is otherwise strong.
+
+## NEXT EXACT ACTION
+1. Root-fix the LaTeX leak. Prefer an output-side normaliser (deterministic,
+   works regardless of which model produced the text) over a prompt rule —
+   the affirmation work already demonstrated that prompt-only rules on output
+   shape are unreliable. Check for an existing sanitiser to extend
+   (`stripIpaNotation` is the precedent) rather than adding a second one.
+2. Regression test with the real string `\( L / T \)`.
+3. Deploy, replay Topic 2's two probes on a clean session.
+4. Then finish Topic 2 (Examples → Guided → Mastery) and mark VERIFIED.
