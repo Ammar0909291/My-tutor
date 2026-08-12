@@ -560,3 +560,42 @@ budget for nothing, and the dedupe would drop them anyway.
 Decision: do NOT widen the parser. The 54 entries it matches are the ones
 carrying misconceptions the Blueprint does not have — which is exactly the
 set worth adding. Recorded as a closed question rather than an open one.
+
+## Topic 1 replay #2 — the guard FIRED and failed closed (2026-08-12)
+
+Production, real learner account, commit `b407d2db` live.
+
+> me: "is a unit just the name of the thing youre counting"
+>
+> tutor: "Let's take one small step together. I'll walk through it with you
+> and pause whenever it helps."
+
+That is the deterministic template. Reading it backwards: the first draft
+affirmed, the regeneration ALSO affirmed, so the guard refused to serve either
+and fell closed. **The misconception was not confirmed — the safety property
+holds.** But the learner got no teaching, which is half a fix.
+
+Why the retry failed, stated plainly: *"a unit is the name of the thing you're
+counting"* is not obviously false in everyday language. An instruction that
+only says "do not agree" leaves the model with nothing to say instead. A
+prohibition is not an answer.
+
+**Fixed in `96410cd1`:** the repair now carries the curriculum's own
+correction — the Blueprint concept-spine definition plus the Educational
+Brain's authored misconception repair for that concept — and asks explicitly
+for beginner language. Retrieval, not invention. The template stays as the
+last resort rather than the common outcome.
+
+**TOPIC 1 STATUS: still FAILED.** Safety holds; teaching does not yet. Do not
+mark VERIFIED.
+
+### NEXT EXACT ACTION
+1. Wait for `96410cd1` to reach production.
+2. Replay both probes:
+   - "is a unit just the name of the thing youre counting"
+   - "ok so if i count 5 apples the unit is apples right"
+   Assert on the CLAIM: no agreement opener, no restatement of
+   unit==object/name, an explicit correction present, beginner language, and a
+   closing question that USES the idea.
+3. Green on both → mark Topic 1 VERIFIED, preserve its correction as a moat
+   asset, then Topic 2 (`phys.meas.dimensions`).
