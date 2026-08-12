@@ -25,6 +25,19 @@ import { parseAttemptVectorTag, stripAttemptTag, isAttemptCaptureEnabled } from 
 const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 const lines = ROUTE.split('\n')
 
+/**
+ * Code lines only — comment lines are blanked, never removed, so every line
+ * NUMBER this file reports still points at the real file.
+ *
+ * Needed because these guards match on source text, and a comment that QUOTES
+ * a log line is not a second implementation of it. That is not hypothetical:
+ * the empty-body guard below started failing when the fix for "an MCQ-only
+ * turn was served an outage template" documented itself by quoting the very
+ * log line the guard counts. The guard's intent is "one empty-body handler in
+ * CODE"; matching prose made it count evidence as duplication.
+ */
+const codeLines = lines.map((l) => (/^\s*(\/\/|\*|\/\*)/.test(l) ? '' : l))
+
 /** First line index (1-based) whose content matches, or -1. */
 function lineOf(re: RegExp): number {
   const i = lines.findIndex((l) => re.test(l))
@@ -176,8 +189,24 @@ describe('C-A · the empty guard runs after every content-removing step', () => 
   })
 
   it('has exactly ONE empty-body guard — no duplicated degraded logic', () => {
-    expect(allLinesOf(/empty response from model/)).toHaveLength(1)
-    expect(allLinesOf(/if \(!text\.trim\(\)\)/)).toHaveLength(1)
+    // Counted over CODE only. The degraded branch may legitimately be preceded
+    // by a narrower one (an MCQ-only turn is not an outage), so what must stay
+    // singular is the DEGRADED handler, not the number of `!text.trim()`
+    // conditions in the chain.
+    const codeMatches = (re: RegExp) =>
+      codeLines.map((l, i) => (re.test(l) ? i + 1 : 0)).filter(Boolean)
+    expect(codeMatches(/empty response from model/)).toHaveLength(1)
+
+    // The chain now has TWO `!text.trim()` conditions and that is correct: a
+    // narrower branch (an MCQ-only turn is not an outage) followed by the
+    // degraded fallback. What must hold is the ORDER — a narrower branch
+    // placed after the catch-all would be dead code, and the outage template
+    // would keep shipping beside valid questions.
+    const emptyChecks = codeMatches(/if \(!text\.trim\(\)/)
+    expect(emptyChecks).toHaveLength(2)
+    const mcqBranch = codeMatches(/if \(!text\.trim\(\) && mcqHoisted\)/)
+    expect(mcqBranch).toHaveLength(1)
+    expect(mcqBranch[0]).toBeLessThan(codeMatches(/empty response from model/)[0])
   })
 
   it('treats whitespace-only as unusable, not just the empty string', () => {

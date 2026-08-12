@@ -3583,7 +3583,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // recurs whenever a reasoning model exhausts its budget mid-thought.
       // So the most FREQUENT degraded case was still shipping the learner a
       // banner, which is exactly what P-3 forbids. Same remedy, same owner.
-      if (!text.trim()) {
+      //
+      // A TURN IS NOT EMPTY WHEN ITS QUESTION IS IN A STRUCTURED CHANNEL.
+      //
+      // Measured in production, corpus audit Topic 3:
+      //
+      //   [learn/chat] empty response from model, finish_reason: STOP
+      //   provider: "degraded"   [ladder] { mcqAsked: true }
+      //
+      // The model put the whole turn into the MCQ tag and wrote no prose —
+      // arguably over-compliance with `buildMcqInstruction`'s "do NOT also
+      // re-type the question and its options in your visible message". The tag
+      // parses and strips FIRST, so `text` is empty by the time this runs, and
+      // the learner was handed an OUTAGE template ("Let's take one small step
+      // together… we can continue whenever you're ready") beside a perfectly
+      // good tappable question. There was no outage.
+      //
+      // The second harm is quieter and worse: the turn is then marked
+      // `provider: 'degraded'`, and `degradedTurn` is exactly the flag that
+      // stops a turn counting as a give — so `demonstrated` and
+      // `taughtThisSession` stay false and the ladder does not move. A turn
+      // that DID teach was recorded as one that taught nothing.
+      //
+      // This is the THIRD guard found judging emptiness from `cleanText` alone,
+      // after the filler detector and the affirmation floor. The standing rule
+      // it implies: a turn's content is its text PLUS its structured payloads,
+      // and any check for "nothing here" must look at both.
+      if (!text.trim() && mcqHoisted) {
+        // Not degraded — introduce the question the learner can already see.
+        // Deterministic, claims nothing, and leaves the MCQ to carry the turn.
+        console.log('[empty-with-mcq] model wrote no prose but a valid MCQ — introducing it instead of degrading')
+        text = 'Here is a question to check your understanding:'
+      } else if (!text.trim()) {
         console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
         const { degradedTurn } = await import('@/lib/eos-runtime')
         const degraded = degradedTurn({ register: contentRegister, learnerText: message })
