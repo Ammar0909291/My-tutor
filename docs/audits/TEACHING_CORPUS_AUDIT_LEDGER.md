@@ -534,3 +534,29 @@ Vercel production, then replay Topic 1. Until then Topic 1 stays FAILED.
 4. If the flag cannot be enabled, promote V-AFFIRM's logic into the always-on
    path instead of the flagged one — that is a code change within my authority
    and does not need the owner.
+
+## CORRECTION — the EB parser "coverage gap" is not a gap
+
+The previous entry recorded, as an honest limit, that `parseEBMisconceptions`
+matched only 54 of 424 concepts and that "the remaining entries use heading
+variants this parser does not yet match". Measured properly:
+
+| finding | count |
+|---------|-------|
+| EB entries using the Blueprint-REFERENCE style (`- **MC-1 (…)**:`) | 309 |
+| …whose Blueprint DOES supply those misconceptions to the prompt | **309** |
+| concepts with NO misconception knowledge from either source | **0** |
+
+Those entries open with wording like *"Blueprint (…Section 4 Misconception
+Library) documents four; reused by reference with birth-type added."* They are
+deliberately NOT duplicating the Blueprint — they add a birth-type
+classification on top of it. The Blueprint register is already retrieved for
+every one of them.
+
+**So the parser is not under-matching; it is correctly declining to duplicate.**
+Widening it would push the same misconceptions into the prompt twice, spend
+budget for nothing, and the dedupe would drop them anyway.
+
+Decision: do NOT widen the parser. The 54 entries it matches are the ones
+carrying misconceptions the Blueprint does not have — which is exactly the
+set worth adding. Recorded as a closed question rather than an open one.
