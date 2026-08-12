@@ -2055,3 +2055,91 @@ code defect I have found:
    - survey the 1,589 ACTIVE explanation rows for names / session-bound
      discourse — the same capture path produced all of them;
    - recurrent Prisma P1008 timeouts.
+
+---
+
+# TWO MORE DEFECTS, BOTH FOUND IN THE LOGS OF THE SUCCESSFUL RUN (`29579267`)
+
+The completed lesson was the right outcome; reading its logs line by line was
+what produced these. Neither was visible from the transcript.
+
+## 1. Explanation Memory answered an ANSWER with a canned explanation
+
+```
+[ladder] { mcqAsked: false, askedQuestion: false,
+           phaseBefore: 'GUIDE', phaseAfter: 'CHECK' }
+provider=memory asset_ids=[f22e5673-…] servingMode=exact_match
+```
+
+The learner tapped an MCQ option and got the wave-interference asset back.
+`admitForLearner`'s relevance test could not stop it, and **its own comment
+explains why**: a turn that "names nothing specific" carries no topic to
+contradict, so it CANNOT fail the test. Correct for "ok" and "go on"; wrong for
+an ANSWER. The very next log line is the SAME asset being refused as
+`irrelevant-to-question` on a turn where the learner did use words — the guard
+works, a bare answer is simply invisible to it.
+
+**The point is not asset quality.** A learner who has just answered is owed
+FEEDBACK ON THAT ANSWER — whether they were right, and why. A canned
+explanation, however good, is the wrong move on that turn. So the gate is "did
+the learner just answer something", using the pending-MCQ grade already
+computed this turn.
+
+Applied at **all three** `serveFromMemory` assignments including the
+dispatcher-error fallback: a degraded path must never be more permissive than
+the healthy one on a gate that decides whether a learner gets feedback.
+
+## 2. Symbolic MCQ options could not be graded AT ALL
+
+Caught by the test for defect 1, and much worse than it.
+
+```
+'[M][L][T]'      → "m l t"
+'[M][L][T]⁻²'    → "m l t"
+'[M][L]⁻¹[T]²'   → "m l t"
+'[M]²[L][T]⁻¹'   → "m l t"
+```
+
+Superscripts were stripped, so the grader saw four identical options and
+correctly refused to choose. **Symbolic questions are the majority form in
+physics and mathematics** — so the MCQ-grading fix shipped one iteration
+earlier would have left the evidence pipeline frozen for exactly the subjects
+under audit, *while appearing to work*, because prose questions graded fine.
+The completed lesson only succeeded because its questions happened to be prose
+or letter-answerable.
+
+Superscripts are now folded to ASCII before stripping and **the minus is
+kept** — `[T]²` and `[T]⁻²` are different answers, and merging them would
+silently mark a wrong answer right. An exact normalised match is added as the
+first rule, since tapping an option sends its text verbatim.
+
+## Residual evidence gap — measured, not estimated
+
+From the successful run's `[ladder]` lines:
+
+| turn | move | mcqAsked | signalTag | outcome |
+|------|------|----------|-----------|---------|
+| GUIDE→CHECK | teach | false | true | graded |
+| CHECK→PRACTICE | ask | true | true | graded |
+| PRACTICE→PRACTICE | ask | true | true | graded |
+| PRACTICE→TRANSFER | teach | true | true | graded |
+
+`signalTag: true` on all four is **my grader's synthesis, not model
+compliance** — stated because the field name invites the wrong reading. Every
+graded turn here came from the deterministic path.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` |
+| REMAINING | 422 |
+| Global fixes this run | 22 |
+
+## NEXT EXACT ACTION
+1. Confirm `29579267` READY, then re-run one symbolic MCQ turn and check
+   `[mcq-grade]` reports a chosen index (it returned nothing for these before).
+2. Start **Topic 3 — `phys.meas.errors`**. Topic 2 remains BLOCKED on the owner
+   deprecating `f22e5673-…`, not on any code defect found.
+3. Owner queue (unchanged, still unreachable from this session):
+   deprecate `f22e5673-…`; survey the 1,589 ACTIVE explanation rows for names
+   and session-bound discourse; recurrent Prisma P1008.
