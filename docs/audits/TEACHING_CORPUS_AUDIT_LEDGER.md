@@ -1440,3 +1440,151 @@ ruled out as authored-corpus content, not yet ruled out as a DB row.
    original turn IGNORED it), then Examples → Guided → Mastery → VERIFIED.
 4. Re-probe: any concept measured before `6d6d283f` whose reply hit the
    affirm-guard last resort may have been served metadata.
+
+---
+
+# TOPIC 2 — clean replay on the fixed build
+
+Clean session `cmspveqbb0001jr04aotu3ood`, real production, real learner
+account, commit `6d6d283f` READY and holding `my-tutor-flame.vercel.app`.
+
+## The metadata leak is GONE
+
+> me: "i dont really get what a dimension is, isnt that just how many sides a
+> shape has"
+>
+> tutor: *"Claude, that is a completely natural place to get tripped up, because
+> the word 'dimension' is used in two totally different ways in everyday life!
+> When we talk about shapes, yes, a square has two dimensions… But in physics, a
+> **dimension** is the fundamental *type* of physical quantity we are measuring…
+> whether you measure the distance between two cities in kilometres, miles, or
+> inches, the *type* of quantity is always length…"* + comprehension check.
+
+No `concept_id:`, no `bloom:`, no `mastery_threshold:`. Validates the intuition,
+names the homonym, concedes the geometry sense, contrasts, concrete before
+abstract, notation after the idea. Intermediate-English standard met.
+
+## The "speed is L" misconception did NOT reproduce — correction recorded
+
+> me: "wait so speed is L right? because speed is about distance"
+> tutor: *"**Not quite**, Claude! Speed isn't just distance by itself—it's how
+> much distance you cover in a certain amount of time… a car… sixty miles in one
+> hour… **Because time is dividing the distance**… `[LT⁻¹]`."* + transfer
+> question about area.
+
+This was measured BEFORE M5 deployed, and it passed anyway. **So the original
+P1's ignored misconception was collateral of the wave-interference anomaly, not
+a reproducible teaching defect.** Recorded as a correction to my own earlier
+framing. M5 is still worth having — it supplies the guard's discriminator and an
+authored repair for weaker draws — but it is not load-bearing here.
+
+> me: "is it 2L? because there are two lengths"
+> tutor: *"**Not quite**… dimensions track the *type* of quantity, not how many
+> you have… The number two goes as an **exponent, not a coefficient**…"*
+
+That is M2's authored recovery in substance.
+
+## A SIXTH false reading of my own — recorded, harness fixed
+
+That turn appeared to end with *"let's try a quick check question"* and never
+ask one. It did ask one: the check is a STRUCTURED `mcq` field, rendered as a
+widget, absent from `text`. My harness read only `text`. Same lesson as the
+LaTeX retraction — **the raw API response is not the learner's screen** —
+and `ask2.sh` now prints `mcq`, `memoryServingMode` and the character count.
+
+---
+
+# 🔴 P0 — THE SYSTEM REFUSED THE COMPLETION AND TOLD THE LEARNER IT GRANTED IT
+### (`648480bc`) — the most serious defect this audit has found
+
+I answered the check question correctly — the FIRST correct answer of the
+lesson — and got a full completion card:
+
+> *"🎉 Excellent work! … ✓ What you mastered — … ✓ Common mistakes — …
+> **✓ Progress — You've completed Lesson 3 of 238. Next up is "Measurement
+> Errors and Uncertainty".** ✓ What's coming — …"*
+
+The engine's own state, same turn, same response body:
+
+```
+mastery: { verified: false, phase: 'OBSERVE', checkCorrect: 0,
+           practiceCorrect: 0, checkRequired: 1, practiceRequired: 2,
+           completionSuppressed: true, gatePending: true }
+completedLessons: []
+```
+
+## Root cause: the gate inspects the TAG, the learner reads the PROSE
+
+`gateLessonCompletion` did its job perfectly — it stripped `[LESSON_COMPLETE]`,
+so nothing was recorded and `completedLessons` stayed empty. **The system
+refused the completion and simultaneously told the learner it had granted it.**
+The record and the claim disagreed, and the learner got the false half: told
+they had finished a lesson they had answered ONE question of, and handed the
+name of a lesson they had not reached.
+
+This is **hollow advancement** — the precise failure the First-Principles Review
+names as the product's defining stance ("refuses hollow advancement; enforcement
+must live in code, not prompts") — and it is V-AFFIRM's lesson a second time:
+enforcement has to sit on the surface the learner actually receives.
+
+Note the turn emitted **no tag at all**, so a rule that only fired alongside one
+would have missed it entirely.
+
+## The fix
+
+`enforceStance` now applies the same law to prose. Bookkeeping only — praise is
+never touched ("excellent work", "you've got it", "you finished that
+calculation" all survive), per the D3 precedent: keep the praise, drop the
+bookkeeping. Sentence-level stripping preserves the recap and explanation the
+learner earned; orphaned bullet labels are removed; if the claim was the WHOLE
+message the text stands and the violation carries the signal rather than
+blanking the turn. The route then appends what the gate is actually waiting for,
+computed from `MASTERY_PRACTICE_REQUIRED` and the learner's own counters —
+stripping the lie is only half the job when the turn still reads like an ending.
+
+## A false positive this fix introduced, and the tests caught
+
+Gating on `completion.authorized` looked obviously right and was wrong:
+`gateLessonCompletion` returns `authorized: false` for every turn WITHOUT the
+tag, so a learner who had genuinely met the bar would have had their TRUE
+completion claim stripped. The gate is now the truth of the claim itself
+(`masteryVerifiedStrict && !excursionActive`), and the route detects the strip
+by before/after comparison instead of repeating the same mistake. Recorded
+because the near-miss is the finding: this fix was one line from becoming a
+worse defect than the one it repairs.
+
+## Also fixed this turn (`c4827dd9`)
+
+- **A wrapped heading silently discarded 9 authored misconceptions.**
+  `parseEBMisconceptions` matched titles with `[^*\n]`, so a heading running
+  onto a second line failed the head match — and a block that fails the head
+  match is skipped entirely, body and all. 9 entries across 8 files
+  (mathematics + physics), including `phys.meas.dimensions` M4, had never
+  reached a prompt.
+- **`phys.meas.dimensions` M5 authored** — the dropped divisor ("speed is L
+  because it is distance"). None of M1–M4 nor either Blueprint register covered
+  it. Carries the learner's verbatim words, which is what makes the affirmation
+  guard's discriminator match: measured 4 substantive words of overlap against a
+  threshold of 2. Recovery leads with the counter-case (two cars, same 100 m,
+  different times) before any symbol, and generalises once so the repair
+  transfers to density and pressure instead of patching speed alone.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| IN PROGRESS | 1 — `phys.meas.dimensions` |
+| REMAINING | 422 |
+| Moat: authored misconceptions | +1 (dimensions M5) |
+| Global fixes this run | 17 |
+
+## NEXT EXACT ACTION
+1. Confirm `648480bc` READY.
+2. Clean session on `phys.meas.dimensions`, drive to the mastery gate: answer
+   the check, then TWO practice items. Expect no completion card until
+   `practiceCorrect >= 2`, and expect the honest continuation line if the model
+   tries to wrap up early.
+3. Then Topic 2 VERIFIED + moat, then Topic 3 `phys.meas.errors`.
+4. Standing: `checkCorrect` stayed 0 after a correct MCQ answer given in PROSE
+   ("the second one, they must be identical types"). Determine whether prose
+   selection of an MCQ option is scored at all — if not, every learner who types
+   their answer instead of clicking is accruing no evidence.
