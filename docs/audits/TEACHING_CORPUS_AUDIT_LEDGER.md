@@ -599,3 +599,62 @@ mark VERIFIED.
    closing question that USES the idea.
 3. Green on both → mark Topic 1 VERIFIED, preserve its correction as a moat
    asset, then Topic 2 (`phys.meas.dimensions`).
+
+## Topic 1 replay #3 and #4 — probe 1 PASSES, probe 2 FAILED then fixed
+
+### A methodology defect of mine, found in the runtime logs
+
+Replay #3 returned the fail-closed template again. The logs said why:
+
+```
+[affirm-guard] { matched: 'Yes', repaired: false, usedTemplate: true }
+recoveryTriggered: true, recoveryKey: 'frustrated', D0-RECOVERY-PREEMPT
+studentIntent: "expressing_distress"
+```
+
+The turn was in RECOVERY. My own earlier probing of that session ("I'm lost",
+wrong answers) had left the account in a frustrated affect state, and I
+replayed into it — so I was measuring recovery behaviour, not the topic.
+**A replay must start from a fresh session.** `clean.sh` now ends the active
+session first; every future topic replay uses it.
+
+### Replay #4, clean session — PROBE 1 PASSES
+
+> me: "is a unit just the name of the thing youre counting"
+>
+> tutor: "A unit is **not just the name of the thing itself**, but the
+> agreed-on size or amount we use to count it—like saying 'one metre' tells us
+> the exact size… Imagine your friend measures a cloth and says it is 'five.'
+> Five spans of a hand? Five paces?… which one gives the same measurement no
+> matter who does the counting?"
+
+Correct, corrects explicitly, beginner language, concrete before abstract,
+ends on a question that USES the idea. This is the standard.
+
+*(My detector first marked this a FAILURE — it matched "the name of the thing"
+inside the negation "is not just the name of the thing". A correct answer must
+quote the learner's wording in order to deny it. Detector fixed to handle
+negation; second time a detector of mine misread a result, and the transcript
+settled it both times.)*
+
+### PROBE 2 FAILED — and defeated the opener list
+
+> me: "ok so if i count 5 apples the unit is apples right"
+>
+> tutor: "Claude, **you hit that nail right on the head**. When you count five
+> apples, 'apples' is **indeed the unit**…"
+
+Enumerating agreement openers lost for the second time. **Fixed by inverting
+the rule (`a68ad5c7`):** on a learner-proposal turn the reply must contain a
+DISTINGUISHING marker — the move every correction makes — instead of the rule
+hunting for an ever-growing list of ways to say yes. Fail-closed by
+construction; does not punish a learner who was right, because adding
+precision satisfies it.
+
+**TOPIC 1: still FAILED** — probe 1 passes, probe 2 does not yet.
+
+### NEXT EXACT ACTION
+1. Wait for `a68ad5c7` in production.
+2. `./clean.sh` then both probes via `./ask2.sh`.
+3. Both green → Topic 1 VERIFIED, preserve the probe-1 answer as a moat asset
+   (it is the verified explanation), then Topic 2 `phys.meas.dimensions`.
