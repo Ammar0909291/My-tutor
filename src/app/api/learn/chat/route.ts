@@ -3736,6 +3736,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // So a learner gets the safety floor always, and enabling the flag
           // still upgrades them to the full rule set with no duplicated work.
           const runFullVerifier = eosFlags.outputVerifier
+          console.log('[affirm-guard-scope]', {
+            outputVerifierFlag: runFullVerifier,
+            verifierMode: eosFlags.verifierMode,
+          })
           if (runFullVerifier) {
             // Move mapping. RECOVER and CLOSE are checked FIRST and are not
             // derivable from evidenceMoveHoisted: decideNextMove() returns
@@ -3887,6 +3891,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const affirmCtx = { learnerText: message } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
             const firstViolation = vAffirm(cleanText, affirmCtx)
+            // Which branch ran, and did the rule even consider this turn?
+            // Added after a production turn that SHOULD have tripped the guard
+            // produced no log line at all, leaving three untestable
+            // explanations. One line, no behaviour change — a safety rule whose
+            // silence is ambiguous is not a safety rule you can trust.
+            console.log('[affirm-guard-scope]', {
+              branch: 'always-on',
+              considered: true,
+              violated: firstViolation !== null,
+            })
             if (firstViolation) {
               // One regeneration, carrying the violation as instruction — the
               // same appendix shape the full loop uses.
