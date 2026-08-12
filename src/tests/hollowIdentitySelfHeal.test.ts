@@ -100,6 +100,19 @@ describe('the asset bootstrap repairs hollow identities', () => {
     expect(SRC).toMatch(/repaired=\$\{repaired\}/)
   })
 
+  it('status convergence failing does not cancel seeding — it is the FIRST db call', () => {
+    // Measured 2026-08-12: the updateMany is the first database call the
+    // bootstrap makes, and it was throwing with "Can't reach database server
+    // at ...pooler.supabase.com:6543". Because it threw, the run aborted
+    // before seeding and repair were ever reached, so the catalogue could not
+    // converge even in the windows when the pooler recovered moments later.
+    const converge = CODE.indexOf('assetIdentity.updateMany')
+    const prefetch = CODE.indexOf('assetIdentity.findMany')
+    expect(converge).toBeGreaterThan(-1)
+    expect(prefetch).toBeGreaterThan(converge)
+    expect(SRC).toMatch(/status convergence failed, continuing to seeding/)
+  })
+
   it('records the measurement in the source so this is not deleted as dead code', () => {
     expect(SRC).toMatch(/737/)
     expect(SRC).toMatch(/findBestProbe/)

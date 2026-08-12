@@ -175,13 +175,32 @@ async function bootstrapAssets() {
       //
       // Opt-out mirrors DISABLE_ASSET_BOOTSTRAP above, for owners who seeded
       // with --draft precisely so they could use the admin approval flow.
+      // NON-FATAL, and this is load-bearing on a flapping pooler. Measured in
+      // production 2026-08-12: this updateMany is the FIRST database call the
+      // bootstrap makes, and it was failing with
+      //   "Can't reach database server at ...pooler.supabase.com:6543"
+      // and with P1008 socket timeouts. Because it threw, the run aborted
+      // before the seeding and repair steps below were ever reached — so the
+      // catalogue could not converge even during the windows when the pooler
+      // was healthy again moments later.
+      //
+      // Status convergence is a nice-to-have (it promotes DRAFT rows a manual
+      // --draft seed left behind). Seeding and repairing the catalogue is the
+      // point. A failure in the former must not cancel the latter.
       if (process.env.DISABLE_SEED_ACTIVATION !== 'true') {
-        const converged = await prisma.assetIdentity.updateMany({
-          where: { ...seedOwnershipWhere(), status: AssetStatus.DRAFT } as never,
-          data: { status: AssetStatus.ACTIVE },
-        })
-        if (converged.count > 0) {
-          console.log(`[instrumentation] asset bootstrap: activated ${converged.count} seed-owned DRAFT rows`)
+        try {
+          const converged = await prisma.assetIdentity.updateMany({
+            where: { ...seedOwnershipWhere(), status: AssetStatus.DRAFT } as never,
+            data: { status: AssetStatus.ACTIVE },
+          })
+          if (converged.count > 0) {
+            console.log(`[instrumentation] asset bootstrap: activated ${converged.count} seed-owned DRAFT rows`)
+          }
+        } catch (convergeErr: any) {
+          console.warn(
+            '[instrumentation] asset bootstrap: status convergence failed, continuing to seeding:',
+            convergeErr?.message ?? convergeErr,
+          )
         }
       }
 
