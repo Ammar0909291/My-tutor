@@ -568,6 +568,39 @@ export function vAffirm(text: string, ctx: VerifierContext): Violation | null {
   // asked — including when the learner happened to be right.
   if (DISTINGUISHING_MARKER_RE.test(clean)) return null
 
+  // ── IS THE LEARNER ACTUALLY WRONG? ────────────────────────────────────────
+  //
+  // Measured, once the rule finally started enforcing: a learner who said
+  // "area would be L times L, so L squared right?" — which is CORRECT — had
+  // the tutor's confirmation rejected twice and received a generic template
+  // instead. Demanding a distinguishing move on every proposal turn punishes
+  // being right, and manufacturing a disagreement is worse teaching than the
+  // agreement it replaced.
+  //
+  // The discriminator is the curriculum's own misconception library: the
+  // authored symptom phrases exist precisely to say "a learner who says THIS
+  // holds THAT error". When the learner's words overlap them, they are likely
+  // wrong and a bare agreement is dangerous. When they do not, agreement is
+  // very likely just correct, and the rule stands down.
+  //
+  // Retrieval, not a heuristic — and no keyword table of this module's own.
+  // Absent knowledge ⇒ conservative behaviour, which is the right default for
+  // a concept nobody has authored misconceptions for.
+  const known = ctx.knownMisconceptionText
+  if (known && known.trim()) {
+    const learnerWords = new Set(
+      learner.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 3),
+    )
+    let overlap = 0
+    for (const w of new Set(known.toLowerCase().split(/[^a-z0-9]+/).filter((w) => w.length > 3))) {
+      if (learnerWords.has(w)) overlap++
+    }
+    // TWO shared substantive words, not one: a single shared noun is usually
+    // just the concept's own name appearing in both, which every on-topic
+    // proposal would trip.
+    if (overlap < 2) return null
+  }
+
   const opener = BARE_AGREEMENT_OPENER_RE.exec(clean)
   return {
     code: 'V-AFFIRM',

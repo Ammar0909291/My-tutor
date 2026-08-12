@@ -3816,7 +3816,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               ?? snapshotCurrentConceptId
               ?? resolvedConceptId
               ?? null
-            const affirmCtx = { learnerText: message } as unknown as
+            // The concept's authored misconceptions, so the rule can tell a
+            // learner who is WRONG from one who is RIGHT. Titles + symptom
+            // phrases from BOTH registers; failure here degrades to the
+            // conservative behaviour rather than taking the turn down.
+            let knownMisconceptionText = ''
+            try {
+              const { loadBlueprintContent, loadEBConceptContext } =
+                await import('@/lib/curriculum/blueprintLoader')
+              const cid = teachingConceptIdForRepair
+              if (cid) {
+                const bp = loadBlueprintContent(cid)
+                if (bp.found) {
+                  for (const mc of bp.content.misconceptions) {
+                    knownMisconceptionText += ` ${mc.title} ${mc.characteristicPhrase ?? ''}`
+                  }
+                }
+                const eb = loadEBConceptContext(cid)
+                if (eb.found) {
+                  for (const mc of eb.context.ebMisconceptions) {
+                    knownMisconceptionText += ` ${mc.title} ${mc.symptom ?? ''}`
+                  }
+                }
+              }
+            } catch { /* conservative default */ }
+
+            const affirmCtx = { learnerText: message, knownMisconceptionText } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
             const firstViolation = vAffirm(cleanText, affirmCtx)
             // Which branch ran, and did the rule even consider this turn?

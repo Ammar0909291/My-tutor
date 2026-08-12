@@ -207,3 +207,64 @@ describe('the verifier gate follows what was SERVED, not what was assembled', ()
     expect(newGate(true, false)).toBe(true)      // new: still verified
   })
 })
+
+/**
+ * TELLING A WRONG LEARNER FROM A RIGHT ONE.
+ *
+ * Measured once the rule finally enforced in production: a learner who said
+ * "area would be L times L, so L squared right?" — which is CORRECT — had the
+ * tutor's confirmation rejected twice and got a generic template instead.
+ * Demanding a distinguishing move on every proposal punishes being right, and
+ * manufacturing a disagreement is worse teaching than the agreement it
+ * replaced.
+ *
+ * The discriminator is the curriculum's own misconception library. Its symptom
+ * phrases exist precisely to say "a learner who says THIS holds THAT error".
+ */
+describe('the rule stands down when the learner is not making a known error', () => {
+  // Verbatim from the authored registers.
+  const UNITS_MCS =
+    'A unit is the name of the thing you are counting. is a unit just the name ' +
+    "of the thing you're counting?; if I count 5 apples the unit is apples"
+
+  const ctxK = (learnerText: string, knownMisconceptionText?: string) =>
+    ({ learnerText, knownMisconceptionText } as never)
+
+  it('REJECTS the wrong learner — their words match an authored symptom', () => {
+    const v = vAffirm(
+      'Claude, you hit the nail on the head! "apples" is indeed the unit.',
+      ctxK('ok so if i count 5 apples the unit is apples right', UNITS_MCS),
+    )
+    expect(v).not.toBeNull()
+  })
+
+  it('ALLOWS confirming the right learner — no authored error matches', () => {
+    // The production false positive. "area / L / squared" appears in no
+    // misconception for this concept, so a plain confirmation is correct.
+    const v = vAffirm(
+      'Spot on! Area is length times length, so its dimension is L squared.',
+      ctxK('ok so area would be L times L, so L squared right?', UNITS_MCS),
+    )
+    expect(v).toBeNull()
+  })
+
+  it('needs TWO shared substantive words, not one', () => {
+    // One shared noun is usually just the concept's own name appearing in
+    // both, which every on-topic proposal would trip.
+    const v = vAffirm(
+      'Yes, exactly.',
+      ctxK('so the unit is metres right?', 'A unit is the name of the thing you are counting'),
+    )
+    expect(v).toBeNull()
+  })
+
+  it('stays conservative when no misconception knowledge is supplied', () => {
+    // A concept nobody has authored misconceptions for must not silently lose
+    // the protection — absent knowledge keeps the old, stricter behaviour.
+    const v = vAffirm(
+      'Yes, exactly — that is right.',
+      ctxK('is a unit just the name of the thing youre counting'),
+    )
+    expect(v).not.toBeNull()
+  })
+})

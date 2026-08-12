@@ -136,6 +136,20 @@ export interface VerifierContext {
   noCapabilities?: string[]
   /** Learner content preview (short) — the REACT rule reads it. */
   learnerText: string
+  /**
+   * The concept's KNOWN MISCONCEPTIONS, as authored — titles plus the symptom
+   * phrases learners holding them actually say. Supplied by the route from the
+   * Blueprint register and the Educational Brain entry.
+   *
+   * V-AFFIRM reads it to tell a learner who is WRONG from one who is RIGHT.
+   * Without it the rule demanded a distinguishing move on every proposal turn,
+   * which punished correct learners: "area is L times L, so L squared right?"
+   * is correct, and the tutor was forced away from simply confirming it.
+   *
+   * Undefined ⇒ the rule falls back to its conservative behaviour, which is
+   * the correct default for a concept with no authored misconceptions.
+   */
+  knownMisconceptionText?: string
   /** Legal single-line tags for this turn (V-TAG whitelist). */
   legalTags: string[]
   /** S1 — recent-turn history for the V-DUP-x / V-OSCILLATE rules. Optional:
