@@ -3191,24 +3191,46 @@ rather than rationalised, produced the real finding.
 Both are Curriculum-Production-Pipeline territory; no KG or Blueprint file was
 modified.
 
+## `phys.opt` — 14 more concepts closed (same iteration)
+
+All 14 short `phys.opt` concepts now carry three gradeable MCQs, all at HIGH
+band (the band their existing probes already use), 0 rung collisions,
+0 band splits. Short-concept ratchet **117 → 103**.
+
+Eight target a misconception that had no gradeable probe — seven of them
+carried it on a short_answer/checkpoint the grader cannot read
+(`MC-MORE-BENDING-MEANS-LARGER-RAINBOW-ANGLE`, `MC-IGNORE-LENS-SEPARATION`,
+`MC-FREQUENCY-CHANGES-AT-BOUNDARY`, `MC-INTERMEDIATE-FILTER-ONLY-BLOCKS`,
+`MC-ANGLE-FROM-SURFACE`, `MC-FULL-WIDTH-IN-FORMULA`,
+`MC-DARK-FRINGE-INDEXING`), plus `diffraction` MC-3 and `refraction` MC-2.
+
+Six are FLUENCY items (`brewsters-law`, `mirrors`, `optical-instruments`,
+`total-internal-reflection`, `wave-optics`, and the earlier
+`wave.interference` / `rel.simultaneity`): those concepts' authored
+misconceptions ALL already had gradeable probes, and the third graded answer a
+gate needs is PRACTICE, not a third screen. Stated in the code so it does not
+later read as an oversight.
+
 ## Remaining shortfall — measured, by domain
 
 ```
-em 32   mod 21   qm 19   particle 16   stat 15   opt 14   TOTAL 117
+em 32   mod 21   qm 19   particle 16   stat 15   TOTAL 103
 ```
-`meas`, `mech`, `therm`, `wave`, `astro`, `rel` are complete at three
-gradeable probes per concept, within band.
+`meas`, `mech`, `therm`, `wave`, `astro`, `rel`, `opt` are complete at three
+gradeable probes per concept, **within band**.
 
 ## Validation
 
 310 test files / 6,598 passed / 9 skipped · `tsc --noEmit` clean ·
-`npm run build` clean.
+`npm run build` clean. (Counts unchanged by the `phys.opt` batch: it adds
+authored data, not new test files.)
 
 ## NEXT EXACT ACTION
 1. Retry B-3, B-4, B-5; log it. B-5 needs **egress + credentials**.
-2. Offline: continue third probes — `phys.opt` (14) and `phys.stat` (15) are
-   the next smallest. Check the free rung across ALL seed corpora AND author
-   into the band the concept's existing probes already use.
+2. Offline: continue third probes — `phys.stat` (15) and `phys.particle` (16)
+   are the next smallest, then `qm` (19), `mod` (21), `em` (32). Check the free
+   rung across ALL seed corpora AND author into the band the concept's existing
+   probes already use — both rules were learned the hard way this iteration.
 3. When production access exists: run the sweep (it now exits non-zero unless
    topics actually ran), require `E6 = 0`, then drive Topic 3
    `phys.meas.errors` to `verified`.

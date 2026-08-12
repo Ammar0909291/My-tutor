@@ -3939,6 +3939,26 @@ const REFR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${REFR}:MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL`],
     source: `${REFR_SRC} — MC-2 bending-direction probe with Snell numbers, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: REFR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Light travels from water (n = 1.33) into air (n = 1.00). Does it bend toward or away from the normal?',
+    choices: [
+      { text: 'Away from the normal — it is entering a LESS optically dense medium, so it speeds up', isCorrect: true },
+      { text: 'Toward the normal — light always bends toward the normal on leaving water', isCorrect: false, misconceptionId: `${REFR}:MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL` },
+      { text: 'Neither — the direction is unchanged', isCorrect: false },
+    ],
+    correctValue: 'away from the normal — going to lower n increases the angle; beyond the critical angle it cannot leave at all (total internal reflection)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REFR}:MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL`],
+    source: `${REFR_SRC} — MC-DENSER-MEDIUM-MEANS-BENDS-AWAY-FROM-NORMAL, distractor-mapped`,
+  },
 ]
 
 // ─── math.geom.triangle ──────────────────────────────────────────────────────
@@ -7458,6 +7478,29 @@ const MIR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${MIR}:MC-2`],
     source: `${MIR_SRC} — P33 m=\u22123 discrimination pair as probe`,
+  },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    // A pure FLUENCY item, deliberately NOT a misconception screen: both of
+    // this concept's authored misconceptions already have a gradeable probe,
+    // and the third graded answer a gate needs is PRACTICE, not a screen.
+    conceptId: MIR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An object sits 10 cm in front of a concave mirror of focal length 20 cm. Where is the image?',
+    choices: [
+      { text: 'Virtual, upright and behind the mirror at 20 cm — the object is INSIDE the focal length', isCorrect: true },
+      { text: 'Real and inverted, 20 cm in front of the mirror', isCorrect: false },
+      { text: 'At the focal point, 20 cm in front', isCorrect: false },
+    ],
+    correctValue: 'virtual, upright, magnified, 20 cm behind the mirror — 1/v = 1/f − 1/u with u inside f gives a virtual image',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${MIR_SRC} — Component 4 practice — mirror equation inside the focal length (fluency)`,
   },
 ]
 
@@ -32758,6 +32801,26 @@ const NLGT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${NLGT}:MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY`],
     source: `${NLGT_SRC} — MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: NLGT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Light passes from air into glass. Its speed and wavelength both drop. What happens to its FREQUENCY?',
+    choices: [
+      { text: 'It stays exactly the same — frequency is set by the source, and it is the wavelength that adjusts', isCorrect: true },
+      { text: 'It drops too, in step with the wavelength', isCorrect: false, misconceptionId: `${NLGT}:MC-FREQUENCY-CHANGES-AT-BOUNDARY` },
+      { text: 'It rises, to keep the speed constant', isCorrect: false, misconceptionId: `${NLGT}:MC-FREQUENCY-CHANGES-AT-BOUNDARY` },
+    ],
+    correctValue: 'frequency is unchanged at a boundary — v = fλ, so with v reduced it is λ that shortens; a changed frequency would change the colour',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NLGT}:MC-FREQUENCY-CHANGES-AT-BOUNDARY`],
+    source: `${NLGT_SRC} — MC-FREQUENCY-CHANGES-AT-BOUNDARY, distractor-mapped`,
+  },
 ]
 
 // ─── phys.opt.reflection ──────────────────────────────────────────────────────
@@ -32817,6 +32880,26 @@ const REFLC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${REFLC}:MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES`],
     source: `${REFLC_SRC} — MC-SPECULAR-REFLECTION-FOR-ALL-SURFACES trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: REFLC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A ray strikes a mirror making 30° WITH THE SURFACE. What is the angle of reflection?',
+    choices: [
+      { text: '60° — angles in the law of reflection are measured from the NORMAL, and 90° − 30° = 60°', isCorrect: true },
+      { text: '30° — the angle of reflection equals the 30° given', isCorrect: false, misconceptionId: `${REFLC}:MC-ANGLE-FROM-SURFACE` },
+      { text: '15° — half the angle to the surface', isCorrect: false, misconceptionId: `${REFLC}:MC-ANGLE-FROM-SURFACE` },
+    ],
+    correctValue: '60° from the normal — the incident angle from the normal is 90° − 30° = 60°, and reflection preserves it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REFLC}:MC-ANGLE-FROM-SURFACE`],
+    source: `${REFLC_SRC} — MC-ANGLE-FROM-SURFACE, distractor-mapped`,
   },
 ]
 
@@ -32878,6 +32961,26 @@ const DISPR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DISPR}:MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH`],
     source: `${DISPR_SRC} — MC-VIOLET-REFRACTS-LESS-BECAUSE-SHORTER-WAVELENGTH trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: DISPR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a prism, violet light is refracted more strongly than red. Does violet therefore emerge at a larger angle from the horizon in a rainbow?',
+    choices: [
+      { text: 'No — in a primary rainbow red appears ABOVE violet, because the geometry of the raindrop reverses the ordering seen in a prism', isCorrect: true },
+      { text: 'Yes — more bending must always mean a larger angle in the sky', isCorrect: false, misconceptionId: `${DISPR}:MC-MORE-BENDING-MEANS-LARGER-RAINBOW-ANGLE` },
+      { text: 'Yes, and that is why violet is the outermost band', isCorrect: false, misconceptionId: `${DISPR}:MC-MORE-BENDING-MEANS-LARGER-RAINBOW-ANGLE` },
+    ],
+    correctValue: 'no — red is the OUTER band of a primary rainbow at ≈42° and violet the inner at ≈40°; more refraction does not translate directly into a larger viewing angle',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DISPR}:MC-MORE-BENDING-MEANS-LARGER-RAINBOW-ANGLE`],
+    source: `${DISPR_SRC} — MC-MORE-BENDING-MEANS-LARGER-RAINBOW-ANGLE, distractor-mapped`,
+  },
 ]
 
 // ─── phys.opt.polarization ────────────────────────────────────────────────────
@@ -32937,6 +33040,26 @@ const POLR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${POLR}:MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS`],
     source: `${POLR_SRC} — MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: POLR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two crossed polarizers block all light. A third polarizer at 45° is inserted BETWEEN them. What now emerges?',
+    choices: [
+      { text: 'Light gets through — each filter re-projects the polarization, so the third one restores a component the last filter can pass', isCorrect: true },
+      { text: 'Still nothing — adding another filter can only block more light', isCorrect: false, misconceptionId: `${POLR}:MC-INTERMEDIATE-FILTER-ONLY-BLOCKS` },
+      { text: 'Still nothing — the first two already removed every photon', isCorrect: false, misconceptionId: `${POLR}:MC-INTERMEDIATE-FILTER-ONLY-BLOCKS` },
+    ],
+    correctValue: 'light emerges (I₀/8 for unpolarized input) — a polarizer PROJECTS rather than merely filters, so an intermediate axis rotates the polarization into one the analyser transmits',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${POLR}:MC-INTERMEDIATE-FILTER-ONLY-BLOCKS`],
+    source: `${POLR_SRC} — MC-INTERMEDIATE-FILTER-ONLY-BLOCKS, distractor-mapped`,
   },
 ]
 
@@ -32998,6 +33121,29 @@ const BREW_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BREW}:MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS`],
     source: `${BREW_SRC} — MC-POLARIZED-SUNGLASSES-BLOCK-ALL-REFLECTIONS trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    // A pure FLUENCY item, deliberately NOT a misconception screen: both of
+    // this concept's authored misconceptions already have a gradeable probe,
+    // and the third graded answer a gate needs is PRACTICE, not a screen.
+    conceptId: BREW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Light hits glass (n = 1.5) from air at Brewster’s angle. What is that angle, to the nearest degree?',
+    choices: [
+      { text: 'About 56° — tan θ_B = n₂/n₁ = 1.5, so θ_B = arctan(1.5)', isCorrect: true },
+      { text: 'About 34° — take arctan(1/1.5) instead', isCorrect: false },
+      { text: '45° — Brewster’s angle is always halfway', isCorrect: false },
+    ],
+    correctValue: '≈56.3° — θ_B = arctan(n₂/n₁) = arctan(1.5); at this angle the REFLECTED ray is fully polarized',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${BREW_SRC} — Component 4 practice — Brewster angle computation (fluency)`,
+  },
 ]
 
 // ─── phys.opt.total-internal-reflection ──────────────────────────────────────
@@ -33057,6 +33203,26 @@ const TIR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${TIR}:MC-TIR-IS-PARTIAL-REFLECTION`],
     source: `${TIR_SRC} — MC-TIR-IS-PARTIAL-REFLECTION trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: TIR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Light in glass (n = 1.5) meets a glass-air boundary at 60°, past the critical angle of about 42°. How much light enters the air?',
+    choices: [
+      { text: 'None — beyond the critical angle the reflection is TOTAL, and no ray is transmitted', isCorrect: true },
+      { text: 'Most of it, with a little reflected back', isCorrect: false, misconceptionId: `${TIR}:MC-TIR-IS-PARTIAL-REFLECTION` },
+      { text: 'About half, split evenly between the two media', isCorrect: false, misconceptionId: `${TIR}:MC-TIR-IS-PARTIAL-REFLECTION` },
+    ],
+    correctValue: 'none is transmitted — “total” is literal: past θ_c, 100% of the energy is reflected, which is why optical fibres carry light so efficiently',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TIR}:MC-TIR-IS-PARTIAL-REFLECTION`],
+    source: `${TIR_SRC} — MC-TIR-IS-PARTIAL-REFLECTION, distractor-mapped`,
   },
 ]
 
@@ -33118,6 +33284,26 @@ const DIFR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DIFR}:MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN`],
     source: `${DIFR_SRC} — MC-NARROWER-SLIT-GIVES-NARROWER-PATTERN trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: DIFR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Are diffraction and interference two names for the same thing?',
+    choices: [
+      { text: 'No — diffraction is a wave spreading from a single aperture or edge; interference is the superposition of two or more waves. Real patterns usually show both', isCorrect: true },
+      { text: 'Yes — they are the same phenomenon under two names', isCorrect: false, misconceptionId: `${DIFR}:MC-3` },
+      { text: 'No — diffraction happens only to light, interference only to sound', isCorrect: false, misconceptionId: `${DIFR}:MC-3` },
+    ],
+    correctValue: 'related but distinct: diffraction is spreading at an aperture; interference is superposition. A double-slit pattern is interference MODULATED by single-slit diffraction',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DIFR}:MC-3`],
+    source: `${DIFR_SRC} — MC-3 (MC-DIFFRACTION-SAME-AS-INTERFERENCE), distractor-mapped`,
+  },
 ]
 
 // ─── phys.opt.lens-power ──────────────────────────────────────────────────────
@@ -33177,6 +33363,26 @@ const LPWR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${LPWR}:MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS`],
     source: `${LPWR_SRC} — MC-HIGHER-POWER-MEANS-STRONGER-LENS-ALWAYS trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: LPWR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two thin lenses of +4 D and +6 D are placed 10 cm apart. Is the combined power simply +10 D?',
+    choices: [
+      { text: 'No — separation matters: P = P₁ + P₂ − d·P₁P₂, so with d = 0.10 m the result is +7.6 D', isCorrect: true },
+      { text: 'Yes — powers of lenses always add', isCorrect: false, misconceptionId: `${LPWR}:MC-IGNORE-LENS-SEPARATION` },
+      { text: 'Yes, because the lenses are thin', isCorrect: false, misconceptionId: `${LPWR}:MC-IGNORE-LENS-SEPARATION` },
+    ],
+    correctValue: '+7.6 D — P = 4 + 6 − 0.10×4×6 = 10 − 2.4; simple addition holds only for lenses IN CONTACT (d = 0)',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LPWR}:MC-IGNORE-LENS-SEPARATION`],
+    source: `${LPWR_SRC} — MC-IGNORE-LENS-SEPARATION, distractor-mapped`,
   },
 ]
 
@@ -33238,6 +33444,29 @@ const OPTI_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${OPTI}:MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW`],
     source: `${OPTI_SRC} — MC-MICROSCOPE-EYEPIECE-IS-JUST-A-WINDOW trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    // A pure FLUENCY item, deliberately NOT a misconception screen: both of
+    // this concept's authored misconceptions already have a gradeable probe,
+    // and the third graded answer a gate needs is PRACTICE, not a screen.
+    conceptId: OPTI,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A telescope has an objective of focal length 100 cm and an eyepiece of 5 cm. What is its angular magnification in normal adjustment?',
+    choices: [
+      { text: '20× — M = f_objective / f_eyepiece = 100/5', isCorrect: true },
+      { text: '0.05× — divide the eyepiece by the objective', isCorrect: false },
+      { text: '105× — add the two focal lengths', isCorrect: false },
+    ],
+    correctValue: '20× — angular magnification is f_o/f_e; the tube length is f_o + f_e = 105 cm, which is a different quantity',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${OPTI_SRC} — Component 4 practice — telescope magnification (fluency)`,
+  },
 ]
 
 // ─── phys.opt.single-slit ─────────────────────────────────────────────────────
@@ -33297,6 +33526,26 @@ const SSLT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SSLT}:MC-M=0-IS-DARK`],
     source: `${SSLT_SRC} — MC-M=0-IS-DARK trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: SSLT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In the single-slit formula a·sinθ = mλ, the symbol a stands for what?',
+    choices: [
+      { text: 'The FULL width of the slit', isCorrect: true },
+      { text: 'Half the slit width, since the derivation pairs up the two halves', isCorrect: false, misconceptionId: `${SSLT}:MC-FULL-WIDTH-IN-FORMULA` },
+      { text: 'The distance from the slit to the screen', isCorrect: false, misconceptionId: `${SSLT}:MC-FULL-WIDTH-IN-FORMULA` },
+    ],
+    correctValue: 'the full slit width — the half-width appears inside the derivation (pairing rays from the two halves), but the final formula uses the whole width a',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SSLT}:MC-FULL-WIDTH-IN-FORMULA`],
+    source: `${SSLT_SRC} — MC-FULL-WIDTH-IN-FORMULA, distractor-mapped`,
   },
 ]
 
@@ -35638,6 +35887,29 @@ const WOPT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${WOPT}:MC-COHERENCE-MEANS-SAME-FREQUENCY`],
     source: `${WOPT_SRC} — MC-2/MC-COHERENCE-MEANS-SAME-FREQUENCY trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    // A pure FLUENCY item, deliberately NOT a misconception screen: both of
+    // this concept's authored misconceptions already have a gradeable probe,
+    // and the third graded answer a gate needs is PRACTICE, not a screen.
+    conceptId: WOPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two coherent sources produce an interference pattern. Compared with simply adding their two intensities, how much total energy lands on the screen?',
+    choices: [
+      { text: 'Exactly the same — energy is REDISTRIBUTED from the dark fringes into the bright ones, never created or destroyed', isCorrect: true },
+      { text: 'More, because bright fringes are brighter than either source alone', isCorrect: false },
+      { text: 'Less, because the dark fringes have lost their energy', isCorrect: false },
+    ],
+    correctValue: 'the same total — interference redistributes energy across the screen; averaged over the pattern it equals the sum of the individual intensities',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${WOPT_SRC} — Component 4 practice — energy conservation across the pattern (fluency)`,
+  },
 ]
 
 // ─── phys.opt.youngs-experiment ────────────────────────────────────────────────
@@ -35697,6 +35969,26 @@ const YOUN_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${YOUN}:MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER`],
     source: `${YOUN_SRC} — MC-CENTRAL-FRINGE-IS-ALWAYS-AT-CENTER trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this one carried two, so the corpus ran dry at
+    // the last gate. Authored at the SAME grade band as its siblings — the
+    // gate serves within a band, so a split leaves every learner short.
+    conceptId: YOUN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a double-slit pattern, which order m labels the FIRST dark fringe next to the central bright one?',
+    choices: [
+      { text: 'm = 0, because dark fringes satisfy path difference = (m + ½)λ', isCorrect: true },
+      { text: 'm = 1, since it is the first dark fringe', isCorrect: false, misconceptionId: `${YOUN}:MC-DARK-FRINGE-INDEXING` },
+      { text: 'm = ½, halfway to the first bright fringe', isCorrect: false, misconceptionId: `${YOUN}:MC-DARK-FRINGE-INDEXING` },
+    ],
+    correctValue: 'm = 0 — bright fringes use mλ starting at m = 0 for the centre, while dark fringes use (m + ½)λ, so the first dark fringe is m = 0',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${YOUN}:MC-DARK-FRINGE-INDEXING`],
+    source: `${YOUN_SRC} — MC-DARK-FRINGE-INDEXING, distractor-mapped`,
   },
 ]
 

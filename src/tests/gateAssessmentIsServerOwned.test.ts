@@ -171,9 +171,9 @@ describe('the authored corpus actually converts', () => {
     // losing them must. Ratcheted 145 -> 139 (six phys.mech concepts) -> 131
     // (five phys.therm: carnot-cycle, entropy, heat-engines, refrigerators,
     // third-law; three phys.wave: beats, forced-oscillations, interference)
-    // -> 117 (six phys.astro + eight phys.rel).
+    // -> 117 (six phys.astro + eight phys.rel) -> 103 (fourteen phys.opt).
     // Tighten this number whenever more are authored.
-    expect(short).toBeLessThanOrEqual(117)
+    expect(short).toBeLessThanOrEqual(103)
     expect(counts.size).toBe(conceptsWithGradeable.size)
   })
 
