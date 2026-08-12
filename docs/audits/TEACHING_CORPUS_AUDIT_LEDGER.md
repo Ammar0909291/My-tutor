@@ -2460,3 +2460,81 @@ it, as it has every time.
    mismatch, and `verified: true` at `practiceCorrect >= 2`.
 3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
 4. **Retry the BLOCKED queue** (B-1…B-4) at the top of the next iteration.
+
+---
+
+# BLOCKED QUEUE RETRY 3 + TOPIC 3 — a fourth route to the same freeze
+
+## Blocked queue, retried FIRST (protocol)
+- **B-1 / B-2 / B-3** — Supabase MCP: **0 projects**. Still blocked.
+- **B-4** — retried Chromium against `example.com` with the installed
+  `/opt/pw-browsers/chromium-1194` binary (the npm default path is stale: it
+  points at `chromium_headless_shell-1228`, which does not exist). The launch
+  **hung to timeout rather than erroring** — the proxy signature, not a missing
+  binary. Still blocked.
+
+## ✅ Verified live: the deixis fix (`23623480`)
+
+The exact phrase that previously froze the ladder:
+
+> me: "ok. can you show me what that looks like"
+
+```
+[excursion] { unresolvedTopic: null, transition: 'none', active: false, turns: 0 }
+CUE: helpRequestKind: "diagram", rule D4b-ANSWER-STUDENT-FIRST
+```
+
+No bogus excursion, and the request was correctly classified as a help request
+and answered. Previously: `unresolvedTopic: 'what that looks like', active: true,
+turns: 4` — with the ladder frozen behind it.
+
+## 🔴 P1 — an MCQ-only turn was served an OUTAGE template (`378d07c5`)
+
+```
+[learn/chat] empty response from model, finish_reason: STOP
+provider: "degraded"    [ladder] { mcqAsked: true }
+```
+
+The learner saw *"Let's take one small step together… we can continue from here
+whenever you're ready"* beside a perfectly good tappable question. **There was
+no outage.** The model had put the whole turn into the MCQ tag and written no
+prose — arguably over-COMPLIANCE with `buildMcqInstruction`.
+
+**The quieter and worse harm:** the turn is then marked `provider: 'degraded'`,
+and `degradedTurn` is the exact flag that stops a turn counting as a give — so
+`demonstrated` and `taughtThisSession` stay false and the ladder does not move.
+**A turn that DID teach was recorded as one that taught nothing.** Fourth route
+to the same freeze in one day. Asserted directly in the test rather than argued.
+
+### The pattern, now written down
+
+This is the **third guard** found judging emptiness from `cleanText` alone,
+after the filler detector and the affirmation floor — all three run AFTER the
+MCQ tag is parsed and stripped. The standing rule, recorded in the test header:
+
+> A turn's content is its TEXT **plus** its STRUCTURED PAYLOADS. Any check for
+> "nothing here" must look at both.
+
+### A guard that failed correctly by its letter and wrongly by its intent
+
+`attemptTagRouteWiring`'s "exactly ONE empty-body guard" assertion broke on this
+change because the fix's **comment quotes the log line the guard counts**. A
+comment is not a second implementation. The guard now counts CODE lines only
+(comments blanked, never removed, so its line numbers still point at the real
+file) and asserts what actually matters: **the narrow MCQ branch must precede
+the degraded fallback**, since a narrower branch after a catch-all is dead code.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` (queue B-1) |
+| IN PROGRESS | 1 — `phys.meas.errors` |
+| REMAINING | 421 |
+| Global fixes this run | 27 |
+
+## NEXT EXACT ACTION
+1. **Retry the BLOCKED queue** (B-1…B-4), log the attempt.
+2. Confirm `378d07c5` READY, then drive Topic 3 to its mastery gate on a clean
+   session — expect no outage template beside an MCQ, and `verified: true` at
+   `practiceCorrect >= 2`.
+3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
