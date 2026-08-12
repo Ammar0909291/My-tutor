@@ -1,0 +1,128 @@
+# ENGINE STABILITY SWEEP against PRODUCTION — manual dispatch only.
+#
+# ── WHY THIS EXISTS ─────────────────────────────────────────────────────────
+# The corpus audit's verdicts require driving real turns against production:
+# sign in, open a topic, answer, and read the engine invariants (E1–E6) out of
+# the response JSON. That is a POST workflow, and the agent sandboxes running
+# this audit have an egress policy that refuses outbound HTTPS to the app's own
+# domain (403 CONNECT). Read-only access via the Vercel/Supabase MCPs can
+# OBSERVE production but cannot DRIVE it, so E6 could never be settled.
+#
+# A GitHub Actions runner has ordinary internet. This workflow is the seam
+# that lets the sweep run without a human typing commands, and without the
+# learner password ever entering a chat transcript or the repository —
+# it lives only in GitHub encrypted secrets.
+#
+# ── WHY MANUAL DISPATCH ONLY ────────────────────────────────────────────────
+# This hits PRODUCTION with real authenticated turns and creates real sessions
+# and messages on the audit account. It must never fire on push or on a
+# schedule. `workflow_dispatch` is the whole trigger list, deliberately.
+#
+# ── REQUIRED SECRETS ────────────────────────────────────────────────────────
+#   AUDIT_EMAIL     the audit learner account's email
+#   AUDIT_PASSWORD  that account's password
+# Set at: Settings → Secrets and variables → Actions → New repository secret.
+# GitHub masks these in logs. The sweep never prints them.
+name: audit-sweep
+
+on:
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: 'Subject KG to sweep (physics | chemistry)'
+        required: false
+        default: 'physics'
+      limit:
+        description: 'How many topics, in KG order'
+        required: false
+        default: '8'
+      concurrency:
+        description: 'Topics in flight at once'
+        required: false
+        default: '6'
+
+# One sweep at a time: concurrent runs would sign in as the same learner and
+# end each other's sessions, which is exactly the state contamination the
+# sweep opens by clearing.
+concurrency:
+  group: audit-sweep
+  cancel-in-progress: false
+
+jobs:
+  sweep:
+    name: engine invariants against production
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fail early if the credentials are not configured
+        env:
+          AUDIT_EMAIL: ${{ secrets.AUDIT_EMAIL }}
+          AUDIT_PASSWORD: ${{ secrets.AUDIT_PASSWORD }}
+        run: |
+          if [ -z "$AUDIT_EMAIL" ] || [ -z "$AUDIT_PASSWORD" ]; then
+            echo "::error::AUDIT_EMAIL / AUDIT_PASSWORD are not set as repository secrets."
+            echo "Add them under Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+          echo "credentials present (values masked)"
+
+      - name: Run the sweep
+        id: sweep
+        env:
+          AUDIT_EMAIL: ${{ secrets.AUDIT_EMAIL }}
+          AUDIT_PASSWORD: ${{ secrets.AUDIT_PASSWORD }}
+        run: |
+          set -o pipefail
+          # The sweep exits non-zero on real findings AND on an inconclusive
+          # run. Both are results worth reading, so capture the code rather
+          # than letting the step abort before the summary is written.
+          set +e
+          npx tsx scripts/audit/engine-sweep.ts \
+            --subject '${{ inputs.subject }}' \
+            --limit '${{ inputs.limit }}' \
+            --concurrency '${{ inputs.concurrency }}' 2>&1 | tee sweep-output.txt
+          echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          set -e
+
+      - name: Publish the result to the run summary
+        if: always()
+        run: |
+          {
+            echo '## Engine sweep — ${{ inputs.subject }}, limit ${{ inputs.limit }}'
+            echo
+            echo '```'
+            cat sweep-output.txt 2>/dev/null || echo '(no output captured)'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the raw output as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sweep-output
+          path: sweep-output.txt
+          retention-days: 30
+
+      - name: Reflect the sweep's own verdict in the job status
+        if: always()
+        run: |
+          code='${{ steps.sweep.outputs.exit_code }}'
+          # Non-zero means findings, or that topics never ran. Either way the
+          # run must not read as a pass — that false green is the defect this
+          # sweep's reporting was fixed to prevent.
+          if [ "$code" != "0" ]; then
+            echo "::warning::sweep exited ${code} — findings, or an inconclusive run. Read the summary."
+            exit 1
+          fi
+          echo "sweep clean"
