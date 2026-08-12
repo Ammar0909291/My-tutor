@@ -430,3 +430,66 @@ describe('production defects D1, D2, D3', () => {
     expect(block).not.toContain('no progress of any kind is recorded for it')
   })
 })
+
+/**
+ * DEIXIS NAMES NOTHING — AND A BOGUS EXCURSION FREEZES THE LADDER.
+ *
+ * Measured in production, corpus audit Topic 3. The learner typed the most
+ * ordinary request there is:
+ *
+ *   "can you show me what that looks like"
+ *
+ * and the runtime logged:
+ *
+ *   [excursion] { unresolvedTopic: 'what that looks like',
+ *                 transition: 'continued', active: true, turns: 4 }
+ *
+ * "what that looks like" is deixis: "that" points back at what is already
+ * being taught, so nothing new is named. But an OPEN EXCURSION PAUSES THE
+ * LESSON — `turnCountsForLesson` freezes the mastery ladder while one runs — so
+ * the phase stayed at OBSERVE for the rest of the session and every graded
+ * correct answer after that counted for nothing.
+ *
+ * `work` and `mean` were already treated as task verbs for exactly this reason
+ * ("how that works", "what this means" both correctly returned null). The
+ * perception verbs were simply missing from the same family.
+ */
+describe('deixis opens no excursion', () => {
+  const TAUGHT = 'Measurement Errors and Uncertainty. uncertainty ruler tool division random systematic'
+
+  for (const msg of [
+    'can you show me what that looks like',
+    'show me what that looks like',
+    'what does that look like',
+    'how that works',
+    'what this means',
+    'can you show me an example',
+    'what does this look like in real life',
+  ]) {
+    it(`names nothing: ${JSON.stringify(msg)}`, () => {
+      expect(namedTopicUnknownTo(msg, TAUGHT)).toBeNull()
+    })
+  }
+
+  // The other half. A filter that silences deixis by silencing everything
+  // would re-break every genuine off-topic question this file exists for.
+  for (const [msg, expected] of [
+    ['explain photosynthesis', 'photosynthesis'],
+    ['what causes friction?', 'friction'],
+    ['what is thermal conductivity', 'thermal conductivity'],
+  ] as const) {
+    it(`still resolves ${JSON.stringify(msg)}`, () => {
+      const r = namedTopicUnknownTo(msg, TAUGHT)
+      expect(r).not.toBeNull()
+      expect(r!.title.toLowerCase()).toContain(expected)
+    })
+  }
+
+  it('"sound" survives — it is a real physics topic, not a perception verb', () => {
+    // The reason `sound` is deliberately absent from the discourse list: adding
+    // it with the other perception words would make "explain sound" name
+    // nothing, and sound is a whole domain of the physics curriculum.
+    expect(namedTopicUnknownTo('explain sound', TAUGHT)).not.toBeNull()
+    expect(namedTopicUnknownTo('tell me about sound waves', TAUGHT)).not.toBeNull()
+  })
+})

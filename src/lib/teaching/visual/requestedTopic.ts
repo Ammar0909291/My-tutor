@@ -235,6 +235,22 @@ const DISCOURSE_NOUNS = new Set([
   // task verbs — what to DO, never what it is ABOUT
   'solve', 'calculate', 'explain', 'understand', 'learn', 'study', 'know',
   'mean', 'work', 'do',
+  // PERCEPTION VERBS — what something LOOKS LIKE, never what it is.
+  //
+  // Measured in production: "can you show me what that looks like" extracted
+  // the topic "what that looks like" and opened an unresolved-topic excursion
+  // that stayed ACTIVE for four turns. An open excursion PAUSES the lesson, so
+  // `turnCountsForLesson` froze the mastery ladder at OBSERVE for the rest of
+  // the session — every graded correct answer after that counted for nothing.
+  //
+  // The phrase is deixis: "that"/"this" point back at what is already being
+  // taught, so nothing is named at all. `work` and `mean` are already in this
+  // list for exactly this reason ("how that works", "what this means" both
+  // correctly return null); the perception verbs were simply missing.
+  //
+  // `sound` is deliberately EXCLUDED: it is a real physics topic, and adding it
+  // would make "explain sound" resolve to nothing.
+  'look', 'seem', 'appear', 'like',
   // position words, safe here because one surviving word is enough
   'next', 'last', 'first', 'previous', 'other',
   // WHAT KIND OF PRESENTATION, not what subject.
