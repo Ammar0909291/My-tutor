@@ -3628,3 +3628,87 @@ both outside what this session can reach:
    saturated after `516bcf1` deploys. It stops the seeding/healing, so it is a
    trade, not a fix — but a tutor that cannot answer is worse than a moat that
    is not yet complete.
+
+---
+
+# ✅ E6 FULLY ROOT-CAUSED — TWO INDEPENDENT FAULTS, BOTH MEASURED
+
+## Fault 1 — the 737 orphans are STALE, not damaged
+
+They cannot be repaired from current seed data, because they are identities
+from a RETIRED slug scheme. Side by side for `phys.meas.units`:
+
+| canonicalSlug | created | content |
+|---|---|---|
+| `phys.meas.units:misconception_probe:en:high:developing` | 2026-08-11 | **yes** |
+| `phys.meas.units:mcq:en:high` | 2026-07-27 | no |
+| `phys.meas.units:checkpoint:en:high` | 2026-07-27 | no |
+| `phys.meas.units:short_answer:en:high` | 2026-07-27 | no |
+| `phys.meas.units:misconception_probe:en:high` | 2026-07-27 | no |
+
+The hollow rows carry the **4-part legacy slug**; the working row carries the
+**5-part Item-6 slug with a difficulty segment**. The bootstrap iterates
+CURRENT slugs, which no longer include the 4-part form — so those identities
+are unreachable by it, forever, by construction. My earlier "self-heal" fix
+was correct in shape and can never touch these particular rows.
+
+**This also explains the 3,123 vs 2,920 discrepancy** recorded as an open
+question two iterations ago: the surplus is the retired scheme's leftovers
+sitting alongside the current one. Question closed.
+
+## Fault 2 — the bootstrap has NEVER completed. Not once, in 24h.
+
+Searched the full 24-hour log window for `asset bootstrap complete`:
+**zero matches.** Meanwhile "seeding missing assets…" is logged on nearly
+every request. It starts constantly and finishes never, which is why
+`2379/2920` has been frozen for weeks.
+
+Two sufficient causes, both real:
+1. the pooler flaps, and until this session the run aborted on the first
+   failure (fixed across `10188af` / `516bcf1` / `560b0d2`); and
+2. **cold-start background seeding is the wrong mechanism on serverless.**
+   `register()` fires `bootstrapAssets()` and does not await it; the lambda
+   freezes once the response is sent. A fire-and-forget task needing ~1,500
+   writes cannot finish inside an invocation that ends in milliseconds.
+
+Cause 2 is structural. No amount of added resilience fixes it — the four
+resilience fixes shipped today make each attempt cheaper and non-aborting,
+which is necessary but not sufficient.
+
+## What actually closes E6
+
+Production is missing ~541 seed identities AND most concepts' gradeable
+probes. `phys.meas.units` holds 1 gradeable probe where the repo holds 4-5.
+The gate therefore runs dry and falls back to prose — E6 × 12.
+
+The fix is to seed the catalogue by a mechanism that can COMPLETE:
+
+- **`npx tsx scripts/brain/seed-knowledge-assets.ts` run with a real
+  `DATABASE_URL`** — idempotent, completes in one run, no lambda lifetime
+  limit. This is the recommended action and it needs an environment holding
+  the credential.
+- or bounded per-request batches behind an admin endpoint, if it must live in
+  the app.
+
+## Recommended production write, NOT executed
+
+The 737 stale ACTIVE identities should be DEPRECATED. They serve nothing (no
+content row can be served), they inflate every completeness count, and they
+make `findBestProbe` consider rows that can never satisfy it:
+
+```sql
+UPDATE asset_identity ai SET status='DEPRECATED',
+  "deprecationReason"='Retired pre-Item-6 slug scheme (no difficulty segment); hollow since 2026-07-27',
+  "updatedAt"=now()
+WHERE ai.family='PROBE' AND ai.status='ACTIVE'
+  AND NOT EXISTS (SELECT 1 FROM probe_assets pa WHERE pa."assetId"=ai."assetId");
+```
+
+Held for owner approval rather than executed: 737 rows is a materially larger
+blast radius than the single PII row approved earlier, even though the write
+is reversible and the rows are provably unservable.
+
+## Status
+
+VERIFIED 1/424 — unchanged. E6 is now fully explained, with the closing action
+identified and outside this session's reach.
