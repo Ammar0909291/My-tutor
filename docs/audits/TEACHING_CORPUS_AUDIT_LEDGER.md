@@ -1853,3 +1853,110 @@ Both would have silently mis-graded real learners:
 5. Standing, unfixed: free-text answers still produce no evidence when the model
    omits the SIGNAL. Decide whether to grade them deterministically too, or to
    make the ladder tolerate their absence.
+
+---
+
+# ✅ THE LADDER CLIMBS — first movement in this entire audit
+
+Clean session `cmspx58sl0001lg04bfk5wr2k`, real production, commit `23695038`
+holding the learner alias.
+
+| turn | learner | phase | note |
+|------|---------|-------|------|
+| 1 | free-text correct answer | OBSERVE | no MCQ pending ⇒ nothing to grade, and no SIGNAL. **The residual gap, visible.** |
+| 2 | "ok i think i understand, can you give me a question to try" | OBSERVE | tutor asks an MCQ (force → `[M][L][T]⁻²`) |
+| 3 | **"b"** | **DEMONSTRATE** | **the ladder moved for the first time** |
+| 4 | "ok give me another question" | **GUIDE** | climbed again |
+
+Deterministic MCQ grading works end to end in production. Turn 1 is the honest
+counter-example: a correct FREE-TEXT answer still produces no evidence, exactly
+as recorded when that bound was written.
+
+---
+
+# 🔴 THE WAVE-INTERFERENCE ANOMALY — SOLVED (`22dc4852`)
+
+It reproduced on turn 4, **byte-for-byte identical** to the first occurrence in
+a different session. That is what identified it as a stored artefact rather than
+a model hallucination. The response metadata named it outright:
+
+```
+provider          = memory
+memoryServingMode = exact_match
+memoryAssetId     = f22e5673-4b1f-473a-bec8-4fbb9637c0c0
+memoryConceptId   = phys.meas.dimensions
+memoryConfidence  = 75
+```
+
+> *"Mohammad Suaib, wave interference happens when two water waves overlap on a
+> pond… Good question — now, back to Dimensional Analysis, let's examine a
+> physical formula…"*
+
+That asset id had been sitting in the CUE logs as an `explanationMemory` hit on
+**every turn of this lesson**, in every session, since before this investigation
+began.
+
+## Root cause: the capture gate checks WELL-FORMED, never REUSABLE
+
+Real concept id, supported language, valid kind, long enough, no placeholder,
+not degenerate — it passed everything. But a captured asset is by definition
+replayed to a DIFFERENT learner in a DIFFERENT session, and two things make this
+text unusable that way:
+
+1. **It addresses one learner BY NAME.** A shared asset carrying a learner's
+   name leaks it to every other learner served that asset. This is the audit
+   mandate's *"never store verbatim learner identity data inside shared teaching
+   assets"* — violated by the capture path itself. **This is a MECHANISM
+   defect**: it would embed ANY learner's name, and here it demonstrably did.
+   *(Distinct from the earlier retracted privacy claim, which was about whose
+   name it was. This is about the pipeline that put a name there at all.)*
+2. **It is turn-scoped discourse** — an answer to a question asked in that
+   session plus a steer back to the lesson. Replayed to anyone else it is a
+   non-sequitur, which is exactly how it read.
+
+The route now passes the learner's profile name into the gate, so the name check
+is exact rather than inferred.
+
+## Two of my own mistakes the tests caught before they shipped
+
+- A **shape heuristic** for vocatives (capitalised word + comma) rejected
+  *"Speed, distance and time are all related…"* — a legitimate explanation. It
+  would have quietly starved the capture pipeline, which is the moat this
+  subsystem exists to build. **Removed rather than tuned:** a name cannot be
+  told from a capitalised common noun without knowing the name. The resulting
+  limit is stated in the code, not hidden.
+- The name regex wrapped `\b` unconditionally, so a name ending in a non-word
+  character (`"A.J. (Bob)"`) never matched **and the leak shipped**. Boundaries
+  are now applied only where the name has a word character to bound.
+
+## Open, and stated rather than papered over
+
+- **On-topic checking is NOT implemented.** The offending asset's second
+  paragraph is genuinely about dimensional analysis, so vocabulary overlap would
+  have passed it and a fuzzy semantic test would reject good assets.
+- **OWNER ACTION — the offending row is still ACTIVE and still serving.** The
+  gate stops NEW captures; it cannot retract what is already stored. This
+  session cannot reach the database (Supabase MCP lists 0 projects). Deprecating
+  `f22e5673-4b1f-473a-bec8-4fbb9637c0c0` is one statement, and until it happens
+  every `phys.meas.dimensions` learner can be served it.
+- **A survey of existing ACTIVE assets for the same defect has NOT been done**,
+  for the same reason. Production holds 1,589 ACTIVE explanation rows; how many
+  carry a name or session-bound discourse is unknown and worth one query.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| IN PROGRESS | 1 — `phys.meas.dimensions` |
+| REMAINING | 422 |
+| Global fixes this run | 20 |
+
+## NEXT EXACT ACTION
+1. Confirm `22dc4852` READY.
+2. Resume the climb on a clean session: MCQ answers only, through CHECK and
+   PRACTICE, and confirm mastery verifies at `practiceCorrect >= 2` — the
+   offline prediction is **six correct answers → TRANSFER, check 1, practice 2**.
+3. Confirm the completion card appears ONLY then (the `648480bc` prose rule
+   should suppress any earlier claim).
+4. Read `[ladder]`'s new `move` / `mcqAsked` fields to quantify how often a gate
+   turn asks WITHOUT an MCQ — that is the residual evidence gap.
+5. Then Topic 2 VERIFIED + moat, then Topic 3 `phys.meas.errors`.
