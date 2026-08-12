@@ -2365,6 +2365,7 @@ a clean session.** Clearing a blocker alone is never sufficient.
 | **Blocker** | Chromium fails `net::ERR_CONNECTION_RESET` on EVERY host through this sandbox's egress proxy — verified against `example.com`, so not app-specific. |
 | **Required action** | Run `scripts/audit/capture-topic.ts` from any machine with ordinary internet. |
 | **Explicitly NOT done** | Disabling TLS verification, which would trade a real security property for a picture. |
+| **NARROWED 2026-08-12** | The blocker was recorded too broadly. Only the NETWORK is blocked — RENDERING works, so `file://` screenshots are possible (`scripts/audit/shot.mjs`). Real turns are captured over HTTP with curl, written into a local page and shot. That is enough to see the tutor's real text and the real figure payload as drawn; it is NOT the product's own screen, so it cannot show layout, theming, or whether a figure sits beside the right message. Those still need a machine with ordinary internet. |
 | **What it does NOT block** | The audit itself — every finding is from real authenticated HTTP with full response text recorded here. |
 
 ## Retry log
