@@ -3735,129 +3735,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           //
           // So a learner gets the safety floor always, and enabling the flag
           // still upgrades them to the full rule set with no duplicated work.
-          const runFullVerifier = eosFlags.outputVerifier
-          console.log('[affirm-guard-scope]', {
-            outputVerifierFlag: runFullVerifier,
-            verifierMode: eosFlags.verifierMode,
-          })
-          if (runFullVerifier) {
-            // Move mapping. RECOVER and CLOSE are checked FIRST and are not
-            // derivable from evidenceMoveHoisted: decideNextMove() returns
-            // 'teach' on a recovery turn, and the session layer owns CLOSING
-            // entirely. Before this, every recovery turn reached the verifier
-            // labelled TEACH and every closing turn as whatever the concept
-            // ladder happened to say — so V-REC and V-Q2's RECOVER/CLOSE arms
-            // were unreachable in production, and V-CLOSE could never fire.
-            const { toPolicyMove, maxQuestionsFor } = await import('@/lib/kernel/policyMove')
-            const verifierMove = toPolicyMove({
-              recoveryKey: recoveryKeyHoisted,
-              episodePhase: sessionEpisodeHoisted?.phase,
-              ladderMove: evidenceMoveHoisted,
-            })
-            const ctx = buildVerifierContext({
-              contentRegister,
-              move: verifierMove,
-              phase: conversationStateHoisted?.phase ?? null,
-              stageCeiling: evidenceStageCeilingHoisted,
-              vocabularyUnlocked: !firstLessonActiveHoisted,
-              formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
-              recoveryActive: recoveryKeyHoisted !== null,
-              affectBand: frustrationBandHoisted ?? undefined,
-              maxQuestions: maxQuestionsFor(verifierMove),
-              maxParagraphs: null,
-              maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
-              vocabularyBans: [],
-              assessmentActive: false,
-              lessonCompletionAuthorized: false,
-              sessionFailureCount: snapshotSessionFailureCount,
-              learnerText: message,
-              reactMandated: true,
-              legalTags: ['VISUAL', 'HINT', 'INLINE_PRACTICE', 'WE', 'LESSON'],
-              bannedConceptTerms: [],
-              noCapabilities: capabilityStateHoisted
-                ? (await import('@/lib/teaching/capabilityModel')).noCapabilities(capabilityStateHoisted)
-                : [],
-              // S1 — history-aware LOG rules (additive; no behavior change
-              // until these are promoted to REJECT per the design report).
-              turnHistory: snapshotTurnHistory,
-              recoveryKey: recoveryKeyHoisted,
-              phaseAfter: conversationStateHoisted?.phase ?? null,
-              // S2 — objective-model LOG rules (additive).
-              objectiveCompleted: objectiveStateHoisted
-                ? (await import('@/lib/teaching/objectiveModel')).isObjectiveLockedFromAssessment(objectiveStateHoisted)
-                : undefined,
-              objectiveStalled: objectiveStateHoisted
-                ? (await import('@/lib/teaching/objectiveModel')).hasStalled(objectiveStateHoisted)
-                : undefined,
-            })
-            const gate = await verifierGate({
-              draftText: cleanText,
-              ctx,
-              mode: eosFlags.verifierMode,
-              learnerText: message,
-              fallbackChain: ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE'],
-              rerender: async (violationAppendix) => {
-                const routed = await routeAI(
-                  [...historyMessages, { role: 'user', content: message }],
-                  // The violation appendix is English machine instruction and
-                  // correctly stays English — but it lands AFTER the language
-                  // contract, which is precisely the burial this whole fix
-                  // exists to prevent. Re-appending the same block restores
-                  // the contract to last position on repair turns, which are
-                  // higher-risk than ordinary ones: the model has already
-                  // produced output the runtime rejected. '' for English, so
-                  // English re-renders are unchanged.
-                  systemPrompt + violationAppendix + outputLanguageBlockHoisted,
-                  country,
-                  2048, // see the primary routeAI() call above for why this was raised from 1024
-                  teachingLang,
-                  { userId, subject: learnSession.subject.slug },
-                )
-                let t = routed.text
-                if (contentRegister === 'beginner') t = stripIpaNotation(t)
-                return t
-              },
-            })
-            cleanText = gate.finalText
-            eosVerifierEvents = gate.events
-            eosVerifierUsedTemplate = gate.usedTemplate
-            eosVerifierAttempts = gate.attempts
-            // Capability evidence (design §4): the answered turn's outcome
-          // updates operational skills. Attribution honesty lives in
-          // observationsFromTurn — a compound-item FAILURE updates nothing,
-          // because failure proves the conjunction failed, not which conjunct.
-          if (capabilityStateHoisted && requiredCapabilitiesHoisted.length > 0) {
-            const capMod2 = await import('@/lib/teaching/capabilityModel')
-            const obs = capMod2.observationsFromTurn({
-              requiredCapabilities: requiredCapabilitiesHoisted,
-              correct: teachingSignal?.correctness ?? null,
-            })
-            if (obs.length > 0) {
-              // Append: a single turn can carry BOTH a stated inability and an
-              // answered outcome. Replacing would silently drop the former.
-              capabilityObservationsHoisted = [...capabilityObservationsHoisted, ...obs]
-              capabilityStateHoisted = capMod2.foldCapabilityState(capabilityStateHoisted, obs)
-            }
-          }
-          // K5 metrics: the rules and the loop already existed; nothing
-            // aggregated them, so RS P-3's violation SLO was unmeasurable.
-            const { foldVerifierMetrics, verifierTags } = await import('@/lib/kernel/verifier')
-            const turnOutcome = {
-              mode: gate.mode,
-              decision: gate.loopResult.decision,
-              attempts: gate.attempts,
-              usedTemplate: gate.usedTemplate,
-            }
-            eosVerifierMetricsHoisted = foldVerifierMetrics(
-              (snapshot?.verifierMetrics as Record<string, unknown> | undefined) as never,
-              turnOutcome,
-            )
-            eosVerifierTagsHoisted = verifierTags(turnOutcome)
-            snapshotRederivers.push((fresh) => ({
-              verifierMetrics: foldVerifierMetrics(fresh.verifierMetrics as never, turnOutcome),
-            }))
-          } else {
-            // THE SAFETY FLOOR, run directly rather than through the full gate.
+            // THE SAFETY FLOOR — UNCONDITIONAL, ahead of the flagged gate.
+            //
+            // This began life inside the `else`, so it ran only when the full
+            // verifier was disabled. Measured in production: a turn that
+            // vAffirm rejects deterministically ("Spot on" answering a
+            // proposal, no distinguishing move) was served to the learner
+            // unchanged. The full gate was running instead — in a mode that
+            // logs without replacing — and the floor never executed.
+            //
+            // A safety rule whose execution depends on which mode another
+            // subsystem happens to be in is not a floor. It runs first, always,
+            // and the full gate then runs on whatever survives.
             //
             // Reusing `verifierGate` with a deliberately permissive context was
             // tried first and abandoned on inspection: `maxQuestions` is typed
@@ -3897,7 +3786,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // explanations. One line, no behaviour change — a safety rule whose
             // silence is ambiguous is not a safety rule you can trust.
             console.log('[affirm-guard-scope]', {
-              branch: 'always-on',
+              branch: 'unconditional',
               considered: true,
               violated: firstViolation !== null,
             })
@@ -4037,6 +3926,128 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 usedTemplate: stillViolating,
               })
             }
+
+          const runFullVerifier = eosFlags.outputVerifier
+          console.log('[affirm-guard-scope]', {
+            outputVerifierFlag: runFullVerifier,
+            verifierMode: eosFlags.verifierMode,
+          })
+          if (runFullVerifier) {
+            // Move mapping. RECOVER and CLOSE are checked FIRST and are not
+            // derivable from evidenceMoveHoisted: decideNextMove() returns
+            // 'teach' on a recovery turn, and the session layer owns CLOSING
+            // entirely. Before this, every recovery turn reached the verifier
+            // labelled TEACH and every closing turn as whatever the concept
+            // ladder happened to say — so V-REC and V-Q2's RECOVER/CLOSE arms
+            // were unreachable in production, and V-CLOSE could never fire.
+            const { toPolicyMove, maxQuestionsFor } = await import('@/lib/kernel/policyMove')
+            const verifierMove = toPolicyMove({
+              recoveryKey: recoveryKeyHoisted,
+              episodePhase: sessionEpisodeHoisted?.phase,
+              ladderMove: evidenceMoveHoisted,
+            })
+            const ctx = buildVerifierContext({
+              contentRegister,
+              move: verifierMove,
+              phase: conversationStateHoisted?.phase ?? null,
+              stageCeiling: evidenceStageCeilingHoisted,
+              vocabularyUnlocked: !firstLessonActiveHoisted,
+              formulaUnlocked: !firstLessonActiveHoisted && contentRegister !== 'beginner',
+              recoveryActive: recoveryKeyHoisted !== null,
+              affectBand: frustrationBandHoisted ?? undefined,
+              maxQuestions: maxQuestionsFor(verifierMove),
+              maxParagraphs: null,
+              maxNewTerms: contentRegister === 'beginner' ? 1 : 2,
+              vocabularyBans: [],
+              assessmentActive: false,
+              lessonCompletionAuthorized: false,
+              sessionFailureCount: snapshotSessionFailureCount,
+              learnerText: message,
+              reactMandated: true,
+              legalTags: ['VISUAL', 'HINT', 'INLINE_PRACTICE', 'WE', 'LESSON'],
+              bannedConceptTerms: [],
+              noCapabilities: capabilityStateHoisted
+                ? (await import('@/lib/teaching/capabilityModel')).noCapabilities(capabilityStateHoisted)
+                : [],
+              // S1 — history-aware LOG rules (additive; no behavior change
+              // until these are promoted to REJECT per the design report).
+              turnHistory: snapshotTurnHistory,
+              recoveryKey: recoveryKeyHoisted,
+              phaseAfter: conversationStateHoisted?.phase ?? null,
+              // S2 — objective-model LOG rules (additive).
+              objectiveCompleted: objectiveStateHoisted
+                ? (await import('@/lib/teaching/objectiveModel')).isObjectiveLockedFromAssessment(objectiveStateHoisted)
+                : undefined,
+              objectiveStalled: objectiveStateHoisted
+                ? (await import('@/lib/teaching/objectiveModel')).hasStalled(objectiveStateHoisted)
+                : undefined,
+            })
+            const gate = await verifierGate({
+              draftText: cleanText,
+              ctx,
+              mode: eosFlags.verifierMode,
+              learnerText: message,
+              fallbackChain: ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE'],
+              rerender: async (violationAppendix) => {
+                const routed = await routeAI(
+                  [...historyMessages, { role: 'user', content: message }],
+                  // The violation appendix is English machine instruction and
+                  // correctly stays English — but it lands AFTER the language
+                  // contract, which is precisely the burial this whole fix
+                  // exists to prevent. Re-appending the same block restores
+                  // the contract to last position on repair turns, which are
+                  // higher-risk than ordinary ones: the model has already
+                  // produced output the runtime rejected. '' for English, so
+                  // English re-renders are unchanged.
+                  systemPrompt + violationAppendix + outputLanguageBlockHoisted,
+                  country,
+                  2048, // see the primary routeAI() call above for why this was raised from 1024
+                  teachingLang,
+                  { userId, subject: learnSession.subject.slug },
+                )
+                let t = routed.text
+                if (contentRegister === 'beginner') t = stripIpaNotation(t)
+                return t
+              },
+            })
+            cleanText = gate.finalText
+            eosVerifierEvents = gate.events
+            eosVerifierUsedTemplate = gate.usedTemplate
+            eosVerifierAttempts = gate.attempts
+            // Capability evidence (design §4): the answered turn's outcome
+          // updates operational skills. Attribution honesty lives in
+          // observationsFromTurn — a compound-item FAILURE updates nothing,
+          // because failure proves the conjunction failed, not which conjunct.
+          if (capabilityStateHoisted && requiredCapabilitiesHoisted.length > 0) {
+            const capMod2 = await import('@/lib/teaching/capabilityModel')
+            const obs = capMod2.observationsFromTurn({
+              requiredCapabilities: requiredCapabilitiesHoisted,
+              correct: teachingSignal?.correctness ?? null,
+            })
+            if (obs.length > 0) {
+              // Append: a single turn can carry BOTH a stated inability and an
+              // answered outcome. Replacing would silently drop the former.
+              capabilityObservationsHoisted = [...capabilityObservationsHoisted, ...obs]
+              capabilityStateHoisted = capMod2.foldCapabilityState(capabilityStateHoisted, obs)
+            }
+          }
+          // K5 metrics: the rules and the loop already existed; nothing
+            // aggregated them, so RS P-3's violation SLO was unmeasurable.
+            const { foldVerifierMetrics, verifierTags } = await import('@/lib/kernel/verifier')
+            const turnOutcome = {
+              mode: gate.mode,
+              decision: gate.loopResult.decision,
+              attempts: gate.attempts,
+              usedTemplate: gate.usedTemplate,
+            }
+            eosVerifierMetricsHoisted = foldVerifierMetrics(
+              (snapshot?.verifierMetrics as Record<string, unknown> | undefined) as never,
+              turnOutcome,
+            )
+            eosVerifierTagsHoisted = verifierTags(turnOutcome)
+            snapshotRederivers.push((fresh) => ({
+              verifierMetrics: foldVerifierMetrics(fresh.verifierMetrics as never, turnOutcome),
+            }))
           }
         } catch (err) {
           // Fail-open: never break the turn on verifier failure.
