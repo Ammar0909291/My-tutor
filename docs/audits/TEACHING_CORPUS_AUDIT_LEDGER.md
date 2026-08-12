@@ -1960,3 +1960,98 @@ is exact rather than inferred.
 4. Read `[ladder]`'s new `move` / `mcqAsked` fields to quantify how often a gate
    turn asks WITHOUT an MCQ — that is the residual evidence gap.
 5. Then Topic 2 VERIFIED + moat, then Topic 3 `phys.meas.errors`.
+
+---
+
+# ✅✅ A LESSON WAS COMPLETED — the first in this audit
+
+Clean session `cmspxlv2o0001l80499tofjdx`, real production, real learner
+account. MCQ answers only, driven to the gate.
+
+| turn | phase | check | practice | verified |
+|------|-------|-------|----------|----------|
+| 1 | OBSERVE | 0 | 0 | false |
+| 2 | OBSERVE | 0 | 0 | false |
+| 3 | DEMONSTRATE | 0 | 0 | false |
+| 4 | GUIDE | 0 | 0 | false |
+| 5 | **CHECK** | 0 | 0 | false |
+| 6 | **PRACTICE** | **1** | 0 | false |
+| 7 | PRACTICE | 1 | **1** | false |
+| 8 | **TRANSFER** | **1** | **2** | **true** |
+
+```
+mastery       = { verified: true, phase: 'TRANSFER', checkCorrect: 1,
+                  practiceCorrect: 2, completionSuppressed: false,
+                  gatePending: false }
+lessonComplete= { complete: true, lessonTitle: 'Dimensional Analysis',
+                  mastered: ['phys.meas.dimensions'], fullyMastered: true,
+                  nextLessonOrder: 4 }
+```
+
+**This matches the offline prediction exactly** (six graded correct answers →
+TRANSFER, check 1, practice 2). Three fixes are now production-verified
+together:
+
+| commit | fix | evidence |
+|--------|-----|----------|
+| `13070945` | ladder froze at DEMONSTRATE | phases climbed past it |
+| `23695038` | SIGNAL never emitted ⇒ no evidence | counters moved on graded MCQs |
+| `648480bc` | completion claimed in prose without evidence | **no completion card appeared on ANY of turns 1–7**, and the real one appeared exactly at turn 8 |
+
+*Note: `completedLessons` in that response body is still `[]` — the client
+PATCHes completion separately. Not asserting the DB row was written; that was
+not observed.*
+
+## RETRACTED before it was reported — my seventh instrument error
+
+Mid-run the tutor replied *"since your reply was just a single letter 'a', walk
+me through how you figured that out"*, which looked like the product punishing a
+learner for answering the question as designed. **It is my harness.**
+`LessonScreen.tsx` (~5131) sends `option` — the FULL OPTION TEXT — when a
+learner taps a button; only my script sends a bare letter. The tutor's response
+to an unexplained single character is reasonable.
+
+Both paths are covered by the grader and both are tested: full option text via
+the containment rule, typed letters via the letter rule.
+
+---
+
+# TOPIC 2 — `phys.meas.dimensions` — **NOT VERIFIED**, and the reason is specific
+
+Teaching quality across this run was strong: the geometry/physics homonym
+handled by contrast rather than dismissal, "speed is L" corrected with a
+concrete counter-case, "2L" corrected to an exponent with the type-vs-count
+distinction, and the mastery gate reached honestly.
+
+**But the wave-interference asset served TWICE MORE during this session**, on
+`phys.meas.dimensions`, mid-lesson. A topic cannot be marked VERIFIED while a
+wrong-topic, name-carrying asset is still being served into it.
+
+`22dc4852` stops NEW captures of this kind. It cannot retract what is already
+stored. **Topic 2 is therefore BLOCKED on owner action**, not on any remaining
+code defect I have found:
+
+> Deprecate `asset_identity` row `f22e5673-4b1f-473a-bec8-4fbb9637c0c0`
+> (concept `phys.meas.dimensions`, family EXPLANATION, currently ACTIVE).
+> One statement. Until then every learner on this concept can be served it.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` |
+| REMAINING | 422 |
+| Global fixes this run | 20 |
+
+## NEXT EXACT ACTION
+1. Read `[ladder]`'s `move` / `mcqAsked` fields from this session's logs to
+   quantify how often a gate turn asks WITHOUT an MCQ — the residual evidence
+   gap, and the last thing standing between "MCQ answers climb" and "any
+   correct answer climbs".
+2. Start **Topic 3 — `phys.meas.errors`** ("Measurement Errors and
+   Uncertainty"). Topic 2 stays BLOCKED, not abandoned; re-verify it the moment
+   the asset is deprecated.
+3. Owner queue, unchanged and growing:
+   - deprecate `f22e5673-…` (blocks Topic 2);
+   - survey the 1,589 ACTIVE explanation rows for names / session-bound
+     discourse — the same capture path produced all of them;
+   - recurrent Prisma P1008 timeouts.
