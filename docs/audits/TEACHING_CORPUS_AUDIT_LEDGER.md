@@ -1676,3 +1676,84 @@ turn 2 and NOT turns 1 and 3, which were substantive correct answers.
      input is right and the transition or the PERSIST is wrong.
 3. Fix, add a regression test that fails on a frozen ladder, then resume Topic 2
    to its gate and mark VERIFIED.
+
+---
+
+# 🔴 ROOT CAUSE FOUND — NO LESSON WAS COMPLETABLE (`13070945`)
+
+The suspected P0 above is confirmed and fixed. **Found offline, with no
+provider and no database** — the production measurement pointed at it, but the
+proof needed neither.
+
+## The reproduction
+
+```
+10 correct answers, every turn asking a question
+  -> phase DEMONSTRATE, check 0, practice 0, demonstrated false
+the same 10 with ONE silent teach turn inserted
+  -> phase TRANSFER, check 1, practice 2, demonstrated true
+```
+
+## The cause
+
+`demonstrated` was set only inside the `else` of `if (askedQuestion)` — the
+code **equated ASKING with NOT TEACHING**. Good tutoring does both in one
+breath: explain, then end on a question. Every production turn measured in this
+audit did exactly that, so `demonstrated` was never set, and DEMONSTRATE→GUIDE
+is gated on it. With the ladder stuck below CHECK, `correctAtCheck` and
+`correctAtPractice` can never increment and `masteryVerifiedStrict` can never
+be true.
+
+**An earlier repair had already found DEMONSTRATE absorbing** and hoisted the
+transition out of the `succeeded` branch — but left it gated on this flag, so
+the freeze survived in a different form. That is why the new test asserts
+REACHABILITY end to end rather than any single transition: a test on one edge
+is precisely what let the previous repair look complete.
+
+## The fix, and what it deliberately does NOT do
+
+`deliveredTeaching` — the server's own decided move, not a guess from prose —
+is wired at BOTH fold sites so the fallback fold cannot disagree with the
+upstream one. Omitting it is byte-identical to previous behaviour, asserted
+rather than assumed.
+
+**It does not lower the mastery bar.** `demonstrated` asserts the TEACHER
+delivered, never that the learner learned. Pinned by tests: eight delivered
+teach turns with no correct answer leave both counters at 0; acknowledgements
+still buy nothing; wrong answers do not climb; a degraded outage template is
+still not a give. It draws the same boundary the acknowledgement path already
+draws — delivery phases advance on delivery, mastery gates on evidence.
+
+**Verified it engages:** `decideNextMove` returns `'show'` at DEMONSTRATE, so
+the real path supplies `deliveredTeaching = true`. A fix depending on a move the
+engine never chooses would be correct in isolation and inert in production.
+
+A drift guard caught the replay harness not modelling the new field — updated,
+because a replay that reproduces a fixed bug is worse than no replay.
+
+## Honest status
+
+- The offline reproduction and the fix are **proven**.
+- **Production verification has NOT been performed** — `13070945` was pushed
+  this turn and had not deployed when this entry was written. The suspected
+  cause of the production OBSERVE→OBSERVE freeze (turns 1–3 of session
+  `cmspvz1sa…`) is a MISSING SIGNAL, which is a SEPARATE question from this
+  one and is what the `[ladder]` diagnostic (`38d0f843`) still needs to answer.
+  Do not record this as closing the production symptom until both are read.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| IN PROGRESS | 1 — `phys.meas.dimensions` |
+| REMAINING | 422 |
+| Global fixes this run | 18 |
+
+## NEXT EXACT ACTION
+1. Confirm `13070945` READY.
+2. Clean session, answer correctly through the ladder, and read BOTH the
+   `[ladder]` line and the `mastery` object each turn.
+   - If `signalTag: false` on answer turns, the SIGNAL half is still open and
+     is its own defect — the ladder fix alone will not climb without evidence.
+   - If phases now climb OBSERVE→DEMONSTRATE→GUIDE→CHECK→PRACTICE→TRANSFER,
+     that is the first completable lesson this audit has seen.
+3. Then Topic 2 VERIFIED + moat, then Topic 3 `phys.meas.errors`.
