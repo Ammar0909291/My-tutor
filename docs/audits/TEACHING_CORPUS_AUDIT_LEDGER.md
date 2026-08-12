@@ -3327,3 +3327,106 @@ cannot do.
    from stored data alone, and it does not require driving a turn.
 3. Continue offline moat production: `phys.stat` (15), `phys.particle` (16),
    `qm` (19), `mod` (21), `em` (32) — 103 concepts remain.
+
+---
+
+# 🔴 P0 — A FINISHED LESSON WAS PERMANENTLY UNTEACHABLE (2026-08-12) — FIXED AND VERIFIED
+
+The owner changed the environment's network policy, so this container can now
+DRIVE production, not only observe it. The first thing playing a real learner
+found is the most serious defect in this audit.
+
+## What the learner experienced
+
+Real account, BRAND-NEW session, `mode: 'restart'` on
+`phys.meas.vector-addition`. Three different turns:
+
+| turn | learner said | tutor replied |
+|---|---|---|
+| 1 | "it moves faster i think" (wrong) | *"Let me ask you something concrete about Vector Addition and Resolution: what's one thing you notice or find surprising about what we just covered?"* |
+| 2 | "i dont know i dont get it" (distress) | **identical, byte for byte** |
+| 3 | "so when two people pull does the box go between them?" (**correct intuition**) | **identical, byte for byte** |
+
+A wrong answer, a cry for help, and a right answer all received the same 146
+characters. Turn 3 was essentially the correct idea and was not even
+acknowledged.
+
+## Root cause, from the runtime logs — not inferred
+
+```
+CUE decision = SERVE_LESSON_COMPLETE
+ruleId       = D0a-LESSON-ALREADY-COMPLETE
+rationale    = "No new teaching is legal for a finished lesson,
+                so no model call is required to answer."
+lessonCompleted = true  (source: contextSnapshot, confidence 1)
+RESPONSE provider=deterministic lessonKey=lesson:6 groq_invoked=false
+llmUsed: false
+```
+
+`lessonCompletedHoisted` reads
+`latestLessonAttempt(userId, subjectSlug, lessonKey)` — keyed on the LESSON,
+never the session — and D-0a refuses to teach a finished lesson ahead of every
+other rule. Re-opening the lesson created **no new attempt**: `mode` only ever
+selected the opening PROMPT text. So the newest attempt stayed COMPLETED
+forever and the concept became permanently unteachable for that learner, in
+every future session.
+
+**A student who finishes a lesson and comes back to revise it gets a dead
+tutor.** That is the most ordinary thing a student does.
+
+D-0a's own comment assumes the opposite — *"Starting a NEW lesson clears
+this"* — which is true for a DIFFERENT lesson and silently false for the SAME
+one. Revision is the same one.
+
+## Fix (`767943e`)
+
+`lesson-init` now re-opens the attempt when the learner explicitly re-enters:
+`restart` and `review` only; `resume` still delivers the close; `next` was
+never affected. Acts only when the newest attempt is COMPLETED, so an
+IN_PROGRESS attempt is never discarded. `openLessonAttempt` is idempotent.
+Advisory try/catch — a failed re-open must never cost the learner the lesson.
+
+Guard: `completedLessonIsReEnterable.test.ts`, 6 cases, honestly labelled a
+SOURCE assertion (the route needs DB + session + auth; Tier 3a fixtures do not
+exist). Right shape here: the defect was a MISSING CALL, not bad logic.
+
+## PRODUCTION VERIFICATION — PASSED
+
+Same account, same concept, fresh session, after `dpl_52juYjoT…`:
+
+> **"it moves faster i think"** → *"Claude, you are thinking about how much
+> effort it takes, but let's look at the actual path the wagon takes… Notice
+> how **A (3)** points one way and **B (4)** points another… we find the
+> combined path, the resultant **R (5)**… the length of R depends not just on
+> the numbers 3 and 4, but on the angle between them."*
+>
+> **"i dont know i dont get it"** → *"I hear you, Claude—it is completely
+> normal to find this confusing at first… if you walk 3 metres east and then 4
+> metres north, you have walked 7 metres. But your displacement… is only 5
+> metres… is your straight-line distance 7 kilometres or 5 kilometres?"*
+
+`provider: gemini` on both — real model calls where there were none. The
+misconception is corrected, the figure is referenced on screen, distress gets
+empathy then a re-teach, and the turn ends on a check question.
+
+**Bonus confirmation:** the tutor's own closing line — *"the length of R
+depends not just on the numbers 3 and 4, but on the angle between them"* — is
+exactly the insight the anti-recall probe authored in `8777a47` tests for.
+
+## Also observed this session, recorded not yet fixed
+
+1. **DB flakiness is real and learner-visible.** `/api/health` reported
+   `db:false` on 3/3 checks while Supabase answered instantly on a direct
+   query. Logs show `auth-authorize-lookup timed out after 8000ms` and
+   repeated `Socket timeout` from Prisma — sign-in failed several times before
+   succeeding. Infrastructure, not code.
+2. **`asset bootstrap: 2379/2920 seed identities present — seeding missing
+   assets…`** runs on cold start and is still incomplete.
+3. `NODE_USE_ENV_PROXY=1` is required for Node's built-in fetch to honour the
+   proxy — the sweep's "Host not i…" error was never the app.
+
+## NEXT EXACT ACTION
+1. Re-run the engine sweep now that production is drivable AND the
+   completed-lesson gate is fixed — the two blockers in front of E6.
+2. Continue playing the learner through Topic 3 `phys.meas.errors`.
+3. Moat: 103 concepts remain (em 32, mod 21, qm 19, particle 16, stat 15).
