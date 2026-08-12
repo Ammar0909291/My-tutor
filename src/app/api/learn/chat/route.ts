@@ -3964,11 +3964,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // is worse than a plain, safe turn.
               const stillViolating = vAffirm(repaired, affirmCtx) !== null
               if (stillViolating) {
-                const { chooseFallback, renderFallback } = await import('@/lib/kernel/verifier')
-                cleanText = renderFallback(
-                  chooseFallback(['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE']),
-                  { learnerText: message } as never,
-                )
+                // FAIL CLOSED, BUT STILL TEACH.
+                //
+                // The generic template ("Let's take one small step together…")
+                // is safe and says nothing, and it was what a real learner got
+                // when both attempts affirmed. Safety without teaching is half
+                // a fix: the learner asked a real question and received filler.
+                //
+                // So the last resort is built from the curriculum's OWN words —
+                // the concept-spine definition already retrieved above — wrapped
+                // in an explicit refusal to agree. Deterministic, correct by
+                // construction (it asserts only what the curriculum asserts),
+                // and it carries the distinction the drafts kept missing.
+                let spine: string | null = null
+                try {
+                  const { loadBlueprintContent } = await import('@/lib/curriculum/blueprintLoader')
+                  const cid = teachingConceptIdForRepair
+                  if (cid) {
+                    const bp = loadBlueprintContent(cid)
+                    if (bp.found) spine = bp.content.conceptSpine?.definition ?? null
+                  }
+                } catch { /* fall through to the generic template */ }
+
+                if (spine) {
+                  // One sentence of the authored definition — enough to answer,
+                  // short enough for a beginner.
+                  const firstSentence = spine.split(/(?<=[.!?])\s/)[0] ?? spine
+                  cleanText =
+                    "Let's check that one carefully rather than me just agreeing — " +
+                    'this is a place where it is easy to mix two things up.\n\n' +
+                    firstSentence.trim() + '\n\n' +
+                    'Tell me in your own words what part of that is different ' +
+                    'from what you were picturing.'
+                } else {
+                  const { chooseFallback, renderFallback } = await import('@/lib/kernel/verifier')
+                  cleanText = renderFallback(
+                    chooseFallback(['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE']),
+                    { learnerText: message } as never,
+                  )
+                }
                 eosVerifierUsedTemplate = true
               } else {
                 cleanText = repaired
