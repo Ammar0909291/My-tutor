@@ -1045,3 +1045,71 @@ defect of the same family as the affirmation problem.
 2. Then Topic 2 to Mastery.
 3. Escalated to owner (not blocking my loop): DB P1008 recurrence affecting a
    real learner; D4-PLACEMENT-PROBE compliance violations.
+
+---
+
+# ROOT CAUSE FOUND — the output verifier was skipped on every ASSEMBLED turn
+
+`4cf6a1ac`. This is the answer to "why did the affirmation guard never fire on
+audit turns", and it invalidates BOTH of my earlier hypotheses.
+
+## The measurement that settled it
+
+```
+[affirm-guard-entry] { assembled: true }
+provider=gemini  explanationMemoryServes=0  memoryServingMode=null
+fallback_reason="Brain decision"
+```
+
+## What was wrong
+
+The verifier block was gated on `if (!assembled)`, on the premise that an
+assembled turn is curated content needing no output verification.
+
+**The premise is false.** `assembled` only means a lesson was ASSEMBLED.
+Serving it additionally requires `serveFromMemory` (the `text = assembled.text`
+site), which the Brain can and does refuse — it escalates to the LLM while
+`assembled` stays non-null. So the LLM wrote the answer and the ENTIRE output
+verifier, including the affirmation safety floor, was skipped.
+
+That is exactly how *"Claude, exactly right!"* reached a learner on a proposal
+turn with no distinguishing move — while the same draft REJECTS deterministically
+offline. Both facts were true; the guard simply never ran.
+
+## Why this is the most important defect found so far
+
+Assembly succeeds MORE often as the moat grows. Under the old gate, **the
+better the asset library became, the more turns lost output verification** — a
+safety layer that decays precisely as the product improves. A regression test
+now pins that property directly, not just the symptom.
+
+## Hypotheses REJECTED along the way (kept, not deleted)
+
+| # | hypothesis | verdict |
+|---|-----------|---------|
+| 1 | "misconception screens never reach runtime" | FALSE — Blueprint register loads; its 4 MCs are all SI-naming |
+| 2 | "full gate running in shadow mode, floor never executes" | FALSE — `outputVerifierFlag: false`, floor was running |
+| 3 | "temporal dead zone throw swallowed by the catch" | FALSE — every variable declared hundreds of lines earlier |
+| 4 | "wrong deployment served the turn" | FALSE — log header names the correct deployment |
+| 5 | **"`assembled` truthy skips the block"** | **TRUE** |
+
+The `else`-placement fix (`e4a5c3c6`) and the unconditional floor were still
+correct and are kept; they were simply not the cause.
+
+## STATUS
+- Topic 1 `phys.meas.units` — **VERIFIED** (measured live; unaffected).
+- Topic 2 `phys.meas.dimensions` — **IN PROGRESS**, teaching strong on 5 probes,
+  but every one of those turns ran WITHOUT output verification. They must be
+  replayed now that the gate is fixed.
+
+## NEXT EXACT ACTION
+1. Wait for `4cf6a1ac`. Re-run the Topic 2 probe
+   `"ok so area would be L times L, so L squared right?"` on a clean session.
+2. Confirm `[affirm-guard-entry] { assembled: true, servedFromMemory: false,
+   willVerify: true }` and an `[affirm-guard]` decision line.
+3. Expected: the "exactly right!" opener is now REJECTED and repaired. Note the
+   design tension already recorded — the learner is RIGHT here, so the repair
+   must add precision, not manufacture a false correction. If the repair
+   invents a disagreement, that is the next defect to fix.
+4. Then Topic 2 → Examples → Guided → Mastery as an intermediate-English
+   learner, and only then VERIFIED.
