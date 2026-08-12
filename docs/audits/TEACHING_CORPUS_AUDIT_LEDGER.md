@@ -3234,3 +3234,96 @@ authored data, not new test files.)
 3. When production access exists: run the sweep (it now exits non-zero unless
    topics actually ran), require `E6 = 0`, then drive Topic 3
    `phys.meas.errors` to `verified`.
+
+---
+
+# B-4/B-5 PARTIALLY UNBLOCKED — production is READABLE, not DRIVABLE (2026-08-12)
+
+## The new path
+
+The container's own egress still returns `403 CONNECT` for
+`my-tutor-flame.vercel.app:443` — retried, unchanged. But the **Vercel MCP
+reaches production over its own network path**, and Supabase MCP reaches the
+database. Both were tried and both work:
+
+```
+mcp__Vercel__web_fetch_vercel_url  https://my-tutor-flame.vercel.app/api/health
+  -> 200 {"status":"ok","db":true, ...}
+```
+
+**What this does NOT unblock.** `web_fetch_vercel_url` takes a URL and nothing
+else — no method, no body, no cookie jar. Sign-in is a POST to
+`/api/auth/callback/credentials` and a turn is a POST to `/api/learn/chat`.
+So production can be **observed**, never **driven**, from here. A controlled
+replay of a topic remains impossible, and therefore **no topic may be marked
+VERIFIED on the strength of this access.**
+
+Restated for the queue: B-4/B-5 move from BLOCKED to **PARTIAL — read-only**.
+
+## Production health, read directly
+
+`db: true`. `visual.scope: "rule-based"` — scene generation is still OFF, as
+recorded. `config.missing: OPENROUTER_API_KEY, NEXT_PUBLIC_APP_URL,
+CRON_SECRET`. The missing OpenRouter key confirms the provider chain is
+running Gemini -> Groq with the middle link absent.
+
+## There IS real traffic, and the evidence loop IS working
+
+| measure | value |
+|---|---|
+| messages, last 24h | **382** |
+| messages, last 7d | 1,370 |
+| sessions, last 7d | 228 |
+| most recent message | 2026-08-12 15:29 |
+| `evidence_events` total | 2,247 |
+| `PROBE_OUTCOME` rows, last 3d | **43** |
+
+So graded probes are being asked, answered and recorded on live learners —
+the L1/L5 writer side is genuinely functioning, not theoretical. Sampled
+`MISCONCEPTION_DETECTED` outcomes are real learner language, e.g.
+*"7 newtons (by simply adding 3 plus 4)"* (vector addition done
+arithmetically) and *"Kinetic energy is m times v"*.
+
+**Caution on provenance:** many recent sessions carry near-identical
+`updatedAt` values (15:16:41.491 / .507 / .541) across different physics
+topics. That is the sweep's concurrency signature, not organic learners — a
+sweep was run successfully from somewhere other than this container. Traffic
+counts above should NOT be read as pure end-user demand.
+
+## THE FINDING — the gate is still not closing, at scale
+
+```
+sessions carrying an objective ......... 191
+objectives with completedAt ............   1
+topic_progress status = MASTERED .......   0
+topic_progress status = COMPLETED ......   2
+max masteryPct across all rows .........  65
+```
+
+`65` is exactly the conversational-checkpoint ceiling (65/25), which by design
+never certifies MASTERED — so **0 MASTERED is partly expected** on
+signal-derived evidence and is NOT by itself proof the gate fix failed. What
+the numbers do establish is narrower and still important:
+
+> Across 191 real sessions carrying an objective, **one** reached
+> `completedAt`. Whatever the mechanism, learners are overwhelmingly not
+> completing objectives in production.
+
+That is consistent with E6 being unresolved in practice, and it is the first
+time this audit has been able to say anything about the gate from REAL
+traffic rather than a replay.
+
+**E6 = 0 REMAINS UNVERIFIED.** Proving it needs a driven turn — asking a gate
+question and reading whether it carried an MCQ tag — which read-only access
+cannot do.
+
+## NEXT EXACT ACTION
+1. The sweep must run from an environment that can POST: the owner's own
+   machine, or CI. Command unchanged; it now exits non-zero unless topics
+   actually ran.
+2. Meanwhile, use the read path for what it CAN settle: query
+   `evidence_events` joined to `learn_sessions` to measure how often a gate
+   turn produced a `PROBE_OUTCOME` at all. That is an E6 proxy computable
+   from stored data alone, and it does not require driving a turn.
+3. Continue offline moat production: `phys.stat` (15), `phys.particle` (16),
+   `qm` (19), `mod` (21), `em` (32) — 103 concepts remain.
