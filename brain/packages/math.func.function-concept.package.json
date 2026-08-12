@@ -6,9 +6,9 @@
     "conceptId": "math.func.function-concept",
     "compiler": "blueprint-frontend@0.3.0-physics-migration",
     "language": "en",
-    "contentHash": "sha256:06d09eccc60d092ab7e35db1adabc7a35c9fee32b992f2db2f39c0dc6689df54",
+    "contentHash": "sha256:995b814d74c8d63862c3e310d144d82f1c8620efcd1d3b9bdf42ab8dd43722ea",
     "sourceLock": {
-      "docs/curriculum/blueprints/math.func.function-concept.md": "sha256:9d6c4d4285a584ac5478281be361a1e667c9b7da3476956deea83ffb8f74605b"
+      "docs/curriculum/blueprints/math.func.function-concept.md": "sha256:ee701c202763da1a023304e0cbaf7eda2933d5445b8b59df584742c112af4acd"
     },
     "assetCount": 42,
     "assetCounts": {
@@ -43,7 +43,7 @@
       "compiler": "eos-brain-compiler@0.1.0-c4",
       "compiledAtIso": "1970-01-01T00:00:00.000Z",
       "sourceLock": {
-        "docs/curriculum/blueprints/math.func.function-concept.md": "sha256:9d6c4d4285a584ac5478281be361a1e667c9b7da3476956deea83ffb8f74605b"
+        "docs/curriculum/blueprints/math.func.function-concept.md": "sha256:ee701c202763da1a023304e0cbaf7eda2933d5445b8b59df584742c112af4acd"
       },
       "contentHash": "sha256:68fa6740b0b440f183bc102130be72362c808025e6404c81fef00d7d9afdcc3f",
       "ruleCount": 31,
@@ -1319,7 +1319,7 @@
       "kind": "teaching_note",
       "conceptId": "math.func.function-concept",
       "title": "Prerequisite Check",
-      "content": "Run before Protocol A (S0 entry). If gap detected, halt and address prerequisite first.\n\n**PRE-1 — Set notation** (requires math.found.set-theory)\n\nStimulus: \"What is {1, 2, 3} ∩ {2, 3, 4}?\"\n\nExpected: {2, 3}\n\nSIGNAL:INCORRECT → prerequisite gap: set-theory; schedule math.found.set-theory session before returning\n\n---\n\n**PRE-2 — Variable substitution** (requires math.alg.variable)\n\nStimulus: \"If x = 5, what is 2x + 1?\"\n\nExpected: 11\n\nSIGNAL:INCORRECT → prerequisite gap: variable; address variable concept before Protocol A\n\n---",
+      "content": "Run before Protocol A (S0 entry). If gap detected, halt and address prerequisite first.\n\n**PRE-1 — Set notation** (requires math.found.set-theory)\n\nStimulus: \"What is {1, 2, 3} ∩ {2, 3, 4}?\"\n\nExpected: {2, 3}\n\nSIGNAL:INCORRECT → prerequisite gap: set-theory; schedule math.found.set-theory session before returning\n\n---\n\n**PRE-2 — Variable substitution** (requires math.found.variable)\n\nStimulus: \"If x = 5, what is 2x + 1?\"\n\nExpected: 11\n\nSIGNAL:INCORRECT → prerequisite gap: variable; address variable concept before Protocol A\n\n---",
       "localKey": null,
       "language": "en",
       "refs": [],
