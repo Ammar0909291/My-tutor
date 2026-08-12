@@ -3488,3 +3488,69 @@ possible since production is both drivable and readable.
 | sweep | 6/6 checked, 0 errored, exit 1 (findings) |
 | E6 | 12 — not closed |
 | moat | 43 concepts closed, 7 domains complete, 103 remain |
+
+---
+
+# 🔴 E6's ROOT CAUSE — 737 ORPHANED PROBE IDENTITIES IN PRODUCTION
+
+Not a defect in the gate. A DATA defect, measured directly:
+
+| | |
+|---|---|
+| probe identities | 1,535 |
+| **orphans (no `probe_assets` row)** | **737 (48%)** |
+| …of which ACTIVE | **737 — every orphan is ACTIVE** |
+| ACTIVE probes that DO have choices | 793 |
+| orphaned explanation identities | 255 |
+
+`phys.meas.units` holds 5 ACTIVE probe identities and **4 have no content
+row** — `stem` is null, the LEFT JOIN finds nothing. One real gradeable probe
+survives for the whole concept.
+
+## Why this produces E6 exactly
+
+`findBestProbe` filters on `status: ACTIVE` and then joins content. An orphan
+passes the status filter and yields nothing servable, so
+`buildGateAssessmentBlock` has no MCQ to attach and the gate turn goes out as
+model prose. That is E6, and it is why the repo can show 3–4 gradeable probes
+per `phys.meas` concept while production serves 0–1.
+
+**Hypothesis 1 from the previous iteration is confirmed and hypothesis 2 is
+ruled out**: the corpus runs dry because most of it was never really there,
+not because the phase was misclassified.
+
+## Where the orphans come from — the same DB flakiness
+
+Production logs, this session, one cold start:
+
+```
+[instrumentation] asset bootstrap: 2379/2920 seed identities present — seeding missing assets...
+[instrumentation] asset bootstrap DB error (will retry on next start):
+  Invalid `prisma.assetIdentity.updateMany()` invocation: Socket timeout
+```
+
+The bootstrap writes the IDENTITY row, then writes the CONTENT row. When the
+socket times out between the two, the identity survives ACTIVE with no
+content — and the retry sees the identity "present" and skips it, so the gap
+is permanent rather than self-healing. 2,379 of 2,920 identities present, with
+737 of them hollow, is that failure repeated across many cold starts.
+
+**This makes the database flakiness a TEACHING defect, not just an
+availability one.** It has been silently hollowing out the moat.
+
+## The fix direction (NOT yet implemented — next iteration)
+
+Identity and content must be written ATOMICALLY, or content-first. A partial
+write must never leave an ACTIVE identity that resolves to nothing. Two
+candidate changes, to be chosen after reading the bootstrap:
+1. wrap the identity+content pair in a single transaction; and
+2. make the "already present" check require CONTENT, not merely an identity,
+   so an existing orphan self-heals on the next cold start instead of being
+   skipped forever.
+
+Repairing the 737 existing orphans is separate from stopping new ones, and
+both are needed.
+
+## Status
+
+VERIFIED 1/424 — unchanged. E6 is explained but not closed.
