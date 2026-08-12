@@ -1757,3 +1757,99 @@ because a replay that reproduces a fixed bug is worse than no replay.
    - If phases now climb OBSERVE→DEMONSTRATE→GUIDE→CHECK→PRACTICE→TRANSFER,
      that is the first completable lesson this audit has seen.
 3. Then Topic 2 VERIFIED + moat, then Topic 3 `phys.meas.errors`.
+
+---
+
+# 🔴 THE SECOND FREEZE — THE SIGNAL TAG IS NEVER EMITTED (`23695038`)
+
+The `[ladder]` diagnostic answered the open question on the first probe.
+Real production, real learner account, on a correct answer the tutor itself
+called "spot-on":
+
+```
+[ladder] { signalTag: false, correctness: null, ack: false,
+           excursion: false, askedQuestion: true,
+           phaseBefore: 'OBSERVE', phaseAfter: 'OBSERVE',
+           check: 0, practice: 0 }
+```
+
+**Candidate (a) CONFIRMED; (b) and (c) eliminated.** The model simply never
+emits `<!--SIGNAL-->`. Its instruction is appended to every system prompt
+unconditionally, so this is non-compliance, not a wiring gap.
+
+## This is a SECOND freeze, independent of the first
+
+| # | freeze | fixed by |
+|---|--------|----------|
+| 1 | `demonstrated` never set ⇒ DEMONSTRATE absorbing | `13070945` |
+| 2 | no SIGNAL ⇒ `signalCorrect` always null ⇒ no evidence at all | `23695038` |
+
+Fixing only #1 would not have produced a completable lesson: the CHECK and
+PRACTICE gates advance on `succeeded`, which requires a correctness signal.
+
+## The fix, and why not a prompt change
+
+`foundations/03 §7` already records the SIGNAL as *"a substitute for real
+instrumentation, not equivalent to it"*. Hanging the entire mastery system off
+one optional-looking tag means a model that skips it silently freezes every
+learner, with no error anywhere. Strengthening the prompt is the wrong lever
+and this audit has now learned that twice (V-AFFIRM, then the never-confirm
+rule).
+
+An MCQ is the one assessment form where correctness is **not a judgement**: the
+tutor declared the right answer when it wrote the question. So a reply to one is
+now graded server-side against the stored `correctIndex` — real instrumentation,
+no model call, no cost. `mcqConfidence()` had been written for exactly this and
+had no caller.
+
+The pending question rides the existing session-snapshot mechanism (no
+migration, no second store), is written UNCONDITIONALLY, and is cleared on any
+turn that asks nothing so a stale MCQ can never grade an unrelated later
+message. *The first draft put that write inside `if (teachingHistoryHoisted)` —
+the exact mistake that left the teaching ledger stale for months, per the note
+sitting directly above it.*
+
+**Refusing to guess is the point.** A wrong guess writes false evidence into a
+permanent record and can advance a learner through a gate they did not earn —
+worse than the freeze it repairs. Grading returns null (never "wrong") when the
+reply cannot be matched, leaving the SIGNAL path alone.
+
+## Two false positives the tests caught before they shipped
+
+Both would have silently mis-graded real learners:
+
+1. **"the third one"** matched the number word *one* and resolved to option 1.
+   The English number words are now dropped entirely rather than disambiguated,
+   and an out-of-range ordinal refuses instead of falling through to a weaker
+   rule.
+2. **"a dimension is about quantity"** — the shape of an answer this learner
+   actually typed — matched the standalone token "a" and selected option A. The
+   indefinite article is the one option key that is also an ordinary English
+   word, so it now requires an explicit marker or the whole message.
+
+## Honest status
+- Both fixes are proven offline; **neither is production-verified yet.**
+  `13070945` was still BUILDING and `23695038` was pushed this turn.
+- The open-ended (non-MCQ) answer case is **still unprotected**: with no SIGNAL,
+  a free-text correct answer produces no evidence. MCQ is the default assessment
+  form per `buildMcqInstruction`, so this covers the graded path — but it is a
+  bound, not a complete solution, and is recorded as such.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| IN PROGRESS | 1 — `phys.meas.dimensions` |
+| REMAINING | 422 |
+| Global fixes this run | 19 |
+
+## NEXT EXACT ACTION
+1. Confirm `23695038` READY.
+2. Clean session; answer the tutor's MCQ; read `[mcq-grade]` and `[ladder]`.
+   Expect `correct: true` from the grader and a phase that CLIMBS.
+3. Drive to the gate — check + two practice items — and confirm a completion
+   card appears ONLY at `practiceCorrect >= 2`. That would be the first
+   completable lesson this audit has seen.
+4. Then Topic 2 VERIFIED + moat, then Topic 3 `phys.meas.errors`.
+5. Standing, unfixed: free-text answers still produce no evidence when the model
+   omits the SIGNAL. Decide whether to grade them deterministically too, or to
+   make the ladder tolerate their absence.
