@@ -147,6 +147,69 @@ export async function POST(req: Request) {
       }
     }
 
+    // ── RE-ENTERING A LESSON MUST RE-OPEN IT ──────────────────────────────
+    //
+    // MEASURED IN PRODUCTION (2026-08-12, real learner account, brand-new
+    // session, mode: 'restart' on phys.meas.vector-addition). Three different
+    // learner turns — a wrong answer, "i dont know i dont get it", and a
+    // correct intuition — each returned the SAME 146-character canned line,
+    // with no model call at all:
+    //
+    //   CUE decision = SERVE_LESSON_COMPLETE
+    //   ruleId       = D0a-LESSON-ALREADY-COMPLETE
+    //   RESPONSE provider=deterministic lessonKey=lesson:6 groq_invoked=false
+    //
+    // WHY. `lessonCompletedHoisted` in the chat route reads
+    // `latestLessonAttempt(userId, subjectSlug, lessonKey)` — keyed on the
+    // LESSON, not the session — and D-0a then refuses to teach a finished
+    // lesson before every other rule. Opening the lesson again created no new
+    // attempt: `mode` only ever selected the opening PROMPT text. So the
+    // newest attempt stayed the COMPLETED one forever, and the concept became
+    // permanently unteachable for that learner across every future session.
+    //
+    // A learner who finishes a lesson and comes back to revise it — the most
+    // ordinary thing a student does — got a dead tutor.
+    //
+    // D-0a's own comment states the invariant it assumes: "Starting a NEW
+    // lesson clears this: lessonCompleted is read per turn from the CURRENT
+    // lesson's attempt." That holds for a DIFFERENT lesson and silently fails
+    // for the SAME one. This restores it at the only place that knows a
+    // re-entry happened.
+    //
+    // Scope is deliberately narrow: 'restart' and 'review' are the two modes
+    // that mean "teach this to me again". 'resume' must NOT re-open — resuming
+    // a finished lesson should still deliver the close — and 'next' moves to a
+    // different lessonKey, which was never affected.
+    //
+    // openLessonAttempt is idempotent: it returns the existing IN_PROGRESS
+    // attempt when there is one, so repeated inits do not spawn duplicates.
+    // Advisory, like the write above — a failure here must never cost the
+    // learner their lesson.
+    if ((mode === 'restart' || mode === 'review') && lessonOrder) {
+      try {
+        const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
+        const key = lessonKeyFor({ lessonOrder })
+        if (key) {
+          const { latestLessonAttempt, openLessonAttempt } = await import('@/lib/teaching/lessonAttemptStore')
+          const latest = await latestLessonAttempt(prisma, {
+            userId, subjectSlug: learnSession.subject.slug, lessonKey: key,
+          })
+          // Only act when the newest attempt is actually closed. An
+          // IN_PROGRESS attempt is already correct and must be left alone, so
+          // a restart never discards work in flight.
+          if (latest && latest.status === 'COMPLETED') {
+            await openLessonAttempt(prisma, {
+              userId, subjectSlug: learnSession.subject.slug,
+              lessonKey: key, lessonTitle: lessonTitle ?? null,
+            })
+            console.info(`[lesson-init] re-opened completed lesson ${key} for mode=${mode}`)
+          }
+        }
+      } catch (err) {
+        console.warn('[lesson-init] lesson attempt re-open failed:', err)
+      }
+    }
+
     // Derive country for LLM routing — same logic as route.ts
     const profileCountry = profile?.country ?? 'global'
     const country = teachingLanguage === 'ru' ? 'ru' : profileCountry
