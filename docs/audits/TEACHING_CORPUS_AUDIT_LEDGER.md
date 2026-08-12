@@ -2374,6 +2374,7 @@ a clean session.** Clearing a blocker alone is never sufficient.
 | 2026-08-12 | 2 | Supabase MCP reconnected under a new name, then disconnected; on reconnection still **0 projects**. B-1/B-2/B-3 remain blocked. |
 | 2026-08-12 | 3 | B-1/B-2/B-3: Supabase MCP **0 projects** — still blocked. B-4: retried Chromium against `example.com` with the installed `/opt/pw-browsers/chromium-1194` binary (the npm default path no longer exists — it points at `chromium_headless_shell-1228`, absent). The launch HUNG to timeout rather than erroring, which is the proxy signature, not a missing binary. Still blocked. |
 | 2026-08-12 | 4 | B-1/B-2/B-3: Supabase MCP **0 projects**. B-4: `page.goto: net::ERR_CONNECTION_RESET at https://example.com/` — the documented proxy signature, reproduced cleanly with `--no-sandbox` and a bounded timeout. All four still blocked. |
+| 2026-08-12 | 5 | B-1/B-2/B-3: Supabase MCP **0 projects**. B-4: `net::ERR_CONNECTION_RESET` again. All four still blocked. |
 
 ---
 
@@ -2601,4 +2602,82 @@ both.
 2. Confirm `378d07c5` + `ec3f4417` READY, then drive Topic 3 to its mastery
    gate on a clean session. Expect: no outage template beside an MCQ, no false
    UNSUPPORTED_EXPLANATION, and `verified: true` at `practiceCorrect >= 2`.
+3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
+
+---
+
+# TOPIC 3 — the outage fix VERIFIED, and the residual evidence gap MEASURED
+
+Blocked queue retried first (attempt 5): B-1/B-2/B-3 **0 projects**; B-4
+`ERR_CONNECTION_RESET`. All four still blocked, none skipped.
+
+## ✅ Verified live: an MCQ-only turn is no longer an outage (`378d07c5`)
+
+Clean session `cmsq6qfeg0001l7042cb5l1fx`. The turn that previously produced
+*"Let's take one small step together… we can continue whenever you're ready"*
+beside a tappable question now produces a real lead-in and the MCQ:
+
+> *"Claude, imagine you measure the length of a pencil using a ruler that only
+> has markings every one millimetre… Which statement best describes the
+> measurement error in this situation?"* + MCQ
+
+No outage template, and the turn is no longer marked `provider: degraded` — so
+it counts as a give.
+
+## 🔴 THE RESIDUAL EVIDENCE GAP, measured on a real turn (`09a25296`)
+
+At phase GUIDE the tutor asked a good, concrete question **in prose with no MCQ
+tag**:
+
+> *"…the thermometer consistently reads exactly two degrees Celsius too high…
+> What happens to that consistent two-degree offset when you take the average
+> of all ten measurements?"*
+
+> me: "the offset stays. averaging only helps with random scatter, not a
+> consistent shift"  ← **fully correct**
+> tutor: *"that is spot on—you've nailed the exact distinction…"*
+
+```
+phase GUIDE -> GUIDE   check 0   practice 0
+```
+
+**A correct answer, praised by the tutor, recorded as nothing.** 2 of 5 turns in
+this session asked at a question-bearing phase without an MCQ.
+
+### Why the fix is a prompt rule here, having rejected prompt rules elsewhere
+
+Correctness for FREE TEXT has no deterministic source: the model does not emit
+`<!--SIGNAL-->` (measured repeatedly today), and grading prose is a judgement
+call of exactly the kind this audit has learned not to trust. An MCQ is the one
+form where the tutor has already declared the answer.
+
+At CHECK and PRACTICE — the phases that REQUIRE evidence — a question without
+the tag cannot produce any, so the gate can never be crossed however well the
+learner answers. The instruction now says that, and says WHY, at those phases
+only. **This is a FORMAT requirement, not a safety property**, which is the
+distinction that makes a prompt lever right here and wrong for the affirmation
+guard. It fabricates no evidence and lowers no bar.
+
+The phase is read straight from the snapshot at prompt-assembly time —
+`conversationStateHoisted` is populated hundreds of lines later, and a value
+that arrives after the prompt is built cannot shape it.
+
+### NOT CLAIMED
+That this closes the gap. It is a prompt requirement, so its effect is a
+question for the next production run, and free-text answers at NON-gate phases
+still produce no evidence at all.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` (queue B-1) |
+| IN PROGRESS | 1 — `phys.meas.errors` |
+| REMAINING | 421 |
+| Global fixes this run | 29 |
+
+## NEXT EXACT ACTION
+1. **Retry the BLOCKED queue** (B-1…B-4), log it.
+2. Confirm `ec3f4417` + `09a25296` READY, then drive Topic 3 to its gate on a
+   clean session. Expect an MCQ on every CHECK/PRACTICE question and
+   `verified: true` at `practiceCorrect >= 2`.
 3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
