@@ -103,7 +103,29 @@ describe('structural lock — bootstrap guard source', () => {
     // A row count equals the identity count only because a partial unique
     // index covers authorId = SEED_AUTHOR_ID. Counting distinct slugs states
     // the invariant directly instead of depending on that index.
-    expect(code).not.toMatch(/assetIdentity\.count\(/)
+    //
+    // NARROWED 2026-08-12, deliberately, and the reason matters. This
+    // previously banned `assetIdentity.count(` outright. That was a proxy for
+    // the real invariant — "the COMPLETENESS measure is a distinct-slug count"
+    // — and the proxy became wrong when a SECOND, unrelated count was added:
+    // the hollow-identity check (identities whose content row is missing),
+    // which is a row count by nature and is not a completeness measure at all.
+    //
+    // Banning the whole method would have forced the hollow check to be
+    // written worse, or the repair to be dropped — so the assertion is
+    // sharpened to say what it always meant, rather than relaxed.
+    const storedAssignment = code.match(/const storedIdentities\s*=\s*\([\s\S]{0,240}?\)\.length/)
+    expect(storedAssignment, 'storedIdentities must be a distinct-slug groupBy length').not.toBeNull()
+    expect(storedAssignment![0]).toMatch(/groupBy\(\{\s*by:\s*\['canonicalSlug'\]/)
+    expect(storedAssignment![0]).not.toMatch(/\.count\(/)
+
+    // Any count() that IS present must be the hollow-identity check, never a
+    // second completeness measure that could disagree with the first.
+    for (const m of code.matchAll(/assetIdentity\.count\(/g)) {
+      const preceding = code.slice(Math.max(0, m.index! - 220), m.index!)
+      expect(preceding, 'the only permitted assetIdentity.count is the hollow-identity check')
+        .toMatch(/hollowIdentities/)
+    }
   })
 
   it('duplicate validation still runs before the guard and before every write', () => {

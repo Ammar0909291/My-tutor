@@ -210,11 +210,39 @@ async function bootstrapAssets() {
           where: seedOwnershipWhere() as never,
         })
       ).length
-      if (storedIdentities >= EXPECTED_IDENTITIES) {
+      // An identity COUNT is not a completeness check. 737 PROBE and 255
+      // EXPLANATION identities were found ACTIVE in production with no content
+      // row behind them, so a database can reach the expected identity count
+      // and still serve nothing — which is exactly the state that produced E6.
+      // Counting hollow identities here is what lets the repair below run at
+      // all: without it, the moment storedIdentities reaches EXPECTED the
+      // bootstrap returns early and the orphans are unreachable forever.
+      //
+      // Two indexed COUNTs on a cold start, and only when the identity count
+      // already looks complete — so the common healthy path pays for them once
+      // and then skips, exactly as before.
+      const hollowIdentities = storedIdentities >= EXPECTED_IDENTITIES
+        ? (await prisma.assetIdentity.count({
+            where: {
+              ...(seedOwnershipWhere() as object),
+              OR: [
+                { family: AssetFamily.PROBE, probeAsset: { is: null } },
+                { family: AssetFamily.EXPLANATION, explanationAsset: { is: null } },
+              ],
+            } as never,
+          }))
+        : 0
+
+      if (storedIdentities >= EXPECTED_IDENTITIES && hollowIdentities === 0) {
         console.log(
-          `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present — skipping`
+          `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present, 0 hollow — skipping`
         )
         return
+      }
+      if (hollowIdentities > 0) {
+        console.warn(
+          `[instrumentation] asset bootstrap: ${hollowIdentities} ACTIVE seed identities have NO content row — repairing`
+        )
       }
 
       console.log(
@@ -223,11 +251,64 @@ async function bootstrapAssets() {
 
       let created = 0
       let skipped = 0
+      // Content rows written for an identity that already existed but was
+      // hollow. Counted separately from `created` so the log distinguishes
+      // "new asset" from "repaired a shell", which are different events.
+      let repaired = 0
 
+      // ── HOLLOW IDENTITIES SELF-HEAL ───────────────────────────────────────
+      //
+      // MEASURED IN PRODUCTION (2026-08-12): 737 of 1,535 PROBE identities and
+      // 255 EXPLANATION identities carry status ACTIVE with NO content row
+      // behind them. All 737 share one signature — HUMAN_CURATOR /
+      // EDUCATIONAL_BRAIN_SEED, every one created on 2026-07-27 — so they came
+      // from a single historical seeding event, not from this loop (the nested
+      // `create` below is atomic and cannot produce one).
+      //
+      // WHY IT MATTERED. `findBestProbe` filters on status ACTIVE and then
+      // joins content. A hollow identity passes the filter and yields nothing
+      // servable, so the mastery gate has no MCQ to attach and the turn goes
+      // out as model prose — the E6 defect, measured at 12 occurrences across
+      // 6 topics. It is why the repo shows 3-4 gradeable probes for a
+      // phys.meas concept while production served 0-1.
+      //
+      // WHY IT NEVER HEALED. The dup check asked only "does an identity with
+      // this canonicalSlug exist?" — an orphan answered yes, so every cold
+      // start since has skipped it. Permanent by construction.
+      //
+      // THE REPAIR. Create the MISSING CHILD for the existing identity rather
+      // than deleting and re-creating it: no unique-index conflict on
+      // canonicalSlug, no id churn for anything already referencing the asset,
+      // and evidence rows keyed on assetId keep pointing at the same asset.
       for (const e of ALL_EXPLANATIONS) {
         const canonicalSlug = seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)
-        const dup = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
-        if (dup) { skipped++; continue }
+        const dup = await prisma.assetIdentity.findFirst({
+          where: { canonicalSlug },
+          include: { explanationAsset: true },
+        })
+        if (dup) {
+          if (!dup.explanationAsset) {
+            try {
+              await prisma.explanationAsset.create({
+                data: {
+                  assetId: dup.assetId,
+                  content: e.content,
+                  style: ExplanationStyle.CONCRETE,
+                  readingLevel: 0,
+                  lengthChars: e.content.length,
+                  targetedMisconceptions: e.targetedMisconceptions,
+                },
+              })
+              repaired++
+            } catch (repairErr: any) {
+              // P2002 = a concurrent cold start healed it first. Both outcomes
+              // are the desired one.
+              if (repairErr?.code !== 'P2002') throw repairErr
+            }
+          }
+          skipped++
+          continue
+        }
         try {
           await prisma.assetIdentity.create({
             data: {
@@ -266,10 +347,38 @@ async function bootstrapAssets() {
         }
       }
 
+      // Same repair on the probe side — this is where the 737 live, and where
+      // the E6 damage was actually done. See the note above the explanation
+      // loop for the full measurement and reasoning.
       for (const p of ALL_PROBES) {
         const canonicalSlug = probeSlug(p)
-        const dup = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
-        if (dup) { skipped++; continue }
+        const dup = await prisma.assetIdentity.findFirst({
+          where: { canonicalSlug },
+          include: { probeAsset: true },
+        })
+        if (dup) {
+          if (!dup.probeAsset) {
+            try {
+              await prisma.probeAsset.create({
+                data: {
+                  assetId: dup.assetId,
+                  stem: p.stem,
+                  choices: p.choices ? (p.choices as unknown as object) : undefined,
+                  correctValue: p.correctValue,
+                  keywords: [],
+                  difficulty: p.difficulty,
+                  targetedMisconceptions: p.targetedMisconceptions,
+                  requiredVisuals: [],
+                },
+              })
+              repaired++
+            } catch (repairErr: any) {
+              if (repairErr?.code !== 'P2002') throw repairErr
+            }
+          }
+          skipped++
+          continue
+        }
         try {
           await prisma.assetIdentity.create({
             data: {
@@ -310,7 +419,8 @@ async function bootstrapAssets() {
       }
 
       console.log(
-        `[instrumentation] asset bootstrap complete: created=${created} skipped=${skipped} total=${EXPECTED_IDENTITIES}`
+        `[instrumentation] asset bootstrap complete: created=${created} repaired=${repaired}` +
+        ` skipped=${skipped} total=${EXPECTED_IDENTITIES}`
       )
     } finally {
       await prisma.$disconnect()
