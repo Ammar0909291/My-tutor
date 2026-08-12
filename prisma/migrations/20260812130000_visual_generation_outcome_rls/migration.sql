@@ -1,0 +1,48 @@
+-- Security fix: public.visual_generation_outcome was created (20260810120000)
+-- after the 2026-07-26 RLS sweep that enabled RLS on all other public tables,
+-- and that sweep was applied as an undocumented, unversioned production-only
+-- change (no migration file exists anywhere in this repo for it). This table
+-- was simply missed by the same process gap that also missed lesson_attempts.
+-- This migration enables RLS using an independent investigation of this
+-- table's own access model — NOT a copy of the lesson_attempts fix.
+--
+-- What this table holds: per-generation-attempt operational audit trail —
+-- concept id/title, generation policy, accept/reject decision, serve flag,
+-- rejection reason, cache hit flag, model name, elapsed ms, renderer kind,
+-- the raw figure payload (or rejected payload), and an optional assetId FK.
+-- This is SYSTEM data, not learner-specific data. There is no "userId" column
+-- and no learner PII in this table.
+--
+-- Access model, verified by reading every call site
+-- (src/lib/teaching/visual/generationOutcomeStore.ts is the only module that
+-- touches this table; route.ts wires it in):
+--   - The browser never talks to Postgres or the Supabase Data API directly.
+--     There is no @supabase/supabase-js dependency in this project and no
+--     NEXT_PUBLIC_SUPABASE_* env var — Supabase is used purely as a managed
+--     Postgres host, reached only through Prisma from Next.js server code.
+--   - The app's DATABASE_URL connects as the `postgres` role, which carries
+--     rolbypassrls=true (verified directly against production — see CLAUDE.md's
+--     "Architecture facts" migration-drift correction and the 2026-07-26
+--     RLS-sweep note). Enabling RLS therefore does NOT change any behaviour for
+--     server-side Prisma reads/writes — they bypass RLS exactly as every other
+--     already-RLS-enabled table's server access does.
+--   - This app does not use Supabase Auth, so there is no `auth.uid()` /
+--     JWT claim available in this Postgres session. Writing auth.uid()-keyed
+--     policies would be theatre: they would never match any row, for any role.
+--     Unlike lesson_attempts, this table has no userId column at all — there
+--     is no learner-scoped identity to key a policy on even in principle.
+--   - Net result: the `anon` and `authenticated` Supabase roles have no
+--     legitimate access path to this table today. The table contains internal
+--     system data (model outputs, generation metrics, figure payloads) that
+--     should never be exposed via the Data API or an anon key regardless.
+--     The least-privilege policy is to enable RLS and grant NO policies to
+--     those roles — a default-deny posture — rather than author a policy that
+--     can never be satisfied or an always-true permissive policy that would
+--     only exist to silence the advisor.
+--
+-- If a genuine client-facing use case for this table appears later (e.g. a
+-- direct admin read via Supabase), add a scoped SELECT policy then, keyed to
+-- whatever identity mechanism is actually wired to Postgres at that time —
+-- do not add one speculatively now.
+
+ALTER TABLE "visual_generation_outcome" ENABLE ROW LEVEL SECURITY;
