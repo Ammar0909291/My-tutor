@@ -820,7 +820,30 @@ then contrasts explicitly instead of confirming or dismissing.
 A wrong answer corrected without discouragement. The affirmation guard is not
 being tripped because the drafts genuinely distinguish — which is the point.
 
-## DEFECT — P2, learner-visible: raw LaTeX in chat prose
+## ~~DEFECT — raw LaTeX in chat prose~~ — **RETRACTED, NOT A DEFECT**
+
+> **I was wrong, and I caught it before shipping a fix.** `\(…\)` is exactly
+> the delimiter this app typesets: `src/lib/text/mathDelimiters.ts` states the
+> renderer "supports `$$…$$` for display and `\(…\)` for inline", `client.ts`
+> §10a *instructs* the model to use it, and `LessonScreen.tsx` runs those spans
+> through KaTeX. The learner sees typeset *L/T*, not backslashes.
+>
+> The error was mine and it was methodological: I read the RAW API response and
+> judged it as if it were the rendered screen. Had I "fixed" it, I would have
+> broken working maths rendering across the whole corpus — the opposite of the
+> intent.
+>
+> **This is the fourth time an instrument of mine produced a false reading**
+> (phrase-list detector missing "that is correct"; negation matched as a
+> restatement; a replay measuring RECOVERY state; now raw-vs-rendered). Every
+> one was caught by checking the source of truth rather than trusting the
+> instrument. That is the standing lesson of this audit and the reason API text
+> alone cannot verify anything the learner SEES — which is also why the
+> screenshot capability matters.
+
+The original (incorrect) finding follows.
+
+### Superseded reasoning
 
 The same turn ended with:
 
@@ -838,14 +861,18 @@ right). Blast radius: EVERY topic that mentions a formula or symbol, i.e. most
 of physics and chemistry. This is a GLOBAL defect, so per the standing rule the
 topic pointer does not advance until it is fixed.
 
-**TOPIC 2 STATUS: FAILED (LaTeX leak).** Teaching is otherwise strong.
+**TOPIC 2 STATUS: IN PROGRESS — no known defect.** The LaTeX finding is
+retracted; teaching on both probes was strong. Remaining: Examples → Guided →
+Mastery, then VERIFIED.
 
 ## NEXT EXACT ACTION
-1. Root-fix the LaTeX leak. Prefer an output-side normaliser (deterministic,
-   works regardless of which model produced the text) over a prompt rule —
-   the affirmation work already demonstrated that prompt-only rules on output
-   shape are unreliable. Check for an existing sanitiser to extend
-   (`stripIpaNotation` is the precedent) rather than adding a second one.
-2. Regression test with the real string `\( L / T \)`.
-3. Deploy, replay Topic 2's two probes on a clean session.
-4. Then finish Topic 2 (Examples → Guided → Mastery) and mark VERIFIED.
+1. **Do NOT "fix" the LaTeX** — it is correct and a change would break maths
+   rendering corpus-wide. Retracted above.
+2. Continue Topic 2 on a clean session: Examples → Guided → Mastery, playing a
+   weak learner. `T_SLUG=phys.meas.dimensions T_ORDER=2
+   T_TITLE='Dimensional Analysis' ... ./clean.sh && ./ask2.sh "<message>"`.
+3. Mark VERIFIED if it holds, preserve any proven repair as a moat asset, then
+   Topic 3.
+4. Standing method note, learned the hard way: **the raw API response is not
+   the learner's screen.** Judge wording and teaching from it; never judge
+   rendering from it.
