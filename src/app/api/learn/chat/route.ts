@@ -4243,6 +4243,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // RS P-3: an outage template taught nothing, so it must not be
               // folded as a give. See TurnEvidence.degradedTurn.
               degradedTurn: isDegradedProvider(provider),
+              // The server's own decided move, not a guess from prose. A turn
+              // that taught AND ended on a question is still a give; treating
+              // it as "taught nothing" is what froze the ladder at DEMONSTRATE.
+              deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
               // Advances the delivery phases only (OBSERVE→DEMONSTRATE→GUIDE→
               // CHECK); the mastery gates still require a real answer.
               acknowledgement: lowSignalAckHoisted,
@@ -5110,6 +5114,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // Same guard as the upstream fold — the two must not disagree
                 // about whether an outage template taught anything.
                 degradedTurn: isDegradedProvider(provider),
+                deliveredTeaching: evidenceMoveHoisted === 'teach' || evidenceMoveHoisted === 'show',
                 acknowledgement: lowSignalAckHoisted,
               }),
             })

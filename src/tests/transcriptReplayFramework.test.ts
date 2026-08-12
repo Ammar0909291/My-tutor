@@ -199,6 +199,12 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
       // why it was absent before. Same expression route.ts uses: the server
       // said ASK and the rendered reply carried no question.
       parityViolation: decision.move === 'ask' && !askedQuestion,
+      // Replayable for the same reason parityViolation is — the decided move
+      // is captured. Same expression as both route.ts fold sites. Without it
+      // this harness would reproduce the frozen-at-DEMONSTRATE runtime that
+      // masteryLadderReachable.test.ts exists to prevent, and a replay that
+      // models a fixed bug is worse than no replay.
+      deliveredTeaching: decision.move === 'teach' || decision.move === 'show',
     })
     phases.push(state.phase)
 

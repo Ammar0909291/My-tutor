@@ -292,6 +292,14 @@ export interface TurnEvidence {
    *  and `taughtThisSession` must not record that it did. Sourced from
    *  degradedMode.isDegradedProvider(), the single owner of the question. */
   degradedTurn?: boolean
+  /** Did this turn actually DELIVER teaching — the server's decided move was
+   *  'teach' or 'show'? A tutor normally explains and then ends on a question,
+   *  and treating "asked something" as "taught nothing" froze the ladder at
+   *  DEMONSTRATE permanently (see the give-detection block below). Asserts what
+   *  the TEACHER did, never what the learner learned, so it advances delivery
+   *  phases only — the mastery gates still require real correct answers.
+   *  Omitted ⇒ behaviour identical to before this field existed. */
+  deliveredTeaching?: boolean
   /** The learner's message was a bare acknowledgement — a receipt ("got it")
    *  or a forward request ("go", "continue", "ready"). Sourced from
    *  isLowSignalAcknowledgement(), the same predicate that drives the turn
@@ -406,21 +414,52 @@ export function advanceConversationState(
   } else {
     next.teachSegmentsSinceQuestion = prev.teachSegmentsSinceQuestion + 1
     next.questionsAskedSinceTeach = 0
-    // Both flags below assert a FACT about what the learner received, so a
-    // degraded outage template — content-free by construction — must not set
-    // either. It asks nothing, so without this guard it reads as a give: it
-    // would satisfy the DEMONSTRATE→GUIDE evidence gate having demonstrated
-    // nothing, and would tell QL-1 a source exists to answer from, licensing
-    // a question about material the outage meant was never delivered. That is
-    // the precise condition QL-1 exists to forbid.
-    if (!evidence.degradedTurn) {
-      // A no-question turn in DEMONSTRATE (or later) means the teacher showed
-      // something — the evidence gate DEMONSTRATE→GUIDE needs.
-      if (prev.phase !== 'OBSERVE') next.demonstrated = true
-      // QL-1: any give — including the OBSERVE-phase anchor, which `demonstrated`
-      // deliberately excludes — creates a source the learner can answer from.
-      next.taughtThisSession = true
-    }
+  }
+
+  // ── WHAT COUNTS AS A GIVE ───────────────────────────────────────────────
+  //
+  // This used to live inside the `else` above, i.e. "a turn that asked nothing
+  // is a give". That equated ASKING with NOT TEACHING, and good tutoring does
+  // both in one breath: explain, then end on a question. Every production turn
+  // measured in the corpus audit did exactly that — so `demonstrated` was never
+  // set, and because DEMONSTRATE→GUIDE is gated on it, the ladder froze at
+  // DEMONSTRATE permanently. Reproduced offline with no provider and no DB:
+  //
+  //   10 correct answers, every turn asking a question
+  //     → phase DEMONSTRATE, check 0, practice 0, demonstrated false
+  //   the same 10 with ONE silent teach turn inserted
+  //     → phase TRANSFER, check 1, practice 2, demonstrated true
+  //
+  // With the ladder stuck below CHECK, `correctAtCheck` and `correctAtPractice`
+  // can never increment, `masteryVerifiedStrict` can never be true, and NO
+  // LESSON IS COMPLETABLE. A previous fix (see the reachability law below)
+  // already found DEMONSTRATE absorbing and hoisted the transition out of the
+  // `succeeded` branch — but left it gated on this flag, so the freeze
+  // survived in a different form.
+  //
+  // THIS DOES NOT WEAKEN THE MASTERY BAR. `demonstrated` asserts that the
+  // TEACHER delivered, never that the learner learned. The learner gates are
+  // `correctAtCheck` / `correctAtPractice`, which still move only on real
+  // correct answers — the same boundary the acknowledgement path below already
+  // draws: delivery phases advance on delivery, mastery gates on evidence.
+  //
+  // `deliveredTeaching` is the server's own decided move for the turn, so this
+  // reads the engine's intent rather than guessing from prose. When the caller
+  // does not supply it, behaviour is byte-identical to before.
+  //
+  // The degraded-outage guard is unchanged and still governs both flags: an
+  // outage template is content-free by construction, so it must not satisfy
+  // the DEMONSTRATE→GUIDE gate and must not tell QL-1 a source exists to
+  // answer from — the precise condition QL-1 exists to forbid.
+  const deliveredAGive =
+    !evidence.degradedTurn && (!evidence.askedQuestion || evidence.deliveredTeaching === true)
+  if (deliveredAGive) {
+    // A give in DEMONSTRATE (or later) means the teacher showed something —
+    // the evidence gate DEMONSTRATE→GUIDE needs.
+    if (prev.phase !== 'OBSERVE') next.demonstrated = true
+    // QL-1: any give — including the OBSERVE-phase anchor, which `demonstrated`
+    // deliberately excludes — creates a source the learner can answer from.
+    next.taughtThisSession = true
   }
 
   // QL-3: fold the learner-directive suppression counter before any early
