@@ -4385,6 +4385,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           console.log('[ladder]', {
             signalTag: teachingSignal !== null,
             correctness: teachingSignal?.correctness ?? null,
+            // THE RESIDUAL GAP, MEASURED RATHER THAN GUESSED AT.
+            //
+            // Deterministic grading covers MCQ turns. A gate turn (CHECK /
+            // PRACTICE) that asks WITHOUT an MCQ can still produce no evidence
+            // at all, because the SIGNAL tag is the only other source and the
+            // model does not emit it. `buildMcqInstruction` makes MCQ the
+            // default for anything gradeable, so how often that contract is
+            // broken is an empirical question — and the answer decides whether
+            // this needs its own fix or is already rare enough to leave.
+            move: evidenceMoveHoisted,
+            mcqAsked: mcqHoisted !== null,
             ack: lowSignalAckHoisted,
             excursion: excursionActiveHoisted,
             askedQuestion: askedQuestionThisTurn,
