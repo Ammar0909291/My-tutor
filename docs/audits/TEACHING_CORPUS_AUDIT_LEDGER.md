@@ -2920,3 +2920,196 @@ here for the same reason B-3 and B-5 are.
 3. Offline until then: third gradeable probes for the eight advanced physics
    domains (~130 items), which is real moat production and needs nothing that is
    currently blocked.
+
+---
+
+# ITERATION — 2026-08-12 · B-1 and B-2 CLOSED, B-5 re-diagnosed
+
+Blocked queue retried FIRST, per the loop's own rule. Two closed, one
+re-diagnosed, and the re-diagnosis matters more than the closures.
+
+## B-1 — CLOSED. The PII leak is off production.
+
+Supabase MCP listed a live project this session (`ACTIVE_HEALTHY`); every
+prior attempt got **0 projects**. So the retry that had failed five times
+succeeded, which is the whole reason the queue is retried every iteration
+rather than declared dead.
+
+`f22e5673-4b1f-473a-bec8-4fbb9637c0c0` — ACTIVE, serving, concept
+`phys.meas.dimensions`, content opening *"[learner's full name], wave
+interference happens when two water waves overlap on a pond…"* — is now
+**DEPRECATED**, with `deprecationReason` citing this audit. Owner approved the
+write explicitly before it was made.
+
+*(The name is redacted here deliberately. An earlier entry in this ledger
+quotes it verbatim — committing a learner's name to the repo is the same
+class of leak this item exists to close, just in a different store. Left
+as-is rather than rewritten, since editing history here would be silent;
+flagged as a cleanup for the owner.)*
+
+Verified after the write, not assumed:
+
+| check | result |
+|-------|--------|
+| ACTIVE `AI_AUTHORED` explanations | **0** |
+| ACTIVE rows containing that learner's name | **0** |
+| ACTIVE assets still serving `phys.meas.dimensions` | 6, all `HUMAN_CURATOR` |
+
+The concept did not lose its teaching content — it lost the one bad row.
+
+## B-2 — CLOSED, and the corpus is clean
+
+The survey B-2 asked for is done. Result, measured across every ACTIVE
+explanation-family row in production:
+
+| corpus | rows | learner names | session-bound discourse |
+|--------|------|---------------|-------------------------|
+| `HUMAN_CURATOR` (curated) | 1,335 | **0** | **0** |
+| `AI_AUTHORED` (live capture) | 1 → now 0 | 1 → now 0 | 1 → now 0 |
+
+**The instrument flagged 28 candidates and every single one was a false
+positive** — a fitting result for this ledger. The 8 "vocatives" were
+*"Solid, liquid, gas…"*, *"Place, manner, and voicing…"*, *"Print, not
+illustration…"*; the 20 "session-bound" hits were *"traces back to"*,
+*"condenses back to water"*, *"back to your exact starting tile"*. Each was
+read before being dismissed, which is the only reason the dismissal is
+trustworthy. This independently re-confirms the finding recorded at the
+capture-gate fix: a capitalised word plus a comma cannot distinguish a name
+from a common noun.
+
+**Structural conclusion:** the defect was never corpus-wide. It was confined
+to the live-capture path, which had exactly ONE ACTIVE row. The gate fix
+(`22dc4852`) stopped new ones; this write retracted the last old one.
+
+## B-5 — the blocker was MISDIAGNOSED, and this is the important finding
+
+The handover recorded B-5 as *"no `AUDIT_EMAIL` / `AUDIT_PASSWORD` in the
+container"*. Credentials were supplied this session. **The sweep still cannot
+run**, for a different reason entirely:
+
+```
+kind:   connect_rejected
+detail: gateway answered 403 to CONNECT (policy denial or upstream failure)
+host:   my-tutor-flame.vercel.app:443
+```
+
+This container's egress policy **denies outbound HTTPS to the app's own
+domain**. Credentials were necessary but never sufficient. Per
+`/root/.ccr/README.md` — *"Do not retry or route around it — report the
+blocked host"* — no workaround was attempted.
+
+**B-5 is therefore restated:** production replay requires an environment whose
+egress policy permits `my-tutor-flame.vercel.app`, AND credentials. Supplying
+credentials alone to a session in this network posture will not move a single
+topic to VERIFIED. Any future handover that lists only credentials is
+under-stating the blocker.
+
+## GLOBAL FIX #31 — the sweep reported a pass on a run that never happened
+
+The most serious thing found this iteration was in the audit's own instrument.
+
+Eight topics, all eight errored on the proxy denial, zero HTTP requests
+succeeded — and the sweep printed:
+
+```
+── ENGINE FINDINGS ──
+  none — every checked engine invariant held
+```
+
+and exited **0**. One implicit inference caused it:
+`findings.length === 0 ⟹ the invariants held`. That holds only if the checks
+RAN. An errored topic yields no findings because it yielded no data, and the
+report could not tell the two apart. This is the same meta-class the audit has
+hit repeatedly — **a layer judging from an incomplete view of what it judges** —
+except here the layer was mine.
+
+Had credentials arrived in a session with working egress, this instrument would
+have been the thing certifying `E6 = 0`.
+
+Fixed in `scripts/audit/sweepReport.ts` (pure, testable, imported by the
+script): a run with ANY errored topic is **INCONCLUSIVE**, says so, excludes
+errored topics from the verified denominator, lists them, and sets a non-zero
+exit code so no caller can read silence as success.
+
+Verified against the real failure — same proxy denial, honest output:
+
+```
+NOTHING WAS CHECKED — 0 of 3 topics completed (3 errored).
+This run proves nothing about the engine invariants.
+⚠ INCONCLUSIVE — this run must not be recorded as a pass.
+EXIT CODE: 1
+```
+
+Tests: `src/tests/engineSweepReporting.test.ts`, 7 cases, the first replaying
+the exact 8/8-errored run and asserting the phrase that lied is absent.
+
+**E6 = 0 remains UNVERIFIED on production.** Unchanged, and now
+un-fakeable by the instrument.
+
+## MOAT — third gradeable MCQ for six `phys.mech` concepts
+
+Closing a concept needs three graded correct answers (CHECK 1 + PRACTICE 2).
+All six of the concepts the audit reaches next carried only two, so the corpus
+ran dry at the last gate and the question fell back to the model.
+
+Each new probe is the **gradeable form of pedagogy the blueprint already
+authored** — its own Conflict Evidence [P28] — not new pedagogy:
+
+| concept | misconception | rung |
+|---|---|---|
+| `newtons-first-law` | `MC-2` book at rest has no forces | ADVANCED |
+| `kinetic-energy` | `MC-KE-NEGATIVE` | PROFICIENT |
+| `potential-energy` | `MC-HEIGHT-VERTICAL-ONLY` | DEVELOPING |
+| `conservation-of-momentum` | `MC-INTERNAL-EXTERNAL` | DEVELOPING |
+| `conservation-of-angular-momentum` | `MC-KE-CONSERVED-ROTATION` | PROFICIENT |
+| `kinematics-2d` | `MC-TOTAL-VELOCITY-COMPONENT` | DEVELOPING |
+
+Measured: all six now carry **3** gradeable MCQs. Short-concept ratchet
+tightened 145 → 139 — exactly six, so nothing else moved.
+
+### Three handover errors found by checking instead of trusting
+
+1. **`MC-KE-CONSERVED` does not exist.** The blueprint's id is
+   `MC-KE-CONSERVED-ROTATION`. Citing the handover's version would have
+   produced a probe targeting nothing.
+2. **`MOM_ASSESS_PROBES` was the wrong array.** `MOM` is
+   `phys.mech.momentum`; `MC-INTERNAL-EXTERNAL` belongs to
+   `conservation-of-momentum`, whose array is `COM_ASSESS_PROBES`. And
+   `phys.mech.momentum` already had 3 gradeable probes — it was never short.
+3. **Rung uniqueness spans ALL seed corpora, not one file.** Probe identity
+   keys on `conceptId × probeKind × gradeBand × difficulty`; two probes on one
+   rung collapse to a single identity and one is silently lost. My first draft
+   collided twice, then a third time against `brainSeedAssets.ts`'s deep-space
+   probe at `mcq/HIGH/PROFICIENT` — which my count had missed because it read
+   only `authoredSeedAssets.ts`. The suite caught all three.
+
+`brainSeedAssets.test.ts`'s legacy collision ratchet moved 407 → 411. Those
+probes are **not** discarded: that ratchet measures the pre-Item-6 slug, which
+has no difficulty segment, while the live resolver
+(`buildProbeSlugResolver`) maps every authored probe to a unique identity —
+asserted at 0 discarded in `difficultyLadderIdentity.test.ts`. The comment now
+says so, so the raise cannot later read as papering over a loss.
+
+## Validation
+
+309 test files / 6,596 passed / 9 skipped · `tsc --noEmit` clean ·
+`npm run build` clean.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| IN PROGRESS | `phys.meas.errors` (Topic 3) |
+| BLOCKED | B-3, B-4, B-5 (B-1, B-2 CLOSED) |
+| Global fixes | **31** |
+| Concepts with 3 gradeable MCQs | +6 |
+
+## NEXT EXACT ACTION
+1. Retry B-3, B-4, B-5 and log it. B-5 now needs **egress + credentials**, not
+   credentials alone.
+2. On a session with working egress: `npx tsx scripts/audit/engine-sweep.ts
+   --subject physics --limit 8`. It now exits non-zero unless topics actually
+   ran, so `E6 = 0` cannot be claimed from a dead run. Then drive Topic 3 to
+   `verified`.
+3. Offline until then: continue third gradeable probes — `phys.therm` (5) and
+   `phys.wave` (3) are the next shortest, same method, same one-rung-per-slot
+   rule checked across every seed corpus.

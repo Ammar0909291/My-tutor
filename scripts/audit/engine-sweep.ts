@@ -45,6 +45,7 @@
  */
 import { readFileSync } from 'fs'
 import path from 'path'
+import { summariseSweep } from './sweepReport'
 
 const BASE = process.env.AUDIT_BASE ?? 'https://my-tutor-flame.vercel.app'
 const EMAIL = process.env.AUDIT_EMAIL
@@ -316,29 +317,37 @@ async function main() {
     }),
   )
 
+  const summary = summariseSweep(results)
+
   console.log('\n── ENGINE FINDINGS ──')
-  const byCode = new Map<string, { conceptId: string; detail: string }[]>()
-  for (const r of results) {
-    for (const f of r.findings) {
-      if (!byCode.has(f.code)) byCode.set(f.code, [])
-      byCode.get(f.code)!.push({ conceptId: r.conceptId, detail: f.detail })
-    }
+  console.log(`  ${summary.findingsLine}`)
+  for (const [code, items] of [...summary.findingsByCode].sort()) {
+    console.log(`\n  ${code} × ${items.length}`)
+    for (const it of items.slice(0, 4)) console.log(`    ${it.conceptId}: ${it.detail}`)
   }
-  if (byCode.size === 0) {
-    console.log('  none — every checked engine invariant held')
-  } else {
-    for (const [code, items] of [...byCode].sort()) {
-      console.log(`\n  ${code} × ${items.length}`)
-      for (const it of items.slice(0, 4)) console.log(`    ${it.conceptId}: ${it.detail}`)
+
+  if (summary.errored > 0) {
+    console.log(`\n── ERRORED (never checked) ──`)
+    for (const r of results.filter((x) => x.error)) {
+      console.log(`  ${r.conceptId.padEnd(32)} ${r.error}`)
     }
   }
 
-  const verified = results.filter((r) => r.reachedVerified).length
-  console.log(`\n── LADDER ──\n  reached verified: ${verified}/${results.length}`)
-  for (const r of results) console.log(`  ${r.conceptId.padEnd(32)} ${r.ladder.join(' → ')}`)
+  // Denominator is the topics that COMPLETED. Dividing by the full list would
+  // silently blame the engine for topics that never reached it.
+  console.log(`\n── LADDER ──\n  reached verified: ${summary.verified}/${summary.checked} checked (${summary.total} requested)`)
+  for (const r of results) {
+    if (r.error) continue
+    console.log(`  ${r.conceptId.padEnd(32)} ${r.ladder.join(' → ')}`)
+  }
 
   console.log('\nNOTE: this checks ENGINE invariants only. "Is the teaching good?"')
   console.log('is a human judgement and is deliberately not automated here.')
+
+  if (summary.inconclusive) {
+    console.log('\n⚠ INCONCLUSIVE — this run must not be recorded as a pass.')
+  }
+  process.exitCode = summary.exitCode
 }
 
 void main()

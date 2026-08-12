@@ -40820,6 +40820,24 @@ const KIN2_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${KIN2}:MC-AXES-NOT-INDEPENDENT`],
     source: `${KIN2_SRC} — Component 6 Mastery Probe Set MP-5 (synthesis)`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on N1_ASSESS_PROBES. Gradeable form of
+    // the blueprint's own MC-TOTAL-VELOCITY-COMPONENT conflict evidence [P28].
+    conceptId: KIN2,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A ball has vₓ = 3 m/s and v_y = 4 m/s, so its speed is |v| = 5 m/s. How far does it travel HORIZONTALLY in 1 second?',
+    choices: [
+      { text: '3 m — the horizontal equation uses vₓ, the component along that axis', isCorrect: true },
+      { text: '5 m — use the speed, since that is how fast the ball is actually moving', isCorrect: false, misconceptionId: `${KIN2}:MC-TOTAL-VELOCITY-COMPONENT` },
+      { text: '7 m — add the two components together', isCorrect: false, misconceptionId: `${KIN2}:MC-TOTAL-VELOCITY-COMPONENT` },
+    ],
+    correctValue: '3 m — x = vₓ × t = 3 × 1; the magnitude |v| is never used in a component equation',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${KIN2}:MC-TOTAL-VELOCITY-COMPONENT`],
+    source: `${KIN2_SRC} — MC-TOTAL-VELOCITY-COMPONENT Conflict Evidence [P28]`,
+  },
 ]
 
 const PROJ_ASSESS_PROBES: SeedProbe[] = [
@@ -41144,6 +41162,32 @@ const N1_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [],
     source: `${N1_SRC} — Section 9 Retrieval Schedule, Day 21`,
+  },
+  {
+    // THIRD gradeable MCQ. Closing a concept needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2); with only two the corpus ran dry at the last gate
+    // and the question fell back to the model. Converts the blueprint's already
+    // authored DB-2a screen into a gradeable form — no new pedagogy invented.
+    conceptId: N1,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A book sits completely still on a table. Which statement about the forces on it is correct?',
+    choices: [
+      { text: 'Gravity pulls it down and the table pushes it up — two forces that cancel, so the NET force is zero', isCorrect: true },
+      { text: 'There are no forces acting on it at all, because it is not moving', isCorrect: false, misconceptionId: `${N1}:MC-2` },
+      { text: 'Only gravity acts on it — the table is not a force, it is just a surface', isCorrect: false, misconceptionId: `${N1}:MC-2` },
+    ],
+    correctValue: 'gravity down and the normal force up cancel; net force is zero',
+    // ADVANCED: the ladder identity keys on
+    // conceptId × probeKind × gradeBand × difficulty, and two probes on one rung
+    // collapse to a single identity, silently losing one. For this concept
+    // mcq/HIGH is already taken at FOUNDATIONAL and DEVELOPING here, and at
+    // PROFICIENT by brainSeedAssets' deep-space probe — so the rung must be
+    // checked across ALL seed corpora, not just this file.
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${N1}:MC-2`],
+    source: `${N1_SRC} — Section 3 Diagnostic Battery DB-2a (MC-2 Net Force and Rest)`,
   },
 ]
 
@@ -41735,6 +41779,26 @@ const KE_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${KE}:MC-KE-NEGATIVE`],
     source: `${KE_SRC} — Component 6 Formative Assessment Strategy FA-3`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on N1_ASSESS_PROBES. Gradeable form of
+    // the blueprint's own MC-KE-NEGATIVE conflict evidence [P28].
+    conceptId: KE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A 1 kg ball moves LEFTWARD at 3 m/s, so its velocity is v = −3 m/s. What is its kinetic energy?',
+    choices: [
+      { text: '+4.5 J — squaring −3 gives +9, so KE comes out positive', isCorrect: true },
+      { text: '−4.5 J — it is moving in the negative direction, so its KE is negative', isCorrect: false, misconceptionId: `${KE}:MC-KE-NEGATIVE` },
+      { text: '0 J — the leftward and rightward parts cancel out', isCorrect: false, misconceptionId: `${KE}:MC-KE-NEGATIVE` },
+    ],
+    correctValue: '+4.5 J — KE = ½ × 1 × (−3)² = ½ × 9 = 4.5 J; squaring removes the sign',
+    // PROFICIENT for the same ladder-identity reason as N1's third MCQ:
+    // mcq/HIGH is already occupied at FOUNDATIONAL and DEVELOPING here.
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KE}:MC-KE-NEGATIVE`],
+    source: `${KE_SRC} — MC-KE-NEGATIVE Conflict Evidence [P28]`,
+  },
 ]
 
 const PE_ASSESS_PROBES: SeedProbe[] = [
@@ -41796,6 +41860,24 @@ const PE_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${PE}:MC-HEIGHT-VERTICAL-ONLY`],
     source: `${PE_SRC} — Component 6 Formative Assessment Strategy FA-3`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on N1_ASSESS_PROBES. Gradeable form of
+    // the blueprint's own MC-HEIGHT-VERTICAL-ONLY conflict evidence [P28].
+    conceptId: PE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A block is pushed 5 m up a 30° ramp. Which value of h should be used in GPE = mgh?',
+    choices: [
+      { text: '2.5 m — the VERTICAL rise, found from 5 × sin30°', isCorrect: true },
+      { text: '5 m — that is the distance the block travelled', isCorrect: false, misconceptionId: `${PE}:MC-HEIGHT-VERTICAL-ONLY` },
+      { text: '4.33 m — the horizontal distance, from 5 × cos30°', isCorrect: false, misconceptionId: `${PE}:MC-HEIGHT-VERTICAL-ONLY` },
+    ],
+    correctValue: '2.5 m — gravity acts vertically, so h is the vertical rise (5 sin30°), never the path length',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PE}:MC-HEIGHT-VERTICAL-ONLY`],
+    source: `${PE_SRC} — MC-HEIGHT-VERTICAL-ONLY Conflict Evidence [P28]`,
   },
 ]
 
@@ -42238,6 +42320,24 @@ const COM_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${COM}:MC-INTERNAL-EXTERNAL`],
     source: `${COM_SRC} — Component 5 Mastery Probe Bank MP-5`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on N1_ASSESS_PROBES. Gradeable form of
+    // the blueprint's own MC-INTERNAL-EXTERNAL conflict evidence [P28].
+    conceptId: COM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A 3 kg ball travelling east at 10 m/s hits a fixed wall and bounces straight back west at 10 m/s. Is the momentum of the BALL conserved?',
+    choices: [
+      { text: 'No — the wall is external to the ball and exerts a force on it, changing p from +30 to −30 kg·m/s', isCorrect: true },
+      { text: 'Yes — momentum is always conserved in every collision', isCorrect: false, misconceptionId: `${COM}:MC-INTERNAL-EXTERNAL` },
+      { text: 'Yes — the speed is 10 m/s before and after, so nothing changed', isCorrect: false, misconceptionId: `${COM}:MC-INTERNAL-EXTERNAL` },
+    ],
+    correctValue: 'not conserved for the ball alone — the wall is an external force; momentum changed by 60 kg·m/s',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COM}:MC-INTERNAL-EXTERNAL`],
+    source: `${COM_SRC} — MC-INTERNAL-EXTERNAL Conflict Evidence [P28]`,
   },
 ]
 
@@ -42824,6 +42924,26 @@ const CAMOM_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [],
     source: `${CAMOM_SRC} — Component 5 Mastery Probe Bank MP-2`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on N1_ASSESS_PROBES. Gradeable form of
+    // the blueprint's own MC-KE-CONSERVED-ROTATION conflict evidence [P28].
+    // NOTE: the misconception id is MC-KE-CONSERVED-ROTATION; an earlier
+    // handover recorded it as "MC-KE-CONSERVED", which does not exist.
+    conceptId: CAMOM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A skater spins with I = 4 kg·m² at ω = 2 rad/s, then pulls her arms in to I = 1 kg·m², so ω rises to 8 rad/s. What happens to her rotational KINETIC ENERGY?',
+    choices: [
+      { text: 'It rises from 8 J to 32 J — she does internal work pulling her arms in', isCorrect: true },
+      { text: 'It stays at 8 J — energy is always conserved', isCorrect: false, misconceptionId: `${CAMOM}:MC-KE-CONSERVED-ROTATION` },
+      { text: 'It falls, because pulling her arms in makes her smaller', isCorrect: false, misconceptionId: `${CAMOM}:MC-KE-CONSERVED-ROTATION` },
+    ],
+    correctValue: 'KE increases 8 J → 32 J; angular momentum is conserved but kinetic energy is not, because her muscles do work',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CAMOM}:MC-KE-CONSERVED-ROTATION`],
+    source: `${CAMOM_SRC} — MC-KE-CONSERVED-ROTATION Conflict Evidence [P28]`,
   },
 ]
 

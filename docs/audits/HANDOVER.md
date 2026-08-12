@@ -38,9 +38,9 @@ and is retried every iteration.
 |---|---|
 | Topics VERIFIED | **1 / 424** (`phys.meas.units`) |
 | IN PROGRESS | `phys.meas.errors` (Topic 3) |
-| BLOCKED | `phys.meas.dimensions` (B-1) |
-| Global root-cause fixes shipped | **30** |
-| Suite | 307 files / 6,575 passed / 9 skipped |
+| BLOCKED | B-3, B-4, B-5 — **B-1 and B-2 closed 2026-08-12** |
+| Global root-cause fixes shipped | **31** |
+| Suite | 309 files / 6,596 passed / 9 skipped |
 | `tsc --noEmit` / `npm run build` | clean |
 | Production | `c40c216a` READY, aliased to `my-tutor-flame.vercel.app` |
 
@@ -66,11 +66,15 @@ since the fix. That is B-5 below and it is the single most important open item.
 
 | id | blocker | required action | acceptance |
 |----|---------|-----------------|-----------|
-| **B-5** | **no `AUDIT_EMAIL` / `AUDIT_PASSWORD` in the container** | run the sweep from an environment holding them | `E6 = 0`, ≥1 topic `verified` |
-| B-1 | needs a DB write to DEPRECATE asset `f22e5673-4b1f-473a-bec8-4fbb9637c0c0` | Supabase MCP lists 0 projects; `DATABASE_URL` unset | asset DEPRECATED, topic re-audited clean |
-| B-2 | same — no read path to the 1,589 ACTIVE rows | cross-corpus asset hygiene survey | survey complete |
+| **B-5** | **egress policy 403s `my-tutor-flame.vercel.app:443` — AND credentials needed.** Credentials ALONE are not enough; this was previously recorded as a credentials-only blocker and that was wrong | run the sweep from an environment whose egress permits the app domain, holding both env vars | `E6 = 0`, ≥1 topic `verified` |
+| ~~B-1~~ | **CLOSED 2026-08-12** — asset `f22e5673-…` DEPRECATED, verified 0 ACTIVE rows carry the name | — | done |
+| ~~B-2~~ | **CLOSED 2026-08-12** — survey complete: 1,335 curated ACTIVE rows, 0 names, 0 session-bound discourse. All 28 flagged candidates were false positives | — | done |
 | B-3 | `DATABASE_URL` unset; pooler state unreadable | verify Supabase pool mode | P1008 cluster explained |
-| B-4 | Chromium hangs on outbound HTTPS (`example.com` timed out at 120 s) | screenshots from a machine with ordinary internet | one per topic |
+| B-4 | Chromium blocked by the same egress policy (`net::ERR_CONNECTION_RESET`) | screenshots from a machine with ordinary internet | one per topic |
+
+**Retrying the queue is not ceremony.** B-1/B-2 sat blocked for five
+iterations on "Supabase MCP lists 0 projects", then the MCP listed a live
+project on the sixth and both closed in one turn.
 
 `file://` rendering DOES work — `scripts/audit/shot.mjs` produces faithful
 reproductions of real captured payloads. They are **not** screenshots of the
@@ -119,24 +123,31 @@ running app and must be labelled that way.
    converting existing pedagogy into a gradeable form, not inventing new
    pedagogy:
 
-   | concept | target misconception (from its blueprint §6) |
-   |---|---|
-   | `newtons-first-law` | `MC-2` — a stationary object has no forces acting on it |
-   | `kinetic-energy` | `MC-KE-NEGATIVE` |
-   | `potential-energy` | `MC-HEIGHT-VERTICAL-ONLY` |
-   | `conservation-of-momentum` | `MC-INTERNAL-EXTERNAL` |
-   | `conservation-of-angular-momentum` | `MC-KE-CONSERVED` |
-   | `kinematics-2d` | `MC-TOTAL-VELOCITY-COMPONENT` |
+   **The six `phys.mech` concepts are DONE (2026-08-12) — all six now carry
+   three gradeable MCQs, ratchet tightened 145 → 139.** The next targets are
+   `phys.therm` (5) and `phys.wave` (3).
 
-   Insertion points are the per-concept arrays in `authoredSeedAssets.ts`
-   (`N1_ASSESS_PROBES` :41084, `KE_ASSESS_PROBES` :41678, `PE_ASSESS_PROBES`
-   :41740, `MOM_ASSESS_PROBES` :42050, `CAMOM_ASSESS_PROBES` :42768,
-   `KIN2_ASSESS_PROBES` :40763). Every new probe must be `probeKind: 'mcq'`
-   with 2–4 choices, exactly one `isCorrect`, distractors carrying
-   `misconceptionId`, and a `source` citation. Verify with
-   `npx vitest run src/tests/gateAssessment` — the coverage test pins the
-   short-concept count as a **maximum**, so authoring more can only ever make
-   it pass.
+   **Three errors in the original version of this list, corrected — check the
+   source, do not copy these tables forward blindly:**
+   - `MC-KE-CONSERVED` does not exist; the real id is
+     `MC-KE-CONSERVED-ROTATION`.
+   - `MOM_ASSESS_PROBES` was the wrong array — `MOM` is `phys.mech.momentum`
+     (which already had 3 probes and was never short). `MC-INTERNAL-EXTERNAL`
+     belongs to `conservation-of-momentum` → `COM_ASSESS_PROBES`.
+   - Line numbers in this file go stale the moment anyone edits the 49k-line
+     `authoredSeedAssets.ts`. Grep for the array name.
+
+   Every new probe must be `probeKind: 'mcq'` with 2–4 choices, exactly one
+   `isCorrect`, distractors carrying `misconceptionId`, and a `source` citation.
+
+   **The rule that will bite you:** probe identity keys on
+   `conceptId × probeKind × gradeBand × difficulty`. Two probes on one rung
+   collapse to ONE identity and one is silently lost — so the new probe needs a
+   FREE rung, checked across **every** seed corpus (`brainSeedAssets.ts`,
+   `authoredSeedAssets.ts`, and the chemistry/biology/CS files), not just the
+   file you are editing. Verify with
+   `npx vitest run src/tests/gateAssessment src/tests/difficultyLadderIdentity.test.ts
+   src/tests/brainSeedAssets.test.ts`.
 
    Where the shortfall actually is (measured, per domain — it is NOT flat, and
    the advanced tail is where the bulk sits, blocking nothing near-term):
@@ -154,6 +165,14 @@ running app and must be labelled that way.
   sweep, which was the *checker*, not the product. Two more failed on first run
   while writing the E6 wiring guard, both the test. Verify a marker's
   *occurrence*, not just its presence.
+- **The worst instance was the sweep itself** (fixed 2026-08-12, global fix
+  #31): with all 8 topics erroring on a proxy denial and zero HTTP requests
+  succeeding, it printed *"none — every checked engine invariant held"* and
+  exited 0. It now reports INCONCLUSIVE and exits non-zero whenever any topic
+  fails to run. If you are about to certify `E6 = 0`, confirm topics actually
+  COMPLETED — the count that matters is `checked`, not `total`.
+- **B-2's survey flagged 28 candidates; all 28 were false positives.** Read
+  every hit before believing it. A capitalised word plus a comma is not a name.
 - **The defect meta-classes found so far**: (a) a layer judging a turn from an
   incomplete view of it — four separate sites reading `cleanText` after the
   payload was stripped, plus CUE reading last turn's signal; (b) evidence
