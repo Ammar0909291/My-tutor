@@ -2767,3 +2767,83 @@ can never fail the test while losing them will.
    `E6 = 0` and topics reaching `verified` before any topic work resumes.
 3. Topic 3 `phys.meas.errors` → VERIFIED + moat; then Topic 4
    `phys.meas.significant-figures`.
+
+---
+
+# ITERATION — WIRING GUARD, A CORRECTION, AND A NEW BLOCKER
+
+## ✅ Deployment READY, wiring guarded
+`c40c216a` reached READY at 1786550592 and holds the
+`my-tutor-flame.vercel.app` alias. Added
+`src/tests/gateAssessmentRouteWiring.test.ts` (14 assertions): selection happens
+BEFORE `routeAI`, attachment AFTER `parseMcqTag`, the server's question outranks
+a model tag (`??` in that order, asserted), the memory branch carries
+`probeMcq`, and all five exclusions are on the eligibility test. This closes the
+unwired-fix class — the module tests alone would have passed green with every
+route call site deleted, which is exactly how `src/lib/educationalBrain/*` came
+to be a whole pipeline that never executes.
+
+Two of my own assertions failed on first run and both were the TEST, not the
+product: the import is dynamic (`await import(...)`, not `from`), and
+`provider = 'memory'` occurs in TWO branches — the first draft anchored to the
+lesson-complete serve, not the Explanation Memory serve. Fixed by anchoring to
+the branch opener. Recorded because the pattern is the same one that has
+produced every false reading in this audit: a marker matched without asking
+which occurrence it was.
+
+## 🟡 CORRECTION — "61% of physics runs dry" was true but misleading
+The previous entry reported the shortfall as a flat 145/238. Measured per
+domain, it is not flat, and the difference changes what should be done about it:
+
+```
+phys.em    32/35   phys.mod   21/21   phys.qm    19/19   phys.particle 16/16
+phys.stat  15/15   phys.opt   14/15   phys.rel    8/8    phys.astro     6/6
+phys.mech   6/60   phys.therm  5/18   phys.wave   3/17   phys.meas      0/8
+```
+
+The shortfall is concentrated almost entirely in the ADVANCED domains. The
+foundation domains this audit actually walks first are nearly fully served —
+**`phys.meas` has zero short concepts** (every one of the eight carries 3–4
+gradeable probes), and `phys.mech` is 6 short of 60.
+
+So the deterministic gate path is available for the audit's whole near-term
+queue, and the content gap is a bounded, plannable task (~130 third probes,
+concentrated in eight advanced domains) rather than an obstacle in front of the
+next topic. Stated precisely because the earlier framing would have justified
+authoring work that nothing is waiting on.
+
+## 🔴 NEW BLOCKER — B-5 · production replay, blocked on credentials
+`E6 = 0` is **NOT verified on production.** The sweep signs in with
+`AUDIT_EMAIL` / `AUDIT_PASSWORD`; this container has neither, and they are
+correctly absent from the repository — a password must never be committed,
+logged or persisted, so there is nothing here to recover and nothing that should
+be. No throwaway account may be created against production either.
+
+- **Exact blocker:** no learner credentials in this environment.
+- **Required action:** re-run
+  `AUDIT_EMAIL=… AUDIT_PASSWORD=… npx tsx scripts/audit/engine-sweep.ts
+   --subject physics --limit 8` from an environment holding them.
+- **Acceptance:** `E6 = 0` and at least one topic reaching `verified`.
+
+What IS established: the module refuses everything it cannot grade honestly
+(18 assertions), the corpus converts for 238/238 physics concepts, and the
+wiring is on the turn path in the right order (14 assertions). What is NOT
+established is the behaviour of a real HTTP turn. The distinction is the whole
+point of this ledger and is not being blurred here.
+
+## Blocked queue, retried this iteration (attempt 6)
+| id | state | evidence this attempt |
+|----|-------|------------------------|
+| B-1 | BLOCKED | needs a DB write to DEPRECATE an asset; Supabase MCP lists 0 projects, `DATABASE_URL` unset |
+| B-2 | BLOCKED | same — no read path to the 1,589 ACTIVE rows |
+| B-3 | BLOCKED | `DATABASE_URL` unset; pooler state unreadable from here |
+| B-4 | BLOCKED | Chromium still hangs on outbound HTTPS (`example.com` timed out at 120 s); `file://` rendering still works |
+| B-5 | BLOCKED | **new** — no learner credentials, production replay impossible |
+
+## NEXT EXACT ACTION
+1. Retry B-1…B-5, log the attempt.
+2. **The moment credentials are available**: re-run the sweep, require `E6 = 0`,
+   then drive Topic 3 `phys.meas.errors` to `verified`.
+3. Until then, work that does NOT need production: the free-text evidence gap
+   (still the largest unclosed global class — every phase except CHECK and
+   PRACTICE produces no recordable evidence at all).
