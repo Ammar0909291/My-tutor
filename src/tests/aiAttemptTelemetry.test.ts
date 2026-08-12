@@ -147,7 +147,15 @@ describe('telemetry never breaks a turn', () => {
   })
 })
 
-describe('P17 — gemini_only isolation mode', () => {
+/**
+ * INVERTED 2026-08-12 (owner instruction): gemini-only is now the DEFAULT, and
+ * `AI_PROVIDER_MODE=failover` is the explicit opt-out that restores the chain.
+ * These assertions previously pinned the opposite polarity; they are updated
+ * rather than removed, because the property worth guarding is unchanged — the
+ * switch must have exactly one meaning, and a typo must fail toward the narrow
+ * chain rather than silently fanning back out to four providers.
+ */
+describe('gemini-only mode — default ON, opt-out via failover', () => {
   const KEY = 'AI_PROVIDER_MODE'
   const prev = process.env[KEY]
   afterEach(() => {
@@ -156,24 +164,18 @@ describe('P17 — gemini_only isolation mode', () => {
     vi.resetModules()
   })
 
-  it('is OFF when the variable is unset — production behaviour unchanged', async () => {
+  it('is ON when the variable is unset — this is the default', async () => {
     delete process.env[KEY]
     vi.resetModules()
     const { isGeminiOnlyMode } = await import('@/lib/ai/router')
-    expect(isGeminiOnlyMode()).toBe(false)
+    expect(isGeminiOnlyMode()).toBe(true)
   })
 
-  it('is OFF for any other value', async () => {
-    for (const v of ['', 'full', 'groq_only', 'gemini', 'GEMINI', '1', 'true']) {
-      process.env[KEY] = v
-      vi.resetModules()
-      const { isGeminiOnlyMode } = await import('@/lib/ai/router')
-      expect(isGeminiOnlyMode(), `value ${JSON.stringify(v)}`).toBe(false)
-    }
-  })
-
-  it('is ON for gemini_only, case- and whitespace-insensitive', async () => {
-    for (const v of ['gemini_only', 'GEMINI_ONLY', ' gemini_only ']) {
+  it('stays ON for any value that is not the exact opt-out', async () => {
+    // Including the OLD opt-in spelling: a deployment still carrying
+    // AI_PROVIDER_MODE=gemini_only keeps getting gemini only, so the
+    // inversion cannot surprise an existing environment.
+    for (const v of ['', 'full', 'groq_only', 'gemini', 'GEMINI', '1', 'true', 'gemini_only']) {
       process.env[KEY] = v
       vi.resetModules()
       const { isGeminiOnlyMode } = await import('@/lib/ai/router')
@@ -181,8 +183,17 @@ describe('P17 — gemini_only isolation mode', () => {
     }
   })
 
-  it('the chain contains ONLY gemini when on', async () => {
-    process.env[KEY] = 'gemini_only'
+  it('is OFF only for failover, case- and whitespace-insensitive', async () => {
+    for (const v of ['failover', 'FAILOVER', ' failover ']) {
+      process.env[KEY] = v
+      vi.resetModules()
+      const { isGeminiOnlyMode } = await import('@/lib/ai/router')
+      expect(isGeminiOnlyMode(), `value ${JSON.stringify(v)}`).toBe(false)
+    }
+  })
+
+  it('the chain contains ONLY gemini by default', async () => {
+    delete process.env[KEY]
     process.env.GEMINI_API_KEY = 'k'
     process.env.GROQ_API_KEY = 'k'
     process.env.OPENROUTER_API_KEY = 'k'
@@ -191,8 +202,8 @@ describe('P17 — gemini_only isolation mode', () => {
     expect(getAIRouter().providerNames).toEqual(['gemini'])
   })
 
-  it('the chain still contains the fallbacks when off', async () => {
-    delete process.env[KEY]
+  it('the chain still contains the fallbacks when explicitly opted out', async () => {
+    process.env[KEY] = 'failover'
     process.env.GEMINI_API_KEY = 'k'
     process.env.GROQ_API_KEY = 'k'
     process.env.OPENROUTER_API_KEY = 'k'
@@ -202,7 +213,7 @@ describe('P17 — gemini_only isolation mode', () => {
   })
 })
 
-describe('P17 — no same-provider retry in isolation mode', () => {
+describe('no same-provider retry in gemini-only mode', () => {
   it('a retryable failure is attempted ONCE, not twice', async () => {
     let calls = 0
     const r = createFailoverRouter({

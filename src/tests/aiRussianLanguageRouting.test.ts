@@ -33,7 +33,15 @@ beforeEach(() => {
   process.env.GEMINI_API_KEY = 'g-key'
   process.env.OPENROUTER_API_KEY = 'o-key'
   process.env.GROQ_API_KEY = 'q-key'
-  delete process.env.AI_PROVIDER_MODE
+  // Gemini-only became the DEFAULT on 2026-08-12 (owner instruction), so an
+  // unset AI_PROVIDER_MODE now collapses every chain to a single provider.
+  // These tests exist to guard the CHAIN COMPOSITION — that Russian is
+  // selected by teaching language and never by country — which is still the
+  // behaviour whenever failover is restored. They therefore opt in explicitly
+  // rather than being deleted: the assembly they protect is intact, reachable
+  // with one env var, and must not be allowed to rot while it is switched off.
+  // The new default is pinned separately, in aiGeminiOnlyDefault.test.ts.
+  process.env.AI_PROVIDER_MODE = 'failover'
   vi.resetModules()
 })
 

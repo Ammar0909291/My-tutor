@@ -110,6 +110,21 @@
   1:1. `prisma migrate deploy` is confirmed a genuine no-op on every deploy — **no drift, resolved,
   not a risk.** (Prior note, 2026-07-26 Engineering Program close-out, is superseded: it had
   flagged this as unverified and originally mis-stated the project as `db push`-only.)
+- **AI PROVIDER — GEMINI ONLY (owner instruction, 2026-08-12, supersedes the chain description
+  below).** Every turn is served by Gemini `gemini-3.5-flash-lite` and nothing else, in every
+  teaching language. `isGeminiOnlyMode()` in `src/lib/ai/router.ts` is INVERTED: unset (or any
+  value other than the exact opt-out) means gemini-only; `AI_PROVIDER_MODE=failover` restores the
+  full chain. Nothing was deleted — the failover algorithm, the provider factories and the Russian
+  Yandex tier are all intact and one env var away, which is why the chain-composition tests still
+  run against the real assembly (`aiRussianLanguageRouting.test.ts` now opts into `failover`
+  explicitly). Two consequences, both deliberate and recorded rather than discovered later:
+  (a) there is nothing to fail over TO, so a Gemini outage or quota exhaustion reaches the learner
+  as the degraded template instead of a Groq answer; (b) **YandexGPT for Russian TEACHING is
+  disabled** — "only Gemini" and "Russian goes to Yandex" cannot both hold, and the newer
+  instruction wins. Russian **text-to-speech is a separate integration and is untouched**:
+  `/api/tts` still routes Russian audio to Yandex. Guarded by
+  `src/tests/aiGeminiOnlyDefault.test.ts` (pins the default, incl. that a typo fails toward the
+  narrow chain) and the inverted P17 block in `aiAttemptTelemetry.test.ts`.
 - AI (**YandexGPT restored 2026-08-04 as an intentional product decision; supersedes the
   2026-08-04 "there is NO YandexGPT LLM provider" note below**): provider selection keys off the
   learner's **selected teaching language and NOTHING else** — never their country. Two chains,

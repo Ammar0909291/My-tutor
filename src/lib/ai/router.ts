@@ -73,21 +73,39 @@ export function chainKeyForLanguage(lang: TeachingLanguage | undefined): 'ru' | 
 const _routers = new Map<'ru' | 'default', ReturnType<typeof createFailoverRouter>>
 
 /**
- * P17 — GEMINI-ONLY ISOLATION MODE (diagnostic, runtime switch only).
+ * GEMINI-ONLY IS NOW THE DEFAULT (owner instruction, 2026-08-12).
  *
- * `AI_PROVIDER_MODE=gemini_only` makes Gemini the sole provider so a 24-hour
- * window can answer one question: is Gemini itself healthy, or is failover
- * masking the real fault? Any other value (including unset) leaves the full
- * chain and today's production behaviour byte-for-byte unchanged.
+ * Every turn is served by Gemini `gemini-3.5-flash-lite` and nothing else.
+ * This was previously a diagnostic opt-IN (`AI_PROVIDER_MODE=gemini_only`,
+ * P17); it is now the standing product decision, so the switch is INVERTED:
+ * the narrow chain is what you get unless failover is explicitly restored.
  *
- * NOTHING IS DELETED. The provider factories, the chain order and the
- * failover algorithm are all untouched — this only narrows the provider LIST
- * handed to the existing router, which is the single place the chain is
- * assembled (verified 2026-08-02: getRouter() is the only caller of
- * createFailoverRouter in src/).
+ *     (unset, or anything else)      -> Gemini only            [DEFAULT]
+ *     AI_PROVIDER_MODE=failover      -> full chain restored
+ *
+ * WHY IT IS AN INVERSION RATHER THAN A DELETION. Turning this on by editing
+ * the chain would have thrown away the failover algorithm, the provider
+ * factories and the Russian tier — none of which are wrong, and all of which
+ * are needed the moment the decision is revisited. Keeping the opt-out means
+ * restoring the old behaviour costs ONE environment variable and no deploy,
+ * and the chain-composition tests keep running against the real assembly.
+ *
+ * THE TRADE-OFF, STATED PLAINLY BECAUSE IT IS REAL. With one provider there
+ * is nothing to fail over TO. A Gemini outage or quota exhaustion now reaches
+ * the learner as the degraded template instead of a Groq-served answer. That
+ * is the accepted cost of the instruction, not an oversight — and it is why
+ * the opt-out above exists and is one env var away.
+ *
+ * IT ALSO DISABLES YANDEXGPT FOR RUSSIAN TEACHING, which was itself an
+ * intentional product decision (2026-08-04). "Only Gemini" and "Russian goes
+ * to Yandex" cannot both hold; the newer instruction wins, and this note
+ * records what was given up so it is a choice rather than a silent
+ * regression. Russian text-to-speech is a SEPARATE integration and is
+ * untouched — `/api/tts` still routes Russian audio to Yandex.
  */
 export function isGeminiOnlyMode(): boolean {
-  return (process.env.AI_PROVIDER_MODE ?? '').trim().toLowerCase() === 'gemini_only'
+  // Explicit opt-out only. Anything else — including unset — is Gemini-only.
+  return (process.env.AI_PROVIDER_MODE ?? '').trim().toLowerCase() !== 'failover'
 }
 
 function getRouter(lang?: TeachingLanguage) {
@@ -113,7 +131,7 @@ function getRouter(lang?: TeachingLanguage) {
     // too. The diagnostic exists to measure Gemini in isolation, and a Russian
     // turn silently routed to YandexGPT would corrupt that measurement exactly
     // as a failover hop would.
-    console.log('[ai/router] AI_PROVIDER_MODE=gemini_only — failover and same-provider retry disabled for this deployment')
+    console.log('[ai/router] gemini-only mode (default) — failover and same-provider retry disabled; set AI_PROVIDER_MODE=failover to restore the chain')
     const geminiOnly = createFailoverRouter({
       providers: [createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)],
       disableSameProviderRetry: true,
