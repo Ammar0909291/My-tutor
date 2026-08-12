@@ -2847,3 +2847,76 @@ point of this ledger and is not being blurred here.
 3. Until then, work that does NOT need production: the free-text evidence gap
    (still the largest unclosed global class — every phase except CHECK and
    PRACTICE produces no recordable evidence at all).
+
+---
+
+# ITERATION — WHY CHEMISTRY WILL NOT BEHAVE LIKE PHYSICS (an owner decision, not a defect)
+
+## The mandate's second subject has no serving content, and the corpus exists
+Read directly from the repository:
+
+| file | explanations | concepts | probes | concepts with a gradeable MCQ |
+|------|--------------|----------|--------|-------------------------------|
+| `chemistrySeedAssets.ts` | 372 | **186/186** | 372 | **186** |
+| `biologySeedAssets.ts` | 216 | **108/108** | 216 | **108** |
+| `csSeedAssets.ts` | 238 | **119/119** | 238 | **119** |
+
+All three are complete, and every concept converts to a gradeable MCQ under
+`probeToMcq`. Production, meanwhile, holds **0 ACTIVE rows for all three**.
+
+## This is DELIBERATE, and I nearly filed it as a bug
+`src/instrumentation.ts`'s cold-start bootstrap loads only `brainSeedAssets` +
+`authoredSeedAssets`, and the boundary is explicit in code:
+
+```ts
+/** Subjects the automatic cold-start bootstrap (src/instrumentation.ts) seeds. */
+export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english'] as const
+```
+
+with `seedOwnershipWhere()`'s own comment naming "script-only subjects
+(chemistry/biology/computer_science)" as out of scope. So the three corpora are
+intended to be seeded by `scripts/brain/seed-knowledge-assets.ts`, deliberately
+NOT by the boot hook.
+
+Recorded as a design boundary rather than a defect, and **not changed**.
+Expanding that constant is a one-line edit that would insert roughly 1,652 new
+**ACTIVE** rows into production on the next cold start — a hard-to-reverse
+production data change, on content that has never been through the review flow
+the boundary exists to preserve. That is an owner's call, not this loop's.
+
+It also explains the multi-session Chemistry AssetIdentity Completion Program:
+744 rows were hand-seeded through Supabase MCP as DRAFT, batch by batch, each
+batch burning a large fixed share of that session's context — while the
+mechanism that seeds physics/english/math as ACTIVE simply does not cover the
+file. The runbook's own item 1 (`--draft` from an environment with a real
+`DATABASE_URL`, then activate) remains the supported path, and remains blocked
+here for the same reason B-3 and B-5 are.
+
+## What this means for the loop, concretely
+- **Physics** — the deterministic gate path is live: 238/238 concepts have a
+  gradeable authored probe and `phys.meas` has zero short concepts.
+- **Chemistry** — `findBestProbe` queries `status: ACTIVE` only, so it will
+  return nothing for all 186 concepts and **every chemistry gate falls back to
+  the model**. E6 should be expected to recur across the whole subject the
+  moment the audit reaches it. Predicting it here so it is not later reported as
+  a discovery.
+- Chemistry also carries **exactly two** gradeable probes per concept against
+  the three graded answers a concept needs, so it will hit the shortfall
+  universally rather than in the advanced tail as physics does.
+
+## Two owner decisions, stated once, not asked repeatedly
+1. **Activate the three script-only corpora?** One-line change to
+   `BOOTSTRAP_SEED_SUBJECTS`, or one run of the seed script. Unblocks chemistry,
+   biology and CS serving in one action. Trade-off: 1,652 ACTIVE rows that
+   skipped per-asset review.
+2. **Learner credentials for the audit loop** (B-5). Without them no production
+   replay is possible, so no topic can move to VERIFIED — including the ones
+   whose engine work is already done.
+
+## NEXT EXACT ACTION
+1. Retry B-1…B-5, log the attempt.
+2. On credentials: re-run the sweep, require `E6 = 0`, drive Topic 3
+   `phys.meas.errors` to `verified`, preserve the moat, move to Topic 4.
+3. Offline until then: third gradeable probes for the eight advanced physics
+   domains (~130 items), which is real moat production and needs nothing that is
+   currently blocked.
