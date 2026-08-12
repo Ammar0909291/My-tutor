@@ -3095,9 +3095,38 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       let cueDecisionHoisted: import('@/lib/understanding/decisionEngine').TeachingDecision | null = null
       try {
         const { understandStudentTurn } = await import('@/lib/understanding')
-        const cueLastSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
+        // THIS TURN'S EVIDENCE OUTRANKS LAST TURN'S.
+        //
+        // Measured in production, corpus audit Topic 3. The learner chose
+        // "Systematic errors and calibration flaws" for "what does averaging
+        // reduce?" — flatly wrong, and the server graded it so:
+        //
+        //   [mcq-grade] { chosen: 1, correct: false }
+        //   [ladder]    { correctness: false, CHECK -> GUIDE }
+        //
+        // and in the SAME turn the decision layer said:
+        //
+        //   CUE decision = ADVANCE_DIFFICULTY (D6-MASTERY-ADVANCE)
+        //   rationale: "Correct AND confident with no failures banked"
+        //   conversation decision = SUCCESS
+        //
+        // The tutor was told the learner was right and instructed to raise the
+        // demand, so it did: it paraphrased a true-but-irrelevant fragment of
+        // the wrong answer back and asked the learner to confirm it. A learner
+        // leaves that turn believing they were correct.
+        //
+        // The cause is that `lastSignal` is the PREVIOUS turn's signal, and it
+        // was the only evidence this layer had. That was invisible while no
+        // reliable per-turn signal existed at all; deterministic MCQ grading
+        // now produces one, and it is strictly fresher than the snapshot.
+        // Preferred here, so the ladder and the decision layer cannot disagree
+        // about whether the learner just got it right.
+        const cueSnapshotSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
           ? snapshot.lastSignal as { correctness?: boolean; confidence?: string }
           : null
+        const cueLastSignal = mcqGradeHoisted && mcqGradeHoisted.correct !== null
+          ? { correctness: mcqGradeHoisted.correct, confidence: cueSnapshotSignal?.confidence }
+          : cueSnapshotSignal
         const understanding = understandStudentTurn({
           // P13: a runtime fact the CUE records and the ladder acts on.
           lessonCompleted: lessonCompletedHoisted,
