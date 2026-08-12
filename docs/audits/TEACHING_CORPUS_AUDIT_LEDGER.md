@@ -2539,3 +2539,66 @@ the degraded fallback**, since a narrower branch after a catch-all is dead code.
    session — expect no outage template beside an MCQ, and `verified: true` at
    `practiceCorrect >= 2`.
 3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
+
+---
+
+# A FOURTH TEXT-ONLY-EMPTINESS DEFECT, found by SWEEPING (`ec3f4417`)
+
+Three instances in one day is a pattern, not a coincidence, so this iteration
+swept for the rest of the family instead of waiting to hit it in production.
+
+`askedQuestionThisTurn = repliesWithQuestion(cleanText)` reads the PROSE, and
+the MCQ tag is parsed and stripped hundreds of lines earlier. A turn that asked
+its question THROUGH the tag reported `askedQuestion: false`. Confirmed on one
+production line already in this ledger:
+
+```
+[ladder] { mcqAsked: true, askedQuestion: false }
+CUE: conversationSummary.lastAssistantAskedQuestion: false
+```
+
+## Not cosmetic
+
+- `enforceStance` raises **UNSUPPORTED_EXPLANATION** — *"the server decided ASK
+  and the rendered response contained no question"* — against a turn that DID
+  ask one. The stance log has been recording false violations.
+- `parityViolation` records the same false disagreement.
+- `classifyConversation` is told the tutor asked nothing, so the learner's NEXT
+  message is less likely to be read as an ANSWER — upstream of every evidence
+  decision in the turn.
+
+## Safe only because of the earlier fix, and that is asserted
+
+Give-detection used to be `!askedQuestion`. Flipping this to true BEFORE
+`deliveredTeaching` existed would have stopped the turn counting as a give and
+**re-frozen the ladder** — the exact defect this audit spent the day removing.
+The two fixes compose; verified offline and pinned by a test that folds both
+ways and requires the same phase.
+
+## The family, in one place
+
+| # | guard | judged from | fixed |
+|---|-------|-------------|-------|
+| 1 | `detectFillerTurn` | `cleanText` | `046bda7d` |
+| 2 | empty-body → outage template + `provider: degraded` | `text` | `378d07c5` |
+| 3 | affirmation floor fail-closed fallback | `cleanText` | already guarded |
+| 4 | `askedQuestionThisTurn` | `cleanText` | `ec3f4417` |
+
+**Standing rule, now written in the test header:** a turn's content is its TEXT
+**plus** its STRUCTURED PAYLOADS. Any check for "nothing here" must look at
+both.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` (queue B-1) |
+| IN PROGRESS | 1 — `phys.meas.errors` |
+| REMAINING | 421 |
+| Global fixes this run | 28 |
+
+## NEXT EXACT ACTION
+1. **Retry the BLOCKED queue** (B-1…B-4), log the attempt.
+2. Confirm `378d07c5` + `ec3f4417` READY, then drive Topic 3 to its mastery
+   gate on a clean session. Expect: no outage template beside an MCQ, no false
+   UNSUPPORTED_EXPLANATION, and `verified: true` at `practiceCorrect >= 2`.
+3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
