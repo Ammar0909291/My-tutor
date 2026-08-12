@@ -4390,7 +4390,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
           const { enforceStance, claimsCompletionInProse } = await import('@/lib/teaching/stanceEnforcement')
           const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
-          const askedQuestionThisTurn = repliesWithQuestion(cleanText)
+          // AN MCQ IS A QUESTION. `repliesWithQuestion` reads the PROSE, and the
+          // MCQ tag was parsed and stripped hundreds of lines earlier, so a turn
+          // that asked its question through the tag reported `askedQuestion:
+          // false`. Confirmed in production: `[ladder] { mcqAsked: true,
+          // askedQuestion: false }`, and CUE's
+          // `conversationSummary.lastAssistantAskedQuestion: false` on the same
+          // turn.
+          //
+          // That is the FOURTH place found judging a turn from `cleanText`
+          // alone, after the filler detector, the empty-body guard and the
+          // affirmation floor. Here the consequences are not cosmetic:
+          //   · enforceStance raises UNSUPPORTED_EXPLANATION ("the server
+          //     decided ASK and the response contained no question") against a
+          //     turn that did ask one;
+          //   · `parityViolation` records the same false disagreement;
+          //   · `classifyConversation` is told the tutor asked nothing, so the
+          //     learner's NEXT message is less likely to be read as an answer.
+          //
+          // Safe to correct only because `deliveredTeaching` now carries
+          // give-detection: before that field existed, flipping this to true
+          // would have stopped the turn counting as a give and re-frozen the
+          // ladder. Verified offline — the fold reaches GUIDE either way.
+          const askedQuestionThisTurn = repliesWithQuestion(cleanText) || mcqHoisted !== null
           // Turn Parity Observer: compare what the server decided against
           // what the LLM actually rendered. Measurement only — no blocking.
           const parityViolationThisTurn = !!(
