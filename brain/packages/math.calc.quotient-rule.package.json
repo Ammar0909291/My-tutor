@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.quotient-rule-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.quotient-rule",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e12ef85a17d77d7bab9c601c5f962068e670fc677f9e9324cbbe5acd9216854c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.quotient-rule.md": "sha256:6be54791f6293cd232b1dcb75b0c679ce8d9fb2e5c0f2d03c26a1312208c828c"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.quotient-rule",
+    "name": "Quotient Rule",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.calc.product-rule"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.quotient-rule-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.quotient-rule (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.quotient-rule.md": "sha256:6be54791f6293cd232b1dcb75b0c679ce8d9fb2e5c0f2d03c26a1312208c828c"
+      },
+      "contentHash": "sha256:37334e08e64a25501e9dcc22f34e6d9bb61aa22278125df8d5f2529e3935e6ce",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.quotient-rule.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.quotient-rule.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.quotient-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.quotient-rule\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.quotient-rule.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.quotient-rule.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.quotient-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.quotient-rule\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.quotient-rule.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.quotient-rule.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.quotient-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.quotient-rule\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.quotient-rule.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.quotient-rule.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.quotient-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.quotient-rule\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.quotient-rule/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply the Quotient Rule $\\left(\\frac{f}{g}\\right)'=\\frac{f'g-fg'}{g^2}$, correctly identifying which function is $f$ (numerator) and which is $g$ (denominator) BEFORE substituting.\n- LO2: Correctly preserve the ORDER of subtraction in the numerator ($f'g-fg'$, NOT $fg'-f'g$) — the quotient rule, unlike the (order-independent) product rule, is order-sensitive because subtraction doesn't commute.\n- LO3: Recognize when the PRODUCT rule (rewriting $f/g$ as $f\\cdot g^{-1}$ then using chain rule) would work instead, but state why the quotient rule's direct formula is usually more efficient for genuine quotients.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "NUMERATOR-AND-DENOMINATOR-SWAPPED-AS-F-AND-G",
+      "content": "| MC-1 | NUMERATOR-AND-DENOMINATOR-SWAPPED-AS-F-AND-G | Incorrectly identifying which function is f (numerator) and which is g (denominator) before applying the formula | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "QUOTIENT-RULE-SUBTRACTION-ORDER-REVERSED",
+      "content": "| MC-2 | QUOTIENT-RULE-SUBTRACTION-ORDER-REVERSED | Reversing the subtraction order in the quotient rule's numerator, producing the negative of the correct derivative | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Identify f and g Before Substituting into the Formula (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Identify f and g Before Substituting into the Formula (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Subtraction Order Matters: f'g − fg', Never the Reverse (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Subtraction Order Matters: f'g − fg', Never the Reverse (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Quotient Rule as the Efficient Shortcut (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Quotient Rule as the Efficient Shortcut (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Differentiate $h(x)=\\frac{x^3}{x-2}$.\n  2. Differentiate $h(x)=\\frac{\\cos x}{x^2}$, being careful about the subtraction order.\n  3. Differentiate $h(x)=\\frac{5}{x+1}$ using the quotient rule.\n  4. Explain, in one sentence, why swapping the quotient rule's subtraction order produces the negative of the correct derivative.\n- **P76 (Transfer Probe, mode = independence)**: \"An economist models the average cost per unit as $\\bar{C}(x)=\\frac{C(x)}{x}$, where $C(x)$ is the total cost function and $x$ is the number of units produced. (a) Using the quotient rule, derive a general formula for $\\bar{C}'(x)$ in terms of $C(x)$, $C'(x)$, and $x$. (b) Explain, being careful about the subtraction order, what would go wrong (in terms of getting the wrong sign) if the numerator's two terms were computed in the reversed order.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.product-rule` — the quotient rule is derivable from the product rule combined with the chain rule, and shares its \"identify the two pieces first\" structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.quotient-rule/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.quotient-rule",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.product-rule`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.calc.product-rule` (the quotient rule is derivable from it combined with the chain rule).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.quotient-rule.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

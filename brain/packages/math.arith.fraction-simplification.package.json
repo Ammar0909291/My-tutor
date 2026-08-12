@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.fraction-simplification-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.fraction-simplification",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9a5c42b29a613afa5a68cf511351e99b486257a36f4187d8afc04eb35daa4572",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.fraction-simplification.md": "sha256:b8832adab2305f5584ed716ca3099ee0be47c1465efd08dc404d3efc8c2e5fd1"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.fraction-simplification",
+    "name": "Fraction Simplification",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.arith.fraction-equivalence",
+      "math.nt.gcd"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.fraction-simplification-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.fraction-simplification (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.fraction-simplification.md": "sha256:b8832adab2305f5584ed716ca3099ee0be47c1465efd08dc404d3efc8c2e5fd1"
+      },
+      "contentHash": "sha256:23b02987aecd43a77fab1cf980f9bb5d884cc20b2a69a8f3028bc37473a6f313",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-simplification.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-simplification.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-simplification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-simplification\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-simplification.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-simplification.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-simplification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-simplification\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.fraction-simplification.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.fraction-simplification.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.fraction-simplification"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.fraction-simplification\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.fraction-simplification/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "Learning Objectives",
+      "content": "- LO1: Simplify a fraction to lowest terms by dividing both numerator and denominator by their greatest common divisor (GCD).\n- LO2: Verify a fraction is FULLY simplified by confirming its numerator and denominator have GCD $=1$ (are coprime).\n- LO3: Recognize that dividing numerator and denominator by any COMMON factor (not necessarily the full GCD) produces an equivalent, but not necessarily fully simplified, fraction — and that repeating the process (or finding the true GCD directly) completes the simplification.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "PARTIAL-REDUCTION-MISTAKEN-FOR-FULL-SIMPLIFICATION",
+      "content": "| MC-1 | PARTIAL-REDUCTION-MISTAKEN-FOR-FULL-SIMPLIFICATION | Stopping after dividing by any common factor smaller than the true GCD, without checking whether the result can be reduced further | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "GCD-COMPUTED-INCORRECTLY",
+      "content": "| MC-2 | GCD-COMPUTED-INCORRECTLY | Miscomputing the greatest common divisor itself (e.g. finding a common factor that isn't the GREATEST one, or an incorrect factor entirely) | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "NUMERATOR-AND-DENOMINATOR-DIVIDED-BY-DIFFERENT-NUMBERS",
+      "content": "| MC-3 | NUMERATOR-AND-DENOMINATOR-DIVIDED-BY-DIFFERENT-NUMBERS | Dividing the numerator and denominator by two DIFFERENT numbers rather than the same common factor, breaking the fraction's equivalence entirely | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "Divide Numerator and Denominator by the GCD (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Divide Numerator and Denominator by the GCD (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "Checking GCD = 1 Confirms Full Simplification (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Checking GCD = 1 Confirms Full Simplification (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Simplify $\\frac{20}{35}$ to lowest terms, showing the GCD used.\n  2. Given a partial simplification of $\\frac{60}{72}$ down to $\\frac{30}{36}$ (divided by 2 only), continue simplifying to lowest terms and verify the final result is coprime.\n  3. Verify whether $\\frac{22}{35}$ is already fully simplified, showing the GCD computation.\n  4. Simplify $\\frac{100}{45}$ (an improper fraction) to lowest terms.\n- **P76 (Transfer Probe, mode = independence)**: \"A recipe calls for $\\frac{16}{40}$ of a cup of an ingredient. (a) Simplify this fraction to lowest terms to express the amount more simply. (b) A cook simplifies it in two steps, first dividing by 4 to get $\\frac{4}{10}$, then stopping — explain, using this lesson's GCD-verification idea, why $\\frac{4}{10}$ is not yet the final simplified answer, and complete the simplification.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.fraction-equivalence` (dividing numerator and denominator by the same number preserves the fraction's value) and `math.nt.gcd` (the greatest common divisor computation this concept applies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.fraction-simplification/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.fraction-simplification",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.fraction-equivalence`, `math.nt.gcd`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.fraction-simplification.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.proper-subset-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.proper-subset",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:e1b58afd49f0bf9afad75266bacd730fa14dfefcc7494888125fa944b5c1ca02",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.proper-subset.md": "sha256:5982e3800eb6dd6177d5c774267e82bbd6065756559b54383e9af085bf5de523"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.proper-subset",
+    "name": "Proper Subset",
+    "difficultyRaw": "foundational",
+    "bloom": "understand",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.found.subset"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.proper-subset-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.proper-subset (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.proper-subset.md": "sha256:5982e3800eb6dd6177d5c774267e82bbd6065756559b54383e9af085bf5de523"
+      },
+      "contentHash": "sha256:0a376aa5b26e45c1562f3cebe0bb38d7d58f1c3baf6c1bc67c45c90fb149fe24",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.proper-subset.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proper-subset.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proper-subset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proper-subset\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proper-subset.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proper-subset.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proper-subset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proper-subset\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.proper-subset.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.proper-subset.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.proper-subset"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.proper-subset\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.proper-subset/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.proper-subset",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define $A$ as a proper subset of $B$ ($A\\subset B$) when $A\\subseteq B$ AND $A\\ne B$, i.e. $B$ has at least one element not in $A$.\n- LO2: Given two sets, correctly determine whether $A\\subseteq B$ (subset, possibly equal), $A\\subset B$ (proper — strictly smaller), or neither.\n- LO3: Recognize that every set is a subset of itself ($A\\subseteq A$) but NO set is a proper subset of itself ($A\\not\\subset A$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.proper-subset",
+      "title": "EQUALITY-CONDITION-OMITTED-FROM-PROPER-SUBSET-CHECK",
+      "content": "| MC-1 | EQUALITY-CONDITION-OMITTED-FROM-PROPER-SUBSET-CHECK | Verifying only the $\\subseteq$ condition and concluding \"proper subset\" without separately checking $A\\ne B$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.proper-subset",
+      "title": "SET-ORDER-MISTAKEN-FOR-INEQUALITY",
+      "content": "| MC-2 | SET-ORDER-MISTAKEN-FOR-INEQUALITY | Believing two sets listed in different orders (e.g. $\\{1,2\\}$ vs. $\\{2,1\\}$) are unequal, leading to an incorrect \"proper subset\" classification | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.proper-subset",
+      "title": "PROPER-SUBSET-COUNT-CONFUSED-WITH-SUBSET-COUNT",
+      "content": "| MC-3 | PROPER-SUBSET-COUNT-CONFUSED-WITH-SUBSET-COUNT | Failing to subtract the one case ($A$ itself) when counting proper subsets versus all subsets of a given set | Minor |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proper-subset",
+      "title": "Two Conditions: Subset AND Not-Equal (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two Conditions: Subset AND Not-Equal (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proper-subset",
+      "title": "$\\subseteq$ Permits Equality; $\\subset$ Forbids It (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"$\\\\subseteq$ Permits Equality; $\\\\subset$ Forbids It (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.proper-subset",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.proper-subset",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. For $A=\\{a,b,c\\}$, $B=\\{a,b,c,d\\}$, determine whether $A\\subset B$, justifying via both conditions.\n  2. Determine whether $\\{1,2\\}\\subset\\{2,1\\}$ (same elements, different listed order) is true, and explain using set equality (order doesn't matter for sets).\n  3. State whether $\\emptyset\\subset\\emptyset$ is true, and justify.\n  4. Given a set $A$ with 5 elements, state how many DISTINCT proper subsets $A$ has, contrasted with how many subsets (including $A$ itself) it has — connect to $2^5$ if the student has this tool, otherwise simply confirm \"one fewer than the total subset count, since $A$ itself is excluded.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A company's 'Premium' membership tier grants every benefit that the 'Basic' tier grants, plus at least one additional benefit Basic does not have. (a) Using this lesson's proper-subset concept, express the relationship between Basic's benefit set and Premium's benefit set using $\\subset$ notation, and explain why $\\subseteq$ alone would not capture the intended relationship. (b) If a future 'Elite' tier is introduced with EXACTLY the same benefits as Premium (no more, no fewer), explain why Premium's benefit set would then be a subset, but NOT a proper subset, of Elite's.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.proper-subset",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.subset` ($\\subseteq$, which allows equality) — this concept adds the strict, equality-excluding variant.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.found.proper-subset/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.proper-subset",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.subset`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.subset` (the non-strict relation this concept sharpens), `math.found.empty-set` (Example 3 reuses its vacuous-subset result by reference).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.proper-subset.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

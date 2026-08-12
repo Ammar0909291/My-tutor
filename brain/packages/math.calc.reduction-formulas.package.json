@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.reduction-formulas-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.reduction-formulas",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:deda78cdda24dbd8d7a80c76f81e5d4d52d3f4c726296bf1db30b75a203c05fa",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.reduction-formulas.md": "sha256:9a2634e55ef073d66d6f55b23adde61d2f64278301038fc34c191c8ff01bf43d"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.reduction-formulas",
+    "name": "Reduction Formulas",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.integration-by-parts"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.reduction-formulas-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.reduction-formulas (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.reduction-formulas.md": "sha256:9a2634e55ef073d66d6f55b23adde61d2f64278301038fc34c191c8ff01bf43d"
+      },
+      "contentHash": "sha256:d405eab05d5b6f3544f0204373d35507ef313a4cc214fef81661a8632442d7bf",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.reduction-formulas.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.reduction-formulas.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.reduction-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.reduction-formulas\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.reduction-formulas.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.reduction-formulas.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.reduction-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.reduction-formulas\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.reduction-formulas.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.reduction-formulas.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.reduction-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.reduction-formulas\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.reduction-formulas.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.reduction-formulas.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.reduction-formulas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.reduction-formulas\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.reduction-formulas/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Learning Objectives",
+      "content": "- LO1: State and apply a reduction formula (e.g. $\\int\\sin^nx\\,dx=-\\frac{\\sin^{n-1}x\\cos x}{n}+\\frac{n-1}{n}\\int\\sin^{n-2}x\\,dx$) to express $\\int f^n$ in terms of a LOWER power's integral ($\\int f^{n-2}$ or $\\int f^{n-1}$), REPEATING the reduction until reaching a base case that can be integrated directly.\n- LO2: Recognize that a reduction formula is DERIVED from integration by parts (choosing $u$ and $dv$ strategically to split off one or two powers of the original function) — it isn't a separate, unrelated technique, but a packaged, reusable RESULT of that same method.\n- LO3: Correctly identify the BASE CASE (e.g. $n=0$ or $n=1$) that terminates the reduction, and stop applying the formula once reached — recognizing that continuing to \"reduce\" past the base case is either impossible or meaningless.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "REDUCTION-FORMULA-APPLIED-ONLY-ONCE-LEAVING-THE-INTEGRAL-UNRESOLVED",
+      "content": "| MC-1 | REDUCTION-FORMULA-APPLIED-ONLY-ONCE-LEAVING-THE-INTEGRAL-UNRESOLVED | Applying the reduction formula a single time and treating the result as final, without repeating until a genuinely elementary base case is reached | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "REDUCTION-CONTINUED-PAST-THE-NATURAL-BASE-CASE",
+      "content": "| MC-2 | REDUCTION-CONTINUED-PAST-THE-NATURAL-BASE-CASE | Attempting to apply the reduction formula further even after reaching the base case (n=0 or n=1), rather than switching to direct integration | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Repeat the Reduction Until Reaching a True Base Case (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Repeat the Reduction Until Reaching a True Base Case (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Reduction Formulas Are Packaged Integration by Parts (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Reduction Formulas Are Packaged Integration by Parts (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Recognize the Base Case and Stop There (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Recognize the Base Case and Stop There (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Use the reduction formula to evaluate $\\int\\cos^3x\\,dx$, applying it until reaching a base case.\n  2. Explain, in one sentence, why a reduction formula is applied REPEATEDLY rather than just once.\n  3. Explain how a reduction formula for $\\int\\sin^nx\\,dx$ can be derived from integration by parts.\n  4. Explain why $\\int\\sin^0x\\,dx$ should be evaluated directly (as $\\int1\\,dx$) rather than by applying the reduction formula again.\n- **P76 (Transfer Probe, mode = independence)**: \"A signal-processing engineer needs to compute $\\int_0^{2\\pi}\\cos^6x\\,dx$ (appearing in a Fourier-analysis calculation of a filter's average power). (a) Explain why using the reduction formula repeatedly (rather than attempting integration by parts from scratch each time) is the practical approach here. (b) Describe, without fully computing, how many times the reduction formula would need to be applied to reach a base case starting from $n=6$, and what that base case integral would be.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.integration-by-parts` — reduction formulas are derived directly from it, applied repeatedly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.reduction-formulas/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.reduction-formulas",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.integration-by-parts`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.reduction-formulas.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

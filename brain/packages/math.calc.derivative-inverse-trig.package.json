@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.derivative-inverse-trig-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.derivative-inverse-trig",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f8b7d4ea3fe502e9bc064ea79f8386b9fbc407361130edd4928a527e723cf015",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md": "sha256:4249fd8a17c52f445ad5319c508af5b5304c6b422f39d398a5404cc7d1495525"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.derivative-inverse-trig",
+    "name": "Derivatives of Inverse Trig Functions",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.derivative-trig",
+      "math.trig.inverse-trig",
+      "math.calc.implicit-differentiation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.derivative-inverse-trig-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.derivative-inverse-trig (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md": "sha256:4249fd8a17c52f445ad5319c508af5b5304c6b422f39d398a5404cc7d1495525"
+      },
+      "contentHash": "sha256:3e4f21d9bafa665adede9ae3cd24906caf8b8ba32eab179c9c82cab212ddbef5",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-inverse-trig.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-inverse-trig\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-inverse-trig.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-inverse-trig\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-inverse-trig.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-inverse-trig\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.derivative-inverse-trig.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.derivative-inverse-trig"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.derivative-inverse-trig\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.derivative-inverse-trig/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Learning Objectives",
+      "content": "- LO1: State $\\frac{d}{dx}\\arcsin x=\\frac{1}{\\sqrt{1-x^2}}$ and $\\frac{d}{dx}\\arctan x=\\frac{1}{1+x^2}$, and recognize the DOMAIN restriction $-1<x<1$ for arcsin's derivative (since the square root would be undefined or the denominator zero outside this range).\n- LO2: DERIVE these formulas via IMPLICIT DIFFERENTIATION of the inverse relation — e.g. for $y=\\arcsin x$, rewrite as $\\sin y=x$, differentiate implicitly to get $\\cos y\\cdot y'=1$, solve for $y'=\\frac{1}{\\cos y}$, then convert back to $x$ using $\\cos y=\\sqrt{1-\\sin^2y}=\\sqrt{1-x^2}$ (using the POSITIVE square root, justified by arcsin's restricted range where $\\cos y\\ge0$).\n- LO3: Apply the CHAIN RULE when the inverse trig function's argument is a function of $x$: $\\frac{d}{dx}\\arcsin(g(x))=\\frac{g'(x)}{\\sqrt{1-[g(x)]^2}}$ — a common omission is forgetting the chain-rule factor $g'(x)$, or forgetting to substitute $g(x)$ (not just $x$) into the denominator.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "SQUARE-ROOT-SIGN-CHOSEN-ARBITRARILY-WITHOUT-JUSTIFYING-VIA-RESTRICTED-RANGE",
+      "content": "| MC-1 | SQUARE-ROOT-SIGN-CHOSEN-ARBITRARILY-WITHOUT-JUSTIFYING-VIA-RESTRICTED-RANGE | Choosing the positive (or negative) square root arbitrarily when deriving arcsin's derivative, without justifying it via arcsin's restricted range | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "CHAIN-RULE-MULTIPLICATION-PERFORMED-BUT-DENOMINATOR-SUBSTITUTION-OMITTED-OR-VICE-VERSA",
+      "content": "| MC-2 | CHAIN-RULE-MULTIPLICATION-PERFORMED-BUT-DENOMINATOR-SUBSTITUTION-OMITTED-OR-VICE-VERSA | Performing only one of the two required modifications (multiplying by g'(x), or substituting g(x) into the denominator) rather than both together | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 87,
+        "endLine": 87
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Justifying the Positive Square Root via arcsin's Restricted Range (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Justifying the Positive Square Root via arcsin's Restricted Range (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Substituting the Inner Function into Both the Numerator (via chain rule) and Denominator (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Substituting the Inner Function into Both the Numerator (via chain rule) and Denominator (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Applying the Same Pattern to arctan (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Applying the Same Pattern to arctan (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Differentiate $f(x)=\\arcsin(x/2)$ and state its domain.\n  2. Differentiate $f(x)=\\arctan(3x)$.\n  3. Explain, in one sentence, why the positive square root is used (rather than the negative) when deriving arcsin's derivative.\n  4. Differentiate $f(x)=\\arcsin(x^2-1)$.\n- **P76 (Transfer Probe, mode = independence)**: \"A surveyor uses $\\theta(x)=\\arctan\\left(\\frac{h}{x}\\right)$ to find the angle of elevation to a fixed tower of height $h$, as a function of the surveyor's horizontal distance $x$ from the tower's base. (a) Using the chain rule and the inverse trig derivative formula, find $\\frac{d\\theta}{dx}$ (treating $h$ as a constant). (b) Explain, in physical terms, why $\\frac{d\\theta}{dx}$ should be NEGATIVE for $x>0$ — connecting to the fact that the angle of elevation decreases as the surveyor moves farther from the tower.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.derivative-trig` (the ordinary trig derivatives used in the implicit-differentiation derivation), `math.trig.inverse-trig` (the functions themselves and their restricted domains/ranges), and `math.calc.implicit-differentiation` (the core derivation technique).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.derivative-inverse-trig/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.derivative-inverse-trig",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.derivative-trig`, `math.trig.inverse-trig`, `math.calc.implicit-differentiation`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.derivative-inverse-trig.md",
+        "startLine": 94,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

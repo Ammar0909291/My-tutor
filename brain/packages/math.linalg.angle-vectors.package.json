@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.angle-vectors-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.angle-vectors",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:300c04b6a25aed5f416e32dd4c14860833a2827ea7905b5c066bdc567bb2401b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.angle-vectors.md": "sha256:3704f1b76902a11ff384d37d0f9ce0bfcc20b7089effdee3e6d8f261f7cc13b3"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.angle-vectors",
+    "name": "Angle Between Vectors",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.linalg.dot-product",
+      "math.linalg.norm"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.angle-vectors-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.angle-vectors (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.angle-vectors.md": "sha256:3704f1b76902a11ff384d37d0f9ce0bfcc20b7089effdee3e6d8f261f7cc13b3"
+      },
+      "contentHash": "sha256:6c5e5239cab6be8edd8b08bdafeea8559edb2aec2a560ec397d074fae3041372",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.angle-vectors.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.angle-vectors.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.angle-vectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.angle-vectors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.angle-vectors.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.angle-vectors.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.angle-vectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.angle-vectors\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.angle-vectors.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.angle-vectors.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.angle-vectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.angle-vectors\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.angle-vectors.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.angle-vectors.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.angle-vectors"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.angle-vectors\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.angle-vectors/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the angle $\\theta$ between two vectors using $\\cos\\theta=\\frac{a\\cdot b}{|a||b|}$.\n- LO2: Use the dot product to test PERPENDICULARITY directly: $\\theta=\\pi/2$ (90°) if and only if $a\\cdot b=0$ — no need to compute the full angle when only checking for perpendicularity.\n- LO3: State that the CAUCHY-SCHWARZ INEQUALITY guarantees $\\frac{a\\cdot b}{|a||b|}$ always lies in $[-1,1]$ — ensuring the angle formula's input to $\\cos^{-1}$ is always VALID (never out of the arccosine's domain).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "FULL-ANGLE-FORMULA-USED-UNNECESSARILY-FOR-PERPENDICULARITY-CHECK",
+      "content": "| MC-1 | FULL-ANGLE-FORMULA-USED-UNNECESSARILY-FOR-PERPENDICULARITY-CHECK | Computing the full angle formula (norms and arccosine) when only checking perpendicularity, rather than using the more efficient dot-product-alone test | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "OUT-OF-RANGE-RATIO-NOT-RECOGNIZED-AS-ERROR-SIGNAL",
+      "content": "| MC-2 | OUT-OF-RANGE-RATIO-NOT-RECOGNIZED-AS-ERROR-SIGNAL | Not recognizing that a computed $\\frac{a\\cdot b}{|a||b|}$ value outside $[-1,1]$ indicates an upstream computational error, since Cauchy-Schwarz guarantees this can never genuinely happen | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "Dot Product Over Product of Norms, Then Arccosine (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Dot Product Over Product of Norms, Then Arccosine (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "Perpendicularity Only Needs the Dot Product (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Perpendicularity Only Needs the Dot Product (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "An Out-of-Range Ratio Signals a Computational Error (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"An Out-of-Range Ratio Signals a Computational Error (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the angle between $a=(3,4)$ and $b=(4,3)$.\n  2. Determine whether $a=(1,2,3)$ and $b=(2,-1,0)$ are perpendicular, using the most efficient method.\n  3. Find the angle between $a=(1,1)$ and $b=(-1,1)$.\n  4. If a computed value of $\\frac{a\\cdot b}{|a||b|}$ comes out to $1.2$, explain what this indicates and what should be checked.\n- **P76 (Transfer Probe, mode = independence)**: \"A robotics engineer needs to verify that two sensor mounting brackets are installed at exactly 90° to each other, using direction vectors $a=(1,2,2)$ and $b=(4,-1,-1)$ read from the CAD model. (a) Determine whether these brackets are indeed perpendicular, using the most efficient test from this lesson. (b) If instead the engineer needed to know the EXACT angle (not just whether it's 90°) for a bracket that is NOT perpendicular, explain why the full formula (norms and arccosine) would be necessary in that case, contrasting with the efficient shortcut used in part (a).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.dot-product` and `math.linalg.norm` — the two ingredients this angle formula combines.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.angle-vectors/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.angle-vectors",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.dot-product`, `math.linalg.norm`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.distance` (another norm-based geometric quantity, computed via a similarly direct formula).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.angle-vectors.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

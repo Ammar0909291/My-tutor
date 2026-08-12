@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.circle-theorems-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.circle-theorems",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9642af31b7670e123153ec2d30b19b21b1079a368b92c0012ecea26cbd883781",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.circle-theorems.md": "sha256:e540f36a6653541705682cecb3eb39faf1a25c56178e33f8803863dc32a0cc38"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.circle-theorems",
+    "name": "Circle Theorems",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.geom.circle",
+      "math.geom.angle-pairs"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.circle-theorems-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.circle-theorems (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.circle-theorems.md": "sha256:e540f36a6653541705682cecb3eb39faf1a25c56178e33f8803863dc32a0cc38"
+      },
+      "contentHash": "sha256:f609d74fd9ba5029cb14c6b741a835ea6a01631c51628fb2f7f10516d2d80c45",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-theorems.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-theorems.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-theorems\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-theorems.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-theorems.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-theorems\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-theorems.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-theorems.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-theorems\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.circle-theorems.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.circle-theorems.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.circle-theorems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.circle-theorems\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.circle-theorems/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the INSCRIBED ANGLE THEOREM — an inscribed angle (vertex ON the circle) is EXACTLY HALF the CENTRAL angle (vertex at the center) subtending the SAME arc — and recognize this means ALL inscribed angles subtending the same arc are EQUAL to each other (all equal to half the same central angle).\n- LO2: Apply the TANGENT-RADIUS PERPENDICULARITY theorem (already introduced in `math.geom.circle-parts`, now used in proofs) and the EQUAL-CHORDS-EQUIDISTANT-FROM-CENTER theorem — equal-length chords are always the SAME distance from the circle's center, and conversely.\n- LO3: Apply the POWER OF A POINT theorem — for a point $P$ outside (or inside) a circle, and two lines through $P$ intersecting the circle at points $A,B$ and $C,D$ respectively, $PA\\cdot PB=PC\\cdot PD$ — a relationship that holds REGARDLESS of which specific pair of intersecting lines through $P$ is chosen.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "INSCRIBED-ANGLE-COMPUTED-AS-EQUAL-TO-OR-DOUBLE-THE-CENTRAL-ANGLE-INSTEAD-OF-HALF",
+      "content": "| MC-1 | INSCRIBED-ANGLE-COMPUTED-AS-EQUAL-TO-OR-DOUBLE-THE-CENTRAL-ANGLE-INSTEAD-OF-HALF | Computing an inscribed angle as equal to or double the corresponding central angle, rather than correctly halving it | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "POWER-OF-A-POINT-RELATIONSHIP-COMPUTED-AS-A-SUM-INSTEAD-OF-A-PRODUCT",
+      "content": "| MC-2 | POWER-OF-A-POINT-RELATIONSHIP-COMPUTED-AS-A-SUM-INSTEAD-OF-A-PRODUCT | Using addition instead of multiplication when applying the power of a point theorem, producing an incorrect result | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "Inscribed Angle Is Half, Never Equal to or Double, the Central Angle (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Inscribed Angle Is Half, Never Equal to or Double, the Central Angle (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "All Inscribed Angles on the Same Arc Are Equal (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"All Inscribed Angles on the Same Arc Are Equal (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "Power of a Point Is a Product Relationship, Not a Sum (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Power of a Point Is a Product Relationship, Not a Sum (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. If a central angle subtending an arc measures $110°$, find the inscribed angle subtending the same arc.\n  2. Explain why two different inscribed angles, both subtending the same arc, must be equal to each other.\n  3. For a point $P$ outside a circle with $PA=6$, $PB=9$ on one line, and $PC=3$ on a second line through $P$, find $PD$.\n  4. State the tangent-radius perpendicularity theorem and the equal-chords-equidistant-from-center theorem in your own words.\n- **P76 (Transfer Probe, mode = independence)**: \"A navigator is using triangulation from two lighthouses (both lying on the boundary of a circular safe-passage zone marked on a nautical chart), observing the angle between the two lighthouses from the ship's current position, and comparing it to the angle observed from a reference position also on the zone's boundary. (a) Explain, using the Inscribed Angle Theorem, why the ship's observed angle should equal the reference position's angle, PROVIDED both are inscribed angles subtending the same arc between the two lighthouses. (b) Explain what it would mean, navigationally, if the ship's observed angle came out DIFFERENT from the reference angle — connecting to whether the ship is genuinely on the same circular boundary.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.circle` (the shape) and `math.geom.angle-pairs` (needed for the inscribed-angle proof's angle relationships).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.circle-theorems/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.circle-theorems",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.circle`, `math.geom.angle-pairs`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.geom.circle`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.circle-theorems.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

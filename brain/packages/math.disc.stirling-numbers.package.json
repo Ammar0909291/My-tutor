@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.stirling-numbers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.stirling-numbers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2264845151464136d524a3265f636fd18c8f6a895254bceac34b9b79f4393ee9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.stirling-numbers.md": "sha256:37b5f57167310964dfde2699af0678c9edec5f3f151a1588ca6b1dc8c3f97012"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.disc.stirling-numbers",
+    "name": "Stirling Numbers",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.disc.combinations",
+      "math.disc.recurrence-relation"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.stirling-numbers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.stirling-numbers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.stirling-numbers.md": "sha256:37b5f57167310964dfde2699af0678c9edec5f3f151a1588ca6b1dc8c3f97012"
+      },
+      "contentHash": "sha256:2fbe36b8fdd2f0f9d04b3290a3ad31f17d61aedd70664fae4840c76a800ff557",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.stirling-numbers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stirling-numbers.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stirling-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stirling-numbers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stirling-numbers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stirling-numbers.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stirling-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stirling-numbers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.stirling-numbers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.stirling-numbers.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.stirling-numbers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.stirling-numbers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.stirling-numbers/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the Stirling numbers of the SECOND kind $S(n,k)$ (partitions of an $n$-set into $k$ non-empty unordered subsets) for small cases, using the recurrence $S(n,k)=k\\cdot S(n-1,k)+S(n-1,k-1)$.\n- LO2: Compute the (unsigned) Stirling numbers of the FIRST kind $s(n,k)$ (permutations of $n$ elements with exactly $k$ cycles) for small cases, using the recurrence $s(n,k)=(n-1)\\cdot s(n-1,k)+s(n-1,k-1)$.\n- LO3: Distinguish the two kinds structurally — second-kind partitions are UNORDERED groupings with NO internal structure within each group, while first-kind cycles have a specific CYCLIC ORDER within each group — and correctly identify which kind a given counting problem calls for.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "FIRST-AND-SECOND-KIND-STIRLING-NUMBERS-CONFLATED",
+      "content": "| MC-1 | FIRST-AND-SECOND-KIND-STIRLING-NUMBERS-CONFLATED | Assuming $S(n,k)=s(n,k)$ generally (based on small-case coincidental equality), missing that cycle counts and partition counts genuinely diverge for larger $n,k$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "RECURRENCE-COEFFICIENT-CONFUSED-BETWEEN-THE-TWO-KINDS",
+      "content": "| MC-2 | RECURRENCE-COEFFICIENT-CONFUSED-BETWEEN-THE-TWO-KINDS | Using the wrong multiplicative coefficient (mixing up $k$ from the second-kind recurrence with $n-1$ from the first-kind recurrence) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "PARTITION-COUNTED-WITH-INTERNAL-ORDER",
+      "content": "| MC-3 | PARTITION-COUNTED-WITH-INTERNAL-ORDER | When computing a second-kind partition count, mistakenly distinguishing internally-ordered arrangements within a subset, effectively over-counting as if computing a first-kind (cycle) count instead | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "Second-Kind Recurrence: Join Existing or Start New (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Second-Kind Recurrence: Join Existing or Start New (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "First Kind vs. Second Kind: Cycles Carry Extra Structure (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"First Kind vs. Second Kind: Cycles Carry Extra Structure (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $S(4,3)$ using the second-kind recurrence, given $S(3,3)=1$ and $S(3,2)=3$.\n  2. Compute $s(4,3)$ using the first-kind recurrence, given $s(3,3)=1$ and $s(3,2)=3$.\n  3. Given a set $\\{1,2,3,4\\}$ partitioned as $\\{1,2\\},\\{3,4\\}$, state whether this represents a second-kind partition, a first-kind cycle structure, or could represent either interpretation depending on context — and explain your reasoning.\n  4. Explain, in one sentence, why $s(n,k)\\ge S(n,k)$ always holds, using the cycle-vs-partition structural distinction.\n- **P76 (Transfer Probe, mode = independence)**: \"A scheduling problem asks: 'in how many ways can 5 distinct tasks be assigned to exactly 3 identical (unlabeled) work teams, with every team getting at least one task?' A SEPARATE problem asks: 'in how many ways can 5 distinct tasks be arranged into exactly 3 cyclic processing loops, where each loop processes its assigned tasks in a specific repeating order?' (a) Identify which Stirling-number kind (first or second) applies to EACH of these two problems, justifying your choice using this lesson's structural distinction. (b) Explain why the two problems, despite both involving '5 tasks into 3 groups,' would generally have DIFFERENT numerical answers.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.combinations` (used within the derivation logic) and `math.disc.recurrence-relation` (both kinds of Stirling numbers are naturally defined via recurrences).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.stirling-numbers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.stirling-numbers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.combinations`, `math.disc.recurrence-relation`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.catalan-numbers` (a sibling \"named combinatorial sequence\" concept sharing the same two prerequisites); Bell numbers (mentioned in the KG description as a further connection, not authored as a separate entry in this batch).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.stirling-numbers.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

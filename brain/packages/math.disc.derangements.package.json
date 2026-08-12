@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.derangements-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.derangements",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8f6360dad2ad0031e6913926df22a3db74d65ee1d6cc92866abb91f3b8dfcf53",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.derangements.md": "sha256:0526be5b3abcf3d6b0a245968037e268dfc52c5463595addc4a099e9aeb514f2"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.derangements",
+    "name": "Derangements",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.disc.inclusion-exclusion"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.derangements-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.derangements (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.derangements.md": "sha256:0526be5b3abcf3d6b0a245968037e268dfc52c5463595addc4a099e9aeb514f2"
+      },
+      "contentHash": "sha256:444922afda403895addde8b1cb03dc07abfa8db69d17859adb666d2d42879690",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.derangements.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.derangements.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.derangements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.derangements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.derangements.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.derangements.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.derangements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.derangements\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.derangements.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.derangements.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.derangements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.derangements\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.derangements.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.derangements.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.derangements"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.derangements\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.derangements/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.derangements",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute $D(n)$ (the number of derangements of $n$ elements — permutations with NO fixed point) using the formula $D(n)=n!\\sum_{k=0}^n\\frac{(-1)^k}{k!}$.\n- LO2: Derive the derangement formula via inclusion-exclusion, treating \"element $i$ is fixed\" as the $i$-th \"bad\" property being excluded.\n- LO3: Use the approximation $D(n)\\approx n!/e$ and the limit $D(n)/n!\\to1/e$ to estimate the probability that a random permutation is a derangement, for reasonably large $n$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.derangements",
+      "title": "INCLUSION-EXCLUSION-TERM-COUNT-MISCOMPUTED-FOR-DERANGEMENTS",
+      "content": "| MC-1 | INCLUSION-EXCLUSION-TERM-COUNT-MISCOMPUTED-FOR-DERANGEMENTS | Correctly computing individual fixed-point-overlap values but miscounting how many such terms exist at each inclusion-exclusion level (singles, pairs, triples, ...) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.derangements",
+      "title": "ONE-OVER-E-APPROXIMATION-ASSUMED-TO-NEED-HUGE-N",
+      "content": "| MC-2 | ONE-OVER-E-APPROXIMATION-ASSUMED-TO-NEED-HUGE-N | Believing the $D(n)\\approx n!/e$ approximation only becomes trustworthy for very large $n$, missing that convergence is already excellent by roughly $n=10$ | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.derangements",
+      "title": "DERANGEMENT-CONFUSED-WITH-ANY-PERMUTATION-WITHOUT-A-SPECIFIC-FIXED-POINT",
+      "content": "| MC-3 | DERANGEMENT-CONFUSED-WITH-ANY-PERMUTATION-WITHOUT-A-SPECIFIC-FIXED-POINT | Treating \"no fixed point at position 1\" (a weaker condition) as equivalent to \"no fixed point anywhere\" (the true derangement condition) | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.derangements",
+      "title": "Computing D(n) from the Closed Form (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Computing D(n) from the Closed Form (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.derangements",
+      "title": "Deriving the Formula via Inclusion-Exclusion (Primitive P64: Conceptual Shift, second instance)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Deriving the Formula via Inclusion-Exclusion (Primitive P64: Conceptual Shift, second instance)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.derangements",
+      "title": "Fast Convergence to 1/e (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Fast Convergence to 1/e (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.derangements",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.derangements",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $D(5)$ using the closed-form formula.\n  2. Derive $D(4)$ from scratch via inclusion-exclusion (computing the fixed-point overlap terms explicitly), and verify it matches Example 1's closed-form value of 9.\n  3. Estimate the probability that a random shuffle of 8 distinct items results in a derangement (no item in its original position), using the $1/e$ approximation.\n  4. Explain, in one sentence, why $D(n)$ must always be a WHOLE number even though its formula involves the seemingly non-integer quantity $n!/e$.\n- **P76 (Transfer Probe, mode = independence)**: \"A teacher randomly redistributes 6 graded exams back to 6 students (without looking at names, purely at random) as an icebreaker activity. (a) Compute the exact number of ways this redistribution can happen such that NO student gets their own exam back, using the derangement formula. (b) Estimate the PROBABILITY that this happens (no student gets their own exam) using the $1/e$ approximation, and explain, using this lesson's fast-convergence point, why this approximation is already trustworthy for a class of only 6 students despite $n=6$ being quite small.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.derangements",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.inclusion-exclusion` (the technique this concept's derivation directly applies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.derangements/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.derangements",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.inclusion-exclusion`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.derangements.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

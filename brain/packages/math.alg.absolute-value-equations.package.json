@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.absolute-value-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.absolute-value-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:87dc6442633571e40a01db7a2477944e9fb2acd0d03420eadb4ae4a010439149",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.absolute-value-equations.md": "sha256:947817aff2cf3622037e10441d550178b6d7df522941f2582d2dacceccbd13bd"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.absolute-value-equations",
+    "name": "Absolute Value Equations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.arith.absolute-value",
+      "math.alg.linear-equation-1var"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.absolute-value-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.absolute-value-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.absolute-value-equations.md": "sha256:947817aff2cf3622037e10441d550178b6d7df522941f2582d2dacceccbd13bd"
+      },
+      "contentHash": "sha256:0d843bbc36cbe985d23864c952b3a56647d45953305a6b774f39949c4a5625ef",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.absolute-value-equations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.absolute-value-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.absolute-value-equations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.absolute-value-equations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.absolute-value-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.absolute-value-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.absolute-value-equations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.absolute-value-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.absolute-value-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.absolute-value-equations.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.absolute-value-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.absolute-value-equations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.absolute-value-equations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve an absolute value equation $|expression|=k$ (for $k\\ge0$) by splitting into two cases: $expression=k$ and $expression=-k$.\n- LO2: Recognize when an absolute value equation has NO solution — specifically when it is set equal to a NEGATIVE number, since $|x|\\ge0$ always.\n- LO3: Solve an absolute value INEQUALITY, correctly distinguishing $|expression|<k$ (a conjunction/\"between\" region) from $|expression|>k$ (a disjunction/\"outside\" region).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "ABSOLUTE-VALUE-EQUATION-SPLIT-WITHOUT-CHECKING-SIGN",
+      "content": "| MC-1 | ABSOLUTE-VALUE-EQUATION-SPLIT-WITHOUT-CHECKING-SIGN | Splitting an absolute value equation into two cases without first checking whether the right-hand side is negative (making the equation unsolvable) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "ABSOLUTE-VALUE-INEQUALITY-AND-OR-STRUCTURE-CONFUSED",
+      "content": "| MC-2 | ABSOLUTE-VALUE-INEQUALITY-AND-OR-STRUCTURE-CONFUSED | Applying the wrong logical structure (AND/between vs. OR/outside) based on the inequality's direction ($<$ vs. $>$) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "ABSOLUTE-VALUE-SOLUTIONS-NOT-VERIFIED",
+      "content": "| MC-3 | ABSOLUTE-VALUE-SOLUTIONS-NOT-VERIFIED | Failing to check candidate solutions from a case-split against the ORIGINAL absolute value equation, missing that one case can sometimes fail to check out (e.g. when the equation is embedded in a larger, more complex expression) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Two Cases: Expression Equals k or Equals -k (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Two Cases: Expression Equals k or Equals -k (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Check the Sign First: No Solution When Set to a Negative (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Check the Sign First: No Solution When Set to a Negative (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Less-Than Gives AND (Between); Greater-Than Gives OR (Outside) (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Less-Than Gives AND (Between); Greater-Than Gives OR (Outside) (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Solve $|3x-1|=8$.\n  2. Determine whether $|2x+5|=-3$ has a solution, and explain why or why not without attempting to split into cases.\n  3. Solve $|x+4|<6$, expressing the solution as a single interval.\n  4. Solve $|2x-1|>9$, expressing the solution as two separate pieces.\n- **P76 (Transfer Probe, mode = independence)**: \"A manufacturing tolerance specifies that a produced part's length $L$ must satisfy $|L-50|\\le0.5$ (millimeters) to pass quality control, where 50mm is the target length. (a) Solve this inequality to find the acceptable range of $L$. (b) A quality inspector instead needs to flag parts that are OUT of tolerance, i.e. satisfying $|L-50|>0.5$ — solve this inequality and explain, using this lesson's AND-vs-OR distinction, why the 'in tolerance' and 'out of tolerance' solution sets have fundamentally different structures (one connected interval vs. two separate pieces).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.absolute-value` (distance from zero, always non-negative) and `math.alg.linear-equation-1var` (solving each resulting case).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.absolute-value-equations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.absolute-value-equations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.absolute-value`, `math.alg.linear-equation-1var`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.absolute-value-equations.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.frenet-serret-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.frenet-serret",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:47074a324ac931e58a8c4867ff0bb6822eabc910ea95b4cb31d8d4b6261b4f4c",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.frenet-serret.md": "sha256:94828357dc343ff3b1e1083b2e2bdcd6df56a9ad7c2db7572a9395cd05acf94e"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.frenet-serret",
+    "name": "Frenet-Serret Formulas",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.65,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.geom.curvature"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.frenet-serret-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.frenet-serret (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.frenet-serret.md": "sha256:94828357dc343ff3b1e1083b2e2bdcd6df56a9ad7c2db7572a9395cd05acf94e"
+      },
+      "contentHash": "sha256:4993aaf3f1b9569efc6a31c7f17604441ecfa1e33f56ede77aa558d75349a18c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.frenet-serret.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.frenet-serret.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.frenet-serret"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.frenet-serret\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.frenet-serret.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.frenet-serret.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.frenet-serret"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.frenet-serret\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.frenet-serret.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.frenet-serret.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.frenet-serret"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.frenet-serret\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.frenet-serret.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.frenet-serret.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.frenet-serret"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.frenet-serret\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.frenet-serret/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify the THREE mutually PERPENDICULAR vectors of the **Frenet frame** (TNB frame) at a point on a space curve: TANGENT $T$ (direction of motion), NORMAL $N$ (direction the curve is turning), and BINORMAL $B$ (perpendicular to both, completing a right-handed system, $B=T\\times N$).\n- LO2: State the Frenet-Serret system $T'=\\kappa N$, $N'=-\\kappa T+\\tau B$, $B'=-\\tau N$, and identify CURVATURE $\\kappa$ (from `math.geom.curvature`, measuring how sharply the curve BENDS within its immediate plane of motion) and TORSION $\\tau$ (a NEW quantity measuring how much the curve TWISTS OUT of that plane, into 3D) — recognizing torsion as a genuinely NEW concept, not simply curvature computed differently.\n- LO3: Recognize that a curve with ZERO torsion EVERYWHERE lies ENTIRELY in a single PLANE (a \"flat,\" non-twisting curve) — torsion specifically measures departure from planarity, while curvature alone (even if nonzero) is compatible with a purely planar curve.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "NORMAL-AND-BINORMAL-VECTORS-ROLES-CONFUSED",
+      "content": "| MC-1 | NORMAL-AND-BINORMAL-VECTORS-ROLES-CONFUSED | Confusing the normal vector (in-plane turning direction) with the binormal vector (out-of-plane axis direction) in the Frenet frame | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "TORSION-TREATED-AS-DERIVABLE-FROM-CURVATURE-RATHER-THAN-INDEPENDENT",
+      "content": "| MC-2 | TORSION-TREATED-AS-DERIVABLE-FROM-CURVATURE-RATHER-THAN-INDEPENDENT | Treating torsion as a recombination or derivative of curvature information, rather than recognizing it as a genuinely independent geometric quantity | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Distinguishing N (In-Plane Turning) from B (Out-of-Plane Axis) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Distinguishing N (In-Plane Turning) from B (Out-of-Plane Axis) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Torsion Is an Independent Quantity from Curvature (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Torsion Is an Independent Quantity from Curvature (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Zero Torsion Everywhere Means the Curve Is Planar (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Zero Torsion Everywhere Means the Curve Is Planar (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.65×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Describe, in your own words, the roles of the tangent, normal, and binormal vectors in the Frenet frame.\n  2. Explain why a circle has zero torsion despite having nonzero curvature.\n  3. Explain why a helix has nonzero torsion, unlike a circle.\n  4. If a curve is known to have zero torsion at every point, what can you conclude about its overall shape?\n- **P76 (Transfer Probe, mode = independence)**: \"An aerospace engineer designing a roller coaster track wants a genuinely three-dimensional loop-the-loop-with-a-twist section (not just a flat vertical circle), and needs to characterize how much the track 'twists' out of any single plane along its length, separate from how sharply it curves. (a) Explain which of the two Frenet-Serret quantities (curvature or torsion) specifically measures this out-of-plane twisting. (b) Explain why simply knowing the track's curvature at each point would be INSUFFICIENT to fully describe whether the track has this 3D twisting feature.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.curvature` — the Frenet-Serret formulas extend curvature into a full 3D local-geometry framework, adding torsion.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.frenet-serret/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.frenet-serret",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.curvature`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.geom.differential-geometry-curves`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.frenet-serret.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

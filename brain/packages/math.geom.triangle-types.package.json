@@ -1,0 +1,262 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.triangle-types-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.triangle-types",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:05d99311e9b8af8b3a594453b61f866e9939ac5cb845b809f082ee74458dc3d3",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.triangle-types.md": "sha256:e7bd2b5e25712396d8a35e864bfad1d32fb44d0f156db058ba1bb5e4b3946644"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.triangle-types",
+    "name": "Types of Triangles",
+    "difficultyRaw": "developing",
+    "bloom": "remember",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.geom.triangle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.triangle-types-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.triangle-types (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.triangle-types.md": "sha256:e7bd2b5e25712396d8a35e864bfad1d32fb44d0f156db058ba1bb5e4b3946644"
+      },
+      "contentHash": "sha256:d146d8bb50439d66d6e0268eee478a14186d8dc8ee24eddbb2df0e1c7441bca3",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-types.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-types.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-types\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-types.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-types.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-types\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-types.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-types.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-types"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-types\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.triangle-types/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.triangle-types",
+      "title": "Learning Objectives",
+      "content": "- LO1: Classify a triangle BY SIDES as SCALENE (all three sides different lengths), ISOSCELES (at least two sides equal), or EQUILATERAL (all three sides equal).\n- LO2: Classify a triangle BY ANGLES as ACUTE (all three angles $<90°$), RIGHT (one angle exactly $90°$), or OBTUSE (one angle $>90°$) — and recognize these two classification systems (by sides, by angles) are INDEPENDENT — a triangle gets ONE label from EACH system simultaneously (e.g. \"isosceles right triangle\").\n- LO3: Recognize that EQUILATERAL triangles are ALWAYS equiangular (all angles exactly $60°$), hence always ACUTE — this is a special, GUARANTEED overlap between the two classification systems, not a coincidence needing separate verification each time.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle-types",
+      "title": "SIDE-CLASSIFICATION-ASSUMED-TO-DETERMINE-ANGLE-CLASSIFICATION",
+      "content": "| MC-1 | SIDE-CLASSIFICATION-ASSUMED-TO-DETERMINE-ANGLE-CLASSIFICATION | Assuming a triangle's side classification (scalene/isosceles/equilateral) directly determines its angle classification, rather than checking the two systems independently | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle-types",
+      "title": "RIGHT-TRIANGLES-ASSUMED-TO-ALWAYS-BE-ISOSCELES",
+      "content": "| MC-2 | RIGHT-TRIANGLES-ASSUMED-TO-ALWAYS-BE-ISOSCELES | Assuming right triangles must always be isosceles (over-generalizing from the familiar 45-45-90 case), rather than recognizing right triangles can be scalene, isosceles, but never equilateral | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-types",
+      "title": "Classify by Sides and by Angles Independently, Then Combine (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Classify by Sides and by Angles Independently, Then Combine (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-types",
+      "title": "Equilateral Guarantees Acute, But No Other Overlaps Are Guaranteed (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Equilateral Guarantees Acute, But No Other Overlaps Are Guaranteed (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.triangle-types",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Classify a triangle with sides 6, 6, 6 by both sides and angles.\n  2. Classify a triangle with sides 7, 9, 12 (given it works out to have one obtuse angle) by both sides and angles.\n  3. Explain why an equilateral triangle is always acute.\n  4. Give an example (sides and rough angle description) of a right triangle that is scalene, and explain why this shows right triangles aren't always isosceles.\n- **P76 (Transfer Probe, mode = independence)**: \"A structural engineer is choosing triangular support brackets for a bridge, and needs brackets classified both by their side lengths (for material-cutting purposes) and by their angles (for load-bearing analysis, since obtuse-angled brackets distribute force differently than acute ones). (a) Explain why the engineer cannot determine the angle classification just from knowing the bracket is 'isosceles,' and must check the actual angles separately. (b) If a bracket design specifies an equilateral triangle, explain what the engineer can immediately conclude about its angles without further calculation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.triangle-types",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.triangle` (the basic triangle concept).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-types/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.triangle-types",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.triangle`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.triangle`.\n- **Parent**: `math.geom.triangle`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-types.md",
+        "startLine": 86,
+        "endLine": 93
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.squeeze-theorem-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.squeeze-theorem",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8b9e754668a22dc0a4ef97310cca11b0a07dba31ff4e1a6eb617af2c9fa6cea4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.squeeze-theorem.md": "sha256:604003beb4ef5ab28c208b947d61735074decdfa629683640692d22bfafd3bb3"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.squeeze-theorem",
+    "name": "Squeeze Theorem",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.calc.limit-laws"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.squeeze-theorem-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.squeeze-theorem (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.squeeze-theorem.md": "sha256:604003beb4ef5ab28c208b947d61735074decdfa629683640692d22bfafd3bb3"
+      },
+      "contentHash": "sha256:cd1bb6dcf8c335ba4b045d0251d778205472056d7e34f8c8a4f511614159a082",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.squeeze-theorem.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.squeeze-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.squeeze-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.squeeze-theorem.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.squeeze-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.squeeze-theorem\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.squeeze-theorem.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.squeeze-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.squeeze-theorem\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.squeeze-theorem.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.squeeze-theorem"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.squeeze-theorem\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.squeeze-theorem/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Squeeze Theorem — if $g(x)\\le f(x)\\le h(x)$ NEAR $a$ (not necessarily AT $a$ itself), and $\\lim_{x\\to a}g(x)=\\lim_{x\\to a}h(x)=L$, then $\\lim_{x\\to a}f(x)=L$ — the \"sandwiched\" function's limit is FORCED to match the bounding functions', even without evaluating $f$ directly.\n- LO2: Correctly establish BOTH inequalities $g(x)\\le f(x)$ and $f(x)\\le h(x)$ before applying the theorem — a common shortcut error uses only ONE side of the inequality, which is insufficient to conclude anything.\n- LO3: Apply the theorem to the classic result $\\lim_{x\\to0}\\frac{\\sin x}{x}=1$, recognizing this is a FOUNDATIONAL limit (needed to derive `math.calc.derivative-trig`'s $\\frac{d}{dx}\\sin x=\\cos x$) that CANNOT be evaluated by direct substitution or the ordinary limit laws alone (since it's a $0/0$ form with no algebraic simplification available).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "ONLY-ONE-SIDE-OF-THE-SANDWICH-INEQUALITY-ESTABLISHED",
+      "content": "| MC-1 | ONLY-ONE-SIDE-OF-THE-SANDWICH-INEQUALITY-ESTABLISHED | Establishing only one bounding inequality (upper or lower) and attempting to conclude the limit anyway, without the complete two-sided sandwich structure | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "ORDINARY-LIMIT-LAWS-ATTEMPTED-WHEN-A-PIECES-LIMIT-DOES-NOT-EXIST",
+      "content": "| MC-2 | ORDINARY-LIMIT-LAWS-ATTEMPTED-WHEN-A-PIECES-LIMIT-DOES-NOT-EXIST | Attempting to apply ordinary limit laws (like the quotient law) to a situation where one piece's limit genuinely does not exist, rather than recognizing the squeeze theorem is the appropriate alternative | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "Establishing Both Bounding Inequalities Before Applying the Theorem (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Establishing Both Bounding Inequalities Before Applying the Theorem (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "The Foundational sin(x)/x Limit (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"The Foundational sin(x)/x Limit (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "Recognizing When Ordinary Limit Laws Fail and the Squeeze Theorem Is Needed (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Recognizing When Ordinary Limit Laws Fail and the Squeeze Theorem Is Needed (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Evaluate $\\lim_{x\\to0}x^4\\cos\\left(\\frac{1}{x}\\right)$ using the Squeeze Theorem, establishing both bounds explicitly.\n  2. Explain, in one sentence, why establishing only one side of the sandwich inequality is insufficient to apply the theorem.\n  3. Explain why $\\lim_{x\\to0}\\frac{\\sin x}{x}$ cannot be evaluated by direct substitution or ordinary limit laws.\n  4. Evaluate $\\lim_{x\\to\\infty}\\frac{\\sin x}{x^2}$ using the Squeeze Theorem.\n- **P76 (Transfer Probe, mode = independence)**: \"A signal-processing engineer analyzes a noisy signal $f(x)=x\\sin\\left(\\frac{1}{x}\\right)$ (near $x=0$, where the oscillation frequency becomes unbounded, but the AMPLITUDE is controlled by the factor $x$). (a) Explain how the Squeeze Theorem lets the engineer confidently conclude the signal approaches 0 as $x\\to0$, despite the wild oscillation of $\\sin(1/x)$ itself. (b) Identify the two bounding functions the engineer would use, and explain why BOTH must converge to the same limit for the argument to work.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.limit-laws` — the squeeze theorem is a genuinely separate technique from the basic limit laws, needed specifically when direct evaluation and algebraic manipulation both fail.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.squeeze-theorem/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.squeeze-theorem",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.limit-laws`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.calc.limits` (the squeeze theorem is a specialized technique extending the basic limit concept).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.squeeze-theorem.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

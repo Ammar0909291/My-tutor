@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.qr-factorization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.qr-factorization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6e5fbd38771781bae50fd0afbf2308d67a8d17bd834dc634173b10e959b79dfe",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.qr-factorization.md": "sha256:7c2a48df72185246336cb4ff9aa7fcdd0c7054e4913a928581dd86573c12998f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.qr-factorization",
+    "name": "QR Factorization",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.linalg.gram-schmidt"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.qr-factorization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.qr-factorization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.qr-factorization.md": "sha256:7c2a48df72185246336cb4ff9aa7fcdd0c7054e4913a928581dd86573c12998f"
+      },
+      "contentHash": "sha256:ca9bcf4a33639dac767c0a0f02f777965e99c27a3f0f18ff99ad26b037af2f98",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.qr-factorization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.qr-factorization.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.qr-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.qr-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.qr-factorization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.qr-factorization.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.qr-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.qr-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.qr-factorization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.qr-factorization.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.qr-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.qr-factorization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.qr-factorization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.qr-factorization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.qr-factorization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.qr-factorization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.qr-factorization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the QR factorization $A=QR$ of a matrix $A$ (with linearly independent columns) by applying Gram-Schmidt to $A$'s columns to get $Q$'s orthonormal columns, then computing $R$ as the matrix of projection coefficients.\n- LO2: State that $Q$ is ORTHOGONAL ($Q^T=Q^{-1}$) and $R$ is UPPER TRIANGULAR — and recognize that $R$'s upper-triangular structure comes DIRECTLY from Gram-Schmidt's sequential construction (each new orthonormalized vector depends only on the PREVIOUS columns, never later ones).\n- LO3: Use QR factorization's practical applications — solving least-squares problems ($Ax\\approx b$ becomes the directly solvable $Rx=Q^Tb$) — WITHOUT needing to explicitly compute $A^{-1}$ or the more numerically unstable normal equations $A^TA$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "R-BELOW-DIAGONAL-ENTRIES-NOT-RECOGNIZED-AS-EXACTLY-ZERO-BY-CONSTRUCTION",
+      "content": "| MC-1 | R-BELOW-DIAGONAL-ENTRIES-NOT-RECOGNIZED-AS-EXACTLY-ZERO-BY-CONSTRUCTION | Treating R's below-diagonal entries as needing computation or as merely \"small,\" rather than recognizing they are exactly 0 by Gram-Schmidt's sequential construction | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "GENERAL-ELIMINATION-USED-INSTEAD-OF-BACK-SUBSTITUTION-FOR-UPPER-TRIANGULAR-R",
+      "content": "| MC-2 | GENERAL-ELIMINATION-USED-INSTEAD-OF-BACK-SUBSTITUTION-FOR-UPPER-TRIANGULAR-R | Solving Rx=Q^Tb via general Gaussian elimination instead of the simpler, more efficient back-substitution that R's upper-triangular structure directly enables | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "R's Upper-Triangular Structure Comes from Gram-Schmidt's Sequential Order (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"R's Upper-Triangular Structure Comes from Gram-Schmidt's Sequential Order (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "Verifying Q's Orthogonality Directly (Primitive P77 sub-step reused as demonstration)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Verifying Q's Orthogonality Directly (Primitive P77 sub-step reused as demonstration)\",\"primitives\":[\"P77\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "Back-Substitution Is the Efficient Solve for Upper-Triangular R (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Back-Substitution Is the Efficient Solve for Upper-Triangular R (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given the Gram-Schmidt vectors $q_1,q_2$ for columns $a_1,a_2$ of a matrix $A$, write down $R$'s four entries in terms of the appropriate dot products.\n  2. Explain, in one sentence, why $R_{21}=0$ is guaranteed by Gram-Schmidt's construction (not just a numerical coincidence).\n  3. Given $Q^Tb=(3,-1)$ and $R=\\begin{pmatrix}2&1\\\\0&4\\end{pmatrix}$, solve $Rx=Q^Tb$ by back-substitution.\n  4. Explain why solving a least-squares problem via QR factorization is generally preferred over directly forming and solving the normal equations $A^TAx=A^Tb$.\n- **P76 (Transfer Probe, mode = independence)**: \"A structural engineer has more strain-gauge sensor readings (5 equations) than unknown stress parameters (3 unknowns) — an overdetermined system $Ax\\approx b$ with no exact solution, requiring a least-squares fit. (a) Explain how QR factorization of the $5\\times3$ matrix $A$ turns this into a directly solvable triangular system, and identify which step (computing $Q^Tb$, or solving $Rx=Q^Tb$) is the back-substitution step. (b) Explain, in practical engineering terms, why the QR approach is preferred over normal equations when working with real sensor data that may contain small measurement errors — connecting to numerical stability.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.gram-schmidt` (the orthonormalization process that directly produces $Q$'s columns and $R$'s entries).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.qr-factorization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.qr-factorization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.gram-schmidt`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.lu-factorization` (another matrix factorization technique, contrasting triangular structure origin).\n- **Cross-links**: `math.num.qr-algorithm` (QR factorization is the core repeated step in the iterative QR algorithm for eigenvalue computation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.qr-factorization.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

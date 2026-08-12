@@ -1,0 +1,263 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.triangle-centers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.triangle-centers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2b1f6b2f5073db9319e0df7e05b573c7e09d5af0c0da2216e0fbd14a28ed0e19",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.triangle-centers.md": "sha256:5cefb3f4e102fb2d7b10726dd7caa64550f7cf8cde2d80062b322feb09175ac3"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.geom.triangle-centers",
+    "name": "Triangle Centers",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.geom.triangle",
+      "math.geom.congruent-triangles"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.triangle-centers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.triangle-centers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.triangle-centers.md": "sha256:5cefb3f4e102fb2d7b10726dd7caa64550f7cf8cde2d80062b322feb09175ac3"
+      },
+      "contentHash": "sha256:257d262731ac091f121e14974b543aec9241de272155d4b38a5db45120122c89",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-centers.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-centers.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-centers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-centers\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-centers.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-centers.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-centers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-centers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.triangle-centers.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.triangle-centers.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.triangle-centers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.triangle-centers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.triangle-centers/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify the FOUR classic triangle centers by their DEFINING construction — CENTROID (intersection of the three MEDIANS, lines from each vertex to the midpoint of the opposite side), CIRCUMCENTER (intersection of the three PERPENDICULAR BISECTORS of the sides), INCENTER (intersection of the three ANGLE BISECTORS), and ORTHOCENTER (intersection of the three ALTITUDES).\n- LO2: Recognize that these four centers are GENERALLY DIFFERENT POINTS for a scalene triangle — each is defined by a DIFFERENT construction (medians vs. perpendicular bisectors vs. angle bisectors vs. altitudes), and there's no reason to expect them to coincide, EXCEPT in special cases.\n- LO3: Recognize the SPECIAL CASE: for an EQUILATERAL triangle, ALL FOUR centers coincide at the SAME single point — a genuine consequence of the triangle's full symmetry, not something that happens for triangles in general.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "TRIANGLE-CENTER-MATCHED-TO-THE-WRONG-DEFINING-CONSTRUCTION",
+      "content": "| MC-1 | TRIANGLE-CENTER-MATCHED-TO-THE-WRONG-DEFINING-CONSTRUCTION | Confusing which construction (medians, perpendicular bisectors, angle bisectors, altitudes) defines which named center | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "FULL-CENTER-COINCIDENCE-ASSUMED-FOR-ANY-ISOSCELES-TRIANGLE-NOT-JUST-EQUILATERAL",
+      "content": "| MC-2 | FULL-CENTER-COINCIDENCE-ASSUMED-FOR-ANY-ISOSCELES-TRIANGLE-NOT-JUST-EQUILATERAL | Assuming all four triangle centers coincide for any isosceles triangle, rather than recognizing this specifically requires full equilateral symmetry | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "Matching Each Center to Its Specific Defining Construction (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Matching Each Center to Its Specific Defining Construction (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "Equilateral Symmetry Forces All Four Centers to Coincide (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Equilateral Symmetry Forces All Four Centers to Coincide (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Match each triangle center (centroid, circumcenter, incenter, orthocenter) to its defining construction.\n  2. Explain why the circumcenter is equidistant from all three vertices, connecting to its perpendicular-bisector construction.\n  3. Explain why the incenter is equidistant from all three sides, connecting to its angle-bisector construction.\n  4. Explain why an equilateral triangle's four centers all coincide, but a general isosceles triangle's do not.\n- **P76 (Transfer Probe, mode = independence)**: \"A city planner wants to place a single water tower to serve three towns forming a scalene triangle on the map, such that the tower is EQUALLY DISTANT from all three towns (minimizing the maximum pipe length to any town). (a) Identify which of the four triangle centers is the correct location for this water tower, and explain why. (b) Explain why a DIFFERENT triangle center (e.g. the centroid) would NOT satisfy this specific equal-distance requirement.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.triangle` (the basic object) and `math.geom.congruent-triangles` (used in proving these centers' defining properties, e.g. that the incenter is equidistant from all three sides).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.triangle-centers/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.triangle-centers",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.triangle`, `math.geom.congruent-triangles`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.geom.triangle`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.triangle-centers.md",
+        "startLine": 86,
+        "endLine": 92
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

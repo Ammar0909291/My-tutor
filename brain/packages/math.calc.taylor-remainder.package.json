@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.taylor-remainder-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.taylor-remainder",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:797dabfd1019122eb3117f69a65532359bcfa9f8fae1460b18d339d31e151dd7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.taylor-remainder.md": "sha256:ecb2ee3d94f02674a22137f6469895939098d1a4b44b149b0bbb2c0bfb41e370"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.taylor-remainder",
+    "name": "Taylor Remainder and Error Bound",
+    "difficultyRaw": "advanced",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.calc.taylor-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.taylor-remainder-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.taylor-remainder (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.taylor-remainder.md": "sha256:ecb2ee3d94f02674a22137f6469895939098d1a4b44b149b0bbb2c0bfb41e370"
+      },
+      "contentHash": "sha256:32d54144af54adb31d5319c9e0c020768b898fb5c00772042f373554830a1254",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-remainder.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-remainder.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-remainder"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-remainder\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-remainder.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-remainder.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-remainder"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-remainder\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-remainder.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-remainder.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-remainder"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-remainder\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.taylor-remainder.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.taylor-remainder.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.taylor-remainder"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.taylor-remainder\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.taylor-remainder/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the Lagrange remainder bound $|R_n(x)|\\le\\frac{M|x-a|^{n+1}}{(n+1)!}$, where $M$ is an UPPER BOUND on $|f^{(n+1)}|$ over the relevant interval — and recognize $R_n(x)$ as the ERROR between the true function value and the $n$th Taylor polynomial's approximation, NOT the polynomial itself.\n- LO2: Find a valid bound $M$ by determining the MAXIMUM possible value of $|f^{(n+1)}(t)|$ over the interval between $a$ and $x$ — using the WORST-CASE (largest) value on this interval, never an arbitrary or convenient value that might UNDERESTIMATE the true maximum.\n- LO3: Use the error bound to determine how many terms $n$ are needed to guarantee a desired PRECISION — solving $\\frac{M|x-a|^{n+1}}{(n+1)!}<\\text{(target error)}$ for the smallest sufficient $n$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "REMAINDER-CONFUSED-WITH-THE-NEXT-SERIES-TERM-RATHER-THAN-THE-TRUE-BOUNDED-ERROR",
+      "content": "| MC-1 | REMAINDER-CONFUSED-WITH-THE-NEXT-SERIES-TERM-RATHER-THAN-THE-TRUE-BOUNDED-ERROR | Treating the Taylor remainder as exactly equal to the next series term, rather than correctly understanding it as the true approximation error, only bounded (not exactly given) by the Lagrange formula | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "BOUND-M-CHOSEN-WITHOUT-RIGOROUSLY-VERIFYING-IT-IS-A-TRUE-UPPER-BOUND",
+      "content": "| MC-2 | BOUND-M-CHOSEN-WITHOUT-RIGOROUSLY-VERIFYING-IT-IS-A-TRUE-UPPER-BOUND | Selecting a value for M without rigorously confirming it upper-bounds the (n+1)th derivative over the entire relevant interval, producing an invalid error guarantee | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "The Remainder Is the True Error, Bounded (Not Computed Exactly) by the Formula (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Remainder Is the True Error, Bounded (Not Computed Exactly) by the Formula (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "Choosing a Rigorously Valid, Safe Bound for M (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Choosing a Rigorously Valid, Safe Bound for M (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "Solving for the Minimum n to Guarantee Precision (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Solving for the Minimum n to Guarantee Precision (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Explain, in one sentence, what the Taylor remainder $R_n(x)$ represents, distinguishing it from the next series term.\n  2. Bound the error when approximating $\\cos(0.3)$ using its degree-2 Taylor polynomial, justifying your choice of $M$.\n  3. Determine how many terms of $e^x$'s Taylor series (at $a=0$) are needed to approximate $e^{0.2}$ with error less than $10^{-4}$.\n  4. Explain why choosing an M that is smaller than the true maximum of $|f^{(n+1)}|$ over the relevant interval produces an invalid error bound.\n- **P76 (Transfer Probe, mode = independence)**: \"A navigation system approximates a trigonometric function using a truncated Taylor polynomial to save computation time on limited hardware, and the engineering team needs a GUARANTEE that the positioning error stays below 1 meter for a specific input range. (a) Explain how the Lagrange error bound formula could be used to determine the minimum number of Taylor polynomial terms needed to guarantee this precision, before any actual hardware testing. (b) Explain why the engineering team must use a RIGOROUSLY justified (safe, possibly slightly loose) bound M, rather than an optimistic estimate, given that lives may depend on the navigation system's guaranteed accuracy.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.taylor-series` — the remainder measures the gap between the true function and a FINITE truncation of its Taylor series.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.taylor-remainder/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.taylor-remainder",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.taylor-series`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.calc.taylor-series`.\n- **Cross-links**: `math.num.error-analysis` (this concept is a foundational instance of general numerical error-bounding technique).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.taylor-remainder.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

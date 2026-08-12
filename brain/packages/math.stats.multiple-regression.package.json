@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.multiple-regression-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.multiple-regression",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1794f8441341ae9c6b1720c4fd38a641d15b2b64a21f7c38479aa65a4b9e5c3f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.multiple-regression.md": "sha256:3e42dc362bc4cfda2ebbf2b9e878aa2dfbb1acfc3cb89ef7323a480071f3b25f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.multiple-regression",
+    "name": "Multiple Linear Regression",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.stats.linear-regression",
+      "math.linalg.matrix-multiplication",
+      "math.linalg.matrix-inverse"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.multiple-regression-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.multiple-regression (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.multiple-regression.md": "sha256:3e42dc362bc4cfda2ebbf2b9e878aa2dfbb1acfc3cb89ef7323a480071f3b25f"
+      },
+      "contentHash": "sha256:3a96e4dc2f1184c8e787cc79c6d96e2036a714d33e12e3dfe8e8d051a454241c",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.multiple-regression.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.multiple-regression.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.multiple-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.multiple-regression\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.multiple-regression.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.multiple-regression.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.multiple-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.multiple-regression\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.multiple-regression.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.multiple-regression.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.multiple-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.multiple-regression\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.multiple-regression.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.multiple-regression.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.multiple-regression"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.multiple-regression\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.multiple-regression/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "Learning Objectives",
+      "content": "- LO1: State the matrix form $y=X\\beta+\\varepsilon$ and the OLS solution $\\hat\\beta=(X^TX)^{-1}X^Ty$ — recognizing this GENERALIZES `math.stats.linear-regression`'s single-predictor formulas into a matrix framework handling MULTIPLE predictors simultaneously, using `math.linalg.matrix-multiplication` and `math.linalg.matrix-inverse`.\n- LO2: Distinguish OVERALL model significance (the $F$-TEST, checking whether the predictors COLLECTIVELY explain significant variance) from INDIVIDUAL coefficient significance ($t$-TESTS per coefficient, checking each predictor's OWN contribution CONTROLLING for the others) — a significant overall $F$-test does NOT mean every individual predictor is significant, and vice versa.\n- LO3: Recognize MULTICOLLINEARITY (when predictor variables are themselves highly correlated with EACH OTHER) as a genuine problem — it can make INDIVIDUAL coefficient estimates unstable/hard to interpret (large standard errors, sometimes even flipped signs) even while the OVERALL model fits well — and recognize this is DIFFERENT from a problem with the model's overall predictive validity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "MATRIX-OLS-OPERATIONS-APPLIED-IN-WRONG-ORDER-OR-WITH-INCOMPATIBLE-DIMENSIONS",
+      "content": "| MC-1 | MATRIX-OLS-OPERATIONS-APPLIED-IN-WRONG-ORDER-OR-WITH-INCOMPATIBLE-DIMENSIONS | Applying the matrix operations of the OLS solution in the wrong order or with dimension-incompatible operations, rather than the correct (XᵀX)⁻¹Xᵀy sequence | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "OVERALL-F-TEST-AND-INDIVIDUAL-T-TESTS-ASSUMED-TO-ALWAYS-AGREE",
+      "content": "| MC-2 | OVERALL-F-TEST-AND-INDIVIDUAL-T-TESTS-ASSUMED-TO-ALWAYS-AGREE | Assuming a significant overall F-test guarantees every individual coefficient is significant, or vice versa, rather than recognizing these test different questions | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "The Matrix OLS Solution's Correct Operation Sequence (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"The Matrix OLS Solution's Correct Operation Sequence (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "Overall F-Test and Individual t-Tests Answer Different Questions (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Overall F-Test and Individual t-Tests Answer Different Questions (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "Multicollinearity Corrupts Individual Coefficients, Not Necessarily Overall Fit (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Multicollinearity Corrupts Individual Coefficients, Not Necessarily Overall Fit (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. For a model with 3 predictors (plus intercept) and $n=100$, state the dimensions of $X$, $X^TX$, and $\\hat\\beta$.\n  2. Explain why a significant overall F-test doesn't guarantee every individual coefficient is significant.\n  3. Explain why multicollinearity destabilizes individual coefficient estimates even when overall model fit remains good.\n  4. Give an example of two predictors that would likely exhibit multicollinearity in a real dataset.\n- **P76 (Transfer Probe, mode = independence)**: \"A real estate analyst builds a multiple regression model predicting house price from square footage, number of bedrooms, AND number of bathrooms — but notices bedrooms and bathrooms are highly correlated (larger houses tend to have more of both), and the individual coefficient for 'bedrooms' comes out with an unexpectedly negative sign, despite bigger houses generally selling for more. (a) Explain why multicollinearity between bedrooms and bathrooms could produce this counterintuitive individual coefficient, even if the overall model predicts prices reasonably well. (b) Explain why the analyst shouldn't necessarily conclude 'more bedrooms lowers house price' from this individual coefficient alone.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.linear-regression` (the single-predictor foundation this generalizes), `math.linalg.matrix-multiplication`, and `math.linalg.matrix-inverse` (both needed for the matrix-form OLS solution).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.multiple-regression/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.multiple-regression",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.linear-regression`, `math.linalg.matrix-multiplication`, `math.linalg.matrix-inverse`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.linear-regression`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.multiple-regression.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

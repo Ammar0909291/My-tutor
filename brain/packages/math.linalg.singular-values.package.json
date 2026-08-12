@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.singular-values-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.singular-values",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5c1123bbe4a125e6fd57a3abf5f533914eddb3fa479b1f3767b7d22a474f43a2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.singular-values.md": "sha256:11351a94693769e463000fd2fc2a2b32aaa3cbbea6e13356ddb435910fea1808"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.singular-values",
+    "name": "Singular Values",
+    "difficultyRaw": "expert",
+    "bloom": "understand",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.svd",
+      "math.linalg.eigenvalues"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.singular-values-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.singular-values (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.singular-values.md": "sha256:11351a94693769e463000fd2fc2a2b32aaa3cbbea6e13356ddb435910fea1808"
+      },
+      "contentHash": "sha256:06c5af02cd6fc55f6854f22a052b85a5ca5e2fbca2696cd974a1ed24a4a86526",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.singular-values.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.singular-values.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.singular-values"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.singular-values\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.singular-values.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.singular-values.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.singular-values"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.singular-values\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.singular-values.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.singular-values.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.singular-values"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.singular-values\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.singular-values.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.singular-values.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.singular-values"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.singular-values\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.singular-values/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute singular values as $\\sigma_i=\\sqrt{\\text{eigenvalues of }A^TA}$ (EQUIVALENTLY $\\sqrt{\\text{eigenvalues of }AA^T}$ — both give the SAME nonzero singular values, since $A^TA$ and $AA^T$ share the same nonzero eigenvalues even though they may have different sizes).\n- LO2: State that singular values GENERALIZE eigenvalues to NON-SQUARE matrices — while eigenvalues are only defined for square matrices, EVERY matrix (any shape) has singular values, making them the more universally meaningful \"strength\" measure.\n- LO3: Identify $\\sigma_1$ (the LARGEST singular value) as the matrix's OPERATOR 2-NORM $|A|$ — the maximum \"stretching factor\" $A$ applies to any unit vector — and recognize each $\\sigma_i$ as encoding the strength of a specific transformation \"mode\" (direction).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.singular-values",
+      "title": "SINGULAR-VALUES-REPORTED-AS-A-TRANSPOSE-A-EIGENVALUES-WITHOUT-SQUARE-ROOT",
+      "content": "| MC-1 | SINGULAR-VALUES-REPORTED-AS-A-TRANSPOSE-A-EIGENVALUES-WITHOUT-SQUARE-ROOT | Reporting A^TA's eigenvalues directly as the singular values, skipping the required square root step | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.singular-values",
+      "title": "OPERATOR-NORM-COMPUTED-AS-AVERAGE-OR-SUM-OF-SINGULAR-VALUES-RATHER-THAN-THE-LARGEST",
+      "content": "| MC-2 | OPERATOR-NORM-COMPUTED-AS-AVERAGE-OR-SUM-OF-SINGULAR-VALUES-RATHER-THAN-THE-LARGEST | Computing the operator 2-norm as an average or sum of all singular values, rather than recognizing it equals the single largest singular value | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Singular Values Are Square Roots of A^TA's Eigenvalues (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Singular Values Are Square Roots of A^TA's Eigenvalues (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Singular Values Exist Even When Eigenvalues Don't (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Singular Values Exist Even When Eigenvalues Don't (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Operator Norm Is the Largest Singular Value Alone, Not an Average (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Operator Norm Is the Largest Singular Value Alone, Not an Average (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Given $A^TA$ has eigenvalues 25 and 4, compute the singular values sorted descending.\n  2. Explain, in one sentence, why a $5\\times2$ matrix (non-square) has well-defined singular values even though it has no eigenvalues of its own.\n  3. Given singular values 6, 2, and 1 for some matrix $A$, state the operator 2-norm $|A|$.\n  4. Explain why $A^TA$ and $AA^T$ (possibly different sizes) share the same nonzero singular values.\n- **P76 (Transfer Probe, mode = independence)**: \"An image-compression algorithm computes the singular values of a grayscale image's pixel-intensity matrix (a genuinely rectangular matrix, e.g. 480×640) and finds most of the 'energy' concentrated in the first 20 singular values (out of 480), with the remaining singular values very close to zero. (a) Explain what a near-zero singular value implies about that particular transformation 'mode' of the image data — connecting to the 'strength' interpretation from this lesson. (b) Explain, conceptually, why keeping only the top 20 singular values (and treating the rest as zero) should still reconstruct an image that looks very close to the original, using the operator-norm/mode-strength framing.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.svd` (singular values are SVD's diagonal entries) and `math.linalg.eigenvalues` (singular values are derived from eigenvalues of $A^TA$ or $AA^T$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.singular-values/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.singular-values",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.svd`, `math.linalg.eigenvalues`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.linalg.svd`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.singular-values.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

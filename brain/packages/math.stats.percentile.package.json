@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.percentile-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.percentile",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:86eb8ed47c36c45b5abab28d10cc80aa2841cb24e0696b17dc077abbaefed7da",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.percentile.md": "sha256:0906df6a8c91a50b26eec46e0c16bf330acc0e3921cdec367688282400578568"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.percentile",
+    "name": "Percentile",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.stats.measures-of-spread"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.percentile-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.percentile (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.percentile.md": "sha256:0906df6a8c91a50b26eec46e0c16bf330acc0e3921cdec367688282400578568"
+      },
+      "contentHash": "sha256:939db0bee3f4fdaf4923110e4b8777c4113cbb66dcda4c5def70333540647828",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.percentile.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.percentile.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.percentile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.percentile\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.percentile.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.percentile.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.percentile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.percentile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.percentile.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.percentile.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.percentile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.percentile\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.percentile.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.percentile.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.percentile"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.percentile\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.percentile/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.percentile",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the $p$-th percentile as the value BELOW which $p\\%$ of the data falls — and correctly interpret this as a statement about the PROPORTION of data below a threshold, not a raw score or count.\n- LO2: Identify the three QUARTILES as specific percentiles: $Q_1$ (25th percentile), $Q_2$ (50th percentile, which is EXACTLY the MEDIAN), and $Q_3$ (75th percentile) — recognizing $Q_2$ isn't a coincidentally similar but separate concept from the median; they are the SAME value.\n- LO3: Compute the Interquartile Range $\\text{IQR}=Q_3-Q_1$ — the SPREAD of the MIDDLE 50% of the data — and recognize the IQR is ROBUST to outliers (like the median), since it depends only on the two quartile positions, ignoring the extreme tails entirely.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.percentile",
+      "title": "PERCENTILE-RANK-CONFUSED-WITH-RAW-SCORE-PERCENTAGE",
+      "content": "| MC-1 | PERCENTILE-RANK-CONFUSED-WITH-RAW-SCORE-PERCENTAGE | Confusing percentile rank (proportion of data below a value) with raw score percentage (fraction of items answered correctly), treating them as the same quantity | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.percentile",
+      "title": "Q2-TREATED-AS-A-SEPARATELY-COMPUTED-VALUE-FROM-THE-MEDIAN",
+      "content": "| MC-2 | Q2-TREATED-AS-A-SEPARATELY-COMPUTED-VALUE-FROM-THE-MEDIAN | Treating Q2 (the 50th percentile) as requiring separate computation from the median, rather than recognizing they are the identical quantity by definition | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.percentile",
+      "title": "Percentile Rank Is Proportion Below, Not a Raw Score Percentage (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Percentile Rank Is Proportion Below, Not a Raw Score Percentage (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.percentile",
+      "title": "Q2 IS the Median, Not a Separately-Computed Value (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Q2 IS the Median, Not a Separately-Computed Value (reused procedure)\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.percentile",
+      "title": "IQR Is Robust to Outliers, Unlike the Full Range (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"IQR Is Robust to Outliers, Unlike the Full Range (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.percentile",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.percentile",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Explain what it means for a value to be at the 40th percentile of a dataset.\n  2. For $\\{10,20,30,40,50\\}$, find $Q_2$ and verify it matches the median.\n  3. For $\\{1,3,5,7,9,11,13\\}$, find $Q_1$, $Q_3$, and the IQR.\n  4. Explain, in one sentence, why the IQR is more robust to outliers than the full range (max minus min).\n- **P76 (Transfer Probe, mode = independence)**: \"A pediatrician tells a parent their child's height is 'at the 60th percentile' for their age group. (a) Explain what this specifically means about the child's height relative to other children the same age. (b) Explain why this is a fundamentally different statement than saying 'the child is 60% as tall as the tallest child in the group.'\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.percentile",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.measures-of-spread` — percentiles and IQR are a refinement of spread-measurement concepts.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.percentile/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.percentile",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.measures-of-spread`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-links**: `math.prob.quantile` (the probability-theory generalization of this concept).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.percentile.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

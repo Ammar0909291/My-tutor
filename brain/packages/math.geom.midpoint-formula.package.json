@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.midpoint-formula-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.midpoint-formula",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b860a644be1d3eadb7ff8edaf989c30b2296bf0055447bdc4af398e69291dba4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.midpoint-formula.md": "sha256:461b75e63650436676c4b96a6f69892ac550eab48bc7e2ede65a669e04214135"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.midpoint-formula",
+    "name": "Midpoint Formula",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.geom.coordinate-plane"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.midpoint-formula-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.midpoint-formula (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.midpoint-formula.md": "sha256:461b75e63650436676c4b96a6f69892ac550eab48bc7e2ede65a669e04214135"
+      },
+      "contentHash": "sha256:a36e377fcbfdb479f6772d10357b96af677b94d4824afebea3d6f4ceef669065",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.midpoint-formula.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.midpoint-formula.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.midpoint-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.midpoint-formula\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.midpoint-formula.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.midpoint-formula.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.midpoint-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.midpoint-formula\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.midpoint-formula.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.midpoint-formula.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.midpoint-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.midpoint-formula\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.midpoint-formula.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.midpoint-formula.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.midpoint-formula"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.midpoint-formula\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.midpoint-formula/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the midpoint formula $\\left(\\frac{x_1+x_2}{2},\\frac{y_1+y_2}{2}\\right)$ for the segment from $(x_1,y_1)$ to $(x_2,y_2)$ — AVERAGING the $x$-coordinates and, SEPARATELY, averaging the $y$-coordinates.\n- LO2: Recognize the formula is ORDER-INDEPENDENT — swapping which point is labeled $(x_1,y_1)$ versus $(x_2,y_2)$ gives the SAME midpoint, since addition (used in both averages) doesn't care about order.\n- LO3: Use the midpoint formula IN REVERSE — given one endpoint and the midpoint, find the OTHER endpoint (by solving the averaging equation for the unknown coordinate).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "X-AND-Y-COORDINATES-CROSS-PAIRED-INSTEAD-OF-AVERAGED-SEPARATELY",
+      "content": "| MC-1 | X-AND-Y-COORDINATES-CROSS-PAIRED-INSTEAD-OF-AVERAGED-SEPARATELY | Incorrectly cross-pairing an x-coordinate with a y-coordinate when applying the midpoint formula, instead of averaging x's together and y's together | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "MISSING-ENDPOINT-FOUND-VIA-SIMPLE-SUBTRACTION-INSTEAD-OF-DOUBLING-AND-SUBTRACTING",
+      "content": "| MC-2 | MISSING-ENDPOINT-FOUND-VIA-SIMPLE-SUBTRACTION-INSTEAD-OF-DOUBLING-AND-SUBTRACTING | Finding a missing endpoint by directly subtracting the known endpoint from the midpoint, rather than correctly doubling the midpoint first | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Average x's Together and y's Together, Never Cross-Pairing (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Average x's Together and y's Together, Never Cross-Pairing (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Verifying Order Independence (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Verifying Order Independence (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Reversing the Formula to Find a Missing Endpoint (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Reversing the Formula to Find a Missing Endpoint (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Find the midpoint of the segment from $(3,9)$ to $(7,1)$.\n  2. Find the midpoint of the segment from $(-4,5)$ to $(2,-3)$.\n  3. A segment has midpoint $(6,2)$ and one endpoint $(10,4)$. Find the other endpoint.\n  4. Explain, in one sentence, why swapping the labels of the two endpoints doesn't change the computed midpoint.\n- **P76 (Transfer Probe, mode = independence)**: \"A delivery company wants to place a new distribution warehouse exactly halfway between two existing warehouses located at map coordinates $(2,10)$ and $(14,2)$ (in km, on a local grid). (a) Use the midpoint formula to find the ideal location for the new warehouse. (b) Suppose the company later discovers that one of the original warehouses (at $(2,10)$) needs to be relocated, but wants to keep the SAME midpoint location found in part (a) with a different second warehouse. If the new second warehouse must be at $(20,-2)$, verify whether the original midpoint location still works, or find the correct new midpoint.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.coordinate-plane` — the midpoint formula operates on coordinate pairs.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.midpoint-formula/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.midpoint-formula",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.coordinate-plane`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.distance-formula`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.midpoint-formula.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

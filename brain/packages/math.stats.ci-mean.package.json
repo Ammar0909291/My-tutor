@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.ci-mean-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.ci-mean",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a2c452143d58b19c3d139ba2313bc72e31fdcbfe385e105f8ce5fd08dd1e5f61",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.ci-mean.md": "sha256:1b00b89d862a854b0abec3eaaeb92d5cce2525c7b4d2bc508dfb55b9f34b0dab"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.ci-mean",
+    "name": "Confidence Interval for a Mean",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.confidence-interval",
+      "math.prob.continuous-distributions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.ci-mean-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.ci-mean (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.ci-mean.md": "sha256:1b00b89d862a854b0abec3eaaeb92d5cce2525c7b4d2bc508dfb55b9f34b0dab"
+      },
+      "contentHash": "sha256:9711bcf0e1da30e80ae42d8371d7d1944cd5330e3548b5723e20fe0b27bc8d6f",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-mean.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-mean.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-mean"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-mean\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-mean.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-mean.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-mean"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-mean\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-mean.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-mean.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-mean"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-mean\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.ci-mean.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.ci-mean.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.ci-mean"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.ci-mean\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.ci-mean/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct a $z$-interval $\\bar{x}\\pm z_{\\alpha/2}\\cdot\\frac{\\sigma}{\\sqrt{n}}$ WHEN the population standard deviation $\\sigma$ is KNOWN.\n- LO2: Construct a $t$-interval $\\bar{x}\\pm t_{\\alpha/2,n-1}\\cdot\\frac{s}{\\sqrt{n}}$ WHEN $\\sigma$ is UNKNOWN (estimated by the sample standard deviation $s$) — using the $t$-DISTRIBUTION with $n-1$ DEGREES OF FREEDOM specifically, NOT the normal ($z$) distribution's critical values, since $s$ itself is an estimate carrying extra uncertainty.\n- LO3: Recognize the interval's WIDTH decreases as $n$ increases (via the $\\sqrt{n}$ in the denominator, mirroring `math.stats.standard-error`'s scaling) — and recognize that a HIGHER confidence level (e.g. 99% vs. 95%) requires a LARGER critical value, producing a WIDER interval, all else equal — confidence level and interval width trade off directly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.ci-mean",
+      "title": "T-DISTRIBUTION-USED-EVEN-WHEN-SIGMA-IS-GENUINELY-KNOWN",
+      "content": "| MC-1 | T-DISTRIBUTION-USED-EVEN-WHEN-SIGMA-IS-GENUINELY-KNOWN | Reaching for the t-distribution's critical value out of habit even when the population standard deviation σ is genuinely known, missing the actual distinguishing condition | Minor |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Z-CRITICAL-VALUE-USED-WHEN-SIGMA-IS-UNKNOWN-AND-ESTIMATED-BY-S",
+      "content": "| MC-2 | Z-CRITICAL-VALUE-USED-WHEN-SIGMA-IS-UNKNOWN-AND-ESTIMATED-BY-S | Using the normal distribution's z-critical-value when σ is actually unknown and estimated by s, understating the true uncertainty and producing a falsely narrow interval | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Use z When σ Is Genuinely Known (reused procedure)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Use z When σ Is Genuinely Known (reused procedure)\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Use t (with n-1 df) When σ Is Estimated by s (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Use t (with n-1 df) When σ Is Estimated by s (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Higher Confidence Requires a Wider Interval (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Higher Confidence Requires a Wider Interval (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Construct a 95% $z$-interval for $\\mu$ given $\\bar{x}=30$, $\\sigma=5$ (known), $n=100$.\n  2. Construct a 95% $t$-interval for $\\mu$ given $\\bar{x}=30$, $s=5$ (estimated), $n=20$.\n  3. Explain, in one sentence, why the $t$-interval uses a critical value from a distribution with fatter tails than the normal.\n  4. Explain why a 99% confidence interval is wider than a 95% confidence interval for the same data.\n- **P76 (Transfer Probe, mode = independence)**: \"A pharmaceutical researcher measures the average reduction in blood pressure from a new drug across 25 patients, finding a sample mean reduction of 12 mmHg and a SAMPLE standard deviation (not a known population value) of 4 mmHg. (a) Explain why the researcher must use the $t$-distribution (not the normal/z distribution) to construct a confidence interval here. (b) Construct a 95% confidence interval for the true mean blood pressure reduction, using $t_{0.025,24}\\approx2.064$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.confidence-interval` (the general concept) and `math.prob.continuous-distributions` (needed for the $z$ and $t$ distributions' critical values).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.ci-mean/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.ci-mean",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.confidence-interval`, `math.prob.continuous-distributions`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.confidence-interval`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.ci-mean.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

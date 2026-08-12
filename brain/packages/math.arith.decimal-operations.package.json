@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.decimal-operations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.decimal-operations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b3fcba8e2c576ff114f8ff140e0f67e44ad0453c33b59b2752075c8651cf7b83",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.decimal-operations.md": "sha256:b8c6bcb8051261041dadb8b266fb0ef3b476d91e137f4159487d198d127884ac"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.decimal-operations",
+    "name": "Decimal Operations",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.arith.decimals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.decimal-operations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.decimal-operations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.decimal-operations.md": "sha256:b8c6bcb8051261041dadb8b266fb0ef3b476d91e137f4159487d198d127884ac"
+      },
+      "contentHash": "sha256:231b34d7cdb405f440fdaad0e5dde3bc05e1fb3d0567e481196f8c6c7d6fabbf",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.decimal-operations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.decimal-operations.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.decimal-operations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.decimal-operations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.decimal-operations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.decimal-operations.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.decimal-operations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.decimal-operations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.decimal-operations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.decimal-operations.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.decimal-operations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.decimal-operations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.decimal-operations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Add and subtract decimals by aligning decimal points (padding with trailing zeros as needed) before combining digit columns.\n- LO2: Multiply decimals by multiplying as whole numbers, then placing the decimal point in the result based on the TOTAL number of decimal places in both factors combined.\n- LO3: Divide decimals by shifting the decimal point in both divisor and dividend to make the divisor a whole number, then dividing normally.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "DECIMALS-ADDED-BY-DIGIT-ALIGNMENT-NOT-POINT-ALIGNMENT",
+      "content": "| MC-1 | DECIMALS-ADDED-BY-DIGIT-ALIGNMENT-NOT-POINT-ALIGNMENT | Right-aligning decimal digit strings as if adding whole numbers, instead of aligning by decimal point (and place value) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 72,
+        "endLine": 72
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "MULTIPLICATION-DECIMAL-PLACE-COUNTED-FROM-ONE-FACTOR-ONLY",
+      "content": "| MC-2 | MULTIPLICATION-DECIMAL-PLACE-COUNTED-FROM-ONE-FACTOR-ONLY | Placing the product's decimal point based on only one factor's decimal-place count, rather than the sum of both factors' counts | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 73,
+        "endLine": 73
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "DIVISION-DECIMAL-SHIFT-APPLIED-TO-ONLY-ONE-NUMBER",
+      "content": "| MC-3 | DIVISION-DECIMAL-SHIFT-APPLIED-TO-ONLY-ONE-NUMBER | Shifting the decimal point in the divisor to make it a whole number but forgetting to shift the dividend's decimal point by the same amount | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "Align Decimal Points, Pad with Zeros (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Align Decimal Points, Pad with Zeros (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "Multiplication: Count Total Decimal Places from BOTH Factors (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Multiplication: Count Total Decimal Places from BOTH Factors (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Add $5.07+2.3$, aligning decimal points correctly.\n  2. Subtract $6-2.45$, padding $6$ appropriately as $6.00$ before subtracting.\n  3. Multiply $1.2\\times0.05$, counting total decimal places across both factors.\n  4. Divide $7.5\\div0.25$, shifting the decimal point in both divisor and dividend appropriately.\n- **P76 (Transfer Probe, mode = independence)**: \"A pharmacist needs to compute the total weight of 0.15 g and 2.3 g of two medications combined, and separately needs to divide a 4.8 g supply into doses of 0.4 g each. (a) Compute both results, showing the decimal-point handling explicitly for the addition and the division. (b) Explain, using this lesson's alignment rule, what would go wrong if the addition were done by right-aligning the digit strings ('015' and '23') instead of aligning decimal points.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.decimals` (what a decimal represents and its place-value structure) — this concept applies the four operations to that representation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.decimal-operations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.decimal-operations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.decimals`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.decimal-operations.md",
+        "startLine": 82,
+        "endLine": 88
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.curve-sketching-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.curve-sketching",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:0d01e3b7b8548620353283711d72dd317d698ee11c02b2909ba8e75d84b959a5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.curve-sketching.md": "sha256:052236848d5b04d18a232964a8a73b3c924fd168588aa5739c8b2b49103725ae"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.curve-sketching",
+    "name": "Curve Sketching",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.concavity",
+      "math.calc.local-extrema",
+      "math.calc.limits-at-infinity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.curve-sketching-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.curve-sketching (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.curve-sketching.md": "sha256:052236848d5b04d18a232964a8a73b3c924fd168588aa5739c8b2b49103725ae"
+      },
+      "contentHash": "sha256:c460bc8a2afccde4b70256d212845c235f2e4094209033798c25fc1811eaae56",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.curve-sketching.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curve-sketching.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curve-sketching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curve-sketching\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.curve-sketching.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curve-sketching.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curve-sketching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curve-sketching\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.curve-sketching.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curve-sketching.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curve-sketching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curve-sketching\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.curve-sketching.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.curve-sketching.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.curve-sketching"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.curve-sketching\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.curve-sketching/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "Learning Objectives",
+      "content": "- LO1: Follow the SYSTEMATIC curve-sketching procedure in order — domain, intercepts, symmetry, asymptotes (using `math.calc.limits-at-infinity`), increasing/decreasing intervals (via $f'$), local extrema (via `math.calc.local-extrema`), and concavity/inflection points (via `math.calc.concavity`) — before drawing the final sketch.\n- LO2: Correctly synthesize the FIRST-derivative information (increasing/decreasing, local max/min) and SECOND-derivative information (concave up/down, inflection points) into ONE coherent sketch, rather than treating them as separate, unconnected facts.\n- LO3: Recognize that skipping ANY step of the systematic procedure (e.g. omitting asymptote analysis) risks producing a GEOMETRICALLY INCORRECT sketch, even if the remaining analysis is done correctly.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "DOMAIN-AND-ASYMPTOTE-STEPS-SKIPPED-IN-FAVOR-OF-DIRECT-DERIVATIVE-ANALYSIS",
+      "content": "| MC-1 | DOMAIN-AND-ASYMPTOTE-STEPS-SKIPPED-IN-FAVOR-OF-DIRECT-DERIVATIVE-ANALYSIS | Jumping directly to derivative-based analysis without first completing the domain/intercept/asymptote steps, risking a globally incorrect sketch | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "DOMAIN-GAPS-IGNORED-WHEN-DRAWING-A-SINGLE-CONTINUOUS-CURVE",
+      "content": "| MC-2 | DOMAIN-GAPS-IGNORED-WHEN-DRAWING-A-SINGLE-CONTINUOUS-CURVE | Drawing a single continuous curve across a domain gap or vertical asymptote, rather than correctly splitting the sketch into separate branches | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "Follow the Systematic Procedure in Order, Every Time (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Follow the Systematic Procedure in Order, Every Time (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "First and Second Derivative Evidence Must Agree (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"First and Second Derivative Evidence Must Agree (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "Domain Gaps and Asymptotes Split the Sketch into Separate Branches (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Domain Gaps and Asymptotes Split the Sketch into Separate Branches (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. List, in order, the seven steps of the systematic curve-sketching procedure.\n  2. For $f(x)=x^3-3x$, find the domain, intercepts, increasing/decreasing intervals, local extrema, and concavity, then describe the resulting sketch.\n  3. Explain why a local maximum should always occur where the function is (locally) concave down, connecting the first and second derivative tests.\n  4. For $f(x)=\\frac{1}{x-2}$, explain why the sketch must consist of two separate, disconnected branches.\n- **P76 (Transfer Probe, mode = independence)**: \"A company's profit function $P(x)$ (profit as a function of units sold $x$) has a vertical asymptote at $x=0$ (fixed costs make very low production catastrophically unprofitable per-unit), a local maximum somewhere in the middle range, and approaches a fixed horizontal asymptote as $x\\to\\infty$ (diminishing returns at very high volumes). (a) Using the systematic curve-sketching procedure, describe what each of these three features (vertical asymptote, local max, horizontal asymptote) tells a business decision-maker about the profit function's real-world behavior. (b) Explain why skipping the asymptote analysis and focusing only on the local maximum could lead to a dangerously incomplete understanding of the profit function's true behavior at very low or very high production volumes.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.concavity` (second-derivative behavior), `math.calc.local-extrema` (first-derivative critical points), and `math.calc.limits-at-infinity` (end behavior and asymptotes) — curve sketching synthesizes all three.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.calc.curve-sketching/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.curve-sketching",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.concavity`, `math.calc.local-extrema`, `math.calc.limits-at-infinity`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.curve-sketching.md",
+        "startLine": 90,
+        "endLine": 95
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

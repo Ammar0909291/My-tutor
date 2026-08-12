@@ -1,0 +1,279 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.radical-equations-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.radical-equations",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2ae841139e68a68e8ac8b4fc54792cd9e47eef9928b6771d5b0488114391307d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.radical-equations.md": "sha256:0f42e2daf28eeeb93728bca3788f4bee0903e4cb2e7b01f1ef9dc65dad589138"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.alg.radical-equations",
+    "name": "Radical Equations",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.radicals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.radical-equations-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.radical-equations (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.radical-equations.md": "sha256:0f42e2daf28eeeb93728bca3788f4bee0903e4cb2e7b01f1ef9dc65dad589138"
+      },
+      "contentHash": "sha256:bd42701fafcf7ae57acfee52350266a711e9905605db24439c2ec9e4df6b0dec",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.radical-equations.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.radical-equations.md#TA-A01 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.radical-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.radical-equations\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.radical-equations.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.radical-equations.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.radical-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.radical-equations\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.radical-equations.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.radical-equations.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.radical-equations"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.radical-equations\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.radical-equations/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.radical-equations",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve a radical equation by first ISOLATING the radical (getting it alone on one side), then SQUARING both sides to eliminate it.\n- LO2: Solve the resulting polynomial equation using appropriate prior techniques.\n- LO3: Check every candidate solution against the ORIGINAL (unsquared) equation, correctly identifying and discarding EXTRANEOUS solutions introduced by the squaring step.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.radical-equations",
+      "title": "RADICAL-EQUATION-CANDIDATES-NOT-CHECKED-AGAINST-ORIGINAL",
+      "content": "| MC-1 | RADICAL-EQUATION-CANDIDATES-NOT-CHECKED-AGAINST-ORIGINAL | Accepting every candidate solution from the squared equation without individually checking each against the original (unsquared) equation | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 78,
+        "endLine": 78
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.radical-equations",
+      "title": "RADICAL-SQUARED-BEFORE-BEING-ISOLATED",
+      "content": "| MC-2 | RADICAL-SQUARED-BEFORE-BEING-ISOLATED | Squaring both sides of a radical equation before first isolating the radical alone on one side, producing an incompletely-simplified result | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 79,
+        "endLine": 79
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.radical-equations",
+      "title": "SQUARED-SUM-EXPANDED-INCORRECTLY",
+      "content": "| MC-3 | SQUARED-SUM-EXPANDED-INCORRECTLY | When a radical equation, once isolated, still involves squaring a binomial (e.g. $(x-3)^2$), expanding it incorrectly (e.g. as $x^2-9$ instead of $x^2-6x+9$) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.radical-equations",
+      "title": "Isolate the Radical BEFORE Squaring (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Isolate the Radical BEFORE Squaring (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.radical-equations",
+      "title": "Squaring Can Introduce Extraneous Solutions — Always Check (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Squaring Can Introduce Extraneous Solutions — Always Check (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.radical-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.radical-equations",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Solve $\\sqrt{2x+5}=7$.\n  2. Solve $\\sqrt{x+6}=x$, checking each candidate for extraneous solutions.\n  3. Solve $\\sqrt{3x-2}-1=x-3$, isolating the radical before squaring.\n  4. Explain, in one sentence, why squaring both sides of an equation can introduce extraneous solutions.\n- **P76 (Transfer Probe, mode = independence)**: \"A physics formula relates a pendulum's period to its length via $T=2\\pi\\sqrt{\\frac{L}{g}}$; a student rearranges this to solve for $L$ given a specific measured period $T=2$ seconds and $g=9.8$ (so $2=2\\pi\\sqrt{L/9.8}$). (a) Isolate the radical and solve for $L$. (b) Explain why, in this particular physical scenario, checking for extraneous solutions is somewhat less likely to be an issue in PRACTICE (hint: consider what physical quantities like length and period must always be, sign-wise) — while still explaining why the general algebraic check remains good mathematical practice regardless.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 15,
+        "endLine": 29
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.radical-equations",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.radicals` (what a radical represents) — this concept solves equations where the variable sits under such a radical.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.radical-equations/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.radical-equations",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.radicals`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.simplifying-radicals` (radical manipulation this concept assumes fluency with), `math.alg.factoring-special` (the perfect-square-trinomial expansion this concept's binomial-squaring step reuses).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.radical-equations.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

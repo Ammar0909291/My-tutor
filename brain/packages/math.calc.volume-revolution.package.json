@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.volume-revolution-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.volume-revolution",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b035710ff441b4342238d1b19fedf535285e1862d8c0a88f2a1faad080655ee2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.volume-revolution.md": "sha256:b2b0db76f7b3faa2ff795a02752247ac4fb250eb648a99872006683ec18a0c51"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.volume-revolution",
+    "name": "Volumes of Revolution",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.calc.integral-area"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.volume-revolution-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.volume-revolution (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.volume-revolution.md": "sha256:b2b0db76f7b3faa2ff795a02752247ac4fb250eb648a99872006683ec18a0c51"
+      },
+      "contentHash": "sha256:8ce5dac301e1fa2942abf1e7d37e840e5f695a5eac26cfa2b76fed065135b3aa",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.volume-revolution.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.volume-revolution.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.volume-revolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.volume-revolution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.volume-revolution.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.volume-revolution.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.volume-revolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.volume-revolution\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.volume-revolution.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.volume-revolution.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.volume-revolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.volume-revolution\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.volume-revolution.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.volume-revolution.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.volume-revolution"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.volume-revolution\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.volume-revolution/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the DISK method $V=\\pi\\int f(x)^2\\,dx$ for a solid formed by rotating a region BOUNDED BY the axis of rotation directly (no gap between the region and the axis).\n- LO2: Apply the WASHER method $V=\\pi\\int(f(x)^2-g(x)^2)\\,dx$ when the rotated region has a GAP from the axis (an inner boundary $g(x)$ and outer boundary $f(x)$) — recognizing that OMITTING the inner-radius subtraction (using the disk method when a washer is needed) overcounts the volume by including a hollow region that shouldn't be there.\n- LO3: Apply the SHELL method $V=2\\pi\\int xf(x)\\,dx$ as an ALTERNATIVE approach (rotating around a vertical axis using horizontal-strip \"shells\" rather than vertical disks/washers) — and choose between disk/washer and shell methods based on which produces an EASIER integral for the given region and axis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "DISK-METHOD-USED-WHEN-A-GAP-FROM-THE-AXIS-REQUIRES-THE-WASHER-METHOD",
+      "content": "| MC-1 | DISK-METHOD-USED-WHEN-A-GAP-FROM-THE-AXIS-REQUIRES-THE-WASHER-METHOD | Applying the disk method (ignoring the inner boundary) when the rotated region has a gap from the axis, overcounting the volume | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 88,
+        "endLine": 88
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "SHELL-METHOD-NOT-CONSIDERED-AS-THE-MORE-EFFICIENT-ALTERNATIVE-FOR-VERTICAL-AXIS-ROTATION",
+      "content": "| MC-2 | SHELL-METHOD-NOT-CONSIDERED-AS-THE-MORE-EFFICIENT-ALTERNATIVE-FOR-VERTICAL-AXIS-ROTATION | Forcing the disk/washer method (requiring solving for the inverse function) for a vertical-axis rotation, rather than recognizing the shell method as the more direct, efficient alternative | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 89,
+        "endLine": 89
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Disk Method for Regions Touching the Axis (reused procedure)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Disk Method for Regions Touching the Axis (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Washer Method Subtracts the Inner Radius When There's a Gap (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Washer Method Subtracts the Inner Radius When There's a Gap (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Choosing Shells vs. Disks/Washers Based on the Easier Integral (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Choosing Shells vs. Disks/Washers Based on the Easier Integral (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Find the volume when the region under $f(x)=x$ from $x=0$ to $x=3$ is rotated around the $x$-axis, using the disk method.\n  2. Find the volume when the region between $f(x)=4$ and $g(x)=x^2$ (from $x=-2$ to $x=2$) is rotated around the $x$-axis, using the washer method.\n  3. Explain, in one sentence, why the washer method subtracts the inner radius squared, rather than just the inner radius.\n  4. Find the volume when the region under $f(x)=x^2$ from $x=0$ to $x=1$ is rotated around the $y$-axis, using the shell method.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer is designing a hollow, vase-shaped ceramic vessel by rotating a 2D profile curve (the outer wall shape $f(x)$ and the inner wall shape $g(x)$, both functions of height $x$) around a central vertical axis. (a) Explain why the washer method — NOT the disk method — is the correct approach for computing the amount of ceramic MATERIAL needed (as opposed to the total enclosed volume including the hollow interior). (b) Set up (but do not fully evaluate) the washer-method integral for the ceramic material's volume, given outer radius function $f(x)$ and inner radius function $g(x)$ over height range $[0,h]$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.integral-area` (definite integrals as area, extended here to volume via cross-sectional slicing).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.volume-revolution/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.volume-revolution",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.integral-area`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.volume` (the geometric concept of volume this technique computes for revolution solids specifically).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.volume-revolution.md",
+        "startLine": 96,
+        "endLine": 102
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

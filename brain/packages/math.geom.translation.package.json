@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.translation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.translation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:996e6c22c58bb252d63ecf826c4abc2bad15d4cd0a56462f171d498570fde8c9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.translation.md": "sha256:3fc4907b9f306806e404c5908315f0f5d1c3d2b6b4d2c2d3032c65b91bfdbd0f"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.translation",
+    "name": "Translation",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.geom.transformations"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.translation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.translation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.translation.md": "sha256:3fc4907b9f306806e404c5908315f0f5d1c3d2b6b4d2c2d3032c65b91bfdbd0f"
+      },
+      "contentHash": "sha256:014a8559d1e1dc6630af15daa2088050039e46b36591230ef488f60401754758",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.translation.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.translation.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.translation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.translation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.translation.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.translation.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.translation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.translation\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.translation.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.translation.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.translation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.translation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.translation.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.translation.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.translation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.translation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.translation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.translation",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply a translation by vector $(h,k)$ — mapping EVERY point $(x,y)\\to(x+h,y+k)$ — using the SAME $(h,k)$ shift for EVERY point of the figure, not a different shift per point.\n- LO2: Recognize that translation PRESERVES shape, size, AND orientation — the translated figure is CONGRUENT to the original (same size and shape) and faces the SAME direction (no rotation or flipping occurs).\n- LO3: Given a figure's image AFTER translation (or a specific point's before/after pair), determine the translation vector $(h,k)$ by SUBTRACTING corresponding coordinates — $h=x_{\\text{new}}-x_{\\text{old}}$, $k=y_{\\text{new}}-y_{\\text{old}}$.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.translation/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.translation",
+      "title": "DIFFERENT-SHIFT-APPLIED-TO-DIFFERENT-POINTS-OF-THE-FIGURE",
+      "content": "| MC-1 | DIFFERENT-SHIFT-APPLIED-TO-DIFFERENT-POINTS-OF-THE-FIGURE | Applying a different (h,k) shift to different points of the figure, instead of the same fixed vector for every point | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.translation/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.translation",
+      "title": "TRANSLATION-VECTOR-COMPUTED-WITH-SUBTRACTION-IN-THE-WRONG-ORDER",
+      "content": "| MC-2 | TRANSLATION-VECTOR-COMPUTED-WITH-SUBTRACTION-IN-THE-WRONG-ORDER | Computing the translation vector as old-minus-new instead of new-minus-old, producing the negative of the correct vector | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.translation/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.translation",
+      "title": "Apply the Same (h,k) Shift to Every Point (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Apply the Same (h,k) Shift to Every Point (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.translation/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.translation",
+      "title": "Shape, Size, and Orientation All Preserved (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Shape, Size, and Orientation All Preserved (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.translation/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.translation",
+      "title": "Vector = New Minus Old, Not Old Minus New (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Vector = New Minus Old, Not Old Minus New (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.translation/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.translation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.translation/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.translation",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Translate the point $(6,-2)$ by vector $(-3,5)$.\n  2. Translate a square with vertices $(0,0)$, $(2,0)$, $(2,2)$, $(0,2)$ by vector $(4,1)$, finding all four new vertices.\n  3. A point $(7,3)$ is translated to $(2,10)$. Find the translation vector.\n  4. Explain, in one sentence, why a translation preserves a figure's shape and orientation.\n- **P76 (Transfer Probe, mode = independence)**: \"A video game designer needs to move an entire spaceship sprite (made of many pixels, each with its own coordinates) 50 pixels to the right and 20 pixels up on the screen, without rotating or resizing the ship. (a) Explain why translation is the correct transformation to use here, connecting to its shape/size/orientation-preserving property. (b) If a specific pixel of the ship was originally at $(100,200)$, find its new coordinates after this translation.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.translation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.translation",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.transformations` — translation is one specific type of transformation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.translation/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.translation",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.transformations`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.rotation`, `math.geom.reflection` (the other rigid transformations).\n- **Parent**: `math.geom.transformations`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.translation.md",
+        "startLine": 92,
+        "endLine": 99
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.hyperbolic-derivatives-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.hyperbolic-derivatives",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:65e79bd6bfcf30b63024cd3afb66466b0de2b8317c69b4512610c9ee14e4bd19",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md": "sha256:03f2d582f894168bd832f2d9cffffad7a2e2d74e8c83be89eacf1970c8e2af68"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.hyperbolic-derivatives",
+    "name": "Derivatives of Hyperbolic Functions",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.trig.hyperbolic-functions",
+      "math.calc.derivative-exponential"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.hyperbolic-derivatives-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.hyperbolic-derivatives (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md": "sha256:03f2d582f894168bd832f2d9cffffad7a2e2d74e8c83be89eacf1970c8e2af68"
+      },
+      "contentHash": "sha256:43033a6b6b098e111959c74eafe70175e5d5ec8e1f129666fc252bb14758f422",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.hyperbolic-derivatives.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.hyperbolic-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.hyperbolic-derivatives\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.hyperbolic-derivatives.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.hyperbolic-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.hyperbolic-derivatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.hyperbolic-derivatives.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.hyperbolic-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.hyperbolic-derivatives\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.hyperbolic-derivatives.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.hyperbolic-derivatives"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.hyperbolic-derivatives\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Learning Objectives",
+      "content": "- LO1: State $\\frac{d}{dx}\\sinh x=\\cosh x$ and $\\frac{d}{dx}\\cosh x=\\sinh x$ — and recognize the CRUCIAL difference from ordinary trig derivatives: NEITHER formula has a NEGATIVE sign, unlike $\\frac{d}{dx}\\cos x=-\\sin x$.\n- LO2: DERIVE these formulas directly from the exponential DEFINITIONS $\\sinh x=\\frac{e^x-e^{-x}}{2}$, $\\cosh x=\\frac{e^x+e^{-x}}{2}$, using `math.calc.derivative-exponential` — rather than treating them as an independent fact set disconnected from the trig-derivative pattern.\n- LO3: Apply the CHAIN RULE when the hyperbolic function's argument is a function of $x$: $\\frac{d}{dx}\\sinh(g(x))=\\cosh(g(x))\\cdot g'(x)$ — a common omission is forgetting the chain-rule factor.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "TRIG-SIGN-FLIP-PATTERN-INCORRECTLY-APPLIED-TO-HYPERBOLIC-FUNCTIONS",
+      "content": "| MC-1 | TRIG-SIGN-FLIP-PATTERN-INCORRECTLY-APPLIED-TO-HYPERBOLIC-FUNCTIONS | Incorrectly carrying over the negative-sign pattern from ordinary trig derivatives (e.g. cos) to the corresponding hyperbolic derivative, which has no sign flip | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "CHAIN-RULE-FACTOR-OMITTED-FOR-HYPERBOLIC-FUNCTION-OF-A-FUNCTION",
+      "content": "| MC-2 | CHAIN-RULE-FACTOR-OMITTED-FOR-HYPERBOLIC-FUNCTION-OF-A-FUNCTION | Omitting the chain-rule factor g'(x) when differentiating a hyperbolic function of a non-trivial argument g(x) | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Hyperbolic Derivatives Have NO Sign Flip, Unlike cos(x) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Hyperbolic Derivatives Have NO Sign Flip, Unlike cos(x) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Deriving Hyperbolic Derivatives from Exponential Definitions (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Deriving Hyperbolic Derivatives from Exponential Definitions (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Chain Rule Factor Is Mandatory for a Hyperbolic Function of a Function (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Chain Rule Factor Is Mandatory for a Hyperbolic Function of a Function (reused procedure)\",\"primitives\":[],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. State $\\frac{d}{dx}\\sinh x$ and $\\frac{d}{dx}\\cosh x$, and explain why neither has a negative sign.\n  2. Derive $\\frac{d}{dx}\\cosh x$ starting from its exponential definition.\n  3. Differentiate $f(x)=\\sinh(4x)$.\n  4. Differentiate $f(x)=\\cosh(x^2+1)$.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer modeling the shape of a hanging cable (a catenary curve) uses $y(x)=a\\cosh(x/a)$ (where $a$ is a constant related to the cable's tension and weight), and needs the cable's slope at any point, $\\frac{dy}{dx}$. (a) Differentiate $y(x)$ with respect to $x$, applying the chain rule correctly. (b) Explain why, unlike a similar-looking trigonometric model, this derivative introduces NO sign change — connecting to the fundamental difference between hyperbolic and ordinary trig derivatives.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.trig.hyperbolic-functions` (the functions themselves, defined via exponentials) and `math.calc.derivative-exponential` (the tool used to derive their derivatives).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.hyperbolic-derivatives/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.hyperbolic-derivatives",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.trig.hyperbolic-functions`, `math.calc.derivative-exponential`.\n- **Unlocks**: none recorded in the KG.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.hyperbolic-derivatives.md",
+        "startLine": 92,
+        "endLine": 97
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

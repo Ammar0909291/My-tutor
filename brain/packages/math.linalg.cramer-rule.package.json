@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.cramer-rule-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.cramer-rule",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:aa11a3cf71d835d50617225b52465e44f2a0e0c97617c3e8f8b321863d48e48d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.cramer-rule.md": "sha256:98421e29cf5c3a80ffc19a54a2ccae0b9309731bd1077b2b4d87f470d9f7da4c"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.cramer-rule",
+    "name": "Cramer's Rule",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.linalg.determinant",
+      "math.linalg.matrix-inverse"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.cramer-rule-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.cramer-rule (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.cramer-rule.md": "sha256:98421e29cf5c3a80ffc19a54a2ccae0b9309731bd1077b2b4d87f470d9f7da4c"
+      },
+      "contentHash": "sha256:877cdf9688dc2cb9b9966ba1780befc2976fd2df80929badb83a1f8142e1c9a0",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.cramer-rule.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cramer-rule.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cramer-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cramer-rule\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cramer-rule.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cramer-rule.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cramer-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cramer-rule\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cramer-rule.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cramer-rule.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cramer-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cramer-rule\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.cramer-rule.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.cramer-rule.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.cramer-rule"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.cramer-rule\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.cramer-rule/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve $Ax=b$ using Cramer's Rule: $x_i=\\frac{\\det(A_i)}{\\det(A)}$, where $A_i$ is $A$ with its $i$-th COLUMN replaced by $b$.\n- LO2: Verify Cramer's Rule requires $\\det(A)\\ne0$ — recognizing that if $\\det(A)=0$, the rule cannot be applied at all (the system either has no unique solution or is singular).\n- LO3: Recognize Cramer's Rule's practical limitation: despite being an elegant EXPLICIT formula, its reliance on computing $n+1$ separate determinants makes it computationally IMPRACTICAL for large $n$, where more efficient methods (row reduction) are preferred.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "CRAMERS-RULE-WRONG-COLUMN-REPLACED",
+      "content": "| MC-1 | CRAMERS-RULE-WRONG-COLUMN-REPLACED | Replacing the wrong column (or a row instead of a column) with $b$ when forming $A_i$, rather than the column matching the target variable's index | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "ZERO-DETERMINANT-MISINTERPRETED-AS-NO-SOLUTION",
+      "content": "| MC-2 | ZERO-DETERMINANT-MISINTERPRETED-AS-NO-SOLUTION | Concluding \"no solution\" automatically when $\\det(A)=0$, rather than recognizing Cramer's Rule simply doesn't apply and a different method is needed to determine actual solvability | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "CRAMERS-RULE-USED-FOR-LARGE-SYSTEMS-WITHOUT-EFFICIENCY-AWARENESS",
+      "content": "| MC-3 | CRAMERS-RULE-USED-FOR-LARGE-SYSTEMS-WITHOUT-EFFICIENCY-AWARENESS | Defaulting to Cramer's Rule for large systems without recognizing its computational impracticality compared to row reduction | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "Replace the Matching Column with b (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Replace the Matching Column with b (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "det(A) = 0 Signals: Switch Methods (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"det(A) = 0 Signals: Switch Methods (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "Elegant Formula, Impractical for Large Systems (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Elegant Formula, Impractical for Large Systems (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Solve $\\begin{cases}3x+2y=8\\\\x-y=1\\end{cases}$ using Cramer's Rule.\n  2. Solve $\\begin{cases}x+2y+z=6\\\\2x+y-z=1\\\\x-y+2z=5\\end{cases}$ for $x$ using Cramer's Rule (finding $\\det(A)$ and $\\det(A_1)$).\n  3. Given a system where $\\det(A)=0$, explain what this means for applying Cramer's Rule, and what alternative approach would be needed.\n  4. Explain, in one sentence, why Cramer's Rule becomes impractical for large systems despite being an elegant explicit formula.\n- **P76 (Transfer Probe, mode = independence)**: \"A small electrical circuit with 3 unknown currents is modeled by a $3\\times3$ system $Ax=b$ where $\\det(A)=12\\ne0$. (a) Explain, using this lesson's method, how Cramer's Rule would find each current $x_i$ as a ratio of two determinants. (b) An engineer scaling this analysis up to a much larger circuit with 50 unknown currents asks whether Cramer's Rule is still the best approach — explain, using this lesson's complexity discussion, why row reduction would be strongly preferred at that scale, even though Cramer's Rule remains mathematically valid.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.determinant` (the computation this rule relies on) and `math.linalg.matrix-inverse` (Cramer's Rule is, structurally, a closed-form expression of $x=A^{-1}b$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.cramer-rule/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.cramer-rule",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.determinant`, `math.linalg.matrix-inverse`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.rank` (the correct diagnostic tool when $\\det(A)=0$ makes Cramer's Rule inapplicable).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.cramer-rule.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

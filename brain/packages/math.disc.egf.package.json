@@ -1,0 +1,311 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.egf-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.egf",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:09839b2da417f7d0989dfe8bb1dd0224c38ab5d4d7567a373f69ee4be87d5ead",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.egf.md": "sha256:b04eed1ab6037d7242e577a1519bda0a0c17ed27d12782505251ff42af93461d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.egf",
+    "name": "Exponential Generating Functions",
+    "difficultyRaw": "expert",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.disc.generating-functions"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.egf-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.egf (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.egf.md": "sha256:b04eed1ab6037d7242e577a1519bda0a0c17ed27d12782505251ff42af93461d"
+      },
+      "contentHash": "sha256:113ec0312e9dc2444ddf8738e0c9e0ff85ca63f5889c4fb393cb355bc7f24fbe",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.egf.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.egf.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.egf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.egf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.egf.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.egf.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.egf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.egf\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.egf.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.egf.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.egf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.egf\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.egf.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.egf.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.egf"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.egf\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.egf/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.egf",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write the EGF $B(x)=\\sum_{n\\ge0}b_n\\frac{x^n}{n!}$ for a given sequence, and recover sequence terms $b_n$ from a given EGF by multiplying its $x^n$ coefficient by $n!$.\n- LO2: Explain WHY EGFs (dividing by $n!$) are the natural choice for LABELED structures, in contrast to OGFs for unlabeled ones — distinguishing when each type applies.\n- LO3: Recognize $e^x$ as the EGF for permutations ($b_n=n!$ for all $n$) and interpret this connection.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.egf/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.egf",
+      "title": "EGF-PRODUCT-COMPUTED-AS-PLAIN-CONVOLUTION",
+      "content": "| MC-1 | EGF-PRODUCT-COMPUTED-AS-PLAIN-CONVOLUTION | Computing the product of two EGFs using an OGF-style plain convolution, missing the automatic binomial-coefficient weighting that makes EGF products correct for labeled structures | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.disc.egf/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.egf",
+      "title": "EGF-COEFFICIENT-EXTRACTION-CONFUSED-WITH-OGF",
+      "content": "| MC-2 | EGF-COEFFICIENT-EXTRACTION-CONFUSED-WITH-OGF | Reading off the coefficient of $x^n$ directly as $b_n$ (as one would for an OGF), forgetting the required multiplication by $n!$ | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.disc.egf/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.egf",
+      "title": "LABELED-VS-UNLABELED-STRUCTURE-TYPE-MISJUDGED",
+      "content": "| MC-3 | LABELED-VS-UNLABELED-STRUCTURE-TYPE-MISJUDGED | Choosing an EGF for a fundamentally unlabeled counting problem, or an OGF for a fundamentally labeled one, misjudging which encoding the problem's structure actually calls for | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.egf/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.egf",
+      "title": "EGF Coefficients Are Divided by n! — Read Carefully (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"EGF Coefficients Are Divided by n! — Read Carefully (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.disc.egf/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.egf",
+      "title": "Why n! Division Matters for Labeled Structures (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Why n! Division Matters for Labeled Structures (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.egf/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.egf",
+      "title": "$e^x$ as the Building-Block EGF (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"$e^x$ as the Building-Block EGF (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.disc.egf/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.egf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.egf/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.egf",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Write the EGF for the sequence $b_n=3^n$.\n  2. Given $B(x)=e^{5x}$, state the sequence $b_n$ it represents.\n  3. Explain, in one sentence, why the coefficient of $\\frac{x^n}{n!}$ (not $x^n$) is the natural quantity to extract from an EGF.\n  4. State what sequence $e^x$ itself represents (i.e. $b_n$ for all $n$), and explain its combinatorial meaning as \"one way to form a labeled block.\"\n- **P76 (Transfer Probe, mode = independence)**: \"A combinatorics problem asks for the number of ways to partition a set of $n$ distinctly labeled students into an unordered collection of non-empty study groups (each student in exactly one group, groups have no internal order or names). (a) Explain, using this lesson's EGF-composition idea (previewed with $e^{e^x-1}$ in Example 3), why this counting problem — the Bell numbers — is naturally suited to EGFs rather than OGFs, given that the students are individually labeled/distinguishable. (b) Contrast this with a DIFFERENT problem: partitioning $n$ IDENTICAL (unlabeled) tokens into groups — explain why this second problem would instead be a natural fit for an OGF (per `math.disc.ogf`), not an EGF.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.disc.egf/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.egf",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.generating-functions` (the general encoding-a-sequence idea) — this concept specializes that idea for LABELED combinatorial structures, contrasting directly with `math.disc.ogf`'s unlabeled case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.egf/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.egf",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.generating-functions`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.ogf` (the unlabeled-structure counterpart, directly contrasted throughout this blueprint), `math.disc.stirling-numbers` (Stirling numbers of the second kind, connected to the Bell-number/set-partition structure this concept previews).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.egf.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

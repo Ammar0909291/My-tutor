@@ -1,0 +1,294 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.matrix-addition-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.matrix-addition",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:8ce5d1cb2873cff188eebc544469a8539807e4cdaa8ea7e6891a378241238828",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.matrix-addition.md": "sha256:59ab4a7dceb45e143397414a45883a6c21dd0f42f41fb841ad73dbf709a16fb5"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.matrix-addition",
+    "name": "Matrix Addition",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.95,
+    "estimatedHours": 1,
+    "prerequisites": [
+      "math.linalg.matrix"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.matrix-addition-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.matrix-addition (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.matrix-addition.md": "sha256:59ab4a7dceb45e143397414a45883a6c21dd0f42f41fb841ad73dbf709a16fb5"
+      },
+      "contentHash": "sha256:65427092d6066fd085bca5da29d53f85adcad88a89a4c463b54b7a013d8feafe",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-addition.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-addition.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-addition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-addition.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-addition.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-addition\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-addition.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-addition.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-addition\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.matrix-addition.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.matrix-addition.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.matrix-addition"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.matrix-addition\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.matrix-addition/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Learning Objectives",
+      "content": "- LO1: Add two matrices of the SAME dimensions by adding CORRESPONDING entries (component-wise).\n- LO2: Recognize that matrix addition is UNDEFINED for matrices of DIFFERENT dimensions — there is no valid way to add a $2\\times3$ matrix to a $3\\times2$ matrix, for instance.\n- LO3: State that matrices of a fixed size, under addition (and scalar multiplication), satisfy all VECTOR SPACE axioms — matrix addition behaves exactly like vector addition, just with entries arranged in a grid rather than a list.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "MISMATCHED-DIMENSION-MATRICES-ADDED-VIA-ARBITRARY-PAIRING",
+      "content": "| MC-1 | MISMATCHED-DIMENSION-MATRICES-ADDED-VIA-ARBITRARY-PAIRING | Attempting to add matrices of different dimensions by forcing some arbitrary entry pairing, rather than recognizing the operation is undefined | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "MATRIX-ADDITION-ENTRY-POSITIONS-MISALIGNED",
+      "content": "| MC-2 | MATRIX-ADDITION-ENTRY-POSITIONS-MISALIGNED | Adding entries from mismatched positions within same-dimension matrices (e.g. transposing one matrix's layout before adding), rather than matching by exact row-column position | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Add Corresponding Entries, Position by Position (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Add Corresponding Entries, Position by Position (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Dimension Mismatch Means the Operation Doesn't Apply (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Dimension Mismatch Means the Operation Doesn't Apply (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Matrix Addition Inherits Vector-Space Properties (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Matrix Addition Inherits Vector-Space Properties (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.95×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Add $\\begin{pmatrix}2&-1\\\\0&3\\end{pmatrix}+\\begin{pmatrix}4&5\\\\-2&1\\end{pmatrix}$.\n  2. Determine whether $\\begin{pmatrix}1&2\\end{pmatrix}$ (a $1\\times2$ matrix) can be added to $\\begin{pmatrix}3\\\\4\\end{pmatrix}$ (a $2\\times1$ matrix), and explain why or why not.\n  3. Add three matrices of the same $2\\times2$ dimensions together, showing the computation is associative regardless of grouping order.\n  4. Explain, in one sentence, why matrix addition requires matching dimensions.\n- **P76 (Transfer Probe, mode = independence)**: \"A spreadsheet tracks monthly sales for 3 products across 2 regions as a $2\\times3$ matrix for January and another $2\\times3$ matrix for February. (a) Add the two matrices to find total sales per product per region across both months. (b) A colleague accidentally tries to add the January matrix (2 regions × 3 products) to a DIFFERENTLY-structured March report organized as 3 regions × 2 products (a $3\\times2$ matrix) — explain, using this lesson's dimension-matching requirement, why this addition cannot be performed directly, and what would need to change first.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.matrix` (what a matrix is, and its dimensions) — addition is the first operation defined on this structure.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.matrix-addition/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.matrix-addition",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.matrix`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.matrix-addition.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

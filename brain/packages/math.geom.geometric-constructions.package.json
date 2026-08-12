@@ -1,0 +1,297 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.geometric-constructions-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.geometric-constructions",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2e73e359eea8557fa271f53dc51329467f2a6a08d439befdb8badbe73d8af113",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.geometric-constructions.md": "sha256:48257a1fba1b2832c6b40e9bf85de5f9471715818545d74e2e49d527985fc549"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.geometric-constructions",
+    "name": "Geometric Constructions",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 10,
+    "prerequisites": [
+      "math.geom.triangle",
+      "math.geom.circle"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.geometric-constructions-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.geometric-constructions (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.geometric-constructions.md": "sha256:48257a1fba1b2832c6b40e9bf85de5f9471715818545d74e2e49d527985fc549"
+      },
+      "contentHash": "sha256:de626e07505ecc1657bf4392ca7dba418fe6d41d041a7d370b603b83a6678d49",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-constructions.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-constructions.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-constructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-constructions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-constructions.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-constructions.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-constructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-constructions\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-constructions.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-constructions.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-constructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-constructions\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.geometric-constructions.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.geometric-constructions.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.geometric-constructions"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.geometric-constructions\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.geometric-constructions/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Learning Objectives",
+      "content": "- LO1: Perform classic COMPASS-AND-STRAIGHTEDGE constructions — bisecting a SEGMENT (finding its midpoint via two intersecting arcs) and bisecting an ANGLE (via arcs from the vertex and from two points on the rays) — using ONLY these two tools, no measuring devices like a ruler's markings or a protractor.\n- LO2: Recognize the STRICT LIMITATION of \"compass and straightedge\" — the straightedge may draw a line through two points but has NO markings for measuring length, and the compass may draw a circle but cannot be \"locked\" to transfer a length in ways beyond its basic drawing function — many familiar shortcuts (like directly measuring a length with a ruler) are NOT valid constructions under these rules.\n- LO3: Recognize that NOT every geometric construction is achievable with compass and straightedge alone — some famous problems (like trisecting an arbitrary angle, or doubling a cube) are PROVABLY IMPOSSIBLE under these strict rules, a fact rigorously established by GALOIS THEORY (a deep algebraic tool classifying exactly which constructions are possible).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "CONSTRUCTION-PERFORMED-VIA-DIRECT-MEASUREMENT-INSTEAD-OF-VALID-COMPASS-STRAIGHTEDGE-STEPS",
+      "content": "| MC-1 | CONSTRUCTION-PERFORMED-VIA-DIRECT-MEASUREMENT-INSTEAD-OF-VALID-COMPASS-STRAIGHTEDGE-STEPS | Attempting to bisect a segment or angle via direct measurement (ruler/protractor) rather than the valid arc-based compass-and-straightedge steps | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "ANY-METHOD-ACHIEVING-THE-SAME-VISUAL-RESULT-ASSUMED-VALID-REGARDLESS-OF-OPERATIONS-USED",
+      "content": "| MC-2 | ANY-METHOD-ACHIEVING-THE-SAME-VISUAL-RESULT-ASSUMED-VALID-REGARDLESS-OF-OPERATIONS-USED | Assuming any method achieving the same visual outcome counts as a valid construction, rather than recognizing the strict rules on which specific operations (arcs, connecting lines, no measurement) are permitted | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Bisecting a Segment via Two Equal-Radius Arcs (Primitive C: Concrete Hands-On Construction)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Bisecting a Segment via Two Equal-Radius Arcs (Primitive C: Concrete Hands-On Construction)\",\"primitives\":[],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Strict Tool Limitations: No Ruler Markings, No Measured Transfer (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Strict Tool Limitations: No Ruler Markings, No Measured Transfer (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Some Constructions Are Provably Impossible, Not Just Unsolved (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Some Constructions Are Provably Impossible, Not Just Unsolved (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Describe the compass-and-straightedge steps to bisect a given angle.\n  2. Explain why using a ruler's numeric markings to measure and transfer a length is not a valid compass-and-straightedge operation.\n  3. Explain the difference between \"bisecting\" an angle (always possible) and \"trisecting\" an arbitrary angle (generally impossible) with compass and straightedge.\n  4. Explain, in your own words, what it means for Galois theory to \"classify\" which constructions are possible.\n- **P76 (Transfer Probe, mode = independence)**: \"A mathematics history student learns that ancient Greek geometers spent centuries attempting to trisect an arbitrary angle using only compass and straightedge, never succeeding. (a) Explain why their repeated failure was NOT due to lack of cleverness or insufficient technique, but a fundamental mathematical impossibility. (b) Explain, at a high level, how a rigorous algebraic proof (via Galois theory) can establish that NO clever construction technique, however sophisticated, could ever succeed at this particular task.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.triangle` and `math.geom.circle` — both are used extensively as the basic building blocks of classical constructions.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.geom.geometric-constructions/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.geometric-constructions",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.triangle`, `math.geom.circle`.\n- **Unlocks**: none recorded in the KG.\n- **Cross-links**: `math.abst.galois-theory` (the advanced algebraic tool proving impossibility results for this concept).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.geometric-constructions.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

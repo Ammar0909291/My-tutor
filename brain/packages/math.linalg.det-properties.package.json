@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.det-properties-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.det-properties",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d2cd54836ec2b978c187d3fb6f6ba874678188cb6ef10096bed0003b2a1063c6",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.det-properties.md": "sha256:ef1af846580858d5cf218da70e8941a7d706744597211982f96fa87cc571e409"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.det-properties",
+    "name": "Determinant Properties",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "math.linalg.determinant"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.det-properties-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.det-properties (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.det-properties.md": "sha256:ef1af846580858d5cf218da70e8941a7d706744597211982f96fa87cc571e409"
+      },
+      "contentHash": "sha256:b27661dae15d728685fda7f7479cf6d313551c4455da64d8ba4861f0a1066e11",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.det-properties.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.det-properties.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.det-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.det-properties\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.det-properties.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.det-properties.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.det-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.det-properties\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.det-properties.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.det-properties.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.det-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.det-properties\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.det-properties.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.det-properties.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.det-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.det-properties\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.det-properties/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply the multiplicative property $\\det(AB)=\\det(A)\\det(B)$ and the transpose property $\\det(A^T)=\\det(A)$.\n- LO2: Apply the scalar property $\\det(cA)=c^n\\det(A)$ (for an $n\\times n$ matrix) — correctly using the exponent $n$, NOT a plain multiplicative factor of $c$.\n- LO3: Track how each ROW OPERATION affects the determinant: a row SWAP flips the sign; SCALING a row by $c$ multiplies the determinant by $c$; ADDING a multiple of one row to another leaves the determinant UNCHANGED.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.det-properties",
+      "title": "SCALAR-DETERMINANT-PROPERTY-USES-C-INSTEAD-OF-C-TO-THE-N",
+      "content": "| MC-1 | SCALAR-DETERMINANT-PROPERTY-USES-C-INSTEAD-OF-C-TO-THE-N | Computing $\\det(cA)$ as $c\\det(A)$ rather than the correct $c^n\\det(A)$ for an $n\\times n$ matrix | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.det-properties",
+      "title": "SINGLE-ROW-SCALING-CONFUSED-WITH-WHOLE-MATRIX-SCALING",
+      "content": "| MC-2 | SINGLE-ROW-SCALING-CONFUSED-WITH-WHOLE-MATRIX-SCALING | Applying the whole-matrix scaling rule ($c^n$) when only a single row was actually scaled (which should use just $c$), or vice versa | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.det-properties",
+      "title": "ROW-SWAP-SIGN-CHANGE-FORGOTTEN",
+      "content": "| MC-3 | ROW-SWAP-SIGN-CHANGE-FORGOTTEN | Forgetting that swapping two rows flips the determinant's sign, treating a row-swapped matrix as having the same determinant | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Whole-Matrix Scaling Uses the Exponent n (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Whole-Matrix Scaling Uses the Exponent n (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Single-Row Scaling vs. Whole-Matrix Scaling (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Single-Row Scaling vs. Whole-Matrix Scaling (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Multiplicative and Transpose Properties (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Multiplicative and Transpose Properties (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Given $\\det(A)=6$ for a $2\\times2$ matrix, find $\\det(3A)$.\n  2. Given $\\det(A)=4$, find the determinant after swapping two rows of $A$, and after scaling just ONE row of $A$ by 5.\n  3. Given $\\det(A)=2$ and $\\det(B)=7$, find $\\det(AB)$ and $\\det(A^{-1})$.\n  4. Explain, in one sentence, why scaling an entire $n\\times n$ matrix by $c$ multiplies its determinant by $c^n$ rather than just $c$.\n- **P76 (Transfer Probe, mode = independence)**: \"An economist models a $3\\times3$ input-output matrix $A$ with $\\det(A)=8$, representing the sensitivity of an economic system. (a) If every entry in the matrix is doubled (representing all sector interactions scaling up uniformly), find the new determinant. (b) If instead only ONE sector's row is doubled (representing just that sector's outputs doubling, others unchanged), find the new determinant — explain, using this lesson's distinction, why these two scenarios (whole-matrix vs. single-row scaling) give different results despite both involving 'doubling by 2.'\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.determinant` (what a determinant computes) — this concept catalogs how determinants behave under common operations.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.det-properties/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.det-properties",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.determinant`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.cofactor-expansion` (a computational method whose results these properties constrain and verify).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.det-properties.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

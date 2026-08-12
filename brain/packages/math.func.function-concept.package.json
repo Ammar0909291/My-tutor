@@ -1,0 +1,1338 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.func.function-concept-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.func.function-concept",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:06d09eccc60d092ab7e35db1adabc7a35c9fee32b992f2db2f39c0dc6689df54",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.func.function-concept.md": "sha256:9d6c4d4285a584ac5478281be361a1e667c9b7da3476956deea83ffb8f74605b"
+    },
+    "assetCount": 42,
+    "assetCounts": {
+      "core_explanation": 1,
+      "learning_objective": 1,
+      "worked_example": 1,
+      "misconception": 4,
+      "teaching_action_meta": 31,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 31
+  },
+  "concept": {
+    "conceptId": "math.func.function-concept",
+    "name": "Function Concept",
+    "difficultyRaw": "3 (proficient)",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.found.variable",
+      "math.found.set-theory"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.func.function-concept-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.func.function-concept (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.func.function-concept.md": "sha256:9d6c4d4285a584ac5478281be361a1e667c9b7da3476956deea83ffb8f74605b"
+      },
+      "contentHash": "sha256:68fa6740b0b440f183bc102130be72362c808025e6404c81fef00d7d9afdcc3f",
+      "ruleCount": 31,
+      "bandCounts": {
+        "3": 31
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-A04 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-A05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-A05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-A06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-A06 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-A07",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-A07",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-B01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-B01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-B02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-B02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-B03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-B03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-B04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-B04 (addresses MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-B05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-B05 (addresses MC-3, MC-4, MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-C01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-C01 (addresses MC-3, MC-2, MC-1, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-C02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-C02 (addresses MC-3, MC-4)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-C03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-C03 (addresses MC-1, MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-C04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-C04 (addresses MC-2, MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-C05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-C05 (addresses MC-4, MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-C06",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-C06",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-D01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-D01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-D02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-D02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-D03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-D03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-D04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-D04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-E01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-E01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-E02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-E02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-E03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-E03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-E04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-E04 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-E05",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-E05",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-F01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-F01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-F02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-F02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-F03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-F03 (addresses MC-3)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.func.function-concept.TA-F04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.func.function-concept.md#TA-F04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.func.function-concept"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.func.function-concept\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.func.function-concept/core_explanation/1",
+      "kind": "core_explanation",
+      "conceptId": "math.func.function-concept",
+      "title": "Function Concept — core idea",
+      "content": "A function is a rule that assigns to each element of a domain set exactly one element of a codomain set. The three critical properties are: (1) every input has an output, (2) each input has exactly one output, (3) different inputs may share the same output. Functions can be expressed as mapping diagrams, tables, ordered pair sets, graphs, verbal rules, or formulas — no single representation is privileged.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 9,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.func.function-concept",
+      "title": "Learning Objective",
+      "content": "Given a relation expressed as a mapping diagram, table of values, set of ordered pairs, graph, or verbal rule, the student:\n\n(a) correctly determines whether the relation is a function (all four representation types);  \n(b) correctly identifies the domain, codomain, and range as distinct sets;  \n(c) correctly evaluates f(a) for specific values using function notation;  \n(d) correctly distinguishes a function from a one-to-one function.\n\n**Accuracy threshold:** 85% across items (a)–(d) combined.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 34,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/worked_example/WE-TA-E02",
+      "kind": "worked_example",
+      "conceptId": "math.func.function-concept",
+      "title": "Concrete with Scaffolded Worked Example",
+      "content": "**TA-E02 — Concrete with Scaffolded Worked Example**\n\nPrimitive sequence: `P01 → P06 → P81 → P10 → P34 → P55 → P49 | P50`\n\n`P01` target_element: arrow diagram classification  \n`P06` concrete: two arrow diagrams (one function, one non-function)  \n`P81` scaffold: annotated worked example — for diagram A: \"Count arrows out of node 1: exactly 1 → OK. Node 2: exactly 1 → OK. Every node OK → function.\"  \n`P10` worked example: demonstrate classification for diagram B, talking through each step  \n`P34` closed: \"Now you classify diagram C\" (new diagram provided)  \n`P55` wait: 5 s\n\nResponse taxonomy: function or not-function with reasoning.\n\n`P49`: CORRECT → TA-E03; PARTIAL → `P53` → TA-E03; INCORRECT → `P50` → repeat scaffold more slowly → retry\n\n---",
+      "localKey": "WE-TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 668,
+        "endLine": 685
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.func.function-concept",
+      "title": "— Range and Codomain Are the Same Set",
+      "content": "### MC-1 — Range and Codomain Are the Same Set\n\n**Observable symptom:** Student states \"range = codomain = {2, 4, 6}\" when codomain is declared as ℕ, or states \"range = codomain = ℝ\" when range is a proper subset.\n\n**Diagnostic trigger:** P41 after range/codomain distinction is introduced (TA-A04, DB-4).\n\n**Root cause:** Both terms involve outputs; school instruction rarely distinguishes \"outputs you could get\" from \"outputs you actually get.\" Most simple school functions have range = codomain, reinforcing the conflation.\n\n**Repair chain:** P27 (expose \"they are the same\") → P28 (conflict: codomain ℝ, range = [0,∞) for f(x)=x²; -4 ∈ codomain but -4 ∉ range) → P29 (pause) → P30 (bridge: actual vs. possible) → P31 (install: \"Range ⊆ Codomain; Range = Codomain only when surjective\") → P32 (consolidation: three examples where range ≠ codomain)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 5,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.func.function-concept",
+      "title": "— Functions Must Have Algebraic Formulas",
+      "content": "### MC-2 — Functions Must Have Algebraic Formulas\n\n**Observable symptom:** Student rejects a mapping diagram, table, or verbal rule as \"not a proper function\" because \"there's no equation.\"\n\n**Diagnostic trigger:** DB-2 (verbal rule); TA-B02 (phone contact diagram).\n\n**Root cause:** Classroom exposure dominated by f(x) = algebraic expression. Students form the implicit rule \"function = formula.\"\n\n**Repair chain:** P27 (surface belief) → P07 (counter-example: real-world mapping with no formula) → P28 (conflict: it satisfies the definition but has no formula) → P30 (bridge: formula is one representation; definition is about the mapping rule) → P42 (student generates 3 non-formula functions)\n\n**MAMR status:** Independent.\n\n---",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.func.function-concept",
+      "title": "— f(x) Means f Multiplied by x",
+      "content": "### MC-3 — f(x) Means f Multiplied by x\n\n**Observable symptom:** Student writes f(3) = 3f or attempts to solve for f as an unknown number; evaluates f(5) = 5 × f(x) symbolically.\n\n**Diagnostic trigger:** P41 (\"Am I multiplying f by 3?\"); DB-3 (evaluation task).\n\n**Root cause:** Juxtaposition in algebra means multiplication (2x = 2 × x, 3a = 3 × a), so f(x) pattern-matches to multiplication by proximity. Function notation departs from this convention without explicit instruction.\n\n**Repair chain:** P27 (expose misreading) → P28 (conflict: if f(3) = 3f, compute f from f(x)=x+2 → contradiction) → P29 (pause) → P30 (bridge: f is a RULE NAME, not a number) → P31 (install: f(x) = \"output of rule f at input x\") → P32 (5 evaluations using correct interpretation)\n\n**MAMR status:** FOUNDATIONAL for MC-4. MC-3 must be cleared before MC-4 repair begins. Rationale: MC-4 repair requires correct evaluation of f(x) to demonstrate that both f(2)=4 and f(-2)=4 are valid outputs; students with MC-3 cannot execute this demonstration.\n\n---",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 33,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/misconception/MC-4",
+      "kind": "misconception",
+      "conceptId": "math.func.function-concept",
+      "title": "— One-to-One Is the Definition of a Function",
+      "content": "### MC-4 — One-to-One Is the Definition of a Function\n\n**Observable symptom:** Student claims f(x) = x² is not a function because \"the same output appears twice\" or \"f(2) = f(-2) = 4 so it's not allowed.\"\n\n**Diagnostic trigger:** P41 (\"Is f(x)=x² a function? Is it one-to-one?\"); DB-1 (mapping diagram where two inputs share one output).\n\n**Root cause:** The definition \"each input has one output\" is linguistically symmetric and students interpret it bidirectionally as \"each output has one input.\" The term \"one-to-one function\" reinforces this, as students assume the word \"one-to-one\" is the definition of \"function.\"\n\n**Repair chain:** P27 (surface belief) → P28 (conflict: f(3)=9 — does 3 have one output? yes. f(-3)=9 — does -3 have one output? yes. Both inputs satisfied the definition.) → P29 → P30 (bridge: function = each INPUT → one output; one-to-one = each OUTPUT ← one input; orthogonal requirements) → P31 (2×2 table: function/not × one-to-one/not with examples) → P33 (discrimination training: sort 6 examples into correct cells)\n\n**MAMR prerequisite:** MC-3 must be cleared first.\n\n---",
+      "localKey": "MC-4",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 47,
+        "endLine": 61
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Function Machine: Concrete Introduction",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Function Machine: Concrete Introduction\",\"primitives\":[\"P01\",\"P04\",\"P06\",\"P14\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 12,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Not-a-Function: Counter-Example",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Not-a-Function: Counter-Example\",\"primitives\":[\"P01\",\"P06\",\"P17\",\"P30\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 47,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Arrow Diagrams: Perceptual Bridge",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Arrow Diagrams: Perceptual Bridge\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P18\",\"P35\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 80,
+        "endLine": 116
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Tables, Ordered Pairs, Range vs Codomain",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Tables, Ordered Pairs, Range vs Codomain\",\"primitives\":[\"P01\",\"P07\",\"P20\",\"P34\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 116,
+        "endLine": 160
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-A05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Graphs and Vertical Line Test: Abstract Bridge",
+      "content": "{\"id\":\"TA-A05\",\"title\":\"Graphs and Vertical Line Test: Abstract Bridge\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P13\",\"P34\",\"P43\",\"P49\",\"P50\",\"P52\",\"P53\",\"P54\",\"P55\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-A05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 160,
+        "endLine": 198
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-A06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Function Notation: Abstract",
+      "content": "{\"id\":\"TA-A06\",\"title\":\"Function Notation: Abstract\",\"primitives\":[\"P01\",\"P08\",\"P22\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P34\",\"P41\",\"P42\",\"P49\",\"P50\",\"P53\",\"P54\",\"P55\",\"P81\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-A06",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 198,
+        "endLine": 238
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-A07",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-A07\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P49\",\"P50\",\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A07",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 238,
+        "endLine": 290
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-B01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Concrete Reactivation",
+      "content": "{\"id\":\"TA-B01\",\"title\":\"Concrete Reactivation\",\"primitives\":[\"P02\",\"P06\",\"P35\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 290,
+        "endLine": 315
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-B02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Non-Equation Functions",
+      "content": "{\"id\":\"TA-B02\",\"title\":\"Non-Equation Functions\",\"primitives\":[\"P01\",\"P06\",\"P07\",\"P27\",\"P30\",\"P31\",\"P41\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-B02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 315,
+        "endLine": 340
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-B03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Range vs Codomain (Formal)",
+      "content": "{\"id\":\"TA-B03\",\"title\":\"Range vs Codomain (Formal)\",\"primitives\":[\"P01\",\"P08\",\"P34\",\"P44\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-B03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 340,
+        "endLine": 367
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-B04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "One-to-One vs Many-to-One",
+      "content": "{\"id\":\"TA-B04\",\"title\":\"One-to-One vs Many-to-One\",\"primitives\":[\"P01\",\"P08\",\"P17\",\"P27\",\"P28\",\"P30\",\"P31\",\"P41\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-4\"]}",
+      "localKey": "TA-B04",
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 367,
+        "endLine": 395
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-B05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-B05\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-B05",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-4",
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 395,
+        "endLine": 410
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-C01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Misconception Identification and Surfacing",
+      "content": "{\"id\":\"TA-C01\",\"title\":\"Misconception Identification and Surfacing\",\"primitives\":[\"P02\",\"P26\",\"P41\",\"P49\",\"P50\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\",\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C01",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-2",
+        "MC-1",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 410,
+        "endLine": 427
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-C02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "MC-3 Repair: f(x) ≠ f × x",
+      "content": "{\"id\":\"TA-C02\",\"title\":\"MC-3 Repair: f(x) ≠ f × x\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P51\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C02",
+      "language": "en",
+      "refs": [
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 427,
+        "endLine": 459
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-C03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "MC-1 Repair: Range ≠ Codomain",
+      "content": "{\"id\":\"TA-C03\",\"title\":\"MC-1 Repair: Range ≠ Codomain\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P32\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C03",
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 459,
+        "endLine": 491
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-C04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "MC-2 Repair: Functions Don't Require Formulas",
+      "content": "{\"id\":\"TA-C04\",\"title\":\"MC-2 Repair: Functions Don't Require Formulas\",\"primitives\":[\"P01\",\"P07\",\"P27\",\"P28\",\"P30\",\"P32\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-1\",\"MC-2\"]}",
+      "localKey": "TA-C04",
+      "language": "en",
+      "refs": [
+        "MC-2",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 491,
+        "endLine": 522
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-C05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "MC-4 Repair: One-to-One ≠ Definition of Function",
+      "content": "{\"id\":\"TA-C05\",\"title\":\"MC-4 Repair: One-to-One ≠ Definition of Function\",\"primitives\":[\"P01\",\"P27\",\"P28\",\"P29\",\"P30\",\"P31\",\"P33\",\"P34\",\"P49\",\"P50\",\"P52\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\",\"MC-4\"]}",
+      "localKey": "TA-C05",
+      "language": "en",
+      "refs": [
+        "MC-4",
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 522,
+        "endLine": 557
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-C06",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-C06\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-C06",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 557,
+        "endLine": 569
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-D01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Representation Audit",
+      "content": "{\"id\":\"TA-D01\",\"title\":\"Representation Audit\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 569,
+        "endLine": 581
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-D02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Weakest Representation Practice",
+      "content": "{\"id\":\"TA-D02\",\"title\":\"Weakest Representation Practice\",\"primitives\":[\"P01\",\"P06\",\"P07\",\"P08\",\"P22\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 581,
+        "endLine": 610
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-D03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Cross-Representation Translation",
+      "content": "{\"id\":\"TA-D03\",\"title\":\"Cross-Representation Translation\",\"primitives\":[\"P01\",\"P07\",\"P38\",\"P47\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-D03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 610,
+        "endLine": 637
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-D04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-D04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P28\",\"P30\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-D04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 637,
+        "endLine": 649
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-E01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Safety Frame and Concrete Activation",
+      "content": "{\"id\":\"TA-E01\",\"title\":\"Safety Frame and Concrete Activation\",\"primitives\":[\"P01\",\"P06\",\"P14\",\"P34\",\"P49\",\"P50\",\"P53\",\"P54\",\"P55\",\"P69\",\"P71\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-E01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 649,
+        "endLine": 668
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-E02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Concrete with Scaffolded Worked Example",
+      "content": "{\"id\":\"TA-E02\",\"title\":\"Concrete with Scaffolded Worked Example\",\"primitives\":[\"P01\",\"P06\",\"P10\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P81\"],\"addresses\":[]}",
+      "localKey": "TA-E02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 668,
+        "endLine": 685
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-E03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Perceptual with Confidence Calibration",
+      "content": "{\"id\":\"TA-E03\",\"title\":\"Perceptual with Confidence Calibration\",\"primitives\":[\"P01\",\"P07\",\"P30\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P64\",\"P70\"],\"addresses\":[]}",
+      "localKey": "TA-E03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 685,
+        "endLine": 711
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-E04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Abstract with Gradual Independence",
+      "content": "{\"id\":\"TA-E04\",\"title\":\"Abstract with Gradual Independence\",\"primitives\":[\"P01\",\"P08\",\"P22\",\"P42\",\"P49\",\"P50\",\"P53\",\"P55\",\"P64\",\"P70\",\"P81\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-E04",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 711,
+        "endLine": 739
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-E05",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-E05\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-E05",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 739,
+        "endLine": 751
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-F01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Visual Vocabulary Anchor",
+      "content": "{\"id\":\"TA-F01\",\"title\":\"Visual Vocabulary Anchor\",\"primitives\":[\"P01\",\"P03\",\"P04\",\"P06\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-F01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 751,
+        "endLine": 778
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-F02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Mapping Diagram with Embedded Vocabulary",
+      "content": "{\"id\":\"TA-F02\",\"title\":\"Mapping Diagram with Embedded Vocabulary\",\"primitives\":[\"P01\",\"P07\",\"P16\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-F02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 778,
+        "endLine": 804
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-F03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Abstraction Ladder: Diagram to Notation",
+      "content": "{\"id\":\"TA-F03\",\"title\":\"Abstraction Ladder: Diagram to Notation\",\"primitives\":[\"P01\",\"P07\",\"P08\",\"P25\",\"P34\",\"P49\",\"P50\",\"P53\",\"P55\"],\"addresses\":[\"MC-3\"]}",
+      "localKey": "TA-F03",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 804,
+        "endLine": 831
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_action_meta/TA-F04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.func.function-concept",
+      "title": "Mastery Gate (Terminal)",
+      "content": "{\"id\":\"TA-F04\",\"title\":\"Mastery Gate (Terminal)\",\"primitives\":[\"P01\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-F04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 831,
+        "endLine": 837
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "math.func.function-concept",
+      "title": "Assessment Battery",
+      "content": "---\n\n**AB-1 — Relation Classification** (P74-pattern)\n\nStimulus: Six relations presented in mixed representations.\n\n| Item | Representation | Verdict |\n|------|---------------|---------|\n| i | {(1,2),(2,4),(3,6)} — ordered pairs | function |\n| ii | {(1,2),(2,4),(1,6)} — ordered pairs | not function (1 has two outputs) |\n| iii | Mapping diagram: each node has exactly one arrow out | function |\n| iv | Graph of x² + y² = 4 (circle) | not function |\n| v | Mapping diagram: one node has no arrows | not function (input without output) |\n| vi | Table: x={1,2,3,4}, f(x)={5,5,5,5} | function (many-to-one is valid) |\n\nTarget: 5/6 correct. Item vi tests MC-4 reversal.\n\n---\n\n**AB-2 — Function Evaluation** (notation)\n\nStimulus: f(x) = 4x − 3.\n\nTasks: evaluate f(0), f(2), f(-1), f(1/2).\n\nExpected: -3, 5, -7, -1. Target: 4/4 correct steps shown.\n\n---\n\n**AB-3 — Representation Translation**\n\nStimulus: mapping diagram {p→7, q→3, r→7} with domain = {p, q, r}, codomain = ℤ.\n\nTasks: (a) write as ordered pairs; (b) write as table; (c) write in function notation; (d) state domain, codomain, range.\n\nExpected: (a) {(p,7),(q,3),(r,7)}; (b) table with correct headers; (c) f(p)=7 etc.; (d) domain={p,q,r}, codomain=ℤ, range={3,7}. Target: 4/4.\n\n---\n\n**AB-4 — Vocabulary Probe**\n\nStudent provides written definitions (own words) for: domain, codomain, range, function, one-to-one function. Target: 4/5 definitions acceptable (captures key distinction).\n\n---\n\n**AB-5 — Transfer Item**\n\nStimulus: \"A library assigns each book an ISBN number. Is 'book → ISBN' a function? What is the domain? Can two books share an ISBN? Does that affect whether it is a function?\"\n\nExpected: function yes; domain = set of books in the library; two books cannot share an ISBN (by ISBN convention — this tests real-world constraint reasoning, accept 'in standard practice'); still a function because each input (book) has exactly one output (ISBN). Target: 3/3 sub-questions.\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 1084,
+        "endLine": 1139
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.func.function-concept",
+      "title": "Student State Matrix",
+      "content": "| State | Entry Condition | Protocol |\n|-------|----------------|----------|\n| S0 | No prior exposure to function concept | Protocol A — full CPA, 7 TAs |\n| S1 | Applies vertical line test procedurally; cannot explain it; notation partly understood | Protocol B — conceptual grounding, 5 TAs |\n| S2 | Carries identified misconception (MC-1, MC-2, MC-3, and/or MC-4) | Protocol C — MAMR repair chain, 3–6 TAs |\n| S3 | Understands functions in one representation; struggles with non-formula representations | Protocol D — representation fluency, 4 TAs |\n| S6 | Correct understanding; low confidence; prone to self-doubt on novel representations | Protocol E — scaffolded CPA without P28, 5 TAs |\n| S9 | Second-language learner; visual processing dominant; vocabulary gaps | Protocol F — visual-first with vocabulary anchoring, 4 TAs |\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-1",
+        "MC-2",
+        "MC-3",
+        "MC-4"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 47,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "math.func.function-concept",
+      "title": "Diagnostic Battery",
+      "content": "Run DB-1 through DB-4 in sequence. Stop when a state is confirmed.\n\n---\n\n**DB-1 — Mapping Diagram Classification**\n\nStimulus: Arrow diagram. Domain = {1, 2, 3}. Arrows: 1→5, 2→7, 3→5. Codomain = {4, 5, 6, 7, 8}.\n\nQuestion: \"Is this a function? How do you know?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"Yes — each input has exactly one arrow going out, so each input has exactly one output\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Yes — but references only 'looking right' or 'arrows go one way', no reasoning about inputs/outputs\",\n  signal: \"SIGNAL:PARTIAL\" }\n\n{ stimulus: \"No — because 5 appears twice (two inputs map to same output)\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-4-precursor\" }\n\n{ stimulus: \"No response or 'I don't know what a function is'\",\n  signal: \"SIGNAL:NO_RESPONSE\" }\n```\n\nSIGNAL:CORRECT → run DB-4 to distinguish S3 from higher; route accordingly  \nSIGNAL:PARTIAL → S1; route to Protocol B  \nSIGNAL:INCORRECT (two-inputs-one-output = not a function) → MC-4 flag; run DB-3; route to Protocol C  \nSIGNAL:NO_RESPONSE → S0; route to Protocol A\n\n---\n\n**DB-2 — Formula Dependency Check**\n\nStimulus: \"Think of a rule: I take a number, I add 3. No formula, just the rule.\"\n\nQuestion: \"Is that rule a function? What would you need to call it a function?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"Yes — each input gets exactly one output (input + 3)\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Yes — but only if I can write it as an equation like f(x) = x + 3\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-2\" }\n\n{ stimulus: \"I think so but I'm not sure without an equation\",\n  signal: \"SIGNAL:PARTIAL\" }\n```\n\nSIGNAL:CORRECT → no MC-2; continue to DB-3  \nSIGNAL:INCORRECT → MC-2 flag; route to Protocol C  \nSIGNAL:PARTIAL → run DB-3\n\n---\n\n**DB-3 — Notation Check**\n\nStimulus: Written expression \"f(x) = 2x + 1\"\n\nQuestion: \"What does f(3) equal? Show your working.\"\n\nResponse taxonomy:\n```\n{ stimulus: \"f(3) = 2(3)+1 = 7\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"f(3) = f × 3 = 3f, or 'I need to know what f equals'\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-3\" }\n\n{ stimulus: \"7 with correct answer but unclear reasoning or lucky arithmetic\",\n  signal: \"SIGNAL:PARTIAL\" }\n```\n\nSIGNAL:INCORRECT (f×3) → MC-3 flag; route to Protocol C (repair MC-3 before MC-4 per MAMR)\n\n---\n\n**DB-4 — Range vs Codomain**\n\nStimulus: f: {1, 2, 3} → ℕ, defined by f(x) = 2x.\n\nQuestion: \"What is the range of f? What is the codomain of f? Are they the same?\"\n\nResponse taxonomy:\n```\n{ stimulus: \"Range = {2,4,6}; codomain = ℕ; they are different\",\n  signal: \"SIGNAL:CORRECT\" }\n\n{ stimulus: \"Range = codomain = {2,4,6} or range = codomain = ℕ\",\n  signal: \"SIGNAL:INCORRECT\", mc_id: \"MC-1\" }\n\n{ stimulus: \"Range = {2,4,6} but codomain unknown or confused with domain\",\n  signal: \"SIGNAL:PARTIAL\" }\n```\n\nSIGNAL:CORRECT → S3; route to Protocol D  \nSIGNAL:INCORRECT → MC-1 flag; route to Protocol C  \nSIGNAL:PARTIAL → S1; route to Protocol B\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-4-precursor",
+        "MC-4",
+        "MC-2",
+        "MC-3",
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 60,
+        "endLine": 164
+      }
+    },
+    {
+      "assetId": "math.func.function-concept/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "math.func.function-concept",
+      "title": "Prerequisite Check",
+      "content": "Run before Protocol A (S0 entry). If gap detected, halt and address prerequisite first.\n\n**PRE-1 — Set notation** (requires math.found.set-theory)\n\nStimulus: \"What is {1, 2, 3} ∩ {2, 3, 4}?\"\n\nExpected: {2, 3}\n\nSIGNAL:INCORRECT → prerequisite gap: set-theory; schedule math.found.set-theory session before returning\n\n---\n\n**PRE-2 — Variable substitution** (requires math.alg.variable)\n\nStimulus: \"If x = 5, what is 2x + 1?\"\n\nExpected: 11\n\nSIGNAL:INCORRECT → prerequisite gap: variable; address variable concept before Protocol A\n\n---",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.func.function-concept.md",
+        "startLine": 164,
+        "endLine": 188
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

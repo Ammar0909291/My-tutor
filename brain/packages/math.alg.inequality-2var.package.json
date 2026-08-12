@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.inequality-2var-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.inequality-2var",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7316b5f130ab3e612ecbe94c274aa83164622a377ea46f5a17ff9cc8a55afdc5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.inequality-2var.md": "sha256:2271948a0f6bfe3fe39a68ba21f6e795db0571d1a6c961d2e76f51cfc1d20386"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.inequality-2var",
+    "name": "Two-Variable Inequalities",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.alg.inequality-1var",
+      "math.alg.linear-equation-2var"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.inequality-2var-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.inequality-2var (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.inequality-2var.md": "sha256:2271948a0f6bfe3fe39a68ba21f6e795db0571d1a6c961d2e76f51cfc1d20386"
+      },
+      "contentHash": "sha256:89c97af2f82f7642906119d0923190425d5b65cc8ba042fabf84e571b37badc2",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-2var.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-2var.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-2var\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-2var.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-2var.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-2var\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-2var.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-2var.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-2var\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.inequality-2var.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.inequality-2var.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.inequality-2var"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.inequality-2var\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.inequality-2var/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Learning Objectives",
+      "content": "- LO1: Graph a two-variable linear inequality $ax+by<c$ (or $\\le,>,\\ge$) by graphing the BOUNDARY LINE $ax+by=c$ and shading the correct half-plane.\n- LO2: Correctly determine whether the boundary line is SOLID (included, for $\\le$ or $\\ge$) or DASHED (excluded, for $<$ or $>$).\n- LO3: Determine which half-plane to shade by testing a specific POINT (typically the origin, when not on the boundary line) against the inequality.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "BOUNDARY-LINE-STYLE-NOT-MATCHED-TO-INEQUALITY-SYMBOL",
+      "content": "| MC-1 | BOUNDARY-LINE-STYLE-NOT-MATCHED-TO-INEQUALITY-SYMBOL | Using a fixed solid or dashed boundary line regardless of whether the actual inequality symbol includes equality | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "ORIGIN-USED-AS-TEST-POINT-WITHOUT-CHECKING-IT-IS-OFF-THE-LINE",
+      "content": "| MC-2 | ORIGIN-USED-AS-TEST-POINT-WITHOUT-CHECKING-IT-IS-OFF-THE-LINE | Defaulting to testing the origin without first verifying it doesn't lie on the boundary line, where it would give no useful information | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "SHADED-HALF-PLANE-REVERSED",
+      "content": "| MC-3 | SHADED-HALF-PLANE-REVERSED | Shading the half-plane NOT containing the test point that satisfied the inequality (or vice versa), inverting the solution region | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Boundary Line, Then Test a Point (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Boundary Line, Then Test a Point (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Solid vs. Dashed Depends on Whether Equality Is Allowed (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Solid vs. Dashed Depends on Whether Equality Is Allowed (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Choose a Test Point NOT on the Boundary Line (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Choose a Test Point NOT on the Boundary Line (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Graph $3x-2y\\le12$, determining the boundary line style and correctly shaded region.\n  2. Graph $y<-x+4$, using the origin as a test point.\n  3. Graph $y\\ge3x$, correctly identifying that the origin lies on the boundary and selecting an alternative test point.\n  4. Explain, in one sentence, why a solid boundary line is used for $\\ge$ but a dashed one for $>$.\n- **P76 (Transfer Probe, mode = independence)**: \"A factory's production constraint requires that the number of chairs $c$ and tables $t$ produced satisfy $3c+5t\\le120$ (a labor-hour budget), with both $c\\ge0$ and $t\\ge0$ (can't produce negative amounts). (a) Graph the feasible region defined by all three inequalities together (the intersection of their half-planes). (b) A manager wants to know if producing 30 chairs and 10 tables is within the labor budget — determine this by testing the specific point $(30,10)$ against the inequality $3c+5t\\le120$, without needing to fully re-draw the graph, and explain what a 'yes' or 'no' answer would mean for the factory's plan.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.inequality-1var` (the general inequality relations $<,\\le,>,\\ge$) and `math.alg.linear-equation-2var` (graphing the boundary line itself).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.inequality-2var/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.inequality-2var",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.inequality-1var`, `math.alg.linear-equation-2var`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared; feeds forward into linear programming feasible-region work per the KG description, not separately authored in this batch.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.inequality-2var.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.polynomial-inequality-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.polynomial-inequality",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:44f6dd4769e5768d20883aea4540d8b22d2789d10bc49829a9850ee917272b14",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.polynomial-inequality.md": "sha256:25d83573df84bdf20bf4b4b6052903ae01426748634869de9dc2843d29a36c4d"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.polynomial-inequality",
+    "name": "Polynomial Inequalities",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.alg.polynomial-roots",
+      "math.alg.inequality"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.polynomial-inequality-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.polynomial-inequality (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.polynomial-inequality.md": "sha256:25d83573df84bdf20bf4b4b6052903ae01426748634869de9dc2843d29a36c4d"
+      },
+      "contentHash": "sha256:f9de9418e7007c2f750f58d09970aab55ad8928e14ee02173c9a79287db87353",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-inequality.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-inequality\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-inequality.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-inequality\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-inequality.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-inequality\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.polynomial-inequality.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.polynomial-inequality"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.polynomial-inequality\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.polynomial-inequality/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Learning Objectives",
+      "content": "- LO1: Solve a polynomial inequality $p(x)>0$ (or $<,\\ge,\\le$) by finding the polynomial's ROOTS, constructing a SIGN CHART (testing a point in each interval between consecutive roots), and identifying which intervals satisfy the required sign.\n- LO2: Correctly determine whether ENDPOINTS (the roots themselves) are INCLUDED or EXCLUDED based on whether the inequality is strict ($<,>$) or non-strict ($\\le,\\ge$).\n- LO3: Handle a REPEATED root correctly — recognizing that the polynomial's sign does NOT change across a root of EVEN multiplicity (it touches zero but stays the same sign on both sides), unlike a root of odd multiplicity (where the sign genuinely flips).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "ENDPOINT-INCLUSION-NOT-MATCHED-TO-INEQUALITY-STRICTNESS",
+      "content": "| MC-1 | ENDPOINT-INCLUSION-NOT-MATCHED-TO-INEQUALITY-STRICTNESS | Using the wrong open/closed endpoint notation, not matching the actual strictness of the given inequality | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "SIGN-ASSUMED-TO-FLIP-AT-EVERY-ROOT-REGARDLESS-OF-MULTIPLICITY",
+      "content": "| MC-2 | SIGN-ASSUMED-TO-FLIP-AT-EVERY-ROOT-REGARDLESS-OF-MULTIPLICITY | Assuming the polynomial's sign changes at every root, missing that even-multiplicity roots don't cause a sign flip | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "SIGN-CHART-TEST-POINT-CHOSEN-ON-A-ROOT",
+      "content": "| MC-3 | SIGN-CHART-TEST-POINT-CHOSEN-ON-A-ROOT | Accidentally choosing a test point that coincides with one of the roots (giving zero, uninformative about the surrounding interval's sign) | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 86,
+        "endLine": 86
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Find Roots, Test Each Interval (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Find Roots, Test Each Interval (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Strict vs. Non-Strict Determines Endpoint Inclusion (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Strict vs. Non-Strict Determines Endpoint Inclusion (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Even Multiplicity: Sign Doesn't Flip (Primitive P06: Contrast Pair, second pairing)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Even Multiplicity: Sign Doesn't Flip (Primitive P06: Contrast Pair, second pairing)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Solve $(x-4)(x+3)<0$ using a sign chart.\n  2. Solve $(x-1)(x-5)\\le0$, correctly including or excluding endpoints.\n  3. Solve $(x+2)^2(x-1)<0$, correctly handling the even-multiplicity root.\n  4. Explain, in one sentence, why a root of even multiplicity doesn't cause the polynomial's sign to flip.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs a beam's stress function $S(x)=(x-5)^2(x-10)$ to be NEGATIVE (indicating a safe compression range) over some range of the load variable $x$. (a) Find the roots of $S(x)$ and construct a sign chart to determine where $S(x)<0$. (b) A colleague assumes the sign must flip at BOTH roots (x=5 and x=10) and proposes an incorrect safe range as a result — explain, using this lesson's multiplicity discussion, why the sign chart around $x=5$ specifically needs closer inspection, and state the correct safe range.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.polynomial-roots` (finding a polynomial's roots) and `math.alg.inequality` (the general inequality relations this concept solves for).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.polynomial-inequality/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.polynomial-inequality",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.polynomial-roots`, `math.alg.inequality`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.alg.rational-inequality` (a sibling concept extending this sign-chart technique to rational expressions).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.polynomial-inequality.md",
+        "startLine": 94,
+        "endLine": 100
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

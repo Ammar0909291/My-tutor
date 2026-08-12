@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.geom.cross-product-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.geom.cross-product",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:767d9861d2a7c238cab72ddb696933db26553d5b34c88bb954802714f237d2ba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.geom.cross-product.md": "sha256:038cf28e8e93adde80d2fe672bd752bb4f5ed360df72a6829c14f7665cd76f49"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.geom.cross-product",
+    "name": "Cross Product",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 5,
+    "prerequisites": [
+      "math.geom.vectors-3d"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.geom.cross-product-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.geom.cross-product (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.geom.cross-product.md": "sha256:038cf28e8e93adde80d2fe672bd752bb4f5ed360df72a6829c14f7665cd76f49"
+      },
+      "contentHash": "sha256:e270bb1d01f322daf231304d000cc98cd6ca1c697c3c13cb302a03fd821244da",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.geom.cross-product.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.cross-product.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.cross-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.cross-product\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.cross-product.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.cross-product.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.cross-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.cross-product\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.cross-product.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.cross-product.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.cross-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.cross-product\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.geom.cross-product.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.geom.cross-product.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.geom.cross-product"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.geom.cross-product\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.geom.cross-product/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.geom.cross-product",
+      "title": "Learning Objectives",
+      "content": "- LO1: Compute the cross product $a\\times b$ using the determinant/component formula, and state that the result is a VECTOR (not a scalar) — a common confusion with `math.geom.dot-product`, which produces a scalar.\n- LO2: State the cross product's geometric properties: $a\\times b$ is PERPENDICULAR to BOTH $a$ AND $b$, with MAGNITUDE $|a||b|\\sin\\theta$ (where $\\theta$ is the angle between them) — and recognize this magnitude equals the AREA of the parallelogram spanned by $a$ and $b$.\n- LO3: Apply the RIGHT-HAND RULE to determine the cross product's DIRECTION, and recognize the cross product is ANTI-COMMUTATIVE: $a\\times b=-(b\\times a)$ — REVERSING the order FLIPS the sign (direction), unlike the dot product, which is fully commutative.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.geom.cross-product",
+      "title": "CROSS-PRODUCT-VECTOR-RESULT-CONFUSED-WITH-DOT-PRODUCT-SCALAR-RESULT",
+      "content": "| MC-1 | CROSS-PRODUCT-VECTOR-RESULT-CONFUSED-WITH-DOT-PRODUCT-SCALAR-RESULT | Confusing the cross product's vector-valued result with the dot product's scalar result | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.geom.cross-product",
+      "title": "CROSS-PRODUCT-ASSUMED-COMMUTATIVE-LIKE-THE-DOT-PRODUCT",
+      "content": "| MC-2 | CROSS-PRODUCT-ASSUMED-COMMUTATIVE-LIKE-THE-DOT-PRODUCT | Assuming the cross product is commutative (order doesn't matter) like the dot product, rather than recognizing it is anti-commutative | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.cross-product",
+      "title": "Cross Product Produces a Vector, Dot Product a Scalar (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Cross Product Produces a Vector, Dot Product a Scalar (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.cross-product",
+      "title": "Magnitude as Parallelogram Area (reused procedure)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Magnitude as Parallelogram Area (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.cross-product",
+      "title": "Anti-Commutativity: Swapping Order Flips the Sign (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Anti-Commutativity: Swapping Order Flips the Sign (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.geom.cross-product",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.geom.cross-product",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $a\\times b$ for $a=(2,0,0)$ and $b=(0,3,0)$.\n  2. Compute $b\\times a$ for the same vectors in problem 1, and verify it is the negative of your answer.\n  3. Given $|a|=4$, $|b|=5$, and the angle between them is $30°$, find $|a\\times b|$.\n  4. Explain, in one sentence, why the cross product's result is a vector while the dot product's result is a scalar.\n- **P76 (Transfer Probe, mode = independence)**: \"A mechanical engineer calculates the TORQUE (rotational force) applied to a bolt, using the formula $\\tau=r\\times F$ (the cross product of the position vector $r$ from the rotation axis to where force is applied, and the force vector $F$ itself). (a) Explain why torque is naturally represented as a cross product rather than a dot product, connecting to torque's own vector nature (it has both a magnitude AND a rotational direction/axis). (b) Explain what would physically change if the engineer accidentally swapped the order, computing $F\\times r$ instead of $r\\times F$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.geom.cross-product",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.geom.vectors-3d` — the cross product is specifically a 3D vector operation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.geom.cross-product/reference/1",
+      "kind": "reference",
+      "conceptId": "math.geom.cross-product",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.geom.vectors-3d`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.geom.dot-product` (the contrasting scalar-valued vector operation).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.geom.cross-product.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

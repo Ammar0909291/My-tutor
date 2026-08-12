@@ -1,0 +1,278 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.found.existence-proof-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.found.existence-proof",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:434f17545d0122d47bc2a77370b37bb43d9dc2b3cbca0bf282e911f6892a0552",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.found.existence-proof.md": "sha256:88817e03c3b852fd4544f1d88847b862990cce7e0c49dad0851081c4472912cd"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.found.existence-proof",
+    "name": "Existence Proof",
+    "difficultyRaw": "developing",
+    "bloom": "create",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.found.proof",
+      "math.found.quantifiers"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.found.existence-proof-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.found.existence-proof (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.found.existence-proof.md": "sha256:88817e03c3b852fd4544f1d88847b862990cce7e0c49dad0851081c4472912cd"
+      },
+      "contentHash": "sha256:de3ec7b9532587dc5163fd8560d3c702bb2f3254774eddcc64a5319f1da79437",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.found.existence-proof.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.existence-proof.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.existence-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.existence-proof\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.existence-proof.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.existence-proof.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.existence-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.existence-proof\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.found.existence-proof.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.found.existence-proof.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.found.existence-proof"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.found.existence-proof\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.found.existence-proof/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.found.existence-proof",
+      "title": "Learning Objectives",
+      "content": "- LO1: Write a **constructive** existence proof — explicitly exhibit an object satisfying the claimed property and verify it works.\n- LO2: Write a **non-constructive** existence proof — show that assuming NO object satisfies the property leads to a contradiction, without ever exhibiting a specific one.\n- LO3: State what a non-constructive existence proof does and does NOT tell you (it guarantees an object exists, but gives no method to find or identify it).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 21,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.found.existence-proof",
+      "title": "EXISTENCE-ASSUMED-TO-REQUIRE-IDENTIFICATION",
+      "content": "| MC-1 | EXISTENCE-ASSUMED-TO-REQUIRE-IDENTIFICATION | Believing every valid existence proof must pin down a specific, identified witness, rejecting non-constructive proofs as incomplete | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.found.existence-proof",
+      "title": "EXHIBITED-CANDIDATE-NOT-VERIFIED",
+      "content": "| MC-2 | EXHIBITED-CANDIDATE-NOT-VERIFIED | Naming a specific candidate object but skipping the verification step that it actually satisfies the required property | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.found.existence-proof",
+      "title": "CASE-SPLIT-EXISTENCE-PROOF-MISREAD-AS-INDECISIVE",
+      "content": "| MC-3 | CASE-SPLIT-EXISTENCE-PROOF-MISREAD-AS-INDECISIVE | Believing a proof-by-cases-style existence argument (like Example 2) is \"incomplete\" or \"unfinished\" because it doesn't resolve which case holds | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 77,
+        "endLine": 77
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.existence-proof",
+      "title": "Constructive: Exhibit and Verify (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Constructive: Exhibit and Verify (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.existence-proof",
+      "title": "Non-Constructive: Existence Without Identification (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Non-Constructive: Existence Without Identification (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.found.existence-proof",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.found.existence-proof",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Give a constructive proof: \"there exists a positive integer divisible by both 4 and 6.\"\n  2. Give a constructive proof: \"there exists a real number strictly between $1/3$ and $2/5$.\"\n  3. Given the non-constructive proof-by-cases template used in Example 2, explain in your own words why the proof is valid despite never determining whether $\\sqrt2^{\\sqrt2}$ is rational.\n  4. State whether \"there exists a prime number greater than 1{,}000{,}000\" is more naturally proved constructively or non-constructively, and justify (constructively — Euclid-style arguments or explicit primality checks can exhibit one).\n- **P76 (Transfer Probe, mode = independence)**: \"Two students are debating a claim: 'there exist two irrational numbers whose product is rational.' Student A says, 'I can't accept this until you tell me the exact two numbers.' Student B replies, 'That's not how existence proofs always work.' (a) Give a valid response to Student A — either a constructive example, or an explanation of why a non-constructive argument (structured like Example 2) would also be acceptable. (b) Explain, in general terms, what kind of mathematical claim is Student B correctly defending, and what Student A is missing about the nature of existence.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.found.existence-proof",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.found.proof` and `math.found.quantifiers` ($\\exists$ — an existence proof establishes exactly a claim of the form \"$\\exists x, P(x)$\").",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 27,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.found.existence-proof/reference/1",
+      "kind": "reference",
+      "conceptId": "math.found.existence-proof",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.found.proof`, `math.found.quantifiers`.\n- **Unlocks**: `math.found.uniqueness-proof` (proving something exists is the first half of proving it exists and is unique).\n- **Related**: `math.found.uniqueness-proof`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.found.existence-proof.md",
+        "startLine": 85,
+        "endLine": 91
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,314 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.linalg.characteristic-polynomial-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.linalg.characteristic-polynomial",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ec8430cccc0feb6a81dc092ea94918d5ecdda3499f56b8347adcb2c33ad11ce2",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md": "sha256:7b4984a4ed8bda34633917410a3d53e2a0703668bbdbc99adf636dcc9a890e15"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.linalg.characteristic-polynomial",
+    "name": "Characteristic Polynomial",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.9,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.linalg.eigenvalues",
+      "math.linalg.determinant"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.linalg.characteristic-polynomial-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.linalg.characteristic-polynomial (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md": "sha256:7b4984a4ed8bda34633917410a3d53e2a0703668bbdbc99adf636dcc9a890e15"
+      },
+      "contentHash": "sha256:bbfe2b8f455d9070ef005992698c14e87ea0907f23152a800e0672305c81f642",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.linalg.characteristic-polynomial.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.characteristic-polynomial"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.characteristic-polynomial\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.characteristic-polynomial.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.characteristic-polynomial"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.characteristic-polynomial\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.characteristic-polynomial.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.characteristic-polynomial"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.characteristic-polynomial\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.linalg.characteristic-polynomial.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.linalg.characteristic-polynomial"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.linalg.characteristic-polynomial\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.linalg.characteristic-polynomial/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct the characteristic polynomial $p(\\lambda)=\\det(A-\\lambda I)$ for a given matrix $A$.\n- LO2: Find eigenvalues by solving $p(\\lambda)=0$ (the roots of the characteristic polynomial).\n- LO3: State the Cayley-Hamilton theorem: $A$ satisfies its OWN characteristic polynomial, $p(A)=0$ (substituting the MATRIX $A$ itself into $p$, treating the constant term as a multiple of the identity matrix, yields the ZERO matrix).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "LAMBDA-SUBTRACTED-FROM-WRONG-ENTRIES",
+      "content": "| MC-1 | LAMBDA-SUBTRACTED-FROM-WRONG-ENTRIES | Subtracting $\\lambda$ from off-diagonal entries, or failing to subtract it from all diagonal entries, when forming $A-\\lambda I$ | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "CAYLEY-HAMILTON-CONSTANT-TERM-NOT-CONVERTED-TO-IDENTITY-MULTIPLE",
+      "content": "| MC-2 | CAYLEY-HAMILTON-CONSTANT-TERM-NOT-CONVERTED-TO-IDENTITY-MULTIPLE | Substituting $A$ for $\\lambda$ but leaving the constant term as a bare scalar rather than converting it to that scalar times the identity matrix | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "CHARACTERISTIC-POLYNOMIAL-DEGREE-MISMATCHED-TO-MATRIX-SIZE",
+      "content": "| MC-3 | CHARACTERISTIC-POLYNOMIAL-DEGREE-MISMATCHED-TO-MATRIX-SIZE | Producing a characteristic polynomial of the wrong degree (not matching the matrix's size $n$), typically from a determinant computation error | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Subtract λ Only from the Diagonal (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Subtract λ Only from the Diagonal (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Eigenvalues Are the Polynomial's Roots (Primitive P64: Conceptual Shift, second instance)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Eigenvalues Are the Polynomial's Roots (Primitive P64: Conceptual Shift, second instance)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Cayley-Hamilton: Constant Term Becomes a Multiple of the Identity (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Cayley-Hamilton: Constant Term Becomes a Multiple of the Identity (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.90×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Construct the characteristic polynomial of $\\begin{pmatrix}4&2\\\\1&3\\end{pmatrix}$.\n  2. Find the eigenvalues of the matrix from problem 1 by solving $p(\\lambda)=0$.\n  3. Construct the characteristic polynomial of $\\begin{pmatrix}5&0\\\\0&5\\end{pmatrix}$ and find its eigenvalue(s).\n  4. State the Cayley-Hamilton theorem for a matrix with characteristic polynomial $\\lambda^2-4\\lambda+3$, writing out the resulting matrix equation.\n- **P76 (Transfer Probe, mode = independence)**: \"An engineer needs to compute $A^3$ for a $2\\times2$ matrix $A$ with characteristic polynomial $p(\\lambda)=\\lambda^2-3\\lambda+2$, without directly multiplying $A$ by itself three times. (a) Use the Cayley-Hamilton theorem to express $A^2$ in terms of $A$ and $I$ (i.e., solve $A^2-3A+2I=0$ for $A^2$). (b) Use this expression to find $A^3=A\\cdot A^2$ in terms of $A$ and $I$ only, explaining how this Cayley-Hamilton-based approach could be more efficient than directly computing higher powers of $A$ by repeated matrix multiplication.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.linalg.eigenvalues` (what eigenvalues are) and `math.linalg.determinant` (the computation this polynomial is built from).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.linalg.characteristic-polynomial/reference/1",
+      "kind": "reference",
+      "conceptId": "math.linalg.characteristic-polynomial",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.linalg.eigenvalues`, `math.linalg.determinant`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.linalg.eigenspace` (the eigenvectors found once eigenvalues are known via this polynomial).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.linalg.characteristic-polynomial.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

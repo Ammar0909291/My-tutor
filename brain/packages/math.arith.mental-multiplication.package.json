@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.mental-multiplication-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.mental-multiplication",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:736a064774ffc576a374d305b08a4b6d4df39a1f5b3ac1097d92e5c289400353",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.mental-multiplication.md": "sha256:00d412e24807b652d966c6fbe4e78bbb9e359dd51de0714f65b2e44ccfd41f92"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.mental-multiplication",
+    "name": "Mental Multiplication",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 6,
+    "prerequisites": [
+      "math.arith.multiplication-table"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.mental-multiplication-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.mental-multiplication (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.mental-multiplication.md": "sha256:00d412e24807b652d966c6fbe4e78bbb9e359dd51de0714f65b2e44ccfd41f92"
+      },
+      "contentHash": "sha256:d039879099d86e9d7db821822de8410012f5be473ff0fbedf270e958c73eade9",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-multiplication.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-multiplication.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-multiplication\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-multiplication.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-multiplication.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-multiplication\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.mental-multiplication.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.mental-multiplication.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.mental-multiplication"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.mental-multiplication\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.mental-multiplication/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "Learning Objectives",
+      "content": "- LO1: Apply **distributive decomposition** — split one factor into place-value parts, multiply each separately, then add — to multiply mentally.\n- LO2: Apply **doubling/halving** — exploit $a\\times b = (2a)\\times(b/2)$ when one factor is even, to convert an awkward multiplication into an easier one.\n- LO3: Apply patterns with powers of 10 (e.g. $\\times10$, $\\times100$, $\\times9$ via $\\times10$ minus one group) for instant or near-instant computation.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "HALVING-APPLIED-WITHOUT-COMPENSATING-DOUBLING",
+      "content": "| MC-1 | HALVING-APPLIED-WITHOUT-COMPENSATING-DOUBLING | Halving one factor of a doubling/halving strategy without correspondingly doubling the other factor, changing the product's value | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "POWERS-OF-TEN-ADJUSTMENT-AMOUNT-MISCOMPUTED",
+      "content": "| MC-2 | POWERS-OF-TEN-ADJUSTMENT-AMOUNT-MISCOMPUTED | In a $\\times9$ (or similar) shortcut, subtracting the wrong amount from the $\\times10$ result — e.g. subtracting 1 instead of one full group of the other factor | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "DISTRIBUTIVE-DECOMPOSITION-PARTIAL-PRODUCTS-NOT-RECOMBINED",
+      "content": "| MC-3 | DISTRIBUTIVE-DECOMPOSITION-PARTIAL-PRODUCTS-NOT-RECOMBINED | Computing both partial products of a distributive decomposition correctly but failing to add them together for the final answer | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "Split by Place Value, Multiply Each Part, Recombine (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Split by Place Value, Multiply Each Part, Recombine (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "Doubling One Factor Requires Halving the Other (and Vice Versa) (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Doubling One Factor Requires Halving the Other (and Vice Versa) (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Compute $46\\times5$ mentally using distributive decomposition.\n  2. Compute $14\\times50$ mentally using doubling/halving.\n  3. Compute $6\\times9$ mentally using the $\\times10$-minus-one-group pattern.\n  4. Explain, in one sentence, why $9\\times50$ (halving 18 without doubling 25 in Example 2's spirit) would give a different, wrong answer for $18\\times25$.\n- **P76 (Transfer Probe, mode = independence)**: \"A cashier mentally computes the cost of 9 items priced at \\$12 each. (a) Use the $\\times10$-minus-one-group pattern to compute this mentally, showing each step. (b) A colleague instead tries doubling/halving on this same problem, converting it to $18\\times6$ (doubling 9, halving... wait, 12 doesn't halve evenly in a useful way here) — explain, using this lesson's strategy-selection idea, why the $\\times9$ pattern is the more natural choice for THIS specific problem, even though doubling/halving worked well for Example 2's $18\\times25$.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.multiplication-table` (instant single-digit product recall) — mental multiplication strategies extend this fluency to larger numbers without written columns.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.arith.mental-multiplication/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.mental-multiplication",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.multiplication-table`.\n- **Unlocks**: `math.arith.mental-arithmetic` (the general fluent-mental-computation capstone this concept feeds into alongside mental addition).\n- **Related**: `math.arith.mental-addition` (the parallel strategy set for addition).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.mental-multiplication.md",
+        "startLine": 90,
+        "endLine": 96
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

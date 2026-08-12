@@ -1,0 +1,277 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.number-base-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.number-base",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:01d38d1e285edf4ecb41ca62adffe12009cd4e354a4efe2186818eb497246676",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.number-base.md": "sha256:ab7a93b21b76c3576b0bbc0a109da5b37a7be82e9e923e2a96b33e4057351ba0"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.number-base",
+    "name": "Number Base",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.arith.place-value"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.number-base-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.number-base (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.number-base.md": "sha256:ab7a93b21b76c3576b0bbc0a109da5b37a7be82e9e923e2a96b33e4057351ba0"
+      },
+      "contentHash": "sha256:cf056dbc47808ec9eff1262a8c5496ecb6b95701ee509b36cf1c41171403d28f",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.number-base.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.number-base.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.number-base"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.number-base\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.number-base.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.number-base.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.number-base"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.number-base\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.number-base.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.number-base.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.number-base"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.number-base\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.number-base/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.number-base",
+      "title": "Learning Objectives",
+      "content": "- LO1: Convert a base-10 number to another base (e.g. binary, octal, hexadecimal) using repeated division.\n- LO2: Convert a number in another base back to base-10 using the digit-times-place-value (power of the base) sum.\n- LO3: Recognize that place value is a GENERAL principle (any base $b$ uses powers of $b$), of which base-10's familiar powers of 10 is only one instance.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.number-base",
+      "title": "LETTER-DIGITS-MISUNDERSTOOD-IN-HEXADECIMAL",
+      "content": "| MC-1 | LETTER-DIGITS-MISUNDERSTOOD-IN-HEXADECIMAL | Treating hexadecimal's letter digits (A-F) as non-numeric placeholders rather than single digits with values 10-15 | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.number-base",
+      "title": "REMAINDER-ORDER-NOT-REVERSED",
+      "content": "| MC-2 | REMAINDER-ORDER-NOT-REVERSED | Reading repeated-division remainders in the order they were generated (first to last) rather than reversing them to get the correct digit sequence | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.arith.number-base",
+      "title": "BASE-10-PLACE-VALUES-ASSUMED-UNIVERSAL",
+      "content": "| MC-3 | BASE-10-PLACE-VALUES-ASSUMED-UNIVERSAL | Applying powers of 10 when converting or evaluating a number in a different base, rather than using that base's own powers | Foundational |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 76,
+        "endLine": 76
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.number-base",
+      "title": "Repeated Division to Convert Base-10 to Another Base (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Repeated Division to Convert Base-10 to Another Base (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.number-base",
+      "title": "Any Base Uses Powers of That Base (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Any Base Uses Powers of That Base (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.number-base",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.number-base",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Convert $25_{10}$ to binary using repeated division.\n  2. Convert $11010_2$ back to base-10.\n  3. Convert $1F_{16}$ to base-10, correctly interpreting the digit \"F\" as value 15.\n  4. Convert $50_{10}$ to octal (base 8) using repeated division by 8.\n- **P76 (Transfer Probe, mode = independence)**: \"A computer stores a small file size as $101100_2$ bytes. (a) Convert this binary value to base-10 to find the file size in ordinary bytes. (b) The same value is sometimes displayed in hexadecimal for compactness; group the binary digits into sets of 4 from the right ($10\\,1100$, padding the leftmost group as needed) and convert each group to its single hex digit, explaining why grouping by 4 binary digits corresponds exactly to one hex digit (since $2^4=16$, the base of hexadecimal).\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.number-base",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.place-value` (digit value depends on position times a power of the base — this concept generalizes that idea beyond base 10).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.number-base/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.number-base",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.place-value`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: none declared.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.number-base.md",
+        "startLine": 84,
+        "endLine": 90
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

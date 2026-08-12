@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.calc.maclaurin-series-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.calc.maclaurin-series",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:88d826160017393981c04a16239726c61eee1e6d77bec88614f88c8f49583b2b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.calc.maclaurin-series.md": "sha256:609c13210c8a32965e9f72529360b24e2544d0585af3c2bbe4e3f440992b36de"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.calc.maclaurin-series",
+    "name": "Maclaurin Series",
+    "difficultyRaw": "advanced",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 8,
+    "prerequisites": [
+      "math.calc.taylor-series"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.calc.maclaurin-series-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.calc.maclaurin-series (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.calc.maclaurin-series.md": "sha256:609c13210c8a32965e9f72529360b24e2544d0585af3c2bbe4e3f440992b36de"
+      },
+      "contentHash": "sha256:4e67bbd192342d8dab96401c3b480cdfe58f02cc4d97ec597f3cdfaa53e48a4d",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.calc.maclaurin-series.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.maclaurin-series.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.maclaurin-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.maclaurin-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.maclaurin-series.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.maclaurin-series.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.maclaurin-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.maclaurin-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.maclaurin-series.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.maclaurin-series.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.maclaurin-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.maclaurin-series\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.calc.maclaurin-series.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.calc.maclaurin-series.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.calc.maclaurin-series"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.calc.maclaurin-series\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.calc.maclaurin-series/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the Maclaurin series as the SPECIAL CASE of the Taylor series CENTERED AT $a=0$: $f(x)=\\sum_{n=0}^{\\infty}\\frac{f^{(n)}(0)}{n!}x^n$ — every derivative is evaluated AT ZERO, simplifying the general Taylor formula.\n- LO2: Memorize and derive the FOUR standard Maclaurin series — $e^x=\\sum\\frac{x^n}{n!}$, $\\sin x=\\sum\\frac{(-1)^nx^{2n+1}}{(2n+1)!}$, $\\cos x=\\sum\\frac{(-1)^nx^{2n}}{(2n)!}$, and $\\frac{1}{1-x}=\\sum x^n$ — and recognize $\\sin x$'s series contains ONLY ODD powers while $\\cos x$'s contains ONLY EVEN powers, a DIRECT consequence of $\\sin$ being an odd function and $\\cos$ an even function.\n- LO3: Derive NEW Maclaurin series from the four standard ones via SUBSTITUTION, DIFFERENTIATION, or INTEGRATION (e.g. finding the series for $e^{-x^2}$ by substituting $-x^2$ for $x$ in $e^x$'s series) — RATHER than computing every derivative from scratch each time.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "ODD-EVEN-POWER-PARITY-VIOLATED-WHEN-RECONSTRUCTING-STANDARD-SERIES",
+      "content": "| MC-1 | ODD-EVEN-POWER-PARITY-VIOLATED-WHEN-RECONSTRUCTING-STANDARD-SERIES | Including a wrong-parity power term (even in sin's series, or odd in cos's) when reconstructing a standard Maclaurin series from memory | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "NEW-SERIES-DERIVED-VIA-DIRECT-DIFFERENTIATION-INSTEAD-OF-REUSING-KNOWN-SERIES",
+      "content": "| MC-2 | NEW-SERIES-DERIVED-VIA-DIRECT-DIFFERENTIATION-INSTEAD-OF-REUSING-KNOWN-SERIES | Attempting to derive a new Maclaurin series by repeated direct differentiation, rather than efficiently reusing a known series via substitution, differentiation, or integration | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Odd Functions Have Only Odd-Power Series Terms; Even Functions Only Even (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Odd Functions Have Only Odd-Power Series Terms; Even Functions Only Even (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Deriving New Series via Substitution Is More Efficient Than Direct Differentiation (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Deriving New Series via Substitution Is More Efficient Than Direct Differentiation (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Deriving New Series via Term-by-Term Integration (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Deriving New Series via Term-by-Term Integration (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.75×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Write the Maclaurin series for $\\cos x$, confirming it contains only even powers.\n  2. Find the Maclaurin series for $e^{3x}$ using substitution into the known $e^x$ series.\n  3. Find the Maclaurin series for $\\sin(x^2)$ using substitution into the known $\\sin x$ series.\n  4. Explain, in one sentence, why using substitution/integration/differentiation from known series is generally more efficient than computing every derivative from the Maclaurin formula's definition directly.\n- **P76 (Transfer Probe, mode = independence)**: \"A physicist needs an approximation for the relativistic energy correction term $\\frac{1}{\\sqrt{1-v^2/c^2}}$ (appearing in special relativity, where $v/c$ is small for everyday speeds) as a power series in $v/c$, to identify the leading correction to Newtonian mechanics. (a) Using the known binomial-series pattern $(1-u)^{-1/2}=1+\\frac{1}{2}u+\\frac{3}{8}u^2+\\cdots$ (a Maclaurin-type expansion), substitute $u=v^2/c^2$ to find the first two nonzero terms of this expression's series in $v/c$. (b) Explain why deriving this via substitution into a known series is far more practical than differentiating the original expression repeatedly from scratch.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.calc.taylor-series` — the Maclaurin series is its $a=0$ special case.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.calc.maclaurin-series/reference/1",
+      "kind": "reference",
+      "conceptId": "math.calc.maclaurin-series",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.calc.taylor-series`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.calc.taylor-series`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.calc.maclaurin-series.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

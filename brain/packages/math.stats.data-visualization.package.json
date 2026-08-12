@@ -1,0 +1,296 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.stats.data-visualization-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.stats.data-visualization",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:07833a663868381533477be38b9e413e53a9bcac0fbf8c7bb9526b0323c69196",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.stats.data-visualization.md": "sha256:461c84d2adb1a6fcd057fccd056e86e857790860543f451167a8596fdbd6f781"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.stats.data-visualization",
+    "name": "Data Visualization",
+    "difficultyRaw": "developing",
+    "bloom": "apply",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.stats.descriptive-statistics"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.stats.data-visualization-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.stats.data-visualization (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.stats.data-visualization.md": "sha256:461c84d2adb1a6fcd057fccd056e86e857790860543f451167a8596fdbd6f781"
+      },
+      "contentHash": "sha256:eb2a4488f9dec381e1dc95998b32e8c88ac68a667606f68222bb7af1cc113f35",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.stats.data-visualization.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.data-visualization.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.data-visualization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.data-visualization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.data-visualization.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.data-visualization.md#TA-A02 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.data-visualization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.data-visualization\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.data-visualization.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.data-visualization.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.data-visualization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.data-visualization\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.stats.data-visualization.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.stats.data-visualization.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.stats.data-visualization"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.stats.data-visualization\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.stats.data-visualization/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Learning Objectives",
+      "content": "- LO1: Select the appropriate graphical summary based on DATA TYPE and QUESTION — HISTOGRAM for a single numeric variable's frequency distribution, BAR CHART specifically for CATEGORICAL data (not numeric bins), and SCATTERPLOT for the relationship between TWO numeric variables.\n- LO2: Read a BOXPLOT (five-number summary: minimum, $Q_1$, median, $Q_3$, maximum, plus outlier points) — correctly identifying which whisker/box segment corresponds to which quartile range, and recognizing points plotted BEYOND the whiskers as flagged OUTLIERS, not errors in the plot.\n- LO3: Recognize a HISTOGRAM and a BAR CHART, despite looking visually similar, serve DIFFERENT purposes — a histogram's bars represent NUMERIC RANGES (bins) with NO meaningful gaps between adjacent bars (since the underlying variable is continuous/ordered), while a bar chart's bars represent DISTINCT CATEGORIES, where gaps between bars are conventional and the bar ORDER is often arbitrary.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.stats.data-visualization",
+      "title": "HISTOGRAM-CONVENTION-USED-FOR-GENUINELY-CATEGORICAL-DATA",
+      "content": "| MC-1 | HISTOGRAM-CONVENTION-USED-FOR-GENUINELY-CATEGORICAL-DATA | Using a histogram's contiguous-bin convention for categorical data that should be displayed with a bar chart instead | Moderate |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.stats.data-visualization",
+      "title": "BOXPLOT-OUTLIER-POINTS-ASSUMED-TO-BE-DATA-ERRORS-RATHER-THAN-GENUINE-FLAGGED-VALUES",
+      "content": "| MC-2 | BOXPLOT-OUTLIER-POINTS-ASSUMED-TO-BE-DATA-ERRORS-RATHER-THAN-GENUINE-FLAGGED-VALUES | Assuming points plotted beyond a boxplot's whiskers indicate a data entry error or plotting mistake, rather than recognizing them as genuine flagged outlier values | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 85,
+        "endLine": 85
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Match Chart Type to Data Type: Numeric vs. Categorical (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Match Chart Type to Data Type: Numeric vs. Categorical (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Boxplot Outliers Are Genuine Flagged Data, Not Errors (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Boxplot Outliers Are Genuine Flagged Data, Not Errors (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 9,
+        "endLine": 15
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Histogram Bars Touch (Contiguous Bins); Bar Chart Bars Don't (Distinct Categories) (reused procedure)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Histogram Bars Touch (Contiguous Bins); Bar Chart Bars Don't (Distinct Categories) (reused procedure)\",\"primitives\":[],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 15,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 5/5.\n\n- **P77 (4-problem set)**:\n  1. Choose the appropriate chart type for the distribution of household incomes in a city, and justify.\n  2. Choose the appropriate chart type for the number of votes each of five candidates received, and justify.\n  3. For a boxplot with $Q_1=20$, median 28, $Q_3=35$, and a point plotted separately at 5, explain what this separate point represents.\n  4. Explain why histogram bars touch each other while bar chart bars conventionally have gaps.\n- **P76 (Transfer Probe, mode = independence)**: \"A data analyst is preparing a report on employee salaries at a company, and needs to visualize (a) the overall salary distribution across all employees, and (b) how many employees work in each of six departments. (a) Recommend the appropriate chart type for each of these two visualizations, justifying your choice based on the data type. (b) If the salary distribution's boxplot shows several points plotted well above the upper whisker, explain what this indicates about the company's salary structure, rather than assuming these are data errors.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 5/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.stats.descriptive-statistics` — these are the graphical counterparts to numeric summary statistics.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.stats.data-visualization/reference/1",
+      "kind": "reference",
+      "conceptId": "math.stats.data-visualization",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.stats.descriptive-statistics`.\n- **Unlocks**: none recorded in the KG.\n- **Parent**: `math.stats.descriptive-statistics`.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.stats.data-visualization.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

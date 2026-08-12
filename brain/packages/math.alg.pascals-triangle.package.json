@@ -1,0 +1,294 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.alg.pascals-triangle-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.alg.pascals-triangle",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:67bd1978d216df1e1c7066e0a8ac2daaaf46f791a23badd5c3b92f504d3fbf14",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.alg.pascals-triangle.md": "sha256:adf4f49ee4a7241aaf99be53754f6495b876af34f029e9ba279facff5ef1d960"
+    },
+    "assetCount": 10,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.alg.pascals-triangle",
+    "name": "Pascal's Triangle",
+    "difficultyRaw": "proficient",
+    "bloom": "apply",
+    "masteryThreshold": 0.8,
+    "estimatedHours": 4,
+    "prerequisites": [
+      "math.alg.binomial-theorem"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.alg.pascals-triangle-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.alg.pascals-triangle (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.alg.pascals-triangle.md": "sha256:adf4f49ee4a7241aaf99be53754f6495b876af34f029e9ba279facff5ef1d960"
+      },
+      "contentHash": "sha256:884ffde616b5bd2f2e81a2b7934414d5e0968702d8ec3199085dc39f33d2b6eb",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.alg.pascals-triangle.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.pascals-triangle.md#TA-A01",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.pascals-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.pascals-triangle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.pascals-triangle.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.pascals-triangle.md#TA-A02 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.pascals-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.pascals-triangle\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.pascals-triangle.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.pascals-triangle.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.pascals-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.pascals-triangle\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.alg.pascals-triangle.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.alg.pascals-triangle.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.alg.pascals-triangle"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.alg.pascals-triangle\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.alg.pascals-triangle/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Learning Objectives",
+      "content": "- LO1: Construct Pascal's Triangle row by row, using the rule that each entry is the SUM of the two entries directly above it (with edge entries always equal to 1).\n- LO2: Identify a specific entry of Pascal's Triangle as the binomial coefficient $\\binom{n}{k}$, correctly matching ROW number $n$ and POSITION $k$ within that row.\n- LO3: Use Pascal's Triangle to quickly read off the coefficients of a binomial expansion $(x+y)^n$, connecting directly to `math.alg.binomial-theorem`'s formula.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "PASCALS-TRIANGLE-ROW-OR-POSITION-MISCOUNTED",
+      "content": "| MC-1 | PASCALS-TRIANGLE-ROW-OR-POSITION-MISCOUNTED | Miscounting the row number or position within a row (off-by-one errors from not consistently 0-indexing both) | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 80,
+        "endLine": 80
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "TRIANGLE-CONSTRUCTION-EDGE-ENTRIES-NOT-SET-TO-ONE",
+      "content": "| MC-2 | TRIANGLE-CONSTRUCTION-EDGE-ENTRIES-NOT-SET-TO-ONE | Forgetting that every row's two edge (outermost) entries are always exactly 1, attempting to compute them via the sum rule instead (which doesn't apply at the edges) | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 81,
+        "endLine": 81
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Build Row by Row: Sum the Two Above (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Build Row by Row: Sum the Two Above (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 3,
+        "endLine": 7
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Careful 0-Indexed Row and Position Counting (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Careful 0-Indexed Row and Position Counting (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 7,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Reading Off Binomial Expansion Coefficients Directly (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Reading Off Binomial Expansion Coefficients Directly (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 13,
+        "endLine": 17
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.80×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Construct rows 0 through 6 of Pascal's Triangle.\n  2. Find $\\binom{6}{3}$ using the triangle, being careful with 0-indexed counting.\n  3. Expand $(x+y)^5$ using Pascal's Triangle's row 5 as the coefficients.\n  4. Explain, in one sentence, why each entry of Pascal's Triangle equals the sum of the two entries above it, connecting to the combinatorial \"include or exclude a specific item\" argument.\n- **P76 (Transfer Probe, mode = independence)**: \"A statistics student needs the coefficients for the binomial probability expansion $(p+q)^6$ (6 independent trials) to compute the probability of exactly 4 successes. (a) Use Pascal's Triangle to find the coefficient corresponding to exactly 4 successes out of 6 trials (i.e., $\\binom{6}{4}$), being careful with the 0-indexed row/position counting. (b) Explain, using this lesson's combinatorial construction-rule argument (include or exclude a specific trial), why $\\binom{6}{4}=\\binom{5}{3}+\\binom{5}{4}$ makes intuitive sense in terms of counting successful-trial patterns.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 17,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.alg.binomial-theorem` (binomial coefficients $\\binom{n}{k}$ and their role in expanding $(x+y)^n$) — Pascal's Triangle is a visual/combinatorial organizing structure for exactly these coefficients.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.alg.pascals-triangle/reference/1",
+      "kind": "reference",
+      "conceptId": "math.alg.pascals-triangle",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.alg.binomial-theorem`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.disc.combinations`, `math.disc.binomial-theorem` (the discrete-mathematics counterparts of these same binomial-coefficient concepts).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.alg.pascals-triangle.md",
+        "startLine": 88,
+        "endLine": 94
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,313 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.disc.complexity-classes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.disc.complexity-classes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5749d3f8b9719eab57dd50ba0fce0f592e2077db48cddb0e0c798587c2aafc65",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.disc.complexity-classes.md": "sha256:57fc0c5d76c9be76c4f7d9c4b432f7c7297aff9135e59461bad5a0958fafb4d8"
+    },
+    "assetCount": 11,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 4,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 4
+  },
+  "concept": {
+    "conceptId": "math.disc.complexity-classes",
+    "name": "Complexity Classes",
+    "difficultyRaw": "expert",
+    "bloom": "analyze",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 7,
+    "prerequisites": [
+      "math.disc.algorithm-complexity"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.disc.complexity-classes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.disc.complexity-classes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.disc.complexity-classes.md": "sha256:57fc0c5d76c9be76c4f7d9c4b432f7c7297aff9135e59461bad5a0958fafb4d8"
+      },
+      "contentHash": "sha256:f828aa69ce26a4d118e4d8f5afb19569236b05bff2b805ef1f8d0b0e497d2427",
+      "ruleCount": 4,
+      "bandCounts": {
+        "3": 4
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.disc.complexity-classes.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.complexity-classes.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.complexity-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.complexity-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.complexity-classes.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.complexity-classes.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.complexity-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.complexity-classes\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.complexity-classes.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.complexity-classes.md#TA-A03 (addresses MC-2)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.complexity-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.complexity-classes\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.disc.complexity-classes.TA-A04",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.disc.complexity-classes.md#TA-A04",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.disc.complexity-classes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.disc.complexity-classes\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.disc.complexity-classes/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "Learning Objectives",
+      "content": "- LO1: Define the class $P$ (problems SOLVABLE in polynomial time) and the class $NP$ (problems VERIFIABLE in polynomial time given a proposed solution/certificate), correctly distinguishing \"solving\" from \"verifying.\"\n- LO2: Explain what it means for a problem to be **NP-complete** (in $NP$, and every problem in $NP$ reduces to it), and state why NP-complete problems are considered the \"hardest\" problems in $NP$.\n- LO3: State the $P$ vs. $NP$ open problem precisely, and explain WHY it remains unresolved (no known polynomial-time algorithm for NP-complete problems exists, but no proof that none can exist has been found either).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 22,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "NP-MEMBERSHIP-CONFLATED-WITH-INHERENT-DIFFICULTY",
+      "content": "| MC-1 | NP-MEMBERSHIP-CONFLATED-WITH-INHERENT-DIFFICULTY | Believing \"a problem is in $NP$\" means the problem is necessarily hard to solve, rather than recognizing $NP$ is defined by verification ease | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 82,
+        "endLine": 82
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "P-NOT-EQUAL-NP-TREATED-AS-PROVEN-FACT",
+      "content": "| MC-2 | P-NOT-EQUAL-NP-TREATED-AS-PROVEN-FACT | Treating the widely-believed but formally unproven statement \"$P\\ne NP$\" as an established mathematical fact | Foundational |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 83,
+        "endLine": 83
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/misconception/MC-3",
+      "kind": "misconception",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "NP-COMPLETE-CONFUSED-WITH-NP-HARD-OR-WITH-ALL-OF-NP",
+      "content": "| MC-3 | NP-COMPLETE-CONFUSED-WITH-NP-HARD-OR-WITH-ALL-OF-NP | Using \"NP-complete\" loosely to mean any hard problem in $NP$, rather than the precise definition requiring universal polynomial-time reducibility from every NP problem | Moderate |",
+      "localKey": "MC-3",
+      "language": "en",
+      "refs": [
+        "MC-3"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 84,
+        "endLine": 84
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "Verification Is Easy Even When Solving Is Hard (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Verification Is Easy Even When Solving Is Hard (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "NP-Completeness Means \"Reduces From Everything in NP\" (Primitive P11: Representation Shift)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"NP-Completeness Means \\\"Reduces From Everything in NP\\\" (Primitive P11: Representation Shift)\",\"primitives\":[\"P11\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "Widely Believed ≠ Proven (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Widely Believed ≠ Proven (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[\"MC-2\"]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 13,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/teaching_action_meta/TA-A04",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A04\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/mastery_probe/MP-TA-A04",
+      "kind": "mastery_probe",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A04 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.70×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Explain, in your own words, the difference between \"solving\" and \"verifying\" a problem, using the SAT example.\n  2. State whether every problem in $P$ is also in $NP$, and justify your answer.\n  3. Explain what it would mean, practically, if someone discovered a polynomial-time algorithm for the graph 3-coloring problem (a known NP-complete problem).\n  4. State the current formal status of the $P$ vs. $NP$ question (proven true, proven false, or open), and briefly justify.\n- **P76 (Transfer Probe, mode = independence)**: \"A cybersecurity system relies on the assumption that certain cryptographic problems (related to factoring large numbers) are computationally HARD to solve but easy to VERIFY, similar in spirit to NP-complete problems. (a) Explain, using this lesson's solving-vs-verifying distinction, why a cryptographic system could remain SECURE even if verifying a proposed solution (e.g. checking a digital signature) is fast, as long as FINDING that solution from scratch remains hard. (b) A junior engineer claims 'since experts believe $P\\ne NP$, our system's security is mathematically guaranteed forever' — explain, using this lesson's belief-vs-proof distinction, why this claim overstates what is actually known, and what it would mean for such cryptographic assumptions if $P=NP$ were ever proven true.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A04",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 19,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.disc.algorithm-complexity` (Big-O analysis and worst-case complexity) — this concept classifies PROBLEMS (not individual algorithms) by the complexity of their best possible solving/verifying algorithms.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 28,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "math.disc.complexity-classes/reference/1",
+      "kind": "reference",
+      "conceptId": "math.disc.complexity-classes",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.disc.algorithm-complexity`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.found.conjecture` (the theorem-vs-conjecture/belief-vs-proof distinction this concept's Teaching Action A03 directly reuses and applies to $P$ vs. $NP$).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.disc.complexity-classes.md",
+        "startLine": 92,
+        "endLine": 98
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

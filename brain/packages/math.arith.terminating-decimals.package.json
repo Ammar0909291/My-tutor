@@ -1,0 +1,260 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "math.arith.terminating-decimals-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "math.arith.terminating-decimals",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a81028c9917fba030e96290619cbda9dd668fa4f44f5ff88fed16cc5052d39a5",
+    "sourceLock": {
+      "docs/curriculum/blueprints/math.arith.terminating-decimals.md": "sha256:c28d336926dca6152945bad2bd9f185db9add229f0239ef7e721b0884e4def2d"
+    },
+    "assetCount": 9,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 3,
+      "mastery_probe": 1,
+      "teaching_note": 1,
+      "reference": 1
+    },
+    "ruleCount": 3
+  },
+  "concept": {
+    "conceptId": "math.arith.terminating-decimals",
+    "name": "Terminating Decimals",
+    "difficultyRaw": "developing",
+    "bloom": "understand",
+    "masteryThreshold": 0.85,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "math.arith.decimals"
+    ],
+    "status": ""
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "math.arith.terminating-decimals-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for math.arith.terminating-decimals (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/math.arith.terminating-decimals.md": "sha256:c28d336926dca6152945bad2bd9f185db9add229f0239ef7e721b0884e4def2d"
+      },
+      "contentHash": "sha256:89c339006ffe7ce958fd4c550589b399a13755a26cf285ad4e685230c9bc9d13",
+      "ruleCount": 3,
+      "bandCounts": {
+        "3": 3
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.math.arith.terminating-decimals.TA-A01",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.terminating-decimals.md#TA-A01 (addresses MC-1)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.terminating-decimals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.terminating-decimals\"",
+        "effect": {
+          "actionClass": "GUIDED_EXPLANATION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.terminating-decimals.TA-A02",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.terminating-decimals.md#TA-A02",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.terminating-decimals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.terminating-decimals\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.math.arith.terminating-decimals.TA-A03",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/math.arith.terminating-decimals.md#TA-A03",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "math.arith.terminating-decimals"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"math.arith.terminating-decimals\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "math.arith.terminating-decimals/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "Learning Objectives",
+      "content": "- LO1: Identify a decimal as terminating (digits end after finitely many places) by direct inspection or by long division reaching a remainder of 0.\n- LO2: Determine, WITHOUT performing the division, whether a fraction $\\frac{a}{b}$ (in lowest terms) will produce a terminating decimal, by checking whether $b$'s only prime factors are 2 and/or 5.\n- LO3: Convert a fraction known to terminate into its exact decimal form using the denominator's prime factorization (e.g. by multiplying to reach a power of 10).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 20,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/misconception/MC-1",
+      "kind": "misconception",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "TERMINATION-TESTED-ON-UNREDUCED-DENOMINATOR",
+      "content": "| MC-1 | TERMINATION-TESTED-ON-UNREDUCED-DENOMINATOR | Checking the prime factors of a fraction's denominator BEFORE simplifying to lowest terms, potentially misclassifying termination | Foundational |",
+      "localKey": "MC-1",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 74,
+        "endLine": 74
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/misconception/MC-2",
+      "kind": "misconception",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "TERMINATION-CRITERION-MISREMEMBERED-AS-EVEN-DENOMINATORS-ONLY",
+      "content": "| MC-2 | TERMINATION-CRITERION-MISREMEMBERED-AS-EVEN-DENOMINATORS-ONLY | Believing only denominators that are powers of 2 (not also 5, or combinations of 2 and 5) permit termination | Moderate |",
+      "localKey": "MC-2",
+      "language": "en",
+      "refs": [
+        "MC-2"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 75,
+        "endLine": 75
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/teaching_action_meta/TA-A01",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "Only Denominators of 2s and 5s Terminate (Primitive P64: Conceptual Shift)",
+      "content": "{\"id\":\"TA-A01\",\"title\":\"Only Denominators of 2s and 5s Terminate (Primitive P64: Conceptual Shift)\",\"primitives\":[\"P64\"],\"addresses\":[\"MC-1\"]}",
+      "localKey": "TA-A01",
+      "language": "en",
+      "refs": [
+        "MC-1"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 3,
+        "endLine": 9
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/teaching_action_meta/TA-A02",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "Simplify to Lowest Terms Before Testing (Primitive P06: Contrast Pair)",
+      "content": "{\"id\":\"TA-A02\",\"title\":\"Simplify to Lowest Terms Before Testing (Primitive P06: Contrast Pair)\",\"primitives\":[\"P06\"],\"addresses\":[]}",
+      "localKey": "TA-A02",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 9,
+        "endLine": 13
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/teaching_action_meta/TA-A03",
+      "kind": "teaching_action_meta",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "{\"id\":\"TA-A03\",\"title\":\"Mastery Gate (Primitive P91)\",\"primitives\":[\"P55\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P91\"],\"addresses\":[]}",
+      "localKey": "TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/mastery_probe/MP-TA-A03",
+      "kind": "mastery_probe",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "Mastery Gate (Primitive P91)",
+      "content": "### Teaching Action A03 — Mastery Gate (Primitive P91)\n\nP91 = P77 → P55 → P76 → P55 → P75 → P55 → P74 → P55 → P78. MAMR = ⌈0.85×5⌉ = 4/5.\n\n- **P77 (4-problem set)**:\n  1. Determine whether $\\frac{5}{16}$ terminates, showing the denominator's prime factorization.\n  2. Determine whether $\\frac{9}{12}$ terminates, first simplifying to lowest terms.\n  3. Convert $\\frac{3}{20}$ to its exact decimal form by scaling to a power of 10 (without long division).\n  4. Explain, in one sentence, why $\\frac{1}{6}$ does NOT terminate, citing its prime factorization.\n- **P76 (Transfer Probe, mode = independence)**: \"A student claims that $\\frac{4}{10}$ does not terminate because 10 has the prime factor... actually, checking, $10=2\\times5$ only — so the student is confused about a DIFFERENT fraction, $\\frac{4}{14}$, and wants to know if IT terminates. (a) Determine whether $\\frac{4}{14}$ terminates, being careful to simplify first. (b) Explain, using this lesson's lowest-terms rule, why checking $14=2\\times7$'s factors directly (before simplifying) could have been misleading here specifically.\"\n- **P55 (Score)** after each stage.\n- **P75 (Mastery Assessment against MAMR = 4/5)**.\n- **P74 (Routing Decision)**: MAMR met → P78 (Completion). MAMR not met → route to the specific missed misconception's repair action before re-attempting P77.",
+      "localKey": "MP-TA-A03",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 13,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "Prerequisite Check",
+      "content": "Assumes mastery of `math.arith.decimals` (the place-value decimal representation this concept classifies).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 26,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "math.arith.terminating-decimals/reference/1",
+      "kind": "reference",
+      "conceptId": "math.arith.terminating-decimals",
+      "title": "Cross-Blueprint Dependencies",
+      "content": "- **Requires**: `math.arith.decimals`.\n- **Unlocks**: none recorded in the KG.\n- **Related**: `math.arith.repeating-decimals` (the complementary classification for non-terminating rational decimals).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/math.arith.terminating-decimals.md",
+        "startLine": 82,
+        "endLine": 88
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
