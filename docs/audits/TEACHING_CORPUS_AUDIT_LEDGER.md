@@ -2372,3 +2372,90 @@ a clean session.** Clearing a blocker alone is never sufficient.
 |------|---------|--------|
 | 2026-08-12 | 1 | Supabase MCP: 0 projects |
 | 2026-08-12 | 2 | Supabase MCP reconnected under a new name, then disconnected; on reconnection still **0 projects**. B-1/B-2/B-3 remain blocked. |
+
+---
+
+# TOPIC 3 continued — the deixis freeze, and a rule that punished compliance
+
+## ✅ Verified live: the held-figure fix (`77acd810`)
+
+Clean session `cmspz1kt50001jo04tgvf2ffw`, three consecutive held-figure turns:
+**0 of 3 restated the numeric range**, against **5 of 6 (plus turn 7)** on the
+pre-fix build. And when the learner explicitly asked *"can you show me what that
+looks like"*, the tutor described the figure's parts fully — so the fix did not
+push it into the opposite failure of a picture the words never touch.
+
+## 🔴 P1 — `"show me what that looks like"` froze the ladder (`23623480`)
+
+```
+[excursion] { unresolvedTopic: 'what that looks like',
+              transition: 'continued', active: true, turns: 4 }
+```
+
+That phrase is **deixis** — "that" points back at what is already being taught,
+so nothing new is named. But an open excursion PAUSES the lesson, so
+`turnCountsForLesson` froze the mastery ladder at OBSERVE for the rest of the
+session and every graded correct answer after it counted for nothing.
+
+**Third route to the same freeze**, and this one is triggered by a phrase
+learners use constantly. `work` and `mean` were already task verbs for exactly
+this reason ("how that works", "what this means" both returned null); the
+perception verbs were missing. Added `look, seem, appear, like`.
+
+`sound` deliberately EXCLUDED — a real physics topic; adding it would make
+"explain sound" name nothing. Asserted by a test, not left as a comment.
+
+## 🔴 P1 — the filler detector overwrote turns that carried an MCQ (`046bda7d`)
+
+Twice, byte-identically, the learner got the generic *"what's one thing you
+notice or find surprising…"* replacement WHILE a concrete MCQ sat beside it.
+Two questions at once, mismatched.
+
+**Two rules contradicting each other.** `buildMcqInstruction` says, in capitals,
+*"Write the question ONCE: put it in the tag, and do NOT also re-type the
+question and its options in your visible message."* A model that OBEYS leaves a
+short lead-in — and the tag is parsed and STRIPPED before `detectFillerTurn`
+runs, so the detector sees short, question-free prose and replaces the turn.
+**Compliance was being punished.**
+
+The detector is right about the TEXT and wrong about SCOPE: the question lives
+in the `mcq` field the client renders as buttons. Guarded with `!mcqHoisted`.
+
+*Stated precisely, because the first draft of the test guessed and was wrong: I
+observed the replacement on turns that ALSO carried an MCQ; I did NOT capture
+the raw pre-replacement prose, so which phrase tripped `FILLER_PHRASE_RE` is
+unknown. The fixture now uses a lead-in verified to trip it.*
+
+## Decision-layer fix: input verified, rule NOT yet exercised
+
+`17b5035c` is live and `masteryState` now reads **`fragile`** from this turn's
+grade where it previously read `progressing` — the input is fixed. But the turn
+resolved to `D0d-SESSION-OPENING-PROTOCOL`, which outranks everything, so
+**`D2b-CONFIDENT-WRONG` did not fire in production and I am not claiming it
+did.** The teaching was nonetheless correct on the re-probe:
+
+> me: "Random error; yes, averaging fixes it"  ← wrong
+> tutor: *"it is called a **systematic error**, not a random error… the average
+> will still include that exact same 0.2 kilogram offset—meaning **averaging
+> cannot fix it**."* + a transfer check (a clock five minutes fast).
+
+Compare the pre-fix reply, which corrected nothing. **My detector reported
+"explicit correction: False"** on that text — a NINTH instrument miss, from a
+phrase list that does not contain "not a random error". The transcript settles
+it, as it has every time.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` (queue B-1) |
+| IN PROGRESS | 1 — `phys.meas.errors` |
+| REMAINING | 421 |
+| Global fixes this run | 26 |
+
+## NEXT EXACT ACTION
+1. Confirm `23623480` + `046bda7d` READY.
+2. Clean Topic 3 session, drive to the mastery gate with MCQ answers only.
+   Expect: no bogus excursion from presentation requests, no prose/MCQ
+   mismatch, and `verified: true` at `practiceCorrect >= 2`.
+3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
+4. **Retry the BLOCKED queue** (B-1…B-4) at the top of the next iteration.
