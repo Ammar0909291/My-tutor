@@ -658,3 +658,44 @@ precision satisfies it.
 2. `./clean.sh` then both probes via `./ask2.sh`.
 3. Both green → Topic 1 VERIFIED, preserve the probe-1 answer as a moat asset
    (it is the verified explanation), then Topic 2 `phys.meas.dimensions`.
+
+## Topic 1 replay #5 (clean session) — probe 1 PASSES, probe 2 fails closed
+
+> **probe 1** "is a unit just the name of the thing youre counting"
+> tutor: *"A unit is actually **not just the name of the object itself, like
+> 'apples'**, but rather the agreed-upon standard size or amount we are
+> comparing things against—such as one kilogram or one metre. When you say
+> 'five kilograms', the word 'kilograms' tells everyone exactly how heavy each
+> of those five portions is, rather than just naming the fruit."*
+>
+> ✅ correct · explicit correction · beginner language · concrete → abstract.
+> It now names "apples" directly, which is M5 reaching the prompt.
+
+> **probe 2** "ok so if i count 5 apples the unit is apples right"
+> tutor: the fail-closed template. Safety held, teaching did not.
+
+Runtime logs gave the reason rather than a guess:
+`[affirm-guard] matched: 'Claude, you noticed something really interesting
+about how we count everyday obj', repaired: false` — the retry used no
+agreement phrase at all, and made no distinguishing move either. Exactly what
+the inverted rule exists to catch.
+
+**Fixed in `e5849555`:** the last resort is now built from the Blueprint
+concept-spine definition, wrapped in an explicit refusal to agree plus a
+question asking the learner to name the difference. Deterministic, asserts only
+what the curriculum asserts, and carries the distinction the drafts missed.
+
+**TOPIC 1: FAILED (1 of 2 probes passing).** Do not mark VERIFIED.
+
+### NEXT EXACT ACTION
+1. Wait for `e5849555` in production.
+2. `cd <scratchpad> && ./clean.sh && ./ask2.sh "<probe 1>" && ./ask2.sh "<probe 2>"`
+   (`clean.sh` ends the active session first — a reused session carries affect
+   state and once made a replay measure RECOVERY instead of the topic.)
+3. Probe 2 green → Topic 1 VERIFIED → preserve probe 1's answer as the
+   concept's verified everyday-language explanation via AssetIdentity →
+   Topic 2 `phys.meas.dimensions`.
+4. If probe 2 still falls to the fallback, the remaining lever is the FIRST
+   draft: inject the matched misconception's symptom phrases into the main
+   prompt when the learner's message matches them, so the first attempt is
+   already forewarned rather than being corrected afterwards.
