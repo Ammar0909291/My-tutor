@@ -117,8 +117,33 @@ export function mcqConfidence(
  * carve-outs are the cases where forcing options would destroy the
  * pedagogy the engine depends on elsewhere.
  */
-export function buildMcqInstruction(): string {
-  return (
+export function buildMcqInstruction(opts: { atMasteryGate?: boolean } = {}): string {
+  // AT A MASTERY GATE THE TAG IS NOT OPTIONAL.
+  //
+  // Measured in production, corpus audit Topic 3: at phase GUIDE the tutor
+  // asked a good, concrete question in PROSE with no MCQ tag, the learner
+  // answered it fully correctly ("the offset stays. averaging only helps with
+  // random scatter, not a consistent shift"), the tutor replied "that is spot
+  // on" — and the ladder did not move. GUIDE -> GUIDE, check 0, practice 0.
+  //
+  // Correctness for a free-text answer has no deterministic source: the model
+  // does not emit `<!--SIGNAL-->` (measured), and grading prose would be a
+  // judgement call. An MCQ is the one form where the tutor has already
+  // declared the answer, so the server can grade it. At CHECK and PRACTICE —
+  // the phases that REQUIRE evidence to advance — a question without a tag
+  // cannot produce any, so the gate can never be crossed.
+  //
+  // This is a format requirement, not a safety property, which is why a prompt
+  // rule is the right lever here where it was the wrong one for the
+  // affirmation guard. It does not fabricate evidence and it does not lower
+  // the bar; it asks for the question in the form the server can read.
+  const gateClause = opts.atMasteryGate
+    ? '\n\nMASTERY CHECK DUE THIS TURN: the question you ask now is the one the ' +
+      'learner\'s progress depends on, so it MUST carry the MCQ tag. A question ' +
+      'asked only in prose cannot be recorded, so the learner cannot advance ' +
+      'however well they answer it. Ask exactly one question, and put it in the tag.'
+    : ''
+  return gateClause + (
     '\n\nASSESSMENT FORMAT (mandatory): when you ask the student an ' +
     'ASSESSMENT question — anything you intend to grade, check understanding ' +
     'with, or advance the lesson on — it MUST be multiple choice, and you ' +

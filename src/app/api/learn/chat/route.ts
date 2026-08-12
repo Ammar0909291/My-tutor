@@ -1734,7 +1734,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // the OBSERVE signal because it is the same mechanism — one
         // machine-readable tag per turn, parsed and stripped server-side.
         const { buildMcqInstruction } = await import('@/lib/teaching/mcq')
-        systemPrompt += buildMcqInstruction()
+        // The phase BEFORE this turn's fold — the phase the tutor is teaching
+        // at right now. Read straight from the snapshot because
+        // `conversationStateHoisted` is populated hundreds of lines later, and
+        // a value that arrives after prompt assembly cannot shape the prompt.
+        const gatePhaseNow = (() => {
+          const cs = (snapshot as { conversationState?: { phase?: unknown } } | null)?.conversationState
+          const phase = cs && typeof cs === 'object' ? (cs as { phase?: unknown }).phase : null
+          return phase === 'CHECK' || phase === 'PRACTICE'
+        })()
+        systemPrompt += buildMcqInstruction({ atMasteryGate: gatePhaseNow })
 
         // P3: the do-not-repeat contract — the questions already asked this
         // session, quoted back, plus the banned stock formulations and the

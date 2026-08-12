@@ -38,6 +38,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import { detectFillerTurn, advanceConversationState, initialConversationState } from '@/lib/teaching/conversationState'
+import { buildMcqInstruction } from '@/lib/teaching/mcq'
 
 const MCQ = { question: 'Can you eliminate all error?', options: ['Yes', 'No'], correctIndex: 1 }
 
@@ -164,5 +165,62 @@ describe('an MCQ is a question — the fourth instance', () => {
       })
     expect(fold(true).demonstrated).toBe(true)
     expect(fold(true).phase).toBe(fold(false).phase)
+  })
+})
+
+/**
+ * THE RESIDUAL EVIDENCE GAP — a correct answer that could not be recorded.
+ *
+ * Measured in production, corpus audit Topic 3, phase GUIDE. The tutor asked a
+ * good, concrete question in PROSE with no MCQ tag:
+ *
+ *   "…the thermometer consistently reads exactly two degrees Celsius too high…
+ *    What happens to that consistent two-degree offset when you take the
+ *    average of all ten measurements?"
+ *
+ * The learner answered it fully correctly — "the offset stays. averaging only
+ * helps with random scatter, not a consistent shift" — the tutor replied "that
+ * is spot on", and the ladder did not move: GUIDE -> GUIDE, check 0,
+ * practice 0.
+ *
+ * Correctness for FREE TEXT has no deterministic source here: the model does
+ * not emit `<!--SIGNAL-->` (measured repeatedly), and grading prose would be a
+ * judgement call of exactly the kind this audit has learned not to trust. An
+ * MCQ is the one form where the tutor has already declared the answer, so the
+ * server can grade it against `correctIndex`.
+ *
+ * So at CHECK and PRACTICE — the phases that REQUIRE evidence to advance — a
+ * question asked without the tag cannot produce any, and the gate can never be
+ * crossed however well the learner answers.
+ *
+ * This is a FORMAT requirement, not a safety property, which is why a prompt
+ * rule is the right lever here where it was the wrong one for the affirmation
+ * guard. It fabricates no evidence and lowers no bar.
+ */
+describe('the MCQ tag is mandatory at a mastery gate', () => {
+  it('adds the requirement at CHECK and PRACTICE only', () => {
+    const atGate = (phase: string) => phase === 'CHECK' || phase === 'PRACTICE'
+    expect(atGate('CHECK')).toBe(true)
+    expect(atGate('PRACTICE')).toBe(true)
+    for (const p of ['OBSERVE', 'DEMONSTRATE', 'GUIDE', 'TRANSFER']) {
+      expect(atGate(p), p).toBe(false)
+    }
+  })
+
+  it('says WHY, so the model is not merely being told to obey a format', () => {
+    const gate = buildMcqInstruction({ atMasteryGate: true })
+    expect(gate).toContain('MASTERY CHECK DUE THIS TURN')
+    expect(gate).toContain('cannot be recorded')
+    expect(gate).toContain('cannot advance')
+  })
+
+  it('never weakens the base contract', () => {
+    const base = buildMcqInstruction()
+    const gate = buildMcqInstruction({ atMasteryGate: true })
+    expect(base).not.toContain('MASTERY CHECK DUE')
+    expect(gate).toContain('ASSESSMENT FORMAT (mandatory)')
+    // The gate clause is additive — every rule in the base contract survives.
+    expect(gate.length).toBeGreaterThan(base.length)
+    expect(gate.endsWith(base)).toBe(true)
   })
 })
