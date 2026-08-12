@@ -568,6 +568,8 @@ export async function POST(req: Request) {
     // at the end of the turn that asks; cleared once graded, so one question is
     // never graded twice.
     let pendingMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    /** This turn's deterministic grade of the pending MCQ, computed once. */
+    let mcqGradeHoisted: { chosenIndex: number | null; correct: boolean | null } | null = null
     // P6.6: the lesson-completion payload for this turn, when the final
     // required concept closed. Hoisted like the others so it can be attached
     // to the JSON response once cleanText is finalized.
@@ -1823,6 +1825,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             && typeof p.correctIndex === 'number'
             && p.correctIndex >= 0 && p.correctIndex < p.options.length) {
             pendingMcqHoisted = { question: p.question, options: p.options as string[], correctIndex: p.correctIndex }
+          }
+        }
+        // Graded HERE rather than at the signal site, because the answer to
+        // "did the learner just answer a question?" is needed BEFORE the
+        // Explanation Memory serve decision, hundreds of lines earlier than
+        // where the grade is folded into evidence.
+        if (pendingMcqHoisted) {
+          const { gradeMcqAnswer } = await import('@/lib/teaching/mcq')
+          const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+          if (!isBareAcknowledgement(message)) {
+            const g = gradeMcqAnswer(message, pendingMcqHoisted)
+            if (g.correct !== null) mcqGradeHoisted = g
           }
         }
         systemPrompt += buildAntiRepetitionBlock(questionLedgerHoisted, {
@@ -3154,7 +3168,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Fallback law: a missing/inconsistent plan always degrades to the
       // legacy behavior — the dispatcher can never strand a turn.
       let brainRuntimeActive = false
-      let serveFromMemory = assembled !== null
+      // AN ANSWER IS NOT A REQUEST FOR AN EXPLANATION.
+      //
+      // Measured in production. The learner tapped an MCQ option; the reply was
+      // a stored asset, served whole:
+      //
+      //   [ladder] { mcqAsked: false, askedQuestion: false,
+      //              phaseBefore: 'GUIDE', phaseAfter: 'CHECK' }
+      //   provider=memory asset_ids=[f22e5673-…] servingMode=exact_match
+      //
+      // `admitForLearner`'s relevance test could not stop it, and its own
+      // reasoning says why: a turn that "names nothing specific" carries no
+      // topic to contradict, so it cannot fail — which is right for "ok" or
+      // "go on", and wrong for an ANSWER. The very next log line was the same
+      // asset being REFUSED as `irrelevant-to-question` on a turn where the
+      // learner did use words. The guard works; a bare answer is simply
+      // invisible to it.
+      //
+      // The deeper point is not asset quality. A learner who has just answered
+      // a question is owed FEEDBACK ON THAT ANSWER — right or wrong, and why.
+      // A canned explanation, however good, is the wrong move on that turn.
+      const answersPendingQuestion = mcqGradeHoisted !== null
+      let serveFromMemory = assembled !== null && !answersPendingQuestion
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
@@ -3167,7 +3202,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ` mode=${brainRuntimeActive ? 'ACTIVE' : 'shadow'}`
           )
           if (brainRuntimeActive) {
-            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null
+            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion
             // P13: the plan — not this route — decides that no provider is
             // needed. Acting on plan.executor is the SAME pattern as
             // serveFromMemory above, not a bypass of the engine.
@@ -3209,7 +3244,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         recordDispatch(dispatchPlanHoisted, brainRuntimeActive)
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
-        serveFromMemory = assembled !== null
+        // The answer-turn suppression survives the fallback. A degraded path
+        // must never be MORE permissive than the healthy one on a gate that
+        // decides whether a learner gets feedback on the answer they just gave.
+        serveFromMemory = assembled !== null && !answersPendingQuestion
       }
 
       // Conversation Decision — standalone block for turns where the Brain
@@ -3556,24 +3594,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // matched to an option, leaving the existing path untouched. Fabricating
       // an answer the learner did not give would write false evidence into a
       // permanent record, which is worse than the freeze this repairs.
-      let mcqGradedThisTurn: { chosenIndex: number | null; correct: boolean | null } | null = null
+      const mcqGradedThisTurn = mcqGradeHoisted
       if (pendingMcqHoisted) {
         try {
-          const { gradeMcqAnswer, mcqConfidence } = await import('@/lib/teaching/mcq')
-          const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
-          if (!isBareAcknowledgement(message)) {
-            const graded = gradeMcqAnswer(message, pendingMcqHoisted)
-            if (graded.correct !== null) {
-              mcqGradedThisTurn = graded
-              const lastAsst = learnSession.messages.find((m: { role: string }) => m.role === 'ASSISTANT')
-              const latencyMs = lastAsst
-                ? Math.max(0, turnReceivedAt - new Date((lastAsst as { createdAt: Date }).createdAt).getTime())
-                : null
-              teachingSignal = {
-                ...(teachingSignal ?? {}),
-                correctness: graded.correct,
-                confidence: mcqConfidence(graded.correct, latencyMs),
-              }
+          if (mcqGradedThisTurn) {
+            const { mcqConfidence } = await import('@/lib/teaching/mcq')
+            const lastAsst = learnSession.messages.find((m: { role: string }) => m.role === 'ASSISTANT')
+            const latencyMs = lastAsst
+              ? Math.max(0, turnReceivedAt - new Date((lastAsst as { createdAt: Date }).createdAt).getTime())
+              : null
+            teachingSignal = {
+              ...(teachingSignal ?? {}),
+              correctness: mcqGradedThisTurn.correct ?? undefined,
+              confidence: mcqConfidence(mcqGradedThisTurn.correct === true, latencyMs),
             }
           }
           console.log('[mcq-grade]', {

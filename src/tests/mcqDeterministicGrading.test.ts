@@ -155,6 +155,44 @@ describe('grading is ground truth, and null is never "wrong"', () => {
   })
 })
 
+describe('symbolic options — the form this corpus actually uses', () => {
+  // The tap path sends the option's text verbatim, and in physics and
+  // mathematics that text is usually symbols. The first draft graded NONE of
+  // these: every option normalised to "m l t" once superscripts were stripped,
+  // so the grader saw four identical options and refused. Symbolic questions
+  // are the majority of the audited corpus, so that would have left the
+  // evidence pipeline frozen for exactly the subjects under audit.
+  const DIMS: TutorMCQ = {
+    question: 'Which is the dimensional formula for force?',
+    options: ['[M][L][T]', '[M][L][T]⁻²', '[M][L]⁻¹[T]²', '[M]²[L][T]⁻¹'],
+    correctIndex: 1,
+  }
+
+  it('resolves every symbolic option to itself', () => {
+    DIMS.options.forEach((o, i) => expect(resolveMcqChoice(o, DIMS), o).toBe(i))
+  })
+
+  it('grades the tapped correct option', () => {
+    expect(gradeMcqAnswer('[M][L][T]⁻²', DIMS).correct).toBe(true)
+  })
+
+  it('grades a tapped wrong option', () => {
+    expect(gradeMcqAnswer('[M][L][T]', DIMS).correct).toBe(false)
+  })
+
+  it('a negative exponent is not the same answer as a positive one', () => {
+    // Dropping the minus would silently mark a wrong answer right.
+    const pair: TutorMCQ = { question: 'q', options: ['[T]²', '[T]⁻²'], correctIndex: 1 }
+    expect(resolveMcqChoice('[T]²', pair)).toBe(0)
+    expect(resolveMcqChoice('[T]⁻²', pair)).toBe(1)
+  })
+
+  it('letters still work alongside symbols', () => {
+    expect(resolveMcqChoice('b', DIMS)).toBe(1)
+    expect(resolveMcqChoice('the second one', DIMS)).toBe(1)
+  })
+})
+
 describe('confidence comes from server-measured latency', () => {
   it('fast + wrong is the dangerous quadrant', () => {
     expect(mcqConfidence(false, 2000)).toBe('high')

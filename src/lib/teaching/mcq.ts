@@ -190,7 +190,26 @@ const ORDINALS: Record<string, number> = {
 /** Words that explicitly announce a letter choice, so "a" can be told from the article. */
 const LETTER_MARKERS = new Set(['option', 'answer', 'choice', 'pick', 'select', 'letter'])
 
-const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim()
+/**
+ * Superscripts carry the ENTIRE meaning of a dimensional formula, and stripping
+ * them made every option identical. Measured: `[M][L][T]`, `[M][L][T]⁻²`,
+ * `[M][L]⁻¹[T]²` and `[M]²[L][T]⁻¹` all normalised to "m l t", so the grader
+ * saw four identical options and correctly refused to choose — meaning
+ * SYMBOLIC questions, the most common form in physics and mathematics, could
+ * not be graded at all. Folded to ASCII before stripping, and the minus sign is
+ * kept, because `[T]²` and `[T]⁻²` are different answers.
+ */
+const SUPERSCRIPTS: Record<string, string> = {
+  '\u2070': '0', '\u00b9': '1', '\u00b2': '2', '\u00b3': '3', '\u2074': '4',
+  '\u2075': '5', '\u2076': '6', '\u2077': '7', '\u2078': '8', '\u2079': '9',
+  '\u207b': '-', '\u207a': '+',
+}
+
+const foldSuperscripts = (s: string) =>
+  s.replace(/[\u2070\u00b9\u00b2\u00b3\u2074-\u2079\u207a\u207b]/g, (c) => SUPERSCRIPTS[c] ?? ' ')
+
+const norm = (s: string) =>
+  foldSuperscripts(s).toLowerCase().replace(/[^a-z0-9 -]+/g, ' ').replace(/\s+/g, ' ').trim()
 const words = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
 
 /**
@@ -205,6 +224,24 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   if (!n) return null
   const tokens = n.split(' ')
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
+
+  // 0. EXACT MATCH — the strongest signal, and the one the UI actually
+  //    produces: tapping an option sends that option's text verbatim
+  //    (LessonScreen sends `option`, not a letter).
+  //
+  //    This rule exists because the first draft did NOT have it and a test
+  //    caught what that cost: `[M][L][T]⁻²` normalises to "m l t", which is
+  //    below the containment rule's length floor and whose every token is too
+  //    short for the distinctive-word rule. So SYMBOLIC options — the most
+  //    common form in physics and mathematics — could not be graded at all,
+  //    and the entire evidence pipeline would have stayed frozen for exactly
+  //    the subjects being audited.
+  //
+  //    Ambiguity is still fatal: two options that normalise identically select
+  //    neither.
+  const exact = mcq.options.map((o, i) => ({ i, hit: norm(o) === n })).filter((x) => x.hit)
+  if (exact.length === 1) return exact[0].i
+  if (exact.length > 1) return null
 
   // 1. A bare letter, alone or as "option b" / "b)" — normalisation has already
   //    removed the bracket. Standalone-token matching alone is NOT enough, and
