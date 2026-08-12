@@ -40921,6 +40921,58 @@ const VADD_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [],
     source: `${VADD_SRC} — Section 9 Retrieval Schedule, Interval 4 (21 days)`,
   },
+  {
+    // ── THE TRIPLE-RECALL HOLE, FOUND IN A REAL PRODUCTION TRANSCRIPT ──────
+    // Every gradeable probe this concept had used the SAME 3-4-5 numbers:
+    // the FOUNDATIONAL mcq, the DEVELOPING mcq and the DEVELOPING
+    // misconception_probe all ask what 3 N east and 4 N north come to. A real
+    // session then ran 3-4-5, 6-8-10, 30-40-50 — every item a Pythagorean
+    // triple, all answered instantly.
+    //
+    // So the gate could be cleared by remembering "3 and 4 makes 5", with no
+    // understanding of vectors at all. A probe set that cannot separate
+    // understanding from recall is not an assessment.
+    //
+    // This item breaks the pattern by keeping the SAME NUMBERS and removing
+    // the right angle. A learner reciting the triple answers 5; a learner who
+    // understands that the 5 came from perpendicularity answers 7. It is the
+    // cheapest possible discriminator, and it is deliberately the one case
+    // the memoriser gets WRONG.
+    conceptId: VADD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A box is pulled with a 3 N force pointing EAST and a 4 N force also pointing EAST — both the same way this time. What is the magnitude of the resultant?',
+    choices: [
+      { text: '7 N — they point the same way, so here they really do just add', isCorrect: true },
+      { text: '5 N — a 3 and a 4 always give 5', isCorrect: false, misconceptionId: `${VADD}:MC-RESULTANT-ALWAYS-LARGER` },
+      { text: '1 N — subtract the smaller from the larger', isCorrect: false },
+    ],
+    correctValue: '7 N — parallel forces add arithmetically; the familiar 5 N comes from the right ANGLE between them, not from the numbers 3 and 4',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VADD}:MC-RESULTANT-ALWAYS-LARGER`],
+    source: `${VADD_SRC} — anti-recall discriminator for the 3-4-5 probe set (production transcript ${'cmsq8fmja'}, 2026-08-12)`,
+  },
+  {
+    // Second discriminator: perpendicular, but NOT a Pythagorean triple, so the
+    // answer is not a whole number. Guards the companion assumption that a
+    // resultant must come out "clean" — which the all-triples set taught by
+    // accident.
+    conceptId: VADD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two forces act at right angles: 2 N north and 3 N east. What is the magnitude of the resultant?',
+    choices: [
+      { text: 'About 3.6 N — the square root of 2² + 3² = √13', isCorrect: true },
+      { text: '5 N — add them, 2 + 3', isCorrect: false, misconceptionId: `${VADD}:MC-RESULTANT-ALWAYS-LARGER` },
+      { text: 'It cannot be worked out — these are not 3-4-5 numbers', isCorrect: false },
+    ],
+    correctValue: '√13 ≈ 3.6 N — Pythagoras applies to ANY perpendicular pair; a resultant is not required to be a whole number',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${VADD}:MC-RESULTANT-ALWAYS-LARGER`],
+    source: `${VADD_SRC} — non-triple discriminator for the 3-4-5 probe set`,
+  },
 ]
 
 const VPRD_ASSESS_PROBES: SeedProbe[] = [
