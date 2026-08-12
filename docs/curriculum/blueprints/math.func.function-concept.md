@@ -175,7 +175,7 @@ SIGNAL:INCORRECT → prerequisite gap: set-theory; schedule math.found.set-theor
 
 ---
 
-**PRE-2 — Variable substitution** (requires math.alg.variable)
+**PRE-2 — Variable substitution** (requires math.found.variable)
 
 Stimulus: "If x = 5, what is 2x + 1?"
 
@@ -1262,7 +1262,7 @@ Items:
 
 | Check | Criterion | Status | Evidence |
 |-------|-----------|--------|----------|
-| V-1 | All concept id slots reference valid KG nodes | PASS | math.func.function-concept, math.alg.variable, math.found.set-theory all valid KG ids |
+| V-1 | All concept id slots reference valid KG nodes | PASS | math.func.function-concept, math.found.variable, math.found.set-theory all valid KG ids |
 | V-2 | difficulty=3 → cpa_entry_stage ∈ {C, P} | PASS | cpa_entry_stage=C; difficulty=3 allows C or P |
 | V-3 | mastery_threshold matches KG value | PASS | 0.85 per KG specification |
 | V-4 | Canonical 10-field schema only | PASS | No domain/concept_type in JSON; those are derived at runtime |

@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 224 | 82 `math.found.*` entries (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` entries (**COMPLETE, DOMAIN CERTIFIED 2026-07-26**) + 28 `math.nt.*` entries (`divisibility`, `prime-number`, `prime-factorization`, `gcd`, `lcm`, `fundamental-theorem-arithmetic`, `euclidean-algorithm`, `division-algorithm`, `divisibility-rules`, `composite-number`, `sieve-of-eratosthenes`, `eulers-totient`, `induction-applications`, `extended-euclidean-algorithm`, `modular-arithmetic`, `congruence`, `modular-inverse`, `fermats-little-theorem`, `bezout-identity`, `chinese-remainder-theorem`, `eulers-theorem`, `primality-testing`, `residue-classes`, `linear-diophantine`, `rsa-basics`, `general-diophantine`, `pells-equation`, `pythagorean-triples` — `math.nt` domain otherwise PARKED at 28/36, blocked on cross-domain campaigns per ROADMAP.md §5 item 1c) + 56 `math.geom.*` entries (`point`, `line`, `line-segment`, `ray`, `plane`, `angle`, `angle-measurement`, `angle-pairs`, `angle-types`, `circle`, `coordinate-plane`, `perimeter`, `length`, `perpendicular-lines`, `triangle`, `triangle-types`, `triangle-angle-sum`, `triangle-centers`, `circle-equation`, `right-triangle`, `congruent-triangles`, `similar-triangles`, `area-triangle`, `polygon`, `pythagorean-theorem`, `pythagorean-converse`, `parallel-lines`, `area-polygon`, `solid-3d`, `distance-formula`, `geometric-proof`, `quadrilateral`, `area`, `volume`, `x-y-coordinates`, `slope`, `transformations`, `vectors-2d`, `surface-area`, `parallelogram`, `trapezoid`, `regular-polygon`, `circle-parts`, `circle-circumference`, `circle-area`, `circle-theorems`, `quadrants`, `midpoint-formula`, `geometric-constructions`, `line-equation`, `vectors-3d`, `polygon-angle-sum`, `platonic-solids`, `translation`, `reflection`, `dilation` — `math.geom` domain IN PROGRESS, 56/69, Wave 11 complete, Wave 12 next), see Delivery history for full per-concept lists and misconception detail. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. |
+| mathematics | 908 | 245 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). Remaining: 663 concepts across 20 unstarted domains; `math.alg` (0/59) is the next campaign. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 216 | **100% COMPLETE (2026-08-11).** 212/216 through Batch 29 (full per-batch narrative in git commit messages and prior revisions of this file), plus Batch 30 — FINAL BATCH (4, autonomous /loop, level-30 frontier BATCH COMPLETE: `eng.communication.professional-communication`, `eng.communication.presentation-design`, `eng.communication.editing-for-publication`, `eng.communication.negotiation-language` — the last of these the English KG's final terminal node). Every English KG concept now has a full 21-section Educational Brain entry. English is the fourth subject to reach 100% Educational Brain coverage, after physics and chemistry (both 2026-07-23/26) and mathematics (domain-by-domain, ongoing). |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -53,6 +53,54 @@ retrieval engine. Per-entry completeness against the tracked fields is in
 
 ## Delivery history
 
+- **Mathematics Phase 1 — `math.nt` tail, DOMAIN CERTIFIED** (2026-08-12, batch 1
+  of the mathematics-completion session). Reconciliation first, per instruction:
+  every branch whose name begins `math`/`mathematics` was compared by *content*
+  rather than by git ancestry (`git ls-tree -r` against
+  `educational-brain/concepts/mathematics/`), because this repository has
+  orphan-rewritten history. Result: **no branch-only Educational Brain work
+  exists.** `origin/claude/math-audit-all-branches-j7zk0l` holds exactly the same
+  237 files as `main`; `claude/math-inventory-audit-bktjvx` and
+  `origin/claude/math-blueprints-continue-bh26fl` hold 224 each, a strict subset
+  (they predate `0d2c76dd`'s `math.geom` recovery);
+  `origin/claude/math-linalg-curriculum-34wonr` holds 1 and is the stale snapshot
+  the branch policy already records as archived. No branch was merged and nothing
+  was recovered, because there was nothing to recover — `main` is the superset.
+  Housekeeping: the two stale `math.alg.variable` references in
+  `docs/curriculum/blueprints/math.func.function-concept.md` (lines 178, 1265)
+  were verified against the live KG as genuinely incorrect — no `math.alg.variable`
+  node exists, `math.found.variable` does — and corrected in place; nothing else
+  in that Blueprint was touched. Authored: the 8 concepts that closed the domain —
+  `prime-distribution`, `continued-fractions`, `analytic-number-theory`,
+  `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`,
+  `algebraic-integers`, `number-fields`. All 8 had existing Blueprints, reused by
+  reference (misconception registries cited with birth-type classification added;
+  worked examples, teaching-action scripts and mastery-gate item sets never
+  restated). Three genuine Curriculum Feedback findings, recorded not fixed: (1) the
+  `algebraic-number-theory` → `algebraic-integers` → `number-fields` cluster has
+  prerequisite edges running *opposite* to its logical build order — the first node's
+  own learning objectives define 𝒪_K as the algebraic integers in K, which is the
+  second node's content — so a learner following the KG's edges meets the synthesis
+  before either component; recorded once as a cluster-level finding rather than three
+  times, and all three entries were written self-contained enough to survive any
+  ordering. (2) `prime-distribution` / `analytic-number-theory` /
+  `prime-number-theorem` are three research-level nodes on adjacent ground whose
+  distinctness is not visible from the KG descriptions alone — the
+  `prime-number-theorem` Blueprint had to introduce a misconception (its MC-3) purely
+  to defend its own node's right to exist, which is a signal about node boundaries
+  rather than about the Blueprint. (3) `riemann-hypothesis` carries
+  `estimated_hours: 100`, the largest value in the mathematics KG, against a gate of
+  three status-sorting items — the figure appears to price the subject rather than the
+  achievable objective. Also corrected: the `continued-fractions` Blueprint's
+  Component 8 states `estimated_hours = 6` while the KG states 10; the KG is
+  authoritative per the standing rule and is what the entry records. **`math.nt`
+  36/36 — DOMAIN CERTIFIED**, the fourth mathematics domain certified after
+  `math.found`, `math.arith` and `math.geom`. Mathematics 237 → **245/908**.
+  Validation: 245 EB files, 0 orphans, 0 duplicates, 0 filenames failing to resolve
+  to a live KG id, 0 Quality Gate 3 heading violations across all `math.nt` entries
+  (all 21 canonical headings, exact order); `npx tsc --noEmit` clean; full suite 304
+  files / 6,536 passed / 9 skipped. No KG file, no Physics/Chemistry/English/Biology/
+  Computer Science content, and no runtime code touched.
 - **Delivery 5** (2026-07-10): integration layer authored (README, TEMPLATE,
   this manifest) + 3 seed entries, one per live-curriculum subject, each
   anchored to a verified canonical KG node.

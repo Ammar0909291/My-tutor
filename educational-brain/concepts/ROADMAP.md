@@ -13,22 +13,20 @@ below from source whenever this file is updated, never hand-estimate.
 | Metric | Value |
 |---|---|
 | Total KG concepts (all 6 subjects) | **1,775** |
-| Concepts with an Educational Brain entry | **864** |
-| Remaining | **911** |
-| Completion percentage | **48.68%** |
+| Concepts with an Educational Brain entry | **245** mathematics + 238 physics + 216 english + 186 chemistry + 0 biology + 0 computer_science = **885** |
+| Remaining | **890** |
+| Completion percentage | **49.86%** |
 
-*(Recomputed from §2 Subject progress table: 224 mathematics + 238 physics
-+ 216 english + 186 chemistry + 0 biology + 0 computer_science = 864.
-English reached 212 through Batch 29 (full per-batch history in prior
-revisions of this file and in git commit messages), then Batch 30 — the
-FINAL BATCH (4, level-30 frontier BATCH COMPLETE:
-`eng.communication.professional-communication`,
-`eng.communication.presentation-design`,
-`eng.communication.editing-for-publication`,
-`eng.communication.negotiation-language`) — to **216/216, ENGLISH
-100% COMPLETE**. Mathematics/physics/chemistry figures are taken as
-already-recorded below, not re-audited this session, per this
-session's English-only scope.)*
+*(Recomputed programmatically 2026-08-12 against the live KG files and the
+live `educational-brain/concepts/` tree — not carried forward from the
+previous revision, which read 864 and was stale in two ways. First, the
+mathematics figure of 224 predated commit `0d2c76dd`'s Wave 0 recovery,
+which restored 13 `math.geom` entries (56 → 69, closing that domain) and
+brought mathematics to 237. Second, this session's Phase 1 batch authored
+the final 8 `math.nt` concepts, closing that domain at 36/36 and bringing
+mathematics to 245. Cross-checked: 0 orphan EB files, 0 duplicate EB
+files, 0 EB filenames that do not resolve to a live KG concept id, across
+all six subjects.)*
 
 ---
 
@@ -36,7 +34,42 @@ session's English-only scope.)*
 
 | Subject | KG concepts | EB entries | Coverage | Entry point(s) | Entry points covered |
 |---|---|---|---|---|---|
-| mathematics | 908 | 224 | 24.67% | `math.found.mathematical-thinking` | **Yes** |
+| mathematics | 908 | 245 | 26.98% | `math.found.mathematical-thinking` | **Yes** |
+
+**Mathematics per-domain state (recomputed 2026-08-12, programmatic):**
+
+| Domain | Authored / KG | Status |
+|---|---|---|
+| `math.found` | 82/82 | **CERTIFIED** (2026-07-26) |
+| `math.geom` | 69/69 | **CERTIFIED** — closed by commit `0d2c76dd`'s Wave 0 recovery |
+| `math.arith` | 58/58 | **CERTIFIED** (2026-07-26) |
+| `math.nt` | 36/36 | **CERTIFIED** (2026-08-12) — closed by this session's Phase 1 batch |
+| `math.calc` | 0/76 | not started |
+| `math.linalg` | 0/61 | not started |
+| `math.alg` | 0/59 | not started — **next domain campaign** |
+| `math.de` | 0/56 | not started |
+| `math.prob` | 0/49 | not started |
+| `math.stats` | 0/40 | not started |
+| `math.abst` | 0/37 | not started |
+| `math.disc` | 0/32 | not started |
+| `math.cx` | 0/31 | not started |
+| `math.real` | 0/30 | not started |
+| `math.func` | 0/29 | not started |
+| `math.trig` | 0/25 | not started |
+| `math.top` | 0/23 | not started |
+| `math.seq` | 0/21 | not started |
+| `math.fnal` | 0/18 | not started |
+| `math.num` | 0/16 | not started |
+| `math.opt` | 0/16 | not started |
+| `math.graph` | 0/16 | not started |
+| `math.cat` | 0/15 | not started |
+| `math.meas` | 0/13 | not started |
+
+Four domains certified, 245 of 908. The four certified domains are the
+graph's foundation layer; every remaining domain draws on at least one of
+them, so the prerequisite debt for the remaining 663 concepts is now
+substantially lower than the raw count suggests.
+
 | physics | 238 | 238 | **100.00%** | `phys.meas.units` | Yes |
 | english | 216 | 216 | **100.00% COMPLETE (2026-08-11)** | `eng.phonics.phonemic-awareness`, `eng.phonics.print-concepts` | Yes (both) — every English KG concept now has a full Educational Brain entry |
 | chemistry | 186 | 186 | **100.00% COMPLETE** | `chem.found.matter` | No — chemistry is fully covered (Completion Loop 2026-07-25/26); mathematics/english/biology/computer_science remain the priority subjects |
