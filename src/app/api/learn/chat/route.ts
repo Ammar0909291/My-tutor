@@ -3906,8 +3906,27 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   }
                   const eb = loadEBConceptContext(cid)
                   if (eb.found && eb.context.ebMisconceptions.length > 0) {
-                    const m = eb.context.ebMisconceptions[0]
+                    // THE MATCHING misconception, not simply the first. A
+                    // concept carries several; handing over an unrelated one
+                    // gives the model authored text about the wrong error.
+                    // Scored on vocabulary shared with what the learner just
+                    // said — their words against the authored symptom phrases,
+                    // which is exactly what those phrases are recorded for.
+                    const { contentWords } = await import('@/lib/teaching/visual/visualEngine')
+                    const learnerWords = contentWords(message)
+                    const score = (text: string) => {
+                      let n = 0
+                      for (const w of contentWords(text)) if (learnerWords.has(w)) n++
+                      return n
+                    }
+                    const ranked = [...eb.context.ebMisconceptions]
+                      .map((m) => ({ m, s: score(`${m.title} ${m.symptom ?? ''}`) }))
+                      .sort((a, b) => b.s - a.s)
+                    // Fall back to the first only when nothing overlaps at all,
+                    // which is still better than no authored material.
+                    const m = ranked[0].s > 0 ? ranked[0].m : eb.context.ebMisconceptions[0]
                     authored += `\nA known misconception here is "${m.title}".`
+                    if (m.symptom) authored += ` Learners holding it say things like: ${m.symptom}`
                     if (m.recovery) authored += ` The authored repair: ${m.recovery}`
                   }
                 }

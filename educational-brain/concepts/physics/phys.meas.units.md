@@ -148,6 +148,33 @@ internalised the symbol as a distinct identity or merely a letter.
 - *Verification*: from-memory list (all seven, no extras, correct names + symbols
   + quantities measured).
 
+**M5 — A unit is the name of the thing you are counting**
+- *Why*: the everyday framing that teaches units in the first place — "four
+  what? four apples" — names the OBJECT as the missing label, so the learner
+  generalises "the missing word after the number" into "that is what a unit is"
+  (type 1, overgeneralisation from the introductory example itself; the tutor's
+  own opening scenario is the source, which is what makes this one so common).
+- *Symptom / phrases*: "is a unit just the name of the thing you're counting?";
+  "if I count 5 apples the unit is apples"; names the object rather than an
+  agreed amount when asked for the unit of a measurement.
+- *Detection probe (verbatim)*: "You and I both measure the same table. I say
+  it is 2 long, you say it is 6 long, and neither of us is lying. What do we
+  each have to tell the other before those numbers mean anything?" — a learner
+  holding M5 answers "the table" or "what you measured"; the correct answer
+  names the agreed amount being counted (my strides vs your handspans).
+- *Recovery*: separate the two questions the number answers. HOW MANY is the
+  count; OF WHAT AGREED AMOUNT is the unit. Counting apples answers only the
+  first — there is no agreed amount, because one apple is not a fixed size, so
+  "5 apples" is a count and not a measurement. Then measure something twice in
+  the room with two different body parts (strides, then handspans): same table,
+  two different numbers, and the only thing that makes either number usable is
+  naming the amount you compared against. Land it: an object can be counted; a
+  unit is an amount everyone has agreed to compare against.
+- *Verification*: "I say the rope is 8. What must I tell you before you can
+  cut a rope the same length?" Correct: the unit / what the 8 is counted in.
+  Delayed: ask for the unit of something with no natural object to name, e.g.
+  temperature or time, where the object framing has nothing to attach to.
+
 ## Analogies
 
 - **Best analogy (currency — use this first)**: £5 and approximately $6.30 are the

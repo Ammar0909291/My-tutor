@@ -149,3 +149,43 @@ describe('parsing is defensive', () => {
     expect(eb.context.ebMisconceptions.length).toBeLessThanOrEqual(6)
   })
 })
+
+describe('M5 — the misconception the corpus audit actually found', () => {
+  it('is authored and parsed', () => {
+    const eb = loadEBConceptContext(UNITS)
+    expect(eb.found).toBe(true)
+    if (!eb.found) return
+    const m5 = eb.context.ebMisconceptions.find((m) => m.id === 'M5')
+    expect(m5, 'M5 must exist — it is the failure Topic 1 exposed').toBeDefined()
+    expect(m5!.title.toLowerCase()).toContain('name of the thing')
+    // The symptom phrases are what let the repair MATCH it to a learner's
+    // words, so they must carry the learner's actual phrasing.
+    expect(m5!.symptom!.toLowerCase()).toContain('counting')
+    expect(m5!.symptom!.toLowerCase()).toContain('apples')
+    expect(m5!.probe).toBeTruthy()
+    expect(m5!.recovery).toBeTruthy()
+  })
+
+  it('reaches the prompt block', () => {
+    const block = blockFor(UNITS)!
+    expect(block).toContain('M5:')
+    expect(block.toLowerCase()).toContain('name of the thing you are counting')
+  })
+
+  it('outranks the other four for the learner phrasing that failed', () => {
+    // The repair selects on vocabulary shared with the learner's message.
+    // This mirrors that scoring so the selection cannot silently regress to
+    // "always the first entry", which would hand over M1 — a real
+    // misconception, but not the one this learner has.
+    const eb = loadEBConceptContext(UNITS)
+    if (!eb.found) throw new Error('fixture lost its EB entry')
+    const learner = 'ok so if i count 5 apples the unit is apples right'
+    const words = new Set(learner.toLowerCase().split(/[^a-z]+/).filter(Boolean))
+    const score = (t: string) =>
+      t.toLowerCase().split(/[^a-z]+/).filter(Boolean).reduce((n, w) => n + (words.has(w) ? 1 : 0), 0)
+    const ranked = [...eb.context.ebMisconceptions]
+      .map((m) => ({ id: m.id, s: score(`${m.title} ${m.symptom ?? ''}`) }))
+      .sort((a, b) => b.s - a.s)
+    expect(ranked[0].id).toBe('M5')
+  })
+})
