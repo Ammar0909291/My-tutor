@@ -3554,3 +3554,77 @@ both are needed.
 ## Status
 
 VERIFIED 1/424 — unchanged. E6 is explained but not closed.
+
+---
+
+# 🔴 P0 INFRA — THE BOOTSTRAP IS A CAUSE OF THE POOL EXHAUSTION, NOT ONLY A VICTIM
+
+Measured while verifying the prefetch fix (2026-08-12 21:36–21:39 UTC).
+Production is degraded RIGHT NOW and it is learner-visible:
+
+```
+POST /api/sessions/end 500
+Timed out fetching a new connection from the connection pool
+  (Current connection pool timeout: 20, connection limit: 15)
+Error in PostgreSQL connection: Error { kind: Closed, cause: None }
+prisma.user.findUnique() ... Socket timeout        [P1008]
+prisma.learnSession.findUnique() ... Socket timeout [P1008]
+```
+
+## The reframe
+
+`[instrumentation] asset bootstrap DB error` appears on **every request** in
+the window, with `cache=MISS` on nearly all of them — i.e. many cold starts,
+each one running the bootstrap. Each run:
+
+- opens its **own second `PrismaClient`** (the pooled config was applied in
+  P5, but it is still a separate client with its own connections), and
+- issued **~2,920 sequential `findFirst` queries** on the pre-prefetch code.
+
+So while learners are competing for a 15-connection pool, the bootstrap is
+hammering the same database with thousands of queries per cold start, failing
+partway, and doing it again on the next invocation. It has been read all day
+as a victim of the flakiness. It is also feeding it.
+
+**This is the same root that produced the 737 hollow identities and E6.** One
+infrastructure fault, three symptoms: learners cannot sign in, the moat never
+finished seeding, and the mastery gate has nothing gradeable to serve.
+
+## What the prefetch fix does to this
+
+`516bcf1` takes the bootstrap from ~2,921 queries per cold start to **one**
+`findMany` plus writes only where work remains, and makes per-asset failures
+non-fatal so a run converges instead of restarting from zero. That is a large
+reduction in exactly the load that is exhausting the pool — but it was NOT yet
+live in the window above (`dpl_D1mrpRWvtMDXfPRSPrKb2GyG6ttv` still logs
+`assetIdentity.findFirst()`), so the numbers below are pre-fix.
+
+## Unverified, and stated as such
+
+Orphans still 737 / 255 and `active_gradeable` still 793 — measured against a
+deployment that does not yet carry the fix. **No claim is made about whether
+the repair works.** It gets re-measured once the new deployment is serving.
+
+## A discrepancy found and NOT yet explained
+
+`count(DISTINCT canonicalSlug) WHERE authorId='EDUCATIONAL_BRAIN_SEED'` = **3,123**,
+while the bootstrap logs `2379/2920`. The bootstrap's `storedIdentities` uses
+`seedOwnershipWhere()`, which filters on more than `authorId`, so the two
+numbers answer different questions — but 3,123 > 2,920 means the DB already
+holds MORE seed-lineage slugs than the seed dataset defines. Recorded as an
+open question rather than guessed at; it may indicate stale slugs from a
+superseded identity scheme (e.g. pre-Item-6 probe slugs without the difficulty
+segment) still sitting ACTIVE.
+
+## OWNER ACTION — the highest-value lever available today
+
+The pool is the upstream cause of everything above. Two things worth doing,
+both outside what this session can reach:
+
+1. **Raise the pooler capacity / check Supabase pool mode.** `connection
+   limit: 15` with `timeout: 20` is being exhausted by ordinary traffic plus
+   the bootstrap.
+2. **Consider `DISABLE_ASSET_BOOTSTRAP=true` temporarily** if the pool stays
+   saturated after `516bcf1` deploys. It stops the seeding/healing, so it is a
+   trade, not a fix — but a tutor that cannot answer is worse than a moat that
+   is not yet complete.
