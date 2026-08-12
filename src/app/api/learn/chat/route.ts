@@ -4297,6 +4297,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[completion-claim]', { stripped: true, practiceStillNeeded: need })
           }
           stanceViolationsHoisted = stanceVerdict.violations.map((v) => v.code)
+
+          // THE LADDER DID NOT MOVE, AND NOTHING SAYS WHY.
+          //
+          // Measured in production: a learner gave three correct answers and an
+          // explicit "yes, I am ready" across a clean session, and every turn
+          // came back phase=OBSERVE, checkCorrect=0, practiceCorrect=0. If that
+          // is real then no learner can ever reach a mastery gate, which would
+          // make every lesson uncompletable.
+          //
+          // Three candidates the existing logs cannot separate: the model never
+          // emits the SIGNAL tag; it emits it but with correctness absent; or
+          // the fold runs and the transition is gated elsewhere. This prints
+          // the tag's presence, its parsed values, and the phase either side of
+          // the fold — one line, no behaviour change. Guessing has been wrong
+          // five times in this investigation; instrumenting has been right.
+          console.log('[ladder]', {
+            signalTag: teachingSignal !== null,
+            correctness: teachingSignal?.correctness ?? null,
+            ack: lowSignalAckHoisted,
+            excursion: excursionActiveHoisted,
+            askedQuestion: askedQuestionThisTurn,
+            phaseBefore: conversationStateHoisted?.phase ?? null,
+            phaseAfter: conversationStateAfterTurnHoisted?.phase ?? null,
+            check: conversationStateAfterTurnHoisted?.correctAtCheck ?? null,
+            practice: conversationStateAfterTurnHoisted?.correctAtPractice ?? null,
+          })
         } catch (err) {
           // Fail-closed for completion: on any gate failure, strip the tag
           // rather than let an unverified completion through.
