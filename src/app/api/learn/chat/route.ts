@@ -3089,6 +3089,68 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // ── DETERMINISTIC MASTERY-GATE ASSESSMENT ──────────────────────────
+      //
+      // At CHECK and PRACTICE the ladder advances ONLY on graded correctness,
+      // and the only deterministic grader needs the turn to declare its own
+      // answer key (an MCQ). Producing that key was delegated to the model,
+      // which is under no obligation — measured by the engine sweep as E6 × 17
+      // across six topics, with 0 of 6 reaching `verified`. The prompt lever
+      // was tried first (09a25296) and did not close it.
+      //
+      // So the server selects the assessment itself, from the reviewed
+      // authored corpus it already holds, and the model writes only the
+      // lead-in. See gateAssessment.ts for the full reasoning; this block is
+      // the wiring. Returns null — and behaviour is exactly as before — when
+      // nothing authored is available, which is an honest content gap rather
+      // than a server-invented question.
+      let gateMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+      try {
+        const { isMasteryGatePhase, probeToMcq, buildGateAssessmentBlock } =
+          await import('@/lib/teaching/gateAssessment')
+        const phaseBeforeTurn = (snapshot as { conversationState?: { phase?: unknown } } | null)
+          ?.conversationState?.phase
+        // The same exclusions the memory path already applies, for the same
+        // reasons: no content into a flooded mind (foundations/04 P5), lesson
+        // one never opens with a quiz (first-lesson/02 §1), and an excursion
+        // deliberately freezes the lesson's ladder — attaching its gate
+        // question mid-excursion would ask about a concept the learner walked
+        // away from two turns ago.
+        const gateEligible =
+          isMasteryGatePhase(phaseBeforeTurn) &&
+          memoryState !== null &&
+          !recoveryKeyHoisted &&
+          !firstLessonActiveHoisted &&
+          !excursionActiveHoisted
+        if (gateEligible && memoryState) {
+          const { findBestProbe } = await import('@/lib/teaching/assets')
+          const { hasAskedMcq } = await import('@/lib/teaching/teachingHistory')
+          const history = teachingHistoryHoisted
+          const probe = await findBestProbe(memoryState, {
+            // Never re-ask a question this concept has already spent. 145 of
+            // physics's 238 concepts carry only two gradeable authored probes
+            // while closing a concept needs three graded answers, so running
+            // dry is the COMMON case, not the edge case — and running dry must
+            // hand the turn back to the model, not repeat itself.
+            excludeProbeStem: history ? (stem) => hasAskedMcq(history, stem) : undefined,
+          })
+          const converted = probe ? probeToMcq(probe) : null
+          if (converted) {
+            gateMcqHoisted = converted
+            systemPrompt += buildGateAssessmentBlock(converted)
+          }
+          console.log('[gate-assessment] ' + JSON.stringify({
+            phase: phaseBeforeTurn,
+            probeFound: probe !== null,
+            converted: converted !== null,
+            assetId: probe?.assetId ?? null,
+          }))
+        }
+      } catch (err) {
+        // A gate question is worth a turn to nobody if it costs the turn.
+        console.warn('[learn/chat] gate assessment skipped:', err)
+      }
+
       // CUE (Conversation Understanding Engine) — Milestone 1 of the
       // Educational Brain Runtime. Runs for EVERY student turn, school and
       // Library, BEFORE the response below is produced (memory-served or
@@ -3393,6 +3455,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       if (!serveLessonComplete && assembled && serveFromMemory) {
         text = assembled.text
+        // The authored probe is this turn's ACTUAL question when it is a
+        // multiple-choice item: tappable for the learner, and gradeable next
+        // turn against the authored key. It used to be appended to the asset
+        // text as prose, which no grader can read — so the one serving path
+        // holding a reviewed assessment produced no evidence from it. The
+        // route's normal MCQ plumbing (persist as pendingMcq, grade on the
+        // reply, record in TeachingHistory) takes it from here unchanged.
+        if (assembled.probeMcq) mcqHoisted = assembled.probeMcq
         provider = 'memory'
         memoryServingMode = assembled.explanationServingMode
         memoryConfidence = assembled.explanationConfidence
@@ -3549,7 +3619,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // to an ordinary typed reply rather than rendering a broken question.
       const { parseMcqTag } = await import('@/lib/teaching/mcq')
       const mcqParse = parseMcqTag(text)
-      mcqHoisted = mcqParse.mcq
+      // THE SERVER'S GATE QUESTION WINS.
+      //
+      // When the engine selected an authored assessment for this turn, that is
+      // the question the learner is being graded on, and the model was told
+      // not to write one. If it emitted a tag anyway, taking the model's would
+      // hand the learner a different question from the one the lead-in was
+      // written around — and would put an unreviewed item at the exact rung
+      // where a wrong answer key costs the learner their progress. The tag is
+      // still STRIPPED either way (mcqParse.cleanText), so nothing leaks.
+      mcqHoisted = gateMcqHoisted ?? mcqParse.mcq
       text = mcqParse.cleanText
       // P1-1: strip the TEACHING INTENT tag in the same place and for the same
       // reason — before asset capture and every other parser, so it can never

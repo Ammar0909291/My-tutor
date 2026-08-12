@@ -101,6 +101,23 @@ export interface MatchableAsset {
 
 export interface MatchOptions {
   activeMisconceptionIds?: string[]
+  /**
+   * PROBE RETRIEVAL ONLY — ignored by scoreMatch and by explanation matching.
+   *
+   * Return true for a stem that must not be selected again. Exists because the
+   * ladder needs THREE graded correct answers to close a concept (CHECK 1 +
+   * PRACTICE 2) while 145 of physics's 238 concepts carry only TWO gradeable
+   * authored probes — measured, not assumed. Without an exclusion the same
+   * best-scoring probe is returned every time and the learner is re-asked a
+   * question they have already answered, which teaches nothing and is the
+   * repeat this codebase forbids everywhere else (`hasAskedMcq`,
+   * `hasShownVisual`, `hasServedExplanation`).
+   *
+   * A predicate rather than an id list because the caller's record of "already
+   * asked" is keyed on the question fingerprint (TeachingHistory.mcqAsked), not
+   * on assetId — matching that record is the whole point.
+   */
+  excludeProbeStem?: (stem: string) => boolean
 }
 
 /**

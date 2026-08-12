@@ -20,6 +20,8 @@ import { pickBest, type MatchableAsset, type MatchOptions } from './matcher'
 import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch, type ExplanationServingMode, type ExplanationFallbackReason } from './explanationMemory'
 import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
+import { probeToMcq } from '../gateAssessment'
+import type { TutorMCQ } from '../mcq'
 
 export interface ProbeMatch {
   assetId: string
@@ -74,6 +76,11 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         console.warn(`[teachingActionRepository] refused probe ${row.assetId} for learner: ${scaffolding}`)
         return false
       })
+      // ALREADY-ASKED EXCLUSION (MatchOptions.excludeProbeStem). Applied here,
+      // before scoring, so an exhausted corpus returns null and the caller
+      // falls back rather than re-asking — never after, which would silently
+      // serve the same question with a lower confidence number attached.
+      .filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
 
     const best = pickBest(state, rows, options)
     if (best) {
@@ -221,6 +228,21 @@ export interface AssembledLesson {
   explanationExactGradeMatch: boolean
   explanationFallbackUsed: boolean
   explanationFallbackReason: ExplanationFallbackReason
+  /**
+   * The authored probe rendered as a GRADEABLE question, when it converts.
+   *
+   * Before this field, an assembled turn's probe was appended to `text` as
+   * prose ("**Quick check:** …\n\nA. …\nB. …") and nothing else. That prose is
+   * invisible to `gradeMcqAnswer` for exactly the same reason an LLM's prose
+   * question is: no declared answer key. So the one serving path that already
+   * HELD a reviewed, distractor-mapped assessment could not produce a single
+   * unit of evidence from it — the memory path's own instance of the E6 defect.
+   *
+   * Null when the authored probe is not a multiple-choice item at all
+   * (`short_answer`, `checkpoint` — 541 of the 1,652 authored probes), in which
+   * case the prose rendering is kept exactly as before.
+   */
+  probeMcq: TutorMCQ | null
 }
 
 /**
@@ -239,13 +261,18 @@ export async function assembleLesson(state: StudentState, options: MatchOptions 
   let text = explanation.content
 
   const probe = await findBestProbe(state, options)
+  let probeMcq: TutorMCQ | null = null
   if (probe) {
     usedAssetIds.push(probe.assetId)
-    text += formatProbeAsFollowUp(probe)
+    // A multiple-choice probe becomes the turn's REAL question — tappable and
+    // gradeable — so it must not also be typed into the prose, or the learner
+    // reads the same question twice and answers the ungraded copy.
+    probeMcq = probeToMcq(probe)
+    if (!probeMcq) text += formatProbeAsFollowUp(probe)
   }
 
   return {
-    text, usedAssetIds, explanationConfidence: explanation.confidence,
+    text, usedAssetIds, probeMcq, explanationConfidence: explanation.confidence,
     explanationAssetId: explanation.assetId,
     explanationServingMode: explanation.servingMode,
     explanationExactGradeMatch: explanation.exactGradeMatch,
