@@ -2682,3 +2682,88 @@ still produce no evidence at all.
    clean session. Expect an MCQ on every CHECK/PRACTICE question and
    `verified: true` at `practiceCorrect >= 2`.
 3. Topic 3 → VERIFIED + moat, then Topic 4 `phys.meas.significant-figures`.
+
+---
+
+# ITERATION — E6 CLOSED AT THE CODE LEVEL (`c40c216a`)
+
+## The blocker, restated exactly
+The parallel sweep (`843063cc`) measured, over six physics topics on real
+production: **E6 × 17** — a question asked at CHECK or PRACTICE carrying no MCQ
+tag — and **0 of 6 topics reached `verified`**. Nothing behind that gate could
+move, so this one defect blocked every topic in the corpus audit and therefore
+all moat production behind it.
+
+## The mechanism — a contradiction the runtime had been living with
+- CHECK and PRACTICE advance ONLY on graded correctness (`correctAtCheck` /
+  `correctAtPractice`, `conversationState.ts`).
+- The only deterministic grader (`gradeMcqAnswer`) needs the previous turn to
+  have declared its own answer key — an MCQ tag.
+- Producing that tag was **delegated to the LLM**, which is under no obligation.
+
+So the server REQUIRED machine-readable evidence and DELEGATED its production to
+a component that could decline. When it declined — routinely — the learner
+answered a perfectly good prose question and the gate stayed shut however well
+they did.
+
+## The prompt lever was tried FIRST, and is not what fixed it
+`09a25296` added `buildMcqInstruction({ atMasteryGate: true })`: the requirement
+in capitals, with the consequence spelled out ("cannot be recorded", "cannot
+advance"). **The sweep after it still found E6 × 17.** A format the ladder's
+correctness depends on cannot be a request. Recorded here because the audit's
+own standing rule is that a prompt rule is the right lever for a FORMAT and the
+wrong one for a PROPERTY — this was the case that showed the line is not where
+that rule assumed it was.
+
+## The fix — the server selects the assessment from the moat
+The assessment already existed, reviewed: `AUTHORED_PROBES` carries 1,652
+authored probes, physics covering **all 238 concepts**, each with
+distractor-mapped `choices[].isCorrect`. `findBestProbe` could retrieve them all
+along. Nothing had ever turned one into the turn's ACTUAL question —
+`assembleLesson` appended it as prose (`**Quick check:** …\nA. …`), which is
+unreadable to the grader for exactly the same reason a prose LLM question is.
+
+- `src/lib/teaching/gateAssessment.ts` — `probeToMcq()` converts an authored
+  probe, and **refuses** anything it cannot grade honestly: 2–4 options, exactly
+  one key, no duplicate or empty option text. Every rule mirrors one
+  `parseMcqTag` already enforces, so a server-selected question is never
+  admitted on weaker terms than a generated one.
+  `correctValue` is deliberately NOT consulted: the real row for
+  `phys.meas.units` holds `"kelvin"` while its choice reads `"kelvin (K)"`, so
+  matching it would be a similarity guess about which answer is right.
+- `route.ts` — at a gate phase the probe is resolved PRE-LLM, attached as the
+  turn's MCQ, and the model is told to write the lead-in only. The server's
+  question wins over a model tag emitted anyway: an unreviewed item must not sit
+  at the rung where a wrong answer key costs the learner their progress.
+- `assembleLesson` now returns `probeMcq`, so the memory path's own reviewed
+  probe becomes gradeable instead of ungradeable prose — the memory path's own
+  instance of E6, found while fixing the LLM path's.
+- `MatchOptions.excludeProbeStem` stops the same question being re-asked.
+
+## A DEFECT PREDICTED AND BUILT AROUND, not shipped
+Measured against the real seed corpus while writing the fix: closing a concept
+needs **three** graded correct answers (CHECK 1 + PRACTICE 2), and the physics
+gradeable-probe histogram is **`{2 probes: 145 concepts, 3: 60, 4: 33}`** —
+**145 of 238 concepts (61%) run out of distinct authored assessments before the
+gate closes.** Without an exclusion the same probe would have been served again;
+with it, the corpus runs dry and the turn falls back to the model.
+
+That is a **content** gap (author a third probe), not a code one, and it is
+pinned as a maximum in `gateAssessmentIsServerOwned.test.ts` so authoring more
+can never fail the test while losing them will.
+
+## Scope honestly stated
+- Physics and English are ACTIVE authored content, so the deterministic path
+  fires there. **Chemistry's 744 rows are DRAFT** and biology/CS are zero, so
+  chemistry will run the fallback path end to end — every fix in this audit so
+  far was measured on the "asset present" path.
+- Validation: suite 307 files / 6,575 passed / 9 skipped; `tsc` clean; build
+  clean. **Not yet verified on production** — deployment `dpl_8MsJ6dxy…` was
+  still BUILDING when this entry was written.
+
+## NEXT EXACT ACTION
+1. **Retry the BLOCKED queue** (B-1…B-4), log the attempt.
+2. Confirm `c40c216a` READY, then **re-run the sweep** and require
+   `E6 = 0` and topics reaching `verified` before any topic work resumes.
+3. Topic 3 `phys.meas.errors` → VERIFIED + moat; then Topic 4
+   `phys.meas.significant-figures`.
