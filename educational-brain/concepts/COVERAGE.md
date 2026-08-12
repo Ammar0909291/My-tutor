@@ -11,7 +11,7 @@ and this file's summary row should be corrected to match.
 
 | Subject | KG concepts | Entries authored | Coverage |
 |---|---|---|---|
-| mathematics | 908 | 245 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). Remaining: 663 concepts across 20 unstarted domains; `math.alg` (0/59) is the next campaign. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
+| mathematics | 908 | 245 | **Four domains CERTIFIED.** 82 `math.found.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 58 `math.arith.*` (COMPLETE, DOMAIN CERTIFIED 2026-07-26) + 69 `math.geom.*` (**COMPLETE, DOMAIN CERTIFIED** — the final 13 entries were restored by commit `0d2c76dd`'s Wave 0 recovery, which this row previously did not reflect) + 36 `math.nt.*` (**COMPLETE, DOMAIN CERTIFIED 2026-08-12** — the domain's final 8 concepts, `prime-distribution`, `continued-fractions`, `analytic-number-theory`, `prime-number-theorem`, `riemann-hypothesis`, `algebraic-number-theory`, `algebraic-integers`, `number-fields`, were authored this session, ending the PARKED status this row previously recorded). 11 `math.alg.*` (**IN PROGRESS, 11/59** — Wave 1 authored 2026-08-12: `expression`, `equation`, `term`, `coefficient`, `exponent-rules`, `polynomial`, `degree`, `zero-exponent`, `negative-exponent`, `solution-set`, `inequality`; all Blueprint-grounded, reused by reference). Remaining: 652 concepts across 19 unstarted domains plus math.alg's remaining 48. All confirmed Quality Gate 3 heading-scheme violations found by this program have been repaired — 0 known violations remain in mathematics. See Delivery history for full per-concept lists and misconception detail. |
 | physics | 238 | 238 | **100% COMPLETE (2026-07-23).** pre-existing 67 (TEMPLATE.md-era) + 12 Wave 6 + 25 Wave 7 + 15 Wave 8 + 16 Wave 9 + 9 Wave 10 + 11 Wave 11 + 8 Wave 12 + 6 Wave 13 + 10 Wave 14 + 9 Wave 15 + 7 Wave 16 + 12 Wave 17 + 8 Wave 18 + 8 Wave 19 + 5 Wave 20 + 5 Wave 21 + 2 Wave 22 + 2 Wave 23 + 1 Wave 24 (FINAL): `phys.mod.diode-rectification` — every physics KG concept now has a full Educational Brain entry; see Delivery history for the full pre-existing-67, Wave-6 through Wave-23 name lists |
 | english | 216 | 216 | **100% COMPLETE (2026-08-11).** 212/216 through Batch 29 (full per-batch narrative in git commit messages and prior revisions of this file), plus Batch 30 — FINAL BATCH (4, autonomous /loop, level-30 frontier BATCH COMPLETE: `eng.communication.professional-communication`, `eng.communication.presentation-design`, `eng.communication.editing-for-publication`, `eng.communication.negotiation-language` — the last of these the English KG's final terminal node). Every English KG concept now has a full 21-section Educational Brain entry. English is the fourth subject to reach 100% Educational Brain coverage, after physics and chemistry (both 2026-07-23/26) and mathematics (domain-by-domain, ongoing). |
 | chemistry | 186 | 186 | **100% COMPLETE (2026-07-26).** Completion Loop 2026-07-25/26, batch 5 of 5: chem.poly.condensation, natural, biodegradable, properties authored, closing chem.poly to 5/5 (chem.poly.addition was already covered). Batches 1-4 closed chem.alc (6/6), chem.carb (7/7), chem.nitro (5/5), chem.bio (6/6) in that order. Every Chemistry KG concept now has a full 21-section Educational Brain entry, a fully authored 16-section Blueprint (`docs/curriculum/blueprints/chem.*.md`), and an authored Teaching Asset (`docs/chemistry/teaching-assets/assets.json`, status draft) — the stale 2026-07-23 note below claiming all-placeholder Blueprint content is corrected here. **Known bookkeeping gap (not corrected this batch):** `EDUCATIONAL_BRAIN_INDEX.md`, `AUTHORING_QUEUE.md`, and `QUALITY.md` were not regenerated for the 21 chemistry entries authored 2026-07-25/26 (chem.alc.epoxides/protection, chem.carb.ketones/carboxylic/alpha-reactions/derivatives/spectro/named-reactions, chem.nitro.amino-acids/diazonium/heterocycles, chem.bio.proteins/carbohydrates/lipids/enzyme-kinetics/nucleic-acids/vitamins, chem.poly.condensation/natural/biodegradable/properties) — those three registry files still show chemistry as 165/186 and should be regenerated from source in a future pass, per `PRODUCTION_PIPELINE.md`'s workflow. |
@@ -53,6 +53,37 @@ retrieval engine. Per-entry completeness against the tracked fields is in
 
 ## Delivery history
 
+- **Mathematics Phase 2 — `math.alg` Wave 1** (2026-08-12, batch 2 of the mathematics-completion
+  session). Authored the 11 concepts occupying topological levels 0–2 of the `math.alg` dependency
+  graph, computed programmatically from the live KG rather than chosen by hand: level 0 —
+  `expression`; level 1 — `equation`, `term`, `exponent-rules`, `polynomial`; level 2 —
+  `coefficient`, `degree`, `inequality`, `solution-set`, `zero-exponent`, `negative-exponent`.
+  (`binomial-theorem` and `exponential-function` are also level 2 but were deferred: each has an
+  out-of-domain unauthored prerequisite — `math.disc.combinations` and `math.func.function-concept`
+  respectively — and neither is a bounded excursion.) All 11 have existing Blueprints, all reused
+  by reference: misconception registries cited by ID with birth-type classification added, worked
+  examples / teaching-action scripts / mastery-gate item sets never restated.
+  **One domain-level Curriculum Feedback finding, recorded six times across the batch and
+  consolidated here rather than repeated as six defects**: `math.alg` repeatedly pairs a large
+  parent node with one or more small child nodes whose content the parent's own Blueprint already
+  teaches in full — `exponent-rules` (6h) against `zero-exponent`/`negative-exponent`/
+  `fractional-exponent` (1–2h each); `polynomial` (10h) against `degree` (1h); `equation` (4h)
+  against `solution-set` (2h); `inequality` against `inequality-1var`. In every case the Blueprints
+  resolve the overlap sensibly in prose (parent derives, child owns edge cases and a narrower
+  Bloom target), and in every case the division is invisible from the KG descriptions alone, so a
+  reader of the KG would judge the child nodes redundant. Recommended to the Curriculum Production
+  Pipeline as a domain-wide description review. Two further findings: `math.alg.term` lists
+  `unlocks: []` while `math.alg.coefficient` lists `requires: ['math.alg.term']`, breaking the
+  requires/unlocks mirror this graph otherwise maintains; and `cross_links: []` on
+  `exponent-rules`, `negative-exponent` and `inequality` is a genuine omission rather than an
+  accurate emptiness — negative exponents are the notation of every derived physical unit, and the
+  strict/non-strict inequality distinction is the off-by-one bug class in computing. None fixed;
+  no KG file was modified. Mathematics 245 → **256/908**; `math.alg` 0/59 → **11/59, IN PROGRESS**.
+  Validation: 256 EB files, 0 orphans, 0 duplicates, 0 unresolvable filenames, 0 Quality Gate 3
+  violations across all `math.alg` entries; `npx tsc --noEmit` clean; full suite 304 files / 6,536
+  passed / 9 skipped (one intermittent failure appeared on a single run and did not reproduce
+  across two subsequent full runs — recorded honestly rather than suppressed). No KG file, no
+  non-mathematics content, and no runtime code touched.
 - **Mathematics Phase 1 — `math.nt` tail, DOMAIN CERTIFIED** (2026-08-12, batch 1
   of the mathematics-completion session). Reconciliation first, per instruction:
   every branch whose name begins `math`/`mathematics` was compared by *content*
