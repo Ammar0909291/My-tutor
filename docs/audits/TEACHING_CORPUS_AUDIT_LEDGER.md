@@ -980,3 +980,68 @@ The served text is the stronger evidence, and it says the same thing.)*
    not a redesign.
 3. Re-verify Topic 1's probe 2 with enforcement genuinely on, then continue
    Topic 2 to Mastery.
+
+## Diagnostic result — my hypothesis was WRONG, and three live findings
+
+`3bce247e`'s instrumentation answered the open question, and not the way I
+predicted.
+
+```
+[affirm-guard-scope] { outputVerifierFlag: false, verifierMode: 'off' }
+[affirm-guard-scope] { branch: 'unconditional', considered: true, violated: false }
+```
+
+**`outputVerifier` is FALSE.** My recorded hypothesis — "the full gate is
+running in shadow mode, so the floor never executes" — is **disproved**. The
+floor was running all along, considered the turns, and returned no violation.
+The `else`-placement was still a genuine latent bug and the unconditional move
+(`e4a5c3c6`) is still correct, but it was not the cause. Recorded as a wrong
+call of mine, in full, rather than quietly dropped.
+
+Why no violation on my turn is still unresolved: **these log entries are not my
+traffic.** They belong to `userId 1c0a7181-…`, subject `english`, concept
+`eng.phonics.print-concepts` — a different account.
+
+### FINDING 1 — there is another live learner on this production app, right now
+
+Real turns, real teaching, concurrent with my audit. Consequences:
+- my audit shares a database and a provider quota with real usage;
+- my earlier "two users, and the heavier half was me" note about the pool
+  incident was right, and this is the other user;
+- **a dedicated audit account is now more than hygiene.** Recorded again.
+
+### FINDING 2 — the database is degraded AGAIN, and it is hitting that learner
+
+Repeated in their turns, not mine:
+```
+prisma:error Invalid `prisma.spineEvent.create()`   → P1008 Socket timeout
+[evidence-spine] append failed: … P1008
+prisma:error Invalid `prisma.studentProgress.upsert()` → P1008 Socket timeout
+[instrumentation] asset bootstrap DB error … P1008
+```
+Their teaching turns still completed (the route degrades gracefully) but their
+**progress writes and evidence writes are failing**. This is the same P1008
+class as the earlier outage, so it is recurrent, not a one-off. It needs an
+owner with Supabase/pooler access — this session has none.
+
+### FINDING 3 — a real Brain compliance violation in their session
+
+```
+BRAIN COMPLIANCE VIOLATION: Brain directed ASK_DIAGNOSTIC_QUESTION
+(rule D4-PLACEMENT-PROBE) but the response asked no question
+```
+Twice, during placement verification. The Brain decided to probe; the model
+answered without a question, so placement cannot converge. Logged by the
+runtime's own compliance checker — this is the system correctly reporting that
+its directive was ignored. Worth a dedicated fix; it is a directive-adherence
+defect of the same family as the affirmation problem.
+
+### NEXT EXACT ACTION
+1. Re-run the Topic 2 "area … right?" turn and read `[affirm-guard-scope]`
+   filtered to MY session id, to learn why `violated: false` there when the
+   same strings reject offline. Likely `cleanText` differs from what the API
+   returns (tags stripped later), which would mean the guard inspects a
+   different string than I tested — a real bug if so.
+2. Then Topic 2 to Mastery.
+3. Escalated to owner (not blocking my loop): DB P1008 recurrence affecting a
+   real learner; D4-PLACEMENT-PROBE compliance violations.
