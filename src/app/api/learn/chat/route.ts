@@ -3960,13 +3960,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // in an explicit refusal to agree. Deterministic, correct by
                 // construction (it asserts only what the curriculum asserts),
                 // and it carries the distinction the drafts kept missing.
+                // WHAT IS SPOKEN HERE IS NOT WHAT IS PROMPTED.
+                //
+                // The blueprint spine is written for an AUTHOR. Its best case
+                // is a real definition; its ordinary case is a mastery rubric
+                // ("[Boundary statement] A student who achieves mastery
+                // demonstrates: 1. Assigns the dimensional formula…"), and its
+                // worst case — measured on a real learner — was an unfenced
+                // `concept_id: … bloom: … mastery_threshold: …` profile block
+                // read out verbatim. The loader now refuses the metadata case
+                // outright; the rubric case is still wrong to SAY.
+                //
+                // The Knowledge Graph description is the one place the
+                // curriculum states a concept in a single learner-facing
+                // sentence, for all 1,775 concepts. It leads; the spine backs
+                // it up; anything that does not read as prose is refused and
+                // the generic template takes over.
+                const readsAsProse = (t: string): boolean => {
+                  const s = t.trim()
+                  if (s.length < 25 || s.length > 400) return false
+                  if (/^[[(]/.test(s)) return false          // "[Boundary statement] …"
+                  if (/^\s*\d+[.)]\s/.test(s)) return false  // a numbered rubric item
+                  return true
+                }
                 let spine: string | null = null
+                const cid = teachingConceptIdForRepair
                 try {
-                  const { loadBlueprintContent } = await import('@/lib/curriculum/blueprintLoader')
-                  const cid = teachingConceptIdForRepair
                   if (cid) {
+                    const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+                    const desc = getKGNode(cid)?.description?.trim()
+                    if (desc && readsAsProse(desc)) spine = desc
+                  }
+                } catch { /* fall through to the blueprint */ }
+                try {
+                  const { loadBlueprintContent, looksLikeMetadata } =
+                    await import('@/lib/curriculum/blueprintLoader')
+                  if (!spine && cid) {
                     const bp = loadBlueprintContent(cid)
-                    if (bp.found) spine = bp.content.conceptSpine?.definition ?? null
+                    const d = bp.found ? bp.content.conceptSpine?.definition ?? null : null
+                    if (d && !looksLikeMetadata(d) && readsAsProse(d)) spine = d
                   }
                 } catch { /* fall through to the generic template */ }
 

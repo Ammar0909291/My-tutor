@@ -750,6 +750,31 @@ function extractExplanationProse(body: string, sectionTitle: string): Explanatio
 
 // ── Concept spine extraction ──────────────────────────────────────────────────
 
+/**
+ * Internal authoring keys that never belong in learner-facing prose. Any one of
+ * them settles the question on its own; the generic `key: value` count below is
+ * for profile blocks that use none of them.
+ */
+const AUTHORING_KEYS =
+  /\b(concept_id|mastery_threshold|estimated_hours|cpa_entry_stage|session_ta_cap|session_cap|cross_links|bloom|prerequisites)[ \t]*:/i
+
+/**
+ * True when a candidate definition is an authoring metadata block rather than
+ * a sentence about the concept.
+ *
+ * Measured, not guessed: 77 of 1,347 blueprints open their spine section with
+ * an unfenced `key: value` profile, and one of them reached a learner verbatim.
+ */
+export function looksLikeMetadata(text: string): boolean {
+  const t = text.trim()
+  if (!t) return false
+  if (AUTHORING_KEYS.test(t)) return true
+  // Three or more `word:` tokens with no sentence ever ending: a record, not
+  // prose. Two is left alone — "Definition: X. Note: Y." is a real sentence.
+  const keys = (t.match(/(?:^|[\s])[A-Za-z_][A-Za-z0-9_]{2,30}[ \t]*:/g) ?? []).length
+  return keys >= 3 && !/[.!?]\s/.test(t)
+}
+
 const DEFINITION_ALIASES = ['one sentence definition', 'core claim', 'core idea', 'definition', 'concept statement']
 const WHY_ALIASES = ['why it matters', 'the core insight', 'core insight', 'significance', 'key vocabulary']
 
@@ -803,12 +828,26 @@ function extractSpine(sections: BlueprintSection[]): ConceptSpine | null {
       // Paragraph fallback. Sub-headings are stripped rather than skipped so a
       // section that opens with "### Target Knowledge State" still yields its
       // prose instead of falling through to nothing.
+      //
+      // Metadata paragraphs are SKIPPED rather than accepted. 77 blueprints
+      // open their spine section with an UNFENCED `key: value` profile block —
+      // no ``` fence, so the YAML branch above never sees it, and no leading
+      // `|`, so this filter used to admit it. The result was served verbatim
+      // to a real learner as the concept's definition:
+      //   "concept_id: phys.meas.dimensions name: Dimensional Analysis
+      //    domain: … bloom: apply mastery_threshold: 0.75 …"
+      // Skipping lets the loop fall through to the next spine section, whose
+      // prose is what the definition was always meant to be.
       const para = s.body
         .split(/\n\s*\n/)
         .map(p => p.replace(/^(?:[ \t]*#{1,6}[^\n]*\n)+/, '').trim())
-        .find(p => p.length > 20 && !p.startsWith('|') && !p.startsWith('```'))
+        .find(p => p.length > 20 && !p.startsWith('|') && !p.startsWith('```') && !looksLikeMetadata(p))
       if (para) definition = para.replace(/\s+/g, ' ').slice(0, 400)
     }
+
+    // Defence in depth: an explicit definition FIELD can carry metadata too
+    // (a blueprint whose `definition:` line is part of the profile block).
+    if (definition && looksLikeMetadata(definition)) definition = ''
 
     const whyItMatters = readField(s.body, WHY_ALIASES)
     const quantitiesTable = /(\|[^\n]+\|\n\|[-| :]+\|\n(?:\|[^\n]+\|\n?)+)/.exec(s.body)?.[1]?.trim() ?? null
