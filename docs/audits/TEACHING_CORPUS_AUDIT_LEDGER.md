@@ -2236,3 +2236,87 @@ failure, a figure on screen that the words never refer to.
    the average) — both authored, neither yet exercised.
 3. Owner queue, unchanged: deprecate `f22e5673-…` (blocks Topic 2); survey the
    1,589 ACTIVE explanation rows; recurrent Prisma P1008.
+
+---
+
+# 🔴 P0 — THE TUTOR WAS TOLD A WRONG ANSWER WAS RIGHT (`17b5035c`)
+
+Topic 3, real production. Probed EB **M2** (random vs systematic treated as
+interchangeable) by answering the tutor's own MCQ **wrong**, on purpose.
+
+> Q: "What does taking the average of multiple measurements actually help
+> reduce?"
+> me: **"Systematic errors and calibration flaws"** — flatly wrong; averaging
+> reduces RANDOM error. This IS M2.
+>
+> tutor: *"Claude, you noticed that systematic errors are tied to calibration
+> flaws. So you are saying that a calibration flaw causes a systematic error —
+> have I got that right?"*
+
+No correction. It extracted a true-but-irrelevant fragment of the wrong answer,
+affirmed **that**, and asked the learner to confirm a restatement. **A learner
+leaves that turn believing they were correct**, having just demonstrated the
+exact misconception the curriculum authored a repair for.
+
+## Two authorities inside one turn, disagreeing
+
+```
+[mcq-grade] { chosen: 1, correct: false }
+[ladder]    { correctness: false, phaseBefore: 'CHECK', phaseAfter: 'GUIDE' }
+```
+```
+CUE decision = ADVANCE_DIFFICULTY (D6-MASTERY-ADVANCE)
+rationale: "Correct AND confident with no failures banked this session"
+conversation decision = SUCCESS
+```
+
+The server graded it wrong, the ladder demoted — and the decision layer told
+the tutor the learner was **correct and confident** and to **raise the demand**.
+The tutor did exactly what it was told.
+
+## Cause
+
+`lastSignal` is the PREVIOUS turn's signal, and it was the only evidence this
+layer had. Invisible while no reliable per-turn signal existed at all — the
+model never emits `<!--SIGNAL-->`, which is why deterministic grading was added
+two commits ago. **That grade reached the LADDER and not the DECISION.** My own
+fix was half-wired, and this is the half that talks to the tutor.
+
+## Fix, measured
+
+This turn's grade now outranks the snapshot's. `ADVANCE_DIFFICULTY` becomes
+**`DETECT_MISCONCEPTION` / `D2b-CONFIDENT-WRONG`** — the rule written for exactly
+this case, routing *into* misconception repair instead of away from it.
+
+Bounded: the override applies only when the grade RESOLVED. `null` means "not
+gradeable", never "wrong", so free-text turns fall through unchanged and a
+correct answer still reads as progressing. The failing case is kept as a test
+rather than deleted — it is the evidence the fix targets the right input.
+
+## Also confirmed this run (pre-fix baseline)
+
+- **EB M1** (*"error means mistake"*) and **EB M4** (*"the average is the true
+  value"*) were both repaired correctly and in everyday language. M4's repair
+  even named the systematic-error reason and pivoted to a question designed to
+  discriminate M2 — the authored progression working.
+- The held-figure re-description continued: turn 7 still restated "9.5 to 10.5".
+  `77acd810` was still building at the time, so this is a clean pre-fix baseline
+  rather than a failure of the fix.
+
+| status | value |
+|--------|-------|
+| VERIFIED | 1 — `phys.meas.units` |
+| BLOCKED (owner) | 1 — `phys.meas.dimensions` |
+| IN PROGRESS | 1 — `phys.meas.errors` |
+| REMAINING | 421 |
+| Global fixes this run | 24 |
+
+## NEXT EXACT ACTION
+1. Confirm `77acd810` + `17b5035c` READY.
+2. Clean session on Topic 3 and re-run BOTH:
+   - the M2 wrong answer → expect an explicit correction and a repair move,
+     not a paraphrase-back;
+   - count held-figure turns that restate the range → expect one introduction.
+3. Then Topic 3 to its mastery gate → VERIFIED + moat, then Topic 4.
+4. Owner queue unchanged: deprecate `f22e5673-…`; survey the 1,589 ACTIVE
+   explanation rows; recurrent Prisma P1008.
