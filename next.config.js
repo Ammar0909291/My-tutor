@@ -23,7 +23,36 @@ const nextConfig = {
     // in production → /api/curriculum returns 500 → English/Math/Physics/etc.
     // curriculum shows "No structured lesson plan for this subject yet."
     outputFileTracingIncludes: {
-      '/**': ['./docs/**/*.json'],
+      // THE AUTHORED TEACHING KNOWLEDGE MUST SHIP, NOT JUST THE GRAPHS.
+      //
+      // This list was `['./docs/**/*.json']` — JSON only. The Knowledge Graphs
+      // are JSON, so they shipped and worked. But every hand-authored teaching
+      // file is MARKDOWN:
+      //
+      //   docs/curriculum/blueprints/*.md      (962 files)
+      //   educational-brain/concepts/**/*.md   (424+ files)
+      //
+      // Neither matched, so neither was traced into the serverless bundle, so
+      // `blueprintLoader`'s readFileSync calls hit ENOENT in production and
+      // returned "not found" for EVERY concept. The consequence is not subtle:
+      // the BLUEPRINT CONTEXT block, the KNOWN MISCONCEPTIONS list, the
+      // never-confirm rule, opening scenarios, teaching sequences, tutor
+      // actions and anti-analogies have never once reached a production prompt.
+      // Locally they all load, which is why this survived so long.
+      //
+      // Measured, on a real learner turn:
+      //   [affirm-guard-known] { conceptId: 'phys.meas.dimensions',
+      //                          knownChars: 0 }
+      // against 555 characters for the same concept in-process.
+      //
+      // Scoped to the two directories that are actually read at runtime rather
+      // than a blanket `**/*.md`, so the function does not carry every README
+      // and ADR in the repository.
+      '/**': [
+        './docs/**/*.json',
+        './docs/curriculum/blueprints/**/*.md',
+        './educational-brain/concepts/**/*.md',
+      ],
     },
   },
   images: {
