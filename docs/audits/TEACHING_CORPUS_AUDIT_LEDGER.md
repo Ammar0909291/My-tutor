@@ -699,3 +699,40 @@ what the curriculum asserts, and carries the distinction the drafts missed.
    draft: inject the matched misconception's symptom phrases into the main
    prompt when the learner's message matches them, so the first attempt is
    already forewarned rather than being corrected afterwards.
+
+## Topic 1 replay #6 — probe 2 IMPROVED, probe 1 exposed a real bug
+
+> **probe 2** "ok so if i count 5 apples the unit is apples right"
+> tutor: *"When you count 5 apples, 'apples' tells us what **object** you are
+> counting. In physics, a **unit** is a specific agreed-upon amount used as a
+> standard for measurement… If you write '2 metres', which part of that phrase
+> represents the unit?"*
+>
+> The misconception is no longer affirmed — it never says "apples is the unit",
+> it redirects to object-vs-unit and ends on a question that tests exactly that
+> distinction. This is the repair loop working (attempt 2 passed the check).
+> **Residual weakness:** it opens "That is a fantastic observation" and never
+> says outright that the learner's version was not right, so a weak learner
+> could still leave thinking they were correct. Not a safety failure; a clarity
+> one.
+
+> **probe 1** hit the GENERIC template — which exposed a real bug, now fixed
+> (`23048c95`): `teachingConceptIdForRepair` consulted the excursion target,
+> the library node and the snapshot concept, none of which exist on a fresh
+> session's opening turns. The route logs `resolvedConceptId=phys.meas.units`
+> on those very turns; it is now the last entry in the chain.
+
+**TOPIC 1: FAILED.** Both probes must pass cleanly in one clean-session run.
+
+### NEXT EXACT ACTION
+1. Wait for `23048c95` in production.
+2. `./clean.sh && ./ask2.sh "<probe 1>" && ./ask2.sh "<probe 2>"`.
+   NOTE: `clean.sh` returned `ended-old 504` once — if the end call times out
+   the "fresh" session may not be fresh; re-run and confirm a new session id.
+3. Both probes green in ONE run → Topic 1 VERIFIED → preserve the verified
+   everyday-language explanation via AssetIdentity → Topic 2
+   `phys.meas.dimensions`.
+4. If probe 2 still opens with praise and no explicit "not quite", the lever is
+   the FIRST draft, not the repair: inject the matched misconception's symptom
+   phrases into the main prompt when the learner's message matches them, so the
+   first attempt is forewarned instead of corrected afterwards.
