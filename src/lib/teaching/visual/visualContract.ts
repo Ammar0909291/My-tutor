@@ -230,6 +230,47 @@ export function buildVisualContractBlock(
   const semanticsBlock = buildSemanticsBlock(semantics)
   if (semanticsBlock) lines.push('WHAT THE LEARNER SEES: ' + semanticsBlock)
 
+  // ── ALREADY INTRODUCED ────────────────────────────────────────────────────
+  //
+  // Everything above tells the tutor what is on screen and instructs it to
+  // refer to the figure by its real elements. That is correct — and on a HELD
+  // figure it fires again, identically, every turn. Measured across six
+  // consecutive production turns on `phys.meas.errors`, five re-described the
+  // same figure with its full numeric range:
+  //
+  //   "Look at the number line on your screen showing the measurement range
+  //    from 9.5 to 10.5 with marks at 9.8 and 10.2."
+  //   "…just like the spread you see between 9.8 and 10.2 on the number line
+  //    on your screen."
+  //   "Think about the number line on your screen showing the measurement
+  //    range with points at 9.8 and 10.2 around a true value of 10.0."
+  //   "Let's look at the number line on your screen showing the measurement
+  //    range from 9.5 to 10.5 with points at 9.8 and 10.2."
+  //   "…let's test that idea using the number line on your screen where the
+  //    measurement range spans from 9.5 to 10.5."
+  //
+  // Nothing there is false, so no fabrication rule catches it. It is a
+  // TEACHING defect: a learner reading at intermediate level spends their
+  // limited attention re-reading a description they already have, and a tutor
+  // that re-introduces the same picture every turn reads as one that has
+  // forgotten it already did.
+  //
+  // The contract had no notion of a SECOND turn with the same figure. It does
+  // now, from state the engine already keeps: `session.turns` is the held
+  // count, 0 on the turn a figure first appears.
+  const heldTurns = decision.session?.turns ?? 0
+  if (heldTurns > 0) {
+    lines.push(
+      'ALREADY INTRODUCED: the learner has had this figure in front of them ' +
+      'for the whole exchange — you introduced it earlier. Do NOT re-introduce ' +
+      'or re-describe it, and do NOT restate its ranges, values or labels that ' +
+      'you have already given. Point at the ONE part you are using right now, ' +
+      'in a few words ("the gap between 9.8 and 10.2"), and spend the rest of ' +
+      'the turn on new teaching. The rules above still bind every element you ' +
+      'do name.',
+    )
+  }
+
   const referenceRule = semantics.elements.length
     ? '(4) Refer to the figure by its REAL elements, named above, and by those ' +
       'only. Never mention a colour, label, axis, arrow or object that is not ' +
