@@ -168,12 +168,11 @@ describe('the authored corpus actually converts', () => {
     }
     const short = [...counts.values()].filter((n) => n < 3).length
     // Pinned as a MAXIMUM: authoring more probes must never fail this test,
-    // losing them must. Ratcheted 145 -> 139 when a third gradeable MCQ was
-    // authored for the six phys.mech concepts the audit reaches next
-    // (newtons-first-law, kinetic-energy, potential-energy,
-    // conservation-of-momentum, conservation-of-angular-momentum,
-    // kinematics-2d). Tighten this number whenever more are authored.
-    expect(short).toBeLessThanOrEqual(139)
+    // losing them must. Ratcheted 145 -> 139 (six phys.mech concepts) -> 131
+    // (five phys.therm: carnot-cycle, entropy, heat-engines, refrigerators,
+    // third-law; three phys.wave: beats, forced-oscillations, interference).
+    // Tighten this number whenever more are authored.
+    expect(short).toBeLessThanOrEqual(131)
     expect(counts.size).toBe(conceptsWithGradeable.size)
   })
 })

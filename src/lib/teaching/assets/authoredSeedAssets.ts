@@ -45337,6 +45337,26 @@ const ENTR_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ENTR}:MC-MUST-USE-ACTUAL-PATH`],
     source: `${ENTR_SRC} — Component 8 Retrieval Schedule, offset_days 14 (P4-d)`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on CARN_ASSESS_PROBES. The blueprint's
+    // P4-b ΔS = Q/T method run in the NEGATIVE direction, so the trapped
+    // distractor is the authored "entropy always increases" misconception.
+    // Rung DEVELOPING — mcq/HIGH is free there (PROFICIENT is taken).
+    conceptId: ENTR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: 6,000 J of heat is REMOVED from a large block held at a constant 300 K. What is the entropy change OF THE BLOCK?',
+    choices: [
+      { text: '−20 J/K — the block loses entropy, because Q is negative for it', isCorrect: true },
+      { text: '+20 J/K — entropy always increases, so it cannot be negative', isCorrect: false, misconceptionId: `${ENTR}:MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM` },
+      { text: '0 J/K — the temperature never changed', isCorrect: false },
+    ],
+    correctValue: '−20 J/K — ΔS = Q/T = (−6,000)/300; the SECOND LAW constrains the entropy of the universe, not of one system',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ENTR}:MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM`],
+    source: `${ENTR_SRC} — Component 4 Practice Set P4-b method; MC-ENTROPY-ALWAYS-INCREASES-FOR-EVERY-SYSTEM distractor`,
+  },
 ]
 
 const HENG_ASSESS_PROBES: SeedProbe[] = [
@@ -45394,6 +45414,26 @@ const HENG_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [],
     source: `${HENG_SRC} — Component 8 Retrieval Schedule, offset_days 14 (P4-e)`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on CARN_ASSESS_PROBES. Rebuilds the
+    // blueprint's own two-way efficiency check (W/Q_H vs 1 − Q_C/Q_H) with
+    // fresh numbers; the distractor is the authored "ratio, not a simple
+    // subtraction" error. Rung PROFICIENT — DEVELOPING is taken.
+    conceptId: HENG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A heat engine absorbs Q_H = 1000 J from the hot reservoir and rejects Q_C = 600 J to the cold one. What is its efficiency?',
+    choices: [
+      { text: '40% — W = 1000 − 600 = 400 J, and η = 400/1000', isCorrect: true },
+      { text: '60% — that is Q_C/Q_H, the fraction wasted', isCorrect: false, misconceptionId: `${HENG}:MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE` },
+      { text: '400 J — the work output is the efficiency', isCorrect: false, misconceptionId: `${HENG}:MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE` },
+    ],
+    correctValue: '40% — both routes agree: W/Q_H = 400/1000 and 1 − Q_C/Q_H = 1 − 0.60; efficiency is a ratio and is dimensionless',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HENG}:MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE`],
+    source: `${HENG_SRC} — MC-EFFICIENCY-EQUALS-ONE-MINUS-WASTE Conflict Evidence [P28] (two-way check)`,
   },
 ]
 
@@ -45453,6 +45493,27 @@ const CARN_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [],
     source: `${CARN_SRC} — Component 4 Practice Set P4-f`,
   },
+  {
+    // THIRD gradeable MCQ. A concept closes on three graded correct answers
+    // (CHECK 1 + PRACTICE 2); this concept carried two, so the corpus ran dry
+    // at the last gate. PRACTICE item: the blueprint's own P4-b method with
+    // fresh numbers, with the Celsius error as the trapped distractor.
+    // Rung PROFICIENT — mcq/HIGH is free there (DEVELOPING is taken).
+    conceptId: CARN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A Carnot engine runs between a hot reservoir at 227°C and a cold reservoir at 27°C. What is its efficiency?',
+    choices: [
+      { text: '40% — convert to kelvin first: 1 − 300/500', isCorrect: true },
+      { text: '88% — 1 − 27/227, using the Celsius values directly', isCorrect: false, misconceptionId: `${CARN}:MC-CARNOT-EFFICIENCY-USES-CELSIUS` },
+      { text: '60% — the ratio 300/500 is the efficiency', isCorrect: false },
+    ],
+    correctValue: '40% — T_H = 500 K, T_C = 300 K, η = 1 − 300/500 = 0.40',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARN}:MC-CARNOT-EFFICIENCY-USES-CELSIUS`],
+    source: `${CARN_SRC} — Component 4 Practice Set P4-b method; MC-CARNOT-EFFICIENCY-USES-CELSIUS distractor`,
+  },
 ]
 
 const RFRG_ASSESS_PROBES: SeedProbe[] = [
@@ -45511,6 +45572,25 @@ const RFRG_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [],
     source: `${RFRG_SRC} — Component 4 Practice Set P4-f`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on CARN_ASSESS_PROBES. The blueprint's
+    // P4-b COP method, with the authored "COP cannot exceed 1" objection as the
+    // trapped distractor. Rung PROFICIENT — DEVELOPING is taken.
+    conceptId: RFRG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A refrigerator removes 1200 J from its interior while its compressor consumes 300 J of electrical work. What is COP_R, and is this allowed?',
+    choices: [
+      { text: 'COP_R = 4, and it is perfectly allowed — the fridge MOVES heat, it does not convert it', isCorrect: true },
+      { text: 'COP_R = 4, but that is impossible — nothing can exceed 100%', isCorrect: false, misconceptionId: `${RFRG}:MC-COP-CANNOT-EXCEED-ONE` },
+      { text: 'COP_R = 0.25 — the output can never exceed the input', isCorrect: false, misconceptionId: `${RFRG}:MC-COP-CANNOT-EXCEED-ONE` },
+    ],
+    correctValue: 'COP_R = Q_C/W = 1200/300 = 4; legal because Q_H = Q_C + W, so nothing is created — the second law only imposes the Carnot ceiling',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RFRG}:MC-COP-CANNOT-EXCEED-ONE`],
+    source: `${RFRG_SRC} — MC-COP-CANNOT-EXCEED-ONE Conflict Evidence [P28]; P4-b COP method`,
+  },
 ]
 
 const TLAW_ASSESS_PROBES: SeedProbe[] = [
@@ -45568,6 +45648,26 @@ const TLAW_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [],
     source: `${TLAW_SRC} — Component 4 Practice Set P4-e`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on CARN_ASSESS_PROBES. Gradeable form
+    // of the blueprint's P4-b Boltzmann comparison (perfect crystal vs glass),
+    // trapping the authored "S = 0 for every substance" reading of the Third
+    // Law. Rung DEVELOPING — PROFICIENT is taken.
+    conceptId: TLAW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: At 0 K a perfect crystal has exactly one possible arrangement (Ω = 1), while a glass is frozen into an enormous number of arrangements. What are their entropies at 0 K?',
+    choices: [
+      { text: 'Crystal S = 0; glass keeps a large RESIDUAL entropy, because S = k_B lnΩ and its Ω is huge', isCorrect: true },
+      { text: 'Both are exactly 0 — the Third Law says entropy is zero at absolute zero', isCorrect: false, misconceptionId: `${TLAW}:MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES` },
+      { text: 'Both are large — all motion stops, so disorder is maximal', isCorrect: false },
+    ],
+    correctValue: 'crystal: S = k_B ln(1) = 0; glass: S = k_B lnΩ with Ω enormous, so residual entropy > 0 — the Third Law applies only to a PERFECT crystal',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TLAW}:MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES`],
+    source: `${TLAW_SRC} — Component 4 Practice Set P4-b (Boltzmann connection); MC-THIRD-LAW-ENTROPY-ZERO-FOR-ALL-SUBSTANCES distractor`,
   },
 ]
 
@@ -45937,6 +46037,25 @@ const FOSC_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [],
     source: `${FOSC_SRC} — Component 8 Retrieval Schedule, offset_days 4 (P4-d)`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on CARN_ASSESS_PROBES. Gradeable form
+    // of the authored "resonance has finite WIDTH" repair. Rung DEVELOPING —
+    // PROFICIENT is taken.
+    conceptId: FOSC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A lightly damped oscillator has a natural frequency of 50 Hz. It is driven at 49 Hz. What happens?',
+    choices: [
+      { text: 'It still responds strongly — resonance is a PEAK with finite width, not a single point', isCorrect: true },
+      { text: 'Nothing unusual — resonance happens only at exactly 50 Hz', isCorrect: false, misconceptionId: `${FOSC}:MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY` },
+      { text: 'It stops oscillating, because the driving frequency fights the natural one', isCorrect: false, misconceptionId: `${FOSC}:MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY` },
+    ],
+    correctValue: 'a large, near-resonant response — the resonance curve has a width set by the damping, so frequencies close to f₀ are strongly amplified too',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FOSC}:MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY`],
+    source: `${FOSC_SRC} — MC-RESONANCE-ONLY-AT-EXACT-NATURAL-FREQUENCY Conflict Evidence [P28]`,
+  },
 ]
 
 const WAV_ASSESS_PROBES: SeedProbe[] = [
@@ -46305,6 +46424,28 @@ const INTF_ASSESS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [],
     source: `${INTF_SRC} — Component 8 Retrieval Schedule, offset_days 14 (P4-e)`,
   },
+  {
+    // THIRD gradeable MCQ — see the note on CARN_ASSESS_PROBES. This one is a
+    // pure FLUENCY item (path difference -> type) from the blueprint's P4-b,
+    // deliberately NOT a misconception screen: this concept's two authored
+    // misconceptions are already covered by its other two gradeable probes,
+    // and the third graded answer a gate needs is PRACTICE, not another screen.
+    // Rung DEVELOPING — PROFICIENT is taken.
+    conceptId: INTF,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two coherent sources emit light of wavelength 500 nm. At point P the path lengths are 2000 nm and 1250 nm. Is P a maximum, a minimum, or neither?',
+    choices: [
+      { text: 'A minimum — the path difference is 750 nm = 1.5λ, an odd number of half-wavelengths', isCorrect: true },
+      { text: 'A maximum — the path difference is a whole number of nanometres', isCorrect: false },
+      { text: 'Neither — 750 nm is not a multiple of the wavelength', isCorrect: false },
+    ],
+    correctValue: 'a minimum (destructive) — Δd = 750 nm = 1.5 × 500 nm, and odd multiples of λ/2 give destructive interference',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${INTF_SRC} — Component 4 Practice Set P4-b (path difference → type)`,
+  },
 ]
 
 const STW_ASSESS_PROBES: SeedProbe[] = [
@@ -46610,6 +46751,25 @@ const BEAT_ASSESS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [],
     source: `${BEAT_SRC} — Component 8 Retrieval Schedule, offset_days 14 (P4-e)`,
+  },
+  {
+    // THIRD gradeable MCQ — see the note on CARN_ASSESS_PROBES. Blueprint's own
+    // |f₁ − f₂| method with fresh numbers; the average is the trapped
+    // distractor. Rung PROFICIENT — DEVELOPING is taken.
+    conceptId: BEAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two tuning forks at 256 Hz and 260 Hz are struck together. How many beats per second do you hear?',
+    choices: [
+      { text: '4 — the beat frequency is the DIFFERENCE, |260 − 256|', isCorrect: true },
+      { text: '258 — the beat frequency is the average of the two', isCorrect: false, misconceptionId: `${BEAT}:MC-BEATS-FREQUENCY-IS-AVERAGE` },
+      { text: '516 — the two frequencies add', isCorrect: false, misconceptionId: `${BEAT}:MC-BEATS-FREQUENCY-IS-AVERAGE` },
+    ],
+    correctValue: '4 beats per second — f_beat = |f₁ − f₂| = 4 Hz; 258 Hz is the PITCH you hear, not the beat rate',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BEAT}:MC-BEATS-FREQUENCY-IS-AVERAGE`],
+    source: `${BEAT_SRC} — MC-BEATS-FREQUENCY-IS-AVERAGE Conflict Evidence [P28]; P4-b method`,
   },
 ]
 
