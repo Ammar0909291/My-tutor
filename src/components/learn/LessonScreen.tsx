@@ -2004,6 +2004,22 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           ? { ...m, content: data.text as string, streaming: false, provider: data.provider }
           : m)
         : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: false, provider: data.provider }])
+      // CompactLessonProgressBar reads masteryState.phase, which this
+      // endpoint's response never carries (lesson-init is intentionally
+      // minimal and skips the mastery-gate pipeline — see its own header
+      // comment). Left untouched, masteryState stays whatever it was before
+      // this call: null on first entry (bar renders nothing) or the
+      // PREVIOUS lesson's phase on restart/review/next (bar shows stale
+      // progress for a lesson that just reset). Both are wrong the instant
+      // this response lands, since every mode here reopens the lesson at
+      // its start. OBSERVE is not a guess: it is the exact default
+      // `initialConversationState()` (conversationState.ts) assigns a
+      // fresh/unresolved concept, so this seeds the same value the server
+      // would produce, not a second source of truth. The real
+      // server-authoritative phase overwrites this on the very next turn
+      // that hits /api/learn/chat (Got it / Not clear / any typed reply),
+      // via the existing `if (data.mastery)` handler above.
+      setMasteryState({ verified: false, gatePending: false, phase: 'OBSERVE' })
     } catch (err) {
       const recoveryText = t('lesson_load_error')
       setMessages((p) => p.some((m) => m.id === aid)
