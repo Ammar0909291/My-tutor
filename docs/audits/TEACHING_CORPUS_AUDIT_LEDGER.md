@@ -1286,7 +1286,22 @@ result is read. Neither contaminated run is recorded as a defect.
 
 ---
 
-# 🔴🔴 P0 — WRONG LEARNER NAME + WRONG-TOPIC CONTENT SERVED
+# P1 — WRONG-TOPIC CONTENT SERVED (the "privacy incident" is RETRACTED)
+
+> **CORRECTION, same session.** I flagged the name "Mohammad Suaib" as a
+> possible cross-learner data leak. **It is not.** The name appears in
+> `src/lib/teaching/teachingGranularity.ts` in a code comment quoting a real
+> production transcript from 2026-08-07 **on this same account**, and the
+> account is `suaibamr@gmail.com`. The auth session's display name is
+> "Claude" (the User row); the teaching prompt uses the learner's PROFILE
+> name, which is the owner's real name. Different field, same person.
+>
+> No other learner's data was involved. The privacy escalation is withdrawn
+> before anyone acts on it. I am recording the false alarm rather than quietly
+> deleting it, because "escalate on suspicion, retract on evidence" only works
+> if both halves are visible.
+>
+> **What remains is still real and still P1** — defects 2 and 3 below.
 
 Found on Topic 2, clean session, real production, after `b53e93ea`.
 
@@ -1299,11 +1314,8 @@ Found on Topic 2, clean session, real production, after `b53e93ea`.
 
 ## Three defects in one turn
 
-1. **WRONG NAME — possible cross-learner data leak.** The account's display
-   name is **"Claude"**. The tutor addressed the learner as **"Mohammad
-   Suaib"**. That name appears nowhere in this session. Until proven otherwise
-   this must be treated as a POSSIBLE PRIVACY INCIDENT — another learner's
-   name, or a name embedded in a stored asset, reaching a different learner.
+1. ~~WRONG NAME — possible cross-learner data leak.~~ **RETRACTED** — it is
+   the account owner's own profile name. See the correction above.
 2. **WRONG TOPIC.** Wave interference on a pond, served inside a Dimensional
    Analysis lesson, in answer to a question about speed.
 3. **THE QUESTION WAS IGNORED.** "so speed is L then?" is a real misconception
@@ -1323,18 +1335,18 @@ authored corpus becoming reachable for the first time. That would make it a
 regression introduced by `b53e93ea` — which must be checked before anything
 else, since that commit is otherwise a large win.
 
-## IMMEDIATE NEXT ACTION (highest priority, ahead of all topic work)
-1. Pull runtime logs for session `cmspqvazn0001l504p4m7u7dt` / the Topic 2
-   session and read `memoryServingMode`, `memoryAssetId`, `explanationMemory`
-   lines for that turn. Determine whether the text came from a stored asset.
-2. If an asset: fetch it by id and inspect its content for the name string.
-   Search `authoredSeedAssets.ts` / `brainSeedAssets.ts` / DB for
-   "Mohammad Suaib" and for "wave interference".
-3. If the name originates from ANOTHER learner's data, stop and escalate to the
-   owner as a privacy incident before continuing the audit.
-4. If it originates from a seeded/authored asset, that asset must be corrected
-   or quarantined — a shared teaching asset must never carry a personal name.
-5. Only then resume Topic 2.
+## IMMEDIATE NEXT ACTION
+1. Pull runtime logs for the Topic 2 turn and read `memoryServingMode` /
+   `memoryAssetId` / `[explanationMemory]` lines. Determine whether the
+   wave-interference text came from a STORED ASSET or from the live model.
+2. If a stored asset: fetch it by id and check why it matched a
+   dimensional-analysis turn. Grep the seed sources for "wave interference".
+   A physics-waves asset served in a measurement lesson is a retrieval defect
+   in the SAME family as the earlier "irrelevant-to-question" refusals already
+   visible in the logs — that refusal path exists and did not fire here.
+3. Separately: the ignored misconception ("speed is L" -> speed is L/T) is a
+   teaching defect independent of where the text came from.
+4. Then resume Topic 2 from a clean session.
 
 ## STATUS
 - Topic 2 `phys.meas.dimensions` — **FAILED** (this turn). Earlier probes on
