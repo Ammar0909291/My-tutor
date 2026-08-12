@@ -29,7 +29,7 @@
  */
 import type { ConversationState, NextMove } from './conversationState'
 import { repliesWithQuestion } from './conversationState'
-import { gateLessonCompletion, masteryVerified } from './masteryGate'
+import { gateLessonCompletion, masteryVerified, masteryVerifiedStrict } from './masteryGate'
 
 export type StanceViolationCode =
   | 'FALSE_MASTERY_COMPLETION'
@@ -90,6 +90,71 @@ const RESOLUTION_CLAIM_RE =
   /\b(you'?ve (?:got|figured out|worked out|fixed|corrected|resolved) (?:it|that|this)|that'?s (?:resolved|fixed|sorted) now|(?:the )?misconception(?:'?s| is)? (?:now )?(?:resolved|fixed|cleared|gone)|you'?re not confused (?:about|by) (?:that|this) anymore|no longer confusing)\b/i
 
 /**
+ * Prose claims about the learner's RECORD — that a lesson is finished, or that
+ * they have moved on to the next one.
+ *
+ * ── WHY THIS EXISTS ─────────────────────────────────────────────────────────
+ * Measured in production, corpus audit Topic 2, on the learner's FIRST correct
+ * answer of the lesson. The engine's own state for that turn:
+ *
+ *   { verified: false, phase: 'OBSERVE', checkCorrect: 0, practiceCorrect: 0,
+ *     practiceRequired: 2, completionSuppressed: true, gatePending: true }
+ *   completedLessons: []
+ *
+ * and the tutor said, in prose:
+ *
+ *   "✓ Progress — You've completed Lesson 3 of 238. Next up is
+ *    'Measurement Errors and Uncertainty'."
+ *
+ * `gateLessonCompletion` did its job perfectly: it stripped `[LESSON_COMPLETE]`
+ * so nothing was recorded. But it is a TAG gate, and the learner reads PROSE.
+ * The system refused the completion and told the learner it had granted it —
+ * the record and the claim disagreed, and the learner was told the false half.
+ *
+ * That is hollow advancement, which this product's whole stance is defined
+ * against, and it is the same lesson V-AFFIRM learned: enforcement has to sit
+ * on the surface the learner actually receives.
+ *
+ * ── SCOPE, DELIBERATELY NARROW ──────────────────────────────────────────────
+ * Bookkeeping only. Praise is NOT a completion claim and is never touched:
+ * "excellent work", "you've got it", "well done" all survive, exactly as the
+ * earlier D3 fix concluded — keep the praise, drop the bookkeeping. What is
+ * caught is a statement about the learner's progress record or a move to the
+ * next lesson, neither of which happened.
+ */
+const COMPLETION_CLAIM_RE =
+  /(you(?:'ve| have)?\s+(?:just\s+)?(?:completed|finished|wrapped up|mastered)\s+(?:this\s+|the\s+)?lesson|(?:you(?:'ve| have)?\s+)?completed\s+lesson\s+\d+|lesson\s+\d+\s+(?:of\s+\d+\s+)?(?:is\s+)?complete|this\s+lesson\s+is\s+(?:now\s+)?(?:complete|finished|done)|next\s+up\s+is\b|on\s+to\s+the\s+next\s+lesson|moving\s+on\s+to\s+lesson\s+\d+|your\s+next\s+lesson\s+is\b)/i
+
+/**
+ * Removes the sentences (or list items) that make a false record claim, leaving
+ * the rest of the turn intact.
+ *
+ * Sentence-level rather than whole-turn, for the same reason the D3 fix was
+ * clause-level: the surrounding recap and praise are legitimate teaching that
+ * the learner earned, and deleting a good explanation to remove one false
+ * clause would be a second harm.
+ */
+export function claimsCompletionInProse(text: string): boolean {
+  return COMPLETION_CLAIM_RE.test(text)
+}
+
+export function stripCompletionClaims(text: string): string {
+  const units = text.split(/(\n+)/)
+  const kept: string[] = []
+  for (const unit of units) {
+    if (/^\n+$/.test(unit)) { kept.push(unit); continue }
+    // Within a line, drop only the offending sentences.
+    const sentences = unit.split(/(?<=[.!?])\s+/)
+    const survivors = sentences.filter((s) => !COMPLETION_CLAIM_RE.test(s))
+    if (survivors.length === sentences.length) { kept.push(unit); continue }
+    const rebuilt = survivors.join(' ').trim()
+    // A bullet reduced to its own label ("✓ Progress —") is debris; drop it.
+    if (rebuilt && !/^[-*✓•]?\s*[\p{L} ']{0,24}[—:-]\s*$/u.test(rebuilt)) kept.push(rebuilt)
+  }
+  return kept.join('').replace(/\n{3,}/g, '\n\n').trim()
+}
+
+/**
  * The single Stance Enforcement chokepoint. Evaluates one already-rendered
  * turn against every currently-enforced teaching law and returns one
  * verdict. Pure; deterministic; never throws (a thrown error inside a
@@ -107,13 +172,45 @@ export function enforceStance(input: StanceEnforcementInput): StanceVerdict {
   const completion = gateLessonCompletion(input.text, input.state, {
     excursionActive: input.excursionActive,
   })
-  const cleanText = completion.cleanText
+  let cleanText = completion.cleanText
   if (completion.suppressed) {
     violations.push({
       code: 'FALSE_MASTERY_COMPLETION',
       detail: input.excursionActive
         ? '[LESSON_COMPLETE] was emitted while an off-lesson concept excursion was open — the lesson is paused, not finished — and was stripped'
         : '[LESSON_COMPLETE] was emitted without verified mastery evidence (masteryVerified(state) === false) and was stripped',
+    })
+  }
+
+  // THE SAME LAW, ON THE SURFACE THE LEARNER ACTUALLY READS.
+  //
+  // The tag gate above governs what the SYSTEM records. This governs what the
+  // learner is TOLD. They came apart in production — completion suppressed,
+  // `completedLessons: []`, and the tutor announcing "You've completed Lesson 3
+  // of 238. Next up is …" — and the learner was told the false half.
+  //
+  // Runs tag or no tag: the measured failure emitted no tag at all, so a rule
+  // that only fired alongside one would have missed it entirely.
+  //
+  // The gate is the TRUTH of the claim, NOT `completion.authorized`. Writing
+  // this the obvious way first produced a false positive that this module's own
+  // test caught: `gateLessonCompletion` returns `authorized: false` for every
+  // turn WITHOUT the tag, so a learner who had genuinely met the bar would have
+  // had their true completion claim stripped. What makes the claim honest is
+  // the learner's evidence — the same strict bar the tag gate itself uses — and
+  // the lesson not being paused by an excursion.
+  const completionIsTrue = !input.excursionActive && masteryVerifiedStrict(input.state)
+  if (!completionIsTrue && COMPLETION_CLAIM_RE.test(cleanText)) {
+    const stripped = stripCompletionClaims(cleanText)
+    // Never hand back an empty turn. If the claim WAS the whole message there
+    // is nothing honest left to say, so the caller keeps the original and the
+    // violation stands — visible, rather than silently blanked.
+    if (stripped.length >= 40) cleanText = stripped
+    violations.push({
+      code: 'FALSE_MASTERY_COMPLETION',
+      detail:
+        'the response claimed in PROSE that the lesson was completed or that the learner had moved on, ' +
+        'while completion was not authorized; the offending sentences were stripped',
     })
   }
 

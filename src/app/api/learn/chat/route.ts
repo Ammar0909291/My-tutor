@@ -4203,7 +4203,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const { advanceConversationState, repliesWithQuestion, isPriorKnowledgeProbe } = await import('@/lib/teaching/conversationState')
           const { isDontKnowSignal } = await import('@/lib/teaching/recoveryGuard')
-          const { enforceStance } = await import('@/lib/teaching/stanceEnforcement')
+          const { enforceStance, claimsCompletionInProse } = await import('@/lib/teaching/stanceEnforcement')
           const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
           const askedQuestionThisTurn = repliesWithQuestion(cleanText)
           // Turn Parity Observer: compare what the server decided against
@@ -4269,9 +4269,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             move: evidenceMoveHoisted === 'teach' ? 'teach' : evidenceMoveHoisted === 'show' ? 'show' : evidenceMoveHoisted === 'ask' ? 'ask' : null,
             misconceptionActive: conversationStateAfterTurnHoisted.misconceptionDetectedThisLesson,
           })
+          // "A prose completion claim was made and enforceStance removed it."
+          // Deliberately NOT gated on `completionAuthorized`: that is false for
+          // every turn without the tag, including an earned one, and the same
+          // mistake produced a false positive inside the pure module. The
+          // before/after comparison asks only what actually happened.
+          const claimedCompletionInProse =
+            claimsCompletionInProse(cleanText) && !claimsCompletionInProse(stanceVerdict.cleanText)
           cleanText = stanceVerdict.cleanText
           masteryCompletionSuppressedHoisted = !stanceVerdict.completionAuthorized && stanceVerdict.violations.some((v) => v.code === 'FALSE_MASTERY_COMPLETION')
           if (masteryCompletionSuppressedHoisted) masteryGatePendingHoisted = true
+
+          // STRIPPING THE LIE IS HALF THE JOB. The turn still READS like an
+          // ending — the model wrote a wrap-up — while the lesson is genuinely
+          // open. Say so, in the learner's own terms, from the counters the
+          // server already holds. No invention: if the gate is waiting on
+          // practice, that is exactly what this asks for.
+          if (claimedCompletionInProse) {
+            const { MASTERY_PRACTICE_REQUIRED } = await import('@/lib/teaching/masteryGate')
+            const need = Math.max(
+              0,
+              MASTERY_PRACTICE_REQUIRED - (conversationStateAfterTurnHoisted.correctAtPractice ?? 0),
+            )
+            cleanText = `${cleanText}\n\n` + (need > 0
+              ? `Before we call this lesson finished, let's do ${need === 1 ? 'one more practice question' : `${need} practice questions`} together — ready?`
+              : `We are not quite finished yet — let's check one more thing before we move on.`)
+            console.log('[completion-claim]', { stripped: true, practiceStillNeeded: need })
+          }
           stanceViolationsHoisted = stanceVerdict.violations.map((v) => v.code)
         } catch (err) {
           // Fail-closed for completion: on any gate failure, strip the tag
