@@ -3787,3 +3787,64 @@ re-measure the same missing corpus.**
 ## NEXT
 Run the seed script from an environment holding `DATABASE_URL`, then re-run
 the sweep and require `E6 = 0` before any topic moves to VERIFIED.
+
+---
+
+# SEEDING PATH PROVEN — fill-and-reactivate, verified in production
+
+## A consequence of my own deprecation, caught before it did damage
+
+The first generated seed SQL used `INSERT … WHERE NOT EXISTS (canonicalSlug)`.
+It would have inserted **nothing**: the hollow identities I deprecated an hour
+earlier occupy exactly the canonicalSlugs the seed needs, so the guard finds
+them and skips. **Deprecating the orphans blocked re-seeding by slug.**
+
+That is a real side effect of an approved write, found by reading the
+generated SQL against the DB state rather than by running it and trusting the
+result.
+
+## The correct operation
+
+Not insert-new — **fill the existing hollow identity's content row, then
+reactivate it**:
+
+```sql
+WITH tgt AS (SELECT "assetId" FROM asset_identity
+             WHERE "canonicalSlug"=… AND "authorId"='EDUCATIONAL_BRAIN_SEED'
+               AND NOT EXISTS (SELECT 1 FROM probe_assets WHERE …)),
+     ins AS (INSERT INTO probe_assets (…) SELECT … FROM tgt RETURNING "assetId")
+UPDATE asset_identity SET status='ACTIVE', "deprecationReason"=NULL
+WHERE "assetId" IN (SELECT "assetId" FROM ins);
+```
+
+This reuses the existing identity, so no unique-index collision, no assetId
+churn, and every evidence row keyed to that asset stays valid. Idempotent: a
+slug that already has content yields an empty `tgt` and the statement is a
+no-op.
+
+Content is generated from the repo's own `AUTHORED_PROBES` / `SEED_PROBES`
+through the real `buildProbeSlugResolver`, so nothing is invented and the
+slugs match what the runtime resolves.
+
+## VERIFIED in production — first real movement in gradeable coverage
+
+| concept | before | after |
+|---|---|---|
+| `phys.meas.units` | 1 | **2** |
+| `phys.meas.scalars-vectors` | 1 | **2** |
+| `phys.meas.vector-products` | 0 | **1** |
+
+3 of 32 generated statements executed. The mechanism is proven end to end.
+
+## STATE — honest
+
+29 statements remain (batches in the session scratchpad, generated but not
+executed). E6 is **still open**: a gate needs THREE gradeable probes per
+concept and no audited concept has three yet.
+
+The full catalogue still wants the real seed run
+(`scripts/brain/seed-knowledge-assets.ts` with `DATABASE_URL`) — this path
+works but moves ~8 probes per session at the context cost of carrying authored
+prose through the tool call twice.
+
+**No sweep re-run and no topic marked VERIFIED.**
