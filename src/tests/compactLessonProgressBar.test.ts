@@ -126,3 +126,69 @@ describe('CompactLessonProgressBar — bar count and completion mapping', () => 
     expect(states.every((s) => !s.current)).toBe(true)
   })
 })
+
+/**
+ * ── STAGE LABEL — "progress bar is missing label- like intro or explantion" ─
+ *
+ * The compact bar carries only the six bars, no text — matching the
+ * original spec. The explicit follow-up asked for a short label naming the
+ * CURRENT stage (the same word the large variant already shows, e.g.
+ * "Explain"), not the large variant's full six-name row. Reuses
+ * STAGE_LABEL_KEYS' existing `.short` translations (LessonProgressBar.tsx) —
+ * no second set of stage names was authored.
+ *
+ * The component itself is source-asserted (LessonProgressBar.tsx has no
+ * render harness in this repo either), but the STAGE -> LABEL mapping it
+ * reads from is real and imported here, so the i18n-key wiring is verified
+ * against the actual live keys, not a guess at their names.
+ */
+import { translations } from '@/lib/i18n'
+
+describe('CompactLessonProgressBar — current-stage label', () => {
+  const SRC = readFileSync(
+    path.join(process.cwd(), 'src/components/learn/LessonProgressBar.tsx'),
+    'utf8',
+  )
+
+  it('renders a short label for the current stage, not the full six-name row', () => {
+    expect(SRC).toMatch(/t\(STAGE_LABEL_KEYS\[LESSON_STAGES\[progress\.stageIndex\]\.phase\]\.short\)/)
+    // Exactly ONE LESSON_STAGES.map in this component — the six bars
+    // themselves. The large variant's SECOND map (a six-name text row, one
+    // <span> per stage) must NOT be duplicated here — that would be exactly
+    // the wide textual indicator the header must not regain.
+    const componentStart = SRC.indexOf('export function CompactLessonProgressBar')
+    const componentEnd = SRC.indexOf('export function LessonProgressBar')
+    const body = SRC.slice(componentStart, componentEnd)
+    const mapCount = (body.match(/LESSON_STAGES\.map/g) ?? []).length
+    expect(mapCount).toBe(1)
+  })
+
+  it('shows the completion label once mastery is verified, matching the large variant', () => {
+    const componentStart = SRC.indexOf('export function CompactLessonProgressBar')
+    const componentEnd = SRC.indexOf('export function LessonProgressBar')
+    const body = SRC.slice(componentStart, componentEnd)
+    expect(body).toContain("t('lesson_progress_complete')")
+  })
+
+  it('every phase has a real, non-empty short label in every shipped language', () => {
+    const phases = ['OBSERVE', 'DEMONSTRATE', 'GUIDE', 'CHECK', 'PRACTICE', 'TRANSFER'] as const
+    const shortKeys = phases.map((p) => `lesson_stage_${p.toLowerCase()}_short`)
+    for (const lang of ['en', 'ru', 'hi'] as const) {
+      for (const key of shortKeys) {
+        const value = (translations[lang] as Record<string, string>)[key]
+        expect(value, `${lang}.${key}`).toBeTruthy()
+        expect(value!.length).toBeGreaterThan(0)
+      }
+    }
+  })
+
+  it('the label text is short (compact, not a sentence) in every language', () => {
+    const phases = ['OBSERVE', 'DEMONSTRATE', 'GUIDE', 'CHECK', 'PRACTICE', 'TRANSFER'] as const
+    for (const lang of ['en', 'ru', 'hi'] as const) {
+      for (const p of phases) {
+        const value = (translations[lang] as Record<string, string>)[`lesson_stage_${p.toLowerCase()}_short`]
+        expect(value!.length).toBeLessThanOrEqual(12)
+      }
+    }
+  })
+})

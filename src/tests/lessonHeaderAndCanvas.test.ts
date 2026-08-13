@@ -106,11 +106,15 @@ describe('bottom action row — Practice / Insights / Got it / Not clear', () =>
   })
 })
 
-// ── DIAGRAM CONTAINER PADDING — 3cm, layout/renderer untouched ──────────────
+// ── DIAGRAM CONTAINER PADDING — 3cm on 3 sides, top corrected for alignment ──
 
-describe('diagram container — 3cm internal padding, layout untouched', () => {
+describe('diagram container — 3cm padding, top corrected to top-align with the explanation', () => {
   const CSS = readFileSync(
     path.join(process.cwd(), 'src/components/learn/LessonScreen.module.css'),
+    'utf8',
+  )
+  const TSX = readFileSync(
+    path.join(process.cwd(), 'src/components/learn/LessonScreen.tsx'),
     'utf8',
   )
 
@@ -125,19 +129,48 @@ describe('diagram container — 3cm internal padding, layout untouched', () => {
     expect(paddingBlock).toBeDefined()
   })
 
-  it('.canvasVisual carries exactly 3cm of padding on every side', () => {
-    expect(paddingBlock).toMatch(/padding:\s*3cm;/)
+  it('right/bottom/left keep the full 3cm reduction; top does not', () => {
+    // Anti-vacuity: pins the exact shorthand (top right bottom left), not
+    // just "contains 3cm somewhere" — a uniform `padding: 3cm` would also
+    // match a loose "contains 3cm" check while reintroducing the bug this
+    // fix closes.
+    expect(paddingBlock).toMatch(/padding:\s*2px 3cm 3cm 3cm;/)
+  })
+
+  it("top padding matches the tutor bubble's own top padding in canvas mode — pixel-aligned, not merely 'small'", () => {
+    // ROOT CAUSE of the reported vertical drop: .teachingCanvas already sets
+    // align-items: start, so both grid cells begin at the identical y — the
+    // uniform 3cm padding on .canvasVisual alone pushed the figure's visible
+    // content 3cm below that shared start line. The fix is this rule's top
+    // value, not the grid. 2px is not arbitrary: it is the exact value the
+    // left column's own Card carries in canvas mode.
+    expect(TSX).toMatch(/padding: hasCanvasVisual \? '2px 0 0' : '14px 16px'/)
   })
 
   it('padding sits INSIDE the existing column (box-sizing), never growing it', () => {
     expect(paddingBlock).toContain('box-sizing: border-box;')
   })
 
+  it('.teachingCanvas still top-aligns both columns — the grid itself was never the problem', () => {
+    const block = CSS.match(/\.teachingCanvas\s*\{[\s\S]*?\}/)?.[0] ?? ''
+    expect(block).toMatch(/align-items:\s*start;/)
+  })
+
+  it('no per-diagram or topic-specific offset was introduced — the fix lives in the one shared layout rule', () => {
+    // The instruction was explicit: no arbitrary negative margins on
+    // individual diagrams, no topic-specific CSS, no per-visual offsets.
+    // CANVAS_VISUAL_FRAME (the wrapper each renderer mounts inside) must
+    // carry no margin/top override of its own.
+    const frame = TSX.match(/const CANVAS_VISUAL_FRAME: React\.CSSProperties = \{[\s\S]*?\}/)?.[0] ?? ''
+    expect(frame).not.toMatch(/margin/)
+    expect(frame).not.toMatch(/paddingTop|top:/)
+  })
+
   it('the 50/50 grid split itself is untouched — still exactly two equal tracks', () => {
     expect(CSS).toMatch(/grid-template-columns:\s*minmax\(0,\s*1fr\)\s+minmax\(0,\s*1fr\)/)
   })
 
-  it('.canvasText (the explanation half) carries no new padding — only the diagram half shrank', () => {
+  it('.canvasText (the explanation half) carries no new padding — only the diagram half changed', () => {
     const textBlock = CSS.match(/\.canvasText,\n\.canvasVisual\s*\{[\s\S]*?\}/)?.[0] ?? ''
     expect(textBlock).not.toMatch(/padding/)
   })

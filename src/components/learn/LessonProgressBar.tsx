@@ -34,9 +34,16 @@ const STAGE_LABEL_KEYS: Record<ProgressPhase, { label: TranslationKey; short: Tr
  * always reflect the same phase — there is only one source of truth. Renders
  * nothing before the lesson starts (same null-guard as the large variant).
  *
- * Six bars × 14px + five gaps × 2px = 94px total width, within the ~115px
- * constraint. The container aligns itself to the height of adjacent header
- * controls via the parent's `alignItems: center`.
+ * Carries a short text label (e.g. "Explain") naming the CURRENT stage only
+ * — not the old large variant's full six-name row ("Introduction → Explain →
+ * Examples → ..."), which is exactly the wide textual indicator the header
+ * must not regain. One short word beside six small bars stays compact; the
+ * short-form translations already exist (STAGE_LABEL_KEYS below, shared with
+ * the large variant), so this reuses them rather than adding a second set.
+ *
+ * Six bars × 14px + five gaps × 2px = 94px, plus the label, comfortably
+ * inside the header's available width. The container aligns itself to the
+ * height of adjacent header controls via the parent's `alignItems: center`.
  */
 export function CompactLessonProgressBar({
   phase,
@@ -45,43 +52,57 @@ export function CompactLessonProgressBar({
   phase: string | undefined
   masteryVerified?: boolean
 }) {
+  const { t } = useLanguage()
   const progress = buildLessonProgress(phase, masteryVerified)
   if (!progress) return null
 
   return (
-    <div
-      role="progressbar"
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-valuenow={progress.percent}
-      aria-label="Lesson progress"
-      aria-valuetext={
-        progress.complete
-          ? 'Lesson complete'
-          : `${LESSON_STAGES[progress.stageIndex].label}, stage ${progress.stageIndex + 1} of ${progress.totalStages}`
-      }
-      style={{ display: 'flex', gap: 2, alignItems: 'center', flexShrink: 0 }}
-    >
-      {LESSON_STAGES.map((stage, i) => {
-        const past = progress.complete || i < progress.stageIndex
-        const current = !progress.complete && i === progress.stageIndex
-        const reached = past || current
-        return (
-          <div
-            key={stage.phase}
-            aria-hidden="true"
-            title={stage.label}
-            style={{
-              width: 14,
-              height: 6,
-              borderRadius: 999,
-              background: reached ? 'var(--coral, #F78166)' : 'var(--bg-hover)',
-              opacity: past ? 0.75 : 1,
-              transition: 'background 320ms ease, opacity 320ms ease',
-            }}
-          />
-        )
-      })}
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+      <div
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={progress.percent}
+        aria-label="Lesson progress"
+        aria-valuetext={
+          progress.complete
+            ? 'Lesson complete'
+            : `${LESSON_STAGES[progress.stageIndex].label}, stage ${progress.stageIndex + 1} of ${progress.totalStages}`
+        }
+        style={{ display: 'flex', gap: 2, alignItems: 'center', flexShrink: 0 }}
+      >
+        {LESSON_STAGES.map((stage, i) => {
+          const past = progress.complete || i < progress.stageIndex
+          const current = !progress.complete && i === progress.stageIndex
+          const reached = past || current
+          return (
+            <div
+              key={stage.phase}
+              aria-hidden="true"
+              title={stage.label}
+              style={{
+                width: 14,
+                height: 6,
+                borderRadius: 999,
+                background: reached ? 'var(--coral, #F78166)' : 'var(--bg-hover)',
+                opacity: past ? 0.75 : 1,
+                transition: 'background 320ms ease, opacity 320ms ease',
+              }}
+            />
+          )
+        })}
+      </div>
+      <span
+        aria-hidden="true"
+        style={{
+          fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)',
+          whiteSpace: 'nowrap', flexShrink: 0,
+        }}
+      >
+        {progress.complete
+          ? t('lesson_progress_complete')
+          : t(STAGE_LABEL_KEYS[LESSON_STAGES[progress.stageIndex].phase].short)}
+      </span>
     </div>
   )
 }

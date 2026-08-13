@@ -98,14 +98,24 @@
   min-width: 0;
 }
 
-/* 3cm of internal space on every side of the diagram half, so the visible
- * figure sits smaller within its column. Padding only — the 50/50 grid
- * split above, the figure's own proportions, its renderer, and its
- * positioning logic are all untouched; box-sizing keeps the padding
- * INSIDE the existing column rather than growing it. */
+/* 3cm of internal space around the diagram half, so the visible figure
+ * sits smaller within its column. Padding only — the 50/50 grid split
+ * above, the figure's own proportions, its renderer, and its positioning
+ * logic are all untouched; box-sizing keeps the padding INSIDE the
+ * existing column rather than growing it.
+ *
+ * TOP is the one side that is NOT 3cm. `.teachingCanvas` already sets
+ * `align-items: start`, so both grid cells begin at the identical y —
+ * the vertical drop this fixes was never the grid, it was this rule's own
+ * uniform padding pushing the figure's content 3cm below that shared
+ * start line. 2px matches the tutor bubble's own top padding in canvas
+ * mode (`padding: hasCanvasVisual ? '2px 0 0' : ...`, in LessonScreen.tsx)
+ * exactly, so the diagram's top edge lands beside the first line of the
+ * explanation rather than merely "near" it. Left/right/bottom keep the
+ * full 3cm reduction unchanged. */
 .canvasVisual {
   box-sizing: border-box;
-  padding: 3cm;
+  padding: 2px 3cm 3cm 3cm;
 }
 
 /* Below this width a 50% column is genuinely unusable for either a paragraph
