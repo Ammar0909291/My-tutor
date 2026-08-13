@@ -4308,3 +4308,85 @@ VERIFIED** in this batch or any of the five before it.
 
 Offline only. `npx tsc --noEmit` clean; 321 files / 6,697 passed / 9 skipped;
 `npm run build` clean.
+
+---
+
+# THE RATCHET WAS MEASURING ONE CORPUS OF FOUR
+
+Physics reached zero. Moving to chemistry surfaced something worse than a
+content gap: **the guard could not see three of the four authored corpora.**
+
+`gateAssessmentIsServerOwned.test.ts` filters `AUTHORED_PROBES` on
+`subjectSlug === 'physics'`. Chemistry, biology and computer science are not
+in `AUTHORED_PROBES` at all — they are separate exported arrays in their own
+seed files, concatenated by every seed writer
+(`scripts/brain/seed-knowledge-assets.ts`, `src/instrumentation.ts`). So a
+test that reads as "the authored corpus actually converts" was measuring a
+quarter of it.
+
+Measured with the identical `probeToMcq` filter:
+
+| subject | concepts | short of three |
+|---|---|---|
+| chemistry | 186 | 186 |
+| biology | 108 | **108 — every single one** |
+| computer_science | 119 | **119 — every single one** |
+
+Biology and CS carry exactly two gradeable probes on every concept they have.
+Their gate runs dry on the last check for 100% of their content, and nothing
+in a 6,700-test suite said so.
+
+Now covered: a new `describe` block measures all three, raw count and
+band-aware, pinned as maxima exactly like the physics ratchet.
+
+---
+
+# CHEMISTRY BATCH 1 — chem.env, chem.sblock, chem.anal, chem.surface (17)
+
+Twelve target a blueprint MC-3 that had no gradeable probe. Five concepts had
+all their documented misconceptions probed already and got transfer cases:
+`water-soil` (judge a reported BOD > COD pair as impossible),
+`chromatography` (the same compound on normal- and reversed-phase),
+`colloids` (Tyndall beam through sugar water vs milk), `emulsions` (has the
+oil DISSOLVED?), and `atmosphere`'s MC2 sibling.
+
+Chemistry: **186 → 169** short. Biology and CS untouched this batch.
+
+## THE REGRESSION THE GUARD CAUGHT — worth recording in full
+
+The first version of this batch authored the third probe as `probeKind:
+'mcq'`, the way every physics batch did. `difficultyLadderIdentity.test.ts`
+failed immediately:
+
+> every non-physics probe keeps the exact identity it had before Item 6
+> — expected 34 items to deeply equal []
+
+The reason is real and specific to chemistry. A second `mcq` at the same
+`gradeBand` turns a singleton slot into a **difficulty ladder**, and
+`buildProbeSlugResolver` then appends a rung segment to that slot's slug —
+which changes the identity of the probe **that was already there**.
+
+For physics that cost nothing: the production audit found physics has no
+`HUMAN_CURATOR` seed rows at all, only live-capture `AI_AUTHORED` ones. **For
+chemistry it would have been damaging** — chemistry is the one subject fully
+seeded in production, 744/744 `HUMAN_CURATOR` rows. Re-identifying 34 of them
+would leave the seeded rows stranded under slugs the writer no longer
+generates, and the next seed run would insert fresh duplicates alongside them.
+
+Fixed at the source, not by relaxing the test: the new probes use
+`probeKind: 'checkpoint'`, an already-established kind (136 uses in the
+corpus) whose slot was verified free on all 17 concepts. That keeps every
+existing chemistry identity byte-for-byte — re-verified, `0` non-physics
+probes changed identity — and `findBestProbe` filters on
+conceptId/language/status and never on `probeKind`, so nothing about what the
+learner sees differs.
+
+**This is the correct precedent for chemistry, biology and CS from here on:
+author the third probe into a FREE slot, never onto an existing rung.**
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 321 files / 6,706 passed / 9 skipped;
+`npm run build` clean. Live `buildProbeSlugResolver` identity: 0 discarded
+across all four corpora. **No production write, no sweep re-run, no topic
+marked VERIFIED.**

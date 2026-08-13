@@ -1118,6 +1118,33 @@ const ATMO_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ATMO}:MC1`],
     source: `${ATMO_SRC} — misconception: conflating ozone depletion with climate change`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC2, which had no gradeable probe. Rung PROFICIENT.
+    conceptId: ATMO,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Is CO2 the greenhouse gas — the only one that really matters?',
+    choices: [
+      { text: 'No — water vapour is the largest natural contributor by absorption, and methane traps far more heat per molecule over short timescales. CO2 dominates policy because of emission VOLUME and atmospheric LIFETIME, not because it absorbs most strongly', isCorrect: true },
+      { text: 'Yes — CO2 is the greenhouse gas, and the others are negligible by comparison', isCorrect: false, misconceptionId: `${ATMO}:MC2` },
+    ],
+    correctValue: 'no — several gases, differing in concentration, potency and lifetime',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ATMO}:MC2`],
+    source: `${ATMO_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.surface.colloids ───────────────────────────────────────────────────
@@ -1197,6 +1224,33 @@ const COLL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${COLL}:MC2`],
     source: `${COLL_SRC} — misconception: Brownian motion from inter-particle collisions`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // A TRANSFER case for MC1 (colloids are true solutions): the Tyndall test on a named pair. Rung PROFICIENT.
+    conceptId: COLL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Shine a narrow beam through a glass of sugar water and through a glass of milk. What do you see, and what does it show?',
+    choices: [
+      { text: 'Nothing in the sugar solution, but a bright visible path through the milk — the Tyndall effect. Milk\'s particles are large enough to scatter light, which is what makes it a colloid rather than a true solution', isCorrect: true },
+      { text: 'The same in both — each looks uniform, so both are solutions and milk is simply fat dissolved in water', isCorrect: false, misconceptionId: `${COLL}:MC1` },
+    ],
+    correctValue: 'a visible beam in milk only — the Tyndall effect',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COLL}:MC1`],
+    source: `${COLL_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -2160,6 +2214,33 @@ const AIRPOL_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${AIRPOL}:MC1`],
     source: `${AIRPOL_SRC} — misconception: ozone is uniformly bad`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung PROFICIENT.
+    conceptId: AIRPOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Carbon monoxide is lethal at a few hundred ppm, far too little to displace the air\'s oxygen. How does it actually kill?',
+    choices: [
+      { text: 'By binding haemoglobin at the very site oxygen uses, with about 200 times the affinity — so even trace CO outcompetes O2 and starves the tissues. The mechanism is biochemical, not physical displacement', isCorrect: true },
+      { text: 'By taking up the space in the air that oxygen would otherwise fill, so less O2 is breathed in', isCorrect: false, misconceptionId: `${AIRPOL}:MC3` },
+    ],
+    correctValue: 'competitive binding to haemoglobin, not displacement',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AIRPOL}:MC3`],
+    source: `${AIRPOL_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.env.water-soil ─────────────────────────────────────────────────────
@@ -2241,6 +2322,33 @@ const WATSOL_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${WATSOL}:MC2`],
     source: `${WATSOL_SRC} — misconception: eutrophication is direct chemical poisoning`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // A TRANSFER case for MC2 (BOD can exceed COD): judge a reported pair of numbers. Rung PROFICIENT.
+    conceptId: WATSOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A lab reports a water sample as BOD 400 mg/L and COD 250 mg/L. What should you conclude?',
+    choices: [
+      { text: 'The result is impossible and the analysis is wrong — chemical oxidation attacks everything biological oxidation does and more, so COD is always greater than or equal to BOD', isCorrect: true },
+      { text: 'It is plausible — bacteria are more thorough than a chemical oxidant, so BOD can come out higher', isCorrect: false, misconceptionId: `${WATSOL}:MC2` },
+    ],
+    correctValue: 'impossible — COD >= BOD always',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WATSOL}:MC2`],
+    source: `${WATSOL_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.surface.emulsions ──────────────────────────────────────────────────
@@ -2319,6 +2427,33 @@ const EMUL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${EMUL}:MC1`],
     source: `${EMUL_SRC} — misconception: emulsions are permanent if emulsifier is present`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // A TRANSFER case for MC1 (emulsifiers make oil and water miscible): what "breaking" an emulsion reveals. Rung PROFICIENT.
+    conceptId: EMUL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Mayonnaise is a stable oil-in-water emulsion. Has the emulsifier made the oil DISSOLVE in the water?',
+    choices: [
+      { text: 'No — the oil is still there as separate droplets, and the emulsifier only coats them so they cannot coalesce. That is exactly why an emulsion can be BROKEN back into two layers, which a true solution can never be', isCorrect: true },
+      { text: 'Yes — that is what an emulsifier does: it makes oil and water genuinely miscible', isCorrect: false, misconceptionId: `${EMUL}:MC1` },
+    ],
+    correctValue: 'no — droplets are stabilised, not dissolved',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EMUL}:MC1`],
+    source: `${EMUL_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -3294,6 +3429,33 @@ const OZONE_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${OZONE}:MC2`],
     source: `${OZONE_SRC} — misconception: ozone hole is a permanent puncture rather than a cyclical phenomenon`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: OZONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: CFCs were emitted mostly over Europe and North America. Why is the ozone hole over Antarctica?',
+    choices: [
+      { text: 'Because CFCs mix globally over years before reaching the stratosphere, and depletion happens where the conditions are right — the polar vortex isolates the air, stratospheric clouds enable the chemistry, and spring UV sets it off. Emission LOCATION is largely irrelevant', isCorrect: true },
+      { text: 'The hole really is worst over the industrial regions where the CFCs were released, and Antarctica is a secondary effect', isCorrect: false, misconceptionId: `${OZONE}:MC3` },
+    ],
+    correctValue: 'polar vortex and PSC chemistry, not emission location',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${OZONE}:MC3`],
+    source: `${OZONE_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.atomic.electronic-config ───────────────────────────────────────────
@@ -4192,6 +4354,33 @@ const ADSORB_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ADSORB}:MC2`],
     source: `${ADSORB_SRC} — misconception: all adsorption behaves like physisorption (monotonic decrease with T)`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung PROFICIENT.
+    conceptId: ADSORB,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Raise the pressure high enough and can chemisorption build up multiple layers, the way physisorption does?',
+    choices: [
+      { text: 'No — chemisorption needs a genuine chemical bond to a specific active site, and once the monolayer fills those sites there is nothing left for a second layer to bond to. Only physisorption, driven by non-specific van der Waals forces, can stack', isCorrect: true },
+      { text: 'Yes — at high enough pressure any adsorption process will build up further layers', isCorrect: false, misconceptionId: `${ADSORB}:MC3` },
+    ],
+    correctValue: 'no — chemisorption is limited to a monolayer',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ADSORB}:MC3`],
+    source: `${ADSORB_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -6102,6 +6291,33 @@ const HYDR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${HYDR}:MC2`],
     source: `${HYDR_SRC} — misconception: overextending "isotopes have identical chemistry" to reaction kinetics`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung PROFICIENT.
+    conceptId: HYDR,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: H2O2 is added to acidified KMnO4 and O2 is evolved. Is H2O2 acting as an oxidising or a reducing agent here?',
+    choices: [
+      { text: 'Reducing — H2O2 -> O2 + 2H+ + 2e- shows it LOSING electrons. Its oxygen sits at the intermediate -1 state and can go either way; against a stronger oxidiser like KMnO4 it is forced into the reducing role', isCorrect: true },
+      { text: 'Oxidising — H2O2 is a peroxide, so it always acts as an oxidising agent', isCorrect: false, misconceptionId: `${HYDR}:MC3` },
+    ],
+    correctValue: 'reducing agent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HYDR}:MC3`],
+    source: `${HYDR_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.anal.chromatography ────────────────────────────────────────────────
@@ -6185,6 +6401,33 @@ const CHROMA_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${CHROMA}:MC2`],
     source: `${CHROMA_SRC} — misconception: Rf is a universal, condition-independent constant`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // A TRANSFER case for MC1 (low Rf means low affinity): the same compound on two stationary phases. Rung PROFICIENT.
+    conceptId: CHROMA,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A compound runs to Rf = 0.10 on normal-phase silica and Rf = 0.85 on a reversed-phase (non-polar) plate. What does that tell you?',
+    choices: [
+      { text: 'It is polar — a LOW Rf means it stayed near the baseline because it bound the stationary phase STRONGLY, so it grips polar silica and barely grips the non-polar phase', isCorrect: true },
+      { text: 'It interacts weakly with silica, since the Rf there is low, and strongly with the reversed phase, since that Rf is high', isCorrect: false, misconceptionId: `${CHROMA}:MC1` },
+    ],
+    correctValue: 'polar — low Rf means strong affinity for that phase',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHROMA}:MC1`],
+    source: `${CHROMA_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -6272,6 +6515,33 @@ const GRAVI_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${GRAVI}:MC2`],
     source: `${GRAVI_SRC} — misconception: low Ksp alone is sufficient for gravimetric suitability`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: GRAVI,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a gravimetric sulfate determination, should you add exactly the stoichiometric amount of BaCl2 to avoid contaminating the precipitate?',
+    choices: [
+      { text: 'No — a modest EXCESS is deliberate. The common-ion effect pushes the equilibrium further toward BaSO4, so less analyte is lost in the filtrate, and the excess BaCl2 simply washes away during filtration', isCorrect: true },
+      { text: 'Yes — any excess reagent risks contaminating the precipitate and inflating the mass', isCorrect: false, misconceptionId: `${GRAVI}:MC3` },
+    ],
+    correctValue: 'no — a deliberate excess drives precipitation to completion',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GRAVI}:MC3`],
+    source: `${GRAVI_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.surface.heterogeneous-cat ──────────────────────────────────────────
@@ -6357,6 +6627,33 @@ const HETCAT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${HETCAT}:MC2`],
     source: `${HETCAT_SRC} — misconception: catalyst poisoning is always reversible with cleaning`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: HETCAT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: 10% of a catalyst\'s surface sites are blocked by a poison. Is the catalyst now dead?',
+    choices: [
+      { text: 'No — 90% of the sites are still clean and it keeps substantial activity. But the loss can exceed 10%, because poisons tend to bind the MOST active sites first; total deactivation needs every site blocked or the structure itself destroyed', isCorrect: true },
+      { text: 'Yes — poisoning means the catalyst is deactivated, however much of it was affected', isCorrect: false, misconceptionId: `${HETCAT}:MC3` },
+    ],
+    correctValue: 'no — activity loss depends on which and how many sites',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HETCAT}:MC3`],
+    source: `${HETCAT_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -7042,6 +7339,33 @@ const ALKALI_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ALKALI}:MC2`],
     source: `${ALKALI_SRC} — misconception: uniform mild reactivity across all alkali metals with water`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: ALKALI,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In Group 17, fluorine at the top is the most reactive. Is lithium therefore the most reactive Group 1 metal?',
+    choices: [
+      { text: 'No — Group 1 reactivity INCREASES down the group, so caesium is the most reactive and lithium the least. Metal reactivity is about ease of losing an electron, and ionisation energy falls down the group; the halogen trend runs the opposite way because non-metals GAIN electrons', isCorrect: true },
+      { text: 'Yes — higher up the group means more reactive, the same way it works for the halogens', isCorrect: false, misconceptionId: `${ALKALI}:MC3` },
+    ],
+    correctValue: 'no — Cs is most reactive, Li least',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ALKALI}:MC3`],
+    source: `${ALKALI_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.pblock.group17 ─────────────────────────────────────────────────────
@@ -7469,6 +7793,33 @@ const ALKEARTH_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ALKEARTH}:MC2`],
     source: `${ALKEARTH_SRC} — misconception: all Group 2 metal halides are purely ionic without exception`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: ALKEARTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: MgCO3 decomposes near 540 C while BaCO3 needs about 1360 C. Mg2+ is the smaller ion with the higher lattice energy. Why is it the LESS stable salt?',
+    choices: [
+      { text: 'Because carbonate stability is set by anion DESTABILISATION, not lattice energy — the small, charge-dense Mg2+ polarises the carbonate ion strongly and pulls it apart, so the smaller cation lowers the decomposition temperature', isCorrect: true },
+      { text: 'It should be the more stable one — a small cation gives a high lattice energy, so MgCO3 must decompose at the higher temperature', isCorrect: false, misconceptionId: `${ALKEARTH}:MC3` },
+    ],
+    correctValue: 'anion polarisation, not lattice energy',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ALKEARTH}:MC3`],
+    source: `${ALKEARTH_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -9230,6 +9581,33 @@ const VOLUM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${VOLUM}:MC2`],
     source: `${VOLUM_SRC} — misconception: burette and pipette are functionally interchangeable`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: VOLUM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In the Volhard determination of chloride, what does the KSCN titrant actually react with?',
+    choices: [
+      { text: 'The EXCESS Ag+ left over after a known excess of AgNO3 has precipitated the chloride — it is a back titration, and the chloride is found by subtraction. KSCN does not titrate Cl- directly; there is no such reaction', isCorrect: true },
+      { text: 'The chloride ions directly, with Fe3+ as the indicator', isCorrect: false, misconceptionId: `${VOLUM}:MC3` },
+    ],
+    correctValue: 'the leftover Ag+ — it is a back titration',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VOLUM}:MC3`],
+    source: `${VOLUM_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.coord.cft ───────────────────────────────────────────────────────────
@@ -10206,6 +10584,33 @@ const WATER_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [],
     source: `${WATER_SRC} — water's 4-fold hydrogen bonding capacity as the structural basis for the ice lattice`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC2, which had no gradeable probe. Rung PROFICIENT.
+    conceptId: WATER,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Can heavy water be softened by boiling it or passing it through an ion-exchange column?',
+    choices: [
+      { text: 'No — the two have nothing to do with each other. Hard water carries dissolved Ca2+ and Mg2+ that boiling or ion exchange removes; heavy water is chemically PURE D2O, heavy because deuterium has twice the mass of protium. There is no impurity to take out', isCorrect: true },
+      { text: 'Yes — heavy water is water with extra dissolved minerals, so the usual softening methods apply', isCorrect: false, misconceptionId: `${WATER}:MC2` },
+    ],
+    correctValue: 'no — D2O is isotopically pure, not contaminated',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WATER}:MC2`],
+    source: `${WATER_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -11450,6 +11855,33 @@ const SURF_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SURF}:MC2`],
     source: `${SURF_SRC} — misconception: surfactants are completely inactive below the critical micelle concentration`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung PROFICIENT.
+    conceptId: SURF,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You keep adding surfactant well past the CMC. What happens to the surface tension?',
+    choices: [
+      { text: 'It plateaus — the surface is already saturated, so extra surfactant goes into forming micelles in the bulk rather than to the surface. The steep fall happens only BELOW the CMC, and the breakpoint IS the CMC', isCorrect: true },
+      { text: 'It keeps falling — more surfactant always means lower surface tension, heading toward zero', isCorrect: false, misconceptionId: `${SURF}:MC3` },
+    ],
+    correctValue: 'it plateaus above the CMC',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SURF}:MC3`],
+    source: `${SURF_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -15612,6 +16044,33 @@ const ANALSPEC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${ANALSPEC}:MC2`],
     source: `${ANALSPEC_SRC} — Beer-Lambert linearity limits at high A and scattering samples`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2).
+    //
+    // probeKind is 'checkpoint', NOT 'mcq', and that is load-bearing. Chemistry
+    // is fully seeded in production (744 HUMAN_CURATOR rows). Adding a second
+    // 'mcq' at this gradeBand would turn a singleton slot into a difficulty
+    // LADDER, and buildProbeSlugResolver then appends a rung segment to the
+    // slug — re-identifying the ALREADY-SEEDED probe and orphaning its row.
+    // A free slot keeps every existing identity byte-for-byte. findBestProbe
+    // filters on conceptId/language/status and never on probeKind, so the
+    // learner-facing behaviour is identical.
+    // Targets MC3, which had no gradeable probe. Rung PROFICIENT.
+    conceptId: ANALSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: An ICP-MS trace of a lead sample shows three peaks at m/z 206, 207 and 208. What are they?',
+    choices: [
+      { text: 'The three stable ISOTOPES of lead, each resolved at its own precise mass — this is why ICP-MS is used for isotope-ratio work such as geological dating and food-origin tracing, not merely for elemental masses', isCorrect: true },
+      { text: 'Three readings of lead\'s atomic mass, scattered by instrument noise around the true value', isCorrect: false, misconceptionId: `${ANALSPEC}:MC3` },
+    ],
+    correctValue: 'the three stable isotopes of lead',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ANALSPEC}:MC3`],
+    source: `${ANALSPEC_SRC} — MC3, distractor-mapped`,
   },
 ]
 

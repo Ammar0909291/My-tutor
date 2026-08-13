@@ -28,7 +28,19 @@
 import { describe, it, expect } from 'vitest'
 import { probeToMcq, isMasteryGatePhase, buildGateAssessmentBlock } from '@/lib/teaching/gateAssessment'
 import { AUTHORED_PROBES } from '@/lib/teaching/assets/authoredSeedAssets'
+import { CHEMISTRY_PROBES } from '@/lib/teaching/assets/chemistrySeedAssets'
+import { BIOLOGY_PROBES } from '@/lib/teaching/assets/biologySeedAssets'
+import { CS_PROBES } from '@/lib/teaching/assets/csSeedAssets'
+
 import { gradeMcqAnswer } from '@/lib/teaching/mcq'
+
+/** The shape the measurement needs — narrower than SeedProbe on purpose. */
+type SeedProbeLike = {
+  conceptId: string
+  stem: string
+  gradeBand: unknown
+  choices?: ReadonlyArray<{ text: string; isCorrect: boolean }> | null
+}
 
 const probe = (choices: Array<{ text: string; isCorrect: boolean }>, stem = 'Which unit is SI base for temperature?') =>
   ({ stem, choices })
@@ -254,5 +266,80 @@ describe('the prompt block asks for a lead-in, not a question', () => {
 
   it('does not list the options — the learner reads those as buttons', () => {
     expect(block).not.toContain('degree Celsius')
+  })
+})
+
+/**
+ * THE SAME MEASUREMENT, FOR THE SUBJECTS THE GUARD NEVER SAW.
+ *
+ * ── THE GAP THIS CLOSES ─────────────────────────────────────────────────────
+ * Everything above filters `AUTHORED_PROBES` on `subjectSlug === 'physics'`.
+ * Chemistry, biology and computer science do not live in `AUTHORED_PROBES` at
+ * all — they are separate exported arrays in their own seed files, and every
+ * seed writer concatenates them (`scripts/brain/seed-knowledge-assets.ts`,
+ * `src/instrumentation.ts`). So the ratchet has been measuring one of four
+ * corpora while reporting on "the authored corpus".
+ *
+ * Measured when this was written, with the identical probeToMcq filter:
+ *   chemistry         186 concepts, 169 short of three
+ *   biology           108 concepts, 108 short of three
+ *   computer_science  119 concepts, 119 short of three
+ *
+ * Biology and CS carry EXACTLY two gradeable probes on every single concept —
+ * the same shape physics was in before the third-probe pass. Their gate runs
+ * dry on the last check for every concept they have, and nothing in the suite
+ * said so.
+ *
+ * Pinned as MAXIMA, exactly like the physics ratchet: authoring more probes
+ * must never fail this test, losing them must.
+ */
+describe('the non-physics authored corpora convert too', () => {
+  const corpora: ReadonlyArray<readonly [string, readonly SeedProbeLike[], number]> = [
+    // [subject, probes, concepts still short of three gradeable probes]
+    // chemistry: 186 -> 169 (chem.env, chem.sblock, chem.anal, chem.surface)
+    ['chemistry', CHEMISTRY_PROBES, 169],
+    ['biology', BIOLOGY_PROBES, 108],
+    ['computer_science', CS_PROBES, 119],
+  ]
+
+  it.each(corpora)('%s: every concept with a probe has a GRADEABLE one', (_s, probes) => {
+    const all = new Set(probes.map((p) => p.conceptId))
+    const gradeable = new Set(
+      probes
+        .filter((p) => probeToMcq({ stem: p.stem, choices: p.choices ?? null }))
+        .map((p) => p.conceptId),
+    )
+    expect(gradeable.size).toBe(all.size)
+  })
+
+  it.each(corpora)('%s: concepts short of three, ratcheted', (_s, probes, ceiling) => {
+    const counts = new Map<string, number>()
+    for (const p of probes) {
+      if (!probeToMcq({ stem: p.stem, choices: p.choices ?? null })) continue
+      counts.set(p.conceptId, (counts.get(p.conceptId) ?? 0) + 1)
+    }
+    const short = [...counts.values()].filter((n) => n < 3).length
+    expect(short).toBeLessThanOrEqual(ceiling)
+  })
+
+  /**
+   * The band-aware form, for the same reason it exists on the physics side: a
+   * concept split UNDERGRADUATE=2 / HIGH=1 passes the raw count while no
+   * single learner ever reaches three. Authoring a third probe into the wrong
+   * band would satisfy the ratchet above and fix nothing.
+   */
+  it.each(corpora)('%s: three within ONE band, ratcheted the same way', (_s, probes, ceiling) => {
+    const byConcept = new Map<string, Map<string, number>>()
+    for (const p of probes) {
+      if (!probeToMcq({ stem: p.stem, choices: p.choices ?? null })) continue
+      if (!byConcept.has(p.conceptId)) byConcept.set(p.conceptId, new Map())
+      const bands = byConcept.get(p.conceptId)!
+      const band = String(p.gradeBand)
+      bands.set(band, (bands.get(band) ?? 0) + 1)
+    }
+    const short = [...byConcept.values()].filter(
+      (bands) => ![...bands.values()].some((n) => n >= 3),
+    ).length
+    expect(short).toBeLessThanOrEqual(ceiling)
   })
 })
