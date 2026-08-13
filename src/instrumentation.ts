@@ -335,6 +335,33 @@ async function bootstrapAssets() {
       // catalogue never converged. Counted and logged loudly, and the next
       // cold start retries whatever is still missing.
       let failed = 0
+
+      // ── A BOUNDED SLICE PER COLD START ────────────────────────────────────
+      //
+      // MEASURED: in 24h of production logs, "asset bootstrap complete" appears
+      // ZERO times, while "seeding missing assets…" appears on nearly every
+      // request. The catalogue has been frozen at 2379/2920 for weeks.
+      //
+      // The remaining cause, after the resilience fixes, is structural rather
+      // than a bug: register() starts this work WITHOUT awaiting it, and a
+      // serverless instance freezes once the response is sent. A task needing
+      // ~1,500 writes cannot finish inside an invocation that ends in
+      // milliseconds — so every cold start redoes the same early work and dies
+      // in the same place, making zero net progress forever.
+      //
+      // Doing LESS is what makes it finish. A bounded slice completes well
+      // inside an invocation, and each cold start advances the catalogue by
+      // that slice, so it converges over ordinary traffic instead of never.
+      // The prefetch above already made "what is still missing" one query, so
+      // resuming costs nothing.
+      //
+      // Deliberately NOT a new seeding path: same loops, same content, same
+      // idempotent writes — only an upper bound on how much one invocation
+      // attempts. `scripts/brain/seed-knowledge-assets.ts` remains the right
+      // tool for seeding the whole catalogue at once.
+      const WRITE_BUDGET = Number(process.env.ASSET_BOOTSTRAP_WRITE_BUDGET ?? 40)
+      let budgetSpent = 0
+      const budgetExhausted = () => budgetSpent >= WRITE_BUDGET
       // Content rows written for an identity that already existed but was
       // hollow. Counted separately from `created` so the log distinguishes
       // "new asset" from "repaired a shell", which are different events.
@@ -365,6 +392,7 @@ async function bootstrapAssets() {
       // canonicalSlug, no id churn for anything already referencing the asset,
       // and evidence rows keyed on assetId keep pointing at the same asset.
       for (const e of ALL_EXPLANATIONS) {
+        if (budgetExhausted()) break
         const canonicalSlug = seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)
         const dup = existing.get(canonicalSlug)
         if (dup) {
@@ -381,6 +409,7 @@ async function bootstrapAssets() {
                 },
               })
               repaired++
+              budgetSpent++
             } catch (repairErr: any) {
               // P2002 = a concurrent cold start healed it first. Both outcomes
               // are the desired one.
@@ -421,6 +450,7 @@ async function bootstrapAssets() {
             },
           })
           created++
+          budgetSpent++
         } catch (createErr: any) {
           // P2002 = concurrent cold start already inserted this slug — safe to skip.
           if (createErr?.code === 'P2002') { skipped++; continue }
@@ -433,6 +463,7 @@ async function bootstrapAssets() {
       // the E6 damage was actually done. See the note above the explanation
       // loop for the full measurement and reasoning.
       for (const p of ALL_PROBES) {
+        if (budgetExhausted()) break
         const canonicalSlug = probeSlug(p)
         const dup = existing.get(canonicalSlug)
         if (dup) {
@@ -451,6 +482,7 @@ async function bootstrapAssets() {
                 },
               })
               repaired++
+              budgetSpent++
             } catch (repairErr: any) {
               if (repairErr?.code !== 'P2002') throw repairErr
             }
@@ -491,6 +523,7 @@ async function bootstrapAssets() {
             },
           })
           created++
+          budgetSpent++
         } catch (createErr: any) {
           if (createErr?.code === 'P2002') { skipped++; continue }
           failed++
@@ -499,9 +532,11 @@ async function bootstrapAssets() {
       }
 
       console.log(
-        `[instrumentation] asset bootstrap complete: created=${created} repaired=${repaired}` +
-        ` skipped=${skipped} failed=${failed} total=${EXPECTED_IDENTITIES}` +
-        (failed > 0 ? ' — some writes failed (likely DB timeouts); the next cold start retries them' : '')
+        `[instrumentation] asset bootstrap slice: created=${created} repaired=${repaired}` +
+        ` skipped=${skipped} failed=${failed} spent=${budgetSpent}/${WRITE_BUDGET}` +
+        ` total=${EXPECTED_IDENTITIES}` +
+        (budgetSpent >= WRITE_BUDGET ? ' — budget spent, the next cold start continues' : ' — nothing left to do') +
+        (failed > 0 ? '; some writes failed (likely DB timeouts) and will be retried' : '')
       )
     } finally {
       await prisma.$disconnect()

@@ -113,6 +113,35 @@ describe('the asset bootstrap repairs hollow identities', () => {
     expect(SRC).toMatch(/status convergence failed, continuing to seeding/)
   })
 
+  it('does a BOUNDED slice per cold start, so it can actually finish', () => {
+    // MEASURED: 24h of production logs contain ZERO "asset bootstrap complete"
+    // lines while "seeding missing assets..." appears on nearly every request.
+    // register() starts this work without awaiting it and a serverless
+    // instance freezes once the response is sent, so a task needing ~1,500
+    // writes never finishes — every cold start redoes the same early work and
+    // makes zero net progress, forever.
+    //
+    // Doing LESS is what makes it finish: a bounded slice completes inside an
+    // invocation, and each cold start advances the catalogue by that slice.
+    expect(SRC).toMatch(/ASSET_BOOTSTRAP_WRITE_BUDGET/)
+    expect(SRC).toMatch(/const budgetExhausted = \(\) => budgetSpent >= WRITE_BUDGET/)
+    // Both loops must respect it — bounding only one still lets the other run
+    // unbounded and freeze mid-way.
+    const breaks = SRC.match(/if \(budgetExhausted\(\)\) break/g) ?? []
+    expect(breaks).toHaveLength(2)
+    // Only REAL writes spend budget; skips are free, or a run of already-seeded
+    // assets would burn the slice without doing anything.
+    expect(SRC).toMatch(/repaired\+\+\s*\n\s*budgetSpent\+\+/)
+    expect(SRC).toMatch(/created\+\+\s*\n\s*budgetSpent\+\+/)
+  })
+
+  it('the log distinguishes "slice spent, more to do" from "nothing left"', () => {
+    // Otherwise a partially-seeded catalogue and a complete one look identical
+    // in the logs — which is how this went unnoticed for weeks.
+    expect(SRC).toMatch(/budget spent, the next cold start continues/)
+    expect(SRC).toMatch(/nothing left to do/)
+  })
+
   it('records the measurement in the source so this is not deleted as dead code', () => {
     expect(SRC).toMatch(/737/)
     expect(SRC).toMatch(/findBestProbe/)
