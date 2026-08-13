@@ -3,7 +3,9 @@ import { readFileSync } from 'fs'
 import path from 'path'
 
 /**
- * HEADER DECLUTTER + COMPACT PROGRESS BAR + DIAGRAM PADDING.
+ * HEADER DECLUTTER + COMPACT PROGRESS BAR + DIAGRAM PADDING + FINAL LEARN
+ * WINDOW UI RESTRUCTURE (Lesson/Code/Chat tabs removed, lesson identity
+ * moved into the header, action controls collapsed into one push-up menu).
  *
  * ── WHY THE PROGRESS BAR "DISAPPEARED" ──────────────────────────────────────
  * Traced against the actual file: `CompactLessonProgressBar` was never
@@ -15,11 +17,24 @@ import path from 'path'
  * pair, competing for space against Avatar + title + the bar itself +
  * Bookmark + Maximize — on a narrow viewport, or once every optional element
  * rendered simultaneously, the bar had far less room than its ~94px design
- * budget. This suite pins the actual fix: those four controls moved OUT of
- * the header into the bottom action row, so the header is back to
- * "Tutor Max | compact progress" with room to spare, and adds regression
- * coverage so the bar (and its header-only placement) cannot silently
- * regress again.
+ * budget. Those four controls first moved OUT of the header into a bottom
+ * action row (superseded), and now live inside the push-up Actions menu
+ * (this file's later describe blocks) — the header itself stays exactly
+ * "Tutor Max | lesson identity | compact progress | bookmark | maximize".
+ *
+ * ── THE FINAL RESTRUCTURE (this revision) ───────────────────────────────────
+ * The current-production screenshot this task started from showed the
+ * previous restructure had NOT reached the Learn window: a visible
+ * Lesson/Code/Chat tab strip, and up to 8 always-visible action buttons
+ * eating the mobile screen's vertical space. This suite now also pins:
+ *   1. The tab strip and its `activeTab` state are gone entirely (not
+ *      hidden with CSS — the state, the buttons and the mobile-only
+ *      visibility classes that depended on it are removed from the source).
+ *   2. Lesson identity ("Lesson N · Title") is rendered in the SAME
+ *      PanelHeader as "Tutor Max", paired with CompactLessonProgressBar.
+ *   3. The 8 action controls collapse into ONE real stateful push-up menu
+ *      (`actionsMenuOpen`), closed by default, toggled ONLY by its own
+ *      button — never by hover, never automatically.
  */
 
 const SRC = readFileSync(
@@ -54,7 +69,7 @@ describe('compact progress bar — present, wired, and NOT crowded out', () => {
     expect(HEADER).not.toContain('moreMenuOpen')
   })
 
-  it('the header keeps only the branding, the bar, and the two panel-level controls (bookmark, maximize)', () => {
+  it('the header keeps branding, lesson identity, the bar, and the two panel-level controls (bookmark, maximize)', () => {
     expect(HEADER).toContain("t('lesson_tutor_max')")
     expect(HEADER).toContain('<CompactLessonProgressBar')
     expect(HEADER).toContain("t('lesson_bookmark')")
@@ -67,21 +82,124 @@ describe('compact progress bar — present, wired, and NOT crowded out', () => {
   })
 })
 
-// ── THE BOTTOM ACTION ROW — the four relocated controls, functionally intact
+// ── LESSON IDENTITY, MOVED INTO THE TUTOR MAX HEADER ────────────────────────
+//
+// Standing UI instruction: with the Lesson/Code/Chat tab strip removed, the
+// learner needs to see which lesson they're in from the SAME header, not a
+// separate navigation surface. Paired visually with CompactLessonProgressBar
+// (both live inside the same right-aligned block, per the mockup's two-line
+// "Lesson N · Title" / "[progress]" pairing) — not a second card, not an
+// oversized standalone title.
 
-const ACTIONS_START = SRC.indexOf('QUICK ACTIONS, WHERE THE LEARNER ACTUALLY IS')
+describe('lesson identity lives in the Tutor Max header, compactly', () => {
+  it('renders "Lesson N · Title" using the existing progress_lesson_label key, gated on currentLessonData', () => {
+    const idx = HEADER.indexOf("t('progress_lesson_label')")
+    expect(idx).toBeGreaterThan(-1)
+    const before = HEADER.slice(Math.max(0, idx - 700), idx)
+    expect(before).toContain('currentLessonData && (')
+    const after = HEADER.slice(idx, idx + 120)
+    expect(after).toContain('currentLessonData.order')
+    expect(after).toContain('currentLessonData.lessonTitle')
+  })
+
+  it('CompactLessonProgressBar sits in the SAME block as the lesson identity text, not a separate header slot', () => {
+    const idx = HEADER.indexOf("t('progress_lesson_label')")
+    const block = HEADER.slice(idx, idx + 900)
+    expect(block).toContain('<CompactLessonProgressBar')
+  })
+
+  it('the identity text truncates rather than wrapping into a large header', () => {
+    const idx = HEADER.indexOf("t('progress_lesson_label')")
+    const block = HEADER.slice(Math.max(0, idx - 400), idx + 200)
+    expect(block).toMatch(/whiteSpace:\s*'nowrap'/)
+    expect(block).toMatch(/textOverflow:\s*'ellipsis'/)
+    // Compact font, not an oversized standalone title.
+    expect(block).toMatch(/fontSize:\s*12\.6/)
+  })
+})
+
+// ── LESSON/CODE/CHAT TABS — REMOVED, NOT HIDDEN ─────────────────────────────
+//
+// The task's own root-cause rule: "Do not simply hide elements with CSS...
+// Remove/restructure the obsolete Lesson/Code/Chat navigation architecture."
+// These assertions fail on a CSS-only hide (className toggle) just as much as
+// on the tabs still existing — the state, the buttons and the mobile-tab
+// className branches must be gone from the source, not merely invisible.
+
+describe('the Lesson/Code/Chat tab strip is removed, not hidden', () => {
+  it('the activeTab state and its type are gone', () => {
+    expect(SRC).not.toContain("useState<ActiveTab>('chat')")
+    expect(SRC).not.toContain("type ActiveTab = 'curriculum' | 'code' | 'chat'")
+    expect(SRC).not.toMatch(/\bconst \[activeTab, setActiveTab\]/)
+  })
+
+  it('no setActiveTab calls remain anywhere in the file', () => {
+    expect(SRC).not.toContain('setActiveTab(')
+  })
+
+  it('the segmented-control tab strip markup (📚/💻/💬, lesson_tab_* labels) is gone', () => {
+    expect(SRC).not.toContain("t('lesson_tab_lesson')")
+    expect(SRC).not.toContain("t('lesson_tab_code')")
+    expect(SRC).not.toContain("t('lesson_tab_chat')")
+    expect(SRC).not.toMatch(/const icons = \['📚', '💻', '💬'\]/)
+  })
+
+  it('was not replaced with another large tab bar — no sibling segmented control was introduced', () => {
+    // The only remaining tab-shaped construct in the file is the desktop
+    // maximize/restore affordance, which is a single per-panel button, not a
+    // multi-option strip. No new `role="tablist"` or segmented-control markup.
+    expect(SRC).not.toContain('role="tablist"')
+    expect(SRC).not.toContain("role='tablist'")
+  })
+
+  it('QuickActionsAndCheck (the tab-only mobile quick-actions rail) no longer exists as a component', () => {
+    expect(SRC).not.toMatch(/function QuickActionsAndCheck/)
+    expect(SRC).not.toContain('<QuickActionsAndCheck')
+  })
+
+  it('mobile shows the chat/teaching panel unconditionally; curriculum and code panels are desktop-only', () => {
+    // Panel 1 (curriculum) and panel 2 (code/former quick-actions): hidden on
+    // mobile unconditionally now, not toggled by a removed tab state.
+    expect(SRC).toMatch(/PANEL 1 — CURRICULUM ROADMAP[\s\S]{0,200}<div className="hidden md:contents"/)
+    // Panel 3 (chat): always rendered — "contents"/"flex", never gated.
+    expect(SRC).toMatch(/PANEL 3 — TUTOR CHAT[\s\S]{0,300}<div className="contents"/)
+  })
+})
+
+// ── THE PUSH-UP ACTIONS MENU — the 8 relocated controls, functionally intact
+
+const ACTIONS_START = SRC.indexOf('ACTIONS MENU — a single push-up toggle')
 const ACTIONS_END = SRC.indexOf("{/* Pill: attach + camera + textarea + mic", ACTIONS_START)
 const ACTIONS_ROW = SRC.slice(ACTIONS_START, ACTIONS_END)
 
-describe('bottom action row — Practice / Insights / Got it / Not clear', () => {
-  it('all four now live in the bottom action row, alongside the existing quick actions', () => {
+describe('push-up Actions menu — collapsed by default, one real toggle', () => {
+  it('the menu marker region exists and is non-empty', () => {
+    expect(ACTIONS_START).toBeGreaterThan(-1)
+    expect(ACTIONS_ROW.length).toBeGreaterThan(0)
+  })
+
+  it('is driven by a single real stateful toggle, not a duplicate button tree', () => {
+    expect(SRC).toMatch(/const \[actionsMenuOpen, setActionsMenuOpen\] = useState\(false\)/)
+    // Exactly one toggle button flips it via a functional update.
+    const toggles = (SRC.match(/setActionsMenuOpen\(\(v\) => !v\)/g) ?? []).length
+    expect(toggles).toBe(1)
+  })
+
+  it('collapsed by default (initial state is false, not true)', () => {
+    expect(SRC).toContain('useState(false)')
+    expect(SRC).not.toMatch(/const \[actionsMenuOpen, setActionsMenuOpen\] = useState\(true\)/)
+  })
+
+  it('the toggle button carries aria-expanded reflecting the real state', () => {
+    expect(ACTIONS_ROW).toContain('aria-expanded={actionsMenuOpen}')
+  })
+
+  it('all 8 controls (4 quick actions + Practice + Insights + Got it + Not clear) live inside the menu', () => {
+    expect(ACTIONS_ROW).toContain('QUICK_ACTIONS[teachingLanguage]')
     expect(ACTIONS_ROW).toContain("{t('nav_practice')}")
     expect(ACTIONS_ROW).toContain("{t('lesson_insights_btn')}")
     expect(ACTIONS_ROW).toContain("{t('lesson_got_it')}")
     expect(ACTIONS_ROW).toContain("{t('lesson_not_clear')}")
-    // The pre-existing four quick actions are still there too — nothing was
-    // replaced, only added alongside.
-    expect(ACTIONS_ROW).toContain('QUICK_ACTIONS[teachingLanguage]')
   })
 
   it('Practice/Insights preserve their exact gate and mutual-exclusivity toggle', () => {
@@ -94,15 +212,44 @@ describe('bottom action row — Practice / Insights / Got it / Not clear', () =>
   it('Got it/Not clear preserve their exact gate (only once the tutor has said something) and handler', () => {
     const idx = ACTIONS_ROW.indexOf("lastAssistant = [...messages].reverse()")
     expect(idx).toBeGreaterThan(-1)
-    const block = ACTIONS_ROW.slice(idx, idx + 1600)
+    const block = ACTIONS_ROW.slice(idx, idx + 2400)
     expect(block).toContain("m.role === 'assistant' && !m.streaming")
     expect(block).toContain("sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)")
     expect(block).toContain("I don't understand, explain differently")
   })
 
-  it('no floating/hover dropdown was reintroduced for these controls', () => {
-    expect(ACTIONS_ROW).not.toContain('position: \'absolute\'')
-    expect(ACTIONS_ROW).not.toContain('aria-haspopup')
+  it('selecting any action closes the menu afterward', () => {
+    const closes = (ACTIONS_ROW.match(/setActionsMenuOpen\(false\)/g) ?? []).length
+    // The 4 quick actions share ONE mapped button template (one source
+    // occurrence, fired per-click at runtime for whichever action was
+    // tapped) + Practice + Insights + Got it + Not clear = 5 source call
+    // sites covering all 8 controls.
+    expect(closes).toBe(5)
+  })
+
+  it('the menu expands UPWARD from above its own toggle — bottom: 100%, absolutely positioned', () => {
+    expect(ACTIONS_ROW).toContain("bottom: '100%'")
+    expect(ACTIONS_ROW).toContain("position: 'absolute'")
+  })
+
+  it('never resizes the canvas: the popup is absolutely positioned relative to a wrapper the toggle also lives in', () => {
+    const wrapperIdx = ACTIONS_ROW.indexOf("position: 'relative'")
+    expect(wrapperIdx).toBeGreaterThan(-1)
+    expect(wrapperIdx).toBeLessThan(ACTIONS_ROW.indexOf("bottom: '100%'"))
+  })
+
+  it('no hover handler opens or closes the menu — only the click toggle', () => {
+    expect(ACTIONS_ROW).not.toMatch(/onMouseEnter.*setActionsMenuOpen/)
+    expect(ACTIONS_ROW).not.toMatch(/onMouseLeave.*setActionsMenuOpen/)
+  })
+
+  it('does not render while an MCQ wizard is active, avoiding the overlap — the toggle itself still works', () => {
+    expect(ACTIONS_ROW).toContain('actionsMenuOpen && !activeMcq &&')
+  })
+
+  it('has an internal scroll bound (maxHeight) rather than growing unbounded on a short viewport', () => {
+    expect(ACTIONS_ROW).toMatch(/maxHeight:\s*'min\(60vh, 380px\)'/)
+    expect(ACTIONS_ROW).toContain("overflowY: 'auto'")
   })
 })
 

@@ -743,7 +743,11 @@ function HintCard({ hint }: { hint: string }) {
 type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
-type ActiveTab = 'curriculum' | 'code' | 'chat'
+// Panel identity — still needed for desktop maximize/restore, even though
+// the mobile tab strip that used to share this type was removed (the Learn
+// window now always shows the chat/teaching panel on mobile; curriculum and
+// code panels are desktop-only, matching the existing 3-panel desktop grid).
+type PanelName = 'curriculum' | 'code' | 'chat'
 // CurriculumLesson, CurriculumProgress, TopicProgressEntry now live in
 // @/lib/curriculum/lessonNavigation (imported above) — single source of
 // truth shared with the Lesson Navigation Panel, no duplicate type shapes.
@@ -815,63 +819,14 @@ function PanelHeader({ children, tall }: { children: React.ReactNode; tall?: boo
   )
 }
 
-// "What would you like to do?" quick-prompt buttons — occupies the right-hand
-// rail for non-programming subjects (mockup's right panel). Quick Check
-// (multiple-choice) intentionally lives inline in the chat feed via
+// QuickActionsAndCheck (the mobile "Code"-tab quick-actions rail for
+// non-programming subjects) was removed with the Lesson/Code/Chat tab strip:
+// it was reachable ONLY via that tab (never rendered on desktop for these
+// subjects — see the panel-2 comment further down), and its content is now
+// folded into the chat panel's own push-up Actions menu. Quick Check
+// (multiple-choice) still lives inline in the chat feed via
 // InlinePracticePrompt, directly under the explanation/diagram it follows —
-// not duplicated here.
-function QuickActionsAndCheck({
-  teachingLanguage, sessionId, sendMessage, setActiveTab,
-}: {
-  teachingLanguage: TeachingLang
-  sessionId: string | null
-  sendMessage: (sid: string, text: string, showInUI?: boolean, voiceSignal?: VoiceTimingSignal) => Promise<void>
-  setActiveTab: (tab: ActiveTab) => void
-}) {
-  const { t } = useLanguage()
-  const ICONS = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }
-  const actions = QUICK_ACTIONS[teachingLanguage] ?? QUICK_ACTIONS.en
-
-  const askForAction = (prompt: string) => {
-    if (!sessionId) return
-    sendMessage(sessionId, prompt, true)
-    setActiveTab('chat')
-  }
-
-  return (
-    <div style={{ flex: 1, overflowY: 'auto', padding: 14, display: 'flex', flexDirection: 'column', gap: 16 }}>
-      {/* What would you like to do? */}
-      <div>
-        <p style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', marginBottom: 10 }}>
-          {t('lesson_what_to_do')}
-        </p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {actions.map((a) => {
-            const Icon = ICONS[a.icon]
-            const palette: Record<typeof a.icon, { bg: string; fg: string }> = {
-              simpler: { bg: `${UI.indigo}14`, fg: UI.indigo },
-              example: { bg: 'rgba(121,192,255,0.12)', fg: '#3B82F6' },
-              diagram: { bg: 'rgba(34,197,94,0.12)', fg: UI.green },
-              challenge: { bg: 'rgba(245,158,11,0.12)', fg: UI.amber },
-            }
-            const c = palette[a.icon]
-            return (
-              <button key={a.key} onClick={() => askForAction(a.prompt)} disabled={!sessionId}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 8, padding: '10px 12px', borderRadius: 10,
-                  background: c.bg, color: c.fg, border: 'none', cursor: sessionId ? 'pointer' : 'not-allowed',
-                  fontSize: 15, fontWeight: 700, textAlign: 'left',
-                }}>
-                <Icon size={15} style={{ flexShrink: 0 }} />
-                {a.label}
-              </button>
-            )
-          })}
-        </div>
-      </div>
-    </div>
-  )
-}
+// unchanged by this removal.
 
 // ─── Component ────────────────────────────────────────────────────────────────
 // WhatsApp-style history: ALL messages live in state (never trimmed); only
@@ -901,7 +856,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [elapsed, setElapsed] = useState(0)
   const [copied, setCopied] = useState(false)
   const [expanded, setExpanded] = useState<Record<string,boolean>>({})
-  const [activeTab, setActiveTab] = useState<ActiveTab>('chat')
+  // The push-up Actions menu (Explain simpler / Real-life example / Diagram /
+  // Challenge me / Practice / Practice insights / Got it / Not clear).
+  // Collapsed by default; toggled ONLY by its own button — no hover-open, no
+  // auto-open, no click-outside-to-close, per the standing UX requirement.
+  const [actionsMenuOpen, setActionsMenuOpen] = useState(false)
   const [atBottom, setAtBottom] = useState(true)
   // WhatsApp-style windowed rendering: how many of the newest messages are
   // mounted. Full history stays in `messages`; scrolling to the top reveals
@@ -913,7 +872,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   useEffect(() => { messagesLenRef.current = messages.length }, [messages.length])
   const historyScrolledRef = useRef(false)
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false)
-  const [maximizedPanel, setMaximizedPanel] = useState<ActiveTab | null>(null)
+  const [maximizedPanel, setMaximizedPanel] = useState<PanelName | null>(null)
 
   // Voice
   const [voiceType, setVoiceType] = useState<VoiceType>(() => resolveVoice(voiceChoice))
@@ -2104,7 +2063,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const replayPrelude = useCallback(() => {
     setPreludeDismissed(false)
     setPreludeReplay(true)
-    setActiveTab('chat')
   }, [])
 
   /**
@@ -2154,7 +2112,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     pendingLessonRunRef.current = null
     setLessonStarted(true)
     initializedRef.current = true
-    setActiveTab('chat')
     await callLessonInit(sessionId, initMode, next)
   }, [handleLessonComplete, curriculumLessons, topicProgressMap, sessionId, callLessonInit])
 
@@ -2199,7 +2156,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     }).catch(() => {})
     setRevisionTopic({ topicSlug: lesson.topicSlug, lessonTitle: lesson.lessonTitle })
     await callLessonInit(sessionId, 'review', lesson)
-    setActiveTab('chat')
   }, [subjectSlug, sessionId, callLessonInit])
 
   /**
@@ -2284,7 +2240,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (isRestart) {
       pendingLessonRunRef.current = async () => {
         await callLessonInit(sessionId, 'restart', target)
-        setActiveTab('chat')
       }
       return
     }
@@ -2321,7 +2276,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // never started gets its introduction, not a resume.
       const entryMode = decideLessonEntryMode({ lesson: target, progress: curriculumProgress, topicProgressMap })
       await callLessonInit(sessionId, lessonInitModeFor(entryMode), target)
-      setActiveTab('chat')
     }
   }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext])
 
@@ -3551,34 +3505,23 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         </div>
       </header>
 
-      {/* ══ MOBILE TABS — candy segmented control ═════════════════════════ */}
-      <div className="flex md:hidden shrink-0" style={{ background: 'var(--bg-surface)', padding: 8, gap: 6, boxShadow: '0 4px 0 var(--border-subtle)' }}>
-        {(['curriculum', 'code', 'chat'] as ActiveTab[]).map((tab, i) => {
-          const icons = ['📚', '💻', '💬']
-          const labels = [t('lesson_tab_lesson'), t('lesson_tab_code'), t('lesson_tab_chat')]
-          const isActive = activeTab === tab
-          return (
-            <button key={tab} onClick={() => setActiveTab(tab)} style={{
-              flex: 1, height: 40, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
-              borderRadius: 14, border: 'none',
-              background: isActive ? 'var(--coral)' : 'var(--bg-elevated)',
-              color: isActive ? '#fff' : 'var(--text-secondary)',
-              boxShadow: isActive ? '0 3px 0 var(--coral-hover)' : '0 3px 0 var(--border-subtle)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
-              transition: 'all 150ms',
-            }}>
-              <span>{icons[i]}</span> {labels[i]}
-            </button>
-          )
-        })}
-      </div>
+      {/* The Lesson/Code/Chat mobile tab strip that used to live here was
+          removed (standing UI instruction): the Learn window is now the
+          teaching experience directly — no navigation strip to switch into
+          it. See the 3-PANEL GRID comment below for how mobile now shows
+          only the chat/teaching panel, and desktop is unchanged. */}
 
       {/* ══ 3-PANEL GRID ══════════════════════════════════════════════════ */}
-      {/* Mobile: single column, one panel visible per activeTab. Desktop (md+): all three side by side.
-          isNotebook (non-code subjects) is only a 2-column desktop grid: the third
-          "quick actions" panel is never a permanent grid column there — that
-          content is reached via the mobile "Code" tab only (see QuickActionsAndCheck
-          below); no automatic desktop overlay presents it. */}
+      {/* Mobile: the chat/teaching panel ONLY, full width — no tabs, no way
+          to switch away from it (curriculum roadmap and code/quick-actions
+          are desktop-only now). Desktop (md+): unchanged from before — all
+          panels side by side via display:contents, exactly the same grid
+          this always used.
+          isNotebook (non-code subjects) is only a 2-column desktop grid: the
+          third "quick actions" panel is never a permanent grid column there
+          — its former mobile-only content (QuickActionsAndCheck) is gone,
+          folded into the chat panel's own push-up Actions menu, which is
+          reachable on both mobile and desktop. */}
       <div
         className={
           maximizedPanel ? 'grid grid-cols-1'
@@ -3588,13 +3531,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         style={{ flex: 1, minHeight: 0, gridTemplateRows: '1fr', gap: maximizedPanel ? 0 : 16, padding: maximizedPanel ? 0 : 16 }}
       >
 
-        {/* ══ PANEL 1 — CURRICULUM ROADMAP (25%) ══════════════════════════ */}
-        {/* On mobile only the active tab's panel is rendered (full width); on desktop all three sit side by side via display:contents */}
-        <div className={activeTab !== 'curriculum' ? 'hidden md:contents' : 'contents'}
+        {/* ══ PANEL 1 — CURRICULUM ROADMAP (25%) — desktop only ═══════════ */}
+        <div className="hidden md:contents"
           style={maximizedPanel && maximizedPanel !== 'curriculum' ? { display: 'none' } : undefined}>
         <Panel style={{ overflow: 'hidden' }} accentColor={UI.indigo}>
           <div style={{ flexDirection: 'column', height: '100%' }}
-            className={activeTab !== 'curriculum' ? 'hidden md:flex' : 'flex'}>
+            className="hidden md:flex">
             {/* Header */}
             <PanelHeader>
               <span style={{ fontSize: 15.6, fontWeight: 700, color: 'var(--text-primary)', flex: 1 }}>
@@ -3929,7 +3871,6 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                               ? `Meri "${lesson.lessonTitle}" ki samajh assess karo. Ek ek karke 3 questions pucho.`
                                               : `Please assess my understanding of "${lesson.lessonTitle}". Ask me 3 questions one at a time.`
                                             sendMessage(sessionId, msg, true)
-                                            setActiveTab('chat')
                                           }}
                                           style={{
                                             fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
@@ -4149,21 +4090,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
              md:hidden unconditionally; the 28% column it used to reserve goes back
              to the chat panel. Mobile behavior (tap the "Code" tab to open quick
              actions) is unchanged. */}
-        <div className={isNotebook
-            ? (activeTab !== 'code' ? 'hidden' : 'contents') + ' md:hidden'
-            : (activeTab !== 'code' ? 'hidden md:contents' : 'contents')}
+        <div className={isNotebook ? 'hidden' : 'hidden md:contents'}
           style={maximizedPanel && maximizedPanel !== 'code' ? { display: 'none' } : undefined}>
         <Panel accentColor={isNotebook ? UI.indigo : '#79C0FF'} style={{ order: isNotebook ? 3 : 2 }}>
-          <div style={{ flexDirection: 'column', height: '100%' }}
-            className={activeTab !== 'code' ? 'hidden md:flex' : 'flex'}>
-            {isNotebook ? (
-              <QuickActionsAndCheck
-                teachingLanguage={teachingLanguage}
-                sessionId={sessionId}
-                sendMessage={sendMessage}
-                setActiveTab={setActiveTab}
-              />
-            ) : (
+          <div style={{ flexDirection: 'column', height: '100%' }} className="hidden md:flex">
             <>
             {/* Header */}
             <PanelHeader>
@@ -4304,17 +4234,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               </div>
             )}
             </>
-            )}
           </div>
         </Panel>
         </div>
 
-        {/* ══ PANEL 3 — TUTOR CHAT (promoted to center/wide for non-code subjects) ══ */}
-        <div className={activeTab !== 'chat' ? 'hidden md:contents' : 'contents'}
+        {/* ══ PANEL 3 — TUTOR CHAT — the Learn window's primary/only mobile
+             panel now; unchanged desktop role (promoted to center/wide for
+             non-code subjects) ══ */}
+        <div className="contents"
           style={maximizedPanel && maximizedPanel !== 'chat' ? { display: 'none' } : undefined}>
         <Panel accentColor={isNotebook ? UI.indigo : '#3FB950'} style={{ order: isNotebook ? 2 : 3 }}>
-          <div style={{ flexDirection: 'column', height: '100%', position: 'relative' }}
-            className={activeTab !== 'chat' ? 'hidden md:flex' : 'flex'}>
+          <div style={{ flexDirection: 'column', height: '100%', position: 'relative' }} className="flex">
 
             {/* Header (taller) */}
             <PanelHeader tall>
@@ -4327,7 +4257,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               </div>
 
               {/* Info */}
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: '1 1 auto', minWidth: 0 }}>
                 <p style={{ fontSize: 15.6, fontWeight: 600, color: 'var(--text-primary)' }}>
                   {t('lesson_tutor_max')}
                 </p>
@@ -4346,17 +4276,38 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 </div>
               )}
 
-              {/* Compact 6-bar lesson phase indicator — driven by the same
-                  server-authoritative phase as the removed large LessonProgressBar.
-                  Renders nothing before the lesson starts (same null-guard).
-                  This is now the header's only teaching-progress control:
-                  Got it / Not clear / Practice / Practice Insights moved to
-                  the bottom action row (see QUICK_ACTIONS), so the header
-                  stays exactly "Tutor Max | compact progress". */}
-              <CompactLessonProgressBar
-                phase={masteryState?.phase}
-                masteryVerified={masteryState?.verified === true}
-              />
+              {/* LESSON IDENTITY, in the existing Tutor Max header — standing
+                  UI instruction: with the Lesson/Code/Chat tab strip gone,
+                  the header is where the learner now sees which lesson
+                  they're in, instead of a separate navigation surface for
+                  it. Paired visually with "Tutor Max"/"online" above/below
+                  it (own two-line block, right-aligned, truncates on narrow
+                  viewports) rather than a large standalone lesson title —
+                  no new card, no oversized text. Absent before a lesson is
+                  selected, same as every other currentLessonData-gated
+                  control in this header. */}
+              {currentLessonData && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 3, minWidth: 0, maxWidth: '48%', flexShrink: 1 }}>
+                  <p style={{
+                    fontSize: 12.6, fontWeight: 700, color: 'var(--text-secondary)',
+                    maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  }}>
+                    {t('progress_lesson_label')} {currentLessonData.order} · {currentLessonData.lessonTitle}
+                  </p>
+                  {/* Compact 6-bar lesson phase indicator — driven by the same
+                      server-authoritative phase as the removed large
+                      LessonProgressBar. Renders nothing before the lesson
+                      starts (same null-guard). Still the header's only
+                      teaching-progress control: Got it / Not clear /
+                      Practice / Practice Insights now live in the push-up
+                      Actions menu (see ACTIONS MENU below), never back in
+                      the header. */}
+                  <CompactLessonProgressBar
+                    phase={masteryState?.phase}
+                    masteryVerified={masteryState?.verified === true}
+                  />
+                </div>
+              )}
 
               {/* Bookmark current lesson */}
               {currentLessonData && (
@@ -5114,133 +5065,188 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 </div>
               )}
 
-              {/* QUICK ACTIONS, WHERE THE LEARNER ACTUALLY IS.
-                  These exist in the right-hand panel, but that panel is
-                  COLLAPSED by default on desktop: measured in production, the
-                  "Give me a diagram" button sat at x=1294 in a 1280px viewport
-                  — present in the DOM, impossible to click, and reachable only
-                  by first discovering an unlabelled tab on the screen edge. A
-                  learner who wants a diagram should not have to find a panel.
-                  Same actions, same handler, same single request path — this
-                  adds no second way to ask for anything. */}
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
-                {(QUICK_ACTIONS[teachingLanguage] ?? QUICK_ACTIONS.en).map((a) => {
-                  const Icon = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }[a.icon]
-                  return (
-                    <button
-                      key={a.key}
-                      onClick={() => { if (sessionId) { void sendMessage(sessionId, a.prompt, true); } }}
-                      disabled={!sessionId || isStreaming}
-                      aria-label={a.label}
-                      title={a.label}
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 5,
-                        minHeight: 32, padding: '6px 11px', borderRadius: 16,
-                        border: '1px solid var(--border-default)', background: 'var(--bg-surface)',
-                        color: 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
-                        cursor: sessionId && !isStreaming ? 'pointer' : 'not-allowed',
-                        opacity: sessionId && !isStreaming ? 1 : 0.5,
-                      }}
-                    >
-                      <Icon size={13} style={{ flexShrink: 0 }} />
-                      {a.label}
-                    </button>
-                  )
-                })}
-
-                {/* Practice / Practice Insights — moved out of the header's
-                    "More" (⋮) dropdown into this row, as visible buttons
-                    rather than a hidden menu. Same gate (a real KG topic to
-                    practice/analyse), same toggles, same panels below
-                    (PracticePanel / InsightsPanel) — only where the trigger
-                    lives changed. */}
-                {currentLessonData?.topicSlug && (
-                  <button
-                    onClick={() => { setInsightsOpen(false); setPracticeOpen((v) => !v) }}
-                    aria-label={t('nav_practice')}
-                    aria-pressed={practiceOpen}
-                    title={t('nav_practice')}
+              {/* ACTIONS MENU — a single push-up toggle, collapsed by default.
+                  Standing UI instruction: these 8 controls (4 quick actions +
+                  Practice + Insights + Got it + Not clear) must NOT occupy
+                  permanent vertical space — that was measured as the single
+                  biggest mobile-space cost in the Learn window, worse once
+                  this panel became the mobile screen's only content. Every
+                  handler, gate and prop below is IDENTICAL to before; only
+                  where the trigger lives changed — a real stateful toggle
+                  (actionsMenuOpen), not a duplicate button tree kept only to
+                  satisfy a visual test. Opens UPWARD (the menu sits ABOVE its
+                  own toggle, absolutely positioned so it never resizes the
+                  canvas above it) and is closed by default. No hover-open, no
+                  auto-open — the ↑/↓ button is the only thing that toggles
+                  it; selecting an action closes it afterward so the incoming
+                  response is immediately visible. */}
+              <div style={{ position: 'relative', flexShrink: 0 }}>
+                {/* Guarded on !activeMcq: the menu floats upward, absolutely
+                    positioned, from right above this toggle — the same
+                    space the MCQ wizard block occupies when a question is
+                    pending. Rendering both at once would visually overlap
+                    them, which the previous always-visible (non-floating)
+                    row never risked. The toggle button itself stays fully
+                    usable; only the popup's render is gated, so state set
+                    while an MCQ is active is simply honoured once it closes. */}
+                {actionsMenuOpen && !activeMcq && (
+                  <div
+                    role="menu"
+                    aria-label={t('lesson_more_options')}
                     style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 5,
-                      minHeight: 32, padding: '6px 11px', borderRadius: 16,
-                      border: `1px solid ${practiceOpen ? UI.indigo : 'var(--border-default)'}`,
-                      background: practiceOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
-                      color: practiceOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
-                      cursor: 'pointer',
+                      position: 'absolute', left: 0, right: 0, bottom: '100%', marginBottom: 8,
+                      display: 'flex', flexDirection: 'column', gap: 6,
+                      padding: 10, borderRadius: 14,
+                      background: 'var(--bg-surface)', border: '1px solid var(--border-default)',
+                      boxShadow: '0 -12px 32px rgba(0,0,0,0.18)',
+                      maxHeight: 'min(60vh, 380px)', overflowY: 'auto',
+                      animation: 'fadeUp 180ms ease-out both',
+                      zIndex: 30,
                     }}
                   >
-                    <Dumbbell size={13} style={{ flexShrink: 0 }} />
-                    {t('nav_practice')}
-                  </button>
-                )}
-                {currentLessonData?.topicSlug && (
-                  <button
-                    onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v) }}
-                    aria-label={t('lesson_insights_btn')}
-                    aria-pressed={insightsOpen}
-                    title={t('lesson_insights_btn')}
-                    style={{
-                      display: 'inline-flex', alignItems: 'center', gap: 5,
-                      minHeight: 32, padding: '6px 11px', borderRadius: 16,
-                      border: `1px solid ${insightsOpen ? UI.indigo : 'var(--border-default)'}`,
-                      background: insightsOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
-                      color: insightsOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <BarChart3 size={13} style={{ flexShrink: 0 }} />
-                    {t('lesson_insights_btn')}
-                  </button>
+                    {(QUICK_ACTIONS[teachingLanguage] ?? QUICK_ACTIONS.en).map((a) => {
+                      const Icon = { simpler: Sparkles, example: Users, diagram: ImageIcon, challenge: Trophy }[a.icon]
+                      return (
+                        <button
+                          key={a.key}
+                          role="menuitem"
+                          onClick={() => { if (sessionId) { void sendMessage(sessionId, a.prompt, true) }; setActionsMenuOpen(false) }}
+                          disabled={!sessionId || isStreaming}
+                          aria-label={a.label}
+                          title={a.label}
+                          style={{
+                            display: 'flex', alignItems: 'center', gap: 8,
+                            minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
+                            border: '1px solid var(--border-default)', background: 'var(--bg-elevated)',
+                            color: 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600, textAlign: 'left',
+                            cursor: sessionId && !isStreaming ? 'pointer' : 'not-allowed',
+                            opacity: sessionId && !isStreaming ? 1 : 0.5,
+                          }}
+                        >
+                          <Icon size={14} style={{ flexShrink: 0 }} />
+                          {a.label}
+                        </button>
+                      )
+                    })}
+
+                    {/* Practice / Practice Insights — same gate (a real KG
+                        topic to practice/analyse), same toggles, same panels
+                        (PracticePanel / InsightsPanel) as before; only the
+                        trigger's location changed. */}
+                    {currentLessonData?.topicSlug && (
+                      <button
+                        role="menuitem"
+                        onClick={() => { setInsightsOpen(false); setPracticeOpen((v) => !v); setActionsMenuOpen(false) }}
+                        aria-label={t('nav_practice')}
+                        aria-pressed={practiceOpen}
+                        title={t('nav_practice')}
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: 8,
+                          minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
+                          border: `1px solid ${practiceOpen ? UI.indigo : 'var(--border-default)'}`,
+                          background: practiceOpen ? `${UI.indigo}14` : 'var(--bg-elevated)',
+                          color: practiceOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
+                          textAlign: 'left', cursor: 'pointer',
+                        }}
+                      >
+                        <Dumbbell size={14} style={{ flexShrink: 0 }} />
+                        {t('nav_practice')}
+                      </button>
+                    )}
+                    {currentLessonData?.topicSlug && (
+                      <button
+                        role="menuitem"
+                        onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v); setActionsMenuOpen(false) }}
+                        aria-label={t('lesson_insights_btn')}
+                        aria-pressed={insightsOpen}
+                        title={t('lesson_insights_btn')}
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: 8,
+                          minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
+                          border: `1px solid ${insightsOpen ? UI.indigo : 'var(--border-default)'}`,
+                          background: insightsOpen ? `${UI.indigo}14` : 'var(--bg-elevated)',
+                          color: insightsOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
+                          textAlign: 'left', cursor: 'pointer',
+                        }}
+                      >
+                        <BarChart3 size={14} style={{ flexShrink: 0 }} />
+                        {t('lesson_insights_btn')}
+                      </button>
+                    )}
+
+                    {/* Got it / Not clear — same gate (only once the tutor
+                        has actually said something), same handler
+                        (sendMessage with the exact same phrasing), same
+                        disabled-while-streaming rule as before. */}
+                    {(() => {
+                      const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant' && !m.streaming)
+                      if (!lastAssistant) return null
+                      return (
+                        <>
+                          <button
+                            role="menuitem"
+                            onClick={() => { if (sessionId) sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true); setActionsMenuOpen(false) }}
+                            disabled={isStreaming || !sessionId}
+                            aria-label={t('lesson_got_it')}
+                            title={t('lesson_got_it')}
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: 8,
+                              minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
+                              border: `1px solid ${UI.indigo}44`, background: `${UI.indigo}14`, color: UI.indigo,
+                              fontSize: 14.4, fontWeight: 600, textAlign: 'left',
+                              cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
+                              opacity: isStreaming || !sessionId ? 0.5 : 1,
+                            }}
+                          >
+                            <ThumbsUp size={14} style={{ flexShrink: 0 }} /> {t('lesson_got_it')}
+                          </button>
+                          <button
+                            role="menuitem"
+                            onClick={() => { if (sessionId) sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true); setActionsMenuOpen(false) }}
+                            disabled={isStreaming || !sessionId}
+                            aria-label={t('lesson_not_clear')}
+                            title={t('lesson_not_clear')}
+                            style={{
+                              display: 'flex', alignItems: 'center', gap: 8,
+                              minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
+                              border: `1px solid ${UI.red}44`, background: UI.redBg, color: UI.red,
+                              fontSize: 14.4, fontWeight: 600, textAlign: 'left',
+                              cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
+                              opacity: isStreaming || !sessionId ? 0.5 : 1,
+                            }}
+                          >
+                            <ThumbsDown size={14} style={{ flexShrink: 0 }} /> {t('lesson_not_clear')}
+                          </button>
+                        </>
+                      )
+                    })()}
+                  </div>
                 )}
 
-                {/* Got it / Not clear — moved out of the top header, same
-                    row as every other learner action now. Unchanged: same
-                    gate (only once the tutor has actually said something),
-                    same handler (sendMessage with the exact same phrasing),
-                    same disabled-while-streaming rule. */}
-                {(() => {
-                  const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant' && !m.streaming)
-                  if (!lastAssistant) return null
-                  return (
-                    <>
-                      <button
-                        onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)}
-                        disabled={isStreaming || !sessionId}
-                        aria-label={t('lesson_got_it')}
-                        title={t('lesson_got_it')}
-                        style={{
-                          display: 'inline-flex', alignItems: 'center', gap: 5,
-                          minHeight: 32, padding: '6px 11px', borderRadius: 16,
-                          border: `1px solid ${UI.indigo}44`, background: `${UI.indigo}14`, color: UI.indigo,
-                          fontSize: 14.4, fontWeight: 600,
-                          cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
-                          opacity: isStreaming || !sessionId ? 0.5 : 1,
-                        }}
-                      >
-                        <ThumbsUp size={13} style={{ flexShrink: 0 }} /> {t('lesson_got_it')}
-                      </button>
-                      <button
-                        onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true)}
-                        disabled={isStreaming || !sessionId}
-                        aria-label={t('lesson_not_clear')}
-                        title={t('lesson_not_clear')}
-                        style={{
-                          display: 'inline-flex', alignItems: 'center', gap: 5,
-                          minHeight: 32, padding: '6px 11px', borderRadius: 16,
-                          border: `1px solid ${UI.red}44`, background: UI.redBg, color: UI.red,
-                          fontSize: 14.4, fontWeight: 600,
-                          cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
-                          opacity: isStreaming || !sessionId ? 0.5 : 1,
-                        }}
-                      >
-                        <ThumbsDown size={13} style={{ flexShrink: 0 }} /> {t('lesson_not_clear')}
-                      </button>
-                    </>
-                  )
-                })()}
+                {/* THE ONLY control that opens/closes the menu — no hover, no
+                    auto-open. Compact single row, ~34px tall (versus up to
+                    ~150px the old always-visible row could reach on a narrow
+                    phone with every gate open). */}
+                <button
+                  type="button"
+                  onClick={() => setActionsMenuOpen((v) => !v)}
+                  aria-expanded={actionsMenuOpen}
+                  aria-label={t('lesson_more_options')}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                    width: '100%', height: 34, borderRadius: 12,
+                    border: '1px solid var(--border-default)',
+                    background: actionsMenuOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
+                    color: actionsMenuOpen ? UI.indigo : 'var(--text-secondary)',
+                    fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
+                  }}
+                >
+                  {actionsMenuOpen ? <ChevronDown size={15} /> : <ChevronUp size={15} />}
+                  {t('lesson_more_options')}
+                </button>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
                 {/* Pill: attach + camera + textarea + mic, one rounded container */}
                 <div style={{
                   flex: 1, display: 'flex', alignItems: 'center', gap: 4, padding: '4px 6px', borderRadius: 22,
