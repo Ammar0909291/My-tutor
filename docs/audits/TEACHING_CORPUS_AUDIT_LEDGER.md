@@ -3948,3 +3948,70 @@ or the fill-and-reactivate path above.
 
 Recorded, not fixed — flagged here because it materially changes what the
 planned run will accomplish.
+
+---
+
+# MOAT BATCH — phys.particle CLEARED (all 16 concepts)
+
+Same shape as the phys.stat batch, one domain later.
+
+## What was short
+
+All 16 `phys.particle` concepts held exactly **two** gradeable probes against
+the **three** a gate needs. Unlike phys.stat, the existing rungs were mixed
+(DEVELOPING / PROFICIENT / ADVANCED in different combinations per concept),
+so the free rung had to be computed per concept rather than assumed. All 16
+sit at `HIGH`, so no grade-band split was possible here.
+
+Rung chosen per concept from what was actually free:
+`DEVELOPING` for 12, `PROFICIENT` for 4 (`four-forces`, `antimatter`,
+`electroweak-unification`, `standard-model` — each already had a DEVELOPING
+or ADVANCED mcq occupying the obvious slot).
+
+## What was authored
+
+**All sixteen** target a blueprint misconception that had **no gradeable
+probe at all** — every one of these blueprints documents three misconceptions
+and only two were probed. No transfer cases were needed in this domain.
+
+| concept | newly covered misconception |
+|---|---|
+| `four-forces` | MC-3 — the weak force is small-scale gravity |
+| `particle-classification` | MC-1 — protons/neutrons are fundamental |
+| `antimatter` | MC-2 — annihilation destroys energy |
+| `quarks` | MC-2 — fractional charge is directly measurable |
+| `leptons` | MC-1 — the muon is less fundamental than the electron |
+| `neutrinos` | MC-3 — flavour is an arbitrary label |
+| `hadron-quark-model` | MC-2 — any quark count makes a hadron |
+| `gauge-bosons` | MC-1 — bosons are just more matter particles |
+| `strong-interaction` | MC-1 — quarks are literally coloured |
+| `weak-interaction` | MC-1 — "weak" means unimportant |
+| `electroweak-unification` | MC-1 — unified means identical at all energies |
+| `higgs-mechanism` | MC-3 — the mechanism was discovered in 2012 |
+| `conservation-laws` | MC-3 — proton decay has been observed by now |
+| `feynman-diagrams` | MC-2 — antiparticles really travel backward in time |
+| `accelerators-detectors` | MC-3 — invariant mass is one measured particle |
+| `standard-model` | MC-2 — precision implies completeness |
+
+Every distractor is misconception-mapped; every probe cites its blueprint.
+
+## Ratchets tightened
+
+| ratchet | before | after |
+|---|---|---|
+| physics concepts short of 3 gradeable probes | 88 | **72** |
+| legacy probe-slug collisions (pre-Item-6 measure) | 465 | **481** |
+
+Live identity (`buildProbeSlugResolver`) still 0 discarded —
+`difficultyLadderIdentity.test.ts` passes.
+
+Remaining short: `phys.qm` 19, `phys.mod` 21, `phys.em` 32. Two domains
+(`phys.stat`, `phys.particle`) are now fully clear; `phys.meas`, `phys.mech`,
+`phys.therm`, `phys.wave`, `phys.astro`, `phys.rel`, `phys.opt` were cleared
+in earlier batches.
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 318 files / 6,660 passed / 9 skipped;
+`npm run build` clean. **No production write, no sweep re-run, no topic
+marked VERIFIED.**

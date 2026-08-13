@@ -39211,6 +39211,23 @@ const FRC4_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${FRC4}:MC-2`],
     source: `${FRC4_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung PROFICIENT.
+    conceptId: FRC4,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Both gravity and the weak nuclear force get called "weak". Is the weak nuclear force just gravity at a smaller scale?',
+    choices: [
+      { text: 'No — gravity has infinite range and never changes what a particle IS; the weak force has a range of about 10^-18 m and is the only force that converts one quark or lepton into another, as in beta decay', isCorrect: true },
+      { text: 'Yes — they are the same kind of long-range attraction, the weak force simply being the smaller of the two', isCorrect: false, misconceptionId: `${FRC4}:MC-3` },
+    ],
+    correctValue: 'no — the weak force changes particle identity, gravity never does',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FRC4}:MC-3`],
+    source: `${FRC4_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.particle-classification ──────────────────────────────────
@@ -39284,6 +39301,23 @@ const PCLS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PCLS}:MC-3`],
     source: `${PCLS_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1, which had no gradeable probe (MC-2 and MC-3 already do). Rung DEVELOPING.
+    conceptId: PCLS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Are protons and neutrons fundamental particles, in the particle-physics sense of having no internal structure?',
+    choices: [
+      { text: 'No — deep inelastic scattering in the late 1960s found point-like constituents (quarks) inside the proton, exactly as Rutherford had found structure inside the atom; only the quarks and the electron are fundamental here', isCorrect: true },
+      { text: 'Yes — protons, neutrons and electrons are the three basic building blocks and cannot be broken down further', isCorrect: false, misconceptionId: `${PCLS}:MC-1` },
+    ],
+    correctValue: 'no — protons and neutrons are composite hadrons',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PCLS}:MC-1`],
+    source: `${PCLS_SRC} — MC-1, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.antimatter ────────────────────────────────────────────────
@@ -39353,6 +39387,23 @@ const ANTI_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ANTI}:MC-3`],
     source: `${ANTI_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable probe (MC-1 and MC-3 already do). Rung PROFICIENT.
+    conceptId: ANTI,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An electron and a positron annihilate at rest. Is anything left afterwards?',
+    choices: [
+      { text: 'Yes — two 511 keV photons carrying exactly the original rest-mass energy; this is precisely what a PET scanner detects, so if energy vanished PET imaging could not work', isCorrect: true },
+      { text: 'No — "annihilate" means they cancel out to nothing and the energy is destroyed', isCorrect: false, misconceptionId: `${ANTI}:MC-2` },
+    ],
+    correctValue: 'yes — two 511 keV photons, energy strictly conserved',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ANTI}:MC-2`],
+    source: `${ANTI_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -39426,6 +39477,23 @@ const QRK_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${QRK}:MC-3`],
     source: `${QRK_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable probe (MC-1 and MC-3 already do). Rung DEVELOPING.
+    conceptId: QRK,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Could a sensitive enough detector measure a lone charge of exactly +2/3 e sitting by itself?',
+    choices: [
+      { text: 'No — confinement means quarks exist only inside hadrons, whose total charge is always a whole multiple of e; every charge ever measured directly has been a whole multiple of e', isCorrect: true },
+      { text: 'Yes — fractional charge is real, so a precise enough instrument should eventually read exactly +2/3 e on its own', isCorrect: false, misconceptionId: `${QRK}:MC-2` },
+    ],
+    correctValue: 'no — free fractional charge is never observed',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${QRK}:MC-2`],
+    source: `${QRK_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -39501,6 +39569,23 @@ const LEPT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${LEPT}:MC-3`],
     source: `${LEPT_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1, which had no gradeable probe (MC-2 and MC-3 already do). Rung DEVELOPING.
+    conceptId: LEPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Is the muon less fundamental than the electron, because it is heavy and unstable?',
+    choices: [
+      { text: 'No — the muon has the same charge, the same spin and no more internal structure than the electron; it is simply heavier, so it decays. Fundamental does not mean stable', isCorrect: true },
+      { text: 'Yes — the electron is a real fundamental particle, while the muon is an exotic heavy cousin that decays away', isCorrect: false, misconceptionId: `${LEPT}:MC-1` },
+    ],
+    correctValue: 'no — equally fundamental, only heavier',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LEPT}:MC-1`],
+    source: `${LEPT_SRC} — MC-1, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.neutrinos ─────────────────────────────────────────────────
@@ -39575,6 +39660,23 @@ const NEUT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${NEUT}:MC-2`],
     source: `${NEUT_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: NEUT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A neutron beta-decays. Which neutrino flavour comes out, and does the flavour label mean anything physical?',
+    choices: [
+      { text: 'An electron-antineutrino specifically — never a muon or tau one. Flavour is conserved at the interaction vertex, which is exactly why solar electron-neutrino detectors measured a deficit once oscillation was in play', isCorrect: true },
+      { text: 'Any of the three — "flavour" is just a naming convention with no physical content', isCorrect: false, misconceptionId: `${NEUT}:MC-3` },
+    ],
+    correctValue: 'electron-antineutrino — flavour is real at the vertex',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NEUT}:MC-3`],
+    source: `${NEUT_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.hadron-quark-model ────────────────────────────────────────
@@ -39648,6 +39750,23 @@ const HDQM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${HDQM}:MC-3`],
     source: `${HDQM_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable probe (MC-1 and MC-3 already do). Rung DEVELOPING.
+    conceptId: HDQM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: If three quarks make a baryon, do two quarks alone (no antiquark) make an ordinary hadron?',
+    choices: [
+      { text: 'No — colour neutrality is the constraint, and it is satisfied by three quarks (one of each colour) or a quark-antiquark pair, not by two quarks; tetraquarks and pentaquarks exist but are rare, recently-confirmed exotics', isCorrect: true },
+      { text: 'Yes — quarks combine to form hadrons, so any number of them should give some valid hadron', isCorrect: false, misconceptionId: `${HDQM}:MC-2` },
+    ],
+    correctValue: 'no — colour neutrality allows 3-quark or quark-antiquark only',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HDQM}:MC-2`],
+    source: `${HDQM_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -39724,6 +39843,23 @@ const GBOS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${GBOS}:MC-3`],
     source: `${GBOS_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1, which had no gradeable probe (MC-2 and MC-3 already do). Rung DEVELOPING.
+    conceptId: GBOS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Is a photon a building block of matter, the same way a quark or an electron is?',
+    choices: [
+      { text: 'No — quarks and leptons are fermions and are what matter is built from; gauge bosons are the force carriers, appearing transiently as an interaction is transmitted rather than composing bulk matter', isCorrect: true },
+      { text: 'Yes — photons, gluons and W/Z bosons are simply more entries on the same particle list', isCorrect: false, misconceptionId: `${GBOS}:MC-1` },
+    ],
+    correctValue: 'no — gauge bosons mediate force, they do not compose matter',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GBOS}:MC-1`],
+    source: `${GBOS_SRC} — MC-1, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.strong-interaction ────────────────────────────────────────
@@ -39797,6 +39933,23 @@ const STRG_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${STRG}:MC-3`],
     source: `${STRG_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1, which had no gradeable probe (MC-2 and MC-3 already do). Rung DEVELOPING.
+    conceptId: STRG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: If you could somehow look at a single quark, would it actually appear red, green or blue?',
+    choices: [
+      { text: 'No — "colour charge" is a name, not a description; quarks are far smaller than any visible wavelength, and the word was borrowed only because three charges combining to neutral mirrors red+green+blue light making white', isCorrect: true },
+      { text: 'Yes — quarks are literally coloured, which is why it is called colour charge', isCorrect: false, misconceptionId: `${STRG}:MC-1` },
+    ],
+    correctValue: 'no — colour charge is an abstract quantum number',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${STRG}:MC-1`],
+    source: `${STRG_SRC} — MC-1, distractor-mapped`,
   },
 ]
 
@@ -39872,6 +40025,23 @@ const WEAK_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${WEAK}:MC-3`],
     source: `${WEAK_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1, which had no gradeable probe (MC-2 and MC-3 already do). Rung DEVELOPING.
+    conceptId: WEAK,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: If the weak interaction stopped working tomorrow, would much change?',
+    choices: [
+      { text: 'Enormously — the Sun\'s proton-proton chain needs a weak step to turn a proton into a neutron, so every main-sequence star would go dark; all beta decay would stop too. "Weak" describes coupling strength, not importance', isCorrect: true },
+      { text: 'Almost nothing — the weak force is weak, so it does not really do much', isCorrect: false, misconceptionId: `${WEAK}:MC-1` },
+    ],
+    correctValue: 'enormously — stellar fusion and all beta decay would stop',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WEAK}:MC-1`],
+    source: `${WEAK_SRC} — MC-1, distractor-mapped`,
   },
 ]
 
@@ -39949,6 +40119,23 @@ const EWKU_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${EWKU}:MC-3`],
     source: `${EWKU_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1, which had no gradeable probe (MC-2 and MC-3 already do). Rung PROFICIENT.
+    conceptId: EWKU,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: If electromagnetism and the weak force are unified, why do they look so different in every ordinary lab experiment?',
+    choices: [
+      { text: 'Because unification is an energy-dependent claim — the two become indistinguishable only above about 100 GeV; below that, electroweak symmetry breaking makes them genuinely, measurably different', isCorrect: true },
+      { text: 'They should not look different — if they were truly unified they would behave identically at any energy', isCorrect: false, misconceptionId: `${EWKU}:MC-1` },
+    ],
+    correctValue: 'unification holds only above ~100 GeV',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EWKU}:MC-1`],
+    source: `${EWKU_SRC} — MC-1, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.higgs-mechanism ────────────────────────────────────────────
@@ -40024,6 +40211,23 @@ const HIGG_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${HIGG}:MC-2`],
     source: `${HIGG_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: HIGG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Was 2012 when physicists first proposed the Higgs mechanism?',
+    choices: [
+      { text: 'No — the mechanism was proposed in 1964 and its framework was already confirmed indirectly by the 1983 W and Z discovery; 2012 confirmed the Higgs BOSON, the last missing piece of a 48-year story', isCorrect: true },
+      { text: 'Yes — the Higgs mechanism was discovered in 2012', isCorrect: false, misconceptionId: `${HIGG}:MC-3` },
+    ],
+    correctValue: 'no — proposed 1964, boson confirmed 2012',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HIGG}:MC-3`],
+    source: `${HIGG_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -40101,6 +40305,23 @@ const PCON_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PCON}:MC-2`],
     source: `${PCON_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: PCON,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: After decades of searching in detectors like Super-Kamiokande, has proton decay actually been observed?',
+    choices: [
+      { text: 'No — none has been seen, which places the proton lifetime beyond 10^34 years if it decays at all; that null result is itself strong positive evidence for baryon number conservation', isCorrect: true },
+      { text: 'Yes — with that much searching over that many years, it must have been found by now', isCorrect: false, misconceptionId: `${PCON}:MC-3` },
+    ],
+    correctValue: 'no — lifetime bound beyond 10^34 years',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PCON}:MC-3`],
+    source: `${PCON_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.feynman-diagrams ──────────────────────────────────────────
@@ -40174,6 +40395,23 @@ const FEYN_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${FEYN}:MC-3`],
     source: `${FEYN_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable probe (MC-1 and MC-3 already do). Rung DEVELOPING.
+    conceptId: FEYN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Feynman diagrams draw antiparticle lines with the arrow pointing backward in time. Have antiparticles been observed travelling backward through time?',
+    choices: [
+      { text: 'No — every antiparticle ever detected moves forward through time like everything else; the backward arrow is a bookkeeping convention reflecting a mathematical equivalence in the field-theory terms', isCorrect: true },
+      { text: 'Yes — antiparticles really do travel backward in time, and the diagrams record that observation', isCorrect: false, misconceptionId: `${FEYN}:MC-2` },
+    ],
+    correctValue: 'no — it is a notational convention, not an observation',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FEYN}:MC-2`],
+    source: `${FEYN_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -40252,6 +40490,23 @@ const ACDT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ACDT}:MC-2`],
     source: `${ACDT_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: ACDT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a discovery announcement, is "invariant mass" the mass of one single particle the detector measured directly?',
+    choices: [
+      { text: 'No — it is computed from the energies and momenta of two or more decay products via the relativistic energy-momentum relation, reconstructing the mass of a parent particle the detector never saw', isCorrect: true },
+      { text: 'Yes — invariant mass is simply the measured mass of the particle that hit the detector', isCorrect: false, misconceptionId: `${ACDT}:MC-3` },
+    ],
+    correctValue: 'no — it is reconstructed from decay products',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ACDT}:MC-3`],
+    source: `${ACDT_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.particle.standard-model ────────────────────────────────────────────
@@ -40328,6 +40583,23 @@ const SMOD_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SMOD}:MC-3`],
     source: `${SMOD_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable probe (MC-1 and MC-3 already do). Rung PROFICIENT.
+    conceptId: SMOD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: The Standard Model predicts the electron magnetic moment to extraordinary precision. Does that mean it is essentially complete?',
+    choices: [
+      { text: 'No — precision within a domain and completeness beyond it are independent. Neutrino masses already required going past the original formulation, and dark matter, dark energy and gravity remain entirely unaddressed', isCorrect: true },
+      { text: 'Yes — a theory tested to that many decimal places cannot have major unresolved gaps left', isCorrect: false, misconceptionId: `${SMOD}:MC-2` },
+    ],
+    correctValue: 'no — precise within scope, acknowledgedly incomplete beyond it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SMOD}:MC-2`],
+    source: `${SMOD_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
