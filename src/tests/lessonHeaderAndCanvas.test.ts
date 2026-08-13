@@ -367,62 +367,82 @@ describe('diagram container — 3cm padding, top corrected to top-align with the
   })
 })
 
-// ── MAXIMIZED CHAT DIAGRAM HEIGHT ───────────────────────────────────────────
-describe('maximized chat panel — diagram height reduced by exactly one bottom-padding step', () => {
-  // The .canvasVisual wrapper's `paddingBottom: 3cm` (defined in the CSS
-  // module) is the mechanism that adds 3cm of space BELOW the rendered diagram.
-  // In maximized-chat state the diagram renders at full column width and can
-  // appear too tall. The fix: when `maximizedPanel === 'chat'`, set inline
-  // `paddingBottom: 0` on the .canvasVisual div, overriding the module-level
-  // 3cm and reducing the container's total height by exactly 3cm.
-  //
-  // This approach never clips rendered content — it only removes whitespace
-  // below the diagram. The 50/50 grid split and every renderer are untouched.
+// ── CHAT SPACE CLEANUP — footer removed, prev/next nav in the controls row ───
+//
+// "AI can make mistakes. Check important info." (lesson_ai_disclaimer) and the
+// unit breadcrumb (currentUnit.title) are removed AT SOURCE — not hidden with CSS,
+// not wrapped in display:none, not left in an empty container. The bottom of the
+// Tutor Max panel now has exactly two rows:
+//   1. [← Previous]  [More options]  [Next →]  — navigation + toggle combined
+//   2. [📎 🖼  textarea  🎤  ➤]                — composer pill + send button
+// The rejected paddingBottom:0 inline style (maximized-height workaround) is also
+// reverted: .canvasVisual's CSS-module padding governs unconditionally again.
 
-  it("the .canvasVisual div adds paddingBottom:0 inline when maximizedPanel === 'chat'", () => {
-    // Find the canvasVisual wrapper div specifically — it carries the
-    // `styles.canvasVisual` className and a conditional inline style.
-    const idx = SRC.indexOf("className={hasCanvasVisual ? styles.canvasVisual : undefined}")
-    expect(idx).toBeGreaterThan(-1)
-    const window = SRC.slice(idx, idx + 300)
-    // The maximized branch must set paddingBottom to 0
-    expect(window).toMatch(/maximizedPanel === 'chat'.*paddingBottom:\s*0/)
+const INPUT_START = SRC.indexOf('── Input area ──')
+const INPUT_END = SRC.indexOf('</Panel>', INPUT_START)
+const INPUT_AREA = SRC.slice(INPUT_START, INPUT_END)
+
+describe('footer cleanup — disclaimer and unit breadcrumb removed at source', () => {
+  it('the input area marker exists and the slice is non-empty', () => {
+    expect(INPUT_START).toBeGreaterThan(-1)
+    expect(INPUT_AREA.length).toBeGreaterThan(0)
   })
 
-  it('the minimized branch (not maximized) carries NO inline paddingBottom', () => {
-    // The non-maximized branch of the ternary must be `undefined` so the
-    // CSS module's own `padding: 2px 3cm 3cm 3cm` rule governs — no inline
-    // style that would silently override it for regular (non-maximized) state.
-    const idx = SRC.indexOf("className={hasCanvasVisual ? styles.canvasVisual : undefined}")
-    expect(idx).toBeGreaterThan(-1)
-    const window = SRC.slice(idx, idx + 400)
-    // Regex: the false-branch of the outer hasCanvasVisual ternary must be
-    // `{ display: 'contents' }` — NOT `{ paddingBottom: ... }`.
-    // The outer structure is: hasCanvasVisual ? <TRUEBRANCH> : { display: 'contents' }
-    // The true branch is: maximizedPanel === 'chat' ? { paddingBottom: 0 } : undefined
-    expect(window).toMatch(/:\s*undefined\s*\)\s*:\s*\{\s*display:\s*'contents'\s*\}/)
+  it('lesson_ai_disclaimer is NOT rendered in the input area', () => {
+    expect(INPUT_AREA).not.toContain("t('lesson_ai_disclaimer')")
   })
 
-  it('the 50/50 CSS grid itself is untouched — no column-width change in either state', () => {
-    const CSS = readFileSync(
-      path.join(process.cwd(), 'src/components/learn/LessonScreen.module.css'),
-      'utf8',
-    )
-    // The same assertion from the existing diagram-padding describe block:
-    // any change to grid-template-columns would have altered the 50/50 split.
-    expect(CSS).toMatch(/grid-template-columns:\s*minmax\(0,\s*1fr\)\s+minmax\(0,\s*1fr\)/)
+  it('currentUnit.title is NOT rendered in the input area', () => {
+    expect(INPUT_AREA).not.toContain('currentUnit.title')
   })
 
-  it('the height reduction is tied to maximizedPanel state, not a media query or viewport unit', () => {
-    // A media-query or viewport-unit approach would fire regardless of the
-    // actual panel state (e.g. at wide viewports even when not maximized).
-    // The fix must read `maximizedPanel` directly.
+  it('no footer-shaped container (space-between flex, marginTop) remains after the send button', () => {
+    // The removed footer was a `justifyContent: space-between` div with
+    // `marginTop: 8` containing both strings. If only emptied (not removed),
+    // it would still consume vertical space as an invisible gap.
+    const afterSend = INPUT_AREA.slice(INPUT_AREA.lastIndexOf("t('lesson_send')"))
+    expect(afterSend).not.toMatch(/justifyContent:\s*'space-between'/)
+  })
+
+  it('the .canvasVisual div carries no inline paddingBottom override', () => {
+    // The rejected maximized-height workaround (paddingBottom: 0 when
+    // maximizedPanel === 'chat') is reverted — the CSS-module rule governs.
     const idx = SRC.indexOf("className={hasCanvasVisual ? styles.canvasVisual : undefined}")
     expect(idx).toBeGreaterThan(-1)
-    const window = SRC.slice(idx, idx + 400)
-    expect(window).toContain("maximizedPanel === 'chat'")
-    // No viewport-only conditional on this line
-    expect(window).not.toMatch(/vw|vh|vmin|vmax/)
-    expect(window).not.toMatch(/@media/)
+    const window = SRC.slice(idx, idx + 200)
+    expect(window).not.toContain('paddingBottom')
+    expect(window).not.toContain("maximizedPanel === 'chat'")
+  })
+})
+
+describe('nav + more-options row — Previous/Next buttons combined with More options', () => {
+  it('Previous lesson button is present with nav_previous_lesson aria-label', () => {
+    expect(INPUT_AREA).toContain("t('nav_previous_lesson')")
+  })
+
+  it('Previous lesson button calls startRevision and is disabled when no previous lesson exists', () => {
+    const idx = INPUT_AREA.indexOf("t('nav_previous_lesson')")
+    const block = INPUT_AREA.slice(Math.max(0, idx - 500), idx + 200)
+    expect(block).toContain('startRevision')
+    expect(block).toContain('previousLessonData')
+    expect(block).toContain('disabled={!previousLessonData}')
+  })
+
+  it('Next lesson button is present with nav_next_lesson aria-label', () => {
+    expect(INPUT_AREA).toContain("t('nav_next_lesson')")
+  })
+
+  it('Next lesson button calls requestLessonSwitch and is disabled when no next lesson exists', () => {
+    const idx = INPUT_AREA.indexOf("t('nav_next_lesson')")
+    const block = INPUT_AREA.slice(Math.max(0, idx - 500), idx + 200)
+    expect(block).toContain('requestLessonSwitch')
+    expect(block).toContain('nextLessonData')
+    expect(block).toContain('disabled={!nextLessonData}')
+  })
+
+  it('More options toggle remains the single actionsMenuOpen flipper', () => {
+    expect(INPUT_AREA).toContain('aria-expanded={actionsMenuOpen}')
+    const toggles = (SRC.match(/setActionsMenuOpen\(\(v\) => !v\)/g) ?? []).length
+    expect(toggles).toBe(1)
   })
 })

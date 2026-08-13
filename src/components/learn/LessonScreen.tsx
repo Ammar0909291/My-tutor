@@ -4704,7 +4704,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         In canvas mode these fill their column; with no figure
                         present this wrapper is display:contents and the tree is
                         structurally identical to before. */}
-                    <div className={hasCanvasVisual ? styles.canvasVisual : undefined} style={hasCanvasVisual ? (maximizedPanel === 'chat' ? { paddingBottom: 0 } : undefined) : { display: 'contents' }}>
+                    <div className={hasCanvasVisual ? styles.canvasVisual : undefined} style={hasCanvasVisual ? undefined : { display: 'contents' }}>
 
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
                     {!isUser && !msg.streaming && msg.visual && (
@@ -5223,27 +5223,72 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   </div>
                 )}
 
-                {/* THE ONLY control that opens/closes the menu — no hover, no
-                    auto-open. Compact single row, ~34px tall (versus up to
-                    ~150px the old always-visible row could reach on a narrow
-                    phone with every gate open). */}
-                <button
-                  type="button"
-                  onClick={() => setActionsMenuOpen((v) => !v)}
-                  aria-expanded={actionsMenuOpen}
-                  aria-label={t('lesson_more_options')}
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                    width: '100%', height: 34, borderRadius: 12,
-                    border: '1px solid var(--border-default)',
-                    background: actionsMenuOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
-                    color: actionsMenuOpen ? UI.indigo : 'var(--text-secondary)',
-                    fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
-                  }}
-                >
-                  {actionsMenuOpen ? <ChevronDown size={15} /> : <ChevronUp size={15} />}
-                  {t('lesson_more_options')}
-                </button>
+                {/* Three-part control row: ← Previous | More options | Next →
+                    Previous and Next are lightweight nav buttons sharing the
+                    34px height as the More options toggle. The relative wrapper
+                    above still owns the push-up menu's upward positioning. */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  {/* ← Previous lesson */}
+                  <button
+                    type="button"
+                    onClick={() => { if (previousLessonData) void startRevision(previousLessonData) }}
+                    disabled={!previousLessonData}
+                    aria-label={t('nav_previous_lesson')}
+                    title={previousLessonData?.lessonTitle}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 4,
+                      height: 34, padding: '0 10px', borderRadius: 12, flexShrink: 0,
+                      border: '1px solid var(--border-default)',
+                      background: 'var(--bg-surface)',
+                      color: 'var(--text-secondary)',
+                      fontSize: 12.5, fontWeight: 600,
+                      cursor: previousLessonData ? 'pointer' : 'default',
+                      opacity: previousLessonData ? 1 : 0.45, whiteSpace: 'nowrap',
+                    }}
+                  >
+                    ← {t('nav_previous')}
+                  </button>
+
+                  {/* More options toggle — flex-1 fills remaining space */}
+                  <button
+                    type="button"
+                    onClick={() => setActionsMenuOpen((v) => !v)}
+                    aria-expanded={actionsMenuOpen}
+                    aria-label={t('lesson_more_options')}
+                    style={{
+                      flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+                      height: 34, borderRadius: 12,
+                      border: '1px solid var(--border-default)',
+                      background: actionsMenuOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
+                      color: actionsMenuOpen ? UI.indigo : 'var(--text-secondary)',
+                      fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
+                    }}
+                  >
+                    {actionsMenuOpen ? <ChevronDown size={15} /> : <ChevronUp size={15} />}
+                    {t('lesson_more_options')}
+                  </button>
+
+                  {/* Next lesson → */}
+                  <button
+                    type="button"
+                    onClick={() => { if (nextLessonData) requestLessonSwitch(nextLessonData) }}
+                    disabled={!nextLessonData}
+                    aria-label={t('nav_next_lesson')}
+                    title={nextLessonData?.lessonTitle}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: 4,
+                      height: 34, padding: '0 10px', borderRadius: 12, flexShrink: 0,
+                      border: '1px solid var(--border-default)',
+                      background: 'var(--bg-surface)',
+                      color: 'var(--text-secondary)',
+                      fontSize: 12.5, fontWeight: 600,
+                      cursor: nextLessonData ? 'pointer' : 'default',
+                      opacity: nextLessonData ? 1 : 0.45, whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {t('nav_next_lesson')} →
+                  </button>
+                </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
@@ -5332,17 +5377,6 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 </button>
               </div>
 
-              {/* Disclaimer + current topic breadcrumb — matches mockup's footer row */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: 8 }}>
-                <p style={{ fontSize: 12, color: 'var(--text-dim)' }}>
-                  ⓘ {t('lesson_ai_disclaimer')}
-                </p>
-                {currentUnit && (
-                  <span style={{ fontSize: 12, color: 'var(--text-dim)', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                    {currentUnit.title}
-                  </span>
-                )}
-              </div>
             </div>
           </div>
         </Panel>
