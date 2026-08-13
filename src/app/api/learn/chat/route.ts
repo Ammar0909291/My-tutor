@@ -4856,11 +4856,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           ? (visualDecisionHoisted.session as unknown as Prisma.InputJsonValue)
           : undefined
 
+      // THE QUESTION AND ITS CHOICES, MADE PART OF DURABLE HISTORY.
+      //
+      // `mcqHoisted` (parsed by parseMcqTag) is a machine-readable tag that
+      // stripMcqTags() already removed from `cleanText` before this point —
+      // deliberately, so the LIVE bubble shows clean prose while the client
+      // renders a tappable wizard from the separate `mcq` JSON field. But
+      // that JSON field is never persisted anywhere: not on the Message row,
+      // not in a second table. A history reload after the learner answers
+      // (or logs back in) restored `content` alone and the question the
+      // tutor actually asked was simply gone — the exact "second channel
+      // that never reaches durable storage" defect class as the diagram
+      // bug above, on a different field.
+      //
+      // Fix: bake a plain-text rendering of the question and its options
+      // into what gets WRITTEN to `content`, reusing the one existing
+      // conversation-history mechanism rather than adding a second one, per
+      // the standing rule (no parallel MCQ persistence path). The LIVE
+      // response the client renders this turn is untouched — `text:
+      // cleanText` below still sends the clean version, so the tappable
+      // wizard is drawn from `mcq`, never duplicated inline. Only a LATER
+      // history reload ever sees this text, and by then the wizard has
+      // already done its job or the turn is stale either way. The correct
+      // answer is deliberately not marked in this text, matching what the
+      // live wizard shows before a tap. Shared, unit-tested helper —
+      // src/tests/mcqHistoryPersistence.test.ts — rather than inline logic.
+      const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
+      const contentForHistory = appendMcqToHistoryText(cleanText, mcqHoisted)
+
       let assistantMessage
       try {
         assistantMessage = await withRetry(() => prisma.message.create({
           data: {
-            sessionId, role: MessageRole.ASSISTANT, content: cleanText, provider,
+            sessionId, role: MessageRole.ASSISTANT, content: contentForHistory, provider,
             ...(displayedVisualSession ? { visualSession: displayedVisualSession } : {}),
           },
         }))
@@ -4870,7 +4898,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // the figure's identity is a nice-to-have on this write.
         console.error('[learn/chat] message.create with provider/visual failed, retrying without them:', err)
         assistantMessage = await withRetry(() => prisma.message.create({
-          data: { sessionId, role: MessageRole.ASSISTANT, content: cleanText },
+          data: { sessionId, role: MessageRole.ASSISTANT, content: contentForHistory },
         }))
       }
 

@@ -88,6 +88,35 @@ export function parseMcqTag(text: string): { mcq: TutorMCQ | null; cleanText: st
 }
 
 /**
+ * THE QUESTION AND ITS CHOICES, MADE PART OF DURABLE HISTORY.
+ *
+ * `parseMcqTag` strips the raw `<!--MCQ-->` tag out of the tutor's text —
+ * correctly, since a learner must never see the machine tag — but the
+ * question and options it carried were then persisted NOWHERE: only the
+ * tag-stripped prose reached `Message.content`, and the parsed `TutorMCQ`
+ * object lived solely in that one turn's JSON response. A history reload
+ * (refresh, logout/login, reopening the conversation) restored the bare
+ * prose with the actual question missing — the exact "second channel that
+ * never reaches durable storage" defect class the diagram-persistence fix
+ * closed, on a different field.
+ *
+ * This appends a plain-text rendering of the question and its options onto
+ * what gets WRITTEN to `content`, reusing the one existing conversation
+ * history mechanism instead of adding a second MCQ-specific persistence
+ * path. Callers pass the CLEAN (already tag-stripped) text; the live JSON
+ * response to the client is built from that clean text directly and is
+ * never passed through this function, so the tappable wizard the learner
+ * sees this turn is unaffected — only a LATER reload of `content` ever
+ * shows this appended text. The correct answer is deliberately not marked,
+ * matching what the live wizard shows before a tap.
+ */
+export function appendMcqToHistoryText(cleanText: string, mcq: TutorMCQ | null): string {
+  if (!mcq) return cleanText
+  const lines = mcq.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}`).join('\n')
+  return `${cleanText}\n\n${mcq.question}\n${lines}`
+}
+
+/**
  * Confidence for an MCQ answer (P2: "confidence estimation should be based
  * primarily on MCQ performance").
  *

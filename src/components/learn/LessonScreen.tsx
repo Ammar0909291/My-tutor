@@ -44,6 +44,7 @@ import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
+import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
 import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
@@ -1206,7 +1207,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         // history now would clobber the welcome screen for the new lesson
         // and set lessonStarted=true, silently bypassing "Start Lesson".
         if (pendingLessonRunRef.current !== null) return
-        setMessages(restored)
+        // P0 root cause (diagrams vanishing on refresh/re-login): this used to
+        // set the restored array directly, unmerged — the figures
+        // `/api/sessions/history` returns in `hist.data.visuals` were fetched
+        // and then never read.
+        // This is the restoration path that actually runs for a returning
+        // learner (refresh, logout/login, reopening the app), so every figure
+        // shown in an earlier session was silently dropped right here, even
+        // though the server-side persistence (Message.visualSession,
+        // restoreMessageVisuals) was already correct. See applyRestoredVisuals.
+        const { messages: restoredWithVisuals } = applyRestoredVisuals(restored, hist?.data?.visuals)
+        setMessages(restoredWithVisuals)
         setLessonStarted(true) // skip the "Start Lesson" welcome screen
         // Prevent startLesson() from firing a duplicate opening prompt if
         // the (now hidden) button were somehow triggered.
@@ -2457,34 +2468,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // True once ANY restored message carried its own figure. It is what
       // decides whether the legacy session-level fallback below may run: a
       // conversation that records per-message figures must never also have one
-      // attached by position. See the fallback's own note.
+      // attached by position. See the fallback's own note. Set from
+      // applyRestoredVisuals's return value below — the module-level function
+      // shared with the mount-time restore effect (see its definition for the
+      // defect this sharing closes).
       let anyMessageVisual = false
-
-      /**
-       * Attach each restored figure to the message that actually showed it.
-       *
-       * Keyed by message id, never by position. The server has already run the
-       * resolver and the admission gate; this validates the payload once more
-       * before rendering — the same defense-in-depth the live path applies, so
-       * a payload that does not validate is dropped rather than drawn.
-       */
-      const withRestoredVisuals = (msgs: ChatMsg[], visuals: unknown): ChatMsg[] => {
-        if (!visuals || typeof visuals !== 'object') return msgs
-        const byId = visuals as Record<string, {
-          conceptId?: string; sceneSpec?: unknown; visual?: string; visualSpec?: unknown
-        }>
-        return msgs.map((m) => {
-          const rv = byId[m.id]
-          if (!rv) return m
-          const scene = rv.sceneSpec as SceneSpec | undefined
-          const validScene = scene && validateSceneSpec(scene).valid ? scene : undefined
-          const validSpec = parseVisualSpec(rv.visualSpec) ?? undefined
-          const visualType = typeof rv.visual === 'string' ? rv.visual : undefined
-          if (!validScene && !validSpec && !visualType) return m
-          anyMessageVisual = true
-          return { ...m, sceneSpec: validScene, visualSpec: validSpec, visual: visualType }
-        })
-      }
 
       try {
         const histRes = await fetchWithTimeout(`/api/sessions/history?subject=${encodeURIComponent(subjectSlug)}`, {}, 15000)
@@ -2501,7 +2489,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               provider: m.provider ?? undefined,
             }))
           if (restored.length > 0) {
-            setMessages(withRestoredVisuals(restored, hist?.data?.visuals))
+            const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, hist?.data?.visuals)
+            setMessages(withVisuals)
+            anyMessageVisual = anyAttached
             restoredAny = true
           }
         }
@@ -2520,7 +2510,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             ts: new Date(m.createdAt).getTime(),
             provider: m.provider ?? undefined,
           }))
-        setMessages(withRestoredVisuals(restored, (data as { messageVisuals?: unknown }).messageVisuals))
+        const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, (data as { messageVisuals?: unknown }).messageVisuals)
+        setMessages(withVisuals)
+        anyMessageVisual = anyAttached
         restoredAny = true
       }
 
