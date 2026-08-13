@@ -4726,6 +4726,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // this point, and post-hoc suppression of a single-authority decision
       // would be a second authority by another name. Suppression belongs on the
       // resolver's INPUT, not on its output; that is a later milestone.
+      // OWNERSHIP: a figure is drawn into THIS message only when this turn
+      // actually put it there — a first appearance or an explicit re-target
+      // (`session.turns === 0`, set in resolveVisual.ts's buildDecision) —
+      // never when continuity is merely HOLDING an earlier turn's figure on
+      // screen (`turns > 0`, session.ts's decideContinuity + tickSession).
+      // Before this gate, a held figure was re-attached to every subsequent
+      // assistant message: the same diagram rendered again under Tutor
+      // message #3, #5, #7… for as long as the topic stayed unchanged — a
+      // learner scrolling the transcript saw one picture duplicated under
+      // every reply, not one picture that belonged to the reply that drew
+      // it. Continuity itself is untouched: the visual-contract prompt block
+      // built above still tells the model a figure is on screen (so its
+      // prose can refer to it), and visualSessionUpdate below still persists
+      // the held session for the next turn's resolution — only the
+      // CLIENT-VISIBLE payload for this specific message is withheld when
+      // this message did not introduce it.
+      const figureIntroducedThisTurn =
+        visualDecisionHoisted?.session ? visualDecisionHoisted.session.turns === 0 : true
+
       {
         const decision = visualDecisionHoisted
         const llmTag = responseVisual as import('@/lib/school/visuals/visualTypes').VisualType | null
@@ -4736,21 +4755,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
         // A null payload is the NO-FIGURE decision: the concept has no faithful
         // visual, so every channel stays null and the learner sees text only.
-        // This is a successful outcome, not a failure to render.
-        switch (decision?.payload?.renderer) {
-          case 'card': {
-            const legal = decision.allowed ?? [decision.payload.visualType]
-            responseVisual = llmTag && legal.includes(llmTag) ? llmTag : decision.payload.visualType
-            break
+        // This is a successful outcome, not a failure to render. A HELD figure
+        // (figureIntroducedThisTurn === false) takes the same empty branch —
+        // this message simply did not introduce a figure of its own.
+        if (figureIntroducedThisTurn) {
+          switch (decision?.payload?.renderer) {
+            case 'card': {
+              const legal = decision.allowed ?? [decision.payload.visualType]
+              responseVisual = llmTag && legal.includes(llmTag) ? llmTag : decision.payload.visualType
+              break
+            }
+            case 'spec':
+              detectedVisualSpec = decision.payload.visualSpec
+              break
+            case 'scene':
+              detectedSceneSpec = decision.payload.sceneSpec
+              break
+            default:
+              break   // no decision, no payload, or the retired ascii member
           }
-          case 'spec':
-            detectedVisualSpec = decision.payload.visualSpec
-            break
-          case 'scene':
-            detectedSceneSpec = decision.payload.sceneSpec
-            break
-          default:
-            break   // no decision, no payload, or the retired ascii member
         }
       }
 
@@ -4873,9 +4896,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       //
       // Deliberately narrow — it changes what is WRITTEN, never what is shown.
       // Continuity on screen is untouched.
+      //
+      // EXTENDED for message-level visual ownership: `session.turns !== 0`
+      // means this turn HELD an earlier turn's figure rather than introducing
+      // one of its own (see figureIntroducedThisTurn above, same signal). A
+      // held figure must not be recorded as this message's either — writing
+      // it would silently reintroduce the duplicate-diagram defect on the
+      // very next page reload, since `applyRestoredVisuals` re-attaches
+      // whatever `/api/sessions/history` returns as this message's visual.
       const figureBelongsToThisTurn = (() => {
         const session = visualDecisionHoisted?.session
         if (!session) return false
+        if (session.turns !== 0) return false
         const excursionOpen = excursionDecisionHoisted?.state.active === true
         if (!excursionOpen) return true
         const taught = excursionDecisionHoisted?.targetConceptId ?? null

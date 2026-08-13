@@ -172,10 +172,13 @@ describe('each figure returns to the message that showed it', () => {
 /** The route's predicate, mirrored exactly (route.ts, figureBelongsToThisTurn). */
 function figureBelongsToThisTurn(input: {
   sessionConceptId: string | null
+  /** 0 = this turn introduced/re-targeted the figure; >0 = continuity is holding an earlier turn's. */
+  sessionTurns: number
   excursionActive: boolean
   excursionTargetConceptId: string | null
 }): boolean {
   if (!input.sessionConceptId) return false
+  if (input.sessionTurns !== 0) return false
   if (!input.excursionActive) return true
   if (!input.excursionTargetConceptId) return false
   return input.sessionConceptId === input.excursionTargetConceptId
@@ -184,7 +187,7 @@ function figureBelongsToThisTurn(input: {
 describe('D6 — only the figure of what was taught is recorded', () => {
   it('an ordinary lesson turn records its figure', () => {
     expect(figureBelongsToThisTurn({
-      sessionConceptId: LESSON, excursionActive: false, excursionTargetConceptId: null,
+      sessionConceptId: LESSON, sessionTurns: 0, excursionActive: false, excursionTargetConceptId: null,
     })).toBe(true)
   })
 
@@ -192,27 +195,27 @@ describe('D6 — only the figure of what was taught is recorded', () => {
     // The exact production shape — an unresolved-topic excursion ("catalyst
     // work") with the lesson's force diagram still on screen.
     expect(figureBelongsToThisTurn({
-      sessionConceptId: LESSON, excursionActive: true, excursionTargetConceptId: null,
+      sessionConceptId: LESSON, sessionTurns: 0, excursionActive: true, excursionTargetConceptId: null,
     })).toBe(false)
   })
 
   it('a RESOLVED excursion records the figure of its own concept', () => {
     expect(figureBelongsToThisTurn({
-      sessionConceptId: 'phys.fluid.viscosity', excursionActive: true,
+      sessionConceptId: 'phys.fluid.viscosity', sessionTurns: 0, excursionActive: true,
       excursionTargetConceptId: 'phys.fluid.viscosity',
     })).toBe(true)
   })
 
   it('a resolved excursion still refuses the LESSON figure', () => {
     expect(figureBelongsToThisTurn({
-      sessionConceptId: LESSON, excursionActive: true,
+      sessionConceptId: LESSON, sessionTurns: 0, excursionActive: true,
       excursionTargetConceptId: 'phys.fluid.viscosity',
     })).toBe(false)
   })
 
   it('no figure at all records nothing', () => {
     expect(figureBelongsToThisTurn({
-      sessionConceptId: null, excursionActive: false, excursionTargetConceptId: null,
+      sessionConceptId: null, sessionTurns: 0, excursionActive: false, excursionTargetConceptId: null,
     })).toBe(false)
   })
 
@@ -227,5 +230,85 @@ describe('D6 — only the figure of what was taught is recorded', () => {
     ])
     expect(out['excursion-turn']).toBeUndefined()
     expect(out['another-excursion-turn']).toBeUndefined()
+  })
+})
+
+// ── A FIGURE BELONGS ONLY TO THE MESSAGE THAT INTRODUCED IT ─────────────────
+//
+// THE MEASURED FAILURE: a figure attached to Tutor message #1 (turns: 0)
+// re-appeared under Tutor message #3, #5, #7… for as long as continuity held
+// the same concept (turns: 1, 2, 3…) — because the same VisualDecision.session
+// identity, and therefore `figureBelongsToThisTurn`, was true on every one of
+// those later turns too, before this rule existed. A learner scrolling the
+// transcript saw one diagram duplicated under every reply.
+//
+// THE FIX (mirrored above): `sessionTurns !== 0` refuses the record outright,
+// before excursion state is even consulted — a held figure is never this
+// message's, on a lesson turn or an excursion turn alike. This is the SAME
+// signal `visualNotReintroduced.test.ts` already uses to stop the tutor's
+// PROSE re-describing a held figure turn after turn; this closes the sibling
+// defect in the RENDERED figure itself.
+describe('a figure belongs only to the message that introduced it', () => {
+  it('the introducing turn (turns: 0) records its figure', () => {
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: LESSON, sessionTurns: 0, excursionActive: false, excursionTargetConceptId: null,
+    })).toBe(true)
+  })
+
+  it('a held turn (turns: 1) — the very next reply — records NOTHING', () => {
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: LESSON, sessionTurns: 1, excursionActive: false, excursionTargetConceptId: null,
+    })).toBe(false)
+  })
+
+  it('a figure held for many turns still never re-attaches', () => {
+    for (const turns of [2, 3, 5, 12, 40]) {
+      expect(figureBelongsToThisTurn({
+        sessionConceptId: LESSON, sessionTurns: turns, excursionActive: false, excursionTargetConceptId: null,
+      })).toBe(false)
+    }
+  })
+
+  it('a held turn is refused even when it would otherwise pass the excursion check', () => {
+    // Without the turns gate this would be `true` (a resolved excursion
+    // recording its own concept, per the D6 case above) — the turns check
+    // must run FIRST and short-circuit regardless of excursion state.
+    expect(figureBelongsToThisTurn({
+      sessionConceptId: 'phys.fluid.viscosity', sessionTurns: 3, excursionActive: true,
+      excursionTargetConceptId: 'phys.fluid.viscosity',
+    })).toBe(false)
+  })
+
+  it('restore reflects the same rule: only the introducing message keeps its figure on reload', async () => {
+    // Message 1 introduced the figure (turns: 0) — a real persisted row.
+    // Messages 3 and 5 held it (turns: 1, 2) — per the route.ts fix, those
+    // never had `visualSession` written at all, so their rows carry none.
+    const out = await restoreMessageVisuals([
+      msg('assistant-1', identity(LESSON, { turns: 0 })),
+      msg('user-2'),
+      msg('assistant-3'),   // held turn — nothing was ever written here
+      msg('user-4'),
+      msg('assistant-5'),   // held turn — nothing was ever written here
+    ])
+    expect(out['assistant-1']).toBeDefined()
+    expect(out['assistant-1'].conceptId).toBe(LESSON)
+    expect(out['assistant-3']).toBeUndefined()
+    expect(out['assistant-5']).toBeUndefined()
+  })
+
+  it('a genuinely NEW figure on a later message is its own, independent record', async () => {
+    // assistant-1 introduces figure A; assistant-3 introduces a DIFFERENT
+    // figure B (turns: 0 again, because a fresh target resets the counter —
+    // see resolveVisual.ts's buildDecision, `heldTurns = 0` on the non-hold
+    // branch). Both are real introductions and both must be restorable,
+    // independently, keyed by message id — never merged, never deduped away.
+    const OTHER = 'phys.mech.projectile-motion'
+    const out = await restoreMessageVisuals([
+      msg('assistant-1', identity(LESSON, { turns: 0 })),
+      msg('assistant-3', identity(OTHER, { turns: 0 })),
+    ])
+    expect(out['assistant-1'].conceptId).toBe(LESSON)
+    expect(out['assistant-3'].conceptId).toBe(OTHER)
+    expect(out['assistant-1'].conceptId).not.toBe(out['assistant-3'].conceptId)
   })
 })
