@@ -4508,3 +4508,52 @@ Offline only. `npx tsc --noEmit` clean; 323 files / 6,758 passed / 9 skipped;
 other four opened fresh slots). Live resolver 0 discarded, 0 non-physics
 identities changed. **No production write, no sweep re-run against
 production, no topic marked VERIFIED.**
+
+---
+
+# CHEMISTRY BREADTH — 7 → 0, and the count moved with it
+
+All seven candidates from the breadth sweep were checked against their
+blueprints BEFORE authoring, exactly as the new guard's docblock requires.
+All seven were genuine: each documents at least two misconceptions and only
+MC1 was probed. None was a `phys.mech.velocity`-style false positive.
+
+One probe per concept closed **both** gaps — the unprobed misconception and
+the missing third gradeable item — so chemistry moved 149 → 142 on count and
+7 → 0 on breadth in the same batch.
+
+| concept | misconception that had no diagnostic |
+|---|---|
+| `atomic.photoelectric-effect` | MC2 — de Broglie waves are observable for any object |
+| `period.modern-periodic-law` | MC2 — the d-block fills *n*d, not (*n*−1)d |
+| `hyd.polycyclic` | MC2 — naphthalene's α and β are equally activated |
+| `bio.vitamins` | MC2 — steroid hormones are one hormone at different doses |
+| `org.arrow-pushing` | MC2 — two arrows from one lone pair in a single step |
+| `elect.concentration-cell` | MC2 — the dilute side is the cathode |
+| `bio.nucleic-acids` | MC2 — DNA and RNA differ only in T vs U |
+
+Two of these are worth noting as more than bookkeeping. `org.arrow-pushing`
+MC2 is a mechanism-drawing error that produces five-bonded oxygen — it
+invalidates every mechanism the learner draws afterwards. `nucleic-acids` MC2
+hides the 2′-OH, which is the reason RNA hydrolyses and DNA does not; a
+learner who "knows" only T-vs-U cannot explain RNA's instability at all.
+
+The chemistry breadth ratchet is now **0** but is left in ratchet form rather
+than converted to a strict equality, so a future authoring batch cannot
+silently reintroduce one.
+
+## State after this batch
+
+| subject | short of 3 probes | within one band | single-misconception |
+|---|---|---|---|
+| physics | 0 | 0 | 1 (`phys.mech.velocity`, correct by design) |
+| chemistry | 142 | 142 | **0** |
+| biology | 108 | 108 | 25 |
+| computer_science | 119 | 119 | 88 |
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 324 files / 6,776 passed / 9 skipped;
+`npm run build` clean. Live resolver 0 discarded, 0 non-physics identities
+changed. **No production write, no sweep re-run against production, no topic
+marked VERIFIED.**

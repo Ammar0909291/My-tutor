@@ -298,7 +298,9 @@ describe('the non-physics authored corpora convert too', () => {
     // [subject, probes, concepts still short of three gradeable probes]
     // chemistry: 186 -> 169 (chem.env, chem.sblock, chem.anal, chem.surface)
     //            -> 149 (chem.redox, chem.dblock, chem.nitro, chem.poly)
-    ['chemistry', CHEMISTRY_PROBES, 149],
+    //            -> 142 (the seven BREADTH gaps; one probe each closed the
+    //                   missing misconception AND the missing third item)
+    ['chemistry', CHEMISTRY_PROBES, 142],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]
@@ -380,7 +382,12 @@ describe('misconception breadth across every authored corpus', () => {
   const breadthCorpora: ReadonlyArray<readonly [string, readonly SeedProbeLike[], number]> = [
     // [subject, probes, concepts whose gradeable probes share ONE misconception]
     ['physics', AUTHORED_PROBES.filter((p) => p.subjectSlug === 'physics'), 1],
-    ['chemistry', CHEMISTRY_PROBES, 7],
+    // chemistry: 7 -> 0. All seven were verified against their blueprints
+    // first — each documented at least two misconceptions with only MC1
+    // probed, so all seven were genuine rather than single-misconception
+    // concepts like phys.mech.velocity. Strict now, but left in ratchet form
+    // so a future authoring batch cannot silently reintroduce one.
+    ['chemistry', CHEMISTRY_PROBES, 0],
     ['biology', BIOLOGY_PROBES, 25],
     ['computer_science', CS_PROBES, 88],
   ]

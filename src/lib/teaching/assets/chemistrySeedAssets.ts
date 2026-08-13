@@ -1492,6 +1492,30 @@ const PHOTO_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PHOTO}:MC1`],
     source: `${PHOTO_SRC} — misconception: intensity affects electron KE (it affects count only)`,
   },
+  {
+    // BREADTH gap, verified against the blueprint. Both existing probes on
+    // this concept target MC1, so MC2 — documented in the blueprint —
+    // had no diagnostic anywhere: a learner holding it could pass every
+    // check the concept offers. This probe also supplies the third gradeable
+    // item the mastery gate needs, so it closes both gaps at once.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is fully seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: PHOTO,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A 60 g tennis ball travels at 50 m/s. Its de Broglie wavelength works out to about 2 x 10^-34 m. Does the ball show observable wave behaviour?',
+    choices: [
+      { text: 'No — that wavelength is roughly 10^20 times smaller than a proton, so no diffraction or interference is detectable. The formula applies universally, but wave behaviour only SHOWS when lambda is comparable to the object\'s own size, as it is for electrons near atoms', isCorrect: true },
+      { text: 'Yes — everything has a wave nature, so the ball diffracts like any other matter wave', isCorrect: false, misconceptionId: `${PHOTO}:MC2` },
+    ],
+    correctValue: 'no — lambda is far too small to be observable',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHOTO}:MC2`],
+    source: `${PHOTO_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.elect.conductance ──────────────────────────────────────────────────
@@ -3702,6 +3726,30 @@ const MODPER_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${MODPER}:MC1`],
     source: `${MODPER_SRC} — misconception: period proximity implies chemical similarity`,
+  },
+  {
+    // BREADTH gap, verified against the blueprint. Both existing probes on
+    // this concept target MC1, so MC2 — documented in the blueprint —
+    // had no diagnostic anywhere: a learner holding it could pass every
+    // check the concept offers. This probe also supplies the third gradeable
+    // item the mastery gate needs, so it closes both gaps at once.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is fully seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: MODPER,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Iron is in period 4. Which d subshell is it filling — 3d or 4d?',
+    choices: [
+      { text: '3d — the d-block in period n fills (n-1)d, always one behind the period number, because 4s lies below 3d when filling begins. Iron is [Ar]3d6 4s2', isCorrect: true },
+      { text: '4d — the period number is 4, so the d electrons go into the 4d subshell', isCorrect: false, misconceptionId: `${MODPER}:MC2` },
+    ],
+    correctValue: '3d',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MODPER}:MC2`],
+    source: `${MODPER_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -11442,6 +11490,30 @@ const POLYCYC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [],
     source: `${POLYCYC_SRC} — testing understanding of why pyrrole's lone pair is integral to its aromatic system`,
   },
+  {
+    // BREADTH gap, verified against the blueprint. Both existing probes on
+    // this concept target MC1, so MC2 — documented in the blueprint —
+    // had no diagnostic anywhere: a learner holding it could pass every
+    // check the concept offers. This probe also supplies the third gradeable
+    // item the mastery gate needs, so it closes both gaps at once.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is fully seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: POLYCYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Naphthalene is nitrated. Are the alpha (C1) and beta (C2) positions equally reactive because the molecule is symmetric?',
+    choices: [
+      { text: 'No — attack at C1 gives a Wheland intermediate that leaves the second ring fully aromatic (three such resonance structures); attack at C2 disrupts both rings. C1 is strongly preferred, and the answer comes from intermediate stability rather than from symmetry', isCorrect: true },
+      { text: 'Yes — both positions sit on the fused aromatic system, so they are activated equally', isCorrect: false, misconceptionId: `${POLYCYC}:MC2` },
+    ],
+    correctValue: 'no — C1 is favoured, via Wheland-intermediate aromaticity',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${POLYCYC}:MC2`],
+    source: `${POLYCYC_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.hal.sn2 ────────────────────────────────────────────────────────────
@@ -14731,6 +14803,30 @@ const VITAMIN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [],
     source: `${VITAMIN_SRC} — testing understanding that vitamin supplementation safety depends on solubility-based body handling`,
   },
+  {
+    // BREADTH gap, verified against the blueprint. Both existing probes on
+    // this concept target MC1, so MC2 — documented in the blueprint —
+    // had no diagnostic anywhere: a learner holding it could pass every
+    // check the concept offers. This probe also supplies the third gradeable
+    // item the mastery gate needs, so it closes both gaps at once.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is fully seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: VITAMIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Testosterone, oestrogen and cortisol all share the identical four-ring steroid nucleus. Are they the same hormone at different concentrations?',
+    choices: [
+      { text: 'No — the peripheral functional groups differ, and those differences decide which receptor each one binds (androgen, oestrogen, glucocorticoid). They are distinct molecules with distinct effects, not interconvertible by concentration', isCorrect: true },
+      { text: 'Essentially yes — the shared steroid core means they are the same substance acting at different levels', isCorrect: false, misconceptionId: `${VITAMIN}:MC2` },
+    ],
+    correctValue: 'no — distinct molecules with distinct receptors',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VITAMIN}:MC2`],
+    source: `${VITAMIN_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.pblock.trends ──────────────────────────────────────────────────────
@@ -15303,6 +15399,30 @@ const ARROWPUSH_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ARROWPUSH}:MC1`],
     source: `${ARROWPUSH_SRC} — sigma bonds as valid electron sources in curved arrow notation`,
   },
+  {
+    // BREADTH gap, verified against the blueprint. Both existing probes on
+    // this concept target MC1, so MC2 — documented in the blueprint —
+    // had no diagnostic anywhere: a learner holding it could pass every
+    // check the concept offers. This probe also supplies the third gradeable
+    // item the mastery gate needs, so it closes both gaps at once.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is fully seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: ARROWPUSH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In one mechanistic step, can two curly arrows be drawn from the SAME lone pair on an oxygen?',
+    choices: [
+      { text: 'No — a lone pair is exactly two electrons and one arrow consumes both, so there is nothing left for a second. Drawing two would put five bonds on oxygen. Two bond-forming events need two separate steps or two genuinely distinct lone pairs', isCorrect: true },
+      { text: 'Yes — as long as the oxygen has a lone pair available, it can push two arrows in the same step', isCorrect: false, misconceptionId: `${ARROWPUSH}:MC2` },
+    ],
+    correctValue: 'no — one lone pair supports exactly one arrow per step',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARROWPUSH}:MC2`],
+    source: `${ARROWPUSH_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.org.pericyclic ─────────────────────────────────────────────────────
@@ -15459,6 +15579,30 @@ const CONCELL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${CONCELL}:MC1`],
     source: `${CONCELL_SRC} — distinction between E° (zero for concentration cell) and E (Nernst-corrected, non-zero)`,
+  },
+  {
+    // BREADTH gap, verified against the blueprint. Both existing probes on
+    // this concept target MC1, so MC2 — documented in the blueprint —
+    // had no diagnostic anywhere: a learner holding it could pass every
+    // check the concept offers. This probe also supplies the third gradeable
+    // item the mastery gate needs, so it closes both gaps at once.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is fully seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: CONCELL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A concentration cell has 1.0 M Zn2+ on one side and 0.01 M on the other. Which side is the cathode?',
+    choices: [
+      { text: 'The 1.0 M side — the cell runs so as to EQUALISE the concentrations, and reduction deposits metal, which lowers [Zn2+]. So reduction must happen where the concentration is higher; oxidation dissolves metal on the dilute side', isCorrect: true },
+      { text: 'The 0.01 M side — the dilute half-cell is where reduction occurs so that its concentration can rise', isCorrect: false, misconceptionId: `${CONCELL}:MC2` },
+    ],
+    correctValue: 'the concentrated side is the cathode',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CONCELL}:MC2`],
+    source: `${CONCELL_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -16167,6 +16311,30 @@ const NACID_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${NACID}:MC1`],
     source: `${NACID_SRC} — H-bonds (not covalent) between strands; helicase separates for replication`,
+  },
+  {
+    // BREADTH gap, verified against the blueprint. Both existing probes on
+    // this concept target MC1, so MC2 — documented in the blueprint —
+    // had no diagnostic anywhere: a learner holding it could pass every
+    // check the concept offers. This probe also supplies the third gradeable
+    // item the mastery gate needs, so it closes both gaps at once.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is fully seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: NACID,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Do DNA and RNA differ only in having T instead of U?',
+    choices: [
+      { text: 'No — there are three independent differences: the base (T vs U), the SUGAR (deoxyribose vs ribose, and ribose\'s 2\'-OH makes the RNA backbone far easier to hydrolyse), and the typical strandedness (double vs single)', isCorrect: true },
+      { text: 'Yes — apart from that one base substitution they are essentially the same molecule', isCorrect: false, misconceptionId: `${NACID}:MC2` },
+    ],
+    correctValue: 'no — base, sugar and strandedness all differ',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NACID}:MC2`],
+    source: `${NACID_SRC} — MC2, distractor-mapped`,
   },
 ]
 
