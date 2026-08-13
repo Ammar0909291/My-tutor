@@ -143,7 +143,8 @@ describe('authoredSeedAssets — canonical slug uniqueness', () => {
     // -> 450 (two anti-recall discriminators for phys.meas.vector-addition)
     // -> 465 (fifteen phys.stat, one new rung each)
     // -> 481 (sixteen phys.particle, one new rung each)
-    // -> 500 (nineteen phys.qm, one new rung each).
+    // -> 500 (nineteen phys.qm, one new rung each)
+    // -> 521 (twenty-one phys.mod, one new rung each).
     //
     // Those probes are NOT lost. `probeSlug` here is the LEGACY pre-Item-6
     // identity, which carries no difficulty segment, so every ladder rung
@@ -152,7 +153,7 @@ describe('authoredSeedAssets — canonical slug uniqueness', () => {
     // asserts it maps every authored probe to a unique slug (0 discarded) —
     // that is the real invariant. This stays a ratchet on the legacy measure
     // so an accidental collision still cannot pass unnoticed.
-    const KNOWN_DISCARDED = 500
+    const KNOWN_DISCARDED = 521
     const slugs = ALL_PROBES.filter((p) => isPhysics(p.conceptId)).map(probeSlug)
     expect(discarded(slugs)).toBeLessThanOrEqual(KNOWN_DISCARDED)
   })

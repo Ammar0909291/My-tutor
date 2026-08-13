@@ -6012,6 +6012,24 @@ const PHOT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PHOT}:MC-ANY-FREQUENCY-WORKS-WITH-ENOUGH-INTENSITY`],
     source: `${PHOT_SRC} — MC-2 probe question verbatim, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: PHOT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In a photoelectric cell, does the stopping potential speed the emitted electrons up on their way to the collector?',
+    choices: [
+      { text: 'No — it is applied to OPPOSE their motion. It sets up a retarding field that decelerates them, and the voltage at which even the fastest electron just fails to arrive measures their maximum kinetic energy', isCorrect: true },
+      { text: 'Yes — a positive voltage on the collector pulls the electrons across faster', isCorrect: false, misconceptionId: `${PHOT}:MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS` },
+    ],
+    correctValue: 'no — it retards them, which is how it measures maximum KE',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PHOT}:MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS`],
+    source: `${PHOT_SRC} — MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS, distractor-mapped`,
+  },
 ]
 
 // ─── math.trig.right-triangle-trig ───────────────────────────────────────────
@@ -8453,6 +8471,24 @@ const BOHR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BOHR}:MC-3`],
     source: `${BOHR_SRC} — MC-3 trigger as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung PROFICIENT, the free one for this concept.
+    conceptId: BOHR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Hydrogen emits at 656 nm and also absorbs at 656 nm. Are emission and absorption therefore the same process?',
+    choices: [
+      { text: 'No — they are opposite transitions that happen to share a photon energy. Emission runs n_i > n_f and releases a photon; absorption runs n_i < n_f and consumes one. Hot gas emits; cool gas in front of a continuum source absorbs', isCorrect: true },
+      { text: 'Yes — the atom emits and absorbs the same colours, so it is one process seen two ways', isCorrect: false, misconceptionId: `${BOHR}:MC-2` },
+    ],
+    correctValue: 'no — opposite transitions sharing one photon energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOHR}:MC-2`],
+    source: `${BOHR_SRC} — MC-2, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.de-broglie ──────────────────────────────────────────────────────
@@ -8536,6 +8572,24 @@ const DEB_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${DEB}:MC-2`],
     source: `${DEB_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: DEB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An electron has a de Broglie wavelength of about 0.1 nm. Does that tell you the electron is about 0.1 nm across?',
+    choices: [
+      { text: 'No — the classical electron radius is about 2.8 fm, roughly 10^5 times smaller. The de Broglie wavelength is the wavelength of the probability wave and depends on momentum, so it changes when the electron speeds up while the electron does not', isCorrect: true },
+      { text: 'Yes — the wavelength is a measure of how big the particle is', isCorrect: false, misconceptionId: `${DEB}:MC-3` },
+    ],
+    correctValue: 'no — it is the probability wavelength, not a size',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DEB}:MC-3`],
+    source: `${DEB_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -33658,6 +33712,24 @@ const PHTN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PHTN}:MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS`],
     source: `${PHTN_SRC} — MC-BRIGHT-BEAM-HAS-MORE-ENERGETIC-PHOTONS trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-PHOTON-HAS-NO-MOMENTUM, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: PHTN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A photon has zero rest mass. Does it therefore carry no momentum?',
+    choices: [
+      { text: 'No — a photon carries momentum p = h/lambda = E/c, which is why a solar sail is actually pushed by sunlight and why Compton scattering shifts the wavelength', isCorrect: true },
+      { text: 'Yes — momentum is mass times velocity, so no mass means no momentum', isCorrect: false, misconceptionId: `${PHTN}:MC-PHOTON-HAS-NO-MOMENTUM` },
+    ],
+    correctValue: 'no — p = h/lambda = E/c',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PHTN}:MC-PHOTON-HAS-NO-MOMENTUM`],
+    source: `${PHTN_SRC} — MC-PHOTON-HAS-NO-MOMENTUM, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.wave-particle-duality ──────────────────────────────────────────
@@ -33717,6 +33789,24 @@ const WPD_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${WPD}:MC-3`],
     source: `${WPD_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: WPD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Putting a which-slit detector on a double-slit experiment destroys the fringes. Is that because the detector mechanically knocks the electron off course?',
+    choices: [
+      { text: 'No — the fringes track whether which-path INFORMATION is available, not how hard the electron was hit. A quantum eraser that discards that information afterwards brings the fringes back without touching the electron again', isCorrect: true },
+      { text: 'Yes — the measurement bumps the electron and the disturbance smears out the pattern', isCorrect: false, misconceptionId: `${WPD}:MC-2` },
+    ],
+    correctValue: 'no — it is about information, not mechanical disturbance',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WPD}:MC-2`],
+    source: `${WPD_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -33778,6 +33868,24 @@ const CMPT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CMPT}:MC-WAVE-MODEL-PREDICTS-SAME-RESULT`],
     source: `${CMPT_SRC} — MC-WAVE-MODEL-PREDICTS-SAME-RESULT trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-COMPTON-IS-ABSORPTION-AND-REEMISSION, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: CMPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In Compton scattering, does the electron absorb the photon and then emit a new one?',
+    choices: [
+      { text: 'No — it is a single elastic collision. Energy and momentum are conserved between the two bodies in one event, and the wavelength shift depends only on the scattering angle, which absorption-and-re-emission would not reproduce', isCorrect: true },
+      { text: 'Yes — the electron takes the photon in and then radiates a fresh one at a longer wavelength', isCorrect: false, misconceptionId: `${CMPT}:MC-COMPTON-IS-ABSORPTION-AND-REEMISSION` },
+    ],
+    correctValue: 'no — a single elastic collision',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CMPT}:MC-COMPTON-IS-ABSORPTION-AND-REEMISSION`],
+    source: `${CMPT_SRC} — MC-COMPTON-IS-ABSORPTION-AND-REEMISSION, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.x-rays ──────────────────────────────────────────────────────────
@@ -33837,6 +33945,24 @@ const XRAY_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${XRAY}:MC-BRAGG-ANGLE-FROM-NORMAL`],
     source: `${XRAY_SRC} — MC-BRAGG-ANGLE-FROM-NORMAL trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE, which had no gradeable
+    // probe. Rung PROFICIENT, the free one for this concept.
+    conceptId: XRAY,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An X-ray tube runs at 50 kV. What is the highest-energy photon it can produce?',
+    choices: [
+      { text: '50 keV — an electron accelerated through V gains kinetic energy eV, and at most it converts all of that into one photon, giving a sharp minimum wavelength lambda_min = hc/eV with nothing beyond it', isCorrect: true },
+      { text: 'There is no hard ceiling — the tube emits a broad spread that includes photons well above 50 keV', isCorrect: false, misconceptionId: `${XRAY}:MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE` },
+    ],
+    correctValue: '50 keV, the Duane-Hunt limit',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${XRAY}:MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE`],
+    source: `${XRAY_SRC} — MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE, distractor-mapped`,
   },
 ]
 
@@ -33898,6 +34024,24 @@ const BEEN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BEEN}:MC-3`],
     source: `${BEEN_SRC} — MC-3 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: BEEN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: D-T fusion releases 17.6 MeV. Is the total rest mass of the products the same as that of the reactants?',
+    choices: [
+      { text: 'No — the rest mass falls by about 0.0189 u, and that missing mass IS the released energy via E = mc^2. Relativistic total energy is conserved; rest mass alone is not', isCorrect: true },
+      { text: 'Yes — mass is always conserved, so the products weigh exactly what the reactants did', isCorrect: false, misconceptionId: `${BEEN}:MC-2` },
+    ],
+    correctValue: 'no — rest mass drops by Q/c^2',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BEEN}:MC-2`],
+    source: `${BEEN_SRC} — MC-2, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.atomic-spectra ──────────────────────────────────────────────────
@@ -33957,6 +34101,24 @@ const ASPC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ASPC}:MC-3`],
     source: `${ASPC_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung PROFICIENT, the free one for this concept.
+    conceptId: ASPC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: The Balmer series gives hydrogen its familiar visible lines. Is that the complete hydrogen spectrum?',
+    choices: [
+      { text: 'No — Lyman (ending at n = 1) sits in the UV and Paschen (ending at n = 3) in the IR, with infinitely many further series; Balmer is simply the one that happens to land in the visible', isCorrect: true },
+      { text: 'Yes — the Balmer lines are the hydrogen spectrum', isCorrect: false, misconceptionId: `${ASPC}:MC-2` },
+    ],
+    correctValue: 'no — Lyman, Paschen and further series exist',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ASPC}:MC-2`],
+    source: `${ASPC_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -34018,6 +34180,24 @@ const NFIS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${NFIS}:MC-4`],
     source: `${NFIS_SRC} — MC-4 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: NFIS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A textbook writes U-235 fission as producing Kr and Ba. Is that THE fission reaction?',
+    choices: [
+      { text: 'No — it is one outcome among hundreds. The fragment yield is a broad bimodal distribution peaking near A = 95 and A = 139; only total A and Z are fixed', isCorrect: true },
+      { text: 'Yes — that is the reaction fission always follows', isCorrect: false, misconceptionId: `${NFIS}:MC-2` },
+    ],
+    correctValue: 'no — a statistical distribution of fragment pairs',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NFIS}:MC-2`],
+    source: `${NFIS_SRC} — MC-2, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.nuclear-fusion ──────────────────────────────────────────────────
@@ -34077,6 +34257,24 @@ const NFUS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${NFUS}:MC-2`],
     source: `${NFUS_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: NFUS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Is fusion fuel radioactive in the way fission fuel is?',
+    choices: [
+      { text: 'No — deuterium is stable and the main product is inert helium; tritium is only weakly radioactive (beta, 12.3 yr, too weak to penetrate skin). The waste issue is activated structure, not long-lived transuranics', isCorrect: true },
+      { text: 'Yes — fusion fuel is radioactive and carries the same hazard as uranium or plutonium', isCorrect: false, misconceptionId: `${NFUS}:MC-3` },
+    ],
+    correctValue: 'no — D is stable, He is inert, T is weakly radioactive',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NFUS}:MC-3`],
+    source: `${NFUS_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -34138,6 +34336,24 @@ const NMOD_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${NMOD}:MC-4`],
     source: `${NMOD_SRC} — MC-4 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: NMOD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In the nuclear shell model, does the spin-orbit splitting have the same sign as in atoms, putting j = l + 1/2 higher?',
+    choices: [
+      { text: 'No — in nuclei j = l + 1/2 lies LOWER. That inverted sign is what drops 1f7/2 down and produces the magic number 28; with the atomic sign the model would predict 40 instead, which the data contradict', isCorrect: true },
+      { text: 'Yes — j = l + 1/2 is the higher level, just as in atomic fine structure', isCorrect: false, misconceptionId: `${NMOD}:MC-2` },
+    ],
+    correctValue: 'no — inverted sign, j = l + 1/2 is lower',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NMOD}:MC-2`],
+    source: `${NMOD_SRC} — MC-2, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.nuclear-reactions ──────────────────────────────────────────────
@@ -34197,6 +34413,24 @@ const NRXN_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${NRXN}:MC-3`],
     source: `${NRXN_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: NRXN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You balance A and Z on both sides of a nuclear reaction and get Q = -1.19 MeV. Will it proceed on its own?',
+    choices: [
+      { text: 'No — balancing is necessary but not sufficient. A negative Q means it is endothermic, so the projectile must arrive above a threshold energy (about 1.53 MeV in the lab frame here); thermal particles simply cannot make it happen', isCorrect: true },
+      { text: 'Yes — the equation balances, so the reaction is allowed and will occur', isCorrect: false, misconceptionId: `${NRXN}:MC-2` },
+    ],
+    correctValue: 'no — Q < 0 needs above-threshold energy',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NRXN}:MC-2`],
+    source: `${NRXN_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -34258,6 +34492,24 @@ const RDEC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${RDEC}:MC-2`],
     source: `${RDEC_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable
+    // probe. Rung PROFICIENT, the free one for this concept.
+    conceptId: RDEC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Radium-226 has a half-life of 1600 years. Take ONE radium-226 nucleus. Will it decay in 1600 years?',
+    choices: [
+      { text: 'Not necessarily — a single nucleus decays probabilistically, with a 50% chance either side of the half-life; the decay time follows an exponential distribution. Half-life is a property of the ensemble, not of any one nucleus', isCorrect: true },
+      { text: 'Yes — after 1600 years that nucleus will have decayed', isCorrect: false, misconceptionId: `${RDEC}:MC-3` },
+    ],
+    correctValue: 'not necessarily — 50% chance either side',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RDEC}:MC-3`],
+    source: `${RDEC_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.radioactivity ───────────────────────────────────────────────────
@@ -34317,6 +34569,24 @@ const RADT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${RADT}:MC-3`],
     source: `${RADT_SRC} — MC-3 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung PROFICIENT, the free one for this concept.
+    conceptId: RADT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Beta-minus decay is often written n -> p + e-. Why is that incomplete?',
+    choices: [
+      { text: 'Because the emitted electrons show a CONTINUOUS energy spectrum. A two-body decay would give the electron one fixed energy; the spread requires a third particle, the antineutrino, sharing the energy — which is exactly why Pauli proposed it in 1930', isCorrect: true },
+      { text: 'It is not incomplete — the neutrino is a bookkeeping convention that need not be written', isCorrect: false, misconceptionId: `${RADT}:MC-2` },
+    ],
+    correctValue: 'the continuous beta spectrum requires the antineutrino',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RADT}:MC-2`],
+    source: `${RADT_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -41000,6 +41270,24 @@ const EBND_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${EBND}:MC-3`],
     source: `${EBND_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: EBND,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: At absolute zero, is the topmost band holding electrons in a metal completely full?',
+    choices: [
+      { text: 'No — it is only PARTIALLY filled: electrons fill the lowest states up to the Fermi energy and leave higher states in the same band empty, which is precisely why they can move into nearby empty states and conduct', isCorrect: true },
+      { text: 'Yes — a band is either occupied or not; occupation does not vary within one band', isCorrect: false, misconceptionId: `${EBND}:MC-2` },
+    ],
+    correctValue: 'no — partially filled up to the Fermi energy',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EBND}:MC-2`],
+    source: `${EBND_SRC} — MC-2, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.semiconductor-classification ───────────────────────────────────
@@ -41074,6 +41362,24 @@ const SCLS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SCLS}:MC-3`],
     source: `${SCLS_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: SCLS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Is a semiconductor\'s conductivity a fixed "medium" value, the way a metal\'s is fixed low-resistivity?',
+    choices: [
+      { text: 'No — it swings by many orders of magnitude with temperature and with doping, and that extreme controllability is exactly why semiconductors are useful for engineered devices', isCorrect: true },
+      { text: 'Yes — a semiconductor conducts a medium amount, and that is a fixed property of the material', isCorrect: false, misconceptionId: `${SCLS}:MC-1` },
+    ],
+    correctValue: 'no — it varies by orders of magnitude',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SCLS}:MC-1`],
+    source: `${SCLS_SRC} — MC-1, distractor-mapped`,
   },
 ]
 
@@ -41150,6 +41456,24 @@ const ISEM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ISEM}:MC-3`],
     source: `${ISEM_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: ISEM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a pure intrinsic semiconductor, is conduction essentially all down to electrons, with holes a minor detail?',
+    choices: [
+      { text: 'No — electrons and holes are created in exactly equal numbers and both contribute measurably; electron and hole mobilities are separately measured material constants (in silicon the electron mobility is only about 2-3 times the hole mobility, not infinitely larger)', isCorrect: true },
+      { text: 'Yes — conduction is really electron motion, and holes are a bookkeeping side detail', isCorrect: false, misconceptionId: `${ISEM}:MC-2` },
+    ],
+    correctValue: 'no — both carriers contribute, in equal numbers',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ISEM}:MC-2`],
+    source: `${ISEM_SRC} — MC-2, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mod.extrinsic-semiconductors ───────────────────────────────────────
@@ -41222,6 +41546,24 @@ const ESEM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${ESEM}:MC-3`],
     source: `${ESEM_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: ESEM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Does n-type silicon contain literally zero holes?',
+    choices: [
+      { text: 'No — a small but nonzero minority-carrier hole population is always present at any nonzero temperature, and those minority carriers matter enormously at a p-n junction. "N-type" names which carrier is in the majority, not which one exists', isCorrect: true },
+      { text: 'Yes — n-type means electrons only and p-type means holes only', isCorrect: false, misconceptionId: `${ESEM}:MC-2` },
+    ],
+    correctValue: 'no — minority carriers are always present',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ESEM}:MC-2`],
+    source: `${ESEM_SRC} — MC-2, distractor-mapped`,
   },
 ]
 
@@ -41296,6 +41638,24 @@ const PNJC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PNJC}:MC-2`],
     source: `${PNJC_SRC} — Section 4 MC-2 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: PNJC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Can you read a p-n junction\'s built-in potential by putting a voltmeter across it?',
+    choices: [
+      { text: 'No — attaching the leads creates metal-semiconductor contact potentials at each probe, and around the closed loop those exactly cancel the built-in potential, so an ideal voltmeter reads zero even though the potential is genuinely there inside the material', isCorrect: true },
+      { text: 'Yes — connect the voltmeter and it reads the built-in potential directly', isCorrect: false, misconceptionId: `${PNJC}:MC-3` },
+    ],
+    correctValue: 'no — contact potentials cancel it around the loop',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PNJC}:MC-3`],
+    source: `${PNJC_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -41373,6 +41733,24 @@ const DREC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${DREC}:MC-3`],
     source: `${DREC_SRC} — Section 4 MC-3 trigger probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-2, which had no gradeable
+    // probe. Rung DEVELOPING, the free one for this concept.
+    conceptId: DREC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A silicon diode is said to turn on at about 0.7 V. Does exactly zero forward current flow below that?',
+    choices: [
+      { text: 'No — the diode equation is a smooth exponential with no discontinuity, so a small forward current (often well under a microamp) does flow below 0.7 V. The turn-on voltage is a practical approximation, not a physical cutoff', isCorrect: true },
+      { text: 'Yes — below the turn-on voltage the diode passes no current at all', isCorrect: false, misconceptionId: `${DREC}:MC-2` },
+    ],
+    correctValue: 'no — a smooth exponential, not a hard cutoff',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DREC}:MC-2`],
+    source: `${DREC_SRC} — MC-2, distractor-mapped`,
   },
 ]
 

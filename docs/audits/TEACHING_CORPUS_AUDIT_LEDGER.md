@@ -4082,3 +4082,79 @@ are now clear.
 Offline only. `npx tsc --noEmit` clean; 318 files / 6,660 passed / 9 skipped;
 `npm run build` clean. **No production write, no sweep re-run, no topic
 marked VERIFIED.**
+
+---
+
+# MOAT BATCH — phys.mod CLEARED (all 21 concepts)
+
+## What was short
+
+All 21 `phys.mod` concepts held two gradeable probes against the three a gate
+needs. `photoelectric-effect` sits at `UNDERGRADUATE`, the other 20 at `HIGH`;
+each third probe went into its concept's own band.
+
+Free rung computed per concept: `DEVELOPING` for 16, `PROFICIENT` for 5
+(`bohr-model`, `x-rays`, `atomic-spectra`, `radioactive-decay`,
+`radioactivity` — each already had a DEVELOPING mcq).
+
+## A naming detail that mattered
+
+Four concepts (`photoelectric-effect`, `photons`, `compton-effect`, `x-rays`)
+carry DESCRIPTIVE misconception ids in the seed
+(`MC-BRIGHTER-LIGHT-FASTER-ELECTRONS`) while their blueprints head the same
+sections `### MC-1: MC-BRIGHTER-…`. Their siblings (`bohr-model`,
+`de-broglie`) use the plain numbered form even though their blueprints are
+written the same way. The new probes follow **whatever the concept's existing
+probes already use**, not a single global rule — mixing the two within one
+concept would break misconception-id joins on that concept alone.
+
+## What was authored
+
+All 21 target a blueprint misconception with no gradeable probe:
+
+| concept | newly covered misconception |
+|---|---|
+| `photoelectric-effect` | MC-STOPPING-POTENTIAL-ACCELERATES-ELECTRONS |
+| `bohr-model` | MC-2 — emission and absorption are one process |
+| `de-broglie` | MC-3 — the wavelength is the particle's size |
+| `photons` | MC-PHOTON-HAS-NO-MOMENTUM |
+| `wave-particle-duality` | MC-2 — the detector mechanically bumps the electron |
+| `compton-effect` | MC-COMPTON-IS-ABSORPTION-AND-REEMISSION |
+| `x-rays` | MC-ALL-PHOTON-ENERGIES-FROM-XRAY-TUBE |
+| `binding-energy` | MC-2 — nuclear reactions conserve rest mass |
+| `atomic-spectra` | MC-2 — Balmer is the whole hydrogen spectrum |
+| `nuclear-fission` | MC-2 — fission always gives the same fragments |
+| `nuclear-fusion` | MC-3 — fusion fuel is radioactive like fission fuel |
+| `nuclear-models` | MC-2 — nuclear spin-orbit has the atomic sign |
+| `nuclear-reactions` | MC-2 — a balanced equation means it happens |
+| `radioactive-decay` | MC-3 — half-life predicts one nucleus |
+| `radioactivity` | MC-2 — beta decay needs no neutrino |
+| `energy-bands` | MC-2 — a band is uniformly full |
+| `semiconductor-classification` | MC-1 — conductivity is a fixed medium value |
+| `intrinsic-semiconductors` | MC-2 — holes are a minor detail |
+| `extrinsic-semiconductors` | MC-2 — n-type has literally zero holes |
+| `pn-junction` | MC-3 — a voltmeter reads the built-in potential |
+| `diode-rectification` | MC-2 — the turn-on voltage is a hard cutoff |
+
+Several are computational rather than declarative — the 50 kV tube's
+Duane-Hunt limit, D-T fusion's 0.0189 u mass defect, the Q = −1.19 MeV
+threshold, one radium-226 nucleus over one half-life — so they cannot be
+passed by recognising a phrase.
+
+## Ratchets tightened
+
+| ratchet | before | after |
+|---|---|---|
+| physics concepts short of 3 gradeable probes | 53 | **32** |
+| legacy probe-slug collisions (pre-Item-6 measure) | 500 | **521** |
+
+Live identity still 0 discarded.
+
+**Eleven of twelve physics domains are now clear. Only `phys.em` remains,
+at 32 concepts — the largest single domain and the last one.**
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 321 files / 6,697 passed / 9 skipped;
+`npm run build` clean. **No production write, no sweep re-run, no topic
+marked VERIFIED.**
