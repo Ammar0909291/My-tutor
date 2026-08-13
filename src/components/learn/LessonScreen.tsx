@@ -4704,7 +4704,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         In canvas mode these fill their column; with no figure
                         present this wrapper is display:contents and the tree is
                         structurally identical to before. */}
-                    <div className={hasCanvasVisual ? styles.canvasVisual : undefined} style={hasCanvasVisual ? undefined : { display: 'contents' }}>
+                    <div className={hasCanvasVisual ? styles.canvasVisual : undefined} style={hasCanvasVisual ? (maximizedPanel === 'chat' ? { paddingBottom: 0 } : undefined) : { display: 'contents' }}>
 
                     {/* Sprint BW: Visual Learning Aid — shown below tutor bubble when present */}
                     {!isUser && !msg.streaming && msg.visual && (

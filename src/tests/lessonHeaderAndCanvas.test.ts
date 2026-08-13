@@ -366,3 +366,63 @@ describe('diagram container — 3cm padding, top corrected to top-align with the
     expect(SRC).toContain('<DynamicVisualRenderer code={msg.dynamicVisualizationCode} />')
   })
 })
+
+// ── MAXIMIZED CHAT DIAGRAM HEIGHT ───────────────────────────────────────────
+describe('maximized chat panel — diagram height reduced by exactly one bottom-padding step', () => {
+  // The .canvasVisual wrapper's `paddingBottom: 3cm` (defined in the CSS
+  // module) is the mechanism that adds 3cm of space BELOW the rendered diagram.
+  // In maximized-chat state the diagram renders at full column width and can
+  // appear too tall. The fix: when `maximizedPanel === 'chat'`, set inline
+  // `paddingBottom: 0` on the .canvasVisual div, overriding the module-level
+  // 3cm and reducing the container's total height by exactly 3cm.
+  //
+  // This approach never clips rendered content — it only removes whitespace
+  // below the diagram. The 50/50 grid split and every renderer are untouched.
+
+  it("the .canvasVisual div adds paddingBottom:0 inline when maximizedPanel === 'chat'", () => {
+    // Find the canvasVisual wrapper div specifically — it carries the
+    // `styles.canvasVisual` className and a conditional inline style.
+    const idx = SRC.indexOf("className={hasCanvasVisual ? styles.canvasVisual : undefined}")
+    expect(idx).toBeGreaterThan(-1)
+    const window = SRC.slice(idx, idx + 300)
+    // The maximized branch must set paddingBottom to 0
+    expect(window).toMatch(/maximizedPanel === 'chat'.*paddingBottom:\s*0/)
+  })
+
+  it('the minimized branch (not maximized) carries NO inline paddingBottom', () => {
+    // The non-maximized branch of the ternary must be `undefined` so the
+    // CSS module's own `padding: 2px 3cm 3cm 3cm` rule governs — no inline
+    // style that would silently override it for regular (non-maximized) state.
+    const idx = SRC.indexOf("className={hasCanvasVisual ? styles.canvasVisual : undefined}")
+    expect(idx).toBeGreaterThan(-1)
+    const window = SRC.slice(idx, idx + 400)
+    // Regex: the false-branch of the outer hasCanvasVisual ternary must be
+    // `{ display: 'contents' }` — NOT `{ paddingBottom: ... }`.
+    // The outer structure is: hasCanvasVisual ? <TRUEBRANCH> : { display: 'contents' }
+    // The true branch is: maximizedPanel === 'chat' ? { paddingBottom: 0 } : undefined
+    expect(window).toMatch(/:\s*undefined\s*\)\s*:\s*\{\s*display:\s*'contents'\s*\}/)
+  })
+
+  it('the 50/50 CSS grid itself is untouched — no column-width change in either state', () => {
+    const CSS = readFileSync(
+      path.join(process.cwd(), 'src/components/learn/LessonScreen.module.css'),
+      'utf8',
+    )
+    // The same assertion from the existing diagram-padding describe block:
+    // any change to grid-template-columns would have altered the 50/50 split.
+    expect(CSS).toMatch(/grid-template-columns:\s*minmax\(0,\s*1fr\)\s+minmax\(0,\s*1fr\)/)
+  })
+
+  it('the height reduction is tied to maximizedPanel state, not a media query or viewport unit', () => {
+    // A media-query or viewport-unit approach would fire regardless of the
+    // actual panel state (e.g. at wide viewports even when not maximized).
+    // The fix must read `maximizedPanel` directly.
+    const idx = SRC.indexOf("className={hasCanvasVisual ? styles.canvasVisual : undefined}")
+    expect(idx).toBeGreaterThan(-1)
+    const window = SRC.slice(idx, idx + 400)
+    expect(window).toContain("maximizedPanel === 'chat'")
+    // No viewport-only conditional on this line
+    expect(window).not.toMatch(/vw|vh|vmin|vmax/)
+    expect(window).not.toMatch(/@media/)
+  })
+})
