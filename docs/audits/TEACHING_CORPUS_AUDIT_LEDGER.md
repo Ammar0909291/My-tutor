@@ -3848,3 +3848,103 @@ works but moves ~8 probes per session at the context cost of carrying authored
 prose through the tool call twice.
 
 **No sweep re-run and no topic marked VERIFIED.**
+
+---
+
+# MOAT BATCH — phys.stat CLEARED (all 15 concepts)
+
+## What was short, measured not assumed
+
+Every one of the 15 `phys.stat` concepts held exactly **two** gradeable
+probes, both at `PROFICIENT`, and closing a concept needs **three** graded
+correct answers (CHECK 1 + PRACTICE 2). So the deterministic path ran dry on
+the last gate for the entire domain and fell back to the model.
+
+Fourteen sit at `HIGH`; `phys.stat.maxwell-boltzmann` sits at
+`UNDERGRADUATE`. The third probe was authored into each concept's **own**
+band — the grade-band-split trap this ledger already records, avoided here by
+reading the existing band rather than defaulting to HIGH.
+
+## What was authored
+
+One third gradeable MCQ per concept, rung `DEVELOPING` (both existing rungs
+are `PROFICIENT`, so the live `buildProbeSlugResolver` identity stays unique).
+
+Eight target a blueprint misconception that had **no gradeable probe at all**:
+
+| concept | newly covered misconception |
+|---|---|
+| `maxwell-boltzmann` | MC-3 — the high-speed tail is negligible |
+| `probability-basics` | MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF |
+| `boltzmann-factor` | MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA |
+| `partition-function` | MC-4 — Z_N = Z₁^N for identical particles |
+| `entropy-statistical` | MC-1 — entropy measures disorder |
+| `free-energy` | MC-4 — ΔG < 0 means completion |
+| `fermi-dirac` | MC-4 — E_F is the maximum electron energy |
+| `bose-einstein` | MC-4 — photons obey Fermi-Dirac |
+
+Seven concepts have only two documented misconceptions, both already probed.
+Those got a **transfer case** on an existing misconception — a different
+situation, not a restatement, so a learner who memorised the first probe's
+answer cannot pass it by recall:
+
+- `chemical-potential` — ice vs. water below 0 °C, not abstract μ₁/μ₂ labels
+- `grand-canonical-ensemble` — the negative-μ result for a dilute gas
+- `fluctuations-correlations` — fluctuations at T_c, where the 1/√N argument fails
+- `phase-transitions` — classify water freezing, don't define "second order"
+- `phase-transitions-critical-phenomena` — iron vs. SF₆, same class, different T_c
+- `ising-model` — run the Peierls balance ΔF = 2J − k_BT ln N
+- `monte-carlo-basics` — predict what accept-everything actually samples
+
+Every distractor is misconception-mapped, so a wrong answer is diagnostic.
+Every probe cites its blueprint in `source`.
+
+## Ratchets tightened
+
+| ratchet | before | after |
+|---|---|---|
+| physics concepts short of 3 gradeable probes | 103 | **88** |
+| legacy probe-slug collisions (pre-Item-6 measure) | 450 | **465** |
+
+The collision rise is expected and not a loss: `probeSlug` in that test is the
+LEGACY identity with no difficulty segment, so every ladder rung past the
+first counts as a collision by construction. The LIVE identity
+(`buildProbeSlugResolver`) still maps every authored probe to a unique slug —
+`difficultyLadderIdentity.test.ts` asserts 0 discarded, and it still passes.
+
+Remaining short, per domain: `phys.particle` 16, `phys.qm` 19, `phys.mod` 21,
+`phys.em` 32.
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; full suite 318 files / 6,660 passed /
+9 skipped; `npm run build` clean. **No production write, no sweep re-run, no
+topic marked VERIFIED** — these probes exist in the repo and reach learners
+only once the catalogue is seeded.
+
+---
+
+# BLOCKER RECORDED — the seed script shares the bootstrap's blind spot
+
+`scripts/brain/seed-knowledge-assets.ts` is the path this ledger names for
+finishing the catalogue. It has the **same defect** the cold-start bootstrap
+had before it was fixed: at lines 123-124 (explanations) and 161-162 (probes)
+it does
+
+```ts
+const existing = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
+if (existing) { skipped++; console.log(`skip (exists): ${canonicalSlug}`); continue }
+```
+
+It checks that an **identity** exists. It never checks whether that identity
+has a **content row**. The 737 hollow identities are exactly identities with
+no content row — so a full run of this script will print `skip (exists)` for
+every one of them and seed **nothing** for the concepts that most need it.
+
+Consequence for the owner's planned action: running the script with a real
+`DATABASE_URL` will not, on its own, close E6. It needs the same self-heal the
+bootstrap received (create the missing child when `existing` has no content),
+or the fill-and-reactivate path above.
+
+Recorded, not fixed — flagged here because it materially changes what the
+planned run will accomplish.

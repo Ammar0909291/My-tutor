@@ -7912,6 +7912,23 @@ const MAXB_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MAXB}:MC-4`],
     source: `${MAXB_SRC} — MC-4 doubling-temperature trigger as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: MAXB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In a mole of N₂ at 300 K only about one molecule in 10⁵ moves faster than 3·v_rms. Is that high-speed tail safely negligible?',
+    choices: [
+      { text: 'No — one in 10⁵ of 6×10²³ molecules is still about 10¹⁹ molecules, and any rate process with an activation barrier is controlled entirely by that tail', isCorrect: true },
+      { text: 'Yes — f(v) decays exponentially, so essentially no molecules move that fast and the tail can be ignored', isCorrect: false, misconceptionId: `${MAXB}:MC-3` },
+    ],
+    correctValue: 'no — the tail is thermally thin but physically decisive',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MAXB}:MC-3`],
+    source: `${MAXB_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.spin ─────────────────────────────────────────────────────────────
@@ -38040,6 +38057,24 @@ const PROB_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PROB}:MC-ENTROPY-MEANS-DISORDER`],
     source: `${PROB_SRC} — MC-2/MC-ENTROPY-MEANS-DISORDER trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets the postulate misconception, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: PROB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: All accessible microstates of an isolated system are equally probable. Is that a theorem proved from Newton’s laws?',
+    choices: [
+      { text: 'No — it is a postulate, accepted because every prediction built on it has matched experiment, not because it was derived from mechanics', isCorrect: true },
+      { text: 'Yes — it follows directly from Newton’s laws of motion applied to the molecules', isCorrect: false, misconceptionId: `${PROB}:MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF` },
+      { text: 'No — it is an approximation that only holds at high temperature', isCorrect: false, misconceptionId: `${PROB}:MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF` },
+    ],
+    correctValue: 'it is a postulate justified by predictive success',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PROB}:MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF`],
+    source: `${PROB_SRC} — MC-FUNDAMENTAL-POSTULATE-NEEDS-PROOF, distractor-mapped`,
+  },
 ]
 
 // ─── phys.stat.boltzmann-factor ────────────────────────────────────────────────
@@ -38099,6 +38134,24 @@ const BOLT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${BOLT}:MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E`],
     source: `${BOLT_SRC} — MC-2/MC-HIGHER-T-MEANS-LOWER-PROBABILITY-FOR-HIGH-E trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets the S=k_B ln Ω / Boltzmann-factor conflation, which had no gradeable probe. Rung DEVELOPING.
+    conceptId: BOLT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A small system is in thermal contact with a reservoir at temperature T. Which formula gives the probability of one specific microstate of energy E?',
+    choices: [
+      { text: 'P = e^(−E/k_BT)/Z — the Boltzmann distribution, which is the formula for a system that exchanges energy with a reservoir', isCorrect: true },
+      { text: 'S = k_B ln Ω — both carry Boltzmann’s name, so either applies', isCorrect: false, misconceptionId: `${BOLT}:MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA` },
+      { text: 'Both give the same answer here', isCorrect: false, misconceptionId: `${BOLT}:MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA` },
+    ],
+    correctValue: 'P = e^(−E/k_BT)/Z',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BOLT}:MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA`],
+    source: `${BOLT_SRC} — MC-BOLTZMANN-SAME-AS-S-KLN-OMEGA, distractor-mapped`,
   },
 ]
 
@@ -38160,6 +38213,23 @@ const PTFN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PTFN}:MC-2`],
     source: `${PTFN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-4 (Z_N = Z₁^N for identical particles), which had no gradeable probe. Rung DEVELOPING.
+    conceptId: PTFN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two IDENTICAL molecules, each with 2 available microstates. Is Z₂ = Z₁² = 4?',
+    choices: [
+      { text: 'No — for identical particles the classical result is Z_N = Z₁^N/N!, so Z₂ = 4/2! = 2; dropping the N! is what produces the Gibbs paradox', isCorrect: true },
+      { text: 'Yes — the partition function for N particles is always Z₁ raised to the power N', isCorrect: false, misconceptionId: `${PTFN}:MC-4` },
+    ],
+    correctValue: 'no — Z₂ = Z₁²/2! = 2',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PTFN}:MC-4`],
+    source: `${PTFN_SRC} — MC-4, distractor-mapped`,
+  },
 ]
 
 // ─── phys.stat.chemical-potential ──────────────────────────────────────────────
@@ -38219,6 +38289,23 @@ const CHEM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${CHEM}:MC-CP-MU-ONLY-CHEMISTRY`],
     source: `${CHEM_SRC} — MC-CP-MU-ONLY-CHEMISTRY trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-CP-HIGHER-MU-MORE-STABLE, on a concrete phase pair rather than abstract μ₁/μ₂ labels. Rung DEVELOPING.
+    conceptId: CHEM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Below 0 °C at 1 atm, ice is the stable phase. Does ice therefore have the higher or the lower chemical potential there?',
+    choices: [
+      { text: 'Lower — the stable phase is the one with the LOWER μ; at exactly 0 °C the two become equal, which is what defines the transition', isCorrect: true },
+      { text: 'Higher — the phase that wins is the one with the higher chemical potential', isCorrect: false, misconceptionId: `${CHEM}:MC-CP-HIGHER-MU-MORE-STABLE` },
+    ],
+    correctValue: 'lower μ',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CHEM}:MC-CP-HIGHER-MU-MORE-STABLE`],
+    source: `${CHEM_SRC} — MC-CP-HIGHER-MU-MORE-STABLE, distractor-mapped`,
   },
 ]
 
@@ -38280,6 +38367,23 @@ const ENTS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ENTS}:MC-4`],
     source: `${ENTS_SRC} — MC-4 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-1 (entropy = disorder), which had no gradeable probe. Rung DEVELOPING.
+    conceptId: ENTS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two different gases, each already spread uniformly through its own half of a box, are allowed to mix. The result looks no messier. What happens to the entropy?',
+    choices: [
+      { text: 'It increases — the number of accessible microstates Ω goes up, and S = k_B ln Ω counts microstates, not visual messiness', isCorrect: true },
+      { text: 'Nothing — the mixture is no more disordered than before, and entropy measures disorder', isCorrect: false, misconceptionId: `${ENTS}:MC-1` },
+    ],
+    correctValue: 'it increases',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ENTS}:MC-1`],
+    source: `${ENTS_SRC} — MC-1, distractor-mapped`,
+  },
 ]
 
 // ─── phys.stat.free-energy ─────────────────────────────────────────────────────
@@ -38339,6 +38443,23 @@ const FREN_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${FREN}:MC-2`],
     source: `${FREN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-4 (ΔG<0 means completion), which had no gradeable probe. Rung DEVELOPING.
+    conceptId: FREN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A reaction has ΔG° = −20 kJ/mol at 298 K. Does it run to completion, leaving no reactants?',
+    choices: [
+      { text: 'No — it stops at equilibrium, where ΔG = 0, not where reactants run out; ΔG° = −20 kJ/mol gives K ≈ 3300, so some reactant always remains', isCorrect: true },
+      { text: 'Yes — a negative ΔG° means the reaction proceeds all the way to products', isCorrect: false, misconceptionId: `${FREN}:MC-4` },
+    ],
+    correctValue: 'no — equilibrium at ΔG = 0, K ≈ 3300',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FREN}:MC-4`],
+    source: `${FREN_SRC} — MC-4, distractor-mapped`,
   },
 ]
 
@@ -38400,6 +38521,23 @@ const FDIR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${FDIR}:MC-2`],
     source: `${FDIR_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-4 (E_F as maximum electron energy), which had no gradeable probe. Rung DEVELOPING.
+    conceptId: FDIR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: At room temperature, is the Fermi energy E_F the energy of the most energetic electron in a metal?',
+    choices: [
+      { text: 'No — E_F is where f(E) = 1/2, a median rather than a maximum; at T > 0 some electrons are thermally excited above it', isCorrect: true },
+      { text: 'Yes — E_F is by definition the highest occupied electron energy, at any temperature', isCorrect: false, misconceptionId: `${FDIR}:MC-4` },
+    ],
+    correctValue: 'no — E_F is the median (f = 1/2), not the maximum',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FDIR}:MC-4`],
+    source: `${FDIR_SRC} — MC-4, distractor-mapped`,
+  },
 ]
 
 // ─── phys.stat.bose-einstein ────────────────────────────────────────────────────
@@ -38459,6 +38597,23 @@ const BOSE_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${BOSE}:MC-2`],
     source: `${BOSE_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-4 (photons wrongly given Fermi-Dirac statistics), which had no gradeable probe. Rung DEVELOPING.
+    conceptId: BOSE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Can two photons of the same wavelength and polarization occupy the same quantum state?',
+    choices: [
+      { text: 'Yes — photons have spin 1, so they are bosons; arbitrarily many can share one mode, which is exactly what makes a laser work', isCorrect: true },
+      { text: 'No — Pauli exclusion forbids any two quantum particles from sharing a state', isCorrect: false, misconceptionId: `${BOSE}:MC-4` },
+    ],
+    correctValue: 'yes — photons are bosons',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BOSE}:MC-4`],
+    source: `${BOSE_SRC} — MC-4, distractor-mapped`,
   },
 ]
 
@@ -38520,6 +38675,23 @@ const GCEN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${GCEN}:MC-GCE-FUGACITY-IS-PROB`],
     source: `${GCEN_SRC} — MC-GCE-FUGACITY-IS-PROB trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-GCE-MU-IS-ENERGY: the negative-μ result, which no existing probe reaches. Rung DEVELOPING.
+    conceptId: GCEN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: For a dilute classical gas the chemical potential μ comes out NEGATIVE. Is that a mistake?',
+    choices: [
+      { text: 'No — μ is the particle-exchange control parameter, not a stored energy that must be positive; it is routinely negative for a dilute gas and for bosons above T_c', isCorrect: true },
+      { text: 'Yes — μ is the energy per particle, and an energy per particle cannot be negative', isCorrect: false, misconceptionId: `${GCEN}:MC-GCE-MU-IS-ENERGY` },
+    ],
+    correctValue: 'no — negative μ is normal',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GCEN}:MC-GCE-MU-IS-ENERGY`],
+    source: `${GCEN_SRC} — MC-GCE-MU-IS-ENERGY, distractor-mapped`,
+  },
 ]
 
 // ─── phys.stat.fluctuations-correlations ────────────────────────────────────────
@@ -38579,6 +38751,23 @@ const FLUC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${FLUC}:MC-FL-CORRELATION-IS-SAME-AS-CORRELATION`],
     source: `${FLUC_SRC} — MC-FL-CORRELATION-IS-SAME-AS-CORRELATION trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-FL-FLUCTUATIONS-NEGLIGIBLE at criticality, where the 1/√N argument breaks. Rung DEVELOPING.
+    conceptId: FLUC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: C_V diverges at T_c, and the energy fluctuation obeys (δE)² = k_BT²C_V. What happens to the energy fluctuations of a LARGE system at T_c?',
+    choices: [
+      { text: 'They diverge as well — the 1/√N argument fails at criticality, and the fluctuations become macroscopic; critical opalescence is this effect made visible', isCorrect: true },
+      { text: 'They stay negligible — N is large, so relative fluctuations go as 1/√N and can be ignored at any temperature', isCorrect: false, misconceptionId: `${FLUC}:MC-FL-FLUCTUATIONS-NEGLIGIBLE` },
+    ],
+    correctValue: 'they diverge — fluctuations are macroscopic at T_c',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FLUC}:MC-FL-FLUCTUATIONS-NEGLIGIBLE`],
+    source: `${FLUC_SRC} — MC-FL-FLUCTUATIONS-NEGLIGIBLE, distractor-mapped`,
   },
 ]
 
@@ -38640,6 +38829,23 @@ const PHTR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PHTR}:MC-PT-MF-EXACT`],
     source: `${PHTR_SRC} — MC-PT-MF-EXACT trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-PT-FIRST-SECOND-TERMINOLOGY: classify a concrete transition rather than define the term. Rung DEVELOPING.
+    conceptId: PHTR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Water freezing at 0 °C releases latent heat and jumps in density. Is that a first-order or a second-order transition?',
+    choices: [
+      { text: 'First-order — a first derivative of G is discontinuous: entropy (hence the latent heat) and volume (hence the density jump)', isCorrect: true },
+      { text: 'Second-order — "order" counts how many times the transition can happen, and freezing and melting make two', isCorrect: false, misconceptionId: `${PHTR}:MC-PT-FIRST-SECOND-TERMINOLOGY` },
+    ],
+    correctValue: 'first-order',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PHTR}:MC-PT-FIRST-SECOND-TERMINOLOGY`],
+    source: `${PHTR_SRC} — MC-PT-FIRST-SECOND-TERMINOLOGY, distractor-mapped`,
+  },
 ]
 
 // ─── phys.stat.phase-transitions-critical-phenomena ────────────────────────────
@@ -38699,6 +38905,23 @@ const PHCR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PHCR}:MC-CP-RG-IS-TECHNIQUE`],
     source: `${PHCR_SRC} — MC-CP-RG-IS-TECHNIQUE trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-CP-UNIV-MEANS-SAME on a named pair of real systems. Rung DEVELOPING.
+    conceptId: PHCR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Iron near its Curie point and SF₆ near its liquid–gas critical point are both in the 3D Ising universality class. Do they share the same T_c?',
+    choices: [
+      { text: 'No — T_c and the amplitudes are completely different; what they share is the critical EXPONENTS and the scaling functions', isCorrect: true },
+      { text: 'Yes — being in one universality class means the systems behave identically, T_c included', isCorrect: false, misconceptionId: `${PHCR}:MC-CP-UNIV-MEANS-SAME` },
+    ],
+    correctValue: 'no — same exponents, different T_c',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PHCR}:MC-CP-UNIV-MEANS-SAME`],
+    source: `${PHCR_SRC} — MC-CP-UNIV-MEANS-SAME, distractor-mapped`,
   },
 ]
 
@@ -38760,6 +38983,23 @@ const ISNG_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ISNG}:MC-IS-MF-ACCURATE-ANY-D`],
     source: `${ISNG_SRC} — MC-IS-MF-ACCURATE-ANY-D trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-IS-1D-ORDERS: run the Peierls free-energy balance rather than recall the verdict. Rung DEVELOPING.
+    conceptId: ISNG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a 1D Ising chain of N spins, one domain wall costs energy 2J but can sit in about N places, worth entropy k_B ln N. What does ΔF = 2J − k_BT ln N imply as N grows?',
+    choices: [
+      { text: 'ΔF turns negative at ANY T > 0 once N is large enough, so domain walls always form — the 1D chain has no ordered phase at finite temperature', isCorrect: true },
+      { text: 'ΔF stays positive, so walls are suppressed and the chain orders ferromagnetically below a finite T_c', isCorrect: false, misconceptionId: `${ISNG}:MC-IS-1D-ORDERS` },
+    ],
+    correctValue: 'ΔF goes negative — no finite-T order in 1D',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ISNG}:MC-IS-1D-ORDERS`],
+    source: `${ISNG_SRC} — MC-IS-1D-ORDERS, distractor-mapped`,
+  },
 ]
 
 // ─── phys.stat.monte-carlo-basics ──────────────────────────────────────────────
@@ -38819,6 +39059,23 @@ const MCAR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${MCAR}:MC-MC-DETAILED-BALANCE-OPTIONAL`],
     source: `${MCAR_SRC} — MC-MC-DETAILED-BALANCE-OPTIONAL trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-MC-RANDOM-MEANS-CORRECT: predict the distribution a broken acceptance rule produces. Rung DEVELOPING.
+    conceptId: MCAR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A student writes a Metropolis loop that ACCEPTS every proposed move. Which distribution does the simulation actually sample?',
+    choices: [
+      { text: 'The uniform distribution over all configurations — that is the infinite-temperature limit, not the Boltzmann distribution at the temperature they intended', isCorrect: true },
+      { text: 'The correct Boltzmann distribution — the moves are random, so the sampling is unbiased', isCorrect: false, misconceptionId: `${MCAR}:MC-MC-RANDOM-MEANS-CORRECT` },
+    ],
+    correctValue: 'uniform — the infinite-temperature limit',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MCAR}:MC-MC-RANDOM-MEANS-CORRECT`],
+    source: `${MCAR_SRC} — MC-MC-RANDOM-MEANS-CORRECT, distractor-mapped`,
   },
 ]
 
