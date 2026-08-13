@@ -344,3 +344,81 @@ describe('the non-physics authored corpora convert too', () => {
     expect(short).toBeLessThanOrEqual(ceiling)
   })
 })
+
+/**
+ * MISCONCEPTION BREADTH — the dimension every count-based ratchet is blind to.
+ *
+ * ── HOW THIS WAS FOUND ──────────────────────────────────────────────────────
+ * Chemistry batch 2 turned up two concepts (`chem.dblock.oxo-species`,
+ * `chem.nitro.heterocycles`) whose BOTH probes pointed at MC1, leaving MC2 with
+ * no diagnostic at all. On a probe count they looked identical to every other
+ * covered concept. Sweeping all four corpora for the pattern found it is not
+ * rare:
+ *
+ *   computer_science   88 of 119 concepts   (74%)
+ *   biology            25 of 108            (23%)
+ *   chemistry           7 of 186            (4%)
+ *   physics             6 of 238  ->  1 after the breadth batch
+ *
+ * ── WHY IT MATTERS ──────────────────────────────────────────────────────────
+ * A concept can satisfy "three gradeable probes" and still test exactly one
+ * misconception three times. A learner holding a DIFFERENT documented
+ * misconception passes every check the concept offers, and the gate closes on
+ * an error that was written down in the blueprint.
+ *
+ * ── WHAT THIS TEST IS AND IS NOT ────────────────────────────────────────────
+ * It is a CANDIDATE signal, not a verdict. It cannot read blueprints, so it
+ * cannot know how many misconceptions a concept actually has. Five of the six
+ * physics hits were genuine; the sixth, `phys.mech.velocity`, documents only
+ * ONE misconception, so three probes on it is correct authoring and it stays
+ * in the count forever. Any number here must be confirmed against the concept's
+ * blueprint before it is treated as a gap.
+ *
+ * Pinned as maxima. Losing breadth must fail; gaining it must not.
+ */
+describe('misconception breadth across every authored corpus', () => {
+  const breadthCorpora: ReadonlyArray<readonly [string, readonly SeedProbeLike[], number]> = [
+    // [subject, probes, concepts whose gradeable probes share ONE misconception]
+    ['physics', AUTHORED_PROBES.filter((p) => p.subjectSlug === 'physics'), 1],
+    ['chemistry', CHEMISTRY_PROBES, 7],
+    ['biology', BIOLOGY_PROBES, 25],
+    ['computer_science', CS_PROBES, 88],
+  ]
+
+  const narrowConcepts = (probes: readonly SeedProbeLike[]) => {
+    const byConcept = new Map<string, { probes: number; mcs: Set<string> }>()
+    for (const p of probes) {
+      if (!probeToMcq({ stem: p.stem, choices: p.choices ?? null })) continue
+      let entry = byConcept.get(p.conceptId)
+      if (!entry) { entry = { probes: 0, mcs: new Set() }; byConcept.set(p.conceptId, entry) }
+      entry.probes += 1
+      for (const m of (p as { targetedMisconceptions?: readonly string[] }).targetedMisconceptions ?? []) {
+        entry.mcs.add(m)
+      }
+    }
+    return [...byConcept.entries()]
+      .filter(([, e]) => e.probes >= 2 && e.mcs.size < 2)
+      .map(([c]) => c)
+  }
+
+  it.each(breadthCorpora)('%s: concepts testing a single misconception, ratcheted', (_s, probes, ceiling) => {
+    expect(narrowConcepts(probes).length).toBeLessThanOrEqual(ceiling)
+  })
+
+  /**
+   * A probe carrying NO targeted misconception is legitimate — the physics
+   * corpus uses prerequisite DIAGNOSTIC probes that deliberately carry none.
+   * What must never happen is a CONCEPT whose entire gradeable set carries
+   * none, because then a wrong answer is not diagnostic of anything.
+   */
+  it.each(breadthCorpora)('%s: no concept is left with zero targeted misconceptions', (_s, probes) => {
+    const byConcept = new Map<string, Set<string>>()
+    for (const p of probes) {
+      if (!probeToMcq({ stem: p.stem, choices: p.choices ?? null })) continue
+      if (!byConcept.has(p.conceptId)) byConcept.set(p.conceptId, new Set())
+      const set = byConcept.get(p.conceptId)!
+      for (const m of (p as { targetedMisconceptions?: readonly string[] }).targetedMisconceptions ?? []) set.add(m)
+    }
+    expect([...byConcept.entries()].filter(([, s]) => s.size === 0).map(([c]) => c)).toEqual([])
+  })
+})

@@ -4438,3 +4438,73 @@ Offline only. `npx tsc --noEmit` clean; 323 files / 6,750 passed / 9 skipped;
 marked VERIFIED.**
 
 Remaining: chemistry 149, biology 108, computer_science 119.
+
+---
+
+# MISCONCEPTION BREADTH — and an honest correction to "physics complete"
+
+Chemistry batch 2 turned up two concepts whose BOTH probes pointed at the
+same misconception. That looked like a local oddity. Sweeping all four
+corpora showed it is not:
+
+| subject | concepts whose gradeable probes share ONE misconception |
+|---|---|
+| computer_science | **88 of 119 (74%)** |
+| biology | **25 of 108 (23%)** |
+| chemistry | 7 of 186 (4%) |
+| physics | 6 of 238 → **1** after this batch |
+
+## This qualifies the previous entry, and the qualification matters
+
+The entry above says physics is complete: all 238 concepts reach three
+gradeable probes. That statement is still true and the ratchet still reads
+zero. But **six physics concepts reached three probes while only ever testing
+ONE misconception.** A learner holding the other documented misconception
+could answer every check correctly and close the concept with the error
+intact.
+
+Their shape explains how it passed: each carried a summative probe on MC-A, a
+prerequisite DIAGNOSTIC probe carrying no misconception at all, and a
+FORMATIVE probe on MC-A again — a deliberate diagnostic→formative→summative
+ladder for one misconception. Good authoring by one measure, blind by another.
+
+Five were genuine gaps and are now closed:
+
+| concept | misconception that had no diagnostic |
+|---|---|
+| `phys.mech.momentum` | MC-MOMENTUM-IS-SCALAR — direction doesn't matter |
+| `phys.mech.angular-kinematics` | MC-DEGREES-NOT-RADIANS |
+| `phys.mech.moment-of-inertia` | MC-I-INDEPENDENT-OF-AXIS |
+| `phys.mech.rotational-dynamics` | MC-ROTATIONAL-KE-IGNORED |
+| `phys.mech.angular-momentum` | MC-TORQUE-CHANGES-SPEED — precession |
+
+**The sixth is not a defect.** `phys.mech.velocity`'s blueprint documents
+exactly ONE misconception, so three probes on it is correct authoring. It
+stays in the count permanently, which is precisely why the new test is
+documented as a candidate signal rather than a verdict.
+
+## What the new guard does and does not claim
+
+`gateAssessmentIsServerOwned.test.ts` gains a breadth block, ratcheted per
+subject at 1 / 7 / 25 / 88. It cannot read blueprints, so it cannot know how
+many misconceptions a concept actually has — **every number it reports must be
+confirmed against the concept's blueprint before being treated as a gap.**
+A second assertion is strict rather than ratcheted: no concept may end up with
+zero targeted misconceptions across its whole gradeable set, because then a
+wrong answer diagnoses nothing. All four corpora pass that today.
+
+## Why this is the more important number than probe count
+
+Probe count measures whether the gate has something to serve. Breadth
+measures whether passing the gate means anything. `computer_science` at 74%
+is the starkest case: three quarters of its concepts can be completed while
+testing a single error, and its probe-count shortfall (119 of 119) had
+already hidden that entirely.
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 323 files / 6,758 passed / 9 skipped;
+`npm run build` clean. Legacy physics collisions 553 → 554 (one new rung; the
+other four opened fresh slots). Live resolver 0 discarded, 0 non-physics
+identities changed. **No production write, no sweep re-run against
+production, no topic marked VERIFIED.**

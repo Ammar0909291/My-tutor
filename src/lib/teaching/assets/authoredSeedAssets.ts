@@ -841,6 +841,27 @@ const MOM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MOM}:MC-MOMENTUM-IS-SPEED`],
     source: `${MOM_SRC} — Component 3 MC-MOMENTUM-IS-SPEED, fresh numbers (not the blueprint's tennis-ball/truck pair), distractor-mapped`,
   },
+  {
+    // MISCONCEPTION BREADTH, not probe count. This concept already had three
+    // gradeable probes, so the count ratchet read it as covered — but all
+    // three diagnosed ONE misconception (the third being a prerequisite
+    // DIAGNOSTIC carrying none at all), leaving MC-MOMENTUM-IS-SCALAR
+    // with no diagnostic anywhere. A learner holding it could pass every
+    // check the concept offers.
+    conceptId: MOM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two 2 kg balls approach each other head-on, each at 5 m/s. What is the TOTAL momentum of the pair?',
+    choices: [
+      { text: 'Zero — momentum is a vector, so taking east as positive gives +10 and -10 kg m/s, which cancel. A system can have zero total momentum while every part of it is still moving', isCorrect: true },
+      { text: '20 kg m/s — each ball carries 10 kg m/s, so the total is the sum of the two magnitudes', isCorrect: false, misconceptionId: `${MOM}:MC-MOMENTUM-IS-SCALAR` },
+    ],
+    correctValue: 'zero — the two momenta cancel',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MOM}:MC-MOMENTUM-IS-SCALAR`],
+    source: `${MOM_SRC} — MC-MOMENTUM-IS-SCALAR, distractor-mapped`,
+  },
 ]
 
 
@@ -11945,6 +11966,27 @@ const AKIN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${AKIN}:MC-SAME-TANGENTIAL`],
     source: `${AKIN_SRC} — MC-SAME-TANGENTIAL trigger case as probe, distractor-mapped`,
   },
+  {
+    // MISCONCEPTION BREADTH, not probe count. This concept already had three
+    // gradeable probes, so the count ratchet read it as covered — but all
+    // three diagnosed ONE misconception (the third being a prerequisite
+    // DIAGNOSTIC carrying none at all), leaving MC-DEGREES-NOT-RADIANS
+    // with no diagnostic anywhere. A learner holding it could pass every
+    // check the concept offers.
+    conceptId: AKIN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A point sits at r = 0.5 m on a disc that turns through 90 degrees. Using s = r*theta with theta = 90 gives s = 45 m. The whole circumference is only about 3.14 m. What went wrong?',
+    choices: [
+      { text: 'theta must be in RADIANS: 90 degrees is pi/2, so s = 0.5 * pi/2 = 0.785 m, exactly a quarter of the circumference. s = r*theta and v = r*omega are only valid in radians', isCorrect: true },
+      { text: 'Nothing is wrong with the method — the arc length really is 45 m, and the circumference figure must be the error', isCorrect: false, misconceptionId: `${AKIN}:MC-DEGREES-NOT-RADIANS` },
+    ],
+    correctValue: '0.785 m — theta must be in radians',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AKIN}:MC-DEGREES-NOT-RADIANS`],
+    source: `${AKIN_SRC} — MC-DEGREES-NOT-RADIANS, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mech.moment-of-inertia ────────────────────────────────────────────
@@ -11990,6 +12032,27 @@ const MOI_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${MOI}:MC-I-IS-MASS`],
     source: `${MOI_SRC} — MC-I-IS-MASS trigger case as probe, distractor-mapped`,
+  },
+  {
+    // MISCONCEPTION BREADTH, not probe count. This concept already had three
+    // gradeable probes, so the count ratchet read it as covered — but all
+    // three diagnosed ONE misconception (the third being a prerequisite
+    // DIAGNOSTIC carrying none at all), leaving MC-I-INDEPENDENT-OF-AXIS
+    // with no diagnostic anywhere. A learner holding it could pass every
+    // check the concept offers.
+    conceptId: MOI,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A 3 kg rod of length 0.6 m has I = 0.09 kg m^2 about its centre. What is I about one END, and why?',
+    choices: [
+      { text: '0.36 kg m^2, four times larger — I depends on the AXIS, not just the object. The parallel-axis theorem adds M*d^2 as the axis moves off the centre of mass, which is why a bat is easier to swing held at the handle', isCorrect: true },
+      { text: 'Still 0.09 kg m^2 — the moment of inertia is a fixed property of the rod and does not depend on where you pivot it', isCorrect: false, misconceptionId: `${MOI}:MC-I-INDEPENDENT-OF-AXIS` },
+    ],
+    correctValue: '0.36 kg m^2 — I depends on the axis',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MOI}:MC-I-INDEPENDENT-OF-AXIS`],
+    source: `${MOI_SRC} — MC-I-INDEPENDENT-OF-AXIS, distractor-mapped`,
   },
 ]
 
@@ -12037,6 +12100,27 @@ const RDYN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${RDYN}:MC-ALPHA-EQUALS-TORQUE`],
     source: `${RDYN_SRC} — MC-ALPHA-EQUALS-TORQUE trigger case as probe, distractor-mapped`,
   },
+  {
+    // MISCONCEPTION BREADTH, not probe count. This concept already had three
+    // gradeable probes, so the count ratchet read it as covered — but all
+    // three diagnosed ONE misconception (the third being a prerequisite
+    // DIAGNOSTIC carrying none at all), leaving MC-ROTATIONAL-KE-IGNORED
+    // with no diagnostic anywhere. A learner holding it could pass every
+    // check the concept offers.
+    conceptId: RDYN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A solid disc (I = 0.25 kg m^2) spins at 6 rad/s about its own centre, which stays put. Using KE = (1/2)mv^2 with v = 0 gives zero. Is the disc\'s kinetic energy really zero?',
+    choices: [
+      { text: 'No — it has rotational kinetic energy (1/2)*I*omega^2 = 4.5 J. The centre of mass is stationary, but every other part of the disc is moving, and (1/2)mv^2 only accounts for translation', isCorrect: true },
+      { text: 'Yes — the centre is not moving, so v = 0 and the kinetic energy is zero', isCorrect: false, misconceptionId: `${RDYN}:MC-ROTATIONAL-KE-IGNORED` },
+    ],
+    correctValue: '4.5 J of rotational KE',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RDYN}:MC-ROTATIONAL-KE-IGNORED`],
+    source: `${RDYN_SRC} — MC-ROTATIONAL-KE-IGNORED, distractor-mapped`,
+  },
 ]
 
 // ─── phys.mech.angular-momentum ─────────────────────────────────────────────
@@ -12081,6 +12165,27 @@ const AMOM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${AMOM}:MC-L-IS-OMEGA`],
     source: `${AMOM_SRC} — MC-L-IS-OMEGA trigger case as probe, distractor-mapped`,
+  },
+  {
+    // MISCONCEPTION BREADTH, not probe count. This concept already had three
+    // gradeable probes, so the count ratchet read it as covered — but all
+    // three diagnosed ONE misconception (the third being a prerequisite
+    // DIAGNOSTIC carrying none at all), leaving MC-TORQUE-CHANGES-SPEED
+    // with no diagnostic anywhere. A learner holding it could pass every
+    // check the concept offers.
+    conceptId: AMOM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A spinning top leans over but does not fall — it sweeps its axis around in a circle instead. Gravity is clearly exerting a torque. What is that torque doing?',
+    choices: [
+      { text: 'Changing the DIRECTION of L, not its size — the torque is horizontal, and tau = dL/dt means L turns horizontally, which is precession. If torque only changed the spin rate, the top would simply slow down and topple', isCorrect: true },
+      { text: 'Slowing the spin down — a torque can only speed up or slow down rotation, never change the axis', isCorrect: false, misconceptionId: `${AMOM}:MC-TORQUE-CHANGES-SPEED` },
+    ],
+    correctValue: 'changing the direction of L — precession',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMOM}:MC-TORQUE-CHANGES-SPEED`],
+    source: `${AMOM_SRC} — MC-TORQUE-CHANGES-SPEED, distractor-mapped`,
   },
 ]
 
