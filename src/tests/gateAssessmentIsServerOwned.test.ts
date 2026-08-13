@@ -173,10 +173,11 @@ describe('the authored corpus actually converts', () => {
     // third-law; three phys.wave: beats, forced-oscillations, interference)
     // -> 117 (six phys.astro + eight phys.rel) -> 103 (fourteen phys.opt)
     // -> 88 (all fifteen phys.stat) -> 72 (all sixteen phys.particle)
-    // -> 53 (all nineteen phys.qm) -> 32 (all twenty-one phys.mod).
-    // Eleven of twelve physics domains are now clear; only phys.em remains.
+    // -> 53 (all nineteen phys.qm) -> 32 (all twenty-one phys.mod)
+    // -> 16 (sixteen of phys.em's thirty-two: the electrostatics and
+    // DC-circuit half). Only phys.em's magnetism/AC half remains.
     // Tighten this number whenever more are authored.
-    expect(short).toBeLessThanOrEqual(32)
+    expect(short).toBeLessThanOrEqual(16)
     expect(counts.size).toBe(conceptsWithGradeable.size)
   })
 

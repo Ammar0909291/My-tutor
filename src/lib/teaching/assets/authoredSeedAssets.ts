@@ -2710,6 +2710,26 @@ const CHG_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CHG}:MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE`],
     source: `${CHG_SRC} — MC-POSITIVE-CHARGE-MEANS-PROTONS-MOVE probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-CHARGE-IS-CREATED-BY-RUBBING: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: CHG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Before rubbing, a rod and a cloth are both neutral. After rubbing, the rod carries -40e. What is the TOTAL charge of rod and cloth together?',
+    choices: [
+      { text: 'Still exactly zero — the cloth is now +40e, because rubbing only TRANSFERS electrons from one surface to the other. Charge is conserved, never manufactured', isCorrect: true },
+      { text: 'About -40e — the rubbing generated new charge on the rod', isCorrect: false, misconceptionId: `${CHG}:MC-CHARGE-IS-CREATED-BY-RUBBING` },
+    ],
+    correctValue: 'zero — charge was transferred, not created',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CHG}:MC-CHARGE-IS-CREATED-BY-RUBBING`],
+    source: `${CHG_SRC} — MC-CHARGE-IS-CREATED-BY-RUBBING, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.coulombs-law ────────────────────────────────────────────────────
@@ -2789,6 +2809,26 @@ const COUL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${COUL}:MC-COULOMBS-LAW-USES-SIGNED-CHARGES-FOR-MAGNITUDE`],
     source: `${COUL_SRC} — signed-magnitude error-analysis probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE: a
+    // different situation, not a restatement. Rung PROFICIENT.
+    conceptId: COUL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two charges attract with force F. You TRIPLE both charges, leaving the separation unchanged. What is the new force?',
+    choices: [
+      { text: '9F — the force depends on the PRODUCT q1*q2, so tripling each multiplies it by 3 x 3', isCorrect: true },
+      { text: '3F — tripling the charges triples the force', isCorrect: false, misconceptionId: `${COUL}:MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE` },
+    ],
+    correctValue: '9F',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COUL}:MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE`],
+    source: `${COUL_SRC} — MC-DOUBLING-BOTH-CHARGES-DOUBLES-FORCE, transfer case, distractor-mapped`,
   },
 ]
 
@@ -2872,6 +2912,26 @@ const OHM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${OHM}:MC-OHMS-LAW-IS-UNIVERSAL`],
     source: `${OHM_SRC} — P28 conflict-evidence measurement as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-OHMS-LAW-IS-UNIVERSAL: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: OHM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A filament lamp draws 0.2 A at 2 V and 0.5 A at 12 V. Is its resistance constant?',
+    choices: [
+      { text: 'No — 2/0.2 = 10 ohm but 12/0.5 = 24 ohm. V/I can be evaluated at any operating point, but it only stays CONSTANT for an ohmic device, and a filament that heats up is not one', isCorrect: true },
+      { text: 'Yes — V = IR is a law of physics, so R has to be the same at both points', isCorrect: false, misconceptionId: `${OHM}:MC-OHMS-LAW-IS-UNIVERSAL` },
+    ],
+    correctValue: 'no — 10 ohm at one point, 24 ohm at the other',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${OHM}:MC-OHMS-LAW-IS-UNIVERSAL`],
+    source: `${OHM_SRC} — MC-OHMS-LAW-IS-UNIVERSAL, transfer case, distractor-mapped`,
   },
 ]
 
@@ -3283,6 +3343,26 @@ const CUR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${CUR}:MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS`],
     source: `${CUR_SRC} — MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-CURRENT-USED-UP-BY-DEVICES: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: CUR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: 0.6 A leaves a battery and splits into two parallel branches; one branch carries 0.4 A. What does the other branch carry, and how much returns to the battery?',
+    choices: [
+      { text: '0.2 A in the other branch, and the full 0.6 A returns — charge is conserved at the junction and around the loop. The bulbs consume ENERGY, not current', isCorrect: true },
+      { text: '0.2 A in the other branch, but less than 0.6 A returns, because the bulbs use up some of the current', isCorrect: false, misconceptionId: `${CUR}:MC-CURRENT-USED-UP-BY-DEVICES` },
+    ],
+    correctValue: '0.2 A, and the full 0.6 A returns',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CUR}:MC-CURRENT-USED-UP-BY-DEVICES`],
+    source: `${CUR_SRC} — MC-CURRENT-USED-UP-BY-DEVICES, transfer case, distractor-mapped`,
   },
 ]
 
@@ -5513,6 +5593,26 @@ const DCC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${DCC}:MC-VOLTAGE-SAME-EVERYWHERE-IN-SERIES`],
     source: `${DCC_SRC} — s6 voltmeter measurement as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-SAME-CURRENT-IN-PARALLEL-BRANCHES: a
+    // different situation, not a restatement. Rung PROFICIENT.
+    conceptId: DCC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Resistors of 10 ohm, 20 ohm and 20 ohm sit in parallel across 20 V. What current does each carry?',
+    choices: [
+      { text: '2 A, 1 A and 1 A — every branch sees the same 20 V, so each carries V/R and the smallest resistance takes the most; equal currents happen only when the resistances are equal', isCorrect: true },
+      { text: 'About 0.67 A each — parallel branches share the total current equally between them', isCorrect: false, misconceptionId: `${DCC}:MC-SAME-CURRENT-IN-PARALLEL-BRANCHES` },
+    ],
+    correctValue: '2 A, 1 A, 1 A',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DCC}:MC-SAME-CURRENT-IN-PARALLEL-BRANCHES`],
+    source: `${DCC_SRC} — MC-SAME-CURRENT-IN-PARALLEL-BRANCHES, transfer case, distractor-mapped`,
   },
 ]
 
@@ -28699,6 +28799,26 @@ const EFLD_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${EFLD}:MC-FIELD-LINES-SHOW-PARTICLE-PATH`],
     source: `${EFLD_SRC} — MC-FIELD-LINES-SHOW-PARTICLE-PATH trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: EFLD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A single proton sits alone in an otherwise empty vacuum chamber. Is there an electric field 1 cm away from it?',
+    choices: [
+      { text: 'Yes — E = kq/r^2 is fixed by the source charge alone. A test charge is how we would MEASURE the field, not what brings it into existence', isCorrect: true },
+      { text: 'No — with nothing at that point to feel a force, there is no field there', isCorrect: false, misconceptionId: `${EFLD}:MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE` },
+    ],
+    correctValue: 'yes — the source charge alone sets the field',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EFLD}:MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE`],
+    source: `${EFLD_SRC} — MC-ELECTRIC-FIELD-REQUIRES-A-TEST-CHARGE, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.electric-potential ─────────────────────────────────────────────
@@ -28780,6 +28900,26 @@ const EPOT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${EPOT}:MC-ELECTRIC-POTENTIAL-IS-A-VECTOR`],
     source: `${EPOT_SRC} — MC-ELECTRIC-POTENTIAL-IS-A-VECTOR trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD: a
+    // different situation, not a restatement. Rung PROFICIENT.
+    conceptId: EPOT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A uniform 500 V/m field fills the 2 cm gap between two plates. What is the potential difference across the gap?',
+    choices: [
+      { text: '10 V — V = E*d, so the two differ by a length and even carry different units (V/m against V); E is a vector field and V is a scalar', isCorrect: true },
+      { text: '500 V — the potential difference is just the field value, since voltage and field are the same thing under two names', isCorrect: false, misconceptionId: `${EPOT}:MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD` },
+    ],
+    correctValue: '10 V',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EPOT}:MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD`],
+    source: `${EPOT_SRC} — MC-VOLTAGE-IS-THE-SAME-AS-ELECTRIC-FIELD, transfer case, distractor-mapped`,
   },
 ]
 
@@ -28864,6 +29004,26 @@ const CAPC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${CAPC}:MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE`],
     source: `${CAPC_SRC} — MC-LARGER-PLATE-SEPARATION-INCREASES-CAPACITANCE trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-SERIES-CAPACITORS-ADD-DIRECTLY: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: CAPC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A 2 uF and a 6 uF capacitor are connected in SERIES. Is the total larger or smaller than 2 uF?',
+    choices: [
+      { text: 'Smaller — 1/C = 1/2 + 1/6 gives 1.5 uF. Series capacitors always come out below the SMALLEST one; it is capacitors in PARALLEL that add directly', isCorrect: true },
+      { text: 'Larger — 8 uF, since capacitors in series add together', isCorrect: false, misconceptionId: `${CAPC}:MC-SERIES-CAPACITORS-ADD-DIRECTLY` },
+    ],
+    correctValue: 'smaller — 1.5 uF',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CAPC}:MC-SERIES-CAPACITORS-ADD-DIRECTLY`],
+    source: `${CAPC_SRC} — MC-SERIES-CAPACITORS-ADD-DIRECTLY, transfer case, distractor-mapped`,
   },
 ]
 
@@ -29722,6 +29882,26 @@ const GAUS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${GAUS}:MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO`],
     source: `${GAUS_SRC} — MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: GAUS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You want the field around a very long uniformly charged wire. Can Gauss\'s law be used, given a wire is not a sphere?',
+    choices: [
+      { text: 'Yes — use a coaxial CYLINDRICAL Gaussian surface. Gauss\'s law holds for every closed surface; the symmetry only decides whether the flux integral is easy, and a long wire has cylindrical symmetry', isCorrect: true },
+      { text: 'No — Gauss\'s law applies only to spherically symmetric charge distributions', isCorrect: false, misconceptionId: `${GAUS}:MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES` },
+    ],
+    correctValue: 'yes — with a cylindrical Gaussian surface',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GAUS}:MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES`],
+    source: `${GAUS_SRC} — MC-GAUSS-LAW-ONLY-WORKS-FOR-SPHERES, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.electric-dipole ─────────────────────────────────────────────────
@@ -29781,6 +29961,26 @@ const EDIP_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${EDIP}:MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY`],
     source: `${EDIP_SRC} — MC-TORQUE-ALIGNS-DIPOLE-INSTANTANEOUSLY trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: EDIP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You move ten times further away. By what factor does a POINT CHARGE\'s field fall, and by what factor does a DIPOLE\'s?',
+    choices: [
+      { text: 'Point charge by 1/100 (inverse square), dipole by 1/1000 (inverse cube) — the dipole\'s two opposite charges nearly cancel at a distance, so its field dies away faster', isCorrect: true },
+      { text: 'Both by 1/100 — every electrostatic field obeys the inverse square law', isCorrect: false, misconceptionId: `${EDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE` },
+    ],
+    correctValue: '1/100 for the point charge, 1/1000 for the dipole',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE`],
+    source: `${EDIP_SRC} — MC-DIPOLE-FIELD-FALLS-OFF-AS-INVERSE-SQUARE, transfer case, distractor-mapped`,
   },
 ]
 
@@ -29842,6 +30042,26 @@ const ENCA_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ENCA}:MC-CAPACITOR-DISCHARGES-INSTANTLY`],
     source: `${ENCA_SRC} — MC-CAPACITOR-DISCHARGES-INSTANTLY trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-ENERGY-STORED-ON-THE-PLATES: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: ENCA,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A charged capacitor is DISCONNECTED, then its plates are pulled further apart. The stored energy increases. Where did the extra energy go?',
+    choices: [
+      { text: 'Into the field filling the larger gap — the work done pulling against the plates\' attraction went into field energy, whose density u = (1/2)*eps0*E^2 lives in the SPACE between the plates', isCorrect: true },
+      { text: 'Onto the plates — more charge collected on the metal surfaces as they separated', isCorrect: false, misconceptionId: `${ENCA}:MC-ENERGY-STORED-ON-THE-PLATES` },
+    ],
+    correctValue: 'into the field in the gap',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ENCA}:MC-ENERGY-STORED-ON-THE-PLATES`],
+    source: `${ENCA_SRC} — MC-ENERGY-STORED-ON-THE-PLATES, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.dielectrics ─────────────────────────────────────────────────────
@@ -29902,6 +30122,26 @@ const DIEL_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DIEL}:MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES`],
     source: `${DIEL_SRC} — MC-DIELECTRIC-CONSTANT-IS-THE-SAME-AT-ALL-FREQUENCIES trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: DIEL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A capacitor stays CONNECTED to its battery while a dielectric (kappa = 3) is slid in. What happens to E between the plates?',
+    choices: [
+      { text: 'E is unchanged — the battery holds V fixed and E = V/d. What triples instead is the CHARGE, because C tripled. A dielectric never boosts the field; it either weakens E or draws more charge', isCorrect: true },
+      { text: 'E triples — the dielectric strengthens the field between the plates', isCorrect: false, misconceptionId: `${DIEL}:MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD` },
+    ],
+    correctValue: 'E unchanged; the charge triples',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DIEL}:MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD`],
+    source: `${DIEL_SRC} — MC-DIELECTRIC-INCREASES-ELECTRIC-FIELD, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.kirchhoffs-laws ─────────────────────────────────────────────────
@@ -29961,6 +30201,26 @@ const KVL2_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${KVL2}:MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL`],
     source: `${KVL2_SRC} — MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: KVL2,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: While writing a KVL loop you traverse a resistor OPPOSITE to the assumed current direction. What sign does the IR term take?',
+    choices: [
+      { text: 'Plus IR — you are moving from the low-potential side toward the high-potential side, so the potential RISES. Only traversal WITH the current gives -IR', isCorrect: true },
+      { text: 'Minus IR — a resistor is always a drop, whichever way you go round the loop', isCorrect: false, misconceptionId: `${KVL2}:MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL` },
+    ],
+    correctValue: '+IR',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${KVL2}:MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL`],
+    source: `${KVL2_SRC} — MC-WRONG-SIGN-FOR-RESISTOR-TRAVERSAL, transfer case, distractor-mapped`,
   },
 ]
 
@@ -31694,6 +31954,26 @@ const EPWR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${EPWR}:MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER`],
     source: `${EPWR_SRC} — MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-POWER-IS-ALWAYS-IV: a
+    // different situation, not a restatement. Rung PROFICIENT.
+    conceptId: EPWR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A resistor of 20 ohm sits across 10 V and you are NOT told the current. What is the fastest route to the power?',
+    choices: [
+      { text: 'P = V^2/R = 100/20 = 5 W — P = IV, P = I^2*R and P = V^2/R are the same relation with Ohm\'s law substituted in, so use whichever pair you were actually given', isCorrect: true },
+      { text: 'You cannot get it yet — power is I times V, so the current has to be found first', isCorrect: false, misconceptionId: `${EPWR}:MC-POWER-IS-ALWAYS-IV` },
+    ],
+    correctValue: '5 W, via P = V^2/R',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EPWR}:MC-POWER-IS-ALWAYS-IV`],
+    source: `${EPWR_SRC} — MC-POWER-IS-ALWAYS-IV, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.electromagnetic-waves ───────────────────────────────────────────
@@ -31994,6 +32274,26 @@ const RSTV_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${RSTV}:MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE`],
     source: `${RSTV_SRC} — MC-SEMICONDUCTOR-RESISTANCE-INCREASES-WITH-TEMPERATURE trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-LONGER-WIRE-HAS-LOWER-RESISTANCE: a
+    // different situation, not a restatement. Rung PROFICIENT.
+    conceptId: RSTV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two copper wires have the same length, but one has DOUBLE the cross-sectional area. How do their resistances compare?',
+    choices: [
+      { text: 'The thicker one has HALF the resistance — R = rho*L/A, so resistance grows with length and falls with area; a wider cross-section gives the carriers more room', isCorrect: true },
+      { text: 'The thicker one has double the resistance — more material means more resistance', isCorrect: false, misconceptionId: `${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE` },
+    ],
+    correctValue: 'half — R is inversely proportional to area',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE`],
+    source: `${RSTV_SRC} — MC-LONGER-WIRE-HAS-LOWER-RESISTANCE, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.solenoid ─────────────────────────────────────────────────────────
@@ -32113,6 +32413,26 @@ const RCC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${RCC}:MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS`],
     source: `${RCC_SRC} — MC-CAPACITOR-ACTS-AS-OPEN-CIRCUIT-ALWAYS trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). This blueprint documents only two
+    // misconceptions and both are already probed, so this is a TRANSFER case
+    // on MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R: a
+    // different situation, not a restatement. Rung DEVELOPING.
+    conceptId: RCC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You keep R fixed and swap in a capacitor with FOUR times the capacitance. What happens to the charging time?',
+    choices: [
+      { text: 'It takes four times as long — tau = R*C, so C counts exactly as much as R; a larger capacitor needs proportionally more charge to reach the same voltage', isCorrect: true },
+      { text: 'Nothing changes — the time constant is set by the resistor, since the resistor is what limits the current', isCorrect: false, misconceptionId: `${RCC}:MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R` },
+    ],
+    correctValue: 'four times longer',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RCC}:MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R`],
+    source: `${RCC_SRC} — MC-RC-TIME-CONSTANT-DEPENDS-ONLY-ON-R, transfer case, distractor-mapped`,
   },
 ]
 

@@ -4158,3 +4158,73 @@ at 32 concepts — the largest single domain and the last one.**
 Offline only. `npx tsc --noEmit` clean; 321 files / 6,697 passed / 9 skipped;
 `npm run build` clean. **No production write, no sweep re-run, no topic
 marked VERIFIED.**
+
+---
+
+# MOAT BATCH — phys.em, half one (16 of 32)
+
+`phys.em` is the last physics domain and the largest. It is being done in two
+halves so each probe gets the same authoring depth as the earlier batches;
+this half is electrostatics + DC circuits, the next is magnetism + AC/EM.
+
+## A structural difference from every earlier domain
+
+**Every one of `phys.em`'s 32 blueprints documents exactly TWO
+misconceptions, and both are already probed.** In phys.stat 8 of 15 had a
+third available, in phys.particle 16 of 16 did, in phys.qm 12 of 19, in
+phys.mod 21 of 21. Here it is 0 of 32.
+
+So every phys.em probe must be a TRANSFER case: the same misconception
+attacked from a situation the existing probe never reaches, chosen so that
+recall of the first probe cannot carry. Recorded as a corpus finding, not a
+gap to paper over — if `phys.em` is later given third misconceptions by the
+Curriculum Pipeline, these transfer probes remain valid and a fourth becomes
+available.
+
+## The 16 transfer cases
+
+| concept | existing probe asks | this probe asks instead |
+|---|---|---|
+| `electric-charge` | charge on the fur after rubbing | the SUM over rod + cloth |
+| `coulombs-law` | doubling both charges | TRIPLING (3F vs 9F is unmistakable) |
+| `ohms-law` | a diode | a filament lamp, with two numeric V/I points |
+| `electric-current` | series ammeters | a parallel junction, and what RETURNS |
+| `dc-circuits` | two unequal branches | three branches, ranked |
+| `electric-field` | a capacitor gap | one proton alone in a vacuum |
+| `electric-potential` | V inside a conductor | V = E·d in a uniform field, with units |
+| `capacitance` | two equal capacitors | 2 µF + 6 µF, "bigger or smaller than the smallest?" |
+| `gauss-law` | an irregular shape | a long wire, i.e. cylindrical symmetry |
+| `electric-dipole` | one dipole at 2 r | point charge vs dipole side by side |
+| `energy-capacitor` | which of two stores more | where the energy GOES when plates separate |
+| `dielectrics` | battery DISCONNECTED | battery CONNECTED — E fixed, charge triples |
+| `kirchhoffs-laws` | traversal WITH the current | traversal AGAINST it (+IR, not −IR) |
+| `electrical-power` | given I and R | given V and R (P = V²/R) |
+| `resistivity` | doubling LENGTH | doubling AREA |
+| `rc-circuits` | changing R | changing C |
+
+Several pairs are deliberately complementary — dielectrics
+connected/disconnected, KVL with/against the current, R vs C in τ = RC,
+length vs area in R = ρL/A. A learner who memorised one cannot answer the
+other without the actual relation.
+
+## Ratchets tightened
+
+| ratchet | before | after |
+|---|---|---|
+| physics concepts short of 3 gradeable probes | 32 | **16** |
+| legacy probe-slug collisions (pre-Item-6 measure) | 521 | **537** |
+
+Live identity still 0 discarded.
+
+Remaining: the 16 magnetism/AC concepts of `phys.em` — `magnetic-field`,
+`magnetic-force`, `biot-savart`, `amperes-law`, `faradays-law`, `lenzs-law`,
+`mutual-inductance`, `magnetic-flux`, `magnetic-materials`,
+`self-inductance`, `ac-basics`, `electromagnetic-waves`, `lc-circuits`,
+`magnetic-dipole`, `maxwells-equations`, `solenoid`. All are PROFICIENT /
+PROFICIENT at HIGH, so all take a DEVELOPING rung.
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 321 files / 6,697 passed / 9 skipped;
+`npm run build` clean. **No production write, no sweep re-run, no topic
+marked VERIFIED.**
