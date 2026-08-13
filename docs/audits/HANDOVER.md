@@ -204,3 +204,98 @@ npx tsc --noEmit          # clean
 npm run build             # clean
 npx vitest run src/tests/gateAssessment   # just the newest work
 ```
+
+
+---
+
+# RESUME POINT — 2026-08-13, after the E6 root-cause session
+
+Read this section first; the rest of the file predates it.
+
+## The single command that unblocks everything
+
+```
+npx tsx scripts/brain/seed-knowledge-assets.ts        # needs DATABASE_URL
+```
+
+Idempotent, completes in one run, no lambda lifetime limit. It seeds the ~541
+missing seed identities AND fills the 734 hollow probe identities. Everything
+below is blocked on it.
+
+Then, and only then:
+
+```
+NODE_USE_ENV_PROXY=1 AUDIT_EMAIL=... AUDIT_PASSWORD=... \
+  npx tsx scripts/audit/engine-sweep.ts --subject physics --limit 8
+```
+
+`NODE_USE_ENV_PROXY=1` is REQUIRED — Node's built-in fetch ignores
+`HTTPS_PROXY`, and its absence produced every historical "Host not i…" error.
+That was never the app. Require `E6 = 0` before any topic moves to VERIFIED.
+
+## E6, fully root-caused — do not re-derive this
+
+The gate cannot attach an authored MCQ that is not in the database.
+
+| audited concept | gradeable probes in prod | in repo |
+|---|---|---|
+| `phys.meas.units` | 2 | 4-5 |
+| `phys.meas.scalars-vectors` | 2 | 4-5 |
+| `phys.meas.vector-products` | 1 | 3+ |
+| dimensions, errors, significant-figures, unit-conversion, vector-addition | **0** | 3-5 each |
+
+A gate needs THREE graded correct answers (CHECK 1 + PRACTICE 2). Six of eight
+concepts have zero. That is the whole of E6.
+
+## Two mechanisms, both now understood
+
+1. **737 probe identities were ACTIVE with no content row.** `findBestProbe`
+   filters ACTIVE then joins content, so they occupied serving slots they could
+   never fill. DEPRECATED 2026-08-13 (owner-approved, 0 evidence rows
+   disturbed, 796 valid probes untouched).
+   **CAUTION: this blocks re-seeding by slug** — those identities still own the
+   canonicalSlugs the seed needs, so an `INSERT … WHERE NOT EXISTS(slug)` will
+   silently insert nothing. The working operation is FILL-AND-REACTIVATE:
+   insert the content row for the existing identity, then set it ACTIVE.
+   Proven in production (units 1→2, scalars-vectors 1→2, vector-products 0→1).
+
+2. **The cold-start bootstrap has never once completed** — zero
+   `asset bootstrap complete` lines in 24h of logs while
+   "seeding missing assets…" appears on nearly every request. `register()` does
+   not await it and the lambda freezes when the response is sent, so ~1,500
+   writes never finish. Four fixes shipped (prefetch instead of 2,920 queries,
+   non-fatal writes, non-fatal status convergence, bounded 40-write slice).
+   **Convergence is still STALLED as of this writing** — ten provoked cold
+   starts produced zero new writes, and the `asset bootstrap slice:` log line
+   has never appeared. Do not assume those fixes work; verify by watching
+   `explanation_assets` row count rise on its own.
+
+## Disproved hypotheses — recorded so they are not re-run
+
+- "The orphans are stale 4-part legacy slugs." **FALSE.** 728 probes and 1,335
+  explanations use 4-part slugs AND have content; 4-part is the normal form.
+  The discriminator is the missing content row.
+- "A socket timeout between two writes created the orphans." **FALSE.** The
+  bootstrap uses a nested atomic create. All 737 share one authorId and one
+  creation day — a single historical seeding event.
+- "The gate phase is misclassified." **FALSE.** The corpus is simply absent.
+
+## Upstream cause, owner-only
+
+The Supabase pooler FLAPS: `Can't reach database server at
+aws-1-ap-south-1.pooler.supabase.com:6543`, P1008 socket timeouts, and
+`connection pool timeout: 20, connection limit: 15` exhaustion — while the
+project reports ACTIVE_HEALTHY and direct queries succeed. It has produced
+learner-visible 500s and failed sign-ins. It is upstream of the hollow
+catalogue, E6, and the outages.
+
+## Verified working today (do not re-investigate)
+
+- Gemini 3.5 Flash Lite is the sole provider (`AI_PROVIDER_MODE=failover`
+  restores the chain).
+- A completed lesson is learnable again — `lesson-init` re-opens the attempt on
+  restart/review. Verified with a real learner turn.
+- The invisible two-column teaching canvas is shipped and tested; NOT visually
+  confirmed (Chromium is blocked in the agent sandbox).
+- Moat: 43 concepts closed, 7 physics domains complete at 3 gradeable probes
+  each, 103 remain (em 32, mod 21, qm 19, particle 16, stat 15).
