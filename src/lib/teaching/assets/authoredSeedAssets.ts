@@ -6839,6 +6839,23 @@ const SCHR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${SCHR}:MC-2`],
     source: `${SCHR_SRC} — MC-2 probe question verbatim, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: SCHR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: For a particle in a box of width L, is psi(x) = x(L-x) a valid solution? It is smooth and vanishes at both walls.',
+    choices: [
+      { text: 'No — vanishing at the walls is not enough. d2/dx2 of x(L-x) is the constant -2, which cannot equal -k^2 x(L-x) for any k, so it fails the Schrodinger equation itself', isCorrect: true },
+      { text: 'Yes — it is smooth and satisfies the boundary conditions, which is what a solution has to do', isCorrect: false, misconceptionId: `${SCHR}:MC-3` },
+    ],
+    correctValue: 'no — it fails the equation, boundary conditions alone are not enough',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SCHR}:MC-3`],
+    source: `${SCHR_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── eng.grammar.active-and-passive-voice ────────────────────────────────────
@@ -8010,6 +8027,23 @@ const SPIN_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SPIN}:MC-2`],
     source: `${SPIN_SRC} — MC-2 probe question verbatim, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: SPIN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Does the Stern-Gerlach magnet CREATE the two spin states by splitting the beam?',
+    choices: [
+      { text: 'No — if the atoms entered with random classical orientations the deflection would be continuous and the screen would show a smear; the two discrete spots require m_s to be quantised before the atoms arrive', isCorrect: true },
+      { text: 'Yes — the magnetic field is what separates the atoms into two groups, so it produces the two states', isCorrect: false, misconceptionId: `${SPIN}:MC-3` },
+    ],
+    correctValue: 'no — the quantisation is intrinsic, the magnet only sorts',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SPIN}:MC-3`],
+    source: `${SPIN_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -37097,6 +37131,23 @@ const WVFN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${WVFN}:MC-2`],
     source: `${WVFN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: WVFN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a double-slit run with single electrons, did each electron have a definite slit it went through, which the measurement merely revealed?',
+    choices: [
+      { text: 'No — if each electron had a definite path the screen would show the sum of two single-slit patterns with no fringes; the interference that actually appears rules that out, as Bell-test experiments later confirmed more generally', isCorrect: true },
+      { text: 'Yes — the electron was on one definite path all along, and detecting it just tells us which', isCorrect: false, misconceptionId: `${WVFN}:MC-3` },
+    ],
+    correctValue: 'no — no definite which-path before measurement',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WVFN}:MC-3`],
+    source: `${WVFN_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.operators ──────────────────────────────────────────────────────────
@@ -37156,6 +37207,23 @@ const OPER_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${OPER}:MC-2`],
     source: `${OPER_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: OPER,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Multiplication of numbers commutes. Does it follow that the commutator [x,p] is zero?',
+    choices: [
+      { text: 'No — p is a derivative operator, not a number. Applying the product rule to x*p*psi and p*x*psi leaves [x,p]psi = i*hbar*psi, so [x,p] = i*hbar, not zero', isCorrect: true },
+      { text: 'Yes — x times p equals p times x, so the commutator vanishes', isCorrect: false, misconceptionId: `${OPER}:MC-3` },
+    ],
+    correctValue: 'no — [x,p] = i hbar',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${OPER}:MC-3`],
+    source: `${OPER_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -37217,6 +37285,23 @@ const UNCP_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${UNCP}:MC-2`],
     source: `${UNCP_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: UNCP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Does the uncertainty principle put a floor on how precisely position alone can be known?',
+    choices: [
+      { text: 'No — delta-x can be made arbitrarily small by localising the wave function tightly; the cost is that delta-p grows without bound. Only the PRODUCT is bounded, by hbar/2', isCorrect: true },
+      { text: 'Yes — position can never be known better than delta-x = hbar/2', isCorrect: false, misconceptionId: `${UNCP}:MC-3` },
+    ],
+    correctValue: 'no — only the product is bounded',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${UNCP}:MC-3`],
+    source: `${UNCP_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.particle-in-box ─────────────────────────────────────────────────────
@@ -37276,6 +37361,23 @@ const PBOX_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${PBOX}:MC-2`],
     source: `${PBOX_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung PROFICIENT.
+    conceptId: PBOX,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: For the n = 2 state of a particle in a box of width L, where is the particle most likely to be found?',
+    choices: [
+      { text: 'Near L/4 and 3L/4 — the probability density (2/L)sin^2(2 pi x/L) has a NODE at the centre x = L/2, so the centre is the least likely place, not the most', isCorrect: true },
+      { text: 'Near the centre, x = L/2 — higher states concentrate the particle toward the middle of the box', isCorrect: false, misconceptionId: `${PBOX}:MC-3` },
+    ],
+    correctValue: 'near L/4 and 3L/4, with a node at the centre',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PBOX}:MC-3`],
+    source: `${PBOX_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -37337,6 +37439,23 @@ const HOSC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${HOSC}:MC-2`],
     source: `${HOSC_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: HOSC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: The n = 1 state of the quantum harmonic oscillator has average position zero. Is x = 0 therefore where the particle is most likely to be?',
+    choices: [
+      { text: 'No — phi_1 is proportional to x times a Gaussian, so the probability density has a node at x = 0. The AVERAGE is zero by symmetry while the most probable positions are out near the turning points', isCorrect: true },
+      { text: 'Yes — the average position is zero, so that is where the probability peaks', isCorrect: false, misconceptionId: `${HOSC}:MC-3` },
+    ],
+    correctValue: 'no — a node at x = 0, peaks near the turning points',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HOSC}:MC-3`],
+    source: `${HOSC_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.hydrogen-atom-qm ────────────────────────────────────────────────────
@@ -37396,6 +37515,23 @@ const HATM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${HATM}:MC-2`],
     source: `${HATM_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung PROFICIENT.
+    conceptId: HATM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A p orbital is drawn as two lobes. Is the electron confined inside those lobes?',
+    choices: [
+      { text: 'No — the drawn surface encloses about 90% of the probability density; the electron has nonzero probability outside it too. The shape reports a directional probability distribution, not a container', isCorrect: true },
+      { text: 'Yes — the two lobes are the region the electron occupies, and it cannot be found outside them', isCorrect: false, misconceptionId: `${HATM}:MC-3` },
+    ],
+    correctValue: 'no — it is a 90% probability surface, not a container',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HATM}:MC-3`],
+    source: `${HATM_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -37457,6 +37593,23 @@ const AMAD_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${AMAD}:MC-AMA-ONE-TOTAL-J`],
     source: `${AMAD_SRC} — MC-AMA-ONE-TOTAL-J trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-AMA-ONE-TOTAL-J: count the states rather than restate the rule. Rung DEVELOPING.
+    conceptId: AMAD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Couple j1 = 1 with j2 = 1/2. The uncoupled basis has (2j1+1)(2j2+1) = 6 states. Does j = 3/2 alone account for them?',
+    choices: [
+      { text: 'No — j = 3/2 supplies only 4 states, so j = 1/2 must also occur, supplying the remaining 2; the coupled and uncoupled bases have to hold the same total of 6', isCorrect: true },
+      { text: 'Yes — the total angular momentum is 1 + 1/2 = 3/2, and that single value covers the whole space', isCorrect: false, misconceptionId: `${AMAD}:MC-AMA-ONE-TOTAL-J` },
+    ],
+    correctValue: 'no — j = 3/2 and j = 1/2, four states plus two',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${AMAD}:MC-AMA-ONE-TOTAL-J`],
+    source: `${AMAD_SRC} — MC-AMA-ONE-TOTAL-J, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.identical-particles ─────────────────────────────────────────────────
@@ -37516,6 +37669,23 @@ const IDPT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${IDPT}:MC-IP-EXCHANGE-SPATIAL-ONLY`],
     source: `${IDPT_SRC} — MC-IP-EXCHANGE-SPATIAL-ONLY trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-IP-EXCHANGE-SPATIAL-ONLY: two electrons in a spin triplet, where the spatial part must flip sign. Rung DEVELOPING.
+    conceptId: IDPT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two electrons are in a symmetric SPIN triplet. What must the spatial part of their wave function be?',
+    choices: [
+      { text: 'Antisymmetric — the FULL wave function (space times spin) has to be antisymmetric for fermions, so a symmetric spin part forces an antisymmetric spatial part', isCorrect: true },
+      { text: 'Also symmetric — symmetrisation is a rule about the spatial wave function, and the spin part is handled separately', isCorrect: false, misconceptionId: `${IDPT}:MC-IP-EXCHANGE-SPATIAL-ONLY` },
+    ],
+    correctValue: 'antisymmetric spatial part',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${IDPT}:MC-IP-EXCHANGE-SPATIAL-ONLY`],
+    source: `${IDPT_SRC} — MC-IP-EXCHANGE-SPATIAL-ONLY, distractor-mapped`,
   },
 ]
 
@@ -37577,6 +37747,23 @@ const PAUL_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PAUL}:MC-2`],
     source: `${PAUL_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: PAUL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Does the Pauli exclusion principle apply to photons as well as electrons?',
+    choices: [
+      { text: 'No — photons are bosons with a symmetric wave function, so any number can share one mode; that is exactly how a laser and a Bose-Einstein condensate work. Exclusion applies to fermions only', isCorrect: true },
+      { text: 'Yes — no two quantum particles of any kind can occupy the same state', isCorrect: false, misconceptionId: `${PAUL}:MC-3` },
+    ],
+    correctValue: 'no — exclusion applies to fermions only',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PAUL}:MC-3`],
+    source: `${PAUL_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.perturbation-theory ─────────────────────────────────────────────────
@@ -37636,6 +37823,23 @@ const PRTB_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PRTB}:MC-2`],
     source: `${PRTB_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: PRTB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Can the non-degenerate perturbation formula be applied level by level to a degenerate set of states?',
+    choices: [
+      { text: 'No — the state correction carries a denominator E_n - E_m, which is exactly zero within a degenerate subspace, so the formula divides by zero. The fix is to diagonalise H\' restricted to that subspace', isCorrect: true },
+      { text: 'Yes — just apply the same formula separately to each state in the degenerate group', isCorrect: false, misconceptionId: `${PRTB}:MC-3` },
+    ],
+    correctValue: 'no — divide by zero, use degenerate perturbation theory',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PRTB}:MC-3`],
+    source: `${PRTB_SRC} — MC-3, distractor-mapped`,
   },
 ]
 
@@ -37697,6 +37901,23 @@ const VARM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${VARM}:MC-VAR-ANY-STATE`],
     source: `${VARM_SRC} — MC-VAR-ANY-STATE trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-VAR-EXACT: the direction of the bound, which no existing probe asks for. Rung DEVELOPING.
+    conceptId: VARM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You compute a variational energy and get E_trial. What does the variational principle actually guarantee about it?',
+    choices: [
+      { text: 'Only that E_trial is greater than or equal to the true ground-state energy — an upper bound. It says nothing about how tight that bound is; a visually plausible trial function with the wrong symmetry or nodes can still be far off', isCorrect: true },
+      { text: 'That E_trial is close to the exact energy whenever the trial wave function looks close to the true ground state', isCorrect: false, misconceptionId: `${VARM}:MC-VAR-EXACT` },
+    ],
+    correctValue: 'an upper bound only, tightness not guaranteed',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VARM}:MC-VAR-EXACT`],
+    source: `${VARM_SRC} — MC-VAR-EXACT, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.wkb-approximation ───────────────────────────────────────────────────
@@ -37756,6 +37977,23 @@ const WKBA_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${WKBA}:MC-WKB-TUNNELING-FORMULA`],
     source: `${WKBA_SRC} — MC-WKB-TUNNELING-FORMULA trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-WKB-EXACT-CLASSICALLY: name where WKB breaks, not whether it is exact. Rung DEVELOPING.
+    conceptId: WKBA,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Where does the WKB approximation break down, no matter how small hbar is?',
+    choices: [
+      { text: 'At the classical turning points — there p(x) goes to zero and the local wavelength diverges, so the slowly-varying requirement fails and connection formulas are needed to patch across', isCorrect: true },
+      { text: 'Nowhere — since hbar is small, WKB is exact for any problem in the classical limit', isCorrect: false, misconceptionId: `${WKBA}:MC-WKB-EXACT-CLASSICALLY` },
+    ],
+    correctValue: 'at the classical turning points',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${WKBA}:MC-WKB-EXACT-CLASSICALLY`],
+    source: `${WKBA_SRC} — MC-WKB-EXACT-CLASSICALLY, distractor-mapped`,
   },
 ]
 
@@ -37817,6 +38055,23 @@ const SCAT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${SCAT}:MC-BORN-ALWAYS-VALID`],
     source: `${SCAT_SRC} — MC-BORN-ALWAYS-VALID trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-SCAT-CROSS-SECTION-AREA: the hard-sphere low-energy result, which is the sharpest counterexample. Rung DEVELOPING.
+    conceptId: SCAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A hard sphere of radius R scatters low-energy waves. Is its cross-section pi R^2, the geometric shadow?',
+    choices: [
+      { text: 'No — at low energy it is 4 pi R^2, four times the geometric value, because of wave diffraction; a cross-section is an effective area set by the potential and the energy, not by geometry', isCorrect: true },
+      { text: 'Yes — the cross-section is the geometric area the target presents, pi R^2', isCorrect: false, misconceptionId: `${SCAT}:MC-SCAT-CROSS-SECTION-AREA` },
+    ],
+    correctValue: 'no — 4 pi R^2 at low energy',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SCAT}:MC-SCAT-CROSS-SECTION-AREA`],
+    source: `${SCAT_SRC} — MC-SCAT-CROSS-SECTION-AREA, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.s-matrix-basics ──────────────────────────────────────────────────────
@@ -37876,6 +38131,23 @@ const SMTX_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SMTX}:MC-SMAT-UNITARITY-OPTIONAL`],
     source: `${SMTX_SRC} — MC-SMAT-UNITARITY-OPTIONAL trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-SMAT-UNITARITY-OPTIONAL: what unitarity physically IS, not whether it is required. Rung DEVELOPING.
+    conceptId: SMTX,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An approximate S-matrix comes out non-unitary. What has actually been broken?',
+    choices: [
+      { text: 'Probability conservation — unitarity S-dagger S = 1 IS conservation of probability, so a non-unitary S can predict negative probabilities or cross-sections violating the optical theorem', isCorrect: true },
+      { text: 'Nothing physical — unitarity is a mathematical nicety, and a non-unitary approximation still gives usable cross-sections', isCorrect: false, misconceptionId: `${SMTX}:MC-SMAT-UNITARITY-OPTIONAL` },
+    ],
+    correctValue: 'probability conservation',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SMTX}:MC-SMAT-UNITARITY-OPTIONAL`],
+    source: `${SMTX_SRC} — MC-SMAT-UNITARITY-OPTIONAL, distractor-mapped`,
   },
 ]
 
@@ -37937,6 +38209,23 @@ const SELR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${SELR}:MC-2`],
     source: `${SELR_SRC} — MC-2 trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: SELR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Is delta-l = +/-1 explained entirely by the photon carrying one unit of angular momentum?',
+    choices: [
+      { text: 'No — that alone would still permit delta-l = 0 for linearly polarised light along z. Delta-l = 0 is ruled out by PARITY, since r is parity-odd; both constraints together force exactly +/-1', isCorrect: true },
+      { text: 'Yes — the photon removes one unit of angular momentum, and that is the whole reason', isCorrect: false, misconceptionId: `${SELR}:MC-3` },
+    ],
+    correctValue: 'no — parity is the other half of the reason',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SELR}:MC-3`],
+    source: `${SELR_SRC} — MC-3, distractor-mapped`,
+  },
 ]
 
 // ─── phys.qm.density-matrix ────────────────────────────────────────────────────────
@@ -37996,6 +38285,23 @@ const DMAT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${DMAT}:MC-DM-PARTIAL-TRACE-LOSES-INFO`],
     source: `${DMAT_SRC} — MC-DM-PARTIAL-TRACE-LOSES-INFO trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC-DM-PARTIAL-TRACE-LOSES-INFO: what SURVIVES the trace, not what is lost. Rung DEVELOPING.
+    conceptId: DMAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You trace out the environment B from an entangled state of A and B. What is left in rho_A?',
+    choices: [
+      { text: 'Every locally accessible quantum property of A — rho_A is generally a mixed QUANTUM state, and coherences within A survive; only the correlations WITH B are gone', isCorrect: true },
+      { text: 'A classical state — the partial trace destroys the entanglement, so nothing quantum about A remains', isCorrect: false, misconceptionId: `${DMAT}:MC-DM-PARTIAL-TRACE-LOSES-INFO` },
+    ],
+    correctValue: 'a mixed quantum state; only correlations with B are lost',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DMAT}:MC-DM-PARTIAL-TRACE-LOSES-INFO`],
+    source: `${DMAT_SRC} — MC-DM-PARTIAL-TRACE-LOSES-INFO, distractor-mapped`,
   },
 ]
 
@@ -39136,6 +39442,23 @@ const QTUN_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${QTUN}:MC-2`],
     source: `${QTUN_SRC} — MC-2 trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC-3, which had no gradeable probe (MC-1 and MC-2 already do). Rung DEVELOPING.
+    conceptId: QTUN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A barrier gives transmission T = 10^-3. The barrier thickness is then DOUBLED. What is T now?',
+    choices: [
+      { text: 'About 10^-6 — T goes as e^(-2 kappa d), so doubling d SQUARES the transmission; this exponential sensitivity is what an STM exploits to resolve single atoms', isCorrect: true },
+      { text: 'About 5 x 10^-4 — doubling the thickness halves the transmission, since T falls off in proportion to d', isCorrect: false, misconceptionId: `${QTUN}:MC-3` },
+    ],
+    correctValue: 'about 10^-6 — T is squared',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${QTUN}:MC-3`],
+    source: `${QTUN_SRC} — MC-3, distractor-mapped`,
   },
 ]
 

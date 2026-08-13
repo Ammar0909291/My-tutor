@@ -4015,3 +4015,70 @@ in earlier batches.
 Offline only. `npx tsc --noEmit` clean; 318 files / 6,660 passed / 9 skipped;
 `npm run build` clean. **No production write, no sweep re-run, no topic
 marked VERIFIED.**
+
+---
+
+# MOAT BATCH — phys.qm CLEARED (all 19 concepts)
+
+## What was short
+
+All 19 `phys.qm` concepts held two gradeable probes against the three a gate
+needs. Two sit at `UNDERGRADUATE` (`schrodinger-equation`, `spin`); the other
+17 at `HIGH`. Each third probe was authored into its concept's own band.
+
+Free rung computed per concept: `DEVELOPING` for 17, `PROFICIENT` for
+`particle-in-box` and `hydrogen-atom-qm` (both already had a DEVELOPING mcq).
+
+## What was authored
+
+**Twelve** target a blueprint MC-3 that had no gradeable probe:
+
+| concept | newly covered misconception |
+|---|---|
+| `schrodinger-equation` | MC-3 — any smooth function satisfying the BCs will do |
+| `spin` | MC-3 — the Stern-Gerlach magnet creates the two states |
+| `wave-function` | MC-3 — measurement reveals a pre-existing position |
+| `operators` | MC-3 — [x,p] = 0 because numbers commute |
+| `uncertainty-principle` | MC-3 — it bounds Δx alone |
+| `particle-in-box` | MC-3 — higher n peaks at the centre |
+| `harmonic-oscillator-qm` | MC-3 — ⟨x⟩ = 0 means x = 0 is most probable |
+| `hydrogen-atom-qm` | MC-3 — the orbital is a container |
+| `pauli-exclusion` | MC-3 — bosons obey exclusion too |
+| `perturbation-theory` | MC-3 — the non-degenerate formula works on degenerate levels |
+| `selection-rules` | MC-3 — Δl = ±1 is purely angular momentum |
+| `quantum-tunneling` | MC-3 — T falls linearly with barrier thickness |
+
+**Seven** concepts document only two misconceptions, both already probed, so
+they got a transfer case attacking the same misconception from a side the
+existing probe never reaches:
+
+- `angular-momentum-addition` — count the 6 states and discover j = 1/2 must
+  also appear, rather than restate the j range
+- `identical-particles` — a symmetric spin triplet FORCES an antisymmetric
+  spatial part
+- `variational-method` — what the bound actually guarantees (upper bound only,
+  tightness not implied)
+- `wkb-approximation` — WHERE it breaks (turning points), not whether it is exact
+- `scattering-theory-born-approximation` — the hard sphere's 4πR² at low
+  energy, the sharpest counterexample to "cross-section = geometric area"
+- `s-matrix-basics` — unitarity IS probability conservation, so breaking it
+  predicts negative probabilities
+- `density-matrix` — what SURVIVES a partial trace, not what is lost
+
+## Ratchets tightened
+
+| ratchet | before | after |
+|---|---|---|
+| physics concepts short of 3 gradeable probes | 72 | **53** |
+| legacy probe-slug collisions (pre-Item-6 measure) | 481 | **500** |
+
+Live identity still 0 discarded (`difficultyLadderIdentity.test.ts` passes).
+
+Remaining short: `phys.mod` 21, `phys.em` 32. Ten of twelve physics domains
+are now clear.
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 318 files / 6,660 passed / 9 skipped;
+`npm run build` clean. **No production write, no sweep re-run, no topic
+marked VERIFIED.**

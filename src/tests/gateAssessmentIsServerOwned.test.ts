@@ -172,10 +172,10 @@ describe('the authored corpus actually converts', () => {
     // (five phys.therm: carnot-cycle, entropy, heat-engines, refrigerators,
     // third-law; three phys.wave: beats, forced-oscillations, interference)
     // -> 117 (six phys.astro + eight phys.rel) -> 103 (fourteen phys.opt)
-    // -> 88 (all fifteen phys.stat) -> 72 (all sixteen phys.particle);
-    // both of those domains are now clear.
+    // -> 88 (all fifteen phys.stat) -> 72 (all sixteen phys.particle)
+    // -> 53 (all nineteen phys.qm); all three of those domains are clear.
     // Tighten this number whenever more are authored.
-    expect(short).toBeLessThanOrEqual(72)
+    expect(short).toBeLessThanOrEqual(53)
     expect(counts.size).toBe(conceptsWithGradeable.size)
   })
 
