@@ -5023,29 +5023,70 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   </div>
                 )}
 
-                {lessonCompletion.nextLessonOrder !== null && (
+                {/* Three compact actions — completion flow and mastery logic
+                    are all untouched above this point; these buttons only
+                    decide what happens to the (already-recorded) completion
+                    screen itself. */}
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 4 }}>
+                  {lessonCompletion.nextLessonOrder !== null && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        // completeAndAdvance is the canonical transition: it
+                        // records completion through /api/curriculum/progress
+                        // (still the server-side owner of completedLessons and
+                        // currentLesson) AND moves the client session to the next
+                        // lesson. This used to call handleLessonComplete, which
+                        // does only the first half — the reason the learner
+                        // stayed on the finished lesson. Teaching still never
+                        // begins automatically: this lands on "Start Lesson".
+                        setLessonCompletion(null)
+                        if (currentLessonData) {
+                          void completeAndAdvance(currentLessonData.order, currentLessonData)
+                        }
+                      }}
+                      className="btn-primary"
+                      style={{ padding: '10px 14px', borderRadius: 10, fontWeight: 800, fontSize: 15.6, border: 'none', cursor: 'pointer' }}
+                    >
+                      {t('lc_next')}
+                    </button>
+                  )}
+
+                  {/* Restart Current Lesson — reuses the SAME lesson-switch
+                      gate every other restart in the app goes through
+                      (requestLessonSwitch -> "Restart this lesson?" confirm
+                      -> confirmLessonSwitch -> callLessonInit(mode:'restart')).
+                      No parallel restart mechanism: requestLessonSwitch
+                      already detects target.order === curriculumProgress.
+                      currentLesson and routes it as a restart, which is
+                      exactly what the just-finished lesson is at this point
+                      (currentLesson has not advanced yet — only Next/
+                      completeAndAdvance above does that). */}
                   <button
                     type="button"
                     onClick={() => {
-                      // completeAndAdvance is the canonical transition: it
-                      // records completion through /api/curriculum/progress
-                      // (still the server-side owner of completedLessons and
-                      // currentLesson) AND moves the client session to the next
-                      // lesson. This used to call handleLessonComplete, which
-                      // does only the first half — the reason the learner
-                      // stayed on the finished lesson. Teaching still never
-                      // begins automatically: this lands on "Start Lesson".
                       setLessonCompletion(null)
-                      if (currentLessonData) {
-                        void completeAndAdvance(currentLessonData.order, currentLessonData)
-                      }
+                      if (currentLessonData) requestLessonSwitch(currentLessonData)
                     }}
-                    className="btn-primary"
-                    style={{ marginTop: 4, padding: '10px 14px', borderRadius: 10, fontWeight: 800, fontSize: 15.6, border: 'none', cursor: 'pointer' }}
+                    style={{ padding: '10px 14px', borderRadius: 10, fontWeight: 700, fontSize: 15.6, border: '1px solid var(--border-default)', background: 'var(--bg-elevated)', color: 'var(--text-primary)', cursor: 'pointer' }}
                   >
-                    {t('lc_next')}
+                    {t('lc_restart')}
                   </button>
-                )}
+
+                  {/* Close — dismisses the completion screen only. Completion
+                      was already recorded server-side the moment this card
+                      appeared (the `data.lessonComplete?.complete === true`
+                      handler that sets `lessonCompletion`); this button
+                      touches no completion/mastery state at all, so closing
+                      can never mark, unmark, or alter what was earned. */}
+                  <button
+                    type="button"
+                    onClick={() => setLessonCompletion(null)}
+                    style={{ padding: '10px 14px', borderRadius: 10, fontWeight: 700, fontSize: 15.6, border: '1px solid var(--border-subtle)', background: 'transparent', color: 'var(--text-dim)', cursor: 'pointer' }}
+                  >
+                    {t('lc_close')}
+                  </button>
+                </div>
               </div>
             )}
 
