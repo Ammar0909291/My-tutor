@@ -150,15 +150,18 @@ describe('the authored corpus actually converts', () => {
   })
 
   /**
-   * THE PREDICTED SHORTFALL, recorded rather than hidden.
+   * THE SHORTFALL, now CLOSED — kept as the guard that it stays closed.
    *
    * Closing a concept needs THREE graded correct answers (CHECK 1 + PRACTICE
-   * 2, per MASTERY_CHECK_REQUIRED / MASTERY_PRACTICE_REQUIRED). Most physics
-   * concepts carry only two gradeable authored probes, so the deterministic
-   * path runs dry mid-lesson on the majority of them and the last gate falls
-   * back to the model. That is why `excludeProbeStem` exists and why the
-   * fallback path is not dead code — and it is a CONTENT gap (author a third
-   * probe), not a code one.
+   * 2, per MASTERY_CHECK_REQUIRED / MASTERY_PRACTICE_REQUIRED). This test was
+   * written when most physics concepts carried only two gradeable authored
+   * probes, so the deterministic path ran dry mid-lesson on the majority of
+   * them and the last gate fell back to the model. It was a CONTENT gap
+   * (author a third probe), not a code one, and it has now been authored out:
+   * all 238 physics concepts reach three.
+   *
+   * `excludeProbeStem` and the model fallback are still live code — they
+   * cover repeat visits and any subject that has not reached three yet.
    */
   it('records how many concepts run dry before the gate closes', () => {
     const counts = new Map<string, number>()
@@ -174,10 +177,10 @@ describe('the authored corpus actually converts', () => {
     // -> 117 (six phys.astro + eight phys.rel) -> 103 (fourteen phys.opt)
     // -> 88 (all fifteen phys.stat) -> 72 (all sixteen phys.particle)
     // -> 53 (all nineteen phys.qm) -> 32 (all twenty-one phys.mod)
-    // -> 16 (sixteen of phys.em's thirty-two: the electrostatics and
-    // DC-circuit half). Only phys.em's magnetism/AC half remains.
-    // Tighten this number whenever more are authored.
-    expect(short).toBeLessThanOrEqual(16)
+    // -> 16 (phys.em electrostatics + DC) -> 0 (phys.em magnetism + AC).
+    // ZERO: every physics concept now reaches three gradeable probes. The
+    // ratchet form is kept deliberately — it now reads as "never regress".
+    expect(short).toBe(0)
     expect(counts.size).toBe(conceptsWithGradeable.size)
   })
 

@@ -31233,6 +31233,26 @@ const MFLD_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MFLD}:MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES`],
     source: `${MFLD_SRC} — MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: MFLD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A proton moves at 2 x 10^6 m/s exactly PARALLEL to a strong magnetic field. What magnetic force does it feel?',
+    choices: [
+      { text: 'Zero — F = qv x B depends on the component of velocity PERPENDICULAR to B, and here there is none. Moving is necessary for a magnetic force but not sufficient', isCorrect: true },
+      { text: 'A large force — it is a fast charge inside a strong field, which is exactly when the magnetic force is biggest', isCorrect: false, misconceptionId: `${MFLD}:MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES` },
+    ],
+    correctValue: 'zero — v is parallel to B',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MFLD}:MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES`],
+    source: `${MFLD_SRC} — MC-MAGNETIC-FORCE-EXISTS-ON-STATIONARY-CHARGES, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.magnetic-force ──────────────────────────────────────────────────
@@ -31292,6 +31312,26 @@ const MFOR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${MFOR}:MC-PARALLEL-CURRENTS-REPEL`],
     source: `${MFOR_SRC} — MC-PARALLEL-CURRENTS-REPEL trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-PARALLEL-CURRENTS-REPEL:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: MFOR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two long parallel wires carry current in OPPOSITE directions. Do they attract or repel?',
+    choices: [
+      { text: 'Repel — each wire sits in the other\'s field and F = IL x B points outward. Like currents attract and unlike currents repel, which is the reverse of the rule for charges', isCorrect: true },
+      { text: 'Attract — opposite directions attract, just as opposite charges do', isCorrect: false, misconceptionId: `${MFOR}:MC-PARALLEL-CURRENTS-REPEL` },
+    ],
+    correctValue: 'repel',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MFOR}:MC-PARALLEL-CURRENTS-REPEL`],
+    source: `${MFOR_SRC} — MC-PARALLEL-CURRENTS-REPEL, transfer case, distractor-mapped`,
   },
 ]
 
@@ -31353,6 +31393,26 @@ const BSAV_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BSAV}:MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE`],
     source: `${BSAV_SRC} — MC-BIOT-SAVART-GIVES-FIELD-FROM-A-SINGLE-MOVING-CHARGE trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: BSAV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Far out along the axis of a circular current loop (z much greater than R), how does B fall off with z?',
+    choices: [
+      { text: 'As 1/z^3 — at a distance the loop behaves as a magnetic dipole. Only the dB ELEMENT goes as 1/r^2; what the integrated field does depends on the geometry', isCorrect: true },
+      { text: 'As 1/z^2 — dB goes as 1/r^2, so any field built out of those elements does too', isCorrect: false, misconceptionId: `${BSAV}:MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES` },
+    ],
+    correctValue: '1/z^3',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BSAV}:MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES`],
+    source: `${BSAV_SRC} — MC-B-FALLS-OFF-AS-1/R-SQUARED-FOR-ALL-GEOMETRIES, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.amperes-law ─────────────────────────────────────────────────────
@@ -31412,6 +31472,26 @@ const AMPL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${AMPL}:MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY`],
     source: `${AMPL_SRC} — MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: AMPL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An Amperian loop encloses two wires carrying 5 A in OPPOSITE directions. What is the closed integral of B.dl, and is B zero everywhere on the loop?',
+    choices: [
+      { text: 'The integral is zero because the enclosed currents cancel — but B is generally NOT zero at any point on the loop. The law constrains the INTEGRAL, never the pointwise field', isCorrect: true },
+      { text: 'Both are zero — no net enclosed current means no field on the loop', isCorrect: false, misconceptionId: `${AMPL}:MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY` },
+    ],
+    correctValue: 'integral zero, B not zero pointwise',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${AMPL}:MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY`],
+    source: `${AMPL_SRC} — MC-AMPERES-LAW-GIVES-B-FROM-ENCLOSED-CURRENT-ONLY, transfer case, distractor-mapped`,
   },
 ]
 
@@ -31473,6 +31553,26 @@ const FARD_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${FARD}:MC-EMF-REQUIRES-A-CONDUCTOR`],
     source: `${FARD_SRC} — MC-EMF-REQUIRES-A-CONDUCTOR trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: FARD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A strong magnet is held perfectly STILL inside a coil, so the flux through it is large and steady. What EMF is induced?',
+    choices: [
+      { text: 'Zero — the EMF is -dPhi/dt, a RATE of change. A large but constant flux induces nothing; the EMF peaks where the flux changes fastest, which is where the flux itself passes through zero', isCorrect: true },
+      { text: 'A large EMF, because the flux threading the coil is large', isCorrect: false, misconceptionId: `${FARD}:MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM` },
+    ],
+    correctValue: 'zero — flux is constant',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FARD}:MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM`],
+    source: `${FARD_SRC} — MC-MAXIMUM-EMF-WHEN-FLUX-IS-MAXIMUM, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.lenzs-law ───────────────────────────────────────────────────────
@@ -31532,6 +31632,26 @@ const LENZ_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${LENZ}:MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION`],
     source: `${LENZ_SRC} — MC-LENZS-LAW-VIOLATES-ENERGY-CONSERVATION trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: LENZ,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A magnet is pulled AWAY from a conducting loop. Does the induced current oppose the magnet\'s field, or try to maintain it?',
+    choices: [
+      { text: 'It tries to MAINTAIN the flux — the induced field points the same way as the magnet\'s, and the loop pulls the magnet back. Lenz\'s law opposes the CHANGE in flux, not the field', isCorrect: true },
+      { text: 'It opposes the magnet\'s field, because the induced current always runs counter to the original', isCorrect: false, misconceptionId: `${LENZ}:MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT` },
+    ],
+    correctValue: 'maintains it — the change is what is opposed',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LENZ}:MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT`],
+    source: `${LENZ_SRC} — MC-LENZS-LAW-MEANS-INDUCED-CURRENT-OPPOSES-ORIGINAL-CURRENT, transfer case, distractor-mapped`,
   },
 ]
 
@@ -31654,6 +31774,26 @@ const MUTL_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MUTL}:MC-TRANSFORMER-CAN-AMPLIFY-POWER`],
     source: `${MUTL_SRC} — MC-TRANSFORMER-CAN-AMPLIFY-POWER trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-TRANSFORMER-CAN-AMPLIFY-POWER:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: MUTL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An ideal transformer steps 120 V up to 1200 V, and the primary draws 10 A. What current flows in the secondary?',
+    choices: [
+      { text: '1 A — power is conserved, so V_p*I_p = V_s*I_s; multiplying the voltage by ten divides the current by ten', isCorrect: true },
+      { text: '10 A — the secondary carries the same current, so the higher voltage means ten times the power', isCorrect: false, misconceptionId: `${MUTL}:MC-TRANSFORMER-CAN-AMPLIFY-POWER` },
+    ],
+    correctValue: '1 A',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MUTL}:MC-TRANSFORMER-CAN-AMPLIFY-POWER`],
+    source: `${MUTL_SRC} — MC-TRANSFORMER-CAN-AMPLIFY-POWER, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.magnetic-flux ────────────────────────────────────────────────────
@@ -31713,6 +31853,26 @@ const MFLX_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${MFLX}:MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO`],
     source: `${MFLX_SRC} — MC-FLUX-THROUGH-CLOSED-SURFACE-CAN-BE-NON-ZERO trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-FLUX-IS-THE-FIELD-STRENGTH:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: MFLX,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Two loops sit in the same uniform 0.5 T field. Loop A has area 0.02 m^2 facing the field; loop B has the same area but is turned edge-on. Compare their fluxes.',
+    choices: [
+      { text: '0.01 Wb through A and zero through B — flux is B*A*cos(theta), so orientation and area matter as much as the field. Same field, different flux', isCorrect: true },
+      { text: 'Equal — both sit in the same 0.5 T field, and the flux is the field strength', isCorrect: false, misconceptionId: `${MFLX}:MC-FLUX-IS-THE-FIELD-STRENGTH` },
+    ],
+    correctValue: '0.01 Wb and zero',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MFLX}:MC-FLUX-IS-THE-FIELD-STRENGTH`],
+    source: `${MFLX_SRC} — MC-FLUX-IS-THE-FIELD-STRENGTH, transfer case, distractor-mapped`,
   },
 ]
 
@@ -31774,6 +31934,26 @@ const MMAT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MMAT}:MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES`],
     source: `${MMAT_SRC} — MC-CUTTING-A-MAGNET-GIVES-SEPARATE-N-AND-S-POLES trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-ALL-METALS-ARE-MAGNETIC:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: MMAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A magnet dropped down a COPPER pipe falls noticeably slowly, yet copper is not attracted to a magnet at rest. What does that show?',
+    choices: [
+      { text: 'That the braking comes from eddy currents driven by a CHANGING flux, not from ferromagnetism — copper is not ferromagnetic. "Metal" and "magnetic" are separate categories; ferrite ceramics are magnetic and are not metals', isCorrect: true },
+      { text: 'That copper is magnetic after all, since the magnet clearly interacts with it', isCorrect: false, misconceptionId: `${MMAT}:MC-ALL-METALS-ARE-MAGNETIC` },
+    ],
+    correctValue: 'eddy-current braking, not ferromagnetism',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MMAT}:MC-ALL-METALS-ARE-MAGNETIC`],
+    source: `${MMAT_SRC} — MC-ALL-METALS-ARE-MAGNETIC, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.self-inductance ─────────────────────────────────────────────────
@@ -31834,6 +32014,26 @@ const SIND_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${SIND}:MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES`],
     source: `${SIND_SRC} — MC-LARGER-L-MEANS-MORE-ENERGY-STORED-AT-ALL-TIMES trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-INDUCTOR-OPPOSES-CURRENT-FLOW:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: SIND,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A steady current flows through an inductor and the switch is suddenly OPENED. What does the inductor do?',
+    choices: [
+      { text: 'It drives a large EMF trying to KEEP the current flowing, often arcing across the opening contacts. An inductor opposes CHANGE in current, so it can push current just as readily as resist it', isCorrect: true },
+      { text: 'It blocks the current more firmly than ever, since an inductor opposes current flow', isCorrect: false, misconceptionId: `${SIND}:MC-INDUCTOR-OPPOSES-CURRENT-FLOW` },
+    ],
+    correctValue: 'it drives current, opposing the change',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SIND}:MC-INDUCTOR-OPPOSES-CURRENT-FLOW`],
+    source: `${SIND_SRC} — MC-INDUCTOR-OPPOSES-CURRENT-FLOW, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.ac-basics ────────────────────────────────────────────────────────
@@ -31893,6 +32093,26 @@ const ACB_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ACB}:MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC`],
     source: `${ACB_SRC} — MC-VOLTAGE-ACROSS-COMPONENTS-ADDS-ARITHMETICALLY-IN-AC trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: ACB,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: An AC supply and a DC supply deliver exactly the same heating power to the same resistor. What does that tell you about the AC supply?',
+    choices: [
+      { text: 'Its RMS voltage equals that DC voltage — RMS is DEFINED by equal heating (the root of the mean of the square), which is precisely why it is not the plain time average, which for a sine wave is zero', isCorrect: true },
+      { text: 'Its average voltage equals the DC voltage, since RMS is just the average of the waveform', isCorrect: false, misconceptionId: `${ACB}:MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM` },
+    ],
+    correctValue: 'the RMS voltage equals the DC voltage',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ACB}:MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM`],
+    source: `${ACB_SRC} — MC-RMS-IS-THE-AVERAGE-OF-THE-WAVEFORM, transfer case, distractor-mapped`,
   },
 ]
 
@@ -32034,6 +32254,26 @@ const EMW_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${EMW}:MC-E-AND-B-FIELDS-OUT-OF-PHASE`],
     source: `${EMW_SRC} — MC-E-AND-B-FIELDS-OUT-OF-PHASE trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-E-AND-B-FIELDS-OUT-OF-PHASE:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: EMW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: At an instant when the electric field of a plane EM wave in vacuum is exactly ZERO at some point, what is the magnetic field there?',
+    choices: [
+      { text: 'Also zero — E and B are IN phase in a plane wave, peaking and vanishing together, with E = cB holding at every instant', isCorrect: true },
+      { text: 'At its maximum — the two fields alternate, one peaking as the other vanishes, the way a pendulum trades energy', isCorrect: false, misconceptionId: `${EMW}:MC-E-AND-B-FIELDS-OUT-OF-PHASE` },
+    ],
+    correctValue: 'also zero — they are in phase',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EMW}:MC-E-AND-B-FIELDS-OUT-OF-PHASE`],
+    source: `${EMW_SRC} — MC-E-AND-B-FIELDS-OUT-OF-PHASE, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.lc-circuits ──────────────────────────────────────────────────────
@@ -32093,6 +32333,26 @@ const LCC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${LCC}:MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL`],
     source: `${LCC_SRC} — MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: LCC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: At the instant the CAPACITOR voltage in an ideal LC circuit reaches its maximum, how is the total energy divided?',
+    choices: [
+      { text: 'All of it is in the capacitor and none in the inductor, because the current is momentarily zero. The energy sloshes completely back and forth; it is never permanently split', isCorrect: true },
+      { text: 'Half in each — the energy settles into an even division between the two components', isCorrect: false, misconceptionId: `${LCC}:MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL` },
+    ],
+    correctValue: 'all in the capacitor',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LCC}:MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL`],
+    source: `${LCC_SRC} — MC-ENERGY-STORED-IN-LC-CIRCUIT-IS-HALF-INITIAL, transfer case, distractor-mapped`,
   },
 ]
 
@@ -32154,6 +32414,26 @@ const MDIP_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MDIP}:MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED`],
     source: `${MDIP_SRC} — MC-DIPOLE-FIELD-FALLS-OFF-AS-1/R-SQUARED trigger case as probe, distractor-mapped`,
   },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: MDIP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A simple current loop IS a magnetic dipole. Where are its separate north and south magnetic charges?',
+    choices: [
+      { text: 'Nowhere — it has none. The loop\'s dipole moment comes from circulating current, mu = I*A. This is why no isolated magnetic monopole has ever been found and why div B = 0', isCorrect: true },
+      { text: 'One on each face of the loop — every dipole has a separate positive and negative magnetic charge', isCorrect: false, misconceptionId: `${MDIP}:MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES` },
+    ],
+    correctValue: 'nowhere — the moment comes from circulating current',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MDIP}:MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES`],
+    source: `${MDIP_SRC} — MC-MAGNETIC-DIPOLE-HAS-SEPARATE-POLES, transfer case, distractor-mapped`,
+  },
 ]
 
 // ─── phys.em.maxwells-equations ──────────────────────────────────────────────
@@ -32213,6 +32493,26 @@ const MAXW_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${MAXW}:MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT`],
     source: `${MAXW_SRC} — MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: MAXW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Take an Amperian loop around the wire feeding a charging capacitor, then stretch its surface so it passes BETWEEN the plates instead of cutting the wire. The enclosed conduction current is now zero. What keeps Ampere\'s law consistent?',
+    choices: [
+      { text: 'The displacement term, epsilon_0 * dPhi_E/dt — the CHANGING ELECTRIC FIELD between the plates. No charge crosses the gap; without that term the same loop would give two different answers', isCorrect: true },
+      { text: 'A real current of electrons hopping the gap, so the enclosed current is not actually zero', isCorrect: false, misconceptionId: `${MAXW}:MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT` },
+    ],
+    correctValue: 'the displacement term, a changing E field',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MAXW}:MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT`],
+    source: `${MAXW_SRC} — MC-DISPLACEMENT-CURRENT-IS-REAL-CURRENT, transfer case, distractor-mapped`,
   },
 ]
 
@@ -32353,6 +32653,26 @@ const SOLN_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SOLN}:MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY`],
     source: `${SOLN_SRC} — MC-SOLENOID-FIELD-IS-ZERO-OUTSIDE-EXACTLY trigger case as probe, distractor-mapped`,
+  },
+  {
+    // THIRD gradeable MCQ — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Every phys.em blueprint documents only
+    // two misconceptions and both are already probed, so this is a TRANSFER
+    // case on MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS:
+    // a different situation, not a restatement. Rung DEVELOPING.
+    conceptId: SOLN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You hold the current and the TOTAL number of turns fixed but stretch a solenoid to twice its length. What happens to the internal field?',
+    choices: [
+      { text: 'It halves — B = mu_0 * n * I depends on turns per unit LENGTH, so doubling the length halves n. Radius never enters; packing density does', isCorrect: true },
+      { text: 'Nothing — the field is set by the total number of turns and the current, and neither changed', isCorrect: false, misconceptionId: `${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS` },
+    ],
+    correctValue: 'it halves',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS`],
+    source: `${SOLN_SRC} — MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS, transfer case, distractor-mapped`,
   },
 ]
 

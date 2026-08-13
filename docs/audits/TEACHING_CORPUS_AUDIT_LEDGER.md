@@ -4228,3 +4228,83 @@ PROFICIENT at HIGH, so all take a DEVELOPING rung.
 Offline only. `npx tsc --noEmit` clean; 321 files / 6,697 passed / 9 skipped;
 `npm run build` clean. **No production write, no sweep re-run, no topic
 marked VERIFIED.**
+
+---
+
+# PHYSICS COMPLETE — every concept reaches three gradeable probes
+
+The final 16 `phys.em` concepts (magnetism, induction, AC, EM waves) are
+authored. **All 238 physics concepts now hold at least three gradeable
+probes, and all three are reachable within a SINGLE grade band** — the
+band-aware check, not just the raw count, since a concept split across bands
+would still leave every individual learner short.
+
+## The final 16 transfer cases
+
+Every phys.em blueprint documents only two misconceptions and both were
+already probed, so all 16 are transfer cases. Where the existing pair allowed
+it, the new probe is the deliberate complement of one of them:
+
+| concept | existing probe | this probe |
+|---|---|---|
+| `magnetic-field` | proton AT REST | proton moving PARALLEL to B |
+| `magnetic-force` | parallel currents, SAME direction | OPPOSITE directions |
+| `biot-savart` | infinite straight wire | far field on a loop's axis (1/z³) |
+| `amperes-law` | a wire OUTSIDE the loop | two opposite currents INSIDE it |
+| `faradays-law` | generator at max EMF | magnet held STILL, large steady flux |
+| `lenzs-law` | magnet pushed TOWARD | magnet pulled AWAY |
+| `mutual-inductance` | step-up power (conceptual) | secondary current (numeric) |
+| `magnetic-flux` | "flux at a point" | same B, two loop orientations |
+| `magnetic-materials` | foil / coin / filings | magnet down a COPPER pipe |
+| `self-inductance` | steady state | switch OPENED, inductor drives current |
+| `ac-basics` | peak 325 V | equal-heating definition of RMS |
+| `electromagnetic-waves` | E at MAXIMUM | E exactly ZERO |
+| `lc-circuits` | at max CURRENT | at max capacitor VOLTAGE |
+| `magnetic-dipole` | a bar magnet | a current LOOP, which has no poles at all |
+| `maxwells-equations` | do electrons cross the gap? | the stretched-surface paradox |
+| `solenoid` | changing RADIUS | changing LENGTH at fixed total turns |
+
+`electromagnetic-waves` and `lc-circuits` are exact complements of their
+existing probes — a learner who memorised "B is at maximum when E is at
+maximum" gets the E = 0 case wrong unless they hold the in-phase relation.
+
+## The test is now an invariant, not a ratchet
+
+`gateAssessmentIsServerOwned.test.ts` asserted `short <= N` with N ratcheted
+down over nine batches: 145 → 139 → 131 → 117 → 103 → 88 → 72 → 53 → 32 → 16.
+It now asserts **`short === 0`**. The ratchet form and its history comment are
+kept deliberately: the number can no longer go down, so the test's job has
+changed from "make progress" to "never regress".
+
+The `excludeProbeStem` fallback path is NOT dead code and was not touched —
+it still covers repeat visits within one concept, and every non-physics
+subject, none of which has been through this pass.
+
+## Final ratchet state
+
+| ratchet | start of session | now |
+|---|---|---|
+| physics concepts short of 3 gradeable probes | 103 | **0** |
+| legacy probe-slug collisions (pre-Item-6 measure) | 450 | **553** |
+
+Live identity (`buildProbeSlugResolver`) 0 discarded across all 1,292 physics
+probes and every other subject — that is the invariant that matters; the
+legacy figure counts ladder rungs by construction.
+
+## What this does and does not mean
+
+It means the deterministic gate now HAS an authored assessment to serve at
+every stage of every physics concept, so `findBestProbe` never runs dry and
+hands the gate back to the model mid-lesson.
+
+It does **not** mean a learner sees them. These probes live in the repo. They
+reach production only through the seed path, and the recorded blocker still
+stands: `scripts/brain/seed-knowledge-assets.ts` checks that an identity
+exists but not that it has a content row, so it will skip all 737 hollow
+identities. **No production write, no sweep re-run, no topic marked
+VERIFIED** in this batch or any of the five before it.
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 321 files / 6,697 passed / 9 skipped;
+`npm run build` clean.
