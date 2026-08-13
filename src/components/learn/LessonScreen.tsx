@@ -4703,7 +4703,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         border: hasCanvasVisual
                           ? '1px solid transparent'
                           : `1px solid ${isSpeaking ? `${UI.indigo}55` : 'var(--border-subtle)'}`,
-                        padding: hasCanvasVisual ? '2px 0 0' : '14px 16px',
+                        // Left: 2cm indent before the explanation text starts (canvas
+                        // mode only) — top stays 2px, matching the diagram column's
+                        // own top padding so the top-alignment fix above is untouched.
+                        padding: hasCanvasVisual ? '2px 0 0 2cm' : '14px 16px',
                         boxShadow: hasCanvasVisual ? 'none' : '0 1px 2px rgba(0,0,0,0.04)',
                         transition: 'border-color 200ms',
                       }}>

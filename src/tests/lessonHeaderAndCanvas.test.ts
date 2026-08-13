@@ -144,7 +144,40 @@ describe('diagram container — 3cm padding, top corrected to top-align with the
     // content 3cm below that shared start line. The fix is this rule's top
     // value, not the grid. 2px is not arbitrary: it is the exact value the
     // left column's own Card carries in canvas mode.
-    expect(TSX).toMatch(/padding: hasCanvasVisual \? '2px 0 0' : '14px 16px'/)
+    expect(TSX).toMatch(/padding: hasCanvasVisual \? '2px 0 0 2cm' : '14px 16px'/)
+  })
+
+  it('the explanation column carries a 2cm left indent before its text starts (canvas mode only)', () => {
+    // Follow-up request: "indention should be 2cm then explanation should
+    // start". Lives on the SAME inline padding shorthand as the top-alignment
+    // fix above (left value), not a second rule — one canvas-mode padding
+    // declaration governs both the top alignment and the left indent.
+    expect(TSX).toMatch(/padding: hasCanvasVisual \? '2px 0 0 2cm' : '14px 16px'/)
+    // Outside the canvas (no figure), the ordinary chat bubble keeps its
+    // existing symmetric padding, unindented — the 2cm indent is canvas-only,
+    // not a global bubble change. The false-branch literal must stay exactly
+    // '14px 16px', not gain a matching left value of its own.
+    const literal = TSX.match(/padding: hasCanvasVisual \? '2px 0 0 2cm' : '([^']*)'/)?.[1]
+    expect(literal).toBe('14px 16px')
+  })
+
+  it('the 2cm indent and the top-alignment fix survive the mobile single-column collapse', () => {
+    // Below 900px the canvas collapses to one column and the diagram moves
+    // BELOW the explanation instead of beside it (pre-existing, deliberate —
+    // see teachingCanvasLayout.test.ts). The Card's padding is an inline
+    // style, not conditioned on the media query, so the same 2px-top/2cm-left
+    // padding — and therefore the same indent — applies identically on
+    // mobile. Verified visually with Playwright/Chromium at 390px and 768px
+    // viewports against the real compiled CSS: indent measured at ~76.6px
+    // (2cm) in both cases, no horizontal overflow, no clipped or negative-
+    // width diagram frame.
+    const block = CSS.match(/@media \(max-width: 900px\)[\s\S]*?\.teachingCanvas\s*\{[\s\S]*?\}/)?.[0] ?? ''
+    expect(block).toMatch(/grid-template-columns:\s*minmax\(0,\s*1fr\)/)
+    // The media query only touches .teachingCanvas's own track/gap — it must
+    // not redefine .canvasVisual's padding or .canvasText's Card padding,
+    // which would silently diverge mobile indentation/alignment from desktop.
+    expect(block).not.toMatch(/\.canvasVisual/)
+    expect(block).not.toMatch(/\.canvasText/)
   })
 
   it('padding sits INSIDE the existing column (box-sizing), never growing it', () => {
