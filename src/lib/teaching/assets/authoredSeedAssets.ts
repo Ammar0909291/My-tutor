@@ -11862,8 +11862,8 @@ const CMASS_EXPLANATIONS: SeedExplanation[] = [
       'geometric centre; for a ring or hollow sphere, the centre of mass ' +
       'sits in the empty space at the middle, not in the material at ' +
       'all.',
-    targetedMisconceptions: [`${CMASS}:MC-CMASS-IS-GEOMETRIC-CENTRE`],
-    source: `${CMASS_SRC} — Component 1 MC-CMASS-IS-GEOMETRIC-CENTRE conflict_evidence [P28] (dumbbell worked numbers)`,
+    targetedMisconceptions: [`${CMASS}:MC-COM-IS-GEOMETRIC-CENTRE`],
+    source: `${CMASS_SRC} — Component 1 MC-COM-IS-GEOMETRIC-CENTRE conflict_evidence [P28] (dumbbell worked numbers)`,
   },
   {
     conceptId: CMASS,
@@ -11883,8 +11883,8 @@ const CMASS_EXPLANATIONS: SeedExplanation[] = [
       'velocity no matter how wildly the individual parts collide or ' +
       'interact inside it, since internal forces can never change the ' +
       'system’s total momentum.',
-    targetedMisconceptions: [`${CMASS}:MC-CMASS-VELOCITY-SUM`],
-    source: `${CMASS_SRC} — Component 1 MC-CMASS-VELOCITY-SUM conflict_evidence [P28] (mass-weighted velocity vs. simple average)`,
+    targetedMisconceptions: [`${CMASS}:MC-COM-VELOCITY-SUM`],
+    source: `${CMASS_SRC} — Component 1 MC-COM-VELOCITY-SUM conflict_evidence [P28] (mass-weighted velocity vs. simple average)`,
   },
 ]
 
@@ -11897,12 +11897,12 @@ const CMASS_PROBES: SeedProbe[] = [
     stem: 'A 1 kg mass sits at x = 0 m and a 9 kg mass sits at x = 1 m on a light rod. Where is the centre of mass?',
     choices: [
       { text: 'x = 0.9 m — the mass-weighted average, pulled toward the heavier 9 kg mass', isCorrect: true },
-      { text: 'x = 0.5 m — the geometric midpoint of the rod', isCorrect: false, misconceptionId: `${CMASS}:MC-CMASS-IS-GEOMETRIC-CENTRE` },
+      { text: 'x = 0.5 m — the geometric midpoint of the rod', isCorrect: false, misconceptionId: `${CMASS}:MC-COM-IS-GEOMETRIC-CENTRE` },
     ],
     correctValue: '0.9 m',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${CMASS}:MC-CMASS-IS-GEOMETRIC-CENTRE`],
-    source: `${CMASS_SRC} — MC-CMASS-IS-GEOMETRIC-CENTRE trigger case as probe, distractor-mapped`,
+    targetedMisconceptions: [`${CMASS}:MC-COM-IS-GEOMETRIC-CENTRE`],
+    source: `${CMASS_SRC} — MC-COM-IS-GEOMETRIC-CENTRE trigger case as probe, distractor-mapped`,
   },
   {
     conceptId: CMASS,
@@ -11912,12 +11912,12 @@ const CMASS_PROBES: SeedProbe[] = [
     stem: 'A 1 kg part of a system moves at 10 m/s and a 4 kg part moves at 2 m/s. What is the centre-of-mass velocity?',
     choices: [
       { text: '3.6 m/s — the mass-weighted average, (1×10 + 4×2)/(1+4)', isCorrect: true },
-      { text: '6 m/s — the simple average of the two speeds', isCorrect: false, misconceptionId: `${CMASS}:MC-CMASS-VELOCITY-SUM` },
+      { text: '6 m/s — the simple average of the two speeds', isCorrect: false, misconceptionId: `${CMASS}:MC-COM-VELOCITY-SUM` },
     ],
     correctValue: '3.6 m/s',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${CMASS}:MC-CMASS-VELOCITY-SUM`],
-    source: `${CMASS_SRC} — MC-CMASS-VELOCITY-SUM trigger case as probe, distractor-mapped`,
+    targetedMisconceptions: [`${CMASS}:MC-COM-VELOCITY-SUM`],
+    source: `${CMASS_SRC} — MC-COM-VELOCITY-SUM trigger case as probe, distractor-mapped`,
   },
 ]
 
@@ -33743,13 +33743,13 @@ const REFLC_PROBES: SeedProbe[] = [
     stem: 'PRACTICE: A ray strikes a mirror making 30° WITH THE SURFACE. What is the angle of reflection?',
     choices: [
       { text: '60° — angles in the law of reflection are measured from the NORMAL, and 90° − 30° = 60°', isCorrect: true },
-      { text: '30° — the angle of reflection equals the 30° given', isCorrect: false, misconceptionId: `${REFLC}:MC-ANGLE-FROM-SURFACE` },
-      { text: '15° — half the angle to the surface', isCorrect: false, misconceptionId: `${REFLC}:MC-ANGLE-FROM-SURFACE` },
+      { text: '30° — the angle of reflection equals the 30° given', isCorrect: false, misconceptionId: `${REFLC}:MC-REFLECTION-ANGLE-FROM-SURFACE` },
+      { text: '15° — half the angle to the surface', isCorrect: false, misconceptionId: `${REFLC}:MC-REFLECTION-ANGLE-FROM-SURFACE` },
     ],
     correctValue: '60° from the normal — the incident angle from the normal is 90° − 30° = 60°, and reflection preserves it',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${REFLC}:MC-ANGLE-FROM-SURFACE`],
-    source: `${REFLC_SRC} — MC-ANGLE-FROM-SURFACE, distractor-mapped`,
+    targetedMisconceptions: [`${REFLC}:MC-REFLECTION-ANGLE-FROM-SURFACE`],
+    source: `${REFLC_SRC} — MC-REFLECTION-ANGLE-FROM-SURFACE, distractor-mapped`,
   },
 ]
 
@@ -43563,11 +43563,11 @@ const CIRC_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (Prerequisite Diagnostic PD-2): A 2 kg object moves in a curve. At one instant, the net force on it is 8 N directed toward the centre of curvature. What is its acceleration, and in which direction?',
     choices: [
       { text: 'a = F/m = 4 m/s², directed toward the centre', isCorrect: true },
-      { text: 'a = 4 m/s², directed away from the centre (outward)', isCorrect: false, misconceptionId: `${CIRC}:MC-CENTRIFUGAL-FORCE-REAL` },
+      { text: 'a = 4 m/s², directed away from the centre (outward)', isCorrect: false, misconceptionId: `${CIRC}:MC-CENTRIFUGAL-REAL` },
     ],
     correctValue: '4 m/s² toward the centre',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-FORCE-REAL`],
+    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-REAL`],
     source: `${CIRC_SRC} — Component 2 Prerequisite Diagnostic Block PD-2`,
   },
   {
@@ -43578,7 +43578,7 @@ const CIRC_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (Mastery Probe MP-1, centrifugal force diagnosis): Draw the FBD of a car on a flat circular curve. Which force provides the centripetal acceleration? Should a “centrifugal force” arrow appear?',
     correctValue: 'friction provides the centripetal force (pointing toward the centre); no centrifugal force arrow appears in the inertial-frame FBD',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-FORCE-REAL`],
+    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-REAL`],
     source: `${CIRC_SRC} — Component 6 Mastery Probe Set MP-1`,
   },
   {
@@ -43611,7 +43611,7 @@ const CIRC_ASSESS_PROBES: SeedProbe[] = [
     stem: 'RETRIEVAL PRACTICE (Mastery Probe MP-5 style, synthesis): A 2 kg mass moves in a horizontal circle of radius 0.5 m with period T = 1.2 s. Find its angular velocity, linear speed, and centripetal force.',
     correctValue: 'ω = 2π/T ≈ 5.24 rad/s; v = rω ≈ 2.62 m/s; F_c = mrω² ≈ 27.4 N',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-FORCE-REAL`],
+    targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-REAL`],
     source: `${CIRC_SRC} — Component 6 Mastery Probe Set MP-5`,
   },
 ]
@@ -43786,11 +43786,11 @@ const N2_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC: In F = ma, which quantity is "m": 60 kg or 600 N?',
     choices: [
       { text: '60 kg — mass; 600 N would be weight', isCorrect: true },
-      { text: '600 N — since it’s the bigger number it must be the mass', isCorrect: false, misconceptionId: `${N2}:MC-MASS-WEIGHT-CONFUSION` },
+      { text: '600 N — since it’s the bigger number it must be the mass', isCorrect: false, misconceptionId: `${N2}:MC-MASS-IS-WEIGHT` },
     ],
     correctValue: '60 kg (mass); 600 N is weight',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${N2}:MC-MASS-WEIGHT-CONFUSION`],
+    targetedMisconceptions: [`${N2}:MC-MASS-IS-WEIGHT`],
     source: `${N2_SRC} — Section 7 Assessment Battery P74 classification item`,
   },
   {
@@ -43838,7 +43838,7 @@ const N2_ASSESS_PROBES: SeedProbe[] = [
     stem: 'RETRIEVAL PRACTICE (Interval 4, 21 days): Distinguish mass and weight for a 10 kg object on Earth (g = 9.8) and on Mars (g = 3.7): give both masses and both weights.',
     correctValue: 'mass = 10 kg on both Earth and Mars (unchanged); weight on Earth = 98 N, weight on Mars = 37 N',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${N2}:MC-MASS-WEIGHT-CONFUSION`],
+    targetedMisconceptions: [`${N2}:MC-MASS-IS-WEIGHT`],
     source: `${N2_SRC} — Section 9 Retrieval Schedule, Interval 4 (21 days)`,
   },
 ]
@@ -44131,11 +44131,11 @@ const NORM_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE: Is the normal force the Third-Law reaction to an object’s weight?',
     choices: [
       { text: 'No — N pairs with the body’s push on the surface; weight pairs with the body pulling the Earth up', isCorrect: true },
-      { text: 'Yes — N and weight are an action-reaction pair', isCorrect: false, misconceptionId: `${NORM}:MC-NORMAL-WEIGHT-PAIR` },
+      { text: 'Yes — N and weight are an action-reaction pair', isCorrect: false, misconceptionId: `${NORM}:MC-NORMAL-EQUALS-WEIGHT` },
     ],
     correctValue: 'no, different Third-Law pairs',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${NORM}:MC-NORMAL-WEIGHT-PAIR`],
+    targetedMisconceptions: [`${NORM}:MC-NORMAL-EQUALS-WEIGHT`],
     source: `${NORM_SRC} — Section 7 Assessment Battery P74 classification item`,
   },
   {
@@ -46335,11 +46335,11 @@ const BUOY_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (Mastery Probe MP-4, depth independence): A 1 kg steel cube (V=1.28×10⁻⁴ m³) is at 5 m depth, then lowered to 20 m depth. How does the buoyant force change?',
     choices: [
       { text: 'It stays the same (1.25 N) — buoyant force depends only on displaced volume, not depth', isCorrect: true },
-      { text: 'It increases at greater depth, since water pressure is higher', isCorrect: false, misconceptionId: `${BUOY}:MC-BUOYANCY-DEPENDS-ON-DEPTH` },
+      { text: 'It increases at greater depth, since water pressure is higher', isCorrect: false, misconceptionId: `${BUOY}:MC-BUOYANCY-PROPORTIONAL-TO-DEPTH` },
     ],
     correctValue: 'unchanged, 1.25 N at both depths',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${BUOY}:MC-BUOYANCY-DEPENDS-ON-DEPTH`],
+    targetedMisconceptions: [`${BUOY}:MC-BUOYANCY-PROPORTIONAL-TO-DEPTH`],
     source: `${BUOY_SRC} — Component 6 Mastery Probe Set MP-4`,
   },
   {
@@ -49091,7 +49091,7 @@ const STW_ASSESS_PROBES: SeedProbe[] = [
     stem: 'MASTERY GATE (P4-d, closed-end pipe): A clarinet pipe (closed at one end) is 0.60 m long. Find its fundamental frequency and the next resonant frequency (v=340 m/s). Pass criterion: correct odd-harmonic-only rule.',
     correctValue: 'f₁=v/(4L)≈142 Hz; next is f₃=3×142=426 Hz (only odd harmonics for a closed-end pipe)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${STW}:MC-ALL-HARMONICS-CLOSED-PIPE`],
+    targetedMisconceptions: [`${STW}:MC-ALL-PIPES-SAME-HARMONICS`],
     source: `${STW_SRC} — Component 4 Diagnostic Probe Set P4-d`,
   },
   {
@@ -49153,7 +49153,7 @@ const SNDW_ASSESS_PROBES: SeedProbe[] = [
     stem: 'MASTERY GATE (Mastery Probe MP-5, pitch and loudness independence): A violinist plays 440 Hz pianissimo while a tuba plays 440 Hz fortissimo. Do they share the same pitch? Whose sound has larger amplitude? What makes them sound different? Pass criterion: correctly separates pitch (frequency) from timbre (overtone content).',
     correctValue: 'same pitch (same 440 Hz); tuba has larger amplitude (louder); they sound different due to timbre — differing harmonic/overtone content, not frequency or amplitude',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${SNDW}:MC-LOUDNESS-CHANGES-PITCH`],
+    targetedMisconceptions: [`${SNDW}:MC-PITCH-IS-LOUDNESS`],
     source: `${SNDW_SRC} — Component 6 Mastery Probe Set MP-5`,
   },
   {
@@ -49412,7 +49412,7 @@ const NLGT_ASSESS_PROBES: SeedProbe[] = [
     stem: 'MASTERY GATE (P-4, mastery gate; ≥0.80 across all parts required): (a) Explain why the photoelectric effect cannot be explained by the wave model, using the threshold frequency observation. (b) A student claims a very bright red laser (660 nm) will eventually eject electrons from tungsten (φ=4.5 eV). Calculate E_red and correct the error.',
     correctValue: '(a) the wave model predicts any frequency plus enough intensity should eject electrons, but the sharp threshold frequency (zero emission below it regardless of intensity) falsifies this; (b) E_red≈1.88 eV < 4.5 eV, so no electrons are ejected regardless of brightness — the error is assuming intensity compensates for insufficient photon energy',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${NLGT}:MC-INTENSITY-COMPENSATES-ENERGY`],
+    targetedMisconceptions: [`${NLGT}:MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY`],
     source: `${NLGT_SRC} — Component 6 Assessment Probes P-4`,
   },
   {
@@ -49423,7 +49423,7 @@ const NLGT_ASSESS_PROBES: SeedProbe[] = [
     stem: 'TRANSFER (P-3, proficient): UV light of frequency f=1.5×10¹⁵ Hz shines on a metal with work function φ=4.0 eV. Find the photon energy, determine whether the photoelectric effect occurs, and find KE_max. Would doubling the UV intensity double KE_max?',
     correctValue: 'E≈6.21 eV; yes, effect occurs (6.21>4.0); KE_max=6.21−4.0=2.21 eV; no — doubling intensity doubles the number of ejected electrons per second, but KE_max=hf−φ depends only on frequency, not intensity',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${NLGT}:MC-INTENSITY-COMPENSATES-ENERGY`],
+    targetedMisconceptions: [`${NLGT}:MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY`],
     source: `${NLGT_SRC} — Component 6 Assessment Probes P-3`,
   },
   {
@@ -49448,7 +49448,7 @@ const REFLC_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (P-1, foundational): A ray of light strikes a plane mirror at 50° to the mirror surface. Find the angle of incidence, angle of reflection, and the angle between the incident and reflected rays.',
     correctValue: 'angle of incidence = 90°−50° = 40° (measured from the normal); angle of reflection = 40°; angle between the rays = 180°−2×40° = 100°',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${REFLC}:MC-ANGLE-FROM-SURFACE`],
+    targetedMisconceptions: [`${REFLC}:MC-REFLECTION-ANGLE-FROM-SURFACE`],
     source: `${REFLC_SRC} — Component 6 Assessment Probes P-1`,
   },
   {
@@ -51262,11 +51262,11 @@ const EMFC_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (Probe Set A1, MCQ): A battery with ε=6V and r=0.5Ω supplies 2A. What is the terminal voltage?',
     choices: [
       { text: '5.0 V', isCorrect: true },
-      { text: '6.0 V', isCorrect: false, misconceptionId: `${EMFC}:MC-TERMINAL-EQUALS-EMF-ALWAYS` },
+      { text: '6.0 V', isCorrect: false, misconceptionId: `${EMFC}:MC-TERMINAL-VOLTAGE-EQUALS-EMF` },
     ],
     correctValue: '5.0 V',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${EMFC}:MC-TERMINAL-EQUALS-EMF-ALWAYS`],
+    targetedMisconceptions: [`${EMFC}:MC-TERMINAL-VOLTAGE-EQUALS-EMF`],
     source: `${EMFC_SRC} — Component 4 Assessment Probes, Probe Set A, A1`,
   },
   {
@@ -51277,7 +51277,7 @@ const EMFC_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (Probe Set A2/A3): State what EMF measures physically, and whether terminal voltage always equals EMF.',
     correctValue: 'EMF is the energy supplied per unit charge by a non-electrostatic mechanism (units J/C=V); terminal voltage equals EMF only in the open-circuit case (no current), otherwise it is lower (discharging) or higher (charging)',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${EMFC}:MC-TERMINAL-EQUALS-EMF-ALWAYS`],
+    targetedMisconceptions: [`${EMFC}:MC-TERMINAL-VOLTAGE-EQUALS-EMF`],
     source: `${EMFC_SRC} — Component 4 Assessment Probes, Probe Set A, A2/A3`,
   },
   {

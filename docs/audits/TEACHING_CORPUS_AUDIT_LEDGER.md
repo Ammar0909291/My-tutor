@@ -4557,3 +4557,100 @@ Offline only. `npx tsc --noEmit` clean; 324 files / 6,776 passed / 9 skipped;
 `npm run build` clean. Live resolver 0 discarded, 0 non-physics identities
 changed. **No production write, no sweep re-run against production, no topic
 marked VERIFIED.**
+
+---
+
+# SCOPE LOCK ACCEPTED — and a defect class that is not a content gap
+
+Moat authoring is now limited to **Physics and Chemistry**. Biology and CS
+breadth work was queued and is **cancelled, not started**. Their measurements
+stay in the guard as recorded findings, which the lock explicitly permits.
+
+Re-measured the CURRENT repository rather than trusting the historical
+numbers, as instructed. Two of those numbers were wrong, in both directions.
+
+## Measurement bug found first, before acting on it
+
+A first pass reported "72 blueprint misconceptions with no probe" in physics.
+That was **inflated by the measurement, not real**. Two parser faults:
+
+1. Blueprints head one misconception with TWO ids —
+   `### MC-1: MC-TIME-DILATION-IS-ILLUSION`. Seeds use either. Reading them as
+   separate ids reported probed misconceptions as unprobed. Whole concepts
+   (`time-dilation`, `bohr-model`, `de-broglie`, `mirrors`) showed every
+   misconception "missing" purely from this.
+2. The id regex stopped at `/`, truncating
+   `MC-B-FALLS-OFF-AS-1/R-SQUARED` to `MC-B-FALLS-OFF-AS-1`.
+
+Fixed both, then re-measured: **72 → 56**. Recorded because acting on 72 would
+have produced sixteen probes for misconceptions that were already covered.
+
+## The real defect: misconception ids that join to nothing
+
+Sharper than any count. When a learner picks a distractor, route.ts writes
+MISCONCEPTION_DETECTED keyed on that `misconceptionId`, and the repair path
+resolves it against the authored remedy — which the blueprint keys by its own
+id. **An id in no blueprint means detection fires, the ledger records it, and
+the repair can never resolve.** A silent teaching failure invisible to every
+count-based measure.
+
+| corpus | ids joining to nothing |
+|---|---|
+| physics | **60** distinct, across 54 concepts |
+| chemistry | 4 distinct, across 4 concepts |
+
+Two sub-classes, handled differently on purpose:
+
+**RENAME (11) — fixed.** Same misconception, different spelling:
+`MC-CENTRIFUGAL-FORCE-REAL` vs the blueprint's `MC-CENTRIFUGAL-REAL`;
+`MC-ANGLE-FROM-SURFACE` vs `MC-REFLECTION-ANGLE-FROM-SURFACE`;
+`MC-CMASS-*` vs `MC-COM-*`. Every pair was confirmed against the blueprint's
+own trigger-signal text, never on token similarity — the two lowest-overlap
+candidates were read in full first, and both proved genuine. 33 references
+rewritten. Physics has no HUMAN_CURATOR rows in production, so no seeded row
+was disturbed.
+
+**NO-MATCH (49) — deliberately NOT "fixed".** The seed names a misconception
+the blueprint does not document at all: `phys.therm.thermal-expansion` probes
+`MC-HOLE-SHRINKS` while its blueprint documents only `MC-ONLY-LENGTH-EXPANDS`
+and `MC-WATER-ALWAYS-EXPANDS-WITH-HEAT`. Retargeting these onto a nearby
+blueprint id would make the number pass while attaching a probe to the WRONG
+diagnosis — worse than the gap. Blueprints are Curriculum-Production-Pipeline
+territory, so these are **curriculum feedback**, not a seed edit.
+
+Chemistry's 4 are all NO-MATCH and are additionally left alone because
+chemistry IS seeded in production: rewriting a stored `targetedMisconceptions`
+value would diverge the repo from the rows already serving.
+
+## Regression guard
+
+`src/tests/misconceptionIdsJoinToBlueprints.test.ts` — reads the real
+blueprints from disk, ratchets the residue at 49 / 4, and names all eleven
+repaired ids individually so a revert fails with the specific id rather than a
+count. It also fails if a blueprint ever drops an id a probe still references.
+
+## Measured state, both subjects, after this iteration
+
+| | physics | chemistry |
+|---|---|---|
+| concepts | 238 | 186 |
+| short of 3 gradeable | **0** | 142 |
+| short within one band | **0** | 142 |
+| single-misconception concepts | 1 (correct by design) | **0** |
+| duplicate stems within a concept | 0 | 0 |
+| blueprint MCs with no probe | 56 | 133 |
+| ids joining to no blueprint | 60 → **49** | 4 |
+
+## Honest status ladder
+
+- **authored in repository** — everything above.
+- **seeded in production** — chemistry only (744 HUMAN_CURATOR rows).
+  Physics has none.
+- **production-served / production-verified / end-user ready** — NOT
+  established this session. No production access was used; the seed script's
+  content-row blind spot still blocks seeding regardless.
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,779 passed / 9 skipped; `npm run
+build` clean. Live resolver 0 discarded, 0 non-physics identities changed.
