@@ -297,7 +297,8 @@ describe('the non-physics authored corpora convert too', () => {
   const corpora: ReadonlyArray<readonly [string, readonly SeedProbeLike[], number]> = [
     // [subject, probes, concepts still short of three gradeable probes]
     // chemistry: 186 -> 169 (chem.env, chem.sblock, chem.anal, chem.surface)
-    ['chemistry', CHEMISTRY_PROBES, 169],
+    //            -> 149 (chem.redox, chem.dblock, chem.nitro, chem.poly)
+    ['chemistry', CHEMISTRY_PROBES, 149],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

@@ -4390,3 +4390,51 @@ Offline only. `npx tsc --noEmit` clean; 321 files / 6,706 passed / 9 skipped;
 `npm run build` clean. Live `buildProbeSlugResolver` identity: 0 discarded
 across all four corpora. **No production write, no sweep re-run, no topic
 marked VERIFIED.**
+
+---
+
+# CHEMISTRY BATCH 2 — chem.redox, chem.dblock, chem.nitro, chem.poly (20)
+
+Chemistry **169 → 149** short. Every probe uses the free-slot precedent
+(`probeKind: 'checkpoint'`) established last batch; re-verified afterwards:
+**0 non-physics identities changed**, live resolver 0 discarded.
+
+Thirteen target a blueprint MC with no gradeable probe. Two of those are
+worth naming separately, because they were not simply "the third
+misconception" — **`chem.dblock.oxo-species` and `chem.nitro.heterocycles`
+had BOTH existing probes pointed at MC1**, leaving their MC2 completely
+unprobed despite the concept looking covered on a raw count. Found by
+reading the targeted-misconception lists rather than the probe totals.
+
+| concept | newly covered |
+|---|---|
+| `redox.oxidation-state` | MC3 — the oxidising agent gets oxidised |
+| `redox.balancing` | MC3 — just swap H⁺ for OH⁻ for basic solution |
+| `redox.activity-series` | MC3 — metals always react with metal salts |
+| `redox.disproportionation` | MC3 — the electron count doesn't balance |
+| `redox.titrations` | MC3 — add starch at the start |
+| `dblock.general` | MC3 — "variable" means any whole-number OS |
+| `dblock.first-row` | MC3 — remove 3d electrons first |
+| `dblock.oxo-species` | **MC2 — both probes were on MC1** |
+| `dblock.organometallics` | MC3 — an OS change means the catalyst is spent |
+| `nitro.amines` | MC3 — direct alkylation gives a clean 1° amine |
+| `nitro.nitro-compounds` | MC3 — HNO₃ itself is the electrophile |
+| `nitro.heterocycles` | **MC2 — both probes were on MC1** |
+| `poly.addition` | MC3 — all polyethylene is the same |
+
+Seven concepts document only two misconceptions, both probed, and got
+transfer cases: `lanthanides` (reason from the SHARPNESS of the absorption
+lines, not the colour), `diazonium` (why the reaction is run at 0–5 °C and
+used immediately), `amino-acids` (count the charged GROUPS at the pI, not the
+net), `condensation` (Xₙ = 1/(1−p) at 98% vs 99%), `properties` (a fully
+amorphous polymer has a Tg but no Tm), `biodegradable` (bio-PET vs PLA — same
+feedstock story, opposite outcome), `natural` (why termites digest cellulose
+and we do not).
+
+## Validation
+
+Offline only. `npx tsc --noEmit` clean; 323 files / 6,750 passed / 9 skipped;
+`npm run build` clean. **No production write, no sweep re-run, no topic
+marked VERIFIED.**
+
+Remaining: chemistry 149, biology 108, computer_science 119.

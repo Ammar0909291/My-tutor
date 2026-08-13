@@ -5376,6 +5376,26 @@ const REDOX_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${REDOX}:MC2`],
     source: `${REDOX_SRC} — misconception: redox reactions require literal ionic electron transfer`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: REDOX,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In 2H2 + O2 -> 2H2O, which species is the oxidising agent, and what happens to it?',
+    choices: [
+      { text: 'O2 — it is the oxidising agent AND it is itself REDUCED, going from oxidation state 0 to -2 as it accepts electrons. An oxidising agent causes oxidation in something else while being reduced itself', isCorrect: true },
+      { text: 'O2 — it is the oxidising agent, so it is the one being oxidised', isCorrect: false, misconceptionId: `${REDOX}:MC3` },
+    ],
+    correctValue: 'O2, and it is itself reduced',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDOX}:MC3`],
+    source: `${REDOX_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.equil.weak-acid ────────────────────────────────────────────────────
@@ -6910,6 +6930,26 @@ const DBLOCK_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DBLOCK}:MC2`],
     source: `${DBLOCK_SRC} — misconception: observed color equals absorbed color rather than its complement`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: DBLOCK,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Manganese shows oxidation states from +2 to +7. Does "variable oxidation state" mean any whole number is reachable, so +8 or +9 too?',
+    choices: [
+      { text: 'No — +7 uses up all of Mn\'s accessible valence electrons (3d5 4s2), so there are none left to remove. The range is bounded by the available d+s electrons and by whether the compound is stable at all', isCorrect: true },
+      { text: 'Yes — a variable oxidation state means the element is not restricted to any particular set of values', isCorrect: false, misconceptionId: `${DBLOCK}:MC3` },
+    ],
+    correctValue: 'no — bounded by available d+s electrons',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DBLOCK}:MC3`],
+    source: `${DBLOCK_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.pblock.group13 ─────────────────────────────────────────────────────
@@ -7624,6 +7664,26 @@ const REDBAL_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${REDBAL}:MC2`],
     source: `${REDBAL_SRC} — misconception: basic-solution balancing is an unrelated, separate method`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: REDBAL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You have balanced a half-equation in ACID and now need it in basic solution. Is swapping every H+ for OH- the right move?',
+    choices: [
+      { text: 'No — add OH- to BOTH sides in the same number as the H+ present, combine H+ + OH- into H2O on the side the H+ was, then cancel any H2O appearing on both sides. Direct symbol substitution skips the balancing step and gives a wrong equation', isCorrect: true },
+      { text: 'Yes — in base there is no H+, so replacing each H+ with OH- converts the equation', isCorrect: false, misconceptionId: `${REDBAL}:MC3` },
+    ],
+    correctValue: 'no — add OH- to both sides, combine, then cancel',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDBAL}:MC3`],
+    source: `${REDBAL_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.thermo.bond-enthalpy ───────────────────────────────────────────────
@@ -7907,6 +7967,26 @@ const ACTSER_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${ACTSER}:MC2`],
     source: `${ACTSER_SRC} — misconception: below-hydrogen metals are universally unreactive with all acids`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: ACTSER,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A clean copper wire is placed in ZnSO4 solution. What happens?',
+    choices: [
+      { text: 'Nothing — Cu (E = +0.34 V) is a WEAKER reducing agent than Zn (E = -0.76 V), so it cannot reduce Zn2+ to Zn. Only a stronger reducing agent displaces a weaker one', isCorrect: true },
+      { text: 'Zinc is displaced and plates onto the wire — copper is a reactive metal, and metals react with metal salt solutions', isCorrect: false, misconceptionId: `${ACTSER}:MC3` },
+    ],
+    correctValue: 'no reaction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACTSER}:MC3`],
+    source: `${ACTSER_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -9405,6 +9485,26 @@ const DISPROP_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DISPROP}:MC2`],
     source: `${DISPROP_SRC} — misconception: disproportionation is a universal tendency rather than element-specific`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: DISPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In 2Cu+ -> Cu + Cu2+, one copper goes +1 to 0 and the other +1 to +2. Do the electrons balance?',
+    choices: [
+      { text: 'Yes — each is a ONE-electron change: one Cu+ gains 1e- and the other loses 1e-, so gain equals loss exactly. Oxidation states also sum to +2 on both sides', isCorrect: true },
+      { text: 'No — two electrons are needed overall but only one moves, so the equation as written cannot be right', isCorrect: false, misconceptionId: `${DISPROP}:MC3` },
+    ],
+    correctValue: 'yes — 1e- gained, 1e- lost',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DISPROP}:MC3`],
+    source: `${DISPROP_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.redox.titrations ───────────────────────────────────────────────────
@@ -9492,6 +9592,26 @@ const REDOXTITR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${REDOXTITR}:MC2`],
     source: `${REDOXTITR_SRC} — misconception: all titration indicators should be added at the start regardless of type`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: REDOXTITR,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In an iodometric titration, when should the starch indicator be added?',
+    choices: [
+      { text: 'Only near the end, once the solution is pale yellow and [I2] is already low — the starch-iodine complex releases iodine only sluggishly when [I2] is high, so adding it early gives a premature, imprecise endpoint', isCorrect: true },
+      { text: 'At the very start, so the colour can be tracked throughout the titration', isCorrect: false, misconceptionId: `${REDOXTITR}:MC3` },
+    ],
+    correctValue: 'near the endpoint, at pale yellow',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDOXTITR}:MC3`],
+    source: `${REDOXTITR_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -12600,6 +12720,26 @@ const FIRSTROW_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${FIRSTROW}:MC2`],
     source: `${FIRSTROW_SRC} — misconception: chromium's configuration is an error rather than a genuine stability-driven exception`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: FIRSTROW,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Fe is [Ar]3d6 4s2. What is the configuration of Fe2+?',
+    choices: [
+      { text: '[Ar]3d6 — ionisation removes the 4s electrons FIRST, whatever the Aufbau filling order was. Once the atom exists, 4s is the outermost orbital energetically, so it empties first', isCorrect: true },
+      { text: '[Ar]3d4 — 3d was filled last, so reversing the filling order removes the two 3d electrons', isCorrect: false, misconceptionId: `${FIRSTROW}:MC3` },
+    ],
+    correctValue: '[Ar]3d6',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${FIRSTROW}:MC3`],
+    source: `${FIRSTROW_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.dblock.lanthanides ─────────────────────────────────────────────────
@@ -12689,6 +12829,26 @@ const LANTH_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${LANTH}:MC2`],
     source: `${LANTH_SRC} — misconception: lanthanides vary chemically as much as d-block transition metals`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC1 (lanthanide colour as d-d): reason from the SHAPE of the absorption bands.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: LANTH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Nd3+ solutions show very narrow, sharp absorption lines while Cu2+ shows one broad band. What does that reveal about the transitions?',
+    choices: [
+      { text: 'The 4f electrons sit inside filled 5s and 5p shells, so ligands barely perturb them and the f-f lines stay sharp — quite unlike a transition metal\'s exposed d orbitals, which the ligand field broadens', isCorrect: true },
+      { text: 'Nothing much — both are d-d transitions and the difference in line width is an instrumental artefact', isCorrect: false, misconceptionId: `${LANTH}:MC1` },
+    ],
+    correctValue: 'shielded 4f orbitals — f-f, not d-d',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LANTH}:MC1`],
+    source: `${LANTH_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -13231,6 +13391,26 @@ const AMINE_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${AMINE}:MC2`],
     source: `${AMINE_SRC} — misconception: aromatic ring proximity increases rather than decreases amine basicity`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: AMINE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You react NH3 with excess CH3Br hoping for pure CH3NH2. What do you actually get?',
+    choices: [
+      { text: 'A mixture of CH3NH2, (CH3)2NH, (CH3)3N and the quaternary salt — each product is at least as nucleophilic as the starting amine, so alkylation keeps going. For a pure primary amine use the Gabriel synthesis instead', isCorrect: true },
+      { text: 'Clean CH3NH2 — the reaction stops once ammonia has been alkylated once', isCorrect: false, misconceptionId: `${AMINE}:MC3` },
+    ],
+    correctValue: 'a mixture through to the quaternary salt',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMINE}:MC3`],
+    source: `${AMINE_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.sol.osmosis ────────────────────────────────────────────────────────
@@ -13409,6 +13589,26 @@ const ADDPOLY_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ADDPOLY}:MC2`],
     source: `${ADDPOLY_SRC} — misconception: propagation continues indefinitely without a termination mechanism`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: ADDPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: LDPE and HDPE are both made from ethene alone. Why is one a flexible film and the other a rigid bottle?',
+    choices: [
+      { text: 'Because the MECHANISM differs: radical polymerisation backbites and gives branched chains that pack badly (LDPE, low crystallinity, flexible), while Ziegler-Natta gives linear chains that pack tightly (HDPE, high crystallinity, rigid)', isCorrect: true },
+      { text: 'They are essentially the same material — the monomer is ethene in both cases, so the properties must match', isCorrect: false, misconceptionId: `${ADDPOLY}:MC3` },
+    ],
+    correctValue: 'branched LDPE vs linear HDPE',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ADDPOLY}:MC3`],
+    source: `${ADDPOLY_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -13947,6 +14147,26 @@ const DIAZO_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${DIAZO}:MC2`],
     source: `${DIAZO_SRC} — misconception: diazonium/Sandmeyer chemistry is redundant with standard electrophilic aromatic substitution`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC1 (diazonium salts are storable): reason from the REACTION CONDITIONS.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: DIAZO,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Why is diazotisation run at 0-5 C with the solution used immediately rather than bottled?',
+    choices: [
+      { text: 'Because the arenediazonium salt decomposes above about 5 C, losing N2 to give the phenol — it is not storable, and dry solid diazonium salts can detonate', isCorrect: true },
+      { text: 'Purely to keep the reaction slow and controllable; the salt itself is stable and could be isolated and stored like any other salt', isCorrect: false, misconceptionId: `${DIAZO}:MC1` },
+    ],
+    correctValue: 'it decomposes above ~5 C',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIAZO}:MC1`],
+    source: `${DIAZO_SRC} — MC1, distractor-mapped`,
+  },
 ]
 
 // ─── chem.carb.derivatives ───────────────────────────────────────────────────
@@ -14215,6 +14435,26 @@ const AMINOACID_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${AMINOACID}:MC2`],
     source: `${AMINOACID_SRC} — misconception: charge states above/below pI produce the same electrophoretic migration behavior`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC2 (pI means no charge): count the charged GROUPS rather than the net.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: AMINOACID,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Glycine is at its isoelectric point. How many charged groups does the molecule carry?',
+    choices: [
+      { text: 'Two — it is a zwitterion, carrying -NH3+ and -COO- at the same time. The pI is where the NET charge is zero, not where charge is absent', isCorrect: true },
+      { text: 'None — at the isoelectric point the molecule is completely uncharged', isCorrect: false, misconceptionId: `${AMINOACID}:MC2` },
+    ],
+    correctValue: 'two — it is a zwitterion',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMINOACID}:MC2`],
+    source: `${AMINOACID_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -14642,6 +14882,26 @@ const OXOSPEC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${OXOSPEC}:MC1`],
     source: `${OXOSPEC_SRC} — same oxidation state +6 in both chromate and dichromate`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC2 — both existing probes target MC1, so MC2 had no gradeable probe at all.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: OXOSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Dilute sulfuric acid is added to a yellow potassium chromate solution. What do you see?',
+    choices: [
+      { text: 'It turns orange — acid shifts 2CrO4^2- + 2H+ <=> Cr2O7^2- + H2O to the right, converting yellow chromate into orange dichromate. Adding alkali reverses it', isCorrect: true },
+      { text: 'It stays yellow — pH does not affect the chromate ion\'s colour', isCorrect: false, misconceptionId: `${OXOSPEC}:MC2` },
+    ],
+    correctValue: 'yellow turns orange',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OXOSPEC}:MC2`],
+    source: `${OXOSPEC_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.org.qualitative-analysis ──────────────────────────────────────────
@@ -14946,6 +15206,26 @@ const NITROCOMP_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${NITROCOMP}:MC2`],
     source: `${NITROCOMP_SRC} — NO2 meta direction and ring deactivation effect on further nitration`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: NITROCOMP,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Benzene is nitrated with HNO3 and H2SO4. Which species actually attacks the ring?',
+    choices: [
+      { text: 'NO2+, the nitronium ion — H2SO4 protonates and dehydrates HNO3 to generate it. Preformed NO2BF4 nitrates rings with no acid present at all, which confirms it', isCorrect: true },
+      { text: 'HNO3 itself attacks the ring, with the sulfuric acid simply acting as a solvent or general helper', isCorrect: false, misconceptionId: `${NITROCOMP}:MC3` },
+    ],
+    correctValue: 'the nitronium ion, NO2+',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NITROCOMP}:MC3`],
+    source: `${NITROCOMP_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -15258,6 +15538,26 @@ const HETCYC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${HETCYC}:MC1`],
     source: `${HETCYC_SRC} — EAS reactivity: pyrrole (electron-rich) vs pyridine (electron-poor)`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC2 — both existing probes target MC1, so MC2 had no gradeable probe at all.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: HETCYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Pyridine and pyrrole are both aromatic nitrogen heterocycles. Do both undergo electrophilic aromatic substitution as readily as benzene?',
+    choices: [
+      { text: 'No — pyrrole donates its nitrogen lone pair INTO the ring, making it electron-rich and MORE reactive than benzene toward EAS; pyridine\'s lone pair sits outside the pi system and the electronegative N withdraws density, so it is deactivated and favours NUCLEOPHILIC substitution at C-2/C-4', isCorrect: true },
+      { text: 'Yes — both are aromatic, so both undergo EAS in much the way benzene does', isCorrect: false, misconceptionId: `${HETCYC}:MC2` },
+    ],
+    correctValue: 'no — pyrrole is activated, pyridine is deactivated',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HETCYC}:MC2`],
+    source: `${HETCYC_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.carb.alpha-reactions ───────────────────────────────────────────────
@@ -15569,6 +15869,26 @@ const CONDPOLY_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CONDPOLY}:MC2`],
     source: `${CONDPOLY_SRC} — Carothers equation: Xn = 1/(1-p), very high conversion needed`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC2 (step growth builds one chain at a time): the conversion-vs-chain-length arithmetic.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: CONDPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A step-growth polymerisation reaches 99% conversion of functional groups. Degree of polymerisation is Xn = 1/(1-p). What was it at 98%?',
+    choices: [
+      { text: 'About 50, against about 100 at 99% — useful chain length appears only in the last fraction of a percent, because everything pairs into dimers and oligomers first rather than one chain growing from monomer', isCorrect: true },
+      { text: 'Roughly the same as at 99% — chains grow steadily throughout, so a 1% difference in conversion barely matters', isCorrect: false, misconceptionId: `${CONDPOLY}:MC2` },
+    ],
+    correctValue: 'about 50 at 98%, about 100 at 99%',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CONDPOLY}:MC2`],
+    source: `${CONDPOLY_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.poly.properties ────────────────────────────────────────────────────
@@ -15647,6 +15967,26 @@ const POLYPROP_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${POLYPROP}:MC2`],
     source: `${POLYPROP_SRC} — semi-crystallinity: crystalline and amorphous regions coexist`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC2 (Tg equals the melting point): a fully amorphous polymer, where the two must separate.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: POLYPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Atactic polystyrene is completely amorphous, with no crystallites at all. Does it have a Tg? A Tm?',
+    choices: [
+      { text: 'A Tg but no Tm — Tg is the glass transition of the amorphous regions, which every amorphous polymer has; Tm needs crystallites to melt, and there are none', isCorrect: true },
+      { text: 'Neither — Tg is essentially the polymer\'s melting point, so with no crystallinity there is nothing to measure', isCorrect: false, misconceptionId: `${POLYPROP}:MC2` },
+    ],
+    correctValue: 'Tg yes, Tm no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLYPROP}:MC2`],
+    source: `${POLYPROP_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -15728,6 +16068,26 @@ const BIODEGPOLY_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${BIODEGPOLY}:MC2`],
     source: `${BIODEGPOLY_SRC} — conducting polymer: pi-electron delocalisation not metallic ions`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC1 (bio-based means biodegradable): two plant-derived plastics that behave oppositely.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: BIODEGPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Bio-PET is made from sugarcane-derived ethylene glycol; PLA is made from corn starch. Are both biodegradable?',
+    choices: [
+      { text: 'Only PLA. Bio-PET is chemically IDENTICAL to petroleum PET and persists just as long — what a plastic degrades like is set by its backbone chemistry, not by where the carbon was sourced', isCorrect: true },
+      { text: 'Yes — both come from plants, so both break down in the environment', isCorrect: false, misconceptionId: `${BIODEGPOLY}:MC1` },
+    ],
+    correctValue: 'only PLA — feedstock is not backbone',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BIODEGPOLY}:MC1`],
+    source: `${BIODEGPOLY_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -15965,6 +16325,26 @@ const NATPOLY_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${NATPOLY}:MC2`],
     source: `${NATPOLY_SRC} — vulcanisation: sulphur crosslinks prevent chain slipping`,
   },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). A TRANSFER case for MC1 (starch vs cellulose as packing or amount): why one organism digests it and another does not.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: NATPOLY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Termites digest cellulose and humans cannot, though both starch and cellulose are just glucose chains. What is the actual difference?',
+    choices: [
+      { text: 'The glycosidic linkage stereochemistry — starch is alpha-1,4 and cellulose is beta-1,4. Human amylase cleaves only the alpha linkage; termites rely on symbionts carrying cellulase for the beta one', isCorrect: true },
+      { text: 'Cellulose is packed more tightly and contains more glucose units, so our enzymes cannot get at it', isCorrect: false, misconceptionId: `${NATPOLY}:MC1` },
+    ],
+    correctValue: 'alpha-1,4 vs beta-1,4 linkage',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NATPOLY}:MC1`],
+    source: `${NATPOLY_SRC} — MC1, distractor-mapped`,
+  },
 ]
 
 // ─── chem.anal.spectroscopy ───────────────────────────────────────────────────
@@ -16155,6 +16535,26 @@ const ORGMET_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${ORGMET}:MC1`],
     source: `${ORGMET_SRC} — 18-electron count for Ni(CO)4`,
+  },
+  {
+    // THIRD gradeable probe — closing a concept needs three graded correct
+    // answers (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    // probeKind 'checkpoint', a FREE slot: chemistry is fully seeded in
+    // production, so adding a second 'mcq' here would make this slot a
+    // difficulty ladder and re-identify the already-seeded probe.
+    conceptId: ORGMET,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In Wilkinson\'s catalyst the rhodium goes Rh(I) -> Rh(III) on oxidative addition of H2. Does that mean the catalyst is consumed?',
+    choices: [
+      { text: 'No — reductive elimination expels the alkane and returns Rh(III) to Rh(I), so the complete cycle leaves the catalyst exactly as it started. Zero NET change across the cycle is what makes it a catalyst', isCorrect: true },
+      { text: 'Yes — its oxidation state changed, so it has been used up and must be regenerated separately', isCorrect: false, misconceptionId: `${ORGMET}:MC3` },
+    ],
+    correctValue: 'no — the cycle restores Rh(I)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ORGMET}:MC3`],
+    source: `${ORGMET_SRC} — MC3, distractor-mapped`,
   },
 ]
 
