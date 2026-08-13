@@ -580,11 +580,36 @@ model Message {
   /// Null for USER messages, for assistant turns that showed no figure, and
   /// for every row written before this column existed.
   visualSession Json?
+  /// STABLE LESSON IDENTITY this message belongs to.
+  ///
+  /// `LearnSession` is (learner x chat session) and can span several lessons
+  /// (resumed for up to 24h, and a lesson can also span several sessions) —
+  /// the wrong grain for "which lesson was this message part of". Before this
+  /// column, `/api/sessions/history` scoped only by (userId, subject), so
+  /// EVERY message across every lesson the learner had ever studied in that
+  /// subject was returned as one undifferentiated thread — a diagram or MCQ
+  /// from Lesson 1 reappeared inside Lesson 2's screen on refresh, because
+  /// there was no per-message fact narrow enough to exclude it.
+  ///
+  /// Same identity format `LessonAttempt.lessonKey` already uses —
+  /// `lessonKeyFor()` in src/lib/teaching/lessonAttempt.ts — reused, not
+  /// duplicated: topic slug, or `lesson:<order>` for curriculum-ordered
+  /// subjects. Resolved server-side ONLY, from `StudentProgress.currentLesson`
+  /// (the same field `/api/curriculum` already reads), so no client-supplied
+  /// value is ever trusted and there is no race with the client's own,
+  /// separately-fetched curriculum state.
+  ///
+  /// Null for every row written before this column existed (they remain
+  /// invisible to the lesson-scoped view — an accepted trade-off, matching
+  /// this repo's own precedent for `visualSession`/`provider`), and for the
+  /// rare turn where no StudentProgress row could be resolved.
+  lessonKey    String?
   createdAt    DateTime    @default(now())
 
   session LearnSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId, createdAt])
+  @@index([lessonKey])
   @@map("messages")
 }
 

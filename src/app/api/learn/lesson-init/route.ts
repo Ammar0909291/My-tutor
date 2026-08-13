@@ -295,9 +295,24 @@ export async function POST(req: Request) {
       routed = { text: degraded.text, provider: degraded.provider, finishReason: degraded.finishReason }
     }
 
+    // LESSON ISOLATION — this IS the "explicit navigation" moment
+    // /api/sessions/history's own resolution treats as authoritative
+    // (activeLessonSlug, prioritized over the coarser currentLesson
+    // counter). Uses the validated request body directly rather than
+    // re-querying StudentProgress: `topicSlug`/`lessonOrder` here are
+    // exactly what the write above just upserted into
+    // activeLessonSlug/currentLesson, so re-reading them back would only
+    // add a query for a value already in hand. Same lessonKeyFor() shape
+    // as every other write site — no second lesson-identity scheme.
+    const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
+    const openingLessonKey = lessonKeyFor({ topicSlug, lessonOrder })
+
     // Persist ONLY the assistant response
     await prisma.message.create({
-      data: { sessionId, role: MessageRole.ASSISTANT, content: routed.text },
+      data: {
+        sessionId, role: MessageRole.ASSISTANT, content: routed.text,
+        ...(openingLessonKey ? { lessonKey: openingLessonKey } : {}),
+      },
     })
 
     return NextResponse.json({ success: true, text: routed.text, provider: routed.provider })

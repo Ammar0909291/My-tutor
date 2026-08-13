@@ -61,6 +61,52 @@ export async function GET(req: Request) {
     return NextResponse.json({ success: false, error: 'subject is required' }, { status: 400 })
   }
 
+  // LESSON ISOLATION — the root-cause fix for cross-lesson history leaking.
+  //
+  // This endpoint used to scope only by (userId, subject): every message the
+  // learner had ever written in this SUBJECT, across every lesson, came back
+  // as one undifferentiated thread. LearnSession cannot narrow this — it is
+  // (learner x chat session) and can span several lessons in either
+  // direction — so scoping instead by the same authoritative fact
+  // /api/curriculum already reads: StudentProgress.currentLesson.
+  //
+  // Resolved HERE, server-side, from the DB row — never from a client-
+  // supplied value. The client's OWN copy of "which lesson am I on"
+  // (curriculumProgress) is fetched by a separate effect on a separate
+  // timer, so trusting a client param would race it; a fresh, cheap,
+  // indexed lookup here has no such race and cannot be spoofed.
+  //
+  // `lessonKeyFor()` reused verbatim from lessonAttempt.ts — the same
+  // identity LessonAttempt already keys by — not a second lesson-identity
+  // scheme. If no StudentProgress row exists yet (a genuinely new learner,
+  // who by definition has no lesson history to leak), lessonKey stays null
+  // and the query falls back to the pre-existing subject-wide scope: there
+  // is nothing to narrow correctly, and narrowing to a fabricated key would
+  // hide the little history that DOES exist rather than protect anything.
+  // `activeLessonSlug` takes priority over `currentLesson` — same order
+  // selectCurrentLesson() applies everywhere else this pair is read
+  // together. `activeLessonSlug` is the "explicit navigation" fact
+  // (lesson-init writes it on every open: next/restart/review/resume
+  // alike), so it always names whichever lesson the learner most recently
+  // actually opened — including a REVIEW of an earlier lesson, where
+  // `currentLesson` (the monotonic furthest-progress counter) legitimately
+  // stays ahead of what is on screen. Falling back to `currentLesson` only
+  // covers subjects with no topicSlug grain, where `activeLessonSlug` is
+  // never written at all.
+  let lessonKey: string | null = null
+  try {
+    const sp = await prisma.studentProgress.findUnique({
+      where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
+      select: { currentLesson: true, activeLessonSlug: true },
+    })
+    if (sp) {
+      const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
+      lessonKey = lessonKeyFor({ topicSlug: sp.activeLessonSlug, lessonOrder: sp.currentLesson })
+    }
+  } catch (err) {
+    console.warn('[sessions/history GET] lesson-key resolution skipped:', err)
+  }
+
   // ISS-19a — cursor pagination. `before` is a message id: the page returned
   // is the newest HISTORY_DISPLAY_LIMIT messages STRICTLY OLDER than it, so a
   // client can walk backwards through history without ever re-fetching what it
@@ -91,6 +137,11 @@ export async function GET(req: Request) {
       userId: session.user.id,
       subject: { slug: subjectSlug },
     },
+    // Scopes to the resolved lesson when one exists — see the resolution
+    // block above. Omitted (not `lessonKey: null`) when unresolvable, so an
+    // unscoped learner keeps seeing the pre-existing subject-wide behaviour
+    // rather than an artificially empty page.
+    ...(lessonKey ? { lessonKey } : {}),
     // Matches the (createdAt desc, id desc) ordering below, so pages never
     // skip or repeat a row when timestamps collide — see lib/db/cursorPage.
     ...olderThan(cursorRow),

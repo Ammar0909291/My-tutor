@@ -129,8 +129,15 @@ export async function POST(req: Request) {
     // still sent to the model (it is what triggers the opening) but is never
     // written to the transcript, so it can never be replayed to the learner.
     // The ASSISTANT reply is persisted either way — the teaching is real.
+    //
+    // The row's `id` is captured so its `lessonKey` can be stamped once
+    // `studentProgress` resolves below (Promise.all, ~90 lines down) — this
+    // write must stay exactly where it is (before that fetch) to avoid
+    // touching the ordering every other early read/write in this handler
+    // already depends on. See the stamping site for why.
+    let userMessageRow: { id: string } | null = null
     if (!ephemeral) {
-      await withRetry(() => prisma.message.create({
+      userMessageRow = await withRetry(() => prisma.message.create({
         data: { sessionId, role: MessageRole.USER, content: message },
       }))
     }
@@ -239,6 +246,33 @@ export async function POST(req: Request) {
       prisma.learningProfile.findUnique({ where: { userId } }).catch(() => null),
       prisma.subjectAnalytics.findUnique({ where: { userId_subjectId: { userId, subjectId: learnSession.subjectId } } }).catch(() => null),
     ])
+
+    // LESSON ISOLATION (write side) — stamps the USER turn just persisted
+    // above with the same identity /api/sessions/history now filters by.
+    // `studentProgress.currentLesson` is the identical source that route's
+    // own resolution reads (verified: this is the same field /api/curriculum
+    // returns as `progress.currentLesson`), so read and write always agree.
+    //
+    // AWAITED, not fire-and-forget: an un-awaited write on a serverless
+    // runtime can be reclaimed the moment this invocation ends, before the
+    // promise ever resolves — the exact defect the `activeLessonSlug` write
+    // in lesson-init/route.ts documents and was fixed by awaiting. A failed
+    // stamp still degrades to "this message has no lesson attribution"
+    // rather than failing the turn — the catch is what makes that safe.
+    if (userMessageRow) {
+      try {
+        const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
+        const userLessonKey = lessonKeyFor({ topicSlug: studentProgress?.activeLessonSlug ?? null, lessonOrder: studentProgress?.currentLesson ?? null })
+        if (userLessonKey) {
+          await prisma.message.update({
+            where: { id: userMessageRow.id },
+            data: { lessonKey: userLessonKey },
+          })
+        }
+      } catch (err) {
+        console.warn('[learn/chat] user message lessonKey stamp skipped:', err)
+      }
+    }
 
     let lessonCtx: LessonContext | null = null
     // Explanation Memory / Teaching Action Repository (approved exception to
@@ -4884,12 +4918,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
       const contentForHistory = appendMcqToHistoryText(cleanText, mcqHoisted)
 
+      // LESSON ISOLATION (write side, assistant turn) — same identity, same
+      // source (studentProgress.currentLesson), same helper as the user
+      // turn's stamp above. Computed inline here (rather than reusing a
+      // variable from up there) only because `studentProgress` could in
+      // principle have been re-read between the two writes in a future edit;
+      // resolving it fresh from the same field keeps this write self-
+      // contained without assuming anything about code between the two.
+      const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
+      const assistantLessonKey = lessonKeyFor({ topicSlug: studentProgress?.activeLessonSlug ?? null, lessonOrder: studentProgress?.currentLesson ?? null })
+
       let assistantMessage
       try {
         assistantMessage = await withRetry(() => prisma.message.create({
           data: {
             sessionId, role: MessageRole.ASSISTANT, content: contentForHistory, provider,
             ...(displayedVisualSession ? { visualSession: displayedVisualSession } : {}),
+            ...(assistantLessonKey ? { lessonKey: assistantLessonKey } : {}),
           },
         }))
       } catch (err) {

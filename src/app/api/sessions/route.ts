@@ -71,6 +71,27 @@ export async function POST(req: Request) {
     const subject = await dbCall('sessions-subject-lookup', () => prisma.subject.findUnique({ where: { slug: subjectSlug } }));
     if (!subject) return NextResponse.json({ success: false, error: "Subject not found" }, { status: 404 });
 
+    // LESSON ISOLATION — same resolution as /api/sessions/history (which
+    // this whole branch exists to stand in for when that call fails):
+    // activeLessonSlug prioritized over currentLesson, same lessonKeyFor()
+    // helper. Resolved BEFORE the session lookup below so it can narrow the
+    // nested `messages` include at the query level, instead of returning a
+    // resumed session's full 30-message window undifferentiated by lesson —
+    // the same cross-lesson leak the primary endpoint had.
+    let resumeLessonKey: string | null = null;
+    try {
+      const sp = await dbCall('sessions-progress-lookup', () => prisma.studentProgress.findUnique({
+        where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
+        select: { currentLesson: true, activeLessonSlug: true },
+      }));
+      if (sp) {
+        const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt');
+        resumeLessonKey = lessonKeyFor({ topicSlug: sp.activeLessonSlug, lessonOrder: sp.currentLesson });
+      }
+    } catch (err) {
+      console.warn('[sessions POST] lesson-key resolution skipped:', err);
+    }
+
     // Resume an existing ACTIVE session from within the last 24 hours instead of
     // creating a new one — this preserves the conversation across page refreshes.
     const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -90,7 +111,15 @@ export async function POST(req: Request) {
         // /api/learn/chat. This is a fallback path only (used when the
         // /api/sessions/history call in LessonScreen fails). Loading every
         // message from a long-running session was the dominant cost here.
-        messages: { orderBy: { createdAt: "desc" }, take: 30 },
+        // Scoped to the resolved lesson when one exists, same as the
+        // primary endpoint — omitted (not `lessonKey: null`) when
+        // unresolvable, so an unscoped learner keeps the pre-existing
+        // behaviour rather than an artificially empty page.
+        messages: {
+          where: resumeLessonKey ? { lessonKey: resumeLessonKey } : undefined,
+          orderBy: { createdAt: "desc" },
+          take: 30,
+        },
       },
     }));
 

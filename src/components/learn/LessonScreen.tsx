@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {
   Check, ChevronDown, ChevronUp, Copy, Lightbulb, Loader2, Mic, Paperclip, Play, Send, Square, X,
   BookOpen, Dumbbell, BarChart3, Library as LibraryIcon, User, Settings as SettingsIcon,
-  Bookmark, MoreVertical, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
+  Bookmark, Sparkles, Users, ImageIcon, Trophy, Globe2, Gauge, ThumbsUp, ThumbsDown,
   Network, ListChecks,
 } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
@@ -996,7 +996,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const [lockReasons, setLockReasons] = useState<Record<string, { missingPrereqs: { slug: string; title: string }[] }>>({})
   const [expandedLockedTopic, setExpandedLockedTopic] = useState<string | null>(null)
   const [knowledgeMapOpen, setKnowledgeMapOpen] = useState(false)
-  const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   const [bookmarkedLessons, setBookmarkedLessons] = useState<Set<number>>(new Set())
   // Real cross-session minutes studied today (from StudySession rows written on
   // session end), fetched once on mount as the baseline for the "Today's Goal"
@@ -1012,7 +1011,6 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       setSubjectMenuOpen(false)
       setLangMenuOpen(false)
       setSpeedMenuOpen(false)
-      setMoreMenuOpen(false)
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
@@ -4350,41 +4348,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
               {/* Compact 6-bar lesson phase indicator — driven by the same
                   server-authoritative phase as the removed large LessonProgressBar.
-                  Renders nothing before the lesson starts (same null-guard). */}
+                  Renders nothing before the lesson starts (same null-guard).
+                  This is now the header's only teaching-progress control:
+                  Got it / Not clear / Practice / Practice Insights moved to
+                  the bottom action row (see QUICK_ACTIONS), so the header
+                  stays exactly "Tutor Max | compact progress". */}
               <CompactLessonProgressBar
                 phase={masteryState?.phase}
                 masteryVerified={masteryState?.verified === true}
               />
-
-              {/* "I get it / Not clear" — reacts to the latest tutor message (mockup's global reaction pills) */}
-              {(() => {
-                const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant' && !m.streaming)
-                if (!lastAssistant) return null
-                return (
-                  <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
-                    <button
-                      onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)}
-                      disabled={isStreaming || !sessionId}
-                      style={{
-                        display: 'flex', alignItems: 'center', gap: 4, padding: '5px 10px', borderRadius: 20,
-                        fontSize: 13.2, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.indigo}44`,
-                        background: `${UI.indigo}14`, color: UI.indigo,
-                      }}>
-                      <ThumbsUp size={12} /> {t('lesson_got_it')}
-                    </button>
-                    <button
-                      onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true)}
-                      disabled={isStreaming || !sessionId}
-                      style={{
-                        display: 'flex', alignItems: 'center', gap: 4, padding: '5px 10px', borderRadius: 20,
-                        fontSize: 13.2, fontWeight: 700, cursor: 'pointer', border: `1px solid ${UI.red}44`,
-                        background: UI.redBg, color: UI.red,
-                      }}>
-                      <ThumbsDown size={12} /> {t('lesson_not_clear')}
-                    </button>
-                  </div>
-                )
-              })()}
 
               {/* Bookmark current lesson */}
               {currentLessonData && (
@@ -4417,40 +4389,6 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 {maximizedPanel === 'chat' ? '⊡' : '⊞'}
               </button>
 
-              {/* More menu — houses Practice / Insights, decluttering the input row */}
-              <div style={{ position: 'relative', flexShrink: 0 }}>
-                <button onClick={() => setMoreMenuOpen((v) => !v)}
-                  title={t('lesson_more_options')}
-                  aria-label={t('lesson_more_options')}
-                  aria-haspopup="menu"
-                  aria-expanded={moreMenuOpen}
-                  style={{ width: 30, height: 30, borderRadius: 8, border: '1px solid var(--border-default)', background: 'transparent', color: 'var(--text-dim)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <MoreVertical size={15} />
-                </button>
-                {moreMenuOpen && (
-                  <>
-                    <div onClick={() => setMoreMenuOpen(false)} style={{ position: 'fixed', inset: 0, zIndex: 40 }} />
-                    <div style={{
-                      position: 'absolute', top: 'calc(100% + 6px)', right: 0, width: 190, zIndex: 50,
-                      background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 12,
-                      boxShadow: '0 8px 24px rgba(0,0,0,0.25)', overflow: 'hidden', display: 'flex', flexDirection: 'column',
-                    }}>
-                      {currentLessonData?.topicSlug && (
-                        <button onClick={() => { setInsightsOpen(false); setPracticeOpen((v) => !v); setMoreMenuOpen(false) }}
-                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                          ✏️ {t('nav_practice')}
-                        </button>
-                      )}
-                      {currentLessonData?.topicSlug && (
-                        <button onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v); setMoreMenuOpen(false) }}
-                          style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '9px 12px', fontSize: 15, fontWeight: 600, color: 'var(--text-primary)', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-                          📊 {t('lesson_insights_btn')}
-                        </button>
-                      )}
-                    </div>
-                  </>
-                )}
-              </div>
             </PanelHeader>
 
             {/* Insights Panel (Sprint P) */}
@@ -5206,6 +5144,97 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     </button>
                   )
                 })}
+
+                {/* Practice / Practice Insights — moved out of the header's
+                    "More" (⋮) dropdown into this row, as visible buttons
+                    rather than a hidden menu. Same gate (a real KG topic to
+                    practice/analyse), same toggles, same panels below
+                    (PracticePanel / InsightsPanel) — only where the trigger
+                    lives changed. */}
+                {currentLessonData?.topicSlug && (
+                  <button
+                    onClick={() => { setInsightsOpen(false); setPracticeOpen((v) => !v) }}
+                    aria-label={t('nav_practice')}
+                    aria-pressed={practiceOpen}
+                    title={t('nav_practice')}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 5,
+                      minHeight: 32, padding: '6px 11px', borderRadius: 16,
+                      border: `1px solid ${practiceOpen ? UI.indigo : 'var(--border-default)'}`,
+                      background: practiceOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
+                      color: practiceOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <Dumbbell size={13} style={{ flexShrink: 0 }} />
+                    {t('nav_practice')}
+                  </button>
+                )}
+                {currentLessonData?.topicSlug && (
+                  <button
+                    onClick={() => { setPracticeOpen(false); setInsightsOpen((v) => !v) }}
+                    aria-label={t('lesson_insights_btn')}
+                    aria-pressed={insightsOpen}
+                    title={t('lesson_insights_btn')}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 5,
+                      minHeight: 32, padding: '6px 11px', borderRadius: 16,
+                      border: `1px solid ${insightsOpen ? UI.indigo : 'var(--border-default)'}`,
+                      background: insightsOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
+                      color: insightsOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <BarChart3 size={13} style={{ flexShrink: 0 }} />
+                    {t('lesson_insights_btn')}
+                  </button>
+                )}
+
+                {/* Got it / Not clear — moved out of the top header, same
+                    row as every other learner action now. Unchanged: same
+                    gate (only once the tutor has actually said something),
+                    same handler (sendMessage with the exact same phrasing),
+                    same disabled-while-streaming rule. */}
+                {(() => {
+                  const lastAssistant = [...messages].reverse().find((m) => m.role === 'assistant' && !m.streaming)
+                  if (!lastAssistant) return null
+                  return (
+                    <>
+                      <button
+                        onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Понял' : 'Got it', true)}
+                        disabled={isStreaming || !sessionId}
+                        aria-label={t('lesson_got_it')}
+                        title={t('lesson_got_it')}
+                        style={{
+                          display: 'inline-flex', alignItems: 'center', gap: 5,
+                          minHeight: 32, padding: '6px 11px', borderRadius: 16,
+                          border: `1px solid ${UI.indigo}44`, background: `${UI.indigo}14`, color: UI.indigo,
+                          fontSize: 14.4, fontWeight: 600,
+                          cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
+                          opacity: isStreaming || !sessionId ? 0.5 : 1,
+                        }}
+                      >
+                        <ThumbsUp size={13} style={{ flexShrink: 0 }} /> {t('lesson_got_it')}
+                      </button>
+                      <button
+                        onClick={() => sessionId && sendMessage(sessionId, teachingLanguage === 'ru' ? 'Не понял, объясни по-другому' : "I don't understand, explain differently", true)}
+                        disabled={isStreaming || !sessionId}
+                        aria-label={t('lesson_not_clear')}
+                        title={t('lesson_not_clear')}
+                        style={{
+                          display: 'inline-flex', alignItems: 'center', gap: 5,
+                          minHeight: 32, padding: '6px 11px', borderRadius: 16,
+                          border: `1px solid ${UI.red}44`, background: UI.redBg, color: UI.red,
+                          fontSize: 14.4, fontWeight: 600,
+                          cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
+                          opacity: isStreaming || !sessionId ? 0.5 : 1,
+                        }}
+                      >
+                        <ThumbsDown size={13} style={{ flexShrink: 0 }} /> {t('lesson_not_clear')}
+                      </button>
+                    </>
+                  )
+                })()}
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

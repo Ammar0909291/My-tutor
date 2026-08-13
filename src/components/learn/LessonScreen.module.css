@@ -98,6 +98,16 @@
   min-width: 0;
 }
 
+/* 3cm of internal space on every side of the diagram half, so the visible
+ * figure sits smaller within its column. Padding only — the 50/50 grid
+ * split above, the figure's own proportions, its renderer, and its
+ * positioning logic are all untouched; box-sizing keeps the padding
+ * INSIDE the existing column rather than growing it. */
+.canvasVisual {
+  box-sizing: border-box;
+  padding: 3cm;
+}
+
 /* Below this width a 50% column is genuinely unusable for either a paragraph
    or a diagram, so the canvas becomes one column and the figure sits under
    its explanation — the pre-existing behaviour. Desktop never pays for this. */
