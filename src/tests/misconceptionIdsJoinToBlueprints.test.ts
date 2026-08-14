@@ -372,6 +372,82 @@ describe('probes whose id joined but whose content did not', () => {
   })
 
   /**
+   * chem.bond — TWO crossed pairs in one domain, and the first concept whose
+   * ENTIRE probe pair belonged to a neighbour.
+   *
+   * chem.bond.vsepr: the NH₃ probe tests "molecular geometry IS electron
+   * geometry" (MC-2) and carried MC-1; the CO₂ probe tests "double bonds count
+   * as two domains" (MC-1) and carried MC-2. chem.bond.mo-theory: the O₂
+   * paramagnetism probe IS MC-2 and carried MC-1; the He₂ bond-order-zero
+   * probe IS MC-1 and carried MC-2. Crossed pairs three and four.
+   *
+   * chem.bond.bond-parameters is the stronger finding. Its blueprint documents
+   * bond STRENGTH and LENGTH (double-is-twice-as-strong, enthalpy-is-fixed,
+   * longer-is-stronger) and BOTH its probes ask about molecular POLARITY —
+   * CCl₄ and water-versus-CO₂ — which is chem.bond.polar-molecules MC-1 word
+   * for word. Meanwhile bond-parameters' OWN MC-1 was being probed inside
+   * chem.bond.covalent-bonding (the C=C-is-twice-as-strong probe). A
+   * three-way displacement, invisible to every count.
+   */
+  it('bond.vsepr: crossed pair three is uncrossed', () => {
+    expect(tagOf('chem.bond.vsepr', 'Ammonia (NH₃) has 3 bonding pairs')).toEqual(['MC2'])
+    expect(tagOf('chem.bond.vsepr', 'CO₂ has the structure O=C=O')).toEqual(['MC1'])
+    expect(tagOf('chem.bond.vsepr', 'SF₄ has 4 bonding pairs')).toEqual(['MC3'])
+  })
+
+  it('bond.mo-theory: crossed pair four is uncrossed', () => {
+    expect(tagOf('chem.bond.mo-theory', 'simple Lewis structure for O₂')).toEqual(['MC2'])
+    expect(tagOf('chem.bond.mo-theory', 'bond order of 0 for He₂')).toEqual(['MC1'])
+    expect(tagOf('chem.bond.mo-theory', 'NO⁺ also has bond order 3')).toEqual(['MC3'])
+  })
+
+  it('bond.bond-parameters: its own three misconceptions are now probed', () => {
+    // All three authored, because both pre-existing probes are polarity
+    // questions belonging to chem.bond.polar-molecules. They are left in
+    // place — sound gradeable questions, filed under the wrong concept.
+    expect(tagOf('chem.bond.bond-parameters', 'Is a C=C double bond about 700')).toEqual(['MC1'])
+    expect(tagOf('chem.bond.bond-parameters', 'O–H bond enthalpy as 463')).toEqual(['MC2'])
+    expect(tagOf('chem.bond.bond-parameters', 'a longer bond is stronger')).toEqual(['MC3'])
+  })
+
+  it('bond: the three other retags', () => {
+    // covalent-bonding P1 is the low-boiling-point probe = MC-2 (intermolecular
+    // confused with intramolecular strength), not MC-1 (polarity).
+    expect(tagOf('chem.bond.covalent-bonding', 'relatively low boiling point')).toEqual(['MC2'])
+    // polar-molecules P1's distractor is "more polar bonds means more polar"
+    // = MC-3 word for word, not MC-1.
+    expect(tagOf('chem.bond.polar-molecules', 'SF₆ has six polar S-F bonds')).toEqual(['MC3'])
+    // resonance P2 is about which structure DOMINATES = MC-3, not MC-2
+    // (moving atoms between structures).
+    expect(tagOf('chem.bond.resonance', 'three possible resonance structures')).toEqual(['MC3'])
+  })
+
+  it('bond: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.bond.ionic-bonding', 'NaCl melts at 801')).toEqual(['MC2'])
+
+    expect(tagOf('chem.bond.covalent-bonding', 'Is CO₂ a polar molecule')).toEqual(['MC1'])
+    expect(tagOf('chem.bond.covalent-bonding', 'ammonium ion NH₄⁺')).toEqual(['MC3'])
+
+    expect(tagOf('chem.bond.metallic-bonding', 'molten copper')).toEqual(['MC2'])
+    expect(tagOf('chem.bond.metallic-bonding', 'Sodium has 1 valence electron')).toEqual(['MC3'])
+
+    expect(tagOf('chem.bond.polar-molecules', 'BF₃ and NF₃')).toEqual(['MC1'])
+    expect(tagOf('chem.bond.polar-molecules', 'dipole moment of 1.47 D')).toEqual(['MC2'])
+
+    expect(tagOf('chem.bond.intermolecular', 'about 20 kJ/mol')).toEqual(['MC1'])
+    expect(tagOf('chem.bond.intermolecular', 'Hexane')).toEqual(['MC2'])
+    expect(tagOf('chem.bond.intermolecular', 'ice sinks in water')).toEqual(['MC3'])
+
+    expect(tagOf('chem.bond.hybridization', 'Oxygen in water has 2 bonding pairs')).toEqual(['MC1'])
+    expect(tagOf('chem.bond.hybridization', 'physically "rearrange"')).toEqual(['MC2'])
+
+    expect(tagOf('chem.bond.resonance', 'moving the hydrogen from carbon to nitrogen')).toEqual(['MC2'])
+
+    expect(tagOf('chem.bond.coordinate-bond', 'which species is the Lewis ACID')).toEqual(['MC2'])
+    expect(tagOf('chem.bond.coordinate-bond', 'hydrogen-bonds to a neighbouring water')).toEqual(['MC3'])
+  })
+
+  /**
    * chem.equil — a SECOND cross-concept distractor, and a domain whose own
    * catalyst misconception was being probed inside a neighbouring concept.
    *

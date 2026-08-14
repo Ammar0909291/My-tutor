@@ -6626,6 +6626,21 @@ const IONB_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${IONB}:MC1`],
     source: `${IONB_SRC} — misconception: ionic compounds exist as discrete molecules like covalent compounds`,
   },
+  {
+    conceptId: IONB,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "NaCl melts at 801 °C. Is that because the bond between one Na⁺ and one Cl⁻ is exceptionally strong?",
+    choices: [
+      { text: "No — a single Na⁺···Cl⁻ attraction is not remarkable. What has to be overcome is the LATTICE ENERGY: every ion is held by six nearest neighbours and by the whole surrounding array, so melting means breaking the entire three-dimensional network at once. That is also why melting point tracks charge and ionic radius, through the lattice energy, rather than any single pairwise bond", isCorrect: true },
+      { text: "Yes — the Na–Cl bond is unusually strong, and melting has to break that individual bond", isCorrect: false, misconceptionId: `${IONB}:MC2` },
+    ],
+    correctValue: "No — lattice energy over the whole 3D network, not one pairwise bond",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IONB}:MC2`],
+    source: `${IONB_SRC} — MC-2: high melting point attributed to one strong Na–Cl bond rather than to the lattice as a whole`,
+  },
 ]
 
 // ─── chem.bond.covalent-bonding ──────────────────────────────────────────────
@@ -6689,11 +6704,11 @@ const COVB_PROBES: SeedProbe[] = [
     stem: 'Water (H₂O) has a relatively low boiling point (100°C) compared to many ionic compounds. Does this mean the O-H covalent bonds within water molecules are weak?',
     choices: [
       { text: 'No — the O-H covalent bonds are actually quite strong (~460 kJ/mol); boiling only breaks the much weaker hydrogen bonds BETWEEN separate water molecules, not the bonds within each molecule', isCorrect: true },
-      { text: 'Yes — the low boiling point directly indicates that O-H covalent bonds are weak', isCorrect: false, misconceptionId: `${COVB}:MC1` },
+      { text: 'Yes — the low boiling point directly indicates that O-H covalent bonds are weak', isCorrect: false, misconceptionId: `${COVB}:MC2` },
     ],
     correctValue: 'No — intermolecular forces (weak) break, not covalent bonds (strong)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${COVB}:MC1`],
+    targetedMisconceptions: [`${COVB}:MC2`],
     source: `${COVB_SRC} — distractor targets confusing boiling point with covalent bond strength`,
   },
   {
@@ -6710,6 +6725,36 @@ const COVB_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${COVB}:MC2`],
     source: `${COVB_SRC} — misconception: bond energy scales exactly linearly with bond order`,
+  },
+  {
+    conceptId: COVB,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "CO₂ contains two strongly polar C=O bonds. Is CO₂ a polar molecule?",
+    choices: [
+      { text: "No — it is linear and symmetric, so the two bond dipoles point in exactly opposite directions and cancel to zero. Molecular polarity is the VECTOR SUM of the bond dipoles, which means geometry decides it. Water has bonds of similar polarity but is BENT, so its dipoles do not cancel and it is strongly polar — same kind of bond, opposite result", isCorrect: true },
+      { text: "Yes — it has two very polar bonds, and a molecule with polar bonds is a polar molecule", isCorrect: false, misconceptionId: `${COVB}:MC1` },
+    ],
+    correctValue: "No — linear symmetry cancels the dipoles; compare bent water",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COVB}:MC1`],
+    source: `${COVB_SRC} — MC-1: molecular polarity read off bond polarity, skipping the vector sum that geometry decides`,
+  },
+  {
+    conceptId: COVB,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "In the ammonium ion NH₄⁺, one N–H bond forms from a lone pair on nitrogen and an empty orbital on H⁺. Is that still a covalent bond?",
+    choices: [
+      { text: "Yes — it is a COORDINATE (dative) covalent bond, and once formed it is indistinguishable from the other three. A covalent bond is defined by a SHARED PAIR, not by where the pair came from. The one-electron-each picture is the common case, not the definition, which is why all four N–H bonds in NH₄⁺ have identical length and strength", isCorrect: true },
+      { text: "No — a covalent bond requires each atom to contribute one electron, so a pair from a single atom is a different kind of bond", isCorrect: false, misconceptionId: `${COVB}:MC3` },
+    ],
+    correctValue: "Yes — coordinate covalent; sharing defines it, not the origin of the pair",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COVB}:MC3`],
+    source: `${COVB_SRC} — MC-3: covalent bonding assumed to require one electron from each atom, excluding dative bonds`,
   },
 ]
 
@@ -6796,6 +6841,36 @@ const METB_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${METB}:MC1`],
     source: `${METB_SRC} — misconception: attributing metallic conductivity to proximity rather than delocalization`,
+  },
+  {
+    conceptId: METB,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Molten NaCl conducts and solid NaCl does not. Does molten copper likewise lose or gain conductivity compared with solid copper?",
+    choices: [
+      { text: "It stays a conductor — molten metals conduct well. The carriers in a metal are DELOCALISED ELECTRONS, and melting disrupts the positions of the cations without localising those electrons. Conductivity does fall somewhat, because the disordered liquid scatters electrons more, but the mechanism is unchanged. Ionic conduction is the opposite case: it REQUIRES melting, because there the carriers are the ions themselves", isCorrect: true },
+      { text: "It stops conducting once molten — an ordered lattice is needed for electrons to move through the metal", isCorrect: false, misconceptionId: `${METB}:MC2` },
+    ],
+    correctValue: "Still conducts; electrons are the carriers and melting does not localise them",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${METB}:MC2`],
+    source: `${METB_SRC} — MC-2: metals assumed to lose conductivity when melted, from transferring the ionic case onto them`,
+  },
+  {
+    conceptId: METB,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Sodium has 1 valence electron and melts at 98 °C; magnesium has 2 and melts at 650 °C; lead has 4 and melts at 327 °C. Does more valence electrons always mean a stronger metallic bond?",
+    choices: [
+      { text: "No — the trend holds from Na to Mg and then breaks. Metallic bond strength depends on the CHARGE DENSITY of the cation, so it rises with charge but falls as the ion gets bigger. Lead has four valence electrons and a very large Pb²⁺ core, so its charge density is low and it melts far below magnesium. Electron count is one factor among several, not a rule", isCorrect: true },
+      { text: "Yes — each extra valence electron adds to the electron sea, so the bond strengthens monotonically down the list", isCorrect: false, misconceptionId: `${METB}:MC3` },
+    ],
+    correctValue: "No — charge density decides; lead has 4 valence electrons and melts below magnesium",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${METB}:MC3`],
+    source: `${METB_SRC} — MC-3: valence electron count treated as the sole determinant of metallic bond strength`,
   },
 ]
 
@@ -7425,11 +7500,11 @@ const VSEPR_PROBES: SeedProbe[] = [
     stem: 'Ammonia (NH₃) has 3 bonding pairs and 1 lone pair around nitrogen. What is its MOLECULAR geometry (not electron geometry)?',
     choices: [
       { text: 'Trigonal pyramidal — the electron geometry is tetrahedral (4 domains), but the molecular shape only describes the 3 visible N-H bonds, not the invisible lone pair', isCorrect: true },
-      { text: 'Tetrahedral — molecular geometry always matches electron geometry exactly', isCorrect: false, misconceptionId: `${VSEPR}:MC1` },
+      { text: 'Tetrahedral — molecular geometry always matches electron geometry exactly', isCorrect: false, misconceptionId: `${VSEPR}:MC2` },
     ],
     correctValue: 'Trigonal pyramidal',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${VSEPR}:MC1`],
+    targetedMisconceptions: [`${VSEPR}:MC2`],
     source: `${VSEPR_SRC} — distractor targets conflating electron geometry with molecular geometry`,
   },
   {
@@ -7440,12 +7515,27 @@ const VSEPR_PROBES: SeedProbe[] = [
     stem: 'CO₂ has the structure O=C=O with two double bonds around carbon. How many electron domains does carbon have for VSEPR purposes?',
     choices: [
       { text: '2 domains — each double bond counts as ONE electron domain regardless of bond order, giving carbon 2 total domains and linear geometry', isCorrect: true },
-      { text: '4 domains — each double bond counts as 2 domains since it contains 2 bonding pairs', isCorrect: false, misconceptionId: `${VSEPR}:MC2` },
+      { text: '4 domains — each double bond counts as 2 domains since it contains 2 bonding pairs', isCorrect: false, misconceptionId: `${VSEPR}:MC1` },
     ],
     correctValue: '2 domains (linear geometry)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${VSEPR}:MC2`],
+    targetedMisconceptions: [`${VSEPR}:MC1`],
     source: `${VSEPR_SRC} — misconception: multiple bonds count as multiple separate electron domains`,
+  },
+  {
+    conceptId: VSEPR,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "SF₄ has 4 bonding pairs and 1 lone pair — five domains, trigonal bipyramidal electron geometry. Where does the lone pair sit, and is that always the answer?",
+    choices: [
+      { text: "EQUATORIAL here, giving the see-saw shape — but the reason is repulsion, not a rule. An equatorial site has only two neighbours at 90°, while an axial site has three, so the bulky lone pair costs less energy equatorially. In an OCTAHEDRAL geometry every position is equivalent, so a single lone pair has no preference at all, and with two (as in XeF₄) they go opposite each other, which is axial by convention", isCorrect: true },
+      { text: "Equatorial always — lone pairs occupy equatorial positions in every geometry, as a fixed rule", isCorrect: false, misconceptionId: `${VSEPR}:MC3` },
+    ],
+    correctValue: "Equatorial in trigonal bipyramidal, from 90° repulsion counts — not a universal rule",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VSEPR}:MC3`],
+    source: `${VSEPR_SRC} — MC-3: the equatorial preference memorised as universal rather than derived from the 90°-neighbour count`,
   },
 ]
 
@@ -7530,6 +7620,36 @@ const HYBRID_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${HYBRID}:MC2`],
     source: `${HYBRID_SRC} — misconception: double bond rigidity is generic "strength" rather than orbital alignment`,
   },
+  {
+    conceptId: HYBRID,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Oxygen in water has 2 bonding pairs and 2 lone pairs. What is its hybridization?",
+    choices: [
+      { text: "sp³ — count FOUR electron domains, because lone pairs are domains too. They occupy hybrid orbitals exactly as bonding pairs do; the only difference is that they hold no second atom, which is why the SHAPE is bent while the hybridization is tetrahedral. Ignoring them would give sp and a linear molecule, and water is measurably 104.5°", isCorrect: true },
+      { text: "sp — only the two bonds count as domains, since lone pairs are not bonded to anything", isCorrect: false, misconceptionId: `${HYBRID}:MC1` },
+    ],
+    correctValue: "sp³ — four domains, two of them lone pairs",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HYBRID}:MC1`],
+    source: `${HYBRID_SRC} — MC-1: lone pairs excluded from the electron-domain count, which changes the predicted hybridization`,
+  },
+  {
+    conceptId: HYBRID,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Does a carbon atom physically \"rearrange\" its s and p orbitals into sp³ orbitals as another atom approaches?",
+    choices: [
+      { text: "No — hybridization is a MATHEMATICAL construction, not a physical event with a before and after. It is a change of basis: we take linear combinations of the atomic-orbital solutions because the resulting set describes the bonded molecule more conveniently. Nothing happens in time, nothing costs energy, and the electron density it describes is simply the density the molecule already has", isCorrect: true },
+      { text: "Yes — the orbitals genuinely mix and reshape themselves as the atoms come together, which is why hybridization takes energy", isCorrect: false, misconceptionId: `${HYBRID}:MC2` },
+    ],
+    correctValue: "No — a change of mathematical basis, not a physical process",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HYBRID}:MC2`],
+    source: `${HYBRID_SRC} — MC-2: hybridization reified as a physical event rather than a chosen linear combination of orbitals`,
+  },
 ]
 
 // ─── chem.bond.resonance ─────────────────────────────────────────────────────
@@ -7609,12 +7729,27 @@ const RESON_PROBES: SeedProbe[] = [
     stem: 'A molecule has three possible resonance structures: one with no formal charges, and two with formal charges on less electronegative atoms. Do all three contribute equally to the true hybrid?',
     choices: [
       { text: 'No — the structure with no formal charges contributes MORE to the hybrid (is more stable/favorable) than the charge-separated structures; the hybrid is a weighted average, not an equal one', isCorrect: true },
-      { text: 'Yes — every valid resonance structure contributes exactly equally regardless of formal charges', isCorrect: false, misconceptionId: `${RESON}:MC2` },
+      { text: 'Yes — every valid resonance structure contributes exactly equally regardless of formal charges', isCorrect: false, misconceptionId: `${RESON}:MC3` },
     ],
     correctValue: 'No — weighted by stability, not equal contribution',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${RESON}:MC2`],
+    targetedMisconceptions: [`${RESON}:MC3`],
     source: `${RESON_SRC} — misconception: all resonance structures contribute equally to the hybrid`,
+  },
+  {
+    conceptId: RESON,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Someone draws a second \"resonance structure\" for HCN by moving the hydrogen from carbon to nitrogen. Is that a resonance structure?",
+    choices: [
+      { text: "No — it is a different compound (an isomer). Resonance structures may move only ELECTRONS; every nucleus must stay exactly where it was, and the connectivity must be identical. Moving an atom produces a tautomer or isomer, which is a real molecule in its own right with its own energy, not a contributor to a single hybrid", isCorrect: true },
+      { text: "Yes — as long as the resulting structure has a valid Lewis arrangement, moving an atom gives another resonance form", isCorrect: false, misconceptionId: `${RESON}:MC2` },
+    ],
+    correctValue: "No — resonance moves electrons only; moving a nucleus gives a different compound",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RESON}:MC2`],
+    source: `${RESON_SRC} — MC-2: atoms moved between resonance structures, which produces isomers rather than contributors`,
   },
 ]
 
@@ -7699,6 +7834,51 @@ const BPARAM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BPARAM}:MC2`],
     source: `${BPARAM_SRC} — misconception: individual bond polarity magnitude (not geometry) determines molecular polarity`,
   },
+  {
+    conceptId: BPARAM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A C–C single bond is about 350 kJ/mol. Is a C=C double bond about 700 kJ/mol?",
+    choices: [
+      { text: "No — about 610 kJ/mol, stronger but well short of double. The second bond is a π bond formed by SIDEWAYS overlap of p orbitals, which is less effective than the head-on σ overlap of the first, so it contributes less. The same pattern holds for C≡C at about 835 rather than 1050, and it is exactly why π bonds are the ones that react", isCorrect: true },
+      { text: "Yes — a double bond is two bonds, so it is twice as strong as a single bond", isCorrect: false, misconceptionId: `${BPARAM}:MC1` },
+    ],
+    correctValue: "No — about 610 kJ/mol; the π bond overlaps sideways and contributes less",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BPARAM}:MC1`],
+    source: `${BPARAM_SRC} — MC-1: bond strength assumed to scale linearly with bond order, ignoring weaker π overlap`,
+  },
+  {
+    conceptId: BPARAM,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "A table gives the O–H bond enthalpy as 463 kJ/mol. Is that the energy needed to break the first O–H bond in a water molecule?",
+    choices: [
+      { text: "No — it is an AVERAGE. Breaking the first O–H in H₂O costs 498 kJ/mol and the second, from the OH radical, costs 428; the tabulated 463 is their mean. Tabulated bond enthalpies are averaged over many molecules and both steps, which is precisely why a ΔH calculated from them disagrees by several kJ with one from ΔH°f values", isCorrect: true },
+      { text: "Yes — a bond enthalpy is a fixed property of the bond type, so every O–H bond costs exactly 463 kJ/mol to break", isCorrect: false, misconceptionId: `${BPARAM}:MC2` },
+    ],
+    correctValue: "No — an average; 498 for the first O–H and 428 for the second",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BPARAM}:MC2`],
+    source: `${BPARAM_SRC} — MC-2: bond enthalpy read as a fixed per-bond value rather than an average across molecules and steps`,
+  },
+  {
+    conceptId: BPARAM,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: a longer bond is stronger, because the extra distance gives the electrons more room to hold the atoms together.",
+    choices: [
+      { text: "False — longer bonds are WEAKER, and the relationship is one of the most reliable in bonding. C≡C is 120 pm and 835 kJ/mol; C=C is 134 pm and 610; C–C is 154 pm and 350. Shorter means the nuclei sit deeper in the shared electron density, so more energy is needed to pull them apart. Down a group the bonds lengthen and weaken for the same reason: H–F 92 pm and 568, H–I 161 pm and 298", isCorrect: true },
+      { text: "True — a longer bond spans more distance, so there is more bonding interaction holding the atoms together", isCorrect: false, misconceptionId: `${BPARAM}:MC3` },
+    ],
+    correctValue: "False — longer is weaker; C≡C 120 pm/835 vs C–C 154 pm/350",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BPARAM}:MC3`],
+    source: `${BPARAM_SRC} — MC-3: bond length assumed to correlate positively with strength, inverting the real relationship`,
+  },
 ]
 
 // ─── chem.bond.coordinate-bond ───────────────────────────────────────────────
@@ -7782,6 +7962,36 @@ const COORDB_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${COORDB}:MC2`],
     source: `${COORDB_SRC} — misconception: coordinate bonding has narrow/limited significance`,
+  },
+  {
+    conceptId: COORDB,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "In the reaction BF₃ + NH₃ → F₃B–NH₃, which species is the Lewis ACID?",
+    choices: [
+      { text: "BF₃ — the electron-pair ACCEPTOR. A Lewis acid accepts a pair, exactly as a Brønsted acid accepts an electron pair when it releases H⁺; boron has an empty p orbital and only six electrons, which is what makes it hungry for one. NH₃, with its lone pair to give, is the Lewis BASE. Acids take, bases give, in both definitions", isCorrect: true },
+      { text: "BF₃ — because it DONATES its electron density to nitrogen, and donating is what an acid does", isCorrect: false, misconceptionId: `${COORDB}:MC2` },
+    ],
+    correctValue: "BF₃, as the electron-pair ACCEPTOR (NH₃ is the donor and the base)",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COORDB}:MC2`],
+    source: `${COORDB_SRC} — MC-2: Lewis acids defined as electron donors, inverting the accept/donate convention`,
+  },
+  {
+    conceptId: COORDB,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Water has two lone pairs and hydrogen-bonds to a neighbouring water molecule. Has a coordinate bond formed?",
+    choices: [
+      { text: "No — a hydrogen bond is an ELECTROSTATIC attraction of about 20 kJ/mol, not a shared pair. A coordinate bond requires the lone pair to be genuinely DONATED into an empty orbital, forming a real covalent bond of a few hundred kJ/mol, as when water coordinates to Cu²⁺. A lone pair being involved is a necessary condition, not a sufficient one", isCorrect: true },
+      { text: "Yes — a lone pair is involved and it is attracted to another atom, which is what a coordinate bond is", isCorrect: false, misconceptionId: `${COORDB}:MC3` },
+    ],
+    correctValue: "No — hydrogen bonding is electrostatic; a coordinate bond needs donation into an empty orbital",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COORDB}:MC3`],
+    source: `${COORDB_SRC} — MC-3: any interaction involving a lone pair assumed to be a coordinate bond`,
   },
 ]
 
@@ -10018,11 +10228,11 @@ const MOTHY_PROBES: SeedProbe[] = [
     stem: 'A simple Lewis structure for O₂ draws all electrons as paired, predicting O₂ should NOT be attracted to a magnetic field. But O₂ IS experimentally paramagnetic (weakly magnetic). How does MO theory resolve this discrepancy?',
     choices: [
       { text: 'MO theory correctly places two electrons unpaired in O₂\'s π* antibonding orbitals, explaining the observed paramagnetism — something the simpler Lewis structure model fails to predict', isCorrect: true },
-      { text: 'This is an experimental error — O₂ cannot actually be paramagnetic if its Lewis structure shows all paired electrons', isCorrect: false, misconceptionId: `${MOTHY}:MC1` },
+      { text: 'This is an experimental error — O₂ cannot actually be paramagnetic if its Lewis structure shows all paired electrons', isCorrect: false, misconceptionId: `${MOTHY}:MC2` },
     ],
     correctValue: 'MO theory correctly predicts unpaired electrons (paramagnetism)',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${MOTHY}:MC1`],
+    targetedMisconceptions: [`${MOTHY}:MC2`],
     source: `${MOTHY_SRC} — distractor targets dismissing experimental data that contradicts the simpler model`,
   },
   {
@@ -10033,12 +10243,27 @@ const MOTHY_PROBES: SeedProbe[] = [
     stem: 'MO theory calculates a bond order of 0 for He₂ (two helium atoms). Does this mean He₂ forms a very weak, barely-detectable bond?',
     choices: [
       { text: 'No — bond order 0 means the bonding and antibonding contributions exactly cancel, providing zero net stabilization; He₂ does not exist as a stable molecule under normal conditions, not merely "weakly"', isCorrect: true },
-      { text: 'Yes — bond order 0 simply indicates an unusually weak bond that still technically forms', isCorrect: false, misconceptionId: `${MOTHY}:MC2` },
+      { text: 'Yes — bond order 0 simply indicates an unusually weak bond that still technically forms', isCorrect: false, misconceptionId: `${MOTHY}:MC1` },
     ],
     correctValue: 'No — bond order 0 means no stable molecule forms',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${MOTHY}:MC2`],
+    targetedMisconceptions: [`${MOTHY}:MC1`],
     source: `${MOTHY_SRC} — misconception: bond order 0 indicates a weak bond rather than no stable bond at all`,
+  },
+  {
+    conceptId: MOTHY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "N₂ has bond order 3 and NO⁺ also has bond order 3. Does equal bond order mean equal bond length and equal stability?",
+    choices: [
+      { text: "Not quite — bond order predicts the TREND within a series, not identity across different molecules. N₂ and NO⁺ are isoelectronic with very similar bond lengths (110 and 106 pm), but NO⁺ is far more reactive because it carries a charge. Bond order is one input to stability alongside charge, electronegativity difference and what else is available to react with", isCorrect: true },
+      { text: "Yes — bond order fixes bond length and overall stability, so equal bond order means the molecules behave the same", isCorrect: false, misconceptionId: `${MOTHY}:MC3` },
+    ],
+    correctValue: "Similar lengths, very different reactivity; bond order is one factor among several",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MOTHY}:MC3`],
+    source: `${MOTHY_SRC} — MC-3: bond order treated as fixing both length and overall stability rather than as one contributing factor`,
   },
 ]
 
@@ -10104,11 +10329,11 @@ const POLARM_PROBES: SeedProbe[] = [
     stem: 'SF₆ has six polar S-F bonds (fluorine is very electronegative), while HCl has just one polar bond. Which molecule is actually polar overall?',
     choices: [
       { text: 'HCl — despite having far fewer polar bonds than SF₆, HCl\'s single bond dipole has nothing to cancel with, while SF₆\'s highly symmetric octahedral geometry causes all six dipoles to cancel exactly, making SF₆ nonpolar overall', isCorrect: true },
-      { text: 'SF₆ — since it has more polar bonds (six vs. one), it must be the more polar molecule overall', isCorrect: false, misconceptionId: `${POLARM}:MC1` },
+      { text: 'SF₆ — since it has more polar bonds (six vs. one), it must be the more polar molecule overall', isCorrect: false, misconceptionId: `${POLARM}:MC3` },
     ],
     correctValue: 'HCl is polar; SF₆ is nonpolar despite having more polar bonds',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${POLARM}:MC1`],
+    targetedMisconceptions: [`${POLARM}:MC3`],
     source: `${POLARM_SRC} — distractor targets counting polar bonds instead of considering geometric cancellation`,
   },
   {
@@ -10125,6 +10350,36 @@ const POLARM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${POLARM}:MC2`],
     source: `${POLARM_SRC} — misconception: nonpolar molecules have zero intermolecular force`,
+  },
+  {
+    conceptId: POLARM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "BF₃ and NF₃ both have three polar bonds to fluorine. One is polar and one is not. Which, and why?",
+    choices: [
+      { text: "NF₃ is polar; BF₃ is NOT. BF₃ is trigonal PLANAR with no lone pair on boron, so its three bond dipoles are symmetrically arranged at 120° and sum to zero. NF₃ is trigonal PYRAMIDAL because nitrogen carries a lone pair, so the dipoles do not cancel. Identical bond polarity, identical bond count, opposite result — geometry is what decides", isCorrect: true },
+      { text: "Both are polar — each has three strongly polar B–F or N–F bonds, and polar bonds make a polar molecule", isCorrect: false, misconceptionId: `${POLARM}:MC1` },
+    ],
+    correctValue: "NF₃ polar (pyramidal), BF₃ non-polar (trigonal planar)",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLARM}:MC1`],
+    source: `${POLARM_SRC} — MC-1: polar bonds taken to imply a polar molecule, with the BF₃/NF₃ pair isolating geometry as the only difference`,
+  },
+  {
+    conceptId: POLARM,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "NH₃ has a dipole moment of 1.47 D and NF₃ only 0.24 D, even though N–F bonds are more polar than N–H bonds. How can that be?",
+    choices: [
+      { text: "Because the LONE PAIR has its own dipole contribution, and it points in opposite senses in the two molecules. In NH₃ the bond dipoles point toward nitrogen, the same way as the lone pair, so the two ADD. In NF₃ the bond dipoles point away toward fluorine, OPPOSING the lone pair, so they largely cancel. Counting only the bonds gets the ordering exactly backwards", isCorrect: true },
+      { text: "The lone pair plays no part — only bonds carry dipoles, so NF₃ with its more polar bonds must have the larger moment", isCorrect: false, misconceptionId: `${POLARM}:MC2` },
+    ],
+    correctValue: "The lone pair adds in NH₃ and opposes in NF₃, which reverses the ordering",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLARM}:MC2`],
+    source: `${POLARM_SRC} — MC-2: the lone pair omitted from the molecular dipole, which inverts the NH₃/NF₃ comparison`,
   },
 ]
 
@@ -11298,6 +11553,51 @@ const IMF_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${IMF}:MC2`],
     source: `${IMF_SRC} — misconception: mere presence of H and F anywhere in the molecule implies hydrogen bonding`,
+  },
+  {
+    conceptId: IMF,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A hydrogen bond in water is about 20 kJ/mol; the O–H covalent bond is about 460 kJ/mol. Is a hydrogen bond just a weaker covalent bond?",
+    choices: [
+      { text: "No — it is a different KIND of interaction, roughly twenty times weaker and not a shared pair at all. A hydrogen bond is an electrostatic attraction between a δ+ hydrogen on N, O or F and a lone pair on a neighbouring molecule. That is why boiling water breaks hydrogen bonds and leaves every H₂O molecule intact: the covalent bonds are untouched", isCorrect: true },
+      { text: "Yes — it is the same kind of bond, just a weak one, so it sits at the bottom of the same scale", isCorrect: false, misconceptionId: `${IMF}:MC1` },
+    ],
+    correctValue: "No — an electrostatic attraction between molecules, not a shared pair; ~20 vs ~460 kJ/mol",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IMF}:MC1`],
+    source: `${IMF_SRC} — MC-1: hydrogen bonding treated as a weak covalent bond rather than as a distinct intermolecular force`,
+  },
+  {
+    conceptId: IMF,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Hexane is a non-polar hydrocarbon with no dipole and no hydrogen bonding. Does it therefore have no intermolecular forces?",
+    choices: [
+      { text: "No — it has LONDON DISPERSION forces, and they are strong enough to make hexane a liquid boiling at 69 °C. Every molecule has them: electrons move, so an instantaneous dipole forms and induces one in a neighbour. Bigger, more polarisable molecules have stronger dispersion, which is why hexane boils higher than butane and why candle wax is a solid at room temperature", isCorrect: true },
+      { text: "Correct — with no dipole and no hydrogen bonding there is nothing left, so hydrocarbons have no intermolecular forces", isCorrect: false, misconceptionId: `${IMF}:MC2` },
+    ],
+    correctValue: "No — London dispersion, which is why hexane is a liquid at all",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IMF}:MC2`],
+    source: `${IMF_SRC} — MC-2: hydrocarbons assumed to have no intermolecular forces, missing London dispersion`,
+  },
+  {
+    conceptId: IMF,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: ice sinks in water, because a solid is always denser than its liquid.",
+    choices: [
+      { text: "False — ice FLOATS, and water is the famous exception. Hydrogen bonding forces each molecule into a tetrahedral arrangement on freezing, and that open cage holds the molecules FURTHER apart than in the liquid, so ice is about 9% less dense. Nearly every other substance does contract on freezing; water does not, and lakes freezing from the top down is the consequence", isCorrect: true },
+      { text: "True — solids are denser than their liquids because their particles are packed more closely, so ice sinks", isCorrect: false, misconceptionId: `${IMF}:MC3` },
+    ],
+    correctValue: "False — ice floats; hydrogen bonding gives an open, less dense structure",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IMF}:MC3`],
+    source: `${IMF_SRC} — MC-3: the general solid-denser rule applied to water, whose hydrogen-bonded ice is the standard exception`,
   },
 ]
 

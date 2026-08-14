@@ -330,7 +330,10 @@ describe('the non-physics authored corpora convert too', () => {
     //                   probe whose distractor belonged to a DIFFERENT concept)
     //            ->  22 (chem.equil x11 — a SECOND cross-concept distractor,
     //                   and the domain's own catalyst probe living in kc-kp)
-    ['chemistry', CHEMISTRY_PROBES, 22],
+    //            ->  12 (chem.bond x11 — TWO crossed pairs in one domain, and
+    //                   chem.bond.bond-parameters, whose ENTIRE probe pair
+    //                   belonged to a neighbouring concept)
+    ['chemistry', CHEMISTRY_PROBES, 12],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

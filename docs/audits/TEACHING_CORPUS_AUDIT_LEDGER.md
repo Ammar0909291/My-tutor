@@ -6750,3 +6750,112 @@ production-verified.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# chem.bond — two crossed pairs, and a concept whose whole probe pair was a neighbour's
+
+Eleven concepts, twenty-two pre-existing probes. Seven retag operations,
+twenty probes authored, two hollow concepts, and the clearest instance yet of
+misconceptions being probed in the wrong place.
+
+## Crossed pairs three and four, in one domain
+
+`chem.bond.vsepr` — the NH₃ probe tests "molecular geometry IS electron
+geometry" (MC-2) and carried MC-1; the CO₂ probe tests "double bonds count as
+two domains" (MC-1) and carried MC-2.
+
+`chem.bond.mo-theory` — the O₂-paramagnetism probe IS MC-2 ("O₂ should be
+diamagnetic") and carried MC-1; the He₂ bond-order-zero probe IS MC-1
+("antibonding cancels bonding, so filling both has no net effect") and carried
+MC-2.
+
+Four crossed pairs in 141 audited chemistry concepts — roughly one in 35, and
+two of them in this domain alone.
+
+## The three-way displacement
+
+`chem.bond.bond-parameters` is the strongest cross-concept case found.
+
+Its blueprint documents bond STRENGTH and LENGTH: double-is-twice-as-strong,
+enthalpy-is-a-fixed-value, longer-is-stronger. **Both of its probes ask about
+molecular POLARITY** — is CCl₄ polar, and why water differs from CO₂ — which
+is `chem.bond.polar-molecules` MC-1 word for word.
+
+Meanwhile `bond-parameters`' OWN MC-1 was being probed inside
+`chem.bond.covalent-bonding`, whose C=C-is-twice-as-strong probe states it
+exactly.
+
+So three concepts were each holding a neighbour's material: bond-parameters
+held polar-molecules', covalent-bonding held bond-parameters', and each
+concept's own documented misconceptions went unprobed. Every count reads
+healthy at every step of that chain.
+
+All three of bond-parameters' misconceptions are now authored. Its two
+polarity probes are LEFT IN PLACE and recorded — they are sound gradeable
+questions filed under the wrong concept, and deleting a valid probe is not
+this campaign's call.
+
+Hollow total: 23 (`chem.bond.intermolecular` and `chem.bond.bond-parameters`).
+
+## Three further retags
+
+`covalent-bonding` P1 (water's low boiling point) is MC-2 — intermolecular
+strength confused with intramolecular — not MC-1 (polarity) ·
+`polar-molecules` P1's distractor is "since it has more polar bonds (six vs.
+one), it must be the more polar molecule", which is MC-3 word for word ·
+`resonance` P2 is about which structure DOMINATES, which is MC-3, not MC-2
+(moving atoms between structures).
+
+## Twenty probes authored
+
+`ionic-bonding` MC-2 (melting breaks the LATTICE, not one Na–Cl bond) ·
+`covalent-bonding` MC-1 (CO₂'s dipoles cancel; bent water's do not) and MC-3
+(a dative bond is still covalent — sharing defines it, not the pair's origin) ·
+`metallic-bonding` MC-2 (**molten copper still conducts** — electrons are the
+carriers) and MC-3 (lead has four valence electrons and melts below magnesium;
+charge density decides) · `vsepr` MC-3 (equatorial in trigonal bipyramidal
+follows from the 90°-neighbour count, and octahedral has no preference at all) ·
+`polar-molecules` MC-1 (**BF₃ non-polar, NF₃ polar** — same bonds, same count,
+opposite geometry) and MC-2 (NH₃ 1.47 D against NF₃ 0.24 D, because the lone
+pair adds in one and opposes in the other) · `intermolecular` MC-1 (~20 against
+~460 kJ/mol; boiling water leaves every molecule intact), MC-2 (hexane boils at
+69 °C on dispersion forces alone) and MC-3 (**ice floats**) · `hybridization`
+MC-1 (lone pairs ARE domains — water is sp³, not sp) and MC-2 (hybridization is
+a change of mathematical basis, not an event in time) · `mo-theory` MC-3 (N₂
+and NO⁺ share bond order 3 with very different reactivity) · `resonance` MC-2
+(moving a nucleus gives an isomer, not a contributor) · `coordinate-bond` MC-2
+(a Lewis acid ACCEPTS — BF₃ is the acid) and MC-3 (a hydrogen bond involves a
+lone pair and is not a coordinate bond) · `bond-parameters` MC-1 (C=C is
+610 kJ/mol, not 700 — π overlap is sideways), MC-2 (463 is an AVERAGE; the
+first O–H costs 498 and the second 428) and MC-3 (**longer is weaker**: C≡C
+120 pm/835 against C–C 154 pm/350).
+
+All twenty open a free `(conceptId, probeKind, gradeBand)` slot. 0 discarded,
+0 non-physics identities changed.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 141 of 186 | 136 | 74 | 4 | 63 | 23 | 11 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 12 |
+| blueprint MCs with no probe | 56 | 17 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+74 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and the 157 probes authored across the last nine assessment
+batches have never been seeded. Nothing here is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
