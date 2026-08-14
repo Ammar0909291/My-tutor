@@ -4945,6 +4945,21 @@ const PERPROP_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PERPROP}:MC3`],
     source: `${PERPROP_SRC} — MC3, distractor-mapped`,
   },
+  {
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: "Lithium and potassium are both group 1 alkali metals. Does the periodic law mean their properties are identical?",
+    choices: [
+      { text: "No — periodicity means properties RECUR in a pattern, not that they repeat exactly. Both are soft, reactive metals forming M⁺ ions, so the family resemblance is real. But potassium is far more reactive (it ignites in water where lithium merely fizzes), melts lower, and has a much larger atomic radius, because each period down adds a shell and increases shielding. The trend is a gradient within the recurrence, and it is why the group has a reactivity ORDER at all", isCorrect: true },
+      { text: "Yes — the periodic law states that properties repeat at regular intervals, so elements in the same group have the same properties", isCorrect: false, misconceptionId: `${PERPROP}:MC4` },
+    ],
+    correctValue: "No — properties recur as a family resemblance with a gradient down the group",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERPROP}:MC4`],
+    source: `${PERPROP_SRC} — MC-4: periodicity read as exact repetition, which erases the trends within a group`,
+  },
 ]
 
 // ─── chem.equil.concept ──────────────────────────────────────────────────────
@@ -6976,6 +6991,21 @@ const REDOX_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${REDOX}:MC3`],
     source: `${REDOX_SRC} — MC3, distractor-mapped`,
   },
+  {
+    conceptId: REDOX,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "What is the oxidation state of hydrogen in sodium hydride, NaH?",
+    choices: [
+      { text: "−1. Hydrogen is +1 only when bonded to something MORE electronegative than itself, which covers almost every common compound. Sodium is a metal and far LESS electronegative, so in the hydride the electron pair is assigned to hydrogen and it takes −1. Sodium is +1, the compound is neutral, and the arithmetic only works with H at −1. The same holds for CaH₂ and LiAlH₄, which is exactly why those reagents deliver hydride", isCorrect: true },
+      { text: "+1 — hydrogen always has an oxidation state of +1 in its compounds", isCorrect: false, misconceptionId: `${REDOX}:MC4` },
+    ],
+    correctValue: "−1; hydrogen is +1 only against a MORE electronegative partner",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REDOX}:MC4`],
+    source: `${REDOX_SRC} — MC-4: hydrogen assumed always +1, which fails for metal hydrides and misassigns every hydride reagent`,
+  },
 ]
 
 // ─── chem.equil.weak-acid ────────────────────────────────────────────────────
@@ -8080,7 +8110,7 @@ const COMPLEQ_PROBES: SeedProbe[] = [
     conceptId: COMPLEQ,
     subjectSlug: 'chemistry',
     probeKind: 'checkpoint',
-    gradeBand: GradeBand.HIGH,
+    gradeBand: GradeBand.UNDERGRADUATE,
     stem: "AgCl dissolution has Ksp = 1.8 × 10⁻¹⁰ and [Ag(NH₃)₂]⁺ formation has Kf = 1.7 × 10⁷. What is K for the overall dissolution of AgCl in ammonia?",
     choices: [
       { text: "3.1 × 10⁻³, from Ksp × Kf. When two equilibria ADD to give an overall reaction, their constants MULTIPLY — because K is built from a ratio of concentration terms, and summing reactions concatenates those ratios. Adding the constants here would give 1.7 × 10⁷, wrong by ten orders of magnitude, and would predict that AgCl dissolves freely in ammonia", isCorrect: true },
@@ -8095,7 +8125,7 @@ const COMPLEQ_PROBES: SeedProbe[] = [
     conceptId: COMPLEQ,
     subjectSlug: 'chemistry',
     probeKind: 'step_check',
-    gradeBand: GradeBand.HIGH,
+    gradeBand: GradeBand.UNDERGRADUATE,
     stem: "A complex has Kf = 10²⁰. What is K for the DISSOCIATION of that complex?",
     choices: [
       { text: "10⁻²⁰ — the RECIPROCAL. Reversing a reaction inverts its constant, because products and reactants swap places in the ratio. It never becomes negative: an equilibrium constant is a ratio of concentrations, and concentrations cannot be negative, so K > 0 for every reaction in either direction. In log form the sign does flip — log K goes from +20 to −20 — which is probably where the idea comes from", isCorrect: true },
@@ -8633,7 +8663,19 @@ const IUPAC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'While naming a molecule, you identify a chloro substituent at position 3 before noticing a methyl substituent at position 2. In the final IUPAC name, which comes first: "3-chloro-2-methyl..." or "2-methyl-3-chloro..."?',
     choices: [
-      { text: '2-methyl-3-chloro... — substituents are always listed ALPHABETICALLY in the name (chloro before methyl alphabetically? No — "chloro" < "methyl" alphabetically, so actually 3-chloro-2-methyl is correct)', isCorrect: false },
+      // REPAIRED, twice over. The distractor previously carried the author's
+      // own working out inside a learner-facing option — "(chloro before
+      // methyl alphabetically? No — "chloro" < "methyl" alphabetically, so
+      // actually 3-chloro-2-methyl is correct)" — which states the correct
+      // answer inside the wrong choice.
+      //
+      // Replacing it exposed a second, deeper flaw: the stem has the learner
+      // notice chloro FIRST, so the discovery-order belief the probe claims to
+      // test produces the CORRECT name by coincidence, and cannot be detected
+      // at all. The distractor now carries the LOCANT-order belief instead —
+      // "position 2 before position 3" — which is the one that actually
+      // yields the wrong name here, and is therefore diagnostic.
+      { text: '2-methyl-3-chloro... — substituents are listed in ascending locant order, so the one at position 2 is named before the one at position 3', isCorrect: false },
       { text: 'Substituents are always ordered alphabetically by name, not by the order they were identified or their locant number — "chloro" comes before "methyl" alphabetically, so it is 3-chloro-2-methyl... regardless of discovery order', isCorrect: true },
     ],
     correctValue: 'Alphabetical ordering (chloro before methyl), independent of discovery order',
@@ -8658,12 +8700,27 @@ const IUPAC_PROBES: SeedProbe[] = [
     stem: 'PRACTICE: Which is the correct IUPAC name — "2-methylpentane" or "methylpentane-2"?',
     choices: [
       { text: '2-methylpentane — the locant goes immediately BEFORE the part of the name it modifies. The same rule gives pentan-3-one rather than pentanone-3', isCorrect: true },
-      { text: 'methylpentane-2 — locants are written after the substituent name they refer to', isCorrect: false, misconceptionId: `${'${IUPAC}'}:MC2` },
+      { text: 'methylpentane-2 — locants are written after the substituent name they refer to', isCorrect: false, misconceptionId: `${IUPAC}:MC2` },
     ],
     correctValue: '2-methylpentane',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${'${IUPAC}'}:MC2`],
-    source: `${'${IUPAC_SRC}'} — MC2, distractor-mapped`,
+    targetedMisconceptions: [`${IUPAC}:MC2`],
+    source: `${IUPAC_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    conceptId: IUPAC,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Propanone is a ketone. Is every IUPAC name ending in \"-one\" a ketone?",
+    choices: [
+      { text: "No — the suffix that marks a ketone is \"-one\" attached to the PARENT CHAIN, as in pentan-2-one. Plenty of names end in those letters without being ketones: methanone appears inside diphenylmethanone (which IS a ketone), but lactone, quinone and silicone are not built that way at all, and cyclohexanone is a ketone while cyclohexanol is not. Read the suffix as part of the systematic name, not as three letters at the end", isCorrect: true },
+      { text: "Yes — \"-one\" is the ketone suffix, so any name ending in those letters is a ketone", isCorrect: false, misconceptionId: `${IUPAC}:MC3` },
+    ],
+    correctValue: "No — \"-one\" must be the systematic suffix on the parent chain, not any word ending",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IUPAC}:MC3`],
+    source: `${IUPAC_SRC} — MC-3: "-one" read as a letter pattern at the end of a name rather than as a systematic suffix`,
   },
 ]
 
@@ -10254,7 +10311,7 @@ const MOTHY_PROBES: SeedProbe[] = [
     conceptId: MOTHY,
     subjectSlug: 'chemistry',
     probeKind: 'checkpoint',
-    gradeBand: GradeBand.HIGH,
+    gradeBand: GradeBand.UNDERGRADUATE,
     stem: "N₂ has bond order 3 and NO⁺ also has bond order 3. Does equal bond order mean equal bond length and equal stability?",
     choices: [
       { text: "Not quite — bond order predicts the TREND within a series, not identity across different molecules. N₂ and NO⁺ are isoelectronic with very similar bond lengths (110 and 106 pm), but NO⁺ is far more reactive because it carries a charge. Bond order is one input to stability alongside charge, electronegativity difference and what else is available to react with", isCorrect: true },
@@ -11050,6 +11107,51 @@ const ORGHYB_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ORGHYB}:MC2`],
     source: `${ORGHYB_SRC} — misconception: assuming molecule-wide uniform hybridization rather than per-carbon assessment`,
   },
+  {
+    conceptId: ORGHYB,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Nitrogen has a lone pair in both trimethylamine and pyridine. Are both nitrogens sp³?",
+    choices: [
+      { text: "No — trimethylamine's is sp³, pyridine's is sp². Count DOMAINS, not lone pairs: the amine nitrogen has three bonds plus a lone pair, four domains, sp³. Pyridine's nitrogen has two ring bonds, one lone pair and one p orbital contributing to the aromatic π system — three domains, sp². Having a lone pair says nothing about hybridization by itself; in pyrrole the nitrogen is sp² and the lone pair is IN the π system entirely", isCorrect: true },
+      { text: "Yes — nitrogen carries a lone pair, and a lone pair means a fourth domain, so nitrogen is always sp³ in organic molecules", isCorrect: false, misconceptionId: `${ORGHYB}:MC1` },
+    ],
+    correctValue: "No — trimethylamine sp³, pyridine sp²; count domains, not lone pairs",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGHYB}:MC1`],
+    source: `${ORGHYB_SRC} — MC-1: all organic nitrogens assumed sp³ because nitrogen has a lone pair`,
+  },
+  {
+    conceptId: ORGHYB,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "A carbonyl oxygen has two lone pairs and a double bond. Is that four electron domains, making it sp³?",
+    choices: [
+      { text: "No — it is THREE domains and sp². A double bond is ONE domain however many pairs it contains, so the count is one double bond plus two lone pairs. That matters: the C=O π bond needs an unhybridized p orbital on oxygen, which only sp² leaves free, and it is why the carbonyl group is planar with 120° angles rather than bent at 109.5°", isCorrect: true },
+      { text: "Yes — two lone pairs plus a double bond makes four domains around oxygen, so it is sp³", isCorrect: false, misconceptionId: `${ORGHYB}:MC2` },
+    ],
+    correctValue: "No — three domains, sp²; the double bond counts once and leaves a p orbital for π",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGHYB}:MC2`],
+    source: `${ORGHYB_SRC} — MC-2: the carbonyl double bond counted as two domains, giving sp³ and losing the p orbital the π bond needs`,
+  },
+  {
+    conceptId: ORGHYB,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: the central carbon of CO₂ has two double bonds, so it is sp² hybridized.",
+    choices: [
+      { text: "False — it is sp. Hybridization follows the number of DOMAINS, and two double bonds are two domains, which gives sp and a linear 180° molecule. Bond ORDER never enters the count. The same holds for the central carbon of allene (CH₂=C=CH₂), which is sp and forces the two CH₂ groups into perpendicular planes — a geometry that makes suitably substituted allenes chiral without having a single stereocentre", isCorrect: true },
+      { text: "True — two double bonds means the carbon is involved in multiple bonding, which makes it sp² like other doubly-bonded carbons", isCorrect: false, misconceptionId: `${ORGHYB}:MC3` },
+    ],
+    correctValue: "False — two domains means sp and linear; bond order does not affect the count",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGHYB}:MC3`],
+    source: `${ORGHYB_SRC} — MC-3: a carbon with two double bonds assumed sp² from the presence of double bonds rather than from the domain count`,
+  },
 ]
 
 // ─── chem.hyd.alkanes ─────────────────────────────────────────────────────────
@@ -11281,6 +11383,51 @@ const ISOM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ISOM}:MC2`],
     source: `${ISOM_SRC} — misconception: conflating cis-trans and optical isomerism as the same phenomenon`,
   },
+  {
+    conceptId: ISOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "(R)-glyceraldehyde is dextrorotatory (+). Does the R label mean it rotates plane-polarised light clockwise?",
+    choices: [
+      { text: "No — the two are independent labels. R/S comes from the CAHN–INGOLD–PRELOG priority rules, a bookkeeping procedure applied to the drawn structure. (+)/(−) is a MEASURED physical property, determined in a polarimeter and impossible to predict from the structure by inspection. (S)-glyceraldehyde's close relative (S)-lactic acid is also (+), and many R compounds are (−). The coincidence in this one molecule is exactly that", isCorrect: true },
+      { text: "Yes — R means the priorities go clockwise, so the molecule rotates light clockwise; S rotates it anticlockwise", isCorrect: false, misconceptionId: `${ISOM}:MC1` },
+    ],
+    correctValue: "No — R/S is a naming rule; (+)/(−) is measured and cannot be predicted from it",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISOM}:MC1`],
+    source: `${ISOM_SRC} — MC-1: R/S read as predicting the direction of optical rotation, conflating a naming convention with a measurement`,
+  },
+  {
+    conceptId: ISOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "meso-tartaric acid has two stereocentres and is optically inactive. Is that because one stereocentre's rotation cancels the other's?",
+    choices: [
+      { text: "The cancellation is real but INTERNAL, and it is a symmetry statement, not an arithmetic one. The molecule has an internal mirror plane, so one half is the mirror image of the other and the molecule is superimposable on its own mirror image — it is ACHIRAL, and an achiral molecule cannot rotate light at all. A racemic MIXTURE is inactive by averaging two different molecules; a meso compound is a single achiral substance and stays inactive however carefully you purify it", isCorrect: true },
+      { text: "Yes — the two stereocentres rotate light by equal and opposite amounts, and the two rotations add to zero", isCorrect: false, misconceptionId: `${ISOM}:MC2` },
+    ],
+    correctValue: "An internal mirror plane makes the molecule achiral; it is not two rotations summing to zero",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISOM}:MC2`],
+    source: `${ISOM_SRC} — MC-2: meso inactivity explained as arithmetic cancellation rather than as internal symmetry making the molecule achiral`,
+  },
+  {
+    conceptId: ISOM,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: staggered and eclipsed ethane are stereoisomers, because they are different three-dimensional arrangements of the same atoms.",
+    choices: [
+      { text: "False — they are CONFORMERS, and conformers are not isomers at all. Isomers must be separable compounds; staggered and eclipsed ethane interconvert by free rotation about the C–C single bond, over a barrier of only about 12 kJ/mol, so at room temperature a molecule passes through both around 10¹¹ times a second. Nothing can be bottled. cis/trans isomers ARE stereoisomers precisely because a double bond blocks that rotation", isCorrect: true },
+      { text: "True — they have different 3D arrangements of the same connected atoms, which is the definition of a stereoisomer", isCorrect: false, misconceptionId: `${ISOM}:MC3` },
+    ],
+    correctValue: "False — conformers interconvert freely; stereoisomers must be separable",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ISOM}:MC3`],
+    source: `${ISOM_SRC} — MC-3: conformers counted as stereoisomers, dropping the separability that defines an isomer`,
+  },
 ]
 
 // ─── chem.org.electronic-effects ─────────────────────────────────────────────
@@ -11351,11 +11498,11 @@ const ELECEFF_PROBES: SeedProbe[] = [
     stem: 'Chlorine attached to a benzene ring shows a −I (inductive, electron-withdrawing) effect but a +M (mesomeric, electron-donating) effect. Can the same substituent have effects pointing in opposite directions?',
     choices: [
       { text: 'Yes — chlorine is electronegative (withdraws density inductively through σ bonds) but also has lone pairs that can donate into the π system via resonance (+M); these are genuinely different mechanisms that can conflict for the same atom', isCorrect: true },
-      { text: 'No — a single substituent must have inductive and mesomeric effects that always point in the same, consistent direction', isCorrect: false, misconceptionId: `${ELECEFF}:MC1` },
+      { text: 'No — a single substituent must have inductive and mesomeric effects that always point in the same, consistent direction', isCorrect: false, misconceptionId: `${ELECEFF}:MC2` },
     ],
     correctValue: 'Yes — the two effects can genuinely conflict',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${ELECEFF}:MC1`],
+    targetedMisconceptions: [`${ELECEFF}:MC2`],
     source: `${ELECEFF_SRC} — distractor targets assuming inductive and mesomeric effects must always align`,
   },
   {
@@ -11372,6 +11519,36 @@ const ELECEFF_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ELECEFF}:MC2`],
     source: `${ELECEFF_SRC} — misconception: inductive effect has no distance dependence`,
+  },
+  {
+    conceptId: ELECEFF,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Trichloroacetic acid (pKa 0.7) is far stronger than acetic acid (pKa 4.76). Do the three chlorines make it stronger by adding electron density?",
+    choices: [
+      { text: "No — they WITHDRAW it, and that is exactly why. Acidity is decided by how stable the ANION left behind is: the chlorines pull electron density away along the σ bonds, spreading the carboxylate's negative charge over a wider region and stabilising it, so the proton leaves far more readily. An electron-DONATING group does the opposite, which is why trimethylacetic acid (pKa 5.03) is weaker than acetic acid", isCorrect: true },
+      { text: "Yes — the chlorines add electron density into the system, and more electron density available to release makes the acid stronger", isCorrect: false, misconceptionId: `${ELECEFF}:MC1` },
+    ],
+    correctValue: "No — they withdraw, which stabilises the conjugate base; that is what raises acidity",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ELECEFF}:MC1`],
+    source: `${ELECEFF_SRC} — MC-1: electron-withdrawing groups described as ADDING electrons, inverting the mechanism by which they raise acidity`,
+  },
+  {
+    conceptId: ELECEFF,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Aniline (pKb 9.4) is a far weaker base than methylamine (pKb 3.4). Is that the inductive effect of the benzene ring?",
+    choices: [
+      { text: "No — it is RESONANCE, and induction alone gets the size of the effect badly wrong. Aniline's nitrogen lone pair is DELOCALISED into the ring, so it is not fully available to accept a proton; protonating aniline costs that delocalisation energy. The tell is the magnitude: a million-fold difference is far more than any σ-inductive effect produces, and cyclohexylamine — a saturated ring, induction but no delocalisation — is a strong base like methylamine", isCorrect: true },
+      { text: "Yes — the benzene ring is electron-withdrawing by induction, which pulls density off the nitrogen and weakens the base", isCorrect: false, misconceptionId: `${ELECEFF}:MC3` },
+    ],
+    correctValue: "No — resonance delocalisation of the lone pair into the ring; compare cyclohexylamine",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ELECEFF}:MC3`],
+    source: `${ELECEFF_SRC} — MC-3: induction used to explain an effect of resonance, with the cyclohexylamine comparison isolating the two`,
   },
 ]
 
@@ -11461,6 +11638,21 @@ const AROM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${AROM}:MC2`],
     source: `${AROM_SRC} — misconception: superficial resemblance to benzene guarantees aromaticity`,
+  },
+  {
+    conceptId: AROM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "The cyclopentadienyl ANION (C₅H₅⁻) is strongly aromatic. Is the corresponding CATION (C₅H₅⁺) aromatic too?",
+    choices: [
+      { text: "No — it is ANTIAROMATIC and notably unstable. Count the π electrons, not the ring: the anion has 6, which is 4n+2 with n=1, so it is aromatic and unusually stable — which is why cyclopentadiene is remarkably acidic for a hydrocarbon. Removing a hydride instead leaves 4 π electrons, which is 4n, so the cation is destabilised. The ring is identical in both; the electron COUNT decides, and here the two ions land on opposite sides of Hückel's rule", isCorrect: true },
+      { text: "Yes — it comes from an aromatic ring system and carries a full positive charge in a conjugated ring, so it is aromatic", isCorrect: false, misconceptionId: `${AROM}:MC3` },
+    ],
+    correctValue: "No — 4 π electrons is 4n, so the cation is ANTIaromatic; the anion has 6 and is aromatic",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${AROM}:MC3`],
+    source: `${AROM_SRC} — MC-3: aromaticity inherited from the ring skeleton rather than recounted from the π electrons after the charge changes`,
   },
 ]
 
@@ -11688,6 +11880,51 @@ const ORGSPEC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ORGSPEC}:MC2`],
     source: `${ORGSPEC_SRC} — misconception: NMR peak height indicates chemical significance rather than hydrogen count`,
   },
+  {
+    conceptId: ORGSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "In a mass spectrum, is the base peak the molecular ion?",
+    choices: [
+      { text: "Not usually. The BASE peak is simply the most intense one, assigned 100% by convention; the MOLECULAR ion is the intact molecule minus one electron, and it appears at the mass you care about. They coincide only when the molecular ion happens to be the most stable fragment, as in benzene. For many molecules the molecular ion is weak or entirely absent — in branched alkanes it can vanish while a stable tertiary carbocation dominates the spectrum", isCorrect: true },
+      { text: "Yes — the tallest peak is the whole molecule, since the intact molecule is the most abundant species present", isCorrect: false, misconceptionId: `${ORGSPEC}:MC1` },
+    ],
+    correctValue: "No — base peak is the most intense; the molecular ion may be weak or absent",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGSPEC}:MC1`],
+    source: `${ORGSPEC_SRC} — MC-1: the base peak assumed to be the molecular ion, conflating intensity with identity`,
+  },
+  {
+    conceptId: ORGSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "A ¹H NMR signal appears as a triplet. How many neighbouring protons does that proton have?",
+    choices: [
+      { text: "TWO. The n+1 rule says n neighbours give n+1 lines, so a triplet means n = 2 — the multiplicity is one MORE than the neighbour count, not equal to it. The full pattern is a giveaway: a singlet means zero neighbours, a doublet one, a quartet three. In ethanol the CH₃ appears as a triplet because it sees the two CH₂ protons, and the CH₂ appears as a quartet because it sees the three CH₃ protons", isCorrect: true },
+      { text: "THREE — a triplet has three lines, so the proton has three neighbours", isCorrect: false, misconceptionId: `${ORGSPEC}:MC2` },
+    ],
+    correctValue: "Two — n+1 lines for n neighbours, so a triplet means n = 2",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGSPEC}:MC2`],
+    source: `${ORGSPEC_SRC} — MC-2: multiplicity read as the neighbour count rather than as n+1`,
+  },
+  {
+    conceptId: ORGSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: a broad O–H absorption around 3300 cm⁻¹ in an IR spectrum means the compound is an alcohol.",
+    choices: [
+      { text: "False — it means an O–H is present, which is not the same claim. A carboxylic acid gives an even broader O–H, spread from about 2500 to 3300 cm⁻¹, and it also shows a strong C=O near 1710 that an alcohol does not. Water contamination in the sample gives the same broad band and means nothing about the compound at all. IR identifies FUNCTIONAL GROUPS, and telling an alcohol from an acid means reading the carbonyl region too", isCorrect: true },
+      { text: "True — the broad O–H stretch is the alcohol signature, so its presence identifies the compound as an alcohol", isCorrect: false, misconceptionId: `${ORGSPEC}:MC3` },
+    ],
+    correctValue: "False — O–H is present; a carboxylic acid (or wet sample) gives it too. Check the C=O region",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGSPEC}:MC3`],
+    source: `${ORGSPEC_SRC} — MC-3: a broad O–H taken as identifying an alcohol, without excluding carboxylic acids or water`,
+  },
 ]
 
 // ─── chem.org.purification ───────────────────────────────────────────────────
@@ -11777,6 +12014,36 @@ const PURIF_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PURIF}:MC2`],
     source: `${PURIF_SRC} — misconception: simple distillation is universally adequate regardless of boiling point closeness`,
+  },
+  {
+    conceptId: PURIF,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "On a normal-phase TLC plate, compound A has Rf 0.8 and compound B has Rf 0.2. Which is more polar?",
+    choices: [
+      { text: "B, the one that moved LESS. The stationary phase is polar silica and the mobile phase is comparatively non-polar, so a polar compound sticks to the plate and travels a short distance. Rf measures how far a compound moved relative to the solvent front, so a HIGH Rf means weakly retained and therefore LESS polar. The relationship inverts on reversed-phase plates, which is why the phase has to be stated", isCorrect: true },
+      { text: "A — it travelled further up the plate, and a more polar compound is carried further by the solvent", isCorrect: false, misconceptionId: `${PURIF}:MC1` },
+    ],
+    correctValue: "B; on normal-phase silica, high Rf means LESS polar",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PURIF}:MC1`],
+    source: `${PURIF_SRC} — MC-1: a high Rf read as greater polarity, inverting the retention relationship on normal-phase silica`,
+  },
+  {
+    conceptId: PURIF,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "An impure sample melts at 118–124 °C; the pure compound melts sharply at 133 °C. Do impurities raise or lower the melting point?",
+    choices: [
+      { text: "They LOWER it, and they BROADEN the range — both together are the diagnosis. An impurity disrupts the crystal lattice and adds to the entropy of the liquid, so melting begins earlier and finishes later; that is the same colligative depression that puts salt on icy roads. A sharp melting point at the literature value is therefore evidence of purity, and the 6-degree spread here is as informative as the depressed value", isCorrect: true },
+      { text: "They raise it — extra particles in the solid mean more particles to separate, so more energy is needed to melt it", isCorrect: false, misconceptionId: `${PURIF}:MC3` },
+    ],
+    correctValue: "Lower AND broaden; a sharp melting point at the literature value indicates purity",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PURIF}:MC3`],
+    source: `${PURIF_SRC} — MC-3: impurities assumed to raise the melting point, inverting colligative depression and losing the broadening signal`,
   },
 ]
 
@@ -13611,6 +13878,21 @@ const WATER_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${WATER}:MC2`],
     source: `${WATER_SRC} — MC2, distractor-mapped`,
   },
+  {
+    conceptId: WATER,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Hard water containing dissolved CaSO₄ is boiled for ten minutes. Does the calcium precipitate out?",
+    choices: [
+      { text: "No — sulfate hardness is PERMANENT and boiling does nothing to it. Boiling only removes TEMPORARY hardness, where the calcium is present as the hydrogencarbonate: heat decomposes HCO₃⁻ to CO₂ and carbonate, and insoluble CaCO₃ drops out. CaSO₄ has no such decomposition route, so it stays dissolved and must be removed by washing soda or an ion-exchange resin instead", isCorrect: true },
+      { text: "Yes — boiling drives off the dissolved minerals, so any hardness is removed by heating the water", isCorrect: false, misconceptionId: `${WATER}:MC3` },
+    ],
+    correctValue: "No — boiling removes only temporary (hydrogencarbonate) hardness; sulfate hardness is permanent",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WATER}:MC3`],
+    source: `${WATER_SRC} — MC-3: boiling assumed to remove all hardness, collapsing the temporary/permanent distinction`,
+  },
 ]
 
 // ─── chem.elect.batteries ────────────────────────────────────────────────────
@@ -14406,6 +14688,21 @@ const REACTINT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${REACTINT}:MC2`],
     source: `${REACTINT_SRC} — misconception: absence of formal charge implies inherent stability/low reactivity`,
   },
+  {
+    conceptId: REACTINT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "Singlet and triplet carbenes both add to a C=C double bond. Do both give the same cyclopropane from a cis alkene?",
+    choices: [
+      { text: "No — and the difference is a classic stereochemical probe. A SINGLET carbene has both electrons paired in one orbital and adds in a single concerted step, so the alkene's geometry is RETAINED: cis alkene gives cis cyclopropane. A TRIPLET carbene is a diradical and must add in two steps, and the intermediate lives long enough to rotate about the C–C bond, so cis and trans products both appear. Same reagent class, same bond formed, opposite stereochemical outcome", isCorrect: true },
+      { text: "Yes — both insert into the π bond to give the same cyclopropane, since spin state does not affect where the bonds form", isCorrect: false, misconceptionId: `${REACTINT}:MC3` },
+    ],
+    correctValue: "No — singlet retains alkene geometry (concerted); triplet scrambles it (stepwise diradical)",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${REACTINT}:MC3`],
+    source: `${REACTINT_SRC} — MC-3: singlet and triplet carbenes assumed to give the same product, ignoring the concerted/stepwise difference`,
+  },
 ]
 
 // ─── chem.hyd.polycyclic ─────────────────────────────────────────────────────
@@ -14518,6 +14815,21 @@ const POLYCYC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${POLYCYC}:MC2`],
     source: `${POLYCYC_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    conceptId: POLYCYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "Rank benzene, furan and thiophene by reactivity toward electrophilic aromatic substitution.",
+    choices: [
+      { text: "Furan > thiophene > benzene — the five-membered heterocycles are MORE reactive, not less. The heteroatom donates a lone pair into the ring, so six π electrons are spread over five atoms instead of six, making the ring electron-RICH and easier for an electrophile to attack. Furan leads because oxygen is the poorest at sharing with carbon's 2p orbitals, leaving more density on the ring carbons. \"Less aromatic\" is true of the resonance energy and does not mean less reactive — it means more", isCorrect: true },
+      { text: "Benzene > thiophene > furan — benzene is the most aromatic and therefore the most reactive toward electrophiles", isCorrect: false, misconceptionId: `${POLYCYC}:MC3` },
+    ],
+    correctValue: "Furan > thiophene > benzene; the heterocycles are electron-rich and more reactive",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POLYCYC}:MC3`],
+    source: `${POLYCYC_SRC} — MC-3: lower aromatic stabilisation read as lower EAS reactivity, when electron-rich rings react faster`,
   },
 ]
 
@@ -14845,6 +15157,21 @@ const ORGMECH_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ORGMECH}:MC2`],
     source: `${ORGMECH_SRC} — misconception: full-headed and fishhook arrows are interchangeable notational choices`,
+  },
+  {
+    conceptId: ORGMECH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A Diels–Alder reaction runs on heating alone, with no acid, no base and no metal. Does it need a catalyst or an ionic intermediate?",
+    choices: [
+      { text: "No — pericyclic reactions are CONCERTED. All the bonds break and form together through one cyclic transition state, with no intermediate of any kind: no carbocation, no radical, nothing to trap or detect. That is why they are stereospecific, and why a Lewis acid merely ACCELERATES a Diels–Alder rather than being required for it. Heat supplies the activation energy; nothing else has to", isCorrect: true },
+      { text: "Yes — every reaction proceeds through an intermediate, so there must be an ionic species formed and consumed along the way", isCorrect: false, misconceptionId: `${ORGMECH}:MC3` },
+    ],
+    correctValue: "No — concerted through one cyclic transition state, with no intermediate at all",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORGMECH}:MC3`],
+    source: `${ORGMECH_SRC} — MC-3: pericyclic reactions assumed to require a catalyst or ionic intermediate, missing that they are concerted`,
   },
 ]
 
@@ -18817,6 +19144,21 @@ const OXOSPEC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${OXOSPEC}:MC2`],
     source: `${OXOSPEC_SRC} — MC2, distractor-mapped`,
   },
+  {
+    conceptId: OXOSPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Assign the oxidation state of vanadium in the vanadyl ion, VO₂⁺.",
+    choices: [
+      { text: "+5. The ion's overall +1 charge is not the metal's oxidation state — it is the SUM over the whole ion. Each oxide oxygen is −2, so two of them give −4, and V + (−4) = +1 requires V = +5. Reading the visible +1 as the metal's charge ignores the ligands entirely; the same arithmetic gives V = +4 in VO²⁺, and the two are different species with different colours", isCorrect: true },
+      { text: "+2 — the ion carries a positive charge, so the vanadium at its centre must be the +2 that the charge shows", isCorrect: false, misconceptionId: `${OXOSPEC}:MC3` },
+    ],
+    correctValue: "+5: V + 2(−2) = +1",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OXOSPEC}:MC3`],
+    source: `${OXOSPEC_SRC} — MC-3: the ion's overall charge read as the metal's oxidation state, omitting the oxide contributions`,
+  },
 ]
 
 // ─── chem.org.qualitative-analysis ──────────────────────────────────────────
@@ -18892,6 +19234,21 @@ const QUALORG_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${QUALORG}:MC2`],
     source: `${QUALORG_SRC} — iodoform test specificity to CH3CO group`,
+  },
+  {
+    conceptId: QUALORG,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Does iodoethane (CH₃CH₂I) give a positive iodoform test?",
+    choices: [
+      { text: "No — despite containing iodine. The test does not DETECT iodine; iodine is the REAGENT. What it detects is the CH₃CO– group, or a CH₃CH(OH)– that can be oxidised to one, which is why ethanol and propan-2-ol are positive and methanol and propan-1-ol are not. Iodoethane has neither motif, so it is negative, and the yellow CHI₃ precipitate that would form comes from the reagent's iodine, not the substrate's", isCorrect: true },
+      { text: "Yes — the compound contains iodine and the test is for iodine-containing compounds, so it gives the yellow precipitate", isCorrect: false, misconceptionId: `${QUALORG}:MC3` },
+    ],
+    correctValue: "No — the test detects the CH₃CO or CH₃CH(OH) motif; the iodine is the reagent",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QUALORG}:MC3`],
+    source: `${QUALORG_SRC} — MC-3: the iodoform test read as detecting iodine in the substrate, when iodine is the reagent and the motif is what is detected`,
   },
 ]
 
@@ -19317,6 +19674,21 @@ const ARROWPUSH_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ARROWPUSH}:MC2`],
     source: `${ARROWPUSH_SRC} — MC2, distractor-mapped`,
   },
+  {
+    conceptId: ARROWPUSH,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: if a mechanism looks chemically sensible, checking formal charges is an optional extra.",
+    choices: [
+      { text: "False — the charge check is what catches the errors that look sensible. Charge is CONSERVED at every step, so the total on the left must equal the total on the right; an arrow drawn from the wrong source or with the wrong head silently breaks that, and the resulting structure often still looks plausible. A neutral nucleophile attacking a neutral electrophile must give a species bearing BOTH a + and a −, and if your drawing shows neither, an arrow is wrong however reasonable the product appears", isCorrect: true },
+      { text: "True — an experienced eye can see whether a mechanism is right, so formal-charge bookkeeping is a formality", isCorrect: false, misconceptionId: `${ARROWPUSH}:MC3` },
+    ],
+    correctValue: "False — charge conservation is the check that catches plausible-looking errors",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARROWPUSH}:MC3`],
+    source: `${ARROWPUSH_SRC} — MC-3: formal-charge checking treated as optional, so arrow errors that produce plausible structures go undetected`,
+  },
 ]
 
 // ─── chem.org.pericyclic ─────────────────────────────────────────────────────
@@ -19396,6 +19768,21 @@ const PERICYC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${PERICYC}:MC2`],
     source: `${PERICYC_SRC} — Woodward-Hoffmann: thermal/photochemical symmetry switch`,
+  },
+  {
+    conceptId: PERICYC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "The Diels–Alder of cyclopentadiene with maleic anhydride gives the ENDO product. Is that because endo is the more stable isomer?",
+    choices: [
+      { text: "No — endo is usually the LESS stable of the two, and it forms anyway because it is KINETICALLY favoured. The dienophile's π system overlaps with the diene's developing π system in the endo transition state — a secondary orbital interaction that lowers that barrier — so endo forms faster despite having more steric strain. Heat the reaction and it can revert and equilibrate to the exo product, which is the thermodynamic one. The Alder endo rule is a statement about transition states, not about products", isCorrect: true },
+      { text: "Yes — the endo arrangement has less steric strain, so it is the more stable product and therefore the one that forms", isCorrect: false, misconceptionId: `${PERICYC}:MC3` },
+    ],
+    correctValue: "No — endo is kinetically favoured by secondary orbital overlap; exo is usually the more stable",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PERICYC}:MC3`],
+    source: `${PERICYC_SRC} — MC-3: the endo preference explained as thermodynamic stability rather than as a kinetic transition-state effect`,
   },
 ]
 

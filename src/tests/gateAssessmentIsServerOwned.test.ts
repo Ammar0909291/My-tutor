@@ -333,7 +333,12 @@ describe('the non-physics authored corpora convert too', () => {
     //            ->  12 (chem.bond x11 — TWO crossed pairs in one domain, and
     //                   chem.bond.bond-parameters, whose ENTIRE probe pair
     //                   belonged to a neighbouring concept)
-    ['chemistry', CHEMISTRY_PROBES, 12],
+    //            ->   0 (chem.org x12, plus the five stragglers left by
+    //                   pre-campaign domains. CHEMISTRY IS COMPLETE on this
+    //                   measure: all 186 concepts carry three gradeable probes
+    //                   within one grade band, and every documented blueprint
+    //                   misconception has a probe authored FOR it.)
+    ['chemistry', CHEMISTRY_PROBES, 0],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

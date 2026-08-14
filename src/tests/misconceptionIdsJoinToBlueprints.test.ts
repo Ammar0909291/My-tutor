@@ -82,6 +82,72 @@ function orphanIds(probes: ReadonlyArray<{ conceptId: string; targetedMisconcept
   return orphans
 }
 
+/**
+ * A THIRD DEFECT CLASS, FOUND BY READING chem.org.iupac: A BROKEN ID PREFIX.
+ *
+ * Every misconception id is `<conceptId>:<MCn>`. The orphan check below takes
+ * `id.split(':').pop()` and joins the TAIL against the blueprint — so a
+ * corrupted PREFIX passes it silently.
+ *
+ * chem.org.iupac carried, in three places, the literal string
+ * "${IUPAC}:MC2". A batch script had emitted `${'${IUPAC}'}:MC2`, which is a
+ * template literal wrapping a single-quoted string, so the interpolation never
+ * ran. The tail is "MC2", which joins to the blueprint perfectly, and the
+ * orphan ratchet was green throughout.
+ *
+ * The runtime cost is total, not cosmetic. route.ts writes
+ * MISCONCEPTION_DETECTED keyed on the distractor's misconceptionId, and
+ * detectMisconceptions resolves it against the CONCEPT. An id whose concept
+ * segment is "${IUPAC}" matches no concept that exists, so the detection fires
+ * into nothing and the repair can never resolve — the same silent teaching
+ * failure the orphan check was written to prevent, entering through the half
+ * of the id it never looked at.
+ *
+ * This asserts the whole id, not the tail.
+ */
+describe('a misconception id names the concept it belongs to', () => {
+  const corpora: ReadonlyArray<readonly [string, ReadonlyArray<{
+    conceptId: string
+    targetedMisconceptions?: readonly string[]
+    choices?: ReadonlyArray<{ misconceptionId?: string }> | null
+  }>]> = [
+    ['physics', [...SEED_PROBES, ...AUTHORED_PROBES]],
+    ['chemistry', CHEMISTRY_PROBES],
+  ]
+
+  it.each(corpora)('%s: every id is exactly `<its own conceptId>:<MC>`', (_subject, probes) => {
+    const wrong: string[] = []
+    for (const probe of probes) {
+      const ids = [
+        ...(probe.targetedMisconceptions ?? []),
+        ...(probe.choices ?? []).map((c) => c.misconceptionId).filter(Boolean),
+      ] as string[]
+      for (const id of ids) {
+        const prefix = id.slice(0, id.lastIndexOf(':'))
+        // Physics uses descriptive ids (MC-CENTRIFUGAL-REAL) with no concept
+        // prefix at all; only prefixed ids are constrained here.
+        if (!id.includes(':')) continue
+        if (prefix !== probe.conceptId) wrong.push(`${probe.conceptId} -> ${id}`)
+      }
+    }
+    expect(wrong).toEqual([])
+  })
+
+  it.each(corpora)('%s: no id contains an uninterpolated template literal', (_subject, probes) => {
+    // The specific failure mode above. Cheap, exact, and would have caught it
+    // on the commit that introduced it.
+    const literal: string[] = []
+    for (const probe of probes) {
+      const ids = [
+        ...(probe.targetedMisconceptions ?? []),
+        ...(probe.choices ?? []).map((c) => c.misconceptionId).filter(Boolean),
+      ] as string[]
+      for (const id of ids) if (id.includes('${')) literal.push(`${probe.conceptId} -> ${id}`)
+    }
+    expect(literal).toEqual([])
+  })
+})
+
 describe('every probed misconception id joins to its blueprint', () => {
   const physics = [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.conceptId.startsWith('phys.'))
 
@@ -369,6 +435,95 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.coord.stability', 'chelate effect')).toEqual(['MC1'])
     expect(tagOf('chem.coord.stability', 'survives for weeks in 1 M acid')).toEqual(['MC2'])
     expect(tagOf('chem.coord.stability', 'OVERALL formation constant')).toEqual(['MC3'])
+  })
+
+  /**
+   * chem.org — the last domain, and it held a defect none of the earlier ones
+   * did: a BROKEN ID, not a mis-tagged one.
+   *
+   * chem.org.iupac carried the literal string "${IUPAC}:MC2" in three places
+   * (see the id-prefix suite above for why every structural check missed it).
+   * The same probe pair also carried the author's own working out inside a
+   * learner-facing distractor — "(chloro before methyl alphabetically? No —
+   * "chloro" < "methyl" alphabetically, so actually 3-chloro-2-methyl is
+   * correct)" — which states the answer inside the wrong choice.
+   *
+   * Repairing that exposed a THIRD flaw in the same probe: its stem has the
+   * learner notice chloro FIRST, so the discovery-order belief it claims to
+   * test yields the CORRECT name by coincidence and cannot be detected. The
+   * distractor now carries the locant-order belief, which is the one that
+   * actually produces the wrong name here.
+   *
+   * chem.org.mechanisms and chem.org.arrow-pushing are CLEAN — every
+   * pre-existing distractor states its own misconception.
+   */
+  it('org.iupac: the broken id is repaired and the probe is diagnostic again', () => {
+    expect(tagOf('chem.org.iupac', '2-methylpentane')).toEqual(['MC2'])
+    const probe = CHEMISTRY_PROBES.find(
+      (p) => p.conceptId === 'chem.org.iupac' && p.stem.includes('chloro substituent at position 3'),
+    )!
+    const wrong = (probe.choices ?? []).filter((c) => !c.isCorrect)
+    expect(wrong).toHaveLength(1)
+    // The distractor must state a belief, not argue itself into the answer.
+    expect(wrong[0].text).toContain('ascending locant order')
+    expect(wrong[0].text).not.toContain('alphabetically')
+  })
+
+  it('org: mechanisms and arrow-pushing were already clean', () => {
+    expect(tagOf('chem.org.mechanisms', 'what does the arrow actually represent moving')).toEqual(['MC1'])
+    expect(tagOf('chem.org.mechanisms', 'fishhook) arrow be used interchangeably')).toEqual(['MC2'])
+    expect(tagOf('chem.org.arrow-pushing', 'where does the tail (start) of each arrow originate')).toEqual(['MC1'])
+    expect(tagOf('chem.org.arrow-pushing', 'two curly arrows be drawn from the SAME lone pair')).toEqual(['MC2'])
+  })
+
+  it('org: electronic-effects P1 is MC-2, not MC-1', () => {
+    // Its distractor is "a single substituent must have inductive and
+    // mesomeric effects that always point in the same direction" — the
+    // halogen case, MC-2, not MC-1 (EWGs "add electrons").
+    expect(tagOf('chem.org.electronic-effects', 'Chlorine attached to a benzene ring')).toEqual(['MC2'])
+  })
+
+  it('org: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.org.iupac', 'every IUPAC name ending in')).toEqual(['MC3'])
+
+    expect(tagOf('chem.org.isomerism', 'glyceraldehyde is dextrorotatory')).toEqual(['MC1'])
+    expect(tagOf('chem.org.isomerism', 'meso-tartaric acid')).toEqual(['MC2'])
+    expect(tagOf('chem.org.isomerism', 'staggered and eclipsed ethane')).toEqual(['MC3'])
+
+    expect(tagOf('chem.org.hybridization', 'trimethylamine and pyridine')).toEqual(['MC1'])
+    expect(tagOf('chem.org.hybridization', 'carbonyl oxygen has two lone pairs')).toEqual(['MC2'])
+    expect(tagOf('chem.org.hybridization', 'central carbon of CO₂')).toEqual(['MC3'])
+
+    expect(tagOf('chem.org.electronic-effects', 'Trichloroacetic acid')).toEqual(['MC1'])
+    expect(tagOf('chem.org.electronic-effects', 'Aniline (pKb 9.4)')).toEqual(['MC3'])
+
+    expect(tagOf('chem.org.mechanisms', 'no acid, no base and no metal')).toEqual(['MC3'])
+    expect(tagOf('chem.org.arrow-pushing', 'checking formal charges is an optional extra')).toEqual(['MC3'])
+    expect(tagOf('chem.org.reactive-intermediates', 'Singlet and triplet carbenes')).toEqual(['MC3'])
+    expect(tagOf('chem.org.aromaticity', 'cyclopentadienyl ANION')).toEqual(['MC3'])
+    expect(tagOf('chem.org.pericyclic', 'maleic anhydride gives the ENDO')).toEqual(['MC3'])
+
+    expect(tagOf('chem.org.spectroscopy', 'is the base peak the molecular ion')).toEqual(['MC1'])
+    expect(tagOf('chem.org.spectroscopy', 'appears as a triplet')).toEqual(['MC2'])
+    expect(tagOf('chem.org.spectroscopy', 'broad O–H absorption')).toEqual(['MC3'])
+
+    expect(tagOf('chem.org.purification', 'compound A has Rf 0.8')).toEqual(['MC1'])
+    expect(tagOf('chem.org.purification', 'melts at 118–124')).toEqual(['MC3'])
+    expect(tagOf('chem.org.qualitative-analysis', 'iodoethane')).toEqual(['MC3'])
+  })
+
+  /**
+   * The five stragglers left by domains audited BEFORE this campaign adopted
+   * the stem-vs-blueprint check. Each is a 4-misconception blueprint whose
+   * last entry, or an MC-3, was never probed. Closing them takes chemistry to
+   * zero unprobed misconceptions across all 186 concepts.
+   */
+  it('the pre-campaign stragglers are closed', () => {
+    expect(tagOf('chem.period.periodic-properties', 'Lithium and potassium')).toEqual(['MC4'])
+    expect(tagOf('chem.redox.oxidation-state', 'sodium hydride')).toEqual(['MC4'])
+    expect(tagOf('chem.sblock.water', 'CaSO₄ is boiled')).toEqual(['MC3'])
+    expect(tagOf('chem.hyd.polycyclic', 'Rank benzene, furan and thiophene')).toEqual(['MC3'])
+    expect(tagOf('chem.dblock.oxo-species', 'vanadyl ion')).toEqual(['MC3'])
   })
 
   /**

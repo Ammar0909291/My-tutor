@@ -6859,3 +6859,114 @@ production-verified.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# chem.org — a broken id, and CHEMISTRY REACHES ZERO
+
+Twelve concepts, twenty-six pre-existing probes. One retag, twenty-one probes
+authored, two hollow concepts, two clean concepts — and a defect class that had
+not appeared in any earlier domain.
+
+## A BROKEN ID, not a mis-tagged one
+
+`chem.org.iupac` carried, in three places, the literal string
+**`${IUPAC}:MC2`**. A batch script had emitted `` `${'${IUPAC}'}:MC2` `` — a
+template literal wrapping a single-quoted string — so the interpolation never
+ran. The misconceptionId, the targetedMisconceptions entry and the source line
+were all corrupt.
+
+**Every structural check in this repository was green on it.** The orphan
+suite takes `id.split(':').pop()`, which yields `"MC2"` and joins to the
+blueprint perfectly. The corrupted CONCEPT half of the id is in the segment
+that check never looks at.
+
+The runtime cost is total. `route.ts` writes MISCONCEPTION_DETECTED keyed on
+the distractor's misconceptionId and `detectMisconceptions` resolves it against
+the CONCEPT. An id whose concept segment is `${IUPAC}` matches no concept that
+exists, so the detection fires into nothing and no repair can ever resolve —
+the exact silent failure the orphan check was written to prevent, entering
+through the half of the id it never inspected.
+
+Fixed, and a new guard added: `misconceptionIdsJoinToBlueprints` now asserts
+that every prefixed id equals its own `conceptId`, and separately that no id
+contains `${`. Verified non-vacuous — it checks 1,364 real chemistry ids.
+
+## The same probe was broken twice more
+
+Its sibling carried the author's own working out inside a learner-facing
+distractor: *"(chloro before methyl alphabetically? No — "chloro" < "methyl"
+alphabetically, so actually 3-chloro-2-methyl is correct)"*. That option
+states the correct answer inside the wrong choice.
+
+Repairing it exposed a third flaw. The stem has the learner notice chloro
+FIRST, so the discovery-order belief the probe claims to test produces the
+CORRECT name by coincidence and cannot be detected at all. The distractor now
+carries the LOCANT-order belief — "position 2 before position 3" — which is
+the one that actually yields the wrong name here.
+
+**Three defects in one probe pair, each hidden behind the one before it.**
+
+## A band split I introduced, and caught
+
+Four concepts still read as short after authoring, because the P template
+hardcoded `GradeBand.HIGH` while their existing probes were UNDERGRADUATE —
+so each band held two gradeable items and neither reached three. The mastery
+gate counts within a band, so this would have left those concepts un-closable
+despite showing four probes. Realigned to the concept's existing band.
+
+## Two hollow, two clean
+
+Hollow: `chem.org.isomerism` (both probes about enantiomer properties and
+cis/trans-vs-optical, neither any of its three documented misconceptions) and
+`chem.org.hybridization` (ethene and propene probes, neither MC-1, MC-2 or
+MC-3). Hollow total: 25.
+
+Clean: `chem.org.mechanisms` and `chem.org.arrow-pushing` — every pre-existing
+distractor states its own misconception verbatim.
+
+## The last five stragglers
+
+Five misconceptions remained unprobed in domains audited BEFORE this campaign
+adopted the stem-vs-blueprint check — each a fourth misconception, or an MC-3,
+that the original pass never reached: `chem.period.periodic-properties` MC-4
+(periodicity is recurrence with a gradient, not exact repetition),
+`chem.redox.oxidation-state` MC-4 (**hydrogen is −1 in NaH**),
+`chem.sblock.water` MC-3 (boiling removes only TEMPORARY hardness),
+`chem.hyd.polycyclic` MC-3 (**furan is MORE reactive than benzene**, not less)
+and `chem.dblock.oxo-species` MC-3 (V is +5 in VO₂⁺, not +2).
+
+## CHEMISTRY IS COMPLETE ON BOTH MEASURES
+
+| | before the campaign | now |
+|---|---|---|
+| concepts short of three gradeable probes | 186 | **0** |
+| blueprint misconceptions with no probe | 186+ | **0** |
+
+All 186 concepts carry three gradeable probes within one grade band, and every
+documented blueprint misconception has a probe authored FOR it — verified by
+reading each stem against its blueprint, not by counting.
+
+## Final stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | **186 of 186** | 181 | 75 | 4 | 68 | 25 | 13 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+Of 181 chemistry concepts that carried pre-existing probes, **75 had at least
+one mis-tagged probe and 25 were entirely hollow.** Thirteen were clean. Six
+crossed pairs and four cross-concept displacements were found, none of which
+any count-based measure can detect.
+
+## Production divergence — UNCHANGED AND IMPORTANT
+
+75 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and 178 authored probes have never been seeded. The seed script
+skips identities that already exist, so **production still serves the old,
+wrong tags**. Nothing in this campaign is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
