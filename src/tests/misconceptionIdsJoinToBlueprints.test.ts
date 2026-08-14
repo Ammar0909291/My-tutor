@@ -174,4 +174,35 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.bio.lipids', 'Has the fat simply dissolved in the base')).toEqual(['MC1'])
     expect(tagOf('chem.bio.lipids', 'LOWER melting points than saturated fats')).toEqual(['MC2'])
   })
+
+  /**
+   * chem.period, audited stem-by-stem against the blueprints. FIVE probes in
+   * seven concepts carried a tag whose blueprint text they did not test —
+   * a far higher rate than chem.bio's two in six, and the reason this class
+   * is now checked on every concept rather than sampled.
+   */
+  it('classification: the "main limitation" probe is MC3, not MC2', () => {
+    // MC-2 is "Mendeleev's table had no predictive power". A question about
+    // the table's LIMITATION tests mass-vs-atomic-number, which is MC-3.
+    expect(tagOf('chem.period.classification', 'main limitation')).toEqual(['MC3'])
+    expect(tagOf('chem.period.classification', 'eka-aluminium')).toEqual(['MC2'])
+  })
+
+  it('electron-affinity: the F/Cl anomaly is MC2 and the neon probe is MC3', () => {
+    // MC-1 is the sign-convention error; neither existing probe tested it,
+    // so it also gained a probe of its own.
+    expect(tagOf('chem.period.electron-affinity', 'Chlorine has a more negative')).toEqual(['MC2'])
+    expect(tagOf('chem.period.electron-affinity', 'Would neon (a noble gas)')).toEqual(['MC3'])
+    expect(tagOf('chem.period.electron-affinity', 'Which attracts an added electron more strongly')).toEqual(['MC1'])
+  })
+
+  it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
+    // Both pre-existing probes ask about oxidation state (MC-3) while
+    // carrying MC1 and MC2, leaving the fixed-valency and NCl5
+    // misconceptions with no diagnostic at all.
+    expect(tagOf('chem.period.valency', 'In CH₄ (methane), carbon is assigned')).toEqual(['MC3'])
+    expect(tagOf('chem.period.valency', 'oxidation state of hydrogen in NaH')).toEqual(['MC3'])
+    expect(tagOf('chem.period.valency', 'valency in H2S, and in H2SO4')).toEqual(['MC1'])
+    expect(tagOf('chem.period.valency', 'Can nitrogen, directly above it, form NCl5')).toEqual(['MC2'])
+  })
 })

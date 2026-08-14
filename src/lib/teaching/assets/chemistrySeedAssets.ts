@@ -1331,12 +1331,12 @@ const PERCL_PROBES: SeedProbe[] = [
     stem: 'What was the main limitation of Mendeleev\'s periodic table that led to the modern table?',
     choices: [
       { text: 'It was arranged by atomic mass, which placed some elements in wrong groups (e.g., Ar/K anomaly) — solved by using atomic number instead', isCorrect: true },
-      { text: 'It had too many gaps and couldn\'t predict new elements', isCorrect: false, misconceptionId: `${PERCL}:MC2` },
+      { text: 'It had too many gaps and couldn\'t predict new elements', isCorrect: false, misconceptionId: `${PERCL}:MC3` },
       { text: 'It didn\'t include noble gases at all because they hadn\'t been discovered', isCorrect: false },
     ],
     correctValue: 'Atomic mass ordering caused misplacements',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${PERCL}:MC2`],
+    targetedMisconceptions: [`${PERCL}:MC3`],
     source: `${PERCL_SRC} — distractor targets "Mendeleev couldn't predict elements" (he predicted many correctly)`,
   },
   {
@@ -1353,6 +1353,25 @@ const PERCL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${PERCL}:MC1`],
     source: `${PERCL_SRC} — misconception: attributing atomic number organization to Mendeleev`,
+  },
+  {
+    // Authored against the blueprint's MC text, not its id. MC2 had no probe once the mis-tagged one was corrected to MC3.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: PERCL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Mendeleev left gaps in his table and described "eka-aluminium" as mass ~68, density ~5.9 g/cm3, forming M2O3. Gallium was found in 1875 at mass 69.7, density 5.91, forming Ga2O3. What does that show?',
+    choices: [
+      { text: 'That the gaps were falsifiable PREDICTIONS, not just missing data — the table forecast properties of elements nobody had seen, and measurement later confirmed them', isCorrect: true },
+      { text: 'That Mendeleev simply organised what chemists already knew, and gallium happened to fit afterwards', isCorrect: false, misconceptionId: `${PERCL}:MC2` },
+    ],
+    correctValue: 'the gaps were confirmed predictions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERCL}:MC2`],
+    source: `${PERCL_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -3835,6 +3854,25 @@ const MODPER_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MODPER}:MC2`],
     source: `${MODPER_SRC} — MC2, distractor-mapped`,
   },
+  {
+    // Authored against the blueprint's MC text, not its id. MC3 had no probe.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: MODPER,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Hydrogen sits at the top of Group 1. Does that make it an alkali metal?',
+    choices: [
+      { text: 'No — its 1s1 configuration is why it is placed there, but chemically it is a non-metal gas with an ionisation energy of 1312 kJ/mol, far above any alkali metal, and it forms H- as well as H+. Some tables set it apart for exactly this reason', isCorrect: true },
+      { text: 'Yes — Group 1 is the alkali metals, so hydrogen is the lightest of them', isCorrect: false, misconceptionId: `${MODPER}:MC3` },
+    ],
+    correctValue: 'no — placement is configurational, its chemistry is unique',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MODPER}:MC3`],
+    source: `${MODPER_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.period.periodic-properties ─────────────────────────────────────────
@@ -3914,6 +3952,63 @@ const PERPROP_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PERPROP}:MC2`],
     source: `${PERPROP_SRC} — misconception: ionization causes uniform radius change regardless of shell structure`,
+  },
+  {
+    // Authored against the blueprint's MC text, not its id. MC1 had no probe. Both pre-existing probes are mis-tagged and test atomic/ionic radius — see the ledger.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Fluorine is the most electronegative element, yet chlorine has the MORE negative electron affinity. Is that a contradiction?',
+    choices: [
+      { text: 'No — they measure different things. Electron affinity is an isolated gas-phase atom gaining an electron; electronegativity is the pull on BONDING electrons inside a bond. F wins on the second while Cl wins on the first', isCorrect: true },
+      { text: 'Yes — electronegativity and electron affinity are the same property, so the two rankings should agree', isCorrect: false, misconceptionId: `${PERPROP}:MC1` },
+    ],
+    correctValue: 'no — different properties, different contexts',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PERPROP}:MC1`],
+    source: `${PERPROP_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC text, not its id. MC2 had no probe.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Reactivity increases down Group 1 (Cs beats Li). Does it also increase down Group 17?',
+    choices: [
+      { text: 'No — it DECREASES. Metals get more reactive down a group because losing an electron gets easier; non-metals get less reactive because gaining one gets harder. Fluorine, not iodine, is the more reactive halogen', isCorrect: true },
+      { text: 'Yes — reactivity always increases down a group, whichever group it is', isCorrect: false, misconceptionId: `${PERPROP}:MC2` },
+    ],
+    correctValue: 'no — it decreases for non-metals',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${PERPROP}:MC2`],
+    source: `${PERPROP_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC text, not its id. MC3 had no probe testing trend EXCEPTIONS.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: PERPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Across period 3, ionisation energy generally rises. Yet Mg is higher than Al, and P is higher than S. Are these measurement noise?',
+    choices: [
+      { text: 'No — both are predictable, explained dips that recur in EVERY period: the Group 2 to 13 drop from the s-to-p subshell change, and the Group 15 to 16 drop from spin-pairing repulsion in a half-filled subshell', isCorrect: true },
+      { text: 'Yes — the trend across a period is smooth, so those two are anomalies in the data rather than in the chemistry', isCorrect: false, misconceptionId: `${PERPROP}:MC3` },
+    ],
+    correctValue: 'no — two explained dips recur every period',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PERPROP}:MC3`],
+    source: `${PERPROP_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -4674,6 +4769,25 @@ const IONE_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${IONE}:MC2`],
     source: `${IONE_SRC} — misconception: IE jump ratios are universal rather than structure-dependent`,
   },
+  {
+    // Authored against the blueprint's MC text, not its id. MC3 had no probe.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: IONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Ionisation energy falls sharply from Li to Cs. Is that because the extra inner electrons shield the nucleus less effectively?',
+    choices: [
+      { text: 'No — inner-shell shielding stays effective, so Zeff barely moves (about 1.3 for Li against 2.2 for Cs). The dominant cause is DISTANCE: Cs\'s outer electron sits in n=6, far further out, and nuclear attraction falls off with distance', isCorrect: true },
+      { text: 'Yes — more electrons means the shielding gets progressively less effective, which is what lowers the ionisation energy', isCorrect: false, misconceptionId: `${IONE}:MC3` },
+    ],
+    correctValue: 'distance, not failing shielding',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${IONE}:MC3`],
+    source: `${IONE_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.period.electron-affinity ───────────────────────────────────────────
@@ -4735,11 +4849,11 @@ const EAFF_PROBES: SeedProbe[] = [
     stem: 'Chlorine has a more negative (more favorable) electron affinity than fluorine, even though fluorine is more electronegative. Why?',
     choices: [
       { text: 'Fluorine\'s very small atomic size causes significant electron-electron repulsion when adding another electron to its already crowded 2p subshell, partially offsetting the favorable nuclear attraction', isCorrect: true },
-      { text: 'This is a measurement error — electron affinity and electronegativity should always rank elements identically', isCorrect: false, misconceptionId: `${EAFF}:MC1` },
+      { text: 'This is a measurement error — electron affinity and electronegativity should always rank elements identically', isCorrect: false, misconceptionId: `${EAFF}:MC2` },
     ],
     correctValue: 'Fluorine\'s small size causes electron repulsion',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${EAFF}:MC1`],
+    targetedMisconceptions: [`${EAFF}:MC2`],
     source: `${EAFF_SRC} — distractor targets assumption that EA and electronegativity must rank identically`,
   },
   {
@@ -4750,12 +4864,31 @@ const EAFF_PROBES: SeedProbe[] = [
     stem: 'Would neon (a noble gas) release or absorb energy when forced to gain an electron?',
     choices: [
       { text: 'Absorb energy (positive/unfavorable electron affinity) — neon\'s full, stable 2p⁶ configuration strongly resists adding an extra electron', isCorrect: true },
-      { text: 'Release energy — all atoms release energy when gaining an electron, without exception', isCorrect: false, misconceptionId: `${EAFF}:MC2` },
+      { text: 'Release energy — all atoms release energy when gaining an electron, without exception', isCorrect: false, misconceptionId: `${EAFF}:MC3` },
     ],
     correctValue: 'Absorb energy (unfavorable)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${EAFF}:MC2`],
+    targetedMisconceptions: [`${EAFF}:MC3`],
     source: `${EAFF_SRC} — misconception: all electron affinities are energetically favorable`,
+  },
+  {
+    // Authored against the blueprint's MC text, not its id. MC1 had no probe once the two mis-tagged ones were corrected to MC2 and MC3.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: EAFF,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Chlorine\'s electron affinity is -349 kJ/mol and fluorine\'s is -328 kJ/mol. Which attracts an added electron more strongly?',
+    choices: [
+      { text: 'Chlorine — a NEGATIVE value means energy is released, so MORE negative means more energy released and a stronger attraction for the electron', isCorrect: true },
+      { text: 'Fluorine — a more negative number means a weaker tendency to gain the electron, so the less negative element attracts it more', isCorrect: false, misconceptionId: `${EAFF}:MC1` },
+    ],
+    correctValue: 'chlorine — more negative means stronger',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EAFF}:MC1`],
+    source: `${EAFF_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -4838,6 +4971,25 @@ const ARAD_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ARAD}:MC2`],
     source: `${ARAD_SRC} — misconception: assuming charge changes always shrink radius`,
   },
+  {
+    // Authored against the blueprint's MC text, not its id. MC3 had no probe.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: ARAD,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Radius usually grows down a group, so Hf (period 6) should be clearly larger than Zr (period 5). Measured, they are about 159 pm and 155 pm. Why so close?',
+    choices: [
+      { text: 'The lanthanide contraction — 14 poorly shielding 4f electrons are inserted between the rows, cancelling almost all of the expected increase. Their near-identical size is why separating Zr from Hf is notoriously hard', isCorrect: true },
+      { text: 'Measurement error — period 6 d-block elements are always larger than their period 5 counterparts', isCorrect: false, misconceptionId: `${ARAD}:MC3` },
+    ],
+    correctValue: 'the lanthanide contraction',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ARAD}:MC3`],
+    source: `${ARAD_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.period.valency ─────────────────────────────────────────────────────
@@ -4898,11 +5050,11 @@ const VALEN_PROBES: SeedProbe[] = [
     stem: 'In CH₄ (methane), carbon is assigned oxidation state −4. Does carbon actually carry a real −4 charge?',
     choices: [
       { text: 'No — oxidation state is a bookkeeping convention that assumes complete electron transfer, but the C-H bonds are covalent (shared electrons), so carbon does not carry a literal −4 charge', isCorrect: true },
-      { text: 'Yes — oxidation state directly measures the actual electric charge on each atom in a molecule', isCorrect: false, misconceptionId: `${VALEN}:MC1` },
+      { text: 'Yes — oxidation state directly measures the actual electric charge on each atom in a molecule', isCorrect: false, misconceptionId: `${VALEN}:MC3` },
     ],
     correctValue: 'No — it\'s a bookkeeping convention, not a real charge',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${VALEN}:MC1`],
+    targetedMisconceptions: [`${VALEN}:MC3`],
     source: `${VALEN_SRC} — distractor targets "oxidation state = literal charge" misconception`,
   },
   {
@@ -4913,12 +5065,50 @@ const VALEN_PROBES: SeedProbe[] = [
     stem: 'What is the oxidation state of hydrogen in NaH (sodium hydride)?',
     choices: [
       { text: '−1 — sodium is less electronegative than hydrogen here, so hydrogen is assigned the electrons in this bond, breaking the usual "hydrogen is +1" pattern', isCorrect: true },
-      { text: '+1 — hydrogen is always assigned +1 in every compound without exception', isCorrect: false, misconceptionId: `${VALEN}:MC2` },
+      { text: '+1 — hydrogen is always assigned +1 in every compound without exception', isCorrect: false, misconceptionId: `${VALEN}:MC3` },
     ],
     correctValue: '−1',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${VALEN}:MC2`],
+    targetedMisconceptions: [`${VALEN}:MC3`],
     source: `${VALEN_SRC} — misconception: hydrogen oxidation state is universally +1`,
+  },
+  {
+    // Authored against the blueprint's MC text, not its id. MC1 had no probe once both pre-existing probes were corrected to MC3.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: VALEN,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Sulfur is in Group 16. What is its valency in H2S, and in H2SO4?',
+    choices: [
+      { text: '2 in H2S and 6 in H2SO4 — the same element, two different valencies. The group number gives the MAXIMUM available to a period-3 element, not a fixed value; expansion to 6 uses accessible 3d orbitals', isCorrect: true },
+      { text: '6 in both — sulfur is in Group 16, so its valency is 6 whatever the compound', isCorrect: false, misconceptionId: `${VALEN}:MC1` },
+    ],
+    correctValue: '2 in H2S, 6 in H2SO4',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VALEN}:MC1`],
+    source: `${VALEN_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC text, not its id. MC2 had no probe.
+    // probeKind 'checkpoint' is a FREE slot — chemistry is seeded in
+    // production, so a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: VALEN,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Phosphorus forms PCl5. Can nitrogen, directly above it, form NCl5?',
+    choices: [
+      { text: 'No — nitrogen is period 2 with only 2s and 2p available, capping it at 4 bonds (as in NH4+). There are no 2d orbitals to expand into. Phosphorus is period 3 and has accessible 3d orbitals, which is what makes PCl5 possible', isCorrect: true },
+      { text: 'Yes — nitrogen is directly above phosphorus in the same group, so it forms the same kind of pentahalide', isCorrect: false, misconceptionId: `${VALEN}:MC2` },
+    ],
+    correctValue: 'no — period 2 caps at valency 4',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VALEN}:MC2`],
+    source: `${VALEN_SRC} — MC2, distractor-mapped`,
   },
 ]
 

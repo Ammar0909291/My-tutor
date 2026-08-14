@@ -4722,3 +4722,83 @@ repo is right; production still carries the crossed tags.
 `npx tsc --noEmit` clean; 325 files / 6,809 passed / 9 skipped; `npm run
 build` clean. Live resolver 0 discarded, 0 non-physics identities changed.
 Offline only — no production write, nothing production-verified.
+
+---
+
+# chem.period (7 concepts) — the mis-tag rate is much worse than chem.bio
+
+Chemistry **132 → 126** short; unprobed blueprint misconceptions **128 → 121**.
+All seven `chem.period` concepts now hold ≥3 gradeable probes in one band.
+
+## Stem-vs-blueprint audit, applied to every concept for the first time
+
+**Five of the fourteen pre-existing probes carried a tag whose blueprint text
+they did not test** — in seven concepts. chem.bio's rate was two in six; this
+domain is worse, which is why the check is now run on every concept rather
+than sampled.
+
+| concept | probe stem | was | is | why |
+|---|---|---|---|---|
+| `classification` | "main limitation of Mendeleev's table" | MC2 | **MC3** | MC-2 is *no predictive power*; the stem tests mass-vs-atomic-number |
+| `electron-affinity` | "Cl has more negative EA than F, why?" | MC1 | **MC2** | that IS the F/Cl anomaly; MC-1 is the sign convention |
+| `electron-affinity` | "would neon release or absorb energy?" | MC2 | **MC3** | tests *adding electrons is always exothermic* |
+| `valency` | "does carbon carry a real −4 charge in CH₄?" | MC1 | **MC3** | oxidation-state-as-real-charge, not fixed valency |
+| `valency` | "oxidation state of H in NaH?" | MC2 | **MC3** | oxidation state again, not the NCl₅ misconception |
+
+Two concepts had **every** documented misconception left unprobed while
+appearing covered: `valency` (both probes were MC-3 questions, so MC-1 and
+MC-2 had no diagnostic) and `electron-affinity` (MC-1 unprobed).
+
+## Ten probes authored, each written against the blueprint's MC text
+
+`modern-periodic-law` MC-3 (hydrogen is not an alkali metal) ·
+`classification` MC-2 (eka-aluminium → gallium, the gaps were predictions) ·
+`periodic-properties` MC-1 (EN ≠ EA: F most electronegative yet Cl's EA more
+negative), MC-2 (reactivity falls down a group for non-metals), MC-3 (the
+Mg>Al and P>S dips recur every period) · `ionization-energy` MC-3 (distance,
+not failing shielding) · `electron-affinity` MC-1 (more negative = stronger) ·
+`atomic-radius` MC-3 (lanthanide contraction, Zr≈Hf) · `valency` MC-1 (S is 2
+in H₂S, 6 in H₂SO₄) and MC-2 (NCl₅ cannot exist — period 2 has no d orbitals).
+
+## An identity collision I introduced, and the guard that caught it
+
+Giving three new `periodic-properties` probes the same
+`checkpoint/HIGH/PROFICIENT` slot made them **identical after resolution — 3
+would have been silently discarded at seed time**, and it shifted 7 chemistry
+identities by turning singleton slots into ladders.
+`difficultyLadderIdentity.test.ts` failed immediately on "every non-physics
+probe keeps the exact identity it had before Item 6".
+
+Resolved **without weakening the guard**: the extra probes now use distinct
+kinds already in the `ProbeKind` union and unused by the corpus (`step_check`,
+`true_false`), so every chemistry slot stays a singleton.
+Re-verified: **0 discarded, 0 non-physics identities changed.**
+
+None of the 7 momentarily-shifted identities was production-seeded — all were
+`checkpoint` probes authored in this campaign — but the fix removes the drift
+entirely rather than arguing it was harmless.
+
+## Curriculum feedback — not fixed here
+
+`periodic-properties`' two pre-existing probes (Li-vs-F radius; Na→Na⁺ drop)
+test **atomic and ionic radius**, which no MC on that concept documents; they
+belong on `chem.period.atomic-radius`. Retargeting them onto an unrelated MC
+would mis-route a wrong answer, so their tags are left as recorded defects for
+a curriculum decision.
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | **0** | 126 |
+| short within one band | **0** | 126 |
+| single-misconception concepts | 1 (by design) | **0** |
+| blueprint MCs with no probe | 56 | 121 |
+| ids joining to no blueprint | 49 | 4 |
+| stem-vs-blueprint audited | **0 of 238** | 23 of 186 |
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,812 passed / 9 skipped; `npm run
+build` clean. Offline only — no production write; production still carries the
+pre-correction tags because the seed script skips existing identities.
