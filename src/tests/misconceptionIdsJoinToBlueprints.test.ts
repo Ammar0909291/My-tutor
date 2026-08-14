@@ -230,6 +230,37 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.sol.colligative', 'rather than molarity')).toEqual(['MC1'])
   })
 
+  /**
+   * chem.solid — FIVE more in six concepts. Three of its probes additionally
+   * test something NO misconception on their concept documents (the glass
+   * softening probe on crystal-systems, the doping probe on defects, the
+   * p-type charge-neutrality probe on properties). Those tags are left as
+   * recorded defects rather than retargeted onto an unrelated id.
+   */
+  it('solid.crystal-systems: fractional corner counting is MC2', () => {
+    expect(tagOf('chem.solid.crystal-systems', 'How many atoms actually belong')).toEqual(['MC2'])
+    expect(tagOf('chem.solid.crystal-systems', 'Is that a body-centred cubic')).toEqual(['MC1'])
+  })
+
+  it('solid.packing: packing efficiency is MC3; fluorite holes are MC2', () => {
+    expect(tagOf('chem.solid.packing', 'only 52% efficient')).toEqual(['MC3'])
+    expect(tagOf('chem.solid.packing', 'Does that mean Ca2+ sits in octahedral holes')).toEqual(['MC2'])
+  })
+
+  it('solid.defects: Frenkel-vs-Schottky is MC1', () => {
+    expect(tagOf('chem.solid.defects', 'AgBr commonly shows Frenkel defects')).toEqual(['MC1'])
+  })
+
+  it('solid.ionic-solids: NaCl-vs-CsCl structure is MC3', () => {
+    expect(tagOf('chem.solid.ionic-solids', 'Do they adopt the same crystal structure')).toEqual(['MC3'])
+    expect(tagOf('chem.solid.ionic-solids', 'what species does the LATTICE ENERGY step')).toEqual(['MC2'])
+  })
+
+  it('solid.properties: the semiconductor temperature probe is MC3', () => {
+    expect(tagOf('chem.solid.properties', 'does the electrical conductivity of silicon')).toEqual(['MC3'])
+    expect(tagOf('chem.solid.properties', 'Solid NaCl is packed full')).toEqual(['MC1'])
+  })
+
   it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
     // Both pre-existing probes ask about oxidation state (MC-3) while
     // carrying MC1 and MC2, leaving the fixed-valency and NCl5

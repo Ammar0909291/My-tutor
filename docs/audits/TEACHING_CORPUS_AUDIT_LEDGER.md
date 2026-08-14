@@ -4868,3 +4868,67 @@ reads 0 short on probe count and has had **none** of this checking.
 
 `npx tsc --noEmit` clean; 325 files / 6,817 passed / 9 skipped; `npm run
 build` clean. Offline only — production still carries every pre-correction tag.
+
+---
+
+# chem.solid (6 concepts) — five more mis-tags, plus three with no valid home
+
+Chemistry **120 → 114** short; unprobed blueprint misconceptions **115 → 109**.
+All six `chem.solid` concepts now hold ≥3 gradeable probes in one band.
+
+## Stem-vs-blueprint: 5 retags
+
+| concept | stem | was | is |
+|---|---|---|---|
+| `crystal-systems` | atoms belonging to one cubic cell | MC1 | **MC2** (fractional corner shares) |
+| `packing` | 52% vs 74% efficiency | MC2 | **MC3** (simple cubic denser) |
+| `defects` | AgBr Frenkel vs NaCl Schottky | MC2 | **MC1** (both change density) |
+| `ionic-solids` | NaCl vs CsCl same structure? | MC2 | **MC3** (Madelung vs coordination) |
+| `properties` | Si vs Cu conductivity with temperature | MC1 | **MC3** (NTC/PTC naming) |
+
+## A sub-class worth separating: probes with NO valid home
+
+Three probes test something **no misconception on their concept documents**:
+
+- `crystal-systems` — the glass-softening probe belongs to `chem.solid.amorphous`
+- `defects` — the silicon-doping probe tests "defects are always bad", undocumented
+- `properties` — the p-type charge-neutrality probe matches none of MC-1…MC-3
+
+These are left tagged as they are and recorded. Retargeting them onto an
+unrelated id would mis-route a wrong answer, which is worse than the gap;
+resolving them needs either a blueprint addition or moving the probe to
+another concept, both Curriculum-Pipeline decisions.
+
+## Nine probes authored
+
+`crystal-systems` MC-1 (CsCl is not BCC — two species) and MC-3 (coordination
+counts neighbours, not covalent bonds) · `packing` MC-2 (fluorite: Ca²⁺ on the
+CCP lattice, F⁻ in all tetrahedral holes) · `defects` MC-2 (Fe₀.₉₅O is a real
+compound; definite proportions governs molecular species) and MC-3 (F-centre =
+*Farbzentrum*, not fluorine) · `amorphous` MC-3 (glass softens through Tg, no
+latent heat) · `ionic-solids` MC-2 (the lattice-energy step starts from gaseous
+IONS) · `properties` MC-1 (solid NaCl has ions but they are immobile) and MC-2
+(diamond is an insulator — 5.5 eV vs silicon's 1.12 eV).
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | no-valid-home |
+|---|---|---|---|---|
+| chemistry | 35 of 186 | 31 | **18** | 3 |
+| physics | 0 of 238 | — | unknown | unknown |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 114 |
+| short within one band | 0 | 114 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 109 |
+| ids joining to no blueprint | 49 | 4 |
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,822 passed / 9 skipped; `npm run
+build` clean. 0 discarded, 0 non-physics identities changed. Offline only —
+production still carries every pre-correction tag.

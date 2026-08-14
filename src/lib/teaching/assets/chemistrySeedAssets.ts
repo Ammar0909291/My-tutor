@@ -7203,11 +7203,11 @@ const CRYST_PROBES: SeedProbe[] = [
     stem: 'A simple cubic unit cell has one atom at each of its 8 corners. How many atoms actually belong to this ONE unit cell?',
     choices: [
       { text: '1 atom — each corner atom is shared among 8 adjacent unit cells, contributing only 1/8 each; 8 corners × 1/8 = 1 whole atom', isCorrect: true },
-      { text: '8 atoms — all 8 visible corner atoms belong entirely to this unit cell', isCorrect: false, misconceptionId: `${CRYST}:MC1` },
+      { text: '8 atoms — all 8 visible corner atoms belong entirely to this unit cell', isCorrect: false, misconceptionId: `${CRYST}:MC2` },
     ],
     correctValue: '1 atom',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${CRYST}:MC1`],
+    targetedMisconceptions: [`${CRYST}:MC2`],
     source: `${CRYST_SRC} — distractor targets counting all visible corner atoms as fully belonging to one cell`,
   },
   {
@@ -7224,6 +7224,42 @@ const CRYST_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${CRYST}:MC2`],
     source: `${CRYST_SRC} — misconception: assuming all solids are crystalline with sharp melting points`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: CRYST,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: CsCl has Cl- at the corners and Cs+ at the body centre. Is that a body-centred cubic (BCC) structure?',
+    choices: [
+      { text: 'No — true BCC needs the SAME species at corners and body centre. CsCl has two different ions in those positions, so it is its own structure type despite the identical geometry', isCorrect: true },
+      { text: 'Yes — there is an atom at the body centre, which is what BCC means', isCorrect: false, misconceptionId: `${CRYST}:MC1` },
+    ],
+    correctValue: 'no — BCC requires one species in both positions',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CRYST}:MC1`],
+    source: `${CRYST_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: CRYST,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In NaCl the coordination is 6:6. Does that mean each Na+ forms six covalent bonds to chloride?',
+    choices: [
+      { text: 'No — an ionic crystal has NO discrete covalent bonds. Each Na+ simply has six nearest-neighbour Cl- ions, held by electrostatic attraction spread through the whole lattice. Coordination number counts neighbours, not bonds', isCorrect: true },
+      { text: 'Yes — a coordination number of 6 means six bonds are formed to six chloride ions', isCorrect: false, misconceptionId: `${CRYST}:MC3` },
+    ],
+    correctValue: 'no — coordination counts neighbours, not covalent bonds',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CRYST}:MC3`],
+    source: `${CRYST_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -8621,12 +8657,30 @@ const PACK_PROBES: SeedProbe[] = [
     stem: 'Simple cubic packing is only 52% efficient, while close packing (HCP/CCP) reaches 74%. Does this difference arise because close-packed atoms are somehow smaller?',
     choices: [
       { text: 'No — packing efficiency differences come purely from GEOMETRIC ARRANGEMENT of identically-sized spheres; simple cubic leaves large unfilled gaps, while close packing eliminates most gaps through nested layer positioning', isCorrect: true },
-      { text: 'Yes — close-packed structures use smaller atoms that fit together more tightly than simple cubic structures', isCorrect: false, misconceptionId: `${PACK}:MC2` },
+      { text: 'Yes — close-packed structures use smaller atoms that fit together more tightly than simple cubic structures', isCorrect: false, misconceptionId: `${PACK}:MC3` },
     ],
     correctValue: 'No — purely a geometric arrangement difference, same atom size',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${PACK}:MC2`],
+    targetedMisconceptions: [`${PACK}:MC3`],
     source: `${PACK_SRC} — misconception: packing efficiency differences reflect atom size rather than arrangement`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: PACK,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In fluorite (CaF2) the Ca:F ratio is 1:2. Does that mean Ca2+ sits in octahedral holes?',
+    choices: [
+      { text: 'No — Ca2+ occupies the CCP lattice positions themselves and F- fills ALL the TETRAHEDRAL holes. The 1:2 ratio falls out because a CCP lattice has exactly twice as many tetrahedral holes as lattice atoms', isCorrect: true },
+      { text: 'Yes — the 1:2 stoichiometry means the cation must occupy the octahedral holes', isCorrect: false, misconceptionId: `${PACK}:MC2` },
+    ],
+    correctValue: 'no — Ca2+ is on the CCP lattice, F- fills tetrahedral holes',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PACK}:MC2`],
+    source: `${PACK_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -8711,12 +8765,48 @@ const DEFECT_PROBES: SeedProbe[] = [
     stem: 'AgBr commonly shows Frenkel defects, while NaCl commonly shows Schottky defects. Are these two defect types essentially the same phenomenon with different names?',
     choices: [
       { text: 'No — Frenkel involves an ion moving to an interstitial site (density roughly unchanged), while Schottky involves both a cation and anion vacancy (ions leaving entirely, density decreases); they occur under different cation/anion size-ratio conditions', isCorrect: true },
-      { text: 'Yes — Frenkel and Schottky defects are interchangeable terms describing the same underlying structural imperfection', isCorrect: false, misconceptionId: `${DEFECT}:MC2` },
+      { text: 'Yes — Frenkel and Schottky defects are interchangeable terms describing the same underlying structural imperfection', isCorrect: false, misconceptionId: `${DEFECT}:MC1` },
     ],
     correctValue: 'No — structurally and physically distinct defect types',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${DEFECT}:MC2`],
+    targetedMisconceptions: [`${DEFECT}:MC1`],
     source: `${DEFECT_SRC} — misconception: conflating Frenkel and Schottky defects as identical`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: DEFECT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Fe(0.95)O has a variable, non-whole-number composition. Does that mean it breaks the law of definite proportions and is not a real compound?',
+    choices: [
+      { text: 'No — that law governs MOLECULAR compounds with fixed formulas. Non-stoichiometric solids are extended lattices whose composition genuinely varies within a range, balanced by mixed oxidation states. They are real, well-characterised materials', isCorrect: true },
+      { text: 'Yes — a compound must have a fixed whole-number ratio, so a variable formula disqualifies it', isCorrect: false, misconceptionId: `${DEFECT}:MC2` },
+    ],
+    correctValue: 'no — the law governs molecular compounds, not extended lattices',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DEFECT}:MC2`],
+    source: `${DEFECT_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: DEFECT,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Heating NaCl in sodium vapour turns the crystal yellow-orange through F-centre formation. Does the F stand for fluorine?',
+    choices: [
+      { text: 'No — it is from the German Farbzentrum, "colour centre". An F-centre is an electron trapped in an ANION vacancy, and it forms in any alkali halide (NaCl, KCl, KBr, LiF). No fluorine is involved', isCorrect: true },
+      { text: 'Yes — F-centres are named for fluorine and appear only in fluoride salts', isCorrect: false, misconceptionId: `${DEFECT}:MC3` },
+    ],
+    correctValue: 'no — Farbzentrum, an electron in an anion vacancy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DEFECT}:MC3`],
+    source: `${DEFECT_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -8805,6 +8895,24 @@ const AMORPH_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${AMORPH}:MC2`],
     source: `${AMORPH_SRC} — misconception: amorphous solids have zero order at any structural scale`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: AMORPH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Crystalline quartz melts sharply at 1713 C. Does soda-lime glass melt sharply at some temperature just below that?',
+    choices: [
+      { text: 'No — it has no melting point at all. It softens progressively, turning plastic around Tg ~ 550 C and gradually becoming workable, with no latent heat of fusion. That gradual softening is the diagnostic signature of an amorphous solid', isCorrect: true },
+      { text: 'Yes — it melts at a single fixed temperature slightly below the crystalline value', isCorrect: false, misconceptionId: `${AMORPH}:MC3` },
+    ],
+    correctValue: 'no — gradual softening through Tg, no sharp melting point',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${AMORPH}:MC3`],
+    source: `${AMORPH_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -11566,12 +11674,30 @@ const IONSOLID_PROBES: SeedProbe[] = [
     stem: 'NaCl and CsCl are both simple 1:1 ionic compounds. Do they adopt the same crystal structure?',
     choices: [
       { text: 'No — NaCl adopts rock salt structure (6:6 coordination, radius ratio ~0.52), while CsCl adopts a different structure (8:8 coordination, radius ratio ~0.93) because Cs+ is much larger relative to Cl-; structure depends on radius ratio, not just charge ratio', isCorrect: true },
-      { text: 'Yes — any ionic compound with a 1:1 cation:anion stoichiometric ratio must adopt the identical crystal structure', isCorrect: false, misconceptionId: `${IONSOLID}:MC2` },
+      { text: 'Yes — any ionic compound with a 1:1 cation:anion stoichiometric ratio must adopt the identical crystal structure', isCorrect: false, misconceptionId: `${IONSOLID}:MC3` },
     ],
     correctValue: 'No — different structures despite identical stoichiometric ratio',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${IONSOLID}:MC2`],
+    targetedMisconceptions: [`${IONSOLID}:MC3`],
     source: `${IONSOLID_SRC} — misconception: identical stoichiometric ratio guarantees identical crystal structure`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: IONSOLID,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In the Born-Haber cycle for NaCl, what species does the LATTICE ENERGY step start from?',
+    choices: [
+      { text: 'Gaseous IONS — the step is Na+(g) + Cl-(g) -> NaCl(s) by definition. Sublimation, atomisation, ionisation and electron affinity are the separate earlier steps that turn the elements into those gaseous ions', isCorrect: true },
+      { text: 'Gaseous ATOMS — the lattice forms from Na and Cl atoms, and the charges appear as the lattice assembles', isCorrect: false, misconceptionId: `${IONSOLID}:MC2` },
+    ],
+    correctValue: 'gaseous ions, not atoms',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${IONSOLID}:MC2`],
+    source: `${IONSOLID_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -11641,11 +11767,11 @@ const SOLIDPROP_PROBES: SeedProbe[] = [
     stem: 'As temperature increases, does the electrical conductivity of silicon (a semiconductor) increase or decrease, compared to a typical metal like copper?',
     choices: [
       { text: 'Silicon\'s conductivity INCREASES with temperature (more electrons thermally excited across the small band gap), OPPOSITE to copper\'s conductivity which decreases with temperature (more lattice vibration scatters electrons)', isCorrect: true },
-      { text: 'Both silicon and copper show decreasing conductivity with increasing temperature, following the same universal trend for all solids', isCorrect: false, misconceptionId: `${SOLIDPROP}:MC1` },
+      { text: 'Both silicon and copper show decreasing conductivity with increasing temperature, following the same universal trend for all solids', isCorrect: false, misconceptionId: `${SOLIDPROP}:MC3` },
     ],
     correctValue: 'Silicon\'s conductivity increases; opposite trend from metals',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${SOLIDPROP}:MC1`],
+    targetedMisconceptions: [`${SOLIDPROP}:MC3`],
     source: `${SOLIDPROP_SRC} — distractor targets assuming a universal temperature-conductivity trend across all solid types`,
   },
   {
@@ -11662,6 +11788,42 @@ const SOLIDPROP_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${SOLIDPROP}:MC2`],
     source: `${SOLIDPROP_SRC} — misconception: p-type doping gives the material a genuine net positive charge`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: SOLIDPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Solid NaCl is packed full of Na+ and Cl- ions. Does it conduct electricity?',
+    choices: [
+      { text: 'No — conduction needs MOBILE charge, and in the solid the ions are locked in lattice positions. Melt it or dissolve it and the same ions become mobile, and it conducts well', isCorrect: true },
+      { text: 'Yes — it is made of charged particles, and charged particles carry current', isCorrect: false, misconceptionId: `${SOLIDPROP}:MC1` },
+    ],
+    correctValue: 'no — the ions are present but immobile',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SOLIDPROP}:MC1`],
+    source: `${SOLIDPROP_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: SOLIDPROP,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Diamond and silicon share the same tetrahedral covalent structure and the same group. Is diamond therefore a semiconductor?',
+    choices: [
+      { text: 'No — it is an insulator. Band gap decides this, not structure: diamond is 5.5 eV while silicon is 1.12 eV, and thermal energy at 300 K is only about 0.026 eV, enough to excite carriers across silicon\'s gap but nowhere near diamond\'s', isCorrect: true },
+      { text: 'Yes — same group and same covalent structure means the same electrical behaviour', isCorrect: false, misconceptionId: `${SOLIDPROP}:MC2` },
+    ],
+    correctValue: 'no — 5.5 eV band gap makes diamond an insulator',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SOLIDPROP}:MC2`],
+    source: `${SOLIDPROP_SRC} — MC2, distractor-mapped`,
   },
 ]
 
