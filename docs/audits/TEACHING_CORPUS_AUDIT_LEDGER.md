@@ -5352,3 +5352,106 @@ production-served or production-verified.
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
 0 discarded, 0 non-physics identities changed. Offline only.
+
+---
+
+# chem.hal — the first crossed pair
+
+Seven concepts, fourteen pre-existing probes. Five retags, fifteen probes
+authored, and one defect shape that had not appeared before in this campaign.
+
+## The crossed pair: chem.hal.sn1
+
+`chem.hal.sn1`'s two probes each diagnose the OTHER one's tag.
+
+| probe | distractor states | blueprint | carried |
+|---|---|---|---|
+| "double the [Nu] in an SN1 — what happens to the rate?" | "the rate doubles, since the nucleophile is a necessary reactant" | MC-2 (rate = k[R–X][Nu]) | **MC1** |
+| "does SN1 always give EXACTLY 50:50?" | "the planar carbocation guarantees exactly equal attack from both faces" | MC-1 (complete racemisation) | **MC2** |
+
+A crossed pair is the hardest shape for any structural check to see. Two
+probes, two distinct ids, both ids joining a real blueprint heading, full
+breadth, no surplus, no orphan, no inert tag — every automated measure in this
+repository reports it healthy. And a learner who errs on either one has
+MISCONCEPTION_DETECTED written against the misconception they DID NOT
+demonstrate, so the repair path serves the remedy for the other one. Both are
+now uncrossed and pinned by stem.
+
+## The other four retags
+
+`cfcs` P1 (one Cl• destroys ~100,000 O₃) is the catalytic-cycle probe = MC-2
+("Cl• is used up in the first step, so each CFC destroys one O₃"), not MC-1
+(fluorine depletes ozone by analogy with chlorine) · `grignard` P2 (a free
+–OH elsewhere in the molecule) tests destruction by a protic proton = MC-1
+("can be stored in water"), not MC-2 (adds to the carbonyl oxygen) ·
+`introduction` P1's distractor states MC-2 verbatim — "the aromatic ring
+should provide extra stabilization that makes chlorobenzene MORE reactive" —
+and carried MC-1 (C–F is most reactive because most polar).
+
+## One more hollow concept: chem.hal.sn2
+
+Both existing probes are sound chemistry and neither is any of the three
+documented misconceptions: the 1°/2°/3° SN2 rate probe tests steric hindrance
+(undocumented here), and the Walden-inversion probe tests R/S versus optical
+rotation sign (also undocumented). All three blueprint misconceptions were
+unprobed. Hollow total: 12.
+
+`chem.hal.haloarenes` failed check 3 for a subtler reason worth recording:
+its MC-1 probe asks "why does chlorobenzene NOT undergo SN2?", so the stem's
+own premise hands the answer to a learner who believes it does. A probe whose
+premise contradicts the misconception cannot diagnose it. A proper MC-1 probe
+was authored, presenting the backside-attack proposal as the student's own and
+asking what is wrong with it.
+
+## Fifteen probes authored
+
+`cfcs` MC-1 (HFC-134a has four fluorines and depletes nothing — C–F does not
+photolyse) and MC-3 (CCl₄ is tetrahedral: four bond dipoles sum to zero;
+CHCl₃ does not) · `elimination` MC-1 (cis vs trans 1-bromo-2-methylcyclohexane
+— only the anti-periplanar β-H is usable) and MC-3 (tBuBr + KOtBu gives
+2-methylpropene, not an ether) · `grignard` MC-2 (the methyl bonds to the
+carbonyl CARBON, not the oxygen) and MC-3 (ester + 1 equiv gives the tertiary
+alcohol; the ketone intermediate is more electrophilic than the ester it came
+from) · `haloarenes` MC-1 (there is no back face to attack at an sp² ring
+carbon), MC-2 (chlorobenzene nitrates ~30× SLOWER than benzene while still
+directing o/p) and MC-3 (chlorobenzene needs 350 °C / 300 atm; SNAr needs
+activation, cf. 1-chloro-2,4-dinitrobenzene) · `introduction` MC-1 (CH₃I >
+CH₃Br > CH₃Cl >> CH₃F — bond strength and leaving-group ability, not polarity)
+and MC-3 (low solubility is an energy comparison, not an absence of
+interaction) · `sn1` MC-3 (a primary carbocation is prohibitively unstable, so
+SN1 is not "simpler", it does not happen) · `sn2` MC-1 ((R)-2-bromobutane in
+plain water racemises substantially — SN1 competes), MC-2 (thiolate beats
+ethoxide by a wide margin despite being ~10⁶ times the weaker base) and MC-3
+(concerted means exactly one maximum and no intermediate).
+
+All fifteen open a free `(conceptId, probeKind, gradeBand)` slot. 0 discarded,
+0 non-physics identities changed.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 76 of 186 | 71 | 36 | 4 | 23 | 12 | 5 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 73 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 70 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+36 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows already
+in production; the seed script skips existing identities, so none of the
+corrections and none of the 34 probes authored across the last two batches
+have reached the database. Nothing here is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+Offline only.

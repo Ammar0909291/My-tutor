@@ -371,6 +371,61 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.coord.stability', 'OVERALL formation constant')).toEqual(['MC3'])
   })
 
+  /**
+   * chem.hal — five retags, including the first cleanly CROSSED PAIR found in
+   * chemistry: chem.hal.sn1's two probes each diagnose the other's tag. The
+   * nucleophile-concentration probe is MC-2 (the rate law) and the "exactly
+   * 50:50?" probe is MC-1 (complete racemisation); they carried MC1 and MC2
+   * respectively. A crossed pair is the one shape that survives every
+   * structural check — two probes, two distinct ids, both joining, full
+   * breadth — and still serves each learner the wrong remedy.
+   *
+   * chem.hal.sn2 was hollow: the steric-hindrance probe and the R/S-vs-
+   * rotation-sign probe are both sound chemistry, and neither is any of the
+   * three documented misconceptions.
+   */
+  it('hal.sn1: the crossed pair is uncrossed', () => {
+    expect(tagOf('chem.hal.sn1', 'double the concentration of the nucleophile')).toEqual(['MC2'])
+    expect(tagOf('chem.hal.sn1', 'always produce EXACTLY')).toEqual(['MC1'])
+    expect(tagOf('chem.hal.sn1', 'single-step ionisation is simpler')).toEqual(['MC3'])
+  })
+
+  it('hal: the four other retags', () => {
+    // cfcs P1 is the catalytic-cycle probe = MC-2 (Cl• consumed, one O3 per
+    // CFC), not MC-1 (fluorine depletes ozone by analogy with chlorine).
+    expect(tagOf('chem.hal.cfcs', 'can destroy approximately 100,000 ozone')).toEqual(['MC2'])
+    // grignard P2 is the acidic -OH probe: the reagent is destroyed by a
+    // protic group = MC-1, not MC-2 (adds to the carbonyl oxygen).
+    expect(tagOf('chem.hal.grignard', 'a free -OH group elsewhere')).toEqual(['MC1'])
+    // introduction P1's distractor states MC-2 verbatim ("the aromatic ring
+    // should provide extra stabilization ... MORE reactive").
+    expect(tagOf('chem.hal.introduction', 'resists the same nucleophilic substitution')).toEqual(['MC2'])
+    // elimination P2 was already correct on MC-2 and stays there.
+    expect(tagOf('chem.hal.elimination', "Does Zaitsev's rule")).toEqual(['MC2'])
+  })
+
+  it('hal: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.hal.cfcs', 'HFC-134a')).toEqual(['MC1'])
+    expect(tagOf('chem.hal.cfcs', 'CCl₄ is a polar molecule')).toEqual(['MC3'])
+
+    expect(tagOf('chem.hal.elimination', 'trans-1-bromo-2-methylcyclohexane')).toEqual(['MC1'])
+    expect(tagOf('chem.hal.elimination', 'potassium tert-butoxide')).toEqual(['MC3'])
+
+    expect(tagOf('chem.hal.grignard', 'Which atom of the carbonyl group')).toEqual(['MC2'])
+    expect(tagOf('chem.hal.grignard', 'one equivalent of CH₃MgBr to methyl benzoate')).toEqual(['MC3'])
+
+    expect(tagOf('chem.hal.haloarenes', 'attacks chlorobenzene from the face opposite')).toEqual(['MC1'])
+    expect(tagOf('chem.hal.haloarenes', 'nitrate FASTER than benzene')).toEqual(['MC2'])
+    expect(tagOf('chem.hal.haloarenes', 'aqueous NaOH at 50')).toEqual(['MC3'])
+
+    expect(tagOf('chem.hal.introduction', 'Rank CH₃F, CH₃Cl')).toEqual(['MC1'])
+    expect(tagOf('chem.hal.introduction', 'no interaction at all')).toEqual(['MC3'])
+
+    expect(tagOf('chem.hal.sn2', 'warmed in plain water')).toEqual(['MC1'])
+    expect(tagOf('chem.hal.sn2', 'thiolate')).toEqual(['MC2'])
+    expect(tagOf('chem.hal.sn2', 'two transition states with a dip')).toEqual(['MC3'])
+  })
+
   it('coord: every documented misconception in the six hollow concepts now has a probe', () => {
     // Pinned by stem so the diagnosis cannot drift back onto a probe that
     // does not test it. Each stem below is the one authored FOR that
