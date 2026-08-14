@@ -88,23 +88,55 @@ function computeGeometry(p: VectorParams): VectorGeometry {
   }
 }
 
+/**
+ * A vector's angle, written the way the figure draws it.
+ *
+ * Measured in production 2026-08-14 on `phys.meas.vector-addition`: the figure
+ * drew A(3) horizontally at 0° and B(4) vertically at 90°, and the tutor
+ * narrated "one force pulling north with a strength of 3 newtons, and another
+ * pulling east with a strength of 4 newtons" — A and B swapped. With that
+ * reading the resultant would sit at atan(3/4) = 36.9°, while the figure's own
+ * title says 53.1°, so the learner is shown two incompatible stories at once.
+ *
+ * The prompt was NOT missing the information: the scene's stage narration
+ * already said "Vector A has magnitude 3 at 0°, and vector B has magnitude 4
+ * at 90°", and the model paraphrased it wrongly anyway. What the deterministic
+ * layer CAN fix is the channel the visual contract binds most tightly — the
+ * text written on the figure, which the contract instructs the tutor to quote
+ * "exactly as the learner reads it". A label of "A (3)" carries no direction,
+ * so nothing the tutor says about direction can be contradicted by the picture.
+ * "A (3 at 0°)" cannot be narrated as north without the learner seeing the
+ * mismatch, and the same string is what reaches the model as quotable text.
+ *
+ * Compass words are deliberately NOT used: the scene has no north, and a figure
+ * that claims one would be making a stronger claim than it can support. The
+ * angle is the figure's own measured quantity.
+ */
+function angleLabel(deg: number): string {
+  const d = round(((deg % 360) + 360) % 360, 1)
+  return `${d}°`
+}
+
 /** Build a vector-addition SceneSpec. Pure, deterministic. */
 export function buildVectorScene(params: VectorParams): SceneSpec {
   const geo = computeGeometry(params)
+  const aLabel = `A (${params.aMag} at ${angleLabel(params.aAngleDeg)})`
+  const bLabel = `B (${params.bMag} at ${angleLabel(params.bAngleDeg)})`
+  const rLabel = `R (${round(geo.resultantMag, 2)} at ${angleLabel(geo.resultantAngleDeg)})`
   return {
     id: `vector-${params.aMag}@${params.aAngleDeg}-${params.bMag}@${params.bAngleDeg}`,
     title: `Vector Addition: |R| ≈ ${round(geo.resultantMag, 2)} at ${round(geo.resultantAngleDeg, 1)}°`,
     sceneType: 'diagram',
     teachingGoal: 'Show that two vectors add tip-to-tail (parallelogram law) to give a resultant R = A + B.',
     cameraDistance: VISUAL_MAX * 2.5,
-    ariaLabel: `Vector A of magnitude ${params.aMag} and vector B of magnitude ${params.bMag} adding to a resultant of magnitude ${round(geo.resultantMag, 2)}.`,
+    ariaLabel: `Vector A of magnitude ${params.aMag} at ${angleLabel(params.aAngleDeg)} and vector B of magnitude ${params.bMag} at ${angleLabel(params.bAngleDeg)}, adding tip-to-tail to a resultant of magnitude ${round(geo.resultantMag, 2)} at ${angleLabel(geo.resultantAngleDeg)}.`,
     steps: [
       {
         narration: `Vector A has magnitude ${params.aMag} at ${params.aAngleDeg}°, and vector B has magnitude ${params.bMag} at ${params.bAngleDeg}°, both drawn from the origin.`,
         objects: [
           { type: 'point', id: 'origin', position: [0, 0, 0], color: '#94a3b8', radius: 0.3 },
-          { type: 'vector', id: 'A', from: [0, 0, 0], to: geo.aTip, color: '#22c55e', text: `A (${params.aMag})` },
-          { type: 'vector', id: 'B', from: [0, 0, 0], to: geo.bTip, color: '#3b82f6', text: `B (${params.bMag})` },
+          { type: 'vector', id: 'A', from: [0, 0, 0], to: geo.aTip, color: '#22c55e', text: aLabel },
+          { type: 'vector', id: 'B', from: [0, 0, 0], to: geo.bTip, color: '#3b82f6', text: bLabel },
         ],
       },
       {
@@ -116,7 +148,7 @@ export function buildVectorScene(params: VectorParams): SceneSpec {
       {
         narration: `The resultant R = A + B runs from the origin to that head, with magnitude ≈ ${round(geo.resultantMag, 2)} at ${round(geo.resultantAngleDeg, 1)}°.`,
         objects: [
-          { type: 'vector', id: 'R', from: [0, 0, 0], to: geo.rTip, color: '#ef4444', text: `R (${round(geo.resultantMag, 2)})` },
+          { type: 'vector', id: 'R', from: [0, 0, 0], to: geo.rTip, color: '#ef4444', text: rLabel },
         ],
       },
     ],
