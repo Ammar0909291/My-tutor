@@ -20,7 +20,7 @@
  *   4. Calls routeAI() with existing history + instruction as user turn —
  *      the instruction is NEVER saved to the DB.
  *   5. Saves ONLY the ASSISTANT response.
- *   6. Returns { success, text, provider }.
+ *   6. Returns { success, text, provider, activeLessonPersisted }.
  *
  * Intentionally minimal — does NOT replicate the full route.ts system prompt
  * pipeline (mastery gate, evidence blocks, inline practice, visualization, etc.)
@@ -50,6 +50,15 @@ const schema = z.object({
 })
 
 const HISTORY_LIMIT = 20
+
+/**
+ * Bounded retry for the activeLessonSlug pointer write. See the call site for
+ * the production failure this exists for. Three attempts total; the two sleeps
+ * are paid only when a write actually fails.
+ */
+const ACTIVE_LESSON_WRITE_ATTEMPTS = 3
+const ACTIVE_LESSON_WRITE_BACKOFF_MS = [100, 250] as const
+const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
 export async function POST(req: Request) {
   try {
@@ -106,8 +115,17 @@ export async function POST(req: Request) {
     // single-digit milliseconds against an LLM call that costs seconds, so
     // awaiting is the cheaper side of the trade. The catch preserves the
     // original guarantee: the learner still receives their lesson if the
-    // write fails, and lesson-init never crashes because of it.
+    // write fails, and lesson-init never crashes because of it. That guarantee
+    // is kept — but it is no longer allowed to be SILENT; see the retry and
+    // the reported flag below.
+    //
+    // Whether the pointer this endpoint owns actually moved. Reported to the
+    // client so a failed lesson switch is attributable rather than silent.
+    // `true` when there was nothing to write (no topicSlug) — that is not a
+    // failed switch, it is a caller that did not ask for one.
+    let activeLessonPersisted = true
     if (topicSlug) {
+      activeLessonPersisted = false
       const subjectCode = learnSession.subject.slug
       try {
         // A brand-new row must NOT be stamped with the opened lesson's order.
@@ -127,7 +145,34 @@ export async function POST(req: Request) {
           ? computeCurriculumEntryOrder(graph, normalizeToCanonicalLevel(profile?.currentLevel))
           : undefined
 
-        await prisma.studentProgress.upsert({
+        // RETRIED. Awaiting alone was not enough — measured in production
+        // 2026-08-14 on a real learner account, mid-audit:
+        //
+        //   Can't reach database server at ...pooler.supabase.com:6543
+        //   Invalid `prisma.studentProgress.upsert()` invocation: Socket timeout
+        //   [visual-v2] concept: 'phys.mech.momentum'   <- the OPENED lesson
+        //                                                  never became active
+        //
+        // The catch below preserved the lesson (correctly — a learner must
+        // never lose their lesson to a pointer write), and that is exactly why
+        // the failure was invisible. The learner's experience was:
+        //
+        //   1. open lesson B  -> lesson B's opening text arrives, looking fine
+        //   2. the pointer write fails and is swallowed
+        //   3. the NEXT chat turn resolves the OLD lesson and teaches A again
+        //
+        // Nothing in the UI could distinguish that from working. The pooler
+        // recovered within seconds both times it was seen, so a bounded retry
+        // is the whole fix: the upsert is idempotent (it sets a pointer to a
+        // constant), so re-running it is always safe.
+        //
+        // Cost is bounded and paid ONLY on failure — at most two extra
+        // attempts and ~350ms of sleep, against an LLM call that costs
+        // seconds. A healthy write still takes exactly one attempt and adds
+        // nothing. There is deliberately no second store for this fact: the
+        // chat route resolves the lesson from `activeLessonSlug` and must keep
+        // exactly one source of truth.
+        const writePointer = () => prisma.studentProgress.upsert({
           where: { userId_subjectCode: { userId, subjectCode } },
           create: {
             userId,
@@ -142,8 +187,30 @@ export async function POST(req: Request) {
           // furthest-progress.
           update: { activeLessonSlug: topicSlug, lastStudiedAt: new Date() },
         })
+
+        for (let attempt = 1; attempt <= ACTIVE_LESSON_WRITE_ATTEMPTS; attempt++) {
+          try {
+            await writePointer()
+            activeLessonPersisted = true
+            if (attempt > 1) {
+              console.log(`[lesson-init] activeLessonSlug persisted on attempt ${attempt}`)
+            }
+            break
+          } catch (err) {
+            if (attempt === ACTIVE_LESSON_WRITE_ATTEMPTS) throw err
+            console.warn(
+              `[lesson-init] activeLessonSlug persist attempt ${attempt} failed, retrying:`,
+              (err as { message?: string })?.message ?? err,
+            )
+            await sleep(ACTIVE_LESSON_WRITE_BACKOFF_MS[attempt - 1])
+          }
+        }
       } catch (err) {
-        console.warn('[lesson-init] activeLessonSlug persist failed:', err)
+        // Still non-fatal — the learner receives their lesson either way. But
+        // it is no longer silent: the response says the pointer did not move,
+        // so a divergence between what was opened and what is taught next is
+        // attributable instead of mysterious.
+        console.error('[lesson-init] activeLessonSlug persist FAILED after retries:', err)
       }
     }
 
@@ -315,7 +382,7 @@ export async function POST(req: Request) {
       },
     })
 
-    return NextResponse.json({ success: true, text: routed.text, provider: routed.provider })
+    return NextResponse.json({ success: true, text: routed.text, provider: routed.provider, activeLessonPersisted })
   } catch (err: any) {
     console.error('[lesson-init]', err)
     return NextResponse.json({ success: false, error: err.message ?? 'Internal error' }, { status: 500 })
