@@ -7696,6 +7696,40 @@ const G13_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${G13}:MC2`],
     source: `${G13_SRC} — misconception: incomplete octet implies inherent molecular instability`,
   },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: G13,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Aluminium is a metal. Does it react with concentrated NaOH solution?',
+    choices: [
+      { text: 'Yes, vigorously — 2Al + 2NaOH + 2H2O -> 2NaAlO2 + 3H2. Al2O3 and Al(OH)3 are AMPHOTERIC, so aluminium reacts with strong base as well as with acid', isCorrect: true },
+      { text: 'No — it is a metal, so it reacts with acids only', isCorrect: false, misconceptionId: `${G13}:MC2` },
+    ],
+    correctValue: 'yes — aluminium is amphoteric',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G13}:MC2`],
+    source: `${G13_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: G13,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Boric acid, B(OH)3, turns water acidic. Does it do so by donating a proton?',
+    choices: [
+      { text: 'No — it is a LEWIS acid. It ACCEPTS a lone pair from water to form [B(OH)4]-, and the H+ is released by the water molecule, not from the boron compound itself', isCorrect: true },
+      { text: 'Yes — like any acid it donates one of its own O-H protons', isCorrect: false, misconceptionId: `${G13}:MC3` },
+    ],
+    correctValue: 'no — a Lewis acid, H+ comes from water',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G13}:MC3`],
+    source: `${G13_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.pblock.group14 ─────────────────────────────────────────────────────
@@ -7761,11 +7795,11 @@ const G14_PROBES: SeedProbe[] = [
     stem: 'Diamond is an electrical insulator, but graphite (also pure carbon) conducts electricity. What structural difference explains this?',
     choices: [
       { text: 'In diamond, all 4 valence electrons per carbon are locked in localized sp³ bonds (no free carriers); in graphite\'s sp² layers, one electron per carbon is delocalized across the sheet, free to carry current', isCorrect: true },
-      { text: 'This is impossible — since both are pure carbon, they must have identical electrical properties', isCorrect: false, misconceptionId: `${G14}:MC1` },
+      { text: 'This is impossible — since both are pure carbon, they must have identical electrical properties', isCorrect: false, misconceptionId: `${G14}:MC2` },
     ],
     correctValue: 'Different bonding structure (localized vs delocalized electrons)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${G14}:MC1`],
+    targetedMisconceptions: [`${G14}:MC2`],
     source: `${G14_SRC} — distractor targets assuming identical elemental composition guarantees identical properties`,
   },
   {
@@ -7782,6 +7816,23 @@ const G14_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${G14}:MC2`],
     source: `${G14_SRC} — misconception: catenation is exclusively a carbon phenomenon`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: G14,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: CO2 dissolves in water to give carbonic acid. Does SiO2 behave the same way?',
+    choices: [
+      { text: 'No — SiO2 is a NETWORK COVALENT solid and does not dissolve in water at room temperature. Silicon cannot form effective pi bonds with oxygen, so it builds an extended lattice instead of discrete O=Si=O molecules', isCorrect: true },
+      { text: 'Yes — silicon sits directly below carbon, so SiO2 dissolves to give silicic acid the same way', isCorrect: false, misconceptionId: `${G14}:MC1` },
+    ],
+    correctValue: 'no — SiO2 is a network solid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G14}:MC1`],
+    source: `${G14_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -7866,6 +7917,40 @@ const G15_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${G15}:MC2`],
     source: `${G15_SRC} — misconception: phosphorus allotropes are merely color variants of the same structure`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: G15,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: N2 has a triple bond. Does P4 contain P≡P triple bonds?',
+    choices: [
+      { text: 'No — P4 is a tetrahedron held together by six P-P SINGLE bonds, with strained 60-degree angles. Phosphorus 3p orbitals are too diffuse for effective pi overlap, so it catenates into single-bonded cages instead', isCorrect: true },
+      { text: 'Yes — phosphorus is directly below nitrogen, so P4 has triple bonds too', isCorrect: false, misconceptionId: `${G15}:MC1` },
+    ],
+    correctValue: 'no — six P-P single bonds',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G15}:MC1`],
+    source: `${G15_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: G15,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Nitrogen has oxidation state +5 in NO3-. How many bonds does that nitrogen actually form?',
+    choices: [
+      { text: 'Four — oxidation state is a bookkeeping number, not a bond count. Nitrogen is period 2 with no d orbitals, so it can never exceed four bonds however high the oxidation state reads', isCorrect: true },
+      { text: 'Five — an oxidation state of +5 means five bonds to oxygen', isCorrect: false, misconceptionId: `${G15}:MC2` },
+    ],
+    correctValue: 'four bonds, despite the +5 state',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G15}:MC2`],
+    source: `${G15_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -7953,6 +8038,57 @@ const G16_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${G16}:MC2`],
     source: `${G16_SRC} — misconception: industrial sulfuric acid production is a single-step process`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: G16,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: H2S, H2Se and H2Te boil higher as they get heavier, yet H2O boils highest of all. Is that because water molecules are small and pack tightly?',
+    choices: [
+      { text: 'No — the heavier hydrides follow the normal van der Waals mass trend. Water breaks it because of HYDROGEN BONDING, which is far stronger than dispersion; small size alone would predict the LOWEST boiling point', isCorrect: true },
+      { text: 'Yes — smaller molecules pack more tightly, which raises the boiling point', isCorrect: false, misconceptionId: `${G16}:MC1` },
+    ],
+    correctValue: 'no — hydrogen bonding, not packing',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G16}:MC1`],
+    source: `${G16_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: G16,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: SO2 and Cl2 both bleach a coloured flower. Is the bleaching equally permanent?',
+    choices: [
+      { text: 'No — SO2 bleaches by REDUCTION and the colour slowly returns as sunlight re-oxidises the product. Chlorine bleaches by OXIDATION, which destroys the chromophore permanently', isCorrect: true },
+      { text: 'Yes — both remove the colour permanently', isCorrect: false, misconceptionId: `${G16}:MC2` },
+    ],
+    correctValue: 'no — SO2 bleaching reverses',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G16}:MC2`],
+    source: `${G16_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'true_false' keeps this slot a SINGLETON.
+    conceptId: G16,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Sulfur forms SF6 with an expanded octet. Can oxygen form OF6?',
+    choices: [
+      { text: 'No — oxygen is period 2 with only 2s and 2p available and no accessible d orbitals, so it is capped at two bonds (three with a formal charge). Expanded octets need period 3 or below', isCorrect: true },
+      { text: 'Yes — oxygen is in the same group as sulfur, so it expands its octet the same way', isCorrect: false, misconceptionId: `${G16}:MC3` },
+    ],
+    correctValue: 'no — period 2 cannot expand its octet',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G16}:MC3`],
+    source: `${G16_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -8136,11 +8272,11 @@ const G17_PROBES: SeedProbe[] = [
     stem: 'Alkali metal reactivity INCREASES down Group 1, but halogen reactivity DECREASES down Group 17. Why are these trends opposite, given both groups have similar "farther from nucleus" size trends?',
     choices: [
       { text: 'Alkali metals must LOSE an electron (easier when farther from nucleus, less nuclear pull); halogens must GAIN an electron (harder when farther from nucleus, since incoming electron feels weaker attraction and more shielding)', isCorrect: true },
-      { text: 'This must be an error — both groups should show the exact same reactivity trend direction since they\'re both influenced by atomic size', isCorrect: false, misconceptionId: `${G17}:MC1` },
+      { text: 'This must be an error — both groups should show the exact same reactivity trend direction since they\'re both influenced by atomic size', isCorrect: false, misconceptionId: `${G17}:MC3` },
     ],
     correctValue: 'Opposite electron gain/loss requirements cause opposite trends',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${G17}:MC1`],
+    targetedMisconceptions: [`${G17}:MC3`],
     source: `${G17_SRC} — distractor targets assuming all groups must share the same reactivity-trend direction`,
   },
   {
@@ -8151,12 +8287,46 @@ const G17_PROBES: SeedProbe[] = [
     stem: 'Can iodine (I₂) displace chlorine from a sodium chloride (NaCl) solution?',
     choices: [
       { text: 'No — displacement only works when a MORE reactive halogen displaces a LESS reactive one; since chlorine is more reactive than iodine (higher up in the group), iodine cannot displace chlorine — only the reverse (Cl2 displacing I⁻) works', isCorrect: true },
-      { text: 'Yes — any halogen can displace any other halogen from its salt in either direction', isCorrect: false, misconceptionId: `${G17}:MC2` },
+      { text: 'Yes — any halogen can displace any other halogen from its salt in either direction', isCorrect: false, misconceptionId: `${G17}:MC3` },
     ],
     correctValue: 'No — displacement only works in the more-reactive-to-less-reactive direction',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${G17}:MC2`],
+    targetedMisconceptions: [`${G17}:MC3`],
     source: `${G17_SRC} — misconception: halogen displacement reactions are bidirectional`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: G17,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Chlorine has a MORE negative electron affinity than fluorine. Does that make Cl2 the stronger oxidising agent?',
+    choices: [
+      { text: 'No — F2 is the stronger oxidiser overall. Oxidising power in solution combines bond dissociation energy, electron affinity and hydration energy; F2 wins on its weak F-F bond and the very large hydration energy of the small F- ion', isCorrect: true },
+      { text: 'Yes — electron affinity is what oxidising power means, so the more negative value wins', isCorrect: false, misconceptionId: `${G17}:MC1` },
+    ],
+    correctValue: 'no — F2 is stronger despite the EA anomaly',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${G17}:MC1`],
+    source: `${G17_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: G17,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Fluorine is the most electronegative element, so the H-F bond is highly polar. Is HF therefore a strong acid?',
+    choices: [
+      { text: 'No — HF is WEAK (0.1 M gives pH about 2.1, against pH 1.0 for HCl). Acid strength depends on bond STRENGTH, and the H-F bond is exceptionally strong; polarity alone does not make an acid dissociate', isCorrect: true },
+      { text: 'Yes — the high bond polarity makes HF the strongest of the hydrogen halides', isCorrect: false, misconceptionId: `${G17}:MC2` },
+    ],
+    correctValue: 'no — HF is a weak acid',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G17}:MC2`],
+    source: `${G17_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -8242,6 +8412,40 @@ const G18_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${G18}:MC2`],
     source: `${G18_SRC} — misconception: chemical inertness implies no practical/industrial value`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: G18,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Argon shields the weld pool in arc welding. Is that because argon does not conduct electricity?',
+    choices: [
+      { text: 'No — it is chosen for chemical INERTNESS, to stop the molten metal reacting with atmospheric O2 or N2. Argon is also cheap, being 0.93% of the atmosphere, and non-flammable', isCorrect: true },
+      { text: 'Yes — a non-conducting gas is needed so the arc is not short-circuited', isCorrect: false, misconceptionId: `${G18}:MC2` },
+    ],
+    correctValue: 'no — chemical inertness',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${G18}:MC2`],
+    source: `${G18_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: G18,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A "neon sign" glows blue-violet. Does it contain neon?',
+    choices: [
+      { text: 'No — neon glows red-orange. "Neon sign" is a generic trade name; blue-violet is argon, yellow is helium, green-yellow is krypton, blue-white is xenon. The gas is chosen for the colour wanted', isCorrect: true },
+      { text: 'Yes — all neon signs contain neon, and the colour comes from the glass coating', isCorrect: false, misconceptionId: `${G18}:MC3` },
+    ],
+    correctValue: 'no — blue-violet is argon',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${G18}:MC3`],
+    source: `${G18_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -16257,12 +16461,12 @@ const PBLOCK_PROBES: SeedProbe[] = [
     stem: 'The inert-pair effect explains why lead (Group 14) predominantly forms Pb²⁺ rather than Pb⁴⁺. What is the underlying reason?',
     choices: [
       { text: 'The 6s² electrons in Pb are stabilised by relativistic contraction, making them less available for bonding than the 6p electrons', isCorrect: true },
-      { text: 'Lead simply does not have enough electrons in total to form four bonds at the same time', isCorrect: false, misconceptionId: `${PBLOCK}:MC1` },
+      { text: 'Lead simply does not have enough electrons in total to form four bonds at the same time', isCorrect: false, misconceptionId: `${PBLOCK}:MC3` },
       { text: 'The higher +4 oxidation state would require ionic character that lead cannot achieve due to its large atomic radius', isCorrect: false },
     ],
     correctValue: 'Relativistic stabilisation of 6s² makes those electrons reluctant to bond',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${PBLOCK}:MC1`],
+    targetedMisconceptions: [`${PBLOCK}:MC3`],
     source: `${PBLOCK_SRC} — inert pair effect mechanism: relativistic s orbital contraction`,
   },
   {
@@ -16279,6 +16483,40 @@ const PBLOCK_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PBLOCK}:MC2`],
     source: `${PBLOCK_SRC} — diagonal relationships across p-block`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: PBLOCK,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Do the Group 16 hydride boiling points rise steadily down the group, H2O < H2S < H2Se < H2Te?',
+    choices: [
+      { text: 'No — H2S < H2Se < H2Te does rise with mass through dispersion forces, but H2O sits at +100 C against H2Te\'s -2 C. Hydrogen bonding lifts water far above the trend rather than starting it', isCorrect: true },
+      { text: 'Yes — boiling point increases steadily with molecular mass down the group', isCorrect: false, misconceptionId: `${PBLOCK}:MC1` },
+    ],
+    correctValue: 'no — water breaks the trend upward',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PBLOCK}:MC1`],
+    source: `${PBLOCK_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: PBLOCK,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: NaCl just dissolves in water. Why does SiCl4 fume and hydrolyse violently instead?',
+    choices: [
+      { text: 'Because NaCl is IONIC — its ions simply hydrate, with no covalent bonds to break — while SiCl4 is COVALENT and silicon has vacant d orbitals, so water\'s lone pair attacks the silicon and the Si-Cl bonds are cleaved', isCorrect: true },
+      { text: 'It does not — SiCl4 is a simple chloride like NaCl and dissolves in the same way', isCorrect: false, misconceptionId: `${PBLOCK}:MC2` },
+    ],
+    correctValue: 'ionic hydration vs covalent hydrolysis',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PBLOCK}:MC2`],
+    source: `${PBLOCK_SRC} — MC2, distractor-mapped`,
   },
 ]
 

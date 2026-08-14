@@ -5187,3 +5187,64 @@ authored physics probes — the assertion was wrong, not the corpus.
 
 `npx tsc --noEmit` clean; 326 files / 6,854 passed / 9 skipped; `npm run
 build` clean. 0 discarded, 0 non-physics identities changed. Offline only.
+
+---
+
+# chem.pblock (7 concepts) — hollow concepts five and six
+
+Chemistry **95 → 87** short; unprobed blueprint misconceptions **90 → 84**.
+
+## Four retags
+
+| concept | stem | was | is |
+|---|---|---|---|
+| `group14` | diamond insulator vs graphite conductor | MC1 | **MC2** (that IS the diamond/graphite misconception) |
+| `group17` | why Group 1 and 17 trends run opposite | MC1 | **MC3** (halogen reactivity increases down) |
+| `group17` | can I₂ displace Cl⁻? | MC2 | **MC3** (same reactivity-order misconception) |
+| `trends` | inert-pair effect, Pb²⁺ vs Pb⁴⁺ | MC1 | **MC3** (max OS = valence electrons) |
+
+## Hollow concepts five and six
+
+`group15` and `group16` each had **both** probes testing something their
+blueprint does not document. `group16` is the starkest so far: two valid-looking
+probes, valid ids, no orphans — and **all three** documented misconceptions
+(H₂O/H₂S boiling point, SO₂ bleaching reversibility, oxygen's inability to
+expand its octet) with no diagnostic at all.
+
+Running hollow count: `hyd.alkanes`, `hyd.conformations`, `alc.diols`,
+`kinet.arrhenius`, `pblock.group15`, `pblock.group16`.
+
+## Fourteen probes authored
+
+`group13` MC-2 (aluminium is amphoteric — reacts vigorously with NaOH) and
+MC-3 (boric acid is a LEWIS acid; the H⁺ comes from water) · `group14` MC-1
+(SiO₂ is a network solid, not CO₂'s analogue) · `group15` MC-1 (P₄ has six
+single bonds, no P≡P) and MC-2 (+5 oxidation state, four actual bonds) ·
+`group16` MC-1 (hydrogen bonding, not packing), MC-2 (SO₂ bleaching reverses in
+sunlight), MC-3 (oxygen cannot expand its octet) · `group17` MC-1 (F₂ is the
+stronger oxidiser despite Cl's more negative EA) and MC-2 (HF is WEAK — bond
+strength, not polarity) · `group18` MC-2 (argon is chosen for inertness, not
+non-conduction) and MC-3 (a blue-violet "neon" sign is argon) · `trends` MC-1
+(water breaks the hydride trend upward) and MC-2 (ionic hydration vs covalent
+hydrolysis).
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 62 of 186 | 57 | 30 | 4 | 18 | 6 | 3 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 87 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 84 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Validation
+
+`npx tsc --noEmit` clean; 326 files / 6,855 passed / 9 skipped; `npm run
+build` clean. 0 discarded, 0 non-physics identities changed. Offline only.

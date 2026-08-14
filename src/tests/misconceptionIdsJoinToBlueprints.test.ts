@@ -328,6 +328,18 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.kinet.mechanism', 'Is the mechanism thereby proved')).toEqual(['MC3'])
   })
 
+  /**
+   * chem.pblock — four retags, and TWO more hollow concepts (group15,
+   * group16), bringing the hollow total to six. group16 had all three MCs
+   * unprobed while carrying two valid-looking probes.
+   */
+  it('pblock: diamond-vs-graphite is MC2 and the halogen trend probes are MC3', () => {
+    expect(tagOf('chem.pblock.group14', 'Diamond is an electrical insulator')).toEqual(['MC2'])
+    expect(tagOf('chem.pblock.group17', 'Alkali metal reactivity INCREASES')).toEqual(['MC3'])
+    expect(tagOf('chem.pblock.group17', 'Can iodine (I₂) displace chlorine')).toEqual(['MC3'])
+    expect(tagOf('chem.pblock.trends', 'inert-pair effect explains why lead')).toEqual(['MC3'])
+  })
+
   it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
     // Both pre-existing probes ask about oxidation state (MC-3) while
     // carrying MC1 and MC2, leaving the fixed-valency and NCl5
