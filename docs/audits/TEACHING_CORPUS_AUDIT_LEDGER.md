@@ -4654,3 +4654,71 @@ count. It also fails if a blueprint ever drops an id a probe still references.
 
 `npx tsc --noEmit` clean; 325 files / 6,779 passed / 9 skipped; `npm run
 build` clean. Live resolver 0 discarded, 0 non-physics identities changed.
+
+---
+
+# CHEMISTRY BATCH — chem.state (6) + chem.bio (4), and a THIRD defect class
+
+Chemistry **142 → 132** short; unprobed blueprint misconceptions **133 → 128**.
+
+Six `chem.state` concepts had a documented misconception with no gradeable
+probe (Boyle's law read as direct proportion; effusion by momentum rather than
+speed; van der Waals `a` as the volume term; evaporation as slow boiling;
+supercritical CO₂ as "just a gas"). One, `kinetic-theory`, had all three
+documented misconceptions probed already and took a transfer case — the
+existing pair compares two GASES, the new one asks about the spread of speeds
+WITHIN one gas, which neither reaches.
+
+## The third defect class: the id joins, but the content does not
+
+The guard added last iteration catches ids matching **no** blueprint. It
+cannot catch a probe whose id matches a real blueprint id while the QUESTION
+diagnoses a different misconception. The join succeeds; every count looks
+healthy. Found by reading `chem.bio` concept by concept:
+
+**`chem.bio.enzyme-kinetics` — tags SWAPPED.** The probe asking "Km 0.1 mM vs
+10 mM, which binds more strongly?" is precisely blueprint MC-1 ("a higher Km
+means the enzyme binds its substrate more strongly") but carried MC2. The
+competitive-inhibitor probe is MC-2's territory and carried MC1.
+
+**`chem.bio.lipids` — mis-tagged, hiding a real gap.** The probe on unsaturated
+melting points carried MC1, but blueprint MC-1 is *saponification* ("just
+dissolves the fat in the base"); the probe actually tests MC-2 ("unsaturated
+means liquid"). So MC-1 was **unprobed while appearing covered**, and a new
+probe was authored for it.
+
+Why this outranks a plain gap: a learner who errs has MISCONCEPTION_DETECTED
+written against the wrong id, so the repair path serves the remedy for a
+misconception they do not hold. Actively wrong, not merely absent.
+
+Corrected in the repo and pinned by assertion. **It cannot be detected
+structurally** — it needs stem-against-blueprint reading. Two were found in
+the six `chem.bio` concepts examined; **the other 180 chemistry concepts and
+all 238 physics concepts have NOT been audited this way.** Recorded as an open
+risk rather than presented as resolved.
+
+### Production divergence, stated explicitly
+
+Chemistry is seeded in production (744 HUMAN_CURATOR rows). These tag
+corrections change `targetedMisconceptions`, not `canonicalSlug`, so **no row
+is stranded** — but the seed script skips identities that already exist, so
+**the corrected tags do NOT reach production without a targeted update**. The
+repo is right; production still carries the crossed tags.
+
+## Measured state after this iteration
+
+| | physics | chemistry |
+|---|---|---|
+| concepts | 238 | 186 |
+| short of 3 gradeable | **0** | 132 |
+| short within one band | **0** | 132 |
+| single-misconception concepts | 1 (correct by design) | **0** |
+| blueprint MCs with no probe | 56 | 128 |
+| ids joining to no blueprint | 49 (blueprint-side) | 4 |
+| mis-tagged (id joins, content differs) | **unaudited** | 2 found, 2 fixed; rest unaudited |
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,809 passed / 9 skipped; `npm run
+build` clean. Live resolver 0 discarded, 0 non-physics identities changed.
+Offline only — no production write, nothing production-verified.

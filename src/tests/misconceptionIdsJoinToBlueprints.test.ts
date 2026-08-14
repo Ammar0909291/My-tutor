@@ -125,3 +125,53 @@ describe('every probed misconception id joins to its blueprint', () => {
     }
   })
 })
+
+/**
+ * A SECOND DEFECT CLASS: THE ID JOINS, BUT THE PROBE TESTS SOMETHING ELSE.
+ *
+ * The suite above catches ids that match NO blueprint. It cannot catch a probe
+ * whose id matches a real blueprint id while the QUESTION diagnoses a
+ * different misconception — the join succeeds and every count looks healthy.
+ *
+ * Two were found by reading chem.bio concept by concept:
+ *
+ *   chem.bio.enzyme-kinetics — tags SWAPPED. The probe asking "Km 0.1 vs
+ *     10 mM, which binds more strongly?" is exactly blueprint MC-1 ("a higher
+ *     Km means the enzyme binds more strongly") but carried MC2; the
+ *     competitive-inhibitor probe is MC-2's territory and carried MC1.
+ *
+ *   chem.bio.lipids — the probe on unsaturated melting points carried MC1,
+ *     but blueprint MC-1 is saponification ("just dissolves the fat in the
+ *     base"); the probe actually tests MC-2 ("unsaturated means liquid").
+ *     Blueprint MC-1 was therefore UNPROBED while appearing covered.
+ *
+ * Why this is worse than a plain gap: a learner who errs has
+ * MISCONCEPTION_DETECTED written against the wrong id, so the repair path
+ * serves the remedy for a misconception they do not hold.
+ *
+ * This cannot be detected structurally — it needs a human reading of stem
+ * against blueprint. These assertions pin the two that were found, so the
+ * correction cannot silently revert, and record the class for the rest of the
+ * corpus, which has NOT been audited this way.
+ */
+describe('probes whose id joined but whose content did not', () => {
+  const tagOf = (conceptId: string, stemFragment: string) => {
+    const probe = CHEMISTRY_PROBES.find(
+      (p) => p.conceptId === conceptId && p.stem.includes(stemFragment),
+    )
+    expect(probe, `probe not found: ${conceptId} / ${stemFragment}`).toBeDefined()
+    return (probe!.targetedMisconceptions ?? []).map((m) => String(m).split(':').pop())
+  }
+
+  it('enzyme-kinetics: the Km-affinity probe is MC1, the inhibitor probe is MC2', () => {
+    // blueprint MC-1 is the Km/affinity inversion; MC-2 is competitive vs
+    // non-competitive. These were crossed.
+    expect(tagOf('chem.bio.enzyme-kinetics', 'Which has higher substrate affinity')).toEqual(['MC1'])
+    expect(tagOf('chem.bio.enzyme-kinetics', 'What happens to the apparent Km and Vmax')).toEqual(['MC2'])
+  })
+
+  it('lipids: saponification is MC1; the melting-point probes are MC2', () => {
+    expect(tagOf('chem.bio.lipids', 'Has the fat simply dissolved in the base')).toEqual(['MC1'])
+    expect(tagOf('chem.bio.lipids', 'LOWER melting points than saturated fats')).toEqual(['MC2'])
+  })
+})

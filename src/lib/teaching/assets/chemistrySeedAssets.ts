@@ -1038,6 +1038,27 @@ const KMT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${KMT}:MC3`],
     source: `${KMT_SRC} — misconception: pressure depends only on temperature, not volume`,
   },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). A TRANSFER case for MC2 (all particles share one speed). The existing probes compare two GASES; this one asks about the spread WITHIN one gas, which neither reaches.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: KMT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A flask holds nitrogen at a single fixed temperature. Do all its molecules move at the same speed?',
+    choices: [
+      { text: 'No — at any temperature the molecules span a continuous Maxwell-Boltzmann distribution of speeds, some far slower and some far faster than average. "Average speed" and "most probable speed" are two different points on that curve, not a description of every molecule', isCorrect: true },
+      { text: 'Yes — temperature fixes the speed, so at one temperature every molecule moves at the average speed', isCorrect: false, misconceptionId: `${KMT}:MC2` },
+    ],
+    correctValue: 'no — a continuous distribution of speeds',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${KMT}:MC2`],
+    source: `${KMT_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.env.atmosphere ─────────────────────────────────────────────────────
@@ -1754,6 +1775,27 @@ const GASL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${GASL}:MC1`],
     source: `${GASL_SRC} — misconception: Celsius works if you adjust R`,
+  },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). Targets MC2, which had no gradeable probe.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: GASL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A sealed syringe of gas is squeezed so the pressure DOUBLES at constant temperature. What happens to the volume?',
+    choices: [
+      { text: 'It HALVES — Boyle\'s law is P1V1 = P2V2, an inverse relationship. Squeezing the gas into less space makes the particles strike the walls more often, which is exactly what raises the pressure', isCorrect: true },
+      { text: 'It doubles too — pressure and volume are directly proportional, so they rise together', isCorrect: false, misconceptionId: `${GASL}:MC2` },
+    ],
+    correctValue: 'it halves — P and V are inversely related',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GASL}:MC2`],
+    source: `${GASL_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -2642,6 +2684,27 @@ const MMGAS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${MMGAS}:MC1`],
     source: `${MMGAS_SRC} — misconception: heavier particles effuse faster`,
   },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). Targets MC2, which had no gradeable probe.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: MMGAS,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: H2 (M = 2) and O2 (M = 32) are held at the same temperature. Which effuses faster through a pinhole, and by what factor?',
+    choices: [
+      { text: 'H2, by a factor of 4 — effusion follows average SPEED, not momentum. Equal temperature means equal average kinetic energy, so the 16x heavier O2 moves 4x slower: r(H2)/r(O2) = sqrt(32/2) = 4', isCorrect: true },
+      { text: 'O2, because it is heavier and therefore carries more momentum into the hole', isCorrect: false, misconceptionId: `${MMGAS}:MC2` },
+    ],
+    correctValue: 'H2, four times faster',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MMGAS}:MC2`],
+    source: `${MMGAS_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.state.real-gases ───────────────────────────────────────────────────
@@ -2723,6 +2786,27 @@ const REALG_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${REALG}:MC2`],
     source: `${REALG_SRC} — misconception: smaller atoms deviate more (deviation tracks intermolecular force strength)`,
+  },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: REALG,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In the van der Waals equation, CO2 has a = 3.59 while He has a = 0.034. What does the constant a describe?',
+    choices: [
+      { text: 'The PRESSURE correction for intermolecular ATTRACTIONS — CO2 attracts far more strongly than helium, which is why its a is a hundred times larger. It is b that corrects for excluded molecular volume', isCorrect: true },
+      { text: 'The molecular VOLUME correction — a comes first in the equation, so it handles the size of the molecules', isCorrect: false, misconceptionId: `${REALG}:MC3` },
+    ],
+    correctValue: 'a corrects for intermolecular attraction',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${REALG}:MC3`],
+    source: `${REALG_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -10667,6 +10751,27 @@ const LIQ_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${LIQ}:MC2`],
     source: `${LIQ_SRC} — misconception: high vapor pressure correlates with strong rather than weak intermolecular forces`,
   },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: LIQ,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A puddle at 20 C dries up over a day, yet water does not boil at 20 C under 1 atm. How can it evaporate without boiling?',
+    choices: [
+      { text: 'Because they are different processes: evaporation happens at the SURFACE at any temperature, as fast-moving molecules escape. Boiling happens throughout the BULK and only once the vapour pressure equals the external pressure — at 20 C water\'s vapour pressure is about 0.023 atm, far below 1 atm', isCorrect: true },
+      { text: 'Evaporation is just slow boiling, so the puddle is boiling gently the whole time', isCorrect: false, misconceptionId: `${LIQ}:MC3` },
+    ],
+    correctValue: 'surface escape at any T, vs bulk boiling at matched pressure',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LIQ}:MC3`],
+    source: `${LIQ_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.sblock.water ───────────────────────────────────────────────────────
@@ -11959,6 +12064,27 @@ const PHASEDIAG_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PHASEDIAG}:MC2`],
     source: `${PHASEDIAG_SRC} — misconception: triple point is a range rather than an exact coordinate`,
+  },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). Targets MC3, which had no gradeable probe.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: PHASEDIAG,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Supercritical CO2 is used to decaffeinate coffee. Beyond the critical point, has it simply become a gas with no liquid-like properties?',
+    choices: [
+      { text: 'No — it holds liquid-like DENSITY (about 0.5-0.9 g/cm3, so it dissolves like a solvent) together with gas-like viscosity and diffusivity (so it penetrates fast). That combination is exactly why it is useful', isCorrect: true },
+      { text: 'Yes — past the critical point it is essentially just a special gas and loses the useful liquid properties', isCorrect: false, misconceptionId: `${PHASEDIAG}:MC3` },
+    ],
+    correctValue: 'no — liquid-like density with gas-like transport',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHASEDIAG}:MC3`],
+    source: `${PHASEDIAG_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -14040,6 +14166,27 @@ const CARBS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CARBS}:MC2`],
     source: `${CARBS_SRC} — misconception: alpha/beta anomers are merely alternate names rather than distinct stereoisomers`,
   },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). A TRANSFER case for MC1 (Fischer and Haworth forms are different compounds). The existing probe reasons from the Tollens result; this one asks what a single crystal DOES on dissolving, which it never reaches.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: CARBS,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Pure crystalline alpha-D-glucose is dissolved in water. Its optical rotation drifts from +112 degrees to +52.7 degrees and then stops. What happened?',
+    choices: [
+      { text: 'The ring opened and re-closed repeatedly through the open-chain form until alpha and beta reached equilibrium — mutarotation. All three are the SAME compound interconverting, not different substances', isCorrect: true },
+      { text: 'The alpha-glucose reacted and was converted into a different compound with its own rotation', isCorrect: false, misconceptionId: `${CARBS}:MC1` },
+    ],
+    correctValue: 'mutarotation — one compound reaching anomeric equilibrium',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBS}:MC1`],
+    source: `${CARBS_SRC} — MC1, distractor-mapped`,
+  },
 ]
 
 // ─── chem.carb.ketones ───────────────────────────────────────────────────────
@@ -14621,6 +14768,27 @@ const PROTEIN_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${PROTEIN}:MC2`],
     source: `${PROTEIN_SRC} — misconception: all protein structural levels are held together by identical bonding forces`,
   },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). A TRANSFER case for MC1 (denaturation breaks peptide bonds). The existing probe asks the yes/no directly; this one asks what RENATURATION implies, which only works if the sequence survived.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: PROTEIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Ribonuclease denatured with urea regains full catalytic activity when the urea is removed. What does that prove about denaturation?',
+    choices: [
+      { text: 'That the primary sequence survived intact — the peptide bonds were never broken. Only the weaker interactions folding the chain (hydrogen bonds, hydrophobic contacts, disulfides) were disrupted, so the chain can refold itself', isCorrect: true },
+      { text: 'That the broken peptide bonds re-formed spontaneously in the correct order once the urea was gone', isCorrect: false, misconceptionId: `${PROTEIN}:MC1` },
+    ],
+    correctValue: 'the peptide bonds were never broken',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PROTEIN}:MC1`],
+    source: `${PROTEIN_SRC} — MC1, distractor-mapped`,
+  },
 ]
 
 // ─── chem.bio.lipids ─────────────────────────────────────────────────────────
@@ -14692,11 +14860,11 @@ const LIPID_PROBES: SeedProbe[] = [
     stem: 'Why do unsaturated fats (containing cis C=C double bonds) generally have LOWER melting points than saturated fats?',
     choices: [
       { text: 'The cis double bond creates a kink/bend in the fatty acid chain, preventing tight, regular molecular packing and weakening intermolecular London dispersion forces compared to the straight-chain packing of saturated fats', isCorrect: true },
-      { text: 'Double bonds are inherently weaker chemical bonds than single bonds, which directly lowers the overall stability and melting point of the molecule', isCorrect: false, misconceptionId: `${LIPID}:MC1` },
+      { text: 'Double bonds are inherently weaker chemical bonds than single bonds, which directly lowers the overall stability and melting point of the molecule', isCorrect: false, misconceptionId: `${LIPID}:MC2` },
     ],
     correctValue: 'Kinked shape disrupts molecular packing, weakening intermolecular forces',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${LIPID}:MC1`],
+    targetedMisconceptions: [`${LIPID}:MC2`],
     source: `${LIPID_SRC} — distractor targets attributing melting point differences to bond strength rather than molecular packing/shape`,
   },
   {
@@ -14713,6 +14881,27 @@ const LIPID_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${LIPID}:MC2`],
     source: `${LIPID_SRC} — misconception: trans-unsaturated fats behave physically like cis-unsaturated fats`,
+  },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). Targets the blueprint's MC-1 (saponification), which was genuinely UNPROBED — see the mis-tag note in the ledger: both existing probes test MC-2 territory while carrying MC1/MC2 tags.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: LIPID,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A triglyceride is boiled with aqueous NaOH and soap forms. Has the fat simply dissolved in the base?',
+    choices: [
+      { text: 'No — it has been chemically destroyed. Hydroxide attacks all three ester carbonyls, cleaving them to give glycerol plus three fatty-acid carboxylate ions. The original triglyceride no longer exists, and the carboxylate is too resonance-stabilised to re-esterify', isCorrect: true },
+      { text: 'Yes — the base is a strong solvent, so the fat dissolves into the solution and can be recovered unchanged', isCorrect: false, misconceptionId: `${LIPID}:MC1` },
+    ],
+    correctValue: 'no — base-promoted ester hydrolysis destroys the triglyceride',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LIPID}:MC1`],
+    source: `${LIPID_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -16391,12 +16580,12 @@ const ENZKIN_PROBES: SeedProbe[] = [
     stem: 'A competitive inhibitor is added to an enzyme at fixed concentration. What happens to the apparent Km and Vmax?',
     choices: [
       { text: 'Apparent Km increases (more substrate needed to reach half-Vmax); Vmax is unchanged (can be reached at sufficiently high [S])', isCorrect: true },
-      { text: 'Km increases AND Vmax decreases — the inhibitor permanently reduces the enzyme\'s maximum rate', isCorrect: false, misconceptionId: `${ENZKIN}:MC1` },
+      { text: 'Km increases AND Vmax decreases — the inhibitor permanently reduces the enzyme\'s maximum rate', isCorrect: false, misconceptionId: `${ENZKIN}:MC2` },
       { text: 'Km is unchanged; only Vmax decreases because the inhibitor blocks some active sites permanently', isCorrect: false },
     ],
     correctValue: 'Apparent Km increases; Vmax unchanged',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${ENZKIN}:MC1`],
+    targetedMisconceptions: [`${ENZKIN}:MC2`],
     source: `${ENZKIN_SRC} — competitive inhibition: Km increases, Vmax unchanged`,
   },
   {
@@ -16407,12 +16596,33 @@ const ENZKIN_PROBES: SeedProbe[] = [
     stem: 'Enzyme A has Km = 0.1 mM; Enzyme B has Km = 10 mM (both for the same substrate). Which has higher substrate affinity?',
     choices: [
       { text: 'Enzyme A — lower Km means the enzyme is half-saturated at a lower substrate concentration, indicating higher affinity', isCorrect: true },
-      { text: 'Enzyme B — higher Km means the enzyme binds substrate more tightly and holds onto it longer', isCorrect: false, misconceptionId: `${ENZKIN}:MC2` },
+      { text: 'Enzyme B — higher Km means the enzyme binds substrate more tightly and holds onto it longer', isCorrect: false, misconceptionId: `${ENZKIN}:MC1` },
     ],
     correctValue: 'Enzyme A — lower Km = higher affinity',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${ENZKIN}:MC2`],
+    targetedMisconceptions: [`${ENZKIN}:MC1`],
     source: `${ENZKIN_SRC} — Km interpretation: lower Km = higher substrate affinity`,
+  },
+  {
+    // THIRD gradeable probe — a gate needs three graded correct answers
+    // (CHECK 1 + PRACTICE 2). A TRANSFER case for MC2 (competitive vs non-competitive told apart by binding strength rather than site and kinetics). The existing probe reads off Km and Vmax; this one asks what raising [S] does, which separates the two mechanisms directly.
+    //
+    // probeKind 'checkpoint' is a FREE slot: chemistry is seeded in
+    // production, and a second 'mcq' here would ladder the slug and
+    // re-identify the already-seeded probe.
+    conceptId: ENZKIN,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: An inhibited enzyme recovers its full Vmax when the substrate concentration is raised high enough. Which kind of inhibitor is it, and why?',
+    choices: [
+      { text: 'Competitive — it binds the ACTIVE SITE reversibly, so abundant substrate simply outcompetes it and Vmax is restored (with Km raised). A non-competitive inhibitor binds elsewhere and lowers Vmax no matter how much substrate is added', isCorrect: true },
+      { text: 'Non-competitive — recovering activity shows the inhibitor was only weakly bound and was displaced', isCorrect: false, misconceptionId: `${ENZKIN}:MC2` },
+    ],
+    correctValue: 'competitive — active-site binding, outcompeted by substrate',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ENZKIN}:MC2`],
+    source: `${ENZKIN_SRC} — MC2, distractor-mapped`,
   },
 ]
 

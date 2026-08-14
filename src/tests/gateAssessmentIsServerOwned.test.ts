@@ -300,7 +300,8 @@ describe('the non-physics authored corpora convert too', () => {
     //            -> 149 (chem.redox, chem.dblock, chem.nitro, chem.poly)
     //            -> 142 (the seven BREADTH gaps; one probe each closed the
     //                   missing misconception AND the missing third item)
-    ['chemistry', CHEMISTRY_PROBES, 142],
+    //            -> 132 (chem.state x6, chem.bio x4)
+    ['chemistry', CHEMISTRY_PROBES, 132],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]
