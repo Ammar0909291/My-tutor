@@ -1044,7 +1044,7 @@ const EQN_PROBES: SeedProbe[] = [
     ],
     correctValue: 'none',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${EQN}:MC-3`],
+    targetedMisconceptions: [`${EQN}:MC-3`, `${EQN}:MC-1`],
     source: `${EQN_SRC} — Component 2 MC-3 trigger (x+1=x variant), distractor-mapped incl. an MC-1 evaluate-the-expression distractor`,
   },
 ]
@@ -6300,7 +6300,7 @@ const TRIG_PROBES: SeedProbe[] = [
     ],
     correctValue: '2\u03c0',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${TRIG}:MC-1`],
+    targetedMisconceptions: [`${TRIG}:MC-1`, `${TRIG}:MC-2`],
     source: `${TRIG_SRC} — MC-1 trigger as probe, distractor-mapped`,
   },
   {
@@ -44318,7 +44318,7 @@ const KE_ASSESS_PROBES: SeedProbe[] = [
     ],
     correctValue: '20 J',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [],
+    targetedMisconceptions: [`${KE}:MC-KE-LINEAR`],
     source: `${KE_SRC} — Component 2 Prerequisite Dependency Map PD-1`,
   },
   {
@@ -44480,7 +44480,7 @@ const WET_ASSESS_PROBES: SeedProbe[] = [
     ],
     correctValue: 'KE = 90 J; W = 60 J',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [],
+    targetedMisconceptions: [`${WET}:MC-PARTIAL-WORK`],
     source: `${WET_SRC} — Component 2 Prerequisite Dependency Map PD-1/PD-2`,
   },
   {

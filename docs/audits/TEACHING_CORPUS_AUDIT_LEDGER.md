@@ -5115,3 +5115,75 @@ t is the first-order plot) · `catalysis` MC-3 (halving Ea gives ~10⁷, not 2×
 
 `npx tsc --noEmit` clean; 325 files / 6,829 passed / 9 skipped; `npm run
 build` clean. 0 discarded, 0 non-physics identities changed. Offline only.
+
+---
+
+# The surplus tag turned out to be STRUCTURALLY detectable — and found 10 more
+
+Last iteration recorded the surplus tag as a manual finding. It is not: a probe
+listing more `targetedMisconceptions` than its distractors can trigger is
+checkable in code. Building that guard immediately surfaced **three related
+defect shapes, all live**, none of which any existing measure could see.
+
+## 1. Contradictory tag — the probe's tag disagrees with its own evidence
+
+`chem.kinet.arrhenius`' "paper doesn't ignite" probe was tagged **MC1** while
+its only mapped distractor carried **MC2**. A wrong answer would have written
+MC2 while the probe's metadata claimed MC1.
+
+## 2. Inert tag — a tag no answer can ever fire
+
+`chem.org.iupac`' substituent-ordering probe was tagged MC2 with **no
+distractor carrying a misconceptionId at all**.
+
+Both probes also test something their blueprint does not document (Ea-vs-
+thermodynamics; alphabetical ORDERING where MC-2 is locant PLACEMENT). Rather
+than retarget them onto an unrelated id, both were made **honestly
+non-diagnostic** — tag removed, question kept. That is a legitimate state: the
+physics corpus uses prerequisite DIAGNOSTIC probes carrying no tag.
+
+## 3. Undeclared distractor — the largest of the three, 10 probes
+
+A distractor naming an id the probe never declares. **6 chemistry + 4 physics
+probes.** Consequence: `MISCONCEPTION_DETECTED` writes an id the probe's own
+metadata omits, so any join keyed on `targetedMisconceptions` misses it and
+breadth undercounts. Examples: `chem.thermo.heat-capacities` triggered MC1
+while declaring only MC3; `phys.mech.kinetic-energy`'s prerequisite diagnostic
+declared nothing while triggering `MC-KE-LINEAR`.
+
+**The distractor is the operative behaviour** — it is what actually writes
+evidence — so the tag list was the thing at fault. Every added id was confirmed
+to exist in that concept's blueprint. Chemistry's unprobed-MC count fell
+94 → 90 purely from declaring what was already being diagnosed.
+
+## A regression the breadth ratchet caught on me
+
+Emptying `chem.org.iupac`' tag left that concept testing a single misconception,
+and the chemistry breadth ratchet (pinned at 0) failed. Fixed the right way —
+by authoring the MC-2 probe the concept had never had (locant placement,
+2-methylpentane vs methylpentane-2) — not by raising the ceiling.
+
+## New guard
+
+`misconceptionIdsJoinToBlueprints.test.ts` gains two strict assertions over
+physics and chemistry: no distractor may name an id the probe does not target,
+and every targeted misconception must have a distractor that can trigger it.
+
+The second is **scoped to choice-based probes**, deliberately: a `short_answer`
+or open `checkpoint` probe has no distractors at all yet can legitimately carry
+a tag graded by keyword or model. Applying it unscoped flagged 107 correctly
+authored physics probes — the assertion was wrong, not the corpus.
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 95 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | **90** (was 94) |
+| contradictory / inert / undeclared tags | **0** | **0** |
+
+## Validation
+
+`npx tsc --noEmit` clean; 326 files / 6,854 passed / 9 skipped; `npm run
+build` clean. 0 discarded, 0 non-physics identities changed. Offline only.

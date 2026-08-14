@@ -338,3 +338,80 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.period.valency', 'Can nitrogen, directly above it, form NCl5')).toEqual(['MC2'])
   })
 })
+
+/**
+ * A TAG MUST BE REACHABLE, AND A DISTRACTOR MUST NOT INVENT ONE.
+ *
+ * ── WHY THIS EXISTS ─────────────────────────────────────────────────────────
+ * The stem-vs-blueprint audit is manual and cannot be automated. But two of its
+ * findings turn out to be STRUCTURALLY detectable, and both were live:
+ *
+ *   SURPLUS TAG — a probe listing more targetedMisconceptions than its
+ *     distractors can trigger. Four chem.kinet probes carried a second id with
+ *     no distractor behind it, which inflated apparent breadth and would have
+ *     recorded a wrong answer against a misconception the learner may not hold.
+ *
+ *   CONTRADICTORY TAG — chem.kinet.arrhenius' "paper doesn't ignite" probe was
+ *     tagged MC1 while its only mapped distractor carried MC2. The tag and the
+ *     evidence the probe would actually write disagreed with each other.
+ *
+ *   INERT TAG — chem.org.iupac's substituent-ordering probe was tagged MC2 with
+ *     NO distractor carrying a misconceptionId at all, so the tag could never
+ *     fire under any answer.
+ *
+ * brainSeedAssets.test.ts already asserted the second direction, but only over
+ * SEED_PROBES — four concepts — so the corpus holding ~99% of the content had
+ * no coverage. That is the gap this closes.
+ *
+ * A probe with NO targeted misconception is legitimate and deliberately allowed:
+ * physics uses prerequisite DIAGNOSTIC probes that carry none, and the two
+ * corrections above made falsely-diagnostic probes honestly non-diagnostic
+ * rather than retargeting them onto an unrelated id.
+ */
+describe('misconception tags and distractors agree', () => {
+  const corpora = [
+    ['physics', [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.conceptId.startsWith('phys.'))],
+    ['chemistry', CHEMISTRY_PROBES],
+  ] as const
+
+  const mappedIds = (probe: { choices?: ReadonlyArray<{ misconceptionId?: string }> | null }) => {
+    const ids = new Set<string>()
+    for (const choice of probe.choices ?? []) if (choice.misconceptionId) ids.add(String(choice.misconceptionId))
+    return ids
+  }
+
+  it.each(corpora)('%s: no distractor names an id the probe does not target', (_s, probes) => {
+    const offenders: string[] = []
+    for (const probe of probes) {
+      const targeted = new Set((probe.targetedMisconceptions ?? []).map(String))
+      for (const id of mappedIds(probe)) {
+        if (!targeted.has(id)) offenders.push(`${probe.conceptId}: distractor ${id} not in targetedMisconceptions`)
+      }
+    }
+    // STRICT. A distractor that writes an id the probe never claimed means the
+    // evidence and the authoring disagree about what is being diagnosed.
+    expect(offenders).toEqual([])
+  })
+
+  it.each(corpora)('%s: every targeted misconception has a distractor that can trigger it', (_s, probes) => {
+    const offenders: string[] = []
+    for (const probe of probes) {
+      // SCOPE, and the reason for it: a short_answer or open checkpoint probe
+      // has no choices at all, so it has no distractor to carry an id — yet it
+      // can still legitimately target a misconception, graded by keyword or by
+      // the model. Applying reachability to those would flag 107 physics probes
+      // that are correctly authored. The claim only means something where
+      // distractors exist to carry it.
+      if (!probe.choices || probe.choices.length === 0) continue
+      const targeted = new Set((probe.targetedMisconceptions ?? []).map(String))
+      if (targeted.size === 0) continue // deliberately non-diagnostic — allowed
+      const reachable = mappedIds(probe)
+      for (const id of targeted) {
+        if (!reachable.has(id)) offenders.push(`${probe.conceptId}: ${id} has no distractor`)
+      }
+    }
+    // STRICT for choice-based probes: an unreachable tag there is a claim the
+    // probe cannot honour under any answer. Both live violations are fixed.
+    expect(offenders).toEqual([])
+  })
+})

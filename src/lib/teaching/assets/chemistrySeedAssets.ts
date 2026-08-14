@@ -628,7 +628,7 @@ const STOICH_PROBES: SeedProbe[] = [
     ],
     correctValue: 'H₂',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${STOICH}:MC1`],
+    targetedMisconceptions: [`${STOICH}:MC1`, `${STOICH}:MC3`],
     source: `${STOICH_SRC} — distractor targets "less moles = limiting" without checking ratio`,
   },
   {
@@ -784,7 +784,7 @@ const SUBAT_PROBES: SeedProbe[] = [
     ],
     correctValue: 'Z=17, A=35',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${SUBAT}:MC1`],
+    targetedMisconceptions: [`${SUBAT}:MC1`, `${SUBAT}:MC3`],
     source: `${SUBAT_SRC} — distractor targets "electrons count toward mass number"`,
   },
   {
@@ -861,7 +861,7 @@ const EMR_PROBES: SeedProbe[] = [
     ],
     correctValue: '200 nm',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${EMR}:MC1`],
+    targetedMisconceptions: [`${EMR}:MC1`, `${EMR}:MC3`],
     source: `${EMR_SRC} — distractor targets "longer λ = more energy" misconception`,
   },
   {
@@ -941,7 +941,7 @@ const THSYS_PROBES: SeedProbe[] = [
     ],
     correctValue: 'Isolated system',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${THSYS}:MC2`],
+    targetedMisconceptions: [`${THSYS}:MC2`, `${THSYS}:MC3`],
     source: `${THSYS_SRC} — distractor targets "sealed = closed" (ignoring insulation = no energy exchange)`,
   },
   {
@@ -2676,7 +2676,7 @@ const HEATC_PROBES: SeedProbe[] = [
     ],
     correctValue: 'Expansion work at constant pressure',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${HEATC}:MC3`],
+    targetedMisconceptions: [`${HEATC}:MC3`, `${HEATC}:MC1`],
     source: `${HEATC_SRC} — distractor targets "pressure requires energy to maintain" misconception`,
   },
   {
@@ -2757,7 +2757,7 @@ const MMGAS_PROBES: SeedProbe[] = [
     ],
     correctValue: '32 g/mol',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${MMGAS}:MC3`],
+    targetedMisconceptions: [`${MMGAS}:MC3`, `${MMGAS}:MC1`],
     source: `${MMGAS_SRC} — distractor targets linear (not square-root) rate-mass relationship`,
   },
   {
@@ -3348,12 +3348,17 @@ const ARRH_PROBES: SeedProbe[] = [
     stem: 'Combustion of paper is highly exothermic (releases lots of energy), yet paper doesn\'t spontaneously catch fire at room temperature. This is because:',
     choices: [
       { text: 'The reaction has a significant activation energy barrier — a spark or flame is needed to supply enough energy for molecules to react, even though the overall process releases energy', isCorrect: true },
-      { text: 'Exothermic reactions require the addition of a catalyst before they can begin', isCorrect: false, misconceptionId: `${ARRH}:MC2` },
+      { text: 'Exothermic reactions require the addition of a catalyst before they can begin', isCorrect: false },
       { text: 'The reaction is actually endothermic at room temperature and only becomes exothermic when heated', isCorrect: false },
     ],
     correctValue: 'Activation energy barrier exists independent of ΔH',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${ARRH}:MC1`],
+    // NO targeted misconception: this probe tests activation energy against
+    // thermodynamics, which chem.kinet.arrhenius does not document. It
+    // previously claimed MC1 while its distractor wrote MC2 — a tag that
+    // contradicted its own evidence. Left in place as a valid question,
+    // but no longer claiming a diagnosis it cannot make.
+    targetedMisconceptions: [],
     source: `${ARRH_SRC} — distractor targets "exothermic reactions have no activation barrier"`,
   },
   {
@@ -7358,8 +7363,32 @@ const IUPAC_PROBES: SeedProbe[] = [
     ],
     correctValue: 'Alphabetical ordering (chloro before methyl), independent of discovery order',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${IUPAC}:MC2`],
+    // NO targeted misconception: this tests alphabetical ORDERING of
+    // substituents, while MC-2 is locant PLACEMENT (2-methyl vs methyl-2).
+    // It also had no distractor carrying a misconceptionId, so the tag
+    // could never have fired. Recorded rather than retargeted.
+    targetedMisconceptions: [],
     source: `${IUPAC_SRC} — misconception: substituents ordered by discovery/position rather than alphabetically`,
+  },
+  {
+    // MC-2 (locant PLACEMENT) had never been probed. The concept's second
+    // probe appeared to cover it but tests alphabetical ORDERING, and its tag
+    // was removed rather than retargeted — see the note there. This probe
+    // closes MC-2 properly, and restores the concept's breadth.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: IUPAC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Which is the correct IUPAC name — "2-methylpentane" or "methylpentane-2"?',
+    choices: [
+      { text: '2-methylpentane — the locant goes immediately BEFORE the part of the name it modifies. The same rule gives pentan-3-one rather than pentanone-3', isCorrect: true },
+      { text: 'methylpentane-2 — locants are written after the substituent name they refer to', isCorrect: false, misconceptionId: `${'${IUPAC}'}:MC2` },
+    ],
+    correctValue: '2-methylpentane',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${'${IUPAC}'}:MC2`],
+    source: `${'${IUPAC_SRC}'} — MC2, distractor-mapped`,
   },
 ]
 
