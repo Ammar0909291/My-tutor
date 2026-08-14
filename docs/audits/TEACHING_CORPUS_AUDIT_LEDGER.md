@@ -7440,3 +7440,31 @@ Regression test: `src/tests/vectorSceneLabelsCarryDirection.test.ts`.
 
 `npx tsc --noEmit` clean; 331 files / 7064 passed / 9 skipped;
 `npm run build` exit 0. Live re-test after deploy recorded separately below.
+
+## LIVE RE-TEST AFTER THE FIX — verified, not asserted
+
+Deployment `dpl_G7kT6oSZ…` (commit `41a8661`) READY in production. The same
+lesson was reopened with the same real account and the same question.
+
+BEFORE (deployment prior to the fix):
+
+> "one force pulling **north** with a strength of 3 newtons, and another force
+>  pulling **east** with a strength of 4 newtons"
+
+A and B swapped; incompatible with the figure's own 53.1° title.
+
+AFTER (deployment carrying the fix):
+
+> "you can see vector A labeled as **3 at 0 degrees** and vector B labeled as
+>  **4 at 90 degrees**, both starting from the origin. … The resultant vector
+>  R, shown as **5 at 53.1 degrees**, is the single combined path running
+>  straight from the origin to the final head of vector B."
+
+The tutor now quotes the on-figure labels verbatim, exactly as the contract
+instructs, and every direction it states matches what is drawn. The served
+scene is unchanged (`vector-3@0-4@90`), confirming the geometry was untouched.
+
+TEACHING CLAIM → SELECTED VISUAL → VISUAL MEANING → LEARNER INTERPRETATION:
+head-to-tail addition of 3 at 0° and 4 at 90° → `vector-3@0-4@90` → A, B and R
+drawn from the origin with magnitude and angle on each → a learner reading both
+gets one consistent story. **CORRECT.**
