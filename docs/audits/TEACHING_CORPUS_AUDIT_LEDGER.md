@@ -7641,3 +7641,93 @@ openings behind. A clean session behaved correctly. Not a defect — method.
 
 `npx tsc --noEmit` clean; 332 files / 7075 passed / 9 skipped;
 `npm run build` exit 0; live re-test as above.
+
+---
+
+# Iteration — REAL-LEARNER VISUAL AUDIT, chemistry (2026-08-14)
+
+Driven against the deployed application with the owner's real account. The
+first half verified this session's own round-6 judgement calls; the second
+half found a systemic defect neither offline analysis nor any existing test
+could see.
+
+## Every round-6 chemistry judgement verified live — in both directions
+
+| concept | round-6 call | live behaviour | verdict |
+|---|---|---|---|
+| `chem.solid.crystal-systems` | DEMOTED | served `lattice-fcc`; tutor taught the SEVEN systems in its own words, reaching for a tilted-boxes analogy for the non-cubic ones, and never claimed the figure showed them | demotion correct, and it visibly improved the teaching |
+| `chem.atomic.electronic-config` | DEMOTED | served `electron-shells-na`; taught the Aufbau principle via a parking-garage analogy, then pointed only at what the Na figure genuinely shows ("Na (11+)") | correct |
+| `chem.period.periodic-properties` | DEMOTED | served `periodic-trends-Na-Cl`; pointed at the two elements' labels, then stated the across-a-period trend in its own words | correct (see note) |
+| `chem.bond.vsepr` | KEPT at concept scope | served `molecule-water`; water is bent at 104.5°, one of the three molecules the KG names, and genuinely instantiates the concept | keep correct |
+| `chem.bond.covalent-bonding` | untouched | served card `three_bond_formation`; the card animates electron SHARING and the lesson is sharing | correct |
+| `chem.bond.ionic-bonding` | RETIRED earlier | served NOTHING, and the tutor taught transfer in words without referring to any figure | retirement correct |
+
+The covalent/ionic pair is the sharpest evidence that the retirement register
+is precise rather than blunt: the SAME card is suppressed for ionic (transfer,
+not sharing) and metallic (delocalised sea) and correctly kept for covalent.
+
+Note on `periodic-properties`: the tutor said "you can see that sodium has a
+larger atomic radius… This means that as you move across a row from left to
+right, the atoms get physically smaller." It points at genuine figure content
+and then generalises in its own words. Defensible — two elements in one period
+are a real instance of the trend — but it is the closest any of these came to
+reading a general conclusion off a two-element figure. Recorded, not actioned.
+
+## SYSTEMIC DEFECT — the prompt contradicts itself, and the model resolves it by inventing a figure
+
+`chem.found.states-of-matter` has a RETIRED binding. No figure was served and
+the NO-FIGURE contract WAS injected. The tutor said:
+
+> "Looking at the figure on your screen showing the **Interconversion of States
+>  of Matter**, you can see how a substance moves between solid, liquid, and gas
+>  phases… it reaches the **Melting (Heating)** step **shown on screen**"
+
+That figure does not exist. The phrase appears in no scene, card, asset or
+blueprint anywhere in the repository — it was invented from the concept's own
+KG description, "interconversion via heating and cooling".
+
+**Root cause: two contradictory instructions in the same prompt.** Blueprints
+drive the teaching sequence and are written for a human tutor at a whiteboard.
+`chem.found.states-of-matter.md` contains:
+
+```
+TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (same-molecule three-states particle
+     diagram) alongside Explanation A
+S6 repair path: Draw the particle-size-vs-spacing contrast diagram
+```
+
+while the visual contract simultaneously said "NO FIGURE IS ATTACHED… Do NOT
+say 'look at the figure'". The model followed the blueprint.
+
+**This is the majority case, not an edge case.** Measured across every physics
+and chemistry concept that has a blueprint: **231 of 424 instruct a demo or a
+diagram while the resolver serves nothing for them** (327 serve nothing at all;
+only 97 serve a figure).
+
+## The fix
+
+One clause, in the layer that already owns the question of what is on screen —
+no new system, no parallel logic, and the blueprint is left alone:
+
+> (6) ANOTHER INSTRUCTION IN THIS PROMPT MAY TELL YOU TO RUN A DEMO, DRAW A
+> DIAGRAM, OR SHOW A FIGURE. Those describe teaching you deliver IN WORDS. This
+> rule wins on the question of what is on screen: carry the demonstration
+> verbally, and NEVER say or imply it is displayed.
+
+The blueprint is NOT wrong and was not edited. Describing a demonstration is
+good teaching; stripping demos out of the teaching sequence would discard
+pedagogy to fix phrasing. What needed settling was precedence, and precedence
+now lives in one place. Injection order was checked and already correct — the
+visual contract lands after the teaching-sequence block, so it has recency.
+
+Scoped to the no-figure branch only: with a real figure attached the tutor
+SHOULD point at it, and the clause would be actively wrong there. A test
+asserts it does not leak into that branch.
+
+Regression test: `src/tests/noFigureBeatsBlueprintDemo.test.ts`, including the
+corpus survey so the conflict count cannot silently grow.
+
+## Validation
+
+`npx tsc --noEmit` clean; 333 files / 7083 passed / 9 skipped;
+`npm run build` exit 0.
