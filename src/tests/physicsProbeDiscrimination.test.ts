@@ -172,6 +172,44 @@ describe('a probe must not assert the misconception its concept repairs', () => 
   })
 })
 
+describe('a probe must not rename a misconception its blueprint already documents', () => {
+  /**
+   * Physics carries 48 tag ids that join to no blueprint misconception. Reading
+   * them shows most are NOT mis-tags: they are correct probes for real
+   * misconceptions the blueprint never registered (induction polarity, vector
+   * superposition, R proportional to 1/d^2, "balance means maximum current").
+   * The probe corpus is RICHER than the blueprints, and closing that is
+   * Curriculum Pipeline work, not retagging.
+   *
+   * Two were different: the SAME misconception under a second name, which
+   * costs a learner the authored repair. `MISCONCEPTION_DETECTED` is written
+   * against the id, and an id that joins to nothing has no bridge_text or
+   * replacement_text to run — the learner is detected and then not repaired.
+   *
+   *   phys.mech.kinematics-1d  MC-SUVAT-UNIVERSAL -> MC-APPLIES-ALWAYS
+   *     The blueprint's own trigger signal is "student applies SUVAT equations
+   *     to a described non-uniform scenario (city traffic...)", and the
+   *     orphan-tagged probes ask exactly that, city traffic included.
+   *   phys.em.gauss-law  MC-FIELD-NONZERO-INSIDE-SHELL
+   *                          -> MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO
+   *     The blueprint's trigger is "the field inside a conductor is weak but
+   *     not zero"; the probe asks for E inside a thin charged shell.
+   *
+   * Retagging changes no canonicalSlug (slug is conceptId:probeKind:gradeBand
+   * [:difficulty]), so no production-seeded identity is stranded.
+   */
+  it('the two confirmed renames now point at their blueprint id', () => {
+    const all = physics.flatMap((p) => [
+      ...(p.targetedMisconceptions ?? []),
+      ...(p.choices ?? []).map((c) => c.misconceptionId).filter(Boolean) as string[],
+    ])
+    expect(all.some((m) => m.endsWith(':MC-SUVAT-UNIVERSAL'))).toBe(false)
+    expect(all.some((m) => m.endsWith(':MC-FIELD-NONZERO-INSIDE-SHELL'))).toBe(false)
+    expect(all.some((m) => m === 'phys.mech.kinematics-1d:MC-APPLIES-ALWAYS')).toBe(true)
+    expect(all.some((m) => m === 'phys.em.gauss-law:MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO')).toBe(true)
+  })
+})
+
 describe('a claimed misconception always has a distractor to detect it', () => {
   // The general form of the defect, across every physics probe that carries a
   // choice list. A probe may legitimately claim a misconception without

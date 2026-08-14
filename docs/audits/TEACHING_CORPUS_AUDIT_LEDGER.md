@@ -7817,3 +7817,78 @@ verifiably examining live content.
 
 `npx tsc --noEmit` clean; 332 files / 7078 passed / 9 skipped;
 `npm run build` exit 0. No production writes (owner decision).
+
+---
+
+# Iteration — PHYSICS CHECK 3: the 48 orphan tags, classified (2026-08-14)
+
+Continues Stage 4 into `phys.mech` and, through it, into the orphan-tag
+population the Moat audit put at 48.
+
+## What the orphans actually are — the opposite of a mis-tag
+
+Reading them, rather than counting them, changes the diagnosis. Physics carries
+48 tag ids that join to no blueprint misconception, and MOST are correct probes
+for real misconceptions the blueprint never registered:
+
+| concept | orphan tag | the probe genuinely tests |
+|---|---|---|
+| `phys.em.electric-charge` | `MC-INDUCTION-POLARITY` | which end of a neutral rod goes positive under induction |
+| `phys.em.electric-charge` | `MC-INSULATORS-CANNOT-BE-ATTRACTED` | why a neutral insulator is still attracted |
+| `phys.em.electric-field` | `MC-FIELDS-ALWAYS-ADD` | vector superposition at a midpoint |
+| `phys.em.resistivity` | `MC-DIAMETER-LINEAR-NOT-SQUARE` | R ∝ 1/d², not 1/d |
+| `phys.em.wheatstone-bridge` | `MC-BALANCE-MEANS-MAX-CURRENT` | balance means ZERO galvanometer current |
+| `phys.mech.acceleration` | `MC-DECELERATION-SEPARATE` | deceleration is not a separate quantity |
+
+The probe corpus is RICHER than the blueprints, not sloppier. Documenting these
+in the blueprints is Curriculum Pipeline work and is recorded as feedback, not
+performed here.
+
+**The runtime consequence is real and worth stating plainly.**
+`MISCONCEPTION_DETECTED` is written against the id. An id that joins to no
+blueprint entry has no `bridge_text` and no `replacement_text` to run, so the
+learner is DETECTED and then NOT REPAIRED. 46 detections currently land in that
+state.
+
+## Two were different — a second name for a documented misconception
+
+These cost the learner an authored repair that already exists:
+
+- `phys.mech.kinematics-1d`: `MC-SUVAT-UNIVERSAL` → **`MC-APPLIES-ALWAYS`**.
+  The blueprint's own trigger signal is "student applies SUVAT equations to a
+  described non-uniform scenario (city traffic, variable engine force…)", and
+  its conflict evidence is the traffic-light example. The orphan-tagged probes
+  ask exactly that, city traffic included. Same misconception, second name.
+- `phys.em.gauss-law`: `MC-FIELD-NONZERO-INSIDE-SHELL` →
+  **`MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO`**. The blueprint's trigger is
+  "the field inside a conductor is weak but not zero"; the probe asks for E
+  inside a thin charged shell at r < R.
+
+Retagged (5 references). Orphans **48 → 46**, and both concepts' authored
+repair paths now actually fire. No canonicalSlug changes — the slug is
+`conceptId:probeKind:gradeBand[:difficulty]` — so no production-seeded identity
+is stranded.
+
+## An instrument of mine that did NOT work, reported rather than trusted
+
+I first tried to split duplicates from novel orphans by token overlap between
+the orphan id and each blueprint MC id. It returned **0 duplicates out of 48** —
+and that was wrong, not a finding: `MC-SUVAT-UNIVERSAL` and `MC-APPLIES-ALWAYS`
+describe the same belief and share no words at all, so a lexical test cannot
+see it. Both duplicates above were found by READING the blueprint bodies.
+
+Consequence for the remaining 46: they are **NOT YET CLASSIFIED**. They are
+predominantly novel on the evidence read so far, but the only reliable method
+is reading each blueprint body against each stem, and that has been done for a
+sample, not for all 46. No count of "novel" is claimed.
+
+## Stage 4 progress
+
+`phys.meas` 8/8 complete (previous batch). `phys.mech` in progress. Physics
+Check 3 stands at **8 of 222 concepts fully audited**, plus a corpus-wide
+orphan pass that touched all 238.
+
+## Validation
+
+`npx tsc --noEmit` clean; 332 files / 7079 passed / 9 skipped;
+`npm run build` exit 0. No production writes (owner decision).

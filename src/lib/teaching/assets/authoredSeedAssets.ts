@@ -43352,11 +43352,11 @@ const KIN_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC: What is the condition under which the SUVAT kinematic equations work?',
     choices: [
       { text: 'Constant (uniform) acceleration', isCorrect: true },
-      { text: 'They work for any motion, constant acceleration or not', isCorrect: false, misconceptionId: `${KIN}:MC-SUVAT-UNIVERSAL` },
+      { text: 'They work for any motion, constant acceleration or not', isCorrect: false, misconceptionId: `${KIN}:MC-APPLIES-ALWAYS` },
     ],
     correctValue: 'constant/uniform acceleration only',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${KIN}:MC-SUVAT-UNIVERSAL`],
+    targetedMisconceptions: [`${KIN}:MC-APPLIES-ALWAYS`],
     source: `${KIN_SRC} — Section 3 Diagnostic Battery DB-1 (run before instruction)`,
   },
   {
@@ -43367,11 +43367,11 @@ const KIN_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE: In city traffic, is it valid to assume constant acceleration and use the SUVAT equations directly?',
     choices: [
       { text: 'Not valid — acceleration varies constantly with stopping/starting traffic', isCorrect: true },
-      { text: 'Valid — SUVAT equations always apply to any moving vehicle', isCorrect: false, misconceptionId: `${KIN}:MC-SUVAT-UNIVERSAL` },
+      { text: 'Valid — SUVAT equations always apply to any moving vehicle', isCorrect: false, misconceptionId: `${KIN}:MC-APPLIES-ALWAYS` },
     ],
     correctValue: 'not valid; acceleration is not constant in city traffic',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${KIN}:MC-SUVAT-UNIVERSAL`],
+    targetedMisconceptions: [`${KIN}:MC-APPLIES-ALWAYS`],
     source: `${KIN_SRC} — Section 7 Assessment Battery P75 boundary item`,
   },
   {
@@ -50574,7 +50574,7 @@ const GAUS_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (P4-b, spherical shell): A thin shell of radius 20 cm carries +5 nC. Find E at r=10 cm and r=30 cm.',
     correctValue: 'r=10 cm (inside): Q_enc=0 → E=0; r=30 cm (outside): E=kQ/r²≈499 N/C outward',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${GAUS}:MC-FIELD-NONZERO-INSIDE-SHELL`],
+    targetedMisconceptions: [`${GAUS}:MC-E-FIELD-INSIDE-CONDUCTOR-IS-NOT-ZERO`],
     source: `${GAUS_SRC} — Component 4 Practice Set P4-b`,
   },
   {
