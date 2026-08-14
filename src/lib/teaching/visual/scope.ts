@@ -76,6 +76,22 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'phys.therm.thermodynamic-processes', // empty x-y plane; no labelled P-V paths
   'phys.therm.carnot-cycle',         // empty x-y plane; no closed four-stage cycle
   'phys.em.resistivity',             // bulb circuit; ρ = RA/L needs conductor geometry
+
+  // ── added by the visual semantic moat sweep ──────────────────────────────
+  // Three concept-level rows that were carrying the STRONG contract ("a
+  // <representation> of <concept> is attached") while pointing at a generic
+  // card. They are thin, not wrong, so they are demoted here rather than
+  // retired — the same verdict phys.em.resistivity and phys.mech.inclined-plane
+  // already carry for the same reason. The demotion is what stops the false
+  // claim; the picture still renders.
+  'phys.mech.displacement',          // bare -5..5 number line; no start, no end, no path
+  'phys.mech.tension',               // force diagram with no string, rope or tension arrow
+  'phys.em.emf',                     // bulb circuit; V = E - I*r needs r drawn inside the cell
+  // Found by asserting the condition rather than assuming it: B2's own
+  // "requires authoring" list already recorded this one as needing a lens
+  // COMBINATION, but it was never demoted, so it kept claiming to BE a figure
+  // of the concept while showing the shared single-lens instance.
+  'phys.opt.lens-power',             // one lens; P = P1 + P2 needs a combination
 ])
 
 /**

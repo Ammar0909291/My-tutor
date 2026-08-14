@@ -24,18 +24,18 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 50 audited concepts', () => {
-    // 29 from the M3-A audit + 21 from the visual semantic moat sweep, which
-    // ran the resolver over all 238 physics and 186 chemistry concepts:
-    //   round 1, the WIDENED tiers (51 bindings whose identity came from a
-    //            generator KIND or a domain prefix rather than a concept row)
-    //            -> 18 depicted a different thing
-    //   round 2, the CURATED and GENERATOR tiers -> the 12 generator scenes
-    //            are all faithful; of the 27 curated rows carrying the STRONG
-    //            contract, 3 pointed at a generic card while claiming to be a
-    //            figure of the concept
-    // See visualSemanticMoatPhysicsChemistry.test.ts for per-concept evidence.
-    expect(RETIRED).toHaveLength(50)
+  it('covers exactly the 37 audited concepts', () => {
+    // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
+    // ran the resolver over all 238 physics and 186 chemistry concepts and
+    // read all 105 bindings that render.
+    //
+    // The sweep's first pass added 21 and then reversed 13 of them: every one
+    // was ALREADY demoted by scope.ts to "a GENERAL ILLUSTRATION — NOT a
+    // figure of X", so retiring it removed a picture that made no claim. The
+    // 8 that remain depict the very position their concept exists to refute —
+    // a perfect lattice for crystal DEFECTS, shell rings for ORBITALS, a
+    // covalent bond for INTERmolecular forces — which no wording can fix.
+    expect(RETIRED).toHaveLength(37)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {

@@ -5878,3 +5878,134 @@ the real card components. No production write was performed.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# VISUAL SEMANTIC MOAT — round 3: a correction to rounds 1 and 2
+
+This round set out to fix the 18 kind-default bindings carrying the strong
+contract. Reading `scope.ts` first found something more important: **rounds 1
+and 2 over-retired, and the codebase already had the right distinction.**
+
+## What was missed
+
+`src/lib/teaching/visual/scope.ts` holds a THIRD mechanism neither earlier
+round accounted for. `scopeForAsset` gives an asset scope `'domain'` when it
+came from a domain rule OR when it appears in `INSUFFICIENT_FOR_CONCEPT` — a
+register of 26 concepts whose figure "belongs to their concept but does not
+depict it". Scope `'domain'` makes `visualContract` introduce the figure as
+"a GENERAL ILLUSTRATION for this topic — NOT a figure of X", with explicit
+hard limits ("Do NOT read a property, a relationship, a result or a conclusion
+off it", "Do NOT build your explanation on it").
+
+Cross-checking the 21 retirements from rounds 1 and 2 against that register:
+
+| | already demoted before retirement? |
+|---|---|
+| round 1, physics (4) | YES — all four sit in `INSUFFICIENT_FOR_CONCEPT` |
+| round 1, chemistry (14) | YES — all resolve through a domain rule |
+| round 2, curated (3) | NO — these genuinely carried the strong contract |
+
+So 18 of the 21 were already introduced honestly, and retiring them removed a
+picture that made no claim. Round 2 had even stated the correct principle when
+it declined to retire a bare coordinate plane bound to `phys.therm.carnot-cycle`
+— "inert under that contract" — and then round 1 had already violated it.
+That is an inconsistency in this campaign's own work, not in the codebase.
+
+## The rule, stated so it is not re-derived differently again
+
+> A demoted general illustration is **INERT** when it is merely thin, or
+> on-topic but unspecific. The contract governs the tutor's words and the
+> picture teaches nothing either way → demote, keep rendering.
+>
+> It is **HARMFUL**, and belongs in the retirement register, when it depicts
+> the very position the concept exists to **REFUTE**. Wording cannot fix that
+> one: the learner's eyes take the claim off the image however carefully it is
+> introduced, and what gets reinforced is the concept's own documented
+> misconception → retire.
+
+## Applied: 13 reversed, 8 kept, 4 demoted at the source
+
+**Kept retired (8) — the figure states what the concept denies.**
+`chem.bond.polar-molecules` (the card's label is "shared pair", i.e. EQUAL
+sharing — a non-polar bond) · `chem.bond.intermolecular` (an intramolecular
+bond, for forces the concept must teach are NOT bonds) · `chem.bond.resonance`
+(one localised structure, the picture resonance says is insufficient) ·
+`chem.bond.coordinate-bond` ("shared pair" is the ordinary covalent case it is
+defined against) · `chem.bond.mo-theory` (the valence-bond picture MO theory
+replaces) · `chem.atomic.orbitals` (circular shell RINGS assert "an orbital is
+an orbit" — the concept's own documented misconception) ·
+`chem.atomic.quantum-mech-model` (sharp shells at definite radii state the
+position the model refutes) · `chem.solid.defects` (a PERFECT lattice, for a
+concept defined entirely by departures from perfection).
+
+**Reversed (10) — already demoted, no claim was being made.**
+`phys.opt.refraction` (a lens works BY refraction) · `phys.wave.shm-energy` (a
+pendulum IS an SHM system) · `phys.mech.gravitational-field` ·
+`phys.mech.kinematics-2d` · `chem.bond.hybridization` ·
+`chem.atomic.electromagnetic-radiation` · `chem.atomic.atomic-spectra` ·
+`chem.atomic.photoelectric-effect` · `chem.period.classification` ·
+`chem.solid.properties`.
+
+**Converted from retirement to demotion (3).** Round 2's three DID carry the
+strong contract, so the finding was real — but the remedy was wrong. They are
+thin, not contradictory, so they were added to `INSUFFICIENT_FOR_CONCEPT`
+instead: `phys.mech.displacement`, `phys.mech.tension`, `phys.em.emf`. This is
+the treatment the M3-A audit already gave `phys.em.resistivity` and
+`phys.mech.inclined-plane`, which are thin in exactly the same way. `phys.em.emf`
+is therefore now demoted alongside `resistivity` rather than retired alongside
+the seven bulb-card concepts — a better fit: those seven require a component
+the card does not contain at all, while emf is about the battery the card does
+draw, merely without internal resistance.
+
+## A fourth defect, found by asserting the condition instead of assuming it
+
+The new test asserts, for every concept on B2's own "requires authoring" list,
+that it carries scope `'domain'`. **`phys.opt.lens-power` failed.** Its entry
+in that list has read "needs a lens COMBINATION" since B2, yet it was never
+added to `INSUFFICIENT_FOR_CONCEPT`, so it kept claiming to BE a figure of
+"Power of a Lens and Lens Combinations" while showing the shared single-lens
+instance. Now demoted. This is the first defect in this campaign found by a
+test rather than by reading — the assertion existed for one turn and paid for
+itself.
+
+## A fifth finding, from the same assertion
+
+The `INSUFFICIENT_FOR_CONCEPT` backlog pin in `vectorProductVisualSelection.test.ts`
+("the remaining backlog is executable") moved 26 → 30. The number going UP is
+the correct direction for a finding of this kind: it means four claims were
+WITHDRAWN, not that any figure got worse. Recorded there with that reasoning
+so a future reader does not try to push it back down by re-promoting a thin
+figure.
+
+## Measured state after three rounds
+
+| | physics | chemistry |
+|---|---|---|
+| concepts | 238 | 186 |
+| figure claimed as the concept (STRONG contract) | 43 | 7 |
+| figure shown as a general illustration | 31 | 16 |
+| no figure — no faithful visual exists | 154 | 151 |
+| no figure — binding retired | 10 | 12 |
+
+Net effect of the whole sweep: **8 retirements (all chemistry, all
+misconception-reinforcing), 14 demotions, and 0 figures deleted that were
+making no claim.** Rounds 1 and 2 as originally committed removed 13 harmless
+pictures; that is undone.
+
+## Open in this dimension
+
+1. Narration and label correctness INSIDE correctly-bound figures — still
+   unexamined, and now the largest untouched area.
+2. Authoring faithful figures for the 8 retired and the ~30 demoted concepts.
+   Three rounds have removed false claims and added no correct figure.
+3. `phys.em.dc-circuits` still needs a combined series-parallel topology.
+
+## Production verification
+
+Not production-verified. Offline measurement against the real resolver, the
+real contract builder and the real card components. No production write.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.

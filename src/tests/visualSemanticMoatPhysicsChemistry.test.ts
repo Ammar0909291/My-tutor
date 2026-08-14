@@ -7,31 +7,36 @@
  * that generated figures pass the critic. None of them asks the only question
  * that matters to a learner: does the figure teach what the tutor is claiming?
  *
- * A figure can be structurally perfect and semantically false. The resolver's
- * own provenance field is where that becomes findable, because it records how
- * a figure's identity was ESTABLISHED:
+ * The resolver's `provenance` field is where that becomes findable, because it
+ * records how a figure's identity was ESTABLISHED: `curated` and `generator`
+ * DECLARE it for the concept, while `domain-default` and `generator-default`
+ * WIDEN it from a domain prefix or a generator kind. Running the real resolver
+ * over all 238 physics and all 186 chemistry concepts found 51 widened
+ * bindings and 54 declared ones. All 105 were read against what they paint.
  *
- *   curated            a human wrote a row for THIS concept
- *   generator          the concept owns its scene parameters
- *   generator-default  the concept named only a generator KIND, and is served
- *                      that kind's SHARED canonical scene
- *   domain-default     a domain prefix rule matched; the binding names
- *                      'chem.bond', not the concept
+ * ── THE LINE, AND THE CORRECTION THAT PRODUCED IT ───────────────────────────
+ * The sweep's first pass retired 21 bindings. Cross-checking against `scope.ts`
+ * then showed EVERY ONE was already demoted — 4 sat in INSUFFICIENT_FOR_CONCEPT
+ * and the rest resolved through a domain rule, so `scopeForAsset` had already
+ * given them scope 'domain' and `visualContract` was already introducing them
+ * as "a GENERAL ILLUSTRATION for this topic — NOT a figure of X", with hard
+ * limits against reading anything off them. That was a stricter rule than the
+ * same pass applied elsewhere: it had explicitly declined to retire a bare
+ * coordinate plane bound to phys.therm.carnot-cycle, on exactly the grounds
+ * that the contract already makes it inert. 13 of the 21 were reversed.
  *
- * The last two WIDEN a figure's identity instead of declaring it, which is
- * exactly where "right subject, wrong thing" lives. Running the real resolver
- * over all 238 physics and all 186 chemistry concepts found 51 such bindings;
- * reading what each actually paints found 18 that depict a different thing.
+ * The rule that survives, and that this file pins:
  *
- * A nineteenth, phys.em.dc-circuits, was proposed and REJECTED: its figure is
- * labelled "Series circuit" for a concept named "Series and Parallel
- * Circuits", which is incomplete but not false, and the bar in this file is
- * "depicts a DIFFERENT thing". It is pinned in the keep-list below.
+ *   INERT   — thin, or on-topic but unspecific. The contract governs the
+ *             tutor's words and the picture teaches nothing either way.
+ *             DEMOTE (scope 'domain'), keep rendering.
  *
- * Every one is pinned below BY ITS EVIDENCE, not by a count — a revert fails
- * here naming the specific concept.
+ *   HARMFUL — depicts the very position the concept exists to REFUTE. Wording
+ *             cannot fix this: the learner's eyes take the claim off the image
+ *             however carefully it is introduced, and what gets reinforced is
+ *             the concept's own documented misconception. RETIRE.
  *
- * ── WHY SUPPRESSION AND NOT SUBSTITUTION ────────────────────────────────────
+ * ── WHY SUPPRESSION AND NOT SUBSTITUTION, FOR THE HARMFUL SET ───────────────
  * No figure is a successful outcome; a wrong figure is not. Each retirement
  * leaves the binding intact in CONCEPT_VISUALS / DOMAIN_VISUALS so a faithful
  * figure can replace it later without rediscovering that one was wanted.
@@ -39,47 +44,45 @@
 import { describe, it, expect } from 'vitest'
 import { resolveVisual, restoreVisualSession } from '@/lib/teaching/visual/resolveVisual'
 import { RETIRED_VISUAL_BINDINGS, isRetiredVisualBinding } from '@/lib/teaching/visual/retired'
+import { isInsufficientForConcept } from '@/lib/teaching/visual/scope'
+import { buildVisualContractBlock } from '@/lib/teaching/visual/visualContract'
 import { getKnowledgeGraph, getAllNodes } from '@/lib/curriculum/knowledgeGraph'
 
 const turn = (conceptId: string, message: string, subject: string) =>
   resolveVisual({ message, lessonConceptId: conceptId, subject } as never)
 
+/** Does the tutor contract claim this figure IS a figure of the concept? */
+const claimsToBeTheConcept = (conceptId: string, subject: string) => {
+  const d = turn(conceptId, 'show me a diagram of this', subject)
+  if (!d.graphical) return false
+  return !buildVisualContractBlock(d).includes('GENERAL ILLUSTRATION')
+}
+
 /**
- * The eighteen found by this sweep, each with the single fact that condemns
- * it. The string is not decoration: it is the claim a reviewer can check
- * against the figure without re-running the audit.
+ * HARMFUL — retired. Each string is the position the figure depicts and the
+ * concept refutes; it is the claim a reviewer can check without re-running the
+ * audit.
  */
-const SEMANTIC_DEFECTS: ReadonlyArray<readonly [string, string, string]> = [
-  // physics — a shared canonical scene served to a member it does not depict
-  ['physics', 'phys.opt.refraction',
-    'served a convex-lens image-formation diagram; Snell\'s law needs an interface, a normal and two angles'],
-  ['physics', 'phys.wave.shm-energy',
-    'served a pendulum whose only quantity is the period; the concept is the KE/PE exchange'],
-  ['physics', 'phys.mech.gravitational-field',
-    'served an orbiting satellite; the title names field lines, which are not in the figure'],
-  ['physics', 'phys.mech.kinematics-2d',
-    'served the ONE-dimensional kinematics plot'],
-
-  // chemistry — the chem.bond domain rule, one covalent-bond card for seven concepts
-  ['chemistry', 'chem.bond.hybridization',      'no orbital and no geometry in a two-sphere card'],
-  ['chemistry', 'chem.bond.mo-theory',          'a localised shared pair is the picture MO theory replaces'],
-  ['chemistry', 'chem.bond.polar-molecules',    'the card\'s label is "shared pair" — equal sharing, i.e. non-polar'],
-  ['chemistry', 'chem.bond.intermolecular',     'an intramolecular bond, for forces that are explicitly not bonds'],
-  ['chemistry', 'chem.bond.resonance',          'one structure, where resonance needs at least two'],
-  ['chemistry', 'chem.bond.coordinate-bond',    '"shared pair" is the ordinary covalent contrast case'],
-
-  // chemistry — the chem.atomic domain rule, one shell diagram for six concepts
-  ['chemistry', 'chem.atomic.electromagnetic-radiation', 'an atom, for a concept about waves and the spectrum'],
-  ['chemistry', 'chem.atomic.atomic-spectra',   'continuous rings, where the discreteness is the observation'],
-  ['chemistry', 'chem.atomic.orbitals',         'shell RINGS for a concept about orbital SHAPES'],
-  ['chemistry', 'chem.atomic.photoelectric-effect', 'an isolated atom; no surface, photon, or threshold'],
-  ['chemistry', 'chem.atomic.quantum-mech-model', 'sharp shells state the position the concept refutes'],
-
-  // chemistry — the chem.period and chem.solid domain rules
-  ['chemistry', 'chem.period.classification',   'electron shells, historically posterior to the classification taught'],
-  ['chemistry', 'chem.solid.defects',           'a PERFECT lattice, for a concept defined by departures from it'],
-  ['chemistry', 'chem.solid.properties',        'a static neutral lattice carries no band structure and no spins'],
+const REFUTED_BY_ITS_OWN_FIGURE: ReadonlyArray<readonly [string, string, string]> = [
+  ['chemistry', 'chem.bond.polar-molecules',
+    'the card is labelled "shared pair" — EQUAL sharing, which is a non-polar bond'],
+  ['chemistry', 'chem.bond.intermolecular',
+    'an intramolecular bond, for forces the concept must teach are NOT bonds'],
+  ['chemistry', 'chem.bond.resonance',
+    'one localised structure, which is the picture resonance says is insufficient'],
+  ['chemistry', 'chem.bond.coordinate-bond',
+    '"shared pair" is the ordinary covalent case the concept is defined against'],
+  ['chemistry', 'chem.bond.mo-theory',
+    'a localised pair is the valence-bond picture MO theory exists to replace'],
+  ['chemistry', 'chem.atomic.orbitals',
+    'circular shell RINGS assert "an orbital is an orbit" — the concept\'s own documented misconception'],
+  ['chemistry', 'chem.atomic.quantum-mech-model',
+    'sharp shells at definite radii state the position the model refutes'],
+  ['chemistry', 'chem.solid.defects',
+    'a PERFECT lattice, for a concept defined entirely by departures from perfection'],
 ]
+
+const SEMANTIC_DEFECTS = REFUTED_BY_ITS_OWN_FIGURE
 
 describe('every semantic defect found in the sweep stays suppressed', () => {
   it.each(SEMANTIC_DEFECTS)('%s / %s — %s', (subject, conceptId) => {
@@ -117,75 +120,78 @@ describe('every semantic defect found in the sweep stays suppressed', () => {
 })
 
 /**
- * ROUND 2 — THE CURATED AND GENERATOR TIERS.
+ * THE INERT SET — demoted, not retired.
  *
- * Round 1 swept the two WIDENED tiers. This round read the other two, and they
- * behave very differently.
- *
- * The GENERATOR tier is clean: all 12 are hand-authored concept-specific
- * scenes printing the concept's own quantities. Nothing to retire, which is
- * itself the finding — authoring a scene FOR a concept is what produces a
- * faithful figure, and no shortcut reproduces it.
- *
- * The CURATED tier splits on CONTRACT STRENGTH, and that is the subtle part.
- * `visualContract` demotes a figure to "GENERAL ILLUSTRATION — NOT a figure of
- * X", with hard limits against reading anything off it, when and only when
- * `asset.scope === 'domain'`. 15 of the 42 carry that and are honest
- * decoration — a bare coordinate plane for the Carnot cycle is inert under
- * that contract and is deliberately NOT retired.
- *
- * The other 27 get "A <representation> of <concept> is attached to THIS
- * response". The demotion is gated on HOW THE BINDING WAS WRITTEN, never on
- * what the figure contains — so a concept-level row pointing at a generic card
- * claims to be a figure of the concept. Three did.
+ * These are the 13 the first pass over-called, plus the ones it correctly left
+ * alone. Every one still renders and every one is introduced as a GENERAL
+ * ILLUSTRATION, so no claim is made on it. Retiring them would delete a
+ * harmless picture and teach nothing — and it would contradict a measured,
+ * recorded decision in scope.ts: withholding these on an explicit request was
+ * tried and rejected because it blanked excursions.
  */
-const ROUND_2_DEFECTS: ReadonlyArray<readonly [string, string, string]> = [
-  ['physics', 'phys.mech.displacement',
-    'a bare -5..5 number line claimed as a figure of Displacement and Distance — no start, no end, no path'],
-  ['physics', 'phys.mech.tension',
-    'the force-diagram card has no string, no rope and no tension arrow'],
-  ['physics', 'phys.em.emf',
-    'the eighth concept on the bulb card, missed while the other seven were retired; no internal resistance is drawn'],
+const INERT_BUT_RENDERING: ReadonlyArray<readonly [string, string, string]> = [
+  // reversed from the first pass — already demoted before it touched them
+  ['physics', 'phys.opt.refraction',        'a lens image construction; a lens works BY refraction, so on-topic'],
+  ['physics', 'phys.wave.shm-energy',       'a pendulum IS a simple-harmonic system; it simply prints no energy'],
+  ['physics', 'phys.mech.gravitational-field', 'an orbit; gravitation, without the field lines'],
+  ['physics', 'phys.mech.kinematics-2d',    '1-D kinematics graphs; kinematics, one dimension short'],
+  ['chemistry', 'chem.bond.hybridization',  'a bond, for a concept about how bonding orbitals are built'],
+  ['chemistry', 'chem.atomic.electromagnetic-radiation', 'an atom; thin, but it asserts nothing about waves'],
+  ['chemistry', 'chem.atomic.atomic-spectra', 'an atom; the rings do not claim spectra are continuous'],
+  ['chemistry', 'chem.atomic.photoelectric-effect', 'an atom; no surface or photon, but nothing contradicted'],
+  ['chemistry', 'chem.period.classification', 'electron shells; later physics than the classification taught'],
+  ['chemistry', 'chem.solid.properties',    'a lattice; solids do have lattices, it simply carries no band structure'],
+  // moved from a claim to a demotion (were on the STRONG contract)
+  ['physics', 'phys.mech.displacement',     'a bare -5..5 number line; no start, no end, no path'],
+  ['physics', 'phys.mech.tension',          'a force diagram with no string, rope or tension arrow'],
+  ['physics', 'phys.em.emf',                'the bulb circuit; V = E - Ir needs r drawn inside the cell'],
+  // correctly left alone by the first pass
+  ['physics', 'phys.therm.carnot-cycle',    'an empty x-y plane; the case that set the standard'],
+  ['physics', 'phys.mech.acceleration',     'the same number line as displacement, already demoted'],
+  ['physics', 'phys.mech.work',             'an empty x-y plane where an F-d area is required'],
 ]
 
-describe('round 2 — curated bindings that claimed to be a figure of the concept', () => {
-  it.each(ROUND_2_DEFECTS)('%s / %s — %s', (subject, conceptId) => {
-    expect(isRetiredVisualBinding(conceptId)).toBe(true)
-    expect(turn(conceptId, 'show me a diagram of this', subject).graphical).toBe(false)
+describe('the inert set is demoted, not suppressed', () => {
+  it.each(INERT_BUT_RENDERING)('%s / %s still renders — %s', (subject, conceptId) => {
+    expect(isRetiredVisualBinding(conceptId), `${conceptId} was retired`).toBe(false)
+    expect(turn(conceptId, 'show me a diagram of this', subject).graphical, conceptId).toBe(true)
   })
 
-  it('phys.em.emf joins the seven siblings it was separated from', () => {
-    // All eight sit on the same "battery, switch, bulb, resistor" card, and
-    // each is defined by a component the card does not contain. Seven were
-    // retired by the M3-A audit; emf was not, and the omission is the point.
+  it.each(INERT_BUT_RENDERING)('%s / %s makes no claim on the concept', (subject, conceptId) => {
+    // The whole basis for keeping them. If any of these ever starts claiming
+    // to BE a figure of its concept, the reason it was safe has gone.
+    expect(claimsToBeTheConcept(conceptId, subject), `${conceptId} now claims to be the concept`).toBe(false)
+  })
+
+  it('the three moved off the strong contract are demoted at the source', () => {
+    // Recorded in INSUFFICIENT_FOR_CONCEPT rather than fixed at the call site,
+    // so the demotion holds for every entry path at once.
+    for (const id of ['phys.mech.displacement', 'phys.mech.tension', 'phys.em.emf']) {
+      expect(isInsufficientForConcept(id), id).toBe(true)
+    }
+  })
+
+  it('phys.em.emf is demoted while its seven siblings stay retired', () => {
+    // All eight sit on the same "battery, switch, bulb, resistor" card. Seven
+    // require a component the card does not contain AND cannot be read as the
+    // concept at all; emf is about the battery the card does draw, just
+    // without internal resistance. Thin, not wrong — the same verdict
+    // phys.em.resistivity already carries.
     for (const id of [
       'phys.em.wheatstone-bridge', 'phys.em.potentiometer', 'phys.em.rc-circuits',
       'phys.em.self-inductance', 'phys.em.mutual-inductance', 'phys.em.ac-basics',
-      'phys.em.lc-circuits', 'phys.em.emf',
+      'phys.em.lc-circuits',
     ]) {
       expect(isRetiredVisualBinding(id), id).toBe(true)
     }
-    // phys.em.electrical-power stays: the card genuinely carries a resistor
-    // and a bulb, so Joule heating can be pointed at.
-    expect(isRetiredVisualBinding('phys.em.electrical-power')).toBe(false)
+    expect(isRetiredVisualBinding('phys.em.emf')).toBe(false)
+    expect(isInsufficientForConcept('phys.em.emf')).toBe(true)
+    expect(isInsufficientForConcept('phys.em.resistivity')).toBe(true)
   })
 
-  it('the honestly-demoted general illustrations were NOT retired with them', () => {
-    // These share the SAME generic cards as the three retirements above, and
-    // are inert because visualContract already bars any claim on them.
-    // Retiring them would remove a harmless picture and teach nothing.
-    for (const id of [
-      'phys.mech.velocity', 'phys.mech.acceleration', 'phys.mech.relative-motion',
-      'phys.therm.carnot-cycle', 'phys.therm.ideal-gas-law', 'phys.mech.work',
-    ]) {
-      expect(isRetiredVisualBinding(id), id).toBe(false)
-      expect(turn(id, 'show me a diagram of this', 'physics').graphical, id).toBe(true)
-    }
-  })
-
-  it('every generator-tier binding survived round 2 untouched', () => {
-    // The clean tier. Named individually so a later change that quietly
-    // widens or retires one of them fails here.
+  it('every generator-tier binding is faithful and untouched', () => {
+    // The clean tier: 12 of 12 hand-authored concept-specific scenes. Named
+    // individually so a change that quietly widens or retires one fails here.
     for (const id of [
       'phys.meas.vector-products', 'phys.mech.collisions-inelastic', 'phys.mech.satellites',
       'phys.mech.surface-tension', 'phys.mech.viscosity', 'phys.therm.calorimetry',
@@ -196,6 +202,7 @@ describe('round 2 — curated bindings that claimed to be a figure of the concep
       expect(d.graphical, id).toBe(true)
       expect(d.asset?.provenance, id).toBe('generator')
       expect(d.asset?.conceptId, id).toBe(id)
+      expect(claimsToBeTheConcept(id, 'physics'), id).toBe(true)
     }
   })
 })
@@ -280,16 +287,16 @@ describe('widened-identity bindings do not grow unaudited', () => {
       .filter((d) => d.graphical && (d.asset?.provenance === 'domain-default' || d.asset?.provenance === 'generator-default'))
   }
 
-  it('physics: 19 widened bindings, all inspected', () => {
-    // 23 generator-default and 0 domain-default before the sweep; four
-    // retired. Every survivor was read against what it paints and is
-    // generic-but-not-wrong, not unexamined.
-    expect(widened('physics').length).toBeLessThanOrEqual(19)
+  it('physics: 23 widened bindings, all inspected', () => {
+    // 23 generator-default and 0 domain-default. None was retired in the end
+    // — all four physics retirements were reversed as inert. Every one was
+    // read against what it paints, and every one is demoted or faithful.
+    expect(widened('physics').length).toBeLessThanOrEqual(23)
   })
 
-  it('chemistry: 14 widened bindings, all inspected', () => {
-    // 23 domain-default and 5 generator-default before the sweep; fourteen
-    // retired.
-    expect(widened('chemistry').length).toBeLessThanOrEqual(14)
+  it('chemistry: 20 widened bindings, all inspected', () => {
+    // 23 domain-default and 5 generator-default before the sweep; eight
+    // retired as harmful, six reversed as inert.
+    expect(widened('chemistry').length).toBeLessThanOrEqual(20)
   })
 })

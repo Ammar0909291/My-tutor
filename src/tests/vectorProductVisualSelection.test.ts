@@ -274,7 +274,18 @@ describe('the repair path is the general one, not a special case', () => {
   it('the remaining backlog is executable, and still contains chemistry', () => {
     // The list is the tracked authoring queue, not a wontfix. Asserting it here
     // means the next repair has to come back and update this number.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(26)
+    //
+    // 26 -> 30: the visual semantic moat sweep found four concept-level rows
+    // carrying the STRONG contract ("a <representation> of <concept> is
+    // attached") while pointing at a generic card — phys.mech.displacement,
+    // phys.mech.tension, phys.em.emf, and phys.opt.lens-power, the last of
+    // which B2's own "requires authoring" list had already described as
+    // needing a lens COMBINATION without ever demoting it. They are thin, not
+    // contradictory, so they join this queue rather than the retirement
+    // register. The number going UP here is the correct direction for a
+    // finding of this kind: it means a claim was withdrawn, not that a figure
+    // got worse.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(30)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.meas.scalars-vectors')).toBe(true)
   })

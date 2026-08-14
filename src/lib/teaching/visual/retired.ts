@@ -90,107 +90,50 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   'bio.cell.cell-signalling':         'Rendered a food chain; no receptor or signalling cascade is depicted.',
   'bio.cell.apoptosis':               'Rendered a food chain; programmed cell death is not depicted.',
 
-  // ══ VISUAL SEMANTIC MOAT, ROUND 2 (physics + chemistry sweep) ═══════════
+  // ══ VISUAL SEMANTIC MOAT SWEEP (physics + chemistry) ════════════════════
   //
-  // The M3-A audit inspected concepts that had an EXACT curated row. This
-  // round ran the real resolver over all 238 physics and all 186 chemistry
-  // concepts and looked at what provenance each figure actually carried:
+  // The M3-A audit inspected concepts holding an EXACT curated row. This sweep
+  // ran the real resolver over all 238 physics and all 186 chemistry concepts
+  // and read what each figure ACTUALLY paints — for scenes the emitted objects
+  // and labels, for cards the component's own rendered labels.
   //
-  //     curated            42   a human wrote a row for THIS concept
-  //     generator          12   the concept owns its scene parameters
-  //     generator-default  28   the concept names only a generator KIND and
-  //                             is served that kind's SHARED canonical scene
-  //     domain-default     23   a domain prefix rule matched; the binding
-  //                             names 'chem.bond', not the concept
+  // ── THE LINE, AND A CORRECTION TO HOW IT WAS FIRST DRAWN ────────────────
+  // The sweep's first pass retired 21 bindings. Cross-checking them against
+  // `scope.ts` showed that EVERY ONE was already demoted: 4 sat in
+  // INSUFFICIENT_FOR_CONCEPT and the rest resolved through a domain-prefix
+  // rule, so `scopeForAsset` had already given them scope 'domain' and
+  // `visualContract` was already introducing them as "a GENERAL ILLUSTRATION
+  // for this topic — NOT a figure of X", with hard limits against reading
+  // anything off them. Retiring those was applying a stricter rule than the
+  // same pass applied elsewhere (it explicitly declined to retire a bare
+  // coordinate plane bound to phys.therm.carnot-cycle, on the grounds that the
+  // contract already makes it inert). 13 of the 21 were reversed.
   //
-  // The last two tiers are where a figure's identity is WIDENED rather than
-  // declared, so they are exactly where a figure can be of the right subject
-  // and the wrong thing. Every one of the 51 was inspected against what it
-  // actually paints — for scenes, the emitted objects and labels; for cards,
-  // the component's own rendered labels. The entries below are the ones that
-  // depict a DIFFERENT thing, on the same high bar as the rest of this file:
-  // a tutor teaching the concept against the figure would be saying something
-  // false. Generic-but-not-wrong figures were deliberately left in place and
-  // are listed in the audit ledger instead.
-
-  // ── physics: shared canonical scenes serving the wrong member ───────────
-  'phys.opt.refraction':
-    'The ray_optics generator\'s shared instance is a CONVEX LENS image-formation ' +
-    'diagram (u=30cm, f=10cm -> v=15cm). "Refraction and Snell\'s Law" requires an ' +
-    'interface between two media, an incident ray, a normal, and the two angles ' +
-    'related by n1 sin(theta1) = n2 sin(theta2). The payload contains no interface, ' +
-    'no normal, no angle and no refractive index — the same evidence that retired ' +
-    'phys.opt.reflection above.',
-  'phys.wave.shm-energy':
-    'The pendulum generator\'s shared instance prints exactly one quantity: the PERIOD, ' +
-    'T = 2*pi*sqrt(L/g) ~ 2.01 s. "Energy in Simple Harmonic Motion" is about the ' +
-    'KE/PE exchange (E = kA^2/2, KE = k(A^2 - x^2)/2). No energy of any kind appears ' +
-    'in the figure.',
-  // phys.em.dc-circuits was proposed for retirement in this round and is
-  // deliberately NOT retired, recorded here so the call is not re-litigated:
-  // its figure asserts "Series circuit — R_total = 30 ohm" for a concept named
-  // "Series and Parallel Circuits", which is INCOMPLETE but not false — the
-  // series half is drawn correctly and labelled honestly. The bar in this file
-  // is "depicts a DIFFERENT thing", and half of a concept, correctly named, is
-  // not that. Closing it properly needs a combined series-parallel topology,
-  // which the electric_circuit generator cannot express (its Connection type
-  // is 'series' | 'parallel', one or the other), so the fix is authoring, not
-  // suppression. Tracked in the audit ledger.
-  'phys.mech.gravitational-field':
-    'The gravitation_orbit generator\'s shared instance is an orbiting satellite ' +
-    'labelled with orbital speed and period. "Gravitational Field and Field Lines" ' +
-    'requires the radial field lines the title names and the field strength ' +
-    'g = GM/r^2; the figure contains neither, and an orbit is a trajectory, not a field.',
-  'phys.mech.kinematics-2d':
-    'Served the kinematics_graphs shared instance, which is the ONE-dimensional case ' +
-    '(u=0 m/s, a=2 m/s^2, single axis). Two-dimensional kinematics is defined by the ' +
-    'independence of the x and y components, which a 1-D plot cannot show — the figure ' +
-    'is literally the concept the learner is being moved on from.',
-
-  // ── ROUND 2: the CURATED tier, where the claim is strongest ────────────
+  // The rule that survives, stated so it is not re-derived differently again:
   //
-  // Round 1 swept the widened tiers. This round read the 42 curated and 12
-  // generator bindings, and found the tiers behave very differently:
+  //   A demoted general illustration is INERT when it is merely thin, or
+  //   on-topic but unspecific. The contract governs the tutor's words and the
+  //   picture teaches nothing either way.
   //
-  //   generator (12)  ALL FAITHFUL. Every one is a hand-authored,
-  //                   concept-specific scene printing the concept's own
-  //                   quantities — sin(theta_c) = n2/n1 for total internal
-  //                   reflection, h = 2T cos(theta)/rho*g*r for capillarity,
-  //                   dU = Q - W for the first law. Nothing to retire.
+  //   It is HARMFUL, and belongs HERE, when it depicts the very position the
+  //   concept exists to REFUTE. Wording cannot fix that one: the learner's
+  //   eyes take the claim off the image no matter how carefully the tutor
+  //   introduces it, and the concept's own documented misconception is what
+  //   is being reinforced.
   //
-  //   curated (42)    SPLIT BY CONTRACT STRENGTH, which is what makes this
-  //                   tier subtle. 15 already carry `scope: 'domain'`, so
-  //                   visualContract demotes them to "GENERAL ILLUSTRATION —
-  //                   NOT a figure of X" with hard limits against reading
-  //                   anything off them. Those are honest decoration and are
-  //                   deliberately NOT retired: a bare coordinate plane for
-  //                   the Carnot cycle is inert under that contract.
+  // Everything below meets the second test. The reversed 13 are recorded in
+  // the audit ledger with the same evidence, demoted rather than suppressed:
+  // 3 of them (phys.mech.displacement, phys.mech.tension, phys.em.emf) were
+  // on the STRONG contract and were moved into INSUFFICIENT_FOR_CONCEPT, so
+  // they are now demoted rather than claimed — the same treatment the M3-A
+  // audit gave phys.em.resistivity and phys.mech.inclined-plane, which are
+  // thin in exactly the same way.
   //
-  // The other 27 get the STRONG contract — "A <representation> of <concept> is
-  // attached to THIS response" — and the demotion is gated on `asset.scope`,
-  // i.e. on HOW THE BINDING WAS WRITTEN, never on what the figure contains. So
-  // a concept-level row pointing at a generic card claims to be a figure of
-  // the concept. Three of the 27 do exactly that.
-  'phys.mech.displacement':
-    'Claimed under the STRONG contract as "a number_line of Displacement and Distance". ' +
-    'The NumberLine card is a bare -5..5 axis with ticks, integer labels and a dot on ' +
-    'zero — no start point, no end point, no path, and therefore neither of the two ' +
-    'quantities the concept exists to distinguish. Its three siblings on the same card ' +
-    '(velocity, acceleration, relative-motion) carry scope:domain and are correctly ' +
-    'demoted to a general illustration; this row is the outlier, not the rule.',
-  'phys.mech.tension':
-    'Claimed under the STRONG contract as "a force_diagram of Tension in Strings and ' +
-    'Ropes". The ForceDiagram card draws a block on flat ground with four labelled ' +
-    'arrows — applied, friction, weight, normal. There is no string, no rope and no ' +
-    'tension arrow anywhere in it. Same evidence shape as the phys.em component ' +
-    'concepts retired above: the object that defines the concept is not in the figure.',
-  'phys.em.emf':
-    'The EIGHTH concept on the "battery, switch, bulb, resistor" card, and the one the ' +
-    'M3-A audit missed while retiring the other seven. EMF, internal resistance and ' +
-    'terminal voltage turn entirely on r INSIDE the cell, which is exactly what the ' +
-    'card does not draw: its battery is an ideal symbol with no internal resistance and ' +
-    'no terminal-voltage marking, so V = E - I*r cannot be pointed at. Retired on the ' +
-    'same evidence as its seven siblings.',
+  // phys.em.dc-circuits was also proposed and rejected: its figure asserts
+  // "Series circuit — R_total = 30 ohm" for a concept named "Series and
+  // Parallel Circuits", which is INCOMPLETE but not false, and the
+  // electric_circuit generator's Connection type is 'series' | 'parallel',
+  // one or the other, so a combined network is authoring work.
 
   // ── chemistry: the chem.bond domain rule ───────────────────────────────
   // Seven concepts inherited BondFormation3D, whose complete content is two
@@ -199,10 +142,6 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   // (chem.bond.ionic-bonding and chem.bond.metallic-bonding were already
   // retired above for the same card; chem.bond.bond-parameters is left in
   // place as generic-but-not-wrong, since it IS a bond.)
-  'chem.bond.hybridization':
-    'The card shows two spheres and a shared pair. Hybridization is the mixing of s and ' +
-    'p orbitals into sp/sp2/sp3 sets with 180/120/109.5 degree geometry; no orbital and ' +
-    'no geometry appears.',
   'chem.bond.mo-theory':
     'The card shows a LOCALISED shared pair between two atoms — which is the valence-bond ' +
     'picture molecular orbital theory exists to replace. MO theory requires a bonding/' +
@@ -231,40 +170,20 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   // and it is the one member the shared figure genuinely serves.
   // chem.atomic.quantum-numbers is left in place as generic-but-not-wrong,
   // since the shells do depict the principal quantum number n.)
-  'chem.atomic.electromagnetic-radiation':
-    'Rendered an atom. Electromagnetic radiation is a wave characterised by wavelength, ' +
-    'frequency and c = f*lambda, plus the spectrum ordering; the figure contains no wave ' +
-    'and no spectrum.',
-  'chem.atomic.atomic-spectra':
-    'Rendered an atom with continuous shell rings. An atomic spectrum is a set of DISCRETE ' +
-    'lines at particular wavelengths — the discreteness is the whole observation, and it ' +
-    'is absent.',
   'chem.atomic.orbitals':
     'Rendered circular SHELL RINGS for a concept about orbital SHAPES (spherical s, ' +
     'dumbbell p, four-lobed d). "An orbital is an orbit" is the single most documented ' +
     'misconception in this area, and this figure asserts it.',
-  'chem.atomic.photoelectric-effect':
-    'Rendered an isolated atom. The photoelectric effect requires incident photons, a ' +
-    'metal SURFACE, ejected electrons and a threshold frequency; none of the four is in ' +
-    'the figure.',
   'chem.atomic.quantum-mech-model':
     'Rendered sharp circular shells — definite paths at definite radii. The quantum ' +
     'mechanical model replaces exactly that with probability densities and orbital ' +
     'clouds, so the figure states the position the concept refutes.',
 
   // ── chemistry: the chem.period and chem.solid domain rules ─────────────
-  'chem.period.classification':
-    'Rendered labelled electron shells. "Early Classification of Elements" is about ' +
-    'Doebereiner\'s triads, Newlands\' octaves and Mendeleev\'s table — arrangements of ' +
-    'elements, historically prior to any knowledge of electron shells.',
   'chem.solid.defects':
     'Rendered a PERFECT FCC lattice. A crystal defect is by definition a vacancy, an ' +
     'interstitial or a substitution — a departure from that perfection. The figure shows ' +
     'the absence of the thing being taught.',
-  'chem.solid.properties':
-    'Rendered a static lattice of neutral spheres. "Electrical and Magnetic Properties" ' +
-    'requires band structure or magnetic domain alignment; neither is representable in ' +
-    'the card, which carries no electrons and no spins.',
 
   // ── computer science ────────────────────────────────────────────────────
   'cs.found.number-systems':
