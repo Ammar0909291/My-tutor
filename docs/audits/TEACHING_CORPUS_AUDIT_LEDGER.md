@@ -7219,3 +7219,121 @@ recorded in the test's list, not modified.
 
 `npx tsc --noEmit` clean; 329 files / 7039 passed / 9 skipped;
 `npm run build` exit 0.
+
+---
+
+# Iteration — PHYSICS CHECK 3 OPENED (2026-08-14)
+
+Check 3 — read the stem against the blueprint and ask whether it DIAGNOSES the
+misconception it is tagged with — had never been run on physics. It is the
+check that found 75 mis-tagged and 25 hollow concepts in chemistry, none of
+which any structural measure detects.
+
+## Baseline, measured not estimated
+
+| | |
+|---|---|
+| physics KG concepts | 238 |
+| with authored probes | 238 (0 missing) |
+| with a blueprint on disk | 222 — **the auditable population** |
+| unprobed blueprint misconceptions | 56 across 54 concepts |
+| orphan tags (join to no blueprint MC) | 48 |
+| **audited under Check 3** | **1 of 222** |
+
+Physics probes are richer than chemistry's — 7 per concept, carrying a
+pedagogical arc (DIAGNOSTIC / FORMATIVE / MASTERY GATE / TRANSFER / RETRIEVAL
+PRACTICE) rather than the 2-3 chemistry carried.
+
+## The unprobed gap is SYSTEMATIC, not 54 independent cases
+
+Grouping the 54 concepts by WHICH misconception is missing:
+
+| missing | count |
+|---|---|
+| MC-4 | 38 |
+| MC-3 | 10 |
+| MC-2 | 4 |
+| other | 2 |
+
+Against the blueprint MC-count distribution (1 MC: 1 concept, 2 MCs: 145,
+3 MCs: 23, 4 MCs: 53), that reads: **72% of four-misconception concepts are
+missing exactly the fourth, and 43% of three-misconception concepts are
+missing exactly the third, while only 2.8% of two-misconception concepts have
+a gap.** The deeper the blueprint's list, the more likely its TAIL is
+unprobed — the signature of a probe-authoring pass that covered the first N
+entries of each blueprint and stopped.
+
+Verified as real rather than a heading-parse artifact by reading the missing
+entries: `MC-QUANTUM-RANDOMNESS-IS-MEASUREMENT-ERROR`,
+`MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM`, `MC-DIFFRACTION-ONLY-AT-SLITS`,
+"Beta-plus decay is the same as gamma decay because Z doesn't change". All are
+genuine, distinct, teachable misconceptions.
+
+## First Check 3 finding — `phys.meas.vector-products`
+
+The probe tagged `MC-SCALAR-MULTIPLY` ("multiplying two vectors just multiplies
+their magnitudes") asked:
+
+> You push as hard as you can against a heavy wall that does not move at all.
+> How much work do you do on the wall?
+
+A learner who HOLDS that misconception computes |F| x |d| = F x 0 = **0** —
+the correct answer. The probe cannot separate a learner who has the
+misconception from one who does not, so it passed unseen while every count,
+join, breadth and mapping test reported the concept covered.
+
+The harm is worse than a gap. The distractor mapped to `MC-SCALAR-MULTIPLY`
+read "a large positive amount, proportional to how hard you pushed and how long
+you leaned into it" — that is "effort = work", a real belief this blueprint
+does not register. Choosing it wrote MISCONCEPTION_DETECTED for
+MC-SCALAR-MULTIPLY and sent the learner into a cos-theta repair for a problem
+that is actually about displacement. **A gap teaches nothing; a mis-tag
+teaches the wrong thing.**
+
+The discriminator was in the blueprint all along — its own Diagnostic Battery
+DB-2 states `"6" (magnitudes only, no cos) -> SIGNAL:MISCONCEPTION:
+MC-SCALAR-MULTIPLY`, which requires a NON-ZERO angle so the two answers differ.
+
+Fix, in two parts:
+1. The wall probe keeps its place and loses its claim — `targetedMisconceptions`
+   emptied, the distractor's `misconceptionId` removed. No id was invented for
+   "effort = work"; the blueprint does not register it, and a wrong claim is
+   worse than none.
+2. A new `step_check` probe carries MC-SCALAR-MULTIPLY using the blueprint's own
+   key: 3 N x 2 m at 60 degrees, correct **3 J**, misconception **6 J**, plus
+   two MC-DOT-CROSS-CONFUSION distractors (sin60°, "gives a vector").
+   `step_check` is a FREE probeKind slot for this concept, so no existing
+   canonicalSlug is re-identified and the single production-seeded identity
+   (`phys.meas.vector-products:misconception_probe:en:high`, verified by direct
+   query) is not stranded.
+
+## An existing guard caught my own new probe, and was NOT weakened
+
+`misconceptionIdsJoinToBlueprints.test.ts` failed on the first version of the
+new probe: its distractors wrote `MC-DOT-CROSS-CONFUSION` while
+`targetedMisconceptions` claimed only `MC-SCALAR-MULTIPLY`. The rule — a probe
+must claim every id its distractors write, or the evidence and the authoring
+disagree — is correct. The content was corrected to claim both; the guard was
+left exactly as it was.
+
+## Regression protection
+
+`src/tests/physicsProbeDiscrimination.test.ts`. Pins the retag, and pins the
+PROPERTY rather than the wording: a choice-bearing probe claiming a
+misconception must offer a distractor a holder would pick, and that
+distractor's answer must DIFFER from the correct one — the precise thing the
+wall stem failed.
+
+One assertion of mine was written as `<= 72` and measured at **0**, i.e. a
+vacuous ceiling. It was tightened to a strict `toEqual([])` plus a
+non-vacuity check, rather than left as a bound that could never fail.
+
+The file states its own limit explicitly: the structural check passes at zero
+AND passed at zero throughout the period the wall probe was mis-tagged. Only
+reading the stem finds this class. **221 of 222 physics concepts remain
+un-audited under Check 3.**
+
+## Validation
+
+`npx tsc --noEmit` clean; 330 files / 7048 passed / 9 skipped;
+`npm run build` exit 0.

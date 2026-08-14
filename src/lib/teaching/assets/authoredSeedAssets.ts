@@ -31797,12 +31797,57 @@ const VPRD_PROBES: SeedProbe[] = [
     stem: 'You push as hard as you can against a heavy wall that does not move at all. How much work do you do on the wall?',
     choices: [
       { text: 'Exactly zero — work is a dot product F·d, and with zero displacement (or force perpendicular to any motion), there is no aligned component to produce work, regardless of how large the force is', isCorrect: true },
-      { text: 'A large positive amount, proportional to how hard you pushed and how long you leaned into it', isCorrect: false, misconceptionId: `${VPRD}:MC-SCALAR-MULTIPLY` },
+      { text: 'A large positive amount, proportional to how hard you pushed and how long you leaned into it', isCorrect: false },
     ],
     correctValue: '0',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${VPRD}:MC-SCALAR-MULTIPLY`],
-    source: `${VPRD_SRC} — MC-SCALAR-MULTIPLY trigger case as probe, distractor-mapped`,
+    // RETAGGED 2026-08-14 — physics Check 3 (stem read against the blueprint).
+    // This probe cannot detect MC-SCALAR-MULTIPLY. A learner who believes
+    // "multiplying two vectors just multiplies their magnitudes" computes
+    // |F| x |d| = F x 0 = 0 — the CORRECT answer here — so the misconception
+    // passes unseen and the concept only LOOKED covered. Worse, the distractor
+    // it was mapped to describes "effort = work", a real belief this blueprint
+    // does not register, so selecting it fired the MC-SCALAR-MULTIPLY repair
+    // and taught cos-theta to a learner whose actual problem is that work needs
+    // displacement. No claim beats a wrong one, so the mapping is dropped
+    // rather than invented onto an id that does not exist. The probe is sound
+    // and is kept; MC-SCALAR-MULTIPLY is now carried by the step_check below,
+    // which uses the blueprint's own answer key.
+    targetedMisconceptions: [],
+    source: `${VPRD_SRC} — zero-displacement case; diagnoses no REGISTERED misconception (see note)`,
+  },
+  {
+    // MC-SCALAR-MULTIPLY, authored 2026-08-14 to close the gap the retag above
+    // exposed. The discriminator is the blueprint's own: its Diagnostic Battery
+    // DB-2 states «"6" (magnitudes only, no cos) -> SIGNAL:MISCONCEPTION:
+    // MC-SCALAR-MULTIPLY», so the stem must have a non-zero angle and the
+    // distractor must be the bare magnitude product. 3 N x 2 m at 60 degrees
+    // gives 3 J correctly and 6 J to the misconception — the two answers differ,
+    // which is exactly what the wall probe could not manage.
+    // `step_check` is a FREE probeKind slot for this concept (mcq,
+    // misconception_probe, checkpoint and short_answer are taken), so no
+    // existing canonicalSlug is re-identified and the one production-seeded
+    // identity for this concept is not stranded.
+    conceptId: VPRD,
+    subjectSlug: 'physics',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 3 N force acts on a box while the box moves 2 m, with 60° between the force and the movement. Work is the dot product F·d. What is the work done?',
+    choices: [
+      { text: '3 J — the dot product takes only the component of the force along the movement, so it is 3 × 2 × cos60° = 3 J', isCorrect: true },
+      { text: '6 J — multiply the two magnitudes together, 3 × 2', isCorrect: false, misconceptionId: `${VPRD}:MC-SCALAR-MULTIPLY` },
+      { text: '5.2 J — multiply the magnitudes and use sin60°, 3 × 2 × sin60°', isCorrect: false, misconceptionId: `${VPRD}:MC-DOT-CROSS-CONFUSION` },
+      { text: '6 J pointing at 60° — multiplying two vectors gives a vector', isCorrect: false, misconceptionId: `${VPRD}:MC-DOT-CROSS-CONFUSION` },
+    ],
+    correctValue: '3',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    // Both are claimed because both are genuinely separable on this stem: the
+    // sin60° option and the "gives a vector" option are the blueprint's own
+    // MC-DOT-CROSS-CONFUSION signals, and a probe must claim every id its
+    // distractors write or the evidence and the authoring disagree about what
+    // is being diagnosed (misconceptionIdsJoinToBlueprints.test.ts).
+    targetedMisconceptions: [`${VPRD}:MC-SCALAR-MULTIPLY`, `${VPRD}:MC-DOT-CROSS-CONFUSION`],
+    source: `${VPRD_SRC} — Section 3 Diagnostic Battery DB-2 answer key ("6" = magnitudes only, no cos; sin/vector = dot-cross confusion), distractor-mapped`,
   },
   {
     conceptId: VPRD,
