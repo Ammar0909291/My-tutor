@@ -372,6 +372,67 @@ describe('probes whose id joined but whose content did not', () => {
   })
 
   /**
+   * chem.found — a SECOND crossed pair, on chem.found.stoichiometry, and the
+   * domain with the most retag operations so far (seven, across six of its
+   * eight concepts).
+   *
+   * The crossed pair: the limiting-reagent probe's distractor is "N2 — there's
+   * less of it (1 mol vs 2 mol)", which is MC-2 ("smallest amount = limiting
+   * reagent") word for word, and it carried MC1. The coefficient probe's
+   * distractor is "coefficients directly give the mass in grams", which is
+   * MC-1 verbatim, and it carried MC2. Each diagnosed the other's tag — the
+   * same shape as chem.hal.sn1, and equally invisible to every count.
+   *
+   * chem.found.concentration was hollow: neither of its probes tests dilution
+   * (MC-2) or ppm (MC-3), and its molarity probe is about solution-vs-solvent
+   * volume rather than MC-1's molality claim.
+   */
+  it('found.stoichiometry: the second crossed pair is uncrossed', () => {
+    expect(tagOf('chem.found.stoichiometry', 'what is the limiting reagent')).toEqual(['MC2'])
+    expect(tagOf('chem.found.stoichiometry', 'the coefficient 2 means')).toEqual(['MC1'])
+    expect(tagOf('chem.found.stoichiometry', 'percent yield of 112%')).toEqual(['MC3'])
+  })
+
+  it('found: the other five retags', () => {
+    // matter P1's "Element — because it looks pure and uniform" argues from
+    // uniform appearance (MC-1), not from element-equals-atom (MC-2).
+    expect(tagOf('chem.found.matter', 'Brass is made by melting')).toEqual(['MC1'])
+    // pure-substances P1's two distractors are both "looks uniform, so pure"
+    // = MC-1, not MC-2 (wrong separation technique).
+    expect(tagOf('chem.found.pure-substances', 'Which of these is a pure substance')).toEqual(['MC1'])
+    // measurement P2 is a unit-conversion DIRECTION error = MC-3, not MC-2
+    // (zeros never significant).
+    expect(tagOf('chem.found.measurement', 'Convert 0.025 kg')).toEqual(['MC3'])
+    // sig-figs P2 applies the MULTIPLICATION rule to an addition = MC-1.
+    expect(tagOf('chem.found.significant-figures', '12.52 + 1.7')).toEqual(['MC1'])
+    // mole P1's "hydrogen is smaller so more fit in 2g" is mass reasoning
+    // = MC-1, not a conversion direction error.
+    expect(tagOf('chem.found.mole-concept', 'Which contains more molecules')).toEqual(['MC1'])
+  })
+
+  it('found: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.found.matter', 'one oxygen ELEMENT')).toEqual(['MC2'])
+    expect(tagOf('chem.found.matter', '88.8% oxygen by mass')).toEqual(['MC3'])
+
+    expect(tagOf('chem.found.states-of-matter', 'puddle on the pavement')).toEqual(['MC3'])
+
+    expect(tagOf('chem.found.pure-substances', 'Would filtration work')).toEqual(['MC2'])
+    expect(tagOf('chem.found.pure-substances', 'out of the condenser')).toEqual(['MC3'])
+
+    expect(tagOf('chem.found.measurement', '0.0450 g')).toEqual(['MC2'])
+
+    expect(tagOf('chem.found.significant-figures', '4500 m')).toEqual(['MC2'])
+    expect(tagOf('chem.found.significant-figures', 'exactly 3 bolts')).toEqual(['MC3'])
+
+    expect(tagOf('chem.found.mole-concept', 'atomic mass of 12 u')).toEqual(['MC2'])
+    expect(tagOf('chem.found.mole-concept', '3.011')).toEqual(['MC3'])
+
+    expect(tagOf('chem.found.concentration', '1 molal')).toEqual(['MC1'])
+    expect(tagOf('chem.found.concentration', 'adding 40 mL of water')).toEqual(['MC2'])
+    expect(tagOf('chem.found.concentration', '15 ppm in soil')).toEqual(['MC3'])
+  })
+
+  /**
    * chem.carb — two retags, two more hollow concepts, and a defect shape that
    * had not appeared before: a concept carrying probes that belong to a
    * DIFFERENT concept.

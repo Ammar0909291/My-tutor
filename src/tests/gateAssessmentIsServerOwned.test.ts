@@ -319,7 +319,10 @@ describe('the non-physics authored corpora convert too', () => {
     //                   another concept's: chem.carb.ketones was carrying two
     //                   alpha-hydrogen-acidity probes belonging to
     //                   chem.carb.alpha-reactions)
-    ['chemistry', CHEMISTRY_PROBES, 66],
+    //            ->  58 (chem.found x8 — a SECOND crossed pair, on
+    //                   chem.found.stoichiometry, plus one hollow concept and
+    //                   seven retag operations across six concepts)
+    ['chemistry', CHEMISTRY_PROBES, 58],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

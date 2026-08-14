@@ -6224,3 +6224,99 @@ production write.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# chem.found — a second crossed pair, and the retag-heaviest domain yet
+
+Eight concepts, sixteen pre-existing probes. Seven retag operations across six
+concepts, fourteen probes authored, one hollow concept, and the second cleanly
+crossed pair of the campaign.
+
+## The crossed pair: chem.found.stoichiometry
+
+| probe | its distractor says | that is | it carried |
+|---|---|---|---|
+| "which is the limiting reagent?" | "N₂ — there's less of it (1 mol vs 2 mol)" | MC-2, *"smallest mass = limiting reagent"* | **MC1** |
+| "the coefficient 2 means 2 grams of Mg" | "coefficients directly give the mass in grams" | MC-1, *"coefficients represent mass ratios"* | **MC2** |
+
+Each probe states the OTHER one's misconception almost verbatim. Same shape as
+`chem.hal.sn1`, and equally invisible: two probes, two distinct ids, both
+joining a real blueprint heading, full breadth, nothing orphaned. Every
+automated measure in this repository reports it healthy while each learner who
+errs is served the wrong remedy.
+
+Two crossed pairs in 91 audited chemistry concepts is now a rate, not an
+anomaly — roughly one in 45.
+
+## Five further retags
+
+`matter` P1's distractor "Element — because it looks pure and uniform" argues
+from uniform appearance, which is MC-1, not MC-2 ("element = atom") ·
+`pure-substances` P1's two distractors ("Filtered seawater — clear and uniform
+after filtering", "Air — invisible and everywhere") are both MC-1, not MC-2
+(wrong separation technique) · `measurement` P2 is a unit-conversion DIRECTION
+error, which is MC-3, not MC-2 ("zeros are never significant") ·
+`significant-figures` P2 applies the MULTIPLICATION rule to an addition, which
+is MC-1 word for word, and carried MC-2 · `mole-concept` P1's "hydrogen is
+smaller so more fit in 2 g" is mass reasoning = MC-1, not a conversion
+direction error.
+
+## One hollow concept: chem.found.concentration
+
+Neither existing probe touches dilution (MC-2) or ppm (MC-3), and its molarity
+probe tests solution-volume-vs-solvent-volume rather than MC-1's molality
+claim. All three documented misconceptions unprobed; all three authored.
+Hollow total: 15.
+
+## Fourteen probes authored
+
+`matter` MC-2 (O₂ is a molecule of two atoms; "element" is a category, and the
+same element also exists as O₃) and MC-3 (every sample of water is 88.8% oxygen
+— the law of definite proportions) · `states-of-matter` MC-3 (a puddle dries at
+20 °C: evaporation is a surface process at any temperature, boiling is a bulk
+one at a fixed temperature) · `pure-substances` MC-2 (filtration cannot recover
+dissolved salt — it separates by particle size, not boiling point) and MC-3
+(distillation returns pure WATER, not hydrogen and oxygen; that would need
+electrolysis) · `measurement` MC-2 (0.0450 g: leading zeros are placeholders,
+the trailing zero is significant, so 3 sig figs) · `significant-figures` MC-2
+(4500 m with no decimal point is ambiguous — which is why scientific notation
+exists) and MC-3 (exactly 3 bolts is a COUNTED number, infinite sig figs, and
+never limits the result) · `mole-concept` MC-2 (12 u is one atom, 12 g/mol is
+6.022×10²³ atoms; the numbers agree because Avogadro's number is DEFINED so
+they do) and MC-3 (particles → moles DIVIDES by N_A; the sanity check is that
+moles are always small) · `stoichiometry` MC-3 (112% yield is a wet or impure
+product, not unusual efficiency) · `concentration` MC-1 (molality is per kg of
+SOLVENT, so heating does not change it — which is why it is used for
+colligative properties), MC-2 (V₂ in M₁V₁ = M₂V₂ is the final TOTAL volume,
+60 mL not 40 mL) and MC-3 (ppm is mg/kg by mass; mg/L coincides only for dilute
+aqueous solutions, and soil is not water).
+
+All fourteen open a free `(conceptId, probeKind, gradeBand)` slot. 0 discarded,
+0 non-physics identities changed.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 91 of 186 | 86 | 45 | 4 | 30 | 15 | 8 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 58 |
+| blueprint MCs with no probe | 56 | 63 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+45 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and the 61 probes authored across the last four assessment batches
+have never been seeded. Nothing here is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
