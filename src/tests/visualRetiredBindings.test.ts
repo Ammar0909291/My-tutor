@@ -24,14 +24,18 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 47 audited concepts', () => {
-    // 29 from the M3-A audit (which read concepts holding an EXACT curated
-    // row) + 18 from the visual semantic moat sweep, which ran the resolver
-    // over all 238 physics and 186 chemistry concepts and read the 51 whose
-    // figure identity was WIDENED from a generator kind or a domain prefix
-    // rather than declared. See visualSemanticMoatPhysicsChemistry.test.ts
-    // for the per-concept evidence.
-    expect(RETIRED).toHaveLength(47)
+  it('covers exactly the 50 audited concepts', () => {
+    // 29 from the M3-A audit + 21 from the visual semantic moat sweep, which
+    // ran the resolver over all 238 physics and 186 chemistry concepts:
+    //   round 1, the WIDENED tiers (51 bindings whose identity came from a
+    //            generator KIND or a domain prefix rather than a concept row)
+    //            -> 18 depicted a different thing
+    //   round 2, the CURATED and GENERATOR tiers -> the 12 generator scenes
+    //            are all faithful; of the 27 curated rows carrying the STRONG
+    //            contract, 3 pointed at a generic card while claiming to be a
+    //            figure of the concept
+    // See visualSemanticMoatPhysicsChemistry.test.ts for per-concept evidence.
+    expect(RETIRED).toHaveLength(50)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {
@@ -129,8 +133,19 @@ describe('B1 changed only what it was meant to change', () => {
     expect(mitosis.payload?.renderer).toBe('scene')
   })
 
-  it('the historic wrong-visual concepts still receive nothing at all', () => {
-    // Unchanged by B1 — they had no asset before and must not have acquired one.
+  it('the historic wrong-visual concepts are not served on an off-topic request', () => {
+    // CORRECTED in visual round 2. This previously read "they had no asset
+    // before and must not have acquired one", which is no longer true and had
+    // stopped describing what the test does: all seven have since been given
+    // faithful, concept-specific generator scenes by the M4 pilot (calorimetry
+    // prints "heat lost = heat gained"; total-internal-reflection prints
+    // sin(theta_c) = n2/n1). That is an improvement, not a regression.
+    //
+    // The assertion still passes, and still guards something real, but it is a
+    // DIFFERENT guarantee: the message below explicitly names a ray diagram and
+    // a mirror, i.e. a topic other than the lesson, so requestTargetsSomethingElse
+    // withholds any new figure. Left in place under its true description —
+    // a guard that passes for a reason its comment denies is worse than no guard.
     for (const id of [
       'phys.opt.total-internal-reflection', 'phys.therm.calorimetry', 'phys.therm.first-law',
       'phys.wave.transverse-waves', 'phys.mech.viscosity', 'phys.mech.surface-tension',

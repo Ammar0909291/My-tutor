@@ -117,6 +117,90 @@ describe('every semantic defect found in the sweep stays suppressed', () => {
 })
 
 /**
+ * ROUND 2 — THE CURATED AND GENERATOR TIERS.
+ *
+ * Round 1 swept the two WIDENED tiers. This round read the other two, and they
+ * behave very differently.
+ *
+ * The GENERATOR tier is clean: all 12 are hand-authored concept-specific
+ * scenes printing the concept's own quantities. Nothing to retire, which is
+ * itself the finding — authoring a scene FOR a concept is what produces a
+ * faithful figure, and no shortcut reproduces it.
+ *
+ * The CURATED tier splits on CONTRACT STRENGTH, and that is the subtle part.
+ * `visualContract` demotes a figure to "GENERAL ILLUSTRATION — NOT a figure of
+ * X", with hard limits against reading anything off it, when and only when
+ * `asset.scope === 'domain'`. 15 of the 42 carry that and are honest
+ * decoration — a bare coordinate plane for the Carnot cycle is inert under
+ * that contract and is deliberately NOT retired.
+ *
+ * The other 27 get "A <representation> of <concept> is attached to THIS
+ * response". The demotion is gated on HOW THE BINDING WAS WRITTEN, never on
+ * what the figure contains — so a concept-level row pointing at a generic card
+ * claims to be a figure of the concept. Three did.
+ */
+const ROUND_2_DEFECTS: ReadonlyArray<readonly [string, string, string]> = [
+  ['physics', 'phys.mech.displacement',
+    'a bare -5..5 number line claimed as a figure of Displacement and Distance — no start, no end, no path'],
+  ['physics', 'phys.mech.tension',
+    'the force-diagram card has no string, no rope and no tension arrow'],
+  ['physics', 'phys.em.emf',
+    'the eighth concept on the bulb card, missed while the other seven were retired; no internal resistance is drawn'],
+]
+
+describe('round 2 — curated bindings that claimed to be a figure of the concept', () => {
+  it.each(ROUND_2_DEFECTS)('%s / %s — %s', (subject, conceptId) => {
+    expect(isRetiredVisualBinding(conceptId)).toBe(true)
+    expect(turn(conceptId, 'show me a diagram of this', subject).graphical).toBe(false)
+  })
+
+  it('phys.em.emf joins the seven siblings it was separated from', () => {
+    // All eight sit on the same "battery, switch, bulb, resistor" card, and
+    // each is defined by a component the card does not contain. Seven were
+    // retired by the M3-A audit; emf was not, and the omission is the point.
+    for (const id of [
+      'phys.em.wheatstone-bridge', 'phys.em.potentiometer', 'phys.em.rc-circuits',
+      'phys.em.self-inductance', 'phys.em.mutual-inductance', 'phys.em.ac-basics',
+      'phys.em.lc-circuits', 'phys.em.emf',
+    ]) {
+      expect(isRetiredVisualBinding(id), id).toBe(true)
+    }
+    // phys.em.electrical-power stays: the card genuinely carries a resistor
+    // and a bulb, so Joule heating can be pointed at.
+    expect(isRetiredVisualBinding('phys.em.electrical-power')).toBe(false)
+  })
+
+  it('the honestly-demoted general illustrations were NOT retired with them', () => {
+    // These share the SAME generic cards as the three retirements above, and
+    // are inert because visualContract already bars any claim on them.
+    // Retiring them would remove a harmless picture and teach nothing.
+    for (const id of [
+      'phys.mech.velocity', 'phys.mech.acceleration', 'phys.mech.relative-motion',
+      'phys.therm.carnot-cycle', 'phys.therm.ideal-gas-law', 'phys.mech.work',
+    ]) {
+      expect(isRetiredVisualBinding(id), id).toBe(false)
+      expect(turn(id, 'show me a diagram of this', 'physics').graphical, id).toBe(true)
+    }
+  })
+
+  it('every generator-tier binding survived round 2 untouched', () => {
+    // The clean tier. Named individually so a later change that quietly
+    // widens or retires one of them fails here.
+    for (const id of [
+      'phys.meas.vector-products', 'phys.mech.collisions-inelastic', 'phys.mech.satellites',
+      'phys.mech.surface-tension', 'phys.mech.viscosity', 'phys.therm.calorimetry',
+      'phys.therm.first-law', 'phys.wave.transverse-waves', 'phys.wave.interference',
+      'phys.opt.mirrors', 'phys.opt.total-internal-reflection', 'phys.em.kirchhoffs-laws',
+    ]) {
+      const d = turn(id, 'show me a diagram of this', 'physics')
+      expect(d.graphical, id).toBe(true)
+      expect(d.asset?.provenance, id).toBe('generator')
+      expect(d.asset?.conceptId, id).toBe(id)
+    }
+  })
+})
+
+/**
  * THE OVER-SUPPRESSION CONTROL.
  *
  * Suppression is cheap to apply and expensive to notice: retiring one concept

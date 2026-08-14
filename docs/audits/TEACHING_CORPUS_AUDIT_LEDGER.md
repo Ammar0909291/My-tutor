@@ -5751,3 +5751,130 @@ provenance of both halves recorded in the comment.
 4. Authoring faithful replacements for the 18 suppressed concepts. Suppression
    removes a false claim; it does not add a correct figure, and this round
    added none.
+
+---
+
+# VISUAL / DIAGRAM SEMANTIC MOAT — round 2 (the curated and generator tiers)
+
+Round 1 swept the two tiers where a figure's identity is WIDENED from a
+generator kind or a domain prefix. This round read the other two — the 42
+`curated` rows and the 12 `generator` scenes — and they behave very
+differently from each other.
+
+## The generator tier is clean: 12 of 12 faithful
+
+Every one is a hand-authored, concept-specific scene that prints the concept's
+own quantities. `phys.opt.total-internal-reflection` draws all three cases
+(θ<θc escapes, θ=θc grazes, θ>θc all reflected) and prints sin θc = n₂/n₁ ·
+`phys.mech.surface-tension` prints h = 2T cos θ / ρgr · `phys.therm.first-law`
+prints ΔU = Q − W · `phys.therm.calorimetry` prints "heat lost = heat gained" ·
+`phys.meas.vector-products` puts the dot and cross products side by side and
+labels one "a SCALAR — just a number" and the other "a VECTOR — with a
+direction".
+
+Nothing was retired here, and that is itself the finding: **authoring a scene
+FOR a concept is what produces a faithful figure, and no shortcut reproduces
+it.** Every defect found across both rounds lives in a tier that reused
+something.
+
+## The curated tier splits on CONTRACT STRENGTH — the subtle part
+
+`visualContract` demotes a figure to "GENERAL ILLUSTRATION — NOT a figure of
+X", with explicit hard limits ("Do NOT read a property, a relationship, a
+result or a conclusion off it"), when and only when `asset.scope === 'domain'`.
+
+15 of the 42 carry that scope and are honest decoration. A bare coordinate
+plane for `phys.therm.carnot-cycle` looks alarming until you read what the
+tutor is actually told about it — the claim is already barred. **They were
+deliberately NOT retired**, and a control test now pins that: retiring an
+inert picture removes something harmless and teaches nothing.
+
+The other 27 receive the STRONG contract — "A `<representation>` of
+`<concept>` is attached to THIS response". The demotion is gated on **how the
+binding was written, never on what the figure contains**, so a concept-level
+row pointing at a generic card claims to be a figure of the concept. Three do.
+
+## Three retirements
+
+`phys.mech.displacement` — claimed as "a number_line of Displacement and
+Distance". The card is a bare −5…5 axis with ticks, integer labels and a dot
+on zero: no start point, no end point, no path, and therefore neither of the
+two quantities the concept exists to distinguish. Its three siblings on the
+SAME card — velocity, acceleration, relative-motion — carry `scope: 'domain'`
+and are correctly demoted, so this row is the outlier, not the rule.
+
+`phys.mech.tension` — claimed as "a force_diagram of Tension in Strings and
+Ropes". The card draws a block on flat ground with four labelled arrows:
+applied, friction, weight, normal. There is no string, no rope and no tension
+arrow anywhere in it.
+
+`phys.em.emf` — **the eighth concept on the "battery, switch, bulb, resistor"
+card, and the one the M3-A audit missed while retiring the other seven.** EMF,
+internal resistance and terminal voltage turn entirely on r INSIDE the cell,
+which is precisely what the card does not draw — its battery is an ideal
+symbol, so V = E − Ir cannot be pointed at. Retired on exactly the evidence
+its siblings were. `phys.em.electrical-power` stays: the card genuinely carries
+a resistor and a bulb, so Joule heating can be pointed at.
+
+## A stale guard, corrected
+
+`visualRetiredBindings.test.ts` contained an assertion commented "the historic
+wrong-visual concepts still receive nothing at all — they had no asset before
+and must not have acquired one", naming seven concepts including
+`phys.therm.calorimetry` and `phys.opt.total-internal-reflection`.
+
+That comment is now false: all seven HAVE acquired assets — the faithful M4
+generator scenes praised above. The test still passes, but for a completely
+different reason than it claims: its message explicitly names a ray diagram
+and a mirror, i.e. a topic other than the lesson, so `requestTargetsSomethingElse`
+withholds a new figure. A guard that passes for a reason its comment denies is
+worse than no guard, because the next person to touch it will draw the wrong
+conclusion. The assertion is kept and re-described accurately rather than
+deleted.
+
+## Measured state after both rounds
+
+| | physics | chemistry |
+|---|---|---|
+| concepts | 238 | 186 |
+| figure, identity declared (`curated`/`generator`) | 44 | 17 |
+| figure, identity widened (inspected, kept) | 19 | 14 |
+| no figure — no faithful visual exists | 154 | 151 |
+| no figure — binding retired | 17 | 18 |
+
+Contract strength across everything that still renders:
+
+| | STRONG ("a figure of X") | GENERAL ILLUSTRATION |
+|---|---|---|
+| curated | 24 | 15 |
+| generator | 12 | 0 |
+| generator-default | 18 | 6 |
+| domain-default | 0 | 9 |
+
+The 18 `generator-default` bindings on the STRONG contract are the largest
+remaining exposure and the honest next target: each is served a shared
+canonical scene while being introduced as a figure of the concept. Round 1
+read all of them and retired the four that assert something false; the
+survivors are incomplete rather than wrong, which is a weaker claim than the
+contract they carry makes.
+
+## Open in this dimension
+
+1. Narration and label correctness INSIDE correctly-bound figures — still
+   unexamined.
+2. The 18 `generator-default` bindings carrying the STRONG contract: the
+   principled fix is `scope: 'domain'` on a binding that names only a kind,
+   which would demote them automatically. Not attempted here — it changes a
+   contract path used by every subject, not just physics and chemistry.
+3. `phys.em.dc-circuits` still needs a combined series-parallel topology.
+4. Authoring faithful replacements for the 21 suppressed concepts. Neither
+   round added a correct figure; both removed false claims.
+
+## Production verification
+
+Not production-verified. Offline measurement against the real resolver and
+the real card components. No production write was performed.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.

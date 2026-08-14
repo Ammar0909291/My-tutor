@@ -147,6 +147,51 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
     'independence of the x and y components, which a 1-D plot cannot show — the figure ' +
     'is literally the concept the learner is being moved on from.',
 
+  // ── ROUND 2: the CURATED tier, where the claim is strongest ────────────
+  //
+  // Round 1 swept the widened tiers. This round read the 42 curated and 12
+  // generator bindings, and found the tiers behave very differently:
+  //
+  //   generator (12)  ALL FAITHFUL. Every one is a hand-authored,
+  //                   concept-specific scene printing the concept's own
+  //                   quantities — sin(theta_c) = n2/n1 for total internal
+  //                   reflection, h = 2T cos(theta)/rho*g*r for capillarity,
+  //                   dU = Q - W for the first law. Nothing to retire.
+  //
+  //   curated (42)    SPLIT BY CONTRACT STRENGTH, which is what makes this
+  //                   tier subtle. 15 already carry `scope: 'domain'`, so
+  //                   visualContract demotes them to "GENERAL ILLUSTRATION —
+  //                   NOT a figure of X" with hard limits against reading
+  //                   anything off them. Those are honest decoration and are
+  //                   deliberately NOT retired: a bare coordinate plane for
+  //                   the Carnot cycle is inert under that contract.
+  //
+  // The other 27 get the STRONG contract — "A <representation> of <concept> is
+  // attached to THIS response" — and the demotion is gated on `asset.scope`,
+  // i.e. on HOW THE BINDING WAS WRITTEN, never on what the figure contains. So
+  // a concept-level row pointing at a generic card claims to be a figure of
+  // the concept. Three of the 27 do exactly that.
+  'phys.mech.displacement':
+    'Claimed under the STRONG contract as "a number_line of Displacement and Distance". ' +
+    'The NumberLine card is a bare -5..5 axis with ticks, integer labels and a dot on ' +
+    'zero — no start point, no end point, no path, and therefore neither of the two ' +
+    'quantities the concept exists to distinguish. Its three siblings on the same card ' +
+    '(velocity, acceleration, relative-motion) carry scope:domain and are correctly ' +
+    'demoted to a general illustration; this row is the outlier, not the rule.',
+  'phys.mech.tension':
+    'Claimed under the STRONG contract as "a force_diagram of Tension in Strings and ' +
+    'Ropes". The ForceDiagram card draws a block on flat ground with four labelled ' +
+    'arrows — applied, friction, weight, normal. There is no string, no rope and no ' +
+    'tension arrow anywhere in it. Same evidence shape as the phys.em component ' +
+    'concepts retired above: the object that defines the concept is not in the figure.',
+  'phys.em.emf':
+    'The EIGHTH concept on the "battery, switch, bulb, resistor" card, and the one the ' +
+    'M3-A audit missed while retiring the other seven. EMF, internal resistance and ' +
+    'terminal voltage turn entirely on r INSIDE the cell, which is exactly what the ' +
+    'card does not draw: its battery is an ideal symbol with no internal resistance and ' +
+    'no terminal-voltage marking, so V = E - I*r cannot be pointed at. Retired on the ' +
+    'same evidence as its seven siblings.',
+
   // ── chemistry: the chem.bond domain rule ───────────────────────────────
   // Seven concepts inherited BondFormation3D, whose complete content is two
   // spheres A and B, one label "shared pair", and one label "Stable molecule
