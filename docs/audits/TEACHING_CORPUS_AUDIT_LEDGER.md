@@ -7736,3 +7736,84 @@ would have caught this immediately.
 
 Revert verified: `npx tsc --noEmit` clean, full suite green, `npm run build`
 exit 0 — recorded in the revert commit.
+
+---
+
+# Iteration — PHYSICS CHECK 3: phys.meas domain complete (2026-08-14)
+
+Resumed on the owner's decision after the Moat progress audit: no production
+writes, and the loop spends itself on Stage 4 (stem-vs-blueprint), which the
+audit showed at 0.5% and with a 1-for-1 defect rate on the only concept
+checked.
+
+## Domain result: phys.meas, 8 of 8 concepts audited
+
+| concept | verdict |
+|---|---|
+| `phys.meas.units` | **DEFECT — fixed** (below) |
+| `phys.meas.scalars-vectors` | tags diagnose their stems; MC-4 unprobed (an S2 gap, tracked separately) |
+| `phys.meas.dimensions` | correct |
+| `phys.meas.errors` | correct |
+| `phys.meas.significant-figures` | correct |
+| `phys.meas.vector-addition` | correct |
+| `phys.meas.vector-products` | **DEFECT — fixed** in the previous batch |
+| `phys.meas.unit-conversion` | correct |
+
+Two defects in eight concepts. Physics Check 3 moves 1/222 → 8/222.
+
+## The defect — an assessment that teaches the misconception it repairs
+
+`phys.meas.units`, mastery-gate TRANSFER probe:
+
+> "TRANSFER: A chemist measures 250 mL of a solution. What SI **base** unit
+>  should be used for volume, and what is this measurement in that unit?"
+> correctValue: "m³ (cubic metre); 2.5 × 10⁻⁴ m³"
+
+Volume has no SI base unit. There are exactly seven — metre, kilogram, second,
+ampere, kelvin, mole, candela — and m³ is a DERIVED unit built from the metre.
+
+This is not a wording slip in this concept, it is the concept's own
+misconception. Its blueprint's MC-3 is "Common Units (Litre, Centimetre, Hour)
+Are SI Base Units", and states the observable symptom as:
+
+> "Student classifies L, cm, or hr as SI base units; or states SI has more
+>  than 7 base units."
+
+The mastery gate was asserting exactly that. A learner who has just been taught
+the seven base units is then asked, by the gate that certifies them, to name a
+volume base unit — and the expected answer confirms the error.
+
+Invisible to every structural check: the probe carries no tag at all, so ids
+join, distractors map, breadth is unaffected, and counts read healthy. Only
+reading the stem against the blueprint finds it.
+
+**Fix**, preserving and sharpening the transfer intent rather than deleting it:
+
+> "What is the SI unit for volume, which SI base unit is it built from, and
+>  what is this measurement in SI units?"
+> correctValue: "m³ (cubic metre) — a DERIVED unit built from the base unit
+>  metre; 2.5 × 10⁻⁴ m³"
+
+Answering now REQUIRES the base/derived distinction MC-3 is about, so the item
+reinforces the correct model instead of the misconception.
+
+## Root-cause sweep — the class is isolated, not systemic
+
+Every physics and chemistry probe making a base-unit claim was checked: 6
+mention base units at all, and only two came near a non-base unit. One is the
+corrected probe; the other is `phys.meas.units`'s sort test, "which ONE of
+these is an SI base unit?" with correct answer "second" and litre as a
+distractor — which is correct and is the item that makes MC-3 diagnosable.
+No further instances.
+
+## Regression protection
+
+`src/tests/physicsProbeDiscrimination.test.ts` extended: pins the corrected
+stem, asserts no physics probe names a derived unit as an SI base unit, and
+includes a non-vacuity check against the sort-test probe so the guard is
+verifiably examining live content.
+
+## Validation
+
+`npx tsc --noEmit` clean; 332 files / 7078 passed / 9 skipped;
+`npm run build` exit 0. No production writes (owner decision).

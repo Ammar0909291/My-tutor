@@ -42598,11 +42598,29 @@ const UNITS_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'short_answer',
     gradeBand: GradeBand.HIGH,
-    stem: 'TRANSFER: A chemist measures 250 mL of a solution. What SI base unit should be used for volume, and what is this measurement in that unit?',
-    correctValue: 'm³ (cubic metre); 2.5 × 10⁻⁴ m³',
+    // CORRECTED 2026-08-14 — physics Check 3 (stem read against the blueprint).
+    //
+    // This asked "What SI BASE unit should be used for volume?" and expected
+    // "m³". Volume has no SI base unit: there are exactly seven (metre,
+    // kilogram, second, ampere, kelvin, mole, candela) and m³ is a DERIVED
+    // unit built from the metre.
+    //
+    // That is not a wording slip here, it is the concept's own misconception.
+    // This blueprint's MC-3 is "Common Units (Litre, Centimetre, Hour) Are SI
+    // Base Units", whose observable symptom it states as: "Student classifies
+    // L, cm, or hr as SI base units; or states SI has more than 7 base units."
+    // The probe asserted a volume base unit exists and named it — teaching the
+    // exact belief the concept exists to repair, in the concept's own mastery
+    // gate. It carries no tag, so no structural check could see it.
+    //
+    // The transfer intent is preserved and sharpened: the item now asks for
+    // the SI unit AND which base unit it is built from, so answering it
+    // requires the base/derived distinction MC-3 is about.
+    stem: 'TRANSFER: A chemist measures 250 mL of a solution. What is the SI unit for volume, which SI base unit is it built from, and what is this measurement in SI units?',
+    correctValue: 'm³ (cubic metre) — a DERIVED unit built from the base unit metre; 2.5 × 10⁻⁴ m³',
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [],
-    source: `${UNITS_SRC} — Section 8 Mastery Gate P76 Transfer Probe (explicitly labeled transfer item in the Blueprint)`,
+    source: `${UNITS_SRC} — Section 8 Mastery Gate P76 Transfer Probe (explicitly labeled transfer item in the Blueprint); stem corrected, see note`,
   },
   {
     conceptId: UNITS,

@@ -120,6 +120,58 @@ describe('MC-SCALAR-MULTIPLY is carried by a probe that can actually separate it
   })
 })
 
+describe('a probe must not assert the misconception its concept repairs', () => {
+  /**
+   * `phys.meas.units` TRANSFER probe, found 2026-08-14. It asked "What SI BASE
+   * unit should be used for volume?" and expected "m³". Volume has no SI base
+   * unit — there are exactly seven, and m³ is DERIVED from the metre.
+   *
+   * That is not a wording slip in this concept. Its own MC-3 is "Common Units
+   * (Litre, Centimetre, Hour) Are SI Base Units", whose observable symptom the
+   * blueprint states as "Student classifies L, cm, or hr as SI base units; or
+   * states SI has more than 7 base units." The mastery gate was asserting the
+   * belief the concept exists to repair. The probe carries no tag, so no
+   * structural check could see it — only reading the stem against the
+   * blueprint does.
+   */
+  const SI_BASE_UNITS = ['metre', 'meter', 'kilogram', 'second', 'ampere', 'kelvin', 'mole', 'candela']
+
+  it('the units transfer probe no longer calls a derived unit a base unit', () => {
+    const probe = forConcept('phys.meas.units').find((p) => p.stem.startsWith('TRANSFER:') && /volume/i.test(p.stem))
+    expect(probe, 'the transfer probe must still exist').toBeDefined()
+    expect(probe!.stem).not.toMatch(/SI base unit should be used for volume/i)
+    // It still teaches the distinction rather than dodging it.
+    expect(probe!.stem).toMatch(/which SI base unit is it built from/i)
+  })
+
+  it('no physics probe names a non-base unit AS an SI base unit', () => {
+    const offenders: string[] = []
+    for (const p of physics) {
+      const text = [p.stem, (p as { correctValue?: string }).correctValue ?? '',
+        ...(p.choices ?? []).map((c) => c.text)].join(' | ')
+      // Only inspect probes that make a base-unit claim at all.
+      if (!/\bbase unit\b/i.test(text)) continue
+      // A claim of the form "<X> ... base unit" where the sentence also asserts
+      // a derived unit IS one. The corrected probe passes because it says
+      // "DERIVED unit built from the base unit metre".
+      const assertsDerivedAsBase =
+        /\b(m³|cubic met(re|er)|litre|liter|newton|joule|watt|pascal|hertz|volt|ohm)\b[^.]{0,60}\bis an? SI base unit\b/i.test(text) ||
+        /\bSI base unit (?:for|of) (volume|force|energy|power|pressure|frequency|charge)\b/i.test(text)
+      if (assertsDerivedAsBase) offenders.push(`${p.conceptId}: ${p.stem.slice(0, 90)}`)
+    }
+    expect(offenders).toEqual([])
+  })
+
+  it('the seven base units are what the corpus actually treats as base', () => {
+    // Non-vacuity: the sort-test probe genuinely asks the question, so the
+    // guard above is checking a live property rather than an empty set.
+    const sort = forConcept('phys.meas.units').find((p) => /which ONE of these is an SI base unit/i.test(p.stem))
+    expect(sort).toBeDefined()
+    const correct = (sort!.choices ?? []).find((c) => c.isCorrect)
+    expect(SI_BASE_UNITS.some((u) => correct!.text.toLowerCase().includes(u))).toBe(true)
+  })
+})
+
 describe('a claimed misconception always has a distractor to detect it', () => {
   // The general form of the defect, across every physics probe that carries a
   // choice list. A probe may legitimately claim a misconception without
