@@ -340,6 +340,62 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.pblock.trends', 'inert-pair effect explains why lead')).toEqual(['MC3'])
   })
 
+  /**
+   * chem.coord — the worst domain measured so far: SIX of its seven concepts
+   * were hollow (cft, bonding, applications, isomerism, werner, and — after
+   * the one retag below — nothing left over on nomenclature either). Both
+   * pre-existing probes on each of those concepts tested something the
+   * blueprint does not document, so every documented misconception was
+   * unprobed while the structural measures all read "covered": two probes,
+   * two distinct ids, both ids joining to a real blueprint heading.
+   *
+   * Only ONE probe in the whole domain survived the stem-vs-blueprint read
+   * unchanged with a correct tag — chem.coord.stability's chelate-effect
+   * MCQ, whose distractor states MC-1 ("each individual bond is stronger")
+   * verbatim. It is pinned here so a later edit cannot quietly break the
+   * one probe that was already right.
+   */
+  it('coord: the bis(ethylenediamine) probe is MC3, not MC1', () => {
+    // blueprint MC-1 is ligand ORDER (alphabetical vs by abundance); MC-3 is
+    // "di-ethylenediamine means two ethylene groups within one ligand" —
+    // which is exactly what the di-/bis- probe asks about. MC-1 and MC-2 had
+    // no probe at all until this batch.
+    expect(tagOf('chem.coord.nomenclature', 'diethylenediamine')).toEqual(['MC3'])
+    expect(tagOf('chem.coord.nomenclature', 'Which ligand name is written first')).toEqual(['MC1'])
+    expect(tagOf('chem.coord.nomenclature', 'potassium hexacyanidoferrate')).toEqual(['MC2'])
+  })
+
+  it('coord: stability MC1 was already correct and stays correct', () => {
+    expect(tagOf('chem.coord.stability', 'chelate effect')).toEqual(['MC1'])
+    expect(tagOf('chem.coord.stability', 'survives for weeks in 1 M acid')).toEqual(['MC2'])
+    expect(tagOf('chem.coord.stability', 'OVERALL formation constant')).toEqual(['MC3'])
+  })
+
+  it('coord: every documented misconception in the six hollow concepts now has a probe', () => {
+    // Pinned by stem so the diagnosis cannot drift back onto a probe that
+    // does not test it. Each stem below is the one authored FOR that
+    // misconception, using the blueprint's own discrimination pair.
+    expect(tagOf('chem.coord.werner', 'What is cobalt’s oxidation state')).toEqual(['MC1'])
+    expect(tagOf('chem.coord.werner', 'precipitate immediately as AgCl')).toEqual(['MC2'])
+    expect(tagOf('chem.coord.werner', '[Ag(NH₃)₂]⁺')).toEqual(['MC3'])
+
+    expect(tagOf('chem.coord.cft', 'Zn²⁺ is d¹⁰')).toEqual(['MC1'])
+    expect(tagOf('chem.coord.cft', 'Δtet larger or smaller')).toEqual(['MC2'])
+    expect(tagOf('chem.coord.cft', 'ZnSO₄ solution is colourless')).toEqual(['MC3'])
+
+    expect(tagOf('chem.coord.bonding', 'd²sp³ and [CoF₆]³⁻ as sp³d²')).toEqual(['MC1'])
+    expect(tagOf('chem.coord.bonding', 'π-DONOR ligands')).toEqual(['MC2'])
+    expect(tagOf('chem.coord.bonding', 'VBT is wrong')).toEqual(['MC3'])
+
+    expect(tagOf('chem.coord.applications', 'carbon monoxide poisoning')).toEqual(['MC1'])
+    expect(tagOf('chem.coord.applications', 'Does it react with DNA at all')).toEqual(['MC2'])
+    expect(tagOf('chem.coord.applications', 'chlorophyll is green')).toEqual(['MC3'])
+
+    expect(tagOf('chem.coord.isomerism', 'two conformers of ethane')).toEqual(['MC1'])
+    expect(tagOf('chem.coord.isomerism', 'linkage isomers')).toEqual(['MC2'])
+    expect(tagOf('chem.coord.isomerism', 'cis-[Co(en)₂Cl₂]⁺ cannot have optical isomers')).toEqual(['MC3'])
+  })
+
   it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
     // Both pre-existing probes ask about oxidation state (MC-3) while
     // carrying MC1 and MC2, leaving the fixed-valency and NCl5

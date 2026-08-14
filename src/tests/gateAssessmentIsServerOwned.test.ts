@@ -308,7 +308,11 @@ describe('the non-physics authored corpora convert too', () => {
     //            -> 102 (chem.alc x6)
     //            ->  95 (chem.kinet x7, incl. six retags)
     //            ->  87 (chem.pblock x7, incl. four retags)
-    ['chemistry', CHEMISTRY_PROBES, 87],
+    //            ->  80 (chem.coord x7 — SIX of the seven were hollow: both
+    //                   existing probes tested something the blueprint does
+    //                   not document, so every documented misconception was
+    //                   unprobed while the structural count read "covered")
+    ['chemistry', CHEMISTRY_PROBES, 80],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

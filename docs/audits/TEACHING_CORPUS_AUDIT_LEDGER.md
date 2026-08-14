@@ -5248,3 +5248,107 @@ hydrolysis).
 
 `npx tsc --noEmit` clean; 326 files / 6,855 passed / 9 skipped; `npm run
 build` clean. 0 discarded, 0 non-physics identities changed. Offline only.
+
+---
+
+# chem.coord — six of seven concepts were hollow
+
+The worst domain measured in this campaign. Every one of the seven concepts
+carried exactly two probes, two distinct misconception ids, and both ids
+joined to a real blueprint heading. Every structural measure read "covered."
+Reading the fourteen stems against the fourteen blueprint misconception
+bodies, **twelve of the fourteen tested something the blueprint does not
+document at all** — leaving all three documented misconceptions unprobed on
+six of the seven concepts.
+
+| concept | P1 | P2 | verdict |
+|---|---|---|---|
+| `werner` | AgNO₃ precipitation, tagged MC1 | "was Werner's theory merely descriptive?" tagged MC2 | hollow |
+| `nomenclature` | di- vs bis(ethylenediamine), tagged MC1 | complex charge vs oxidation state, tagged MC2 | 1 retag + 1 no-valid-home |
+| `cft` | how many levels do 5 d orbitals split into, tagged MC1 | strong field → fewer unpaired, tagged MC2 | hollow |
+| `bonding` | CO vs Cl⁻ spectrochemical order, tagged MC1 | [Ni(CN)₄]²⁻ vs [NiCl₄]²⁻ geometry, tagged MC2 | hollow |
+| `applications` | EDTA overdose in chelation therapy, tagged MC1 | Fe–O₂ bond-strength tuning, tagged MC2 | hollow |
+| `stability` | chelate effect is entropic, tagged MC1 | larger chelate rings, tagged MC2 | **MC1 correct**; MC2 no valid home |
+| `isomerism` | cisplatin vs transplatin activity, tagged MC1 | ionisation isomers, tagged MC2 | hollow |
+
+`chem.coord.stability`'s chelate-effect MCQ is the single probe in the domain
+that survived unchanged: its distractor states MC-1 ("each individual Ni–N
+bond is significantly stronger") verbatim. It is now pinned by stem so it
+cannot drift.
+
+## One retag
+
+`chem.coord.nomenclature` P1 asks whether two ethylenediamine ligands are
+named "diethylenediamine" or "bis(ethylenediamine)". That is blueprint MC-3
+("di-ethylenediamine means two ethylene groups within one ligand") word for
+word. It carried MC-1, which is the ligand-ORDER misconception (alphabetical
+vs by abundance) and had no probe at all.
+
+## Nineteen probes authored
+
+Each uses the blueprint's own discrimination pair or characteristic phrase as
+the distractor, so a wrong answer names the documented misconception rather
+than being generic noise.
+
+`werner` MC-1 (oxidation state +3 vs coordination number 6 for the same
+complex), MC-2 ([Co(NH₃)₄Cl₂]Cl — only ONE of three chlorides precipitates),
+MC-3 ([Ag(NH₃)₂]⁺ has CN = 2) · `nomenclature` MC-1 (chlorido before ammine —
+alphabetical, not abundance), MC-2 (hexacyanidoferrate contains no oxygen; the
+"-ate" marks charge) · `cft` MC-1 (CFSE is exactly zero for d¹⁰ whatever the
+ligand), MC-2 (Δtet ≈ 4/9 Δoct), MC-3 (Zn²⁺ is d¹⁰ FULL, not d⁰ empty) ·
+`bonding` MC-1 (d²sp³ inner-orbital low spin vs sp³d² outer-orbital high spin
+— different magnetic moments), MC-2 (π donors are WEAK-field; strong-field
+ligands are π acceptors), MC-3 (VBT is bounded by MO theory, not abolished) ·
+`applications` MC-1 (CO binding is reversible competition at the same Fe(II)
+site), MC-2 (transplatin DOES react with DNA — the lesion type differs),
+MC-3 (Mg²⁺ is d⁰; the porphyrin π system absorbs, and green is reflected) ·
+`stability` MC-2 ([Co(NH₃)₆]³⁺ is kinetically inert AND thermodynamically
+unstable in acid), MC-3 (β_n = ΠK_i; only log β_n is additive) · `isomerism`
+MC-1 (conformers rotate freely; cis/trans requires bond breaking), MC-2
+(nitro/nitrito are isolable — red and yellow, different IR), MC-3
+(cis-[Co(en)₂Cl₂]⁺ has NO mirror plane and resolves into Δ/Λ; the trans
+isomer is the achiral one).
+
+Every new probe opened a free `(conceptId, probeKind, gradeBand)` slot —
+`checkpoint`, `step_check`, `true_false`, none of which any chemistry concept
+was using. No existing chemistry identity moved, so nothing already seeded in
+production is stranded or re-identified.
+
+Running hollow count: `hyd.alkanes`, `hyd.conformations`, `alc.diols`,
+`kinet.arrhenius`, `pblock.group15`, `pblock.group16`, `coord.werner`,
+`coord.cft`, `coord.bonding`, `coord.applications`, `coord.isomerism` — 11.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 69 of 186 | 64 | 31 | 4 | 20 | 11 | 4 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 80 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 77 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+Note on the "blueprint MCs with no probe" row: it fell only 84 → 77 for seven
+concepts closed, because the structural measure counted just MC-3 as unprobed
+on each — MC-1 and MC-2 already carried tags. Those tags were the defect. The
+number a count can see and the number a reader can see are different numbers,
+which is the whole reason this domain needed reading.
+
+## Production divergence
+
+Unchanged and still true: the seed script skips identities that already
+exist, so the corrected tags — 31 in chemistry now — remain WRONG in the
+744 HUMAN_CURATOR chemistry rows already in production. The 19 probes
+authored here have never been seeded. Nothing in this batch is
+production-served or production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+0 discarded, 0 non-physics identities changed. Offline only.
