@@ -4994,3 +4994,60 @@ is the electrophile), MC-3 (Friedel-Crafts alkylation rearranges).
 
 `npx tsc --noEmit` clean; 325 files / 6,825 passed / 9 skipped; `npm run
 build` clean. 0 discarded, 0 non-physics identities changed. Offline only.
+
+---
+
+# chem.alc (6 concepts) — a third hollow concept, and three genuinely clean ones
+
+Chemistry **108 → 102** short; unprobed blueprint misconceptions **103 → 99**.
+
+## Stem-vs-blueprint
+
+One retag: `alcohols`' "tertiary alcohol + KMnO₄" probe carried MC1 while it
+tests MC-3 (tertiary alcohols cannot be oxidised) exactly.
+
+**`chem.alc.diols` is the third hollow concept found** (after `chem.hyd.alkanes`
+and `chem.hyd.conformations`): both probes tested boiling point and antifreeze
+colligative behaviour, neither documented on that concept, so all three MCs —
+periodate cleavage, OsO₄ syn addition, the pinacol rearrangement — had no
+diagnostic while every structural measure read it as covered.
+
+**Three concepts audited genuinely clean**, which is worth recording as much as
+the defects: `phenols`, `epoxides` and `protection` each had both probes
+correctly matched to their blueprint misconceptions. `epoxides` and `protection`
+document only two MCs each, both already probed, so they needed a count-closing
+probe rather than a breadth fix.
+
+## Ten probes authored
+
+`alcohols` MC-1 (only phenol reacts with NaOH — pKa 16 vs 10 against water's
+15.7) and MC-2 (PCC stops at the aldehyde; aqueous KMnO₄ goes on to the acid) ·
+`ethers` MC-2 (Williamson needs the primary halide — tert-butoxide + CH₃Br, not
+NaOCH₃ + t-BuBr, which eliminates) and MC-3 (HI cleaves at the tertiary carbon
+via SN1) · `diols` MC-1 (periodate cleaves the C–C bond, giving two acetones),
+MC-2 (OsO₄ is syn — cis-butene gives the R,R/S,S pair, not meso), MC-3 (pinacol
+rearranges to a KETONE) · `phenols` MC-3 (Kolbe–Schmitt is ortho-selective by
+chelation — salicylic acid) · `epoxides` MC-2 (acid opens at the MORE
+substituted carbon; base at the less hindered one) · `protection` MC-1 (the TMS
+group comes back off).
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | no-valid-home | clean |
+|---|---|---|---|---|---|
+| chemistry | 48 of 186 | 43 | **24** | 9 | 3 concepts fully clean |
+| physics | 0 of 238 | — | unknown | unknown | unknown |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 102 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 99 |
+| ids joining to no blueprint | 49 | 4 |
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,827 passed / 9 skipped; `npm run
+build` clean. 0 discarded, 0 non-physics identities changed. Offline only.

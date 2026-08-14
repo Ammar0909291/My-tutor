@@ -285,6 +285,24 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.hyd.arenes', 'What actually attacks the ring')).toEqual(['MC1'])
   })
 
+  /**
+   * chem.alc — one retag, but the notable finding is chem.alc.diols: BOTH
+   * probes tested boiling point and antifreeze colligative behaviour, neither
+   * of which its blueprint documents, so all three MCs were unprobed while
+   * every structural measure read the concept as covered.
+   */
+  it('alc.alcohols: tertiary-alcohol oxidation is MC3', () => {
+    expect(tagOf('chem.alc.alcohols', 'A tertiary alcohol is treated with a standard oxidizing')).toEqual(['MC3'])
+    expect(tagOf('chem.alc.alcohols', 'mixed with aqueous NaOH')).toEqual(['MC1'])
+    expect(tagOf('chem.alc.alcohols', 'oxidised with PCC in dichloromethane')).toEqual(['MC2'])
+  })
+
+  it('alc.diols: all three MCs now have their own probe', () => {
+    expect(tagOf('chem.alc.diols', 'treated with periodate')).toEqual(['MC1'])
+    expect(tagOf('chem.alc.diols', 'treated with OsO4')).toEqual(['MC2'])
+    expect(tagOf('chem.alc.diols', 'treated with acid and rearranges')).toEqual(['MC3'])
+  })
+
   it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
     // Both pre-existing probes ask about oxidation state (MC-3) while
     // carrying MC1 and MC2, leaving the fixed-valency and NCl5

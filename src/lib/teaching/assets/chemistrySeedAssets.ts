@@ -13038,11 +13038,11 @@ const ALCOH_PROBES: SeedProbe[] = [
     stem: 'A tertiary alcohol is treated with a standard oxidizing agent (like acidified KMnO4) under normal conditions. What happens?',
     choices: [
       { text: 'No reaction occurs (or very minimal reaction) — tertiary alcohols lack a hydrogen atom directly bonded to the carbon bearing the -OH group, which the oxidation mechanism requires to remove; this resistance is used diagnostically to identify tertiary alcohols', isCorrect: true },
-      { text: 'It oxidizes readily, just like primary and secondary alcohols, following the same mechanism regardless of carbon type', isCorrect: false, misconceptionId: `${ALCOH}:MC1` },
+      { text: 'It oxidizes readily, just like primary and secondary alcohols, following the same mechanism regardless of carbon type', isCorrect: false, misconceptionId: `${ALCOH}:MC3` },
     ],
     correctValue: 'Tertiary alcohols resist oxidation under standard conditions',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${ALCOH}:MC1`],
+    targetedMisconceptions: [`${ALCOH}:MC3`],
     source: `${ALCOH_SRC} — distractor targets assuming uniform oxidation behavior across all alcohol carbon types`,
   },
   {
@@ -13059,6 +13059,42 @@ const ALCOH_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ALCOH}:MC2`],
     source: `${ALCOH_SRC} — misconception: secondary alcohol oxidation can proceed as far as primary alcohol oxidation`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALCOH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Ethanol (pKa 16) is mixed with aqueous NaOH. Phenol (pKa 10) is treated the same way. Which one visibly reacts?',
+    choices: [
+      { text: 'Only phenol — water is pKa 15.7, so deprotonating ethanol has K about 0.5 and barely proceeds, while phenol gives K about 10^5. An -OH group alone does not make a compound react with NaOH', isCorrect: true },
+      { text: 'Both — any compound with an -OH group is acidic enough to be deprotonated by NaOH', isCorrect: false, misconceptionId: `${ALCOH}:MC1` },
+    ],
+    correctValue: 'only phenol',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALCOH}:MC1`],
+    source: `${ALCOH_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALCOH,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Propan-1-ol is oxidised with PCC in dichloromethane, and separately with hot aqueous KMnO4. Same product?',
+    choices: [
+      { text: 'No — PCC is mild and anhydrous, so it stops at propanal; aqueous KMnO4 hydrates that aldehyde to a gem-diol and oxidises on to propanoic acid. The choice of oxidant selects the oxidation level', isCorrect: true },
+      { text: 'Yes — both oxidise a primary alcohol, so both give the same carboxylic acid', isCorrect: false, misconceptionId: `${ALCOH}:MC2` },
+    ],
+    correctValue: 'no — PCC stops at the aldehyde',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALCOH}:MC2`],
+    source: `${ALCOH_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -13801,6 +13837,42 @@ const ETHER_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ETHER}:MC2`],
     source: `${ETHER_SRC} — misconception: chemical unreactivity is a drawback rather than the desired solvent property here`,
   },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ETHER,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: To make tert-butyl methyl ether by Williamson synthesis, which pairing works?',
+    choices: [
+      { text: 'Sodium tert-butoxide plus CH3Br — the primary halide takes the SN2 attack. Using NaOCH3 with (CH3)3CBr fails: a strong base on a tertiary halide gives E2 elimination to isobutylene instead', isCorrect: true },
+      { text: 'Either pairing — Williamson synthesis works with primary, secondary or tertiary halides', isCorrect: false, misconceptionId: `${ETHER}:MC2` },
+    ],
+    correctValue: 'tert-butoxide + methyl bromide',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ETHER}:MC2`],
+    source: `${ETHER_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ETHER,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: tert-Butyl methyl ether is cleaved with excess HI. Where does iodide attack?',
+    choices: [
+      { text: 'At the TERTIARY carbon — protonation gives an oxonium ion that ionises to a stable 3-degree carbocation, which iodide captures. Methanol leaves (and picks up a second iodide with excess HI)', isCorrect: true },
+      { text: 'At the larger carbon in every case, because HI cleavage always attacks the bulkier group by SN2', isCorrect: false, misconceptionId: `${ETHER}:MC3` },
+    ],
+    correctValue: 'the tertiary carbon, via SN1',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ETHER}:MC3`],
+    source: `${ETHER_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.alc.diols ──────────────────────────────────────────────────────────
@@ -13888,6 +13960,60 @@ const DIOL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${DIOL}:MC2`],
     source: `${DIOL_SRC} — misconception: antifreeze functions via chemical reaction rather than physical colligative effect`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: DIOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Pinacol, (CH3)2C(OH)-C(OH)(CH3)2, is treated with periodate. What forms?',
+    choices: [
+      { text: 'Two equivalents of acetone — periodate makes a cyclic ester with BOTH oxygens at once and the ring collapses by breaking the C-C bond. It is a cleavage, not two separate OH oxidations', isCorrect: true },
+      { text: 'Two carboxylic acids — each -OH is oxidised separately all the way up', isCorrect: false, misconceptionId: `${DIOL}:MC1` },
+    ],
+    correctValue: 'two equivalents of acetone',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIOL}:MC1`],
+    source: `${DIOL_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: DIOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: cis-But-2-ene is treated with OsO4. Is the diol product meso or the (R,R)/(S,S) pair?',
+    choices: [
+      { text: 'The (2R,3R) and (2S,3S) pair — OsO4 adds through a concerted [3+2] cycloaddition delivering both oxygens to the SAME face (syn). Anti addition, like Br2, is what would have produced the meso diol', isCorrect: true },
+      { text: 'Meso — OsO4 adds anti across the double bond, in the same way bromine does', isCorrect: false, misconceptionId: `${DIOL}:MC2` },
+    ],
+    correctValue: 'the (R,R)/(S,S) pair — syn addition',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIOL}:MC2`],
+    source: `${DIOL_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'true_false' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: DIOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Pinacol is treated with acid and rearranges. What is the product class?',
+    choices: [
+      { text: 'A KETONE — pinacolone. After the carbocation forms, a methyl group migrates onto the carbon bearing the remaining OH, giving an oxocarbenium ion stabilised by the oxygen lone pair, which becomes the ketone', isCorrect: true },
+      { text: 'An alkene or an ether — the acid simply dehydrates the diol', isCorrect: false, misconceptionId: `${DIOL}:MC3` },
+    ],
+    correctValue: 'a ketone (pinacolone)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DIOL}:MC3`],
+    source: `${DIOL_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -13977,6 +14103,24 @@ const PHENOL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${PHENOL}:MC2`],
     source: `${PHENOL_SRC} — misconception: increased acidity implies decreased ring reactivity toward electrophiles`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: PHENOL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Sodium phenoxide is heated with CO2 under pressure (Kolbe-Schmitt). Where does the carboxyl group end up?',
+    choices: [
+      { text: 'ORTHO — giving salicylic acid. The sodium ion chelates the phenoxide oxygen and the incoming CO2 together in a six-membered transition state, so the ortho product dominates and para is minor', isCorrect: true },
+      { text: 'PARA — the para position is less hindered, so the carboxyl group adds there', isCorrect: false, misconceptionId: `${PHENOL}:MC3` },
+    ],
+    correctValue: 'ortho — salicylic acid',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHENOL}:MC3`],
+    source: `${PHENOL_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -14617,6 +14761,24 @@ const EPOX_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${EPOX}:MC2`],
     source: `${EPOX_SRC} — misconception: epoxide ring-opening regiochemistry is independent of reaction conditions`,
   },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: EPOX,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: 2-Methyl-1,2-epoxypropane is opened by methanol under ACIDIC conditions. Which carbon is attacked, and why does that differ from base?',
+    choices: [
+      { text: 'The MORE substituted carbon — protonation makes the C-O bond to the tertiary carbon break most, so positive charge builds there and the nucleophile attacks it. Under basic conditions the nucleophile attacks the LESS hindered carbon instead', isCorrect: true },
+      { text: 'The less hindered carbon, as always — sterics decide epoxide opening whatever the conditions', isCorrect: false, misconceptionId: `${EPOX}:MC2` },
+    ],
+    correctValue: 'the more substituted carbon under acid',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${EPOX}:MC2`],
+    source: `${EPOX_SRC} — MC2, distractor-mapped`,
+  },
 ]
 
 // ─── chem.alc.protection ─────────────────────────────────────────────────────
@@ -14706,6 +14868,24 @@ const PROTECT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${PROTECT}:MC2`],
     source: `${PROTECT_SRC} — misconception: protecting groups are generically interchangeable regardless of synthetic context`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: PROTECT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: A TMS-protected alcohol is carried through a Grignard step and then treated with aqueous acid. What is recovered?',
+    choices: [
+      { text: 'The original alcohol — the TMS group is removed and the -OH returns unchanged. A protecting group is a temporary disguise, added and taken off, not a permanent modification of the molecule', isCorrect: true },
+      { text: 'A TMS ether — once installed, the protecting group is part of the final structure', isCorrect: false, misconceptionId: `${PROTECT}:MC1` },
+    ],
+    correctValue: 'the original alcohol',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PROTECT}:MC1`],
+    source: `${PROTECT_SRC} — MC1, distractor-mapped`,
   },
 ]
 
