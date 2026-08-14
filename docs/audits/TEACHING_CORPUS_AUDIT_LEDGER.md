@@ -7337,3 +7337,106 @@ un-audited under Check 3.**
 
 `npx tsc --noEmit` clean; 330 files / 7048 passed / 9 skipped;
 `npm run build` exit 0.
+
+---
+
+# Iteration — REAL-LEARNER VISUAL SEMANTIC AUDIT, phys.meas (2026-08-14)
+
+Run against the deployed application with the owner's real account, driving
+actual lessons and actual LLM calls. Every classification below comes from a
+live turn, not from resolver inspection.
+
+Method per concept: open the lesson through `/api/learn/lesson-init` — the ONE
+writer of `activeLessonSlug`, and the exact call the browser makes when a
+learner clicks a lesson, which explicitly does NOT record progress — then read
+the tutor's own words and the `visual`/`visualSpec`/`sceneSpec` the learner's
+client actually receives, and compare them.
+
+## Results
+
+| concept | visual actually served | teaching claim | verdict |
+|---|---|---|---|
+| `phys.meas.vector-products` | scene `phys-vector-products`, "Dot and cross products of the same two vectors" | dot vs cross, θ=60°, A·B=6 scalar, \|A×B\|=10.39 vector | **CORRECT** |
+| `phys.meas.significant-figures` | none | digits that carry precision | **NO SUITABLE VISUAL** — and handled honestly |
+| `phys.meas.vector-addition` | scene `vector-3@0-4@90`, "\|R\| ≈ 5 at 53.1°" | head-to-tail addition of 3 and 4 | selection CORRECT, **narration MISMATCH** |
+
+### vector-products — the reported failure is already fixed
+
+Listed in the brief as "Dot/cross product → generic vector-components visual".
+It no longer is. The served figure is a concept-authored scene showing both
+products of the SAME two vectors side by side, and the numbers check out:
+|A||B| = 12 gives A·B = 12cos60° = 6 and |A×B| = 12sin60° = 10.39, exactly what
+the tutor said. Keep.
+
+A false alarm of mine is recorded here too: on turns 2+ the response carried no
+`sceneSpec` and I briefly read that as "the tutor is describing a figure that
+is not there". It is visual CONTINUITY — the figure is held client-side and not
+re-sent. Correct behaviour.
+
+### significant-figures — no figure, and the tutor says so
+
+Asked directly for a diagram ("Can you show me a diagram for this?"), the tutor
+answered:
+
+> "I can't show you a picture of this one, so let me describe it using a text
+>  diagram of a ruler scale"
+
+and drew an ASCII ruler between 1.20 and 1.30 with the mark at 1.25. There is
+no registry binding and no scene generator for this concept, so nothing was
+served and nothing was faked. This is the "a missing visual is safer than a
+misleading one" rule working end to end.
+
+The brief lists "Significant figures explanation → measurement uncertainty
+number line" as an observed failure. It does not reproduce; the number-line
+bindings for this domain were demoted or retired in earlier rounds. The concept
+is now a genuine **NO SUITABLE VISUAL EXISTS** case — the tutor's own ASCII
+ruler is a precise specification of the smallest correct figure, and authoring
+it is queued rather than done in this batch.
+
+### vector-addition — right figure, wrong words
+
+The figure is correct and concept-specific. The tutor said:
+
+> "one force pulling north with a strength of 3 newtons, and another force
+>  pulling east with a strength of 4 newtons"
+
+The figure draws A(3) at 0° and B(4) at 90°. A and B are swapped. Under the
+tutor's reading the resultant sits at atan(3/4) = 36.9°, while the figure's own
+title says 53.1°. Two incompatible stories in one turn.
+
+**Root cause, stated precisely because it changes the fix.** This is NOT a
+missing-information defect. The visual contract already carried the truth — the
+scene's stage narration reads "Vector A has magnitude 3 at 0°, and vector B has
+magnitude 4 at 90°" — and the model paraphrased it wrongly regardless. An
+earlier hypothesis of mine ("the labels omit direction so the model filled the
+gap") was checked against the actual prompt text and **disproved**.
+
+What the deterministic layer CAN do is use the channel the contract binds most
+tightly. It prints the figure's own text under "TEXT WRITTEN ON THE FIGURE,
+exactly as the learner reads it" and instructs the tutor to use those words
+when pointing at parts. While the labels read "A (3)" and "B (4)", no claim the
+tutor makes about direction can be contradicted by the picture the learner is
+looking at. They now read "A (3 at 0°)", "B (4 at 90°)", "R (5 at 53.1°)", so a
+"north" claim is visibly wrong on screen, and the same strings reach the model
+as quotable text. The ariaLabel carries both directions.
+
+Compass words are deliberately not introduced — the scene has no north, and a
+figure must not claim more than it can support. Geometry is untouched;
+the generator's own independent law-of-cosines cross-check is asserted across
+five further vector pairs to prove it.
+
+Regression test: `src/tests/vectorSceneLabelsCarryDirection.test.ts`.
+
+## Honest limits of this batch
+
+- 3 of 238 physics concepts have had the real-learner visual audit. The
+  remaining 235 are not certified.
+- The label change is a MITIGATION of model drift, not a guarantee. It makes a
+  wrong direction claim visibly wrong to the learner and puts the angles in the
+  verbatim-quote channel; it cannot stop a model from contradicting a label.
+- The significant-figures figure is specified, not authored.
+
+## Validation
+
+`npx tsc --noEmit` clean; 331 files / 7064 passed / 9 skipped;
+`npm run build` exit 0. Live re-test after deploy recorded separately below.
