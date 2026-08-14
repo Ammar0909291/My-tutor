@@ -5455,3 +5455,107 @@ production-verified.
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
 Offline only.
+
+---
+
+# chem.carb — a concept carrying another concept's probes
+
+Seven concepts, fourteen pre-existing probes. Two retags, thirteen probes
+authored, two more hollow concepts, and one defect shape not seen before.
+
+## The new shape: chem.carb.ketones was probing chem.carb.alpha-reactions
+
+Both of `chem.carb.ketones`' probes ask why alpha-hydrogens are unusually
+acidic (pKa ~20 against ~50). That is `chem.carb.alpha-reactions`' subject,
+and one of the two is a near-duplicate of that concept's own probe — the same
+question, the same two pKa values, in two different concepts' assets.
+
+Meanwhile none of ketones' three documented misconceptions had any probe:
+keto/enol tautomerism read as resonance, Baeyer–Villiger insertion read as
+arbitrary, and "ketones are prepared only by oxidising secondary alcohols".
+
+This matters beyond redundancy. `findBestProbe` selects on conceptId, so a
+learner working on ketones is served an alpha-hydrogen question, and a wrong
+answer writes MISCONCEPTION_DETECTED against a ketones id whose remedy is
+about something else entirely. The count-based measures cannot see it: the
+ids join, the breadth is two, nothing is orphaned.
+
+## The two retags
+
+`alpha-reactions` P2's distractor states MC-1 verbatim — "the carbonyl oxygen
+pulls electron density away from the alpha-C via induction" — and carried MC2.
+The blueprint's MC-1 is exactly that inductive explanation, against the
+correct resonance/enolate one.
+
+`named-reactions` P1 is the Baeyer–Villiger migration probe, whose distractor
+is "the methyl group migrates because smaller substituents migrate faster".
+That is MC-2 (insertion governed by migratory aptitude, not proximity). It
+carried MC-1, which is "the Wittig is just another way to make an alkene" —
+unprobed until this batch.
+
+## chem.carb.derivatives: both probes already correct
+
+The only concept in the domain whose two pre-existing probes both survived the
+stem-vs-blueprint read. Its distractors state MC-1 ("all derivatives sharing
+the same core carbonyl should show essentially identical reactivity") and MC-2
+("conversions proceed with equal ease regardless of direction") almost word for
+word. Both are pinned. It needed only a third gradeable item, so it received
+an ORDERING probe on MC-1 (rank acid chloride / anhydride / ester / amide)
+rather than a fourth restatement of the same two-compound comparison.
+
+## Thirteen probes authored
+
+`aldehydes` MC-1 (cyanide bonds to the δ+ CARBON, not the δ− oxygen), MC-2
+(propanal + NaBH₄ gives a PRIMARY alcohol; secondary comes from ketones) and
+MC-3 (benzaldehyde is Fehling's-NEGATIVE and Tollens'-positive) ·
+`alpha-reactions` MC-2 (cold dilute base stops at 3-hydroxybutanal;
+dehydration is a separate step) · `carboxylic` MC-1 (ethanol pKa 16 vs acetic
+acid pKa 4.8 — both have O–H, so acidity is conjugate-base stability) and
+MC-3 (acetic acid does not decarboxylate; β-keto and malonic acids do) ·
+`derivatives` MC-1 (the full reactivity ordering, ~10¹³ in rate) · `ketones`
+MC-1 (keto/enol are tautomers — a hydrogen MOVES — so ⇌ not ↔), MC-2
+(acetophenone + mCPBA gives phenyl acetate: aryl outranks methyl in migratory
+aptitude) and MC-3 (Friedel–Crafts, ozonolysis, alkyne hydration are all ketone
+routes) · `named-reactions` MC-1 (the Wittig fixes the alkene position; acid
+dehydration gives the Zaitsev mixture plus rearrangement) · `spectro` MC-1
+(1715 cm⁻¹ is the saturated-ketone reference, and the shift is the diagnosis:
+ester 1735–1750, amide 1650–1680) and MC-2 (McLafferty needs a γ-hydrogen —
+pentan-2-one has one, butan-2-one does not).
+
+All thirteen open a free `(conceptId, probeKind, gradeBand)` slot. 0
+discarded, 0 non-physics identities changed.
+
+## Curriculum feedback (recorded, not acted on)
+
+`chem.carb.ketones` and `chem.carb.alpha-reactions` overlap enough at the
+blueprint level that the authoring pass drifted from one to the other. The
+duplicated alpha-hydrogen probes are left in place — deleting a probe is not
+this campaign's call, and both are gradeable items that still count toward the
+mastery gate. Recorded for the Curriculum Production Pipeline.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 83 of 186 | 78 | 38 | 4 | 28 | 14 | 7 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 66 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 67 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+38 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and the 47 probes authored across the last three batches have
+never been seeded. Nothing here is production-served or production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+Offline only.

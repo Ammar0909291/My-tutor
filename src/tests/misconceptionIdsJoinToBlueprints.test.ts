@@ -372,6 +372,61 @@ describe('probes whose id joined but whose content did not', () => {
   })
 
   /**
+   * chem.carb — two retags, two more hollow concepts, and a defect shape that
+   * had not appeared before: a concept carrying probes that belong to a
+   * DIFFERENT concept.
+   *
+   * chem.carb.ketones' two probes both asked why alpha-hydrogens are acidic
+   * (pKa ~20 vs ~50) — which is chem.carb.alpha-reactions' subject, and one of
+   * them near-duplicates that concept's own probe. None of ketones' three
+   * documented misconceptions (keto/enol tautomerism, Baeyer-Villiger
+   * migratory aptitude, preparation routes) had any probe at all.
+   *
+   * chem.carb.aldehydes was hollow the ordinary way: both probes compare
+   * aldehydes with ketones, and neither is MC-1 (nucleophile sent to the
+   * oxygen), MC-2 (reduction product class) or MC-3 (Fehling's on
+   * benzaldehyde).
+   */
+  it('carb: the two retags', () => {
+    // alpha-reactions P2's distractor states MC-1 verbatim — "the carbonyl
+    // oxygen pulls electron density away via induction". It carried MC2.
+    expect(tagOf('chem.carb.alpha-reactions', 'more acidic (pKa ~20)')).toEqual(['MC1'])
+    // named-reactions P1 is the Baeyer-Villiger migration probe = MC-2
+    // (migratory aptitude), not MC-1 (Wittig vs elimination).
+    expect(tagOf('chem.carb.named-reactions', 'Baeyer–Villiger oxidation of 2-methylcyclohexanone')).toEqual(['MC2'])
+  })
+
+  it('carb: derivatives was already correct on both, and stays correct', () => {
+    // The only concept in the domain whose pre-existing probes both survived
+    // the stem-vs-blueprint read. Its distractors state MC-1 and MC-2 almost
+    // word for word.
+    expect(tagOf('chem.carb.derivatives', 'Acid chlorides react with water almost instantly')).toEqual(['MC1'])
+    expect(tagOf('chem.carb.derivatives', 'converting an amide directly into an acid chloride')).toEqual(['MC2'])
+  })
+
+  it('carb: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.carb.aldehydes', 'cyanide ion attacks propanal')).toEqual(['MC1'])
+    expect(tagOf('chem.carb.aldehydes', 'reduced with NaBH₄')).toEqual(['MC2'])
+    expect(tagOf('chem.carb.aldehydes', 'benzaldehyde')).toEqual(['MC3'])
+
+    expect(tagOf('chem.carb.alpha-reactions', 'dilute NaOH at 5')).toEqual(['MC2'])
+
+    expect(tagOf('chem.carb.carboxylic', 'Ethanol (CH₃CH₂OH, pKa ≈ 16)')).toEqual(['MC1'])
+    expect(tagOf('chem.carb.carboxylic', 'warming acetic acid gently')).toEqual(['MC3'])
+
+    expect(tagOf('chem.carb.derivatives', 'Rank ethanoyl chloride')).toEqual(['MC1'])
+
+    expect(tagOf('chem.carb.ketones', 'double-headed arrow')).toEqual(['MC1'])
+    expect(tagOf('chem.carb.ketones', 'acetophenone')).toEqual(['MC2'])
+    expect(tagOf('chem.carb.ketones', 'only way to prepare a ketone')).toEqual(['MC3'])
+
+    expect(tagOf('chem.carb.named-reactions', '2-methylpent-1-ene')).toEqual(['MC1'])
+
+    expect(tagOf('chem.carb.spectro', '1735 cm⁻¹')).toEqual(['MC1'])
+    expect(tagOf('chem.carb.spectro', 'Butan-2-one (M = 72)')).toEqual(['MC2'])
+  })
+
+  /**
    * chem.hal — five retags, including the first cleanly CROSSED PAIR found in
    * chemistry: chem.hal.sn1's two probes each diagnose the other's tag. The
    * nucleophile-concentration probe is MC-2 (the rate law) and the "exactly

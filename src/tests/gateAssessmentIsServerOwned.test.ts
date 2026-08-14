@@ -314,7 +314,12 @@ describe('the non-physics authored corpora convert too', () => {
     //                   unprobed while the structural count read "covered")
     //            ->  73 (chem.hal x7 — five retags incl. a cleanly CROSSED
     //                   pair on chem.hal.sn1, plus one more hollow concept)
-    ['chemistry', CHEMISTRY_PROBES, 73],
+    //            ->  66 (chem.carb x7 — two more hollow concepts, two retags,
+    //                   and the first case of one concept's probes duplicating
+    //                   another concept's: chem.carb.ketones was carrying two
+    //                   alpha-hydrogen-acidity probes belonging to
+    //                   chem.carb.alpha-reactions)
+    ['chemistry', CHEMISTRY_PROBES, 66],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

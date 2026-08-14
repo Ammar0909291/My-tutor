@@ -15102,6 +15102,51 @@ const ALDEH_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ALDEH}:MC2`],
     source: `${ALDEH_SRC} — misconception: attributing the aldehyde/ketone Tollens' test difference to different atom composition rather than structural H-availability`,
   },
+  {
+    conceptId: ALDEH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A cyanide ion attacks propanal. The carbonyl oxygen carries the δ− charge and the carbon carries δ+. Which atom does the cyanide bond to?",
+    choices: [
+      { text: "The CARBON. A nucleophile is electron-rich and seeks the electron-POOR site, which is the δ+ carbon; the δ− oxygen is where the electron density already is, and it accepts the pair pushed onto it, becoming an alkoxide that is protonated to –OH. The product is the cyanohydrin, with C–CN and C–OH on the same carbon", isCorrect: true },
+      { text: "The OXYGEN — it carries the δ− charge, which marks it as the reactive site of the carbonyl", isCorrect: false, misconceptionId: `${ALDEH}:MC1` },
+    ],
+    correctValue: "The carbonyl CARBON (the δ+ site); oxygen becomes the alkoxide",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALDEH}:MC1`],
+    source: `${ALDEH_SRC} — MC-1: δ− read as "reactive site" so the nucleophile is sent to the oxygen instead of the electrophilic carbon`,
+  },
+  {
+    conceptId: ALDEH,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Propanal (CH₃CH₂CHO) is reduced with NaBH₄. Is the product a primary or a secondary alcohol?",
+    choices: [
+      { text: "PRIMARY — propan-1-ol. Hydride adds to the carbonyl carbon, which in an aldehyde already carries one H; after protonation that carbon holds the –OH, one H it started with, one H from the hydride, and one R group, which is the definition of a primary carbinol carbon. Secondary alcohols come from KETONES, whose carbonyl carbon carries two R groups", isCorrect: true },
+      { text: "SECONDARY — reduction adds a hydroxyl to an internal carbon, and aldehyde reduction gives a secondary alcohol", isCorrect: false, misconceptionId: `${ALDEH}:MC2` },
+    ],
+    correctValue: "Primary (propan-1-ol); ketones are what give secondary alcohols",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALDEH}:MC2`],
+    source: `${ALDEH_SRC} — MC-2: aldehyde reduction assigned the ketone product class (aldehyde -> 1°, ketone -> 2°)`,
+  },
+  {
+    conceptId: ALDEH,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: benzaldehyde (C₆H₅CHO) gives a positive Fehling’s test, since Fehling’s detects aldehydes.",
+    choices: [
+      { text: "False — benzaldehyde gives a NEGATIVE Fehling’s test. Fehling’s solution is a mild Cu(II) oxidant that works on ALIPHATIC aldehydes only; an aryl aldehyde is not oxidised under those conditions. Tollens’ reagent is the stronger oxidant and does give a silver mirror with benzaldehyde, so \"aldehyde\" and \"positive Fehling’s\" are not the same claim", isCorrect: true },
+      { text: "True — Fehling’s is the standard test for the aldehyde group, so every aldehyde including benzaldehyde gives the red precipitate", isCorrect: false, misconceptionId: `${ALDEH}:MC3` },
+    ],
+    correctValue: "False — Fehling’s is negative for aromatic aldehydes; Tollens’ is positive",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALDEH}:MC3`],
+    source: `${ALDEH_SRC} — MC-3: Fehling’s assumed positive for all aldehydes including benzaldehyde (Tollens’ vs Fehling’s discrimination pair)`,
+  },
 ]
 
 // ─── chem.hyd.alkynes ────────────────────────────────────────────────────────
@@ -15864,6 +15909,36 @@ const CARBOXY_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CARBOXY}:MC2`],
     source: `${CARBOXY_SRC} — misconception: substituent inductive effects on acidity are independent of distance from the carboxyl group`,
   },
+  {
+    conceptId: CARBOXY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Ethanol (CH₃CH₂OH, pKa ≈ 16) and acetic acid (CH₃COOH, pKa ≈ 4.8) both contain an O–H group that can lose a proton. Why is acetic acid over ten billion times the stronger acid?",
+    choices: [
+      { text: "Because acidity is decided by the stability of the ANION left behind, not by the presence of an O–H. Ethoxide localises its full negative charge on one oxygen. Acetate delocalises the charge equally over two equivalent oxygens, and the adjacent C=O withdraws inductively as well — the carboxylate is a far more stable conjugate base, so the proton leaves far more readily", isCorrect: true },
+      { text: "They should be similar — both have an O–H group that can release a proton, and that is what makes a compound acidic", isCorrect: false, misconceptionId: `${CARBOXY}:MC1` },
+    ],
+    correctValue: "Conjugate-base stability (delocalised carboxylate), not the mere presence of O–H",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARBOXY}:MC1`],
+    source: `${CARBOXY_SRC} — MC-1: acidity attributed to having an O–H rather than to conjugate-base stability (ethanol vs acetic acid discrimination pair)`,
+  },
+  {
+    conceptId: CARBOXY,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: warming acetic acid gently in solution decarboxylates it to methane and CO₂, since carboxylic acids readily lose CO₂.",
+    choices: [
+      { text: "False — a simple carboxylic acid is thermally robust; acetic acid boils unchanged at 118 °C and needs soda-lime with strong heating to lose CO₂. Ready decarboxylation belongs to SPECIFIC structures: β-keto acids and malonic acids, whose carbonyl two carbons away lets a six-membered cyclic transition state deliver the proton as CO₂ leaves. 3-oxobutanoic acid decarboxylates near 100 °C; acetic acid, lacking that β-carbonyl, does not", isCorrect: true },
+      { text: "True — the –COOH group is inherently unstable and drops CO₂ under mild warming for carboxylic acids generally", isCorrect: false, misconceptionId: `${CARBOXY}:MC3` },
+    ],
+    correctValue: "False — ready decarboxylation needs a β-keto or malonic structure",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBOXY}:MC3`],
+    source: `${CARBOXY_SRC} — MC-3: decarboxylation generalised from β-keto/malonic acids to all carboxylic acids`,
+  },
 ]
 
 // ─── chem.bio.carbohydrates ──────────────────────────────────────────────────
@@ -16063,6 +16138,51 @@ const KETONE_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${KETONE}:MC2`],
     source: `${KETONE_SRC} — misconception: any hydrogen in the molecule (not specifically alpha-position) can form the enolate`,
+  },
+  {
+    conceptId: KETONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "The keto and enol forms of propanone are often drawn with a double-headed arrow between them. Are they resonance structures of one molecule?",
+    choices: [
+      { text: "No — they are TAUTOMERS, two different compounds. Resonance structures differ only in where electrons are drawn and every atom stays put; converting keto to enol MOVES A HYDROGEN ATOM from carbon to oxygen and rearranges the σ framework. They have different energies (propanone is about 99.99% keto at equilibrium), and in favourable cases both can be isolated. The correct symbol between them is the equilibrium arrow ⇌, never the resonance arrow ↔", isCorrect: true },
+      { text: "Yes — the electrons simply shift between the C=O and the C=C form, so keto and enol are two resonance contributors to one hybrid structure", isCorrect: false, misconceptionId: `${KETONE}:MC1` },
+    ],
+    correctValue: "No — tautomers (a hydrogen moves); ⇌ not ↔",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${KETONE}:MC1`],
+    source: `${KETONE_SRC} — MC-1: tautomerism read as resonance, ignoring that an atom moves`,
+  },
+  {
+    conceptId: KETONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Phenyl methyl ketone (acetophenone, C₆H₅COCH₃) is treated with mCPBA. Does the inserted oxygen end up on the phenyl side or the methyl side, and what decides it?",
+    choices: [
+      { text: "On the PHENYL side, giving phenyl acetate. The group that migrates to oxygen is decided by MIGRATORY APTITUDE — roughly tertiary alkyl > cyclohexyl ≈ secondary ≈ aryl > primary > methyl — because the migrating group moves with its bonding pair and needs to stabilise the developing positive character in the transition state. Position and size do not decide it; methyl is the poorest migrator of the common groups", isCorrect: true },
+      { text: "Whichever group is nearer or smaller migrates — insertion is essentially arbitrary in an unsymmetrical ketone, so methyl migrates here", isCorrect: false, misconceptionId: `${KETONE}:MC2` },
+    ],
+    correctValue: "Phenyl migrates (migratory aptitude), giving phenyl acetate",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${KETONE}:MC2`],
+    source: `${KETONE_SRC} — MC-2: Baeyer–Villiger insertion assumed arbitrary/proximity-driven rather than governed by migratory aptitude`,
+  },
+  {
+    conceptId: KETONE,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: the only way to prepare a ketone is by oxidising a secondary alcohol.",
+    choices: [
+      { text: "False — that is one route among many. Ketones also come from Friedel–Crafts acylation of an arene, from ozonolysis of a suitably substituted alkene, from hydration of an alkyne (Markovnikov, via the enol), from a Gilman reagent or a Weinreb amide with an acid chloride, and from oxidative cleavage. Secondary-alcohol oxidation is simply the first route usually taught, and treating it as the only one closes off most retrosynthetic options", isCorrect: true },
+      { text: "True — a ketone comes from oxidising a secondary alcohol; that is what defines its preparation", isCorrect: false, misconceptionId: `${KETONE}:MC3` },
+    ],
+    correctValue: "False — Friedel–Crafts acylation, ozonolysis, alkyne hydration and others",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${KETONE}:MC3`],
+    source: `${KETONE_SRC} — MC-3: the first-taught preparation generalised into the only preparation`,
   },
 ]
 
@@ -16265,6 +16385,21 @@ const CARBDERIV_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${CARBDERIV}:MC2`],
     source: `${CARBDERIV_SRC} — misconception: derivative interconversion is equally easy regardless of reactivity direction`,
+  },
+  {
+    conceptId: CARBDERIV,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "Rank ethanoyl chloride, ethanoic anhydride, ethyl ethanoate and ethanamide from fastest to slowest toward nucleophilic acyl substitution.",
+    choices: [
+      { text: "Acid chloride > anhydride > ester > amide, spanning something like 10¹³ in rate. The order follows leaving-group ability and how strongly the X group donates into the carbonyl: Cl⁻ leaves readily and donates almost nothing, whereas an amide nitrogen donates strongly (giving real C–N double-bond character) and NH₂⁻ is a terrible leaving group. The shared C=O is what they have in common, not what sets their rates", isCorrect: true },
+      { text: "They react at broadly similar rates — all four contain the same R–CO–X carbonyl, so the same nucleophilic attack applies to each", isCorrect: false, misconceptionId: `${CARBDERIV}:MC1` },
+    ],
+    correctValue: "Acid chloride > anhydride > ester > amide",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CARBDERIV}:MC1`],
+    source: `${CARBDERIV_SRC} — MC-1: the shared carbonyl read as implying shared reactivity; ordering case that requires the leaving-group argument, not just the acid-chloride/amide extreme`,
   },
 ]
 
@@ -17895,12 +18030,27 @@ const ALPHARXN_PROBES: SeedProbe[] = [
     stem: 'Why is the alpha-hydrogen of a ketone more acidic (pKa ~20) than a typical C–H bond (pKa ~50)?',
     choices: [
       { text: 'Removing the alpha-H generates an enolate where the negative charge is delocalised into the carbonyl oxygen via resonance, stabilising the conjugate base', isCorrect: true },
-      { text: 'The carbonyl oxygen pulls electron density away from the alpha-C via induction, making the C–H bond polar and the H more positive', isCorrect: false, misconceptionId: `${ALPHARXN}:MC2` },
+      { text: 'The carbonyl oxygen pulls electron density away from the alpha-C via induction, making the C–H bond polar and the H more positive', isCorrect: false, misconceptionId: `${ALPHARXN}:MC1` },
     ],
     correctValue: 'Resonance stabilisation of enolate (C=C-O- ↔ C-C=O) is the main effect',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${ALPHARXN}:MC2`],
+    targetedMisconceptions: [`${ALPHARXN}:MC1`],
     source: `${ALPHARXN_SRC} — alpha-H acidity from enolate resonance stabilisation`,
+  },
+  {
+    conceptId: ALPHARXN,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Acetaldehyde is treated with dilute NaOH at 5 °C. Is the α,β-unsaturated aldehyde (but-2-enal) obtained directly?",
+    choices: [
+      { text: "No — cold dilute base gives the ALDOL, 3-hydroxybutanal, and it can be isolated. Condensation is a SECOND, separate step: heating (or stronger base) dehydrates the aldol by an E1cb elimination of water to give but-2-enal. Aldol addition and aldol condensation are two stages, and stopping at the first is a routine synthetic choice", isCorrect: true },
+      { text: "Yes — aldol condensation is a single step that forms the C–C bond and the C=C double bond together, so the unsaturated product is what you get", isCorrect: false, misconceptionId: `${ALPHARXN}:MC2` },
+    ],
+    correctValue: "No — 3-hydroxybutanal first; dehydration is a separate step on heating",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALPHARXN}:MC2`],
+    source: `${ALPHARXN_SRC} — MC-2: aldol addition and dehydration collapsed into one step, so the isolable aldol intermediate disappears`,
   },
 ]
 
@@ -17979,6 +18129,36 @@ const CARBSPECTRO_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CARBSPECTRO}:MC2`],
     source: `${CARBSPECTRO_SRC} — MS alpha-cleavage of ketone: acylium ion identity`,
   },
+  {
+    conceptId: CARBSPECTRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "An unknown carbonyl compound shows a strong IR band at 1735 cm⁻¹ and a second unknown shows one at 1660 cm⁻¹. If the C=O stretch sits at ~1715 cm⁻¹, what do these two values tell you?",
+    choices: [
+      { text: "That 1715 cm⁻¹ is the SATURATED KETONE reference point, not a fixed carbonyl frequency. The band moves diagnostically: an ester near 1735–1750 (the alkoxy oxygen withdraws inductively, strengthening C=O), an amide near 1650–1680 (nitrogen donates into the carbonyl, weakening it), a conjugated ketone near 1680, a strained cyclopentanone near 1745. Reading the exact position is how IR identifies WHICH carbonyl is present", isCorrect: true },
+      { text: "That neither compound can contain a C=O group — the carbonyl stretch is fixed at about 1715 cm⁻¹, so a band elsewhere must be a different bond", isCorrect: false, misconceptionId: `${CARBSPECTRO}:MC1` },
+    ],
+    correctValue: "1715 is a ketone reference point; the position identifies the carbonyl type",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARBSPECTRO}:MC1`],
+    source: `${CARBSPECTRO_SRC} — MC-1: ~1715 cm⁻¹ memorised as a fixed carbonyl value rather than a reference the substituents shift`,
+  },
+  {
+    conceptId: CARBSPECTRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "In the mass spectrum of pentan-2-one (M = 86) a prominent peak appears at m/z 58. Butan-2-one (M = 72) shows no corresponding m/z 44 peak. Why does one show the McLafferty rearrangement and the other not?",
+    choices: [
+      { text: "Because McLafferty needs a GAMMA-HYDROGEN. The rearrangement transfers a hydrogen three carbons from the carbonyl through a six-membered cyclic transition state, then cleaves the α–β bond. Pentan-2-one’s propyl chain supplies that γ-H; butan-2-one’s ethyl chain is one carbon too short and has none, so the pathway is geometrically unavailable. The absence of the peak is itself structural evidence", isCorrect: true },
+      { text: "Both contain a carbonyl, so both must undergo McLafferty — the butan-2-one peak is simply too weak to be seen", isCorrect: false, misconceptionId: `${CARBSPECTRO}:MC2` },
+    ],
+    correctValue: "McLafferty needs a γ-hydrogen; butan-2-one has none",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CARBSPECTRO}:MC2`],
+    source: `${CARBSPECTRO_SRC} — MC-2: McLafferty assumed universal to carbonyls rather than requiring a γ-hydrogen and a six-membered transition state`,
+  },
 ]
 
 // ─── chem.carb.named-reactions ───────────────────────────────────────────────
@@ -18036,12 +18216,12 @@ const NAMEDCARBR_PROBES: SeedProbe[] = [
     stem: 'In the Baeyer–Villiger oxidation of 2-methylcyclohexanone with mCPBA, which group migrates preferentially?',
     choices: [
       { text: 'The secondary C adjacent to C=O migrates (migration aptitude: secondary > methyl), giving a 7-membered lactone with the oxygen inserted next to the secondary carbon', isCorrect: true },
-      { text: 'The methyl group migrates because smaller substituents migrate faster in concerted rearrangements', isCorrect: false, misconceptionId: `${NAMEDCARBR}:MC1` },
+      { text: 'The methyl group migrates because smaller substituents migrate faster in concerted rearrangements', isCorrect: false, misconceptionId: `${NAMEDCARBR}:MC2` },
       { text: 'The C=O oxygen is retained and a new oxygen is added to form a diol', isCorrect: false },
     ],
     correctValue: 'Secondary C migrates (higher migration aptitude than methyl)',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${NAMEDCARBR}:MC1`],
+    targetedMisconceptions: [`${NAMEDCARBR}:MC2`],
     source: `${NAMEDCARBR_SRC} — Baeyer-Villiger migration aptitude: secondary > methyl`,
   },
   {
@@ -18058,6 +18238,21 @@ const NAMEDCARBR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${NAMEDCARBR}:MC2`],
     source: `${NAMEDCARBR_SRC} — Wittig Z-selectivity from non-stabilised ylides`,
+  },
+  {
+    conceptId: NAMEDCARBR,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "You need 2-methylpent-1-ene (the C=C exactly at C1, no isomers). One route dehydrates 2-methylpentan-2-ol with acid; the other runs a Wittig on pentan-2-one with Ph₃P=CH₂. Are these interchangeable ways of making the alkene?",
+    choices: [
+      { text: "No — the Wittig is POSITIONALLY CERTAIN and elimination is not. The Wittig puts the C=C precisely where the C=O carbon was, with no choice of which proton leaves and no carbocation to rearrange. Acid dehydration goes through a carbocation, obeys Zaitsev, and delivers mainly the more substituted 2-methylpent-2-ene along with rearrangement products. That reliability is why the Wittig exists at all", isCorrect: true },
+      { text: "Yes — both make a C=C in the same molecule, so they are interchangeable routes and either can be used", isCorrect: false, misconceptionId: `${NAMEDCARBR}:MC1` },
+    ],
+    correctValue: "No — the Wittig fixes the alkene position; elimination gives the Zaitsev mixture",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${NAMEDCARBR}:MC1`],
+    source: `${NAMEDCARBR_SRC} — MC-1: Wittig treated as interchangeable with elimination, losing its defining positional certainty`,
   },
 ]
 
