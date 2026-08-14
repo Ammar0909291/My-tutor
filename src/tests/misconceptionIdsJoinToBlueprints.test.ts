@@ -372,6 +372,80 @@ describe('probes whose id joined but whose content did not', () => {
   })
 
   /**
+   * chem.equil — a SECOND cross-concept distractor, and a domain whose own
+   * catalyst misconception was being probed inside a neighbouring concept.
+   *
+   * chem.equil.kc-kp P1 asks what a catalyst does to a reaction at
+   * equilibrium. That is chem.equil.le-chatelier MC-1 ("a catalyst shifts the
+   * equilibrium position"), not any of kc-kp's three misconceptions, which are
+   * about exponents, omitted solids and Kp-versus-Kc. Meanwhile le-chatelier's
+   * OWN P1 is an inert-gas-at-constant-volume probe — a PRESSURE question,
+   * i.e. its MC-3 — carrying MC-1. So the catalyst misconception was probed,
+   * in the wrong concept, while the concept that documents it had its slot
+   * occupied by a pressure probe.
+   *
+   * chem.equil.concept is CLEAN: all three of its distractors state their
+   * misconception verbatim, and only ΔG° = 0 (MC-3) needed authoring.
+   */
+  it('equil: the catalyst misconception now lives where it is documented', () => {
+    // le-chatelier P1 becomes MC-3 (pressure), and MC-1 (catalyst) gets the
+    // probe it never had. kc-kp P1 is left in place and recorded: it is a
+    // sound catalyst question, simply filed under a concept that does not
+    // document the belief.
+    expect(tagOf('chem.equil.le-chatelier', 'Adding an inert gas')).toEqual(['MC3'])
+    expect(tagOf('chem.equil.le-chatelier', 'catalyst is added to a reaction sitting at equilibrium')).toEqual(['MC1'])
+  })
+
+  it('equil: the three other retags', () => {
+    // kc-kp P2's distractor is "solids included as a fixed constant" = MC-2
+    // (pure solids must appear), not MC-3 (Kp always equals Kc).
+    expect(tagOf('chem.equil.kc-kp', 'CaCO₃')).toEqual(['MC2'])
+    // acids-bases P2 is the Lewis probe — a base need not involve protons at
+    // all, which is MC-3's territory, not MC-2 (pKa ordering).
+    expect(tagOf('chem.equil.acids-bases', 'BF₃ reacts with NH₃')).toEqual(['MC3'])
+    // titration P2's distractor is "a pH 7 indicator would always be correct"
+    // = MC-3 (any indicator for any titration), not MC-2 (endpoint vs
+    // equivalence).
+    expect(tagOf('chem.equil.titration', 'phenolphthalein')).toEqual(['MC3'])
+  })
+
+  it('equil: chem.equil.concept was already clean and stays clean', () => {
+    expect(tagOf('chem.equil.concept', 'What is actually happening at the molecular level')).toEqual(['MC1', 'MC2'])
+    expect(tagOf('chem.equil.concept', '95% reactants and 5% products')).toEqual(['MC2'])
+    expect(tagOf('chem.equil.concept', 'K = 4.2')).toEqual(['MC3'])
+  })
+
+  it('equil: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.equil.kc-kp', 'how do the coefficients')).toEqual(['MC1'])
+    expect(tagOf('chem.equil.kc-kp', 'are Kp and Kc numerically equal')).toEqual(['MC3'])
+
+    expect(tagOf('chem.equil.acids-bases', 'conjugate base of H₂SO₄')).toEqual(['MC1'])
+    expect(tagOf('chem.equil.acids-bases', 'chloroacetic acid')).toEqual(['MC2'])
+
+    expect(tagOf('chem.equil.kw-ph', '0.01 M HCl')).toEqual(['MC2'])
+    expect(tagOf('chem.equil.kw-ph', 'pH 3.4')).toEqual(['MC3'])
+
+    expect(tagOf('chem.equil.weak-acid', 'Kb for acetate')).toEqual(['MC2'])
+    expect(tagOf('chem.equil.weak-acid', 'chloroacetic acid, Ka = 1.4')).toEqual(['MC3'])
+
+    expect(tagOf('chem.equil.buffer', 'dilute a pH 4.76 acetate buffer')).toEqual(['MC1'])
+    expect(tagOf('chem.equil.buffer', 'buffer capacity greatest')).toEqual(['MC3'])
+
+    expect(tagOf('chem.equil.titration', 'endpoint the same thing')).toEqual(['MC2'])
+    expect(tagOf('chem.equil.titration', 'HALF-equivalence point')).toEqual(['MC4'])
+
+    expect(tagOf('chem.equil.hydrolysis', 'NaCl dissolves in water')).toEqual(['MC1'])
+    expect(tagOf('chem.equil.hydrolysis', 'hydrolysis constant Kh')).toEqual(['MC3'])
+    expect(tagOf('chem.equil.hydrolysis', 'NH₄Cl solution is basic')).toEqual(['MC4'])
+
+    expect(tagOf('chem.equil.solubility', 'Ag₂CrO₄ dissolving')).toEqual(['MC2'])
+    expect(tagOf('chem.equil.solubility', 'go into Q_sp')).toEqual(['MC3'])
+
+    expect(tagOf('chem.equil.complex-equil', 'What is K for the overall dissolution')).toEqual(['MC1'])
+    expect(tagOf('chem.equil.complex-equil', 'DISSOCIATION of that complex')).toEqual(['MC2'])
+  })
+
+  /**
    * chem.thermo — two more hollow concepts, and the first distractor found to
    * belong to a DIFFERENT CONCEPT entirely.
    *

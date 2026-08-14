@@ -6652,3 +6652,101 @@ production-verified.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# chem.equil — a misconception probed in the wrong concept, twice over
+
+Eleven concepts, twenty-two pre-existing probes. Six retag operations,
+twenty-one probes authored, and the second cross-concept distractor — this
+time with a twist that makes it clearer what is going on.
+
+## The catalyst misconception was homeless in both directions
+
+`chem.equil.kc-kp` P1 asks what a catalyst does to a reaction at equilibrium.
+That is `chem.equil.le-chatelier` MC-1 — "a catalyst shifts the equilibrium
+position" — and it is none of kc-kp's three misconceptions, which are about
+exponents, omitted solids, and Kp versus Kc.
+
+Meanwhile `chem.equil.le-chatelier`'s OWN P1 is an inert-gas-at-constant-volume
+probe. That is a PRESSURE question, its MC-3, and it was carrying MC-1.
+
+So the catalyst belief was being probed **in a concept that does not document
+it**, while **the concept that does document it had that slot occupied by a
+pressure probe**. Two errors that conceal each other: every structural measure
+sees both concepts covered, and neither covers what it claims.
+
+The repair: le-chatelier P1 becomes MC-3, and MC-1 gets the catalyst probe it
+never had. kc-kp P1 is left in place and recorded — it is a sound catalyst
+question, simply filed under a concept that does not document the belief.
+Deleting a valid gradeable probe is not this campaign's call.
+
+## One clean concept
+
+`chem.equil.concept` — all three distractors state their misconception
+verbatim ("all reactions have completely stopped", "concentrations have become
+exactly equal", "true equilibrium requires roughly equal amounts"). Only MC-3
+(ΔG° = 0 at equilibrium) needed authoring. Second clean concept found in 130
+audited.
+
+## Five further retags
+
+`kc-kp` P2 — "solids included as a fixed constant equal to their molar mass"
+is MC-2 (pure solids must appear), not MC-3 · `acids-bases` P2 — the BF₃/NH₃
+Lewis probe is about a base not needing protons at all, which is MC-3's
+territory, not MC-2 (pKa ordering) · `titration` P2 — "a pH 7 indicator would
+always be the correct universal choice" is MC-3 (any indicator for any
+titration), not MC-2 (endpoint versus equivalence).
+
+## Twenty-one probes authored
+
+`concept` MC-3 (ΔG = 0 at equilibrium; ΔG° = 0 would mean K = 1) · `kc-kp`
+MC-1 (coefficients are EXPONENTS — which is why doubling them squares K) and
+MC-3 (Kp = Kc(RT)^Δn) · `le-chatelier` MC-1 (a catalyst lowers both barriers
+equally, so only the TIME changes) · `acids-bases` MC-1 (conjugate pairs are
+one proton apart: HSO₄⁻, not SO₄²⁻) and MC-2 (**lower pKa is stronger** —
+chloroacetic beats acetic) · `kw-ph` MC-2 (0.01 M HCl is pH 2 directly; no Ka,
+no ICE table) and MC-3 (10^(−3.4) is 4.0 × 10⁻⁴, not 3.4 × 10⁻⁴) ·
+`weak-acid` MC-2 (Ka × Kb = Kw, multiplicative — pKa + pKb = 14 is the same
+statement) and MC-3 (the 5% approximation FAILS when Ka > C₀) · `buffer` MC-1
+(**dilution preserves pH and destroys capacity** — the ratio survives, the
+amounts do not) and MC-3 (capacity peaks at a ratio of 1, not 10) ·
+`titration` MC-2 (equivalence is stoichiometric, endpoint is observed, and the
+gap is the titration error) and MC-4 (**half-equivalence is pH = pKa**, which
+is how pKa is measured) · `hydrolysis` MC-1 (dissolution separates ions;
+hydrolysis is a subsequent reaction WITH water), MC-3 (Kh = Kw/Ka, a quotient)
+and MC-4 (NH₄Cl is ACIDIC — what is in solution is ammonia's conjugate ACID) ·
+`solubility` MC-2 ([Ag⁺] = 2s for Ag₂CrO₄, so Ksp = 4s³) and MC-3 (Q_sp uses
+just-mixed concentrations, or the test is vacuous by construction) ·
+`complex-equil` MC-1 (adding reactions MULTIPLIES constants: Ksp × Kf) and
+MC-2 (reversing INVERTS K; it never goes negative, because K is a ratio of
+concentrations).
+
+All twenty-one open a free `(conceptId, probeKind, gradeBand)` slot. 0
+discarded, 0 non-physics identities changed.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 130 of 186 | 125 | 67 | 4 | 56 | 21 | 11 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 22 |
+| blueprint MCs with no probe | 56 | 28 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+67 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and the 137 probes authored across the last eight assessment
+batches have never been seeded. Nothing here is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.

@@ -328,7 +328,9 @@ describe('the non-physics authored corpora convert too', () => {
     //                   in any domain, plus one hollow concept)
     //            ->  32 (chem.thermo x9 — two more hollow concepts, and a
     //                   probe whose distractor belonged to a DIFFERENT concept)
-    ['chemistry', CHEMISTRY_PROBES, 32],
+    //            ->  22 (chem.equil x11 — a SECOND cross-concept distractor,
+    //                   and the domain's own catalyst probe living in kc-kp)
+    ['chemistry', CHEMISTRY_PROBES, 22],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]
