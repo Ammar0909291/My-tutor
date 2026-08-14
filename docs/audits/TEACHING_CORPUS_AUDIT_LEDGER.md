@@ -7468,3 +7468,105 @@ TEACHING CLAIM → SELECTED VISUAL → VISUAL MEANING → LEARNER INTERPRETATION
 head-to-tail addition of 3 at 0° and 4 at 90° → `vector-3@0-4@90` → A, B and R
 drawn from the origin with magnitude and angle on each → a learner reading both
 gets one consistent story. **CORRECT.**
+
+---
+
+# Iteration — REAL-LEARNER AUDIT, phys.mech + all 8 turn types (2026-08-14)
+
+Driven against the deployed application with the owner's real account. Every
+line below is from a live turn.
+
+## All eight required turn types were exercised
+
+| # | turn type | where | result |
+|---|---|---|---|
+| 1 | normal lesson explanation | momentum, circular-motion, torque | correct |
+| 2 | follow-up question | vector-products | correct |
+| 3 | "I don't understand" | momentum | correct — switched to a boxes/tape analogy targeting the live misconception, then re-tested |
+| 4 | "Can you show me a diagram?" | significant-figures, vector-products | correct — honest refusal where nothing exists |
+| 5 | misconception / wrong answer | momentum ("5, because 2 plus 3 is 5") | detected |
+| 6 | corrective teaching response | momentum | named add-vs-multiply, re-taught, re-tested with a parallel item whose distractor A) 6 is the SAME misconception (4+2) |
+| 7 | refresh / reload | `/api/sessions/history` | correct — see below |
+| 8 | continue the conversation | throughout | correct |
+
+## Round 6's demotion verified on a real learner turn
+
+`phys.mech.momentum` was demoted to domain scope this session on offline
+evidence. Live, it behaves exactly as the demotion intends:
+
+> "let's look at the figure displayed on your screen **showing an elastic
+>  collision** where m1=2, m2=1, and u1=3. Momentum is the product of an
+>  object's mass and its velocity… p = mv"
+
+The figure is introduced as what it is — an elastic collision — and the
+concept is then taught in the tutor's own words. It is never called a figure
+of momentum. **CORRECT.**
+
+## Two more round-6 judgement calls verified live
+
+Both were left at concept scope on offline judgement; both hold under a real
+turn, with the narration matching the figure's own numbers:
+
+- `phys.mech.circular-motion` → `circular-r2-v4`, "a_c = v²/r ≈ 8 m/s²".
+  Tutor: r = 2 m, v = 4 m/s, tangential velocity, centripetal acceleration
+  inward. 16/2 = 8. **CORRECT.**
+- `phys.mech.torque` → `torque-2-10-90`, "r=2 m, F=10 N, θ=90°". Tutor: lever
+  arm 2 m, force 10 N perpendicular, "the resulting torque is twenty
+  newton-metres". 2 × 10 × sin90° = 20. **CORRECT.**
+
+## Refresh / history restoration — persistence intact
+
+`/api/sessions/history?subject=physics` returned 7 messages, scoped to this
+lesson only, plus a `visuals` map keyed BY MESSAGE ID. Exactly one entry
+(`collision-elastic-2-1`), keyed to the message that introduced it and present
+in the restored list; the later corrective and recovery turns carry none.
+Diagram persistence, per-message visual ownership and per-lesson history
+isolation all confirmed working.
+
+## A hypothesis of mine, raised and then DISPROVED
+
+Mid-audit a lesson switch inside one session appeared not to refresh the
+figure — the exact "old figure presented as if it explains a NEW concept"
+failure the brief warns about. Before acting on it I read the server logs,
+which showed the real cause:
+
+```
+Can't reach database server at aws-1-ap-south-1.pooler.supabase.com:6543
+Invalid `prisma.studentProgress.upsert()` invocation: Socket timeout
+[visual-v2] concept: 'phys.mech.momentum'     <- torque never became active
+```
+
+The lesson had not switched at all. Re-running once the write landed
+(confirmed by direct query: `activeLessonSlug = phys.mech.torque`), the SAME
+session immediately served the new `torque-2-10-90` figure. **There is no
+continuity defect.** Continuity releases correctly on a concept change, and a
+fix built on the first reading would have been a fix for nothing.
+
+## REAL production defect found, reported not patched
+
+The same logs show a genuine learner-facing failure mode. `lesson-init` is the
+only writer of `activeLessonSlug`; its upsert is awaited inside a try/catch
+and, on a pooler timeout, is caught and logged. The LLM call still succeeds,
+so the sequence a learner gets is:
+
+1. click lesson B → lesson B's opening text appears, looking successful;
+2. the pointer write silently fails;
+3. the next turn teaches lesson A again.
+
+Also observed failing in the same window: `spineEvent.create()` (evidence
+capture) and the cold-start asset bootstrap. These are transient — the write
+landed on a later attempt — but the learner is given no indication that their
+lesson selection was lost.
+
+NOT fixed in this batch, deliberately: it touches lesson navigation, which the
+brief lists as must-not-break, and the correct remedy (retry the pointer write,
+or surface the failure to the client rather than swallowing it) deserves its
+own change rather than being appended to a visual audit at the end of a long
+session. Recorded as the top next item.
+
+## Honest coverage
+
+6 of 238 physics concepts have now had the real-learner visual audit
+(vector-products, significant-figures, vector-addition, momentum,
+circular-motion, torque). 232 are not certified. Physics Check 3 remains at
+1 of 222.
