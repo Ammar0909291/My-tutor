@@ -24,8 +24,14 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 29 audited concepts', () => {
-    expect(RETIRED).toHaveLength(29)
+  it('covers exactly the 47 audited concepts', () => {
+    // 29 from the M3-A audit (which read concepts holding an EXACT curated
+    // row) + 18 from the visual semantic moat sweep, which ran the resolver
+    // over all 238 physics and 186 chemistry concepts and read the 51 whose
+    // figure identity was WIDENED from a generator kind or a domain prefix
+    // rather than declared. See visualSemanticMoatPhysicsChemistry.test.ts
+    // for the per-concept evidence.
+    expect(RETIRED).toHaveLength(47)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {

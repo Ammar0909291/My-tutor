@@ -5559,3 +5559,195 @@ never been seeded. Nothing here is production-served or production-verified.
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
 Offline only.
+
+---
+
+# VISUAL / DIAGRAM SEMANTIC MOAT — round 1 (physics + chemistry sweep)
+
+A second moat dimension opens here: not whether an assessment diagnoses the
+documented misconception, but whether the FIGURE the tutor points at teaches
+what the tutor is claiming. This round built the instrument and cleared the
+first defect class it found.
+
+## The instrument
+
+The existing visual tests assert that a figure is returned, that its identity
+matches the concept it claims, that layout is safe, and that generated figures
+pass the critic. None asks whether the figure teaches the concept. The
+resolver's own `provenance` field turns out to be where that becomes findable,
+because it records how a figure's identity was ESTABLISHED. Running the real
+`resolveVisual` over all 238 physics and all 186 chemistry concepts:
+
+| provenance | count | what it means |
+|---|---|---|
+| `curated` | 42 | a human wrote a row for THIS concept |
+| `generator` | 12 | the concept owns its scene parameters |
+| `generator-default` | 28 | the concept named only a generator KIND, and is served that kind's SHARED canonical scene |
+| `domain-default` | 23 | a domain prefix rule matched; the binding names `chem.bond`, not the concept |
+| no figure | 305 | 154+151 concepts, plus 14 already-retired bindings |
+
+The last two tiers WIDEN a figure's identity instead of declaring it. That is
+structurally where "right subject, wrong thing" lives, and it is 51 concepts —
+a bounded, readable set. Each was inspected against what it ACTUALLY paints:
+for scenes, the emitted objects and labels; for cards, the component's own
+rendered label list.
+
+## Eighteen figures depicted a different thing
+
+Same bar as the existing register: not "generic", not "thin" — a tutor
+teaching the concept against the figure would be saying something false.
+
+**Physics (4) — a shared canonical scene served to a member it does not depict.**
+`phys.opt.refraction` gets the convex-LENS image-formation diagram
+(u=30cm, f=10cm → v=15cm); Snell's law needs an interface, a normal and two
+angles, and the payload has none of the three — byte-identical evidence to the
+already-retired `phys.opt.reflection` · `phys.wave.shm-energy` gets a pendulum
+whose ONLY printed quantity is the period T = 2π√(L/g), for a concept that is
+entirely about the KE/PE exchange · `phys.mech.gravitational-field` ("…and Field Lines")
+gets an orbiting satellite labelled with orbital speed and period; an orbit is
+a trajectory, not a field · `phys.mech.kinematics-2d` gets the ONE-dimensional
+kinematics plot — literally the concept the learner is moving on from.
+
+**Chemistry (14) — four domain rules, four cards, sixty-plus concepts.**
+The `chem.bond` rule serves BondFormation3D, whose complete content is two
+spheres, one label "shared pair" and one label "Stable molecule AB", to seven
+concepts. Six are retired: `hybridization` (no orbital, no geometry),
+`mo-theory` (a localised pair is the picture MO theory replaces),
+`polar-molecules` (**"shared pair" is EQUAL sharing — the card depicts a
+non-polar bond**), `intermolecular` (an intramolecular bond, for forces that
+are explicitly not bonds — the exact misconception the concept must dismantle),
+`resonance` (one structure, where resonance needs two), `coordinate-bond`
+("shared pair" is the ordinary covalent contrast case).
+
+The `chem.atomic` rule serves a nucleus-and-shell card to seven. Five are
+retired: `electromagnetic-radiation` (an atom, for waves and the spectrum),
+`atomic-spectra` (continuous rings, where the DISCRETENESS is the whole
+observation), `orbitals` (**shell RINGS for a concept about orbital SHAPES —
+"an orbital is an orbit" is the single most documented misconception in this
+area, and the figure asserts it**), `photoelectric-effect` (an isolated atom;
+no surface, no photon, no threshold), `quantum-mech-model` (sharp shells state
+the position the concept refutes).
+
+Plus `chem.period.classification` (electron shells, historically posterior to
+the triads/octaves/Mendeleev arrangements being taught), `chem.solid.defects`
+(**a PERFECT lattice, for a concept defined by departures from perfection**)
+and `chem.solid.properties` (a static neutral lattice carries no band
+structure and no spins).
+
+## What was deliberately NOT retired
+
+Suppression is cheap to apply and expensive to notice — one concept too many
+silently removes a correct figure with no learner-visible error. Kept, with
+reasons, and pinned by an over-suppression control test:
+`chem.atomic.bohr-model` (quantised circular orbits round a nucleus is exactly
+that card — the one member the shared figure genuinely serves) ·
+`phys.opt.lenses`, `phys.wave.pendulum`, `phys.mech.torque`,
+`phys.mech.collisions-elastic`, `phys.meas.vector-addition`, `chem.bond.vsepr`,
+`chem.solid.crystal-systems` — each IS the canonical case of its shared scene.
+
+A NINETEENTH WAS PROPOSED AND REJECTED, recorded so the call is not
+re-litigated: `phys.em.dc-circuits` shows a figure labelled "Series circuit —
+R_total = 30 Ω" for a concept named "Series and Parallel Circuits". The first
+reading of this round called it a defect. It is not: the series half is drawn
+correctly and labelled honestly, and the register's bar is "depicts a
+DIFFERENT thing", which half of a concept under its own true name is not. A
+pre-existing test also recorded a deliberate decision here — "dc-circuits
+keeps the series default deliberately, it is the concept's other half" — and
+the `electric_circuit` generator's `Connection` type is `'series' | 'parallel'`,
+one or the other, so it cannot express a combined network. The correct fix is
+authoring a combined-topology scene, not suppression. Left in place, tracked
+as open.
+
+Thirty-three survivors are generic-but-not-wrong and were left alone rather than
+suppressed: `phys.mech.impulse` (the collision scene's velocities make Δp
+readable even though F·Δt is absent), `phys.mech.rotational-dynamics` (torque
+is correct; I and α are missing), `phys.meas.scalars-vectors`,
+`phys.em.electric-current`, `phys.em.ohms-law`,
+`phys.mech.universal-gravitation`, `chem.bond.bond-parameters`,
+`chem.atomic.quantum-numbers` (the shells DO depict n), the four
+`chem.period` trend concepts, `chem.solid.packing`, `chem.solid.ionic-solids`
+and the rest. A ratchet now caps widened-identity bindings at 19 physics /
+14 chemistry, so a new domain rule or generator kind cannot quietly take on
+more concepts than this sweep inspected.
+
+## Regression protection
+
+`src/tests/visualSemanticMoatPhysicsChemistry.test.ts`, 48 assertions:
+every defect pinned individually with its evidence; each checked across all
+FOUR entry paths (fresh turn, explicit "give me a diagram"/"draw this"/"show
+me a picture", follow-up turn, and refresh via `restoreVisualSession` with a
+hand-written snapshot); the over-suppression control; a standing invariant
+that NO concept in the whole register can be reached through any tier under
+any message; and a check that every id in the register really exists in a
+canonical KG, since a typo'd id suppresses nothing while reading as coverage.
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| concepts | 238 | 186 |
+| figure, identity declared (`curated`/`generator`) | 47 | 17 |
+| figure, identity widened (inspected, kept) | 19 | 14 |
+| no figure — no faithful visual exists | 154 | 151 |
+| **total concepts served a figure** | **66** | **31** |
+| no figure — binding retired | 14 | 18 |
+
+The honest headline: **only 47 of 238 physics and 17 of 186 chemistry concepts
+have a figure whose identity was declared for that concept.** Suppressing 19
+wrong figures does not add a single correct one — it stops the tutor asserting
+things that are not on screen. Authoring faithful replacements is the next
+stage of this dimension and is not claimed here.
+
+## Not yet done in this dimension
+
+The 42 `curated` and 12 `generator` bindings were NOT re-read this round —
+the M3-A audit covered curated rows previously, but not against the stricter
+"teaches the current teaching claim" test. Narration/label correctness inside
+figures that ARE correctly bound is also unexamined. Both are recorded as
+open, not assumed clean.
+
+## Production verification
+
+Not production-verified. This is offline measurement against the real
+resolver modules. Suppression takes effect wherever this code runs; no
+production write was performed.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+## One pre-existing test had to be split, and why that is not a weakening
+
+`visualGeneratorSplits.test.ts` listed twelve concepts under "cases the audit
+found that B2 deliberately did NOT approximate" and asserted all twelve "still
+resolve, unchanged and not faked". Four of this round's retirements are on
+that list, so the sweep broke it.
+
+Read carefully, the two findings agree. That assertion was a B2-SCOPE guard —
+it means B2 REMOVED nothing when it authored generator parameters — and was
+never a finding that those figures teach their concepts. The list's OWN
+comments say the opposite for exactly the four now retired: "needs a boundary,
+a normal, angles i/r"; "needs a KE/PE energy split"; "needs 2D components, not
+1D graphs"; "needs field lines". The earlier decision was to keep the generic
+figure rather than invent a near-miss; this round's rule is that a figure
+asserting what the concept contradicts is worse than none. Both are honoured:
+nothing was approximated, and nothing false is shown.
+
+The test was SPLIT, not deleted or relaxed: eight keep the original "still
+resolves, unchanged" assertion; four now assert no figure; and the original
+invariant that none of the TWELVE was silently handed a neighbour's authored
+parameters still covers all twelve. B2's authored parameters are untouched.
+`visualRetiredBindings.test.ts`'s register-size pin moved 29 -> 47 with the
+provenance of both halves recorded in the comment.
+
+## Open in this dimension (recorded, not assumed clean)
+
+1. The 42 `curated` and 12 `generator` bindings were NOT re-read this round
+   against the stricter "teaches the current teaching claim" test.
+2. Narration and label correctness INSIDE correctly-bound figures is
+   unexamined.
+3. `phys.em.dc-circuits` needs a combined series-parallel topology that the
+   generator cannot currently express.
+4. Authoring faithful replacements for the 18 suppressed concepts. Suppression
+   removes a false claim; it does not add a correct figure, and this round
+   added none.

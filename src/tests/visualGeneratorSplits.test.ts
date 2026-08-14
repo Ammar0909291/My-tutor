@@ -130,26 +130,42 @@ describe('B2 changed nothing else', () => {
 })
 
 describe('cases the audit found that B2 deliberately did NOT approximate', () => {
-  // Each needs geometry no existing generator has. They keep their current
-  // conditional/generic figure; inventing a near-miss would be the exact
-  // failure mode M1 and B1 exist to prevent. Recorded here so the list is
-  // executable rather than only living in a report.
-  const REQUIRES_AUTHORING = [
-    'phys.opt.refraction',            // needs a boundary, a normal, angles i/r
-    'phys.opt.lens-power',            // needs a lens COMBINATION
-    'phys.mech.impulse',              // needs a force-time curve
-    'phys.wave.shm-energy',           // needs a KE/PE energy split
-    'phys.meas.scalars-vectors',      // needs a scalar shown beside a vector
-    'phys.mech.kinematics-2d',        // needs 2D components, not 1D graphs
+  // Each needs geometry no existing generator has. B2 authored none of them,
+  // and inventing a near-miss would be the exact failure mode M1 and B1 exist
+  // to prevent. Recorded here so the list is executable rather than only
+  // living in a report.
+  //
+  // ── SPLIT BY THE VISUAL SEMANTIC MOAT SWEEP ─────────────────────────────
+  // This list originally asserted, for all twelve, that the concept "still
+  // resolves" — a B2-scope guard meaning B2 REMOVED nothing. That guard was
+  // correct and still is for the eight below. It was never a finding that the
+  // eight figures teach their concept, and for four of the twelve the list's
+  // OWN comments said the opposite ("needs a boundary, a normal, angles i/r";
+  // "needs a KE/PE energy split"; "needs 2D components, not 1D graphs";
+  // "needs field lines"). Those four have since been retired on that evidence
+  // — see RETIRED_VISUAL_BINDINGS and visualSemanticMoatPhysicsChemistry —
+  // because a figure that asserts something the concept contradicts is worse
+  // than no figure. B2's authored parameters are untouched by that.
+  const KEEPS_A_GENERIC_FIGURE = [
+    'phys.opt.lens-power',            // needs a lens COMBINATION; the single-lens diagram is true as far as it goes
+    'phys.mech.impulse',              // needs a force-time curve; the collision's velocities still make dp readable
+    'phys.meas.scalars-vectors',      // needs a scalar beside a vector; the resultant does show direction
     'phys.mech.universal-gravitation',// needs two masses and an inverse-square force
-    'phys.mech.gravitational-field',  // needs field lines
-    'phys.em.electric-current',       // needs drift velocity / charge carriers
-    'phys.mech.rotational-dynamics',  // needs moment of inertia and angular acceleration
+    'phys.em.electric-current',       // needs drift velocity; the figure does print the current
+    'phys.mech.rotational-dynamics',  // needs I and alpha; the torque it shows is correct
     'chem.period.modern-periodic-law',// needs the periodic table itself
     'bio.mol.dna-replication',        // needs a replication fork, not static base pairing
   ] as const
 
-  it.each(REQUIRES_AUTHORING)('%s still resolves, unchanged and not faked', (conceptId) => {
+  /** The four whose figure asserts something their concept contradicts. */
+  const SUPPRESSED_BY_THE_SEMANTIC_SWEEP = [
+    'phys.opt.refraction',
+    'phys.wave.shm-energy',
+    'phys.mech.kinematics-2d',
+    'phys.mech.gravitational-field',
+  ] as const
+
+  it.each(KEEPS_A_GENERIC_FIGURE)('%s still resolves, unchanged and not faked', (conceptId) => {
     const d = ask(conceptId)
     // Still shows its existing figure — B2 removed nothing — and the figure
     // still belongs to the concept that asked for it.
@@ -157,8 +173,14 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
     expect(d.asset?.conceptId).toBe(conceptId)
   })
 
-  it('none of them was silently given another concept\'s override', () => {
-    for (const conceptId of REQUIRES_AUTHORING) {
+  it.each(SUPPRESSED_BY_THE_SEMANTIC_SWEEP)('%s now shows no figure rather than a false one', (conceptId) => {
+    expect(ask(conceptId).graphical).toBe(false)
+  })
+
+  it('none of the twelve was silently given another concept\'s override', () => {
+    // The original invariant, unchanged and still covering all twelve: B2
+    // must not have handed any of them a neighbour's authored parameters.
+    for (const conceptId of [...KEEPS_A_GENERIC_FIGURE, ...SUPPRESSED_BY_THE_SEMANTIC_SWEEP]) {
       expect(CONCEPT_SCENE_OVERRIDES, conceptId).not.toContain(conceptId)
     }
   })
