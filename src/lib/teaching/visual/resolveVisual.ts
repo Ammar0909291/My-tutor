@@ -247,8 +247,12 @@ function buildDecision(
         // existing provenance assertions are untouched; the honest distinction
         // lives in `provenance`/`identity`, which is what M3 will query, and is
         // spelled out in the id rather than hidden.
+        // A concept may own authored parameters without naming a generator
+        // KIND at all — the registry row has no `sceneGenerator`, and
+        // CONCEPT_SCENES is consulted before the kind is. Interpolating the
+        // null produced the literal id 'generator:<concept>:null'.
         assetId: conceptOwned
-          ? `generator:${ctx.conceptId}:${generatorKind}`
+          ? `generator:${ctx.conceptId}:${generatorKind ?? 'concept-authored'}`
           : `generator:kind-default:${generatorKind}`,
         conceptId: ctx.conceptId,
         conceptTitle: ctx.title,

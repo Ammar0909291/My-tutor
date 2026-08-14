@@ -30,6 +30,7 @@ import { fitSceneToFrame } from './layout'
 import { buildProjectileScene } from '@/lib/teaching/sceneGenerators/projectileMotion'
 import { buildTriangleScene } from '@/lib/teaching/sceneGenerators/triangleAngleSum'
 import { buildVectorScene } from '@/lib/teaching/sceneGenerators/vectorAddition'
+import { buildVectorProductsScene } from '@/lib/teaching/sceneGenerators/vectorProducts'
 import { buildCircularScene } from '@/lib/teaching/sceneGenerators/circularMotion'
 import { buildPendulumScene } from '@/lib/teaching/sceneGenerators/pendulumMotion'
 import { buildCollisionScene } from '@/lib/teaching/sceneGenerators/momentumCollision'
@@ -234,6 +235,22 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // viscosity) and M1 removed that path. These are authored replacements: plain
   // SceneSpecs built only from primitives SceneSpecRenderer paints, resolved
   // through the same registry -> admission -> contract path as everything else.
+  // ── the vector family's third claim ──────────────────────────────────────
+  // Components, addition and PRODUCTS are three different geometric claims,
+  // and all five concepts naming them shared one `three_vector_visualization`
+  // card — a single vector resolved into x/y/z components. The card is at
+  // least adjacent for the first two (both also carry a `vector` generator
+  // binding, which outranks it and draws the addition case). For products it
+  // was the only tier that fired, so a learner asking to see the dot product
+  // was shown components: no second vector, no angle, no projection.
+  //
+  // Same repair as `phys.opt.reflection` above, one layer up — the concept
+  // gets its own instance rather than the family's shared default. It is a
+  // CONCEPT_SCENES override rather than a new generator kind because the
+  // registry row names no generator at all, and this table is consulted
+  // before the kind is.
+  'phys.meas.vector-products': buildVectorProductsScene,
+
   'phys.opt.total-internal-reflection': buildTotalInternalReflectionScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,

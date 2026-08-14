@@ -107,10 +107,13 @@ describe('B2 changed nothing else', () => {
 
   it('B2 added exactly its two overrides', () => {
     // 5 pre-existing (reflection, mirrors, inelastic, meiosis, dihybrid)
-    // + 2 from B2 + 7 from the M4 Physics pilot = 14.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(14)
+    // + 2 from B2 + 7 from the M4 Physics pilot = 14, + 1 for
+    // phys.meas.vector-products (the vector family's third claim — see
+    // vectorProductVisualSelection.test.ts) = 15.
+    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(15)
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.mech.satellites')
+    expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.meas.vector-products')
   })
 
   it('the generator kind-defaults themselves are unchanged', () => {

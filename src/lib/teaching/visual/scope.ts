@@ -56,7 +56,11 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'bio.mol.dna-replication',         // static Watson-Crick pairing; no replication fork
 
   // ── curated cards thinner than the concept they were bound to ────────────
-  'phys.meas.vector-products',       // one vector; dot/cross need two and their product
+  // phys.meas.vector-products was HERE ("one vector; dot/cross need two and
+  // their product") and has been removed: it now resolves to an authored
+  // dot/cross figure via CONCEPT_SCENES, which outranks the card, so the
+  // verdict no longer describes what the concept renders. This is the
+  // intended exit from this set — repair the figure, then drop the entry.
   'phys.mech.velocity',              // static number line cannot show a rate
   'phys.mech.acceleration',          // static number line cannot show a rate of a rate
   'phys.mech.relative-motion',       // one number line; the concept needs two frames
@@ -92,4 +96,19 @@ export function scopeForAsset(provenance: AssetProvenance, conceptId: string): V
   if (provenance === 'domain-default') return 'domain'
   if (INSUFFICIENT_FOR_CONCEPT.has(conceptId)) return 'domain'
   return 'concept'
+}
+
+/**
+ * Did the audit find this concept's figure missing the thing that defines it?
+ *
+ * The membership test, exposed so the authoring backlog can be asserted rather
+ * than only described. It is deliberately NOT wired into selection: withholding
+ * these figures on an explicit request was measured and rejected — it blanked
+ * excursions ("Teach me vectors with diagram" resolved to nothing) and
+ * contradicted the recorded decision that these concepts KEEP their generic
+ * figure, demoted in wording by `scopeForAsset` above, until a faithful one is
+ * authored. See `vectorProductVisualSelection.test.ts`.
+ */
+export function isInsufficientForConcept(conceptId: string | null | undefined): boolean {
+  return Boolean(conceptId) && INSUFFICIENT_FOR_CONCEPT.has(conceptId as string)
 }
