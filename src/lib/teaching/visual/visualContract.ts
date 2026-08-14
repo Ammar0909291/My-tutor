@@ -138,49 +138,7 @@ export function buildVisualContractBlock(
           'word-picture you can. Do NOT ignore the request, and do NOT ' +
           'promise a diagram later — you cannot attach one.'
         : '(5) Do not apologise for the absence of a diagram; ' +
-          'a clear explanation is the complete answer.') +
-      // RULE 6 — THE CONFLICTING INSTRUCTION.
-      //
-      // Rules 1-3 tell the tutor not to refer to a figure. Another block in
-      // the SAME prompt routinely tells it to show one. Blueprints drive the
-      // teaching sequence and are written for a human tutor at a whiteboard,
-      // so they say things like:
-      //
-      //   "TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (same-molecule three-states
-      //    diagram) alongside Explanation A"
-      //   "Run Demo 1 (same-molecule three-states diagram)"
-      //   "S6 repair path: Draw the particle-size-vs-spacing contrast diagram"
-      //
-      // Measured 2026-08-14: 231 of the 424 physics and chemistry concepts
-      // that have a blueprint instruct a demo or a diagram while the resolver
-      // serves NOTHING for them. The majority case is a prompt that says both
-      // "show this diagram" and "no figure is attached".
-      //
-      // Observed live on the real deployed tutor, chem.found.states-of-matter
-      // (a RETIRED binding, so no figure was served and this very block WAS
-      // injected):
-      //
-      //   "Looking at the figure on your screen showing the Interconversion of
-      //    States of Matter, you can see how a substance moves between solid,
-      //    liquid, and gas phases... it reaches the Melting (Heating) step
-      //    shown on screen"
-      //
-      // No such figure exists anywhere in this codebase — the phrase was
-      // invented from the concept's own KG description ("interconversion via
-      // heating and cooling"). The model resolved the contradiction by
-      // fabricating the picture the blueprint asked for.
-      //
-      // The blueprint is not wrong: describing a demonstration IS good
-      // teaching, and stripping demos out of the teaching sequence would throw
-      // away the pedagogy to fix the phrasing. What has to be settled, once
-      // and deterministically, is which instruction wins about what is ON
-      // SCREEN — and that is this block's own subject, so it says so here
-      // rather than in a second place.
-      ' (6) ANOTHER INSTRUCTION IN THIS PROMPT MAY TELL YOU TO RUN A DEMO, ' +
-      'DRAW A DIAGRAM, OR SHOW A FIGURE. Those describe teaching you deliver ' +
-      'IN WORDS. This rule wins on the question of what is on screen: carry ' +
-      'the demonstration verbally ("picture three boxes, each with the same ' +
-      'particles packed differently"), and NEVER say or imply it is displayed.'
+          'a clear explanation is the complete answer.')
     )
   }
 

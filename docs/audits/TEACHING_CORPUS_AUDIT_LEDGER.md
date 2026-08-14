@@ -7646,21 +7646,18 @@ openings behind. A clean session behaved correctly. Not a defect — method.
 
 # Iteration — REAL-LEARNER VISUAL AUDIT, chemistry (2026-08-14)
 
-Driven against the deployed application with the owner's real account. The
-first half verified this session's own round-6 judgement calls; the second
-half found a systemic defect neither offline analysis nor any existing test
-could see.
+Driven against the deployed application with the owner's real account.
 
 ## Every round-6 chemistry judgement verified live — in both directions
 
 | concept | round-6 call | live behaviour | verdict |
 |---|---|---|---|
-| `chem.solid.crystal-systems` | DEMOTED | served `lattice-fcc`; tutor taught the SEVEN systems in its own words, reaching for a tilted-boxes analogy for the non-cubic ones, and never claimed the figure showed them | demotion correct, and it visibly improved the teaching |
+| `chem.solid.crystal-systems` | DEMOTED | served `lattice-fcc`; the tutor taught the SEVEN systems in its own words, reaching for a tilted-boxes analogy for the non-cubic ones, and never claimed the figure showed them | demotion correct, and it visibly improved the teaching |
 | `chem.atomic.electronic-config` | DEMOTED | served `electron-shells-na`; taught the Aufbau principle via a parking-garage analogy, then pointed only at what the Na figure genuinely shows ("Na (11+)") | correct |
-| `chem.period.periodic-properties` | DEMOTED | served `periodic-trends-Na-Cl`; pointed at the two elements' labels, then stated the across-a-period trend in its own words | correct (see note) |
+| `chem.period.periodic-properties` | DEMOTED | served `periodic-trends-Na-Cl`; pointed at the two elements' labels, then stated the across-a-period trend in its own words | correct (note below) |
 | `chem.bond.vsepr` | KEPT at concept scope | served `molecule-water`; water is bent at 104.5°, one of the three molecules the KG names, and genuinely instantiates the concept | keep correct |
 | `chem.bond.covalent-bonding` | untouched | served card `three_bond_formation`; the card animates electron SHARING and the lesson is sharing | correct |
-| `chem.bond.ionic-bonding` | RETIRED earlier | served NOTHING, and the tutor taught transfer in words without referring to any figure | retirement correct |
+| `chem.bond.ionic-bonding` | RETIRED earlier | served nothing, and the tutor taught transfer in words without referring to any figure | retirement correct |
 
 The covalent/ionic pair is the sharpest evidence that the retirement register
 is precise rather than blunt: the SAME card is suppressed for ionic (transfer,
@@ -7673,61 +7670,69 @@ and then generalises in its own words. Defensible — two elements in one period
 are a real instance of the trend — but it is the closest any of these came to
 reading a general conclusion off a two-element figure. Recorded, not actioned.
 
-## SYSTEMIC DEFECT — the prompt contradicts itself, and the model resolves it by inventing a figure
+## RETRACTED — a defect I reported that does not exist
 
-`chem.found.states-of-matter` has a RETIRED binding. No figure was served and
-the NO-FIGURE contract WAS injected. The tutor said:
+An earlier version of this entry, and commit `0ab4faa`, claimed that
+`chem.found.states-of-matter` fabricated a figure: the tutor said "Take a look
+at the figure on your screen showing the Interconversion of States of Matter…
+the Melting (Heating) step", and I reported that no such figure existed.
 
-> "Looking at the figure on your screen showing the **Interconversion of States
->  of Matter**, you can see how a substance moves between solid, liquid, and gas
->  phases… it reaches the **Melting (Heating)** step **shown on screen**"
+**It exists.** The response carried:
 
-That figure does not exist. The phrase appears in no scene, card, asset or
-blueprint anywhere in the repository — it was invented from the concept's own
-KG description, "interconversion via heating and cooling".
-
-**Root cause: two contradictory instructions in the same prompt.** Blueprints
-drive the teaching sequence and are written for a human tutor at a whiteboard.
-`chem.found.states-of-matter.md` contains:
-
-```
-TA-1 [DEMONSTRATE + EXPLAIN]: Demo 1 (same-molecule three-states particle
-     diagram) alongside Explanation A
-S6 repair path: Draw the particle-size-vs-spacing contrast diagram
+```json
+{"type":"process_flow","title":"Interconversion of States of Matter",
+ "steps":["Solid State","Melting (Heating)","Liquid State",
+          "Evaporation (Heating)","Gas State"]}
 ```
 
-while the visual contract simultaneously said "NO FIGURE IS ATTACHED… Do NOT
-say 'look at the figure'". The model followed the blueprint.
+Every element the tutor named is in the figure. That turn was CORRECT — one of
+the most accurate figure descriptions in this whole audit.
 
-**This is the majority case, not an edge case.** Measured across every physics
-and chemistry concept that has a blueprint: **231 of 424 instruct a demo or a
-diagram while the resolver serves nothing for them** (327 serve nothing at all;
-only 97 serve a figure).
+**Cause of my error: a blind instrument.** The chat response can carry a figure
+in three fields — `visual` (card), `sceneSpec` (scene), and `visualSpec` (spec,
+which is what the generation engine produces). My sweep script printed only the
+first two, so a generated figure read as "NONE". The server log said otherwise
+all along:
 
-## The fix
+```
+[visual-v2] renderer: 'spec', graphical: true,
+            provenance: 'generated:chem.found.states-of-matter:cached'
+visualFired: true
+```
 
-One clause, in the layer that already owns the question of what is on screen —
-no new system, no parallel logic, and the blueprint is left alone:
+`chem.found.states-of-matter` is retired from its CARD binding — which is why I
+expected nothing — but the generation engine had authored and cached a figure
+for it. Retirement suppresses a binding, not the engine.
 
-> (6) ANOTHER INSTRUCTION IN THIS PROMPT MAY TELL YOU TO RUN A DEMO, DRAW A
-> DIAGRAM, OR SHOW A FIGURE. Those describe teaching you deliver IN WORDS. This
-> rule wins on the question of what is on screen: carry the demonstration
-> verbally, and NEVER say or imply it is displayed.
+**Two things were wrong, not one.** The "231 of 424 physics and chemistry
+concepts instruct a demo while the resolver serves nothing" measurement used
+the same blind definition of "serves nothing" (retired ∥ scene ∥ card binding)
+and ignored the generation engine entirely. That number is unreliable and is
+withdrawn.
 
-The blueprint is NOT wrong and was not edited. Describing a demonstration is
-good teaching; stripping demos out of the teaching sequence would discard
-pedagogy to fix phrasing. What needed settling was precedence, and precedence
-now lives in one place. Injection order was checked and already correct — the
-visual contract lands after the teaching-sequence block, so it has recency.
+**Action taken:** commit `0ab4faa` is reverted in full — the contract rule and
+its test are removed. The rule was defensible in the abstract, but it was
+justified by a misread, its scope claim was unverified, and its code comment
+asserted as fact something now known to be false. Shipping a prompt rule on
+false evidence is precisely what the root-cause discipline forbids, and a
+comment that misleads the next reader is a durable cost.
 
-Scoped to the no-figure branch only: with a real figure attached the tutor
-SHOULD point at it, and the clause would be actively wrong there. A test
-asserts it does not leak into that branch.
+**What remains genuinely open:** whether a real no-figure turn ever collides
+with a blueprint demo instruction. Blueprint demo instructions are real
+(`chem.found.states-of-matter.md` does say "TA-1 [DEMONSTRATE + EXPLAIN]:
+Demo 1 (same-molecule three-states particle diagram)"). What is NOT established
+is that any concept combines one with a genuinely empty screen in front of a
+learner. Re-measuring that needs an instrument that accounts for the generation
+engine, and it needs a reproduced live case before anything is changed.
 
-Regression test: `src/tests/noFigureBeatsBlueprintDemo.test.ts`, including the
-corpus survey so the conflict count cannot silently grow.
+## Method correction, applied going forward
+
+Every future visual observation in this ledger reads all three fields —
+`visual`, `visualSpec`, `sceneSpec` — and is cross-checked against the
+`[visual-v2]` server log line, which carries `graphical` and `provenance` and
+would have caught this immediately.
 
 ## Validation
 
-`npx tsc --noEmit` clean; 333 files / 7083 passed / 9 skipped;
-`npm run build` exit 0.
+Revert verified: `npx tsc --noEmit` clean, full suite green, `npm run build`
+exit 0 — recorded in the revert commit.
