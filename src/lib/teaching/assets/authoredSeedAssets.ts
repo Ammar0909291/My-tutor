@@ -49776,7 +49776,7 @@ const LPWR_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'short_answer',
     gradeBand: GradeBand.HIGH,
-    stem: 'TRANSFER (P-3, proficient): Two lenses (f₁=+20 cm, f₂=+30 cm) are placed 5 cm apart. Find the effective focal length using the separated-lens formula, and compare to the (incorrect) result from simply adding P₁+P₂.',
+    stem: 'TRANSFER (P-3, proficient): Two lenses (f₁=+20 cm, f₂=+30 cm) are placed 5 cm apart. Find the effective focal length using the separated-lens formula, and compare to the naive result from simply adding P₁+P₂.',
     correctValue: 'separated formula: P_total = P₁+P₂−dP₁P₂ (d in metres) gives a different (smaller magnitude combined power) result than the naive P₁+P₂ sum, with the difference being the percentage error introduced by ignoring separation',
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${LPWR}:MC-IGNORE-LENS-SEPARATION`],

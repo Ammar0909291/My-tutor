@@ -8422,7 +8422,7 @@ const GRAVI_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'In a gravimetric determination of chloride via AgCl precipitation, why is the washing step analytically important, not just cosmetic?',
     choices: [
-      { text: 'Washing removes soluble impurities (excess AgNO₃, byproduct salts) that would otherwise add extra mass to the weighed precipitate, causing a systematically inflated (incorrect) result', isCorrect: true },
+      { text: 'Washing removes soluble impurities (excess AgNO₃, byproduct salts) that would otherwise add extra mass to the weighed precipitate, causing a systematically inflated result', isCorrect: true },
       { text: 'Washing has no real effect on accuracy — it just makes the final precipitate look more presentable', isCorrect: false, misconceptionId: `${GRAVI}:MC1` },
     ],
     correctValue: 'Washing removes mass-inflating soluble impurities',

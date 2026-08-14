@@ -140,6 +140,75 @@ export function isRelevantToLearnerQuestion(content: string, userMessage: string
 }
 
 /**
+ * IS THIS MARKER A LABEL, OR IS IT ORDINARY TEACHING PROSE?
+ *
+ * `findAuthorScaffolding` above answers "does this text contain a marker
+ * SHAPE". That is the right question for a capture-time linter and it is
+ * deliberately left unchanged. It is the wrong question for the serve-time
+ * boundary, because two of the shapes occur constantly in correct
+ * learner-facing prose, and refusing those assets is itself a learner harm:
+ * the refused content is never replaced, it is simply lost, and the concept
+ * falls back to an ungoverned model turn.
+ *
+ * Measured directly against the stored corpora (chemistry + authored
+ * math/physics/english), 2026-08-14:
+ *
+ *   verdict-marker   171 occurrences, 164 of them immediately after a CLOSING
+ *                    QUOTE — the "quote the misconception, then correct it"
+ *                    sentence that is the whole point of a repair
+ *                    explanation: «"Breaking bonds releases energy." WRONG —
+ *                    breaking bonds ALWAYS requires energy.» The remaining 7
+ *                    are prose too («…makes the claim TRUE — here x = 2»).
+ *                    ZERO were reviewer annotations. A rule whose real-corpus
+ *                    false-positive rate is 100% is not protecting anyone.
+ *   trap-label       383 occurrences, 140 at the start of a line — a genuine
+ *                    "Trap:" heading, exactly the register this boundary was
+ *                    built to stop. The other 243 are a teacher enumerating
+ *                    pitfalls mid-paragraph («Another trap: confusing molar
+ *                    mass of an ATOM with molar mass of a COMPOUND»), which
+ *                    this module's own header already promises not to block:
+ *                    "a tutor may legitimately say 'that is a common trap',
+ *                    and must not be blocked for it."
+ *
+ * So the marker's POSITION decides. A label sits at the start of a line
+ * (optionally behind a bullet or list number); prose does not. The other five
+ * markers are unconditional — an answer key, a TODO or a bracketed
+ * [correct] label is author-facing wherever it appears — so they are not
+ * position-tested at all, and nothing about them changes.
+ *
+ * This is narrower than the shape test, not broader: every asset it still
+ * refuses was refused before. It cannot admit anything the five unconditional
+ * markers catch, and it cannot admit a "Trap:" heading.
+ */
+const POSITION_SENSITIVE = new Set(['trap-label', 'verdict-marker'])
+
+/** Is the offset at the start of a line, allowing a bullet or list number? */
+function atLineStart(content: string, index: number): boolean {
+  return /(?:^|\n)[ \t]*(?:[-*>#]+[ \t]*|\d+[.)][ \t]*)?$/.test(content.slice(0, index))
+}
+
+/**
+ * The author-facing scaffolding a LEARNER must never be shown — the shape
+ * test above, narrowed by position for the two markers that also occur in
+ * ordinary prose. Returns the offending fragment so the refusal is auditable.
+ */
+export function findLearnerFacingScaffolding(text: string): string | null {
+  const content = text ?? ''
+  for (const marker of AUTHOR_MARKERS) {
+    const re = new RegExp(marker.re.source, marker.re.flags.includes('g') ? marker.re.flags : marker.re.flags + 'g')
+    for (const m of content.matchAll(re)) {
+      // Skip the leading-boundary capture group so the offset points at the
+      // marker word itself, not at the whitespace in front of it.
+      const at = m.index + (m[1] ? m[1].length : 0)
+      if (POSITION_SENSITIVE.has(marker.name) && !atLineStart(content, at)) continue
+      const from = Math.max(0, at - 20)
+      return `${marker.name}: ${from > 0 ? '…' : ''}${content.slice(from, at + 40)}`
+    }
+  }
+  return null
+}
+
+/**
  * The single question every stored asset must answer before a learner sees it:
  * may this be spoken to this student, on this turn, as the tutor's own words?
  */
@@ -147,7 +216,7 @@ export function admitForLearner(input: { content: string; userMessage: string })
   const content = (input.content ?? '').trim()
   if (!content) return { admit: false, reason: 'empty', evidence: 'no content' }
 
-  const scaffolding = findAuthorScaffolding(content)
+  const scaffolding = findLearnerFacingScaffolding(content)
   if (scaffolding) return { admit: false, reason: 'author-scaffolding', evidence: scaffolding }
 
   if (!isRelevantToLearnerQuestion(content, input.userMessage ?? '')) {

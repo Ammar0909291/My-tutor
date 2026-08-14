@@ -6970,3 +6970,150 @@ production-verified.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# Iteration — LIVE PRODUCTION VERIFICATION (2026-08-14)
+
+The owner supplied a real account and asked for a full sweep. This is the
+first production-verified entry in this ledger. Everything below was read
+from the live database, the live learner API, or the live server logs — not
+from the repository.
+
+Account resolved: `suaibamr@gmail.com` (differs from the session-context
+email). Credentials were held outside the repository, never echoed, never
+committed. The sweep wrote real rows to `learn_sessions` / `student_progress`
+for that account.
+
+## 1. The crossed pairs are confirmed live
+
+Read directly from `asset_identity` ⋈ `probe_assets`, compared against the
+blueprint headings on disk. All four pairs this campaign repaired are still
+crossed in production — each probe carries the OTHER's misconception id:
+
+| concept | production `mcq` | production `misconception_probe` |
+|---|---|---|
+| `chem.hal.sn1` | nucleophile-concentration stem tagged MC1 (it tests MC-2, the rate law) | racemisation stem tagged MC2 (it tests MC-1) |
+| `chem.found.stoichiometry` | limiting-reagent stem tagged MC1 (tests MC-2) | "coefficient 2 means 2 grams" tagged MC2 (tests MC-1) |
+| `chem.bond.vsepr` | NH₃ molecular-geometry stem tagged MC1 (tests MC-2) | CO₂ electron-domain stem tagged MC2 (tests MC-1) |
+| `chem.bond.mo-theory` | O₂ paramagnetism stem tagged MC1 (tests MC-2) | He₂ bond-order stem tagged MC2 (tests MC-1) |
+
+`chem.org.iupac` is mis-tagged but not crossed: its MC1 is correct, its MC2
+stem tests alphabetical-vs-discovery order, which is not the documented MC-2.
+
+## 2. Two claims of mine were WRONG. Both are corrected here.
+
+**(a) The `${IUPAC}` template-literal corruption was never in production.**
+Production carries a correctly-formed `chem.org.iupac:MC2`. `git log -S`
+shows the broken literal was introduced by THIS campaign's own commit
+`eba7268` (today) and fixed in `1bb3d1b`. I had described it as pre-existing
+production data. It was mine. The prefix guard it motivated is still worth
+keeping; the defect was not a discovery about production.
+
+**(b) "Two probes means the concept cannot close" is FALSE.**
+I wrote this repeatedly, including earlier today as "0 of 186 chemistry
+concepts can close". A live lesson on `chem.solid.ionic-solids` closed the
+concept in 8 turns. The server's own telemetry shows why:
+
+```
+CHECK    gate-assessment probeFound=true  assetId=5f9f8077…   (authored #1)
+PRACTICE gate-assessment probeFound=true  assetId=e793f6aa…   (authored #2)
+PRACTICE gate-assessment probeFound=FALSE assetId=null        (corpus dry)
+ladder   check=1 practice=2 → TRANSFER, concept closed
+```
+
+The ladder counts three GRADED CORRECT answers from any source. Two came
+from the authored corpus; the first came from an MCQ the model invented.
+So what a missing third probe actually costs is that **one of the three gate
+questions falls back to an ungoverned, unreviewed model question** — exactly
+the delegation the gate block exists to end — not that the learner is stuck.
+The third-probe authoring is still the right fix; the consequence was
+overstated.
+
+## 3. The gate fires later than a short sweep reveals
+
+`isMasteryGatePhase` is CHECK|PRACTICE only, and the ladder walks
+OBSERVE → DEMONSTRATE → GUIDE → CHECK. Turns 1–5 of the live lesson produced
+no `[gate-assessment]` line at all and both MCQs were model-written. An
+earlier reading of mine — "the authored corpus is never consulted" — was
+premature; it is consulted from turn 6.
+
+## 4. Chemistry is excluded from the production auto-bootstrap
+
+`src/instrumentation.ts` seeds missing assets on cold start, logging
+`asset bootstrap: 2549/3028 seed identities present`. But
+`BOOTSTRAP_SEED_SUBJECTS = ['mathematics','physics','english']`. Chemistry,
+biology and computer_science are out of scope by construction. So this
+campaign's 178 authored chemistry probes will NOT reach production on
+deploy, and the 75 retags would not apply even if they did, because the
+per-asset dedup matches on `canonicalSlug` alone.
+
+## 5. NEW DEFECT, root-caused and fixed — the boundary refused correct teaching
+
+Every turn of the live session logged:
+
+```
+[explanationMemory] refused 7f48fc93-… : author-scaffolding
+  — trap-label: …Trap: "Lattice energy depends primarily on th…
+```
+
+That refusal is correct. Measuring the same guard across the whole corpus
+showed it was also refusing content that is plainly learner-facing:
+
+| marker | occurrences | at a line start (a real label) | in mid-sentence prose |
+|---|---|---|---|
+| `verdict-marker` | 171 | **0** | 171 (164 immediately after a quoted claim) |
+| `trap-label` | 383 | 140 | 243 |
+
+The verdict rule's real-corpus false-positive rate is **100%**: every match
+is the misconception-repair sentence itself — `"Breaking bonds releases
+energy." WRONG — breaking bonds ALWAYS requires energy.` The module's own
+header already promised the trap rule would not do this ("a tutor may
+legitimately say 'that is a common trap', and must not be blocked for it").
+
+Root cause: both rules were generalised from ONE compound production sample
+that happened to contain a real `Trap:` heading AND a `FALSE —` correction;
+the correction half was promoted to a rule of its own, but it is not author
+register.
+
+Fix: `findAuthorScaffolding` is UNCHANGED (it is the right question for a
+capture-time linter, and all 31 of its existing tests still pass, unedited).
+A narrower `findLearnerFacingScaffolding` now answers the serve-time
+question, position-testing only those two markers. The other five stay
+unconditional.
+
+Measured effect: chemistry explanations refused **174 → 142**, authored
+math/physics/english **72 → 2**. Nothing previously admitted is now refused
+(asserted). The 142 that remain are genuine line-start `Trap:` headings —
+real author register that must be rewritten at source, tracked as a ratchet
+that may only ever go down.
+
+Two probes (`chem.anal.gravimetric`, `phys.opt.lens-power`) used
+"(incorrect)" as an ordinary parenthetical and were silently unavailable.
+Both were reworded at source rather than loosening a second rule; the probe
+path keeps the raw shape test unchanged.
+
+Regression test: `src/tests/learnerAdmissionPositionSensitivity.test.ts`.
+
+## 6. Other live observations, recorded not acted on
+
+- The visual served for `chem.solid.ionic-solids` was
+  `registry:domain-default:chem.solid:three_crystal_lattice` and was held for
+  7 turns, while the tutor narrated it as concept-specific ("the single unit
+  cell and how it repeats"). Domain-default provenance is supposed to carry
+  the demoted "GENERAL ILLUSTRATION" contract. Needs a dedicated check.
+- The learner's grade band is ADULT; every chemistry asset is HIGH or
+  UNDERGRADUATE, so all serving is `grade_fallback` at score 60.
+- Production probe coverage: chemistry 186 concepts × exactly 2 probes;
+  physics 82 of 238 concepts have any probe at all.
+
+## Production status after this iteration
+
+Still **not production-served**. The guard fix ships with the next deploy and
+takes effect immediately for all subjects. The corrected chemistry tags and
+the 178 authored probes remain unseeded and require an explicit seeding run;
+no production writes were performed.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
