@@ -372,6 +372,78 @@ describe('probes whose id joined but whose content did not', () => {
   })
 
   /**
+   * chem.thermo — two more hollow concepts, and the first distractor found to
+   * belong to a DIFFERENT CONCEPT entirely.
+   *
+   * chem.thermo.enthalpy P1's distractor is "breaking the H-H bond releases
+   * energy which powers the reaction". That is not any of enthalpy's three
+   * documented misconceptions — it is chem.thermo.bond-enthalpy MC-1, word for
+   * word, sitting in the wrong concept's probe. Every earlier mis-tag pointed
+   * at the wrong id WITHIN a concept; this one points across concepts, so
+   * repairing it needed a new probe on enthalpy AND the existing bond-enthalpy
+   * MC-1 probe authored separately.
+   *
+   * chem.thermo.gibbs was hollow in a way worth recording: its crossover-
+   * temperature probe does the unit conversion CORRECTLY in the answer key
+   * (40000/100), which is exactly MC-3's skill — but neither distractor is the
+   * unit error, so a learner holding MC-3 is never caught. A correct worked
+   * answer is not a diagnostic.
+   */
+  it('thermo: the four concepts whose tags moved', () => {
+    // first-law P1: both distractors are ΔH-versus-ΔU claims = MC-2, and it
+    // carried MC-1 (expansion means w positive).
+    expect(tagOf('chem.thermo.first-law', 'Δn_gas')).toEqual(['MC2'])
+    // first-law P2: "heat measured in any calorimeter is always ΔH" is MC-3
+    // (q_p and q_v differ only in name), not MC-2.
+    expect(tagOf('chem.thermo.first-law', 'bomb calorimeter')).toEqual(['MC3'])
+    // bond-enthalpy P1: "they should be identical" is MC-2 (bond enthalpies
+    // give exact ΔH), not MC-1 (breaking releases energy).
+    expect(tagOf('chem.thermo.bond-enthalpy', 'two ways')).toEqual(['MC2'])
+    // heat-capacities P1: its second distractor is another Cp/Cv claim, not
+    // MC-3 (γ < 1).
+    expect(tagOf('chem.thermo.heat-capacities', 'Why is Cp always greater')).toEqual(['MC1'])
+    // third-law P2: "the Third Law only applies to elements" is MC-1 (it
+    // applies to all materials), not MC-2 (no jumps).
+    expect(tagOf('chem.thermo.third-law', 'residual entropy')).toEqual(['MC1'])
+  })
+
+  it('thermo: the cross-concept distractor is now probed in its own concept', () => {
+    // The bond-breaking-releases-energy belief belongs to bond-enthalpy MC-1.
+    // enthalpy gets its own MC-1 probe (Hess via a hypothetical route), and
+    // bond-enthalpy gets the rubber-band probe the belief actually needs.
+    expect(tagOf('chem.thermo.bond-enthalpy', 'explains combustion by saying')).toEqual(['MC1'])
+    expect(tagOf('chem.thermo.enthalpy', 'BURNING CO in oxygen')).toEqual(['MC1'])
+  })
+
+  it('thermo: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.thermo.system', 'pour half of a beaker')).toEqual(['MC2'])
+    expect(tagOf('chem.thermo.system', 'Where is the system boundary')).toEqual(['MC3'])
+
+    expect(tagOf('chem.thermo.first-law', 'gas EXPANDS')).toEqual(['MC1'])
+
+    expect(tagOf('chem.thermo.enthalpy', 'ΔH°f for O₂(g)')).toEqual(['MC2'])
+    expect(tagOf('chem.thermo.enthalpy', 'combustion of methane')).toEqual(['MC3'])
+
+    expect(tagOf('chem.thermo.entropy', 'S° also zero')).toEqual(['MC2'])
+    expect(tagOf('chem.thermo.entropy', 'ammonium nitrate')).toEqual(['MC3'])
+
+    expect(tagOf('chem.thermo.gibbs', 'ΔG° = 0 at 298 K')).toEqual(['MC1'])
+    expect(tagOf('chem.thermo.gibbs', 'ΔG° = +12 kJ/mol')).toEqual(['MC2'])
+    expect(tagOf('chem.thermo.gibbs', 'crossover temperature')).toEqual(['MC3'])
+
+    expect(tagOf('chem.thermo.bond-enthalpy', 'most electronegative element')).toEqual(['MC3'])
+
+    expect(tagOf('chem.thermo.heat-capacities', 'Helium is monatomic')).toEqual(['MC2'])
+    expect(tagOf('chem.thermo.heat-capacities', 'γ = Cₚ/Cᵥ = 0.8')).toEqual(['MC3'])
+
+    expect(tagOf('chem.thermo.third-law', 'through melting and boiling')).toEqual(['MC2'])
+    expect(tagOf('chem.thermo.third-law', 'Kirchhoff')).toEqual(['MC3'])
+
+    expect(tagOf('chem.thermo.cell-thermo', 'ΔG° = +212 kJ/mol or −212')).toEqual(['MC1'])
+    expect(tagOf('chem.thermo.cell-thermo', 'deliver current faster')).toEqual(['MC3'])
+  })
+
+  /**
    * chem.atomic — eleven retag operations, the most in any single domain, and
    * a reminder that a probe can be excellent and still be filed wrong.
    *

@@ -6545,3 +6545,110 @@ production-verified.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# chem.thermo — a distractor that belonged to a different concept
+
+Nine concepts, eighteen pre-existing probes. Eight retag operations, nineteen
+probes authored, two more hollow concepts, and a defect shape that had not
+appeared before.
+
+## The new shape: a cross-concept distractor
+
+`chem.thermo.enthalpy` P1's distractor is **"breaking the H–H bond releases
+energy which powers the reaction"**. That is not any of enthalpy's three
+documented misconceptions. It is `chem.thermo.bond-enthalpy` MC-1 — "breaking
+bonds releases energy, like a breaking rubber band snapping back" — word for
+word, sitting inside the wrong concept's probe.
+
+Every mis-tag found so far pointed at the wrong id WITHIN a concept. This one
+points ACROSS concepts, and the repair is correspondingly different: the
+belief needed a probe on `bond-enthalpy`, where it is documented, and
+`enthalpy` needed its own MC-1 probe (Hess's law through a hypothetical route)
+because its documented misconception had none. One defect, two authored probes,
+in two different concepts.
+
+It also means the runtime consequence is worse than usual. A learner picking
+that distractor gets MISCONCEPTION_DETECTED against an `enthalpy` id, so the
+repair path looks for enthalpy's remedy — while the belief they actually
+demonstrated is documented, with a remedy, one concept away.
+
+## Two more hollow concepts
+
+`chem.thermo.enthalpy` — neither probe is Hess-via-hypothetical-route (MC-1),
+elements-have-non-zero-ΔH°f (MC-2), or reversing-preserves-sign (MC-3).
+
+`chem.thermo.gibbs` — hollow in a way worth recording separately. Its
+crossover-temperature probe does the unit conversion CORRECTLY in the answer
+key (40000/100 = 400 K), which is exactly MC-3's skill. But neither distractor
+is the unit error, so a learner who would have divided 40/100 and got 0.4 K is
+never caught. **A correct worked answer is not a diagnostic** — the distractor
+is what does the detecting, and this probe's distractors are ΔH/ΔS sign
+reasoning instead.
+
+Hollow total: 21.
+
+## Eight retag operations
+
+`first-law` P1 — both distractors are ΔH-versus-ΔU claims, so MC-2, and it
+carried MC-1 (expansion means w positive) · `first-law` P2 — "heat measured in
+any calorimeter is always ΔH" is MC-3 (q_p and q_v differ only in name) ·
+`bond-enthalpy` P1 — "they should be identical" is MC-2 (bond enthalpies give
+exact ΔH) · `heat-capacities` P1 — its second distractor is another C_p/C_v
+claim, not MC-3 (γ < 1) · `third-law` P2 — "the Third Law only applies to
+elements" is MC-1 (it applies to all materials), not MC-2 (no jumps).
+
+## Nineteen probes authored
+
+`system` MC-2 (**pour half away: temperature unchanged, heat capacity halves**
+— the split-the-sample test) and MC-3 (the boundary is a choice; it just has to
+stay fixed for one calculation) · `first-law` MC-1 (expansion gives w < 0,
+because the system SPENDS energy) · `enthalpy` MC-1 (a Hess route may burn CO
+to CO₂ even though the real reaction never does — that is why the law exists),
+MC-2 (**O₂ is exactly zero, O₃ is +142 kJ/mol** — same element, wrong
+allotrope) and MC-3 (reversing flips the sign, or you have a perpetual motion
+machine) · `entropy` MC-2 (S°(graphite) = 5.7, not 0 — entropy's zero is at
+0 K, not at the elements) and MC-3 (an ice pack is endothermic AND spontaneous,
+because TΔS outweighs ΔH) · `gibbs` MC-1 (ΔG° = 0 means K = 1, not "nothing
+happens"), MC-2 (ΔG° = +12 kJ/mol still runs forward at a small enough Q —
+which is how metabolism works) and MC-3 (**0.4 K is colder than liquid helium**
+— that answer is the tell that the kJ/J conversion was skipped) ·
+`bond-enthalpy` MC-1 (breaking always COSTS; if it released, molecules would
+fall apart) and MC-3 (H–F is the strongest hydrogen halide bond AND HF is the
+weakest acid, precisely because of it) · `heat-capacities` MC-2 (nitrogen
+beats helium, 5R/2 against 3R/2 — rotational degrees of freedom) and MC-3
+(γ = 1 + R/C_v > 1 always) · `third-law` MC-2 (S° jumps vertically at each
+phase transition by ΔH/T) and MC-3 (the linear Kirchhoff form is correct while
+ΔC_p is near-constant) · `cell-thermo` MC-1 (ΔG° = −nFE°, so +1.10 V gives
+−212 kJ/mol; dropping the sign says a working battery is uphill) and MC-3
+(E° is thermodynamic; current is kinetics and internal resistance).
+
+All nineteen open a free `(conceptId, probeKind, gradeBand)` slot. 0 discarded,
+0 non-physics identities changed.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 119 of 186 | 114 | 61 | 4 | 48 | 21 | 10 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 32 |
+| blueprint MCs with no probe | 56 | 40 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+61 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and the 116 probes authored across the last seven assessment
+batches have never been seeded. Nothing here is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.
