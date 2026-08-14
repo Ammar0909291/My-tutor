@@ -7570,3 +7570,74 @@ session. Recorded as the top next item.
 (vector-products, significant-figures, vector-addition, momentum,
 circular-motion, torque). 232 are not certified. Physics Check 3 remains at
 1 of 222.
+
+---
+
+# Iteration — the silent lesson-switch failure, fixed and re-tested (2026-08-14)
+
+Closes the top item from the previous entry: the only defect from the
+phys.mech audit with direct learner impact.
+
+## The defect
+
+`lesson-init` is the ONLY writer of `activeLessonSlug`, and the chat route
+resolves which lesson to teach from that pointer. The write was awaited inside
+a try/catch that logged and continued. That is correct in intent — a learner
+must never lose their lesson to a bookkeeping write — and it is exactly why
+the failure was invisible:
+
+```
+Can't reach database server at ...pooler.supabase.com:6543
+Invalid `prisma.studentProgress.upsert()` invocation: Socket timeout
+[visual-v2] concept: 'phys.mech.momentum'   <- the OPENED lesson never
+                                               became active
+```
+
+What a learner experienced: open lesson B, receive lesson B's opening text
+looking perfectly successful, and then be taught lesson A on the next turn.
+Nothing in the response distinguished that from a working switch. It misled
+this audit too — a stale figure was briefly read as a visual-continuity defect
+when the lesson had simply never switched.
+
+## The fix
+
+The pooler recovered within seconds on both observations, so a bounded retry is
+the substance of it. The upsert is idempotent — it sets a pointer to a constant
+— so re-running it is always safe. Three attempts, 100 ms then 250 ms, paid
+ONLY on failure; a healthy write still costs exactly one attempt and no sleep,
+against an LLM call measured in seconds. The response now carries
+`activeLessonPersisted`, so a remaining failure is attributable rather than
+mysterious, and the non-fatal guarantee is unchanged.
+
+**Deliberately NOT done:** stashing the pointer in `contextSnapshot` as a
+fallback copy. That is the first thing a "make it survive the pooler" fix
+reaches for, and it would create a second authority for the fact the chat route
+resolves from. The regression test asserts the existing `contextSnapshot` READ
+stays and that no such write appears.
+
+## Live verification on production, after deploy
+
+Deployment `dpl_CMkAthWajQfRo2Cbhi6FqUvPeUvQ` (commit `20e4fed`).
+
+1. `POST /api/learn/lesson-init` for `phys.mech.torque` returned
+   `activeLessonPersisted = true` alongside `success` and `text`.
+2. Direct query confirmed the pointer actually moved:
+   `activeLessonSlug = phys.mech.torque`, written at 15:13:40 — and
+   `currentLesson` stayed at **5**, so the "opening a lesson is not progress"
+   invariant held. No rewind, no fabricated progress.
+3. End-to-end in a clean session, the switched lesson taught correctly and
+   served its own figure: scene `torque-2-10-90`, narration "the lever arm
+   pivoting at the origin and extending two metres to the point where a ten
+   newton force is applied at a ninety-degree angle". Figure and words agree.
+
+## A test artifact of mine, recorded
+
+An intermediate end-to-end attempt returned a RECOVERY response and no figure.
+Cause was my own harness: the until-loop I used to wait for the deploy called
+`lesson-init` repeatedly into a single session, leaving a pile of lesson
+openings behind. A clean session behaved correctly. Not a defect — method.
+
+## Validation
+
+`npx tsc --noEmit` clean; 332 files / 7075 passed / 9 skipped;
+`npm run build` exit 0; live re-test as above.
