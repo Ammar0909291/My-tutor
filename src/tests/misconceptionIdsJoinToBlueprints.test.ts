@@ -303,6 +303,31 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.alc.diols', 'treated with acid and rearranges')).toEqual(['MC3'])
   })
 
+  /**
+   * chem.kinet — a NEW variant: probes tagged with TWO ids where only one is
+   * actually tested. The extra id makes the concept look broader than it is
+   * and, worse, mis-routes a wrong answer to a second misconception the
+   * learner may not hold. Four of the seven concepts had this shape.
+   */
+  it('kinet: probes carry only the misconception they actually test', () => {
+    // stoichiometric rate ratios test MC-1; MC-3 ("heat melts particles")
+    // was along for the ride.
+    expect(tagOf('chem.kinet.rate', 'if d[O₂]/dt = 0.05 M/s')).toEqual(['MC1'])
+    // quantum yield >> 1 is MC-1; the Beer-Lambert log base (MC-2) is not asked.
+    expect(tagOf('chem.kinet.photochemistry', 'quantum yield of about 10')).toEqual(['MC1'])
+    // determining orders experimentally is MC-1, not "more concentration is
+    // always faster" (MC-2).
+    expect(tagOf('chem.kinet.rate-law', 'quadruples the rate')).toEqual(['MC1'])
+    // constant half-life => first order is MC-1; the 1/[A] slope is MC-2.
+    expect(tagOf('chem.kinet.integrated-rate', 'half-life of 10 days regardless')).toEqual(['MC1'])
+  })
+
+  it('kinet.mechanism: the rate-determining-step probe is MC1, the catalyst probe MC2', () => {
+    expect(tagOf('chem.kinet.mechanism', 'Step 1: A + B → C (slow)')).toEqual(['MC1'])
+    expect(tagOf('chem.kinet.mechanism', 'Should X appear in the overall balanced')).toEqual(['MC2'])
+    expect(tagOf('chem.kinet.mechanism', 'Is the mechanism thereby proved')).toEqual(['MC3'])
+  })
+
   it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
     // Both pre-existing probes ask about oxidation state (MC-3) while
     // carrying MC1 and MC2, leaving the fixed-valency and NCl5

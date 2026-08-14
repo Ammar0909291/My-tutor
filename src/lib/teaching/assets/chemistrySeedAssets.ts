@@ -1954,11 +1954,11 @@ const RATE_PROBES: SeedProbe[] = [
     choices: [
       { text: '0.10 M/s — O₂ appears at 1/1 coefficient rate, NO₂ disappears at 2/1 = twice that rate', isCorrect: true },
       { text: '0.05 M/s — rate is the same for all species in a reaction', isCorrect: false, misconceptionId: `${RATE}:MC1` },
-      { text: '0.025 M/s — NO₂ has coefficient 2 so divide by 2', isCorrect: false, misconceptionId: `${RATE}:MC3` },
+      { text: '0.025 M/s — NO₂ has coefficient 2 so divide by 2', isCorrect: false, misconceptionId: `${RATE}:MC1` },
     ],
     correctValue: '0.10 M/s',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${RATE}:MC1`, `${RATE}:MC3`],
+    targetedMisconceptions: [`${RATE}:MC1`],
     source: `${RATE_SRC} — distractor targets "all species change at same rate" misconception`,
   },
   {
@@ -1975,6 +1975,40 @@ const RATE_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${RATE}:MC2`],
     source: `${RATE_SRC} — misconception: coefficients = reaction order`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: RATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A first-order reaction runs to completion. Does its rate stay constant until the reactant runs out, then drop to zero?',
+    choices: [
+      { text: 'No — rate falls continuously from the start. As [A] drops there are fewer molecules to collide, so the concentration-time graph is a decaying curve, never a flat line with a cliff at the end', isCorrect: true },
+      { text: 'Yes — the rate holds steady while reactant remains and stops once it is consumed', isCorrect: false, misconceptionId: `${RATE}:MC2` },
+    ],
+    correctValue: 'no — the rate decreases continuously',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RATE}:MC2`],
+    source: `${RATE_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: RATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Heating a reaction from 25 C to 35 C roughly doubles its rate. Is that because the higher temperature melts or breaks apart the particles?',
+    choices: [
+      { text: 'No — it raises average kinetic energy, which both increases how often molecules collide and, far more importantly, increases the FRACTION of collisions carrying enough energy to clear the activation barrier', isCorrect: true },
+      { text: 'Yes — heat softens or melts the particles so they react more easily', isCorrect: false, misconceptionId: `${RATE}:MC3` },
+    ],
+    correctValue: 'no — more collisions above the activation energy',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RATE}:MC3`],
+    source: `${RATE_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -3085,11 +3119,11 @@ const PHOTOC_PROBES: SeedProbe[] = [
     choices: [
       { text: 'Each absorbed photon triggers a chain reaction producing about a million HCl molecules before the chain terminates', isCorrect: true },
       { text: 'The reaction is impossible since quantum yield can never exceed 1', isCorrect: false, misconceptionId: `${PHOTOC}:MC1` },
-      { text: 'A million photons are needed to make just one HCl molecule', isCorrect: false, misconceptionId: `${PHOTOC}:MC2` },
+      { text: 'A million photons are needed to make just one HCl molecule', isCorrect: false, misconceptionId: `${PHOTOC}:MC1` },
     ],
     correctValue: 'One photon triggers a million-step chain',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${PHOTOC}:MC1`, `${PHOTOC}:MC2`],
+    targetedMisconceptions: [`${PHOTOC}:MC1`],
     source: `${PHOTOC_SRC} — distractor targets "Φ≤1 always" and inverted quantum yield definition`,
   },
   {
@@ -3106,6 +3140,40 @@ const PHOTOC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PHOTOC}:MC3`],
     source: `${PHOTOC_SRC} — misconception: selective absorption is a concentration effect, not an energy-matching effect`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: PHOTOC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: A sample transmits one tenth of the incident light, so I0/I = 10. What is its absorbance?',
+    choices: [
+      { text: '1.00 — the Beer-Lambert law is defined with log base 10, A = log10(I0/I). Spectrometers report in these units directly; the factor 2.303 appears only when converting to natural logs', isCorrect: true },
+      { text: '2.303 — absorbance uses the natural logarithm, so A = ln(I0/I)', isCorrect: false, misconceptionId: `${PHOTOC}:MC2` },
+    ],
+    correctValue: 'A = 1.00',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PHOTOC}:MC2`],
+    source: `${PHOTOC_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: PHOTOC,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In the Chapman cycle, O2 + hv -> 2O. is followed by O. + O2 -> O3. Does the second step also need a photon?',
+    choices: [
+      { text: 'No — only the first step is photochemical. Once the oxygen radicals exist, the second step is a thermal (dark) reaction that runs without light. Secondary processes inherit reactive species, not photons', isCorrect: true },
+      { text: 'Yes — every step of a photochemical cycle is driven directly by absorbed light', isCorrect: false, misconceptionId: `${PHOTOC}:MC3` },
+    ],
+    correctValue: 'no — the second step is thermal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHOTOC}:MC3`],
+    source: `${PHOTOC_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -3164,11 +3232,11 @@ const RATEL_PROBES: SeedProbe[] = [
     choices: [
       { text: 'rate = k[A]²[B]¹ — quadrupling from doubling means order 2 in A; doubling from doubling means order 1 in B', isCorrect: true },
       { text: 'rate = k[A][B] — matches typical stoichiometric coefficients', isCorrect: false, misconceptionId: `${RATEL}:MC1` },
-      { text: 'rate = k[A]⁴[B]² — directly use the multiplication factors as exponents', isCorrect: false, misconceptionId: `${RATEL}:MC2` },
+      { text: 'rate = k[A]⁴[B]² — directly use the multiplication factors as exponents', isCorrect: false, misconceptionId: `${RATEL}:MC1` },
     ],
     correctValue: 'rate = k[A]²[B]',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${RATEL}:MC1`, `${RATEL}:MC2`],
+    targetedMisconceptions: [`${RATEL}:MC1`],
     source: `${RATEL_SRC} — distractor targets "exponent = coefficient" and "exponent = rate multiplier"`,
   },
   {
@@ -3185,6 +3253,40 @@ const RATEL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${RATEL}:MC1`],
     source: `${RATEL_SRC} — misconception: overall balanced equation gives rate law directly`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: RATEL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A reaction has rate = k[A]^-1[B]. What happens to the rate when you DOUBLE [A]?',
+    choices: [
+      { text: 'It HALVES — a negative order means the species inhibits the reaction. Raising a concentration does not always speed things up; enzyme inhibition behaves this way in practice', isCorrect: true },
+      { text: 'It doubles — more of any reactant means more collisions and a faster rate', isCorrect: false, misconceptionId: `${RATEL}:MC2` },
+    ],
+    correctValue: 'it halves — negative order',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RATEL}:MC2`],
+    source: `${RATEL_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: RATEL,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You compute k from two different runs of the same reaction at the same temperature but different starting concentrations. Should the two values of k agree?',
+    choices: [
+      { text: 'Yes — k is constant at a fixed temperature. It absorbs the factors that do NOT depend on concentration (collision frequency per unit concentration, steric factor, activation energy). Disagreement means the rate law itself is wrong', isCorrect: true },
+      { text: 'No — k depends on concentration, so different starting conditions give different values', isCorrect: false, misconceptionId: `${RATEL}:MC3` },
+    ],
+    correctValue: 'yes — k is concentration-independent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RATEL}:MC3`],
+    source: `${RATEL_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -3268,6 +3370,57 @@ const ARRH_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ARRH}:MC2`],
     source: `${ARRH_SRC} — misconception: catalysts change reaction thermodynamics (ΔH)`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: ARRH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You apply the Arrhenius equation using T = 25 for a reaction at 25 C. What is wrong?',
+    choices: [
+      { text: 'T must be in KELVIN — 298 K. The equation comes from the Boltzmann factor e^(-Ea/kT), where kT only has energy units if T is absolute. Celsius has an arbitrary zero and destroys that relation', isCorrect: true },
+      { text: 'Nothing — any consistent temperature scale works as long as you use it throughout', isCorrect: false, misconceptionId: `${ARRH}:MC1` },
+    ],
+    correctValue: 'T must be in kelvin (298 K)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARRH}:MC1`],
+    source: `${ARRH_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: ARRH,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A plot of ln k against 1/T has slope -8500 K. What is Ea?',
+    choices: [
+      { text: 'About 71 kJ/mol — the slope is -Ea/R, so Ea = -slope x R = 8500 x 8.314. The slope is NEGATIVE because Ea and R are both positive', isCorrect: true },
+      { text: 'About -71 kJ/mol — the slope equals +Ea/R, so Ea takes the slope\'s sign', isCorrect: false, misconceptionId: `${ARRH}:MC2` },
+    ],
+    correctValue: 'Ea = -slope x R = about 71 kJ/mol',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ARRH}:MC2`],
+    source: `${ARRH_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'true_false' keeps this slot a SINGLETON.
+    conceptId: ARRH,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In k = A e^(-Ea/RT), what does A represent?',
+    choices: [
+      { text: 'The pre-exponential factor — the limiting rate constant as T goes to infinity, when the exponential approaches 1 and effectively every collision reacts. The activation energy is Ea, sitting in the exponent', isCorrect: true },
+      { text: 'The activation energy — A is the energy barrier the reaction must overcome', isCorrect: false, misconceptionId: `${ARRH}:MC3` },
+    ],
+    correctValue: 'the pre-exponential factor, not Ea',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ARRH}:MC3`],
+    source: `${ARRH_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -4371,12 +4524,12 @@ const MECH_PROBES: SeedProbe[] = [
     stem: 'In a two-step mechanism, Step 1: A + B → C (slow); Step 2: C → D (fast). What is the experimental rate law?',
     choices: [
       { text: 'rate = k[A][B] — the rate-determining step (slowest, Step 1) sets the overall rate, and its molecularity gives the rate law directly', isCorrect: true },
-      { text: 'rate = k[C] — the rate law comes from the fast step since that\'s what produces the final product', isCorrect: false, misconceptionId: `${MECH}:MC3` },
+      { text: 'rate = k[C] — the rate law comes from the fast step since that\'s what produces the final product', isCorrect: false, misconceptionId: `${MECH}:MC1` },
       { text: 'rate = k[A][B][C] — include all species from both steps', isCorrect: false },
     ],
     correctValue: 'rate = k[A][B]',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${MECH}:MC3`],
+    targetedMisconceptions: [`${MECH}:MC1`],
     source: `${MECH_SRC} — distractor targets "fast step determines rate" misconception`,
   },
   {
@@ -4387,12 +4540,29 @@ const MECH_PROBES: SeedProbe[] = [
     stem: 'A proposed mechanism includes a catalyst X. Should X appear in the overall balanced equation for the reaction?',
     choices: [
       { text: 'No — X is consumed in an early step and regenerated in a later step, so it cancels out of the overall equation, just like an intermediate cancels out (but in the opposite order: reactant-then-product vs. product-then-reactant)', isCorrect: true },
-      { text: 'Yes — catalysts must appear in the overall equation since they participate directly in the reaction', isCorrect: false, misconceptionId: `${MECH}:MC1` },
+      { text: 'Yes — catalysts must appear in the overall equation since they participate directly in the reaction', isCorrect: false, misconceptionId: `${MECH}:MC2` },
     ],
     correctValue: 'No — catalysts cancel out like intermediates',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${MECH}:MC1`],
+    targetedMisconceptions: [`${MECH}:MC2`],
     source: `${MECH_SRC} — misconception: catalysts show up in the overall stoichiometric equation`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: MECH,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: A proposed mechanism correctly predicts the observed rate law, rate = k[NO]^2[O2]. Is the mechanism thereby proved?',
+    choices: [
+      { text: 'No — other mechanisms can be written that derive the SAME rate law, so matching it cannot distinguish between them. A rate law can only rule mechanisms OUT; confirming one needs independent evidence such as detecting the intermediate', isCorrect: true },
+      { text: 'Yes — reproducing the experimental rate law is what establishes a mechanism as correct', isCorrect: false, misconceptionId: `${MECH}:MC3` },
+    ],
+    correctValue: 'no — a rate law can only eliminate mechanisms',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${MECH}:MC3`],
+    source: `${MECH_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -4452,12 +4622,12 @@ const INTRATE_PROBES: SeedProbe[] = [
     stem: 'A radioactive isotope has a half-life of 10 days regardless of how much sample you start with. This constant half-life property indicates the decay is:',
     choices: [
       { text: 'First order — constant half-life independent of starting concentration is the defining signature of first-order kinetics', isCorrect: true },
-      { text: 'Zero order — the amount decreasing at a constant rate implies zero order', isCorrect: false, misconceptionId: `${INTRATE}:MC2` },
+      { text: 'Zero order — the amount decreasing at a constant rate implies zero order', isCorrect: false, misconceptionId: `${INTRATE}:MC1` },
       { text: 'It could be any order — half-life is always constant regardless of order', isCorrect: false, misconceptionId: `${INTRATE}:MC1` },
     ],
     correctValue: 'First order',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${INTRATE}:MC1`, `${INTRATE}:MC2`],
+    targetedMisconceptions: [`${INTRATE}:MC1`],
     source: `${INTRATE_SRC} — distractor targets "half-life always constant" and "constant decrease = zero order" misconceptions`,
   },
   {
@@ -4474,6 +4644,40 @@ const INTRATE_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${INTRATE}:MC1`],
     source: `${INTRATE_SRC} — misconception: applying first-order constant-half-life property universally`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: INTRATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: For a second-order reaction, is the plot of 1/[A] against time rising or falling?',
+    choices: [
+      { text: 'RISING, with positive slope k — the integrated law is 1/[A]t = 1/[A]0 + kt, and as [A] falls its reciprocal grows (0.1 M gives 10, then 0.05 M gives 20)', isCorrect: true },
+      { text: 'Falling — [A] decreases over time, so 1/[A] decreases with it', isCorrect: false, misconceptionId: `${INTRATE}:MC2` },
+    ],
+    correctValue: 'rising, slope +k',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INTRATE}:MC2`],
+    source: `${INTRATE_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON.
+    conceptId: INTRATE,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Which plot comes out as a straight line for a FIRST-order reaction?',
+    choices: [
+      { text: 'ln[A] against t. Plotting [A] against t gives a decaying exponential curve for first order; [A] vs t is straight only for ZERO order, and 1/[A] vs t only for second order', isCorrect: true },
+      { text: '[A] against t — a straight-line concentration decay is the signature of first order', isCorrect: false, misconceptionId: `${INTRATE}:MC3` },
+    ],
+    correctValue: 'ln[A] vs t',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${INTRATE}:MC3`],
+    source: `${INTRATE_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -4556,6 +4760,23 @@ const CATAL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${CATAL}:MC2`],
     source: `${CATAL_SRC} — misconception: catalyst quantity (not surface area) determines rate enhancement`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON.
+    conceptId: CATAL,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A catalyst halves Ea from 80 to 40 kJ/mol at 298 K. Does the rate roughly double?',
+    choices: [
+      { text: 'No — the rate rises by roughly 10^7. Rate depends on e^(-Ea/RT), so the ratio is exp(40000/(8.314 x 298)) = exp(16.1). Ea enters exponentially, not proportionally', isCorrect: true },
+      { text: 'Yes — halving the activation energy roughly doubles the rate', isCorrect: false, misconceptionId: `${CATAL}:MC3` },
+    ],
+    correctValue: 'no — about a 10^7 increase',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CATAL}:MC3`],
+    source: `${CATAL_SRC} — MC3, distractor-mapped`,
   },
 ]
 

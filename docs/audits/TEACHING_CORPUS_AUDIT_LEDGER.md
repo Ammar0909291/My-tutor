@@ -5051,3 +5051,67 @@ group comes back off).
 
 `npx tsc --noEmit` clean; 325 files / 6,827 passed / 9 skipped; `npm run
 build` clean. 0 discarded, 0 non-physics identities changed. Offline only.
+
+---
+
+# chem.kinet (7 concepts) — a new variant: probes tagged with an id they don't test
+
+Chemistry **102 → 95** short; unprobed blueprint misconceptions **99 → 94**.
+
+## A fourth defect shape: the surplus tag
+
+Four of the seven concepts carried probes tagged with **two** misconception
+ids where only one is actually tested. The surplus id does two harmful things:
+it makes breadth look wider than it is, and a wrong answer is recorded against
+a second misconception the learner may not hold.
+
+| concept | probe | was | is |
+|---|---|---|---|
+| `rate` | stoichiometric rate ratios | MC1+**MC3** | MC1 |
+| `photochemistry` | quantum yield ≈ 10⁶ | MC1+**MC2** | MC1 |
+| `rate-law` | doubling [A] quadruples rate | MC1+**MC2** | MC1 |
+| `integrated-rate` | constant half-life ⇒ order | MC1+**MC2** | MC1 |
+
+Plus two ordinary retags on `mechanism`: the rate-determining-step probe was
+MC3 but derives the rate law from the MECHANISM (MC-1); the catalyst-in-overall-
+equation probe was MC1 but belongs with the intermediate-in-rate-law
+misconception (MC-2).
+
+## `chem.kinet.arrhenius` — the fourth hollow concept
+
+Both probes tested activation-energy-vs-thermodynamics (paper not igniting) and
+catalyst effect on ΔH — **neither documented on that concept**. Celsius-in-
+Arrhenius, the sign of the ln k vs 1/T slope, and the meaning of A all had no
+diagnostic. It gained three probes.
+
+## Thirteen probes authored
+
+`rate` MC-2 (rate falls continuously, no cliff) and MC-3 (heat raises the
+fraction of collisions over the barrier, it does not melt particles) ·
+`photochemistry` MC-2 (A = log₁₀(I₀/I) = 1.00, not 2.303) and MC-3 (the Chapman
+second step is thermal) · `rate-law` MC-2 (a negative order means doubling [A]
+HALVES the rate) and MC-3 (k is concentration-independent) · `arrhenius` MC-1
+(T must be kelvin), MC-2 (slope is −Ea/R, so Ea ≈ 71 kJ/mol from −8500 K),
+MC-3 (A is the pre-exponential factor) · `mechanism` MC-3 (a rate law can only
+rule mechanisms out) · `integrated-rate` MC-2 (1/[A] RISES) and MC-3 (ln[A] vs
+t is the first-order plot) · `catalysis` MC-3 (halving Ea gives ~10⁷, not 2×).
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus tags | no-valid-home | clean |
+|---|---|---|---|---|---|---|
+| chemistry | 55 of 186 | 50 | 26 | **4** | 11 | 3 |
+| physics | 0 of 238 | — | unknown | unknown | unknown | unknown |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 95 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 94 |
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,829 passed / 9 skipped; `npm run
+build` clean. 0 discarded, 0 non-physics identities changed. Offline only.
