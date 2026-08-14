@@ -322,7 +322,9 @@ describe('the non-physics authored corpora convert too', () => {
     //            ->  58 (chem.found x8 — a SECOND crossed pair, on
     //                   chem.found.stoichiometry, plus one hollow concept and
     //                   seven retag operations across six concepts)
-    ['chemistry', CHEMISTRY_PROBES, 58],
+    //            ->  50 (chem.elect x9 — THREE hollow concepts in one domain
+    //                   (galvanic-cell, corrosion, industrial), the most so far)
+    ['chemistry', CHEMISTRY_PROBES, 50],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

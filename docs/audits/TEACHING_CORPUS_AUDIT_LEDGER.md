@@ -6320,3 +6320,113 @@ production-verified.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# chem.elect — three hollow concepts in one domain
+
+Nine concepts, eighteen pre-existing probes. Five retag operations, eighteen
+probes authored, and **three hollow concepts in a single domain** — the most
+any domain has produced.
+
+## The three hollow concepts
+
+In each, both pre-existing probes are sound electrochemistry about the right
+topic, and neither is any of the three documented misconceptions.
+
+`galvanic-cell` asks about electrode POLARITY in an electrolytic cell and what
+happens when the salt bridge is removed. Its blueprint documents which metal is
+the anode, what `n` means in the Nernst equation, and what the bridge CARRIES.
+
+`corrosion` asks why rust flakes while aluminium oxide protects, and whether a
+scratched galvanised pipe still resists rust. Its blueprint documents
+tinning-versus-galvanising, WHERE the iron actually dissolves, and what
+"cathodic protection" names.
+
+`industrial` asks about cryolite's role and where recycling's energy saving
+comes from. Its blueprint documents chloralkali-versus-Down's-cell, whether the
+Hall-Héroult anodes are consumed, and which electrode is plated.
+
+Hollow total: 18.
+
+## Five retags
+
+`standard-electrode` P2 is the thermodynamics-versus-kinetics probe, which is
+MC-3 ("if E°cell > 0 the reaction WILL occur under all conditions"), not MC-2
+("more negative E° means less reactive") · `electrolysis` P1's distractor is
+"electrolyzing any solution containing a metal ion should always deposit that
+metal", which is MC-2 word for word, and it carried MC-1 (cathode sign) ·
+`nernst` P1's distractor is "E°cell = 0 so the cell can never produce voltage",
+which is MC-2, and it carried MC-1 (Q built per half-cell) · `conductance`
+P1's second distractor is the same κ/Λ_m conflation as its first, so MC-1, not
+MC-2 (Kohlrausch at all concentrations) · `concentration-cell` P1's "the high
+concentration drives oxidation" distractor is MC-2 (cathode always the
+higher-concentration side), so the probe now targets both ids its two
+distractors name.
+
+## Eighteen probes authored
+
+`standard-electrode` MC-2 (Li⁺/Li at −3.04 V is the MOST reactive metal — the
+table lists reductions) · `galvanic-cell` MC-1 (copper is the anode against
+silver and the CATHODE against zinc — the pair decides), MC-2 (n = 6 for
+2Al + 3Cu²⁺, the electrons transferred, not a coefficient) and MC-3 (electrons
+go through the wire; the bridge carries IONS) · `electrolysis` MC-1 (the
+cathode is NEGATIVE in an electrolytic cell; the invariant is that reduction
+happens there) and MC-3 (one faraday gives 108 g Ag but 9 g Al — equal
+equivalents, not equal masses) · `nernst` MC-1 (Q comes once from the overall
+reaction, not per half-cell) and MC-3 (0.059/n V per decade, so 0.059 V for
+Ag⁺ against 0.030 V for Cu²⁺) · `batteries` MC-2 (a clean product is not
+perfect efficiency; the ceiling is ΔG/ΔH) and MC-3 (nothing burns — separated
+half-reactions, and therefore no Carnot limit) · `corrosion` MC-1 (**tin
+ACCELERATES rusting at a scratch**, because it is the less reactive metal),
+MC-2 (differential aeration: the oxygen-poor centre is the anode, and rust
+deposits where Fe²⁺ meets OH⁻) and MC-3 (cathodic protection makes the
+structure the cathode) · `conductance` MC-2 (Kohlrausch's law holds at infinite
+dilution only) · `concentration-cell` MC-3 (**a pH meter IS a concentration
+cell**, 0.059 V per pH unit — small is not unimportant) · `industrial` MC-1
+(molten NaCl gives sodium metal, aqueous brine gives H₂ and NaOH), MC-2 (the
+carbon anodes are CONSUMED: C + O²⁻ → CO₂ + 4e⁻) and MC-3 (the plated object is
+the cathode, because deposition is reduction).
+
+All eighteen open a free `(conceptId, probeKind, gradeBand)` slot. 0 discarded,
+0 non-physics identities changed.
+
+## Curriculum feedback (recorded, not acted on)
+
+`chem.elect.nernst` MC-2 ("a concentration cell has E° = 0 so it can't generate
+voltage") and `chem.elect.concentration-cell` MC-1 ("a concentration cell
+cannot generate voltage because both electrodes are the same") are the same
+misconception documented under two concepts, and `concentration-cell` MC-3
+overlaps `nernst`'s territory too. Both concepts now probe it independently,
+which is correct behaviour for a shared misconception, but the duplication is
+worth the Curriculum Production Pipeline's attention.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 100 of 186 | 95 | 50 | 4 | 37 | 18 | 9 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+**Over half of chemistry is now stem-audited.** Of the 95 concepts that carried
+pre-existing probes, 50 had at least one mis-tagged probe — a rate above one in
+two — and 18 were fully hollow.
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 50 |
+| blueprint MCs with no probe | 56 | 55 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+50 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and the 79 probes authored across the last five assessment batches
+have never been seeded. Nothing here is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.

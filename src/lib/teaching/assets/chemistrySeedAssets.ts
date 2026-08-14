@@ -1824,11 +1824,11 @@ const ELCOND_PROBES: SeedProbe[] = [
     choices: [
       { text: 'κ decreases (fewer ions per unit volume) while Λ_m increases (less interionic drag per mole)', isCorrect: true },
       { text: 'Both κ and Λ_m increase (dilution always helps conductance)', isCorrect: false, misconceptionId: `${ELCOND}:MC1` },
-      { text: 'Both decrease (less solute means less of everything)', isCorrect: false, misconceptionId: `${ELCOND}:MC2` },
+      { text: 'Both decrease (less solute means less of everything)', isCorrect: false, misconceptionId: `${ELCOND}:MC1` },
     ],
     correctValue: 'κ decreases, Λ_m increases',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${ELCOND}:MC1`, `${ELCOND}:MC2`],
+    targetedMisconceptions: [`${ELCOND}:MC1`],
     source: `${ELCOND_SRC} — distractor targets "dilution increases κ" and "both decrease" misconceptions`,
   },
   {
@@ -1845,6 +1845,21 @@ const ELCOND_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ELCOND}:MC3`],
     source: `${ELCOND_SRC} — misconception: molar conductivity increase is about spacing, not dissociation`,
+  },
+  {
+    conceptId: ELCOND,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Kohlrausch's law of independent migration lets you add ionic conductivities to get Λ°_m. Can you use it at any concentration?",
+    choices: [
+      { text: "No — it holds at INFINITE DILUTION only, which is what the ° denotes. The law assumes the ions migrate independently, and that is only true when they are far enough apart to ignore each other. At real concentrations interionic attraction slows them, so measured Λ_m falls below the sum. Its practical use is the reverse direction: obtaining Λ°_m for a WEAK electrolyte, whose own extrapolation to zero concentration does not converge", isCorrect: true },
+      { text: "Yes — ionic conductivities are properties of the ions themselves, so they add at any concentration", isCorrect: false, misconceptionId: `${ELCOND}:MC2` },
+    ],
+    correctValue: "No — at infinite dilution only; interionic effects break independence at real concentrations",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ELCOND}:MC2`],
+    source: `${ELCOND_SRC} — MC-2: Kohlrausch's law applied at all concentrations, dropping the independent-migration condition it rests on`,
   },
 ]
 
@@ -10681,6 +10696,51 @@ const GALV_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${GALV}:MC2`],
     source: `${GALV_SRC} — misconception: missing salt bridge merely slows the reaction rather than halting it`,
   },
+  {
+    conceptId: GALV,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A cell is built from Cu (E° = +0.34 V) and Ag (E° = +0.80 V). Copper is the more reactive of the two. Is copper therefore the anode?",
+    choices: [
+      { text: "Yes here — but the reason is the COMPARISON, not copper's reactivity in isolation. The anode is whichever half-cell has the LOWER reduction potential of the pair, so the same copper electrode becomes the CATHODE when paired with zinc (E° = −0.76 V). \"The more reactive metal is the anode\" is a shortcut that only works while you happen to compare the right two", isCorrect: true },
+      { text: "Yes — copper is more reactive, and the more reactive metal is always the anode in any cell you build with it", isCorrect: false, misconceptionId: `${GALV}:MC1` },
+    ],
+    correctValue: "Yes against silver, but copper is the CATHODE against zinc — the pair decides, not the metal",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GALV}:MC1`],
+    source: `${GALV_SRC} — MC-1: "more reactive metal is always the anode" applied absolutely rather than as a comparison within the pair (Cu/Ag vs Cu/Zn discrimination pair)`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "For 2Al + 3Cu²⁺ → 2Al³⁺ + 3Cu, what value of n goes into the Nernst equation?",
+    choices: [
+      { text: "6 — the number of electrons ACTUALLY TRANSFERRED once the half-reactions are balanced against each other: 2Al → 2Al³⁺ + 6e⁻ and 3Cu²⁺ + 6e⁻ → 3Cu. n is not read off the coefficients of the species in the overall equation; it is the electron count that the two half-reactions had to share to cancel", isCorrect: true },
+      { text: "3 — take the largest coefficient in the balanced equation as written, which is the 3 in front of Cu²⁺", isCorrect: false, misconceptionId: `${GALV}:MC2` },
+    ],
+    correctValue: "6 — the electrons transferred, from the balanced half-reactions",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GALV}:MC2`],
+    source: `${GALV_SRC} — MC-2: n read off the overall equation's coefficients instead of the electrons transferred between balanced half-reactions`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: the salt bridge completes the circuit by carrying electrons from one half-cell to the other.",
+    choices: [
+      { text: "False — electrons never enter the solution. They travel through the EXTERNAL WIRE from anode to cathode; the salt bridge completes the circuit with ION flow, sending anions toward the anode and cations toward the cathode to cancel the charge that would otherwise build up. Two different carriers, two different paths — electrons in the metal, ions in the solution", isCorrect: true },
+      { text: "True — the salt bridge is the return path for the electrons, which is why the circuit stops without it", isCorrect: false, misconceptionId: `${GALV}:MC3` },
+    ],
+    correctValue: "False — ions move through the bridge; electrons move through the wire",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GALV}:MC3`],
+    source: `${GALV_SRC} — MC-3: the salt bridge treated as an electron conductor rather than an ion path`,
+  },
 ]
 
 // ─── chem.redox.disproportionation ───────────────────────────────────────────
@@ -12471,6 +12531,36 @@ const BATT_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${BATT}:MC2`],
     source: `${BATT_SRC} — misconception: fuel cells and batteries are structurally identical devices`,
   },
+  {
+    conceptId: BATT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A hydrogen fuel cell emits only water. Is it therefore 100% efficient?",
+    choices: [
+      { text: "No — the two claims are unrelated. Emitting only water is about the PRODUCT; efficiency is about how much of the reaction's free energy becomes electrical work. A practical hydrogen fuel cell runs at roughly 40-60%, with the rest lost as heat and to internal resistance. Its thermodynamic ceiling is ΔG/ΔH, which is below 1 and falls as temperature rises — clean exhaust is not free energy", isCorrect: true },
+      { text: "Yes — the only product is water, so nothing is wasted and all the energy is converted to electricity", isCorrect: false, misconceptionId: `${BATT}:MC2` },
+    ],
+    correctValue: "No — roughly 40-60% in practice; the ceiling is ΔG/ΔH, not 1",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BATT}:MC2`],
+    source: `${BATT_SRC} — MC-2: a clean product mistaken for perfect efficiency`,
+  },
+  {
+    conceptId: BATT,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: a hydrogen fuel cell works by burning hydrogen, and the heat released is converted into electricity.",
+    choices: [
+      { text: "False — nothing burns. The hydrogen is OXIDISED electrochemically at an anode while oxygen is reduced at a separate cathode, and the electrons are forced through an external circuit between the two. Keeping the two half-reactions apart is the whole design: a combustion engine has to go through heat and is therefore capped by the Carnot limit, and a fuel cell is not", isCorrect: true },
+      { text: "True — hydrogen combines with oxygen and burns, and the heat drives a generator inside the cell", isCorrect: false, misconceptionId: `${BATT}:MC3` },
+    ],
+    correctValue: "False — electrochemical half-reactions kept apart, no combustion, no Carnot limit",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BATT}:MC3`],
+    source: `${BATT_SRC} — MC-3: fuel cell treated as combustion plus a generator rather than as separated electrochemical half-reactions`,
+  },
 ]
 
 // ─── chem.elect.corrosion ────────────────────────────────────────────────────
@@ -12561,6 +12651,51 @@ const CORR_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CORR}:MC2`],
     source: `${CORR_SRC} — misconception: galvanizing provides only physical barrier protection, not sacrificial protection`,
   },
+  {
+    conceptId: CORR,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A tin-plated (tinned) steel can and a galvanised (zinc-coated) bucket both get scratched to bare iron. Do both keep protecting the iron?",
+    choices: [
+      { text: "No — they behave oppositely once broken. Zinc is MORE reactive than iron, so it keeps corroding sacrificially and the iron is still protected. Tin is LESS reactive than iron, so at the scratch the iron becomes the anode of a tin-iron couple and rusts FASTER than bare iron would. Tin protects only as an unbroken barrier", isCorrect: true },
+      { text: "Yes — both are metal coatings on iron, so both go on protecting it sacrificially at a scratch", isCorrect: false, misconceptionId: `${CORR}:MC1` },
+    ],
+    correctValue: "No — zinc protects sacrificially; tin accelerates rusting once broken",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CORR}:MC1`],
+    source: `${CORR_SRC} — MC-1: tinning assumed to protect sacrificially like galvanising, ignoring that tin is the less reactive metal`,
+  },
+  {
+    conceptId: CORR,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "A drop of water sits on an iron plate. Rust appears in a ring at the EDGE of the drop. Is that where the iron is dissolving?",
+    choices: [
+      { text: "No — the iron dissolves in the middle, where oxygen is scarcest, and that is the ANODE. Oxygen reaches the thin edge easily, so the edge is the CATHODE where O₂ is reduced. The Fe²⁺ from the centre and the OH⁻ from the edge meet partway and precipitate there. Rust marks where the two products MEET, not where metal is being lost", isCorrect: true },
+      { text: "Yes — rust is iron oxide, so it forms exactly where the iron is being eaten away", isCorrect: false, misconceptionId: `${CORR}:MC2` },
+    ],
+    correctValue: "No — the anode is the oxygen-poor centre; rust deposits where Fe²⁺ meets OH⁻",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CORR}:MC2`],
+    source: `${CORR_SRC} — MC-2: the rusted spot assumed to be the anode, ignoring differential aeration and where the products meet`,
+  },
+  {
+    conceptId: CORR,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: \"cathodic protection\" is so called because it protects the cathode of the corrosion cell.",
+    choices: [
+      { text: "False — it protects the structure BY MAKING IT the cathode. A more reactive metal (or an impressed current) is attached so the steel is forced to be the cathode, where reduction happens and no metal is lost; the sacrificial anode corrodes instead. The name describes the role the protected object is pushed into, not the thing being protected", isCorrect: true },
+      { text: "True — the technique works by shielding the cathode from attack, which is where corrosion would otherwise occur", isCorrect: false, misconceptionId: `${CORR}:MC3` },
+    ],
+    correctValue: "False — the protected structure is MADE the cathode; the sacrificial anode corrodes",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CORR}:MC3`],
+    source: `${CORR_SRC} — MC-3: "cathodic protection" parsed as protecting a cathode rather than as forcing the structure to become one`,
+  },
 ]
 
 // ─── chem.elect.standard-electrode ───────────────────────────────────────────
@@ -12640,12 +12775,27 @@ const STDELEC_PROBES: SeedProbe[] = [
     stem: 'A calculated E°cell for a reaction is −0.5V. Does this mean the reaction happens slowly, or that it is thermodynamically non-spontaneous as written?',
     choices: [
       { text: 'Thermodynamically non-spontaneous as written — a negative E°cell means positive ΔG° (via ΔG°=−nFE°); this is a statement about feasibility, not speed. The reverse reaction would be spontaneous instead', isCorrect: true },
-      { text: 'It happens slowly — a negative E°cell just indicates slow kinetics, not that the reaction is fundamentally non-spontaneous', isCorrect: false, misconceptionId: `${STDELEC}:MC2` },
+      { text: 'It happens slowly — a negative E°cell just indicates slow kinetics, not that the reaction is fundamentally non-spontaneous', isCorrect: false, misconceptionId: `${STDELEC}:MC3` },
     ],
     correctValue: 'Non-spontaneous (thermodynamic), not merely slow (kinetic)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${STDELEC}:MC2`],
+    targetedMisconceptions: [`${STDELEC}:MC3`],
     source: `${STDELEC_SRC} — misconception: conflating negative E°cell with slow kinetics rather than non-spontaneity`,
+  },
+  {
+    conceptId: STDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Li⁺/Li has E° = −3.04 V, the most negative in the table. Does that make lithium the LEAST reactive metal?",
+    choices: [
+      { text: "No — the opposite. A very negative reduction potential means the REDUCED form is very hard to keep reduced, i.e. lithium metal gives up its electron extremely readily. Lithium is one of the most reactive metals known. The sign runs the intuitive way round only if you remember the table lists REDUCTION half-reactions: the more negative the reduction potential, the more strongly the metal wants to be OXIDISED", isCorrect: true },
+      { text: "Yes — the most negative E° means the least ability to react, so lithium is the least reactive metal in the series", isCorrect: false, misconceptionId: `${STDELEC}:MC2` },
+    ],
+    correctValue: "No — most negative E° means most readily oxidised, i.e. most reactive",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STDELEC}:MC2`],
+    source: `${STDELEC_SRC} — MC-2: a more negative E° read as "less reactive", from forgetting the table lists reduction half-reactions`,
   },
 ]
 
@@ -12713,11 +12863,11 @@ const ELECTROLYSIS_PROBES: SeedProbe[] = [
     stem: 'Electrolyzing an AQUEOUS solution of NaCl produces H2 gas at the cathode, NOT sodium metal. Why?',
     choices: [
       { text: 'Water is easier to reduce than Na+ in aqueous solution (water\'s reduction potential is far less negative than Na+\'s −2.71V), so H2 forms preferentially; pure sodium metal requires electrolyzing MOLTEN (water-free) NaCl instead', isCorrect: true },
-      { text: 'This is an error — electrolyzing any solution containing a metal ion should always deposit that metal at the cathode', isCorrect: false, misconceptionId: `${ELECTROLYSIS}:MC1` },
+      { text: 'This is an error — electrolyzing any solution containing a metal ion should always deposit that metal at the cathode', isCorrect: false, misconceptionId: `${ELECTROLYSIS}:MC2` },
     ],
     correctValue: 'Water is preferentially reduced over Na+ in aqueous solution',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${ELECTROLYSIS}:MC1`],
+    targetedMisconceptions: [`${ELECTROLYSIS}:MC2`],
     source: `${ELECTROLYSIS_SRC} — distractor targets assuming aqueous electrolysis always deposits the intended metal ion`,
   },
   {
@@ -12734,6 +12884,36 @@ const ELECTROLYSIS_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${ELECTROLYSIS}:MC2`],
     source: `${ELECTROLYSIS_SRC} — misconception: treating Faraday's Law as approximate rather than an exact stoichiometric relationship`,
+  },
+  {
+    conceptId: ELECTROLYSIS,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "In an electrolytic cell driven by a power supply, is the cathode the positive or the negative electrode?",
+    choices: [
+      { text: "NEGATIVE — it is wired to the negative terminal, which pushes electrons into it so cations can be reduced there. The definition that never changes is functional: the CATHODE is where REDUCTION happens, in every cell. Its SIGN flips between cell types, because in a galvanic cell the cathode is positive. Learn the reaction, not the sign", isCorrect: true },
+      { text: "POSITIVE — the cathode attracts cations, which are positive, so the cathode must be the positive electrode", isCorrect: false, misconceptionId: `${ELECTROLYSIS}:MC1` },
+    ],
+    correctValue: "Negative in an electrolytic cell; the invariant is that reduction happens there",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ELECTROLYSIS}:MC1`],
+    source: `${ELECTROLYSIS_SRC} — MC-1: cathode assumed positive; the sign is cell-type-dependent while "reduction happens at the cathode" is not`,
+  },
+  {
+    conceptId: ELECTROLYSIS,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: passing the same charge through molten AlCl₃ and molten AgNO₃ deposits the same mass of aluminium and silver, because Faraday's Second Law says equal charge gives equal amounts.",
+    choices: [
+      { text: "False — equal charge deposits equal numbers of EQUIVALENTS, not equal masses. One faraday gives 108 g of silver (Ag⁺, one electron, M = 108) but only 9 g of aluminium (Al³⁺, three electrons, M = 27, so 27/3). Faraday's Second Law says the masses are in the ratio of the equivalent weights M/z, which is exactly what makes the two different", isCorrect: true },
+      { text: "True — the same quantity of electricity always liberates the same mass of any metal", isCorrect: false, misconceptionId: `${ELECTROLYSIS}:MC3` },
+    ],
+    correctValue: "False — masses go as M/z; 108 g Ag versus 9 g Al per faraday",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ELECTROLYSIS}:MC3`],
+    source: `${ELECTROLYSIS_SRC} — MC-3: Faraday's Second Law read as equal MASS rather than equal equivalents (M/z)`,
   },
 ]
 
@@ -13897,11 +14077,11 @@ const NERNST_PROBES: SeedProbe[] = [
     stem: 'A concentration cell has two identical Cu/Cu2+ half-cells but with different Cu2+ concentrations (0.1M vs 1.0M). Since both electrodes are chemically identical (E°cell = 0), can this cell produce a measurable voltage?',
     choices: [
       { text: 'Yes — the Nernst equation gives a nonzero E because Q ≠ 1 when concentrations differ; the cell is driven purely by the concentration gradient, spontaneously working to equalize concentrations, and can genuinely do electrical work', isCorrect: true },
-      { text: 'No — since E°cell = 0 (identical electrodes), the cell can never produce any measurable voltage regardless of concentration differences', isCorrect: false, misconceptionId: `${NERNST}:MC1` },
+      { text: 'No — since E°cell = 0 (identical electrodes), the cell can never produce any measurable voltage regardless of concentration differences', isCorrect: false, misconceptionId: `${NERNST}:MC2` },
     ],
     correctValue: 'Yes — concentration cells produce real voltage despite E°cell=0',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${NERNST}:MC1`],
+    targetedMisconceptions: [`${NERNST}:MC2`],
     source: `${NERNST_SRC} — distractor targets assuming E°cell=0 guarantees zero voltage under all conditions`,
   },
   {
@@ -13918,6 +14098,36 @@ const NERNST_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${NERNST}:MC2`],
     source: `${NERNST_SRC} — misconception: battery voltage remains flat until an abrupt drop rather than declining continuously`,
+  },
+  {
+    conceptId: NERNST,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "For Zn + Cu²⁺ → Zn²⁺ + Cu, how is Q built for the Nernst equation?",
+    choices: [
+      { text: "From the OVERALL cell reaction, in one expression: Q = [Zn²⁺]/[Cu²⁺], products over reactants, with the solid metals omitted. There is no separate Q per electrode to combine afterwards — the Nernst equation is applied once to the whole cell, using the same E° and the same n the cell reaction gives", isCorrect: true },
+      { text: "Work out a Q for each half-reaction separately at its own electrode, then combine the two results", isCorrect: false, misconceptionId: `${NERNST}:MC1` },
+    ],
+    correctValue: "Q = [Zn²⁺]/[Cu²⁺] from the overall reaction, applied once",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NERNST}:MC1`],
+    source: `${NERNST_SRC} — MC-1: Q computed per half-cell and combined, rather than once from the overall cell reaction`,
+  },
+  {
+    conceptId: NERNST,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "At 25 °C, raising [Cu²⁺] tenfold in a Cu²⁺/Cu half-cell raises its potential by about 0.030 V. If instead you raise [Ag⁺] tenfold in an Ag⁺/Ag half-cell, do you get the same 0.030 V?",
+    choices: [
+      { text: "No — about 0.059 V, twice as much. The per-decade shift is 0.059/n volts, and n differs: 2 for Cu²⁺ and 1 for Ag⁺. The Nernst equation is logarithmic in concentration but inversely proportional to the electron count, so \"one decade\" is not a fixed number of millivolts across different couples", isCorrect: true },
+      { text: "Yes — one factor of ten in concentration always shifts the potential by the same amount, so it is 0.030 V again", isCorrect: false, misconceptionId: `${NERNST}:MC3` },
+    ],
+    correctValue: "No — 0.059/n V per decade, so 0.059 V for Ag⁺ against 0.030 V for Cu²⁺",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NERNST}:MC3`],
+    source: `${NERNST_SRC} — MC-3: the per-decade Nernst shift assumed constant across couples, ignoring the 1/n factor`,
   },
 ]
 
@@ -14007,6 +14217,51 @@ const INDELEC_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${INDELEC}:MC2`],
     source: `${INDELEC_SRC} — misconception: attributing recycling energy savings primarily to avoided mining rather than avoided electrolysis`,
+  },
+  {
+    conceptId: INDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "Both the chloralkali process and the Down's cell electrolyse sodium chloride. Do they give the same products?",
+    choices: [
+      { text: "No, and the difference is the STATE of the electrolyte. The Down's cell electrolyses MOLTEN NaCl, where the only species present are Na⁺ and Cl⁻, so sodium METAL is produced. The chloralkali process electrolyses AQUEOUS brine, where water is reduced in preference to Na⁺, giving hydrogen and sodium hydroxide instead. Same salt, different phase, different products", isCorrect: true },
+      { text: "Yes — both electrolyse NaCl, so both give sodium metal and chlorine gas", isCorrect: false, misconceptionId: `${INDELEC}:MC1` },
+    ],
+    correctValue: "No — molten gives Na metal; aqueous gives H₂ and NaOH",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${INDELEC}:MC1`],
+    source: `${INDELEC_SRC} — MC-1: the two processes conflated because they share a salt, ignoring that molten and aqueous electrolytes discharge different species`,
+  },
+  {
+    conceptId: INDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "In the Hall-Héroult cell the carbon anodes have to be replaced regularly. Why, if they only carry current?",
+    choices: [
+      { text: "Because they are CONSUMED. The oxygen released by the reduction of alumina attacks the hot carbon immediately: C + O²⁻ → CO₂ + 4e⁻. The anodes are a genuine reactant, burning away and needing replacement every few weeks, and that carbon consumption is a large part of the process's CO₂ footprint. Inert anodes are still an active research goal precisely because these are not", isCorrect: true },
+      { text: "They gradually erode from the mechanical and thermal stress of the molten bath; chemically they are inert and just provide the connection", isCorrect: false, misconceptionId: `${INDELEC}:MC2` },
+    ],
+    correctValue: "They are consumed: C + O²⁻ → CO₂ + 4e⁻",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${INDELEC}:MC2`],
+    source: `${INDELEC_SRC} — MC-2: Hall-Héroult anodes assumed inert and permanent, when their consumption is part of the cell reaction`,
+  },
+  {
+    conceptId: INDELEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "True or false: when electroplating a spoon with silver, the spoon is connected as the ANODE, since it has to receive the silver.",
+    choices: [
+      { text: "False — the spoon is the CATHODE. Plating means depositing metal, deposition is REDUCTION (Ag⁺ + e⁻ → Ag), and reduction happens at the cathode in every cell. The silver ANODE is the one that dissolves, resupplying Ag⁺ to the bath. \"Positive attracts the object\" is not a rule; the rule is that the object being built up is where reduction occurs", isCorrect: true },
+      { text: "True — the object must be positive so that the metal ions in solution are attracted to it and stick", isCorrect: false, misconceptionId: `${INDELEC}:MC3` },
+    ],
+    correctValue: "False — the object plated is the cathode; the source metal is the anode",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${INDELEC}:MC3`],
+    source: `${INDELEC_SRC} — MC-3: the plated object assigned to the anode from an attraction intuition rather than from where reduction occurs`,
   },
 ]
 
@@ -18026,12 +18281,12 @@ const CONCELL_PROBES: SeedProbe[] = [
     stem: 'A concentration cell consists of two copper electrodes in CuSO₄ solutions at 1.0 M and 0.01 M. Which electrode is the anode?',
     choices: [
       { text: 'The 0.01 M electrode (anode) — copper dissolves here, raising the low concentration; the 1.0 M electrode is the cathode', isCorrect: true },
-      { text: 'The 1.0 M electrode (anode) — the high concentration drives oxidation at the more concentrated side', isCorrect: false, misconceptionId: `${CONCELL}:MC1` },
+      { text: 'The 1.0 M electrode (anode) — the high concentration drives oxidation at the more concentrated side', isCorrect: false, misconceptionId: `${CONCELL}:MC2` },
       { text: 'Neither — identical electrodes cannot be distinguished as anode or cathode', isCorrect: false, misconceptionId: `${CONCELL}:MC1` },
     ],
     correctValue: '0.01 M electrode is anode (Cu dissolves, concentrations equalise)',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${CONCELL}:MC1`],
+    targetedMisconceptions: [`${CONCELL}:MC1`, `${CONCELL}:MC2`],
     source: `${CONCELL_SRC} — anode assignment in concentration cell: dilute side oxidises`,
   },
   {
@@ -18072,6 +18327,21 @@ const CONCELL_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${CONCELL}:MC2`],
     source: `${CONCELL_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    conceptId: CONCELL,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: a concentration cell's EMF is always so small that it has no practical importance.",
+    choices: [
+      { text: "False — small is not the same as unimportant, and it is exactly what a pH meter measures. A glass electrode IS a concentration cell responding to the H⁺ difference across its membrane, at 0.059 V per pH unit; ion-selective electrodes and nerve membrane potentials work the same way. Small potentials are measurable to a millivolt, which is what makes them useful as SENSORS rather than as power sources", isCorrect: true },
+      { text: "True — with E° = 0 the voltage is tiny, so concentration cells are a textbook curiosity with no real use", isCorrect: false, misconceptionId: `${CONCELL}:MC3` },
+    ],
+    correctValue: "False — a pH meter is a concentration cell, at 0.059 V per pH unit",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CONCELL}:MC3`],
+    source: `${CONCELL_SRC} — MC-3: a small EMF equated with an unimportant one, missing the sensing applications that depend on it`,
   },
 ]
 

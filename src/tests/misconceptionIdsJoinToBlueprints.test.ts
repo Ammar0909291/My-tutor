@@ -372,6 +372,67 @@ describe('probes whose id joined but whose content did not', () => {
   })
 
   /**
+   * chem.elect — THREE hollow concepts in a single domain (galvanic-cell,
+   * corrosion, industrial), the most any domain has produced. In each, both
+   * pre-existing probes are sound electrochemistry about the right topic and
+   * neither is any of the three documented misconceptions: the galvanic-cell
+   * pair asks about electrode polarity and the salt bridge's necessity while
+   * its blueprint documents which metal is the anode, n in the Nernst
+   * equation, and what the bridge CARRIES; corrosion asks why rust flakes and
+   * whether galvanising survives a scratch while its blueprint documents
+   * tinning-versus-galvanising, where the metal actually dissolves, and what
+   * "cathodic protection" names; industrial asks about cryolite and recycling
+   * energy while its blueprint documents chloralkali-versus-Down's, whether
+   * Hall-Héroult anodes are consumed, and which electrode is plated.
+   */
+  it('elect: the five retags', () => {
+    // standard-electrode P2 is the thermodynamics-vs-kinetics probe = MC-3
+    // ("E°cell > 0 means it WILL occur"), not MC-2 ("negative = less reactive").
+    expect(tagOf('chem.elect.standard-electrode', 'thermodynamically non-spontaneous')).toEqual(['MC3'])
+    // electrolysis P1's distractor is "any solution containing a metal ion
+    // should always deposit that metal" — MC-2 verbatim, not MC-1 (cathode sign).
+    expect(tagOf('chem.elect.electrolysis', 'AQUEOUS solution of NaCl')).toEqual(['MC2'])
+    // nernst P1's distractor is "E°cell = 0 so never any voltage" — MC-2.
+    expect(tagOf('chem.elect.nernst', 'two identical Cu/Cu2+ half-cells')).toEqual(['MC2'])
+    // conductance P1's second distractor is the same kappa/Lambda conflation
+    // as its first = MC-1, not MC-2 (Kohlrausch at all concentrations).
+    expect(tagOf('chem.elect.conductance', 'On diluting a strong electrolyte')).toEqual(['MC1'])
+    // concentration-cell P1's "high concentration drives oxidation" distractor
+    // is MC-2 (cathode always the higher-concentration side), so the probe now
+    // targets both ids its two distractors name.
+    expect(tagOf('chem.elect.concentration-cell', 'Which electrode is the anode')).toEqual(['MC1', 'MC2'])
+  })
+
+  it('elect: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.elect.standard-electrode', 'most negative in the table')).toEqual(['MC2'])
+
+    expect(tagOf('chem.elect.galvanic-cell', 'Copper is the more reactive')).toEqual(['MC1'])
+    expect(tagOf('chem.elect.galvanic-cell', 'what value of n goes into')).toEqual(['MC2'])
+    expect(tagOf('chem.elect.galvanic-cell', 'carrying electrons from one half-cell')).toEqual(['MC3'])
+
+    expect(tagOf('chem.elect.electrolysis', 'is the cathode the positive or the negative')).toEqual(['MC1'])
+    expect(tagOf('chem.elect.electrolysis', 'molten AlCl')).toEqual(['MC3'])
+
+    expect(tagOf('chem.elect.nernst', 'how is Q built')).toEqual(['MC1'])
+    expect(tagOf('chem.elect.nernst', 'raising [Cu²⁺] tenfold')).toEqual(['MC3'])
+
+    expect(tagOf('chem.elect.batteries', 'Is it therefore 100% efficient')).toEqual(['MC2'])
+    expect(tagOf('chem.elect.batteries', 'works by burning hydrogen')).toEqual(['MC3'])
+
+    expect(tagOf('chem.elect.corrosion', 'tinned) steel can')).toEqual(['MC1'])
+    expect(tagOf('chem.elect.corrosion', 'drop of water sits on an iron plate')).toEqual(['MC2'])
+    expect(tagOf('chem.elect.corrosion', '"cathodic protection" is so called')).toEqual(['MC3'])
+
+    expect(tagOf('chem.elect.conductance', 'Kohlrausch')).toEqual(['MC2'])
+
+    expect(tagOf('chem.elect.concentration-cell', 'no practical importance')).toEqual(['MC3'])
+
+    expect(tagOf('chem.elect.industrial', 'Down\'s cell electrolyse sodium chloride')).toEqual(['MC1'])
+    expect(tagOf('chem.elect.industrial', 'carbon anodes have to be replaced')).toEqual(['MC2'])
+    expect(tagOf('chem.elect.industrial', 'electroplating a spoon')).toEqual(['MC3'])
+  })
+
+  /**
    * chem.found — a SECOND crossed pair, on chem.found.stoichiometry, and the
    * domain with the most retag operations so far (seven, across six of its
    * eight concepts).
