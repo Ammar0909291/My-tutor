@@ -324,7 +324,9 @@ describe('the non-physics authored corpora convert too', () => {
     //                   seven retag operations across six concepts)
     //            ->  50 (chem.elect x9 — THREE hollow concepts in one domain
     //                   (galvanic-cell, corrosion, industrial), the most so far)
-    ['chemistry', CHEMISTRY_PROBES, 50],
+    //            ->  41 (chem.atomic x10 — eleven retag operations, the most
+    //                   in any domain, plus one hollow concept)
+    ['chemistry', CHEMISTRY_PROBES, 41],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

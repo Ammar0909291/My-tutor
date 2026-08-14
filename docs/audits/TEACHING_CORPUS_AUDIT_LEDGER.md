@@ -6430,3 +6430,118 @@ production-verified.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# chem.atomic — eleven retags, and a probe that was excellent and filed wrong
+
+Ten concepts, twenty-one pre-existing probes. Eleven retag operations — the
+most in any single domain — eighteen probes authored, one hollow concept, and
+one genuinely clean concept.
+
+## The clearest illustration of this defect class: chem.atomic.bohr-model
+
+| probe | what it tests | it carried |
+|---|---|---|
+| "which energy level has the MOST negative energy?" — both distractors are the energy-versus-distance confusion | MC-1 word for word | **MC2** |
+| "why does the Bohr model fail for helium?" | MC-2 itself | **MC3** |
+
+Both misconceptions were probed WELL, and both were filed under the wrong id.
+This is the sharpest statement of what the campaign keeps finding: the corpus
+is not badly written, it is badly indexed. A learner who picks either
+distractor gets MISCONCEPTION_DETECTED against a misconception they did not
+demonstrate, and the repair path serves them the wrong remedy — despite the
+question itself being exactly the right question to ask.
+
+## Ten further retag operations
+
+`subatomic-particles` P1's second distractor ("Z = 35, A = 17 — Z is the
+bigger number") is another Z/A confusion, not the ion-electron-count
+misconception it carried · `electromagnetic-radiation` P1's second distractor
+("all photons carry the same energy") is the same wavelength-energy error as
+its first, not MC-3 ("radio waves have no energy") · `quantum-mech-model` P1
+IS the uncertainty-is-instrumental probe, which is MC-3, and it carried MC-1
+(ψ versus ψ²) · `quantum-numbers` P1 tests that l runs 0…n−1, which is MC-1
+("l starts at 1"), and it carried MC-3 (mₛ belongs to the orbital) ·
+`electronic-config` P2's distractor is "electrons are removed from 3d first",
+which is MC-1 verbatim, and it carried MC-2.
+
+## One hollow concept, one clean concept
+
+`chem.atomic.orbitals` was hollow: "what is a node?" and "does one electron
+live in each lobe?" are both sound questions, and neither is MC-1 (d orbitals
+all have four lobes), MC-2 (radial node count) or MC-3 (same-n degeneracy).
+Hollow total: 19.
+
+`chem.atomic.photoelectric-effect` is one of the few CLEAN concepts this
+campaign has found — all three pre-existing probes diagnose the id they carry.
+It is now pinned, because a clean concept is as worth protecting as a repaired
+one.
+
+## An orphan id, recorded not fixed
+
+`chem.atomic.electromagnetic-radiation` P2 carries
+`chem.atomic.electromagnetic-radiation:MC4`, and its blueprint documents only
+MC-1 to MC-3. The probe is a unit-conversion slip ("forgot to convert nm to
+m"), which is a real and useful error to catch and which the blueprint does not
+document anywhere. Retargeting it onto MC-1, MC-2 or MC-3 would make the
+number pass while attaching the probe to the wrong diagnosis — worse than the
+gap. It is one of the four chemistry orphans the
+`misconceptionIdsJoinToBlueprints` ratchet already tracks, and it stays there
+as curriculum feedback.
+
+## Eighteen probes authored
+
+`atomic-theory` MC-2 (**about 1 in 8000 alphas bounced — the RARITY is the
+result**) and MC-3 (chlorine's 35.5 is a weighted average of two isotopes, not
+one atom's mass) · `subatomic-particles` MC-3 (Cl⁻ has 18 electrons to 17
+protons; the difference IS the charge) · `electromagnetic-radiation` MC-2 (a
+dim BLUE lamp emits higher-energy photons than a bright red one — intensity is
+photon count) and MC-3 (radio photons carry ~10⁻²⁴ J, small but never zero) ·
+`atomic-spectra` MC-1 (a hot solid gives continuous, isolated low-pressure
+atoms give lines) and MC-3 (**absorption is the same fingerprint as emission,
+read as dark lines** — which is how the Fraunhofer lines identify the Sun's
+elements) · `bohr-model` MC-3 (still exact for hydrogen to four significant
+figures; superseded means bounded, not void) · `quantum-mech-model` MC-1 (ψ²
+is the probability; ψ can be negative, and that sign is what makes orbitals
+interfere) and MC-2 (the sphere is a 90% contour, so the electron is outside it
+10% of the time) · `quantum-numbers` MC-2 (mₗ labels degenerate orbitals; the
+direction depends on the axes chosen) and MC-3 (mₛ belongs to the ELECTRON,
+which is why Pauli caps an orbital at two) · `orbitals` MC-1 (**d_z² has two
+lobes and a ring, not four lobes**), MC-2 (radial nodes are n − l − 1; n − 1 is
+the TOTAL) and MC-3 (4s < 4p in a multielectron atom — and without that
+splitting the periodic table would have a different shape) ·
+`electronic-config` MC-2 (Hund's rule applies within one degenerate set, not
+across subshells) and MC-3 (Cr's anomaly is near-degenerate 4s/3d plus exchange
+energy; "half-filled is stable" is the observation being explained) ·
+`photoelectric-effect` MC-3 (Δx·Δp ≥ ℏ/2 follows from the wave description, so
+no gentler instrument can evade it).
+
+All eighteen open a free `(conceptId, probeKind, gradeBand)` slot. 0 discarded,
+0 non-physics identities changed.
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | surplus | no-valid-home | hollow | clean |
+|---|---|---|---|---|---|---|---|
+| chemistry | 110 of 186 | 105 | 56 | 4 | 41 | 19 | 10 |
+| physics | 0 of 238 | — | — | — | — | — | — |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 41 |
+| blueprint MCs with no probe | 56 | 46 |
+| contradictory / inert / undeclared tags | 0 | 0 |
+
+## Production divergence
+
+56 corrected chemistry tags now differ from the 744 HUMAN_CURATOR rows in
+production, and the 97 probes authored across the last six assessment batches
+have never been seeded. Nothing here is production-served or
+production-verified.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.

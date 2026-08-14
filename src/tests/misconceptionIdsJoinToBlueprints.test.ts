@@ -372,6 +372,85 @@ describe('probes whose id joined but whose content did not', () => {
   })
 
   /**
+   * chem.atomic — eleven retag operations, the most in any single domain, and
+   * a reminder that a probe can be excellent and still be filed wrong.
+   *
+   * chem.atomic.bohr-model is the clearest case: BOTH of P1's distractors
+   * ("n = infinity, furthest means lowest energy"; "n = 1 has the highest
+   * energy because it is closest to the positive nucleus") are the
+   * energy-versus-distance confusion, which is MC-1 word for word, and both
+   * carried MC-2 ("Bohr describes all atoms"). Meanwhile P2 asks exactly why
+   * the model fails for helium — MC-2 itself — and carried MC-3. So MC-1 and
+   * MC-2 were each probed well and each filed under the wrong id.
+   *
+   * chem.atomic.orbitals was hollow: "what is a node?" and "does one electron
+   * live in each lobe?" are both sound, and neither is MC-1 (d orbitals all
+   * have four lobes), MC-2 (radial node count) or MC-3 (same-n degeneracy).
+   *
+   * chem.atomic.photoelectric-effect is one of the few CLEAN concepts found in
+   * this campaign — all three pre-existing probes diagnose the id they carry.
+   */
+  it('atomic.bohr-model: both misconceptions were probed, and both were filed wrong', () => {
+    expect(tagOf('chem.atomic.bohr-model', 'MOST negative (lowest) energy')).toEqual(['MC1'])
+    expect(tagOf('chem.atomic.bohr-model', 'fail for helium')).toEqual(['MC2'])
+    expect(tagOf('chem.atomic.bohr-model', 'Should it still be taught')).toEqual(['MC3'])
+  })
+
+  it('atomic: the other retags', () => {
+    // subatomic P1's second distractor is another Z/A confusion, not the
+    // ion-electron-count misconception it carried.
+    expect(tagOf('chem.atomic.subatomic-particles', 'An atom has 17 protons')).toEqual(['MC1'])
+    // EMR P1's second distractor is the same wavelength-energy error as its
+    // first, not MC-3 ("radio waves have no energy").
+    expect(tagOf('chem.atomic.electromagnetic-radiation', 'Which photon carries MORE energy')).toEqual(['MC1'])
+    // QMM P1 IS the uncertainty-is-instrumental probe = MC-3, not MC-1 (psi
+    // versus psi squared).
+    expect(tagOf('chem.atomic.quantum-mech-model', 'Heisenberg Uncertainty Principle states')).toEqual(['MC3'])
+    // QNUM P1 tests that l runs 0..n-1 = MC-1, not MC-3 (m_s belongs to the
+    // orbital).
+    expect(tagOf('chem.atomic.quantum-numbers', 'Which sub-shell does NOT exist')).toEqual(['MC1'])
+    // ECONF P2's distractor is "electrons are removed from 3d first" — MC-1
+    // verbatim, and it carried MC-2 (Hund across subshells).
+    expect(tagOf('chem.atomic.electronic-config', 'What is the configuration of Fe')).toEqual(['MC1'])
+  })
+
+  it('atomic: photoelectric-effect was already correct and stays correct', () => {
+    // Three probes, three correct tags, nothing to change. Pinned because a
+    // clean concept is as worth protecting as a repaired one.
+    expect(tagOf('chem.atomic.photoelectric-effect', 'work function of 4.0 eV')).toEqual(['MC1'])
+    expect(tagOf('chem.atomic.photoelectric-effect', 'double the INTENSITY')).toEqual(['MC1'])
+    expect(tagOf('chem.atomic.photoelectric-effect', 'tennis ball')).toEqual(['MC2'])
+  })
+
+  it('atomic: every documented misconception now has a probe authored FOR it', () => {
+    expect(tagOf('chem.atomic.atomic-theory', 'deflected backwards')).toEqual(['MC2'])
+    expect(tagOf('chem.atomic.atomic-theory', 'Chlorine is found as')).toEqual(['MC3'])
+
+    expect(tagOf('chem.atomic.subatomic-particles', 'chloride ion')).toEqual(['MC3'])
+
+    expect(tagOf('chem.atomic.electromagnetic-radiation', 'dim blue lamp')).toEqual(['MC2'])
+    expect(tagOf('chem.atomic.electromagnetic-radiation', 'radio waves carry no energy')).toEqual(['MC3'])
+
+    expect(tagOf('chem.atomic.atomic-spectra', 'tungsten filament lamp')).toEqual(['MC1'])
+    expect(tagOf('chem.atomic.atomic-spectra', '589 nm')).toEqual(['MC3'])
+
+    expect(tagOf('chem.atomic.quantum-mech-model', 'probability of finding it in a small volume')).toEqual(['MC1'])
+    expect(tagOf('chem.atomic.quantum-mech-model', '1s orbital is drawn as a sphere')).toEqual(['MC2'])
+
+    expect(tagOf('chem.atomic.quantum-numbers', 'pointing along the x-axis')).toEqual(['MC2'])
+    expect(tagOf('chem.atomic.quantum-numbers', 'same 2s orbital')).toEqual(['MC3'])
+
+    expect(tagOf('chem.atomic.orbitals', 'all five d orbitals have four lobes')).toEqual(['MC1'])
+    expect(tagOf('chem.atomic.orbitals', 'RADIAL nodes')).toEqual(['MC2'])
+    expect(tagOf('chem.atomic.orbitals', 'potassium atom')).toEqual(['MC3'])
+
+    expect(tagOf('chem.atomic.electronic-config', 'Hund')).toEqual(['MC2'])
+    expect(tagOf('chem.atomic.electronic-config', 'Chromium is')).toEqual(['MC3'])
+
+    expect(tagOf('chem.atomic.photoelectric-effect', 'gentler instrument')).toEqual(['MC3'])
+  })
+
+  /**
    * chem.elect — THREE hollow concepts in a single domain (galvanic-cell,
    * corrosion, industrial), the most any domain has produced. In each, both
    * pre-existing probes are sound electrochemistry about the right topic and

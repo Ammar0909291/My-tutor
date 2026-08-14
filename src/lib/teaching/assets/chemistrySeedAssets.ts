@@ -499,6 +499,36 @@ const ATTHY_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ATTHY}:MC1`],
     source: `${ATTHY_SRC} — misconception: one wrong postulate invalidates the entire model`,
   },
+  {
+    conceptId: ATTHY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "In Rutherford's gold-foil experiment, roughly what fraction of the alpha particles were deflected backwards?",
+    choices: [
+      { text: "About 1 in 8000 — and the rarity IS the result. Almost every alpha passed straight through, which is what showed the atom is mostly empty space; the tiny minority that bounced back showed the positive charge is concentrated in a very small, dense nucleus. If most had bounced, the conclusion would have been the opposite of the one Rutherford drew", isCorrect: true },
+      { text: "Most of them — the sheet of gold was solid, so nearly all the alpha particles bounced back off it", isCorrect: false, misconceptionId: `${ATTHY}:MC2` },
+    ],
+    correctValue: "About 1 in 8000; the rarity is what proved the atom is mostly empty space",
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ATTHY}:MC2`],
+    source: `${ATTHY_SRC} — MC-2: all (or most) alpha particles believed to have bounced back, which inverts the experiment's actual conclusion`,
+  },
+  {
+    conceptId: ATTHY,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Dalton said all atoms of a given element are identical. Chlorine is found as ³⁵Cl and ³⁷Cl. Is Dalton wrong?",
+    choices: [
+      { text: "On this point, yes — and the correction is ISOTOPES. Atoms of one element share the same proton number, which fixes their chemistry, but they can differ in neutron number and therefore in mass. That is why chlorine's relative atomic mass is 35.5: it is the weighted average of two real isotopes, not the mass of any single atom", isCorrect: true },
+      { text: "No — every chlorine atom is identical, and 35.5 is simply the true mass of one chlorine atom", isCorrect: false, misconceptionId: `${ATTHY}:MC3` },
+    ],
+    correctValue: "Yes on this point — isotopes differ in neutrons; 35.5 is a weighted average",
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ATTHY}:MC3`],
+    source: `${ATTHY_SRC} — MC-3: all atoms of an element assumed identical, so the non-integer relative atomic mass has no explanation`,
+  },
 ]
 
 // ─── chem.found.significant-figures ──────────────────────────────────────────
@@ -990,11 +1020,11 @@ const SUBAT_PROBES: SeedProbe[] = [
     choices: [
       { text: 'Z = 17, A = 35 (Z = protons; A = protons + neutrons)', isCorrect: true },
       { text: 'Z = 17, A = 52 (A = protons + neutrons + electrons)', isCorrect: false, misconceptionId: `${SUBAT}:MC1` },
-      { text: 'Z = 35, A = 17 (Z is the bigger number)', isCorrect: false, misconceptionId: `${SUBAT}:MC3` },
+      { text: 'Z = 35, A = 17 (Z is the bigger number)', isCorrect: false, misconceptionId: `${SUBAT}:MC1` },
     ],
     correctValue: 'Z=17, A=35',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${SUBAT}:MC1`, `${SUBAT}:MC3`],
+    targetedMisconceptions: [`${SUBAT}:MC1`],
     source: `${SUBAT_SRC} — distractor targets "electrons count toward mass number"`,
   },
   {
@@ -1011,6 +1041,21 @@ const SUBAT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SUBAT}:MC2`],
     source: `${SUBAT_SRC} — misconception: isotopes have different chemical properties`,
+  },
+  {
+    conceptId: SUBAT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A chloride ion, Cl⁻, has 17 protons. How many electrons does it have?",
+    choices: [
+      { text: "18 — one MORE than its protons. That extra electron is what makes it negative: charge = protons − electrons = 17 − 18 = −1. Electron count equals proton count only in a NEUTRAL atom; in an ion the two deliberately differ, and the difference IS the charge. A cation such as Na⁺ has one fewer electron than protons", isCorrect: true },
+      { text: "17 — an atom always has as many electrons as protons, so the chloride ion has 17 of each", isCorrect: false, misconceptionId: `${SUBAT}:MC3` },
+    ],
+    correctValue: "18 — protons minus electrons is the charge, so an ion must differ",
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUBAT}:MC3`],
+    source: `${SUBAT_SRC} — MC-3: electron count equated with proton count for an ion, which would make every ion neutral`,
   },
 ]
 
@@ -1067,11 +1112,11 @@ const EMR_PROBES: SeedProbe[] = [
     choices: [
       { text: '200 nm — shorter wavelength means higher frequency and therefore higher energy (E = hν = hc/λ)', isCorrect: true },
       { text: '600 nm — longer wavelength means more energy', isCorrect: false, misconceptionId: `${EMR}:MC1` },
-      { text: 'Same energy — all photons carry the same energy regardless of wavelength', isCorrect: false, misconceptionId: `${EMR}:MC3` },
+      { text: 'Same energy — all photons carry the same energy regardless of wavelength', isCorrect: false, misconceptionId: `${EMR}:MC1` },
     ],
     correctValue: '200 nm',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${EMR}:MC1`, `${EMR}:MC3`],
+    targetedMisconceptions: [`${EMR}:MC1`],
     source: `${EMR_SRC} — distractor targets "longer λ = more energy" misconception`,
   },
   {
@@ -1088,6 +1133,36 @@ const EMR_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${EMR}:MC4`],
     source: `${EMR_SRC} — misconception: forgetting nm→m conversion in c=λν`,
+  },
+  {
+    conceptId: EMR,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A dim blue lamp and a very bright red lamp are compared. Which emits the higher-ENERGY photons?",
+    choices: [
+      { text: "The dim BLUE lamp. Photon energy depends on FREQUENCY alone (E = hν), and blue light has a higher frequency than red. Brightness is the NUMBER of photons per second, not the energy of each one — so the bright red lamp delivers more total energy while every individual photon it emits carries less. That distinction is exactly what the photoelectric effect turns on", isCorrect: true },
+      { text: "The bright red lamp — it is far brighter, so it must be delivering higher-energy photons", isCorrect: false, misconceptionId: `${EMR}:MC2` },
+    ],
+    correctValue: "The blue lamp; intensity is photon COUNT, frequency sets photon ENERGY",
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EMR}:MC2`],
+    source: `${EMR_SRC} — MC-2: intensity (brightness) equated with photon energy, rather than with the number of photons`,
+  },
+  {
+    conceptId: EMR,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: radio waves carry no energy, which is why they are harmless to pass through.",
+    choices: [
+      { text: "False — every photon carries energy E = hν, and a radio photon simply carries very LITTLE of it (around 10⁻²⁴ J, some hundred million times less than a visible photon). Radio waves are harmless because each photon is far too weak to ionise a molecule, not because they carry none: a radio transmitter still radiates real power, and enough of them will heat you, which is what a microwave oven does", isCorrect: true },
+      { text: "True — radio waves are at the bottom of the spectrum, so they have zero energy", isCorrect: false, misconceptionId: `${EMR}:MC3` },
+    ],
+    correctValue: "False — E = hν is small but never zero; the harmlessness is about ionisation, not zero energy",
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EMR}:MC3`],
+    source: `${EMR_SRC} — MC-3: radio waves assumed to have no energy, conflating "too little to ionise" with "none"`,
   },
 ]
 
@@ -1663,6 +1738,36 @@ const SPEC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${SPEC}:MC1`],
     source: `${SPEC_SRC} — misconception: orbiting = radiating (classical vs Bohr model)`,
   },
+  {
+    conceptId: SPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "A tungsten filament lamp gives a continuous rainbow of colour; a hydrogen discharge tube gives a few sharp coloured lines. Why the difference?",
+    choices: [
+      { text: "Because the two sources emit by different mechanisms. A hot SOLID has its atoms packed so closely that their energy levels smear into continuous bands, so every wavelength is available. A low-pressure GAS has isolated atoms with sharp, discrete energy levels, so only the specific transition energies are emitted — and those give the lines. Continuous means dense matter; line means isolated atoms", isCorrect: true },
+      { text: "They are the same kind of spectrum — the hydrogen tube is just dimmer, so only its brightest wavelengths show up as lines", isCorrect: false, misconceptionId: `${SPEC}:MC1` },
+    ],
+    correctValue: "Hot dense solid gives continuous; isolated low-pressure atoms give lines",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPEC}:MC1`],
+    source: `${SPEC_SRC} — MC-1: continuous and line spectra assumed to come from the same source type, differing only in brightness`,
+  },
+  {
+    conceptId: SPEC,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Sodium's emission spectrum has a bright line at 589 nm. Where is 589 nm in its ABSORPTION spectrum?",
+    choices: [
+      { text: "At exactly the same place — as a DARK line on a bright background. Absorption and emission use the identical set of energy gaps, just in opposite directions: an atom absorbs at the same wavelengths it emits. That is why the Fraunhofer dark lines in sunlight identify the elements in the Sun's atmosphere. Same fingerprint, photographic negative", isCorrect: true },
+      { text: "Somewhere else — absorption and emission spectra are two different fingerprints for the same element", isCorrect: false, misconceptionId: `${SPEC}:MC3` },
+    ],
+    correctValue: "The same wavelength, as a dark line — one fingerprint, two directions",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SPEC}:MC3`],
+    source: `${SPEC_SRC} — MC-3: emission and absorption treated as different fingerprints rather than the same energy gaps read in reverse`,
+  },
 ]
 
 // ─── chem.atomic.photoelectric-effect ────────────────────────────────────────
@@ -1765,6 +1870,21 @@ const PHOTO_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${PHOTO}:MC2`],
     source: `${PHOTO_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    conceptId: PHOTO,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: the uncertainty principle says that measuring an electron's position disturbs it, so a gentler instrument would eventually beat the limit.",
+    choices: [
+      { text: "False — disturbance is a real effect but it is not the principle. Δx·Δp ≥ ℏ/2 follows from the electron HAVING a wave description at all: a wave packet localised in space is necessarily built from a spread of wavelengths, and wavelength is momentum. The spread exists before anyone measures it, so no instrument, however gentle, can be built to evade it", isCorrect: true },
+      { text: "True — every measurement disturbs the system, and the limit reflects how good our instruments currently are", isCorrect: false, misconceptionId: `${PHOTO}:MC3` },
+    ],
+    correctValue: "False — it follows from the wave description itself, not from measurement disturbance",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHOTO}:MC3`],
+    source: `${PHOTO_SRC} — MC-3: the uncertainty principle read as an instrument or disturbance limitation rather than as a property of wave descriptions`,
   },
 ]
 
@@ -2098,12 +2218,12 @@ const BOHR_PROBES: SeedProbe[] = [
     stem: 'In the hydrogen atom, which energy level has the MOST negative (lowest) energy?',
     choices: [
       { text: 'n = 1 (E₁ = −13.6 eV — closest to nucleus, most tightly bound)', isCorrect: true },
-      { text: 'n = ∞ (furthest from nucleus means lowest energy)', isCorrect: false, misconceptionId: `${BOHR}:MC2` },
-      { text: 'n = 1 has the highest energy because it\'s closest to the positive nucleus', isCorrect: false, misconceptionId: `${BOHR}:MC2` },
+      { text: 'n = ∞ (furthest from nucleus means lowest energy)', isCorrect: false, misconceptionId: `${BOHR}:MC1` },
+      { text: 'n = 1 has the highest energy because it\'s closest to the positive nucleus', isCorrect: false, misconceptionId: `${BOHR}:MC1` },
     ],
     correctValue: 'n = 1',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${BOHR}:MC2`],
+    targetedMisconceptions: [`${BOHR}:MC1`],
     source: `${BOHR_SRC} — distractor targets "close to nucleus = high energy" misconception`,
   },
   {
@@ -2114,12 +2234,27 @@ const BOHR_PROBES: SeedProbe[] = [
     stem: 'Why does the Bohr model fail for helium (2 electrons) while working perfectly for hydrogen (1 electron)?',
     choices: [
       { text: 'Bohr\'s model cannot account for electron-electron repulsion — with 2+ electrons, interelectronic forces make the problem unsolvable with simple circular orbits', isCorrect: true },
-      { text: 'Helium\'s nucleus is too heavy for the Bohr equations to work', isCorrect: false, misconceptionId: `${BOHR}:MC3` },
+      { text: 'Helium\'s nucleus is too heavy for the Bohr equations to work', isCorrect: false, misconceptionId: `${BOHR}:MC2` },
     ],
     correctValue: 'Electron-electron repulsion',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${BOHR}:MC3`],
+    targetedMisconceptions: [`${BOHR}:MC2`],
     source: `${BOHR_SRC} — misconception: Bohr fails due to nuclear mass (it fails due to multi-electron interactions)`,
+  },
+  {
+    conceptId: BOHR,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "The Bohr model is superseded by quantum mechanics. Should it still be taught and used?",
+    choices: [
+      { text: "Yes — it remains exactly right about the things it was built for. It predicts hydrogen's line spectrum to four significant figures, it introduced quantised energy levels, and E = −13.6/n² eV is still the working formula for hydrogen. A superseded model is one with a KNOWN DOMAIN, not one that was never right: quantum mechanics tells you where Bohr stops applying, which is more than \"wrong\" ever tells you", isCorrect: true },
+      { text: "No — it was proven wrong, so teaching it just installs an error that has to be unlearned later", isCorrect: false, misconceptionId: `${BOHR}:MC3` },
+    ],
+    correctValue: "Yes — it is exact for hydrogen and introduced quantisation; superseded means bounded, not void",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOHR}:MC3`],
+    source: `${BOHR_SRC} — MC-3: a superseded model read as void rather than as one with a stated domain of validity`,
   },
 ]
 
@@ -3180,12 +3315,12 @@ const QNUM_PROBES: SeedProbe[] = [
     stem: 'Which sub-shell does NOT exist: 1p, 2p, 3d, or 4f?',
     choices: [
       { text: '1p — for n=1, l can only be 0 (l goes from 0 to n−1), so only 1s exists', isCorrect: true },
-      { text: '3d — d orbitals never exist for any n value below 4', isCorrect: false, misconceptionId: `${QNUM}:MC3` },
+      { text: '3d — d orbitals never exist for any n value below 4', isCorrect: false, misconceptionId: `${QNUM}:MC1` },
       { text: '4f — f orbitals never exist for any n below 5', isCorrect: false },
     ],
     correctValue: '1p does not exist',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${QNUM}:MC3`],
+    targetedMisconceptions: [`${QNUM}:MC1`],
     source: `${QNUM_SRC} — distractor targets wrong minimum-n rules for d and f sub-shells`,
   },
   {
@@ -3202,6 +3337,36 @@ const QNUM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${QNUM}:MC2`],
     source: `${QNUM_SRC} — misconception: ml range starts at 0, not −l`,
+  },
+  {
+    conceptId: QNUM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "An electron is in a 2p orbital with mₗ = +1. Does that mean it is in the p orbital pointing along the x-axis?",
+    choices: [
+      { text: "No — the three mₗ values label three DEGENERATE, mutually orthogonal p orbitals, and which physical direction each corresponds to depends on the axes you chose. In a free atom there is no preferred direction at all, so the labelling is arbitrary; the familiar p_x, p_y, p_z are real combinations of the mₗ solutions. A direction only becomes meaningful once a field or a molecular framework picks one out", isCorrect: true },
+      { text: "Yes — each mₗ value corresponds to one fixed orbital direction in space, the same for every atom", isCorrect: false, misconceptionId: `${QNUM}:MC2` },
+    ],
+    correctValue: "No — mₗ labels degenerate orbitals; the direction depends on the chosen axes",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QNUM}:MC2`],
+    source: `${QNUM_SRC} — MC-2: a specific mₗ read as a fixed direction in space, independent of the chosen frame`,
+  },
+  {
+    conceptId: QNUM,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Two electrons occupy the same 2s orbital. What quantum number distinguishes them, and what is it a property OF?",
+    choices: [
+      { text: "mₛ, which is +½ for one and −½ for the other — and it is a property of the ELECTRON, not of the orbital. The first three quantum numbers (n, l, mₗ) specify the orbital; spin is an intrinsic property the electron itself carries into it. That is exactly why Pauli's principle caps an orbital at two electrons: there are only two spin states available to differ in", isCorrect: true },
+      { text: "mₛ — a property of the ORBITAL, which can be either spin-up or spin-down", isCorrect: false, misconceptionId: `${QNUM}:MC3` },
+    ],
+    correctValue: "mₛ = ±½, a property of the electron; n, l, mₗ specify the orbital",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QNUM}:MC3`],
+    source: `${QNUM_SRC} — MC-3: mₛ attributed to the orbital rather than to the electron, which breaks the Pauli argument`,
   },
 ]
 
@@ -3284,6 +3449,51 @@ const ORBIT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ORBIT}:MC2`],
     source: `${ORBIT_SRC} — misconception: p-orbital lobes house separate electrons`,
+  },
+  {
+    conceptId: ORBIT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Do all five d orbitals have four lobes?",
+    choices: [
+      { text: "No — four of them do (d_xy, d_yz, d_xz, d_x²−y²), but d_z² does not. It has two lobes along the z-axis plus a doughnut-shaped ring around the middle. It looks like the odd one out because it IS a combination of two of the original solutions, chosen so that exactly five real orbitals come out of the five mₗ values", isCorrect: true },
+      { text: "Yes — all five d orbitals have the same four-lobed cloverleaf shape, just in different orientations", isCorrect: false, misconceptionId: `${ORBIT}:MC1` },
+    ],
+    correctValue: "No — d_z² has two lobes plus a ring; the other four are four-lobed",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORBIT}:MC1`],
+    source: `${ORBIT_SRC} — MC-1: all five d orbitals assumed four-lobed, missing d_z² entirely`,
+  },
+  {
+    conceptId: ORBIT,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "How many RADIAL nodes does a 3p orbital have?",
+    choices: [
+      { text: "One. The count is n − l − 1 = 3 − 1 − 1 = 1. It is n − 1 only when l = 0, i.e. for s orbitals, which is why the rule looks right until the first time you apply it to a p or d orbital. The TOTAL node count is n − 1, split between radial nodes (n − l − 1) and angular nodes (l) — 3p has 1 radial and 1 angular, giving 2 in all", isCorrect: true },
+      { text: "Two — the number of radial nodes is n − 1, so 3 − 1 = 2", isCorrect: false, misconceptionId: `${ORBIT}:MC2` },
+    ],
+    correctValue: "One: radial nodes = n − l − 1; it is the TOTAL that is n − 1",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORBIT}:MC2`],
+    source: `${ORBIT_SRC} — MC-2: n − 1 applied to radial nodes, when that is the total node count (radial + angular)`,
+  },
+  {
+    conceptId: ORBIT,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "True or false: in a potassium atom, the 4s and 4p orbitals have the same energy because they share the same n.",
+    choices: [
+      { text: "False — that holds for HYDROGEN only. With more than one electron, inner electrons screen the nucleus, and an s electron penetrates closer to it than a p electron of the same shell, so it feels a larger effective nuclear charge and sits LOWER in energy. The ordering becomes 4s < 4p < 4d < 4f. If it were not for that splitting, 4s would never fill before 3d and the periodic table would have a different shape", isCorrect: true },
+      { text: "True — energy depends only on the principal quantum number, so all orbitals with n = 4 are degenerate", isCorrect: false, misconceptionId: `${ORBIT}:MC3` },
+    ],
+    correctValue: "False — degeneracy within a shell holds only for one-electron atoms; screening splits it",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ORBIT}:MC3`],
+    source: `${ORBIT_SRC} — MC-3: same-n degeneracy carried from hydrogen into multielectron atoms, ignoring penetration and screening`,
   },
 ]
 
@@ -4097,12 +4307,42 @@ const ECONF_PROBES: SeedProbe[] = [
     stem: 'Iron\'s ground-state configuration is [Ar]4s²3d⁶. What is the configuration of Fe²⁺?',
     choices: [
       { text: '[Ar]3d⁶ — both 4s electrons are removed first when forming the cation, since 4s becomes higher energy than 3d once occupied', isCorrect: true },
-      { text: '[Ar]4s²3d⁴ — electrons are removed from 3d first since it was filled last', isCorrect: false, misconceptionId: `${ECONF}:MC2` },
+      { text: '[Ar]4s²3d⁴ — electrons are removed from 3d first since it was filled last', isCorrect: false, misconceptionId: `${ECONF}:MC1` },
     ],
     correctValue: '[Ar]3d⁶',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${ECONF}:MC2`],
+    targetedMisconceptions: [`${ECONF}:MC1`],
     source: `${ECONF_SRC} — misconception: ions lose electrons in reverse of filling order`,
+  },
+  {
+    conceptId: ECONF,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: "Nitrogen has 7 electrons: 1s² 2s² 2p³. By Hund's rule, how are the three 2p electrons arranged?",
+    choices: [
+      { text: "One in each of the three 2p orbitals, all with parallel spins — singly first, pairing only once every orbital in THAT subshell holds one. Hund's rule applies WITHIN a set of degenerate orbitals, so it says nothing about spreading electrons across 2s and 2p, which differ in energy. The 2s pair up completely before 2p is touched", isCorrect: true },
+      { text: "One electron in each available orbital across the whole shell — 2s and 2p alike — before any pairing anywhere", isCorrect: false, misconceptionId: `${ECONF}:MC2` },
+    ],
+    correctValue: "One per 2p orbital with parallel spins; Hund applies within a degenerate set only",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ECONF}:MC2`],
+    source: `${ECONF_SRC} — MC-2: Hund's rule applied across all subshells rather than within one degenerate set`,
+  },
+  {
+    conceptId: ECONF,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: "Chromium is [Ar]4s¹3d⁵ rather than the expected [Ar]4s²3d⁴. Is \"half-filled subshells are more stable\" the reason?",
+    choices: [
+      { text: "That is the label, not the reason. Two real effects do the work: 4s and 3d lie very close in energy in this region, so promoting one electron costs little; and putting all six electrons in singly-occupied orbitals with parallel spins MINIMISES electron-electron repulsion while MAXIMISING exchange energy, a genuine quantum-mechanical stabilisation. \"Half-filled is stable\" is the observation being explained — which is why it fails to predict the exceptions further down the d-block", isCorrect: true },
+      { text: "Yes — half-filled and fully-filled subshells are simply more stable, and that is the complete explanation", isCorrect: false, misconceptionId: `${ECONF}:MC3` },
+    ],
+    correctValue: "No — near-degenerate 4s/3d plus reduced repulsion and exchange energy; the \"rule\" is the observation",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ECONF}:MC3`],
+    source: `${ECONF_SRC} — MC-3: the Cr/Cu anomalies explained by a memorised stability rule rather than by the energetics that produce it`,
   },
 ]
 
@@ -4165,11 +4405,11 @@ const QMM_PROBES: SeedProbe[] = [
     stem: 'The Heisenberg Uncertainty Principle states that we cannot simultaneously know an electron\'s exact position and momentum. This is because:',
     choices: [
       { text: 'It is a fundamental property of quantum systems arising from wave-particle duality, not a limitation of measurement technology', isCorrect: true },
-      { text: 'Our current instruments are not precise enough — future technology will overcome this limit', isCorrect: false, misconceptionId: `${QMM}:MC1` },
+      { text: 'Our current instruments are not precise enough — future technology will overcome this limit', isCorrect: false, misconceptionId: `${QMM}:MC3` },
     ],
     correctValue: 'Fundamental property, not instrument limitation',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${QMM}:MC1`],
+    targetedMisconceptions: [`${QMM}:MC3`],
     source: `${QMM_SRC} — distractor targets "measurement limitation" misconception`,
   },
   {
@@ -4186,6 +4426,36 @@ const QMM_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${QMM}:MC2`],
     source: `${QMM_SRC} — misconception: matter waves are literal physical undulations`,
+  },
+  {
+    conceptId: QMM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "For an electron in an orbital, which quantity gives the probability of finding it in a small volume: ψ or ψ²?",
+    choices: [
+      { text: "ψ² (strictly |ψ|²). ψ itself is the probability AMPLITUDE — it can be negative, and in general complex, so it cannot be a probability at all; negative probabilities do not exist. Squaring makes it real and non-negative. The sign of ψ is not discarded, though: it is precisely what makes orbitals interfere constructively or destructively when they combine into bonds", isCorrect: true },
+      { text: "ψ — the wavefunction is the probability, and ψ² is a separate derived quantity used for normalisation", isCorrect: false, misconceptionId: `${QMM}:MC1` },
+    ],
+    correctValue: "ψ² (the Born rule); ψ is an amplitude and can be negative",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${QMM}:MC1`],
+    source: `${QMM_SRC} — MC-1: ψ read as the probability itself, leaving no account of why a wavefunction may be negative`,
+  },
+  {
+    conceptId: QMM,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: "A 1s orbital is drawn as a sphere. Is that sphere the boundary the electron stays inside?",
+    choices: [
+      { text: "No — it is a chosen CONTOUR, normally the surface enclosing 90% of the probability. The electron's probability density falls off smoothly and never reaches exactly zero at any finite distance, so 10% of the time it is outside the drawn sphere. Draw the 95% surface and you get a bigger sphere for the same orbital: the boundary is a convention of the drawing, not a wall in the atom", isCorrect: true },
+      { text: "Yes — the surface is the edge of the orbital, and the electron is confined within it", isCorrect: false, misconceptionId: `${QMM}:MC2` },
+    ],
+    correctValue: "No — a 90% probability contour, chosen by convention; the density never truly ends",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${QMM}:MC2`],
+    source: `${QMM_SRC} — MC-2: the boundary surface read as a physical edge or orbit rather than as a chosen probability contour`,
   },
 ]
 
