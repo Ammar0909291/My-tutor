@@ -302,7 +302,8 @@ describe('the non-physics authored corpora convert too', () => {
     //                   missing misconception AND the missing third item)
     //            -> 132 (chem.state x6, chem.bio x4)
     //            -> 126 (chem.period x7, incl. five stem-vs-blueprint retags)
-    ['chemistry', CHEMISTRY_PROBES, 126],
+    //            -> 120 (chem.sol x6, incl. six more retags)
+    ['chemistry', CHEMISTRY_PROBES, 120],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

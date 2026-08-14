@@ -2035,12 +2035,12 @@ const SOLT_PROBES: SeedProbe[] = [
     stem: 'Oil does not dissolve in water but dissolves readily in hexane. This is best explained by:',
     choices: [
       { text: '"Like dissolves like" — oil and hexane are both nonpolar, so their intermolecular forces are compatible', isCorrect: true },
-      { text: 'Hexane reacts with oil to form a new compound that is soluble', isCorrect: false, misconceptionId: `${SOLT}:MC1` },
-      { text: 'Hexane is a stronger solvent than water', isCorrect: false, misconceptionId: `${SOLT}:MC3` },
+      { text: 'Hexane reacts with oil to form a new compound that is soluble', isCorrect: false, misconceptionId: `${SOLT}:MC2` },
+      { text: 'Hexane is a stronger solvent than water', isCorrect: false, misconceptionId: `${SOLT}:MC2` },
     ],
     correctValue: 'Like dissolves like',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${SOLT}:MC1`, `${SOLT}:MC3`],
+    targetedMisconceptions: [`${SOLT}:MC2`],
     source: `${SOLT_SRC} — distractor targets "dissolving = reaction" and "stronger solvent" misconceptions`,
   },
   {
@@ -2057,6 +2057,44 @@ const SOLT_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${SOLT}:MC4`],
     source: `${SOLT_SRC} — misconception: lower VP = weaker interactions (opposite is true)`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: SOLT,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Benzene and toluene form a near-IDEAL solution. HCl gas in water is strongly NON-ideal. Which pair is more soluble in one another?',
+    choices: [
+      { text: 'HCl in water, by far — "ideal" describes the mixing energetics (solute-solvent forces equal to the pure-component forces, hence Raoult\'s law), and says nothing about HOW MUCH will dissolve. The two are separate classifications', isCorrect: true },
+      { text: 'Benzene and toluene — an ideal solution is the purest kind, so it must be the more soluble pair', isCorrect: false, misconceptionId: `${SOLT}:MC1` },
+    ],
+    correctValue: 'HCl in water — ideality is not solubility',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SOLT}:MC1`],
+    source: `${SOLT_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: SOLT,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Soda water is a GAS (CO2) dissolved in a LIQUID. Is the resulting solution a gas or a liquid?',
+    choices: [
+      { text: 'A liquid — the solution takes the state of the SOLVENT, not the solute. Brass is solid-in-solid, air is gas-in-gas, but soda water is gas-in-liquid and is plainly liquid', isCorrect: true },
+      { text: 'A gas — the solute is a gas, so the solution must be a gas too', isCorrect: false, misconceptionId: `${SOLT}:MC3` },
+    ],
+    correctValue: 'liquid — the solvent sets the state',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SOLT}:MC3`],
+    source: `${SOLT_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -3306,12 +3344,31 @@ const SOLUB_PROBES: SeedProbe[] = [
     stem: 'A deep-sea diver must ascend slowly to avoid "the bends." Explain using Henry\'s Law.',
     choices: [
       { text: 'At depth, high pressure dissolves more N₂ in blood (Henry\'s Law). Rapid ascent drops pressure suddenly, and dissolved N₂ can\'t escape gradually — it forms bubbles in blood/tissue, which is dangerous.', isCorrect: true },
-      { text: 'Deep water is colder, which makes more gas dissolve; ascending warms the diver and gas escapes safely regardless of speed', isCorrect: false, misconceptionId: `${SOLUB}:MC2` },
+      { text: 'Deep water is colder, which makes more gas dissolve; ascending warms the diver and gas escapes safely regardless of speed', isCorrect: false, misconceptionId: `${SOLUB}:MC3` },
     ],
     correctValue: 'Pressure drop releases dissolved N₂ as bubbles',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${SOLUB}:MC2`],
+    targetedMisconceptions: [`${SOLUB}:MC3`],
     source: `${SOLUB_SRC} — misconception: attributing the bends to temperature rather than pressure change`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: SOLUB,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Raising the pressure of CO2 above a drink dissolves more of it. Does raising the pressure on solid NaCl in water dissolve more salt?',
+    choices: [
+      { text: 'No — Henry\'s law applies only to GASES in liquids. A solid is essentially incompressible, so there is no compressed phase forcing extra particles in; NaCl solubility is nearly unchanged by modest pressure', isCorrect: true },
+      { text: 'Yes — Henry\'s law relates pressure to solubility, so more pressure dissolves more of any solute', isCorrect: false, misconceptionId: `${SOLUB}:MC2` },
+    ],
+    correctValue: 'no — Henry\'s law is for gas solutes only',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SOLUB}:MC2`],
+    source: `${SOLUB_SRC} — MC2, distractor-mapped`,
   },
 ]
 
@@ -12144,11 +12201,11 @@ const VAPP_PROBES: SeedProbe[] = [
     stem: 'Does 1 mole of NaCl dissolved in water lower the solvent\'s vapor pressure by roughly the SAME amount as 1 mole of sugar (a non-dissociating molecular solute)?',
     choices: [
       { text: 'No — NaCl dissociates into Na+ and Cl- (2 particles per formula unit), roughly doubling the effective particle count compared to sugar (which stays as 1 intact particle), causing roughly twice the vapor pressure lowering', isCorrect: true },
-      { text: 'Yes — since both are 1 mole of solute, they must lower vapor pressure by exactly the same amount regardless of dissociation behavior', isCorrect: false, misconceptionId: `${VAPP}:MC1` },
+      { text: 'Yes — since both are 1 mole of solute, they must lower vapor pressure by exactly the same amount regardless of dissociation behavior', isCorrect: false, misconceptionId: `${VAPP}:MC2` },
     ],
     correctValue: 'No — NaCl lowers vapor pressure roughly twice as much due to dissociation',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${VAPP}:MC1`],
+    targetedMisconceptions: [`${VAPP}:MC2`],
     source: `${VAPP_SRC} — distractor targets ignoring dissociation's effect on effective particle count`,
   },
   {
@@ -12159,12 +12216,31 @@ const VAPP_PROBES: SeedProbe[] = [
     stem: 'Are vapor pressure lowering, boiling point elevation, and freezing point depression three separate phenomena requiring three independent explanations?',
     choices: [
       { text: 'No — all three are direct consequences of the same single underlying cause (Raoult\'s Law: solute particles reduce the solvent\'s effective surface fraction, lowering vapor pressure), which in turn shifts both the boiling and freezing points', isCorrect: true },
-      { text: 'Yes — each colligative property arises from a distinct, unrelated mechanism and must be understood and memorized separately', isCorrect: false, misconceptionId: `${VAPP}:MC2` },
+      { text: 'Yes — each colligative property arises from a distinct, unrelated mechanism and must be understood and memorized separately', isCorrect: false, misconceptionId: `${VAPP}:MC3` },
     ],
     correctValue: 'No — all three trace back to the same root cause (vapor pressure lowering)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${VAPP}:MC2`],
+    targetedMisconceptions: [`${VAPP}:MC3`],
     source: `${VAPP_SRC} — misconception: treating the colligative properties as unrelated, separately-memorized facts`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: VAPP,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Per mole of dissolved PARTICLES, glucose (weak H-bonding to water) and a strongly interacting solute lower the vapour pressure by about the same amount. What does that reveal about the mechanism?',
+    choices: [
+      { text: 'That the main cause is surface OCCUPANCY, not chemical attraction — solute particles take up surface positions and cut the fraction of solvent molecules able to escape. Bonding strength only adds secondary deviations', isCorrect: true },
+      { text: 'That the solute holds onto solvent molecules chemically, and the two solutes happen to bind with similar strength', isCorrect: false, misconceptionId: `${VAPP}:MC1` },
+    ],
+    correctValue: 'surface occupancy, a particle-count effect',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VAPP}:MC1`],
+    source: `${VAPP_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -13010,12 +13086,50 @@ const ACTIVITY_PROBES: SeedProbe[] = [
     stem: 'A precise electrochemistry experiment in a concentrated ionic solution shows a measured cell potential that deviates from the value predicted using simple concentrations in the Nernst equation. Does this deviation indicate an experimental error?',
     choices: [
       { text: 'No — this deviation is an expected, well-understood consequence of non-ideal solution behavior (interionic electrostatic interactions causing activity coefficients to differ from 1); using true activities instead of raw concentrations would resolve the discrepancy', isCorrect: true },
-      { text: 'Yes — any deviation from concentration-based predictions signals a flaw in either the experimental setup or the underlying theory', isCorrect: false, misconceptionId: `${ACTIVITY}:MC2` },
+      { text: 'Yes — any deviation from concentration-based predictions signals a flaw in either the experimental setup or the underlying theory', isCorrect: false, misconceptionId: `${ACTIVITY}:MC1` },
     ],
     correctValue: 'No — expected non-ideality, not an error',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${ACTIVITY}:MC2`],
+    targetedMisconceptions: [`${ACTIVITY}:MC1`],
     source: `${ACTIVITY_SRC} — misconception: deviation from concentration-based thermodynamic predictions indicates experimental/theoretical error`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: ACTIVITY,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: A molecular solution shows POSITIVE deviation from Raoult\'s law — its vapour pressure is higher than predicted. What does that imply about the activity coefficient?',
+    choices: [
+      { text: 'That gamma is GREATER than 1 — the substance behaves as if more concentrated than it is. The Debye-Huckel prediction of gamma < 1 applies only to dilute electrolytes, not as a universal ceiling', isCorrect: true },
+      { text: 'That gamma is still at most 1 — activity coefficients never exceed unity', isCorrect: false, misconceptionId: `${ACTIVITY}:MC2` },
+    ],
+    correctValue: 'gamma > 1',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACTIVITY}:MC2`],
+    source: `${ACTIVITY_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: ACTIVITY,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: What is the ionic strength of 0.1 M CaCl2?',
+    choices: [
+      { text: '0.3 M — I = half the sum of c*z^2, so (0.1 x 4) for Ca2+ plus (0.2 x 1) for Cl-, halved. The charge-squared weighting makes it three times the molar concentration', isCorrect: true },
+      { text: '0.1 M — the ionic strength is just the molar concentration of the salt', isCorrect: false, misconceptionId: `${ACTIVITY}:MC3` },
+    ],
+    correctValue: '0.3 M',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ACTIVITY}:MC3`],
+    source: `${ACTIVITY_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -13889,6 +14003,25 @@ const OSMOSIS_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${OSMOSIS}:MC2`],
     source: `${OSMOSIS_SRC} — misconception: treating hypotonic and hypertonic solution effects as interchangeable`,
   },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: OSMOSIS,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Blood plasma is about 0.28 M in dissolved particles at 310 K. Compute the osmotic pressure and judge whether it matters.',
+    choices: [
+      { text: 'pi = iMRT is about 720 kPa, roughly 7 atm — the pressure your red-cell membranes hold back continuously. Seawater desalination needs about 27 atm. Osmotic pressure is one of the larger pressures in biology, not a small correction', isCorrect: true },
+      { text: 'A fraction of an atmosphere — the solution is dilute, so the osmotic pressure is negligible in practice', isCorrect: false, misconceptionId: `${OSMOSIS}:MC3` },
+    ],
+    correctValue: 'about 7 atm — substantial',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${OSMOSIS}:MC3`],
+    source: `${OSMOSIS_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.poly.addition ──────────────────────────────────────────────────────
@@ -14735,11 +14868,11 @@ const COLLIG_PROBES: SeedProbe[] = [
     stem: 'A 0.1 molal solution of CaCl2 is prepared. What effective particle molality should be used in the freezing point depression formula ΔTf = i·Kf·m?',
     choices: [
       { text: '0.3 molal effective particles — CaCl2 fully dissociates into Ca2+ + 2Cl- (i=3 particles per formula unit), so 0.1 mol CaCl2 produces 0.3 mol of total dissolved particles', isCorrect: true },
-      { text: '0.1 molal — you should always use the stated molar concentration of the compound directly, without adjusting for dissociation', isCorrect: false, misconceptionId: `${COLLIG}:MC1` },
+      { text: '0.1 molal — you should always use the stated molar concentration of the compound directly, without adjusting for dissociation', isCorrect: false, misconceptionId: `${COLLIG}:MC2` },
     ],
     correctValue: '0.3 molal effective particles (i=3 for CaCl2)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${COLLIG}:MC1`],
+    targetedMisconceptions: [`${COLLIG}:MC2`],
     source: `${COLLIG_SRC} — distractor targets forgetting to apply the van't Hoff factor for a dissociating ionic solute`,
   },
   {
@@ -14756,6 +14889,44 @@ const COLLIG_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${COLLIG}:MC2`],
     source: `${COLLIG_SRC} — misconception: solute size/mass affects colligative property magnitude`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: COLLIG,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Why do the freezing-point and boiling-point formulas use MOLALITY rather than molarity, when the two are nearly equal in dilute water?',
+    choices: [
+      { text: 'Because molality is mass-based and so temperature-INDEPENDENT, while molarity shifts as the solution expands or contracts with temperature — and the two are close but genuinely unequal even when dilute, diverging further as concentration rises', isCorrect: true },
+      { text: 'They are interchangeable in dilute aqueous solution, so the choice is only a matter of convention', isCorrect: false, misconceptionId: `${COLLIG}:MC1` },
+    ],
+    correctValue: 'molality is temperature-independent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COLLIG}:MC1`],
+    source: `${COLLIG_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug and
+    // re-identify an existing probe.
+    conceptId: COLLIG,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: A red blood cell is dropped into pure water. Roughly what osmotic pressure acts on its membrane, and what happens?',
+    choices: [
+      { text: 'About 7 atm inward (pi = iMRT with roughly 0.28 M at 310 K) — enough to burst the cell. Osmotic pressure at ordinary biological concentrations is a real mechanical force, not a negligible one', isCorrect: true },
+      { text: 'Well under an atmosphere — the concentrations involved are far too low for osmotic pressure to do mechanical damage', isCorrect: false, misconceptionId: `${COLLIG}:MC3` },
+    ],
+    correctValue: 'about 7 atm inward — the cell lyses',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COLLIG}:MC3`],
+    source: `${COLLIG_SRC} — MC3, distractor-mapped`,
   },
 ]
 

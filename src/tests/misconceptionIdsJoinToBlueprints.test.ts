@@ -196,6 +196,40 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.period.electron-affinity', 'Which attracts an added electron more strongly')).toEqual(['MC1'])
   })
 
+  /**
+   * chem.sol — SIX more in six concepts. The running rate across every
+   * concept audited stem-by-stem is now 13 defects in 19 concepts that
+   * carried pre-existing probes.
+   */
+  it('sol.types: like-dissolves-like is MC2', () => {
+    // was MC1+MC3; MC-2 is "solubility is absolute", which is what the
+    // oil/water/hexane contrast actually diagnoses.
+    expect(tagOf('chem.sol.types', 'Oil does not dissolve in water')).toEqual(['MC2'])
+  })
+
+  it('sol.solubility: the bends is MC3, not MC2', () => {
+    // N2 is a non-reactive gas that nonetheless dissolves — MC-3. MC-2 is
+    // "Henry's law applies to solid solutes", which now has its own probe.
+    expect(tagOf('chem.sol.solubility', 'deep-sea diver must ascend slowly')).toEqual(['MC3'])
+    expect(tagOf('chem.sol.solubility', 'raising the pressure on solid NaCl')).toEqual(['MC2'])
+  })
+
+  it('sol.vapour-pressure: NaCl-vs-sugar is MC2 and the three-phenomena probe is MC3', () => {
+    expect(tagOf('chem.sol.vapour-pressure', 'roughly the SAME amount as 1 mole of sugar')).toEqual(['MC2'])
+    expect(tagOf('chem.sol.vapour-pressure', 'three separate phenomena')).toEqual(['MC3'])
+    expect(tagOf('chem.sol.vapour-pressure', 'Per mole of dissolved PARTICLES')).toEqual(['MC1'])
+  })
+
+  it('sol.activity: the deviation probe is MC1; gamma>1 is MC2', () => {
+    expect(tagOf('chem.sol.activity', 'measured cell potential that deviates')).toEqual(['MC1'])
+    expect(tagOf('chem.sol.activity', 'POSITIVE deviation from Raoult')).toEqual(['MC2'])
+  })
+
+  it('sol.colligative: the van\'t Hoff probe is MC2, not molarity-vs-molality', () => {
+    expect(tagOf('chem.sol.colligative', 'What effective particle molality')).toEqual(['MC2'])
+    expect(tagOf('chem.sol.colligative', 'rather than molarity')).toEqual(['MC1'])
+  })
+
   it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
     // Both pre-existing probes ask about oxidation state (MC-3) while
     // carrying MC1 and MC2, leaving the fixed-valency and NCl5

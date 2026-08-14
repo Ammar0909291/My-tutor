@@ -4802,3 +4802,69 @@ a curriculum decision.
 `npx tsc --noEmit` clean; 325 files / 6,812 passed / 9 skipped; `npm run
 build` clean. Offline only — no production write; production still carries the
 pre-correction tags because the seed script skips existing identities.
+
+---
+
+# chem.sol (6 concepts) — six more mis-tags; the rate is not improving
+
+Chemistry **126 → 120** short; unprobed blueprint misconceptions **121 → 115**.
+All six `chem.sol` concepts now hold ≥3 gradeable probes in one band.
+
+## Stem-vs-blueprint: 6 defects in 6 concepts
+
+| concept | stem | was | is |
+|---|---|---|---|
+| `types` | oil dissolves in hexane, not water | MC1+MC3 | **MC2** (like-dissolves-like *is* "solubility is absolute") |
+| `solubility` | the bends, via Henry's law | MC2 | **MC3** (N₂ is non-reactive yet dissolves) |
+| `vapour-pressure` | 1 mol NaCl vs 1 mol sugar | MC1 | **MC2** (what quantity enters Raoult's law) |
+| `vapour-pressure` | "three separate phenomena?" | MC2 | **MC3** (that *is* the unrelated-phenomena claim) |
+| `activity` | concentrated-solution cell deviation | MC2 | **MC1** (activity ≠ concentration; says nothing about γ≤1) |
+| `colligative` | CaCl₂ effective particle molality | MC1 | **MC2** (van 't Hoff dissociation, not molarity-vs-molality) |
+
+`chem.sol.types` was the worst: after correction, **all three of its documented
+misconceptions had been unprobed** — one probe covered MC-2 only, and the other
+carries `MC4`, an id its blueprint does not define (one of the four known
+chemistry orphans).
+
+## Nine probes authored
+
+`types` MC-1 (ideal ≠ soluble: benzene/toluene vs HCl-in-water) and MC-3 (soda
+water is gas-in-liquid but the solution is liquid) · `solubility` MC-2 (Henry's
+law is gas-only; pressure barely moves NaCl) · `vapour-pressure` MC-1 (surface
+occupancy, not chemical holding — equal lowering per particle regardless of
+bonding) · `activity` MC-2 (positive Raoult deviation ⇒ γ>1) and MC-3 (ionic
+strength of CaCl₂ is 0.3 M, not 0.1 M) · `osmosis` MC-3 and `colligative` MC-3
+(π = iMRT ≈ 7 atm — the pressure a red cell holds back) · `colligative` MC-1
+(molality is temperature-independent; molarity is not).
+
+## Identity discipline held from the start this time
+
+Every new probe took a free `(conceptId, probeKind, gradeBand)` slot —
+`checkpoint` for the first on a concept, `step_check` for the second — after
+the previous batch's collision. Verified: **0 discarded, 0 non-physics
+identities changed.**
+
+## Running stem-vs-blueprint tally
+
+| | audited | concepts with pre-existing probes | mis-tags found |
+|---|---|---|---|
+| chemistry | 29 of 186 | 25 | **13** |
+| physics | 0 of 238 | — | unknown |
+
+Better than one mis-tagged probe for every two concepts audited. Physics
+reads 0 short on probe count and has had **none** of this checking.
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 120 |
+| short within one band | 0 | 120 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 115 |
+| ids joining to no blueprint | 49 | 4 |
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,817 passed / 9 skipped; `npm run
+build` clean. Offline only — production still carries every pre-correction tag.
