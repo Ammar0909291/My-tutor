@@ -4932,3 +4932,65 @@ IONS) · `properties` MC-1 (solid NaCl has ions but they are immobile) and MC-2
 `npx tsc --noEmit` clean; 325 files / 6,822 passed / 9 skipped; `npm run
 build` clean. 0 discarded, 0 non-physics identities changed. Offline only —
 production still carries every pre-correction tag.
+
+---
+
+# chem.hyd (6 concepts) — two concepts had BOTH probes off-target
+
+Chemistry **114 → 108** short; unprobed blueprint misconceptions **109 → 103**.
+
+## Stem-vs-blueprint: 5 retags
+
+| concept | stem | was | is |
+|---|---|---|---|
+| `alkynes` | terminal C–H pKa 25 vs 50 | MC1 | **MC3** (acidity) |
+| `alkynes` | can a weak base deprotonate it? | MC2 | **MC3** (acidity) |
+| `petroleum` | why is cracking economically important | MC1 | **MC2** (cracking ≠ distillation) |
+| `petroleum` | does molecular shape affect fuel quality | MC2 | **MC3** (octane number) |
+| `arenes` | Cl deactivating yet o/p-directing | MC1 | **MC2** (directing effects) |
+
+`alkynes` had **both** probes on MC-3, leaving MC-1 (Lindlar vs Na/NH₃
+stereochemistry) and MC-2 (terminal-alkyne hydration gives a ketone, not an
+aldehyde) with no diagnostic at all.
+
+## Two concepts where every documented misconception was unprobed
+
+`alkanes` and `conformations` each had **both** probes testing something no MC
+on their concept documents — boiling-point trends and general reactivity for
+`alkanes`; conformer interconversion for `conformations`. Both therefore had
+all three MCs unprobed while reading as covered on every structural measure.
+Each gained three probes rather than a token third.
+
+## Thirteen probes authored
+
+`alkanes` MC-1 (R–X forms in the second propagation step, not initiation),
+MC-2 (bromine is the selective halogen, not chlorine), MC-3 ("free" rotation
+is not isoenergetic) · `alkenes` MC-2 (bromonium ion forces anti addition —
+cis-butene gives the racemate, not meso), MC-3 (hydroboration vs
+oxymercuration are complementary) · `alkynes` MC-1 (Lindlar gives cis, Na/NH₃
+gives trans), MC-2 (hex-1-yne hydrates to hexan-2-one) · `petroleum` MC-1
+(heavy fractions condense at the hot bottom) · `conformations` MC-1 (eclipsed
+is destabilised by torsional strain), MC-2 (a Newman front carbon shows four
+bonds), MC-3 (the ring flip swaps axial and equatorial) · `arenes` MC-1 (NO₂⁺
+is the electrophile), MC-3 (Friedel-Crafts alkylation rearranges).
+
+## Running stem-vs-blueprint tally
+
+| | audited | with pre-existing probes | mis-tags | no-valid-home |
+|---|---|---|---|---|
+| chemistry | 42 of 186 | 37 | **23** | 7 |
+| physics | 0 of 238 | — | unknown | unknown |
+
+## Measured state
+
+| | physics | chemistry |
+|---|---|---|
+| short of 3 gradeable | 0 | 108 |
+| single-misconception concepts | 1 (by design) | 0 |
+| blueprint MCs with no probe | 56 | 103 |
+| ids joining to no blueprint | 49 | 4 |
+
+## Validation
+
+`npx tsc --noEmit` clean; 325 files / 6,825 passed / 9 skipped; `npm run
+build` clean. 0 discarded, 0 non-physics identities changed. Offline only.

@@ -9257,6 +9257,60 @@ const ALKANE_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ALKANE}:MC2`],
     source: `${ALKANE_SRC} — misconception: alkanes are completely chemically inert`,
   },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALKANE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In free-radical chlorination of methane, which step first produces CH3Cl?',
+    choices: [
+      { text: 'The SECOND propagation step, CH3. + Cl2 -> CH3Cl + Cl. — initiation only splits Cl2 into two chlorine radicals and never touches the alkane, so no organic product can form there', isCorrect: true },
+      { text: 'The initiation step — that is where the reaction starts, so that is where the product first appears', isCorrect: false, misconceptionId: `${ALKANE}:MC1` },
+    ],
+    correctValue: 'the second propagation step',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKANE}:MC1`],
+    source: `${ALKANE_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALKANE,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Which halogen is MORE selective in radical halogenation of an alkane — chlorine or bromine?',
+    choices: [
+      { text: 'Bromine — H-abstraction by Br. is endothermic, giving a late, product-like transition state that reflects radical stability, so Br strongly prefers the tertiary position. Cl. is so reactive it discriminates barely at all', isCorrect: true },
+      { text: 'Chlorine — it is more electronegative, so it is choosier about which C-H bond it attacks', isCorrect: false, misconceptionId: `${ALKANE}:MC2` },
+    ],
+    correctValue: 'bromine is the selective one',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALKANE}:MC2`],
+    source: `${ALKANE_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'true_false' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALKANE,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Rotation about a C-C single bond is called "free". Does that mean every conformation has the same energy?',
+    choices: [
+      { text: 'No — "free" only means no barrier is high enough to PREVENT rotation, unlike a C=C where breaking the pi bond would cost over 250 kJ/mol. Staggered and eclipsed still differ in energy through torsional strain', isCorrect: true },
+      { text: 'Yes — free rotation means the conformations are energetically equivalent', isCorrect: false, misconceptionId: `${ALKANE}:MC3` },
+    ],
+    correctValue: 'no — free means unhindered, not isoenergetic',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ALKANE}:MC3`],
+    source: `${ALKANE_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.org.isomerism ──────────────────────────────────────────────────────
@@ -10809,11 +10863,11 @@ const PETRO_PROBES: SeedProbe[] = [
     stem: 'Why is cracking (breaking heavy hydrocarbon fractions into lighter ones) an economically important process in petroleum refining?',
     choices: [
       { text: 'Crude oil naturally contains more heavy, long-chain fractions than market demand requires relative to gasoline; cracking converts surplus heavy fractions into more of the high-demand lighter, gasoline-range molecules', isCorrect: true },
-      { text: 'Smaller hydrocarbon molecules are inherently more chemically stable and useful than larger ones for any purpose', isCorrect: false, misconceptionId: `${PETRO}:MC1` },
+      { text: 'Smaller hydrocarbon molecules are inherently more chemically stable and useful than larger ones for any purpose', isCorrect: false, misconceptionId: `${PETRO}:MC2` },
     ],
     correctValue: 'Cracking matches supply of fractions to market demand',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${PETRO}:MC1`],
+    targetedMisconceptions: [`${PETRO}:MC2`],
     source: `${PETRO_SRC} — distractor targets vague "smaller is better" reasoning instead of supply-demand economics`,
   },
   {
@@ -10824,12 +10878,30 @@ const PETRO_PROBES: SeedProbe[] = [
     stem: 'Does the shape of a hydrocarbon molecule (straight-chain vs. branched/cyclic) actually affect its quality as an engine fuel, given the same carbon count?',
     choices: [
       { text: 'Yes — straight-chain alkanes tend to ignite unevenly under compression (causing engine knocking), while branched and aromatic structures burn more smoothly; this is why reforming converts straight chains into branched/cyclic structures to improve octane rating', isCorrect: true },
-      { text: 'No — molecular shape has no effect on combustion quality; only the carbon count and total energy content matter for fuel performance', isCorrect: false, misconceptionId: `${PETRO}:MC2` },
+      { text: 'No — molecular shape has no effect on combustion quality; only the carbon count and total energy content matter for fuel performance', isCorrect: false, misconceptionId: `${PETRO}:MC3` },
     ],
     correctValue: 'Yes — molecular shape significantly affects combustion quality/octane rating',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${PETRO}:MC2`],
+    targetedMisconceptions: [`${PETRO}:MC3`],
     source: `${PETRO_SRC} — misconception: molecular shape is irrelevant to fuel combustion quality`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: PETRO,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: In a fractionating column, where are the HEAVY fractions collected, and why?',
+    choices: [
+      { text: 'Near the BOTTOM — vapours rise from the heated base and cool as they climb, so each fraction condenses where the temperature matches its boiling point. Heavy fractions boil highest, so they condense first, lowest down', isCorrect: true },
+      { text: 'Near the TOP — they are denser, so they are carried highest before settling out', isCorrect: false, misconceptionId: `${PETRO}:MC1` },
+    ],
+    correctValue: 'near the bottom, where the column is hottest',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PETRO}:MC1`],
+    source: `${PETRO_SRC} — MC1, distractor-mapped`,
   },
 ]
 
@@ -10921,6 +10993,60 @@ const CONFORM_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${CONFORM}:MC2`],
     source: `${CONFORM_SRC} — misconception: molecules become permanently fixed in the lowest-energy conformation`,
   },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: CONFORM,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In eclipsed ethane the C-H bonds line up at a 0 degree dihedral. Does that overlap make it the MORE stable conformation?',
+    choices: [
+      { text: 'No — eclipsed is the LESS stable one. Lining the bonds up brings non-bonded hydrogens closer than their van der Waals radii allow, which is repulsion (torsional strain), not bonding. Only bonds between atoms stabilise', isCorrect: true },
+      { text: 'Yes — more overlap means more sharing, so the eclipsed form is favoured', isCorrect: false, misconceptionId: `${CONFORM}:MC1` },
+    ],
+    correctValue: 'no — eclipsed is destabilised by torsional strain',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CONFORM}:MC1`],
+    source: `${CONFORM_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: CONFORM,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: In a Newman projection of ethane, how many bonds does the FRONT carbon show?',
+    choices: [
+      { text: 'Four — three C-H bonds drawn from the central dot, plus the C-C bond itself, which lies along the line of sight and is therefore not drawn as a separate line', isCorrect: true },
+      { text: 'Six — a Newman projection shows six bonds around each carbon', isCorrect: false, misconceptionId: `${CONFORM}:MC2` },
+    ],
+    correctValue: 'four — three drawn, plus the C-C along the line of sight',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CONFORM}:MC2`],
+    source: `${CONFORM_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'true_false' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: CONFORM,
+    subjectSlug: 'chemistry',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'PRACTICE: Methylcyclohexane undergoes a ring flip. The count of axial and equatorial bonds is unchanged, so is the molecule equally stable either way?',
+    choices: [
+      { text: 'No — the flip SWAPS which positions are axial and which are equatorial, so the methyl group moves from axial to equatorial. The equatorial chair is lower in energy by the A-value, and the two conformers are not equally populated', isCorrect: true },
+      { text: 'Yes — the same number of axial and equatorial positions exists before and after, so the energy is unchanged', isCorrect: false, misconceptionId: `${CONFORM}:MC3` },
+    ],
+    correctValue: 'no — the methyl moves axial to equatorial',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${CONFORM}:MC3`],
+    source: `${CONFORM_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.hyd.arenes ─────────────────────────────────────────────────────────
@@ -10991,11 +11117,11 @@ const ARENES_PROBES: SeedProbe[] = [
     stem: 'Chlorine on a benzene ring is deactivating (makes the ring less reactive overall) but ortho/para-directing. Is this a contradiction?',
     choices: [
       { text: 'No — these answer two different questions: overall reactivity is dominated by Cl\'s -I inductive withdrawal (deactivating), while positional directing preference is dominated by Cl\'s +M resonance donation (ortho/para-directing) — different effects can dominate different questions', isCorrect: true },
-      { text: 'Yes — deactivating groups must always be meta-directing; this combination is chemically impossible and indicates an error', isCorrect: false, misconceptionId: `${ARENES}:MC1` },
+      { text: 'Yes — deactivating groups must always be meta-directing; this combination is chemically impossible and indicates an error', isCorrect: false, misconceptionId: `${ARENES}:MC2` },
     ],
     correctValue: 'No — different effects (inductive vs mesomeric) dominate different aspects',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${ARENES}:MC1`],
+    targetedMisconceptions: [`${ARENES}:MC2`],
     source: `${ARENES_SRC} — distractor targets assuming activating/directing effects must always correlate simply`,
   },
   {
@@ -11012,6 +11138,42 @@ const ARENES_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${ARENES}:MC2`],
     source: `${ARENES_SRC} — misconception: benzene behaves like an ordinary polyene toward addition reactions`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ARENES,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Benzene is nitrated with HNO3 and concentrated H2SO4. What actually attacks the ring?',
+    choices: [
+      { text: 'The nitronium ion NO2+ — H2SO4 protonates HNO3 and dehydrates it to generate NO2+. HNO3 by itself is far too weak an electrophile to attack an electron-rich aromatic ring at any useful rate', isCorrect: true },
+      { text: 'Nitric acid itself — the sulfuric acid is only a solvent or drying agent', isCorrect: false, misconceptionId: `${ARENES}:MC1` },
+    ],
+    correctValue: 'the nitronium ion, NO2+',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ARENES}:MC1`],
+    source: `${ARENES_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ARENES,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Friedel-Crafts alkylation of benzene with 1-chloropropane and AlCl3. Do you get n-propylbenzene cleanly?',
+    choices: [
+      { text: 'No — the electrophile is a carbocation, and the primary one rearranges to the more stable secondary before it reaches the ring, so isopropylbenzene dominates. Alkylation is not a clean SN2-style substitution', isCorrect: true },
+      { text: 'Yes — the alkyl group transfers directly, as it would in an SN2 reaction', isCorrect: false, misconceptionId: `${ARENES}:MC3` },
+    ],
+    correctValue: 'no — carbocation rearrangement gives isopropylbenzene',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ARENES}:MC3`],
+    source: `${ARENES_SRC} — MC3, distractor-mapped`,
   },
 ]
 
@@ -12986,6 +13148,42 @@ const ALKENE_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ALKENE}:MC2`],
     source: `${ALKENE_SRC} — misconception: the peroxide/anti-Markovnikov effect applies generally to all hydrogen halides`,
   },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALKENE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Br2 adds to cis-but-2-ene and gives the racemic (d,l) pair, not the meso compound. What does that tell you about the facial selectivity?',
+    choices: [
+      { text: 'That addition is ANTI — a bridging bromonium ion blocks the near face, so bromide can only attack from the opposite side. Syn addition to a cis-alkene would have produced the meso product instead', isCorrect: true },
+      { text: 'That addition is SYN — both bromines are delivered to the same face of the double bond', isCorrect: false, misconceptionId: `${ALKENE}:MC2` },
+    ],
+    correctValue: 'anti addition, via the bromonium ion',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALKENE}:MC2`],
+    source: `${ALKENE_SRC} — MC2, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC3 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALKENE,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You want the OH on the LESS substituted carbon of an alkene. Hydroboration-oxidation or oxymercuration-demercuration?',
+    choices: [
+      { text: 'Hydroboration-oxidation — boron adds to the less substituted carbon, so OH ends up there (anti-Markovnikov). Oxymercuration puts OH on the MORE substituted carbon (Markovnikov); they are complementary, not equivalent', isCorrect: true },
+      { text: 'Either — both routes hydrate an alkene and give the same alcohol', isCorrect: false, misconceptionId: `${ALKENE}:MC3` },
+    ],
+    correctValue: 'hydroboration-oxidation',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALKENE}:MC3`],
+    source: `${ALKENE_SRC} — MC3, distractor-mapped`,
+  },
 ]
 
 // ─── chem.hal.elimination ────────────────────────────────────────────────────
@@ -13941,11 +14139,11 @@ const ALKYNE_PROBES: SeedProbe[] = [
     stem: 'The terminal C-H bond in a terminal alkyne (pKa ~25) is dramatically more acidic than a typical alkane C-H bond (pKa ~50). What structural feature causes this difference?',
     choices: [
       { text: 'The sp-hybridized carbon in the alkyne has 50% s-character (vs. 25% for sp3), holding the resulting carbanion\'s electron density closer to the nucleus and thus more stable, making the corresponding C-H bond more willing to release a proton', isCorrect: true },
-      { text: 'This must be an error — carbon\'s electronegativity doesn\'t change regardless of hybridization, so all hydrocarbon C-H bonds should have essentially identical acidity', isCorrect: false, misconceptionId: `${ALKYNE}:MC1` },
+      { text: 'This must be an error — carbon\'s electronegativity doesn\'t change regardless of hybridization, so all hydrocarbon C-H bonds should have essentially identical acidity', isCorrect: false, misconceptionId: `${ALKYNE}:MC3` },
     ],
     correctValue: 'Higher s-character in sp carbon stabilizes the resulting carbanion',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${ALKYNE}:MC1`],
+    targetedMisconceptions: [`${ALKYNE}:MC3`],
     source: `${ALKYNE_SRC} — distractor targets assuming hybridization has no effect on C-H bond acidity`,
   },
   {
@@ -13956,12 +14154,48 @@ const ALKYNE_PROBES: SeedProbe[] = [
     stem: 'Can a terminal alkyne be deprotonated by a weak base like water or a typical amine, given that it is described as relatively "acidic" among hydrocarbons?',
     choices: [
       { text: 'No — despite being far more acidic than typical hydrocarbons, terminal alkynes (pKa ~25) are still much less acidic than water (pKa ~15.7); deprotonation requires a genuinely strong base like NaNH2, not a weak base', isCorrect: true },
-      { text: 'Yes — since terminal alkynes are described as acidic, any weak base including water should be sufficient to deprotonate them', isCorrect: false, misconceptionId: `${ALKYNE}:MC2` },
+      { text: 'Yes — since terminal alkynes are described as acidic, any weak base including water should be sufficient to deprotonate them', isCorrect: false, misconceptionId: `${ALKYNE}:MC3` },
     ],
     correctValue: 'No — requires a strong base, not a weak one like water',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${ALKYNE}:MC2`],
+    targetedMisconceptions: [`${ALKYNE}:MC3`],
     source: `${ALKYNE_SRC} — misconception: relative acidity among hydrocarbons implies reactivity with weak bases like water`,
+  },
+  {
+    // Authored against the blueprint's MC1 TEXT, not its id.
+    // probeKind 'checkpoint' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALKYNE,
+    subjectSlug: 'chemistry',
+    probeKind: 'checkpoint',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: You need the CIS (Z) alkene from an internal alkyne. Lindlar catalyst or Na in liquid NH3?',
+    choices: [
+      { text: 'Lindlar — the poisoned Pd surface delivers both hydrogens to the SAME face (syn), giving cis. Na/NH3 goes through a radical anion and protonates to the trans (anti) product', isCorrect: true },
+      { text: 'Na in liquid NH3 — the dissolving-metal route gives the cis alkene and Lindlar gives trans', isCorrect: false, misconceptionId: `${ALKYNE}:MC1` },
+    ],
+    correctValue: 'Lindlar gives cis',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALKYNE}:MC1`],
+    source: `${ALKYNE_SRC} — MC1, distractor-mapped`,
+  },
+  {
+    // Authored against the blueprint's MC2 TEXT, not its id.
+    // probeKind 'step_check' keeps this slot a SINGLETON — chemistry is seeded
+    // in production, so reusing an occupied slot would ladder the slug.
+    conceptId: ALKYNE,
+    subjectSlug: 'chemistry',
+    probeKind: 'step_check',
+    gradeBand: GradeBand.HIGH,
+    stem: 'PRACTICE: Hex-1-yne is hydrated with H2SO4/HgSO4. What is the product?',
+    choices: [
+      { text: 'Hexan-2-one, a methyl KETONE — Markovnikov addition puts OH on the more substituted carbon and the enol tautomerises to the ketone. An aldehyde requires hydroboration with a bulky borane instead', isCorrect: true },
+      { text: 'Hexanal, an aldehyde — hydrating a terminal alkyne puts the oxygen on the terminal carbon', isCorrect: false, misconceptionId: `${ALKYNE}:MC2` },
+    ],
+    correctValue: 'hexan-2-one, a methyl ketone',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${ALKYNE}:MC2`],
+    source: `${ALKYNE_SRC} — MC2, distractor-mapped`,
   },
 ]
 

@@ -304,7 +304,8 @@ describe('the non-physics authored corpora convert too', () => {
     //            -> 126 (chem.period x7, incl. five stem-vs-blueprint retags)
     //            -> 120 (chem.sol x6, incl. six more retags)
     //            -> 114 (chem.solid x6, incl. five more retags)
-    ['chemistry', CHEMISTRY_PROBES, 114],
+    //            -> 108 (chem.hyd x6, incl. five more retags)
+    ['chemistry', CHEMISTRY_PROBES, 108],
     ['biology', BIOLOGY_PROBES, 108],
     ['computer_science', CS_PROBES, 119],
   ]

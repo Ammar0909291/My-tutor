@@ -261,6 +261,30 @@ describe('probes whose id joined but whose content did not', () => {
     expect(tagOf('chem.solid.properties', 'Solid NaCl is packed full')).toEqual(['MC1'])
   })
 
+  /**
+   * chem.hyd — FIVE more retags. Two concepts (alkanes, conformations) had
+   * BOTH probes testing something no misconception on their concept
+   * documents, so both concepts had all three MCs unprobed while reading as
+   * covered; each gained three probes rather than a token third.
+   */
+  it('hyd.alkynes: both acidity probes are MC3; MC1/MC2 gained their own', () => {
+    expect(tagOf('chem.hyd.alkynes', 'dramatically more acidic')).toEqual(['MC3'])
+    expect(tagOf('chem.hyd.alkynes', 'deprotonated by a weak base')).toEqual(['MC3'])
+    expect(tagOf('chem.hyd.alkynes', 'Lindlar catalyst or Na in liquid NH3')).toEqual(['MC1'])
+    expect(tagOf('chem.hyd.alkynes', 'hydrated with H2SO4/HgSO4')).toEqual(['MC2'])
+  })
+
+  it('hyd.petroleum: cracking is MC2 and fuel-shape is MC3', () => {
+    expect(tagOf('chem.hyd.petroleum', 'economically important process')).toEqual(['MC2'])
+    expect(tagOf('chem.hyd.petroleum', 'quality as an engine fuel')).toEqual(['MC3'])
+    expect(tagOf('chem.hyd.petroleum', 'where are the HEAVY fractions collected')).toEqual(['MC1'])
+  })
+
+  it('hyd.arenes: deactivating-but-directing is MC2, and nitration is MC1', () => {
+    expect(tagOf('chem.hyd.arenes', 'deactivating (makes the ring less reactive')).toEqual(['MC2'])
+    expect(tagOf('chem.hyd.arenes', 'What actually attacks the ring')).toEqual(['MC1'])
+  })
+
   it('valency: both oxidation-state probes are MC3, and MC1/MC2 gained their own', () => {
     // Both pre-existing probes ask about oxidation state (MC-3) while
     // carrying MC1 and MC2, leaving the fixed-valency and NCl5
