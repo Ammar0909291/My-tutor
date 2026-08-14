@@ -7117,3 +7117,105 @@ no production writes were performed.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# Iteration — VISUAL MOAT ROUND 6: the generator-default blind spot (2026-08-14)
+
+Started from the one item the live sweep left open: the tutor narrated a
+`domain-default` figure during the production lesson. **That turned out to be a
+false alarm, and so did a second hypothesis.** Both are recorded because the
+checking is what produced the real finding.
+
+## Two hypotheses of mine, both wrong
+
+**(a) "The tutor over-claimed a domain-default figure."** It did not. The
+`three_crystal_lattice` card's own aria-label reads "a single unit cell, the
+repeated structure, lattice growth across multiple cells, a symmetry plane,
+and the completed crystal" — exactly what the tutor pointed at. HARD LIMIT (4)
+of the domain contract explicitly permits naming what the figure genuinely
+shows, and the tutor then taught the concept in its own words. Compliant.
+
+**(b) "`chem.solid.ionic-solids` deserves an exact binding."** It does not.
+The card renders every node in ONE colour at ONE radius — its own header says
+"a simple cubic lattice". An ionic crystal is defined by two alternating
+species of different size (the radius-ratio rule the concept's own probe
+tests: NaCl 6:6 vs CsCl 8:8). The card is missing the defining element, so the
+existing domain demotion is CORRECT and binding it exactly would have created
+a false claim.
+
+A third measurement of mine was also wrong and was corrected before use: an
+initial sweep reported `force_diagram` bound to `phys.opt.mirrors` and
+`phys.opt.lenses`, which looked alarming. Those rows carry a `sceneGenerator`,
+and Tier 0 (generator) outranks Tier 1 (card) — `primary` is only a fallback.
+Re-measured against the real tier order, the alarm disappeared.
+
+## The real finding
+
+`asset.ts` declares BOTH shared-figure provenances as 'derived' identity —
+the concept's identity is widened from something shared rather than declared
+for it:
+
+    IDENTITY_STRENGTH['domain-default']    = 'derived'
+    IDENTITY_STRENGTH['generator-default'] = 'derived'
+
+`scopeForAsset` demotes the first to 'domain' scope and says nothing about the
+second. So a concept that names a generator KIND but authors no parameters of
+its own is served that kind's ONE shared canonical scene AND told to introduce
+it as a figure of itself, under the STRONG contract that licenses it to build
+the explanation on the figure and read results off it.
+
+**20 concepts are in that position.** Measured, not estimated, by replicating
+the resolver's tier order over all six KGs.
+
+## Judged individually, not demoted as a class
+
+Rounds 1-2 of this sweep over-retired and had to be reversed; that mistake is
+not repeated here. Each of the 20 was compared, scene title against the KG's
+own description. Nine are genuinely depicted by their shared instance and were
+left alone — an elastic-collision scene for `collisions-elastic`, a thin-lens
+ray diagram for `lenses`, a projectile at 45° for `projectile-motion`.
+
+Seven show ONE INSTANCE of something the concept defines more broadly, and
+were demoted to domain scope (the picture still renders; only the claim is
+withdrawn):
+
+| concept | KG definition | shared scene served |
+|---|---|---|
+| `chem.solid.crystal-systems` | **Seven** crystal systems; Bravais lattices | "Face-Centred Cubic (FCC) unit cell" |
+| `phys.em.ohms-law` | V = IR | "Series circuit — R_total = 30 Ω" |
+| `phys.em.dc-circuits` | series **AND** parallel | series only |
+| `phys.mech.momentum` | p = mv, a conserved vector | "Elastic Collision (1D)" |
+| `phys.wave.shm` | restoring force ∝ −displacement | "Simple Pendulum" (one small-angle instance) |
+| `chem.atomic.electronic-config` | Aufbau, Hund, Pauli, Cr/Cu anomalies | "Sodium (Z=11) — 2, 8, 1" |
+| `chem.period.periodic-properties` | diagonal relationships, Li/Be anomalies | "Periodic Trends: Na vs Cl" |
+
+`chem.bond.vsepr` was considered and deliberately NOT demoted: water bent at
+104.5° genuinely shows the lone-pair effect the concept is built on, and is
+one of the three molecules the KG names. Recorded so the judgement is
+auditable rather than silent.
+
+`INSUFFICIENT_FOR_CONCEPT` 34 -> 41. That ratchet's own comment already states
+the number going UP is the correct direction — a claim withdrawn, not a figure
+degraded. No figure was removed and no binding was changed.
+
+## Regression protection
+
+`src/tests/visualGeneratorDefaultScope.test.ts` — pins that both provenances
+are 'derived', that the seven are demoted, and ENUMERATES the thirteen still
+claiming concept scope. The list may only shrink: by authoring concept
+parameters (promoting the figure to 'generator'), or by demoting the claim. A
+new generator-default concept appearing fails the test instead of reaching a
+learner.
+
+## Scope
+
+Chemistry and physics only for the demotions. `math.geom.distance-formula`,
+`bio.cell.mitosis` and `cs.found.boolean-logic` sit in the same enumerated
+gap and were deliberately left untouched per the preservation rule — they are
+recorded in the test's list, not modified.
+
+## Validation
+
+`npx tsc --noEmit` clean; 329 files / 7039 passed / 9 skipped;
+`npm run build` exit 0.

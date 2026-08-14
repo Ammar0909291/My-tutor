@@ -297,7 +297,19 @@ describe('the repair path is the general one, not a special case', () => {
     // to concept SCOPE, so both were recorded here in the same change to keep
     // the contract exactly as honest as it was: the picture improves, the
     // claim does not. Entries added alongside a rebind are the good kind.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(34)
+    // 34 -> 41: round 6 found that `scopeForAsset` demotes 'domain-default'
+    // but not 'generator-default', even though asset.ts declares BOTH
+    // 'derived' identity. 20 concepts name a generator KIND without authoring
+    // parameters, are served that kind's one shared canonical scene, and were
+    // told to introduce it as a figure of themselves. Seven were judged
+    // individually — scene title against the KG's own description — and each
+    // shows ONE INSTANCE of something the concept defines more broadly
+    // (crystal-systems gets an FCC cell for "seven crystal systems";
+    // ohms-law gets a series network for V = IR). The other thirteen genuinely
+    // ARE depicted by their shared instance and were deliberately left alone;
+    // they are enumerated in visualGeneratorDefaultScope.test.ts so the gap
+    // cannot grow in the dark.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(41)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.meas.scalars-vectors')).toBe(true)
   })

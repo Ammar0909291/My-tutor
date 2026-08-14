@@ -107,6 +107,43 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // honest as it was. The picture improves; the claim does not.
   'chem.bond.hybridization',         // only the sp3 case is drawn; sp and sp2 are not
   'chem.bond.bond-parameters',       // the angle is labelled; bond length and enthalpy are not
+
+  // ── Round 6: the generator-default blind spot ────────────────────────────
+  // Found by driving a real production lesson, then asking why a figure that
+  // is NOT concept-owned was still claiming concept scope.
+  //
+  // `asset.ts`'s IDENTITY_STRENGTH declares BOTH shared-figure provenances
+  // 'derived' — the concept's identity is widened from the kind rather than
+  // declared:
+  //     'domain-default':    'derived'
+  //     'generator-default': 'derived'
+  // but `scopeForAsset` below demotes only the first. So a concept that names
+  // a generator KIND without authoring its own parameters is served that
+  // kind's ONE shared canonical scene and told to introduce it as a figure of
+  // itself. 20 concepts are in that position.
+  //
+  // They are NOT demoted as a class, because for nine of them the shared
+  // instance genuinely IS the concept — an elastic-collision scene for
+  // `collisions-elastic`, a thin-lens ray diagram for `lenses`, a projectile
+  // at 45° for `projectile-motion`. Demoting those would lose real teaching
+  // value for no gain, which is the mistake rounds 1-2 of this sweep already
+  // made once by over-retiring.
+  //
+  // The seven below were judged individually, scene title against the KG's own
+  // description, and each shows ONE INSTANCE of something the concept defines
+  // more broadly. The remaining generator-default concepts are pinned by
+  // `visualGeneratorDefaultScope.test.ts` so a new one cannot appear silently.
+  'phys.mech.momentum',              // an elastic COLLISION; p = mv is never drawn
+  'phys.wave.shm',                   // a pendulum — one (small-angle) instance; F = -kx is not shown
+  'phys.em.ohms-law',                // a series network with R_total; V = IR is not the figure
+  'phys.em.dc-circuits',             // series only; the concept is series AND parallel
+  'chem.atomic.electronic-config',   // one Na shell diagram; no Aufbau, Hund, Pauli or Cr/Cu anomaly
+  'chem.period.periodic-properties', // Na vs Cl only; no diagonal relationships, no Li/Be anomalies
+  'chem.solid.crystal-systems',      // one FCC unit cell; the concept is SEVEN systems + Bravais lattices
+  // Deliberately NOT added, and recorded so the judgement is auditable:
+  // chem.bond.vsepr renders water bent at 104.5°, which genuinely shows the
+  // lone-pair effect the concept is built on. It is one of the three molecules
+  // the KG names, not a figure of something else.
 ])
 
 /**
