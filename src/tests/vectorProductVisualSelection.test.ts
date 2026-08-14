@@ -290,7 +290,14 @@ describe('the repair path is the general one, not a special case', () => {
     // phys.qm.schrodinger-equation is served a STATIC ψ(x) for the
     // TIME-DEPENDENT equation, and phys.qm.selection-rules a level diagram
     // that draws transitions without saying which are allowed.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(32)
+    // 32 -> 34: round 5 rebound chem.bond.hybridization and
+    // chem.bond.bond-parameters off the chem.bond domain default onto the
+    // molecular-shapes card, which labels 109.5° tetrahedral angles instead of
+    // showing an abstract A-B pair. An exact registry row promotes a concept
+    // to concept SCOPE, so both were recorded here in the same change to keep
+    // the contract exactly as honest as it was: the picture improves, the
+    // claim does not. Entries added alongside a rebind are the good kind.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(34)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.meas.scalars-vectors')).toBe(true)
   })

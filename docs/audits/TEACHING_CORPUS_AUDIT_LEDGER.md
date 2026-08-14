@@ -6121,3 +6121,106 @@ No production write.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# VISUAL SEMANTIC MOAT — round 5: the friction pattern, one tier up
+
+Round 4's repair was a registry row whose `all` list already named a
+better-fitting visual than its `primary`. This round swept every physics and
+chemistry binding carrying more than one visual — 32 rows — looking for the
+same shape.
+
+## A structural version of the same defect
+
+`chem.bond.hybridization` and `chem.bond.bond-parameters` have **no exact
+registry row at all**. They inherit the `chem.bond` DOMAIN rule and are served
+its primary, `three_bond_formation` — BondFormation3D, whose entire content is
+two spheres, one label "shared pair" and one "Stable molecule AB".
+
+The domain rule's own `all` list names `three_molecular_shapes` second. That
+card (MolecularShapes3D) draws a tetrahedral molecule and labels
+**"109.5° tetrahedral angles"**.
+
+A domain rule cannot select per concept, so the better visual was listed for
+these concepts and structurally unreachable by them. Same defect as friction,
+with the ordering error one tier up — and unlike friction, no amount of
+reordering the domain rule fixes it, because whichever visual is primary,
+every concept under the prefix gets the same one.
+
+Hybridization IS the geometry of the hybrid orbital set (sp 180°, sp² 120°,
+sp³ 109.5°), and a bond ANGLE is one of the three bond parameters. Both are
+strictly better served by the shapes card. Exact rows added.
+
+## The subtlety that made this a two-part change
+
+Adding an exact row PROMOTES a concept from `domain-default` to concept scope,
+which hands it the STRONG contract — "a three_molecular_shapes of
+Hybridization is attached to THIS response". The card shows only the sp³ case,
+and shows neither bond length nor bond enthalpy, so that claim would be false
+in exactly the way this campaign exists to prevent.
+
+Both were therefore added to `INSUFFICIENT_FOR_CONCEPT` in the same change.
+Verified after: provenance `curated`, visual `three_molecular_shapes`, contract
+still GENERAL. **The picture improves; the claim does not move.** That pairing
+is what the new tests pin — if a future change drops the scope entry, the
+concept silently starts asserting that a tetrahedral CH₄ is a figure of
+hybridization in general.
+
+## What the sweep did NOT change
+
+`chem.bond.covalent-bonding` keeps `three_bond_formation` and keeps its claim:
+two spheres sharing a pair IS covalent bonding, which is the whole point of the
+finding — the card is right for exactly one of the concepts it was serving.
+`chem.bond.vsepr` keeps its authored molecule generator (water, bent, 104.5°),
+which outranks every card tier and is untouched by rebinding two neighbours.
+
+Also examined and left alone: `phys.mech.newtons-second-law` (the Newton card
+has a net-force branch, so it is not merely the balanced case);
+`chem.atomic.quantum-numbers` (`three_electron_shells` would be marginally more
+direct than `three_atomic_structure`, but both draw shells and the improvement
+is too small to justify a promotion risk); the double-slit, Stern–Gerlach and
+tunnelling rows, whose secondaries are 3D versions of the same figure.
+
+## The structural finding worth recording
+
+**A domain rule's `all` list is dead weight.** Only its `primary` can ever be
+served, because the tier has no per-concept selection. Any better visual named
+there is unreachable by every concept under the prefix. Four chemistry domain
+rules carry a second visual today. The fix in each case is an exact row — which
+is what this round did twice, and which is available for the rest whenever a
+concept is found that the secondary genuinely fits.
+
+## Measured state after five rounds
+
+| | physics | chemistry |
+|---|---|---|
+| figure claimed as the concept | 41 | 7 |
+| figure shown as a general illustration | 33 | 16 |
+| no figure — no faithful visual exists | 154 | 151 |
+| no figure — binding retired | 10 | 12 |
+
+Whole sweep: **8 retirements, 19 demotions, 3 repairs, 0 figures deleted that
+were making no claim.** Backlog pin 26 → 34 across rounds 3–5; every increment
+is a claim withdrawn, and the last two came paired with a better picture.
+
+## Open in this dimension
+
+1. The remaining demoted figures still need faithful replacements. Rounds 4–5
+   show two repair shapes — reorder a row, or add an exact row to escape a
+   domain rule — and both are exhausted for the cases found so far.
+2. `phys.mech.viscosity` needs a Stokes'-law half; `phys.em.dc-circuits` a
+   combined series-parallel topology; hybridization needs sp and sp².
+3. Card descriptions remain per-visual-type, so a card serving several
+   concepts keeps producing mismatches. A per-binding description removes the
+   class structurally — still not attempted, it touches every subject.
+
+## Production verification
+
+Not production-verified. Offline measurement against the real resolver, the
+real registry, the real contract builder and the real card components. No
+production write.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.

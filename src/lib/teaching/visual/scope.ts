@@ -98,6 +98,15 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // contain.
   'phys.qm.schrodinger-equation',    // a static ψ(x); the TIME-DEPENDENT equation shows no time and no equation
   'phys.qm.selection-rules',         // transitions are drawn, but not which are allowed, and no probabilities
+  // Round 5 rebound these two from the chem.bond domain default onto the
+  // molecular-shapes card, which is strictly more relevant (it labels
+  // 109.5° tetrahedral angles rather than showing an abstract A-B pair).
+  // Adding an exact registry row would otherwise PROMOTE them from
+  // 'domain-default' to concept scope and hand them a claim the card cannot
+  // support, so they are recorded here to keep the contract exactly as
+  // honest as it was. The picture improves; the claim does not.
+  'chem.bond.hybridization',         // only the sp3 case is drawn; sp and sp2 are not
+  'chem.bond.bond-parameters',       // the angle is labelled; bond length and enthalpy are not
 ])
 
 /**

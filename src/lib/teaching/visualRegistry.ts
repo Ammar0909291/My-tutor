@@ -380,6 +380,25 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'chem.bond.covalent-bonding':       { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_molecular_shapes'] },
   'chem.bond.metallic-bonding':       { primary: 'three_bond_formation', all: ['three_bond_formation', 'three_crystal_lattice'] },
   'chem.bond.vsepr':                  { primary: 'three_molecular_shapes', all: ['three_molecular_shapes'], sceneGenerator: 'molecule' },
+  // REPAIRED by the visual semantic moat sweep (round 5), same shape as the
+  // phys.mech.friction fix in round 4. Both of these had NO exact row, so they
+  // inherited the chem.bond DOMAIN rule and were served its primary,
+  // `three_bond_formation` — BondFormation3D, whose entire content is two
+  // spheres, one "shared pair" label and one "Stable molecule AB".
+  //
+  // The domain rule's own `all` list names `three_molecular_shapes` second,
+  // and that card (MolecularShapes3D) draws a tetrahedral molecule with
+  // "109.5° tetrahedral angles" labelled. A domain rule cannot pick per
+  // concept, so the better visual was listed and unreachable — the structural
+  // version of the friction defect.
+  //
+  // Hybridization IS the geometry of the hybrid orbital set, and a bond ANGLE
+  // is one of the three bond parameters, so both are strictly better served by
+  // the shapes card. Both stay DEMOTED in scope.ts: the card shows only the
+  // sp3/tetrahedral case, and it shows neither bond length nor bond enthalpy,
+  // so the picture improves while the claim does not.
+  'chem.bond.hybridization':          { primary: 'three_molecular_shapes', all: ['three_molecular_shapes', 'three_bond_formation'] },
+  'chem.bond.bond-parameters':        { primary: 'three_molecular_shapes', all: ['three_molecular_shapes', 'three_bond_formation'] },
   'chem.solid.crystal-systems':       { primary: 'three_crystal_lattice', all: ['three_crystal_lattice'], sceneGenerator: 'lattice' },
 
   // Chemistry — States of matter

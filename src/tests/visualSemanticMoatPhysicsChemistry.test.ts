@@ -298,6 +298,69 @@ describe('round 4 — figure content, not figure choice', () => {
 })
 
 /**
+ * ROUND 5 — THE FRICTION PATTERN, HUNTED ACROSS THE REGISTRY.
+ *
+ * Round 4's repair was a row whose `all` list already named a better-fitting
+ * visual than its `primary`. This round swept every physics and chemistry
+ * binding carrying more than one visual, looking for the same shape.
+ *
+ * It found a STRUCTURAL version of it. `chem.bond.hybridization` and
+ * `chem.bond.bond-parameters` had NO exact row at all, so they inherited the
+ * chem.bond DOMAIN rule and were served its primary — BondFormation3D, whose
+ * entire content is two spheres, "shared pair" and "Stable molecule AB". The
+ * domain rule's own `all` names `three_molecular_shapes` second, and that card
+ * draws a tetrahedral molecule with "109.5° tetrahedral angles" labelled.
+ *
+ * A domain rule cannot select per concept, so the better visual was listed and
+ * unreachable — the friction defect, with the ordering error one tier up.
+ * Hybridization IS the geometry of the hybrid orbital set, and a bond ANGLE is
+ * one of the three bond parameters, so both are strictly better served there.
+ *
+ * The subtlety: adding an exact row PROMOTES a concept from 'domain-default'
+ * to concept scope, which would hand it the strong contract. The card shows
+ * only the sp3 case and shows neither bond length nor enthalpy, so both were
+ * added to INSUFFICIENT_FOR_CONCEPT at the same time. Net effect: the picture
+ * improves, the claim does not move. That pairing is what these tests pin.
+ */
+describe('round 5 — better visual reachable, claim unchanged', () => {
+  const visualOf = (conceptId: string) => {
+    const d = turn(conceptId, 'show me a diagram of this', 'chemistry')
+    expect(d.graphical, conceptId).toBe(true)
+    return (d.asset?.payload as { visualType?: string } | undefined)?.visualType
+  }
+
+  it.each(['chem.bond.hybridization', 'chem.bond.bond-parameters'])(
+    '%s is served the shapes card, not the generic A-B bond', (conceptId) => {
+      expect(visualOf(conceptId)).toBe('three_molecular_shapes')
+    })
+
+  it.each(['chem.bond.hybridization', 'chem.bond.bond-parameters'])(
+    '%s gained a better picture WITHOUT gaining a claim', (conceptId) => {
+      // The whole point of pairing the rebind with a scope entry. If a future
+      // change drops the scope entry, the concept silently starts asserting
+      // that a tetrahedral CH4 IS a figure of hybridization in general.
+      expect(isInsufficientForConcept(conceptId), conceptId).toBe(true)
+      expect(claimsToBeTheConcept(conceptId, 'chemistry'), conceptId).toBe(false)
+    })
+
+  it('the concepts the bond-formation card genuinely fits keep it', () => {
+    // Two spheres sharing a pair IS covalent bonding. It is not hybridization
+    // and not bond parameters, which is the whole finding.
+    expect(visualOf('chem.bond.covalent-bonding')).toBe('three_bond_formation')
+    expect(claimsToBeTheConcept('chem.bond.covalent-bonding', 'chemistry')).toBe(true)
+  })
+
+  it('VSEPR still outranks both with its own authored scene', () => {
+    // chem.bond.vsepr owns a molecule GENERATOR (water, bent, 104.5°), which
+    // sits above every card tier. Rebinding two of its neighbours onto the
+    // shapes card must not disturb it.
+    const d = turn('chem.bond.vsepr', 'show me a diagram of this', 'chemistry')
+    expect((d.asset?.payload as { renderer?: string } | undefined)?.renderer).toBe('scene')
+    expect(claimsToBeTheConcept('chem.bond.vsepr', 'chemistry')).toBe(true)
+  })
+})
+
+/**
  * THE OVER-SUPPRESSION CONTROL.
  *
  * Suppression is cheap to apply and expensive to notice: retiring one concept
