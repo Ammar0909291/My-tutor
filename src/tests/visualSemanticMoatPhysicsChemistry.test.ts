@@ -208,6 +208,96 @@ describe('the inert set is demoted, not suppressed', () => {
 })
 
 /**
+ * ROUND 4 — WHAT IS INSIDE THE FIGURES THAT LEGITIMATELY CLAIM THEIR CONCEPT.
+ *
+ * Rounds 1-3 asked which figure is attached. This one reads the CONTENT of the
+ * ~50 that carry the STRONG contract: for scenes every narration line, label
+ * and computed quantity; for cards the contract's own "WHAT THE LEARNER SEES"
+ * description, which is what the tutor is actually told the picture contains.
+ *
+ * The authored scenes came out numerically correct — every printed quantity
+ * was re-derived by hand and matched: R = 5 at 53.1° for A=3, B=4 at right
+ * angles; dot 6 and cross 10.39 for |A|=3, |B|=4 at 60°; range 40.82 m and
+ * peak 10.2 m for 20 m/s at 45°; v1f = -0.33 and v2f = 4.67 for the elastic
+ * pair; 12 V over 30 Ω giving 0.4 A in series and over 6.67 Ω giving 1.8 A in
+ * parallel; v = 3074 m/s and T = 86181 s at geostationary radius. Those are
+ * asserted below as a sample, so a change to a generator that breaks the
+ * arithmetic fails here rather than reaching a learner.
+ *
+ * The defects were on the CARD side, where the description is a fixed string
+ * per visual type and the same card serves several concepts.
+ */
+describe('round 4 — figure content, not figure choice', () => {
+  const sceneTextOf = (conceptId: string, subject = 'physics') => {
+    const d = turn(conceptId, 'show me a diagram of this', subject)
+    const spec = (d.asset?.payload as { sceneSpec?: Record<string, unknown> } | undefined)?.sceneSpec
+    expect(spec, `${conceptId} has no scene`).toBeDefined()
+    return JSON.stringify(spec)
+  }
+
+  it('the authored scenes print quantities that are actually correct', () => {
+    // Re-derived independently; each pair is (concept, a value the physics
+    // requires). A generator regression that silently changes a number cannot
+    // be caught by any structural check — only by knowing the answer.
+    const cases: Array<[string, string[]]> = [
+      ['phys.meas.vector-addition',    ['5', '53.1']],            // 3,4 at 90° -> 5 at 53.13°
+      ['phys.meas.vector-products',    ['6', '10.39', '60']],     // 3·4·cos60=6, 3·4·sin60=10.392
+      ['phys.mech.projectile-motion',  ['40.82', '10.2']],        // 20 m/s at 45°: R=v²/g, H=v²/4g
+      ['phys.mech.circular-motion',    ['8']],                    // v²/r = 16/2
+      ['phys.mech.collisions-elastic', ['-0.33', '4.67']],        // m1=2,u1=3; m2=1,u2=-2
+      ['phys.mech.collisions-inelastic', ['1.33']],               // (6-2)/3
+      ['phys.mech.torque',             ['20']],                   // 2·10·sin90
+      ['phys.mech.satellites',         ['3074', '86181']],        // √(GM/r), 2πr/v at r=42164 km
+      ['phys.em.kirchhoffs-laws',      ['6.67', '1.8']],          // 10∥20, 12/6.67
+    ]
+    for (const [conceptId, values] of cases) {
+      const text = sceneTextOf(conceptId)
+      for (const v of values) expect(text, `${conceptId} lost ${v}`).toContain(v)
+    }
+  })
+
+  it('the mirror and the lens disagree in sign, which is the correct behaviour', () => {
+    // Same u and f, same magnification, opposite image distance: the Cartesian
+    // convention puts a real mirror image at v = -15 (same side as the object)
+    // and a real lens image at v = +15 (the far side). A generator that made
+    // them agree would have dropped the convention.
+    expect(sceneTextOf('phys.opt.mirrors')).toContain('-15cm')
+    expect(sceneTextOf('phys.opt.lenses')).toContain('15cm')
+    expect(sceneTextOf('phys.opt.lenses')).not.toContain('-15cm')
+    for (const id of ['phys.opt.mirrors', 'phys.opt.lenses']) {
+      expect(sceneTextOf(id), id).toContain('-0.5')
+    }
+  })
+
+  it('friction is served a figure that contains friction', () => {
+    // THE REPAIR. NewtonForces3D draws exactly two labelled vectors, Fg and N;
+    // there is no friction anywhere in it, and phys.mech.friction was bound to
+    // it as PRIMARY while ForceDiagram — which draws a labelled Friction arrow
+    // — sat second in the same row. Only the order was wrong.
+    const d = turn('phys.mech.friction', 'show me a diagram of this', 'physics')
+    expect(d.graphical).toBe(true)
+    expect((d.asset?.payload as { visualType?: string } | undefined)?.visualType).toBe('force_diagram')
+    // And it keeps the strong contract, because now it has earned it.
+    expect(claimsToBeTheConcept('phys.mech.friction', 'physics')).toBe(true)
+  })
+
+  it('two quantum concepts stopped claiming a card that lacks their subject', () => {
+    // The wave_function card is ψ(x) and |ψ(x)|² on static axes: correct for
+    // phys.qm.wave-function, and silent about time for the TIME-DEPENDENT
+    // Schrödinger equation. The energy_level_diagram draws transitions but not
+    // which are allowed, which is what selection rules are.
+    expect(isInsufficientForConcept('phys.qm.schrodinger-equation')).toBe(true)
+    expect(isInsufficientForConcept('phys.qm.selection-rules')).toBe(true)
+    expect(claimsToBeTheConcept('phys.qm.schrodinger-equation', 'physics')).toBe(false)
+    expect(claimsToBeTheConcept('phys.qm.selection-rules', 'physics')).toBe(false)
+    // Their siblings on the same two cards are correct and keep the claim.
+    expect(claimsToBeTheConcept('phys.qm.wave-function', 'physics')).toBe(true)
+    expect(claimsToBeTheConcept('phys.mod.atomic-spectra', 'physics')).toBe(true)
+    expect(claimsToBeTheConcept('phys.mod.bohr-model', 'physics')).toBe(true)
+  })
+})
+
+/**
  * THE OVER-SUPPRESSION CONTROL.
  *
  * Suppression is cheap to apply and expensive to notice: retiring one concept

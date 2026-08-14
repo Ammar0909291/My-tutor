@@ -6009,3 +6009,115 @@ real contract builder and the real card components. No production write.
 ## Validation
 
 `npx tsc --noEmit` clean; full suite green; `npm run build` clean.
+
+---
+
+# VISUAL SEMANTIC MOAT — round 4: what is inside the figures that claim their concept
+
+Rounds 1–3 asked WHICH figure is attached. This round reads the CONTENT of the
+~50 that carry the STRONG contract — for scenes every narration line, label and
+computed quantity; for cards the tutor contract's own "WHAT THE LEARNER SEES"
+description, which is what the model is actually told the picture contains.
+
+## The authored scenes are numerically correct
+
+Every printed quantity was re-derived by hand and matched:
+
+| figure | printed | check |
+|---|---|---|
+| vector addition | \|R\| = 5 at 53.1° | A=3 at 0°, B=4 at 90° |
+| dot / cross | 6 and 10.39 | 12·cos60 = 6; 12·sin60 = 10.392 |
+| projectile | range 40.82 m, peak 10.2 m | v²/g and v²/4g at 20 m/s, 45° |
+| circular motion | a_c = 8 m/s² | v²/r = 16/2 |
+| elastic collision | v1f = −0.33, v2f = 4.67 | m1=2,u1=3; m2=1,u2=−2 |
+| inelastic | 1.33 m/s | (6−2)/3 |
+| torque | 20 N·m | 2 × 10 × sin 90° |
+| geostationary | v = 3074 m/s, T = 86181 s | √(GM/r), 2πr/v at r = 42 164 km |
+| series / parallel | 0.4 A over 30 Ω; 1.8 A over 6.67 Ω | 12 V; 10∥20 = 6.667 |
+
+A sample is now asserted in the test suite. A generator regression that
+silently changes a number is invisible to every structural check — only
+knowing the answer catches it.
+
+One detail worth recording because it looks like an error and is not: the
+mirror prints v = **−15 cm** and the lens v = **+15 cm** for the same u and f.
+That is the Cartesian sign convention applied correctly — a real mirror image
+is on the object's side, a real lens image on the far side — and both carry
+m = −0.5, real, inverted. A generator change that made them agree would have
+dropped the convention, so the disagreement is now pinned.
+
+## The defects were on the card side
+
+A card's description is a FIXED STRING per visual type, and one card serves
+several concepts. Three mismatches:
+
+**`phys.mech.friction` — REPAIRED, not suppressed.** `NewtonForces3D` draws
+exactly two labelled vectors, `Fg` and `N`. There is no friction anywhere in
+it. The concept was bound to it as PRIMARY under the strong contract — a
+figure of "Friction Forces" containing no friction — while `ForceDiagram`,
+which draws an explicitly labelled **Friction** arrow, sat SECOND in the same
+registry row. Only the order was wrong. `primary` and the `all` order swapped.
+
+**This is the first genuine repair in the whole visual campaign.** Rounds 1–3
+produced 8 suppressions and 17 demotions and zero correct figures; this one
+gives a concept a figure that actually contains its subject, using an asset
+that already existed and was already listed for it.
+
+**`phys.qm.schrodinger-equation` — demoted.** The `wave_function` card is
+ψ(x) and |ψ(x)|² on static axes. Correct for `phys.qm.wave-function`, which
+keeps its claim; silent about time for the TIME-DEPENDENT equation, and it
+does not show the equation either.
+
+**`phys.qm.selection-rules` — demoted.** The `energy_level_diagram` draws
+transitions but not WHICH are allowed (Δl = ±1), which is what selection rules
+are, and shows no transition probabilities. Its two siblings on the same card,
+`phys.mod.bohr-model` and `phys.mod.atomic-spectra`, are correct and keep
+their claim — energy levels and a spectral line is exactly what they are.
+
+## Two incomplete-but-not-false cases, recorded not acted on
+
+`phys.mech.viscosity`'s scene teaches the shear definition and F = ηA(dv/dy);
+**Stokes' law (F = 6πηrv) is not in it**, and the concept is named
+"Viscosity and Stokes' Law". Same shape as `phys.em.dc-circuits`: one half of a
+two-half concept, drawn correctly.
+
+`chem.solid.crystal-systems`' narration explains the counting rule as "each
+corner counts 1/8, each face 1/2, **a body atom 1**" — an FCC cell has no body
+atom. The arithmetic it reaches (8×1/8 + 6×1/2 = 4) is right; the clause is a
+general rule stated inside a specific case. Minor, and left alone because
+editing an authored narration for style is not what this campaign is for.
+
+## Measured state after four rounds
+
+| | physics | chemistry |
+|---|---|---|
+| figure claimed as the concept | 41 | 7 |
+| figure shown as a general illustration | 33 | 16 |
+| no figure — no faithful visual exists | 154 | 151 |
+| no figure — binding retired | 10 | 12 |
+
+Whole-sweep totals: **8 retirements, 17 demotions, 1 repair, 0 figures deleted
+that were making no claim.** The backlog pin `INSUFFICIENT_FOR_CONCEPT` moved
+26 → 32 across rounds 3 and 4; up is the right direction, because each
+increment is a claim withdrawn, not a figure made worse.
+
+## Open in this dimension
+
+1. The 33 physics and 16 chemistry demoted figures still have no faithful
+   replacement. Round 4 shows what a replacement looks like when the asset
+   already exists (friction); the rest need authoring.
+2. `phys.mech.viscosity` needs a Stokes'-law half; `phys.em.dc-circuits` needs
+   a combined series-parallel topology.
+3. Card descriptions are per-visual-type, so any card serving several concepts
+   will keep producing this class of mismatch. A per-binding description would
+   remove it structurally — not attempted, since it touches every subject.
+
+## Production verification
+
+Not production-verified. Offline measurement against the real resolver, the
+real contract builder, the real generators and the real card components.
+No production write.
+
+## Validation
+
+`npx tsc --noEmit` clean; full suite green; `npm run build` clean.

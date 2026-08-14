@@ -285,7 +285,12 @@ describe('the repair path is the general one, not a special case', () => {
     // register. The number going UP here is the correct direction for a
     // finding of this kind: it means a claim was withdrawn, not that a figure
     // got worse.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(30)
+    // 30 -> 32: round 4 read the tutor contract's own "WHAT THE LEARNER SEES"
+    // text for every card-backed figure carrying the strong contract.
+    // phys.qm.schrodinger-equation is served a STATIC ψ(x) for the
+    // TIME-DEPENDENT equation, and phys.qm.selection-rules a level diagram
+    // that draws transitions without saying which are allowed.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(32)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.meas.scalars-vectors')).toBe(true)
   })

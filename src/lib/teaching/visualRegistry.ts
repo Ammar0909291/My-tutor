@@ -39,7 +39,15 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.newtons-first-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
   'phys.mech.newtons-second-law':     { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
   'phys.mech.newtons-third-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
-  'phys.mech.friction':               { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
+  // REPAIRED by the visual semantic moat sweep (round 4): the primary and the
+  // secondary were the wrong way round. `three_newton_forces` (NewtonForces3D)
+  // draws exactly two labelled force vectors, `Fg` and `N` — there is no
+  // friction vector anywhere in it — while `force_diagram` (ForceDiagram) draws
+  // a labelled Friction arrow explicitly. The concept was being served, under
+  // the STRONG contract, a figure of "Friction Forces" containing no friction.
+  // Both visuals were already listed here; only their ORDER was wrong, so this
+  // is a binding fix at the source rather than a new asset or a suppression.
+  'phys.mech.friction':               { primary: 'force_diagram', all: ['force_diagram', 'three_newton_forces'] },
   'phys.mech.momentum':               { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
   'phys.mech.impulse':                { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
   'phys.mech.torque':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'torque_diagram' },

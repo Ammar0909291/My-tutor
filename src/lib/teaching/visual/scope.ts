@@ -92,6 +92,12 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // COMBINATION, but it was never demoted, so it kept claiming to BE a figure
   // of the concept while showing the shared single-lens instance.
   'phys.opt.lens-power',             // one lens; P = P1 + P2 needs a combination
+  // Round 4 read the contract's own "WHAT THE LEARNER SEES" text for every
+  // card-backed figure carrying the STRONG contract, and compared it with the
+  // concept's claim. Two named a thing the card's own description does not
+  // contain.
+  'phys.qm.schrodinger-equation',    // a static ψ(x); the TIME-DEPENDENT equation shows no time and no equation
+  'phys.qm.selection-rules',         // transitions are drawn, but not which are allowed, and no probabilities
 ])
 
 /**

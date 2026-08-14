@@ -162,13 +162,32 @@ describe('visualRegistry', () => {
   })
 
   // ── Regression: genuine dynamics/force concepts are unaffected ────────────
+  // The guarantee here is that the kinematics fix did not take a force concept
+  // with it. phys.mech.friction moved OFF three_newton_forces later and for an
+  // unrelated, separately-evidenced reason (below), so it is asserted with its
+  // own value rather than dropped — the "still a force visual, not collateral
+  // damage" guarantee is unchanged for all four.
   it.each([
     ['phys.mech.newtons-first-law', 'three_newton_forces'],
     ['phys.mech.newtons-second-law', 'three_newton_forces'],
     ['phys.mech.newtons-third-law', 'three_newton_forces'],
-    ['phys.mech.friction', 'three_newton_forces'],
+    ['phys.mech.friction', 'force_diagram'],
   ] as const)('force concept %s still resolves correctly (%s), unaffected by the kinematics fix', (conceptId, expected) => {
     expect(getConceptVisualType(conceptId)).toBe(expected)
+  })
+
+  it('friction is bound to the only force visual that actually draws friction', () => {
+    // Visual semantic moat, round 4. NewtonForces3D draws exactly two labelled
+    // vectors, Fg and N — no friction anywhere in it — and phys.mech.friction
+    // had it as PRIMARY while ForceDiagram, which draws a labelled Friction
+    // arrow, sat second in the same row. Only the order was wrong, so this was
+    // a binding repair rather than a new asset or a suppression.
+    expect(getConceptVisualType('phys.mech.friction')).toBe('force_diagram')
+    // The other three keep the Newton card, which is right for them: it ends
+    // in the balanced-force state, which is what the first law is about.
+    for (const id of ['phys.mech.newtons-first-law', 'phys.mech.newtons-second-law', 'phys.mech.newtons-third-law']) {
+      expect(getConceptVisualType(id), id).toBe('three_newton_forces')
+    }
   })
 
   // P2 (superseded expectation): the P0 fix deliberately left the
