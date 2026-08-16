@@ -37757,7 +37757,22 @@ const SIML_PROBES: SeedProbe[] = [
       { text: 'Both at once — the passenger is exactly midway between the two strikes', isCorrect: false },
       { text: 'The one from the REAR — that light is chasing the passenger and so arrives sooner', isCorrect: false },
     ],
-    correctValue: 'the front flash — the passenger moves toward it during the flight time, which is why the passenger concludes the strikes were NOT simultaneous',
+    // ANSWER TEXT TAUGHT THE CONCEPT'S OWN MISCONCEPTION, corrected (Moat S4,
+    // phys.rel pass). The graded content — which flash arrives first — was and
+    // is correct, and is unchanged. The explanation was not: it derived the
+    // passenger's non-simultaneity conclusion FROM their motion toward the
+    // front flash, which is precisely MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-
+    // LIGHT, this concept's own documented misconception ("Einstein's train
+    // experiment just shows a light travel delay, not anything fundamental").
+    // The blueprint's conflict evidence states the correct chain explicitly:
+    // the train observer concludes front-first AFTER accounting for both
+    // pulses travelling at c over equal distances in their own frame. Arrival
+    // order is explained in the ground frame; the simultaneity conclusion is
+    // reached in the passenger's frame, and conflating the two is the error.
+    // Left untagged: neither distractor expresses MC-1, and inventing one to
+    // justify a tag would be worse than the honest gap.
+    correctValue:
+      'the front flash. In the GROUND frame that is because the passenger travels toward it while it is in transit. The passenger\'s own conclusion is a separate argument in the PASSENGER\'S frame: there they sit still at the midpoint, both pulses cover equal distances at c, so equal travel times — and yet the front pulse still arrives first, which can only mean the front strike happened EARLIER. That is why the disagreement survives every travel-time correction instead of being explained away by one',
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [],
     source: `${SIML_SRC} — Einstein's train thought experiment as a gradeable fluency item`,

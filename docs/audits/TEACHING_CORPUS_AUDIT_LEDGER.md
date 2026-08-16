@@ -8171,3 +8171,112 @@ non-vacuity bounds. Orphan ratchet 42 → 39.
 phys.meas 8/8, phys.mech 60/60, phys.em 35/35 → **103 of 238**. Remaining: 135
 concepts across 9 domains (mod 21, qm 19, therm 18, wave 17, particle 16, opt
 15, stat 15, rel 8, astro 6).
+
+---
+
+# Iteration — PHYSICS CHECK 3: the seven compact domains, Stage 4 (2026-08-16)
+
+**103 concepts, 375 probes** — `phys.mod` (21), `phys.qm` (19), `phys.therm`
+(18), `phys.particle` (16), `phys.stat` (15), `phys.rel` (8), `phys.astro` (6).
+Every probe read against its blueprint's misconception bodies. **1 defect.**
+Physics Stage 4 moves **103 → 206 of 238**.
+
+## The one defect — a new class: the ANSWER TEXT taught the misconception
+
+`phys.rel.simultaneity`, PRACTICE item: *"Lightning strikes both ends of a
+train at the same instant IN THE GROUND FRAME… Which flash reaches the
+passenger first?"* The graded answer — the front one — was correct and is
+unchanged. Its explanation was not:
+
+> "the front flash — the passenger moves toward it during the flight time,
+> **which is why** the passenger concludes the strikes were NOT simultaneous"
+
+That derivation is this concept's own documented
+`MC-SIMULTANEITY-IS-JUST-TRAVEL-TIME-OF-LIGHT`, whose trigger signal is
+*"Einstein's train experiment just shows a light travel delay, not anything
+fundamental."* The blueprint's conflict evidence states the correct chain
+explicitly: the train observer concludes front-first **after accounting for
+both pulses covering equal distances at c in their own frame**. Arrival order
+is a ground-frame fact; the simultaneity conclusion is a passenger-frame
+argument, and the old text made the former the *reason* for the latter.
+
+Same class as the `phys.meas.units` mastery gate that asked for the "SI base
+unit for volume": an **untagged** probe, invisible to every structural check,
+teaching the error its own concept exists to repair. That is the second
+instance of this class and the reason the untagged probes are read too — 79 of
+`phys.therm`'s 131 probes carry no tag at all.
+
+Fixed by rewriting the explanation to separate the two frames. Left untagged:
+neither distractor expresses MC-1, and inventing one to justify a tag would be
+worse than the honest gap.
+
+## Six domains are structurally immaculate — measured, not asserted
+
+`phys.mod`, `phys.qm`, `phys.particle`, `phys.stat`, `phys.rel`, `phys.astro`
+carry, between them: **0 orphan tags, 0 probes claiming a misconception with no
+distractor, 0 choices that are simultaneously correct and misconception-mapped,
+0 untagged probes** (bar one in `phys.rel`). They follow a consistent
+three-probe template — blueprint trigger case → misconception probe → transfer
+case — in which every tag names a documented misconception and every mapped
+distractor states that misconception's own belief. Reading them found nothing
+to fix, and that is a result rather than an absence of effort: 85 concepts and
+255 probes were read one at a time.
+
+## phys.therm — read in two passes, 0 defects
+
+52 tagged and 79 untagged probes. The untagged half is where the only
+previously-seen instance of the answer-teaches-the-misconception class lived,
+so it was read in full and its arithmetic spot-checked (thermal-expansion
+overflow, calorimetry equilibrium, adiabatic `T₂ = T₁(V₁/V₂)^(γ−1)`, Otto
+efficiency, absolute-entropy integral, refrigerator entropy balance, Newton
+cooling constant, absolute-zero extrapolation) — all correct.
+
+**One near-miss, reported because I nearly called it a defect.**
+`phys.therm.first-law`'s isothermal item ("can you compute the work as W = PΔV?")
+is tagged `MC-WORK-IS-ONLY-MECHANICAL`, whose *name* is about W = Fd versus
+W = PΔV — a different issue from P varying during an isothermal expansion. But
+the blueprint's own Turn 6 conflict evidence for that MC **is** this exact
+scenario: *"Isothermal expansion of gas: P changes throughout. Why can't we use
+W = PΔV?"* The probe is faithful to the blueprint's own assignment; the mismatch
+is between the misconception's NAME and its authored SCOPE. Recorded as
+curriculum feedback, **not fixed** — overriding the Curriculum Pipeline's own
+id assignment on the strength of its name would be exactly the forced retagging
+this campaign forbids.
+
+## Curriculum feedback — phys.therm's 9 novel orphans (no blueprint touched)
+
+`thermal-expansion:MC-HOLE-SHRINKS`, `specific-heat:MC-HEAT-IS-STORED`,
+`calorimetry:MC-IGNORE-LATENT-HEAT`,
+`phase-transitions:MC-PHASE-HEAT-RAISES-TEMP`,
+`ideal-gas-law:MC-FORGET-KELVIN-CONVERSION`, `first-law:MC-SIGN-CONVENTION`,
+`internal-energy:MC-SIGN-CONVENTION`, `entropy:MC-MUST-USE-ACTUAL-PATH`,
+`carnot-cycle:MC-SUBSTANCE-AFFECTS-EFFICIENCY`. Each probe does diagnose the
+belief it names; the blueprint simply never registered it. Orphan count is
+unchanged at 39 — no rename was warranted in any of the seven domains.
+
+## Production
+
+The corrected probe is repo-only and has never been seeded. **Repo-fixed: yes.
+Production-seeded: no. Production-verified: no.** No production writes.
+
+## Regression protection
+
+`src/tests/physicsCompactDomainsProbeDiscrimination.test.ts` — pins the
+corrected explanation on all three properties that were broken (the
+passenger-frame argument is present, the survives-correction claim is present,
+the old causal clause is gone), plus the graded answer is unchanged; and turns
+the six clean domains into strict per-domain measurements (zero orphans, zero
+unmapped claims, zero correct-and-mapped choices) with corpus-size non-vacuity
+bounds, so a regression in any of them fails immediately rather than being
+discovered by a future re-read.
+
+## Validation
+
+`npx tsc --noEmit` clean; **335 files / 7132 passed / 9 skipped**;
+`npm run build` exit 0.
+
+## Stage 4 standing
+
+meas 8/8, mech 60/60, em 35/35, mod 21/21, qm 19/19, therm 18/18, particle
+16/16, stat 15/15, rel 8/8, astro 6/6 → **206 of 238**. Remaining: `phys.wave`
+(17) and `phys.opt` (15) — 32 concepts, 241 probes.
