@@ -17,7 +17,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S4 | stem-vs-blueprint agreement | 238/238 | 186/186 | CLOSED |
 | S5 | visual semantic (offline) | 23 widened, inspected | 20 widened, inspected | CLOSED |
 | S6 | visual semantic (live) | 25 served figures audited, 0 defects | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified |
-| S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — 1 detection gap open |
+| S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — detection gap traced, OWNER DECISION |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
 | S9 | end-user runtime | lesson 5 end-to-end live-verified | ladder + evidence live-verified | IN PROGRESS — chain verified, 1 product finding open |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
@@ -527,7 +527,76 @@ returned to the lesson concept and declined honestly —
 `provenance: no-figure:engine-no-suitable-form`,
 `continuity: visual-request-returns-to-lesson`. That path was already right.
 
-### FINDING B — misconception stated plainly, not detected
+### FINDING B — INVESTIGATED 2026-08-16: **E (mixed), dominated by F (intended)** — NOT a defect
+
+Reproduced live and traced end to end. **Not patched**, because the only way to
+close it changes a deliberate design stance — see the decision at the end.
+
+**Reproduction (live, real account).** On `chem.found.pure-substances` the
+learner asserted a textbook conflation: *"so salt water is a compound because
+the salt and water are chemically joined"*. The tutor diagnosed and repaired it
+in prose — *"that is a really common place to get tripped up—let me show you why
+salt water is actually a mixture, not a compound… if you boil away the water you
+get the original salt back entirely unchanged"* — and the turn recorded nothing:
+
+```
+llmUsed: true, explanationMemoryServes: 0     <- NOT a memory-served turn
+[ladder] signalTag: false, correctness: null
+misconceptionCandidates: []
+mistake_records: no row written
+```
+
+**This eliminates (C).** The first observation happened on a memory-served turn,
+so Explanation Memory precedence was the obvious suspect. It reproduces on a
+plain LLM turn with no memory hit, so precedence is not the cause. It also
+eliminates (B) — nothing was computed and discarded — and (D), since no asset
+served on the reproduction turn.
+
+**Root cause — three independent gates, each deliberate:**
+
+1. `detectMisconceptions` (`misconceptionEngine.ts:767`) is a **historical
+   aggregator**: it queries `mistake_records` and `learning_checkpoints` over a
+   30/14-day window. It cannot see the current utterance, so
+   `misconceptionCandidates: []` is CORRECT output, not a failure. This is why
+   (A) is the wrong diagnosis.
+2. The only live writer of misconception evidence is route.ts's
+   `signal_confident_wrong` branch, gated on
+   `correctness === false && confidence === 'high'`. Hesitant-wrong deliberately
+   writes nothing ("fast = misconception, hedged = guess") — confirmed in
+   production: the physics MCQ answered wrong hesitantly produced only a
+   `recovery_signal`, while a confident-wrong answer on
+   `chem.found.states-of-matter` DID write `signal_confident_wrong`. **The
+   recording machinery works.**
+3. `teachingSignal` exists only if the model emits `<!--SIGNAL-->`, and
+   `buildSignalInstruction()` (`signals.ts:85`) restricts it to "the student's
+   LAST message contained an answer or attempt at a task you set", explicitly
+   excluding greetings, questions and small talk — "no fabricated evidence".
+
+So misconception evidence has exactly **one** entry point (a graded, confident
+wrong answer), while learners express misconceptions in free prose. The
+decision engine even has a misconception-preempt rule
+(`decisionEngine.ts:260`, `HIGH` candidate), but its input can only be populated
+by a prior recorded mistake — so a first-time conversational misconception can
+never trigger it.
+
+**Scope: general**, not chemistry and not one misconception family. Every gate
+above is in shared code (`signals.ts`, `route.ts`, `misconceptionEngine.ts`);
+no subject-specific branch is involved. A second-subject sample was not run
+because the code path proof is stronger than another anecdote.
+
+**OWNER/PRODUCT DECISION — not patched.** Closing this needs a live free-text
+misconception classifier feeding the same evidence tables. That would:
+- overturn the explicit "no fabricated evidence" stance in the signal contract,
+- introduce false-positive misconception records, which then drive
+  MISCONCEPTION_REPAIR at learners who never held the misconception, and
+- widen what counts as evidence for the mastery ledger.
+
+Loosening the SIGNAL contract to fire on non-answers is exactly the
+"force every suspicious message through a generic repair path" fix that must
+not be applied. The honest summary is that the tutor **teaches** these
+misconceptions well and **remembers** none of them.
+
+### FINDING B — as originally recorded
 
 The learner said *"so a mixture is when two things are chemically joined
 together right"* — a textbook mixture/compound conflation. That turn:
