@@ -8845,3 +8845,63 @@ No KG, blueprint, or Educational Brain file modified.
   direct experience improves in proportion to how often the model complies
   with the re-issue directive, which is a measurement, not a claim.
 
+
+---
+
+# S2 phys.stat batch (2026-08-16)
+
+Third physics domain to reach ZERO unprobed under S2, after phys.mod and
+phys.qm. Eight documented misconceptions in eight concepts, all authored on
+the same three-probe residue: `mcq × 2 + misconception_probe × 1` had left
+each fourth documented misconception without a diagnostic.
+
+| concept | MC | belief the distractor states |
+|---|---|---|
+| phys.stat.boltzmann-factor | MC-4 | "Double the T means double the probability" |
+| phys.stat.bose-einstein | MC-3 | "In a BEC, all atoms are squeezed into one point" |
+| phys.stat.entropy-statistical | MC-2 | "Entropy can never decrease — it's a law of physics" |
+| phys.stat.fermi-dirac | MC-3 | "Each electron contributes 3/2 k_B by equipartition" |
+| phys.stat.free-energy | MC-3 | "Z is just for entropy; use a separate equation of state for P" |
+| phys.stat.maxwell-boltzmann | MC-2 | "f(v) is just the Boltzmann factor — the v² is missing" |
+| phys.stat.partition-function | MC-3 | "Differentiating in T is the same as differentiating in β" |
+| phys.stat.probability-basics | MC-4 | "There's always some probability — so the gas MIGHT be ordered" |
+
+## How each probe was written
+
+Same procedure as the phys.qm batch, verbatim. Stem = the blueprint's own
+**Probe:** line. Correct answer = its **Conflict evidence [P28]** /
+**Replacement [P31]**, carrying the concrete number the blueprint supplies
+— the 15,000× Boltzmann jump from 300 K to 600 K at E = 0.5 eV, ≈0.02 Nk_B
+for copper's electronic C_V at 300 K, (1/2)^N for a mole compressed to one
+half, the C(N, N/2) ≈ 2^N/√(πN/2) ratio, the bimodal BEC time-of-flight
+image. Distractor = the **Characteristic phrase**, so the probe DETECTS the
+belief instead of merely naming it. Nothing was retagged to move a number.
+
+## Slot safety
+
+`canonicalSlug` is `conceptId:probeKind:lang:band[:difficulty]`, and
+difficulty is appended only to slots holding more than one probe — so
+adding to an occupied singleton slot RE-IDENTIFIES an existing production
+row. `true_false` was verified FREE in all eight concepts before authoring;
+each probe lands in a free slot and stays a singleton, and the guard
+asserts it. Bands follow each concept's existing probes: HIGH for seven,
+UNDERGRADUATE for `phys.stat.maxwell-boltzmann`.
+
+## Regression protection
+
+`src/tests/physicsS2MisconceptionCoverage.test.ts` — ratchet lowered 27 →
+19 (downward only); phys.stat asserted at exactly zero; all eight pairings
+pinned; slot-safety asserted per concept; and each new probe required to
+map a NON-correct distractor to the misconception it claims.
+
+## Validation
+
+`npx tsc --noEmit` clean; **339 files / 7,270 passed / 9 skipped** (up 18
+from the prior batch's 7,252); `npm run build` exit 0. No production
+writes; no KG, blueprint, or Educational Brain file modified.
+
+## Standing
+
+Physics S2 **585/604** (220/238 concepts). Remaining 19: rel 7, astro 6,
+opt 3, meas 2, mech 1. Next highest-count block is `phys.rel` (7).
+

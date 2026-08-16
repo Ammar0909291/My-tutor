@@ -52470,8 +52470,154 @@ const S2_MOD_COVERAGE_PROBES: SeedProbe[] = [
   },
 ]
 
+/**
+ * S2 COVERAGE — phys.stat batch (2026-08-16).
+ *
+ * The eight documented misconceptions in phys.stat that carried NO probe. Each
+ * concept holds the same three-probe shape phys.qm and phys.mod carried
+ * (mcq × 2 + misconception_probe × 1), so its FOURTH documented misconception
+ * had no diagnostic — the same authoring-template residue that left the other
+ * two domains short, and the reason phys.stat was the largest remaining S2
+ * gap after phys.mod and phys.qm closed.
+ *
+ * Each stem is its blueprint's own **Probe:** line, each correct answer is that
+ * blueprint's **Conflict evidence [P28]** / **Replacement [P31]** carrying the
+ * concrete numbers the blueprint supplies — the 15,000× Boltzmann jump, the
+ * bimodal BEC time-of-flight image, ~0.02 Nk_B for copper's electronic C_V,
+ * the (1/2)^N compression probability. Distractors STATE the **Characteristic
+ * phrase** so the probe DETECTS the belief instead of merely naming it.
+ *
+ * SLOT SAFETY: all eight concepts hold mcq × 2 + misconception_probe × 1 and
+ * nothing in `true_false`, verified before authoring; every probe below lands
+ * in a free slot and stays a singleton. Bands follow each concept's existing
+ * probes: HIGH for seven, UNDERGRADUATE for `maxwell-boltzmann`.
+ */
+const S2_STAT_COVERAGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: BOLT,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You double T from 300 K to 600 K, for an energy level at E = 0.5 eV. Does the Boltzmann factor e^(−E/k_BT) also roughly double?',
+    choices: [
+      { text: 'No — it rises by a factor of about 15,000. At 300 K, k_BT ≈ 0.026 eV, so the exponent is −19.2 and the factor is ≈4.5×10⁻⁹; at 600 K, k_BT ≈ 0.052 eV, the exponent is −9.6 and the factor is ≈6.8×10⁻⁵. The exponential amplifies a linear change in T into orders of magnitude — this is exactly what makes reaction rates so temperature-sensitive (Arrhenius, and the ~10 K "doubles the rate" rule)', isCorrect: true },
+      { text: 'Yes — double the T means double the probability', isCorrect: false, misconceptionId: `${BOLT}:MC-4` },
+    ],
+    correctValue: 'no — ~15,000×, not 2×; the exponent halves and e^(−9.6)/e^(−19.2) is enormous',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOLT}:MC-4`],
+    source: `${BOLT_SRC} — MC-4 Probe line verbatim (T: 300 K → 600 K, E = 0.5 eV) + conflict evidence [P28] (the 4.5×10⁻⁹ → 6.8×10⁻⁵ computation, ratio ≈15,000); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: BOSE,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a Bose-Einstein condensate, are all the atoms crammed into the same point in real space, the way water condenses into a droplet?',
+    choices: [
+      { text: 'No — condensation happens in MOMENTUM space, not real space. All N₀ atoms sit in the same p ≈ 0 ground state and share one macroscopic wave function; in real space that condensate is spread across the whole trap. Time-of-flight images show it: when the trap is released, the BEC hardly flies apart (narrow in momentum), while a bimodal density map shows it as an extended peak superimposed on the thermal cloud — not a real-space droplet', isCorrect: true },
+      { text: 'Yes — in a BEC, all atoms are squeezed into one point in space', isCorrect: false, misconceptionId: `${BOSE}:MC-3` },
+    ],
+    correctValue: 'no — condensation is in momentum space; real-space wave function is spatially extended',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BOSE}:MC-3`],
+    source: `${BOSE_SRC} — MC-3 Probe line verbatim + conflict evidence [P28] (uniform ψ₀ in real space, momentum-space condensation) and the S6 time-of-flight discrimination pair; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: ENTS,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The second law says the entropy of an isolated system does not decrease. Is that an absolute prohibition, or a statistical near-certainty?',
+    choices: [
+      { text: 'Statistical. For a gas of N molecules the probability that they all spontaneously crowd into one half of the container is (1/2)^N — 1/1024 for N = 10, and for N = 10²³ a number so small it would not happen in the age of the universe, but not zero. Fluctuation theorems predict measurable entropy-decreasing fluctuations in small systems (single molecules, nanodevices), and experiments have observed them. The law is the overwhelming weight of numbers, not an absolute veto', isCorrect: true },
+      { text: 'Absolute — entropy can never decrease. It is a law of physics', isCorrect: false, misconceptionId: `${ENTS}:MC-2` },
+    ],
+    correctValue: 'statistical — probability of macroscopic decrease is fantastically small but nonzero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENTS}:MC-2`],
+    source: `${ENTS_SRC} — MC-2 Probe line verbatim + conflict evidence [P28] ((1/2)^N compression, fluctuation theorem) and the S6 N = 10 vs. 100 computation; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: FDIR,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You have a mole of free electrons in copper at 300 K. Equipartition predicts electronic heat capacity 3/2 Nk_B. Does the measured value match that?',
+    choices: [
+      { text: 'No — it is roughly 75× smaller. Only electrons within ~k_BT of the Fermi energy E_F can absorb thermal energy (deeper ones have no empty states to jump to — Pauli exclusion), so C_V = (π²/2)(k_BT/E_F)Nk_B. For copper, k_BT/E_F ≈ 0.026/7 ≈ 0.004, giving ≈0.02 Nk_B, agreeing with experiment and the C_V ∝ T low-temperature line. This was one of the first successes of Fermi-Dirac statistics (Sommerfeld, 1927)', isCorrect: true },
+      { text: 'Yes — each electron contributes 3/2 k_B to the heat capacity by equipartition', isCorrect: false, misconceptionId: `${FDIR}:MC-3` },
+    ],
+    correctValue: 'no — measured C_V is ~0.02 Nk_B for copper at 300 K, ~75× below the classical prediction',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${FDIR}:MC-3`],
+    source: `${FDIR_SRC} — MC-3 Probe line verbatim + conflict evidence [P28] (measured vs. classical, Sommerfeld formula) and its S6 copper computation (k_BT/E_F ≈ 0.004); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: FREN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You have computed the partition function Z of an ideal gas. Do you already have its pressure, or do you need a separate equation of state?',
+    choices: [
+      { text: 'You already have it. F = −k_BT ln Z is the master link, and every thermodynamic property is a derivative of F: pressure P = −(∂F/∂V)_T = k_BT (∂ ln Z/∂V)_T, entropy S = −(∂F/∂T)_V, internal energy U = F + TS, and so on. Deriving PV = Nk_BT for an ideal gas is one differentiation of ln Z away — no separate equation of state is invoked', isCorrect: true },
+      { text: 'You need a separate equation of state — Z is just for entropy and heat capacity', isCorrect: false, misconceptionId: `${FREN}:MC-3` },
+    ],
+    correctValue: 'F = −k_BT ln Z is the master link; P, S, U, C_V are all derivatives of ln Z',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${FREN}:MC-3`],
+    source: `${FREN_SRC} — MC-3 Probe line + conflict evidence (F = −k_BT ln Z; P = k_BT ∂ln Z/∂V) and the S6 ideal-gas derivation from F; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: MAXB,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'For the Maxwell-Boltzmann SPEED distribution f(v), is f(0) zero or positive?',
+    choices: [
+      { text: 'Zero. The distribution is f(v) = C v² e^(−mv²/2k_BT), and the v² factor kills f(0). Geometrically it is the area 4πv² of the spherical shell of radius v in velocity space — there is only one velocity vector with speed exactly zero, and many directions for any nonzero speed. Drop the v² and you get the 1D velocity-COMPONENT distribution f(v_x), which does peak at v_x = 0; that is a different quantity', isCorrect: true },
+      { text: 'Positive — f(v) is just the Boltzmann factor e^(−mv²/2k_BT), so f(0) = C', isCorrect: false, misconceptionId: `${MAXB}:MC-2` },
+    ],
+    correctValue: 'zero — the v² phase-space factor makes f(0) = 0 and shifts the peak to v_p > 0',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MAXB}:MC-2`],
+    source: `${MAXB_SRC} — MC-2 Probe line verbatim + conflict evidence [P28] (f(0) = 0), the 4πv²dv geometric bridge and the 1D-vs-3D discrimination pair; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: PTFN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The mean energy is ⟨E⟩ = −∂(ln Z)/∂β. If you instead differentiate ln Z with respect to T, do you get the same number?',
+    choices: [
+      { text: 'No — β and T are inversely related (β = 1/k_BT), so by the chain rule ∂/∂T = (dβ/dT)(∂/∂β) = −1/(k_BT²) × ∂/∂β. To recover ⟨E⟩ from a T-derivative you need the extra factor: ⟨E⟩ = k_BT² × ∂(ln Z)/∂T. Verify on the two-state system Z = e^(−βε) + e^(βε): both routes give ⟨E⟩ = −ε tanh(βε), but only after the chain-rule factor is included on the T side', isCorrect: true },
+      { text: 'Yes — I just differentiated with respect to T instead of β', isCorrect: false, misconceptionId: `${PTFN}:MC-3` },
+    ],
+    correctValue: 'no — differs by dβ/dT = −1/(k_BT²); ⟨E⟩ = k_BT² · ∂(ln Z)/∂T',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PTFN}:MC-3`],
+    source: `${PTFN_SRC} — MC-3 Probe line verbatim + conflict evidence [P28] (dβ/dT = −1/k_BT²) and the S6 two-state cross-check with ε tanh(βε); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: PROB,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a 4-molecule box, all four ending up in one half has probability 1/16 — small, but not vanishing. For a mole of gas, is there any meaningful chance every molecule sits in the left half?',
+    choices: [
+      { text: 'No — "small" becomes "never in cosmic history". The number of (N/2, N/2) arrangements over the (N, 0) arrangement is C(N, N/2) ≈ 2^N/√(πN/2). For N = 10²³ the ratio is 2^(10²³), a number with about 10²² digits, so the probability of (N, 0) is 1/2^(10²³) — indistinguishable from zero in any finite time. Small-N and large-N intuitions belong to different regimes; this is why macroscopic statistical statements are effectively certain', isCorrect: true },
+      { text: 'Yes — there is always some probability, so the gas MIGHT be ordered given enough time', isCorrect: false, misconceptionId: `${PROB}:MC-4` },
+    ],
+    correctValue: 'no — probability 1/2^(10²³) for a mole; effectively zero',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PROB}:MC-4`],
+    source: `${PROB_SRC} — MC-4 Probe line verbatim (the 4-molecule → 10²³ extrapolation) + its C(N, N/2) ≈ 2^N/√(πN/2) conflict evidence [P28]; distractor is the characteristic phrase`,
+  },
+]
+
 export const AUTHORED_PROBES: SeedProbe[] = [
   ...S2_QM_COVERAGE_PROBES,
+  ...S2_STAT_COVERAGE_PROBES,
   ...S2_MOD_COVERAGE_PROBES,
   ...UNITS_PROBES,
   ...VEL_PROBES,
