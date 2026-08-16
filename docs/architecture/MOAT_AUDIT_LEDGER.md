@@ -482,6 +482,42 @@ nullable, `ADD COLUMN IF NOT EXISTS`. **Production-verified**: column present,
 `_prisma_migrations` row `finished_at` set. **No historical repair**: 146 rows,
 0 carrying a marker, `sum(attempts)` 146 — unchanged by the migration.
 
+**LIVE-VERIFIED** on the real test account, deployment
+`dpl_8y8tLnRT4is6p1TaKs8rqjkRPrEe` (commit `f70c3a4`), played as a weak learner
+on `chem.found.states-of-matter`. One structured MCQ, answered correctly once:
+
+```
+[mcq-grade]                chosen: 1, correct: true       <- graded server-side
+[ladder]                   signalTag:true correctness:true
+                           GUIDE -> CHECK
+[topic-progress-evidence]  event: 'cmsw33inq000jk3045auc7akd'
+                           score: 65, outcome: 'applied'  <- the new code path
+```
+
+`topic_progress` before → after:
+
+```
+attempts 1 -> 2      masteryPct 25 -> 65     lastScore 25 -> 65
+lastEvidenceMessageId  NULL -> cmsw33inq000jk3045auc7akd
+updatedAt  15:34:24 -> 17:34:11
+```
+
+Exactly one increment for one answer. The marker was confirmed against the
+`messages` table to be the learner's own USER row (`content: "B"`,
+17:33:56) — the identity is genuinely the learner's utterance, not a
+synthesised key.
+
+Two negative controls fell out of the same session, both correct: a PROSE
+question answered "C" produced no `[mcq-grade]`, no signal, and **no write at
+all** (`completionSuppressed: true` — the prose-MCQ guard refusing to record
+ungraded correctness), and the ladder moved `GUIDE -> CHECK` while
+`checkCorrect` stayed 0, exactly as `masteryLadderReachability.test.ts`
+predicts.
+
+**Evidence states, kept separate:** repo-fixed `f70c3a4` · deployed
+`dpl_8y8t…` READY · production-verified (migration applied, 146 rows untouched)
+· live-verified (the run above).
+
 **Regression** — `src/tests/topicProgressEvidenceIdempotency.test.ts`, 11 tests,
 each asserting `attempts` advanced by exactly one: normal success (existing row
 and first create), pre-commit failure + retry, post-commit timeout + retry (the
