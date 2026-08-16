@@ -422,7 +422,9 @@ ends in `.catch(() => {})` — a silent swallow. The project's own
 `src/lib/db/withRetry.ts` already lists **P1008** as retryable, so the remedy
 exists and this write simply does not use it.
 
-**Smallest root fix — PROPOSED, NOT IMPLEMENTED.** Wrap that upsert in the
+**FIX IMPLEMENTED 2026-08-16** (commit `f70c3a4`) — see the section below.
+
+**Smallest root fix — as originally PROPOSED.** Wrap that upsert in the
 existing `withRetry` and log the failure instead of swallowing it. Stopped
 short of implementing because it is **not unambiguously safe**: the update
 carries `attempts: { increment: 1 }`, which is not idempotent, and a P1008
@@ -430,6 +432,64 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## Evidence idempotency — the P1008 fix (2026-08-16, commit `f70c3a4`)
+
+**Idempotent first, retried second.** The order matters and is the whole point:
+a socket timeout never reports whether the statement committed, so wrapping the
+old blind `attempts: { increment: 1 }` in `withRetry` would have traded a lost
+increment for a double one. Corrupting the ledger in the other direction is not
+a fix.
+
+**Identity — existing, not invented.** The learner's own `Message` row id. It is
+already database-generated and already stable across every retry of that turn,
+so no second source of truth appears. It is stamped on the `TopicProgress` row
+it guards (`lastEvidenceMessageId`), so the marker and the counter it protects
+commit in the SAME row write and cannot drift apart.
+
+**Enforced by the database, not an in-memory flag.** One statement:
+
+```sql
+UPDATE topic_progress
+   SET attempts = attempts + 1, masteryPct = $score, lastScore = $score,
+       status = 'IN_PROGRESS', "lastEvidenceMessageId" = $event
+ WHERE (userId, subjectSlug, topicSlug) = (...)
+   AND status NOT IN ('MASTERED','COMPLETED')
+   AND ("lastEvidenceMessageId" IS NULL OR "lastEvidenceMessageId" <> $event)
+```
+
+The guard and the increment are evaluated under the row lock, so a concurrent
+duplicate serialises behind it, re-reads the stamped marker and matches zero
+rows. There is no read-then-write window left to lose.
+
+Two details that would have been silent bugs:
+
+- The `IS NULL` arm is **required**. SQL's `NULL <> 'x'` is NULL, not true, so a
+  bare `<>` would have skipped every row written before this column existed —
+  i.e. all 146 of them.
+- The MASTERED/COMPLETED guard moved **into** the same WHERE. It used to be a
+  separate `findUnique` followed by an upsert, which was its own race.
+
+**Semantics preserved exactly.** Same 65/25 scores, still never writes
+MASTERED/COMPLETED, no threshold, phase, counter meaning or mastery rule
+touched. The ladder is not involved. Failures now log
+`[topic-progress-evidence] FAILED after retries` instead of `.catch(() => {})`.
+
+**Migration** `20260816180000_topic_progress_evidence_idempotency` — additive,
+nullable, `ADD COLUMN IF NOT EXISTS`. **Production-verified**: column present,
+`_prisma_migrations` row `finished_at` set. **No historical repair**: 146 rows,
+0 carrying a marker, `sum(attempts)` 146 — unchanged by the migration.
+
+**Regression** — `src/tests/topicProgressEvidenceIdempotency.test.ts`, 11 tests,
+each asserting `attempts` advanced by exactly one: normal success (existing row
+and first create), pre-commit failure + retry, post-commit timeout + retry (the
+committed-but-unreported case), five repeated retries, concurrent duplicates on
+both the update and the create race. Plus the semantics guards: a genuinely
+different event still increments, a certified concept stays locked and is never
+overwritten, a NULL marker counts as unapplied, and a non-unique error
+propagates rather than being swallowed.
 
 ---
 
