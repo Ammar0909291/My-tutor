@@ -7892,3 +7892,172 @@ orphan pass that touched all 238.
 
 `npx tsc --noEmit` clean; 332 files / 7079 passed / 9 skipped;
 `npm run build` exit 0. No production writes (owner decision).
+
+---
+
+# Iteration — PHYSICS CHECK 3: phys.mech domain complete, Stage 4 (2026-08-16)
+
+The whole domain, read rather than counted: **60 concepts, 420 probes**, each
+tagged probe's stem taken against its blueprint's misconception body and asked
+the one Stage 4 question — *could a learner who HOLDS this misconception still
+answer correctly?* Twelve defects in five classes. Physics Stage 4 moves
+**8/222 → 68/222**.
+
+Every structural check over this corpus was green throughout. Ids joined,
+distractors mapped, breadth was covered, the claimed-misconception-has-a-
+distractor test read zero. That is the point of Stage 4 and the reason it
+cannot be automated.
+
+## The five classes
+
+| # | class | instances |
+|---|---|---|
+| 1 | a second NAME for a misconception the same blueprint documents | 5 |
+| 2 | crossed pair — both ids documented, probe carried the other one | 1 |
+| 3 | tag whose distractor expresses no misconception of that concept | 2 |
+| 4 | non-discriminating stem — the misconception answers correctly | 4 |
+| 5 | distractor TEXT states a different misconception than its tag | 1 |
+
+### Class 1 — five renames (orphans 47 → 42)
+
+`MISCONCEPTION_DETECTED` is written against the id; an id joining to no
+blueprint entry has no `bridge_text` and no `replacement_text`, so the learner
+is detected and then **not repaired**. Each was confirmed against the
+blueprint's own trigger-signal prose, never on token similarity — the ledger
+already records that instrument failing.
+
+- `conservative-forces` `MC-PATH-MATTERS` → `MC-PATH-INDEPENDENCE-HARD`
+  (trigger signal verbatim: "gravity does more work when you fall a longer
+  path (e.g. along a ramp vs vertically)"). The same id name is **legitimate**
+  on `conservation-of-energy`, which does document it — only the
+  conservative-forces copies moved, and a guard pins that.
+- `kinematics-2d` `MC-AXES-NOT-INDEPENDENT` → `MC-AXES-COUPLED` (same
+  blueprint, same horizontal-throw-from-a-cliff conflict evidence).
+- `projectile-motion` `MC-MASS-AFFECTS-FALL` → `MC-HEAVIER-FALLS-FASTER`.
+- `relative-motion` `MC-SCALAR-VECTOR-ADDITION` → `MC-FRAMES-ADD-SPEEDS`.
+- `newtons-first-law` `M1` → `MC-1` — the Educational Brain entry's label for
+  the belief the blueprint calls MC-1, whose repair chain ends at P32
+  "spaceship with engines off", this probe's exact scenario.
+
+No canonicalSlug changes (slug is `conceptId:probeKind:gradeBand[:difficulty]`),
+so no seeded identity is stranded and no slot is re-identified.
+
+### Class 2 — the crossed pair
+
+`normal-force`'s FORMATIVE probe *"Is the normal force the Third-Law reaction
+to an object's weight?"*, distractor *"Yes — N and weight are an
+action-reaction pair"*, was tagged **`MC-NORMAL-EQUALS-WEIGHT`**. Both ids are
+documented in that blueprint. The stem and distractor are unambiguously
+`MC-NORMAL-IS-REACTION`; the id it carried is the *magnitude* belief, whose
+repair teaches resolving perpendicular to the surface — the wrong remedy,
+delivered on a correct detection. Retagged.
+
+### Class 3 — two false tags, removed rather than retargeted
+
+- `kinetic-energy` PD-1 claimed `MC-KE-LINEAR`, whose trigger signals are all
+  about v² ("double speed → double KE", "computes KE = mv"). Its distractor is
+  *"ignoring friction's negative work"* — a different belief. That belief IS
+  documented, but on another concept
+  (`work-energy-theorem:MC-PARTIAL-WORK`), and ids are concept-scoped, so
+  there is no correct id to move it to.
+- `work-energy-theorem` PD-1/PD-2 claimed `MC-PARTIAL-WORK`, whose trigger
+  signals are all "ignores friction in W_net". Its distractor contains no
+  friction at all — it is `KE = mv` / `W = F + d`, prerequisite formula
+  misremembering.
+
+Untagged, not retargeted: attaching a probe to the wrong diagnosis to make a
+number pass is worse than the gap. Both misconceptions keep ≥2 correct
+carriers, so nothing loses coverage. Recorded as curriculum feedback.
+
+### Class 4 — four non-discriminating stems
+
+The class the `phys.meas.vector-products` wall probe belonged to.
+
+- **`canonical-transformations` MP-4** is the sharpest instance and the same
+  shape as the wall probe: *"A student says Q=2q, P=p/2 is canonical because
+  it's just a scaling. Verify or refute."* — and that transformation **really
+  is canonical**. A learner holding `MC-CT-ANY-COORD-CHANGE` ("any smooth
+  invertible map qualifies") answers "canonical", is graded correct, and keeps
+  the belief. Changed to **Q=2q, P=2p**: equally "just a scaling", equally
+  smooth and invertible, `{Q,P}=4≠1`. The misconception now yields the wrong
+  verdict.
+- **`acceleration`** 21-day retrieval asked only "can a and v point in
+  opposite directions?" — a holder of "momentarily at rest ⇒ no acceleration"
+  answers that correctly, because the ball-thrown-up example is about the
+  RISE. Extended to require the zero-velocity instant.
+- **`circular-motion`** MP-5 asked for ω, v and |F_c| — a centrifugal-force
+  believer computes identical numbers. Now requires the direction, the real
+  object exerting it, and whether any outward force acts in the ground frame.
+- **`hamilton-jacobi-equation`** MP-2 asked only to verify a candidate S
+  against the PDE, which is pure differentiation and something a holder of
+  `MC-HJ-S-IS-ACTION` does perfectly. Now also asks whether the trajectory had
+  to be known first. The answer states honestly that for this free particle S
+  *does* coincide numerically with ∫L dt along the classical path — which is
+  precisely why the belief survives — but that it is defined as a solution of
+  the PDE.
+
+### Class 5 — right tag, wrong distractor text
+
+`newtons-first-law`'s satellite item is the blueprint's own DB-2b/TA-A04 item
+and its `MC-4` tag ("the First Law only applies to objects at rest") is right
+for the stem. Its distractor read *"Non-zero — it needs thrust to maintain its
+speed"*, which is **MC-1's** observable symptom. A learner picking it was
+routed to MC-4's repair for something they said in MC-1's words — and MC-1's
+repair is a different chain, marked FOUNDATIONAL for MC-3. Distractor
+rewritten to state MC-4.
+
+## Production, read directly — 1 of 12 is live
+
+Queried `asset_identity` ⋈ `probe_assets` for all twelve concepts. **Exactly
+one defect reaches a learner**: `phys.mech.newtons-first-law:mcq:en:high:
+proficient` is **ACTIVE, HUMAN_CURATOR, carrying `M1`** — an id that joins to
+nothing, so the detection fires and the repair can never resolve. Every other
+defective probe is repo-only and has never been seeded; the ACTIVE rows for
+the other eleven concepts carry correctly-tagged probes.
+
+**The fix is at source only.** Production still carries `M1` and will keep
+carrying it: the seed script skips identities that already exist, and this
+campaign makes no production writes (owner decision). Re-seeding that one row
+is owner-gated. Stated as three different sentences on purpose —
+authored-in-repo: yes; seeded-in-production: no; production-verified: no.
+
+## A correction to this ledger's own record
+
+The previous entry reported the orphan residue as **48 → 46**. Measured, it was
+**47** before this pass. The gap is `newtons-first-law:M1`: that sweep looked
+for descriptive `MC-*` ids and `M1` does not have that shape, so it was missed
+— while `misconceptionIdsJoinToBlueprints.test.ts` had been counting it
+correctly the whole time. The ratchet is now **42**, tightened from 49.
+
+## Curriculum feedback (no blueprint touched)
+
+Novel orphans confirmed as real misconceptions the blueprint does not register:
+`projectile-motion:MC-AXES-NOT-INDEPENDENT` (its sibling `kinematics-2d`
+documents the belief as MC-AXES-COUPLED, but ids are concept-scoped so it
+cannot be borrowed), `surface-tension:MC-LARGER-HAS-HIGHER-PRESSURE`,
+`acceleration:MC-DECELERATION-SEPARATE`,
+`bernoulli:MC-FASTER-MEANS-HIGHER-PRESSURE`; plus the two Class-3 beliefs now
+untagged. Also noted: `buoyancy`'s MC-BUOYANCY-WEIGHT probe states its own
+counterexample in the stem (1 kg ball sinks, 1000 kg ship floats) before
+asking, which cues the answer — weak rather than defective, left alone.
+
+## Regression protection
+
+`src/tests/physicsMechProbeDiscrimination.test.ts` — one guard per class plus
+every individual correction, so a revert fails with the specific id or stem
+rather than a count; non-vacuity bounds on corpus size (≥60 concepts, ≥400
+probes); over-correction guard on the legitimate `conservation-of-energy:
+MC-PATH-MATTERS`; coverage guards so untagging cannot silently drop a
+documented misconception. Mutation-tested: reverting `MC-1` to `M1` fails the
+suite with that id named.
+
+## Validation
+
+`npx tsc --noEmit` clean; **333 files / 7102 passed / 9 skipped** (was 332 /
+7079); `npm run build` exit 0. No production writes.
+
+## Stage 4 standing
+
+phys.meas 8/8, phys.mech 60/60 → **68 of 222** blueprint-backed physics
+concepts read this way. The remaining 154 are not certified by any file in
+this repo.

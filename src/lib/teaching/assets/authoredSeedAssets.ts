@@ -43335,8 +43335,15 @@ const ACC_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'short_answer',
     gradeBand: GradeBand.HIGH,
-    stem: 'RETRIEVAL PRACTICE (Interval 4, 21 days): Distinguish acceleration and velocity — can they point in opposite directions? Give an example.',
-    correctValue: 'yes — e.g. a ball thrown upward has velocity upward but acceleration (gravity) downward throughout the rise; this is what causes it to slow down',
+    // NON-DISCRIMINATING STEM, corrected (Moat S4, phys.mech pass). This is
+    // tagged MC-ZERO-VELOCITY-ZERO-ACCELERATION ("if an object is momentarily
+    // at rest it has no acceleration"), but it only asked whether a and v can
+    // point in opposite directions. A learner who holds the misconception
+    // answers that correctly — "ball thrown up: v up, a down" is about the
+    // RISE, and says nothing about the instant at the top where v = 0. The
+    // second clause is what the tag actually claims to detect.
+    stem: 'RETRIEVAL PRACTICE (Interval 4, 21 days): Distinguish acceleration and velocity. Can they point in opposite directions? And can an object have zero velocity and non-zero acceleration at the same instant? Give one example of each.',
+    correctValue: 'opposite directions: yes — a ball thrown upward has velocity upward but acceleration (gravity) downward throughout the rise, which is what slows it down. Zero velocity with non-zero acceleration: yes — at the very top of that throw v = 0 for an instant while a is still 9.8 m/s² downward; zero velocity does not mean zero acceleration',
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${ACC}:MC-ZERO-VELOCITY-ZERO-ACCELERATION`],
     source: `${ACC_SRC} — Section 9 Retrieval Schedule, Interval 4 (21 days)`,
@@ -43418,11 +43425,11 @@ const KIN2_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC: In 2D projectile-style motion, write the x and y equations of motion for a ball thrown horizontally at 12 m/s from height 45 m. Which axis is constant velocity, which has acceleration?',
     choices: [
       { text: 'x = 12t (constant vₓ = 12 m/s); y = −½(9.8)t² (a_y = −9.8 m/s², no initial vertical speed)', isCorrect: true },
-      { text: 'Both x and y have the same acceleration since it is the same object', isCorrect: false, misconceptionId: `${KIN2}:MC-AXES-NOT-INDEPENDENT` },
+      { text: 'Both x and y have the same acceleration since it is the same object', isCorrect: false, misconceptionId: `${KIN2}:MC-AXES-COUPLED` },
     ],
     correctValue: 'x: constant vₓ=12; y: a_y=−9.8 m/s²',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${KIN2}:MC-AXES-NOT-INDEPENDENT`],
+    targetedMisconceptions: [`${KIN2}:MC-AXES-COUPLED`],
     source: `${KIN2_SRC} — Component 2 Prerequisite Diagnostic Block PD-1 (2D SUVAT and axis independence)`,
   },
   {
@@ -43433,7 +43440,7 @@ const KIN2_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (Mastery Probe MP-1, axis independence): A ball rolls off a table horizontally at the same instant a second ball is dropped straight down from the same height. Which lands first?',
     correctValue: 'both land simultaneously — horizontal motion does not affect the independent vertical fall time',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${KIN2}:MC-AXES-NOT-INDEPENDENT`],
+    targetedMisconceptions: [`${KIN2}:MC-AXES-COUPLED`],
     source: `${KIN2_SRC} — Component 6 Mastery Probe Set MP-1`,
   },
   {
@@ -43466,7 +43473,7 @@ const KIN2_ASSESS_PROBES: SeedProbe[] = [
     stem: 'RETRIEVAL PRACTICE (synthesis, Mastery Probe MP-5 style): A ball is launched at 25 m/s at 37° (sin37°=0.6, cos37°=0.8). Give its x and y velocity components, and state which stays constant throughout the flight.',
     correctValue: 'vₓ = 20 m/s (constant throughout); v_y = 15 m/s initially, decreasing under gravity',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${KIN2}:MC-AXES-NOT-INDEPENDENT`],
+    targetedMisconceptions: [`${KIN2}:MC-AXES-COUPLED`],
     source: `${KIN2_SRC} — Component 6 Mastery Probe Set MP-5 (synthesis)`,
   },
   {
@@ -43513,11 +43520,11 @@ const PROJ_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (Mastery Probe MP-1, mass independence): Two balls, A (0.1 kg) and B (2 kg), are thrown horizontally at 10 m/s from the same height. Which lands first? Which travels further?',
     choices: [
       { text: 'Both land simultaneously and travel the same range — mass appears in neither equation', isCorrect: true },
-      { text: 'The heavier ball (B) lands first because it falls faster', isCorrect: false, misconceptionId: `${PROJ}:MC-MASS-AFFECTS-FALL` },
+      { text: 'The heavier ball (B) lands first because it falls faster', isCorrect: false, misconceptionId: `${PROJ}:MC-HEAVIER-FALLS-FASTER` },
     ],
     correctValue: 'both land at the same time and travel the same range; mass is irrelevant',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${PROJ}:MC-MASS-AFFECTS-FALL`],
+    targetedMisconceptions: [`${PROJ}:MC-HEAVIER-FALLS-FASTER`],
     source: `${PROJ_SRC} — Component 6 Mastery Probe Set MP-1`,
   },
   {
@@ -43564,11 +43571,11 @@ const RELM_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (Prerequisite Diagnostic PD-1): Vector A = 4 m/s east. Vector B = 3 m/s north. What is |A + B| and its direction?',
     choices: [
       { text: '5 m/s at arctan(3/4) ≈ 37° north of east', isCorrect: true },
-      { text: '7 m/s, adding the magnitudes directly', isCorrect: false, misconceptionId: `${RELM}:MC-SCALAR-VECTOR-ADDITION` },
+      { text: '7 m/s, adding the magnitudes directly', isCorrect: false, misconceptionId: `${RELM}:MC-FRAMES-ADD-SPEEDS` },
     ],
     correctValue: '5 m/s at ≈37° north of east',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${RELM}:MC-SCALAR-VECTOR-ADDITION`],
+    targetedMisconceptions: [`${RELM}:MC-FRAMES-ADD-SPEEDS`],
     source: `${RELM_SRC} — Component 2 Prerequisite Diagnostic Block PD-1`,
   },
   {
@@ -43671,8 +43678,13 @@ const CIRC_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'short_answer',
     gradeBand: GradeBand.HIGH,
-    stem: 'RETRIEVAL PRACTICE (Mastery Probe MP-5 style, synthesis): A 2 kg mass moves in a horizontal circle of radius 0.5 m with period T = 1.2 s. Find its angular velocity, linear speed, and centripetal force.',
-    correctValue: 'ω = 2π/T ≈ 5.24 rad/s; v = rω ≈ 2.62 m/s; F_c = mrω² ≈ 27.4 N',
+    // NON-DISCRIMINATING STEM, corrected (Moat S4, phys.mech pass). Tagged
+    // MC-CENTRIFUGAL-REAL, but it only asked for three magnitudes — and a
+    // learner who believes an outward centrifugal force is real computes
+    // exactly the same numbers. The belief is about DIRECTION and about which
+    // real interaction supplies the force, so the item now asks for both.
+    stem: 'RETRIEVAL PRACTICE (Mastery Probe MP-5 style, synthesis): A 2 kg mass on a string moves in a horizontal circle of radius 0.5 m with period T = 1.2 s. Find its angular velocity, linear speed, and the centripetal force. State which way that force points, name the real object that exerts it, and say whether any outward force also acts on the mass in the ground frame.',
+    correctValue: 'ω = 2π/T ≈ 5.24 rad/s; v = rω ≈ 2.62 m/s; F_c = mrω² ≈ 27.4 N, directed INWARD toward the centre, exerted by the string (tension). No outward force acts on the mass in the ground frame — the outward pull the whirler feels is the string\'s Third-Law partner acting on the HAND, not a force on the mass',
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${CIRC}:MC-CENTRIFUGAL-REAL`],
     source: `${CIRC_SRC} — Component 6 Mastery Probe Set MP-5`,
@@ -43769,10 +43781,19 @@ const N1_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'mcq',
     gradeBand: GradeBand.HIGH,
+    // DISTRACTOR/TAG MISMATCH, corrected (Moat S4, phys.mech pass). The stem
+    // is right for MC-4 ("the First Law only applies to objects at rest" —
+    // this is the blueprint's own DB-2b/TA-A04 item), but the distractor text
+    // stated MC-1's belief instead ("it needs thrust to maintain its speed" is
+    // MC-1's observable symptom, "what keeps it going?"). A learner picking it
+    // was routed to MC-4's repair (P07 satellite → both cases, one principle)
+    // for something they said in MC-1's words, whose repair is a different
+    // chain and is FOUNDATIONAL for MC-3. The distractor now expresses the
+    // misconception the tag claims.
     stem: 'FORMATIVE: A satellite travels at 7,000 m/s in a straight line with no thrust. What is the net force on it?',
     choices: [
       { text: 'Zero — constant velocity means no acceleration means net force = 0', isCorrect: true },
-      { text: 'Non-zero — it needs thrust to maintain its speed', isCorrect: false, misconceptionId: `${N1}:MC-4` },
+      { text: 'You cannot say — Newton’s First Law is about objects at rest, so it does not cover a satellite that is moving', isCorrect: false, misconceptionId: `${N1}:MC-4` },
     ],
     correctValue: 'zero net force',
     difficulty: ProbeDifficulty.DEVELOPING,
@@ -44191,14 +44212,22 @@ const NORM_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'mcq',
     gradeBand: GradeBand.HIGH,
+    // CROSSED PAIR, corrected (Moat S4, phys.mech pass). Both ids are
+    // documented in THIS blueprint, and this probe carried the wrong one.
+    // The stem and the distractor are about the Third-Law pairing, which is
+    // MC-NORMAL-IS-REACTION ("The normal force is the Third-Law reaction to
+    // the weight"); MC-NORMAL-EQUALS-WEIGHT is the magnitude belief (N = mg
+    // on an incline / in an accelerating lift) and its repair teaches
+    // resolving perpendicular to the surface — the wrong remedy for a learner
+    // who picked this distractor.
     stem: 'FORMATIVE: Is the normal force the Third-Law reaction to an object’s weight?',
     choices: [
       { text: 'No — N pairs with the body’s push on the surface; weight pairs with the body pulling the Earth up', isCorrect: true },
-      { text: 'Yes — N and weight are an action-reaction pair', isCorrect: false, misconceptionId: `${NORM}:MC-NORMAL-EQUALS-WEIGHT` },
+      { text: 'Yes — N and weight are an action-reaction pair', isCorrect: false, misconceptionId: `${NORM}:MC-NORMAL-IS-REACTION` },
     ],
     correctValue: 'no, different Third-Law pairs',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${NORM}:MC-NORMAL-EQUALS-WEIGHT`],
+    targetedMisconceptions: [`${NORM}:MC-NORMAL-IS-REACTION`],
     source: `${NORM_SRC} — Section 7 Assessment Battery P74 classification item`,
   },
   {
@@ -44377,11 +44406,24 @@ const KE_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (Prerequisite PD-1, Work): A 10 N force pulls a 3 kg box 5 m along the floor with friction 6 N opposing. What is the net work?',
     choices: [
       { text: 'W_net = (10−6) × 5 = 20 J', isCorrect: true },
-      { text: 'W_net = 10 × 5 = 50 J (ignoring friction’s negative work)', isCorrect: false, misconceptionId: `${KE}:MC-KE-LINEAR` },
+      // FALSE TAG REMOVED (Moat S4, phys.mech pass). This carried
+      // `${KE}:MC-KE-LINEAR`, whose blueprint trigger signals are all about v²
+      // ("double speed → double KE", "computes KE = mv"). The distractor
+      // expresses a different belief entirely — ignoring friction's negative
+      // work — so a learner who picked it was detected as KE-LINEAR and given
+      // the v² repair for an error about net work. The belief it does express
+      // is documented, but on ANOTHER concept
+      // (phys.mech.work-energy-theorem:MC-PARTIAL-WORK), and ids are
+      // concept-scoped, so there is no correct id to move it to here.
+      // Untagged rather than retargeted: this concept's blueprint not
+      // registering it is Curriculum-Pipeline feedback, not a licence to
+      // attach the probe to the wrong diagnosis. The probe itself is
+      // unchanged and still works as the PD-1 prerequisite check.
+      { text: 'W_net = 10 × 5 = 50 J (ignoring friction’s negative work)', isCorrect: false },
     ],
     correctValue: '20 J',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${KE}:MC-KE-LINEAR`],
+    targetedMisconceptions: [],
     source: `${KE_SRC} — Component 2 Prerequisite Dependency Map PD-1`,
   },
   {
@@ -44539,11 +44581,19 @@ const WET_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (Prerequisite PD-1/PD-2): A 5 kg cart moves at 6 m/s (KE?) and separately a 15 N force acts over 4 m at θ=0° (work?). What are the two values?',
     choices: [
       { text: 'KE = ½×5×36 = 90 J; W = 15×4 = 60 J', isCorrect: true },
-      { text: 'KE = 5×6 = 30 J; W = 15+4 = 19 J', isCorrect: false, misconceptionId: `${WET}:MC-PARTIAL-WORK` },
+      // FALSE TAG REMOVED (Moat S4, phys.mech pass). This carried
+      // MC-PARTIAL-WORK, whose blueprint trigger signals are all "computes
+      // W_net from the applied force only, ignoring friction". This
+      // distractor has no friction in it at all — it is formula
+      // misremembering (KE = mv instead of ½mv², W = F + d instead of F × d),
+      // a prerequisite-arithmetic error the blueprint does not register.
+      // MC-PARTIAL-WORK keeps two correctly-tagged carriers in this concept,
+      // so nothing loses coverage.
+      { text: 'KE = 5×6 = 30 J; W = 15+4 = 19 J', isCorrect: false },
     ],
     correctValue: 'KE = 90 J; W = 60 J',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${WET}:MC-PARTIAL-WORK`],
+    targetedMisconceptions: [],
     source: `${WET_SRC} — Component 2 Prerequisite Dependency Map PD-1/PD-2`,
   },
   {
@@ -44725,11 +44775,11 @@ const CONSV_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (Prerequisite Diagnostic PD-1): A ball is released from height h on a frictionless ramp. What is its speed at the bottom?',
     choices: [
       { text: 'v = √(2gh), from mgh = ½mv² (mechanical energy conserved since only gravity, a conservative force, acts)', isCorrect: true },
-      { text: 'v depends on the exact shape of the ramp, not just h', isCorrect: false, misconceptionId: `${CONSV}:MC-PATH-MATTERS` },
+      { text: 'v depends on the exact shape of the ramp, not just h', isCorrect: false, misconceptionId: `${CONSV}:MC-PATH-INDEPENDENCE-HARD` },
     ],
     correctValue: 'v = √(2gh)',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${CONSV}:MC-PATH-MATTERS`],
+    targetedMisconceptions: [`${CONSV}:MC-PATH-INDEPENDENCE-HARD`],
     source: `${CONSV_SRC} — Component 2 Prerequisite Diagnostic Block PD-1`,
   },
   {
@@ -44773,7 +44823,7 @@ const CONSV_ASSESS_PROBES: SeedProbe[] = [
     stem: 'RETRIEVAL PRACTICE (Mastery Probe MP-2 style, path independence): A 5 kg object moves along path 1 (10 m) against a 20 N friction force, then along path 2 (3 m, same friction). Compare W_friction for the two paths. Now compare W_gravity for two paths with the same 4 m height gain.',
     correctValue: 'friction: W₁=−200 J, W₂=−60 J (different — path-dependent, non-conservative); gravity: W₁=W₂=−196 J (same — path-independent, conservative)',
     difficulty: ProbeDifficulty.ADVANCED,
-    targetedMisconceptions: [`${CONSV}:MC-PATH-MATTERS`],
+    targetedMisconceptions: [`${CONSV}:MC-PATH-INDEPENDENCE-HARD`],
     source: `${CONSV_SRC} — Component 6 Mastery Probe Set MP-2`,
   },
 ]
@@ -47064,8 +47114,17 @@ const CANT_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'short_answer',
     gradeBand: GradeBand.HIGH,
-    stem: 'RETRIEVAL PRACTICE (Mastery Probe MP-4 style, verify or refute): A student says "Q=2q, P=p/2 is canonical because it’s just a scaling." Verify or refute using the Poisson bracket criterion.',
-    correctValue: '{Q,P}={2q,p/2}=2·(1/2)·{q,p}=1 ✓ — this scaling IS canonical, but the reasoning must check {Q,P} explicitly, not just assume "scaling looks canonical"',
+    // NON-DISCRIMINATING STEM, corrected (Moat S4, phys.mech pass). Same class
+    // as the phys.meas.vector-products wall probe: the misconception produced
+    // the CORRECT answer. The item is tagged MC-CT-ANY-COORD-CHANGE ("any
+    // smooth invertible coordinate change is canonical"), and the old example
+    // Q=2q, P=p/2 genuinely IS canonical — so a learner holding the
+    // misconception says "canonical", is graded correct, and keeps the belief.
+    // The scaling is now Q=2q, P=2p, which is equally "just a scaling" and
+    // equally smooth and invertible, but {Q,P}=4≠1. The misconception now
+    // yields the wrong verdict, which is what makes the item diagnostic.
+    stem: 'RETRIEVAL PRACTICE (Mastery Probe MP-4 style, verify or refute): A student says "Q=2q, P=2p is canonical because it’s just a scaling." Verify or refute using the Poisson bracket criterion.',
+    correctValue: 'REFUTE — {Q,P}={2q,2p}=4·{q,p}=4≠1, so this transformation is NOT canonical, even though it is a smooth, invertible, perfectly ordinary scaling. "It is just a coordinate change" is never the test; computing {Q,P} is. (Q=2q with P=p/2 would be canonical — the momentum has to scale inversely.)',
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${CANT}:MC-CT-ANY-COORD-CHANGE`],
     source: `${CANT_SRC} — C5 Mastery-Probe Set MP-4`,
@@ -47093,8 +47152,13 @@ const HAJC_ASSESS_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'short_answer',
     gradeBand: GradeBand.HIGH,
-    stem: 'FORMATIVE (Mastery Probe MP-2, apply): For a free particle H=p²/2m, verify that S=px−p²t/(2m) satisfies the HJ equation.',
-    correctValue: '∂S/∂t=−p²/(2m); ∂S/∂x=p; (1/2m)(∂S/∂x)²=p²/(2m); the sum is 0, satisfying the equation',
+    // NON-DISCRIMINATING STEM, corrected (Moat S4, phys.mech pass). Tagged
+    // MC-HJ-S-IS-ACTION ("S is just the action integral evaluated along an
+    // already-known trajectory"), but a pure verify-by-differentiation task is
+    // something a holder of that belief performs perfectly. The added clause
+    // asks the one question the belief gets wrong.
+    stem: 'FORMATIVE (Mastery Probe MP-2, apply): For a free particle H=p²/2m, verify that S=px−p²t/(2m) satisfies the HJ equation. Did you need to know the particle\'s trajectory in advance to carry out that check? What does your answer say about what S is?',
+    correctValue: '∂S/∂t=−p²/(2m); ∂S/∂x=p; (1/2m)(∂S/∂x)²=p²/(2m); the sum is 0, satisfying the equation. No trajectory was needed — the check is pure differentiation of a candidate function against the PDE. That is the point: S is DEFINED as a solution of ∂S/∂t+H(q,∂S/∂q,t)=0, so it exists before any trajectory is known, and the trajectory is then extracted from it. (For this free particle S does numerically coincide with ∫L dt along the classical path, which is exactly why the "S is just the action integral" reading survives — but the coincidence is a result, not the definition.)',
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${HAJC}:MC-HJ-S-IS-ACTION`],
     source: `${HAJC_SRC} — C5 Mastery-Probe Set MP-2`,

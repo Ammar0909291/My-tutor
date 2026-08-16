@@ -152,11 +152,20 @@ describe('every probed misconception id joins to its blueprint', () => {
   const physics = [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.conceptId.startsWith('phys.'))
 
   it('physics: unjoinable ids do not exceed the known residue', () => {
-    // RATCHET. 60 -> 49 after the eleven verified renames. Every remaining
-    // entry names a misconception its blueprint does not document; closing
-    // them needs a blueprint change, which is the Curriculum Production
-    // Pipeline's to make, not this campaign's.
-    expect(orphanIds(physics).size).toBeLessThanOrEqual(49)
+    // RATCHET. 60 -> 49 after the eleven verified renames, then 47 -> 42 in
+    // the phys.mech Stage 4 pass (five more confirmed renames: see
+    // physicsMechProbeDiscrimination.test.ts). Ratchets only go down.
+    //
+    // Two corrections to the record while tightening this. The audit ledger
+    // reported the residue as 48 -> 46 before that pass; measured here it was
+    // 47. The gap is `phys.mech.newtons-first-law:M1`, which the ledger's
+    // sweep missed because it looked for descriptive `MC-*` ids and M1 does
+    // not have that shape — while THIS test counted it correctly all along.
+    //
+    // Every remaining entry names a misconception its blueprint does not
+    // document; closing them needs a blueprint change, which is the Curriculum
+    // Production Pipeline's to make, not this campaign's.
+    expect(orphanIds(physics).size).toBeLessThanOrEqual(42)
   })
 
   it('chemistry: unjoinable ids do not exceed the known residue', () => {

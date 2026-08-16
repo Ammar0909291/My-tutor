@@ -314,16 +314,24 @@ export const SEED_PROBES: SeedProbe[] = [
     probeKind: 'mcq',
     gradeBand: GradeBand.HIGH,
     // §Misconception library M1 (impetus) verification probe — "spaceship engine cuts out in deep space"
+    //
+    // RETAGGED M1 -> MC-1 (Moat S4, phys.mech pass). The Educational Brain
+    // entry calls this misconception M1; the blueprint calls the SAME belief
+    // MC-1 ("Objects Need Continuous Force to Maintain Motion"), whose repair
+    // chain ends at P32 with "spaceship with engines off" — this exact
+    // scenario. The blueprint id is the one detectMisconceptions can resolve a
+    // repair against, so M1 detected and then never repaired the learner.
+    // canonicalSlug is unaffected (conceptId:probeKind:lang:band[:difficulty]).
     stem: "A spaceship's engine cuts out in deep space, far from any planet or star. What happens to the spaceship?",
     choices: [
       { text: 'It keeps moving at the same speed, in the same direction, indefinitely', isCorrect: true },
-      { text: 'It gradually slows down and eventually stops', isCorrect: false, misconceptionId: 'phys.mech.newtons-first-law:M1' },
-      { text: 'It stops as soon as the engine cuts out', isCorrect: false, misconceptionId: 'phys.mech.newtons-first-law:M1' },
+      { text: 'It gradually slows down and eventually stops', isCorrect: false, misconceptionId: 'phys.mech.newtons-first-law:MC-1' },
+      { text: 'It stops as soon as the engine cuts out', isCorrect: false, misconceptionId: 'phys.mech.newtons-first-law:MC-1' },
     ],
     correctValue: 'It keeps moving at the same speed, in the same direction',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: ['phys.mech.newtons-first-law:M1'],
-    source: 'educational-brain/concepts/physics/phys.mech.newtons-first-law.md — Misconception library M1, delayed/speeded verification probe',
+    targetedMisconceptions: ['phys.mech.newtons-first-law:MC-1'],
+    source: 'educational-brain/concepts/physics/phys.mech.newtons-first-law.md — Misconception library M1, delayed/speeded verification probe (retagged to the blueprint id MC-1, same belief)',
   },
   {
     conceptId: 'eng.phonics.letter-sound-correspondence',
