@@ -52034,6 +52034,207 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
 // evidence, and each distractor states that misconception's characteristic
 // phrase, so the probe genuinely diagnoses the belief rather than merely
 // carrying its id — the S4 standard applied at authoring time.
+/**
+ * MOAT STAGE 2 — phys.qm coverage. Every one of these twelve concepts documents
+ * FOUR misconceptions and carried probes for only three: the same three-probe
+ * authoring template that left phys.mod short, and the reason MC-4 alone
+ * accounted for 39 of the 54 physics-wide gaps.
+ *
+ * Each stem is its blueprint's own **Probe:** line, each correct answer is that
+ * blueprint's **Conflict evidence [P28]** / **Replacement [P31]**, and each
+ * distractor STATES the **Characteristic phrase** so the probe can detect the
+ * belief rather than merely name it. No probe was retagged to raise a number.
+ *
+ * SLOT SAFETY: canonicalSlug is conceptId:probeKind:lang:band[:difficulty], and
+ * difficulty is appended only to slots holding MORE than one probe — so adding
+ * to an occupied singleton slot RE-IDENTIFIES an existing production row. All
+ * twelve concepts hold mcq×2 + misconception_probe×1 and nothing in
+ * `true_false`, verified before authoring; every probe below therefore lands in
+ * a free slot and stays a singleton.
+ */
+const S2_QM_COVERAGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: HOSC,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The raising operator acts as â₊|n⟩ = √(n+1)|n+1⟩. Is that a piece of physics, or only algebraic shorthand for moving up the energy ladder?',
+    choices: [
+      { text: 'Physics — â₊ adds one real quantum of energy ℏω. In quantum optics the same operator is the photon creation operator, and applying it literally creates a photon; in a solid it creates a phonon. The √(n+1) is bosonic enhancement, and it is measurable: absorption rate ∝ n+1 while emission ∝ n', isCorrect: true },
+      { text: 'Shorthand — it is just an algebraic convenience, not real. The physics is in the energy levels Eₙ = (n+½)ℏω; the operators are bookkeeping for getting between them', isCorrect: false, misconceptionId: `${HOSC}:MC-4` },
+    ],
+    correctValue: 'physics — â₊ is the creation operator; it adds a real quantum ℏω with measurable consequences',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${HOSC}:MC-4`],
+    source: `${HOSC_SRC} — MC-4 Probe line + conflict evidence [P28] (photon/phonon creation) and discrimination pairs [P33] (rate ∝ n+1 vs n); distractor carries the characteristic phrase`,
+  },
+  {
+    conceptId: HATM,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Ignoring spin, how many distinct quantum states does the hydrogen level n = 2 have?',
+    choices: [
+      { text: 'Four — l can be 0 or 1. The l=0 (2s) subshell contributes 1 state, and l=1 (2p) contributes 3, giving 1+3 = 4 = n². The count is Σ(2l+1) from l=0 to n−1, so n=1 gives 1, n=2 gives 4, n=3 gives 9', isCorrect: true },
+      { text: 'Three — one for each p orbital, m = −1, 0, +1', isCorrect: false, misconceptionId: `${HATM}:MC-4` },
+    ],
+    correctValue: 'four — (2,0,0) plus the three (2,1,m) states; n² = 4',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HATM}:MC-4`],
+    source: `${HATM_SRC} — MC-4 Probe line verbatim + its conflict evidence [P28] (the forgotten 2s) and discrimination pairs 1/4/9; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: OPER,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The momentum operator is p̂ = −iℏ ∂/∂x. It contains an explicit i. Is it Hermitian?',
+    choices: [
+      { text: 'Yes — Hermitian for a differential operator means ⟨ψ|Âφ⟩ = ⟨Âψ|φ⟩, and integrating ∫ψ*(−iℏ ∂φ/∂x)dx by parts turns it into ∫(iℏ ∂ψ*/∂x)φ dx, which is exactly ⟨p̂ψ|φ⟩. The conjugation in the inner product cancels the i, which is why the eigenvalues come out real', isCorrect: true },
+      { text: 'No — it has an i in it, so it cannot be Hermitian. A Hermitian operator has to be a symmetric matrix with real entries', isCorrect: false, misconceptionId: `${OPER}:MC-4` },
+    ],
+    correctValue: 'yes — Hermitian by the integral condition, verified by integration by parts, despite the factor of i',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${OPER}:MC-4`],
+    source: `${OPER_SRC} — MC-4 Probe line verbatim + conflict evidence (the integration-by-parts verification) and bridge (matrix definition is a special case); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: PBOX,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For a particle in an infinite square well with E₁ = 1 eV, is the gap E₃ − E₂ the same size as the gap E₂ − E₁?',
+    choices: [
+      { text: 'No — the gaps grow. Eₙ = n²E₁, so E₁, E₂, E₃ are 1, 4, 9 eV: E₂ − E₁ = 3 eV but E₃ − E₂ = 5 eV. The spacing is (2n+1)E₁ and increases with n. Equal spacing belongs to the harmonic oscillator, where Eₙ = (n+½)ℏω, and the difference comes from the shape of the potential', isCorrect: true },
+      { text: 'Yes — energy levels are evenly spaced, so both gaps are the same', isCorrect: false, misconceptionId: `${PBOX}:MC-4` },
+    ],
+    correctValue: 'no — 3 eV then 5 eV; infinite-well spacing is (2n+1)E₁ and grows with n',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PBOX}:MC-4`],
+    source: `${PBOX_SRC} — MC-4 Probe line verbatim (E₁ = 1 eV) + its conflict evidence (3E₁ then 5E₁) and the oscillator contrast in the bridge; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: PAUL,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Many-electron wave functions are written as a Slater determinant. Is the determinant doing physical work, or is it a mathematical formality?',
+    choices: [
+      { text: 'Physical work — it encodes antisymmetry and exclusion in one structure. Swapping two rows flips the sign, so ψ(2,1) = −ψ(1,2) automatically; setting two rows equal makes the determinant vanish, so two electrons in the same state automatically have no wave function at all. Hartree-Fock, the basis of computational quantum chemistry, is built on it', isCorrect: true },
+      { text: 'A formality — it is just a mathematical convenience for writing the product out, and does not mean anything physical', isCorrect: false, misconceptionId: `${PAUL}:MC-4` },
+    ],
+    correctValue: 'physical — antisymmetry and exclusion both follow from determinant properties',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PAUL}:MC-4`],
+    source: `${PAUL_SRC} — MC-4 Probe line + conflict evidence [P28] (row swap gives antisymmetry, equal rows give det = 0) and the Hartree-vs-Slater discrimination pair; distractor carries the characteristic phrase`,
+  },
+  {
+    conceptId: PRTB,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You switch on a CONSTANT electric field across an atom. Does time-independent perturbation theory tell you how fast the electron transitions between levels?',
+    choices: [
+      { text: 'No — it gives shifted energy levels and mixed stationary states, which for a constant field is the Stark effect. A constant perturbation does not cause transitions at all; transition rates require a TIME-DEPENDENT perturbation and come from Fermi’s golden rule. Constant magnetic field → Zeeman splitting of levels; oscillating EM wave → absorption and emission rates', isCorrect: true },
+      { text: 'Yes — the electric field perturbs the system and therefore causes transitions, and perturbation theory is what gives you their rate', isCorrect: false, misconceptionId: `${PRTB}:MC-4` },
+    ],
+    correctValue: 'no — time-independent PT shifts levels (Stark effect); rates need time-dependent PT',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${PRTB}:MC-4`],
+    source: `${PRTB_SRC} — MC-4 Probe line verbatim + conflict evidence [P28] and the constant-field/oscillating-field discrimination pairs [P33]; distractor carries the characteristic phrase`,
+  },
+  {
+    conceptId: QTUN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a proton tunnel through a barrier, or is tunnelling something only electrons are able to do?',
+    choices: [
+      { text: 'All particles tunnel — protons tunnel in enzyme reactions and in stellar fusion, and alpha particles (about 7300 electron masses) tunnel out of nuclei in alpha decay. Mass enters as T ∝ e^(−2d√(2m(V₀−E))/ℏ), so heavier particles tunnel far less: through the same 0.5 nm, 1 eV barrier an electron gets T ≈ 6×10⁻³ and a proton ≈ 10⁻⁴¹ — vanishingly small, but never zero', isCorrect: true },
+      { text: 'Only electrons — they are the only particles small enough to tunnel; anything heavier is simply reflected by the barrier', isCorrect: false, misconceptionId: `${QTUN}:MC-4` },
+    ],
+    correctValue: 'all particles tunnel; T falls exponentially with √m but is never zero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${QTUN}:MC-4`],
+    source: `${QTUN_SRC} — MC-4 Probe line verbatim + conflict evidence (alpha decay, enzymes, stellar fusion) and the S6 electron-vs-proton computation; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: SCHR,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A particle is in the state ψ = (1/√2)φ₁ + (1/√2)φ₂, where φ₁ and φ₂ are energy eigenstates. You measure its energy ONCE. Do you get (E₁+E₂)/2?',
+    choices: [
+      { text: 'No — a single measurement gives either E₁ or E₂, each with probability |c|² = ½, and never the value in between. (E₁+E₂)/2 is ⟨E⟩, the statistical mean over MANY measurements. It is like a fair coin: every flip is heads or tails, never half a head, even though the long-run average is ½', isCorrect: true },
+      { text: 'Yes — it is a mixture of E₁ and E₂, so the energy you measure is (E₁+E₂)/2', isCorrect: false, misconceptionId: `${SCHR}:MC-4` },
+    ],
+    correctValue: 'no — E₁ or E₂ with probability ½ each; (E₁+E₂)/2 is the mean over many measurements',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SCHR}:MC-4`],
+    source: `${SCHR_SRC} — MC-4 Probe line verbatim + conflict evidence (Born rule per measurement) and the biased-coin bridge; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: SELR,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In helium, a transition runs from a triplet state (S = 1) to a singlet state (S = 0) with Δl = −1. Is it allowed as an electric-dipole (E1) transition?',
+    choices: [
+      { text: 'No — E1 also requires ΔS = 0, and this changes S. The E1 operator r⃗ acts only on spatial coordinates and cannot touch the spin state at all. The evidence is the lifetime: helium’s metastable 1s2s ³S₁ lives about 8,000 seconds — over two hours — where an E1-allowed decay takes nanoseconds. Such intercombination lines appear only weakly, via spin-orbit coupling, as M1 or E2', isCorrect: true },
+      { text: 'Yes — it is allowed as long as Δl = ±1, which this transition satisfies', isCorrect: false, misconceptionId: `${SELR}:MC-4` },
+    ],
+    correctValue: 'no — E1 forbidden because ΔS ≠ 0; confirmed by the ≈8000 s triplet lifetime',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SELR}:MC-4`],
+    source: `${SELR_SRC} — MC-4 Probe line verbatim + conflict evidence [P28] (8000 s metastable lifetime) and bridge [P30] (r⃗ does not act on spin); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: SPIN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'You measure S_z on an electron and get +ℏ/2. You immediately measure S_x on the same electron. Is the result certain?',
+    choices: [
+      { text: 'No — it is +ℏ/2 or −ℏ/2 with probability ½ each. After the first measurement the state is |↑_z⟩ = (1/√2)(|↑_x⟩ + |↓_x⟩), so S_x is maximally uncertain: ⟨S_x⟩ = 0 with ΔS_x = ℏ/2. Because [Ŝ_x, Ŝ_z] ≠ 0 the two cannot both be definite, and serial Stern-Gerlach experiments show exactly this randomness', isCorrect: true },
+      { text: 'Yes — still +ℏ/2, because the spin is now pointing up and stays pointing that way', isCorrect: false, misconceptionId: `${SPIN}:MC-4` },
+    ],
+    correctValue: 'no — ±ℏ/2 with probability ½ each; definite S_z means maximally uncertain S_x',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SPIN}:MC-4`],
+    source: `${SPIN_SRC} — MC-4 Probe line verbatim + conflict evidence [P28] (serial Stern-Gerlach) and replacement [P31]; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: UNCP,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Popular accounts say a virtual particle can "borrow" energy ΔE from the vacuum for a time Δt ≈ ℏ/ΔE. Is that what ΔE·Δt ≥ ℏ/2 actually says?',
+    choices: [
+      { text: 'No — it says a state with a finite lifetime Δt cannot have perfectly sharp energy, so its spectral line has a natural width ΔE ≥ ℏ/(2Δt). Nothing is borrowed and energy conservation is never suspended. The sodium D-line, lifetime 16 ns, has width ≈2.6×10⁻⁷ eV against a photon energy of 2.1 eV. Virtual particles are internal bookkeeping in perturbation theory, and real calculations of the Lamb shift or the Casimir force invoke no energy loan', isCorrect: true },
+      { text: 'Yes — virtual particles borrow energy from the vacuum using the uncertainty principle, and repay it within Δt', isCorrect: false, misconceptionId: `${UNCP}:MC-4` },
+    ],
+    correctValue: 'no — it is the natural linewidth of a finite-lifetime state, not an energy loan',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${UNCP}:MC-4`],
+    source: `${UNCP_SRC} — MC-4 Probe line + conflict evidence, replacement (natural linewidth) and the S6 Na D-line computation; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: WVFN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A particle is in ψ = ψ₁ + ψ₂. Is that the same thing as a 50/50 classical mixture — half the particles in ψ₁, half in ψ₂?',
+    choices: [
+      { text: 'No, and the difference is measurable. A classical mixture gives P = ½|ψ₁|² + ½|ψ₂|², with no cross term. A superposition gives |ψ₁+ψ₂|² = |ψ₁|² + |ψ₂|² + 2Re(ψ₁*ψ₂), and that last term is interference. At a dark fringe where ψ₂ = −ψ₁ the superposition gives exactly zero while the mixture still gives |ψ₁|² ≠ 0 — so the fringes decide it. Classical mixing adds intensities; superposition adds amplitudes and squares after', isCorrect: true },
+      { text: 'Yes — superposition means the particle is half in state 1 and half in state 2, blended like mixing two paints', isCorrect: false, misconceptionId: `${WVFN}:MC-4` },
+    ],
+    correctValue: 'no — the interference term 2Re(ψ₁*ψ₂) is present for a superposition and absent for a mixture',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WVFN}:MC-4`],
+    source: `${WVFN_SRC} — MC-4 Probe line verbatim + conflict evidence [P28] (cross term), discrimination pairs [P33] (add intensities vs amplitudes) and the dark-fringe S6 path; distractor is the characteristic phrase`,
+  },
+]
+
 const S2_MOD_COVERAGE_PROBES: SeedProbe[] = [
   {
     conceptId: ASPC,
@@ -52270,6 +52471,7 @@ const S2_MOD_COVERAGE_PROBES: SeedProbe[] = [
 ]
 
 export const AUTHORED_PROBES: SeedProbe[] = [
+  ...S2_QM_COVERAGE_PROBES,
   ...S2_MOD_COVERAGE_PROBES,
   ...UNITS_PROBES,
   ...VEL_PROBES,

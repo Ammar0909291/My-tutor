@@ -75,11 +75,11 @@ const physics = [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.conceptId.s
 
 describe('S2 — physics misconception coverage ratchet', () => {
   it('unprobed documented misconceptions do not exceed the known residue', () => {
-    // RATCHET. 54 -> 39 after the phys.mod batch (15 concepts). Ratchets only
-    // go DOWN. The remaining 39 are the same systematic MC-4 gap in phys.qm
-    // (12), phys.stat (8), phys.rel (7), phys.astro (6), plus phys.meas (2),
-    // phys.opt (3, one concept missing two) and phys.mech (1).
-    expect(coverage(physics).unprobed.length).toBeLessThanOrEqual(39)
+    // RATCHET. 54 -> 39 (phys.mod, 15 concepts) -> 27 (phys.qm, 12 concepts).
+    // Ratchets only go DOWN. phys.qm is now at ZERO: every one of its twelve
+    // concepts documented four misconceptions and probed three. The remaining
+    // 27 are stat 8, rel 7, astro 6, opt 3, meas 2, mech 1.
+    expect(coverage(physics).unprobed.length).toBeLessThanOrEqual(27)
   })
 
   it('chemistry S2 stays complete at zero unprobed', () => {
@@ -148,6 +148,75 @@ describe('S2 — the phys.mod batch stays covered', () => {
     // S2 coverage without S4 quality would just be a number. Each new probe
     // must offer a wrong option that STATES the tagged belief, so it can
     // actually detect it rather than merely name it.
+    const failures: string[] = []
+    for (const [conceptId, mc] of covered) {
+      const p = physics.find(
+        (x) =>
+          x.conceptId === conceptId &&
+          (x as unknown as { probeKind: string }).probeKind === 'true_false',
+      ) as unknown as { choices?: ReadonlyArray<{ isCorrect?: boolean; misconceptionId?: string }> } | undefined
+      if (!p) { failures.push(`${conceptId}: no true_false probe`); continue }
+      const mapped = (p.choices ?? []).filter((c) => c.misconceptionId === `${conceptId}:${mc}`)
+      if (!mapped.length) failures.push(`${conceptId}: no distractor mapped to ${mc}`)
+      if (mapped.some((c) => c.isCorrect)) failures.push(`${conceptId}: mapped the CORRECT choice`)
+    }
+    expect(failures).toEqual([])
+  })
+})
+
+describe('S2 — the phys.qm batch stays covered', () => {
+  /**
+   * phys.qm reached ZERO unprobed with this batch — the first physics domain
+   * to do so under S2. Every one of these twelve concepts held exactly
+   * mcq×2 + misconception_probe×1 and nothing in `true_false`, so each new
+   * probe lands in a free slot and stays a SINGLETON, leaving every existing
+   * canonicalSlug untouched (see the slot-safety note in the block above).
+   */
+  const covered: ReadonlyArray<readonly [string, string]> = [
+    ['phys.qm.harmonic-oscillator-qm', 'MC-4'],
+    ['phys.qm.hydrogen-atom-qm', 'MC-4'],
+    ['phys.qm.operators', 'MC-4'],
+    ['phys.qm.particle-in-box', 'MC-4'],
+    ['phys.qm.pauli-exclusion', 'MC-4'],
+    ['phys.qm.perturbation-theory', 'MC-4'],
+    ['phys.qm.quantum-tunneling', 'MC-4'],
+    ['phys.qm.schrodinger-equation', 'MC-4'],
+    ['phys.qm.selection-rules', 'MC-4'],
+    ['phys.qm.spin', 'MC-4'],
+    ['phys.qm.uncertainty-principle', 'MC-4'],
+    ['phys.qm.wave-function', 'MC-4'],
+  ]
+
+  it('phys.qm has NO unprobed documented misconception left', () => {
+    // Asserted strictly, not as a ceiling: this domain is complete, and a
+    // regression here would be a real loss rather than a slower ratchet.
+    const left = coverage(physics).unprobed.filter((u) => u.startsWith('phys.qm.'))
+    expect(left).toEqual([])
+  })
+
+  it.each(covered)('%s %s now has a probe that claims it', (conceptId, mc) => {
+    const ids = physics
+      .filter((p) => p.conceptId === conceptId)
+      .flatMap((p) => p.targetedMisconceptions ?? [])
+    expect(ids).toContain(`${conceptId}:${mc}`)
+  })
+
+  it.each(covered)('%s: the new probe sits in a FREE singleton slot', (conceptId) => {
+    const mine = physics.filter((p) => p.conceptId === conceptId) as ReadonlyArray<{
+      probeKind: string
+      gradeBand: string
+    }>
+    const slots = new Map<string, number>()
+    for (const p of mine) {
+      const k = `${p.probeKind}|${p.gradeBand}`
+      slots.set(k, (slots.get(k) ?? 0) + 1)
+    }
+    for (const [k, n] of slots) if (k.startsWith('true_false|')) expect(n, k).toBe(1)
+  })
+
+  it('every new probe diagnoses its misconception with a mapped distractor', () => {
+    // Coverage without diagnosis would just be a number: each probe must offer
+    // a WRONG option that states the tagged belief, so it can detect it.
     const failures: string[] = []
     for (const [conceptId, mc] of covered) {
       const p = physics.find(

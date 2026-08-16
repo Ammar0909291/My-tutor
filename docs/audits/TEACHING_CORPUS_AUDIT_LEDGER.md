@@ -8665,3 +8665,74 @@ resolve either defect. One further observation belongs with them — the tutor
 graded the answer "C" as correct for a prose-lettered question whose C was
 "Surface area", because a prose-only question has no structured `mcq` field and
 therefore no deterministic grader. Recorded here so it is not lost; not fixed.
+
+---
+
+# S2 — phys.qm reaches zero (2026-08-16)
+
+Second S2 batch. Physics unprobed documented misconceptions **39 → 27**;
+concepts **200 → 212 of 238**; misconceptions **565 → 577 of 604**.
+
+**phys.qm is the first physics domain to reach ZERO under S2** — asserted
+strictly in the guard rather than as a ceiling, because a regression there
+would be a real loss, not a slower ratchet.
+
+## The gap was one authoring template, and it is now visible in full
+
+All twelve phys.qm concepts held exactly `mcq × 2 + misconception_probe × 1`
+and documented FOUR misconceptions. Not one of them was missing a random MC —
+every single gap was MC-4. That is the same three-probe template that left
+phys.mod short, confirmed twice now rather than inferred from a count.
+
+| concept | MC-4 |
+|---|---|
+| harmonic-oscillator-qm | ladder operators are just notation |
+| hydrogen-atom-qm | n=2 has three states (forgetting 2s) |
+| operators | Hermitian means a real symmetric matrix |
+| particle-in-box | level spacing is constant, as in the oscillator |
+| pauli-exclusion | the Slater determinant is just a trick |
+| perturbation-theory | a constant field causes transitions |
+| quantum-tunneling | only electrons are small enough to tunnel |
+| schrodinger-equation | a superposition has definite energy (E₁+E₂)/2 |
+| selection-rules | spin-flip transitions are E1 allowed |
+| spin | measuring S_z fixes the spin vector in space |
+| uncertainty-principle | ΔE·Δt lets a virtual particle "borrow" energy |
+| wave-function | superposition is a 50/50 classical mixture |
+
+## How each probe was written
+
+Stem = the blueprint's own **Probe:** line. Correct answer = its **Conflict
+evidence [P28]** / **Replacement [P31]**, carrying the concrete number the
+blueprint supplies — helium's ≈8,000 s metastable triplet lifetime, the sodium
+D-line's 2.6×10⁻⁷ eV natural width, T ≈ 6×10⁻³ for an electron against ≈10⁻⁴¹
+for a proton through the same barrier, 3 eV then 5 eV for the infinite well.
+Distractor = the **Characteristic phrase**, so the probe DETECTS the belief
+instead of merely naming it. Nothing was retagged to move a number.
+
+## Slot safety
+
+`canonicalSlug` is `conceptId:probeKind:lang:band[:difficulty]`, and difficulty
+is appended only to slots holding more than one probe — so adding to an
+occupied singleton slot RE-IDENTIFIES an existing production row. `true_false`
+was verified free in all twelve concepts BEFORE authoring; every probe lands in
+a free slot and stays a singleton, and the guard asserts it. Bands follow each
+concept's existing probes: HIGH for ten, UNDERGRADUATE for `schrodinger-equation`
+and `spin`.
+
+## Regression protection
+
+`src/tests/physicsS2MisconceptionCoverage.test.ts` — ratchet lowered 39 → 27
+(downward only); phys.qm asserted at exactly zero; all twelve pairings pinned;
+slot-safety asserted per concept; and each new probe required to map a
+NON-correct distractor to the misconception it claims.
+
+## Validation
+
+`npx tsc --noEmit` clean; **338 files / 7230 passed / 9 skipped**; `npm run
+build` exit 0. No production writes; no KG, blueprint, or Educational Brain
+file modified.
+
+## Standing
+
+Physics S2 **577/604** (212/238 concepts). Remaining 27: stat 8, rel 7,
+astro 6, opt 3, meas 2, mech 1. Next highest-count block is `phys.stat` (8).
