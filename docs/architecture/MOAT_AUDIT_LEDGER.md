@@ -20,7 +20,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S7 | real-tutor behaviour | prose-MCQ guard deployed | — | DEPLOYED, not production-verified |
 | S8 | production seeding | **196/238 served** | 186/186 served | **DEFECT OPEN** |
 | S9 | end-user runtime | — | — | NOT MEASURED |
-| S10 | regression protection | offline invariants pinned | pinned | ONGOING |
+| S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
 ---
 
@@ -131,6 +131,37 @@ gradeable probes under the difficulty-bearing identity
 already exist). No content needs to be authored; no code needs to change.
 
 **Status: awaiting authorization. Not attempted.**
+
+### Confirmed by two independent methods
+
+The 42 is not an artifact of how "gradeable" was defined. Both give the same
+numbers (physics 196 served / 238 authored; chemistry 186/186):
+
+1. **Family-name filter** — ACTIVE rows whose `familyKind` is one of
+   `mcq`/`true_false`/`checkpoint`/`short_answer`/`step_check`/`misconception_probe`.
+2. **Conversion predicate** — ACTIVE rows whose `choices` actually satisfy
+   `probeToMcq`'s rules (2–4 options, exactly one `isCorrect`). This is the
+   stricter and more truthful test, because it is what the turn itself runs.
+
+---
+
+## S10 — regression protection
+
+`scripts/moat/audit-production-seeding.ts` (read-only) compares authored-vs-
+served per subject, importing `probeToMcq` so it measures what the tutor could
+really serve. Exits 1 on a gap, so it can gate a post-deploy check. This closes
+the blind spot that let S8 happen: the suite proves what is AUTHORED, the
+runtime serves what is ACTIVE, and until now nothing compared them.
+
+Two defects were found and fixed while writing it, both of which would have
+made the audit report a false pass — recorded because they are the failure mode
+this class of script is most prone to:
+
+- A `as unknown as Row[]` cast masked a wrong relation name (`probe` vs the
+  schema's `probeAsset`). The cast is gone; tsc now checks the query.
+- The corpus omitted the chemistry/biology/CS arrays, so chemistry reported
+  "0 authored, 0 missing" — a clean pass produced by looking at nothing. It is
+  now composed exactly as `seed-knowledge-assets.ts:43` composes it.
 
 ---
 
