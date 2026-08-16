@@ -19,7 +19,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S6 | visual semantic (live) | 25 served + 16 DRAFT audited | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified, 0 runtime defects |
 | S7 | real-tutor behaviour | lesson 8 fresh: 13/13 pass | lesson 3 fresh: 12/13, 1 defect fixed | BOTH SUBJECTS COVERED — 1 detection gap = OWNER DECISION |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
-| S9 | end-user runtime | mastery closure live-verified | mastery closure live-verified | BOTH SUBJECTS VERIFIED — 1 defect (duration) + 1 intended mismatch, both systemic |
+| S9 | end-user runtime | mastery closure + real duration live-verified | mastery closure live-verified | BOTH SUBJECTS VERIFIED — duration FIXED; 1 intended mismatch remains |
 | S10 | regression protection | offline pinned + prod audit incl. 2 invariants | same | EXTENDED — visual + evidence-marker invariants PASS in prod |
 
 ---
@@ -641,7 +641,41 @@ Ladder walked exactly as `masteryLadderReachability.test.ts` predicts:
 Payload: `mastered: ["phys.meas.scalars-vectors"]`, `needsReview: []`,
 `fullyMastered: true`. Attempt row: 1, COMPLETED, `teachingAttempts: 1`.
 
-### FINDING C — `durationSeconds` is always ~1s. **Classification: A (defect), fix is architectural**
+### FINDING C — **RESOLVED 2026-08-16** (owner-approved, `8dfe689`, live-verified)
+
+Fixed by opening the attempt at genuine lesson start. `lesson-init` already
+opened one for `restart|review` on a COMPLETED lesson; it now also opens one when
+**no attempt exists at all**. The chat route needed no change — `openLessonAttempt`
+reuses an existing IN_PROGRESS row, so the outcome block finalises THAT row.
+
+The duplicate-attempt invariant is preserved because the only new case is
+`latest === null`: IN_PROGRESS is left alone, COMPLETED is still reopened ONLY
+for restart/review, so a completed attempt is never reopened or replaced by
+chat, resume or D-0a.
+
+**LIVE-VERIFIED** on `dpl_EJph4bEqDZVtrZY1mBE21fzLWr3D`, fresh physics lesson 7
+(`phys.meas.vector-products`), driven to genuine mastery with real elapsed time:
+
+```
+attempt opened at lesson start   20:56:42.847  (IN_PROGRESS — this never existed before)
+completed at                     21:00:07.006
+durationSeconds                  204           (was 1; wall clock 3m24s — exact)
+rows                             1             (0 IN_PROGRESS left)
+mastered                         [phys.meas.vector-products], fullyMastered true
+re-entry via chat                D-0a close, no new row
+re-entry via lesson-init resume  no new row
+```
+
+The completion card renders `max(1, round(204/60))` = **3 min** instead of the
+old "1 min". Historical 1-second rows were deliberately left untouched — no
+migration, no repair.
+
+Regression: `lessonAttemptOpensAtLessonStart.test.ts` (12 tests, edge cases
+A–J). `completedLessonIsReEnterable.test.ts` matched the warn string by literal
+and that string was renamed ("re-open" no longer covers every case); the matcher
+was updated with the reason recorded and its assertion left unchanged.
+
+### FINDING C — as originally recorded (classification A, fix architectural)
 
 The attempt above records `startedAt 18:56:34.618`, `completedAt 18:56:35.275`,
 `durationSeconds: 1` — for a concept the learner actually worked for ~12
