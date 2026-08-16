@@ -16,7 +16,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S3 | structural tag integrity (orphan MC ids) | 30 residual | 4 residual | CLOSED — all classified |
 | S4 | stem-vs-blueprint agreement | 238/238 | 186/186 | CLOSED |
 | S5 | visual semantic (offline) | 23 widened, inspected | 20 widened, inspected | CLOSED |
-| S6 | visual semantic (live) | 25 served figures audited, 0 defects | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified |
+| S6 | visual semantic (live) | 25 served + 16 DRAFT audited | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified, 0 runtime defects |
 | S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — detection gap traced, OWNER DECISION |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
 | S9 | end-user runtime | mastery closure live-verified (6/8 pass) | ladder + evidence live-verified | IN PROGRESS — 1 defect (duration), 1 intended mismatch |
@@ -432,6 +432,56 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## S6 — offline semantic audit of the 16 DRAFT visual assets (2026-08-16)
+
+Read-only. No asset promoted, no production write, no runtime change.
+All 16 are `AI_AUTHORED`, `familyKind: concept_figure`, `gradeBand: ADULT`, and
+all carry a non-empty `a11yDescription` (ADR 12 requirement met).
+
+**Zero conflicts with authoritative content**: not one of the 15 distinct
+concepts holds an ACTIVE visual, so promoting any of these could not violate the
+one-ACTIVE-per-`canonicalSlug` rule.
+
+**Instrument correction (recorded, since it nearly produced a false finding).**
+A first pass reported every graph as having no `series` and every number_line no
+`min`/`max`. That was my SQL guessing field names. The real schema
+(`visualSpec.ts:54,83`) uses `equation` + `xLabel`/`yLabel` for graphs and
+`start`/`end`/`highlight` for number lines. Re-measured against the real fields
+before drawing any conclusion.
+
+### Dispositions
+
+| concept | verdict |
+|---|---|
+| `chem.thermo.gibbs` | **REVISE — do not promote.** `equation: "H - T*S"` contains no `x`; the renderer plots f(x), so this cannot vary or compile. Title promises "Gibbs Free Energy vs. Temperature"; the spec cannot draw it. |
+| `phys.rel.time-dilation` | **REVISE — do not promote.** `xLabel`/`yLabel` MISSING. `visualSpec.ts:62` records the measured learner-facing defect this exists to prevent (a graph narrated with axis names that were not on screen), and `validateGeneratedFigure` REQUIRES labels of a generated graph. |
+| `eng.phonetics.intonation-patterns` (×2) | **DE-DUPLICATE.** Two drafts, same concept, both `sin(x)`. "Pitch Contour of a Statement vs. Question" is strictly the more teachable; "Pitch Contour of an Utterance" is the weaker sibling. |
+| `phys.mech.work-energy-theorem` | **REVISE.** Title says "Net Work vs Kinetic Energy"; axes are Displacement [m] vs Energy [J]. Coherent figure, mismatched promise. |
+| `phys.meas.errors` and `topic:77646280409e3c0c` | **DUPLICATE across identities** — byte-identical spec (`start 9.5, end 10.5, 2 highlights`). One is the KG concept, one the runtime-topic hash of the same subject. |
+| `chem.equil.kw-ph`, `chem.found.states-of-matter`, `chem.bond.ionic-bonding`, `phys.mod.radioactive-decay`, `phys.wave.doppler-effect`, `phys.em.electric-field` | **PROMOTABLE on semantics** — spec well-formed, type fits the concept, labels present. (`chem.bond.ionic-bonding` draws the Born-Haber cycle: correct, but a notably advanced framing for a foundational bonding concept — a level call, not an error.) |
+| `topic:5c4a5b24…`, `topic:75f44540…`, `topic:cc25d3d3…` | **KEEP DRAFT.** Keyed to runtime-topic hashes, not KG ids, so they can only ever serve the same off-curriculum phrasing that produced them. |
+
+### Findings
+
+- **No runtime defect. Classification C/D.** The two unpromotable specs are
+  content quality, and the system is already handling them correctly: they sit
+  in DRAFT, and the APPROVED tier re-validates through `validateGeneratedFigure`
+  at serve time, so even an erroneous promotion of the time-dilation graph would
+  be rejected rather than shown. The review gate is doing its job.
+- **Curriculum-adjacent observation (F), not acted on.**
+  `topic:cc25d3d3…` is "Steps in Dimensional Analysis", while the KG concept
+  `phys.meas.dimensions` carries a cached DECLINE served 31 times. The same
+  subject matter is refused on the curriculum path and drawn on the
+  runtime-topic path, because the two are judged against different grounding
+  text (KG title+description vs the learner's own words). Consistent with the
+  engine's design; recorded because the learner-visible consequence is that
+  asking off-curriculum is the only way to get that figure.
+
+**S6 remains RENDERED: NOT MEASURED** — Chromium still cannot reach HTTPS from
+this sandbox. Nothing here is browser evidence.
 
 ---
 
