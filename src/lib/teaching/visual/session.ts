@@ -206,13 +206,37 @@ export function decideContinuity(input: {
   // Nothing on screen yet — resolve freshly.
   if (!session) return { kind: 'switch', targetConceptId: requestedConceptId ?? lessonConceptId, reason: 'no-active-session' }
 
-  // The lesson itself moved on (learner navigated to a different lesson). The
-  // excursion's anchor no longer exists, so the surface is stale.
+  // The lesson itself moved on (learner navigated to a different lesson), so
+  // the figure on screen belongs to a lesson nobody is in any more.
+  //
+  // This used to require `session.returnToConceptId`, which quietly limited it
+  // to EXCURSION figures. An anchor is only set when a figure is introduced for
+  // a concept that is NOT the lesson's own (see resolveVisual: "an excursion
+  // begins when the new figure is NOT the lesson's own concept"), so a plain
+  // LESSON figure has none — and when the lesson moved on, nothing released it.
+  //
+  // PRODUCTION DEFECT this fixes (measured 2026-08-16, real learner account):
+  // the learner left `chem.found.states-of-matter` for
+  // `chem.found.pure-substances` and the States-of-Matter process flow stayed
+  // on screen for every turn of the new lesson —
+  //   [visual-v2] concept: 'chem.found.states-of-matter'
+  //               provenance: 'generated:chem.found.states-of-matter:cached'
+  //               continuity: 'continuity'
+  // while `resolvedConceptId` was `chem.found.pure-substances`. It reached the
+  // catch-all hold at the bottom of this function, which exists for follow-ups
+  // and corrections, not for a lesson change. The tutor narrates whatever is on
+  // screen ("Let's look at the figure on your screen showing…"), so this is the
+  // same mis-narration failure the two defects recorded below already describe,
+  // arriving by a third route.
+  //
+  // Testing the anchor by VALUE rather than existence keeps every excursion
+  // case identical: an open excursion anchored to the current lesson still
+  // holds (its returnTo IS lessonConceptId), and an excursion whose lesson
+  // changed underneath it still releases, exactly as before.
   if (
     lessonConceptId &&
-    session.returnToConceptId &&
-    lessonConceptId !== session.returnToConceptId &&
-    lessonConceptId !== session.conceptId
+    lessonConceptId !== session.conceptId &&
+    lessonConceptId !== session.returnToConceptId
   ) {
     return { kind: 'switch', targetConceptId: lessonConceptId, reason: 'lesson-changed' }
   }
