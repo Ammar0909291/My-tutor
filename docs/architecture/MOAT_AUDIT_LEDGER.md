@@ -19,7 +19,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S6 | visual semantic (live) | 25 served + 16 DRAFT audited | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified, 0 runtime defects |
 | S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — detection gap traced, OWNER DECISION |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
-| S9 | end-user runtime | mastery closure live-verified (6/8 pass) | ladder + evidence live-verified | IN PROGRESS — 1 defect (duration), 1 intended mismatch |
+| S9 | end-user runtime | mastery closure live-verified | mastery closure live-verified | BOTH SUBJECTS VERIFIED — 1 defect (duration) + 1 intended mismatch, both systemic |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
 ---
@@ -432,6 +432,40 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## S9 CHEMISTRY — genuine mastery closure (2026-08-16, live-verified)
+
+Mirrors the physics run on a genuinely untouched lesson: chemistry 4,
+`chem.found.measurement` (baseline 0 attempts, 0 `topic_progress`, 2 ACTIVE
+probes). Weak-learner session, five server-graded MCQs, no guiding.
+
+Ladder: `OBSERVE → DEMONSTRATE → GUIDE → CHECK → checkCorrect 1 / PRACTICE →
+practiceCorrect 1 → practiceCorrect 2 / TRANSFER`. Assessment results: 5 probes
+issued, 5 answered, 5 graded correct server-side, 0 wrong, 0 ungraded.
+
+Outcome — identical shape to physics:
+
+```
+verified true, TRANSFER, check 1 / practice 2
+mastered [chem.found.measurement], needsReview [], fullyMastered true, next 5
+lesson_attempts: 1 row, COMPLETED, budgetExhaustions 0, teachingAttempts 1
+re-entry: D-0a "You've already finished… You mastered: …", still 1 row,
+          completedAt unchanged
+```
+
+**14/14 chain checks behave as in physics.** Closed by MASTERY, not budget.
+No duplicate attempt on re-entry. Completion message names the mastered concept.
+
+**Both open findings reproduce here, confirming they are subject-independent
+and systemic rather than physics quirks:**
+- FINDING C — `durationSeconds: 1` again, for a full worked lesson.
+- FINDING D — `topic_progress` reads `IN_PROGRESS 65% att=5` while the attempt
+  says `fullyMastered`.
+
+No new defect and no new owner decision. **S9 mastery closure is now
+live-verified for BOTH subjects.**
 
 ---
 
