@@ -162,11 +162,9 @@ describe('the six immaculate compact domains stay immaculate', () => {
     expect(counts['phys.astro']).toBeGreaterThanOrEqual(6)
   })
 
-  // phys.therm is deliberately NOT in the strict orphan list above: it carries
-  // 9 orphan ids, every one of which was read and confirmed to be a genuinely
-  // novel misconception the blueprint does not register (MC-HOLE-SHRINKS,
-  // MC-HEAT-IS-STORED, MC-IGNORE-LATENT-HEAT, MC-PHASE-HEAT-RAISES-TEMP,
-  // MC-FORGET-KELVIN-CONVERSION, MC-SIGN-CONVENTION x2,
-  // MC-MUST-USE-ACTUAL-PATH, MC-SUBSTANCE-AFFECTS-EFFICIENCY). Each probe
-  // does diagnose the belief it names. They stay in the corpus-wide ratchet.
+  // phys.therm carries 6 orphan ids after 3 renames (S3 classification pass):
+  // MC-HOLE-SHRINKS, MC-IGNORE-LATENT-HEAT, MC-SIGN-CONVENTION x2,
+  // MC-MUST-USE-ACTUAL-PATH, MC-SUBSTANCE-AFFECTS-EFFICIENCY. Each probe
+  // diagnoses the belief it names — genuine NO-MATCH (blueprint curriculum
+  // feedback). They stay in the corpus-wide ratchet.
 })

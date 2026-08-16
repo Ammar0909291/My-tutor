@@ -47499,11 +47499,11 @@ const SPHT_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (P4-a, prereq: heat concept): What is the SI unit of heat? Is heat a property stored in an object?',
     choices: [
       { text: 'Joule (J); no — heat is energy in transit, not a stored property', isCorrect: true },
-      { text: 'Kelvin (K); yes — every object has a fixed amount of heat', isCorrect: false, misconceptionId: `${SPHT}:MC-HEAT-IS-STORED` },
+      { text: 'Kelvin (K); yes — every object has a fixed amount of heat', isCorrect: false, misconceptionId: `${SPHT}:MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT` },
     ],
     correctValue: 'Joule; heat is energy in transit',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${SPHT}:MC-HEAT-IS-STORED`],
+    targetedMisconceptions: [`${SPHT}:MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT`],
     source: `${SPHT_SRC} — Component 4 Diagnostic Probe Set P4-a`,
   },
   {
@@ -47623,11 +47623,11 @@ const PTRN_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (P4-a, prereq: calorimetry): A phase change occurs at constant temperature. What is happening to the added heat energy?',
     choices: [
       { text: 'It is breaking or forming intermolecular bonds, not raising kinetic energy/temperature', isCorrect: true },
-      { text: 'It is being stored as extra temperature that hasn’t "shown up" yet', isCorrect: false, misconceptionId: `${PTRN}:MC-PHASE-HEAT-RAISES-TEMP` },
+      { text: 'It is being stored as extra temperature that hasn’t "shown up" yet', isCorrect: false, misconceptionId: `${PTRN}:MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE` },
     ],
     correctValue: 'breaking/forming intermolecular bonds',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${PTRN}:MC-PHASE-HEAT-RAISES-TEMP`],
+    targetedMisconceptions: [`${PTRN}:MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE`],
     source: `${PTRN_SRC} — Component 4 Diagnostic Probe Set P4-a`,
   },
   {
@@ -47685,11 +47685,11 @@ const IGL_ASSESS_PROBES: SeedProbe[] = [
     stem: 'DIAGNOSTIC (P4-a, Kelvin conversion): A gas is at 27°C. What is T in Kelvin?',
     choices: [
       { text: 'T = 300 K', isCorrect: true },
-      { text: 'T = 27 K', isCorrect: false, misconceptionId: `${IGL}:MC-FORGET-KELVIN-CONVERSION` },
+      { text: 'T = 27 K', isCorrect: false, misconceptionId: `${IGL}:MC-CELSIUS-IN-GAS-LAW` },
     ],
     correctValue: '300 K',
     difficulty: ProbeDifficulty.FOUNDATIONAL,
-    targetedMisconceptions: [`${IGL}:MC-FORGET-KELVIN-CONVERSION`],
+    targetedMisconceptions: [`${IGL}:MC-CELSIUS-IN-GAS-LAW`],
     source: `${IGL_SRC} — Component 4 Diagnostic Probe Set P4-a`,
   },
   {

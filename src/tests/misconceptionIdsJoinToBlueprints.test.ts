@@ -177,7 +177,11 @@ describe('every probed misconception id joins to its blueprint', () => {
     // more confirmed renames, plus one that was never a real orphan at all —
     // `phys.opt.single-slit:MC-M=0-IS-DARK`, which the parser above could not
     // see until `=` was added to the id character class.
-    expect(orphanIds(physics).size).toBeLessThanOrEqual(33)
+    // Then 33 -> 30: three phys.therm renames (S3 classification pass):
+    //   MC-HEAT-IS-STORED → MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT
+    //   MC-PHASE-HEAT-RAISES-TEMP → MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE
+    //   MC-FORGET-KELVIN-CONVERSION → MC-CELSIUS-IN-GAS-LAW
+    expect(orphanIds(physics).size).toBeLessThanOrEqual(30)
   })
 
   it('chemistry: unjoinable ids do not exceed the known residue', () => {
@@ -188,7 +192,7 @@ describe('every probed misconception id joins to its blueprint', () => {
     expect(orphanIds(CHEMISTRY_PROBES).size).toBeLessThanOrEqual(4)
   })
 
-  it('the eleven repaired ids stay repaired', () => {
+  it('the fourteen repaired ids stay repaired', () => {
     // Each of these was a live broken join. Naming them explicitly means a
     // revert fails here with the specific id, not just a count.
     const repaired = [
@@ -203,6 +207,9 @@ describe('every probed misconception id joins to its blueprint', () => {
       'phys.wave.sound-waves:MC-PITCH-IS-LOUDNESS',
       'phys.opt.nature-of-light:MC-PHOTON-ENERGY-DEPENDS-ON-INTENSITY',
       'phys.em.emf:MC-TERMINAL-VOLTAGE-EQUALS-EMF',
+      'phys.therm.specific-heat:MC-HIGH-TEMPERATURE-MEANS-HIGH-HEAT-CONTENT',
+      'phys.therm.phase-transitions:MC-TEMPERATURE-RISES-DURING-PHASE-CHANGE',
+      'phys.therm.ideal-gas-law:MC-CELSIUS-IN-GAS-LAW',
     ]
     const orphans = orphanIds(physics)
     for (const id of repaired) {
