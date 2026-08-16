@@ -30,6 +30,7 @@ import {
   type LegalityContext,
   type LegalityReason,
 } from './questionLegality'
+import { qualifiesForBudgetExtension } from './conceptBudget'
 import { buildCapabilityRepairLine } from './capabilityModel'
 import { buildGranularityDirective } from './teachingGranularity'
 
@@ -174,6 +175,13 @@ export interface ConversationState {
    *  phases — the exact loop the concept budget exists to bound. Reset on a
    *  concept change by readConversationState, like every other counter here. */
   turnsOnConcept: number
+  /** Set once, by advanceConversationState, when the learner reaches the base
+   *  turn budget while demonstrably converting (conceptBudget:
+   *  qualifiesForBudgetExtension). Buys turns only — never mastery. Persisted
+   *  in contextSnapshot.conversationState; readConversationState spreads the
+   *  stored object over initialConversationState, so pre-existing snapshots
+   *  simply default to false. No migration. */
+  budgetExtensionGranted: boolean
   /** QL-5 (questionLegality.ts, Runtime Redesign Mission Part 7, closes
    *  gap G2): has a reflection/check-style question already been asked
    *  during the CURRENT entry into CHECK phase? CHECK is legacy's
@@ -229,6 +237,7 @@ export function initialConversationState(conceptId: string | null): Conversation
     frustrationLevel: 0,
     turnsInCurrentPhase: 0,
     turnsOnConcept: 0,
+    budgetExtensionGranted: false,
     reflectionAskedThisEntry: false,
     verifiedCorrectAtCheck: 0,
     verifiedCorrectAtPractice: 0,
@@ -388,6 +397,25 @@ export function repliesWithQuestion(assistantText: string): boolean {
 }
 
 /** Fold one completed turn's evidence into the state machine. Pure. */
+/**
+ * Grant the one-time turn extension, if this turn's folded state earns it.
+ *
+ * Applied at EVERY exit of advanceConversationState — including the remediation
+ * and failure branches, which return early. Evaluating it here rather than at
+ * the turnsOnConcept increment is deliberate: `consecutiveFailures` is set
+ * later in the failure branch, so an earlier check would read a stale zero and
+ * could grant an extension on the very turn the learner failed.
+ *
+ * The rule itself lives in conceptBudget.qualifiesForBudgetExtension — one
+ * definition, shared with the budget evaluation that consumes the flag.
+ */
+function withBudgetExtension(next: ConversationState): ConversationState {
+  if (qualifiesForBudgetExtension(next)) {
+    return { ...next, budgetExtensionGranted: true }
+  }
+  return next
+}
+
 export function advanceConversationState(
   prev: ConversationState,
   evidence: TurnEvidence,
@@ -536,7 +564,7 @@ export function advanceConversationState(
     next.turnsInCurrentPhase = foldTurnsInCurrentPhase(
       prev.phase, next.phase, prev.turnsInCurrentPhase ?? 0,
     )
-    return next
+    return withBudgetExtension(next)
   }
 
   const failed = evidence.recoveryFired || evidence.signalCorrect === false
@@ -585,7 +613,7 @@ export function advanceConversationState(
     next.turnsInCurrentPhase = foldTurnsInCurrentPhase(
       prev.phase, next.phase, prev.turnsInCurrentPhase ?? 0,
     )
-    return next
+    return withBudgetExtension(next)
   }
 
   // ── The reachability law ────────────────────────────────────────────────
@@ -728,7 +756,7 @@ export function advanceConversationState(
     next.turnsInCurrentPhase = prev.turnsInCurrentPhase
   }
 
-  return next
+  return withBudgetExtension(next)
 }
 
 // ── Phase E: next-move decision (pre-LLM) ─────────────────────────────────────
