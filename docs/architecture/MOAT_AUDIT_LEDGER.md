@@ -17,9 +17,9 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S4 | stem-vs-blueprint agreement | 238/238 | 186/186 | CLOSED |
 | S5 | visual semantic (offline) | 23 widened, inspected | 20 widened, inspected | CLOSED |
 | S6 | visual semantic (live) | — | — | NOT MEASURED |
-| S7 | real-tutor behaviour | prose-MCQ guard deployed | — | DEPLOYED, not production-verified |
-| S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (repaired)** |
-| S9 | end-user runtime | — | — | NOT MEASURED |
+| S7 | real-tutor behaviour | live session run; 1 defect found + fixed | — | IN PROGRESS |
+| S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
+| S9 | end-user runtime | live learner session run (HTTP, no browser) | — | IN PROGRESS |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
 ---
@@ -167,6 +167,110 @@ numbers (physics 196 served / 238 authored; chemistry 186/186):
 2. **Conversion predicate** — ACTIVE rows whose `choices` actually satisfy
    `probeToMcq`'s rules (2–4 options, exactly one `isCorrect`). This is the
    stricter and more truthful test, because it is what the turn itself runs.
+
+---
+
+## S8 — re-measured independently (2026-08-16, second session)
+
+Not taken on trust from the entry below. Re-run against production with the
+**conversion predicate** (the stricter of the two methods — ACTIVE PROBE
+identities joined to `probe_assets` whose `choices` satisfy `probeToMcq`:
+2–4 options, exactly one `isCorrect`):
+
+```
+subject   concepts_with_servable_gradeable   servable_rows
+chem      186                                372
+phys      238                                370
+```
+
+Integrity at the same moment: 0 duplicate ACTIVE `canonicalSlug`, 0 hollow
+ACTIVE probe identities, 10 ACTIVE VISUAL, 868 ACTIVE phys+chem EXPLANATION.
+**S8 stands CLOSED on independent measurement.**
+
+Note for future sessions: `mcp__Supabase__list_projects` returns `[]` in this
+sandbox, which earlier sessions recorded as "DB unreachable". It is not —
+`execute_sql` against project `ywakxiqbevfuxsiwewnw` works normally. Do not
+conclude the database is unreachable from an empty project list.
+
+---
+
+## S7/S9 — first live learner session (2026-08-16)
+
+**Instrument note, stated plainly: there are NO browser screenshots.** Chromium
+is installed but its network is blocked sandbox-wide — `ERR_CONNECTION_RESET`
+on every navigation including `https://example.com`, direct and via the proxy,
+with no CONNECT arriving at the proxy. The session was therefore driven over
+HTTP against the real deployment (real NextAuth credentials session, real
+`/api/sessions` → `/api/learn/chat`, real provider path, real persistence).
+That is a real learner session, but it is not a rendered screen: **S6 stays
+NOT MEASURED**, because judging a figure requires seeing what the learner sees.
+
+### DEFECT — a finished lesson accrued a new attempt on every chat turn
+
+Found on the first two live turns, on `phys.meas.units` (lesson:1). The learner
+typed "i dont understand any of this", then "wait please explain what a unit is
+again, i really dont get it". Both turns returned the *identical* first-time
+close — "That's SI Units and Measurement finished — nice work." — and each one
+wrote a NEW `lesson_attempts` row.
+
+Production state for that one account:
+
+```
+lessonKey   rows   rows with durationSeconds <= 3
+lesson:6    14     11
+lesson:1     7      6      (2 of them written by this audit's turns)
+lesson:4     4      4
+```
+
+The genuine lesson:1 attempt ran **2621s**; the rest are 1-second rows
+manufactured by idle utterances after the close. The defect predates this
+session (earliest 2026-08-12).
+
+**Root cause.** `openLessonAttempt` reuses only an `IN_PROGRESS` row. Against a
+COMPLETED lesson it creates a new attempt; the concept is still closed, so
+`recordConceptOutcome` folds it in and `shouldFinalizeLesson` is immediately
+true — a fresh COMPLETED row per turn, forever. Confirmed from the deployment's
+own logs, which show D-0a serving correctly with no model call
+(`RESPONSE provider=deterministic source=LessonAttempt lessonKey=lesson:1
+reason=lesson_already_complete`) while the attempt row was rewritten anyway.
+
+**Why it matters** — the damage is to the evidence ledger, which is the moat
+asset, not to a cosmetic string:
+- `durationSeconds` stops describing the real attempt,
+- `completedAt` drifts forward onto the last thing the learner typed,
+- `teachingAttempts` / `budgetExhaustions` reset to a fresh attempt's values,
+  discarding the struggle history the adaptive layer reads back,
+- and the learner-visible consequence: the fresh finalise overwrites the
+  "you've already finished" close with the FIRST-TIME close, so a distressed
+  learner is congratulated with "nice work" on every turn.
+
+**Fix.** The outcome writer in `route.ts` is gated on `lessonCompletedHoisted`
+— the same authority the D-0a completion gate already reads, computed from
+`latestLessonAttempt().status` for the identical `lessonKey`, so no second
+source of truth is introduced. Re-opening a completed lesson remains
+`lesson-init`'s job, scoped there to `mode=restart|review`; after a real
+restart the flag is false and recording resumes unchanged.
+
+Regression: `src/tests/lessonAttemptNoReopenOnChat.test.ts` — 6 tests, pinning
+the defect mechanism, the one-row outcome, non-drifting `completedAt`,
+preserved counters, normal in-lesson recording, and restart resumption.
+
+### NOT a defect, checked and dismissed
+
+- `status=COMPLETED` alongside `summaryEvidence.complete=false` is **by
+  design**: `closedConceptIds` counts budget-spent as closed (P6), and
+  `summary.complete` means fully-mastered. Two different questions.
+- D-0a preempting recovery on a closed lesson is **deliberate**, with a
+  recorded production incident behind it (2026-08-02). Not reopened.
+
+### STILL OPEN from this session
+
+The close for a zero-mastery attempt says "finished — nice work" and points
+only at "Start next lesson". Its own rule's rationale claims it "points them at
+Review or the next lesson", and a Review path does exist (`lesson-init`
+`mode=review|restart`), but the text never offers it. Not changed here: it is a
+learner-facing copy + affordance decision, not a correctness bug, and it wants
+an owner call rather than an audit's guess.
 
 ---
 

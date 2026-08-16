@@ -5453,7 +5453,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             if (stateForOutcome?.conceptId) {
               const { isConceptClosed, lessonKeyFor, recordConceptOutcome } =
                 await import('@/lib/teaching/lessonAttempt')
-              if (isConceptClosed(stateForOutcome)) {
+              // A FINISHED LESSON DOES NOT ACCRUE NEW ATTEMPTS.
+              //
+              // openLessonAttempt reuses only an IN_PROGRESS row, so once this
+              // lesson's attempt is COMPLETED every later turn created a BRAND
+              // NEW attempt, folded the (still-closed) concept into it and
+              // finalised it immediately. Measured in production 2026-08-16 on
+              // a real learner account: lesson:6 held 14 attempt rows (11 of
+              // them <=3s), lesson:1 held 7, lesson:4 held 4 — one per idle
+              // utterance after the close. Three things broke: durationSeconds
+              // stopped describing the real attempt (2621s, buried under 1s
+              // rows), completedAt drifted forward to the last thing the
+              // learner typed, and teachingAttempts/budgetExhaustions reset to
+              // a fresh attempt's values — destroying the struggle history the
+              // adaptive layer reads back. The learner saw it too: the fresh
+              // finalise overwrote the "you've already finished" close with the
+              // FIRST-TIME close, so someone saying "i dont understand any of
+              // this" was congratulated with "nice work" again and again.
+              //
+              // Re-opening a completed lesson is lesson-init's job and is
+              // scoped there to mode restart/review ("teach this to me again").
+              // A chat turn is not that act. lessonCompletedHoisted is computed
+              // above from latestLessonAttempt().status for THIS SAME lessonKey
+              // (identical lessonKeyFor call, same user + subject), so this is
+              // the same authority the D-0a completion gate reads — not a
+              // second source of truth. After a real restart, lesson-init has
+              // opened an IN_PROGRESS attempt, this flag is false, and
+              // recording resumes exactly as before.
+              if (isConceptClosed(stateForOutcome) && !lessonCompletedHoisted) {
                 // LessonContext addresses lessons by order within the
                 // subject's curriculum; lessonKeyFor renders that into the
                 // single key format so one lesson cannot be recorded twice
