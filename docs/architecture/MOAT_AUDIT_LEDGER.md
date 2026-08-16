@@ -19,7 +19,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S6 | visual semantic (live) | 25 served figures audited, 0 defects | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified |
 | S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — detection gap traced, OWNER DECISION |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
-| S9 | end-user runtime | lesson 5 end-to-end live-verified | ladder + evidence live-verified | IN PROGRESS — chain verified, 1 product finding open |
+| S9 | end-user runtime | mastery closure live-verified (6/8 pass) | ladder + evidence live-verified | IN PROGRESS — 1 defect (duration), 1 intended mismatch |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
 ---
@@ -432,6 +432,84 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## S9 — lesson completion by GENUINE MASTERY (2026-08-16, live-verified)
+
+First time in this campaign a concept was driven to real mastery on a real
+account. Fresh lesson: physics 2, `phys.meas.scalars-vectors` (no prior attempt
+row). Played as a weak learner; five server-graded MCQ answers, no guiding.
+
+Ladder walked exactly as `masteryLadderReachability.test.ts` predicts:
+`OBSERVE →(correct) DEMONSTRATE →(teaching give) GUIDE →(correct) CHECK
+→(correct) checkCorrect 1 / PRACTICE →(correct) practiceCorrect 1
+→(correct) practiceCorrect 2 / TRANSFER`.
+
+| # | check | result |
+|---|---|---|
+| 1 | mastered concept closes correctly | **PASS** — `budgetExhaustions: 0`, closed by mastery not budget |
+| 2 | counters/evidence persisted | **PASS** — `verified: true`, TRANSFER, check 1 / practice 2; `topic_progress` attempts 7, marker set |
+| 3 | attempt duration/state correct | **FAIL** — see FINDING C |
+| 4 | completion message matches mastery | **PASS** — "You mastered: Scalar and Vector Quantities" (contrast the zero-mastery close, which names nothing) |
+| 5 | D-0a agrees post-completion | **PASS** — "You've already finished… You mastered: …", the `alreadyFinished` variant |
+| 6 | re-entry creates no duplicate attempt | **PASS** — still 1 row, `completedAt` unchanged |
+| 7 | correct next action | **PASS** — `nextLessonOrder: 3`, `fullyMastered: true` |
+| 8 | message vs persisted history consistent | **MISMATCH** — see FINDING D |
+
+Payload: `mastered: ["phys.meas.scalars-vectors"]`, `needsReview: []`,
+`fullyMastered: true`. Attempt row: 1, COMPLETED, `teachingAttempts: 1`.
+
+### FINDING C — `durationSeconds` is always ~1s. **Classification: A (defect), fix is architectural**
+
+The attempt above records `startedAt 18:56:34.618`, `completedAt 18:56:35.275`,
+`durationSeconds: 1` — for a concept the learner actually worked for ~12
+minutes.
+
+**Learner-visible**, not internal bookkeeping: `LessonScreen.tsx:4914` renders
+`Math.max(1, Math.round(durationSeconds / 60))` + `t('lc_min')` on the
+completion card, so a normally-completed lesson tells the learner it took
+**1 min**.
+
+Root cause: `openLessonAttempt` is called from the chat route's outcome block,
+which only runs when a concept CLOSES. The row is therefore created and
+finalised in the same turn and `startedAt ≈ completedAt`. The one historical row
+with a real duration (2621s, physics lesson:1) got it because `lesson-init`'s
+`restart|review` path had opened the attempt earlier — the only path that opens
+one in advance.
+
+**Not patched — the fix is an architectural choice, and both options have a
+cost:**
+- Open the attempt when the lesson opens (lesson-init, all modes). Restores the
+  field's meaning, but creates IN_PROGRESS rows for every opened-and-abandoned
+  lesson, reshaping a ledger whose lifecycle was only just stabilised.
+- Derive the duration at finalisation from the first message carrying this
+  `lessonKey`. No new rows and no lifecycle change, but it makes something other
+  than `startedAt` the authority on when the attempt began.
+
+Owner/architect call. Severity is low (a wrong number on a card, no teaching
+decision reads it) but it is genuinely wrong, so it is recorded as a defect
+rather than a nitpick.
+
+### FINDING D — the two stores disagree about mastery. **Classification: D (intended)**
+
+For the same concept at the same moment:
+
+```
+lesson_attempts   conceptsMastered: [phys.meas.scalars-vectors], fullyMastered: true
+topic_progress    status: IN_PROGRESS, masteryPct: 65
+```
+
+Both are deliberate. `topic_progress` is written by the SIGNAL checkpoint, which
+"deliberately NEVER writes COMPLETED/MASTERED and never exceeds 65 —
+conversational evidence alone must not certify mastery". The attempt ledger
+certifies from the ladder's server-graded MCQ counters, which is stronger
+evidence than the checkpoint path was designed around.
+
+No code change. Recorded because the learner is told "You mastered X" while the
+per-topic ledger still reads 65% IN_PROGRESS, and any future dashboard or
+review-scheduler reading `topic_progress` will disagree with the completion
+card. Whether the two should be reconciled is a product question, not a bug.
 
 ---
 
