@@ -16,10 +16,10 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S3 | structural tag integrity (orphan MC ids) | 30 residual | 4 residual | CLOSED — all classified |
 | S4 | stem-vs-blueprint agreement | 238/238 | 186/186 | CLOSED |
 | S5 | visual semantic (offline) | 23 widened, inspected | 20 widened, inspected | CLOSED |
-| S6 | visual semantic (live) | — | — | NOT MEASURED |
+| S6 | visual semantic (live) | 25 served figures audited, 0 defects | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified |
 | S7 | real-tutor behaviour | live session run; 1 defect found + fixed | — | IN PROGRESS |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
-| S9 | end-user runtime | live session; ledger clean | ladder proven reachable | IN PROGRESS — ladder OK, 1 DB-timeout defect proposed |
+| S9 | end-user runtime | lesson 5 end-to-end live-verified | ladder + evidence live-verified | IN PROGRESS — chain verified, 1 product finding open |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
 ---
@@ -432,6 +432,88 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## S6/S9 batch — served figures audited, physics runtime end-to-end (2026-08-16)
+
+### S6 — what production ACTUALLY serves as a figure
+
+Measured read-only from `visualization_cache` (58 rows): **25 served figures**
+(`scene:v1:fig:*`), 19 cached declines, 14 cached verdicts. Alongside:
+10 ACTIVE VISUAL assets over 10 concepts, 16 DRAFT, 199
+`visual_generation_outcome` rows.
+
+Every one of the 25 was checked title-against-concept. All read as
+semantically honest — e.g. `chem.equil.kw-ph` → "The pH Scale at 25°C"
+(number_line), `phys.rel.time-dilation` → "Lorentz Factor vs. Velocity (v/c)"
+(graph), `chem.found.states-of-matter` → "Interconversion of States of Matter"
+(process_flow), `eng.phonetics.intonation-patterns` → "Pitch Contour of a
+Statement vs. Question" (graph). No mislabelled or off-concept figure found on
+this surface.
+
+**S6 remains NOT MEASURED in the rendered sense** and this does not change it:
+Chromium still cannot reach HTTPS from the sandbox (re-tested this session:
+`ERR_PROXY_CONNECTION_FAILED` via proxy, `ERR_CONNECTION_RESET` direct, even to
+`example.com`). This is production-data evidence about figure SEMANTICS, not
+browser evidence about rendering.
+
+**Three suspicious signals investigated, all correct by design** — recorded
+because each looked like a defect and was not:
+
+1. One turn logged `representation: labelled_figure`, `renderer: spec` and
+   delivered `visualSpec.type: process_flow` — three different names. Not a
+   disagreement: all three come from the same `decision` object, and
+   `labelled_figure` is the default classification for a generated figure
+   (`resolveVisual.ts:990`).
+2. Two served rows carry a title but no top-level `type`
+   (`phys.em.electric-field`, served 5×; one runtime topic). `classifyFigure`
+   handles both payload generations explicitly — `steps` without `type` is a
+   scene. The `type`-less shape is older, not broken. My SQL was the imprecise
+   instrument.
+3. `phys.meas.units` has a cached DECLINE served 52 times — the entry lesson of
+   physics, never getting a figure. That is the documented "a list is not a
+   process" rule: the seven SI base units are a list, and the engine is
+   supposed to decline rather than bend it into a `process_flow`.
+
+### S9 — physics end-to-end on a fresh lesson (live-verified)
+
+Real test account, played as a struggling beginner on
+**lesson 5, `phys.meas.significant-figures`** — chosen because it had no prior
+attempt row, so nothing was inherited. Full chain observed live:
+
+| step | evidence |
+|---|---|
+| lesson switch | `activeLessonSlug` → `phys.meas.significant-figures`, persisted |
+| teaching | concrete anchor (jeweller's vs bathroom scale) before the term |
+| wrong answer | "the whole seconds one because its simpler" — corrected, not marked harshly |
+| confusion | "i dont understand which digits are the real ones" — answered, no drilling |
+| probe | structured MCQ served, "45.2 cm" → `correctIndex 2` (3 s.f.), correct |
+| wrong MCQ | graded server-side → `topic_progress` CREATED, attempts 1, score 25 |
+| correct MCQ | "0.0042 g" → 2 s.f., answered A → attempts 1→2 **exactly**, score 65 |
+| marker | joined to `messages`: a real USER row containing "A" |
+| ladder | OBSERVE → DEMONSTRATE on the correct answer, counters still 0 — per contract |
+| attempt ledger | **no** `lesson:5` attempt row (concept not closed) — correct |
+
+This also live-exercises the **CREATE branch** of the idempotent applier, which
+until now had only been proven offline: the wrong answer created the row, the
+correct answer updated it, one increment each, marker advancing both times.
+
+### NEW FINDING — a lesson closed by budget exhaustion on an improving turn
+
+Not changed; recorded. On the chemistry turn at 17:34 the learner answered a
+structured MCQ correctly, the evidence was applied (65), and the ladder
+advanced `GUIDE → CHECK`. On that **same** turn the concept's turn budget
+expired, so `lesson:2` was opened, folded and finalised: `status COMPLETED`,
+`conceptsMastered: []`, `conceptsNeedingReview: [chem.found.states-of-matter]`.
+The learner reached the CHECK rung and was closed out of the lesson in the same
+breath — and D-0a then locks the lesson to the canned close.
+
+The attempt row itself is correct (one row, first close, no duplicate — the
+lifecycle fix holding). What is questionable is the pedagogy: budget exhaustion
+fires on evidence of improvement rather than of stalling. Changing it means
+changing what "a concept closes" means (P6), which is a product decision of the
+same family as the completion-message items already reserved for the owner.
 
 ---
 
