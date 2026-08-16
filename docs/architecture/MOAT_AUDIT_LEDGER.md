@@ -19,7 +19,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S6 | visual semantic (live) | — | — | NOT MEASURED |
 | S7 | real-tutor behaviour | live session run; 1 defect found + fixed | — | IN PROGRESS |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
-| S9 | end-user runtime | live learner session run (HTTP, no browser) | — | IN PROGRESS |
+| S9 | end-user runtime | live session; ledger clean | live session; **gate cannot close** | IN PROGRESS — 1 high-priority open |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
 ---
@@ -357,6 +357,55 @@ observed live, with the DB checked afterwards:
   `IN_PROGRESS / masteryPct 25`. The model's claim did not become state.
   Worth an owner's eye: the learner still READS "you've mastered" on evidence
   the server refused to certify.
+
+### S9 — HIGH PRIORITY OPEN: a correct answer left no trace, and the gate cannot close
+
+The core S9 criterion ("a real learner reaches it and can achieve/close mastery
+correctly") was measured live for the first time, on
+`chem.found.states-of-matter`. It does **not** currently hold.
+
+**MEASURED — not inferred.** The learner asked for practice, received a
+genuinely structured MCQ (`mcq` field present — the server-owned gradeable
+path, i.e. an S8-seeded probe reaching a real learner), and answered it
+correctly ("C"). The tutor replied "Spot on". Then:
+
+```
+response.mastery  {"verified":false,"phase":"GUIDE","checkCorrect":0,
+                   "practiceCorrect":0,"checkRequired":1,"practiceRequired":2,
+                   "completionSuppressed":false,"gatePending":false}
+
+topic_progress    chem.found.states-of-matter  IN_PROGRESS  masteryPct 25
+                  updatedAt 15:34:24  <- the earlier WRONG-answer turn
+lesson_attempts   (no row at all for this chemistry lesson)
+```
+
+So the WRONG answer was recorded (25%, `signal_confident_wrong`) and the RIGHT
+answer recorded nothing. `checkCorrect` and `practiceCorrect` are still 0
+against a gate needing 1 and 2 — the counters never moved, so this gate cannot
+close by mastery no matter how many questions the learner gets right.
+
+This is consistent with the whole account's history: every `lesson_attempts`
+row has `conceptsMastered: []` except one (`lesson:92`). Physics `lesson:1` ran
+a genuine **2621 seconds** and still closed with `mastered: []` — by budget
+exhaustion, not mastery. Closure by exhaustion appears to be the normal path in
+production, and closure by mastery the exception.
+
+**Traced, but NOT confirmed — do not act on this without proving it.**
+`correctAtCheck` increments only in `conversationState.ts:638`, and only when
+`prev.phase === 'CHECK'`. The session is stuck at `GUIDE`, which advances only
+on `if (next.demonstrated) next.phase = 'CHECK'`. `demonstrated` is set at
+:459 from `deliveredAGive = !degradedTurn && (!askedQuestion ||
+deliveredTeaching === true)` — so a turn that is *purely a question*, which is
+exactly what the MCQ turn is, may deliver no "give" and leave `demonstrated`
+false. A physics `[ladder]` log in the same session also shows a phase moving
+BACKWARDS (`phaseBefore: 'GUIDE'` → `phaseAfter: 'DEMONSTRATE'`), so
+`phaseDown()` is active too and may be part of it.
+
+Deliberately not fixed in this batch: this is the core teaching ladder, the
+blast radius is every lesson, and strictness here is partly INTENDED (the moat's
+own stance is to refuse hollow advancement). Distinguishing "correctly strict"
+from "cannot ever close" needs its own bounded investigation with the ladder
+logs turn-by-turn — not a patch written on top of a plausible-looking trace.
 
 ### NOT a defect, checked and dismissed
 
