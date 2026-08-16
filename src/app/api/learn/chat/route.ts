@@ -1779,6 +1779,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         })()
         systemPrompt += buildMcqInstruction({ atMasteryGate: gatePhaseNow })
 
+        // Prose-MCQ guard (defect observed live, 2026-08-16). When the tutor's
+        // previous turn asked a multiple-choice question in prose WITHOUT the
+        // MCQ tag, this turn's reply cannot be graded — no ground truth exists,
+        // and asking the LLM to grade its own memory of the intended answer key
+        // is exactly how "That is right!" ends up under a wrong choice. If the
+        // prior turn shows the shape, tell the model not to claim correctness
+        // this turn and to re-issue the question WITH the tag instead. The
+        // deterministic backstop (correctness stripped from teachingSignal)
+        // sits with the SIGNAL parse below; this is the prompt-level partner
+        // that reduces the harm the LEARNER SEES.
+        try {
+          const { hasProseMultipleChoice, buildProseMcqReplyDirective } =
+            await import('@/lib/teaching/proseMcqGuard')
+          const priorAsstForProseCheck = learnSession.messages.find(
+            (m: { role: string }) => m.role === MessageRole.ASSISTANT,
+          )
+          const pendingMcqPresent = (snapshot as { pendingMcq?: unknown } | null)?.pendingMcq != null
+          const priorProse = !pendingMcqPresent
+            && !!priorAsstForProseCheck
+            && hasProseMultipleChoice((priorAsstForProseCheck as { content?: string }).content ?? '')
+          if (priorProse) systemPrompt += buildProseMcqReplyDirective(true)
+        } catch { /* non-fatal — falls through with no directive appended */ }
+
         // P3: the do-not-repeat contract — the questions already asked this
         // session, quoted back, plus the banned stock formulations and the
         // "confusion → explain, new example, new MCQ" rule that replaces
@@ -3823,6 +3846,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             teachingSignal = resolveContradiction(teachingSignal, verification)
           }
         } catch { /* non-fatal — fall through with CLEAN */ }
+      }
+
+      // PROSE-MCQ EVIDENCE GUARD (defect observed live, 2026-08-16).
+      //
+      // When the prior assistant turn asked a multiple-choice question in
+      // PROSE only (no `<!--MCQ-->` tag), `pendingMcqHoisted` is null and
+      // there is no server-side answer key. The only source of correctness
+      // for this turn is then the LLM's own `<!--SIGNAL-->` tag — the LLM
+      // grading its own memory of the intended answer. Measured on a real
+      // production turn: a wrong "C" was reported as `correctness="true"`
+      // and the ladder would have advanced on false evidence.
+      //
+      // The prompt directive above asks the model not to declare correctness
+      // in this shape, but a prompt rule is advisory. This is the
+      // deterministic backstop: if the shape holds and no pendingMcq exists,
+      // strip `correctness` from the signal for this turn. `chosenPhrase` /
+      // `confusion` / `confidence` remain — they are the model's read of the
+      // learner's behaviour, not a claim about a right answer we cannot
+      // verify. Fabricating an answer the learner did not give would put
+      // false evidence into their permanent record; refusing to record a
+      // correctness we cannot check is the strictly safer trade.
+      if (teachingSignal && teachingSignal.correctness !== undefined && !pendingMcqHoisted) {
+        try {
+          const { hasProseMultipleChoice } = await import('@/lib/teaching/proseMcqGuard')
+          const priorAsstForEvidence = learnSession.messages.find(
+            (m: { role: string }) => m.role === MessageRole.ASSISTANT,
+          )
+          const priorContent = priorAsstForEvidence
+            ? ((priorAsstForEvidence as { content?: string }).content ?? '')
+            : ''
+          if (hasProseMultipleChoice(priorContent)) {
+            console.log('[prose-mcq-ungradeable]', {
+              claimed: teachingSignal.correctness,
+              learnerMessage: message.slice(0, 40),
+              signalVerificationStatus: signalVerificationStatusHoisted,
+            })
+            teachingSignal = { ...teachingSignal, correctness: undefined }
+          }
+        } catch { /* non-fatal — fall through unchanged */ }
       }
 
       // Phase 2/5 capture: decompose a successful LLM generation into

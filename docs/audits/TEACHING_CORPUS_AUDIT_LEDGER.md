@@ -8736,3 +8736,112 @@ file modified.
 
 Physics S2 **577/604** (212/238 concepts). Remaining 27: stat 8, rel 7,
 astro 6, opt 3, meas 2, mech 1. Next highest-count block is `phys.stat` (8).
+
+---
+
+# S9 — a THIRD live runtime defect, from the same corpus audit turn
+
+The two defects fixed in the prior S9 block (the misnamed markup leak, the
+MCQ stored twice) both surfaced during production verification of a fresh
+account. The same account produced a third symptom on the SAME turn, and it
+is the one the learner sees most directly:
+
+> Q: What does `s` most commonly represent in physics equations?
+> A) Speed
+> B) Second (time)
+> C) Surface area
+> D) Size
+>
+> Learner: C
+> Tutor: **That is right!** …
+
+The correct answer was B. "That is right!" for a wrong choice is exactly
+the failure mode the whole deterministic-grading path was written to
+prevent — and it went through it, because that path only runs when the
+prior turn's assessment carried the `<!--MCQ-->` tag. THIS one did not.
+The question and its options were prose, no tag, so `parseMcqTag()`
+returned null, `pendingMcqHoisted` was never populated, and `gradeMcqAnswer()`
+never ran. The only source of correctness for the answering turn was the
+LLM's own `<!--SIGNAL correctness=…-->` — the model grading its own memory
+of an answer key it never wrote down.
+
+`mcq.ts`'s `buildMcqInstruction()` already tells the model to always emit
+the tag for assessments and doubles that at the mastery gate. That is a
+prompt lever and the model is under no obligation. The doubling stops the
+learner from seeing the LLM's guess on a gated turn; the OBSERVE case
+observed here has no such backstop.
+
+## The fix
+
+`src/lib/teaching/proseMcqGuard.ts` — a pure module with two exports and
+the rule it enforces: if the PRIOR assistant message contains 2-4 distinct
+lettered options each on their own line (`A)` / `A.` / `A]` / `(A)`, case
+insensitive), the current turn is answering an ungradeable prose MCQ. In
+that state:
+
+  1. `buildProseMcqReplyDirective()` is appended to the system prompt for
+     this one turn, telling the model it cannot verify the answer and must
+     re-issue the same question with the MCQ tag rather than declare
+     correctness. Prompt-level partner; reduces the harm the learner sees.
+  2. `hasProseMultipleChoice()` is re-checked next to `signalVerification`,
+     and if it fires with no `pendingMcqHoisted`, `teachingSignal.correctness`
+     is stripped. `chosenPhrase` / `confusion` / `confidence` are kept —
+     they are the model's read of the learner's behaviour, not a claim
+     about a right answer we cannot check. This is the deterministic
+     backstop: no false correctness ever reaches evidence, `TopicProgress`
+     or `MistakeRecord` from this shape.
+
+Detection is deliberately narrow: 2-4 DISTINCT letters A-Z, one option per
+line. An inline mention of "A) something" in a paragraph does not fire; a
+five-line list (A/B/C/D/E) does not fire; two lines both starting with
+`A)` do not fire (the count is over distinct letters). A false positive
+costs one turn of suppressed correctness; a false negative writes
+unverifiable claims into a permanent record. The narrower rule matches the
+live shape exactly.
+
+## Why the SIGNAL layer, not the MCQ-grade layer
+
+The deterministic grader (`gradeMcqAnswer`) needs an answer key. A prose
+MCQ has none. Inventing one from the surface prose (last-letter, first-letter,
+"most physical") would still be a guess — the same failure class, one layer
+in. The route already treats "no ground truth → return null, defer to the
+existing path" as the right conservative move for that layer. The SIGNAL
+layer is where the falsehood WOULD have been believed, so it is where the
+suppression belongs.
+
+## Regression protection
+
+`src/tests/proseMcqEvidenceGuard.test.ts` — 22 tests. The verbatim live
+prose block asserts detection; ten shape variants pin the boundary (dots,
+brackets, lowercase, four options; single option, five options, inline,
+plain, numbered, repeated letter); a compact re-encoding of the route's
+own suppression predicate asserts both directions (`correctness=true` and
+`correctness=false` both suppressed), the exemptions (a real
+`pendingMcq` present, plain prose prior, no correctness field, null signal),
+and that unrelated signal fields survive.
+
+## Validation
+
+`npx tsc --noEmit` clean; **339 files / 7,252 passed / 9 skipped** (up 22
+tests from 7,230); `npm run build` exit 0. No production writes.
+No KG, blueprint, or Educational Brain file modified.
+
+## Verification bookkeeping — what "fixed" means for each layer
+
+- **Repo-fixed**: yes — the source in main compiles, all tests pass, and
+  the audit ledger records the fix.
+- **Deployed**: pending — this turn's commit needs to reach production
+  the same way the two prior S9 fixes did.
+- **Production-verified**: NOT YET. The prior S9 turn's own bookkeeping
+  measured the base rate for markup leaks at 0.45%. Prose-only MCQ turns
+  are much rarer than that (the model is told about the tag on every turn,
+  and complies most of the time); a clean-session replay is unlikely to
+  reproduce inside a few turns. Verification will be by production log
+  inspection (`[prose-mcq-ungradeable]`) rather than by trying to force
+  the shape.
+- **Live-verified**: N/A this turn. The two behaviours the fix produces —
+  no correctness evidence written and a prompt-directed re-issue — are
+  observable in server logs and asset writes respectively; the learner's
+  direct experience improves in proportion to how often the model complies
+  with the re-issue directive, which is a measurement, not a claim.
+
