@@ -33969,13 +33969,13 @@ const POLR_PROBES: SeedProbe[] = [
     stem: 'PRACTICE: Two crossed polarizers block all light. A third polarizer at 45° is inserted BETWEEN them. What now emerges?',
     choices: [
       { text: 'Light gets through — each filter re-projects the polarization, so the third one restores a component the last filter can pass', isCorrect: true },
-      { text: 'Still nothing — adding another filter can only block more light', isCorrect: false, misconceptionId: `${POLR}:MC-INTERMEDIATE-FILTER-ONLY-BLOCKS` },
-      { text: 'Still nothing — the first two already removed every photon', isCorrect: false, misconceptionId: `${POLR}:MC-INTERMEDIATE-FILTER-ONLY-BLOCKS` },
+      { text: 'Still nothing — adding another filter can only block more light', isCorrect: false, misconceptionId: `${POLR}:MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS` },
+      { text: 'Still nothing — the first two already removed every photon', isCorrect: false, misconceptionId: `${POLR}:MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS` },
     ],
     correctValue: 'light emerges (I₀/8 for unpolarized input) — a polarizer PROJECTS rather than merely filters, so an intermediate axis rotates the polarization into one the analyser transmits',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${POLR}:MC-INTERMEDIATE-FILTER-ONLY-BLOCKS`],
-    source: `${POLR_SRC} — MC-INTERMEDIATE-FILTER-ONLY-BLOCKS, distractor-mapped`,
+    targetedMisconceptions: [`${POLR}:MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS`],
+    source: `${POLR_SRC} — MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS (retagged from the orphan id MC-INTERMEDIATE-FILTER-ONLY-BLOCKS; the blueprint trigger names this belief verbatim), distractor-mapped`,
   },
 ]
 
@@ -34292,13 +34292,13 @@ const LPWR_PROBES: SeedProbe[] = [
     stem: 'PRACTICE: Two thin lenses of +4 D and +6 D are placed 10 cm apart. Is the combined power simply +10 D?',
     choices: [
       { text: 'No — separation matters: P = P₁ + P₂ − d·P₁P₂, so with d = 0.10 m the result is +7.6 D', isCorrect: true },
-      { text: 'Yes — powers of lenses always add', isCorrect: false, misconceptionId: `${LPWR}:MC-IGNORE-LENS-SEPARATION` },
-      { text: 'Yes, because the lenses are thin', isCorrect: false, misconceptionId: `${LPWR}:MC-IGNORE-LENS-SEPARATION` },
+      { text: 'Yes — powers of lenses always add', isCorrect: false, misconceptionId: `${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES` },
+      { text: 'Yes, because the lenses are thin', isCorrect: false, misconceptionId: `${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES` },
     ],
     correctValue: '+7.6 D — P = 4 + 6 − 0.10×4×6 = 10 − 2.4; simple addition holds only for lenses IN CONTACT (d = 0)',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${LPWR}:MC-IGNORE-LENS-SEPARATION`],
-    source: `${LPWR_SRC} — MC-IGNORE-LENS-SEPARATION, distractor-mapped`,
+    targetedMisconceptions: [`${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES`],
+    source: `${LPWR_SRC} — MC-POWER-ADDS-FOR-SEPARATED-LENSES (retagged from the orphan id MC-IGNORE-LENS-SEPARATION; same belief, blueprint MC-1), distractor-mapped`,
   },
 ]
 
@@ -48590,7 +48590,7 @@ const PEND_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (Mastery Probe MP-2, mass independence): Two pendulums of the same length L=0.5 m: one has a 100 g bob, the other 500 g. Find T for each and state which returns first when both are displaced to the same angle.',
     correctValue: 'both have T=2π√(0.5/9.8)≈1.421 s — neither returns first; they swing in perfect synchrony regardless of mass',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${PEND}:MC-HEAVIER-SWINGS-DIFFERENTLY`],
+    targetedMisconceptions: [`${PEND}:MC-PENDULUM-PERIOD-DEPENDS-ON-MASS`],
     source: `${PEND_SRC} — Component 6 Mastery Probe Set MP-2`,
   },
   {
@@ -49181,7 +49181,7 @@ const INTF_ASSESS_PROBES: SeedProbe[] = [
     stem: 'TRANSFER (P4-d, energy conservation check): Two coherent 2 W speakers create an interference pattern. What is the total power in the pattern?',
     correctValue: '4 W total — energy is conserved, only redistributed (not destroyed) by interference',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${INTF}:MC-ENERGY-DESTROYED-AT-MINIMA`],
+    targetedMisconceptions: [`${INTF}:MC-INTERFERENCE-DESTROYS-ENERGY`],
     source: `${INTF_SRC} — Component 4 Diagnostic Probe Set P4-d`,
   },
   {
@@ -49496,7 +49496,29 @@ const BEAT_ASSESS_PROBES: SeedProbe[] = [
     probeKind: 'checkpoint',
     gradeBand: GradeBand.HIGH,
     stem: 'MASTERY GATE (P4-d, tuning by beats): A violinist hears 3 beats/s between an open string (196 Hz reference) and her string, then 5 beats/s after tightening. Was her original string frequency above or below the reference? Pass criterion: correctly reasons that beats alone don’t reveal direction, only magnitude, requiring the tightening-direction clue.',
-    correctValue: 'beats increasing after tightening means she moved further from the reference — since tightening only raises pitch, her original frequency must have been below the reference (flat), i.e. ~193 Hz',
+    // FACTUALLY WRONG GRADED ANSWER, corrected (Moat S4, phys.wave pass). The
+    // old answer was self-contradictory and failed a learner who reasoned
+    // correctly. It said "she moved FURTHER from the reference — since
+    // tightening only raises pitch, her original frequency must have been
+    // BELOW the reference". Those two clauses cannot both hold: if raising the
+    // pitch moved her further away, she was already ABOVE it.
+    //
+    // 3 beats against 196 Hz means 193 or 199 Hz — this concept's own P4-b
+    // probe says exactly that ("5 beats, one fork at 440: the other is 435 OR
+    // 445"). Tightening raises f. From 199 -> 201 gives 5 beats directly. From
+    // 193, reaching 5 beats needs 201 Hz, i.e. crossing the reference — still
+    // arithmetically possible, but then she moved TOWARD it before passing it,
+    // not "further" as the old reasoning claimed.
+    //
+    // The blueprint's own P4-d note lists BOTH branches and then asserts 193 Hz
+    // "as stated in the direction of tuning" — but nothing in the stem states
+    // she was flat, and its claim that both scenarios overshoot the reference
+    // is false for the sharp branch. Recorded as curriculum feedback; the
+    // blueprint is not modified. This answer now grades what the item's own
+    // pass criterion actually asks for: that beats give magnitude, not
+    // direction, and that the tightening observation is what discriminates.
+    correctValue:
+      '3 beats against the 196 Hz reference means her string was at 193 Hz or 199 Hz — beats give the MAGNITUDE of the mismatch, never its direction. Tightening raises pitch, and the beats grew to 5, which points to the SHARP branch: 199 -> 201 Hz moves steadily further from 196 and gives 5 beats directly. The flat branch is not impossible but requires overshooting: 193 Hz would have to be tightened all the way past 196 to 201 Hz, passing through a moment of zero beats on the way. A complete answer names both branches and says which observation would settle it — if the beats had DROPPED on tightening, she was flat',
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${BEAT}:MC-BEATS-REVEAL-DIRECTION`],
     source: `${BEAT_SRC} — Component 4 Diagnostic Probe Set P4-d`,
@@ -49858,11 +49880,11 @@ const LENS_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE: Is P_total=P_1+P_2 always valid for two lenses? State the one condition under which it is exact.',
     choices: [
       { text: 'Only when the lenses are in contact (separation d=0)', isCorrect: true },
-      { text: 'Always valid, regardless of lens separation', isCorrect: false, misconceptionId: `${LENS}:MC-POWER-ADDITIVE-ALWAYS` },
+      { text: 'Always valid, regardless of lens separation', isCorrect: false, misconceptionId: `${LENS}:MC-POWER-SEPARATED` },
     ],
     correctValue: 'only when d=0',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${LENS}:MC-POWER-ADDITIVE-ALWAYS`],
+    targetedMisconceptions: [`${LENS}:MC-POWER-SEPARATED`],
     source: `${LENS_SRC} — Section 7 Assessment Battery P74 classification item`,
   },
   {
@@ -49942,7 +49964,7 @@ const LPWR_ASSESS_PROBES: SeedProbe[] = [
     stem: 'TRANSFER (P-3, proficient): Two lenses (f₁=+20 cm, f₂=+30 cm) are placed 5 cm apart. Find the effective focal length using the separated-lens formula, and compare to the naive result from simply adding P₁+P₂.',
     correctValue: 'separated formula: P_total = P₁+P₂−dP₁P₂ (d in metres) gives a different (smaller magnitude combined power) result than the naive P₁+P₂ sum, with the difference being the percentage error introduced by ignoring separation',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${LPWR}:MC-IGNORE-LENS-SEPARATION`],
+    targetedMisconceptions: [`${LPWR}:MC-POWER-ADDS-FOR-SEPARATED-LENSES`],
     source: `${LPWR_SRC} — Component 6 Assessment Probes P-3`,
   },
   {
@@ -50045,7 +50067,16 @@ const DISPR_ASSESS_PROBES: SeedProbe[] = [
     probeKind: 'checkpoint',
     gradeBand: GradeBand.HIGH,
     stem: 'MASTERY GATE (P-4a, mastery gate at ≥0.80): A rainbow’s red appears at 42° and violet at 40° from the anti-solar point. Explain why red appears as the OUTER (larger-angle) arc.',
-    correctValue: 'red light bends less (lower n) inside the water droplet, resulting in a larger overall deviation angle from the anti-solar point compared to violet, which bends more and emerges at a smaller angle — placing red on the outside of the primary rainbow',
+    // SELF-CONTRADICTORY WORDING, corrected (Moat S4, phys.opt pass). The old
+    // answer said red "bends less … resulting in a larger overall DEVIATION
+    // angle". In rainbow optics "deviation angle" is the specific quantity D
+    // (~137.6° for red, ~139.4° for violet), and red's D is SMALLER, not
+    // larger. The viewing angle from the anti-solar point is 180° − D, which
+    // is what is larger for red. A learner who knows the term reads the stored
+    // answer as contradicting its own premise. Conclusion and premise both
+    // unchanged; only the conflated quantity is now named explicitly.
+    correctValue:
+      'red light bends less inside the droplet (lower n), so it is deviated LESS overall: its total deviation is D ≈ 137.6° against violet\'s ≈ 139.4°. The angle you actually look at is measured from the anti-solar point and equals 180° − D, so the smaller deviation becomes the LARGER viewing angle — red at ≈42°, violet at ≈40°. Less bending therefore puts red on the OUTSIDE of the primary rainbow. Note this is the reverse of a prism, where more bending simply means more deflection; the droplet\'s internal reflection inverts the relationship',
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${DISPR}:MC-MORE-BENDING-MEANS-LARGER-RAINBOW-ANGLE`],
     source: `${DISPR_SRC} — Component 6 Assessment Probes P-4`,
@@ -50326,7 +50357,7 @@ const POLR_ASSESS_PROBES: SeedProbe[] = [
     stem: 'FORMATIVE (P-2, developing): Polarized light I₀ passes through filters at 0°, 45°, 90°. Find the intensity after each. If only the first and third (0° and 90°) filters are used with no intermediate, what is the final intensity, and why is it different?',
     correctValue: 'with intermediate: I₀→I₀cos²45°=I₀/2→(I₀/2)cos²45°=I₀/4; without intermediate: I₀cos²90°=0 — the intermediate filter re-projects the light onto a new axis, allowing some transmission through the final crossed filter, whereas direct crossed polarizers transmit nothing',
     difficulty: ProbeDifficulty.DEVELOPING,
-    targetedMisconceptions: [`${POLR}:MC-INTERMEDIATE-FILTER-ONLY-BLOCKS`],
+    targetedMisconceptions: [`${POLR}:MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS`],
     source: `${POLR_SRC} — Component 6 Assessment Probes P-2`,
   },
   {

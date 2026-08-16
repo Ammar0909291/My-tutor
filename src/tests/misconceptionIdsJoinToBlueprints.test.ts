@@ -57,7 +57,13 @@ function blueprintIds(conceptId: string): Set<string> {
   const ids = new Set<string>()
   for (const raw of fs.readFileSync(file, 'utf8').split('\n')) {
     const line = raw.trim()
-    const heading = /^#+\s*(MC-?[A-Za-z0-9/-]+?)\s*(?::\s*(MC-[A-Za-z0-9/-]+?))?\s*(?:\(|$|:|\s—)/.exec(line)
+    // `=` belongs in the id character class. phys.opt.single-slit documents
+    // `### MC-2: MC-M=0-IS-DARK`, and without `=` the descriptive half parsed
+    // as the truncated `MC-M`, so the probe that correctly targets it was
+    // counted as an ORPHAN for the entire life of this ratchet — a false
+    // positive in the instrument, not a defect in the corpus. Found during the
+    // phys.opt Stage 4 pass by reading the blueprint next to the probe.
+    const heading = /^#+\s*(MC-?[A-Za-z0-9/=-]+?)\s*(?::\s*(MC-[A-Za-z0-9/=-]+?))?\s*(?:\(|$|:|\s—)/.exec(line)
     if (heading) { ids.add(heading[1]); if (heading[2]) ids.add(heading[2]) }
     const row = /^\|\s*(MC-[A-Z][A-Za-z0-9/-]{3,})\s*\|/.exec(line)
     if (row) ids.add(row[1])
@@ -167,7 +173,11 @@ describe('every probed misconception id joins to its blueprint', () => {
     // Production Pipeline's to make, not this campaign's.
     // Then 42 -> 39 in the phys.em Stage 4 pass (three more confirmed
     // renames: see physicsEmProbeDiscrimination.test.ts).
-    expect(orphanIds(physics).size).toBeLessThanOrEqual(39)
+    // Then 39 -> 33 across the phys.wave and phys.opt Stage 4 passes: five
+    // more confirmed renames, plus one that was never a real orphan at all —
+    // `phys.opt.single-slit:MC-M=0-IS-DARK`, which the parser above could not
+    // see until `=` was added to the id character class.
+    expect(orphanIds(physics).size).toBeLessThanOrEqual(33)
   })
 
   it('chemistry: unjoinable ids do not exceed the known residue', () => {

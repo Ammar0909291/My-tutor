@@ -8280,3 +8280,172 @@ discovered by a future re-read.
 meas 8/8, mech 60/60, em 35/35, mod 21/21, qm 19/19, therm 18/18, particle
 16/16, stat 15/15, rel 8/8, astro 6/6 → **206 of 238**. Remaining: `phys.wave`
 (17) and `phys.opt` (15) — 32 concepts, 241 probes.
+
+---
+
+# Iteration — PHYSICS CHECK 3: phys.wave + phys.opt — STAGE 4 COMPLETE (2026-08-16)
+
+The final two domains: `phys.wave` (17) and `phys.opt` (15) — **32 concepts,
+241 probes**, tagged and untagged alike. **7 defects.** Physics Stage 4 reaches
+**238 of 238 — COMPLETE.**
+
+## The two serious ones: mastery gates that grade a wrong answer
+
+A gate is where a learner is certified, so a wrong graded answer there does not
+merely misroute a repair — it fails someone who reasoned correctly.
+
+### `phys.wave.beats` — factually wrong AND self-contradictory
+
+> "A violinist hears 3 beats/s between an open string (196 Hz reference) and
+> her string, then 5 beats/s after tightening. Was her original frequency above
+> or below the reference?"
+>
+> **Old answer:** "beats increasing after tightening means she moved FURTHER
+> from the reference — since tightening only raises pitch, her original
+> frequency must have been BELOW the reference (flat), i.e. ~193 Hz"
+
+Those two clauses cannot both be true. If raising the pitch moved her *further*
+from 196 Hz, she was already *above* it. 3 beats means 193 **or** 199 Hz.
+Tightening raises f: 199 → 201 gives 5 beats directly and monotonically; 193 →
+201 also gives 5 beats but only by crossing the reference, so she would have
+moved *toward* it first.
+
+**The corpus already contradicted itself.** This same concept's P4-b probe
+states the two-branch fact plainly: *"Two tuning forks give 5 beats per second.
+One is at 440 Hz. What are the two possible frequencies of the other?" → 435 Hz
+or 445 Hz.*
+
+Rewritten to grade what the item's own pass criterion actually asks — that
+beats give magnitude, not direction; that both branches exist; and that the
+tightening observation is what discriminates them.
+
+**Blueprint discrepancy, recorded not fixed.** The blueprint's own P4-d note
+lists both branches, then asserts 193 Hz "as stated in the direction of tuning"
+— but nothing in the stem states she was flat, and its accompanying claim that
+*both* scenarios overshoot the reference is false for the sharp branch. The
+blueprint is Curriculum-Pipeline-owned and was not modified.
+
+### `phys.opt.dispersion` — right conclusion, contradictory mechanism
+
+The gate asks why red is the **outer** band of a primary rainbow. The old
+answer said red "bends less (lower n) … resulting in a **larger** overall
+**deviation angle** from the anti-solar point". In rainbow optics *deviation
+angle* is the specific quantity D — red ≈ 137.6°, violet ≈ 139.4° — and red's D
+is **smaller**. The viewing angle is 180° − D, which is what is larger for red
+(≈42° vs ≈40°). A learner who knows the term reads the stored answer as
+contradicting its own premise. Premise and conclusion kept; the conflated
+quantity is now named explicitly.
+
+## Five renames (orphans 39 → 34, before the instrument fix)
+
+| concept | was | now | blueprint evidence |
+|---|---|---|---|
+| `wave.pendulum` | `MC-HEAVIER-SWINGS-DIFFERENTLY` | `MC-PENDULUM-PERIOD-DEPENDS-ON-MASS` | trigger: "a heavier pendulum bob swings more slowly" |
+| `wave.interference` | `MC-ENERGY-DESTROYED-AT-MINIMA` | `MC-INTERFERENCE-DESTROYS-ENERGY` | trigger: "destructive interference means the waves cancel and the energy disappears"; conflict evidence uses the same two-speaker setup |
+| `opt.lens-power` | `MC-IGNORE-LENS-SEPARATION` | `MC-POWER-ADDS-FOR-SEPARATED-LENSES` | trigger: "applies P_total = P₁ + P₂ for lenses with a gap between them" |
+| `opt.lenses` | `MC-POWER-ADDITIVE-ALWAYS` | `MC-POWER-SEPARATED` | the blueprint heading IS "Lens powers always add … regardless of separation" |
+| `opt.polarization` | `MC-INTERMEDIATE-FILTER-ONLY-BLOCKS` | `MC-CROSSED-POLARIZERS-MEANS-ZERO-ALWAYS` | trigger names it verbatim: "…or *adding more polarizers can only reduce intensity*" |
+
+Two `source:` provenance strings still cited retired ids after the retag and
+were updated — a citation to an id that no longer exists misleads the next
+reader as surely as a wrong tag misleads the runtime. Guarded.
+
+## A defect in the INSTRUMENT, not the corpus
+
+`phys.opt.single-slit` correctly targets `MC-M=0-IS-DARK`, which its blueprint
+documents as `### MC-2: MC-M=0-IS-DARK`. The orphan ratchet's id parser used
+the character class `[A-Za-z0-9/-]`, which **excludes `=`** — so the descriptive
+half parsed as the truncated `MC-M` and this perfectly good join has been
+counted as an ORPHAN for the entire life of that guard. The corpus was right;
+the measurement was wrong.
+
+`=` added to both character classes. **Orphans 39 → 33** (five real renames plus
+this one false positive). Found only by reading the blueprint next to the probe
+— the same reason Stage 4 exists.
+
+## What phys.wave and phys.opt did NOT contain
+
+No crossed pairs, no false tags, no non-discriminating stems. Both domains'
+untagged halves (73 and 67 probes) were read in full with arithmetic
+spot-checked — Doppler source-speed simultaneous solution, YDSE glass-slab
+shift, single-slit width from central maximum, separated-lens effective focal
+length, noise-exposure dB averaging, pendulum altitude drift, Q-factor decay
+time, transverse particle-direction geometry — all correct.
+
+## Curriculum feedback — 12 novel orphans across the two domains
+
+`wave.shm:MC-RESTORING-FORCE-DIRECTION`,
+`wave.wave-properties:MC-FREQUENCY-CHANGES-WITH-MEDIUM`,
+`wave.longitudinal-waves:MC-MAX-DISPLACEMENT-AT-COMPRESSION`,
+`wave.superposition:MC-ANY-SAME-FREQ-IS-COHERENT`,
+`wave.sound-intensity:MC-INTENSITY-INDEPENDENT-OF-DISTANCE`,
+`wave.doppler-effect:MC-APPROACHING-SPREADS-WAVES`,
+`wave.beats:MC-BEATS-REVEAL-DIRECTION`,
+`opt.nature-of-light:MC-FREQUENCY-CHANGES-AT-BOUNDARY`,
+`opt.dispersion:MC-MORE-BENDING-MEANS-LARGER-RAINBOW-ANGLE`,
+`opt.single-slit:MC-FULL-WIDTH-IN-FORMULA`,
+`opt.youngs-experiment:MC-DARK-FRINGE-INDEXING`,
+`opt.reflection:MC-LEFT-RIGHT-INVERSION`. Each probe diagnoses the belief it
+names; the blueprint never registered it.
+
+## Production
+
+None of the seven is live; all repo-only, never seeded. **Repo-fixed: yes.
+Production-seeded: no. Production-verified: no.** No production writes.
+
+## Regression protection
+
+`src/tests/physicsWaveOpticsProbeDiscrimination.test.ts` — both gates pinned on
+the specific properties that were broken (both branches named; the
+self-contradictory clause absent; the discriminating observation present;
+deviation D distinguished from the 180° − D viewing angle), the sibling
+two-branch probe pinned as the corroborating evidence, five renames pinned both
+ways, provenance strings checked, and the `=` id pinned so the parser cannot
+silently narrow again. Orphan ratchet 39 → 33.
+
+## Validation
+
+`npx tsc --noEmit` clean; **336 files / 7148 passed / 9 skipped**;
+`npm run build` exit 0.
+
+---
+
+# PHYSICS STAGE 4 — COMPLETE: 238 / 238
+
+| domain | concepts | probes | defects |
+|---|---|---|---|
+| `phys.meas` | 8 | 59 | 2 |
+| `phys.mech` | 60 | 420 | 12 |
+| `phys.em` | 35 | 192 | 5 |
+| `phys.mod` | 21 | 63 | 0 |
+| `phys.qm` | 19 | 57 | 0 |
+| `phys.therm` | 18 | 131 | 0 |
+| `phys.particle` | 16 | 48 | 0 |
+| `phys.stat` | 15 | 45 | 0 |
+| `phys.wave` | 17 | 122 | 3 |
+| `phys.opt` | 15 | 119 | 4 |
+| `phys.rel` | 8 | 24 | 1 |
+| `phys.astro` | 6 | 18 | 0 |
+| **total** | **238** | **1,298** | **27** |
+
+**Every physics probe has now been read against its blueprint's misconception
+bodies.** Orphan residue 60 → 33. Seven defect classes found, each with a
+regression guard:
+
+1. a second NAME for a misconception the same blueprint documents (13)
+2. a crossed pair — both ids documented, the probe carried the other (1)
+3. a tag whose distractor expresses no misconception of that concept (2)
+4. a non-discriminating stem — the misconception answers correctly (6)
+5. a distractor stating a different misconception than its tag (1)
+6. an answer explanation teaching the concept's own misconception (2)
+7. a mastery gate grading a factually wrong answer (2)
+
+Plus one defect in the measuring instrument itself.
+
+**What this does NOT certify.** Stage 4 is complete; Stage 8 is not. Of the 27
+corrections, **exactly one** (`phys.mech.newtons-first-law`'s `M1` tag) is on a
+row that exists in production, and it is still wrong there — the seed script
+skips existing identities and this campaign makes no production writes.
+Everything else is repo-only. Physics Stage 8 remains at 2/238 by the
+handover's own count. Repo-fixed is not production-seeded, and neither is
+production-verified.
