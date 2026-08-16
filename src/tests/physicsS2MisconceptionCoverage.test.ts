@@ -75,12 +75,10 @@ const physics = [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.conceptId.s
 
 describe('S2 — physics misconception coverage ratchet', () => {
   it('unprobed documented misconceptions do not exceed the known residue', () => {
-    // RATCHET. 54 -> 39 (phys.mod, 15 concepts) -> 27 (phys.qm, 12 concepts) ->
-    // 19 (phys.stat, 8 concepts). Ratchets only go DOWN. phys.stat is now at
-    // ZERO too: every one of its eight remaining concepts documented four
-    // misconceptions and probed three. The remaining 19 are rel 7, astro 6,
-    // opt 3, meas 2, mech 1.
-    expect(coverage(physics).unprobed.length).toBeLessThanOrEqual(19)
+    // RATCHET. 54 -> 39 (phys.mod) -> 27 (phys.qm) -> 19 (phys.stat) ->
+    // 12 (phys.rel, 7 concepts). Ratchets only go DOWN. phys.rel is now at
+    // ZERO too. The remaining 12 are astro 6, opt 3, meas 2, mech 1.
+    expect(coverage(physics).unprobed.length).toBeLessThanOrEqual(12)
   })
 
   it('chemistry S2 stays complete at zero unprobed', () => {
@@ -285,6 +283,67 @@ describe('S2 — the phys.stat batch stays covered', () => {
     // The same S4-in-miniature check the prior batches carry: each new probe
     // must offer a WRONG option that STATES the tagged belief, so it can
     // detect it rather than merely name it.
+    const failures: string[] = []
+    for (const [conceptId, mc] of covered) {
+      const p = physics.find(
+        (x) =>
+          x.conceptId === conceptId &&
+          (x as unknown as { probeKind: string }).probeKind === 'true_false',
+      ) as unknown as { choices?: ReadonlyArray<{ isCorrect?: boolean; misconceptionId?: string }> } | undefined
+      if (!p) { failures.push(`${conceptId}: no true_false probe`); continue }
+      const mapped = (p.choices ?? []).filter((c) => c.misconceptionId === `${conceptId}:${mc}`)
+      if (!mapped.length) failures.push(`${conceptId}: no distractor mapped to ${mc}`)
+      if (mapped.some((c) => c.isCorrect)) failures.push(`${conceptId}: mapped the CORRECT choice`)
+    }
+    expect(failures).toEqual([])
+  })
+})
+
+describe('S2 — the phys.rel batch stays covered', () => {
+  /**
+   * phys.rel reached ZERO unprobed with this batch, the fourth physics
+   * domain to do so under S2 after phys.mod, phys.qm and phys.stat. All
+   * seven remaining concepts held exactly mcq × 2 + misconception_probe × 1
+   * and nothing in `true_false`, verified before authoring; every new probe
+   * lands in a free slot and stays a SINGLETON, leaving every existing
+   * canonicalSlug untouched (see the slot-safety note in the batches above).
+   */
+  const covered: ReadonlyArray<readonly [string, string]> = [
+    ['phys.rel.length-contraction', 'MC-4'],
+    ['phys.rel.lorentz-transform', 'MC-4'],
+    ['phys.rel.mass-energy', 'MC-4'],
+    ['phys.rel.postulates', 'MC-4'],
+    ['phys.rel.relativistic-momentum', 'MC-4'],
+    ['phys.rel.spacetime', 'MC-3'],
+    ['phys.rel.time-dilation', 'MC-3'],
+  ]
+
+  it('phys.rel has NO unprobed documented misconception left', () => {
+    const left = coverage(physics).unprobed.filter((u) => u.startsWith('phys.rel.'))
+    expect(left).toEqual([])
+  })
+
+  it.each(covered)('%s %s now has a probe that claims it', (conceptId, mc) => {
+    const ids = physics
+      .filter((p) => p.conceptId === conceptId)
+      .flatMap((p) => p.targetedMisconceptions ?? [])
+    expect(ids).toContain(`${conceptId}:${mc}`)
+  })
+
+  it.each(covered)('%s: the new probe sits in a FREE singleton slot', (conceptId) => {
+    const mine = physics.filter((p) => p.conceptId === conceptId) as ReadonlyArray<{
+      probeKind: string
+      gradeBand: string
+    }>
+    const slots = new Map<string, number>()
+    for (const p of mine) {
+      const k = `${p.probeKind}|${p.gradeBand}`
+      slots.set(k, (slots.get(k) ?? 0) + 1)
+    }
+    for (const [k, n] of slots) if (k.startsWith('true_false|')) expect(n, k).toBe(1)
+  })
+
+  it('every new probe diagnoses its misconception with a mapped distractor', () => {
     const failures: string[] = []
     for (const [conceptId, mc] of covered) {
       const p = physics.find(

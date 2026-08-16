@@ -52492,6 +52492,128 @@ const S2_MOD_COVERAGE_PROBES: SeedProbe[] = [
  * in a free slot and stays a singleton. Bands follow each concept's existing
  * probes: HIGH for seven, UNDERGRADUATE for `maxwell-boltzmann`.
  */
+/**
+ * S2 COVERAGE — phys.rel batch (2026-08-16).
+ *
+ * The seven documented misconceptions in phys.rel that carried NO probe —
+ * one per concept, six MC-4 and one MC-3. Same three-probe residue as the
+ * other physics domains (`mcq × 2 + misconception_probe × 1`), same
+ * remedy: append one `true_false` in the free singleton slot, stem =
+ * blueprint's **Probe:** line, correct answer = its **Conflict evidence
+ * [P28]** / **Replacement [P31]** with the concrete number the blueprint
+ * supplies (the 1/γ symmetry, the E' = γ(E − vp_x) 4-vector transform,
+ * the identical 0.511 MeV/c² positron mass, the two 511 keV PET photons,
+ * the (γ−1) ≈ 5×10⁻¹⁴ everyday-speed dilation), distractor = the
+ * **Characteristic phrase**.
+ */
+const S2_REL_COVERAGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: LCON,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: "Frame A measures frame B's 1-meter ruler as 0.5 m. Does frame B measure frame A's ruler as 2 m to compensate?",
+    choices: [
+      { text: "No — B ALSO measures A's ruler as 0.5 m. Length contraction is symmetric: neither frame is preferred, so each applies the same L = L₀/γ formula to the other's rulers. There is no reciprocal expansion to conserve — the apparent paradox is resolved by the relativity of simultaneity, and the invariant spacetime interval keeps everything consistent. (Compare the Doppler effect: if A hears B's siren higher, B hears A's siren LOWER, not higher — symmetry ≠ inverse.)", isCorrect: true },
+      { text: 'Yes — if one ruler is contracted, the other must be expanded to compensate', isCorrect: false, misconceptionId: `${LCON}:MC-4` },
+    ],
+    correctValue: "no — both frames see the other's rulers as contracted by the same 1/γ; no reciprocal expansion",
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCON}:MC-4`],
+    source: `${LCON_SRC} — MC-4 Probe line verbatim (v = 0.87c, 1 m → 0.5 m) + conflict evidence [P28] (symmetric contraction) and the Doppler discrimination pair; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: LRTZ,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A photon has energy E in frame S. Frame S′ moves at v relative to S in the direction the photon travels. Does the photon carry the same energy E in S′?',
+    choices: [
+      { text: 'No — energy is the time component of the 4-vector (E/c, p) and transforms exactly like (ct, x): E′ = γ(E − v p_x). For a photon p_x = E/c, so E′ = γE(1 − v/c) = E√((1−v/c)/(1+v/c)), which is the relativistic Doppler formula for frequency. The Lorentz-invariant is E² − (pc)² = (mc²)², not E itself', isCorrect: true },
+      { text: 'Yes — energy is a scalar, so the Lorentz transformation does not change it', isCorrect: false, misconceptionId: `${LRTZ}:MC-4` },
+    ],
+    correctValue: "no — E' = γ(E − v p_x); the invariant is E² − (pc)² = (mc²)², not E itself",
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${LRTZ}:MC-4`],
+    source: `${LRTZ_SRC} — MC-4 Probe line verbatim (photon in direction of boost) + conflict evidence (relativistic Doppler shift), bridge (energy-momentum 4-vector) and the scalar/non-scalar discrimination pair; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: MEQ,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A positron is the antiparticle of the electron. Does it have negative mass?',
+    choices: [
+      { text: 'No — the positron mass is 0.511 MeV/c², EXACTLY equal to the electron mass. "Anti" refers to opposite quantum numbers (charge +e vs −e, opposite lepton number), not to a negative mass or negative energy. The Dirac equation has negative-energy solutions that Dirac REINTERPRETED as antiparticles, not as negative masses. PET scanners confirm it directly: an e⁺ + e⁻ annihilation produces two 511 keV photons, one mc² for each — measured every day in hospitals', isCorrect: true },
+      { text: 'Yes — antimatter is negative mass; that is why it annihilates matter', isCorrect: false, misconceptionId: `${MEQ}:MC-4` },
+    ],
+    correctValue: 'no — m_positron = m_electron = 0.511 MeV/c²; the "anti" is opposite charge, not negative mass',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MEQ}:MC-4`],
+    source: `${MEQ_SRC} — MC-4 Probe line verbatim + conflict evidence (PDG positron mass; PET 511 keV photons); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: POST,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Michelson-Morley experiment "failed" to detect the aether. Does that failure alone prove Einstein was right?',
+    choices: [
+      { text: 'No — Michelson-Morley eliminated the aether, but special relativity stands on separate quantitative predictions verified independently to extraordinary precision. Kennedy-Thorndike and Ives-Stilwell tested the postulates directly, modern laser experiments confirm the constancy of c to 1 part in 10¹⁵, and time dilation is measured every day in muon lifetimes, GPS satellites, and particle accelerators. Einstein\'s theory is validated by its own predictions, not by one failure of a competing model', isCorrect: true },
+      { text: 'It just means they could not find the aether yet — special relativity is still just a theory', isCorrect: false, misconceptionId: `${POST}:MC-4` },
+    ],
+    correctValue: 'no — MM eliminated the aether; SR is validated by many independent quantitative predictions (Kennedy-Thorndike, Ives-Stilwell, muons, GPS)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${POST}:MC-4`],
+    source: `${POST_SRC} — MC-4 Probe line verbatim (MM did not prove Einstein alone) + conflict evidence [P28] (Kennedy-Thorndike, Ives-Stilwell, muons, GPS, c to 1 in 10¹⁵); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: RMOM,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A proton is moving at 0.9c. Does E² = (pc)² + (mc²)² still apply, or is it only for particles at rest?',
+    choices: [
+      { text: 'Still applies — it holds in every inertial frame for any massive particle. E = γmc², p = γmv, so (pc)² + (mc²)² = γ²m²v²c² + m²c⁴ = m²c⁴(γ²v²/c² + 1) = m²c⁴γ² = E². The Lorentz invariant is E² − (pc)² = (mc²)², true in ALL frames. E = mc² is the special case v = 0 (γ = 1), NOT the general relation', isCorrect: true },
+      { text: 'No — that formula is for rest energy only', isCorrect: false, misconceptionId: `${RMOM}:MC-4` },
+    ],
+    correctValue: 'still applies — E² − (pc)² = (mc²)² is a Lorentz invariant, valid in all frames for all v',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${RMOM}:MC-4`],
+    source: `${RMOM_SRC} — MC-4 Probe line verbatim (0.9c proton) + conflict evidence (algebraic proof from γmc² and γmv); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: SPTM,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A particle has 3-momentum p⃗ and energy E. Is the four-momentum inner product p_μ p^μ just the 3D dot product p_x² + p_y² + p_z²?',
+    choices: [
+      { text: 'No — with the Minkowski metric (+ − − −), p_μ p^μ = (E/c)² − p_x² − p_y² − p_z² = (mc)². The time component enters with a plus and the space components with a minus, and that indefinite signature is exactly what makes the combination Lorentz-invariant. For a photon (m = 0) this gives E = pc; for a particle at rest (p⃗ = 0), E = mc² — both follow from the SAME invariant, whereas the 3D dot product |p⃗|² is not Lorentz-invariant at all', isCorrect: true },
+      { text: 'Yes — p·p = |p⃗|² = p_x² + p_y² + p_z²', isCorrect: false, misconceptionId: `${SPTM}:MC-3` },
+    ],
+    correctValue: 'no — p_μ p^μ = (E/c)² − |p⃗|² = (mc)² under the Minkowski (+−−−) metric',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SPTM}:MC-3`],
+    source: `${SPTM_SRC} — MC-3 Probe line verbatim + conflict evidence [P28] (Minkowski (+−−−); (E/c)² − |p⃗|² = (mc)²) and the photon/rest-frame discrimination pairs; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: TDIL,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'A train moves at 100 m/s relative to the ground. Compute γ. What is the fractional change in time (γ − 1)?',
+    choices: [
+      { text: 'β = v/c = 100/(3×10⁸) = 3.33×10⁻⁷, so β² ≈ 1.11×10⁻¹³ and γ = 1/√(1 − 10⁻¹³) ≈ 1 + 5×10⁻¹⁴. The fractional time dilation (γ − 1) ≈ 5×10⁻¹⁴ — utterly negligible. Always reduce v to the dimensionless β = v/c first, and γ is always ≥ 1; a γ < 1 or β > 1 is a computation error, not a physical result', isCorrect: true },
+      { text: 'γ = 1/√(1 − v²/c²) = 1/√(1 − (100)²/(3×10⁸)²) — plug the numbers straight in with v in m/s and c in m/s (no need to reduce first)', isCorrect: false, misconceptionId: `${TDIL}:MC-3` },
+    ],
+    correctValue: '(γ − 1) ≈ 5×10⁻¹⁴; always compute β = v/c first, then γ = 1/√(1−β²)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TDIL}:MC-3`],
+    source: `${TDIL_SRC} — MC-3 Probe line verbatim (train at 100 m/s) + conflict evidence [P28] (β = 3.33×10⁻⁷; γ − 1 ≈ 5×10⁻¹⁴); distractor is the characteristic phrase (dimensional-form mistake)`,
+  },
+]
+
 const S2_STAT_COVERAGE_PROBES: SeedProbe[] = [
   {
     conceptId: BOLT,
@@ -52617,6 +52739,7 @@ const S2_STAT_COVERAGE_PROBES: SeedProbe[] = [
 
 export const AUTHORED_PROBES: SeedProbe[] = [
   ...S2_QM_COVERAGE_PROBES,
+  ...S2_REL_COVERAGE_PROBES,
   ...S2_STAT_COVERAGE_PROBES,
   ...S2_MOD_COVERAGE_PROBES,
   ...UNITS_PROBES,

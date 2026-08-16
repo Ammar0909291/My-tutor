@@ -8905,3 +8905,60 @@ writes; no KG, blueprint, or Educational Brain file modified.
 Physics S2 **585/604** (220/238 concepts). Remaining 19: rel 7, astro 6,
 opt 3, meas 2, mech 1. Next highest-count block is `phys.rel` (7).
 
+
+---
+
+# S2 phys.rel batch (2026-08-16)
+
+Fourth physics domain to reach ZERO unprobed under S2, after phys.mod,
+phys.qm and phys.stat. Seven documented misconceptions across seven
+concepts, same three-probe residue as before.
+
+| concept | MC | belief the distractor states |
+|---|---|---|
+| phys.rel.length-contraction | MC-4 | "if one ruler is contracted, the other must be expanded" |
+| phys.rel.lorentz-transform | MC-4 | "energy is a scalar — Lorentz doesn't change it" |
+| phys.rel.mass-energy | MC-4 | "antimatter is negative mass" |
+| phys.rel.postulates | MC-4 | "Michelson-Morley failed — SR is still just a theory" |
+| phys.rel.relativistic-momentum | MC-4 | "E² = (pc)² + (mc²)² is for rest energy only" |
+| phys.rel.spacetime | MC-3 | "p·p = |p⃗|² (3D dot product for a 4-vector)" |
+| phys.rel.time-dilation | MC-3 | "plug v in m/s straight into γ (don't reduce β first)" |
+
+## How each probe was written
+
+Same procedure. Stem = the blueprint's own **Probe:** line. Correct answer
+= its **Conflict evidence [P28]** / **Replacement [P31]**, carrying the
+concrete number the blueprint supplies — the 1/γ symmetry of length
+contraction, the E′ = γ(E − vp_x) 4-vector transform reducing to the
+relativistic Doppler formula for a photon, the two 511 keV PET
+annihilation photons confirming m_positron = m_electron = 0.511 MeV/c²,
+E² − (pc)² = (mc²)² proved algebraically for a 0.9c proton, the
+Minkowski (+ − − −) inner product (E/c)² − |p⃗|² = (mc)², β = 100 m/s /
+3×10⁸ m/s and (γ − 1) ≈ 5×10⁻¹⁴. Distractor = the **Characteristic
+phrase**, so the probe DETECTS the belief instead of merely naming it.
+
+## Slot safety
+
+Same discipline. `canonicalSlug` is `conceptId:probeKind:lang:band[:difficulty]`;
+`true_false` verified FREE in all seven concepts before authoring — every
+probe lands in a free slot and stays a singleton (asserted per concept).
+Bands follow existing probes: HIGH ×6, UNDERGRADUATE ×1 (time-dilation).
+
+## Regression protection
+
+`src/tests/physicsS2MisconceptionCoverage.test.ts` — ratchet lowered
+19 → 12 (downward only); phys.rel asserted at exactly zero; all seven
+pairings pinned; slot-safety asserted per concept; and each new probe
+required to map a NON-correct distractor to the misconception it claims.
+
+## Validation
+
+`npx tsc --noEmit` clean; **339 files / 7,286 passed / 9 skipped** (up 16
+from 7,270); `npm run build` exit 0. No production writes; no KG,
+blueprint, or Educational Brain file modified.
+
+## Standing
+
+Physics S2 **592/604** (227/238 concepts). Remaining 12: astro 6, opt 3,
+meas 2, mech 1. Next block: `phys.astro` (6).
+
