@@ -271,6 +271,57 @@ ledger is untouched — and the learner now receives the correct close,
 variant), instead of the first-time "finished — nice work" that the spurious
 finalise had been overwriting it with.
 
+### Re-entry paths — both verified clean (2026-08-16, second pass)
+
+The first verification covered "keep chatting after the close". The other
+re-entry route, **`/api/learn/lesson-init` on a completed lesson**, was then
+tested live on the same account (`mode=resume`, lesson:1). Ledger after it:
+
+```
+rows 7   latest completedAt 2026-08-16 15:18:30.733   max durationSeconds 2621   IN_PROGRESS 0
+```
+
+Unchanged, no new row, the real 2621s attempt still intact — `resume` correctly
+does not re-open, matching the intent documented at `lesson-init/route.ts:245`.
+Evidence integrity now confirmed on BOTH re-entry paths.
+
+Regression coverage extended to the signals the adaptive layer actually reads
+(11 tests total). `latestLessonAttempt` orders `startedAt DESC` and is the
+single read behind all three consumers — the prompt SUMMARY block
+(`route.ts` ~1826), the completion gate on that same read, and the D-0a serve
+(~3479) — so under the defect the tutor was reading the 1-second row the
+previous turn had manufactured, not the learner's real attempt. Now pinned:
+`durationSeconds` stays 2621, `teachingAttempts`/`budgetExhaustions` are not
+reset, `latestLessonAttempt` still points at the real attempt, a RECOVERY turn
+writes nothing, and an IN_PROGRESS attempt is still reused rather than doubled.
+
+### NEW FINDING — re-entry teaches, then chat refuses to listen
+
+Distinct from the ledger defect above, found while testing that re-entry path.
+Reproduced live, in this order:
+
+1. `lesson-init` (`mode=resume`) on the COMPLETED lesson → the tutor **teaches**
+   a full opening via gemini and ends with a real question: *"when you measure
+   how long a table is, what label or unit do you normally use?"*
+2. The learner answers it correctly — "metres i think".
+3. `/api/learn/chat` → D-0a serves the canned close. The answer is never
+   acknowledged, never graded, never recorded.
+
+The app asks a question it is structurally incapable of receiving an answer to.
+Cause is a disagreement between two paths about whether a finished lesson may
+be taught: `lesson-init` generates a fresh LLM opening regardless of status,
+while D-0a refuses all teaching on the same lesson. Each is defensible alone;
+together they produce the dead end. `lesson-init/route.ts:245` states the
+intended behaviour explicitly — "resuming a finished lesson should still
+deliver the close" — and the observed opening is not that.
+
+**NOT changed here, deliberately.** Fixing it means choosing which side is
+right, and that is a product call of the same family as the completion-message
+items already reserved for the owner: a learner re-entering a lesson they never
+mastered arguably *should* be taught, which would make the existing
+`restart|review` re-open machinery the natural home rather than silencing the
+opening. Recommendation recorded, decision not taken.
+
 **Observation, not yet diagnosed:** two of the four post-fix turns served a
 prior assistant question verbatim ("Let me ask you something concrete about SI
 Units and Measurement…") with `provider=memory`,

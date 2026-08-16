@@ -32,7 +32,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { readFileSync } from 'node:fs'
 import {
-  openLessonAttempt, saveLessonAttempt, finalizeLessonAttempt,
+  openLessonAttempt, saveLessonAttempt, finalizeLessonAttempt, latestLessonAttempt,
 } from '@/lib/teaching/lessonAttemptStore'
 import { recordConceptOutcome, isConceptClosed } from '@/lib/teaching/lessonAttempt'
 import { shouldFinalizeLesson, requiredConceptsForLesson } from '@/lib/teaching/lessonCompletion'
@@ -133,6 +133,96 @@ describe('a completed lesson does not accrue attempts from later chat turns', ()
     await recordTurn(db, false)
     expect(rows.length).toBe(2)
     expect(rows[1].status).toBe('COMPLETED')
+  })
+})
+
+/**
+ * THE ADAPTIVE LAYER READS THE NEWEST ROW.
+ *
+ * latestLessonAttempt orders by startedAt DESC, and it is the single read
+ * behind all three consumers: the lesson SUMMARY block injected into the
+ * prompt (route.ts ~1826), the completion gate that sets lessonCompletedHoisted
+ * on the same read, and the D-0a deterministic serve (route.ts ~3479).
+ *
+ * So under the defect the tutor was not reading the learner's real attempt at
+ * all — it was reading the 1-second row the previous turn had manufactured.
+ * These tests pin the REAL attempt's signals surviving post-completion chatter.
+ */
+describe('post-completion turns do not corrupt the signals the adaptive layer reads', () => {
+  /** A genuine long attempt: opened, taught, closed 2621s later — the real
+   *  duration measured on the production account that exposed this. */
+  async function realAttempt(db: any) {
+    const { id, outcome } = await openLessonAttempt(db, { ...ARGS, lessonTitle: 'SI Units' })
+    const folded = recordConceptOutcome(outcome, CLOSED, 'SI Units')
+    await saveLessonAttempt(db, id, folded)
+    return finalizeLessonAttempt(
+      db, id, folded, new Date(folded.startedAt.getTime() + 2621_000),
+    )
+  }
+
+  it('preserves durationSeconds — the real attempt is not buried under 1s rows', async () => {
+    const { db, rows } = fakeDb()
+    await realAttempt(db)
+    expect(rows[0].durationSeconds).toBe(2621)
+
+    for (let i = 0; i < 5; i++) await recordTurn(db, true)
+
+    const latest = await latestLessonAttempt(db, ARGS)
+    expect(rows.length).toBe(1)
+    expect(latest!.durationSeconds).toBe(2621)
+  })
+
+  it('does not reset teachingAttempts or budgetExhaustions', async () => {
+    const { db } = fakeDb()
+    const { outcome } = await realAttempt(db)
+    // The closed concept spent its budget, so both counters carry real history.
+    expect(outcome.budgetExhaustions).toBeGreaterThan(0)
+    const before = {
+      teachingAttempts: outcome.teachingAttempts,
+      budgetExhaustions: outcome.budgetExhaustions,
+    }
+
+    for (let i = 0; i < 5; i++) await recordTurn(db, true)
+
+    const latest = await latestLessonAttempt(db, ARGS)
+    expect(latest!.teachingAttempts).toBe(before.teachingAttempts)
+    expect(latest!.budgetExhaustions).toBe(before.budgetExhaustions)
+  })
+
+  it('leaves latestLessonAttempt pointing at the learner\'s real attempt', async () => {
+    const { db } = fakeDb()
+    const { outcome } = await realAttempt(db)
+    for (let i = 0; i < 3; i++) await recordTurn(db, true)
+
+    const latest = await latestLessonAttempt(db, ARGS)
+    // Same attempt, same close, same evidence the summary is built from.
+    expect(latest!.startedAt.getTime()).toBe(outcome.startedAt.getTime())
+    expect(latest!.completedAt!.getTime()).toBe(outcome.completedAt!.getTime())
+    expect(latest!.conceptsNeedingReview).toEqual(outcome.conceptsNeedingReview)
+    expect(latest!.status).toBe('COMPLETED')
+  })
+
+  it('holds for a RECOVERY turn — D-0a serves without writing an attempt', async () => {
+    const { db, rows } = fakeDb()
+    await realAttempt(db)
+    // decideTeaching returns SERVE_LESSON_COMPLETE for a recovery utterance on a
+    // closed lesson (pinned in completedLessonRecoveryPreempt.test.ts). That
+    // serve is deterministic and must not touch the ledger: the gate is read
+    // from the same lessonCompleted signal the decision used.
+    for (const _ of ['i dont understand any of this', 'i feel stupid', 'please help me i am lost']) {
+      await recordTurn(db, true)
+    }
+    expect(rows.length).toBe(1)
+    expect(rows[0].durationSeconds).toBe(2621)
+  })
+
+  it('reuses an IN_PROGRESS attempt instead of opening a second one', async () => {
+    const { db, rows } = fakeDb()
+    const first = await openLessonAttempt(db, { ...ARGS, lessonTitle: 'SI Units' })
+    const second = await openLessonAttempt(db, { ...ARGS, lessonTitle: 'SI Units' })
+    expect(second.id).toBe(first.id)
+    expect(rows.length).toBe(1)
+    expect(rows[0].status).toBe('IN_PROGRESS')
   })
 })
 
