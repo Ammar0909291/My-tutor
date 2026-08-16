@@ -112,8 +112,47 @@ export function parseMcqTag(text: string): { mcq: TutorMCQ | null; cleanText: st
  */
 export function appendMcqToHistoryText(cleanText: string, mcq: TutorMCQ | null): string {
   if (!mcq) return cleanText
+  // DUPLICATION GUARD (observed live, 2026-08-16).
+  //
+  // This function rests on an assumption that is usually — but not always —
+  // true: that stripMcqTags() removed the question from `cleanText`, so
+  // appending it here is the only copy in durable history.
+  //
+  // A real production turn broke it. The model wrote the question and its
+  // options inline AS PROSE *and* emitted the <!--MCQ--> tag. Stripping the tag
+  // left the prose copy untouched, so this append produced a second one and the
+  // stored message read:
+  //
+  //   "Which of the following is the official SI base unit for mass?
+  //    A) Gram  B) Kilogram  C) Pound  D) Newton
+  //    Which of the following is the official SI base unit for mass?
+  //    A) Gram  B) Kilogram  C) Pound  D) Newton"
+  //
+  // Invisible live — the API response carries the single prose copy and the
+  // client draws its wizard from the `mcq` field — and visible only after a
+  // reload, which is exactly when history is all the learner has.
+  //
+  // Comparing on the question alone is deliberate. If the tutor already asked
+  // it in prose, appending the options again adds nothing a reader needs, and
+  // matching loosely on the question is far more robust than trying to detect
+  // an options block that the model may have lettered, bulleted or inlined.
+  if (containsQuestion(cleanText, mcq.question)) return cleanText
   const lines = mcq.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}`).join('\n')
   return `${cleanText}\n\n${mcq.question}\n${lines}`
+}
+
+/**
+ * Whitespace- and case-insensitive containment. The prose copy and the tag copy
+ * of one question routinely differ by line wrapping and capitalisation, so an
+ * exact match would miss the very case this guard exists for. Punctuation is
+ * kept: two questions differing only by a "?" are still the same question, but
+ * dropping punctuation entirely risks colliding genuinely different prompts.
+ */
+function containsQuestion(haystack: string, question: string): boolean {
+  const norm = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase()
+  const q = norm(question)
+  if (q.length < 12) return false // too short to match safely
+  return norm(haystack).includes(q)
 }
 
 /**

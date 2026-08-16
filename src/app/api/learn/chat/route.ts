@@ -4947,6 +4947,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // answer is deliberately not marked in this text, matching what the
       // live wizard shows before a tap. Shared, unit-tested helper —
       // src/tests/mcqHistoryPersistence.test.ts — rather than inline logic.
+      // RESIDUAL MACHINE-TAG SWEEP — the last line of defence before this text
+      // becomes both the learner's bubble and durable history.
+      //
+      // Every tag parser above is keyed to a tag NAME. That is necessary (they
+      // extract structured meaning) but demonstrably not sufficient: a real
+      // production turn ended with `<!--ATMPT …-->` and `<!--OBSERVATION …-->`
+      // because the model abbreviated ATTEMPT and renamed SIGNAL, and no
+      // name-keyed parser can recover from a name it was never given. Measured
+      // across all 1,986 assistant messages in production, 9 carry raw markup —
+      // five different families, including correctly-named ones.
+      //
+      // Assigned back to `cleanText` deliberately, rather than applied only to
+      // `contentForHistory`: this single variable feeds BOTH the persisted row
+      // below and the `text:` field of the response, so sweeping it once closes
+      // both channels and cannot leave them disagreeing — which is the defect
+      // class that produced the MCQ duplication directly beneath this.
+      const { stripResidualMachineTags } = await import('@/lib/teaching/residualTagSweep')
+      cleanText = stripResidualMachineTags(cleanText)
+
       const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
       const contentForHistory = appendMcqToHistoryText(cleanText, mcqHoisted)
 
