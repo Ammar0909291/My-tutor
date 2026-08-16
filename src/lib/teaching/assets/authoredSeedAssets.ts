@@ -52493,6 +52493,127 @@ const S2_MOD_COVERAGE_PROBES: SeedProbe[] = [
  * probes: HIGH for seven, UNDERGRADUATE for `maxwell-boltzmann`.
  */
 /**
+ * S2 COVERAGE — phys.opt / phys.meas / phys.mech last-mile batch (2026-08-16).
+ *
+ * Six unprobed documented misconceptions across five concepts spread over
+ * THREE otherwise-complete domains — the distinct residue left after the five
+ * whole-domain S2 batches (mod, qm, stat, rel, astro). Not a three-probe
+ * template gap: each of these concepts already carries the full authored
+ * probe suite for the OTHER misconceptions (some hold 6-8 probes across
+ * mcq/misconception_probe/short_answer/checkpoint), so the missing MC is a
+ * genuine one-off omission rather than a systematic under-authoring — which
+ * is why they were left last: it needed one careful pass, not a template.
+ *
+ * `true_false` was verified FREE in all five concepts before authoring, so
+ * every probe below lands in a free slot and stays a singleton. All HIGH
+ * band, since every existing probe in each concept is HIGH.
+ *
+ * This batch closes S2 across physics at 604/604 (ZERO).
+ */
+const S2_LAST_MILE_COVERAGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: SV,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Every physical quantity is essentially a number — you can add temperature, time and force the same way. Is that right, or does something depend on more than a number?',
+    choices: [
+      { text: 'No — some quantities need a DIRECTION as well as a magnitude, and they combine differently for it. Two 5 N forces in the SAME direction give a net 10 N; two 5 N forces in OPPOSITE directions give net 0 N; two 5 N forces at right angles give ~7 N at 45°. Same magnitudes, three different physical outcomes — scalars alone (temperature, time, mass) cannot produce that. Force, displacement, velocity, acceleration and momentum are vectors precisely because direction changes the physics', isCorrect: true },
+      { text: 'Yes — all physical quantities are just numbers; direction is a description, not a quantity', isCorrect: false, misconceptionId: `${SV}:MC-4` },
+    ],
+    correctValue: 'no — force/displacement/velocity are vectors; direction changes the physical outcome (tug-of-war)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${SV}:MC-4`],
+    source: `${SV_SRC} — MC-4 (All Physical Quantities Are Just Numbers) + its P28 evidence (tug-of-war: same magnitude, different direction → different outcome) and the direction-sensitive replacement; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: UNITS,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: '"My weight is 70 kg." Is the kilogram the unit of weight?',
+    choices: [
+      { text: 'No — the KILOGRAM is the SI base unit of MASS (how much matter). WEIGHT is a FORCE — the gravitational pull on that mass, F = mg — and forces are measured in newtons (N), a derived unit. A 70 kg person has a weight of about 686 N on Earth (g ≈ 9.8 m/s²) and about 114 N on the Moon (g ≈ 1.6 m/s²) — same mass in kg, different weight in N. "My weight is 70 kg" mixes the two quantities; "my mass is 70 kg" is the precise statement', isCorrect: true },
+      { text: 'Yes — mass and weight are the same quantity; both use the kilogram', isCorrect: false, misconceptionId: `${UNITS}:MC-2` },
+    ],
+    correctValue: 'no — kilogram measures mass; weight is a force, unit newton (N)',
+    difficulty: ProbeDifficulty.FOUNDATIONAL,
+    targetedMisconceptions: [`${UNITS}:MC-2`],
+    source: `${UNITS_SRC} — MC-2 (Mass and Weight Are the Same Quantity) + the "kg = mass, N = weight-force" partial repair specified in the blueprint (full mass/weight repair deferred to phys.mech.force); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: N1,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A car is cruising at a constant 60 km/h on a level road. To keep going at constant speed, does the engine have to provide a NET forward force on the car?',
+    choices: [
+      { text: 'No — a car at constant velocity has ZERO net force on it. The engine\'s forward push exactly BALANCES friction plus air drag: F_engine = F_friction, so ΣF = 0 and a = 0 (which is exactly what "constant velocity" means, by Newton\'s second law). The engine is not providing a net force to "maintain motion" (that would be a Newton-first-law violation — Aristotelian intuition); it is providing the force needed to CANCEL the resistive forces that would otherwise slow the car down', isCorrect: true },
+      { text: 'Yes — to keep moving at constant velocity the car needs a constant net forward force from the engine', isCorrect: false, misconceptionId: `${N1}:MC-3` },
+    ],
+    correctValue: 'no — ΣF = 0 at constant v; engine force cancels friction/drag, does not provide a net force',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${N1}:MC-3`],
+    source: `${N1_SRC} — MC-3 (Constant Velocity Requires a Constant Net Force) + repair chain P07 (car FBD at constant v: engine = friction) and the ΣF = 0 vs a = 0 P28 contradiction; distractor is the characteristic phrase (the direct consequence of MC-1)`,
+  },
+  {
+    conceptId: DIFR,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Light passes through a normal 1 m wide doorway. Does it diffract, or does diffraction only happen at narrow slits?',
+    choices: [
+      { text: 'It DIFFRACTS — diffraction is universal for all apertures. What decides whether you SEE the pattern is the ratio a/λ. For a 1 m door and visible light (λ ≈ 500 nm), a/λ ≈ 2×10⁶, and the central diffraction maximum spreads through only about 0.5 μrad — utterly invisible, but there. Narrow the opening down until a ≈ λ (a slit ~1 μm wide) and the pattern becomes observable; walk through an audio-wavelength doorway (λ ≈ 1 m) and you hear diffraction easily — same physics, different a/λ', isCorrect: true },
+      { text: 'No — you need a really small opening for diffraction to happen', isCorrect: false, misconceptionId: `${DIFR}:MC-4` },
+    ],
+    correctValue: 'diffracts — universal for all apertures; observable when a/λ ≈ 1, invisible at 1 m/500 nm (a/λ ≈ 2×10⁶)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DIFR}:MC-4`],
+    source: `${DIFR_SRC} — MC-4 (MC-DIFFRACTION-ONLY-AT-SLITS) Probe line + conflict evidence [P28] (1 m door, λ = 500 nm, 0.5 μrad central maximum, a/λ = 2×10⁶); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: SSLT,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a single-slit diffraction pattern, are all the secondary maxima the same brightness as each other, the way Young\'s double-slit fringes are?',
+    choices: [
+      { text: 'No — the secondary maxima DECAY under a sinc² envelope. The first sits near α ≈ 3π/2 with I/I₀ ≈ 4/(9π²) ≈ 0.045 — about 22× dimmer than the central peak; the second near α ≈ 5π/2 with I/I₀ ≈ 4/(25π²) ≈ 0.016, about 61× dimmer. Young\'s equal-intensity fringes come from two POINT sources contributing equal amplitude at every angle; single-slit intensity is the FT of a uniform aperture, and the phasor sum shrinks with angle, so the envelope monotonically decays', isCorrect: true },
+      { text: 'Yes — they should all be the same brightness, like Young\'s fringes', isCorrect: false, misconceptionId: `${SSLT}:MC-3` },
+    ],
+    correctValue: 'no — sinc² envelope; I/I₀ ≈ 0.045, 0.016, … monotonically decays',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${SSLT}:MC-3`],
+    source: `${SSLT_SRC} — MC-3 (MC-SECONDARIES-EQUAL-BRIGHTNESS) Probe line verbatim + conflict evidence [P28] (sinc² decay, 4/9π² ≈ 0.045 and 4/25π² ≈ 0.016) and the Young's-vs-single-slit bridge; distractor is the characteristic phrase`,
+  },
+  {
+    // Second single-slit probe. Both go into `true_false` — verified empty
+    // before authoring, so both are new singletons together and neither
+    // re-identifies an existing production row (per buildProbeSlugResolver's
+    // rule: a slot count going 0 → 2 gives BOTH new probes their difficulty
+    // segment from day one; the orphaning hazard is a slot going 1 → 2, and
+    // we're not doing that). Difficulties are distinct so the two slugs
+    // differ.
+    conceptId: SSLT,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Young\'s double-slit gives BRIGHT fringes where d sin θ = mλ. In single-slit diffraction, a sin θ = mλ (with a the slit width). Does integer m give bright fringes too?',
+    choices: [
+      { text: 'No — a sin θ = mλ in single-slit is the DARK-fringe condition. Divide the slit into two equal halves: when the path difference between the TOP of the slit and the MIDPOINT is λ/2, every point in the upper half destructively pairs with a point in the lower half, and everything cancels. Same identical-looking formula, opposite physics: in Young\'s the two point sources arrive in phase (constructive); in single-slit the paired halves of ONE aperture arrive out of phase (destructive). Geometry decides the interpretation', isCorrect: true },
+      { text: 'Yes — same formula, same answer: integer m gives bright fringes', isCorrect: false, misconceptionId: `${SSLT}:MC-4` },
+    ],
+    correctValue: 'no — in single-slit, integer m gives DARK fringes (paired-strip cancellation)',
+    // PROFICIENT rather than ADVANCED so this probe's slug (which includes
+    // difficulty because two true_false probes share the slot for this
+    // concept) is distinct from the MC-3 probe above (which is ADVANCED).
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SSLT}:MC-4`],
+    source: `${SSLT_SRC} — MC-4 (MC-SINGLE-SLIT-FORMULA-SAME-AS-YOUNGS) Probe line verbatim + conflict evidence [P28] (same formula, opposite physics; paired-strip cancellation for the top-midpoint λ/2) and the bridge; distractor is the characteristic phrase`,
+  },
+]
+
+/**
  * S2 COVERAGE — phys.astro batch (2026-08-16).
  *
  * Six documented misconceptions across six concepts — the last physics
@@ -52849,6 +52970,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...S2_REL_COVERAGE_PROBES,
   ...S2_STAT_COVERAGE_PROBES,
   ...S2_ASTRO_COVERAGE_PROBES,
+  ...S2_LAST_MILE_COVERAGE_PROBES,
   ...S2_MOD_COVERAGE_PROBES,
   ...UNITS_PROBES,
   ...VEL_PROBES,

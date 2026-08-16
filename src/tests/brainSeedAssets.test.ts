@@ -149,6 +149,12 @@ describe('authoredSeedAssets — canonical slug uniqueness', () => {
     // -> 553 (the final sixteen phys.em; physics is complete at 1,292 probes)
     // -> 554 (one misconception-BREADTH probe on phys.mech.momentum; the
     //         other four in that batch opened fresh slots and added none).
+    // -> 555 (last-mile S2 batch: phys.opt.single-slit MC-3 and MC-4 share
+    //         one 0 → 2 true_false slot — both new, both get a difficulty
+    //         segment from birth via buildProbeSlugResolver, so nothing is
+    //         orphaned; the LEGACY slug used here cannot see difficulty and
+    //         reports one collision. The other five last-mile probes each
+    //         open a fresh true_false slot and add none).
     //
     // Those probes are NOT lost. `probeSlug` here is the LEGACY pre-Item-6
     // identity, which carries no difficulty segment, so every ladder rung
@@ -157,7 +163,7 @@ describe('authoredSeedAssets — canonical slug uniqueness', () => {
     // asserts it maps every authored probe to a unique slug (0 discarded) —
     // that is the real invariant. This stays a ratchet on the legacy measure
     // so an accidental collision still cannot pass unnoticed.
-    const KNOWN_DISCARDED = 554
+    const KNOWN_DISCARDED = 555
     const slugs = ALL_PROBES.filter((p) => isPhysics(p.conceptId)).map(probeSlug)
     expect(discarded(slugs)).toBeLessThanOrEqual(KNOWN_DISCARDED)
   })

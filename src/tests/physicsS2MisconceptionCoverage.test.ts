@@ -74,13 +74,13 @@ function coverage(probes: ReadonlyArray<{ conceptId: string; targetedMisconcepti
 const physics = [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.conceptId.startsWith('phys.'))
 
 describe('S2 — physics misconception coverage ratchet', () => {
-  it('unprobed documented misconceptions do not exceed the known residue', () => {
-    // RATCHET. 54 -> 39 (phys.mod) -> 27 (phys.qm) -> 19 (phys.stat) ->
-    // 12 (phys.rel) -> 6 (phys.astro, 6 concepts). Ratchets only go DOWN.
-    // phys.astro is now at ZERO too. The remaining 6 are opt 3, meas 2,
-    // mech 1 — a distinct authoring pattern (single-concept residue in
-    // three otherwise-completed domains), which is why they were left last.
-    expect(coverage(physics).unprobed.length).toBeLessThanOrEqual(6)
+  it('physics S2 stays complete at zero unprobed', () => {
+    // RATCHET closed: 54 -> 39 (phys.mod) -> 27 (phys.qm) -> 19 (phys.stat)
+    // -> 12 (phys.rel) -> 6 (phys.astro) -> 0 (opt 3 + meas 2 + mech 1
+    // last-mile batch). Every one of physics' 604 documented misconceptions
+    // now carries at least one probe. Asserted STRICTLY, not as a ceiling:
+    // a regression here would be a real loss rather than a slower ratchet.
+    expect(coverage(physics).unprobed).toEqual([])
   })
 
   it('chemistry S2 stays complete at zero unprobed', () => {
@@ -414,6 +414,93 @@ describe('S2 — the phys.astro batch stays covered', () => {
           (x as unknown as { probeKind: string }).probeKind === 'true_false',
       ) as unknown as { choices?: ReadonlyArray<{ isCorrect?: boolean; misconceptionId?: string }> } | undefined
       if (!p) { failures.push(`${conceptId}: no true_false probe`); continue }
+      const mapped = (p.choices ?? []).filter((c) => c.misconceptionId === `${conceptId}:${mc}`)
+      if (!mapped.length) failures.push(`${conceptId}: no distractor mapped to ${mc}`)
+      if (mapped.some((c) => c.isCorrect)) failures.push(`${conceptId}: mapped the CORRECT choice`)
+    }
+    expect(failures).toEqual([])
+  })
+})
+
+describe('S2 — the last-mile opt/meas/mech batch closes physics at 604/604', () => {
+  /**
+   * Physics S2 reached ZERO. The last six unprobed misconceptions were
+   * scattered across three otherwise-complete domains — a distinct residue
+   * from the five whole-domain three-probe-template gaps that preceded them.
+   * Each concept already carried a full authored probe suite for its other
+   * misconceptions, so the missing one was a one-off omission rather than a
+   * systematic under-authoring; this final batch fills each individually.
+   *
+   * SLOT-SAFETY DIFFERENCE from the whole-domain batches: `phys.opt.single-slit`
+   * holds two of the six residual misconceptions, so its `true_false` slot
+   * goes 0 → 2 in one authoring pass. That is deliberate and safe. Per
+   * `buildProbeSlugResolver` (brainSeedAssets.ts), the "orphan an existing
+   * seeded row" hazard is a slot going 1 → 2 (the previously-singleton row
+   * loses its identity when the second sibling arrives); a slot going
+   * 0 → 2 gives BOTH new probes their difficulty segment from birth and
+   * re-identifies nothing. The two SSLT probes carry DIFFERENT difficulties
+   * (ADVANCED, PROFICIENT) to guarantee distinct slugs. Every other concept
+   * in this batch stays a fresh true_false singleton.
+   */
+  const covered: ReadonlyArray<readonly [string, string]> = [
+    ['phys.meas.scalars-vectors', 'MC-4'],
+    ['phys.meas.units', 'MC-2'],
+    ['phys.mech.newtons-first-law', 'MC-3'],
+    ['phys.opt.diffraction', 'MC-4'],
+    ['phys.opt.single-slit', 'MC-3'],
+    ['phys.opt.single-slit', 'MC-4'],
+  ]
+
+  it.each(covered)('%s %s now has a probe that claims it', (conceptId, mc) => {
+    const ids = physics
+      .filter((p) => p.conceptId === conceptId)
+      .flatMap((p) => p.targetedMisconceptions ?? [])
+    expect(ids).toContain(`${conceptId}:${mc}`)
+  })
+
+  it.each(['phys.meas.scalars-vectors', 'phys.meas.units', 'phys.mech.newtons-first-law', 'phys.opt.diffraction'])(
+    '%s: the new probe sits in a FREE singleton slot',
+    (conceptId) => {
+      const mine = physics.filter((p) => p.conceptId === conceptId) as ReadonlyArray<{
+        probeKind: string
+        gradeBand: string
+      }>
+      const slots = new Map<string, number>()
+      for (const p of mine) {
+        const k = `${p.probeKind}|${p.gradeBand}`
+        slots.set(k, (slots.get(k) ?? 0) + 1)
+      }
+      for (const [k, n] of slots) if (k.startsWith('true_false|')) expect(n, k).toBe(1)
+    },
+  )
+
+  it('phys.opt.single-slit: both new true_false probes share a 0 → 2 slot with DISTINCT difficulties', () => {
+    // The exception to the singleton rule, deliberately: two of the six
+    // last-mile misconceptions live on the same concept, so the slot goes
+    // 0 → 2 in one pass. Both are new, both get difficulty appended by the
+    // resolver, and their difficulties differ — so the two slugs differ.
+    const mine = physics.filter((p) => p.conceptId === 'phys.opt.single-slit') as ReadonlyArray<{
+      probeKind: string
+      gradeBand: string
+      difficulty?: string
+    }>
+    const tf = mine.filter((p) => p.probeKind === 'true_false')
+    expect(tf.length).toBe(2)
+    const diffs = tf.map((p) => p.difficulty)
+    expect(new Set(diffs).size).toBe(2)
+  })
+
+  it('every new probe diagnoses its misconception with a mapped distractor', () => {
+    const failures: string[] = []
+    for (const [conceptId, mc] of covered) {
+      // Two SSLT true_false probes exist — pick the one that CLAIMS this mc.
+      const p = physics.find(
+        (x) =>
+          x.conceptId === conceptId &&
+          (x as unknown as { probeKind: string }).probeKind === 'true_false' &&
+          ((x as unknown as { targetedMisconceptions?: readonly string[] }).targetedMisconceptions ?? []).includes(`${conceptId}:${mc}`),
+      ) as unknown as { choices?: ReadonlyArray<{ isCorrect?: boolean; misconceptionId?: string }> } | undefined
+      if (!p) { failures.push(`${conceptId}: no true_false probe for ${mc}`); continue }
       const mapped = (p.choices ?? []).filter((c) => c.misconceptionId === `${conceptId}:${mc}`)
       if (!mapped.length) failures.push(`${conceptId}: no distractor mapped to ${mc}`)
       if (mapped.some((c) => c.isCorrect)) failures.push(`${conceptId}: mapped the CORRECT choice`)

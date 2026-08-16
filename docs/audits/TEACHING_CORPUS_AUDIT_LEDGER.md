@@ -9024,3 +9024,77 @@ scattered across THREE otherwise-complete domains — `phys.opt` (3),
 `phys.meas` (2), `phys.mech` (1). Next batch collects all six in one
 combined authoring pass and takes physics S2 to 604/604 (ZERO).
 
+
+---
+
+# S2 last-mile (2026-08-16) — PHYSICS S2 CLOSED AT 604/604
+
+Six unprobed misconceptions across five concepts in three otherwise-complete
+domains — the residue left after the five whole-domain three-probe-template
+gaps closed (phys.mod, phys.qm, phys.stat, phys.rel, phys.astro). Not a
+systematic template gap: every one of these concepts already carried a full
+authored probe suite (`mcq`, `misconception_probe`, `short_answer`,
+`checkpoint`; some as many as 8 probes total) for the OTHER misconceptions
+in the blueprint, and one MC per concept had simply been missed.
+
+| concept | MC | belief the distractor states |
+|---|---|---|
+| phys.meas.scalars-vectors | MC-4 | "all physical quantities are just numbers" |
+| phys.meas.units | MC-2 | "my weight is 70 kg" (mass = weight, same unit) |
+| phys.mech.newtons-first-law | MC-3 | "constant velocity needs a constant net force" |
+| phys.opt.diffraction | MC-4 | "you need a really small opening for diffraction" |
+| phys.opt.single-slit | MC-3 | "secondary maxima are all the same brightness" |
+| phys.opt.single-slit | MC-4 | "a sin θ = mλ gives bright fringes (same as Young's)" |
+
+## How each probe was written
+
+Same procedure. Stem = the blueprint's own **Probe:** line (or the
+observable-symptom question the blueprint anchors on). Correct answer =
+its **Conflict evidence [P28]** / **Replacement [P31]** with the concrete
+number the blueprint supplies — the tug-of-war outcome (5 N + 5 N same
+direction, opposite, right-angles); a 70 kg mass weighing 686 N on Earth
+and 114 N on the Moon; a car FBD at constant velocity showing engine =
+friction so ΣF = 0; the 1 m door + 500 nm light giving a/λ ≈ 2×10⁶ and
+a 0.5 μrad central diffraction maximum; the sinc² secondaries at I/I₀
+≈ 0.045 and ≈ 0.016; the paired-strip cancellation making a sin θ = mλ
+the DARK condition. Distractor = the **Characteristic phrase**, so the
+probe DETECTS the belief rather than merely names it.
+
+## Slot safety — the ONE deliberate exception
+
+Four of the six probes land in an empty `true_false` slot as fresh
+singletons — the pattern the whole-domain batches followed. `phys.opt.
+single-slit` carries TWO of the six unprobed MCs (MC-3 and MC-4), so its
+`true_false|HIGH` slot goes 0 → 2 in one authoring pass. That is safe by
+`buildProbeSlugResolver`'s explicit rule: a slot going 0 → 2 gives BOTH new
+probes their difficulty segment from birth — the orphaning hazard is a slot
+going 1 → 2, and no existing SSLT `true_false` probe exists to orphan. The
+two SSLT probes carry DIFFERENT difficulties (ADVANCED / PROFICIENT) so
+their two resolved slugs differ. Every other concept in this batch stays a
+fresh `true_false` singleton, and the ratchet on the legacy identity's
+collision count rises by exactly one (554 → 555), matching this single
+intended 0 → 2 slot precisely.
+
+## Regression protection
+
+`src/tests/physicsS2MisconceptionCoverage.test.ts` — the outer physics S2
+assertion is now `unprobed).toEqual([])`, a STRICT equality rather than a
+ratchet ceiling; the six pairings are pinned; slot-safety asserted for the
+four singleton concepts; a dedicated assertion verifies the SSLT 0 → 2 slot
+with distinct difficulties; and each new probe required to map a
+NON-correct distractor to the misconception it claims. The legacy-identity
+collision baseline in `brainSeedAssets.test.ts` is raised 554 → 555 with
+its own comment tying the +1 to this exact slot.
+
+## Validation
+
+`npx tsc --noEmit` clean; **339 files / 7,312 passed / 9 skipped** (up 12
+from 7,300); `npm run build` exit 0. No production writes; no KG,
+blueprint, or Educational Brain file modified.
+
+## Standing — PHYSICS S2 CLOSED
+
+Physics S2 **604/604** across all 12 domains. Chemistry S2 remains at
+537/537. Both KG-backed subjects at ZERO unprobed. Next: the S2 loop moves
+off physics.
+
