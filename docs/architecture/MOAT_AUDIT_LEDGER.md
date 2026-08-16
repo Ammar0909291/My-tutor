@@ -19,7 +19,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S6 | visual semantic (live) | — | — | NOT MEASURED |
 | S7 | real-tutor behaviour | live session run; 1 defect found + fixed | — | IN PROGRESS |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
-| S9 | end-user runtime | live session; ledger clean | live session; **gate cannot close** | IN PROGRESS — 1 high-priority open |
+| S9 | end-user runtime | live session; ledger clean | ladder proven reachable | IN PROGRESS — ladder OK, 1 DB-timeout defect proposed |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
 ---
@@ -358,7 +358,82 @@ observed live, with the DB checked afterwards:
   Worth an owner's eye: the learner still READS "you've mastered" on evidence
   the server refused to certify.
 
-### S9 — HIGH PRIORITY OPEN: a correct answer left no trace, and the gate cannot close
+### S9 — RESOLVED BY INVESTIGATION: the ladder is correctly strict; the LOSS is a DB timeout
+
+Verdict on the previous entry's hypothesis: **D (MIXED), and the headline
+hypothesis was WRONG.** The ladder is reachable and behaving as designed
+(**A — correctly strict**). A separate, real **C — state/transport defect**
+explains the missing `topic_progress` update. No code change was made to the
+ladder, and none should be.
+
+**The turn-by-turn trace that settled it** (production `[ladder]` logs,
+chemistry session, concept `chem.found.states-of-matter`):
+
+```
+16:18:24  "another practice question?"  signalTag=false correctness=null  mcqAsked=true
+          OBSERVE     -> OBSERVE      check 0  practice 0
+16:18:53  "C"                          signalTag=true  correctness=true
+          [mcq-grade] chosen=2 correct=true
+          OBSERVE     -> DEMONSTRATE  check 0  practice 0
+16:19:54  "one more practice question"  signalTag=false correctness=null
+          DEMONSTRATE -> GUIDE        check 0  practice 0
+```
+
+The correct answer was **not lost**. Two things the previous entry got wrong:
+
+1. The MCQ **is** graded server-side and **did** reach the ladder —
+   `[mcq-grade] correct: true`, `signalTag: true, correctness: true`. There is
+   no signal-transport failure and no dependence on the model self-reporting.
+2. The session had never left **OBSERVE**, so that correct answer was spent on
+   `OBSERVE -> DEMONSTRATE`, a transition that increments no counter. The
+   counters move only inside CHECK and PRACTICE. That is the design, not a bug.
+
+Persisted state confirms the ladder is climbing and durable:
+`phase GUIDE, demonstrated true, turnsOnConcept 8`.
+
+**The cost of mastery, now pinned in the suite**
+(`src/tests/masteryLadderReachability.test.ts`, 7 tests): closing the gate takes
+**five graded-correct answers** — OBSERVE→DEMONSTRATE, a teaching give for
+DEMONSTRATE→GUIDE, GUIDE→CHECK, one in CHECK (`correctAtCheck` 1 → PRACTICE),
+two in PRACTICE (→ TRANSFER). Strict, but plainly reachable in one sitting.
+
+**OBSERVE is deliberately not absorbing.** An assumption written into the first
+draft of that test — "a learner who never answers correctly never leaves
+OBSERVE" — FAILED against the real module. `phaseAfterConcludedDiagnostic`
+advances after two failed probes, and `conversationState.ts` carries a long
+note explaining why: without it a learner who answered wrong twice was pinned
+forever and every later turn re-emitted a byte-identical directive. Leaving
+OBSERVE that way awards no counter, so it is not hollow advancement. The test
+was corrected to the real contract; the module was not touched.
+
+**The genuine defect — evidence lost to a DB socket timeout.** On the turn at
+16:19:54 these all failed with Prisma **P1008 socket timeout**:
+
+```
+prisma.evidenceEvent.create()      prisma.spineEvent.aggregate()
+prisma.studentProgress.upsert()    prisma.topicProgress.upsert()
+```
+
+That is why `topic_progress` still carried the earlier wrong-answer timestamp.
+Frequency in the measured window: **1 request** — intermittent infrastructure,
+not chronic. Root cause at `route.ts:5267`: the mastery-evidence write runs in
+a floating fire-and-forget `async` IIFE, is **not** wrapped in `withRetry`, and
+ends in `.catch(() => {})` — a silent swallow. The project's own
+`src/lib/db/withRetry.ts` already lists **P1008** as retryable, so the remedy
+exists and this write simply does not use it.
+
+**Smallest root fix — PROPOSED, NOT IMPLEMENTED.** Wrap that upsert in the
+existing `withRetry` and log the failure instead of swallowing it. Stopped
+short of implementing because it is **not unambiguously safe**: the update
+carries `attempts: { increment: 1 }`, which is not idempotent, and a P1008
+timeout does not tell us whether the write committed — so a naive retry can
+double-count attempts. Doing it properly means making the write idempotent
+(or moving the increment) first, which is a real design decision and wants its
+own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+### Superseded — the original S9 finding as first recorded
 
 The core S9 criterion ("a real learner reaches it and can achieve/close mastery
 correctly") was measured live for the first time, on
