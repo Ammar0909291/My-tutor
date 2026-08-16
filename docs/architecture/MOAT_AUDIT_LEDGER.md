@@ -18,7 +18,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S5 | visual semantic (offline) | 23 widened, inspected | 20 widened, inspected | CLOSED |
 | S6 | visual semantic (live) | — | — | NOT MEASURED |
 | S7 | real-tutor behaviour | prose-MCQ guard deployed | — | DEPLOYED, not production-verified |
-| S8 | production seeding | **196/238 served** | 186/186 served | **DEFECT OPEN** |
+| S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (repaired)** |
 | S9 | end-user runtime | — | — | NOT MEASURED |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
 
@@ -57,12 +57,13 @@ both texts:
 
 ---
 
-## S8 — production seeding: OPEN DEFECT (found 2026-08-16)
+## S8 — production seeding: FOUND AND REPAIRED (2026-08-16)
 
 ### The finding
 
-**42 of 238 physics concepts (17.6%) have no ACTIVE gradeable probe in
-production.** Chemistry is complete at 186/186.
+**42 of 238 physics concepts (17.6%) had no ACTIVE gradeable probe in
+production.** Chemistry was already complete at 186/186. Now repaired — see
+"Repair" below. State at discovery:
 
 Measured directly against production (`asset_identity`, Supabase
 `ywakxiqbevfuxsiwewnw`), read-only:
@@ -90,31 +91,36 @@ correctness on that shape. Correct behaviour (better a missing record than a
 false one), but it means for these 42 concepts a learner can answer correctly
 at a gate and have **nothing recorded**, so the gate may never close.
 
-### Root cause
+### Root cause — CORRECTED
 
-A single bulk deprecation at `2026-08-12 21:59:37.418` retired **734 legacy
-4-segment-slug** gradeable rows across **all 238** physics concepts, migrating
-to the difficulty-bearing 5-segment identity. The re-seed under the new
-identity covered only 196 concepts:
+My first diagnosis, that a slug-scheme migration re-seeded only 196 of 238, was
+WRONG, and the database says so in its own words. Every affected row carries
+this `deprecationReason` from a single event at `2026-08-12 21:59:37.418`:
 
-```
-status      slug_segments   rows   concepts   window
-ACTIVE      5 (new)         304    195        2026-08-11 .. 2026-08-16
-ACTIVE      4 (legacy)       25     24        2026-08-11 .. 2026-08-16
-DEPRECATED  4 (legacy)      734    238        2026-08-12 21:59:37 (single event)
-```
+> "Audit 2026-08-12: ACTIVE PROBE identity with NO probe_assets row —
+> unservable by findBestProbe (which filters ACTIVE then joins content), so it
+> occupied a serving slot it could never fill. Reversible: set status back to
+> ACTIVE. NOTE: not a slug-scheme issue — 4-part slugs are the normal form; the
+> defect is the missing content row."
 
-The 42 were deprecated and never re-seeded.
+So the deprecation was a DELIBERATE and CORRECT audit action against *hollow*
+identities — identity rows with no `probe_assets` content. It removed rows that
+could never serve. What it could not do was supply the missing content, so the
+42 concepts were left with no servable gradeable probe at all.
+
+Only 2 of the 42 had any deprecated row with real content; the other 40 were
+hollow. Reactivation alone was therefore never the fix — the content had to be
+inserted.
 
 ### It is NOT an authoring gap
 
 Verified against the repo: **all 42 have authored gradeable probes** in
 `AUTHORED_PROBES`. `gateAssessmentIsServerOwned.test.ts:152` already asserts
 every physics concept with an authored probe has at least one gradeable one
-(238/238) and passes. The offline invariant is sound; only the production
-seeding run is incomplete.
+(238/238) and passes. The offline invariant was sound; only the production
+seeding run was incomplete.
 
-### Affected concepts (42)
+### Affected concepts (42, all now served)
 
 - `phys.particle.*` — 16 (the entire Particle Physics domain)
 - `phys.stat.*` — 14
@@ -122,15 +128,34 @@ seeding run is incomplete.
 - `phys.qm.*` — 4 (`density-matrix`, `quantum-tunneling`, `s-matrix-basics`, `selection-rules`)
 - `phys.mech.displacement`, `phys.mech.hookes-law` — 2
 
-### Repair — REQUIRES OWNER AUTHORIZATION
+### Repair — AUTHORIZED AND COMPLETED
 
-The fix is a **production write** and is therefore blocked under the standing
-"no production writes" rule. The repair is a re-seed of those 42 concepts'
-gradeable probes under the difficulty-bearing identity
-(`scripts/brain/seed-knowledge-assets.ts`, idempotent — it skips slugs that
-already exist). No content needs to be authored; no code needs to change.
+Owner authorized the re-seed on 2026-08-16. Executed against production via
+Supabase MCP (the sandbox has no `DATABASE_URL`, so the seed script could not be
+run directly; every statement replicated its exact row shape — same
+`buildProbeSlugResolver` identity, `hashContent`, `SEED_AUTHOR_ID`,
+`HUMAN_CURATOR`, tags and `NOT EXISTS` skip semantics).
 
-**Status: awaiting authorization. Not attempted.**
+Two passes were needed, and the second one is the interesting part:
+
+1. **Insert** authored gradeable probes for the 42 concepts. Guarded by
+   `WHERE NOT EXISTS` on `canonicalSlug`, exactly as the seed script skips.
+   Result: 196 → 234 concepts served.
+2. **Backfill + reactivate** the last 4. `phys.mod.diode-rectification`,
+   `phys.particle.electroweak-unification`, `phys.particle.feynman-diagrams`
+   and `phys.particle.hadron-quark-model` each had their
+   `misconception_probe:en:high` slug held by a hollow DEPRECATED row, so the
+   insert was correctly skipped and they stayed unserved. **This is the trap
+   that would have defeated a plain re-run of the seed script**: its skip check
+   matches on slug regardless of status, so a hollow deprecated row makes the
+   concept permanently unseedable. Fixed by inserting the missing
+   `probe_assets` content against the existing identity and then setting it
+   ACTIVE — precisely the reversal the audit's own note described, now valid
+   because the content exists.
+
+**Verified after the write:** physics 238/238, chemistry 186/186,
+0 duplicate ACTIVE canonicalSlugs, 0 hollow ACTIVE probe identities, chemistry
+unchanged at 372 ACTIVE probe rows.
 
 ### Confirmed by two independent methods
 
