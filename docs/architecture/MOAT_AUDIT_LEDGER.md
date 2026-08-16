@@ -17,7 +17,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S4 | stem-vs-blueprint agreement | 238/238 | 186/186 | CLOSED |
 | S5 | visual semantic (offline) | 23 widened, inspected | 20 widened, inspected | CLOSED |
 | S6 | visual semantic (live) | 25 served figures audited, 0 defects | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified |
-| S7 | real-tutor behaviour | live session run; 1 defect found + fixed | — | IN PROGRESS |
+| S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — 1 detection gap open |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
 | S9 | end-user runtime | lesson 5 end-to-end live-verified | ladder + evidence live-verified | IN PROGRESS — chain verified, 1 product finding open |
 | S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
@@ -432,6 +432,141 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## Chemistry S7 batch — real-tutor behaviour on a fresh concept (2026-08-16)
+
+Real test account, played as a genuinely weak learner on **chemistry lesson 3,
+`chem.found.pure-substances`** — chosen because it had no `lesson_attempts` row
+and no `topic_progress` row, so nothing was inherited. Production baseline
+before the session: 2 ACTIVE probes, 2 ACTIVE explanations, **no cached
+figure**.
+
+| # | checked | result |
+|---|---|---|
+| 1 | lesson switching / `activeLessonSlug` | switched and persisted |
+| 2 | opening teaching + anchoring | tap water vs distilled water, before any definition |
+| 3 | confusion detection | "i dont know" → `recoveryKey: dont_know`, D0-RECOVERY-PREEMPT |
+| 4 | diagnosis → repair | see FINDING B below |
+| 5 | structured MCQ generation | `[gate-assessment] probeFound:true converted:true` from the seeded asset |
+| 6 | deterministic grading | `[mcq-grade] chosen: null, correct: null` on a non-answer — correctly not scored |
+| 7 | wrong-answer handling | corrected without marking the learner wrong |
+| 8 | correct-answer handling | covered in the physics batch (create + increment) |
+| 9 | `topic_progress` persistence | no write on ungraded turns — correct |
+| 10 | ladder transitions | OBSERVE held while ungraded; advanced only on a graded signal |
+| 11 | attempt lifecycle | no attempt row (concept not closed) — correct |
+| 12 | visual selection/ownership | **DEFECT — see FINDING A** |
+| 13 | lesson completion | not reached this batch |
+
+Best single behaviour observed: to "i dont know" the tutor answered *"of course
+— I haven't shown you the definition yet, so there is no way you could have
+known!"* — the register the Recovery Engine specifies, taking the blame itself.
+
+Also confirmed live: **provider=memory** served a seeded Explanation Memory
+asset (`D1-MEMORY-HIT`, 2 asset ids, no model call). S8-seeded content is
+genuinely reaching learners, not just sitting in the database.
+
+### FINDING A — a lesson's own figure survived a lesson change (FIXED)
+
+Reproduced, root-caused, fixed, regression-guarded — commit `f1cad37`.
+
+The learner left `chem.found.states-of-matter` for
+`chem.found.pure-substances`, and the States-of-Matter process flow stayed on
+screen for **every** turn of the new lesson:
+
+```
+[visual-v2] concept: 'chem.found.states-of-matter'
+            provenance: 'generated:chem.found.states-of-matter:cached'
+            continuity: 'continuity'
+RESPONSE    resolvedConceptId=chem.found.pure-substances
+```
+
+All three payload fields plus the log were inspected, per the visual rule.
+Cause: `decideContinuity`'s lesson-changed guard required
+`session.returnToConceptId`. That anchor is set **only** when a figure is
+introduced for a concept that is not the lesson's own — i.e. for excursion
+figures — so a plain LESSON figure has none, the guard could not fire, and the
+turn fell to the catch-all hold meant for follow-ups and corrections.
+
+Learner impact is real: the tutor narrates whatever is on screen (observed
+earlier this campaign: *"Let's look at the figure on your screen showing…"*), so
+the previous lesson's figure gets explained as though it depicts the new one.
+
+Fix: compare the anchor by VALUE, not existence — release when the lesson
+concept is neither the figure's concept nor its return anchor. Excursions are
+byte-identical: anchored-to-current-lesson still holds, lesson-changed-underneath
+still releases, and a figure the lesson has just moved ONTO is still kept.
+Guard: `visualLessonFigureSurvivesLessonChange.test.ts` (8 tests), including the
+answer-shaped turn, since that hold sits below this guard and previously won.
+
+**LIVE-VERIFIED** on deployment `dpl_8a7NBDaAAmeEZWksGrq1xekv9ySr` (`f1cad37`,
+READY and aliased). The original scenario was reproduced exactly — return to
+`chem.found.states-of-matter` until its figure is on screen (confirmed:
+`visualSpec` process_flow delivered, `continuity: no-active-session`), switch to
+`chem.found.pure-substances`, then take an answer-shaped turn ("i dont know"):
+
+```
+BEFORE (18:07)  concept: chem.found.states-of-matter   continuity: 'continuity'
+                provenance: generated:chem.found.states-of-matter:cached
+                graphical: true,  renderer: 'spec'
+
+AFTER  (18:22)  concept: chem.found.pure-substances    continuity: 'lesson-changed'
+                provenance: no-figure:declined-cached
+                graphical: false, renderer: 'none'
+```
+
+All three payload fields (`visual`, `sceneSpec`, `visualSpec`) were empty on the
+AFTER turn. The stale figure is released and the engine correctly declines
+rather than inventing one for the new concept.
+
+**Correct behaviour seen in the same session**, worth recording so the engine is
+not misjudged: on an explicit "can you show me a diagram of this" the resolver
+returned to the lesson concept and declined honestly —
+`concept: chem.found.pure-substances`,
+`provenance: no-figure:engine-no-suitable-form`,
+`continuity: visual-request-returns-to-lesson`. That path was already right.
+
+### FINDING B — misconception stated plainly, not detected
+
+The learner said *"so a mixture is when two things are chemically joined
+together right"* — a textbook mixture/compound conflation. That turn:
+
+```
+misconceptionCandidates: []
+decision: SERVE_EXPLANATION_MEMORY (D1-MEMORY-HIT)
+```
+
+The canned explanation served is good and on-topic, but it never names the
+learner's error. No `MistakeRecord` was written, so nothing routes to
+MISCONCEPTION_REPAIR on the following turn. Not fixed here: it spans the
+misconception engine's detection surface and the precedence between
+D1-MEMORY-HIT and repair, which is a bigger design question than this batch —
+recorded for its own bounded investigation.
+
+### Budget-exhaustion finding from the previous batch — CLASSIFIED: **D (MIXED)**
+
+Investigated only far enough to classify, as instructed. Evidence: the closing
+row carries `teachingAttempts: 1`, so `attemptsUsed = 1` and the
+`MAX_TEACHING_ATTEMPTS` route did not fire — it closed on the **12-turn**
+`CONCEPT_TURN_BUDGET`, exactly as specified ("introduction, explanation,
+example, MCQ, one recovery explanation, one recovery MCQ, then move on…
+deliberately generous but finite").
+
+- **NOT (B) a runtime defect.** Nothing was lost or mis-recorded: the ladder
+  advanced correctly, the evidence persisted, the counters were right, and one
+  attempt row was written, not several.
+- **(A) intended strict behaviour**, and deliberately so:
+  `evaluateConceptBudget` checks mastery FIRST precisely to stop "a
+  slow-but-successful learner from being marked for review on the turn they
+  succeed" — but that carve-out covers only FULL mastery
+  (`correctAtPractice >= 2` or phase TRANSFER).
+- **(C) the open half is policy**: whether that carve-out should extend to a
+  learner who is demonstrably improving — this learner had just advanced
+  GUIDE → CHECK on a correct answer — is a teaching decision. Extending it
+  changes when a concept closes (P6).
+
+**OWNER/PRODUCT DECISION. Not patched.**
 
 ---
 
