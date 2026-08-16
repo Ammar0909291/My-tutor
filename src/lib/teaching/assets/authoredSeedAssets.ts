@@ -52007,7 +52007,270 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...DREC_EXPLANATIONS,
 ]
 
+// ─── MOAT STAGE 2 — phys.mod coverage batch ──────────────────────────────────
+//
+// S2 asks a different question from S4: not "does this probe diagnose its tag"
+// but "does every misconception the blueprint DOCUMENTS have a probe at all".
+// An undiagnosed misconception is invisible: the learner holds it, nothing ever
+// asks, and the authored repair beneath it never runs.
+//
+// Measured across physics: 550 of 604 documented misconceptions carried a
+// probe; 54 did not, spread over 53 concepts. The gap is systematic, not
+// random — phys.mod, phys.qm, phys.stat, phys.rel and phys.astro were authored
+// to a three-probe template (blueprint trigger case -> misconception probe ->
+// transfer case) while their blueprints document FOUR misconceptions, so the
+// fourth was simply never reached. That is why MC-4 accounts for 39 of the 54.
+//
+// SLOT SAFETY. canonicalSlug is conceptId:probeKind:lang:band[:difficulty], and
+// difficulty is appended only to slots holding more than one probe. Adding a
+// probe to an occupied singleton slot would therefore RE-IDENTIFY an existing
+// row. Every probe below is authored into `true_false`, which is free in all 53
+// target concepts, keeping each a fresh singleton slot — the same technique
+// chemistrySeedAssets.ts already uses and documents ("probeKind 'true_false'
+// keeps this slot a SINGLETON"). Grade band matches each concept's existing
+// probes so the mastery gate, which counts within ONE band, still sees them.
+//
+// Each stem is authored from its blueprint's own **Probe:** line and conflict
+// evidence, and each distractor states that misconception's characteristic
+// phrase, so the probe genuinely diagnoses the belief rather than merely
+// carrying its id — the S4 standard applied at authoring time.
+const S2_MOD_COVERAGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: ASPC,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can an atom emit light at room temperature, without being heated or run through a discharge tube?',
+    choices: [
+      { text: 'Yes — any mechanism that lifts an electron to a higher level produces emission when it falls back. A glow-in-the-dark toy charged by ambient light, fluorescent minerals under a UV lamp, and bioluminescence in a firefly all emit at room temperature', isCorrect: true },
+      { text: 'No — you need a very high temperature to get emission lines; that is why flame tests and discharge tubes are heated', isCorrect: false, misconceptionId: `${ASPC}:MC-4` },
+    ],
+    correctValue: 'yes — temperature is one way to excite electrons, not the only way',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ASPC}:MC-4`],
+    source: `${ASPC_SRC} — MC-4 Probe line + conflict evidence [P28] (fluorescence at room temperature), distractor carries the characteristic phrase`,
+  },
+  {
+    conceptId: BEEN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you split one ⁵⁶Fe nucleus into two ²⁸Si nuclei, is energy released — the way it is when ²³⁵U splits?',
+    choices: [
+      { text: 'No — energy is ABSORBED. BE/A is 8.79 MeV/nucleon for ⁵⁶Fe but only ≈8.45 for ²⁸Si, so the products are less tightly bound. Fission releases energy only for nuclei heavier than the BE/A peak at iron; splitting iron moves away from the peak', isCorrect: true },
+      { text: 'Yes — fission always releases energy, because splitting a nucleus into two pieces is what releases energy', isCorrect: false, misconceptionId: `${BEEN}:MC-4` },
+    ],
+    correctValue: 'no — endothermic; only fission of nuclei heavier than the BE/A peak releases energy',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BEEN}:MC-4`],
+    source: `${BEEN_SRC} — MC-4 Probe line verbatim (⁵⁶Fe into two ²⁸Si) + its BE/A conflict evidence`,
+  },
+  {
+    conceptId: BOHR,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Balmer series of hydrogen lies in the visible range. Are there also hydrogen spectral lines in the ultraviolet and the infrared?',
+    choices: [
+      { text: 'Yes — the Lyman series (ending at n=1) is deep UV at 122, 103, 97 nm, and the Paschen series (ending at n=3) is infrared, with infinitely many further series beyond. Balmer is simply the one series that happens to land in the visible', isCorrect: true },
+      { text: 'No — the hydrogen spectrum IS the Balmer series; those are the lines hydrogen produces', isCorrect: false, misconceptionId: `${BOHR}:MC-4` },
+    ],
+    correctValue: 'yes — Lyman in the UV, Paschen in the IR, and further series beyond',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BOHR}:MC-4`],
+    source: `${BOHR_SRC} — MC-4 (MC-BALMER-SERIES-IS-ALL-OF-HYDROGEN-SPECTRUM) Probe line verbatim + Lyman/Paschen conflict evidence`,
+  },
+  {
+    conceptId: CMPT,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In Compton scattering, is the wavelength shift LARGEST at θ = 0° (forward scattering), where the photon carries straight on?',
+    choices: [
+      { text: 'No — it is exactly ZERO there. Δλ = λ_C(1 − cos θ), and cos 0° = 1, so Δλ = 0: a photon that carries straight on has not collided and transferred no momentum. The shift is λ_C at θ = 90° and its maximum 2λ_C at θ = 180°, a head-on backscatter', isCorrect: true },
+      { text: 'Yes — at θ = 0 the shift is maximum, because the photon is going straight through the electron', isCorrect: false, misconceptionId: `${CMPT}:MC-4` },
+    ],
+    correctValue: 'zero at 0°, λ_C at 90°, maximum 2λ_C at 180°',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CMPT}:MC-4`],
+    source: `${CMPT_SRC} — MC-4 (MC-COMPTON-SHIFT-ZERO-AT-θ=0) Probe line + Δλ = λ_C(1−cosθ) conflict evidence`,
+  },
+  {
+    conceptId: DEB,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An electron is accelerated to a higher speed. Does its de Broglie wavelength get LONGER?',
+    choices: [
+      { text: 'No — it gets SHORTER. λ = h/p, so a higher speed means higher momentum and a smaller wavelength. The photon analogy misleads here: for a photon, higher energy also means shorter λ, so "more energetic" never meant "longer wavelength" in the first place', isCorrect: true },
+      { text: 'Yes — faster means more energetic, and more energetic means a longer wavelength', isCorrect: false, misconceptionId: `${DEB}:MC-4` },
+    ],
+    correctValue: 'shorter — λ = h/p, so higher p gives smaller λ',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DEB}:MC-4`],
+    source: `${DEB_SRC} — MC-4 (MC-FASTER-PARTICLE-LONGER-WAVELENGTH) Probe line verbatim + λ = h/p conflict evidence`,
+  },
+  {
+    conceptId: NFIS,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a fission chain reaction essentially instantaneous, with all the neutrons released at once?',
+    choices: [
+      { text: 'No — about 0.65% of fission neutrons are DELAYED, emitted by fission products over milliseconds to minutes. That tiny fraction is what makes reactors controllable: it stretches the effective neutron generation time from ~10⁻⁷ s to ~0.1 s, giving operators seconds to act. Reactors are deliberately critical only WITH the delayed neutrons; prompt-critical is the weapon regime', isCorrect: true },
+      { text: 'Yes — it is instantaneous; all the neutrons are released at once', isCorrect: false, misconceptionId: `${NFIS}:MC-3` },
+    ],
+    correctValue: 'no — 0.65% are delayed, and reactor control depends entirely on them',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NFIS}:MC-3`],
+    source: `${NFIS_SRC} — MC-3 Probe line + delayed-neutron conflict evidence (0.65%, delayed-critical regime)`,
+  },
+  {
+    conceptId: NFUS,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'D-T fusion releases 17.6 MeV per reaction; ²³⁵U fission releases about 200 MeV. Does fusion release more energy per reaction?',
+    choices: [
+      { text: 'No — per REACTION fission wins outright, 200 MeV against 17.6 MeV. Fusion wins on a different metric: per unit MASS, because the fuel nuclei are so much lighter that a gram holds vastly more of them — about 337 GJ per gram of D-T against about 82 GJ per gram of ²³⁵U, roughly a factor of 4', isCorrect: true },
+      { text: 'Yes — fusion must release more, because fusion is what powers stars', isCorrect: false, misconceptionId: `${NFUS}:MC-4` },
+    ],
+    correctValue: 'per event fission wins (200 vs 17.6 MeV); per gram fusion wins (~337 vs ~82 GJ)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NFUS}:MC-4`],
+    // NOTE, recorded as curriculum feedback rather than acted on: this MC's
+    // blueprint is internally inconsistent. Its conflict evidence gives 337 GJ
+    // vs 82 GJ per gram, "factor ~4" — which is correct (17.6 MeV per 5 u is
+    // 3.4×10¹⁴ J/kg; 200 MeV per 235 u is 8.2×10¹³ J/kg). Its S6 repair path
+    // then states 2.1×10¹⁵ J/kg for D-T and "ratio ≈ 26×", which is wrong by
+    // about a factor of 6. This probe uses the correct conflict-evidence
+    // figures. The blueprint is Curriculum-Pipeline-owned and is not modified.
+    source: `${NFUS_SRC} — MC-4 Probe line verbatim + conflict evidence per-event vs per-gram figures (NOT the S6 repair path, whose J/kg value is arithmetically wrong)`,
+  },
+  {
+    conceptId: NMOD,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the nuclear shell model, do protons and neutrons fill ONE combined set of levels, so that the first two shells hold eight nucleons in total?',
+    choices: [
+      { text: 'No — protons and neutrons are different species and obey the Pauli principle independently, so you run TWO filling diagrams over the same shell structure. ⁴He is doubly magic because Z=2 and N=2 are each magic separately, and ¹⁶O because Z=8 and N=8 are. On a single combined ladder, a nucleus with 8 nucleons in total would be magic — and it is not', isCorrect: true },
+      { text: 'Yes — eight total; the nucleus is one system, so there is one sequence of levels to fill', isCorrect: false, misconceptionId: `${NMOD}:MC-3` },
+    ],
+    correctValue: 'two independent filling diagrams, one for Z and one for N',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NMOD}:MC-3`],
+    source: `${NMOD_SRC} — MC-3 Probe line ("How many nucleons fill the first two shells?") + its ⁴He/¹⁶O conflict evidence`,
+  },
+  {
+    conceptId: NRXN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the beta-minus decay ¹⁴C → ¹⁴N, the atomic number goes from 6 to 7. Does that violate conservation of charge?',
+    choices: [
+      { text: 'No — the emitted electron carries charge −1, so the full balance is 6 → 7 + (−1) = 6. Charge is conserved across the COMPLETE reaction; the antineutrino is neutral and does not affect it. Z appearing to jump is an artefact of leaving the emitted particle out of the accounting', isCorrect: true },
+      { text: 'Yes — Z increased from 6 to 7, so charge was not conserved', isCorrect: false, misconceptionId: `${NRXN}:MC-4` },
+    ],
+    correctValue: 'no violation — 6 → 7 + (−1) = 6 once the emitted electron is counted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NRXN}:MC-4`],
+    source: `${NRXN_SRC} — MC-4 Probe line verbatim + its ¹⁴C charge-balance conflict evidence`,
+  },
+  {
+    conceptId: PHOT,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Sodium and platinum are illuminated by the same UV source. Do they have the same threshold frequency?',
+    choices: [
+      { text: 'No — the work function is a property of the MATERIAL. φ(Na) ≈ 2.3 eV puts sodium\'s threshold around 540 nm, in the visible green; φ(Pt) ≈ 5.7 eV puts platinum\'s around 220 nm, in the deep UV. Since ν₀ = φ/h, one source can eject electrons from sodium while ejecting none at all from platinum', isCorrect: true },
+      { text: 'Yes — the threshold is the same for any metal, since it is a property of light rather than of the surface', isCorrect: false, misconceptionId: `${PHOT}:MC-4` },
+    ],
+    correctValue: 'no — ν₀ = φ/h is material-specific; Na ≈ 2.3 eV, Pt ≈ 5.7 eV',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHOT}:MC-4`],
+    source: `${PHOT_SRC} — MC-4 (MC-WORK-FUNCTION-IS-FIXED-FOR-ALL-METALS) Probe line verbatim + Na/Pt conflict evidence`,
+  },
+  {
+    conceptId: PHTN,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A photon detector in a very dim beam clicks at irregular intervals. A student says the irregularity is just because the detector is not sensitive enough. Are they right?',
+    choices: [
+      { text: 'No — modern single-photon detectors exceed 90% efficiency with timing jitter under 100 ps, and the irregular arrival intervals persist at that precision. The randomness is a property of the quantum process itself, not a shortcoming of the instrument; a better detector makes the clicks better MEASURED, never regular', isCorrect: true },
+      { text: 'Yes — a better detector would give regular clicks; apparent randomness always comes from measurement limitations', isCorrect: false, misconceptionId: `${PHTN}:MC-4` },
+    ],
+    correctValue: 'no — the randomness is intrinsic, and survives >90%-efficient, <100 ps detectors',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${PHTN}:MC-4`],
+    source: `${PHTN_SRC} — MC-4 (MC-QUANTUM-RANDOMNESS-IS-MEASUREMENT-ERROR) Probe line verbatim + detector-efficiency conflict evidence`,
+  },
+  {
+    conceptId: RDEC,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A sample has a half-life of 10 minutes. Does its ACTIVITY fall to half its initial value in less than 10 minutes, since activity is a rate?',
+    choices: [
+      { text: 'No — in exactly 10 minutes, the same half-life. A = λN, so A(t) = λN₀e^(−λt) = A₀e^(−λt): activity and number of nuclei carry the identical exponential factor. λ is only a constant of proportionality and cannot change the decay rate', isCorrect: true },
+      { text: 'Yes — activity decreases faster than the number of nuclei, because activity is the rate of decay rather than a count', isCorrect: false, misconceptionId: `${RDEC}:MC-4` },
+    ],
+    correctValue: 'same half-life — A(t) = A₀e^(−λt) and N(t) = N₀e^(−λt) share the exponent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RDEC}:MC-4`],
+    source: `${RDEC_SRC} — MC-4 Probe line verbatim + A = λN conflict evidence`,
+  },
+  {
+    conceptId: RADT,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In the beta-plus decay of ²²Na, does the atomic number stay the same — the way it does in the gamma decay of ⁶⁰Co*?',
+    choices: [
+      { text: 'No — beta-plus CHANGES the element. ²²₁₁Na → ²²₁₀Ne + e⁺ + νₑ: a proton became a neutron, so Z drops from 11 to 10 and sodium becomes neon. Gamma decay is the case where Z is unchanged: ⁶⁰₂₇Co* → ⁶⁰₂₇Co + γ is the same nucleus shedding energy. Both leave A unchanged, which is what makes them easy to confuse', isCorrect: true },
+      { text: 'Yes — positron emission does not change the nucleus, just like gamma emission', isCorrect: false, misconceptionId: `${RADT}:MC-4` },
+    ],
+    correctValue: 'beta-plus drops Z by 1 (Na → Ne); gamma leaves Z unchanged',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RADT}:MC-4`],
+    source: `${RADT_SRC} — MC-4 Probe line verbatim (²²Na vs ⁶⁰Co*) + its Z-tracking conflict evidence`,
+  },
+  {
+    conceptId: WPD,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A slow electron has a longer de Broglie wavelength than a fast one. Does that mean the slow electron is physically LARGER?',
+    choices: [
+      { text: 'No — scattering experiments put the electron\'s size near 10⁻¹⁵ m whatever its speed, while its de Broglie wavelength can reach centimetres when it moves slowly. λ = h/p describes how rapidly the probability wave oscillates in space, not how much room the particle takes up — just as a 1 m radio wave does not require a 1 m antenna', isCorrect: true },
+      { text: 'Yes — the electron gets bigger at lower speeds, since a longer wavelength means a larger wave', isCorrect: false, misconceptionId: `${WPD}:MC-4` },
+    ],
+    correctValue: 'no — size stays ≈10⁻¹⁵ m; λ is the wavefunction\'s spatial periodicity, not an extent',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${WPD}:MC-4`],
+    source: `${WPD_SRC} — MC-4 Probe line verbatim + electron-radius conflict evidence and the radio-wave discrimination pair`,
+  },
+  {
+    conceptId: XRAY,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Are characteristic X-rays produced when the incoming electron knocks out an OUTER-shell electron, since outer electrons are the easiest to remove?',
+    choices: [
+      { text: 'No — an INNER-shell (K or L) electron has to be ejected. The vacancy it leaves is filled by an electron dropping in from an outer shell, and the characteristic X-ray photon carries the energy difference between those two shells. Removing an outer electron leaves only a small gap and produces no X-ray at all', isCorrect: true },
+      { text: 'Yes — the outer electrons are easier to remove, so they must be the ones producing the X-rays', isCorrect: false, misconceptionId: `${XRAY}:MC-4` },
+    ],
+    correctValue: 'inner-shell vacancy, filled from an outer shell — the shell energy difference is the photon',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${XRAY}:MC-4`],
+    source: `${XRAY_SRC} — MC-4 (MC-CHARACTERISTIC-XRAYS-FROM-OUTER-SHELL) Probe line verbatim + inner-vacancy conflict evidence`,
+  },
+]
+
 export const AUTHORED_PROBES: SeedProbe[] = [
+  ...S2_MOD_COVERAGE_PROBES,
   ...UNITS_PROBES,
   ...VEL_PROBES,
   ...ACC_PROBES,

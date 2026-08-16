@@ -8449,3 +8449,82 @@ skips existing identities and this campaign makes no production writes.
 Everything else is repo-only. Physics Stage 8 remains at 2/238 by the
 handover's own count. Repo-fixed is not production-seeded, and neither is
 production-verified.
+
+---
+
+# Iteration — MOAT STAGE 2: physics misconception coverage, phys.mod batch (2026-08-16)
+
+Stage 4 is complete for both in-scope subjects, so the loop moved to the next
+measurable assessment-moat gap. **Measured first, then worked.**
+
+## The measurement (and a metric correction)
+
+| subject | documented misconceptions | with a probe | unprobed |
+|---|---|---|---|
+| physics | 604 | 550 → **565** | 54 → **39** |
+| chemistry | 537 | 537 | **0 — complete** |
+
+The handover reported physics S2 as "168/222, 56 unprobed". That figure counted
+CONCEPTS whose misconceptions are all probed, against the stale 222 denominator.
+Both metrics are now stated explicitly: **185 → 200 of 238 concepts fully
+covered**, and **565 of 604 individual misconceptions probed**. Chemistry S2 was
+already complete and is asserted strictly rather than ratcheted.
+
+## The gap is systematic, not scattered
+
+39 of the 54 unprobed misconceptions are `MC-4`, and 9 more are `MC-3`. Cause:
+phys.mod, phys.qm, phys.stat, phys.rel and phys.astro were authored to a
+**three-probe template** — blueprint trigger case → misconception probe →
+transfer case — while their blueprints document **four** misconceptions. The
+fourth was never reached. Nothing was wrong with the probes that exist; a whole
+misconception per concept simply had no instrument.
+
+## What was authored — 15 probes, phys.mod
+
+One probe per concept for: atomic-spectra, binding-energy, bohr-model,
+compton-effect, de-broglie, nuclear-fission, nuclear-fusion, nuclear-models,
+nuclear-reactions, photoelectric-effect, photons, radioactive-decay,
+radioactivity, wave-particle-duality, x-rays.
+
+Each stem is taken from its blueprint's own `**Probe:**` line and conflict
+evidence, and each distractor states that misconception's `**Characteristic
+phrase:**` — so the probe DIAGNOSES the belief rather than merely naming it.
+That is the S4 standard applied at authoring time, and it is asserted by the
+guard, not assumed.
+
+## Slot safety — the property that actually mattered
+
+`canonicalSlug` is `conceptId:probeKind:lang:band[:difficulty]`, and difficulty
+is appended only to slots holding more than one probe. Adding a probe to an
+occupied singleton slot would therefore **re-identify an existing production
+row**. Every probe went into `true_false`, which is free in all 53 target
+concepts, keeping each a fresh singleton — the technique
+`chemistrySeedAssets.ts` already uses and documents. Verified after the edit:
+**15 true_false slots in physics, 0 with more than one probe.**
+
+## One blueprint error found while authoring, recorded not fixed
+
+`phys.mod.nuclear-fusion` MC-4 is internally inconsistent. Its conflict evidence
+gives 337 GJ vs 82 GJ per gram, "factor ~4" — correct (17.6 MeV per 5 u is
+3.4×10¹⁴ J/kg; 200 MeV per 235 u is 8.2×10¹³ J/kg). Its S6 repair path then
+states 2.1×10¹⁵ J/kg and "ratio ≈ 26×", wrong by about a factor of 6. The probe
+uses the correct conflict-evidence figures and cites which half it took them
+from. Blueprints are Curriculum-Pipeline-owned and were not modified.
+
+## Regression protection
+
+`src/tests/physicsS2MisconceptionCoverage.test.ts` — coverage ratchet (54 → 39,
+only ever downward), chemistry asserted strictly at zero, corpus-size
+non-vacuity, all 15 new pairings pinned, a slot-safety assertion that every
+`true_false` slot holds exactly one probe, and a quality assertion that each new
+probe maps a NON-correct distractor to the misconception it claims.
+
+## Validation
+
+`npx tsc --noEmit` clean; **337 files / 7182 passed / 9 skipped**;
+`npm run build` exit 0. No production writes.
+
+## Standing
+
+Physics S2 **565/604** misconceptions (200/238 concepts). Remaining 39: qm 12,
+stat 8, rel 7, astro 6, opt 3, meas 2, mech 1.
