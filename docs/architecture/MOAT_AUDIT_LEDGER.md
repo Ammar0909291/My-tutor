@@ -255,6 +255,58 @@ Regression: `src/tests/lessonAttemptNoReopenOnChat.test.ts` — 6 tests, pinning
 the defect mechanism, the one-row outcome, non-drifting `completedAt`,
 preserved counters, normal in-lesson recording, and restart resumption.
 
+**PRODUCTION-VERIFIED** (commit `b891653`, deployment `dpl_AWBfYs7p9Le…`,
+READY and aliased to `my-tutor-flame.vercel.app`). The same learner scenario
+was re-run on the same completed lesson after deploy:
+
+```
+                        lesson:1 rows   latest completedAt
+before fix (baseline)   7               2026-08-16 15:18:30.733
+after 4 post-fix turns  7               2026-08-16 15:18:30.733
+```
+
+Pre-fix, two turns added two rows and moved `completedAt` twice. Post-fix the
+ledger is untouched — and the learner now receives the correct close,
+**"You've already finished SI Units and Measurement"** (the `alreadyFinished`
+variant), instead of the first-time "finished — nice work" that the spurious
+finalise had been overwriting it with.
+
+**Observation, not yet diagnosed:** two of the four post-fix turns served a
+prior assistant question verbatim ("Let me ask you something concrete about SI
+Units and Measurement…") with `provider=memory`,
+`memoryFallbackReason=lesson_complete`, before the fourth turn served the
+correct close. Recorded rather than guessed at; it needs its own turn-by-turn
+trace and is NOT claimed here as either a defect or as intended behaviour.
+
+### Chemistry live session — what PASSED (2026-08-16)
+
+A second live session on `chem.found.states-of-matter` (a genuinely open
+lesson — no prior attempt row), played as a weak beginner. Every step below was
+observed live, with the DB checked afterwards:
+
+- **Misconception diagnosis and repair works.** "in a solid the particles are
+  completely still" → repaired without marking the learner wrong ("completely
+  natural to picture them that way… never truly still"). Second misconception
+  ("when it melts the particles are gone?") → repaired with conservation of
+  identity. Third, a confident wrong answer at a check question ("they break
+  apart into hydrogen and oxygen atoms") → correctly diagnosed as a
+  physical-vs-chemical-change error, and **not** marked correct.
+- **The evidence spine records it.** `mistake_records` row written at the exact
+  turn: `category=signal_confident_wrong`, `topicSlug=chem.found.states-of-matter`.
+  The physics distress turn likewise wrote `category=recovery_signal`.
+- **Explanation and figure agree.** The attached `visualSpec` (`process_flow`,
+  "Interconversion of States of Matter") was referenced by its REAL step labels
+  — "Solid State" → "Melting (Heating)" → "Liquid State" — and used correctly
+  to extend the vibration repair. The same figure was held across turns with
+  continuity rather than churned. This is a semantic check of explanation
+  against figure SPEC; it is **not** S6, which needs the rendered screen.
+- **Stance enforcement held.** After one correct answer the model produced
+  mastery-shaped closing text ("✓ You've mastered…"), but the server issued
+  **no** `lessonComplete` payload and `topic_progress` stayed
+  `IN_PROGRESS / masteryPct 25`. The model's claim did not become state.
+  Worth an owner's eye: the learner still READS "you've mastered" on evidence
+  the server refused to certify.
+
 ### NOT a defect, checked and dismissed
 
 - `status=COMPLETED` alongside `summaryEvidence.complete=false` is **by
