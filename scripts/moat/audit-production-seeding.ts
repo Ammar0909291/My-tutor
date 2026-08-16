@@ -48,6 +48,7 @@ import { SEED_PROBES } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { CHEMISTRY_PROBES } from '../../src/lib/teaching/assets/chemistrySeedAssets'
 import { BIOLOGY_PROBES } from '../../src/lib/teaching/assets/biologySeedAssets'
 import { CS_PROBES } from '../../src/lib/teaching/assets/csSeedAssets'
+import { duplicateActiveVisuals, evidenceMarkerViolations } from '../../src/lib/teaching/moatInvariants'
 
 const prisma = new PrismaClient()
 
@@ -120,6 +121,75 @@ async function auditSubject(subjectSlug: string, idPrefix: string) {
   return missing.length
 }
 
+/**
+ * S10 — the two invariants established on 2026-08-16, checked against the same
+ * production state the runtime serves. Read-only; returns a violation count.
+ *
+ * Kept in this script rather than a second tool so there is ONE production
+ * audit entry point. The rules themselves live in `moatInvariants.ts` and are
+ * unit-tested there without a database.
+ */
+async function auditInvariants(): Promise<number> {
+  console.log('\n── invariants ──────────────────────────────────────────────')
+
+  // 1. At most one ACTIVE visual per concept (guards f1cad37's surface: the
+  //    APPROVED tier resolves by concept, so two ACTIVE rows make the served
+  //    figure depend on row order).
+  const activeVisuals = await prisma.assetIdentity.findMany({
+    where: { family: AssetFamily.VISUAL, status: AssetStatus.ACTIVE },
+    select: { conceptId: true, assetId: true },
+  })
+  const dups = duplicateActiveVisuals(activeVisuals)
+  console.log(
+    dups.length === 0
+      ? `  visual: OK — ${activeVisuals.length} ACTIVE visual(s), no concept serves two`
+      : `  visual: FAIL — ${dups.length} concept(s) with more than one ACTIVE visual`,
+  )
+  for (const d of dups) console.log(`    - ${d.conceptId}: ${d.assetIds.join(', ')}`)
+
+  // 2. Evidence-marker integrity (guards f70c3a4). The cutoff is the migration's
+  //    own recorded completion time — never a constant typed here — so rows that
+  //    predate the column are not condemned for lacking a marker.
+  const migrationRows = await prisma.$queryRaw<Array<{ finished_at: Date | null }>>`
+    select finished_at from _prisma_migrations
+     where migration_name like '%topic_progress_evidence_idempotency%'
+       and finished_at is not null
+     order by finished_at desc limit 1`
+  const liveSince = migrationRows[0]?.finished_at ?? null
+
+  const tpRows = await prisma.topicProgress.findMany({
+    select: {
+      id: true, userId: true, topicSlug: true, attempts: true,
+      lastEvidenceMessageId: true, updatedAt: true,
+    },
+  })
+  const markerIds = tpRows
+    .map((r) => r.lastEvidenceMessageId)
+    .filter((id): id is string => id !== null)
+  const markerMessages = markerIds.length
+    ? await prisma.message.findMany({
+        where: { id: { in: markerIds } },
+        select: { id: true, role: true, session: { select: { userId: true } } },
+      })
+    : []
+  const markerMap = new Map(
+    markerMessages.map((m) => [m.id, { id: m.id, userId: m.session.userId, role: String(m.role) }]),
+  )
+
+  const violations = evidenceMarkerViolations(tpRows, markerMap, liveSince)
+  console.log(
+    violations.length === 0
+      ? `  topic_progress: OK — ${tpRows.length} row(s), ${markerIds.length} marked, 0 violations`
+        + (liveSince ? '' : ' (completeness check SKIPPED: migration time unknown)')
+      : `  topic_progress: FAIL — ${violations.length} violation(s)`,
+  )
+  for (const v of violations) {
+    console.log(`    - ${v.topicSlug} [${v.rowId}] ${v.reason}: ${v.detail}`)
+  }
+
+  return dups.length + violations.length
+}
+
 async function main() {
   const flagIdx = process.argv.indexOf('--subject')
   const only = flagIdx >= 0 ? process.argv[flagIdx + 1] : null
@@ -137,6 +207,8 @@ async function main() {
     gaps += await auditSubject(slug, prefix)
   }
 
+  const invariantFailures = await auditInvariants()
+
   console.log(
     gaps === 0
       ? '\nOK — every authored gradeable concept is served in production.'
@@ -145,7 +217,7 @@ async function main() {
         'npx tsx scripts/brain/seed-knowledge-assets.ts',
   )
   await prisma.$disconnect()
-  process.exit(gaps === 0 ? 0 : 1)
+  process.exit(gaps === 0 && invariantFailures === 0 ? 0 : 1)
 }
 
 main().catch(async (e) => {

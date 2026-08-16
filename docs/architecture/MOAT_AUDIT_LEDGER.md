@@ -20,7 +20,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — detection gap traced, OWNER DECISION |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
 | S9 | end-user runtime | mastery closure live-verified | mastery closure live-verified | BOTH SUBJECTS VERIFIED — 1 defect (duration) + 1 intended mismatch, both systemic |
-| S10 | regression protection | offline pinned + prod audit script | same | ONGOING |
+| S10 | regression protection | offline pinned + prod audit incl. 2 invariants | same | EXTENDED — visual + evidence-marker invariants PASS in prod |
 
 ---
 
@@ -432,6 +432,60 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## S10 — production invariants for the two 2026-08-16 fixes
+
+The suite proves what the code does; the production audit proves what the
+database holds. Both fixes now have the second kind of guard, in the SAME
+read-only script (one audit entry point, no second authority). Rules live in
+`src/lib/teaching/moatInvariants.ts` as pure functions, unit-tested without a
+database (`moatInvariants.test.ts`, 10 tests); the script supplies Prisma rows.
+
+**1. Visual integrity** — at most one ACTIVE visual per concept. Guards
+`f1cad37`'s surface: the APPROVED tier resolves by concept, so a second ACTIVE
+row would make the served figure depend on row order.
+
+**2. Evidence-marker integrity** — guards `f70c3a4`. Three falsifiable checks:
+a non-null marker must resolve to a real message, that message must be a USER
+message, and it must belong to the same learner as the row; plus, once the
+column exists, a row updated after the migration must carry a marker.
+
+**What is NOT checkable, stated rather than approximated.**
+`lastEvidenceMessageId` is a SCALAR holding only the LATEST marker, so stored
+state cannot answer "does `attempts` equal the number of distinct events that
+incremented it" — earlier markers were overwritten and no history is kept. A row
+with `attempts: 7` and one marker is normal. The literal
+"attempts == distinct markers" invariant is therefore not implementable, and a
+test pins that limitation so it is not re-derived later. Idempotency is enforced
+at WRITE time by the guarded UPDATE and proved in
+`topicProgressEvidenceIdempotency.test.ts`; this audit checks identity and
+completeness, which is what production state can actually support.
+
+**Historical rows are exempt by construction.** The cutoff is read from the
+migration's own `_prisma_migrations.finished_at`
+(`2026-08-16 17:27:34 UTC`) — never a constant typed into the code — and when
+that timestamp cannot be read the completeness check is SKIPPED rather than
+guessed, because otherwise every pre-migration row would look like a violation.
+
+**Production result (read-only, 2026-08-16):**
+
+```
+marker cutoff            2026-08-16 17:27:34 UTC (from _prisma_migrations)
+duplicate ACTIVE visuals 0     (10 ACTIVE visuals total)
+marker violations        0     (147 rows, 4 marked, 0 dangling/non-USER/wrong-user)
+unmarked after migration 0     (143 historical rows correctly exempt)
+```
+
+Both invariants PASS. No production repair needed, so no write was proposed.
+
+**Evidence-state note:** the script itself could not be executed here — this
+sandbox has no `DATABASE_URL` — so the numbers above come from running the
+script's own queries directly against production, including the
+migration-derived cutoff and the message→session→userId join it uses. That is
+production-verified data, not a verified script run; the first real run belongs
+to an environment that has the connection string.
 
 ---
 
