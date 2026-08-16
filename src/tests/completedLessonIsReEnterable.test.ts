@@ -83,7 +83,11 @@ describe('lesson-init re-opens a completed lesson', () => {
     // Advisory, like the activeLessonSlug write above it: a learner must still
     // get their lesson when this write fails.
     const open = lineOf(/await openLessonAttempt\(prisma, \{/)
-    const caught = lineOf(/lesson attempt re-open failed/)
+    // Message renamed 2026-08-16 when the same block also became the opener for
+    // a lesson's FIRST start (attempt-duration fix) — "re-open" no longer
+    // described every case. The assertion is unchanged: the catch must follow
+    // the open, so a failed write never costs the learner their lesson.
+    const caught = lineOf(/lesson attempt open failed/)
     expect(caught).toBeGreaterThan(open)
   })
 

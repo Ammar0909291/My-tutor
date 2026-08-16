@@ -252,7 +252,35 @@ export async function POST(req: Request) {
     // attempt when there is one, so repeated inits do not spawn duplicates.
     // Advisory, like the write above — a failure here must never cost the
     // learner their lesson.
-    if ((mode === 'restart' || mode === 'review') && lessonOrder) {
+    // ── WHERE A LESSON ATTEMPT BEGINS ────────────────────────────────────────
+    //
+    // Extended 2026-08-16 (owner-approved) to fix attempt DURATION. Previously
+    // the only opener was the re-teach case below, so a normally-taught lesson
+    // had no IN_PROGRESS row until the chat route's outcome block created one
+    // AT THE MOMENT THE CONCEPT CLOSED — creating and finalising it in the same
+    // turn. `startedAt` and `completedAt` landed ~1s apart no matter how long
+    // the learner actually studied, and LessonScreen renders
+    // `durationSeconds / 60`, so every completed lesson told the learner it
+    // took "1 min". Measured on the real account: a ~12-minute physics lesson
+    // and a ~12-minute chemistry lesson both recorded durationSeconds 1.
+    //
+    // Opening here makes `startedAt` the moment the lesson genuinely opened.
+    // The chat route needs no change: `openLessonAttempt` REUSES an existing
+    // IN_PROGRESS row, so the outcome block now finalises THIS row instead of
+    // minting one, and the duration spans the real lesson.
+    //
+    // The lifecycle invariant fixed earlier is preserved exactly, because the
+    // only NEW case is `latest === null`:
+    //   - latest IN_PROGRESS  -> nothing to do; it is already the open attempt
+    //     (and `openLessonAttempt` would reuse it anyway).
+    //   - latest COMPLETED    -> opened ONLY for restart/review, exactly as
+    //     before. `resume` still must not re-open — resuming a finished lesson
+    //     delivers the close — and `next` addresses a different lessonKey.
+    //   - latest null         -> NEW: this is a genuine first start.
+    // A completed attempt is therefore still never reopened or replaced merely
+    // because the learner chats again or resumes, which is the duplicate-1s-row
+    // defect this must not reintroduce.
+    if (lessonOrder) {
       try {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
         const key = lessonKeyFor({ lessonOrder })
@@ -261,19 +289,26 @@ export async function POST(req: Request) {
           const latest = await latestLessonAttempt(prisma, {
             userId, subjectSlug: learnSession.subject.slug, lessonKey: key,
           })
-          // Only act when the newest attempt is actually closed. An
-          // IN_PROGRESS attempt is already correct and must be left alone, so
-          // a restart never discards work in flight.
-          if (latest && latest.status === 'COMPLETED') {
+          const isReteach = mode === 'restart' || mode === 'review'
+          const reason = latest === null
+            ? 'first-start'
+            : latest.status === 'COMPLETED' && isReteach
+              ? `re-open for mode=${mode}`
+              : null
+
+          if (reason) {
             await openLessonAttempt(prisma, {
               userId, subjectSlug: learnSession.subject.slug,
               lessonKey: key, lessonTitle: lessonTitle ?? null,
             })
-            console.info(`[lesson-init] re-opened completed lesson ${key} for mode=${mode}`)
+            console.info(`[lesson-init] attempt opened for ${key}: ${reason}`)
           }
         }
       } catch (err) {
-        console.warn('[lesson-init] lesson attempt re-open failed:', err)
+        // Advisory: a failure here must never cost the learner their lesson.
+        // The chat route's outcome block still creates an attempt at close, so
+        // evidence is never lost — only the duration degrades to the old value.
+        console.warn('[lesson-init] lesson attempt open failed:', err)
       }
     }
 
