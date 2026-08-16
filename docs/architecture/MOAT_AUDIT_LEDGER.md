@@ -17,7 +17,7 @@ Chemistry only. Every entry states what was MEASURED and how, and distinguishes
 | S4 | stem-vs-blueprint agreement | 238/238 | 186/186 | CLOSED |
 | S5 | visual semantic (offline) | 23 widened, inspected | 20 widened, inspected | CLOSED |
 | S6 | visual semantic (live) | 25 served + 16 DRAFT audited | same surface | RENDERED: NOT MEASURED (no browser); semantics: production-verified, 0 runtime defects |
-| S7 | real-tutor behaviour | live session; 1 defect fixed | lesson 3 covered; 1 defect fixed + live-verified | IN PROGRESS — detection gap traced, OWNER DECISION |
+| S7 | real-tutor behaviour | lesson 8 fresh: 13/13 pass | lesson 3 fresh: 12/13, 1 defect fixed | BOTH SUBJECTS COVERED — 1 detection gap = OWNER DECISION |
 | S8 | production seeding | **238/238 served** | 186/186 served | **CLOSED (re-verified 2026-08-16)** |
 | S9 | end-user runtime | mastery closure live-verified | mastery closure live-verified | BOTH SUBJECTS VERIFIED — 1 defect (duration) + 1 intended mismatch, both systemic |
 | S10 | regression protection | offline pinned + prod audit incl. 2 invariants | same | EXTENDED — visual + evidence-marker invariants PASS in prod |
@@ -432,6 +432,49 @@ timeout does not tell us whether the write committed — so a naive retry can
 double-count attempts. Doing it properly means making the write idempotent
 (or moving the increment) first, which is a real design decision and wants its
 own bounded change, not a wrapper bolted on during an investigation.
+
+---
+
+## S7 PHYSICS — real-tutor behavioural coverage (2026-08-16, live-verified)
+
+Mirrors the chemistry S7 batch on a genuinely untouched concept: physics
+lesson 8, `phys.meas.unit-conversion`. Fresh-state confirmed before starting —
+0 `lesson_attempts`, 0 `topic_progress`, 6 ACTIVE gradeable probes, 1 ACTIVE
+VISUAL belonging to the concept itself. Played as a weak beginner.
+
+**13/13 checks pass. No defect found, so no code was changed.**
+
+| # | check | evidence |
+|---|---|---|
+| 1 | lesson switch / active concept | switched from chemistry; taught unit conversion |
+| 2 | concrete anchor | paperclip, then a 1 m ribbon cut into 100 cm — before any rule |
+| 3 | beginner does not know | "i find this stuff hard" / "i dont know how to do this" |
+| 4 | confusion recovery | "It is completely normal to find unit conversion tricky at first" |
+| 5 | misconception expressed | "so 1 metre is 10 centimetres right" |
+| 6 | diagnosis → repair | corrected with the mechanism (centi = one-hundredth), tied to the figure's "Apply conversion factor" step |
+| 7 | structured probe | server-owned MCQ issued on request |
+| 8 | grading authoritative | wrong graded wrong, correct graded correct, server-side |
+| 9 | wrong answer handled | scored 25, `mistake_records` row written, no false advance |
+| 10 | correct answer advances | `GUIDE → CHECK` |
+| 11 | visual ownership | served the concept's OWN "Steps for Unit Conversion"; the tutor narrated its real step labels |
+| 12 | evidence only when gradeable | `attempts=2` for exactly the 2 graded answers; ungraded turns wrote nothing |
+| 13 | no duplicate/stale state | 0 attempt rows (concept not closed), 1 ACTIVE visual, marker resolves to a USER message |
+
+Assessment summary: 2 probes issued, 2 answered, 1 wrong + 1 correct, both
+graded server-side; `topic_progress` ended `IN_PROGRESS 65% attempts=2 last=65`.
+
+Ladder: `OBSERVE → DEMONSTRATE → GUIDE → CHECK`. The `OBSERVE → DEMONSTRATE`
+step came from two failed probes (the "i dont know" plus the wrong MCQ)
+concluding the diagnostic — the documented anti-deadlock exit, matching
+`masteryLadderReachability.test.ts`, NOT an advance earned by a wrong answer.
+
+**Bonus verification:** this exercised `f1cad37` across a SUBJECT switch
+(chemistry → physics), which the fix's own live verification did not cover — no
+chemistry figure carried into the physics lesson.
+
+**S7 is now covered on a fresh concept in both subjects.** The physics/chemistry
+behavioural asymmetry is closed. Rendered-browser evidence remains NOT MEASURED;
+the visual checks above are payload and production-data evidence, not a screen.
 
 ---
 
