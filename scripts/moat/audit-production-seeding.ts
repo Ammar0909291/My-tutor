@@ -48,7 +48,9 @@ import { SEED_PROBES } from '../../src/lib/teaching/assets/brainSeedAssets'
 import { CHEMISTRY_PROBES } from '../../src/lib/teaching/assets/chemistrySeedAssets'
 import { BIOLOGY_PROBES } from '../../src/lib/teaching/assets/biologySeedAssets'
 import { CS_PROBES } from '../../src/lib/teaching/assets/csSeedAssets'
-import { duplicateActiveVisuals, evidenceMarkerViolations } from '../../src/lib/teaching/moatInvariants'
+import {
+  duplicateActiveVisuals, evidenceMarkerViolations, multipleOpenAttempts,
+} from '../../src/lib/teaching/moatInvariants'
 
 const prisma = new PrismaClient()
 
@@ -147,7 +149,24 @@ async function auditInvariants(): Promise<number> {
   )
   for (const d of dups) console.log(`    - ${d.conceptId}: ${d.assetIds.join(', ')}`)
 
-  // 2. Evidence-marker integrity (guards f70c3a4). The cutoff is the migration's
+  // 2. At most one OPEN attempt per lesson (guards 8dfe689). Since attempts now
+  //    open at lesson start, a second IN_PROGRESS row for the same lesson would
+  //    make latestLessonAttempt's answer depend on ordering.
+  const attemptRows = await prisma.lessonAttempt.findMany({
+    where: { status: 'IN_PROGRESS' },
+    select: { userId: true, subjectSlug: true, lessonKey: true, status: true },
+  })
+  const multiOpen = multipleOpenAttempts(attemptRows)
+  console.log(
+    multiOpen.length === 0
+      ? `  attempts: OK — ${attemptRows.length} open attempt(s), none doubled on a lesson`
+      : `  attempts: FAIL — ${multiOpen.length} lesson(s) holding more than one open attempt`,
+  )
+  for (const m of multiOpen) {
+    console.log(`    - ${m.subjectSlug}/${m.lessonKey} (user ${m.userId}): ${m.count} open`)
+  }
+
+  // 3. Evidence-marker integrity (guards f70c3a4). The cutoff is the migration's
   //    own recorded completion time — never a constant typed here — so rows that
   //    predate the column are not condemned for lacking a marker.
   const migrationRows = await prisma.$queryRaw<Array<{ finished_at: Date | null }>>`
@@ -187,7 +206,7 @@ async function auditInvariants(): Promise<number> {
     console.log(`    - ${v.topicSlug} [${v.rowId}] ${v.reason}: ${v.detail}`)
   }
 
-  return dups.length + violations.length
+  return dups.length + multiOpen.length + violations.length
 }
 
 async function main() {

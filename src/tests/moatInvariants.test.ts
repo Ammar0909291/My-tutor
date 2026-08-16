@@ -6,8 +6,8 @@
  */
 import { describe, it, expect } from 'vitest'
 import {
-  duplicateActiveVisuals, evidenceMarkerViolations,
-  type TopicProgressRow, type MarkerMessage,
+  duplicateActiveVisuals, evidenceMarkerViolations, multipleOpenAttempts,
+  type TopicProgressRow, type MarkerMessage, type AttemptRow,
 } from '@/lib/teaching/moatInvariants'
 
 const MIGRATION = new Date('2026-08-16T18:00:00Z')
@@ -41,6 +41,39 @@ describe('visual integrity — one ACTIVE visual per concept', () => {
       { conceptId: 'chem.found.matter', assetId: 'a2' },
     ])).toEqual([])
     expect(duplicateActiveVisuals([])).toEqual([])
+  })
+})
+
+describe('lesson-attempt openness — at most one open attempt per lesson', () => {
+  const a = (over: Partial<AttemptRow> = {}): AttemptRow => ({
+    userId: 'u1', subjectSlug: 'physics', lessonKey: 'lesson:7',
+    status: 'IN_PROGRESS', ...over,
+  })
+
+  it('flags a lesson holding two open attempts', () => {
+    const bad = multipleOpenAttempts([a(), a()])
+    expect(bad).toHaveLength(1)
+    expect(bad[0]).toMatchObject({ lessonKey: 'lesson:7', count: 2 })
+  })
+
+  it('passes with exactly one open attempt per lesson', () => {
+    expect(multipleOpenAttempts([a(), a({ lessonKey: 'lesson:8' })])).toEqual([])
+  })
+
+  it('ignores COMPLETED rows entirely — a lesson may have many of those', () => {
+    // Re-teaching a lesson legitimately leaves several COMPLETED rows behind;
+    // only OPEN rows must be unique.
+    expect(multipleOpenAttempts([
+      a({ status: 'COMPLETED' }), a({ status: 'COMPLETED' }), a(),
+    ])).toEqual([])
+  })
+
+  it('separates learners and subjects sharing a lessonKey', () => {
+    // "lesson:7" is not globally unique — it is scoped by user and subject,
+    // which is the identity openLessonAttempt itself queries on.
+    expect(multipleOpenAttempts([
+      a(), a({ userId: 'u2' }), a({ subjectSlug: 'chemistry' }),
+    ])).toEqual([])
   })
 })
 
