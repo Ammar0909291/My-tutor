@@ -5258,17 +5258,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const signalCorrect = teachingSignal.correctness
         const signalConfidence = teachingSignal.confidence
         ;(async () => {
-          const existing = await prisma.topicProgress.findUnique({
-            where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId } },
-            select: { status: true },
-          }).catch(() => null)
-          if (existing?.status === 'MASTERED' || existing?.status === 'COMPLETED') return
           const score = signalCorrect ? 65 : 25
-          await prisma.topicProgress.upsert({
-            where: { userId_subjectSlug_topicSlug: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId } },
-            create: { userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId, status: 'IN_PROGRESS', masteryPct: score, attempts: 1, lastScore: score },
-            update: { status: 'IN_PROGRESS', masteryPct: score, lastScore: score, attempts: { increment: 1 } },
-          }).catch(() => {})
+          // IDEMPOTENT, THEN RETRIED — in that order, because the reverse is
+          // unsafe. This write was previously an unguarded
+          // `attempts: { increment: 1 }` with no retry and a silent
+          // `.catch(() => {})`; a Prisma P1008 socket timeout ate one in
+          // production on 2026-08-16 and the learner's graded answer left no
+          // trace. Wrapping a blind increment in withRetry would have traded
+          // that for double-counting, since a timeout never says whether the
+          // statement committed. applyTopicProgressEvidence stamps the
+          // learner's own Message id in the same row write as the increment,
+          // so a retry — or a concurrent duplicate — matches zero rows.
+          // The MASTERED/COMPLETED guard moved INTO that statement's WHERE,
+          // which also closes the read-then-write race the old code had.
+          const { applyTopicProgressEvidence } = await import('@/lib/teaching/topicProgressEvidence')
+          // Falls back to the session's turn timestamp only when there is no
+          // learner Message row (an ephemeral, non-persisted turn). That value
+          // is fixed at ingress, so it is still stable across retries of THIS
+          // request, which is the window withRetry operates in.
+          const evidenceEventId = userMessageRow?.id ?? `${learnSession.id}:${turnReceivedAt}`
+          await withRetry(() => applyTopicProgressEvidence(prisma, {
+            userId, subjectSlug: subjectCode, topicSlug: resolvedConceptId,
+            score, eventId: evidenceEventId,
+          })).then((outcome) => {
+            console.log('[topic-progress-evidence]', {
+              concept: resolvedConceptId, event: evidenceEventId, score, outcome,
+            })
+          }).catch((err) => {
+            // Still non-fatal to the learner's turn, but no longer silent: an
+            // evidence write that fails every retry is exactly the event this
+            // investigation could not see the first time.
+            console.error('[topic-progress-evidence] FAILED after retries:', {
+              concept: resolvedConceptId, event: evidenceEventId, err,
+            })
+          })
           // The D1 grid's dangerous quadrant (foundations/02 §1): a
           // confident WRONG answer is a misconception signature, not a
           // slip. Writing the MistakeRecord routes it through machinery

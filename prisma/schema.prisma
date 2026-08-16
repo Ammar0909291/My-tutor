@@ -372,6 +372,15 @@ model TopicProgress {
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @updatedAt
 
+  /// Idempotency marker for the Library-mode graded-signal checkpoint: the id
+  /// of the learner Message whose evidence was last folded into `attempts`.
+  /// Stamped in the SAME statement as the increment it guards, so a retried or
+  /// concurrent apply of the same event matches zero rows instead of counting
+  /// twice (see src/lib/teaching/topicProgressEvidence.ts). Null on every row
+  /// written before this column existed, which the guard treats as "no event
+  /// applied yet" — no historical row is altered or repaired.
+  lastEvidenceMessageId String?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, subjectSlug, topicSlug])
