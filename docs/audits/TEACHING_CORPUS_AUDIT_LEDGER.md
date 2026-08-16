@@ -8528,3 +8528,140 @@ probe maps a NON-correct distractor to the misconception it claims.
 
 Physics S2 **565/604** misconceptions (200/238 concepts). Remaining 39: qm 12,
 stat 8, rel 7, astro 6, opt 3, meas 2, mech 1.
+
+---
+
+# S9 — two live runtime defects, found by being a learner (2026-08-16)
+
+Found by driving the deployed tutor on the owner's real account as a weak
+student, not by any repository measurement. Both were invisible to the entire
+test suite for the same reason: tests and parsers alike were written against
+CORRECTLY-FORMED model output.
+
+## Defect 1 — machine markup reached the learner and was persisted
+
+A production turn ended, in the chat bubble, with:
+
+    <!--ATMPT channel="verbal" … interleaving="blocked"-->
+    <!--OBSERVATION signal="false" confidence="low" confusion="true" phrase="A"-->
+
+The prompts ask for `<!--ATTEMPT …-->` (attemptVectorSignal.ts) and
+`<!--SIGNAL …-->` (signals.ts), and the parsers match exactly those names. The
+model abbreviated one and renamed the other — it also renamed the attribute
+`correctness` to `signal`. No parser keyed to a tag NAME can recover from the
+model choosing a different name.
+
+Two costs, and the quiet one is worse. The learner saw raw markup, persisted, so
+it returned on every reload. And the signal was never parsed, so PROBE_OUTCOME /
+MISCONCEPTION_DETECTED and the attempt vector were silently not written for that
+turn — the evidence spine records nothing while every count still reads healthy.
+
+**Scale, measured across all 1,986 assistant messages in production:** 9 carry
+raw `<!--` markup — 0.45% — and they are not one bug but FIVE families:
+
+| family | rows | named correctly? |
+|---|---|---|
+| `<!--SIGNAL …/>` | 4 | yes — and still leaked |
+| `<!--MCQ q="…"-->` | 2 | yes |
+| `<!--VISUAL type="…"-->` | 1 | yes |
+| `<!--LESSON_COMPLETE-->` | 1 | yes |
+| `<!--ATMPT-->` / `<!--OBSERVATION-->` | 1 | no |
+
+Name-specific parsers are necessary but demonstrably not sufficient.
+
+**Fix at source:** `src/lib/teaching/residualTagSweep.ts` — a post-parser sweep
+that removes any SHOUTED-name HTML comment, for every family including ones not
+invented yet, plus an unterminated trailing tag from a truncated generation. It
+runs repeatedly until stable, because removing an inner tag can reconstruct an
+outer one. It deliberately leaves ordinary lowercase HTML comments alone: this
+deletes text from a learner's message, so it deletes only what is unmistakably
+markup.
+
+It cannot fix the lost evidence write. A misnamed tag carries no recoverable
+contract, and guessing at one would FABRICATE evidence — worse than losing it.
+Recorded as a known, accepted limit rather than papered over.
+
+Applied at route.ts:4967, the single point where the persisted row and the
+response `text` converge, so the two channels cannot disagree — which is the
+defect class that produced Defect 2 directly beneath it.
+
+## Defect 2 — the multiple-choice question was stored twice
+
+`appendMcqToHistoryText` rested on an assumption that is usually but not always
+true: that `stripMcqTags()` had removed the question from `cleanText`. On this
+turn the model wrote the question and its options inline AS PROSE *and* emitted
+the tag, so the append produced a second copy.
+
+Invisible live — the API response carries the single prose copy and the client
+draws its wizard from the separate `mcq` field — and visible only after a
+reload, which is precisely when history is all the learner has.
+
+**Fix at source:** `src/lib/teaching/mcq.ts` — skip the append when the prose
+already contains the question (whitespace- and case-insensitive, ≥12 chars).
+Compared on the question alone: matching an options block the model may have
+lettered, bulleted or inlined is far less robust, and if the question was
+already asked, re-appending the options adds nothing a reader needs.
+
+## Verification — four distinct states, kept separate
+
+| state | defect 1 | defect 2 |
+|---|---|---|
+| repo-fixed | YES | YES |
+| unit-proven on the real modules | YES | YES |
+| replayed against the real stored production row | YES | YES |
+| **production-verified end to end** | **NO — see below** | **YES** |
+
+**Defect 2 is production-verified.** A turn on the deployed fixed build
+(`messages.id = cmsv9qnt7000vl204j35y2ydl`, 03:52:07) hit the exact trigger — a
+structured `mcq` field present AND the question written inline as prose. The
+stored row is 303 chars with the question appearing exactly ONCE. The pre-fix
+row under the identical trigger (`cmsv8bhlf000fle0437ntzyq0`, 03:12:19) stores
+it TWICE. Same account, same lesson, before and after.
+
+**Defect 1 is NOT production-verified, and must not be recorded as if it were.**
+8 assistant messages were produced on the fixed build and 0 carried markup — but
+the base rate is 0.45%, so 8 clean messages is what you would expect from an
+unfixed build too. It proves nothing on its own. The real evidence is the
+deterministic one: the sweep is a pure function, proven against the verbatim
+stored production row, applied at the one line both output channels pass
+through. Confirming it in production needs volume this session did not generate.
+
+## An instrument defect found and corrected mid-verification
+
+`POST /api/sessions` REUSES the day's active session rather than creating one:
+the "clean session" I created returned `cmsv86pkk0001jy04wmsqo90r`, started
+03:08:36 — the same session as the pre-fix run. Querying by session id therefore
+reported markup in the "new" session, which was really the old defective row.
+Re-partitioned by deployment-ready time (03:41:29 UTC) instead, which is the
+boundary that actually separates the two builds.
+
+A second instrument error, in the replay itself: the first reconstruction cut
+the appended copy with a pattern, and the pattern matched the LEGITIMATE prose
+copy earlier in the same message. The permanent test now cuts by LENGTH and
+asserts the suffix, and the comment records why.
+
+## Regression protection
+
+`src/tests/residualMachineTagLeak.test.ts` — 22 tests. Pins the verbatim
+live-captured leak; covers all five leaked families plus an unknown one;
+unterminated tags; nested tags that reconstruct on removal; lowercase comments
+preserved; idempotency; non-string input; both MCQ branches; and the two defects
+COMPOSED, replayed against the real stored production row — the sweep runs first
+and changes the text the duplication guard then reads, so the ORDER of the two
+fixes in route.ts is itself something that can regress.
+
+## Validation
+
+`npx tsc --noEmit` clean; **338 files / 7202 passed / 9 skipped**; `npm run
+build` exit 0. No production writes — the only production mutations were made by
+the app itself, as a learner, through its own HTTP API.
+
+## Observed and NOT acted on
+
+Teaching-quality observations from the same session (quiz-first opening, "SI"
+used in lesson one, competitive-exam framing, a dense reply after "i dont know",
+zero visuals across eight turns) are deliberately excluded: none is required to
+resolve either defect. One further observation belongs with them — the tutor
+graded the answer "C" as correct for a prose-lettered question whose C was
+"Surface area", because a prose-only question has no structured `mcq` field and
+therefore no deterministic grader. Recorded here so it is not lost; not fixed.

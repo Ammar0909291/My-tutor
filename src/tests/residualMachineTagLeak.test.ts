@@ -152,3 +152,78 @@ describe('defect 2 — the MCQ is stored once, not twice', () => {
     expect(appendMcqToHistoryText('Plain teaching.', null)).toBe('Plain teaching.')
   })
 })
+
+/**
+ * THE TWO DEFECTS COMPOSED, replayed against a REAL production row.
+ *
+ * Both fired on the same turn, and the stored message is the evidence. This is
+ * the verbatim `content` of messages.id = cmsv8bhlf000fle0437ntzyq0
+ * (2026-08-16 03:12:19, pre-fix), read back from production: it carries the two
+ * misnamed tags AND the question stored twice.
+ *
+ * Kept because neither block above covers the composition — the sweep runs
+ * FIRST and changes the text the duplication guard then reads, so the order of
+ * the two fixes in route.ts is itself a thing that can regress.
+ */
+const STORED_PRODUCTION_ROW = `That's a really common place to get tripped up — let me show you why. 
+
+Even though we use grams every day for smaller things, the official base unit in the International System of Units is actually the kilogram, written as the letters k g, and it is the only base unit that has a prefix built right into its name! 
+
+Let's look at this another way: if you were writing out a rigorous physics calculation for a competitive exam, which unit for mass must you use so the rest of the equations work out correctly?
+
+A) Gram (g)
+B) Kilogram (kg)
+C) Milligram (mg)
+D) Pound (lb)
+
+<!--ATMPT channel="verbal" representation="narrative" concreteness="symbolic" entry="definition-first" granularity="decomposed" agency="tutor-does" scaffold="1" hint="H0" difficulty="1" paceRate="1" paceDensity="1" paceWait="1" loadBudget="1" loadDecomposition="decomposed" interleaving="blocked"-->
+<!--OBSERVATION signal="false" confidence="low" confusion="true" phrase="A"-->
+
+if you were writing out a rigorous physics calculation for a competitive exam, which unit for mass must you use so the rest of the equations work out correctly?
+A) Gram (g)
+B) Kilogram (kg)
+C) Milligram (mg)
+D) Pound (lb)`
+
+const STORED_MCQ = {
+  question:
+    'if you were writing out a rigorous physics calculation for a competitive exam, which unit for mass must you use so the rest of the equations work out correctly?',
+  options: ['Gram (g)', 'Kilogram (kg)', 'Milligram (mg)', 'Pound (lb)'],
+  correctIndex: 1,
+}
+
+describe('the real production row, replayed through the fixed pipeline', () => {
+  it('the stored row really does carry both defects', () => {
+    // Guards the fixture itself: if this ever stops holding, the replay below
+    // is testing something other than the defect it claims to.
+    expect(STORED_PRODUCTION_ROW).toContain('<!--ATMPT')
+    expect(STORED_PRODUCTION_ROW).toContain('<!--OBSERVATION')
+    const q = STORED_MCQ.question.toLowerCase()
+    expect(STORED_PRODUCTION_ROW.toLowerCase().split(q).length - 1).toBe(2)
+  })
+
+  it('stores the question once, with no markup, keeping the teaching', () => {
+    // Reconstruct the pre-append cleanText by LENGTH, not by pattern: the row
+    // is exactly `cleanText + "\n\n" + question + "\n" + lettered options`, and
+    // any pattern-based cut would match the legitimate prose copy earlier in
+    // the message instead of the appended one. (It did, on the first attempt.)
+    const appended =
+      `\n\n${STORED_MCQ.question}\n` +
+      STORED_MCQ.options.map((o, i) => `${String.fromCharCode(65 + i)}) ${o}`).join('\n')
+    expect(STORED_PRODUCTION_ROW.endsWith(appended)).toBe(true)
+    const cleanText = STORED_PRODUCTION_ROW.slice(0, STORED_PRODUCTION_ROW.length - appended.length)
+
+    // The same two calls route.ts makes, in the same order.
+    const swept = stripResidualMachineTags(cleanText)
+    expect(swept).not.toContain('<!--')
+
+    const out = appendMcqToHistoryText(swept, STORED_MCQ as never)
+    expect(out).toBe(swept) // append SKIPPED: the question is already in prose
+
+    const q = STORED_MCQ.question.toLowerCase()
+    expect(out.toLowerCase().split(q).length - 1).toBe(1)
+
+    expect(out).toContain('the official base unit in the International System of Units is actually the kilogram')
+    expect(out).toContain('B) Kilogram (kg)')
+  })
+})
