@@ -165,7 +165,9 @@ describe('every probed misconception id joins to its blueprint', () => {
     // Every remaining entry names a misconception its blueprint does not
     // document; closing them needs a blueprint change, which is the Curriculum
     // Production Pipeline's to make, not this campaign's.
-    expect(orphanIds(physics).size).toBeLessThanOrEqual(42)
+    // Then 42 -> 39 in the phys.em Stage 4 pass (three more confirmed
+    // renames: see physicsEmProbeDiscrimination.test.ts).
+    expect(orphanIds(physics).size).toBeLessThanOrEqual(39)
   })
 
   it('chemistry: unjoinable ids do not exceed the known residue', () => {

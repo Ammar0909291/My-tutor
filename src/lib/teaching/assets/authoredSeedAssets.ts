@@ -32734,12 +32734,23 @@ const RSTV_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'mcq',
     gradeBand: GradeBand.HIGH,
-    stem: 'PRACTICE: Two copper wires have the same length, but one has DOUBLE the cross-sectional area. How do their resistances compare?',
+    // NON-DISCRIMINATING STEM + MISMATCHED DISTRACTOR, corrected (Moat S4,
+    // phys.em pass). The tag is MC-LONGER-WIRE-HAS-LOWER-RESISTANCE, whose
+    // trigger signal is "more wire gives more path for electrons — easier to
+    // conduct". The old item varied AREA ONLY, and that same "more room is
+    // easier" intuition gives the CORRECT answer for area — so a holder
+    // scored right and kept the belief. Worse, the old distractor ("more
+    // material means more resistance") is the OPPOSITE intuition to the one
+    // tagged, so it could not detect it either. The item now varies length as
+    // well, which is the comparison the blueprint's own conflict evidence
+    // uses, and each distractor states a belief someone actually holds.
+    stem: 'PRACTICE: Start from a copper wire of resistance R. Wire A is the same wire made TWICE AS LONG (same thickness). Wire B is the same wire with DOUBLE the cross-sectional area (same length). Give the resistance of each.',
     choices: [
-      { text: 'The thicker one has HALF the resistance — R = rho*L/A, so resistance grows with length and falls with area; a wider cross-section gives the carriers more room', isCorrect: true },
-      { text: 'The thicker one has double the resistance — more material means more resistance', isCorrect: false, misconceptionId: `${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE` },
+      { text: 'Wire A: 2R (R = rho*L/A grows with length — electrons travel further and suffer more collisions). Wire B: R/2 (a wider cross-section gives the carriers more room). Length and area pull in OPPOSITE directions', isCorrect: true },
+      { text: 'Wire A: R/2 (the longer wire gives electrons more path to flow along, so conducting is easier). Wire B: R/2', isCorrect: false, misconceptionId: `${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE` },
+      { text: 'Wire A: 2R. Wire B: 2R — more material means more resistance either way', isCorrect: false },
     ],
-    correctValue: 'half — R is inversely proportional to area',
+    correctValue: 'A: 2R (R ∝ L); B: R/2 (R ∝ 1/A) — longer raises resistance, thicker lowers it',
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${RSTV}:MC-LONGER-WIRE-HAS-LOWER-RESISTANCE`],
     source: `${RSTV_SRC} — MC-LONGER-WIRE-HAS-LOWER-RESISTANCE, transfer case, distractor-mapped`,
@@ -32814,12 +32825,22 @@ const SOLN_PROBES: SeedProbe[] = [
     subjectSlug: 'physics',
     probeKind: 'mcq',
     gradeBand: GradeBand.HIGH,
-    stem: 'PRACTICE: You hold the current and the TOTAL number of turns fixed but stretch a solenoid to twice its length. What happens to the internal field?',
+    // NON-DISCRIMINATING STEM + MISMATCHED DISTRACTOR, corrected (Moat S4,
+    // phys.em pass). The tag is MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS, whose
+    // trigger signal is "a wider solenoid has a stronger field" — but the old
+    // item held the radius FIXED and only stretched the length, so the belief
+    // made no prediction and its holder could reason correctly about n. The
+    // old distractor stated a different belief again (N versus n). The radius
+    // is now varied explicitly, so the tagged belief predicts a stronger
+    // field and gets the item wrong; the N-versus-n distractor is kept as a
+    // genuine third option rather than deleted, since that error is real.
+    stem: 'PRACTICE: You hold the current and the TOTAL number of turns fixed, then stretch a solenoid to twice its length AND double its radius. What happens to the internal field?',
     choices: [
-      { text: 'It halves — B = mu_0 * n * I depends on turns per unit LENGTH, so doubling the length halves n. Radius never enters; packing density does', isCorrect: true },
-      { text: 'Nothing — the field is set by the total number of turns and the current, and neither changed', isCorrect: false, misconceptionId: `${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS` },
+      { text: 'It halves — B = mu_0 * n * I depends on turns per unit LENGTH, so doubling the length halves n. The radius does not appear in B at all; it changes the inductance and the flux, not the field strength', isCorrect: true },
+      { text: 'It roughly doubles — the solenoid is much wider now, and a wider solenoid produces a stronger field inside', isCorrect: false, misconceptionId: `${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS` },
+      { text: 'Nothing changes — the field is set by the total number of turns and the current, and neither changed', isCorrect: false },
     ],
-    correctValue: 'it halves',
+    correctValue: 'it halves — n is halved; the radius does not enter B',
     difficulty: ProbeDifficulty.DEVELOPING,
     targetedMisconceptions: [`${SOLN}:MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS`],
     source: `${SOLN_SRC} — MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS, transfer case, distractor-mapped`,
@@ -50765,7 +50786,7 @@ const CAPC_ASSESS_PROBES: SeedProbe[] = [
     stem: 'MASTERY GATE (P4-c, series and parallel): Three 6 μF capacitors are connected all in parallel, then all in series. Find C_eq in each case. Pass criterion: correct combination rules for both configurations.',
     correctValue: 'parallel: C_eq=6+6+6=18 μF; series: 1/C_eq=3/6 → C_eq=2 μF',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${CAPC}:MC-SERIES-PARALLEL-SWAP`],
+    targetedMisconceptions: [`${CAPC}:MC-SERIES-CAPACITORS-ADD-DIRECTLY`],
     source: `${CAPC_SRC} — Component 4 Practice Set P4-c`,
   },
   {
@@ -50939,7 +50960,7 @@ const CUR_ASSESS_PROBES: SeedProbe[] = [
     stem: 'MASTERY GATE (P4-d, direction conventions): In a battery connected to a light bulb, state the direction of conventional current in the external wire, the direction of electron flow, and the direction of conventional current inside the battery. Pass criterion: all three directions correct.',
     correctValue: 'conventional current: + terminal → bulb → − terminal; electrons: − terminal → bulb → + terminal; inside the battery, conventional current flows from − to + to complete the loop',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${CUR}:MC-ELECTRON-DIRECTION-CONFUSION`],
+    targetedMisconceptions: [`${CUR}:MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS`],
     source: `${CUR_SRC} — Component 4 Practice Set P4-d`,
   },
   {
@@ -51353,7 +51374,7 @@ const EPWR_ASSESS_PROBES: SeedProbe[] = [
     stem: 'MASTERY GATE (P4-e, series vs. parallel): A 20 Ω and a 5 Ω resistor: in series across 100 V, which dissipates more and by what ratio? In parallel across 100 V, which dissipates more and by what ratio? Pass criterion: correctly opposite answers for each configuration.',
     correctValue: 'series: 20Ω dissipates more (320W vs 80W, ratio 4:1, ∝R); parallel: 5Ω dissipates more (2000W vs 500W, ratio 4:1, ∝1/R)',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${EPWR}:MC-SAME-RESISTOR-DISSIPATES-MORE-BOTH-CONFIGS`],
+    targetedMisconceptions: [`${EPWR}:MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER`],
     source: `${EPWR_SRC} — Component 4 Practice Set P4-e`,
   },
   {

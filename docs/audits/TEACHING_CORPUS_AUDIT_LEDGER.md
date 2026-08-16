@@ -8061,3 +8061,113 @@ suite with that id named.
 phys.meas 8/8, phys.mech 60/60 → **68 of 222** blueprint-backed physics
 concepts read this way. The remaining 154 are not certified by any file in
 this repo.
+
+---
+
+# Iteration — PHYSICS CHECK 3: phys.em domain complete, Stage 4 (2026-08-16)
+
+**35 concepts, 192 probes**, every tagged stem read against its blueprint's
+misconception body. **5 defects in 2 classes.** Physics Stage 4 moves
+**68 → 103**.
+
+## A correction to the denominator this campaign has been reporting
+
+The handover and every prior entry state Stage 4 as `n/222` — "222
+blueprint-backed physics concepts, 16 with no blueprint". Measured directly
+this turn against the live KG and the blueprint directory:
+
+- `docs/physics/kg/graph.json` — **238** concepts
+- `docs/curriculum/blueprints/phys.*.md` — **238** files
+- KG concepts with **no** blueprint — **0**
+- blueprints with **zero** parsed misconception ids — **0**
+
+So every physics concept is blueprint-backed and Stage-4-auditable. The
+Curriculum Production Pipeline evidently authored the missing 16 at some point
+after the 222 figure was recorded; nothing in this campaign closed them. **The
+Stage 4 denominator is 238, not 222.** All progress figures below use 238, and
+the previously reported 68/222 is restated as 68/238 — the numerator was never
+wrong, only the base.
+
+## Class 1 — three renames (orphans 42 → 39)
+
+All three sat on **mastery-gate checkpoints, which carry no choices**. That is
+why they survived: the "a claimed misconception always has a distractor" guard
+only inspects choice-bearing probes, so a checkpoint can claim an id that joins
+to nothing and every structural check stays green.
+
+| concept | was | now | blueprint evidence |
+|---|---|---|---|
+| `capacitance` | `MC-SERIES-PARALLEL-SWAP` | `MC-SERIES-CAPACITORS-ADD-DIRECTLY` | trigger: "applies C_eq = C₁ + C₂ for capacitors in series (confusing with resistors in parallel or capacitors in parallel)" |
+| `electric-current` | `MC-ELECTRON-DIRECTION-CONFUSION` | `MC-ELECTRONS-MOVE-FROM-PLUS-TO-MINUS` | trigger names it outright: "…or confuses conventional current direction with electron flow direction" |
+| `electrical-power` | `MC-SAME-RESISTOR-DISSIPATES-MORE-BOTH-CONFIGS` | `MC-HIGH-RESISTANCE-ELEMENTS-ALWAYS-DISSIPATE-MORE-POWER` | trigger: "'more resistance = more power dissipation' **without specifying whether series or parallel**"; its conflict evidence IS the series-vs-parallel comparison the checkpoint asks |
+
+## Class 4/5 — two probes that varied the wrong quantity
+
+Both are "transfer case" items that explore a *different variable* from the one
+their tagged belief is about, with a distractor stating a *third* belief. The
+combination is invisible structurally: the id joins, a distractor is mapped,
+and the physics in the item is correct.
+
+- **`resistivity`** was tagged `MC-LONGER-WIRE-HAS-LOWER-RESISTANCE` — "more
+  wire gives more path for electrons, easier to conduct" — but varied **area
+  only**. Applied to area, that very intuition ("more room is easier") gives
+  the **correct** answer, so a holder scored right and kept the belief. The old
+  distractor ("more material means more resistance") is the *opposite*
+  intuition, so it could not detect the tag either. The item now varies length
+  and area together — the comparison the blueprint's own conflict evidence uses
+  — with a distractor that predicts R/2 for the *longer* wire.
+- **`solenoid`** was tagged `MC-SOLENOID-FIELD-DEPENDS-ON-RADIUS` — "a wider
+  solenoid has a stronger field" — but held the **radius fixed** and only
+  stretched the length, so the belief made no prediction and could not be
+  scored. The old distractor stated the N-versus-n error instead. The radius is
+  now varied explicitly; the N-versus-n error is **kept as an unmapped third
+  option** rather than deleted, since it is a real error that simply has no
+  documented id.
+
+## What phys.em did NOT contain
+
+No crossed pairs, no false tags, and no probe asserting the misconception its
+own concept repairs. Measured, not assumed: every one of the 192 probes was
+read. phys.em is materially cleaner than phys.mech (5 defects / 192 probes
+versus 12 / 420).
+
+## Curriculum feedback — 8 novel orphans (no blueprint touched)
+
+`dielectrics:MC-Q-CONSTANT-REGARDLESS-OF-BATTERY`,
+`electric-charge:MC-INDUCTION-POLARITY`,
+`electric-charge:MC-INSULATORS-CANNOT-BE-ATTRACTED`,
+`electric-field:MC-FIELDS-ALWAYS-ADD`,
+`electric-potential:MC-SIGN-CONVENTION-EV`,
+`potentiometer:MC-K-CONSTANT-REGARDLESS-OF-DRIVER-R`,
+`resistivity:MC-DIAMETER-LINEAR-NOT-SQUARE`,
+`wheatstone-bridge:MC-BALANCE-MEANS-MAX-CURRENT`. Each probe **does** diagnose
+the belief it names; the gap is that the blueprint never registered it, so the
+detection has no authored repair to run. Curriculum Pipeline work.
+
+## Production
+
+None of the five is live. Checked `asset_identity` ⋈ `probe_assets` for all
+five concepts: the corrected probes are repo-only and have never been seeded.
+**Repo-fixed: yes. Production-seeded: no. Production-verified: no.** No
+production writes were made.
+
+## Regression protection
+
+`src/tests/physicsEmProbeDiscrimination.test.ts` — the three renames pinned
+both ways (retired id absent corpus-wide, adopted id present, and tied to the
+specific checkpoint stem so deleting the probe cannot pass vacuously); the two
+corrected items asserted on the property that was broken (the mapped distractor
+must predict the tagged belief's answer); a general strict check that no phys.em
+choice is simultaneously `isCorrect` and misconception-mapped; corpus-size
+non-vacuity bounds. Orphan ratchet 42 → 39.
+
+## Validation
+
+`npx tsc --noEmit` clean; **334 files / 7113 passed / 9 skipped**;
+`npm run build` exit 0.
+
+## Stage 4 standing
+
+phys.meas 8/8, phys.mech 60/60, phys.em 35/35 → **103 of 238**. Remaining: 135
+concepts across 9 domains (mod 21, qm 19, therm 18, wave 17, particle 16, opt
+15, stat 15, rel 8, astro 6).
