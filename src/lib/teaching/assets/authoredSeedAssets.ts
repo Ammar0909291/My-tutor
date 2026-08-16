@@ -52493,6 +52493,113 @@ const S2_MOD_COVERAGE_PROBES: SeedProbe[] = [
  * probes: HIGH for seven, UNDERGRADUATE for `maxwell-boltzmann`.
  */
 /**
+ * S2 COVERAGE — phys.astro batch (2026-08-16).
+ *
+ * Six documented misconceptions across six concepts — the last physics
+ * domain-scale S2 gap. Same three-probe residue as the other domains, same
+ * remedy: one `true_false` in the free singleton slot, stem = blueprint's
+ * **Probe:** line, correct answer = its **Conflict evidence [P28]** /
+ * **Replacement [P31]** with the concrete number the blueprint supplies —
+ * ρ ≈ 10⁻⁶ kg/m³ inside M87*'s horizon, the observable universe's ~46 Gly
+ * comoving radius, the 1998 Type Ia supernova acceleration measurement,
+ * ΔL ~ 4×10⁻¹⁸ m for LIGO GW150914, the Kelvin-Helmholtz vs nuclear
+ * timescales for the Sun, cool white dwarfs at T ~ 4000 K after 12 Gyr.
+ * Distractor = the **Characteristic phrase**.
+ */
+const S2_ASTRO_COVERAGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: BH,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'Are black holes infinitely dense?',
+    choices: [
+      { text: 'No — average density inside the event horizon is ρ = 3c⁶/(32πG³M²), which DECREASES with mass². A stellar-mass BH (10 M_☉) has ρ_avg ~ 10¹⁷ kg/m³ (nuclear density), but a supermassive BH like M87* (6.5×10⁹ M_☉) has ρ_avg ~ 10⁻⁶ kg/m³ — thinner than the vacuum of interstellar space. The "singularity" is a mathematical artefact where classical GR breaks down (quantum gravity expected there), not a physical measurement of infinite density', isCorrect: true },
+      { text: 'Yes — infinite density is what makes them black holes in the first place', isCorrect: false, misconceptionId: `${BH}:MC-4` },
+    ],
+    correctValue: 'no — ρ_avg falls as 1/M²; M87* averages ~10⁻⁶ kg/m³ inside its horizon',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${BH}:MC-4`],
+    source: `${BH_SRC} — MC-4 Probe line verbatim + conflict evidence [P28] (ρ = 3c⁶/(32πG³M²)) and the S6 M87* computation; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: COSM,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.UNDERGRADUATE,
+    stem: 'How large is the observable universe?',
+    choices: [
+      { text: '~46 billion light-years in comoving radius, not 13.8. Light we now receive from the CMB was emitted from regions that were only ~42 million light-years away at the time; during the 13.8 Gyr the photons traveled, those same regions continued to expand away, and are now ~46 Gly distant. Light-travel distance and current proper distance are different quantities in an expanding universe — like an ant walking on a stretching rubber sheet, the start point ends up farther than the distance walked', isCorrect: true },
+      { text: '13.8 billion light-years — because that is how long light has had to travel', isCorrect: false, misconceptionId: `${COSM}:MC-4` },
+    ],
+    correctValue: '~46 Gly comoving; the 13.8 Gy is light-travel time, not current distance',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${COSM}:MC-4`],
+    source: `${COSM_SRC} — MC-4 Probe line verbatim + conflict evidence [P28] (CMB source now ~46 Gly away) and the rubber-sheet analogy; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: DMTR,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Einstein called Λ his biggest blunder and removed it from his equations. Is it back today because we are just forcing the equations to fit the data?',
+    choices: [
+      { text: 'No — the 1998 Type Ia supernova surveys (Perlmutter, Riess and collaborators) measured distant supernovae directly and found them ≈25% fainter than a decelerating universe predicts. The expansion is ACCELERATING. Positive Λ is the simplest term in the field equations that produces ä > 0, and the CMB acoustic peaks and baryon acoustic oscillations independently confirm the same value. Λ is now three-way experimentally required, not a fudge — and it also independently fixes the age of the universe at ≈13.8 Gyr, consistent with the oldest stars', isCorrect: true },
+      { text: 'Yes — Λ is just a fudge factor; we are forcing the equations to fit the data', isCorrect: false, misconceptionId: `${DMTR}:MC-4` },
+    ],
+    correctValue: 'no — three independent probes (Type Ia SNe, CMB, BAO) require Λ; not a fit-fudge',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${DMTR}:MC-4`],
+    source: `${DMTR_SRC} — MC-4 Probe question verbatim + conflict evidence (P28) (1998 Perlmutter/Riess, ~25% faint, three independent probes); distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: GRAW,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What exactly does LIGO measure — the speed of gravitational waves, or something else?',
+    choices: [
+      { text: 'The STRAIN h(t) = ΔL(t)/L, i.e. the time-varying differential arm-length change in a 4 km Fabry-Pérot interferometer. For GW150914 peak strain was h ~ 10⁻²¹ (ΔL ~ 4×10⁻¹⁸ m — about 1/1000 of a proton diameter). The GW SPEED was separately confirmed = c by comparing the GW170817 signal with its gamma-ray burst: over ~1.8 billion light-years the arrival times differed by less than 1.7 s, bounding |v_GW/c − 1| < 10⁻¹⁵', isCorrect: true },
+      { text: 'It measures the SPEED of the gravitational waves', isCorrect: false, misconceptionId: `${GRAW}:MC-2` },
+    ],
+    correctValue: 'strain h(t) = ΔL/L via arm-length interferometry; speed = c confirmed separately via GW170817',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${GRAW}:MC-2`],
+    source: `${GRAW_SRC} — MC-2 Probe line verbatim + conflict evidence [P28] (h ~ 10⁻²¹, ΔL ~ 4×10⁻¹⁸ m for GW150914) and the GW170817 speed bound; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: STLE,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How does a white dwarf produce its light — is it still burning hydrogen?',
+    choices: [
+      { text: 'No — a white dwarf is an INERT degenerate C-O (or O-Ne) remnant supported by electron degeneracy pressure; there is no nuclear burning at all. Its luminosity is pure thermal radiation from stored heat, L = 4πR²σT⁴, and it MONOTONICALLY cools: the hottest young WDs radiate at T ~ 100,000 K, but the oldest white dwarfs in globular clusters (~12 Gyr) have cooled all the way to T ~ 4,000 K. If they were fusing hydrogen they would be maintaining or increasing their temperature, not cooling', isCorrect: true },
+      { text: 'Yes — it still has some hydrogen fuel burning slowly', isCorrect: false, misconceptionId: `${STLE}:MC-3` },
+    ],
+    correctValue: 'no — no fusion; blackbody radiation from a cooling degenerate remnant',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${STLE}:MC-3`],
+    source: `${STLE_SRC} — MC-3 Probe line verbatim + conflict evidence [P28] (monotonic cooling from 100,000 K to 4,000 K over 12 Gyr) and the L = 4πR²σT⁴ replacement; distractor is the characteristic phrase`,
+  },
+  {
+    conceptId: STLS,
+    subjectSlug: 'physics',
+    probeKind: 'true_false',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Sun is in hydrostatic equilibrium. Does that mean nothing is really happening inside it?',
+    choices: [
+      { text: 'No — it is a DYNAMICAL steady state. The pressure-gradient equation dP/dr = −ρg(r) is satisfied at every layer, but the balance is only maintained because fusion in the core is generating energy at 3.85×10²⁶ W (about 600 million tonnes of hydrogen per second) and radiation/convection carry it out to the surface. Cut the fusion off and the star collapses on the free-fall timescale τ_ff = √(R³/GM) ≈ 30 min for the Sun. It is like a ball floating in a steady waterfall: stable position, but only because of continuous flow', isCorrect: true },
+      { text: 'Yes — equilibrium means it is not changing; it is stable and nothing is going on inside', isCorrect: false, misconceptionId: `${STLS}:MC-4` },
+    ],
+    correctValue: 'no — dynamical steady state; force balance is MAINTAINED by continuous fusion (τ_ff ≈ 30 min without it)',
+    difficulty: ProbeDifficulty.ADVANCED,
+    targetedMisconceptions: [`${STLS}:MC-4`],
+    source: `${STLS_SRC} — MC-4 Probe line verbatim + conflict evidence [P28] (Sun: 3.85×10²⁶ W, 6×10⁸ t/s, τ_ff ≈ 30 min without fusion) and the waterfall bridge; distractor is the characteristic phrase`,
+  },
+]
+
+/**
  * S2 COVERAGE — phys.rel batch (2026-08-16).
  *
  * The seven documented misconceptions in phys.rel that carried NO probe —
@@ -52741,6 +52848,7 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...S2_QM_COVERAGE_PROBES,
   ...S2_REL_COVERAGE_PROBES,
   ...S2_STAT_COVERAGE_PROBES,
+  ...S2_ASTRO_COVERAGE_PROBES,
   ...S2_MOD_COVERAGE_PROBES,
   ...UNITS_PROBES,
   ...VEL_PROBES,

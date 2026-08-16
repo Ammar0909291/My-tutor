@@ -8962,3 +8962,65 @@ blueprint, or Educational Brain file modified.
 Physics S2 **592/604** (227/238 concepts). Remaining 12: astro 6, opt 3,
 meas 2, mech 1. Next block: `phys.astro` (6).
 
+
+---
+
+# S2 phys.astro batch (2026-08-16)
+
+Fifth physics domain to reach ZERO unprobed under S2, after phys.mod,
+phys.qm, phys.stat and phys.rel. Six documented misconceptions across
+six concepts, same three-probe residue.
+
+| concept | MC | belief the distractor states |
+|---|---|---|
+| phys.astro.black-holes | MC-4 | "infinite density is what makes them" |
+| phys.astro.cosmology | MC-4 | "13.8 Gly — because that's how long light has had to travel" |
+| phys.astro.dark-matter | MC-4 | "Λ is a fudge factor — we're forcing the equations to fit" |
+| phys.astro.gravitational-waves | MC-2 | "LIGO measures the SPEED of the waves" |
+| phys.astro.stellar-evolution | MC-3 | "white dwarfs still have some hydrogen burning" |
+| phys.astro.stellar-structure | MC-4 | "equilibrium means nothing is going on inside" |
+
+## How each probe was written
+
+Same procedure. Stem = the blueprint's own **Probe:** line. Correct answer
+= its **Conflict evidence [P28]** / **Replacement [P31]**, with the concrete
+number the blueprint supplies — ρ_avg ~ 10⁻⁶ kg/m³ inside M87*'s horizon
+(less than interstellar vacuum); the observable universe's ~46 Gly
+comoving radius vs. 13.8 Gly light-travel time; the 1998 Perlmutter/Riess
+Type Ia supernova measurement of ~25% faintness (three-way independent
+with CMB + BAO); ΔL ~ 4×10⁻¹⁸ m for LIGO GW150914 (with the GW170817
+γ-ray comparison bounding |v_GW/c − 1| < 10⁻¹⁵); white dwarfs cooling
+from T ~ 100,000 K to T ~ 4,000 K over 12 Gyr; the Sun's τ_ff ≈ 30 min
+without fusion, versus 3.85×10²⁶ W of ongoing energy generation.
+Distractor = the **Characteristic phrase**, so the probe DETECTS the
+belief instead of merely naming it.
+
+## Slot safety
+
+Same discipline. `true_false` verified FREE in all six concepts before
+authoring — every probe lands in a free slot and stays a singleton
+(asserted per concept). Bands follow existing probes: HIGH ×4,
+UNDERGRADUATE ×2 (black-holes, cosmology).
+
+## Regression protection
+
+`src/tests/physicsS2MisconceptionCoverage.test.ts` — ratchet lowered
+12 → 6 (downward only); phys.astro asserted at exactly zero; all six
+pairings pinned; slot-safety asserted per concept; and each new probe
+required to map a NON-correct distractor to the misconception it claims.
+
+## Validation
+
+`npx tsc --noEmit` clean; **339 files / 7,300 passed / 9 skipped** (up
+14 from 7,286); `npm run build` exit 0. No production writes; no KG,
+blueprint, or Educational Brain file modified.
+
+## Standing
+
+Physics S2 **598/604** (233/238 concepts). Remaining 6, and the shape of
+the last mile has changed: no more whole domains authored to a
+three-probe template. Instead a small residue of individual concepts
+scattered across THREE otherwise-complete domains — `phys.opt` (3),
+`phys.meas` (2), `phys.mech` (1). Next batch collects all six in one
+combined authoring pass and takes physics S2 to 604/604 (ZERO).
+

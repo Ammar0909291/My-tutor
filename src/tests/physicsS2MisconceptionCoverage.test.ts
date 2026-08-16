@@ -76,9 +76,11 @@ const physics = [...SEED_PROBES, ...AUTHORED_PROBES].filter((p) => p.conceptId.s
 describe('S2 — physics misconception coverage ratchet', () => {
   it('unprobed documented misconceptions do not exceed the known residue', () => {
     // RATCHET. 54 -> 39 (phys.mod) -> 27 (phys.qm) -> 19 (phys.stat) ->
-    // 12 (phys.rel, 7 concepts). Ratchets only go DOWN. phys.rel is now at
-    // ZERO too. The remaining 12 are astro 6, opt 3, meas 2, mech 1.
-    expect(coverage(physics).unprobed.length).toBeLessThanOrEqual(12)
+    // 12 (phys.rel) -> 6 (phys.astro, 6 concepts). Ratchets only go DOWN.
+    // phys.astro is now at ZERO too. The remaining 6 are opt 3, meas 2,
+    // mech 1 — a distinct authoring pattern (single-concept residue in
+    // three otherwise-completed domains), which is why they were left last.
+    expect(coverage(physics).unprobed.length).toBeLessThanOrEqual(6)
   })
 
   it('chemistry S2 stays complete at zero unprobed', () => {
@@ -320,6 +322,66 @@ describe('S2 — the phys.rel batch stays covered', () => {
 
   it('phys.rel has NO unprobed documented misconception left', () => {
     const left = coverage(physics).unprobed.filter((u) => u.startsWith('phys.rel.'))
+    expect(left).toEqual([])
+  })
+
+  it.each(covered)('%s %s now has a probe that claims it', (conceptId, mc) => {
+    const ids = physics
+      .filter((p) => p.conceptId === conceptId)
+      .flatMap((p) => p.targetedMisconceptions ?? [])
+    expect(ids).toContain(`${conceptId}:${mc}`)
+  })
+
+  it.each(covered)('%s: the new probe sits in a FREE singleton slot', (conceptId) => {
+    const mine = physics.filter((p) => p.conceptId === conceptId) as ReadonlyArray<{
+      probeKind: string
+      gradeBand: string
+    }>
+    const slots = new Map<string, number>()
+    for (const p of mine) {
+      const k = `${p.probeKind}|${p.gradeBand}`
+      slots.set(k, (slots.get(k) ?? 0) + 1)
+    }
+    for (const [k, n] of slots) if (k.startsWith('true_false|')) expect(n, k).toBe(1)
+  })
+
+  it('every new probe diagnoses its misconception with a mapped distractor', () => {
+    const failures: string[] = []
+    for (const [conceptId, mc] of covered) {
+      const p = physics.find(
+        (x) =>
+          x.conceptId === conceptId &&
+          (x as unknown as { probeKind: string }).probeKind === 'true_false',
+      ) as unknown as { choices?: ReadonlyArray<{ isCorrect?: boolean; misconceptionId?: string }> } | undefined
+      if (!p) { failures.push(`${conceptId}: no true_false probe`); continue }
+      const mapped = (p.choices ?? []).filter((c) => c.misconceptionId === `${conceptId}:${mc}`)
+      if (!mapped.length) failures.push(`${conceptId}: no distractor mapped to ${mc}`)
+      if (mapped.some((c) => c.isCorrect)) failures.push(`${conceptId}: mapped the CORRECT choice`)
+    }
+    expect(failures).toEqual([])
+  })
+})
+
+describe('S2 — the phys.astro batch stays covered', () => {
+  /**
+   * phys.astro reached ZERO unprobed with this batch, the fifth physics
+   * domain to do so under S2 after phys.mod, phys.qm, phys.stat and phys.rel.
+   * All six remaining concepts held exactly mcq × 2 + misconception_probe × 1
+   * and nothing in `true_false`, verified before authoring; every new probe
+   * lands in a free slot and stays a SINGLETON, leaving every existing
+   * canonicalSlug untouched.
+   */
+  const covered: ReadonlyArray<readonly [string, string]> = [
+    ['phys.astro.black-holes', 'MC-4'],
+    ['phys.astro.cosmology', 'MC-4'],
+    ['phys.astro.dark-matter', 'MC-4'],
+    ['phys.astro.gravitational-waves', 'MC-2'],
+    ['phys.astro.stellar-evolution', 'MC-3'],
+    ['phys.astro.stellar-structure', 'MC-4'],
+  ]
+
+  it('phys.astro has NO unprobed documented misconception left', () => {
+    const left = coverage(physics).unprobed.filter((u) => u.startsWith('phys.astro.'))
     expect(left).toEqual([])
   })
 
