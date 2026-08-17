@@ -1980,3 +1980,117 @@ Nothing in the Moat-protected list changed: mastery, evidence, grading, answer
 keys, attempt lifecycle, budget semantics, misconception protocol, recovery,
 `answersPendingQuestion`, `sessionEpisode` lifecycle, the CLOSING boundary,
 visual ownership, Educational Brain, KG, curriculum, authored assets.
+
+---
+
+# PHASE 11 (2026-08-17) — D0b VALIDATION: **THRESHOLD NOT MET, NO ENFORCEMENT**
+
+Collection run only. **No code changed.** The Phase 10 threshold was not met and
+was not moved.
+
+## A. The sample
+
+Six fresh lessons, three physics and three chemistry, weak-beginner persona,
+14 turns each — `phys.mech.newtons-third-law`, `chem.bond.metallic-bonding`,
+`phys.mech.momentum`, `chem.period.periodic-properties`,
+`phys.em.electric-charge`, `chem.period.modern-periodic-law`. 84 chat turns plus
+6 openings.
+
+**It produced ZERO D0b turns.**
+
+Cumulative checked D0b evidence, all phases:
+
+| gate | required | actual | met |
+|---|---|---|---|
+| checked D0b turns | ≥20 | **2** | ✗ |
+| distinct lessons | ≥5 | **2** | ✗ |
+| both subjects | yes | physics + chemistry | ✓ |
+| violation rate | >50% | **100% (2/2)** | ✓ (on n=2) |
+
+| subject | lesson | D0b checked | violations |
+|---|---|---|---|
+| physics | `phys.mech.newtons-second-law` | 1 | 1 (`D0B_LENGTH_EXCEEDED`) |
+| chemistry | `chem.bond.covalent-bonding` | 1 | 1 (`D0B_QUESTION_PRESENT`) |
+
+**Two of four gates failed. Enforcement is NOT implemented.**
+
+## B. Why the sample could not be collected — and why that matters more
+
+D0b requires `visibleFailures >= 2`, and `visibleFailures` only increments on a
+signal carrying `correctness === false`. A correctness signal requires a graded
+assessment.
+
+**Only 3 of 84 turns attached an assessment (3.6%).** With almost no graded
+items, the affect budget was almost never charged, CLOSING was almost never
+entered, and D0b almost never fired. The same 14-turn persona that drove one
+Phase 8 lesson into 8 consecutive D0b turns produced none across six.
+
+Reaching 20 checked D0b turns would require deliberately manufacturing graded
+failures — which the brief explicitly forbids ("do not deliberately force
+pathological behaviour merely to increase the sample"), and which would produce
+a violation rate measured on traffic no real learner generates.
+
+## C. CORRECTION — Phase 8's D0b frequency was not representative
+
+Phase 8 measured D0b at **8 of 30 calls (26.7%)** and Phase 10 at 2 of 20. This
+run: **0 of 90**. Across all three, D0b is **10 of 140 assistant turns**, and 8
+of those 10 came from a single lesson that happened to bank two graded failures
+early.
+
+**D0b is a high-variance tail event, not a steady 27% of traffic.** Any ranking
+that treated 26.7% as a rate — including Phase 8 §F, already withdrawn on other
+grounds — was reading one lesson as a population. This is the second independent
+reason not to build anything for D0b.
+
+## D. What the evidence does and does not support
+
+**Supported:** when D0b fires, the close contract is violated. 2 of 2 checked
+turns, plus Phase 9's 8 unchecked turns showing the same pattern (7 with
+question marks, new scenarios introduced, teaching resumed after the close). The
+qualitative finding from Phase 9 stands and is not weakened.
+
+**Not supported:** a violation *rate* worth acting on, or a call volume worth
+enforcing against. n=2 is a demonstration, not a measurement of frequency.
+
+The Phase 10 design (discard the violating text, serve a deterministic
+session-close fallback, never a second provider call) remains the right design
+**if** the evidence ever justifies building it. It is written down in Phase 10
+§E and was not implemented.
+
+## E. One implementation note found while preparing, recorded for later
+
+`buildLessonCloseText` (`lessonCompletion.ts`) is the precedent a D0b fallback
+would follow — deterministic, localized through `t(lang, …)`, rendered from
+persisted evidence, and it **already replaces the model's outgoing text** on the
+lesson-finalising turn for exactly the reason D0b needs (a prompt instruction is
+advisory; a runtime value is not).
+
+It is **not reusable as-is**: it says the *lesson* is finished, and at D0b the
+lesson is not. A D0b fallback needs a session-close fragment, which does not
+exist in the i18n set today. That is a small additive piece of learner-facing
+text — worth noting, because Phase 10 §E assumed an existing fragment could be
+reused and no such fragment exists.
+
+## F. Next action
+
+**None on D0b.** Do not build the fallback on this evidence. If D0b is revisited,
+the trigger should be organic production traffic reaching the threshold, not
+another synthetic collection run — synthetic runs cannot generate graded
+failures at a realistic rate without manufacturing them.
+
+The higher-value open item remains **D0d**, which fired 10 times in this run
+alone (the single largest rule) and is still `NOT_MEASURABLE`. Its answer is
+unchanged from Phase 10: **B — improve detection first.** Not started.
+
+## G. Corrections preserved
+
+- Phase 8 §D — D0b "absorbing state": **WRONG** (Phase 9 §A).
+- D0b lifecycle: **CORRECT**; exits on the >30-minute inactivity boundary.
+- Phase 8 §F — D0b as #1 elimination target: **WITHDRAWN**, and now doubly so
+  (§C: the frequency was one lesson, not a rate).
+- Phase 7 §F/G — D8-LLM-FLOOR: **REFUTED** (0 calls in every run since).
+- Phase 6 — `confidence_failed` before `bbd7ef1`: **INVALID**.
+- Phase 5A vector framing: **REVERTED**.
+
+Nothing in the Moat-protected list was touched. No mathematics content was
+touched. No Phase 12 started.
