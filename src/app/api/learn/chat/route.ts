@@ -3162,6 +3162,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // nothing authored is available, which is an honest content gap rather
       // than a server-invented question.
       let gateMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+      // Phase 2: the deterministic lead-in for this turn, or null when the
+      // model must keep it. Non-null is the ONLY condition under which the
+      // provider call below is skipped for a gate turn.
+      let gateLeadInHoisted: string | null = null
       try {
         const { isMasteryGatePhase, probeToMcq, buildGateAssessmentBlock } =
           await import('@/lib/teaching/gateAssessment')
@@ -3194,7 +3198,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const converted = probe ? probeToMcq(probe) : null
           if (converted) {
             gateMcqHoisted = converted
+            // The block still goes in: if the deterministic renderer refuses
+            // below, the model serves this turn and needs its instruction.
             systemPrompt += buildGateAssessmentBlock(converted)
+            // Phase 2 — DETERMINISTIC LEAD-IN. The question, choices,
+            // correctIndex and grading are already server-owned by this point;
+            // the model's only remaining job is the sentence above the
+            // question. renderGateLeadIn writes it, or returns null and the
+            // model keeps the turn. It refuses whenever the turn is not purely
+            // a lead-in — an answer still to react to, a figure on screen, or
+            // a non-English lesson — so an assessment is never degraded to buy
+            // a saved call. See gateAssessmentRenderer.ts for each refusal.
+            try {
+              const { renderGateLeadIn } = await import('@/lib/teaching/gateAssessmentRenderer')
+              const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+              gateLeadInHoisted = renderGateLeadIn({
+                question: converted.question,
+                conceptTitle: resolvedConceptId ? (getKGNode(resolvedConceptId)?.title ?? null) : null,
+                teachingLanguage: teachingLang,
+                hasPendingAnswerToReactTo: mcqGradeHoisted !== null,
+                hasAttachedFigure: visualDecisionHoisted?.graphical === true,
+              })
+            } catch (err) {
+              // Rendering is an optimisation; the model path is the contract.
+              console.warn('[gate-assessment] deterministic lead-in skipped:', err)
+              gateLeadInHoisted = null
+            }
           }
           console.log('[gate-assessment] ' + JSON.stringify({
             phase: phaseBeforeTurn,
@@ -3556,6 +3585,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           ` memoryExactGradeMatch=${memoryExactGradeMatch}` +
           ` memoryFallbackUsed=${memoryFallbackUsed}` +
           ` memoryFallbackReason=${memoryFallbackReasonCode}`
+        )
+      } else if (!serveLessonComplete && gateLeadInHoisted && gateMcqHoisted) {
+        // PHASE 2 — SERVER-RENDERED GATE ASSESSMENT. Zero provider calls.
+        //
+        // Everything the learner is graded on was already decided before this
+        // branch: `gateMcqHoisted` IS the authored probe, already converted and
+        // already refused if it was not unambiguously gradeable. It is attached
+        // to the turn further down by the same `mcqHoisted = gateMcqHoisted ??
+        // mcqParse.mcq` line the model path uses, so the question, the choices,
+        // their order, the correctIndex, `gradeMcqAnswer`, the evidence write
+        // and the ladder transition are byte-for-byte the model path's.
+        //
+        // The ONLY difference is which sentence sits above the question.
+        text = gateLeadInHoisted
+        provider = 'gate'
+        try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
+        console.log(
+          '[learn/chat] RESPONSE provider=gate' +
+          ` resolvedConceptId=${resolvedConceptId ?? 'unknown'}` +
+          ` subject=${learnSession.subject.slug}` +
+          ` source=GateAssessmentRenderer` +
+          ` groq_invoked=false` +
+          ` chars=${text.length}`
         )
       } else if (!serveLessonComplete) {
         // P13: a completed lesson was already answered from persisted
@@ -3929,7 +3981,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // after which findBestExplanation() serves that boilerplate to every
       // matching learner forever — turning a transient outage into permanent
       // repetition that no state-machine fix can reach.
-      if (memoryState && !assembled) {
+      // Phase 2 adds a SECOND non-generated provider, and it lands in exactly
+      // the trap described above: a gate turn has a memoryState by
+      // construction, so without this the fixed six-word lead-in template
+      // would be decomposed and written as a DRAFT core_explanation, and
+      // approving one would make that template the ACTIVE asset served to
+      // every matching learner forever. `provider === 'gate'` is server-
+      // rendered text, not a generation, and there is nothing to capture.
+      if (memoryState && !assembled && provider !== 'gate') {
         const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
         if (!isDegradedProvider(provider)) {
           void ingestGeneratedLesson({
@@ -4135,12 +4194,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Now it skips verification only when the served text genuinely IS the
       // curated asset — the same condition the serve site uses.
       const servedFromMemory = !serveLessonComplete && assembled !== null && serveFromMemory
+      // Phase 2: a server-rendered gate lead-in is in the SAME class as a
+      // curated asset — it is not model output, so there is nothing for an
+      // output verifier to catch. Running it anyway would be worse than
+      // pointless: the verifier's remedy is `rerender`, which calls a provider,
+      // so verifying server-authored text would spend the very call this path
+      // exists to save AND could replace the authored framing with generated
+      // text. Same condition as the serve site, exactly as `servedFromMemory`
+      // above mirrors its own.
+      const servedByGateRenderer = provider === 'gate'
+      const servedDeterministically = servedFromMemory || servedByGateRenderer
       console.log('[affirm-guard-entry]', {
         assembled: assembled !== null,
         servedFromMemory,
-        willVerify: !servedFromMemory,
+        servedByGateRenderer,
+        willVerify: !servedDeterministically,
       })
-      if (!servedFromMemory) {
+      if (!servedDeterministically) {
         try {
           const { readEosFlags, buildVerifierContext, verifierGate } = await import('@/lib/eos-runtime')
           const eosFlags = readEosFlags()
@@ -4923,7 +4993,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         recordCompliance(complianceResult)
 
         const explanationMemoryAvailable = assembled !== null
-        const llmUsed = provider !== 'memory'
+        // Phase 2: 'gate' is server-rendered, so it is no more "LLM used" than
+        // 'memory' is. Reporting it as an LLM turn would make the dependency
+        // metric this whole programme is measured by count its own saving as a
+        // cost.
+        const llmUsed = provider !== 'memory' && provider !== 'gate'
         recordBrainEvent({
           version: 1,
           timestamp: new Date().toISOString(),

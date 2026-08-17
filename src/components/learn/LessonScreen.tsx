@@ -4626,8 +4626,14 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             succeeded — human-reviewed content, never
                             AI-generated for this turn), otherwise the real
                             LLM driver id (groq/yandex/fallback). */}
-                        {msg.provider === 'memory' && <MemoryBadge />}
-                        {msg.provider && msg.provider !== 'memory' && (
+                        {/* 'gate' is a server-rendered assessment lead-in above
+                            an authored, human-reviewed probe. It is NOT model
+                            output, so it must never mount AiBadge — that badge
+                            states "AI Generated / Reason: AI fallback used",
+                            which would be a false provenance claim shown to the
+                            learner. It belongs with 'memory'. */}
+                        {(msg.provider === 'memory' || msg.provider === 'gate') && <MemoryBadge />}
+                        {msg.provider && msg.provider !== 'memory' && msg.provider !== 'gate' && (
                           <AiBadge provider={msg.provider} />
                         )}
                       </div>
