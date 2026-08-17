@@ -3875,30 +3875,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // counters still drive the ladder. Measured on the 2026-08-17 turn:
       // `correctAtCheck 1` with `verifiedCorrectAtCheck 0`. Detection without
       // suppression does not hold the gate, which is why this exists.
-      // ── TEMPORARY DIAGNOSTIC — REMOVE AFTER THE NEGATIVE CONTROL RUNS ──
-      // Log-only. Runs on EVERY turn, including turns where the model claims
-      // nothing, because the open question is precisely how often the
-      // dangerous SHAPE occurs versus how often correctness is claimed on it.
-      // Reads no new data, writes nothing, changes no branch.
-      try {
-        const { askedAnswerableQuestion } = await import('@/lib/teaching/answerableTurn')
-        const { hasProseMultipleChoice } = await import('@/lib/teaching/proseMcqGuard')
-        const prior = learnSession.messages.find((m: { role: string }) => m.role === MessageRole.ASSISTANT)
-        const priorText = prior ? ((prior as { content?: string }).content ?? '') : ''
-        console.log('[answerable-diag]', {
-          session: learnSession.id,
-          concept: conversationStateHoisted?.conceptId ?? null,
-          phase: conversationStateHoisted?.phase ?? null,
-          learner: message.slice(0, 30),
-          claimed: teachingSignal?.correctness ?? null,
-          answerable: askedAnswerableQuestion(priorText),
-          proseMcq: hasProseMultipleChoice(priorText),
-          structuredMcq: Boolean(pendingMcqHoisted),
-          priorTail: priorText.slice(-90).replace(/\s+/g, ' '),
-        })
-      } catch { /* diagnostic only */ }
-      // ── END TEMPORARY DIAGNOSTIC ───────────────────────────────────────
-
       if (teachingSignal && teachingSignal.correctness !== undefined) {
         try {
           const { shouldSuppressSignalCorrectness } = await import('@/lib/teaching/answerableTurn')
