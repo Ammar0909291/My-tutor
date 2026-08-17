@@ -1547,3 +1547,73 @@ and no server-side key to audit. That content is ephemeral, never enters
 `probe_assets`, and is invisible to this sweep by construction. It is a
 different risk from authored-key correctness and is recorded here as such, not
 fixed.
+
+---
+
+## Final Physics + Chemistry gate + LLM-usage measurement (2026-08-17)
+
+### S6 rendered-browser: INFRASTRUCTURE BLOCKED (one test, not retried)
+`playwright screenshot https://example.com` produces no file in this sandbox.
+Recorded as blocked; no Physics/Chemistry browser smoke test was performed and
+none is claimed.
+
+### LLM usage — measured from production runtime logs, not estimated
+
+Window: 2026-08-17, deployments `dpl_2FgxrWWQYvgeRVTZXyXiyYKp93Sv` and
+`dpl_Edumz2NRffwQ2QQy6vDMWbztTA3E`. **23 tutor turns** (`POST /api/learn/chat`),
+parsed per request block by counting `[ai/attempt]` lines.
+
+| model calls in the turn | turns | share |
+| --- | --- | --- |
+| 0 | 3 | 13.0 % |
+| 1 | 18 | 78.3 % |
+| 2 | 1 | 4.3 % |
+| 3 | 1 | 4.3 % |
+
+Total model calls 23; **average 1.00 per turn; maximum observed 3**;
+**87.0 % of tutor turns required at least one LLM call**. All 23 outcomes `ok`
+— no retries, no failovers (gemini-only mode).
+
+Calls by purpose, separated by prompt size (the main teaching call carries
+~8–10k prompt tokens; auxiliaries ~0.9k):
+
+| purpose | calls | share of all calls |
+| --- | --- | --- |
+| main teaching turn | 20 | 87.0 % |
+| visual generation + critic | 3 | 13.0 % |
+| retries / failovers | 0 | 0 % |
+| background / shadow | 0 | 0 % |
+
+The CUE decision layer runs in `shadow: true` and makes **no** model call —
+counted as 0, as the logs show, not assumed. `/api/learn/lesson-init` makes one
+additional call per lesson start (3 in this window); it is a user-facing turn
+but not a chat turn, and is excluded from the per-turn figures above.
+
+### Why the LLM is called even though coverage is 238/238 and 186/186
+
+Fallback reasons recorded on the non-serving turns:
+
+| reason | occurrences |
+| --- | --- |
+| `confidence_failed` | 12 |
+| `brain_decision` | 8 |
+| `grade_band` | 3 |
+
+`explanationMemoryAvailable: false` on 12 of 23 turns and
+`explanationMemoryHit: true` on only 3 (`D1-MEMORY-HIT` ×3 — the same 3
+zero-LLM turns). **Concept coverage is not the constraint.** Assets are keyed
+`(concept, family, language, gradeBand)` and a concept carries only one or two
+explanation variants, while a lesson needs many turn KINDS — opening, analogy,
+recovery, transition, close. Escalations under `D0d-SESSION-OPENING-PROTOCOL`
+and `D0b-CLOSING-PROTECT` are the Brain choosing to generate, not a missing
+asset.
+
+Also observed, flagged not diagnosed: `[gate-assessment]` shows `probeFound`
+true on all 16 logged occurrences but `converted` **false on 7 of 16**.
+
+### Sample-size limitation — stated, not glossed
+
+23 tutor turns from ONE synthetic learner profile (my own driven sessions).
+There is **no organic learner traffic** in the window. This measures the code
+path faithfully; it is **not** a reliable population percentage for real
+learners, whose mix of question-asking and answering would shift the ratio.
