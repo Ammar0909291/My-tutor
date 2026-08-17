@@ -705,3 +705,143 @@ evidence. The recorded next candidate is the memory path: 4 turns chose
 `answersPendingQuestion` blocked deterministic serving. Do NOT relax that
 condition without its own authorization — it is load-bearing, and it is the
 reaction the learner earned by answering.
+
+
+---
+
+# LIVE VERIFICATION + VISUAL/PROVENANCE AUDIT (2026-08-17, post-Phase-3)
+
+Run on the owner's account by explicit instruction after the dedicated test
+account was requested twice and not supplied. Recorded because it writes real
+learner state: the run completed `phys.meas.vector-addition` and added ~60
+turns of history.
+
+## A. Phase 3 IS VERIFIED EFFECTIVE (MEASURED)
+
+Gate evaluations, from production logs on the serving deployment:
+
+| | before Phase 3 | after Phase 3 |
+|---|---|---|
+| evaluations | 28 | 14 |
+| probe found | 9 | 7 |
+| **converted to MCQ** | **2 (22%)** | **7 (100%)** |
+| `converted:false` (the defect) | **7** | **0** |
+| deterministic gate turns (`provider='gate'`) | 0 | **0** |
+
+**The defect class is eliminated.** Every probe the gate selected post-fix was
+convertible; the `short_answer`-with-no-choices selection cannot recur.
+
+`phys.meas.vector-addition` was a fair test: 8 ACTIVE probes — 6 convertible
+(4 mcq + 2 misconception_probe) and **2 short_answer with 0 convertible**, i.e.
+exactly the shape that produced the original defect.
+
+## B. Phase 2 STILL NEVER FIRES — the blocker moved one stage
+
+```
+gate eligible → probe found → probeToMcq OK → renderer → provider=gate
+                    ▲              ▲             ▲
+              7 of 14 fail    FIXED (100%)   ALL 7 refused
+```
+
+All 7 convertible probes were refused by the renderer. Every one arrived on a
+turn where the learner had just answered an MCQ, so refusal rule 1
+(`answersPendingQuestion`) fired — as predicted when Phase 2 shipped.
+
+**This is now the single blocking condition, and it is a teaching-quality
+decision, not a bug.** The learner earned a reaction by answering; a lead-in
+alone would drop it.
+
+## C. Measured turn distribution (post-Phase-3 window)
+
+| executor | decision | fallback | provider | turns | calls |
+|---|---|---|---|---|---|
+| LESSON_COMPLETE | SERVE_LESSON_COMPLETE | lesson_complete | memory | 38 | 2 |
+| LLM_OPEN | ESCALATE_TO_LLM | brain_decision | gemini | 2 | 2 |
+| LLM_OPEN | ESCALATE_TO_LLM | confidence_failed | gemini | 1 | 1 |
+| LLM_RENDERER | DETECT_MISCONCEPTION | brain_decision | gemini | 1 | 1 |
+| LLM_RENDERER | PRACTICE | confidence_failed | gemini | 1 | 1 |
+
+Raw: 43 turns, 7 calls (16.3%).
+**Genuine teaching turns (LESSON_COMPLETE excluded): 5 turns, 5 calls, 100% LLM.**
+`provider='gate'`: 0. Calls eliminated by Phase 2: **0**. By Phase 3: **0**
+(it unblocked conversion, which cannot save a call until the renderer fires).
+
+## D. Visual audit — `phys.meas.vector-addition`
+
+Traced the real turn (11:42:45, `visualSession` = renderer `scene`,
+representation `vector`, conceptId bound).
+
+Provenance, established from production, not assumed:
+- ACTIVE VISUAL assets for the concept: **0**
+- `visual_generation_outcome` rows: **0**
+- `visualization_cache` rows: **0**
+- Registry binding EXISTS: `visualRegistry.ts:146` →
+  `three_vector_visualization`, `sceneGenerator: 'vector'`
+
+**Classification: B — deterministic visual.** Not AI-generated, not
+AI-selected, not cached, not an approved asset. A curated registry binding
+rendered by a pure function.
+
+**Physics correctness: PASS.** `computeGeometry` in
+`sceneGenerators/vectorAddition.ts` is a pure function computing
+`ax=|A|cos θ, ay=|A|sin θ`, `r = a + b` componentwise, `|R| = hypot(rx,ry)`,
+direction `atan2(ry,rx)`, tip-to-tail drawn from A's tip to R's tip, with a
+single uniform scale so relative magnitudes and all directions are preserved.
+For A=3@0°, B=4@90° → R=(3,4), |R|=5, 53.13°. Labels carry magnitude AND
+angle (`A (3 at 0°)`), a deliberate fix for a measured 2026-08-14 defect where
+the tutor narrated the vectors swapped.
+
+**Display: the reported "too small" is a REAL and SEPARATE defect —
+CORRECT CONTENT / DISPLAY DEFECT.**
+
+Container (`ThreeDVisual.tsx`): `width:100%`, `aspectRatio 4/3`,
+`minHeight 260`, `maxHeight min(520px, 60vh)` — reasonable.
+Camera: `cameraDistance = VISUAL_MAX * 2.5 = 45`, `fov 50°`.
+
+Visible frame height at that distance ≈ `2 × 45 × tan(25°) ≈ 42` world units,
+while the scene scales its LARGEST vector to `VISUAL_MAX = 18`. For the 3-4-5
+case the drawn content spans about `10.8 × 14.4` units and sits entirely in the
+**+x+y quadrant**, because every vector starts at the origin and the origin is
+the centre of the view.
+
+So the figure occupies roughly **a third of the frame height, pushed into one
+quadrant, with the opposite three-quarters empty**. That is the "too small"
+the learner saw. It is camera framing, not container size, and not physics.
+
+FIX NOT IMPLEMENTED (audit only). The correct change is to frame the camera on
+the scene's actual bounding box rather than a fixed multiple of `VISUAL_MAX` —
+`cameraDistance` should follow content extent, and the content should be
+centred on its bounds.
+
+## E. AI / Brain provenance audit
+
+| execution path | provider | badge shown | correct? |
+|---|---|---|---|
+| LLM generated the turn | gemini/groq/yandex | AiBadge "AI Generated" | ✅ |
+| Explanation Memory served | memory | MemoryBadge (Brain) | ✅ |
+| Lesson-complete from evidence | memory | MemoryBadge (Brain) | ⚠️ see below |
+| Deterministic gate render | gate | MemoryBadge (Brain) | ✅ (Phase 2) |
+
+**DEFECT CONFIRMED, previously reported and still present:** `provider='memory'`
+is recorded on turns that DID spend a provider call — 2 such turns in the
+earlier run, 2 more in this one. Those learners saw the Brain badge on a turn
+an LLM generated. The badge is driven by `provider`, and `provider` is not a
+faithful record of the execution path.
+
+`llmCallCount` is the trustworthy field and already proves the mismatch. The
+correct rule is **badge from `llmCallCount === 0`, not from `provider`** — a
+turn that spent a call is an AI turn regardless of which label the serving
+branch wrote. NOT CHANGED in this audit.
+
+## F. Diagram — gate pipeline, post-Phase-3 (MEASURED)
+
+```mermaid
+flowchart TD
+  G["Gate eligible · 14 evaluations"] --> P{"probe found?"}
+  P -->|"no · 7"| L1["LLM fallback"]
+  P -->|"yes · 7"| C{"probeToMcq converts?"}
+  C -->|"BEFORE Phase 3: 2 of 9"| X["7 rejected → LLM"]
+  C -->|"AFTER Phase 3: 7 of 7 · 100%"| R{"renderer refusals"}
+  R -->|"answersPendingQuestion · 7 of 7"| L2["LLM fallback"]
+  R -->|"clear · 0"| D["provider=gate · 0 calls"]
+```
