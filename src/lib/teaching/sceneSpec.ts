@@ -92,6 +92,20 @@ export interface SceneSpec {
   teachingGoal?: string
   /** Forwarded to ThreeDVisual (defaults applied by the renderer). */
   cameraDistance?: number
+  /**
+   * Optional point the camera looks at, in scene coordinates.
+   *
+   * PRESENTATION ONLY, and additive: omitted means the origin, which is what
+   * every scene did before this existed, so no generator changes behaviour by
+   * default. It exists because a scene whose content legitimately sits off
+   * the origin — vectors all drawn FROM the origin, so the drawing occupies
+   * one quadrant — was framed around a point at the corner of its own
+   * content, leaving most of the viewport empty. Moving the CAMERA fixes that
+   * without moving the geometry, which matters: `checkVectorConsistency`
+   * verifies the physics against absolute tip positions, so the spec's
+   * coordinates must stay exactly as the generator computed them.
+   */
+  cameraTarget?: [number, number, number]
   ariaLabel?: string
   steps: SceneStep[]
 }

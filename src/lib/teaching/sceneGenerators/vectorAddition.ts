@@ -117,18 +117,64 @@ function angleLabel(deg: number): string {
   return `${d}°`
 }
 
+/**
+ * FRAME THE CAMERA ON WHAT IS ACTUALLY DRAWN.
+ *
+ * MEASURED DEFECT (production, 2026-08-17, `phys.meas.vector-addition`): the
+ * learner reported the diagram was too small. It was, and the geometry was
+ * not at fault. Every vector is drawn FROM the origin, so the whole figure
+ * lives in ONE quadrant, while the camera sat at a fixed `VISUAL_MAX * 2.5`
+ * and looked at the origin — i.e. at the CORNER of the content. For the 3-4-5
+ * case the frame showed ~42 world units of height while the drawing spanned
+ * ~14, so the figure filled about a third of the viewport and was pushed into
+ * the top-right, with the opposite three-quarters empty.
+ *
+ * The fix is presentation-only and stays inside this generator: aim the camera
+ * at the CENTRE of the content's bounding box, and pull it only as far back as
+ * that box actually needs. The scene's coordinates are NOT moved —
+ * `checkVectorConsistency` verifies the physics against absolute tip
+ * positions (`R == A + B`, magnitude from the origin), and translating the
+ * geometry would break that safety net for a cosmetic gain.
+ */
+function frameCamera(points: ReadonlyArray<Vec3>): { distance: number; target: [number, number, number] } {
+  const xs = points.map((p) => p[0])
+  const ys = points.map((p) => p[1])
+  const minX = Math.min(...xs), maxX = Math.max(...xs)
+  const minY = Math.min(...ys), maxY = Math.max(...ys)
+  const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2
+  // Half-extents measured FROM THE CENTRE, which is what the camera now aims at.
+  const halfW = Math.max((maxX - minX) / 2, 1e-6)
+  const halfH = Math.max((maxY - minY) / 2, 1e-6)
+  // The container is 4/3, and fov 50 is VERTICAL, so the width test divides by
+  // the aspect. MARGIN leaves room for the labels, which are placed outside
+  // the arrow tips and would otherwise be the first thing clipped.
+  const MARGIN = 1.45
+  const ASPECT = 4 / 3
+  const halfFov = (50 * Math.PI) / 180 / 2
+  const dForHeight = (halfH * MARGIN) / Math.tan(halfFov)
+  const dForWidth = (halfW * MARGIN) / (Math.tan(halfFov) * ASPECT)
+  // Floor keeps a degenerate scene (both vectors ~zero) from putting the
+  // camera inside the geometry.
+  const distance = Math.max(dForHeight, dForWidth, VISUAL_MAX * 0.6)
+  return { distance: round(distance, 2), target: [round(cx), round(cy), 0] }
+}
+
 /** Build a vector-addition SceneSpec. Pure, deterministic. */
 export function buildVectorScene(params: VectorParams): SceneSpec {
   const geo = computeGeometry(params)
   const aLabel = `A (${params.aMag} at ${angleLabel(params.aAngleDeg)})`
   const bLabel = `B (${params.bMag} at ${angleLabel(params.bAngleDeg)})`
   const rLabel = `R (${round(geo.resultantMag, 2)} at ${angleLabel(geo.resultantAngleDeg)})`
+  // Every point the scene actually draws, including the origin marker and the
+  // moved-B segment, so nothing can fall outside the frame.
+  const camera = frameCamera([[0, 0, 0], geo.aTip, geo.bTip, geo.rTip, geo.bTailFrom, geo.bTailTo])
   return {
     id: `vector-${params.aMag}@${params.aAngleDeg}-${params.bMag}@${params.bAngleDeg}`,
     title: `Vector Addition: |R| ≈ ${round(geo.resultantMag, 2)} at ${round(geo.resultantAngleDeg, 1)}°`,
     sceneType: 'diagram',
     teachingGoal: 'Show that two vectors add tip-to-tail (parallelogram law) to give a resultant R = A + B.',
-    cameraDistance: VISUAL_MAX * 2.5,
+    cameraDistance: camera.distance,
+    cameraTarget: camera.target,
     ariaLabel: `Vector A of magnitude ${params.aMag} at ${angleLabel(params.aAngleDeg)} and vector B of magnitude ${params.bMag} at ${angleLabel(params.bAngleDeg)}, adding tip-to-tail to a resultant of magnitude ${round(geo.resultantMag, 2)} at ${angleLabel(geo.resultantAngleDeg)}.`,
     steps: [
       {
