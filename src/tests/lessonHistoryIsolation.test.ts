@@ -165,17 +165,25 @@ describe('write side: /api/learn/lesson-init stamps the opening message', () => 
     expect(SRC).toMatch(/const openingLessonKey = lessonKeyFor\(\{ topicSlug, lessonOrder \}\)/)
   })
 
-  it('the create call includes the stamp', () => {
-    const createIdx = SRC.indexOf('await prisma.message.create({\n      data: {\n        sessionId, role: MessageRole.ASSISTANT')
-    const block = SRC.slice(createIdx, createIdx + 300)
-    expect(block).toContain('...(openingLessonKey ? { lessonKey: openingLessonKey } : {})')
+  it('EVERY create call includes the stamp', () => {
+    // The route now has two writes — the instrumented one and the fail-open
+    // retry that drops telemetry if a column is missing. Losing the stamp on
+    // the retry would break per-lesson history isolation, which is real
+    // learner-facing behaviour rather than telemetry, so BOTH must carry it.
+    // Matched structurally rather than by exact indentation: the writes are
+    // nested inside try/catch and their leading whitespace is not the contract.
+    const creates = SRC.match(/prisma\.message\.create\(\{[\s\S]{0,400}?\n\s*\}\)/g) ?? []
+    expect(creates.length).toBeGreaterThanOrEqual(1)
+    for (const block of creates) {
+      expect(block).toContain('lessonKey: openingLessonKey')
+    }
   })
 
-  it('the stamp is computed before the write it feeds', () => {
+  it('the stamp is computed before every write it feeds', () => {
     const stampIdx = SRC.indexOf('const openingLessonKey = lessonKeyFor(')
-    const writeIdx = SRC.indexOf('await prisma.message.create({\n      data: {\n        sessionId, role: MessageRole.ASSISTANT')
     expect(stampIdx).toBeGreaterThan(-1)
-    expect(writeIdx).toBeGreaterThan(stampIdx)
+    const firstWrite = SRC.indexOf('prisma.message.create({')
+    expect(firstWrite).toBeGreaterThan(stampIdx)
   })
 })
 

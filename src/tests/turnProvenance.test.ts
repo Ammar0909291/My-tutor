@@ -36,6 +36,9 @@ const SCREEN = REPO('src/components/learn/LessonScreen.tsx')
  */
 type Badge = 'brain' | 'ai' | 'none'
 function badgeFor(msg: { provider?: string; llmCallCount?: number }): Badge {
+  // A degraded turn spends an ATTEMPT but serves a template, so it is checked
+  // before the count — otherwise an outage would be labelled "AI Generated".
+  if (msg.provider === 'degraded') return 'brain'
   const spent = msg.llmCallCount
   if (typeof spent === 'number') return spent === 0 ? 'brain' : 'ai'
   if (msg.provider === 'memory' || msg.provider === 'gate') return 'brain'
@@ -67,7 +70,10 @@ describe('provenance matrix — the label must match what the turn spent', () =>
     expect(badgeFor({ provider: 'gemini', llmCallCount: 0 })).toBe('brain')
   })
 
-  it('a degraded outage template is not an AI turn — no model produced it', () => {
+  it('a degraded outage template is not an AI turn — even though it spent a call', () => {
+    // The real production shape: routeAI is attempted (count 1), the chain
+    // fails, and K6's template is served. The TEXT is not model output.
+    expect(badgeFor({ provider: 'degraded', llmCallCount: 1 })).toBe('brain')
     expect(badgeFor({ provider: 'degraded', llmCallCount: 0 })).toBe('brain')
   })
 

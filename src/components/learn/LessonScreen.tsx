@@ -4647,6 +4647,13 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           // label. Rows written before the column existed report
                           // undefined and keep the old provider-based rule, so
                           // history never loses its badge.
+                          // A DEGRADED turn is a template, not model output.
+                          // It spends a provider ATTEMPT (so llmCallCount is 1)
+                          // and then serves K6's content-free outage text, so
+                          // counting alone would label it "AI Generated" —
+                          // false in exactly the way this rule exists to
+                          // prevent. Checked before the count.
+                          if (msg.provider === 'degraded') return <MemoryBadge />
                           const spent = msg.llmCallCount
                           if (typeof spent === 'number') {
                             return spent === 0

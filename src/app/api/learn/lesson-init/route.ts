@@ -379,7 +379,21 @@ export async function POST(req: Request) {
     // opening is teaching-shaped rather than an error, and it is persisted
     // like any other assistant turn so the transcript stays coherent.
     let routed: { text: string; provider: string; finishReason: string | null }
+    // EXECUTION TELEMETRY — identical meaning to the chat route's counter.
+    //
+    // Counts PROVIDER CALLS ACTUALLY SPENT on this request, not "a provider
+    // exists" and not a boolean. Incremented BEFORE the await so a chain that
+    // throws still records the call it spent — the degraded path below serves
+    // a template, but the attempt was paid for.
+    //
+    // Why this route needed it: lesson-init persisted only
+    // {sessionId, role, content}, so every lesson opening was invisible to the
+    // Phase 1 instrumentation. At a measured 42 lesson starts per 682 assistant
+    // turns (~6.2%), any "% LLM-dependent" computed from `messages` was
+    // systematically under-counting by about that much.
+    let llmCallCount = 0
     try {
+      llmCallCount++
       routed = await routeAI(
         [...historyMessages, { role: 'user', content: instruction }],
         systemPrompt,
@@ -410,14 +424,36 @@ export async function POST(req: Request) {
     const openingLessonKey = lessonKeyFor({ topicSlug, lessonOrder })
 
     // Persist ONLY the assistant response
-    await prisma.message.create({
-      data: {
-        sessionId, role: MessageRole.ASSISTANT, content: routed.text,
-        ...(openingLessonKey ? { lessonKey: openingLessonKey } : {}),
-      },
-    })
+    // FAIL-OPEN, same rule as the chat route's assistant write: a lesson must
+    // never fail to start because of a telemetry column a deploy has not
+    // applied yet. The teaching is the point; the measurement is not worth a
+    // learner's lesson.
+    try {
+      await prisma.message.create({
+        data: {
+          sessionId, role: MessageRole.ASSISTANT, content: routed.text,
+          provider: routed.provider,
+          llmCallCount,
+          ...(openingLessonKey ? { lessonKey: openingLessonKey } : {}),
+        },
+      })
+    } catch (persistErr) {
+      console.error('[lesson-init] message.create with telemetry failed, retrying without it:', persistErr)
+      await prisma.message.create({
+        data: {
+          sessionId, role: MessageRole.ASSISTANT, content: routed.text,
+          ...(openingLessonKey ? { lessonKey: openingLessonKey } : {}),
+        },
+      })
+    }
 
-    return NextResponse.json({ success: true, text: routed.text, provider: routed.provider, activeLessonPersisted })
+    return NextResponse.json({
+      success: true, text: routed.text, provider: routed.provider,
+      // Shipped so the client badges the opening from what it SPENT, exactly
+      // as the chat route does — never from the provider string alone.
+      llmCallCount,
+      activeLessonPersisted,
+    })
   } catch (err: any) {
     console.error('[lesson-init]', err)
     return NextResponse.json({ success: false, error: err.message ?? 'Internal error' }, { status: 500 })

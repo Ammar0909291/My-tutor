@@ -80,7 +80,9 @@ describe('the retry policy the route actually ships', () => {
   it('reports the outcome to the client', () => {
     expect(SOURCE).toContain('activeLessonPersisted')
     // The flag must be in the success response, not only in a log line.
-    expect(SOURCE).toMatch(/success: true[^\n]*activeLessonPersisted/)
+    // The success payload is now multi-line (it also ships llmCallCount), so
+    // the outcome flag is matched across lines rather than on one.
+    expect(SOURCE).toMatch(/success: true[\s\S]{0,400}activeLessonPersisted/)
   })
 
   it('still cannot crash the lesson — the write stays inside a catch', () => {
