@@ -184,7 +184,9 @@ describe('route wiring — fewer LLM calls, nothing else changed (7,8,9,11,12)',
     // Without this the verifier's `rerender` would spend the very call this
     // path exists to save, and could overwrite the authored framing.
     expect(ROUTE).toContain("const servedByGateRenderer = provider === 'gate'")
-    expect(ROUTE).toContain('const servedDeterministically = servedFromMemory || servedByGateRenderer')
+    // Phase 4 added lesson-complete to the same exclusion; the gate term must
+    // still be present, which is what this guards.
+    expect(ROUTE).toContain('servedFromMemory || servedByGateRenderer')
     expect(ROUTE).toContain('if (!servedDeterministically) {')
   })
 
@@ -221,8 +223,12 @@ describe('route wiring — fewer LLM calls, nothing else changed (7,8,9,11,12)',
 
 describe('provenance is not misreported to the learner', () => {
   it("a server-rendered turn never mounts the 'AI Generated' badge", () => {
+    // Phase 4 replaced the provider-string rule with an execution-based one:
+    // the badge now derives from llmCallCount, and a gate turn spends 0 calls,
+    // so it still lands on MemoryBadge. The provider fallback survives for
+    // legacy rows written before the column existed.
     const screen = readFileSync(join(process.cwd(), 'src/components/learn/LessonScreen.tsx'), 'utf8')
-    expect(screen).toContain("(msg.provider === 'memory' || msg.provider === 'gate') && <MemoryBadge />")
-    expect(screen).toContain("msg.provider !== 'memory' && msg.provider !== 'gate'")
+    expect(screen).toContain('const spent = msg.llmCallCount')
+    expect(screen).toContain("if (msg.provider === 'memory' || msg.provider === 'gate') return <MemoryBadge />")
   })
 })

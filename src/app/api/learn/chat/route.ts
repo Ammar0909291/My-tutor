@@ -4211,11 +4211,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // text. Same condition as the serve site, exactly as `servedFromMemory`
       // above mirrors its own.
       const servedByGateRenderer = provider === 'gate'
-      const servedDeterministically = servedFromMemory || servedByGateRenderer
+      // MEASURED DEFECT (production, 2026-08-17): four turns recorded
+      // `provider='memory'` with `llmCallCount=1`, ALL of them
+      // `dispatchExecutor='LESSON_COMPLETE'`. `servedFromMemory` above begins
+      // `!serveLessonComplete && …`, so a completed-lesson turn is FALSE for it
+      // and therefore ran the output verifier — whose remedy is `rerender`,
+      // which calls a provider. The server-authored close text from
+      // `buildLessonCloseText` was replaced by model prose, and because the
+      // serve branch had already set `provider='memory'` the learner was shown
+      // the Brain badge on an LLM-written turn.
+      //
+      // A completed-lesson answer is built from persisted attempt evidence by
+      // a pure function. It is server-authored in exactly the sense the memory
+      // and gate paths are, so it belongs in the same exclusion: there is
+      // nothing for an output verifier to catch, and verifying it can only
+      // spend a call and overwrite the deterministic close.
+      const servedByLessonComplete = serveLessonComplete
+      const servedDeterministically =
+        servedFromMemory || servedByGateRenderer || servedByLessonComplete
       console.log('[affirm-guard-entry]', {
         assembled: assembled !== null,
         servedFromMemory,
         servedByGateRenderer,
+        servedByLessonComplete,
         willVerify: !servedDeterministically,
       })
       if (!servedDeterministically) {
@@ -6194,6 +6212,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       return NextResponse.json({
         success: true, text: cleanText, provider,
+        // PROVENANCE SOURCE OF TRUTH. `provider` names the serving branch
+        // and has been measured lying: four LESSON_COMPLETE turns carried
+        // 'memory' while an LLM had re-rendered them. The client must badge
+        // from what the turn actually SPENT, so the count ships with it.
+        llmCallCount,
         // P0 (Explanation Memory serving metadata — observability only).
         // `provider` above is unchanged and remains the stable field
         // (memory/groq/yandex/fallback); these describe HOW/WHY, never a

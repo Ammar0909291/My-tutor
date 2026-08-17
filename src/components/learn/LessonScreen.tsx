@@ -740,7 +740,7 @@ function HintCard({ hint }: { hint: string }) {
 }
 
 // ─── Types ────────────────────────────────────────────────────────────────────
-type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
+type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; llmCallCount?: number; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string }
 type MicState = 'idle' | 'recording' | 'processing'
 type AttachedFile = { name: string; content: string; language: string }
 // Panel identity — still needed for desktop maximize/restore, even though
@@ -1136,14 +1136,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
-        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
+        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
           .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
             id: m.id,
             role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
-            provider: m.provider ?? undefined,
+            provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
           }))
         if (cancelled) return
         // All rows were internal bootstrap prompts (e.g. the only prior turn
@@ -1630,7 +1630,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; correctIndex?: number }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -1902,7 +1902,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // APPEND the reply instead of silently dropping it via a no-op map —
       // the tutor's answer must never vanish because of a state race.
       setMessages((p) => {
-        const landed = { content: full, streaming: false as const, provider, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
+        const landed = { content: full, streaming: false as const, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
         return p.some((m) => m.id === aid)
           ? p.map((m) => m.id === aid ? { ...m, ...landed } : m)
           : [...p, { id: aid, role: 'assistant' as const, ts: Date.now(), ...landed }]
@@ -1980,9 +1980,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // must never make the lesson opening vanish.
       setMessages((p) => p.some((m) => m.id === aid)
         ? p.map((m) => m.id === aid
-          ? { ...m, content: data.text as string, streaming: false, provider: data.provider }
+          ? { ...m, content: data.text as string, streaming: false, provider: data.provider, llmCallCount: data.llmCallCount }
           : m)
-        : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: false, provider: data.provider }])
+        : [...p, { id: aid, role: 'assistant' as const, content: data.text as string, ts: Date.now(), streaming: false, provider: data.provider, llmCallCount: data.llmCallCount }])
       // CompactLessonProgressBar reads masteryState.phase, which this
       // endpoint's response never carries (lesson-init is intentionally
       // minimal and skips the mastery-gate pipeline — see its own header
@@ -2431,14 +2431,14 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
-          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
+          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
             .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
             .map((m) => ({
               id: m.id,
               role: m.role === 'USER' ? 'user' as const : 'assistant' as const,
               content: m.content,
               ts: new Date(m.createdAt).getTime(),
-              provider: m.provider ?? undefined,
+              provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
             }))
           if (restored.length > 0) {
             const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, hist?.data?.visuals)
@@ -2452,7 +2452,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Fallback (history endpoint unavailable): restore the resumed active
       // session's own messages, exactly as before this feature.
       if (!restoredAny && data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
-        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null }>)
+        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
           .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
           .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
@@ -2460,7 +2460,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             role: m.role === 'USER' ? 'user' : 'assistant',
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
-            provider: m.provider ?? undefined,
+            provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
           }))
         const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, (data as { messageVisuals?: unknown }).messageVisuals)
         setMessages(withVisuals)
@@ -4632,10 +4632,31 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             states "AI Generated / Reason: AI fallback used",
                             which would be a false provenance claim shown to the
                             learner. It belongs with 'memory'. */}
-                        {(msg.provider === 'memory' || msg.provider === 'gate') && <MemoryBadge />}
-                        {msg.provider && msg.provider !== 'memory' && msg.provider !== 'gate' && (
-                          <AiBadge provider={msg.provider} />
-                        )}
+                        {(() => {
+                          // PROVENANCE FROM EXECUTION, NOT FROM THE LABEL.
+                          //
+                          // MEASURED (production, 2026-08-17): four turns carried
+                          // provider='memory' while llmCallCount=1 — LESSON_COMPLETE
+                          // turns whose deterministic close text had been re-rendered
+                          // by the output verifier. Those learners were shown the
+                          // Brain badge on an LLM-written turn, which is a false
+                          // provenance claim.
+                          //
+                          // llmCallCount is what the turn actually SPENT, so it
+                          // decides. `provider` still names WHICH model for the AI
+                          // label. Rows written before the column existed report
+                          // undefined and keep the old provider-based rule, so
+                          // history never loses its badge.
+                          const spent = msg.llmCallCount
+                          if (typeof spent === 'number') {
+                            return spent === 0
+                              ? <MemoryBadge />
+                              : <AiBadge provider={msg.provider ?? 'unknown'} />
+                          }
+                          if (msg.provider === 'memory' || msg.provider === 'gate') return <MemoryBadge />
+                          if (msg.provider) return <AiBadge provider={msg.provider} />
+                          return null
+                        })()}
                       </div>
                     )}
 

@@ -160,7 +160,11 @@ export async function GET(req: Request) {
       where,
       orderBy: [{ createdAt: 'desc' as const }, { id: 'desc' as const }],
       take: HISTORY_DISPLAY_LIMIT,
-      select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true, visualSession: true },
+      // llmCallCount is selected for PROVENANCE, not analytics: the badge must
+      // reflect what the turn actually spent, and `provider` has been measured
+      // reporting 'memory' on turns an LLM re-rendered. Without this column a
+      // restored transcript would keep showing the old, wrong badge forever.
+      select: { id: true, role: true, content: true, createdAt: true, sessionId: true, provider: true, llmCallCount: true, visualSession: true },
     }))
     const messages = raw.reverse().map(stripControlMarkup)
 
