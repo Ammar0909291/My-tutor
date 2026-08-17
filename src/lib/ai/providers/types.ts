@@ -16,7 +16,14 @@ export interface AICompletionResult {
   provider: string
   /** P10 — token counts AS REPORTED BY THE PROVIDER. Optional because not
    *  every provider returns them; absent means "not measured", never "zero". */
-  usage?: { promptTokens?: number; completionTokens?: number }
+  /**
+   * `cachedTokens` is the provider's own count of prompt tokens served from a
+   * context cache. Gemini reports it as `usageMetadata.cachedContentTokenCount`
+   * and bills those tokens at the cached-read rate rather than the input rate,
+   * so it is the ONLY trustworthy answer to "is caching actually happening" —
+   * architecture cannot answer it and token totals cannot either.
+   */
+  usage?: { promptTokens?: number; completionTokens?: number; cachedTokens?: number }
 }
 
 export interface AIProvider {

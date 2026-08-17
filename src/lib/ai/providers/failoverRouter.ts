@@ -86,6 +86,10 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
         finish_reason: result.finishReason,
         prompt_tokens: result.usage?.promptTokens ?? 'not_reported',
         completion_tokens: result.usage?.completionTokens ?? 'not_reported',
+        // 0 is a real, meaningful answer here (cache did not fire), so it must
+        // survive logAttempt's empty-value filter — hence the explicit String().
+        cached_tokens: result.usage?.cachedTokens != null
+          ? String(result.usage.cachedTokens) : 'not_reported',
         // Summed only when at least one half was reported, so an unreported
         // call reads 'not_reported' rather than a misleading 0.
         total_tokens: result.usage && (result.usage.promptTokens != null || result.usage.completionTokens != null)

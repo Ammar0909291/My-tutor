@@ -55,9 +55,16 @@ export function createGeminiProvider(apiKey: string, model: string): AIProvider 
 
       // P10: the SDK already reports this on every response; it was being
       // discarded, which is why no token or cost figure existed anywhere.
-      const um = (result.response as { usageMetadata?: { promptTokenCount?: number; candidatesTokenCount?: number } } | undefined)?.usageMetadata
+      // `cachedContentTokenCount` was also being discarded. Gemini 2.5+ has
+      // IMPLICIT caching on by default, so this field is the only evidence of
+      // whether it is firing — and those tokens bill at the cached-read rate.
+      const um = (result.response as { usageMetadata?: { promptTokenCount?: number; candidatesTokenCount?: number; cachedContentTokenCount?: number } } | undefined)?.usageMetadata
       const usage = um
-        ? { promptTokens: um.promptTokenCount, completionTokens: um.candidatesTokenCount }
+        ? {
+            promptTokens: um.promptTokenCount,
+            completionTokens: um.candidatesTokenCount,
+            cachedTokens: um.cachedContentTokenCount,
+          }
         : undefined
 
       return { text, finishReason, provider: 'gemini', usage }
