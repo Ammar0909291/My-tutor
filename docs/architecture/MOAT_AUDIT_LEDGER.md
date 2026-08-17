@@ -1314,3 +1314,98 @@ evaluating at the `turnsOnConcept` increment would have read a stale
 `consecutiveFailures: 0` and granted on a failing turn), the 12-vs-18 cap in
 both directions, and snapshot round-tripping with a no-migration default for
 states written before the field existed.
+
+---
+
+## S9 — answerable-turn evidence guard (authorized fix #1)
+
+Commit `a464889`, production deployment `dpl_Edumz2NRffwQ2QQy6vDMWbztTA3E`
+(READY, `target: production`, ref `main`).
+
+### Root cause — sharper than this ledger's first report
+
+The previous entry said "the no-question case is ungoverned". True, but
+incomplete, and the incomplete half mattered: **both existing layers ran, and
+neither was positioned to stop it.**
+
+- `proseMcqGuard` suppresses only when the prior turn IS a lettered options
+  list. The prior turn was an explanation, so it correctly did not match.
+- `signalVerification`'s `bare-content-at-advanced-phase` **DID fire** and
+  returned SUSPICIOUS. Measured in production on the stoichiometry snapshot:
+  `correctAtCheck 1` with **`verifiedCorrectAtCheck 0`**.
+
+That second measurement is the real finding. There are TWO counter families:
+`verifiedCorrect*` (withheld on SUSPICIOUS, drives completion authority) and
+`correct*` (drives phase transitions, `hasDemonstratedMastery`,
+`qualifiesForBudgetExtension` and the `topic_progress` write). The detector
+worked; it fed the counter nobody gates on. **Detection without suppression
+does not hold the gate** — which is why the fix had to suppress, and why
+raising SUSPICIOUS to blocking was NOT the chosen route (that would change
+ladder transitions and mastery thresholds, both out of scope).
+
+### Fix
+
+`src/lib/teaching/answerableTurn.ts` — with no structured MCQ pending,
+correctness is accepted ONLY when the preceding tutor turn posed an answerable
+question or task and was not a prose-only MCQ. Positive evidence is required,
+so an unrecognised question shape SUPPRESSES (costs one turn of unrecorded
+correctness) rather than accepts (writes false evidence permanently). One
+exported decision, `shouldSuppressSignalCorrectness()`, so the route is a thin
+call and the rule is testable without a database, a model or an HTTP turn.
+
+Confirmation questions are matched at the **tail**, not by keyword. The live
+sentence "so you're seeing HOW the mole ratio matches … — have I got that
+right?" embeds a wh-word inside a confirmation; a contains-a-wh-word rule
+accepts it. This was caught by the test suite, not by inspection.
+
+Suppression drops `correctness` only — `confidence`, `confusion` and
+`chosenPhrase` survive. Nothing is fabricated: a suppressed turn records no
+correctness, never a wrong answer. The ladder fold and both evidence writers
+are already gated on `correctness !== undefined`, so ONE suppression removes
+the write with no side effect and no second code path.
+
+Not changed: ladder transitions, mastery thresholds, the SUSPICIOUS/CLEAN
+contract, and the advisory prose-MCQ prompt directive.
+
+### Evidence states — kept separate deliberately
+
+| state | claim |
+| --- | --- |
+| repo-fixed | YES — 47 new tests, full suite 347 files / 7436 passed, tsc clean, build clean |
+| deployed | YES — `dpl_Edumz2NRffwQ2QQy6vDMWbztTA3E` READY on `a464889` |
+| production-verified | PARTIAL — see below |
+| live-verified (positive control) | YES |
+| live-verified (negative control) | **NO — the guard was never exercised** |
+| browser-verified | NO — Chromium unreachable in this sandbox |
+
+**LIVE POSITIVE CONTROL — PASS.** `phys.meas.unit-conversion` (physics lesson
+8), fresh session. Server-owned MCQ ("A road is 3 kilometres long. How many
+metres is that?", `correctIndex 0`), genuine answer "A" → `correctAtCheck`
+0 → 1, phase CHECK → PRACTICE, `topic_progress` 65 % marked by the learner's
+own "A" message. Server-owned grading is unchanged and the guard correctly
+short-circuits on a pending structured MCQ.
+
+**LIVE NEGATIVE CONTROL — NOT EXERCISED, and the reason matters.** Six
+acknowledgement turns were driven across two fresh concepts
+(`chem.found.concentration`, `phys.meas.unit-conversion`). The OUTCOME the
+control asserts did hold: `chem.found.concentration` finished with **no
+`topic_progress` row at all**, and on the physics row the two acknowledgements
+after the graded answer wrote nothing (marker still "A", `updatedAt` frozen at
+the graded turn). But `[ladder]` reports `signalTag: false, correctness: null`
+on **every** logged turn, and zero `[no-answerable-question]` markers appear in
+the runtime logs — **the model never claimed correctness, so the suppression
+branch was never entered.** The counters holding therefore proves the outcome,
+not the guard. Forcing the shape is not directly drivable: it needs the model
+to volunteer `correctness="true"` after a turn that asked nothing, which it did
+on the stoichiometry trace and did not reproduce here.
+
+One measurement deliberately NOT attributed: that physics row reads
+`attempts: 3` though this session graded one answer. The row was not verified
+empty beforehand (physics *lesson attempts* were checked, this
+`topic_progress` row was not), so the count includes writes predating this run
+and is not evidence of anything in this batch.
+
+Historical production rows from the earlier defect (`chem.found.stoichiometry`
+at 65 %, its `lesson:7` attempt still IN_PROGRESS) remain **unrepaired**, per
+the standing rule that repairing historical learner data needs explicit
+authorization.
