@@ -1125,3 +1125,208 @@ Implemented this phase: lesson-init telemetry (`23c9068`); the
 Not implemented: any elimination candidate. Phase 5A's vector camera fix stays
 reverted (`b90f798`) — it was falsified by browser measurement and the
 replacement was unverifiable in this environment.
+
+---
+
+# PHASE 7 (2026-08-17) — `brain_decision` AUDIT: WHICH DECISIONS COULD BE DETERMINISTIC
+
+Read-only audit. Nothing implemented. Every count below is a production query
+or a deduction from the source, never an estimate.
+
+**Correction to Phase 6 §G first.** That section said `brain_decision` means
+"the turn was never offered to Explanation Memory at all." That is wrong, and
+backwards. The label is set at `route.ts` only under
+`!serveFromMemory && assembled !== null && memoryFallbackReason === null` —
+`assembled !== null` is a REQUIRED term. `brain_decision` therefore means the
+opposite: **authored content was assembled and in hand, and the turn spent a
+provider call anyway.** That makes it the most interesting bucket in the
+dataset, not the least.
+
+## A. `brain_decision` is three different things (third label conflation)
+
+Joining the persisted plan to the persisted execution decomposes it exactly.
+`teachingDecision`/`dispatchExecutor` are the PLAN's; `llmCallCount` is the
+EXECUTION's, so the two can be compared:
+
+| teachingDecision | executor | turns | calls | what it really is |
+|---|---|---|---|---|
+| ESCALATE_TO_LLM | LLM_OPEN | 11 | 11 | the Brain genuinely chose the LLM |
+| SERVE_EXPLANATION_MEMORY | EXPLANATION_MEMORY | 5 | 5 | **plan said no provider; one was spent** |
+| DETECT_MISCONCEPTION | LLM_RENDERER | 1 | 1 | repair flow |
+
+The middle row is provable, not inferred. When the executor is
+`EXPLANATION_MEMORY` and `assembled !== null`, the only remaining term that can
+make `serveFromMemory` false is `answersPendingQuestion`. Those 5 turns are
+learners who had just answered an MCQ.
+
+**They are NOT waste and must not be "fixed".** `answersPendingQuestion` is
+load-bearing: a learner who just answered is owed feedback on THAT answer, and
+a stored explanation is the wrong move on that turn — the guard exists because
+production served a canned asset in reply to a tapped MCQ option. Serving them
+deterministically would require authored feedback keyed to each distractor,
+which is a content question, not a dispatch one.
+
+What IS wrong is the label. `answer_pending` deserves its own code, exactly as
+`already_served` now has one. Three labels have now been found conflated
+(`confidence_failed`, `brain_decision`, and `no_asset` as the mapping default);
+this is a recurring class, and the structural test added in `bbd7ef1` catches
+only the third of them.
+
+## B. The determinism test (derived from what already succeeded and failed)
+
+Phase 2 succeeded and Phase 4 was rejected, and the difference between them is
+the whole test:
+
+> **Does the turn's output have to contain something only THIS learner said on
+> THIS turn?**
+
+- Gate assessment: no. Question, choices, key and grading are all authored; only
+  a lead-in sentence was free text. → deterministic, shipped, fires in prod.
+- Misconception repair: yes. The protocol is elicit → commit → collide, and the
+  collision must contrast against the learner's own stated reasoning. → rejected.
+
+A second, independent gate: **does the corpus actually hold the artefact?**
+A decision can pass the first test and still be content-blocked.
+
+## C. Architectural finding: Phase 2 did not make a DECISION deterministic
+
+The gate renderer is keyed on `conversationState.phase` (`CHECK`/`PRACTICE`),
+computed **before** and **independently of** the dispatch plan. Proof from the
+run: both gate turns persisted `teachingDecision=ESCALATE_TO_LLM`,
+`dispatchExecutor=LLM_OPEN` — the plan said "open escalation, provider
+required" and the turn served deterministically anyway.
+
+So determinism currently arrives on an axis the dispatcher cannot see. Extending
+it is not "add more phases" — it is giving `LLM_RENDERER` decisions their own
+deterministic renderers, the way the gate has one, so `groqRequired` stops being
+a property of the executor name and starts being a property of what the turn can
+actually serve.
+
+## D. Corpus capability (production, phys + chem, ACTIVE only)
+
+| artefact | physics | chemistry |
+|---|---|---|
+| core_explanation | 238/238 concepts | 186/186 |
+| misconception_repair | 227/238 | 186/186 |
+| **MCQ-convertible probe (any difficulty)** | **238/238 (606 probes)** | **186/186 (372)** |
+| MCQ-convertible at ADVANCED | 38/238 (16%) | 75/186 (40%) |
+| MCQ-convertible at FOUNDATIONAL/DEVELOPING | 236/238 (99%) | 50/186 (27%) |
+| worked_example | 10/238 (4%) | **0** |
+| real_world_example | 2/238 | 0 |
+| VISUAL asset | 2/238 | 2/186 |
+
+Every concept in both subjects has at least one MCQ-convertible probe. That one
+fact is what makes the probe-shaped decisions viable and the prose-shaped ones
+not.
+
+## E. The eleven decision types, audited
+
+There are **eleven**, not twelve (`decisionEngine.ts:41`) — an earlier count in
+this document was wrong.
+
+| # | decision | executor today | own words needed? | corpus | verdict |
+|---|---|---|---|---|---|
+| 1 | SERVE_EXPLANATION_MEMORY | EXPLANATION_MEMORY | no | full | **already deterministic** |
+| 2 | SERVE_LESSON_COMPLETE | LESSON_COMPLETE | no | n/a | **already deterministic** |
+| 3 | ASK_DIAGNOSTIC_QUESTION | LLM_RENDERER | **no** | 100% MCQ | **CANDIDATE 1** |
+| 4 | REVIEW_PREREQUISITE | LLM_RENDERER | **no** | 100% expl. | **CANDIDATE 2** |
+| 5 | PRACTICE | LLM_RENDERER | **no** | 100% MCQ | **CANDIDATE 3** |
+| 6 | ADVANCE_DIFFICULTY | LLM_RENDERER | **no** | 16% phys | CANDIDATE 4 (content-blocked) |
+| 7 | VISUALIZATION | LLM_RENDERER | no | figure already resolved | CANDIDATE 5 |
+| 8 | CONTINUE_LESSON | LLM_RENDERER | **partly** | — | NOT a candidate |
+| 9 | TEACH_DIRECTLY | LLM_RENDERER | no | 4% phys, **0% chem** | blocked on CONTENT |
+| 10 | DETECT_MISCONCEPTION | LLM_RENDERER | **yes** | — | **REJECTED (Phase 4)** |
+| 11 | ESCALATE_TO_LLM | LLM_OPEN | **yes** (D4b) | — | irreducible, see §G |
+
+### Candidate 1 — ASK_DIAGNOSTIC_QUESTION (`D4-PLACEMENT-PROBE`)
+Output is a probe question. **Structurally identical to the mastery gate Phase 2
+already solved** — same artefact, same converter, same grader, same attach line.
+The only reason it is not already deterministic is that the gate is keyed on
+phase, and a placement probe is not a CHECK/PRACTICE phase. Corpus is 100%.
+This is the smallest genuine extension available: reuse `renderGateLeadIn` and
+`probeToMcq` unchanged, key the eligibility on the decision instead of the phase.
+
+### Candidate 2 — REVIEW_PREREQUISITE (`D3-PREREQ-REVIEW`)
+"Step back one KG edge and teach the prerequisite." That is
+`SERVE_EXPLANATION_MEMORY` **pointed at a different conceptId** — a path that
+already exists, already has an already-read guard, and has 100% corpus coverage
+for both subjects. The decision engine already computes the target
+(`u.prerequisiteTopic`, a KG id, `types.ts:139`). No new serving mechanism.
+Risk to check before building: the turn must say WHY it is stepping back, and
+the current `hasServedExplanation` guard is keyed per assetId, so a prerequisite
+already served earlier in the session correctly falls through to the model.
+
+### Candidate 3 — PRACTICE (`D5-FRAGILE-CONSOLIDATE`)
+Probe-shaped, 100% corpus. **Partly covered already**: `isMasteryGatePhase`
+includes the PRACTICE *phase*, so a PRACTICE decision that coincides with that
+phase can already be served. The gap is a PRACTICE decision at another phase.
+Measured: 2 turns / 2 calls, both `LLM_RENDERER`. Lower value than 1-2 because
+of the existing partial coverage.
+
+### Candidate 4 — ADVANCE_DIFFICULTY (`D6-MASTERY-ADVANCE`)
+Wants a harder item. The mechanism exists — probes carry `difficulty` and the
+matcher already scores `difficultyProximityBonus` against `targetDifficulty`.
+But `resolveTargetDifficulty` derives from experienceLevel + gradeBand, **not
+from demonstrated mastery**, so nothing currently raises the target. And the
+corpus is thin: only 38 of 238 physics concepts have an MCQ-convertible ADVANCED
+probe. Real, but content-blocked in physics.
+
+### Candidate 5 — VISUALIZATION (`D6-VISUAL-ON-REQUEST`)
+The rule only fires when the visual pipeline has ALREADY resolved a figure, so
+the artefact is deterministic before the model is called and the model writes
+only the sentence around it — the gate's exact shape. Blocked by an unrelated
+open item: generation is still disabled in production pending env vars, and
+`requestedVisualForm` (L3) means the framing sentence sometimes has to DECLARE a
+mismatch, which is not a fixed template. Defer until the visual engine's own
+open items close.
+
+### Not candidates
+- **CONTINUE_LESSON** — the next step is deterministic (lesson plan) but the
+  acknowledgement references the answer just given. Half-deterministic turns are
+  how the invisible-restart class of defect starts.
+- **TEACH_DIRECTLY** — passes the determinism test, fails the corpus test hard:
+  10 worked examples in physics, **zero in chemistry**. This is an authoring
+  request, not an engineering one.
+- **DETECT_MISCONCEPTION** — rejected in Phase 4 on protocol grounds; evidence
+  unchanged.
+
+## F. THE MEASUREMENT GAP THAT SHOULD CLOSE FIRST
+
+`decisionEngine` computes a `ruleId` for every decision (`D0`…`D9`) and it is
+logged — but it is **not persisted**. `messages` carries `teachingDecision` and
+not `ruleId`.
+
+That is exactly the wrong half to keep for this question. `ESCALATE_TO_LLM` is
+11 of the 17 `brain_decision` calls and it is reachable from seven different
+rules, which split into two groups that want opposite responses:
+
+- `D4b-ANSWER-STUDENT-FIRST` — the learner asked a question. **Irreducible.**
+  The answer must address what they said; no authored asset can.
+- `D8-LLM-FLOOR` — the explicit catch-all: no rule fired. **Every turn here is
+  a missing rule**, and each one is a candidate.
+
+Today those are indistinguishable in the data. One column (`ruleId`, additive,
+nullable, same shape as the four Phase 1 columns) turns the single largest
+remaining bucket from unattributable into a ranked list. **It should ship before
+any of Candidates 1-5**, because it may well re-rank them.
+
+## G. Ranked, with what each is worth
+
+Frequency here comes from 130 instrumented turns on ONE learner across driven
+runs — enough to prove mechanisms, **not** enough to rank by real-world
+frequency. That is the second reason `ruleId` comes first.
+
+1. **Persist `ruleId`** — measurement, not optimization. Unblocks the ranking.
+2. **ASK_DIAGNOSTIC_QUESTION** — reuses Phase 2 wholesale, 100% corpus.
+3. **REVIEW_PREREQUISITE** — reuses the memory path wholesale, 100% corpus.
+4. **PRACTICE** — same mechanism, partly covered already.
+5. **ADVANCE_DIFFICULTY** — needs a mastery-driven `targetDifficulty` and more
+   ADVANCED probes in physics.
+6. **VISUALIZATION** — wait for the visual engine's open items.
+
+Not on the list, deliberately: relaxing `answersPendingQuestion` (the 5 turns in
+§A), anything keyed on `confidence_failed` (invalid before `bbd7ef1`), and
+`TEACH_DIRECTLY` (an authoring request).
+
+**Nothing in this section is implemented.** Each item needs its own
+authorization.
