@@ -5192,6 +5192,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // so the distribution query is a plain GROUP BY with no join.
       const dependencyInstrumentation = {
         teachingDecision: dispatchPlanHoisted?.decision ?? null,
+        // Phase 8. Sourced from the DECISION, not from the dispatch plan,
+        // even though `planDispatch` copies it through and the two agree on
+        // every healthy turn. They diverge in exactly one case: an internal
+        // dispatcher failure returns a plan carrying `ruleId:'DISPATCH-ERROR'`
+        // — a dispatcher artefact, not a rule the engine ever produced.
+        // Reading the plan there would overwrite the real rule with a code
+        // that answers a different question, which is the value-collapsing
+        // this column exists to stop. The engine's own error path already has
+        // an honest rule of its own (`D9-ENGINE-ERROR`).
+        //
+        // Stored verbatim. No normalising, no remapping, no defaulting to a
+        // sibling code — the whole point is that D4b and D8 stay separable.
+        teachingRuleId: cueDecisionHoisted?.ruleId ?? null,
         dispatchExecutor: dispatchPlanHoisted?.executor ?? null,
         // 'none' is the initialised value and means the memory path never
         // reported a reason; stored as NULL rather than the string 'none' so
