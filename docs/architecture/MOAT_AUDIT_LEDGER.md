@@ -1693,3 +1693,75 @@ than leaving it alone.
 Per this campaign's own stop rule — "if the next optimization requires changing
 teaching behaviour, introducing a new content-authoring system, or altering
 evidence semantics, STOP and request authorization" — no code was changed.
+
+---
+
+## Implicit context caching — MEASURED, NOT FIRING (2026-08-17)
+
+`telemetry(ai)` commit `1bf5c28` captures `usageMetadata.cachedContentTokenCount`
+(previously discarded) and emits it as `cached_tokens` on `[ai/attempt]`.
+Telemetry only — no explicit caching, no prompt reordering, no content change.
+
+### Verified provider semantics (before coding)
+
+- Implicit caching is **on by default for all Gemini 2.5+ models**; nothing to
+  enable. Explicit caching would therefore be redundant AND would add a
+  storage bill implicit caching does not have ($1.00 / 1M tokens / hour).
+- **Minimum 4,096 tokens** for the Gemini 3.x family, implicit and explicit.
+- Cached read $0.15/1M vs input $1.50/1M (Gemini 3.5 Flash, standard tier).
+
+### The blocking structural fact
+
+`route.ts:487` initialises `systemPrompt` from `buildTutorSystemPrompt(...)`
+and every later block is `+=`. The contiguous invariant prefix is therefore
+exactly that base: **~2,058 real tokens — below the 4,096 minimum.**
+
+The earlier "~4,674 tokens (44%) static" figure is a SUM of static blocks
+scattered through the prompt, not a contiguous prefix. Caching matches a
+prefix, not a set. That distinction is the whole difference between
+"44% cacheable" and "not cacheable at all", and it was mine to draw earlier.
+
+### Live measurement — 6 consecutive turns, one lesson
+
+`chem.atomic.subatomic-particles` (chemistry lesson 10), deployment
+`dpl_8g3RZ1oFvwQHsSW7JZtAzGrHFeJB`.
+
+| turn | prompt | completion | cached |
+| --- | --- | --- | --- |
+| 1 | 10,474 | 75 | **not_reported** |
+| 2 | 10,381 | 269 | **not_reported** |
+| 3 | 10,381 | 180 | **not_reported** |
+| 4 | 10,305 | 65 | **not_reported** |
+| 5 | 10,167 | 280 | **not_reported** |
+| 6 | 9,894 | 63 | **not_reported** |
+
+6 calls / 6 turns = 1.00 calls per turn, 0 retries, 0 failovers.
+Total prompt 61,602 (avg 10,267); total completion 932 (avg 155).
+**Cached tokens: 0 on every call, including turn 6 after five identical-prefix
+predecessors.** `lesson-init` measured separately: prompt 3,703, completion 12,
+cached not_reported.
+
+`not_reported` means the API omitted `cachedContentTokenCount` entirely — no
+tokens were billed at the cached-read rate on any call.
+
+### Economic impact: ZERO
+
+Nothing was saved, because nothing was cached. At Gemini 3.5 Flash standard
+pricing a turn costs ≈ $0.0154 input + $0.0014 output ≈ **$0.0168**, all of
+the input at the full rate. Even if the invariant prefix DID cache, it would
+save 2,058 × $1.35/1M ≈ $0.0028 — about 17 % of input cost — and it cannot,
+being below the minimum.
+
+Flash-**Lite** pricing was not confirmed (the pricing page listed Flash); the
+absolute costs above may be lower, the ratios unchanged.
+
+### STOP
+
+Per the authorization's own stop condition, `cachedContentTokenCount` is zero,
+so this is reported and stopped. Prompt reordering — the only route to a
+≥4,096-token contiguous prefix — was NOT done and needs separate
+authorization, because it is a behaviour question, not a cost one.
+
+Incidental, not a defect: a previously unseen explanation-memory refusal
+reason appeared — `author-scaffolding — trap-label`, correctly refusing to
+serve an asset whose text contains an author-facing "Trap:" label.
