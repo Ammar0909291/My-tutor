@@ -177,7 +177,6 @@ export function SceneSpecRenderer({ spec, revealStep = Infinity }: SceneSpecRend
     <ThreeDVisual
       revealStep={revealStep}
       cameraDistance={spec.cameraDistance ?? 7}
-      cameraTarget={spec.cameraTarget}
       ariaLabel={spec.ariaLabel ?? spec.title}
       // A labelled teaching figure is a diagram, not a turntable. While the
       // camera orbits, every label's screen position orbits with it, so

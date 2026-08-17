@@ -20,8 +20,6 @@ interface ThreeDVisualProps {
   ariaLabel: string
   /** Camera distance from origin. */
   cameraDistance?: number
-  /** Point the camera looks at. Defaults to the origin — prior behaviour. */
-  cameraTarget?: [number, number, number]
   /** Allow user orbit/zoom/pan (default true; disabled automatically under reduced motion is NOT assumed — rotation auto-spin is what reduced motion disables). */
   enableControls?: boolean
   /**
@@ -50,7 +48,6 @@ export function ThreeDVisual({
   children,
   ariaLabel,
   cameraDistance = 6,
-  cameraTarget,
   enableControls = true,
   autoRotate = true,
 }: ThreeDVisualProps) {
@@ -78,9 +75,7 @@ export function ThreeDVisual({
     >
       <Canvas
         dpr={[1, 2]}
-        // Offset by the target so the framed point sits at screen centre.
-        // Undefined target keeps [0,0,d] exactly as before.
-        camera={{ position: [cameraTarget?.[0] ?? 0, cameraTarget?.[1] ?? 0, cameraDistance], fov: 50 }}
+        camera={{ position: [0, 0, cameraDistance], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
         // The container's height depends on aspect-ratio and viewport terms
         // that settle after first paint; without an explicit resize observer
@@ -100,7 +95,6 @@ export function ThreeDVisual({
             // part they were looking at back into frame. Zoom without pan is a
             // trap; both are enabled together.
             enablePan
-            target={cameraTarget ?? [0, 0, 0]}
             autoRotate={autoRotate && !reducedMotion}
             autoRotateSpeed={0.6}
             minDistance={cameraDistance * 0.5}
