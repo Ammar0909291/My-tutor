@@ -3194,6 +3194,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // dry is the COMMON case, not the edge case — and running dry must
             // hand the turn back to the model, not repeat itself.
             excludeProbeStem: history ? (stem) => hasAskedMcq(history, stem) : undefined,
+            // The gate can ONLY use a probe that becomes the turn's MCQ — it is
+            // graded by gradeMcqAnswer against the authored key, and there is
+            // no prose path here. Measured 2026-08-17: without this, 7 of 9
+            // gate selections returned a short_answer probe with no choices,
+            // which probeToMcq then refused, spending the turn on the model
+            // anyway. Scoped to this call site only: assembleLesson still
+            // accepts non-MCQ probes and renders them as prose follow-ups.
+            requireMcq: true,
           })
           const converted = probe ? probeToMcq(probe) : null
           if (converted) {

@@ -118,6 +118,31 @@ export interface MatchOptions {
    * on assetId — matching that record is the whole point.
    */
   excludeProbeStem?: (stem: string) => boolean
+  /**
+   * PROBE RETRIEVAL ONLY — ignored by scoreMatch and by explanation matching.
+   *
+   * "Only return a probe that can actually become the turn's MCQ."
+   *
+   * MEASURED DEFECT THIS EXISTS FOR (production, 2026-08-17): across 28
+   * mastery-gate evaluations, 7 selected the SAME asset —
+   * `phys.mech.displacement:short_answer:en:high:proficient`, a short_answer
+   * probe with `choices: null`. `probeToMcq` correctly refused it all 7 times
+   * and the gate fell back to the model. Selection had no idea the caller
+   * needed an MCQ, so a probe the very next mandatory layer must reject could
+   * win on score.
+   *
+   * Scoped, NOT global, and that distinction is load-bearing: `assembleLesson`
+   * also calls `findBestProbe` and DELIBERATELY accepts a non-MCQ probe,
+   * rendering it as a prose follow-up (`formatProbeAsFollowUp`). Making
+   * retrieval MCQ-only everywhere would silently delete short-answer practice
+   * from that path. Only the mastery gate, which cannot use anything else,
+   * sets this.
+   *
+   * When set, a concept whose only authored probes are unconvertible returns
+   * null — an honest "no gate-compatible probe", which the caller already
+   * handles by falling back to the model.
+   */
+  requireMcq?: boolean
 }
 
 /**

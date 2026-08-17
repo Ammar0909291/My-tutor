@@ -81,6 +81,29 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       // falls back rather than re-asking — never after, which would silently
       // serve the same question with a lower confidence number attached.
       .filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
+      // GATE-COMPATIBILITY FILTER (MatchOptions.requireMcq).
+      //
+      // The selection layer must not return an asset that the next MANDATORY
+      // conversion layer will inevitably reject. Applied BEFORE pickBest, so
+      // the winner is the best CONVERTIBLE probe rather than the best probe
+      // that then fails to convert — filtering after ranking would still lose
+      // the turn whenever an unconvertible probe outscored a usable one, which
+      // is exactly what production did 7 times out of 9.
+      //
+      // The predicate is `probeToMcq` itself, not a familyKind check. A
+      // familyKind allowlist would be a second, drifting definition of
+      // "gradeable"; asking the real converter means selection and conversion
+      // can never disagree — including on the cases probeToMcq refuses for
+      // reasons other than kind (no choices, zero or multiple correct answers,
+      // duplicate option text, more than four options).
+      .filter((row) => {
+        if (!options.requireMcq) return true
+        const probe = row.probeAsset!
+        return probeToMcq({
+          stem: probe.stem,
+          choices: (probe.choices as Array<{ text: string; isCorrect: boolean }> | null) ?? null,
+        }) !== null
+      })
 
     const best = pickBest(state, rows, options)
     if (best) {
