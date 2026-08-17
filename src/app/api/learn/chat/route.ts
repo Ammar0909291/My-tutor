@@ -3117,11 +3117,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // through to the LLM to move the lesson on. Same owner, same
           // concept scope, same reset-on-concept-change lifecycle as its two
           // sibling guards — no new store and no new state.
+          let alreadyServedThisConcept = false
           if (assembled && teachingHistoryHoisted) {
             const { hasServedExplanation } = await import('@/lib/teaching/teachingHistory')
             const explanationId = assembled.explanationAssetId
             if (explanationId && hasServedExplanation(teachingHistoryHoisted, explanationId)) {
               assembled = null
+              alreadyServedThisConcept = true
               memoryFallbackReason = 'Already served this concept'
             }
           }
@@ -3129,7 +3131,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const { CACHE_KEY_EXPLANATION } = await import('@/lib/teaching/retrievalCache')
             retrievalCacheHoisted.set(CACHE_KEY_EXPLANATION, assembled.text)
           }
-          if (!assembled) {
+          // MEASUREMENT DEFECT FIXED 2026-08-17 (`!alreadyServedThisConcept`).
+          // The already-served guard above sets `assembled = null`, which made
+          // this block true and OVERWROTE its reason with the count-derived
+          // one. Since an already-served concept by definition has ACTIVE
+          // authored assets, activeCount > 0 always held and every such turn
+          // was recorded as 'Confidence failed'. Measured consequence: of the
+          // 36 instrumented provider calls in production, 14 (39%) were
+          // labelled `confidence_failed` — pointing the next optimization at
+          // the matcher's threshold, which was never the blocker. The real
+          // cause is the already-read guard, and that is correct teaching
+          // behaviour, not a tuning problem.
+          //
+          // Instrumentation only: which reason string is recorded. Nothing
+          // decides differently, no provider call is added or removed.
+          if (!assembled && !alreadyServedThisConcept) {
             // Distinguish "nothing authored for this concept/language" from
             // "an asset exists but didn't clear the confidence threshold" —
             // a single cheap, indexed count query, not a re-run of matching.
@@ -3630,6 +3646,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'First lesson' ? 'first_lesson'
           : memoryFallbackReason === 'Recovery mode' ? 'recovery_mode'
           : memoryFallbackReason === 'No asset' ? 'no_asset'
+          : memoryFallbackReason === 'Already served this concept' ? 'already_served'
           : memoryFallbackReason === 'Confidence failed' ? 'confidence_failed'
           : memoryFallbackReason === 'No asset (lookup error)' ? 'lookup_error'
           : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'

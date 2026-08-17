@@ -983,3 +983,145 @@ concept naming, mode framing) is deterministic; the analogy is not.
 **Verdict: not a safe call-elimination target as it stands.** Making it one is
 a design task about who owns the first explanation, not a small fix. Estimated
 saving if solved: ~6% of turns — real, but below the risk it currently carries.
+
+---
+
+# PHASE 6 (2026-08-17) — FIRST COMPLETE MEASUREMENT
+
+Run on the owner's account (`suaibamr@gmail.com`) by explicit standing
+authorization: *"Yes use my account as default, run both lessons now."* Two
+fresh concepts, chosen because neither had been touched by any earlier run:
+`phys.meas.significant-figures` (4 gate-eligible probes) and
+`chem.alc.alcohols` (2 — chemistry's maximum anywhere in the corpus).
+
+This is the first measurement that includes lesson openings, so it is the first
+one that is not structurally under-counting.
+
+## A. Telemetry gap CLOSED — verified live
+
+`lesson-init` returned `llmCallCount: 1` on both lessons and both rows persisted
+`provider` + `llmCallCount`. Lesson openings are no longer invisible. Every
+assistant turn produced in this window carries instrumentation; there is no
+un-attributed remainder.
+
+## B. Phase 2 FIRED IN PRODUCTION — first time
+
+Two turns served `provider='gate'`, `llmCallCount=0`, both with an MCQ attached.
+The deterministic gate renderer worked end to end: authored probe → `probeToMcq`
+→ deterministic lead-in → same attach line → same grading → **zero provider
+calls**. It had fired 0 times in every prior window.
+
+Both were physics. Chemistry produced none.
+
+## C. Measured distribution (n=40 assistant turns, 21 calls)
+
+| executor | decision | provider | turns | calls | per turn |
+|---|---|---|---|---|---|
+| LLM_OPEN | ESCALATE_TO_LLM | gemini | 17 | 17 | 1.00 |
+| LESSON_COMPLETE | SERVE_LESSON_COMPLETE | memory | 16 | 0 | 0.00 |
+| lesson-init | (opening) | gemini | 2 | 2 | 1.00 |
+| **LLM_OPEN** | **ESCALATE_TO_LLM** | **gate** | **2** | **0** | **0.00** |
+| LLM_RENDERER | DETECT_MISCONCEPTION | gemini | 1 | 1 | 1.00 |
+| EXPLANATION_MEMORY | SERVE_EXPLANATION_MEMORY | memory | 1 | 0 | 0.00 |
+| EXPLANATION_MEMORY | SERVE_EXPLANATION_MEMORY | gemini | 1 | 1 | 1.00 |
+
+Per lesson: physics 21 turns / 9 calls; chemistry 19 turns / 12 calls.
+
+## D. The honest reading — the number has NOT moved yet
+
+The 16 `LESSON_COMPLETE` turns are idle turns after the lesson closed. They cost
+nothing and they are not teaching, so including them would flatter the result
+exactly the way the earlier "20.4% overall" figure did.
+
+**Genuine teaching turns: 24. Calls: 21. LLM-dependent: 87.5%.**
+
+Against the authoritative baseline of **87.0% (n=484)**, that is no movement.
+Deterministic teaching turns were **3 of 24** (2 gate + 1 explanation memory).
+
+n=40 on one learner cannot detect a small real effect, and this is not claimed
+as evidence that Phases 2-3 do not work — Phase 3's corpus effect is separately
+measured and real. It is evidence that **the eliminated turn types are rare
+enough that eliminating them does not move the aggregate.** The dominant cost
+remains `LLM_OPEN / ESCALATE_TO_LLM`: 19 of 24 teaching turns, 17 of 21 calls.
+
+Phase 4's fix also held: 16 `lesson_complete` turns, **0 calls** (the four
+provenance-defect turns were pre-fix and remain the only ones).
+
+## E. DEFECT FOUND IN THE INSTRUMENTATION ITSELF — fixed
+
+Across every instrumented turn since Phase 1 shipped (130 turns, 36 calls),
+`memoryFallbackReason` distributed as:
+
+| reason | turns | calls |
+|---|---|---|
+| brain_decision | 17 | 17 |
+| **confidence_failed** | **14** | **14** |
+| lesson_complete | 95 | 4 (all pre-Phase-4) |
+| recovery_mode | 1 | 1 |
+| grade_band | 1 | 0 |
+
+`confidence_failed` at 39% of all calls reads as the clear second target, and
+the obvious action is "relax `DEFAULT_CONFIDENCE_THRESHOLD`."
+
+**That would have been wrong.** The label is a lie, and reading the source
+proves it:
+
+- The already-read guard sets `assembled = null` when the learner has already
+  been shown that explanation, and records `'Already served this concept'`.
+- The block below it is keyed on `!assembled`, so it also ran and **overwrote**
+  the reason with one derived from a count query.
+- An already-served concept has ACTIVE assets by definition, so
+  `activeCount > 0` always held → `'Confidence failed'`, every time.
+- `'Already served this concept'` had no arm in the snake_case mapping either,
+  so even surviving it would have collapsed into `no_asset`.
+
+This matches the run exactly: `chem.alc.alcohols` has **one** ACTIVE
+`core_explanation`; it was served once (the single `grade_band` memory turn) and
+all six subsequent turns on that concept reported `confidence_failed`.
+
+The matcher was never the blocker. The real blocker is the already-read guard,
+and that is correct teaching behaviour — serving the same explanation twice
+teaches nothing (it happened three turns running in production on 2026-08-02,
+which is why the guard exists).
+
+Fixed: `!alreadyServedThisConcept` guards the count-derived reason, and
+`already_served` is now a first-class code. Instrumentation only — no decision,
+no provider call and no served text depends on it. Pinned by
+`src/tests/memoryFallbackReasonAccuracy.test.ts`, including a structural check
+that every reason string the route can set has a mapping arm, so the next
+reason added upstream cannot silently collapse into `no_asset`.
+
+**Every `confidence_failed` figure recorded before this commit must be
+re-measured. Do not quote the 39%.**
+
+## F. Why chemistry's gate never fired
+
+`chem.alc.alcohols` carries exactly 2 ACTIVE probes (1 `mcq`,
+1 `misconception_probe`) against physics's 4 (2 `mcq`, 2 `misconception_probe`).
+Chemistry also spent a `recovery_mode` turn, which excludes the gate renderer by
+design. Small authored-probe pools are the ceiling on Phase 2 in chemistry, not
+a defect in it — consistent with the corpus measurement in §9b.
+
+## G. Next candidate — evidence-based, NOT implemented
+
+`LLM_OPEN / ESCALATE_TO_LLM` with `memoryFallbackReason='brain_decision'`:
+17 of 36 instrumented calls, and 6 of physics's 9 in this run. `brain_decision`
+means the Teaching Engine chose an executor the memory path does not serve — the
+turn was never offered to Explanation Memory at all.
+
+That is the largest remaining block and it is a DISPATCH question, not a content
+question: which decisions could be served deterministically that currently are
+not. It needs its own audit of the 12 `TeachingDecisionType`s against what the
+corpus can actually satisfy, and its own authorization.
+
+**Explicitly not recommended:** anything keyed on `confidence_failed` until the
+corrected label has been re-measured in production.
+
+## H. Stop point
+
+Implemented this phase: lesson-init telemetry (`23c9068`); the
+`memoryFallbackReason` accuracy fix + 8 tests.
+
+Not implemented: any elimination candidate. Phase 5A's vector camera fix stays
+reverted (`b90f798`) — it was falsified by browser measurement and the
+replacement was unverifiable in this environment.
