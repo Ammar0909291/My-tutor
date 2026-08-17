@@ -226,6 +226,61 @@ Both were CHECK-phase turns following a learner answer, so **refusal rule 1
 
 ---
 
+## 9b. Phase 3 — Gate Probe Selection Fix (deployed 2026-08-17)
+
+### Root cause
+
+`findBestProbe` queries **every** ACTIVE PROBE for the concept regardless of
+`familyKind`, filters only on (probeAsset exists / author scaffolding /
+already-asked), and ranks on quality, grade-band proximity and difficulty.
+Nothing in selection knew the caller required an MCQ, so a probe that the next
+**mandatory** layer (`probeToMcq`) must reject could win on score.
+
+### Fix
+
+`MatchOptions.requireMcq`, applied in `findBestProbe` **before** `pickBest`, so
+the winner is the best *convertible* probe. Filtering after ranking would still
+lose the turn whenever an unconvertible probe outscored a usable one — which is
+precisely what production did 7 times out of 9.
+
+The predicate is `probeToMcq` itself, not a `familyKind` allowlist. An
+allowlist would be a second, drifting definition of "gradeable"; using the real
+converter means selection and conversion can never disagree, including on
+refusals unrelated to kind (no choices, zero or multiple correct answers,
+duplicate option text, more than four options).
+
+**Scoped, and that is load-bearing.** `assembleLesson` also calls
+`findBestProbe` and *deliberately* accepts a non-MCQ probe, rendering it via
+`formatProbeAsFollowUp`. A global MCQ-only retrieval would have silently
+deleted short-answer practice from that path. Exactly one call site sets the
+flag — the mastery gate, which has no prose fallback.
+
+### Corpus-wide effect (MEASURED, read-only, phys + chem)
+
+| | value |
+|---|---|
+| concepts | 424 |
+| ACTIVE probes | 1,383 |
+| unconvertible probes now excluded at the gate | **405 (29.3% of the pool)** |
+| concepts where the fix changes selection | **136** |
+| **concepts left with no gate probe by the fix** | **0** |
+
+That last row is the safety proof: every concept holding any probe holds at
+least one convertible one, so the filter cannot strand a concept.
+
+For the concept that caused the defect, `phys.mech.displacement`: 4 ACTIVE
+probes — 2 MCQ (both convertible) and **2 short_answer (0 convertible)**. The
+gate pool goes 4 → 2, and both survivors are servable.
+`chem.atomic.subatomic-particles` has 2 probes, both already convertible, so
+the fix changes nothing there — consistent with the run, where both
+`converted:true` evaluations were chemistry.
+
+### Status
+
+Committed `6af66c5`, deployed. **Live before/after NOT measured** — see §17.
+
+---
+
 ## 10. Measured Call Distribution
 
 **MEASURED**, n = 49 instrumented assistant turns:
@@ -378,6 +433,12 @@ deterministic response would be worse.
   dedicated log line — there is no `[gate-lead-in] refused reason=…` log.
 - No misconception-repair, recovery, excursion or visual turn occurred
   naturally, so those paths remain unmeasured.
+- **Phase 3 has no live before/after.** The instruction for that run barred the
+  only account available to this session and no dedicated test-account
+  credentials were supplied, so no production gate turn has been observed since
+  the fix. The corpus-wide numbers in §9b are read-only projections of what the
+  selector will now choose — they are NOT proof that a turn reached the
+  deterministic renderer.
 
 ---
 
@@ -485,6 +546,25 @@ flowchart LR
   P3 --> P6[React+move renderer]
   P6 --> F[LLM as fallback]
 ```
+
+### Diagram 5b — Gate assessment after the Phase 3 fix
+
+```mermaid
+flowchart TD
+  TD[Teaching decision: mastery gate] --> FB["findBestProbe(state, requireMcq: true)"]
+  FB --> F{"Gate-compatible?<br/>predicate = probeToMcq itself"}
+  F -->|"no compatible probe"| LLM["LLM fallback · unchanged"]
+  F -->|"best CONVERTIBLE probe"| PC["probeToMcq → TutorMCQ"]
+  PC --> R{"Renderer refusals<br/>pending answer / figure / non-English"}
+  R -->|"any refusal"| LLM
+  R -->|"clear"| DET["Deterministic gate turn<br/>provider=gate · 0 LLM calls"]
+  DET --> G["gradeMcqAnswer · authored key<br/>evidence + ladder UNCHANGED"]
+  LLM --> G
+```
+
+Before Phase 3 the filter node did not exist: an unconvertible probe could win
+selection, `probeToMcq` rejected it, and every such turn fell to the model.
+**Measured 7 of 9 gate evaluations that found a probe.**
 
 ### Diagram 6 — LLM-free decision tree
 
@@ -601,7 +681,15 @@ fixes; 32 new tests.
 `answersPendingQuestion`; anything touching Educational Brain, KG, curriculum,
 mastery, evidence or grading.
 
-**Single highest-value next action** — make `findBestProbe` prefer
-MCQ-convertible probes at a mastery gate. Measured 7 of 9 gate selections were
-unconvertible `short_answer` probes. Until that is fixed, Phase 2 cannot fire
-and no further renderer is worth building.
+**Phase 3 (done, `6af66c5`)** — `findBestProbe` now prefers MCQ-convertible
+probes at a mastery gate. 405 unconvertible probes (29.3% of the pool) are
+excluded at the gate across 424 concepts; 136 concepts change selection; **0**
+are left without a gate probe.
+
+**Single highest-value next action** — measure Phase 2 + 3 together with a live
+lesson on a DEDICATED test account, then decide the next optimization on
+evidence. The recorded next candidate is the memory path: 4 turns chose
+`SERVE_EXPLANATION_MEMORY` and still spent a provider call because
+`answersPendingQuestion` blocked deterministic serving. Do NOT relax that
+condition without its own authorization — it is load-bearing, and it is the
+reaction the learner earned by answering.
