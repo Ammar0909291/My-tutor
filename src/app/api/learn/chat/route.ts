@@ -3848,40 +3848,56 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal — fall through with CLEAN */ }
       }
 
-      // PROSE-MCQ EVIDENCE GUARD (defect observed live, 2026-08-16).
+      // ANSWERABLE-TURN EVIDENCE GUARD (see answerableTurn.ts).
       //
-      // When the prior assistant turn asked a multiple-choice question in
-      // PROSE only (no `<!--MCQ-->` tag), `pendingMcqHoisted` is null and
-      // there is no server-side answer key. The only source of correctness
-      // for this turn is then the LLM's own `<!--SIGNAL-->` tag — the LLM
-      // grading its own memory of the intended answer. Measured on a real
-      // production turn: a wrong "C" was reported as `correctness="true"`
-      // and the ladder would have advanced on false evidence.
+      // Two live defects, one precondition. A SIGNAL correctness value is
+      // evidence only if the learner was answering something: with no
+      // structured MCQ pending there is no server-side answer key, so the
+      // model is grading its own memory of a question it also asked.
       //
-      // The prompt directive above asks the model not to declare correctness
-      // in this shape, but a prompt rule is advisory. This is the
-      // deterministic backstop: if the shape holds and no pendingMcq exists,
-      // strip `correctness` from the signal for this turn. `chosenPhrase` /
-      // `confusion` / `confidence` remain — they are the model's read of the
-      // learner's behaviour, not a claim about a right answer we cannot
-      // verify. Fabricating an answer the learner did not give would put
-      // false evidence into their permanent record; refusing to record a
-      // correctness we cannot check is the strictly safer trade.
-      if (teachingSignal && teachingSignal.correctness !== undefined && !pendingMcqHoisted) {
+      // 2026-08-16 — the prior turn asked a prose-only MCQ; a wrong "C" came
+      // back as correctness="true". 2026-08-17 — the prior turn asked NOTHING
+      // (it worked through its own answer), the learner said "i see", and
+      // correctness="true" advanced CHECK -> PRACTICE and wrote 65 % to
+      // topic_progress. The second is strictly more ungradeable than the
+      // first: there is not even a question to compare an answer against.
+      //
+      // Deterministic backstop for both. The prompt directive below is
+      // advisory; the model is under no obligation to honour it.
+      //
+      // Ordering is load-bearing: this runs BEFORE the ladder fold and the
+      // topic_progress write, and both are gated on
+      // `correctness !== undefined`, so a suppressed turn advances no counter
+      // and performs no evidence write — one suppression, no side effects.
+      //
+      // NOT a substitute for signalVerification above: that layer FLAGS
+      // (SUSPICIOUS withholds the verified counters) while the unverified
+      // counters still drive the ladder. Measured on the 2026-08-17 turn:
+      // `correctAtCheck 1` with `verifiedCorrectAtCheck 0`. Detection without
+      // suppression does not hold the gate, which is why this exists.
+      if (teachingSignal && teachingSignal.correctness !== undefined) {
         try {
-          const { hasProseMultipleChoice } = await import('@/lib/teaching/proseMcqGuard')
+          const { shouldSuppressSignalCorrectness } = await import('@/lib/teaching/answerableTurn')
           const priorAsstForEvidence = learnSession.messages.find(
             (m: { role: string }) => m.role === MessageRole.ASSISTANT,
           )
           const priorContent = priorAsstForEvidence
             ? ((priorAsstForEvidence as { content?: string }).content ?? '')
             : ''
-          if (hasProseMultipleChoice(priorContent)) {
-            console.log('[prose-mcq-ungradeable]', {
+          const decision = shouldSuppressSignalCorrectness({
+            priorAssistantText: priorContent,
+            hasPendingStructuredMcq: Boolean(pendingMcqHoisted),
+          })
+          if (decision.suppress) {
+            console.log(`[${decision.reason}]`, {
               claimed: teachingSignal.correctness,
               learnerMessage: message.slice(0, 40),
               signalVerificationStatus: signalVerificationStatusHoisted,
             })
+            // ONLY `correctness` is dropped. `confidence` / `confusion` /
+            // `chosenPhrase` are the model's read of the learner's behaviour,
+            // not a claim about an answer, and stay. Nothing is fabricated:
+            // this records no correctness, never a wrong answer.
             teachingSignal = { ...teachingSignal, correctness: undefined }
           }
         } catch { /* non-fatal — fall through unchanged */ }
