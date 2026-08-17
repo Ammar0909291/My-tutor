@@ -1409,3 +1409,68 @@ Historical production rows from the earlier defect (`chem.found.stoichiometry`
 at 65 %, its `lesson:7` attempt still IN_PROGRESS) remain **unrepaired**, per
 the standing rule that repairing historical learner data needs explicit
 authorization.
+
+---
+
+## S9 — negative control (diagnostic run) + Budget Test B
+
+Diagnostic deployed as `586518f` (`dpl_2FgxrWWQYvgeRVTZXyXiyYKp93Sv`), used for
+one bounded session, and **reverted in `d84ccf3`**. Log-only while it existed:
+no branch, no counter and no write depended on it.
+
+### NEGATIVE CONTROL — still NOT exercised, but now quantified
+
+12 turns on a fresh concept (`phys.mech.displacement`, physics lesson 9), real
+account, acknowledgements only. The diagnostic recorded the guard's inputs on
+every turn:
+
+| turns | prior turn | model correctness claim |
+| --- | --- | --- |
+| 1 | answerable question, structured MCQ pending | none |
+| 2, 4-12 | prose MCQ and/or structured MCQ pending | none |
+| **3** | **`answerable=false`, no MCQ pending — the dangerous shape** | **none** |
+
+**The shape occurred exactly once in twelve turns, and the model claimed
+nothing on it.** `claimed=null` on all twelve. So the suppression branch was
+never entered, and the negative control remains unexercised by live model
+behaviour — now with a measured reason rather than an inference. Per the
+batch's own stop rule, this was not retried further.
+
+What this run DOES establish, against the deployed guard: twelve
+acknowledgement turns produced **zero** graded evidence — `correctAtCheck 0`,
+`correctAtPractice 0`, and no evidence-marked `topic_progress` write.
+
+Also observed and worth keeping: on 10 of 12 turns a structured or prose MCQ
+was pending, i.e. the tutor mostly DOES leave something answerable on the
+table. The 2026-08-17 defect needed the rarer state, which is consistent with
+it having gone unnoticed.
+
+### BUDGET TEST B — PASS (the reachable form of the contract)
+
+Same run. The sharpest possible configuration: at the base budget the learner
+satisfied **both** other eligibility conditions (phase `CHECK`,
+`consecutiveFailures 0`) and failed **only** the graded-correct one, so the
+extension had exactly one reason to refuse.
+
+| assertion | result |
+| --- | --- |
+| `correctAtCheck + correctAtPractice` at the budget | **0** |
+| `budgetExtensionGranted` | **false** |
+| effective budget | **12, not 18** |
+| closed at | **turn 12** |
+| `budgetExhaustions` | **1** |
+| `conceptsMastered` / `conceptsNeedingReview` | **[]** / **["phys.mech.displacement"]** |
+| attempt rows for `lesson:9` | **exactly 1** |
+| `durationSeconds` | **227** (real elapsed) |
+| fabricated mastery or evidence | **none** |
+
+One row needed checking rather than assuming: a `topic_progress` row exists for
+the concept despite zero graded answers. It reads `masteryPct 0`,
+`attempts 0`, `status REVISION`, created at 05:55:01.911 — 0.3 s before the
+attempt's `completedAt` — with **no evidence marker**. It is the closure path's
+needs-revision bookkeeping, not evidence: the learner is flagged for revision
+and credited with nothing. Correct behaviour.
+
+Together with Test A (mastery at turn 13 inside the extension), both directions
+of the budget policy are now live-verified: it extends a converting learner and
+refuses a non-converting one.
