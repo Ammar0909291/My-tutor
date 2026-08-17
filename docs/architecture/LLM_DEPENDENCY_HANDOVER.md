@@ -1,0 +1,607 @@
+# MY TUTOR — LLM DEPENDENCY ELIMINATION
+## Complete Technical Handover
+
+Physics + Chemistry. Every number is labelled **MEASURED**, **ESTIMATE** or
+**TARGET**, and they are never mixed. Where an earlier conclusion was wrong it
+is preserved with its correction, because the wrong turns explain why some
+approaches are closed.
+
+---
+
+## 1. Executive Summary
+
+The investigation set out to reduce how often My Tutor needs an LLM. It found
+that the deterministic teaching engine already decides most of what should
+happen, and the LLM is largely rendering a decision that was already made:
+
+```
+deterministic teaching decision  →  LLM_RENDERER  →  learner-visible wording
+```
+
+Two phases shipped. Phase 1 (instrumentation) is working. Phase 2 (a
+deterministic gate-assessment renderer) is deployed and **has never fired in a
+real lesson** — the live run explains exactly why, and the reason is not the
+renderer.
+
+The single most important result of the live run is that the gate path is
+blocked upstream of the renderer: of 28 gate evaluations, 19 found no probe at
+all and 7 found a probe that cannot be converted to an MCQ. Only 2 produced a
+usable question, and both were refused by the renderer's pending-answer rule.
+
+---
+
+## 2. Original Baseline
+
+**MEASURED**, n = 484 assistant turns, window 2026-08-12 → 2026-08-17 07:36
+(the "gemini-only era"), from `messages`:
+
+| | turns | share |
+|---|---|---|
+| LLM-served (gemini/groq/yandex) | 421 | **87.0%** |
+| memory-served | 59 | 12.2% |
+| degraded (outage template) | 4 | 0.8% |
+
+Average ~1.00 provider calls/turn, 0 retries/failovers.
+
+This 87% figure is **not superseded** by the live run below. The live sample is
+49 turns from one account and is not a population measurement.
+
+---
+
+## 3. Investigation Timeline
+
+1. **87% baseline established** (n=484). Measured, not estimated.
+2. **Hypothesis: more authored coverage would cut calls.** REJECTED — physics
+   is 238/238 and chemistry 186/186 for gradeable probes, yet the LLM still
+   served 87% of turns. Concept coverage was never the constraint.
+3. **Prompt-size / caching investigation.** CLOSED, see §4.
+4. **Architecture dependency audit.** The dispatcher has 12 decision types and
+   only 2 have non-LLM executors; 9 route to `LLM_RENDERER`, and 8 of those 9
+   carry a note saying the injected blocks "direct the renderer".
+5. **Phase 1 instrumentation** shipped, §7.
+6. **Phase 2 gate renderer** shipped, §8, plus 3 integration defects found
+   while wiring it.
+7. **Live production run**, §9 — the first real measurement.
+
+### Corrections made along the way (preserved deliberately)
+
+- **"Vercel is blocked."** WRONG. A wrong team ID was passed
+  (`team_explorewithpappu`, which does not exist). The real one is
+  `team_ZHSoYXkAEang6oq1I9hAPn45`. Vercel was always reachable.
+- **S8 root cause "a slug-scheme migration re-seeded only 196 of 238".** WRONG.
+  The database records the real cause in its own `deprecationReason`: a
+  deliberate 2026-08-12 audit deprecated ACTIVE PROBE identities that had **no
+  `probe_assets` row** — hollow rows occupying a serving slot they could never
+  fill. Correct action, but it could not supply missing content.
+- **Gate assessment estimated at ~10-15% of LLM turns.** Now known to be
+  optimistic in the direction that matters: it can *become eligible* often, but
+  it almost never yields a servable question (§9).
+
+---
+
+## 4. Prompt-Cost Investigation — CLOSED, DO NOT REOPEN
+
+**MEASURED:** contiguous invariant prompt prefix ≈ **2,058 tokens**; Gemini 3.x
+implicit-cache minimum ≈ **4,096 tokens**; `cachedContentTokenCount` absent/zero
+across six consecutive turns.
+
+Cause is structural: `route.ts` seeds `systemPrompt` from
+`buildTutorSystemPrompt` and appends everything after, so the static material is
+scattered rather than forming a cacheable prefix. Caching matches a *prefix*,
+not a sum.
+
+Explicit caching NOT implemented (redundant with a default-on mechanism, adds
+storage cost, and cannot be created from a sub-minimum prefix). Prompt
+reordering is behaviour-sensitive and was not attempted.
+
+**Conclusion: caching is not the lever. Token reduction ≠ call reduction.**
+
+---
+
+## 5. Architecture Dependency Map
+
+`src/lib/understanding/dispatcher.ts`, `ENGINE_ROUTES` — 12 decisions, 4
+executors, only 2 of which need no provider:
+
+| decision | executor | provider needed |
+|---|---|---|
+| SERVE_EXPLANATION_MEMORY | EXPLANATION_MEMORY | **no** |
+| SERVE_LESSON_COMPLETE | LESSON_COMPLETE | **no** |
+| ASK_DIAGNOSTIC_QUESTION | LLM_RENDERER | yes |
+| DETECT_MISCONCEPTION | LLM_RENDERER | yes |
+| REVIEW_PREREQUISITE | LLM_RENDERER | yes |
+| TEACH_DIRECTLY | LLM_RENDERER | yes |
+| PRACTICE | LLM_RENDERER | yes |
+| VISUALIZATION | LLM_RENDERER | yes |
+| CONTINUE_LESSON | LLM_RENDERER | yes |
+| ADVANCE_DIFFICULTY | LLM_RENDERER | yes |
+| ESCALATE_TO_LLM | LLM_OPEN | yes |
+
+The executor name is the finding: the decision is already made; the model
+renders it.
+
+---
+
+## 6. Existing Deterministic Infrastructure (already built, under-used)
+
+**MEASURED** ACTIVE assets, physics + chemistry:
+
+| family | kind | rows | concepts |
+|---|---|---|---|
+| PROBE | mcq | 689 | 422 |
+| PROBE | short_answer | 405 | 136 |
+| PROBE | misconception_probe | 234 | 215 |
+| PROBE | true_false | 54 | 53 |
+| EXPLANATION | core_explanation | 438 | 424 |
+| EXPLANATION | **misconception_repair** | **415** | **413** |
+| EXPLANATION | worked_example | 10 | 10 |
+| EXPLANATION | real_world_example | 2 | 2 |
+
+Server-owned already: probe selection, `probeToMcq` refusal rules, the answer
+key, `gradeMcqAnswer`, evidence writes, the mastery ladder, the misconception
+engine, recovery, attempt lifecycle.
+
+---
+
+## 7. Phase 1 — Instrumentation (deployed, working)
+
+Four additive nullable columns on `messages`, written on the same row as
+`provider`: `teachingDecision`, `dispatchExecutor`, `memoryFallbackReason`,
+`llmCallCount`.
+
+`llmCallCount` is a **count**, not a boolean, deliberately — `provider` records
+which driver answered but not how many calls the turn spent. **The live run
+proved this decision correct**: 2 turns recorded `provider='memory'` *and*
+`llmCallCount=1`. A boolean, or deriving from `provider`, would have reported
+those turns as costing nothing. See §11.
+
+Commits `5220c2a` (columns) and `4245596` (wiring guard).
+
+---
+
+## 8. Phase 2 — Deterministic Gate Renderer (deployed, never fired)
+
+`src/lib/teaching/gateAssessmentRenderer.ts`. When the server has already
+selected the assessment, it writes the lead-in itself and skips the provider
+call. The MCQ is attached by the same line the model path uses, so question,
+choices, order, `correctIndex`, grading, evidence and ladder transition are
+shared code.
+
+It refuses — returning null so the LLM path serves unchanged — when:
+1. an answer is waiting to be reacted to,
+2. a figure is attached,
+3. the lesson is not in English.
+
+### Three integration defects found while wiring (each would have shipped)
+
+- **Output verification would have run on server-authored text**, and its
+  remedy is `rerender`, which calls a provider — spending the very call the
+  path saves and possibly overwriting the framing.
+- **Asset capture would have decomposed the fixed template into a DRAFT
+  `core_explanation`** (a gate turn always has a `memoryState`). Approving one
+  would have made boilerplate the ACTIVE asset served to every matching learner
+  forever — the exact defect that path's own comment describes.
+- **The client would have mounted `AiBadge`**, telling the learner "AI
+  Generated / Reason: AI fallback used" about a turn no model touched.
+
+Commits `e6a3f9b` (impl), `e890897` (25 tests).
+
+---
+
+## 9. Live Production Measurement (2026-08-17)
+
+Driven through the real HTTP API as an authenticated weak-beginner learner. No
+database manipulation, no internal API calls, no manufactured state.
+
+**Session A — physics.** Re-entered `phys.mech.displacement`, which was already
+complete. 23 turns, all `SERVE_LESSON_COMPLETE`. Not a teaching measurement;
+retained because it shows the completed-lesson path costs ~0 calls.
+
+**Session B — chemistry.** Genuinely fresh (`chem.atomic.subatomic-particles`,
+lesson 1, 0 completed). Turns 1-8 were a real lesson: MCQs offered, answers
+graded, lesson completed at turn 8. Turns 9-26 fell into the completed-lesson
+path.
+
+Two `504 FUNCTION_INVOCATION_TIMEOUT` responses occurred during session A.
+
+### Gate-assessment eligibility — the key result
+
+**MEASURED**, from 28 `[gate-assessment]` log lines:
+
+| outcome | count | meaning |
+|---|---|---|
+| `probeFound:false` (phase PRACTICE) | 17 | no probe available at all |
+| `probeFound:true, converted:false` | 7 | probe found, `probeToMcq` refused it |
+| `probeFound:false` (phase CHECK) | 2 | no probe available |
+| `probeFound:true, converted:true` | **2** | a usable question was produced |
+
+The 7 refusals are all one asset, `c0213b4f-69db-44d9-aab1-08910b6e8d9b`:
+`familyKind = short_answer`, `choices = null`. It is not an MCQ and can never
+convert, yet `findBestProbe` selected it seven times.
+
+On both `converted:true` turns the response was `provider=gemini` and
+`[affirm-guard-entry]` ran — i.e. the renderer refused and the model served.
+Both were CHECK-phase turns following a learner answer, so **refusal rule 1
+(pending answer) fired**, exactly as flagged when Phase 2 shipped.
+
+---
+
+## 10. Measured Call Distribution
+
+**MEASURED**, n = 49 instrumented assistant turns:
+
+| executor | decision | fallbackReason | provider | turns | calls | calls/turn |
+|---|---|---|---|---|---|---|
+| LESSON_COMPLETE | SERVE_LESSON_COMPLETE | lesson_complete | memory | 41 | 2 | 0.05 |
+| EXPLANATION_MEMORY | SERVE_EXPLANATION_MEMORY | brain_decision | gemini | 4 | 4 | 1.00 |
+| LLM_OPEN | ESCALATE_TO_LLM | confidence_failed | gemini | 2 | 2 | 1.00 |
+| LLM_RENDERER | PRACTICE | confidence_failed | gemini | 1 | 1 | 1.00 |
+| LLM_OPEN | ESCALATE_TO_LLM | brain_decision | gemini | 1 | 1 | 1.00 |
+
+Aggregates (**MEASURED**):
+
+- total turns **49**; total provider calls **10**
+- 0 calls **39** (79.6%) · 1 call **10** (20.4%) · 2 calls **0** · 3+ **0**
+- turns needing ≥1 LLM **20.4%**; average **0.204**; maximum **1**
+- provider: memory 41, gemini 8 … plus 2 memory turns that also spent a call
+- executor: LESSON_COMPLETE 41, EXPLANATION_MEMORY 4, LLM_OPEN 3, LLM_RENDERER 1
+- fallbackReason: lesson_complete 41, brain_decision 5, confidence_failed 3
+- `provider='gate'` turns: **0**
+
+### The honest reading — do not quote 20.4% as progress
+
+41 of 49 turns are post-completion idling that a real learner would not
+generate. Excluding `LESSON_COMPLETE`:
+
+**Teaching turns: 8. Provider calls: 8. Turns needing ≥1 LLM: 100.0%.**
+
+So in the only genuine teaching sequence measured, the LLM served **every**
+turn. Phase 2 eliminated **zero** calls. The 87% baseline stands.
+
+### Top 3 LLM consumers (by calls, measured)
+
+1. `SERVE_EXPLANATION_MEMORY` → served by gemini anyway — **4 calls**
+2. `ESCALATE_TO_LLM` / `LLM_OPEN` — **3 calls**
+3. `SERVE_LESSON_COMPLETE` (2) and `PRACTICE` (1) — **3 calls**
+
+Consumer 1 deserves emphasis: the dispatcher chose the *deterministic*
+executor and a model was called anyway, because `serveFromMemory` additionally
+requires `!answersPendingQuestion`. The learner answering a question is what
+forces the model.
+
+---
+
+## 11. Remaining LLM Dependencies + defects surfaced
+
+1. **`answersPendingQuestion` is the dominant forcing condition.** It defeated
+   both the memory path (4 turns) and the gate renderer (2 turns) in one short
+   lesson.
+2. **`findBestProbe` does not filter to MCQ-convertible probes.** It returned a
+   `short_answer` probe with no choices 7 times at a gate. Measured content/
+   selection defect, not a renderer defect.
+3. **`provider` under-reports cost.** 2 turns recorded `provider='memory'` with
+   `llmCallCount=1`.
+4. **Two 504 FUNCTION_INVOCATION_TIMEOUTs** during normal use.
+5. **`eb_evidence_event` has 0 rows since 2026-08-12** (noted, not investigated).
+6. The tutor addresses the learner as "Claude" (profile-name artefact on the
+   test account; cosmetic, not investigated).
+
+---
+
+## 12. Conservative / Practical / Aggressive Targets
+
+Baseline **MEASURED 87%**. All three targets remain **ESTIMATES** — the live
+sample is too small and too skewed to move them.
+
+| scenario | LLM-dependent | requires |
+|---|---|---|
+| CONSERVATIVE | ~73-78% | gate path actually reaching a servable probe |
+| PRACTICAL | ~45-55% | + targeted misconception repair, re-serve |
+| AGGRESSIVE | ~25-35% | + composed react+move rendering |
+
+**Nothing measured yet supports moving off 87%.**
+
+---
+
+## 13. CTO Recommendation
+
+**Fix the probe-selection defect before building any new renderer.**
+
+Phase 2's renderer is correct and deployed, but it sits behind a gate that
+produced a usable question twice in 28 evaluations. Building another renderer
+now would add a second component behind the same blocked pipe.
+
+Ranked by `calls eliminated × safety × frequency ÷ (cost × Moat risk)`:
+
+1. **Make `findBestProbe` prefer MCQ-convertible probes at a gate.** Measured
+   7/9 wasted selections. Small, contained, no teaching-behaviour change, no
+   Moat surface — it changes which authored probe is picked, never the key or
+   the grading.
+2. **Re-measure.** With 1 fixed, the gate path's real share becomes knowable.
+3. **Then** decide between misconception repair (415 authored assets) and the
+   react+move renderer, on evidence.
+
+**Do not start the react+move renderer.** It is the one that would relax
+`answersPendingQuestion`, which the data now shows is load-bearing.
+
+---
+
+## 14. Implementation Roadmap
+
+```
+Phase 0  baseline 87%                          DONE (measured)
+Phase 1  instrumentation                       DONE (deployed, working)
+Phase 2  deterministic gate renderer           DONE (deployed, never fired)
+Phase 2b probe-selection fix at the gate       ← NEXT, not authorized yet
+Phase 2c re-measure with real traffic
+Phase 3  targeted misconception repair         evidence-gated
+Phase 4  lesson-opening skeleton               low priority
+Phase 5  explanation re-serve                  content-gated
+Phase 6  react + move renderer                 highest risk, last
+```
+
+---
+
+## 15. Moat Safety Constraints (must remain deterministic)
+
+Server-owned grading · mastery thresholds · evidence semantics ·
+answerable-turn guard · prose-MCQ guard · `topic_progress` writer + idempotency ·
+misconception detection · recovery · mastery ladder · attempt lifecycle ·
+budget extension · visual ownership · S10 invariants.
+
+LLM generation is allowed only for learner-visible *wording*, and only where a
+deterministic response would be worse.
+
+---
+
+## 16. Rejected Approaches (and why)
+
+- **Prompt caching** — measured dead end (§4).
+- **More authored concept coverage** — coverage was already 100%; not the
+  constraint.
+- **A smaller/cheaper classifier** — classification is already deterministic;
+  adding one would add a model call, not remove one.
+- **Keyword matching on learner answers** — brittle; explicitly prohibited.
+- **Optimising visual generation** — already ~85% cached; 19 paid generations
+  vs 421 chat LLM turns.
+- **Serving an authored repair because the concept matches** — must match the
+  diagnosed misconception, not the concept.
+
+---
+
+## 17. Known Limitations
+
+- Live sample is **49 turns, one account, two sessions**, 41 of them
+  post-completion. It is a code-path measurement, not a population estimate.
+- Physics contributed **no** teaching turns (its lesson was already complete).
+- The renderer's refusal reason is inferred from phase + ordering, not from a
+  dedicated log line — there is no `[gate-lead-in] refused reason=…` log.
+- No misconception-repair, recovery, excursion or visual turn occurred
+  naturally, so those paths remain unmeasured.
+
+---
+
+## 18. Open Decisions
+
+1. Authorize the probe-selection fix (Phase 2b)?
+2. Add a refusal-reason log line to the renderer so future runs attribute
+   refusals directly?
+3. Investigate the two 504s?
+4. `eb_evidence_event` writing nothing since 2026-08-12 — in scope or not?
+5. Should `provider` be corrected so a turn that spent a call is never labelled
+   `memory`?
+
+---
+
+## 19. Diagrams
+
+### Diagram 1 — Current LLM request flow
+
+```mermaid
+flowchart TD
+  L[Learner message] --> R["/api/learn/chat"]
+  R --> G[Grade pending MCQ<br/>server-owned]
+  G --> U[CUE perception]
+  U --> D[Teaching decision<br/>decisionEngine]
+  D --> P[planDispatch]
+  P --> E{executor}
+  E -->|EXPLANATION_MEMORY| M[assembleLesson]
+  E -->|LESSON_COMPLETE| C[persisted evidence]
+  E -->|LLM_RENDERER| X[routeAI]
+  E -->|LLM_OPEN| X
+  M --> S{serveFromMemory<br/>AND NOT answersPendingQuestion}
+  S -->|no| X
+  S -->|yes| OUT[Response]
+  C --> OUT
+  X --> V[Verifier gate<br/>may re-render = extra call]
+  V --> EV[Evidence + ladder]
+  EV --> OUT
+```
+
+### Diagram 2 — Current vs target
+
+```mermaid
+flowchart LR
+  subgraph CURRENT
+    A1[Teaching decision] --> A2[LLM renderer] --> A3[Response]
+  end
+  subgraph TARGET
+    B1[Teaching decision] --> B2{Deterministic<br/>response exists?}
+    B2 -->|yes| B5[Response]
+    B2 -->|no| B3{Authored asset<br/>fits this state?}
+    B3 -->|yes| B5
+    B3 -->|no| B4[LLM fallback] --> B5
+  end
+```
+
+### Diagram 3 — Measured distribution (n=49 turns, 10 calls)
+
+```mermaid
+pie showData title Instrumented turns by executor (MEASURED)
+  "LESSON_COMPLETE (41)" : 41
+  "EXPLANATION_MEMORY (4)" : 4
+  "LLM_OPEN (3)" : 3
+  "LLM_RENDERER (1)" : 1
+```
+
+```mermaid
+pie showData title Teaching turns only, LESSON_COMPLETE excluded (MEASURED)
+  "Needed an LLM (8)" : 8
+  "Server-rendered (0)" : 0
+```
+
+### Diagram 4 — Moat safety boundaries
+
+```mermaid
+flowchart TD
+  subgraph DET["MUST STAY DETERMINISTIC"]
+    D1[Grading + answer key]
+    D2[Evidence + idempotency]
+    D3[Mastery thresholds + ladder]
+    D4[Misconception state]
+    D5[topic_progress]
+    D6[Attempt lifecycle]
+    D7[Visual ownership]
+  end
+  subgraph GEN["LLM MAY GENERATE"]
+    G1[Wording of an explanation]
+    G2[Reaction phrasing]
+    G3[Open/novel conversation]
+    G4[Visual candidate + critic]
+  end
+  DET -->|constrains| GEN
+```
+
+### Diagram 5 — Optimization roadmap
+
+```mermaid
+flowchart LR
+  P0[Phase 0<br/>87% baseline] --> P1[Phase 1<br/>instrumentation]
+  P1 --> P2[Phase 2<br/>gate renderer]
+  P2 --> LM[LIVE MEASUREMENT<br/>gate never fired]
+  LM --> P2B[Phase 2b<br/>probe-selection fix]
+  P2B --> RM[Re-measure]
+  RM --> P3[Misconception repair]
+  P3 --> P6[React+move renderer]
+  P6 --> F[LLM as fallback]
+```
+
+### Diagram 6 — LLM-free decision tree
+
+```mermaid
+flowchart TD
+  S[Turn begins] --> A{Lesson already complete?}
+  A -->|yes| DET1[Serve persisted evidence · 0 calls]
+  A -->|no| B{Learner answering<br/>a pending question?}
+  B -->|yes| LLM1[LLM · reaction needed]
+  B -->|no| C{Mastery gate phase?}
+  C -->|yes| D{MCQ-convertible<br/>authored probe?}
+  D -->|yes| E{English, no figure?}
+  E -->|yes| DET2[Server-rendered lead-in · 0 calls]
+  E -->|no| LLM2[LLM]
+  D -->|no| LLM3[LLM ← 26 of 28 land here today]
+  C -->|no| F{Authored explanation<br/>fits, not yet served?}
+  F -->|yes| DET3[Explanation Memory · 0 calls]
+  F -->|no| LLM4[LLM]
+```
+
+---
+
+## 20. Git / Deployment State
+
+| commit | what |
+|---|---|
+| `5220c2a` | Phase 1 instrumentation columns + migration |
+| `4245596` | Phase 1 wiring guard tests |
+| `e6a3f9b` | Phase 2 deterministic gate renderer |
+| `e890897` | Phase 2 regression suite (25 tests) |
+
+Branch `main`. Production deployment `dpl_CeFpSFkMd6tHs3AXg6gpRX6y8LWx` @
+`e890897`, READY. Migration `20260817120000_message_llm_dependency_instrumentation`
+applied and registered (`finished_at` set, `rolled_back_at` null).
+Suite at last run: 350 files / 7,479 passed / 9 skipped; tsc clean; build clean.
+
+---
+
+## 21. Reproduction Queries / Commands
+
+```sql
+-- primary distribution
+SELECT "dispatchExecutor","teachingDecision","memoryFallbackReason","provider",
+       COUNT(*) turns, SUM("llmCallCount") calls, ROUND(AVG("llmCallCount"),2) per_turn
+FROM messages WHERE role='ASSISTANT' AND "llmCallCount" IS NOT NULL
+GROUP BY 1,2,3,4 ORDER BY turns DESC;
+
+-- teaching turns only (exclude completed-lesson idling)
+SELECT COUNT(*) turns, SUM("llmCallCount") calls,
+       ROUND(100.0*COUNT(*) FILTER (WHERE "llmCallCount">=1)/COUNT(*),1) pct_llm,
+       COUNT(*) FILTER (WHERE provider='gate') gate_rendered
+FROM messages WHERE role='ASSISTANT' AND "llmCallCount" IS NOT NULL
+  AND "dispatchExecutor" <> 'LESSON_COMPLETE';
+
+-- turns that spent a call but are not labelled as an LLM provider
+SELECT "createdAt", provider, "llmCallCount", "lessonKey"
+FROM messages WHERE role='ASSISTANT' AND "llmCallCount" > 0 AND provider NOT IN
+  ('gemini','groq','yandex');
+```
+
+Gate eligibility, from Vercel production runtime logs:
+`query="gate-assessment"`, then group by the `probeFound`/`converted` pair.
+
+```
+npm install && npx prisma generate && npx prisma migrate deploy
+npm run build · npx tsc --noEmit
+npx vitest run src/tests/gateAssessmentRenderer.test.ts
+npx vitest run src/tests/llmDependencyInstrumentation.test.ts
+```
+
+---
+
+## 22. Handover Notes for Next Engineer
+
+- Trust `llmCallCount` over `provider`. `provider` is the driver label and has
+  been observed reading `memory` on a turn that spent a call.
+- Exclude `dispatchExecutor='LESSON_COMPLETE'` from any dependency percentage.
+  It is cheap by design and will flatter any number that includes it.
+- The gate renderer is **not** the bottleneck. `findBestProbe` is.
+- `answersPendingQuestion` is load-bearing. Anything that relaxes it changes
+  teaching behaviour and belongs in the react+move workstream, with its own
+  authorization.
+- Driving live traffic requires the real HTTP API and an authenticated session.
+  Rate limit is 30 requests / 60 s; pace ~2.6 s per turn.
+
+---
+
+## CURRENT STOP POINT
+
+**Proven**
+- The dispatcher decides before the LLM renders; only 2 of 12 executors are
+  provider-free.
+- Prompt caching is a dead end (prefix 2,058 vs 4,096 minimum).
+- Phase 1 instrumentation records correctly, and `llmCallCount`-as-a-count
+  caught cost that `provider` hid.
+- Phase 2's renderer, verification skip, capture skip and badge handling all
+  behave as designed under test.
+
+**Measured**
+- Baseline 87.0% LLM-dependent (n=484).
+- Live: 49 turns, 10 calls, 20.4% overall — but 8 teaching turns at **100%**.
+- Gate eligibility 28×: 19 no probe, 7 unconvertible, 2 usable, 0 rendered.
+- `provider='gate'` turns in production: **0**.
+
+**Still estimated**
+- Every per-path share and all three scenario targets.
+- The true frequency of misconception-repair, recovery, excursion and visual
+  turns — none occurred naturally.
+
+**Implemented** — Phase 1 instrumentation; Phase 2 gate renderer + 3 integration
+fixes; 32 new tests.
+
+**NOT implemented** — Phase 3; any probe-selection change; any relaxation of
+`answersPendingQuestion`; anything touching Educational Brain, KG, curriculum,
+mastery, evidence or grading.
+
+**Single highest-value next action** — make `findBestProbe` prefer
+MCQ-convertible probes at a mastery gate. Measured 7 of 9 gate selections were
+unconvertible `short_answer` probes. Until that is fixed, Phase 2 cannot fire
+and no further renderer is worth building.
