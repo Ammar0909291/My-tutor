@@ -1330,3 +1330,141 @@ Not on the list, deliberately: relaxing `answersPendingQuestion` (the 5 turns in
 
 **Nothing in this section is implemented.** Each item needs its own
 authorization.
+
+---
+
+# PHASE 8 (2026-08-17) — RULE-ID INSTRUMENTATION
+
+## A. Implemented and DEPLOYED
+
+`messages.teachingRuleId TEXT NULL` + partial index
+(`20260817190000_message_teaching_rule_id`). Verified applied in production:
+the column exists, and `_prisma_migrations` records
+`finished_at = 2026-08-17 19:35:26+00`, `rolled_back_at = null`, applied by
+`prisma migrate deploy` on the normal build — no manual production write.
+Deployment `dpl_3B7DxB2KzpVni5LFyn5jRZgbgoPD` from commit `148f7a5`.
+
+**Sourced from the DECISION, not the dispatch plan.** They agree on every
+healthy turn — `planDispatch` copies `ruleId` through, including on its
+memory-without-content fallback (tested, executed). They diverge in exactly one
+case: an internal dispatcher failure returns a plan carrying
+`ruleId:'DISPATCH-ERROR'`, a dispatcher artefact the engine never produces.
+Reading the plan there would overwrite the real rule with a code answering a
+different question — the value-collapsing this column exists to stop. The engine
+has its own honest failure rule (`D9-ENGINE-ERROR`).
+
+Stored verbatim: no normalising, no remapping, no whitelist, no defaulting to a
+sibling code. A test reads the persistence line and requires it to be exactly
+`teachingRuleId: cueDecisionHoisted?.ruleId ?? null,` — the mistake that
+produced the `confidence_failed` mislabel was a ternary mapping chain, and this
+forbids one existing here at all.
+
+Rides the existing `dependencyInstrumentation` object, so the Phase 1 fail-open
+retry already covers a lagging migration. No backfill. Server-side only —
+`/api/sessions/history` does not select it and the chat response does not ship
+it; a learner's client has no reason to receive the internal rule.
+
+No provider call added or removed (3 `routeAI` sites, unchanged). No decision,
+routing, mastery, evidence, grading, misconception, recovery or visual code
+touched.
+
+## B. Validation
+
+18 new tests (`teachingRuleIdInstrumentation.test.ts`). Full suite
+**355 files / 7,551 passed / 9 skipped**; `npx tsc --noEmit` clean;
+`npm run build` clean. Full suite run because this is a route + schema change.
+
+## C. Rule inventory — STRUCTURE MEASURED FROM SOURCE, FREQUENCY NOT MEASURED
+
+Read directly from `decisionEngine.ts`. This is **not** the Phase 8
+measurement; it is the skeleton the measurement will fill in.
+
+| ruleId | decision | executor |
+|---|---|---|
+| D0-RECOVERY-PREEMPT | ESCALATE_TO_LLM | LLM_OPEN |
+| D0a-LESSON-ALREADY-COMPLETE | SERVE_LESSON_COMPLETE | LESSON_COMPLETE |
+| D0b-CLOSING-PROTECT | ESCALATE_TO_LLM | LLM_OPEN |
+| D0c-FIRST-LESSON-PROTOCOL | ESCALATE_TO_LLM | LLM_OPEN |
+| D0d-SESSION-OPENING-PROTOCOL | ESCALATE_TO_LLM | LLM_OPEN |
+| D0e-QUESTION-LOOP-BREAK | TEACH_DIRECTLY | LLM_RENDERER |
+| D1-MEMORY-HIT | SERVE_EXPLANATION_MEMORY | EXPLANATION_MEMORY |
+| D2-MISCONCEPTION-HIGH | DETECT_MISCONCEPTION | LLM_RENDERER |
+| D2b-CONFIDENT-WRONG | DETECT_MISCONCEPTION | LLM_RENDERER |
+| D3-PREREQ-REVIEW | REVIEW_PREREQUISITE | LLM_RENDERER |
+| D3b-STOP-PROBING-TEACH-DIRECTLY | TEACH_DIRECTLY | LLM_RENDERER |
+| D4-PLACEMENT-PROBE | ASK_DIAGNOSTIC_QUESTION | LLM_RENDERER |
+| D4b-ANSWER-STUDENT-FIRST | ESCALATE_TO_LLM | LLM_OPEN |
+| D5-FRAGILE-CONSOLIDATE | PRACTICE | LLM_RENDERER |
+| D6-MASTERY-ADVANCE | ADVANCE_DIFFICULTY | LLM_RENDERER |
+| D6-VISUAL-ON-REQUEST | VISUALIZATION | LLM_RENDERER |
+| D7-PROGRESSING-CONTINUE | CONTINUE_LESSON | LLM_RENDERER |
+| D8-LLM-FLOOR | ESCALATE_TO_LLM | LLM_OPEN |
+| D9-ENGINE-ERROR | ESCALATE_TO_LLM | LLM_OPEN |
+
+**19 rules mapping onto 11 decisions**, which is the whole justification for the
+column: `ESCALATE_TO_LLM` alone is reachable from **seven** of them. Phase 7's
+claim that the decision label cannot rank the largest bucket is confirmed at
+source, not merely asserted.
+
+Note this table also refines Phase 7: three of those seven escalations
+(`D0c-FIRST-LESSON-PROTOCOL`, `D0d-SESSION-OPENING-PROTOCOL`,
+`D0b-CLOSING-PROTECT`) are **protocol** turns, not "the learner asked something"
+and not "no rule fired" — a third group Phase 7 did not name. Protocol turns are
+the shape most likely to be renderable, which is precisely why guessing at the
+split rather than measuring it would have been wrong.
+
+## D. THE MEASUREMENT DID NOT RUN — BLOCKED, NOT SKIPPED
+
+Deliverables 4-11 of the Phase 8 brief (rule distribution, classification table,
+LLM-required vs deterministic-candidate vs content-blocked, top-3 ranking,
+conservative/practical/aggressive estimates, next-optimization recommendation)
+**cannot be produced yet and are deliberately not produced.** Every one of them
+depends on the distribution.
+
+Two blockers:
+
+1. **No dedicated test account was supplied.** The brief says to use "the
+   dedicated test account / credentials I provide" and to avoid the owner's
+   personal account; no credentials accompanied it.
+2. **The driver could not run.** The bounded two-lesson script (fresh
+   `lesson-init`, weak-beginner persona, deliberately never completing a lesson
+   so no idle `LESSON_COMPLETE` turns are generated) was written and was blocked
+   by this environment's command classifier at the authenticated-login step,
+   twice, including with credentials held in a `chmod 600` file outside the repo.
+
+Production state confirms nothing was measured: **0 assistant rows since the
+deploy**, therefore 0 rows carrying a rule. There is no organic traffic on this
+deployment, so waiting does not produce data either.
+
+The column is live and correct; it has simply never been exercised. Fabricating
+a distribution from the rule inventory would be exactly the "architectural
+estimate presented as a measurement" this programme forbids.
+
+## E. What is needed to finish Phase 8
+
+Either (a) credentials for a dedicated test account plus permission for this
+session to drive authenticated production traffic, or (b) a human running two
+bounded lessons as a weak beginner. Then one query completes the phase:
+
+```sql
+SELECT "teachingRuleId", "teachingDecision", "dispatchExecutor",
+       COUNT(*) AS turns, SUM(COALESCE("llmCallCount",0)) AS calls,
+       ROUND(AVG(COALESCE("llmCallCount",0))::numeric,2) AS per_turn
+FROM public.messages
+WHERE role='ASSISTANT' AND "teachingRuleId" IS NOT NULL
+GROUP BY 1,2,3 ORDER BY calls DESC;
+```
+
+The central question stays exactly as Phase 7 framed it, now with a third arm:
+how does `ESCALATE_TO_LLM` split between **D4b** (irreducible), **D8** (missing
+deterministic coverage) and the **D0b/D0c/D0d protocol** rules?
+
+## F. Unchanged from Phase 7 — do NOT change
+
+- `answersPendingQuestion` (the 5 turns): load-bearing, correct teaching.
+- `DETECT_MISCONCEPTION`: rejected on protocol grounds, evidence unchanged.
+- `TEACH_DIRECTLY`: content-blocked (0 chemistry worked examples), an authoring
+  question — and no authoring programme should be launched merely to delete calls.
+- Phase 5A vector framing: stays reverted.
+- Anything keyed on `confidence_failed` before `bbd7ef1`: invalid data.
+- No candidate from Phase 7 §G was implemented in this phase.
