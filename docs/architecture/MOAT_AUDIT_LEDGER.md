@@ -1617,3 +1617,79 @@ true on all 16 logged occurrences but `converted` **false on 7 of 16**.
 There is **no organic learner traffic** in the window. This measures the code
 path faithfully; it is **not** a reliable population percentage for real
 learners, whose mix of question-asking and answering would shift the ratio.
+
+---
+
+## LLM COST MAP — Physics + Chemistry (2026-08-17, measurement only)
+
+Sample: **23 tutor turns** — ALL production `/api/learn/chat` traffic in the
+retention window across every deployment queried. 100 turns were targeted and
+production does not contain them; there is no organic traffic. One synthetic
+learner profile. Not a population estimate.
+
+| calls in turn | turns | share |
+| --- | --- | --- |
+| 0 | 3 | 13.0 % |
+| 1 | 18 | 78.3 % |
+| 2 | 1 | 4.3 % |
+| 3 | 1 | 4.3 % |
+
+23 calls total, avg 1.00/turn, max 3, `llmUsed` true on 20 / false on 3.
+
+### Escalation reason — per turn, from logs, not inferred
+
+| brain rule | turns | LLM? |
+| --- | --- | --- |
+| D6-MASTERY-ADVANCE | 6 | yes |
+| D0d-SESSION-OPENING-PROTOCOL | 5 | yes |
+| D0b-CLOSING-PROTECT | 4 | yes |
+| D7-PROGRESSING-CONTINUE | 3 | yes |
+| D8-LLM-FLOOR | 2 | yes |
+| **D1-MEMORY-HIT** | **3** | **no** |
+
+`fallbackReason`: `confidence_failed` 12, `brain_decision` 8, `grade_band` 3.
+**`grade_band` is not a failure** — those are exactly the 3 zero-LLM turns,
+served through grade fallback. So the LLM-causing reasons partition cleanly:
+12 confidence_failed + 8 brain_decision = the 20 LLM turns.
+
+Categories E (recovery), G (transition), L (retry/failover) recorded **zero**
+occurrences. J+K (visual generation + critic) = 3 calls on 2 turns, and decay
+to zero as figures cache.
+
+### PHASE 2 — why only 3/23 hits at 100 % concept coverage
+
+Measured in the authored corpus: **866 explanation assets over 423 concepts —
+2.05 variants per concept (min 1, max 5)**, grade bands HIGH 743 / UNDERGRAD
+100 / MIDDLE 14 / ADULT 9.
+
+**It is VARIANT coverage, not CONCEPT coverage.** A lesson runs ~12 turns of
+many KINDS — opening, teach, show, ask, recover, transition, close — and the
+asset key has no turn-kind dimension at all: `(concept, family, language,
+gradeBand)`. Two HIGH-band variants cannot serve twelve turn kinds, so
+`explanationMemoryAvailable` was false on 12 of 23 turns. A new relevance gate
+is also visible and working as intended: `[explanationMemory] refused … 
+irrelevant-to-question — asked "Give me a multiple choice question on this.",
+asset shares no topic word`.
+
+### PHASE 3 — ranked candidates
+
+| Candidate | Current % | Safe? | Calls removable | Risk | Effort |
+| --- | --- | --- | --- | --- | --- |
+| Turn-kind variants for authored assets | up to 52 % (confidence_failed) | POSSIBLE — needs authorization | ~12/23 | new authoring system | large |
+| Deterministic OPENING render (D0d) | 21.7 % | POSSIBLE | 5/23 | learner-specific recap is real | medium |
+| Deterministic CLOSING render (D0b) | 17.4 % | POSSIBLE | 4/23 | learner-specific summary is real | medium |
+| Serve authored MCQ on `ask` with no LLM framing | 4.3 % (1 turn) | SAFE but marginal | 1/23 | low | small |
+| D6 / D7 / D8 adaptive turns | 47.8 % | **UNSAFE** | 0 | this IS the teaching | — |
+| Visual generation + critic | 8.7 % | already self-limiting | ~0 | none | — |
+
+### PHASE 4 — NOT IMPLEMENTED, deliberately
+
+Every dominant driver is UNSAFE (D6/D7/D8 — genuine adaptation, 11 of 20 LLM
+turns) or POSSIBLE-but-behaviour-changing (D0d/D0b protocol renders, 9 of 20).
+The only strictly SAFE candidate is worth **one turn in twenty-three**, and
+implementing it would touch the assessment path to save 4.3 % — a worse trade
+than leaving it alone.
+
+Per this campaign's own stop rule — "if the next optimization requires changing
+teaching behaviour, introducing a new content-authoring system, or altering
+evidence semantics, STOP and request authorization" — no code was changed.
