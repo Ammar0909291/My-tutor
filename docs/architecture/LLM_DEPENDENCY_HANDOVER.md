@@ -917,3 +917,69 @@ still runs elicit and re-probe. That is a quality improvement, not a saving.
 
 This corrects the earlier ranking, which listed misconception repair as the
 next-best call-elimination target on asset count alone.
+
+---
+
+# PHASE 5 (2026-08-17)
+
+## Track A — vector camera framing: SHIPPED (`e07ef96`)
+
+Root cause: vectors are drawn FROM the origin, so the figure occupies one
+quadrant, while the camera sat at a fixed `VISUAL_MAX * 2.5` **looking at the
+origin — the corner of its own content**. Live 3-4-5 case: frame ~42 world
+units, drawing ~14.
+
+Fix (presentation only, scoped to `vectorAddition.ts`): aim the camera at the
+content bounding-box centre and pull back only as far as that box needs, using
+the renderer's real terms (fov 50 vertical, 4/3 aspect) + 1.45 margin for
+labels, which render outside the arrow tips.
+
+**The geometry was deliberately NOT translated.** `checkVectorConsistency`
+validates against ABSOLUTE tip positions (`R == A + B`, magnitude from origin);
+centring by moving the scene would have broken the safety net that proves the
+figure correct. The camera moved instead.
+
+`cameraTarget` is a new OPTIONAL `SceneSpec` field forwarded through
+`SceneSpecRenderer` → `ThreeDVisual`, defaulting to the origin, so the other
+30 generators sharing that renderer are unchanged.
+
+**MEASURED** over 4 cases (incl. near-cancelling and negative quadrants):
+frame fill **34% → 69%** on the live case, **0 clipped points**, and
+`checkVectorConsistency` passes on every case.
+
+## Track B — lesson opening: AUDITED, NOT IMPLEMENTED
+
+**Frequency (MEASURED, since 2026-08-12):** 42 lesson starts against 682
+assistant turns ≈ **6.2% of turns**, 1 provider call each.
+
+**Instrumentation gap found:** `lesson-init` persists only
+`{sessionId, role, content}` — it does NOT write `llmCallCount`,
+`dispatchExecutor` or `teachingDecision`. **Lesson-opening calls are therefore
+invisible to the Phase 1 instrumentation**, and 106 of 682 assistant turns in
+the window carry no instrumentation at all. Any future "% LLM-dependent" figure
+computed from `messages` UNDER-COUNTS by roughly the lesson-start rate.
+
+**Classification: E — HYBRID, and the LLM half is the valuable half.**
+
+The opening is not protocol-shaped. Observed live, the physics opening produced
+a concrete analogy — *"imagine you walk 3 steps forward, then 4 steps to the
+right… looking at your footprint path from a helicopter"* — which is genuine
+teaching content, not orientation boilerplate. The protocol shell (greeting,
+concept naming, mode framing) is deterministic; the analogy is not.
+
+**Two blockers found, either of which alone justifies stopping:**
+
+1. **Mode divergence.** `buildInstruction` has four modes and `review`
+   explicitly requests "key concepts AND practice exercises" — a different
+   artefact from a first-teaching opening. One authored `core_explanation`
+   does not satisfy all four.
+2. **Collision with the already-served rule.** `lesson-init` deliberately
+   bypasses Explanation Memory ("intentionally minimal"). If it began serving
+   the authored `core_explanation`, it would not record it through
+   `hasServedExplanation`, so the FIRST chat turn could serve the same text
+   again — repetition — or, if wired to record it, would push that turn onto
+   the LLM instead. **The call would move, not disappear.**
+
+**Verdict: not a safe call-elimination target as it stands.** Making it one is
+a design task about who owns the first explanation, not a small fix. Estimated
+saving if solved: ~6% of turns — real, but below the risk it currently carries.
