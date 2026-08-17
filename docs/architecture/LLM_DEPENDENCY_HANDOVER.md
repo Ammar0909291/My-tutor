@@ -1826,3 +1826,157 @@ the measurement of how often the close is violated should come first.
 - Phase 8 §F ranked D0b the #1 elimination target — **withdrawn**; §E/§F here
   show there is no elimination prize in it.
 - Phase 7 §F/§G (D8 as the central question) — already refuted in Phase 8.
+
+---
+
+# PHASE 10 (2026-08-17) — MANDATORY PROTOCOL COMPLIANCE: INSTRUMENTED + MEASURED
+
+Measurement only. Nothing re-renders, re-prompts, replaces output or spends a
+provider call on a violation — pinned by tests, including one that fails if any
+`if` ever branches on the verdict.
+
+## A. What shipped
+
+`messages.teachingComplianceStatus` + `messages.teachingComplianceViolation`
+(migration `20260817203000_message_protocol_compliance`, verified applied in
+production `20:38:52+00`). Commit `cf0bf22`.
+
+The protocol contracts are evaluated **inside `checkBrainCompliance`, before the
+`LLM_OPEN` early return** — one authority extended, not a second checker beside
+it. The context parameter is optional, so every pre-existing caller and check is
+byte-for-byte unchanged.
+
+Each rule got its **own** contract; D0b's checks were never applied mechanically
+to the others:
+
+| rule | checkable | code | not checkable |
+|---|---|---|---|
+| D0b | question mark present | `D0B_QUESTION_PRESENT` | whether prose introduces NEW CONTENT |
+| D0b | far longer than a ~2-sentence close (>6 sentences) | `D0B_LENGTH_EXCEEDED` | whether a close was actually delivered |
+| D0b | an assessment was attached (that IS another attempt) | `D0B_NEW_ATTEMPT` | — |
+| D0c | burst longer than the 2-sentence limit | `D0C_BURST_TOO_LONG` | ≤3 new words, demonstrate-before-explain, praise-the-act |
+| D0c | opened lesson one with a quiz | `D0C_OPENED_WITH_QUIZ` | ≤6 questions per SESSION (cross-turn counter, not added) |
+| D0d | **nothing** | — | **all of it** |
+
+Multiple codes are `'+'`-joined, never collapsed — Phase 6's lesson encoded. An
+unverifiable protocol (`NOT_MEASURABLE`) stays distinguishable from no protocol
+at all (`violation = null`).
+
+**D0d is reported `NOT_MEASURABLE`, not `PASS`.** Every requirement in
+`buildOpeningBlock` is ordering and presence of meaning — engineered win first,
+continuity in one breath, reviews before new content, then objective + why +
+connection. Inventing a structural signature would manufacture a rate rather
+than measure one.
+
+## B. MEASURED — bounded production run, 2 fresh lessons × 10 turns
+
+`phys.mech.newtons-second-law`, `chem.bond.covalent-bonding`, weak-beginner
+persona, owner-authorized account.
+
+| RULE | TURNS | CALLS | CHECKED | PASS | VIOLATION | NOT_CHECKED | VIOLATION RATE |
+|---|---|---|---|---|---|---|---|
+| D0d-SESSION-OPENING-PROTOCOL | 8 | 8 | 0 | 0 | 0 | 8 (all `NOT_MEASURABLE`) | **unmeasurable** |
+| D0-RECOVERY-PREEMPT | 4 | 4 | 0 | 0 | 0 | 4 | no contract |
+| **D0b-CLOSING-PROTECT** | **2** | **2** | **2** | **0** | **2** | 0 | **100%** |
+| (lesson-init) | 2 | 2 | — | — | — | — | n/a |
+| D1-MEMORY-HIT | 2 | 0 | — | — | — | — | n/a |
+| D5-FRAGILE-CONSOLIDATE | 2 | 2 | — | — | — | — | n/a |
+| D6-VISUAL-ON-REQUEST | 2 | 2 | — | — | — | — | n/a |
+| **D0c-FIRST-LESSON-PROTOCOL** | **0** | 0 | — | — | — | — | **NOT OBSERVED** |
+
+**D0c did not fire.** `firstLessonGuard` requires a Library beginner at lesson 1
+with zero completions; this account has completions. Its contract is written and
+tested but has **no production evidence** — reported as NOT OBSERVED, not as
+passing.
+
+`CHECK_ERROR`: 0.
+
+## C. The two violations — and why one check would not have been enough
+
+| # | code | chars | `?` | what it was |
+|---|---|---|---|---|
+| 1 | `D0B_LENGTH_EXCEEDED` | 894 | **0** | *"you picked option B, but let's trace it back to our bowling ball and tennis ball example…"* — full re-teaching |
+| 2 | `D0B_QUESTION_PRESENT` | 714 | 1 | *"🎉 …✓ What you mastered — You can now describe…"* — the real close, but it asks a question |
+
+Both structural. **Neither check would have caught both.** Violation 1 has zero
+question marks — a question-only check misses it entirely, which is precisely
+the assumption the brief warned against ("no question mark = compliant"). It was
+caught only because it was long. Violation 2 is short in sentence terms (a
+structured close with bullets) and was caught only by the question check.
+
+That is the measured justification for separate codes rather than one label.
+
+**Requirement violated in each case:** #1 *"do NOT introduce new content… close
+warmly in ~2 sentences"*; #2 *"do NOT introduce… new questions"*.
+
+## D. Answers to the success criteria
+
+1. **Are D0b/D0c/D0d being checked?** D0b: yes, now. D0c: contract exists,
+   never fired. D0d: **no, and structurally cannot be.**
+2. **How often do they violate?** D0b **2 of 2 = 100% (MEASURED, n=2)**.
+   Consistent with Phase 9's unchecked sample: 8 D0b turns, 7 with question
+   marks, new scenarios introduced — **10 of 10 across both phases show the
+   pattern.**
+3. **What fails?** The two-sentence close bound and the no-new-questions rule.
+4. **Structural or semantic?** Both violations caught structurally, but the
+   requirement that matters most — *"do not introduce new content"* — is only
+   ever **proxied** by length. A short new-content turn with no question mark
+   would pass today.
+5. **Highest measured rate:** D0b, 100%.
+6. **Is the mechanism capable?** **Partially.** It caught every violation in
+   this sample, but it cannot see D0d at all (the largest bucket, 8 of 20 calls)
+   and its new-content detection is a proxy, not a test.
+7. **Minimum safe enforcement:** see §E.
+
+## E. NEXT DECISION — **A: ENFORCE MEASURED VIOLATIONS, scoped to D0b only**
+
+D0b is the one rule where the contract is unambiguous, the violation is measured
+at 100%, and a Moat guarantee is concretely broken: the affect budget exists to
+stop pushing a struggling learner, and the learner was re-taught anyway.
+
+Smallest safe enforcement design (**NOT implemented**):
+
+- **Do not re-render and do not call the provider again.** A second call to fix
+  a close costs the exact thing this programme is reducing, and a model that
+  ignored the block once may ignore it twice.
+- **Serve the deterministic close instead, on violation only.** The close's two
+  learner-specific parts are both already available server-side without a model:
+  the concept title (KG) and the session's own graded outcomes. This is a
+  *fallback for a broken turn*, not the D0b renderer Phase 9 rejected — it fires
+  only when the structural check fails, so a compliant close is never replaced.
+- **Keep `llmCallCount` truthful**: the call was spent even though its output was
+  discarded. Provenance must show what was paid, not what was served.
+- **Gate it behind measurement**: ship it dark first (status recorded, output
+  unchanged) until the rate holds on a larger sample.
+
+**Blocking prerequisite before any of this:** the violation rate rests on n=2
+checked turns. Minimum additional sample before enforcement: **≥20 checked D0b
+turns across ≥5 distinct lessons and both subjects.** If the rate stays above
+~50%, enforce; below that, the fallback is not worth the branch.
+
+**D0d is a separate track and its answer is B (improve detection first)** — 8 of
+20 calls in this run, and today literally nothing about it is verifiable. It
+cannot be enforced, ranked or optimized until at least one requirement in
+`buildOpeningBlock` has a defensible structural signature.
+
+## F. Known limitation, stated rather than hidden
+
+`teachingComplianceStatus` is NULL for `LLM_RENDERER` and `EXPLANATION_MEMORY`
+turns (D1, D5, D6 above) — those paths return through the pre-existing switch,
+which this phase deliberately did not touch. NULL means "no Phase 10 verdict",
+identical to a pre-deploy row. Extending coverage there is future work, not a
+silent gap.
+
+## G. Corrections preserved (all still standing)
+
+- Phase 8 §D — D0b "absorbing state" claim: **WRONG**, corrected in Phase 9 §A.
+- D0b lifecycle: **CORRECT**; exits on the >30-minute inactivity boundary.
+- Phase 8 §F — D0b as #1 elimination target: **WITHDRAWN**.
+- Phase 7 §F/G — D8-LLM-FLOOR hypothesis: **REFUTED** (0 calls, twice).
+- Phase 6 — every `confidence_failed` figure before `bbd7ef1`: **INVALID**.
+- Phase 5A vector framing: **REVERTED**, not reopened.
+
+Nothing in the Moat-protected list changed: mastery, evidence, grading, answer
+keys, attempt lifecycle, budget semantics, misconception protocol, recovery,
+`answersPendingQuestion`, `sessionEpisode` lifecycle, the CLOSING boundary,
+visual ownership, Educational Brain, KG, curriculum, authored assets.
