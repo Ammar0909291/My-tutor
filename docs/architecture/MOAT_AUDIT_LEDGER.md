@@ -1474,3 +1474,76 @@ and credited with nothing. Correct behaviour.
 Together with Test A (mastery at turn 13 inside the extension), both directions
 of the budget policy are now live-verified: it extends a converting learner and
 refuses a non-converting one.
+
+---
+
+## S4b — ANSWER-KEY TRUTH SWEEP (2026-08-17, measurement only)
+
+The gap named by the readiness assessment: S1 counts probes that CONVERT and
+S4 checks the stem AGREES with its blueprint, but no stage asked whether the
+option marked correct IS correct. Corpus: 2,039 physics + chemistry probes,
+of which **1,498 are gradeable MCQs** (the rest carry no choices).
+
+### Layer 1 — structural keying integrity: 1,498/1,498, deterministic
+
+| check | result |
+| --- | --- |
+| exactly one `isCorrect` | **1,498 / 1,498** |
+| zero-correct probes | **0** |
+| multi-correct probes | **0** |
+| duplicate choice text | **0** |
+
+No judgement involved; this is the whole MCQ corpus.
+
+### Layer 2 — independently judged answer keys: 54 probes, 0 wrong
+
+Every significant-figures probe (6, the control class) plus a reproducible
+seeded sample of 48 drawn from the 552 numerically decidable probes (335
+physics / 217 chemistry — stem and choices both carry numbers, so the key can
+be checked by computation rather than by agreeing with another copy of itself).
+
+Physics 28 judged, chemistry 26 judged. **0 WRONG, 0 AMBIGUOUS.**
+
+Spot examples recomputed from first principles rather than compared:
+`10 g@80 °C + 200 g@20 °C → 22.9 °C` (not the 50 °C distractor);
+`1/f = 1/(−20) − 1/(−30) = −1/60 → f = −60 cm, diverging`;
+`ΔH 30 kJ / ΔS 75 J·K⁻¹ → 400 K` (the kJ/J trap is the distractor, and the key
+is on the right side of it); `Xn = 1/(1−0.98) = 50`; iodoform positive for
+pentan-2-one and propan-2-ol but not pentan-3-one; `E₃ = −13.6/9 = −1.51 eV`.
+
+### THE CONTROL DID NOT EXIST — my earlier report was wrong
+
+The deferred item was recorded as "0.0405 g keyed as 4 significant figures,
+correct is 3". Measured:
+
+- **no probe containing `0.0405` exists** in the authored corpus or in
+  production `probe_assets` (queried directly; the only chemistry
+  significant-figures probes served are `0.00470` and `12.52 + 1.7`, both
+  correctly keyed);
+- the nearest authored item is **`0.04050`** in
+  `docs/mathematics/teaching-assets/assets.json` — a Curriculum-Pipeline worked
+  example, not a served probe — and `0.04050` genuinely has **4** significant
+  figures (4, 0, 5, 0). Its stated answer is CORRECT.
+
+The trailing zero is exactly the digit that makes it 4. Either the earlier note
+dropped it, or it recorded an ephemeral model-generated MCQ from a live turn.
+**It is not an authored answer-key defect, and the deferred item should be
+closed as a false alarm rather than fixed.**
+
+### What is measured, and what is not
+
+Honest denominator: 54 of 1,498 MCQ keys were individually judged. Zero errors
+in 54 puts the 95 % upper bound on the corpus error rate at roughly **5.6 %**
+(rule of three) — small, but not zero, and not a claim that all 1,498 are
+correct. The 1,444 unjudged keys are **NOT VERIFIED**, and the ~946
+non-numeric MCQs cannot be swept by computation at all: checking them is
+subject-matter reading, not a script.
+
+### The defect class that remains, and that no corpus sweep can reach
+
+If the 0.0405 sighting was real, it was a **model-generated MCQ at runtime** —
+the model writing a question and keying its own answer, with no authored asset
+and no server-side key to audit. That content is ephemeral, never enters
+`probe_assets`, and is invisible to this sweep by construction. It is a
+different risk from authored-key correctness and is recorded here as such, not
+fixed.
