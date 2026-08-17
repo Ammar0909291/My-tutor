@@ -1207,3 +1207,110 @@ this class of script is most prone to:
   `[prose-mcq-ungradeable]` marker has no session to fire on.
 - **S6 / S9** remain NOT MEASURED. Both need live learner traffic, and there
   has been none in the observable window.
+
+---
+
+## S9 — progress-aware budget extension (owner-approved), live-verified
+
+Commit `7f703c3`, deployment `dpl_CxXEqYp3oQxdYza6ednQSKt2em6N` (READY).
+Implements Option B exactly as analysed: a learner sitting at
+`CONCEPT_TURN_BUDGET` who is demonstrably converting gets **one** `+6`
+extension (hard cap 18). The extension buys TURNS and never certification —
+mastery stays `correctAtPractice >= 2 || phase TRANSFER`, from server-graded
+evidence only.
+
+### Premise correction, recorded because it weakens my own case
+
+The analysis that motivated this said a weak learner burns budget on clarifying
+questions. **That part was wrong, and measured to be wrong**: an active
+excursion freezes the lesson ladder, and excursion turns do NOT increment
+`turnsOnConcept` (observed: 6 turns on concept across 11 chat turns). The part
+that survives is the one the policy actually rests on — the ladder needs five
+server-graded correct answers plus a teaching give, and when the tutor does not
+volunteer each question the learner spends a turn asking for it.
+
+### LIVE TEST A — progressing learner (PASS)
+
+`chem.found.mole-concept` (chemistry lesson 6), verified fresh beforehand:
+0 attempts, 0 `topic_progress`, 2 ACTIVE probes. Driven with server-owned MCQs
+and letter answers only, padded with bare acknowledgements, to avoid opening an
+excursion (which would have frozen the very counter under test).
+
+| assertion | result |
+| --- | --- |
+| extension granted exactly once | `budgetExtensionGranted` false → **true at turn 12**, still a single grant at turn 14 |
+| all three conditions held at grant | `chk+prac = 2 ≥ 1`, `fails = 0`, phase `PRACTICE` |
+| mastery still reachable | reached at turn 13 — `practiceCorrect 2`, phase `TRANSFER` |
+| no artificial certification | mastery came from a server-graded MCQ (`correctIndex` owned by the server), not from the extension |
+| `budgetExhaustions` | **0** |
+| attempt rows for `lesson:6` | **exactly 1** |
+| duration | **520 s** (real elapsed, not the 1-second artefact) |
+| close | `conceptsMastered: ["chem.found.mole-concept"]`, `conceptsNeedingReview: []`, `fullyMastered: true` |
+
+This is the direct A/B against the recorded `chem.found.states-of-matter` case:
+mastery landed at turn 13, so **under the old policy this concept would have
+closed at turn 12 as `needsReview` with `conceptsMastered: []`** — on a learner
+who then proved mastery one turn later.
+
+### LIVE TEST B — did NOT test what it was meant to, and found something else
+
+Intent: a non-converting learner must still be capped at 12. Run on
+`chem.found.stoichiometry` (lesson 7, verified fresh) with acknowledgements
+only, never answering a graded MCQ. At turn 6 the profile was exactly right —
+phase `CHECK` and `fails 0` both *qualifying*, `chk+prac = 0` the only
+disqualifier, so the extension had to be refused.
+
+It was not refused, because the counter moved. At turn 10 `correctAtCheck` went
+0 → 1 and the extension was granted at turn 12. **The extension behaved
+correctly given its inputs**; the inputs were wrong.
+
+Note also the framing of the original Test B is unreachable as written: a purely
+failing learner cannot be driven to turn 18, because `MAX_CONSECUTIVE_FAILURES`
+(3) exhausts the budget first. The reachable and meaningful form of the test is
+the one above — "a non-qualifying learner is still capped at 12" — and it
+remains **NOT VERIFIED**, blocked on the defect below.
+
+### FINDING — correctness accepted with NO question pending (class A, pre-existing)
+
+Reproduced on the real account, `chem.found.stoichiometry`, 2026-08-17:
+
+1. turn 8 — tutor asks a prose-only MCQ (`A)`/`B)` on their own lines).
+2. turn 9 — learner says `hmm`. The prose-MCQ guard fires correctly here and
+   correctness is suppressed. The tutor then **works through the answer itself**
+   and states the conclusion.
+3. turn 10 — learner says `i see`. The prior assistant message is now an
+   explanation, not an options list, so `hasProseMultipleChoice()` is false and
+   the guard does not fire. `pendingMcqHoisted` is also null. The model's
+   `<!--SIGNAL--> correctness="true"` is accepted.
+
+Result: `correctAtCheck` 0 → 1, the ladder advanced `CHECK` → `PRACTICE`, and
+`topic_progress.chem.found.stoichiometry` was written to **65 %** — all from a
+two-word acknowledgement of the tutor's own worked answer. The learner
+demonstrated nothing.
+
+Mechanism, read in `route.ts:3870`: the suppression condition is
+`!pendingMcqHoisted && hasProseMultipleChoice(prior)`. The complementary case —
+`!pendingMcqHoisted` **and no question of any kind was asked** — is entirely
+ungoverned, and it is strictly *more* ungradeable than the prose-MCQ case the
+guard was built for: there is not even a question to compare an answer against.
+
+Classification **A, genuine runtime defect, PRE-EXISTING and independent of this
+batch** — `qualifiesForBudgetExtension` only reads counters and cannot cause one
+to increment. It is reported, not fixed: the approved plan for this batch says
+to stop and report on an unexpected interaction with the ladder rather than
+change policy, and this is one. Fixing it means deciding what counts as an
+answerable turn, which is a ladder-wide evidence rule, not a patch.
+
+Not repaired in production either: the two affected rows
+(`chem.found.stoichiometry` at 65 %, and the `lesson:7` attempt left
+IN_PROGRESS) are historical learner data on the test account, and repairing
+historical production data needs explicit authorization.
+
+### Regression guard
+
+`src/tests/conceptBudgetExtension.test.ts` — 16 tests over the three approved
+conditions, the grant-at-most-once property (including the fold, where
+evaluating at the `turnsOnConcept` increment would have read a stale
+`consecutiveFailures: 0` and granted on a failing turn), the 12-vs-18 cap in
+both directions, and snapshot round-tripping with a no-migration default for
+states written before the field existed.
