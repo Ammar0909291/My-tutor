@@ -277,7 +277,19 @@ the fix changes nothing there — consistent with the run, where both
 
 ### Status
 
-Committed `6af66c5`, deployed. **Live before/after NOT measured** — see §17.
+Committed `6af66c5`, deployed. Production is serving `4ddb090` (deployment
+`dpl_6DDby2MQp7F6Ninfa7pTVTDcC4Jw`, READY), which contains the Phase 3 code.
+
+**Live before/after still NOT measured** — see §17.
+
+Post-deploy traffic to date (**MEASURED**): exactly **1** assistant turn, at
+2026-08-17 11:42:45 on `phys.meas.vector-addition` —
+`ESCALATE_TO_LLM` / `LLM_OPEN`, `memoryFallbackReason=confidence_failed`,
+`llmCallCount=1`, a figure on screen. It is an open-escalation turn, not a
+mastery gate, so it exercises none of the Phase 2/3 pipeline.
+
+**`provider='gate'` turns in production, all time: 0.** Phase 2 has still never
+fired, and Phase 3's effect on the gate remains unproven in production.
 
 ---
 
