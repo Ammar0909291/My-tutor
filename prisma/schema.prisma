@@ -569,6 +569,22 @@ model Message {
   // client's AI badge survives a page reload / history restore instead
   // of only existing for the current in-memory turn.
   provider     String?
+  // ── LLM-DEPENDENCY INSTRUMENTATION (Phase 1, additive, all nullable) ─────
+  // The dispatcher computes a teaching decision and an executor on EVERY
+  // turn, and the Explanation Memory path computes why it did or did not
+  // serve. All three were logged and then discarded, which is exactly why the
+  // dependency audit could MEASURE the 87% aggregate but had to ESTIMATE
+  // every per-path share. These columns persist values the runtime already
+  // holds: no extra model call, no teaching-behaviour change, no backfill.
+  //
+  // llmCallCount is a COUNT, not a boolean, deliberately. `provider` records
+  // which driver answered but not how many provider calls the turn spent, so
+  // the verifier-gate and definition-agreement REPAIR calls were entirely
+  // unmeasurable — they are the two paths the audit had to leave unsized.
+  teachingDecision     String? // TeachingDecisionType, e.g. 'DETECT_MISCONCEPTION'
+  dispatchExecutor     String? // DispatchExecutor, e.g. 'LLM_RENDERER'
+  memoryFallbackReason String? // snake_case code, e.g. 'already_served'
+  llmCallCount         Int?    // provider calls spent on this turn (0 for memory/degraded)
   /// THE FIGURE THIS MESSAGE ACTUALLY DISPLAYED.
   ///
   /// A diagram the tutor taught with is part of the learner's teaching record,

@@ -3446,6 +3446,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // branch clears its own flag if it cannot produce text.
       let text: string = ''
       let provider: string = 'fallback'
+      // Phase 1 instrumentation. Counts PROVIDER CALLS spent on this turn, not
+      // whether one happened: the primary generation is one call, and the
+      // verifier-gate and definition-agreement repairs each add another on the
+      // same turn. `provider` cannot express that (it names the driver that
+      // answered), which is exactly why the repair paths were unsized in the
+      // dependency audit. Incremented at every routeAI() call site in this
+      // route; a memory- or degraded-served turn correctly ends at 0.
+      let llmCallCount = 0
       // The provider's own reason the completion ended ('stop', 'length',
       // etc.) — 'n/a' for memory-served responses, which never call a
       // model. Logged below so a future empty-response failure carries
@@ -3575,6 +3583,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // exhaustion is load management with a deliberate 429, not an outage.
         let routed: { text: string; provider: string; finishReason: string | null }
         try {
+          llmCallCount++ // instrumentation only — counted before the await so a
+          // throw still records the call that was actually spent.
           routed = await routeAI(
             [...historyMessages, { role: 'user', content: message }],
             systemPrompt,
@@ -4315,6 +4325,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 'Re-answer their question now.'
               let repaired = cleanText
               try {
+                llmCallCount++ // instrumentation only (definition-agreement repair)
                 const routed = await routeAI(
                   [...historyMessages, { role: 'user', content: message }],
                   systemPrompt + appendix + outputLanguageBlockHoisted,
@@ -4478,6 +4489,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               learnerText: message,
               fallbackChain: ['SHOW_EASIEST_LEGAL', 'ECHO_MICROWIN', 'WARM_CLOSE'],
               rerender: async (violationAppendix) => {
+                llmCallCount++ // instrumentation only (verifier-gate re-render)
                 const routed = await routeAI(
                   [...historyMessages, { role: 'user', content: message }],
                   // The violation appendix is English machine instruction and
@@ -5057,11 +5069,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt')
       const assistantLessonKey = lessonKeyFor({ topicSlug: studentProgress?.activeLessonSlug ?? null, lessonOrder: studentProgress?.currentLesson ?? null })
 
+      // Phase 1 instrumentation payload. Every value is already computed by
+      // this turn — nothing here calls a model, reads the learner's content,
+      // or influences what was taught. Written on the SAME row as `provider`
+      // so the distribution query is a plain GROUP BY with no join.
+      const dependencyInstrumentation = {
+        teachingDecision: dispatchPlanHoisted?.decision ?? null,
+        dispatchExecutor: dispatchPlanHoisted?.executor ?? null,
+        // 'none' is the initialised value and means the memory path never
+        // reported a reason; stored as NULL rather than the string 'none' so
+        // "no reason recorded" and "a reason was recorded" stay distinguishable.
+        memoryFallbackReason: memoryFallbackReasonCode === 'none' ? null : memoryFallbackReasonCode,
+        llmCallCount,
+      }
+
       let assistantMessage
       try {
         assistantMessage = await withRetry(() => prisma.message.create({
           data: {
             sessionId, role: MessageRole.ASSISTANT, content: contentForHistory, provider,
+            ...dependencyInstrumentation,
             ...(displayedVisualSession ? { visualSession: displayedVisualSession } : {}),
             ...(assistantLessonKey ? { lessonKey: assistantLessonKey } : {}),
           },
