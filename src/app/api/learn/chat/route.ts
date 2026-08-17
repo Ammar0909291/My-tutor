@@ -3574,6 +3574,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // told 'AI down'"). AIBudgetExceededError still propagates — budget
         // exhaustion is load management with a deliberate 429, not an outage.
         let routed: { text: string; provider: string; finishReason: string | null }
+        // ── TEMPORARY PROMPT COST DIAGNOSTIC — REMOVE AFTER ONE SESSION ──
+        // Log-only. Measures the EMITTED prompt, never source literals, by
+        // splitting the assembled systemPrompt on its own ALL-CAPS section
+        // headers. Reads nothing new, writes nothing, changes no branch.
+        try {
+          const t = (s: string) => Math.round(s.length / 4)
+          const secs = systemPrompt.split(/\n(?=[A-Z][A-Z0-9 /&(),'’—-]{5,}:)/)
+          const hist = historyMessages
+            .map((m: { content?: string }) => m.content ?? '').join('')
+          console.log('[prompt-cost]', JSON.stringify({
+            session: learnSession.id,
+            concept: conversationStateHoisted?.conceptId ?? null,
+            phase: conversationStateHoisted?.phase ?? null,
+            rule: (globalThis as Record<string, unknown>).__cueRuleId ?? null,
+            totalSystemTok: t(systemPrompt),
+            historyMsgs: historyMessages.length,
+            historyTok: t(hist),
+            learnerTok: t(message),
+            sections: secs
+              .map((x) => [x.split('\n')[0].slice(0, 46).trim(), t(x)])
+              .filter(([, n]) => (n as number) >= 15)
+              .sort((a, b) => (b[1] as number) - (a[1] as number)),
+          }))
+        } catch { /* diagnostic only */ }
+        // ── END TEMPORARY PROMPT COST DIAGNOSTIC ────────────────────────
         try {
           routed = await routeAI(
             [...historyMessages, { role: 'user', content: message }],
