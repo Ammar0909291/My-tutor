@@ -845,3 +845,75 @@ flowchart TD
   R -->|"answersPendingQuestion · 7 of 7"| L2["LLM fallback"]
   R -->|"clear · 0"| D["provider=gate · 0 calls"]
 ```
+
+---
+
+# PHASE 4 (2026-08-17) — PROVENANCE FIX + MISCONCEPTION-REPAIR ANALYSIS
+
+## Track A — provenance defect: ROOT CAUSE FOUND AND FIXED (`4766b61`)
+
+**MEASURED:** 4 production turns carried `provider='memory'` with
+`llmCallCount=1`. All 4 were `dispatchExecutor='LESSON_COMPLETE'`,
+`memoryFallbackReason='lesson_complete'`, and their stored text was model
+prose — not the close `buildLessonCloseText` produces.
+
+**Root cause (not merely a label bug).** `servedFromMemory` is defined
+`!serveLessonComplete && …`, so a completed-lesson turn is FALSE for it and ran
+the output verifier. The verifier's remedy is `rerender()`, which calls a
+provider. It spent a call AND replaced server-authored text, while the serve
+branch had already stamped `provider='memory'`. Learners saw the Brain badge on
+an LLM-written turn.
+
+**Fix, two parts:**
+1. Lesson-complete joins the verification exclusion alongside memory and gate —
+   all three produce server-authored text. This also stops the call.
+2. The badge derives from `llmCallCount` (what the turn SPENT), not `provider`
+   (which branch served). `llmCallCount` now ships in the chat response and is
+   selected by `/api/sessions/history`, so a restored transcript re-badges
+   instead of keeping the wrong label forever. Legacy rows (column undefined)
+   keep the provider rule and never lose their badge.
+
+A frontend-only change was impossible: `llmCallCount` was persisted but absent
+from both the API response and the history `select`.
+
+Tests: `src/tests/turnProvenance.test.ts` (15), full suite 352 files / 7,510
+passed, tsc + build clean.
+
+## Track B — misconception repair: DO NOT IMPLEMENT (analysis only)
+
+**Authored coverage (MEASURED, phys+chem):**
+
+| | count |
+|---|---|
+| misconceptions detectable by ACTIVE probes | 837 |
+| misconceptions with an authored repair | 710 |
+| **exact (concept + misconception) matches** | **538 = 64.3%** |
+| detectable with NO exact repair | 299 = 35.7% |
+
+Every one of the 415 repair assets targets ≥1 misconception (avg 1.71), so the
+corpus is better keyed than expected. Coverage alone would support a hybrid.
+
+**But coverage is not the blocker — the intervention shape is.**
+`MISCONCEPTION_REPAIR` in `teachingStrategy.ts` is a MULTI-STAGE protocol:
+
+1. address the misconception early
+2. **"Ask the student to explain their reasoning BEFORE correcting"**
+3. contrast the wrong model with the correct one side by side
+4. **confirm with a follow-up question** before moving on
+5. frame it without implying carelessness
+
+Step 2 requires reading THIS learner's reasoning; step 3 must contrast against
+what they actually said; step 4 needs a question. Serving one authored asset as
+one message would skip the elicit, contrast against a generic wrong model
+rather than the learner's words, and may drop the re-probe. That is a genuine
+teaching regression, not a stylistic one — and it matches the Educational
+Brain's own elicit→commit→collide→replace→contrast→apply→re-probe sequence.
+
+**Conclusion: the LLM here is doing adaptive work, not verbalizing a decision.**
+Designs A (direct serve) and B (asset + deterministic framing) both collapse the
+elicit step and are REJECTED. Design C is viable only in a form that does NOT
+eliminate the call — authored repair grounding the contrast while the model
+still runs elicit and re-probe. That is a quality improvement, not a saving.
+
+This corrects the earlier ranking, which listed misconception repair as the
+next-best call-elimination target on asset count alone.
