@@ -1661,3 +1661,168 @@ The run wrote real data on the owner's account: 3 sessions ended via the
 product's own endpoint, 3 lesson attempts on `phys.therm.heat-transfer`,
 `phys.mech.newtons-first-law`, `chem.bond.ionic-bonding`, and ~75 assistant
 turns of history across the contaminated and clean runs.
+
+---
+
+# PHASE 9 (2026-08-17) — CLOSING / D0b AUDIT
+
+Read-only. No code changed. No production traffic needed — the Phase 8 run
+already produced the artefacts, and re-running would have cost learner state for
+nothing.
+
+## A. CORRECTION FIRST — Phase 8 §D was WRONG
+
+Phase 8 called CLOSING "an absorbing state" that "never exits." **That is
+false.** CLOSING has a designed exit and I missed it.
+
+`sessionLifecycle.ts`, traced completely:
+
+| transition | trigger |
+|---|---|
+| → OPENING | `deriveEpisode` on a fresh boundary |
+| OPENING → CORE | `applySignalToEpisode`, first answered signal |
+| CORE → CLOSING | `applySignalToEpisode`, `visibleFailures >= budget` (2; **1** in lesson one) |
+| any → CLOSING | `forceClosing`, explicit stop request (`detectExplicitFinishRequest`) |
+| **CLOSING → OPENING** | **`isNewEpisode()` — a >30-minute inactivity gap (`SESSION_GAP_MS`)** |
+
+There is no other exit, **and that is intentional**, stated in route.ts at the
+injection site: *"the close instruction holds until a boundary resets the
+episode."* Pedagogically it is coherent — CLOSING means "the affect budget is
+spent, stop for today," and rest is the exit.
+
+My Phase 8 driver sent a turn every **2.6 seconds**, so it could never reach the
+30-minute boundary. The "8 consecutive D0b turns, never exits" observation is an
+artefact of my own pacing, not a product defect. **Answering the 15 audit
+questions: CLOSING is not indefinite in wall-clock terms, no client action is
+required, and no transition is missing at the session level.**
+
+## B. THE REAL DEFECT — the close is NOT BEING OBEYED
+
+Reading what those 8 turns actually said (production content, `phys.mech.newtons-first-law`):
+
+| n | what the turn did |
+|---|---|
+| 1 | "let me try a completely different angle" + a 3D simulation |
+| 2 | new friction explanation (book sliding on a table) |
+| 3 | answered a question, 1,145 chars |
+| 4 | reaction + a **new scenario** (spaceship at 5,000 m/s) |
+| 5 | reaction to a guess |
+| 6 | 🎉 the actual close ("What you mastered…") |
+| 7 | new teaching, 962 chars |
+| 8 | reaction + a **new scenario** (crate sliding at 3 m/s) |
+
+`buildAffectCloseBlock()` says: *"do NOT introduce new content, new questions, or
+another attempt at the item that failed… close warmly in ~2 sentences."*
+
+**7 of the 8 turns contain at least one question mark**, and the content
+introduces scenarios that did not exist before CLOSING began. The close arrives
+at turn 6 of 8 and teaching resumes after it.
+
+So the 8 calls are **not** wasted repeats of a close script. They are genuine
+adaptive teaching — the model ignored a mandatory block. That inverts Phase 8's
+conclusion: D0b is not a cheap deterministic-render target, it is a **Moat
+guarantee that is silently not holding.** The affect budget exists to stop
+pushing a struggling learner; this learner banked their budget and was taught
+for 8 more turns.
+
+## C. ROOT CAUSE — the compliance checker exempts exactly this executor
+
+`execution.ts:155`:
+
+```ts
+if (plan.executor === 'LLM_OPEN') {
+  return { compliant: true, reason: 'open escalation — no structural directive to check' }
+}
+```
+
+D0b routes to `LLM_OPEN`. Every CLOSING turn is therefore declared **compliant
+by construction, without being checked.** The premise — "open escalation has no
+structural directive" — is false for D0b, and equally false for
+`D0c-FIRST-LESSON-PROTOCOL` and `D0d-SESSION-OPENING-PROTOCOL`, which also carry
+mandatory blocks and also route to `LLM_OPEN`. Three protocol rules, 14 of 30
+calls in the Phase 8 run, all structurally unverifiable today.
+
+`recordCompliance` also only logs; nothing is persisted, so this was invisible
+for the same reason `ruleId` was.
+
+## D. VERDICT — C, with a correction to the question
+
+Against the brief's four options: **not A** (the block is not being honoured),
+**not B** (the lifecycle is correct and does exit), **C** — but the brief framed
+C as "valid state, but subsequent turns shouldn't invoke an LLM." The measured
+answer is sharper and different:
+
+> The lifecycle is correct. The turns are LLM-dependent because the LLM is doing
+> real teaching work — work the Brain explicitly forbade. The problem is not the
+> cost of the calls; it is that the calls are producing the wrong teaching.
+
+## E. IS D0b DETERMINISTICALLY RENDERABLE? — NO, not as it stands
+
+Part 5's test, applied honestly. `buildAffectCloseBlock()` is a fixed string
+with no parameters, which looks promising — but the content it *asks for* is
+learner-specific: "give the learner one immediately achievable success
+(echo-level if needed)" and "name one specific thing they did today." Both
+require this session's actual history. That is class **E — HYBRID**, the same
+verdict Phase 5 reached for the lesson opening, not class C.
+
+And the deeper reason not to build it now: **a renderer for a state whose
+current output is non-compliant would be measuring the wrong baseline.** If the
+close were obeyed, CLOSING would be ~1–2 turns, not 8, and the prize would be
+2 calls, not 8.
+
+## F. CALLS REMOVABLE
+
+| figure | label |
+|---|---|
+| 8 of 30 calls (26.7%) on D0b in the Phase 8 run | **MEASURED** (n=1 lesson, 1 persona) |
+| ~6 of those 8 would not exist if the close were obeyed | **ESTIMATE** — a close is 1–2 turns by its own script |
+| ~2 calls genuinely attributable to a compliant close | **ESTIMATE** |
+| 0 calls removable by a deterministic D0b renderer today | **MEASURED CONCLUSION** — the content is not a close |
+
+The honest read: **there is no call-elimination prize in D0b.** There is a
+teaching-correctness defect worth more than the calls.
+
+## G. NEXT ACTION — option 1, but not the one the brief expected
+
+**FIX THE CLOSE ENFORCEMENT, not the CLOSING lifecycle.** The lifecycle is
+correct and needs no change.
+
+Smallest correct fix, scoped and NOT implemented:
+1. Remove the blanket `LLM_OPEN` exemption in `checkBrainCompliance` and give
+   the three protocol rules (D0b/D0c/D0d) a structural check keyed on `ruleId`,
+   which is now available. For D0b the check is already expressible with an
+   existing helper: `repliesWithQuestion(cleanText)` must be **false**.
+2. Persist compliance alongside the Phase 8 telemetry so the violation rate is
+   measurable rather than logged.
+
+Both are additive and change no teaching behaviour. Whether the *remedy* for a
+violating close should be a re-render, a deterministic close, or only a
+measurement is a separate decision that should follow the measurement — not
+precede it.
+
+**A secondary, narrower question for the owner** (found, not resolved):
+`lesson-init` and `POST /api/sessions/end` never touch `sessionEpisode`, so
+starting a NEW LESSON inside the 30-minute window inherits CLOSING from the
+previous one — and the close block then says "forecast the next session" to a
+learner who just opened one. Defensible (the budget is session-scoped, and
+opening a new lesson is not rest) but incoherent in output. This is what
+contaminated the first Phase 8 run.
+
+## H. MOAT RISK
+
+The risk is in the CURRENT state, not in changing it. An unenforced affect
+budget means the single Moat guarantee that most distinguishes a tutor from an
+assistant — *withholding, and stopping when the learner has had enough* — is
+advisory. Adding the check restores a guarantee; it removes none.
+
+## I. SHOULD CODE CHANGE NOW? — NO
+
+Nothing was changed this phase. The fix above needs its own authorization, and
+the measurement of how often the close is violated should come first.
+
+## J. Corrections carried
+
+- Phase 8 §D ("absorbing state / never exits") — **wrong, corrected in §A**.
+- Phase 8 §F ranked D0b the #1 elimination target — **withdrawn**; §E/§F here
+  show there is no elimination prize in it.
+- Phase 7 §F/§G (D8 as the central question) — already refuted in Phase 8.
