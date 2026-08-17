@@ -1468,3 +1468,196 @@ deterministic coverage) and the **D0b/D0c/D0d protocol** rules?
 - Phase 5A vector framing: stays reverted.
 - Anything keyed on `confidence_failed` before `bbd7ef1`: invalid data.
 - No candidate from Phase 7 §G was implemented in this phase.
+
+---
+
+# PHASE 8 — MEASURED (2026-08-17, owner-authorized account)
+
+Ran after the owner explicitly authorized `suaibamr@gmail.com`. Three bounded
+lessons, weak-beginner persona (asks what things mean, guesses, gets confused,
+asks for a picture, acknowledges), 14 turns each, never driven to completion.
+
+## A. FIRST RUN WAS CONTAMINATED — and the column caught it immediately
+
+The first attempt measured **D0b-CLOSING-PROTECT on turn 1 of both lessons**,
+22 of 26 calls. That is not what a fresh lesson does.
+
+Cause: `POST /api/sessions` **resumes** any ACTIVE session from the last 24 h
+(`route.ts:95`), and the resumed `contextSnapshot` carries the sessionLifecycle
+phase with it. Those sessions had been driven to CLOSING by the Phase 6 runs.
+
+**`lesson-init` does NOT clear it.** Direct evidence: in one session a
+lesson-init landed at turn 8 and turn 9 was `D0b-CLOSING-PROTECT` again. Compare
+`D0a`, whose own comment promises "starting a NEW lesson clears this" — D0a is
+read per-turn from the current attempt and does self-clear. D0b is read from
+persisted lifecycle state and does not.
+
+Fixed by calling the product's own `POST /api/sessions/end` first. **This is
+also the first thing ruleId bought: under Phase 1 telemetry those 22 turns read
+as `ESCALATE_TO_LLM / LLM_OPEN / brain_decision` and would have been filed as
+"the Brain chose the LLM."** Some of Phase 6's 11 `brain_decision` escalations
+were very likely D0b for the same reason.
+
+## B. MEASURED DISTRIBUTION (clean runs; n=31 genuine teaching turns, 30 calls)
+
+Fresh sessions: physics `phys.mech.newtons-first-law`, chemistry
+`chem.bond.ionic-bonding`. The 14 `D0a-LESSON-ALREADY-COMPLETE` idle turns from
+a third (already-completed) physics lesson are excluded — they are not teaching.
+
+| RULE ID | DECISION | EXECUTOR | TURNS | CALLS | /TURN | % OF CALLS | CLASS |
+|---|---|---|---|---|---|---|---|
+| D0b-CLOSING-PROTECT | ESCALATE_TO_LLM | LLM_OPEN | 8 | 8 | 1.00 | 26.7% | **C** |
+| D0d-SESSION-OPENING-PROTOCOL | ESCALATE_TO_LLM | LLM_OPEN | 6 | 6 | 1.00 | 20.0% | **C** |
+| D0-RECOVERY-PREEMPT | ESCALATE_TO_LLM | LLM_OPEN | 4 | 4 | 1.00 | 13.3% | E |
+| D4b-ANSWER-STUDENT-FIRST | ESCALATE_TO_LLM | LLM_OPEN | 3 | 3 | 1.00 | 10.0% | **A** |
+| (lesson-init opening) | — | lesson-init | 3 | 3 | 1.00 | 10.0% | E |
+| D5-FRAGILE-CONSOLIDATE | PRACTICE | LLM_RENDERER | 2 | 2 | 1.00 | 6.7% | **C** |
+| D3-PREREQ-REVIEW | REVIEW_PREREQUISITE | LLM_RENDERER | 2 | 2 | 1.00 | 6.7% | **C** |
+| D6-VISUAL-ON-REQUEST | VISUALIZATION | LLM_RENDERER | 1 | 1 | 1.00 | 3.3% | C (deferred) |
+| D2b-CONFIDENT-WRONG | DETECT_MISCONCEPTION | LLM_RENDERER | 1 | 1 | 1.00 | 3.3% | **A** |
+| D1-MEMORY-HIT | SERVE_EXPLANATION_MEMORY | EXPLANATION_MEMORY | 1 | **0** | 0.00 | 0% | **B** |
+| *(excluded)* D0a | SERVE_LESSON_COMPLETE | LESSON_COMPLETE | 14 | 0 | 0.00 | 0% | B |
+
+**MEASURED: 30 calls / 31 genuine teaching turns = 96.8% LLM-dependent.**
+Exactly ONE teaching turn in the whole run was deterministic (D1-MEMORY-HIT).
+
+This is **NOT comparable to the 87.0% baseline (n=484)** and does not supersede
+it. A weak beginner keeps preemption rules firing almost continuously; the
+baseline population is mixed. Different population, different number.
+
+## C. THE CENTRAL QUESTION IS ANSWERED — and my Phase 7 hypothesis was WRONG
+
+**D8-LLM-FLOOR fired ZERO times across all 30 calls.**
+
+Phase 7 §F named D8 as "potentially a major hidden source of unnecessary LLM
+calls" and made separating it from D4b "the central question of Phase 8." It is
+not a major source. In this run it is not a source at all. That hypothesis is
+refuted, not merely unsupported.
+
+D4b is also small — 3 calls, 10%.
+
+**The real answer is the third group.** Phase 8 §C predicted from source that
+the D0 protocol rules were "the shape most likely to be renderable"; measurement
+shows they are also by far the most FREQUENT:
+
+  D0b + D0d + D0-RECOVERY = **18 of 30 calls (60%)**, and with the
+  lesson-init opening, **21 of 30 (70%) of all provider calls in this run are
+  protocol, preemption or opening turns — not adaptive teaching.**
+
+Every one of them already has its authored artefact injected into the prompt
+before the model is called: `sessionLifecycle`'s close-on-a-win script (D0b),
+`buildOpeningBlock` (D0d), `recoveryGuard`'s authored scripts (D0-RECOVERY).
+The model is writing the sentence around content the server already chose —
+which is precisely the shape Phase 2 already proved renderable at the gate.
+
+## D. SEPARATE PRODUCT FINDING — a CLOSING session never exits (NOT fixed)
+
+The physics trajectory, per turn, in a genuinely fresh session:
+
+    2-3  D0d opening   4  D4b   5  D2b-CONFIDENT-WRONG   6  RECOVERY
+    7 8 9 10 11  D0b   12  RECOVERY   13 14 15  D0b
+
+The affect budget was spent around turn 6, CLOSING was entered, and **it never
+left** — 8 turns, 8 calls, and by D0b's own design NO deterministic path is
+legal past it ("no new content, practice, probes, or repair may start"). The
+lesson never completes, so D0a never rescues it either.
+
+Chemistry, same persona, same turn count, never entered CLOSING and kept
+teaching (D6, D1, D5, D3, D4b).
+
+So the same learner behaviour produced two completely different trajectories,
+and one of them is an absorbing state that costs one provider call per turn
+forever and forbids every saving this programme could make. Whether that is
+correct pedagogy (the close is protected) or a missing exit is a **teaching
+decision for the owner** — flagged, deliberately NOT changed.
+
+## E. CLASSIFICATION
+
+**A — GENUINELY LLM-REQUIRED (4 calls, 13%)**
+`D4b-ANSWER-STUDENT-FIRST` (must address what the learner actually said);
+`D2b-CONFIDENT-WRONG` → DETECT_MISCONCEPTION (Phase 4 rejection stands: the
+collision must contrast the learner's own reasoning).
+
+**B — DETERMINISTIC ALREADY (0 calls)**
+`D1-MEMORY-HIT`, `D0a-LESSON-ALREADY-COMPLETE`. Both served at 0 calls.
+
+**C — DETERMINISTIC-CANDIDATE (17 calls, 57%)**
+`D0b-CLOSING-PROTECT` (8) — close script already authored and injected, and the
+rule itself forbids new content, so there is unusually little adaptive work left
+to do; `D0d-SESSION-OPENING-PROTOCOL` (6) — `buildOpeningBlock` already
+injected; `D5-FRAGILE-CONSOLIDATE` (2) — probe-shaped, 100% MCQ corpus;
+`D3-PREREQ-REVIEW` (2) — the memory path pointed at a prerequisite, 100%
+explanation corpus. `D6-VISUAL-ON-REQUEST` (1) stays deferred behind the visual
+engine's own open items.
+
+**D — CONTENT-BLOCKED (0 observed)**
+`TEACH_DIRECTLY` (D0e/D3b) never fired this run; its corpus problem (0 chemistry
+worked examples) is unchanged from Phase 7.
+
+**E — HYBRID (7 calls, 23%)**
+`D0-RECOVERY-PREEMPT` (4) — authored scripts exist and are retrieved
+deterministically, but the reply must attach to the learner's specific distress;
+lesson-init opening (3) — Phase 5's HYBRID verdict unchanged.
+
+**F — UNKNOWN / did not fire**
+`D8-LLM-FLOOR`, `D0c`, `D0e`, `D3b`, `D4-PLACEMENT-PROBE`, `D6-MASTERY-ADVANCE`,
+`D7`, `D9`, `D2-MISCONCEPTION-HIGH`. Note this includes
+`D4-PLACEMENT-PROBE` — Phase 7's Candidate 1, which now has **zero measured
+frequency** and drops out of the top ranking on evidence.
+
+## F. TOP 3 (calls eliminable × safety × corpus readiness ÷ cost)
+
+1. **D0b-CLOSING-PROTECT — 8 calls (26.7%).** Largest single consumer; artefact
+   already authored and injected; the rule itself bans new content, so a
+   deterministic render removes almost no adaptivity. **Pair it with the §D
+   question first** — if a stuck CLOSING is a defect, fixing that changes the
+   frequency, and optimizing before answering that would optimize a bug.
+2. **D0d-SESSION-OPENING-PROTOCOL — 6 calls (20%).** Same shape,
+   `buildOpeningBlock` already injected. It occupied 4 consecutive turns in
+   chemistry, which is worth understanding before rendering it.
+3. **D3-PREREQ-REVIEW + D5-FRAGILE-CONSOLIDATE — 4 calls (13%).** Both reuse
+   mechanisms that already exist and ship (memory path / gate renderer), both at
+   100% corpus coverage in physics and chemistry. Lowest risk, lowest cost,
+   smallest prize.
+
+Phase 7's ranking is superseded: `ASK_DIAGNOSTIC_QUESTION` was ranked first on
+structure and measured zero.
+
+## G. ESTIMATES — ARCHITECTURAL, NOT MEASURED
+
+Applying this run's rule mix (n=31 turns, ONE persona, TWO lessons — the mix
+itself is a small sample):
+
+| scenario | eliminates | remaining calls | LLM-dependent |
+|---|---|---|---|
+| MEASURED TODAY | — | 30/31 | **96.8%** (this run) |
+| Conservative *(estimate)* | D3 + D5 | 26/31 | ~83.9% |
+| Practical *(estimate)* | + D0b close render | 18/31 | ~58.1% |
+| Aggressive *(estimate)* | + D0d opening render | 12/31 | ~38.7% |
+
+Every row but the first is an **ARCHITECTURAL ESTIMATE**. None is a measurement,
+none is a commitment, and all three would move if the §D CLOSING question
+resolves as a defect.
+
+## H. NEXT OPTIMIZATION RECOMMENDATION
+
+**Answer the §D question before building anything.** Is a session that enters
+CLOSING and never exits correct? That single answer re-ranks the entire list:
+D0b is 27% of calls today, and if the absorbing state is a defect, its true
+frequency is much lower and D0d becomes the top target.
+
+That is an owner teaching decision, not an engineering one. Nothing was changed.
+
+## I. DO NOT CHANGE (unchanged)
+
+`answersPendingQuestion`; `DETECT_MISCONCEPTION`; `TEACH_DIRECTLY` corpus
+(no authoring programme to delete calls); Phase 5A vector framing stays
+reverted; any `confidence_failed` figure predating `bbd7ef1`. No Phase 7 or
+Phase 8 candidate was implemented.
+
+## J. Run cost to real learner state
+
+The run wrote real data on the owner's account: 3 sessions ended via the
+product's own endpoint, 3 lesson attempts on `phys.therm.heat-transfer`,
+`phys.mech.newtons-first-law`, `chem.bond.ionic-bonding`, and ~75 assistant
+turns of history across the contaminated and clean runs.
