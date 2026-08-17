@@ -3507,6 +3507,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // dependency audit. Incremented at every routeAI() call site in this
       // route; a memory- or degraded-served turn correctly ends at 0.
       let llmCallCount = 0
+      // Phase 10 — mandatory-protocol compliance for this turn. Written by the
+      // compliance check further down (which runs BEFORE the message create) and
+      // persisted alongside the Phase 1/8 telemetry. Measurement only.
+      let protocolComplianceStatus: string | null = null
+      let protocolComplianceViolation: string | null = null
       // The provider's own reason the completion ended ('stop', 'length',
       // etc.) — 'n/a' for memory-served responses, which never call a
       // model. Logged below so a future empty-response failure carries
@@ -5032,7 +5037,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       try {
         const { checkBrainCompliance } = await import('@/lib/understanding/execution')
         const { recordCompliance, recordBrainEvent } = await import('@/lib/understanding/brainMetrics')
-        const complianceResult = checkBrainCompliance(cleanText, dispatchPlanHoisted, cueDecisionHoisted, visualFired)
+        // Phase 10: the mandatory-protocol context. `mcqAttached` is the
+        // turn's real assessment (an attached MCQ IS "another attempt", which
+        // the close block forbids); `isFirstTurnOfEpisode` is the episode's
+        // own freshness flag, reused rather than recomputed.
+        const complianceResult = checkBrainCompliance(
+          cleanText, dispatchPlanHoisted, cueDecisionHoisted, visualFired,
+          { mcqAttached: mcqHoisted !== null, isFirstTurnOfEpisode: sessionEpisodeFreshHoisted },
+        )
+        protocolComplianceStatus = complianceResult.status ?? null
+        protocolComplianceViolation = complianceResult.violation ?? null
         recordCompliance(complianceResult)
 
         const explanationMemoryAvailable = assembled !== null
@@ -5205,6 +5219,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // Stored verbatim. No normalising, no remapping, no defaulting to a
         // sibling code — the whole point is that D4b and D8 stay separable.
         teachingRuleId: cueDecisionHoisted?.ruleId ?? null,
+        // Phase 10. Stored verbatim from the checker — multiple violation
+        // codes arrive '+'-joined and are NEVER collapsed into one label.
+        teachingComplianceStatus: protocolComplianceStatus,
+        teachingComplianceViolation: protocolComplianceViolation,
         dispatchExecutor: dispatchPlanHoisted?.executor ?? null,
         // 'none' is the initialised value and means the memory path never
         // reported a reason; stored as NULL rather than the string 'none' so

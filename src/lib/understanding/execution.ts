@@ -126,6 +126,145 @@ export function buildBrainExecutionBlock(
 export interface ComplianceResult {
   compliant: boolean
   reason: string
+  /**
+   * PHASE 10. Set only for the mandatory-protocol rules below; absent
+   * everywhere else so nothing about the existing checks changes.
+   */
+  status?: ComplianceStatus
+  /**
+   * Stable, specific violation code(s). MULTIPLE VIOLATIONS ARE JOINED WITH
+   * '+', never collapsed into one label — Phase 6 showed exactly what happens
+   * when distinct causes share a bucket (`confidence_failed` was really the
+   * already-read guard, and it pointed the next optimization at a matcher that
+   * was working). Null when nothing was violated.
+   */
+  violation?: string | null
+}
+
+/**
+ * PASS / VIOLATION — a structural check ran and returned a verdict.
+ * NOT_CHECKED — no structural check exists for this turn's rule. Paired with
+ *   the `NOT_MEASURABLE` code when the rule DOES carry a mandatory block that
+ *   we deliberately cannot verify, so "unverifiable protocol" and "no protocol
+ *   at all" stay distinguishable in the data.
+ * CHECK_ERROR — the checker itself threw. Never silently a PASS.
+ */
+export type ComplianceStatus = 'PASS' | 'VIOLATION' | 'NOT_CHECKED' | 'CHECK_ERROR'
+
+/**
+ * PHASE 10 — MANDATORY PROTOCOL CONTRACTS.
+ *
+ * Phase 9's root cause: D0b, D0c and D0d each inject a MANDATORY block and
+ * each route to `LLM_OPEN`, and the `LLM_OPEN` early-return below declares
+ * them compliant by construction on the premise that "open escalation has no
+ * structural directive." That premise is false for exactly these three.
+ * Measured consequence (production, `phys.mech.newtons-first-law`): 8 D0b
+ * turns, 7 carrying a question mark, introducing new scenarios the close block
+ * forbids — none of it detected.
+ *
+ * These checks are keyed on `ruleId`, which Phase 8 made available. They are
+ * MEASUREMENT ONLY: nothing here re-renders, re-prompts, replaces output or
+ * spends a provider call. A violating turn still reaches the learner exactly
+ * as it does today, because an enforcement decision must follow an honest
+ * baseline rather than precede it.
+ *
+ * Only genuinely defensible structural conditions are checked. A requirement
+ * needing semantic judgement is reported NOT_MEASURABLE rather than
+ * approximated — a check that misfires on correct teaching is worse than no
+ * check, because it would be believed.
+ */
+
+/** Terminal-punctuation sentence count. Deliberately crude and only ever used
+ *  against limits stated as sentence counts in the blocks themselves. */
+export function countSentences(text: string): number {
+  const stripped = text
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/<!--[\s\S]*?-->/g, ' ')
+  const parts = stripped.split(/[.!?…]+[\s"')\]]*/).filter((s) => /\p{L}/u.test(s))
+  return parts.length
+}
+
+export interface ProtocolContext {
+  /** An assessment was attached to this turn (server- or model-produced). */
+  mcqAttached: boolean
+  /** This is the learner's first exchange of the episode. */
+  isFirstTurnOfEpisode: boolean
+}
+
+/**
+ * D0b — "do NOT introduce new content, new questions, or another attempt at
+ * the item that failed… close warmly in ~2 sentences."
+ *
+ * Checkable: a question mark is present; the turn is far longer than a
+ * two-sentence close; an assessment was attached (that IS another attempt).
+ * NOT checkable: whether the prose introduces NEW CONTENT, and whether a close
+ * was actually delivered — both need semantic judgement.
+ *
+ * The length bound is deliberately loose (>6 sentences against a stated limit
+ * of ~2) so a slightly verbose but genuinely closing turn is not called a
+ * violation. It is the closest defensible proxy for "introduced new content"
+ * without pretending to judge meaning.
+ */
+const D0B_CLOSE_SENTENCE_CEILING = 6
+
+function checkD0bClose(cleanText: string, ctx: ProtocolContext): string[] {
+  const violations: string[] = []
+  // Records "a question mark is present", NOT "asked a question" — a
+  // rhetorical question counts here, and that over-reports rather than
+  // under-reports. Reuses the existing detector; never a second one.
+  if (repliesWithQuestion(cleanText)) violations.push('D0B_QUESTION_PRESENT')
+  if (countSentences(cleanText) > D0B_CLOSE_SENTENCE_CEILING) violations.push('D0B_LENGTH_EXCEEDED')
+  if (ctx.mcqAttached) violations.push('D0B_NEW_ATTEMPT')
+  return violations
+}
+
+/**
+ * D0c — first-lesson protocol. Two of its limits are per-TURN and structural;
+ * the rest (≤3 new words, demonstrate-before-explain, praise the act, ≤6
+ * questions across the SESSION) are semantic or cross-turn and are NOT checked
+ * here. The session-scoped question budget is genuinely measurable but needs a
+ * counter this phase does not add — reported as unmeasured, not as passing.
+ */
+const D0C_BURST_SENTENCE_CEILING = 4 // stated limit is 2; allow slack before calling it a violation
+
+function checkD0cFirstLesson(cleanText: string, ctx: ProtocolContext): string[] {
+  const violations: string[] = []
+  if (countSentences(cleanText) > D0C_BURST_SENTENCE_CEILING) violations.push('D0C_BURST_TOO_LONG')
+  // "NEVER open with a quiz or a knowledge check."
+  if (ctx.isFirstTurnOfEpisode && ctx.mcqAttached) violations.push('D0C_OPENED_WITH_QUIZ')
+  return violations
+}
+
+/**
+ * Compliance for a mandatory-protocol rule, or NOT_CHECKED with a reason.
+ * Pure; no I/O; no provider call; never throws.
+ */
+export function checkProtocolCompliance(
+  ruleId: string | null,
+  cleanText: string,
+  ctx: ProtocolContext,
+): { status: ComplianceStatus; violation: string | null; reason: string } {
+  try {
+    if (!ruleId) return { status: 'NOT_CHECKED', violation: null, reason: 'no rule recorded' }
+    let violations: string[] | null = null
+    if (ruleId === 'D0b-CLOSING-PROTECT') violations = checkD0bClose(cleanText, ctx)
+    else if (ruleId === 'D0c-FIRST-LESSON-PROTOCOL') violations = checkD0cFirstLesson(cleanText, ctx)
+    else if (ruleId === 'D0d-SESSION-OPENING-PROTOCOL') {
+      // Every requirement in buildOpeningBlock is about ORDERING and PRESENCE
+      // of meaning — engineered win first, continuity in one breath, due
+      // reviews before new content, then objective + why + connection. None of
+      // it has a defensible structural signature, and inventing one would
+      // manufacture a violation rate rather than measure it.
+      return { status: 'NOT_CHECKED', violation: 'NOT_MEASURABLE', reason: 'D0d requirements are semantic (ordering/presence of meaning)' }
+    } else {
+      return { status: 'NOT_CHECKED', violation: null, reason: `no mandatory-protocol contract for ${ruleId}` }
+    }
+    return violations.length > 0
+      ? { status: 'VIOLATION', violation: violations.join('+'), reason: `${ruleId}: ${violations.join('+')}` }
+      : { status: 'PASS', violation: null, reason: `${ruleId}: structural checks passed` }
+  } catch (err) {
+    return { status: 'CHECK_ERROR', violation: null, reason: `protocol check errored: ${err instanceof Error ? err.message : String(err)}` }
+  }
 }
 
 /**
@@ -146,14 +285,36 @@ export function checkBrainCompliance(
   plan: DispatchPlan | null,
   decision: TeachingDecision | null,
   visualFired: boolean,
+  protocolCtx?: ProtocolContext,
 ): ComplianceResult {
   try {
     if (!plan || !decision) return { compliant: true, reason: 'no Brain decision this turn' }
     if (plan.executor === 'EXPLANATION_MEMORY') {
       return { compliant: true, reason: 'memory-served — no LLM text to check' }
     }
+    // PHASE 10 — the mandatory-protocol rules are checked BEFORE the LLM_OPEN
+    // early return below, because they are the exact case that return was
+    // wrong about. One authority, extended; not a second checker alongside it.
+    if (protocolCtx) {
+      const protocol = checkProtocolCompliance(decision.ruleId, cleanText, protocolCtx)
+      if (protocol.status !== 'NOT_CHECKED' || protocol.violation === 'NOT_MEASURABLE') {
+        return {
+          // MEASUREMENT ONLY. `compliant` drives recordCompliance's counter and
+          // its warn log; nothing re-renders, re-prompts or replaces output.
+          compliant: protocol.status !== 'VIOLATION',
+          reason: protocol.reason,
+          status: protocol.status,
+          violation: protocol.violation,
+        }
+      }
+    }
     if (plan.executor === 'LLM_OPEN') {
-      return { compliant: true, reason: 'open escalation — no structural directive to check' }
+      return {
+        compliant: true,
+        reason: 'open escalation — no structural directive to check',
+        status: 'NOT_CHECKED',
+        violation: null,
+      }
     }
     const asksQuestion = repliesWithQuestion(cleanText)
     switch (plan.decision) {

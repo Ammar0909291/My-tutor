@@ -592,6 +592,12 @@ model Message {
   dispatchExecutor     String? // DispatchExecutor, e.g. 'LLM_RENDERER'
   memoryFallbackReason String? // snake_case code, e.g. 'already_served'
   llmCallCount         Int?    // provider calls spent on this turn (0 for memory/degraded)
+  // Phase 10. D0b/D0c/D0d each inject a MANDATORY block and each route to
+  // LLM_OPEN, which checkBrainCompliance declared compliant by construction —
+  // so a violated protocol was undetectable. MEASUREMENT ONLY: nothing
+  // re-renders or replaces output on a violation.
+  teachingComplianceStatus    String? // PASS | VIOLATION | NOT_CHECKED | CHECK_ERROR
+  teachingComplianceViolation String? // stable codes, '+'-joined; NEVER collapsed
   /// THE FIGURE THIS MESSAGE ACTUALLY DISPLAYED.
   ///
   /// A diagram the tutor taught with is part of the learner's teaching record,
