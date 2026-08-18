@@ -161,13 +161,50 @@ export async function certifyConcept(
   let turns = 0
   let last: TurnPayload
 
+  // A REFERENCE TO A FIGURE SHOWN EARLIER IS NOT THE SAME DEFECT.
+  //
+  // The runtime deliberately does not re-attach a HELD figure — one message owns
+  // it, so the transcript does not repeat the same diagram under every reply —
+  // and the tutor is explicitly told it may still refer to it. A turn carrying
+  // no payload can therefore be pointing at something the learner really does
+  // have, just further up.
+  //
+  // So "no figure on THIS turn" is not enough to call it a lie. What matters is
+  // whether the lesson has EVER shown one before that point: if it has not, the
+  // reference cannot be true. If it has, the reference may merely be stale
+  // (upstream's own finding: a figure belongs to a message and scrolls away,
+  // fastest on a phone), which is a real but different problem and is recorded
+  // as an observation rather than a failure.
+  //
+  // Two runs were misread before this distinction existed, so it is drawn here
+  // rather than argued about afterwards.
+  let figureShownByTurn = -1
+  const staleReferences: TurnEvidence[] = []
+
   const check = (p: TurnPayload) => {
     const text = p.text ?? ''
     const hasFigure = Boolean(p.visual) || Boolean(p.sceneSpec)
-    if (REFERENCES_FIGURE.test(text) && !hasFigure && !failed.includes('D6-missing-figure')) {
-      failed.push('D6-missing-figure')
-      notes.push(`referenced a figure with none attached: ${(text.match(REFERENCES_FIGURE) ?? [''])[0]}`)
-      evidence.push({ criterion: 'D6-missing-figure', phase: String(p.mastery?.phase ?? ''), turn: turns, text })
+    if (hasFigure && figureShownByTurn < 0) figureShownByTurn = turns
+    if (REFERENCES_FIGURE.test(text) && !hasFigure) {
+      const everShown = figureShownByTurn >= 0
+      const item: TurnEvidence = {
+        criterion: everShown ? 'D6-stale-reference' : 'D6-missing-figure',
+        phase: String(p.mastery?.phase ?? ''), turn: turns, text,
+      }
+      if (!everShown && !failed.includes('D6-missing-figure')) {
+        failed.push('D6-missing-figure')
+        notes.push(
+          'referenced a figure this lesson has never shown: ' +
+          `${(text.match(REFERENCES_FIGURE) ?? [''])[0]}`,
+        )
+        evidence.push(item)
+      } else if (everShown && staleReferences.length === 0) {
+        notes.push(
+          `referenced a figure last attached on turn ${figureShownByTurn} — ` +
+          'possibly still on screen, possibly scrolled away; recorded, not failed',
+        )
+        staleReferences.push(item)
+      }
     }
     if (hasMalformedLatex(text) && !failed.includes('D6-latex')) {
       failed.push('D6-latex'); notes.push('malformed LaTeX in learner-facing text')
@@ -277,7 +314,8 @@ export async function certifyConcept(
 
   return {
     conceptId: target.conceptId, pass: failed.length === 0, failed,
-    turns, finalPhase, checkCorrect, practiceCorrect, verified, notes, evidence,
+    turns, finalPhase, checkCorrect, practiceCorrect, verified, notes,
+    evidence: [...evidence, ...staleReferences],
   }
 }
 
