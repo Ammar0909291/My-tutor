@@ -28,6 +28,14 @@ function mcs(conceptId: string) {
   return r.found ? r.context.ebMisconceptions : []
 }
 
+/** Every subject KG whose EB entries this parser serves. */
+const KGS = [
+  'docs/mathematics/kg/graph.json',
+  'docs/physics/kg/graph.json',
+  'docs/chemistry/kg/graph.json',
+  'docs/english/kg/graph.json',
+] as const
+
 function conceptIdsOf(kgPath: string): string[] {
   return JSON.parse(fs.readFileSync(kgPath, 'utf-8')).concepts.map((c: { id: string }) => c.id)
 }
@@ -132,10 +140,13 @@ describe('corpus-wide misconception retrieval', () => {
   it('mathematics: 154 concepts carry a parsed misconception library', () => {
     const { concepts, records } = corpusRecordCount('docs/mathematics/kg/graph.json')
     expect(concepts).toBe(154)
-    // 443 = 5 authored M-n (math.arith.fractions) + 438 MC-n. Four further
-    // authored records are held back by the parser's pre-existing 300-char
-    // title bound, NOT by the id/anchor shapes this test covers.
-    expect(records).toBe(443)
+    // 447 = 5 authored M-n (math.arith.fractions) + 442 MC-n — the whole
+    // authored mathematics library. The last four (complement MC-2,
+    // problem-solving-strategies MC-2, reading-mathematics MC-3,
+    // set-equality MC-3) run 306-353 chars and were rejected by the parser's
+    // earlier 300-char title bound; N-1 raised it to 360. Concept count is
+    // unchanged by that raise — all four sit in files that already parsed.
+    expect(records).toBe(447)
   })
 
   it('physics and english are unchanged by the mathematics fix', () => {
@@ -145,5 +156,97 @@ describe('corpus-wide misconception retrieval', () => {
 
   it('chemistry was authored in the same shape and is recovered too', () => {
     expect(corpusRecordCount('docs/chemistry/kg/graph.json')).toEqual({ concepts: 67, records: 198 })
+  })
+})
+
+// ── N-1. the four long-title records, and the guard that still bounds them ──
+
+describe('the four long-title mathematics records (N-1)', () => {
+  const FOUR: Array<[string, string, string]> = [
+    ['math.found.complement', 'MC-2', 'complement twice'],
+    ['math.found.problem-solving-strategies', 'MC-2', 'Symmetry-seeking'],
+    ['math.found.reading-mathematics', 'MC-3', 'Unfamiliar notation'],
+    ['math.found.set-equality', 'MC-3', 'two subset checks'],
+  ]
+
+  it.each(FOUR)('%s %s parses with its full body', (conceptId, id, fragment) => {
+    const rec = mcs(conceptId).find((m) => m.id === id)
+    expect(rec, `${conceptId} ${id} did not parse`).toBeDefined()
+    expect(rec!.title).toContain(fragment)
+    // Long titles are the reason these were blocked; they are still TITLES.
+    expect(rec!.title.length).toBeGreaterThan(300)
+    expect(rec!.title.length).toBeLessThanOrEqual(360)
+    // The authored body survived — recovering the heading is only half of it.
+    expect(rec!.symptom, `${id} symptom`).toBeTruthy()
+    expect(rec!.probe, `${id} probe`).toBeTruthy()
+    expect(rec!.recovery, `${id} recovery`).toBeTruthy()
+  })
+
+  it.each(FOUR)('%s %s captured no body prose in its title', (conceptId, id) => {
+    const rec = mcs(conceptId).find((m) => m.id === id)!
+    // Body bleed is what the bound exists to prevent — assert its absence
+    // directly rather than inferring it from the length.
+    expect(rec.title).not.toContain('*Why*')
+    expect(rec.title).not.toContain('*Symptom*')
+    expect(rec.title).not.toContain('Detection probe')
+    expect(rec.title).not.toContain('\n')
+  })
+
+  it('no parsed title anywhere in the corpus exceeds the bound', () => {
+    for (const kg of KGS) {
+      for (const id of conceptIdsOf(kg)) {
+        const r = loadEBConceptContext(id)
+        if (!r.found) continue
+        for (const m of r.context.ebMisconceptions) {
+          expect(m.title.length, `${id} ${m.id}`).toBeLessThanOrEqual(360)
+        }
+      }
+    }
+  })
+})
+
+/**
+ * The anti-runaway guard itself.
+ *
+ * `[^*]` was loosened from `[^*\n]` so wrapped titles could parse, which removed
+ * the newline stop; the length bound replaced it. Without a bound, a heading
+ * whose closing `**` is missing runs through asterisk-free body prose until some
+ * later bold token closes it, and paragraphs become a "title". N-1 raised the
+ * bound 300 -> 360; it must never be removed or widened without re-measuring.
+ *
+ * The pattern under test is READ FROM THE SHIPPED SOURCE rather than copied, so
+ * this cannot pass against a stale duplicate of the regex.
+ */
+describe('the bound still stops a runaway heading', () => {
+  const SRC = fs.readFileSync('src/lib/curriculum/blueprintLoader.ts', 'utf-8')
+
+  function shippedHeadRegex(): { re: RegExp; bound: number } {
+    const idPattern = /const EB_MC_ID = String\.raw`([^`]*)`/.exec(SRC)?.[1]
+    const headPattern = /const head = new RegExp\(String\.raw`([^`]*)`\)/.exec(SRC)?.[1]
+    expect(idPattern, 'EB_MC_ID not found in source').toBeTruthy()
+    expect(headPattern, 'head regex not found in source').toBeTruthy()
+    const source = headPattern!.replace('${EB_MC_ID}', idPattern!)
+    const bound = Number(/\{3,(\d+)\}/.exec(source)?.[1])
+    return { re: new RegExp(source), bound }
+  }
+
+  it('is set to exactly 360 in the shipped parser', () => {
+    expect(shippedHeadRegex().bound).toBe(360)
+  })
+
+  it('does not consume body prose from an unclosed heading', () => {
+    const { re } = shippedHeadRegex()
+    // Unclosed `**`, then asterisk-free prose, then a later bold token that
+    // would supply the closing `**` if the bound allowed the match to reach it.
+    const prose = 'This is ordinary body prose that carries no asterisks at all. '.repeat(20)
+    const block = `**MC-1 — a legitimate looking claim ${prose}**emphasis later**`
+    expect(block.length).toBeGreaterThan(1000)
+    expect(re.exec(block), 'the bound let a runaway title through').toBeNull()
+  })
+
+  it('still admits a legitimate title at the top of the allowed range', () => {
+    const { re } = shippedHeadRegex()
+    const title = 'a'.repeat(353)
+    expect(re.exec(`**MC-1 — ${title}**`)?.[2]).toBe(title)
   })
 })

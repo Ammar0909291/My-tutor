@@ -1186,7 +1186,16 @@ function parseEBMisconceptions(content: string): EBMisconception[] {
     // `phys.meas.dimensions` M4, never reached a prompt for that reason.
     // Newlines are allowed and collapsed; the length bound and `[^*]` keep it
     // from running past a missing closing `**` into the body.
-    const head = new RegExp(String.raw`\*\*\s*(${EB_MC_ID})\s*[—–-]\s*([^*]{3,300}?)\s*\*\*`).exec(block)
+    //
+    // The bound is 360, not 300: four authored mathematics titles run 306-353
+    // characters and were rejected by the old value. Measured across all 917 EB
+    // files before changing it — raising the bound admits EXACTLY those four and
+    // nothing else, and the corpus is saturated (removing the bound entirely
+    // still yields 869 records, longest title 353). The guard itself is load
+    // bearing and stays: an unclosed `**` followed by asterisk-free prose and a
+    // later bold token DOES run away once the bound is large enough, so this is
+    // a raise, never a removal. Pinned by ebMisconceptionFormatCompat.test.ts.
+    const head = new RegExp(String.raw`\*\*\s*(${EB_MC_ID})\s*[—–-]\s*([^*]{3,360}?)\s*\*\*`).exec(block)
     if (!head) continue
     head[2] = head[2].replace(/\s+/g, ' ').trim()
 
