@@ -27,6 +27,7 @@
  * Pure module: no DB, no I/O — everything here is unit-testable.
  */
 
+import { repliesWithQuestion } from './conversationState'
 import type { ConversationState } from '@/lib/teaching/conversationState'
 
 // ── Mastery definition (Bug 3 / Bug 12) ──────────────────────────────────────
@@ -143,6 +144,54 @@ const LESSON_COMPLETE_RE = /\s*\[LESSON_COMPLETE\]\s*/gi
  * machine's own evidence counters say mastery is verified.
  * Fail-closed: a missing/null state can never authorize completion.
  */
+/**
+ * THE LEARNER JUST ANSWERED A QUESTION THE TUTOR ASKED IN PROSE.
+ *
+ * `answersPendingQuestion` (route.ts) is `mcqGradeHoisted !== null` — keyed on
+ * the MCQ grade, so it recognises an answer to a WIDGET question and is blind
+ * to an answer to a PROSE one. Measured in production: the tutor asked which
+ * was larger on a winding road, the learner answered correctly and with
+ * reasoning, and D1-MEMORY-HIT served a stored essay (llmCallCount=0) instead
+ * of reacting. They had to ask "was my answer right?" to get anything back.
+ *
+ * Composed from the two detectors that already exist — `repliesWithQuestion`
+ * (conversationState.ts, already used by checkBrainCompliance) and
+ * `isBareAcknowledgement` above. Deliberately NOT a new detector, and
+ * deliberately not a change to `answersPendingQuestion`, whose MCQ meaning is
+ * load-bearing elsewhere.
+ *
+ * WHY IT DOES NOT SWALLOW "why?" — a question is not an answer, and D4b
+ * (ANSWER-STUDENT-FIRST) already owns that case and outranks memory serving on
+ * its own. This guard is only about the OTHER half of that rule: the learner
+ * who answered rather than asked. D4b's trigger set is untouched.
+ *
+ * Knows nothing about phases, mastery counters or grading — it decides only
+ * whether a static asset may serve on a turn that owes a reaction.
+ */
+export function answersProseQuestion(input: {
+  /** The tutor's previous message, as the learner saw it. */
+  lastAssistantText: string | null | undefined
+  /** The learner's message this turn. */
+  learnerMessage: string
+}): boolean {
+  try {
+    const prev = input.lastAssistantText
+    if (!prev || !repliesWithQuestion(prev)) return false
+    const msg = input.learnerMessage?.trim() ?? ''
+    if (msg.length === 0) return false
+    // A receipt is not an answer — "ok" after a question keeps its existing
+    // behaviour, which the readiness guard already handles at a mastery gate.
+    if (isBareAcknowledgement(msg)) return false
+    // A question is not an answer. D4b owns it.
+    if (msg.endsWith('?')) return false
+    return true
+  } catch {
+    // A guard must never break a turn; the pre-existing behaviour is the safe
+    // outcome.
+    return false
+  }
+}
+
 export function gateLessonCompletion(
   text: string,
   state: ConversationState | null,

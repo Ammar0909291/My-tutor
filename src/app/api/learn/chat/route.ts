@@ -3443,7 +3443,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const readinessAtGate = isBareAckHoisted && isGatePhase(
         (snapshot as { conversationState?: { phase?: unknown } } | null)?.conversationState?.phase,
       )
-      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate
+      // AN ANSWER TO A PROSE QUESTION IS NOT A REQUEST FOR AN EXPLANATION.
+      //
+      // `answersPendingQuestion` above is the MCQ grade, so it covers an answer
+      // to the WIDGET and is blind to an answer to the tutor's own prose.
+      // Measured in production: the tutor asked which quantity was larger on a
+      // winding road, the learner answered correctly with reasoning, and
+      // D1-MEMORY-HIT served a stored essay at zero cost instead of reacting.
+      //
+      // Composed from the two existing detectors (repliesWithQuestion +
+      // isBareAcknowledgement) — see answersProseQuestion. The MCQ path, D4b,
+      // the ladder and grading are all untouched.
+      const { answersProseQuestion } = await import('@/lib/teaching/masteryGate')
+      const lastAssistantText = learnSession.messages.find(
+        (m) => m.role === MessageRole.ASSISTANT,
+      )?.content ?? null
+      const answersProse = answersProseQuestion({ lastAssistantText, learnerMessage: message })
+      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
