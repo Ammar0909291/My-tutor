@@ -36,7 +36,7 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { answersProseQuestion, isBareAcknowledgement } from '@/lib/teaching/masteryGate'
-import { repliesWithQuestion } from '@/lib/teaching/conversationState'
+import { repliesWithQuestion, isLowSignalAcknowledgement } from '@/lib/teaching/conversationState'
 
 const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
 
@@ -83,6 +83,14 @@ describe('the four cases the guard must separate', () => {
     for (const ack of ['ok', 'okay', 'got it', 'yes', 'go on', 'continue']) {
       expect(isBareAcknowledgement(ack)).toBe(true)
       expect(answersProseQuestion({ lastAssistantText: TUTOR_ASKED, learnerMessage: ack })).toBe(false)
+    }
+  })
+
+  it('readiness phrases are low-signal acks, NOT bare acks', () => {
+    for (const phrase of ['ready', 'yes ready', 'im ready', "i'm ready", 'ok ready',
+      "let's go", 'lets go', 'go ahead', 'yes im ready']) {
+      expect(isLowSignalAcknowledgement(phrase)).toBe(true)
+      expect(isBareAcknowledgement(phrase)).toBe(false)
     }
   })
 
@@ -173,9 +181,9 @@ describe('THE GATE RESIDUAL — a widget question is still a question', () => {
 })
 
 describe('route wiring — narrowly scoped, nothing else moved', () => {
-  it('the guard is applied to serveFromMemory alongside the existing two', () => {
+  it('the guard is applied to serveFromMemory alongside the existing guards', () => {
     expect(ROUTE).toContain(
-      'let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse',
+      'let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion',
     )
   })
 
@@ -190,6 +198,11 @@ describe('route wiring — narrowly scoped, nothing else moved', () => {
 
   it('the gate readiness guard from the previous fix still stands', () => {
     expect(ROUTE).toMatch(/const readinessAtGate = isBareAckHoisted && isGatePhase\(/)
+  })
+
+  it('a low-signal ack to a question suppresses memory in ANY phase', () => {
+    expect(ROUTE).toContain('const ackToQuestion = isLowSignalAcknowledgement(message)')
+    expect(ROUTE).toContain('repliesWithQuestion(lastAssistantText)')
   })
 
   it('NO ADDITIONAL PROVIDER CALL SITE', () => {

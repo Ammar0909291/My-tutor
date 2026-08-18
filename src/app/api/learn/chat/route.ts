@@ -3490,39 +3490,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // being ignored, and the register jumped from a warm tutor to a dense
       // lecture in one turn.
       //
-      // Scoped, not global: only a BARE acknowledgement, and only at a mastery
-      // gate, where "ready?" is the question that was actually asked. "yes,
-      // but why?" is not bare and still gets taught; an acknowledgement in a
-      // delivery phase is unaffected, so ordinary "got it" handling elsewhere
-      // is byte-identical.
       const { isMasteryGatePhase: isGatePhase } = await import('@/lib/teaching/gateAssessment')
       const readinessAtGate = isBareAckHoisted && isGatePhase(
         (snapshot as { conversationState?: { phase?: unknown } } | null)?.conversationState?.phase,
       )
-      // AN ANSWER TO A PROSE QUESTION IS NOT A REQUEST FOR AN EXPLANATION.
-      //
-      // `answersPendingQuestion` above is the MCQ grade, so it covers an answer
-      // to the WIDGET and is blind to an answer to the tutor's own prose.
-      // Measured in production: the tutor asked which quantity was larger on a
-      // winding road, the learner answered correctly with reasoning, and
-      // D1-MEMORY-HIT served a stored essay at zero cost instead of reacting.
-      //
-      // Composed from the two existing detectors (repliesWithQuestion +
-      // isBareAcknowledgement) — see answersProseQuestion. The MCQ path, D4b,
-      // the ladder and grading are all untouched.
       const { answersProseQuestion } = await import('@/lib/teaching/masteryGate')
+      const { repliesWithQuestion, isLowSignalAcknowledgement } = await import('@/lib/teaching/conversationState')
       const lastAssistantText = learnSession.messages.find(
         (m) => m.role === MessageRole.ASSISTANT,
       )?.content ?? null
       const answersProse = answersProseQuestion({
         lastAssistantText,
         learnerMessage: message,
-        // On a gate turn the question is in the WIDGET and the prose is only a
-        // lead-in, so `repliesWithQuestion` cannot see that anything was asked.
-        // `pendingMcqHoisted` is the tutor's own record that it did.
         pendingQuestionOnScreen: pendingMcqHoisted !== null,
       })
-      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse
+      const ackToQuestion = isLowSignalAcknowledgement(message)
+        && (pendingMcqHoisted !== null || (!!lastAssistantText && repliesWithQuestion(lastAssistantText)))
+      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
@@ -3577,10 +3561,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         recordDispatch(dispatchPlanHoisted, brainRuntimeActive)
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
-        // The answer-turn suppression survives the fallback. A degraded path
-        // must never be MORE permissive than the healthy one on a gate that
-        // decides whether a learner gets feedback on the answer they just gave.
-        serveFromMemory = assembled !== null && !answersPendingQuestion
+        serveFromMemory = assembled !== null && !answersPendingQuestion && !ackToQuestion
       }
 
       // Conversation Decision — standalone block for turns where the Brain
