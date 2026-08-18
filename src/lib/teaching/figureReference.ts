@@ -45,16 +45,36 @@
  * is true and is left exactly as written.
  */
 
-/** Things a tutor can point at. Deliberately concrete — no metaphors. */
-const FIGURE_NOUN =
-  /\b(diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
-
-/** Verbs that direct the learner's eyes somewhere. */
-const POINTING_VERB = /\b(look at|looking at|see|notice|observe|study|examine|consider)\b/i
-
 /** Words that place the thing on screen rather than in the prose. */
 const ON_SCREEN =
   /\b(on (?:your|the) screen|displayed|shown (?:above|below|here)?|above|below|to the (?:right|left)|highlighted|on screen|pictured)\b/i
+
+/**
+ * Things a tutor can point at, in two tiers.
+ *
+ * STRONG names a rendered artefact and nothing else, so it counts on its own.
+ *
+ * WEAK is a word that can equally name something written in the prose itself —
+ * "look at this example — 3 + 4 × 2" points at the very next characters, not at
+ * a picture — so it counts ONLY alongside an on-screen locator. Measured on a
+ * real lesson: "Let's look at a complete worked example on your screen using the
+ * expression (2 + 3)² ÷ 5 − 1" slipped through when the list was strong-only,
+ * because "worked example" is not a diagram and the turn carried no figure.
+ */
+const STRONG_FIGURE_NOUN =
+  /\b(diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
+
+const WEAK_FIGURE_NOUN =
+  /\b(worked example|example|table|steps?|solution|board|canvas|panel|screen)\b/i
+
+/** Does this fragment name something the learner is being told to look AT? */
+function namesAFigure(fragment: string): boolean {
+  if (STRONG_FIGURE_NOUN.test(fragment)) return true
+  return WEAK_FIGURE_NOUN.test(fragment) && ON_SCREEN.test(fragment)
+}
+
+/** Verbs that direct the learner's eyes somewhere. */
+const POINTING_VERB = /\b(look at|looking at|see|notice|observe|study|examine|consider)\b/i
 
 export interface FigureReferenceResult {
   text: string
@@ -77,7 +97,9 @@ export function stripUnbackedFigureReferences(
     if (hasFigure) return { text, stripped: false, removed: [] }
     if (typeof text !== 'string' || text.length === 0) return { text, stripped: false, removed: [] }
     // Cheap reject: nothing here points at anything.
-    if (!FIGURE_NOUN.test(text)) return { text, stripped: false, removed: [] }
+    if (!STRONG_FIGURE_NOUN.test(text) && !WEAK_FIGURE_NOUN.test(text)) {
+      return { text, stripped: false, removed: [] }
+    }
 
     const removed: string[] = []
     const paragraphs = text.split(/\n{2,}/)
@@ -93,11 +115,25 @@ export function stripUnbackedFigureReferences(
         const clause = s.match(/^(.{0,140}?[—–-]\s*)(?=\S)/)
         if (clause) {
           const head = clause[1]
-          if (POINTING_VERB.test(head) && FIGURE_NOUN.test(head)) {
+          if (POINTING_VERB.test(head) && namesAFigure(head)) {
             const rest = s.slice(head.length).trim()
-            if (rest.length > 0) {
+            // A REPAIR MUST NOT LEAVE A SENTENCE STARTING MID-THOUGHT.
+            //
+            // Measured on the real turn "When we look at the numbers highlighted
+            // on the number line on your screen—2, 3, 5, 7, 11, and 13—each of
+            // these numbers can only be divided evenly by 1 and by itself": the
+            // pointing head carried the sentence's subject, so cutting it left
+            // "2, 3, 5, 7, 11, and 13—each of these numbers…", which reads as a
+            // fragment. When the remainder does not begin like a sentence, the
+            // whole sentence goes instead — a clean turn beats a mangled one,
+            // and the surrounding paragraphs carry the teaching.
+            if (rest.length > 0 && /^[A-Za-z]/.test(rest)) {
               removed.push(head.trim())
               return rest.charAt(0).toUpperCase() + rest.slice(1)
+            }
+            if (rest.length > 0 && !s.includes('?')) {
+              removed.push(s)
+              return ''
             }
           }
         }
@@ -106,7 +142,7 @@ export function stripUnbackedFigureReferences(
         // question is content the learner is expected to answer, and removing
         // it would silently change what the turn asked.
         const isPointer =
-          POINTING_VERB.test(s) && FIGURE_NOUN.test(s) && ON_SCREEN.test(s) && !s.includes('?')
+          POINTING_VERB.test(s) && namesAFigure(s) && ON_SCREEN.test(s) && !s.includes('?')
         if (isPointer) {
           removed.push(s)
           return ''
