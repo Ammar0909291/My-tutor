@@ -17,12 +17,26 @@ import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/
 const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
-/** Concepts this batch was written to bring up to contract. */
+/**
+ * Every mathematics concept on the 245-concept spine that currently SERVES
+ * content. Each must hold >= 3 closed-choice probes at every band it serves, so
+ * a perfect learner can reach mastery without the model volunteering a question.
+ */
 const COVERED = [
+  // math.arith
   'math.arith.addition', 'math.arith.subtraction', 'math.arith.multiplication',
   'math.arith.division', 'math.arith.fractions', 'math.arith.fraction-equivalence',
   'math.arith.fraction-multiplication', 'math.arith.order-of-operations',
   'math.arith.ratios', 'math.arith.exponentiation',
+  // math.found
+  'math.found.integers', 'math.found.logic', 'math.found.natural-numbers',
+  'math.found.rational-numbers', 'math.found.set',
+  // math.geom
+  'math.geom.angle', 'math.geom.circle', 'math.geom.coordinate-plane',
+  'math.geom.right-triangle', 'math.geom.similar-triangles', 'math.geom.slope',
+  'math.geom.triangle', 'math.geom.vectors-2d',
+  // math.nt
+  'math.nt.prime-number',
 ]
 
 describe('mathematics seed probes', () => {

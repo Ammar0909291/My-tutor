@@ -279,8 +279,221 @@ const TOP_UPS: SeedProbe[] = [
   },
 ]
 
+// ─── math.found ──────────────────────────────────────────────────────────────
+// Existing ACTIVE stems are avoided: integers "every integer is either positive
+// or negative" / "closed under"; logic "divisible by 4" / "n²+n+41";
+// natural-numbers "Is 0 natural?" / well-ordering; rational-numbers "1/2 and
+// 2/4" / "0.333…"; set "{∅} cardinality" / "{a,b,a,c,b}".
+const FOUNDATIONS: SeedProbe[] = [
+  {
+    conceptId: 'math.found.integers', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Is −7 a smaller number than −3?',
+    choices: [
+      { text: 'Yes — on the number line −7 lies further left, so it is less than −3', isCorrect: true },
+      { text: 'No — 7 is bigger than 3, so −7 is bigger than −3', isCorrect: false, misconceptionId: 'math.found.integers:MC-magnitude-as-order' },
+    ],
+    targetedMisconceptions: ['math.found.integers:MC-magnitude-as-order'],
+    source: src('math.found.integers', 'ordering negatives by magnitude rather than by position'),
+  },
+  {
+    conceptId: 'math.found.logic', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'The statement "every swan I have seen is white" is offered as proof that all swans are white. What is missing?',
+    choices: [
+      { text: 'An argument covering every swan — examples can support a claim but never establish it for all cases', isCorrect: true },
+      { text: 'Nothing — enough observations amount to a proof', isCorrect: false, misconceptionId: 'math.found.logic:MC-examples-as-proof' },
+      { text: 'More observations of the same kind', isCorrect: false, misconceptionId: 'math.found.logic:MC-examples-as-proof' },
+    ],
+    targetedMisconceptions: ['math.found.logic:MC-examples-as-proof'],
+    source: src('math.found.logic', 'accumulated examples mistaken for a universal proof'),
+  },
+  {
+    conceptId: 'math.found.natural-numbers', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Is there a largest natural number?',
+    choices: [
+      { text: 'No — whichever you name, adding 1 gives a larger one', isCorrect: true },
+      { text: 'Yes, infinity', isCorrect: false, misconceptionId: 'math.found.natural-numbers:MC-infinity-as-number' },
+    ],
+    targetedMisconceptions: ['math.found.natural-numbers:MC-infinity-as-number'],
+    source: src('math.found.natural-numbers', 'infinity treated as a natural number rather than as unboundedness'),
+  },
+  {
+    conceptId: 'math.found.rational-numbers', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Between the rationals 1/3 and 1/2, how many other rationals are there?',
+    choices: [
+      { text: 'Infinitely many — the average of any two rationals is another rational between them', isCorrect: true },
+      { text: 'None — they are next to each other', isCorrect: false, misconceptionId: 'math.found.rational-numbers:MC-discrete-successor' },
+      { text: 'Exactly one', isCorrect: false, misconceptionId: 'math.found.rational-numbers:MC-discrete-successor' },
+    ],
+    targetedMisconceptions: ['math.found.rational-numbers:MC-discrete-successor'],
+    source: src('math.found.rational-numbers', 'expecting a next rational, carried over from counting numbers'),
+  },
+  {
+    conceptId: 'math.found.set', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Are {1, 2, 3} and {3, 1, 2} the same set?',
+    choices: [
+      { text: 'Yes — a set is decided by which members it has, not by the order they are written in', isCorrect: true },
+      { text: 'No — the members are in a different order', isCorrect: false, misconceptionId: 'math.found.set:MC-order-matters' },
+    ],
+    targetedMisconceptions: ['math.found.set:MC-order-matters'],
+    source: src('math.found.set', 'sets read as ordered lists'),
+  },
+  {
+    conceptId: 'math.found.set', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Is the empty set a subset of {1, 2, 3}?',
+    choices: [
+      { text: 'Yes — it has no member that is missing from {1, 2, 3}, so nothing disqualifies it', isCorrect: true },
+      { text: 'No — it has no members, so it cannot be inside anything', isCorrect: false, misconceptionId: 'math.found.set:MC-empty-set-not-subset' },
+    ],
+    targetedMisconceptions: ['math.found.set:MC-empty-set-not-subset'],
+    source: src('math.found.set', 'the empty set as a subset of every set'),
+  },
+  {
+    conceptId: 'math.found.set', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'For A = {1, 2}, which is true: 1 ∈ A, or {1} ∈ A?',
+    choices: [
+      { text: '1 ∈ A — the number is a member; {1} is a set containing it, and A does not contain that set', isCorrect: true },
+      { text: 'Both are true', isCorrect: false, misconceptionId: 'math.found.set:MC-element-vs-singleton' },
+      { text: '{1} ∈ A — members are written as sets', isCorrect: false, misconceptionId: 'math.found.set:MC-element-vs-singleton' },
+    ],
+    targetedMisconceptions: ['math.found.set:MC-element-vs-singleton'],
+    source: src('math.found.set', 'membership vs containment — an element is not the singleton holding it'),
+  },
+  {
+    conceptId: 'math.found.set', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A = {1, 2} and B = {1, 2, 3}. Is A ⊆ B, or A ∈ B?',
+    choices: [
+      { text: 'A ⊆ B — every member of A is a member of B, but A itself is not one of B\'s three members', isCorrect: true },
+      { text: 'A ∈ B — A sits inside B', isCorrect: false, misconceptionId: 'math.found.set:MC-subset-vs-membership' },
+    ],
+    targetedMisconceptions: ['math.found.set:MC-subset-vs-membership'],
+    source: src('math.found.set', 'subset and membership conflated — the two senses of "inside"'),
+  },
+]
+
+// ─── math.geom ───────────────────────────────────────────────────────────────
+const GEOMETRY: SeedProbe[] = [
+  {
+    conceptId: 'math.geom.angle', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Two angles are complementary and one measures 35°. What is the other?',
+    choices: [
+      { text: '55° — complementary angles sum to 90°', isCorrect: true },
+      { text: '145° — they sum to 180°', isCorrect: false, misconceptionId: 'math.geom.angle:MC-complementary-supplementary-swap' },
+      { text: '35° — complementary means equal', isCorrect: false, misconceptionId: 'math.geom.angle:MC-complementary-means-equal' },
+    ],
+    targetedMisconceptions: ['math.geom.angle:MC-complementary-supplementary-swap'],
+    source: src('math.geom.angle', 'complementary and supplementary exchanged'),
+  },
+  {
+    conceptId: 'math.geom.circle', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A circle has radius 3. A student computes the circumference as 2π(3²) = 18π. What went wrong?',
+    choices: [
+      { text: 'They squared the radius; circumference is 2πr = 6π, and it is the AREA that uses r²', isCorrect: true },
+      { text: 'Nothing — 18π is correct', isCorrect: false, misconceptionId: 'math.geom.circle:MC-area-circumference-swap' },
+      { text: 'They should have used the diameter instead of the radius', isCorrect: false, misconceptionId: 'math.geom.circle:MC-radius-diameter-swap' },
+    ],
+    targetedMisconceptions: ['math.geom.circle:MC-area-circumference-swap'],
+    source: src('math.geom.circle', 'the two circle formulas exchanged'),
+  },
+  {
+    conceptId: 'math.geom.coordinate-plane', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Are the points (2, 5) and (5, 2) the same point?',
+    choices: [
+      { text: 'No — the first number is the horizontal move and the second the vertical, so swapping them gives a different place', isCorrect: true },
+      { text: 'Yes — they use the same two numbers', isCorrect: false, misconceptionId: 'math.geom.coordinate-plane:MC-coordinate-order' },
+    ],
+    targetedMisconceptions: ['math.geom.coordinate-plane:MC-coordinate-order'],
+    source: src('math.geom.coordinate-plane', 'an ordered pair read as an unordered pair'),
+  },
+  {
+    conceptId: 'math.geom.right-triangle', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A right triangle has legs 6 and 8. A student says the hypotenuse is 6 + 8 = 14. What is it really?',
+    choices: [
+      { text: '10 — the squares add, not the lengths: 6² + 8² = 100, so the hypotenuse is √100', isCorrect: true },
+      { text: '14', isCorrect: false, misconceptionId: 'math.geom.right-triangle:MC-add-legs' },
+      { text: '48', isCorrect: false, misconceptionId: 'math.geom.right-triangle:MC-multiply-legs' },
+    ],
+    targetedMisconceptions: ['math.geom.right-triangle:MC-add-legs'],
+    source: src('math.geom.right-triangle', 'adding the legs instead of adding their squares'),
+  },
+  {
+    conceptId: 'math.geom.similar-triangles', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Two similar triangles have sides in the ratio 1:3. What is the ratio of their AREAS?',
+    choices: [
+      { text: '1:9 — area scales with the square of the length factor', isCorrect: true },
+      { text: '1:3 — the same as the sides', isCorrect: false, misconceptionId: 'math.geom.similar-triangles:MC-linear-area-scaling' },
+      { text: '1:6', isCorrect: false, misconceptionId: 'math.geom.similar-triangles:MC-linear-area-scaling' },
+    ],
+    targetedMisconceptions: ['math.geom.similar-triangles:MC-linear-area-scaling'],
+    source: src('math.geom.similar-triangles', 'area assumed to scale linearly with side length'),
+  },
+  {
+    conceptId: 'math.geom.slope', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'What is the slope of a horizontal line?',
+    choices: [
+      { text: '0 — it rises by nothing over any run', isCorrect: true },
+      { text: 'Undefined', isCorrect: false, misconceptionId: 'math.geom.slope:MC-horizontal-vertical-swap' },
+      { text: '1', isCorrect: false, misconceptionId: 'math.geom.slope:MC-slope-one-default' },
+    ],
+    targetedMisconceptions: ['math.geom.slope:MC-horizontal-vertical-swap'],
+    source: src('math.geom.slope', 'zero slope and undefined slope exchanged'),
+  },
+  {
+    conceptId: 'math.geom.triangle', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Can a triangle be built with sides 2, 3 and 9?',
+    choices: [
+      { text: 'No — 2 + 3 is less than 9, so the two short sides cannot meet', isCorrect: true },
+      { text: 'Yes — any three positive lengths make a triangle', isCorrect: false, misconceptionId: 'math.geom.triangle:MC-any-three-lengths' },
+    ],
+    targetedMisconceptions: ['math.geom.triangle:MC-any-three-lengths'],
+    source: src('math.geom.triangle', 'the triangle inequality — not every triple of lengths closes'),
+  },
+  {
+    conceptId: 'math.geom.vectors-2d', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Vector u = (3, 4) and vector v = (4, 3). Do u and v have the same magnitude, and are they the same vector?',
+    choices: [
+      { text: 'Same magnitude (both 5), different vectors — they point in different directions', isCorrect: true },
+      { text: 'They are the same vector', isCorrect: false, misconceptionId: 'math.geom.vectors-2d:MC-magnitude-is-identity' },
+      { text: 'Different magnitudes', isCorrect: false, misconceptionId: 'math.geom.vectors-2d:MC-component-order-changes-length' },
+    ],
+    targetedMisconceptions: ['math.geom.vectors-2d:MC-magnitude-is-identity'],
+    source: src('math.geom.vectors-2d', 'a vector is magnitude AND direction — equal length is not equality'),
+  },
+]
+
+// ─── math.nt ─────────────────────────────────────────────────────────────────
+const NUMBER_THEORY: SeedProbe[] = [
+  {
+    conceptId: 'math.nt.prime-number', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Is 2 a prime number?',
+    choices: [
+      { text: 'Yes — its only divisors are 1 and itself; being even is irrelevant to primality', isCorrect: true },
+      { text: 'No — primes are odd', isCorrect: false, misconceptionId: 'math.nt.prime-number:MC-primes-are-odd' },
+    ],
+    targetedMisconceptions: ['math.nt.prime-number:MC-primes-are-odd'],
+    source: src('math.nt.prime-number', 'oddness mistaken for a defining property of primes'),
+  },
+]
+
 export const MATHEMATICS_PROBES: SeedProbe[] = [
   ...ADDITION, ...SUBTRACTION, ...MULTIPLICATION, ...DIVISION, ...TOP_UPS,
+  ...FOUNDATIONS, ...GEOMETRY, ...NUMBER_THEORY,
 ]
 
 /** No explanations are added here — every concept above already serves one. */
