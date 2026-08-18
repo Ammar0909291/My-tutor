@@ -491,9 +491,298 @@ const NUMBER_THEORY: SeedProbe[] = [
   },
 ]
 
+// ─── math.alg ────────────────────────────────────────────────────────────────
+// Existing ACTIVE stems avoided: equation "x + 5 = x" (high) / "3x = 12, are you
+// done?" (middle); expression "Simplify 4x + 3"; like-terms "3x² + 2x²" /
+// "x + x²"; linear-equation-1var "5x = 12 − 3" / "4x + 7 = 31";
+// quadratic-equation discriminant / "x² + 3x + 1 no integer pair".
+const ALGEBRA: SeedProbe[] = [
+  {
+    conceptId: 'math.alg.equation', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'Solving 2x + 6 = 10, a student subtracts 6 from the left only and writes 2x = 10. What did they miss?',
+    choices: [
+      { text: 'Whatever is done to one side must be done to the other, so it should be 2x = 4', isCorrect: true },
+      { text: 'Nothing — you only clear the side with the variable', isCorrect: false, misconceptionId: 'math.alg.equation:MC-one-sided-operation' },
+      { text: 'They should have added 6 instead', isCorrect: false, misconceptionId: 'math.alg.equation:MC-inverse-direction' },
+    ],
+    targetedMisconceptions: ['math.alg.equation:MC-one-sided-operation'],
+    source: src('math.alg.equation', 'the balance is broken when an operation is applied to one side'),
+  },
+  {
+    conceptId: 'math.alg.equation', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'What does the "=" in 3x + 1 = 7 assert?',
+    choices: [
+      { text: 'That the two sides have the same value — it is a claim to be kept true, not an instruction to compute', isCorrect: true },
+      { text: 'That the answer follows next, like the = on a calculator', isCorrect: false, misconceptionId: 'math.alg.equation:MC-equals-as-operator' },
+    ],
+    targetedMisconceptions: ['math.alg.equation:MC-equals-as-operator'],
+    source: src('math.alg.equation', 'the operator reading of equals, carried from arithmetic'),
+  },
+  {
+    conceptId: 'math.alg.equation', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A student solving x² = 9 writes x = 3. Is that the complete solution?',
+    choices: [
+      { text: 'No — x = −3 also satisfies it, so both roots must be given', isCorrect: true },
+      { text: 'Yes — a square root has one value', isCorrect: false, misconceptionId: 'math.alg.equation:MC-lost-negative-root' },
+    ],
+    targetedMisconceptions: ['math.alg.equation:MC-lost-negative-root'],
+    source: src('math.alg.equation', 'the negative root dropped when undoing a square'),
+  },
+  {
+    conceptId: 'math.alg.equation', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'From x(x − 2) = 0, what can be concluded?',
+    choices: [
+      { text: 'x = 0 or x = 2 — a product is zero only when a factor is zero', isCorrect: true },
+      { text: 'x = 2 only', isCorrect: false, misconceptionId: 'math.alg.equation:MC-discard-trivial-root' },
+      { text: 'x − 2 = 0 and x = 0 must both hold', isCorrect: false, misconceptionId: 'math.alg.equation:MC-and-vs-or' },
+    ],
+    targetedMisconceptions: ['math.alg.equation:MC-and-vs-or'],
+    source: src('math.alg.equation', 'the zero-product property read as a conjunction'),
+  },
+  {
+    conceptId: 'math.alg.expression', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.PROFICIENT,
+    stem: 'What is the difference between 3x + 5 and 3x + 5 = 11?',
+    choices: [
+      { text: 'The first is an expression — a value depending on x. The second is an equation, a claim that can be solved', isCorrect: true },
+      { text: 'Nothing — they mean the same thing', isCorrect: false, misconceptionId: 'math.alg.expression:MC-expression-is-equation' },
+      { text: 'The first is unfinished and must be set equal to something', isCorrect: false, misconceptionId: 'math.alg.expression:MC-expression-needs-answer' },
+    ],
+    targetedMisconceptions: ['math.alg.expression:MC-expression-is-equation'],
+    source: src('math.alg.expression', 'expression and equation conflated — the source of "solve 4x + 3"'),
+  },
+  {
+    conceptId: 'math.alg.expression', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In the expression 5y, what does the 5 do?',
+    choices: [
+      { text: 'It multiplies y — 5y means five lots of whatever y is', isCorrect: true },
+      { text: 'It is added to y', isCorrect: false, misconceptionId: 'math.alg.expression:MC-juxtaposition-as-addition' },
+      { text: 'It is a digit placed in front, like 5 and y written together', isCorrect: false, misconceptionId: 'math.alg.expression:MC-concatenation' },
+    ],
+    targetedMisconceptions: ['math.alg.expression:MC-juxtaposition-as-addition'],
+    source: src('math.alg.expression', 'implied multiplication read as concatenation or addition'),
+  },
+  {
+    conceptId: 'math.alg.like-terms', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Simplify 5a + 3b, if possible.',
+    choices: [
+      { text: 'It is already simplified — a and b are different unknowns and cannot be combined', isCorrect: true },
+      { text: '8ab', isCorrect: false, misconceptionId: 'math.alg.like-terms:MC-combine-unlike' },
+      { text: '8', isCorrect: false, misconceptionId: 'math.alg.like-terms:MC-drop-variables' },
+    ],
+    targetedMisconceptions: ['math.alg.like-terms:MC-combine-unlike'],
+    source: src('math.alg.like-terms', 'unlike terms combined under pressure to produce a single answer'),
+  },
+  {
+    conceptId: 'math.alg.linear-equation-1var', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.MIDDLE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'To solve 3x = 12, which single step finishes it?',
+    choices: [
+      { text: 'Divide both sides by 3 — the inverse of multiplying by 3', isCorrect: true },
+      { text: 'Subtract 3 from both sides', isCorrect: false, misconceptionId: 'math.alg.linear-equation-1var:MC-wrong-inverse' },
+      { text: 'Multiply both sides by 3', isCorrect: false, misconceptionId: 'math.alg.linear-equation-1var:MC-inverse-direction' },
+    ],
+    targetedMisconceptions: ['math.alg.linear-equation-1var:MC-wrong-inverse'],
+    source: src('math.alg.linear-equation-1var', 'the inverse chosen by operation-type rather than by what undoes it'),
+  },
+  {
+    conceptId: 'math.alg.quadratic-equation', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A student solves x² = 5x by dividing both sides by x, getting x = 5. What has been lost?',
+    choices: [
+      { text: 'The root x = 0 — dividing by x assumes x is not zero, and here it can be', isCorrect: true },
+      { text: 'Nothing — x = 5 is the whole solution', isCorrect: false, misconceptionId: 'math.alg.quadratic-equation:MC-divide-by-variable' },
+    ],
+    targetedMisconceptions: ['math.alg.quadratic-equation:MC-divide-by-variable'],
+    source: src('math.alg.quadratic-equation', 'dividing through by the variable silently discards a root'),
+  },
+]
+
+// ─── math.calc ───────────────────────────────────────────────────────────────
+const CALCULUS: SeedProbe[] = [
+  {
+    conceptId: 'math.calc.limits', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'g(x) = 1 for every x except x = 3, where g(3) = 7. What is lim_{x→3} g(x)?',
+    choices: [
+      { text: '1 — a limit describes the approach, and the value AT the point is irrelevant', isCorrect: true },
+      { text: '7 — the limit is the function value there', isCorrect: false, misconceptionId: 'math.calc.limits:MC-limit-is-value' },
+    ],
+    targetedMisconceptions: ['math.calc.limits:MC-limit-is-value'],
+    source: src('math.calc.limits', 'the limit confused with the function value at the point'),
+  },
+  {
+    conceptId: 'math.calc.derivative-intro', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'For f(x) = x², f′(3) = 6. What does the 6 measure?',
+    choices: [
+      { text: 'The instantaneous rate of change of f at x = 3 — the slope of the tangent there', isCorrect: true },
+      { text: 'The value of f at x = 3', isCorrect: false, misconceptionId: 'math.calc.derivative-intro:MC-derivative-is-value' },
+      { text: 'The average slope between x = 0 and x = 3', isCorrect: false, misconceptionId: 'math.calc.derivative-intro:MC-average-vs-instantaneous' },
+    ],
+    targetedMisconceptions: ['math.calc.derivative-intro:MC-average-vs-instantaneous'],
+    source: src('math.calc.derivative-intro', 'average rate over an interval vs instantaneous rate at a point'),
+  },
+  {
+    conceptId: 'math.calc.chain-rule', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A student differentiates (3x + 1)⁵ as 5(3x + 1)⁴. What is missing?',
+    choices: [
+      { text: 'The derivative of the inside, 3 — the answer is 15(3x + 1)⁴', isCorrect: true },
+      { text: 'Nothing — the power rule is complete', isCorrect: false, misconceptionId: 'math.calc.chain-rule:MC-forgotten-inner-derivative' },
+      { text: 'The inside should also be differentiated to 3x', isCorrect: false, misconceptionId: 'math.calc.chain-rule:MC-inner-mishandled' },
+    ],
+    targetedMisconceptions: ['math.calc.chain-rule:MC-forgotten-inner-derivative'],
+    source: src('math.calc.chain-rule', 'the inner derivative dropped — the commonest chain-rule slip'),
+  },
+  {
+    conceptId: 'math.calc.antiderivatives', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Why does ∫2x dx = x² + C carry the "+ C"?',
+    choices: [
+      { text: 'Because every function differing by a constant has the same derivative, so the antiderivative is a family, not one function', isCorrect: true },
+      { text: 'It is a convention with no mathematical content', isCorrect: false, misconceptionId: 'math.calc.antiderivatives:MC-constant-is-decorative' },
+      { text: 'Because the integral is only approximate', isCorrect: false, misconceptionId: 'math.calc.antiderivatives:MC-integral-approximate' },
+    ],
+    targetedMisconceptions: ['math.calc.antiderivatives:MC-constant-is-decorative'],
+    source: src('math.calc.antiderivatives', 'the constant of integration copied without meaning'),
+  },
+]
+
+// ─── math.linalg / math.abst / math.func ─────────────────────────────────────
+const STRUCTURES: SeedProbe[] = [
+  {
+    conceptId: 'math.linalg.determinant', subjectSlug: S, probeKind: 'mcq',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A 2×2 matrix has determinant 0. What follows?',
+    choices: [
+      { text: 'It has no inverse — its columns are linearly dependent', isCorrect: true },
+      { text: 'It is the zero matrix', isCorrect: false, misconceptionId: 'math.linalg.determinant:MC-zero-det-zero-matrix' },
+      { text: 'Its inverse is the zero matrix', isCorrect: false, misconceptionId: 'math.linalg.determinant:MC-zero-inverse' },
+    ],
+    targetedMisconceptions: ['math.linalg.determinant:MC-zero-det-zero-matrix'],
+    source: src('math.linalg.determinant', 'a zero determinant read as a zero matrix'),
+  },
+  {
+    conceptId: 'math.linalg.matrix-multiplication', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A is 2×3 and B is 3×4. What is the size of AB?',
+    choices: [
+      { text: '2×4 — the inner dimensions match and cancel, leaving the outer ones', isCorrect: true },
+      { text: '3×3', isCorrect: false, misconceptionId: 'math.linalg.matrix-multiplication:MC-inner-dimensions-kept' },
+      { text: 'It cannot be computed', isCorrect: false, misconceptionId: 'math.linalg.matrix-multiplication:MC-same-shape-required' },
+    ],
+    targetedMisconceptions: ['math.linalg.matrix-multiplication:MC-inner-dimensions-kept'],
+    source: src('math.linalg.matrix-multiplication', 'conformability and the shape of the product'),
+  },
+  {
+    conceptId: 'math.abst.group-theory', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.UNDERGRADUATE, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Are the integers under subtraction a group?',
+    choices: [
+      { text: 'No — subtraction is not associative, so one of the group axioms fails', isCorrect: true },
+      { text: 'Yes — subtraction is closed on ℤ and 0 acts as an identity', isCorrect: false, misconceptionId: 'math.abst.group-theory:MC-closure-suffices' },
+    ],
+    targetedMisconceptions: ['math.abst.group-theory:MC-closure-suffices'],
+    source: src('math.abst.group-theory', 'closure mistaken for the whole of the group axioms'),
+  },
+  {
+    conceptId: 'math.func.function-concept', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A rule pairs 3 with both 5 and 9. Is it a function?',
+    choices: [
+      { text: 'No — a function gives each input exactly one output', isCorrect: true },
+      { text: 'Yes — repeated outputs are allowed in a function', isCorrect: false, misconceptionId: 'math.func.function-concept:MC-input-output-direction' },
+    ],
+    targetedMisconceptions: ['math.func.function-concept:MC-input-output-direction'],
+    source: src('math.func.function-concept', 'the one-output rule applied to the wrong side of the pairing'),
+  },
+]
+
+// ─── math.prob / math.trig ───────────────────────────────────────────────────
+const PROB_TRIG: SeedProbe[] = [
+  {
+    conceptId: 'math.prob.classical-probability', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A fair coin has landed heads five times running. What is P(heads) on the next toss?',
+    choices: [
+      { text: '1/2 — the coin has no memory of previous tosses', isCorrect: true },
+      { text: 'Less than 1/2, because tails is overdue', isCorrect: false, misconceptionId: 'math.prob.classical-probability:MC-gamblers-fallacy' },
+      { text: 'More than 1/2, because heads is on a run', isCorrect: false, misconceptionId: 'math.prob.classical-probability:MC-hot-hand' },
+    ],
+    targetedMisconceptions: ['math.prob.classical-probability:MC-gamblers-fallacy'],
+    source: src('math.prob.classical-probability', 'independence denied by the gambler\'s fallacy'),
+  },
+  {
+    conceptId: 'math.prob.conditional-probability', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A disease affects 1 in 1000. A test is 99% accurate and a random person tests positive. Is it near-certain they have it?',
+    choices: [
+      { text: 'No — the healthy majority produces many false positives, so the chance stays well below certainty', isCorrect: true },
+      { text: 'Yes — the test is 99% accurate, so they are 99% likely to have it', isCorrect: false, misconceptionId: 'math.prob.conditional-probability:MC-base-rate-neglect' },
+    ],
+    targetedMisconceptions: ['math.prob.conditional-probability:MC-base-rate-neglect'],
+    source: src('math.prob.conditional-probability', 'base-rate neglect — test accuracy read as posterior probability'),
+  },
+  {
+    conceptId: 'math.prob.expected-value', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'A fair die is rolled. What is the expected value?',
+    choices: [
+      { text: '3.5 — the probability-weighted average, which is not itself a possible roll', isCorrect: true },
+      { text: '6, the most you can score', isCorrect: false, misconceptionId: 'math.prob.expected-value:MC-expected-as-maximum' },
+      { text: 'It has none, since no face shows 3.5', isCorrect: false, misconceptionId: 'math.prob.expected-value:MC-must-be-attainable' },
+    ],
+    targetedMisconceptions: ['math.prob.expected-value:MC-must-be-attainable'],
+    source: src('math.prob.expected-value', 'expectation required to be an attainable outcome'),
+  },
+  {
+    conceptId: 'math.trig.right-triangle-trig', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'In a right triangle, which side is the hypotenuse?',
+    choices: [
+      { text: 'The one opposite the right angle — always the longest', isCorrect: true },
+      { text: 'Whichever side is drawn at the bottom', isCorrect: false, misconceptionId: 'math.trig.right-triangle-trig:MC-orientation-dependent' },
+      { text: 'The side adjacent to the angle being used', isCorrect: false, misconceptionId: 'math.trig.right-triangle-trig:MC-hypotenuse-is-adjacent' },
+    ],
+    targetedMisconceptions: ['math.trig.right-triangle-trig:MC-orientation-dependent'],
+    source: src('math.trig.right-triangle-trig', 'side roles read off the drawing rather than off the right angle'),
+  },
+  {
+    conceptId: 'math.trig.trig-functions', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'Can sin(x) ever equal 1.4?',
+    choices: [
+      { text: 'No — sine is a ratio bounded between −1 and 1', isCorrect: true },
+      { text: 'Yes, for a large enough angle', isCorrect: false, misconceptionId: 'math.trig.trig-functions:MC-unbounded-sine' },
+    ],
+    targetedMisconceptions: ['math.trig.trig-functions:MC-unbounded-sine'],
+    source: src('math.trig.trig-functions', 'sine treated as unbounded like a polynomial'),
+  },
+  {
+    conceptId: 'math.trig.unit-circle', subjectSlug: S, probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.ADVANCED,
+    stem: 'On the unit circle, in which quadrant is sin θ positive while cos θ is negative?',
+    choices: [
+      { text: 'The second — y is above the axis while x is to its left', isCorrect: true },
+      { text: 'The fourth', isCorrect: false, misconceptionId: 'math.trig.unit-circle:MC-quadrant-signs-swapped' },
+      { text: 'The third', isCorrect: false, misconceptionId: 'math.trig.unit-circle:MC-both-negative' },
+    ],
+    targetedMisconceptions: ['math.trig.unit-circle:MC-quadrant-signs-swapped'],
+    source: src('math.trig.unit-circle', 'quadrant sign patterns memorised without the coordinate meaning'),
+  },
+]
+
 export const MATHEMATICS_PROBES: SeedProbe[] = [
   ...ADDITION, ...SUBTRACTION, ...MULTIPLICATION, ...DIVISION, ...TOP_UPS,
   ...FOUNDATIONS, ...GEOMETRY, ...NUMBER_THEORY,
+  ...ALGEBRA, ...CALCULUS, ...STRUCTURES, ...PROB_TRIG,
 ]
 
 /** No explanations are added here — every concept above already serves one. */

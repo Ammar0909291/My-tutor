@@ -18,9 +18,13 @@ const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
- * Every mathematics concept on the 245-concept spine that currently SERVES
- * content. Each must hold >= 3 closed-choice probes at every band it serves, so
+ * EVERY mathematics concept that currently serves content — all 43, not just the
+ * spine's. Each must hold >= 3 closed-choice probes at every band it serves, so
  * a perfect learner can reach mastery without the model volunteering a question.
+ *
+ * Measured against production on 2026-08-18 this list stood at ZERO: 40 concepts
+ * held two probes and 3 held one. That is why a learner could answer three
+ * PRACTICE questions correctly on math.found.logic and still not finish.
  */
 const COVERED = [
   // math.arith
@@ -37,6 +41,19 @@ const COVERED = [
   'math.geom.triangle', 'math.geom.vectors-2d',
   // math.nt
   'math.nt.prime-number',
+  // math.alg
+  'math.alg.equation', 'math.alg.expression', 'math.alg.like-terms',
+  'math.alg.linear-equation-1var', 'math.alg.quadratic-equation',
+  // math.calc
+  'math.calc.limits', 'math.calc.derivative-intro', 'math.calc.chain-rule',
+  'math.calc.antiderivatives',
+  // math.linalg / abst / func
+  'math.linalg.determinant', 'math.linalg.matrix-multiplication',
+  'math.abst.group-theory', 'math.func.function-concept',
+  // math.prob / trig
+  'math.prob.classical-probability', 'math.prob.conditional-probability',
+  'math.prob.expected-value', 'math.trig.right-triangle-trig',
+  'math.trig.trig-functions', 'math.trig.unit-circle',
 ]
 
 describe('mathematics seed probes', () => {
