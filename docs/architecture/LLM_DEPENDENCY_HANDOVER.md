@@ -2707,3 +2707,97 @@ Not "implement", and not "audit one more thing".
 Ship the visualization env vars, run the beta, and re-measure the phase
 distribution against this 76.4% / 4.9% baseline with real learners. If the
 stall persists there, §H is waiting and the evidence will finally justify it.
+
+---
+
+# PROSE-ANSWER AUDIT (2026-08-18, read-only, DOCUMENTATION-ONLY)
+
+**VERDICT: A — defect proven, narrowly-scoped fix identified, NOT implemented.**
+
+## Root cause — SOURCE-VERIFIED + MEASURED
+
+`answersPendingQuestion = mcqGradeHoisted !== null` — it is keyed on the MCQ
+grade, so it recognises an answer to a **widget** question and is blind to an
+answer to a **prose** question. `serveFromMemory` therefore stays true, and
+`D1-MEMORY-HIT` serves a static asset on a turn that owes the learner a reaction.
+
+The decision engine has an explicit rule protecting learners who **ask**
+(`D4b-ANSWER-STUDENT-FIRST`, whose own comment says *"a stored explanation keyed
+to the concept is not an answer to the student's specific question"*) and **no
+rule protecting learners who answer**. D4b fires on `asking_question` /
+`requesting_help` only; `answering` falls straight through to D1.
+
+MEASURED, production: both occurrences are
+`teachingRuleId='D1-MEMORY-HIT'`, `SERVE_EXPLANATION_MEMORY`,
+`EXPLANATION_MEMORY`, `llmCallCount=0`, serving the identical stored essay.
+
+## The detector already exists — no new one needed
+
+`conversationReader.ts` computes `studentIntent` every turn and already
+separates all four cases the fix must distinguish:
+
+| learner says | intent | source |
+|---|---|---|
+| answers the tutor's question | `answering` | `tentativeAnswer`, or `lastAssistantAskedQuestion && length > 0` |
+| "why?" / "explain more" | `asking_question` / `requesting_help` | `isQuestion`, `detectLearnerRequest` |
+| "ok" / "go on" | `acknowledging` | `isBareAcknowledgement` |
+| new unrelated request | `asking_question` / `requesting_help` | same |
+
+## Not gate-specific
+
+The two occurrences were **not** at CHECK/PRACTICE (sessions ended at PRACTICE
+and GUIDE respectively; the serves happened mid-session). The readiness fix
+shipped in `23157ad` is scoped to a bare acknowledgement at a mastery gate and
+**does not cover this** — a reasoned prose answer is neither bare nor
+gate-bound. INFERENCE on the phase-at-time-of-turn; per-turn phase is not
+persisted.
+
+## Smallest fix — specified, NOT implemented
+
+`src/app/api/learn/chat/route.ts`, one clause on the existing guard, matching
+the shape already there:
+
+```ts
+let serveFromMemory = assembled !== null && !answersPendingQuestion
+  && !readinessAtGate && !answersProseQuestion
+```
+
+`answersProseQuestion` = the previous assistant message asked a question
+(`repliesWithQuestion`, already exported from `conversationState.ts`, already
+used by `checkBrainCompliance`) AND the learner's message is not a bare
+acknowledgement (`isBareAckHoisted`, already hoisted). No new detector, no new
+state, no decision-engine change, no schema change.
+
+## Regression risk — MEASURED, and it is the reason to pause
+
+Of 12 `D1-MEMORY-HIT` serves in production, **6 (50%) followed an assistant turn
+containing a question with a non-empty learner reply.** So the guard could
+suppress up to half of all Explanation Memory serving and push those turns to
+the provider — the opposite of what the dependency programme was for.
+
+That 50% is an **UPPER BOUND**: `studentIntent === 'answering'` excludes bare
+acks, help requests and questions first, so the true rate is lower. n=12, all
+from synthetic and smoke-test traffic on one account.
+
+**The trade-off is real and is an owner decision:** authored-content serving
+versus reacting to what the learner actually said. Pedagogically the reaction
+should win — that is precisely why `answersPendingQuestion` exists — but it
+costs zero-call serves, and the size of that cost is not reliably known at n=12.
+
+## Tests that would be required
+
+Answer to a prose question does not serve memory · "why?" still gets teaching ·
+bare "ok" unchanged · no previous question ⇒ memory serves as before ·
+`answersPendingQuestion` and the gate readiness guard both unchanged ·
+D1-MEMORY-HIT still reachable when the tutor did not ask.
+
+## Recorded, NOT audited (second issue)
+
+**Inconsistent shown arithmetic with a correct result.** Observed live:
+*"Its total distance travelled is one hundred metres, so its average speed is
+twenty metres divided by ten seconds, which gives us ten metres per second."*
+100/10 = 10 is right; "twenty divided by ten" is not, and equals 2. A learner
+following the working is misled. Separate learner-facing correctness issue; no
+audit started.
+
+**B5 close/reoffer loop**: unchanged, still open, still lower priority.
