@@ -58,9 +58,50 @@
 import { stripAuthoringLabel } from './gateProbeContract'
 import type { TutorMCQ } from './mcq'
 
-/** The two phases whose advancement is gated on graded correctness. */
+/** The two phases whose advancement is gated on graded correctness.
+ *
+ *  UNCHANGED, and deliberately so: this is the mastery boundary. It decides
+ *  where `correctAtCheck` / `correctAtPractice` may move and where a bare
+ *  "ready?" must not buy a stored explanation. Widening it would move the
+ *  mastery bar. Probe ATTACHMENT is a different question — see below. */
 export function isMasteryGatePhase(phase: unknown): boolean {
   return phase === 'CHECK' || phase === 'PRACTICE'
+}
+
+/**
+ * Phases where the server may ATTACH an authored probe as the turn's question.
+ *
+ * ── THE CIRCULAR DEPENDENCY THIS BREAKS (A1) ────────────────────────────────
+ * Attachment used to be gated on `isMasteryGatePhase`, i.e. CHECK|PRACTICE. But
+ * GUIDE→CHECK advances only on a SUCCESS while in GUIDE, and the only reliable
+ * source of correctness is a gradeable widget probe. So the machinery that
+ * produces trustworthy correctness was switched off in exactly the phase that
+ * needed it to advance, and the only correctness available at GUIDE was the
+ * model's self-reported SIGNAL tag.
+ *
+ * Measured on a real beginner Mathematics session (math.arith.fractions,
+ * 8 turns, no concept churn, `demonstrated` true): both deterministically
+ * graded answers were spent on the lower rungs, the one answer given while IN
+ * GUIDE was a model-written PROSE-ONLY question with no widget, and the ladder
+ * sat at GUIDE with correctAtCheck 0. The learner answered correctly, was told
+ * "that is correct", and nothing moved.
+ *
+ * ── WHY THIS DOES NOT LOWER THE MASTERY BAR ─────────────────────────────────
+ * It changes WHERE A QUESTION MAY COME FROM, never what a correct answer buys.
+ * `correctAtCheck` / `correctAtPractice` still increment only in CHECK /
+ * PRACTICE (conversationState's own switch, which does not consult this
+ * function). A correct answer at GUIDE advances GUIDE→CHECK exactly as it
+ * always did — the difference is that it can now be graded deterministically
+ * against a reviewed authored key instead of resting on the model's word.
+ * That is a HIGHER bar at that rung, not a lower one.
+ *
+ * Kept as its own predicate rather than widening `isMasteryGatePhase` because
+ * that function has a second caller — the readiness guard that stops a bare
+ * "ready?" being answered with a stored explanation — and those two questions
+ * must be free to have different answers.
+ */
+export function isProbeAttachablePhase(phase: unknown): boolean {
+  return phase === 'GUIDE' || isMasteryGatePhase(phase)
 }
 
 /** The shape `findBestProbe` returns, narrowed to what conversion needs. */

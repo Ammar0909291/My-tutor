@@ -94,13 +94,26 @@ describe('the gate assessment is on the turn path', () => {
 describe('the exclusions are on the eligibility test, not assumed', () => {
   /** The `gateEligible` expression as it appears in the route. */
   const eligibility = (() => {
-    const start = codeLines.findIndex((l) => /const gateEligible =/.test(l))
+    // A2a split the phase test into `phaseAllowsProbe` immediately above
+    // `gateEligible`, so the window starts there — the conditions are the same
+    // conditions, one binding earlier.
+    const start = codeLines.findIndex((l) => /const phaseAllowsProbe =/.test(l))
     expect(start).toBeGreaterThan(-1)
-    return codeLines.slice(start, start + 8).join('\n')
+    return codeLines.slice(start, start + 12).join('\n')
   })()
 
-  it('fires only at a mastery gate', () => {
+  it('still fires unconditionally at a mastery gate', () => {
     expect(eligibility).toMatch(/isMasteryGatePhase\(phaseBeforeTurn\)/)
+  })
+
+  it('fires at GUIDE ONLY on a turn that was already going to ask (A2a)', () => {
+    // Attaching a question to a GUIDE teach-turn would override a teaching
+    // decision the ladder made deliberately.
+    expect(eligibility).toMatch(/phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask'/)
+  })
+
+  it('never fires below GUIDE', () => {
+    expect(eligibility).not.toMatch(/OBSERVE|DEMONSTRATE/)
   })
 
   it('never during recovery — no content into a flooded mind', () => {
@@ -138,7 +151,7 @@ describe('an exhausted corpus falls back rather than repeating itself', () => {
   })
 
   it('cannot cost the learner their turn — the whole block is guarded', () => {
-    const start = codeLines.findIndex((l) => /const \{ isMasteryGatePhase, probeToMcq, buildGateAssessmentBlock \} =/.test(l))
+    const start = codeLines.findIndex((l) => /const \{ isProbeAttachablePhase, isMasteryGatePhase, probeToMcq, buildGateAssessmentBlock \} =/.test(l))
     expect(start).toBeGreaterThan(-1)
     // A `try` opened on the line before the import destructure.
     expect(codeLines.slice(Math.max(0, start - 2), start).join('\n')).toMatch(/try \{/)

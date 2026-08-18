@@ -248,6 +248,68 @@ export function initialConversationState(conceptId: string | null): Conversation
 
 /** Read a persisted state back off contextSnapshot, resetting when the
  * concept changed or the shape is unrecognisable. Total: never throws. */
+/**
+ * A2b — DID THE LADDER JUST GET WIPED, AND WHY?
+ *
+ * `readConversationState` below returns a FRESH state whenever the stored
+ * concept differs from the turn's concept. That is correct when the learner
+ * genuinely moved to another concept — and catastrophic, silently, when it
+ * fires for any other reason: phase drops to OBSERVE, `demonstrated` to false,
+ * `correctAtCheck` to 0, `turnsOnConcept` to 0, with nothing in the response,
+ * the logs or the transcript to say a restart happened.
+ *
+ * A1 measured the footprint and could not name the cause. In 15 of the 16 long
+ * sessions parked at OBSERVE, `turnsOnConcept` was 0 or 1 after 11-29 learner
+ * turns — one had 29 learner turns and `turnsOnConcept` 0. That counter rises
+ * on every non-degraded turn, so those turns were reset or degraded, and
+ * STORED STATE CANNOT TELL THE TWO APART: the per-turn concept id was never
+ * recorded. Ruled out by measurement: the stored conceptId is never null
+ * (0 of 252 sessions) and 234 of 363 sessions carry one concept in evidence.
+ *
+ * This reports the fact so the next day of real traffic answers it. Pure, and
+ * deliberately NOT wired into the reset decision — measuring a suspected defect
+ * must not change the behaviour being measured. Nothing here alters what
+ * `readConversationState` returns.
+ */
+export interface ConversationStateReadDiagnostics {
+  /** True when the ladder was discarded and rebuilt from scratch this turn. */
+  reset: boolean
+  /** Why — distinguishes a real concept change from a state that was absent
+   *  or unreadable, which look identical in the stored snapshot. */
+  reason: 'kept' | 'no-stored-state' | 'unreadable-phase' | 'concept-changed'
+  /** The concept the stored ladder belonged to; null when there was none. */
+  storedConceptId: string | null
+  /** The concept this turn resolved to. */
+  currentConceptId: string | null
+}
+
+export function inspectConversationStateRead(
+  raw: unknown,
+  currentConceptId: string | null,
+): ConversationStateReadDiagnostics {
+  if (!raw || typeof raw !== 'object') {
+    return { reset: true, reason: 'no-stored-state', storedConceptId: null, currentConceptId }
+  }
+  const s = raw as ConversationState
+  if (!PHASE_ORDER.includes(s.phase)) {
+    return {
+      reset: true,
+      reason: 'unreadable-phase',
+      storedConceptId: typeof s.conceptId === 'string' ? s.conceptId : null,
+      currentConceptId,
+    }
+  }
+  if (s.conceptId === currentConceptId) {
+    return { reset: false, reason: 'kept', storedConceptId: s.conceptId ?? null, currentConceptId }
+  }
+  return {
+    reset: true,
+    reason: 'concept-changed',
+    storedConceptId: typeof s.conceptId === 'string' ? s.conceptId : null,
+    currentConceptId,
+  }
+}
+
 export function readConversationState(
   raw: unknown,
   currentConceptId: string | null,

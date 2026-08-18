@@ -2267,6 +2267,41 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const convConceptId = libraryConceptNodeIdHoisted ?? snapshotCurrentConceptId ?? resolvedConceptId ?? null
           conversationStateHoisted = readConversationState(snapshot?.conversationState, convConceptId)
 
+          // A2b — MEASURE THE SILENT RESET.
+          //
+          // readConversationState discards the whole ladder when the stored
+          // concept differs from this turn's: phase back to OBSERVE,
+          // `demonstrated` false, `correctAtCheck` 0. Correct when the learner
+          // really moved on; an invisible lesson restart otherwise. A1 found
+          // its footprint — 15 of 16 long OBSERVE sessions had `turnsOnConcept`
+          // 0-1 after 11-29 learner turns — but could not name the cause,
+          // because the per-turn concept id was never recorded.
+          //
+          // `convConceptId` is a three-way fallback, so WHICH source supplied
+          // it is the first thing to know: if one turn is keyed on the Library
+          // node and the next on the snapshot or the resolver, the ids differ
+          // and the ladder is wiped without anything being wrong with the
+          // learner. Logged, never acted on — this must not change what it
+          // measures.
+          try {
+            const { inspectConversationStateRead } = await import('@/lib/teaching/conversationState')
+            const diag = inspectConversationStateRead(snapshot?.conversationState, convConceptId)
+            if (diag.reset) {
+              console.log('[ladder-reset] ' + JSON.stringify({
+                reason: diag.reason,
+                storedConceptId: diag.storedConceptId,
+                currentConceptId: diag.currentConceptId,
+                conceptSource: libraryConceptNodeIdHoisted ? 'library-node'
+                  : snapshotCurrentConceptId ? 'snapshot'
+                  : resolvedConceptId ? 'resolver' : 'none',
+                libraryConceptNodeId: libraryConceptNodeIdHoisted ?? null,
+                snapshotCurrentConceptId: snapshotCurrentConceptId ?? null,
+                resolvedConceptId: resolvedConceptId ?? null,
+                sessionId: learnSession.id,
+              }))
+            }
+          } catch { /* telemetry only — a measurement must never break a turn */ }
+
 
           // S2 (Runtime Redesign Mission Part 5): objective state resets on
           // the same conceptId change conversationState does — one
@@ -3191,7 +3226,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // provider call below is skipped for a gate turn.
       let gateLeadInHoisted: string | null = null
       try {
-        const { isMasteryGatePhase, probeToMcq, buildGateAssessmentBlock } =
+        const { isProbeAttachablePhase, isMasteryGatePhase, probeToMcq, buildGateAssessmentBlock } =
           await import('@/lib/teaching/gateAssessment')
         const phaseBeforeTurn = (snapshot as { conversationState?: { phase?: unknown } } | null)
           ?.conversationState?.phase
@@ -3217,8 +3252,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // outstanding; the widget keeps rendering it from `pendingMcq`, which
         // is the same object the next turn will grade against.
         const unansweredProbeOnScreen = pendingMcqHoisted !== null && mcqGradeHoisted === null
+        // A2a — GUIDE joins CHECK/PRACTICE, but only on a turn that was already
+        // going to ASK.
+        //
+        // At GUIDE the engine chooses between teaching and asking
+        // (decideNextMove: `teachSegmentsSinceQuestion >= 2 ? 'ask' : 'teach'`).
+        // Attaching a question to a TEACH turn would override a teaching
+        // decision the ladder made for good reasons, so the authored probe is
+        // offered only where the turn already carries a question — it replaces
+        // a model-invented question with a reviewed, gradeable one rather than
+        // adding a question that was not wanted.
+        //
+        // `evidenceMoveHoisted` is decided ~800 lines above this block, so it
+        // is the same move the rest of the turn is built from; this reads it,
+        // never sets it. At CHECK/PRACTICE the move is always 'ask', so those
+        // phases are unaffected by the extra condition and behave exactly as
+        // they did before.
+        const phaseAllowsProbe =
+          isMasteryGatePhase(phaseBeforeTurn) ||
+          (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask')
         const gateEligible =
-          isMasteryGatePhase(phaseBeforeTurn) &&
+          phaseAllowsProbe &&
+          isProbeAttachablePhase(phaseBeforeTurn) &&
           memoryState !== null &&
           !unansweredProbeOnScreen &&
           !recoveryKeyHoisted &&
@@ -3276,6 +3331,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
           console.log('[gate-assessment] ' + JSON.stringify({
             phase: phaseBeforeTurn,
+            move: evidenceMoveHoisted,
             probeFound: probe !== null,
             converted: converted !== null,
             assetId: probe?.assetId ?? null,
