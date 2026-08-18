@@ -263,6 +263,11 @@ function buildDecision(
         // also had a registry row — and would have introduced the M4 pilot's
         // ray diagrams and wave figures to the tutor as number lines.
         representation: (() => {
+          // The generator KIND first — see SCENE_KIND_REPRESENTATION. The
+          // registry card is the fallback, so concepts whose card already
+          // agrees with their scene are unchanged.
+          const fromKind = generatorKind ? SCENE_KIND_REPRESENTATION[generatorKind] : undefined
+          if (fromKind) return fromKind
           const registryVisual = getConceptVisualType(ctx.conceptId)
           return registryVisual
             ? representationForVisualType(registryVisual)
@@ -525,6 +530,60 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
  * Best-effort reverse lookup so a registry-sourced decision still carries a
  * teaching-language representation. Advisory only — it never affects rendering.
  */
+/**
+ * WHAT A GENERATED SCENE ACTUALLY IS.
+ *
+ * `representation` is the word the tutor is handed for the figure on screen
+ * ("A <representation> of <concept> is attached to THIS response"). For a
+ * GENERATED scene it used to be read off the concept's registry row — but that
+ * row's `primary` names a static CARD, chosen from the cards that happen to
+ * exist, and for several subjects no card matches the scene at all.
+ *
+ * MEASURED: `bio.gen.mendels-laws`, `monohybrid-cross` and `dihybrid-cross`
+ * all carry `primary: 'food_chain'` while their generator builds a PUNNETT
+ * SQUARE; `bio.cell.mitosis` / `meiosis` / `cell-division` and
+ * `bio.mol.dna-structure` / `dna-replication` carry the same food_chain card
+ * over cell-division and DNA scenes; `math.stat.mean-median-mode` carries
+ * `number_line` over a bar chart. The row is not careless — there IS no
+ * punnett or DNA card to name — but the tutor was being told it had a food
+ * chain in front of it and instructed to teach from one.
+ *
+ * The generator kind is the most reliable statement of what the figure IS, so
+ * it is consulted first. The registry card remains the fallback, which keeps
+ * every concept whose card and scene already agree exactly as it was.
+ */
+const SCENE_KIND_REPRESENTATION: Record<string, Representation> = {
+  punnett_square: 'punnett',
+  cell_division: 'cell',
+  dna_structure: 'dna',
+  ecological_pyramid: 'ecological_pyramid',
+  statistics_bar_chart: 'chart',
+  demographic_pyramid: 'chart',
+  economics_curves: 'graph',
+  civics_org_chart: 'hierarchy',
+  historical_timeline: 'timeline',
+  logic_gate: 'block_diagram',
+  er_diagram: 'block_diagram',
+  electric_circuit: 'circuit',
+  molecule: 'molecule',
+  lattice: 'crystal',
+  electron_shells: 'electron_shells',
+  periodic_trends: 'periodic_trend',
+  kinematics_graphs: 'motion_graph',
+  calculus_graph: 'graph',
+  coordinate_geometry_line: 'coordinate_system',
+  projectile: 'projectile',
+  circular: 'circular_motion',
+  pendulum: 'pendulum',
+  collision: 'collision',
+  gravitation_orbit: 'orbit',
+  ray_optics: 'ray_optics',
+  torque_diagram: 'force_diagram',
+  vector: 'vector',
+  triangle: 'geometry',
+  heights_and_distances: 'geometry',
+}
+
 function representationForVisualType(visualType: VisualType) {
   for (const archetype of Object.values(ARCHETYPES)) {
     if (archetype.card === visualType) return archetype.representation
