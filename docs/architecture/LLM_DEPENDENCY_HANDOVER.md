@@ -2245,3 +2245,206 @@ another renderer. The one open candidate is §F, and it is a routing-correctness
 question, not an LLM-dependency one.
 
 Nothing in the Moat-protected list was touched. Mathematics untouched.
+
+---
+
+# PHASE 13 — D0d ROUTING-CORRECTNESS AUDIT
+
+Read-only. **No code changed, no deployment, no credentials used, no production
+traffic generated.** Evidence base is the existing Phase 8/10/11/12 telemetry.
+
+**DECISION: the mismatch is REAL (Part 3 case 3 — possible and partly
+unintended), but the fix is NOT WARRANTED on current evidence.**
+
+## A. D0d eligibility — SOURCE-VERIFIED
+
+`conversationReader.ts:103`:
+```ts
+} else if (input.freshBoundary || input.episode?.phase === 'OPENING') {
+  conversationIntent = sourced('session_opening', 'sessionLifecycle', 0.85)
+```
+`decisionEngine.ts` D0d fires on `conversationIntent === 'session_opening'`.
+Two independent sufficient conditions; `phase === 'OPENING'` alone is enough.
+
+## B. Protocol-block injection — SOURCE-VERIFIED
+
+`route.ts:2111`: `if (boundary && sessionEpisodeHoisted.phase !== 'CLOSING')`,
+and `buildOpeningBlock` itself opens `if (!opts.isFreshBoundary) return ''`.
+`boundary = isNewEpisode(lastMessageAtMs, now)` — **true only on a >30-minute
+inactivity gap, or when the session holds no prior message.**
+
+**A vs B: injection requires `boundary`; eligibility does not.** The decision is
+multi-turn; the block is single-turn.
+
+## C. Can the divergent state persist? — SOURCE-VERIFIED, case 3
+
+`deriveEpisode(prev, newBoundary, …)`: `if (!newBoundary && prev) return prev`,
+otherwise a fresh `phase: 'OPENING'` episode. So:
+
+- `prev === null && boundary === false` → a **fresh OPENING episode with no
+  block injected**. This is the first chat turn of any new session: `lesson-init`
+  wrote an assistant row seconds earlier, so `lastMessageAtMs` is current and
+  `boundary` is false.
+- Every later turn returns `prev` unchanged, and the episode leaves OPENING
+  **only** via `applySignalToEpisode`, which advances only on a graded
+  correctness signal — measured in Phase 11 at **3 of 84 turns (3.6%)**.
+
+So the state persists indefinitely until a graded item lands. **Not impossible,
+and not fully intentional.**
+
+## D. Intended semantics — interpretation B, imperfectly implemented
+
+D0d's own rationale (`decisionEngine.ts`) says the opening protocol "outranks
+generic content decisions **until it is delivered**." That is interpretation
+**B** — "an opening protocol is active" — and `phase === 'OPENING'` is the proxy
+chosen for "not yet delivered".
+
+**The proxy is wrong in two directions**, both SOURCE-VERIFIED:
+1. It clears only on a graded signal, not on the opening having been delivered.
+2. In the `lesson-init` flow the opening **has already been delivered** — by
+   `lesson-init` itself — yet nothing informs the episode machine, so D0d keeps
+   claiming priority for a protocol that is finished.
+
+## E. Production evidence — MEASURED
+
+All D0d rows postdate `bbd7ef1`, so the Phase 6 `confidence_failed` correction
+applies and the labels are trustworthy.
+
+| position in session | turns | `memoryFallbackReason` | calls | what it proves |
+|---|---|---|---|---|
+| 1 | 10 | `confidence_failed` | 10 | `assembled === null` → **D1-MEMORY-HIT was impossible** |
+| 2 | 10 | `brain_decision` | 10 | `assembled !== null` → authored content WAS in hand |
+| 3 | 9 | `brain_decision` | 9 | same |
+| 4 | 9 | `brain_decision` | 9 | same |
+
+`brain_decision` is set only under `!serveFromMemory && assembled !== null`, so
+that label is a **proof** that Explanation Memory had assembled content.
+
+**MEASURED: on 28 of 38 D0d turns, authored content was assembled and a
+protocol rule carrying no protocol claimed the turn instead.**
+**MEASURED: 0 of 38 D0d turns had the protocol block injected** (Phase 12 §C,
+re-confirmed by the trace above).
+
+## F. Counterfactual routing — mostly UNKNOWN, with one hard bound
+
+**The decision engine CANNOT be replayed from the database.** `decide()` is a
+pure function of the STU (`studentIntent`, `masteryState`,
+`requiredVisualization`, `conversationSummary`, `prerequisiteTopic`, …), and the
+STU is **not persisted** — only the resulting rule, decision, executor,
+fallback reason, call count and compliance verdict are. So for each of the 28
+turns, "which rule would have won" is **UNKNOWN**.
+
+Specifically unresolvable: D2 / D2b (misconception), D6-VISUAL, and
+**D4b-ANSWER-STUDENT-FIRST** all sit between D0d and D1 in rule order, and every
+one of their conditions is unpersisted. `answersPendingQuestion` is likewise
+unpersisted.
+
+**One bound IS provable (COUNTERFACTUAL UPPER BOUND).** The already-read guard
+(`hasServedExplanation`) blocks re-serving the same explanation within a
+concept. Turns 2, 3 and 4 of a session carry the *same* assembled explanation —
+none was ever served, which is why none reports `already_served`. So had D1 won
+at turn 2, turns 3–4 would have been blocked. **At most ONE deterministic serve
+per session was available: ≤10 turns across the 10 lessons, not 28.**
+
+The true figure is somewhere in **[0, 10]** and **UNKNOWN**. It could be 0 if
+D2/D2b/D6/D4b would have intercepted every time.
+
+## G. Quantified
+
+| category | value | label |
+|---|---|---|
+| D0d turns observed | 38 | MEASURED |
+| …with the protocol block active | **0** | MEASURED |
+| …without it | **38** | MEASURED |
+| …with authored content assembled | **28** | MEASURED |
+| provider calls on D0d turns | **38** (1.00/turn) | MEASURED |
+| deterministic turns *provably* shadowed | **0** | MEASURED — the engine cannot be replayed |
+| deterministic turns *potentially* shadowed | **≤10** | COUNTERFACTUAL UPPER BOUND |
+| LLM calls provably saveable | **0** | MEASURED |
+
+**No counterfactual is converted into a measured saving.**
+
+## H. Teaching risk of the Phase 12 candidate — NOT dismissed
+
+Narrowing D0d to `freshBoundary` alone would:
+
+- **Remove a real protection.** On a genuine >30-minute return the opening
+  mandates due-reviews-before-new-content. If the learner replies without
+  attempting them, turn 2 still owes that ordering — and under the narrowed
+  predicate D0d would stop protecting it. INFERENCE from `buildOpeningBlock`'s
+  own ordering clause.
+- **Let D4b take over**, which is correct for a question but would answer it
+  *instead of* completing an unfinished opening. INFERENCE.
+- **Risk repeated explanation content.** Freeing turns 2–4 to reach D1 puts the
+  same authored explanation in play three turns running; the already-read guard
+  prevents the exact repeat, but this is the neighbourhood of the documented
+  2026-08-02 defect (the same 787-char asset served three turns running). The
+  guard exists, so this is a *caution*, not a predicted regression. INFERENCE.
+- **Not** create an invisible restart: `buildOpeningBlock` would fire strictly
+  less often, never more. SOURCE-VERIFIED.
+
+The opposite fix — making the block multi-turn to match the decision — is
+**worse**: re-injecting "a new session is starting… greet with continuity" on
+turn 3 re-greets a learner mid-lesson, which is the invisible-restart failure
+this codebase guards against everywhere else. SOURCE-VERIFIED from the block's
+own text.
+
+## I. Verdict on the final question
+
+> **Is D0d preempting turns it has no business owning?**
+
+**Yes, in a precise and limited sense — and no, in the sense that matters for
+this programme.**
+
+- **Yes:** on all 38 measured turns D0d suppressed every lower rule while
+  carrying no protocol whatsoever. A rule that outranks others "until the
+  protocol is delivered" should not outrank them when the protocol is absent.
+  MEASURED + SOURCE-VERIFIED.
+- **No:** it did not demonstrably cost anything. Phase 12 measured those turns
+  as genuine adaptive teaching, the learner was taught correctly, and the
+  provable saving is **0** with an upper bound of 10 turns whose true value is
+  UNKNOWN.
+
+## J. Smallest safe fix — specified, NOT implemented, NOT recommended now
+
+If ever pursued, the fix is **not** Phase 12's predicate swap. It is to make the
+decision and the block agree on one condition:
+
+1. **File:** `src/lib/understanding/readers/conversationReader.ts` (line 103) —
+   and `src/app/api/learn/chat/route.ts` to supply the input.
+2. **Condition:** replace `input.freshBoundary || input.episode?.phase ===
+   'OPENING'` with a single `openingProtocolActive` flag computed at the one
+   place that already knows it — the same `boundary && phase !== 'CLOSING'`
+   guard that injects the block.
+3. **Change:** one new boolean on the reader input; no new state, no migration.
+4. **Tests:** D0d fires with the block active; does NOT fire with `phase ===
+   'OPENING'` and no block; the >30-min return path still gets its opening;
+   `lesson-init` sessions no longer report D0d on turns 2+.
+5. **Regressions:** no re-greeting mid-lesson; the already-read guard still
+   blocks a repeat explanation; D4b still answers questions.
+6. **Verification:** the Phase 8/10 telemetry answers it directly — D0d turns
+   should collapse to boundary turns only, and the rules below it should appear.
+7. **Learner-facing effect:** turns 2+ of a fresh session get the rule their
+   state actually warrants instead of an empty opening protocol.
+
+**Prerequisite before any of it:** the counterfactual is UNKNOWN because the
+route does not record whether the opening block was injected. Without that, the
+change cannot be evaluated after shipping either. That is a statement of what is
+missing — **not** a recommendation to go instrument it.
+
+## K. What was NOT changed
+
+No code, no schema, no deployment, no production traffic, no credentials. None
+of: Educational Brain, KG, curriculum, authored content, mastery, grading,
+evidence, misconception semantics, recovery, affect budget, `sessionEpisode`,
+CLOSING, `answersPendingQuestion`, attempt lifecycle, visual ownership, vector
+rendering, visual generation, answer-reaction composer, Mathematics.
+
+## L. Corrections preserved
+
+Phase 8 §D D0b "absorbing state" = **WRONG**; D0b lifecycle = **CORRECT**;
+Phase 8 §F D0b ranking = **WITHDRAWN**; Phase 11 D0b = **rare/high-variance,
+CLOSED**; Phase 7 D8 hypothesis = **REFUTED**; Phase 6 `confidence_failed`
+before `bbd7ef1` = **INVALID**; Phase 5A vector framing = **REVERTED**;
+Phase 10 §E reusable-closing-fragment assumption = **there is none**;
+Phase 12 D0d = **remains LLM-powered**.
