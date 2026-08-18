@@ -84,6 +84,34 @@ function sampleCurves(p: KinematicsParams): SampledCurve {
 }
 
 /** Build a 3-step kinematics SceneSpec: position-time, then velocity-time, then acceleration-time. */
+/** How far above the curve end a label sits, so it never overprints the line. */
+const LABEL_LIFT = 1.4
+
+/**
+ * THREE UNLABELLED CURVES ARE THREE COLOURED LINES.
+ *
+ * Position, velocity and acceleration were drawn as bare paths distinguished
+ * only by colour, so the learner had nothing telling them which was which and
+ * `fromScene` — which reads LABELS — reported the whole scene to the tutor as
+ * "3 plotted curves". A tutor that cannot name the curve it is teaching from
+ * cannot point at it either. Same defect and fix as electricCircuit's
+ * component labels.
+ *
+ * The label rides the curve's LAST sampled point, i.e. the right-hand end,
+ * which is where a reader's eye leaves the line and where a legend would sit.
+ */
+function curveLabel(id: string, points: Vec3[], text: string, color: string): SceneObject {
+  const end = points[points.length - 1] ?? [0, 0, 0]
+  return {
+    type: 'label',
+    id,
+    position: [round(end[0]), round(end[1] + LABEL_LIFT), 0] as Vec3,
+    text,
+    color,
+    properties: { labels: id.replace(/-label$/, '') },
+  }
+}
+
 export function buildKinematicsGraphScene(params: KinematicsParams): SceneSpec {
   const s = sampleCurves(params)
 
@@ -107,15 +135,24 @@ export function buildKinematicsGraphScene(params: KinematicsParams): SceneSpec {
     steps: [
       {
         narration: `This is the position-time graph: x = ${params.initialPosition} + ${params.initialVelocity}t + 0.5(${params.acceleration})t², a ${params.acceleration === 0 ? 'straight line' : params.acceleration > 0 ? 'curve bending upward' : 'curve bending downward'} since acceleration is ${params.acceleration === 0 ? 'zero' : 'constant and non-zero'}.`,
-        objects: [{ type: 'path', id: 'position-curve', points: positionPoints, color: '#3b82f6' }],
+        objects: [
+          { type: 'path', id: 'position-curve', points: positionPoints, color: '#3b82f6' },
+          curveLabel('position-curve-label', positionPoints, `x–t: x = ${params.initialPosition} + ${params.initialVelocity}t + 0.5(${params.acceleration})t²`, '#3b82f6'),
+        ],
       },
       {
         narration: `This is the velocity-time graph: v = ${params.initialVelocity} + ${params.acceleration}t — ${params.acceleration === 0 ? 'a flat line, since velocity is constant' : 'a straight line, since velocity changes at a constant rate'}.`,
-        objects: [{ type: 'path', id: 'velocity-curve', points: velocityPoints, color: '#22c55e' }],
+        objects: [
+          { type: 'path', id: 'velocity-curve', points: velocityPoints, color: '#22c55e' },
+          curveLabel('velocity-curve-label', velocityPoints, `v–t: v = ${params.initialVelocity} + ${params.acceleration}t`, '#22c55e'),
+        ],
       },
       {
         narration: `This is the acceleration-time graph: a flat line at a = ${params.acceleration} m/s², since acceleration is constant throughout.`,
-        objects: [{ type: 'path', id: 'acceleration-curve', points: accelerationPoints, color: '#f59e0b' }],
+        objects: [
+          { type: 'path', id: 'acceleration-curve', points: accelerationPoints, color: '#f59e0b' },
+          curveLabel('acceleration-curve-label', accelerationPoints, `a–t: a = ${params.acceleration} m/s² (constant)`, '#f59e0b'),
+        ],
       },
     ],
   }

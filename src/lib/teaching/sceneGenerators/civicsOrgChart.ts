@@ -67,6 +67,8 @@ export function validateOrgChartParams(raw: unknown): OrgChartParams | null {
 const ROOT_Y = 10
 const LEVEL1_Y = 0
 const LEVEL2_Y = -10
+/** Labels sit just under their node, clear of the edges that fan out below it. */
+const LABEL_DROP = 1.6
 const SPACING = 6
 
 /** Evenly spaced x positions for `n` siblings, centered on x=0. */
@@ -121,10 +123,34 @@ export function buildOrgChartScene(params: OrgChartParams): SceneSpec {
     to: [round(level1Xs[i]), LEVEL1_Y, 0] as Vec3,
   }))
 
+  // ── A CHART OF UNNAMED BOXES IS NOT A CHART ───────────────────────────────
+  //
+  // Every node already carries its `name` and `role` in `properties`, and a
+  // `node` renders as position+radius+colour — so this whole hierarchy reached
+  // the learner as coloured dots joined by lines, with the names sitting in a
+  // payload nobody reads. `fromScene` reads LABELS, so the tutor was told only
+  // "4 marked points, 3 straight lines": it could not name a single body on a
+  // chart whose entire teaching content IS the names.
+  //
+  // Same defect and same fix as electricCircuit's component labels — a label is
+  // drawn AND read into the tutor's semantics, so one change serves both.
+  const nameLabel = (id: string, at: Vec3, n: { name: string; role?: string }): SceneObject => ({
+    type: 'label',
+    id: `${id}-label`,
+    position: [at[0], round(at[1] - LABEL_DROP), at[2]] as Vec3,
+    text: n.role && n.role !== n.name ? `${n.name} (${n.role})` : n.name,
+    color: '#94a3b8',
+    properties: { labels: id },
+  })
+
   const steps: SceneStep[] = [
     {
       narration: `${params.institutionName} is led by ${level1.length} body${level1.length === 1 ? '' : 'ies'} directly below it.`,
-      objects: [root, ...level1Nodes, ...level1Edges],
+      objects: [
+        root, ...level1Nodes, ...level1Edges,
+        nameLabel('node-root', rootPos, { name: params.institutionName }),
+        ...level1.map((n, i) => nameLabel(`node-1-${i}`, [round(level1Xs[i]), LEVEL1_Y, 0] as Vec3, n)),
+      ],
     },
   ]
 
@@ -152,7 +178,10 @@ export function buildOrgChartScene(params: OrgChartParams): SceneSpec {
     })
     steps.push({
       narration: `Each of those bodies oversees further levels of ${params.institutionName}'s structure.`,
-      objects: [...level2Nodes, ...level2Edges],
+      objects: [
+        ...level2Nodes, ...level2Edges,
+        ...level2.map((n, i) => nameLabel(`node-2-${i}`, [round(level2Xs[i]), LEVEL2_Y, 0] as Vec3, n)),
+      ],
     })
   }
 

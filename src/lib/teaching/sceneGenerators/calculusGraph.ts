@@ -161,19 +161,42 @@ function sampleCurve(p: CalculusParams): CurveSample {
 }
 
 /** Build a function-graph SceneSpec: the sampled curve in step 1, critical points marked in step 2. */
+/** How far above a marked point or curve end its label sits. */
+const LABEL_LIFT = 1.4
+
 export function buildCalculusGraphScene(params: CalculusParams): SceneSpec {
   const s = sampleCurve(params)
   const curvePoints: Vec3[] = s.xs.map((x, i) => [round(x * s.sx), round(s.ys[i] * s.sy), 0])
 
+  // ── A MARKED POINT THAT DOES NOT SAY WHERE IT IS ──────────────────────────
+  //
+  // Each critical point already carries its x and f'(x) in `properties`, and a
+  // `point` renders as position+radius+colour — so the one fact the whole scene
+  // exists to teach (WHERE the derivative is zero) was never on screen, and
+  // `fromScene`, which reads LABELS, told the tutor only "a plotted curve, a
+  // marked point". Same defect and fix as electricCircuit's component labels.
+  //
+  // The curve itself is labelled too: a graph the tutor cannot name is one it
+  // can only call "the curve".
   const criticalObjects: SceneObject[] = s.criticalXs.length > 0
-    ? s.criticalXs.map((x, i) => ({
-        type: 'point',
-        id: `critical-${i}`,
-        position: [round(x * s.sx), round(s.criticalYs[i] * s.sy), 0] as Vec3,
-        color: '#f59e0b',
-        radius: 0.4,
-        properties: { x: round(x, 6), fpx: round(evaluateDerivative(params, x), 6) },
-      }))
+    ? s.criticalXs.flatMap((x, i) => [
+        {
+          type: 'point' as const,
+          id: `critical-${i}`,
+          position: [round(x * s.sx), round(s.criticalYs[i] * s.sy), 0] as Vec3,
+          color: '#f59e0b',
+          radius: 0.4,
+          properties: { x: round(x, 6), fpx: round(evaluateDerivative(params, x), 6) },
+        },
+        {
+          type: 'label' as const,
+          id: `critical-${i}-label`,
+          position: [round(x * s.sx), round(s.criticalYs[i] * s.sy + LABEL_LIFT), 0] as Vec3,
+          text: `critical point: x = ${round(x, 2)}, f'(x) = 0`,
+          color: '#f59e0b',
+          properties: { labels: `critical-${i}` },
+        },
+      ])
     : [{ type: 'label', id: 'no-critical-points', position: [0, 0, 0] as Vec3, text: 'No critical points in this domain.', color: '#94a3b8', properties: { critical: false } }]
 
   return {
@@ -186,7 +209,15 @@ export function buildCalculusGraphScene(params: CalculusParams): SceneSpec {
     steps: [
       {
         narration: `Here is the graph of the function over [${params.domainMin}, ${params.domainMax}].`,
-        objects: [{ type: 'path', id: 'curve', points: curvePoints, color: '#3b82f6' }],
+        objects: [
+          { type: 'path', id: 'curve', points: curvePoints, color: '#3b82f6' },
+          {
+            type: 'label', id: 'curve-label',
+            position: [round(curvePoints[curvePoints.length - 1]?.[0] ?? 0), round((curvePoints[curvePoints.length - 1]?.[1] ?? 0) + LABEL_LIFT), 0] as Vec3,
+            text: `${params.functionType} function on [${params.domainMin}, ${params.domainMax}]`,
+            color: '#3b82f6', properties: { labels: 'curve' },
+          },
+        ],
       },
       {
         narration: s.criticalXs.length > 0

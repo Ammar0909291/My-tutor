@@ -200,11 +200,19 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
   // Step 2 adds what each branch CARRIES. Kept separate from the value labels
   // above so the stepped walkthrough still builds up — the circuit first, the
   // currents it produces second — which is the order the narration teaches in.
+  // LABEL THE QUANTITY THAT VARIES. In parallel every branch sees the same 12 V
+  // and the CURRENTS differ, so the currents are what the split is about; in
+  // series the same current flows through every resistor and the VOLTAGE DROPS
+  // differ, so labelling identical currents would teach nothing and hide the
+  // one quantity KVL is about. Both numbers are already computed and validated
+  // either way — this only chooses which one the learner reads off the figure.
   const branchLabels: SceneObject[] = resistors.map((r, i) => ({
     type: 'label' as const,
-    id: `resistor-${i}-current`,
+    id: `resistor-${i}-${params.connection === 'series' ? 'drop' : 'current'}`,
     position: outward(positions[i + 1], CURRENT_LABEL_OFFSET),
-    text: `I${i + 1} = ${round(branches[i].current, 2)} A`,
+    text: params.connection === 'series'
+      ? `V${i + 1} = ${round(branches[i].voltageDrop, 2)} V`
+      : `I${i + 1} = ${round(branches[i].current, 2)} A`,
     color: '#22c55e',
     properties: { current: round(branches[i].current, 6), voltageDrop: round(branches[i].voltageDrop, 6) },
   }))
