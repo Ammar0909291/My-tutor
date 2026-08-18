@@ -2801,3 +2801,69 @@ following the working is misled. Separate learner-facing correctness issue; no
 audit started.
 
 **B5 close/reoffer loop**: unchanged, still open, still lower priority.
+
+---
+
+# PHYSICS GATE-PROBE RESTORATION (2026-08-18) — PRODUCTION DATA CHANGE
+
+Owner-authorized. **139 AssetIdentity rows DEPRECATED → ACTIVE. No code, no
+schema, no migration, no deploy** — the app filters `status='ACTIVE'` at query
+time, so the restored probes became servable immediately.
+
+## Why they were locked out — SOURCE-VERIFIED
+
+1. **2026-07-27** seeded 730 physics probe identities. 388 came out hollow (no
+   `probe_assets` row); 342 had valid content.
+2. **2026-08-12** an audit deprecated **all 730** for *"ACTIVE PROBE identity
+   with NO probe_assets row"*. Correct for the 388. **Collateral for the 342.**
+3. **2026-08-11…17** the corpus was re-seeded (1,004 new ACTIVE identities) and
+   did **not** recover them, because `scripts/brain/seed-knowledge-assets.ts:161`
+   keys idempotency on `canonicalSlug` **alone, ignoring status**:
+   ```ts
+   const existing = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
+   if (existing) { skipped++; continue }
+   ```
+   A DEPRECATED identity therefore blocks its own re-seed permanently. Re-running
+   the seed could never have fixed this.
+
+## What was restored — scoped, never by status alone
+
+Predicate: `status='DEPRECATED'` AND physics AND **has a `probe_assets` row**
+AND gate-convertible AND belongs to a concept with exactly 2 ACTIVE gate probes.
+
+Pre-verified on all 139: content row present · 2–4 choices · exactly one
+`isCorrect` · no empty option text · no two options normalising identically ·
+English · gradeBand and difficulty set · **0 canonicalSlug conflicts with an
+ACTIVE asset** · **0 duplicate stems** against an ACTIVE probe on the same
+concept. Sampled stems appear verbatim in `authoredSeedAssets.ts`.
+
+`deprecationReason` was **prepended, not overwritten** — the original 2026-08-12
+text is preserved after `PRIOR REASON:` on every restored row.
+
+## Measured before → after
+
+| | before | after |
+|---|---|---|
+| physics ACTIVE probe identities | 1,011 | **1,150** |
+| physics DEPRECATED | 730 | **591** |
+| hollow identities still deprecated | 388 | **388** (untouched, correctly) |
+| **ACTIVE with no content row** | 0 | **0** ← the 2026-08-12 defect NOT reintroduced |
+| concepts with exactly 2 gate probes | **137** | **0** |
+| concepts with ≥3 gate probes | 101 | **238 / 238** |
+| gate-usable physics probes | ~605 | **745** |
+| concepts with a misconception probe | 29 | **164** |
+| duplicate ACTIVE canonicalSlugs (all subjects) | 0 | **0** (ADR 14 holds) |
+| non-physics DEPRECATED rows | 0 | 0 (nothing else touched) |
+
+**Every physics concept can now complete the mastery ladder** — CHECK ≥1 plus
+PRACTICE ≥2 needs three distinct graded probes, and `excludeProbeStem` never
+re-asks, so 2 was structurally short.
+
+## Still open — a latent defect this exposed, NOT fixed
+
+`seed-knowledge-assets.ts`'s status-blind idempotency will re-create this class
+of lockout on any future audit-then-reseed cycle. It needs its own fix and its
+own authorization; nothing was changed here.
+
+The 388 hollow identities remain deprecated and should stay that way until
+someone establishes why their content rows were never written.
