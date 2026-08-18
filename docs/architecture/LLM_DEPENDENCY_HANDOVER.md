@@ -2094,3 +2094,154 @@ unchanged from Phase 10: **B — improve detection first.** Not started.
 
 Nothing in the Moat-protected list was touched. No mathematics content was
 touched. No Phase 12 started.
+
+---
+
+# PHASE 12 (2026-08-17) — D0d SESSION-OPENING PROTOCOL: TARGETED AUDIT
+
+Read-only. **No code changed, no deployment, no new production traffic.** The
+required sample already existed in the Phase 8/10/11 data, so none was
+manufactured.
+
+## A. Sample — target met without new traffic
+
+| gate | target | actual |
+|---|---|---|
+| D0d turns | ≥10 | **38** |
+| distinct lessons | ≥5 | **10** |
+| both subjects | yes | physics 18 / chemistry 20 |
+
+## B. The D0d contract, traced
+
+| # | requirement | source | kind | testable |
+|---|---|---|---|---|
+| 1 | engineered win FIRST when `retroWinOwed` | `sessionLifecycle.ts` `buildOpeningBlock` | semantic + ordering | **NOT_STRUCTURALLY_MEASURABLE** |
+| 2 | greet with continuity in ONE breath, name one specific thing they did well | same | semantic | **NOT_STRUCTURALLY_MEASURABLE** |
+| 3 | due reviews BEFORE any new content (when `dueReviewCount > 0`) | same | ordering | **NOT_STRUCTURALLY_MEASURABLE** |
+| 4 | state the lesson objective, why it matters, and the connection to the previous lesson | same (`lessonIntro`) | semantic (presence of meaning) | NOT measurable; only "mentions the lesson title" is a narrow proxy for one clause |
+| 5 | "keep this to a few sentences — an orientation, not a lecture" | same | structural (sentence count) | measurable |
+
+Phase 10's `NOT_MEASURABLE` verdict is confirmed by tracing, not assumed:
+four of five requirements are ordering or presence-of-meaning.
+
+## C. THE FINDING — D0d's mandatory block was never injected
+
+`buildOpeningBlock` opens with `if (!opts.isFreshBoundary) return ''`, and its
+call site is gated by `if (boundary && …)` (`route.ts:2111`). `boundary` is
+`isNewEpisode(lastMessageAtMs, now)` — **true only on a >30-minute inactivity
+gap, or when the session has no prior message at all.**
+
+But `conversationReader.ts:103` sets the intent that triggers D0d as:
+
+```ts
+} else if (input.freshBoundary || input.episode?.phase === 'OPENING') {
+  conversationIntent = sourced('session_opening', 'sessionLifecycle', 0.85)
+```
+
+`phase === 'OPENING'` alone is enough. And the episode only leaves OPENING via
+`applySignalToEpisode`, which advances **only on a graded correctness signal** —
+which Phase 11 measured arriving on **3 of 84 turns (3.6%)**.
+
+So D0d fires on every turn until a graded item lands, while its block is
+injected only at a genuine 30-minute boundary. In this sample the two never
+coincided: every session was opened by `lesson-init` seconds earlier, so
+`lastMessageAtMs` was current, `boundary` was false, and **`buildOpeningBlock`
+returned `''` on all 38 turns.**
+
+Confirmed against the outputs. Four D0d turns read (2 lessons × positions 1 and
+3): not one contains a greeting, a continuity line, an objective, a
+why-it-matters, a connection, or a due-review retrieval. They are ordinary
+teaching — a copper-wire anchor for metallic bonding, a "quantity of motion"
+explanation for momentum, and two follow-up answers to the learner's own
+questions.
+
+**D0d in this sample is a MISLABEL, not a protocol.**
+
+## D. Answers
+
+1. **How often did D0d fire?** 38 turns across 10 lessons — the largest single
+   rule in the corpus.
+2. **What contract does it impose?** §B. In practice, on these turns: none, as
+   the block was absent.
+3. **Structurally measurable?** Only requirement 5 (length), and a narrow
+   title-mention proxy for one clause of 4.
+4. **Measured compliance rate?** **Not computable, and deliberately not
+   estimated** — a compliance rate against a contract that was never delivered
+   would be meaningless.
+5. **Violations?** None recordable, for the same reason.
+6. **Protocol-only, hybrid, or adaptive?** On the measured turns, **genuinely
+   adaptive (class C/D)**: answering the learner's own question, building a
+   concept anchor. Not a protocol shell.
+7. **How much is genuinely educational?** On these 38 turns, effectively all of
+   it. No authored artefact was in play.
+8. **Can any portion become deterministic?** Not on this evidence.
+9. **Calls realistically eliminable by rendering D0d?** **Zero.**
+10. **Risk of elimination?** Replacing these turns with a deterministic opening
+    would delete real teaching and answer the learner's question with a
+    greeting.
+
+## E. DECISION — **C: D0d SHOULD REMAIN LLM-POWERED**
+
+The model is doing genuine educational work on every D0d turn measured. Phase 5
+warned that "the server knows the concept" does not mean the model is idle;
+D0d is a stronger case still — the server had not even supplied a protocol.
+
+**D0d is closed as a call-elimination target.**
+
+## F. The one concrete candidate this audit DID surface (not implemented)
+
+D0d sits **above** D2, D2b, D6-VISUAL, D4b, **D1-MEMORY-HIT**, D3, D3b, D4, D5,
+D6-ADVANCE, D7 and D8 in the rule order. Every mislabelled D0d turn therefore
+**shadowed all of them — including `D1-MEMORY-HIT`, the only zero-call rule in
+that set.**
+
+The candidate is not "make D0d deterministic". It is: **stop D0d claiming turns
+where its protocol is not active**, so those turns reach the rules below it —
+some of which can serve from Explanation Memory at zero cost.
+
+Mechanically this is narrow: `conversationReader.ts:103`'s
+`input.freshBoundary || input.episode?.phase === 'OPENING'` would become
+freshBoundary-scoped, matching the condition that actually injects the block.
+
+**Two reasons it is NOT a drive-by and was NOT implemented here:**
+
+1. **It changes routing, and therefore teaching.** Those 38 turns would fall to
+   different rules with different directives. That is a teaching-behaviour
+   change, which this phase forbids.
+2. **The size of the prize is unmeasured.** How many of the 38 would land on
+   `D1-MEMORY-HIT` is a counterfactual this audit cannot compute, and no number
+   is offered.
+
+## G. Unifying root cause across Phases 11 and 12
+
+Phase 11: D0b never fires because the affect budget is charged only by graded
+failures, and assessments attach on ~3.6% of turns.
+Phase 12: D0d over-fires because the episode leaves OPENING only on a graded
+signal, from the same starved source.
+
+**Both preemption rules are governed by a signal that almost never arrives.**
+One rule is therefore rarer than it looks and the other far commoner — and both
+distortions have the same cause. That is the most useful thing these two phases
+produced, and it is a statement about assessment attachment, not about the LLM.
+
+## H. Corrections preserved
+
+- Phase 8 §D — D0b "absorbing state": **WRONG** (Phase 9 §A).
+- D0b lifecycle: **CORRECT**; exits on the >30-minute inactivity boundary.
+- Phase 8 §F — D0b as #1 elimination target: **WITHDRAWN**.
+- Phase 11: D0b is a **rare, high-variance tail event** (10 of 140 turns, 8 from
+  one lesson); **CLOSED**.
+- Phase 7 §F/G — D8-LLM-FLOOR: **REFUTED**.
+- Phase 6 — `confidence_failed` before `bbd7ef1`: **INVALID**.
+- Phase 5A vector framing: **REVERTED**.
+- Phase 10 §E — assumed an existing closing fragment could be reused: **there is
+  none** (Phase 11 §E).
+
+## I. Programme status
+
+Both remaining protocol candidates are now closed: **D0b (Phase 11, rare)** and
+**D0d (this phase, genuinely adaptive)**. Nothing in the measured data supports
+another renderer. The one open candidate is §F, and it is a routing-correctness
+question, not an LLM-dependency one.
+
+Nothing in the Moat-protected list was touched. Mathematics untouched.
