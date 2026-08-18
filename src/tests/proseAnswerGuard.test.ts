@@ -205,6 +205,12 @@ describe('route wiring — narrowly scoped, nothing else moved', () => {
     expect(ROUTE).toContain('repliesWithQuestion(lastAssistantText)')
   })
 
+  it('the Brain-dispatcher path carries every guard the primary line does', () => {
+    expect(ROUTE).toContain(
+      "executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion",
+    )
+  })
+
   it('the catch-block fallback carries every guard the primary line does', () => {
     expect(ROUTE).toContain(
       'serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion',
