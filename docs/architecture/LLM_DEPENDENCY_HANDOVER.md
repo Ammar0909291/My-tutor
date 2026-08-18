@@ -2559,3 +2559,151 @@ into a fix. Two owner decisions gate Phase 15:
 
 Also unblocked and needing a human, not an engineer: **enable visualization
 generation** (two Vercel env vars) and **start a small learner beta**.
+
+---
+
+# PHASE 15 — OBSERVE-STALL ROOT CAUSE (read-only, DOCUMENTATION-ONLY)
+
+No code, no writes, no migration, no deployment, no traffic, no credentials.
+
+**VERDICT: E — MIXED. A deliberate ladder DESIGN DECISION (C) whose interaction
+with an unreliable self-reported signal (B) produces the stall. NOT a bug.
+Recovery (option C-recovery) is REFUTED by measurement.**
+
+**RECOMMENDATION: STOP AND MOVE TO REAL-LEARNER BETA.** Do not change the
+ladder on this evidence.
+
+## A. What Phase 14 got right and wrong
+
+RIGHT: the ladder distribution, the gate-phase share (4.9%) matching turn-level
+attachment (3.6%), and that 3.6% is a symptom rather than a gate defect.
+
+WRONG / OVERSTATED: Phase 14 called the circularity the root cause and implied
+recovery was a compounding factor. **Recovery is not a factor — see §D.** And
+"self-reinforcing stall" overstated it: escaping OBSERVE never required a
+graded probe, only an acknowledgement or one self-reported correctness.
+
+## B. The exact OBSERVE advancement machine — SOURCE-VERIFIED
+
+`OBSERVE → DEMONSTRATE` fires on either:
+- `succeeded = evidence.signalCorrect === true && !evidence.recoveryFired`, or
+- `evidence.acknowledgement` (a bare receipt: "ok", "got it", "go").
+
+`DEMONSTRATE → GUIDE` and `GUIDE → CHECK` fire on `next.demonstrated`, set by:
+```ts
+const deliveredAGive = !evidence.degradedTurn
+  && (!evidence.askedQuestion || evidence.deliveredTeaching === true)
+if (deliveredAGive) {
+  if (prev.phase !== 'OBSERVE') next.demonstrated = true   // <-- OBSERVE excluded
+  next.taughtThisSession = true
+}
+```
+
+**OBSERVE is the only one of the three delivery phases
+(`isDeliveryPhase` = OBSERVE | DEMONSTRATE | GUIDE) that does not advance on a
+delivery.** The exclusion is explicit and commented as deliberate: the
+OBSERVE-phase give is an *anchor* (activating prior knowledge), not a
+demonstration. **That is a defensible pedagogical position, not a bug.**
+
+## C. Origin and reliability of `teachingSignal.correctness`
+
+`signals.ts`: parsed from a `<!--SIGNAL …-->` tag the model embeds. Optional;
+absent → null. The module's own header states it: *"this is LLM self-report — a
+substitute for real instrumentation, not equivalent to it."*
+
+**MEASURED emission rate** (PROBE_OUTCOME rows are written exactly when
+`correctness !== undefined`), sessions with ≥2 turns on concept:
+
+| | STALLED at OBSERVE | PROGRESSED past OBSERVE |
+|---|---|---|
+| sessions | 66 | 54 |
+| turns on concept | 179 (2.7 avg) | 445 (8.2 avg) |
+| correctness emitted | **5 (2.8% of turns)** | 143 (32.1%) |
+| correctness = true | 4 | 119 |
+
+**Caveat, and it matters:** the 32.1% is inflated by post-escape turns, where a
+deterministic MCQ attaches at CHECK/PRACTICE. Per-turn phase is not persisted,
+so pre-escape and post-escape emission **cannot be separated. UNKNOWN.**
+
+## D. Recovery interaction — REFUTED as a cause
+
+`!recoveryFired` does block `succeeded`, SOURCE-VERIFIED. But it is not what
+distinguishes stalled from progressing sessions:
+
+| | recovery fired | no recovery |
+|---|---|---|
+| PROGRESSED | **33** (61%) | 21 |
+| STALLED | 20 (30%) | 46 |
+
+**Progressing sessions encounter MORE recovery than stalled ones.** If recovery
+were the blocker the relationship would invert. Hypothesis C-recovery is dead.
+
+## E. The measured discriminator — and the smoking gun
+
+| | STALLED | PROGRESSED |
+|---|---|---|
+| avg turns on concept | **2.6 – 2.8** | **6.3 – 9.5** |
+| `taughtThisSession` true | **59 of 66 (89%)** | 52 of 54 (96%) |
+| avg knowledge probes | 0.00 | 0.00 – 0.05 |
+
+**The tutor DID teach in 89% of stalled sessions.** `taughtThisSession` is set
+by the *same* `deliveredAGive` branch that refuses to set `demonstrated` at
+OBSERVE. So the give happened, the runtime recorded that it happened, and the
+ladder still did not move — purely because the phase was OBSERVE.
+
+That is the mechanism, cleanly evidenced.
+
+## F. Root-cause verdict: **E — MIXED (C + B)**
+
+- **C (ladder design):** OBSERVE's exclusion from `demonstrated` is deliberate
+  and commented. Primary structural cause.
+- **B (missing signal):** 2.8% correctness emission in stalled sessions means
+  the one remaining escape route fires rarely. Makes C bite.
+- **A (bug):** rejected — the behaviour matches the written intent.
+- **C-recovery:** rejected — measured, inverted.
+- **D (assessment scheduling):** not implicated; the gate works when reached.
+
+## G. Should mastery semantics remain untouched? — YES
+
+Whatever is changed, CHECK and PRACTICE must keep advancing only on
+`correctAtCheck` / `correctAtPractice`, which only a real graded answer
+increments. The anti-hollow-advancement law is not in question and nothing here
+argues against it.
+
+## H. Smallest possible fix IF a defect is ever proven
+
+Set `demonstrated` on an OBSERVE-phase give — i.e. drop `prev.phase !== 'OBSERVE'`
+from that one line in `conversationState.ts`.
+
+**Protected invariant it would touch:** the delivery/mastery boundary. It moves
+OBSERVE from "anchor, not demonstration" to "delivery counts as delivery",
+matching DEMONSTRATE and GUIDE. It does **not** touch CHECK/PRACTICE, so hollow
+advancement stays impossible. It is one clause — but it is a pedagogical
+position change, not a bug fix, and needs owner sign-off as such.
+
+## I. What remains UNKNOWN
+
+1. **Direction.** Stalled sessions run 2.6–2.8 turns, progressing ones 6.3–9.5.
+   Whether the stall shortens sessions or short sessions merely have fewer
+   chances to escape **cannot be resolved from this data.** This is the single
+   most important unknown and it decides whether the fix is worth anything.
+2. **Pre- vs post-escape signal emission** — per-turn phase is not persisted.
+3. **Whether ~3 turns is even long enough** to expect rung 1 to clear.
+4. **What the correct check-in rate is.** Still unset, deliberately not assumed.
+
+## J. Recommendation — **STOP AND MOVE TO REAL-LEARNER BETA**
+
+Not "implement", and not "audit one more thing".
+
+- The mechanism is understood and the design is deliberate, so there is no
+  defect to fix — only a position to revisit.
+- The decisive unknown (§I.1) is a question about **why learners leave**, and no
+  amount of source tracing or synthetic traffic answers it. Real learners do.
+- All 260 sessions come from essentially one account with heavily synthetic
+  traffic. Changing the mastery ladder on that basis is precisely the mistake
+  this programme has correctly refused five times (Phases 9, 11, 12, 13, and
+  D0b enforcement).
+
+Ship the visualization env vars, run the beta, and re-measure the phase
+distribution against this 76.4% / 4.9% baseline with real learners. If the
+stall persists there, §H is waiting and the evidence will finally justify it.
