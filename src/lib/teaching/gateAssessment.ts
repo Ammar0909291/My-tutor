@@ -55,7 +55,8 @@
  * read as one rather than be papered over with a server-invented question.
  */
 
-import { stripAuthoringLabel } from './gateProbeContract'
+import { stripAuthoringLabel, containsOptionList } from './gateProbeContract'
+import { askedAnswerableQuestion } from './answerableTurn'
 import type { TutorMCQ } from './mcq'
 
 /** The two phases whose advancement is gated on graded correctness.
@@ -188,4 +189,130 @@ export function buildGateAssessmentBlock(mcq: TutorMCQ): string {
     'other question, and do NOT emit an MCQ tag of your own. Never mention ' +
     'that the question was selected for you.'
   )
+}
+
+// ── NO GRADEABLE PROBE ⇒ NO MASTERY QUESTION ────────────────────────────────
+//
+// ── THE DEFECT THIS EXISTS FOR ──────────────────────────────────────────────
+// Measured end to end on `math.found.logic`, 2026-08-18. The concept holds two
+// authored closed-choice probes; mastery needs three graded answers and the
+// gate never re-asks a spent probe. So the pool ran dry at PRACTICE and the
+// turn was handed to the model, exactly as `findBestProbe`'s call site intends.
+//
+// The model then asked in PROSE — a real, well-formed question with A/B/C/D
+// options and no `<!--MCQ-->` tag. Three times. The learner answered all three
+// correctly and was told "That's correct" each time, and `correctAtPractice`
+// never moved, because `shouldSuppressSignalCorrectness` refuses to record
+// correctness for a question with no server answer key. That refusal is right:
+// the alternative is the model grading its own memory of an answer it never
+// declared, which is how a wrong "C" was once recorded as correct.
+//
+// So the evidence layer was behaving correctly and the learner still lost. The
+// error is upstream: a question that COUNTS TOWARD MASTERY was asked when
+// nothing existed to grade it with.
+//
+// ── WHY NOT A PROMPT RULE ───────────────────────────────────────────────────
+// `buildMcqInstruction({ atMasteryGate: true })` already states it in capitals,
+// and it is correctly wired — `gatePhaseNow` is read from the pre-turn phase,
+// so the clause WAS in the prompt on every failing turn. The prose-MCQ guard
+// then told the model, on the following turn, to re-issue the question with the
+// tag; it wrote prose again. Two advisory layers, both present, both ignored.
+// Measured compliance across the two Phase-B lessons: 3 of 7 opportunities.
+//
+// ── WHAT THIS DOES, AND WHAT IT DELIBERATELY DOES NOT ───────────────────────
+// It withholds the QUESTION and keeps the TEACHING. The turn stops being an
+// ungradeable assessment and becomes what it should have been — an explanation
+// — and the ladder waits for a turn that can actually carry evidence.
+//
+// It does NOT grade prose, invent an answer key, convert a short_answer probe,
+// lower the bar, or make a second provider call. It cannot manufacture the
+// probe that was missing; only the asset contract can do that
+// (`assetContract.ts`: >= 3 closed-choice probes per band). This is the
+// backstop for a concept below contract, not the cure. Once a concept meets
+// the contract this should never fire, and a rising fire rate is the signal
+// that the corpus, not the runtime, needs attention.
+//
+// Scoped to CHECK and PRACTICE — the phases whose counters only a graded answer
+// can move. GUIDE may still ask freely: it advances on a give, so an ungraded
+// question there costs a turn, not a lesson.
+export interface UngradedGateQuestionInput {
+  /** The outgoing text, tags already stripped. */
+  text: string
+  /** The phase this turn was BUILT at (pre-fold), same value the gate read. */
+  phase: unknown
+  /** Does the turn carry a structured MCQ the server can grade? */
+  hasStructuredMcq: boolean
+}
+
+export interface UngradedGateQuestionResult {
+  text: string
+  withheld: boolean
+  reason: 'ok' | 'no-gradeable-probe'
+}
+
+/**
+ * The one sentence used when the ENTIRE turn was the ungradeable question and
+ * no teaching survived the cut.
+ *
+ * Deliberately claims nothing and promises nothing: not that the learner did
+ * well, not that a question is coming, not that anything was understood. It
+ * exists so the repair can never emit an empty turn, which would be a worse
+ * failure than the one being repaired. Same stance as
+ * `gateProbeContract`'s FALLBACK_LEAD_IN.
+ */
+const WITHHELD_QUESTION_CONTINUATION = "Let's stay with this idea for a moment."
+
+export function withholdUngradedGateQuestion(
+  input: UngradedGateQuestionInput,
+): UngradedGateQuestionResult {
+  try {
+    if (!isMasteryGatePhase(input.phase)) return { text: input.text, withheld: false, reason: 'ok' }
+    if (input.hasStructuredMcq) return { text: input.text, withheld: false, reason: 'ok' }
+
+    const text = typeof input.text === 'string' ? input.text : ''
+    // A turn that asks nothing gradeable is already fine. `askedAnswerableQuestion`
+    // is reused rather than re-derived precisely because it ALREADY excludes
+    // confirmation tails — "does that make sense?" and "shall we carry on?" are
+    // not mastery questions and must survive untouched.
+    const poses = askedAnswerableQuestion(text) || containsOptionList(text)
+    if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
+
+    const kept = dropTrailingQuestion(text)
+    return {
+      text: kept.length > 0 ? kept : WITHHELD_QUESTION_CONTINUATION,
+      withheld: true,
+      reason: 'no-gradeable-probe',
+    }
+  } catch {
+    // A repair must never break a turn. Unchanged text is the safe outcome.
+    return { text: input.text, withheld: false, reason: 'ok' }
+  }
+}
+
+/**
+ * Cut the turn back to its teaching: drop an enumerated option list and
+ * everything after it, then drop trailing paragraphs that pose a question.
+ *
+ * Paragraph-wise, not sentence-wise, for the reason `dropCompetingQuestion`
+ * already records: cutting one sentence strands the question's setup ("A car
+ * drives 60 km east in 1 hour.") in front of nothing, and half a question is
+ * still a question. Loops because a model that wrote one question often wrote
+ * its set-up as a separate paragraph, and is bounded so a pathological input
+ * cannot spin.
+ */
+function dropTrailingQuestion(text: string): string {
+  const lines = text.split('\n')
+  const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
+  let head = firstOptionLine >= 0 ? lines.slice(0, firstOptionLine).join('\n').trim() : text.trim()
+
+  for (let i = 0; i < 6; i++) {
+    if (head.length === 0) break
+    const paragraphs = head.split(/\n{2,}/)
+    const last = paragraphs[paragraphs.length - 1].trim()
+    if (last.length === 0) { paragraphs.pop(); head = paragraphs.join('\n\n').trim(); continue }
+    if (!askedAnswerableQuestion(last)) break
+    paragraphs.pop()
+    head = paragraphs.join('\n\n').trim()
+  }
+  return head
 }

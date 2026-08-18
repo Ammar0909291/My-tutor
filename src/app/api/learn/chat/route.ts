@@ -4846,6 +4846,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // give-detection: before that field existed, flipping this to true
           // would have stopped the turn counting as a give and re-frozen the
           // ladder. Verified offline — the fold reaches GUIDE either way.
+          // ── NO GRADEABLE PROBE ⇒ NO MASTERY QUESTION ──────────────────────
+          //
+          // Placed ABOVE `askedQuestionThisTurn` deliberately. Everything below
+          // this line — the parity observer, the ladder fold, the completion
+          // claim repair, `classifyConversation` — reads the turn through that
+          // flag, so repairing the text afterwards would leave the server
+          // believing it asked a question the learner never saw. Repairing
+          // first means one turn, one truth.
+          //
+          // Fires only at CHECK/PRACTICE, only when the turn carries no
+          // structured MCQ, and only when it poses something answerable. See
+          // `withholdUngradedGateQuestion` for the production failure this
+          // replays and for what it refuses to do (no prose grading, no
+          // invented answer key, no second provider call).
+          try {
+            const { withholdUngradedGateQuestion } = await import('@/lib/teaching/gateAssessment')
+            const ungraded = withholdUngradedGateQuestion({
+              text: cleanText,
+              // The phase the turn was BUILT at — the same pre-fold value the
+              // gate itself read when it went looking for a probe.
+              phase: conversationStateHoisted?.phase ?? null,
+              hasStructuredMcq: mcqHoisted !== null,
+            })
+            if (ungraded.withheld) {
+              console.warn('[gate-contract] ' + JSON.stringify({
+                event: 'ungraded-mastery-question-withheld',
+                phase: conversationStateHoisted?.phase ?? null,
+                conceptId: resolvedConceptId ?? null,
+                // A rising rate here means the CORPUS is below the asset
+                // contract, not that the runtime is misbehaving.
+                charsBefore: cleanText.length,
+                charsAfter: ungraded.text.length,
+              }))
+              cleanText = ungraded.text
+            }
+          } catch (err) {
+            // A repair must never break a turn.
+            console.warn('[gate-contract] ungraded-question check skipped:', err)
+          }
           const askedQuestionThisTurn = repliesWithQuestion(cleanText) || mcqHoisted !== null
           // Turn Parity Observer: compare what the server decided against
           // what the LLM actually rendered. Measurement only — no blocking.
