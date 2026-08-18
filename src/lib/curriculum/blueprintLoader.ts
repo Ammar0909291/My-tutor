@@ -1129,16 +1129,41 @@ export interface EBMisconception {
   recovery: string | null
 }
 
+/** The two authored id shapes — `MC-1` first so the longer token wins.
+ *  Deliberately closed: no bare number, no arbitrary label. */
+const EB_MC_ID = String.raw`(?:MC-\d+|M\d+)`
+/** Where a misconception heading may begin: at the line's start, or after a
+ *  single markdown list marker. That marker is the ONLY prefix allowed, and a
+ *  bold `M…`/`MC-…` token followed by a dash is still required — an ordinary
+ *  bullet can never be mistaken for a misconception heading. */
+const EB_MC_HEAD = String.raw`[ \t]*(?:[-*+][ \t]+)?\*\*\s*${EB_MC_ID}\s*[—–-]`
+
 /**
  * Parse `## Misconceptions` from an EB concept entry.
  *
- * The authored shape is stable across the corpus:
+ * TWO authored shapes exist in the corpus, both matched here:
+ *
+ *   (a) `M1`, heading opening its own line — physics (218 records) and
+ *       english, plus `math.arith.fractions`:
  *
  *     **M1 — Units are interchangeable labels on the same number**
  *     - *Why*: ...
  *     - *Symptom / phrases*: ...
  *     - *Detection probe (verbatim)*: "..."
  *     - *Recovery*: ...
+ *
+ *   (b) `MC-1`, often inside a markdown list item — the mathematics and
+ *       chemistry batches, which cite the Blueprint's own MC ids by number:
+ *
+ *     - **MC-1 — "Sets preserve order and allow repetition" (Type 1)**: the
+ *       student writes {1,2,1} and claims 3 elements. Full trigger: Blueprint
+ *       Component 2, MC-1.
+ *
+ * Shape (b) was invisible until 2026-08-18: the id pattern accepted only
+ * `M\d+` (so `MC-1` never matched) and the block anchor required the heading
+ * to open its line (so a list marker suppressed the split). 442 authored
+ * mathematics records across 153 files, and 198 chemistry records across 67,
+ * were parsed as zero. Nothing was re-authored to fix it — only these regexes.
  *
  * Field labels vary a little between batches (`Detection probe`,
  * `Detection probe (verbatim)`, `Symptom`, `Symptom / phrases`), so matching is
@@ -1152,7 +1177,7 @@ function parseEBMisconceptions(content: string): EBMisconception[] {
 
   const out: EBMisconception[] = []
   // Split on the bolded heading that opens each entry, keeping the heading.
-  const blocks = raw.split(/\n(?=\s*\*\*\s*M\d+\s*[—–-])/)
+  const blocks = raw.split(new RegExp(String.raw`\n(?=\s*(?:[-*+][ \t]+)?\*\*\s*${EB_MC_ID}\s*[—–-])`))
 
   for (const block of blocks) {
     // The title may WRAP. `[^*\n]` used to forbid that, and a wrapped heading
@@ -1161,7 +1186,7 @@ function parseEBMisconceptions(content: string): EBMisconception[] {
     // `phys.meas.dimensions` M4, never reached a prompt for that reason.
     // Newlines are allowed and collapsed; the length bound and `[^*]` keep it
     // from running past a missing closing `**` into the body.
-    const head = /\*\*\s*(M\d+)\s*[—–-]\s*([^*]{3,300}?)\s*\*\*/.exec(block)
+    const head = new RegExp(String.raw`\*\*\s*(${EB_MC_ID})\s*[—–-]\s*([^*]{3,300}?)\s*\*\*`).exec(block)
     if (!head) continue
     head[2] = head[2].replace(/\s+/g, ' ').trim()
 
@@ -1170,7 +1195,7 @@ function parseEBMisconceptions(content: string): EBMisconception[] {
         // `- *Label ...*: body` — body runs to the next bulleted field or the
         // end of the block, so a wrapped multi-line value survives intact.
         const re = new RegExp(
-          `\\*\\s*${stem}[^*]*\\*\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*-\\s*\\*|\\n\\s*\\*\\*\\s*M\\d|$)`,
+          `\\*\\s*${stem}[^*]*\\*\\s*:?\\s*([\\s\\S]*?)(?=\\n\\s*-\\s*\\*|\\n\\s*\\*\\*\\s*M\\d|\\n${EB_MC_HEAD}|$)`,
           'i',
         )
         const m = re.exec(block)
