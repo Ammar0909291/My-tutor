@@ -111,6 +111,34 @@ async function post(pathname: string, body: unknown, cookie: string): Promise<Tu
  * Certify one concept. Returns a verdict; never throws for a teaching failure —
  * a failed concept is data, not an error.
  */
+/**
+ * A FRESH session per concept, always.
+ *
+ * The first run of this harness reused one session across concepts and reported
+ * math.found.logic as TRANSFER / verified / checkCorrect 1 / practiceCorrect 2
+ * after a SINGLE turn — it was reading the mastery the PREVIOUS concept had
+ * earned in that session. At scale that is worse than a broken harness: it
+ * manufactures PASSes for concepts nobody taught. Certification must start from
+ * a learner who knows nothing about this concept, so the session is created
+ * here and never shared.
+ */
+async function createSession(cookie: string): Promise<string> {
+  const res = await fetch(`${BASE}/api/sessions`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', cookie },
+    body: JSON.stringify({ subjectSlug: 'mathematics' }),
+  })
+  if (!res.ok) throw new Error(`/api/sessions -> HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`)
+  const body = (await res.json()) as { data?: { id?: string }; id?: string; resumed?: boolean }
+  const id = body.data?.id ?? body.id
+  if (!id) throw new Error(`/api/sessions returned no session id: ${JSON.stringify(body).slice(0, 200)}`)
+  // The endpoint RESUMES any ACTIVE session for the subject from the last 24
+  // hours rather than minting a new one, and says so. A resumed session carries
+  // the previous concept's ladder, which is the condition `DIRTY-STATE` below
+  // exists to catch.
+  return id
+}
+
 export async function certifyConcept(
   target: ConceptTarget, cookie: string, sessionId: string,
 ): Promise<CertificationResult> {
@@ -131,8 +159,12 @@ export async function certifyConcept(
     }
   }
 
+  // `mode: 'restart'` rather than 'next': certification must begin from a
+  // learner who knows nothing about THIS concept, and the endpoint hands back an
+  // existing ACTIVE session for the subject rather than minting a new one, so a
+  // fresh session cannot be relied on for isolation.
   last = await post('/api/learn/lesson-init', {
-    sessionId, mode: 'next', lessonTitle: target.lessonTitle,
+    sessionId, mode: 'restart', lessonTitle: target.lessonTitle,
     lessonOrder: target.lessonOrder, topicSlug: target.conceptId,
     unitTitle: target.unitTitle, totalLessons: 908, completedLessons: [], teachingLanguage: 'en',
   }, cookie)
@@ -141,6 +173,15 @@ export async function certifyConcept(
   // D1 — the opening turn teaches. A quiz-first opener is a first-lesson
   // violation and is judged on the opener alone, before any answer exists.
   if (last.mcq) { failed.push('D1-quiz-first'); notes.push('opening turn led with an MCQ') }
+
+  // MASTERY FROM lesson-init IS NOT THIS CONCEPT'S MASTERY.
+  //
+  // The opening response carries the snapshot as it stood BEFORE this lesson
+  // began — on the first run of this harness that was the previous concept's
+  // finished state, so math.found.logic was reported TRANSFER / verified /
+  // check 1 / practice 2 after zero teaching. The ladder resets on the first
+  // chat turn, so mastery is only read from turns, never from the opener.
+  last = { ...last, mastery: null, lessonComplete: null }
 
   while (turns < MAX_TURNS) {
     const phase = last.mastery?.phase ?? null
@@ -164,6 +205,28 @@ export async function certifyConcept(
     last = await post('/api/learn/chat', { sessionId, message: reply }, cookie)
     check(last)
     turns += 1
+
+    // ── CERTIFICATION MUST START FROM A LEARNER WHO KNOWS NOTHING ──────────
+    //
+    // A false PASS is worse than no harness. Measured here twice: reusing a
+    // session made math.found.logic report TRANSFER / verified / check 1 /
+    // practice 2 on the FIRST turn — it was reading the ladder a previous run
+    // had left behind, and reported PASS for a concept nobody taught.
+    //
+    // `/api/sessions` resumes any ACTIVE session for the subject from the last
+    // 24 hours, and `mode: 'restart'` does not clear the stored conversation
+    // state, so isolation cannot be assumed — it has to be checked. Mastery
+    // that is already at or past the gate one turn in did not come from this
+    // run, so the concept is reported DIRTY-STATE rather than certified.
+    if (turns === 1 && (last.mastery?.verified === true || (last.mastery?.checkCorrect ?? 0) > 0)) {
+      failed.push('DIRTY-STATE')
+      notes.push(
+        `session carried prior mastery into turn 1 (phase ${last.mastery?.phase}, ` +
+        `check ${last.mastery?.checkCorrect}, practice ${last.mastery?.practiceCorrect}) — ` +
+        'not certified; certification needs a learner with no history on this concept',
+      )
+      break
+    }
   }
 
   const m = last.mastery ?? {}
@@ -231,9 +294,6 @@ async function login(): Promise<string> {
 }
 
 async function main() {
-  const sessionId = process.env.MATH_CERT_SESSION_ID
-  if (!sessionId) throw new Error('set MATH_CERT_SESSION_ID to an existing learn session for the test learner')
-
   const targets: ConceptTarget[] = JSON.parse(
     require('fs').readFileSync(process.argv[2] ?? 'scripts/math/targets.json', 'utf-8'),
   )
@@ -243,6 +303,7 @@ async function main() {
   for (const t of targets) {
     process.stderr.write(`certifying ${t.conceptId} … `)
     try {
+      const sessionId = await createSession(cookie)
       const r = await certifyConcept(t, cookie, sessionId)
       results.push(r)
       process.stderr.write(`${r.pass ? 'PASS' : `FAIL [${r.failed.join(', ')}]`} (${r.turns} turns)\n`)
