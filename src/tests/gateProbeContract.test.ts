@@ -138,6 +138,48 @@ describe('P0-b — the model cannot put a second assessment on the turn', () => 
   })
 })
 
+describe('B — a competing question WITHOUT an option list', () => {
+  // Observed in production after the option-list repair shipped: the widget
+  // asked "You walk 6 m north and then 6 m south in 12 s…" while the model's
+  // prose asked about a train travelling 120 miles. No A/B/C/D list, so the
+  // option-list detector did not fire and the learner was asked two different
+  // things at once.
+  const TRAIN = [
+    'Suppose a train travels 120 miles due north in 2 hours, and then turns around',
+    'and travels 120 miles due south back to its exact starting point.',
+    '',
+    'In your own words, what is the train average speed for the entire journey?',
+  ].join('\n')
+
+  it('THE DEFECT SHAPE: no option list is present', () => {
+    expect(containsOptionList(TRAIN)).toBe(false)
+  })
+
+  it('THE FIX: the competing question is removed anyway', () => {
+    const r = enforceGateProbeContract({
+      text: TRAIN, leadIn: null,
+      canonicalQuestion: 'You walk 6 m north and then 6 m south in 12 s. What is your average speed?',
+    })
+    expect(r.replaced).toBe(true)
+    expect(r.text).not.toContain('train average speed for the entire journey')
+  })
+
+  it('a RESTATEMENT of the canonical question is still kept', () => {
+    const restated = 'Let us look at it again.\n\nYou walk 6 m north and then 6 m south in 12 s. What is your average speed?'
+    const r = enforceGateProbeContract({
+      text: restated, leadIn: null,
+      canonicalQuestion: 'You walk 6 m north and then 6 m south in 12 s. What is your average speed?',
+    })
+    expect(r.replaced).toBe(false)
+    expect(r.text).toBe(restated)
+  })
+
+  it('ordinary lead-in prose with no question is untouched', () => {
+    const lead = 'Let us check that idea against a round trip.'
+    expect(enforceGateProbeContract({ text: lead, leadIn: null, canonicalQuestion: 'x y z' }).replaced).toBe(false)
+  })
+})
+
 describe('P0 safety contract — the probe itself is untouched', () => {
   it('selected probe P produces widget P, options and key intact', () => {
     const mcq = probeToMcq(PROBE)!

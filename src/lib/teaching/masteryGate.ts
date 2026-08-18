@@ -173,10 +173,34 @@ export function answersProseQuestion(input: {
   lastAssistantText: string | null | undefined
   /** The learner's message this turn. */
   learnerMessage: string
+  /**
+   * A canonical MCQ was already on the learner's screen, awaiting an answer.
+   *
+   * THE RESIDUAL THIS CLOSES, measured in production after the first version of
+   * this guard shipped. On a mastery-gate turn the QUESTION lives in the
+   * widget and the prose is only a lead-in — "Now let's tackle our first
+   * practice question to lock this in." carries no question mark, so
+   * `repliesWithQuestion` correctly reported false and this guard could not
+   * see that anything had been asked. The learner then answered
+   * "A. 400 over 80 is 5 for the speed, and the velocity is 0 because they end
+   * at the start line"; `gradeMcqAnswer` refused to parse it
+   * (`{chosenIndex: null, correct: null}`), so `answersPendingQuestion` was
+   * false too — and the stored essay served.
+   *
+   * Both guards missed the same turn for two different reasons. This is the
+   * one that was structurally blind: the tutor HAD asked, just not in prose.
+   *
+   * Grading is untouched — an unparseable answer stays ungraded and no mastery
+   * counter moves. This only stops a STATIC asset serving on a turn that owes
+   * the learner a reaction.
+   */
+  pendingQuestionOnScreen?: boolean
 }): boolean {
   try {
     const prev = input.lastAssistantText
-    if (!prev || !repliesWithQuestion(prev)) return false
+    const tutorAsked = input.pendingQuestionOnScreen === true
+      || (!!prev && repliesWithQuestion(prev))
+    if (!tutorAsked) return false
     const msg = input.learnerMessage?.trim() ?? ''
     if (msg.length === 0) return false
     // A receipt is not an answer — "ok" after a question keeps its existing

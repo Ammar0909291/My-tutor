@@ -92,7 +92,25 @@ export function enforceGateProbeContract(input: GateContractInput): GateContract
   try {
     const lines = input.text.split('\n')
     const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
-    if (!containsOptionList(input.text) || firstOptionLine < 0) {
+    const hasOptionList = containsOptionList(input.text) && firstOptionLine >= 0
+
+    // A COMPETING QUESTION DOES NOT NEED OPTIONS TO BE ONE.
+    //
+    // Observed in production after the option-list repair shipped: with a
+    // canonical widget asking "You walk 6 m north and then 6 m south in 12 s…",
+    // the model wrote its own prose question about a train travelling 120 miles
+    // — no A/B/C/D list, so the option-list detector did not fire, and the
+    // learner was asked two different things at once. Less confusing than two
+    // sets of tappable buttons, still wrong.
+    //
+    // No semantic matching is introduced: `dropCompetingQuestion` below already
+    // distinguishes a RESTATEMENT of the canonical question (keep — the model
+    // legitimately repeats it when a learner asks for a reminder) from a
+    // different one (cut), by word overlap against the probe the server chose.
+    const head = hasOptionList ? lines.slice(0, firstOptionLine).join('\n').trim() : input.text.trim()
+    const kept = dropCompetingQuestion(head, input.canonicalQuestion)
+    if (!hasOptionList && kept === head) {
+      // Nothing to repair: no option list, and no competing question.
       return { text: input.text, replaced: false, reason: 'ok' }
     }
 
@@ -105,9 +123,6 @@ export function enforceGateProbeContract(input: GateContractInput): GateContract
     // ABOVE it is kept — that is where the reaction lives. Only the trailing
     // sentence of that prose is removed, and only when it is a question the
     // canonical probe did not ask, because that is the competing question.
-    const head = lines.slice(0, firstOptionLine).join('\n').trim()
-    const kept = dropCompetingQuestion(head, input.canonicalQuestion)
-
     if (kept.length > 0) {
       return { text: kept, replaced: true, reason: 'model_wrote_own_options' }
     }
@@ -120,42 +135,46 @@ export function enforceGateProbeContract(input: GateContractInput): GateContract
   }
 }
 
-const wordsOf = (s: string) =>
-  new Set(s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 3))
+const normalise = (s: string) =>
+  s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').replace(/\s+/g, ' ').trim()
+
+/**
+ * How much of the canonical stem must appear verbatim for the model's prose to
+ * count as a RESTATEMENT rather than a competing question.
+ *
+ * Containment, not similarity. An earlier version scored word overlap and got
+ * it wrong on real output: a canonical probe about walking 6 m north/south and
+ * a model-written question about a train travelling 120 miles share "what",
+ * "your", "average" and "speed" — 50% overlap, two completely different
+ * questions. Two physics questions about the same concept ALWAYS share
+ * vocabulary, so overlap cannot separate them.
+ *
+ * A genuine restatement copies the stem (observed: the tutor repeated "You walk
+ * 6 m north and then 6 m south in 12 s. What is your average speed?" verbatim
+ * when the learner asked for a reminder). A different question does not. The
+ * prefix is used rather than the whole stem so a truncated or lightly
+ * re-punctuated repeat still matches.
+ */
+const RESTATEMENT_PREFIX_CHARS = 40
 
 /**
  * Remove a trailing question sentence when it is NOT the canonical probe's own
  * question.
  *
- * The model legitimately restates the question it was given (observed in
- * production: a learner asked for a reminder and the tutor helpfully repeated
- * the same question and options). That is duplication, not contradiction, and
- * the reaction around it must survive. A DIFFERENT question is the actual
- * defect, and it is what gets cut.
- *
- * Overlap rather than equality, because the model paraphrases; the threshold is
- * deliberately low, since the cost of keeping a restatement is a repeated
- * sentence while the cost of keeping a competing question is a learner who
- * cannot tell what to answer.
+ * The model legitimately restates the question it was given — that is
+ * duplication, not contradiction, and the reaction around it must survive. A
+ * DIFFERENT question is the actual defect and is what gets cut, back to its
+ * paragraph boundary: cutting one sentence left "A car drives 60 km east in 1
+ * hour." stranded in front of a probe about something else, and half a
+ * competing question is still a competing question.
  */
 function dropCompetingQuestion(head: string, canonicalQuestion: string): string {
   if (!head.endsWith('?')) return head
-  const cut = Math.max(head.lastIndexOf('. '), head.lastIndexOf('\n'))
-  const tail = (cut >= 0 ? head.slice(cut + 1) : head).trim()
-  if (!tail.endsWith('?')) return head
-
-  const canon = wordsOf(canonicalQuestion)
-  const asked = wordsOf(tail)
-  if (canon.size === 0 || asked.size === 0) return cut >= 0 ? head.slice(0, cut + 1).trim() : ''
-  let shared = 0
-  for (const w of asked) if (canon.has(w)) shared++
-  const overlap = shared / asked.size
-  if (overlap >= 0.4) return head // a restatement of the canonical question
-
-  // A competing question is cut back to its PARAGRAPH boundary, not just its
-  // final sentence. Dropping only the last sentence left "A car drives 60 km
-  // east in 1 hour." stranded in front of a probe about something else — half
-  // a competing question is still a competing question.
+  const canon = normalise(canonicalQuestion)
+  if (canon.length >= RESTATEMENT_PREFIX_CHARS
+    && normalise(head).includes(canon.slice(0, RESTATEMENT_PREFIX_CHARS))) {
+    return head // a restatement of the canonical question
+  }
   const para = head.lastIndexOf('\n\n')
   return para >= 0 ? head.slice(0, para).trim() : ''
 }

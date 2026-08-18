@@ -3458,7 +3458,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const lastAssistantText = learnSession.messages.find(
         (m) => m.role === MessageRole.ASSISTANT,
       )?.content ?? null
-      const answersProse = answersProseQuestion({ lastAssistantText, learnerMessage: message })
+      const answersProse = answersProseQuestion({
+        lastAssistantText,
+        learnerMessage: message,
+        // On a gate turn the question is in the WIDGET and the prose is only a
+        // lead-in, so `repliesWithQuestion` cannot see that anything was asked.
+        // `pendingMcqHoisted` is the tutor's own record that it did.
+        pendingQuestionOnScreen: pendingMcqHoisted !== null,
+      })
       let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null

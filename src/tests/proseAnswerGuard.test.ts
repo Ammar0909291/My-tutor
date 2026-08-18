@@ -119,6 +119,59 @@ describe('the four cases the guard must separate', () => {
   })
 })
 
+describe('THE GATE RESIDUAL — a widget question is still a question', () => {
+  // Measured in production AFTER the first version of this guard shipped.
+  // The gate lead-in carried no '?', and gradeMcqAnswer refused to parse the
+  // learner's answer, so BOTH guards missed and the stored essay served.
+  const GATE_LEAD_IN = "Now let's tackle our first practice question to lock this in."
+
+  it('the real lead-in genuinely contains no question mark', () => {
+    expect(repliesWithQuestion(GATE_LEAD_IN)).toBe(false)
+  })
+
+  it('THE DEFECT: without the pending-question signal the guard is blind', () => {
+    expect(answersProseQuestion({
+      lastAssistantText: GATE_LEAD_IN,
+      learnerMessage: 'A. 400 over 80 is 5 for the speed, and the velocity is 0 because they end at the start line',
+    })).toBe(false)
+  })
+
+  it('THE FIX: a pending widget question arms the guard', () => {
+    expect(answersProseQuestion({
+      lastAssistantText: GATE_LEAD_IN,
+      learnerMessage: 'A. 400 over 80 is 5 for the speed, and the velocity is 0 because they end at the start line',
+      pendingQuestionOnScreen: true,
+    })).toBe(true)
+  })
+
+  it('a pending question does NOT swallow a genuine question — D4b keeps it', () => {
+    expect(answersProseQuestion({
+      lastAssistantText: GATE_LEAD_IN, learnerMessage: 'what does displacement mean?', pendingQuestionOnScreen: true,
+    })).toBe(false)
+  })
+
+  it('a pending question does NOT swallow a bare acknowledgement', () => {
+    expect(answersProseQuestion({
+      lastAssistantText: GATE_LEAD_IN, learnerMessage: 'ok', pendingQuestionOnScreen: true,
+    })).toBe(false)
+  })
+
+  it('no pending question and no prose question -> memory still available', () => {
+    expect(answersProseQuestion({
+      lastAssistantText: 'Speed is distance over time.', learnerMessage: 'ten', pendingQuestionOnScreen: false,
+    })).toBe(false)
+  })
+
+  it('the route passes the pending-MCQ signal', () => {
+    expect(ROUTE).toContain('pendingQuestionOnScreen: pendingMcqHoisted !== null,')
+  })
+
+  it('GRADING IS UNTOUCHED — the guard never inspects or moves a grade', () => {
+    expect(ROUTE).toContain('const answersPendingQuestion = mcqGradeHoisted !== null')
+    expect(ROUTE).toContain('const g = gradeMcqAnswer(message, pendingMcqHoisted)')
+  })
+})
+
 describe('route wiring — narrowly scoped, nothing else moved', () => {
   it('the guard is applied to serveFromMemory alongside the existing two', () => {
     expect(ROUTE).toContain(
@@ -152,8 +205,13 @@ describe('route wiring — narrowly scoped, nothing else moved', () => {
 
   it('the mastery ladder and grading semantics are not referenced by this change', () => {
     const GUARD = readFileSync(join(process.cwd(), 'src/lib/teaching/masteryGate.ts'), 'utf8')
-    const fn = GUARD.slice(GUARD.indexOf('export function answersProseQuestion'))
-      .slice(0, GUARD.slice(GUARD.indexOf('export function answersProseQuestion')).indexOf('\n}') + 2)
+    // Comments stripped first: the header legitimately EXPLAINS what the guard
+    // leaves alone (grading, mastery counters), and a test that forbade
+    // describing the contract would be a bad test.
+    const raw = GUARD.slice(GUARD.indexOf('export function answersProseQuestion'))
+    const fn = raw.slice(0, raw.indexOf('\n}') + 2)
+      .replace(/\/\*[\s\S]*?\*\//g, '')
+      .replace(/^\s*\/\/.*$/gm, '')
     for (const forbidden of ['correctAtCheck', 'correctAtPractice', 'gradeMcqAnswer', 'phase']) {
       expect(fn).not.toContain(forbidden)
     }
