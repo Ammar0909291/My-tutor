@@ -2448,3 +2448,114 @@ CLOSED**; Phase 7 D8 hypothesis = **REFUTED**; Phase 6 `confidence_failed`
 before `bbd7ef1` = **INVALID**; Phase 5A vector framing = **REVERTED**;
 Phase 10 §E reusable-closing-fragment assumption = **there is none**;
 Phase 12 D0d = **remains LLM-powered**.
+
+---
+
+# PHASE 14 — ASSESSMENT ATTACHMENT: ROOT CAUSE (read-only)
+
+No code changed, no traffic, no credentials. Existing production state only.
+
+**VERDICT: 3.6% assessment attachment is a SYMPTOM, not a defect in the
+assessment gate. The mastery ladder is stalled at its first rung.**
+
+## A. The gate is keyed to a ladder, not to turns — SOURCE-VERIFIED
+
+`isMasteryGatePhase(phase)` returns true only for `CHECK` and `PRACTICE`.
+`conversationState.ts` runs a six-rung ladder:
+
+    OBSERVE → DEMONSTRATE → GUIDE → CHECK → PRACTICE → TRANSFER
+                                    └── the ONLY rungs where a probe attaches
+
+An authored probe therefore cannot attach until three prior transitions have
+happened.
+
+## B. MEASURED — where real sessions actually sit (260 sessions)
+
+| phase | sessions | share |
+|---|---|---|
+| **OBSERVE** | **188** | **76.4%** |
+| DEMONSTRATE | 30 | 12.2% |
+| GUIDE | 12 | 4.9% |
+| CHECK | 8 | 3.3% |
+| PRACTICE | 4 | 1.6% |
+| TRANSFER | 4 | 1.6% |
+
+**Sessions in a gate phase (CHECK+PRACTICE): 12 of 246 = 4.9%.**
+Phase 11 measured assessment attachment at **3.6% of turns**. The two agree.
+That agreement is the finding: the gate is doing exactly what it should — it is
+almost never *reached*.
+
+## C. Split by engagement — the stall is real, not just abandonment
+
+| engagement | OBSERVE | DEMONSTRATE | GUIDE | CHECK | PRACTICE | TRANSFER |
+|---|---|---|---|---|---|---|
+| ≤1 turn (barely started) | 122 | 4 | — | — | — | — |
+| **2–4 turns (engaged)** | **62** | 9 | 3 | **0** | **0** | **0** |
+| 5+ turns (sustained) | 4 | 17 | 9 | 8 | 4 | 4 |
+
+- The ≤1-turn band is abandonment, not a ladder problem.
+- **Of 74 genuinely engaged sessions, 62 (83.8%) are still on rung 1, and NONE
+  reached CHECK.**
+- Sessions surviving past ~5 turns do climb: 42 of 46 progressed.
+
+`demonstrated` tracks this perfectly: **false on every OBSERVE session, true on
+every GUIDE/CHECK/PRACTICE/TRANSFER session.**
+
+## D. ROOT CAUSE — a self-reinforcing stall — SOURCE-VERIFIED
+
+Escaping OBSERVE requires `succeeded` **or** `acknowledgement`
+(`conversationState.ts` transition table):
+
+```ts
+const succeeded = evidence.signalCorrect === true && !evidence.recoveryFired
+```
+
+and `signalCorrect` is `teachingSignal?.correctness` — **the LLM's own
+`<!--SIGNAL-->` self-report** (`route.ts`). `acknowledgement` is a bare receipt
+("ok", "got it", "go").
+
+So on rung 1 the ladder advances only if the model volunteers a correctness
+verdict on an ungraded, open prior-knowledge probe, or the learner happens to
+say "ok".
+
+**The circularity:** the deterministic grader that would reliably produce
+`correctness` is the mastery-gate probe — which cannot attach until the ladder
+reaches CHECK, which requires the correctness the probe would have produced.
+
+**Compounding factor, MEASURED:** `!evidence.recoveryFired` means a recovery
+turn can never advance the ladder. Pre-existing production history carries
+**221 recovery events against 180 probe outcomes** — the state that most often
+blocks advancement is more common than the state that produces it.
+
+## E. Consequences — this one stall explains four earlier findings
+
+| earlier finding | explained by |
+|---|---|
+| Phase 11: D0b never fires; 3 of 84 turns graded | no gate phase → no probe → no graded failure → affect budget never charged |
+| Phase 12: D0d over-fires on 38 turns | `sessionEpisode` leaves OPENING only on a graded signal, from the same starved source |
+| Phase 13: 28 turns with content assembled but unserved | same |
+| Moat #2 "verified learner state manufactured by scheduled probes" | probes are scheduled behind a rung the learner rarely reaches |
+
+## F. What is NOT established — labelled honestly
+
+- **Whether the stall CAUSES the abandonment.** 62 engaged sessions die on rung
+  1; sustained sessions climb. That is correlation. Direction is **UNKNOWN**.
+- **Whether the ladder design is wrong, or the LLM's SIGNAL emission is
+  unreliable.** Both are consistent with the data. Distinguishing them needs the
+  SIGNAL emission rate on OBSERVE turns, which is not persisted. **UNKNOWN.**
+- **What the correct check-in rate is.** Nobody has stated a target, so "3.6% is
+  too low" remains an intuition, not a finding. **OWNER DECISION.**
+
+## G. Next — Phase 15 is NOT started, deliberately
+
+Per the agreed discipline, this phase ends in a verdict and does not continue
+into a fix. Two owner decisions gate Phase 15:
+
+1. **The target.** How often should a tutor check understanding?
+2. **The direction.** Fix the ladder (let OBSERVE advance on delivery, as
+   DEMONSTRATE/GUIDE already do) or fix the signal (make correctness reliable on
+   open probes)? The first touches **mastery semantics**, which is
+   Moat-protected and needs explicit authorization.
+
+Also unblocked and needing a human, not an engineer: **enable visualization
+generation** (two Vercel env vars) and **start a small learner beta**.
