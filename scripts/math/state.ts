@@ -18,6 +18,7 @@
  */
 import * as fs from 'fs'
 import * as path from 'path'
+import { loadBlueprintContent } from '../../src/lib/curriculum/blueprintLoader'
 
 const ROOT = process.cwd()
 const KG = path.join(ROOT, 'docs/mathematics/kg/graph.json')
@@ -25,6 +26,31 @@ const BLUEPRINTS = path.join(ROOT, 'docs/curriculum/blueprints')
 const EB = path.join(ROOT, 'educational-brain/concepts/mathematics')
 
 interface DomainRow { domain: string; kg: number; blueprints: number; eb: number; ebComplete: boolean }
+
+/**
+ * GENERATION READINESS — can a serving asset be MADE for this concept, and from
+ * what?
+ *
+ * Measured 2026-08-18, and the answer corrected a plank of the build strategy.
+ * "Blueprints 908/908" is a FILE count. It does not mean 908 concepts carry
+ * learner-facing prose:
+ *
+ *   · 908/908 carry a Misconception Registry (2,595 rows, median 3 per concept)
+ *     — an excellent AUTHORING source, and the reason Blueprints stay primary.
+ *   · 711/908 yield some "explanation" block from the loader, but 728 of those
+ *     2,205 blocks are labelled Learning Objective / Mastery statement. They are
+ *     assessment criteria written ABOUT the student ("A student who achieves
+ *     mastery identifies which thinking move they are using"), in the third
+ *     person. Serving one to a learner would be nonsense.
+ *   · 199/908 carry a block actually labelled "Core Explanation" with real
+ *     teaching prose — and only 69 of those are on the 245-concept spine.
+ *
+ * So a serving asset can be EXTRACTED for 199 concepts and must be AUTHORED for
+ * the rest, grounded in the misconception registry the Blueprint does supply.
+ * This block reports that split so generation is scoped from measurement rather
+ * than from the file count.
+ */
+interface SourceRow { extractable: number; authorable: number; neither: number }
 
 function kgConcepts(): { id: string; name?: string }[] {
   const raw = JSON.parse(fs.readFileSync(KG, 'utf-8')) as { concepts: { id: string; name?: string }[] }
@@ -61,6 +87,24 @@ function repoState() {
     if (ebIds.has(c.id)) row.eb += 1
     byDomain.set(d, row)
   }
+  // Generation readiness. Requires the real blueprint parser, not a regex — a
+  // hand-rolled scan of one heading format reported 7 usable blueprints where
+  // the loader finds 908, because the corpus carries three schema generations.
+  const sources: SourceRow = { extractable: 0, authorable: 0, neither: 0 }
+  const spineSources: SourceRow = { extractable: 0, authorable: 0, neither: 0 }
+  const SPINE = new Set(['math.found', 'math.arith', 'math.geom', 'math.nt'])
+  for (const c of concepts) {
+    const r = loadBlueprintContent(c.id)
+    const content = r.found ? r.content : null
+    const hasLearnerProse = Boolean(
+      content?.explanations.some((e) => /^core explanation$/i.test(e.label.trim()) && e.text.trim().length > 200),
+    )
+    const hasMisconceptions = (content?.misconceptions.length ?? 0) >= 3
+    const bucket: keyof SourceRow = hasLearnerProse ? 'extractable' : hasMisconceptions ? 'authorable' : 'neither'
+    sources[bucket] += 1
+    if (SPINE.has(domainOf(c.id))) spineSources[bucket] += 1
+  }
+
   const domains = [...byDomain.values()].map((r) => ({ ...r, ebComplete: r.eb === r.kg }))
   domains.sort((a, b) => b.kg - a.kg)
 
@@ -74,6 +118,7 @@ function repoState() {
     blueprints: [...blueprintIds].filter((id) => kgIds.has(id)).length,
     educationalBrain: [...ebIds].filter((id) => kgIds.has(id)).length,
     certifiedDomains: domains.filter((d) => d.ebComplete).map((d) => d.domain),
+    generationSources: { all: sources, spine245: spineSources },
     domains,
     integrity: { orphanBlueprints, orphanEb },
   }
@@ -165,6 +210,9 @@ async function main() {
   console.log(`Blueprints         ${repo.blueprints}/${repo.kgConcepts}`)
   console.log(`Educational Brain  ${repo.educationalBrain}/${repo.kgConcepts}`)
   console.log(`EB-certified domains (${repo.certifiedDomains.length}): ${repo.certifiedDomains.join(', ') || 'none'}`)
+  const g = repo.generationSources
+  console.log(`Serving source     extract ${g.all.extractable} / author ${g.all.authorable} / neither ${g.all.neither}`)
+  console.log(`  on 245 spine     extract ${g.spine245.extractable} / author ${g.spine245.authorable} / neither ${g.spine245.neither}`)
   if (repo.integrity.orphanBlueprints.length || repo.integrity.orphanEb.length) {
     console.log(`INTEGRITY: ${repo.integrity.orphanBlueprints.length} orphan blueprints, ${repo.integrity.orphanEb.length} orphan EB entries`)
   }

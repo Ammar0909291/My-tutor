@@ -186,8 +186,33 @@ export async function certifyConcept(
   }
 }
 
+/**
+ * A session cookie, however it is obtained.
+ *
+ * MATH_CERT_COOKIE is the supported path and is checked first: the credentials
+ * flow below reimplements Auth.js's callback handshake, which is version-coupled
+ * and fails silently when it drifts. A harness that cannot log in reports a
+ * fleet of HARNESS-ERRORs that look exactly like teaching failures, so the
+ * robust path is the default one.
+ *
+ * The account is verified against /api/auth/session either way — the forbidden
+ * account must be refused whether it arrived as a password or as a cookie.
+ */
+async function authenticate(): Promise<string> {
+  const cookie = process.env.MATH_CERT_COOKIE ? process.env.MATH_CERT_COOKIE : await login()
+  const res = await fetch(`${BASE}/api/auth/session`, { headers: { cookie } })
+  const who = (await res.json()) as { user?: { email?: string; name?: string } }
+  const email = who.user?.email
+  if (!email) throw new Error('not authenticated — no session for the supplied cookie')
+  if (FORBIDDEN_ACCOUNTS.includes(email.toLowerCase())) {
+    throw new Error(`${email} is an engineering account and must never be used for certification`)
+  }
+  process.stderr.write(`authenticated as ${who.user?.name} <${email}>\n`)
+  return cookie
+}
+
 async function login(): Promise<string> {
-  if (!EMAIL || !PASSWORD) throw new Error('set MATH_CERT_EMAIL and MATH_CERT_PASSWORD')
+  if (!EMAIL || !PASSWORD) throw new Error('set MATH_CERT_COOKIE, or MATH_CERT_EMAIL and MATH_CERT_PASSWORD')
   if (FORBIDDEN_ACCOUNTS.includes(EMAIL.toLowerCase())) {
     throw new Error(`${EMAIL} is an engineering account and must never be used for certification`)
   }
@@ -212,7 +237,7 @@ async function main() {
   const targets: ConceptTarget[] = JSON.parse(
     require('fs').readFileSync(process.argv[2] ?? 'scripts/math/targets.json', 'utf-8'),
   )
-  const cookie = await login()
+  const cookie = await authenticate()
 
   const results: CertificationResult[] = []
   for (const t of targets) {
