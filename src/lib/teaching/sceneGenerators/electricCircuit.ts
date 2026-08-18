@@ -105,6 +105,27 @@ function loopPositions(n: number): Vec3[] {
   })
 }
 
+/** How much further out a branch-current label sits than its value label, so the two never coincide. */
+const CURRENT_LABEL_OFFSET = 2.6
+
+/**
+ * Push a point away from the loop's centre, so a component's label sits beside
+ * it rather than on top of it.
+ *
+ * The components are laid on a circle centred at the origin, so "away from the
+ * centre" is just the point's own direction. A component exactly at the centre
+ * has no such direction (it cannot happen with `loopPositions`, but a
+ * zero-length vector would produce NaN coordinates and a label the renderer
+ * would silently drop), so it falls back to straight up.
+ */
+function outward(p: [number, number, number], extra = 0): [number, number, number] {
+  const [x, y, z] = p
+  const len = Math.hypot(x, y)
+  const gap = 1.8 + extra
+  if (len < 1e-6) return [x, y + gap, z]
+  return [x + (x / len) * gap, y + (y / len) * gap, z]
+}
+
 /** Build a circuit-loop SceneSpec: battery + resistors laid in a loop with connecting wires in step 1, per-resistor current/voltage-drop and totals in step 2. */
 export function buildCircuitScene(params: CircuitParams): SceneSpec {
   const resistors = resistorValues(params)
@@ -138,16 +159,75 @@ export function buildCircuitScene(params: CircuitParams): SceneSpec {
     to: positions[(i + 1) % positions.length],
   }))
 
+  // ── THE COMPONENTS MUST SAY WHAT THEY ARE ─────────────────────────────────
+  //
+  // Every per-component number below was already computed and already
+  // VALIDATED (the checker further down re-derives each branch and even
+  // asserts KCL) — it was just never drawn. A `node` renders as a plain
+  // coloured sphere: position, radius, colour. `properties` reach no one.
+  //
+  // Measured in a real production lesson on phys.em.kirchhoffs-laws: a
+  // parallel circuit of a 10 Ω and a 20 Ω branch reached the learner as two
+  // IDENTICAL blue dots with a single "R_total = 6.67 Ω, I_total = 1.8 A"
+  // caption. The tutor was then asked to explain why the current splits — off
+  // a picture in which the two branches are indistinguishable — and it
+  // invented "a larger resistance value like ten ohms", which is backwards.
+  // Nothing on screen could have corrected it, because the values were not on
+  // screen. `fromScene` reads LABELS, so the tutor was blind to them too.
+  //
+  // A `label` is drawn (PlacedLabels solves their positions together) AND is
+  // read into the semantics the tutor is given, so labelling here fixes both
+  // audiences at once — no renderer change, no new prompt channel.
+  const componentLabels: SceneObject[] = [
+    {
+      type: 'label',
+      id: 'battery-label',
+      position: outward(batteryPos),
+      text: `${round(params.voltage, 2)} V`,
+      color: '#ef4444',
+      properties: { voltage: round(params.voltage, 6) },
+    },
+    ...resistors.map((r, i) => ({
+      type: 'label' as const,
+      id: `resistor-${i}-label`,
+      position: outward(positions[i + 1]),
+      text: `R${i + 1} = ${round(r, 2)} Ω`,
+      color: '#3b82f6',
+      properties: { value: round(r, 6) },
+    })),
+  ]
+
+  // Step 2 adds what each branch CARRIES. Kept separate from the value labels
+  // above so the stepped walkthrough still builds up — the circuit first, the
+  // currents it produces second — which is the order the narration teaches in.
+  // LABEL THE QUANTITY THAT VARIES. In parallel every branch sees the same 12 V
+  // and the CURRENTS differ, so the currents are what the split is about; in
+  // series the same current flows through every resistor and the VOLTAGE DROPS
+  // differ, so labelling identical currents would teach nothing and hide the
+  // one quantity KVL is about. Both numbers are already computed and validated
+  // either way — this only chooses which one the learner reads off the figure.
+  const branchLabels: SceneObject[] = resistors.map((r, i) => ({
+    type: 'label' as const,
+    id: `resistor-${i}-${params.connection === 'series' ? 'drop' : 'current'}`,
+    position: outward(positions[i + 1], CURRENT_LABEL_OFFSET),
+    text: params.connection === 'series'
+      ? `V${i + 1} = ${round(branches[i].voltageDrop, 2)} V`
+      : `I${i + 1} = ${round(branches[i].current, 2)} A`,
+    color: '#22c55e',
+    properties: { current: round(branches[i].current, 6), voltageDrop: round(branches[i].voltageDrop, 6) },
+  }))
+
   const steps: SceneStep[] = [
     {
       narration: `A ${params.connection} circuit with ${resistors.length} resistor${resistors.length === 1 ? '' : 's'} powered by a ${round(params.voltage, 2)} V source.`,
-      objects: [battery, ...resistorNodes, ...wires],
+      objects: [battery, ...resistorNodes, ...wires, ...componentLabels],
     },
     {
       narration: params.connection === 'series'
         ? `Total resistance is ${round(rTotal, 2)} Ω, giving a current of ${round(iTotal, 2)} A through every resistor.`
         : `Total resistance is ${round(rTotal, 2)} Ω, giving a total current of ${round(iTotal, 2)} A split across the branches.`,
       objects: [
+        ...branchLabels,
         { type: 'label', id: 'total-label', position: [0, -RADIUS - 2, 0], text: `R_total = ${round(rTotal, 2)} Ω, I_total = ${round(iTotal, 2)} A`, color: '#22c55e', properties: { rTotal: round(rTotal, 6), iTotal: round(iTotal, 6), connection: params.connection } },
       ],
     },

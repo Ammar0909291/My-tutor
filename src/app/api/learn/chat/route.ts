@@ -5109,7 +5109,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // This is a successful outcome, not a failure to render. A HELD figure
         // (figureIntroducedThisTurn === false) takes the same empty branch —
         // this message simply did not introduce a figure of its own.
-        if (figureIntroducedThisTurn) {
+        //
+        // ── UNLESS THE LEARNER ASKED TO SEE IT ────────────────────────────────
+        //
+        // "Held" means "already on the learner's screen", and in this UI that is
+        // only true for a while: a figure is attached to a MESSAGE, not pinned to
+        // the viewport, so it scrolls away as the lesson goes on — fastest on a
+        // phone, where a few turns of prose is already several screens.
+        //
+        // Measured as a learner on phys.em.kirchhoffs-laws: "can you show me a
+        // diagram of the loop so i can see where the voltage drops happen" got no
+        // figure at all, and the tutor answered "let's look at the circuit on your
+        // screen" — pointing at turn 1, four turns and several screens above. The
+        // request simply vanished, which is the same harm the NO-FIGURE branch's
+        // rule (5) already exists to prevent.
+        //
+        // Re-attaching costs nothing and risks nothing: the payload is re-derived
+        // deterministically (see resolveVisual's header — a held turn reproduces
+        // byte-identical output), so this sends the SAME figure the session
+        // already holds. No generation, no provider call, no session mutation, and
+        // the held-session bookkeeping above is untouched.
+        const reattachOnExplicitRequest =
+          !figureIntroducedThisTurn && learnerRequestHoisted === 'diagram'
+        if (figureIntroducedThisTurn || reattachOnExplicitRequest) {
           switch (decision?.payload?.renderer) {
             case 'card': {
               const legal = decision.allowed ?? [decision.payload.visualType]

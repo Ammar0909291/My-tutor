@@ -122,8 +122,24 @@ const RESOLUTION_CLAIM_RE =
  * caught is a statement about the learner's progress record or a move to the
  * next lesson, neither of which happened.
  */
+// ── A COLON IS THE SAME CLAIM AS "IS" ───────────────────────────────────────
+//
+// `next up is` was already listed here. Measured as a learner on
+// phys.em.kirchhoffs-laws at practiceCorrect=1, verified=false — the lesson
+// was NOT over — the tutor wrote "Next up: Wheatstone Bridge." and then
+// attached another practice question underneath it. The colon form slipped
+// through a rule that already meant to catch it, so the learner was moved on
+// from a lesson they had not finished. It happened twice in ten turns.
+//
+// DELIBERATELY NOT ADDED: the "✓ What you mastered" / "✓ What's coming"
+// bullets of `client.ts`'s LESSON CLOSING FORMAT, which appeared in the same
+// turn. They are a genuine claim about unearned mastery and a real candidate,
+// but this module already decided they count as RECAP rather than bookkeeping
+// (`completionClaimInProse.test.ts` — "keeps the praise and the recap"), and
+// overturning a documented product decision about recap language is a change
+// of policy, not a bug fix. Recorded here so the question stays visible.
 const COMPLETION_CLAIM_RE =
-  /(you(?:'ve| have)?\s+(?:just\s+)?(?:completed|finished|wrapped up|mastered)\s+(?:this\s+|the\s+)?lesson|(?:you(?:'ve| have)?\s+)?completed\s+lesson\s+\d+|lesson\s+\d+\s+(?:of\s+\d+\s+)?(?:is\s+)?complete|this\s+lesson\s+is\s+(?:now\s+)?(?:complete|finished|done)|next\s+up\s+is\b|on\s+to\s+the\s+next\s+lesson|moving\s+on\s+to\s+lesson\s+\d+|your\s+next\s+lesson\s+is\b)/i
+  /(you(?:'ve| have)?\s+(?:just\s+)?(?:completed|finished|wrapped up|mastered)\s+(?:this\s+|the\s+)?lesson|(?:you(?:'ve| have)?\s+)?completed\s+lesson\s+\d+|lesson\s+\d+\s+(?:of\s+\d+\s+)?(?:is\s+)?complete|this\s+lesson\s+is\s+(?:now\s+)?(?:complete|finished|done)|next\s+up\s*(?:is\b|:)|on\s+to\s+the\s+next\s+lesson|moving\s+on\s+to\s+lesson\s+\d+|your\s+next\s+lesson\s+is\b)/i
 
 /**
  * Removes the sentences (or list items) that make a false record claim, leaving

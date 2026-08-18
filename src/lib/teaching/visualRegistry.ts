@@ -431,13 +431,13 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'math.geom.straight-lines':         { primary: 'coordinate_plane', all: ['coordinate_plane'] },
 
   // Mathematics — Geometry
-  'math.geom.triangles':              { primary: 'geometry_shape', all: ['geometry_shape', 'three_geometric_solids'], sceneGenerator: 'triangle' },
+  'math.geom.triangle':              { primary: 'geometry_shape', all: ['geometry_shape', 'three_geometric_solids'], sceneGenerator: 'triangle' },
   'math.geom.angle-sum':              { primary: 'geometry_shape', all: ['geometry_shape'], sceneGenerator: 'triangle' },
   'math.geom.congruence':             { primary: 'geometry_shape', all: ['geometry_shape'] },
   'math.geom.similarity':             { primary: 'geometry_shape', all: ['geometry_shape'] },
-  'math.geom.circles':                { primary: 'geometry_shape', all: ['geometry_shape'] },
-  'math.geom.quadrilaterals':         { primary: 'geometry_shape', all: ['geometry_shape'] },
-  'math.geom.polygons':               { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.circle':                { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.quadrilateral':         { primary: 'geometry_shape', all: ['geometry_shape'] },
+  'math.geom.polygon':               { primary: 'geometry_shape', all: ['geometry_shape'] },
   'math.geom.area-perimeter':         { primary: 'geometry_shape', all: ['geometry_shape'] },
   'math.geom.surface-area-volume':    { primary: 'three_geometric_solids', all: ['three_geometric_solids', 'geometry_shape'] },
   'math.geom.3d-geometry':            { primary: 'three_geometric_solids', all: ['three_geometric_solids'] },
@@ -455,8 +455,8 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
 
   // Mathematics — Algebra (graphing)
   'math.alg.linear-equations':        { primary: 'coordinate_plane', all: ['coordinate_plane'] },
-  'math.alg.quadratic-equations':     { primary: 'coordinate_plane', all: ['coordinate_plane'] },
-  'math.alg.polynomials':             { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  'math.alg.quadratic-equation':     { primary: 'coordinate_plane', all: ['coordinate_plane'] },
+  'math.alg.polynomial':             { primary: 'coordinate_plane', all: ['coordinate_plane'] },
   'math.alg.linear-inequalities':     { primary: 'coordinate_plane', all: ['coordinate_plane', 'number_line'] },
 
   // Mathematics — Statistics

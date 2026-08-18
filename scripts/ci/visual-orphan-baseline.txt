@@ -32,8 +32,6 @@ cs.ds.linked-lists
 cs.ds.stacks-queues
 math.alg.linear-equations
 math.alg.linear-inequalities
-math.alg.polynomials
-math.alg.quadratic-equations
 math.arith.integers
 math.arith.rational-numbers
 math.arith.real-numbers
@@ -44,17 +42,13 @@ math.calc.maxima-minima
 math.geom.3d-geometry
 math.geom.angle-sum
 math.geom.area-perimeter
-math.geom.circles
 math.geom.congruence
 math.geom.coordinate-geometry
 math.geom.heights-distances
-math.geom.polygons
-math.geom.quadrilaterals
 math.geom.section-formula
 math.geom.similarity
 math.geom.straight-lines
 math.geom.surface-area-volume
-math.geom.triangles
 math.stat.data-representation
 math.stat.frequency-distribution
 math.stat.mean-median-mode

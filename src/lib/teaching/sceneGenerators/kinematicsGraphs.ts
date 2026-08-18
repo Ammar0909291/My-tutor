@@ -84,6 +84,74 @@ function sampleCurves(p: KinematicsParams): SampledCurve {
 }
 
 /** Build a 3-step kinematics SceneSpec: position-time, then velocity-time, then acceleration-time. */
+/**
+ * WRITE THE EQUATION THE WAY A TEACHER WOULD WRITE IT.
+ *
+ * The first version of these labels interpolated every term unconditionally,
+ * so a runner starting from rest at the origin got:
+ *
+ *     x–t: x = 0 + 0t + 0.5(2)t²
+ *
+ * Every character of that is TRUE and three of its terms are noise. Measured
+ * in a live production lesson: the tutor read it out to the learner verbatim,
+ * backticks and all, because the contract correctly tells it to use the
+ * figure's own words — so a sloppy label becomes sloppy teaching directly.
+ *
+ * Zero terms are dropped, a unit coefficient is left implicit (1t² is t²), and
+ * a negative term is joined with a real minus sign rather than "+ -".
+ */
+function polynomial(terms: (string | null)[]): string {
+  const kept = terms.filter((t): t is string => t !== null && t.length > 0)
+  if (kept.length === 0) return '0'
+  // The LEADING term takes the same real minus sign as a joined one, so a
+  // single expression never mixes "-2" with "− 4t".
+  const head = kept[0].startsWith('-') ? `−${kept[0].slice(1)}` : kept[0]
+  return kept.slice(1).reduce((acc, t) => (t.startsWith('-') ? `${acc} − ${t.slice(1)}` : `${acc} + ${t}`), head)
+}
+
+/** A coefficient attached to a variable: 0 drops the term, ±1 leaves it implicit. */
+function term(coefficient: number, variable: string): string | null {
+  const c = round(coefficient)
+  if (c === 0) return null
+  if (c === 1) return variable
+  if (c === -1) return `-${variable}`
+  return `${c}${variable}`
+}
+
+/** A bare constant: 0 drops the term. */
+function constant(value: number): string | null {
+  const v = round(value)
+  return v === 0 ? null : String(v)
+}
+
+/** How far above the curve end a label sits, so it never overprints the line. */
+const LABEL_LIFT = 1.4
+
+/**
+ * THREE UNLABELLED CURVES ARE THREE COLOURED LINES.
+ *
+ * Position, velocity and acceleration were drawn as bare paths distinguished
+ * only by colour, so the learner had nothing telling them which was which and
+ * `fromScene` — which reads LABELS — reported the whole scene to the tutor as
+ * "3 plotted curves". A tutor that cannot name the curve it is teaching from
+ * cannot point at it either. Same defect and fix as electricCircuit's
+ * component labels.
+ *
+ * The label rides the curve's LAST sampled point, i.e. the right-hand end,
+ * which is where a reader's eye leaves the line and where a legend would sit.
+ */
+function curveLabel(id: string, points: Vec3[], text: string, color: string): SceneObject {
+  const end = points[points.length - 1] ?? [0, 0, 0]
+  return {
+    type: 'label',
+    id,
+    position: [round(end[0]), round(end[1] + LABEL_LIFT), 0] as Vec3,
+    text,
+    color,
+    properties: { labels: id.replace(/-label$/, '') },
+  }
+}
+
 export function buildKinematicsGraphScene(params: KinematicsParams): SceneSpec {
   const s = sampleCurves(params)
 
@@ -107,15 +175,24 @@ export function buildKinematicsGraphScene(params: KinematicsParams): SceneSpec {
     steps: [
       {
         narration: `This is the position-time graph: x = ${params.initialPosition} + ${params.initialVelocity}t + 0.5(${params.acceleration})t², a ${params.acceleration === 0 ? 'straight line' : params.acceleration > 0 ? 'curve bending upward' : 'curve bending downward'} since acceleration is ${params.acceleration === 0 ? 'zero' : 'constant and non-zero'}.`,
-        objects: [{ type: 'path', id: 'position-curve', points: positionPoints, color: '#3b82f6' }],
+        objects: [
+          { type: 'path', id: 'position-curve', points: positionPoints, color: '#3b82f6' },
+          curveLabel('position-curve-label', positionPoints, `x–t: x = ${polynomial([constant(params.initialPosition), term(params.initialVelocity, 't'), term(params.acceleration / 2, 't²')])}`, '#3b82f6'),
+        ],
       },
       {
         narration: `This is the velocity-time graph: v = ${params.initialVelocity} + ${params.acceleration}t — ${params.acceleration === 0 ? 'a flat line, since velocity is constant' : 'a straight line, since velocity changes at a constant rate'}.`,
-        objects: [{ type: 'path', id: 'velocity-curve', points: velocityPoints, color: '#22c55e' }],
+        objects: [
+          { type: 'path', id: 'velocity-curve', points: velocityPoints, color: '#22c55e' },
+          curveLabel('velocity-curve-label', velocityPoints, `v–t: v = ${polynomial([constant(params.initialVelocity), term(params.acceleration, 't')])}`, '#22c55e'),
+        ],
       },
       {
         narration: `This is the acceleration-time graph: a flat line at a = ${params.acceleration} m/s², since acceleration is constant throughout.`,
-        objects: [{ type: 'path', id: 'acceleration-curve', points: accelerationPoints, color: '#f59e0b' }],
+        objects: [
+          { type: 'path', id: 'acceleration-curve', points: accelerationPoints, color: '#f59e0b' },
+          curveLabel('acceleration-curve-label', accelerationPoints, `a–t: a = ${params.acceleration} m/s² (constant)`, '#f59e0b'),
+        ],
       },
     ],
   }
