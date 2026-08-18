@@ -90,15 +90,74 @@ const FALLBACK_LEAD_IN = 'Here is your next question.'
  */
 export function enforceGateProbeContract(input: GateContractInput): GateContractResult {
   try {
-    if (!containsOptionList(input.text)) {
+    const lines = input.text.split('\n')
+    const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
+    if (!containsOptionList(input.text) || firstOptionLine < 0) {
       return { text: input.text, replaced: false, reason: 'ok' }
     }
+
+    // KEEP THE REACTION. A learner who has just answered is owed feedback on
+    // THAT answer, and the first version of this repair threw it away: a
+    // correct answer came back as the bare fallback lead-in with no
+    // acknowledgement at all, which is a worse turn than the one it fixed.
+    //
+    // So the option list and everything after it is dropped, and the prose
+    // ABOVE it is kept — that is where the reaction lives. Only the trailing
+    // sentence of that prose is removed, and only when it is a question the
+    // canonical probe did not ask, because that is the competing question.
+    const head = lines.slice(0, firstOptionLine).join('\n').trim()
+    const kept = dropCompetingQuestion(head, input.canonicalQuestion)
+
+    if (kept.length > 0) {
+      return { text: kept, replaced: true, reason: 'model_wrote_own_options' }
+    }
+    // Nothing survived — the whole turn WAS the competing assessment.
     const replacement = (input.leadIn ?? '').trim() || FALLBACK_LEAD_IN
     return { text: replacement, replaced: true, reason: 'model_wrote_own_options' }
   } catch {
     // A repair must never break a turn. Unchanged text is the safe outcome.
     return { text: input.text, replaced: false, reason: 'ok' }
   }
+}
+
+const wordsOf = (s: string) =>
+  new Set(s.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 3))
+
+/**
+ * Remove a trailing question sentence when it is NOT the canonical probe's own
+ * question.
+ *
+ * The model legitimately restates the question it was given (observed in
+ * production: a learner asked for a reminder and the tutor helpfully repeated
+ * the same question and options). That is duplication, not contradiction, and
+ * the reaction around it must survive. A DIFFERENT question is the actual
+ * defect, and it is what gets cut.
+ *
+ * Overlap rather than equality, because the model paraphrases; the threshold is
+ * deliberately low, since the cost of keeping a restatement is a repeated
+ * sentence while the cost of keeping a competing question is a learner who
+ * cannot tell what to answer.
+ */
+function dropCompetingQuestion(head: string, canonicalQuestion: string): string {
+  if (!head.endsWith('?')) return head
+  const cut = Math.max(head.lastIndexOf('. '), head.lastIndexOf('\n'))
+  const tail = (cut >= 0 ? head.slice(cut + 1) : head).trim()
+  if (!tail.endsWith('?')) return head
+
+  const canon = wordsOf(canonicalQuestion)
+  const asked = wordsOf(tail)
+  if (canon.size === 0 || asked.size === 0) return cut >= 0 ? head.slice(0, cut + 1).trim() : ''
+  let shared = 0
+  for (const w of asked) if (canon.has(w)) shared++
+  const overlap = shared / asked.size
+  if (overlap >= 0.4) return head // a restatement of the canonical question
+
+  // A competing question is cut back to its PARAGRAPH boundary, not just its
+  // final sentence. Dropping only the last sentence left "A car drives 60 km
+  // east in 1 hour." stranded in front of a probe about something else — half
+  // a competing question is still a competing question.
+  const para = head.lastIndexOf('\n\n')
+  return para >= 0 ? head.slice(0, para).trim() : ''
 }
 
 /**

@@ -62,7 +62,7 @@ describe('P0-b — the model cannot put a second assessment on the turn', () => 
     expect(containsOptionList(VIOLATING_PROSE)).toBe(true)
   })
 
-  it('THE REAL TURN: the prose is replaced with the deterministic lead-in', () => {
+  it('THE REAL TURN: the competing question and its options are removed', () => {
     const r = enforceGateProbeContract({
       text: VIOLATING_PROSE,
       leadIn: 'Let us see whether that idea holds in a new situation.',
@@ -70,9 +70,29 @@ describe('P0-b — the model cannot put a second assessment on the turn', () => 
     })
     expect(r.replaced).toBe(true)
     expect(r.reason).toBe('model_wrote_own_options')
-    expect(r.text).toBe('Let us see whether that idea holds in a new situation.')
-    // The competing question and its options are gone.
     expect(r.text).not.toContain('60 km east')
+    expect(containsOptionList(r.text)).toBe(false)
+    // THE REACTION SURVIVES. The first version of this repair replaced the whole
+    // turn, so a learner's correct answer came back with no acknowledgement at
+    // all — a worse turn than the one being fixed. Caught in verification.
+    expect(r.text).toContain('completely correct')
+  })
+
+  it('REGRESSION: a restatement of the CANONICAL question is not a competing one', () => {
+    // Observed in production: the learner asked for a reminder and the tutor
+    // helpfully repeated the same question and its options. That is duplication,
+    // not contradiction, and the explanation around it must survive.
+    const restated = [
+      'Claude, no problem at all. Average velocity is displacement over time.',
+      '',
+      'Now, with that in mind, let us look at the question again:',
+      '',
+      '60 km/h vs. 60 km/h northbound - which is a speed and which a velocity?',
+      'A) The first is speed; the second is velocity',
+      'B) They are the same quantity',
+    ].join('\n')
+    const r = enforceGateProbeContract({ text: restated, leadIn: null, canonicalQuestion: PROBE.stem })
+    expect(r.text).toContain('Average velocity is displacement over time')
     expect(containsOptionList(r.text)).toBe(false)
   })
 
@@ -80,7 +100,10 @@ describe('P0-b — the model cannot put a second assessment on the turn', () => 
     // The renderer refuses on a non-English lesson, an attached figure, or an
     // answer still owed a reaction. A broken turn still must not ship two
     // questions, and the repair must not invent praise or progress.
-    const r = enforceGateProbeContract({ text: VIOLATING_PROSE, leadIn: null, canonicalQuestion: PROBE.stem })
+    // Only when NOTHING survives the cut - i.e. the whole turn was the
+    // competing assessment.
+    const bare = 'What is the average velocity?\nA) zero\nB) two'
+    const r = enforceGateProbeContract({ text: bare, leadIn: null, canonicalQuestion: PROBE.stem })
     expect(r.replaced).toBe(true)
     expect(r.text).toBe('Here is your next question.')
     expect(r.text).not.toMatch(/you (mastered|got|did)|well done|excellent/i)
