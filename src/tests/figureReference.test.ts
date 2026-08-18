@@ -168,3 +168,31 @@ What is the only even prime number?`
     expect(stripUnbackedFigureReferences(t, false).stripped).toBe(false)
   })
 })
+
+/**
+ * The opening turn lives behind a DIFFERENT endpoint, and that is how it was
+ * missed. `/api/learn/lesson-init` has no visual pipeline at all — no
+ * visualFired, no sceneSpec, no responseVisual — so its message is structurally
+ * incapable of carrying a figure, whatever the model writes.
+ */
+describe('the opening turn', () => {
+  const OPENING = `Let's look at the numbers displayed on your screen: the highlighted points are 2, 3, 5, 7, 11, and 13. Each of these can only be divided evenly by 1 and itself.`
+
+  it('strips the reference the harness captured on the first turn of a lesson', () => {
+    const r = stripUnbackedFigureReferences(OPENING, false)
+    expect(r.stripped).toBe(true)
+    expect(r.text).not.toMatch(/on your screen/i)
+    expect(r.text).toMatch(/divided evenly by 1 and itself/i)
+  })
+
+  it('lesson-init applies it, and can only ever pass false', () => {
+    const fs = require('fs') as typeof import('fs')
+    const route = fs.readFileSync('src/app/api/learn/lesson-init/route.ts', 'utf-8')
+    expect(route).toMatch(/stripUnbackedFigureReferences\(routed\.text,\s*false\)/)
+    // That endpoint has no visual pipeline, which is WHY false is unconditional.
+    // Asserted as code rather than prose — the first version of this check
+    // matched the word inside the comment above the call and failed on itself.
+    expect(route).not.toMatch(/(?:const|let|var)\s+visualFired/)
+    expect(route).not.toMatch(/detectedSceneSpec\s*=/)
+  })
+})

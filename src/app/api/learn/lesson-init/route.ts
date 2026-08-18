@@ -411,6 +411,44 @@ export async function POST(req: Request) {
       routed = { text: degraded.text, provider: degraded.provider, finishReason: degraded.finishReason }
     }
 
+    // ── THE OPENING TURN CANNOT SHOW A FIGURE ───────────────────────────────
+    //
+    // This route has no visual pipeline at all — no visualFired, no
+    // sceneSpec, no responseVisual — so the message it returns is structurally
+    // incapable of carrying a figure. The model does not know that, and
+    // routinely opens with one anyway.
+    //
+    // MEASURED by the certification harness on the FIRST turn of
+    // math.nt.prime-number, three separate runs:
+    //
+    //   "Look at the number line displayed on your screen, which highlights
+    //    the numbers 2, 3, 5, 7, 11, and 13."
+    //   "Let's look at the numbers displayed on your screen: the highlighted
+    //    points are 2, 3, 5, 7, 11, and 13."
+    //
+    // Nothing was on the screen. The learner's very first contact with the
+    // lesson is an instruction to read something that does not exist.
+    //
+    // The chat route gained this repair first; the opening turn was missed
+    // because it lives behind a different endpoint, which is exactly why the
+    // harness drives the real product rather than a module. `false` is passed
+    // unconditionally — there is no figure to be had here, ever.
+    try {
+      const { stripUnbackedFigureReferences } = await import('@/lib/teaching/figureReference')
+      const figures = stripUnbackedFigureReferences(routed.text, false)
+      if (figures.stripped) {
+        console.warn('[lesson-init] ' + JSON.stringify({
+          event: 'unbacked-figure-reference-stripped',
+          topicSlug,
+          removed: figures.removed,
+        }))
+        routed = { ...routed, text: figures.text }
+      }
+    } catch (err) {
+      // A repair must never stop a lesson from opening.
+      console.warn('[lesson-init] figure-reference check skipped:', err)
+    }
+
     // LESSON ISOLATION — this IS the "explicit navigation" moment
     // /api/sessions/history's own resolution treats as authoritative
     // (activeLessonSlug, prioritized over the coarser currentLesson
