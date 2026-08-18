@@ -83,3 +83,35 @@ describe('what it must not touch', () => {
     expect(stripUnbackedFigureReferences(t, false).text).toBe(t)
   })
 })
+
+/**
+ * The interaction that nearly shipped a regression.
+ *
+ * `visualFired` is false on a CONTINUITY turn: the figure was introduced by an
+ * earlier message and is deliberately not re-attached to this one, yet it IS on
+ * the learner's screen and the visual-contract block tells the model its prose
+ * may refer to it. Keying the repair on `visualFired` alone would have stripped
+ * a TRUE reference on every held turn.
+ *
+ * The route now passes `visualFired || session.turns > 0`. These pin the
+ * behaviour the caller must preserve.
+ */
+describe('a held figure is still a figure', () => {
+  const HELD_TURN =
+    'Look at the circuit on your screen — what happens to the current when the ' +
+    'second resistor is added?'
+
+  it('leaves the reference intact when a figure is on screen, however it got there', () => {
+    const r = stripUnbackedFigureReferences(HELD_TURN, true)
+    expect(r.stripped).toBe(false)
+    expect(r.text).toBe(HELD_TURN)
+  })
+
+  it('the route must not ask "did THIS message send a figure" — only "is one on screen"', () => {
+    const fs = require('fs') as typeof import('fs')
+    const route = fs.readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
+    // The call site passes a computed on-screen flag, never the bare fired flag.
+    expect(route).toMatch(/stripUnbackedFigureReferences\(cleanText,\s*figureOnScreen\)/)
+    expect(route).toMatch(/visualFired \|\| \(visualDecisionHoisted\?\.session\?\.turns \?\? 0\) > 0/)
+  })
+})

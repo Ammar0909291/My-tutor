@@ -5170,11 +5170,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // for the two shapes it recognises and why it refuses to empty a turn.
       try {
         const { stripUnbackedFigureReferences } = await import('@/lib/teaching/figureReference')
-        const figures = stripUnbackedFigureReferences(cleanText, visualFired)
+        // A HELD FIGURE IS STILL A FIGURE.
+        //
+        // `visualFired` is false on a continuity turn: the figure was
+        // introduced by an earlier message and is deliberately not re-attached
+        // to this one (see `figureIntroducedThisTurn` above), yet it IS on the
+        // learner's screen and the visual-contract block explicitly tells the
+        // model its prose may refer to it. Keying the repair on `visualFired`
+        // alone would strip a TRUE reference on every held turn — caught by
+        // reading the ownership gate rather than by a test, because nothing
+        // here would have failed.
+        //
+        // So the question is "does the learner have a figure", not "did this
+        // message send one", and the answer errs toward leaving prose alone:
+        // deleting a true reference is a worse failure than leaving one that
+        // points slightly too far up the transcript.
+        const figureOnScreen =
+          visualFired || (visualDecisionHoisted?.session?.turns ?? 0) > 0
+        const figures = stripUnbackedFigureReferences(cleanText, figureOnScreen)
         if (figures.stripped) {
           console.warn('[figure-reference] ' + JSON.stringify({
             event: 'unbacked-figure-reference-stripped',
             conceptId: resolvedConceptId ?? null,
+            heldTurns: visualDecisionHoisted?.session?.turns ?? null,
             // The exact fragments, so the log says what was removed rather than
             // that something was.
             removed: figures.removed,
