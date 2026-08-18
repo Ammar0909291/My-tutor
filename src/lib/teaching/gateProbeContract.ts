@@ -191,7 +191,7 @@ function dropCompetingQuestion(head: string, canonicalQuestion: string): string 
  * changes nothing about which probe is selected, how it is graded, or what is
  * stored — only what is rendered.
  */
-const AUTHORING_LABELS = /^\s*(DIAGNOSTIC|FORMATIVE|SUMMATIVE|CHECKPOINT|PROBE|MISCONCEPTION[- ]PROBE)\s*:\s*/i
+const AUTHORING_LABELS = /^\s*(DIAGNOSTIC|FORMATIVE|SUMMATIVE|CHECKPOINT|PROBE|MISCONCEPTION[- ]PROBE)\s*(\([^)]*\)\s*)?:\s*/i
 
 /** Remove a leading authoring label from a learner-facing stem. Idempotent. */
 export function stripAuthoringLabel(stem: string): string {

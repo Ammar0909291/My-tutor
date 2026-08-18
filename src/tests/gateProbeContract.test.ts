@@ -228,6 +228,17 @@ describe('P1 — authoring labels never reach a learner', () => {
       .toBe('Diagnostics are used by mechanics. What does the reading mean?')
   })
 
+  it('strips parenthetical authoring metadata', () => {
+    expect(stripAuthoringLabel('DIAGNOSTIC (Prerequisite Diagnostic PD-2): A 2 kg object moves in a curve…'))
+      .toBe('A 2 kg object moves in a curve…')
+    expect(stripAuthoringLabel('FORMATIVE (Mastery Probe MP-1, axis independence): A ball rolls off a table'))
+      .toBe('A ball rolls off a table')
+    expect(stripAuthoringLabel('DIAGNOSTIC (pre-teaching entry check): Is the SI base unit for temperature the degree Celsius?'))
+      .toBe('Is the SI base unit for temperature the degree Celsius?')
+    expect(stripAuthoringLabel('DIAGNOSTIC (P4-a, prereq: Q=mcΔT): How much heat is needed?'))
+      .toBe('How much heat is needed?')
+  })
+
   it('is idempotent and never empties a stem', () => {
     expect(stripAuthoringLabel(stripAuthoringLabel('PROBE: x'))).toBe('x')
     expect(stripAuthoringLabel('DIAGNOSTIC:')).toBe('DIAGNOSTIC:')
