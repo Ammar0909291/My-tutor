@@ -26,6 +26,7 @@ import { describe, it, expect } from 'vitest'
 import { ACTIVATED_SCENE_KINDS, buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
 import { describeVisualPayload } from '@/lib/teaching/visual/visualSemantics'
 import { buildCircuitScene } from '@/lib/teaching/sceneGenerators/electricCircuit'
+import { buildKinematicsGraphScene } from '@/lib/teaching/sceneGenerators/kinematicsGraphs'
 
 const readableOf = (kind: string) => {
   const spec = buildCanonicalScene(kind)
@@ -76,6 +77,51 @@ describe('the three scenes the sweep repaired', () => {
     // The one fact the scene exists to teach was in `properties` only.
     expect(joined).toMatch(/critical point: x = -?[\d.]+/)
     expect(joined).toContain("f'(x) = 0")
+  })
+})
+
+describe('a label a tutor reads aloud must be written the way a teacher writes it', () => {
+  // The first version of the kinematics labels interpolated every term
+  // unconditionally, so a runner starting from rest at the origin got
+  // "x–t: x = 0 + 0t + 0.5(2)t²". Every character true, three terms noise.
+  // MEASURED in a live production lesson: the tutor read it out verbatim,
+  // backticks and all — because the visual contract correctly tells it to use
+  // the figure's own words, which makes a sloppy label sloppy teaching.
+  const labels = (p: Record<string, number>) =>
+    (buildKinematicsGraphScene(p as never).steps ?? [])
+      .flatMap((s) => (s.objects ?? []).filter((o) => o.type === 'label').map((o) => String(o.text)))
+
+  it('drops zero terms and an implicit unit coefficient', () => {
+    const l = labels({ initialVelocity: 0, acceleration: 2, duration: 5, initialPosition: 0 })
+    expect(l).toContain('x–t: x = t²')
+    expect(l).toContain('v–t: v = 2t')
+    expect(l.join(' ')).not.toContain('0 + 0t')
+  })
+
+  it('keeps every term that carries information', () => {
+    const l = labels({ initialVelocity: 20, acceleration: -10, duration: 4, initialPosition: 5 })
+    expect(l).toContain('x–t: x = 5 + 20t − 5t²')
+    expect(l).toContain('v–t: v = 20 − 10t')
+  })
+
+  it('a constant velocity is a constant, not "v = 3 + 0t"', () => {
+    const l = labels({ initialVelocity: 3, acceleration: 0, duration: 5, initialPosition: 0 })
+    expect(l).toContain('v–t: v = 3')
+    expect(l).toContain('x–t: x = 3t')
+  })
+
+  it('an all-zero case still says something rather than nothing', () => {
+    const l = labels({ initialVelocity: 0, acceleration: 0, duration: 5, initialPosition: 0 })
+    expect(l).toContain('x–t: x = 0')
+    expect(l).toContain('v–t: v = 0')
+  })
+
+  it('ONE MINUS SIGN — a leading negative never mixes glyphs with a joined one', () => {
+    const l = labels({ initialVelocity: -4, acceleration: 2, duration: 5, initialPosition: -2 })
+    expect(l).toContain('x–t: x = −2 − 4t + t²')
+    expect(l).toContain('v–t: v = −4 + 2t')
+    // No ASCII hyphen used as a minus anywhere in the equations.
+    for (const t of l) expect(t.replace(/x–t|v–t|a–t/g, '')).not.toContain('-')
   })
 })
 
