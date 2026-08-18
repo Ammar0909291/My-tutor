@@ -2156,6 +2156,49 @@
   concepts): physics 238/238, english 216/216, chemistry 186/186, mathematics 43/908, biology 0,
   computer_science 0. Biology and CS remain the only subjects with no authored serving content.
 
+## Mathematics readiness build (2026-08-18, autonomous — acting-CTO authority granted)
+- **Run `npx tsx scripts/math/state.ts` before touching this subject.** It prints KG /
+  Blueprint / Educational Brain / generation-readiness counts from source. Three figures in
+  this file were stale at once when it was written (Blueprints recorded 529/908, actually
+  908/908; EB 224, actually 257; math.geom 56/69, actually certified) and decisions were being
+  made on all three. Do not hand-count and do not trust the numbers below over the script.
+- **The asset contract** (`src/lib/teaching/assetContract.ts`, v1): >= 1 explanation and
+  >= 3 closed-choice probes per served band. Three is the mastery bar itself
+  (correctAtCheck >= 1 plus correctAtPractice >= 2) with no re-asking — the minimum that lets a
+  perfect learner finish without the model volunteering a question. Measured 2026-08-18:
+  **0 of 43** serving mathematics concepts met it (40 held two probes, 3 held one). Physics
+  meets it at ~3.13 per concept, so the shortfall is a property of the seed template, not of
+  the subject.
+- **Why lessons could not close.** With the pool dry at PRACTICE the turn is handed to the
+  model, whose `<!--MCQ-->` tag is an advisory prompt rule; when it asks in prose instead,
+  `shouldSuppressSignalCorrectness` correctly refuses to record correctness for a question with
+  no server answer key. Measured compliance across two full lessons: 3 of 7 opportunities.
+  `withholdUngradedGateQuestion` (gateAssessment.ts) now withholds the QUESTION and keeps the
+  TEACHING on such turns — a backstop for a concept below contract, never the cure.
+- **Blueprints are NOT a learner-facing corpus** — the correction that reshaped the plan.
+  908/908 is a FILE count. 908/908 carry a Misconception Registry (2,595 rows, median 3) and
+  that is genuine; but of 2,205 parsed "explanation" blocks, 728 are Learning Objectives or
+  Mastery statements written ABOUT the student, and only **199 concepts** carry a real
+  `Core Explanation` (69 of them on the 245 spine). Serving assets must be AUTHORED for ~675
+  concepts, grounded in the misconception registry — offline and batched, so Permanent Rule 9
+  (one LLM call per turn) is untouched. Full detail:
+  `docs/architecture/MATHEMATICS_BUILD_STATUS.md`.
+- **Certification is the harness, never a count** (`scripts/math/certify.ts`, drives the REAL
+  endpoint). Asserts D1 taught-before-quizzed, D2 every counted question gradeable, D3
+  CHECK->TRANSFER without unbounded repetition, D4 mastery agrees across stores, D6 no
+  referenced-but-missing figure and no malformed LaTeX. D5 (band) needs a database.
+  It refuses the engineering account outright, and reports **DIRTY-STATE** rather than PASS
+  when a session carries prior mastery into turn 1 — `/api/sessions` resumes any ACTIVE session
+  from the last 24h and `mode: 'restart'` does not clear the ladder, so isolation cannot be
+  assumed. First real result: `math.geom.slope` PASS in 6 turns, verified, from a clean start.
+- **Content shipped**: `mathematicsSeedAssets.ts`, 18 authored closed-choice probes taking all
+  10 serving `math.arith` concepts to >= 3 gradeable questions per served band. DRAFT only —
+  promotion stays human, through `/api/admin/knowledge-assets`.
+- **Still blocked, and these set the cost curve**: no provider key here (so the ~675 concepts
+  that need authored content cannot be generated in this environment) and no `DATABASE_URL`
+  (so nothing can be seeded — `npx tsx scripts/brain/seed-knowledge-assets.ts --draft` is
+  idempotent and finishes it in one run wherever that exists).
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY
