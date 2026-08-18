@@ -187,6 +187,60 @@ export async function markConceptForReview(
   })
 }
 
+/**
+ * A3 — the mirror of `markConceptForReview`, for the branch that was missing one.
+ *
+ * At lesson finalisation the route folds each concept into `conceptsMastered`
+ * or `conceptsNeedingReview`. The needs-review branch has a TopicProgress
+ * writer (above); the MASTERED branch had none. So a lesson could finish with
+ * `verified: true` and `lesson_attempts = COMPLETED` while TopicProgress still
+ * read whatever the conversational-evidence writer last left — measured on the
+ * first completed mathematics lesson as IN_PROGRESS / 65%, which is that
+ * writer's deliberate never-certify output, not a bug in it.
+ *
+ * WHY THIS DOES NOT LOWER THE MASTERY BAR — it invents no rule and no score:
+ *
+ *   · It runs ONLY for a concept the completion gate already placed in
+ *     `conceptsMastered`, i.e. one that satisfied `masteryVerifiedStrict`
+ *     (correctAtCheck >= 1 AND correctAtPractice >= 2 on VERIFIED counters).
+ *   · The new status comes from `deriveTopicStatus`, the platform's existing
+ *     canonical formula, applied to the masteryPct ALREADY on the row. This
+ *     function never writes `masteryPct` — inventing a score is exactly the
+ *     thing it must not do, so a row whose score the formula judges too low
+ *     stays IN_PROGRESS on its own terms.
+ *   · `deriveTopicStatus` refuses to downgrade by construction: anything not
+ *     NOT_STARTED/IN_PROGRESS is returned unchanged, so MASTERED is never
+ *     reduced to COMPLETED and a concept flagged REVISION is never certified.
+ *   · No row is created. Absent a TopicProgress row there is no recorded score
+ *     to judge, and manufacturing one would be manufacturing evidence.
+ */
+export async function markConceptMastered(
+  db: Db,
+  args: { userId: string; subjectSlug: string; topicSlug: string },
+): Promise<void> {
+  const key = {
+    userId_subjectSlug_topicSlug: {
+      userId: args.userId,
+      subjectSlug: args.subjectSlug,
+      topicSlug: args.topicSlug,
+    },
+  }
+  const existing = await db.topicProgress.findUnique({ where: key })
+  if (!existing) return
+
+  const { deriveTopicStatus } = await import('@/lib/mastery/topicMasteryFormula')
+  const next = deriveTopicStatus(
+    existing.status as Parameters<typeof deriveTopicStatus>[0],
+    existing.masteryPct ?? 0,
+  )
+  if (next === existing.status) return
+
+  await db.topicProgress.update({
+    where: key,
+    data: { status: next, completedAt: new Date() },
+  })
+}
+
 /** The most recent attempt for a lesson, for resume and history reads. */
 export async function latestLessonAttempt(
   db: Db,

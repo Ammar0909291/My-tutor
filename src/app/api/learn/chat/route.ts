@@ -5879,6 +5879,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                       subjectSlug: learnSession.subject.slug,
                       topicSlug: stateForOutcome.conceptId,
                     })
+                  } else if (folded.conceptsMastered.includes(stateForOutcome.conceptId)) {
+                    // A3 — the branch that had no writer.
+                    //
+                    // Needs-review has routed into TopicProgress since it was
+                    // built ("the EXISTING owner, not a second queue"); mastered
+                    // never did. So the first completed mathematics lesson ended
+                    // with verified: true and lesson_attempts COMPLETED while
+                    // TopicProgress still read IN_PROGRESS / 65% — the
+                    // conversational writer's deliberate never-certify output,
+                    // left standing because nothing on this path superseded it.
+                    //
+                    // markConceptMastered applies the platform's OWN
+                    // deriveTopicStatus to the score already on the row. It
+                    // writes no score, creates no row, and cannot downgrade.
+                    await store.markConceptMastered(prisma, {
+                      userId,
+                      subjectSlug: learnSession.subject.slug,
+                      topicSlug: stateForOutcome.conceptId,
+                    })
                   }
                   // P6.6: has every required concept in this lesson closed?
                   // The lesson -> concept mapping is the canonical KG one the
