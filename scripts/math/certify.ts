@@ -81,8 +81,21 @@ interface TurnPayload {
   mcq?: { question: string; options: string[]; correctIndex: number } | null
   mastery?: { verified?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } | null
   lessonComplete?: { complete?: boolean } | null
+  // EVERY figure channel the route can send, taken from the response literal
+  // rather than from memory. The first version of this harness knew only
+  // `visual` and `sceneSpec`, so a 'spec'-rendered figure was invisible to it —
+  // it reported a lesson as having shown nothing while the learner was looking
+  // at a diagram, and then failed the lesson for referring to it.
   visual?: unknown
+  visualSpec?: unknown
   sceneSpec?: unknown
+  dynamicVisualizationCode?: unknown
+}
+
+/** Did this turn put a figure in front of the learner, by any renderer? */
+function carriesFigure(p: TurnPayload): boolean {
+  return Boolean(p.visual) || Boolean(p.visualSpec) || Boolean(p.sceneSpec)
+    || Boolean(p.dynamicVisualizationCode)
 }
 
 // ── D6 detectors ────────────────────────────────────────────────────────────
@@ -183,7 +196,7 @@ export async function certifyConcept(
 
   const check = (p: TurnPayload) => {
     const text = p.text ?? ''
-    const hasFigure = Boolean(p.visual) || Boolean(p.sceneSpec)
+    const hasFigure = carriesFigure(p)
     if (hasFigure && figureShownByTurn < 0) figureShownByTurn = turns
     if (REFERENCES_FIGURE.test(text) && !hasFigure) {
       const everShown = figureShownByTurn >= 0
