@@ -205,6 +205,12 @@ describe('route wiring — narrowly scoped, nothing else moved', () => {
     expect(ROUTE).toContain('repliesWithQuestion(lastAssistantText)')
   })
 
+  it('the catch-block fallback carries every guard the primary line does', () => {
+    expect(ROUTE).toContain(
+      'serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion',
+    )
+  })
+
   it('NO ADDITIONAL PROVIDER CALL SITE', () => {
     expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(3)
   })
