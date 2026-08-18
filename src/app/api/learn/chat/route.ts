@@ -602,6 +602,8 @@ export async function POST(req: Request) {
     // at the end of the turn that asks; cleared once graded, so one question is
     // never graded twice.
     let pendingMcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    /** Learner's message is a bare receipt ("ok", "yes", "ready") — see readinessAtGate. */
+    let isBareAckHoisted = false
     /** This turn's deterministic grade of the pending MCQ, computed once. */
     let mcqGradeHoisted: { chosenIndex: number | null; correct: boolean | null } | null = null
     // P6.6: the lesson-completion payload for this turn, when the final
@@ -1905,6 +1907,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             if (g.correct !== null) mcqGradeHoisted = g
           }
         }
+        // Read once, from the same helper the grading branch above uses, so the
+        // readiness guard further down cannot disagree with it.
+        {
+          const { isBareAcknowledgement: isBareAck } = await import('@/lib/teaching/masteryGate')
+          isBareAckHoisted = isBareAck(message)
+        }
         systemPrompt += buildAntiRepetitionBlock(questionLedgerHoisted, {
           learnerAcknowledged: isAckForPrompt(message),
         })
@@ -3193,9 +3201,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // deliberately freezes the lesson's ladder — attaching its gate
         // question mid-excursion would ask about a concept the learner walked
         // away from two turns ago.
+        // A PROBE ALREADY ON SCREEN IS NOT REPLACED.
+        //
+        // Measured in the end-user smoke test: the learner asked "which one
+        // should I answer?" — not a gradeable reply, so `mcqGradeHoisted`
+        // stayed null and the pending probe was never consumed — and the gate
+        // ran again and selected a DIFFERENT authored probe. The tutor then
+        // referred them to a question that was no longer on screen. Across
+        // three turns the learner was shown three different questions while
+        // being told to answer the first.
+        //
+        // `findBestProbe`'s `excludeProbeStem` guarantees a FRESH probe every
+        // time it runs, which is correct for "never re-ask" and exactly wrong
+        // here. So the gate does not run at all while an unanswered probe is
+        // outstanding; the widget keeps rendering it from `pendingMcq`, which
+        // is the same object the next turn will grade against.
+        const unansweredProbeOnScreen = pendingMcqHoisted !== null && mcqGradeHoisted === null
         const gateEligible =
           isMasteryGatePhase(phaseBeforeTurn) &&
           memoryState !== null &&
+          !unansweredProbeOnScreen &&
           !recoveryKeyHoisted &&
           !firstLessonActiveHoisted &&
           !excursionActiveHoisted
@@ -3399,7 +3424,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // a question is owed FEEDBACK ON THAT ANSWER — right or wrong, and why.
       // A canned explanation, however good, is the wrong move on that turn.
       const answersPendingQuestion = mcqGradeHoisted !== null
-      let serveFromMemory = assembled !== null && !answersPendingQuestion
+      // A READINESS CONFIRMATION IS NOT A REQUEST FOR AN EXPLANATION.
+      //
+      // Measured in the end-user smoke test: the tutor said "let's do 2
+      // practice questions together — ready?", the learner said "yes ok im
+      // ready", and the runtime served a stored explanation essay instead of
+      // the practice it had just promised. In the telemetry that turn looked
+      // like a SAVED CALL (provider=memory, 0 calls); to the learner it was
+      // being ignored, and the register jumped from a warm tutor to a dense
+      // lecture in one turn.
+      //
+      // Scoped, not global: only a BARE acknowledgement, and only at a mastery
+      // gate, where "ready?" is the question that was actually asked. "yes,
+      // but why?" is not bare and still gets taught; an acknowledgement in a
+      // delivery phase is unaffected, so ordinary "got it" handling elsewhere
+      // is byte-identical.
+      const { isMasteryGatePhase: isGatePhase } = await import('@/lib/teaching/gateAssessment')
+      const readinessAtGate = isBareAckHoisted && isGatePhase(
+        (snapshot as { conversationState?: { phase?: unknown } } | null)?.conversationState?.phase,
+      )
+      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
@@ -5034,6 +5078,44 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Never blocks or alters the response — log-only, and never
       // silently ignored (recordCompliance always logs; violations log
       // at 'warn'; recordBrainEvent always emits the structured line).
+      // ── ONE ASSESSMENT TURN = ONE CANONICAL QUESTION ────────────────────
+      //
+      // The gate block already tells the model, in the strongest terms a prompt
+      // can: "do NOT list the options, do NOT ask any other question." In the
+      // end-user smoke test it wrote its own four-option question anyway, on a
+      // turn whose buttons carried a different authored probe — so whatever the
+      // learner tapped would have been graded against a question they never
+      // read.
+      //
+      // A prompt instruction is advisory. This is the same enforcement shape
+      // `buildLessonCloseText` already uses: the runtime replaces the outgoing
+      // text when the model has demonstrably broken a hard contract. It fires
+      // ONLY on a detected enumerated option list, and ONLY when a canonical
+      // probe is attached, so ordinary lead-in prose is never touched.
+      //
+      // The probe, its options, its correct index and the grade are untouched —
+      // this decides which SENTENCE sits above a question the server chose.
+      if (gateMcqHoisted && mcqHoisted) {
+        try {
+          const { enforceGateProbeContract } = await import('@/lib/teaching/gateProbeContract')
+          const contract = enforceGateProbeContract({
+            text: cleanText,
+            leadIn: gateLeadInHoisted,
+            canonicalQuestion: mcqHoisted.question,
+          })
+          if (contract.replaced) {
+            console.warn(
+              '[learn/chat] GATE CONTRACT: model wrote its own options beside a canonical probe' +
+              ` — prose replaced (reason=${contract.reason}, chars ${cleanText.length}->${contract.text.length})`,
+            )
+            cleanText = contract.text
+          }
+        } catch (err) {
+          // A repair must never break a turn.
+          console.warn('[learn/chat] gate contract enforcement skipped:', err)
+        }
+      }
+
       try {
         const { checkBrainCompliance } = await import('@/lib/understanding/execution')
         const { recordCompliance, recordBrainEvent } = await import('@/lib/understanding/brainMetrics')

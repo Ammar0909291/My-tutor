@@ -55,6 +55,7 @@
  * read as one rather than be papered over with a server-invented question.
  */
 
+import { stripAuthoringLabel } from './gateProbeContract'
 import type { TutorMCQ } from './mcq'
 
 /** The two phases whose advancement is gated on graded correctness. */
@@ -95,7 +96,13 @@ const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
  * the authored key and is unambiguous.
  */
 export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
-  const question = probe.stem?.trim()
+  // Authoring labels are stripped HERE because this is the single choke point
+  // where an authored stem becomes learner-facing. The corpus genuinely carries
+  // them (`stem: 'DIAGNOSTIC: A car travels at 60 km/h…'`), and a learner met
+  // "DIAGNOSTIC:" as the first word of their practice question in the
+  // end-user smoke test. Presentation-only: selection, grading, evidence and
+  // the stored asset are all untouched.
+  const question = stripAuthoringLabel(probe.stem ?? '')
   if (!question) return null
 
   const choices = probe.choices

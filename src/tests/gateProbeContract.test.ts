@@ -1,0 +1,203 @@
+/**
+ * ONE ASSESSMENT TURN = ONE CANONICAL QUESTION.
+ *
+ * ── WHAT A LEARNER ACTUALLY SAW (end-user smoke test, phys.mech.velocity) ───
+ * Turn 7 — the tutor's prose asked "A car drives 60 km east then 60 km west,
+ * what is the average velocity?" with options A-D, while the tappable buttons
+ * beneath asked "60 km/h vs 60 km/h northbound — which is speed and which is
+ * velocity?" with options A-B. Whatever they tapped would have been graded
+ * against a question they never read.
+ *
+ * Turn 8 — they said so. The tutor replied "please answer the question on your
+ * screen about the car driving east and west, options A, B, C and D" while the
+ * screen had by then moved to a THIRD probe, about a swimmer.
+ *
+ * Two independent causes, fixed and tested independently:
+ *   P0-a  the gate selected a NEW probe on every gate-eligible turn, because
+ *         `findBestProbe`'s excludeProbeStem guarantees a fresh one and nothing
+ *         checked whether one was already on screen unanswered.
+ *   P0-b  the model wrote its own assessment beside the canonical one. The
+ *         prompt already forbids this in capitals; it is advisory, so the
+ *         runtime enforces it the way buildLessonCloseText already does.
+ *
+ * Also covered: authoring labels ("DIAGNOSTIC:", "FORMATIVE:") reaching the
+ * learner as the first word of their practice question, and a readiness
+ * confirmation being answered with a stored explanation essay.
+ */
+import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'fs'
+import { join } from 'path'
+import {
+  containsOptionList,
+  enforceGateProbeContract,
+  stripAuthoringLabel,
+} from '@/lib/teaching/gateProbeContract'
+import { probeToMcq } from '@/lib/teaching/gateAssessment'
+import { gradeMcqAnswer } from '@/lib/teaching/mcq'
+
+const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
+
+/** The canonical probe, shaped exactly as the corpus stores one. */
+const PROBE = {
+  stem: 'FORMATIVE: 60 km/h vs. 60 km/h northbound — which is a speed and which a velocity?',
+  choices: [
+    { text: 'The first is speed (scalar, no direction); the second is velocity (vector, has direction)', isCorrect: true },
+    { text: 'They are the same quantity just phrased differently', isCorrect: false },
+  ],
+}
+
+/** The real violating turn, reproduced from the smoke test. */
+const VIOLATING_PROSE = [
+  'Claude, that is completely correct! Here is your second and final practice question:',
+  '',
+  "A car drives 60 km east in 1 hour, and then drives 60 km west in 1 hour. What is the car's average velocity for the entire trip?",
+  'A) 60 kilometres per hour',
+  'B) 0 kilometres per hour',
+  'C) 120 kilometres per hour',
+  'D) 30 kilometres per hour',
+].join('\n')
+
+describe('P0-b — the model cannot put a second assessment on the turn', () => {
+  it('THE REAL TURN: a model-authored option list is detected', () => {
+    expect(containsOptionList(VIOLATING_PROSE)).toBe(true)
+  })
+
+  it('THE REAL TURN: the prose is replaced with the deterministic lead-in', () => {
+    const r = enforceGateProbeContract({
+      text: VIOLATING_PROSE,
+      leadIn: 'Let us see whether that idea holds in a new situation.',
+      canonicalQuestion: PROBE.stem,
+    })
+    expect(r.replaced).toBe(true)
+    expect(r.reason).toBe('model_wrote_own_options')
+    expect(r.text).toBe('Let us see whether that idea holds in a new situation.')
+    // The competing question and its options are gone.
+    expect(r.text).not.toContain('60 km east')
+    expect(containsOptionList(r.text)).toBe(false)
+  })
+
+  it('falls back to a content-free lead-in when the renderer refused', () => {
+    // The renderer refuses on a non-English lesson, an attached figure, or an
+    // answer still owed a reaction. A broken turn still must not ship two
+    // questions, and the repair must not invent praise or progress.
+    const r = enforceGateProbeContract({ text: VIOLATING_PROSE, leadIn: null, canonicalQuestion: PROBE.stem })
+    expect(r.replaced).toBe(true)
+    expect(r.text).toBe('Here is your next question.')
+    expect(r.text).not.toMatch(/you (mastered|got|did)|well done|excellent/i)
+  })
+
+  it('ORDINARY LEAD-IN PROSE IS NEVER TOUCHED — the important negative', () => {
+    for (const good of [
+      'Let us check that idea against a round trip.',
+      'This next one is the case people usually get wrong, so take your time.',
+      'Claude, you nailed the arithmetic. Here is one that pushes it a bit further.',
+      'A. Einstein noticed the same thing about trains.',
+      'Try these in order: 1) walk out, 2) walk back.',
+    ]) {
+      expect(containsOptionList(good)).toBe(false)
+      expect(enforceGateProbeContract({ text: good, leadIn: 'x', canonicalQuestion: PROBE.stem }).replaced).toBe(false)
+    }
+  })
+
+  it('a code fence containing letters is not an option list', () => {
+    expect(containsOptionList('Look at this:\n```\nA) foo\nB) bar\n```\nWhat do you notice.')).toBe(false)
+  })
+
+  it('needs BOTH A and B — one stray letter is not an assessment', () => {
+    expect(containsOptionList('C) this is a fragment')).toBe(false)
+    expect(containsOptionList('A) only one option')).toBe(false)
+  })
+
+  it('never throws, whatever the input', () => {
+    for (const t of ['', '   ', 'A)\nB)', '```', ' ']) {
+      expect(() => enforceGateProbeContract({ text: t, leadIn: null, canonicalQuestion: '' })).not.toThrow()
+    }
+  })
+})
+
+describe('P0 safety contract — the probe itself is untouched', () => {
+  it('selected probe P produces widget P, options and key intact', () => {
+    const mcq = probeToMcq(PROBE)!
+    expect(mcq.options).toEqual([
+      'The first is speed (scalar, no direction); the second is velocity (vector, has direction)',
+      'They are the same quantity just phrased differently',
+    ])
+    expect(mcq.correctIndex).toBe(0)
+  })
+
+  it('grading still evaluates against P after the prose was replaced', () => {
+    const mcq = probeToMcq(PROBE)!
+    enforceGateProbeContract({ text: VIOLATING_PROSE, leadIn: null, canonicalQuestion: mcq.question })
+    expect(gradeMcqAnswer('A', mcq).correct).toBe(true)
+    expect(gradeMcqAnswer('B', mcq).correct).toBe(false)
+    expect(gradeMcqAnswer('who knows', mcq).correct).toBeNull()
+  })
+
+  it('an unconvertible probe still yields NO widget — no fabricated question', () => {
+    expect(probeToMcq({ stem: 'q', choices: null })).toBeNull()
+    expect(probeToMcq({ stem: 'q', choices: [{ text: 'a', isCorrect: true }, { text: 'b', isCorrect: true }] })).toBeNull()
+  })
+})
+
+describe('P1 — authoring labels never reach a learner', () => {
+  it('strips the labels the corpus actually carries', () => {
+    expect(stripAuthoringLabel('DIAGNOSTIC: A car travels at 60 km/h. Is that a scalar or a vector?'))
+      .toBe('A car travels at 60 km/h. Is that a scalar or a vector?')
+    expect(stripAuthoringLabel('FORMATIVE: 60 km/h vs. 60 km/h northbound'))
+      .toBe('60 km/h vs. 60 km/h northbound')
+  })
+
+  it('is applied at the single choke point, so the widget is already clean', () => {
+    expect(probeToMcq(PROBE)!.question).toBe(
+      '60 km/h vs. 60 km/h northbound — which is a speed and which a velocity?',
+    )
+  })
+
+  it('leaves a normal stem completely alone', () => {
+    const stem = 'What is the average velocity for the round trip?'
+    expect(stripAuthoringLabel(stem)).toBe(stem)
+  })
+
+  it('does not eat a word that merely starts with a label name', () => {
+    expect(stripAuthoringLabel('Diagnostics are used by mechanics. What does the reading mean?'))
+      .toBe('Diagnostics are used by mechanics. What does the reading mean?')
+  })
+
+  it('is idempotent and never empties a stem', () => {
+    expect(stripAuthoringLabel(stripAuthoringLabel('PROBE: x'))).toBe('x')
+    expect(stripAuthoringLabel('DIAGNOSTIC:')).toBe('DIAGNOSTIC:')
+  })
+})
+
+describe('route wiring — the two runtime rules', () => {
+  it('P0-a: the gate does NOT run while an unanswered probe is on screen', () => {
+    expect(ROUTE).toContain('const unansweredProbeOnScreen = pendingMcqHoisted !== null && mcqGradeHoisted === null')
+    expect(ROUTE).toContain('!unansweredProbeOnScreen &&')
+  })
+
+  it('P1: a bare readiness ack at a gate does not serve a stored explanation', () => {
+    expect(ROUTE).toContain('let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate')
+  })
+
+  it('the readiness guard is SCOPED — bare ack AND a mastery gate, not every "yes"', () => {
+    expect(ROUTE).toMatch(/const readinessAtGate = isBareAckHoisted && isGatePhase\(/)
+  })
+
+  it('answersPendingQuestion is unchanged — it still gates on the grade alone', () => {
+    expect(ROUTE).toContain('const answersPendingQuestion = mcqGradeHoisted !== null')
+  })
+
+  it('the contract runs only with a canonical probe attached', () => {
+    expect(ROUTE).toContain('if (gateMcqHoisted && mcqHoisted) {')
+    expect(ROUTE).toContain('enforceGateProbeContract')
+  })
+
+  it('no provider call was added by any of this', () => {
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(3)
+  })
+
+  it('mastery, grading and the attach line are untouched', () => {
+    expect(ROUTE).toContain('mcqHoisted = gateMcqHoisted ?? mcqParse.mcq')
+    expect(ROUTE).toContain('servedFromMemory || servedByGateRenderer || servedByLessonComplete')
+  })
+})
