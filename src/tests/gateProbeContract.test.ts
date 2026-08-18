@@ -218,6 +218,21 @@ describe('P1 — authoring labels never reach a learner', () => {
     )
   })
 
+  it('strips PRACTICE: — met live in a production lesson', () => {
+    // Observed as a real learner, phys.em.kirchhoffs-laws, PRACTICE phase: the
+    // tappable widget's first word was the authoring label.
+    //   "PRACTICE: While writing a KVL loop you traverse a resistor OPPOSITE…"
+    // Every other label in the corpus was already covered; this one was simply
+    // missing from the list.
+    expect(stripAuthoringLabel('PRACTICE: While writing a KVL loop you traverse a resistor OPPOSITE to the assumed current direction. What sign does the IR term take?'))
+      .toBe('While writing a KVL loop you traverse a resistor OPPOSITE to the assumed current direction. What sign does the IR term take?')
+  })
+
+  it('does not eat the word "practice" used normally', () => {
+    const stem = 'Practice makes perfect. Which law applies at a junction?'
+    expect(stripAuthoringLabel(stem)).toBe(stem)
+  })
+
   it('leaves a normal stem completely alone', () => {
     const stem = 'What is the average velocity for the round trip?'
     expect(stripAuthoringLabel(stem)).toBe(stem)

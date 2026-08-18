@@ -291,40 +291,77 @@ describe('diagram container — 3cm padding, top corrected to top-align with the
     // content 3cm below that shared start line. The fix is this rule's top
     // value, not the grid. 2px is not arbitrary: it is the exact value the
     // left column's own Card carries in canvas mode.
-    expect(TSX).toMatch(/padding: hasCanvasVisual \? '2px 0 0 2cm' : '14px 16px'/)
+    // The declaration MOVED from an inline style to `.canvasBubble` in the CSS
+    // module. It had to: an inline style cannot carry a media query, and this
+    // padding must shrink on a phone (see the mobile test below). The value is
+    // byte-for-byte what the inline style set, so desktop is unchanged.
+    expect(CSS).toMatch(/\.canvasBubble\s*\{[^}]*padding:\s*2px 0 0 2cm;/)
   })
 
   it('the explanation column carries a 2cm left indent before its text starts (canvas mode only)', () => {
     // Follow-up request: "indention should be 2cm then explanation should
-    // start". Lives on the SAME inline padding shorthand as the top-alignment
-    // fix above (left value), not a second rule — one canvas-mode padding
-    // declaration governs both the top alignment and the left indent.
-    expect(TSX).toMatch(/padding: hasCanvasVisual \? '2px 0 0 2cm' : '14px 16px'/)
-    // Outside the canvas (no figure), the ordinary chat bubble keeps its
+    // start". One canvas-mode padding declaration governs both the top
+    // alignment and the left indent — now `.canvasBubble` rather than an
+    // inline style, for the media-query reason above.
+    expect(CSS).toMatch(/\.canvasBubble\s*\{[^}]*padding:\s*2px 0 0 2cm;/)
+    // The class is applied only in canvas mode...
+    expect(TSX).toMatch(/hasCanvasVisual \? ` \$\{styles\.canvasBubble\}` : ''/)
+    // ...and outside the canvas (no figure) the ordinary chat bubble keeps its
     // existing symmetric padding, unindented — the 2cm indent is canvas-only,
     // not a global bubble change. The false-branch literal must stay exactly
-    // '14px 16px', not gain a matching left value of its own.
-    const literal = TSX.match(/padding: hasCanvasVisual \? '2px 0 0 2cm' : '([^']*)'/)?.[1]
-    expect(literal).toBe('14px 16px')
+    // '14px 16px', and the true branch must set NO inline padding, or it would
+    // override the responsive class.
+    expect(TSX).toMatch(/padding: hasCanvasVisual \? undefined : '14px 16px'/)
   })
 
-  it('the 2cm indent and the top-alignment fix survive the mobile single-column collapse', () => {
-    // Below 900px the canvas collapses to one column and the diagram moves
-    // BELOW the explanation instead of beside it (pre-existing, deliberate —
-    // see teachingCanvasLayout.test.ts). The Card's padding is an inline
-    // style, not conditioned on the media query, so the same 2px-top/2cm-left
-    // padding — and therefore the same indent — applies identically on
-    // mobile. Verified visually with Playwright/Chromium at 390px and 768px
-    // viewports against the real compiled CSS: indent measured at ~76.6px
-    // (2cm) in both cases, no horizontal overflow, no clipped or negative-
-    // width diagram frame.
-    const block = CSS.match(/@media \(max-width: 900px\)[\s\S]*?\.teachingCanvas\s*\{[\s\S]*?\}/)?.[0] ?? ''
+  it('THE DESKTOP INSETS ARE DROPPED ON PHONES — they were most of the screen', () => {
+    // ── THIS TEST PREVIOUSLY ASSERTED THE DEFECT ──────────────────────────
+    // It required the mobile block NOT to touch .canvasVisual/.canvasText, on
+    // the reasoning that mobile must not "diverge" from desktop. Its own
+    // comment recorded a Playwright check at 390px that found "no horizontal
+    // overflow, no clipped or negative-width diagram frame" — all true, and
+    // all blind to the actual failure, which is the opposite of overflow: the
+    // figure was too SMALL to read.
+    //
+    // MEASURED against the real CSS in Chromium, before the fix:
+    //   viewport 360 -> figure 101.3px wide  (226.8px of a 328px track was padding)
+    //   viewport 390 -> figure 131.3px wide
+    //   viewport 414 -> figure 155.3px wide
+    // After: 328 / 358 / 382px respectively. Desktop at 1280 is unchanged
+    // (padding still 113.386px per side, figure still 386.3px).
+    //
+    // Divergence from desktop is the POINT: 3cm and 2cm are half-column
+    // devices, and below 900px the grid above has already collapsed to a
+    // single column, so there is no half-column left to inset from.
+    const block = CSS.match(/@media \(max-width: 900px\)\s*\{[\s\S]*?\n\}/)?.[0] ?? ''
     expect(block).toMatch(/grid-template-columns:\s*minmax\(0,\s*1fr\)/)
-    // The media query only touches .teachingCanvas's own track/gap — it must
-    // not redefine .canvasVisual's padding or .canvasText's Card padding,
-    // which would silently diverge mobile indentation/alignment from desktop.
-    expect(block).not.toMatch(/\.canvasVisual/)
-    expect(block).not.toMatch(/\.canvasText/)
+    // The figure gets its width back: no horizontal inset at all.
+    expect(block).toMatch(/\.canvasVisual\s*\{[^}]*padding:\s*2px 0 12px;/)
+    // The explanation loses its 2cm indent on a phone.
+    expect(block).toMatch(/\.canvasBubble\s*\{[^}]*padding:\s*2px 0 0;/)
+  })
+
+  it('CASCADE ORDER: the base .canvasBubble precedes the media query', () => {
+    // Caught by re-measuring, not by reading: the first version of this fix
+    // appended `.canvasBubble`'s base rule to the END of the file, AFTER the
+    // media query. Same specificity, so source order decides — the 2cm base
+    // won on mobile too, and the measured indent was still 75.59px at 390px
+    // while the figure width had correctly changed. Half a fix, and it looked
+    // like a whole one everywhere except the number.
+    expect(CSS.indexOf('.canvasBubble {')).toBeGreaterThan(-1)
+    expect(CSS.indexOf('.canvasBubble {')).toBeLessThan(CSS.indexOf('@media (max-width: 900px)'))
+  })
+
+  it('ONE mobile block, not two — the overrides live with the collapse rule', () => {
+    expect(CSS.match(/@media \(max-width: 900px\)/g)?.length).toBe(1)
+  })
+
+  it('DESKTOP IS UNTOUCHED — the base rules still carry the full insets', () => {
+    // The mobile block must be an override, never a replacement: if these base
+    // declarations were edited instead, the fix would have silently changed
+    // the desktop design it was explicitly not allowed to touch.
+    expect(paddingBlock).toMatch(/padding:\s*2px 3cm 3cm 3cm;/)
+    expect(CSS).toMatch(/\.canvasBubble\s*\{\s*padding:\s*2px 0 0 2cm;\s*\}/)
   })
 
   it('padding sits INSIDE the existing column (box-sizing), never growing it', () => {

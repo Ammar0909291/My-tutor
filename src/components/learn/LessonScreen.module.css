@@ -118,6 +118,14 @@
   padding: 2px 3cm 3cm 3cm;
 }
 
+/* The tutor bubble's canvas-mode indent, as a class rather than an inline
+ * style, for the single reason that an inline style cannot carry a media
+ * query — and this indent MUST shrink on a phone (see the mobile block
+ * below). Desktop keeps the 2cm it already had, byte for byte. */
+.canvasBubble {
+  padding: 2px 0 0 2cm;
+}
+
 /* Below this width a 50% column is genuinely unusable for either a paragraph
    or a diagram, so the canvas becomes one column and the figure sits under
    its explanation — the pre-existing behaviour. Desktop never pays for this. */
@@ -125,5 +133,31 @@
   .teachingCanvas {
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
+  }
+
+  /* ── The desktop insets are not merely large here, they are most of the
+   * screen ──────────────────────────────────────────────────────────────
+   * `.canvasVisual`'s 3cm and `.canvasBubble`'s 2cm are half-column devices:
+   * they exist to stop a figure sprawling across a wide desktop track. The
+   * rule above has ALREADY collapsed the grid to one column, so there is no
+   * half-column left to inset from — but the padding stayed, and 3cm is
+   * 113.4px per side at 96dpi whatever the screen is.
+   *
+   * MEASURED, real CSS, real Chromium, before this block existed:
+   *   viewport 360 -> figure 101.3px wide  (226.8px of the 328px track was padding)
+   *   viewport 390 -> figure 131.3px wide
+   *   viewport 414 -> figure 155.3px wide
+   * A circuit diagram carrying resistor values and branch currents is not
+   * readable at 101px, and a learner cannot zoom a canvas back out of it.
+   * The text half was indented 75.6px on the same screens.
+   *
+   * After: 328 / 358 / 382px. Desktop is untouched — these are overrides,
+   * and the base rules still carry the full 3cm/2cm. */
+  .canvasVisual {
+    padding: 2px 0 12px;
+  }
+
+  .canvasBubble {
+    padding: 2px 0 0;
   }
 }
