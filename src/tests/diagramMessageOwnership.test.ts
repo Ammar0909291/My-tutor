@@ -72,18 +72,39 @@ describe('the live render is gated on this-turn introduction', () => {
     )
   })
 
-  it('the authority clamp only fills the visual channels when the figure was introduced this turn', () => {
+  it('the authority clamp fills the visual channels only on introduction — or an explicit ask', () => {
     const clampStart = ROUTE.indexOf('const decision = visualDecisionHoisted')
     expect(clampStart).toBeGreaterThan(-1)
-    const clamp = ROUTE.slice(clampStart, clampStart + 1200)
-    expect(clamp).toMatch(/if \(figureIntroducedThisTurn\) \{/)
+    const clamp = ROUTE.slice(clampStart, clampStart + 2600)
+    expect(clamp).toMatch(/if \(figureIntroducedThisTurn \|\| reattachOnExplicitRequest\) \{/)
     // The three payload-filling cases (card/spec/scene) must all sit INSIDE
     // that gate, not merely somewhere in the clamp.
-    const gateStart = clamp.indexOf('if (figureIntroducedThisTurn) {')
+    const gateStart = clamp.indexOf('if (figureIntroducedThisTurn || reattachOnExplicitRequest) {')
     const gated = clamp.slice(gateStart)
     expect(gated).toContain("case 'card':")
     expect(gated).toContain("case 'spec':")
     expect(gated).toContain("case 'scene':")
+  })
+
+  it('THE EXCEPTION IS ONE TURN, NOT A RETURN TO DUPLICATION', () => {
+    // The duplication bug above was a figure attached to EVERY reply. This is
+    // the single turn on which the learner said, in words, that they want to
+    // see it — measured on phys.em.kirchhoffs-laws, where "can you show me a
+    // diagram of the loop" returned nothing at all and the tutor answered
+    // "look at the circuit on your screen" about a figure four turns above.
+    // `detectLearnerRequest` is deterministic and pre-LLM, so the exception
+    // cannot widen on its own.
+    expect(ROUTE).toContain("!figureIntroducedThisTurn && learnerRequestHoisted === 'diagram'")
+  })
+
+  it('THE PERSISTED RECORD IS NOT WIDENED — history still shows one figure once', () => {
+    // Only the LIVE RENDER re-attaches. `figureBelongsToThisTurn` still refuses
+    // a held session, so `Message.visualSession` is not written and a reload
+    // cannot resurrect a second copy: the figure keeps belonging to the message
+    // that drew it, which is this file's whole doctrine.
+    expect(ROUTE).toContain('const figureBelongsToThisTurn = (() => {')
+    const persistStart = ROUTE.indexOf('const figureBelongsToThisTurn = (() => {')
+    expect(ROUTE.slice(persistStart, persistStart + 600)).not.toContain('reattachOnExplicitRequest')
   })
 
   it('the four channel-clears at the top of the clamp are still unconditional', () => {
