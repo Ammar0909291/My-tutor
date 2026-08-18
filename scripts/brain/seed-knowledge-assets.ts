@@ -20,8 +20,10 @@
  *   --dry-run      → print what would be written; touch nothing.
  *
  * Idempotent: an existing row with the same canonicalSlug is never
- * duplicated or overwritten (seeds are versionless imports; post-seed
- * evolution belongs to the capture pipeline + admin review flow).
+ * duplicated. ACTIVE/DRAFT/REVIEW rows are skipped (post-seed evolution
+ * belongs to the capture pipeline + admin review flow). DEPRECATED or
+ * RETIRED rows are revived: status restored to the target, version
+ * bumped, content refreshed from the authored source.
  *
  * Run: npx tsx scripts/brain/seed-knowledge-assets.ts [--draft] [--dry-run]
  */
@@ -116,12 +118,48 @@ async function main() {
 
   let created = 0
   let skipped = 0
+  let revived = 0
+  const REVIVABLE: Set<string> = new Set([AssetStatus.DEPRECATED, AssetStatus.RETIRED])
 
   for (const e of ALL_EXPLANATIONS) {
     const canonicalSlug = seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)
     if (dryRun) { created++; console.log(`would create EXPLANATION: ${canonicalSlug}`); continue }
     const existing = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
-    if (existing) { skipped++; console.log(`skip (exists): ${canonicalSlug}`); continue }
+    if (existing) {
+      if (REVIVABLE.has(existing.status)) {
+        await prisma.assetIdentity.update({
+          where: { id: existing.id },
+          data: {
+            status,
+            version: existing.version + 1,
+            contentHash: hashContent(e.content),
+            tags: [e.subjectSlug, e.familyKind],
+            explanationAsset: {
+              upsert: {
+                create: {
+                  content: e.content,
+                  style: ExplanationStyle.CONCRETE,
+                  readingLevel: 0,
+                  lengthChars: e.content.length,
+                  targetedMisconceptions: e.targetedMisconceptions,
+                },
+                update: {
+                  content: e.content,
+                  style: ExplanationStyle.CONCRETE,
+                  readingLevel: 0,
+                  lengthChars: e.content.length,
+                  targetedMisconceptions: e.targetedMisconceptions,
+                },
+              },
+            },
+          },
+        })
+        revived++
+        console.log(`revived EXPLANATION ${existing.status}→${status} (v${existing.version + 1}): ${canonicalSlug}`)
+        continue
+      }
+      skipped++; console.log(`skip (${existing.status}): ${canonicalSlug}`); continue
+    }
     await prisma.assetIdentity.create({
       data: {
         family: AssetFamily.EXPLANATION,
@@ -159,7 +197,43 @@ async function main() {
     const canonicalSlug = probeSlug(p)
     if (dryRun) { created++; console.log(`would create PROBE: ${canonicalSlug}`); continue }
     const existing = await prisma.assetIdentity.findFirst({ where: { canonicalSlug } })
-    if (existing) { skipped++; console.log(`skip (exists): ${canonicalSlug}`); continue }
+    if (existing) {
+      if (REVIVABLE.has(existing.status)) {
+        await prisma.assetIdentity.update({
+          where: { id: existing.id },
+          data: {
+            status,
+            version: existing.version + 1,
+            contentHash: hashContent(p.stem),
+            tags: [p.subjectSlug, p.probeKind],
+            probeAsset: {
+              upsert: {
+                create: {
+                  stem: p.stem,
+                  choices: p.choices ? (p.choices as unknown as object) : undefined,
+                  correctValue: p.correctValue,
+                  keywords: [],
+                  difficulty: p.difficulty,
+                  targetedMisconceptions: p.targetedMisconceptions,
+                  requiredVisuals: [],
+                },
+                update: {
+                  stem: p.stem,
+                  choices: p.choices ? (p.choices as unknown as object) : undefined,
+                  correctValue: p.correctValue,
+                  difficulty: p.difficulty,
+                  targetedMisconceptions: p.targetedMisconceptions,
+                },
+              },
+            },
+          },
+        })
+        revived++
+        console.log(`revived PROBE ${existing.status}→${status} (v${existing.version + 1}): ${canonicalSlug}`)
+        continue
+      }
+      skipped++; console.log(`skip (${existing.status}): ${canonicalSlug}`); continue
+    }
     await prisma.assetIdentity.create({
       data: {
         family: AssetFamily.PROBE,
@@ -195,7 +269,7 @@ async function main() {
     console.log(`created PROBE (${status}): ${canonicalSlug}`)
   }
 
-  console.log(`\nDone. created=${created} skipped=${skipped} status=${dryRun ? 'DRY-RUN' : status}`)
+  console.log(`\nDone. created=${created} revived=${revived} skipped=${skipped} status=${dryRun ? 'DRY-RUN' : status}`)
 }
 
 main()
