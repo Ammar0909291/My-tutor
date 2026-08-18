@@ -104,6 +104,11 @@ describe('the remaining gap is enumerated and may only shrink', () => {
     'chem.bond.vsepr',
     'cs.found.boolean-logic',
     'math.geom.distance-formula',
+    // Judged when the row's id was corrected from the plural 'math.geom.triangles',
+    // which matched no KG concept and so was never consulted at all. The shared
+    // instance is an equilateral triangle carrying its angle sum — a genuine
+    // depiction of "Triangle", true of the figure drawn, not a domain stand-in.
+    'math.geom.triangle',
     'phys.mech.circular-motion',
     'phys.mech.collisions-elastic',
     'phys.mech.kinematics-1d',
