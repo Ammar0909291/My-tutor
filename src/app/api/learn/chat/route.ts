@@ -5130,6 +5130,40 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       const visualFired = Boolean(detectedVisualSpec || detectedSceneSpec || responseVisual)
 
+      // ── A TUTOR MAY NOT POINT AT A FIGURE THAT IS NOT THERE ──────────────
+      //
+      // Placed here because `visualFired` is the first point at which the
+      // question "does this turn actually carry a figure?" has an answer. The
+      // text was generated earlier, while that was still undecided, so the
+      // model can and does write about a figure it never gets.
+      //
+      // Captured live by the certification harness on math.nt.prime-number: a
+      // turn with no visual, no visualSpec and no sceneSpec told the learner
+      // twice to read a highlighted number line, then asked a question about
+      // it. They cannot answer that, and cannot tell whether the fault is
+      // theirs or the app's.
+      //
+      // Removes the REFERENCE and keeps the TEACHING — and never removes a
+      // question, so what the turn asked is unchanged. See figureReference.ts
+      // for the two shapes it recognises and why it refuses to empty a turn.
+      try {
+        const { stripUnbackedFigureReferences } = await import('@/lib/teaching/figureReference')
+        const figures = stripUnbackedFigureReferences(cleanText, visualFired)
+        if (figures.stripped) {
+          console.warn('[figure-reference] ' + JSON.stringify({
+            event: 'unbacked-figure-reference-stripped',
+            conceptId: resolvedConceptId ?? null,
+            // The exact fragments, so the log says what was removed rather than
+            // that something was.
+            removed: figures.removed,
+          }))
+          cleanText = figures.text
+        }
+      } catch (err) {
+        // A repair must never break a turn.
+        console.warn('[figure-reference] check skipped:', err)
+      }
+
       // ADR 15: create RRM entry after visual pipeline resolution.
       // Single-writer: this is the ONLY path that writes RRM entries.
       let rrmEntryThisTurn: import('@/lib/teaching/renderedRealityModel').RRMEntry | null = null
