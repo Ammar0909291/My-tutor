@@ -35,6 +35,9 @@
  * writes no assets, no schema and no content.
  */
 
+import { askedAnswerableQuestion } from '../../src/lib/teaching/answerableTurn'
+import { containsOptionList } from '../../src/lib/teaching/gateProbeContract'
+
 const BASE = process.env.MATH_CERT_BASE_URL ?? 'https://my-tutor-flame.vercel.app'
 const EMAIL = process.env.MATH_CERT_EMAIL ?? ''
 const PASSWORD = process.env.MATH_CERT_PASSWORD ?? ''
@@ -52,6 +55,14 @@ const MAX_TURNS = 24
 
 export interface ConceptTarget { conceptId: string; lessonTitle: string; lessonOrder: number; unitTitle: string }
 
+/** The complete offending turn, kept so a failure can be judged rather than guessed at. */
+export interface TurnEvidence {
+  criterion: string
+  phase: string
+  turn: number
+  text: string
+}
+
 export interface CertificationResult {
   conceptId: string
   pass: boolean
@@ -62,6 +73,7 @@ export interface CertificationResult {
   practiceCorrect: number
   verified: boolean
   notes: string[]
+  evidence: TurnEvidence[]
 }
 
 interface TurnPayload {
@@ -144,6 +156,8 @@ export async function certifyConcept(
 ): Promise<CertificationResult> {
   const failed: string[] = []
   const notes: string[] = []
+  /** Full text of every turn that tripped a criterion, so a FAIL is diagnosable. */
+  const evidence: TurnEvidence[] = []
   let turns = 0
   let last: TurnPayload
 
@@ -153,6 +167,7 @@ export async function certifyConcept(
     if (REFERENCES_FIGURE.test(text) && !hasFigure && !failed.includes('D6-missing-figure')) {
       failed.push('D6-missing-figure')
       notes.push(`referenced a figure with none attached: ${(text.match(REFERENCES_FIGURE) ?? [''])[0]}`)
+      evidence.push({ criterion: 'D6-missing-figure', phase: String(p.mastery?.phase ?? ''), turn: turns, text })
     }
     if (hasMalformedLatex(text) && !failed.includes('D6-latex')) {
       failed.push('D6-latex'); notes.push('malformed LaTeX in learner-facing text')
@@ -194,10 +209,27 @@ export async function certifyConcept(
       // D2 — a mastery-phase turn that asks without a structured MCQ cannot be
       // graded however well it is answered. Recorded once; the harness then
       // says "ready" so the lesson can continue and D3 stays measurable.
-      const asksSomething = /\?/.test(last.text ?? '')
+      //
+      // MEASURED FALSE POSITIVE, and the reason this is not a bare "?" test.
+      // The first run flagged math.geom.coordinate-plane on the turn
+      // "...known as Quadrant II. So you're saying the correct choice is option
+      // A — have I got that right?" — a CONFIRMATION, not a mastery question,
+      // and one the runtime deliberately leaves alone. A harness that cries
+      // wolf on a correct turn is worse than no harness, so this reuses the
+      // same judgement the runtime makes (`askedAnswerableQuestion`, which
+      // already excludes confirmation tails) plus the option-list detector that
+      // catches a prose MCQ with no question mark at all.
+      const text = last.text ?? ''
+      const asksSomething = askedAnswerableQuestion(text) || containsOptionList(text)
       if ((phase === 'CHECK' || phase === 'PRACTICE') && asksSomething && !failed.includes('D2-ungradeable')) {
         failed.push('D2-ungradeable')
-        notes.push(`ungradeable question at ${phase}: ${(last.text ?? '').slice(-110).replace(/\n/g, ' ')}`)
+        notes.push(`ungradeable question at ${phase}`)
+        // THE WHOLE TURN, NOT A SLICE. The first run recorded the last 110
+        // characters with newlines flattened, and that was not enough to tell a
+        // genuine prose MCQ from a confirmation tail — the one judgement the
+        // note existed to support. A failure the harness cannot diagnose is a
+        // failure it has only half-reported.
+        evidence.push({ criterion: 'D2-ungradeable', phase: String(phase), turn: turns + 1, text })
       }
       reply = 'ready'
     }
@@ -245,7 +277,7 @@ export async function certifyConcept(
 
   return {
     conceptId: target.conceptId, pass: failed.length === 0, failed,
-    turns, finalPhase, checkCorrect, practiceCorrect, verified, notes,
+    turns, finalPhase, checkCorrect, practiceCorrect, verified, notes, evidence,
   }
 }
 
@@ -311,7 +343,7 @@ async function main() {
       results.push({
         conceptId: t.conceptId, pass: false, failed: ['HARNESS-ERROR'], turns: 0,
         finalPhase: null, checkCorrect: 0, practiceCorrect: 0, verified: false,
-        notes: [String(err)],
+        notes: [String(err)], evidence: [],
       })
       process.stderr.write(`HARNESS-ERROR\n`)
     }
