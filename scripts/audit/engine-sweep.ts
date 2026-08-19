@@ -297,7 +297,29 @@ async function main() {
     readFileSync(path.join(process.cwd(), 'docs', SUBJECT, 'kg', 'graph.json'), 'utf8'),
   ) as { concepts: { id: string; name: string; description: string }[] }
 
-  const topics = graph.concepts.slice(0, LIMIT).map((c, i) => ({ ...c, order: i + 1 }))
+  // ── WHICH TOPICS ──────────────────────────────────────────────────────────
+  //
+  // `slice(0, LIMIT)` could only ever test the FRONT of a subject. Physics has
+  // 238 concepts across 12 domains and the sweep never reached past the first
+  // handful, so every later domain — electromagnetism, modern, particle,
+  // semiconductors — was unswept. The one real defect found by hand this
+  // session was at index 132 (`phys.em.kirchhoffs-laws`), i.e. in the region
+  // the sweep structurally could not see.
+  //
+  // `--spread` samples evenly across the WHOLE graph instead, so a run of N
+  // covers N domains' worth of ground rather than N adjacent concepts.
+  //
+  // `order` is the concept's REAL index in the graph, not its position in the
+  // sample. It was `i + 1` over the slice, which is the same number only while
+  // the slice starts at 0 — a latent trap the moment selection changes, and
+  // lesson-init is given this value as the learner's lesson number.
+  const all = graph.concepts.map((c, i) => ({ ...c, order: i + 1 }))
+  const SPREAD = process.argv.includes('--spread')
+  const OFFSET = Number(arg('offset', '0'))
+  const topics = SPREAD
+    ? Array.from({ length: Math.min(LIMIT, all.length) }, (_, k) =>
+        all[Math.floor((k * all.length) / Math.min(LIMIT, all.length))])
+    : all.slice(OFFSET, OFFSET + LIMIT)
   console.log(`sweeping ${topics.length} ${SUBJECT} topics, concurrency ${CONCURRENCY}\n`)
 
   const results: TopicResult[] = []
