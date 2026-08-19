@@ -112,11 +112,27 @@ const REFERENCES_FIGURE =
  * LaTeX that these renderers PRINT rather than typeset, and malformed
  * delimiters. Observed shipped to a learner: `$a:b\(as\)b:a$`.
  */
-function hasMalformedLatex(text: string): boolean {
-  if (/\$[^$\n]*\\\(/.test(text)) return true            // \( nested inside $…$
-  if (/\\\([^)]*\$/.test(text)) return true              // $ inside \(…\)
-  const dollars = (text.match(/(?<!\\)\$/g) ?? []).length
-  if (dollars % 2 === 1) return true                     // unbalanced $
+export function hasMalformedLatex(text: string): boolean {
+  // A DOLLAR SIGN IN FRONT OF A DIGIT IS MONEY, NOT A DELIMITER.
+  //
+  // Both D6-latex failures in the first full sweep were this, and both were
+  // wrong. Measured on math.arith.order-of-operations:
+  //
+  //   "you buy 3 pens for $2 each, plus a notebook for $5. To find the total
+  //    cost, you write down an expression … : \(3 \times 2 + 5\)."
+  //
+  // Perfectly good LaTeX, and a shopping example — which is the natural way to
+  // teach order of operations. The old rules read "$5 … \(" as a delimiter
+  // nested inside a math span and failed the lesson for it. A subject taught
+  // through money examples would fail this check forever.
+  //
+  // Currency is removed first so the delimiter rules see only real delimiters.
+  const withoutCurrency = text.replace(/\$(?=\d)/g, '')
+
+  if (/\$[^$\n]*\\\(/.test(withoutCurrency)) return true   // \( nested inside $…$
+  if (/\\\([^)]*\$/.test(withoutCurrency)) return true     // $ inside \(…\)
+  const dollars = (withoutCurrency.match(/(?<!\\)\$/g) ?? []).length
+  if (dollars % 2 === 1) return true                    // unbalanced $
   return false
 }
 
