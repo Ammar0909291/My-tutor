@@ -67,10 +67,14 @@ import {
   MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS,
   MATHEMATICS_QUANTIFIER_CRAFT_PROBES,
 } from '@/lib/teaching/assets/mathematicsQuantifierCraftAssets'
+import {
+  MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS,
+  MATHEMATICS_FOUNDATIONS_CLOSE_PROBES,
+} from '@/lib/teaching/assets/mathematicsFoundationsCloseAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -219,7 +223,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -341,6 +345,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS,
     ...MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS,
     ...MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS,
+    ...MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -357,6 +362,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES,
     ...MATHEMATICS_PROOF_MACHINERY_PROBES,
     ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES,
+    ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1099,6 +1105,89 @@ describe('mathematics variables, quantifiers, and the craft of reading and writi
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_QUANTIFIER_CRAFT_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 15 — the foundations proper.
+ *
+ * Two results in this batch look wrong to a learner and are not: an
+ * infinite set matching a PROPER SUBSET of itself, and the rationals
+ * being no larger than the integers despite being dense. Both registers
+ * rate these high-severity. An explanation that states the result
+ * without the pairing that produces it has asked for belief rather than
+ * given a reason, so the checks demand the constructions appear.
+ */
+describe('mathematics foundations — sets, structure and size', () => {
+  const NEW = [
+    'math.found.set-theory', 'math.found.axiomatic-system',
+    'math.found.set-theory-axiomatic', 'math.found.function-set-theoretic',
+    'math.found.equivalence-relation', 'math.found.partial-order',
+    'math.found.cardinality', 'math.found.countable-set',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_FOUNDATIONS_CLOSE_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the counter-intuitive size results come with their constructions', () => {
+    const card = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.found.cardinality')!
+    const ctbl = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.found.countable-set')!
+    // the pairing, not just the claim
+    expect(card.content).toMatch(/match n with 2n/i)
+    expect(card.content).toMatch(/PROPER SUBSET/)
+    // the enumeration, not just "it is countable"
+    expect(ctbl.content).toMatch(/sweep the diagonals/i)
+    expect(ctbl.content).toMatch(/zigzag/i)
+  })
+
+  it('antisymmetric is corrected against the "anti" prefix reading', () => {
+    const po = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.found.partial-order')!
+    expect(po.content).toMatch(/does not mean "never symmetric"/i)
+    expect(po.content).toMatch(/must be equal|forces a = b/i)
+  })
+
+  it('an axiomatic system is axioms PLUS logic, with the three properties kept apart', () => {
+    const a = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.found.axiomatic-system')!
+    expect(a.content).toMatch(/not just a list of axioms/i)
+    for (const w of [/CONSISTENT/, /COMPLETE/, /INDEPENDENT/]) expect(a.content).toMatch(w)
+  })
+
+  it('ZFC names the paradox, the restriction, and the incompleteness', () => {
+    const z = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.found.set-theory-axiomatic')!
+    expect(z.content).toMatch(/Russell/)
+    expect(z.content).toMatch(/SEPARATION/)
+    expect(z.content).toMatch(/not complete/i)
+  })
+
+  it('the function definition insists on totality, not only single-valuedness', () => {
+    const f = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.found.function-set-theoretic')!
+    expect(f.content).toMatch(/totality/i)
+    expect(f.content).toMatch(/RANGE/)
+  })
+
+  it('equivalence relations require all three properties and correspond both ways', () => {
+    const e = MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS.find((x) => x.conceptId === 'math.found.equivalence-relation')!
+    expect(e.content).toMatch(/all THREE properties/i)
+    expect(e.content).toMatch(/runs both ways/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_FOUNDATIONS_CLOSE_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_FOUNDATIONS_CLOSE_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
