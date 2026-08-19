@@ -99,10 +99,14 @@ import {
   MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS,
   MATHEMATICS_TRIANGLE_TRANSFORM_PROBES,
 } from '@/lib/teaching/assets/mathematicsTriangleTransformAssets'
+import {
+  MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS,
+  MATHEMATICS_DIVISIBILITY_MODULAR_PROBES,
+} from '@/lib/teaching/assets/mathematicsDivisibilityModularAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -251,7 +255,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -381,6 +385,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_COORDINATE_EXPLANATIONS,
     ...MATHEMATICS_NUMBER_THEORY_EXPLANATIONS,
     ...MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS,
+    ...MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -405,6 +410,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_COORDINATE_PROBES,
     ...MATHEMATICS_NUMBER_THEORY_PROBES,
     ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES,
+    ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1820,6 +1826,98 @@ describe('mathematics angle spine, distance and transformations', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_TRIANGLE_TRANSFORM_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 23 — the divisibility spine and the arithmetic of remainders.
+ *
+ * The division algorithm sits at a fork: its uniqueness is what makes
+ * the Euclidean algorithm TERMINATE and what makes "a mod n" a single
+ * well-defined value. Two registers record it being read as a
+ * restatement of division, which hides both. The checks below re-derive
+ * the worked numbers rather than trusting the prose.
+ */
+describe('mathematics divisibility and modular arithmetic', () => {
+  const NEW = [
+    'math.nt.divisibility', 'math.nt.division-algorithm',
+    'math.nt.prime-factorization', 'math.nt.euclidean-algorithm',
+    'math.nt.gcd', 'math.nt.lcm',
+    'math.nt.congruence', 'math.nt.modular-arithmetic',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_DIVISIBILITY_MODULAR_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the negative-dividend case is arithmetically right', () => {
+    // -17 = 5*(-4) + 3, with 0 <= 3 < 5. The truncating pair (-3, -2) violates r >= 0.
+    expect(5 * -4 + 3).toBe(-17)
+    expect(3).toBeGreaterThanOrEqual(0)
+    expect(3).toBeLessThan(5)
+    const d = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.division-algorithm')!
+    expect(d.content).toMatch(/q = −4, r = 3/)
+    expect(d.content).toMatch(/NON-NEGATIVE/)
+  })
+
+  it('the Euclidean trace and the gcd/lcm pair are right', () => {
+    expect(48 % 18).toBe(12)
+    expect(18 % 12).toBe(6)
+    expect(12 % 6).toBe(0)
+    // gcd 6, lcm 36, and the product relation
+    expect((12 * 18) / 6).toBe(36)
+    const l = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.lcm')!
+    expect(l.content).toMatch(/216\/6 = 36/)
+  })
+
+  it('gcd and lcm carry OPPOSITE size checks, and both are stated', () => {
+    const g = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.gcd')!
+    const l = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.lcm')!
+    expect(g.content).toMatch(/never exceed the smaller input/i)
+    expect(l.content).toMatch(/never SMALLER than the larger/i)
+    // and the exponent rule that gets swapped
+    expect(g.content).toMatch(/LOWER exponent/)
+    expect(l.content).toMatch(/HIGHER exponent/)
+  })
+
+  it('the modular claims hold: negative reduction and the non-invertible residue', () => {
+    expect(((3 - 5) % 7 + 7) % 7).toBe(5)
+    const inverses = (b: number, n: number) => [...Array(n).keys()].filter((x) => (b * x) % n === 1)
+    expect(inverses(5, 12)).toEqual([5])
+    expect(inverses(6, 12)).toEqual([])
+    const m = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.modular-arithmetic')!
+    expect(m.content).toMatch(/6 has none/)
+    expect(m.content).toMatch(/only when n is PRIME/)
+  })
+
+  it('divisibility is taught as a claim, and not symmetric', () => {
+    const d = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.divisibility')!
+    expect(d.content).toMatch(/yes-or-no\s+CLAIM/)
+    expect(d.content).toMatch(/not symmetric/i)
+  })
+
+  it('congruence is separated from equality and pinned to exactly n classes', () => {
+    const c = MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.congruence')!
+    expect(c.content).toMatch(/Congruent is not equal/)
+    expect(c.content).toMatch(/always n, never more or fewer/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_DIVISIBILITY_MODULAR_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_DIVISIBILITY_MODULAR_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
