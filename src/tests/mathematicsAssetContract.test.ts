@@ -31,10 +31,14 @@ import {
   MATHEMATICS_FRACTION_EXPLANATIONS,
   MATHEMATICS_FRACTION_PROBES,
 } from '@/lib/teaching/assets/mathematicsFractionDecimalAssets'
+import {
+  MATHEMATICS_PROPORTION_EXPLANATIONS,
+  MATHEMATICS_PROPORTION_PROBES,
+} from '@/lib/teaching/assets/mathematicsProportionProofAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -183,7 +187,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -296,6 +300,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_BATCH3_EXPLANATIONS,
     ...MATHEMATICS_GEOMETRY_EXPLANATIONS,
     ...MATHEMATICS_FRACTION_EXPLANATIONS,
+    ...MATHEMATICS_PROPORTION_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -303,6 +308,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_BATCH3_PROBES,
     ...MATHEMATICS_GEOMETRY_PROBES,
     ...MATHEMATICS_FRACTION_PROBES,
+    ...MATHEMATICS_PROPORTION_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -402,5 +408,66 @@ describe('mathematics fractions and decimals — newly serving concepts', () => 
         if (!c.isCorrect) expect(c.misconceptionId, `${p.stem} -> "${c.text}"`).toBeTruthy()
       }
     }
+  })
+})
+
+/**
+ * Batch 6 — proportional reasoning, and the words results are filed under.
+ *
+ * The second cluster is the reason this test exists in the shape it does:
+ * theorem, lemma, corollary and conjecture read like a difficulty ranking and
+ * are not one. Three of the four are proved; exactly one is not. An explanation
+ * that leaves that distinction implicit has taught the ranking, so the check
+ * below is on the DISTINCTION, not on wording.
+ */
+describe('mathematics proportion and the vocabulary of results', () => {
+  const NEW = [
+    'math.arith.proportion', 'math.arith.unit-rate',
+    'math.arith.mental-multiplication', 'math.arith.number-base',
+    'math.found.theorem', 'math.found.lemma',
+    'math.found.corollary', 'math.found.conjecture',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_PROPORTION_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_PROPORTION_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('each result-word explanation says outright whether the thing is proved', () => {
+    const RESULT_WORDS = ['math.found.theorem', 'math.found.lemma', 'math.found.corollary', 'math.found.conjecture']
+    for (const id of RESULT_WORDS) {
+      const e = MATHEMATICS_PROPORTION_EXPLANATIONS.find((x) => x.conceptId === id)
+      expect(e, id).toBeDefined()
+      expect(e!.content, id).toMatch(/\bproved\b|\bNOT proved\b/)
+    }
+  })
+
+  it('conjecture is the one taught as unproved, and says so explicitly', () => {
+    const e = MATHEMATICS_PROPORTION_EXPLANATIONS.find((x) => x.conceptId === 'math.found.conjecture')!
+    expect(e.content).toMatch(/NOT proved/)
+  })
+
+  it('cross-multiplication is derived, never asserted', () => {
+    // The misconception this batch targets is that cross-multiplying is a rule
+    // of its own. The explanation must show where it comes from.
+    const e = MATHEMATICS_PROPORTION_EXPLANATIONS.find((x) => x.conceptId === 'math.arith.proportion')!
+    expect(e.content).toMatch(/multiplying both sides/i)
+  })
+
+  it('every probe is gradeable and every distractor names its misconception', () => {
+    for (const p of MATHEMATICS_PROPORTION_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_PROPORTION_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
