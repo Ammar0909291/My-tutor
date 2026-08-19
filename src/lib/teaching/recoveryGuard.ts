@@ -285,12 +285,67 @@ function isShoutingCaps(text: string): boolean {
  * makes it impossible for the two to disagree about what an acknowledgement
  * is, which is the property whose absence produced this bug.
  */
+/**
+ * A REQUEST FOR THE NEXT QUESTION IS NOT AN ANSWER, SO REPEATING ONE IS NOT
+ * REPEATING AN ANSWER.
+ *
+ * ── THE DEFECT, TRACED END TO END IN PRODUCTION ─────────────────────────────
+ * phys.mech.viscosity, captured turn by turn on the real account. The learner
+ * asked for a question, was taught, and asked again — the ordinary rhythm of a
+ * lesson. On the SECOND identical request:
+ *
+ *   detectFailureState('ok give me the next question',
+ *                      'ok give me the next question')  ->  'frustrated'
+ *
+ * which the route turns into `recoveryFired`, which
+ * `advanceConversationState` reads as `failed`:
+ *   · consecutiveFailures + 1
+ *   · phaseDown()
+ *   · the memory path suppressed ('Recovery mode')
+ *
+ * MAX_CONSECUTIVE_FAILURES is 3, so the third such turn exhausts the concept
+ * budget, `isConceptClosed` returns true, and the lesson FINALISES. Measured:
+ * the viscosity lesson ended 68 seconds in, on turn 4, with checkCorrect 0 and
+ * practiceCorrect 0 — on a turn where the learner had just answered correctly
+ * — and every later turn served the completion text forever
+ * ("what's one thing you notice or find surprising…", provider=memory,
+ * llmCallCount=0). The learner is shown the door and then talked at in a loop.
+ *
+ * This is the mechanism behind every "frozen at DEMONSTRATE with 0/0" row the
+ * engine sweep reported: the ladder was never stuck, the LESSON WAS OVER.
+ *
+ * ── THE FIX IS THIS FUNCTION'S OWN REASONING, APPLIED ONCE MORE ─────────────
+ * `isRepeatedAnswer` already excludes acknowledgements, and the classifier
+ * above already excludes recovery utterances, both on the ground that they are
+ * not ANSWERS. A request to be given a question is not an answer either. It is
+ * the most ordinary thing a willing learner types, and typing it twice means
+ * they are still willing — the opposite of what 'frustrated' asserts.
+ *
+ * Deliberately narrow: it matches a request for a QUESTION/PROBLEM/EXAMPLE, or
+ * a bare "next"/"carry on" form. It does NOT match a repeated substantive
+ * answer, which still falls through to 'frustrated' exactly as before, and it
+ * does not match a request to be re-explained — `isRephraseRequest` owns that,
+ * and repeating it IS a signal worth acting on.
+ */
+const NEXT_ITEM_REQUEST_RE =
+  /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:can\s+you\s+|could\s+you\s+|please\s+|lets?\s+|i(?:'|’)?d\s+like\s+|i\s+want\s+)*(?:give\s+me|gimme|ask\s+me|show\s+me|do|try|have|get)?\s*(?:me\s+)?(?:the\s+|a\s+|an\s+|one\s+|another\s+|some\s+|more\s+|next\s+|other\s+)*(?:more\s+|next\s+|new\s+|practice\s+|practise\s+|another\s+)*(?:question|questions|problem|problems|example|examples|exercise|exercises|one)\b[\s\S]{0,40}$/i
+
+/** A bare "next" / "keep going" style nudge, with no content of its own. */
+const BARE_NEXT_RE = /^(?:ok(?:ay)?[\s,.]*)?(?:next|another|more|again|continue|carry\s+on|go\s+on|keep\s+going)\s*(?:please|one|question)?[\s.!?]*$/i
+
+function isNextItemRequest(text: string): boolean {
+  const t = text.trim()
+  if (t.length > MILD_MAX_LENGTH) return false
+  return NEXT_ITEM_REQUEST_RE.test(t) || BARE_NEXT_RE.test(t)
+}
+
 function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {
   if (!priorUserMessage) return false
   const normalize = (s: string) => s.trim().toLowerCase().replace(/['’]/g, '').replace(/[.,!?…\s]+/g, ' ').trim()
   const a = normalize(message)
   const b = normalize(priorUserMessage)
   if (a.length < 4 || a !== b) return false
+  if (isNextItemRequest(message)) return false
   return !isLowSignalAcknowledgement(message)
 }
 
