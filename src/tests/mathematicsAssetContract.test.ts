@@ -83,10 +83,14 @@ import {
   MATHEMATICS_ARITH_CLOSE_EXPLANATIONS,
   MATHEMATICS_ARITH_CLOSE_PROBES,
 } from '@/lib/teaching/assets/mathematicsArithCloseAssets'
+import {
+  MATHEMATICS_MEASUREMENT_EXPLANATIONS,
+  MATHEMATICS_MEASUREMENT_PROBES,
+} from '@/lib/teaching/assets/mathematicsMeasurementAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -235,7 +239,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -361,6 +365,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS,
     ...MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS,
     ...MATHEMATICS_ARITH_CLOSE_EXPLANATIONS,
+    ...MATHEMATICS_MEASUREMENT_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -381,6 +386,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_NUMBER_SYSTEMS_PROBES,
     ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES,
     ...MATHEMATICS_ARITH_CLOSE_PROBES,
+    ...MATHEMATICS_MEASUREMENT_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1450,6 +1456,86 @@ describe('mathematics — closing arithmetic, and two from number theory', () =>
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_ARITH_CLOSE_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 19 — measurement, and the first sameness criterion.
+ *
+ * Area/perimeter conflation appears in FOUR of these registers
+ * independently, so it is checked with the concrete counterexample
+ * rather than a warning: 1x8 and 3x6 share a perimeter of 18 and have
+ * areas 8 and 18. The arithmetic is asserted here so a later edit
+ * cannot quietly break the example.
+ */
+describe('mathematics measurement and congruence', () => {
+  const NEW = [
+    'math.geom.angle-pairs', 'math.geom.length', 'math.geom.perimeter',
+    'math.geom.area', 'math.geom.area-triangle', 'math.geom.area-polygon',
+    'math.geom.circle-parts', 'math.geom.congruent-triangles',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_MEASUREMENT_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_MEASUREMENT_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the perimeter counterexample is arithmetically true', () => {
+    // 1x8 and 3x6: same perimeter, very different areas.
+    expect(2 * (1 + 8)).toBe(18)
+    expect(2 * (3 + 6)).toBe(18)
+    expect(1 * 8).toBe(8)
+    expect(3 * 6).toBe(18)
+    const p = MATHEMATICS_MEASUREMENT_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.perimeter')!
+    expect(p.content).toMatch(/BOTH have perimeter 18/)
+    expect(p.content).toMatch(/not a rule with exceptions/i)
+  })
+
+  it('area is taught as counting squares, and scaling as the square', () => {
+    const a = MATHEMATICS_MEASUREMENT_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.area')!
+    expect(a.content).toMatch(/unit squares fit inside/i)
+    expect(a.content).toMatch(/FOUR times/)
+  })
+
+  it('the polygon formulas are derived from the rectangle, not listed', () => {
+    const p = MATHEMATICS_MEASUREMENT_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.area-polygon')!
+    expect(p.content).toMatch(/comes from the rectangle by cutting and moving/i)
+    expect(p.content).toMatch(/NO half/)
+  })
+
+  it('the triangle height is defined as perpendicular, and Heron as height-free', () => {
+    const t = MATHEMATICS_MEASUREMENT_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.area-triangle')!
+    expect(t.content).toMatch(/perpendicular distance/i)
+    expect(t.content).toMatch(/needs no height at all/i)
+  })
+
+  it('both congruence impostors are named and distinguished from each other', () => {
+    const c = MATHEMATICS_MEASUREMENT_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.congruent-triangles')!
+    expect(c.content).toMatch(/AAA/)
+    expect(c.content).toMatch(/SSA/)
+    expect(c.content).toMatch(/ambiguous case/i)
+  })
+
+  it('sector and segment are separated by the reaches-the-centre test', () => {
+    const c = MATHEMATICS_MEASUREMENT_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.circle-parts')!
+    expect(c.content).toMatch(/sector reaches the centre and the segment does not/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_MEASUREMENT_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_MEASUREMENT_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
