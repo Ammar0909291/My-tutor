@@ -58,7 +58,41 @@ function arg(name: string, fallback: string): string {
 
 const SUBJECT = arg('subject', 'physics')
 const LIMIT = Number(arg('limit', '8'))
-const CONCURRENCY = Number(arg('concurrency', '6'))
+
+/**
+ * CONCURRENCY IS 1, AND THAT IS NOT A PERFORMANCE CHOICE.
+ *
+ * A LEARN SESSION BELONGS TO A USER, NOT TO A TOPIC. This sweep signs in as one
+ * account, and before each topic it ends every ACTIVE session for the subject
+ * "so state cannot leak in" — which, run in parallel, means each topic ends its
+ * siblings' sessions. `/api/sessions` then resumes an existing ACTIVE session
+ * rather than always minting a fresh one, so two topics can end up driving the
+ * same session.
+ *
+ * MEASURED, and it fabricated a serious-looking production defect. A run at
+ * concurrency 2 reported:
+ *
+ *   E4  phys.wave.wave-speed: served asset … is for phys.em.coulombs-law
+ *
+ * i.e. "a learner on wave speed was taught Coulomb's law". The database says
+ * otherwise: lesson_attempts shows `Wave Speed` starting 06:37:50 and
+ * `Coulomb's Law` starting 06:38:07 — overlapping — and BOTH sessions alive in
+ * that window carry `currentConceptNodeId = phys.em.coulombs-law`. The asset
+ * itself is correctly tagged for Coulomb's law. Nothing was wrong in
+ * production; the harness had two topics sharing one session.
+ *
+ * That is the SECOND false finding this instrument produced in one session (the
+ * first was a bot-manufactured DEMONSTRATE freeze), and a harness that invents
+ * "the wrong concept was served" is worse than a slow one — it sends people to
+ * fix code that is correct.
+ *
+ * Real isolation needs one account per worker. Until this has that, topics run
+ * one at a time. `--unsafe-concurrency N` exists for a throwaway account where
+ * contamination does not matter; every finding from such a run must be treated
+ * as unverified.
+ */
+const UNSAFE = Number(arg('unsafe-concurrency', '0'))
+const CONCURRENCY = UNSAFE > 1 ? UNSAFE : 1
 
 // ── session-scoped cookie jar ────────────────────────────────────────────────
 //
@@ -80,14 +114,45 @@ class Jar {
   }
 }
 
+/**
+ * RETRY THROUGH A DEPLOY, BECAUSE DEPLOYS HAPPEN MID-SWEEP.
+ *
+ * A full run takes minutes and this repo deploys on every push. MEASURED: one
+ * physics run reported all 12 topics as ERROR — five `chat 504`, six
+ * `no session id` — and the cause was six production deployments landing
+ * inside the run window from a concurrent session. Nothing was wrong with the
+ * engine, the sweep, or the topics; the instrument simply had no tolerance for
+ * its own environment and voided a ten-minute run.
+ *
+ * Only transport-level failures and 5xx are retried. A 4xx is a real answer
+ * and is returned untouched — retrying it would turn a genuine rejection into
+ * a timeout and hide it.
+ */
 async function req(jar: Jar, url: string, init: RequestInit = {}): Promise<Response> {
-  const res = await fetch(url, {
-    ...init,
-    headers: { ...(init.headers ?? {}), cookie: jar.header() },
-    redirect: 'manual',
-  })
-  jar.absorb(res)
-  return res
+  const delays = [1500, 4000, 9000]
+  let lastErr: unknown = null
+  for (let attempt = 0; attempt <= delays.length; attempt++) {
+    try {
+      const res = await fetch(url, {
+        ...init,
+        headers: { ...(init.headers ?? {}), cookie: jar.header() },
+        redirect: 'manual',
+      })
+      if (res.status >= 500 && attempt < delays.length) {
+        await new Promise((r) => setTimeout(r, delays[attempt]))
+        continue
+      }
+      jar.absorb(res)
+      return res
+    } catch (e) {
+      lastErr = e
+      if (attempt < delays.length) {
+        await new Promise((r) => setTimeout(r, delays[attempt]))
+        continue
+      }
+    }
+  }
+  throw lastErr ?? new Error(`unreachable after ${delays.length + 1} attempts: ${url}`)
 }
 
 async function signIn(jar: Jar): Promise<void> {
@@ -266,12 +331,48 @@ async function sweepTopic(concept: { id: string; name: string; description: stri
     // freeze the ladder for the rest of the session.
     await say(PRESENTATION_PROBE, true)
 
-    // Then drive to the gate by answering every MCQ correctly.
+    // ── DRIVE TO THE GATE ─────────────────────────────────────────────────
+    //
+    // Two changes after this harness produced a badly misleading run: 12
+    // physics topics, 2 verified, six apparently frozen at DEMONSTRATE with
+    // 0/0 — which traced to a real-looking gate defect. Hand-driving one of
+    // the "frozen" topics as a learner moved it OBSERVE -> DEMONSTRATE ->
+    // GUIDE in four turns. The freeze was the BOT, not the engine.
+    //
+    // 1. WHEN THERE IS NO MCQ, ENGAGE INSTEAD OF DEMANDING. The loop used to
+    //    reply "ok give me a question to practise" on every question-less
+    //    turn. That is not an answer, so the tutor kept teaching and the bot
+    //    kept demanding — a standoff no learner produces. Alternating a short
+    //    engaged reply with the request is still not a realistic learner, but
+    //    it stops manufacturing a deadlock and calling it an engine defect.
+    //
+    // 2. TYPE THE NUMBER, NOT ONLY THE OPTION. Sending the option verbatim is
+    //    the TAPPED path. Typing the bare value is what a person does, and it
+    //    was completely ungraded until the number-word/digit fix — a defect
+    //    this harness ran straight past for exactly that reason. Alternating
+    //    the two exercises both, so a regression in either is visible.
+    const ENGAGE = [
+      'yes, i think so — it depends on how big each quantity is',
+      'ok, that makes sense so far',
+      'i think it changes when the other quantity changes',
+    ]
+    /** The correct option's bare number, when it has exactly one. */
+    const typedValue = (opt: string): string | null => {
+      const nums = opt.match(/\d+(?:\.\d+)?/g)
+      return nums && nums.length === 1 ? nums[0] : null
+    }
     let last = await say('ok give me a question to check i understand')
-    for (let i = 0; i < 10 && !result.reachedVerified; i++) {
-      const answer = last.mcq
-        ? last.mcq.options[last.mcq.correctIndex]
-        : 'ok give me a question to practise'
+    let answered = 0
+    for (let i = 0; i < 12 && !result.reachedVerified; i++) {
+      let answer: string
+      if (last.mcq) {
+        const correct = last.mcq.options[last.mcq.correctIndex]
+        const asNumber = answered % 2 === 1 ? typedValue(correct) : null
+        answer = asNumber ?? correct
+        answered++
+      } else {
+        answer = i % 2 === 0 ? ENGAGE[i % ENGAGE.length] : 'ok give me a question to practise'
+      }
       last = await say(answer)
     }
 
@@ -279,6 +380,27 @@ async function sweepTopic(concept: { id: string; name: string; description: stri
     const phases = new Set(result.ladder.map((l) => l.split('(')[0]))
     if (phases.size === 1) {
       result.findings.push({ code: 'E1', detail: `ladder never left ${[...phases][0]}` })
+    }
+
+    // E7 — THE SHAPE E1 WAS TOO WEAK TO SEE.
+    //
+    // E1 only fires when the ladder never leaves its FIRST phase. Six topics
+    // in the misleading run left OBSERVE, sat at DEMONSTRATE for the rest of
+    // the session with zero graded answers, and were reported as "no
+    // findings" — the dominant failure mode, invisible to every check.
+    //
+    // A drive that answers every question it is offered and still ends below
+    // CHECK with nothing graded means no gradeable question was ever put in
+    // front of it. That is worth naming whether the cause is the engine or
+    // the corpus.
+    const lastRung = result.ladder[result.ladder.length - 1] ?? ''
+    const belowCheck = /^(OBSERVE|DEMONSTRATE|GUIDE)\(/.test(lastRung)
+    const nothingGraded = result.ladder.every((l) => l.includes('(0/0)'))
+    if (belowCheck && nothingGraded) {
+      result.findings.push({
+        code: 'E7',
+        detail: `ended at ${lastRung} with no graded answer in ${result.ladder.length} turns — no gradeable question was ever offered`,
+      })
     }
   } catch (e) {
     result.error = String((e as Error).message)
@@ -321,6 +443,13 @@ async function main() {
         all[Math.floor((k * all.length) / Math.min(LIMIT, all.length))])
     : all.slice(OFFSET, OFFSET + LIMIT)
   console.log(`sweeping ${topics.length} ${SUBJECT} topics, concurrency ${CONCURRENCY}\n`)
+  if (CONCURRENCY > 1) {
+    console.log(
+      '  UNSAFE CONCURRENCY — a session belongs to the ACCOUNT, not the topic, so\n'
+      + '  topics will share and end each other\'s sessions. Findings from this run are\n'
+      + '  NOT trustworthy: a previous such run invented a cross-concept serve.\n',
+    )
+  }
 
   const results: TopicResult[] = []
   const queue = [...topics]
