@@ -51,10 +51,14 @@ import {
   MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS,
   MATHEMATICS_RELATIONS_NUMBERS_PROBES,
 } from '@/lib/teaching/assets/mathematicsRelationsNumbersAssets'
+import {
+  MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS,
+  MATHEMATICS_ORDERS_PROOFS_PROBES,
+} from '@/lib/teaching/assets/mathematicsOrdersProofsAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -203,7 +207,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -321,6 +325,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_POWERS_VARIATION_EXPLANATIONS,
     ...MATHEMATICS_SET_OPERATIONS_EXPLANATIONS,
     ...MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS,
+    ...MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -333,6 +338,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_POWERS_VARIATION_PROBES,
     ...MATHEMATICS_SET_OPERATIONS_PROBES,
     ...MATHEMATICS_RELATIONS_NUMBERS_PROBES,
+    ...MATHEMATICS_ORDERS_PROOFS_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -759,6 +765,76 @@ describe('mathematics relations, derived sets, number kinds and case proofs', ()
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_RELATIONS_NUMBERS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 11 — relation properties, the operations survey, and three words
+ * that promise more than they deliver.
+ *
+ * Vacuous satisfaction reads as a trick to every learner who meets it, and
+ * it appears in both symmetric and transitive. An explanation that ducks it
+ * leaves the learner to conclude the definition is being gamed, so the
+ * check is that each one addresses the empty case rather than only the
+ * populated one.
+ */
+describe('mathematics relation properties, operations survey and overselling names', () => {
+  const NEW = [
+    'math.found.symmetric-relation', 'math.found.transitive-relation',
+    'math.found.total-order', 'math.found.union', 'math.found.set-operations',
+    'math.found.uncountable-set', 'math.found.strong-induction',
+    'math.found.uniqueness-proof',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_ORDERS_PROOFS_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('both relation properties address the case with nothing to check', () => {
+    for (const id of ['math.found.symmetric-relation', 'math.found.transitive-relation']) {
+      const e = MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS.find((x) => x.conceptId === id)!
+      expect(e.content, id).toMatch(/empty relation|no pair that could fail|nothing that could fail/i)
+    }
+  })
+
+  it('strong induction is stated NOT to be more powerful', () => {
+    const e = MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS.find((x) => x.conceptId === 'math.found.strong-induction')!
+    expect(e.content).toMatch(/not more powerful/i)
+  })
+
+  it('uniqueness is stated NOT to give existence', () => {
+    const e = MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS.find((x) => x.conceptId === 'math.found.uniqueness-proof')!
+    expect(e.content).toMatch(/separate claims|separate work|separate halves/i)
+    expect(e.content).toMatch(/at most one/i)
+  })
+
+  it('uncountable is separated from "very large"', () => {
+    const e = MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS.find((x) => x.conceptId === 'math.found.uncountable-set')!
+    expect(e.content).toMatch(/rationals/i)
+    expect(e.content).toMatch(/countable/i)
+  })
+
+  it('union gives the inclusion-exclusion correction rather than only warning about it', () => {
+    const e = MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS.find((x) => x.conceptId === 'math.found.union')!
+    expect(e.content).toMatch(/\|A ∩ B\|/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_ORDERS_PROOFS_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_ORDERS_PROOFS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
