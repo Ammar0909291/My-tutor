@@ -1,0 +1,173 @@
+{
+  "generatedAt": "2026-08-19T16:25:15.747214+00:00",
+  "baseUrl": "https://my-tutor-flame.vercel.app",
+  "supersedes": "docs/architecture/MATHEMATICS_CERTIFICATION_2026-08-19.json",
+  "account": "claudeTest <explorewithpappu@gmail.com> \u2014 the engineering account was never used",
+  "scope": "The nine concepts that failed the first full sweep, re-run after the fixes that landed since. NOT a full-corpus sweep: see blocker below.",
+  "total": 9,
+  "passed": 5,
+  "teachingFailures": 0,
+  "unmeasured": 4,
+  "resolvedSinceFirstSweep": {
+    "D2-ungradeable": [
+      "math.abst.group-theory",
+      "math.alg.expression",
+      "math.arith.fraction-multiplication",
+      "math.arith.ratios"
+    ],
+    "D6-latex": [
+      "math.arith.order-of-operations"
+    ],
+    "note": "All five now reach TRANSFER with checkCorrect 1 / practiceCorrect 2 and the lesson closes. The two D6-latex verdicts in the first sweep were FALSE \u2014 the check read a currency $ as a maths delimiter; that was corrected before this run."
+  },
+  "blocker": {
+    "what": "AI provider rate limit (HTTP 429, AIRateLimitError) on gemini-3.5-flash-lite",
+    "evidence": [
+      "[ai/attempt] provider=gemini http_status=429 error_name=AIRateLimitError \u2014 139 lines in 20 minutes",
+      "[ai/router] all providers failed: Rate limit exceeded on gemini \u2014 40 lines",
+      "[learn/chat] all providers down \u2014 serving degraded template (RS P-3)"
+    ],
+    "persistence": "Not recovered after ~20 minutes on single-lesson traffic.",
+    "consequence": "A full 257-concept sweep needs on the order of 1,800 provider calls and cannot run against this quota. Certification at corpus scale is blocked on provider capacity, not on the teaching engine.",
+    "ownerDecision": "gemini-only mode turns a provider rate limit into a total teaching outage, because there is nothing to fail over to. The failover chain is intact and one env var away (AI_PROVIDER_MODE=failover). Reported, not changed \u2014 gemini-only is a standing owner instruction."
+  },
+  "results": [
+    {
+      "conceptId": "math.abst.group-theory",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": [],
+      "outcome": "pass"
+    },
+    {
+      "conceptId": "math.alg.expression",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": [],
+      "outcome": "pass"
+    },
+    {
+      "conceptId": "math.arith.fraction-multiplication",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": [],
+      "outcome": "pass"
+    },
+    {
+      "conceptId": "math.arith.order-of-operations",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": [],
+      "outcome": "pass"
+    },
+    {
+      "conceptId": "math.arith.ratios",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": [],
+      "outcome": "pass"
+    },
+    {
+      "conceptId": "math.found.set",
+      "pass": false,
+      "failed": [
+        "INFRASTRUCTURE-degraded"
+      ],
+      "turns": 24,
+      "finalPhase": "OBSERVE",
+      "checkCorrect": 0,
+      "practiceCorrect": 0,
+      "verified": false,
+      "notes": [
+        "did not finish within 24 turns"
+      ],
+      "evidence": [],
+      "outcome": "unmeasured",
+      "unmeasuredReason": "AI provider rate limit \u2014 every turn served the degraded template, so the teaching engine was never reached. Directly confirmed for math.found.set by re-running it with turn capture: the final turn is the degraded template verbatim. The other three carry an identical signature (24 turns, phase OBSERVE, checkCorrect 0, practiceCorrect 0) inside the same provider-outage window in the production logs."
+    },
+    {
+      "conceptId": "math.func.function-concept",
+      "pass": false,
+      "failed": [
+        "INFRASTRUCTURE-degraded"
+      ],
+      "turns": 24,
+      "finalPhase": "OBSERVE",
+      "checkCorrect": 0,
+      "practiceCorrect": 0,
+      "verified": false,
+      "notes": [
+        "did not finish within 24 turns"
+      ],
+      "evidence": [],
+      "outcome": "unmeasured",
+      "unmeasuredReason": "AI provider rate limit \u2014 every turn served the degraded template, so the teaching engine was never reached. Directly confirmed for math.found.set by re-running it with turn capture: the final turn is the degraded template verbatim. The other three carry an identical signature (24 turns, phase OBSERVE, checkCorrect 0, practiceCorrect 0) inside the same provider-outage window in the production logs."
+    },
+    {
+      "conceptId": "math.geom.slope",
+      "pass": false,
+      "failed": [
+        "INFRASTRUCTURE-degraded"
+      ],
+      "turns": 24,
+      "finalPhase": "OBSERVE",
+      "checkCorrect": 0,
+      "practiceCorrect": 0,
+      "verified": false,
+      "notes": [
+        "did not finish within 24 turns"
+      ],
+      "evidence": [],
+      "outcome": "unmeasured",
+      "unmeasuredReason": "AI provider rate limit \u2014 every turn served the degraded template, so the teaching engine was never reached. Directly confirmed for math.found.set by re-running it with turn capture: the final turn is the degraded template verbatim. The other three carry an identical signature (24 turns, phase OBSERVE, checkCorrect 0, practiceCorrect 0) inside the same provider-outage window in the production logs."
+    },
+    {
+      "conceptId": "math.prob.expected-value",
+      "pass": false,
+      "failed": [
+        "INFRASTRUCTURE-degraded"
+      ],
+      "turns": 24,
+      "finalPhase": "OBSERVE",
+      "checkCorrect": 0,
+      "practiceCorrect": 0,
+      "verified": false,
+      "notes": [
+        "did not finish within 24 turns"
+      ],
+      "evidence": [],
+      "outcome": "unmeasured",
+      "unmeasuredReason": "AI provider rate limit \u2014 every turn served the degraded template, so the teaching engine was never reached. Directly confirmed for math.found.set by re-running it with turn capture: the final turn is the degraded template verbatim. The other three carry an identical signature (24 turns, phase OBSERVE, checkCorrect 0, practiceCorrect 0) inside the same provider-outage window in the production logs."
+    }
+  ]
+}
