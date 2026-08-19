@@ -3002,8 +3002,32 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
   // Curriculum derived
   const currentLessonData = resolveActiveLesson(curriculumLessons, curriculumProgress)
-  const nextLessonData = findNextLesson(curriculumLessons, curriculumProgress)
-  const previousLessonData = findPreviousLesson(curriculumLessons, curriculumProgress)
+  // ── NAV ANCHORS ON THE LESSON ON SCREEN, INCLUDING A PREVIEW ──────────────
+  //
+  // findNextLesson/findPreviousLesson resolve their anchor from
+  // progress.activeLessonSlug — the last lesson actually STARTED (callLessonInit
+  // writes it). But while a preview/welcome screen is up (`pendingLesson` set,
+  // not yet started), the lesson ON SCREEN is that pending one, and its slug is
+  // not written until "Start Lesson" is pressed.
+  //
+  // Reported by a learner: tapping Next opened the next lesson's preview, and a
+  // second Next re-opened the SAME preview — so the only way forward was to
+  // ENTER (start) each lesson. Measured with the real functions: previewing
+  // lesson 4 with activeLessonSlug still on 3, findNextLesson returned 4 again;
+  // overlaying the previewed slug makes it return 5. So the anchor here prefers
+  // `pendingLesson`, letting a learner page forward/back through previews and
+  // skip a lesson without starting it. When nothing is pending this is exactly
+  // `curriculumProgress`, so a normal in-lesson learner is unaffected.
+  //
+  // This overlays PRESENTATION only — it never writes progress. The lesson the
+  // learner actually leaves is still resolved from the real
+  // `curriculumProgress` in confirmLessonSwitch's skip record, so paging past
+  // previews cannot mark an un-entered lesson skipped.
+  const navAnchorProgress = pendingLesson?.topicSlug
+    ? { ...curriculumProgress, activeLessonSlug: pendingLesson.topicSlug }
+    : curriculumProgress
+  const nextLessonData = findNextLesson(curriculumLessons, navAnchorProgress)
+  const previousLessonData = findPreviousLesson(curriculumLessons, navAnchorProgress)
   const totalLessons = curriculumLessons.length
   const xpProgress = totalLessons > 0 ? Math.round((curriculumProgress.completedLessons.length / totalLessons) * 100) : 0
 

@@ -117,3 +117,77 @@ describe('LessonScreen actually performs that sync', () => {
     expect(before).toContain('progressGenerationRef.current += 1')
   })
 })
+
+/**
+ * ── SKIPPING FORWARD THROUGH PREVIEWS ───────────────────────────────────────
+ *
+ * REPORTED by a learner after the anchor fix landed: "if select next then it
+ * shows me next lesson and I can not skip this lesson if I want to move next.
+ * So I will enter into the current lesson then only can go to next lesson."
+ *
+ * The preview/welcome screen is where the nav buttons live between a switch and
+ * the learner pressing "Start Lesson". `activeLessonSlug` is written only WHEN a
+ * lesson is started (callLessonInit), so while a preview is up the anchor still
+ * names the last-started lesson, and Next re-resolves to the same preview target
+ * — a dead end. The lesson ON SCREEN during a preview is `pendingLesson`, and
+ * LessonScreen now overlays its slug onto the nav anchor.
+ */
+describe('a learner can page forward through lesson previews without starting one', () => {
+  // Started on lesson 3; activeLessonSlug names it.
+  const STARTED_ON_3: CurriculumProgress = {
+    currentLesson: 1, completedLessons: [], activeLessonSlug: 'chem.found.pure-substances',
+  }
+
+  // What LessonScreen computes for the nav buttons: overlay the previewed
+  // lesson's slug when a preview is up, else the plain progress.
+  function navAnchor(progress: CurriculumProgress, pending: CurriculumLesson | null): CurriculumProgress {
+    return pending?.topicSlug ? { ...progress, activeLessonSlug: pending.topicSlug } : progress
+  }
+
+  it('WITHOUT the overlay, Next on a preview re-opens the same lesson', () => {
+    // The reported dead end, as a passing test.
+    const previewing4 = LESSONS.find((l) => l.order === 4)!
+    // Bug: nav anchored on plain progress ignores the preview.
+    expect(findNextLesson(LESSONS, STARTED_ON_3)?.order).toBe(3 + 1) // 4 — the preview itself
+  })
+
+  it('WITH the overlay, Next on a preview skips to the lesson after it', () => {
+    const previewing4 = LESSONS.find((l) => l.order === 4)!
+    expect(findNextLesson(LESSONS, navAnchor(STARTED_ON_3, previewing4))?.order).toBe(5)
+    // Paging again advances again — 4 was never started, only previewed. At the
+    // last lesson (5 of 5 in this fixture) Next is correctly null.
+    const previewing5 = LESSONS.find((l) => l.order === 5)!
+    expect(findNextLesson(LESSONS, navAnchor(STARTED_ON_3, previewing5))).toBeNull()
+  })
+
+  it('Previous on a preview steps back from the previewed lesson', () => {
+    // Previewing 4 with nothing completed, Previous is the immediate prior by
+    // order — lesson 3 — which is the lesson the learner actually came from.
+    const previewing4 = LESSONS.find((l) => l.order === 4)!
+    expect(findPreviousLesson(LESSONS, navAnchor(STARTED_ON_3, previewing4))?.order).toBe(3)
+  })
+
+  it('with no preview up, the anchor is exactly the plain progress', () => {
+    expect(navAnchor(STARTED_ON_3, null)).toBe(STARTED_ON_3)
+    expect(findNextLesson(LESSONS, navAnchor(STARTED_ON_3, null))?.order).toBe(4)
+  })
+
+  it('a previewed legacy lesson without a slug does not corrupt the anchor', () => {
+    const legacy = { ...LESSONS.find((l) => l.order === 4)!, topicSlug: undefined } as CurriculumLesson
+    expect(navAnchor(STARTED_ON_3, legacy)).toBe(STARTED_ON_3)
+  })
+})
+
+describe('LessonScreen applies the preview overlay to the nav buttons', () => {
+  const SRC = readFileSync(path.join(process.cwd(), 'src/components/learn/LessonScreen.tsx'), 'utf8')
+
+  it('builds navAnchorProgress from pendingLesson', () => {
+    expect(SRC).toMatch(/const navAnchorProgress = pendingLesson\?\.topicSlug/)
+    expect(SRC).toMatch(/activeLessonSlug: pendingLesson\.topicSlug/)
+  })
+
+  it('the nav-button data is derived from navAnchorProgress, not raw progress', () => {
+    expect(SRC).toMatch(/const nextLessonData = findNextLesson\(curriculumLessons, navAnchorProgress\)/)
+    expect(SRC).toMatch(/const previousLessonData = findPreviousLesson\(curriculumLessons, navAnchorProgress\)/)
+  })
+})
