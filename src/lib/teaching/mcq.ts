@@ -301,8 +301,97 @@ const SUPERSCRIPTS: Record<string, string> = {
 const foldSuperscripts = (s: string) =>
   s.replace(/[\u2070\u00b9\u00b2\u00b3\u2074-\u2079\u207a\u207b]/g, (c) => SUPERSCRIPTS[c] ?? ' ')
 
+
+/**
+ * NUMBER WORDS AND DIGITS ARE THE SAME ANSWER.
+ *
+ * ── THE DEFECT, MEASURED IN A REAL PHYSICS LESSON ──────────────────────────
+ * phys.mech.torque, turn 4. The tutor asked "…ten newtons at zero point five
+ * metres, what is the resulting torque?" and offered:
+ *
+ *     zero point five newton-metres | five newton-metres |
+ *     ten newton-metres            | twenty newton-metres
+ *
+ * The learner typed "5 newton metres" — the correct answer, in the form a
+ * person actually types. It graded as NOTHING: chosenIndex null, correct null,
+ * `correctAtCheck` stayed 0, and nine turns later the lesson closed with zero
+ * graded evidence and the concept flagged for review.
+ *
+ * Measured across the same real option set, only two forms ever graded:
+ *     "B" / "b"                   -> graded          (a letter)
+ *     "five newton-metres"        -> graded          (verbatim option text)
+ *     "5 newton metres"           -> NOT GRADED
+ *     "5 newton-metres"           -> NOT GRADED
+ *     "five"                      -> NOT GRADED
+ *     "5"                         -> NOT GRADED
+ *
+ * Two independent causes, both fixed here:
+ *
+ *  (a) The options are spelled out in WORDS because the tutor is instructed to
+ *      write numbers as words so they can be spoken. Learners type digits. The
+ *      two never met, so the most natural correct answer in physics and
+ *      mathematics — the number itself — was unreachable.
+ *  (b) `norm` preserved hyphens, so "newton-metres" and "newton metres" were
+ *      different strings and neither exact nor containment matching could fire.
+ *
+ * This does NOT lower the bar: it recognises the answer the learner gave, it
+ * does not decide it is right. `gradeMcqAnswer` still compares the resolved
+ * index against the authored key, and ambiguity still resolves to null.
+ */
+const NUMBER_WORDS: Record<string, string> = {
+  zero: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6',
+  seven: '7', eight: '8', nine: '9', ten: '10', eleven: '11', twelve: '12',
+  thirteen: '13', fourteen: '14', fifteen: '15', sixteen: '16',
+  seventeen: '17', eighteen: '18', nineteen: '19', twenty: '20',
+  thirty: '30', forty: '40', fifty: '50', sixty: '60', seventy: '70',
+  eighty: '80', ninety: '90', hundred: '100',
+}
+
+/**
+ * Rewrite number words as digits, joining decimals written as "X point Y".
+ * Applied AFTER the character fold so it sees plain lowercase tokens.
+ */
+function digitiseNumbers(text: string): string {
+  const out: string[] = []
+  const toks = text.split(' ')
+  for (let i = 0; i < toks.length; i++) {
+    const d = NUMBER_WORDS[toks[i]]
+    if (d === undefined) { out.push(toks[i]); continue }
+    // "zero point five" -> "0.5". Only when a number sits on BOTH sides of
+    // "point", so the ordinary English word is never eaten.
+    const next = toks[i + 1]
+    const after = toks[i + 2] !== undefined ? NUMBER_WORDS[toks[i + 2]] : undefined
+    if (next === 'point' && after !== undefined) { out.push(`${d}.${after}`); i += 2; continue }
+    out.push(d)
+  }
+  return out.join(' ')
+}
+
+/** Every distinct number a string mentions, in canonical digit form. */
+function numbersIn(text: string): string[] {
+  return [...new Set((text.match(/\d+(?:\.\d+)?/g) ?? []).map((v) => String(Number(v))))]
+}
+
 const norm = (s: string) =>
-  foldSuperscripts(s).toLowerCase().replace(/[^a-z0-9 -]+/g, ' ').replace(/\s+/g, ' ').trim()
+  digitiseNumbers(
+    foldSuperscripts(s).toLowerCase()
+      .replace(/[^a-z0-9.\- ]+/g, ' ')
+      // A hyphen JOINING WORDS becomes a space, because "newton-metres" and
+      // "newton metres" are the same words and keeping them distinct made both
+      // exact and containment matching fail on the measured turn.
+      //
+      // A hyphen in front of a DIGIT is kept, because it is a minus sign:
+      // `foldSuperscripts` turns [T]⁻² into "[T]-2", and spacing that hyphen
+      // out would make a negative exponent identical to a positive one. This
+      // module's own test caught exactly that — dimensional formulae are the
+      // commonest option form in physics, and grading T⁻² as T² would mark a
+      // wrong answer right.
+      .replace(/-(?!\d)/g, ' ')
+      // A dot only survives between digits (a decimal point); sentence
+      // punctuation must not glue tokens together.
+      .replace(/(?<!\d)\.|\.(?!\d)/g, ' ')
+      .replace(/\s+/g, ' ').trim(),
+  )
 const words = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
 
 /**
@@ -386,6 +475,24 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   })
   const best = Math.max(...scores)
   if (best >= 2 && scores.filter((s) => s === best).length === 1) return scores.indexOf(best)
+
+  // 5. THE NUMBER ITSELF. In physics and mathematics the natural answer to
+  //    "what is the resulting torque?" is "5" — no unit, no sentence, no
+  //    letter. Every rule above needs either the option's words or its letter,
+  //    so the bare value graded as nothing.
+  //
+  //    Deliberately the LAST rule and deliberately narrow: it fires only when
+  //    the learner named exactly ONE number and exactly ONE option carries it.
+  //    A worked-out reply ("5, because 10 times 0.5") names three numbers and
+  //    is refused rather than guessed at — refusing costs a turn, guessing
+  //    grades the wrong option.
+  const said = numbersIn(n)
+  if (said.length === 1) {
+    const carrying = mcq.options
+      .map((o, i) => ({ i, hit: numbersIn(norm(o)).includes(said[0]) }))
+      .filter((x) => x.hit)
+    if (carrying.length === 1) return carrying[0].i
+  }
 
   return null
 }
