@@ -63,10 +63,14 @@ import {
   MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS,
   MATHEMATICS_PROOF_MACHINERY_PROBES,
 } from '@/lib/teaching/assets/mathematicsProofMachineryAssets'
+import {
+  MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS,
+  MATHEMATICS_QUANTIFIER_CRAFT_PROBES,
+} from '@/lib/teaching/assets/mathematicsQuantifierCraftAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -215,7 +219,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -336,6 +340,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS,
     ...MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS,
     ...MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS,
+    ...MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -351,6 +356,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ORDERS_PROOFS_PROBES,
     ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES,
     ...MATHEMATICS_PROOF_MACHINERY_PROBES,
+    ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1010,6 +1016,89 @@ describe('mathematics proof machinery', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_PROOF_MACHINERY_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 14 — saying something precise about many objects at once.
+ *
+ * Quantifier ORDER is the one place in elementary logic where swapping two
+ * symbols turns a true statement false, and three separate registers in
+ * this batch record learners treating it as stylistic. The checks below
+ * demand the concrete pair (forall-exists vs exists-forall) actually
+ * appears, not merely a warning that order matters.
+ */
+describe('mathematics variables, quantifiers, and the craft of reading and writing', () => {
+  const NEW = [
+    'math.found.variable', 'math.found.predicate',
+    'math.found.quantifiers', 'math.found.predicate-logic',
+    'math.found.set-builder-notation', 'math.found.reading-mathematics',
+    'math.found.writing-mathematics', 'math.found.abstraction',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_QUANTIFIER_CRAFT_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('quantifier order is shown with the concrete pair, not merely warned about', () => {
+    const p = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.predicate-logic')!
+    expect(p.content).toMatch(/∀x ∃y/)
+    expect(p.content).toMatch(/∃y ∀x/)
+  })
+
+  it('quantifiers deny BOTH everyday readings and give the negation rule', () => {
+    const q = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.quantifiers')!
+    expect(q.content).toMatch(/not "most"|is not "most"/i)
+    expect(q.content).toMatch(/not "exactly one"/i)
+    expect(q.content).toMatch(/∃x ¬P\(x\)/)
+  })
+
+  it('a predicate is distinguished from a proposition AND from a formula', () => {
+    const p = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.predicate')!
+    expect(p.content).toMatch(/proposition/i)
+    expect(p.content).toMatch(/not the same thing as a formula/i)
+  })
+
+  it('the variable explanation kills the label reading explicitly', () => {
+    const v = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.variable')!
+    expect(v.content).toMatch(/does not mean three apples/i)
+  })
+
+  it('set-builder keeps the domain mandatory and an empty result legitimate', () => {
+    const s = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.set-builder-notation')!
+    expect(s.content).toMatch(/ANSWER and not a sign/i)
+    expect(s.content).toMatch(/different and much larger/i)
+  })
+
+  it('reading and writing fail in opposite directions, and both are stated', () => {
+    const r = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.reading-mathematics')!
+    const w = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.writing-mathematics')!
+    expect(r.content).toMatch(/not read at the speed of prose/i)
+    expect(w.content).toMatch(/Symbols do not supply rigour/i)
+  })
+
+  it('abstraction is the opposite of vagueness, and transfer is not assumed', () => {
+    const a = MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS.find((e) => e.conceptId === 'math.found.abstraction')!
+    expect(a.content).toMatch(/opposite of vagueness/i)
+    expect(a.content).toMatch(/does not transfer by itself/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_QUANTIFIER_CRAFT_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_QUANTIFIER_CRAFT_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
