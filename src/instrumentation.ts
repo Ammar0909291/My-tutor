@@ -5,9 +5,9 @@
  *
  * On every cold start (local dev and Vercel), if the AssetIdentity table
  * has fewer rows than the expected seed total, the authored seed assets
- * (brainSeedAssets + authoredSeedAssets) are inserted as ACTIVE rows so
- * assembleLesson() starts serving authored content immediately — without
- * requiring manual `npm run seed:brain-assets`.
+ * (brainSeedAssets + authoredSeedAssets + chemistrySeedAssets) are inserted
+ * as ACTIVE rows so assembleLesson() starts serving authored content
+ * immediately — without requiring manual `npm run seed:brain-assets`.
  *
  * REQUIRES `experimental.instrumentationHook: true` in next.config.js on
  * Next.js 14 — without it Next never calls register() and this entire module
@@ -90,15 +90,33 @@ async function bootstrapAssets() {
         await import('./lib/teaching/assets/brainSeedAssets')
       const { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } =
         await import('./lib/teaching/assets/authoredSeedAssets')
+      // Chemistry joined this bootstrap's corpus 2026-08-19. See the ownership
+      // note in brainSeedAssets.ts: its 314 unseeded probes were authored, in
+      // git, and unreachable, because the only writer that had ever seeded them
+      // is a script needing a DATABASE_URL no session here has. Production held
+      // exactly 2 gradeable probes per concept for all 186 chemistry concepts
+      // against an asset contract of 3, so no chemistry lesson could reach
+      // mastery. Biology and computer_science remain script-only — their
+      // corpora have not been measured against the contract.
+      const { CHEMISTRY_EXPLANATIONS, CHEMISTRY_PROBES } =
+        await import('./lib/teaching/assets/chemistrySeedAssets')
       const { hashContent } = await import('./lib/teaching/assets/similarity')
       const { AssetFamily, AssetStatus, AuthorKind, ExplanationStyle } = await import('@prisma/client')
 
-      const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS]
-      const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES]
+      const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS]
+      const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES]
       // ADR 14 §13 (Item 6): ladder rungs get a difficulty segment; singleton
       // slots keep the identity they already have. One resolver drives BOTH
       // the pre-flight check and the write loop so they cannot disagree.
       const probeSlug = buildProbeSlugResolver(ALL_PROBES)
+
+      // The exact set of canonical identities THIS corpus declares. The
+      // completeness guard below intersects the table against it so that seed
+      // rows belonging to a different corpus cannot report this one as done.
+      const expectedSlugs = new Set<string>([
+        ...ALL_EXPLANATIONS.map((e) => seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)),
+        ...ALL_PROBES.map((p) => probeSlug(p)),
+      ])
 
       // ── Step 0: pre-flight duplicate-identity check ────────────────────────
       //
@@ -234,52 +252,6 @@ async function bootstrapAssets() {
       //     identities coincide today only because a partial unique index
       //     covers authorId = SEED_AUTHOR_ID; counting distinct slugs states
       //     the invariant directly instead of depending on that index.
-      const EXPECTED_IDENTITIES = identityCheck.distinctIdentities
-      const storedIdentities = (
-        await prisma.assetIdentity.groupBy({
-          by: ['canonicalSlug'],
-          where: seedOwnershipWhere() as never,
-        })
-      ).length
-      // An identity COUNT is not a completeness check. 737 PROBE and 255
-      // EXPLANATION identities were found ACTIVE in production with no content
-      // row behind them, so a database can reach the expected identity count
-      // and still serve nothing — which is exactly the state that produced E6.
-      // Counting hollow identities here is what lets the repair below run at
-      // all: without it, the moment storedIdentities reaches EXPECTED the
-      // bootstrap returns early and the orphans are unreachable forever.
-      //
-      // Two indexed COUNTs on a cold start, and only when the identity count
-      // already looks complete — so the common healthy path pays for them once
-      // and then skips, exactly as before.
-      const hollowIdentities = storedIdentities >= EXPECTED_IDENTITIES
-        ? (await prisma.assetIdentity.count({
-            where: {
-              ...(seedOwnershipWhere() as object),
-              OR: [
-                { family: AssetFamily.PROBE, probeAsset: { is: null } },
-                { family: AssetFamily.EXPLANATION, explanationAsset: { is: null } },
-              ],
-            } as never,
-          }))
-        : 0
-
-      if (storedIdentities >= EXPECTED_IDENTITIES && hollowIdentities === 0) {
-        console.log(
-          `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present, 0 hollow — skipping`
-        )
-        return
-      }
-      if (hollowIdentities > 0) {
-        console.warn(
-          `[instrumentation] asset bootstrap: ${hollowIdentities} ACTIVE seed identities have NO content row — repairing`
-        )
-      }
-
-      console.log(
-        `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present — seeding missing assets...`
-      )
-
       // ── ONE QUERY INSTEAD OF 2,920 ────────────────────────────────────────
       //
       // MEASURED IN PRODUCTION (2026-08-12). The bootstrap logged
@@ -326,6 +298,57 @@ async function bootstrapAssets() {
           hasContent: row.probeAsset !== null || row.explanationAsset !== null,
         })
       }
+
+
+      // ── THE COMPLETENESS GUARD MEASURES THIS CORPUS, NOT THE TABLE ────────
+      //
+      // It used to compare `identityCheck.distinctIdentities` (the corpus) to a
+      // DISTINCT canonicalSlug count over every seed-owned row in the table.
+      // Those are different sets, and the table's is the larger one: rows
+      // seeded historically by `scripts/brain/seed-knowledge-assets.ts` — whose
+      // corpus includes files this hook does not import (the mathematics batch
+      // assets, biology, computer_science) — carry the same authorKind,
+      // authorId and subject tags, so they COUNT toward the guard while being
+      // invisible to the loops below.
+      //
+      // MEASURED 2026-08-19, adding chemistry: expected 4,144, stored 4,219.
+      // The guard was already satisfied while 314 chemistry probes were absent.
+      // Only the 388 hollow identities kept the run alive; the moment those
+      // were repaired the bootstrap would have returned early on every cold
+      // start thereafter and those 314 probes would never have been created —
+      // the same never-converges failure mode as the historical bugs above,
+      // reached from the opposite direction.
+      //
+      // Both figures now come from the SAME prefetch, intersected with the
+      // slugs this corpus actually declares, so "present" and "hollow" mean
+      // "present in what we are here to seed". Foreign seed rows can no longer
+      // satisfy the guard, and the two extra aggregate queries this replaced
+      // are gone — the prefetch already holds the answer.
+      const EXPECTED_IDENTITIES = identityCheck.distinctIdentities
+      let storedIdentities = 0
+      let hollowIdentities = 0
+      for (const slug of expectedSlugs) {
+        const row = existing.get(slug)
+        if (!row) continue
+        storedIdentities++
+        if (!row.hasContent) hollowIdentities++
+      }
+
+      if (storedIdentities >= EXPECTED_IDENTITIES && hollowIdentities === 0) {
+        console.log(
+          `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present, 0 hollow — skipping`
+        )
+        return
+      }
+      if (hollowIdentities > 0) {
+        console.warn(
+          `[instrumentation] asset bootstrap: ${hollowIdentities} ACTIVE seed identities have NO content row — repairing`
+        )
+      }
+
+      console.log(
+        `[instrumentation] asset bootstrap: ${storedIdentities}/${EXPECTED_IDENTITIES} seed identities present — seeding missing assets...`
+      )
 
       let created = 0
       let skipped = 0

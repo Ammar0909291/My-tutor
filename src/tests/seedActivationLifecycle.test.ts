@@ -105,16 +105,30 @@ describe('P20 D2 — seedOwnershipWhere selects exactly the bootstrap corpus', (
     expect(matches(where, OTHER_CURATOR)).toBe(false)
   })
 
-  it('NEGATIVE CONTROL: never matches chemistry (manual-script-only subject)', () => {
-    // Chemistry shares authorKind AND authorId with the bootstrap corpus —
-    // the subject tag is the only thing separating them, which is exactly why
-    // it is part of the predicate.
-    expect(matches(where, CHEM_SEED)).toBe(false)
+  it('chemistry IS in scope — it joined the bootstrap corpus 2026-08-19', () => {
+    // It was a negative control here until 2026-08-19, when the consequence of
+    // being script-only was measured: the script needs a DATABASE_URL no
+    // session has ever had, so chemistry sat at exactly 2 gradeable probes per
+    // concept across all 186 concepts against an asset contract of 3, and no
+    // chemistry lesson could reach mastery. 314 authored probes were in git and
+    // unreachable. The subject tag still separates corpora — biology and
+    // computer_science below are the remaining negative controls — but
+    // chemistry is now on this side of the line, so the bootstrap may write it.
+    expect(matches(where, CHEM_SEED)).toBe(true)
   })
 
-  it('scopes to exactly the three subjects the bootstrap seeds', () => {
-    expect([...BOOTSTRAP_SEED_SUBJECTS].sort()).toEqual(['english', 'mathematics', 'physics'])
-    expect(where.tags.hasSome.sort()).toEqual(['english', 'mathematics', 'physics'])
+  it('NEGATIVE CONTROL: still never matches biology or computer_science', () => {
+    // Their corpora have not been measured against the asset contract, so they
+    // stay script-only. This is what stops "add chemistry" from silently
+    // becoming "seed everything".
+    for (const subject of ['biology', 'computer_science']) {
+      expect(matches(where, { ...CHEM_SEED, tags: [subject, 'mcq'] })).toBe(false)
+    }
+  })
+
+  it('scopes to exactly the four subjects the bootstrap seeds', () => {
+    expect([...BOOTSTRAP_SEED_SUBJECTS].sort()).toEqual(['chemistry', 'english', 'mathematics', 'physics'])
+    expect(where.tags.hasSome.sort()).toEqual(['chemistry', 'english', 'mathematics', 'physics'])
   })
 
   it('a subject tag can never be satisfied by a familyKind value', () => {
@@ -138,12 +152,34 @@ describe('P20 D2 — instrumentation.ts uses ownership-scoped queries', () => {
     // completeness, and eventually suppresses seeding permanently.
     expect(src).not.toMatch(/assetIdentity\.count\(\s*\)/)
     expect(src).not.toMatch(/assetIdentity\.groupBy\(\s*\)/)
-    // Remediation Item 4 replaced count() with a DISTINCT canonicalSlug count
-    // so both sides of the guard are identities. The invariant this test
-    // protects is the SCOPING, not the method, so it now accepts either —
-    // and still requires seedOwnershipWhere() on whichever is used.
+    // Every read of the shared identity table carries the predicate. The guard
+    // no longer runs aggregates of its own (see the next test), so the one
+    // remaining read is the prefetch — and it must be scoped.
+    const reads = src.match(/assetIdentity\.(count|groupBy|findMany|findFirst)\(/g) ?? []
+    expect(reads.length).toBeGreaterThan(0)
     expect(src).toMatch(
-      /assetIdentity\.(count|groupBy)\(\s*\{[\s\S]{0,200}?where:\s*seedOwnershipWhere\(\)/,
+      /assetIdentity\.findMany\(\s*\{[\s\S]{0,200}?where:\s*seedOwnershipWhere\(\)/,
+    )
+  })
+
+  it('the guard measures THIS corpus, not every seed-owned row in the table', () => {
+    // MEASURED 2026-08-19: expected 4,144 identities, table held 4,219
+    // seed-owned ones — rows written by scripts/brain/seed-knowledge-assets.ts,
+    // whose corpus includes files this hook does not import. They share
+    // authorKind, authorId and subject tags, so a row COUNT was already
+    // satisfied while 314 chemistry probes were absent. Only the hollow-row
+    // repair kept the run alive; once that finished the bootstrap would have
+    // skipped forever with the corpus incomplete.
+    //
+    // Presence is therefore derived by intersecting the prefetch with the slugs
+    // this corpus declares — the same source the create loops iterate, so the
+    // guard and the loops cannot disagree about what "done" means.
+    expect(src).toMatch(/const expectedSlugs = new Set<string>\(\[/)
+    expect(src).toMatch(/for \(const slug of expectedSlugs\) \{/)
+    // and the prefetch must be read BEFORE the guard decides, or the
+    // intersection has nothing to intersect.
+    expect(src.indexOf('const existing = new Map<string')).toBeLessThan(
+      src.indexOf('if (storedIdentities >= EXPECTED_IDENTITIES && hollowIdentities === 0)'),
     )
   })
 

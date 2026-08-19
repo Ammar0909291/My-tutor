@@ -91,7 +91,12 @@ describe('structural lock — bootstrap guard source', () => {
 
   it('compares distinct identities on BOTH sides', () => {
     expect(code).toContain('identityCheck.distinctIdentities')
-    expect(code).toMatch(/groupBy\(\{\s*by:\s*\['canonicalSlug'\]/)
+    // The stored side is a set of canonical slugs, not a row count. It stopped
+    // being a groupBy on 2026-08-19 (see the next test) — the prefetch already
+    // reads every seed-owned slug, so the guard intersects that instead of
+    // asking the database a question it has already answered.
+    expect(code).toMatch(/const expectedSlugs = new Set<string>\(\[/)
+    expect(code).toMatch(/for \(const slug of expectedSlugs\) \{/)
   })
 
   it('no longer sums array lengths as the completeness target', () => {
@@ -99,39 +104,41 @@ describe('structural lock — bootstrap guard source', () => {
     expect(code).not.toMatch(/ALL_EXPLANATIONS\.length\s*\+\s*ALL_PROBES\.length/)
   })
 
-  it('counts distinct slugs, not rows, on the stored side', () => {
+  it('the stored side counts identities OF THIS CORPUS, not rows in the table', () => {
     // A row count equals the identity count only because a partial unique
     // index covers authorId = SEED_AUTHOR_ID. Counting distinct slugs states
     // the invariant directly instead of depending on that index.
     //
-    // NARROWED 2026-08-12, deliberately, and the reason matters. This
-    // previously banned `assetIdentity.count(` outright. That was a proxy for
-    // the real invariant — "the COMPLETENESS measure is a distinct-slug count"
-    // — and the proxy became wrong when a SECOND, unrelated count was added:
-    // the hollow-identity check (identities whose content row is missing),
-    // which is a row count by nature and is not a completeness measure at all.
+    // REPLACED 2026-08-12's groupBy on 2026-08-19, and the reason is a real
+    // defect, not a refactor. The groupBy counted EVERY seed-owned row sharing
+    // the subject tags — including rows written by
+    // scripts/brain/seed-knowledge-assets.ts, whose corpus contains files this
+    // hook does not import. Measured when chemistry was added: expected 4,144,
+    // table held 4,219. The guard was already satisfied while 314 chemistry
+    // probes were missing, and only the hollow-row repair kept the run alive;
+    // once that finished the bootstrap would have skipped forever with the
+    // corpus incomplete — the same never-converges failure this file exists to
+    // prevent, arrived at from the opposite direction.
     //
-    // Banning the whole method would have forced the hollow check to be
-    // written worse, or the repair to be dropped — so the assertion is
-    // sharpened to say what it always meant, rather than relaxed.
-    const storedAssignment = code.match(/const storedIdentities\s*=\s*\([\s\S]{0,240}?\)\.length/)
-    expect(storedAssignment, 'storedIdentities must be a distinct-slug groupBy length').not.toBeNull()
-    expect(storedAssignment![0]).toMatch(/groupBy\(\{\s*by:\s*\['canonicalSlug'\]/)
+    // The measure is now the intersection of the prefetch with the slugs this
+    // corpus declares, so foreign seed rows cannot report it done, and the
+    // guard and the create loops read the same source of truth.
+    const storedAssignment = code.match(/let storedIdentities = 0[\s\S]{0,400}?\n\s*\}/)
+    expect(storedAssignment, 'storedIdentities must be derived from expectedSlugs').not.toBeNull()
+    expect(storedAssignment![0]).toMatch(/for \(const slug of expectedSlugs\)/)
+    expect(storedAssignment![0]).toMatch(/existing\.get\(slug\)/)
     expect(storedAssignment![0]).not.toMatch(/\.count\(/)
 
-    // Any count() that IS present must be the hollow-identity check, never a
-    // second completeness measure that could disagree with the first.
-    for (const m of code.matchAll(/assetIdentity\.count\(/g)) {
-      const preceding = code.slice(Math.max(0, m.index! - 220), m.index!)
-      expect(preceding, 'the only permitted assetIdentity.count is the hollow-identity check')
-        .toMatch(/hollowIdentities/)
-    }
+    // The guard must not reintroduce an aggregate over the whole table — that
+    // is precisely the measure that could disagree with the loops.
+    expect(code).not.toMatch(/assetIdentity\.groupBy\(/)
+    expect(code).not.toMatch(/assetIdentity\.count\(/)
   })
 
   it('duplicate validation still runs before the guard and before every write', () => {
     const validate = code.indexOf('validateSeedIdentities(')
     expect(validate).toBeGreaterThan(-1)
-    for (const write of ['updateMany', 'groupBy', 'create']) {
+    for (const write of ['updateMany', 'findMany', 'create']) {
       const at = code.indexOf(`prisma.assetIdentity.${write}`)
       expect(at, `guard/write ${write} must follow validation`).toBeGreaterThan(validate)
     }
