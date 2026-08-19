@@ -59,10 +59,14 @@ import {
   MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS,
   MATHEMATICS_LANGUAGE_STRATEGY_PROBES,
 } from '@/lib/teaching/assets/mathematicsLanguageStrategyAssets'
+import {
+  MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS,
+  MATHEMATICS_PROOF_MACHINERY_PROBES,
+} from '@/lib/teaching/assets/mathematicsProofMachineryAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -211,7 +215,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -331,6 +335,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS,
     ...MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS,
     ...MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS,
+    ...MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -345,6 +350,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_RELATIONS_NUMBERS_PROBES,
     ...MATHEMATICS_ORDERS_PROOFS_PROBES,
     ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES,
+    ...MATHEMATICS_PROOF_MACHINERY_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -922,6 +928,88 @@ describe('mathematics language, notation, strategy and two overtrusted tools', (
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_LANGUAGE_STRATEGY_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 13 — the machinery of proof.
+ *
+ * The registers for all four proof SHAPES agree on one thing: learners
+ * rank them ("direct first", "contradiction is the powerful one",
+ * "contrapositive is weaker"). None of that is true, and a corpus that
+ * teaches four techniques without saying so teaches the ranking by
+ * omission. The checks below are on the anti-ranking claims and on the
+ * three places a proof silently stops being one.
+ */
+describe('mathematics proof machinery', () => {
+  const NEW = [
+    'math.found.proof', 'math.found.direct-proof',
+    'math.found.proof-by-contrapositive', 'math.found.proof-by-contradiction',
+    'math.found.existence-proof', 'math.found.rules-of-inference',
+    'math.found.logical-equivalence', 'math.found.proof-by-induction',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_PROOF_MACHINERY_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('no proof shape is taught as ranked above another', () => {
+    const direct = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.direct-proof')!
+    const contrap = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.proof-by-contrapositive')!
+    const contra = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.proof-by-contradiction')!
+    expect(direct.content).toMatch(/(nor|not) is direct proof the compulsory first attempt/i)
+    expect(contrap.content).toMatch(/full proof, not a weaker one/i)
+    expect(contra.content).toMatch(/not the strongest technique/i)
+  })
+
+  it('contradiction states the actual standard, R and not-R', () => {
+    const c = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.proof-by-contradiction')!
+    expect(c.content).toMatch(/R and not R/)
+    // and negation of a universal, which is where the technique is misapplied
+    expect(c.content).toMatch(/there exists x with not P\(x\)/i)
+  })
+
+  it('the contrapositive is distinguished from BOTH converse and inverse', () => {
+    const c = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.proof-by-contrapositive')!
+    expect(c.content).toMatch(/converse/i)
+    expect(c.content).toMatch(/inverse/i)
+  })
+
+  it('induction answers the circularity objection and defends the base case', () => {
+    const i = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.proof-by-induction')!
+    expect(i.content).toMatch(/not circular/i)
+    expect(i.content).toMatch(/CONDITIONAL/)
+    expect(i.content).toMatch(/base case is not a formality/i)
+  })
+
+  it('existence is separated from constructiveness and from uniqueness', () => {
+    const e = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((x) => x.conceptId === 'math.found.existence-proof')!
+    expect(e.content).toMatch(/non-constructive proof is a complete proof/i)
+    expect(e.content).toMatch(/says nothing about uniqueness/i)
+  })
+
+  it('both reversal fallacies are named, not just one', () => {
+    const r = MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.rules-of-inference')!
+    expect(r.content).toMatch(/affirming the consequent/i)
+    expect(r.content).toMatch(/denying the antecedent/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_PROOF_MACHINERY_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_PROOF_MACHINERY_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
