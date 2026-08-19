@@ -43796,6 +43796,62 @@ const FORCE_ASSESS_PROBES: SeedProbe[] = [
 const N1 = 'phys.mech.newtons-first-law'
 const N1_SRC = 'docs/curriculum/blueprints/phys.mech.newtons-first-law.md'
 
+// The one physics concept that reached 238/238 on probes and blueprints while
+// carrying NO explanation asset — measured 2026-08-19, 237 of 238. Ironic
+// twice over: this concept is one of the three original Educational Brain seed
+// entries, authored as the quality bar for the whole tree, and its blueprint
+// has the richest misconception engine in phys.mech. Both explanations below
+// are grounded in that blueprint's own §6, not invented.
+const N1_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: N1,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.MIDDLE,
+    // MC-1 is the Aristotelian belief, and the blueprint marks it FOUNDATIONAL
+    // for MC-3 — it must be cleared first or MC-3's repair relapses. So the
+    // opening does the MC-1 repair directly: name the invisible force rather
+    // than let motion "run out".
+    content:
+      'Everything you have ever seen moving has eventually stopped, so it '
+      + 'feels obvious that motion needs something to keep it going. It does '
+      + 'not. What stops things is FRICTION — a real force, just an invisible '
+      + 'one. Take it away and the stopping goes away with it: a puck on very '
+      + 'smooth ice slides much further than one on concrete, and a satellite '
+      + 'with its engines off does not slow down at all. Newton\'s First Law '
+      + 'says an object keeps doing exactly what it is already doing — sitting '
+      + 'still, or moving at a steady speed in a straight line — unless a net '
+      + 'force changes it. Force is not what MAINTAINS motion. Force is what '
+      + 'CHANGES it. Nothing is needed to keep the satellite going; something '
+      + 'would be needed to stop it.',
+    targetedMisconceptions: [`${N1}:MC-1`],
+    source: `${N1_SRC} — §6 MC-1 repair chain P27→P06→P28→P30→P31 (friction named, force reframed as change not maintenance)`,
+  },
+  {
+    conceptId: N1,
+    subjectSlug: 'physics',
+    familyKind: 'worked_example',
+    gradeBand: GradeBand.HIGH,
+    // MC-2 and MC-3 in one worked pair, because they are the same error seen
+    // from two sides: "no motion means no forces" and "steady motion means a
+    // leftover force". Both are answered by ΣF = 0 meaning BALANCED, not ABSENT.
+    content:
+      'Two cases people get backwards, and one idea settles both. A book '
+      + 'rests on a table: gravity pulls it down with 20 N, the table pushes '
+      + 'up with 20 N. The book is still — but there are two forces on it, '
+      + 'not none. They cancel. Now a car cruises at a steady 25 m/s: the '
+      + 'engine drives it forward with 800 N and drag plus friction push back '
+      + 'with 800 N. It is moving — but the net force is zero, not leftover. '
+      + 'ΣF = 0 does not mean "no forces". It means the forces BALANCE, and '
+      + 'balance is exactly the condition for velocity to stay put, whether '
+      + 'that velocity happens to be 0 m/s or 25 m/s. The stationary book and '
+      + 'the cruising car are the same physics; only the starting velocity '
+      + 'differs.',
+    targetedMisconceptions: [`${N1}:MC-2`, `${N1}:MC-3`, `${N1}:MC-4`],
+    source: `${N1_SRC} — §6 MC-2 repair P07 (stationary book force diagram) + MC-3/MC-4 (constant velocity needs no net force; the law is not rest-only)`,
+  },
+]
+
 const N1_ASSESS_PROBES: SeedProbe[] = [
   {
     conceptId: N1,
@@ -51516,6 +51572,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...VEL_EXPLANATIONS,
   ...ACC_EXPLANATIONS,
   ...FORCE_EXPLANATIONS,
+  ...N1_EXPLANATIONS,
   ...N2_EXPLANATIONS,
   ...N3_EXPLANATIONS,
   ...MOM_EXPLANATIONS,
