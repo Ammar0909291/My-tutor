@@ -11880,11 +11880,18 @@ const ORGSPEC_PROBES: SeedProbe[] = [
     targetedMisconceptions: [`${ORGSPEC}:MC2`],
     source: `${ORGSPEC_SRC} — misconception: NMR peak height indicates chemical significance rather than hydrogen count`,
   },
+  // BAND CORRECTED 2026-08-19. These three probes were authored HIGH while
+  // the concept itself — both its explanations and its two original probes —
+  // is UNDERGRADUATE. Measured against production once the catalogue was
+  // seeded: chem.org.spectroscopy was the ONE concept of 186 below the asset
+  // contract per served band (UNDERGRADUATE had 2 gradeable probes, not 3),
+  // because the contract is per (concept, band) and these three landed in a
+  // band with no explanation to reach them from.
   {
     conceptId: ORGSPEC,
     subjectSlug: 'chemistry',
     probeKind: 'checkpoint',
-    gradeBand: GradeBand.HIGH,
+    gradeBand: GradeBand.UNDERGRADUATE,
     stem: "In a mass spectrum, is the base peak the molecular ion?",
     choices: [
       { text: "Not usually. The BASE peak is simply the most intense one, assigned 100% by convention; the MOLECULAR ion is the intact molecule minus one electron, and it appears at the mass you care about. They coincide only when the molecular ion happens to be the most stable fragment, as in benzene. For many molecules the molecular ion is weak or entirely absent — in branched alkanes it can vanish while a stable tertiary carbocation dominates the spectrum", isCorrect: true },
@@ -11899,7 +11906,7 @@ const ORGSPEC_PROBES: SeedProbe[] = [
     conceptId: ORGSPEC,
     subjectSlug: 'chemistry',
     probeKind: 'step_check',
-    gradeBand: GradeBand.HIGH,
+    gradeBand: GradeBand.UNDERGRADUATE,
     stem: "A ¹H NMR signal appears as a triplet. How many neighbouring protons does that proton have?",
     choices: [
       { text: "TWO. The n+1 rule says n neighbours give n+1 lines, so a triplet means n = 2 — the multiplicity is one MORE than the neighbour count, not equal to it. The full pattern is a giveaway: a singlet means zero neighbours, a doublet one, a quartet three. In ethanol the CH₃ appears as a triplet because it sees the two CH₂ protons, and the CH₂ appears as a quartet because it sees the three CH₃ protons", isCorrect: true },
@@ -11914,7 +11921,7 @@ const ORGSPEC_PROBES: SeedProbe[] = [
     conceptId: ORGSPEC,
     subjectSlug: 'chemistry',
     probeKind: 'true_false',
-    gradeBand: GradeBand.HIGH,
+    gradeBand: GradeBand.UNDERGRADUATE,
     stem: "True or false: a broad O–H absorption around 3300 cm⁻¹ in an IR spectrum means the compound is an alcohol.",
     choices: [
       { text: "False — it means an O–H is present, which is not the same claim. A carboxylic acid gives an even broader O–H, spread from about 2500 to 3300 cm⁻¹, and it also shows a strong C=O near 1710 that an alcohol does not. Water contamination in the sample gives the same broad band and means nothing about the compound at all. IR identifies FUNCTIONAL GROUPS, and telling an alcohol from an acid means reading the carbonyl region too", isCorrect: true },
