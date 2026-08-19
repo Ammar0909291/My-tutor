@@ -75,10 +75,14 @@ import {
   MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS,
   MATHEMATICS_NUMBER_SYSTEMS_PROBES,
 } from '@/lib/teaching/assets/mathematicsNumberSystemsCloseAssets'
+import {
+  MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS,
+  MATHEMATICS_ALGORITHMS_PRECISION_PROBES,
+} from '@/lib/teaching/assets/mathematicsAlgorithmsPrecisionAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -227,7 +231,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -351,6 +355,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS,
     ...MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS,
     ...MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS,
+    ...MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -369,6 +374,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES,
     ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES,
     ...MATHEMATICS_NUMBER_SYSTEMS_PROBES,
+    ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1282,6 +1288,84 @@ describe('mathematics number systems, reach, and the last of algebra', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_NUMBER_SYSTEMS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 17 — the written algorithms, and the arithmetic of precision.
+ *
+ * All four algorithm registers record the SAME shape of error: a step
+ * done correctly in the wrong COLUMN, or a chain broken partway. Those
+ * are bookkeeping failures, and the only defence is knowing what the
+ * column is worth — so each of the four explanations must say what the
+ * carry, borrow, shift or alignment MEANS, not merely where to put it.
+ * That is what these checks enforce.
+ */
+describe('mathematics written algorithms and precision', () => {
+  const NEW = [
+    'math.arith.carrying', 'math.arith.borrowing',
+    'math.arith.long-multiplication', 'math.arith.long-division',
+    'math.arith.decimals', 'math.arith.percentages',
+    'math.arith.rounding', 'math.arith.significant-figures',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_ALGORITHMS_PRECISION_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('each algorithm says what its bookkeeping mark is WORTH, not just where it goes', () => {
+    const find = (id: string) => MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.find((e) => e.conceptId === id)!
+    expect(find('math.arith.carrying').content).toMatch(/one TEN/)
+    expect(find('math.arith.borrowing').content).toMatch(/borrowed amount is ten, not one/i)
+    expect(find('math.arith.long-multiplication').content).toMatch(/IS the place value/)
+    expect(find('math.arith.long-division').content).toMatch(/record of place value/i)
+  })
+
+  it('the two chain-breaking errors are each shown with a worked case', () => {
+    const carry = MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.carrying')!
+    const borrow = MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.borrowing')!
+    expect(carry.content).toMatch(/195 \+ 5/)
+    expect(borrow.content).toMatch(/302 − 178/)
+  })
+
+  it('decimals deny both the longer-is-larger and split-number readings', () => {
+    const d = MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.decimals')!
+    expect(d.content).toMatch(/More digits does not mean bigger/i)
+    expect(d.content).toMatch(/one number, not a 3 next to a 7/i)
+  })
+
+  it('percentages show the non-cancelling case with real numbers', () => {
+    const p = MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.percentages')!
+    expect(p.content).toMatch(/£99/)
+    expect(p.content).toMatch(/50% loss needs a 100% gain/i)
+  })
+
+  it('rounding and significant figures are kept apart, with the small-number case', () => {
+    const r = MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.rounding')!
+    const sf = MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.significant-figures')!
+    expect(r.content).toMatch(/0\.004617/)
+    expect(r.content).toMatch(/never counted as significant/i)
+    // the two rules that get conflated
+    expect(sf.content).toMatch(/fewest SIGNIFICANT FIGURES/)
+    expect(sf.content).toMatch(/fewest DECIMAL PLACES/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_ALGORITHMS_PRECISION_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_ALGORITHMS_PRECISION_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
