@@ -71,10 +71,14 @@ import {
   MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS,
   MATHEMATICS_FOUNDATIONS_CLOSE_PROBES,
 } from '@/lib/teaching/assets/mathematicsFoundationsCloseAssets'
+import {
+  MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS,
+  MATHEMATICS_NUMBER_SYSTEMS_PROBES,
+} from '@/lib/teaching/assets/mathematicsNumberSystemsCloseAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -223,7 +227,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -346,6 +350,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_PROOF_MACHINERY_EXPLANATIONS,
     ...MATHEMATICS_QUANTIFIER_CRAFT_EXPLANATIONS,
     ...MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS,
+    ...MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -363,6 +368,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_PROOF_MACHINERY_PROBES,
     ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES,
     ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES,
+    ...MATHEMATICS_NUMBER_SYSTEMS_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1188,6 +1194,94 @@ describe('mathematics foundations — sets, structure and size', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_FOUNDATIONS_CLOSE_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 16 — extending the number line, and the two directions
+ * mathematics reaches. This batch CLOSES math.found and math.alg.
+ *
+ * math.alg.exponent-rules and math.arith.exponent-rules are two separate
+ * KG nodes, and unlike the notation/symbols pair they are genuinely
+ * different: arithmetic owns the integer laws and why they hold BY
+ * COUNTING; algebra owns the extension to zero, negative and rational
+ * exponents, where counting stops working and the laws are preserved by
+ * demand. The duplication guard below enforces that split the same way
+ * batch 12's does for notation and symbols.
+ */
+describe('mathematics number systems, reach, and the last of algebra', () => {
+  const NEW = [
+    'math.arith.negative-numbers', 'math.arith.absolute-value',
+    'math.found.real-numbers', 'math.found.complex-numbers',
+    'math.found.generalization', 'math.found.mathematical-modeling',
+    'math.alg.polynomial', 'math.alg.exponent-rules',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_NUMBER_SYSTEMS_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the two exponent-rules nodes are taught as different things', () => {
+    const algebraic = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.find((e) => e.conceptId === 'math.alg.exponent-rules')!
+    const arithmetic = MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.exponent-rules')!
+    // arithmetic owns the counting justification; algebra owns the extension
+    expect(arithmetic.content).toMatch(/counted|counting|write out the a/i)
+    expect(algebraic.content).toMatch(/a\^½|a\^\(1\/2\)/)
+    expect(algebraic.content).toMatch(/DEMANDING|forced/i)
+    const shingles = (t: string) => new Set(t.toLowerCase().split(/\s+/).map((_, i, a) => a.slice(i, i + 8).join(' ')).filter((g) => g.split(' ').length === 8))
+    const a = shingles(arithmetic.content)
+    const overlap = [...shingles(algebraic.content)].filter((g) => a.has(g))
+    expect(overlap, `shared 8-word passages: ${overlap.slice(0, 3).join(' | ')}`).toHaveLength(0)
+  })
+
+  it('the costliest exponent error is stated with a numeric counterexample', () => {
+    const a = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.find((e) => e.conceptId === 'math.alg.exponent-rules')!
+    expect(a.content).toMatch(/is NOT a² \+ b²/)
+    expect(a.content).toMatch(/49/)
+    expect(a.content).toMatch(/25/)
+  })
+
+  it('each number-system extension gives the equation that forced it', () => {
+    const neg = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.negative-numbers')!
+    const cplx = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.complex-numbers')!
+    expect(neg.content).toMatch(/3 − 5/)
+    expect(cplx.content).toMatch(/x² = −1/)
+  })
+
+  it('absolute value is distance, and never negative', () => {
+    const a = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.absolute-value')!
+    expect(a.content).toMatch(/DISTANCE/)
+    expect(a.content).toMatch(/never negative/i)
+  })
+
+  it('completeness is defined, and a real is distinguished from its decimal', () => {
+    const r = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.real-numbers')!
+    expect(r.content).toMatch(/COMPLETENESS/)
+    expect(r.content).toMatch(/0\.999…/)
+  })
+
+  it('modelling keeps the return leg and denies the one-correct-model idea', () => {
+    const m = MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.mathematical-modeling')!
+    expect(m.content).toMatch(/2\.3 buses/)
+    expect(m.content).toMatch(/no single correct model/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_NUMBER_SYSTEMS_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_NUMBER_SYSTEMS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
