@@ -47,10 +47,14 @@ import {
   MATHEMATICS_SET_OPERATIONS_EXPLANATIONS,
   MATHEMATICS_SET_OPERATIONS_PROBES,
 } from '@/lib/teaching/assets/mathematicsSetOperationsAssets'
+import {
+  MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS,
+  MATHEMATICS_RELATIONS_NUMBERS_PROBES,
+} from '@/lib/teaching/assets/mathematicsRelationsNumbersAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -199,7 +203,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -316,6 +320,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS,
     ...MATHEMATICS_POWERS_VARIATION_EXPLANATIONS,
     ...MATHEMATICS_SET_OPERATIONS_EXPLANATIONS,
+    ...MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -327,6 +332,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,
     ...MATHEMATICS_POWERS_VARIATION_PROBES,
     ...MATHEMATICS_SET_OPERATIONS_PROBES,
+    ...MATHEMATICS_RELATIONS_NUMBERS_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -682,6 +688,77 @@ describe('mathematics set operations, pairs, partitions and cardinality', () => 
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_SET_OPERATIONS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 10 — relations, sets built from sets, two number kinds, and the
+ * proof shape that leans on Batch 9's partition.
+ *
+ * proof-by-cases is the one entry here that must contradict a neighbouring
+ * entry to be correct: its cases need NOT be disjoint, only exhaustive,
+ * which is strictly weaker than partitioning. An explanation that borrows
+ * partition's strictness teaches a false obligation, so the check is that
+ * the weaker requirement is stated.
+ */
+describe('mathematics relations, derived sets, number kinds and case proofs', () => {
+  const NEW = [
+    'math.found.relation', 'math.found.reflexive-relation',
+    'math.found.hasse-diagram', 'math.found.set-difference',
+    'math.found.power-set', 'math.found.irrational-numbers',
+    'math.found.ordinal-number', 'math.found.proof-by-cases',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_RELATIONS_NUMBERS_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('proof-by-cases states that overlap is permitted and exhaustiveness is not', () => {
+    const p = MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.proof-by-cases')!
+    expect(p.content).toMatch(/EXHAUSTIVE|exhaustive/)
+    expect(p.content).toMatch(/need not form a partition|Overlap.{0,40}harmless/i)
+  })
+
+  it('a relation is defined as a set of pairs, and said not to require a rule', () => {
+    const r = MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.relation')!
+    expect(r.content).toMatch(/ordered pairs/i)
+    expect(r.content).toMatch(/no formula|no rule|not a rule/i)
+  })
+
+  it('irrational is separated from imprecise and from non-terminating', () => {
+    const i = MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.irrational-numbers')!
+    expect(i.content).toMatch(/does not mean imprecise/i)
+    expect(i.content).toMatch(/repeating/i)
+  })
+
+  it('the power set explanation resolves P(empty) rather than leaving it implied', () => {
+    const p = MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.power-set')!
+    expect(p.content).toMatch(/P\(∅\)/)
+    expect(p.content).toMatch(/It is not empty/i)
+  })
+
+  it('ordinals are distinguished from cardinals and shown not to commute', () => {
+    const o = MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.ordinal-number')!
+    expect(o.content).toMatch(/not commutative/i)
+    expect(o.content).toMatch(/ℵ₀/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_RELATIONS_NUMBERS_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_RELATIONS_NUMBERS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
