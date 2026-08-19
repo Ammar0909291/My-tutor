@@ -220,7 +220,16 @@ export async function certifyConcept(
       }
     }
     if (hasMalformedLatex(text) && !failed.includes('D6-latex')) {
-      failed.push('D6-latex'); notes.push('malformed LaTeX in learner-facing text')
+      failed.push('D6-latex')
+      notes.push('malformed LaTeX in learner-facing text')
+      // The turn, not just the verdict. This path was the one place a failure
+      // still reported without its evidence, so the first two D6-latex hits in
+      // the full sweep could not be judged at all — which is the same mistake
+      // the 110-character slice made, in the one branch that had not been
+      // fixed with it.
+      evidence.push({
+        criterion: 'D6-latex', phase: String(p.mastery?.phase ?? ''), turn: turns, text,
+      })
     }
   }
 

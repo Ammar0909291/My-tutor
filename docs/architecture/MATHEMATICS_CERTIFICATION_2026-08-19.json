@@ -1,0 +1,703 @@
+{
+  "generatedAt": "2026-08-19T01:07:48.336Z",
+  "baseUrl": "https://my-tutor-flame.vercel.app",
+  "total": 43,
+  "passed": 34,
+  "failed": 9,
+  "results": [
+    {
+      "conceptId": "math.abst.group-theory",
+      "pass": false,
+      "failed": [
+        "D2-ungradeable"
+      ],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "ungradeable question at CHECK"
+      ],
+      "evidence": [
+        {
+          "criterion": "D2-ungradeable",
+          "phase": "CHECK",
+          "turn": 4,
+          "text": "Here is your first practice question:\n\nConsider the set of all integers (positive, negative, and zero) with the usual operation of addition, forming the group \\( (\\mathbb{Z}, +) \\). What is the identity element \\( e \\) for this group?\nA) 0, because adding 0 to any integer leaves it completely unchanged\nB) 1, because 1 is the fundamental building block of counting\nC) -1, because it acts as the negative counterpart to positive numbers\nD) There is no identity element for infinite sets"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.alg.equation",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.alg.expression",
+      "pass": false,
+      "failed": [
+        "D2-ungradeable"
+      ],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "ungradeable question at CHECK"
+      ],
+      "evidence": [
+        {
+          "criterion": "D2-ungradeable",
+          "phase": "CHECK",
+          "turn": 4,
+          "text": "Why isn't 3x + 2y just 5xy? Give the letters jobs: x = the price of an apple, y = the price of a banana. Then 3x + 2y is the cost of 3 apples and 2 bananas. Can you shorten that to \"5 apple-bananas\"? There's no such fruit — the two costs stay separate until you know actual prices. Same with 3x + 2: three apples plus 2 rupees isn't 5 of anything. The rule underneath: only LIKE terms — same letter, same power — can be combined, because 3x + 2x really is 5 of the same thing (5 apples: 5x). Test any simplification by substituting a number: at x = 2, y = 3, the original 3x + 2y = 12, but 5xy = 30. Different numbers, so the \"simplification\" was actually a different expression."
+        }
+      ]
+    },
+    {
+      "conceptId": "math.alg.like-terms",
+      "pass": true,
+      "failed": [],
+      "turns": 11,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.alg.linear-equation-1var",
+      "pass": true,
+      "failed": [],
+      "turns": 10,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 2,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.alg.quadratic-equation",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.arith.addition",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.arith.division",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "PRACTICE",
+          "turn": 3,
+          "text": "Yes — 3 remainder 2 — because 5 times 3 gives 15, and you have 2 left over to reach 47, which is expressed as 3 remainder 2.\n\nNow, as you look at the number line displayed on your screen, let's test this final concept before we finish up today."
+        }
+      ]
+    },
+    {
+      "conceptId": "math.arith.exponentiation",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "CHECK",
+          "turn": 2,
+          "text": "As you look at the number line displayed on your screen, notice how each step upward in exponentiation multiplies the total by the base again rather than just adding the same amount."
+        }
+      ]
+    },
+    {
+      "conceptId": "math.arith.fraction-equivalence",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "GUIDE",
+          "turn": 1,
+          "text": "When you cut the chocolate bar into 4 equal pieces and take 2 of them, you hold 2 over 4, which covers the exact same amount of space as 1 over 2. \n\nTwo fractions that name the exact same quantity are called **equivalent fractions**. \n\nAs you look at the number line displayed on your screen, notice how different fractions can land on the exact same position relative to zero.\n\nclaudeTest, are 2 over 4 and 1 over 2 equivalent fractions?"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.arith.fraction-multiplication",
+      "pass": false,
+      "failed": [
+        "D2-ungradeable"
+      ],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed",
+        "ungradeable question at CHECK"
+      ],
+      "evidence": [
+        {
+          "criterion": "D2-ungradeable",
+          "phase": "CHECK",
+          "turn": 4,
+          "text": "Yes — 8 over 15 — because we multiply the numerators 2 times 4 to get 8, and the denominators 3 times 5 to get 15.\n\nWhen we share or divide a fraction by another fraction, such as splitting a half-litre bottle of juice into containers that each hold one-quarter of a litre, we use **division of fractions**. \n\nDivision of fractions is computed by multiplying the first fraction by the **reciprocal** of the divisor, which means flipping the second fraction upside down so that its numerator and denominator swap places.\n\nAs you look at the number line on your screen, dividing by a fraction asks how many of those fractional portions fit into the first number.\n\nclaudeTest, what is the reciprocal of the fraction \\(\\frac{3}{4}\\) (three-fourths)?\nA) \\(-\\frac{3}{4}\\) — changing the sign of the fraction\nB) \\(\\frac{4}{3}\\) — swapping the numerator and the denominator\nC) \\(\\frac{3}{4}\\) — keeping the fraction exactly as it is\n\nWhat is the reciprocal of 3/4?\nA) -3/4 — changing the sign\nB) 4/3 — swapping numerator and denominator\nC) 3/4 — keeping it the same"
+        },
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "GUIDE",
+          "turn": 1,
+          "text": "Yes — 1/6 — because multiplying the numerators 1 times 1 gives 1, and multiplying the denominators 2 times 3 gives 6.\n\nTo see this with the number line on your screen, taking one-third of the interval from zero to one-half lands us at one-sixth.\n\nWhat is the result of multiplying \\(\\frac{2}{3} \\times \\frac{4}{5}\\) (two-thirds times four-fifths)?\nA) \\(\\frac{6}{8}\\) — adding the numerators and denominators separately\nB) \\(\\frac{8}{15}\\) — multiplying the numerators together and the denominators together\nC) \\(\\frac{5}{12}\\) — multiplying diagonally across the fractions"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.arith.fractions",
+      "pass": true,
+      "failed": [],
+      "turns": 17,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "PRACTICE",
+          "turn": 15,
+          "text": "Using the fraction bar on your screen divided into parts, why is a fraction with a larger denominator actually a smaller piece of the whole?"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.arith.multiplication",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.arith.order-of-operations",
+      "pass": false,
+      "failed": [
+        "D6-latex"
+      ],
+      "turns": 9,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "malformed LaTeX in learner-facing text"
+      ],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.arith.ratios",
+      "pass": false,
+      "failed": [
+        "D2-ungradeable"
+      ],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "ungradeable question at CHECK",
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D2-ungradeable",
+          "phase": "CHECK",
+          "turn": 4,
+          "text": "A recipe for pancakes calls for a ratio of 2 cups of flour to 3 cups of milk. \n\nWhen we write this comparison as a ratio, order matters completely. Let's look at the first quantity named in the description: flour, which has a measure of 2 cups. \n\nWhat is the second quantity named in the recipe description?"
+        },
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "PRACTICE",
+          "turn": 5,
+          "text": "Yes — 3:5 simply describes the exact same proportional relationship in smaller terms, without changing the actual number of items in the bag.\n\nRatio is a multiplicative comparison between two quantities by division, expressing how many times one is contained in the other, written as a:b or a/b.\n\nTake a look at the number line on your screen showing values relative to zero. Notice how distance can be compared in parts, just like quantities in a ratio."
+        }
+      ]
+    },
+    {
+      "conceptId": "math.arith.subtraction",
+      "pass": true,
+      "failed": [],
+      "turns": 9,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.calc.antiderivatives",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "GUIDE",
+          "turn": 1,
+          "text": "When you take the derivative of a constant number—like 5, or 10, or zero—the derivative is always zero. \n\nBecause differentiating a constant wipes it out, going backward from a derivative means we can never be completely sure whether there was a starting constant tucked at the end of the original function. The **+ C** represents that unknown constant of integration, which stands for a family of possible antiderivatives that differ only by a vertical shift.\n\nLet's look at how this works on the coordinate plane on your screen, which shows an x-y axis system for plotting functions. \n\nSuppose our derivative function is \\( f(x) = 2x \\) (f of x equals two x). One antiderivative is \\( F(x) = x^2 \\) (F of x equals x squared), but another valid antiderivative is \\( x^2 + 3 \\) (x squared plus three), and another is \\( x^2 - 5 \\) (x squared minus five).\n\nWhat is the general antiderivative of \\( f(x) = 3x^2 \\) (f of x equals three x squared)?\nA) \\( x^3 + C \\) (x cubed plus C)\nB) \\( 3x^3 + C \\) (three x cubed plus C)\nC) \\( x^2 + C \\) (x squared plus C)"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.calc.chain-rule",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.calc.derivative-intro",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "GUIDE",
+          "turn": 1,
+          "text": "A secant line passes through two points on a curve, letting us calculate an average rate of change.\n\nHere is the coordinate plane on your screen, which shows an x-y axis system for plotting functions. \n\nThe derivative at a point is the instantaneous rate of change, defined as the limit of the average rate of change (difference quotient) as the interval shrinks to zero: \\( f'(a) = \\lim_{h \\to 0} \\frac{f(a+h) - f(a)}{h} \\) (f-prime of a equals the limit as h approaches zero of f of a plus h minus f of a all divided by h). Geometrically, \\( f'(a) \\) (f-prime of a) is the slope of the tangent line to the curve \\( y = f(x) \\) (y equals f of x) at \\( x = a \\) (x equals a).\n\nWhat happens to the slope of the secant line as the second point moves closer and closer along the curve toward the first point?\nA) It approaches the slope of the tangent line at that single point\nB) It becomes equal to zero because the two points merge into one\nC) It becomes vertical and undefined because the distance between points disappears"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.calc.limits",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.found.integers",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.found.logic",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.found.natural-numbers",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.found.rational-numbers",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.found.set",
+      "pass": false,
+      "failed": [
+        "D2-ungradeable"
+      ],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "ungradeable question at CHECK"
+      ],
+      "evidence": [
+        {
+          "criterion": "D2-ungradeable",
+          "phase": "CHECK",
+          "turn": 4,
+          "text": "Yes, exactly — because sets are unordered, listing the elements in a different sequence still describes the exact same collection.\n\nNow let's look at the well-definedness rule: a valid set requires an unambiguous yes or no answer for whether any given object belongs to it. For instance, \"natural numbers less than five\" is well-defined because we can test any number with a clear yes or no.\n\nWhich of the following descriptions gives a well-defined set with a clear yes or no test for membership?\nA) The set of all tall people in your city\nB) The set of all integers greater than zero and less than five"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.func.function-concept",
+      "pass": false,
+      "failed": [
+        "D2-ungradeable"
+      ],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "ungradeable question at CHECK"
+      ],
+      "evidence": [
+        {
+          "criterion": "D2-ungradeable",
+          "phase": "CHECK",
+          "turn": 4,
+          "text": "It looks like you might have missed that last question or just typed ready. Let's make sure we are on the same page: a function requires that **each input has exactly one output**. If one input gives two different results, it fails the definition.\n\nSo, let's look at this restatement to confirm: are you saying that a rule where one input gives multiple different outputs is **not** a function?"
+        }
+      ]
+    },
+    {
+      "conceptId": "math.geom.angle",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.geom.circle",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.geom.coordinate-plane",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "PRACTICE",
+          "turn": 5,
+          "text": "That's correct — since the x-coordinate is negative and the y-coordinate is positive, the point sits to the left of the vertical axis and above the horizontal axis, placing it in Quadrant II.\n\nWe've explored how the coordinate plane uses two perpendicular axes meeting at the origin to map any point in two-dimensional space. Building on this, we can now use these pairs of numbers to describe geometric shapes algebraically.\n\nTake a look at the geometry shapes shown on your screen. While those shapes illustrate general geometric figures, every single point on their boundary lines can be described precisely using pairs of numbers on our coordinate plane.\n\nLet's do one final check on how we name these locations."
+        }
+      ]
+    },
+    {
+      "conceptId": "math.geom.right-triangle",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "CHECK",
+          "turn": 3,
+          "text": "A right triangle is a three-sided flat shape with one 90-degree angle, where the side opposite that right angle is called the hypotenuse and is always the longest side.\n\nBuilding on our look at the geometry shapes on your screen, every right triangle also obeys the Pythagorean theorem, which links the lengths of its two legs and its hypotenuse together through squares of their lengths."
+        }
+      ]
+    },
+    {
+      "conceptId": "math.geom.similar-triangles",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.geom.slope",
+      "pass": false,
+      "failed": [
+        "D2-ungradeable"
+      ],
+      "turns": 11,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 2,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "ungradeable question at CHECK",
+        "referenced a figure last attached on turn 0 — possibly still on screen, possibly scrolled away; recorded, not failed"
+      ],
+      "evidence": [
+        {
+          "criterion": "D2-ungradeable",
+          "phase": "CHECK",
+          "turn": 4,
+          "text": "When calculating slope, the vertical change in y always goes on top of the fraction, representing the rise, while the horizontal change in x goes on the bottom, representing the run.\n\nLet's look at this check question:\n\nFor the points (−1, 4) and (3, 12): which difference goes on top of the slope fraction, and how do you know?\nA) The vertical change in y goes on top because slope is defined as rise over run (vertical change divided by horizontal change)\nB) The horizontal change in x goes on top because we always move horizontally first along the coordinate plane"
+        },
+        {
+          "criterion": "D6-stale-reference",
+          "phase": "PRACTICE",
+          "turn": 7,
+          "text": "Let's apply this to a new challenge to see how the slope behaves across different points on the same line.\n\nAs you look at the geometric shapes on your screen, imagine a straight line drawn across one of them. If you pick any two pairs of points on that same straight line and calculate their slopes, the resulting value is always the exact same because the steepness of a straight line is constant everywhere along its path."
+        }
+      ]
+    },
+    {
+      "conceptId": "math.geom.triangle",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.geom.vectors-2d",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.linalg.determinant",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.linalg.matrix-multiplication",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.nt.prime-number",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.prob.classical-probability",
+      "pass": true,
+      "failed": [],
+      "turns": 8,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.prob.conditional-probability",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.prob.expected-value",
+      "pass": false,
+      "failed": [
+        "D6-latex"
+      ],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [
+        "malformed LaTeX in learner-facing text"
+      ],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.trig.right-triangle-trig",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.trig.trig-functions",
+      "pass": true,
+      "failed": [],
+      "turns": 6,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    },
+    {
+      "conceptId": "math.trig.unit-circle",
+      "pass": true,
+      "failed": [],
+      "turns": 7,
+      "finalPhase": "TRANSFER",
+      "checkCorrect": 1,
+      "practiceCorrect": 2,
+      "verified": true,
+      "notes": [],
+      "evidence": []
+    }
+  ]
+}
