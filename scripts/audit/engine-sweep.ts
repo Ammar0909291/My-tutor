@@ -58,7 +58,41 @@ function arg(name: string, fallback: string): string {
 
 const SUBJECT = arg('subject', 'physics')
 const LIMIT = Number(arg('limit', '8'))
-const CONCURRENCY = Number(arg('concurrency', '6'))
+
+/**
+ * CONCURRENCY IS 1, AND THAT IS NOT A PERFORMANCE CHOICE.
+ *
+ * A LEARN SESSION BELONGS TO A USER, NOT TO A TOPIC. This sweep signs in as one
+ * account, and before each topic it ends every ACTIVE session for the subject
+ * "so state cannot leak in" — which, run in parallel, means each topic ends its
+ * siblings' sessions. `/api/sessions` then resumes an existing ACTIVE session
+ * rather than always minting a fresh one, so two topics can end up driving the
+ * same session.
+ *
+ * MEASURED, and it fabricated a serious-looking production defect. A run at
+ * concurrency 2 reported:
+ *
+ *   E4  phys.wave.wave-speed: served asset … is for phys.em.coulombs-law
+ *
+ * i.e. "a learner on wave speed was taught Coulomb's law". The database says
+ * otherwise: lesson_attempts shows `Wave Speed` starting 06:37:50 and
+ * `Coulomb's Law` starting 06:38:07 — overlapping — and BOTH sessions alive in
+ * that window carry `currentConceptNodeId = phys.em.coulombs-law`. The asset
+ * itself is correctly tagged for Coulomb's law. Nothing was wrong in
+ * production; the harness had two topics sharing one session.
+ *
+ * That is the SECOND false finding this instrument produced in one session (the
+ * first was a bot-manufactured DEMONSTRATE freeze), and a harness that invents
+ * "the wrong concept was served" is worse than a slow one — it sends people to
+ * fix code that is correct.
+ *
+ * Real isolation needs one account per worker. Until this has that, topics run
+ * one at a time. `--unsafe-concurrency N` exists for a throwaway account where
+ * contamination does not matter; every finding from such a run must be treated
+ * as unverified.
+ */
+const UNSAFE = Number(arg('unsafe-concurrency', '0'))
+const CONCURRENCY = UNSAFE > 1 ? UNSAFE : 1
 
 // ── session-scoped cookie jar ────────────────────────────────────────────────
 //
@@ -409,6 +443,13 @@ async function main() {
         all[Math.floor((k * all.length) / Math.min(LIMIT, all.length))])
     : all.slice(OFFSET, OFFSET + LIMIT)
   console.log(`sweeping ${topics.length} ${SUBJECT} topics, concurrency ${CONCURRENCY}\n`)
+  if (CONCURRENCY > 1) {
+    console.log(
+      '  UNSAFE CONCURRENCY — a session belongs to the ACCOUNT, not the topic, so\n'
+      + '  topics will share and end each other\'s sessions. Findings from this run are\n'
+      + '  NOT trustworthy: a previous such run invented a cross-concept serve.\n',
+    )
+  }
 
   const results: TopicResult[] = []
   const queue = [...topics]
