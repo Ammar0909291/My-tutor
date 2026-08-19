@@ -115,10 +115,14 @@ import {
   MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
   MATHEMATICS_SOLIDS_POLYGONS_PROBES,
 } from '@/lib/teaching/assets/mathematicsSolidsPolygonsAssets'
+import {
+  MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS,
+  MATHEMATICS_CIRCLES_TRANSFORM_PROBES,
+} from '@/lib/teaching/assets/mathematicsCirclesTransformAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -267,7 +271,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -401,6 +405,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
     ...MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS,
     ...MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
+    ...MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -429,6 +434,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_CRYPTO_NUMBER_PROBES,
     ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES,
     ...MATHEMATICS_SOLIDS_POLYGONS_PROBES,
+    ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -2212,6 +2218,96 @@ describe('mathematics polygons and solids', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_SOLIDS_POLYGONS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 27 — circles, and moving things about the plane.
+ *
+ * ONE error dominates the circle half and both formula registers name
+ * it as their foundational entry: substituting the DIAMETER where the
+ * formula wants a radius. It costs a factor of 2 in circumference and
+ * 4 in area — and the asymmetry is the teachable part, because the
+ * mistake in the area case sits inside a square. The checks below
+ * compute both wrong answers, so the asymmetry is asserted rather than
+ * asserted-about.
+ */
+describe('mathematics circles and transformations', () => {
+  const NEW = [
+    'math.geom.circle-circumference', 'math.geom.circle-area',
+    'math.geom.circle-equation', 'math.geom.circle-theorems',
+    'math.geom.x-y-coordinates', 'math.geom.transformations',
+    'math.geom.translation', 'math.geom.geometric-constructions',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_CIRCLES_TRANSFORM_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the diameter slip really costs 2x in circumference and 4x in area', () => {
+    const d = 14, r = d / 2
+    expect(Math.round(Math.PI * d * 100) / 100).toBe(43.98)          // correct C
+    expect(Math.round(2 * Math.PI * d * 100) / 100).toBe(87.96)      // the slip: exactly double
+    expect((2 * Math.PI * d) / (Math.PI * d)).toBe(2)
+    expect(Math.round(Math.PI * r * r * 10) / 10).toBe(153.9)        // correct A
+    expect(Math.round(Math.PI * d * d * 10) / 10).toBe(615.8)        // the slip
+    expect((Math.PI * d * d) / (Math.PI * r * r)).toBe(4)            // exactly four times
+    const a = MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.circle-area')!
+    expect(a.content).toMatch(/four times too large/)
+    expect(a.content).toMatch(/inside a square/)
+  })
+
+  it('the impossible circle equation really completes to a negative', () => {
+    // x^2 + y^2 - 4x + 6y + 20 = 0  ->  (x-2)^2 + (y+3)^2 = -20 + 4 + 9
+    expect(-20 + 4 + 9).toBe(-7)
+    const c = MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.circle-equation')!
+    expect(c.content).toMatch(/= −7/)
+    expect(c.content).toMatch(/describes nothing/)
+  })
+
+  it('the semicircle right angle is derived from the arc, not asserted', () => {
+    expect(180 / 2).toBe(90)
+    const t = MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.circle-theorems')!
+    expect(t.content).toMatch(/the arc is 180° and half of that is 90°/)
+    // and the halving rule is scoped to inscribed angles
+    expect(t.content).toMatch(/halving applies to inscribed angles only/i)
+  })
+
+  it('composition is stated as non-commutative, and dilation as the odd one out', () => {
+    const t = MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.transformations')!
+    expect(t.content).toMatch(/does NOT commute/)
+    expect(t.content).toMatch(/Dilations are not/)
+  })
+
+  it('the translation arithmetic is right and the shift is uniform', () => {
+    expect([1 + 3, 5 - 2]).toEqual([4, 3])
+    const t = MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.translation')!
+    expect(t.content).toMatch(/SAME shift applies to every vertex/)
+  })
+
+  it('constructions keep the unmarked-straightedge rule and the impossibility results', () => {
+    const c = MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.geometric-constructions')!
+    expect(c.content).toMatch(/UNMARKED straightedge/)
+    expect(c.content).toMatch(/provably IMPOSSIBLE/)
+    expect(c.content).toMatch(/trisecting/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_CIRCLES_TRANSFORM_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_CIRCLES_TRANSFORM_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
