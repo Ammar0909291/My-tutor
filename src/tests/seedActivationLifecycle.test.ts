@@ -252,8 +252,17 @@ describe('P20 D3 — seed-slug uniqueness is enforced by a partial index', () =>
     expect(datamodel).not.toMatch(/canonicalSlug\s+String\s+@unique/)
   })
 
-  it('the bootstrap still treats P2002 as a skip (now reachable, previously dead)', () => {
-    expect(instrumentation).toMatch(/P2002/)
-    expect(instrumentation).toMatch(/code === 'P2002'/)
+  it('the bootstrap still lets the losing racer skip, via ON CONFLICT DO NOTHING', () => {
+    // The partial unique index is what makes concurrent cold starts converge
+    // on one catalogue instead of duplicating rows or aborting each other.
+    // The bootstrap used to consume that as a per-asset P2002 catch; since the
+    // writes were batched (2026-08-19, because 40 sequential nested creates
+    // could not finish inside the boot deadline) it consumes it as
+    // skipDuplicates, which Prisma emits as ON CONFLICT DO NOTHING against the
+    // same index. Same guarantee, whole batch at a time.
+    expect(instrumentation).toMatch(/skipDuplicates: true/)
+    // And the loser must not then write a content row against an id the
+    // database never accepted — that would violate the foreign key.
+    expect(instrumentation).toMatch(/landed\.has\(id\)/)
   })
 })

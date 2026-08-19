@@ -57,19 +57,33 @@ describe('the asset bootstrap repairs hollow identities', () => {
     expect(CODE).not.toMatch(/prisma\.assetIdentity\.findFirst\(/)
   })
 
-  it('a single failed write does not discard the rest of the run', () => {
+  it('a failed write does not discard the rest of the run', () => {
     // All-or-nothing is exactly why the catalogue never converged.
+    //
+    // The unit changed on 2026-08-19 and the invariant did not. Writes are now
+    // batched (createMany) because 40 sequential nested creates could not
+    // finish inside the boot deadline — measured at three assets per cold
+    // start. So a failure costs its BATCH rather than one asset. Each flush is
+    // caught separately, the batch is bounded by the same write budget, and
+    // every statement is idempotent, so the worst case is that one cold start
+    // advances less — not that progress is lost or the run is discarded.
     expect(SRC).toMatch(/let failed = 0/)
-    expect(SRC).toMatch(/failed\+\+/)
+    expect(SRC).toMatch(/failed \+= /)
     expect(SRC).toMatch(/failed=\$\{failed\}/)
-    // No unconditional rethrow left in the per-asset create path.
+    // Each flush is caught on its own; none rethrows out of the run.
+    expect(CODE).toMatch(/const flush = async \(/)
+    expect(CODE).toMatch(/retried on next cold start/)
     expect(CODE).not.toMatch(/throw createErr/)
   })
 
   it('creates the MISSING CHILD for an existing identity, both families', () => {
     expect(SRC).toMatch(/if \(!dup\.hasContent\)/)
-    expect(SRC).toMatch(/prisma\.explanationAsset\.create\(/)
-    expect(SRC).toMatch(/prisma\.probeAsset\.create\(/)
+    // Batched since 2026-08-19: the repair collects children in memory and
+    // writes them with createMany. Same rows, same parents, one statement.
+    expect(CODE).toMatch(/repairExplanations\.push\(child\(dup\.assetId\)\)/)
+    expect(CODE).toMatch(/repairProbes\.push\(child\(dup\.assetId\)\)/)
+    expect(CODE).toMatch(/prisma\.explanationAsset\.createMany\(/)
+    expect(CODE).toMatch(/prisma\.probeAsset\.createMany\(/)
   })
 
   it('repairs by adding the child, never by deleting the identity', () => {
@@ -94,8 +108,14 @@ describe('the asset bootstrap repairs hollow identities', () => {
   })
 
   it('a concurrent cold start healing the same row is not an error', () => {
-    // Both racers want the same end state; P2002 means it already happened.
-    expect(SRC).toMatch(/if \(repairErr\?\.code !== 'P2002'\) throw repairErr/)
+    // Both racers want the same end state, so the loser must write nothing and
+    // carry on. That used to be a per-asset P2002 catch; batching moved it into
+    // the statement as ON CONFLICT DO NOTHING, which is the same guarantee
+    // against the same partial unique index — and now covers the whole batch
+    // rather than one row at a time.
+    const flushes = CODE.match(/createMany\(\{[\s\S]{0,200}?\}\)/g) ?? []
+    expect(flushes.length).toBeGreaterThan(0)
+    for (const call of flushes) expect(call).toMatch(/skipDuplicates: true/)
   })
 
   it('reports repairs separately from creations', () => {
@@ -135,9 +155,16 @@ describe('the asset bootstrap repairs hollow identities', () => {
     const breaks = SRC.match(/if \(budgetExhausted\(\)\) break/g) ?? []
     expect(breaks).toHaveLength(2)
     // Only REAL writes spend budget; skips are free, or a run of already-seeded
-    // assets would burn the slice without doing anything.
-    expect(SRC).toMatch(/repaired\+\+\s*\n\s*budgetSpent\+\+/)
-    expect(SRC).toMatch(/created\+\+\s*\n\s*budgetSpent\+\+/)
+    // assets would burn the slice without doing anything. Since the writes are
+    // batched, budget is spent when an asset is PLANNED — one unit per row the
+    // flush will attempt — and the `skipped` paths still `continue` without
+    // spending. `repaired`/`created` are now counted from what the statements
+    // report, so they are no longer the place the budget moves.
+    expect(CODE).toMatch(/repairExplanations\.push\(child\(dup\.assetId\)\)\s*\n\s*budgetSpent\+\+/)
+    expect(CODE).toMatch(/newExplanationChildren\.set\(assetId, child\(assetId\)\)\s*\n\s*budgetSpent\+\+/)
+    expect(CODE).toMatch(/newProbeChildren\.set\(assetId, child\(assetId\)\)\s*\n\s*budgetSpent\+\+/)
+    // A skip must never spend it.
+    expect(CODE).toMatch(/skipped\+\+\s*\n\s*continue/)
   })
 
   it('the log distinguishes "slice spent, more to do" from "nothing left"', () => {
