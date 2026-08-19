@@ -55,10 +55,14 @@ import {
   MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS,
   MATHEMATICS_ORDERS_PROOFS_PROBES,
 } from '@/lib/teaching/assets/mathematicsOrdersProofsAssets'
+import {
+  MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS,
+  MATHEMATICS_LANGUAGE_STRATEGY_PROBES,
+} from '@/lib/teaching/assets/mathematicsLanguageStrategyAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -207,7 +211,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -326,6 +330,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_SET_OPERATIONS_EXPLANATIONS,
     ...MATHEMATICS_RELATIONS_NUMBERS_EXPLANATIONS,
     ...MATHEMATICS_ORDERS_PROOFS_EXPLANATIONS,
+    ...MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -339,6 +344,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_SET_OPERATIONS_PROBES,
     ...MATHEMATICS_RELATIONS_NUMBERS_PROBES,
     ...MATHEMATICS_ORDERS_PROOFS_PROBES,
+    ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -835,6 +841,87 @@ describe('mathematics relation properties, operations survey and overselling nam
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_ORDERS_PROOFS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 12 — how mathematics is written, how patterns are found, how
+ * problems are attacked, and two tools that get trusted too far.
+ *
+ * `mathematical-notation` and `mathematical-symbols` have near-identical KG
+ * descriptions — an open Curriculum Feedback item since math.found Wave 2.
+ * They are authored here as the SYSTEM and the individual MARKS, which is
+ * the only split that makes them separately masterable. The check below
+ * enforces that split rather than trusting it: if the two entries ever
+ * converge in content, the test fails.
+ */
+describe('mathematics language, notation, strategy and two overtrusted tools', () => {
+  const NEW = [
+    'math.found.mathematical-language', 'math.found.mathematical-notation',
+    'math.found.mathematical-symbols', 'math.found.pattern-recognition',
+    'math.found.problem-solving', 'math.found.problem-solving-strategies',
+    'math.found.venn-diagram', 'math.found.well-ordering-principle',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_LANGUAGE_STRATEGY_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('notation and symbols are taught as different things, not two copies', () => {
+    const notation = MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.mathematical-notation')!
+    const symbols = MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.mathematical-symbols')!
+    // Notation owns the SYSTEM and the look-alike pairs; symbols owns the
+    // individual marks and their families. Neither may drift into the other.
+    expect(notation.content).toMatch(/the SYSTEM/)
+    expect(symbols.content).toMatch(/individual marks/i)
+    expect(symbols.content).toMatch(/quantifier/i)
+    // A crude but real duplication guard: they must not share long passages.
+    const shingles = (t: string) => new Set(t.toLowerCase().split(/\s+/).map((_, i, a) => a.slice(i, i + 8).join(' ')).filter((g) => g.split(' ').length === 8))
+    const a = shingles(notation.content)
+    const overlap = [...shingles(symbols.content)].filter((g) => a.has(g))
+    expect(overlap, `shared 8-word passages: ${overlap.slice(0, 3).join(' | ')}`).toHaveLength(0)
+  })
+
+  it('the Venn diagram is said to illustrate rather than prove', () => {
+    const v = MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.venn-diagram')!
+    expect(v.content).toMatch(/illustrates rather than proves/i)
+    expect(v.content).toMatch(/2ⁿ|2\^n/)
+  })
+
+  it('well-ordering states both conditions — non-empty AND the naturals', () => {
+    const w = MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.well-ordering-principle')!
+    expect(w.content).toMatch(/NON-EMPTY|non-empty/)
+    expect(w.content).toMatch(/integers fail it/i)
+  })
+
+  it('systematic trial is distinguished from guessing by what a failure yields', () => {
+    const p = MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.problem-solving')!
+    expect(p.content).toMatch(/not guessing/i)
+    expect(p.content).toMatch(/rules out|learns nothing/i)
+  })
+
+  it('pattern recognition is capped at a candidate, never a proof', () => {
+    const p = MATHEMATICS_LANGUAGE_STRATEGY_EXPLANATIONS.find((e) => e.conceptId === 'math.found.pattern-recognition')!
+    expect(p.content).toMatch(/CANDIDATE|candidate/)
+    expect(p.content).toMatch(/never a substitute for one|not yet established/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_LANGUAGE_STRATEGY_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_LANGUAGE_STRATEGY_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
