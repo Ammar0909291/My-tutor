@@ -87,10 +87,14 @@ import {
   MATHEMATICS_MEASUREMENT_EXPLANATIONS,
   MATHEMATICS_MEASUREMENT_PROBES,
 } from '@/lib/teaching/assets/mathematicsMeasurementAssets'
+import {
+  MATHEMATICS_COORDINATE_EXPLANATIONS,
+  MATHEMATICS_COORDINATE_PROBES,
+} from '@/lib/teaching/assets/mathematicsCoordinateAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -239,7 +243,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -366,6 +370,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS,
     ...MATHEMATICS_ARITH_CLOSE_EXPLANATIONS,
     ...MATHEMATICS_MEASUREMENT_EXPLANATIONS,
+    ...MATHEMATICS_COORDINATE_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -387,6 +392,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES,
     ...MATHEMATICS_ARITH_CLOSE_PROBES,
     ...MATHEMATICS_MEASUREMENT_PROBES,
+    ...MATHEMATICS_COORDINATE_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1536,6 +1542,86 @@ describe('mathematics measurement and congruence', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_MEASUREMENT_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 20 — the coordinate plane and two conics.
+ *
+ * The ellipse and hyperbola are a matched pair that swap on BOTH counts
+ * at once — sum vs difference of distances, difference vs sum of
+ * squares — and their registers record exactly that cross-contamination.
+ * They are therefore authored together, each naming the other, and the
+ * checks below demand both halves of the swap appear in both entries.
+ */
+describe('mathematics coordinate plane and conics', () => {
+  const NEW = [
+    'math.geom.quadrants', 'math.geom.midpoint-formula',
+    'math.geom.line-equation', 'math.geom.parallelogram',
+    'math.geom.pythagorean-converse', 'math.geom.reflection',
+    'math.geom.ellipse', 'math.geom.hyperbola',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_COORDINATE_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_COORDINATE_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the two conics each state the full swap, not half of it', () => {
+    const ell = MATHEMATICS_COORDINATE_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.ellipse')!
+    const hyp = MATHEMATICS_COORDINATE_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.hyperbola')!
+    // distances: ellipse sums, hyperbola differences
+    expect(ell.content).toMatch(/SUM to a constant/)
+    expect(hyp.content).toMatch(/constant\s+DIFFERENCE/)
+    // squares: ellipse subtracts, hyperbola adds — and each names the other
+    expect(ell.content).toMatch(/c² = a² − b²/)
+    expect(hyp.content).toMatch(/c² = a² \+ b²/)
+    expect(ell.content).toMatch(/hyperbola/i)
+    expect(hyp.content).toMatch(/ellipse/i)
+  })
+
+  it('the Pythagorean converse is taught as a separate claim, with the general rule denied', () => {
+    const c = MATHEMATICS_COORDINATE_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.pythagorean-converse')!
+    expect(c.content).toMatch(/separate claim needing its own proof/i)
+    expect(c.content).toMatch(/Converses fail constantly/i)
+    // and the acute/obtuse extension, which is what makes it useful
+    expect(c.content).toMatch(/acute/i)
+    expect(c.content).toMatch(/obtuse/i)
+  })
+
+  it('the y = x reflection swaps without negating, and orientation reverses', () => {
+    const r = MATHEMATICS_COORDINATE_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.reflection')!
+    expect(r.content).toMatch(/coordinates SWAP/)
+    expect(r.content).toMatch(/no negation at all/i)
+    expect(r.content).toMatch(/cannot shake your right hand/i)
+  })
+
+  it('quadrant numbering is stated as anticlockwise, and axis points excluded', () => {
+    const q = MATHEMATICS_COORDINATE_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.quadrants')!
+    expect(q.content).toMatch(/ANTI-clockwise/)
+    expect(q.content).toMatch(/in NO quadrant/)
+  })
+
+  it('the three line forms are said to be one line', () => {
+    const l = MATHEMATICS_COORDINATE_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.line-equation')!
+    expect(l.content).toMatch(/SAME LINE/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_COORDINATE_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_COORDINATE_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
