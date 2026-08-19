@@ -19,10 +19,14 @@ import {
   MATHEMATICS_ARITHMETIC_EXPLANATIONS,
   MATHEMATICS_ARITHMETIC_PROBES,
 } from '@/lib/teaching/assets/mathematicsArithmeticFoundations'
+import {
+  MATHEMATICS_BATCH3_EXPLANATIONS,
+  MATHEMATICS_BATCH3_PROBES,
+} from '@/lib/teaching/assets/mathematicsBatch3Assets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -171,7 +175,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -227,6 +231,82 @@ describe('mathematics early arithmetic — newly serving concepts', () => {
       const sentences = e.content.split(/(?<=[.!?])\s+/).filter((x) => x.trim().length > 0)
       const longest = Math.max(...sentences.map((x) => x.split(/\s+/).length))
       expect(longest, `${e.conceptId} has a ${longest}-word sentence`).toBeLessThanOrEqual(34)
+    }
+  })
+})
+
+/**
+ * Third batch — written procedures, and the vocabulary of proof.
+ */
+describe('mathematics batch 3 — newly serving concepts', () => {
+  const NEW = [
+    'math.arith.column-addition', 'math.arith.mental-addition',
+    'math.arith.multiplication-table', 'math.arith.remainder',
+    'math.arith.divisor-dividend', 'math.found.set-equality',
+    'math.found.proper-subset', 'math.found.axiom',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_BATCH3_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_BATCH3_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('probes never appear at a band the explanation does not cover', () => {
+    for (const conceptId of NEW) {
+      const bands = new Set(MATHEMATICS_BATCH3_EXPLANATIONS
+        .filter((e) => e.conceptId === conceptId).map((e) => e.gradeBand))
+      for (const p of MATHEMATICS_BATCH3_PROBES.filter((x) => x.conceptId === conceptId)) {
+        expect(bands.has(p.gradeBand), `${conceptId} probe at ${p.gradeBand}`).toBe(true)
+      }
+    }
+  })
+
+  it('every probe is gradeable and every distractor names its misconception', () => {
+    for (const p of MATHEMATICS_BATCH3_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      for (const c of p.choices ?? []) {
+        if (!c.isCorrect) expect(c.misconceptionId, `${p.stem} -> "${c.text}"`).toBeTruthy()
+      }
+    }
+  })
+})
+
+/**
+ * ACROSS EVERY BATCH. Written once so a future batch cannot quietly reuse an
+ * identity or drop a citation — the seed validator catches collisions, but only
+ * for assets that reach it, and only at seed time.
+ */
+describe('all authored mathematics batches together', () => {
+  const ALL_EXPLANATIONS = [
+    ...MATHEMATICS_FOUNDATION_EXPLANATIONS,
+    ...MATHEMATICS_ARITHMETIC_EXPLANATIONS,
+    ...MATHEMATICS_BATCH3_EXPLANATIONS,
+  ]
+  const ALL_NEW_PROBES = [
+    ...MATHEMATICS_FOUNDATION_PROBES,
+    ...MATHEMATICS_ARITHMETIC_PROBES,
+    ...MATHEMATICS_BATCH3_PROBES,
+  ]
+
+  it('no concept is authored twice across batches', () => {
+    const ids = ALL_EXPLANATIONS.map((e) => `${e.conceptId}:${e.gradeBand}`)
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('every asset cites the Educational Brain entry it came from', () => {
+    for (const a of [...ALL_EXPLANATIONS, ...ALL_NEW_PROBES]) {
+      expect(a.source, a.conceptId).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
+    }
+  })
+
+  it('no explanation opens with a bare definition', () => {
+    for (const e of ALL_EXPLANATIONS) {
+      expect(e.content, e.conceptId).not.toMatch(/^(A|An|The)\s+\w+(\s+\w+)?\s+is\s+(defined\s+as|a\s+\w+\s+that)/i)
     }
   })
 })
