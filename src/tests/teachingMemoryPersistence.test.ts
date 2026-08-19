@@ -39,7 +39,10 @@ const CONCEPT = 'chem.found.mole-concept'
 function persistBlock(): string {
   const start = ROUTE.indexOf('if (teachingHistoryHoisted) {')
   expect(start).toBeGreaterThan(-1)
-  return ROUTE.slice(start, start + 3000)
+  // Wide enough to contain the whole block. It was 3000 and the block
+  // outgrew it when the probe-spend rule gained its rationale comment, which
+  // failed this test for a reason that had nothing to do with the assertion.
+  return ROUTE.slice(start, start + 7000)
 }
 
 describe('the ledger is written on EVERY taught turn', () => {
@@ -64,8 +67,21 @@ describe('the ledger is written on EVERY taught turn', () => {
   })
 
   it('mcqAsked and explanationsServed fold on ordinary turns too', () => {
+    // THE POINT OF THIS TEST IS THE BLOCK, NOT THE ARGUMENT. It exists because
+    // these folds once sat inside the `explain_differently` branch, so an
+    // ordinary turn recorded nothing and the ledger went stale. Both calls must
+    // therefore live in the always-folding block, which is what `persistBlock()`
+    // returns.
+    //
+    // The mcq argument CHANGED (deliberately): a probe is spent when it is
+    // ANSWERED, not when it is shown, so the recorded question is the pending
+    // one that just got a grade rather than the outgoing one. Burning a probe
+    // on display cost the pool an item for nothing, and production physics
+    // carries a mean of 3.13 gradeable probes against a bar of 3 graded
+    // answers — no slack to lose. See the comment at the call site.
     const b = persistBlock()
-    expect(b).toContain('recordMcqAsked(memoryHistory, mcqHoisted.question)')
+    expect(b).toContain('recordMcqAsked(memoryHistory, pendingMcqHoisted.question)')
+    expect(b).toContain('if (pendingMcqHoisted?.question && mcqGradeHoisted)')
     expect(b).toContain('recordExplanationServed(memoryHistory, assembled.explanationAssetId)')
   })
 
