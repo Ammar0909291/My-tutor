@@ -23,10 +23,14 @@ import {
   MATHEMATICS_BATCH3_EXPLANATIONS,
   MATHEMATICS_BATCH3_PROBES,
 } from '@/lib/teaching/assets/mathematicsBatch3Assets'
+import {
+  MATHEMATICS_GEOMETRY_EXPLANATIONS,
+  MATHEMATICS_GEOMETRY_PROBES,
+} from '@/lib/teaching/assets/mathematicsGeometryFoundations'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -175,7 +179,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -286,11 +290,13 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_FOUNDATION_EXPLANATIONS,
     ...MATHEMATICS_ARITHMETIC_EXPLANATIONS,
     ...MATHEMATICS_BATCH3_EXPLANATIONS,
+    ...MATHEMATICS_GEOMETRY_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
     ...MATHEMATICS_ARITHMETIC_PROBES,
     ...MATHEMATICS_BATCH3_PROBES,
+    ...MATHEMATICS_GEOMETRY_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -307,6 +313,47 @@ describe('all authored mathematics batches together', () => {
   it('no explanation opens with a bare definition', () => {
     for (const e of ALL_EXPLANATIONS) {
       expect(e.content, e.conceptId).not.toMatch(/^(A|An|The)\s+\w+(\s+\w+)?\s+is\s+(defined\s+as|a\s+\w+\s+that)/i)
+    }
+  })
+})
+
+/**
+ * Geometry's actual beginning. Eight concepts were already served in geometry,
+ * and every one of them assumes point, line and plane — which had no serving
+ * content at all.
+ */
+describe('mathematics geometry foundations — newly serving concepts', () => {
+  const NEW = [
+    'math.geom.point', 'math.geom.line', 'math.geom.line-segment', 'math.geom.ray',
+    'math.geom.plane', 'math.geom.angle-types', 'math.geom.angle-measurement',
+    'math.geom.perpendicular-lines',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_GEOMETRY_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_GEOMETRY_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the undefined terms say the drawing is not the object', () => {
+    // Pretending the pencil mark IS the point is what leaves a learner believing
+    // a line is a thin rectangle. Each of these three must name the gap.
+    for (const id of ['math.geom.point', 'math.geom.line', 'math.geom.plane']) {
+      const e = MATHEMATICS_GEOMETRY_EXPLANATIONS.find((x) => x.conceptId === id)!
+      expect(e.content, id).toMatch(/picture|stands for|drawing|draw/i)
+    }
+  })
+
+  it('every probe is gradeable and every distractor names its misconception', () => {
+    for (const p of MATHEMATICS_GEOMETRY_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      for (const c of p.choices ?? []) {
+        if (!c.isCorrect) expect(c.misconceptionId, `${p.stem} -> "${c.text}"`).toBeTruthy()
+      }
     }
   })
 })
