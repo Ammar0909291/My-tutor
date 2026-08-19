@@ -144,7 +144,12 @@ describe('P20 D2 — seedOwnershipWhere selects exactly the bootstrap corpus', (
 // ── D2: the bootstrap must use the predicate, not a bare count ───────────────
 
 describe('P20 D2 — instrumentation.ts uses ownership-scoped queries', () => {
-  const src = fs.readFileSync(path.join(process.cwd(), 'src/instrumentation.ts'), 'utf8')
+  const raw = fs.readFileSync(path.join(process.cwd(), 'src/instrumentation.ts'), 'utf8')
+  // Assert against CODE, not prose. The file quotes production error messages
+  // verbatim — including `prisma.assetIdentity.groupBy()` from the socket
+  // timeout that led to the query being removed — and a bare-call ban below
+  // matched the quotation rather than a call.
+  const src = raw.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^[^\n]*\/\/.*$/gm, '')
 
   it('the completeness guard is scoped, never an unscoped aggregate', () => {
     // A bare count() measures the shared table — including the unbounded
