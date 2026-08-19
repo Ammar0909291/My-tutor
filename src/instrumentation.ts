@@ -87,7 +87,13 @@ export async function register() {
   //
   // Cost: once the catalogue is complete the guard exits after that one 10 ms
   // read, so the steady state is a single indexed query per cold start.
-  const deadlineMs = Number(process.env.ASSET_BOOTSTRAP_DEADLINE_MS ?? 5000)
+  // MEASURED at 5000ms: the deadline was reached on every cold start with only
+  // a handful of rows written, because almost all of it goes to FIXED cost
+  // before any write — Prisma engine connect, evaluating 1.37 MB of seed source,
+  // and validating 4,144 canonical identities. Raising it buys write time, not
+  // idle time, and since the writes are batched the marginal cost of a larger
+  // slice is a bigger INSERT payload rather than more round trips.
+  const deadlineMs = Number(process.env.ASSET_BOOTSTRAP_DEADLINE_MS ?? 12000)
   let onDeadline: ReturnType<typeof setTimeout> | undefined
   await Promise.race([
     bootstrapAssets().catch((err) =>
@@ -438,7 +444,12 @@ async function bootstrapAssets() {
       // idempotent writes — only an upper bound on how much one invocation
       // attempts. `scripts/brain/seed-knowledge-assets.ts` remains the right
       // tool for seeding the whole catalogue at once.
-      const WRITE_BUDGET = Number(process.env.ASSET_BOOTSTRAP_WRITE_BUDGET ?? 40)
+      //
+      // 40 was chosen when each asset cost its own round trip. Batched, 150
+      // rows is the same four statements — so the budget now bounds payload
+      // size rather than latency, and the catalogue converges in a couple of
+      // cold starts instead of dozens.
+      const WRITE_BUDGET = Number(process.env.ASSET_BOOTSTRAP_WRITE_BUDGET ?? 150)
       let budgetSpent = 0
       const budgetExhausted = () => budgetSpent >= WRITE_BUDGET
       // Content rows written for an identity that already existed but was
