@@ -107,10 +107,14 @@ import {
   MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
   MATHEMATICS_CRYPTO_NUMBER_PROBES,
 } from '@/lib/teaching/assets/mathematicsCryptoNumberAssets'
+import {
+  MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS,
+  MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES,
+} from '@/lib/teaching/assets/mathematicsAnalyticAlgebraicAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -259,7 +263,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -391,6 +395,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS,
     ...MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS,
     ...MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
+    ...MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -417,6 +422,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES,
     ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES,
     ...MATHEMATICS_CRYPTO_NUMBER_PROBES,
+    ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -2013,6 +2019,102 @@ describe('mathematics number theory — Bézout to RSA', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_CRYPTO_NUMBER_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 25 — the analytic and algebraic tail. NINE concepts; closes math.nt.
+ *
+ * FOUR registers here record the SAME error: that the Prime Number
+ * Theorem depends on the Riemann Hypothesis. It does not — PNT was
+ * proved in 1896 and RH has been open since 1859, so a proved theorem
+ * would be resting on an open conjecture. That mis-teaches what
+ * "proved" MEANS as much as it mis-teaches the number theory, which is
+ * why the check below demands all four entries get it right rather
+ * than just the two most obvious ones.
+ */
+describe('mathematics analytic and algebraic number theory', () => {
+  const NEW = [
+    'math.nt.prime-distribution', 'math.nt.prime-number-theorem',
+    'math.nt.riemann-hypothesis', 'math.nt.analytic-number-theory',
+    'math.nt.algebraic-integers', 'math.nt.number-fields',
+    'math.nt.algebraic-number-theory', 'math.nt.continued-fractions',
+    'math.nt.induction-applications',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('all four analytic entries keep PNT independent of RH', () => {
+    const find = (id: string) => MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS.find((e) => e.conceptId === id)!
+    // the two that must say it outright
+    expect(find('math.nt.prime-number-theorem').content).toMatch(/does NOT depend on the Riemann Hypothesis/)
+    expect(find('math.nt.riemann-hypothesis').content).toMatch(/proved in 1896 and does not wait for RH/)
+    // and neither of the other two may imply the dependence
+    expect(find('math.nt.analytic-number-theory').content).not.toMatch(/PNT (?:requires|depends on|needs) RH/i)
+    expect(find('math.nt.prime-distribution').content).not.toMatch(/assuming RH/i)
+    // the distinction that makes it concrete: zero-free line vs critical line
+    expect(find('math.nt.prime-number-theorem').content).toMatch(/Re\(s\) = 1/)
+    expect(find('math.nt.riemann-hypothesis').content).toMatch(/Re\(s\) = ½/)
+  })
+
+  it('the prime-counting figures quoted are real', () => {
+    const sieve = (x: number) => {
+      const s = new Array(x + 1).fill(true); s[0] = s[1] = false
+      for (let i = 2; i * i <= x; i++) if (s[i]) for (let j = i * i; j <= x; j += i) s[j] = false
+      return s.filter(Boolean).length
+    }
+    expect(sieve(100)).toBe(25)
+    expect(sieve(1000000)).toBe(78498)
+    expect(Math.round(1000000 / Math.log(1000000))).toBe(72382)
+    const p = MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.prime-distribution')!
+    expect(p.content).toMatch(/72 382/)
+    expect(p.content).toMatch(/78 498/)
+  })
+
+  it('the induction identity used in the worked example is true', () => {
+    for (let n = 1; n <= 20; n++) {
+      expect((n + 1) ** 3 - (n + 1)).toBe((n ** 3 - n) + 3 * (n ** 2 + n))
+      expect(((n ** 3 - n) % 3)).toBe(0)
+    }
+    const i = MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.induction-applications')!
+    expect(i.content).toMatch(/BY THE HYPOTHESIS/)
+  })
+
+  it('the algebraic entries state the failure and its repair', () => {
+    const find = (id: string) => MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS.find((e) => e.conceptId === id)!
+    expect(find('math.nt.algebraic-number-theory').content).toMatch(/does NOT always hold/)
+    expect(find('math.nt.algebraic-number-theory').content).toMatch(/factor IDEALS instead/i)
+    // monic is the whole condition, and the norm can be negative
+    expect(find('math.nt.algebraic-integers').content).toMatch(/MONIC/)
+    expect(1 - 2).toBe(-1)   // norm of 1 + sqrt2 in Z[sqrt2]
+    expect(find('math.nt.algebraic-integers').content).toMatch(/which is −1 for 1 \+ √2/)
+  })
+
+  it('continued fractions are tied to the Euclidean algorithm and to Pell', () => {
+    const c = MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.continued-fractions')!
+    expect(c.content).toMatch(/Euclidean algorithm in different clothes/i)
+    expect(c.content).toMatch(/quadratic irrational/i)
+    expect(c.content).toMatch(/Pell/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
