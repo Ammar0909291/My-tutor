@@ -35,10 +35,14 @@ import {
   MATHEMATICS_PROPORTION_EXPLANATIONS,
   MATHEMATICS_PROPORTION_PROBES,
 } from '@/lib/teaching/assets/mathematicsProportionProofAssets'
+import {
+  MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS,
+  MATHEMATICS_ALGEBRA_VOCAB_PROBES,
+} from '@/lib/teaching/assets/mathematicsAlgebraVocabAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -187,7 +191,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -301,6 +305,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_GEOMETRY_EXPLANATIONS,
     ...MATHEMATICS_FRACTION_EXPLANATIONS,
     ...MATHEMATICS_PROPORTION_EXPLANATIONS,
+    ...MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -309,6 +314,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_GEOMETRY_PROBES,
     ...MATHEMATICS_FRACTION_PROBES,
     ...MATHEMATICS_PROPORTION_PROBES,
+    ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -468,6 +474,68 @@ describe('mathematics proportion and the vocabulary of results', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_PROPORTION_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 7 — the parts of an expression, and the exponents that look like
+ * exceptions.
+ *
+ * a^0 = 1 and a^-n = 1/a^n are the two most-decreed facts in school algebra.
+ * Both are forced by the quotient rule, and an explanation that states them
+ * without that derivation has handed the learner two things to remember
+ * instead of one thing to recover. The checks below are on the derivation
+ * being present, not on wording.
+ */
+describe('mathematics algebra vocabulary and exponent edges', () => {
+  const NEW = [
+    'math.alg.term', 'math.alg.coefficient', 'math.alg.degree',
+    'math.alg.inequality', 'math.alg.solution-set',
+    'math.arith.exponent-rules', 'math.alg.zero-exponent', 'math.alg.negative-exponent',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_ALGEBRA_VOCAB_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the exponent edges are derived from the quotient rule, not decreed', () => {
+    const zero = MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS.find((e) => e.conceptId === 'math.alg.zero-exponent')!
+    // a^5/a^5 is 1 by division and a^0 by subtraction — both readings must appear.
+    expect(zero.content).toMatch(/a⁵\/a⁵/)
+    expect(zero.content).toMatch(/undefined/)
+  })
+
+  it('the negative exponent explanation separates the sign of the exponent from the sign of the value', () => {
+    const neg = MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS.find((e) => e.conceptId === 'math.alg.negative-exponent')!
+    expect(neg.content).toMatch(/not −8|not -8/)
+  })
+
+  it('the inequality flip is justified, not asserted', () => {
+    const ineq = MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS.find((e) => e.conceptId === 'math.alg.inequality')!
+    expect(ineq.content).toMatch(/reverses the order/i)
+  })
+
+  it('degree is taught as a ceiling on roots, never a count', () => {
+    const deg = MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS.find((e) => e.conceptId === 'math.alg.degree')!
+    expect(deg.content).toMatch(/at most/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_ALGEBRA_VOCAB_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_ALGEBRA_VOCAB_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
