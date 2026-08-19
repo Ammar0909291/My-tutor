@@ -111,10 +111,14 @@ import {
   MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS,
   MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES,
 } from '@/lib/teaching/assets/mathematicsAnalyticAlgebraicAssets'
+import {
+  MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
+  MATHEMATICS_SOLIDS_POLYGONS_PROBES,
+} from '@/lib/teaching/assets/mathematicsSolidsPolygonsAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -263,7 +267,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -396,6 +400,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_DIVISIBILITY_MODULAR_EXPLANATIONS,
     ...MATHEMATICS_CRYPTO_NUMBER_EXPLANATIONS,
     ...MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS,
+    ...MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -423,6 +428,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES,
     ...MATHEMATICS_CRYPTO_NUMBER_PROBES,
     ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES,
+    ...MATHEMATICS_SOLIDS_POLYGONS_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -2115,6 +2121,97 @@ describe('mathematics analytic and algebraic number theory', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 26 — polygons named properly, and the step into three dimensions.
+ *
+ * The plane half is ONE misconception in four costumes: classifying by
+ * APPEARANCE rather than by measured property. The solid half is one
+ * derivation being skipped: surface area is the faces added, and the
+ * 1/3 in a pyramid is three pyramids filling their prism.
+ *
+ * Two probe defects were caught and fixed before commit — see the
+ * arithmetic checks below, which exist because one distractor was
+ * accidentally TRUE.
+ */
+describe('mathematics polygons and solids', () => {
+  const NEW = [
+    'math.geom.polygon', 'math.geom.triangle-types',
+    'math.geom.regular-polygon', 'math.geom.trapezoid',
+    'math.geom.solid-3d', 'math.geom.volume',
+    'math.geom.surface-area', 'math.geom.platonic-solids',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_SOLIDS_POLYGONS_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('no Euler distractor is accidentally a correct V−E+F', () => {
+    // 6 - 12 + 8 = 2 is the OCTAHEDRON and was briefly offered as a wrong
+    // answer to a cube question. Any distractor evaluating to 2 is a trap.
+    expect(8 - 12 + 6).toBe(2)      // cube, the correct answer
+    expect(6 - 12 + 8).toBe(2)      // octahedron — must NOT appear as a distractor
+    expect(8 - 6 + 12).toBe(14)     // the replacement, genuinely wrong
+    const p = MATHEMATICS_SOLIDS_POLYGONS_PROBES.find((x) => x.conceptId === 'math.geom.solid-3d' && x.stem.includes('cube'))!
+    for (const c of p.choices!.filter((c) => !c.isCorrect)) {
+      expect(c.text, `distractor evaluates to a valid Euler characteristic: ${c.text}`).not.toMatch(/6 − 12 \+ 8/)
+    }
+  })
+
+  it('all five Platonic solids satisfy V − E + F = 2', () => {
+    const solids: [string, number, number, number][] = [
+      ['tetrahedron', 4, 6, 4], ['cube', 8, 12, 6], ['octahedron', 6, 12, 8],
+      ['dodecahedron', 20, 30, 12], ['icosahedron', 12, 30, 20],
+    ]
+    for (const [name, v, e, f] of solids) expect(v - e + f, name).toBe(2)
+    expect(solids).toHaveLength(5)
+    const p = MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.platonic-solids')!
+    expect(p.content).toMatch(/exactly five is a theorem/i)
+    expect(p.content).toMatch(/under 360°/)
+  })
+
+  it('the regular-polygon angle arithmetic is right, and 180/n is denied', () => {
+    expect(360 / 6).toBe(60)          // exterior
+    expect(180 - 360 / 6).toBe(120)   // interior, the supplement
+    expect(180 / 6).toBe(30)          // the wrong route
+    const r = MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.regular-polygon')!
+    expect(r.content).toMatch(/It is not 180\/n/)
+    expect(r.content).toMatch(/LARGER interior angles/)
+  })
+
+  it('the appearance-over-measurement thread is stated in all four plane entries', () => {
+    const find = (id: string) => MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS.find((e) => e.conceptId === id)!
+    expect(find('math.geom.polygon').content).toMatch(/do(?:es)? not make it regular/i)
+    expect(find('math.geom.triangle-types').content).toMatch(/by MEASUREMENT, never by how the drawing looks/i)
+    expect(find('math.geom.regular-polygon').content).toMatch(/rather than a word for "looks tidy"/i)
+    expect(find('math.geom.trapezoid').content).toMatch(/is NOT the slanted leg/i)
+  })
+
+  it('the solid entries derive rather than list', () => {
+    const find = (id: string) => MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS.find((e) => e.conceptId === id)!
+    expect(find('math.geom.volume').content).toMatch(/three pyramids of the right shape assemble into/i)
+    expect(find('math.geom.surface-area').content).toMatch(/not a new technique/i)
+    expect(find('math.geom.solid-3d').content).toMatch(/gives V − E \+ F = 0/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_SOLIDS_POLYGONS_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_SOLIDS_POLYGONS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
