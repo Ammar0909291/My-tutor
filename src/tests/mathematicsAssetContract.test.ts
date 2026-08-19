@@ -119,10 +119,14 @@ import {
   MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS,
   MATHEMATICS_CIRCLES_TRANSFORM_PROBES,
 } from '@/lib/teaching/assets/mathematicsCirclesTransformAssets'
+import {
+  MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
+  MATHEMATICS_VECTORS_CONICS_PROBES,
+} from '@/lib/teaching/assets/mathematicsVectorsConicsAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -271,7 +275,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES, ...MATHEMATICS_DIVISIBILITY_MODULAR_PROBES, ...MATHEMATICS_CRYPTO_NUMBER_PROBES, ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES, ...MATHEMATICS_SOLIDS_POLYGONS_PROBES, ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES, ...MATHEMATICS_VECTORS_CONICS_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -406,6 +410,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ANALYTIC_ALGEBRAIC_EXPLANATIONS,
     ...MATHEMATICS_SOLIDS_POLYGONS_EXPLANATIONS,
     ...MATHEMATICS_CIRCLES_TRANSFORM_EXPLANATIONS,
+    ...MATHEMATICS_VECTORS_CONICS_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -435,6 +440,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ANALYTIC_ALGEBRAIC_PROBES,
     ...MATHEMATICS_SOLIDS_POLYGONS_PROBES,
     ...MATHEMATICS_CIRCLES_TRANSFORM_PROBES,
+    ...MATHEMATICS_VECTORS_CONICS_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -2308,6 +2314,102 @@ describe('mathematics circles and transformations', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_CIRCLES_TRANSFORM_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 28 — vectors in space, polar coordinates, and the conics.
+ *
+ * Two TYPE errors run through this batch: the dot product returns a
+ * NUMBER and the cross product a VECTOR (three registers record the
+ * swap), and the conics are ONE family rather than four. A type error
+ * is worse than a wrong value because every downstream step becomes
+ * meaningless — you cannot take the angle of a vector or the direction
+ * of a scalar — so the checks demand both types are stated outright.
+ */
+describe('mathematics vectors, polar coordinates and conics', () => {
+  const NEW = [
+    'math.geom.vectors-3d', 'math.geom.dot-product', 'math.geom.cross-product',
+    'math.geom.polar-coordinates', 'math.geom.polar-curves',
+    'math.geom.conic-sections', 'math.geom.parabola', 'math.geom.triangle-centers',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_VECTORS_CONICS_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('both products state their TYPE outright', () => {
+    const dot = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.dot-product')!
+    const cross = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.cross-product')!
+    expect(dot.content).toMatch(/is a NUMBER/)
+    expect(cross.content).toMatch(/is a VECTOR/)
+    expect(cross.content).toMatch(/NOT commutative/)
+    // the worked dot product
+    expect(1 * 4 + 2 * 5 + 3 * 6).toBe(32)
+    expect(dot.content).toMatch(/= 32/)
+  })
+
+  it('the vector magnitudes quoted are right, projection included', () => {
+    expect(Math.hypot(3, 4, 12)).toBe(13)
+    expect(Math.hypot(3, 4)).toBe(5)
+    const v = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.vectors-3d')!
+    expect(v.content).toMatch(/magnitude 13 while its shadow \(3, 4\) has\s*magnitude 5|magnitude 13/)
+  })
+
+  it('the arccos step is required and the value quoted is right', () => {
+    expect(Math.round(Math.acos(0.8) * 100) / 100).toBe(0.64)
+    const p = MATHEMATICS_VECTORS_CONICS_PROBES.find((x) => x.conceptId === 'math.geom.dot-product' && x.stem.includes('0.8'))!
+    expect(p.choices!.find((c) => c.isCorrect)!.text).toMatch(/0\.64/)
+  })
+
+  it('the parabola vertex sign flip is arithmetically true', () => {
+    // y = x^2 - 6x + 5  ==  (x - 3)^2 - 4, vertex (3, -4)
+    for (const x of [0, 1, 3, 5, 7]) {
+      expect(x * x - 6 * x + 5).toBe((x - 3) ** 2 - 4)
+    }
+    const p = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.parabola')!
+    expect(p.content).toMatch(/vertex \(3, −4\)/)
+    expect(p.content).toMatch(/the SQUARED variable is the one/i)
+  })
+
+  it('the conics are taught as one family with one discriminant test', () => {
+    const c = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.conic-sections')!
+    expect(c.content).toMatch(/ONE family, not four/)
+    expect(c.content).toMatch(/B² − 4AC/)
+    expect(c.content).toMatch(/COMPLETING THE SQUARE/)
+  })
+
+  it('the two equidistant centres are separated by equidistant-from-WHAT', () => {
+    const t = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.triangle-centers')!
+    expect(t.content).toMatch(/equidistant from WHAT/)
+    expect(t.content).toMatch(/three VERTICES/)
+    expect(t.content).toMatch(/three SIDES/)
+    expect(t.content).toMatch(/fall outside/)
+  })
+
+  it('polar entries keep negative r defined and the petal parity right', () => {
+    const pc = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.polar-coordinates')!
+    const pv = MATHEMATICS_VECTORS_CONICS_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.polar-curves')!
+    expect(pc.content).toMatch(/NEGATIVE r is perfectly defined/)
+    expect(pv.content).toMatch(/n petals when n is ODD, and 2n/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_VECTORS_CONICS_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_VECTORS_CONICS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
