@@ -2194,6 +2194,22 @@
 - **Content shipped**: `mathematicsSeedAssets.ts`, 18 authored closed-choice probes taking all
   10 serving `math.arith` concepts to >= 3 gradeable questions per served band. DRAFT only —
   promotion stays human, through `/api/admin/knowledge-assets`.
+- **First complete certification, 2026-08-19**: all 43 serving concepts run as real lessons
+  against the deployed app — **36/43 PASS, 43/43 reached verified mastery**. Every concept
+  COMPLETED; the failures are quality flags on the way through, not learners left stuck. The 7
+  remaining are all `D2-ungradeable` and are the contract gap, because the 58 authored probes are
+  in git and unseeded. Falsifiable prediction recorded: seeding clears all seven — diff against
+  `docs/architecture/MATHEMATICS_CERTIFICATION_2026-08-19.json`. Two real product defects were
+  fixed on the way (the ungradeable-question class; the OPENING turn comes from
+  `/api/learn/lesson-init`, which has no visual pipeline at all and had no figure gate, so a
+  learner's first contact with a lesson could be an instruction to read a figure that was never
+  attached). The harness itself needed SIX corrections in the same period, all the same root
+  cause — built from a model of the product rather than from the product. Read the captured turn
+  before believing a verdict.
+- **Seeding cannot be done from a session — verified, not assumed (2026-08-19)**: the Supabase MCP
+  surface is a READ-ONLY transaction (`25006: cannot execute CREATE TABLE in a read-only
+  transaction`), so no amount of batching helps. It needs a real `DATABASE_URL`, and one
+  idempotent run of `npx tsx scripts/brain/seed-knowledge-assets.ts --draft` finishes it.
 - **Still blocked, and these set the cost curve**: no provider key here (so the ~675 concepts
   that need authored content cannot be generated in this environment) and no `DATABASE_URL`
   (so nothing can be seeded — `npx tsx scripts/brain/seed-knowledge-assets.ts --draft` is

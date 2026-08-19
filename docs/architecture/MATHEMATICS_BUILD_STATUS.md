@@ -1,6 +1,6 @@
 # Mathematics Build — measured status and the corrected plan
 
-**Last measured 2026-08-18.** Every number here is produced by
+**Last measured 2026-08-19.** Every number here is produced by
 `npx tsx scripts/math/state.ts`. Do not hand-edit them and do not re-derive them
 in a session — run the script. Three figures in project memory were stale at
 once when this was written (Blueprints recorded 529/908 when complete at
@@ -85,13 +85,67 @@ A concept is ready when the harness says so, never when a count does.
 
 `ACTIVE != certified`. An asset that validates is not a lesson that teaches.
 
+## Certification — the first complete measurement (2026-08-19)
+
+All 43 serving concepts, real lessons against the deployed app on the test
+learner. Raw result committed at
+`docs/architecture/MATHEMATICS_CERTIFICATION_2026-08-19.json`.
+
+|                                  |        |
+|----------------------------------|--------|
+| PASS                             | 36 / 43 |
+| reached verified mastery         | 43 / 43 |
+| median turns to mastery          | 7 |
+
+**Every concept completed.** No lesson left a learner stuck — the failures are
+quality flags raised on the way through, which is the distinction the harness
+exists to draw. A coverage count would have reported 43/43 and said nothing.
+
+The 7 remaining failures are all `D2-ungradeable` — a mastery-phase question
+with nothing to grade it — on these concepts:
+
+    math.abst.group-theory · math.alg.expression ·
+    math.arith.fraction-multiplication · math.arith.ratios ·
+    math.found.set · math.func.function-concept · math.geom.slope
+
+This is the asset contract gap appearing exactly where the model predicted:
+production still serves the two-probe pools, because the 58 authored probes that
+fix it are in git and **unseeded**.
+
+### The falsifiable prediction
+
+Seeding clears all seven. Run:
+
+```
+npx tsx scripts/brain/seed-knowledge-assets.ts --draft
+MATH_CERT_COOKIE="…" npx tsx scripts/math/certify.ts scripts/math/targets.json
+```
+
+and diff the table against the committed baseline. If seven `D2-ungradeable`
+failures do not become PASS, the contract model is wrong and should be revised
+rather than defended.
+
+### What the harness got wrong, recorded so it is not re-litigated
+
+Six corrections in one session, every one the same root cause — it was built
+from a model of the product rather than from the product: a bare `?` for D2; a
+110-character slice instead of the offending turn; held figures treated as
+absent; two figure channels read out of four; no evidence captured on the LaTeX
+path; and a currency `$2` read as a maths delimiter. Two real product defects
+were found in the same period. The ratio is not flattering, and it is stated
+here so the next reader weighs a fresh failure accordingly — read the captured
+turn before believing the verdict.
+
 ## What blocks progress, in order
 
 1. **Authoring capability.** ~675 concepts need composed explanations and probes.
    Requires a provider key in the environment that runs the generator.
 2. **A database.** `DATABASE_URL` for `scripts/brain/seed-knowledge-assets.ts`.
-   Without it, seeding goes through read-only tooling in small batches and the
-   binding cost becomes session context rather than the work itself.
+   **Verified 2026-08-19, not assumed:** the Supabase MCP surface available to
+   these sessions is a READ-ONLY transaction — `CREATE TABLE` returns
+   `25006: cannot execute CREATE TABLE in a read-only transaction`. So seeding
+   cannot be done from a session at all, by batching or otherwise. It needs a
+   real `DATABASE_URL`, and one idempotent run finishes it.
 3. **Review throughput.** ~908 concepts x ~4 assets is a queue no one reads
    asset-by-asset. Acceptance sampling per domain batch, with the harness as the
    exhaustive gate, is the proposed answer.
