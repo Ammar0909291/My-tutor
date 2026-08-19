@@ -1976,6 +1976,34 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok || !data.success || !data.text) throw new Error(data.error ?? `HTTP ${res.status}`)
+
+      // ── THE CLIENT MUST LEARN WHAT THE SERVER WAS JUST TOLD ────────────────
+      //
+      // The request above sends `topicSlug` precisely so the server records
+      // this lesson as the learner's explicit selection. Nothing wrote that
+      // fact back into local state, so `curriculumProgress.activeLessonSlug`
+      // still named the PREVIOUS lesson after a switch — and since
+      // findNextLesson / findPreviousLesson resolve their anchor from it, the
+      // controls stayed pointed at the lesson just left. Tapping "Next" a
+      // second time re-opened the same lesson.
+      //
+      // It self-corrected only on the next /api/learn/chat turn, whose
+      // opportunistic `data.lessonOrder` sync sets the resolved order and
+      // clears the slug. But lesson-init renders an opening WITHOUT a chat
+      // turn, so between the switch and the learner's first reply the anchor
+      // was stale — which is the whole window the navigation buttons live in.
+      //
+      // The generation bump is the same contract skip/complete/restart use:
+      // opening a different lesson is an authoritative, user-initiated action,
+      // so an in-flight chat response must not clobber the pointer afterwards
+      // with its pre-switch value.
+      progressGenerationRef.current += 1
+      setCurriculumProgress((prev) => (
+        prev.activeLessonSlug === (lesson.topicSlug ?? null)
+          ? prev
+          : { ...prev, activeLessonSlug: lesson.topicSlug ?? null, lastLessonTitle: lesson.lessonTitle }
+      ))
+
       // Clobber-proof landing (same as sendMessage): a late history restore
       // must never make the lesson opening vanish.
       setMessages((p) => p.some((m) => m.id === aid)
