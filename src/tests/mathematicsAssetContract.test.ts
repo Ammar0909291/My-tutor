@@ -15,10 +15,14 @@ import {
   MATHEMATICS_FOUNDATION_EXPLANATIONS,
   MATHEMATICS_FOUNDATION_PROBES,
 } from '@/lib/teaching/assets/mathematicsFoundationAssets'
+import {
+  MATHEMATICS_ARITHMETIC_EXPLANATIONS,
+  MATHEMATICS_ARITHMETIC_PROBES,
+} from '@/lib/teaching/assets/mathematicsArithmeticFoundations'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -167,8 +171,62 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
+    }
+  })
+})
+
+/**
+ * Early arithmetic — the ground a beginner stands on before anything else.
+ * Counting, place value and the number line every later idea gets drawn on.
+ * All eight had an Educational Brain entry and served the learner nothing.
+ */
+describe('mathematics early arithmetic — newly serving concepts', () => {
+  const NEW = [
+    'math.arith.counting', 'math.arith.counting-sequence', 'math.arith.subitizing',
+    'math.arith.place-value', 'math.arith.ones-tens-hundreds', 'math.arith.expanded-form',
+    'math.arith.number-line', 'math.arith.ordering',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_ARITHMETIC_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_ARITHMETIC_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('an explanation and its probes agree on the band', () => {
+    // A band with probes and no explanation is worse than no band at all: the
+    // gate would find questions to ask and nothing to teach from.
+    for (const conceptId of NEW) {
+      const bands = new Set(MATHEMATICS_ARITHMETIC_EXPLANATIONS
+        .filter((e) => e.conceptId === conceptId).map((e) => e.gradeBand))
+      for (const p of MATHEMATICS_ARITHMETIC_PROBES.filter((x) => x.conceptId === conceptId)) {
+        expect(bands.has(p.gradeBand), `${conceptId} probe at ${p.gradeBand}`).toBe(true)
+      }
+    }
+  })
+
+  it('every probe is gradeable and every distractor names its misconception', () => {
+    for (const p of MATHEMATICS_ARITHMETIC_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      for (const c of p.choices ?? []) {
+        if (!c.isCorrect) expect(c.misconceptionId, `${p.stem} -> "${c.text}"`).toBeTruthy()
+      }
+    }
+  })
+
+  it('the youngest bands keep sentences short — first-lesson/02 register', () => {
+    const early = MATHEMATICS_ARITHMETIC_EXPLANATIONS.filter((e) => e.gradeBand === 'EARLY')
+    expect(early.length).toBeGreaterThan(0)
+    for (const e of early) {
+      const sentences = e.content.split(/(?<=[.!?])\s+/).filter((x) => x.trim().length > 0)
+      const longest = Math.max(...sentences.map((x) => x.split(/\s+/).length))
+      expect(longest, `${e.conceptId} has a ${longest}-word sentence`).toBeLessThanOrEqual(34)
     }
   })
 })
