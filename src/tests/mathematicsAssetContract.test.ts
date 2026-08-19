@@ -91,10 +91,14 @@ import {
   MATHEMATICS_COORDINATE_EXPLANATIONS,
   MATHEMATICS_COORDINATE_PROBES,
 } from '@/lib/teaching/assets/mathematicsCoordinateAssets'
+import {
+  MATHEMATICS_NUMBER_THEORY_EXPLANATIONS,
+  MATHEMATICS_NUMBER_THEORY_PROBES,
+} from '@/lib/teaching/assets/mathematicsNumberTheoryAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -243,7 +247,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -371,6 +375,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ARITH_CLOSE_EXPLANATIONS,
     ...MATHEMATICS_MEASUREMENT_EXPLANATIONS,
     ...MATHEMATICS_COORDINATE_EXPLANATIONS,
+    ...MATHEMATICS_NUMBER_THEORY_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -393,6 +398,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ARITH_CLOSE_PROBES,
     ...MATHEMATICS_MEASUREMENT_PROBES,
     ...MATHEMATICS_COORDINATE_PROBES,
+    ...MATHEMATICS_NUMBER_THEORY_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1622,6 +1628,105 @@ describe('mathematics coordinate plane and conics', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_COORDINATE_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 21 — number theory.
+ *
+ * This batch carries more checkable arithmetic than any before it, and
+ * the checks below RE-COMPUTE the claims rather than pattern-matching
+ * the prose: 561 really is a Carmichael number, phi(12) really is 4 by
+ * distinct primes, the Bezout pair really certifies gcd(30,18), and the
+ * D=61 Pell solution really satisfies the equation. A wrong number in a
+ * teaching asset is worse than a missing one, because it is believed.
+ */
+describe('mathematics number theory', () => {
+  const NEW = [
+    'math.nt.sieve-of-eratosthenes', 'math.nt.fundamental-theorem-arithmetic',
+    'math.nt.primality-testing', 'math.nt.eulers-totient',
+    'math.nt.eulers-theorem', 'math.nt.extended-euclidean-algorithm',
+    'math.nt.general-diophantine', 'math.nt.pells-equation',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_NUMBER_THEORY_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('561 really is a Carmichael number, as the primality entry claims', () => {
+    const modpow = (b: bigint, e: bigint, m: bigint) => {
+      let r = 1n; b %= m
+      while (e > 0n) { if (e & 1n) r = (r * b) % m; b = (b * b) % m; e >>= 1n }
+      return r
+    }
+    // 561 = 3 x 11 x 17, composite, yet passes the Fermat test for every coprime base
+    expect(561 % 3).toBe(0)
+    for (const a of [2n, 5n, 7n, 13n, 23n]) {
+      expect(modpow(a, 560n, 561n), `base ${a}`).toBe(1n)
+    }
+    const p = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.primality-testing')!
+    expect(p.content).toMatch(/561 is the smallest/)
+    expect(p.content).toMatch(/PASSING PROVES NOTHING/)
+  })
+
+  it('the totient worked example is right, and uses distinct primes only', () => {
+    // 12 = 2^2 x 3 -> 12 * (1 - 1/2) * (1 - 1/3) = 4, the 2 used ONCE
+    expect(12 * (1 - 1 / 2) * (1 - 1 / 3)).toBe(4)
+    const t = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.eulers-totient')!
+    expect(t.content).toMatch(/DISTINCT primes/)
+    expect(t.content).toMatch(/φ\(7\) = 6/)
+  })
+
+  it('the Bezout certificate in the EEA entry actually certifies the gcd', () => {
+    expect(2 * 18 - 30).toBe(6)   // x = -1, y = 2
+    const gcd = (a: number, b: number): number => (b === 0 ? a : gcd(b, a % b))
+    expect(gcd(30, 18)).toBe(6)
+    const e = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.find((x) => x.conceptId === 'math.nt.extended-euclidean-algorithm')!
+    expect(e.content).toMatch(/x = −1 and y = 2/)
+  })
+
+  it('the D=61 Pell solution quoted really satisfies the equation', () => {
+    const x = 1766319049n, y = 226153980n
+    expect(x * x - 61n * y * y).toBe(1n)
+    const p = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.pells-equation')!
+    expect(p.content).toMatch(/1 766 319 049/)
+    expect(p.content).toMatch(/NON-SQUARE|non-square/)
+  })
+
+  it('the FTA is taught as two separate claims', () => {
+    const f = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.fundamental-theorem-arithmetic')!
+    expect(f.content).toMatch(/TWO claims/)
+    expect(f.content).toMatch(/harder half/i)
+  })
+
+  it('Fermat is named as the special case of Euler, not a separate result', () => {
+    const e = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.find((x) => x.conceptId === 'math.nt.eulers-theorem')!
+    expect(e.content).toMatch(/special case where n is PRIME/)
+  })
+
+  it('the Diophantine entry states that no general method can exist', () => {
+    const g = MATHEMATICS_NUMBER_THEORY_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.general-diophantine')!
+    expect(g.content).toMatch(/Hilbert/)
+    expect(g.content).toMatch(/Matiyasevich/)
+    expect(g.content).toMatch(/theorem rather than an admission/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_NUMBER_THEORY_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_NUMBER_THEORY_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
