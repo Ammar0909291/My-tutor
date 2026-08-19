@@ -11,10 +11,14 @@
 import { describe, it, expect } from 'vitest'
 import { AUTHORED_PROBES } from '@/lib/teaching/assets/authoredSeedAssets'
 import { MATHEMATICS_PROBES } from '@/lib/teaching/assets/mathematicsSeedAssets'
+import {
+  MATHEMATICS_FOUNDATION_EXPLANATIONS,
+  MATHEMATICS_FOUNDATION_PROBES,
+} from '@/lib/teaching/assets/mathematicsFoundationAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -108,6 +112,63 @@ describe('mathematics seed probes', () => {
     for (const p of MATHEMATICS_PROBES) {
       expect(p.source, p.stem).toMatch(/^docs\/curriculum\/blueprints\/math\./)
       expect(p.targetedMisconceptions.length, p.stem).toBeGreaterThan(0)
+    }
+  })
+})
+
+/**
+ * The foundations batch — concepts that served the learner NOTHING until now.
+ *
+ * 221 spine concepts carry a full Educational Brain entry and no serving assets,
+ * because an EB entry only reaches a lesson once it is transcribed into
+ * AssetIdentity. Among them was `math.found.mathematical-thinking` — the ROOT of
+ * the subject, zero prerequisites, the first thing a beginner meets.
+ */
+describe('mathematics foundations — newly serving concepts', () => {
+  const NEW = [
+    'math.found.mathematical-thinking', 'math.found.definition',
+    'math.found.set-membership', 'math.found.empty-set', 'math.found.subset',
+    'math.found.proposition', 'math.found.logical-connectives', 'math.found.truth-table',
+  ]
+
+  it.each(NEW)('%s now meets the contract — an explanation and 3 probes', (conceptId) => {
+    const explanations = MATHEMATICS_FOUNDATION_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_FOUNDATION_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the root of the subject is covered', () => {
+    expect(NEW).toContain('math.found.mathematical-thinking')
+  })
+
+  it('explanations teach — they do not open with a bare definition', () => {
+    // A definition-first opening is the most-recorded teaching failure in this
+    // project's notes, so the house style anchors first and names second.
+    for (const e of MATHEMATICS_FOUNDATION_EXPLANATIONS) {
+      expect(e.content.length, e.conceptId).toBeGreaterThan(400)
+      expect(e.content, e.conceptId).not.toMatch(/^(A|An|The)\s+\w+\s+is\s+defined\s+as/i)
+    }
+  })
+
+  it('every probe is gradeable and every distractor names its misconception', () => {
+    for (const p of MATHEMATICS_FOUNDATION_PROBES) {
+      const n = p.choices?.length ?? 0
+      expect(n, p.stem).toBeGreaterThanOrEqual(2)
+      expect(n, p.stem).toBeLessThanOrEqual(4)
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      for (const c of p.choices ?? []) {
+        if (!c.isCorrect) expect(c.misconceptionId, `${p.stem} -> "${c.text}"`).toBeTruthy()
+      }
+    }
+  })
+
+  it('every asset cites the Educational Brain entry it came from', () => {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES]) {
+      expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
 })

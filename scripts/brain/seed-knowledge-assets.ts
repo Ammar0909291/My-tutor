@@ -37,13 +37,14 @@ import { CHEMISTRY_EXPLANATIONS, CHEMISTRY_PROBES } from '../../src/lib/teaching
 import { BIOLOGY_EXPLANATIONS, BIOLOGY_PROBES } from '../../src/lib/teaching/assets/biologySeedAssets'
 import { CS_EXPLANATIONS, CS_PROBES } from '../../src/lib/teaching/assets/csSeedAssets'
 import { MATHEMATICS_EXPLANATIONS, MATHEMATICS_PROBES } from '../../src/lib/teaching/assets/mathematicsSeedAssets'
+import { MATHEMATICS_FOUNDATION_EXPLANATIONS, MATHEMATICS_FOUNDATION_PROBES } from '../../src/lib/teaching/assets/mathematicsFoundationAssets'
 
 // One seed pass covers all collections: the frozen-Brain transcriptions
 // (brainSeedAssets), the blueprint-grounded authored batch
 // (authoredSeedAssets), and per-subject authored assets (chemistry, biology).
 // Same idempotency, KG-validation, and status rules.
-const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS, ...BIOLOGY_EXPLANATIONS, ...CS_EXPLANATIONS, ...MATHEMATICS_EXPLANATIONS]
-const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...BIOLOGY_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES]
+const ALL_EXPLANATIONS = [...SEED_EXPLANATIONS, ...AUTHORED_EXPLANATIONS, ...CHEMISTRY_EXPLANATIONS, ...BIOLOGY_EXPLANATIONS, ...CS_EXPLANATIONS, ...MATHEMATICS_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_EXPLANATIONS]
+const ALL_PROBES = [...SEED_PROBES, ...AUTHORED_PROBES, ...CHEMISTRY_PROBES, ...BIOLOGY_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES]
 import { hashContent } from '../../src/lib/teaching/assets/similarity'
 import {
   validateSeedIdentities, formatSeedIdentityReport, previewOf,
