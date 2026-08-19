@@ -2251,15 +2251,21 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setLessonSwitchDialog({ target, isReview, isRestart })
   }, [curriculumProgress, topicProgressMap, availableTopicSlugs])
 
-  // Confirming the switch dialog selects the target lesson — it must NOT
-  // start teaching it. That only happens once the learner explicitly
-  // presses "Start Lesson" on the resulting welcome screen, same gate as
-  // every other entry point (first open, refresh, etc.). Resets to the
-  // pre-start UI and stores the actual side-effect for the button to run.
-  const confirmLessonSwitch = useCallback(async () => {
-    if (!lessonSwitchDialog || !sessionId) return
-    const { target, isRestart } = lessonSwitchDialog
-    setLessonSwitchDialog(null)
+  // Stage `target` as the new preview: sets pendingLesson and defers the
+  // actual side effect (restart / review / forward-skip-and-init) to the
+  // "Start Lesson" button via pendingLessonRunRef, exactly what confirming
+  // the switch dialog used to do inline. Extracted so it can also be called
+  // DIRECTLY — no dialog — when the learner is already on an unstarted
+  // preview and just pages to an adjacent one (see isPreviewing below).
+  // PRESENTATION ONLY: never runs a side effect itself, never mutates
+  // progress. The lesson-being-left calculation inside the forward branch
+  // below reads live `curriculumProgress`/`curriculumLessons`, which is the
+  // lesson genuinely last STARTED — unaffected by how many previews were
+  // paged through first, so chained previewing still can't mark an
+  // un-entered lesson skipped.
+  const stageLessonPreview = useCallback((target: CurriculumLesson) => {
+    if (!sessionId) return
+    const isRestart = target.order === curriculumProgress.currentLesson
     setMessages([])
     setLessonStarted(false)
     initializedRef.current = false
@@ -2305,7 +2311,29 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const entryMode = decideLessonEntryMode({ lesson: target, progress: curriculumProgress, topicProgressMap })
       await callLessonInit(sessionId, lessonInitModeFor(entryMode), target)
     }
-  }, [lessonSwitchDialog, sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext])
+  }, [sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext])
+
+  // Confirming the switch dialog selects the target lesson — it must NOT
+  // start teaching it. That only happens once the learner explicitly
+  // presses "Start Lesson" on the resulting welcome screen, same gate as
+  // every other entry point (first open, refresh, etc.).
+  const confirmLessonSwitch = useCallback(async () => {
+    if (!lessonSwitchDialog) return
+    const { target } = lessonSwitchDialog
+    setLessonSwitchDialog(null)
+    stageLessonPreview(target)
+  }, [lessonSwitchDialog, stageLessonPreview])
+
+  // Whether the learner is currently ON an unstarted preview screen
+  // (pendingLesson is set only between a staged switch and either "Start
+  // Lesson" or completeAndAdvance taking over — see their setPendingLesson
+  // calls). Root cause of the "preview chaining" bug: Next/Previous always
+  // routed through requestLessonSwitch's confirm dialog (or, for Previous,
+  // straight into startRevision — an immediate COMMIT), even when nothing
+  // was actually started yet and there was nothing to warn about leaving.
+  // While this is true, paging Next/Previous must re-stage the adjacent
+  // preview directly via stageLessonPreview — no dialog, no commit.
+  const isPreviewing = pendingLesson !== null
 
   // Open the next lesson. Free navigation: the Lesson Navigation Panel's
   // Next button is always enabled whenever a next lesson exists (matches
@@ -2750,8 +2778,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         if (textareaRef.current) textareaRef.current.style.height = 'auto'
         // P0 (lesson start flow): same canonical preview-then-confirm gate
         // as the nav-panel Next button — typing "next lesson" in chat must
-        // not start teaching immediately either.
-        requestLessonSwitch(nextLessonData)
+        // not start teaching immediately either. And the same preview-
+        // chaining fix: typing it again while already on an unstarted
+        // preview must page forward, not re-open the confirm dialog.
+        if (isPreviewing) { stageLessonPreview(nextLessonData) } else { requestLessonSwitch(nextLessonData) }
         return true
       }
     } else if (PREV_INTENT_RE.test(trimmed)) {
@@ -2759,7 +2789,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
         setInput('')
         clearDraft(`lesson_${subjectSlug}`)
         if (textareaRef.current) textareaRef.current.style.height = 'auto'
-        await startRevision(previousLessonData)
+        if (isPreviewing) { stageLessonPreview(previousLessonData) } else { await startRevision(previousLessonData) }
         return true
       }
     }
@@ -5328,7 +5358,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   {/* ← Previous lesson */}
                   <button
                     type="button"
-                    onClick={() => { if (previousLessonData) void startRevision(previousLessonData) }}
+                    onClick={() => {
+                      if (!previousLessonData) return
+                      // Pure preview-to-preview browsing: re-stage, no commit.
+                      if (isPreviewing) { stageLessonPreview(previousLessonData); return }
+                      void startRevision(previousLessonData)
+                    }}
                     disabled={!previousLessonData}
                     aria-label={t('nav_previous_lesson')}
                     title={previousLessonData?.lessonTitle}
@@ -5368,7 +5403,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   {/* Next lesson → */}
                   <button
                     type="button"
-                    onClick={() => { if (nextLessonData) requestLessonSwitch(nextLessonData) }}
+                    onClick={() => {
+                      if (!nextLessonData) return
+                      // Pure preview-to-preview browsing: re-stage, no dialog.
+                      if (isPreviewing) { stageLessonPreview(nextLessonData); return }
+                      requestLessonSwitch(nextLessonData)
+                    }}
                     disabled={!nextLessonData}
                     aria-label={t('nav_next_lesson')}
                     title={nextLessonData?.lessonTitle}

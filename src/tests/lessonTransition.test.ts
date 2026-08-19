@@ -216,7 +216,11 @@ describe('every completion entry point uses the canonical transition', () => {
   })
 
   it('the chosen-lesson switch path also starts the target lesson', () => {
-    const start = SRC.indexOf('const confirmLessonSwitch = useCallback')
+    // This logic now lives in stageLessonPreview (extracted so preview-to-
+    // preview chaining can call it directly, without the confirm dialog) —
+    // confirmLessonSwitch is a thin wrapper that closes the dialog and
+    // delegates to it.
+    const start = SRC.indexOf('const stageLessonPreview = useCallback')
     // Widened from 2200: the Option B rationale comment sits inside this
     // callback and pushed the tail of the body past the old window.
     const body = SRC.slice(start, start + 3400)

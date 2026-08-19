@@ -98,7 +98,7 @@ describe('manual navigation keeps its preview gate — the two must not re-merge
   it('the manual switch path still defers to pendingLessonRunRef', () => {
     // Requirement 4: automatic and manual progression must not interfere. They
     // share callLessonInit (one implementation) and differ only in entry policy.
-    const start = CODE.indexOf('const confirmLessonSwitch')
+    const start = CODE.indexOf('const stageLessonPreview')
     expect(start).toBeGreaterThan(-1)
     const region = CODE.slice(start, start + 2500)
     expect(region).toMatch(/pendingLessonRunRef\.current\s*=\s*async/)

@@ -91,7 +91,7 @@ describe('NAVIGATION — no prerequisite may block a click', () => {
   it('the roadmap row calls requestLessonSwitch unconditionally', () => {
     // The old gate lives on only inside a comment explaining its removal;
     // assert on executable code by checking the switch path itself.
-    const fn = SRC.slice(SRC.indexOf('const requestLessonSwitch'), SRC.indexOf('const confirmLessonSwitch'))
+    const fn = SRC.slice(SRC.indexOf('const requestLessonSwitch'), SRC.indexOf('const stageLessonPreview'))
     expect(fn).toMatch(/requestLessonSwitch = useCallback/)
     expect(fn).not.toMatch(/^\s*if \(state\.isLocked\) return/m)
   })
@@ -102,7 +102,7 @@ describe('NAVIGATION — no prerequisite may block a click', () => {
     })
     expect(state.isLocked).toBe(true)      // still labelled
     // …and nothing in the switch path consults it.
-    const fn = SRC.slice(SRC.indexOf('const requestLessonSwitch'), SRC.indexOf('const confirmLessonSwitch'))
+    const fn = SRC.slice(SRC.indexOf('const requestLessonSwitch'), SRC.indexOf('const stageLessonPreview'))
     expect(fn).not.toMatch(/return\s*$/m)
   })
 })

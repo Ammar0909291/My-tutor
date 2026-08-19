@@ -254,8 +254,8 @@ describe('live in-session isolation (pre-existing, must remain true)', () => {
     expect(SRC.slice(start, end)).toContain('setMessages([])')
   })
 
-  it('confirmLessonSwitch (restart/review/skip-ahead) still clears messages before opening the target lesson', () => {
-    const start = SRC.indexOf('const confirmLessonSwitch = useCallback')
+  it('stageLessonPreview (restart/review/skip-ahead, shared by confirmLessonSwitch and preview-chaining) still clears messages before opening the target lesson', () => {
+    const start = SRC.indexOf('const stageLessonPreview = useCallback')
     const body = SRC.slice(start, start + 400)
     expect(body).toContain('setMessages([])')
   })
