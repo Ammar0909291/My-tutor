@@ -79,10 +79,14 @@ import {
   MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS,
   MATHEMATICS_ALGORITHMS_PRECISION_PROBES,
 } from '@/lib/teaching/assets/mathematicsAlgorithmsPrecisionAssets'
+import {
+  MATHEMATICS_ARITH_CLOSE_EXPLANATIONS,
+  MATHEMATICS_ARITH_CLOSE_PROBES,
+} from '@/lib/teaching/assets/mathematicsArithCloseAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -231,7 +235,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -356,6 +360,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_FOUNDATIONS_CLOSE_EXPLANATIONS,
     ...MATHEMATICS_NUMBER_SYSTEMS_EXPLANATIONS,
     ...MATHEMATICS_ALGORITHMS_PRECISION_EXPLANATIONS,
+    ...MATHEMATICS_ARITH_CLOSE_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -375,6 +380,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES,
     ...MATHEMATICS_NUMBER_SYSTEMS_PROBES,
     ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES,
+    ...MATHEMATICS_ARITH_CLOSE_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1366,6 +1372,84 @@ describe('mathematics written algorithms and precision', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_ALGORITHMS_PRECISION_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 18 — the last of math.arith, plus two from number theory.
+ *
+ * One probe in this batch was rewritten before commit: the 11-rule
+ * distractor originally offered "alternate from the right", which is a
+ * VALID method reaching the correct conclusion — a distractor a careful
+ * learner would be right to pick. It was replaced with a genuine
+ * sign-misassignment. The check below pins the surviving arithmetic so
+ * the same mistake cannot creep back.
+ */
+describe('mathematics — closing arithmetic, and two from number theory', () => {
+  const NEW = [
+    'math.arith.fraction-simplification', 'math.arith.fraction-addition',
+    'math.arith.integer-arithmetic', 'math.arith.mental-arithmetic',
+    'math.arith.irrational-roots', 'math.arith.scientific-notation',
+    'math.nt.composite-number', 'math.nt.divisibility-rules',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_ARITH_CLOSE_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_ARITH_CLOSE_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the 11-rule probe offers no distractor that is actually a valid method', () => {
+    const p = MATHEMATICS_ARITH_CLOSE_PROBES.find((x) => x.conceptId === 'math.nt.divisibility-rules' && x.stem.includes('2915'))!
+    // 2915 IS divisible by 11; alternating either direction gives ±11, so
+    // neither direction may appear as a wrong answer.
+    expect(2915 % 11).toBe(0)
+    for (const c of p.choices!.filter((c) => !c.isCorrect)) {
+      expect(c.text, `distractor reaches a valid alternating sum: ${c.text}`).not.toMatch(/−2 \+ 9 − 1 \+ 5|5 − 1 \+ 9 − 2/)
+    }
+  })
+
+  it('1 is taught as neither prime nor composite, with the reason', () => {
+    const c = MATHEMATICS_ARITH_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.nt.composite-number')!
+    expect(c.content).toMatch(/1 is NEITHER/)
+    expect(c.content).toMatch(/unique/i)
+  })
+
+  it('−3² is distinguished from (−3)²', () => {
+    const i = MATHEMATICS_ARITH_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.integer-arithmetic')!
+    expect(i.content).toMatch(/−3² is −9, not 9/)
+  })
+
+  it('fraction addition gives the size check, not just the procedure', () => {
+    const f = MATHEMATICS_ARITH_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.fraction-addition')!
+    expect(f.content).toMatch(/2\/5 is less than 1\/2/)
+  })
+
+  it('simplification names a case the obvious factors miss', () => {
+    const f = MATHEMATICS_ARITH_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.fraction-simplification')!
+    expect(f.content).toMatch(/51\/68/)
+  })
+
+  it('irrationality is presented as proved, and the decimal as an approximation', () => {
+    const r = MATHEMATICS_ARITH_CLOSE_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.irrational-roots')!
+    expect(r.content).toMatch(/is a PROOF, not an unfinished search/i)
+    expect(r.content).toMatch(/1\.41421356 is not √2/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_ARITH_CLOSE_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_ARITH_CLOSE_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
