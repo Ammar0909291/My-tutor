@@ -39,10 +39,14 @@ import {
   MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS,
   MATHEMATICS_ALGEBRA_VOCAB_PROBES,
 } from '@/lib/teaching/assets/mathematicsAlgebraVocabAssets'
+import {
+  MATHEMATICS_POWERS_VARIATION_EXPLANATIONS,
+  MATHEMATICS_POWERS_VARIATION_PROBES,
+} from '@/lib/teaching/assets/mathematicsPowersVariationAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -191,7 +195,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -306,6 +310,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_FRACTION_EXPLANATIONS,
     ...MATHEMATICS_PROPORTION_EXPLANATIONS,
     ...MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS,
+    ...MATHEMATICS_POWERS_VARIATION_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -315,6 +320,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_FRACTION_PROBES,
     ...MATHEMATICS_PROPORTION_PROBES,
     ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,
+    ...MATHEMATICS_POWERS_VARIATION_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -536,6 +542,74 @@ describe('mathematics algebra vocabulary and exponent edges', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_ALGEBRA_VOCAB_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 8 — powers and their inverses, variation, and the two reasonings.
+ *
+ * The inductive-reasoning entry carries the one name collision in this corpus
+ * that reverses a concept's meaning: mathematical induction is DEDUCTIVE and
+ * certain, while inductive reasoning is neither. An explanation that leaves
+ * that unsaid teaches the opposite of the truth by omission, so the check is
+ * that it is said outright.
+ */
+describe('mathematics powers, variation and reasoning', () => {
+  const NEW = [
+    'math.arith.square-numbers', 'math.arith.cube-numbers',
+    'math.arith.square-roots', 'math.arith.estimation',
+    'math.arith.direct-variation', 'math.arith.inverse-variation',
+    'math.found.deductive-reasoning', 'math.found.inductive-reasoning',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_POWERS_VARIATION_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_POWERS_VARIATION_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('inductive reasoning states that mathematical induction is deductive', () => {
+    const ind = MATHEMATICS_POWERS_VARIATION_EXPLANATIONS.find((e) => e.conceptId === 'math.found.inductive-reasoning')!
+    expect(ind.content).toMatch(/MATHEMATICAL INDUCTION is not/i)
+    expect(ind.content).toMatch(/deductive/i)
+  })
+
+  it('deductive reasoning separates valid from true from sound', () => {
+    const ded = MATHEMATICS_POWERS_VARIATION_EXPLANATIONS.find((e) => e.conceptId === 'math.found.deductive-reasoning')!
+    for (const word of [/\bvalid\b/i, /\btrue\b/i, /\bsound\b/i]) {
+      expect(ded.content).toMatch(word)
+    }
+  })
+
+  it('squaring and cubing are each contrasted with the operation they get absorbed into', () => {
+    const sq = MATHEMATICS_POWERS_VARIATION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.square-numbers')!
+    const cu = MATHEMATICS_POWERS_VARIATION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.cube-numbers')!
+    expect(sq.content).toMatch(/doubl/i)
+    expect(cu.content).toMatch(/tripl/i)
+  })
+
+  it('the two variations are distinguished by what stays constant, not by direction', () => {
+    const dv = MATHEMATICS_POWERS_VARIATION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.direct-variation')!
+    const iv = MATHEMATICS_POWERS_VARIATION_EXPLANATIONS.find((e) => e.conceptId === 'math.arith.inverse-variation')!
+    expect(dv.content).toMatch(/origin/i)
+    expect(iv.content).toMatch(/PRODUCT|product/)
+    expect(iv.content).toMatch(/RATIO|ratio/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_POWERS_VARIATION_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_POWERS_VARIATION_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
