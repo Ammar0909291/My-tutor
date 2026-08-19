@@ -83,8 +83,13 @@ describe('the asset bootstrap repairs hollow identities', () => {
     // Without this the repair is unreachable: the moment the identity count
     // reaches the expected total, the bootstrap returns before the loops.
     expect(SRC).toMatch(/hollowIdentities/)
-    expect(SRC).toMatch(/probeAsset:\s*\{\s*is:\s*null\s*\}/)
-    expect(SRC).toMatch(/explanationAsset:\s*\{\s*is:\s*null\s*\}/)
+    // Hollowness is derived from the prefetch's `hasContent`, not from a
+    // separate `probeAsset: { is: null }` aggregate (2026-08-19). Same
+    // invariant, one fewer query: the prefetch already reads whether each
+    // identity has a child, so the gate reads it there rather than asking the
+    // database the same question a second time.
+    expect(SRC).toMatch(/hasContent:\s*row\.probeAsset !== null \|\| row\.explanationAsset !== null/)
+    expect(SRC).toMatch(/if \(!row\.hasContent\) hollowIdentities\+\+/)
     expect(SRC).toMatch(/storedIdentities >= EXPECTED_IDENTITIES && hollowIdentities === 0/)
   })
 

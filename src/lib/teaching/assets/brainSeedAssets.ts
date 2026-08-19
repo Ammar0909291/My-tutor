@@ -100,7 +100,7 @@ export function buildProbeSlugResolver<
 }
 
 /** Subjects the automatic cold-start bootstrap (src/instrumentation.ts) seeds. */
-export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english'] as const
+export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english', 'chemistry'] as const
 
 /**
  * Prisma `where` matching EXACTLY the AssetIdentity rows the seed bootstrap
@@ -116,8 +116,17 @@ export const BOOTSTRAP_SEED_SUBJECTS = ['mathematics', 'physics', 'english'] as 
  *       and this bootstrap must never touch them.
  *   authorId SEED_AUTHOR_ID  — excludes any other human curator's rows.
  *   tags hasSome <subjects>  — excludes the subjects only the manual script
- *       seeds (chemistry/biology/computer_science). Those share authorKind and
- *       authorId but are not part of this bootstrap's corpus.
+ *       seeds (biology/computer_science). Those share authorKind and authorId
+ *       but are not part of this bootstrap's corpus.
+ *
+ *       CHEMISTRY JOINED THE BOOTSTRAP CORPUS 2026-08-19. It was script-only,
+ *       and the script cannot be run from any session that lacks DATABASE_URL —
+ *       which is every session this repo has had. The measurable consequence:
+ *       chemistry sat at exactly 2 gradeable probes per concept for all 186
+ *       concepts, against an asset contract of 3, so no chemistry lesson could
+ *       reach mastery. The other 314 probes were authored, in git, and
+ *       unreachable. Adding the subject here is what lets the cold-start
+ *       bootstrap — which runs where DATABASE_URL exists — finish the job.
  *
  * Seed rows are tagged `[subjectSlug, familyKind]` (see src/instrumentation.ts),
  * so matching on subject slugs cannot collide with familyKind values.
