@@ -6215,7 +6215,43 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // engine has a trend, not just a current value).
             const { recordMcqAsked, recordConfidence, recordExplanationServed } = await import('@/lib/teaching/teachingHistory')
             let memoryHistory = updatedHistory
-            if (mcqHoisted?.question) memoryHistory = recordMcqAsked(memoryHistory, mcqHoisted.question)
+            // A PROBE IS SPENT WHEN IT IS ANSWERED, NOT WHEN IT IS SHOWN.
+            //
+            // This recorded the OUTGOING question, so a probe was burned the
+            // moment it appeared — even if the learner never answered it. The
+            // exclusion at the gate (`excludeProbeStem: hasAskedMcq`) then
+            // refused to offer it again, and the pool shrank by one for
+            // nothing.
+            //
+            // MEASURED, and the margin does not survive it. Production physics
+            // carries >= 3 ACTIVE closed-choice probes for 238 of 238 concepts
+            // — mean 3.13 — while closing a concept needs THREE graded answers
+            // (correctAtCheck >= 1, correctAtPractice >= 2) and the gate never
+            // re-asks. So the supply equals the bar exactly, with no slack. One
+            // wasted probe makes the concept unclosable, and from then on every
+            // gate turn runs dry and hands the learner an ungradeable prose
+            // question, which cannot move the ladder.
+            //
+            // Watched happen on phys.mech.torque: a probe was attached on turn
+            // 3, the learner asked for something else, a NEW probe replaced it
+            // on turn 4 — and the first was gone. The lesson later closed with
+            // checkCorrect 0 / practiceCorrect 0.
+            //
+            // Recording on the GRADE instead spends a probe exactly once, when
+            // it has actually produced evidence. This does not touch the
+            // mastery bar: each probe still yields at most one graded answer,
+            // and a probe the learner answers is still never re-asked. The
+            // alternative fix — re-asking spent probes when the pool is dry —
+            // was rejected outright: it would let one question be answered
+            // three times and called mastery, which is the hollow advancement
+            // this product is defined against.
+            //
+            // `unansweredProbeOnScreen` already stops the gate selecting a new
+            // probe while one is pending, so deferring the record cannot let
+            // the same probe be handed out twice in a row.
+            if (pendingMcqHoisted?.question && mcqGradeHoisted) {
+              memoryHistory = recordMcqAsked(memoryHistory, pendingMcqHoisted.question)
+            }
             // The write half of the already-read guard above. Recorded only
             // when the asset was actually SERVED to the learner this turn —
             // an assembled-but-not-served asset (the Brain routed elsewhere)
