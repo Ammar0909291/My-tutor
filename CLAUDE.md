@@ -2405,3 +2405,35 @@ contained in `main`'s current tip.
   exists as a read-only duplicate of that same history; it holds nothing unique
   and is not to be developed on. Deleting it on the remote was left to the
   owner.
+
+## Mathematics Educational Brain serving-asset campaign — COMPLETE (2026-08-19)
+- **257/257 authored Educational Brain entries in mathematics now have serving assets.**
+  Started the session at 75/257. 29 batches, 185 concepts authored this session
+  (185 explanations + 555 closed-choice probes). All five domains closed:
+  `math.found`, `math.alg`, `math.arith`, `math.nt`, `math.geom`.
+- Every concept meets `src/lib/teaching/assetContract.ts` v1: >= 1 explanation and
+  >= 3 closed-choice probes per served band — the inventory that lets a lesson close
+  without depending on the model volunteering a gradeable question.
+- Seed corpus: **6,030 assets, 0 duplicate canonicalSlugs** (`--dry-run` reports
+  `created=6030 revived=0 skipped=0`). All DRAFT. Promotion stays human via
+  `PATCH /api/admin/knowledge-assets` — unchanged, and deliberately so.
+- Guard: `src/tests/mathematicsAssetContract.test.ts`, 472 assertions. It does NOT
+  only pattern-match prose — it RE-DERIVES the arithmetic every batch quotes
+  (Carmichael 561 by modular exponentiation, phi(12) by distinct primes, the Bezout
+  certificate for gcd(30,18), the D=61 Pell solution, pi(10^6) by sieve, all five
+  Platonic solids at V-E+F=2, the diameter slip costing exactly 2x and 4x). A wrong
+  number in a teaching asset is worse than a missing one, because it is believed.
+- Four probe defects were caught by these checks BEFORE commit and are worth knowing
+  about as a class: an 11-rule distractor that was a valid alternative method; a
+  cube-Euler distractor that was the octahedron's count and evaluated correctly; a
+  misconception id mapped to a register entry that did not describe it; and two
+  explanations that opened with genus-differentia definitions the corpus guard bans.
+  Three test failures in the same period were the ASSERTIONS being wrong, not the
+  content — recorded so a future session does not "fix" correct prose.
+- **Still blocked, unchanged and unchanged for the whole session:** none of this
+  reaches a learner. Seeding needs a real `DATABASE_URL`; the Supabase MCP surface is
+  a READ-ONLY transaction (verified: `25006: cannot execute CREATE TABLE in a
+  read-only transaction`), so no batching works around it. One idempotent run
+  finishes all 6,030: `npx tsx scripts/brain/seed-knowledge-assets.ts --draft`.
+- Per-batch detail lives in the commit messages (`git log --grep "feat(math)"`), which
+  carry the misconception analysis rather than a change list.
