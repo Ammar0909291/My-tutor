@@ -222,3 +222,107 @@ describe('detectNavigationIntent — non-navigation content (must return null)',
   it('ignores "I don\'t understand the previous example"', () => expect(detectNavigationIntent("I don't understand the previous example")).toBeNull())
   it('ignores "let me try the next example"', () => expect(detectNavigationIntent("let me try the next example")).toBeNull())
 })
+
+/**
+ * ── NEXT AND PREVIOUS FOLLOW THE LESSON ON SCREEN ───────────────────────────
+ *
+ * MEASURED IN PRODUCTION, 2026-08-19, real account, chemistry (186 lessons).
+ * `GET /api/curriculum?subject=chemistry` returned:
+ *
+ *   progress.currentLesson    1
+ *   progress.completedLessons []
+ *   progress.activeLessonSlug 'chem.found.pure-substances'
+ *   progress.lastLessonTitle  'Pure Substances and Mixtures'   (order 3)
+ *
+ * Against that payload the shipped functions answered:
+ *
+ *   findNextLesson()     -> order 2, "States of Matter"   ← BEHIND the open lesson
+ *   findPreviousLesson() -> null                          ← control rendered disabled
+ *
+ * which is the reported symptom exactly: "Previous" did nothing (a null result
+ * makes the button `disabled`), and "Next" did not go to the next lesson — it
+ * went backwards.
+ *
+ * The cause was the anchor. `currentLesson` is a COMPLETION counter; the lesson
+ * open is `resolveActiveLesson`, which honours `activeLessonSlug`. They diverge
+ * the moment a learner opens a lesson ahead of their recorded progress, which
+ * is ordinary behaviour.
+ *
+ * WHY THE SUITE ABOVE COULD NOT HAVE CAUGHT THIS: every fixture in it omits
+ * `activeLessonSlug`, so `resolveActiveLesson` falls back to `currentLesson`
+ * and both anchors agree. Those tests still pass unchanged — which is the
+ * backwards-compatibility check — but the divergence needed a case of its own.
+ */
+describe('navigation anchors on the lesson actually open, not the completion counter', () => {
+  // The production payload, reduced to the five fields these functions read.
+  const CHEM: CurriculumLesson[] = [
+    lesson({ order: 1, lessonTitle: 'Nature of Matter', topicSlug: 'chem.found.matter' }),
+    lesson({ order: 2, lessonTitle: 'States of Matter', topicSlug: 'chem.found.states-of-matter' }),
+    lesson({ order: 3, lessonTitle: 'Pure Substances and Mixtures', topicSlug: 'chem.found.pure-substances' }),
+    lesson({ order: 4, lessonTitle: 'Physical Quantities and SI Units', topicSlug: 'chem.found.si-units' }),
+  ]
+  const REAL: CurriculumProgress = {
+    currentLesson: 1,
+    completedLessons: [],
+    activeLessonSlug: 'chem.found.pure-substances',
+  }
+
+  it('NEXT goes forward from the open lesson, not from the completion counter', () => {
+    // Before the fix this returned order 2 — a lesson the learner had already
+    // moved past. Tapping "Next" walked them backwards.
+    expect(findNextLesson(CHEM, REAL)?.order).toBe(4)
+    expect(findNextLesson(CHEM, REAL)?.lessonTitle).toBe('Physical Quantities and SI Units')
+  })
+
+  it('PREVIOUS is offered at all — a null here is what disabled the button', () => {
+    // Before the fix this was null, because currentLesson - 1 = 0.
+    const prev = findPreviousLesson(CHEM, REAL)
+    expect(prev).not.toBeNull()
+    expect(prev?.order).toBe(2)
+    expect(prev?.lessonTitle).toBe('States of Matter')
+  })
+
+  it('a learner sitting on their recorded lesson is unaffected', () => {
+    // No activeLessonSlug ⇒ resolveActiveLesson falls back to currentLesson,
+    // so the two anchors agree and behaviour is exactly as before.
+    const onRecord: CurriculumProgress = { currentLesson: 3, completedLessons: [1, 2] }
+    expect(findNextLesson(CHEM, onRecord)?.order).toBe(4)
+    expect(findPreviousLesson(CHEM, onRecord)?.order).toBe(2)
+  })
+
+  it('an activeLessonSlug that matches the counter changes nothing', () => {
+    const agreeing: CurriculumProgress = {
+      currentLesson: 3, completedLessons: [1, 2], activeLessonSlug: 'chem.found.pure-substances',
+    }
+    expect(findNextLesson(CHEM, agreeing)?.order).toBe(4)
+    expect(findPreviousLesson(CHEM, agreeing)?.order).toBe(2)
+  })
+
+  it('a stale slug that names no lesson falls back to the counter, never to null', () => {
+    const stale: CurriculumProgress = {
+      currentLesson: 3, completedLessons: [1, 2], activeLessonSlug: 'chem.found.does-not-exist',
+    }
+    expect(findNextLesson(CHEM, stale)?.order).toBe(4)
+    expect(findPreviousLesson(CHEM, stale)?.order).toBe(2)
+  })
+
+  it('at the last lesson NEXT is still null, and at the first PREVIOUS is still null', () => {
+    const atEnd: CurriculumProgress = {
+      currentLesson: 1, completedLessons: [], activeLessonSlug: 'chem.found.si-units',
+    }
+    expect(findNextLesson(CHEM, atEnd)).toBeNull()
+    const atStart: CurriculumProgress = {
+      currentLesson: 1, completedLessons: [], activeLessonSlug: 'chem.found.matter',
+    }
+    expect(findPreviousLesson(CHEM, atStart)).toBeNull()
+  })
+
+  it('a completed earlier lesson still wins over the immediate predecessor', () => {
+    // The existing "nearest completed before" rule is preserved — it is now
+    // measured against the open lesson rather than the counter.
+    const withCompletions: CurriculumProgress = {
+      currentLesson: 1, completedLessons: [1], activeLessonSlug: 'chem.found.si-units',
+    }
+    expect(findPreviousLesson(CHEM, withCompletions)?.order).toBe(1)
+  })
+})

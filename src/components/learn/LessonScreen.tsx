@@ -2554,7 +2554,15 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
 
       // Lesson position data — available once curriculum loads; gracefully absent for
       // school mode or subjects without a KG (positionCtx stays empty string).
-      const curLesson = curriculumLessons.find((l) => l.order === curriculumProgress.currentLesson) ?? curriculumLessons[0] ?? null
+      // THE SAME WRONG ANCHOR, one line up from the navigation it broke.
+      // `currentLesson` is a COMPLETION counter; the lesson on screen is
+      // `resolveActiveLesson` (it honours activeLessonSlug). Measured against
+      // production chemistry: currentLesson 1 while the open lesson was order 3
+      // "Pure Substances and Mixtures" — so the tutor was told "Lesson 1 of 186.
+      // Today: Nature of Matter" while teaching something else, and the
+      // Previous/Next names in the same sentence were wrong with it.
+      const curLesson = resolveActiveLesson(curriculumLessons, curriculumProgress)
+        ?? curriculumLessons[0] ?? null
       const nxtLesson = findNextLesson(curriculumLessons, curriculumProgress)
       const prvLesson = findPreviousLesson(curriculumLessons, curriculumProgress)
       const ttlLessons = curriculumLessons.length
