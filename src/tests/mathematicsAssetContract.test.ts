@@ -27,10 +27,14 @@ import {
   MATHEMATICS_GEOMETRY_EXPLANATIONS,
   MATHEMATICS_GEOMETRY_PROBES,
 } from '@/lib/teaching/assets/mathematicsGeometryFoundations'
+import {
+  MATHEMATICS_FRACTION_EXPLANATIONS,
+  MATHEMATICS_FRACTION_PROBES,
+} from '@/lib/teaching/assets/mathematicsFractionDecimalAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -179,7 +183,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -291,12 +295,14 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_ARITHMETIC_EXPLANATIONS,
     ...MATHEMATICS_BATCH3_EXPLANATIONS,
     ...MATHEMATICS_GEOMETRY_EXPLANATIONS,
+    ...MATHEMATICS_FRACTION_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
     ...MATHEMATICS_ARITHMETIC_PROBES,
     ...MATHEMATICS_BATCH3_PROBES,
     ...MATHEMATICS_GEOMETRY_PROBES,
+    ...MATHEMATICS_FRACTION_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -350,6 +356,47 @@ describe('mathematics geometry foundations — newly serving concepts', () => {
 
   it('every probe is gradeable and every distractor names its misconception', () => {
     for (const p of MATHEMATICS_GEOMETRY_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      for (const c of p.choices ?? []) {
+        if (!c.isCorrect) expect(c.misconceptionId, `${p.stem} -> "${c.text}"`).toBeTruthy()
+      }
+    }
+  })
+})
+
+/**
+ * Fractions, decimals and percentages — the same number in three costumes, and
+ * the place where a remembered rule with no reason behind it does most damage.
+ */
+describe('mathematics fractions and decimals — newly serving concepts', () => {
+  const NEW = [
+    'math.arith.fraction-reciprocal', 'math.arith.mixed-numbers',
+    'math.arith.improper-fractions', 'math.arith.decimal-operations',
+    'math.arith.terminating-decimals', 'math.arith.repeating-decimals',
+    'math.arith.percentage-calculations', 'math.arith.percentage-change',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_FRACTION_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_FRACTION_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the rules are given a reason, not just stated', () => {
+    // These eight are exactly where "turn it upside down and multiply" gets
+    // remembered without meaning and then decays. Each explanation must contain
+    // a causal connective, not only an instruction.
+    for (const e of MATHEMATICS_FRACTION_EXPLANATIONS) {
+      expect(e.content, e.conceptId).toMatch(/\bbecause\b|\bwhich is why\b|\bthat is why\b|\bso that\b/i)
+    }
+  })
+
+  it('every probe is gradeable and every distractor names its misconception', () => {
+    for (const p of MATHEMATICS_FRACTION_PROBES) {
       expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
       for (const c of p.choices ?? []) {
         if (!c.isCorrect) expect(c.misconceptionId, `${p.stem} -> "${c.text}"`).toBeTruthy()
