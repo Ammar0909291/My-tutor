@@ -68,22 +68,29 @@ export async function register() {
 
 async function bootstrapAssets() {
   try {
-    const { PrismaClient } = await import('@prisma/client')
-    const { withPoolParams } = await import('./lib/db/poolConfig')
-    // P5 (2026-07-26): this bootstrap ran its own unpooled PrismaClient on
-    // every cold start (default connection_limit = CPU count, pool_timeout
-    // = 10s), bypassing the P0 pool-sizing fix (poolConfig.ts /
-    // connection_limit=15, pool_timeout=20) that src/lib/db/prisma.ts's
-    // singleton already applies. That opened an extra unpooled connection
-    // at exactly the moment (cold start) request traffic is also spiking —
-    // worsening the "Timed out fetching a new connection from the
-    // connection pool" errors seen in production. Applying the same pool
-    // params here closes that gap without changing any bootstrap behavior.
-    const prisma = new PrismaClient({
-      ...(withPoolParams(process.env.DATABASE_URL) ? { datasources: { db: { url: withPoolParams(process.env.DATABASE_URL) } } } : {}),
-    })
+    // ONE POOL PER PROCESS, NOT TWO.
+    //
+    // P5 (2026-07-26) gave this bootstrap's OWN PrismaClient the same pool
+    // params as the app's singleton, which fixed the params but left the
+    // second client. A serverless instance therefore opened two pools of
+    // connection_limit=15 against a database whose max_connections is 60 —
+    // so four warm instances can exhaust it, and a cold start is exactly the
+    // moment both pools are being filled at once.
+    //
+    // MEASURED 2026-08-19, production, on this hook's FIRST query:
+    //   asset bootstrap DB error (will retry on next start):
+    //     Invalid `prisma.assetIdentity.groupBy()` invocation: Socket timeout
+    // and after the guard was rewritten, the same failure moved to
+    // findMany — i.e. it is not the query. asset_identity holds 5,386 rows;
+    // no read of it costs seconds. It is connection acquisition.
+    //
+    // The singleton is already constructed with withPoolParams (see
+    // src/lib/db/prisma.ts), so this keeps the P5 fix and drops the extra
+    // pool. It is also why there is no $disconnect below: the client belongs
+    // to the application, not to this run.
+    const { prisma, withRetry } = await import('./lib/db/prisma')
 
-    try {
+    {
       // Load seed arrays first so we know the expected total before querying.
       const { SEED_EXPLANATIONS, SEED_PROBES, SEED_LANGUAGE, SEED_AUTHOR_ID, seedCanonicalSlug,
         buildProbeSlugResolver, seedOwnershipWhere } =
@@ -280,8 +287,15 @@ async function bootstrapAssets() {
       // The TOCTOU window is unchanged in kind (it was always there) and is
       // still closed the same way: the partial unique index makes a losing
       // racer fail with P2002, which is caught per-asset as a skip.
+      //
+      // RETRIED, because this single read is now the whole run's gate. It was
+      // failing in production with "Socket timeout" on a 5,386-row table —
+      // connection acquisition, not query cost — and one such failure threw
+      // out of the entire cold start, which is the never-converges shape this
+      // block already describes. withRetry's isRetryable() already classifies
+      // socket timeouts and pool-acquisition failures as transient.
       const existing = new Map<string, { assetId: string; hasContent: boolean }>()
-      for (const row of await prisma.assetIdentity.findMany({
+      for (const row of await withRetry(() => prisma.assetIdentity.findMany({
         where: seedOwnershipWhere() as never,
         select: {
           assetId: true,
@@ -289,7 +303,7 @@ async function bootstrapAssets() {
           probeAsset: { select: { assetId: true } },
           explanationAsset: { select: { assetId: true } },
         },
-      })) {
+      }))) {
         // Last write wins on a duplicate slug, which cannot happen under the
         // partial unique index — recorded so the Map's behaviour is stated
         // rather than assumed.
@@ -561,8 +575,6 @@ async function bootstrapAssets() {
         (budgetSpent >= WRITE_BUDGET ? ' — budget spent, the next cold start continues' : ' — nothing left to do') +
         (failed > 0 ? '; some writes failed (likely DB timeouts) and will be retried' : '')
       )
-    } finally {
-      await prisma.$disconnect()
     }
   } catch (err: any) {
     // DB not reachable yet (e.g., slow cold start) — non-fatal; the next cold
