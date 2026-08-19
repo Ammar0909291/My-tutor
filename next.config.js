@@ -89,7 +89,7 @@ const nextConfig = {
       },
     ];
   },
-  webpack: (config, { nextRuntime }) => {
+  webpack: (config, { nextRuntime, webpack }) => {
     // Next.js always emits a full source map for the Edge runtime bundle
     // (src/middleware.ts) in production, regardless of any experimental
     // sourcemap flag. That map isn't needed to execute the middleware —
@@ -99,6 +99,34 @@ const nextConfig = {
     // compilation; server/client source maps are unaffected.
     if (nextRuntime === "edge") {
       config.devtool = false;
+
+      // THE ASSET BOOTSTRAP MUST NOT BE COMPILED INTO THE EDGE BUNDLE.
+      //
+      // Next compiles src/instrumentation.ts for BOTH runtimes. Its first line
+      // returns unless NEXT_RUNTIME === 'nodejs', but that is a RUNTIME guard
+      // and the edge runtime has no code splitting — webpack inlines every
+      // `await import(...)` the hook contains whether or not it can be
+      // reached. Those imports are the authored seed corpora;
+      // chemistrySeedAssets.ts alone is 1.37 MB of source.
+      //
+      // MEASURED: deploy dpl_7HZgvv4M failed with
+      //   NOW_SANDBOX_WORKER_MAX_MIDDLEWARE_SIZE — "src/middleware" is 1.17 MB,
+      //   plan limit 1 MB
+      // and .next/server/edge-instrumentation.js gzipped to 1,124,399 bytes
+      // carrying 372 chemistry concept ids. The same budget is what the
+      // devtool line above already exists to protect.
+      //
+      // Substituting the module is what makes the exclusion structural rather
+      // than a size that happens to fit today: the edge hook is honestly empty,
+      // and the Node build still compiles src/instrumentation.ts unchanged, so
+      // there is exactly one implementation and the bootstrap tests keep
+      // reading the real one.
+      config.plugins.push(
+        new webpack.NormalModuleReplacementPlugin(
+          /[\\/]src[\\/]instrumentation\.ts$/,
+          require("path").resolve(__dirname, "src/instrumentation.edge.ts"),
+        ),
+      );
     }
     return config;
   },
