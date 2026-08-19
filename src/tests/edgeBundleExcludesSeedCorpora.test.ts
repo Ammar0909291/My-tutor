@@ -80,3 +80,36 @@ describe('the seed corpora are large enough that this matters', () => {
     expect(bytes).toBeGreaterThan(1_000_000)
   })
 })
+
+/**
+ * THE BOOTSTRAP MUST GET WALL-CLOCK, NOT GOOD LUCK.
+ *
+ * register() used to fire-and-forget "so cold-start latency is unaffected".
+ * A serverless instance freezes the moment its response is sent, so nothing
+ * cancelled the work — it was suspended mid-query and the socket was dead by
+ * the time the instance thawed. Every cold start logged a Socket timeout on
+ * the run's FIRST query, while EXPLAIN ANALYZE of that same query against
+ * production measured 10.025 ms. The database was never the problem.
+ */
+describe('the bootstrap is awaited, under a deadline', () => {
+  const HOOK = fs.readFileSync(path.join(process.cwd(), 'src/instrumentation.ts'), 'utf8')
+
+  it('register awaits the run instead of firing and forgetting', () => {
+    expect(HOOK).toMatch(/await Promise\.race\(\[/)
+    expect(HOOK).toMatch(/bootstrapAssets\(\)\.catch\(/)
+  })
+
+  it('the wait is bounded, so an unreachable database cannot delay boot forever', () => {
+    expect(HOOK).toMatch(/ASSET_BOOTSTRAP_DEADLINE_MS/)
+    expect(HOOK).toMatch(/setTimeout\(/)
+    // The deadline must not become the thing that keeps a process alive.
+    expect(HOOK).toMatch(/\.unref\?\.\(\)/)
+  })
+
+  it('the per-cold-start write budget still exists — the deadline does not replace it', () => {
+    // Two independent bounds: the deadline bounds TIME, the budget bounds
+    // WORK. Dropping either one is how this turns into a slow boot.
+    expect(HOOK).toMatch(/ASSET_BOOTSTRAP_WRITE_BUDGET/)
+    expect(HOOK).toMatch(/budgetExhausted\(\)/)
+  })
+})

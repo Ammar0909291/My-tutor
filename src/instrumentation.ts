@@ -59,11 +59,53 @@ export async function register() {
   if (process.env.NEXT_RUNTIME !== 'nodejs') return
   if (process.env.DISABLE_ASSET_BOOTSTRAP === 'true') return
 
-  // Kick off in the background — don't await so cold-start latency is
-  // unaffected even if the DB is momentarily slow.
-  bootstrapAssets().catch((err) =>
-    console.error('[instrumentation] asset bootstrap failed (non-fatal):', err?.message ?? err)
-  )
+  // ── WHY THIS IS AWAITED, WITH A DEADLINE ──────────────────────────────────
+  //
+  // It was fire-and-forget, "so cold-start latency is unaffected". That is
+  // why the catalogue never converged, and the reason is stated a few lines
+  // below in this same file: a serverless instance FREEZES once its response
+  // is sent. Nothing cancels the background work — it is simply suspended
+  // mid-flight, and when the instance thaws for the next request the socket
+  // it was waiting on is gone.
+  //
+  // MEASURED 2026-08-19. Every cold start logged
+  //   asset bootstrap DB error (will retry on next start): ... Socket timeout
+  // on the run's FIRST query. EXPLAIN ANALYZE of that exact query against
+  // production: 10.025 ms, 4,219 rows, seq scan on a 5,386-row table. The
+  // database was never slow. `/api/health` returns in about 200 ms, and the
+  // instance froze inside that window — so the work had no wall-clock to
+  // finish in, no matter how few writes it attempted.
+  //
+  // Awaiting a BOUNDED slice makes progress deterministic instead of
+  // incidental to how long some unrelated request happened to take. The
+  // deadline is the safety property: a slow or unreachable database delays
+  // boot by at most this long, never indefinitely, and the write budget
+  // caps the work itself. If the deadline wins, the run is abandoned exactly
+  // as before and the next cold start resumes from the prefetch — the
+  // partial progress is already committed, because each asset is its own
+  // write.
+  //
+  // Cost: once the catalogue is complete the guard exits after that one 10 ms
+  // read, so the steady state is a single indexed query per cold start.
+  const deadlineMs = Number(process.env.ASSET_BOOTSTRAP_DEADLINE_MS ?? 5000)
+  let onDeadline: ReturnType<typeof setTimeout> | undefined
+  await Promise.race([
+    bootstrapAssets().catch((err) =>
+      console.error('[instrumentation] asset bootstrap failed (non-fatal):', err?.message ?? err)
+    ),
+    new Promise<void>((resolve) => {
+      onDeadline = setTimeout(() => {
+        console.warn(
+          `[instrumentation] asset bootstrap: ${deadlineMs}ms boot deadline reached — ` +
+            'continuing in the background; the next cold start resumes',
+        )
+        resolve()
+      }, deadlineMs)
+      // Never hold the process open on account of this timer.
+      onDeadline.unref?.()
+    }),
+  ])
+  if (onDeadline) clearTimeout(onDeadline)
 }
 
 async function bootstrapAssets() {
