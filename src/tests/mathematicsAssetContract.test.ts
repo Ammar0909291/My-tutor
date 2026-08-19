@@ -43,10 +43,14 @@ import {
   MATHEMATICS_POWERS_VARIATION_EXPLANATIONS,
   MATHEMATICS_POWERS_VARIATION_PROBES,
 } from '@/lib/teaching/assets/mathematicsPowersVariationAssets'
+import {
+  MATHEMATICS_SET_OPERATIONS_EXPLANATIONS,
+  MATHEMATICS_SET_OPERATIONS_PROBES,
+} from '@/lib/teaching/assets/mathematicsSetOperationsAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -195,7 +199,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -311,6 +315,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_PROPORTION_EXPLANATIONS,
     ...MATHEMATICS_ALGEBRA_VOCAB_EXPLANATIONS,
     ...MATHEMATICS_POWERS_VARIATION_EXPLANATIONS,
+    ...MATHEMATICS_SET_OPERATIONS_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -321,6 +326,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_PROPORTION_PROBES,
     ...MATHEMATICS_ALGEBRA_VOCAB_PROBES,
     ...MATHEMATICS_POWERS_VARIATION_PROBES,
+    ...MATHEMATICS_SET_OPERATIONS_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -610,6 +616,72 @@ describe('mathematics powers, variation and reasoning', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_POWERS_VARIATION_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 9 — combining sets, pairing them, carving them up, counting them.
+ *
+ * Two checks here are about a claim being STATED rather than implied, because
+ * both are places where silence teaches the wrong thing: a complement is
+ * meaningless without a universal set, and one equivalence class answers to
+ * many names.
+ */
+describe('mathematics set operations, pairs, partitions and cardinality', () => {
+  const NEW = [
+    'math.found.intersection', 'math.found.complement',
+    'math.found.ordered-pair', 'math.found.cartesian-product',
+    'math.found.partition', 'math.found.equivalence-class',
+    'math.found.finite-set', 'math.found.cardinal-arithmetic',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_SET_OPERATIONS_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_SET_OPERATIONS_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('complement names the universal set as part of the question', () => {
+    const c = MATHEMATICS_SET_OPERATIONS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.complement')!
+    expect(c.content).toMatch(/universal set/i)
+  })
+
+  it('equivalence class says outright that one class has many names', () => {
+    const e = MATHEMATICS_SET_OPERATIONS_EXPLANATIONS.find((x) => x.conceptId === 'math.found.equivalence-class')!
+    expect(e.content).toMatch(/SAME SET|same set/)
+  })
+
+  it('partition distinguishes covering from partitioning', () => {
+    const p = MATHEMATICS_SET_OPERATIONS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.partition')!
+    expect(p.content).toMatch(/cover/i)
+    expect(p.content).toMatch(/disjoint/i)
+  })
+
+  it('the ordered pair is contrasted with the set, not merely defined', () => {
+    const op = MATHEMATICS_SET_OPERATIONS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.ordered-pair')!
+    expect(op.content).toMatch(/same set/i)
+  })
+
+  it('cardinal arithmetic separates the continuum hypothesis from countability', () => {
+    const c = MATHEMATICS_SET_OPERATIONS_EXPLANATIONS.find((e) => e.conceptId === 'math.found.cardinal-arithmetic')!
+    expect(c.content).toMatch(/continuum hypothesis/i)
+    expect(c.content).toMatch(/countability|countable/i)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_SET_OPERATIONS_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_SET_OPERATIONS_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
