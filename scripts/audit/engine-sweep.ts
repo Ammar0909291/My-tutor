@@ -46,6 +46,11 @@
 import { readFileSync } from 'fs'
 import path from 'path'
 import { summariseSweep } from './sweepReport'
+// The REAL predicates the runtime judges a turn by. E6 used to test `/\?/`,
+// which is a different question from the one the runtime asks — see the note
+// on E6 below.
+import { askedAnswerableQuestion } from '../../src/lib/teaching/answerableTurn'
+import { containsOptionList } from '../../src/lib/teaching/gateProbeContract'
 
 const BASE = process.env.AUDIT_BASE ?? 'https://my-tutor-flame.vercel.app'
 const EMAIL = process.env.AUDIT_EMAIL
@@ -251,9 +256,27 @@ function checkTurn(
   }
 
   // E6 — a gate-phase question must carry the tag, or it cannot be recorded.
-  if ((ctx.phaseBefore === 'CHECK' || ctx.phaseBefore === 'PRACTICE')
-      && /\?/.test(text) && !r.mcq) {
-    out.push({ code: 'E6', detail: `question asked at ${ctx.phaseBefore} without an MCQ tag` })
+  //
+  // SHARPENED 2026-08-19, because the instrument was asking a different
+  // question from the runtime. It tested `/\?/` — ANY question mark — so
+  // "does that make sense?" and "shall we carry on?" were reported as
+  // ungradeable mastery questions. Those are confirmation tails, not mastery
+  // questions, and the runtime's own repair
+  // (`withholdUngradedGateQuestion`) deliberately lets them through: it asks
+  // `askedAnswerableQuestion(text) || containsOptionList(text)`.
+  //
+  // Using the runtime's predicates means a finding here is the same event the
+  // server would have acted on, rather than a stricter one this file invented
+  // — the pattern this whole harness has been burned by twice already (the
+  // bot-manufactured DEMONSTRATE freeze, the parallel-session asset mix-up).
+  // The offending text rides along so the verdict can be judged, not guessed.
+  if ((ctx.phaseBefore === 'CHECK' || ctx.phaseBefore === 'PRACTICE') && !r.mcq
+      && (askedAnswerableQuestion(text) || containsOptionList(text))) {
+    const snippet = text.replace(/\s+/g, ' ').trim().slice(-220)
+    out.push({
+      code: 'E6',
+      detail: `answerable question asked at ${ctx.phaseBefore} without an MCQ tag — "…${snippet}"`,
+    })
   }
 
   return out
@@ -469,6 +492,25 @@ async function main() {
   )
 
   const summary = summariseSweep(results)
+
+  // ── THE TRANSCRIPT IS THE EVIDENCE ────────────────────────────────────────
+  //
+  // A finding code is a claim; the turn that produced it is the proof. This
+  // harness has twice reported a real-looking engine defect that the actual
+  // exchange disproved — a bot-manufactured DEMONSTRATE freeze, and an asset
+  // mix-up that was two sessions on one account. Both cost a near-miss fix to
+  // production code. `--dump <path>` writes every topic's full ladder,
+  // findings and transcript so a verdict can be READ rather than trusted.
+  const dumpPath = arg('dump', '')
+  if (dumpPath) {
+    const { writeFileSync } = await import('fs')
+    writeFileSync(dumpPath, JSON.stringify({
+      subject: SUBJECT,
+      ranAt: new Date().toISOString(),
+      results,
+    }, null, 2))
+    console.log(`\n  transcripts written to ${dumpPath}`)
+  }
 
   console.log('\n── ENGINE FINDINGS ──')
   console.log(`  ${summary.findingsLine}`)

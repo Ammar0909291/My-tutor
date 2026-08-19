@@ -2215,6 +2215,116 @@
   (so nothing can be seeded — `npx tsx scripts/brain/seed-knowledge-assets.ts --draft` is
   idempotent and finishes it in one run wherever that exists).
 
+## Chemistry made servable (2026-08-19)
+
+- **The blocking defect, measured**: chemistry held exactly **2** ACTIVE closed-choice probes per
+  concept for all 186 concepts, against an asset contract of **3** (`correctAtCheck >= 1` plus
+  `correctAtPractice >= 2`, and the gate never re-asks a spent probe). **0 of 186 concepts were at
+  contract, so no chemistry lesson could reach mastery.** The other 314 probes were authored, in
+  git (`chemistrySeedAssets.ts` carries 372 explanations + 687 probes), and unreachable — the only
+  writer that had ever seeded them is `scripts/brain/seed-knowledge-assets.ts`, which needs a
+  `DATABASE_URL` no session in this environment has ever had.
+- **Now**: `chem.%` holds **687/687 ACTIVE probes over 186/186 concepts at >= 3**, plus 372
+  explanations over 186 concepts. Verified against production: 0 duplicate canonicalSlugs, 0
+  hollow identities (probe or explanation), 0 non-ACTIVE rows, every probe 2-3 choices with
+  **exactly one** `isCorrect` — 687/687 gradeable.
+- **How, and why it is durable**: chemistry joined `BOOTSTRAP_SEED_SUBJECTS` and the cold-start
+  bootstrap's corpus (`src/instrumentation.ts`), so the content is written by the one writer that
+  DOES have database access. Seeding by hand through the Supabase MCP was rejected on cost: the
+  SQL has to pass through the session context twice (once read, once as the tool argument), about
+  320 KB for the checkpoint probes alone.
+- **Four real defects were found on the way, each measured before it was fixed:**
+  1. **The completeness guard measured the wrong set.** It compared this corpus (4,144 identities)
+     against a DISTINCT-slug count over every seed-owned row in the table (4,219) — rows written
+     historically by the script, whose corpus includes files the hook does not import. The guard
+     was already satisfied with 314 chemistry probes absent; only hollow-row repairs kept the run
+     alive, and once those finished it would have skipped forever. Presence and hollowness are now
+     an intersection of the existing prefetch with the slugs the corpus declares.
+  2. **The seed corpora were being compiled into the EDGE bundle.** Next compiles
+     `instrumentation.ts` for both runtimes; the `NEXT_RUNTIME !== 'nodejs'` guard is a RUNTIME
+     guard, and the edge runtime has no code splitting, so webpack inlined every `await import()`
+     regardless of reachability. Deploy `dpl_7HZgvv4M` failed with
+     `NOW_SANDBOX_WORKER_MAX_MIDDLEWARE_SIZE` (1.17 MB vs a 1 MB limit);
+     `edge-instrumentation.js` gzipped to 1,124,399 bytes carrying 372 chemistry concept ids.
+     `next.config.js` now substitutes `src/instrumentation.edge.ts` for the edge compilation only.
+     **Middleware 1.2 MB -> 79.7 kB** — this budget had already been hit once before, by edge
+     source maps, which is what the neighbouring `config.devtool = false` line is for.
+  3. **The bootstrap never had wall-clock.** Every cold start logged `Socket timeout` on the run's
+     FIRST query, while `EXPLAIN ANALYZE` of that exact query against production measured
+     **10.025 ms** (4,219 rows, seq scan of a 5,386-row table) with 18/60 connections in use. The
+     database was never slow: `register()` fired the run without awaiting it, and a serverless
+     instance FREEZES once its response is sent — `/api/health` returns in ~200 ms. It now awaits
+     under a deadline (`ASSET_BOOTSTRAP_DEADLINE_MS`, 12s) so progress is deterministic instead of
+     incidental to how long some unrelated request happened to take. Also fixed en route: the hook
+     ran its OWN PrismaClient, so each instance opened two pools of `connection_limit=15` against
+     a `max_connections=60` database — it now uses the app singleton.
+  4. **40 sequential nested creates could not fit in a slice.** First cold start with real
+     wall-clock wrote **three** assets with the budget nowhere near spent. The loops now plan in
+     memory and flush with `createMany` — four round trips instead of forty; `skipDuplicates`
+     (ON CONFLICT DO NOTHING against the seed lineage's partial unique index) replaces the
+     per-asset P2002 catch, and the flush reads back which of its own ids landed before writing
+     content rows, because a skipped row belongs to a racer under a different `assetId`. Budget
+     40 -> 150, since batched it bounds payload rather than latency. Convergence then took **two
+     cold starts**: 382 -> 572 -> 687.
+- **Known cost, stated rather than discovered later**: `register()` now awaits, so every cold start
+  pays a fixed few seconds (Prisma connect + evaluating 1.37 MB of seed source + validating 4,144
+  identities) before the guard returns, even when there is nothing to do. A persisted
+  completeness marker would remove it and is NOT in this change.
+- **Reported honestly**: an early 24-way request burst fired to force cold starts exhausted the
+  connection pool and took `/api/health` to `db:false` for about five minutes. That is the same
+  failure at larger scale, and it is why the connection diagnosis above is measurement rather than
+  theory. Later rounds used 5 concurrent requests with a health check between each.
+- **NOT verified this session**: no chemistry lesson was certified end to end.
+  `scripts/math/certify.ts` refuses `suaibamr@gmail.com` by name (it is the engineering account,
+  not a learner), and it is the only account this session has credentials for. Everything above is
+  measured against production data and the real modules — not a learner transcript.
+- **Biology and computer_science remain script-only and at 0 rows** (432 and 476 authored items).
+  They were deliberately left out of the bootstrap corpus: their corpora have not been measured
+  against the asset contract, and adding them would have turned "make chemistry servable" into
+  "seed everything".
+
+## Mobile lesson navigation fixed (2026-08-19)
+
+- **Reported symptom**: on the mobile web lesson screen, the Previous/Next lesson controls
+  did not move to the next or previous lesson.
+- **Reproduced with production data, not theory** — Chromium cannot reach the app through this
+  sandbox's egress proxy (four flag combinations all `ERR_CONNECTION_RESET`), so instead the real
+  account's `GET /api/curriculum?subject=chemistry` payload was read and the REAL
+  `findNextLesson`/`findPreviousLesson` were run against it. That payload:
+  `currentLesson=1`, `completedLessons=[]`, `activeLessonSlug='chem.found.pure-substances'`
+  (the open lesson is order 3). The shipped functions answered `next -> order 2 "States of
+  Matter"` (BEHIND the open lesson) and `prev -> null` (a null renders the button `disabled`).
+  So "Previous" did nothing and "Next" went BACKWARDS — the symptom exactly.
+- **Cause**: both functions anchored on `progress.currentLesson`, a COMPLETION counter that only
+  advances when a lesson is recorded complete/skipped. The lesson actually open is
+  `resolveActiveLesson()` (honours `activeLessonSlug`). They diverge the moment a learner opens a
+  lesson ahead of their recorded progress — the ordinary case. NOT mobile-only (logic is shared
+  with desktop); mobile is just where a side-by-side backwards jump is unmistakable.
+- **Fix, two commits**:
+  1. `94f8c1b` — `findNextLesson`/`findPreviousLesson` resolve their anchor from
+     `resolveActiveLesson` inside the functions (not via an optional caller param, which is how
+     the two ideas of "current" drifted apart). The same wrong anchor one line above, in
+     LessonScreen's tutor POSITION line (`order === currentLesson`), was fixed to
+     `resolveActiveLesson` too — the model was being told "Lesson 1 of 186. Today: Nature of
+     Matter" while teaching lesson 3.
+  2. `7ca5d4b` — the anchor only moves if something writes `activeLessonSlug` on switch, and
+     nothing did on the client. `callLessonInit` sent `topicSlug` to the SERVER but never wrote
+     it back to local state, so a second tap of "Next" re-opened the same lesson until the next
+     chat turn's `data.lessonOrder` sync cleared the slug — and lesson-init renders an opening
+     WITHOUT a chat turn, which is the exact window the buttons live in. It now writes the target
+     slug + `lastLessonTitle` into local progress on success and bumps `progressGenerationRef`
+     (the skip/complete/restart contract, so an in-flight chat response can't clobber it).
+- **Evidence the tests are real**: the 58 pre-existing `lessonNavigation.test.ts` cases pass in
+  BOTH the broken and fixed states — every fixture omits `activeLessonSlug`, which is exactly why
+  the suite never caught this. 7 new cases built from the production payload FAIL (4 of them) with
+  the anchor temporarily reverted and pass with the fix; `lessonSwitchAnchor.test.ts` reproduces
+  the "second tap re-opens the same lesson" defect as a passing test so the client sync isn't
+  decorative. Re-confirmed against the live payload post-deploy: `next -> 4`, `prev -> 2`.
+- **NOT verified**: an actual on-device browser tap (proxy blocks Chromium here). Everything is
+  measured against the real production API payload and the real modules, plus source assertions
+  that the client performs the write. Full suite 374 files / 8,273 passed / 9 skipped; tsc clean;
+  build clean. Deployed `dpl_FJE9TBEGkTAdrc4pBD2KNLMZiNZp` READY on `7ca5d4b`.
+
 ## Run locally
 ```
 cp .env.example .env   # set DATABASE_URL, AUTH_SECRET (openssl rand -base64 32), GROQ_API_KEY

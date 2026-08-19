@@ -59,11 +59,59 @@ export async function register() {
   if (process.env.NEXT_RUNTIME !== 'nodejs') return
   if (process.env.DISABLE_ASSET_BOOTSTRAP === 'true') return
 
-  // Kick off in the background — don't await so cold-start latency is
-  // unaffected even if the DB is momentarily slow.
-  bootstrapAssets().catch((err) =>
-    console.error('[instrumentation] asset bootstrap failed (non-fatal):', err?.message ?? err)
-  )
+  // ── WHY THIS IS AWAITED, WITH A DEADLINE ──────────────────────────────────
+  //
+  // It was fire-and-forget, "so cold-start latency is unaffected". That is
+  // why the catalogue never converged, and the reason is stated a few lines
+  // below in this same file: a serverless instance FREEZES once its response
+  // is sent. Nothing cancels the background work — it is simply suspended
+  // mid-flight, and when the instance thaws for the next request the socket
+  // it was waiting on is gone.
+  //
+  // MEASURED 2026-08-19. Every cold start logged
+  //   asset bootstrap DB error (will retry on next start): ... Socket timeout
+  // on the run's FIRST query. EXPLAIN ANALYZE of that exact query against
+  // production: 10.025 ms, 4,219 rows, seq scan on a 5,386-row table. The
+  // database was never slow. `/api/health` returns in about 200 ms, and the
+  // instance froze inside that window — so the work had no wall-clock to
+  // finish in, no matter how few writes it attempted.
+  //
+  // Awaiting a BOUNDED slice makes progress deterministic instead of
+  // incidental to how long some unrelated request happened to take. The
+  // deadline is the safety property: a slow or unreachable database delays
+  // boot by at most this long, never indefinitely, and the write budget
+  // caps the work itself. If the deadline wins, the run is abandoned exactly
+  // as before and the next cold start resumes from the prefetch — the
+  // partial progress is already committed, because each asset is its own
+  // write.
+  //
+  // Cost: once the catalogue is complete the guard exits after that one 10 ms
+  // read, so the steady state is a single indexed query per cold start.
+  // MEASURED at 5000ms: the deadline was reached on every cold start with only
+  // a handful of rows written, because almost all of it goes to FIXED cost
+  // before any write — Prisma engine connect, evaluating 1.37 MB of seed source,
+  // and validating 4,144 canonical identities. Raising it buys write time, not
+  // idle time, and since the writes are batched the marginal cost of a larger
+  // slice is a bigger INSERT payload rather than more round trips.
+  const deadlineMs = Number(process.env.ASSET_BOOTSTRAP_DEADLINE_MS ?? 12000)
+  let onDeadline: ReturnType<typeof setTimeout> | undefined
+  await Promise.race([
+    bootstrapAssets().catch((err) =>
+      console.error('[instrumentation] asset bootstrap failed (non-fatal):', err?.message ?? err)
+    ),
+    new Promise<void>((resolve) => {
+      onDeadline = setTimeout(() => {
+        console.warn(
+          `[instrumentation] asset bootstrap: ${deadlineMs}ms boot deadline reached — ` +
+            'continuing in the background; the next cold start resumes',
+        )
+        resolve()
+      }, deadlineMs)
+      // Never hold the process open on account of this timer.
+      onDeadline.unref?.()
+    }),
+  ])
+  if (onDeadline) clearTimeout(onDeadline)
 }
 
 async function bootstrapAssets() {
@@ -396,7 +444,12 @@ async function bootstrapAssets() {
       // idempotent writes — only an upper bound on how much one invocation
       // attempts. `scripts/brain/seed-knowledge-assets.ts` remains the right
       // tool for seeding the whole catalogue at once.
-      const WRITE_BUDGET = Number(process.env.ASSET_BOOTSTRAP_WRITE_BUDGET ?? 40)
+      //
+      // 40 was chosen when each asset cost its own round trip. Batched, 150
+      // rows is the same four statements — so the budget now bounds payload
+      // size rather than latency, and the catalogue converges in a couple of
+      // cold starts instead of dozens.
+      const WRITE_BUDGET = Number(process.env.ASSET_BOOTSTRAP_WRITE_BUDGET ?? 150)
       let budgetSpent = 0
       const budgetExhausted = () => budgetSpent >= WRITE_BUDGET
       // Content rows written for an identity that already existed but was
@@ -428,143 +481,201 @@ async function bootstrapAssets() {
       // than deleting and re-creating it: no unique-index conflict on
       // canonicalSlug, no id churn for anything already referencing the asset,
       // and evidence rows keyed on assetId keep pointing at the same asset.
+      // ── PLAN IN MEMORY, THEN WRITE IN BATCHES ─────────────────────────────
+      //
+      // MEASURED 2026-08-19, first cold start that got real wall-clock: three
+      // assets written inside a 5-second boot deadline, with the log reading
+      //   asset bootstrap: 3830/4144 seed identities present — seeding...
+      //   asset bootstrap: 5000ms boot deadline reached
+      // The 40-write budget was nowhere near spent. Each asset was a nested
+      // create — an identity and its content row in one implicit transaction —
+      // so 40 assets meant 40 sequential round trips to a database in another
+      // region, and the deadline arrived long before the budget did. At three
+      // per cold start the remaining 314 chemistry probes need a hundred cold
+      // starts.
+      //
+      // The loops below therefore decide everything first, touching nothing,
+      // and the writes go out as a handful of createMany statements. Same
+      // content, same idempotence, same budget — four round trips instead of
+      // forty.
+      //
+      // WHAT REPLACES THE NESTED CREATE'S ATOMICITY. createMany cannot nest, so
+      // an identity and its content row are now two statements, and an
+      // interruption between them leaves exactly the hollow identity this file
+      // already knows how to repair — the self-heal below is not a new
+      // dependency, it is the same one, and it now covers this path too. Ids
+      // are generated here rather than by the database, which is what lets the
+      // content rows name their parents without reading them back by slug.
+      //
+      // WHAT REPLACES PER-ASSET FAILURE ISOLATION. A failed statement now costs
+      // its whole batch rather than one asset. The batch is bounded by the
+      // write budget, every statement is idempotent, and each flush is caught
+      // separately so one failure does not discard the others — so the worst
+      // case is that one cold start advances less, not that progress is lost.
+      const { randomUUID } = await import('node:crypto')
+
+      type Row = Record<string, unknown>
+      const newIdentities: Row[] = []
+      const newExplanationChildren = new Map<string, Row>()
+      const newProbeChildren = new Map<string, Row>()
+      const repairExplanations: Row[] = []
+      const repairProbes: Row[] = []
+
       for (const e of ALL_EXPLANATIONS) {
         if (budgetExhausted()) break
         const canonicalSlug = seedCanonicalSlug(e.conceptId, e.familyKind, e.gradeBand)
+        const child = (assetId: string): Row => ({
+          assetId,
+          content: e.content,
+          style: ExplanationStyle.CONCRETE,
+          readingLevel: 0,
+          lengthChars: e.content.length,
+          targetedMisconceptions: e.targetedMisconceptions,
+        })
         const dup = existing.get(canonicalSlug)
         if (dup) {
           if (!dup.hasContent) {
-            try {
-              await prisma.explanationAsset.create({
-                data: {
-                  assetId: dup.assetId,
-                  content: e.content,
-                  style: ExplanationStyle.CONCRETE,
-                  readingLevel: 0,
-                  lengthChars: e.content.length,
-                  targetedMisconceptions: e.targetedMisconceptions,
-                },
-              })
-              repaired++
-              budgetSpent++
-            } catch (repairErr: any) {
-              // P2002 = a concurrent cold start healed it first. Both outcomes
-              // are the desired one.
-              if (repairErr?.code !== 'P2002') throw repairErr
-            }
+            repairExplanations.push(child(dup.assetId))
+            budgetSpent++
           }
           skipped++
           continue
         }
-        try {
-          await prisma.assetIdentity.create({
-            data: {
-              family: AssetFamily.EXPLANATION,
-              familyKind: e.familyKind,
-              conceptId: e.conceptId,
-              language: SEED_LANGUAGE,
-              gradeBand: e.gradeBand,
-              authorId: SEED_AUTHOR_ID,
-              authorKind: AuthorKind.HUMAN_CURATOR,
-              status: AssetStatus.ACTIVE,
-              version: 1,
-              canonicalSlug,
-              contentHash: hashContent(e.content),
-              tags: [e.subjectSlug, e.familyKind],
-              intellectualProperty: 'proprietary',
-              curriculumMappings: [],
-              incompatibilities: [],
-              prerequisites: [],
-              explanationAsset: {
-                create: {
-                  content: e.content,
-                  style: ExplanationStyle.CONCRETE,
-                  readingLevel: 0,
-                  lengthChars: e.content.length,
-                  targetedMisconceptions: e.targetedMisconceptions,
-                },
-              },
-            },
-          })
-          created++
-          budgetSpent++
-        } catch (createErr: any) {
-          // P2002 = concurrent cold start already inserted this slug — safe to skip.
-          if (createErr?.code === 'P2002') { skipped++; continue }
-          failed++
-          continue
-        }
+        const assetId = randomUUID()
+        newIdentities.push({
+          assetId,
+          family: AssetFamily.EXPLANATION,
+          familyKind: e.familyKind,
+          conceptId: e.conceptId,
+          language: SEED_LANGUAGE,
+          gradeBand: e.gradeBand,
+          authorId: SEED_AUTHOR_ID,
+          authorKind: AuthorKind.HUMAN_CURATOR,
+          status: AssetStatus.ACTIVE,
+          version: 1,
+          canonicalSlug,
+          contentHash: hashContent(e.content),
+          tags: [e.subjectSlug, e.familyKind],
+          intellectualProperty: 'proprietary',
+          curriculumMappings: [],
+          incompatibilities: [],
+          prerequisites: [],
+        })
+        newExplanationChildren.set(assetId, child(assetId))
+        budgetSpent++
       }
 
-      // Same repair on the probe side — this is where the 737 live, and where
-      // the E6 damage was actually done. See the note above the explanation
-      // loop for the full measurement and reasoning.
+      // Same planning on the probe side — this is where the hollow identities
+      // live, and where the E6 damage was actually done. See the note above the
+      // explanation loop for the full measurement and reasoning.
       for (const p of ALL_PROBES) {
         if (budgetExhausted()) break
         const canonicalSlug = probeSlug(p)
+        const child = (assetId: string): Row => ({
+          assetId,
+          stem: p.stem,
+          choices: p.choices ? (p.choices as unknown as object) : undefined,
+          correctValue: p.correctValue,
+          keywords: [],
+          difficulty: p.difficulty,
+          targetedMisconceptions: p.targetedMisconceptions,
+          requiredVisuals: [],
+        })
         const dup = existing.get(canonicalSlug)
         if (dup) {
           if (!dup.hasContent) {
-            try {
-              await prisma.probeAsset.create({
-                data: {
-                  assetId: dup.assetId,
-                  stem: p.stem,
-                  choices: p.choices ? (p.choices as unknown as object) : undefined,
-                  correctValue: p.correctValue,
-                  keywords: [],
-                  difficulty: p.difficulty,
-                  targetedMisconceptions: p.targetedMisconceptions,
-                  requiredVisuals: [],
-                },
-              })
-              repaired++
-              budgetSpent++
-            } catch (repairErr: any) {
-              if (repairErr?.code !== 'P2002') throw repairErr
-            }
+            repairProbes.push(child(dup.assetId))
+            budgetSpent++
           }
           skipped++
           continue
         }
+        const assetId = randomUUID()
+        newIdentities.push({
+          assetId,
+          family: AssetFamily.PROBE,
+          familyKind: p.probeKind,
+          conceptId: p.conceptId,
+          language: SEED_LANGUAGE,
+          gradeBand: p.gradeBand,
+          authorId: SEED_AUTHOR_ID,
+          authorKind: AuthorKind.HUMAN_CURATOR,
+          status: AssetStatus.ACTIVE,
+          version: 1,
+          canonicalSlug,
+          contentHash: hashContent(p.stem),
+          tags: [p.subjectSlug, p.probeKind],
+          intellectualProperty: 'proprietary',
+          curriculumMappings: [],
+          incompatibilities: [],
+          prerequisites: [],
+        })
+        newProbeChildren.set(assetId, child(assetId))
+        budgetSpent++
+      }
+
+      // ── THE FLUSH ─────────────────────────────────────────────────────────
+      //
+      // skipDuplicates is ON CONFLICT DO NOTHING, which is what makes a
+      // concurrent cold start harmless: the partial unique index on the seed
+      // lineage rejects a second row for a slug, and the loser simply writes
+      // nothing. It is the same guarantee the per-asset P2002 catch gave, moved
+      // into the statement.
+      const flush = async (what: string, run: () => Promise<{ count: number }>) => {
         try {
-          await prisma.assetIdentity.create({
-            data: {
-              family: AssetFamily.PROBE,
-              familyKind: p.probeKind,
-              conceptId: p.conceptId,
-              language: SEED_LANGUAGE,
-              gradeBand: p.gradeBand,
-              authorId: SEED_AUTHOR_ID,
-              authorKind: AuthorKind.HUMAN_CURATOR,
-              status: AssetStatus.ACTIVE,
-              version: 1,
-              canonicalSlug,
-              contentHash: hashContent(p.stem),
-              tags: [p.subjectSlug, p.probeKind],
-              intellectualProperty: 'proprietary',
-              curriculumMappings: [],
-              incompatibilities: [],
-              prerequisites: [],
-              probeAsset: {
-                create: {
-                  stem: p.stem,
-                  choices: p.choices ? (p.choices as unknown as object) : undefined,
-                  correctValue: p.correctValue,
-                  keywords: [],
-                  difficulty: p.difficulty,
-                  targetedMisconceptions: p.targetedMisconceptions,
-                  requiredVisuals: [],
-                },
-              },
-            },
-          })
-          created++
-          budgetSpent++
-        } catch (createErr: any) {
-          if (createErr?.code === 'P2002') { skipped++; continue }
-          failed++
-          continue
+          return (await withRetry(run)).count
+        } catch (err: any) {
+          console.warn(`[instrumentation] asset bootstrap: ${what} failed (retried on next cold start):`, err?.message ?? err)
+          return null
+        }
+      }
+
+      if (repairExplanations.length) {
+        const n = await flush('explanation repair', () =>
+          prisma.explanationAsset.createMany({ data: repairExplanations as never, skipDuplicates: true }))
+        if (n === null) failed += repairExplanations.length
+        else repaired += n
+      }
+      if (repairProbes.length) {
+        const n = await flush('probe repair', () =>
+          prisma.probeAsset.createMany({ data: repairProbes as never, skipDuplicates: true }))
+        if (n === null) failed += repairProbes.length
+        else repaired += n
+      }
+
+      if (newIdentities.length) {
+        const n = await flush('identity insert', () =>
+          prisma.assetIdentity.createMany({ data: newIdentities as never, skipDuplicates: true }))
+        if (n === null) {
+          failed += newIdentities.length
+        } else {
+          // WHICH OF OUR IDS ACTUALLY LANDED. skipDuplicates reports a count,
+          // not a set, and a row skipped as a duplicate belongs to a racer
+          // under a DIFFERENT assetId — so writing our content row against our
+          // id would violate the foreign key. One indexed read settles it.
+          const ourIds = newIdentities.map((r) => r.assetId as string)
+          const landed = new Set(
+            (await withRetry(() => prisma.assetIdentity.findMany({
+              where: { assetId: { in: ourIds } },
+              select: { assetId: true },
+            }))).map((r) => r.assetId),
+          )
+          skipped += ourIds.length - landed.size
+
+          const explData = [...newExplanationChildren].filter(([id]) => landed.has(id)).map(([, d]) => d)
+          const probeData = [...newProbeChildren].filter(([id]) => landed.has(id)).map(([, d]) => d)
+          if (explData.length) {
+            const c = await flush('explanation content', () =>
+              prisma.explanationAsset.createMany({ data: explData as never, skipDuplicates: true }))
+            if (c === null) failed += explData.length
+            else created += c
+          }
+          if (probeData.length) {
+            const c = await flush('probe content', () =>
+              prisma.probeAsset.createMany({ data: probeData as never, skipDuplicates: true }))
+            if (c === null) failed += probeData.length
+            else created += c
+          }
         }
       }
 
