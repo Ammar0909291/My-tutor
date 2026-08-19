@@ -25,6 +25,7 @@ import { describe, it, expect } from 'vitest'
 import { readdirSync, readFileSync } from 'fs'
 import path from 'path'
 import { MIN_EXPLANATIONS, MIN_CLOSED_CHOICE_PROBES } from '../lib/teaching/assetContract'
+import { hasMalformedLatex } from '../../scripts/math/certify'
 
 const ASSET_DIR = path.join(__dirname, '..', 'lib', 'teaching', 'assets')
 const SEED_SCRIPT = path.join(__dirname, '..', '..', 'scripts', 'brain', 'seed-knowledge-assets.ts')
@@ -237,5 +238,33 @@ describe('the band-gap probes are arithmetically true', () => {
       expect(p.targetedMisconceptions.length).toBeGreaterThan(0)
       expect(p.source.length).toBeGreaterThan(20)
     }
+  }, 30_000)
+})
+
+/**
+ * D6, applied to the CONTENT rather than to a live turn. Certification catches
+ * malformed LaTeX only on concepts a sweep actually reaches, and a full sweep
+ * is bounded by provider quota — so the authored corpus is checked here, where
+ * every string can be read for free.
+ */
+describe('no authored mathematics text ships LaTeX the renderer will print', () => {
+  it('scans every explanation body, probe stem and choice', async () => {
+    const { explanations, probes } = await loadAssets()
+    const texts: { where: string; text: string }[] = []
+    for (const e of explanations) {
+      if (e.subjectSlug !== SUBJECT) continue
+      texts.push({ where: `${e.conceptId} ${e.familyKind}`, text: e.content })
+    }
+    for (const p of probes) {
+      if (p.subjectSlug !== SUBJECT) continue
+      texts.push({ where: `${p.conceptId} ${p.probeKind} stem`, text: p.stem })
+      for (const c of p.choices ?? []) texts.push({ where: `${p.conceptId} choice`, text: c.text })
+    }
+    const bad = texts
+      .filter((t) => typeof t.text === 'string' && hasMalformedLatex(t.text))
+      .map((t) => `${t.where}: ${t.text.slice(0, 120)}`)
+    expect(bad).toEqual([])
+    // A guard that scanned nothing would pass silently.
+    expect(texts.length).toBeGreaterThan(3000)
   }, 30_000)
 })
