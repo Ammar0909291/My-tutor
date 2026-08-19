@@ -95,10 +95,14 @@ import {
   MATHEMATICS_NUMBER_THEORY_EXPLANATIONS,
   MATHEMATICS_NUMBER_THEORY_PROBES,
 } from '@/lib/teaching/assets/mathematicsNumberTheoryAssets'
+import {
+  MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS,
+  MATHEMATICS_TRIANGLE_TRANSFORM_PROBES,
+} from '@/lib/teaching/assets/mathematicsTriangleTransformAssets'
 import { SEED_PROBES, seedCanonicalSlug } from '@/lib/teaching/assets/brainSeedAssets'
 import { evaluateAssetContract, MIN_CLOSED_CHOICE_PROBES } from '@/lib/teaching/assetContract'
 
-const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES]
+const ALL = [...SEED_PROBES, ...AUTHORED_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES]
 const isClosedChoice = (p: { choices?: unknown[] }) => (p.choices?.length ?? 0) >= 2
 
 /**
@@ -247,7 +251,7 @@ describe('mathematics foundations — newly serving concepts', () => {
   })
 
   it('every asset cites the Educational Brain entry it came from', () => {
-    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES]) {
+    for (const a of [...MATHEMATICS_FOUNDATION_EXPLANATIONS, ...MATHEMATICS_FOUNDATION_PROBES, ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES, ...MATHEMATICS_FRACTION_PROBES, ...MATHEMATICS_PROPORTION_PROBES, ...MATHEMATICS_ALGEBRA_VOCAB_PROBES, ...MATHEMATICS_POWERS_VARIATION_PROBES, ...MATHEMATICS_SET_OPERATIONS_PROBES, ...MATHEMATICS_RELATIONS_NUMBERS_PROBES, ...MATHEMATICS_ORDERS_PROOFS_PROBES, ...MATHEMATICS_LANGUAGE_STRATEGY_PROBES, ...MATHEMATICS_PROOF_MACHINERY_PROBES, ...MATHEMATICS_QUANTIFIER_CRAFT_PROBES, ...MATHEMATICS_FOUNDATIONS_CLOSE_PROBES, ...MATHEMATICS_NUMBER_SYSTEMS_PROBES, ...MATHEMATICS_ALGORITHMS_PRECISION_PROBES, ...MATHEMATICS_ARITH_CLOSE_PROBES, ...MATHEMATICS_MEASUREMENT_PROBES, ...MATHEMATICS_COORDINATE_PROBES, ...MATHEMATICS_NUMBER_THEORY_PROBES, ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES]) {
       expect(a.source).toMatch(/^educational-brain\/concepts\/mathematics\/math\./)
     }
   })
@@ -376,6 +380,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_MEASUREMENT_EXPLANATIONS,
     ...MATHEMATICS_COORDINATE_EXPLANATIONS,
     ...MATHEMATICS_NUMBER_THEORY_EXPLANATIONS,
+    ...MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS,
   ]
   const ALL_NEW_PROBES = [
     ...MATHEMATICS_FOUNDATION_PROBES,
@@ -399,6 +404,7 @@ describe('all authored mathematics batches together', () => {
     ...MATHEMATICS_MEASUREMENT_PROBES,
     ...MATHEMATICS_COORDINATE_PROBES,
     ...MATHEMATICS_NUMBER_THEORY_PROBES,
+    ...MATHEMATICS_TRIANGLE_TRANSFORM_PROBES,
   ]
 
   it('no concept is authored twice across batches', () => {
@@ -1727,6 +1733,93 @@ describe('mathematics number theory', () => {
 
   it('no two probes for one concept collide on identity', () => {
     const slugs = MATHEMATICS_NUMBER_THEORY_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
+    expect(new Set(slugs).size).toBe(slugs.length)
+  })
+})
+
+/**
+ * Batch 22 — the angle spine, the distance fact, and two transformations.
+ *
+ * parallel lines -> triangle angle sum -> polygon angle sum is one
+ * derivation, not three facts, and three separate registers record it
+ * being memorised as three. The checks below demand each entry POINTS
+ * at the one below it, so the chain is visible in the content rather
+ * than only in this comment.
+ */
+describe('mathematics angle spine, distance and transformations', () => {
+  const NEW = [
+    'math.geom.parallel-lines', 'math.geom.triangle-angle-sum',
+    'math.geom.polygon-angle-sum', 'math.geom.pythagorean-theorem',
+    'math.geom.distance-formula', 'math.geom.quadrilateral',
+    'math.geom.rotation', 'math.geom.dilation',
+  ]
+
+  it.each(NEW)('%s now meets the contract', (conceptId) => {
+    const explanations = MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS.filter((e) => e.conceptId === conceptId)
+    const probes = MATHEMATICS_TRIANGLE_TRANSFORM_PROBES.filter((p) => p.conceptId === conceptId && isClosedChoice(p))
+    expect(explanations.length, conceptId).toBeGreaterThanOrEqual(1)
+    const verdict = evaluateAssetContract({
+      explanations: explanations.length, closedChoiceProbes: probes.length,
+    })
+    expect(verdict.satisfied, `${conceptId}: ${verdict.shortfall}`).toBe(true)
+  })
+
+  it('the angle spine is visible: each entry points at the one it rests on', () => {
+    const find = (id: string) => MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === id)!
+    // triangle sum is derived FROM parallel lines, and says so
+    expect(find('math.geom.triangle-angle-sum').content).toMatch(/parallel/i)
+    expect(find('math.geom.triangle-angle-sum').content).toMatch(/CONSEQUENCE of them/)
+    // polygon sum is the triangle result applied n-2 times, and says so
+    expect(find('math.geom.polygon-angle-sum').content).toMatch(/n − 2 triangles/)
+    // parallel lines carries the converse, which is what makes the proof possible
+    expect(find('math.geom.parallel-lines').content).toMatch(/BOTH ways/)
+  })
+
+  it('the distance formula is named as Pythagoras, not a new rule', () => {
+    const d = MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.distance-formula')!
+    expect(d.content).toMatch(/not a\s+new formula/i)
+    expect(d.content).toMatch(/Pythagorean theorem wearing/i)
+    // the 3-4-5 contrast between grid distance and straight-line distance
+    expect(Math.hypot(3, 4)).toBe(5)
+    expect(3 + 4).toBe(7)
+    expect(d.content).toMatch(/while the straight-line distance is 5/)
+  })
+
+  it('the polygon arithmetic quoted is right', () => {
+    expect((5 - 2) * 180).toBe(540)
+    expect((4 - 2) * 180).toBe(360)
+    const p = MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.polygon-angle-sum')!
+    expect(p.content).toMatch(/giving 360°/)
+  })
+
+  it('the missing-leg case subtracts, and the arithmetic holds', () => {
+    expect(25 - 9).toBe(16)
+    expect(Math.sqrt(16)).toBe(4)
+    const y = MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.pythagorean-theorem')!
+    expect(y.content).toMatch(/SUBTRACTION/)
+  })
+
+  it('quadrilateral categories are said to nest, with the reason', () => {
+    const q = MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.quadrilateral')!
+    expect(q.content).toMatch(/categories NEST/)
+    expect(q.content).toMatch(/without being restated four times/i)
+  })
+
+  it('dilation separates k from k², and negative k from a reflection', () => {
+    const d = MATHEMATICS_TRIANGLE_TRANSFORM_EXPLANATIONS.find((e) => e.conceptId === 'math.geom.dilation')!
+    expect(d.content).toMatch(/NINE times bigger/)
+    expect(d.content).toMatch(/NOT a reflection/)
+  })
+
+  it('every probe is gradeable and offers at least three choices', () => {
+    for (const p of MATHEMATICS_TRIANGLE_TRANSFORM_PROBES) {
+      expect(p.choices?.filter((c) => c.isCorrect).length, p.stem).toBe(1)
+      expect(p.choices!.length, p.stem).toBeGreaterThanOrEqual(3)
+    }
+  })
+
+  it('no two probes for one concept collide on identity', () => {
+    const slugs = MATHEMATICS_TRIANGLE_TRANSFORM_PROBES.map((p) => `${p.conceptId}:${p.probeKind}:${p.gradeBand}:${p.difficulty}`)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
