@@ -63,6 +63,20 @@ export interface TurnEvidence {
   text: string
 }
 
+/**
+ * One row per learner turn: what the engine said the ladder was, and whether it
+ * offered something answerable. A D3 failure without this is a verdict with no
+ * evidence — the same gap that made the first sweep's D6 hits unjudgeable.
+ */
+export interface LadderStep {
+  turn: number
+  phase: string | null
+  checkCorrect: number
+  practiceCorrect: number
+  /** what the harness was able to send back: a graded choice, or 'ready' */
+  answered: 'mcq' | 'ready'
+}
+
 export interface CertificationResult {
   conceptId: string
   pass: boolean
@@ -74,6 +88,7 @@ export interface CertificationResult {
   verified: boolean
   notes: string[]
   evidence: TurnEvidence[]
+  ladder: LadderStep[]
 }
 
 interface TurnPayload {
@@ -187,6 +202,7 @@ export async function certifyConcept(
   const notes: string[] = []
   /** Full text of every turn that tripped a criterion, so a FAIL is diagnosable. */
   const evidence: TurnEvidence[] = []
+  const ladder: LadderStep[] = []
   let turns = 0
   let last: TurnPayload
 
@@ -312,6 +328,13 @@ export async function certifyConcept(
     last = await post('/api/learn/chat', { sessionId, message: reply }, cookie)
     check(last)
     turns += 1
+    ladder.push({
+      turn: turns,
+      phase: last.mastery?.phase ?? null,
+      checkCorrect: last.mastery?.checkCorrect ?? 0,
+      practiceCorrect: last.mastery?.practiceCorrect ?? 0,
+      answered: reply === 'ready' ? 'ready' : 'mcq',
+    })
 
     // ── CERTIFICATION MUST START FROM A LEARNER WHO KNOWS NOTHING ──────────
     //
@@ -353,7 +376,7 @@ export async function certifyConcept(
   return {
     conceptId: target.conceptId, pass: failed.length === 0, failed,
     turns, finalPhase, checkCorrect, practiceCorrect, verified, notes,
-    evidence: [...evidence, ...staleReferences],
+    evidence: [...evidence, ...staleReferences], ladder,
   }
 }
 
@@ -382,21 +405,69 @@ async function authenticate(): Promise<string> {
   return cookie
 }
 
+/**
+ * A COOKIE JAR, NOT A CONCATENATION.
+ *
+ * `/api/auth/csrf` was observed returning the SAME cookie name twice with two
+ * DIFFERENT values in one response:
+ *
+ *   __Host-authjs.csrf-token=4e0a723d…
+ *   __Host-authjs.csrf-token=3f5a39a5…
+ *
+ * Joining every Set-Cookie into one header sends both, the server reads the
+ * first, the JSON body carried the second, and the login is rejected with
+ * `MissingCSRF` — which is what this harness reported as "login failed" and is
+ * why it could not be run at all. A browser and curl both keep ONE value per
+ * name (last write wins), so this does the same. Later writes of a name
+ * override earlier ones, and a deletion (empty value) removes it.
+ */
+export function mergeCookies(...sources: readonly (readonly string[])[]): string {
+  const jar = new Map<string, string>()
+  for (const source of sources) {
+    for (const raw of source) {
+      const pair = raw.split(';')[0]
+      const eq = pair.indexOf('=')
+      if (eq <= 0) continue
+      const name = pair.slice(0, eq).trim()
+      const value = pair.slice(eq + 1).trim()
+      if (!value) jar.delete(name)
+      else jar.set(name, value)
+    }
+  }
+  return [...jar].map(([n, v]) => `${n}=${v}`).join('; ')
+}
+
+/** The `<token>` half of the `<token>|<hash>` csrf cookie the jar will send. */
+export function csrfTokenFromJar(jar: string): string | null {
+  for (const pair of jar.split('; ')) {
+    const eq = pair.indexOf('=')
+    if (eq <= 0) continue
+    if (!/csrf-token$/.test(pair.slice(0, eq).trim())) continue
+    const value = decodeURIComponent(pair.slice(eq + 1).trim())
+    return value.split('|')[0] || null
+  }
+  return null
+}
+
 async function login(): Promise<string> {
   if (!EMAIL || !PASSWORD) throw new Error('set MATH_CERT_COOKIE, or MATH_CERT_EMAIL and MATH_CERT_PASSWORD')
   if (FORBIDDEN_ACCOUNTS.includes(EMAIL.toLowerCase())) {
     throw new Error(`${EMAIL} is an engineering account and must never be used for certification`)
   }
   const csrfRes = await fetch(`${BASE}/api/auth/csrf`)
-  const { csrfToken } = (await csrfRes.json()) as { csrfToken: string }
-  const jar = (csrfRes.headers.getSetCookie?.() ?? []).map((c) => c.split(';')[0]).join('; ')
+  const body = (await csrfRes.json()) as { csrfToken: string }
+  const jar = mergeCookies(csrfRes.headers.getSetCookie?.() ?? [])
+  // The token is taken from the COOKIE THAT WILL BE SENT, not from the JSON
+  // body: when the endpoint answers twice, the body carries one response's
+  // token and the jar keeps the other's, and the two must agree or the POST is
+  // rejected. The cookie's value is `<token>|<hash>`; the form wants `<token>`.
+  const csrfToken = csrfTokenFromJar(jar) ?? body.csrfToken
   const res = await fetch(`${BASE}/api/auth/callback/credentials`, {
     method: 'POST', redirect: 'manual',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded', cookie: jar },
     body: new URLSearchParams({ csrfToken, email: EMAIL, password: PASSWORD, callbackUrl: `${BASE}/learn` }),
   })
-  const session = (res.headers.getSetCookie?.() ?? []).map((c) => c.split(';')[0])
-  const all = [...jar.split('; ').filter(Boolean), ...session].join('; ')
+  const all = mergeCookies(jar.split('; ').filter(Boolean), res.headers.getSetCookie?.() ?? [])
   if (!/session-token/.test(all)) throw new Error('login failed — no session cookie returned')
   return all
 }
@@ -419,7 +490,7 @@ async function main() {
       results.push({
         conceptId: t.conceptId, pass: false, failed: ['HARNESS-ERROR'], turns: 0,
         finalPhase: null, checkCorrect: 0, practiceCorrect: 0, verified: false,
-        notes: [String(err)], evidence: [],
+        notes: [String(err)], evidence: [], ladder: [],
       })
       process.stderr.write(`HARNESS-ERROR\n`)
     }
