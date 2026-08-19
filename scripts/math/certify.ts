@@ -36,6 +36,9 @@
  */
 
 import { askedAnswerableQuestion } from '../../src/lib/teaching/answerableTurn'
+// The product owns the string that names a degraded turn; this reads it rather
+// than matching on template prose, so the two cannot drift apart.
+import { isDegradedProvider } from '../../src/lib/eos-runtime/degradedMode'
 import { containsOptionList } from '../../src/lib/teaching/gateProbeContract'
 
 const BASE = process.env.MATH_CERT_BASE_URL ?? 'https://my-tutor-flame.vercel.app'
@@ -93,6 +96,8 @@ export interface CertificationResult {
 
 interface TurnPayload {
   text?: string
+  /** 'degraded' when every AI provider failed and a template was served. */
+  provider?: string | null
   mcq?: { question: string; options: string[]; correctIndex: number } | null
   mastery?: { verified?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number } | null
   lessonComplete?: { complete?: boolean } | null
@@ -293,6 +298,36 @@ export async function certifyConcept(
     const phase = last.mastery?.phase ?? null
     if (last.mastery?.verified === true || last.lessonComplete?.complete === true) break
 
+    // ── AN OUTAGE IS NOT A TEACHING VERDICT ───────────────────────────────
+    //
+    // MEASURED. A nine-concept sweep exhausted the provider quota partway
+    // through, and every concept after that point reported an IDENTICAL
+    // D3-unreachable: 24 turns, phase still OBSERVE, check 0, practice 0.
+    // Production logs for the same window:
+    //
+    //   [ai/attempt] provider=gemini http_status=429 error_name=AIRateLimitError
+    //   [ai/router]  all providers failed: Rate limit exceeded on gemini
+    //   [learn/chat] all providers down — serving degraded template (RS P-3)
+    //
+    // The engine was never reached. Reporting that as D3 would have condemned
+    // the teaching ladder for an infrastructure fault — the exact mistake this
+    // file has already been burned by three times (the manufactured DEMONSTRATE
+    // freeze, the parallel-session asset mix-up, the currency-as-delimiter
+    // LaTeX check), each of which nearly produced a fix for a defect that did
+    // not exist. The run stops here and says so.
+    if (isDegradedProvider(last.provider)) {
+      failed.push('INFRASTRUCTURE-degraded')
+      notes.push(
+        'every AI provider failed and a degraded template was served — the ' +
+        'teaching engine was not exercised, so this concept is NOT certified ' +
+        'and is NOT a teaching failure. Re-run when the provider recovers.',
+      )
+      evidence.push({
+        criterion: 'INFRASTRUCTURE-degraded', phase: String(phase), turn: turns, text: last.text ?? '',
+      })
+      break
+    }
+
     let reply: string
     if (last.mcq) {
       reply = String.fromCharCode(65 + last.mcq.correctIndex)
@@ -367,6 +402,14 @@ export async function certifyConcept(
 
   if (turns >= MAX_TURNS && !verified) {
     failed.push('D3-unreachable'); notes.push(`did not finish within ${MAX_TURNS} turns`)
+    // THE TURN, NOT THE VERDICT — the same rule D2 and D6 already follow. A
+    // lesson that runs out the limit is the one failure most likely to be the
+    // HARNESS rather than the product (it answers 'ready' whenever no MCQ is
+    // offered, which is not what a learner would say), and that cannot be told
+    // apart without reading what the tutor actually sent.
+    evidence.push({
+      criterion: 'D3-unreachable', phase: String(finalPhase), turn: turns, text: last.text ?? '',
+    })
   }
   if (!verified) { failed.push('D4-not-verified') }
   else if (last.lessonComplete?.complete !== true) {
@@ -472,6 +515,21 @@ async function login(): Promise<string> {
   return all
 }
 
+/**
+ * The three outcomes a certification run can produce. Exported so the split is
+ * testable: an outage counted as a teaching failure turns the pass rate into a
+ * measure of the AI quota, which is how a nine-concept sweep produced four
+ * identical D3 verdicts against an engine that was never reached.
+ */
+export type CertificationOutcome = 'pass' | 'teaching-failure' | 'unmeasured'
+
+export function classifyOutcome(
+  result: Pick<CertificationResult, 'pass' | 'failed'>,
+): CertificationOutcome {
+  if (result.failed.includes('INFRASTRUCTURE-degraded')) return 'unmeasured'
+  return result.pass ? 'pass' : 'teaching-failure'
+}
+
 async function main() {
   const targets: ConceptTarget[] = JSON.parse(
     require('fs').readFileSync(process.argv[2] ?? 'scripts/math/targets.json', 'utf-8'),
@@ -497,11 +555,31 @@ async function main() {
   }
 
   const passed = results.filter((r) => r.pass).length
+  // Three outcomes, not two. A concept the provider outage prevented from being
+  // taught is UNMEASURED — counting it as a teaching failure would make the
+  // pass rate a measure of the AI quota rather than of the engine.
+  const degraded = results.filter((r) => classifyOutcome(r) === 'unmeasured')
+  const teachingFailures = results.filter((r) => classifyOutcome(r) === 'teaching-failure')
   console.log(JSON.stringify({
     generatedAt: new Date().toISOString(),
-    baseUrl: BASE, total: results.length, passed, failed: results.length - passed, results,
+    baseUrl: BASE,
+    total: results.length,
+    passed,
+    failed: teachingFailures.length,
+    unmeasured: degraded.length,
+    results,
   }, null, 2))
-  process.stderr.write(`\n${passed}/${results.length} PASS\n`)
+  process.stderr.write(
+    `\n${passed}/${results.length} PASS` +
+    `, ${teachingFailures.length} teaching failure(s)` +
+    `, ${degraded.length} UNMEASURED (provider outage)\n`,
+  )
+  if (degraded.length > 0) {
+    process.stderr.write(
+      'The provider was rate-limited during this run. The unmeasured concepts ' +
+      'were never taught and must be re-run before any verdict is drawn.\n',
+    )
+  }
 }
 
 if (require.main === module) main().catch((e) => { console.error(e); process.exit(1) })
